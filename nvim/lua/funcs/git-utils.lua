@@ -18,21 +18,36 @@ function M.issueSearch()
 	repo = repo:match(":.*%."):sub(2, -2)
 
 	-- TODO figure out how to make a proper http request in nvim
-	local rawJSON = fn.system([[curl -sL "https://api.github.com/repos/]] .. repo .. [[/issues?per_page=10&state=all"]])
+	local rawJSON = fn.system(
+		[[curl -sL "https://api.github.com/repos/]] .. repo .. [[/issues?per_page=20&state=all"]]
+	)
 	local issues = vim.json.decode(rawJSON)
-	local issues_formatted = {}
-	for _, issue in pairs(issues) do
-		table.insert(issues_formatted, issue)
-	end
 
 	local function formatter(issue)
-		local state = issue.state == "open" and "" or ""
-		return state.." #" .. issue.number .. " " .. issue.title
+		local isPR = issue.pull_request ~= nil
+		local merged = isPR and issue.pull_request.merged_at ~= nil
+
+		local icon
+		if issue.state == "open" and isPR then
+			icon = "🟦 "
+		elseif issue.state == "closed" and isPR and merged then
+			icon = "🟨 "
+		elseif issue.state == "closed" and isPR and not merged then
+			icon = "🟥 "
+		elseif issue.state == "closed" and not isPR then
+			icon = "🟣 "
+		elseif issue.state == "open" and not isPR then
+			icon = "🟢 "
+		end
+		if issue.title:lower():find("request") or issue.title:find("FR") then icon = icon .. "🙏 " end
+		if issue.title:lower():find("bug") then icon = icon .. "🪲 " end
+
+		return icon .. "#" .. issue.number .. " " .. issue.title
 	end
 
-	vim.ui.select(issues_formatted, { prompt = "Select Issue:", format_item = formatter }, function (choice)
+	vim.ui.select(issues, { prompt = "Select Issue:", format_item = formatter }, function(choice)
 		if not choice then return end
-		fn.system("open '".. choice.html_url .."'")
+		fn.system("open '" .. choice.html_url .. "'")
 	end)
 end
 
@@ -158,4 +173,3 @@ end
 
 --------------------------------------------------------------------------------
 return M
-

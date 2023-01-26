@@ -536,6 +536,7 @@ autocmd("FileType", {
 		"lazy",
 		"notify",
 		"AppleScriptRunOutput",
+		"DressingSelect",
 		"man",
 	},
 	callback = function()
