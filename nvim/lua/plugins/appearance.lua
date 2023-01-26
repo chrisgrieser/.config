@@ -75,6 +75,7 @@ return {
 					excludes = {
 						"lazy",
 						"gitcommit",
+						"DressingSelect",
 						"DiffviewFileHistoryPanel",
 					},
 				},
@@ -131,6 +132,9 @@ return {
 						min_width = 18,
 						max_height = 12,
 						min_height = 4,
+						win_options = {
+							winblend = 0,
+						},
 						mappings = {
 							["q"] = "Close",
 							["Esc"] = "Close",

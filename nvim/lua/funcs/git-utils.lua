@@ -8,7 +8,7 @@ local logInfo = vim.log.levels.INFO
 
 --------------------------------------------------------------------------------
 
----Choose a GitHub issues from the current repo to open
+---Choose a GitHub issues from the current repo to open in the browser
 function M.issueSearch()
 	local repo = fn.system("git remote -v | head -n1")
 	if repo:find("^fatal") then
@@ -18,16 +18,21 @@ function M.issueSearch()
 	repo = repo:match(":.*%."):sub(2, -2)
 
 	-- TODO figure out how to make a proper http request in nvim
-	local rawJSON = fn.system([[curl -sL "https://api.github.com/repos/]] .. repo .. [[/issues?per_page=2&state=all"]])
+	local rawJSON = fn.system([[curl -sL "https://api.github.com/repos/]] .. repo .. [[/issues?per_page=10&state=all"]])
 	local issues = vim.json.decode(rawJSON)
 	local issues_formatted = {}
 	for _, issue in pairs(issues) do
-		table.insert(issues_formatted, issue.html_url)
+		table.insert(issues_formatted, issue)
 	end
 
-	vim.ui.select(issues_formatted, { prompt = "Select Issue:" }, function (choice)
+	local function formatter(issue)
+		local state = issue.state == "open" and "" or ""
+		return state.." #" .. issue.number .. " " .. issue.title
+	end
+
+	vim.ui.select(issues_formatted, { prompt = "Select Issue:", format_item = formatter }, function (choice)
 		if not choice then return end
-		fn.system("open '".. choice .."'")
+		fn.system("open '".. choice.html_url .."'")
 	end)
 end
 
