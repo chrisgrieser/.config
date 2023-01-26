@@ -69,6 +69,7 @@
   "satellite.nvim": { "branch": "main", "commit": "d522369aa50cf8c0116c952ddc55253c505e8bf7" },
   "ssr.nvim": { "branch": "main", "commit": "e6a11a702483d26f767f937575d549ac73b2fea3" },
   "substitute.nvim": { "branch": "main", "commit": "42d09f1e6324d98aa2e5b765b64528e0aefe72b0" },
+  "telescope-hop.nvim": { "branch": "master", "commit": "337a1e9f08f972ebf7a7d26251577812ebaadc78" },
   "telescope-luasnip.nvim": { "branch": "master", "commit": "1f0057d04985ddcc698b2b29d6eb198a7876e651" },
   "telescope-undo.nvim": { "branch": "main", "commit": "f2ca7c914134c7e6eb9275ee09863141caa77a3f" },
   "telescope.nvim": { "branch": "master", "commit": "dce1156ca103b8222e4abbfc63f9c6887abf5ec6" },
