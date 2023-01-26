@@ -18,8 +18,9 @@ function M.issueSearch()
 	repo = repo:match(":.*%."):sub(2, -2)
 
 	-- TODO figure out how to make a proper http request in nvim
+	local max_results = 20
 	local rawJSON = fn.system(
-		[[curl -sL "https://api.github.com/repos/]] .. repo .. [[/issues?per_page=20&state=all"]]
+		[[curl -sL "https://api.github.com/repos/]] .. repo .. [[/issues?per_page=]]..max_results..[[&state=all"]]
 	)
 	local issues = vim.json.decode(rawJSON)
 

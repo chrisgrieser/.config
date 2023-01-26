@@ -1,19 +1,18 @@
 local maps = {
 	["<Esc>"] = "close",
 	["<CR>"] = "select_default",
-	["<D-w>"] = "delete_buffer",
+	["<D-w>"] = "delete_buffer", -- only buffer picker
 	["<S-Down>"] = "preview_scrolling_down",
 	["<S-Up>"] = "preview_scrolling_up",
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
 	["<Up>"] = "move_selection_previous",
 	["<Down>"] = "move_selection_next",
-	["ö"] = function(prompt)
-		require("telescope").extensions.hop.hop(prompt, {
-			loop_callback = function() require("telescope.actions").toggle_selection(prompt) end,
-		})
-	end,
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
+	["ö"] = function(prompt)
+		require("telescope").extensions.hop.hop(prompt)
+		require("telescope.actions").select_default(prompt)
+	end,
 	["<Tab>"] = function(prompt) -- multi-select
 		require("telescope.actions").toggle_selection(prompt)
 		require("telescope.actions").move_selection_next(prompt)
@@ -30,7 +29,7 @@ local options = {
 		file_ignore_patterns = {
 			"%.DS_Store", -- macOS system file
 			"%.git/",
-			"%.git$", -- submodules
+			"%.git$", -- git dir in submodules
 			"node_modules/", -- node
 			"venv/", -- python
 			"lib/", -- python
@@ -188,22 +187,11 @@ local options = {
 	},
 	extensions = {
 		undo = {
-			-- https://github.com/debugloop/telescope-undo.nvim#configuration
 			entry_format = "$STAT/$TIME",
 			layout_config = { preview_width = 0.7 },
 			prompt_prefix = "碑",
 			initial_mode = "normal",
 		},
-		-- frecency = {
-		-- 	db_root = vimDataDir,
-		-- 	ignore_patterns = { "*.git/*", "*/tmp/*" },
-		-- 	layout_strategy = "bottom_pane",
-		-- 	layout_config = {
-		-- 		horizontal = {
-		-- 			width = 0.4,
-		-- 		},
-		-- 	},
-		-- },
 	},
 }
 
@@ -217,7 +205,6 @@ return {
 			"debugloop/telescope-undo.nvim",
 			"benfowler/telescope-luasnip.nvim",
 			"nvim-telescope/telescope-hop.nvim",
-			-- { "nvim-telescope/telescope-frecency.nvim", dependencies = "kkharji/sqlite.lua" },
 		},
 		config = function()
 			require("telescope").setup(options)
@@ -225,7 +212,6 @@ return {
 			require("telescope").load_extension("notify")
 			require("telescope").load_extension("luasnip")
 			require("telescope").load_extension("hop")
-			-- require("telescope").load_extension("frecency")
 		end,
 	},
 }
