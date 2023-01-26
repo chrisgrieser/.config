@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 #!/usr/bin/env osascript -l JavaScript
 function run(argv) {
 	ObjC.import("stdlib");
@@ -15,14 +16,13 @@ function run(argv) {
 	const token = argv[0];
 	const username = $.getenv("github_username");
 	const issues = JSON.parse(
-		app.doShellScript(
-			`echo "${token}" | gh auth login --with-token ; gh search issues --include-prs --involves=${username} --json="repository,title,url,number,state,commentsCount"`,
-		),
-	// eslint-disable-next-line complexity
-	).map(item => {
-		const isPR = item.url.includes("pull");
-		
+		app.doShellScript(`curl -sL "https://api.github.com/search/issues?q=involves:${username}"`),
+	).items.map(item => {
+		const url = item.html_url
+		const isPR = url.includes("pull");
 		const title = item.title;
+		const repo = item.repository_url.match(/.+\/.+$/)[0];
+		const comments = item.commentsCount > 0 ? "💬 " + item.commentsCount.toString() : "";
 
 		let icon; // also lists PRs due to --include-prs
 		if (item.state === "merged") icon = "🟦 ";
@@ -36,8 +36,6 @@ function run(argv) {
 		if (title.toLowerCase().includes("bug")) icon += "🪲 ";
 		if (title.includes("?")) icon += "❓ ";
 
-		const repo = item.repository.nameWithOwner;
-		const comments = item.commentsCount > 0 ? "💬 " + item.commentsCount.toString() : "";
 		let matcher = alfredMatcher(item.title) + " " + alfredMatcher(repo);
 		if (isPR) matcher += " pr";
 
@@ -45,7 +43,7 @@ function run(argv) {
 			title: icon + title,
 			subtitle: `#${item.number}  ${repo}   ${comments}`,
 			match: matcher,
-			arg: item.url,
+			arg: url,
 		};
 	});
 	return JSON.stringify({ items: issues });

@@ -108,6 +108,7 @@ function workLayout()
 	})
 	hs.layout.apply(layout)
 	twitterToTheSide()
+	app("Twitter"):mainWindow():focus() -- since it is sometimes not properly raied
 	showAllSidebars()
 	runWithDelays({ 0.5, 1 }, function() app("Drafts"):activate() end)
 
