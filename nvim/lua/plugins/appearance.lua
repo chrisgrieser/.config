@@ -104,8 +104,8 @@ return {
 			}
 		end,
 	},
-
-	{ -- Better input fields
+	-- Better input fields
+	{ 
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
 		config = function()
@@ -121,9 +121,6 @@ return {
 						winblend = 0,
 					},
 					insert_only = false, -- enable normal mode
-					mappings = {
-						n = { ["q"] = "Close" },
-					},
 				},
 				select = {
 					backend = { "builtin" }, -- Priority list of preferred vim.select implementations
@@ -137,10 +134,6 @@ return {
 						min_height = 4,
 						win_options = {
 							winblend = 0,
-						},
-						mappings = {
-							["q"] = "Close",
-							["Esc"] = "Close",
 						},
 					},
 				},

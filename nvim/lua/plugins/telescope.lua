@@ -1,5 +1,6 @@
 local maps = {
 	["<Esc>"] = "close",
+	["<CR>"] = "select_default",
 	["<D-w>"] = "delete_buffer",
 	["<S-Down>"] = "preview_scrolling_down",
 	["<S-Up>"] = "preview_scrolling_up",
@@ -7,6 +8,11 @@ local maps = {
 	["<C-l>"] = "cycle_history_next",
 	["<Up>"] = "move_selection_previous",
 	["<Down>"] = "move_selection_next",
+	["ö"] = function(prompt)
+		require("telescope").extensions.hop.hop(prompt, {
+			loop_callback = function() require("telescope.actions").toggle_selection(prompt) end,
+		})
+	end,
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<Tab>"] = function(prompt) -- multi-select
 		require("telescope.actions").toggle_selection(prompt)
@@ -210,13 +216,15 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"debugloop/telescope-undo.nvim",
 			"benfowler/telescope-luasnip.nvim",
+			"nvim-telescope/telescope-hop.nvim",
 			-- { "nvim-telescope/telescope-frecency.nvim", dependencies = "kkharji/sqlite.lua" },
 		},
 		config = function()
 			require("telescope").setup(options)
 			require("telescope").load_extension("undo")
 			require("telescope").load_extension("notify")
-			require('telescope').load_extension('luasnip')
+			require("telescope").load_extension("luasnip")
+			require("telescope").load_extension("hop")
 			-- require("telescope").load_extension("frecency")
 		end,
 	},

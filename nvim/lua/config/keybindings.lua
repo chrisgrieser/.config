@@ -116,8 +116,8 @@ keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 --------------------------------------------------------------------------------
 
 -- Whitespace Control
-keymap("n", "=", "mzO<Esc>`z<CR>", { desc = "add blank line above" })
-keymap("n", "_", "mzo<Esc>`z<CR>", { desc = "add blank line below" })
+keymap("n", "=", "mzO<Esc>`z", { desc = "add blank line above" })
+keymap("n", "_", "mzo<Esc>`z", { desc = "add blank line below" })
 
 -- Indentation
 keymap("n", "<Tab>", ">>", { desc = "indent" })
@@ -129,7 +129,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "outdent" })
 -- EDITING
 
 -- Casing
-keymap("n", "ü", "mzlblgueh~`z<CR>", { desc = "toggle capital/lowercase of word" })
+keymap("n", "ü", "mzlblgueh~`z", { desc = "toggle capital/lowercase of word" })
 keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
 keymap("n", "~", "~h")
 keymap("n", "<C-ü>", qol.wordSwitch, { desc = "switch common words" })
@@ -137,15 +137,15 @@ keymap("n", "<C-ü>", qol.wordSwitch, { desc = "switch common words" })
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
 for _, v in pairs(trailingKeys) do
-	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z<CR>", { desc = "append " .. v .. " to EoL" })
+	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = "append " .. v .. " to EoL" })
 end
-keymap("n", "X", "mz$x`z<CR>", { desc = "delete last character" })
+keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "spellsuggest" })
 keymap("n", "gl", "]s", { desc = "next misspelling" })
 keymap("n", "gL", "]s", { desc = "prev misspelling" })
-keymap("n", "za", "mz]s1z=`z<CR>", { desc = "autofix spelling" }) -- [a]utofix word under cursor
+keymap("n", "za", "mz]s1z=`z", { desc = "autofix spelling" }) -- [a]utofix word under cursor
 
 -- [S]ubstitute Operator (substitute.nvim)
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
@@ -415,7 +415,7 @@ keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" 
 -- stylua: ignore start
 keymap({ "n", "x" }, "<leader>gl", function () require("funcs.git-utils").gitLink() end, { desc = " GitHub Link" })
 keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = " Add-Commit-Push" })
-keymap("n", "<leader>ghi", function () require("funcs.git-utils").issueSearch() end, { desc = " GitHub Issues" })
+keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch() end, { desc = " GitHub Issues" })
 -- stylua: ignore end
 
 -- Diffview
@@ -536,7 +536,8 @@ autocmd("FileType", {
 		"lazy",
 		"notify",
 		"AppleScriptRunOutput",
-		"DressingSelect",
+		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
+		"DressingInput",
 		"man",
 	},
 	callback = function()
