@@ -183,8 +183,17 @@ end
 -- GIT
 
 function M.issueSearch()
-git remote -v | head -n1
-	local repo = fn.system("")
+	local repo = fn.system("git remote -v | head -n1")
+	if repo:find("^fatal") then
+		vim.notify("Not a GitHub Repo.", logWarn)
+		return
+	end
+	repo = repo:match(":.*%."):sub(2, -2)
+	-- TODO figure out how to make a proper http request in nvim
+	local json = fn.system([[curl -sL "https://api.github.com/repos/]] .. repo.. [[/issues"]])
+	local issues = vim.json.decode(json)
+
+
 		
 end
 
