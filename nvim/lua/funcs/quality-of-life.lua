@@ -190,17 +190,12 @@ function M.issueSearch()
 	end
 	repo = repo:match(":.*%."):sub(2, -2)
 
-
-	local output = {}
-	local opts = {
-		stdout_buffered = true,
-		stderr_buffered = true,
-		on_stdout = function(_, data)
-			table.insert(output, data)
-		end,
-	}
 	-- TODO figure out how to make a proper http request in nvim
-	fn.jobstart([[curl -sL "https://api.github.com/repos/]] .. repo .. [[/issues"]], opts)
+	-- fn.jobstart([[curl -sL "https://api.github.com/repos/]] .. repo .. [[/issues"]], opts)
+	-- fn.jobstart([[curl -sL "https://api.github.com/repos/chrisgrieser/shimmering-obsidian/issues?per_page=1"]], opts)
+	local out = fn.system([[curl -sL "https://api.github.com/repos/chrisgrieser/shimmering-obsidian/issues?per_page=10"]])
+	print(out)
+
 end
 
 ---@param commitMsg string
