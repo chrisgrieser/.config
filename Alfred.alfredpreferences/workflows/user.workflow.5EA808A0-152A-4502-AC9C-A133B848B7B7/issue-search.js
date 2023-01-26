@@ -36,8 +36,7 @@ issueJSON.forEach(issue => {
 	let state = issue.state === "open" ? "🟣 " : "🟢 "
 	if (title.toLowerCase().includes("request") || title.includes("FR")) state += "🙏 ";
 	if (title.toLowerCase().includes("suggestion")) state += "💡 ";
-	if (title.toLowerCase().includes("bug")) state += "🪲 ";
-	if (title.includes("?")) state += "❓ ";
+
 	let comments = "";
 	if (issue.comments !== "0") comments = "   💬 " + issue.comments;
 
