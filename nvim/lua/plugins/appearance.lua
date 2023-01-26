@@ -47,7 +47,7 @@ return {
 			require("satellite").setup {
 				winblend = 20, -- winblend = transparency
 				handlers = {
-					-- displaying marks creates autocmds mapping of things with m, 
+					-- displaying marks creates autocmds mapping of things with m,
 					-- making m-bindings infeasable
 					marks = { enable = false },
 				},
@@ -72,11 +72,14 @@ return {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
 					lsp = true,
-					excludes = {
-						"lazy",
-						"gitcommit",
-						"DressingSelect",
-						"DiffviewFileHistoryPanel",
+					filetypes = { -- ignoring certain filetypes a bit buggy
+						"css",
+						"lua",
+						"sh",
+						"bash",
+						"toml",
+						"yaml",
+						"json",
 					},
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
@@ -128,9 +131,9 @@ return {
 					builtin = {
 						border = borderStyle,
 						relative = "cursor",
-						max_width = 60,
-						min_width = 18,
-						max_height = 12,
+						max_width = 80,
+						min_width = 20,
+						max_height = 15,
 						min_height = 4,
 						win_options = {
 							winblend = 0,
