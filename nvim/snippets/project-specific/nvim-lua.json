@@ -25,7 +25,7 @@
 		]
 	},
 	"select (vim.ui)": {
-		"prefix": "input (vim.ui)",
+		"prefix": "select (vim.ui)",
 		"body": [
 			"local ${1:list} = {}",
 			"vim.ui.select(${1:list}, { prompt = \"${2:prompt_msg}\" }, function (choice)",
