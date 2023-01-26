@@ -97,6 +97,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>8BE8ACA3-604D-474D-A934-3B48DF6BDB1D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>31E69F58-B448-43C3-A5EE-E9262AB81918</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>910D559A-3716-434C-8BAB-91AD98EB0E50</key>
 		<array>
 			<dict>
@@ -373,48 +386,6 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>koala</string>
-				<key>subtext</key>
-				<string>Discord</string>
-				<key>text</key>
-				<string>Koala</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>14890ADC-5B86-4B56-8205-31DD925BF275</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>discord://discord.com/channels/@me/894696437676408833</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>FAE9825B-FFCC-45A9-8F91-485535506CFC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
 				<string>vivi</string>
@@ -498,6 +469,48 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>koala</string>
+				<key>subtext</key>
+				<string>Discord</string>
+				<key>text</key>
+				<string>Koala</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>14890ADC-5B86-4B56-8205-31DD925BF275</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>discord://discord.com/channels/@me/894696437676408833</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>FAE9825B-FFCC-45A9-8F91-485535506CFC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -534,6 +547,58 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>59D9B736-8554-4EA2-8960-591B4400DF1B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>31E69F58-B448-43C3-A5EE-E9262AB81918</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"Linux people doing Linux things","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/966134631625801729"},{"title":"Vim people doing vim things","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/1056113012999720980"},{"title":"Mac people doing mac things","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/984910828459397270"},{"title":"theme-dev","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/931552763467411487"},{"title":"off-topic","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/700466324840775831"},{"title":"academia","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/722584061087842365"},{"title":"vip-lounge","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/714234422379151400"},{"title":"alpha-testing","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/989603365606531104"},{"title":"knowledge-management","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/710585052769157141"},{"title":"AI doing people things","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/1060148949878571089"}]</string>
+				<key>keyword</key>
+				<string>#</string>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Discord Channels</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>8BE8ACA3-604D-474D-A934-3B48DF6BDB1D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -642,11 +707,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>14890ADC-5B86-4B56-8205-31DD925BF275</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>6</integer>
 			<key>xpos</key>
-			<real>620</real>
+			<real>625</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>470</real>
 		</dict>
 		<key>28A37FE2-DC32-454F-9F4A-5EA7B7302518</key>
 		<dict>
@@ -661,10 +726,21 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>2B552BA8-0C59-435F-BDBD-098DE6AFEEEC</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
 			<real>705</real>
+		</dict>
+		<key>31E69F58-B448-43C3-A5EE-E9262AB81918</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>810</real>
+			<key>ypos</key>
+			<real>595</real>
 		</dict>
 		<key>37395496-78FC-403F-9082-9A707DCD9ABF</key>
 		<dict>
@@ -690,6 +766,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>50269231-2406-4275-B09D-C8C56303345C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
@@ -697,6 +775,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>59D9B736-8554-4EA2-8960-591B4400DF1B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -711,8 +791,21 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>310</real>
 		</dict>
+		<key>8BE8ACA3-604D-474D-A934-3B48DF6BDB1D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>discord channels</string>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>595</real>
+		</dict>
 		<key>910D559A-3716-434C-8BAB-91AD98EB0E50</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -720,6 +813,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>A0DD7429-3BAA-45F5-9905-252E0AABEE20</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
@@ -745,6 +840,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>E0D8A61D-BE3E-49D5-9A20-336421C90A72</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
@@ -804,11 +901,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>FAE9825B-FFCC-45A9-8F91-485535506CFC</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>6</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>470</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
