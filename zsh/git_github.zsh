@@ -18,7 +18,7 @@ alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to
 function getGithubURL() {
 	git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
 }
-alias g='open "$(getGithubURL)"'
+alias gh='open "$(getGithubURL)"'
 alias ghi='open "$(getGithubURL)/issues"'
 
 #───────────────────────────────────────────────────────────────────────────────

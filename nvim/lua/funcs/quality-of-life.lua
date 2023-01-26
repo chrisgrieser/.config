@@ -182,6 +182,12 @@ end
 --------------------------------------------------------------------------------
 -- GIT
 
+function M.issueSearch()
+git remote -v | head -n1
+	local repo = fn.system("")
+		
+end
+
 ---@param commitMsg string
 ---@param gitShellOpts table
 local function shimmeringFocusBuild(commitMsg, gitShellOpts)
@@ -245,20 +251,8 @@ function M.addCommitPush(prefillMsg)
 			elseif commitMsg == "" then
 				commitMsg = "chore"
 			end
-
-			local cc = {
-				"chore",
-				"build",
-				"test",
-				"fix",
-				"feat",
-				"refactor",
-				"perf",
-				"style",
-				"revert",
-				"ci",
-				"docs",
-			}
+			-- stylua: ignore
+			local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
 			local firstWord = commitMsg:match("^%w+")
 			if not vim.tbl_contains(cc, firstWord) then
 				vim.notify("Not using a Conventional Commits keyword.", logWarn)
