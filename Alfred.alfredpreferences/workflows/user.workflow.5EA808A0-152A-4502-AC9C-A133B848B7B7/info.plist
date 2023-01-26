@@ -700,7 +700,7 @@ echo "$url"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>gi</string>
+				<string>ghi</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -723,7 +723,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>title</key>
 				<string>Search my GitHub issues</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -913,9 +913,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>issue search reguires `gh` installed and `$GITHUB_TOKEN` stored in `.zshenv`.
-
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
@@ -1182,6 +1180,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>github_username</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>15</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>to be displayed in issue search</string>
+			<key>label</key>
+			<string>number of results</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>results_number</string>
 		</dict>
 	</array>
 	<key>variables</key>

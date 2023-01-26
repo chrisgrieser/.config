@@ -11,7 +11,6 @@ alias push="git push"
 alias pull="git pull"
 alias amend="git commit --amend"
 
-# go to git root https://stackoverflow.com/a/38843585
 alias root='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 
@@ -20,7 +19,7 @@ function getGithubURL() {
 	git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
 }
 alias g='open "$(getGithubURL)"'
-alias gi='open "$(getGithubURL)/issues"'
+alias ghi='open "$(getGithubURL)/issues"'
 
 #───────────────────────────────────────────────────────────────────────────────
 

@@ -429,8 +429,8 @@ keymap("n", "<leader>gd", function()
 end, { desc = " File History (Diffview)" })
 
 -- Octo https://github.com/pwntester/octo.nvim#-commands
-keymap("n", "<leader>gi", ":Octo issue list<CR>", { desc = "  GitHub Issues" })
-keymap("n", "<leader>gp", ":Octo pr list<CR>", { desc = "  GitHub PRs" })
+keymap("n", "<leader>ghi", ":Octo issue list<CR>", { desc = "  GitHub Issues" })
+keymap("n", "<leader>ghp", ":Octo pr list<CR>", { desc = "  GitHub PRs" })
 
 --------------------------------------------------------------------------------
 
