@@ -399,7 +399,7 @@ keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { d
 
 -- goto file
 -- needed, since gf remapped to reference search
-keymap("n", "gP", "gf", {desc = "goto path (gf)"})
+keymap("n", "gP", "gf", { desc = "goto path (gf)" })
 
 --------------------------------------------------------------------------------
 -- GIT
@@ -412,9 +412,11 @@ keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = " Reset Hunk" 
 keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" })
 
 -- my custom functions
-keymap({ "n", "x" }, "<leader>gl", qol.gitLink, { desc = " GitHub Link" })
-keymap("n", "<leader>gg", qol.addCommitPush, { desc = " Add-Commit-Push" })
-keymap("n", "<leader>ghi", qol.issueSearch, { desc = " GitHub Issues" })
+-- stylua: ignore start
+keymap({ "n", "x" }, "<leader>gl", function () require("funcs.git-utils").gitLink() end, { desc = " GitHub Link" })
+keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = " Add-Commit-Push" })
+keymap("n", "<leader>ghi", function () require("funcs.git-utils").issueSearch() end, { desc = " GitHub Issues" })
+-- stylua: ignore end
 
 -- Diffview
 keymap("n", "<leader>gd", function()

@@ -26,7 +26,5 @@
 	delay 0.05
 	set the clipboard to prevClipboard
 end alfred_script</string>
-	<key>prefix</key>
-	<integer>1</integer>
 </dict>
 </plist>
