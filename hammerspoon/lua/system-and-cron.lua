@@ -105,6 +105,7 @@ function syncAllGitRepos(sendNotification)
 	hs.timer
 		.waitUntil(noSyncInProgress, function()
 			hs.execute("sketchybar --trigger repo-files-update")
+			if sendNotification then notify("Sync finished.") end
 		end)
 		:start()
 end
@@ -127,12 +128,7 @@ shutDownWatcher = caff
 
 wakeWatcher = caff
 	.new(function(eventType)
-		if
-			eventType ~= caff.screensDidWake
-			and eventType ~= caff.systemDidWake
-		then
-			return
-		end
+		if eventType ~= caff.screensDidWake and eventType ~= caff.systemDidWake then return end
 
 		twitterScrollUp()
 
@@ -157,11 +153,8 @@ wakeWatcher = caff
 				setDarkmode(true)
 				movieModeLayout()
 			else
-				if eventType ~= caff.systemDidWake then
-					notify("System Wake, syncing git repos…")
-					syncAllGitRepos("notify")
-				end
-				workLayout() 
+				if eventType ~= caff.systemDidWake then syncAllGitRepos("notify") end
+				workLayout()
 				local toDark = not (betweenTime(7, 19))
 				setDarkmode(toDark)
 			end
