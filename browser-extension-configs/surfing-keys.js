@@ -2,7 +2,7 @@
 // example configs: https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
 
 // Compatibility Prefix
-const {Hints, imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vmapkey, vunmap, aceVimMap} = api;
+const { Hints, imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vmapkey, vunmap, aceVimMap } = api;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -21,15 +21,7 @@ unmap("j", /google/); // unmap jk on google for web search navigator (vimium-lik
 unmap("k", /google/);
 
 unmap("?", /github.com/); // cheatsheet for github shortcuts
-
-unmap("j", /reddit.com/);
-unmap("k", /reddit.com/);
 unmap("?", /reddit.com/); // cheatsheet for reddit shortcuts
-unmap("l", /reddit.com/); // open reddit link
-unmap("x", /reddit.com/); // toggle fold
-unmap("a", /reddit.com/); // upvote
-unmap("z", /reddit.com/); // downvote
-unmap("r", /reddit.com/); // reply
 
 //──────────────────────────────────────────────────────────────────────────────
 // Mappings
@@ -94,6 +86,10 @@ mapkey("s", "Fullscreen", function () {
 		document.documentElement.requestFullscreen();
 	}
 });
+
+//──────────────────────────────────────────────────────────────────────────────
+
+
 
 //──────────────────────────────────────────────────────────────────────────────
 // Insert Mode & ACE editor

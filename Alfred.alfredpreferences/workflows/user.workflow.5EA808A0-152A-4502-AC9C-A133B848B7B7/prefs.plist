@@ -4,5 +4,7 @@
 <dict>
 	<key>github_username</key>
 	<string>chrisgrieser</string>
+	<key>results_number</key>
+	<string>30</string>
 </dict>
 </plist>
