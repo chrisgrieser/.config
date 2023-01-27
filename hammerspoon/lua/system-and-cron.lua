@@ -105,7 +105,6 @@ function syncAllGitRepos(sendNotification)
 	hs.timer
 		.waitUntil(noSyncInProgress, function()
 			hs.execute("sketchybar --trigger repo-files-update")
-			if sendNotification then notify("Sync finished.") end
 		end)
 		:start()
 end
