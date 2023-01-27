@@ -46,7 +46,7 @@ function M.issueSearch()
 		return icon .. "#" .. issue.number .. " " .. issue.title
 	end
 
-	vim.ui.select(issues, { prompt = "Select Issue:", format_item = formatter }, function(choice)
+	vim.ui.select(issues, { prompt = "Select Issue:", kind = "github_issue", format_item = formatter }, function(choice)
 		if not choice then return end
 		fn.system("open '" .. choice.html_url .. "'")
 	end)
