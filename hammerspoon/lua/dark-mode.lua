@@ -34,18 +34,6 @@ function toggleDarkMode()
 		app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfbg }
 	end
 
-	-- sketchybar
-	-- stylua: ignore
-	hs.execute( 'BG_COLOR="'..sketchybg..'" ; FONT_COLOR="'..sketchyfont..'" ; '..
-	[[sketchybar --bar color="$BG_COLOR" \
-		--set drafts icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
-		--set sync-indicator icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
-		--set clock icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
-		--set weather icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
-		--set covid-stats icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
-		--update
-	]])
-
 	-- System & Brave (Workaround for Dark Reader)
 	applescript([[
 		tell application "Brave Browser"
@@ -65,6 +53,18 @@ function toggleDarkMode()
 		else
 			tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
 		end if
+	]])
+
+	-- sketchybar
+	-- stylua: ignore
+	hs.execute( 'BG_COLOR="'..sketchybg..'" ; FONT_COLOR="'..sketchyfont..'" ; '..
+	[[sketchybar --bar color="$BG_COLOR" \
+		--set drafts icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
+		--set sync-indicator icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
+		--set clock icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
+		--set weather icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
+		--set covid-stats icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
+		--update
 	]])
 
 	app(prevApp):activate()
