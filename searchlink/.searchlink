@@ -22,7 +22,8 @@ prefix_random: true
 
 # set to true to add titles to links based on the page title
 # of the search result
-include_titles: true
+# adds the query after the link
+include_titles: false
 
 # set to true to attempt to remove SEO elements from page titles,
 # such that "Regular expressions for beginners | Brett Terpstra.com"
