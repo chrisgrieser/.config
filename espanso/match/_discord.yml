@@ -1,9 +1,11 @@
 matches:
   # cencorship for carl (lol)
   - trigger: "roadmap"
-    replace: "ro*dmap (carl, no!)"
+    replace: "r0admap (carl, no!)"
   - trigger: "legacy editor"
     replace: "legacy edit0r (carl, no!)"
+  - trigger: "getting started"
+    replace: "getting start3d (carl, no!)"
 
   # Carl
   - trigger: '!carl'
