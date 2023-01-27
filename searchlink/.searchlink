@@ -1,13 +1,10 @@
-# vim: filetype=config
-#───────────────────────────────────────────────────────────────────────────────
-
 # set to true to have an HTML comment included detailing any errors
 debug: false
 # set to true to have an HTML comment included reporting results
-report: true
+report: false
 
 # use Notification Center to display progress
-notifications: false
+notifications: true
 
 # when running on a file, back up original to *.bak
 backup: true
@@ -25,12 +22,12 @@ prefix_random: true
 
 # set to true to add titles to links based on the page title
 # of the search result
-include_titles: false
+include_titles: true
 
 # set to true to attempt to remove SEO elements from page titles,
 # such that "Regular expressions for beginners | Brett Terpstra.com"
 # becomes "Regular expressions for beginners"
-remove_seo: false
+remove_seo: true
 
 # If the link text is left empty, always insert the page title
 # E.g. [](!g Search Text)
@@ -47,9 +44,8 @@ validate_links: true
 social_template: "%service%/%user%"
 
 # append affiliate link info to iTunes urls, empty quotes for none
-# example:
-# itunes_affiliate = "&at=10l4tL&ct=searchlink"
-itunes_affiliate: "&at=10l4tL&ct=searchlink"
+# example: itunes_affiliate = "&at=10l4tL&ct=searchlink"
+itunes_affiliate: ""
 
 # to create Amazon affiliate links, set amazon_partner to:
 # [tag, camp, creative]
@@ -57,7 +53,7 @@ itunes_affiliate: "&at=10l4tL&ct=searchlink"
 # to find the needed parts. Set to false to return regular amazon links
 # example:
 #    amazon_partner: ["bretttercom-20","1789","390957"]
-amazon_partner: ["brettterpstra-20", "1789", "9325"]
+amazon_partner: false
 
 # To create custom abbreviations for DuckDuckGo Site Searches,
 # add to (or replace) the hash below.
@@ -81,17 +77,6 @@ amazon_partner: ["brettterpstra-20", "1789", "9325"]
 # Use $terms to slugify all search terms, turning
 # "Markdown Service Tools" into "markdown-service-tools"
 custom_site_searches:
-  bt: brettterpstra.com
-  btt: http://brettterpstra.com/$term1d/$term2d
-  bts: /search/$term --no-validate_links
-  md: www.macdrifter.com
-  tuaw: www.tuaw.com
-  ms: macstories.net
-  dd: www.leancrew.com
-  spark: macsparky.com
-  man: http://man.cx/$term
-  dev: developer.apple.com
-  dl: http://marked2app.com/download/Marked.zip
 
 # Remove or comment (with #) history searches you don't want
 # performed by `!h`. You can force-enable them per search, e.g.
@@ -101,10 +86,7 @@ custom_site_searches:
 history_types:
 - chrome_history
 - chrome_bookmarks
-- safari_bookmarks
-- safari_history
-- firefox_bookmarks
-- firefox_history
+
 # You can find your api key here: https://pinboard.in/settings/password
 pinboard_api_key: ''
 # Generate an access token at https://app.bitly.com/settings/api/
