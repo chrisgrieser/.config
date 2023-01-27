@@ -72,7 +72,7 @@ return {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
 					lsp = true,
-					filetypes = { -- ignoring certain filetypes a bit buggy
+					filetypes = { -- ignoring certain filetypes a bit buggy, therefore whitelisting instead
 						"css",
 						"lua",
 						"sh",
@@ -105,7 +105,7 @@ return {
 		end,
 	},
 	-- Better input fields
-	{ 
+	{
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
 		config = function()
@@ -128,14 +128,15 @@ return {
 					builtin = {
 						border = borderStyle,
 						relative = "cursor",
-						max_width = 80,
+						max_width = 70,
 						min_width = 20,
 						max_height = 15,
 						min_height = 4,
-						win_options = {
-							winblend = 0,
-						},
+						win_options = { winblend = 0 },
 					},
+					get_config = function(opts)
+						if opts.kind == "github_issue" then return { backend = "telescope" } end
+					end,
 				},
 			}
 		end,
