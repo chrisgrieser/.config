@@ -1,7 +1,7 @@
 {
 	"modeline": {
 		"prefix": "modeline",
-		"body": "vim: filetype=\n$0"
+		"body": "# vim: filetype=$0"
 	},
 	"cmd": {
 		"prefix": "cmd",
