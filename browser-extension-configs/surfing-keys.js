@@ -1,4 +1,6 @@
 /* global api, settings, window, document */
+//──────────────────────────────────────────────────────────────────────────────
+
 // example configs: https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
 
 // Compatibility Prefix
@@ -86,10 +88,6 @@ mapkey("s", "Fullscreen", function () {
 		document.documentElement.requestFullscreen();
 	}
 });
-
-//──────────────────────────────────────────────────────────────────────────────
-
-
 
 //──────────────────────────────────────────────────────────────────────────────
 // Insert Mode & ACE editor
