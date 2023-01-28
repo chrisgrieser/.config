@@ -108,9 +108,11 @@ function workLayout()
 	})
 	hs.layout.apply(layout)
 	twitterToTheSide()
-	app("Twitter"):mainWindow():focus() -- since it is sometimes not properly raied
 	showAllSidebars()
-	runWithDelays({ 0.5, 1 }, function() app("Drafts"):activate() end)
+	runWithDelays({ 0.5, 1 }, function()
+		app("Drafts"):activate()
+		app("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
+	end)
 
 	-- wait until sync is finished, to avoid merge conflict
 	hs.timer
