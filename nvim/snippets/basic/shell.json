@@ -8,11 +8,11 @@
 		"body": "${1:input}=${1-\"${2:default_value}\"}"
 	},
 	"slice": {
-		"prefix": "slice",
+		"prefix": "slice (expansion)",
 		"body": "${${1:var}:${2:start}:${3:length}}"
 	},
 	"substitute": {
-		"prefix": "substitute",
+		"prefix": "substitute (expansion)",
 		"body": "${${1:var}//${2:search}/${3:replace}}",
 		"description": "one slash for single substitution, two for global substitution"
 	},
@@ -49,7 +49,7 @@
 		"body": "osascript -e \\\"display notification \\\"\\\" with title \\\"$${1:var}\\\""
 	},
 	"if (short)": {
-		"prefix": "if (short)",
+		"prefix": "if: [[ .. ]] && ..",
 		"body": "[[ \"$${1:var}\" ]] && $0"
 	},
 	"then": {
@@ -68,6 +68,15 @@
 		"prefix": "check installed",
 		"body": "'if ! command -v ${1:cli} &>/dev/null; then echo \"${1:cli} not installed.\" && exit 1; fi"
 	},
+	"awk (get field)": {
+		"prefix": "awk (field)",
+		"body": "awk '{ print $${1:1} }'",
+		"description": "The argument number `$n`"
+	},
+	"sed (replacement)": {
+		"prefix": "sed (replacement)",
+		"body": "sed -E 's/${1:pattern}/${2:replacement}/g'"
+	},
 	"stderr (pipe)": {
 		"prefix": "stderr (pipe)",
 		"body": "2>&1"
@@ -75,10 +84,6 @@
 	"null (pipe)": {
 		"prefix": "null (pipe)",
 		"body": "&>/dev/null "
-	},
-	"sed (pipe)": {
-		"prefix": "sed (pipe)",
-		"body": "sed -E 's/${1:pattern}/${2:replacement}/g'"
 	},
 	"plist: extract key": {
 		"prefix": "plist: extract key",
