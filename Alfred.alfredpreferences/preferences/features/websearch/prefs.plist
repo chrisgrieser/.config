@@ -105,7 +105,7 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>src</string>
+			<string>sg</string>
 			<key>text</key>
 			<string>Sourcegraph</string>
 			<key>url</key>
