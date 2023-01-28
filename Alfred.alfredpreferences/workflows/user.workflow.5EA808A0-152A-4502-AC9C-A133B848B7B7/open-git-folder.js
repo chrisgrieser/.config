@@ -11,7 +11,6 @@ const finderApp = Application("Finder");
 //──────────────────────────────────────────────────────────────────────────────
 
 const pathsToSearch = [
-	$.getenv("working_folder").replace(/^~/, home),
 	$.getenv("dotfile_folder").replace(/^~/, home),
 	$.getenv("dotfile_folder").replace(/^~/, home) + "/nvim/my-plugins",
 	$.getenv("dotfile_folder").replace(/^~/, home) + "/Alfred.alfredpreferences/workflows",
@@ -60,6 +59,8 @@ const repoArray = app
 
 repoArray.forEach(localRepoFilePath => {
 	let repoName;
+	const repoID = localRepoFilePath.replace(/.*\//, "");
+
 	const isAlfredWorkflow = finderApp.exists(Path(localRepoFilePath + "/info.plist"));
 	const isObsiPlugin = finderApp.exists(Path(localRepoFilePath + "/manifest.json"));
 	const isNeovimPlugin = finderApp.exists(Path(localRepoFilePath + "/lua"));
@@ -80,25 +81,17 @@ repoArray.forEach(localRepoFilePath => {
 	} else if (isNeovimPlugin) {
 		repoName = localRepoFilePath.replace(/.*\/(.*)/, "$1");
 		iconpath += "neovim.png";
+	} else if (localRepoFilePath.endsWith(".config/")) {
+		repoName = "pseudometa's dotfiles"
+		iconpath = "icon.png";
 	} else {
-		const readme = readFile(localRepoFilePath + "/README.md");
-		const isKarabinerMod = readme.includes("Karabiner");
-		if (isKarabinerMod) iconpath += "karabiner.png";
-
-		if (readme) {
-			repoName = readme
-				.split("\n")
-				.find(line => line.startsWith("# "))
-				.replace(/^#+ /, "");
-			if (!repoName) repoName = "Heading Missing";
-		} else {
-			repoName = localRepoFilePath;
-		}
+		repoName = localRepoFilePath;
+		iconpath = "icon.png";
 	}
 
 	jsonArray.push({
 		title: repoName + dirtyIcon,
-		match: alfredMatcher(repoName),
+		match: alfredMatcher(repoName) + " " + alfredMatcher(repoID),
 		icon: { path: iconpath },
 		arg: localRepoFilePath,
 		uid: localRepoFilePath,

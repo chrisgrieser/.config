@@ -1,7 +1,11 @@
 {
+	"replace (gm)": {
+		"prefix": "replace",
+		"body": "replace(/${1:regexp}/gm, \"$2\");"
+	},
 	"replace": {
 		"prefix": "replace",
-		"body": "replace(/${1:regexp}/${2:gm}, \"$3\");"
+		"body": "replace(/${1:regexp}/, \"$2\");"
 	},
 	"ignore (prettier)": {
 		"prefix": "ignore (prettier)",
