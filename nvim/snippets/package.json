@@ -4,9 +4,6 @@
 		"https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vscode"
 	],
 	"name": "pseudometa-snippets",
-	"engines": {
-		"vscode": "^1.11.0"
-	},
 	"contributes": {
 		"snippets": [
 			{
@@ -33,7 +30,7 @@
 				"language": [
 					"gitcommit"
 				],
-				"path": "./basic/gitcommit.json"
+				"path": "./basic/conventional-commits.json"
 			},
 			{
 				"language": [
@@ -110,13 +107,6 @@
 					"applescript"
 				],
 				"path": "./project-specific/alfred-applescript.json"
-			},
-			{
-				"language": [
-					"css",
-					"scss"
-				],
-				"path": "./project-specific/obsidian-theme-dev.json"
 			}
 		]
 	}
