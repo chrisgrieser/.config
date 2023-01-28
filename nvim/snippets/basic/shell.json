@@ -71,7 +71,7 @@
 	"awk (get field)": {
 		"prefix": "awk (field)",
 		"body": "awk '{ print $${1:1} }'",
-		"description": "The argument number `$n`"
+		"description": "Retrieve a field from the piped in string, with whitespace as the default field delimiter. `$n` means that the nth field will be used."
 	},
 	"sed (replacement)": {
 		"prefix": "sed (replacement)",
@@ -95,7 +95,8 @@
 	},
 	"quicklook": {
 		"prefix": "quicklook",
-		"body": "qlmanage -p \"${1:filepath}\""
+		"body": "qlmanage -p \"${1:filepath}\"",
+		"description": "QuickLook the file. MacOS only."
 	},
 	"echo": {
 		"prefix": "echo",
@@ -129,10 +130,7 @@
 	"case": {
 		"prefix": "case",
 		"body": "case \"\\$${1:VAR}\" in\n\t${2:1}) echo 1\n\t;;\n\t${3:2|3}) echo 2 or 3\n\t;;\n\t*) echo default\n\t;;\nesac\n",
-		"description": [
-			"case word in [ [(] pattern [ | pattern ] ... ) list ;; ] ... esac\n",
-			"A case command first expands word, and tries to match it against each pattern in turn."
-		]
+		"description": "A case command first expands word, and tries to match it against each pattern in turn."
 	},
 	"reset color": {
 		"prefix": "reset color",
