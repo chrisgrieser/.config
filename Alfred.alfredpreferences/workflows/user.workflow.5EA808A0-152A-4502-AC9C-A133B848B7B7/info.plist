@@ -1206,18 +1206,27 @@ echo "$url"</string>
 			<key>variable</key>
 			<string>results_number</string>
 		</dict>
-	</array>
-	<key>variables</key>
-	<dict>
-		<key>dotfile_folder</key>
-		<string>~/.config</string>
-		<key>vault_path</key>
-		<string>~/Main Vault/</string>
-	</dict>
-	<key>variablesdontexport</key>
-	<array>
-		<string>vault_path</string>
-		<string>dotfile_folder</string>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/.config</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Dotfile Folder</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>dotfile_folder</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string></string>

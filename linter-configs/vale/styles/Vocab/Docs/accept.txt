@@ -2,6 +2,11 @@ git
 beta
 BRAT
 currently
+PDF
+PDFs
+VS
+ISBN
+DOI
 keymaps
 vim
 Vim
