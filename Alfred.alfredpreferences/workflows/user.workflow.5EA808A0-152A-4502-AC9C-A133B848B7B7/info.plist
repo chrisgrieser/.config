@@ -1211,17 +1211,12 @@ echo "$url"</string>
 	<dict>
 		<key>dotfile_folder</key>
 		<string>~/.config</string>
-		<key>maxReposNumber</key>
-		<string>100</string>
 		<key>vault_path</key>
 		<string>~/Main Vault/</string>
-		<key>working_folder</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
 		<string>vault_path</string>
-		<string>working_folder</string>
 		<string>dotfile_folder</string>
 	</array>
 	<key>version</key>
