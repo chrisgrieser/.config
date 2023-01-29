@@ -46,16 +46,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8AA5AD09-3EF5-4C93-8DF9-6690A90B221D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>43880D3B-C354-4AC9-BFB5-C7A430DAC0DF</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -184,27 +174,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://corpora.uni-leipzig.de/de/res?corpusId=deu_news_2021&amp;word={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>8AA5AD09-3EF5-4C93-8DF9-6690A90B221D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -272,9 +241,9 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>265</real>
+			<real>260</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>460</real>
 		</dict>
 		<key>54108A38-6929-4455-A62B-5EFADC3B4CF8</key>
 		<dict>
@@ -284,15 +253,6 @@
 			<real>265</real>
 			<key>ypos</key>
 			<real>150</real>
-		</dict>
-		<key>8AA5AD09-3EF5-4C93-8DF9-6690A90B221D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>265</real>
-			<key>ypos</key>
-			<real>410</real>
 		</dict>
 		<key>8BD829FB-FA30-46D7-ABBE-1255DFE26375</key>
 		<dict>

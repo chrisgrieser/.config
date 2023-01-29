@@ -1,0 +1,14 @@
+{
+	"new entry template": {
+		"prefix": "new entry",
+		"body": [
+			"@${1|article,book,incollection,inproceedings,unpublished,online|}{${2:citekey},",
+			"\ttitle = {${2:title}},",
+			"\tauthor = {${3:names}},",
+			"\tyear = ${4:1990},",
+			"\tkeywords = {$5}",
+			"}",
+			"$0"
+		]
+	}
+}

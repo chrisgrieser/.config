@@ -6,6 +6,19 @@
 	<string>de.chris-grieser.killring-alfred</string>
 	<key>connections</key>
 	<dict>
+		<key>951AA443-87DA-4A79-B532-C8F2CD34E296</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6A366E16-6E4E-46CC-BF4C-EA23D423E3F4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A20399A4-276B-4500-AF36-A310532F62AA</key>
 		<array>
 			<dict>
@@ -26,6 +39,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A8970522-87DD-45EC-95A3-D77922C7646D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F14A9693-9814-42A8-93D2-B527428A251E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>951AA443-87DA-4A79-B532-C8F2CD34E296</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -79,6 +105,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{clipboard:{query}}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>A8970522-87DD-45EC-95A3-D77922C7646D</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -103,20 +148,73 @@
 			<key>config</key>
 			<dict>
 				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{clipboard:{query}}</string>
+				<false/>
+				<key>clipboardtextrtf</key>
+				<string>{\rtf1\ansi\ansicpg1252\cocoartf2706
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0\c84706\cname controlTextColor;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf2 \{clipboard\}\
+\{query\}}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>transient</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>A8970522-87DD-45EC-95A3-D77922C7646D</string>
+			<string>951AA443-87DA-4A79-B532-C8F2CD34E296</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>6</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>Y</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>F14A9693-9814-42A8-93D2-B527428A251E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Purr</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>6A366E16-6E4E-46CC-BF4C-EA23D423E3F4</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -125,6 +223,24 @@
 Restart the history after 1 minute.</string>
 	<key>uidata</key>
 	<dict>
+		<key>6A366E16-6E4E-46CC-BF4C-EA23D423E3F4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>210</real>
+		</dict>
+		<key>951AA443-87DA-4A79-B532-C8F2CD34E296</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>210</real>
+		</dict>
 		<key>A20399A4-276B-4500-AF36-A310532F62AA</key>
 		<dict>
 			<key>note</key>
@@ -147,6 +263,17 @@ Restart the history after 1 minute.</string>
 			<real>175</real>
 			<key>ypos</key>
 			<real>60</real>
+		</dict>
+		<key>F14A9693-9814-42A8-93D2-B527428A251E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>note</key>
+			<string>Add to Clipboard</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>210</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
