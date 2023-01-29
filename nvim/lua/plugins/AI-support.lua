@@ -78,6 +78,15 @@ return {
 			}
 		end,
 	},
+	-- TODO checkout again when the bugs are gone
+	-- {
+	-- 	"jcdickinson/codeium.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"MunifTanjim/nui.nvim",
+	-- 	},
+	-- 	config = function() require("codeium").setup {} end,
+	-- },
 	{
 		"Exafunction/codeium.vim",
 		event = "InsertEnter",
