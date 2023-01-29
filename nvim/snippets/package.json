@@ -55,6 +55,12 @@
 			},
 			{
 				"language": [
+					"bib"
+				],
+				"path": "./basic/bibtex.json"
+			},
+			{
+				"language": [
 					"javascript",
 					"typescript"
 				],
