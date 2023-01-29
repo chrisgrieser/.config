@@ -15,12 +15,18 @@ I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
 
----gets shell environment variable
+---gets shell environment variable. WARN: if .zshenv is changed during
+--Hammerspoon's runtime, this	will not work.
 ---@param VAR string
 ---@return string
 function getenv(VAR)
 	local out = hs.execute("echo $" .. VAR):gsub("\n$", "")
-	return out
+	if not out or out == "" then
+		notify("⚠️️ $"..VAR.." could not be retrieved.")
+		return ""
+	else
+		return out
+	end
 end
 
 ---trims whitespace from string
