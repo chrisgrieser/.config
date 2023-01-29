@@ -6,19 +6,6 @@
 	<string>giovanni-alfred-powerthesaurus</string>
 	<key>connections</key>
 	<dict>
-		<key>2C9C2E06-FF0F-4D0A-AC8C-B06306B2EDDB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>71549F8C-335E-4312-803F-77DD92359D20</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>3BDFA2EA-F8AA-4E1D-BACD-9578AA20FCF0</key>
 		<array>
 			<dict>
@@ -38,19 +25,6 @@
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Open antonyms in browser</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>71549F8C-335E-4312-803F-77DD92359D20</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>819E593B-43C3-4EBF-9000-3D3C0F5AB6D2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -78,19 +52,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>F5989E20-7E1B-4F7F-BA96-CF45D5B56468</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2C9C2E06-FF0F-4D0A-AC8C-B06306B2EDDB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>giovanni from Clarence Castillo</string>
@@ -102,85 +63,6 @@
 	<string>Power Thesaurus</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>39</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>Ä</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>F5989E20-7E1B-4F7F-BA96-CF45D5B56468</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>select-word.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2C9C2E06-FF0F-4D0A-AC8C-B06306B2EDDB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>71549F8C-335E-4312-803F-77DD92359D20</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -362,34 +244,12 @@ CTRL+enter (^↩️) opens antonyms in browser
 https://github.com/giovannicoppola/alfred-powerthesaurus</string>
 	<key>uidata</key>
 	<dict>
-		<key>2C9C2E06-FF0F-4D0A-AC8C-B06306B2EDDB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>get word under cursor</string>
-			<key>xpos</key>
-			<real>175</real>
-			<key>ypos</key>
-			<real>30</real>
-		</dict>
 		<key>3BDFA2EA-F8AA-4E1D-BACD-9578AA20FCF0</key>
 		<dict>
 			<key>xpos</key>
 			<real>170</real>
 			<key>ypos</key>
 			<real>500</real>
-		</dict>
-		<key>71549F8C-335E-4312-803F-77DD92359D20</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>remove \n</string>
-			<key>xpos</key>
-			<real>335</real>
-			<key>ypos</key>
-			<real>60</real>
 		</dict>
 		<key>76D80E62-E346-4FE5-87F5-0F588660706B</key>
 		<dict>
@@ -403,7 +263,7 @@ https://github.com/giovannicoppola/alfred-powerthesaurus</string>
 		<key>819E593B-43C3-4EBF-9000-3D3C0F5AB6D2</key>
 		<dict>
 			<key>xpos</key>
-			<real>175</real>
+			<real>170</real>
 			<key>ypos</key>
 			<real>225</real>
 		</dict>
@@ -423,40 +283,9 @@ https://github.com/giovannicoppola/alfred-powerthesaurus</string>
 			<key>ypos</key>
 			<real>370</real>
 		</dict>
-		<key>F5989E20-7E1B-4F7F-BA96-CF45D5B56468</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>30</real>
-		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>70</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>in ms</string>
-			<key>label</key>
-			<string>delay</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>delay_ms</string>
-		</dict>
-	</array>
+	<array/>
 	<key>variables</key>
 	<dict>
 		<key>ALFRED_PT_SSL_VERIFICATION</key>
