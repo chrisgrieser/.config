@@ -64,7 +64,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>687D92F1-08CF-48D4-A7A2-10A22E5AFD66</string>
+				<string>88575279-2CDE-460A-96E7-6D1B72F15E67</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -99,7 +99,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>687D92F1-08CF-48D4-A7A2-10A22E5AFD66</key>
+		<key>88575279-2CDE-460A-96E7-6D1B72F15E67</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -396,7 +396,7 @@ end run</string>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -442,22 +442,23 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
 				<false/>
-				<key>variables</key>
-				<dict>
-					<key>query</key>
-					<string>{query}</string>
-				</dict>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
+			<string>alfred.workflow.utility.replace</string>
 			<key>uid</key>
-			<string>687D92F1-08CF-48D4-A7A2-10A22E5AFD66</string>
+			<string>88575279-2CDE-460A-96E7-6D1B72F15E67</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -609,7 +610,7 @@ end run</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>requires "aspell" to be installed on the system. (`brew install aspell`)
+	<string>Spell-fixing requires "aspell" to be installed on the system. (`brew install aspell`)
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
@@ -702,15 +703,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>485</real>
 		</dict>
-		<key>687D92F1-08CF-48D4-A7A2-10A22E5AFD66</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>340</real>
-			<key>ypos</key>
-			<real>515</real>
-		</dict>
 		<key>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</key>
 		<dict>
 			<key>colorindex</key>
@@ -719,6 +711,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>80</real>
+		</dict>
+		<key>88575279-2CDE-460A-96E7-6D1B72F15E67</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>515</real>
 		</dict>
 		<key>912E9A88-C5CA-47E8-9A5D-E9B80D66847D</key>
 		<dict>
@@ -806,10 +809,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>second_lang</string>
 		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
-	<string>0.3</string>
+	<string>0.5</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
