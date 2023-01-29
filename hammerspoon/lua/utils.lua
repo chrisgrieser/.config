@@ -14,20 +14,7 @@ hyper = { "cmd", "alt", "ctrl", "shift" }
 I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
-
----gets shell environment variable. WARN: if .zshenv is changed during
---Hammerspoon's runtime, this	will not work.
----@param VAR string
----@return string
-function getenv(VAR)
-	local out = hs.execute("echo $" .. VAR):gsub("\n$", "")
-	if not out or out == "" then
-		notify("⚠️️ $"..VAR.." could not be retrieved.")
-		return ""
-	else
-		return out
-	end
-end
+-- general lua utils
 
 ---trims whitespace from string
 ---@param str string
@@ -36,6 +23,35 @@ function trim(str)
 	if not str then return "" end
 	str = str:gsub("^%s*(.-)%s*$", "%1")
 	return str
+end
+
+---write to a file, using lua io
+---@param filepath string
+---@param textToAppend string
+function appendToFile(filepath, textToAppend)
+	local file, err = io.open(filepath, "a")
+	if file then
+		file:write(textToAppend)
+		file:close()
+	else
+		print("error:", err) 
+	end
+end
+
+--------------------------------------------------------------------------------
+
+---gets shell environment variable. WARN: if .zshenv is changed during
+--Hammerspoon's runtime, this	will not work.
+---@param VAR string
+---@return string
+function getenv(VAR)
+	local out = hs.execute("echo $" .. VAR):gsub("\n$", "")
+	if not out or out == "" then
+		notify("⚠️️ $" .. VAR .. " could not be retrieved.")
+		return ""
+	else
+		return out
+	end
 end
 
 ---Repeat a Function multiple times
