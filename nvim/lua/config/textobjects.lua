@@ -110,6 +110,18 @@ autocmd("FileType", {
 	end,
 })
 
+augroup("filetypesWithPipe", {})
+autocmd("FileType", {
+	group = "filetypesWithPipe",
+	callback = function()
+		local pipeFiletypes = { "sh", "zsh", "bash" }
+		if vim.tbl_contains(pipeFiletypes, bo.filetype) then
+			keymap( { "x", "o" }, "i|", function() require("various-textobjs").indentation(true) end, { buffer = true, desc = "inner pipe textobj" })
+			keymap( { "x", "o" }, "a|", function() require("various-textobjs").indentation(false) end, { buffer = true, desc = "outer pipe textobj" })
+		end
+	end,
+})
+
 -- Git Hunks
 keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
 
