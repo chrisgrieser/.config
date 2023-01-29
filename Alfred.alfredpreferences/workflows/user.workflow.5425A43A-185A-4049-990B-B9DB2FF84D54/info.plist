@@ -35,6 +35,34 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># determined via .zshenv
+sf_path="$VAULT_PATH/.obsidian/themes/Shimmering Focus/theme.css"
+lineNo="$*"
+
+# workaround for https://github.com/neovide/neovide/issues/1604
+open "$sf_path" --env=LINE=$lineNo</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>846A75D1-67B5-4DFC-A2B0-8F8276CA4423</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -80,33 +108,6 @@
 			<string>681793A7-1E5D-456D-8593-88828D1E5C40</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>sf_path="${vault_path/#\~/$HOME}/.obsidian/themes/Shimmering Focus/theme.css"
-lineNo="$*"
-
-# workaround for https://github.com/neovide/neovide/issues/1604
-open "$sf_path" --env=LINE=$lineNo</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>846A75D1-67B5-4DFC-A2B0-8F8276CA4423</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>

@@ -340,7 +340,8 @@ end, { desc = "LuaSnip: Jump Back" })
 
 keymap({ "i", "s" }, "<D-k>", function()
 	if require("luasnip").choice_active() then
-		require("luasnip").change_choice(1)
+		require("luasnip.extras.select_choice")()
+		return "<Esc>" -- HACK so we do not end up in insert mode for the selection
 	elseif bo.filetype == "markdown" then
 		return "<D-k>" -- md link creation
 	else

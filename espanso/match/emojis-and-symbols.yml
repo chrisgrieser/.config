@@ -28,6 +28,10 @@ matches:
 
   - trigger: '!no'
     replace: ❌
+  - trigger: '!yes'
+    replace: ✅
+  - trigger: '!wait'
+    replace: ⏳
   - trigger: '!info'
     replace: ℹ️
   - trigger: '!new'
@@ -36,8 +40,6 @@ matches:
     replace: ▪︎
   - trigger: '!warn'
     replace: ⚠️
-  - trigger: '!yes'
-    replace: ✅
   - trigger: '->'
     replace: →
     word: true
