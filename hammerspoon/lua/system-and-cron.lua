@@ -15,20 +15,21 @@ local passIcon = "🔑"
 --------------------------------------------------------------------------------
 
 -- retrieve configs from zshenv
-local dotfilesFolder = getenv("DOTFILE_FOLDER")
-local passwordStore = getenv("PASSWORD_STORE_DIR")
-local vaultLocation = getenv("VAULT_PATH")
+-- not local, cause sometimes not available, so set at startup
+dotfilesFolder = getenv("DOTFILE_FOLDER")
+passwordStore = getenv("PASSWORD_STORE_DIR")
+vaultLocation = getenv("VAULT_PATH")
 
--- not local, cause otherwise vault-launch-path sometimes becomes inaccessible?!
 local gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
 local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
 local gitPassScript = passwordStore .. "/pass-sync.sh"
 
 --------------------------------------------------------------------------------
 
+---@return boolean
 local function gitDotfileSync()
-	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return end
-	if not (screenIsUnlocked()) then return end -- prevent of standby home device background sync when in office
+	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return false end
+	if not (screenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
 
 	gitDotfileSyncTask = hs.task
 		.new(
@@ -52,11 +53,15 @@ local function gitDotfileSync()
 			end
 		)
 		:start()
+
+	if not gitDotfileSyncTask then return false end
+	return true
 end
 
+---@return boolean
 local function gitVaultSync()
-	if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return end
-	if not (screenIsUnlocked()) then return end -- prevent of standby home device background sync when in office
+	if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return false end
+	if not (screenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
 
 	gitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
@@ -68,11 +73,15 @@ local function gitVaultSync()
 			notify(vaultIcon .. "⚠️️ vault " .. stdErr)
 		end)
 		:start()
+
+	if not gitVaultSyncTask then return false end
+	return true
 end
 
+---@return boolean
 local function gitPassSync()
-	if gitPassSyncTask and gitPassSyncTask:isRunning() then return end
-	if not screenIsUnlocked() then return end -- prevent of standby home device background sync when in office
+	if gitPassSyncTask and gitPassSyncTask:isRunning() then return true end
+	if not screenIsUnlocked() then return true end -- prevent of standby home device background sync when in office
 
 	gitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
@@ -84,6 +93,9 @@ local function gitPassSync()
 			notify(passIcon .. "⚠️️ password-store " .. stdErr)
 		end)
 		:start()
+
+	if not gitPassSyncTask then return false end
+	return true
 end
 
 --------------------------------------------------------------------------------
@@ -91,9 +103,13 @@ end
 ---sync all three git repos
 ---@param sendNotification? string whether to send notification on finished sync
 function syncAllGitRepos(sendNotification)
-	gitDotfileSync()
-	gitPassSync()
-	gitVaultSync()
+	local success1 = gitDotfileSync()
+	local success2 = gitPassSync()
+	local success3 = gitVaultSync()
+	if not (success1 and success2 and success3) then
+		notify("⚠️️ Sync Error.")
+		return
+	end
 
 	local function noSyncInProgress()
 		local dotfilesSyncing = gitDotfileSyncTask and gitDotfileSyncTask:isRunning()
