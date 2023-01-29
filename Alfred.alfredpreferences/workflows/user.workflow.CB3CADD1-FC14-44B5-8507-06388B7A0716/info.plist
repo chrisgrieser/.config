@@ -84,19 +84,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1184F490-5C6C-4B9E-A0D1-BD91007F65EB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D9265DEF-6A05-43E3-9D8D-DF376C242E91</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>13F012E9-4D28-4459-9E50-AF9A0A3C5C54</key>
 		<array>
 			<dict>
@@ -1458,27 +1445,6 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>chrisgrieser</string>
-				<key>subtext</key>
-				<string>~</string>
-				<key>text</key>
-				<string>🏠 Home Folder</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>1184F490-5C6C-4B9E-A0D1-BD91007F65EB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
 				<string>dock</string>
@@ -2553,15 +2519,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<real>65</real>
 			<key>ypos</key>
 			<real>3160</real>
-		</dict>
-		<key>1184F490-5C6C-4B9E-A0D1-BD91007F65EB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>595</real>
-			<key>ypos</key>
-			<real>855</real>
 		</dict>
 		<key>13F012E9-4D28-4459-9E50-AF9A0A3C5C54</key>
 		<dict>
