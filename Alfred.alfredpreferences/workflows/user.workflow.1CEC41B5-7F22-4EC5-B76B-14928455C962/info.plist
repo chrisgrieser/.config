@@ -490,15 +490,15 @@ echo -n "$*"</string>
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>keyword</key>
-				<string>blue</string>
+				<string>blue restart</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Restart Bluetooth</string>
+				<string>🔁 Restart Bluetooth</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>

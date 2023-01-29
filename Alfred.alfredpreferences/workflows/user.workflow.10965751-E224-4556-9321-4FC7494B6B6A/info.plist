@@ -80,19 +80,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>47C1BF4B-188B-4643-810A-6964F3F436F6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A1984774-184F-4A18-8608-093AC1ABA3B4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4ED764B2-0EF6-4208-B794-3E956BD419D6</key>
 		<array>
 			<dict>
@@ -553,41 +540,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>15</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>R</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>org.yanex.marta</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>47C1BF4B-188B-4643-810A-6964F3F436F6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -932,16 +884,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>365</real>
 		</dict>
 		<key>0E71F532-8554-48C0-B7F0-FADA559A831C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>530</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>490</real>
 		</dict>
 		<key>2168E700-2687-41C9-9B03-97661BD3AD70</key>
 		<dict>
@@ -955,7 +907,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</key>
 		<dict>
 			<key>xpos</key>
-			<real>245</real>
+			<real>190</real>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
@@ -967,15 +919,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>765</real>
 			<key>ypos</key>
 			<real>580</real>
-		</dict>
-		<key>47C1BF4B-188B-4643-810A-6964F3F436F6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>460</real>
 		</dict>
 		<key>4ED764B2-0EF6-4208-B794-3E956BD419D6</key>
 		<dict>
@@ -1013,16 +956,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>365</real>
 		</dict>
 		<key>769D9FCB-D640-41FC-8076-AC1EA99EB319</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>530</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>375</real>
 		</dict>
 		<key>7DFCE745-A1BC-4042-9D56-A22C4B08E73F</key>
 		<dict>
@@ -1047,7 +990,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>395</real>
 		</dict>
 		<key>8820CF69-3EB2-4193-AFCF-0D368DFD4C9D</key>
 		<dict>
@@ -1067,9 +1010,9 @@ CHANGE SCRIPT HERE to a different type of parsing</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>695</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>385</real>
 		</dict>
 		<key>B0E28085-73FC-4A79-A52D-6F87FC592ECC</key>
 		<dict>
