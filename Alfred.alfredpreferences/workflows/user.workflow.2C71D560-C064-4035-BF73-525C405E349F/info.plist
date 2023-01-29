@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.quick-spelling-fixer</string>
+	<string>de.chris-grieser.spelling-and-word-changer</string>
 	<key>connections</key>
 	<dict>
 		<key>07067962-C5C6-4B45-84D2-E12B587B394A</key>
@@ -159,7 +159,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Quick Spelling Fixer &amp; Completion</string>
+	<string>Spelling and word changer</string>
 	<key>objects</key>
 	<array>
 		<dict>
