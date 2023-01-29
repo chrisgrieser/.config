@@ -299,7 +299,7 @@ finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 
 	-- quit Finder if it was started as a helper (e.g., JXA), but has no window
 	elseif eventType == aw.launched then
-		-- INFO delay shouldn't be lower than 2-3s, otherwise other scripts cannot
+		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
 		-- properly utilize Finder
 		runWithDelays({ 3, 5, 10 }, function()
 			if finderAppObj and not (finderAppObj:mainWindow()) then finderAppObj:kill() end

@@ -8,6 +8,10 @@ require("lua.utils")
 -- - Sketchybar
 -- - Hammerspoon Console
 function toggleDarkMode()
+	local ambientBrightness = math.floor(hs.brightness.ambient())
+	notify(ambientBrightness)
+	-- 10:00:
+
 	local prevApp = frontAppName()
 	local sketchyfont, sketchybg, toMode, pdfbg
 

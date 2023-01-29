@@ -110,8 +110,10 @@ function workLayout()
 	twitterToTheSide()
 	showAllSidebars()
 	runWithDelays({ 0.5, 1 }, function()
-		app("Drafts"):activate()
 		app("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
+		app("Drafts"):activate()
+		local workspace = isAtOffice() and "Office" or "Home"
+		app("Drafts"):selectMenuItem { "Workspaces", workspace }
 	end)
 
 	-- wait until sync is finished, to avoid merge conflict
