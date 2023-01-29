@@ -15,6 +15,7 @@ local lsp_servers = {
 	"pyright", -- python
 	"marksman", -- markdown
 	"tsserver", -- ts/js
+	"eslint", -- ts/js
 }
 
 --------------------------------------------------------------------------------
@@ -136,12 +137,8 @@ autocmd("LspAttach", {
 		local bufnr = args.buf
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local capabilities = client.server_capabilities
-		local bufopts = { buffer = true }
 
 		require("lsp-inlayhints").on_attach(client, bufnr)
-
-		-- eslint & prettier already take care of formatting
-		if client.name == "tsserver" then capabilities.documentFormattingProvider = false end
 
 		if capabilities.renameProvider then
 			-- overrides treesitter-refactor's rename
@@ -171,7 +168,7 @@ autocmd("LspAttach", {
 				vim.lsp.buf.format { async = true }
 			end
 			cmd.write()
-		end, bufopts)
+		end, {buffer = true, desc = "璉 Save & Format"})
 		-- stylua: ignore end
 	end,
 })
@@ -190,7 +187,7 @@ keymap("n", "<D-b>", function()
 	else
 		vim.notify("No Breadcrumbs available.", logWarn)
 	end
-end)
+end, {desc = "璉Copy Breadcrumbs"})
 
 --------------------------------------------------------------------------------
 -- Add borders to various lsp windows
@@ -251,19 +248,19 @@ lspSettings.cssls = {
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
 	format = {
-		insertSpaceAfterCommaDelimiter = true,
-		insertSpaceAfterConstructor = false,
-		insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
-		insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
-		insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
-		insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
-		insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
-		insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
-		insertSpaceAfterSemicolonInForStatements = true,
-		insertSpaceBeforeAndAfterBinaryOperators = true,
-		insertSpaceBeforeFunctionParenthesis = false,
-		placeOpenBraceOnNewLineForFunctions = false,
-		trimTrailingWhitespace = true,
+		-- insertSpaceAfterCommaDelimiter = true,
+		-- insertSpaceAfterConstructor = false,
+		-- insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
+		-- insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
+		-- insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
+		-- insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+		-- insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+		-- insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+		-- insertSpaceAfterSemicolonInForStatements = true,
+		-- insertSpaceBeforeAndAfterBinaryOperators = true,
+		-- insertSpaceBeforeFunctionParenthesis = false,
+		-- placeOpenBraceOnNewLineForFunctions = false,
+		-- trimTrailingWhitespace = true,
 	},
 	inlayHints = {
 		includeInlayEnumMemberValueHints = true,
@@ -285,6 +282,14 @@ lspSettings.tsserver = {
 	},
 	typescript = jsAndTsSettings,
 	javascript = jsAndTsSettings,
+}
+
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
+lspSettings.eslint = {
+	quiet = false, -- = include warnings
+	codeAction = {
+		disableRuleComment = { location = "sameLine" }, -- add ignore-comments on the same line
+	},
 }
 
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
@@ -310,6 +315,9 @@ for _, lsp in pairs(lsp_servers) do
 	local config = { capabilities = capabilities }
 	if lspSettings[lsp] then config.settings = lspSettings[lsp] end
 	if lspFileTypes[lsp] then config.filetypes = lspFileTypes[lsp] end
+
+	-- FIX missing root-directory detection for eslint LSP
+	if lsp == "eslint" then config.root_dir = require("lspconfig.util").find_git_ancestor end
 
 	require("lspconfig")[lsp].setup(config)
 end

@@ -16,7 +16,6 @@ local lintersAndFormatters = {
 	"codespell", -- natural language (common misspellings, autoformatted)
 	"selene", -- lua
 	"stylua", -- lua
-	"eslint_d", -- eslint-lsp seems to be too buggy
 	"prettier", -- only for TS and JS
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
@@ -45,14 +44,8 @@ null_ls.setup {
 
 		-- PYTHON
 		builtins.formatting.black.with {
-			args = {
-				"--config",
-				linterConfig .. "/black.toml",
-				"--stdin-filename",
-				"$FILENAME",
-				"--quiet",
-				"-",
-			},
+			-- stylua: ignore
+			args = { "--config", linterConfig .. "/black.toml", "--stdin-filename", "$FILENAME", "--quiet", "-" },
 		},
 
 		-- SHELL
@@ -69,13 +62,6 @@ null_ls.setup {
 		builtins.formatting.prettier.with {
 			filetypes = { "javascript", "typescript" }, -- do format markdown, css, and so on
 			extra_args = { "--config", linterConfig .. "/.prettierrc.yml" },
-		},
-		builtins.code_actions.eslint_d, -- must not use a config file
-		builtins.formatting.eslint_d.with {
-			extra_args = { "--config", linterConfig .. "/.eslintrc.yml" },
-		},
-		builtins.diagnostics.eslint_d.with {
-			extra_args = { "--config", linterConfig .. "/.eslintrc.yml" },
 		},
 
 		-- CSS

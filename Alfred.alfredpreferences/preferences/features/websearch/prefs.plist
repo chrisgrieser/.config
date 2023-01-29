@@ -107,7 +107,7 @@
 			<key>keyword</key>
 			<string>sg</string>
 			<key>text</key>
-			<string>Sourcegraph</string>
+			<string>Sourcegraph: '{query}'</string>
 			<key>url</key>
 			<string>https://sourcegraph.com/search?q={query}</string>
 		</dict>
@@ -175,6 +175,28 @@
 			<string>https://www.facebook.com/</string>
 			<key>utf8</key>
 			<true/>
+		</dict>
+		<key>B917FE82-DF9A-41E0-887A-FB63F089584C</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>sci</string>
+			<key>text</key>
+			<string>Libgen: '{query}'</string>
+			<key>url</key>
+			<string>https://libgen.rs/search.php?req={query}</string>
+		</dict>
+		<key>C8DFE5EB-17FB-4D10-B030-4DF965F3584A</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>sci</string>
+			<key>text</key>
+			<string>SciHub</string>
+			<key>url</key>
+			<string>https://sci-hub.ru/{query}</string>
 		</dict>
 		<key>CFD350B4-6201-41ED-93FE-EE2199EC6FAC</key>
 		<dict>

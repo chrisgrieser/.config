@@ -18,6 +18,7 @@ export ZDOTDIR="$DOTFILE_FOLDER/zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# Github token (right now actually unused)
 GITHUB_TOKEN=$(tr -d "\n" < "$ICLOUD/Dotfolder/private dotfiles/github_token")
 export GITHUB_TOKEN
 
@@ -37,9 +38,5 @@ export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
 # vidir availability
 export PATH="$DOTFILE_FOLDER/zsh/plugins":$PATH
 
-# NEOVIM: completions for cmp-zsh https://github.com/tamago324/cmp-zsh#configuration
-[[ -d $HOME/.zsh/comp ]] && export FPATH="$HOME/.zsh/comp:$FPATH"
-
 # NEOVIM: so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
-alias eslint="eslint_d"
