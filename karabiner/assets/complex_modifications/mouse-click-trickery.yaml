@@ -87,6 +87,7 @@ rules:
               - BetterTouchTool
               - Hammerspoon
               - "[Nn]eovide"
+              - "[Mm]industry"
       - type: basic
         from:
           pointing_button: button3
