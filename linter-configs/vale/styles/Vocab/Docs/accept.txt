@@ -1,10 +1,13 @@
 git
 beta
 BRAT
-currently
 PDF
 PDFs
 APA
+URL
+author
+prepend
+Prepend
 VS
 ISBN
 DOI
@@ -25,15 +28,13 @@ Normal
 US
 German
 keypress
-unfortunately
-Unfortunately
 afterwards
 which
 notify
+it is
+It is
 above
 LSP
-It is
-it is
 code
 Code
 alias

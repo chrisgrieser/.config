@@ -40254,6 +40254,26 @@
 	doi = {10.1002/smj.2932},
 	url = {https://onlinelibrary.wiley.com/doi/full/10.1002/smj.2932}
 }
+@article{Ziegler1984,
+	title = {Das {{Netz}} der {{Personen}}- und {{Kapitalverflechtungen}} Deutscher und {\"O}sterreichischer {{Wirtschaftsunternehmen}}},
+	author = {Ziegler, Rolf},
+	year = 1984,
+	journal = {K{\"o}lner Zeitschrift f{\"u}r Soziologie und Sozialpsychologie},
+	volume = 36,
+	number = 3,
+	pages = {585--614},
+	keywords = {Methoden,Wissenschaftstheorie,Banken,interorganisationale Netzwerke,Netzwerkanalyse}
+}
+@incollection{Ziegler2016,
+	title = {Die Historische {{Entwicklung}} der {{Wahrscheinlichkeitstheorie}}},
+	author = {Ziegler, Markus},
+	year = 2016,
+	booktitle = {Induktive {{Statistik}} und Soziologische {{Theorie}}. {{Eine Analyse}} Des Theoretischen {{Potenzials}} der {{Bayes}}-{{Statistik}}},
+	location = {TU Berlin},
+	publisher = {Dissertation},
+	pages = {10--120},
+	keywords = {bayesianische Statistik,Statistikgeschichte}
+}
 @incollection{Ziegler2021,
 	title = {Die neuen Maschinensysteme des Hightech-Kapitalismus},
 	author = {Ziegler, Alexander},
@@ -40277,6 +40297,18 @@
 	url = {https://journals.sagepub.com/doi/10.1177/0306312719865607},
 	keywords = {Quantifizierung,Gaming (von Rankings),Ranking,Suchmaschine}
 }
+@incollection{Zimbardo2008,
+	title = {The {{SPE}}: {{Ethics}} and {{Extensions}}},
+	author = {Zimbardo, Philip G.},
+	year = 2008,
+	booktitle = {The {{Lucifer}} Effect: Understanding How Good People Turn Evil},
+	location = {New York},
+	publisher = {Random House Trade Paperbacks},
+	pages = {229--257},
+	isbn = {978-0-8129-7444-7},
+	edition = {2008 Random House trade pbk. ed},
+	keywords = {Forschungsethik}
+}
 @book{ZimmermannFalk2020,
 	title = {Handbuch Gameskultur},
 	year = 2020,
@@ -40284,6 +40316,19 @@
 	isbn = {978-3-947308-22-4},
 	editor = {Zimmermann, Olaf and Falk, Felix},
 	keywords = {Games,Gamification,Handbuch}
+}
+@article{ZittBassecoulard2006,
+	title = {Delineating Complex Scientific Fields by an Hybrid Lexical-Citation Method: {{An}} Application to Nanosciences},
+	author = {Zitt, Michel and Bassecoulard, Elise},
+	year = 2006,
+	journal = {Information Processing \& Management},
+	series = {Special {{Issue}} on {{Informetrics}}},
+	volume = 42,
+	number = 6,
+	pages = {1513--1531},
+	doi = {10.1016/j.ipm.2006.03.016},
+	url = {http://www.sciencedirect.com/science/article/pii/S0306457306000379},
+	keywords = {Methoden,Wissenschaftstheorie,Dokumentanalyse,Informationswissenschaft,Nanotechnologie}
 }
 @article{Zittrain2006,
 	title = {The {{Generative Internet}}},
@@ -40296,6 +40341,27 @@
 	doi = {10.1145/1435417.1435426},
 	url = {https://dash.harvard.edu/handle/1/9385626},
 	keywords = {Digitalwirtschaft,Generifizierung}
+}
+@article{Zorn2004,
+	title = {Here a {{Chief}}, {{There}} a {{Chief}}: {{The Rise}} of the {{CFO}} in the {{American Firm}}},
+	author = {Zorn, D. M.},
+	year = 2004,
+	journal = {American Sociological Review},
+	volume = 69,
+	number = 3,
+	pages = {345--364},
+	doi = {10.1177/000312240406900302},
+	url = {http://asr.sagepub.com/cgi/doi/10.1177/000312240406900302},
+	keywords = {Wirtschaft,Entrepreneurship,Management,Neoinstitutionalismus}
+}
+@article{Miller2012a,
+	title = {How {{Money Makes People Act Less Human}}},
+	author = {Miller, Lisa},
+	year = 2012,
+	journal = {New York Magazine},
+	url = {https://nymag.com/news/features/money-brain-2012-7/},
+	entrysubtype = {magazine},
+	keywords = {Psychologie,Reichtum,Soziale Ungleichheit}
 }
 @article{Zuboff1985,
 	title = {Automate/Informate: {{The}} Two Faces of Intelligent Technology},
