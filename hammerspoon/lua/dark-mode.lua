@@ -1,6 +1,18 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 
+-- log ambient brightness values, so I can automate them later
+function logBrightness()
+	local mode = isDarkMode() and "dark" or "light"
+	local time = os.date():sub(12, 16)
+	local brightness = math.floor(hs.brightness.ambient())
+	local out = time .. "\t" .. mode .. "\t" .. tostring(brightness)
+	appendToFile("ambient-brightness.log", out)
+end
+hs.timer.doEvery(3600, logBrightness):start()
+
+--------------------------------------------------------------------------------
+
 -- done manually to include app-specific toggling for:
 -- - Brave Browser (fixing Dark Reader Bug)
 -- - Neovim
@@ -8,10 +20,6 @@ require("lua.utils")
 -- - Sketchybar
 -- - Hammerspoon Console
 function toggleDarkMode()
-	local ambientBrightness = math.floor(hs.brightness.ambient())
-	notify(ambientBrightness)
-	-- 10:00:
-
 	local prevApp = frontAppName()
 	local sketchyfont, sketchybg, toMode, pdfbg
 
@@ -73,6 +81,7 @@ function toggleDarkMode()
 
 	app(prevApp):activate()
 	holeCover() -- redraw hole-covers in proper color
+	logBrightness()
 end
 
 ---@return boolean
