@@ -1,4 +1,4 @@
--- INFO openai_api_key defined in zshenv but there read from outside of dotfiles
+-- INFO openai_api_key defined in zshenv 
 --------------------------------------------------------------------------------
 return {
 	{
