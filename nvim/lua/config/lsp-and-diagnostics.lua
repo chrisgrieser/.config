@@ -20,6 +20,7 @@ local lsp_servers = {
 
 --------------------------------------------------------------------------------
 
+-- SIGN-COLUMN ICONS
 local signIcons = {
 	Error = "",
 	Warn = "▲",
@@ -27,24 +28,25 @@ local signIcons = {
 	Hint = "",
 }
 
--- SIGN-COLUMN ICONS
 for type, icon in pairs(signIcons) do
 	local hl = "DiagnosticSign" .. type
 	fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+-- BORDERS
+require("lspconfig.ui.windows").default_options.border = borderStyle
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
+vim.lsp.handlers["textDocument/signatureHelp"] =
+	vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
+
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS (also applies to null-ls)
--- stylua: ignore
+-- stylua: ignore start
 keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, { desc = "璉Next Diagnostic" })
--- stylua: ignore
 keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { desc = "璉Previous Diagnostic" })
-keymap(
-	"n",
-	"<leader>d",
-	function() vim.diagnostic.open_float { focusable = false } end,
-	{ desc = "璉Show Diagnostic" }
-)
+keymap( "n", "<leader>d", function() vim.diagnostic.open_float { focusable = false } end, { desc = "璉Show Diagnostic" })
+keymap( "n", "<leader>D", function() cmd.Telescope("diagnostic") end, { desc = "璉Workspace Diagnostics" })
+-- stylua: ignore end
 
 local function diagnosticFormat(diagnostic, mode)
 	local msg = diagnostic.message:gsub("^%s*", ""):gsub("%s*$", "")
@@ -151,7 +153,7 @@ autocmd("LspAttach", {
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "璉Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
 			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "璉Workspace Symbols", buffer = true })
 		end
-		keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "璉Goto [d]efinition", buffer = true })
+		keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "璉Goto definition", buffer = true })
 		keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "璉Goto Re[f]erence", buffer = true })
 		keymap("n", "gy", function() cmd.Telescope("lsp_type_definitions") end, { desc = "璉Goto T[y]pe Definition", buffer = true })
 		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, {desc = "璉Signature", buffer = true})
@@ -188,13 +190,6 @@ keymap("n", "<D-b>", function()
 		vim.notify("No Breadcrumbs available.", logWarn)
 	end
 end, { desc = "璉Copy Breadcrumbs" })
-
---------------------------------------------------------------------------------
--- Add borders to various lsp windows
-require("lspconfig.ui.windows").default_options.border = borderStyle
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
-vim.lsp.handlers["textDocument/signatureHelp"] =
-	vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
 
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP

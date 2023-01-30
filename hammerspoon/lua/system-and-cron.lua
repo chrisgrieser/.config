@@ -171,7 +171,7 @@ wakeWatcher = caff
 			else
 				if eventType ~= caff.systemDidWake then syncAllGitRepos("notify") end
 				workLayout()
-				logBrightness()
+				logBrightness("wakeup")
 				local toDark = not (betweenTime(7, 19))
 				setDarkmode(toDark)
 			end

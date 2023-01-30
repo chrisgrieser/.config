@@ -1,15 +1,17 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 
--- log ambient brightness values, so I can automate them later
-function logBrightness()
-	local mode = isDarkMode() and "dark" or "light"
+---log ambient brightness values, so I can automate them later
+---@param trigger string description of the situation the log was triggered,
+---e.g. "manual" or "hourly"
+function logBrightness(trigger)
+	local mode = isDarkMode() and "dark " or "light"
 	local time = os.date():sub(12, 16)
 	local brightness = math.floor(hs.brightness.ambient())
-	local out = time .. "\t" .. mode .. "\t" .. tostring(brightness)
+	local out = time .. " " .. mode .. " " .. trigger .. tostring(brightness) .. "\n"
 	appendToFile("ambient-brightness.log", out)
 end
-hs.timer.doEvery(3600, logBrightness):start()
+hs.timer.doEvery(3600, function() logBrightness("hourly") end):start()
 
 --------------------------------------------------------------------------------
 
@@ -81,7 +83,7 @@ function toggleDarkMode()
 
 	app(prevApp):activate()
 	holeCover() -- redraw hole-covers in proper color
-	logBrightness()
+	logBrightness("toggle")
 end
 
 ---@return boolean
