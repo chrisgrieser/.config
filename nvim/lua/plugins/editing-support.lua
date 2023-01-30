@@ -56,6 +56,7 @@ return {
 	{ "ggandor/leap.nvim", event = "VeryLazy" },
 	{
 		"unblevable/quick-scope",
+		enabled = false,
 		keys = { "f", "F", "t", "T" },
 		init = function()
 			vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
