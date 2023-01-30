@@ -36,16 +36,16 @@ end
 -- BORDERS
 require("lspconfig.ui.windows").default_options.border = borderStyle
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
-vim.lsp.handlers["textDocument/signatureHelp"] =
-	vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
+-- stylua: ignore
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS (also applies to null-ls)
 -- stylua: ignore start
 keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, { desc = "璉Next Diagnostic" })
 keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { desc = "璉Previous Diagnostic" })
-keymap( "n", "<leader>d", function() vim.diagnostic.open_float { focusable = false } end, { desc = "璉Show Diagnostic" })
-keymap( "n", "<leader>D", function() cmd.Telescope("diagnostic") end, { desc = "璉Workspace Diagnostics" })
+keymap("n", "<leader>d", function() vim.diagnostic.open_float { focusable = false } end, { desc = "璉Show Diagnostic" })
+keymap("n", "<leader>D", function() cmd.Telescope("diagnostic") end, { desc = "璉Workspace Diagnostics" })
 -- stylua: ignore end
 
 local function diagnosticFormat(diagnostic, mode)
