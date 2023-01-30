@@ -454,9 +454,9 @@ end, { desc = "  diagnostics" })
 -- TERMINAL AND CODI
 keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = "go to next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = "Paste in Terminal Mode" })
-
-keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = "ToggleTerm" })
-keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "Selection to ToggleTerm" })
+-- echo bla
+keymap("n", "6", ":ToggleTerm size=10<CR>", { desc = "ToggleTerm" })
+keymap("x", "6", ":ToggleTermSendVisualSelection size=10<CR>", { desc = "Selection to ToggleTerm" })
 
 keymap("n", "5", function()
 	cmd.CodiNew()
@@ -529,8 +529,6 @@ autocmd("FileType", {
 	group = "quickClose",
 	pattern = {
 		"help",
-		"startuptime",
-		"netrw",
 		"lspinfo",
 		"tsplayground",
 		"qf",
