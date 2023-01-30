@@ -187,7 +187,7 @@ keymap("n", "<D-b>", function()
 	else
 		vim.notify("No Breadcrumbs available.", logWarn)
 	end
-end, {desc = "璉Copy Breadcrumbs"})
+end, { desc = "璉Copy Breadcrumbs" })
 
 --------------------------------------------------------------------------------
 -- Add borders to various lsp windows

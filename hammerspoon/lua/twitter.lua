@@ -32,16 +32,14 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 			if win:title():find("Media") then
 				win:close()
 				-- HACK using keystroke, since closing window does not seem to work reliably
-				keystroke({ "command" }, "w", 1, app("Twitter")) 
+				keystroke({ "command" }, "w", 1, app("Twitter"))
 			end
 		end
 
 	-- raise twitter
 	elseif appIsRunning("Twitter") and eventType == aw.activated then
 		local win = appObj:mainWindow()
-		if checkSize(win, pseudoMaximized) and win:title() ~= "Quick Look" then
-			app("Twitter"):mainWindow():raise()
-		end
+		if checkSize(win, pseudoMaximized) then app("Twitter"):mainWindow():raise() end
 	end
 end):start()
 

@@ -127,7 +127,11 @@ function moveResize(win, pos)
 	toggleWinSidebar(win)
 	obsidianThemeDevHelper(win, pos)
 
-	if (pos == pseudoMaximized or pos == centered) and appIsRunning("Twitter") then
+	if
+		(pos == pseudoMaximized or pos == centered)
+		and appIsRunning("Twitter")
+		and win:title() ~= "Quick Look"
+	then
 		app("Twitter"):mainWindow():raise()
 	end
 

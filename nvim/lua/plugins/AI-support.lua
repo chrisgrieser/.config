@@ -1,4 +1,4 @@
--- INFO openai_api_key defined in zshenv 
+-- INFO openai_api_key defined in zshenv
 --------------------------------------------------------------------------------
 return {
 	{
@@ -78,15 +78,20 @@ return {
 			}
 		end,
 	},
-	-- TODO checkout again when the bugs are gone
-	
 	{
 		"jcdickinson/codeium.nvim",
+		event = "InsertEnter",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
+			"hrsh7th/nvim-cmp",
 		},
-		config = function() require("codeium").setup {} end,
+		config = function()
+			require("codeium").setup {
+				config_path = vim.env.ICLOUD .. "Dotfolder/private dotfiles/codium-api-key.json",
+				bin_path = vim.fn.stdpath("data") .. "/codeium",
+			}
+		end,
 	},
 	-- {
 	-- 	"Exafunction/codeium.vim",

@@ -134,7 +134,7 @@ local function cmpconfig()
 		formatting = {
 			fields = { "kind", "abbr", "menu" }, -- order of the fields
 			format = function(entry, vim_item)
-				local kindIcon = kind_icons[vim_item.kind] or ""
+				local kindIcon = kind_icons[vim_item.kind] or ""
 				vim_item.kind = " " .. kindIcon .. " "
 				vim_item.menu = source_icons[entry.source.name]
 				return vim_item
