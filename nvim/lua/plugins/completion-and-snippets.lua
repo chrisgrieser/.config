@@ -15,8 +15,8 @@ local s = {
 }
 
 local defaultSources = {
-	s.codeium,
 	s.snippets,
+	s.codeium,
 	s.lsp,
 	s.tabnine,
 	s.emojis,
