@@ -94,9 +94,6 @@ rules:
   # Commas
   comma-spacing: warn
   comma-style: warn
-  comma-dangle:
-    - warn
-    - always-multiline
   quotes:
     - warn
     - double
