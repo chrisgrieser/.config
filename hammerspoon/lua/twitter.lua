@@ -78,7 +78,11 @@ local function pageupAction()
 end
 
 local function endAction()
-	if appIsRunning("Twitter") then
+	if appIsRunning("zoom.us") then
+		alert("📹/⛔") -- toggle video
+		keystroke({ "shift", "command" }, "V", 1, app("zoom.us"))
+		return
+	elseif appIsRunning("Twitter") then
 		keystroke({ "command" }, "K", 1, app("Twitter")) -- open tweet
 		app("Twitter"):activate() -- so media windows come to the foreground
 	end
