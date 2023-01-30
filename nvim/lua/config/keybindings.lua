@@ -268,17 +268,20 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 -- BUFFERS & WINDOWS & SPLITS
 
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " open buffers" })
+keymap("n", "<BS>", cmd.bprevious, { desc = ":bprevious" })
 
 local altalt = require("funcs.alt-alt")
 keymap("n", "<CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
+
+-- for consistency with terminal buffers also <S-CR>
 keymap("n", "<S-CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
 
 if isGui() then
 	keymap({ "n", "x", "i" }, "<D-w>", altalt.betterClose, { desc = "close buffer/window/tab" })
 end
 
-keymap("n", "<C-w>v", ":vsplit #<CR>", { desc = "vertical split (alt file)" }) -- open the alternate file in the split instead of the current file
-keymap("n", "<C-w>h", ":split #<CR>", { desc = "horizontal split (alt file)" })
+keymap("", "<C-w>v", ":vsplit #<CR>", { desc = "vertical split (alt file)" }) -- open the alternate file in the split instead of the current file
+keymap("", "<C-w>h", ":split #<CR>", { desc = "horizontal split (alt file)" })
 keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
 keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize (-)" })
 keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize (+)" })

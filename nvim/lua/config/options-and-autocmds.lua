@@ -80,8 +80,8 @@ opt.titlestring = '%{expand("%:p")}'
 
 -- Editor
 opt.cursorline = true
-opt.scrolloff = 12
-opt.sidescrolloff = 15
+opt.scrolloff = 11
+opt.sidescrolloff = 13
 
 augroup("sidescroll", {})
 autocmd("FileType", {
@@ -183,7 +183,6 @@ local function remember(mode)
 	local ignoredFts = {
 		"DressingInput",
 		"DressingSelect",
-		"cybu",
 		"TelescopePrompt",
 		"gitcommit",
 		"toggleterm",
