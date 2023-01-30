@@ -33,7 +33,6 @@ which
 notify
 it is
 It is
-special
 above
 LSP
 code
