@@ -134,6 +134,13 @@ local function cmpconfig()
 		formatting = {
 			fields = { "kind", "abbr", "menu" }, -- order of the fields
 			format = function(entry, vim_item)
+				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
+				-- (height is controlled via pumheight option)
+				local max_length = 50
+				local ellipsis_char = "…"
+				if #vim_item.abbr > max_length then vim_item.abbr = vim_item.abbr:sub(1, max_length) .. ellipsis_char end
+
+				-- icons
 				local kindIcon = kind_icons[vim_item.kind] or ""
 				vim_item.kind = " " .. kindIcon .. " "
 				vim_item.menu = source_icons[entry.source.name]
