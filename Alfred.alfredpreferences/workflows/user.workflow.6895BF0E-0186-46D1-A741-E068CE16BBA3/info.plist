@@ -596,7 +596,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>695</real>
+			<real>720</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
@@ -649,7 +649,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit</string>
 			<key>xpos</key>
-			<real>775</real>
+			<real>800</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
@@ -660,7 +660,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>auto_push</string>
 			<key>xpos</key>
-			<real>626</real>
+			<real>651</real>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
