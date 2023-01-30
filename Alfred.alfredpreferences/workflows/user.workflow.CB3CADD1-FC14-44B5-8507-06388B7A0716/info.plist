@@ -1000,23 +1000,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>x-apple.systempreferences:com.apple.SystemProfiler.AboutExtension</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>9A08AB7D-C3AA-4A06-A516-31995F1CFEA0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -1053,6 +1036,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>x-apple.systempreferences:com.apple.SystemProfiler.AboutExtension</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>9A08AB7D-C3AA-4A06-A516-31995F1CFEA0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -1068,23 +1068,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>B7B9D159-E1DE-4C44-B7A9-8C7577CD5DBE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>x-apple.systempreferences:com.apple.preference.universalaccess</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>48EAE7F8-F0CA-4421-8671-05CEA6773F6D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1127,6 +1110,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>x-apple.systempreferences:com.apple.preference.universalaccess</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>48EAE7F8-F0CA-4421-8671-05CEA6773F6D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -1142,23 +1142,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>354F777D-BBCC-4FB8-BA07-1F9C33490800</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>x-apple.systempreferences:com.apple.Appearance-Settings.extension</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>9995134B-DD1E-46A9-B7A9-0A33BBDC1B0A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1201,6 +1184,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>x-apple.systempreferences:com.apple.Appearance-Settings.extension</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>9995134B-DD1E-46A9-B7A9-0A33BBDC1B0A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -1216,23 +1216,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>10BB0E7F-7A7B-47CA-B6BF-A2E88447DBDA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>0608C0AA-05B8-4CE2-BF9D-929EC1D23ED0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1269,6 +1252,23 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>4E11D9B5-2FBA-48FF-827A-B938A220C520</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>0608C0AA-05B8-4CE2-BF9D-929EC1D23ED0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1353,23 +1353,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>x-apple.systempreferences:com.apple.BluetoothSettings</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>F90E8A37-DC7E-4213-974D-30FDDC830142</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -1400,6 +1383,23 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>ED3CE1D3-721C-448D-8EE9-3F073773C2BA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>x-apple.systempreferences:com.apple.BluetoothSettings</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>F90E8A37-DC7E-4213-974D-30FDDC830142</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2472,9 +2472,9 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>815</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>525</real>
 		</dict>
 		<key>0608C0AA-05B8-4CE2-BF9D-929EC1D23ED0</key>
 		<dict>
@@ -2546,9 +2546,9 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>815</real>
 			<key>ypos</key>
-			<real>120</real>
+			<real>40</real>
 		</dict>
 		<key>1F30947A-6478-415C-8496-35E5FF7E3183</key>
 		<dict>
@@ -2571,9 +2571,9 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>815</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>405</real>
 		</dict>
 		<key>2CB67EEF-BC29-4898-AE0C-34104B40FE99</key>
 		<dict>
@@ -2669,9 +2669,9 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>280</real>
 		</dict>
 		<key>47194840-EFFD-41C6-A534-A8C1E72054B6</key>
 		<dict>
@@ -2692,9 +2692,9 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>405</real>
 		</dict>
 		<key>5271B0D3-9DE1-4163-9A3E-CF2C294EF1AE</key>
 		<dict>
@@ -2715,18 +2715,18 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>160</real>
 		</dict>
 		<key>62967DDE-6533-4E4A-A093-5E8039C12853</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>120</real>
+			<real>40</real>
 		</dict>
 		<key>65BD6A90-B01C-4699-ACA2-9A58F7949E26</key>
 		<dict>
@@ -2782,9 +2782,9 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>525</real>
 		</dict>
 		<key>8B7B3372-147B-42C1-9FCC-63D3C98B2227</key>
 		<dict>
@@ -2891,9 +2891,9 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>815</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>160</real>
 		</dict>
 		<key>BDECD53D-5065-4FAF-A7C1-17257C5E9EB6</key>
 		<dict>
@@ -2963,9 +2963,9 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>815</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>650</real>
 		</dict>
 		<key>DD1926A0-F642-425A-ADD7-8ED32692EE46</key>
 		<dict>
@@ -2993,9 +2993,9 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>815</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>280</real>
 		</dict>
 		<key>EA53A7BA-07DA-4429-8B26-5002562C3AF9</key>
 		<dict>
@@ -3025,9 +3025,9 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>650</real>
 		</dict>
 		<key>EEE44FA0-2C27-4B2A-B1AD-EF2CC79BCBF9</key>
 		<dict>
