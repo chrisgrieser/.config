@@ -41,7 +41,9 @@ rules:
         # is done in finder-vim-alfred-addon.yaml
         conditions:
           - type: frontmost_application_unless
-            bundle_identifiers: [^com\.apple\.finder$]
+            bundle_identifiers: 
+              - ^com\.apple\.finder$
+              - ^mindustry\.mac$
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪ Tab  → Meh/Tab"
     manipulators:
@@ -55,6 +57,10 @@ rules:
             modifiers:
               - control
               - option
+        conditions:
+          - type: frontmost_application_unless
+            bundle_identifiers: 
+              - ^mindustry\.mac$
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣  \U0001F4C2 Open Locations (Globally Active)"
     manipulators:
