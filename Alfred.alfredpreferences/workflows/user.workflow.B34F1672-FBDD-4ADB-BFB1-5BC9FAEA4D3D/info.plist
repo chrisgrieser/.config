@@ -75,21 +75,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1FE345F3-85DD-44F2-A273-950FBEEEA71F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>667546DE-C588-449B-BAD3-89DDFE26371A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>0914C46E-4A35-4C65-8501-F63F3947A40E</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>2ABAE956-53E7-4846-B25A-EC53C6145476</key>
 		<array>
 			<dict>
@@ -185,15 +170,43 @@
 				<false/>
 			</dict>
 		</array>
-		<key>9C5F7E53-FEEC-4EB3-A1DE-4E3C3C2A5488</key>
+		<key>9B4ED8D4-DA04-4180-8724-EF719E477AF5</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>667546DE-C588-449B-BAD3-89DDFE26371A</string>
+				<string>C16F4190-0845-4708-BFE1-9EA431FA968C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C0B9F750-4C81-4503-AC88-8A916C8138E6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0354600E-3522-4210-A260-3E335E8242FF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C16F4190-0845-4708-BFE1-9EA431FA968C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0354600E-3522-4210-A260-3E335E8242FF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>0914C46E-4A35-4C65-8501-F63F3947A40E</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -226,19 +239,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>7099D02E-6857-4A1B-ABE6-8653C16F6A49</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>D9F7B43C-9766-4330-B6D1-433CCF2ABB41</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1FE345F3-85DD-44F2-A273-950FBEEEA71F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -297,7 +297,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D9F7B43C-9766-4330-B6D1-433CCF2ABB41</string>
+				<string>9B4ED8D4-DA04-4180-8724-EF719E477AF5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -366,6 +366,55 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>css</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>./mdn-search.js "CSS $*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>MDN Search &amp; Visual References (CSS)</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F244FBB2-D206-4A08-9404-12E9A2DB8944</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -383,6 +432,31 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>F4EA4D6A-5EC4-4ECE-9BF6-39E6A49C321E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>readonly cache="${alfred_workflow_cache}/cache.json"
+
+[[ -n "$(find "${cache}" -mtime +15)" ]] &amp;&amp; echo -n 'REBUILD_CACHE'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9B4ED8D4-DA04-4180-8724-EF719E477AF5</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -449,80 +523,6 @@ cat "${cache}"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>css</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>./mdn-search.js "CSS $*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>MDN Search &amp; Visual References (CSS)</string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>F244FBB2-D206-4A08-9404-12E9A2DB8944</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>readonly cache="${alfred_workflow_cache}/cache.json"
-
-[[ -n "$(find "${cache}" -mtime +15)" ]] &amp;&amp; echo -n 'REBUILD_CACHE'</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D9F7B43C-9766-4330-B6D1-433CCF2ABB41</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -548,53 +548,9 @@ cat "${cache}"</string>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>1FE345F3-85DD-44F2-A273-950FBEEEA71F</string>
+			<string>C16F4190-0845-4708-BFE1-9EA431FA968C</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>readonly cache="${alfred_workflow_cache}/cache.json"
-mkdir -p "$(dirname "${cache}")"
-
-IFS=$'\n' read -d '' -rA dict_array &lt; &lt;(find '/Applications' "${HOME}/Applications" '/System/Applications' '/System/Cryptexes/App/System/Applications' '/System/Library/CoreServices/' '/System/Library/ScriptingAdditions' '/System/Library/ScriptingDefinitions' '/System/Library/PrivateFrameworks' -name '*.sdef' 2&gt; /dev/null | grep 'Contents/Resources')
-
-osascript -l JavaScript -e '
-  function run(argv) {
-    return JSON.stringify({
-      "items": argv.map(dict =&gt; {
-        const app_path = $(dict).stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.js
-
-        return {
-          "uid": dict,
-          "type": "file",
-          "title": $(app_path).lastPathComponent.stringByDeletingPathExtension.js,
-          "subtitle": dict,
-          "icon": { "path": app_path, "type": "fileicon" },
-          "arg": dict
-        }})
-      })
-    }
-' "${dict_array[@]}" &gt; "${cache}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>667546DE-C588-449B-BAD3-89DDFE26371A</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -656,9 +612,53 @@ osascript -l JavaScript -e '
 			<key>type</key>
 			<string>alfred.workflow.trigger.external</string>
 			<key>uid</key>
-			<string>9C5F7E53-FEEC-4EB3-A1DE-4E3C3C2A5488</string>
+			<string>C0B9F750-4C81-4503-AC88-8A916C8138E6</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>readonly cache="${alfred_workflow_cache}/cache.json"
+mkdir -p "$(dirname "${cache}")"
+
+IFS=$'\n' read -d '' -rA dict_array &lt; &lt;(find '/Applications' "${HOME}/Applications" '/System/Applications' '/System/Cryptexes/App/System/Applications' '/System/Library/CoreServices/' '/System/Library/ScriptingAdditions' '/System/Library/ScriptingDefinitions' '/System/Library/PrivateFrameworks' -name '*.sdef' 2&gt; /dev/null | grep 'Contents/Resources')
+
+osascript -l JavaScript -e '
+  function run(argv) {
+    return JSON.stringify({
+      "items": argv.map(dict =&gt; {
+        const app_path = $(dict).stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.js
+
+        return {
+          "uid": dict,
+          "type": "file",
+          "title": $(app_path).lastPathComponent.stringByDeletingPathExtension.js,
+          "subtitle": dict,
+          "icon": { "path": app_path, "type": "fileicon" },
+          "arg": dict
+        }})
+      })
+    }
+' "${dict_array[@]}" &gt; "${cache}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0354600E-3522-4210-A260-3E335E8242FF</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1238,13 +1238,24 @@ osascript -l JavaScript -e '
 	<key>readme</key>
 	<string>Search various Docs.
 
-Can-I-use-Search from https://github.com/chrillek/caniuse-workflow/
+Can-I-use-Search by @chrillek, https://github.com/chrillek/caniuse-workflow/
+
+AppleScript Dictionary by the Alfred Team
 
 ---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0354600E-3522-4210-A260-3E335E8242FF</key>
+		<dict>
+			<key>note</key>
+			<string>Rebuild cache</string>
+			<key>xpos</key>
+			<real>1050</real>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
 		<key>03C8A38F-8577-483D-8E18-B31886F2113F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1283,13 +1294,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>245</real>
 		</dict>
-		<key>1FE345F3-85DD-44F2-A273-950FBEEEA71F</key>
-		<dict>
-			<key>xpos</key>
-			<real>790</real>
-			<key>ypos</key>
-			<real>35</real>
-		</dict>
 		<key>2ABAE956-53E7-4846-B25A-EC53C6145476</key>
 		<dict>
 			<key>colorindex</key>
@@ -1321,15 +1325,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>1180</real>
 		</dict>
-		<key>667546DE-C588-449B-BAD3-89DDFE26371A</key>
-		<dict>
-			<key>note</key>
-			<string>Rebuild cache</string>
-			<key>xpos</key>
-			<real>1000</real>
-			<key>ypos</key>
-			<real>45</real>
-		</dict>
 		<key>7099D02E-6857-4A1B-ABE6-8653C16F6A49</key>
 		<dict>
 			<key>colorindex</key>
@@ -1355,16 +1350,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>List AppleScript dictionaries</string>
 			<key>xpos</key>
-			<real>265</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>20</real>
 		</dict>
-		<key>9C5F7E53-FEEC-4EB3-A1DE-4E3C3C2A5488</key>
+		<key>9B4ED8D4-DA04-4180-8724-EF719E477AF5</key>
 		<dict>
+			<key>note</key>
+			<string>Check if cache is old</string>
 			<key>xpos</key>
-			<real>790</real>
+			<real>795</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>20</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
@@ -1374,6 +1371,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>420</real>
 			<key>ypos</key>
 			<real>575</real>
+		</dict>
+		<key>C0B9F750-4C81-4503-AC88-8A916C8138E6</key>
+		<dict>
+			<key>xpos</key>
+			<real>795</real>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
+		<key>C16F4190-0845-4708-BFE1-9EA431FA968C</key>
+		<dict>
+			<key>xpos</key>
+			<real>940</real>
+			<key>ypos</key>
+			<real>40</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
@@ -1395,21 +1406,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>320</real>
 		</dict>
-		<key>D9F7B43C-9766-4330-B6D1-433CCF2ABB41</key>
-		<dict>
-			<key>note</key>
-			<string>Check if cache is old</string>
-			<key>xpos</key>
-			<real>640</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>DB0FF08A-04FB-4663-9EF5-E89C6C4CD8F1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>hammerspoon docs</string>
+			<string>sketchybar docs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1429,9 +1431,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Open dictionary</string>
 			<key>xpos</key>
-			<real>460</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>20</real>
 		</dict>
 		<key>FE8C5299-418B-45DE-A554-50495EF4EE22</key>
 		<dict>
