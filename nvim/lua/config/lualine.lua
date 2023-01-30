@@ -87,8 +87,8 @@ local function currentFile()
 	local icon = bo.modifiable and "%% " or " "
 	local ft = bo.filetype
 	if bo.buftype == "terminal" then
-		local mode = fn.mode() == "n" and "[N]" or ""
-		return " Terminal " .. mode
+		local mode = fn.mode() == "n" and " [N]" or ""
+		return " Terminal" .. mode
 	elseif bo.buftype == "nofile" then
 		if curFile == "" then curFile = ft end
 		return " " .. curFile -- e.g. Codi
