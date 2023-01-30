@@ -133,29 +133,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>CB80323E-4F47-48B2-9747-9E4135EC73CB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5C9F2728-AD97-470C-9DFE-58ADE8D2D388</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E2F99E8D-87AA-4ABB-985E-5771B7FCD094</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>D08CA8F9-2C11-41A6-BDFA-428DB06F4222</key>
 		<array>
 			<dict>
@@ -174,19 +151,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>EF402CBD-8784-45BE-9715-E3F97EDABA3D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EBAE6D21-C0E3-4E4B-9B5D-2EBA1328914E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CB80323E-4F47-48B2-9747-9E4135EC73CB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -672,90 +636,6 @@ fi</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>sum-of-all-numbers.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>CB80323E-4F47-48B2-9747-9E4135EC73CB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>copied to the clipboard</string>
-				<key>title</key>
-				<string>∑ = {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>5C9F2728-AD97-470C-9DFE-58ADE8D2D388</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Sum of all numbers in Selection</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>EBAE6D21-C0E3-4E4B-9B5D-2EBA1328914E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>E2F99E8D-87AA-4ABB-985E-5771B7FCD094</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -855,15 +735,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>625</real>
 		</dict>
-		<key>5C9F2728-AD97-470C-9DFE-58ADE8D2D388</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>380</real>
-			<key>ypos</key>
-			<real>910</real>
-		</dict>
 		<key>6AD52E8C-2CD9-477B-9C6E-393123615B72</key>
 		<dict>
 			<key>colorindex</key>
@@ -931,15 +802,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>780</real>
 		</dict>
-		<key>CB80323E-4F47-48B2-9747-9E4135EC73CB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>910</real>
-		</dict>
 		<key>D08CA8F9-2C11-41A6-BDFA-428DB06F4222</key>
 		<dict>
 			<key>colorindex</key>
@@ -949,15 +811,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
-		<key>E2F99E8D-87AA-4ABB-985E-5771B7FCD094</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>380</real>
-			<key>ypos</key>
-			<real>1025</real>
-		</dict>
 		<key>E97CFCEF-F6E3-4176-9B8A-11B67D5EAB7D</key>
 		<dict>
 			<key>colorindex</key>
@@ -966,15 +819,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>250</real>
 			<key>ypos</key>
 			<real>260</real>
-		</dict>
-		<key>EBAE6D21-C0E3-4E4B-9B5D-2EBA1328914E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>910</real>
 		</dict>
 		<key>EC6BE1DF-A45D-4E4F-B77B-B69BBC17D1EE</key>
 		<dict>
