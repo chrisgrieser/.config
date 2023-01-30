@@ -268,10 +268,10 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 -- BUFFERS & WINDOWS & SPLITS
 
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " open buffers" })
--- INFO: <BS> to cycle buffer has to be set in cybu config
 
 local altalt = require("funcs.alt-alt")
 keymap("n", "<CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
+keymap("n", "<S-CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
 
 if isGui() then
 	keymap({ "n", "x", "i" }, "<D-w>", altalt.betterClose, { desc = "close buffer/window/tab" })
@@ -454,9 +454,9 @@ end, { desc = "  diagnostics" })
 -- TERMINAL AND CODI
 keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = "go to next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = "Paste in Terminal Mode" })
--- echo bla
-keymap("n", "6", ":ToggleTerm size=10<CR>", { desc = "ToggleTerm" })
-keymap("x", "6", ":ToggleTermSendVisualSelection size=10<CR>", { desc = "Selection to ToggleTerm" })
+
+keymap("n", "6", ":ToggleTerm size=9<CR>", { desc = "ToggleTerm" })
+keymap("x", "6", ":ToggleTermSendVisualSelection size=9<CR>", { desc = "Selection to ToggleTerm" })
 
 keymap("n", "5", function()
 	cmd.CodiNew()
