@@ -79,28 +79,29 @@ return {
 		end,
 	},
 	-- TODO checkout again when the bugs are gone
-	-- {
-	-- 	"jcdickinson/codeium.nvim",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"MunifTanjim/nui.nvim",
-	-- 	},
-	-- 	config = function() require("codeium").setup {} end,
-	-- },
+	
 	{
-		"Exafunction/codeium.vim",
-		event = "InsertEnter",
-		init = function()
-			vim.g.codeium_disable_bindings = 1 -- no default bindings
-			vim.g.codeium_filetypes = {
-				applescript = false,
-			}
-		end,
-		config = function()
-			-- stylua: ignore start
-			vim.keymap.set("i", "<C-e>", function() return vim.fn["codeium#Clear"]() end, { desc = "codium clear", expr = true })
-			vim.keymap.set("i", "<C-c>", function() return vim.fn["codeium#Accept"]() end, { desc = "codium accept", expr = true })
-			-- stylua: ignore end
-		end,
+		"jcdickinson/codeium.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+		},
+		config = function() require("codeium").setup {} end,
 	},
+	-- {
+	-- 	"Exafunction/codeium.vim",
+	-- 	event = "InsertEnter",
+	-- 	init = function()
+	-- 		vim.g.codeium_disable_bindings = 1 -- no default bindings
+	-- 		vim.g.codeium_filetypes = {
+	-- 			applescript = false,
+	-- 		}
+	-- 	end,
+	-- 	config = function()
+	-- 		-- stylua: ignore start
+	-- 		vim.keymap.set("i", "<C-e>", function() return vim.fn["codeium#Clear"]() end, { desc = "codium clear", expr = true })
+	-- 		vim.keymap.set("i", "<C-c>", function() return vim.fn["codeium#Accept"]() end, { desc = "codium accept", expr = true })
+	-- 		-- stylua: ignore end
+	-- 	end,
+	-- },
 }
