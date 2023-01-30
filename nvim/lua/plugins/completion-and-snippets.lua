@@ -6,6 +6,7 @@ local s = {
 	path = { name = "path" },
 	zsh = { name = "zsh" },
 	tabnine = { name = "cmp_tabnine", keyword_length = 3 },
+	codeium = { name = "codeium" },
 	snippets = { name = "luasnip" },
 	lsp = { name = "nvim_lsp" },
 	treesitter = { name = "treesitter" },
@@ -14,6 +15,7 @@ local s = {
 }
 
 local defaultSources = {
+	s.codeium,
 	s.snippets,
 	s.lsp,
 	s.tabnine,
@@ -58,6 +60,7 @@ local source_icons = {
 	zsh = "",
 	nvim_lsp = "璉",
 	cmp_tabnine = "ﮧ",
+	codeium = "",
 	luasnip = "ﲖ",
 	emoji = "",
 	nerdfont = "",
@@ -131,7 +134,8 @@ local function cmpconfig()
 		formatting = {
 			fields = { "kind", "abbr", "menu" }, -- order of the fields
 			format = function(entry, vim_item)
-				vim_item.kind = " " .. kind_icons[vim_item.kind] .. " "
+				local kindIcon = kind_icons[vim_item.kind] or ""
+				vim_item.kind = " " .. kindIcon .. " "
 				vim_item.menu = source_icons[entry.source.name]
 				return vim_item
 			end,
@@ -145,11 +149,12 @@ local function cmpconfig()
 	cmp.setup.filetype("lua", {
 		enabled = function() -- disable leading "-"
 			local lineContent = vim.fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
-			return not (lineContent:match(" %-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
+			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
 		end,
 		sources = cmp.config.sources {
 			s.snippets,
 			s.lsp,
+			s.codeium,
 			s.tabnine,
 			s.nerdfont, -- add nerdfont for config
 			s.emojis,
@@ -162,6 +167,7 @@ local function cmpconfig()
 		sources = cmp.config.sources {
 			s.snippets,
 			s.lsp,
+			s.codeium,
 			s.tabnine,
 			s.nerdfont, -- add nerdfont for config
 			s.emojis,
@@ -175,6 +181,7 @@ local function cmpconfig()
 		sources = cmp.config.sources {
 			s.snippets,
 			s.lsp,
+			s.codeium,
 			s.tabnine,
 			s.emojis,
 			-- buffer and treesitter too slow on big files
@@ -197,6 +204,7 @@ local function cmpconfig()
 			s.lsp,
 			s.snippets,
 			s.treesitter, -- treesitter works good on yaml
+			s.codeium,
 			s.tabnine,
 			s.emojis,
 			s.buffer,
@@ -210,6 +218,7 @@ local function cmpconfig()
 			s.zsh,
 			s.lsp,
 			s.path,
+			s.codeium,
 			s.tabnine,
 			s.treesitter,
 			s.buffer,
@@ -233,6 +242,7 @@ local function cmpconfig()
 			s.snippets,
 			s.buffer,
 			s.emojis,
+			s.codeium,
 		},
 	})
 
@@ -273,7 +283,7 @@ return {
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
 			"ray-x/cmp-treesitter",
-			{"petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim"},
+			{ "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
