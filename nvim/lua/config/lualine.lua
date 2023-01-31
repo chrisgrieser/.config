@@ -98,12 +98,8 @@ require("lualine").setup {
 	sections = {
 		lualine_a = {
 			{ "filetype", colored = false, icon_only = true },
-			{
-            "filename",
-				file_status = false,
-				shorting_target = 30,
-         },
-		}, 
+			{ "filename", file_status = false },
+		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
 			{ searchCounter },
@@ -112,12 +108,7 @@ require("lualine").setup {
 			{ lsp_progress },
 			{
 				"diagnostics",
-				symbols = {
-					error = " ",
-					warn = " ",
-					info = " ",
-					hint = "ﬤ ",
-				},
+				symbols = { error = " ", warn = " ", info = " ", hint = "ﬤ " },
 			},
 			{ mixedIndentation },
 		},

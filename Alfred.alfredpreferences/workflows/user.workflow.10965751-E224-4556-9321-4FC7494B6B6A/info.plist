@@ -145,9 +145,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Parsing Assumption: first author is the first part of a filename and ends with an underscore ("_"), optionally with an et al. Years are the first 4 digits of a filename.
-
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</key>
@@ -184,20 +182,28 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variables</key>
-	<dict>
-		<key>alfred_bar_length</key>
-		<string>65</string>
-		<key>bibtex_library_path</key>
-		<string>~/.pandoc/main-bibliography.bib</string>
-		<key>pdf_folder</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/PDFs/</string>
-	</dict>
-	<key>variablesdontexport</key>
 	<array>
-		<string>bibtex_library_path</string>
-		<string>pdf_folder</string>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>PDF Folder</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>pdf_folder</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string></string>
