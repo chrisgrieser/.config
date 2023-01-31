@@ -1,5 +1,7 @@
 git
 Requirement
+type
+allow
 beta
 BRAT
 PDF
