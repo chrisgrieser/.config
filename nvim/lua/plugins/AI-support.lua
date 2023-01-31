@@ -2,31 +2,6 @@
 --------------------------------------------------------------------------------
 return {
 	{
-		"tzachar/cmp-tabnine",
-		build = "./install.sh",
-		event = "InsertEnter",
-		config = function()
-			-- TABNINE
-			-- INFO also requires setup in cmp config
-			require("cmp_tabnine.config"):setup { -- yes, requires a ":", not "."
-				max_lines = 1000,
-				max_num_results = 20,
-				run_on_every_keystroke = true,
-				snippet_placeholder = "…",
-				show_prediction_strength = true,
-			}
-			local function prefetchTabnine() require("cmp_tabnine"):prefetch(vim.fn.expand("%:p")) end
-			prefetchTabnine() -- initialize for the current buffer
-
-			-- automatically prefetch completions for the buffer
-			augroup("prefetchTabNine", {})
-			autocmd("BufRead", {
-				group = "prefetchTabNine",
-				callback = prefetchTabnine,
-			})
-		end,
-	},
-	{
 		"jackMort/ChatGPT.nvim",
 		cmd = "ChatGPT",
 		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
