@@ -1,6 +1,5 @@
 local M = {}
 local fn = vim.fn
-local cmd = vim.cmd
 
 local logWarn = vim.log.levels.WARN
 local logError = vim.log.levels.ERROR
@@ -90,15 +89,7 @@ function M.addCommitPush(prefillMsg)
 				logLevel = logWarn
 			end
 			vim.notify(out, logLevel)
-			-- HACK for linters writing the current file, and autoread failing, preventing to
-			-- quit the file. Requires manual reloading via `:edit`.
-			if bo.modifiable then
-				cmd.mkview(1)
-				cmd.edit()
-				cmd.loadview(1)
-			end
-			-- specific to my setup
-			os.execute("sketchybar --trigger repo-files-update")
+			os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
 		end,
 	}
 
