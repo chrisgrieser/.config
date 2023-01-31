@@ -386,7 +386,7 @@
 				<key>text</key>
 				<string>{var:url}</string>
 				<key>title</key>
-				<string>Starting download...</string>
+				<string>⏳ Starting download...</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
