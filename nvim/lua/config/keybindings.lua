@@ -241,14 +241,6 @@ keymap("x", "|", "<Esc>`>a<CR><Esc>`<i<CR><Esc>", { desc = "split around selecti
 -- TreeSJ plugin
 keymap("n", "<leader>s", cmd.TSJToggle, { desc = "split/join" })
 
--- TS Node Action Plugin
--- keymap(
--- 	"n",
--- 	"<leader>t",
--- 	function() require("ts-node-action").node_action() end,
--- 	{ desc = "node action" }
--- )
-
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
 keymap("i", "<C-e>", "<Esc>A") -- EoL
@@ -257,6 +249,9 @@ keymap("i", "<C-a>", "<Esc>I") -- BoL
 keymap("c", "<C-a>", "<Home>")
 keymap("c", "<C-e>", "<End>")
 keymap("c", "<C-u>", "<C-e><C-u>") -- clear
+
+keymap("i", "ö", "{}") -- replacements do not autopair
+keymap("i", "ä", "}")
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE

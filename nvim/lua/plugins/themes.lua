@@ -1,6 +1,5 @@
 local lightTheme = "rose-pine"
 local darkTheme = "bluloco"
--- local darkTheme = "rose-pine"
 -- local darkTheme = "tokyonight-moon"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
@@ -9,7 +8,7 @@ local darkTheme = "bluloco"
 
 local themePackages = {
 	{ "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
-	"rose-pine/neovim",
+	{ "rose-pine/neovim", name = "rose-pine" },
 	-- "EdenEast/nightfox.nvim",
 	-- "glepnir/zephyr-nvim",
 	-- "folke/tokyonight.nvim",
@@ -38,10 +37,7 @@ function themeSettings()
 	-----------------------------------------------------------------------------
 
 	linkHighlight("myAnnotations", "Todo")
-	fn.matchadd(
-		"myAnnotations",
-		[[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|NOTE\|WARNING\|FIX\)\>]]
-	)
+	fn.matchadd("myAnnotations", [[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|NOTE\|WARNING\|FIX\)\>]])
 
 	function customHighlights()
 		local highlights = {
@@ -158,10 +154,9 @@ function themeSettings()
 	autocmd("ColorScheme", {
 		group = "themeChange",
 		callback = function()
-			-- HACK defer needed for some modifications to properly take effect, for
-			-- whatever reason…
-			vim.defer_fn(themeModifications, 100) ---@diagnostic disable-line: param-type-mismatch
-			vim.defer_fn(customHighlights, 100) ---@diagnostic disable-line: param-type-mismatch
+			-- HACK defer needed for some modifications to properly take effect
+			vim.defer_fn(themeModifications, 50) ---@diagnostic disable-line: param-type-mismatch
+			vim.defer_fn(customHighlights, 50) ---@diagnostic disable-line: param-type-mismatch
 		end,
 	})
 
@@ -174,12 +169,10 @@ function themeSettings()
 		cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 		local targetTheme = mode == "dark" and darkTheme or lightTheme
 		cmd.colorscheme(targetTheme)
-		-- vim.defer_fn(themeModifications, 100) ---@diagnostic disable-line: param-type-mismatch
 	end
 
 	-- set dark or light mode on neovim startup (requires macos)
-	local macOStheme = fn.system([[defaults read -g AppleInterfaceStyle]])
-	local targetMode = macOStheme:find("Dark") and "dark" or "light"
+	local targetMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark") and "dark" or "light"
 	setThemeMode(targetMode)
 end
 

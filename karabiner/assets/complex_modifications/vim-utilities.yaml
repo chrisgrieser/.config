@@ -261,37 +261,4 @@ rules:
         to_after_key_up:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
-      #─────────────────────────────────────────────────────────────────
-      # öä -> {}
-      - type: basic
-        from: {key_code: semicolon}
-        to:
-          - select_input_source:
-              input_source_id: ^com\.apple\.keylayout\.US$
-          - key_code: vk_none
-            hold_down_milliseconds: 20
-          - {key_code: open_bracket, modifiers: [shift]}
-        conditions:
-          - type: input_source_if
-            input_sources: [language: ^de$]
-          - type: frontmost_application_if
-            file_paths: ["[Nn]eovide"]
-        to_after_key_up:
-          - select_input_source:
-              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
-      - type: basic
-        from: {key_code: quote}
-        to:
-          - select_input_source:
-              input_source_id: ^com\.apple\.keylayout\.US$
-          - key_code: vk_none
-            hold_down_milliseconds: 20
-          - {key_code: open_bracket, modifiers: [shift]}
-        conditions:
-          - type: input_source_if
-            input_sources: [language: ^de$]
-          - type: frontmost_application_if
-            file_paths: ["[Nn]eovide"]
-        to_after_key_up:
-          - select_input_source:
-              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+#─────────────────────────────────────────────────────────────────
