@@ -43,16 +43,6 @@ local function config()
 			or msg:find("^nvim%-navic:.*Already attached to %w+")
 	end
 
-	augroup("macOSnotification", {})
-	autocmd("FocusGained", {
-		group = "macOSnotification",
-		callback = function() g.nvim_has_focus = true end,
-	})
-	autocmd("FocusLost", {
-		group = "macOSnotification",
-		callback = function() g.nvim_has_focus = false end,
-	})
-
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
 		if banned(msg) then return end
 		if type(msg) == "string" then
@@ -67,19 +57,6 @@ local function config()
 				nl = nl:gsub("^%s*", ""):gsub("%s*$", "")
 				if nl and nl ~= "" then table.insert(truncated, " " .. nl .. " ") end
 			end
-		end
-
-		-- use macOS notification if neovim is not focused
-		if g.nvim_has_focus == false then
-			local title = table.remove(truncated, 1)
-			local text = #truncated > 0 and table.concat(truncated, "\n") or ""
-			os.execute(
-				[[osascript -e 'display notification "]]
-					.. text
-					.. [[" with title "]]
-					.. title
-					.. [[" sound name "Blow"']]
-			)
 		end
 
 		return require("notify")(truncated, level, opts)

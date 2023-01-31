@@ -5,7 +5,6 @@ local s = {
 	buffer = { name = "buffer", keyword_length = 3 },
 	path = { name = "path" },
 	zsh = { name = "zsh" },
-	tabnine = { name = "cmp_tabnine", keyword_length = 3 },
 	codeium = { name = "codeium" },
 	snippets = { name = "luasnip" },
 	lsp = { name = "nvim_lsp" },
@@ -18,7 +17,6 @@ local defaultSources = {
 	s.snippets,
 	s.codeium,
 	s.lsp,
-	s.tabnine,
 	s.emojis,
 	s.treesitter,
 	s.buffer,
@@ -59,7 +57,6 @@ local source_icons = {
 	treesitter = "",
 	zsh = "",
 	nvim_lsp = "璉",
-	cmp_tabnine = "ﮧ",
 	codeium = "",
 	luasnip = "ﲖ",
 	emoji = "",
@@ -92,13 +89,12 @@ local function cmpconfig()
 		sorting = {
 			comparators = {
 				compare.offset,
-				-- compare.exact, -- disable exact matches getting higher priority https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
-				-- compare.scopes,
+				-- disable exact matches getting higher priority https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
+				-- compare.exact,
 				compare.score,
 				compare.recently_used,
 				compare.locality,
 				compare.kind,
-				compare.sort_text,
 				compare.length,
 				compare.order,
 			},
@@ -138,7 +134,9 @@ local function cmpconfig()
 				-- (height is controlled via pumheight option)
 				local max_length = 50
 				local ellipsis_char = "…"
-				if #vim_item.abbr > max_length then vim_item.abbr = vim_item.abbr:sub(1, max_length) .. ellipsis_char end
+				if #vim_item.abbr > max_length then
+					vim_item.abbr = vim_item.abbr:sub(1, max_length) .. ellipsis_char
+				end
 
 				-- icons
 				local kindIcon = kind_icons[vim_item.kind] or ""
@@ -162,7 +160,6 @@ local function cmpconfig()
 			s.snippets,
 			s.lsp,
 			s.codeium,
-			s.tabnine,
 			s.nerdfont, -- add nerdfont for config
 			s.emojis,
 			s.treesitter,
@@ -175,7 +172,6 @@ local function cmpconfig()
 			s.snippets,
 			s.lsp,
 			s.codeium,
-			s.tabnine,
 			s.nerdfont, -- add nerdfont for config
 			s.emojis,
 			s.treesitter,
@@ -189,7 +185,6 @@ local function cmpconfig()
 			s.snippets,
 			s.lsp,
 			s.codeium,
-			s.tabnine,
 			s.emojis,
 			-- buffer and treesitter too slow on big files
 		},
@@ -202,7 +197,6 @@ local function cmpconfig()
 			s.path, -- e.g. image paths
 			s.lsp,
 			s.emojis,
-			-- no buffer or tabnine, since only adding noise
 		},
 	})
 
@@ -212,7 +206,6 @@ local function cmpconfig()
 			s.snippets,
 			s.treesitter, -- treesitter works good on yaml
 			s.codeium,
-			s.tabnine,
 			s.emojis,
 			s.buffer,
 		},
@@ -226,7 +219,6 @@ local function cmpconfig()
 			s.lsp,
 			s.path,
 			s.codeium,
-			s.tabnine,
 			s.treesitter,
 			s.buffer,
 			s.emojis,
@@ -270,10 +262,6 @@ local function cmpconfig()
 		}),
 	})
 
-	-- Enable Completion in DressingInput
-	cmp.setup.filetype("DressingInput", {
-		sources = cmp.config.sources { { name = "omni" } },
-	})
 end
 --------------------------------------------------------------------------------
 
@@ -294,7 +282,6 @@ return {
 			"hrsh7th/cmp-nvim-lsp", -- lsp
 			"L3MON4D3/LuaSnip", -- snippet
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
-			"hrsh7th/cmp-omni", -- omni for autocompletion in input prompts
 		},
 		config = cmpconfig,
 	},
@@ -328,23 +315,17 @@ return {
 			}
 		end,
 	},
-	{ -- smarter autopairs
-		"hrsh7th/nvim-insx",
+	{
+		"windwp/nvim-autopairs",
+		dependencies = "hrsh7th/nvim-cmp",
 		event = "InsertEnter",
-		config = function() require("insx.preset.standard").setup() end,
+		config = function()
+			require("nvim-autopairs").setup()
+			-- add brackets to cmp completions, e.g. "function" -> "function()"
+			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+		end,
 	},
-	-- {
-	-- 	"windwp/nvim-autopairs",
-	-- 	dependencies = "hrsh7th/nvim-cmp",
-	-- 	event = "InsertEnter",
-	-- 	config = function()
-	-- 		require("nvim-autopairs").setup()
-	--
-	-- 		-- add brackets to cmp completions, e.g. "function" -> "function()"
-	-- 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-	-- 		require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-	-- 	end,
-	-- },
 
 	-----------------------------------------------------------------------------
 
