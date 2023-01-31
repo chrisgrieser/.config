@@ -9,7 +9,6 @@ local lsp_servers = {
 	"sumneko_lua",
 	"yamlls",
 	"jsonls",
-	"bashls", -- used for zsh; also requires shellcheck-cli
 	"cssls",
 	"emmet_ls", -- css & html completion
 	"pyright", -- python
@@ -123,14 +122,8 @@ require("neodev").setup {
 -- fallback for languages without an action LSP
 keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
 
--- actions defined globally so null-ls can use them without LSP, e.g., for bash
--- or gitsigns
-keymap(
-	{ "n", "x" },
-	"<leader>c",
-	function() vim.lsp.buf.code_action { apply = false } end, -- "apply = true" auto-executes code action if there is only one
-	{ desc = "璉Code Action" }
-)
+-- actions defined globally so null-ls can use them without LSP
+keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "璉Code Action" })
 
 augroup("LSP", {})
 autocmd("LspAttach", {
@@ -144,7 +137,7 @@ autocmd("LspAttach", {
 
 		if capabilities.renameProvider then
 			-- overrides treesitter-refactor's rename
-			keymap("n", "<leader>R", vim.lsp.buf.rename, { desc = "璉Var Rename", buffer = true })
+			keymap("n", "leaderR", vim.lsp.buf.rename, { desc = "璉Var Rename", buffer = true })
 		end
 
 		-- stylua: ignore start
@@ -286,7 +279,6 @@ lspSettings.jsonls = {
 	},
 }
 
-lspFileTypes.bashls = { "sh", "zsh", "bash" } -- force lsp to work with zsh
 lspFileTypes.emmet_ls = { "css", "scss", "html" }
 
 --------------------------------------------------------------------------------

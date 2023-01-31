@@ -51,8 +51,10 @@ null_ls.setup {
 		-- SHELL
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.formatting.shfmt,
-		-- no diagnostics for shellcheck needed, since handled by bash-lsp
-		-- but code actions are needed: https://github.com/bash-lsp/bash-language-server/issues/490
+		builtins.diagnostics.shellcheck.with {
+			extra_filetypes = { "zsh" },
+			extra_args = { "--shell=bash" },
+		},
 		builtins.code_actions.shellcheck.with {
 			extra_filetypes = { "zsh" },
 			extra_args = { "--shell=bash" },
