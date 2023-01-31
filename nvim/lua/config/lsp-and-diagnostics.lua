@@ -160,6 +160,10 @@ autocmd("LspAttach", {
 		keymap("n", "<leader>h", vim.lsp.buf.hover, {desc = "璉Hover", buffer = true})
 
 		-- Formatters
+
+		-- avoid conflict of tsserver with prettier
+		if client.name == "tsserver" then capabilities.documentFormattingProvider = false end
+
 		keymap({ "n", "x", "i" }, "<D-s>", function()
 			if bo.filetype == "applescript" then
 				cmd.mkview(2)
@@ -242,7 +246,7 @@ lspSettings.cssls = {
 
 local jsAndTsSettings = {
 	-- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
-	format = {},
+	format = {}, -- not used, since taken care of by prettier
 	inlayHints = {
 		includeInlayEnumMemberValueHints = true,
 		includeInlayFunctionLikeReturnTypeHints = true,
