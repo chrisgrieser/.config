@@ -1,6 +1,6 @@
 {
-	"replace (gm)": {
-		"prefix": "replace",
+	"replace /gm": {
+		"prefix": "replace /gm",
 		"body": "replace(/${1:regexp}/gm, \"$2\");"
 	},
 	"replace": {
