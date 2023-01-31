@@ -14,8 +14,8 @@ local lsp_servers = {
 	"emmet_ls", -- css & html completion
 	"pyright", -- python
 	"marksman", -- markdown
-	"tsserver", -- ts/js
-	"eslint", -- ts/js
+	-- "tsserver", -- ts/js
+	-- "eslint", -- ts/js
 }
 
 --------------------------------------------------------------------------------
@@ -246,7 +246,7 @@ local jsAndTsSettings = {
 		-- insertSpaceAfterCommaDelimiter = true,
 		-- insertSpaceAfterConstructor = false,
 		-- insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
-		-- insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
+		insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false, -- conflict with prettier
 		-- insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
 		-- insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
 		-- insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,

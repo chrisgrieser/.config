@@ -42,9 +42,6 @@ rules:
   array-bracket-spacing: warn
   space-before-blocks: warn
   semi-spacing: warn
-  object-curly-spacing:
-    - warn
-    - always
   no-whitespace-before-property: error
   no-empty: warn
   arrow-spacing: warn
