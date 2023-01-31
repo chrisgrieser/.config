@@ -61,7 +61,7 @@ keymap("i", "<M-S-CR>", '<Space>') -- prevent accidental triggering in insert mo
 keymap({"o", "x"}, "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
 
 -- L: link
-keymap({ "o", "x" }, "L", function() require("various-textobjs").url() end, { desc = "link textobj" })
+keymap("o", "L", function() require("various-textobjs").url() end, { desc = "link textobj" })
 
 -- n: [n]ear end of the line
 keymap({ "o", "x" }, "n", function() require("various-textobjs").nearEoL() end, { desc = "near EoL textobj" })
