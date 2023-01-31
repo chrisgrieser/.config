@@ -9,10 +9,6 @@ local maps = {
 	["<Up>"] = "move_selection_previous",
 	["<Down>"] = "move_selection_next",
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
-	["ö"] = function(prompt)
-		require("telescope").extensions.hop.hop(prompt)
-		require("telescope.actions").select_default(prompt)
-	end,
 	["<Tab>"] = function(prompt) -- multi-select
 		require("telescope.actions").toggle_selection(prompt)
 		require("telescope.actions").move_selection_next(prompt)
@@ -204,14 +200,12 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"debugloop/telescope-undo.nvim",
 			"benfowler/telescope-luasnip.nvim",
-			"nvim-telescope/telescope-hop.nvim",
 		},
 		config = function()
 			require("telescope").setup(options)
 			require("telescope").load_extension("undo")
 			require("telescope").load_extension("notify")
 			require("telescope").load_extension("luasnip")
-			require("telescope").load_extension("hop")
 		end,
 	},
 }
