@@ -115,7 +115,7 @@ opt.confirm = true -- ask instead of aborting
 augroup("autosave", {})
 autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	group = "autosave",
-	pattern = "?*", -- pattern required
+	pattern = "?*", -- pattern required for some events
 	callback = function()
 		if not bo.readonly and expand("%") ~= "" and bo.buftype == "" and bo.filetype ~= "gitcommit" then
 			cmd.update(expand("%:p"))
