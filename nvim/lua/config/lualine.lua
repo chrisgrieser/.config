@@ -80,30 +80,6 @@ local function searchCounter()
 	return " " .. current .. "/" .. total .. " " .. searchTerm
 end
 
-local function currentFile()
-	local maxLen = 15
-	local altFile = expand("#:t")
-	local curFile = expand("%:t")
-	local icon = bo.modifiable and "%% " or " "
-	local ft = bo.filetype
-	if bo.buftype == "terminal" then
-		local mode = fn.mode() == "n" and " [N]" or ""
-		return " Terminal" .. mode
-	elseif bo.buftype == "nofile" then
-		if curFile == "" then curFile = ft end
-		return " " .. curFile -- e.g. Codi
-	elseif curFile == "" and ft ~= "" then
-		return " " .. ft
-	elseif curFile == "" and ft == "" then
-		return "%% [New]"
-	elseif curFile == altFile then
-		local curParent = expand("%:p:h:t")
-		if #curParent > maxLen then curParent = curParent:sub(1, maxLen) .. "…" end
-		return "%% " .. curParent .. "/" .. curFile
-	end
-	return icon .. curFile
-end
-
 -- clock, but only when full screen (and therefore covering the sketchybar)
 local function clock()
 	if fn.winwidth(0) < 110 then return "" end
@@ -120,7 +96,14 @@ local topSeparators = isGui() and { left = "", right = "" } or { left = ""
 
 require("lualine").setup {
 	sections = {
-		lualine_a = { { currentFile } },
+		lualine_a = {
+			{ "filetype", colored = false, icon_only = true },
+			{
+            "filename",
+				file_status = false,
+				shorting_target = 30,
+         },
+		}, 
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
 			{ searchCounter },
