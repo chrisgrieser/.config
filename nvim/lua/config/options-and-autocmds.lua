@@ -111,17 +111,21 @@ opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
 
 -- Files & Saving
 opt.confirm = true -- ask instead of aborting
-opt.autowriteall = false -- seems to cause annoyances sometimes?
 
 augroup("autosave", {})
-autocmd({ "BufWinLeave", "WinLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
+autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	group = "autosave",
 	pattern = "?*", -- pattern required
 	callback = function()
-		if not bo.modifiable or bo.buftype == "nofile" or bo.filetype == "gitcommit" then return end
-		cmd.update(expand("%:p"))
+		if not bo.readonly and expand("%") ~= "" and bo.buftype == "" and bo.filetype ~= "gitcommit" then
+			cmd.update(expand("%:p"))
+		end
 	end,
 })
+autocmd("FocusGained", { -- Update file when there are changes
+	callback = vim.cmd.checktime,
+	group = "autosave",
+ })
 
 -- emulate autochdir, which is deprecated
 augroup("autochdir", {})
@@ -129,21 +133,11 @@ autocmd("BufWinEnter", {
 	group = "autochdir",
 	pattern = "?*", -- needed for BufWinEnter to work
 	callback = function()
-		local ignoredFT = {
-			"gitcommit",
-			"NeogitCommitMessage",
-			"DiffviewFileHistory",
-			"",
-		}
 		-- needs to exclude commit filetypes: https://github.com/petertriho/cmp-git/issues/47#issuecomment-1374788422
-		if
-			not bo.modifiable
-			or vim.tbl_contains(ignoredFT, bo.filetype)
-			or not (expand("%:p"):find("^/"))
-		then
-			return
+		local ignoredFT = { "gitcommit", "NeogitCommitMessage", "DiffviewFileHistory", "" }
+		if not vim.tbl_contains(ignoredFT, bo.filetype) and (expand("%:p"):find("^/")) then
+			cmd.lcd(expand("%:p:h"))
 		end
-		cmd.cd(expand("%:p:h"))
 	end,
 })
 
