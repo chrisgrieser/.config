@@ -15,7 +15,7 @@ local lsp_servers = {
 	"pyright", -- python
 	"marksman", -- markdown
 	"tsserver", -- ts/js
-	-- "eslint", -- ts/js
+	"eslint", -- ts/js
 }
 
 --------------------------------------------------------------------------------
