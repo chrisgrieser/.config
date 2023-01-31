@@ -48,7 +48,7 @@
 	},
 	"exists (file)": {
 		"prefix": "exists (file)",
-		"body": "'const fileExists = (filePath) => Application(\"Finder\").exists(Path(filePath));"
+		"body": "const fileExists = (filePath) => Application(\"Finder\").exists(Path(filePath));"
 	},
 	"window path (Finder)": {
 		"prefix": "window path (Finder)",
