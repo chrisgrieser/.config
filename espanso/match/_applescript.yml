@@ -2,9 +2,6 @@
 # ------------------------------------------
 
 matches:
-  - trigger: '!continue'
-    replace: "¬"
-    label: 🍏 Continuation Character
   - replace: |
       if frontmost of application "$|$" then
 
@@ -39,7 +36,7 @@ matches:
       	make new draft with properties {content: "$|$", tags: {"blue", "green"}}
       end tell
     label: 🍏 Create new Draft
-  - replace: display notification "subtitle" with title "title$|$" subtitle "subtitle2" sound name "Frog"
+  - replace: display notification "subtitle" with title "title$|$"
     label: 🍏 Display Notification
   - replace: |
       tell application "Brave Browser"
