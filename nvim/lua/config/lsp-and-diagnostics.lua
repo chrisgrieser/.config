@@ -14,7 +14,7 @@ local lsp_servers = {
 	"emmet_ls", -- css & html completion
 	"pyright", -- python
 	"marksman", -- markdown
-	-- "tsserver", -- ts/js
+	"tsserver", -- ts/js
 	-- "eslint", -- ts/js
 }
 
@@ -240,23 +240,9 @@ lspSettings.cssls = {
 	},
 }
 
--- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
-	format = {
-		-- insertSpaceAfterCommaDelimiter = true,
-		-- insertSpaceAfterConstructor = false,
-		-- insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
-		insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false, -- conflict with prettier
-		-- insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
-		-- insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
-		-- insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
-		-- insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
-		-- insertSpaceAfterSemicolonInForStatements = true,
-		-- insertSpaceBeforeAndAfterBinaryOperators = true,
-		-- insertSpaceBeforeFunctionParenthesis = false,
-		-- placeOpenBraceOnNewLineForFunctions = false,
-		-- trimTrailingWhitespace = true,
-	},
+	-- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
+	format = {},
 	inlayHints = {
 		includeInlayEnumMemberValueHints = true,
 		includeInlayFunctionLikeReturnTypeHints = true,

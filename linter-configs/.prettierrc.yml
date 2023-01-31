@@ -2,5 +2,6 @@
 printWidth: 120
 useTabs: true
 tabWidth: 3
-bracketSpacing: false
+bracketSpacing: true
 arrowParens: avoid
+trailingComma: all
