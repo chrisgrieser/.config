@@ -369,12 +369,12 @@ keymap("n", "go", function()
 	local isGitRepo = os.execute("test -e $(git rev-parse --show-toplevel)/.git") == 0 -- using test -e instead of -f to check for repo and submodule
 	local cwd = expand("%:p:h")
 	local scope = "find_files"
-	if cwd:find("/nvim/") and not (cwd:find("/my%-plugins/")) then
+	if cwd:find("/my%-plugins/") or (isGitRepo and not cwd:find(vim.env.DOTFILE_FOLDER)) then
+		scope = "git_files"
+	elseif cwd:find("/nvim/") and not (cwd:find("/my%-plugins/")) then
 		scope = "find_files cwd=" .. fn.stdpath("config")
 	elseif cwd:find("/hammerspoon/") then
 		scope = "find_files cwd=" .. vim.env.DOTFILE_FOLDER .. "/hammerspoon/"
-	elseif isGitRepo and not (cwd:find(vim.env.DOTFILE_FOLDER)) then
-		scope = "git_files"
 	end
 	cmd("Telescope " .. scope)
 end, { desc = " Open File in repo/folder" })
@@ -557,5 +557,25 @@ autocmd("FileType", {
 		end
 	end,
 })
+
+--------------------------------------------------------------------------------
+
+-- Simple version of the delaytrain plugin
+for _, key in ipairs { "x", "h", "l" } do
+	local timeout = 5000
+	local maxUsage = 8
+
+	local count = 0
+	keymap("n", key, function()
+		if key == "x" then key = [["_x]] end
+		if fn.reg_executing() ~= "" then return key end
+
+		if count <= maxUsage then
+			count = count + 1
+			vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
+			return key
+		end
+	end, { expr = true, desc = key .. " (delaytrain)" })
+end
 
 --------------------------------------------------------------------------------

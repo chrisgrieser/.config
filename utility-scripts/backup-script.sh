@@ -4,7 +4,7 @@ VOLUME_NAME="$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)"
 if [[ $(echo "$VOLUME_NAME" | wc -l) -gt 1 ]] ; then 
 	print "\033[1;33mMore than one volume connected.\033[0m"
 	exit 1
-elif [[ $(echo "$VOLUME_NAME" | wc -l) -gt 1 ]] ; then 
+elif [[ $(echo "$VOLUME_NAME" | wc -l) -lt 1 ]] ; then 
 	print "\033[1;33mNo volume connected.\033[0m"
 	exit 1
 fi
