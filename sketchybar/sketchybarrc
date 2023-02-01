@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #───────────────────────────────────────────────────────────────────────────────
 # INFO: After app update, needs to be re-granted screen recording permissions
 #───────────────────────────────────────────────────────────────────────────────
@@ -78,7 +78,7 @@ sketchybar \
 	--set "$gpu_bar_item" width=55 \
 	--add alias "$network_bar_item" $second_set \
 	--set "$network_bar_item" width=65 \
-	--add item sync-indicator $third_set \
+	--add item sync-indicator "$third_set" \
 	--set sync-indicator update_freq=300 \
 	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \

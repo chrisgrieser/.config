@@ -44,6 +44,15 @@
 		"prefix": "directory of script",
 		"body": "cd \"$(dirname \"\\$0\")"
 	},
+	"multiline string": {
+		"prefix": "multiline string",
+		"body": [
+			"${1:var}=$(cat <<EOF",
+			"$0",
+			"EOF",
+			")"
+		]
+	},
 	"notify": {
 		"prefix": "notify",
 		"body": "osascript -e \"display notification \\\"\\\" with title \\\"$${1:var}\\\"\""
