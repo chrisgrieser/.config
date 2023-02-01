@@ -57,7 +57,15 @@ scanFolderWatcher = pw(scanFolder, function()
 end):start()
 
 local systemDownloadFolder = home .. "/Downloads/"
-systemDlFolderWatcher = pw(systemDownloadFolder, function()
+systemDlFolderWatcher = pw(systemDownloadFolder, function(files)
+	-- Stats Update file can directly be trashed
+	for _, filePath in pairs(files) do
+		if filePath:find("Stats%.dmg$") then
+			os.rename(filePath, os.getenv("HOME").."/.Trash/Stats.dmg")
+			return	
+		end
+	end
+	-- otherwise move to filehub
 	hs.execute("mv '" .. systemDownloadFolder .. "'/* '" .. fileHub .. "'")
 	notify("Download moved to File Hub.")
 end):start()
