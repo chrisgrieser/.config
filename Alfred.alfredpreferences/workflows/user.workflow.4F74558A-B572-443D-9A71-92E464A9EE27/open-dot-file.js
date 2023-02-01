@@ -9,16 +9,19 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeperated, str].join(" ");
 }
 const home = app.pathTo("home folder");
-const getEnv = (path) => $.getenv(path).replace(/^~/, home);
+const getEnv = path => $.getenv(path).replace(/^~/, home);
 
 //──────────────────────────────────────────────────────────────────────────────
 
 const jsonArray = [];
 const dotfileFolder = getEnv("dotfile_folder");
 /* eslint-disable no-multi-str, quotes */
-const workArray = app.doShellScript(
-	'PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;\
-	cd "' + dotfileFolder + '" ; \
+const workArray = app
+	.doShellScript(
+		'PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;\
+	cd "' +
+			dotfileFolder +
+			'" ; \
 	fd --hidden --no-ignore \
 	-E "Alfred.alfredpreferences" \
 	-E "alacritty/colors/*" \
@@ -41,11 +44,13 @@ const workArray = app.doShellScript(
 	-E "Fonts/*" \
 	-E ".DS_Store" \
 	-E ".git/" \
-	-E ".git"', 
-).split("\r");
+	-E ".git"',
+	)
+	.split("\r");
 /* eslint-enable no-multi-str, quotes */
 
-workArray.forEach(file => { /* eslint-disable-line complexity */
+/* eslint-disable-next-line complexity */
+workArray.forEach(file => {
 	const filePath = dotfileFolder + file;
 	const parts = file.split("/");
 	const isFolder = file.endsWith("/");
@@ -57,48 +62,50 @@ workArray.forEach(file => { /* eslint-disable-line complexity */
 
 	let iconObj;
 	let ext = isFolder ? "folder" : fileName.split(".").pop();
-	if (ext.includes("rc")) ext = "rc"; 
+	if (ext.includes("rc")) ext = "rc";
 	else if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
 
 	switch (ext) {
 		case "json":
-			iconObj = { "path": "icons/json.png" };
+			iconObj = { path: "icons/json.png" };
 			break;
 		case "lua":
-			iconObj = { "path": "icons/lua.png" };
+			iconObj = { path: "icons/lua.png" };
 			break;
 		case "yaml":
 		case "yml":
-			iconObj = { "path": "icons/yaml.png" };
+			iconObj = { path: "icons/yaml.png" };
 			break;
 		case "md":
-			iconObj = { "path": "icons/markdown-file.png" };
+			iconObj = { path: "icons/markdown-file.png" };
 			break;
 		case "js":
-			iconObj = { "path": "icons/js.png" };
+			iconObj = { path: "icons/js.png" };
 			break;
 		case "zsh":
 		case "sh":
-			iconObj = { "path": "icons/shell.png" };
+			iconObj = { path: "icons/shell.png" };
 			break;
 		case "png":
-			iconObj = { "path": filePath }; // if png, use image itself
+			iconObj = { path: filePath }; // if png, use image itself
 			break;
 		case "rc":
-			iconObj = { "path": "icons/rc.png" };
+			iconObj = { path: "icons/rc.png" };
 			break;
 		default:
-			iconObj = { "type": "fileicon", "path": filePath }; // by default, use file icon
+			iconObj = { type: "fileicon", path: filePath }; // by default, use file icon
 	}
+	let matcher = alfredMatcher(`${fileName} ${parentPart}`);
+	if (isFolder) matcher += " folder";
 
 	jsonArray.push({
-		"title": fileName,
-		"subtitle": "▸ " + parentPart,
-		"match": alfredMatcher(`${fileName} ${parentPart}`),
-		"icon": iconObj,
-		"type": "file:skipcheck",
-		"uid": filePath,
-		"arg": filePath,
+		title: fileName,
+		subtitle: "▸ " + parentPart,
+		match: matcher,
+		icon: iconObj,
+		type: "file:skipcheck",
+		uid: filePath,
+		arg: filePath,
 	});
 });
 
@@ -107,23 +114,23 @@ workArray.forEach(file => { /* eslint-disable-line complexity */
 // add dotfile folder itself + password-store (pass-cli)
 const self = dotfileFolder.replace(/.*\/(.+)\//, "$1");
 jsonArray.push({
-	"title": self,
-	"subtitle": "▸ root",
-	"match": alfredMatcher(self),
-	"icon": { "type": "fileicon", "path": dotfileFolder },
-	"type": "file:skipcheck",
-	"uid": self,
-	"arg": dotfileFolder,
+	title: self,
+	subtitle: "▸ root",
+	match: alfredMatcher(self),
+	icon: { type: "fileicon", path: dotfileFolder },
+	type: "file:skipcheck",
+	uid: self,
+	arg: dotfileFolder,
 });
 
 const pwPath = home + "/.password-store";
 jsonArray.push({
-	"title": ".password-store",
-	"match": alfredMatcher(pwPath),
-	"icon": { "type": "fileicon", "path": pwPath },
-	"type": "file:skipcheck",
-	"uid": pwPath,
-	"arg": pwPath,
+	title: ".password-store",
+	match: alfredMatcher(pwPath),
+	icon: { type: "fileicon", path: pwPath },
+	type: "file:skipcheck",
+	uid: pwPath,
+	arg: pwPath,
 });
 
 JSON.stringify({ items: jsonArray });
