@@ -559,23 +559,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-
--- Simple version of delaytrain
-for _, key in ipairs { "x", "h", "l" } do
-	local timeout = 5000
-	local maxUsage = 8
-
-	local count = 0
-	keymap("n", key, function()
-		if key == "x" then key = [["_x]] end
-		if fn.reg_executing() ~= "" then return key end
-
-		if count <= maxUsage then
-			count = count + 1
-			vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
-			return key
-		end
-	end, { expr = true, desc = key .. " (delaytrain)" })
-end
-
---------------------------------------------------------------------------------

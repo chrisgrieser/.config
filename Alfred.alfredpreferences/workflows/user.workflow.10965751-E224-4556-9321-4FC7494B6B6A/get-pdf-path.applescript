@@ -20,7 +20,7 @@ end if
 if (frontApp is "Highlights") then
 
 	# resolved PDF Folder
-	set pdfFolder to (system attribute "pdf_folder_highlights_app")
+	set pdfFolder to (system attribute "pdf_folder")
 	set AppleScript's text item delimiters to "~/"
 	set theTextItems to every text item of pdfFolder
 	set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))
