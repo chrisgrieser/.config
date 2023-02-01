@@ -279,14 +279,16 @@ lspSettings.jsonls = {
 	},
 }
 
+--------------------------------------------------------------------------------
+
 lspFileTypes.bashls = { "sh", "zsh", "bash" } -- force lsp to work with zsh
 lspFileTypes.emmet_ls = { "css", "scss", "html" }
-
---------------------------------------------------------------------------------
 
 -- Enable snippet capability for completion (nvim_cmp)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+--------------------------------------------------------------------------------
 
 -- configure all lsp servers
 for _, lsp in pairs(lsp_servers) do

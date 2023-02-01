@@ -8,7 +8,7 @@ function logBrightness(trigger)
 	local mode = isDarkMode() and "dark " or "light"
 	local time = os.date():sub(12, 16)
 	local brightness = math.floor(hs.brightness.ambient())
-	local out = time .. " " .. mode .. " " .. trigger .. tostring(brightness) .. "\n"
+	local out = time .. " " .. mode .. " " .. trigger .." ".. tostring(brightness) .. "\n"
 	appendToFile("ambient-brightness.log", out)
 end
 hs.timer.doEvery(3600, function() logBrightness("hourly") end):start()

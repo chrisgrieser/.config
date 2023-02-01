@@ -78,13 +78,13 @@ function themeSettings()
 	local function themeModifications()
 		local mode = opt.background:get()
 		local theme = g.colors_name
+		local modes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 
 		-- tokyonight
 		if theme == "tokyonight" then
 			-- HACK bugfix for https://github.com/neovim/neovim/issues/20456
 			linkHighlight("luaParenError.highlight", "NormalFloat")
 			linkHighlight("luaParenError", "NormalFloat")
-			local modes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 			for _, v in pairs(modes) do
 				setHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
 				setHighlight("lualine_y_diff_added_" .. v, "guifg=#8cbf8e")
@@ -99,10 +99,9 @@ function themeSettings()
 
 		-- blueloco
 		elseif theme == "bluloco" then
-			setHighlight("lualine_a_normal", "gui=bold")
-			setHighlight("lualine_a_visual", "gui=bold")
-			setHighlight("lualine_a_insert", "gui=bold")
-			setHighlight("lualine_a_replace", "gui=bold")
+			for _, v in pairs(modes) do
+				setHighlight("lualine_a_" .. v, "gui=bold")
+			end
 			setHighlight("ScrollView", "guibg=#303d50")
 
 		-- rose-pine
@@ -155,8 +154,8 @@ function themeSettings()
 		group = "themeChange",
 		callback = function()
 			-- HACK defer needed for some modifications to properly take effect
-			vim.defer_fn(themeModifications, 50) ---@diagnostic disable-line: param-type-mismatch
-			vim.defer_fn(customHighlights, 50) ---@diagnostic disable-line: param-type-mismatch
+			vim.defer_fn(themeModifications, 100) ---@diagnostic disable-line: param-type-mismatch
+			vim.defer_fn(customHighlights, 100) ---@diagnostic disable-line: param-type-mismatch
 		end,
 	})
 
@@ -172,7 +171,8 @@ function themeSettings()
 	end
 
 	-- set dark or light mode on neovim startup (requires macos)
-	local targetMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark") and "dark" or "light"
+	local targetMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark") and "dark"
+		or "light"
 	setThemeMode(targetMode)
 end
 
