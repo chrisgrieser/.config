@@ -7,10 +7,13 @@
 12:48	dark	74
 14:08	dark	141
 14:08	light	141
-14:14	dark	5108:00 light toggle0
-13:09 light wakeup69
-13:59 dark  toggle43
-12:25 light toggle210
-13:24 dark  toggle81
-13:53 light toggle130
-17:42 light wakeup9
+14:14	dark	51
+08:00 light toggle 0
+13:09 light wakeup 69
+13:59 dark  toggle 43
+12:25 light toggle 210
+13:24 dark  toggle 81
+13:53 light toggle 130
+17:42 light wakeup 9
+17:42 light wakeup 12
+17:42 dark  toggle 9
