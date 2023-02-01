@@ -15,6 +15,7 @@ local lsp_servers = {
 	"marksman", -- markdown
 	"tsserver", -- ts/js
 	"eslint", -- ts/js
+	"bashls", -- also used for zsh
 }
 
 --------------------------------------------------------------------------------
@@ -26,7 +27,6 @@ local signIcons = {
 	Info = "",
 	Hint = "",
 }
-
 for type, icon in pairs(signIcons) do
 	local hl = "DiagnosticSign" .. type
 	fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -279,6 +279,7 @@ lspSettings.jsonls = {
 	},
 }
 
+lspFileTypes.bashls = { "sh", "zsh", "bash" } -- force lsp to work with zsh
 lspFileTypes.emmet_ls = { "css", "scss", "html" }
 
 --------------------------------------------------------------------------------
