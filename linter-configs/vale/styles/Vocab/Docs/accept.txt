@@ -2,6 +2,7 @@ git
 Requirement
 type
 allow
+unzip
 beta
 BRAT
 PDF
