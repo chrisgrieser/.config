@@ -119,27 +119,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>d</string>
-				<key>subtext</key>
-				<string>Woxion &amp; Wortschatz Leipzig</string>
-				<key>text</key>
-				<string>Synonyme: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A744F634-72A4-4373-86F2-EBC783690DB8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -155,6 +134,27 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>43880D3B-C354-4AC9-BFB5-C7A430DAC0DF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>d</string>
+				<key>subtext</key>
+				<string>Woxion &amp; Wortschatz Leipzig</string>
+				<key>text</key>
+				<string>Synonyme: '{query}'</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A744F634-72A4-4373-86F2-EBC783690DB8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>

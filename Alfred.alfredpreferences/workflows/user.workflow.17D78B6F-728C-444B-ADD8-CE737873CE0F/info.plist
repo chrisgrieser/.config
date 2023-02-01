@@ -166,7 +166,7 @@ end alfred_script</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>relatedApps</key>
 				<array>
 					<string>md.obsidian</string>

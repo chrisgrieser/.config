@@ -58,11 +58,15 @@ echo "completed: $(date '+%H:%M')" >>"$LOG_LOCATION"
 # Log (at Backup Destination)
 echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>last_backup.log
 
-# Reminder for Next Backup in 14 days
+# Reminder for Next Backup in 14 days, if there os no next backup reminder
+# already (avoids duplicate reminders if backup run twice)
 osascript -e'
 	set nextDate to (current date) + 14 * (60 * 60 * 24)
-	tell application "Reminders" 
-		tell (list "General") to make new reminder at end with properties {name: "Backup", allday due date: nextDate}
+	tell application "Reminders"
+		set backupReminders to reminders of list "General" where name is "Backup" and completed is false
+		if (count of backupReminders) is 0 then
+			tell (list "General") to make new reminder with properties {name:"Backup", allday due date:nextDate}
+		end if
 		quit
 	end tell' &>/dev/null
 
