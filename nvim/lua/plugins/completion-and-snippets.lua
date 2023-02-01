@@ -102,12 +102,13 @@ local function cmpconfig()
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
 			["<S-Up>"] = cmp.mapping.scroll_docs(-4),
+			["<D-Esc>"] = cmp.mapping.complete(), -- manually trigger completion
 			["<S-Down>"] = cmp.mapping.scroll_docs(4),
 			["<C-e>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.abort()
 				else
-					fallback() -- e.g. codium clear
+					fallback() -- 
 				end
 			end, { "i", "s" }),
 

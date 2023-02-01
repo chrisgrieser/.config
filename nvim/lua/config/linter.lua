@@ -7,7 +7,7 @@ local builtins = null_ls.builtins
 -- INFO linters also need to be added as source below
 local lintersAndFormatters = {
 	"yamllint",
-	"yamlfmt",
+	-- "yamlfmt",
 	"shellcheck", -- needed for bash-lsp
 	"shfmt", -- shell
 	"markdownlint",
@@ -63,7 +63,7 @@ null_ls.setup {
 
 		-- JS/TS
 		builtins.formatting.prettier.with {
-			filetypes = { "javascript", "typescript" }, -- do not format markdown, css, and so on
+			filetypes = { "javascript", "typescript", "yaml" }, -- do not format markdown, css, and so on
 			extra_args = { "--config", linterConfig .. "/.prettierrc.yml" },
 		},
 
@@ -90,7 +90,7 @@ null_ls.setup {
 		},
 
 		-- YAML
-		builtins.formatting.yamlfmt,
+		-- builtins.formatting.yamlfmt,
 		builtins.diagnostics.yamllint.with {
 			extra_args = { "--config-file", linterConfig .. "/.yamllint.yaml" },
 		},
