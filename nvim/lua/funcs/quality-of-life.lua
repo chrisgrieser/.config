@@ -109,7 +109,7 @@ function M.undoDuration()
 	local now = os.time() -- saved in epoch secs
 	local minsPassed = math.floor((now - b.timeOpened) / 60)
 	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
-	local selection = { resetLabel, "15m", "1h", "4h", "24h", " present" }
+	local selection = { " present", resetLabel, "15m", "1h" }
 
 	vim.ui.select(selection, { prompt = "Undo…" }, function(choice)
 		if not choice then

@@ -6,19 +6,6 @@
 	<string></string>
 	<key>connections</key>
 	<dict>
-		<key>244B3588-53FE-431C-AE89-3AD891A5AE06</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAD493F4-333E-4D5A-8720-8709EE20C984</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4267517F-135F-4BC9-9F30-955369812887</key>
 		<array>
 			<dict>
@@ -132,48 +119,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>dict://{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>CAD493F4-333E-4D5A-8720-8709EE20C984</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>e</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Terminology: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>244B3588-53FE-431C-AE89-3AD891A5AE06</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -218,15 +163,6 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>244B3588-53FE-431C-AE89-3AD891A5AE06</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>280</real>
-		</dict>
 		<key>4267517F-135F-4BC9-9F30-955369812887</key>
 		<dict>
 			<key>colorindex</key>
@@ -243,7 +179,7 @@
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>290</real>
 		</dict>
 		<key>54108A38-6929-4455-A62B-5EFADC3B4CF8</key>
 		<dict>
@@ -270,16 +206,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>455</real>
-		</dict>
-		<key>CAD493F4-333E-4D5A-8720-8709EE20C984</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>265</real>
-			<key>ypos</key>
-			<real>280</real>
+			<real>290</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

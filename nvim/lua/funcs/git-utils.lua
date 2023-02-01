@@ -87,6 +87,15 @@ function M.addCommitPush(prefillMsg)
 				logLevel = logWarn
 			end
 			vim.notify(out, logLevel)
+
+			-- HACK for stylelint on build script writing the current file, 
+			-- and autoread failing, preventing to quit the file. Seems to requires manual
+			-- reloading via `:edit`.
+			if expand("%") == "source.css" then
+				cmd.mkview(1)
+				cmd.edit()
+				cmd.loadview(1)
+			end
 			os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
 		end,
 	}
