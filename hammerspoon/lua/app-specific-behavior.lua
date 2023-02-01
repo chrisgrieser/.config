@@ -193,7 +193,7 @@ neovideWatcher = aw.new(function(appName, eventType, appObj)
 		clipboardFix()
 		-- maximize app, INFO cannot use aw.launched, since that signal isn't sent
 		-- by neovide
-		runWithDelays({ 0.2, 0.4, 0.6 }, function()
+		runWithDelays({ 0.2, 0.4, 0.6, 0.8, 1 }, function()
 			if not neovideWin then return end
 			if checkSize(neovideWin, leftHalf) or checkSize(neovideWin, rightHalf) then return end
 			local size = isProjector() and maximized or pseudoMaximized
