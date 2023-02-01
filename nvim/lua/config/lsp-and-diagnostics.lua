@@ -137,7 +137,7 @@ autocmd("LspAttach", {
 
 		if capabilities.renameProvider then
 			-- overrides treesitter-refactor's rename
-			keymap("n", "leaderR", vim.lsp.buf.rename, { desc = "璉Var Rename", buffer = true })
+			keymap("n", "<leader>R", vim.lsp.buf.rename, { desc = "璉Var Rename", buffer = true })
 		end
 
 		-- stylua: ignore start
@@ -157,7 +157,7 @@ autocmd("LspAttach", {
 		-- avoid conflict of tsserver with prettier
 		if client.name == "tsserver" then capabilities.documentFormattingProvider = false end
 
-		keymap({ "n", "x", "i" }, "<D-s>", function()
+		keymap({ "n", "i" }, "<D-s>", function()
 			if bo.filetype == "applescript" then
 				cmd.mkview(2)
 				normal("gg=G") -- poor man's formatting

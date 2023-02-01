@@ -8,7 +8,7 @@
 		"body": ":gsub(\"0$\", \"\")"
 	},
 	"ignore start/end (stylua)": {
-		"prefix": "ignore (stylua)",
+		"prefix": "ignore start/end (stylua)",
 		"body": [
 			"-- stylua: ignore start",
 			"-- stylua: ignore end"
