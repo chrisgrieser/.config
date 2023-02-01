@@ -46,17 +46,6 @@
 			"JSON.stringify({ items: jsonArray });"
 		]
 	},
-	"Get Alfred Env (safe)": {
-		"prefix": "Get Alfred Env (safe)",
-		"body": [
-			"function env(envVar) {",
-			"\tlet out;",
-			"\ttry { out = $.getenv(envVar)}",
-			"\tcatch (e) { out = \"\" }",
-			"\treturn out;",
-			"}"
-		]
-	},
 	"read Alfred data": {
 		"prefix": "read Alfred data",
 		"body": [
