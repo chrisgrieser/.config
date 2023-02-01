@@ -18,7 +18,7 @@ const alfredMatcher = (str) => str.replace (/[-()_:.]/g, " ") + " " + str + " ";
 const jsonArray = [];
 let i = 0;
 const sfPath = $.getenv("shimmering_focus_repo_path").replace(/^~/, app.pathTo("home folder"));
-const navigationMarkers = readFile(sfPath)
+const navigationMarkers = readFile(sfPath + "/source.css")
 	.split("\n")
 	.map(nm => { i++; return [nm, i] } )
 	.filter(nm => nm[0].startsWith("/* <") || nm[0].startsWith("# <<") );
