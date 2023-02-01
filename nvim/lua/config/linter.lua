@@ -7,7 +7,6 @@ local builtins = null_ls.builtins
 -- INFO linters also need to be added as source below
 local lintersAndFormatters = {
 	"yamllint",
-	-- "yamlfmt",
 	"shellcheck", -- needed for bash-lsp
 	"shfmt", -- shell
 	"markdownlint",
@@ -52,8 +51,7 @@ null_ls.setup {
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.formatting.shfmt,
 		builtins.diagnostics.shellcheck.with {
-			-- no "extra_", since for bash, bashls does use shellcheck already
-			filetypes = { "zsh" }, 
+			extra_filetypes = { "zsh" }, 
 			extra_args = { "--shell=bash" },
 		},
 		builtins.code_actions.shellcheck.with {
@@ -90,7 +88,6 @@ null_ls.setup {
 		},
 
 		-- YAML
-		-- builtins.formatting.yamlfmt,
 		builtins.diagnostics.yamllint.with {
 			extra_args = { "--config-file", linterConfig .. "/.yamllint.yaml" },
 		},

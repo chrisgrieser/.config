@@ -40,8 +40,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string># determined via .zshenv
-sf_path="$VAULT_PATH/.obsidian/themes/Shimmering Focus/theme.css"
+				<string>sf_path="${shimmering_focus_repo_path/#\~/$HOME}"
 lineNo="$*"
 
 # workaround for https://github.com/neovide/neovide/issues/1604
@@ -159,27 +158,6 @@ open "$sf_path" --env=LINE=$lineNo</string>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>shimmering_focus_repo_path</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>~/main-vault</string>
-				<key>filtermode</key>
-				<integer>1</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Vault Path</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>vault_path</string>
 		</dict>
 	</array>
 	<key>version</key>
