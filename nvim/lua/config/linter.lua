@@ -52,7 +52,8 @@ null_ls.setup {
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.formatting.shfmt,
 		builtins.diagnostics.shellcheck.with {
-			extra_filetypes = { "zsh" },
+			-- no "extra_", since for bash, bashls does use shellcheck already
+			filetypes = { "zsh" }, 
 			extra_args = { "--shell=bash" },
 		},
 		builtins.code_actions.shellcheck.with {
@@ -62,7 +63,7 @@ null_ls.setup {
 
 		-- JS/TS
 		builtins.formatting.prettier.with {
-			filetypes = { "javascript", "typescript" }, -- do format markdown, css, and so on
+			filetypes = { "javascript", "typescript" }, -- do not format markdown, css, and so on
 			extra_args = { "--config", linterConfig .. "/.prettierrc.yml" },
 		},
 
@@ -111,7 +112,6 @@ null_ls.setup {
 				linterConfig .. "/.markdownlintrc",
 			},
 		},
-		builtins.hover.dictionary, -- vim's builtin dictionary
 		builtins.completion.spell.with { -- vim's built-in spell-suggestions
 			filetypes = { "markdown", "text", "gitcommit" },
 		},

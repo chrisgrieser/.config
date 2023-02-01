@@ -2,7 +2,6 @@
 # ------------------------------------------
 
 matches:
-
   - triggers: ['!ctrl', "!control"]
     replace: ⌃
   - trigger: '!space'
@@ -21,11 +20,8 @@ matches:
     replace: ↹
   - triggers: ['!return', "!enter"]
     replace: ↵
-  - trigger: '!delete'
-    replace: ⌦
   - trigger: '!backspace'
     replace: ⌫
-
   - trigger: '!no'
     replace: ❌
   - trigger: '!yes'
@@ -52,7 +48,10 @@ matches:
   - trigger: '!eyes'
     replace: 👁️👄👁️
 
-  - triggers: [':shrug', "!ascii"]
+
+
+
+  - triggers: [    ':shrug', "!ascii"]
     replace: ¯\_(ツ)_/¯
   - triggers: [':gimme', "!ascii"]
     replace: ༼つ ◕_◕ ༽つ
