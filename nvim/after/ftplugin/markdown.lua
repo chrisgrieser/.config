@@ -10,9 +10,8 @@ bo.comments = "b:-"
 bo.formatoptions = bo.formatoptions:gsub("[ct]", "") .. "ro"
 
 -- enable wrapping lines
--- HACK for whatever reason, needs to be wrapped in a condition, otherwise it
--- worn't trigger?!
-if not opt_local.wrap:get() then require("funcs.quality-of-life").toggleWrap() end
+-- HACK for whatever reason, needs delay
+vim.defer_fn(require("funcs.quality-of-life").toggleWrap, 100) ---@diagnostic disable-line: param-type-mismatch
 
 -- decrease line length without zen mode plugins 
 opt_local.signcolumn = "yes:9"
@@ -32,6 +31,7 @@ keymap(
 	{ desc = "outer md link textobj", buffer = true }
 )
 
+keymap("n", "<D-s>", "", { desc = "", buffer = true })
 -- iE/aE: code block textobj
 keymap(
 	{ "o", "x" },
