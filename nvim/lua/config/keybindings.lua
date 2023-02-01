@@ -433,9 +433,9 @@ end, { desc = " File History (Diffview)" })
 -- Option Toggling
 keymap("n", "<leader>os", ":set spell!<CR>", { desc = "  toggle spelling" })
 keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = "  toggle relative line numbers" })
-keymap("n", "<leader>on", ":set number!<CR>", { desc = "  line numbers" })
-keymap("n", "<leader>ow", qol.toggleWrap, { desc = "  wrap" })
-keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 璉LSP Restart (sumneko_lua)" })
+keymap("n", "<leader>on", ":set number!<CR>", { desc = "  toggle line numbers" })
+keymap("n", "<leader>ow", qol.toggleWrap, { desc = "  toggle wrap" })
+keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 璉LSP Restart" })
 
 keymap("n", "<leader>od", function()
 	if g.diagnosticOn == nil then g.diagnosticOn = true end
