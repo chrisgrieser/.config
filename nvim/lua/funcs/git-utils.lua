@@ -116,7 +116,7 @@ function M.addCommitPush(prefillMsg)
 			end
 
 			-- Shimmering Focus specific actions instead
-			if expand("%:p"):find("themes/Shimmering Focus/theme.css$") then
+			if expand("%:p:t"):find("source.css$") then
 				shimmeringFocusBuild(commitMsg, gitShellOpts)
 				return
 			end

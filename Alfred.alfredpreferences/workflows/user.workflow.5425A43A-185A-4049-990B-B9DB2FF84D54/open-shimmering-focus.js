@@ -14,11 +14,10 @@ function readFile (path, encoding) {
 }
 
 const alfredMatcher = (str) => str.replace (/[-()_:.]/g, " ") + " " + str + " ";
-const getEnv = (path) => $.getenv(path).replace(/^~/, app.pathTo("home folder"));
 
 const jsonArray = [];
 let i = 0;
-const sfPath = getEnv("vault_path") + "/.obsidian/themes/Shimmering Focus/theme.css";
+const sfPath = $.getenv("shimmering_focus_repo_path").replace(/^~/, app.pathTo("home folder"));
 const navigationMarkers = readFile(sfPath)
 	.split("\n")
 	.map(nm => { i++; return [nm, i] } )
