@@ -42,13 +42,14 @@
 		"prefix": "home (JXA)",
 		"body": "app.pathTo(\"home folder\")"
 	},
-	"resolve home (JXA)": {
-		"prefix": "resolve home (JXA)",
-		"body": "const ${1:vari} = $.getenv(\"${2:envvar}\").replace(/^~/, \"\");"
-	},
 	"exists (file)": {
 		"prefix": "exists (file)",
 		"body": "const fileExists = (filePath) => Application(\"Finder\").exists(Path(filePath));"
+	},
+	"Create new Draft": {
+		"prefix": "Create new Draft",
+		"body": "Application(\"Drafts\").Draft({ \"content\": \"My Draft Content\"}).make()",
+		"description": "In the Drafts.app. See https://forums.getdrafts.com/t/create-new-draft-via-jxa/13940"
 	},
 	"window path (Finder)": {
 		"prefix": "window path (Finder)",

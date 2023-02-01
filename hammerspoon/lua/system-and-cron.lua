@@ -4,6 +4,12 @@ require("lua.dark-mode")
 require("lua.layouts")
 local caff = hs.caffeinate.watcher
 local timer = hs.timer.doAt
+
+local function restartSketchybar()
+	hs.execute(
+		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar"
+	)
+end
 --------------------------------------------------------------------------------
 
 -- CONFIG
@@ -144,7 +150,7 @@ shutDownWatcher = caff
 
 wakeWatcher = caff
 	.new(function(eventType)
-		if eventType ~= caff.screensDidWake and eventType ~= caff.systemDidWake then return end
+		if eventType ~= caff.screensDidWake and eventType ~= caff.systemDidWake and eventType ~= caff.screensDidWake and eventType ~= caff.screensDidUnlock then return end
 
 		twitterScrollUp()
 
@@ -156,10 +162,8 @@ wakeWatcher = caff
 			return
 		end
 
-		if eventType == caff.screensDidWake then
-			hs.execute(
-				"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar"
-			)
+		if eventType == caff.screensDidWake or eventType == caff.screensDidUnlock then
+			hs.timer.waitUntil(screenIsUnlocked, restartSketchybar):start()
 		end
 
 		-- INFO checks need to run after delay, since display number is not
