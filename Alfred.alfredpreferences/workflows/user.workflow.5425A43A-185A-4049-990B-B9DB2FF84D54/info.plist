@@ -44,7 +44,7 @@
 lineNo="$*"
 
 # workaround for https://github.com/neovide/neovide/issues/1604
-open "$sf_path" --env=LINE=$lineNo</string>
+open "$sf_path/source.css" --env=LINE=$lineNo</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

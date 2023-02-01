@@ -981,7 +981,7 @@ echo "$url"</string>
 			<key>note</key>
 			<string>search my issues</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>70</real>
 		</dict>

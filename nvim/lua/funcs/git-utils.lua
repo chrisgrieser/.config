@@ -55,9 +55,7 @@ end
 ---@param gitShellOpts table
 local function shimmeringFocusBuild(commitMsg, gitShellOpts)
 	vim.notify(' Building theme…\n"' .. commitMsg .. '"')
-	local buildScript =
-		expand("~/Library/Mobile Documents/com~apple~CloudDocs/Repos/shimmering-focus/build.sh")
-	fn.jobstart('zsh "' .. buildScript .. '" "' .. commitMsg .. '"', gitShellOpts)
+	fn.jobstart('zsh ./build.sh "'.. commitMsg .. '"', gitShellOpts)
 end
 
 ---@param prefillMsg? string
@@ -116,7 +114,7 @@ function M.addCommitPush(prefillMsg)
 			end
 
 			-- Shimmering Focus specific actions instead
-			if expand("%:p:t"):find("source.css$") then
+			if expand("%") == "source.css" then
 				shimmeringFocusBuild(commitMsg, gitShellOpts)
 				return
 			end
