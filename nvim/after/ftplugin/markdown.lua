@@ -13,48 +13,30 @@ bo.formatoptions = bo.formatoptions:gsub("[ct]", "") .. "ro"
 -- HACK for whatever reason, needs delay
 vim.defer_fn(require("funcs.quality-of-life").toggleWrap, 100) ---@diagnostic disable-line: param-type-mismatch
 
--- decrease line length without zen mode plugins 
+-- decrease line length without zen mode plugins
 opt_local.signcolumn = "yes:9"
 
 --------------------------------------------------------------------------------
+-- stylua: ignore start
 -- link textobj
-keymap(
-	{ "o", "x" },
-	"il",
-	function() require("various-textobjs").mdlink(true) end,
-	{ desc = "inner md link textobj", buffer = true }
-)
-keymap(
-	{ "o", "x" },
-	"al",
-	function() require("various-textobjs").mdlink(false) end,
-	{ desc = "outer md link textobj", buffer = true }
-)
+keymap({ "o", "x" }, "il", function() require("various-textobjs").mdlink(true) end, { desc = "inner md link textobj", buffer = true })
+keymap({ "o", "x" }, "al", function() require("various-textobjs").mdlink(false) end, { desc = "outer md link textobj", buffer = true })
 
-keymap("n", "<D-s>", "", { desc = "", buffer = true })
 -- iE/aE: code block textobj
-keymap(
-	{ "o", "x" },
-	"iE",
-	function() require("various-textobjs").mdFencedCodeBlock(true) end,
-	{ desc = "inner md code block textobj", buffer = true }
-)
-keymap(
-	{ "o", "x" },
-	"aE",
-	function() require("various-textobjs").mdFencedCodeBlock(false) end,
-	{ desc = "outer md code block textobj", buffer = true }
-)
+keymap({ "o", "x" }, "iE", function() require("various-textobjs").mdFencedCodeBlock(true) end, { desc = "inner md code block textobj", buffer = true })
+keymap({ "o", "x" }, "aE", function() require("various-textobjs").mdFencedCodeBlock(false) end, { desc = "outer md code block textobj", buffer = true })
+-- stylua: ignore end
 
+keymap("x", "<D-s>", ":!pandoc -t commonmark_x<CR><CR>", { desc = "format md table", buffer = true })
 --------------------------------------------------------------------------------
 
-local opts = { buffer = true }
--- Heading instead of function navigation
-keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], opts)
-keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], opts)
+-- Heading jump to next/prev heading
+keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], {desc = "next heading", buffer = true})
+keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], {desc = "previous heading", buffer = true})
 
 --KEYBINDINGS WITH THE GUI
 if isGui() then
+	local opts = { buffer = true }
 	-- cmd+r: Markdown Preview
 	keymap("n", "<D-r>", "<Plug>MarkdownPreviewToggle", opts)
 
