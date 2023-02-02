@@ -1,5 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
-// requires 'fd' cli
+// INFO requires 'fd' cli
 
 //──────────────────────────────────────────────────────────────────────────────
 ObjC.import("stdlib");
@@ -7,7 +7,7 @@ ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const home = app.pathTo("home folder");
-const finderApp = Application("Finder");
+const fileExists = filePath => Application("Finder").exists(Path(filePath));
 //──────────────────────────────────────────────────────────────────────────────
 
 const pathsToSearch = [
@@ -46,12 +46,11 @@ function readFile(path) {
 const jsonArray = [];
 let pathString = "";
 
-pathsToSearch.forEach(path => {
-	pathString += '"' + path + '" ';
-});
+pathsToSearch.forEach(path => (pathString += '"' + path + '" '));
 const repoArray = app
 	.doShellScript(
-		"export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; fd '\\.git$' --no-ignore --hidden --max-depth=2 " + pathString,
+		"export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; fd '\\.git$' --no-ignore --hidden --max-depth=2 " +
+			pathString,
 	)
 	.split("\r")
 	.map(i => i.slice(0, -5))
@@ -61,9 +60,9 @@ repoArray.forEach(localRepoFilePath => {
 	let repoName;
 	const repoID = localRepoFilePath.replace(/.*\//, "");
 
-	const isAlfredWorkflow = finderApp.exists(Path(localRepoFilePath + "/info.plist"));
-	const isObsiPlugin = finderApp.exists(Path(localRepoFilePath + "/manifest.json"));
-	const isNeovimPlugin = finderApp.exists(Path(localRepoFilePath + "/lua"));
+	const isAlfredWorkflow = fileExists(localRepoFilePath + "/info.plist");
+	const isObsiPlugin = fileExists(localRepoFilePath + "/manifest.json");
+	const isNeovimPlugin = fileExists(localRepoFilePath + "/lua");
 
 	// Dirty Repo
 	let dirtyIcon = "";
@@ -82,10 +81,10 @@ repoArray.forEach(localRepoFilePath => {
 		repoName = localRepoFilePath.replace(/.*\/(.*)/, "$1");
 		iconpath += "neovim.png";
 	} else if (localRepoFilePath.endsWith(".config/")) {
-		repoName = "pseudometa's dotfiles"
+		repoName = "dotfiles";
 		iconpath = "icon.png";
 	} else {
-		repoName = localRepoFilePath;
+		repoName = localRepoFilePath.replace(/.*\/(.*?)\/$/, "$1");
 		iconpath = "icon.png";
 	}
 
