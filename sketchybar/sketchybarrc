@@ -39,15 +39,6 @@ PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 #───────────────────────────────────────────────────────────────────────────────
 
 # HACK to fix topmost: https://github.com/FelixKratz/SketchyBar/issues/321
-[[ "$(scutil --get ComputerName)" =~ Office ]] && topmost="" || topmost="popup.topmost=false"
-
-
-# sketchybar \
-# 	--bar color=0xff333333 height=50\
-# 	--default popup.drawing=true popup.topmost=false popup.drawing=on \
-# 	popup.y_offset=-10 y_offset=15 \
-# 	--add item foo left --set foo label="bar" \
-# 	--add item baz popup.foo --set baz label="nek"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -63,7 +54,7 @@ sketchybar \
 	label.font="Recursive:Medium:15.5" label.color="$FONT_COLOR" \
 	icon.padding_left=2 icon.padding_right=1 \
 	label.padding_left=2 label.padding_right=10 \
-	popup.drawing=true popup.horizontal=true $topmost \
+	popup.drawing=true popup.horizontal=true popup.topmost=true \
 	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
 	--add item clock $first_set \
 	--set clock update_freq=1 \
