@@ -28,5 +28,6 @@ if [[ -n "$(git status --porcelain)" ]] ; then
 	fi
 fi
 
+sketchybar --trigger repo-files-update # update icon
 echo -n "success"
 
