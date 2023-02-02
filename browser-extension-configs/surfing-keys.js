@@ -16,6 +16,9 @@ settings.startToShowEmoji = 0; // length of chars to show emojis (acemode)
 
 Hints.style("font-family: Arial; font-size: 12px;");
 
+// disable surfingkey's pdf viewer
+chrome.storage.local.set({"noPdfViewer": 1}) /* eslint-disable-line no-undef */
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // IGNORE LIST
