@@ -5,6 +5,7 @@ require("lua.utils")
 ---@param trigger string description of the situation the log was triggered,
 ---e.g. "manual" or "hourly"
 function logBrightness(trigger)
+	if not isIMacAtHome() then return end
 	local mode = isDarkMode() and "dark " or "light"
 	local time = os.date():sub(12, 16)
 	local brightness = math.floor(hs.brightness.ambient())

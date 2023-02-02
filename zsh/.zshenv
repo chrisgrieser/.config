@@ -18,10 +18,6 @@ export ZDOTDIR="$DOTFILE_FOLDER/zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# Github token (right now actually unused)
-GITHUB_TOKEN=$(tr -d "\n" < "$ICLOUD/Dotfolder/private dotfiles/github_token")
-export GITHUB_TOKEN
-
 # OpenAI API Key stored outside of public git repo (symlinked file)
 # (key is accessed by nvim as well as shell plugins)
 OPENAI_API_KEY=$(tr -d "\n" < "$ICLOUD/Dotfolder/private dotfiles/openai_api_key")
