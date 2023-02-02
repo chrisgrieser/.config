@@ -65,32 +65,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1F1C02D6-B7DD-46E6-BA2F-10F05999A0C2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>013B3750-137A-45FE-8C34-F33182EAB82A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E18A0F1F-4959-4ED3-839A-6F42CA2A4BD6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CCFD0AC5-46EC-4EFD-BE13-5A9A8505B4E4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<array>
 			<dict>
@@ -306,108 +280,11 @@ brew services restart sketchybar</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>bar</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Hide Popups</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>1F1C02D6-B7DD-46E6-BA2F-10F05999A0C2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>sketchybar --set clock popup.drawing=false</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>013B3750-137A-45FE-8C34-F33182EAB82A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>bar</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Show Popups</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E18A0F1F-4959-4ED3-839A-6F42CA2A4BD6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>sketchybar --set clock popup.drawing=true</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>CCFD0AC5-46EC-4EFD-BE13-5A9A8505B4E4</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>013B3750-137A-45FE-8C34-F33182EAB82A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>220</real>
-			<key>ypos</key>
-			<real>595</real>
-		</dict>
 		<key>0EB9ED7D-4AE6-43BF-A788-F34C046B3732</key>
 		<dict>
 			<key>colorindex</key>
@@ -439,17 +316,6 @@ brew services restart sketchybar</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>1F1C02D6-B7DD-46E6-BA2F-10F05999A0C2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>Hide Popups</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>595</real>
-		</dict>
 		<key>335056B8-CF17-4C0A-AC12-6F8AD5A5D685</key>
 		<dict>
 			<key>colorindex</key>
@@ -476,26 +342,6 @@ brew services restart sketchybar</string>
 			<real>220</real>
 			<key>ypos</key>
 			<real>320</real>
-		</dict>
-		<key>CCFD0AC5-46EC-4EFD-BE13-5A9A8505B4E4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>220</real>
-			<key>ypos</key>
-			<real>740</real>
-		</dict>
-		<key>E18A0F1F-4959-4ED3-839A-6F42CA2A4BD6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>show</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>740</real>
 		</dict>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<dict>
