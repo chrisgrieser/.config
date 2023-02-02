@@ -127,7 +127,7 @@ end
 --------------------------------------------------------------------------------
 
 ---enables overscrolling for that action when close to the last line, depending
----on 'scrolloff' option
+---on 'scrolloff' option. Alternative Approach: https://www.reddit.com/r/neovim/comments/10rhoxs/how_to_make_scrolloff_option_scroll_past_end_of/
 ---@param action string The motion to be executed when not at the EOF
 function M.overscroll(action)
 	if bo.filetype ~= "DressingSelect" then
