@@ -78,7 +78,6 @@ cask "mimestream"
 cask "neovide"
 cask "obsidian"
 cask "rocket"
-cask "shortcat"
 cask "shottr"
 cask "slack"
 cask "stats"
@@ -90,5 +89,4 @@ mas "Drafts", id: 1435957248
 mas "Highlights", id: 1498912833
 mas "Peek", id: 1554235898
 mas "Pixelmator Pro", id: 1289583905
-mas "Reeder", id: 1529448980
-mas "Twitterrific", id: 1289378661
+mas "Twitter", id: 1482454543

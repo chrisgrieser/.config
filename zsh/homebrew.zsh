@@ -39,11 +39,6 @@ function dump () {
 }
 
 function update (){
-
-	print-section "OBSIDIAN"
-	echo "Opening URIs..."
-	open "obsidian://advanced-uri?vault=main-vault&updateplugins=true"
-
 	print-section "HOMEBREW"
 	print-section "update"
 	brew update
@@ -68,7 +63,6 @@ function update (){
 	
 	print-section "\033[1;33mREMINDERS"
 	echo "If sketchybar or espanso updated, they need to be re-given permissions."
-
 }
 
 function report (){
