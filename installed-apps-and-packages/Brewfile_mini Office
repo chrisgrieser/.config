@@ -36,7 +36,7 @@ brew "zoxide"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-brew "felixkratz/formulae/sketchybar"
+brew "felixkratz/formulae/sketchybar", args: ["HEAD"]
 brew "mgmeyers/pdfannots2json/pdfannots2json"
 brew "yasyf/do/do"
 cask "alacritty"
@@ -54,7 +54,6 @@ cask "microsoft-auto-update"
 cask "microsoft-excel"
 cask "microsoft-word"
 cask "mimestream"
-cask "monitorcontrol"
 cask "neovide"
 cask "obsidian"
 cask "rocket"
@@ -67,4 +66,5 @@ cask "zoom"
 mas "Drafts", id: 1435957248
 mas "Highlights", id: 1498912833
 mas "Peek", id: 1554235898
-mas "Twitterrific", id: 1289378661
+mas "Pixelmator Pro", id: 1289583905
+mas "Twitter", id: 1482454543
