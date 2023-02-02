@@ -29,17 +29,15 @@ fi
 
 # HACK using popup for second row. the popup only refers to the clock item to anchor it to the leftmost item,
 # it actually has nothing to do with the clock
-first_set="left"
-second_set="popup.clock" # = used as second row
+first_row="left"
+second_row="popup.clock" 
+
 POPUP_Y_OFFSET=-35
 HEIGHT=60                    # extra height for second row & to cover the holes at the corner where the wallpaper shines through
 ITEM_Y_OFFSET=18             # needs to be adjusted for Height
 PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# TODO change popup.topmost to false when issue is fixed 
-# https://github.com/FelixKratz/SketchyBar/issues/321
 
 # one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
 # shellcheck disable=2086
@@ -53,33 +51,33 @@ sketchybar \
 	label.font="Recursive:Medium:15.5" label.color="$FONT_COLOR" \
 	icon.padding_left=2 icon.padding_right=1 \
 	label.padding_left=2 label.padding_right=10 \
-	popup.drawing=true popup.horizontal=true popup.topmost=true \
+	popup.drawing=true popup.horizontal=true popup.topmost=false \
 	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
-	--add item clock $first_set \
+	--add item clock $first_row \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
 	background.padding_left=5 \
-	--add item covid-stats $first_set \
+	--add item covid-stats $first_row \
 	--set covid-stats update_freq=43200 \
 	script="$PLUGIN_DIR/covid-stats.sh" \
-	--add item weather $first_set \
+	--add item weather $first_row \
 	--set weather update_freq=1800 \
 	script="$PLUGIN_DIR/weather.sh" \
-	--add item drafts $first_set \
+	--add item drafts $first_row \
 	--set drafts icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
 	script="$PLUGIN_DIR/drafts-counter.sh" \
 	--add event drafts-counter-update \
 	--subscribe drafts drafts-counter-update \
 	--subscribe drafts system_woke \
-	--add alias "$ram_bar_item" $second_set \
+	--add alias "$ram_bar_item" $second_row \
 	--set "$ram_bar_item" width=38 \
-	--add alias "$cpu_bar_item" $second_set \
+	--add alias "$cpu_bar_item" $second_row \
 	--set "$cpu_bar_item" width=60 \
-	--add alias "$gpu_bar_item" $second_set \
+	--add alias "$gpu_bar_item" $second_row \
 	--set "$gpu_bar_item" width=55 \
-	--add alias "$network_bar_item" $second_set \
+	--add alias "$network_bar_item" $second_row \
 	--set "$network_bar_item" width=65 \
-	--add item sync-indicator $second_set \
+	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 \
 	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
