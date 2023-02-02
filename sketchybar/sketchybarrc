@@ -38,9 +38,8 @@ PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# HACK to fix topmost: https://github.com/FelixKratz/SketchyBar/issues/321
-
-#───────────────────────────────────────────────────────────────────────────────
+# TODO change popup.topmost to false when issue is fixed 
+# https://github.com/FelixKratz/SketchyBar/issues/321
 
 # one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
 # shellcheck disable=2086

@@ -51,7 +51,7 @@ end):start()
 
 -- when currently auto-tiled, hide the app on deactivation to it does not cover sketchybar
 autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
-	local autoTileApps = { "Finder", "Mimestream", "Brave Browser" }
+	local autoTileApps = { "Finder", "Brave Browser" }
 	if eventType == aw.deactivated and tableContains(autoTileApps, appName) then
 		if #appObj:allWindows() > 1 then appObj:hide() end
 	end
@@ -151,7 +151,6 @@ wf_mimestream = wf.new("Mimestream")
 	})
 	:subscribe(wf.windowCreated, function() autoTile(wf_mimestream) end)
 	:subscribe(wf.windowDestroyed, function() autoTile(wf_mimestream) end)
-	:subscribe(wf.windowFocused, bringAllToFront)
 
 --------------------------------------------------------------------------------
 
