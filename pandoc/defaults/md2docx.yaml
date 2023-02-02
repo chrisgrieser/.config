@@ -14,7 +14,7 @@ resource-path: # must be array
   - ./attachments
   - ${HOME}/main-vault/ # Vault path for images
 # Markdown-Reader + enable some extensions
-reader: markdown+lists_without_preceding_blankline+mark
+reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
 strip-comments: true
 number-sections: true
 # Academic
