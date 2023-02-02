@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 
-# sketchybar \
-# 	--default popup.drawing=on \
-# 	--add item foo left --set foo label="bar" popup.drawing=on \
-# 	--add item baz popup.foo --set baz label="nek"
-
 sketchybar \
-	--add item foo left --set foo label="bar" \
-	--add item baz popup.foo --set baz label="nek" \
-	--set foo popup.drawing=on
+	--default popup.drawing=on \
+	--add item foo left --set foo label="bar" popup.drawing=on \
+	--add item baz popup.foo --set baz label="nek"
+
+# sketchybar \
+# 	--add item foo left --set foo label="bar" \
+# 	--add item baz popup.foo --set baz label="nek" \
+# 	--set foo popup.drawing=on
+
+# sketchybar \
+# 	--add item test left \
+# 	--set test label="test" \
+# 	click_script="sketchybar --set test label=TEST"
