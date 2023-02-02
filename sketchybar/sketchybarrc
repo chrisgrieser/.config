@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 #───────────────────────────────────────────────────────────────────────────────
 # INFO: After app update, needs to be re-granted screen recording permissions
 #───────────────────────────────────────────────────────────────────────────────
@@ -36,11 +36,13 @@ HEIGHT=60                    # extra height for second row & to cover the holes 
 ITEM_Y_OFFSET=18             # needs to be adjusted for Height
 PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
-# HACK sync indicator to top row in office, second row elsewhere. workaround for https://github.com/FelixKratz/SketchyBar/issues/316
-[[ "$(scutil --get ComputerName)" =~ Office ]] && third_set="$first_set" || third_set="$second_set"
+# HACK to fix topmost: https://github.com/FelixKratz/SketchyBar/issues/321
+[[ "$(scutil --get ComputerName)" =~ Office ]] && topmost="" || topmost="popup.topmost=false"
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
+# shellcheck disable=2086
 sketchybar \
 	--bar \
 	height="$HEIGHT" position=top display=all \
@@ -51,60 +53,40 @@ sketchybar \
 	label.font="Recursive:Medium:15.5" label.color="$FONT_COLOR" \
 	icon.padding_left=2 icon.padding_right=1 \
 	label.padding_left=2 label.padding_right=10 \
-	popup.drawing=true popup.horizontal=true popup.topmost=false \
+	popup.drawing=true popup.horizontal=true $topmost \
 	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
-	\
 	--add item clock $first_set \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
 	background.padding_left=5 \
-	--add item baz popup.clock --set baz label="nek" \
-
-# one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
-# sketchybar \
-# 	--bar \
-# 	height="$HEIGHT" position=top display=all \
-# 	padding_left=0 padding_right=0 color="$BG_COLOR" \
-# 	--default \
-# 	updates=when_shown drawing=on align=left \
-# 	icon.font="Noto Emoji:Bold:16" icon.color="$FONT_COLOR" \
-# 	label.font="Recursive:Medium:15.5" label.color="$FONT_COLOR" \
-# 	icon.padding_left=2 icon.padding_right=1 \
-# 	label.padding_left=2 label.padding_right=10 \
-# 	popup.drawing=true popup.horizontal=true popup.topmost=false \
-# 	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
-# 	--add item clock $first_set \
-# 	--set clock update_freq=1 \
-# 	script="$PLUGIN_DIR/clock.sh" \
-# 	background.padding_left=5 \
-# 	--add item covid-stats $first_set \
-# 	--set covid-stats update_freq=43200 \
-# 	script="$PLUGIN_DIR/covid-stats.sh" \
-# 	--add item weather $first_set \
-# 	--set weather update_freq=1800 \
-# 	script="$PLUGIN_DIR/weather.sh" \
-# 	--add item drafts $first_set \
-# 	--set drafts icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
-# 	script="$PLUGIN_DIR/drafts-counter.sh" \
-# 	--add event drafts-counter-update \
-# 	--subscribe drafts drafts-counter-update \
-# 	--subscribe drafts system_woke \
-# 	--add alias "$ram_bar_item" $second_set \
-# 	--set "$ram_bar_item" width=38 \
-# 	--add alias "$cpu_bar_item" $second_set \
-# 	--set "$cpu_bar_item" width=60 \
-# 	--add alias "$gpu_bar_item" $second_set \
-# 	--set "$gpu_bar_item" width=55 \
-# 	--add alias "$network_bar_item" $second_set \
-# 	--set "$network_bar_item" width=65 \
-# 	--add item sync-indicator "$third_set" \
-# 	--set sync-indicator update_freq=300 \
-# 	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
-# 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
-# 	--add event repo-files-update \
-# 	--subscribe sync-indicator repo-files-update \
-# 	--subscribe sync-indicator system_woke \
-# 	--update
+	--add item covid-stats $first_set \
+	--set covid-stats update_freq=43200 \
+	script="$PLUGIN_DIR/covid-stats.sh" \
+	--add item weather $first_set \
+	--set weather update_freq=1800 \
+	script="$PLUGIN_DIR/weather.sh" \
+	--add item drafts $first_set \
+	--set drafts icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
+	script="$PLUGIN_DIR/drafts-counter.sh" \
+	--add event drafts-counter-update \
+	--subscribe drafts drafts-counter-update \
+	--subscribe drafts system_woke \
+	--add alias "$ram_bar_item" $second_set \
+	--set "$ram_bar_item" width=38 \
+	--add alias "$cpu_bar_item" $second_set \
+	--set "$cpu_bar_item" width=60 \
+	--add alias "$gpu_bar_item" $second_set \
+	--set "$gpu_bar_item" width=55 \
+	--add alias "$network_bar_item" $second_set \
+	--set "$network_bar_item" width=65 \
+	--add item sync-indicator $second_set \
+	--set sync-indicator update_freq=300 \
+	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
+	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
+	--add event repo-files-update \
+	--subscribe sync-indicator repo-files-update \
+	--subscribe sync-indicator system_woke \
+	--update
 
 # INFO
 # - `--update` needs to run at the end of config and should not be run in an item script
