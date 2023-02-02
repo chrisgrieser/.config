@@ -863,7 +863,7 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 		<key>0F55C68E-C6D6-4629-B28B-1E323E3CC867</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
@@ -919,7 +919,7 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
@@ -928,7 +928,7 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 		<key>6BF4A116-C3FE-4B51-BFF9-65DE98E2EAD1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>485</real>
 			<key>ypos</key>
@@ -937,7 +937,7 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 		<key>7E7254FB-7761-400D-887B-162AB242F68E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>will ask for confirmation</string>
 			<key>xpos</key>
@@ -1002,7 +1002,7 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 		<key>AA5C04E1-1B2F-4CEA-8B5D-6E4E4ECD0D8B</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
