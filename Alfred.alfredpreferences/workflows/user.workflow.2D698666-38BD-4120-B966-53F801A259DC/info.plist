@@ -108,27 +108,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Call with Facetime</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>CC945B71-5B86-4BF9-A9F5-92FC20B741DE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -144,6 +123,27 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>49D0A48F-2A39-4133-8D0C-DAD9F6F7EDFB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Call with Facetime</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>CC945B71-5B86-4BF9-A9F5-92FC20B741DE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -245,7 +245,7 @@
 			<key>xpos</key>
 			<real>255</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>270</real>
 		</dict>
 		<key>766F9E1B-6979-4A81-A85D-9C7FE8EFCA8F</key>
 		<dict>
@@ -268,7 +268,7 @@
 			<key>xpos</key>
 			<real>415</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>270</real>
 		</dict>
 		<key>CC945B71-5B86-4BF9-A9F5-92FC20B741DE</key>
 		<dict>

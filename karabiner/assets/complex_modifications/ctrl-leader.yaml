@@ -109,17 +109,6 @@ rules:
         to_if_alone:
           - *deactivate-leader
           - *remove-notice
-      # [.] Emoji Inserter
-      - type: basic
-        from: {key_code: period}
-        to:
-          - key_code: spacebar
-            modifiers:
-              - control
-              - command
-          - *deactivate-leader
-          - *remove-notice
-        conditions: [*leader-active]
       # [C]alendar: BusyCal
       - type: basic
         from: {key_code: c}

@@ -163,8 +163,8 @@ wakeWatcher = caff
 		end
 
 		if eventType == caff.screensDidWake or eventType == caff.screensDidUnlock then
-			-- hs.timer.waitUntil(screenIsUnlocked, restartSketchybar):start()
-			restartSketchybar()
+			-- restartSketchybar()
+			hs.execute("sketchybar --set clock popup.drawing=false")
 		end
 
 		-- INFO checks need to run after delay, since display number is not

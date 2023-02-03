@@ -198,6 +198,17 @@
 			<key>url</key>
 			<string>https://sci-hub.ru/{query}</string>
 		</dict>
+		<key>CB53E08B-32B8-4062-98CC-5A36E97438A4</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>tel</string>
+			<key>text</key>
+			<string>Call with Facetime</string>
+			<key>url</key>
+			<string>tel://{query}</string>
+		</dict>
 		<key>CFD350B4-6201-41ED-93FE-EE2199EC6FAC</key>
 		<dict>
 			<key>enabled</key>
