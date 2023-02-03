@@ -38,19 +38,15 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>sf_path="${shimmering_focus_repo_path/#\~/$HOME}"
-lineNo="$*"
-
-# workaround for https://github.com/neovide/neovide/issues/1604
-open "$sf_path/source.css" --env=LINE=$lineNo</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>open-at-line.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -85,19 +81,20 @@ open "$sf_path/source.css" --env=LINE=$lineNo</string>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>loading</string>
+				<string>loading…</string>
 				<key>script</key>
-				<string></string>
+				<string># Vault path set via zshenv
+osascript -l JavaScript "./open-shimmering-focus.js" "$VAULT_PATH"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-shimmering-focus.js</string>
+				<string></string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string>🔍 Open Shimmering Focus</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
