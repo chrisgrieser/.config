@@ -4,6 +4,9 @@ matches:
   - trigger: "::"
     replace: ":innen"
   #─────────────────────────────────────────────────────────────────────────────
+  - trigger: "!null"
+    replace: "&>/dev/null;"
+  #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!web"
     replace: https://chris-grieser.de/
   - trigger: "!twitter"
