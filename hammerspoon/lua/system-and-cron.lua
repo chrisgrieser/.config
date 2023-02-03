@@ -9,7 +9,9 @@ local function restartSketchybar()
 	hs.execute(
 		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar"
 	)
-	hs.execute("osascript -l JavaScript ./helpers/dismiss-notification.js")
+	runWithDelays(0.5, function ()
+		hs.execute("osascript -l JavaScript ./helpers/dismiss-notification.js &>/dev/null;")
+	end)
 end
 --------------------------------------------------------------------------------
 
