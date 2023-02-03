@@ -88,10 +88,10 @@ function M.addCommitPush(prefillMsg)
 			end
 			vim.notify(out, logLevel)
 
-			-- HACK for stylelint on build script writing the current file, 
+			-- HACK for stylelint on build script / panvimdoc writing the current file, 
 			-- and autoread failing, preventing to quit the file. Seems to requires manual
 			-- reloading via `:edit`.
-			if expand("%") == "source.css" then
+			if expand("%") == "source.css" or expand("%") == "README.md" then
 				cmd.mkview(1)
 				cmd.edit()
 				cmd.loadview(1)
@@ -100,9 +100,8 @@ function M.addCommitPush(prefillMsg)
 		end,
 	}
 
-	-- uses dressing + cmp + omnifunc for autocompletion of filenames
 	vim.ui.input(
-		{ prompt = "Commit Message", default = prefillMsg, completion = "file" },
+		{ prompt = "Commit Message", default = prefillMsg },
 		function(commitMsg)
 			if not commitMsg then
 				return
