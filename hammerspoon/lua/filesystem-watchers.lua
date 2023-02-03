@@ -1,7 +1,6 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 -- CONFIG
--- non-local for persistence against garbage collection
 local dotfilesFolder = getenv("DOTFILE_FOLDER")
 local fileHub = getenv("WD")
 local home = getenv("HOME")

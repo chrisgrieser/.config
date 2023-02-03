@@ -91,7 +91,7 @@ function M.addCommitPush(prefillMsg)
 			-- HACK for stylelint on build script / panvimdoc writing the current file, 
 			-- and autoread failing, preventing to quit the file. Seems to requires manual
 			-- reloading via `:edit`.
-			if expand("%") == "source.css" or expand("%") == "README.md" then
+			if expand("%") == "theme.css" or expand("%") == "README.md" then
 				cmd.mkview(1)
 				cmd.edit()
 				cmd.loadview(1)
@@ -122,7 +122,7 @@ function M.addCommitPush(prefillMsg)
 			end
 
 			-- Shimmering Focus specific actions instead
-			if expand("%") == "source.css" then
+			if expand("%") == "theme.css" then
 				shimmeringFocusBuild(commitMsg, gitShellOpts)
 				return
 			end

@@ -134,29 +134,7 @@ osascript -l JavaScript "./open-shimmering-focus.js" "$VAULT_PATH"</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
-				<integer>1</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Shimmering Focus Repo</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>shimmering_focus_repo_path</string>
-		</dict>
-	</array>
+	<array/>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
