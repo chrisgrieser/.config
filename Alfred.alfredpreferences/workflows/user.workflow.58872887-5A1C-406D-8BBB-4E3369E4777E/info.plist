@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string></string>
+	<key>connections</key>
+	<dict>
+		<key>0DDAA976-9F29-4765-B66D-265EBDBA545F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6D6E67D1-1F17-4129-A457-0D9A41C42E95</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>lancethomps &amp; Bartosz Petrynski</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Big Sur Notification Dismisser</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>function run(input, parameters) {
+
+  const appName = "";
+  const verbose = true;
+
+  const scriptName = "close_notifications_applescript";
+
+  const CLEAR_ALL_ACTION = "Clear All";
+  const CLEAR_ALL_ACTION_TOP = "Clear";
+  const CLOSE_ACTION = "Close";
+
+  const notNull = (val) =&gt; {
+    return val !== null &amp;&amp; val !== undefined;
+  }
+
+  const isNull = (val) =&gt; {
+    return !notNull(val);
+  }
+
+  const isError = (maybeErr) =&gt; {
+    return notNull(maybeErr) &amp;&amp; (maybeErr instanceof Error || maybeErr.message);
+  }
+
+  const systemVersion = () =&gt; {
+    return Application("Finder").version().split(".").map(val =&gt; parseInt(val));
+  }
+
+  const systemVersionGreaterThanOrEqualTo = (vers) =&gt; {
+    return systemVersion()[0] &gt;= vers;
+  }
+
+  const isBigSurOrGreater = () =&gt; {
+    return systemVersionGreaterThanOrEqualTo(11);
+  }
+
+  const V11_OR_GREATER = isBigSurOrGreater();
+  const APP_NAME_MATCHER_ROLE = V11_OR_GREATER ? "AXStaticText" : "AXImage";
+  const hasAppName = notNull(appName) &amp;&amp; appName !== "";
+  const appNameForLog = hasAppName ? ` [${appName}]` : "";
+
+  const logs = [];
+  const log = (message, ...optionalParams) =&gt; {
+    let message_with_prefix = `${new Date().toISOString().replace("Z", "").replace("T", " ")} [${scriptName}]${appNameForLog} ${message}`;
+    console.log(message_with_prefix, optionalParams);
+    logs.push(message_with_prefix);
+  }
+
+  const logError = (message, ...optionalParams) =&gt; {
+    if (isError(message)) {
+      let err = message;
+      message = `${err}${err.stack ? (' ' + err.stack) : ''}`;
+    }
+    log(`ERROR ${message}`, optionalParams);
+  }
+
+  const logErrorVerbose = (message, ...optionalParams) =&gt; {
+    if (verbose) {
+      logError(message, optionalParams);
+    }
+  }
+
+  const logVerbose = (message) =&gt; {
+    if (verbose) {
+      log(message);
+    }
+  }
+
+  const getLogLines = () =&gt; {
+    return logs.join("\n");
+  }
+
+  const getSystemEvents = () =&gt; {
+    let systemEvents = Application("System Events");
+    systemEvents.includeStandardAdditions = true;
+    return systemEvents;
+  }
+
+  const getNotificationCenter = () =&gt; {
+    try {
+      return getSystemEvents().processes.byName("NotificationCenter");
+    } catch (err) {
+      logError("Could not get NotificationCenter");
+      throw err;
+    }
+  }
+
+  const getNotificationCenterGroups = (retryOnError = false) =&gt; {
+    try {
+      let notificationCenter = getNotificationCenter();
+      if (notificationCenter.windows.length &lt;= 0) {
+        return [];
+      }
+      if (!V11_OR_GREATER) {
+        return notificationCenter.windows();
+      }
+      return notificationCenter.windows[0].uiElements[0].uiElements[0].uiElements();
+    } catch (err) {
+      logError("Could not get NotificationCenter groups");
+      if (retryOnError) {
+        logError(err);
+        return getNotificationCenterGroups(false);
+      } else {
+        throw err;
+      }
+    }
+  }
+
+  const isClearButton = (description, name) =&gt; {
+    return description === "button" &amp;&amp; name === CLEAR_ALL_ACTION_TOP;
+  }
+
+  const matchesAppName = (role, value) =&gt; {
+    return role === APP_NAME_MATCHER_ROLE &amp;&amp; value.toLowerCase() === appName.toLowerCase();
+  }
+
+  const notificationGroupMatches = (group) =&gt; {
+    try {
+      let description = group.description();
+      if (V11_OR_GREATER &amp;&amp; isClearButton(description, group.name())) {
+        return true;
+      }
+      if (V11_OR_GREATER &amp;&amp; description !== "group") {
+        return false;
+      }
+      if (!V11_OR_GREATER) {
+        let matchedAppName = !hasAppName;
+        if (!matchedAppName) {
+          for (let elem of group.uiElements()) {
+            if (matchesAppName(elem.role(), elem.description())) {
+              matchedAppName = true;
+              break;
+            }
+          }
+        }
+        if (matchedAppName) {
+          return notNull(findCloseActionV10(group, -1));
+        }
+        return false;
+      }
+      if (!hasAppName) {
+        return true;
+      }
+      let firstElem = group.uiElements[0];
+      return matchesAppName(firstElem.role(), firstElem.value());
+    } catch (err) {
+      logErrorVerbose(`Caught error while checking window, window is probably closed: ${err}`);
+      logErrorVerbose(err);
+    }
+    return false;
+  }
+
+  const findCloseActionV10 = (group, closedCount) =&gt; {
+    try {
+      for (let elem of group.uiElements()) {
+        if (elem.role() === "AXButton" &amp;&amp; elem.title() === CLOSE_ACTION) {
+          return elem.actions["AXPress"];
+        }
+      }
+    } catch (err) {
+      logErrorVerbose(`(group_${closedCount}) Caught error while searching for close action, window is probably closed: ${err}`);
+      logErrorVerbose(err);
+      return null;
+    }
+    log("No close action found for notification");
+    return null;
+  }
+
+  const findCloseAction = (group, closedCount) =&gt; {
+    try {
+      if (!V11_OR_GREATER) {
+        return findCloseActionV10(group, closedCount);
+      }
+      let checkForPress = isClearButton(group.description(), group.name());
+      let clearAllAction;
+      let closeAction;
+      for (let action of group.actions()) {
+        let description = action.description();
+        if (description === CLEAR_ALL_ACTION) {
+          clearAllAction = action;
+          break;
+        } else if (description === CLOSE_ACTION) {
+          closeAction = action;
+        } else if (checkForPress &amp;&amp; description === "press") {
+          clearAllAction = action;
+          break;
+        }
+      }
+      if (notNull(clearAllAction)) {
+        return clearAllAction;
+      } else if (notNull(closeAction)) {
+        return closeAction;
+      }
+    } catch (err) {
+      logErrorVerbose(`(group_${closedCount}) Caught error while searching for close action, window is probably closed: ${err}`);
+      logErrorVerbose(err);
+      return null;
+    }
+    log("No close action found for notification");
+    return null;
+  }
+
+  const closeNextGroup = (groups, closedCount) =&gt; {
+    try {
+      for (let group of groups) {
+        if (notificationGroupMatches(group)) {
+          let closeAction = findCloseAction(group, closedCount);
+
+          if (notNull(closeAction)) {
+            try {
+              closeAction.perform();
+              return [true, 1];
+            } catch (err) {
+              logErrorVerbose(`(group_${closedCount}) Caught error while performing close action, window is probably closed: ${err}`);
+              logErrorVerbose(err);
+            }
+          }
+          return [true, 0];
+        }
+      }
+      return false;
+    } catch (err) {
+      logError("Could not run closeNextGroup");
+      throw err;
+    }
+  }
+
+  try {
+    let groupsCount = getNotificationCenterGroups(true).filter(group =&gt; notificationGroupMatches(group)).length;
+
+    if (groupsCount &gt; 0) {
+      logVerbose(`Closing ${groupsCount}${appNameForLog} notification group${(groupsCount &gt; 1 ? "s" : "")}`);
+
+      let startTime = new Date().getTime();
+      let closedCount = 0;
+      let maybeMore = true;
+      let maxAttempts = 2;
+      let attempts = 1;
+      while (maybeMore &amp;&amp; ((new Date().getTime() - startTime) &lt;= (1000 * 30))) {
+        try {
+          let closeResult = closeNextGroup(getNotificationCenterGroups(), closedCount);
+          maybeMore = closeResult[0];
+          if (maybeMore) {
+            closedCount = closedCount + closeResult[1];
+          }
+        } catch (innerErr) {
+          if (maybeMore &amp;&amp; closedCount === 0 &amp;&amp; attempts &lt; maxAttempts) {
+            log(`Caught an error before anything closed, trying ${maxAttempts - attempts} more time(s).`)
+            attempts++;
+          } else {
+            throw innerErr;
+          }
+        }
+      }
+    } else {
+      throw Error(`No${appNameForLog} notifications found...`);
+    }
+  } catch (err) {
+    logError(err);
+    logError(err.message);
+    getLogLines();
+    throw err;
+  }
+
+  return getLogLines();
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6D6E67D1-1F17-4129-A457-0D9A41C42E95</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>27</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>SS</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>0DDAA976-9F29-4765-B66D-265EBDBA545F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Based on lancethomps' gist: https://gist.github.com/lancethomps/a5ac103f334b171f70ce2ff983220b4f
+
+Change log:
+1.1
+- Updated to https://gist.github.com/lancethomps/a5ac103f334b171f70ce2ff983220b4f/revisions#diff-83192c5d8a65f0aa536c1b7346b1d2a4bf1d05e94c5d14d0f68193952d081232
+
+1.0
+- Initial version</string>
+	<key>uidata</key>
+	<dict>
+		<key>0DDAA976-9F29-4765-B66D-265EBDBA545F</key>
+		<dict>
+			<key>xpos</key>
+			<real>105</real>
+			<key>ypos</key>
+			<real>205</real>
+		</dict>
+		<key>6D6E67D1-1F17-4129-A457-0D9A41C42E95</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>205</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.1</string>
+	<key>webaddress</key>
+	<string>https://gist.github.com/lancethomps/a5ac103f334b171f70ce2ff983220b4f</string>
+</dict>
+</plist>

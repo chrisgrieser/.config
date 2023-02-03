@@ -27,7 +27,7 @@ function run(argv) {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	const navigationMarkers = readFile(sfPath + "/source.css")
+	const navigationMarkers = readFile(sfPath)
 		.split("\n")
 		.map(nm => {
 			i++;
