@@ -43,6 +43,7 @@ local options = {
 			"%.pdf",
 			"%.log",
 			"%.png",
+			"%.gif",
 			"%.jpe?g",
 			"%.icns",
 			"%.zip",
