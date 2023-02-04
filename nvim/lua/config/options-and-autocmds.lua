@@ -94,7 +94,7 @@ opt.textwidth = 80
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
-opt.colorcolumn = "+1" -- relative to textwidth
+opt.colorcolumn = {"+1"} -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
 
 -- status bar & cmdline
