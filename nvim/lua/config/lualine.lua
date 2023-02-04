@@ -98,7 +98,11 @@ require("lualine").setup {
 	sections = {
 		lualine_a = {
 			{ "filetype", colored = false, icon_only = true },
-			{ "filename", file_status = false },
+			{
+				"filename",
+				file_status = false,
+				fmt = function(str) return str:gsub("zsh;#toggleterm#", "Toggleterm ") end,
+			},
 		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {

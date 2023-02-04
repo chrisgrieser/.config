@@ -21,15 +21,13 @@
 		]
 	},
 	"recent files": {
-		"description": "Obsidian: Get the 10 most recent files, as an array of file-path-strings. (The 10 most recent files are the ones visible in the Quick Switcher, when there no input yet.)",
+		"description": "Obsidian: Get the 10 most recent files, as an array of file-path strings. (The 10 most recent files are the ones visible in the Quick Switcher, when there no input yet.)",
 		"prefix": [
 			"recent files",
 			"Quick Switcher: recent files",
 			"last opened files"
 		],
-		"body": [
-			"const recentFiles = this.app.workspace.lastOpenFiles;"
-		]
+		"body": "const recentFiles = this.app.workspace.getLastOpenFiles();"
 	},
 	"get editor": {
 		"description": "Obsidian: Get the editor of the currently active note.",
