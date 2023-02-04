@@ -3,10 +3,20 @@
 		"prefix": "get selection (Finder)",
 		"body": "tell application \"Finder\" to return POSIX path of (selection as alias)"
 	},
+	"get current window (Finder)": {
+		"prefix": "get current window (Finder)",
+		"body": [
+			"tell application \"Finder\"",
+			"\tif ((count windows) is 0) then return \"no window\"",
+			"\treturn POSIX path of (target of window 1 as alias)",
+			"end tell"
+		],
+		"description": "desc"
+	},
 	"function": {
 		"prefix": "function",
 		"body": [
-			"on ${1:func} (${2:argv})",	
+			"on ${1:func} (${2:argv})",
 			"\t$0",
 			"end ${1:func}"
 		]
@@ -48,6 +58,10 @@
 			"click menu item \"${2:item}\" of menu of menu item \"${3:submenu}\" of menu \"${4:menu}\" of menu bar 1",
 			"end tell"
 		]
+	},
+	"get front process": {
+		"prefix": "get front process",
+		"body": "tell application \"System Events\" to set frontApp to (name of first process where it is frontmost)"
 	},
 	"resolve home": {
 		"prefix": "resolve home",
