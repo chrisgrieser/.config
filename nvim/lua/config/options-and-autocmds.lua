@@ -123,10 +123,6 @@ autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 		end
 	end,
 })
-autocmd("FocusGained", { -- Update file when there are changes
-	callback = vim.cmd.checktime,
-	group = "autosave",
-})
 
 -- emulate autochdir, which is deprecated
 augroup("autochdir", {})
