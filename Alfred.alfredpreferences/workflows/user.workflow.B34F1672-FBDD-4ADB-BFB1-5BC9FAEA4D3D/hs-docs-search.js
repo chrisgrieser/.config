@@ -13,7 +13,7 @@ function readFile(path, encoding) {
 	return ObjC.unwrap(str);
 }
 
-//------------------------------------------------------------------------------
+//──────────────────────────────────────────────────────────────────────────────
 
 // run `hs.docstrings_json_file` in hammerspoon console to get the docs path
 const hammerspoonDocsJson = "/Applications/Hammerspoon.app/Contents/Resources/docs.json";
@@ -29,7 +29,6 @@ categoryArr.forEach(category => {
 		match: alfredMatcher(category.name),
 		arg: `https://www.hammerspoon.org/docs/${category.name}.html`,
 		uid: category.name,
-		mods: { alt: { arg: category.name } },
 	});
 
 	// categories items
@@ -41,7 +40,7 @@ categoryArr.forEach(category => {
 			match: alfredMatcher(shortdef),
 			arg: `https://www.hammerspoon.org/docs/${category.name}.html#${catItem.name}`,
 			uid: `${category.name}_${catItem.name}`,
-			mods: { alt: { arg: shortdef, }, },
+			mods: { alt: { arg: shortdef } },
 		});
 	});
 });
@@ -50,12 +49,6 @@ workArray.push({
 	match: "getting started examples",
 	arg: "https://www.hammerspoon.org/go/",
 	uid: "getting-started",
-	mods: {
-		alt: {
-			valid: false,
-			subtitle: "❌",
-		},
-	},
 });
 
 JSON.stringify({ items: workArray });
