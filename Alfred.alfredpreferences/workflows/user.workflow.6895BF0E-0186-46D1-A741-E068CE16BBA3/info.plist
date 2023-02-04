@@ -224,6 +224,7 @@
 			<dict>
 				<key>argument</key>
 				<string>{query}
+
 pass git push</string>
 				<key>passthroughargument</key>
 				<false/>
@@ -324,7 +325,7 @@ pass git push</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>x</string>
+				<string>pw</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>

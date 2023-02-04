@@ -36,7 +36,7 @@ function run(argv) {
 					"mods": {
 						"fn": {
 							"arg": group,
-							"subtitle": "fn: Create new entry in " + group,
+							"subtitle": "fn: Create new entry in '" + group + "'",
 						},
 					},
 				});
