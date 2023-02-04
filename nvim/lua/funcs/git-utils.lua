@@ -55,7 +55,8 @@ end
 ---@param gitShellOpts table
 local function shimmeringFocusBuild(commitMsg, gitShellOpts)
 	vim.notify(' Building theme…\n"' .. commitMsg .. '"')
-	fn.jobstart('zsh ./build.sh "'.. commitMsg .. '"', gitShellOpts)
+	local buildscriptLocation = vim.env.ICLOUD .."/Repos/shimmering-focus/build.sh"
+	fn.jobstart('zsh "'..buildscriptLocation..'" "'.. commitMsg .. '"', gitShellOpts)
 end
 
 ---@param prefillMsg? string
@@ -92,9 +93,9 @@ function M.addCommitPush(prefillMsg)
 			-- and autoread failing, preventing to quit the file. Seems to requires manual
 			-- reloading via `:edit`.
 			if expand("%") == "theme.css" or expand("%") == "README.md" then
-				cmd.mkview(1)
+				cmd.mkview(2)
 				cmd.edit()
-				cmd.loadview(1)
+				cmd.loadview(2)
 			end
 			os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
 		end,
