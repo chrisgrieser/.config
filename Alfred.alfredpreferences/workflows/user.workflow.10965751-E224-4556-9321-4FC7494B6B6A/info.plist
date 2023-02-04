@@ -46,18 +46,7 @@
 			</dict>
 		</array>
 		<key>B910E148-74E6-4CEF-B938-F8C08E26AA8E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2CA6EA3D-1293-43FA-8BBC-B0ECDA2B2DEA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>EA56B776-2944-4A9F-805A-0BEA83ABEAB7</key>
 		<array>
 			<dict>
@@ -185,21 +174,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/PDF Annotation Extractor.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>2CA6EA3D-1293-43FA-8BBC-B0ECDA2B2DEA</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -277,20 +251,34 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>2CA6EA3D-1293-43FA-8BBC-B0ECDA2B2DEA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>440</real>
-			<key>ypos</key>
-			<real>315</real>
-		</dict>
 		<key>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</key>
 		<dict>
 			<key>colorindex</key>
@@ -349,10 +337,19 @@
 			<key>ypos</key>
 			<real>345</real>
 		</dict>
+		<key>E37A9BDD-290E-4BCD-9832-06488718A4BD</key>
+		<dict>
+			<key>xpos</key>
+			<real>465</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
 		<key>EA56B776-2944-4A9F-805A-0BEA83ABEAB7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>get path</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>

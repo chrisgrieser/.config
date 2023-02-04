@@ -28,6 +28,13 @@
 			},
 			{
 				"language": [
+					"css",
+					"scss"
+				],
+				"path": "./basic/css.json"
+			},
+			{
+				"language": [
 					"gitcommit"
 				],
 				"path": "./basic/conventional-commits.json"
