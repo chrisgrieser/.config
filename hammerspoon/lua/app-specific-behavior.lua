@@ -169,7 +169,7 @@ end):start()
 
 -- NEOVIM / NEOVIDE
 
--- Add dots when copypasting to from devtools
+-- Add dots when copypasting to from Obsidian devtools
 -- not using window focused, since not reliable
 local function clipboardFix()
 	if not app("neovide"):mainWindow():title():find("%.css$") then return end
@@ -178,7 +178,9 @@ local function clipboardFix()
 	if not clipb then return end
 
 	local hasSelectorAndClass = clipb:find(".%-.") and not (clipb:find("\n"))
-	if not hasSelectorAndClass then return end
+	local alreadyLeadingDot = clipb:find("^%.")
+	local isURL = clipb:find("^http")
+	if not hasSelectorAndClass or alreadyLeadingDot or isURL then return end
 
 	clipb = clipb:gsub("^", "."):gsub(" ", ".")
 	hs.pasteboard.setContents(clipb)

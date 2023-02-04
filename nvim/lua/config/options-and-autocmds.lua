@@ -94,8 +94,9 @@ opt.textwidth = 80
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
-opt.colorcolumn = {"+1"} -- relative to textwidth
 opt.signcolumn = "yes:1" -- = gutter
+local gmColumn = math.floor(fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
+opt.colorcolumn = { "+1", gmColumn } -- relative to textwidth
 
 -- status bar & cmdline
 opt.history = 400 -- reduce noise for command history search
@@ -125,7 +126,7 @@ autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 autocmd("FocusGained", { -- Update file when there are changes
 	callback = vim.cmd.checktime,
 	group = "autosave",
- })
+})
 
 -- emulate autochdir, which is deprecated
 augroup("autochdir", {})
