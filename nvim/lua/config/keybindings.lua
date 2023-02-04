@@ -132,7 +132,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "outdent" })
 keymap("n", "ü", "mzlblgueh~`z", { desc = "toggle capital/lowercase of word" })
 keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
 keymap("n", "~", "~h")
-keymap("n", "<C-ü>", qol.wordSwitch, { desc = "switch common words" })
+keymap("n", "<BS>", qol.wordSwitch, { desc = "switch common words" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
@@ -262,18 +262,13 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS & SPLITS
 
-keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " open buffers" })
-keymap("n", "<BS>", cmd.bprevious, { desc = ":bprevious" })
-
+-- for consistency with terminal buffers also <S-CR>
 local altalt = require("funcs.alt-alt")
+keymap("n", "<S-CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
 keymap("n", "<CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
 
--- for consistency with terminal buffers also <S-CR>
-keymap("n", "<S-CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
-
-if isGui() then
-	keymap({ "n", "x", "i" }, "<D-w>", altalt.betterClose, { desc = "close buffer/window/tab" })
-end
+keymap({ "n", "x", "i" }, "<D-w>", altalt.betterClose, { desc = "close buffer/window/tab" })
+keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " open buffers" })
 
 keymap("", "<C-w>v", ":vsplit #<CR>", { desc = "vertical split (alt file)" }) -- open the alternate file in the split instead of the current file
 keymap("", "<C-w>h", ":split #<CR>", { desc = "horizontal split (alt file)" })

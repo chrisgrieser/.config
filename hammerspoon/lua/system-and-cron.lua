@@ -167,7 +167,7 @@ wakeWatcher = caff
 
 		if eventType == caff.screensDidWake or eventType == caff.screensDidUnlock then
 			-- restartSketchybar()
-			hs.execute("sketchybar --set clock popup.drawing=false")
+			hs.execute("sketchybar --set clock popup.drawing=true")
 		end
 
 		-- INFO checks need to run after delay, since display number is not
