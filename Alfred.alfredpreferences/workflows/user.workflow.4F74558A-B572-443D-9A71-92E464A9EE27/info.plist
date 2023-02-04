@@ -253,7 +253,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>check-if-alacritty-runs.sh</string>
+				<string>check-if-alacritty-runs.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -331,9 +331,9 @@
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>1</integer>
+						<integer>4</integer>
 						<key>matchstring</key>
-						<string>already-running</string>
+						<string>not-running</string>
 						<key>outputlabel</key>
 						<string>start</string>
 						<key>uid</key>
@@ -543,7 +543,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>685</real>
 		</dict>
 		<key>222B531F-8CC2-406A-BEFD-1DB401A7880C</key>
 		<dict>
@@ -579,14 +579,14 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>685</real>
 		</dict>
 		<key>5D832920-C82B-4DD3-8853-68ABE3D3552A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>335</real>
+			<real>345</real>
 			<key>ypos</key>
 			<real>305</real>
 		</dict>
@@ -597,7 +597,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>560</real>
 		</dict>
 		<key>877D0FB8-C312-4433-A6EF-6CA2A683D76F</key>
 		<dict>
@@ -606,7 +606,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>175</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>770</real>
 		</dict>
 		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
 		<dict>
@@ -615,7 +615,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>810</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
@@ -631,7 +631,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>685</real>
 		</dict>
 		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<dict>
@@ -640,7 +640,7 @@ echo "$backup"</string>
 			<key>note</key>
 			<string>open Alacritty with config</string>
 			<key>xpos</key>
-			<real>400</real>
+			<real>420</real>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
@@ -651,7 +651,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>560</real>
 		</dict>
 		<key>FE91F5F4-DB81-40FB-95B9-20859076AB23</key>
 		<dict>
@@ -660,7 +660,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>805</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -27,12 +27,13 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 
 	-- auto-close media windows
 	elseif appName == "Twitter" and eventType == aw.deactivated then
-		app("Twitter"):selectMenuItem { "View", "Back" }
+		keystroke({ "command" }, "left", 1, app("Twitter")) -- go back
 
-		local wins = appObj:allWindows()
-		for _, win in pairs(wins) do
+		for _, win in pairs(appObj:allWindows()) do
 			if win:title():find("Media") then
-				app("Twitter"):selectMenuItem { "File", "Close" }
+				win:close()
+				-- HACK using keystroke, since closing window does not seem to work reliably
+				keystroke({ "command" }, "w", 1, app("Twitter")) -- close media window
 			end
 		end
 
