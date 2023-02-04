@@ -46,7 +46,18 @@
 			</dict>
 		</array>
 		<key>B910E148-74E6-4CEF-B938-F8C08E26AA8E</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>EA56B776-2944-4A9F-805A-0BEA83ABEAB7</key>
 		<array>
 			<dict>
@@ -183,7 +194,30 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-pdf-path.applescript</string>
+				<string>scripts/run-extraction.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/get-pdf-path.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -251,29 +285,6 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -311,7 +322,7 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>run PDF annotqtion extractor</string>
+			<string>run PDF annotation extractor</string>
 			<key>xpos</key>
 			<real>40</real>
 			<key>ypos</key>
@@ -339,10 +350,14 @@
 		</dict>
 		<key>E37A9BDD-290E-4BCD-9832-06488718A4BD</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>run extraction</string>
 			<key>xpos</key>
-			<real>465</real>
+			<real>440</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>315</real>
 		</dict>
 		<key>EA56B776-2944-4A9F-805A-0BEA83ABEAB7</key>
 		<dict>
