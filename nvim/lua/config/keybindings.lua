@@ -61,7 +61,7 @@ keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
-keymap({"n", "o"}, "-", "/", { desc = "Search" })
+keymap({ "n", "o" }, "-", "/", { desc = "Search" })
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 keymap("n", "+", "*", { desc = "Search word under cursor" })
 keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
@@ -361,15 +361,21 @@ keymap("n", "<leader>a", ":ChatGPT<CR>", { desc = "ﮧ ChatGPT Prompt" })
 
 -- File Switchers
 keymap("n", "go", function()
-	local isGitRepo = os.execute("test -e $(git rev-parse --show-toplevel)/.git") == 0 -- using test -e instead of -f to check for repo and submodule
+	local isGitRepo = os.execute("test -e $(git rev-parse --show-toplevel)/.git") == 0
+	local isSubModule = os.execute("test -f $(git rev-parse --show-toplevel)/.git") == 0
 	local cwd = expand("%:p:h")
-	local scope = "find_files"
-	if cwd:find("/my%-plugins/") or (isGitRepo and not cwd:find(vim.env.DOTFILE_FOLDER)) then
+	local scope
+	if isSubModule then
 		scope = "git_files"
 	elseif cwd:find("/nvim/") and not (cwd:find("/my%-plugins/")) then
 		scope = "find_files cwd=" .. fn.stdpath("config")
 	elseif cwd:find("/hammerspoon/") then
 		scope = "find_files cwd=" .. vim.env.DOTFILE_FOLDER .. "/hammerspoon/"
+	elseif isGitRepo then
+		-- selene: allow(if_same_then_else)
+		scope = "git_files"
+	else
+		scope = "find_files"
 	end
 	cmd("Telescope " .. scope)
 end, { desc = " Open File in repo/folder" })
