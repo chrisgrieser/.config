@@ -146,6 +146,7 @@ function themeSettings()
 				linkHighlight("NotifyINFOTitle", "@define")
 				linkHighlight("NotifyINFOBody", "@define")
 			end
+			linkHighlight("VirtColumn", "guifg=#b29b84")
 		end
 	end
 
