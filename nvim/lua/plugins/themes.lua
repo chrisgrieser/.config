@@ -103,10 +103,13 @@ function themeSettings()
 				setHighlight("lualine_a_" .. v, "gui=bold")
 			end
 			setHighlight("ScrollView", "guibg=#303d50")
+			setHighlight("ColorColumn", "guibg=#2e3742")
 
 		-- rose-pine
 		elseif theme == "rose-pine" then
 			linkHighlight("IndentBlanklineChar", "FloatBorder")
+			setHighlight("VirtColumn", "guifg=#deccba")
+			setHighlight("ColorColumn", "guibg=#eae2d8")
 			local blueHlgroups = {
 				"@keyword",
 				"@include",
@@ -146,7 +149,6 @@ function themeSettings()
 				linkHighlight("NotifyINFOTitle", "@define")
 				linkHighlight("NotifyINFOBody", "@define")
 			end
-			linkHighlight("VirtColumn", "guifg=#b29b84")
 		end
 	end
 
@@ -155,8 +157,8 @@ function themeSettings()
 		group = "themeChange",
 		callback = function()
 			-- HACK defer needed for some modifications to properly take effect
-			vim.defer_fn(themeModifications, 100) ---@diagnostic disable-line: param-type-mismatch
 			vim.defer_fn(customHighlights, 100) ---@diagnostic disable-line: param-type-mismatch
+			vim.defer_fn(themeModifications, 100) ---@diagnostic disable-line: param-type-mismatch
 		end,
 	})
 

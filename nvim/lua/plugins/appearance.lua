@@ -56,6 +56,7 @@ return {
 	},
 	{ -- nicer colorcolumn
 		"xiyaowong/virtcolumn.nvim",
+		enabled = false,
 		init = function() vim.g.virtcolumn_char = "║" end,
 		event = "VeryLazy",
 	},

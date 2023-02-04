@@ -27,10 +27,11 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 
 	-- auto-close media windows
 	elseif appName == "Twitter" and eventType == aw.deactivated then
+		app("Twitter"):selectMenuItem { "View", "Back" }
+
 		local wins = appObj:allWindows()
 		for _, win in pairs(wins) do
 			if win:title():find("Media") then
-				app("Twitter"):selectMenuItem { "File", "Close" }
 				app("Twitter"):selectMenuItem { "File", "Close" }
 			end
 		end
