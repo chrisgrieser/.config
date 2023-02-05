@@ -79,8 +79,8 @@ map("X", ";dh"); // delete bookmark
 map("m", "<Alt-m>"); // mute tab
 map("M", ";pm"); // markdown preview
 map("gi", "I"); // enter insert field
-unmap("a"); // open link (remapped)
 map("a", "p"); // disable for one key
+unmap("a"); // open link (remapped)
 map(",", ";e"); // Settings
 
 // toggle fullscreen
