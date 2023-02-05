@@ -75,7 +75,7 @@ keymap( { "x", "o" }, "gG", function() require("various-textobjs").entireBuffer(
 -- r: [r]est of paragraph/indentation (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
 keymap( "o", "r", function() require("various-textobjs").restOfParagraph() end, { desc = "rest of paragraph textobj" })
-keymap({"o", "x"}, "R", function() require("various-textobjs").restOfIndentation() end, { desc = "rest of indentation textobj" })
+keymap("o", "R", function() require("various-textobjs").restOfIndentation() end, { desc = "rest of indentation textobj" })
 
 -- iv/av: value textobj
 keymap({ "x", "o" }, "iv", function() require("various-textobjs").value(true) end, { desc = "inner value textobj" })

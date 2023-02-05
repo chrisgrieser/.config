@@ -63,7 +63,8 @@ end
 local function pagedownAction()
 	if #hs.screen.allScreens() > 1 then
 		moveCurWinToOtherDisplay()
-	elseif appIsRunning("Twitter") then
+	-- disable in Finder due to conflict with finder vim mode
+	elseif appIsRunning("Twitter") and not frontAppName() == "Finder" then 
 		keystroke({}, "down", 1, app("Twitter")) -- tweet down
 	end
 end
@@ -71,7 +72,7 @@ end
 local function pageupAction()
 	if #hs.screen.allScreens() > 1 then
 		moveCurWinToOtherDisplay()
-	elseif appIsRunning("Twitter") then
+	elseif appIsRunning("Twitter") and not frontAppName() == "Finder" then
 		keystroke({}, "up", 1, app("Twitter")) -- tweet up
 	end
 end
