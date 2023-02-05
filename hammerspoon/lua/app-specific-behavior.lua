@@ -130,30 +130,6 @@ wf_browser_all = wf.new("Brave Browser")
 
 --------------------------------------------------------------------------------
 
--- MIMESTREAM
--- split when second window is opened
--- change sizing back, when back to one window
-wf_mimestream = wf.new("Mimestream")
-	:setOverrideFilter({
-		allowRoles = "AXStandardWindow",
-		rejectTitles = {
-			"General",
-			"Accounts",
-			"Sidebar & List",
-			"Viewing",
-			"Composing",
-			"Templates",
-			"Signatures",
-			"Labs",
-			"Updating Mimestream",
-			"Software Update",
-		},
-	})
-	:subscribe(wf.windowCreated, function() autoTile(wf_mimestream) end)
-	:subscribe(wf.windowDestroyed, function() autoTile(wf_mimestream) end)
-
---------------------------------------------------------------------------------
-
 -- IINA: Full Screen when on projector
 iinaAppLauncher = aw.new(function(appName, eventType, appObject)
 	if eventType == aw.launched and appName == "IINA" and isProjector() then
@@ -429,24 +405,5 @@ discordAppWatcher = aw.new(function(appName, eventType)
 			clipb = clipb:sub(2, -2) -- remove first & last character
 			hs.pasteboard.setContents(clipb)
 		end
-	end
-end):start()
-
---------------------------------------------------------------------------------
-
--- SHOTTR
--- Auto-select Arrow-Tool on start
-wf_shottr = wf.new("Shottr"):subscribe(wf.windowCreated, function(newWindow)
-	if newWindow:title() == "Preferences" then return end
-	runWithDelays(0.1, function() keystroke({}, "a") end)
-end)
-
---------------------------------------------------------------------------------
-
--- WARP
--- since window size saving & session saving is not separated
-warpWatcher = aw.new(function(appName, eventType)
-	if appName == "Warp" and eventType == aw.launched then
-		keystroke({ "cmd" }, "k") -- clear
 	end
 end):start()
