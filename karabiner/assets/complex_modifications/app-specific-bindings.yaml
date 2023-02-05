@@ -159,10 +159,10 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.brave\.Browser] # no $ to also work in PWAs
-  - description: "\U0001F170️\U0001F3DE YouTube: ⌘+P → Picture-in-Picture Mode"
+  - description: "YouTube: ⇧⌘+P → Picture-in-Picture Mode"
     manipulators:
       - type: basic
-        from: {key_code: p, modifiers: {mandatory: [command]}}
+        from: {key_code: p, modifiers: {mandatory: [shift, command]}}
         to:
           - software_function: {set_mouse_cursor_position: {x: 50%, y: 50%, screen: 0}}
           - pointing_button: button2
