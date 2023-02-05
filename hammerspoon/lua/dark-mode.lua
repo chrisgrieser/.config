@@ -1,20 +1,7 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 
----log ambient brightness values, so I can automate them later
----@param trigger string description of the situation the log was triggered,
----e.g. "manual" or "hourly"
-function logBrightness(trigger)
-	if not isIMacAtHome() then return end
-	local mode = isDarkMode() and "dark " or "light"
-	local time = os.date():sub(12, 16)
-	local brightness = math.floor(hs.brightness.ambient())
-	local out = time .. " " .. mode .. " " .. trigger .." ".. tostring(brightness) .. "\n"
-	appendToFile("ambient-brightness.log", out)
-end
-hs.timer.doEvery(3600, function() logBrightness("hourly") end):start()
-
---------------------------------------------------------------------------------
+uriScheme("ambient-brightness")
 
 -- done manually to include app-specific toggling for:
 -- - Brave Browser (fixing Dark Reader Bug)
@@ -84,7 +71,6 @@ function toggleDarkMode()
 
 	app(prevApp):activate()
 	holeCover() -- redraw hole-covers in proper color
-	logBrightness("toggle")
 end
 
 ---@return boolean
