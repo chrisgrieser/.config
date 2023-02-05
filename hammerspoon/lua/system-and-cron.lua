@@ -5,14 +5,15 @@ require("lua.layouts")
 local caff = hs.caffeinate.watcher
 local timer = hs.timer.doAt
 
-local function restartSketchybar()
-	hs.execute(
-		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar"
-	)
-	runWithDelays(0.5, function ()
-		hs.execute("osascript -l JavaScript ./helpers/dismiss-notification.js &>/dev/null;")
-	end)
-end
+-- local function restartSketchybar()
+-- 	hs.execute(
+-- 		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; brew services restart sketchybar"
+-- 	)
+-- 	runWithDelays(
+-- 		0.5,
+-- 		function() hs.execute("osascript -l JavaScript ./helpers/dismiss-notification.js &>/dev/null;") end
+-- 	)
+-- end
 --------------------------------------------------------------------------------
 
 -- CONFIG
@@ -151,47 +152,40 @@ sleepWatcher = caff
 	end)
 	:start()
 
-
-
-
-wakeWatcher = caff
-	.new(function(eventType)
-		if eventType ~= caff.screensDidWake and eventType ~= caff.systemDidWake and eventType ~= caff.screensDidWake and eventType ~= caff.screensDidUnlock then return end
-
+officeWakeWatcher = caff.new(function(event)
+	if isAtOffice() and event == caff.screensDidWake or event == caff.systemDidWake then
 		twitterScrollUp()
-
-		if isAtOffice() then
-			syncAllGitRepos()
-			workLayout()
-			local toDark = betweenTime(7, 18)
-			setDarkmode(toDark)
-			return
-		end
-
-		if eventType == caff.screensDidWake or eventType == caff.screensDidUnlock then
-			-- restartSketchybar()
-			hs.execute("sketchybar --set clock popup.drawing=true")
-		end
-
-		-- INFO checks need to run after delay, since display number is not
-		-- immediately picked up after wake
-		runWithDelays(1, function()
-			if isProjector() then
-				setDarkmode(true)
-				movieModeLayout()
-			else
-				if eventType ~= caff.systemDidWake then syncAllGitRepos("notify") end
-				workLayout()
-				local toDark = hs.brightness.ambient() < 100
-				setDarkmode(toDark)
-			end
-		end)
-	end)
-	:start()
+		syncAllGitRepos()
+		workLayout()
+		local toDark = betweenTime(7, 18)
+		setDarkmode(toDark)
+		return
+	end
+end)
 
 --------------------------------------------------------------------------------
-
 -- CRONJOBS AT HOME
+
+homeWakeWatcher = caff
+	.new(function(event)
+		if not (isAtOffice()) and event == caff.screensDidWake or event == caff.systemDidWake then
+			hs.execute("sketchybar --set clock popup.drawing=true")
+
+			-- INFO checks need to run after delay, since display number is not
+			-- immediately picked up after wake
+			runWithDelays(1, function()
+				if isProjector() then
+					setDarkmode(true)
+					movieModeLayout()
+				else
+					workLayout()
+					local toDark = hs.brightness.ambient() < 100
+					setDarkmode(toDark)
+				end
+			end)
+		end
+	end)
+	:start()
 
 -- Drafts to do if trackpadBattery is low
 local function trackpadBatteryCheck()
