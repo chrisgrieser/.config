@@ -129,7 +129,7 @@ return {
 					builtin = {
 						border = borderStyle,
 						relative = "cursor",
-						max_width = 70,
+						max_width = 80,
 						min_width = 20,
 						max_height = 15,
 						min_height = 4,

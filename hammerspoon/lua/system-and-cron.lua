@@ -145,11 +145,14 @@ end)
 
 --------------------------------------------------------------------------------
 
-shutDownWatcher = caff
+sleepWatcher = caff
 	.new(function(eventType)
 		if eventType == caff.screensDidSleep then syncAllGitRepos() end
 	end)
 	:start()
+
+
+
 
 wakeWatcher = caff
 	.new(function(eventType)
@@ -179,7 +182,6 @@ wakeWatcher = caff
 			else
 				if eventType ~= caff.systemDidWake then syncAllGitRepos("notify") end
 				workLayout()
-				logBrightness("wakeup")
 				local toDark = hs.brightness.ambient() < 100
 				setDarkmode(toDark)
 			end
