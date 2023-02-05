@@ -43,7 +43,7 @@ rules:
     manipulators:
       # non-apple keyboard
       - type: basic
-        from: {key_code: left_control}
+        from: { key_code: left_control }
         to:
           - key_code: left_control
         parameters:
@@ -55,9 +55,9 @@ rules:
           - key_code: left_control
           - *activate-leader
           - *set-notice
-      - description: '2x Leader: F19'
+      - description: "2x Leader: F19"
         type: basic
-        from: {key_code: left_control}
+        from: { key_code: left_control }
         to:
           - key_code: left_control
         conditions:
@@ -74,7 +74,7 @@ rules:
       # Apple Keyboard
       - type: basic
         description: Apple Keyboard
-        from: {key_code: fn}
+        from: { key_code: fn }
         to:
           - key_code: fn
         conditions:
@@ -86,9 +86,9 @@ rules:
           - key_code: fn
           - *activate-leader
           - *set-notice
-      - description: '2x Leader: F19'
+      - description: "2x Leader: F19"
         type: basic
-        from: {key_code: fn}
+        from: { key_code: fn }
         to:
           - key_code: fn
         conditions:
@@ -99,27 +99,40 @@ rules:
           - *deactivate-leader
           - *remove-notice
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "\U0001F53A App Switcher Actions"
+  - description: "App Switcher Actions"
     manipulators:
       # Cancel (Esc/Hyper)
       - type: basic
-        description: 'Hyper (Esc): Leader Cancel'
-        from: {key_code: caps_lock}
+        description: "Hyper (Esc): Leader Cancel"
+        from: { key_code: caps_lock }
         conditions: [*leader-active]
         to_if_alone:
           - *deactivate-leader
           - *remove-notice
       # [C]alendar: BusyCal
       - type: basic
-        from: {key_code: c}
+        from: { key_code: c }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'BusyCal'
           - *deactivate-leader
           - *remove-notice
+      # [ö] (looks like tweetbot): twitter
+      - type: basic
+        from: { key_code: semicolon } # ö on German keyboard
+        conditions:
+          - type: variable_if
+            name: LEADER_ACTIVE
+            value: true
+          - type: input_source_if
+            input_sources: [{ language: ^de$ }]
+        to:
+          - shell_command: open -a 'Twitter'
+          - *deactivate-leader
+          - *remove-notice
       # [,]: System Preferences
       - type: basic
-        from: {key_code: comma}
+        from: { key_code: comma }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'System Preferences'
@@ -127,7 +140,7 @@ rules:
           - *remove-notice
       # [O]bsidian
       - type: basic
-        from: {key_code: o}
+        from: { key_code: o }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Obsidian'
@@ -135,7 +148,7 @@ rules:
           - *remove-notice
       # [D]iscord
       - type: basic
-        from: {key_code: d}
+        from: { key_code: d }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Discord'
@@ -144,7 +157,7 @@ rules:
       # [Z]oom
       - type: basic
         # switched y and z due to German Keyboard
-        from: {key_code: "y"}
+        from: { key_code: "y" }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'zoom.us'
@@ -152,7 +165,7 @@ rules:
           - *remove-notice
       # [E]ditor: Neovide
       - type: basic
-        from: {key_code: e}
+        from: { key_code: e }
         conditions: [*leader-active]
         to:
           - shell_command: osascript -e 'tell application "Neovide" to activate'
@@ -160,7 +173,7 @@ rules:
           - *remove-notice
       # [j]: Drafts (mnemonic: Jot down)
       - type: basic
-        from: {key_code: j}
+        from: { key_code: j }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Drafts'
@@ -168,7 +181,7 @@ rules:
           - *remove-notice
       # [S]lack
       - type: basic
-        from: {key_code: s}
+        from: { key_code: s }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Slack'
@@ -176,7 +189,7 @@ rules:
           - *remove-notice
       # Script Editor [Q]
       - type: basic
-        from: {key_code: q}
+        from: { key_code: q }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Script Editor'
@@ -184,7 +197,7 @@ rules:
           - *remove-notice
       # [M]imestream
       - type: basic
-        from: {key_code: m}
+        from: { key_code: m }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Mimestream'
@@ -192,7 +205,7 @@ rules:
           - *remove-notice
       # Brave [b]rowser
       - type: basic
-        from: {key_code: b}
+        from: { key_code: b }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Brave Browser'
@@ -200,18 +213,18 @@ rules:
           - *remove-notice
       # Brave [B]rowser: re-open tab (Shift)
       - type: basic
-        from: {key_code: b, modifiers: {mandatory: [shift]}}
+        from: { key_code: b, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
           - shell_command: osascript -e 'tell application "Brave Browser" to activate'
-          - {key_code: vk_none, hold_down_milliseconds: 250}
+          - { key_code: vk_none, hold_down_milliseconds: 250 }
           - key_code: t
             modifiers: [command, shift]
           - *deactivate-leader
           - *remove-notice
       # [L]: Finder (mnemonic: File [L]ocation)
       - type: basic
-        from: {key_code: l}
+        from: { key_code: l }
         conditions: [*leader-active]
         to:
           - shell_command: open -a "Finder"
@@ -219,7 +232,7 @@ rules:
           - *remove-notice
       # [H]ammerspoon
       - type: basic
-        from: {key_code: h}
+        from: { key_code: h }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Hammerspoon'
@@ -227,7 +240,7 @@ rules:
           - *remove-notice
       # [k]arabiner-EventViewer
       - type: basic
-        from: {key_code: k}
+        from: { key_code: k }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Karabiner-EventViewer'
@@ -235,7 +248,7 @@ rules:
           - *remove-notice
       # [K]arabiner-Elements
       - type: basic
-        from: {key_code: k, modifiers: {mandatory: [shift]}}
+        from: { key_code: k, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Karabiner-Elements'
@@ -243,7 +256,7 @@ rules:
           - *remove-notice
       # [Y]ouTube
       - type: basic
-        from: {key_code: z} # switched y and z due to German Keyboard
+        from: { key_code: z } # switched y and z due to German Keyboard
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'YouTube' || open 'https://www.youtube.com/'
@@ -251,7 +264,7 @@ rules:
           - *remove-notice
       # [A]lfred Preferences
       - type: basic
-        from: {key_code: a}
+        from: { key_code: a }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Alfred Preferences'
@@ -259,7 +272,7 @@ rules:
           - *remove-notice
       # [I]noreader
       - type: basic
-        from: {key_code: i}
+        from: { key_code: i }
         conditions: [*leader-active]
         to:
           - shell_command: open 'https://www.inoreader.com/'
@@ -267,7 +280,7 @@ rules:
           - *remove-notice
       # [P]DF Reader: Highlights
       - type: basic
-        from: {key_code: p}
+        from: { key_code: p }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Highlights'
@@ -275,7 +288,7 @@ rules:
           - *remove-notice
       # [G]oogle Docs
       - type: basic
-        from: {key_code: g}
+        from: { key_code: g }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Docs' || open 'https://docs.google.com/'
@@ -283,7 +296,7 @@ rules:
           - *remove-notice
       # [V]ideo: IINA
       - type: basic
-        from: {key_code: v}
+        from: { key_code: v }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'IINA'
@@ -291,7 +304,7 @@ rules:
           - *remove-notice
       # [W]hatsApp
       - type: basic
-        from: {key_code: w}
+        from: { key_code: w }
         conditions: [*leader-active]
         to:
           - shell_command: open 'https://web.whatsapp.com/'
@@ -299,7 +312,7 @@ rules:
           - *remove-notice
       # [T]elegram
       - type: basic
-        from: {key_code: t}
+        from: { key_code: t }
         conditions: [*leader-active]
         to:
           - shell_command: open 'https://web.telegram.org/z/'
@@ -307,7 +320,7 @@ rules:
           - *remove-notice
       # [F]acebook
       - type: basic
-        from: {key_code: f}
+        from: { key_code: f }
         conditions: [*leader-active]
         to:
           - shell_command: open 'https://www.messenger.com/'
@@ -315,7 +328,7 @@ rules:
           - *remove-notice
       # [R]eddit: neovim/vim
       - type: basic
-        from: {key_code: r}
+        from: { key_code: r }
         conditions: [*leader-active]
         to:
           - shell_command: |
@@ -336,20 +349,20 @@ rules:
           - *remove-notice
       # [?] (w/o shift, German keyboard) man page
       - type: basic
-        from: {key_code: hyphen}
+        from: { key_code: hyphen }
         conditions:
           - type: variable_if
             name: LEADER_ACTIVE
             value: true
           - type: input_source_if
-            input_sources: [{language: ^de$}]
+            input_sources: [{ language: ^de$ }]
         to:
           - shell_command: open -g 'hammerspoon://focus-help'
           - *deactivate-leader
           - *remove-notice
       # [esc]: System Monitor (btop)
       - type: basic
-        from: {key_code: escape}
+        from: { key_code: escape }
         conditions: [*leader-active]
         to:
           - shell_command: open -g 'hammerspoon://focus-btop'
