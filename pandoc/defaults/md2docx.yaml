@@ -1,5 +1,6 @@
 # https://pandoc.org/MANUAL.html#defaults-files
 #───────────────────────────────────────────────────────────────────────────────
+# INFO $USERDATA set via pandoc option `--data-dir` to this directory
 
 # General
 verbosity: WARNING
@@ -9,21 +10,21 @@ toc-depth: 3
 resource-path:
   - .
   - ./attachments
-  - ${HOME}/main-vault/ # Vault path for images
+  - ${HOME}/main-vault/ # Vault path for images in vault
 
 # Word-Writer
 writer: docx+native_numbering
-reference-doc: ${HOME}/.config/pandoc/reference-docs/academic-paper.docx
+reference-doc: ${USERDATA}/reference-docs/academic-paper.docx
 
-# Markdown-Reader + enable some extensions
+# Markdown-Reader
 reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
 strip-comments: true
 number-sections: true
 
 # Academic
 citeproc: true
-bibliography: ${HOME}/.config/pandoc/main-bibliography.bib
-csl: apa-6th-edition  # does not need extension
+bibliography: ${USERDATA}/main-bibliography.bib
 
-# needs to be set in metadata-file, so it is overwritten by metadata in the document yaml
+# needs to be set in metadata-file so it is overwritten by metadata in the
+# document yaml. (setting them here makes them override the document yaml.)
 metadata-files: [academic.yaml]

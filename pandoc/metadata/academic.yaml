@@ -5,7 +5,7 @@
 # subdirectory of the user data directory (see --data-dir)."
 # ---------------------------------------------
 
-csl: apa-6th-edition  # does not need extension
+csl: apa-6th-edition # does not need extension
 lang: en-US
 
 title: Untitled
