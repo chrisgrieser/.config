@@ -1,7 +1,11 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 
-uriScheme("ambient-brightness")
+-- notify with ambient brightness for Alfred
+uriScheme("ambient-brightness", function ()
+	local brightness = math.floor(hs.brightness.ambient())
+	notify("Brightness: ", tostring(brightness))	
+end)
 
 -- done manually to include app-specific toggling for:
 -- - Brave Browser (fixing Dark Reader Bug)
@@ -25,8 +29,8 @@ function toggleDarkMode()
 		sketchyfont = "0xffffffff"
 	end
 
-	-- neovim
-	hs.execute([[echo "setThemeMode(']] .. toMode .. [[')" > /tmp/nvim-automation]]) -- requires setup in ~/.config/nvim/lua/file-watcher.lua
+	-- neovim (requires setup in ~/.config/nvim/lua/file-watcher.lua)
+	hs.execute([[echo "setThemeMode(']] .. toMode .. [[')" > /tmp/nvim-automation]]) 
 
 	-- hammerspoon console
 	setConsoleColors(toMode)
