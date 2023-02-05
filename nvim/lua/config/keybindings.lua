@@ -318,10 +318,15 @@ end
 keymap({ "i", "s" }, "<D-j>", function()
 	if require("luasnip").jumpable(1) then
 		require("luasnip").jump(1)
+		-- if after jump at a choice, trigger choice selection
+		if require("luasnip").choice_active() then
+			require("luasnip.extras.select_choice")()
+			return "<Esc>" -- HACK to not end up in insert mode (due to dressing)
+		end
 	else
 		vim.notify("No Jump available.", logWarn)
 	end
-end, { desc = "LuaSnip: Jump" })
+end, { desc = "LuaSnip: Jump & Choice" })
 
 keymap({ "i", "s" }, "<D-S-j>", function()
 	if require("luasnip").jumpable(-1) then
@@ -330,17 +335,6 @@ keymap({ "i", "s" }, "<D-S-j>", function()
 		vim.notify("No Jump back available.", logWarn)
 	end
 end, { desc = "LuaSnip: Jump Back" })
-
-keymap({ "i", "s" }, "<D-k>", function()
-	if require("luasnip").choice_active() then
-		require("luasnip.extras.select_choice")()
-		return "<Esc>" -- HACK so we do not end up in insert mode for the selection
-	elseif bo.filetype == "markdown" then
-		return "<D-k>" -- md link creation
-	else
-		vim.notify("No Choice available.", logWarn)
-	end
-end, { desc = "LuaSnip: Select Choice", expr = true, remap = true })
 
 keymap("n", "<leader>ls", function() cmd.Telescope("luasnip") end, { desc = " LuaSnip: Snippets" })
 
