@@ -135,9 +135,6 @@ return {
 						min_height = 4,
 						win_options = { winblend = 0 },
 					},
-					get_config = function(opts)
-						if opts.kind == "github_issue" then return { backend = "telescope" } end
-					end,
 				},
 			}
 		end,

@@ -15,13 +15,24 @@ function M.issueSearch()
 		return
 	end
 	repo = repo:match(":.*%."):sub(2, -2)
+	-- fix for Shimmering Focus theme not being in it's repo
+	if repo == "chrisgrieser/main-vault" then repo = "chrisgrieser/shimmering-focus" end
 
 	-- TODO figure out how to make a proper http request in nvim
 	local max_results = 20
 	local rawJSON = fn.system(
-		[[curl -sL "https://api.github.com/repos/]] .. repo .. [[/issues?per_page=]]..max_results..[[&state=all"]]
+		[[curl -sL "https://api.github.com/repos/]]
+			.. repo
+			.. [[/issues?per_page=]]
+			.. max_results
+			.. [[&state=open"]]
 	)
 	local issues = vim.json.decode(rawJSON)
+
+	if #issues == 0 then
+		vim.notify("There are no issues or PRs for this repo.", logWarn)
+		return
+	end
 
 	local function formatter(issue)
 		local isPR = issue.pull_request ~= nil
@@ -45,18 +56,22 @@ function M.issueSearch()
 		return icon .. "#" .. issue.number .. " " .. issue.title
 	end
 
-	vim.ui.select(issues, { prompt = "Select Issue:", kind = "github_issue", format_item = formatter }, function(choice)
-		if not choice then return end
-		fn.system("open '" .. choice.html_url .. "'")
-	end)
+	vim.ui.select(
+		issues,
+		{ prompt = "Select Issue:", kind = "github_issue", format_item = formatter },
+		function(choice)
+			if not choice then return end
+			fn.system("open '" .. choice.html_url .. "'")
+		end
+	)
 end
 
 ---@param commitMsg string
 ---@param gitShellOpts table
 local function shimmeringFocusBuild(commitMsg, gitShellOpts)
 	vim.notify(' Building theme…\n"' .. commitMsg .. '"')
-	local buildscriptLocation = vim.env.ICLOUD .."/Repos/shimmering-focus/build.sh"
-	fn.jobstart('zsh "'..buildscriptLocation..'" "'.. commitMsg .. '"', gitShellOpts)
+	local buildscriptLocation = vim.env.ICLOUD .. "/Repos/shimmering-focus/build.sh"
+	fn.jobstart('zsh "' .. buildscriptLocation .. '" "' .. commitMsg .. '"', gitShellOpts)
 end
 
 ---@param prefillMsg? string
@@ -89,7 +104,7 @@ function M.addCommitPush(prefillMsg)
 			end
 			vim.notify(out, logLevel)
 
-			-- HACK for stylelint on build script / panvimdoc writing the current file, 
+			-- HACK for stylelint on build script / panvimdoc writing the current file,
 			-- and autoread failing, preventing to quit the file. Seems to requires manual
 			-- reloading via `:edit`.
 			if expand("%") == "theme.css" or expand("%") == "README.md" then
@@ -101,40 +116,37 @@ function M.addCommitPush(prefillMsg)
 		end,
 	}
 
-	vim.ui.input(
-		{ prompt = "Commit Message", default = prefillMsg },
-		function(commitMsg)
-			if not commitMsg then
-				return
-			elseif #commitMsg > 50 then
-				vim.notify("Commit Message too long.", logWarn)
-				M.addCommitPush(commitMsg:sub(1, 50))
-				return
-			elseif commitMsg == "" then
-				commitMsg = "chore"
-			end
+	vim.ui.input({ prompt = "Commit Message", default = prefillMsg }, function(commitMsg)
+		if not commitMsg then
+			return
+		elseif #commitMsg > 50 then
+			vim.notify("Commit Message too long.", logWarn)
+			M.addCommitPush(commitMsg:sub(1, 50))
+			return
+		elseif commitMsg == "" then
+			commitMsg = "chore"
+		end
 			-- stylua: ignore
 			local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
-			local firstWord = commitMsg:match("^%w+")
-			if not vim.tbl_contains(cc, firstWord) then
-				vim.notify("Not using a Conventional Commits keyword.", logWarn)
-				M.addCommitPush(commitMsg)
-				return
-			end
-
-			-- Shimmering Focus specific actions instead
-			if expand("%") == "theme.css" then
-				shimmeringFocusBuild(commitMsg, gitShellOpts)
-				return
-			end
-
-			vim.notify(' git add-commit-push\n"' .. commitMsg .. '"')
-			fn.jobstart(
-				"git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push",
-				gitShellOpts
-			)
+		local firstWord = commitMsg:match("^%w+")
+		if not vim.tbl_contains(cc, firstWord) then
+			vim.notify("Not using a Conventional Commits keyword.", logWarn)
+			M.addCommitPush(commitMsg)
+			return
 		end
-	)
+
+		-- Shimmering Focus specific actions instead
+		if expand("%") == "theme.css" then
+			shimmeringFocusBuild(commitMsg, gitShellOpts)
+			return
+		end
+
+		vim.notify(' git add-commit-push\n"' .. commitMsg .. '"')
+		fn.jobstart(
+			"git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push",
+			gitShellOpts
+		)
+	end)
 end
 
 ---normal mode: link to file
