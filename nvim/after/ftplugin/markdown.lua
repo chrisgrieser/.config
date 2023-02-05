@@ -31,8 +31,8 @@ keymap("x", "<D-s>", ":!pandoc -t commonmark_x<CR><CR>", { desc = "format md tab
 --------------------------------------------------------------------------------
 
 -- Heading jump to next/prev heading
-keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], {desc = "next heading", buffer = true})
-keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], {desc = "previous heading", buffer = true})
+keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], { desc = "next heading", buffer = true })
+keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], { desc = "previous heading", buffer = true })
 
 --KEYBINDINGS WITH THE GUI
 if isGui() then
