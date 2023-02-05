@@ -42,6 +42,7 @@ return {
 		dev = true,
 		lazy = true,
 		dependencies = "stevearc/dressing.nvim",
+		init = function () vim.g.genghis_disable_commands = true end,
 	},
 	{
 		"folke/which-key.nvim",
