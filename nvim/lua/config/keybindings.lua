@@ -365,10 +365,14 @@ keymap("n", "go", function()
 		scope = "find_files cwd=" .. fn.stdpath("config")
 	elseif cwd:find("/hammerspoon/") then
 		scope = "find_files cwd=" .. vim.env.DOTFILE_FOLDER .. "/hammerspoon/"
+	elseif cwd:find(vim.env.DOTFILE_FOLDER, 1, true) then
+		-- selene: allow(if_same_then_else)
+		scope = "find_files"
 	elseif isGitRepo then
 		-- selene: allow(if_same_then_else)
 		scope = "git_files"
 	else
+		-- selene: allow(if_same_then_else)
 		scope = "find_files"
 	end
 	cmd("Telescope " .. scope)
