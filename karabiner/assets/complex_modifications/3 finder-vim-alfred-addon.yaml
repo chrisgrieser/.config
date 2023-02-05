@@ -1,3 +1,4 @@
+# INFO has to come before finder-vim-mode.yaml itself
 rules:
   - description: "Addons for Finder-Vim-Mode"
     manipulators:
