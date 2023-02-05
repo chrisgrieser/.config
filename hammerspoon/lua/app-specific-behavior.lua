@@ -177,11 +177,8 @@ local function clipboardFix()
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
 
-	local hasSelectorAndClass = clipb:find(".%-.") and not (clipb:find("\n"))
-	local alreadyLeadingDot = clipb:find("^%.")
-	local isDataValue = clipb:find("[:=]")
-	local isURL = clipb:find("^http")
-	if not hasSelectorAndClass or alreadyLeadingDot or isURL or isDataValue then return end
+	local hasSelectorAndClass = clipb:find(".%-.") and not (clipb:find("[\n.=]"))
+	if not hasSelectorAndClass then return end
 
 	clipb = clipb:gsub("^", "."):gsub(" ", ".")
 	hs.pasteboard.setContents(clipb)
