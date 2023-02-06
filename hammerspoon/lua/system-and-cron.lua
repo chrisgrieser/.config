@@ -153,7 +153,7 @@ sleepWatcher = caff
 	:start()
 
 officeWakeWatcher = caff.new(function(event)
-	if isAtOffice() and event == caff.screensDidWake or event == caff.systemDidWake then
+	if isAtOffice() and (event == caff.screensDidWake or event == caff.systemDidWake) then
 		twitterScrollUp()
 		syncAllGitRepos()
 		workLayout()
@@ -168,7 +168,8 @@ end)
 
 homeWakeWatcher = caff
 	.new(function(event)
-		if not (isAtOffice()) and event == caff.screensDidWake or event == caff.systemDidWake then
+		if not (isAtOffice()) and (event == caff.screensDidWake or event == caff.systemDidWake) then
+			twitterScrollUp()
 			hs.execute("sketchybar --set clock popup.drawing=true")
 
 			-- INFO checks need to run after delay, since display number is not
@@ -183,6 +184,7 @@ homeWakeWatcher = caff
 					setDarkmode(toDark)
 				end
 			end)
+			if event == caff.systemDidWake then syncAllGitRepos("notify") end
 		end
 	end)
 	:start()
