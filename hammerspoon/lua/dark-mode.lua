@@ -3,6 +3,7 @@ require("lua.utils")
 
 -- notify with ambient brightness for Alfred
 uriScheme("ambient-brightness", function ()
+	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 	local brightness = math.floor(hs.brightness.ambient())
 	notify("Brightness: ", tostring(brightness))	
 end)
