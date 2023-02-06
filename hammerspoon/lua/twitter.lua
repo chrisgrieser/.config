@@ -69,8 +69,17 @@ local function homeAction()
 	twitterScrollUp()
 end
 
+local function endAction()
+	if appIsRunning("zoom.us") then
+		alert("📹") -- toggle video
+		keystroke({ "shift", "command" }, "V", 1, app("zoom.us"))
+		return
+	end
+end
+
 -- Hotkeys
 hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
 hotkey(hyper, "pagedown", moveCurWinToOtherDisplay)
 hotkey(hyper, "pageup", moveCurWinToOtherDisplay)
 hotkey({}, "home", homeAction)
+hotkey({}, "end", endAction)
