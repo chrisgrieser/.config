@@ -3,6 +3,7 @@ Requirement
 type
 allow
 unzip
+CSS
 beta
 BRAT
 PDF
