@@ -42,9 +42,9 @@ alias t='command exa --tree -L4 --icons --git-ignore'
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 
 #───────────────────────────────────────────────────────────────────────────────
+# https://www.thorsten-hans.com/5-types-of-zsh-aliases
 
 # GLOBAL ALIAS (to be used at the end, mostly)
-# https://www.thorsten-hans.com/5-types-of-zsh-aliases
 alias -g H="--help"
 alias -g G="| grep --ignore-case --color"
 alias -g B="| bat"
