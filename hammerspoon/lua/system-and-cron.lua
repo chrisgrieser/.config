@@ -181,6 +181,7 @@ homeWakeWatcher = caff
 				else
 					workLayout()
 					local toDark = hs.brightness.ambient() < 100
+					notify("toDark:", toDark)
 					setDarkmode(toDark)
 				end
 			end)
