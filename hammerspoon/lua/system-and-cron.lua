@@ -180,7 +180,7 @@ homeWakeWatcher = caff
 					movieModeLayout()
 				else
 					workLayout()
-					local toDark = hs.brightness.ambient() < 100
+					local toDark = hs.brightness.ambient() < 90
 					notify("toDark:", toDark)
 					setDarkmode(toDark)
 				end
