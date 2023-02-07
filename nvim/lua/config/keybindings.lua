@@ -43,14 +43,9 @@ keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "K", "2k")
 
 -- e,w,b make small movements, treating _-. as word boundaries
-for _, key in ipairs { "e", "w", "b" } do
-	keymap({ "n", "x" }, key, function()
-		local iskeywBefore = opt.iskeyword:get()
-		vim.opt.iskeyword:remove { "_", "-", "." }
-		normal(key)
-		opt.iskeyword = iskeywBefore
-	end, { desc = "small " .. key })
-end
+keymap("", "w", "<Plug>CamelCaseMotion_w", { desc = "camelCase w" })
+keymap("", "e", "<Plug>CamelCaseMotion_e", { desc = "camelCase e" })
+keymap("", "b", "<Plug>CamelCaseMotion_b", { desc = "camelCase b" })
 
 -- add overscroll
 keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)" })
@@ -430,10 +425,10 @@ end, { desc = " File History (Diffview)" })
 --------------------------------------------------------------------------------
 
 -- Option Toggling
-keymap("n", "<leader>os", ":set spell!<CR>", { desc = "  toggle spelling" })
-keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = "  toggle relative line numbers" })
-keymap("n", "<leader>on", ":set number!<CR>", { desc = "  toggle line numbers" })
-keymap("n", "<leader>ow", qol.toggleWrap, { desc = "  toggle wrap" })
+keymap("n", "<leader>os", ":set spell!<CR>", { desc = " toggle spelling" })
+keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = " toggle relative line numbers" })
+keymap("n", "<leader>on", ":set number!<CR>", { desc = " toggle line numbers" })
+keymap("n", "<leader>ow", qol.toggleWrap, { desc = " toggle wrap" })
 keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 璉LSP Restart" })
 
 keymap("n", "<leader>od", function()
@@ -444,7 +439,7 @@ keymap("n", "<leader>od", function()
 		vim.diagnostic.enable(0)
 	end
 	g.diagnosticOn = not g.diagnosticOn
-end, { desc = "  diagnostics" })
+end, { desc = " diagnostics" })
 
 --------------------------------------------------------------------------------
 
