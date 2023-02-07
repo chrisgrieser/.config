@@ -245,8 +245,6 @@ keymap("c", "<C-a>", "<Home>")
 keymap("c", "<C-e>", "<End>")
 keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
-keymap("i", "ö", "{<CR>}") 
-
 --------------------------------------------------------------------------------
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })

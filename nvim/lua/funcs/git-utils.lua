@@ -104,12 +104,13 @@ function M.addCommitPush(prefillMsg)
 			end
 			vim.notify(out, logLevel)
 
-			-- HACK for stylelint on build script / panvimdoc writing the current file,
-			-- and autoread failing, preventing to quit the file. Seems to requires manual
-			-- reloading via `:edit`.
-			if expand("%") == "theme.css" or expand("%") == "README.md" then
+			-- HACK since autoread fails in these causes, prompting for unsaved
+			-- files on closing after git add-commit-pull-push
+			local changeNeededBcStylelint = expand("%") == "theme.css"
+			local changeNeededBcPanvimdoc = expand("%:p"):find("my%-plugins/.*/README.md")
+			if changeNeededBcPanvimdoc or changeNeededBcStylelint then
 				cmd.mkview(2)
-				cmd.edit()
+				cmd.edit() -- = reload
 				cmd.loadview(2)
 			end
 			os.execute("sketchybar --trigger repo-files-update") -- specific to my setup

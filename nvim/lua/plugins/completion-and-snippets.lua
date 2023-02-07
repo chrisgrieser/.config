@@ -347,7 +347,7 @@ return {
 			-- INFO using these instead of vim abbreviations since they do not work with
 			-- added extra undo points
 			local spellAutoFixes = {}
-			local spellfixes = require("config.spell-autocorrects")
+			local spellfixes = require("config.autocorrects-and-autosnippets")
 			for _, wordPair in pairs(spellfixes) do
 				-- lsp-style-snippets for future-proofness
 				local parsed = ls.parser.parse_snippet(wordPair[1], wordPair[2])
