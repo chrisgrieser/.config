@@ -152,7 +152,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>217B9FF8-9406-4D7C-B2BE-A65B56FD35DE</string>
+				<string>43331380-A614-4A95-986C-65E821FD6224</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -489,7 +489,8 @@ echo -n "$*"</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>sudo pkill bluetoothd</string>
+				<string>sudo pkill bluetoothd
+echo -n "Bluetooth"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -503,27 +504,6 @@ echo -n "$*"</string>
 			<string>9132689B-E107-4FA3-9CA5-181DAF3FD179</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⏳Restarting Bluetooth…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>43331380-A614-4A95-986C-65E821FD6224</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -638,6 +618,27 @@ fi</string>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳Restarting {query}…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>43331380-A614-4A95-986C-65E821FD6224</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
 				<string>⚠️ Sync Issue</string>
@@ -652,33 +653,16 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⏳Restarting Bluetooth…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>217B9FF8-9406-4D7C-B2BE-A65B56FD35DE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>sudo pkill bluetoothd</string>
+				<string># depending on device, may need to change `en1` to `en0` or `end2`
+networksetup -setairportpower en1 off
+sleep 0.5
+networksetup -setairportpower en1 on
+echo -n "WiFi"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1335,15 +1319,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>217B9FF8-9406-4D7C-B2BE-A65B56FD35DE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>990</real>
-			<key>ypos</key>
-			<real>435</real>
-		</dict>
 		<key>30BDE79A-EDB6-4D0B-B19A-CC25C363DFA5</key>
 		<dict>
 			<key>colorindex</key>
@@ -1378,9 +1353,9 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>985</real>
+			<real>1005</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>365</real>
 		</dict>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
