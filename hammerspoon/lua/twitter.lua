@@ -14,6 +14,7 @@ end
 function twitterToTheSide()
 	app("Twitter"):findWindow("Twitter"):raise()
 	app("Twitter"):findWindow("Twitter"):setFrame(toTheSide)
+	keystroke({ "command" }, "1", 1, app("Twitter")) -- home tab
 end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
@@ -28,6 +29,7 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 	-- auto-close media windows
 	elseif appName == "Twitter" and eventType == aw.deactivated then
 		keystroke({ "command" }, "left", 1, app("Twitter")) -- go back
+		keystroke({ "command" }, "1", 1, app("Twitter")) -- home tab
 
 		for _, win in pairs(appObj:allWindows()) do
 			if win:title():find("Media") then
