@@ -142,6 +142,11 @@ function betterClone() {
 }
 
 function nuke {
+	is_submodule=$(git rev-parse --show-superproject-working-tree)
+	if [[ -n "$is_submodule" ]]; then
+		echo "Aborting. nuke function has not been implemented for git submodules yet."
+		exit 0
+	fi
 	SSH_REMOTE=$(git remote -v | head -n1 | cut -d" " -f1 | cut -d$'	' -f2)
 
 	# go to git repo root
