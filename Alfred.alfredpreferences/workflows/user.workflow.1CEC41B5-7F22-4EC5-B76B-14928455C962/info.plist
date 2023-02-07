@@ -148,6 +148,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B23560CE-55AA-460B-8405-275B52CDC10D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>217B9FF8-9406-4D7C-B2BE-A65B56FD35DE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C129402F-060A-4E14-A919-D21FCE15A4A4</key>
 		<array>
 			<dict>
@@ -166,6 +179,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>08FF165B-3950-4760-9A48-5996704B1C65</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B23560CE-55AA-460B-8405-275B52CDC10D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -626,6 +652,215 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳Restarting Bluetooth…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>217B9FF8-9406-4D7C-B2BE-A65B56FD35DE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>sudo pkill bluetoothd</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B23560CE-55AA-460B-8405-275B52CDC10D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>wifi restart</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔁 Restart WiFi</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo -n | ioreg -r -d 1 -k BatteryPercent | egrep '("BatteryPercent"|"Product") ' | cut -d "=" -f 2 | sed -E 's/^ //g' | sed -E 's/\"//g' | sed -E 's/(^[0-9]{1,3})/(\1%)/g' | tr "\n" ";" | sed -E 's/);/)\n/g' | tr ";" "  "</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D6190251-1CA6-4563-B6A9-600A8F0DD885</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🔋 Battery</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A4A97FBA-5CBA-4449-9044-CFD69762CA19</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>battery</string>
+				<key>subtext</key>
+				<string>Periphery Devices</string>
+				<key>text</key>
+				<string>📊 Show Battery</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F237B22E-6247-4FA6-899C-A9CA938AFED5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>8B8645C1-776A-41E4-B093-DF59FEF6D696</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>uptime</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>📊 Uptime &amp; Last Reboots</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C129402F-060A-4E14-A919-D21FCE15A4A4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo "🕓 Uptime"
+echo "========="
+uptime | cut -d "," -f 1,2 | cut -c 11-
+echo ""
+echo " 🥾 Last 10 Reboots"
+echo "=============="
+last reboot | head -n 10 | cut -c 37-</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A25DDA0D-DA11-46FF-9CCB-41D3D338B420</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -635,11 +870,11 @@ fi</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>27</integer>
+				<integer>25</integer>
 				<key>hotmod</key>
 				<integer>1966080</integer>
 				<key>hotstring</key>
-				<string>SS</string>
+				<string>9</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -979,150 +1214,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>echo -n | ioreg -r -d 1 -k BatteryPercent | egrep '("BatteryPercent"|"Product") ' | cut -d "=" -f 2 | sed -E 's/^ //g' | sed -E 's/\"//g' | sed -E 's/(^[0-9]{1,3})/(\1%)/g' | tr "\n" ";" | sed -E 's/);/)\n/g' | tr ";" "  "</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D6190251-1CA6-4563-B6A9-600A8F0DD885</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🔋 Battery</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>A4A97FBA-5CBA-4449-9044-CFD69762CA19</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>battery</string>
-				<key>subtext</key>
-				<string>Periphery Devices</string>
-				<key>text</key>
-				<string>📊 Show Battery</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>F237B22E-6247-4FA6-899C-A9CA938AFED5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>8B8645C1-776A-41E4-B093-DF59FEF6D696</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>uptime</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📊 Uptime &amp; Last Reboots</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>C129402F-060A-4E14-A919-D21FCE15A4A4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>echo "🕓 Uptime"
-echo "========="
-uptime | cut -d "," -f 1,2 | cut -c 11-
-echo ""
-echo " 🥾 Last 10 Reboots"
-echo "=============="
-last reboot | head -n 10 | cut -c 37-</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A25DDA0D-DA11-46FF-9CCB-41D3D338B420</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -1244,6 +1335,15 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>217B9FF8-9406-4D7C-B2BE-A65B56FD35DE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>990</real>
+			<key>ypos</key>
+			<real>435</real>
+		</dict>
 		<key>30BDE79A-EDB6-4D0B-B19A-CC25C363DFA5</key>
 		<dict>
 			<key>colorindex</key>
@@ -1298,9 +1398,9 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>note</key>
 			<string>dismiss notifications</string>
 			<key>xpos</key>
-			<real>690</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>580</real>
 		</dict>
 		<key>6BF4A116-C3FE-4B51-BFF9-65DE98E2EAD1</key>
 		<dict>
@@ -1385,6 +1485,15 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>305</real>
 		</dict>
+		<key>B23560CE-55AA-460B-8405-275B52CDC10D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>840</real>
+			<key>ypos</key>
+			<real>435</real>
+		</dict>
 		<key>C129402F-060A-4E14-A919-D21FCE15A4A4</key>
 		<dict>
 			<key>colorindex</key>
@@ -1402,6 +1511,15 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>685</real>
+		</dict>
+		<key>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>690</real>
+			<key>ypos</key>
+			<real>435</real>
 		</dict>
 		<key>D2D919DB-3F73-46E1-88F7-C6743CF222FA</key>
 		<dict>
@@ -1462,9 +1580,9 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>855</real>
+			<real>865</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>580</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
