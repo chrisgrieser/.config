@@ -245,8 +245,7 @@ keymap("c", "<C-a>", "<Home>")
 keymap("c", "<C-e>", "<End>")
 keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
-keymap("i", "ö", "{}") -- replacements do not autopair
-keymap("i", "ä", "}")
+keymap("i", "ö", "{<CR>}") 
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
