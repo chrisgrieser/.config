@@ -104,7 +104,7 @@ function acp() {
 	git pull
 	git push
 
-	if [[ "$PWD" =~ $DOTFILE_FOLDER ]] || [[ "$PWD" =~ $VAULT_PATH ]] ; then
+	if [[ "$PWD" == "$DOTFILE_FOLDER" ]] || [[ "$PWD" == "$VAULT_PATH" ]] ; then
 		sketchybar --trigger repo-files-update
 	fi
 }
