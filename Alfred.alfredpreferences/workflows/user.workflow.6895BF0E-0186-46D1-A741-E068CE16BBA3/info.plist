@@ -244,7 +244,7 @@ pass git push</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>pass edit {query}
+				<string>pass edit "{query}"
 </string>
 			</dict>
 			<key>type</key>
