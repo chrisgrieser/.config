@@ -289,7 +289,7 @@ nmap ö :lightspeed
 
 " Link Jump (similar to Vimium's f)
 exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
-nmap ,f :linkjump
+nmap ,l :linkjump
 
 """"""""""""""""""""""
 " Substitute
