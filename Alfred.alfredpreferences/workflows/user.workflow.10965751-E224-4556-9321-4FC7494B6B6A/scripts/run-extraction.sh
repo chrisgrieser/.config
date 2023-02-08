@@ -35,8 +35,8 @@ extraction_engine=$(echo "$settings" | grep "extraction_engine" | cut -d "=" -f2
 
 #───────────────────────────────────────────────────────────────────────────────
 # Input
-# pdf_path=$(osascript "./scripts/get-pdf-path.applescript")
-pdf_path="$1"
+pdf_path=$(osascript "./scripts/get-pdf-path.applescript")
+# pdf_path="$1"
 
 #───────────────────────────────────────────────────────────────────────────────
 # GUARD CLAUSES & RETRIEVE CITEKEY
@@ -109,5 +109,5 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # PROCESS ANNOTATIONS
-JS_script_path="/Applications/PDF Annotation Extractor.app/Contents/process_annotations.js"
+JS_script_path="./scripts/process_annotations.js"
 osascript -l JavaScript "$JS_script_path" "$citekey" "$annotations" "$entry" "$output_path" "$extraction_engine"

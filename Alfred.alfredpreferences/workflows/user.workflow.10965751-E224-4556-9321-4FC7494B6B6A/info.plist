@@ -36,33 +36,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>EA56B776-2944-4A9F-805A-0BEA83ABEAB7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B910E148-74E6-4CEF-B938-F8C08E26AA8E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
 				<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EA56B776-2944-4A9F-805A-0BEA83ABEAB7</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B910E148-74E6-4CEF-B938-F8C08E26AA8E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -185,6 +159,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/run-extraction.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -215,73 +212,6 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>B42ED178-4437-4D4D-BEF0-63B085EF7730</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/get-pdf-path.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>EA56B776-2944-4A9F-805A-0BEA83ABEAB7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/run-extraction.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>B910E148-74E6-4CEF-B938-F8C08E26AA8E</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -337,36 +267,14 @@
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
-		<key>B910E148-74E6-4CEF-B938-F8C08E26AA8E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>remove \n</string>
-			<key>xpos</key>
-			<real>350</real>
-			<key>ypos</key>
-			<real>345</real>
-		</dict>
 		<key>E37A9BDD-290E-4BCD-9832-06488718A4BD</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>run extraction</string>
 			<key>xpos</key>
-			<real>440</real>
-			<key>ypos</key>
-			<real>315</real>
-		</dict>
-		<key>EA56B776-2944-4A9F-805A-0BEA83ABEAB7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>get path</string>
-			<key>xpos</key>
-			<real>200</real>
+			<real>190</real>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
