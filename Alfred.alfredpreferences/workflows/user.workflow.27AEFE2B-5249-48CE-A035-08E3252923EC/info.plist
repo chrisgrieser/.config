@@ -71,6 +71,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>6DAF8EF4-C140-4B43-9A63-8BD0A53D87BA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<array/>
 		<key>8D2676E8-2C88-4759-9445-2DBC22311D6D</key>
@@ -243,6 +256,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>sw</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Switch to Private Window</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E51DFA56-3523-4840-8EF6-40FC832EE3BB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -262,27 +296,6 @@
 			<string>10C28BFB-0100-4B2F-BAEF-FEA3FC8C44E2</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>sw</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Switch to Private Window</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E51DFA56-3523-4840-8EF6-40FC832EE3BB</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -868,6 +881,48 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome-extension://gfbliohnnapiefjpjlpjnehglfpaknnc/pages/options.html</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>vimium</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Open Vimium Settings</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>6DAF8EF4-C140-4B43-9A63-8BD0A53D87BA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -947,6 +1002,15 @@
 			<key>ypos</key>
 			<real>665</real>
 		</dict>
+		<key>6DAF8EF4-C140-4B43-9A63-8BD0A53D87BA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>565</real>
+			<key>ypos</key>
+			<real>990</real>
+		</dict>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<dict>
 			<key>colorindex</key>
@@ -1010,9 +1074,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>565</real>
 			<key>ypos</key>
-			<real>1220</real>
+			<real>865</real>
 		</dict>
 		<key>A8E0AB8E-1473-4197-B793-732E24B45E9F</key>
 		<dict>
@@ -1068,14 +1132,23 @@
 			<key>ypos</key>
 			<real>575</real>
 		</dict>
+		<key>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>740</real>
+			<key>ypos</key>
+			<real>990</real>
+		</dict>
 		<key>CEBEAB0F-094B-4D18-8144-6C38BDC53F34</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>1220</real>
+			<real>865</real>
 		</dict>
 		<key>CF0751AB-25B7-45A7-89DE-68E791637C9D</key>
 		<dict>
