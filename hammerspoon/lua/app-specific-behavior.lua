@@ -266,9 +266,10 @@ wf_finder = wf.new("Finder")
 
 finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 	if not (appName == "Finder") then return end
+	if not (#finderAppObj:allWindows() > 0) then return end
 
 	if eventType == aw.activated then
-		autoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
+		autoTile(wf_finder) -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
 		bringAllToFront()
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
 
@@ -277,7 +278,7 @@ finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
 		-- properly utilize Finder
 		runWithDelays({ 3, 5, 10 }, function()
-			if finderAppObj and not (finderAppObj:mainWindow()) then finderAppObj:kill() end
+			if finderAppObj and not (#finderAppObj:allWindows() > 0) then finderAppObj:kill() end
 		end)
 	end
 end):start()
@@ -301,10 +302,10 @@ wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
 				end repeat
 			end tell
 		]])
-	local numberOfZoomWindows = #wf_zoom:getWindows()
-	if numberOfZoomWindows == 2 then
-		runWithDelays({ 1, 2 }, function() app("zoom.us"):findWindow("^Zoom$"):close() end)
-	end
+
+	runWithDelays(1, function ()
+		app("zoom.us"):findWindow("^Zoom$"):close()
+	end)
 end)
 
 --------------------------------------------------------------------------------
