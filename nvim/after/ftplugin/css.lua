@@ -38,23 +38,6 @@ keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], { buffer = true, desc =
 
 --------------------------------------------------------------------------------
 
--- if copying a css selection, add the closing bracket as well
-keymap("n", "p", function()
-	normal("p") -- paste as always
-
-	local reg = '"'
-	local regContent = fn.getreg(reg)
-	local isLinewise = fn.getregtype(reg) == "V"
-	if isLinewise and regContent:find("{\n$") then
-		print("beep")
-		fn.append(".", { "\t", "}" }) ---@diagnostic disable-line: param-type-mismatch
-		normal("j")
-		cmd.startinsert { bang = true }
-	end
-end, { desc = "smarter CSS paste", buffer = true })
-
---------------------------------------------------------------------------------
-
 keymap(
 	{ "o", "x" },
 	"as",
@@ -69,8 +52,22 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
-
 ---@diagnostic disable: undefined-field, param-type-mismatch
+
+-- if copying a css selection, add the closing bracket as well
+keymap("n", "p", function()
+	normal("p") -- paste as always
+	local reg = '"'
+	local regContent = fn.getreg(reg)
+	local isLinewise = fn.getregtype(reg) == "V"
+	if isLinewise and regContent:find("{\n$") then
+		fn.append(".", { "\t", "}" }) 
+		normal("j")
+		cmd.startinsert { bang = true }
+	end
+end, { desc = "smarter CSS paste", buffer = true })
+
+-- toggle !important
 keymap("n", "<leader>i", function()
 	local lineContent = fn.getline(".")
 	if lineContent:find("!important") then
@@ -81,6 +78,7 @@ keymap("n", "<leader>i", function()
 	fn.setline(".", lineContent)
 end, { buffer = true, desc = "toggle !important" })
 
+-- insert nice divider
 keymap("n", "qw", function()
 	local hr = {
 		"/* ───────────────────────────────────────────────── */",
