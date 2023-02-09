@@ -20,7 +20,7 @@ on run argv
 		set mdlink to "[" & currentTabTitle & "](" & currentTabUrl & ")"
 
 		if (selectionExists) then
-			set output to "> " & input & "\n – " & mdlink
+			set output to "> " & input & " " & mdlink
 			set notif_msg to input
 		else
 			set output to mdlink

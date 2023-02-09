@@ -643,7 +643,7 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>save-to-drafts_[Browser].applescript</string>
+				<string>save-to-drafts.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
