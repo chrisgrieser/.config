@@ -38,6 +38,23 @@ keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], { buffer = true, desc =
 
 --------------------------------------------------------------------------------
 
+-- if copying a css selection, add the closing bracket as well
+keymap("n", "p", function()
+	normal("p") -- paste as always
+
+	local reg = '"'
+	local regContent = fn.getreg(reg)
+	local isLinewise = fn.getregtype(reg) == "V"
+	if isLinewise and regContent:find("{\n$") then
+		print("beep")
+		fn.append(".", { "\t", "}" }) ---@diagnostic disable-line: param-type-mismatch
+		normal("j")
+		cmd.startinsert { bang = true }
+	end
+end, { desc = "smarter CSS paste", buffer = true })
+
+--------------------------------------------------------------------------------
+
 keymap(
 	{ "o", "x" },
 	"as",
@@ -74,7 +91,7 @@ keymap("n", "qw", function()
 	}
 	fn.append(".", hr)
 	local lineNum = getCursor(0)[1] + 2
-	local colNum = #(hr[2]) + 2
+	local colNum = #hr[2] + 2
 	setCursor(0, { lineNum, colNum })
 	cmd.startinsert { bang = true }
 end, { buffer = true, desc = "insert comment-heading" })

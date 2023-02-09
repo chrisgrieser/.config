@@ -30,7 +30,7 @@ fi
 # HACK using popup for second row. the popup only refers to the clock item to anchor it to the leftmost item,
 # it actually has nothing to do with the clock
 first_row="left"
-second_row="popup.clock" 
+second_row="popup.clock"
 
 POPUP_Y_OFFSET=-35
 HEIGHT=60                    # extra height for second row & to cover the holes at the corner where the wallpaper shines through
@@ -64,6 +64,7 @@ sketchybar \
 	--add item weather $first_row \
 	--set weather update_freq=1800 \
 	script="$PLUGIN_DIR/weather.sh" \
+	\
 	--add item drafts $first_row \
 	--set drafts icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
 	script="$PLUGIN_DIR/drafts-counter.sh" \
@@ -79,6 +80,7 @@ sketchybar \
 	--set "$gpu_bar_item" width=55 \
 	--add alias "$network_bar_item" $second_row \
 	--set "$network_bar_item" width=65 \
+	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 \
 	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
@@ -87,6 +89,10 @@ sketchybar \
 	--subscribe sync-indicator repo-files-update \
 	--subscribe sync-indicator system_woke \
 	--update
+
+if [[ "$(scutil --get ComputerName)" =~ Office ]] ; then
+	sketchybar --add alias "Control Center,WiFi" $second_row 
+fi
 
 # INFO
 # - `--update` needs to run at the end of config and should not be run in an item script
