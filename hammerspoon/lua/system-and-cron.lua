@@ -30,7 +30,7 @@ local gitPassScript = passwordStore .. "/pass-sync.sh"
 ---@return boolean
 local function gitDotfileSync()
 	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return false end
-	if not (screenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
+	if not (screenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
 
 	gitDotfileSyncTask = hs.task
 		.new(
