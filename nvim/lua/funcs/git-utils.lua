@@ -110,6 +110,7 @@ function M.addCommitPush(prefillMsg)
 			local changeNeededBcPanvimdoc = expand("%:p"):find("my%-plugins/.*/README.md")
 			if changeNeededBcPanvimdoc or changeNeededBcStylelint then
 				cmd.mkview(2)
+				cmd.update()
 				cmd.edit() -- = reload
 				cmd.loadview(2)
 			end
