@@ -40,7 +40,6 @@ PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 #───────────────────────────────────────────────────────────────────────────────
 
 # one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
-# shellcheck disable=2086
 sketchybar \
 	--bar \
 	height="$HEIGHT" position=top display=all \
@@ -72,6 +71,7 @@ sketchybar \
 	--subscribe drafts drafts-counter-update \
 	--subscribe drafts system_woke \
 	\
+	$wifi \
 	--add alias "$ram_bar_item" $second_row \
 	--set "$ram_bar_item" width=38 \
 	--add alias "$cpu_bar_item" $second_row \
@@ -89,10 +89,6 @@ sketchybar \
 	--subscribe sync-indicator repo-files-update \
 	--subscribe sync-indicator system_woke \
 	--update
-
-if [[ "$(scutil --get ComputerName)" =~ Office ]] ; then
-	sketchybar --add alias "Control Center,WiFi" $second_row 
-fi
 
 # INFO
 # - `--update` needs to run at the end of config and should not be run in an item script
