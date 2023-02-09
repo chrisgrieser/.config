@@ -23,9 +23,6 @@ case $APP_TO_UPDATE in
 "Steam")
 	iconsur set "Steam.app" &>/dev/null
 	;;
-"zoom.us")
-	iconsur set "zoom.us.app" &>/dev/null
-	;;
 "Transmission")
 	cp "$CUSTOM_ICON_FOLDER/Transmission 2.icns" '/Transmission.app/Contents/Resources/Transmission.icns'
 	touch "Transmission.app"
@@ -91,11 +88,6 @@ case $APP_TO_UPDATE in
 	;;
 	# cp "$CUSTOM_ICON_FOLDER/Mail_fancy.icns" 'Mimestream.app/Contents/Resources/AppIcon.icns'
 	# touch "Mimestream.app" ;;
-"TweetDeck")
-	iconsur -k "Twitter" set "$PWA_FOLDER/TweetDeck.app" &>/dev/null
-	;;
-	# cp "$CUSTOM_ICON_FOLDER/Twitter.icns" 'TweetDeck.app/Contents/Resources/app.icns'
-	# touch "$PWA_FOLDER/TweetDeck.app" ;;
 "Docs")
 	cp "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Docs.app/Contents/Resources/app.icns"
 	touch "$PWA_FOLDER/Docs.app"
@@ -136,13 +128,13 @@ if [[ $INFO_WINDOW == 1 ]]; then
 	sleep 0.2
 	osascript -e 'tell application "System Events"
 		keystroke "v" using {command down}
-		delay 0.1
+		delay 0.05
 		keystroke "w" using {command down}
 	end tell'
 	sleep 0.2
 fi
 
-killall "Dock" # INFO pgreping for the Dock does not work, since there is always a process called that?
+killall "Dock" # INFO pgrep-ing for the Dock does not work, since there is always a process called that?
 killall "$APP_TO_UPDATE"
 while pgrep -q "$APP_TO_UPDATE"; do sleep 0.1 ; done
 sleep 0.1

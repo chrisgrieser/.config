@@ -93,7 +93,7 @@ function acp() {
 		COMMIT_MSG=${COMMIT_MSG::50}
 		print -z "acp \"$COMMIT_MSG\"" # put back into buffer
 		return 1
-	# enforce conventional commits keyword
+	# enforce conventional commits
 	elif ! [[ "$conventional_commits" =~ $first_word ]]; then
 		echo "'$first_word' not a conventional commits keyword."
 		print -z "acp \"$COMMIT_MSG\""
