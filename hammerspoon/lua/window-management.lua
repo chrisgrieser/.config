@@ -11,9 +11,9 @@ toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide u
 
 ---@param win hs.window
 ---@param size hs.geometry
----@return boolean
+---@return boolean|nil
 function checkSize(win, size)
-	if not win then return false end
+	if not win then return nil end
 	local maxf = win:screen():frame()
 	local winf = win:frame()
 
@@ -99,6 +99,7 @@ end
 ---@param win hs.window
 ---@param pos hs.geometry
 local function obsidianThemeDevHelper(win, pos)
+	if not win or not win:application() then return end
 	if
 		not (pos == pseudoMaximized or pos == maximized)
 		and win:application():name():lower() == "neovide"
@@ -135,8 +136,10 @@ function moveResize(win, pos)
 		app("Twitter"):mainWindow():raise()
 	end
 
-	local i = 0 -- pseudo-timeout
-	while win and i < 25 and not (checkSize(win, pos)) do
+	-- pseudo-timeout
+	local i = 0
+	while win and i < 25 and checkSize(win, pos) == false do
+		if not win then return end
 		win:moveToUnit(pos)
 		os.execute("sleep 0.1") -- since lua itself does not have a blocking wait function
 	end
