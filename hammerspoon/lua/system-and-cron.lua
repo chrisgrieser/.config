@@ -148,7 +148,7 @@ officeWakeWatcher = caff.new(function(event)
 		twitterScrollUp()
 		syncAllGitRepos()
 		workLayout()
-		local toDark = betweenTime(7, 18)
+		local toDark = not (betweenTime(7, 18))
 		setDarkmode(toDark)
 		return
 	end
@@ -165,7 +165,7 @@ homeWakeWatcher = caff
 
 			-- INFO checks need to run after delay, since display number is not
 			-- immediately picked up after wake
-			runWithDelays(1, function()
+			runWithDelays(0.7, function()
 				if isProjector() then
 					setDarkmode(true)
 					movieModeLayout()
