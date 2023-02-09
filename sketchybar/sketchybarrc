@@ -53,6 +53,7 @@ sketchybar \
 	label.padding_left=2 label.padding_right=10 \
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
 	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
+	\
 	--add item clock $first_row \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
@@ -69,6 +70,7 @@ sketchybar \
 	--add event drafts-counter-update \
 	--subscribe drafts drafts-counter-update \
 	--subscribe drafts system_woke \
+	\
 	--add alias "$ram_bar_item" $second_row \
 	--set "$ram_bar_item" width=38 \
 	--add alias "$cpu_bar_item" $second_row \
