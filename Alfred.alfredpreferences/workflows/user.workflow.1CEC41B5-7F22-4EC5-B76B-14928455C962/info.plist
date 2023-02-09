@@ -653,6 +653,27 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>wifi restart</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔁 Restart WiFi</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -676,27 +697,6 @@ echo -n "WiFi"</string>
 			<string>B23560CE-55AA-460B-8405-275B52CDC10D</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>wifi restart</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔁 Restart WiFi</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
