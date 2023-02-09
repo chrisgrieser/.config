@@ -1,12 +1,13 @@
 {
 	"name": "Vimium C",
-	"@time": "29/12/2022, 20:07:40",
-	"time": 1672340860450,
+	"@time": "10/02/2023, 00:39:47",
+	"time": 1675985987042,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
-		"chromium": 108
+		"chromium": 110
 	},
+	"allBrowserUrls": true,
 	"exclusionListenHash": false,
 	"exclusionRules": [
 		{
@@ -15,15 +16,19 @@
 		},
 		{
 			"passKeys": "j k ",
-			"pattern": ":https://www.google.com/"
+			"pattern": "^https://www.google.*/"
 		}
 	],
 	"grabBackFocus": true,
 	"keyLayout": 129,
 	"keyMappings": [
 		"#!no-check",
-		"\" INFO: mapping assumes 'always ignore keyboard layout' to be enabled",
+		"\" INFO: mapping assumes 'always ignore keyboard layout'",
+		"\" to be enabled, meaning that z and y are switched on German Keyboard etc",
+		"",
 		"unmapAll",
+		"",
+		"\"--------------------------------",
 		"",
 		"\" Modes",
 		"map <esc> reset",
@@ -33,6 +38,7 @@
 		"map a passNextKey",
 		"",
 		"\" Find",
+		"\" / is - due to layout ignoring",
 		"map / enterFindMode",
 		"map n performFind",
 		"map N performBackwardsFind",
