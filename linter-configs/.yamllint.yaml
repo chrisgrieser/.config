@@ -11,3 +11,4 @@ rules:
   trailing-spaces: disable
   comments: disable
   braces: disable
+  new-line-at-end-of-file: disable # compatibility with prettier
