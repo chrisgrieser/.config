@@ -40578,3 +40578,33 @@
 	publisher = {Forum Qualitative Sozialforschung / Forum: Qualitative Social Research},
 	year = {2022},
 }
+@incollection{BulmerBurgess1968,
+	keywords = {Wissenschaftstheorie},
+	doi = {10.4324/9781351170000},
+	year = 2018,
+	pages = {246--265},
+	publisher = {Routledge},
+	author = {Bulmer, Martin and Burgess, Robert G.},
+	editor = {Robert G. Burgess},
+	title = {Do Concepts, Variables and Indicators Interrelate?},
+	booktitle = {Key Variables in Social Investigation}
+}
+@book{MacKenzie2021,
+	author = {Donald MacKenzie},
+	title = {Trading at the Speed of Light},
+	publisher = {Princeton Univers. Press},
+	year = 2021,
+	isbn = {0691211388},
+}
+@article{ParkEtAl2023,
+	keywords = {},
+	doi = {10.1038/s41586-022-05543-x},
+	year = 2023,
+	publisher = {Springer Science and Business Media },
+	volume = {613},
+	number = {7942},
+	pages = {138--144},
+	author = {Michael Park and Erin Leahey and Russell J. Funk},
+	title = {Papers and patents are becoming less disruptive over time},
+	journal = {Nature}
+}
