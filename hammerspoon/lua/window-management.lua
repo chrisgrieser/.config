@@ -149,30 +149,18 @@ end
 -- WINDOW TILING (OF SAME APP)
 
 ---automatically apply per-app auto-tiling of the windows of the app
----@param windowSource hs.window.filter|string windowFilter OR string representing app name
-function autoTile(windowSource)
-	---necessary b/c windowfilter is null when not triggered via
-	---windowfilter-subscription-event. This check allows for using app names,
-	---which enables using the autotile-function e.g. within app watchers
-	---@param _windowSource hs.window.filter|string windowFilter OR string representing app name
-	---@return hs.window[]
-	local function getWins(_windowSource)
-		if type(_windowSource) == "string" then
-			return app(_windowSource):allWindows()
-		else
-			return _windowSource:getWindows()
-		end
-	end
-	local wins = getWins(windowSource)
+---@param windowFilter hs.window.filter
+function autoTile(windowFilter)
+	local wins = windowFilter:getWindows()
 
 	if #wins == 0 and frontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
 		runWithDelays(0.5, function()
 			-- 1) quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
-			-- 2) getWins() again to check if window count has changed in the meantime
+			-- 2) check if window count has changed in the meantime
 			-- 3) delay needs to be high enough to since e.g. during quitting fullscreen
 			-- mode, Hammerspoon temporarily cannot detect Finder windows (sic!)
-			if #getWins(windowSource) == 0 then app("Finder"):kill() end
+			if #windowFilter:getWindows() == 0 then app("Finder"):kill() end
 		end)
 	elseif #wins == 1 then
 		if isProjector() then
@@ -200,13 +188,6 @@ function autoTile(windowSource)
 		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
 		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
 		moveResize(wins[5], { h = 0.5, w = 0.5, x = 0.25, y = 0.25 })
-	elseif #wins == 6 then
-		moveResize(wins[1], { h = 0.5, w = 0.33, x = 0, y = 0 })
-		moveResize(wins[2], { h = 0.5, w = 0.33, x = 0, y = 0.5 })
-		moveResize(wins[3], { h = 0.5, w = 0.34, x = 0.33, y = 0 })
-		moveResize(wins[4], { h = 0.5, w = 0.34, x = 0.33, y = 0.5 })
-		moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.67, y = 0 })
-		moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.67, y = 0.5 })
 	end
 end
 
