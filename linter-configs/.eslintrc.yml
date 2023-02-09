@@ -155,5 +155,4 @@ globals:
 
   # Obsidian
   tp: readonly # templater
-  dv: readonly # dataview
   request: readonly
