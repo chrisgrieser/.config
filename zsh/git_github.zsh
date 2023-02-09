@@ -10,8 +10,6 @@ alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull"
 alias amend="git commit --amend"
-
-alias root='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 
 # open GitHub repo
@@ -25,7 +23,7 @@ alias ghi='open "$(getGithubURL)/issues"'
 
 # GIT LOG
 
-# short
+# short (only last 15 messages)
 alias gl="git log -n 15 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; echo '(…)'"
 
 # long
@@ -34,7 +32,7 @@ alias gll="git log --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset)
 
 # interactive
 function gli() {
-	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && exit 1; fi
+	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	local hash key_pressed selected
 	selected=$(
@@ -134,7 +132,7 @@ function betterClone() {
 	cd "$(ls -1 -t | head -n1)" || return
 	if grep -q "obsidian" package.json &>/dev/null; then
 		echo "Detected Obsidian plugin. Installing NPM dependencies…"
-		if ! command -v node &>/dev/null; then print "\033[1;33mnode not installed, not running npm." && exit 0; fi
+		if ! command -v node &>/dev/null; then print "\033[1;33mnode not installed, not running npm." && return 0; fi
 		npm i 
 		echo "Building…"
 		npm run build
@@ -145,7 +143,7 @@ function nuke {
 	is_submodule=$(git rev-parse --show-superproject-working-tree)
 	if [[ -n "$is_submodule" ]]; then
 		echo "Aborting. nuke function has not been implemented for git submodules yet."
-		exit 1
+		return 1
 	fi
 	SSH_REMOTE=$(git remote -v | head -n1 | cut -d" " -f1 | cut -d$'	' -f2)
 
@@ -185,8 +183,8 @@ function rel() {
 
 # search for [g]it [d]eleted [f]ile
 function gdf() {
-	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && exit 1; fi
-	if ! command -v bat &>/dev/null; then echo "bat not installed." && exit 1; fi
+	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
+	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
 
 	local deleted_path deletion_commit
 	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}" # goto git root
