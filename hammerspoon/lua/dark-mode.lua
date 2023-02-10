@@ -2,13 +2,15 @@ require("lua.utils")
 --------------------------------------------------------------------------------
 
 local function brightnessNotify()
-	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 	local brightness = math.floor(hs.brightness.ambient())
 	notify("Brightness: ", tostring(brightness))	
 end
 
 -- notify with ambient brightness for Alfred
-uriScheme("ambient-brightness", brightnessNotify)
+uriScheme("ambient-brightness", function ()
+	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
+	brightnessNotify()
+end)
 
 -- done manually to include app-specific toggling for:
 -- - Brave Browser (fixing Dark Reader Bug)
