@@ -5,7 +5,7 @@
 # directory path: open it
 # url: open in Browser
 # email: send to that address
-# some other text: google it
+# some other text: google it & open first duckduckgo hit
 # empty: do nothing
 
 # if no input, copy selection
@@ -18,6 +18,7 @@ if [[ -z "$SEL" ]]; then
 	# restore clipboard
 	[[ -n "$PREV_CLIPBOARD" ]] && echo "$PREV_CLIPBOARD" | pbcopy
 fi
+
 # clean up
 SEL=$(echo -n "$SEL" | xargs echo -n) # trims whitespace
 SEL="${SEL/#\~/$HOME}"                # resolve ~
@@ -36,5 +37,6 @@ elif [[ -n "$SEL" ]]; then
 	URL_ENCODED_SEL=$(osascript -l JavaScript -e "encodeURIComponent('$SEL')")
 	open "https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky"
 	open "https://www.google.com/search?q=$URL_ENCODED_SEL"
-	osascript -e 'tell application "System Events" to keystroke tab using {control down, option down}'
+	sleep 0.05
+	osascript -e 'tell application "System Events" to keystroke tab using {control down, shift down}'
 fi
