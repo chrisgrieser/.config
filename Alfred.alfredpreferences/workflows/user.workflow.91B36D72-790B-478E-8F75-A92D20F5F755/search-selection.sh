@@ -36,5 +36,5 @@ elif [[ -n "$SEL" ]]; then
 	URL_ENCODED_SEL=$(osascript -l JavaScript -e "encodeURIComponent('$SEL')")
 	open "https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky"
 	open "https://www.google.com/search?q=$URL_ENCODED_SEL"
-	osascript -e 'tell application "System Events" to key code 124 using {command down, option down}'
+	osascript -e 'tell application "System Events" to keystroke tab using {control down, option down}'
 fi
