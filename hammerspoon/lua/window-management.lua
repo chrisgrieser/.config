@@ -14,6 +14,7 @@ toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide u
 ---@return boolean|nil
 function checkSize(win, size)
 	if not win then return nil end
+	if not win or not win:screen() then return end
 	local maxf = win:screen():frame()
 	local winf = win:frame()
 
@@ -118,7 +119,7 @@ end
 ---@param win hs.window
 ---@param pos hs.geometry
 function moveResize(win, pos)
-	if not win then return end -- window been closed before
+	if not win or not win:application() then return end
 	local appName = win:application():name()
 	if appName == "System Settings" or appName == "Twitter" then
 		notify(appName .. " cannot be resized properly.")
@@ -138,10 +139,10 @@ function moveResize(win, pos)
 
 	-- pseudo-timeout
 	local i = 0
-	while win and i < 25 and checkSize(win, pos) == false do
+	while i < 10 and checkSize(win, pos) == false do
 		if not win then return end
 		win:moveToUnit(pos)
-		os.execute("sleep 0.1") -- since lua itself does not have a blocking wait function
+		os.execute("sleep 0.15") -- since lua itself does not have a blocking wait function
 	end
 end
 
@@ -151,6 +152,7 @@ end
 ---automatically apply per-app auto-tiling of the windows of the app
 ---@param windowFilter hs.window.filter
 function autoTile(windowFilter)
+	if not windowFilter then return end
 	local wins = windowFilter:getWindows()
 
 	if #wins == 0 and frontAppName() == "Finder" then
@@ -158,7 +160,7 @@ function autoTile(windowFilter)
 		runWithDelays(0.5, function()
 			-- 1) quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 			-- 2) check if window count has changed in the meantime
-			-- 3) delay needs to be high enough to since e.g. during quitting fullscreen
+			-- 3) delay needs to be high enough since e.g. during quitting fullscreen
 			-- mode, Hammerspoon temporarily cannot detect Finder windows (sic!)
 			if #windowFilter:getWindows() == 0 then app("Finder"):kill() end
 		end)
@@ -182,12 +184,6 @@ function autoTile(windowFilter)
 		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
 		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
 		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
-	elseif #wins == 5 then
-		moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
-		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
-		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
-		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
-		moveResize(wins[5], { h = 0.5, w = 0.5, x = 0.25, y = 0.25 })
 	end
 end
 
@@ -207,7 +203,48 @@ local function controlSpaceAction()
 	moveResize(currentWin, pos)
 end
 
--- Window resizing
+--------------------------------------------------------------------------------
+
+local function moveCurWinToOtherDisplay()
+	local win = hs.window.focusedWindow()
+	if not win then return end
+	local targetScreen = win:screen():next()
+	win:moveToScreen(targetScreen, true)
+
+	runWithDelays({ 0.1, 0.2 }, function()
+		-- workaround for ensuring proper resizing
+		win = hs.window.focusedWindow()
+		if not win then return end
+		win:setFrameInScreenBounds(win:frame())
+	end)
+end
+
+local function homeAction()
+	if appIsRunning("zoom.us") then
+		alert("🔈/🔇") -- toggle mute
+		keystroke({ "shift", "command" }, "A", 1, app("zoom.us"))
+		return
+	end
+	twitterScrollUp()
+end
+
+local function endAction()
+	if appIsRunning("zoom.us") then
+		alert("📹") -- toggle video
+		keystroke({ "shift", "command" }, "V", 1, app("zoom.us"))
+		return
+	end
+end
+
+--------------------------------------------------------------------------------
+
+-- Hotkeys
+hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
+hotkey(hyper, "pagedown", moveCurWinToOtherDisplay)
+hotkey(hyper, "pageup", moveCurWinToOtherDisplay)
+hotkey({}, "home", homeAction)
+hotkey({}, "end", endAction)
 hotkey(hyper, "right", function() moveResize(hs.window.focusedWindow(), rightHalf) end)
 hotkey(hyper, "left", function() moveResize(hs.window.focusedWindow(), leftHalf) end)
 hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
+

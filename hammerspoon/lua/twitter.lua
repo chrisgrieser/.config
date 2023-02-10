@@ -12,8 +12,11 @@ function twitterScrollUp()
 end
 
 function twitterToTheSide()
-	app("Twitter"):findWindow("Twitter"):raise()
-	app("Twitter"):findWindow("Twitter"):setFrame(toTheSide)
+	if not (appIsRunning("Twitter")) then return end
+	local win = app("Twitter"):findWindow("Twitter")
+	if not win then return end
+	win:raise()
+	win:setFrame(toTheSide)
 	keystroke({ "command" }, "1", 1, app("Twitter")) -- home tab
 end
 
@@ -40,48 +43,9 @@ twitterWatcher = aw.new(function(appName, eventType, appObj)
 		end
 
 	-- raise twitter
-	elseif appIsRunning("Twitter") and eventType == aw.activated then
+	elseif eventType == aw.activated then
 		local win = appObj:mainWindow()
-		if checkSize(win, pseudoMaximized) then app("Twitter"):mainWindow():raise() end
+		if checkSize(win, pseudoMaximized) and appIsRunning("Twitter") then app("Twitter"):mainWindow():raise() end
 	end
 end):start()
 
---------------------------------------------------------------------------------
-
-local function moveCurWinToOtherDisplay()
-	local win = hs.window.focusedWindow()
-	if not win then return end
-	local targetScreen = win:screen():next()
-	win:moveToScreen(targetScreen, true)
-
-	runWithDelays({ 0.1, 0.2 }, function()
-		-- workaround for ensuring proper resizing
-		win = hs.window.focusedWindow()
-		if not win then return end
-		win:setFrameInScreenBounds(win:frame())
-	end)
-end
-
-local function homeAction()
-	if appIsRunning("zoom.us") then
-		alert("🔈/🔇") -- toggle mute
-		keystroke({ "shift", "command" }, "A", 1, app("zoom.us"))
-		return
-	end
-	twitterScrollUp()
-end
-
-local function endAction()
-	if appIsRunning("zoom.us") then
-		alert("📹") -- toggle video
-		keystroke({ "shift", "command" }, "V", 1, app("zoom.us"))
-		return
-	end
-end
-
--- Hotkeys
-hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
-hotkey(hyper, "pagedown", moveCurWinToOtherDisplay)
-hotkey(hyper, "pageup", moveCurWinToOtherDisplay)
-hotkey({}, "home", homeAction)
-hotkey({}, "end", endAction)
