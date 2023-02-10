@@ -1,23 +1,14 @@
 #!/bin/zsh
 # shellcheck disable=SC2012
-
-# https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
-
-#-------------------------------------------------------------------------------
-
-# to be triggered on finishing a torrent download, e.g. via Transmission.app
+export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+#───────────────────────────────────────────────────────────────────────────────
+# INFO https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
+#───────────────────────────────────────────────────────────────────────────────
 
 # Config
-VIDEO_DIR=~'/Downloaded'
+VIDEO_DIR="$HOME/Downloaded"
 SUB_LANG='en'
-
-# for testing purposes, to see if "TR_TORRENT_DIR" works
-echo "$TR_TORRENT_DIR" >> "$VIDEO_DIR/clutter-deletion-info.txt"
-echo "$TR_TORRENT_NAME" >> "$VIDEO_DIR/clutter-deletion-info.txt"
-
-#-------------------------------------------------------------------------------
-
-export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+#───────────────────────────────────────────────────────────────────────────────
 
 # delete clutter
 find "$VIDEO_DIR" \
@@ -42,6 +33,6 @@ if [[ $FILES_IN_FOLDER == 1 ]]; then
 fi
 
 # quit Transmission, if there are no other torrents
-STATUS=$(transmission-remote --list | grep -Ev '^( *ID|Sum:) ')
-[[ -z "$STATUS" ]] && osascript -e 'tell application "Transmission" to quit'
-
+if [[ -z "$(transmission-remote --list)" ]]; then
+	killall "Transmission"
+fi
