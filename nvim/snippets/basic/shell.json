@@ -94,6 +94,10 @@
 		"prefix": "null (pipe)",
 		"body": "&>/dev/null "
 	},
+	"urlencode": {
+		"prefix": "urlencode",
+		"body": "osascript -l JavaScript -e \"encodeURIComponent('$SEL')\""
+	},
 	"plist: extract key": {
 		"prefix": "plist: extract key",
 		"body": "plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
