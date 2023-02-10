@@ -1,12 +1,14 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 
--- notify with ambient brightness for Alfred
-uriScheme("ambient-brightness", function ()
+local function brightnessNotify()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 	local brightness = math.floor(hs.brightness.ambient())
 	notify("Brightness: ", tostring(brightness))	
-end)
+end
+
+-- notify with ambient brightness for Alfred
+uriScheme("ambient-brightness", brightnessNotify)
 
 -- done manually to include app-specific toggling for:
 -- - Brave Browser (fixing Dark Reader Bug)
@@ -15,6 +17,7 @@ end)
 -- - Sketchybar
 -- - Hammerspoon Console
 function toggleDarkMode()
+	brightnessNotify()
 	local prevApp = frontAppName()
 	local sketchyfont, sketchybg, toMode, pdfbg
 
