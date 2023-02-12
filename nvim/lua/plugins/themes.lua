@@ -157,8 +157,10 @@ function themeSettings()
 		group = "themeChange",
 		callback = function()
 			-- HACK defer needed for some modifications to properly take effect
-			vim.defer_fn(customHighlights, 100) ---@diagnostic disable-line: param-type-mismatch
-			vim.defer_fn(themeModifications, 100) ---@diagnostic disable-line: param-type-mismatch
+			for _, delayMs in pairs { 50, 100, 200 } do
+				vim.defer_fn(customHighlights, delayMs) ---@diagnostic disable-line: param-type-mismatch
+				vim.defer_fn(themeModifications, delayMs) ---@diagnostic disable-line: param-type-mismatch
+			end
 		end,
 	})
 
@@ -174,8 +176,8 @@ function themeSettings()
 	end
 
 	-- set dark or light mode on neovim startup (requires macos)
-	local targetMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark") and "dark"
-		or "light"
+	local isDarkMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
+	local targetMode = isDarkMode and "dark" or "light"
 	setThemeMode(targetMode)
 end
 
