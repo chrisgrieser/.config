@@ -59,12 +59,12 @@ function M.objectlog()
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
 		logStatement {
 			'print("' .. varname .. '")',
-			'hs.inspect(' .. varname .. ')'
+			"hs.inspect(" .. varname .. ")",
 		}
 	elseif ft == "lua" and expand("%:p:h"):find("nvim") then
-		logStatement = 'print("' .. varname .. ':", vim.pretty_print(' .. varname .. "))"
+		logStatement = { 'vim.pretty_print("' .. varname .. ':", ' .. varname .. ")" }
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = 'console.log("' .. varname .. ':", JSON.parse(JSON.stringify(' .. varname .. ")));"
+		logStatement = { 'console.dir("' .. varname .. ':", ' .. varname .. ");" }
 	else
 		vim.notify("Objectlog does not support " .. ft .. " yet.", logWarn)
 		return
@@ -75,7 +75,6 @@ function M.objectlog()
 		normal("j==")
 	end
 end
-
 
 function M.timelog()
 	if g.timelogStart == nil then g.timelogStart = true end
@@ -172,10 +171,7 @@ function M.removelogs()
 	local ft = bo.filetype
 	local logCommand
 	local linesBefore = fn.line("$")
-	if ft == "lua" and expand("%:p:h"):find("/hammerspoon/") then
-		logCommand = "print"
-		vim.notify("Only removing 'print' statements, not 'notify' statements.")
-	elseif ft == "lua" or ft == "python" then
+	if ft == "lua" or ft == "python" then
 		logCommand = "print"
 	elseif ft == "javascript" or ft == "typescript" then
 		logCommand = "console.log"
