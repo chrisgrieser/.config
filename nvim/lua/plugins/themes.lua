@@ -22,7 +22,7 @@ local lightTransparency = 0.95
 
 --------------------------------------------------------------------------------
 
-function themeSettings()
+function ThemeSettings()
 	require("config.utils")
 	---@param hlgroupfrom string
 	---@param hlgroupto string
@@ -39,7 +39,7 @@ function themeSettings()
 	linkHighlight("myAnnotations", "Todo")
 	fn.matchadd("myAnnotations", [[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|NOTE\|FIX\)\>]])
 
-	function customHighlights()
+	function CustomHighlights()
 		local highlights = {
 			"DiagnosticUnderlineError",
 			"DiagnosticUnderlineWarn",
@@ -158,7 +158,7 @@ function themeSettings()
 		callback = function()
 			-- HACK defer needed for some modifications to properly take effect
 			for _, delayMs in pairs { 50, 100, 200 } do
-				vim.defer_fn(customHighlights, delayMs) ---@diagnostic disable-line: param-type-mismatch
+				vim.defer_fn(CustomHighlights, delayMs) ---@diagnostic disable-line: param-type-mismatch
 				vim.defer_fn(themeModifications, delayMs) ---@diagnostic disable-line: param-type-mismatch
 			end
 		end,
@@ -167,7 +167,7 @@ function themeSettings()
 	-----------------------------------------------------------------------------
 	-- DARK MODE / LIGHT MODE
 	---@param mode string "dark"|"light"
-	function setThemeMode(mode)
+	function SetThemeMode(mode)
 		o.background = mode
 		g.neovide_transparency = mode == "dark" and darkTransparency or lightTransparency
 		cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
@@ -178,7 +178,7 @@ function themeSettings()
 	-- set dark or light mode on neovim startup (requires macos)
 	local isDarkMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
 	local targetMode = isDarkMode and "dark" or "light"
-	setThemeMode(targetMode)
+	SetThemeMode(targetMode)
 end
 
 return themePackages

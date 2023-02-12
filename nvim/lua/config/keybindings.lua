@@ -24,8 +24,8 @@ keymap("n", "<leader>lc", function()
 	vim.notify("COPIED\n" .. lastCommand)
 end, { desc = "Copy last command" })
 
--- [l]ast command [r]epeat
-keymap("n", "<leader>lr", "@:", { desc = "Run last command again" })
+-- last command again
+keymap("n", "!!", "@:", { desc = "Run last command again" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -194,8 +194,8 @@ keymap(
 
 -- Logging & Debugging
 local qlog = require("funcs.quicklog")
-keymap({"n", "x"}, "<leader>ll", qlog.log, { desc = " log" })
-keymap({"n", "x"}, "<leader>lo", qlog.objectlog, { desc = " object log" })
+keymap({ "n", "x" }, "<leader>ll", qlog.log, { desc = " log" })
+keymap({ "n", "x" }, "<leader>lo", qlog.objectlog, { desc = " object log" })
 keymap("n", "<leader>lb", qlog.beeplog, { desc = " beep log" })
 keymap("n", "<leader>lt", qlog.timelog, { desc = " time log" })
 keymap("n", "<leader>lr", qlog.removelogs, { desc = "  remove log" })

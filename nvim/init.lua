@@ -1,9 +1,9 @@
 -- CORE CONFIG
 vim.g.mapleader = ","
-borderStyle = "single" -- none|single|double|rounded|shadow|solid
-linterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
-vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
-updateCounterThreshhold = 25
+BorderStyle = "single" -- none|single|double|rounded|shadow|solid
+LinterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
+VimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
+UpdateCounterThreshhold = 25
 
 --------------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ require("config.utils") -- should come after lazy
 
 if isGui() then
 	require("config.gui-settings")
-	themeSettings()
+	ThemeSettings()
 else
 	require("config.terminal-only")
 end
