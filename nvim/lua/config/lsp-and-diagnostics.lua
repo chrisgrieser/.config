@@ -6,7 +6,7 @@ require("config.utils")
 -- INFO: Server names are LSP names, not Mason names
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local lsp_servers = {
-	"sumneko_lua",
+	"lua_ls",
 	"yamlls",
 	"jsonls",
 	"cssls",
@@ -194,9 +194,9 @@ end, { desc = "璉Copy Breadcrumbs" })
 local lspSettings = {}
 local lspFileTypes = {}
 
--- https://github.com/sumneko/lua-language-server/wiki/Annotations#annotations
--- https://github.com/sumneko/lua-language-server/wiki/Settings
-lspSettings.sumneko_lua = {
+-- https://github.com/LuaLS/lua-language-server/wiki/Annotations#annotations
+-- https://github.com/LuaLS/lua-language-server/wiki/Settings
+lspSettings.lua_ls = {
 	Lua = {
 		format = { enable = false }, -- using stylua instead. Also, sumneko-lsp-formatting has this weird bug where all folds are opened
 		completion = {
@@ -206,7 +206,7 @@ lspSettings.sumneko_lua = {
 		},
 		-- libraries defined per-project via luarc.json location: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
 		diagnostics = {
-			disable = { "trailing-space", "lowercase-global" },
+			disable = { "trailing-space" },
 		},
 		workspace = { checkThirdParty = false }, -- HACK https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		hint = {
