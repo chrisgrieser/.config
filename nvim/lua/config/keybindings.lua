@@ -194,12 +194,12 @@ keymap(
 
 -- Logging & Debugging
 local qlog = require("funcs.quicklog")
-keymap("n", "<leader>ll", qlog.log, { desc = " log" })
+keymap({"n", "x"}, "<leader>ll", qlog.log, { desc = " log" })
+keymap({"n", "x"}, "<leader>lo", qlog.objectlog, { desc = " object log" })
 keymap("n", "<leader>lb", qlog.beeplog, { desc = " beep log" })
 keymap("n", "<leader>lt", qlog.timelog, { desc = " time log" })
 keymap("n", "<leader>lr", qlog.removelogs, { desc = "  remove log" })
 keymap("n", "<leader>ld", qlog.debuglog, { desc = " debugger" })
-keymap("n", "<leader>lo", qlog.objectlog, { desc = " object log" })
 
 -- Sort & highlight duplicate lines
 -- stylua: ignore
