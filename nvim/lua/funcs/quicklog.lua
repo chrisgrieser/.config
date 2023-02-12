@@ -9,11 +9,8 @@ local logWarn = vim.log.levels.WARN
 ---runs :normal natively with bang
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
---------------------------------------------------------------------------------
-
----log statement for variable under cursor, similar to the 'turbo console log'
----VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
-function M.quicklog()
+---@return string
+local function getVarnameUnderCursor()
 	local varname
 	if fn.mode() == "n" then
 		varname = expand("<cword>")
@@ -23,13 +20,19 @@ function M.quicklog()
 		varname = fn.getreg("z")
 		fn.setreg("z", prevReg)
 	end
+	return varname
+end
 
+--------------------------------------------------------------------------------
+
+---log statement for variable under cursor, similar to the 'turbo console log'
+---VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
+function M.log()
+	local varname = getVarnameUnderCursor()
 	local logStatement
 	local ft = bo.filetype
 
-	if ft == "lua" and expand("%:p:h"):find("/hammerspoon/") then
-		logStatement = 'notify("' .. varname .. ':", ' .. varname .. ")"
-	elseif ft == "lua" then
+	if ft == "lua" then
 		logStatement = 'print("' .. varname .. ':", ' .. varname .. ")"
 	elseif ft == "python" then
 		logStatement = 'print("' .. varname .. ': " + ' .. varname .. ")"
@@ -47,6 +50,9 @@ function M.quicklog()
 	append(".", logStatement) ---@diagnostic disable-line: param-type-mismatch
 	normal("j==")
 end
+
+
+
 
 function M.timelog()
 	if g.timelogStart == nil then g.timelogStart = true end
@@ -103,9 +109,7 @@ function M.beeplog()
 	local logStatement
 	local ft = bo.filetype
 
-	if ft == "lua" and expand("%:p:h"):find("/hammerspoon/") then
-		logStatement = 'notify("beep")'
-	elseif ft == "lua" or ft == "python" then
+	if ft == "lua" or ft == "python" then
 		logStatement = 'print("beep")'
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement = 'console.log("beep");'

@@ -68,17 +68,19 @@ function movieModeLayout()
 end
 
 function workLayout()
-	local brightness 
-	if betweenTime(1, 8) then
-		brightness = 0	
-	elseif hs.brightness.ambient() > 120 then
-		brightness = 100
-	elseif hs.brightness.ambient() > 100 then
-		brightness = 90
-	else
-		brightness = 80
-	end 
-	if iMacDisplay then iMacDisplay:setBrightness(brightness) end
+	if iMacDisplay then
+		local brightness
+		if betweenTime(1, 8) then
+			brightness = 0
+		elseif hs.brightness.ambient() > 120 then
+			brightness = 100
+		elseif hs.brightness.ambient() > 100 then
+			brightness = 90
+		else
+			brightness = 80
+		end
+		iMacDisplay:setBrightness(brightness)
+	end
 
 	holeCover()
 	if not isWeekend() then openApp("Slack") end

@@ -24,8 +24,8 @@ keymap("n", "<leader>lc", function()
 	vim.notify("COPIED\n" .. lastCommand)
 end, { desc = "Copy last command" })
 
--- run [l]ast command [a]gain
-keymap("n", "<leader>la", "@:", { desc = "Run last command again" })
+-- [l]ast command [r]epeat
+keymap("n", "<leader>lr", "@:", { desc = "Run last command again" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -194,11 +194,12 @@ keymap(
 
 -- Logging & Debugging
 local qlog = require("funcs.quicklog")
-keymap({ "n", "x" }, "<leader>ll", qlog.quicklog, { desc = " log" })
-keymap({ "n", "x" }, "<leader>lb", qlog.beeplog, { desc = " beep log" })
-keymap({ "n", "x" }, "<leader>lt", qlog.timelog, { desc = " time log" })
-keymap({ "n", "x" }, "<leader>lr", qlog.removelogs, { desc = "  remove log" })
-keymap({ "n", "x" }, "<leader>ld", qlog.debuglog, { desc = " debugger" })
+keymap("n", "<leader>ll", qlog.log, { desc = " log" })
+keymap("n", "<leader>lb", qlog.beeplog, { desc = " beep log" })
+keymap("n", "<leader>lt", qlog.timelog, { desc = " time log" })
+keymap("n", "<leader>lr", qlog.removelogs, { desc = "  remove log" })
+keymap("n", "<leader>ld", qlog.debuglog, { desc = " debugger" })
+keymap("n", "<leader>lo", qlog.objectlog, { desc = " object log" })
 
 -- Sort & highlight duplicate lines
 -- stylua: ignore
