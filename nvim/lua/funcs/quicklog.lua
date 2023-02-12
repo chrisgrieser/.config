@@ -9,12 +9,12 @@ local logWarn = vim.log.levels.WARN
 ---runs :normal natively with bang
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
+---in normal mode, returns word under cursor, in visual mode, returns selection
 ---@return string
-local function getVarnameUnderCursor()
-	local varname
+local function getVar()
 	if fn.mode() == "n" then
 		varname = expand("<cword>")
-	else
+	elseif fn.mode():find("[Vv]") then
 		local prevReg = fn.getreg("z")
 		normal('"zy')
 		varname = fn.getreg("z")
@@ -28,16 +28,16 @@ end
 ---log statement for variable under cursor, similar to the 'turbo console log'
 ---VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.log()
-	local varname = getVarnameUnderCursor()
+	local varname = getVar()
 	local logStatement
 	local ft = bo.filetype
 
 	if ft == "lua" then
 		logStatement = 'print("' .. varname .. ':", ' .. varname .. ")"
 	elseif ft == "python" then
-		logStatement = 'print("' .. varname .. ': " + ' .. varname .. ")"
+		logStatement = 'print("' .. varname .. ': ", ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = 'console.log("' .. varname .. ': " + ' .. varname .. ");"
+		logStatement = 'console.log("' .. varname .. ':", ' .. varname .. ");"
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
 		logStatement = 'echo "(log) ' .. varname .. ": $" .. varname .. '"'
 	elseif ft == "applescript" then
@@ -51,7 +51,30 @@ function M.log()
 	normal("j==")
 end
 
+function M.objectlog()
+	local varname = getVar()
+	local logStatement
+	local ft = bo.filetype
 
+	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
+		logStatement {
+			'print("' .. varname .. '")',
+			'hs.inspect(' .. varname .. ')'
+		}
+	elseif ft == "lua" and expand("%:p:h"):find("nvim") then
+		logStatement = 'print("' .. varname .. ':", vim.pretty_print(' .. varname .. "))"
+	elseif ft == "javascript" or ft == "typescript" then
+		logStatement = 'console.log("' .. varname .. ':", JSON.parse(JSON.stringify(' .. varname .. ")));"
+	else
+		vim.notify("Objectlog does not support " .. ft .. " yet.", logWarn)
+		return
+	end
+
+	append(".", logStatement) ---@diagnostic disable-line: param-type-mismatch
+	for _ = 1, #logStatement, 1 do
+		normal("j==")
+	end
+end
 
 
 function M.timelog()
