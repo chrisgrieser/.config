@@ -30,7 +30,7 @@ function SystemStart()
 	else
 		if app("Finder") and #app("Finder"):allWindows() == 0 then app("Finder"):kill() end
 		notify("Hammerspoon started.")
-		syncAllGitRepos()
+		SyncAllGitRepos()
 		notify("Sync finished.")
 	end
 end
@@ -42,7 +42,7 @@ cons.toolbar(nil)
 cons.consoleFont { name = "JetBrainsMonoNL Nerd Font", size = 21 }
 
 ---@param mode string "dark"|"light""
-function setConsoleColors(mode)
+function SetConsoleColors(mode)
 	if mode == "dark" then
 		cons.darkMode(true)
 		cons.outputBackgroundColor { white = 0.1 }
@@ -58,13 +58,14 @@ end
 
 -- initialize
 local isDark = hs.execute([[defaults read -g AppleInterfaceStyle]]):find("Dark") and "dark" or "light"
-setConsoleColors(isDark)
+SetConsoleColors(isDark)
 
 -- copy last command to clipboard
 -- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)
 uriScheme("copy-last-command", function()
-	consoleHistory = cons.getHistory()
-	lastcommand = consoleHistory[#consoleHistory]
+	local consoleHistory = cons.getHistory()
+	if not consoleHistory then return end
+	local lastcommand = consoleHistory[#consoleHistory]
 	lastcommand = trim(lastcommand)
 	hs.pasteboard.setContents(lastcommand)
 	notify("Copied: '" .. lastcommand .. "'")

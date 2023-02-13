@@ -17,22 +17,22 @@ local passIcon = "🔑"
 
 -- retrieve configs from zshenv
 -- not local, cause sometimes not available, so set at startup
-dotfilesFolder = getenv("DOTFILE_FOLDER")
-passwordStore = getenv("PASSWORD_STORE_DIR")
-vaultLocation = getenv("VAULT_PATH")
+DotfilesFolder = getenv("DOTFILE_FOLDER")
+PasswordStore = getenv("PASSWORD_STORE_DIR")
+VaultLocation = getenv("VAULT_PATH")
 
-local gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
-local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
-local gitPassScript = passwordStore .. "/pass-sync.sh"
+local gitDotfileScript = DotfilesFolder .. "/git-dotfile-sync.sh"
+local gitVaultScript = VaultLocation .. "/Meta/git-vault-sync.sh"
+local gitPassScript = PasswordStore .. "/pass-sync.sh"
 
 --------------------------------------------------------------------------------
 
 ---@return boolean
 local function gitDotfileSync()
-	if gitDotfileSyncTask and gitDotfileSyncTask:isRunning() then return false end
+	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
 	if not (screenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
 
-	gitDotfileSyncTask = hs.task
+	GitDotfileSyncTask = hs.task
 		.new(
 			gitDotfileScript,
 			function(exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
@@ -55,16 +55,16 @@ local function gitDotfileSync()
 		)
 		:start()
 
-	if not gitDotfileSyncTask then return false end
+	if not GitDotfileSyncTask then return false end
 	return true
 end
 
 ---@return boolean
 local function gitVaultSync()
-	if gitVaultSyncTask and gitVaultSyncTask:isRunning() then return false end
+	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return false end
 	if not (screenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
 
-	gitVaultSyncTask = hs.task
+	GitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
 			stdErr = stdErr:gsub("\n", " –– ")
 			if exitCode == 0 then
@@ -75,16 +75,16 @@ local function gitVaultSync()
 		end)
 		:start()
 
-	if not gitVaultSyncTask then return false end
+	if not GitVaultSyncTask then return false end
 	return true
 end
 
 ---@return boolean
 local function gitPassSync()
-	if gitPassSyncTask and gitPassSyncTask:isRunning() then return true end
+	if GitPassSyncTask and GitPassSyncTask:isRunning() then return true end
 	if not screenIsUnlocked() then return true end -- prevent of standby home device background sync when in office
 
-	gitPassSyncTask = hs.task
+	GitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
 			stdErr = stdErr:gsub("\n", " –– ")
 			if exitCode == 0 then
@@ -95,7 +95,7 @@ local function gitPassSync()
 		end)
 		:start()
 
-	if not gitPassSyncTask then return false end
+	if not GitPassSyncTask then return false end
 	return true
 end
 
@@ -103,7 +103,7 @@ end
 
 ---sync all three git repos
 ---@param sendNotification? string|boolean whether to send notification on finished sync
-function syncAllGitRepos(sendNotification)
+function SyncAllGitRepos(sendNotification)
 	local success1 = gitDotfileSync()
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
@@ -113,9 +113,9 @@ function syncAllGitRepos(sendNotification)
 	end
 
 	local function noSyncInProgress()
-		local dotfilesSyncing = gitDotfileSyncTask and gitDotfileSyncTask:isRunning()
-		local passSyncing = gitPassSyncTask and gitPassSyncTask:isRunning()
-		local vaultSyncing = gitVaultSyncTask and gitVaultSyncTask:isRunning()
+		local dotfilesSyncing = GitDotfileSyncTask and GitDotfileSyncTask:isRunning()
+		local passSyncing = GitPassSyncTask and GitPassSyncTask:isRunning()
+		local vaultSyncing = GitVaultSyncTask and GitVaultSyncTask:isRunning()
 		return not (dotfilesSyncing or vaultSyncing or passSyncing)
 	end
 
@@ -127,27 +127,27 @@ function syncAllGitRepos(sendNotification)
 		:start()
 end
 
-repoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, syncAllGitRepos):start()
+RepoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, SyncAllGitRepos):start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 uriScheme("sync-repos", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
-	syncAllGitRepos("notify")
+	SyncAllGitRepos("notify")
 end)
 
 --------------------------------------------------------------------------------
 
-sleepWatcher = caff
+SleepWatcher = caff
 	.new(function(eventType)
-		if eventType == caff.screensDidSleep then syncAllGitRepos() end
+		if eventType == caff.screensDidSleep then SyncAllGitRepos() end
 	end)
 	:start()
 
-officeWakeWatcher = caff.new(function(event)
+OfficeWakeWatcher = caff.new(function(event)
 	if isAtOffice() and (event == caff.screensDidWake or event == caff.systemDidWake) then
-		twitterScrollUp()
-		syncAllGitRepos()
-		workLayout()
+		TwitterScrollUp()
+		SyncAllGitRepos()
+		WorkLayout()
 		local toDark = not (betweenTime(7, 18))
 		SetDarkmode(toDark)
 		return
@@ -157,10 +157,10 @@ end)
 --------------------------------------------------------------------------------
 -- CRONJOBS AT HOME
 
-homeWakeWatcher = caff
+HomeWakeWatcher = caff
 	.new(function(event)
 		if not (isAtOffice()) and (event == caff.screensDidWake or event == caff.systemDidWake) then
-			twitterScrollUp()
+			TwitterScrollUp()
 			hs.execute("sketchybar --set clock popup.drawing=true")
 
 			-- INFO checks need to run after delay, since display number is not
@@ -168,14 +168,14 @@ homeWakeWatcher = caff
 			runWithDelays(0.7, function()
 				if isProjector() then
 					SetDarkmode(true)
-					movieModeLayout()
+					MovieModeLayout()
 				else
-					workLayout()
+					WorkLayout()
 					local toDark = hs.brightness.ambient() < 85
 					SetDarkmode(toDark)
 				end
 			end)
-			if event == caff.systemDidWake then syncAllGitRepos("notify") end
+			if event == caff.systemDidWake then SyncAllGitRepos("notify") end
 		end
 	end)
 	:start()
@@ -199,7 +199,7 @@ local function trackpadBatteryCheck()
 	end
 end
 
-biweeklyTimer = timer("02:00", "02d", function()
+BiweeklyTimer = timer("02:00", "02d", function()
 	applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
@@ -214,15 +214,15 @@ biweeklyTimer = timer("02:00", "02d", function()
 end, true)
 
 -- timers not local for longevity with garbage collection
-dailyEveningTimer = timer("19:00", "01d", function() SetDarkmode(true) end)
-dailyMorningTimer = timer("08:00", "01d", function()
+DailyEveningTimer = timer("19:00", "01d", function() SetDarkmode(true) end)
+DailyMorningTimer = timer("08:00", "01d", function()
 	if not (isProjector()) then SetDarkmode(false) end
 end)
 
-projectorScreensaverWatcher = caff.new(function(eventType)
+ProjectorScreensaverWatcher = caff.new(function(eventType)
 	if eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart then
 		runWithDelays(2, function()
-			if isProjector() then iMacDisplay:setBrightness(0) end
+			if isProjector() then IMacDisplay:setBrightness(0) end
 		end)
 	end
 end)
@@ -245,24 +245,24 @@ local function sleepMovieApps()
 	]])
 end
 
-sleepTimer0 = timer("02:00", "01d", sleepMovieApps, true)
-sleepTimer1 = timer("03:00", "01d", sleepMovieApps, true)
-sleepTimer2 = timer("04:00", "01d", sleepMovieApps, true)
-sleepTimer3 = timer("05:00", "01d", sleepMovieApps, true)
-sleepTimer4 = timer("06:00", "01d", sleepMovieApps, true)
+SleepTimer0 = timer("02:00", "01d", sleepMovieApps, true)
+SleepTimer1 = timer("03:00", "01d", sleepMovieApps, true)
+SleepTimer2 = timer("04:00", "01d", sleepMovieApps, true)
+SleepTimer3 = timer("05:00", "01d", sleepMovieApps, true)
+SleepTimer4 = timer("06:00", "01d", sleepMovieApps, true)
 
 --------------------------------------------------------------------------------
 
 if isIMacAtHome() or isAtMother() then
-	dailyMorningTimer:start()
-	dailyEveningTimer:start()
-	sleepTimer0:start()
-	sleepTimer1:start()
-	sleepTimer2:start()
-	sleepTimer3:start()
-	sleepTimer4:start()
+	DailyMorningTimer:start()
+	DailyEveningTimer:start()
+	SleepTimer0:start()
+	SleepTimer1:start()
+	SleepTimer2:start()
+	SleepTimer3:start()
+	SleepTimer4:start()
 	if isIMacAtHome() then
-		biweeklyTimer:start()
-		projectorScreensaverWatcher:start()
+		BiweeklyTimer:start()
+		ProjectorScreensaverWatcher:start()
 	end
 end

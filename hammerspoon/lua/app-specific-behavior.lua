@@ -120,7 +120,7 @@ Wf_browser = wf.new("Brave Browser")
 		AutoTile(Wf_browser)
 
 		-- HACK to fix autofocus-bug in Brave
-		runWithDelays({0.4, 0.5}, function()
+		runWithDelays({ 0.4, 0.5 }, function()
 			if #Wf_browser:getWindows() == 1 then hs.eventtap.leftClick { x = 1000, y = 500 } end
 		end)
 	end)
@@ -279,6 +279,12 @@ FinderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 		AutoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
 		bringAllToFront()
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
+
+		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
+		-- properly utilize Finder
+		runWithDelays({2.5, 5, 10}, function()
+			if finderAppObj and #finderAppObj:allWindows() > 0 then finderAppObj:kill() end
+		end)
 	end
 end):start()
 
