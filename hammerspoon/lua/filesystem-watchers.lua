@@ -1,9 +1,9 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 -- CONFIG
-local dotfilesFolder = getenv("DOTFILE_FOLDER")
-local fileHub = getenv("WD")
-local home = getenv("HOME")
+local dotfilesFolder = Getenv("DOTFILE_FOLDER")
+local fileHub = Getenv("WD")
+local home = Getenv("HOME")
 
 --------------------------------------------------------------------------------
 
@@ -37,26 +37,26 @@ downloadFolderWatcher = pw(
 -- FONT rsync (for both directions)
 -- (symlinking the Folder somehow does not work properly, therefore rsync)
 local fontLocation = dotfilesFolder .. "/fonts/" -- source folder needs trailing "/" to copy contents (instead of the folder)
-fontsWatcher1 = pw(home .. "/Library/Fonts", function()
+FontsWatcher1 = Pw(home .. "/Library/Fonts", function()
 	hs.execute([[rsync --archive --update --delete "$HOME/Library/Fonts/" "]] .. fontLocation .. [["]])
-	notify("Fonts synced.")
+	Notify("Fonts synced.")
 end):start()
-fontsWatcher2 = pw(fontLocation, function()
+FontsWatcher2 = Pw(fontLocation, function()
 	hs.execute([[rsync --archive --update --delete "]] .. fontLocation .. [[" "$HOME/Library/Fonts"]])
-	notify("Fonts synced.")
+	Notify("Fonts synced.")
 end):start()
 
 --------------------------------------------------------------------------------
 
 -- Redirects TO File Hub
 local scanFolder = home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
-scanFolderWatcher = pw(scanFolder, function()
+ScanFolderWatcher = Pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. fileHub .. "'")
-	notify("Scan moved to File Hub")
+	Notify("Scan moved to File Hub")
 end):start()
 
 local systemDownloadFolder = home .. "/Downloads/"
-systemDlFolderWatcher = pw(systemDownloadFolder, function(files)
+SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	-- Stats Update file can directly be trashed
 	for _, filePath in pairs(files) do
 		if filePath:find("Stats%.dmg$") then
@@ -66,15 +66,15 @@ systemDlFolderWatcher = pw(systemDownloadFolder, function(files)
 	end
 	-- otherwise move to filehub
 	hs.execute("mv '" .. systemDownloadFolder .. "'/* '" .. fileHub .. "'")
-	notify("Download moved to File Hub.")
+	Notify("Download moved to File Hub.")
 end):start()
 
 local draftsIcloud = home .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
-draftsIcloudWatcher = pw(draftsIcloud, function(files)
+DraftsIcloudWatcher = Pw(draftsIcloud, function(files)
 	for _, filePath in pairs(files) do
 		if filePath:sub(-3) ~= ".md" or filePath:find("Inbox") then return end
 		hs.execute("mv '" .. draftsIcloud .. "'/*.md '" .. fileHub .. "'")
-		notify("Drafts doc moved to File Hub.")
+		Notify("Drafts doc moved to File Hub.")
 	end
 end):start()
 
@@ -82,7 +82,7 @@ end):start()
 
 -- Redirects FROM File Hub
 local browserSettings = dotfilesFolder .. "/browser-extension-configs/"
-fileHubWatcher = pw(fileHub, function(paths)
+FileHubWatcher = Pw(fileHub, function(paths)
 	for _, file in pairs(paths) do
 		local function isInSubdirectory(f, folder) -- (instead of directly in the folder)
 			local _, fileSlashes = f:gsub("/", "")
@@ -95,37 +95,37 @@ fileHubWatcher = pw(fileHub, function(paths)
 
 		-- delete alfredworkflows and ics
 		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
-			runWithDelays(3, function() os.rename(file, home .. "/.Trash/" .. fileName) end)
+			RunWithDelays(3, function() os.rename(file, home .. "/.Trash/" .. fileName) end)
 
 		-- ublacklist
 		elseif fileName == "ublacklist-settings.json" then
 			os.rename(file, browserSettings .. fileName)
-			notify(fileName .. " filed away.")
+			Notify(fileName .. " filed away.")
 
 			-- vimium-c
 		elseif fileName:match("vimium_c") then
 			os.rename(file, browserSettings .. "vimium-c-settings.json")
-			notify("Vimium-C backup filed away.")
+			Notify("Vimium-C backup filed away.")
 
 		-- adguard backup
 		elseif fileName:match(".*_adg_ext_settings_.*%.json") then
 			os.rename(file, browserSettings .. "adguard-settings.json")
-			notify("AdGuard backup filed away.")
+			Notify("AdGuard backup filed away.")
 
 		-- sponsor block
 		elseif fileName:match("SponsorBlockConfig_.*%.json") then
 			os.rename(file, browserSettings .. "SponsorBlockConfig.json")
-			notify("SpondorBlockConfig filed away.")
+			Notify("SpondorBlockConfig filed away.")
 
 		-- tampermonkey backup
 		elseif fileName:match("tampermonkey%-backup-.+%.txt") then
 			os.rename(file, browserSettings .. "tampermonkey-settings.json")
-			notify("TamperMonkey backup filed away.")
+			Notify("TamperMonkey backup filed away.")
 
 		-- watch later .urls from the office
-		elseif fileName:sub(-4) == ".url" and isIMacAtHome() then
+		elseif fileName:sub(-4) == ".url" and IsIMacAtHome() then
 			os.rename(file, home .. "/Downloaded/" .. fileName)
-			notify("Watch Later URL moved to Video Downloads.")
+			Notify("Watch Later URL moved to Video Downloads.")
 
 		-- visualised keyboard layouts
 		elseif
@@ -137,7 +137,7 @@ fileHubWatcher = pw(fileHub, function(paths)
 			or fileName:match("single%-keystroke%-bindings%.%w+")
 		then
 			os.rename(file, dotfilesFolder .. "/visualized-keyboard-layout/" .. fileName)
-			notify("Visualized Keyboard Layout filed away.")
+			Notify("Visualized Keyboard Layout filed away.")
 
 			-- Finder vim mode
 		elseif fileName:match("finder%-vim%-cheatsheet%.%w+") then
@@ -145,18 +145,18 @@ fileHubWatcher = pw(fileHub, function(paths)
 				file,
 				home .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/" .. fileName
 			)
-			notify("Finder Vim Layout filed away.")
+			Notify("Finder Vim Layout filed away.")
 		end
 	end
 end):start()
 
 --------------------------------------------------------------------------------
 -- auto-install Obsidian Alpha builds as soon as the file is downloaded
-obsiAlphaWatcher = pw(fileHub, function(files)
+ObsiAlphaWatcher = Pw(fileHub, function(files)
 	for _, file in pairs(files) do
 		-- needs delay and crdownload check, since the renaming is sometimes not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
-		runWithDelays(0.5, function()
+		RunWithDelays(0.5, function()
 			hs.execute([[cd "]] .. fileHub .. [[" || exit 1
 				test -f obsidian-*.*.*.asar.gz || exit 1
 				killall Obsidian
@@ -168,7 +168,7 @@ obsiAlphaWatcher = pw(fileHub, function(files)
 				sleep 0.2
 				open -a "Obsidian"]])
 			-- close the created tab
-			applescript([[
+			Applescript([[
 				tell application "Brave Browser"
 					set window_list to every window
 					repeat with the_window in window_list

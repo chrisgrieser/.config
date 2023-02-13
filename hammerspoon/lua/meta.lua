@@ -12,7 +12,7 @@ hs.window.animationDuration = 0
 
 -- `hammerspoon://hs-reload` for reloading via Build System
 local reloadIndicator = "/tmp/hs-is-reloading"
-uriScheme("hs-reload", function()
+UriScheme("hs-reload", function()
 	if cons.hswindow() then cons.hswindow():close() end -- close console
 	hs.execute("touch " .. reloadIndicator)
 	hs.reload()
@@ -28,10 +28,10 @@ function SystemStart()
 		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded.")' > /tmp/nvim-automation]])
 		return
 	else
-		if app("Finder") and #app("Finder"):allWindows() == 0 then app("Finder"):kill() end
-		notify("Hammerspoon started.")
+		if App("Finder") and #App("Finder"):allWindows() == 0 then App("Finder"):kill() end
+		Notify("Hammerspoon started.")
 		SyncAllGitRepos()
-		notify("Sync finished.")
+		Notify("Sync finished.")
 	end
 end
 
@@ -62,14 +62,14 @@ SetConsoleColors(isDark)
 
 -- copy last command to clipboard
 -- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)
-uriScheme("copy-last-command", function()
+UriScheme("copy-last-command", function()
 	local consoleHistory = cons.getHistory()
 	if not consoleHistory then return end
 	local lastcommand = consoleHistory[#consoleHistory]
-	lastcommand = trim(lastcommand)
+	lastcommand = Trim(lastcommand)
 	hs.pasteboard.setContents(lastcommand)
-	notify("Copied: '" .. lastcommand .. "'")
+	Notify("Copied: '" .. lastcommand .. "'")
 end)
 
 -- `hammerspoon://clear-console` for Karabiner Elements (⌘K)
-uriScheme("clear-console", cons.clearConsole)
+UriScheme("clear-console", cons.clearConsole)

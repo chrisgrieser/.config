@@ -45,7 +45,7 @@ function M.log()
 	local ft = bo.filetype
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = 'notify("' .. varname .. ':", ' .. varname .. ")"
+		logStatement = 'Notify("' .. varname .. ':", ' .. varname .. ")"
 	elseif ft == "lua" or ft == "python" then
 		logStatement = 'print("' .. varname .. ': ", ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
@@ -68,10 +68,7 @@ function M.objectlog()
 	local ft = bo.filetype
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement {
-			'print("' .. varname .. '")',
-			"hs.inspect(" .. varname .. ")",
-		}
+		logStatement = 'print("' .. varname .. ':", hs.inspect(' .. varname .. "))"
 	elseif ft == "lua" and expand("%:p:h"):find("nvim") then
 		logStatement = 'vim.pretty_print("' .. varname .. ':", ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
@@ -137,7 +134,7 @@ function M.beeplog()
 	local ft = bo.filetype
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = 'notify("beep")'
+		logStatement = 'Notify("beep")'
 	elseif ft == "lua" or ft == "python" then
 		logStatement = 'print("beep")'
 	elseif ft == "javascript" or ft == "typescript" then
@@ -172,41 +169,41 @@ end
 ---Remove all log statements in the current buffer
 ---Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.removelogs()
-	g.timelogCount = 0 -- reset timelog
 	local ft = bo.filetype
 	local logCommand
 	local numOfLinesBefore = fn.line("$")
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logCommand = 'notify("beep")'
-		vim.notify("Only removing log statements for ham")
+		logCommand = 'Notify("beep")'
+		vim.notify("Only removing beep log statements for hammmerspoon, since otherwise not unambiguous")
 	elseif ft == "lua" or ft == "python" then
 		logCommand = "print"
 	elseif ft == "javascript" or ft == "typescript" then
 		logCommand = "console.log"
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
 		logCommand = {
-
+			'echo "(beep)"',
+			'echo "(log)', -- no second " to catch full log statement
+			'echo "(time)',
 		}
-		cmd([[g/^\secho "(beep)"/d]]) -- keywords in () needed to ensure that other echos are not deleted
-		cmd([[g/^\secho "(log)/d]])
-		cmd([[g/^\secho "(time)/d]])
-		return
 	elseif ft == "applescript" then
-		cmd([[g/^\slog/d]])
-		cmd([[g/^\sbeep/d]])
-		return
+		logCommand = { "log", "beep" }
 	else
 		vim.notify("Removelog does not support " .. ft .. " yet.", logWarn)
 	end
 
-	cmd([[g/^\s*]] .. logCommand .. [[/d]])
+	if type(logCommand) == "string" then logCommand = { logCommand } end
+	for _, logCom in pairs(logCommand) do
+		cmd([[g/^\s*]] .. logCom .. [[/d]])
+	end
 	cmd.nohlsearch()
 
 	local linesRemoved = numOfLinesBefore - fn.line("$")
 	local msg = "Cleared " .. tostring(linesRemoved) .. " log statements."
 	if linesRemoved == 1 then msg = msg:gsub("s%.$", ".") end -- remove plural
 	vim.notify(msg)
+
+	g.timelogCount = 0 -- reset timelog
 end
 
 --------------------------------------------------------------------------------

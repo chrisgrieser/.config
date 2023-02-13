@@ -27,49 +27,49 @@ local function highlightsAppScroll(amount)
 end
 
 local function scrollDown()
-	if frontAppName():lower() == "alacritty" then
-		keystroke({ "shift" }, "pagedown")
-	elseif frontAppName() == "Highlights" then
+	if FrontAppName():lower() == "alacritty" then
+		Keystroke({ "shift" }, "pagedown")
+	elseif FrontAppName() == "Highlights" then
 		highlightsAppScroll(-highlightsScrollAmount)
 	else
-		keystroke({}, "pagedown")
+		Keystroke({}, "pagedown")
 	end
 end
 local function scrollUp()
-	if frontAppName():lower() == "alacritty" then
-		keystroke({ "shift" }, "pageup")
-	elseif frontAppName() == "Highlights" then
+	if FrontAppName():lower() == "alacritty" then
+		Keystroke({ "shift" }, "pageup")
+	elseif FrontAppName() == "Highlights" then
 		highlightsAppScroll(highlightsScrollAmount)
 	else
-		keystroke({}, "pageup")
+		Keystroke({}, "pageup")
 	end
 end
 
-hotkey({ "alt" }, "J", scrollDown, nil, scrollDown)
-hotkey({ "alt" }, "K", scrollUp, nil, scrollUp)
+Hotkey({ "alt" }, "J", scrollDown, nil, scrollDown)
+Hotkey({ "alt" }, "K", scrollUp, nil, scrollUp)
 
 --------------------------------------------------------------------------------
 
 -- CURSOR HIDING in Brave
 -- when Brave activates and j or k is pressed for the first time, hide cursor
 local function hideCurAndPassThrough(key)
-	jHidesCursor:disable() -- so it only works the first time
-	kHidesCursor:disable()
-	keystroke({}, key, 1) -- sending globally instead of to Brave, so it still works with Alfred
+	JHidesCursor:disable() -- so it only works the first time
+	KHidesCursor:disable()
+	Keystroke({}, key, 1) -- sending globally instead of to Brave, so it still works with Alfred
 	pseudoHideCursor()
 end
 
-jHidesCursor = hotkey({}, "j", function() hideCurAndPassThrough("j") end):disable()
-kHidesCursor = hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
+JHidesCursor = Hotkey({}, "j", function() hideCurAndPassThrough("j") end):disable()
+KHidesCursor = Hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
 
-jk_watcher = aw.new(function(appName, eventType)
-	if eventType == aw.activated then
+Jk_watcher = Aw.new(function(appName, eventType)
+	if eventType == Aw.activated then
 		if appName == "Brave Browser" then
-			jHidesCursor:enable()
-			kHidesCursor:enable()
+			JHidesCursor:enable()
+			KHidesCursor:enable()
 		else
-			jHidesCursor:disable()
-			kHidesCursor:disable()
+			JHidesCursor:disable()
+			KHidesCursor:disable()
 		end
 	end
 end):start()

@@ -44,9 +44,9 @@ function MovieModeLayout()
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
 
-	runWithDelays({ 0, 0.5 }, function() openApp("YouTube") end)
+	RunWithDelays({ 0, 0.5 }, function() OpenApp("YouTube") end)
 
-	quitApp {
+	QuitApp {
 		"Obsidian",
 		"Drafts",
 		"Neovide",
@@ -70,7 +70,7 @@ end
 function WorkLayout()
 	if IMacDisplay then
 		local brightness
-		if betweenTime(1, 8) then
+		if BetweenTime(1, 8) then
 			brightness = 0
 		elseif hs.brightness.ambient() > 120 then
 			brightness = 100
@@ -83,15 +83,15 @@ function WorkLayout()
 	end
 
 	HoleCover()
-	if not isWeekend() then openApp("Slack") end
-	openApp {
+	if not isWeekend() then OpenApp("Slack") end
+	OpenApp {
 		"Discord",
 		"Mimestream",
 		"Brave Browser",
 		"Twitter",
 		"Drafts",
 	}
-	quitApp {
+	QuitApp {
 		"Finder",
 		"YouTube",
 		"Netflix",
@@ -120,17 +120,17 @@ function WorkLayout()
 	hs.layout.apply(layout)
 	TwitterToTheSide()
 	ShowAllSidebars()
-	runWithDelays({ 0.5, 1 }, function()
-		app("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
-		app("Drafts"):activate()
-		local workspace = isAtOffice() and "Office" or "Home"
-		app("Drafts"):selectMenuItem { "Workspaces", workspace }
+	RunWithDelays({ 0.5, 1 }, function()
+		App("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
+		App("Drafts"):activate()
+		local workspace = IsAtOffice() and "Office" or "Home"
+		App("Drafts"):selectMenuItem { "Workspaces", workspace }
 	end)
 
 	-- wait until sync is finished, to avoid merge conflict
 	hs.timer
 		.waitUntil(
-			function() return not (gitDotfileSyncTask and gitDotfileSyncTask:isRunning()) end,
+			function() return not (GitDotfileSyncTask and GitDotfileSyncTask:isRunning()) end,
 			function() alacrittyFontSize(26) end
 		)
 		:start()
@@ -139,9 +139,9 @@ end
 local function motherMovieModeLayout()
 	IMacDisplay:setBrightness(0)
 	dockSwitcher("mother-movie")
-	runWithDelays({ 0, 1 }, function()
-		openApp("YouTube")
-		quitApp {
+	RunWithDelays({ 0, 1 }, function()
+		OpenApp("YouTube")
+		QuitApp {
 			"Obsidian",
 			"Drafts",
 			"Slack",
@@ -159,11 +159,11 @@ local function motherMovieModeLayout()
 end
 
 local function motherHomeModeLayout()
-	local brightness = betweenTime(1, 8) and 0 or 0.8
+	local brightness = BetweenTime(1, 8) and 0 or 0.8
 	IMacDisplay:setBrightness(brightness)
 
-	if not isWeekend() then openApp("Slack") end
-	openApp {
+	if not isWeekend() then OpenApp("Slack") end
+	OpenApp {
 		"Discord",
 		"Obsidian",
 		"Mimestream",
@@ -171,14 +171,14 @@ local function motherHomeModeLayout()
 		"Twitter",
 		"Drafts",
 	}
-	quitApp {
+	QuitApp {
 		"YouTube",
 		"Netflix",
 		"CrunchyRoll",
 		"IINA",
 		"Twitch",
 	}
-	privateClosers()
+	PrivateClosers()
 
 	alacrittyFontSize(25)
 	dockSwitcher("home")
@@ -195,7 +195,7 @@ local function motherHomeModeLayout()
 		"Alacritty",
 	})
 
-	runWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
+	RunWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
 		hs.layout.apply(layout)
 		TwitterToTheSide()
 	end)
@@ -205,26 +205,26 @@ end
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 local function setLayout()
-	if isIMacAtHome() and isProjector() then
+	if IsIMacAtHome() and IsProjector() then
 		MovieModeLayout()
-	elseif isAtOffice() or (isIMacAtHome() and not isProjector()) then
-		workLayout()
-	elseif isAtMother() and isProjector() then
+	elseif IsAtOffice() or (IsIMacAtHome() and not IsProjector()) then
+		WorkLayout()
+	elseif IsAtMother() and IsProjector() then
 		motherMovieModeLayout()
-	elseif isAtMother() and not isProjector() then
+	elseif IsAtMother() and not IsProjector() then
 		motherHomeModeLayout()
 	end
 end
 
 -- watcher + hotkey
 DisplayCountWatcher = hs.screen.watcher.new(setLayout):start()
-hotkey(hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
-hotkey({ "shift" }, "f6", setLayout) -- for Apple keyboard
+Hotkey(Hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
+Hotkey({ "shift" }, "f6", setLayout) -- for Apple keyboard
 
 --------------------------------------------------------------------------------
 
 -- Open at Mouse Screen
-Wf_appsOnMouseScreen = wf.new({
+Wf_appsOnMouseScreen = Wf.new({
 	"Drafts",
 	"Brave Browser",
 	"Mimestream",
@@ -247,14 +247,14 @@ Wf_appsOnMouseScreen = wf.new({
 	"Netflix",
 	"CrunchyRoll",
 	"Finder",
-}):subscribe(wf.windowCreated, function(newWin)
+}):subscribe(Wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	if not mouseScreen then return end
 	local screenOfWindow = newWin:screen()
-	if not isProjector() or mouseScreen:name() == screenOfWindow:name() then return end
+	if not IsProjector() or mouseScreen:name() == screenOfWindow:name() then return end
 
 	local appn = newWin:application():name()
-	runWithDelays({ 0.1, 0.3 }, function()
+	RunWithDelays({ 0.1, 0.3 }, function()
 		if not (mouseScreen:name() == screenOfWindow:name()) then newWin:moveToScreen(mouseScreen) end
 
 		if appn == "Finder" or appn == "Script Editor" or appn == "Hammerspoon" then

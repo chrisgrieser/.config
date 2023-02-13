@@ -1,16 +1,16 @@
-hotkey = hs.hotkey.bind
-alert = hs.alert.show
-keystroke = hs.eventtap.keyStroke
-aw = hs.application.watcher
-wf = hs.window.filter
-app = hs.application
-applescript = hs.osascript.applescript
-uriScheme = hs.urlevent.bind
-pw = hs.pathwatcher.new
-tableContains = hs.fnutils.contains
+Hotkey = hs.hotkey.bind
+Alert = hs.alert.show
+Keystroke = hs.eventtap.keyStroke
+Aw = hs.application.watcher
+Wf = hs.window.filter
+App = hs.application
+Applescript = hs.osascript.applescript
+UriScheme = hs.urlevent.bind
+Pw = hs.pathwatcher.new
+TableContains = hs.fnutils.contains
 --------------------------------------------------------------------------------
 
-hyper = { "cmd", "alt", "ctrl", "shift" }
+Hyper = { "cmd", "alt", "ctrl", "shift" }
 I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ I = hs.inspect -- to inspect tables in the console
 ---trims whitespace from string
 ---@param str string
 ---@return string
-function trim(str)
+function Trim(str)
 	if not str then return "" end
 	str = str:gsub("^%s*(.-)%s*$", "%1")
 	return str
@@ -28,7 +28,7 @@ end
 ---write to a file, using lua io
 ---@param filepath string
 ---@param textToAppend string
-function appendToFile(filepath, textToAppend)
+function AppendToFile(filepath, textToAppend)
 	local file, err = io.open(filepath, "a")
 	if file then
 		file:write(textToAppend)
@@ -44,10 +44,10 @@ end
 --Hammerspoon's runtime, this	will not work.
 ---@param VAR string
 ---@return string
-function getenv(VAR)
+function Getenv(VAR)
 	local out = hs.execute("echo $" .. VAR):gsub("\n$", "")
 	if not out or out == "" then
-		notify("⚠️️ $" .. VAR .. " could not be retrieved.")
+		Notify("⚠️️ $" .. VAR .. " could not be retrieved.")
 		return ""
 	else
 		return out
@@ -57,7 +57,7 @@ end
 ---Repeat a Function multiple times
 ---@param delaySecs number|number[]
 ---@param func function function to repeat
-function runWithDelays(delaySecs, func)
+function RunWithDelays(delaySecs, func)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
 		hs.timer.doAfter(delay, func)
@@ -65,7 +65,7 @@ function runWithDelays(delaySecs, func)
 end
 
 ---@return boolean
-function isProjector()
+function IsProjector()
 	local mainDisplayName = hs.screen.primaryScreen():name()
 	local projectorHelmholtz = mainDisplayName == "ViewSonic PJ"
 	local tvLeuthinger = mainDisplayName == "TV_MONITOR"
@@ -73,7 +73,7 @@ function isProjector()
 end
 
 ---@return boolean
-function isAtOffice()
+function IsAtOffice()
 	local mainDisplayName = hs.screen.primaryScreen():name()
 	local screenOne = mainDisplayName == "HP E223"
 	local screenTwo = mainDisplayName == "Acer CB241HY"
@@ -81,7 +81,7 @@ function isAtOffice()
 end
 
 ---@return boolean
-function screenIsUnlocked()
+function ScreenIsUnlocked()
 	local _, success = hs.execute(
 		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1'
 	)
@@ -89,20 +89,20 @@ function screenIsUnlocked()
 end
 
 ---@return string
-function deviceName()
+function DeviceName()
 	-- similar to `scutil --get ComputerName`, only native to hammerspoon and therefore a bit more reliable
 	local name, _ = hs.host.localizedName():gsub(".- ", "", 1)
 	return name
 end
 
 ---@return boolean
-function isAtMother() return deviceName():find("Mother") ~= nil end
+function IsAtMother() return DeviceName():find("Mother") ~= nil end
 
 ---@return boolean
-function isIMacAtHome() return (deviceName():find("iMac") and deviceName():find("Home")) ~= nil end
+function IsIMacAtHome() return (DeviceName():find("iMac") and DeviceName():find("Home")) ~= nil end
 
 ---Send Notification
-function notify(...)
+function Notify(...)
 	local safe_args = {}
 	local args = { ... }
 	for _, arg in pairs(args) do
@@ -117,39 +117,39 @@ end
 ---@param startHour number, e.g. 13.5 = 13:30
 ---@param endHour number
 ---@return boolean
-function betweenTime(startHour, endHour)
+function BetweenTime(startHour, endHour)
 	local currentHour = hs.timer.localTime() / 60 / 60
 	return currentHour > startHour and currentHour < endHour
 end
 
 ---@return string
-function frontAppName()
+function FrontAppName()
 	return hs.application.frontmostApplication():name() ---@diagnostic disable-line: return-type-mismatch
 end
 
 ---@param appName string
 ---@return boolean
-function appIsRunning(appName)
+function AppIsRunning(appName)
 	-- can't use ":isRunning()", since the application object is nil when it
 	-- wasn't running before
 	return hs.application.get(appName) ~= nil
 end
 
 ---@param appNames string|string[]
-function openApp(appNames)
+function OpenApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		local runs = app.get(name)
-		if not runs then app.open(name) end
+		local runs = App.get(name)
+		if not runs then App.open(name) end
 	end
 end
 
 ---@param appNames string|string[]
-function quitApp(appNames)
+function QuitApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		runWithDelays({ 0, 0.5 }, function()
-			local appObj = app.get(name)
+		RunWithDelays({ 0, 0.5 }, function()
+			local appObj = App.get(name)
 			if appObj then appObj:kill() end
 		end)
 	end
@@ -157,4 +157,4 @@ end
 
 -- won't work with Chromium browsers due to bug, but good for URI schemes
 ---@param url string
-function openLinkInBackground(url) hs.execute('open -g "' .. url .. '"') end
+function OpenLinkInBackground(url) hs.execute('open -g "' .. url .. '"') end

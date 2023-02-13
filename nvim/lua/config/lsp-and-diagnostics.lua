@@ -44,7 +44,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, { desc = "璉Next Diagnostic" })
 keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { desc = "璉Previous Diagnostic" })
 keymap("n", "<leader>d", function() vim.diagnostic.open_float { focusable = false } end, { desc = "璉Show Diagnostic" })
-keymap("n", "<leader>D", function() cmd.Telescope("diagnostic") end, { desc = "璉Workspace Diagnostics" })
 -- stylua: ignore end
 
 local function diagnosticFormat(diagnostic, mode)

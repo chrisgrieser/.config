@@ -22,7 +22,7 @@ function CheckSize(win, size)
 		"Transmission",
 		"Twitter",
 	}
-	if tableContains(invalidWinsByTitle, win:title()) then return nil end
+	if TableContains(invalidWinsByTitle, win:title()) then return nil end
 	local maxf = win:screen():frame()
 	local winf = win:frame()
 
@@ -45,17 +45,17 @@ end
 -- https://directory.getdrafts.com/a/2BS & https://directory.getdrafts.com/a/2BR
 ---@param draftsWin hs.window
 local function toggleDraftsSidebar(draftsWin)
-	runWithDelays({ 0.05, 0.2 }, function()
+	RunWithDelays({ 0.05, 0.2 }, function()
 		local drafts_w = draftsWin:frame().w
 		local screen_w = draftsWin:screen():frame().w
 		local mode = drafts_w / screen_w > 0.6 and "show" or "hide"
-		openLinkInBackground("drafts://x-callback-url/runAction?text=&action=" .. mode .. "-sidebar")
+		OpenLinkInBackground("drafts://x-callback-url/runAction?text=&action=" .. mode .. "-sidebar")
 	end)
 end
 
 ---@param highlightsWin hs.window
 local function toggleHighlightsSidebar(highlightsWin)
-	runWithDelays(0.3, function()
+	RunWithDelays(0.3, function()
 		local highlights_w = highlightsWin:frame().w
 		local screen_w = highlightsWin:screen():frame().w
 		local highlightsApp = hs.application("Highlights")
@@ -68,7 +68,7 @@ end
 -- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 ---@param obsiWin hs.window
 local function toggleObsidianSidebar(obsiWin)
-	runWithDelays({ 0.05, 0.2 }, function()
+	RunWithDelays({ 0.05, 0.2 }, function()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
 		if numberOfObsiWindows > 1 then return end -- prevent popout window resizing to affect sidebars
 
@@ -79,7 +79,7 @@ local function toggleObsidianSidebar(obsiWin)
 		-- (full = used as split pane)
 		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "true"
 			or "false"
-		openLinkInBackground("obsidian://sidebar?showRight=" .. mode .. "&showLeft=false")
+		OpenLinkInBackground("obsidian://sidebar?showRight=" .. mode .. "&showLeft=false")
 	end)
 end
 
@@ -97,9 +97,9 @@ function ToggleWinSidebar(win)
 end
 
 function ShowAllSidebars()
-	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
-	openLinkInBackground("obsidian://sidebar?showLeft=false&showRight=true")
-	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
+	if AppIsRunning("Highlights") then App("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
+	OpenLinkInBackground("obsidian://sidebar?showLeft=false&showRight=true")
+	OpenLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
 --------------------------------------------------------------------------------
@@ -112,11 +112,11 @@ local function obsidianThemeDevHelper(win, pos)
 	if
 		not (pos == PseudoMaximized or pos == Maximized)
 		and win:application():name():lower() == "neovide"
-		and appIsRunning("Obsidian")
+		and AppIsRunning("Obsidian")
 	then
-		runWithDelays(0.15, function()
-			app("Obsidian"):unhide()
-			app("Obsidian"):mainWindow():raise()
+		RunWithDelays(0.15, function()
+			App("Obsidian"):unhide()
+			App("Obsidian"):mainWindow():raise()
 		end)
 	end
 end
@@ -130,7 +130,7 @@ function MoveResize(win, pos)
 	if not win or not win:application() then return end
 	local appName = win:application():name()
 	if appName == "System Settings" or appName == "Twitter" or appName == "Transmission" then
-		notify(appName .. " cannot be resized properly.")
+		Notify(appName .. " cannot be resized properly.")
 		return
 	end
 
@@ -139,10 +139,10 @@ function MoveResize(win, pos)
 
 	if
 		(pos == PseudoMaximized or pos == Centered)
-		and appIsRunning("Twitter")
+		and AppIsRunning("Twitter")
 		and win:title() ~= "Quick Look"
 	then
-		app("Twitter"):mainWindow():raise()
+		App("Twitter"):mainWindow():raise()
 	end
 
 	-- pseudo-timeout
@@ -168,26 +168,26 @@ function AutoTile(windowSource)
 	---@return hs.window[]
 	local function getWins(_windowSource)
 		if type(_windowSource) == "string" then
-			return app(_windowSource):allWindows()
+			return App(_windowSource):allWindows()
 		else
 			return _windowSource:getWindows()
 		end
 	end
 	local wins = getWins(windowSource)
 
-	if #wins == 0 and frontAppName() == "Finder" then
+	if #wins == 0 and FrontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
-		runWithDelays(1, function()
+		RunWithDelays(1, function()
 			-- 1) quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 			-- 2) getWins() again to check if window count has changed in the meantime
 			-- 3) delay needs to be high enough to since e.g. during quitting fullscreen
 			-- mode, Hammerspoon temporarily cannot detect Finder windows (sic!)
-			if #getWins(windowSource) == 0 then app("Finder"):kill() end
+			if #getWins(windowSource) == 0 then App("Finder"):kill() end
 		end)
 	elseif #wins == 1 then
-		if isProjector() then
+		if IsProjector() then
 			MoveResize(wins[1], Maximized)
-		elseif frontAppName() == "Finder" then
+		elseif FrontAppName() == "Finder" then
 			MoveResize(wins[1], Centered)
 		else
 			MoveResize(wins[1], PseudoMaximized)
@@ -213,7 +213,7 @@ end
 local function controlSpaceAction()
 	local currentWin = hs.window.focusedWindow()
 	local pos
-	if frontAppName() == "Finder" or frontAppName() == "Script Editor" then
+	if FrontAppName() == "Finder" or FrontAppName() == "Script Editor" then
 		pos = Centered
 	elseif not CheckSize(currentWin, PseudoMaximized) then
 		pos = PseudoMaximized
@@ -231,7 +231,7 @@ local function moveCurWinToOtherDisplay()
 	local targetScreen = win:screen():next()
 	win:moveToScreen(targetScreen, true)
 
-	runWithDelays({ 0.1, 0.2 }, function()
+	RunWithDelays({ 0.1, 0.2 }, function()
 		-- workaround for ensuring proper resizing
 		win = hs.window.focusedWindow()
 		if not win then return end
@@ -240,18 +240,18 @@ local function moveCurWinToOtherDisplay()
 end
 
 local function homeAction()
-	if appIsRunning("zoom.us") then
-		alert("🔈/🔇") -- toggle mute
-		keystroke({ "shift", "command" }, "A", 1, app("zoom.us"))
+	if AppIsRunning("zoom.us") then
+		Alert("🔈/🔇") -- toggle mute
+		Keystroke({ "shift", "command" }, "A", 1, App("zoom.us"))
 		return
 	end
 	TwitterScrollUp()
 end
 
 local function endAction()
-	if appIsRunning("zoom.us") then
-		alert("📹") -- toggle video
-		keystroke({ "shift", "command" }, "V", 1, app("zoom.us"))
+	if AppIsRunning("zoom.us") then
+		Alert("📹") -- toggle video
+		Keystroke({ "shift", "command" }, "V", 1, App("zoom.us"))
 		return
 	end
 end
@@ -259,12 +259,12 @@ end
 --------------------------------------------------------------------------------
 
 -- Hotkeys
-hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
-hotkey(hyper, "pagedown", moveCurWinToOtherDisplay)
-hotkey(hyper, "pageup", moveCurWinToOtherDisplay)
-hotkey({}, "home", homeAction)
-hotkey({}, "end", endAction)
-hotkey(hyper, "right", function() MoveResize(hs.window.focusedWindow(), RightHalf) end)
-hotkey(hyper, "left", function() MoveResize(hs.window.focusedWindow(), LeftHalf) end)
-hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
+Hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
+Hotkey(Hyper, "pagedown", moveCurWinToOtherDisplay)
+Hotkey(Hyper, "pageup", moveCurWinToOtherDisplay)
+Hotkey({}, "home", homeAction)
+Hotkey({}, "end", endAction)
+Hotkey(Hyper, "right", function() MoveResize(hs.window.focusedWindow(), RightHalf) end)
+Hotkey(Hyper, "left", function() MoveResize(hs.window.focusedWindow(), LeftHalf) end)
+Hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
 

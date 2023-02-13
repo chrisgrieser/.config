@@ -17,9 +17,9 @@ local passIcon = "🔑"
 
 -- retrieve configs from zshenv
 -- not local, cause sometimes not available, so set at startup
-DotfilesFolder = getenv("DOTFILE_FOLDER")
-PasswordStore = getenv("PASSWORD_STORE_DIR")
-VaultLocation = getenv("VAULT_PATH")
+DotfilesFolder = Getenv("DOTFILE_FOLDER")
+PasswordStore = Getenv("PASSWORD_STORE_DIR")
+VaultLocation = Getenv("VAULT_PATH")
 
 local gitDotfileScript = DotfilesFolder .. "/git-dotfile-sync.sh"
 local gitVaultScript = VaultLocation .. "/Meta/git-vault-sync.sh"
@@ -30,7 +30,7 @@ local gitPassScript = PasswordStore .. "/pass-sync.sh"
 ---@return boolean
 local function gitDotfileSync()
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
-	if not (screenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
+	if not (ScreenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
 
 	GitDotfileSyncTask = hs.task
 		.new(
@@ -47,9 +47,9 @@ local function gitDotfileSync()
 				local submodulesStillDirty = stdout:match(" m ")
 				if submodulesStillDirty then
 					local modules = stdout:gsub(".*/", "")
-					notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
+					Notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
 				else
-					notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
+					Notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
 				end
 			end
 		)
@@ -62,7 +62,7 @@ end
 ---@return boolean
 local function gitVaultSync()
 	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return false end
-	if not (screenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
+	if not (ScreenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
 
 	GitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
@@ -71,7 +71,7 @@ local function gitVaultSync()
 				print(vaultIcon, "Vault Sync successful.")
 				return
 			end
-			notify(vaultIcon .. "⚠️️ vault " .. stdErr)
+			Notify(vaultIcon .. "⚠️️ vault " .. stdErr)
 		end)
 		:start()
 
@@ -82,7 +82,7 @@ end
 ---@return boolean
 local function gitPassSync()
 	if GitPassSyncTask and GitPassSyncTask:isRunning() then return true end
-	if not screenIsUnlocked() then return true end -- prevent of standby home device background sync when in office
+	if not ScreenIsUnlocked() then return true end -- prevent of standby home device background sync when in office
 
 	GitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
@@ -91,7 +91,7 @@ local function gitPassSync()
 				print(passIcon, "Password-Store Sync successful.")
 				return
 			end
-			notify(passIcon .. "⚠️️ password-store " .. stdErr)
+			Notify(passIcon .. "⚠️️ password-store " .. stdErr)
 		end)
 		:start()
 
@@ -108,7 +108,7 @@ function SyncAllGitRepos(sendNotification)
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
 	if not (success1 and success2 and success3) then
-		notify("⚠️️ Sync Error.")
+		Notify("⚠️️ Sync Error.")
 		return
 	end
 
@@ -122,7 +122,7 @@ function SyncAllGitRepos(sendNotification)
 	hs.timer
 		.waitUntil(noSyncInProgress, function()
 			hs.execute("sketchybar --trigger repo-files-update")
-			if sendNotification then notify("Sync finished.") end
+			if sendNotification then Notify("Sync finished.") end
 		end)
 		:start()
 end
@@ -130,7 +130,7 @@ end
 RepoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, SyncAllGitRepos):start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
-uriScheme("sync-repos", function()
+UriScheme("sync-repos", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 	SyncAllGitRepos("notify")
 end)
@@ -144,11 +144,11 @@ SleepWatcher = caff
 	:start()
 
 OfficeWakeWatcher = caff.new(function(event)
-	if isAtOffice() and (event == caff.screensDidWake or event == caff.systemDidWake) then
+	if IsAtOffice() and (event == caff.screensDidWake or event == caff.systemDidWake) then
 		TwitterScrollUp()
 		SyncAllGitRepos()
 		WorkLayout()
-		local toDark = not (betweenTime(7, 18))
+		local toDark = not (BetweenTime(7, 18))
 		SetDarkmode(toDark)
 		return
 	end
@@ -159,14 +159,14 @@ end)
 
 HomeWakeWatcher = caff
 	.new(function(event)
-		if not (isAtOffice()) and (event == caff.screensDidWake or event == caff.systemDidWake) then
+		if not (IsAtOffice()) and (event == caff.screensDidWake or event == caff.systemDidWake) then
 			TwitterScrollUp()
 			hs.execute("sketchybar --set clock popup.drawing=true")
 
 			-- INFO checks need to run after delay, since display number is not
 			-- immediately picked up after wake
-			runWithDelays(0.7, function()
-				if isProjector() then
+			RunWithDelays(0.7, function()
+				if IsProjector() then
 					SetDarkmode(true)
 					MovieModeLayout()
 				else
@@ -187,7 +187,7 @@ local function trackpadBatteryCheck()
 		[[ioreg -c AppleDeviceManagementHIDEventService -r -l | grep -i trackpad -A 20 | grep BatteryPercent | cut -d= -f2 | cut -d' ' -f2]]
 	)
 	if not trackpadPercent then return end -- no trackpad connected
-	trackpadPercent = trim(trackpadPercent)
+	trackpadPercent = Trim(trackpadPercent)
 	if tonumber(trackpadPercent) < warningLevel then
 		local msg = "Trackpad Battery is low (" .. trackpadPercent .. "%)"
 		-- write to drafts inbox (= new draft without opening Drafts)
@@ -200,7 +200,7 @@ local function trackpadBatteryCheck()
 end
 
 BiweeklyTimer = timer("02:00", "02d", function()
-	applescript([[
+	Applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
 			run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
 			run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles"
@@ -216,13 +216,13 @@ end, true)
 -- timers not local for longevity with garbage collection
 DailyEveningTimer = timer("19:00", "01d", function() SetDarkmode(true) end)
 DailyMorningTimer = timer("08:00", "01d", function()
-	if not (isProjector()) then SetDarkmode(false) end
+	if not (IsProjector()) then SetDarkmode(false) end
 end)
 
 ProjectorScreensaverWatcher = caff.new(function(eventType)
 	if eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart then
-		runWithDelays(2, function()
-			if isProjector() then IMacDisplay:setBrightness(0) end
+		RunWithDelays(2, function()
+			if IsProjector() then IMacDisplay:setBrightness(0) end
 		end)
 	end
 end)
@@ -230,10 +230,10 @@ end)
 local function sleepMovieApps()
 	local minutesIdle = hs.host.idleTime() / 60
 	if minutesIdle < 30 then return end
-	quitApp { "YouTube", "Twitch", "CrunchyRoll" }
+	QuitApp { "YouTube", "Twitch", "CrunchyRoll" }
 	-- no need to quit IINA, since it autoquits on finishing playback
 	-- no need to quit Netflix since it autostops
-	applescript([[
+	Applescript([[
 		tell application "Brave Browser"
 			if ((count of window) is not 0)
 				if ((count of tab of front window) is not 0)
@@ -253,7 +253,7 @@ SleepTimer4 = timer("06:00", "01d", sleepMovieApps, true)
 
 --------------------------------------------------------------------------------
 
-if isIMacAtHome() or isAtMother() then
+if IsIMacAtHome() or IsAtMother() then
 	DailyMorningTimer:start()
 	DailyEveningTimer:start()
 	SleepTimer0:start()
@@ -261,7 +261,7 @@ if isIMacAtHome() or isAtMother() then
 	SleepTimer2:start()
 	SleepTimer3:start()
 	SleepTimer4:start()
-	if isIMacAtHome() then
+	if IsIMacAtHome() then
 		BiweeklyTimer:start()
 		ProjectorScreensaverWatcher:start()
 	end
