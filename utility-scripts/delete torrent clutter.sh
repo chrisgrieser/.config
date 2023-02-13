@@ -33,6 +33,6 @@ if [[ $FILES_IN_FOLDER == 1 ]]; then
 fi
 
 # quit Transmission, if there are no other torrents
-if [[ -z "$(transmission-remote --list)" ]]; then
-	killall "Transmission"
-fi
+sleep 0.5
+torrent_active=$(transmission-remote --list | grep -v "ID" | grep -v "Sum:")
+[[ -z "$torrent_active" ]] && killall "Transmission"

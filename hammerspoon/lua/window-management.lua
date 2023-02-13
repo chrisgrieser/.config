@@ -14,7 +14,15 @@ ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide u
 ---@return boolean|nil
 function CheckSize(win, size)
 	if not win then return nil end
-	if not win or not win:screen() then return end
+	local invalidWinsByTitle = { -- windows which cannot be resized
+		"Copy",
+		"Move",
+		"Delete",
+		"System Settings",
+		"Transmission",
+		"Twitter",
+	}
+	if tableContains(invalidWinsByTitle, win:title()) then return nil end
 	local maxf = win:screen():frame()
 	local winf = win:frame()
 
@@ -121,7 +129,7 @@ end
 function MoveResize(win, pos)
 	if not win or not win:application() then return end
 	local appName = win:application():name()
-	if appName == "System Settings" or appName == "Twitter" then
+	if appName == "System Settings" or appName == "Twitter" or appName == "Transmission" then
 		notify(appName .. " cannot be resized properly.")
 		return
 	end
