@@ -116,7 +116,14 @@ Wf_browser = wf.new("Brave Browser")
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(wf.windowCreated, function() AutoTile(Wf_browser) end)
+	:subscribe(wf.windowCreated, function()
+		AutoTile(Wf_browser)
+
+		-- HACK to fix autofocus-bug in Brave
+		runWithDelays({0.4, 0.5}, function()
+			if #Wf_browser:getWindows() == 1 then hs.eventtap.leftClick { x = 1000, y = 500 } end
+		end)
+	end)
 	:subscribe(wf.windowDestroyed, function() AutoTile(Wf_browser) end)
 	:subscribe(wf.windowFocused, bringAllToFront)
 

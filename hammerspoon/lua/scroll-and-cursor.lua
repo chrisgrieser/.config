@@ -5,8 +5,6 @@ local function pseudoHideCursor()
 	local screen = hs.mouse.getCurrentScreen()
 	if not screen then return end
 	local pos = {
-		-- x = screen:frame().w - 1, -- -1 to keep it on the current screen
-		-- y = screen:frame().h * 0.75,
 		x = 0,
 		y = screen:frame().h * 0.9,
 	}

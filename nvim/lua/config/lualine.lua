@@ -148,7 +148,7 @@ require("lualine").setup {
 				cond = function()
 					if not require("lazy.status").has_updates() then return false end
 					local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
-					return numberOfUpdates >= updateCounterThreshhold
+					return numberOfUpdates >= UpdateCounterThreshhold
 				end,
 				color = "NonText",
 			},
