@@ -53,9 +53,13 @@
 			")"
 		]
 	},
-	"notify": {
-		"prefix": "notify",
+	"notify (var)": {
+		"prefix": "notify (var)",
 		"body": "osascript -e \"display notification \\\"\\\" with title \\\"$${1:var}\\\"\""
+	},
+	"notify (msg)": {
+		"prefix": "notify (msg)",
+		"body": "osascript -e 'display notification \"\" with title \"${1:msg}\"'"
 	},
 	"if (short)": {
 		"prefix": "if: [[ .. ]] && ..",

@@ -4,7 +4,6 @@ export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 # INFO https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
 #───────────────────────────────────────────────────────────────────────────────
-
 # Config
 VIDEO_DIR="$HOME/Downloaded"
 SUB_LANG='en'
@@ -22,17 +21,22 @@ find "$VIDEO_DIR" \
 find "$VIDEO_DIR" -name "Sample" -print0 | xargs -0 rm -r # `-delete` does not work for directories, therefore done this way
 
 # download subtitles in newest folder
-NEW_FOLDER="$VIDEO_DIR/$(ls -tc "$VIDEO_DIR" | head -n1)"
-subliminal download --language "$SUB_LANG" "$NEW_FOLDER"
-
-# if no subtitle, move up
-FILES_IN_FOLDER=$(ls "$NEW_FOLDER" | wc -l | tr -d " ")
-if [[ $FILES_IN_FOLDER == 1 ]]; then
-	mv "$NEW_FOLDER"/* "$VIDEO_DIR"
-	rmdir "$NEW_FOLDER"
+if command -v subliminal &>/dev/null; then
+	NEW_FOLDER="$VIDEO_DIR/$(ls -tc "$VIDEO_DIR" | head -n1)"
+	subliminal download --language "$SUB_LANG" "$NEW_FOLDER"
+	# if no subtitle, move up
+	FILES_IN_FOLDER=$(ls "$NEW_FOLDER" | wc -l | tr -d " ")
+	if [[ $FILES_IN_FOLDER == 1 ]]; then
+		mv "$NEW_FOLDER"/* "$VIDEO_DIR"
+		rmdir "$NEW_FOLDER"
+	fi
+else
+	osascript -e 'display notification "" with title "Subliminal not installed"'
+	echo "subliminal not installed."
+	return 1
 fi
 
-# quit Transmission, if there are no other torrents
+# quit Transmission, if there are no other torrents active
 sleep 0.5
 torrent_active=$(transmission-remote --list | grep -v "ID" | grep -v "Sum:")
 [[ -z "$torrent_active" ]] && killall "Transmission"
