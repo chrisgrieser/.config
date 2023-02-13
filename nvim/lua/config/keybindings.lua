@@ -22,10 +22,10 @@ keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":")
 	fn.setreg("+", lastCommand)
 	vim.notify("COPIED\n" .. lastCommand)
-end, { desc = "Copy last command" })
+end, { desc = "גּ Copy last command" })
 
--- last command again
-keymap("n", "!!", "@:", { desc = "Run last command again" })
+-- [l]ast command [a]gain
+keymap("n", "<leader>la", "@:", { desc = "גּ Run last command again" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
