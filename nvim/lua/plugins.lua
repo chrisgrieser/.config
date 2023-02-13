@@ -24,15 +24,15 @@ return {
 			"SmiteshP/nvim-navic", -- breadcrumbs for statusline/winbar
 			"folke/neodev.nvim", -- lsp for nvim-lua config
 			"b0o/SchemaStore.nvim", -- schemas for json-lsp
-			{
-				"roobert/statusline-action-hints.nvim",
-				config = function()
-					require("statusline-action-hints").setup {
-						definition_identifier = "gd",
-						template = "%s ref:%s",
-					}
-				end,
-			},
+			-- {
+			-- 	"roobert/statusline-action-hints.nvim",
+			-- 	config = function()
+			-- 		require("statusline-action-hints").setup {
+			-- 			definition_identifier = "gd",
+			-- 			template = "%s ref:%s",
+			-- 		}
+			-- 	end,
+			-- },
 		},
 	},
 

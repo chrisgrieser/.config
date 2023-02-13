@@ -9,7 +9,7 @@ anchors:
         type: variable_unless
         name: LEADER_ACTIVE
         value: true
-        # IDs can be seen in the karabiner main app, devices tab
+        # IDs can be seen in the karabiner main app (devices tab)
       - &not-apple-keyboard
         type: device_unless
         identifiers:

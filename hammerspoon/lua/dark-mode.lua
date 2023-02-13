@@ -39,7 +39,7 @@ local function toggleDarkMode()
 	hs.execute([[echo "SetThemeMode(']] .. toMode .. [[')" > /tmp/nvim-automation]]) 
 
 	-- hammerspoon console
-	setConsoleColors(toMode)
+	SetConsoleColors(toMode)
 
 	-- Highlights PDF background
 	if appIsRunning("Highlights") then
@@ -80,7 +80,7 @@ local function toggleDarkMode()
 	]])
 
 	app(prevApp):activate()
-	holeCover() -- redraw hole-covers in proper color
+	HoleCover() -- redraw hole-covers in proper color
 end
 
 ---@return boolean
