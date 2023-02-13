@@ -152,7 +152,7 @@ end
 ---automatically apply per-app auto-tiling of the windows of the app
 ---@param windowFilter hs.window.filter
 function AutoTile(windowFilter)
-	if not windowFilter then return end
+	-- if not windowFilter then return end
 	local wins = windowFilter:getWindows()
 	notify("#wins:" + tostring(#wins))
 
