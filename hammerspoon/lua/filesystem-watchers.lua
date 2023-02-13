@@ -1,15 +1,15 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
--- CONFIG
-local dotfilesFolder = Getenv("DOTFILE_FOLDER")
-local fileHub = Getenv("WD")
-local home = Getenv("HOME")
+-- CONFIG (not local vars for longevity)
+DotfilesFolder = Getenv("DOTFILE_FOLDER")
+FileHub = Getenv("WD")
+Home = Getenv("HOME")
 
 --------------------------------------------------------------------------------
 
 -- BRAVE Bookmarks synced to Chrome Bookmarks (needed for Alfred)
-local browserFolder = home .. "/Library/Application Support/BraveSoftware/Brave-Browser/"
-bookmarkWatcher = pw(
+local browserFolder = Home .. "/Library/Application Support/BraveSoftware/Brave-Browser/"
+BookmarkWatcher = Pw(
 	browserFolder .. "Default/Bookmarks",
 	function()
 		hs.execute("BROWSER_FOLDER='" .. browserFolder .. "' ; " .. [[
@@ -24,8 +24,8 @@ bookmarkWatcher = pw(
 
 -- Download Folder Badge
 -- requires "fileicon" being installed
-local downloadFolder = home .. "/Downloaded"
-downloadFolderWatcher = pw(
+local downloadFolder = Home .. "/Downloaded"
+DownloadFolderWatcher = Pw(
 	downloadFolder,
 	function()
 		hs.execute("zsh ./helpers/download-folder-badge/download-folder-icon.sh " .. downloadFolder)
@@ -36,8 +36,8 @@ downloadFolderWatcher = pw(
 
 -- FONT rsync (for both directions)
 -- (symlinking the Folder somehow does not work properly, therefore rsync)
-local fontLocation = dotfilesFolder .. "/fonts/" -- source folder needs trailing "/" to copy contents (instead of the folder)
-FontsWatcher1 = Pw(home .. "/Library/Fonts", function()
+local fontLocation = DotfilesFolder .. "/fonts/" -- source folder needs trailing "/" to copy contents (instead of the folder)
+FontsWatcher1 = Pw(Home .. "/Library/Fonts", function()
 	hs.execute([[rsync --archive --update --delete "$HOME/Library/Fonts/" "]] .. fontLocation .. [["]])
 	Notify("Fonts synced.")
 end):start()
@@ -49,13 +49,13 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- Redirects TO File Hub
-local scanFolder = home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
+local scanFolder = Home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 ScanFolderWatcher = Pw(scanFolder, function()
-	hs.execute("mv '" .. scanFolder .. "'/* '" .. fileHub .. "'")
+	hs.execute("mv '" .. scanFolder .. "'/* '" .. FileHub .. "'")
 	Notify("Scan moved to File Hub")
 end):start()
 
-local systemDownloadFolder = home .. "/Downloads/"
+local systemDownloadFolder = Home .. "/Downloads/"
 SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	-- Stats Update file can directly be trashed
 	for _, filePath in pairs(files) do
@@ -65,15 +65,15 @@ SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 		end
 	end
 	-- otherwise move to filehub
-	hs.execute("mv '" .. systemDownloadFolder .. "'/* '" .. fileHub .. "'")
+	hs.execute("mv '" .. systemDownloadFolder .. "'/* '" .. FileHub .. "'")
 	Notify("Download moved to File Hub.")
 end):start()
 
-local draftsIcloud = home .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
+local draftsIcloud = Home .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
 DraftsIcloudWatcher = Pw(draftsIcloud, function(files)
 	for _, filePath in pairs(files) do
 		if filePath:sub(-3) ~= ".md" or filePath:find("Inbox") then return end
-		hs.execute("mv '" .. draftsIcloud .. "'/*.md '" .. fileHub .. "'")
+		hs.execute("mv '" .. draftsIcloud .. "'/*.md '" .. FileHub .. "'")
 		Notify("Drafts doc moved to File Hub.")
 	end
 end):start()
@@ -81,8 +81,8 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- Redirects FROM File Hub
-local browserSettings = dotfilesFolder .. "/browser-extension-configs/"
-FileHubWatcher = Pw(fileHub, function(paths)
+local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
+FileHubWatcher = Pw(FileHub, function(paths)
 	for _, file in pairs(paths) do
 		local function isInSubdirectory(f, folder) -- (instead of directly in the folder)
 			local _, fileSlashes = f:gsub("/", "")
@@ -90,12 +90,12 @@ FileHubWatcher = Pw(fileHub, function(paths)
 			return fileSlashes > folderSlashes
 		end
 
-		if isInSubdirectory(file, fileHub) then return end
+		if isInSubdirectory(file, FileHub) then return end
 		local fileName = file:gsub(".*/", "")
 
 		-- delete alfredworkflows and ics
 		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
-			RunWithDelays(3, function() os.rename(file, home .. "/.Trash/" .. fileName) end)
+			RunWithDelays(3, function() os.rename(file, Home .. "/.Trash/" .. fileName) end)
 
 		-- ublacklist
 		elseif fileName == "ublacklist-settings.json" then
@@ -124,7 +124,7 @@ FileHubWatcher = Pw(fileHub, function(paths)
 
 		-- watch later .urls from the office
 		elseif fileName:sub(-4) == ".url" and IsIMacAtHome() then
-			os.rename(file, home .. "/Downloaded/" .. fileName)
+			os.rename(file, Home .. "/Downloaded/" .. fileName)
 			Notify("Watch Later URL moved to Video Downloads.")
 
 		-- visualised keyboard layouts
@@ -136,14 +136,14 @@ FileHubWatcher = Pw(fileHub, function(paths)
 			or fileName:match("hyper%-bindings%-layout%.%w+")
 			or fileName:match("single%-keystroke%-bindings%.%w+")
 		then
-			os.rename(file, dotfilesFolder .. "/visualized-keyboard-layout/" .. fileName)
+			os.rename(file, DotfilesFolder .. "/visualized-keyboard-layout/" .. fileName)
 			Notify("Visualized Keyboard Layout filed away.")
 
 			-- Finder vim mode
 		elseif fileName:match("finder%-vim%-cheatsheet%.%w+") then
 			os.rename(
 				file,
-				home .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/" .. fileName
+				Home .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/" .. fileName
 			)
 			Notify("Finder Vim Layout filed away.")
 		end
@@ -152,12 +152,12 @@ end):start()
 
 --------------------------------------------------------------------------------
 -- auto-install Obsidian Alpha builds as soon as the file is downloaded
-ObsiAlphaWatcher = Pw(fileHub, function(files)
+ObsiAlphaWatcher = Pw(FileHub, function(files)
 	for _, file in pairs(files) do
 		-- needs delay and crdownload check, since the renaming is sometimes not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
 		RunWithDelays(0.5, function()
-			hs.execute([[cd "]] .. fileHub .. [[" || exit 1
+			hs.execute([[cd "]] .. FileHub .. [[" || exit 1
 				test -f obsidian-*.*.*.asar.gz || exit 1
 				killall Obsidian
 				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"

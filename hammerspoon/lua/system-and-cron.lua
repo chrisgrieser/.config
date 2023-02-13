@@ -245,22 +245,16 @@ local function sleepMovieApps()
 	]])
 end
 
-SleepTimer0 = timer("02:00", "01d", sleepMovieApps, true)
-SleepTimer1 = timer("03:00", "01d", sleepMovieApps, true)
-SleepTimer2 = timer("04:00", "01d", sleepMovieApps, true)
-SleepTimer3 = timer("05:00", "01d", sleepMovieApps, true)
-SleepTimer4 = timer("06:00", "01d", sleepMovieApps, true)
-
 --------------------------------------------------------------------------------
 
 if IsIMacAtHome() or IsAtMother() then
 	DailyMorningTimer:start()
 	DailyEveningTimer:start()
-	SleepTimer0:start()
-	SleepTimer1:start()
-	SleepTimer2:start()
-	SleepTimer3:start()
-	SleepTimer4:start()
+	SleepTimer0 = timer("02:00", "01d", sleepMovieApps, true):start()
+	SleepTimer1 = timer("03:00", "01d", sleepMovieApps, true):start()
+	SleepTimer2 = timer("04:00", "01d", sleepMovieApps, true):start()
+	SleepTimer3 = timer("05:00", "01d", sleepMovieApps, true):start()
+	SleepTimer4 = timer("06:00", "01d", sleepMovieApps, true):start()
 	if IsIMacAtHome() then
 		BiweeklyTimer:start()
 		ProjectorScreensaverWatcher:start()

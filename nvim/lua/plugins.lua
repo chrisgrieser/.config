@@ -57,7 +57,7 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		config = function()
-			vim.opt.timeoutlen = 1200 -- duration until which-key is shown
+			vim.opt.timeoutlen = 800 -- duration until which-key is shown
 			require("which-key").setup {
 				window = {
 					border = "none", -- none to save space
