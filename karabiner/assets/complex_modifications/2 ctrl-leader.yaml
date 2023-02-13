@@ -344,6 +344,7 @@ rules:
                   else
                     open location "https://www.reddit.com/r/neovim/"
                   end if
+                  activate
                 end tell'
           - *deactivate-leader
           - *remove-notice

@@ -76,5 +76,5 @@ return {
 	-- Filetype-specific
 	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
 	{ "hail2u/vim-css3-syntax", ft = "css" }, -- better syntax highlighting (until treesitter css looks decent…)
-	{ "iamcco/markdown-preview.nvim", ft = { "markdown", "octo" }, build = "cd app && npm install" },
+	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
 }

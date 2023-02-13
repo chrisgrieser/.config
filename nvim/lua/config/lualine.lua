@@ -80,7 +80,7 @@ local function searchCounter()
 	return " " .. current .. "/" .. total .. " " .. searchTerm
 end
 
--- clock, but only when full screen (and therefore covering the sketchybar)
+-- clock, but only when full screen (as it covers the sketchybar then)
 local function clock()
 	if fn.winwidth(0) < 110 then return "" end
 	local time = os.date():sub(12, 16)
@@ -128,6 +128,7 @@ require("lualine").setup {
 	winbar = {
 		lualine_a = {
 			{ clock },
+			-- { require("statusline-action-hints").statusline },
 		},
 		lualine_b = {
 			{
