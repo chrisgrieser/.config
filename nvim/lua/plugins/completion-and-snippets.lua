@@ -80,10 +80,10 @@ local function cmpconfig()
 		window = {
 			completion = {
 				side_padding = 0,
-				border = borderStyle,
+				border = BorderStyle,
 			},
 			documentation = {
-				border = borderStyle,
+				border = BorderStyle,
 			},
 		},
 		sorting = {

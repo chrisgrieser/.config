@@ -14,7 +14,8 @@ local function runningApps()
 	local appsArr = {}
 	for _, win in pairs(hs.window:allWindows()) do
 		local appName = win:application():name()
-		local isExcludedApp = { "Hammerspoon", "Gifox", "Twitterrific", "Notification Centre", frontAppName() }
+		local isExcludedApp =
+			{ "Hammerspoon", "Gifox", "Twitterrific", "Notification Centre", frontAppName() }
 		if not tableContains(isExcludedApp, appName) then table.insert(appsArr, { text = appName }) end
 	end
 	return appsArr
@@ -27,15 +28,15 @@ end
 ---@param mode string start|end of paired-activation
 local function pairedActivation(mode)
 	if mode == "stop" then
-		if wf_pairedActivation then wf_pairedActivation:unsubscribeAll() end
-		wf_pairedActivation = nil
+		if Wf_pairedActivation then Wf_pairedActivation:unsubscribeAll() end
+		Wf_pairedActivation = nil
 		return
 	end
 
 	local app1 = SPLIT_LEFT:application():name()
 	local app2 = SPLIT_RIGHT:application():name()
 
-	wf_pairedActivation = wf.new({ app1, app2 })
+	Wf_pairedActivation = wf.new({ app1, app2 })
 		:subscribe(wf.windowFocused, function(focusedWin)
 			-- not using :focus(), since that would cause infinite recursion
 			-- raising needs small delay, so that focused window is already at front
@@ -52,7 +53,7 @@ local function pairedActivation(mode)
 				or (SPLIT_RIGHT:id() == closedWin:id())
 				or (SPLIT_LEFT:id() == closedWin:id())
 			then
-				vsplitSetLayout("unsplit")
+				VsplitSetLayout("unsplit")
 			end
 		end)
 end
@@ -60,7 +61,7 @@ end
 ---main split function
 ---@param mode string swap|unsplit|split, split will use the secondWin and the current win
 ---@param secondWin? hs.window required when using mode "split"
-function vsplitSetLayout(mode, secondWin)
+function VsplitSetLayout(mode, secondWin)
 	if not (splitActive()) and (mode == "swap" or mode == "unsplit") then
 		notify("no split active")
 		return
@@ -83,29 +84,29 @@ function vsplitSetLayout(mode, secondWin)
 
 	if mode == "split" then
 		pairedActivation("start")
-		f1 = leftHalf
-		f2 = rightHalf
+		f1 = LeftHalf
+		f2 = RightHalf
 	elseif mode == "unsplit" then
-		f1 = baseLayout
-		f2 = baseLayout
+		f1 = PseudoMaximized
+		f2 = PseudoMaximized
 		pairedActivation("stop")
 	elseif mode == "swap" then
-		f1 = rightHalf
-		f2 = leftHalf
+		f1 = RightHalf
+		f2 = LeftHalf
 	end
 
-	moveResize(SPLIT_RIGHT, f1)
-	moveResize(SPLIT_LEFT, f2)
+	MoveResize(SPLIT_RIGHT, f1) ---@diagnostic disable-line: param-type-mismatch
+	MoveResize(SPLIT_LEFT, f2) ---@diagnostic disable-line: param-type-mismatch
 	SPLIT_RIGHT:raise()
 	SPLIT_LEFT:raise()
 	runWithDelays(0.3, function()
-		toggleWinSidebar(SPLIT_RIGHT)
-		toggleWinSidebar(SPLIT_LEFT)
+		ToggleWinSidebar(SPLIT_RIGHT) ---@diagnostic disable-line: param-type-mismatch
+		ToggleWinSidebar(SPLIT_LEFT) ---@diagnostic disable-line: param-type-mismatch
 	end)
 
 	if mode == "unsplit" then
 		SPLIT_RIGHT = nil
-		SPLIT_LEFT = nil
+		SPLIT_LEFT = nil ---@diagnostic disable-line: assign-type-mismatch
 	end
 end
 
@@ -118,7 +119,7 @@ local function selectSecondWin()
 			if not selection then return end
 			local appName = selection.text
 			local secondWin = hs.application(appName):allWindows()[1]
-			vsplitSetLayout("split", secondWin)
+			VsplitSetLayout("split", secondWin)
 		end)
 		:choices(apps)
 		:rows(#apps - 2) -- for whatever reason, the rows parameter is off by 3?!
@@ -130,10 +131,10 @@ end
 --------------------------------------------------------------------------------
 -- HOTKEYS
 
-hotkey(hyper, "X", function() vsplitSetLayout("swap") end)
+hotkey(hyper, "X", function() VsplitSetLayout("swap") end)
 hotkey(hyper, "V", function()
 	if splitActive() then
-		vsplitSetLayout("unsplit")
+		VsplitSetLayout("unsplit")
 	else
 		selectSecondWin()
 	end
