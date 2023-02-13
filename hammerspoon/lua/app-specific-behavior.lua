@@ -272,16 +272,16 @@ FinderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 		AutoTile(Wf_finder) -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
 		bringAllToFront()
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
+	end
 
 	-- quit Finder if it was started as a helper (e.g., JXA), but has no window
-	elseif eventType == aw.launched then
+	if eventType == aw.launched then
+			notify("beep")
 		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
 		-- properly utilize Finder
-		runWithDelays({ 3, 5, 10 }, function()
-			if finderAppObj and #finderAppObj:allWindows() > 0 then
-				finderAppObj:kill()
-				notify("beep1")
-			end
+		runWithDelays(1, function()
+			if finderAppObj and #finderAppObj:allWindows() > 0 then finderAppObj:kill() end
+			notify("beep")
 		end)
 	end
 end):start()

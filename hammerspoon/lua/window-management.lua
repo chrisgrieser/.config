@@ -162,8 +162,7 @@ function AutoTile(windowFilter)
 			-- 2) check if window count has changed in the meantime
 			-- 3) delay needs to be high enough since e.g. during quitting fullscreen
 			-- mode, Hammerspoon temporarily cannot detect Finder windows (sic!)
-			if #windowFilter:getWindows() == 0 then app("Finder"):kill() end
-			notify("beep2")
+			-- if #windowFilter:getWindows() == 0 then app("Finder"):kill() end
 		end)
 	elseif #wins == 1 then
 		if isProjector() then

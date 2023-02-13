@@ -39,9 +39,7 @@ function M.wordSwitch()
 	if ft == "lua" then
 		ftWords = {
 			{ "~=", "==" },
-			{ "if", "elseif", false },
-			{ "elseif", "else", false },
-			{ "else", "if", false },
+			{ "if", "elseif" },
 			{ "function", "local function", false },
 			{ "pairs", "ipairs" },
 		}
