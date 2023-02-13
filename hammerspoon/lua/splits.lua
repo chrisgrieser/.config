@@ -15,8 +15,8 @@ local function runningApps()
 	for _, win in pairs(hs.window:allWindows()) do
 		local appName = win:application():name()
 		local isExcludedApp =
-			{ "Hammerspoon", "Gifox", "Twitterrific", "Notification Centre", frontAppName() }
-		if not tableContains(isExcludedApp, appName) then table.insert(appsArr, { text = appName }) end
+			{ "Hammerspoon", "Gifox", "Twitterrific", "Notification Centre", FrontAppName() }
+		if not TableContains(isExcludedApp, appName) then table.insert(appsArr, { text = appName }) end
 	end
 	return appsArr
 end
@@ -36,17 +36,17 @@ local function pairedActivation(mode)
 	local app1 = SPLIT_LEFT:application():name()
 	local app2 = SPLIT_RIGHT:application():name()
 
-	Wf_pairedActivation = wf.new({ app1, app2 })
-		:subscribe(wf.windowFocused, function(focusedWin)
+	Wf_pairedActivation = Wf.new({ app1, app2 })
+		:subscribe(Wf.windowFocused, function(focusedWin)
 			-- not using :focus(), since that would cause infinite recursion
 			-- raising needs small delay, so that focused window is already at front
 			if focusedWin:id() == SPLIT_RIGHT:id() then
-				runWithDelays(0.02, function() SPLIT_LEFT:raise() end)
+				RunWithDelays(0.02, function() SPLIT_LEFT:raise() end)
 			elseif focusedWin:id() == SPLIT_LEFT:id() then
-				runWithDelays(0.02, function() SPLIT_RIGHT:raise() end)
+				RunWithDelays(0.02, function() SPLIT_RIGHT:raise() end)
 			end
 		end)
-		:subscribe(wf.windowDestroyed, function(closedWin)
+		:subscribe(Wf.windowDestroyed, function(closedWin)
 			if
 				not SPLIT_LEFT
 				or not SPLIT_RIGHT
@@ -63,7 +63,7 @@ end
 ---@param secondWin? hs.window required when using mode "split"
 function VsplitSetLayout(mode, secondWin)
 	if not (splitActive()) and (mode == "swap" or mode == "unsplit") then
-		notify("no split active")
+		Notify("no split active")
 		return
 	end
 
@@ -99,7 +99,7 @@ function VsplitSetLayout(mode, secondWin)
 	MoveResize(SPLIT_LEFT, f2) ---@diagnostic disable-line: param-type-mismatch
 	SPLIT_RIGHT:raise()
 	SPLIT_LEFT:raise()
-	runWithDelays(0.3, function()
+	RunWithDelays(0.3, function()
 		ToggleWinSidebar(SPLIT_RIGHT) ---@diagnostic disable-line: param-type-mismatch
 		ToggleWinSidebar(SPLIT_LEFT) ---@diagnostic disable-line: param-type-mismatch
 	end)
@@ -124,15 +124,15 @@ local function selectSecondWin()
 		:choices(apps)
 		:rows(#apps - 2) -- for whatever reason, the rows parameter is off by 3?!
 		:width(30)
-		:placeholderText("Split " .. frontAppName() .. " with...")
+		:placeholderText("Split " .. FrontAppName() .. " with...")
 		:show()
 end
 
 --------------------------------------------------------------------------------
 -- HOTKEYS
 
-hotkey(hyper, "X", function() VsplitSetLayout("swap") end)
-hotkey(hyper, "V", function()
+Hotkey(Hyper, "X", function() VsplitSetLayout("swap") end)
+Hotkey(Hyper, "V", function()
 	if splitActive() then
 		VsplitSetLayout("unsplit")
 	else

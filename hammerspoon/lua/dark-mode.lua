@@ -3,11 +3,11 @@ require("lua.utils")
 
 local function brightnessNotify()
 	local brightness = math.floor(hs.brightness.ambient())
-	notify("Brightness: ", tostring(brightness))	
+	Notify("Brightness: ", tostring(brightness))	
 end
 
 -- notify with ambient brightness for Alfred
-uriScheme("ambient-brightness", function ()
+UriScheme("ambient-brightness", function ()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 	brightnessNotify()
 end)
@@ -20,7 +20,7 @@ end)
 -- - Hammerspoon Console
 local function toggleDarkMode()
 	brightnessNotify()
-	local prevApp = frontAppName()
+	local prevApp = FrontAppName()
 	local sketchyfont, sketchybg, toMode, pdfbg
 
 	if IsDarkMode() then
@@ -42,12 +42,12 @@ local function toggleDarkMode()
 	SetConsoleColors(toMode)
 
 	-- Highlights PDF background
-	if appIsRunning("Highlights") then
-		app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfbg }
+	if AppIsRunning("Highlights") then
+		App("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfbg }
 	end
 
 	-- System & Brave (Workaround for Dark Reader)
-	applescript([[
+	Applescript([[
 		tell application "Brave Browser"
 			set openBlank to false
 			if ((count of window) is 0) then
@@ -79,7 +79,7 @@ local function toggleDarkMode()
 		--update
 	]])
 
-	app(prevApp):activate()
+	App(prevApp):activate()
 	HoleCover() -- redraw hole-covers in proper color
 end
 
@@ -96,5 +96,5 @@ function SetDarkmode(toDark)
 end
 
 -- `del` mapped to f13 (so ⇧+⌫ can still be used for forward-deleting)
-hotkey({}, "f13", toggleDarkMode)
-hotkey({}, "f5", toggleDarkMode) -- for Apple Keyboards
+Hotkey({}, "f13", toggleDarkMode)
+Hotkey({}, "f5", toggleDarkMode) -- for Apple Keyboards

@@ -12,7 +12,7 @@ RoundedCorners:start()
 ---to stop wallpaper shining through
 ---@param arg? string
 function HoleCover(arg)
-	if isAtOffice() or isProjector() then return end
+	if IsAtOffice() or IsProjector() then return end
 
 	if Cover1 then
 		Cover1:delete()
