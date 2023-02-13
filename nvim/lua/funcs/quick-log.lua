@@ -1,7 +1,6 @@
 local M = {}
 --------------------------------------------------------------------------------
 local fn = vim.fn
-local append = vim.fn.append
 local bo = vim.bo
 local expand = vim.fn.expand
 local logWarn = vim.log.levels.WARN
@@ -12,6 +11,7 @@ local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 ---in normal mode, returns word under cursor, in visual mode, returns selection
 ---@return string
 local function getVar()
+	local varname
 	if fn.mode() == "n" then
 		varname = expand("<cword>")
 	elseif fn.mode():find("[Vv]") then
@@ -23,6 +23,18 @@ local function getVar()
 	return varname
 end
 
+---append string below current line, if text is array of strings, append each
+---element as separate line
+---@param text string|string[]
+local function append(text)
+	if type(text) == "string" then text = { text } end
+
+	vim.fn.append(".", text) ---@diagnostic disable-line: param-type-mismatch
+	for _ = 1, #text, 1 do
+		normal("j==")
+	end
+end
+
 --------------------------------------------------------------------------------
 
 ---log statement for variable under cursor, similar to the 'turbo console log'
@@ -32,9 +44,9 @@ function M.log()
 	local logStatement
 	local ft = bo.filetype
 
-	if ft == "lua" then
-		logStatement = 'print("' .. varname .. ':", ' .. varname .. ")"
-	elseif ft == "python" then
+	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
+		logStatement = 'notify("' .. varname .. ':", ' .. varname .. ")"
+	elseif ft == "lua" or ft == "python" then
 		logStatement = 'print("' .. varname .. ': ", ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement = 'console.log("' .. varname .. ':", ' .. varname .. ");"
@@ -47,8 +59,7 @@ function M.log()
 		return
 	end
 
-	append(".", logStatement) ---@diagnostic disable-line: param-type-mismatch
-	normal("j==")
+	append(logStatement)
 end
 
 function M.objectlog()
@@ -62,18 +73,15 @@ function M.objectlog()
 			"hs.inspect(" .. varname .. ")",
 		}
 	elseif ft == "lua" and expand("%:p:h"):find("nvim") then
-		logStatement = { 'vim.pretty_print("' .. varname .. ':", ' .. varname .. ")" }
+		logStatement = 'vim.pretty_print("' .. varname .. ':", ' .. varname .. ")"
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = { 'console.dir("' .. varname .. ':", ' .. varname .. ");" }
+		logStatement = 'console.dir("' .. varname .. ':", ' .. varname .. ");"
 	else
 		vim.notify("Objectlog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
-	append(".", logStatement) ---@diagnostic disable-line: param-type-mismatch
-	for _ = 1, #logStatement, 1 do
-		normal("j==")
-	end
+	append(logStatement)
 end
 
 function M.timelog()
@@ -91,7 +99,7 @@ function M.timelog()
 			'print("timelog: ", duration, "s")',
 		}
 	elseif ft == "javascript" then
-		-- JXA for example does not support console.time()
+		-- JXA, for example, does not support console.time()
 		logStatement1 = {
 			'console.log("timelog start")',
 			"const timelogStart = new Date()",
@@ -101,8 +109,8 @@ function M.timelog()
 			'console.log("timelog: ", duration, "s")',
 		}
 	elseif ft == "typescript" then
-		logStatement1 = { 'console.time("timelog")' }
-		logStatement2 = { 'console.timeEnd("timelog")' }
+		logStatement1 = 'console.time("timelog")'
+		logStatement2 = 'console.timeEnd("timelog")'
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" or ft == "fish" then
 		logStatement1 = {
 			"timelogStart=$(date +%s)",
@@ -118,34 +126,32 @@ function M.timelog()
 	end
 	local logToAdd = g.timelogStart and logStatement1 or logStatement2
 
-	append(".", logToAdd) ---@diagnostic disable-line: param-type-mismatch
-	for _ = 1, #logToAdd, 1 do
-		normal("j==")
-	end
+	append(logToAdd)
 	g.timelogStart = not g.timelogStart
 end
 
 ---adds simple "beep" log statement to check whether conditionals have been
----entered. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
+---triggered. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.beeplog()
 	local logStatement
 	local ft = bo.filetype
 
-	if ft == "lua" or ft == "python" then
+	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
+		logStatement = 'notify("beep")'
+	elseif ft == "lua" or ft == "python" then
 		logStatement = 'print("beep")'
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatement = 'console.log("beep");'
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
 		logStatement = 'echo "(beep)"'
 	elseif ft == "applescript" then
-		logStatement = 'log "beep"'
+		logStatement = "beep"
 	else
 		vim.notify("Beeplog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
-	append(".", logStatement) ---@diagnostic disable-line: param-type-mismatch
-	normal("j==")
+	append(logStatement)
 end
 
 -- simple debug statement
@@ -160,8 +166,7 @@ function M.debuglog()
 		return
 	end
 
-	append(".", logStatement) ---@diagnostic disable-line: param-type-mismatch
-	normal("j==")
+	append(logStatement)
 end
 
 ---Remove all log statements in the current buffer
@@ -170,18 +175,27 @@ function M.removelogs()
 	g.timelogCount = 0 -- reset timelog
 	local ft = bo.filetype
 	local logCommand
-	local linesBefore = fn.line("$")
-	if ft == "lua" or ft == "python" then
+	local numOfLinesBefore = fn.line("$")
+
+	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
+		logCommand = 'notify("beep")'
+		vim.notify("Only removing log statements for ham")
+	elseif ft == "lua" or ft == "python" then
 		logCommand = "print"
 	elseif ft == "javascript" or ft == "typescript" then
 		logCommand = "console.log"
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		cmd([[g/echo "(beep)"/d]]) -- keywords in () needed to ensure that other echos are not deleted
-		cmd([[g/echo "(log)/d]])
-		cmd([[g/echo "(time)/d]])
+		logCommand = {
+
+		}
+		cmd([[g/^\secho "(beep)"/d]]) -- keywords in () needed to ensure that other echos are not deleted
+		cmd([[g/^\secho "(log)/d]])
+		cmd([[g/^\secho "(time)/d]])
 		return
 	elseif ft == "applescript" then
-		logCommand = "log"
+		cmd([[g/^\slog/d]])
+		cmd([[g/^\sbeep/d]])
+		return
 	else
 		vim.notify("Removelog does not support " .. ft .. " yet.", logWarn)
 	end
@@ -189,7 +203,7 @@ function M.removelogs()
 	cmd([[g/^\s*]] .. logCommand .. [[/d]])
 	cmd.nohlsearch()
 
-	local linesRemoved = linesBefore - fn.line("$")
+	local linesRemoved = numOfLinesBefore - fn.line("$")
 	local msg = "Cleared " .. tostring(linesRemoved) .. " log statements."
 	if linesRemoved == 1 then msg = msg:gsub("s%.$", ".") end -- remove plural
 	vim.notify(msg)

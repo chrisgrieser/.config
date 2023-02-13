@@ -31,12 +31,14 @@ if command -v subliminal &>/dev/null; then
 		rmdir "$NEW_FOLDER"
 	fi
 else
-	osascript -e 'display notification "" with title "Subliminal not installed"'
-	echo "subliminal not installed."
-	return 1
+	touch "$VIDEO_DIR/subliminal_not_installed.txt"
 fi
 
 # quit Transmission, if there are no other torrents active
-sleep 0.5
-torrent_active=$(transmission-remote --list | grep -v "ID" | grep -v "Sum:")
-[[ -z "$torrent_active" ]] && killall "Transmission"
+if command -v transmission-remote &>/dev/null; then
+	sleep 0.5
+	torrent_active=$(transmission-remote --list | grep -v "ID" | grep -v "Sum:")
+	[[ -z "$torrent_active" ]] && killall "Transmission"
+else
+	touch "$VIDEO_DIR/transmission-remote_not_installed.txt"
+fi

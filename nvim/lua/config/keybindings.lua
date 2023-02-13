@@ -193,7 +193,7 @@ keymap(
 )
 
 -- Logging & Debugging
-local qlog = require("funcs.quicklog")
+local qlog = require("funcs.quick-log")
 keymap({ "n", "x" }, "<leader>ll", qlog.log, { desc = " log" })
 keymap({ "n", "x" }, "<leader>lo", qlog.objectlog, { desc = " object log" })
 keymap("n", "<leader>lb", qlog.beeplog, { desc = " beep log" })
