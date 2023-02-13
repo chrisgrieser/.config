@@ -33,10 +33,10 @@ for type, icon in pairs(signIcons) do
 end
 
 -- BORDERS
-require("lspconfig.ui.windows").default_options.border = borderStyle
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
+require("lspconfig.ui.windows").default_options.border = BorderStyle
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = BorderStyle })
 -- stylua: ignore
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = BorderStyle })
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS (also applies to null-ls)
@@ -66,7 +66,7 @@ vim.diagnostic.config {
 		severity = { min = vim.diagnostic.severity.WARN },
 	},
 	float = {
-		border = borderStyle,
+		border = BorderStyle,
 		max_width = 50,
 		format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,
 	},
@@ -76,7 +76,7 @@ vim.diagnostic.config {
 -- Mason Config
 require("mason").setup {
 	ui = {
-		border = borderStyle,
+		border = BorderStyle,
 		icons = { package_installed = "✓", package_pending = "羽", package_uninstalled = "✗" },
 	},
 }

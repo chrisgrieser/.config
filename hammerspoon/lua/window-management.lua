@@ -139,10 +139,11 @@ function MoveResize(win, pos)
 
 	-- pseudo-timeout
 	local i = 0
-	while i < 10 and CheckSize(win, pos) == false do
+	while i < 20 and CheckSize(win, pos) == false do
 		if not win then return end
 		win:moveToUnit(pos)
-		os.execute("sleep 0.15") -- since lua itself does not have a blocking wait function
+		os.execute("sleep 0.1") -- since lua itself does not have a blocking wait function
+		i = i + 1
 	end
 end
 
@@ -154,7 +155,7 @@ end
 function AutoTile(windowSource)
 	---necessary b/c windowfilter is null when not triggered via
 	---windowfilter-subscription-event. This check allows for using app names,
-	---which enables using the autotile-function e.g. within app watchers
+	---which enables using the autotile-function within app watchers
 	---@param _windowSource hs.window.filter|string windowFilter OR string representing app name
 	---@return hs.window[]
 	local function getWins(_windowSource)
@@ -168,7 +169,7 @@ function AutoTile(windowSource)
 
 	if #wins == 0 and frontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
-		runWithDelays(0.5, function()
+		runWithDelays(1, function()
 			-- 1) quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 			-- 2) getWins() again to check if window count has changed in the meantime
 			-- 3) delay needs to be high enough to since e.g. during quitting fullscreen

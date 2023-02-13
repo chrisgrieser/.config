@@ -23,23 +23,10 @@ return {
 		config = function()
 			require("gitsigns").setup {
 				max_file_length = 10000,
-				preview_config = { border = borderStyle },
+				preview_config = { border = BorderStyle },
 			}
 		end,
 	},
-	-- scrollbar
-	-- {
-	-- 	"dstein64/nvim-scrollview",
-	-- 	event = "VeryLazy",
-	-- 	config = function()
-	-- 		require("scrollview").setup {
-	-- 			current_only = true,
-	-- 			winblend = 85,
-	-- 			base = "right",
-	-- 			column = 1,
-	-- 		}
-	-- 	end,
-	-- },
 	{
 		"lewis6991/satellite.nvim",
 		event = "VeryLazy",
@@ -54,12 +41,11 @@ return {
 			}
 		end,
 	},
-	{ -- nicer colorcolumn
-		"xiyaowong/virtcolumn.nvim",
-		enabled = false,
-		init = function() vim.g.virtcolumn_char = "║" end,
-		event = "VeryLazy",
-	},
+	-- { -- nicer colorcolumn
+	-- 	"xiyaowong/virtcolumn.nvim",
+	-- 	init = function() vim.g.virtcolumn_char = "║" end,
+	-- 	event = "VeryLazy",
+	-- },
 	{ -- color previews & color utilities
 		"uga-rosa/ccc.nvim",
 		event = "BufEnter", -- cannot use VeryLazy, since the first buffer entered would not get highlights
@@ -68,7 +54,7 @@ return {
 			local ccc = require("ccc")
 			vim.opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal
 			ccc.setup {
-				win_opts = { border = borderStyle },
+				win_opts = { border = BorderStyle },
 				highlighter = {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
@@ -113,7 +99,7 @@ return {
 			local gitCommitMsgLength = 50
 			require("dressing").setup {
 				input = {
-					border = borderStyle,
+					border = BorderStyle,
 					relative = "win",
 					max_width = gitCommitMsgLength,
 					min_width = gitCommitMsgLength,
@@ -127,7 +113,7 @@ return {
 					backend = { "builtin" }, -- Priority list of preferred vim.select implementations
 					trim_prompt = true, -- Trim trailing `:` from prompt
 					builtin = {
-						border = borderStyle,
+						border = BorderStyle,
 						relative = "cursor",
 						max_width = 80,
 						min_width = 20,

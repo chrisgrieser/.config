@@ -23,11 +23,11 @@ return {
 					},
 				},
 				chat_window = {
-					border = { style = borderStyle },
+					border = { style = BorderStyle },
 				},
 				chat_input = {
 					prompt = " > ",
-					border = { style = borderStyle },
+					border = { style = BorderStyle },
 				},
 			}
 		end,
