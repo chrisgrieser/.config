@@ -24,6 +24,15 @@ return {
 			"SmiteshP/nvim-navic", -- breadcrumbs for statusline/winbar
 			"folke/neodev.nvim", -- lsp for nvim-lua config
 			"b0o/SchemaStore.nvim", -- schemas for json-lsp
+			{
+				"roobert/statusline-action-hints.nvim",
+				config = function()
+					require("statusline-action-hints").setup {
+						definition_identifier = "gd",
+						template = "%s ref:%s",
+					}
+				end,
+			},
 		},
 	},
 
@@ -42,7 +51,7 @@ return {
 		dev = true,
 		lazy = true,
 		dependencies = "stevearc/dressing.nvim",
-		init = function () vim.g.genghis_disable_commands = true end,
+		init = function() vim.g.genghis_disable_commands = true end,
 	},
 	{
 		"folke/which-key.nvim",
@@ -67,5 +76,5 @@ return {
 	-- Filetype-specific
 	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
 	{ "hail2u/vim-css3-syntax", ft = "css" }, -- better syntax highlighting (until treesitter css looks decent…)
-	{ "iamcco/markdown-preview.nvim", ft = {"markdown", "octo"}, build = "cd app && npm install" },
+	{ "iamcco/markdown-preview.nvim", ft = { "markdown", "octo" }, build = "cd app && npm install" },
 }
