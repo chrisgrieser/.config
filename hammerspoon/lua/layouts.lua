@@ -40,9 +40,9 @@ end
 
 --------------------------------------------------------------------------------
 -- LAYOUTS
-function movieModeLayout()
-	holeCover("remove")
-	iMacDisplay:setBrightness(0)
+function MovieModeLayout()
+	HoleCover("remove")
+	IMacDisplay:setBrightness(0)
 
 	runWithDelays({ 0, 0.5 }, function() openApp("YouTube") end)
 
@@ -64,11 +64,11 @@ function movieModeLayout()
 		"Twitter",
 	}
 	dockSwitcher("movie")
-	setDarkmode(true)
+	SetDarkmode(true)
 end
 
-function workLayout()
-	if iMacDisplay then
+function WorkLayout()
+	if IMacDisplay then
 		local brightness
 		if betweenTime(1, 8) then
 			brightness = 0
@@ -79,10 +79,10 @@ function workLayout()
 		else
 			brightness = 80
 		end
-		iMacDisplay:setBrightness(brightness)
+		IMacDisplay:setBrightness(brightness)
 	end
 
-	holeCover()
+	HoleCover()
 	if not isWeekend() then openApp("Slack") end
 	openApp {
 		"Discord",
@@ -103,7 +103,7 @@ function workLayout()
 
 	dockSwitcher("home")
 
-	local layout = createLayout(pseudoMaximized, iMacDisplay, {
+	local layout = createLayout(PseudoMaximized, IMacDisplay, {
 		"Brave Browser",
 		"Highlights",
 		"Neovide",
@@ -118,8 +118,8 @@ function workLayout()
 		"Alacritty",
 	})
 	hs.layout.apply(layout)
-	twitterToTheSide()
-	showAllSidebars()
+	TwitterToTheSide()
+	ShowAllSidebars()
 	runWithDelays({ 0.5, 1 }, function()
 		app("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
 		app("Drafts"):activate()
@@ -137,7 +137,7 @@ function workLayout()
 end
 
 local function motherMovieModeLayout()
-	iMacDisplay:setBrightness(0)
+	IMacDisplay:setBrightness(0)
 	dockSwitcher("mother-movie")
 	runWithDelays({ 0, 1 }, function()
 		openApp("YouTube")
@@ -160,7 +160,7 @@ end
 
 local function motherHomeModeLayout()
 	local brightness = betweenTime(1, 8) and 0 or 0.8
-	iMacDisplay:setBrightness(brightness)
+	IMacDisplay:setBrightness(brightness)
 
 	if not isWeekend() then openApp("Slack") end
 	openApp {
@@ -183,7 +183,7 @@ local function motherHomeModeLayout()
 	alacrittyFontSize(25)
 	dockSwitcher("home")
 
-	local layout = createLayout(pseudoMaximized, iMacDisplay, {
+	local layout = createLayout(PseudoMaximized, IMacDisplay, {
 		"Brave Browser",
 		"Warp",
 		"Slack",
@@ -197,16 +197,16 @@ local function motherHomeModeLayout()
 
 	runWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
 		hs.layout.apply(layout)
-		twitterToTheSide()
+		TwitterToTheSide()
 	end)
-	showAllSidebars()
+	ShowAllSidebars()
 end
 
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 local function setLayout()
 	if isIMacAtHome() and isProjector() then
-		movieModeLayout()
+		MovieModeLayout()
 	elseif isAtOffice() or (isIMacAtHome() and not isProjector()) then
 		workLayout()
 	elseif isAtMother() and isProjector() then
@@ -217,14 +217,14 @@ local function setLayout()
 end
 
 -- watcher + hotkey
-displayCountWatcher = hs.screen.watcher.new(setLayout):start()
+DisplayCountWatcher = hs.screen.watcher.new(setLayout):start()
 hotkey(hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
 hotkey({ "shift" }, "f6", setLayout) -- for Apple keyboard
 
 --------------------------------------------------------------------------------
 
 -- Open at Mouse Screen
-wf_appsOnMouseScreen = wf.new({
+Wf_appsOnMouseScreen = wf.new({
 	"Drafts",
 	"Brave Browser",
 	"Mimestream",
@@ -258,9 +258,9 @@ wf_appsOnMouseScreen = wf.new({
 		if not (mouseScreen:name() == screenOfWindow:name()) then newWin:moveToScreen(mouseScreen) end
 
 		if appn == "Finder" or appn == "Script Editor" or appn == "Hammerspoon" then
-			moveResize(newWin, centered)
+			MoveResize(newWin, Centered)
 		else
-			moveResize(newWin, maximized)
+			MoveResize(newWin, Maximized)
 		end
 	end)
 end)

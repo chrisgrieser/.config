@@ -19,5 +19,5 @@ if isIMacAtHome() or isAtMother() then
 	require("lua.usb-watchers")
 end
 
-holeCover()
-systemStart()
+HoleCover()
+SystemStart()

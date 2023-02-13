@@ -149,7 +149,7 @@ officeWakeWatcher = caff.new(function(event)
 		syncAllGitRepos()
 		workLayout()
 		local toDark = not (betweenTime(7, 18))
-		setDarkmode(toDark)
+		SetDarkmode(toDark)
 		return
 	end
 end)
@@ -167,12 +167,12 @@ homeWakeWatcher = caff
 			-- immediately picked up after wake
 			runWithDelays(0.7, function()
 				if isProjector() then
-					setDarkmode(true)
+					SetDarkmode(true)
 					movieModeLayout()
 				else
 					workLayout()
 					local toDark = hs.brightness.ambient() < 85
-					setDarkmode(toDark)
+					SetDarkmode(toDark)
 				end
 			end)
 			if event == caff.systemDidWake then syncAllGitRepos("notify") end
@@ -214,9 +214,9 @@ biweeklyTimer = timer("02:00", "02d", function()
 end, true)
 
 -- timers not local for longevity with garbage collection
-dailyEveningTimer = timer("19:00", "01d", function() setDarkmode(true) end)
+dailyEveningTimer = timer("19:00", "01d", function() SetDarkmode(true) end)
 dailyMorningTimer = timer("08:00", "01d", function()
-	if not (isProjector()) then setDarkmode(false) end
+	if not (isProjector()) then SetDarkmode(false) end
 end)
 
 projectorScreensaverWatcher = caff.new(function(eventType)

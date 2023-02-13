@@ -2,10 +2,10 @@ require("config.utils")
 --------------------------------------------------------------------------------
 
 -- DIRECTORIES
-opt.directory:prepend(vimDataDir .. "swap//")
-opt.undodir:prepend(vimDataDir .. "undo//")
-opt.viewdir = vimDataDir .. "view"
-opt.shadafile = vimDataDir .. "main.shada"
+opt.directory:prepend(VimDataDir .. "swap//")
+opt.undodir:prepend(VimDataDir .. "undo//")
+opt.viewdir = VimDataDir .. "view"
+opt.shadafile = VimDataDir .. "main.shada"
 
 --------------------------------------------------------------------------------
 -- Undo

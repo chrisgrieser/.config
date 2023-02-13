@@ -21,7 +21,7 @@ local options = {
 		prompt_prefix = "❱ ",
 		multi_icon = "洛",
 		path_display = { "tail" },
-		history = { path = vimDataDir .. "telescope_history" }, -- sync the history
+		history = { path = VimDataDir .. "telescope_history" }, -- sync the history
 		file_ignore_patterns = {
 			"%.DS_Store", -- macOS system file
 			"%.git/",
