@@ -4,7 +4,7 @@ local newCommand = vim.api.nvim_create_user_command
 
 -- `:SwapDeleteAll` deletes all swap files
 newCommand("SwapDeleteAll", function(_)
-	local swapdir = vimDataDir .. "swap/"
+	local swapdir = VimDataDir .. "swap/"
 	local out = fn.system([[rm -vf "]] .. swapdir .. [["* ]])
 	vim.notify("Deleted:\n" .. out)
 end, {})
@@ -29,7 +29,7 @@ local function inspect(str)
 				api.nvim_buf_set_option(buf, "filetype", "lua")
 			end
 		end,
-		timeout = 15000,
+		timeout = 10000,
 	})
 
 end
@@ -40,7 +40,7 @@ keymap({"n", "x"}, "<leader>li", function()
 		normal('"zy')
 		inspect(fn.getreg("z"))
 	end
-end, { desc = "inspect selection" })
+end, { desc = " inspect selection / cWORD" })
 newCommand("I", function(ctx) inspect(ctx.args) end, { nargs = "+" })
 
 -- `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/?utm_source=share&utm_medium=web2x&context=3
