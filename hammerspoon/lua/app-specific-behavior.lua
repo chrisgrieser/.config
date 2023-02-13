@@ -273,17 +273,6 @@ FinderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 		bringAllToFront()
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
 	end
-
-	-- quit Finder if it was started as a helper (e.g., JXA), but has no window
-	if eventType == aw.launched then
-			notify("beep")
-		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
-		-- properly utilize Finder
-		runWithDelays(1, function()
-			if finderAppObj and #finderAppObj:allWindows() > 0 then finderAppObj:kill() end
-			notify("beep")
-		end)
-	end
 end):start()
 
 --------------------------------------------------------------------------------
