@@ -267,6 +267,7 @@ Wf_finder = wf.new("Finder")
 FinderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 	if not (appName == "Finder") then return end
 	if not (#finderAppObj:allWindows() > 0) then return end
+	notify("beep")
 
 	if eventType == aw.activated then
 		AutoTile(Wf_finder) -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
