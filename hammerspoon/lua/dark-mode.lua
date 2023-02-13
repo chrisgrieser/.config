@@ -18,12 +18,12 @@ end)
 -- - Highlights PDF appearance
 -- - Sketchybar
 -- - Hammerspoon Console
-function toggleDarkMode()
+local function toggleDarkMode()
 	brightnessNotify()
 	local prevApp = frontAppName()
 	local sketchyfont, sketchybg, toMode, pdfbg
 
-	if isDarkMode() then
+	if IsDarkMode() then
 		pdfbg = "Default"
 		toMode = "light"
 		sketchybg = "0xffcdcdcd"
@@ -36,7 +36,7 @@ function toggleDarkMode()
 	end
 
 	-- neovim (requires setup in ~/.config/nvim/lua/file-watcher.lua)
-	hs.execute([[echo "setThemeMode(']] .. toMode .. [[')" > /tmp/nvim-automation]]) 
+	hs.execute([[echo "SetThemeMode(']] .. toMode .. [[')" > /tmp/nvim-automation]]) 
 
 	-- hammerspoon console
 	setConsoleColors(toMode)
@@ -84,15 +84,15 @@ function toggleDarkMode()
 end
 
 ---@return boolean
-function isDarkMode()
+function IsDarkMode()
 	-- reading this via shell rather than applescript is less laggy
 	local isDark = hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n"
 	return isDark
 end
 
 ---@param toDark boolean true = dark, false = light
-function setDarkmode(toDark)
-	if (not (isDarkMode()) and toDark) or (isDarkMode() and not toDark) then toggleDarkMode() end
+function SetDarkmode(toDark)
+	if (not (IsDarkMode()) and toDark) or (IsDarkMode() and not toDark) then toggleDarkMode() end
 end
 
 -- `del` mapped to f13 (so ⇧+⌫ can still be used for forward-deleting)

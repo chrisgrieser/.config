@@ -31,7 +31,7 @@ end
 --------------------------------------------------------------------------------
 
 -- AUTOMATIONS FOR MULTIPLE APPS
-transBgAppWatcher = aw.new(function(appName, eventType, appObject)
+TransBgAppWatcher = aw.new(function(appName, eventType, appObject)
 	local appsWithTransparency = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
 	if not tableContains(appsWithTransparency, appName) then return end
 	if isProjector() then return end
@@ -42,7 +42,7 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 		runWithDelays({ 0, 0.1, 0.2, 0.3 }, function()
 			local win = appObject:mainWindow()
 			if not win then return end
-			if checkSize(win, pseudoMaximized) or checkSize(win, maximized) then hideOthers(win) end
+			if CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized) then hideOthers(win) end
 		end)
 	elseif eventType == aw.terminated then
 		unHideAll()
@@ -50,7 +50,7 @@ transBgAppWatcher = aw.new(function(appName, eventType, appObject)
 end):start()
 
 -- when currently auto-tiled, hide the app on deactivation to it does not cover sketchybar
-autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
+AutoTileAppWatcher = aw.new(function(appName, eventType, appObj)
 	local autoTileApps = { "Finder", "Brave Browser" }
 	if eventType == aw.deactivated and tableContains(autoTileApps, appName) then
 		if #appObj:allWindows() > 1 then appObj:hide() end
@@ -59,9 +59,9 @@ end):start()
 
 -- prevent maximized window from covering sketchybar if they are unfocused
 -- pseudomaximized windows always get twitter to the side
-wf_maxWindows = wf.new(true):subscribe(wf.windowUnfocused, function(win)
+Wf_maxWindows = wf.new(true):subscribe(wf.windowUnfocused, function(win)
 	if isProjector() then return end
-	if checkSize(win, maximized) then win:application():hide() end
+	if CheckSize(win, Maximized) then win:application():hide() end
 end)
 
 ---play/pause spotify with spotifyTUI
@@ -84,7 +84,7 @@ end
 
 -- auto-pause Spotify on launch of apps w/ sound
 -- auto-resume Spotify on quit of apps w/ sound
-spotifyAppWatcher = aw.new(function(appName, eventType)
+SpotifyAppWatcher = aw.new(function(appName, eventType)
 	if isProjector() then return end -- never start music when on projector
 	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
 	if tableContains(appsWithSound, appName) then
@@ -99,9 +99,9 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- PIXELMATOR: open maximized
-pixelmatorWatcher = aw.new(function(appName, eventType, appObj)
+PixelmatorWatcher = aw.new(function(appName, eventType, appObj)
 	if appName == "Pixelmator" and eventType == aw.launched then
-		runWithDelays(0.3, function() moveResize(appObj, maximized) end)
+		runWithDelays(0.3, function() MoveResize(appObj, Maximized) end)
 	end
 end):start()
 
@@ -110,28 +110,28 @@ end):start()
 -- BRAVE BROWSER
 -- split when second window is opened
 -- change sizing back, when back to one window
-wf_browser = wf.new("Brave Browser")
+Wf_browser = wf.new("Brave Browser")
 	:setOverrideFilter({
 		rejectTitles = { " %(Private%)$", "^Picture in Picture$", "^Task Manager$" },
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(wf.windowCreated, function() autoTile(wf_browser) end)
-	:subscribe(wf.windowDestroyed, function() autoTile(wf_browser) end)
+	:subscribe(wf.windowCreated, function() AutoTile(Wf_browser) end)
+	:subscribe(wf.windowDestroyed, function() AutoTile(Wf_browser) end)
 	:subscribe(wf.windowFocused, bringAllToFront)
 
 -- Automatically hide Browser has when no window
 -- requires wider window-filter to not hide PiP windows etc
-wf_browser_all = wf.new("Brave Browser")
+Wf_browser_all = wf.new("Brave Browser")
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(wf.windowDestroyed, function()
-		if #wf_browser_all:getWindows() == 0 then app("Brave Browser"):hide() end
+		if #Wf_browser_all:getWindows() == 0 then app("Brave Browser"):hide() end
 	end)
 
 --------------------------------------------------------------------------------
 
 -- IINA: Full Screen when on projector
-iinaAppLauncher = aw.new(function(appName, eventType, appObject)
+IinaAppLauncher = aw.new(function(appName, eventType, appObject)
 	if eventType == aw.launched and appName == "IINA" and isProjector() then
 		-- going full screen needs a small delay
 		runWithDelays(
@@ -160,7 +160,7 @@ local function clipboardFix()
 	hs.pasteboard.setContents(clipb)
 end
 
-neovideWatcher = aw.new(function(appName, eventType, appObj)
+NeovideWatcher = aw.new(function(appName, eventType, appObj)
 	if not appName or appName:lower() ~= "neovide" then return end
 
 	local neovideWin = appObj:mainWindow()
@@ -170,9 +170,9 @@ neovideWatcher = aw.new(function(appName, eventType, appObj)
 		-- by neovide
 		runWithDelays({ 0.2, 0.4, 0.6, 0.8, 1 }, function()
 			if not neovideWin then return end
-			if checkSize(neovideWin, leftHalf) or checkSize(neovideWin, rightHalf) then return end
-			local size = isProjector() and maximized or pseudoMaximized
-			moveResize(neovideWin, size)
+			if CheckSize(neovideWin, LeftHalf) or CheckSize(neovideWin, RightHalf) then return end
+			local size = isProjector() and Maximized or PseudoMaximized
+			MoveResize(neovideWin, size)
 		end)
 
 	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
@@ -185,11 +185,11 @@ end):start()
 
 -- ALACRITTY
 -- pseudomaximized window
-wf_alacritty = wf.new({ "alacritty", "Alacritty" })
+Wf_alacritty = wf.new({ "alacritty", "Alacritty" })
 	:setOverrideFilter({ rejectTitles = { "btop" } })
 	:subscribe(wf.windowCreated, function(newWin)
 		if isProjector() then return end -- has it's own layouting already
-		moveResize(newWin, pseudoMaximized)
+		MoveResize(newWin, PseudoMaximized)
 	end)
 
 -- Man leader hotkey (for Karabiner)
@@ -225,7 +225,7 @@ uriScheme("focus-btop", function()
 	if success then
 		runWithDelays({ 0.2, 0.3, 0.4 }, function()
 			local btopWin = hs.window.find("^btop$")
-			moveResize(btopWin, maximized)
+			MoveResize(btopWin, Maximized)
 		end)
 	else
 		notify("⚠️ btop not installed")
@@ -235,7 +235,7 @@ end)
 --------------------------------------------------------------------------------
 
 -- QuickLook: bigger window
-wf_quicklook = wf
+Wf_quicklook = wf
 	.new(true) -- BUG for some reason, restricting this to "Finder" does not work
 	:setOverrideFilter({ allowRoles = "Quick Look" })
 	:subscribe(wf.windowCreated, function(newWin)
@@ -249,27 +249,27 @@ wf_quicklook = wf
 		then
 			return
 		end
-		runWithDelays(0.4, function() moveResize(newWin, centered) end)
+		runWithDelays(0.4, function() MoveResize(newWin, Centered) end)
 	end)
 
 --------------------------------------------------------------------------------
 
 -- FINDER
-wf_finder = wf.new("Finder")
+Wf_finder = wf.new("Finder")
 	:setOverrideFilter({
 		rejectTitles = { "^Quick Look$", "^Move$", "^Bin$", "^Copy$", "^Finder Settings$", " Info$", "^$" }, -- "^$" excludes the Desktop, which has no window title
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(wf.windowCreated, function() autoTile(wf_finder) end)
-	:subscribe(wf.windowDestroyed, function() autoTile(wf_finder) end)
+	:subscribe(wf.windowCreated, function() AutoTile(Wf_finder) end)
+	:subscribe(wf.windowDestroyed, function() AutoTile(Wf_finder) end)
 
-finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
+FinderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 	if not (appName == "Finder") then return end
 	if not (#finderAppObj:allWindows() > 0) then return end
 
 	if eventType == aw.activated then
-		autoTile(wf_finder) -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
+		AutoTile(Wf_finder) -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
 		bringAllToFront()
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
 
@@ -278,7 +278,10 @@ finderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
 		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
 		-- properly utilize Finder
 		runWithDelays({ 3, 5, 10 }, function()
-			if finderAppObj and #finderAppObj:allWindows() > 0 then finderAppObj:kill() end
+			if finderAppObj and #finderAppObj:allWindows() > 0 then
+				finderAppObj:kill()
+				notify("beep1")
+			end
 		end)
 	end
 end):start()
@@ -288,7 +291,7 @@ end):start()
 -- ZOOM
 -- close first window, when second is open
 -- don't leave browser tab behind when opening zoom
-wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
+Wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
 	quitApp("BusyCal") -- mostly only used to open a Zoom link
 	applescript([[
 			tell application "Brave Browser"
@@ -311,11 +314,11 @@ end)
 -- HIGHLIGHTS
 -- - Sync Dark & Light Mode
 -- - Start with Highlight as Selection
-highlightsAppWatcher = aw.new(function(appName, eventType, appObject)
+HighlightsAppWatcher = aw.new(function(appName, eventType, appObject)
 	if not (eventType == aw.launched and appName == "Highlights") then return end
 
 	local targetView = "Default"
-	if isDarkMode() then targetView = "Night" end
+	if IsDarkMode() then targetView = "Night" end
 	appObject:selectMenuItem { "View", "PDF Appearance", targetView }
 
 	-- pre-select yellow highlight tool & hide toolbar
@@ -323,7 +326,7 @@ highlightsAppWatcher = aw.new(function(appName, eventType, appObject)
 	appObject:selectMenuItem { "Tools", "Color", "Yellow" }
 	appObject:selectMenuItem { "View", "Hide Toolbar" }
 
-	moveResize(appObject:mainWindow(), pseudoMaximized)
+	MoveResize(appObject:mainWindow(), PseudoMaximized)
 end):start()
 
 --------------------------------------------------------------------------------
@@ -332,7 +335,7 @@ end):start()
 -- - Hide Toolbar
 -- - set workspace
 -- - update counter in sketchybar
-draftsWatcher = aw.new(function(appName, eventType, appObject)
+DraftsWatcher = aw.new(function(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
 	-- update counter in sketchybar
@@ -353,7 +356,7 @@ end):start()
 -- SCRIPT EDITOR
 -- - auto-paste and lint content
 -- - skip new file creaton dialog
-wf_script_editor = wf
+Wf_script_editor = wf
 	.new("Script Editor")
 	:subscribe(wf.windowCreated, function(newWin)
 		if newWin:title() == "Open" then
@@ -361,7 +364,7 @@ wf_script_editor = wf
 			runWithDelays(0.2, function()
 				keystroke({ "cmd" }, "v")
 				local win = app("Script Editor"):mainWindow() -- cannot use newWin, since it's the open dialog
-				moveResize(win, centered)
+				MoveResize(win, Centered)
 			end)
 			runWithDelays(0.4, function() keystroke({ "cmd" }, "k") end)
 		end
@@ -377,7 +380,7 @@ wf_script_editor = wf
 --------------------------------------------------------------------------------
 
 -- DISCORD
-discordAppWatcher = aw.new(function(appName, eventType)
+DiscordAppWatcher = aw.new(function(appName, eventType)
 	if appName ~= "Discord" then return end
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)

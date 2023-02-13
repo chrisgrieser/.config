@@ -1,18 +1,18 @@
 require("lua.utils")
 
 --------------------------------------------------------------------------------
-iMacDisplay = hs.screen("Built%-in")
-maximized = hs.layout.maximized
-rightHalf = hs.layout.right50
-leftHalf = hs.layout.left50
-pseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
-centered = { x = 0.186, y = 0, w = 0.6, h = 1 }
-toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
+IMacDisplay = hs.screen("Built%-in")
+Maximized = hs.layout.maximized
+RightHalf = hs.layout.right50
+LeftHalf = hs.layout.left50
+PseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
+Centered = { x = 0.186, y = 0, w = 0.6, h = 1 }
+ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
 
 ---@param win hs.window
 ---@param size hs.geometry
 ---@return boolean|nil
-function checkSize(win, size)
+function CheckSize(win, size)
 	if not win then return nil end
 	if not win or not win:screen() then return end
 	local maxf = win:screen():frame()
@@ -76,7 +76,7 @@ local function toggleObsidianSidebar(obsiWin)
 end
 
 ---@param win hs.window
-function toggleWinSidebar(win)
+function ToggleWinSidebar(win)
 	if not win or not win:application() then return end
 	local appOfWin = win:application():name()
 	if appOfWin == "Drafts" then
@@ -88,7 +88,7 @@ function toggleWinSidebar(win)
 	end
 end
 
-function showAllSidebars()
+function ShowAllSidebars()
 	if appIsRunning("Highlights") then app("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
 	openLinkInBackground("obsidian://sidebar?showLeft=false&showRight=true")
 	openLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
@@ -102,7 +102,7 @@ end
 local function obsidianThemeDevHelper(win, pos)
 	if not win or not win:application() then return end
 	if
-		not (pos == pseudoMaximized or pos == maximized)
+		not (pos == PseudoMaximized or pos == Maximized)
 		and win:application():name():lower() == "neovide"
 		and appIsRunning("Obsidian")
 	then
@@ -118,7 +118,7 @@ end
 
 ---@param win hs.window
 ---@param pos hs.geometry
-function moveResize(win, pos)
+function MoveResize(win, pos)
 	if not win or not win:application() then return end
 	local appName = win:application():name()
 	if appName == "System Settings" or appName == "Twitter" then
@@ -126,11 +126,11 @@ function moveResize(win, pos)
 		return
 	end
 
-	toggleWinSidebar(win)
+	ToggleWinSidebar(win)
 	obsidianThemeDevHelper(win, pos)
 
 	if
-		(pos == pseudoMaximized or pos == centered)
+		(pos == PseudoMaximized or pos == Centered)
 		and appIsRunning("Twitter")
 		and win:title() ~= "Quick Look"
 	then
@@ -139,7 +139,7 @@ function moveResize(win, pos)
 
 	-- pseudo-timeout
 	local i = 0
-	while i < 10 and checkSize(win, pos) == false do
+	while i < 10 and CheckSize(win, pos) == false do
 		if not win then return end
 		win:moveToUnit(pos)
 		os.execute("sleep 0.15") -- since lua itself does not have a blocking wait function
@@ -151,7 +151,7 @@ end
 
 ---automatically apply per-app auto-tiling of the windows of the app
 ---@param windowFilter hs.window.filter
-function autoTile(windowFilter)
+function AutoTile(windowFilter)
 	if not windowFilter then return end
 	local wins = windowFilter:getWindows()
 
@@ -163,27 +163,28 @@ function autoTile(windowFilter)
 			-- 3) delay needs to be high enough since e.g. during quitting fullscreen
 			-- mode, Hammerspoon temporarily cannot detect Finder windows (sic!)
 			if #windowFilter:getWindows() == 0 then app("Finder"):kill() end
+			notify("beep2")
 		end)
 	elseif #wins == 1 then
 		if isProjector() then
-			moveResize(wins[1], maximized)
+			MoveResize(wins[1], Maximized)
 		elseif frontAppName() == "Finder" then
-			moveResize(wins[1], centered)
+			MoveResize(wins[1], Centered)
 		else
-			moveResize(wins[1], pseudoMaximized)
+			MoveResize(wins[1], PseudoMaximized)
 		end
 	elseif #wins == 2 then
-		moveResize(wins[1], leftHalf)
-		moveResize(wins[2], rightHalf)
+		MoveResize(wins[1], LeftHalf)
+		MoveResize(wins[2], RightHalf)
 	elseif #wins == 3 then
-		moveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 })
-		moveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 })
-		moveResize(wins[3], { h = 1, w = 0.33, x = 0.67, y = 0 })
+		MoveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 })
+		MoveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 })
+		MoveResize(wins[3], { h = 1, w = 0.33, x = 0.67, y = 0 })
 	elseif #wins == 4 then
-		moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
-		moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
-		moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
-		moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
+		MoveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
+		MoveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
+		MoveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
+		MoveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
 	end
 end
 
@@ -194,13 +195,13 @@ local function controlSpaceAction()
 	local currentWin = hs.window.focusedWindow()
 	local pos
 	if frontAppName() == "Finder" or frontAppName() == "Script Editor" then
-		pos = centered
-	elseif not checkSize(currentWin, pseudoMaximized) then
-		pos = pseudoMaximized
+		pos = Centered
+	elseif not CheckSize(currentWin, PseudoMaximized) then
+		pos = PseudoMaximized
 	else
-		pos = maximized
+		pos = Maximized
 	end
-	moveResize(currentWin, pos)
+	MoveResize(currentWin, pos)
 end
 
 --------------------------------------------------------------------------------
@@ -225,7 +226,7 @@ local function homeAction()
 		keystroke({ "shift", "command" }, "A", 1, app("zoom.us"))
 		return
 	end
-	twitterScrollUp()
+	TwitterScrollUp()
 end
 
 local function endAction()
@@ -244,7 +245,7 @@ hotkey(hyper, "pagedown", moveCurWinToOtherDisplay)
 hotkey(hyper, "pageup", moveCurWinToOtherDisplay)
 hotkey({}, "home", homeAction)
 hotkey({}, "end", endAction)
-hotkey(hyper, "right", function() moveResize(hs.window.focusedWindow(), rightHalf) end)
-hotkey(hyper, "left", function() moveResize(hs.window.focusedWindow(), leftHalf) end)
+hotkey(hyper, "right", function() MoveResize(hs.window.focusedWindow(), RightHalf) end)
+hotkey(hyper, "left", function() MoveResize(hs.window.focusedWindow(), LeftHalf) end)
 hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
 

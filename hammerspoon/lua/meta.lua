@@ -19,7 +19,7 @@ uriScheme("hs-reload", function()
 	-- INFO will also run the systemStart function due to reload
 end)
 
-function systemStart()
+function SystemStart()
 	-- prevent commit spam when updating hammerspoon config regularly
 	local _, isReloading = hs.execute("[[ -e " .. reloadIndicator .. " ]]")
 	if isReloading then
