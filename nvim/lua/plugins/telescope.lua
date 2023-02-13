@@ -99,7 +99,6 @@ local options = {
 				cursor = {
 					width = 0.7,
 					preview_cutoff = 30,
-					preview_width = { 0.55, max = 45 },
 				},
 			},
 		},
@@ -113,7 +112,6 @@ local options = {
 				cursor = {
 					width = 0.7,
 					preview_cutoff = 30,
-					preview_width = { 1.55, max = 45 },
 				},
 			},
 		},
@@ -173,7 +171,7 @@ local options = {
 			initial_mode = "normal",
 			prompt_prefix = "暈",
 			theme = "cursor",
-			layout_config = { cursor = { width = 0.25 } },
+			layout_config = { cursor = { width = 0.3 } },
 		},
 		colorscheme = {
 			enable_preview = true,

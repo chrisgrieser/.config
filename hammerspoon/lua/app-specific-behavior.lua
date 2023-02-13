@@ -273,7 +273,6 @@ Wf_finder = Wf.new("Finder")
 
 FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)
 	if not (appName == "Finder") then return end
-	if not (#finderAppObj:allWindows() > 0) then return end
 
 	if eventType == Aw.activated then
 		AutoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
@@ -283,7 +282,7 @@ FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)
 		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
 		-- properly utilize Finder
 		RunWithDelays({2.5, 5, 10}, function()
-			if finderAppObj and #finderAppObj:allWindows() > 0 then finderAppObj:kill() end
+			if finderAppObj and #finderAppObj:allWindows() == 0 then finderAppObj:kill() end
 		end)
 	end
 end):start()

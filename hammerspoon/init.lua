@@ -12,9 +12,9 @@ require("lua.system-and-cron")
 require("lua.filesystem-watchers")
 require("lua.app-specific-behavior")
 require("lua.twitter")
-require("lua.notification-watcher")
+-- require("lua.notification-watcher")
 
-if isIMacAtHome() or isAtMother() then
+if IsIMacAtHome() or IsAtMother() then
 	require("lua.hot-corner-action")
 	require("lua.usb-watchers")
 end
