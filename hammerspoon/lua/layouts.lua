@@ -99,7 +99,7 @@ function WorkLayout()
 		"IINA",
 		"Twitch",
 	}
-	privateClosers()
+	PrivateClosers()
 
 	dockSwitcher("home")
 
