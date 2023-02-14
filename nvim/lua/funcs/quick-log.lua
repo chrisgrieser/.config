@@ -65,20 +65,21 @@ end
 
 function M.objectlog()
 	local varname = getVar()
-	local logStatement
+	local templateStr
 	local ft = bo.filetype
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = string.format('print("%s:", hs.inspect(%s))', varname, varname)
+		templateStr = 'print("%s:", hs.inspect(%s))'
 	elseif ft == "lua" and expand("%:p:h"):find("nvim") then
-		logStatement = string.format('vim.pretty_print("%s:", %s)', varname, varname)
+		templateStr = 'vim.pretty_print("%s:", %s)'
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = string.format('console.dir("%s:", %s)', varname, varname)
+		templateStr = 'console.dir("%s:", %s)'
 	else
 		vim.notify("Objectlog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
+	local logStatement = string.format(templateStr, varname, varname)
 	append(logStatement)
 end
 
