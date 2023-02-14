@@ -1,17 +1,17 @@
-local lightTheme = "rose-pine"
-local darkTheme = "bluloco"
--- local darkTheme = "tokyonight-moon"
+-- local lightTheme = "rose-pine"
+-- local darkTheme = "bluloco"
+local darkTheme = "tokyonight-moon"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
--- local lightTheme = "dawnfox"
+local lightTheme = "dawnfox"
 -- local darkTheme = "zephyr"
 
 local themePackages = {
-	{ "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
-	{ "rose-pine/neovim", name = "rose-pine" },
-	-- "EdenEast/nightfox.nvim",
+	-- { "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
+	-- { "rose-pine/neovim", name = "rose-pine" },
+	"EdenEast/nightfox.nvim",
 	-- "glepnir/zephyr-nvim",
-	-- "folke/tokyonight.nvim",
+	"folke/tokyonight.nvim",
 	-- "rebelot/kanagawa.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",
@@ -91,6 +91,9 @@ function ThemeSettings()
 			end
 			setHighlight("GitSignsChange", "guifg=#acaa62")
 			setHighlight("GitSignsAdd", "guifg=#7fcc82")
+			for _, v in pairs(modes) do
+				setHighlight("lualine_a_" .. v, "gui=bold")
+			end
 
 		-- oxocarbon
 		elseif theme == "oxocarbon" then
