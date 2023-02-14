@@ -128,6 +128,8 @@ require("lualine").setup {
 	winbar = {
 		lualine_a = {
 			{ clock },
+			-- TODO
+			-- { require("statusline-action-hints").statusline },
 		},
 		lualine_b = {
 			{

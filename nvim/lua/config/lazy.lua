@@ -25,7 +25,7 @@ require("lazy").setup("plugins", {
 	},
 	ui = {
 		wrap = true,
-		border = borderStyle,
+		border = BorderStyle,
 		size = { width = 1, height = 1 }, -- full sized
 	},
 	checker = {
