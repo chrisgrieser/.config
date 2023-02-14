@@ -120,7 +120,7 @@ Wf_browser = Wf.new("Brave Browser")
 		AutoTile(Wf_browser)
 
 		-- HACK to fix autofocus-bug in Brave
-		RunWithDelays(0.4, function()
+		RunWithDelays(0.5, function()
 			if #Wf_browser:getWindows() ~= 1 then return end
 			local prevCur = hs.mouse.getRelativePosition()
 			local screen = hs.mouse.getCurrentScreen()
