@@ -203,6 +203,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F7BE3A07-5E84-47F7-9087-F135C41A15C3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CFD26295-2670-4CF9-B85E-A7465ADE565A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -306,6 +319,48 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
+				<string>extensions</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>⌨️ Extension Shortcuts</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>9AA14640-4989-4266-9F9B-E6DB0264EFA5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome://extensions/shortcuts</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>8EF415FC-4BD8-4481-A80A-C31DB81268CE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
 				<string>sw</string>
 				<key>subtext</key>
 				<string></string>
@@ -389,42 +444,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>chrome://extensions/shortcuts</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>8EF415FC-4BD8-4481-A80A-C31DB81268CE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>keyword</key>
-				<string>extensions</string>
+				<string>paywall</string>
 				<key>subtext</key>
-				<string></string>
+				<string>via 12ft.io</string>
 				<key>text</key>
-				<string>⌨️ Extension Shortcuts</string>
+				<string>Skip Paywall</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>9AA14640-4989-4266-9F9B-E6DB0264EFA5</string>
+			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -454,21 +488,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>paywall</string>
-				<key>subtext</key>
-				<string>via 12ft.io</string>
-				<key>text</key>
-				<string>Skip Paywall</string>
-				<key>withspace</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome-extension://dhdgffkkebhmkfjojejmpbldmpobfkfo/options.html#nav=utils</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
+			<string>CF0751AB-25B7-45A7-89DE-68E791637C9D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -496,23 +530,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>concurrently</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Browser-Bookmarks.bkp" &amp;&amp; echo yes</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string></string>
-				<key>url</key>
-				<string>chrome-extension://dhdgffkkebhmkfjojejmpbldmpobfkfo/options.html#nav=utils</string>
+				<key>type</key>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>CF0751AB-25B7-45A7-89DE-68E791637C9D</string>
+			<string>14C11AAF-4BA7-4F10-8AE5-C5BF378187DE</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -559,29 +595,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Browser-Bookmarks.bkp" &amp;&amp; echo yes</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>14C11AAF-4BA7-4F10-8AE5-C5BF378187DE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -618,6 +631,27 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>4B4208D1-E8A7-4F39-B0A9-1DB6D596B5BC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query} URLs</string>
+				<key>title</key>
+				<string>✅ URLs copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>40631024-7C9F-4784-A3E7-1116BD6C894A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -668,27 +702,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query} URLs</string>
-				<key>title</key>
-				<string>✅ URLs copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>40631024-7C9F-4784-A3E7-1116BD6C894A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
@@ -696,6 +709,113 @@
 			<string>alfred.workflow.utility.transform</string>
 			<key>uid</key>
 			<string>BE8B707A-6DA8-4CDD-A5BF-434F69DAC7B4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome://flags/</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>CFD26295-2670-4CF9-B85E-A7465ADE565A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>flags</string>
+				<key>subtext</key>
+				<string>chrome://flags/</string>
+				<key>text</key>
+				<string>🏳️ Browser Flags</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F7BE3A07-5E84-47F7-9087-F135C41A15C3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-browser-default-folder_[Browser-Path].sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>81336F07-6F1D-4BF8-8FC0-6EF0B8886277</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>:browser</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Browser Default Folder</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>528AE6EA-5209-45EE-816F-B14350E47D2A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -732,71 +852,6 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>E5B886F0-9286-40B9-9F3E-0475D3256D4F</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>:browser</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Browser Default Folder</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>528AE6EA-5209-45EE-816F-B14350E47D2A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-browser-default-folder_[Browser-Path].sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>81336F07-6F1D-4BF8-8FC0-6EF0B8886277</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -906,7 +961,7 @@
 			<key>xpos</key>
 			<real>740</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>155</real>
 		</dict>
 		<key>97E52210-B26B-49B3-AC6D-65A1235A88C9</key>
 		<dict>
@@ -926,16 +981,16 @@
 			<key>xpos</key>
 			<real>565</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>155</real>
 		</dict>
 		<key>A8E0AB8E-1473-4197-B793-732E24B45E9F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>735</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>290</real>
 		</dict>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
@@ -989,7 +1044,7 @@
 			<key>xpos</key>
 			<real>740</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>755</real>
 		</dict>
 		<key>CF0751AB-25B7-45A7-89DE-68E791637C9D</key>
 		<dict>
@@ -999,6 +1054,15 @@
 			<real>740</real>
 			<key>ypos</key>
 			<real>405</real>
+		</dict>
+		<key>CFD26295-2670-4CF9-B85E-A7465ADE565A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>740</real>
+			<key>ypos</key>
+			<real>635</real>
 		</dict>
 		<key>D14B4522-0A25-4F4D-9985-FF8B04E43832</key>
 		<dict>
@@ -1044,10 +1108,12 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>vimium settings</string>
 			<key>xpos</key>
-			<real>570</real>
+			<real>565</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>755</real>
 		</dict>
 		<key>F34E5081-7725-4B48-867B-36BC4DFAD990</key>
 		<dict>
@@ -1056,7 +1122,16 @@
 			<key>xpos</key>
 			<real>565</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>290</real>
+		</dict>
+		<key>F7BE3A07-5E84-47F7-9087-F135C41A15C3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>565</real>
+			<key>ypos</key>
+			<real>635</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
