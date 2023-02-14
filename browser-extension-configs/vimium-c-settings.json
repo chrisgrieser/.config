@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "10/02/2023, 15:54:20",
-	"time": 1676040860673,
+	"@time": "14/02/2023, 16:20:54",
+	"time": 1676388054310,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -17,6 +17,10 @@
 		{
 			"passKeys": "j k ",
 			"pattern": "^https://www.google.*/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://www.inoreader.com/"
 		}
 	],
 	"grabBackFocus": true,
@@ -48,6 +52,9 @@
 		"map F LinkHints.activateOpenInNewTab",
 		"map zf LinkHints.activateCopyLinkUrl",
 		"",
+		"\" Images",
+		"map zi LinkHints.activateCopyImage",
+		"",
 		"\" Bookmarks",
 		"map B addBookmark",
 		"",
@@ -56,7 +63,9 @@
 		"map we closeTabsOnRight",
 		"map wv moveTabToNewWindow",
 		"map wm joinTabs",
+		"map wi moveTabToIncognito",
 		"map W closeOtherTabs",
+		"",
 		"map i removeTab",
 		"map x removeTab",
 		"map u restoreTab",
@@ -67,6 +76,7 @@
 		"map t Vomnibar.activateTabSelection",
 		"map wn createTab window",
 		"map zt duplicateTab",
+		"map s sortTabs",
 		"",
 		"\" Scrolling",
 		"map j scrollDown",
