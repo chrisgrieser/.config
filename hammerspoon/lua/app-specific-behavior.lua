@@ -120,8 +120,12 @@ Wf_browser = Wf.new("Brave Browser")
 		AutoTile(Wf_browser)
 
 		-- HACK to fix autofocus-bug in Brave
-		RunWithDelays({ 0.4, 0.5 }, function()
-			if #Wf_browser:getWindows() == 1 then hs.eventtap.leftClick { x = 1000, y = 500 } end
+		RunWithDelays(0.4, function()
+			if #Wf_browser:getWindows() ~= 1 then return end
+			local prevCur = hs.mouse.getRelativePosition()
+			local screen = hs.mouse.getCurrentScreen()
+			hs.eventtap.leftClick { x = 1000, y = 500 }
+			hs.mouse.setRelativePosition(prevCur, screen)
 		end)
 	end)
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_browser) end)
@@ -281,7 +285,7 @@ FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)
 
 		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
 		-- properly utilize Finder
-		RunWithDelays({2.5, 5, 10}, function()
+		RunWithDelays({ 2.5, 5, 10 }, function()
 			if finderAppObj and #finderAppObj:allWindows() == 0 then finderAppObj:kill() end
 		end)
 	end
