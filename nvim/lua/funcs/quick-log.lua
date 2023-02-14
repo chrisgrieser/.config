@@ -41,24 +41,25 @@ end
 ---VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.log()
 	local varname = getVar()
-	local logStatement
+	local templateStr
 	local ft = bo.filetype
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = 'Notify("' .. varname .. ':", ' .. varname .. ")"
+		templateStr = 'Notify("%s:", %s)'
 	elseif ft == "lua" or ft == "python" then
-		logStatement = 'print("' .. varname .. ': ", ' .. varname .. ")"
+		templateStr = 'print("%s:", %s)'
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = 'console.log("' .. varname .. ':", ' .. varname .. ");"
+		templateStr = 'console.log("%s:", %s);'
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		logStatement = 'echo "(log) ' .. varname .. ": $" .. varname .. '"'
+		templateStr = 'echo "(log) %s:", $%s);'
 	elseif ft == "applescript" then
-		logStatement = 'log "' .. varname .. ': " & ' .. varname
+		templateStr = 'log "%s:" & %s'
 	else
 		vim.notify("Quicklog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
+	local logStatement = string.format(templateStr, varname, varname)
 	append(logStatement)
 end
 
@@ -68,11 +69,11 @@ function M.objectlog()
 	local ft = bo.filetype
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = 'print("' .. varname .. ':", hs.inspect(' .. varname .. "))"
+		logStatement = string.format('print("%s:", hs.inspect(%s))', varname, varname)
 	elseif ft == "lua" and expand("%:p:h"):find("nvim") then
-		logStatement = 'vim.pretty_print("' .. varname .. ':", ' .. varname .. ")"
+		logStatement = string.format('vim.pretty_print("%s:", %s)', varname, varname)
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = 'console.dir("' .. varname .. ':", ' .. varname .. ");"
+		logStatement = string.format('console.dir("%s:", %s)', varname, varname)
 	else
 		vim.notify("Objectlog does not support " .. ft .. " yet.", logWarn)
 		return
