@@ -1,11 +1,7 @@
 {
 	"trim trailing line break": {
-		"prefix": [
-			":gsub",
-			"gsub",
-			"trim trailing line break"
-		],
-		"body": ":gsub(\"0$\", \"\")"
+		"prefix": "trim trailing line break" ,
+		"body": ":gsub(\"\\n$\", \"\")"
 	},
 	"ignore start/end (stylua)": {
 		"prefix": "ignore start/end (stylua)",
