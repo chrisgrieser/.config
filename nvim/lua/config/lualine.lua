@@ -84,7 +84,10 @@ end
 local function clock()
 	if fn.winwidth(0) < 110 then return "" end
 	local time = os.date():sub(12, 16)
-	if os.time() % 2 == 1 then time = time:gsub(":", " ") end -- blinking `:`
+
+	-- blinking `:`, requires statusline-refresh interval of 1000
+	if os.time() % 2 == 1 then time = time:gsub(":", " ") end 
+
 	return " " .. time
 end
 

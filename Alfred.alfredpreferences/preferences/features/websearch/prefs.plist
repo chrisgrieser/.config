@@ -11,7 +11,7 @@
 			<key>keyword</key>
 			<string>ag</string>
 			<key>text</key>
-			<string>Alfred Gallery</string>
+			<string>Alfred Gallery: '{query}'</string>
 			<key>url</key>
 			<string>https://alfred.app/search/?q={query}</string>
 		</dict>
