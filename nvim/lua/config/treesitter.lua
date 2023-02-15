@@ -126,3 +126,12 @@ autocmd("BufWinEnter", {
 	pattern = { "*.sh", "*.zsh", ".zsh*" },
 	command = "silent! set filetype=sh",
 })
+
+--------------------------------------------------------------------------------
+-- treesitter for lua https://github.com/neovim/neovim/issues/14090#issuecomment-1430970242
+-- augroup ("treesitterLua", {})
+-- autocmd ("FileType", {
+-- 	group = "treesitterLua",
+-- 	pattern = "lua",
+--   callback = function() vim.treesitter.start() end,
+-- })
