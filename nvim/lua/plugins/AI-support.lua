@@ -33,27 +33,6 @@ return {
 		end,
 	},
 	{
-		"dense-analysis/neural",
-		cmd = "NeuralCode",
-		dependencies = "MunifTanjim/nui.nvim",
-		config = function()
-			require("neural").setup {
-				mappings = {
-					swift = nil,
-					prompt = nil,
-				},
-				open_ai = {
-					api_key = vim.env.OPENAI_API_KEY, -- not committed, defined in config/private-settings.lua outside of repo
-					max_tokens = 1000,
-					temperature = 0.1,
-					presence_penalty = 0.5,
-					frequency_penalty = 0.5,
-				},
-				ui = { icon = "ﮧ" },
-			}
-		end,
-	},
-	{
 		"jcdickinson/codeium.nvim",
 		event = "InsertEnter",
 		dependencies = {
@@ -68,20 +47,4 @@ return {
 			}
 		end,
 	},
-	-- {
-	-- 	"Exafunction/codeium.vim",
-	-- 	event = "InsertEnter",
-	-- 	init = function()
-	-- 		vim.g.codeium_disable_bindings = 1 -- no default bindings
-	-- 		vim.g.codeium_filetypes = {
-	-- 			applescript = false,
-	-- 		}
-	-- 	end,
-	-- 	config = function()
-	-- 		-- stylua: ignore start
-	-- 		vim.keymap.set("i", "<C-e>", function() return vim.fn["codeium#Clear"]() end, { desc = "codium clear", expr = true })
-	-- 		vim.keymap.set("i", "<C-c>", function() return vim.fn["codeium#Accept"]() end, { desc = "codium accept", expr = true })
-	-- 		-- stylua: ignore end
-	-- 	end,
-	-- },
 }
