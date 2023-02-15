@@ -44,9 +44,6 @@ nmap k gk
 
 " consistent with emacs bindings
 nmap <C-e> A
-nmap <C-a> I
-vmap <C-e> <Esc>A
-vmap <C-a> <Esc>I
 
 " HJKL behaves like hjkl, but bigger distance
 map H g0
@@ -61,10 +58,6 @@ nmap zl :contextMenu
 
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
 nmap ge :nextSuggestion
-
-" Synonyms
-exmap synonymSuggestion obcommand obsidian-wordy:wordy-syn
-nmap zs :synonymSuggestion
 
 " done via Obsdian Hotkeys, so they also work in Preview Mode
 " nmap <C-h> :back
@@ -91,10 +84,10 @@ nmap m %
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
 nmap gs :gotoHeading
 
-" [g]oto [f]ile (= Follow Link under cursor)
-exmap followLinkUnderCursor obcommand editor:follow-link
-nmap gx :followLinkUnderCursor
-nmap gd :followLinkUnderCursor
+" [g]oto definition / link (shukuchi makes it forward-seeking)
+exmap followNextLink obcommand shukuchi:open-link
+nmap gx :followNextLink
+nmap gd :followNextLink
 
 exmap live-grep obcommand obsidian-another-quick-switcher:grep
 nmap gF :live-grep
@@ -102,7 +95,7 @@ nmap gF :live-grep
 " [g]oto [o]pen file (= Quick Switcher)
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search
 nmap go :quickSwitcher
-vmap go :quickSwitcher
+nmap gr :quickSwitcher
 
 " go to last change - https://vimhelp.org/motion.txt.html#g%3B
 nmap gc u<C-r>
@@ -163,7 +156,7 @@ nmap ,c F[t|"_dt]
 " append to [y]aml (line 3 = tags)
 nmap ,y 3ggA
 
-" [g]oto -> [f]ootnotes
+" [g]oto [f]ootnotes
 " requires Footnotes Shortcut Plugin
 exmap gotoFootnoteDefinition obcommand obsidian-footnotes:insert-footnote
 nmap gf :gotoFootnoteDefinition
@@ -287,9 +280,9 @@ nmap zR :unfoldall
 exmap lightspeed obcommand mrj-jump-to-link:activate-lightspeed-jump
 nmap ö :lightspeed
 
-" Link Jump (similar to Vimium's f)
+" Quick Link Jump (similar to Vimium's f)
 exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
-nmap ,l :linkjump
+nmap q :linkjump
 
 """"""""""""""""""""""
 " Substitute
@@ -297,13 +290,6 @@ nmap ,l :linkjump
 " poor man's substitute.nvim 🥲
 nmap s Vp
 nmap S vg$p
-
-""""""""""""""""""""""
-" Comment
-""""""""""""""""""""""
-" poor man's comment.nvim
-exmap comment obcommand obsidian-smarter-md-hotkeys:smarter-html-comments
-nmap qq :comment
 
 """"""""""""""""""""""
 " Option Toggling
