@@ -1,6 +1,5 @@
 require("lua.utils")
 require("lua.window-management")
-require("lua.private")
 require("lua.twitter")
 --------------------------------------------------------------------------------
 
@@ -99,7 +98,6 @@ function WorkLayout()
 		"IINA",
 		"Twitch",
 	}
-	PrivateClosers()
 
 	dockSwitcher("home")
 
@@ -178,7 +176,6 @@ local function motherHomeModeLayout()
 		"IINA",
 		"Twitch",
 	}
-	PrivateClosers()
 
 	alacrittyFontSize(25)
 	dockSwitcher("home")
