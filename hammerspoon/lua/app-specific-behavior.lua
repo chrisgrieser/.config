@@ -311,7 +311,9 @@ Wf_zoom = Wf.new("zoom.us"):subscribe(Wf.windowCreated, function()
 			end tell
 		]])
 
-	RunWithDelays(1, function() App("zoom.us"):findWindow("^Zoom$"):close() end)
+	RunWithDelays(1, function()
+		if Wf_zoom:getWindows() > 1 then App("zoom.us"):findWindow("^Zoom$"):close() end
+	end)
 end)
 
 --------------------------------------------------------------------------------
