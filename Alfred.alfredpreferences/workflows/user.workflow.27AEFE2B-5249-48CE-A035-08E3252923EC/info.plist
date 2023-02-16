@@ -151,6 +151,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C574D3B2-DE78-4BA9-A254-826DF8F39DBF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>01E66D52-D050-4B99-B60D-675358A02529</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D1AFFF36-7CC6-4D2F-8728-863C85053348</key>
 		<array>
 			<dict>
@@ -444,27 +457,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>paywall</string>
-				<key>subtext</key>
-				<string>via 12ft.io</string>
-				<key>text</key>
-				<string>Skip Paywall</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -484,6 +476,27 @@
 			<string>97E52210-B26B-49B3-AC6D-65A1235A88C9</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>paywall</string>
+				<key>subtext</key>
+				<string>via 12ft.io</string>
+				<key>text</key>
+				<string>Skip Paywall</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -743,7 +756,7 @@
 				<key>subtext</key>
 				<string>chrome://flags/</string>
 				<key>text</key>
-				<string>🏳️ Browser Flags</string>
+				<string>🏳️ Chrome Flags</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -810,6 +823,48 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
+				<string>brave://flags/</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>01E66D52-D050-4B99-B60D-675358A02529</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>flags</string>
+				<key>subtext</key>
+				<string>brave://flags/</string>
+				<key>text</key>
+				<string>🏳️ Brave Flags</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C574D3B2-DE78-4BA9-A254-826DF8F39DBF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
 				<string>chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html</string>
 			</dict>
 			<key>type</key>
@@ -860,6 +915,15 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>01E66D52-D050-4B99-B60D-675358A02529</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>740</real>
+			<key>ypos</key>
+			<real>755</real>
+		</dict>
 		<key>10C28BFB-0100-4B2F-BAEF-FEA3FC8C44E2</key>
 		<dict>
 			<key>colorindex</key>
@@ -1037,14 +1101,23 @@
 			<key>ypos</key>
 			<real>575</real>
 		</dict>
+		<key>C574D3B2-DE78-4BA9-A254-826DF8F39DBF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>565</real>
+			<key>ypos</key>
+			<real>755</real>
+		</dict>
 		<key>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>745</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>885</real>
 		</dict>
 		<key>CF0751AB-25B7-45A7-89DE-68E791637C9D</key>
 		<dict>
@@ -1111,9 +1184,9 @@
 			<key>note</key>
 			<string>vimium settings</string>
 			<key>xpos</key>
-			<real>565</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>885</real>
 		</dict>
 		<key>F34E5081-7725-4B48-867B-36BC4DFAD990</key>
 		<dict>
