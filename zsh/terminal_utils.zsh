@@ -8,7 +8,7 @@ function o (){
 	local input="$*"
 
 	if [[ -e "$input" ]] ; then # skip `fzf` if file is fully named, e.g. through tab completion
-		[[ -d "$input" ]] && z "$input"
+		[[ -d "$input" ]] && __zoxide_z "$input"
 		[[ -f "$input" ]] && open "$input"
 		return 0
 	fi
