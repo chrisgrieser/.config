@@ -151,19 +151,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C574D3B2-DE78-4BA9-A254-826DF8F39DBF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>01E66D52-D050-4B99-B60D-675358A02529</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>D1AFFF36-7CC6-4D2F-8728-863C85053348</key>
 		<array>
 			<dict>
@@ -221,6 +208,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>CFD26295-2670-4CF9-B85E-A7465ADE565A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FA2B313E-1452-4A60-A4DB-766A82D53C56</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9E95210A-C79F-4F6F-8C1D-8927F7A9D85C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -823,48 +823,6 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>brave://flags/</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>01E66D52-D050-4B99-B60D-675358A02529</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>flags</string>
-				<key>subtext</key>
-				<string>brave://flags/</string>
-				<key>text</key>
-				<string>🏳️ Brave Flags</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>C574D3B2-DE78-4BA9-A254-826DF8F39DBF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
 				<string>chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html</string>
 			</dict>
 			<key>type</key>
@@ -910,20 +868,57 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>:browser</string>
+				<key>subtext</key>
+				<string>will require brave re-install to enable auto-update again</string>
+				<key>text</key>
+				<string>Remove Brave Autoupdate</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>FA2B313E-1452-4A60-A4DB-766A82D53C56</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># https://github.com/brave/brave-browser/issues/5576
+# https://www.techrepublic.com/forums/discussions/disable-brave-browser-auto-update-on-a-mac/
+rm -r /Applications/Brave\ Browser.app/Contents/Frameworks/Brave\ Browser\ Framework.framework/Versions/*/Frameworks/Sparkle.framework/Versions/A/Resources/Autoupdate.app</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9E95210A-C79F-4F6F-8C1D-8927F7A9D85C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>01E66D52-D050-4B99-B60D-675358A02529</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>740</real>
-			<key>ypos</key>
-			<real>755</real>
-		</dict>
 		<key>10C28BFB-0100-4B2F-BAEF-FEA3FC8C44E2</key>
 		<dict>
 			<key>colorindex</key>
@@ -1047,6 +1042,15 @@
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
+		<key>9E95210A-C79F-4F6F-8C1D-8927F7A9D85C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>795</real>
+		</dict>
 		<key>A8E0AB8E-1473-4197-B793-732E24B45E9F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1101,23 +1105,14 @@
 			<key>ypos</key>
 			<real>575</real>
 		</dict>
-		<key>C574D3B2-DE78-4BA9-A254-826DF8F39DBF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>565</real>
-			<key>ypos</key>
-			<real>755</real>
-		</dict>
 		<key>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>745</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>885</real>
+			<real>760</real>
 		</dict>
 		<key>CF0751AB-25B7-45A7-89DE-68E791637C9D</key>
 		<dict>
@@ -1184,9 +1179,9 @@
 			<key>note</key>
 			<string>vimium settings</string>
 			<key>xpos</key>
-			<real>570</real>
+			<real>565</real>
 			<key>ypos</key>
-			<real>885</real>
+			<real>760</real>
 		</dict>
 		<key>F34E5081-7725-4B48-867B-36BC4DFAD990</key>
 		<dict>
@@ -1205,6 +1200,15 @@
 			<real>565</real>
 			<key>ypos</key>
 			<real>635</real>
+		</dict>
+		<key>FA2B313E-1452-4A60-A4DB-766A82D53C56</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>795</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
