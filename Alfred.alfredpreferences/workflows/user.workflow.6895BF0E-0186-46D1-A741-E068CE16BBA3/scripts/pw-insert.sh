@@ -8,5 +8,7 @@ entry_name=${entry_name:l}
 
 folder=${folder:1} # cut "*" which marked entry as folder
 
-pass generate --clip --no-symbols "$folder/$entry_name" | tail -n1
+pbpaste | pass insert --echo "$folder/$entry_name" # new password from clipboard
 [[ "$auto_push" == "1" ]] && pass git push &>/dev/null
+
+echo -n "Password saved for $entry_name"
