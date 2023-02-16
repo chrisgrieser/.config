@@ -1,12 +1,13 @@
 {
 	"name": "Vimium C",
-	"@time": "14/02/2023, 17:26:32",
-	"time": 1676391992244,
+	"@time": "16/02/2023, 15:47:58",
+	"time": 1676558878050,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
-		"chromium": 110
+		"chromium": 109
 	},
+	"allBrowserUrls": true,
 	"exclusionListenHash": false,
 	"exclusionRules": [
 		{
@@ -14,12 +15,12 @@
 			"pattern": ":https://mail.google.com/"
 		},
 		{
-			"passKeys": "j k ",
-			"pattern": "^https://www.google.*/"
-		},
-		{
 			"passKeys": "",
 			"pattern": ":https://www.inoreader.com/"
+		},
+		{
+			"passKeys": "j k ",
+			"pattern": "^https://www.google.*/"
 		}
 	],
 	"grabBackFocus": true,
@@ -35,7 +36,6 @@
 		"",
 		"\" Modes",
 		"map <esc> reset",
-		"map I enterInsertMode",
 		"map v enterVisualMode",
 		"map V enterVisualLineMode",
 		"map a passNextKey",
@@ -63,13 +63,12 @@
 		"map wv moveTabToNewWindow",
 		"map wm joinTabs",
 		"map wi moveTabToIncognito",
-		"map W closeOtherTabs",
+		"map ww closeOtherTabs",
 		"",
 		"map i removeTab",
 		"map x removeTab",
 		"map u restoreTab",
-		"\" 19 is the maximum where chrome does not prompt for confirmation",
-		"map ww removeTab count=19",
+		"",
 		"map b previousTab",
 		"map e nextTab",
 		"map t Vomnibar.activateTabSelection",

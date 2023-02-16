@@ -124,7 +124,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "outdent" })
 -- EDITING
 
 -- Casing
-keymap("n", "ü", "mzlblgueh~`z", { desc = "toggle capital/lowercase of word" })
+keymap("n", "ü", "mzlb~`z", { desc = "toggle capital/lowercase of word" })
 keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
 keymap("n", "~", "~h")
 keymap("n", "<BS>", qol.wordSwitch, { desc = "switch common words" })
@@ -554,8 +554,8 @@ autocmd("FileType", {
 
 -- Simple version of the delaytrain plugin
 for _, key in ipairs { "x", "h", "l" } do
-	local timeout = 5000
-	local maxUsage = 8
+	local timeout = 4000
+	local maxUsage = 10
 
 	local count = 0
 	keymap("n", key, function()

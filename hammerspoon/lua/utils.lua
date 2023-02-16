@@ -144,6 +144,10 @@ function OpenApp(appNames)
 	end
 end
 
+function QuitFinderIfNoWindow()
+	if App("Finder") and #App("Finder"):allWindows() == 0 then App("Finder"):kill() end
+end
+
 ---@param appNames string|string[]
 function QuitApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
