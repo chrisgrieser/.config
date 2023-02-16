@@ -145,6 +145,7 @@ function OpenApp(appNames)
 end
 
 function QuitFinderIfNoWindow()
+	-- quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 	if App("Finder") and #App("Finder"):allWindows() == 0 then App("Finder"):kill() end
 end
 

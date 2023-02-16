@@ -178,11 +178,9 @@ function AutoTile(windowSource)
 	if #wins == 0 and FrontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
 		RunWithDelays(1, function()
-			-- 1) quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
-			-- 2) getWins() again to check if window count has changed in the meantime
-			-- 3) delay needs to be high enough to since e.g. during quitting fullscreen
+			-- delay needs to be high enough to since e.g. during quitting fullscreen
 			-- mode, Hammerspoon temporarily cannot detect Finder windows (sic!)
-			if #getWins(windowSource) == 0 then App("Finder"):kill() end
+			QuitFinderIfNoWindow()
 		end)
 	elseif #wins == 1 then
 		if IsProjector() then

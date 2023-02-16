@@ -92,13 +92,13 @@ function WorkLayout()
 		"Drafts",
 	}
 	QuitApp {
-		"Finder",
 		"YouTube",
 		"Netflix",
 		"CrunchyRoll",
 		"IINA",
 		"Twitch",
 	}
+	QuitFinderIfNoWindow()
 	require("lua.private").closer()
 
 	dockSwitcher("work")
@@ -154,6 +154,7 @@ local function motherMovieModeLayout()
 			"alacritty",
 			"Alacritty",
 			"Twitter",
+			"Finder",
 		}
 	end)
 end
@@ -179,6 +180,7 @@ local function motherHomeModeLayout()
 		"Twitch",
 	}
 	require("lua.private").closer()
+	QuitFinderIfNoWindow()
 
 	alacrittyFontSize(25)
 	dockSwitcher("home")
