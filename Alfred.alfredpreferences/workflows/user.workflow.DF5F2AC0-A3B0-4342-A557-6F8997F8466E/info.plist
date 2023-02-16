@@ -19,6 +19,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>1B052359-9E54-4CBB-BABF-C6925CB1015A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0B2584E5-EDEE-4BE5-9D80-5098C54BD631</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</key>
 		<array>
 			<dict>
@@ -37,6 +50,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>0B2584E5-EDEE-4BE5-9D80-5098C54BD631</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>987848DC-2D1D-4883-8F73-DA101A1B60C2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1B052359-9E54-4CBB-BABF-C6925CB1015A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -549,6 +575,44 @@ return "{query}"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>pwa</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Update all PWA Icons</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>987848DC-2D1D-4883-8F73-DA101A1B60C2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>PWAs</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>1B052359-9E54-4CBB-BABF-C6925CB1015A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -571,6 +635,15 @@ return "{query}"</string>
 			<real>690</real>
 			<key>ypos</key>
 			<real>140</real>
+		</dict>
+		<key>1B052359-9E54-4CBB-BABF-C6925CB1015A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>570</real>
+			<key>ypos</key>
+			<real>605</real>
 		</dict>
 		<key>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</key>
 		<dict>
@@ -636,6 +709,17 @@ return "{query}"</string>
 			<real>350</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>987848DC-2D1D-4883-8F73-DA101A1B60C2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>update all PWA icons</string>
+			<key>xpos</key>
+			<real>430</real>
+			<key>ypos</key>
+			<real>575</real>
 		</dict>
 		<key>A069BE51-DA62-4835-8048-AF3A608C97D0</key>
 		<dict>

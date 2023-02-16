@@ -83,9 +83,9 @@ case $APP_TO_UPDATE in
 	;;
 	# cp "$CUSTOM_ICON_FOLDER/Mail_fancy.icns" 'Mimestream.app/Contents/Resources/AppIcon.icns'
 	# touch "Mimestream.app" ;;
+#────────────────────────────────────────────────────────────────────────────
 "Docs")
-	cp "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Docs.app/Contents/Resources/app.icns"
-	touch "$PWA_FOLDER/Docs.app"
+	iconsur set "$PWA_FOLDER/Docs.app" &>/dev/null
 	;;
 "YouTube" | "Youtube")
 	cp "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
@@ -102,6 +102,13 @@ case $APP_TO_UPDATE in
 	;;
 "Twitch")
 	iconsur set "$PWA_FOLDER/Twitch.app" &>/dev/null
+	;;
+"PWAs")
+	cd "$PWA_FOLDER" || exit 1
+	iconsur set --local reddxxx.app Sharesome.app &>/dev/null 
+	iconsur set Tagesschau.app Docs.app Netflix.app Twitch.app CrunchyRoll.app &>/dev/null 
+	cp "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
+	touch "$PWA_FOLDER/YouTube.app"
 	;;
 *)
 	NONE_FOUND=1
@@ -124,9 +131,15 @@ if [[ $INFO_WINDOW == 1 ]]; then
 fi
 
 killall "Dock" # INFO pgrep-ing for the Dock does not work, since there is always a process called that?
+
+if [[ "$APP_TO_UPDATE" == "PWAs" ]] ; then
+	echo -n "All PWAs"
+	open "$PWA_FOLDER"
+	exit 0	
+fi
+
 killall "$APP_TO_UPDATE"
 while pgrep -q "$APP_TO_UPDATE"; do sleep 0.1 ; done
 sleep 0.1
-
 open -a "$APP_TO_UPDATE"
 echo -n "$APP_TO_UPDATE" # pass for notification
