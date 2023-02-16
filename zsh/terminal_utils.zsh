@@ -7,36 +7,38 @@ function o (){
 	local selected
 	local input="$*"
 
-	if [[ -e "$input" ]] ; then # skip `fzf` if file is fully named, e.g. through tab completion
-		[[ -d "$input" ]] && __zoxide_z "$input"
-		[[ -f "$input" ]] && open "$input"
+	# skip `fzf` if file is fully named, e.g. through tab completion
+	if [[ -d "$input" ]] ; then 
+		z "$input"
+		return 0
+	elif [[ -f "$input" ]] ; then 
+		open "$input"
 		return 0
 	fi
+
 	# --delimiter and --nth options ensure only file name and parent folder are displayed
 	selected=$(fd --hidden --color=always | fzf \
 					-0 -1 \
 					--ansi \
 					--query="$input" \
-					--expect=ctrl-b \
 					--cycle \
 					--info=inline \
 					--delimiter=/ --with-nth=-2.. --nth=-2.. \
 					--header-first \
-					--header="↵ : open/cd, ^B: buffer, ↹ : only dirs" \
+					--header="↵  :open/cd, ↹ : only dirs, ⇧↹ : depth=1" \
 					--bind="tab:reload(fd --hidden --color=always --type=directory)+change-prompt(↪ )" \
+					--bind="shift-tab:reload(fd --hidden --color=always --max-depth=1)" \
 					--preview-window="border-left" \
 					--preview 'if [[ -d {} ]] ; then echo "\\033[1;33m"{}"\\033[0m" ; echo ; exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=1 {} ; fi' \
 				)
-	[[ -z "$selected" ]] && return 0
-	key_pressed=$(echo "$selected" | head -n1)
-	selected=$(echo "$selected" | tail -n+2)
-
-	if [[ "$key_pressed" == "ctrl-b" ]] ; then
-		print -z "$selected"
+	if [[ -z "$selected" ]] ; then  # fzf aborted
+		return 0
 	elif [[ -d "$selected" ]] ; then
 		z "$selected"
 	elif [[ -f "$selected" ]] ; then
 		open "$selected"
+	else
+		return 1
 	fi
 }
 
@@ -47,6 +49,7 @@ function directoryInspect (){
 		git --no-optional-locks status --short
 		echo
 	fi
+	# shellcheck disable=2012
 	if [[ $(ls | wc -l) -lt 20 ]] ; then
 		exa
 	fi
@@ -63,9 +66,9 @@ function timezsh(){
 function d () {
 	if ! command -v trash &>/dev/null; then echo "trash-cli not installed." && exit 1; fi
 	if [[ $# == 0 ]]; then
-		trash *
+		trash ./*
 	else
-		trash $*
+		trash "$@"
 	fi
 }
 
@@ -88,6 +91,7 @@ function z () {
 	else
 		__zoxide_z "$1"
 	fi
+	# shellcheck disable=2181
 	[[ $? -eq 0 ]] && directoryInspect
 }
 function zi () {
@@ -96,44 +100,27 @@ function zi () {
 	directoryInspect
 }
 
-# settings (zshrc)
-alias ,="settings"
-function settings () {
-	( cd "$DOTFILE_FOLDER/zsh" || return
-	# shellcheck disable=SC1009,SC1056,SC1073,SC2035
-	SELECTED=$( { ls *.zsh | cut -d. -f1 ; ls .z* } | fzf \
-	           -0 -1 \
-	           --query "$*" \
-	           --height=75% \
-	           --layout=reverse \
-	           --info=hidden \
-	           )
-	if [[ -n $SELECTED ]] ; then
-		[[ $SELECTED != .z* ]] && SELECTED="$SELECTED.zsh"
-		open "$SELECTED"
-	fi )
-}
-
 # copies last command(s)
 function lc (){
-	num=${1-"1"} # default: 1 last command
-	history | tail -n$num | cut -c8- | sed 's/"/\"/g' | sed "s/'/\'/g" | sed -E '/^$/d'| pbcopy
+	num=${1-"1"} # default= 1 -> last command
+	history | tail -n"$num" | cut -c8- | sed 's/"/\"/g' | sed "s/'/\'/g" | sed -E '/^$/d'| pbcopy
 	echo "Copied."
 }
 # save last command(s) in Drafts
 function lcd (){
 	num=${1-"1"} # default: 1 last command
-	local timestamp="$(date +%Y-%m-%d_%H-%M-%S)"
+	local timestamp
+	timestamp="$(date +%Y-%m-%d_%H-%M-%S)"
 	local drafts_inbox="$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/"
 	mkdir -p "$drafts_inbox"
-	history | tail -n$num | cut -c8- | sed -E '/^$/d' > "$drafts_inbox/$timestamp.md"
+	history | tail -n"$num" | cut -c8- | sed -E '/^$/d' > "$drafts_inbox/$timestamp.md"
 	echo "Saved in Drafts."
 }
 
 # copies result of last command(s)
 function lr (){
 	num=${1-"1"} # default: 1 last command
-	last_command=$(history | tail -n$num | cut -c 8-)
+	last_command=$(history | tail -n"$num" | cut -c 8-)
 	echo -n "$(eval "$last_command")" | pbcopy
 	echo "Copied."
 }
