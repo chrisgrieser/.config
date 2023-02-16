@@ -28,7 +28,7 @@ function SystemStart()
 		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded.")' > /tmp/nvim-automation]])
 		return
 	else
-		if App("Finder") and #App("Finder"):allWindows() == 0 then App("Finder"):kill() end
+		QuitFinderIfNoWindow()
 		Notify("Hammerspoon started.")
 		SyncAllGitRepos()
 		Notify("Sync finished.")

@@ -26,7 +26,7 @@ end
 
 local function bringAllToFront()
 	local frontapp = App.frontmostApplication()
-	if #frontapp:allWindows() > 1 then -- HACK to prevent the occasional faulty creation of task manager windows
+	if #frontapp:allWindows() > 1 then -- HACK to prevent the occasional faulty creation of task manager windows in Brave
 		frontapp:selectMenuItem { "Window", "Bring All to Front" }
 	end
 end
@@ -165,12 +165,11 @@ end
 NeovideWatcher = Aw.new(function(appName, eventType, appObj)
 	if not appName or appName:lower() ~= "neovide" then return end
 
-	local neovideWin = appObj:mainWindow()
-	if eventType == Aw.activated then
+	if eventType == Aw.activated or eventType == Aw.launched then
 		clipboardFix()
-		-- maximize app, INFO cannot use aw.launched, since that signal isn't sent
-		-- by neovide
-		RunWithDelays({ 0.2, 0.4, 0.6, 0.8, 1 }, function()
+		-- maximize app
+		RunWithDelays({ 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 }, function()
+			local neovideWin = appObj:mainWindow()
 			if not neovideWin then return end
 			if CheckSize(neovideWin, LeftHalf) or CheckSize(neovideWin, RightHalf) then return end
 			local size = IsProjector() and Maximized or PseudoMaximized
@@ -267,18 +266,14 @@ Wf_finder = Wf.new("Finder")
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_finder) end)
 
 FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)
-	if not (appName == "Finder") then return end
-
-	if eventType == Aw.activated then
+	if eventType == Aw.launched and appName == "Finder" then
+		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
+		-- properly utilize Finder
+		RunWithDelays({ 3, 5, 10 }, QuitFinderIfNoWindow)
+	elseif eventType == Aw.activated and appName == "Finder" then
 		AutoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
 		bringAllToFront()
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
-
-		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
-		-- properly utilize Finder
-		RunWithDelays({ 2.5, 5, 10 }, function()
-			if finderAppObj and #finderAppObj:allWindows() == 0 then finderAppObj:kill() end
-		end)
 	end
 end):start()
 
@@ -340,7 +335,7 @@ end):start()
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
 -- - auto-paste and lint content
--- - skip new file creaton dialog
+-- - skip new file creation dialog
 Wf_script_editor = Wf
 	.new("Script Editor")
 	:subscribe(Wf.windowCreated, function(newWin)
