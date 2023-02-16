@@ -1,7 +1,17 @@
 #!/usr/bin/env zsh
-# shellcheck disable=2154
-pass_path="$PASSWORD_STORE_DIR"
-entry="$*"
-[[ -z "$pass_path" ]] && pass_path="$HOME/.password-store"
 
-open -R "$pass_path/$entry.gpg"
+pass_path="$PASSWORD_STORE_DIR"
+[[ -z "$pass_path" ]] && pass_path="$HOME/.password-store"
+entry=$(echo "$*" | tr -d '*') # remove the "*" marking entry as folder
+
+gpg="$pass_path/$entry.gpg"
+folder="$pass_path/$entry"
+
+if [[ -d "$folder" ]]; then
+	open "$folder"
+elif [[ -f "$gpg" ]]; then
+	open -R "$gpg"
+else
+	echo "error: file/folder not found"
+	exit 1
+fi

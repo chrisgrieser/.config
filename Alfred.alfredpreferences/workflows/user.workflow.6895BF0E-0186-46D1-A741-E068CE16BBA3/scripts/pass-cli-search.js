@@ -50,14 +50,14 @@ function run(argv) {
 			folder = folder.slice(2); // remove leading "./"
 
 			jsonArray.push({
-				title: "📂 " + folder,
+				title: folder,
+				icon: { path: "pw-folder.png" },
 				subtitle: "Create new entry in folder",
 				match: alfredMatcher(folder) + " new folder",
 				arg: "*" + folder,
 				uid: folder,
 				mods: { // disallow entry-actions
 					"cmd": { valid: false },
-					"alt": { valid: false },
 					"shift": { valid: false },
 					"fn+cmd": { valid: false },
 					"ctrl": { valid: false },

@@ -51,7 +51,7 @@ function M.log()
 	elseif ft == "javascript" or ft == "typescript" then
 		templateStr = 'console.log("%s:", %s);'
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		templateStr = 'echo "(log) %s:", $%s);'
+		templateStr = 'echo "(log) %s: $%s"'
 	elseif ft == "applescript" then
 		templateStr = 'log "%s:" & %s'
 	else
