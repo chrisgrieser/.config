@@ -16,6 +16,7 @@ local lsp_servers = {
 	"tsserver", -- ts/js
 	"eslint", -- ts/js
 	"bashls", -- also used for zsh
+	"taplo", -- toml
 }
 
 --------------------------------------------------------------------------------

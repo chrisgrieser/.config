@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>net.deanishe.alfred-reddit</string>
+	<key>connections</key>
+	<dict>
+		<key>B5CF205D-436D-41EC-A53A-555FF106ADDD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DCE19CD7-860E-45F4-B4CB-4A45085765B5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Dean Jackson</string>
+	<key>description</key>
+	<string>Browse Hot Posts on Reddit</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Reddit</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>r/</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Querying Reddit.com…</string>
+				<key>script</key>
+				<string>export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
+python3 reddit.py "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Enter subreddit name to get started</string>
+				<key>title</key>
+				<string>Browse Reddit</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>B5CF205D-436D-41EC-A53A-555FF106ADDD</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
+python3 reddit.py $argv</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DCE19CD7-860E-45F4-B4CB-4A45085765B5</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Reddit for Alfred
+=================
+
+Find subreddits and browse hot posts on Reddit.
+
+# Description
+-----------
+
+A basic workflow to browse subreddits.
+
+The subreddit search, `r/&lt;query&gt;`, uses Reddit's API to search for subreddits that match `&lt;query&gt;`. 25 results are retrieved by default.
+
+The subreddit search can be a bit odd, which is due to the legendary crapness of Reddit's search function.
+
+Search within a subreddit, `r/subreddit/&lt;query&gt;`, only filters the list of hot results. 50 results are retrieved by default.
+
+# Usage
+-----
+
+- `r/` — Show list of popular subreddits
+	- `⇥`, `↩` or `⌘+NUM` — Show 50 hottest posts in selected subreddit
+	- `⌘+↩` — Open subreddit in browser
+	- `⇧` or `⌘+Y` — Show Quick Look preview of subreddit
+    - `⌥+↩` - Make post in the subreddit
+- `r/&lt;query&gt;` — Search for subreddits matching `&lt;query&gt;`
+    - `⇥` — Show 50 hottest posts in selected subreddit (same as appending `/`)
+    - `↩` or `⌘+NUM` — Open subreddit in browser
+    - `⇧` or `⌘+Y` — Show Quick Look preview of subreddit
+    - `⌥+↩` - Make post in the subreddit
+- `r/&lt;subreddit&gt;/[&lt;query&gt;]` — Show 50 hottest posts on subreddit `&lt;subreddit&gt;`, filtered by `&lt;query&gt;` if present
+    - `↩` or `⌘+NUM` — Open article in default browser
+    - `⌘+↩` — Open Reddit comments in default browser
+    - `⌥+↩` — Open article and Reddit comments in default browser
+    - `⌘+L` — Show full post title in Alfred's Large Type window
+    - `⇧` or `⌘+Y` — Show Quick Look preview of comments page (or post)
+- `r/u/&lt;username&gt;/m/&lt;multi&gt;/[&lt;query&gt;]` — Show 50 hottest posts on user multireddit.
+
+**Note:** OS X's "delete word" shortcut (`⌥+⌫`) is very handy for backing out of a subreddit.</string>
+	<key>uidata</key>
+	<dict>
+		<key>B5CF205D-436D-41EC-A53A-555FF106ADDD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>255</real>
+		</dict>
+		<key>DCE19CD7-860E-45F4-B4CB-4A45085765B5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>455</real>
+			<key>ypos</key>
+			<real>255</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>0</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Set NSFW to 1 to include subreddits marked NSFW.</string>
+			<key>label</key>
+			<string>NSFW</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>NSFW</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>0</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Set QUICKLOOK_POST to 1 for Quick Look preview (SHIFT or CMD+Y) to show the post instead of the Reddit comments page.</string>
+			<key>label</key>
+			<string>QUICKLOOK_POST</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>QUICKLOOK_POST</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>2.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/giovannicoppola/alfred-reddit</string>
+</dict>
+</plist>

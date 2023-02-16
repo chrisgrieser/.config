@@ -25,7 +25,10 @@ local function hideOthers(win)
 end
 
 local function bringAllToFront()
-	App.frontmostApplication():selectMenuItem { "Window", "Bring All to Front" }
+	local frontapp = App.frontmostApplication()
+	if #frontapp:allWindows() > 1 then -- HACK to prevent the occasional faulty creation of task manager windows
+		frontapp:selectMenuItem { "Window", "Bring All to Front" }
+	end
 end
 
 --------------------------------------------------------------------------------

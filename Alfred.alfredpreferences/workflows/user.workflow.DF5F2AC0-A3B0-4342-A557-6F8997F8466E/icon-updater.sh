@@ -23,10 +23,6 @@ case $APP_TO_UPDATE in
 "Steam")
 	iconsur set "Steam.app" &>/dev/null
 	;;
-"Transmission")
-	cp "$CUSTOM_ICON_FOLDER/Transmission 2.icns" '/Transmission.app/Contents/Resources/Transmission.icns'
-	touch "Transmission.app"
-	;;
 "Alfred Preferences")
 	osascript -e "tell application \"Finder\"
 			open information window of (\"Alfred 5.app/Contents/Preferences/Alfred Preferences.app\" as POSIX file as alias)
@@ -110,9 +106,6 @@ case $APP_TO_UPDATE in
 	;;
 "Twitch")
 	iconsur set "$PWA_FOLDER/Twitch.app" &>/dev/null
-	;;
-"BunnyFap" | "Bunnyfap")
-	iconsur --input "$CUSTOM_ICON_FOLDER/BunnyFap.png" --scale 1.1 set "$PWA_FOLDER/BunnyFap.app" &>/dev/null
 	;;
 *)
 	NONE_FOUND=1
