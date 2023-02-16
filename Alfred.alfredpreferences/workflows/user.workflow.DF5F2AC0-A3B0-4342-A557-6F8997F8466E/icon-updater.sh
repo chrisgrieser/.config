@@ -8,8 +8,7 @@ if ! command -v iconsur &>/dev/null; then echo -n "iconsur not installed." && ex
 CUSTOM_ICON_FOLDER="$DOTFILE_FOLDER/custom-app-icons"
 
 PWA_FOLDER="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Brave Browser Apps.localized/"
-DEVICE_NAME=$(scutil --get ComputerName | cut -d" " -f2-)
-[[ "$DEVICE_NAME" =~ "Mother" ]] && PWA_FOLDER="$HOME/Applications/Brave Browser Apps.localized"
+[[ "$(scutil --get ComputerName)" =~ Mother ]] && PWA_FOLDER="$HOME/Applications/Brave Browser Apps.localized"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -88,9 +87,6 @@ case $APP_TO_UPDATE in
 	cp "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Docs.app/Contents/Resources/app.icns"
 	touch "$PWA_FOLDER/Docs.app"
 	;;
-"Inoreader")
-	iconsur -k "Unread" set "$PWA_FOLDER/Inoreader.app" &>/dev/null
-	;;
 "YouTube" | "Youtube")
 	cp "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
 	touch "$PWA_FOLDER/YouTube.app"
@@ -99,7 +95,7 @@ case $APP_TO_UPDATE in
 	iconsur set "$PWA_FOLDER/Tagesschau.app" &>/dev/null
 	;;
 "CrunchyRoll")
-	iconsur set "$PWA_FOLDER/CrunchyRoll.app"
+	iconsur set "$PWA_FOLDER/CrunchyRoll.app" &>/dev/null
 	;;
 "Netflix")
 	iconsur set "$PWA_FOLDER/Netflix.app" &>/dev/null
