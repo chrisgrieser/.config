@@ -1,6 +1,7 @@
 require("lua.utils")
 require("lua.window-management")
 require("lua.twitter")
+require("lua.private") -- symlinked private dotfile
 --------------------------------------------------------------------------------
 
 ---@param targetMode string
@@ -98,8 +99,9 @@ function WorkLayout()
 		"IINA",
 		"Twitch",
 	}
+	require("lua.private").closer()
 
-	dockSwitcher("home")
+	dockSwitcher("work")
 
 	local layout = createLayout(PseudoMaximized, IMacDisplay, {
 		"Brave Browser",
@@ -176,6 +178,7 @@ local function motherHomeModeLayout()
 		"IINA",
 		"Twitch",
 	}
+	require("lua.private").closer()
 
 	alacrittyFontSize(25)
 	dockSwitcher("home")
