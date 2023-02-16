@@ -52,7 +52,7 @@ TransBgAppWatcher = Aw.new(function(appName, eventType, appObject)
 	end
 end):start()
 
--- when currently auto-tiled, hide the app on deactivation to it does not cover sketchybar
+-- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
 AutoTileAppWatcher = Aw.new(function(appName, eventType, appObj)
 	local autoTileApps = { "Finder", "Brave Browser" }
 	if eventType == Aw.deactivated and TableContains(autoTileApps, appName) then
@@ -119,14 +119,7 @@ Wf_browser = Wf.new("Brave Browser")
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(Wf.windowCreated, function()
-		AutoTile(Wf_browser)
-
-		-- HACK to fix autofocus-bug in Brave
-		if #Wf_browser:getWindows() == 1 then 
-			
-		end
-	end)
+	:subscribe(Wf.windowCreated, function() AutoTile(Wf_browser) end)
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_browser) end)
 	:subscribe(Wf.windowFocused, bringAllToFront)
 
@@ -143,7 +136,6 @@ Wf_browser_all = Wf.new("Brave Browser")
 -- IINA: Full Screen when on projector
 IinaAppLauncher = Aw.new(function(appName, eventType, appObject)
 	if eventType == Aw.launched and appName == "IINA" and IsProjector() then
-		-- going full screen needs a small delay
 		RunWithDelays(
 			{ 0.05, 0.2 },
 			function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end
