@@ -72,22 +72,22 @@
 }
 
 /* ───────────────────────────────────────────────── */
-/* get rid of small space to the right */
+/* hide space to the right */
 /* #header .top .tab-strip { */
 /* 	position: relative; */
 /* 	display: flex; */
 /* } */
-/**/
+
 /* #header .top .tab-strip > span { */
 /* 	display: inline-block; */
 /* 	flex: 1 1 0; */
 /* } */
-/**/
+
 /* #header .top .tab-strip > span > .tab-position { */
 /* 	position: static; */
 /* 	display: inline; */
 /* } */
-/**/
+
 /* #header .top .tab-strip > span > .tab-position > .tab .tab-header { */
 /* 	width: var(--Width); */
 /* } */

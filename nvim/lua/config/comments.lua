@@ -3,7 +3,7 @@ require("config.utils")
 
 -- COMMENTS (mnemonic: [q]uiet text)
 require("Comment").setup {
-	-- ignore = "^$", -- ignore empty lines
+	ignore = "^$", -- ignore empty lines
 	toggler = {
 		line = "qq",
 		block = "<Nop>",
