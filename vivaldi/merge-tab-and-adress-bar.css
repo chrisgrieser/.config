@@ -63,3 +63,13 @@
 	height: 30px;
 	min-height: unset !important;
 }
+
+/* ───────────────────────────────────────────────── */
+
+.toolbar-extensions {
+	position: absolute !important;
+	background: none !important;
+	height: 30px !important;
+	margin-left: 20px !important;
+	right: 0 !important;
+}
