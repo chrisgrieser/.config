@@ -1,0 +1,11 @@
+/* new tab button */
+.button-toolbar.newtab {
+	display: none;
+}
+
+/* dropdown button */
+.UrlBar-AddressField .button-toolbar.drop-down-menu{
+	display: none;
+}
+
+
