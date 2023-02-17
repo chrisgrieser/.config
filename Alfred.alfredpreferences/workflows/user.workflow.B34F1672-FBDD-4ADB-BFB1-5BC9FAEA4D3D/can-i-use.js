@@ -122,8 +122,6 @@ function run(argv) {
 			arg: r.url,
 			title: `${r.title} [${r.stats}]`,
 			subtitle: r.description,
-			icon: { path: "icon.png" },
-			/* add icon */
 		};
 	}); /* items */
 	return JSON.stringify({
