@@ -210,6 +210,7 @@ rules:
               - ^/System/Applications/Utilities/Terminal.app
               - ^/Applications/Discord\.app
               - ^/Applications/Brave Browser\.app
+              - ^com\.vivaldi\.Vivaldi$
               - ^/Applications/Hammerspoon\.app
         to:
           - key_code: hyphen
@@ -231,6 +232,7 @@ rules:
               - "[Nn]eovide"
               - ^/Applications/Discord\.app
               - ^/Applications/Brave Browser\.app
+              - ^com\.vivaldi\.Vivaldi$
               - ^/Applications/Hammerspoon\.app
         to:
           - select_input_source:

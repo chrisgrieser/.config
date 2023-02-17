@@ -155,7 +155,9 @@ local function clipboardFix()
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
 
-	local hasSelectorAndClass = clipb:find(".%-.") and not (clipb:find("[\n.=]"))
+	local hasSelectorAndClass = clipb:find(".%-.")
+		and not (clipb:find("[\n.=]"))
+		and not (clipb:find("^%-%-"))
 	if not hasSelectorAndClass then return end
 
 	clipb = clipb:gsub("^", "."):gsub(" ", ".")

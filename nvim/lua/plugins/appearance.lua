@@ -61,6 +61,7 @@ return {
 					lsp = true,
 					filetypes = { -- ignoring certain filetypes a bit buggy, therefore whitelisting instead
 						"css",
+						"scss",
 						"lua",
 						"sh",
 						"bash",

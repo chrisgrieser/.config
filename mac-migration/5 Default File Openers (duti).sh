@@ -4,7 +4,7 @@
 if ! command -v duti &>/dev/null; then echo "duti not installed." && exit 1; fi
 
 # Config
-browserID="com.brave.Browser"
+browserID="com.vivaldi.Vivaldi"
 videoplayerID="com.colliderli.iina"
 editorID="com.apple.automator.Neovim"
 obsiOpenerID="com.apple.automator.Obsidian-Opener"
@@ -56,11 +56,9 @@ duti -s org.m0k.transmission magnet
 duti -s com.mimestream.Mimestream mailto # = default mail client
 
 # Browser
-duti -s "$browserID" http           # = default browser
-duti -s "$browserID" https
+browserID="com.vivaldi.Vivaldi"
 duti -s "$browserID" chrome-extension
 duti -s "$browserID" chrome
-duti -s "$browserID" brave
 duti -s "$browserID" webloc all     # link files
 duti -s "$browserID" url all     # link files
 
