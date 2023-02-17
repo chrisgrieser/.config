@@ -718,11 +718,13 @@ rules:
         to: # TODO: does not work yet on files without extension
           - shell_command: |
               sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
-              fileNoExt=${sel%.*}
-              ext=${sel##*.}
-              symlinkName="${fileNoExt}-symlink.$ext"
-              ln -sf "$sel" "$symlinkName"
-              open -R "$symlinkName"
+              if [[ -f "$sel" ]] ; then
+                ln -sf "$sel" "${sel}-symlink"
+              elif [[ -d "$sel" ]] ; then
+                link=${sel:0:-1}
+                ln -sf "$sel" "${sel}-symlink/"
+              fi
+              open -R "${sel}-symlink"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       # z = zip files
       - type: basic
