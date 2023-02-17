@@ -1,5 +1,5 @@
 /* stylelint-disable selector-max-id, custom-property-pattern */
-.button-toolbar.newtab, /* new tab button */
+/* .button-toolbar.newtab, /* /* new tab button */
 .ContentBlocker-Control, /* content/shield button */
 .toolbar-insideinput .button-toolbar:nth-child(2), /* reader view button */
 .UrlBar-AddressField .pageload, /* page load info */
@@ -18,4 +18,8 @@
 
 .BookmarkButton {
 	opacity: 0;
+}
+
+.button-toolbar.newtab{ /* new tab button */
+	width: 0 !important; 
 }
