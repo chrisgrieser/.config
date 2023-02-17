@@ -291,6 +291,16 @@ rules:
           - { key_code: tab, modifiers: [shift] }
           - key_code: r
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "Obsidian: cmd+^ fix"
+    manipulators:
+      - type: basic
+        from: { key_code: "non_us_backslash", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: "6", modifiers: [command] }
+        conditions:
+          # [{ type: frontmost_application_if, bundle_identifiers: [^md.obsidian$] }]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "Alfred Preferences: cmd+0 as cmd+9"
     manipulators:
       - type: basic
