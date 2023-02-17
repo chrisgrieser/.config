@@ -81,19 +81,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7EE02F05-65D4-4B6C-8634-A6CA65E3261C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C95D0D3E-2765-487B-91F6-0BA4B45F41EB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>80310399-4092-49D2-B048-D91D9184B37F</key>
 		<array>
 			<dict>
@@ -423,50 +410,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>CE6F0B40-E42E-4D8B-833A-537723F42C63</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>repo-health.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C95D0D3E-2765-487B-91F6-0BA4B45F41EB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>health</string>
-				<key>subtext</key>
-				<string>Current Browser Tab</string>
-				<key>text</key>
-				<string>Repo Health</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7EE02F05-65D4-4B6C-8634-A6CA65E3261C</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1023,15 +966,6 @@ echo "$url"</string>
 			<key>ypos</key>
 			<real>395</real>
 		</dict>
-		<key>7EE02F05-65D4-4B6C-8634-A6CA65E3261C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>655</real>
-			<key>ypos</key>
-			<real>160</real>
-		</dict>
 		<key>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</key>
 		<dict>
 			<key>colorindex</key>
@@ -1120,17 +1054,6 @@ echo "$url"</string>
 			<real>310</real>
 			<key>ypos</key>
 			<real>630</real>
-		</dict>
-		<key>C95D0D3E-2765-487B-91F6-0BA4B45F41EB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>repo health</string>
-			<key>xpos</key>
-			<real>825</real>
-			<key>ypos</key>
-			<real>160</real>
 		</dict>
 		<key>CC7C190D-D205-4F5B-A0DC-2A6D64736EC7</key>
 		<dict>

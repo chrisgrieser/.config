@@ -125,7 +125,7 @@ Wf_browser = Wf.new("Brave Browser")
 
 -- Automatically hide Browser has when no window
 -- requires wider window-filter to not hide PiP windows etc
-Wf_browser_all = Wf.new("Brave Browser")
+Wf_browser_all = Wf.new({"Brave Browser", "Vivaldi"})
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(Wf.windowDestroyed, function()
 		if #Wf_browser_all:getWindows() == 0 then App("Brave Browser"):hide() end
