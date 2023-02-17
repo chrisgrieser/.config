@@ -1,16 +1,19 @@
+/* https://forum.vivaldi.net/topic/16684/inspecting-the-vivaldi-ui-with-devtools */
+/* based on https://forum.vivaldi.net/topic/34187/merge-tabs-and-address-bar/61?lang=en-US&page=4 */
+/* stylelint-disable selector-max-id, declaration-no-important */
 :root {
 	--adressbar-width: 300px;
+	--adressbar-focussed-width: 300px;
 }
 
-/* stylelint-disable selector-max-id, declaration-no-important */
+/* ───────────────────────────────────────────────── */
+#browser #tabs-container {
+	padding-left: 12px;
+}
+
 #tabs-tabbar-container {
 	margin-left: var(--adressbar-width);
-	padding-left: 0;
 	transition: all 0.75s;
-}
-
-.win.normal .tab-group-indicator {
-	top: -2px;
 }
 
 .UrlBar-AddressField {
@@ -19,12 +22,9 @@
 }
 
 /* extends the width of the url bar addressfield while it is focused */
-.UrlBar-AddressField:focus-within {
-	width: 500px !important;
-}
 
-.OmniDropdown {
-	margin-top: -3px;
+.UrlBar-AddressField:focus-within {
+	width: 500px;
 }
 
 .mainbar .toolbar-mainbar:not(.toolbar-wrap .toolbar-droptarget) {
@@ -44,15 +44,6 @@
 	left: unset;
 	right: unset;
 }
-
-/* .toolbar-extensions { */
-/* 	position: absolute !important; */
-/* 	transform: translate(-100%); */
-/* 	background-color: var(--colorBg) !important; */
-/* 	left: calc(100vw - 165px) !important; */
-/* 	height: 30px !important; */
-/* 	right: unset !important; */
-/* } */
 
 .window-buttongroup {
 	height: 35px;
