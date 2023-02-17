@@ -17,25 +17,27 @@ const casks = JSON.parse(app.doShellScript(`curl -sL "https://formulae.brew.sh/a
 const formula = JSON.parse(app.doShellScript(`curl -sL "https://formulae.brew.sh/api/formula.json"`));
 
 casks.forEach(item => {
+	item = item.name;
 	jsonArray.push({
 		title: item,
 		match: alfredMatcher(item),
 		subtitle: "cask",
 		arg: `${item} --cask`,
+		mods: { cmd: { arg: item } },
 		uid: item,
 	});
 });
-JSON.stringify({ items: jsonArray });
 
-const searchResults = [...casks, ...formulae].map(brew => {
-	const resultName = brew.split(" --")[0];
-	const resultType = brew.split(" --")[1];
-	const betterMatching = resultName.replaceAll("-", " ") + " " + resultName;
-	return {
-		title: resultName,
-		subtitle: resultType,
-		arg: brew,
-		match: betterMatching,
-		mods: { cmd: { arg: resultName } },
-	};
+formula.forEach(item => {
+	item = item.name;
+	jsonArray.push({
+		title: item,
+		match: alfredMatcher(item),
+		subtitle: "formula",
+		arg: `${item} --formula`,
+		mods: { cmd: { arg: item } },
+		uid: item,
+	});
 });
+
+JSON.stringify({ items: jsonArray });

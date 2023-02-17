@@ -92,7 +92,7 @@
 				<key>escaping</key>
 				<integer>4</integer>
 				<key>keyword</key>
-				<string>bi</string>
+				<string>mas</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -234,37 +234,37 @@ The workflow now uses Alfred’s environment variables to get the correct paths 
 		<key>2C399287-EF02-4BD6-9D60-BAAAFCE0BFC1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>40</real>
 			<key>ypos</key>
-			<integer>15</integer>
+			<real>15</real>
 		</dict>
 		<key>32715625-6073-4C95-B221-28AD342856F5</key>
 		<dict>
 			<key>xpos</key>
-			<integer>240</integer>
+			<real>240</real>
 			<key>ypos</key>
-			<integer>15</integer>
+			<real>15</real>
 		</dict>
 		<key>B006C7A4-F892-4A87-ACE7-40E351351DAB</key>
 		<dict>
 			<key>xpos</key>
-			<integer>240</integer>
+			<real>240</real>
 			<key>ypos</key>
-			<integer>135</integer>
+			<real>135</real>
 		</dict>
 		<key>D2860D99-CACD-440D-A62D-F0C9E4524214</key>
 		<dict>
 			<key>xpos</key>
-			<integer>240</integer>
+			<real>240</real>
 			<key>ypos</key>
-			<integer>260</integer>
+			<real>260</real>
 		</dict>
 		<key>F8A7E0F1-2DF1-46A9-938D-4404E866BAE9</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>40</real>
 			<key>ypos</key>
-			<integer>260</integer>
+			<real>260</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
