@@ -161,7 +161,7 @@
 				<key>argumenttrimmode</key>
 				<integer>1</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -181,7 +181,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>build-brew-list.js</string>
+				<string>build-brew-list.sh</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
