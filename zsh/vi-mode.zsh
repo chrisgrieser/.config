@@ -7,8 +7,7 @@ bindkey -v
 export KEYTIMEOUT=1
 
 #-------------------------------------------------------------------------------
-# https://jindalakshett.medium.com/zsh-vim-%EF%B8%8F-eafdef2183c4
-# Text object: i" i' i` i" etc.
+# quote textobjs (i" i' i` i") https://github.com/zsh-users/zsh/blob/master/Functions/Zle/select-quoted
 autoload -U select-quoted
 zle -N select-quoted
 for m in visual viopp; do
@@ -17,7 +16,7 @@ for m in visual viopp; do
 	done
 done
 
-# i{ i( i< etc.
+# bracket textobjs (i{ i( i[ https://github.com/zsh-users/zsh/blob/master/Functions/Zle/select-bracketed
 autoload -U select-bracketed
 zle -N select-bracketed
 for m in visual viopp; do
@@ -46,7 +45,7 @@ bindkey -M viins '^[[A' history-substring-search-up # up-arrow
 bindkey -M viins '^[[B' history-substring-search-down # down-arrow
 
 # to prevent accidentally going to the beginning of the history (which is never
-# a desired behavior...) Not implemented for 'G', since going down the history
+# a desired behavior…) Not implemented for 'G', since going down the history
 # is useful
 bindkey -M vicmd 'gg' vi-beginning-of-line
 

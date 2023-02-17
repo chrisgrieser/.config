@@ -17,6 +17,8 @@ cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | cut -d\" -f2)
 gpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*gpu" | cut -d\" -f2)
 ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*ram" | head -n1 | cut -d\" -f2)
 
+[[ -z "$ram_bar_item" ]] && osascript -e 'display notification "" with title "⚠️ RAM Bar missing."'
+
 #───────────────────────────────────────────────────────────────────────────────
 
 if defaults read -g AppleInterfaceStyle | grep -iq "Dark"; then
@@ -71,7 +73,6 @@ sketchybar \
 	--subscribe drafts drafts-counter-update \
 	--subscribe drafts system_woke \
 	\
-	$wifi \
 	--add alias "$ram_bar_item" $second_row \
 	--set "$ram_bar_item" width=38 \
 	--add alias "$cpu_bar_item" $second_row \
