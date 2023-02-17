@@ -17,7 +17,7 @@ const casks = JSON.parse(app.doShellScript(`curl -sL "https://formulae.brew.sh/a
 const formula = JSON.parse(app.doShellScript(`curl -sL "https://formulae.brew.sh/api/formula.json"`));
 
 casks.forEach(item => {
-	item = item.name;
+	item = item.token;
 	jsonArray.push({
 		title: item,
 		match: alfredMatcher(item),
@@ -28,16 +28,16 @@ casks.forEach(item => {
 	});
 });
 
-// formula.forEach(item => {
-// 	item = item.name;
-// 	jsonArray.push({
-// 		title: item,
-// 		match: alfredMatcher(item),
-// 		subtitle: "formula",
-// 		arg: `${item} --formula`,
-// 		mods: { cmd: { arg: item } },
-// 		uid: item,
-// 	});
-// });
+formula.forEach(item => {
+	item = item.name;
+	jsonArray.push({
+		title: item,
+		match: alfredMatcher(item),
+		subtitle: "formula",
+		arg: `${item} --formula`,
+		mods: { cmd: { arg: item } },
+		uid: item,
+	});
+});
 
 JSON.stringify({ items: jsonArray });
