@@ -144,7 +144,7 @@ local options = {
 		},
 		buffers = {
 			prompt_prefix = "﬘ ",
-			ignore_current_buffer = true,
+			ignore_current_buffer = false,
 			initial_mode = "normal",
 			sort_mru = true,
 			prompt_title = false,
