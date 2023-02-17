@@ -1,5 +1,5 @@
 /* stylelint-disable selector-max-id, custom-property-pattern */
-/* .button-toolbar.newtab, /* /* new tab button */
+.button-toolbar.newtab, /* new tab button */
 .ContentBlocker-Control, /* content/shield button */
 .toolbar-insideinput .button-toolbar:nth-child(2), /* reader view button */
 .UrlBar-AddressField .pageload, /* page load info */
@@ -20,6 +20,17 @@
 	opacity: 0;
 }
 
+.tab-strip {
+	position: relative !important;
+	left: 20px !important;
+}
+
+
+.tabs-top .tab.tab-accordion.active:after, .tabs-top .tab.active:not(.marked):not(.tab-mini):not(.tab-in-accordion):after,
+.toolbar-large:has(.newtab){
+	display: none !important;
+}
+
 .button-toolbar.newtab{ /* new tab button */
-	width: 0 !important; 
+	--Width: 0 !important; 
 }
