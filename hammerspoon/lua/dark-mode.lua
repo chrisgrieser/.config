@@ -3,17 +3,16 @@ require("lua.utils")
 
 local function brightnessNotify()
 	local brightness = math.floor(hs.brightness.ambient())
-	Notify("Brightness: ", tostring(brightness))	
+	Notify("Brightness: ", tostring(brightness))
 end
 
 -- notify with ambient brightness for Alfred
-UriScheme("ambient-brightness", function ()
+UriScheme("ambient-brightness", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 	brightnessNotify()
 end)
 
 -- done manually to include app-specific toggling for:
--- - Brave Browser (fixing Dark Reader Bug)
 -- - Neovim
 -- - Highlights PDF appearance
 -- - Sketchybar
@@ -36,7 +35,7 @@ local function toggleDarkMode()
 	end
 
 	-- neovim (requires setup in ~/.config/nvim/lua/file-watcher.lua)
-	hs.execute([[echo "SetThemeMode(']] .. toMode .. [[')" > /tmp/nvim-automation]]) 
+	hs.execute([[echo "SetThemeMode(']] .. toMode .. [[')" > /tmp/nvim-automation]])
 
 	-- hammerspoon console
 	SetConsoleColors(toMode)
@@ -46,25 +45,9 @@ local function toggleDarkMode()
 		App("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfbg }
 	end
 
-	-- System & Brave (Workaround for Dark Reader)
+	-- System
 	Applescript([[
-		tell application "Brave Browser"
-			set openBlank to false
-			if ((count of window) is 0) then
-				set openBlank to true
-			else if ((URL of active tab of front window) starts with "chrome://") then
-				set openBlank to true
-			end if
-		end tell
-		if (openBlank) then
-			open location "https://www.blank.org/"
-			delay 0.4
-			tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
-			delay 0.2
-			tell application "Brave Browser" to close active tab of front window
-		else
-			tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
-		end if
+		tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
 	]])
 
 	-- sketchybar
