@@ -19,18 +19,3 @@
 .BookmarkButton {
 	opacity: 0;
 }
-
-.tab-strip {
-	position: relative !important;
-	left: 20px !important;
-}
-
-
-.tabs-top .tab.tab-accordion.active:after, .tabs-top .tab.active:not(.marked):not(.tab-mini):not(.tab-in-accordion):after,
-.toolbar-large:has(.newtab){
-	display: none !important;
-}
-
-.button-toolbar.newtab{ /* new tab button */
-	--Width: 0 !important; 
-}
