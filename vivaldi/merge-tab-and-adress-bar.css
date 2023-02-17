@@ -11,10 +11,6 @@
 	padding-left: 12px;
 }
 
-#header:has(+ #main .UrlBar-AddressField:focus-within) #tabs-tabbar-container {
-	margin-left: var(--adressbar-focused-width);
-}
-
 #tabs-tabbar-container,
 .UrlBar-AddressField {
 	transition: 0.15s ease-in-out !important;
@@ -31,6 +27,10 @@
 /* extends the width of the url bar addressfield while it is focused */
 .UrlBar-AddressField:focus-within {
 	width: var(--adressbar-focused-width);
+}
+
+#header:has(+ #main .UrlBar-AddressField:focus-within) #tabs-tabbar-container {
+	margin-left: var(--adressbar-focused-width);
 }
 
 .mainbar .toolbar-mainbar:not(.toolbar-wrap .toolbar-droptarget) {
