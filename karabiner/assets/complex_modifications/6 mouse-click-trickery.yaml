@@ -17,6 +17,7 @@ rules:
               - ^org\.chromium\.Chromium$
               - ^com\.brave\.Browser$
               - ^com\.apple\.Safari$
+              - ^com\.vivaldi\.Vivaldi$
   - description: "\U0001F401 R (tap): Open link in new background tab (RSS Readers)"
     manipulators:
       - type: basic
@@ -36,7 +37,9 @@ rules:
             bundle_identifiers:
               - ^org\.chromium\.Chromium # no $ to also affect PWAs
               - ^com\.brave\.Browser
+              - ^com\.vivaldi\.Vivaldi
               - ^com.reederapp.5.macOS$
+              - ^maccatalyst\.com\.lireapp\.macOS$
       # Drafts: R-Click opens link in background
       - type: basic
         from:
@@ -115,23 +118,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "\U0001F401 4 (bottom)"
     manipulators:
-      # Brave: Back
-      - type: basic
-        from:
-          pointing_button: button4
-        to:
-          # not done via keypress so it works in insert mode as well 
-          # (where cmd+left would move the cursor)
-          - shell_command: |
-              osascript -e '
-              tell application "System Events" to tell process "Brave Browser"
-                set frontmost to true
-                click menu item "Back" of menu "History" of menu bar 1
-              end tell'
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
+      # INFO Browsers already have mouse 4 mapped to "Back"
       # YouTube: Home
       - type: basic
         from:
@@ -154,20 +141,7 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
-              - ^org\.yanex\.marta$
               - ^md\.obsidian$
-      # Shottr: Pin
-      - type: basic
-        from:
-          pointing_button: button4
-        to:
-          - key_code: p
-            modifiers:
-              - command
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^cc\.ffitch\.shottr$
       # Mimestream: Delete
       - type: basic
         from:
@@ -227,13 +201,12 @@ rules:
           - type: frontmost_application_unless
             bundle_identifiers:
               - ^com\.brave\.Browser$
+              - ^com\.vivaldi\.Vivaldi$
               - ^com\.apple\.finder$
               - ^md\.obsidian$
               - ^com\.mimestream\.Mimestream$
               - ^com\.agiletortoise\.Drafts-OSX$
               - ^net\.highlightsapp\.universal$
-              - ^org\.yanex\.marta$
-              - ^cc\.ffitch\.shottr$
               - ^maccatalyst\.com\.atebits\.Tweetie
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
