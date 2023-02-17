@@ -75,8 +75,8 @@ ESPANSO_DIR=~"/Library/Application Support/espanso"
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
 # Browser PWAs
-BROWSER="Chrome" # Chrome = Vivaldi
-# BROWSER="Brave"
+BROWSER="Chrome" # Chrome = Vivaldi (sic!)
+# BROWSER="Brave Browser"
 [[ -e ~"/Applications/$BROWSER Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER Apps.localized"
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 

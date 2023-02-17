@@ -6,9 +6,8 @@ if ! command -v iconsur &>/dev/null; then echo -n "iconsur not installed." && ex
 
 # config
 CUSTOM_ICON_FOLDER="$DOTFILE_FOLDER/custom-app-icons"
-
-PWA_FOLDER="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Brave Browser Apps.localized/"
-[[ "$(scutil --get ComputerName)" =~ Mother ]] && PWA_FOLDER="$HOME/Applications/Brave Browser Apps.localized"
+PWA_FOLDER="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Chrome Apps.localized/"
+[[ "$(scutil --get ComputerName)" =~ Mother ]] && PWA_FOLDER="$HOME/Applications/Chrome Apps.localized"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -30,34 +29,34 @@ case $APP_TO_UPDATE in
 		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Alfred Prefs.icns\""
 	INFO_WINDOW=1
 	;;
-	# cp "$CUSTOM_ICON_FOLDER/Alfred Prefs.icns" 'Alfred 5.app/Contents/Preferences/Alfred Preferences.app/Contents/Resources/appicon.icns'
+	# cp -f "$CUSTOM_ICON_FOLDER/Alfred Prefs.icns" 'Alfred 5.app/Contents/Preferences/Alfred Preferences.app/Contents/Resources/appicon.icns'
 	# touch 'Alfred 4.app/Contents/Preferences/Alfred Preferences.app/Contents/Resources/appicon.icns' ;;
 "Cryptomator")
-	cp "$CUSTOM_ICON_FOLDER/Cryptomator.icns" 'Cryptomator.app/Contents/Resources/Cryptomator.icns'
+	cp -f "$CUSTOM_ICON_FOLDER/Cryptomator.icns" 'Cryptomator.app/Contents/Resources/Cryptomator.icns'
 	touch "Cryptomator.app"
 	;;
 "Alacritty" | "alacritty")
-	cp "$CUSTOM_ICON_FOLDER/Alacritty.icns" 'Alacritty.app/Contents/Resources/alacritty.icns'
+	cp -f "$CUSTOM_ICON_FOLDER/Alacritty.icns" 'Alacritty.app/Contents/Resources/alacritty.icns'
 	touch "Alacritty.app"
 	;;
 "AppCleaner")
-	cp "$CUSTOM_ICON_FOLDER/AppCleaner.icns" 'AppCleaner.app/Contents/Resources/AppCleaner.icns'
+	cp -f "$CUSTOM_ICON_FOLDER/AppCleaner.icns" 'AppCleaner.app/Contents/Resources/AppCleaner.icns'
 	touch "AppCleaner.app"
 	;;
 "Obsidian")
-	cp "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" 'Obsidian.app/Contents/Resources/icon.icns'
+	cp -f "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" 'Obsidian.app/Contents/Resources/icon.icns'
 	touch "Obsidian.app"
 	;;
 "Discord")
-	cp "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
+	cp -f "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
 	touch "Discord.app"
 	;;
 "Vivaldi")
-	cp "$CUSTOM_ICON_FOLDER/Vivaldi.icns" 'Vivaldi.app/Contents/Resources/app.icns'
+	cp -f "$CUSTOM_ICON_FOLDER/Vivaldi.icns" 'Vivaldi.app/Contents/Resources/app.icns'
 	touch "Vivaldi.app"
 	;;
 "Neovide")
-	cp "$CUSTOM_ICON_FOLDER/Vimac.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
+	cp -f "$CUSTOM_ICON_FOLDER/Vimac.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
 	touch "Neovide.app"
 	;;
 
@@ -89,10 +88,11 @@ case $APP_TO_UPDATE in
 	# touch "Mimestream.app" ;;
 #────────────────────────────────────────────────────────────────────────────
 "Docs")
-	iconsur set "$PWA_FOLDER/Docs.app" &>/dev/null
+	cp -f "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Docs.app/Contents/Resources/app.icns"
+	touch "$PWA_FOLDER/Docs.app"
 	;;
 "YouTube" | "Youtube")
-	cp "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
+	cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
 	touch "$PWA_FOLDER/YouTube.app"
 	;;
 "Tagesschau")
@@ -111,8 +111,10 @@ case $APP_TO_UPDATE in
 	cd "$PWA_FOLDER" || exit 1
 	iconsur set --local reddxxx.app &>/dev/null 
 	iconsur set Tagesschau.app Docs.app Netflix.app Twitch.app CrunchyRoll.app &>/dev/null 
-	cp "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
+	cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
 	touch "$PWA_FOLDER/YouTube.app"
+	cp -f "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Docs.app/Contents/Resources/app.icns"
+	touch "$PWA_FOLDER/Docs.app"
 	;;
 *)
 	NONE_FOUND=1
