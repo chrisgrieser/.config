@@ -5,10 +5,9 @@ return {
 
 	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
-	{
-		"bkad/CamelCaseMotion",
-		event = "BufReadPost", -- other lazyloading methods do not seem to work
-	},
+
+	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
+	{ "bkad/CamelCaseMotion", event = "BufReadPost" },
 	{
 		"mizlan/iswap.nvim", -- swapping of nodes
 		dependencies = "nvim-treesitter/nvim-treesitter",
