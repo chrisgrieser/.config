@@ -1,7 +1,7 @@
 .button-toolbar.newtab, /* new tab button */
 .ContentBlocker-Control, /* security button */
 .toolbar-insideinput .button-toolbar:nth-child(2), /* reader view button */
-.UrlBar-AddressField .pageload, 
+.UrlBar-AddressField .pageload, /* page load info */
 .UrlBar-AddressField .button-toolbar.drop-down-menu { /* dropdown button */
 	display: none;
 }
