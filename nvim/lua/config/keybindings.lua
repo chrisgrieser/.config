@@ -454,7 +454,6 @@ keymap("n", "5", function()
 end, { desc = ":CodiNew" })
 
 --------------------------------------------------------------------------------
-
 -- BUILD SYSTEM
 
 keymap("n", "<leader>r", function()
@@ -464,14 +463,11 @@ keymap("n", "<leader>r", function()
 
 	-- sketchybar
 	if parentFolder:find("sketchybar") then
-		fn.system("brew services restart sketchybar")
-
-	-- markdown / pandoc
-	elseif ft == "markdown" then
-		local filepath = expand("%:p")
-		local pdfFilename = expand("%:t:r") .. ".pdf"
-		fn.system("pandoc '" .. filepath .. "' --output='" .. pdfFilename .. "' --pdf-engine=wkhtmltopdf")
-		fn.system("open '" .. pdfFilename .. "'")
+		fn.system([[
+			brew services restart sketchybar
+			sleep 3
+			osascript -l JavaScript "$DOTFILE_FOLDER/hammerspoon/helpers/dismiss-notification.js"
+		]])
 
 	-- nvim config
 	elseif ft == "lua" and parentFolder:find("nvim") then

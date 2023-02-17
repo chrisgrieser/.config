@@ -104,7 +104,6 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - ^/Applications/Obsidian\.app
-              - ^/Applications/Sublime Text\.app
               - "[Nn]eovide"
         to:
           - select_input_source:
@@ -117,9 +116,9 @@ rules:
         to_after_key_up:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+      # ^
       - type: basic
-        from:
-          key_code: non_us_backslash
+        from: {key_code: non_us_backslash}
         conditions:
           - type: input_source_if
             input_sources:
@@ -127,7 +126,6 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - ^/Applications/Obsidian\.app
-              - ^/Applications/Sublime Text\.app
               - "[Nn]eovide"
         to:
           - select_input_source:

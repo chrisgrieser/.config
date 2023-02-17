@@ -95,15 +95,10 @@ rules:
   - description: "🔘 ° → \\ (+ US Layout); ⌥^ for ° Symbol"
     manipulators:
       - type: basic
-        from:
-          key_code: non_us_backslash
-          modifiers:
-            mandatory:
-              - shift
+        from: {key_code: non_us_backslash, modifiers: {mandatory: [shift]}}
         conditions:
           - type: input_source_if
-            input_sources:
-              - language: ^de$
+            input_sources: [language: ^de$]
         to:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.US$
@@ -114,19 +109,19 @@ rules:
           - select_input_source:
               input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
       - type: basic
-        from:
-          key_code: non_us_backslash
-          modifiers:
-            mandatory:
-              - option
+        from: {key_code: non_us_backslash, modifiers: {mandatory: [option]}}
         conditions:
           - type: input_source_if
-            input_sources:
-              - language: ^de$
+            input_sources: [language: ^de$]
         to:
-          - key_code: non_us_backslash
-            modifiers:
-              - shift
+          - {key_code: non_us_backslash, modifiers: [shift]}
+      - type: basic
+        from: {key_code: non_us_backslash, modifiers: {mandatory: [command]}}
+        conditions:
+          - type: input_source_if
+            input_sources: [language: ^de$]
+        to:
+          - {key_code: "6", modifiers: [command]}
   - description: "🔘1️⃣ One Stroke ^` (German Layout)"
     manipulators:
       # backtick
