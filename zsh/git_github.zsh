@@ -131,10 +131,10 @@ function betterClone() {
 	# shellcheck disable=SC2012
 	cd "$(ls -1 -t | head -n1)" || return
 	if grep -q "obsidian" package.json &>/dev/null; then
-		echo "Detected Obsidian plugin. Installing NPM dependencies…"
+		print "\n\033[1;34mDetected Obsidian plugin. Installing NPM dependencies…\033[0m"
 		if ! command -v node &>/dev/null; then print "\033[1;33mnode not installed, not running npm." && return 0; fi
 		npm i 
-		echo "Building…"
+		print "\n\033[1;34mBuilding…\033[0m"
 		npm run build
 	fi
 }

@@ -138,6 +138,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>EDA21286-4E28-4304-A9DB-0BA74AB2C370</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5B810AFF-1831-421D-B46A-472F6C829DB6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -181,7 +194,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>build-brew-list.sh</string>
+				<string>scripts/build-brew-list.sh</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -197,6 +210,29 @@
 			<string>72D18DBC-72FF-40AA-B367-D4C148AEC3A6</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/update-cache.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5B810AFF-1831-421D-B46A-472F6C829DB6</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -285,7 +321,7 @@ brew home "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>brew-list-installed.js</string>
+				<string>scripts/brew-list-installed.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -381,7 +417,7 @@ brew home "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>brew-list-installed.js</string>
+				<string>scripts/brew-list-installed.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -495,6 +531,17 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>ypos</key>
 			<real>460</real>
 		</dict>
+		<key>5B810AFF-1831-421D-B46A-472F6C829DB6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>update cache</string>
+			<key>xpos</key>
+			<real>635</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
 		<key>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</key>
 		<dict>
 			<key>colorindex</key>
@@ -582,7 +629,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>200</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
