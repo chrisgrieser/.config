@@ -73,19 +73,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>CE7614ED-D40C-491F-9512-567F3BDB68C0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8A5B08EE-864A-4668-98C6-D4F8E9A56580</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>F1646853-4BE7-44BE-985F-9282246BAFCA</key>
 		<array>
 			<dict>
@@ -147,6 +134,7 @@
 				<key>relatedApps</key>
 				<array>
 					<string>com.brave.Browser</string>
+					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -155,41 +143,6 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>5BD7290A-4D3C-4A41-A4D4-668385E514AB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>5</integer>
-				<key>hotmod</key>
-				<integer>262144</integer>
-				<key>hotstring</key>
-				<string>G</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.mimestream.Mimestream</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>CE7614ED-D40C-491F-9512-567F3BDB68C0</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -205,7 +158,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>send-mail_[Browser].applescript</string>
+				<string>send-mail.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -236,34 +189,6 @@
 			<string>919C67AD-F9F2-4691-A835-0E3807CABF9F</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "System Events"
-	tell process "Mimestream"
-		set frontmost to true
-		click menu item "Open in Gmail" of menu "Message" of menu bar 1
-	end tell
-end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>send-mail_[Browser].applescript</string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>8A5B08EE-864A-4668-98C6-D4F8E9A56580</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -334,6 +259,7 @@ Chris</string>
 				<key>relatedApps</key>
 				<array>
 					<string>com.brave.Browser</string>
+					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
@@ -528,7 +454,7 @@ end tell</string>
 			<key>note</key>
 			<string>search query in Mimestream</string>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>325</real>
 		</dict>
@@ -563,15 +489,6 @@ end tell</string>
 			<key>ypos</key>
 			<real>590</real>
 		</dict>
-		<key>8A5B08EE-864A-4668-98C6-D4F8E9A56580</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>720</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>919C67AD-F9F2-4691-A835-0E3807CABF9F</key>
 		<dict>
 			<key>colorindex</key>
@@ -602,17 +519,6 @@ end tell</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>325</real>
-		</dict>
-		<key>CE7614ED-D40C-491F-9512-567F3BDB68C0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>open in Gmail</string>
-			<key>xpos</key>
-			<real>550</real>
-			<key>ypos</key>
-			<real>15</real>
 		</dict>
 		<key>F1646853-4BE7-44BE-985F-9282246BAFCA</key>
 		<dict>
