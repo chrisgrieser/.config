@@ -349,7 +349,6 @@ keymap("n", "<leader>a", ":ChatGPT<CR>", { desc = "ﮧ ChatGPT Prompt" })
 -- File Switchers
 keymap("n", "go", function()
 	local isGitRepo = os.execute('test -e "$(git rev-parse --show-toplevel)/.git"') == 0
-	print("isGitRepo:", isGitRepo)
 	local isSubModule = os.execute('test -f "$(git rev-parse --show-toplevel)/.git"') == 0
 	local cwd = expand("%:p:h")
 	local scope
