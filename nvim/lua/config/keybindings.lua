@@ -176,7 +176,6 @@ keymap("n", "cR", "R", { desc = "replace mode" })
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
 keymap("n", "<C-u>", qol.undoDuration, { desc = "undo specific durations" })
-keymap("n", "<leader>u", function() cmd.Telescope("undo") end, { desc = " Undotree" })
 
 -- Refactor
 keymap(

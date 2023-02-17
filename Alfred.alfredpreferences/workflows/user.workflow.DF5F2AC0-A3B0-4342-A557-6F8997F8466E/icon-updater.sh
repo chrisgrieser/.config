@@ -109,7 +109,7 @@ case $APP_TO_UPDATE in
 	;;
 "PWAs")
 	cd "$PWA_FOLDER" || exit 1
-	iconsur set --local reddxxx.app Sharesome.app &>/dev/null 
+	iconsur set --local reddxxx.app &>/dev/null 
 	iconsur set Tagesschau.app Docs.app Netflix.app Twitch.app CrunchyRoll.app &>/dev/null 
 	cp "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
 	touch "$PWA_FOLDER/YouTube.app"

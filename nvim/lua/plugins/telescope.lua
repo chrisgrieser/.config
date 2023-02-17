@@ -1,6 +1,6 @@
 local maps = {
 	["<Esc>"] = "close",
-	["<CR>"] = "select_default",
+	-- ["<CR>"] = "select_default",
 	["<D-w>"] = "delete_buffer", -- only buffer picker
 	["<S-Down>"] = "preview_scrolling_down",
 	["<S-Up>"] = "preview_scrolling_up",
@@ -180,14 +180,6 @@ local options = {
 			layout_strategy = "bottom_pane",
 		},
 	},
-	extensions = {
-		undo = {
-			entry_format = "$STAT/$TIME",
-			layout_config = { preview_width = 0.7 },
-			prompt_prefix = "碑",
-			initial_mode = "normal",
-		},
-	},
 }
 
 return {
@@ -197,12 +189,10 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
-			"debugloop/telescope-undo.nvim",
 			"benfowler/telescope-luasnip.nvim",
 		},
 		config = function()
 			require("telescope").setup(options)
-			require("telescope").load_extension("undo")
 			require("telescope").load_extension("notify")
 			require("telescope").load_extension("luasnip")
 		end,
