@@ -37,7 +37,7 @@ case $APP_TO_UPDATE in
 	touch "Cryptomator.app"
 	;;
 "Alacritty" | "alacritty")
-	cp "$CUSTOM_ICON_FOLDER/alacritty alt.icns" 'Alacritty.app/Contents/Resources/alacritty.icns'
+	cp "$CUSTOM_ICON_FOLDER/Alacritty.icns" 'Alacritty.app/Contents/Resources/alacritty.icns'
 	touch "Alacritty.app"
 	;;
 "AppCleaner")
