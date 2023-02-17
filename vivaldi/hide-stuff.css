@@ -1,7 +1,21 @@
+/* stylelint-disable selector-max-id, custom-property-pattern */
 .button-toolbar.newtab, /* new tab button */
-.ContentBlocker-Control, /* security button */
+.ContentBlocker-Control, /* content/shield button */
 .toolbar-insideinput .button-toolbar:nth-child(2), /* reader view button */
 .UrlBar-AddressField .pageload, /* page load info */
-.UrlBar-AddressField .button-toolbar.drop-down-menu { /* dropdown button */
+.UrlBar-AddressField .drop-down-menu { /* dropdown button */
 	display: none;
+}
+
+/* bookmark as colored adress bar */
+.UrlBar-AddressField:has(.BookmarkButton .button-on) .UrlFragment-Wrapper {
+	color: var(--colorHighlightBgFaded);
+}
+
+.UrlBar-AddressField:has(.BookmarkButton .button-on) .UrlFragment--Highlight {
+	color: var(--colorHighlightBg);
+}
+
+.BookmarkButton {
+	opacity: 0;
 }
