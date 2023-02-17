@@ -6,7 +6,7 @@ Maximized = hs.layout.maximized
 RightHalf = hs.layout.right50
 LeftHalf = hs.layout.left50
 PseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
-Centered = { x = 0.186, y = 0, w = 0.6, h = 1 }
+Centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
 
 ---@param win hs.window
