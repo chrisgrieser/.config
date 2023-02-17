@@ -28,16 +28,16 @@ casks.forEach(item => {
 	});
 });
 
-formula.forEach(item => {
-	item = item.name;
-	jsonArray.push({
-		title: item,
-		match: alfredMatcher(item),
-		subtitle: "formula",
-		arg: `${item} --formula`,
-		mods: { cmd: { arg: item } },
-		uid: item,
-	});
-});
+// formula.forEach(item => {
+// 	item = item.name;
+// 	jsonArray.push({
+// 		title: item,
+// 		match: alfredMatcher(item),
+// 		subtitle: "formula",
+// 		arg: `${item} --formula`,
+// 		mods: { cmd: { arg: item } },
+// 		uid: item,
+// 	});
+// });
 
 JSON.stringify({ items: jsonArray });
