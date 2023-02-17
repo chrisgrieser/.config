@@ -268,7 +268,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>bi {query}</string>
+				<string>brew install {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>
@@ -374,7 +374,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>br {query}</string>
+				<string>brew reinstall {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>
@@ -629,7 +629,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>bu {query}</string>
+				<string>brew uninstall {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>

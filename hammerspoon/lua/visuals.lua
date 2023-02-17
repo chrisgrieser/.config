@@ -6,7 +6,7 @@ require("lua.dark-mode")
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 -- this mostly round the corners in the bottom
 RoundedCorners = hs.loadSpoon("RoundedCorners")
-RoundedCorners.radius = 8
+RoundedCorners.radius = 7
 RoundedCorners:start()
 
 ---to stop wallpaper shining through
@@ -36,8 +36,7 @@ function HoleCover(arg)
 		bgColor = { ["red"] = 0.8, ["blue"] = 0.8, ["green"] = 0.8, ["alpha"] = 1 }
 	end
 
-	-- local pseudoMaxCorner = pseudoMaximized.w*screen.w -- if sideapp is to the right
-	local pseudoMaxCorner = ToTheSide.w * screen.w -- if sideapp is to the left
+	local pseudoMaxCorner = ToTheSide.w + ToTheSide.x
 
 	-- three points, forming roughly a triangle
 	Cover1 = hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 }
