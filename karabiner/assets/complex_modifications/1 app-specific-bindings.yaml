@@ -292,7 +292,7 @@ rules:
           - key_code: r
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Alfred Preferences: cmd+0 as cmd+9"
+  - description: "(App) Alfred Preferences: cmd+0 as cmd+9"
     manipulators:
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
@@ -300,6 +300,28 @@ rules:
           - { key_code: "9", modifiers: [command] }
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^com.runningwithcrayons.Alfred-Preferences$] }]
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "(App) Lire: sidebar + j/k"
+    manipulators:
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: s, modifiers: [command, control] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.lireapp\.macOS$] }
+      - type: basic
+        from: { key_code: j }
+        to:
+          - key_code: "right_arrow"
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.lireapp\.macOS$] }
+      - type: basic
+        from: { key_code: k }
+        to:
+          - key_code: "left_arrow"
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.lireapp\.macOS$] }
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(App) Discord"
     manipulators:
       # HACK ctrl-h & ctrl-l to go back / forward a channel cannot be mapped
@@ -327,16 +349,16 @@ rules:
         from: { key_code: e, modifiers: { mandatory: [command] } }
         to:
           - shell_command: pbpaste | pbcopy -pboard ruler # move current clipboard to alt clipboard
-          - {key_code: vk_none, hold_down_milliseconds: 100}
+          - { key_code: vk_none, hold_down_milliseconds: 100 }
           - shell_command: pbcopy < /dev/null # empty the standard clipboard
-          - {key_code: vk_none, hold_down_milliseconds: 100}
-          - {key_code: x, modifiers: [command]}
-          - {key_code: vk_none, hold_down_milliseconds: 150}
-          - {key_code: equal_sign, modifiers: [shift]}
-          - {key_code: equal_sign, modifiers: [shift]}
+          - { key_code: vk_none, hold_down_milliseconds: 100 }
+          - { key_code: x, modifiers: [command] }
+          - { key_code: vk_none, hold_down_milliseconds: 150 }
+          - { key_code: equal_sign, modifiers: [shift] }
+          - { key_code: equal_sign, modifiers: [shift] }
           - key_code: left_arrow
-          - {key_code: v, modifiers: [command]}
-          - {key_code: vk_none, hold_down_milliseconds: 100}
+          - { key_code: v, modifiers: [command] }
+          - { key_code: vk_none, hold_down_milliseconds: 100 }
           - shell_command: pbpaste -pboard ruler | pbcopy # restore previous cb
         conditions:
           - type: frontmost_application_if
