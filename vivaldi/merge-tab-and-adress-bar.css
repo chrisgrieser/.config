@@ -66,6 +66,12 @@
 
 /* ───────────────────────────────────────────────── */
 
+/* bookmark button to the left so there is space for the extension icon */
+.toolbar-insideinput:last-child {
+	margin-right: 23px;
+}
+
+/* this only works properly when hiding all extension buttons */
 .toolbar-extensions {
 	position: absolute !important;
 	background: none !important;
