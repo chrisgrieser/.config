@@ -115,6 +115,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A1EFFCF5-AED3-4AE3-A9C2-D0874D28CF2E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F38873E7-462C-4F93-9AD6-56BD4578A162</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
 		<array>
 			<dict>
@@ -139,6 +152,19 @@
 			</dict>
 		</array>
 		<key>EDA21286-4E28-4304-A9DB-0BA74AB2C370</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5B810AFF-1831-421D-B46A-472F6C829DB6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F38873E7-462C-4F93-9AD6-56BD4578A162</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -214,6 +240,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>brew install {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -237,17 +278,51 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>1</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>bh</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
 				<key>script</key>
-				<string>brew install {query}</string>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/build-brew-list.sh</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>&gt; brew home '{query}'</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
+			<string>A1EFFCF5-AED3-4AE3-A9C2-D0874D28CF2E</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -534,13 +609,13 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 		<key>5B810AFF-1831-421D-B46A-472F6C829DB6</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>update cache</string>
 			<key>xpos</key>
-			<real>635</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>85</real>
 		</dict>
 		<key>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</key>
 		<dict>
@@ -588,6 +663,17 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<real>285</real>
 			<key>ypos</key>
 			<real>380</real>
+		</dict>
+		<key>A1EFFCF5-AED3-4AE3-A9C2-D0874D28CF2E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>install</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>200</real>
 		</dict>
 		<key>A98EAA76-0074-4CAD-9A09-48949FC126DB</key>
 		<dict>

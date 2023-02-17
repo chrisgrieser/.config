@@ -45,19 +45,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>528AE6EA-5209-45EE-816F-B14350E47D2A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>81336F07-6F1D-4BF8-8FC0-6EF0B8886277</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<array/>
 		<key>8D2676E8-2C88-4759-9445-2DBC22311D6D</key>
@@ -216,19 +203,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>FA2B313E-1452-4A60-A4DB-766A82D53C56</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9E95210A-C79F-4F6F-8C1D-8927F7A9D85C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -237,7 +211,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Brave Browser</string>
+	<string>Browser</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -273,7 +247,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>switch-ingonito_[Browser].applescript</string>
+				<string>switch-ingonito.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -401,7 +375,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>switch-to-safari_[Browser].applescript</string>
+				<string>switch-to-safari.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -466,7 +440,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>skip-paywall_[Browser].applescript</string>
+				<string>skip-paywall.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -546,15 +520,15 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Browser-Bookmarks.bkp" &amp;&amp; echo yes</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>backup-bookmarks.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -680,7 +654,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-alltabs_[Browser].applescript</string>
+				<string>get-alltabs.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -770,50 +744,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-browser-default-folder_[Browser-Path].sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>81336F07-6F1D-4BF8-8FC0-6EF0B8886277</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>:browser</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Browser Default Folder</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>528AE6EA-5209-45EE-816F-B14350E47D2A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -855,6 +785,7 @@
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
+					<string>com.vivaldi.Vivaldi</string>
 					<string>com.brave.Browser</string>
 					<string>org.chromium.Chromium</string>
 				</array>
@@ -865,52 +796,6 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>E5B886F0-9286-40B9-9F3E-0475D3256D4F</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>:browser</string>
-				<key>subtext</key>
-				<string>will require brave re-install to enable auto-update again</string>
-				<key>text</key>
-				<string>Remove Brave Autoupdate</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>FA2B313E-1452-4A60-A4DB-766A82D53C56</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># https://github.com/brave/brave-browser/issues/5576
-# https://www.techrepublic.com/forums/discussions/disable-brave-browser-auto-update-on-a-mac/
-rm -r /Applications/Brave\ Browser.app/Contents/Frameworks/Brave\ Browser\ Framework.framework/Versions/*/Frameworks/Sparkle.framework/Versions/A/Resources/Autoupdate.app</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>9E95210A-C79F-4F6F-8C1D-8927F7A9D85C</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -975,15 +860,6 @@ rm -r /Applications/Brave\ Browser.app/Contents/Frameworks/Brave\ Browser\ Frame
 			<key>ypos</key>
 			<real>520</real>
 		</dict>
-		<key>528AE6EA-5209-45EE-816F-B14350E47D2A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>665</real>
-		</dict>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<dict>
 			<key>colorindex</key>
@@ -992,15 +868,6 @@ rm -r /Applications/Brave\ Browser.app/Contents/Frameworks/Brave\ Browser\ Frame
 			<real>205</real>
 			<key>ypos</key>
 			<real>160</real>
-		</dict>
-		<key>81336F07-6F1D-4BF8-8FC0-6EF0B8886277</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>665</real>
 		</dict>
 		<key>8D2676E8-2C88-4759-9445-2DBC22311D6D</key>
 		<dict>
@@ -1041,15 +908,6 @@ rm -r /Applications/Brave\ Browser.app/Contents/Frameworks/Brave\ Browser\ Frame
 			<real>565</real>
 			<key>ypos</key>
 			<real>155</real>
-		</dict>
-		<key>9E95210A-C79F-4F6F-8C1D-8927F7A9D85C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>795</real>
 		</dict>
 		<key>A8E0AB8E-1473-4197-B793-732E24B45E9F</key>
 		<dict>
@@ -1146,7 +1004,7 @@ rm -r /Applications/Brave\ Browser.app/Contents/Frameworks/Brave\ Browser\ Frame
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>bookmark update</string>
+			<string>bookmark backup</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1200,15 +1058,6 @@ rm -r /Applications/Brave\ Browser.app/Contents/Frameworks/Brave\ Browser\ Frame
 			<real>565</real>
 			<key>ypos</key>
 			<real>635</real>
-		</dict>
-		<key>FA2B313E-1452-4A60-A4DB-766A82D53C56</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>795</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
