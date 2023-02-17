@@ -1,0 +1,68 @@
+:root {
+	--adressbar-width: 300px;
+}
+
+/* stylelint-disable selector-max-id, declaration-no-important */
+#tabs-tabbar-container {
+	margin-left: var(--adressbar-width);
+	padding-left: 0;
+	transition: all 0.75s;
+}
+
+.win.normal .tab-group-indicator {
+	top: -2px;
+}
+
+.UrlBar-AddressField {
+	width: var(--adressbar-width);
+	transition: 0.1s ease-in-out !important; /* added animation for extending and reducing the width */
+}
+
+/* extends the width of the url bar addressfield while it is focused */
+.UrlBar-AddressField:focus-within {
+	width: 500px !important;
+}
+
+.OmniDropdown {
+	margin-top: -3px;
+}
+
+.mainbar .toolbar-mainbar:not(.toolbar-wrap .toolbar-droptarget) {
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	height: 30px;
+	border-radius: 10px;
+}
+
+.mainbar .toolbar-mainbar::before,
+.mainbar .toolbar-extensions::before {
+	display: none;
+}
+
+.win.normal .mainbar .toolbar-mainbar {
+	left: unset;
+	right: unset;
+}
+
+/* .toolbar-extensions { */
+/* 	position: absolute !important; */
+/* 	transform: translate(-100%); */
+/* 	background-color: var(--colorBg) !important; */
+/* 	left: calc(100vw - 165px) !important; */
+/* 	height: 30px !important; */
+/* 	right: unset !important; */
+/* } */
+
+.window-buttongroup {
+	height: 35px;
+}
+
+#browser:not(.is-settingspage) #main {
+	position: unset;
+}
+
+.win.normal #header {
+	height: 30px;
+	min-height: unset !important;
+}
