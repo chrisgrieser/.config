@@ -1,15 +1,11 @@
 # https://docs.brew.sh/Manpage#environment
 
-export HOMEBREW_NO_AUTO_UPDATE=0
-export HOMEBREW_AUTO_UPDATE_SECS=259200 # = 3 days before updating on `brew install`
 export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_NO_GITHUB_API=1
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
 export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 export HOMEBREW_AUTOREMOVE=1
 export HOMEBREW_CASK_OPTS="--no-quarantine"
-export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 
 BREWDUMP_PATH="$DOTFILE_FOLDER/installed-apps-and-packages/"
 
