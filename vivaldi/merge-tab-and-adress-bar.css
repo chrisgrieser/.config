@@ -1,6 +1,6 @@
 /* https://forum.vivaldi.net/topic/16684/inspecting-the-vivaldi-ui-with-devtools */
 /* based on https://forum.vivaldi.net/topic/34187/merge-tabs-and-address-bar/61?lang=en-US&page=4 */
-/* stylelint-disable selector-max-id, declaration-no-important */
+/* stylelint-disable selector-max-id, declaration-no-important, custom-property-pattern  */
 :root {
 	--adressbar-width: 300px;
 	--adressbar-focused-width: 400px;
@@ -70,3 +70,24 @@
 	margin-left: 20px !important;
 	right: 0 !important;
 }
+
+/* ───────────────────────────────────────────────── */
+/* get rid of small space to the right */
+/* #header .top .tab-strip { */
+/* 	position: relative; */
+/* 	display: flex; */
+/* } */
+/**/
+/* #header .top .tab-strip > span { */
+/* 	display: inline-block; */
+/* 	flex: 1 1 0; */
+/* } */
+/**/
+/* #header .top .tab-strip > span > .tab-position { */
+/* 	position: static; */
+/* 	display: inline; */
+/* } */
+/**/
+/* #header .top .tab-strip > span > .tab-position > .tab .tab-header { */
+/* 	width: var(--Width); */
+/* } */
