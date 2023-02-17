@@ -3,7 +3,7 @@
 /* stylelint-disable selector-max-id, declaration-no-important */
 :root {
 	--adressbar-width: 300px;
-	--adressbar-focused-width: 500px;
+	--adressbar-focused-width: 400px;
 }
 
 /* ───────────────────────────────────────────────── */
@@ -13,7 +13,7 @@
 
 #tabs-tabbar-container,
 .UrlBar-AddressField {
-	transition: 0.15s ease-in-out !important;
+	transition: 0.3s ease-in-out;
 }
 
 #tabs-tabbar-container {
@@ -44,15 +44,6 @@
 .mainbar .toolbar-mainbar::before,
 .mainbar .toolbar-extensions::before {
 	display: none;
-}
-
-.win.normal .mainbar .toolbar-mainbar {
-	left: unset;
-	right: unset;
-}
-
-.window-buttongroup {
-	height: 35px;
 }
 
 #browser:not(.is-settingspage) #main {
