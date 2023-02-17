@@ -16,7 +16,7 @@
 		]
 	},
 	"Modifiers (Script Filter)": {
-		"prefix": "Modifiers (Script Filter)",
+		"prefix": "Modifiers (Alfred)",
 		"body": [
 			"mods: {",
 			"\t${1:cmd}: {",
@@ -27,7 +27,7 @@
 		]
 	},
 	"Script Filter": {
-		"prefix": "Script Filter",
+		"prefix": "Script Filter (Alfred)",
 		"body": [
 			"const jsonArray = app.doShellScript(`$1`)",
 			"\t.split(\"\r\")",
@@ -35,7 +35,7 @@
 			"\t\t$2",
 			"\t\treturn {",
 			"\t\t\ttitle: item,",
-			"\t\t\tmatch: alfredMatcher (item),",
+			"\t\t\tmatch: alfredMatcher(item),",
 			"\t\t\tsubtitle: item,",
 			"\t\t\ttype: \"file:skipcheck\",",
 			"\t\t\ticon: { type: \"fileicon\", path: item },",

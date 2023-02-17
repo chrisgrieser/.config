@@ -1,7 +1,6 @@
 # Apps
 export EDITOR=nvim
 export PAGER=less
-export BROWSER="Brave Browser"
 
 # Directories
 export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
