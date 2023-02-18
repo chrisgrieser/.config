@@ -17,6 +17,7 @@ if [[ -z "$SEL" ]]; then
 	SEL=$(pbpaste)
 	# restore clipboard
 	[[ -n "$PREV_CLIPBOARD" ]] && echo "$PREV_CLIPBOARD" | pbcopy
+	[[ -z "$SEL" ]] && return 1 # = no selection
 fi
 
 # clean up
@@ -29,8 +30,7 @@ if [[ -f "$SEL" ]]; then
 elif [[ -d "$SEL" ]]; then
 	open "$SEL"
 elif [[ "$SEL" =~ ^http.* ]]; then
-	URL=$(echo "$SEL" | tr -d " ")
-	open "$URL"
+	open "$SEL"
 elif [[ "$SEL" =~ "@" ]]; then
 	open "mailto:$SEL"
 elif [[ -n "$SEL" ]]; then
@@ -38,6 +38,6 @@ elif [[ -n "$SEL" ]]; then
 	open "https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky"
 	open "https://www.google.com/search?q=$URL_ENCODED_SEL"
 	sleep 0.05
-	# requires browser to cycle in tab order
+	# requires browser to cycle "in tab order", so the DDG lucky window is active
 	osascript -e 'tell application "System Events" to keystroke tab using {control down, shift down}'
 fi

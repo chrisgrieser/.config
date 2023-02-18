@@ -555,6 +555,8 @@ end run</string>
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>cmp</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
