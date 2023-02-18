@@ -55,6 +55,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3EBC4FD3-8668-45CA-88AD-94829E028C95</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AFEFE0A4-FE91-4A87-9942-C5C777CCE5C2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>78077732-42EB-4967-885E-DF4366FAB695</key>
 		<array>
 			<dict>
@@ -207,6 +220,19 @@
 				<true/>
 			</dict>
 		</array>
+		<key>AF85AB81-9BE3-4518-85D3-C5088521F862</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3EBC4FD3-8668-45CA-88AD-94829E028C95</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B50914A1-ED52-4AEC-B2B5-C2521ADEBBFA</key>
 		<array>
 			<dict>
@@ -316,7 +342,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>github-history_[Browser].js</string>
+				<string>github-history.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -437,6 +463,75 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>CE6F0B40-E42E-4D8B-833A-537723F42C63</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>downgit.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>AFEFE0A4-FE91-4A87-9942-C5C777CCE5C2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>downgit</string>
+				<key>subtext</key>
+				<string>Current Browser Tab</string>
+				<key>text</key>
+				<string>Download via Downgit</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>AF85AB81-9BE3-4518-85D3-C5088521F862</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
+
+-- funktioniert auch mit der Youtube Webapp</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>../get-url-from-browser.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3EBC4FD3-8668-45CA-88AD-94829E028C95</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -768,6 +863,27 @@ echo "$url"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>repo</string>
+				<key>subtext</key>
+				<string>Current browser tab</string>
+				<key>text</key>
+				<string>Search Repo locally: '{query}'</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>EE2EE748-E122-42A4-B39B-D8B343A666ED</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -839,27 +955,6 @@ echo "$url"</string>
 			<string>FE2EDB4D-45EA-4907-8F3D-039C8E48975A</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>repo</string>
-				<key>subtext</key>
-				<string>Current browser tab</string>
-				<key>text</key>
-				<string>Search Repo locally: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>EE2EE748-E122-42A4-B39B-D8B343A666ED</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1008,6 +1103,17 @@ echo "$url"</string>
 			<key>ypos</key>
 			<real>70</real>
 		</dict>
+		<key>3EBC4FD3-8668-45CA-88AD-94829E028C95</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>get Browser URL</string>
+			<key>xpos</key>
+			<real>825</real>
+			<key>ypos</key>
+			<real>165</real>
+		</dict>
 		<key>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</key>
 		<dict>
 			<key>colorindex</key>
@@ -1021,8 +1127,6 @@ echo "$url"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
-			<key>note</key>
-			<string>githistory.xyz</string>
 			<key>xpos</key>
 			<real>825</real>
 			<key>ypos</key>
@@ -1103,6 +1207,24 @@ echo "$url"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>380</real>
+		</dict>
+		<key>AF85AB81-9BE3-4518-85D3-C5088521F862</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>655</real>
+			<key>ypos</key>
+			<real>165</real>
+		</dict>
+		<key>AFEFE0A4-FE91-4A87-9942-C5C777CCE5C2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>990</real>
+			<key>ypos</key>
+			<real>165</real>
 		</dict>
 		<key>B50914A1-ED52-4AEC-B2B5-C2521ADEBBFA</key>
 		<dict>

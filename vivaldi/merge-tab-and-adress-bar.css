@@ -3,14 +3,13 @@
 /* stylelint-disable selector-max-id, custom-property-pattern  */
 :root {
 	--adressbar-width: 300px;
-	--adressbar-big-width: 450px;
+	--adressbar-big-width: 550px;
 }
 
 /* ───────────────────────────────────────────────── */
 #browser #tabs-container {
 	padding-left: 12px;
 }
-
 
 #tabs-tabbar-container,
 .UrlBar-AddressField {

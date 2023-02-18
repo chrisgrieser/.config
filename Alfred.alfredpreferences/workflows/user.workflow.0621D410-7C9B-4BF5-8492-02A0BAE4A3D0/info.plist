@@ -8,7 +8,7 @@
 	<dict>
 		<key>2856DA0F-7623-47F9-9E7C-DA4CC8F0B448</key>
 		<array/>
-		<key>2B34C51A-B434-45D5-9705-2866E79B33BC</key>
+		<key>34386EC6-BB0D-4C32-9050-9E4ECBAF62AA</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -40,7 +40,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2B34C51A-B434-45D5-9705-2866E79B33BC</string>
+				<string>34386EC6-BB0D-4C32-9050-9E4ECBAF62AA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -497,15 +497,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>type</key>
-				<integer>0</integer>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.transform</string>
+			<string>alfred.workflow.utility.replace</string>
 			<key>uid</key>
-			<string>2B34C51A-B434-45D5-9705-2866E79B33BC</string>
+			<string>34386EC6-BB0D-4C32-9050-9E4ECBAF62AA</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -585,10 +593,12 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
-		<key>2B34C51A-B434-45D5-9705-2866E79B33BC</key>
+		<key>34386EC6-BB0D-4C32-9050-9E4ECBAF62AA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
+			<key>note</key>
+			<string>remove \n</string>
 			<key>xpos</key>
 			<real>385</real>
 			<key>ypos</key>
