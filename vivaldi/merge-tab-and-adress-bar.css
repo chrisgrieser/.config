@@ -3,7 +3,7 @@
 /* stylelint-disable selector-max-id, declaration-no-important, custom-property-pattern  */
 :root {
 	--adressbar-width: 300px;
-	--adressbar-focused-width: 400px;
+	--adressbar-big-width: 400px;
 }
 
 /* ───────────────────────────────────────────────── */
@@ -24,13 +24,15 @@
 	width: var(--adressbar-width);
 }
 
-/* extends the width of the url bar addressfield while it is focused */
+/* extends the width of the url bar addressfield while it is focused/hovered */
+#header:has(:not(.tab-strip span:nth-child(5))) + #main .UrlBar-AddressField, /* less than 5 tabs */
 .UrlBar-AddressField:is(:focus-within, :hover) {
-	width: var(--adressbar-focused-width);
+	width: var(--adressbar-big-width);
 }
 
+#tabs-tabbar-container:has(:not(.tab-strip span:nth-child(5))), /* less than 5 tabs */
 #header:has(+ #main .UrlBar-AddressField:is(:focus-within, :hover)) #tabs-tabbar-container {
-	margin-left: var(--adressbar-focused-width);
+	margin-left: var(--adressbar-big-width);
 }
 
 .mainbar .toolbar-mainbar:not(.toolbar-wrap .toolbar-droptarget) {
@@ -70,4 +72,3 @@
 	margin-left: 20px !important;
 	right: 0 !important;
 }
-
