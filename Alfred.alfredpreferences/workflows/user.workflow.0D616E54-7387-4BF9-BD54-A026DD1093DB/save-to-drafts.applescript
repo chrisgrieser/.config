@@ -8,12 +8,12 @@ on run argv
 	set hotkeyUsed to (system attribute "hotkeyUsed")
 	tell application id "com.runningwithcrayons.Alfred" to remove configuration "hotkeyUsed" in workflow (system attribute "alfred_workflow_bundleid")
 
-	if (selectionExists is false) and (frontApp is not "Brave Browser") then
+	if (selectionExists is false) and (frontApp is not "Vivaldi") then
 		return "🛑 No Input provided."
 	end if
 
-	if (frontApp is "Brave Browser" and hotkeyUsed is "true") then
-		tell application "Brave Browser"
+	if (frontApp is "Vivaldi" and hotkeyUsed is "true") then
+		tell application "Vivaldi"
 			set currentTabUrl to URL of active tab of front window
 			set currentTabTitle to title of active tab of front window
 		end tell
