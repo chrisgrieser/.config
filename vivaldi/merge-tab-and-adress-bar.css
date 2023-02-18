@@ -3,7 +3,7 @@
 /* stylelint-disable selector-max-id, custom-property-pattern  */
 :root {
 	--adressbar-width: 300px;
-	--adressbar-big-width: 400px;
+	--adressbar-big-width: 450px;
 }
 
 /* ───────────────────────────────────────────────── */
@@ -27,12 +27,12 @@
 
 /* extends the width of the url bar addressfield while it is focused/hovered */
 #header:not(:has(.tab-strip span:nth-child(5))) + #main .UrlBar-AddressField, /* less than 5 tabs */
-.UrlBar-AddressField:is(:focus-within, :hover) {
+.UrlBar-AddressField:focus-within:not(:has(#urlFieldInput[value=""])) {
 	width: var(--adressbar-big-width);
 }
 
 #tabs-tabbar-container:not(:has(.tab-strip span:nth-child(5))), /* less than 5 tabs */
-#header:has(+ #main .UrlBar-AddressField:is(:focus-within, :hover)) #tabs-tabbar-container {
+#header:has(+ #main .UrlBar-AddressField:focus-within):not(:has(#urlFieldInput[value=""])) #tabs-tabbar-container {
 	margin-left: var(--adressbar-big-width);
 }
 
@@ -59,11 +59,7 @@
 }
 
 /* ───────────────────────────────────────────────── */
-
-/* bookmark button to the left so there is space for the extension icon */
-.toolbar-insideinput:last-child {
-	margin-right: 23px;
-}
+/* EXTENSION ICON */
 
 /* show extension button only when hovering url bar */
 .toolbar-mainbar:not(:hover) .UrlBar-AddressField + .toolbar-extensions {
@@ -80,6 +76,9 @@
 }
 
 
-#browser #main .mainbar .toolbar-extensions:hover {
-	background: none !important;
+.toolbar-extensions .button-toolbar:not(.ExtensionIcon) button:hover svg {
+	color: var(--colorHighlightBg);
+}
+#browser .toolbar-extensions .button-toolbar:not(.ExtensionIcon) button {
+	background: none;
 }
