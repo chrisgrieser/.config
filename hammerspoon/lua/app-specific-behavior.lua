@@ -103,10 +103,8 @@ end):start()
 
 --------------------------------------------------------------------------------
 
--- BRAVE BROWSER
--- split when second window is opened
--- change sizing back, when back to one window
-Wf_browser = Wf.new("Brave Browser")
+-- BROWSER (Vivaldi)
+Wf_browser = Wf.new("Vivaldi")
 	:setOverrideFilter({
 		rejectTitles = { " %(Private%)$", "^Picture in Picture$", "^Task Manager$" },
 		allowRoles = "AXStandardWindow",
@@ -118,10 +116,10 @@ Wf_browser = Wf.new("Brave Browser")
 
 -- Automatically hide Browser has when no window
 -- requires wider window-filter to not hide PiP windows etc
-Wf_browser_all = Wf.new({"Brave Browser", "Vivaldi"})
+Wf_browser_all = Wf.new({ "Vivaldi" })
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(Wf.windowDestroyed, function()
-		if #Wf_browser_all:getWindows() == 0 then App("Brave Browser"):hide() end
+		if #Wf_browser_all:getWindows() == 0 then App("Vivaldi"):hide() end
 	end)
 
 --------------------------------------------------------------------------------
