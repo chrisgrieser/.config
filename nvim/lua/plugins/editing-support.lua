@@ -2,12 +2,28 @@ return {
 	-- EDITING-SUPPORT
 	{ "numToStr/Comment.nvim" }, -- comment operator
 	{ "kylechui/nvim-surround" },
+	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
 
 	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
 
-	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
 	{ "bkad/CamelCaseMotion", event = "BufReadPost" },
+	{
+		"mbbill/undotree",
+		keys = "<leader>u",
+		init = function()
+			vim.keymap.set("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "Undotree" })
+			vim.g.undotree_WindowLayout = 3
+			vim.g.undotree_DiffpanelHeight = 8
+			vim.g.undotree_ShortIndicators = 1
+			vim.g.undotree_SplitWidth = 30
+			vim.g.undotree_DiffAutoOpen = 0
+			vim.g.undotree_SetFocusWhenToggle = 1
+			vim.g.undotree_DiffCommand = "delta"
+			vim.g.undotree_HelpLine = 1
+		end,
+	},
+
 	{
 		"mizlan/iswap.nvim", -- swapping of nodes
 		dependencies = "nvim-treesitter/nvim-treesitter",
