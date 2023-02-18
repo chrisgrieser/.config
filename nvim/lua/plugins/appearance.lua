@@ -14,6 +14,7 @@ return {
 			require("indent_blankline").setup {
 				show_current_context = true, -- active indent
 				use_treesitter = true,
+				filetype_exclude = {"undotree", "help", "man", "lspinfo", ""}
 			}
 		end,
 	},
