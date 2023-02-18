@@ -19,11 +19,13 @@ vaultChanges=$(git status --porcelain | wc -l | tr -d " ")
 passPath="$PASSWORD_STORE_DIR"
 [[ -z "$passPath" ]] && passPath="$HOME/.password-store"
 cd "$passPath" || configError="repo-path wrong"
-passChanges=$(git status --porcelain --branch | grep -Eo "\d") # to check for ahead/behind instead of untracked, since pass auto add-commits, but does not auto-push
+passChanges1=$(git status --porcelain | wc -l | tr -d " ")
+passChanges2=$(git status --porcelain --branch | grep -Eo "\d") # to check for ahead/behind instead of untracked, since pass auto add-commits, but does not auto-push
 
 [[ "$dotChanges" != "0" ]] && label="${dotChanges}d " # INFO string comparison, so it also works with submodules
 [[ $vaultChanges -ne 0 ]] && label="$label${vaultChanges}v "
-[[ -n "$passChanges" ]] && label="$label${passChanges}p "
-[[ -n "$label" ]] && icon="痢"
+[[ "$passChanges1" -ne 0 ]] && label="$label${passChanges1}p"
+[[ -n "$passChanges2" ]] && label="$label${passChanges2}p"
+[[ -n "$label" ]] && icon=" "
 [[ $submodulesChanges -eq 1 ]] && icon=" "
 sketchybar --set "$NAME" icon="$icon" label="$label$configError"

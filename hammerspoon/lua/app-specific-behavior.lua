@@ -24,13 +24,6 @@ local function hideOthers(win)
 	end
 end
 
-local function bringAllToFront()
-	local frontapp = App.frontmostApplication()
-	if #frontapp:allWindows() > 1 then -- HACK to prevent the occasional faulty creation of task manager windows in Brave
-		frontapp:selectMenuItem { "Window", "Bring All to Front" }
-	end
-end
-
 --------------------------------------------------------------------------------
 
 -- AUTOMATIONS FOR MULTIPLE APPS
@@ -121,7 +114,7 @@ Wf_browser = Wf.new("Brave Browser")
 	})
 	:subscribe(Wf.windowCreated, function() AutoTile(Wf_browser) end)
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_browser) end)
-	:subscribe(Wf.windowFocused, bringAllToFront)
+	:subscribe(Wf.windowFocused, BringAllToFront)
 
 -- Automatically hide Browser has when no window
 -- requires wider window-filter to not hide PiP windows etc
@@ -274,7 +267,7 @@ FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)
 		RunWithDelays({ 3, 5, 10 }, QuitFinderIfNoWindow)
 	elseif eventType == Aw.activated and appName == "Finder" then
 		AutoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
-		bringAllToFront()
+		BringAllToFront()
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
 	end
 end):start()
