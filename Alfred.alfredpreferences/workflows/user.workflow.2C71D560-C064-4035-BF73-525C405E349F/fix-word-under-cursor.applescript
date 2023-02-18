@@ -38,6 +38,7 @@ on run argv
 	delay delayAmount
 
 	if clipboardPreserved is true then
+		delay 0.1
 		set the clipboard to prevClipboard
 	end if
 

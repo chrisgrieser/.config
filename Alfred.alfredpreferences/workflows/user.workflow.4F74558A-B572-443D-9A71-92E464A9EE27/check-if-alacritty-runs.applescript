@@ -13,8 +13,16 @@ on run
 	if frontApp is "Finder" then
 		tell application "Finder"
 			if ((count windows) is 0) then return
+			-- clipboard cannot be preserved if it contains non-text (image, file)
+			try
+				set prevClipboard to the clipboard
+				set clipboardPreserved to true
+			on error
+				set clipboardPreserved to false
+			end try
 			set the clipboard to POSIX path of (target of window 1 as alias)
 		end tell
+
 		tell application "Alacritty" to activate
 		delay 0.05
 		tell application "System Events"
@@ -24,6 +32,11 @@ on run
 			keystroke "'"
 			keystroke return
 		end tell
+
+		if clipboardPreserved is true then
+			delay 0.05
+			set the clipboard to prevClipboard
+		end if
 	else
 		tell application "Alacritty" to activate
 	end if
