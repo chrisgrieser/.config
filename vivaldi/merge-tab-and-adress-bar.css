@@ -1,6 +1,6 @@
 /* https://forum.vivaldi.net/topic/16684/inspecting-the-vivaldi-ui-with-devtools */
 /* based on https://forum.vivaldi.net/topic/34187/merge-tabs-and-address-bar/61?lang=en-US&page=4 */
-/* stylelint-disable selector-max-id, declaration-no-important, custom-property-pattern  */
+/* stylelint-disable selector-max-id, custom-property-pattern  */
 :root {
 	--adressbar-width: 300px;
 	--adressbar-big-width: 400px;
@@ -55,7 +55,7 @@
 
 .win.normal #header {
 	height: 30px;
-	min-height: unset !important;
+	min-height: unset;
 }
 
 /* ───────────────────────────────────────────────── */
@@ -65,11 +65,21 @@
 	margin-right: 23px;
 }
 
-/* this only works properly when hiding all extension buttons */
-.toolbar-extensions {
-	position: absolute !important;
+/* show extension button only when hovering url bar */
+.toolbar-mainbar:not(:hover) .UrlBar-AddressField + .toolbar-extensions {
+	display: none;
+}
+
+/* TODO this only works properly when hiding all extension buttons */
+#browser #main .mainbar .toolbar-extensions {
+	position: absolute;
+	background: none;
+	height: 30px;
+	margin-left: 20px;
+	right: 0;
+}
+
+
+#browser #main .mainbar .toolbar-extensions:hover {
 	background: none !important;
-	height: 30px !important;
-	margin-left: 20px !important;
-	right: 0 !important;
 }
