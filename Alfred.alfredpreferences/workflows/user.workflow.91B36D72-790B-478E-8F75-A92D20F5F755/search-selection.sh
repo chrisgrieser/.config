@@ -38,5 +38,6 @@ elif [[ -n "$SEL" ]]; then
 	open "https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky"
 	open "https://www.google.com/search?q=$URL_ENCODED_SEL"
 	sleep 0.05
+	# requires browser to cycle in tab order
 	osascript -e 'tell application "System Events" to keystroke tab using {control down, shift down}'
 fi
