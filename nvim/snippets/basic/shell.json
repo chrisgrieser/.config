@@ -53,7 +53,11 @@
 			")"
 		]
 	},
-	"notify (var)": {
+	"xargs (for each line)": {
+		"prefix": "xargs (for each line)",
+		"body": " xargs -I {} echo "
+	},
+		"notify (var)": {
 		"prefix": "notify (var)",
 		"body": "osascript -e \"display notification \\\"\\\" with title \\\"$${1:var}\\\"\""
 	},
