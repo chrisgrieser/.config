@@ -55,7 +55,7 @@
 	},
 	"xargs (for each line)": {
 		"prefix": "xargs (for each line)",
-		"body": " xargs -I {} echo "
+		"body": "xargs -I {} ${1:some_cmd} '{}'"
 	},
 		"notify (var)": {
 		"prefix": "notify (var)",
