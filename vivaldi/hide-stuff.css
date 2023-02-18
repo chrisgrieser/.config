@@ -1,4 +1,4 @@
-/* stylelint-disable selector-max-id, custom-property-pattern */
+/* stylelint-disable selector-max-id */
 .button-toolbar.newtab, /* new tab button */
 .ContentBlocker-Control, /* content/shield button */
 .toolbar-insideinput .button-toolbar:nth-child(2), /* reader view button */
@@ -7,15 +7,3 @@
 	display: none;
 }
 
-/* bookmark as colored adress bar */
-.UrlBar-AddressField:has(.BookmarkButton .button-on) .UrlFragment-Wrapper {
-	color: var(--colorHighlightBgFaded);
-}
-
-.UrlBar-AddressField:has(.BookmarkButton .button-on) .UrlFragment--Highlight {
-	color: var(--colorHighlightBg);
-}
-
-.BookmarkButton {
-	display: none;
-}
