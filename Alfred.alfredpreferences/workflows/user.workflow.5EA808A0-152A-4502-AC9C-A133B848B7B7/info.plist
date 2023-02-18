@@ -1150,7 +1150,9 @@ echo "$url"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>clone &amp; search repo</string>
+			<string>clone &amp; search repo
+
+INFO: requires nvim automation</string>
 			<key>xpos</key>
 			<real>560</real>
 			<key>ypos</key>
@@ -1425,7 +1427,7 @@ echo "$url"</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>to be displayed in issue search</string>
+			<string>max number of results in issue search</string>
 			<key>label</key>
 			<string>number of results</string>
 			<key>type</key>

@@ -14,23 +14,26 @@ function run() {
 	//──────────────────────────────────────────────────────────────────────────────
 
 	const username = $.getenv("github_username");
-	const jsonArray = JSON.parse(app.doShellScript(`curl -sL "https://api.github.com/users/${username}/repos?per_page=100"`))
-		.filter(item => item.fork === false)
+	const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
+
+	const jsonArray = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`))
+		.filter(item => !item.fork && !item.archived)
+		.sort((a, b) => b.stargazers_count - a.stargazers_count)
 		.map(item => {
 			let repo = item.full_name.split("/")[1];
 			if (repo === username) repo = "My GitHub Profile";
 			const url = item.html_url;
 			const stars = item.stargazers_count;
 			const issues = item.open_issues_count;
-			const forks = item.fork_count;
-			const archived = item.archived ? "[archived]" : "";
-			let info = ""
-			if (stars > 0) info += `⭑ ${stars}  `
-			if (issues > 0) info += `● ${issues}`
-			if (forks > 0) info += `⑂ ${forks}`
+			const forks = item.forks_count;
+
+			let info = "";
+			if (stars > 0) info += `⭐ ${stars}  `;
+			if (issues > 0) info += `🟢 ${issues}  `;
+			if (forks > 0) info += `🍴 ${forks}  `;
 
 			return {
-				title: `${repo}   ${archived}`,
+				title: repo,
 				subtitle: info,
 				match: alfredMatcher(repo),
 				arg: url,
