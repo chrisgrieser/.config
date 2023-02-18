@@ -15,11 +15,11 @@ function run() {
 
 	const resultsNumber = $.getenv("results_number");
 	const username = $.getenv("github_username");
-	const issues = JSON.parse(
-		app.doShellScript(`curl -sL "https://api.github.com/search/issues?q=involves:${username}&per_page=${resultsNumber}"`),
-	).items.map(item => {
-		const isPR = Boolean(item.pull_request)
-		const merged = Boolean(item.pull_request?.merged_at)
+	const apiURL = `https://api.github.com/search/issues?q=involves:${username}&per_page=${resultsNumber}`;
+
+	const issues = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`)).items.map(item => {
+		const isPR = Boolean(item.pull_request);
+		const merged = Boolean(item.pull_request?.merged_at);
 		const title = item.title;
 		const repo = item.repository_url.match(/[^/]+\/[^/]+$/)[0];
 		const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
