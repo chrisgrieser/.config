@@ -7,7 +7,7 @@ Home = Getenv("HOME")
 
 --------------------------------------------------------------------------------
 
--- BRAVE Bookmarks synced to Chrome Bookmarks (needed for Alfred)
+-- Bookmarks synced to Chrome Bookmarks (needed for Alfred)
 local browserFolder = Home .. "/Library/Application Support/BraveSoftware/Brave-Browser/"
 BookmarkWatcher = Pw(
 	browserFolder .. "Default/Bookmarks",
