@@ -31,6 +31,10 @@
 		],
 		"description": "Insert table with 2 rows and 2 columns. First row is heading."
 	},
+	"modeline: nospell": {
+		"prefix": "modeline: nospell",
+		"body": "<!-- vim: nospell \n-->"
+	},
 	"Insert 3x2 table": {
 		"prefix": "3x2table",
 		"body": [
