@@ -19,19 +19,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>892B9EF8-E33C-4D32-BBEB-591DFBEFFFEC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C8DFF277-2C74-48D3-B685-F304268DF007</key>
 		<array/>
 		<key>CD061C82-1321-458D-B46E-3603B3DB27E0</key>
@@ -107,37 +94,6 @@
 			<string>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>0</integer>
-				<key>hotmod</key>
-				<integer>0</integer>
-				<key>hotstring</key>
-				<string></string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>892B9EF8-E33C-4D32-BBEB-591DFBEFFFEC</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -289,17 +245,6 @@ E.g
 		<dict>
 			<key>xpos</key>
 			<real>290</real>
-			<key>ypos</key>
-			<real>140</real>
-		</dict>
-		<key>892B9EF8-E33C-4D32-BBEB-591DFBEFFFEC</key>
-		<dict>
-			<key>note</key>
-			<string>Thanks for downloading! 
-
-I highly recommend you set a hotkey for this so that it's even easier to trigger it. I personally set it to double-tapping the Cmd key.</string>
-			<key>xpos</key>
-			<real>70</real>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>

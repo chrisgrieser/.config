@@ -1,5 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
-// INFO placed in parent fodler of all Alfred workflwos for easy access
+// INFO placed in parent folder of all Alfred workflwos for easy access
 
 //──────────────────────────────────────────────────────────────────────────────
 function run() {
