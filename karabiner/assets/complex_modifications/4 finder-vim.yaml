@@ -1094,10 +1094,9 @@ rules:
               ROOT_LEN=${#ROOT_PATH}
               REMOTE_URL="$(git remote -v |  head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')"
               PATH_IN_REPO=${SEL:$ROOT_LEN}
+              PATH_IN_REPO=$(osascript -l JavaScript -e "encodeURIComponent('$PATH_IN_REPO')")
 
               URL="$REMOTE_URL/blob/$BRANCH/$PATH_IN_REPO"
-              URL="${URL/ /%20}"  # open pseudo-encoded url (to not require a dependency)
-
               echo "$URL" | pbcopy
               open "$URL"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
