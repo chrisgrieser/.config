@@ -96,7 +96,7 @@
 			"function browserTab() {",
 			"\tconst frontmostAppName = Application(\"System Events\").applicationProcesses.where({ frontmost: true }).name()[0];",
 			"\tconst frontmostApp = Application(frontmostAppName);",
-			"\tconst chromiumVariants = [\"Google Chrome\", \"Chromium\", \"Opera\", \"Vivaldi\", \"Vivaldi\", \"Microsoft Edge\"];",
+			"\tconst chromiumVariants = [\"Google Chrome\", \"Chromium\", \"Opera\", \"Vivaldi\", \"Brave Browser\", \"Microsoft Edge\"];",
 			"\tconst webkitVariants = [\"Safari\", \"Webkit\"];",
 			"\tlet title, url;",
 			"\tif (chromiumVariants.some(appName => frontmostAppName.startsWith(appName))) {",
