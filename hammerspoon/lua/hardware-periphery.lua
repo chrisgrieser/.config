@@ -23,9 +23,20 @@ OpenSwimWatcher = hs.usb.watcher
 	:start()
 
 -- External Harddrive used for backups
+-- TODO add some more functionality later
 ExternalHarddriveWatcher = hs.usb.watcher
 	.new(function(device)
+		if not (device.eventType == "added") then return end
+		Notify("Mounted: " .. device.productName)
 
+		local harddriveNames = {
+			externe_A = "ZY603 USB3.0 Device",
+			-- externe_B = "", TODO
+			externe_C = "Elements 2621",
+		}
+		for _, productName in pairs(harddriveNames) do
+			if productName == device.productName then OpenApp("Alacritty") end
+		end
 	end)
 	:start()
 
