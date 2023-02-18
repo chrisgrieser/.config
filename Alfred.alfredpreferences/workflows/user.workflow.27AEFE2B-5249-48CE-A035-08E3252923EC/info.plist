@@ -444,6 +444,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>paywall</string>
+				<key>subtext</key>
+				<string>via 12ft.io</string>
+				<key>text</key>
+				<string>Skip Paywall</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -463,27 +484,6 @@
 			<string>97E52210-B26B-49B3-AC6D-65A1235A88C9</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>paywall</string>
-				<key>subtext</key>
-				<string>via 12ft.io</string>
-				<key>text</key>
-				<string>Skip Paywall</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -819,9 +819,9 @@
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.vivaldi.Vivaldi</string>
-					<string>org.chromium.Chromium</string>
 					<string>com.brave.Browser</string>
+					<string>org.chromium.Chromium</string>
+					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -845,7 +845,7 @@
 			<key>xpos</key>
 			<real>740</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>640</real>
 		</dict>
 		<key>10C28BFB-0100-4B2F-BAEF-FEA3FC8C44E2</key>
 		<dict>
@@ -901,7 +901,7 @@
 			<key>xpos</key>
 			<real>740</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>760</real>
 		</dict>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<dict>
@@ -919,7 +919,7 @@
 			<key>xpos</key>
 			<real>565</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>640</real>
 		</dict>
 		<key>8D2676E8-2C88-4759-9445-2DBC22311D6D</key>
 		<dict>
@@ -986,7 +986,7 @@
 			<key>xpos</key>
 			<real>565</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>520</real>
 		</dict>
 		<key>BCBA39EC-1A03-42AE-AC02-3008B7476776</key>
 		<dict>
@@ -995,7 +995,7 @@
 			<key>xpos</key>
 			<real>565</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>760</real>
 		</dict>
 		<key>BE7EDFB7-052F-45E8-BC4B-5448613EE413</key>
 		<dict>
@@ -1031,7 +1031,7 @@
 			<key>xpos</key>
 			<real>740</real>
 			<key>ypos</key>
-			<real>890</real>
+			<real>880</real>
 		</dict>
 		<key>CF0751AB-25B7-45A7-89DE-68E791637C9D</key>
 		<dict>
@@ -1040,7 +1040,7 @@
 			<key>xpos</key>
 			<real>740</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>520</real>
 		</dict>
 		<key>D14B4522-0A25-4F4D-9985-FF8B04E43832</key>
 		<dict>
@@ -1091,7 +1091,7 @@
 			<key>xpos</key>
 			<real>565</real>
 			<key>ypos</key>
-			<real>890</real>
+			<real>880</real>
 		</dict>
 		<key>F34E5081-7725-4B48-867B-36BC4DFAD990</key>
 		<dict>

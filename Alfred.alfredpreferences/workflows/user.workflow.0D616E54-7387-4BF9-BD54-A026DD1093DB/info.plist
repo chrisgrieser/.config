@@ -374,7 +374,7 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>📸 OCR Text saved in Drafts</string>
+				<string>📸 Drafts OCR</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
