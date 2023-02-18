@@ -1,8 +1,9 @@
 /* https://forum.vivaldi.net/topic/16684/inspecting-the-vivaldi-ui-with-devtools */
 /* based on https://forum.vivaldi.net/topic/34187/merge-tabs-and-address-bar/61?lang=en-US&page=4 */
 /* stylelint-disable selector-max-id, custom-property-pattern  */
+/* ────────────────────────────────────────────────────────────────────────── */
 :root {
-	--adressbar-width: 600px;
+	--adressbar-width: 600px; /* focused tab or 1-2 tabs */
 	--adressbar-width-3-tab: 550px;
 	--adressbar-width-4-tab: 500px;
 	--adressbar-width-5-tab: 450px;
@@ -10,9 +11,9 @@
 	--adressbar-width-7-tab: 350px;
 	--adressbar-width-8-tab: 300px;
 	--adressbar-width-9-tab: 250px;
+	--animation: 60ms ease-in;
 }
 
-/* less than x tabs */
 #tabs-tabbar-container{
 	margin-left: var(--adressbar-width);
 }
@@ -21,6 +22,7 @@
 	width: var(--adressbar-width);
 }
 
+/* less than x tabs */
 #tabs-tabbar-container:has(.tab-strip span:nth-child(3)) {
 	margin-left: var(--adressbar-width-3-tab);
 }
@@ -77,8 +79,7 @@
 	width: var(--adressbar-width-9-tab);
 }
 
-
-/* ───────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
 
 /* extends the width of the url bar addressfield while it is focused */
 #browser #main .UrlBar-AddressField:focus-within:not(:has(#urlFieldInput[value=""])) {
@@ -87,7 +88,6 @@
 
 #header:has(+ #main .UrlBar-AddressField:focus-within):not(:has(+ #main #urlFieldInput[value=""])) #tabs-tabbar-container {
 	opacity: 0;
-	/* margin-left: var(--adressbar-width); */
 }
 
 #browser #tabs-container {
@@ -96,7 +96,7 @@
 
 #tabs-tabbar-container,
 .UrlBar-AddressField {
-	transition: 80ms ease-out;
+	transition: var(--animation);
 }
 
 .mainbar .toolbar-mainbar:not(.toolbar-wrap .toolbar-droptarget) {
@@ -121,7 +121,7 @@
 	min-height: unset;
 }
 
-/* ───────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
 /* EXTENSION ICON */
 
 /* show extension button only when hovering url bar */
@@ -145,3 +145,10 @@
 #browser .toolbar-extensions .button-toolbar:not(.ExtensionIcon) button {
 	background: none;
 }
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* TAB LOOK */
+#tabs-container .tab {
+	border-radius: 5px;	
+}
+
