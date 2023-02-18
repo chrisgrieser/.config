@@ -13,35 +13,29 @@ function run() {
 
 	//──────────────────────────────────────────────────────────────────────────────
 
-	const resultsNumber = $.getenv("results_number");
 	const username = $.getenv("github_username");
-	const issues = JSON.parse(
-		app.doShellScript(`curl -sL "https://api.github.com/search/issues?q=involves:${username}&per_page=${resultsNumber}"`),
-	).items.map(item => {
-		const isPR = Boolean(item.pull_request)
-		const merged = Boolean(item.pull_request?.merged_at)
-		const title = item.title;
-		const repo = item.repository_url.match(/[^/]+\/[^/]+$/)[0];
-		const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
+	const jsonArray = JSON.parse(app.doShellScript(`curl -sL "https://api.github.com/users/${username}/repos?per_page=100"`))
+		.filter(item => item.fork === false)
+		.map(item => {
+			let repo = item.full_name.split("/")[1];
+			if (repo === username) repo = "My GitHub Profile";
+			const url = item.html_url;
+			const stars = item.stargazers_count;
+			const issues = item.open_issues_count;
+			const forks = item.fork_count;
+			const archived = item.archived ? "[archived]" : "";
+			let info = ""
+			if (stars > 0) info += `⭑ ${stars}  `
+			if (issues > 0) info += `● ${issues}`
+			if (forks > 0) info += `⑂ ${forks}`
 
-		let icon; // also lists PRs due to --include-prs
-		if (item.state === "open" && isPR) icon = "🟦 ";
-		else if (item.state === "closed" && isPR && merged) icon = "🟨 ";
-		else if (item.state === "closed" && isPR && !merged) icon = "🟥 ";
-		else if (item.state === "closed" && !isPR) icon = "🟣 ";
-		else if (item.state === "open" && !isPR) icon = "🟢 ";
-		if (title.toLowerCase().includes("request") || title.includes("FR")) icon += "🙏 ";
-		if (title.toLowerCase().includes("bug")) icon += "🪲 ";
-
-		let matcher = alfredMatcher(item.title) + " " + alfredMatcher(repo);
-		if (isPR) matcher += " pr";
-
-		return {
-			title: icon + title,
-			subtitle: `#${item.number}  ${repo}   ${comments}`,
-			match: matcher,
-			arg: item.html_url,
-		};
-	});
-	return JSON.stringify({ items: issues });
+			return {
+				title: `${repo}   ${archived}`,
+				subtitle: info,
+				match: alfredMatcher(repo),
+				arg: url,
+				uid: repo,
+			};
+		});
+	return JSON.stringify({ items: jsonArray });
 }
