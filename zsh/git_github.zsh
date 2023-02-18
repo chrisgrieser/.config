@@ -102,7 +102,7 @@ function acp() {
 	git pull
 	git push
 
-	if [[ -z "${PWD#"$DOTFILE_FOLDER"}" ]] || [[ -z "${PWD#"$VAULT_PATH"}" ]]; then
+	if [[ "$PWD" == "${PWD#"$DOTFILE_FOLDER"}" ]] || [[ "$PWD" == "${PWD#"$VAULT_PATH"}" ]]; then
 		sketchybar --trigger repo-files-update
 	fi
 }
@@ -133,7 +133,7 @@ function betterClone() {
 	if grep -q "obsidian" package.json &>/dev/null; then
 		print "\n\033[1;34mDetected Obsidian plugin. Installing NPM dependencies…\033[0m"
 		if ! command -v node &>/dev/null; then print "\033[1;33mnode not installed, not running npm." && return 0; fi
-		npm i 
+		npm i
 		print "\n\033[1;34mBuilding…\033[0m"
 		npm run build
 	fi
@@ -204,7 +204,7 @@ function gdf() {
 
 	deletion_commit=$(git log --format='%h' --follow -- "$deleted_path" | head -n1)
 	last_commit=$(git show --format='%h' "$deletion_commit^" | head -n1)
-	if [[ -z "$selection" ]] ; then
+	if [[ -z "$selection" ]]; then
 		print "🔍\033[1;32m One file found:"
 	else
 		print "🔍\033[1;32m Selected file:"
