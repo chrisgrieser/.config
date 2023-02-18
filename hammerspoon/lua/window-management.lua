@@ -158,6 +158,14 @@ end
 --------------------------------------------------------------------------------
 -- WINDOW TILING (OF SAME APP)
 
+---bring all windows of front app to the front
+function BringAllToFront()
+	local app = App.frontmostApplication()
+	if #app:allWindows() > 1 then -- HACK to prevent the occasional faulty creation of task manager windows in Brave
+		app:selectMenuItem { "Window", "Bring All to Front" }
+	end
+end
+
 ---automatically apply per-app auto-tiling of the windows of the app
 ---@param windowSource hs.window.filter|string windowfilter or appname
 function AutoTile(windowSource)
@@ -203,6 +211,8 @@ function AutoTile(windowSource)
 		MoveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
 		MoveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
 	end
+
+	if #wins > 1 then BringAllToFront() end
 end
 
 --------------------------------------------------------------------------------
@@ -265,4 +275,3 @@ Hotkey({}, "end", endAction)
 Hotkey(Hyper, "right", function() MoveResize(hs.window.focusedWindow(), RightHalf) end)
 Hotkey(Hyper, "left", function() MoveResize(hs.window.focusedWindow(), LeftHalf) end)
 Hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
-
