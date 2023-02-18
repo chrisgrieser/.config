@@ -349,7 +349,6 @@ return {
 			local spellAutoFixes = {}
 			local spellfixes = require("config.autocorrects-and-autotriggers")
 			for _, wordPair in pairs(spellfixes) do
-				-- lsp-style-snippets for future-proofness
 				local parsed = ls.parser.parse_snippet(wordPair[1], wordPair[2])
 				table.insert(spellAutoFixes, parsed)
 			end

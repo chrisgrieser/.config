@@ -8,5 +8,4 @@ return {
 	{ "nto", "not" },
 	{ "sicne", "since" },
 	{ "teh", "the" },
-	{ "öö", "{\n\t$0\n}" },
 }

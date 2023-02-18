@@ -125,7 +125,7 @@
 /* ────────────────────────────────────────────────────────────────────────── */
 /* TAB LOOK */
 #tabs-container .tab {
-	border-radius: 6px;
+	border-radius: var(--radius);
 }
 
 #tabs-container .tab-strip div {
@@ -145,4 +145,18 @@
 #browser .tab.active::after,
 #browser .tab.active::before {
 	display: none;
+}
+
+/* unread indicator replacement */
+#tabs-container .unread .title {
+	font-style: italic;
+}
+
+#tabs-container .unread .title::before {
+	content: "○";
+	padding-right: 2px;
+}
+
+#tabs-container .unread {
+	background-image: none;
 }
