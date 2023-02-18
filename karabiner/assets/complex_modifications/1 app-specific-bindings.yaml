@@ -366,6 +366,7 @@ rules:
               - ^com\.hnc\.Discord$
               - ^com\.tinyspeck\.slackmacgap$
               - ^com\.brave\.Browser$ # useful for reddit
+              - ^com\.vivaldi\.Vivaldi$
       # [r]eply to msg above
       - type: basic
         from: { key_code: r, modifiers: { mandatory: [command] } }
