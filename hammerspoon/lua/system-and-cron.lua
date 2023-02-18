@@ -207,7 +207,7 @@ BiweeklyTimer = timer("02:00", "02d", function()
 		end tell
 	]])
 	hs.execute(
-		'cp -f "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks.bkp"'
+		'cp -f "$HOME/Library/Application Support/Vivaldi/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks.bkp"'
 	)
 	hs.loadSpoon("EmmyLua") -- so it runs not as often
 	trackpadBatteryCheck()
