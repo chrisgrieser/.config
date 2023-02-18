@@ -169,7 +169,7 @@ ObsiAlphaWatcher = Pw(FileHub, function(files)
 				open -a "Obsidian"]])
 			-- close the created tab
 			Applescript([[
-				tell application "Brave Browser"
+				tell application "Vivaldi"
 					set window_list to every window
 					repeat with the_window in window_list
 						set tab_list to every tab in the_window

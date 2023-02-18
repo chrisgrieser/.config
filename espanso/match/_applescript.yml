@@ -27,7 +27,7 @@ matches:
       end tell
     label: 🍏 Click Submenu Item of Menubar
   - replace: |
-      tell application "Brave Browser" to close active tab of front window
+      tell application "Vivaldi" to close active tab of front window
     label: 🍏 Close Browser Tab
   - replace: set the clipboard to POSIX file ($|$)
     label: 🍏 Copy Image to Clipboard
@@ -39,7 +39,7 @@ matches:
   - replace: display notification "subtitle" with title "title$|$"
     label: 🍏 Display Notification
   - replace: |
-      tell application "Brave Browser"
+      tell application "Vivaldi"
       	set currentTabUrl to URL of active tab of front window
       end tell
     label: 🍏 Get Current Browser Tab
@@ -78,7 +78,7 @@ matches:
       end repeat
     label: 🍏 Wait till app is running
   - replace: |
-      tell application "Brave Browser"
+      tell application "Vivaldi"
       	repeat until (loading of active tab of front window is false)
       	end repeat
       end tell

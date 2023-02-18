@@ -64,7 +64,7 @@ KHidesCursor = Hotkey({}, "k", function() hideCurAndPassThrough("k") end):disabl
 
 Jk_watcher = Aw.new(function(appName, eventType)
 	if eventType == Aw.activated then
-		if appName == "Brave Browser" then
+		if appName == "Vivaldi" then
 			JHidesCursor:enable()
 			KHidesCursor:enable()
 		else

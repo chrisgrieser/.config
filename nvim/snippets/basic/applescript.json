@@ -23,7 +23,7 @@
 	},
 	"browser URL": {
 		"prefix": "browser URL",
-		"body": "tell application \"Brave Browser\" to set currentTabUrl to URL of active tab of front window"
+		"body": "tell application \"Vivaldi\" to set currentTabUrl to URL of active tab of front window"
 	},
 	"notify": {
 		"prefix": "notify",
@@ -39,7 +39,7 @@
 	},
 	"browser tab title": {
 		"prefix": "browser tab title",
-		"body": "tell application \"Brave Browser\" to set currentTabName to title of active tab of front window"
+		"body": "tell application \"Vivaldi\" to set currentTabName to title of active tab of front window"
 	},
 	"menu item": {
 		"prefix": "menu item",

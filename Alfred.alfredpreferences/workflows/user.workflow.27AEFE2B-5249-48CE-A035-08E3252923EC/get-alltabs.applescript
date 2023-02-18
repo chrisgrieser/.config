@@ -3,7 +3,7 @@
 # https://gist.github.com/NoahCardoza/fa060f434a7eda2fc040619a25a8f136
 
 set output to ""
-tell application "Brave Browser"
+tell application "Vivaldi"
 	set tab_list to (every tab in front window)
 	repeat with the_tab in tab_list
 		set the_url to the URL of the_tab

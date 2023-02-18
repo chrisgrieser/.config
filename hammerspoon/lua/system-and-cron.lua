@@ -234,7 +234,7 @@ local function sleepMovieApps()
 	-- no need to quit IINA, since it autoquits on finishing playback
 	-- no need to quit Netflix since it autostops
 	Applescript([[
-		tell application "Brave Browser"
+		tell application "Vivaldi"
 			if ((count of window) is not 0)
 				if ((count of tab of front window) is not 0)
 					set currentTabUrl to URL of active tab of front window

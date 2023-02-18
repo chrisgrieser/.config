@@ -87,7 +87,7 @@ function WorkLayout()
 	OpenApp {
 		"Discord",
 		"Mimestream",
-		"Brave Browser",
+		"Vivaldi",
 		"Twitter",
 		"Drafts",
 	}
@@ -104,7 +104,7 @@ function WorkLayout()
 	dockSwitcher("work")
 
 	local layout = createLayout(PseudoMaximized, IMacDisplay, {
-		"Brave Browser",
+		"Vivaldi",
 		"Highlights",
 		"Neovide",
 		"neovide",
@@ -168,7 +168,7 @@ local function motherHomeModeLayout()
 		"Discord",
 		"Obsidian",
 		"Mimestream",
-		"Brave Browser",
+		"Vivaldi",
 		"Twitter",
 		"Drafts",
 	}
@@ -186,7 +186,7 @@ local function motherHomeModeLayout()
 	dockSwitcher("home")
 
 	local layout = createLayout(PseudoMaximized, IMacDisplay, {
-		"Brave Browser",
+		"Vivaldi",
 		"Warp",
 		"Slack",
 		"Discord",
@@ -228,7 +228,7 @@ Hotkey({ "shift" }, "f6", setLayout) -- for Apple keyboard
 -- Open at Mouse Screen
 Wf_appsOnMouseScreen = Wf.new({
 	"Drafts",
-	"Brave Browser",
+	"Vivaldi",
 	"Mimestream",
 	"Obsidian",
 	"Alacritty",

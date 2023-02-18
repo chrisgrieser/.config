@@ -11,7 +11,7 @@ delay 0.2
 set tabSelection to the clipboard
 
 
-tell application "Brave Browser"
+tell application "Vivaldi"
 	set tabUrl to URL of active tab of front window
 	set tabTitle to title of active tab of front window
 end tell
