@@ -56,7 +56,7 @@ case $APP_TO_UPDATE in
 	touch "Vivaldi.app"
 	;;
 "Neovide")
-	cp -f "$CUSTOM_ICON_FOLDER/Neovim-light.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
+	cp -f "$CUSTOM_ICON_FOLDER/lego.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
 	touch "Neovide.app"
 	;;
 

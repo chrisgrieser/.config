@@ -11,9 +11,10 @@
 	padding-left: 12px;
 }
 
+
 #tabs-tabbar-container,
 .UrlBar-AddressField {
-	transition: 0.3s ease-in-out;
+	transition: 0.15s ease-in-out;
 }
 
 #tabs-tabbar-container {
@@ -25,12 +26,12 @@
 }
 
 /* extends the width of the url bar addressfield while it is focused/hovered */
-#header:has(:not(.tab-strip span:nth-child(5))) + #main .UrlBar-AddressField, /* less than 5 tabs */
+#header:not(:has(.tab-strip span:nth-child(5))) + #main .UrlBar-AddressField, /* less than 5 tabs */
 .UrlBar-AddressField:is(:focus-within, :hover) {
 	width: var(--adressbar-big-width);
 }
 
-#tabs-tabbar-container:has(:not(.tab-strip span:nth-child(5))), /* less than 5 tabs */
+#tabs-tabbar-container:not(:has(.tab-strip span:nth-child(5))), /* less than 5 tabs */
 #header:has(+ #main .UrlBar-AddressField:is(:focus-within, :hover)) #tabs-tabbar-container {
 	margin-left: var(--adressbar-big-width);
 }
