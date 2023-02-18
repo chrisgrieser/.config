@@ -25,11 +25,11 @@
 }
 
 /* extends the width of the url bar addressfield while it is focused */
-.UrlBar-AddressField:focus-within {
+.UrlBar-AddressField:is(:focus-within, :hover) {
 	width: var(--adressbar-focused-width);
 }
 
-#header:has(+ #main .UrlBar-AddressField:focus-within) #tabs-tabbar-container {
+#header:has(+ #main .UrlBar-AddressField:is(:focus-within, :hover)) #tabs-tabbar-container {
 	margin-left: var(--adressbar-focused-width);
 }
 
@@ -71,23 +71,3 @@
 	right: 0 !important;
 }
 
-/* ───────────────────────────────────────────────── */
-/* hide space to the right */
-/* #header .top .tab-strip { */
-/* 	position: relative; */
-/* 	display: flex; */
-/* } */
-
-/* #header .top .tab-strip > span { */
-/* 	display: inline-block; */
-/* 	flex: 1 1 0; */
-/* } */
-
-/* #header .top .tab-strip > span > .tab-position { */
-/* 	position: static; */
-/* 	display: inline; */
-/* } */
-
-/* #header .top .tab-strip > span > .tab-position > .tab .tab-header { */
-/* 	width: var(--Width); */
-/* } */

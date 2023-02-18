@@ -31,3 +31,5 @@ rg "$FROM_BROWSER_PATH" --files-with-matches \
 	| grep -v "/user.workflow.3BF713ED-02D0-4127-8126-26E36BF15CFC/" \
 	| grep -v "$0" \
 	| xargs -I {} sed -i '' "s|$FROM_BROWSER_PATH|$TO_BROWSER_PATH|g" '{}' 
+
+# TODO afterwards, restart Hammerspoon
