@@ -18,4 +18,4 @@ rg "$FROM_BROWSER" --files-with-matches \
 	| grep -v "BetterTouchTool" \
 	| grep -v "app-specific-behavior.lua" \
 	| grep -v "$0" \
-	| sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" \
+	| xargs -I {} sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" '{}' 
