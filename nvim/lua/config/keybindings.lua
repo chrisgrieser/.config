@@ -205,7 +205,7 @@ keymap("n", "<leader>ld", qlog.debuglog, { desc = " debugger" })
 -- stylua: ignore
 keymap( { "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc = "sort & highlight duplicates" })
 
--- URL Opening
+-- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()
 	require("various-textobjs").url()
 	local foundURL = fn.mode():find("v")
