@@ -17,5 +17,6 @@ rg "$FROM_BROWSER" --files-with-matches \
 	| grep -v "info.plist" \
 	| grep -v "BetterTouchTool" \
 	| grep -v "app-specific-behavior.lua" \
+	| grep -v "/user.workflow.3BF713ED-02D0-4127-8126-26E36BF15CFC/" \
 	| grep -v "$0" \
-	| xargs -I {} sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" '{}' 
+	# | xargs -I {} sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" '{}' 

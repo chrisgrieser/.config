@@ -430,7 +430,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-youtube-url_[Browser].applescript</string>
+				<string>../get-url-from-browser.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
