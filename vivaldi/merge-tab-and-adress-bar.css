@@ -32,7 +32,7 @@
 }
 
 #tabs-tabbar-container:not(:has(.tab-strip span:nth-child(5))), /* less than 5 tabs */
-#header:has(+ #main .UrlBar-AddressField:focus-within):not(:has(#urlFieldInput[value=""])) #tabs-tabbar-container {
+#header:has(+ #main .UrlBar-AddressField:focus-within):not(:has(+ #main #urlFieldInput[value=""])) #tabs-tabbar-container {
 	margin-left: var(--adressbar-big-width);
 }
 

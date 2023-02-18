@@ -14,6 +14,7 @@ TO_BROWSER_PATH="/Vivaldi/" # ~/Library/Application Support/Vivaldi/Default
 #───────────────────────────────────────────────────────────────────────────────
 cd "$DOTFILE_FOLDER" || return 1
 
+sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" "/karabiner/assets/complex_modifications/2 ctrl-leader.yaml"
 rg "$FROM_BROWSER" --files-with-matches \
 	| grep -v "/complex_modifications/" \
 	| grep -v "/shimmering-obsidian/" \
@@ -32,4 +33,4 @@ rg "$FROM_BROWSER_PATH" --files-with-matches \
 	| grep -v "$0" \
 	| xargs -I {} sed -i '' "s|$FROM_BROWSER_PATH|$TO_BROWSER_PATH|g" '{}' 
 
-# TODO afterwards, restart Hammerspoon
+# TODO afterwards, restart Hammerspoon and rebuild karabiner
