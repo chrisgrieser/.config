@@ -44,6 +44,10 @@
 		"prefix": "directory of script",
 		"body": "cd \"$(dirname \"\\$0\")"
 	},
+	"jxa (run script)": {
+		"prefix": "jxa (run script)",
+		"body": "osascript -l JavaScript \"${1:file}\""
+	},
 	"multiline string": {
 		"prefix": "multiline string",
 		"body": [
@@ -143,6 +147,15 @@
 		"prefix": "while",
 		"body": "while [[ ${1:condition} ]]; do\n\t${0}\ndone\n",
 		"description": "A while loop by condition."
+	},
+	"restart app": {
+		"prefix": "restart app",
+		"body": [
+			"killall \"${1:app_name}\"",
+			"while pgrep -q \"${1:app_name}\"; do sleep 0.1; done",
+			"open -a \"${1:app_name}\""
+		],
+		"description": "safely restart app, avoiding race condition"
 	},
 	"function": {
 		"prefix": "function",

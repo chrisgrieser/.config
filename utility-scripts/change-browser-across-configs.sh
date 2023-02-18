@@ -33,4 +33,12 @@ rg "$FROM_BROWSER_PATH" --files-with-matches |
 	grep -v "$0" |
 	xargs -I {} sed -i '' "s|$FROM_BROWSER_PATH|$TO_BROWSER_PATH|g" '{}'
 
-# TODO afterwards, restart Hammerspoon and rebuild karabiner
+
+# reload karabiner
+karabinerMsg=$(osascript -l JavaScript "$DOTFILE_FOLDER/karabiner/build-karabiner-config.js")
+echo "$karabinerMsg"
+
+# restart hammerspoon
+killall "Hammerspoon"
+while pgrep -q "Hammerspoon"; do sleep 0.1; done
+open -a "Hammerspoon"
