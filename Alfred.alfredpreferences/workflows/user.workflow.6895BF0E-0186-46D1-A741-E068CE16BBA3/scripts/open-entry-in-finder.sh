@@ -11,7 +11,4 @@ if [[ -d "$folder" ]]; then
 	open "$folder"
 elif [[ -f "$gpg" ]]; then
 	open -R "$gpg"
-else
-	echo "error: file/folder not found"
-	exit 1
 fi

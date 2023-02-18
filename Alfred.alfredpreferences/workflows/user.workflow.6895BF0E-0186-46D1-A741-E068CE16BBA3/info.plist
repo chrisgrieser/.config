@@ -183,18 +183,7 @@
 			</dict>
 		</array>
 		<key>DD83841D-8A6C-41C6-96C4-440F0D766047</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>EAA031C0-0941-40BC-A061-30783EABD6C1</key>
 		<array>
 			<dict>
@@ -742,6 +731,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>A6CFA085-84C6-412D-9381-4CCA67DBF464</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>note</key>
 			<string>auto-push</string>
 			<key>xpos</key>

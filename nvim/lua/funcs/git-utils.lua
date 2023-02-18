@@ -179,11 +179,11 @@ function M.gitLink()
 		location = "#L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
 	end
 
-	local gitRemote = "https://github.com/" .. repo .. "/blob/" .. branch .. pathInRepo 
+	local gitRemote = "https://github.com/" .. repo .. "/blob/" .. branch .. pathInRepo
 
-	-- workarond since shimmering focus is symlinked
+	-- workaround since shimmering focus theme is symlinked
 	if expand("%:p"):find("/Shimmering Focus/theme.css") then
-		gitRemote = 
+		gitRemote = "https://github.com/chrisgrieser/shimmering-focus/blob/main/source.css"
 	end
 
 	local resultUrl = gitRemote .. location

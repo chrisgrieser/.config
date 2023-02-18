@@ -8,8 +8,13 @@ screencapture -i "$temp_image"
 
 scannedText=$(tesseract "$temp_image" stdout -l "$ocr_languages" 2>&1 |
 	grep -Ev "Warning: Invalid resolution 0 dpi." |
-	grep -Ev "Estimating resolution as")
+	grep -Ev "Estimating resolution as" |
+	grep -Ev "Error, cannot read input file")
 
-osascript -e "tell application \"Drafts\" to make new draft with properties {content: \"$scannedText\", tags: {\"OCR\"}}" &>/dev/null
+if [[ -z "$scannedText" ]] ; then
+	echo "❌ Error. Text not scanned."
+else	
+	osascript -e "tell application \"Drafts\" to make new draft with properties {content: \"$scannedText\", tags: {\"OCR\"}}" &>/dev/null
+	echo "$scannedText" 
+fi
 
-echo -n "$scannedText" # for notification
