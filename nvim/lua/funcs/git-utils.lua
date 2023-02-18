@@ -129,7 +129,7 @@ function M.addCommitPush(prefillMsg)
 			commitMsg = "chore"
 		end
 			-- stylua: ignore
-			local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
+		local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
 		local firstWord = commitMsg:match("^%w+")
 		if not vim.tbl_contains(cc, firstWord) then
 			vim.notify("Not using a Conventional Commits keyword.", logWarn)
@@ -160,6 +160,7 @@ function M.gitLink()
 		vim.notify("Not a git repository.", logWarn)
 		return
 	end
+
 	local filepath = expand("%:p")
 	local gitroot = fn.system([[git --no-optional-locks rev-parse --show-toplevel]])
 	local pathInRepo = filepath:sub(#gitroot)
@@ -178,10 +179,16 @@ function M.gitLink()
 		location = "#L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
 	end
 
-	local gitRemote = "https://github.com/" .. repo .. "/blob/" .. branch .. pathInRepo .. location
+	local gitRemote = "https://github.com/" .. repo .. "/blob/" .. branch .. pathInRepo 
 
-	os.execute("open '" .. gitRemote .. "'")
-	fn.setreg("+", gitRemote)
+	-- workarond since shimmering focus is symlinked
+	if expand("%:p"):find("/Shimmering Focus/theme.css") then
+		gitRemote = 
+	end
+
+	local resultUrl = gitRemote .. location
+	os.execute("open '" .. resultUrl .. "'")
+	fn.setreg("+", resultUrl)
 end
 
 --------------------------------------------------------------------------------

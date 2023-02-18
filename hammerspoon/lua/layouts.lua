@@ -97,8 +97,8 @@ function WorkLayout()
 		"CrunchyRoll",
 		"IINA",
 		"Twitch",
+		"Finder",
 	}
-	QuitFinderIfNoWindow()
 	require("lua.private").closer()
 
 	dockSwitcher("work")
@@ -178,9 +178,9 @@ local function motherHomeModeLayout()
 		"CrunchyRoll",
 		"IINA",
 		"Twitch",
+		"Finder",
 	}
 	require("lua.private").closer()
-	QuitFinderIfNoWindow()
 
 	alacrittyFontSize(25)
 	dockSwitcher("home")
