@@ -1,6 +1,6 @@
 local maps = {
 	["<Esc>"] = "close",
-	-- ["<CR>"] = "select_default",
+	["<CR>"] = "select_default",
 	["<D-w>"] = "delete_buffer", -- only buffer picker
 	["<S-Down>"] = "preview_scrolling_down",
 	["<S-Up>"] = "preview_scrolling_up",
@@ -150,7 +150,7 @@ local options = {
 			prompt_title = false,
 			results_title = false,
 			theme = "cursor",
-			layout_config = { cursor = { width = 0.4 } },
+			layout_config = { cursor = { width = 0.6 } },
 		},
 		quickfix = {
 			trim_text = true,

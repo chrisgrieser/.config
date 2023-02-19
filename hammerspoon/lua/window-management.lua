@@ -5,6 +5,8 @@ IMacDisplay = hs.screen("Built%-in")
 Maximized = hs.layout.maximized
 RightHalf = hs.layout.right50
 LeftHalf = hs.layout.left50
+TopHalf = { x = 0, y = 0, w = 1, h = 0.5 }
+BottomHalf = { x = 0, y = 0.5, w = 1, h = 0.5 }
 PseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
 Centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
@@ -274,4 +276,6 @@ Hotkey({}, "home", homeAction)
 Hotkey({}, "end", endAction)
 Hotkey(Hyper, "right", function() MoveResize(hs.window.focusedWindow(), RightHalf) end)
 Hotkey(Hyper, "left", function() MoveResize(hs.window.focusedWindow(), LeftHalf) end)
+Hotkey(Hyper, "down", function() MoveResize(hs.window.focusedWindow(), BottomHalf) end)
+Hotkey(Hyper, "up", function() MoveResize(hs.window.focusedWindow(), TopHalf) end)
 Hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner

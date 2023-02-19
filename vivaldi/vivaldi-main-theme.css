@@ -3,11 +3,12 @@
 /* stylelint-disable selector-max-id, custom-property-pattern  */
 /* ────────────────────────────────────────────────────────────────────────── */
 :root {
-	--adressbar-width-1-tab: 100vw; /* focused tab or one tab */
+	--adressbar-width-focussed: 99vw;
+	--adressbar-width-1-tab: 80vw;
 	--adressbar-width-2-tab: 70vw;
 	--adressbar-width-3-tab: 60vw;
-	--adressbar-width-4-tab: 55vw;
-	--adressbar-width-5-tab: 50vw;
+	--adressbar-width-4-tab: 50vw;
+	--adressbar-width-5-tab: 45vw;
 	--adressbar-width-6-tab: 40vw;
 	--adressbar-width-7-tab: 35vw;
 	--adressbar-width-8-tab: 30vw;
@@ -24,67 +25,67 @@
 }
 
 /* less than x tabs */
-#tabs-tabbar-container:has(.tab-strip span:nth-child(2)) {
+#tabs-tabbar-container:has(.tab-strip > span:nth-child(2)) {
 	margin-left: var(--adressbar-width-2-tab);
 }
 
-#header:has(.tab-strip span:nth-child(2)) + #main .UrlBar-AddressField {
+#header:has(.tab-strip > span:nth-child(2)) + #main .UrlBar-AddressField {
 	width: var(--adressbar-width-2-tab);
 }
 
-#tabs-tabbar-container:has(.tab-strip span:nth-child(3)) {
+#tabs-tabbar-container:has(.tab-strip > span:nth-child(3)) {
 	margin-left: var(--adressbar-width-3-tab);
 }
 
-#header:has(.tab-strip span:nth-child(3)) + #main .UrlBar-AddressField {
+#header:has(.tab-strip > span:nth-child(3)) + #main .UrlBar-AddressField {
 	width: var(--adressbar-width-3-tab);
 }
 
-#tabs-tabbar-container:has(.tab-strip span:nth-child(4)) {
+#tabs-tabbar-container:has(.tab-strip > span:nth-child(4)) {
 	margin-left: var(--adressbar-width-4-tab);
 }
 
-#header:has(.tab-strip span:nth-child(4)) + #main .UrlBar-AddressField {
+#header:has(.tab-strip > span:nth-child(4)) + #main .UrlBar-AddressField {
 	width: var(--adressbar-width-4-tab);
 }
 
-#tabs-tabbar-container:has(.tab-strip span:nth-child(5)) {
+#tabs-tabbar-container:has(.tab-strip > span:nth-child(5)) {
 	margin-left: var(--adressbar-width-5-tab);
 }
 
-#header:has(.tab-strip span:nth-child(5)) + #main .UrlBar-AddressField {
+#header:has(.tab-strip > span:nth-child(5)) + #main .UrlBar-AddressField {
 	width: var(--adressbar-width-5-tab);
 }
 
-#tabs-tabbar-container:has(.tab-strip span:nth-child(6)) {
+#tabs-tabbar-container:has(.tab-strip > span:nth-child(6)) {
 	margin-left: var(--adressbar-width-6-tab);
 }
 
-#header:has(.tab-strip span:nth-child(6)) + #main .UrlBar-AddressField {
+#header:has(.tab-strip > span:nth-child(6)) + #main .UrlBar-AddressField {
 	width: var(--adressbar-width-6-tab);
 }
 
-#tabs-tabbar-container:has(.tab-strip span:nth-child(7)) {
+#tabs-tabbar-container:has(.tab-strip > span:nth-child(7)) {
 	margin-left: var(--adressbar-width-7-tab);
 }
 
-#header:has(.tab-strip span:nth-child(7)) + #main .UrlBar-AddressField {
+#header:has(.tab-strip > span:nth-child(7)) + #main .UrlBar-AddressField {
 	width: var(--adressbar-width-7-tab);
 }
 
-#tabs-tabbar-container:has(.tab-strip span:nth-child(8)) {
+#tabs-tabbar-container:has(.tab-strip > span:nth-child(8)) {
 	margin-left: var(--adressbar-width-8-tab);
 }
 
-#header:has(.tab-strip span:nth-child(8)) + #main .UrlBar-AddressField {
+#header:has(.tab-strip > span:nth-child(8)) + #main .UrlBar-AddressField {
 	width: var(--adressbar-width-8-tab);
 }
 
-#tabs-tabbar-container:has(.tab-strip span:nth-child(9)) {
+#tabs-tabbar-container:has(.tab-strip > span:nth-child(9)) {
 	margin-left: var(--adressbar-width-9-tab);
 }
 
-#header:has(.tab-strip span:nth-child(9)) + #main .UrlBar-AddressField {
+#header:has(.tab-strip > span:nth-child(9)) + #main .UrlBar-AddressField {
 	width: var(--adressbar-width-9-tab);
 }
 
@@ -92,7 +93,7 @@
 
 /* extends the width of the url bar addressfield while it is focused */
 #browser #main .UrlBar-AddressField:focus-within:not(:has(#urlFieldInput[value=""])) {
-	width: var(--adressbar-width-1-tab);
+	width: var(--adressbar-width-focussed);
 }
 
 #header:has(+ #main .UrlBar-AddressField:focus-within):not(:has(+ #main #urlFieldInput[value=""])) #tabs-tabbar-container {

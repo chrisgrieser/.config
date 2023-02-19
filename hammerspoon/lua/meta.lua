@@ -31,7 +31,7 @@ function SystemStart()
 		QuitFinderIfNoWindow()
 		Notify("Hammerspoon started.")
 		SyncAllGitRepos()
-		Notify("Sync finished.")
+		Notify("✅ Sync finished.")
 	end
 end
 

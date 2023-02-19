@@ -16,6 +16,7 @@ end
 -- hide windows of other apps, except twitter
 ---@param win hs.window the window of the app not to hide
 local function hideOthers(win)
+	if not win or not (win:application()) then return end
 	local wins = win:otherWindowsSameScreen()
 	local winName = win:application():name()
 	for _, w in pairs(wins) do
@@ -47,7 +48,7 @@ end):start()
 
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
 AutoTileAppWatcher = Aw.new(function(appName, eventType, appObj)
-	local autoTileApps = { "Finder", "Brave Browser" }
+	local autoTileApps = { "Finder", "Vivaldi" }
 	if eventType == Aw.deactivated and TableContains(autoTileApps, appName) then
 		if #appObj:allWindows() > 1 then appObj:hide() end
 	end
@@ -106,11 +107,18 @@ end):start()
 -- BROWSER (Vivaldi)
 Wf_browser = Wf.new("Vivaldi")
 	:setOverrideFilter({
-		rejectTitles = { " %(Private%)$", "^Picture in Picture$", "^Task Manager$", "^evTools" },
+		rejectTitles = { " %(Private%)$", "^Picture in Picture$", "^Task Manager$" },
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(Wf.windowCreated, function() AutoTile(Wf_browser) end)
+	:subscribe(Wf.windowCreated, function(newWin)
+		-- HACK delay instead of rejectTitles necessary, since in the moment of window
+		-- creation, devtools do not seem to have a window
+		RunWithDelays(0.1, function()
+			if newWin:title():find("DevTools") then return end 
+			AutoTile(Wf_browser)
+		end)
+	end)
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_browser) end)
 	:subscribe(Wf.windowFocused, BringAllToFront)
 
