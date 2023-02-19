@@ -83,20 +83,12 @@ opt.cursorline = true
 opt.scrolloff = 11
 opt.sidescrolloff = 13
 
-augroup("sidescroll", {})
-autocmd("FileType", {
-	group = "sidescroll",
-	pattern = { "ssr" },
-	callback = function() wo.sidescrolloff = 0 end,
-})
-
 opt.textwidth = 80
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 opt.signcolumn = "yes:1" -- = gutter
-local gmColumn = math.floor(fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
-opt.colorcolumn = { "+1", gmColumn } -- relative to textwidth
+opt.colorcolumn = "+1" -- relative to textwidth
 
 -- status bar & cmdline
 opt.history = 400 -- reduce noise for command history search

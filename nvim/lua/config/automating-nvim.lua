@@ -29,12 +29,12 @@ local function executeExtCommand()
 
 	if w then
 		w:stop() -- prevent multiple executions
-		startWatching()
+		StartWatching()
 	end
 end
 
-function startWatching()
+function StartWatching()
 	if w then w:start(watchedFile, {}, vim.schedule_wrap(executeExtCommand)) end
 end
 
-startWatching()
+StartWatching()

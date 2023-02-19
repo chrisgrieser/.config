@@ -132,7 +132,6 @@
 	min-height: unset;
 }
 
-
 /* ────────────────────────────────────────────────────────────────────────── */
 /* TAB LOOK */
 #tabs-container .tab {
@@ -145,7 +144,6 @@
 
 #tabs-container .tab-header {
 	padding-top: 4px;
-	padding-left: 4px;
 }
 
 #tabs-container .tab-header .title {
