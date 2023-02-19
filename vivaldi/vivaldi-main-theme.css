@@ -3,26 +3,35 @@
 /* stylelint-disable selector-max-id, custom-property-pattern  */
 /* ────────────────────────────────────────────────────────────────────────── */
 :root {
-	--adressbar-width: 600px; /* focused tab or 1-2 tabs */
-	--adressbar-width-3-tab: 550px;
-	--adressbar-width-4-tab: 500px;
-	--adressbar-width-5-tab: 450px;
-	--adressbar-width-6-tab: 400px;
-	--adressbar-width-7-tab: 350px;
-	--adressbar-width-8-tab: 300px;
-	--adressbar-width-9-tab: 250px;
+	--adressbar-width-1-tab: 100vw; /* focused tab or one tab */
+	--adressbar-width-2-tab: 70vw;
+	--adressbar-width-3-tab: 60vw;
+	--adressbar-width-4-tab: 55vw;
+	--adressbar-width-5-tab: 50vw;
+	--adressbar-width-6-tab: 40vw;
+	--adressbar-width-7-tab: 35vw;
+	--adressbar-width-8-tab: 30vw;
+	--adressbar-width-9-tab: 25vw;
 	--animation: 60ms ease-in;
 }
 
 #tabs-tabbar-container {
-	margin-left: var(--adressbar-width);
+	margin-left: var(--adressbar-width-1-tab);
 }
 
 #main .UrlBar-AddressField {
-	width: var(--adressbar-width);
+	width: var(--adressbar-width-1-tab);
 }
 
 /* less than x tabs */
+#tabs-tabbar-container:has(.tab-strip span:nth-child(2)) {
+	margin-left: var(--adressbar-width-2-tab);
+}
+
+#header:has(.tab-strip span:nth-child(2)) + #main .UrlBar-AddressField {
+	width: var(--adressbar-width-2-tab);
+}
+
 #tabs-tabbar-container:has(.tab-strip span:nth-child(3)) {
 	margin-left: var(--adressbar-width-3-tab);
 }
@@ -83,7 +92,7 @@
 
 /* extends the width of the url bar addressfield while it is focused */
 #browser #main .UrlBar-AddressField:focus-within:not(:has(#urlFieldInput[value=""])) {
-	width: var(--adressbar-width);
+	width: var(--adressbar-width-1-tab);
 }
 
 #header:has(+ #main .UrlBar-AddressField:focus-within):not(:has(+ #main #urlFieldInput[value=""])) #tabs-tabbar-container {
@@ -129,7 +138,7 @@
 }
 
 #tabs-container .tab-strip div {
-	height: 25px;
+	height: 26px;
 }
 
 #tabs-container .tab-header {

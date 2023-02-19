@@ -7,18 +7,27 @@ Home = Getenv("HOME")
 
 --------------------------------------------------------------------------------
 
+---@param f string filepath
+---@param folder string folderpath
+---@return boolean
+local function isInSubdirectory(f, folder) -- (instead of directly in the folder)
+	local _, fileSlashes = f:gsub("/", "")
+	local _, folderSlashes = folder:gsub("/", "")
+	return fileSlashes > folderSlashes
+end
+
+--------------------------------------------------------------------------------
+
 -- Bookmarks synced to Chrome Bookmarks (needed for Alfred)
 local browserFolder = Home .. "/Library/Application Support/Vivaldi/"
-BookmarkWatcher = Pw(
-	browserFolder .. "Default/Bookmarks",
-	function()
-		hs.execute("BROWSER_FOLDER='" .. browserFolder .. "' ; " .. [[
-		mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
-		cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
-		cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
-	]])
-	end
-):start()
+BookmarkWatcher = Pw(browserFolder .. "Default/Bookmarks", function()
+	hs.execute("BROWSER_FOLDER='" .. browserFolder .. "' ; " .. [[
+			mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
+			cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
+			cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
+		]])
+	print("Bookmarks synced to Chrome Bookmarks")
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -60,8 +69,9 @@ SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	-- Stats Update file can directly be trashed
 	for _, filePath in pairs(files) do
 		if filePath:find("Stats%.dmg$") then
-			os.rename(filePath, os.getenv("HOME").."/.Trash/Stats.dmg")
-			return	
+			os.execute("sleep 1")
+			os.rename(filePath, os.getenv("HOME") .. "/.Trash/Stats.dmg")
+			return
 		end
 	end
 	-- otherwise move to filehub
@@ -83,69 +93,61 @@ end):start()
 -- Redirects FROM File Hub
 local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
 FileHubWatcher = Pw(FileHub, function(paths)
-	for _, file in pairs(paths) do
-		local function isInSubdirectory(f, folder) -- (instead of directly in the folder)
-			local _, fileSlashes = f:gsub("/", "")
-			local _, folderSlashes = folder:gsub("/", "")
-			return fileSlashes > folderSlashes
-		end
+	for _, filep in pairs(paths) do
+		if isInSubdirectory(filep, FileHub) then return end
+		local fileName = filep:gsub(".*/", "")
+		local extension = fileName:gsub(".*%.", "")
 
-		if isInSubdirectory(file, FileHub) then return end
-		local fileName = file:gsub(".*/", "")
+		-- delete alfredworkflows and ics (iCal)
+		if extension == "alfredworkflow" or extension == "ics" then
+			os.execute("open '" .. filep .. "'")
+			RunWithDelays(3, function() os.rename(filep, Home .. "/.Trash/" .. fileName) end)
 
-		-- delete alfredworkflows and ics
-		if fileName:sub(-15) == ".alfredworkflow" or fileName:sub(-4) == ".ics" then
-			RunWithDelays(3, function() os.rename(file, Home .. "/.Trash/" .. fileName) end)
+		-- open .zip or .dmg
+		elseif extension == "zip" or extension == "dmg" then
+			os.execute("open '" .. filep .. "'")
+
+		-- watch later .urls from the office
+		elseif extension == "url" and IsIMacAtHome() then
+			os.rename(filep, Home .. "/Downloaded/" .. fileName)
+			Notify("Watch Later URL moved to Video Downloads.")
 
 		-- ublacklist
 		elseif fileName == "ublacklist-settings.json" then
-			os.rename(file, browserSettings .. fileName)
+			os.rename(filep, browserSettings .. fileName)
 			Notify(fileName .. " filed away.")
 
 			-- vimium-c
 		elseif fileName:match("vimium_c") then
-			os.rename(file, browserSettings .. "vimium-c-settings.json")
+			os.rename(filep, browserSettings .. "vimium-c-settings.json")
 			Notify("Vimium-C backup filed away.")
 
 		-- adguard backup
 		elseif fileName:match(".*_adg_ext_settings_.*%.json") then
-			os.rename(file, browserSettings .. "adguard-settings.json")
+			os.rename(filep, browserSettings .. "adguard-settings.json")
 			Notify("AdGuard backup filed away.")
 
 		-- sponsor block
 		elseif fileName:match("SponsorBlockConfig_.*%.json") then
-			os.rename(file, browserSettings .. "SponsorBlockConfig.json")
+			os.rename(filep, browserSettings .. "SponsorBlockConfig.json")
 			Notify("SpondorBlockConfig filed away.")
 
 		-- tampermonkey backup
 		elseif fileName:match("tampermonkey%-backup-.+%.txt") then
-			os.rename(file, browserSettings .. "tampermonkey-settings.json")
+			os.rename(filep, browserSettings .. "tampermonkey-settings.json")
 			Notify("TamperMonkey backup filed away.")
-
-		-- watch later .urls from the office
-		elseif fileName:sub(-4) == ".url" and IsIMacAtHome() then
-			os.rename(file, Home .. "/Downloaded/" .. fileName)
-			Notify("Watch Later URL moved to Video Downloads.")
 
 		-- visualised keyboard layouts
 		elseif
 			fileName:match("base%-keyboard%-layout%.%w+")
 			or fileName:match("app%-switcher%-layout%.%w+")
 			or fileName:match("vimrc%-remapping%.%w+")
-			or fileName:match("marta%-key%-bindings%.%w+")
 			or fileName:match("hyper%-bindings%-layout%.%w+")
 			or fileName:match("single%-keystroke%-bindings%.%w+")
 		then
-			os.rename(file, DotfilesFolder .. "/visualized-keyboard-layout/" .. fileName)
+			os.rename(filep, DotfilesFolder .. "/visualized-keyboard-layout/" .. fileName)
 			Notify("Visualized Keyboard Layout filed away.")
 
-			-- Finder vim mode
-		elseif fileName:match("finder%-vim%-cheatsheet%.%w+") then
-			os.rename(
-				file,
-				Home .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/finder-vim-mode/" .. fileName
-			)
-			Notify("Finder Vim Layout filed away.")
 		end
 	end
 end):start()
