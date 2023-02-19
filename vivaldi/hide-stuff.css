@@ -1,7 +1,7 @@
 /* stylelint-disable selector-max-id */
 .button-toolbar.newtab, /* new tab button */
 .ContentBlocker-Control, /* content/shield button */
-.toolbar-insideinput .button-toolbar:nth-child(2), /* reader view button */
+.toolbar-insideinput .button-toolbar, /* reader view button, password icon */
 .UrlBar-AddressField .pageload, /* page load info */
 .UrlBar-AddressField .drop-down-menu { /* dropdown button */
 	display: none;

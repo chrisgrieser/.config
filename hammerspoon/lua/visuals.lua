@@ -6,7 +6,7 @@ require("lua.dark-mode")
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 -- this mostly round the corners in the bottom
 RoundedCorners = hs.loadSpoon("RoundedCorners")
-RoundedCorners.radius = 7
+RoundedCorners.radius = 9
 RoundedCorners:start()
 
 ---to stop wallpaper shining through
