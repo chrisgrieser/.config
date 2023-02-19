@@ -25,7 +25,7 @@ return {
 			}
 		end,
 	},
-	{ -- only coderunner with virtual text
+	{ -- only coderunner with virtual text. Alternative: iron.nvim
 		"metakirby5/codi.vim",
 		cmd = { "Codi", "CodiNew", "CodiExpand" },
 	},

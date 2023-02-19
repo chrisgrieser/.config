@@ -13,6 +13,50 @@ local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 --------------------------------------------------------------------------------
 
+-- HORIZONTAL DIVIDER
+function M.commentHr()
+	---@diagnostic disable: param-type-mismatch
+	local linechar = "─"
+	local wasOnBlank = fn.getline(".") == ""
+	local indent = fn.indent(".")
+	local textwidth = bo.textwidth
+	local comStr = bo.commentstring
+	local ft = bo.filetype
+	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
+
+	if comStr == "" then
+		vim.notify(" No commentstring for this filetype available.", logWarn)
+		return
+	end
+	if comStr:find("-") then linechar = "-" end
+
+	local linelength = textwidth - indent - comStrLength
+	local fullLine = string.rep(linechar, linelength)
+	local hr = comStr:gsub(" ?%%s ?", fullLine)
+	if ft == "markdown" then hr = "---" end
+
+	local linesToAppend = {"", hr, ""}
+	if ft == "yaml" then linesToAppend = {hr}
+	elseif wasOnBlank then linesToAppend = {hr, ""} end
+
+	fn.append(".", linesToAppend)
+
+	-- shorten if it was on blank line, since fn.indent() does not return indent
+	-- line would have if it has content
+	if wasOnBlank then
+		normal("j==")
+		local hrIndent = fn.indent(".")
+		-- cannot use simply :sub, since it assumes one-byte-size chars
+		local hrLine = fn.getline(".") ---@diagnostic disable-next-line: assign-type-mismatch, undefined-field
+		hrLine = hrLine:gsub(linechar, "", hrIndent)
+		fn.setline(".", hrLine)
+	else
+		normal("jj==")
+	end
+	---@diagnostic enable: param-type-mismatch
+end
+
+
 ---switches words under the cursor from `true` to `false` and similar cases
 function M.wordSwitch()
 	local iskeywBefore = opt.iskeyword:get()

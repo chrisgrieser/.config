@@ -1,7 +1,167 @@
 return {
 	-- EDITING-SUPPORT
-	{ "numToStr/Comment.nvim" }, -- comment operator
-	{ "kylechui/nvim-surround" },
+	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup {
+				ignore = "^$", -- ignore empty lines
+				opleader = {
+					line = "q", -- (mnemonic: [q]uiet text)
+					block = "<Nop>",
+				},
+				toggler = {
+					line = "qq",
+					block = "<Nop>",
+				},
+				extra = {
+					eol = "Q",
+					above = "<Nop>",
+					below = "<Nop>",
+				},
+			}
+		end,
+	},
+	{
+		"kylechui/nvim-surround",
+		event = "BufRead",
+		config = function()
+			-- HACK define these manually, since for some reason they do not work by default
+			vim.keymap.set("n", "yss", "ys_", { remap = true, desc = "surround line" })
+			vim.keymap.set("n", "yS", "ys$", { remap = true, desc = "surround till EoL" })
+
+			-- need to be consistent with the text obj mappings
+			local functionObjChar = "f"
+			local conditionObjChar = "o"
+			local callObjChar = "l"
+			local doubleSquareBracketObjChar = "R"
+			local regexObjChar = "/"
+
+			-- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L483
+			local sconfig = require("nvim-surround.config")
+			require("nvim-surround").setup {
+				aliases = { -- aliases should match the bindings for text objects
+					["b"] = ")",
+					["c"] = "}",
+					["r"] = "]",
+					["q"] = '"',
+					["z"] = "'",
+					["e"] = "`",
+				},
+				move_cursor = false,
+				keymaps = {
+					normal_cur = "<Nop>", -- mapped on my own (see above)
+					normal_line = "<Nop>", -- mapped on my own (see above)
+					normal_cur_line = "<Nop>",
+					visual = "s",
+				},
+				surrounds = {
+					[doubleSquareBracketObjChar] = {
+						find = "%[%[.-%]%]",
+						add = { "[[", "]]" },
+						delete = "(%[%[)().-(%]%])()",
+						change = {
+							target = "(%[%[)().-(%]%])()",
+						},
+					},
+					[regexObjChar] = {
+						find = "/.-/",
+						add = { "/", "/" },
+						delete = "(/)().-(/)()",
+						change = {
+							target = "(/)().-(/)()",
+						},
+					},
+					[functionObjChar] = {
+						find = function() return sconfig.get_selection { motion = "a" .. functionObjChar } end,
+						delete = function()
+							local ft = bo.filetype
+							local patt
+							if ft == "lua" then
+								patt = "^(.-function.-%b() ?)().-( ?end)()$"
+							elseif
+								ft == "javascript"
+								or ft == "typescript"
+								or ft == "bash"
+								or ft == "zsh"
+								or ft == "sh"
+							then
+								patt = "^(.-function.-%b() ?{)().*(})()$"
+							else
+								vim.notify("No function-surround defined for " .. ft, logWarn)
+								patt = "()()()()"
+							end
+							return sconfig.get_selections {
+								char = functionObjChar,
+								pattern = patt,
+							}
+						end,
+						add = function()
+							local ft = bo.filetype
+							if ft == "lua" then
+								return {
+									{ "function ()", "\t" },
+									{ "", "end" },
+								}
+							elseif
+								ft == "typescript"
+								or ft == "javascript"
+								or ft == "bash"
+								or ft == "zsh"
+								or ft == "sh"
+							then
+								return {
+									{ "function () {", "\t" },
+									{ "", "}" },
+								}
+							end
+							vim.notify("No function-surround defined for " .. ft, logWarn)
+							return { { "" }, { "" } }
+						end,
+					},
+					[callObjChar] = {
+						find = function() return sconfig.get_selection { motion = "a" .. callObjChar } end,
+						delete = "^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
+					},
+					[conditionObjChar] = {
+						find = function() return sconfig.get_selection { motion = "a" .. conditionObjChar } end,
+						delete = function()
+							local ft = bo.filetype
+							local patt
+							if ft == "lua" then
+								patt = "^(if .- then)().-( ?end)()$"
+							elseif ft == "javascript" or ft == "typescript" then
+								patt = "^(if %b() ?{?)().-( ?}?)()$"
+							else
+								vim.notify("No conditional-surround defined for " .. ft, logWarn)
+								patt = "()()()()"
+							end
+							return sconfig.get_selections {
+								char = conditionObjChar,
+								pattern = patt,
+							}
+						end,
+						add = function()
+							local ft = bo.filetype
+							if ft == "lua" then
+								return {
+									{ "if true then", "\t" },
+									{ "", "end" },
+								}
+							elseif ft == "typescript" or ft == "javascript" then
+								return {
+									{ "if (true) {", "\t" },
+									{ "", "}" },
+								}
+							end
+							vim.notify("No if-surround defined for " .. ft, logWarn)
+							return { { "" }, { "" } }
+						end,
+					},
+				},
+			}
+		end,
+	},
+
 	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
 
 	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
@@ -23,7 +183,7 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "undotree",
 				callback = function()
-					vim.keymap.set("n", "<D-w>", ":UndotreeToggle<CR>", { buffer = true })	
+					vim.keymap.set("n", "<D-w>", ":UndotreeToggle<CR>", { buffer = true })
 					vim.opt_local.listchars = "space: "
 					-- vim.opt_local.listchars = {space = " "}
 				end,
@@ -105,7 +265,6 @@ return {
 				},
 				-- selene: allow(high_cyclomatic_complexity)
 				transform = function(lines)
-
 					-- transformation for single line duplication
 					if #lines > 1 then return lines end
 
