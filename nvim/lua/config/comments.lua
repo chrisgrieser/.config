@@ -1,23 +1,4 @@
 require("config.utils")
---------------------------------------------------------------------------------
-
--- COMMENTS (mnemonic: [q]uiet text)
-require("Comment").setup {
-	ignore = "^$", -- ignore empty lines
-	toggler = {
-		line = "qq",
-		block = "<Nop>",
-	},
-	opleader = {
-		line = "q",
-		block = "<Nop>",
-	},
-	extra = {
-		above = "qO",
-		below = "qo",
-		eol = "Q",
-	},
-}
 
 --------------------------------------------------------------------------------
 -- STICKY COMMENT TEXT OBJECT ACTIONS
@@ -44,51 +25,6 @@ end, {desc = "change comment"})
 keymap("n", "qd", "Rkqqj", {desc = "Duplicate Line as Comment", remap = true})
 
 --------------------------------------------------------------------------------
--- HORIZONTAL DIVIDER
-
----@diagnostic disable: param-type-mismatch
-local function divider()
-	local linechar = "─"
-	local wasOnBlank = fn.getline(".") == ""
-	local indent = fn.indent(".")
-	local textwidth = bo.textwidth
-	local comStr = bo.commentstring
-	local ft = bo.filetype
-	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
-
-	if comStr == "" then
-		vim.notify(" No commentstring for this filetype available.", logWarn)
-		return
-	end
-	if comStr:find("-") then linechar = "-" end
-
-	local linelength = textwidth - indent - comStrLength
-	local fullLine = string.rep(linechar, linelength)
-	local hr = comStr:gsub(" ?%%s ?", fullLine)
-	if ft == "markdown" then hr = "---" end
-
-	local linesToAppend = {"", hr, ""}
-	if ft == "yaml" then linesToAppend = {hr}
-	elseif wasOnBlank then linesToAppend = {hr, ""} end
-
-	fn.append(".", linesToAppend)
-
-	-- shorten if it was on blank line, since fn.indent() does not return indent
-	-- line would have if it has content
-	if wasOnBlank then
-		normal("j==")
-		local hrIndent = fn.indent(".")
-		-- cannot use simply :sub, since it assumes one-byte-size chars
-		local hrLine = fn.getline(".") ---@diagnostic disable-next-line: assign-type-mismatch, undefined-field
-		hrLine = hrLine:gsub(linechar, "", hrIndent)
-		fn.setline(".", hrLine)
-	else
-		normal("jj==")
-	end
-end
----@diagnostic enable: param-type-mismatch
-
-keymap("n", "qw", divider)
 
 --------------------------------------------------------------------------------
 
