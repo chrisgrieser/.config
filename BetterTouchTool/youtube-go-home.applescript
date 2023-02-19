@@ -6,7 +6,7 @@
 -- go to home (assuming Vimium)
 tell application "System Events"
 	key code 53 -- leave fullscreen
-	delay 0.06
+	delay 0.12
 	keystroke "g"
 	keystroke "u"
 end tell
