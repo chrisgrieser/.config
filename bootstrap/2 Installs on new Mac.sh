@@ -9,8 +9,7 @@ sudo gem install anystyle-cli
 
 pip3 install pdfannots
 
-# MAS CLI sign in currently broken due to Apple API change
-# Sign in Bug: https://github.com/mas-cli/mas#-sign-in
+# BUG MAS sign in currently broken due https://github.com/mas-cli/mas#-sign-in
 # ➞ sign in manually to start download
 open '/System/Applications/App Store.app'
 
@@ -38,17 +37,19 @@ pip list --not-required
 # SETTINGS
 #-------------------------------------------------------------------------------
 
+# Vivaldi auto-open files, https://forum.vivaldi.net/topic/42881/how-to-make-vivaldi-open-downloaded-files-automatically
+killall "Vivaldi"
+while pgrep -q "Vivaldi"; do sleep 0.1; done
+sed -i '' \
+	's/"directory_upgrade":true/"directory_upgrade":true,"extensions_to_open":"torrent:zip:alfredworkflow:ics:dmg"/' \
+	"$HOME/Library/Application Support/Vivaldi/Default/Preferences"
+open -a "Vivaldi"
+
 # Espanso
 espanso service register
 
 # sketchybar
 brew services start felixkratz/formulae/sketchybar
-
-# change setting of archive utility
-open "/System/Library/CoreServices/Applications/Archive Utility.app"
-
-# Twitterific headless http://support.iconfactory.com/kb/twitterrific/advanced-settings-using-the-command-line-macos
-defaults write com.iconfactory.Twitterrific5 advancedShowDockIcon -bool NO
 
 # Hammerspoon
 defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
