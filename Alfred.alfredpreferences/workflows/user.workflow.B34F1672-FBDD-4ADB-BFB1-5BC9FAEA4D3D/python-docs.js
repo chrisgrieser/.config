@@ -11,20 +11,24 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const pythonVersion = "3.11"
-const docsURL = "https://api.github.com/repos/python/cpython/git/trees/main?recursive=1"
-const baseURL = `https://docs.python.org/${pythonVersion}`
+const pythonVersion = $.getenv("python_version");
+const docsURL = "https://api.github.com/repos/python/cpython/git/trees/main?recursive=1";
+const baseURL = `https://docs.python.org/${pythonVersion}`;
 
 const workArray = JSON.parse(app.doShellScript(`curl -s "${docsURL}"`))
-	.tree
-	.filter(file => file.path.match(/^Doc\/.*\.rst/))
-	.map(file => {
+	.tree.filter(file => /^Doc\/.*\.rst$/.test(file.path))
+	.map(entry => {
+		const subsite = entry.path.slice(4, -4);
+		const category = subsite.split("/")[0];
+		const displayTitle = subsite.split("/")[1];
+		const url = `${baseURL}/${subsite}.html`
 
 		return {
-			"title": file,
-			"match": alfredMatcher (file),
-			"arg": `${baseURL}/${file}`,
-			"uid": file,
+			title: displayTitle,
+			subtitle: category,
+			match: alfredMatcher(subsite),
+			arg: url,
+			uid: subsite,
 		};
 	});
 
