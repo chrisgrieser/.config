@@ -110,7 +110,7 @@ function Notify(...)
 	end
 	local out = table.concat(safe_args, " ")
 	hs.notify.show("Hammerspoon", "", out)
-	print("notify: " .. out) -- log in the console, too
+	print("Notify: " .. out) -- log in the console, too
 end
 
 ---Whether the current time is between startHour & endHour

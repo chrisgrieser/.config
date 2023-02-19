@@ -104,7 +104,7 @@ augroup("IndentedFileTypes", {})
 autocmd("FileType", {
 	group = "IndentedFileTypes",
 	callback = function()
-		local indentedFts = { "python", "yaml", "markdown" }
+		local indentedFts = { "python", "yaml", "markdown", "gitconfig" }
 		if vim.tbl_contains(indentedFts, bo.filetype) then
 			keymap( { "x", "o" }, "ai", function() require("various-textobjs").indentation(false, true) end, { buffer = true, desc = "indent textobj w/ start border" })
 		end

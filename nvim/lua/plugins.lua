@@ -49,7 +49,6 @@ return {
 	-- Misc
 	{
 		"chrisgrieser/nvim-genghis",
-		dev = true,
 		lazy = true,
 		dependencies = "stevearc/dressing.nvim",
 		init = function() vim.g.genghis_disable_commands = true end,
