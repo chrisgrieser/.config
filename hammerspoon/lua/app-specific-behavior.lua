@@ -106,7 +106,7 @@ end):start()
 -- BROWSER (Vivaldi)
 Wf_browser = Wf.new("Vivaldi")
 	:setOverrideFilter({
-		rejectTitles = { " %(Private%)$", "^Picture in Picture$", "^Task Manager$" },
+		rejectTitles = { " %(Private%)$", "^Picture in Picture$", "^Task Manager$", "^evTools" },
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
