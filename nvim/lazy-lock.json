@@ -52,6 +52,7 @@
   "nvim-lspconfig": { "branch": "master", "commit": "649137cbc53a044bffde36294ce3160cb18f32c7" },
   "nvim-navic": { "branch": "master", "commit": "7e9d2b2b601149fecdccd11b516acb721e571fe6" },
   "nvim-notify": { "branch": "master", "commit": "bdd647f61a05c9b8a57c83b78341a0690e9c29d7" },
+  "nvim-recorder": { "branch": "main", "commit": "89c1fb1139fac0a4b42faf54beaf363be104550b" },
   "nvim-surround": { "branch": "main", "commit": "9739e85547cb97d2f0497d2aedbab7d6f5c6654d" },
   "nvim-treesitter": { "branch": "master", "commit": "17d7cf6f4b4057a949e86df6fbc2e271ba788823" },
   "nvim-treesitter-refactor": { "branch": "master", "commit": "75f5895cc662d61eb919da8050b7a0124400d589" },
@@ -72,11 +73,11 @@
   "toggleterm.nvim": { "branch": "main", "commit": "557664818f6af78de6192f0ce8bc2e887bf4943a" },
   "tokyonight.nvim": { "branch": "main", "commit": "a0abe53df53616d13da327636cb0bcac3ea7f5af" },
   "treesj": { "branch": "main", "commit": "7d397fddf9eb15e5d8e8cb0539beb6f6312a768e" },
-  "tsnode-marker.nvim": { "branch": "main", "commit": "139f10460f2a2a145a700be4d004605589f9f414" },
   "undotree": { "branch": "master", "commit": "b6fdb95db53b7ceb23ddfe8a8211a3135d98eef0" },
   "vim-applescript": { "branch": "master", "commit": "a39af8fc7e4caf581366e2917d558f6232e4db36" },
   "vim-css3-syntax": { "branch": "main", "commit": "be78408deaca623ba8f18147698d3882d115c146" },
   "vim-matchup": { "branch": "master", "commit": "945e01e39fc137bd74bb3aa8c4f40e6ffb5be2dd" },
   "vim-visual-multi": { "branch": "master", "commit": "724bd53adfbaf32e129b001658b45d4c5c29ca1a" },
+  "virtcolumn.nvim": { "branch": "main", "commit": "cd9485d64a0763c5572272e03d70cbff1f91fde0" },
   "which-key.nvim": { "branch": "main", "commit": "5224c261825263f46f6771f1b644cae33cd06995" }
 }
