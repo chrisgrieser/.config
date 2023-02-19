@@ -33,7 +33,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("satellite").setup {
-				winblend = 20, -- winblend = transparency
+				winblend = 60, -- winblend = transparency
 				handlers = {
 					-- displaying marks creates autocmds mapping of things with m,
 					-- making m-bindings infeasable
@@ -42,30 +42,13 @@ return {
 			}
 		end,
 	},
-	{ -- highlight backgrounds, e.g. markdown fenced code
-		"atusy/tsnode-marker.nvim",
-		lazy = true,
-		filetype = "markdown",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				group = vim.api.nvim_create_augroup("tsnode-marker-markdown", {}),
-				pattern = "markdown",
-				callback = function(ctx)
-					require("tsnode-marker").set_automark(ctx.buf, {
-						target = { "code_fence_content" }, -- list of target node types
-						hl_group = "CursorLine", -- highlight group
-					})
-				end,
-			})
-		end,
+
+	{ -- nicer colorcolumn
+		"xiyaowong/virtcolumn.nvim",
+		init = function() vim.g.virtcolumn_char = "║" end,
+		event = "VeryLazy",
 	},
 
-	-- { -- nicer colorcolumn
-	-- 	"xiyaowong/virtcolumn.nvim",
-	-- 	init = function() vim.g.virtcolumn_char = "║" end,
-	-- 	event = "VeryLazy",
-	-- },
 	{ -- color previews & color utilities
 		"uga-rosa/ccc.nvim",
 		event = "BufEnter", -- cannot use VeryLazy, since the first buffer entered would not get highlights
