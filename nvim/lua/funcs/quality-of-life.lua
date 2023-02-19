@@ -56,7 +56,6 @@ function M.commentHr()
 	---@diagnostic enable: param-type-mismatch
 end
 
-
 ---switches words under the cursor from `true` to `false` and similar cases
 function M.wordSwitch()
 	local iskeywBefore = opt.iskeyword:get()

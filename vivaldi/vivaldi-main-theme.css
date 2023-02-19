@@ -158,14 +158,9 @@
 	display: none;
 }
 
-/* unread indicator replacement */
+/* unread indicator italic instead of icon */
 #tabs-container .unread .title {
 	font-style: italic;
-}
-
-#tabs-container .unread .title::before {
-	content: "○";
-	padding-right: 2px;
 }
 
 #tabs-container .unread {

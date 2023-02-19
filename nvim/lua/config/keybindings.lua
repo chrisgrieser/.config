@@ -76,6 +76,7 @@ keymap("n", "Ä", require("funcs.mark-cycler").setMark, { desc = "Set Next Mark"
 
 --------------------------------------------------------------------------------
 
+-- Dismiss notifications
 keymap("n", "<Esc>", function()
 	if isGui() then
 		local clearPending = require("notify").pending() > 10
@@ -107,6 +108,10 @@ keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickf
 -- Leap
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
+
+-- Comments
+keymap("n", "qw", qol.commentHr, {desc = "Horizontal Divider"})
+keymap("n", "qd", "Rkqqj", {desc = "Duplicate Line as Comment", remap = true})
 
 --------------------------------------------------------------------------------
 
