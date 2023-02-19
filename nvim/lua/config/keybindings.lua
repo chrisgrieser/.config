@@ -109,9 +109,44 @@ keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickf
 keymap("n", "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 
--- Comments
-keymap("n", "qw", qol.commentHr, {desc = "Horizontal Divider"})
-keymap("n", "qd", "Rkqqj", {desc = "Duplicate Line as Comment", remap = true})
+--------------------------------------------------------------------------------
+
+-- Comments & Annotations
+keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })
+keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
+keymap("n", "qa", function() require("neogen").generate() end, { desc = "Neogen: Annotation Comment" })
+
+-- LUASNIP
+keymap({ "i", "s" }, "<D-j>", function()
+	if require("neogen").jumpable() then
+		require("neogen").jump_next()
+	elseif require("luasnip").jumpable(1) then
+		require("luasnip").jump(1)
+		-- if after jump at a choice, trigger choice selection
+		if require("luasnip").choice_active() then
+			require("luasnip.extras.select_choice")()
+			return "<Esc>" -- HACK to not end up in insert mode (due to dressing)
+		end
+	else
+		vim.notify("No Jump available.", logWarn)
+	end
+end, { desc = "LuaSnip: Jump & Choice" })
+
+keymap({ "i", "s" }, "<D-S-j>", function()
+	if require("neogen").jumpable(true) then
+		require("neogen").jump_prev()
+	elseif require("luasnip").jumpable(-1) then
+		require("luasnip").jump(-1)
+	else
+		vim.notify("No Jump back available.", logWarn)
+	end
+end, { desc = "LuaSnip: Jump Back" })
+
+keymap("n", "<leader>ls", function() cmd.Telescope("luasnip") end, { desc = " LuaSnip: Snippets" })
+
+--------------------------------------------------------------------------------
+
+function bla(str) print("bla") end
 
 --------------------------------------------------------------------------------
 
@@ -310,31 +345,6 @@ if isGui() then
 	keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b", { desc = "Template String Markup" })
 	keymap("i", "<D-t>", "${}<Left>", { desc = "Template String Markup" })
 end
-
---------------------------------------------------------------------------------
--- LUASNIP
-keymap({ "i", "s" }, "<D-j>", function()
-	if require("luasnip").jumpable(1) then
-		require("luasnip").jump(1)
-		-- if after jump at a choice, trigger choice selection
-		if require("luasnip").choice_active() then
-			require("luasnip.extras.select_choice")()
-			return "<Esc>" -- HACK to not end up in insert mode (due to dressing)
-		end
-	else
-		vim.notify("No Jump available.", logWarn)
-	end
-end, { desc = "LuaSnip: Jump & Choice" })
-
-keymap({ "i", "s" }, "<D-S-j>", function()
-	if require("luasnip").jumpable(-1) then
-		require("luasnip").jump(-1)
-	else
-		vim.notify("No Jump back available.", logWarn)
-	end
-end, { desc = "LuaSnip: Jump Back" })
-
-keymap("n", "<leader>ls", function() cmd.Telescope("luasnip") end, { desc = " LuaSnip: Snippets" })
 
 --------------------------------------------------------------------------------
 

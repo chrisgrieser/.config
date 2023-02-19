@@ -107,18 +107,13 @@ end):start()
 -- BROWSER (Vivaldi)
 Wf_browser = Wf.new("Vivaldi")
 	:setOverrideFilter({
-		rejectTitles = { " %(Private%)$", "^Picture in Picture$", "^Task Manager$" },
+		-- INFO DevTools windows are titled "" on creation, so need to reject
+		-- those as well
+		rejectTitles = { " %(Private%)$", "^Picture in Picture$", "^Task Manager$", "^DevTools", "^$" },
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(Wf.windowCreated, function(newWin)
-		-- HACK delay instead of rejectTitles necessary, since in the moment of window
-		-- creation, devtools do not seem to have a window
-		RunWithDelays(0.1, function()
-			if newWin:title():find("DevTools") then return end 
-			AutoTile(Wf_browser)
-		end)
-	end)
+	:subscribe(Wf.windowCreated, function() AutoTile(Wf_browser) end)
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_browser) end)
 	:subscribe(Wf.windowFocused, BringAllToFront)
 

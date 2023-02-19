@@ -3,7 +3,7 @@ return {
 	{
 		"numToStr/Comment.nvim",
 		-- (mnemonic: [q]uiet text)
-		keys = {"q", "Q"},
+		keys = { "q", "Q" },
 		config = function()
 			require("Comment").setup {
 				ignore = "^$", -- ignore empty lines
@@ -22,6 +22,11 @@ return {
 				},
 			}
 		end,
+	},
+	{
+		"danymat/neogen",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = function() require("neogen").setup() end,
 	},
 	{
 		"kylechui/nvim-surround",
