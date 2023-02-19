@@ -1081,22 +1081,8 @@ rules:
         from: {key_code: g, modifiers: {mandatory: [control]}}
         to:
           - shell_command: |
-              GIT_OPTIONAL_LOCKS=0
-              SEL=$(osascript -e 'tell application "Finder"
-                set sel to (item 1 of (selection as list) as alias)
-                return POSIX path of sel
-              end tell')
-              [[ -f "$SEL" ]] || exit 1
-              cd "$(dirname "$SEL")"
-
-              BRANCH=$(git branch --show-current)
-              ROOT_PATH=$(git rev-parse --show-toplevel)
-              ROOT_LEN=${#ROOT_PATH}
-              REMOTE_URL="$(git remote -v |  head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')"
-              PATH_IN_REPO=${SEL:$ROOT_LEN}
-              PATH_IN_REPO=$(osascript -l JavaScript -e "encodeURIComponent('$PATH_IN_REPO')")
-
-              URL="$REMOTE_URL/blob/$BRANCH/$PATH_IN_REPO"
-              echo "$URL" | pbcopy
-              open "$URL"
+              osascript -e "beep"
+              osascript -e "beep"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - dummy: bla
+      #─────────────────────────────────────────────────────────────────────────
