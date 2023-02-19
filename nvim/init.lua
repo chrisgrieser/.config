@@ -26,7 +26,6 @@ require("config.keybindings")
 require("config.lsp-and-diagnostics") -- should come before linter since it includes mason setup
 require("config.linter")
 
-require("config.comments")
 require("config.textobjects")
 require("config.clipboard")
 require("config.user-commands")
