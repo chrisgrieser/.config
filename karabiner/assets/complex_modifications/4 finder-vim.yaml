@@ -1082,7 +1082,6 @@ rules:
         to:
           - shell_command: |
               osascript -e "beep"
-              osascript -e "beep"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - dummy: bla
       #─────────────────────────────────────────────────────────────────────────
