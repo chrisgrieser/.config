@@ -2,11 +2,13 @@ return {
 	-- EDITING-SUPPORT
 	{
 		"numToStr/Comment.nvim",
+		-- (mnemonic: [q]uiet text)
+		keys = {"q", "Q"},
 		config = function()
 			require("Comment").setup {
 				ignore = "^$", -- ignore empty lines
 				opleader = {
-					line = "q", -- (mnemonic: [q]uiet text)
+					line = "q",
 					block = "<Nop>",
 				},
 				toggler = {
@@ -185,7 +187,6 @@ return {
 				callback = function()
 					vim.keymap.set("n", "<D-w>", ":UndotreeToggle<CR>", { buffer = true })
 					vim.opt_local.listchars = "space: "
-					-- vim.opt_local.listchars = {space = " "}
 				end,
 			})
 		end,
