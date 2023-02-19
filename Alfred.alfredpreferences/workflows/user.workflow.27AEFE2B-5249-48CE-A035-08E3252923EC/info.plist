@@ -45,6 +45,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>52D4C860-B68A-4110-82F8-C803E09B0CB7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>76AAF636-1881-4072-A9C5-239C90C7934A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<array/>
 		<key>84E909BE-967C-46E7-8E3A-3250AF1317B5</key>
@@ -736,6 +749,64 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>43</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>,</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.vivaldi.Vivaldi</string>
+					<string>com.brave.Browser</string>
+					<string>org.chromium.Chromium</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>E5B886F0-9286-40B9-9F3E-0475D3256D4F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -778,6 +849,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>minimap</string>
+				<key>subtext</key>
+				<string>Scroll Preview Plugin Settings</string>
+				<key>text</key>
+				<string>🗺️ Minimap</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>52D4C860-B68A-4110-82F8-C803E09B0CB7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -787,51 +879,14 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html</string>
+				<string>chrome-extension://hhpfdnhklmhheldplcmfhfdooeekgpmm/options/options.html</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</string>
+			<string>76AAF636-1881-4072-A9C5-239C90C7934A</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>43</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>,</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-					<string>org.chromium.Chromium</string>
-					<string>com.vivaldi.Vivaldi</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>E5B886F0-9286-40B9-9F3E-0475D3256D4F</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -903,6 +958,15 @@
 			<key>ypos</key>
 			<real>760</real>
 		</dict>
+		<key>52D4C860-B68A-4110-82F8-C803E09B0CB7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>560</real>
+			<key>ypos</key>
+			<real>880</real>
+		</dict>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<dict>
 			<key>colorindex</key>
@@ -911,6 +975,15 @@
 			<real>205</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>76AAF636-1881-4072-A9C5-239C90C7934A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>735</real>
+			<key>ypos</key>
+			<real>880</real>
 		</dict>
 		<key>84E909BE-967C-46E7-8E3A-3250AF1317B5</key>
 		<dict>
@@ -1029,9 +1102,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>665</real>
 		</dict>
 		<key>CF0751AB-25B7-45A7-89DE-68E791637C9D</key>
 		<dict>
@@ -1089,9 +1162,9 @@
 			<key>note</key>
 			<string>vimium settings</string>
 			<key>xpos</key>
-			<real>565</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>665</real>
 		</dict>
 		<key>F34E5081-7725-4B48-867B-36BC4DFAD990</key>
 		<dict>
