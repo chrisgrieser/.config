@@ -36,7 +36,6 @@ local function gitDotfileSync()
 		.new(
 			gitDotfileScript,
 			function(exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
-				stdErr = stdErr:gsub("\n", " –– ")
 				if exitCode == 0 then
 					print(dotfileIcon, "Dotfile Sync successful.")
 					return
@@ -66,7 +65,6 @@ local function gitVaultSync()
 
 	GitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
-			stdErr = stdErr:gsub("\n", " –– ")
 			if exitCode == 0 then
 				print(vaultIcon, "Vault Sync successful.")
 				return
@@ -86,7 +84,6 @@ local function gitPassSync()
 
 	GitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
-			stdErr = stdErr:gsub("\n", " –– ")
 			if exitCode == 0 then
 				print(passIcon, "Password-Store Sync successful.")
 				return

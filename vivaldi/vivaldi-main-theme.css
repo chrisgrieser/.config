@@ -87,6 +87,7 @@
 
 #header:has(.tab-strip > span:nth-child(9)) + #main .UrlBar-AddressField {
 	width: var(--adressbar-width-9-tab);
+	min-width: 250px;
 }
 
 /* ────────────────────────────────────────────────────────────────────────── */
