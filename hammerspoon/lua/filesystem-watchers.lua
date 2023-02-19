@@ -92,6 +92,7 @@ end):start()
 
 -- Redirects FROM File Hub
 local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
+WatcherActive = true -- to prevent recursion issues
 FileHubWatcher = Pw(FileHub, function(paths)
 	for _, filep in pairs(paths) do
 		if isInSubdirectory(filep, FileHub) then return end
@@ -99,13 +100,8 @@ FileHubWatcher = Pw(FileHub, function(paths)
 		local extension = fileName:gsub(".*%.", "")
 
 		-- delete alfredworkflows and ics (iCal)
-		if extension == "alfredworkflow" or extension == "ics" then
-			os.execute("open '" .. filep .. "'")
-			RunWithDelays(3, function() os.rename(filep, Home .. "/.Trash/" .. fileName) end)
-
-		-- open .zip or .dmg
-		elseif extension == "zip" or extension == "dmg" then
-			os.execute("open '" .. filep .. "'")
+		if extension == "alfredworkflow" or extension == "ics" or extension == "dmg" then
+			-- RunWithDelays(3, function() os.rename(filep, Home .. "/.Trash/" .. fileName) end)
 
 		-- watch later .urls from the office
 		elseif extension == "url" and IsIMacAtHome() then

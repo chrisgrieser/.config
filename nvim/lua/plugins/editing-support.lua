@@ -223,6 +223,10 @@ return {
 			require("ssr").setup {
 				keymaps = { close = "Q" },
 			}
+			autocmd("FileType", {
+				pattern = "ssr",
+				callback = function() wo.sidescrolloff = 0 end,
+			})
 		end,
 	},
 	{

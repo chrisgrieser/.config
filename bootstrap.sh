@@ -25,8 +25,8 @@ brew install --no-quarantine alfred hammerspoon neovim alacritty karabiner-eleme
 brew install --no-quarantine --cask neovide
 
 # important settings
-defaults write com.apple.finder CreateDesktop false # disable desktop icons & make desktop unfocussable
-defaults write com.apple.finder QuitMenuItem -bool true # Finder quitable
+defaults write com.apple.finder CreateDesktop false          # disable desktop icons & make desktop unfocussable
+defaults write com.apple.finder QuitMenuItem -bool true      # Finder quitable
 defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "$DOTFILE_FOLDER/hammerspoon/init.lua"
 
@@ -75,10 +75,18 @@ ESPANSO_DIR=~"/Library/Application Support/espanso"
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
 # Browser PWAs
-BROWSER="Chrome" # Chrome = Vivaldi (sic!)
+BROWSER="Chrome" # Chrome = Vivaldi, since Vivaldi does not rename the dir
 # BROWSER="Brave Browser"
 [[ -e ~"/Applications/$BROWSER Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER Apps.localized"
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
+
+# Vivaldi auto-open files, https://forum.vivaldi.net/topic/42881/how-to-make-vivaldi-open-downloaded-files-automatically
+killall "Vivaldi"
+while pgrep -q "Vivaldi"; do sleep 0.1; done
+sed -i '' \
+	's/"directory_upgrade":true/"directory_upgrade":true,"extensions_to_open":"torrent:zip:alfredworkflow:ics:dmg"/' \
+	"$HOME/Library/Application Support/Vivaldi/Default/Preferences"
+open -a "Vivaldi"
 
 #───────────────────────────────────────────────────────────────────────────────
 
