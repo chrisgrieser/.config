@@ -38,6 +38,9 @@ local function createLayout(pos, display, apps)
 	return out
 end
 
+
+
+
 --------------------------------------------------------------------------------
 -- LAYOUTS
 function MovieModeLayout()
@@ -45,6 +48,7 @@ function MovieModeLayout()
 	IMacDisplay:setBrightness(0)
 
 	RunWithDelays({ 0, 0.5 }, function() OpenApp("YouTube") end)
+	App("Vivaldi"):hide()
 
 	QuitApp {
 		"Obsidian",
@@ -68,19 +72,6 @@ function MovieModeLayout()
 end
 
 function WorkLayout()
-	if IMacDisplay then
-		local brightness
-		if BetweenTime(1, 8) then
-			brightness = 0
-		elseif hs.brightness.ambient() > 120 then
-			brightness = 100
-		elseif hs.brightness.ambient() > 100 then
-			brightness = 90
-		else
-			brightness = 80
-		end
-		IMacDisplay:setBrightness(brightness)
-	end
 
 	HoleCover()
 	if not isWeekend() then OpenApp("Slack") end
@@ -139,6 +130,8 @@ end
 local function motherMovieModeLayout()
 	IMacDisplay:setBrightness(0)
 	dockSwitcher("mother-movie")
+	App("Vivaldi"):hide()
+
 	RunWithDelays({ 0, 1 }, function()
 		OpenApp("YouTube")
 		QuitApp {
