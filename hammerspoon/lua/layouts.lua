@@ -1,22 +1,12 @@
 require("lua.utils")
 require("lua.window-management")
 require("lua.twitter")
-require("lua.private") -- symlinked private dotfile
 --------------------------------------------------------------------------------
+-- HELPERS
 
 ---@param targetMode string
 local function dockSwitcher(targetMode)
 	hs.execute("zsh ./helpers/dock-switching/dock-switcher.sh --load " .. targetMode)
-end
-
----@param size integer
-local function alacrittyFontSize(size)
-	hs.execute("VALUE=" .. tostring(size) .. [[
-		ALACRITTY_CONFIG="$HOME/.config/alacritty/alacritty.yml"
-		MAN_PAGE_CONFIG="$HOME/.config/alacritty/man-page.yml"
-		sed -i '' "s/size: .*/size: $VALUE/" "$ALACRITTY_CONFIG"
-		sed -i '' "s/size: .*/size: $VALUE/" "$MAN_PAGE_CONFIG"
-	]])
 end
 
 ---@return boolean
@@ -38,11 +28,116 @@ local function createLayout(pos, display, apps)
 	return out
 end
 
+local function setHigherBrightnessDuringDay()
+	local hasBrightnessSensor = hs.brightness.ambient() > -1
+	if not hasBrightnessSensor then return end
 
-
+	local brightness
+	if BetweenTime(1, 8) then
+		brightness = 0
+	elseif hs.brightness.ambient() > 120 then
+		brightness = 100
+	elseif hs.brightness.ambient() > 100 then
+		brightness = 90
+	else
+		brightness = 80
+	end
+	hs.screen("Built%-in"):setBrightness(brightness)
+end
 
 --------------------------------------------------------------------------------
 -- LAYOUTS
+
+function WorkLayout()
+	setHigherBrightnessDuringDay()
+	HoleCover()
+
+	if not isWeekend() then OpenApp("Slack") end
+	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
+	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder" }
+	require("lua.private").closer()
+
+	dockSwitcher("work")
+
+	local layout = createLayout(PseudoMaximized, IMacDisplay, {
+		"Vivaldi",
+		"Highlights",
+		"Neovide",
+		"neovide",
+		"Slack",
+		"Discord",
+		"Warp",
+		"Obsidian",
+		"Drafts",
+		"Mimestream",
+		"alacritty",
+		"Alacritty",
+	})
+	hs.layout.apply(layout)
+	TwitterToTheSide()
+	ShowAllSidebars()
+	RunWithDelays({ 0.5, 1 }, function()
+		App("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
+		App("Drafts"):activate()
+		local workspace = IsAtOffice() and "Office" or "Home"
+		App("Drafts"):selectMenuItem { "Workspaces", workspace }
+	end)
+end
+
+local function motherHomeModeLayout()
+	setHigherBrightnessDuringDay()
+
+	if not isWeekend() then OpenApp("Slack") end
+	OpenApp { "Discord", "Obsidian", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
+	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder" }
+	require("lua.private").closer()
+
+	dockSwitcher("home")
+
+	local layout = createLayout(PseudoMaximized, IMacDisplay, {
+		"Vivaldi",
+		"Warp",
+		"Slack",
+		"Discord",
+		"Obsidian",
+		"Drafts",
+		"Mimestream",
+		"alacritty",
+		"Alacritty",
+	})
+
+	RunWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
+		hs.layout.apply(layout)
+		TwitterToTheSide()
+	end)
+	ShowAllSidebars()
+end
+
+local function motherMovieModeLayout()
+	IMacDisplay:setBrightness(0)
+	dockSwitcher("mother-movie")
+	App("Vivaldi"):hide()
+
+	RunWithDelays({ 0, 1 }, function()
+		OpenApp("YouTube")
+		QuitApp {
+			"Obsidian",
+			"Drafts",
+			"Slack",
+			"Discord",
+			"Mimestream",
+			"Alfred Preferences",
+			"Warp",
+			"neovide",
+			"Neovide",
+			"alacritty",
+			"Alacritty",
+			"Twitter",
+			"Finder",
+		}
+	end)
+end
+
 function MovieModeLayout()
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
@@ -71,132 +166,6 @@ function MovieModeLayout()
 	SetDarkmode(true)
 end
 
-function WorkLayout()
-
-	HoleCover()
-	if not isWeekend() then OpenApp("Slack") end
-	OpenApp {
-		"Discord",
-		"Mimestream",
-		"Vivaldi",
-		"Twitter",
-		"Drafts",
-	}
-	QuitApp {
-		"YouTube",
-		"Netflix",
-		"CrunchyRoll",
-		"IINA",
-		"Twitch",
-		"Finder",
-	}
-	require("lua.private").closer()
-
-	dockSwitcher("work")
-
-	local layout = createLayout(PseudoMaximized, IMacDisplay, {
-		"Vivaldi",
-		"Highlights",
-		"Neovide",
-		"neovide",
-		"Slack",
-		"Discord",
-		"Warp",
-		"Obsidian",
-		"Drafts",
-		"Mimestream",
-		"alacritty",
-		"Alacritty",
-	})
-	hs.layout.apply(layout)
-	TwitterToTheSide()
-	ShowAllSidebars()
-	RunWithDelays({ 0.5, 1 }, function()
-		App("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
-		App("Drafts"):activate()
-		local workspace = IsAtOffice() and "Office" or "Home"
-		App("Drafts"):selectMenuItem { "Workspaces", workspace }
-	end)
-
-	-- wait until sync is finished, to avoid merge conflict
-	hs.timer
-		.waitUntil(
-			function() return not (GitDotfileSyncTask and GitDotfileSyncTask:isRunning()) end,
-			function() alacrittyFontSize(26) end
-		)
-		:start()
-end
-
-local function motherMovieModeLayout()
-	IMacDisplay:setBrightness(0)
-	dockSwitcher("mother-movie")
-	App("Vivaldi"):hide()
-
-	RunWithDelays({ 0, 1 }, function()
-		OpenApp("YouTube")
-		QuitApp {
-			"Obsidian",
-			"Drafts",
-			"Slack",
-			"Discord",
-			"Mimestream",
-			"Alfred Preferences",
-			"Warp",
-			"neovide",
-			"Neovide",
-			"alacritty",
-			"Alacritty",
-			"Twitter",
-			"Finder",
-		}
-	end)
-end
-
-local function motherHomeModeLayout()
-	local brightness = BetweenTime(1, 8) and 0 or 0.8
-	IMacDisplay:setBrightness(brightness)
-
-	if not isWeekend() then OpenApp("Slack") end
-	OpenApp {
-		"Discord",
-		"Obsidian",
-		"Mimestream",
-		"Vivaldi",
-		"Twitter",
-		"Drafts",
-	}
-	QuitApp {
-		"YouTube",
-		"Netflix",
-		"CrunchyRoll",
-		"IINA",
-		"Twitch",
-		"Finder",
-	}
-	require("lua.private").closer()
-
-	alacrittyFontSize(25)
-	dockSwitcher("home")
-
-	local layout = createLayout(PseudoMaximized, IMacDisplay, {
-		"Vivaldi",
-		"Warp",
-		"Slack",
-		"Discord",
-		"Obsidian",
-		"Drafts",
-		"Mimestream",
-		"alacritty",
-		"Alacritty",
-	})
-
-	RunWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
-		hs.layout.apply(layout)
-		TwitterToTheSide()
-	end)
-	ShowAllSidebars()
-end
-
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 local function setLayout()
@@ -223,6 +192,7 @@ Wf_appsOnMouseScreen = Wf.new({
 	"Drafts",
 	"Vivaldi",
 	"Mimestream",
+	"BetterTouchTool",
 	"Obsidian",
 	"Alacritty",
 	"alacritty",
@@ -237,7 +207,6 @@ Wf_appsOnMouseScreen = Wf.new({
 	"Espanso",
 	"BusyCal",
 	"Alfred Preferences",
-	"System Preferences",
 	"YouTube",
 	"Netflix",
 	"CrunchyRoll",
