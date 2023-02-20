@@ -406,7 +406,7 @@ brew home "$*"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>brew uninstall {query}</string>
+				<string>brew uninstall --zap {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>
@@ -499,6 +499,21 @@ brew home "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>802369B2-358A-46C9-9516-940B8E3E7940</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>1</integer>
 				<key>filetypes</key>
@@ -514,21 +529,6 @@ brew home "$*"</string>
 			<string>89F35AB8-AC54-4BB2-B884-9B206671D5AE</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>802369B2-358A-46C9-9516-940B8E3E7940</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -546,7 +546,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>note</key>
-			<string>uninstall</string>
+			<string>brew uninstall --zap</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -613,7 +613,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>install</string>
+			<string>brew home</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -633,7 +633,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>reinstall</string>
+			<string>brew reinstall</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
