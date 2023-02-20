@@ -18,21 +18,26 @@ function readFile(path) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const browserConfig = "/Vivaldi/"
-const extensionFolder = app.pathTo("home folder") + "/Library/Application Support/${browserConfig}/Default/Extensions"
+const browserConfig = "/Vivaldi/"; // lead the surrounding // for automation purposes
+const extensionFolder = app.pathTo("home folder") + `/Library/Application Support/${browserConfig}/Default/Extensions`;
 
-const jsonArray = app.doShellScript(`find "${extensionFolder}" -name "manifest.json"`)
+const jsonArray = app
+	.doShellScript(`find "${extensionFolder}" -name "manifest.json"`)
 	.split("\r")
-	.map(item => {
-		// const name = app.doShellScript("")
-		
+	.map(manifestPath => {
+		const id = manifestPath.replace(/.*Extensions\/(\w+)\/.*/, "$1") 
+		const manifest = JSON.parse(readFile(manifestPath));
+		let name = manifest.name;
+		const description = manifest.description.startsWith("__MSG_") ? "" : manifest.description;
+		if (name.startsWith("__MSG_") && manifest.short_name) name = manifest.short_name;
+
 		return {
-			title: item,
-			match: alfredMatcher(item),
-			// subtitle: item,
+			title: name,
+			subtitle: description,
+			match: alfredMatcher(name),
 			// icon: { type: "fileicon", path: item },
-			arg: item,
-			uid: item,
+			arg: id,
+			uid: id,
 		};
 	});
 JSON.stringify({ items: jsonArray });
