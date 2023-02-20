@@ -16,13 +16,17 @@ end
 -- hide windows of other apps, except twitter
 ---@param win hs.window the window of the app not to hide
 local function hideOthers(win)
-	if not win or not (win:application()) then return end
-	local wins = win:otherWindowsSameScreen()
-	local winName = win:application():name()
-	for _, w in pairs(wins) do
-		local app = w:application()
-		if app and app:name() ~= "Twitter" and app:name() ~= winName then app:hide() end
-	end
+	-- if not win or not (win:application()) then return end
+	-- local winName = win:application():name()
+
+	-- local wins = win:otherWindowsSameScreen()
+	-- for _, w in pairs(wins) do
+	-- 	local app = w:application()
+	-- 	local browserWithPiP = app and app:name() == "Vivaldi" and app:findWindow("Picture in Picture")
+	-- 	local isTwitter = app and app:name() == "Twitter" 
+	-- 	local isWindowItself = app and app:name() == winName
+	-- 	if app and not(browserWithPiP or isWindowItself or isTwitter) then app:hide() end
+	-- end
 end
 
 --------------------------------------------------------------------------------

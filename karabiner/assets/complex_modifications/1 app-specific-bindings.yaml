@@ -173,55 +173,14 @@ rules:
           - software_function: { set_mouse_cursor_position: { x: 50%, y: 50%, screen: 0 } }
           - pointing_button: button2
           - pointing_button: button2
-          - key_code: vk_none
-            hold_down_milliseconds: 100
+          - {key_code: vk_none, hold_down_milliseconds: 200}
           - key_code: p
           - key_code: return_or_enter
-          - key_code: vk_none
-            hold_down_milliseconds: 800
-          - key_code: h
-            modifiers: [command]
+          - {key_code: vk_none, hold_down_milliseconds: 500}
+          - {key_code: h, modifiers: [command]}
         conditions:
           - type: frontmost_application_if
-            file_paths: [YouTube, Brave Browser]
-  - description: "(Apps) Reeder: b opens in background"
-    manipulators:
-      - type: basic
-        from: { key_code: b }
-        to:
-          - key_code: v
-          - key_code: vk_none
-            hold_down_milliseconds: 300
-          - key_code: h
-            modifiers: [command]
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.reederapp\.\d\.macOS$] }]
-  - description: "(Apps) Inoreader: b opens in background, switch jk & np"
-    manipulators:
-      - type: basic
-        from: { key_code: b }
-        to:
-          - key_code: v
-          - key_code: vk_none
-            hold_down_milliseconds: 300
-          - key_code: h
-            modifiers: [command]
-        conditions: [{ type: frontmost_application_if, file_paths: [Inoreader.app] }]
-      - type: basic
-        from: { key_code: j }
-        to: [{ key_code: n }]
-        conditions: [{ type: frontmost_application_if, file_paths: [Inoreader.app] }]
-      - type: basic
-        from: { key_code: k }
-        to: [{ key_code: p }]
-        conditions: [{ type: frontmost_application_if, file_paths: [Inoreader.app] }]
-      - type: basic
-        from: { key_code: n }
-        to: [{ key_code: j }]
-        conditions: [{ type: frontmost_application_if, file_paths: [Inoreader.app] }]
-      - type: basic
-        from: { key_code: p }
-        to: [{ key_code: k }]
-        conditions: [{ type: frontmost_application_if, file_paths: [Inoreader.app] }]
+            file_paths: [YouTube, Brave Browser, Vivaldi]
   - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
       - type: basic
