@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "20/02/2023, 20:02:14",
-	"time": 1676919734757,
+	"@time": "20/02/2023, 20:42:22",
+	"time": 1676922142737,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -95,7 +95,7 @@
 		"map gu goUp",
 		"map gU goToRoot",
 		"map gs toggleViewSource",
-		"map zz copyCurrentUrl",
+		"map yy copyCurrentUrl",
 		"map p togglePinTab",
 		"map m toggleMuteTab",
 		"map r reload",
