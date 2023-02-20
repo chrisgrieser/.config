@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "19/02/2023, 15:05:21",
-	"time": 1676815521136,
+	"@time": "20/02/2023, 17:39:25",
+	"time": 1676911165971,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -101,7 +101,6 @@
 		"",
 		"\" Misc (_ = ? in US layout)",
 		"map _ showHelp",
-		"map s addBookmark",
 		"map gi focusInput",
 		""
 	],
