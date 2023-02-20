@@ -63,7 +63,6 @@ keymap("n", "p", function()
 	if isLinewise and regContent:find("{\n$") then
 		fn.append(".", { "\t", "}" }) 
 		normal("j")
-		cmd.startinsert { bang = true }
 	end
 end, { desc = "smarter CSS paste", buffer = true })
 

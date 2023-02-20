@@ -1,4 +1,6 @@
 /* stylelint-disable custom-property-pattern */
+/* ───────────────────────────────────────────────── */
+
 /* bookmark as colored adress bar */
 .UrlBar-AddressField:has(.BookmarkButton .button-on) .UrlFragment-Wrapper {
 	color: var(--colorHighlightBgFaded);
@@ -10,4 +12,8 @@
 
 .BookmarkButton {
 	display: none;
+}
+
+#browser .UrlFragment--Highlight {
+	font-weight: 600;
 }
