@@ -78,10 +78,10 @@ local function toggleObsidianSidebar(obsiWin)
 		local screen_width = obsiWin:screen():frame().w
 
 		-- if pseudo-maximized, hide sidebar, if half or full show sidebar
-		-- (full = used as split pane)
-		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "true"
-			or "false"
-		OpenLinkInBackground("obsidian://sidebar?showRight=" .. mode .. "&showLeft=false")
+		-- (full = used as split pane). Requires Obsidian Advanced URI plugin
+		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "expand"
+			or "collapse"
+		OpenLinkInBackground("obsidian://advanced-uri?eval=this.app.workspace.rightSplit."..mode.."%28%29")
 	end)
 end
 
@@ -100,7 +100,7 @@ end
 
 function ShowAllSidebars()
 	if AppIsRunning("Highlights") then App("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
-	OpenLinkInBackground("obsidian://sidebar?showLeft=false&showRight=true")
+	OpenLinkInBackground("obsidian://advanced-uri?eval=this.app.workspace.rightSplit.expand%28%29")
 	OpenLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
 
