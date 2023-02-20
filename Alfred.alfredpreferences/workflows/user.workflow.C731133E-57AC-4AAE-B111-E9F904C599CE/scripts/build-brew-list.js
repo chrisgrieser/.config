@@ -34,10 +34,12 @@ const formula = JSON.parse(readFile(formulaJson));
 casks.forEach(item => {
 	const name = item.name[0];
 	const id = item.token;
+	const desc = item.desc;
+
 	jsonArray.push({
 		title: name,
 		match: alfredMatcher(name),
-		subtitle: "cask",
+		subtitle: `cask         ${desc}`,
 		arg: `${id} --cask`,
 		mods: { cmd: { arg: id } },
 		uid: id,
@@ -47,10 +49,12 @@ casks.forEach(item => {
 formula.forEach(item => {
 	const name = item.full_name;
 	const id = item.name;
+	const desc = item.desc;
+
 	jsonArray.push({
 		title: name,
 		match: alfredMatcher(name),
-		subtitle: "formula",
+		subtitle: `formula    ${desc}`,
 		arg: `${id} --formula`,
 		mods: { cmd: { arg: id } },
 		uid: id,
