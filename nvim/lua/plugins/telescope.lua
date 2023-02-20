@@ -72,6 +72,7 @@ local options = {
 			},
 			cursor = {
 				preview_cutoff = 9001, -- never use preview here
+				height = 0.9,
 			},
 			bottom_pane = {
 				height = 8,
