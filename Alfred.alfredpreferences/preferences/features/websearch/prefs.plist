@@ -92,13 +92,11 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>ce</string>
+			<string>cs</string>
 			<key>text</key>
 			<string>Chrome Extensions: '{query}'</string>
 			<key>url</key>
 			<string>https://chrome.google.com/webstore/search/{query}</string>
-			<key>utf8</key>
-			<true/>
 		</dict>
 		<key>84F18614-4389-4B12-8CD3-4B9F82576401</key>
 		<dict>
@@ -230,19 +228,6 @@
 			<string>Wer streamt es?</string>
 			<key>url</key>
 			<string>https://www.werstreamt.es/filme-serien/?q={query}</string>
-			<key>utf8</key>
-			<true/>
-		</dict>
-		<key>D994EE3A-E522-46FB-9349-F95D15870317</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>tn</string>
-			<key>text</key>
-			<string>Tech News Search: '{query}'</string>
-			<key>url</key>
-			<string>https://www.google.de/search?q={query}+(site:wired.com+OR+site:techcrunch.com+OR+site:bloomberg.com+OR+site:nytimes.com+OR+site:theverge.com+OR+site:protocol.com)&amp;tbm=nws</string>
 			<key>utf8</key>
 			<true/>
 		</dict>
