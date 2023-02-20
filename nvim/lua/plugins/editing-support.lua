@@ -231,11 +231,11 @@ return {
 	},
 	{
 		"andymass/vim-matchup",
+		event = "BufReadPost", -- other lazyloading methods do not seem to work
 		init = function()
 			vim.g.matchup_text_obj_enabled = 0
 			vim.g.matchup_matchparen_enabled = 1 -- highlight
 		end,
-		event = "BufReadPost", -- other lazyloading methods do not seem to work
 	},
 	{
 		"nacro90/numb.nvim", -- line previews when ":n"
@@ -275,7 +275,7 @@ return {
 				},
 				-- selene: allow(high_cyclomatic_complexity)
 				transform = function(lines)
-					-- transformation for single line duplication
+					-- transformations only for single line duplication
 					if #lines > 1 then return lines end
 
 					local line = lines[1]

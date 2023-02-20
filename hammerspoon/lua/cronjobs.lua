@@ -124,7 +124,7 @@ function SyncAllGitRepos(sendNotification)
 		:start()
 end
 
-RepoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, SyncAllGitRepos):start()
+BrightnessCheckTimer = hs.timer.doEvery(repoSyncFreqMin * 60, SyncAllGitRepos):start()
 
 -- manual sync for Alfred: `hammerspoon://sync-repos`
 UriScheme("sync-repos", function()
@@ -168,8 +168,7 @@ HomeWakeWatcher = caff
 					MovieModeLayout()
 				else
 					WorkLayout()
-					local toDark = hs.brightness.ambient() < 85
-					SetDarkmode(toDark)
+					AutoSwitchDarkmode()
 				end
 			end)
 			if event == caff.systemDidWake then SyncAllGitRepos("notify") end

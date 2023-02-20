@@ -8,7 +8,7 @@ require("lua.layouts")
 require("lua.splits")
 
 require("lua.scroll-and-cursor")
-require("lua.system-and-cron")
+require("lua.cronjobs")
 require("lua.filesystem-watchers")
 require("lua.app-specific-behavior")
 require("lua.twitter")
