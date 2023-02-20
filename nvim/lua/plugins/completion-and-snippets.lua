@@ -321,7 +321,9 @@ return {
 		dependencies = "hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		config = function()
-			require("nvim-autopairs").setup()
+			require("nvim-autopairs").setup{
+				enable_check_bracket_line = false,
+			}
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
