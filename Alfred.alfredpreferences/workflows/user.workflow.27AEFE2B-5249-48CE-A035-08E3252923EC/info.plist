@@ -191,27 +191,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>sw</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Switch to Private Window</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E51DFA56-3523-4840-8EF6-40FC832EE3BB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -231,6 +210,27 @@
 			<string>10C28BFB-0100-4B2F-BAEF-FEA3FC8C44E2</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>sw</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Switch to Private Window</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E51DFA56-3523-4840-8EF6-40FC832EE3BB</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -297,9 +297,9 @@
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.vivaldi.Vivaldi</string>
-					<string>org.chromium.Chromium</string>
 					<string>com.brave.Browser</string>
+					<string>org.chromium.Chromium</string>
+					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -400,27 +400,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>paywall</string>
-				<key>subtext</key>
-				<string>via 12ft.io</string>
-				<key>text</key>
-				<string>Skip Paywall</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -440,6 +419,27 @@
 			<string>97E52210-B26B-49B3-AC6D-65A1235A88C9</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>paywall</string>
+				<key>subtext</key>
+				<string>via 12ft.io</string>
+				<key>text</key>
+				<string>Skip Paywall</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
