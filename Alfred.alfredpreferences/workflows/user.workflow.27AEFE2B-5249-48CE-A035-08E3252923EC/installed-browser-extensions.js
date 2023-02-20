@@ -27,15 +27,24 @@ const jsonArray = app
 	.map(manifestPath => {
 		const id = manifestPath.replace(/.*Extensions\/(\w+)\/.*/, "$1") 
 		const manifest = JSON.parse(readFile(manifestPath));
-		let name = manifest.name;
 		const description = manifest.description.startsWith("__MSG_") ? "" : manifest.description;
+		const root = 
+
+		let name = manifest.name;
 		if (name.startsWith("__MSG_") && manifest.short_name) name = manifest.short_name;
+		if (name.startsWith("__MSG_")) {
+			const messagesPath = manifestPath.replace(/manifest.json$/, "_locales/en/messages.json");
+			const messagesJson = JSON.parse(readFile(messagesPath));
+			name = messagesJson.extensionName?.message ? messagesJson.extensionName.message : "[name missing]";
+		}
+
+		const iconPath =  manifest.icons["128"];
 
 		return {
 			title: name,
-			subtitle: description,
+			subtitle: iconPath,
 			match: alfredMatcher(name),
-			// icon: { type: "fileicon", path: item },
+			icon: { path: iconPath },
 			arg: id,
 			uid: id,
 		};
