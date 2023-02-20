@@ -159,7 +159,7 @@
     "BTTNotchBarNotchMenubarModeHideRightScrollable" : true,
     "BSTSnapAreaDefaultPictoDistanceFromLeft" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "35CCC01C-974C-4781-B652-F57DEC9B8E0A",
+  "BTTPresetUUID" : "065FB282-C7D3-4C92-8BCA-730451C85876",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "BT.G",
@@ -601,8 +601,10 @@
           "BTTTriggerType" : 102,
           "BTTTriggerTypeDescription" : "3 Finger Swipe Up",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType" : 247,
-          "BTTPredefinedActionName" : "Quit App Under Cursor",
+          "BTTPredefinedActionType" : 172,
+          "BTTPredefinedActionName" : "Run Apple Script (blocking)",
+          "BTTGenericActionConfig" : "tell application \"YouTube\"\n\tquit\n\tdelay 0.1\n\tlaunch\nend tell\n",
+          "BTTInlineAppleScript" : "tell application \"YouTube\"\n\tquit\n\tdelay 0.1\n\tlaunch\nend tell\n",
           "BTTEnabled2" : 1,
           "BTTAlternateModifierKeys" : 0,
           "BTTRepeatDelay" : 0,
@@ -611,43 +613,7 @@
           "BTTEnabled" : 1,
           "BTTModifierMode" : 0,
           "BTTOrder" : 1,
-          "BTTDisplayOrder" : 0,
-          "BTTAdditionalActions" : [
-            {
-              "BTTTriggerType" : -1,
-              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTPredefinedActionType" : 129,
-              "BTTPredefinedActionName" : "Delay Next Action (blocking)",
-              "BTTGenericActionConfig" : "0.1",
-              "BTTDelayNextActionBy" : "0.1",
-              "BTTEnabled2" : 1,
-              "BTTAlternateModifierKeys" : 0,
-              "BTTRepeatDelay" : 0,
-              "BTTUUID" : "B104D271-1D95-481D-A39F-27B45793C303",
-              "BTTNotesInsteadOfDescription" : 0,
-              "BTTEnabled" : 1,
-              "BTTModifierMode" : 0,
-              "BTTOrder" : 0,
-              "BTTDisplayOrder" : 0
-            },
-            {
-              "BTTTriggerType" : -1,
-              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTPredefinedActionType" : 49,
-              "BTTPredefinedActionName" : "Launch Application \/ Open File \/ Start Apple Script …",
-              "BTTGenericActionConfig" : "\/Users\/chrisgrieser\/Library\/Mobile Documents\/com~apple~CloudDocs\/Dotfolder\/Chrome Apps.localized\/YouTube.app",
-              "BTTLaunchPath" : "\/Users\/chrisgrieser\/Library\/Mobile Documents\/com~apple~CloudDocs\/Dotfolder\/Chrome Apps.localized\/YouTube.app",
-              "BTTEnabled2" : 1,
-              "BTTAlternateModifierKeys" : 0,
-              "BTTRepeatDelay" : 0,
-              "BTTUUID" : "9E290314-6F4C-4F9F-A9FF-F2F4997BE5DE",
-              "BTTNotesInsteadOfDescription" : 0,
-              "BTTEnabled" : 1,
-              "BTTModifierMode" : 0,
-              "BTTOrder" : 1,
-              "BTTDisplayOrder" : 0
-            }
-          ]
+          "BTTDisplayOrder" : 0
         }
       ]
     },
