@@ -45,11 +45,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>52D4C860-B68A-4110-82F8-C803E09B0CB7</key>
+		<key>64E7E716-0427-41F0-844C-90D39ACC9152</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>76AAF636-1881-4072-A9C5-239C90C7934A</string>
+				<string>FCB5AB9C-F70B-4589-A0EB-4F040AADDD75</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -60,11 +60,11 @@
 		</array>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<array/>
-		<key>84E909BE-967C-46E7-8E3A-3250AF1317B5</key>
+		<key>8D2676E8-2C88-4759-9445-2DBC22311D6D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>108297BB-3FFF-4873-84B8-BC4E6B1DD195</string>
+				<string>D9F4EE1D-52DB-49C1-9E18-08ED50105830</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -73,7 +73,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8D2676E8-2C88-4759-9445-2DBC22311D6D</key>
+		<key>8FC1D9E0-2464-40BB-BB54-4BBA6A2F2771</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -104,19 +104,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>97E52210-B26B-49B3-AC6D-65A1235A88C9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B6430DD8-BB7B-43C8-ADCA-D14DD9FC0D7A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CF0751AB-25B7-45A7-89DE-68E791637C9D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -164,19 +151,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C6C4E59B-E0BE-4C24-A409-FAAE49BE8100</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A8E0AB8E-1473-4197-B793-732E24B45E9F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>D1AFFF36-7CC6-4D2F-8728-863C85053348</key>
 		<array>
 			<dict>
@@ -195,32 +169,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>10C28BFB-0100-4B2F-BAEF-FEA3FC8C44E2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E5B886F0-9286-40B9-9F3E-0475D3256D4F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F34E5081-7725-4B48-867B-36BC4DFAD990</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A8E0AB8E-1473-4197-B793-732E24B45E9F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -329,44 +277,39 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>extensions</string>
-				<key>subtext</key>
-				<string>Keyboard Shortcuts</string>
-				<key>text</key>
-				<string>⚙️ Browser Extensions</string>
-				<key>withspace</key>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
 				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>43</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>,</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.vivaldi.Vivaldi</string>
+					<string>org.chromium.Chromium</string>
+					<string>com.brave.Browser</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>9AA14640-4989-4266-9F9B-E6DB0264EFA5</string>
+			<string>8FC1D9E0-2464-40BB-BB54-4BBA6A2F2771</string>
 			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>chrome://extensions/shortcuts</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>8EF415FC-4BD8-4481-A80A-C31DB81268CE</string>
-			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -418,18 +361,18 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>adblock</string>
+				<string>extensions</string>
 				<key>subtext</key>
-				<string>User Rules</string>
+				<string>Keyboard Shortcuts</string>
 				<key>text</key>
-				<string>🚫 Adblock Settings</string>
+				<string>⚙️ Browser Extensions</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>F34E5081-7725-4B48-867B-36BC4DFAD990</string>
+			<string>9AA14640-4989-4266-9F9B-E6DB0264EFA5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -445,12 +388,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html#user-filter</string>
+				<string>chrome://extensions/shortcuts</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>A8E0AB8E-1473-4197-B793-732E24B45E9F</string>
+			<string>8EF415FC-4BD8-4481-A80A-C31DB81268CE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -504,18 +447,39 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>adguard</string>
+				<string>downloads</string>
 				<key>subtext</key>
-				<string>User Rules</string>
+				<string></string>
 				<key>text</key>
-				<string>🚫 Adblock Settings</string>
+				<string>⬇️ Downloads</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>C6C4E59B-E0BE-4C24-A409-FAAE49BE8100</string>
+			<string>BCBA39EC-1A03-42AE-AC02-3008B7476776</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome://downloads/</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>4B4208D1-E8A7-4F39-B0A9-1DB6D596B5BC</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -587,48 +551,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>chrome-extension://dhdgffkkebhmkfjojejmpbldmpobfkfo/options.html#nav=utils</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>CF0751AB-25B7-45A7-89DE-68E791637C9D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>tampermonkey</string>
-				<key>subtext</key>
-				<string>export/import</string>
-				<key>text</key>
-				<string>🐵 Tampermonkey</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B6430DD8-BB7B-43C8-ADCA-D14DD9FC0D7A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -673,6 +595,70 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>FCB5AB9C-F70B-4589-A0EB-4F040AADDD75</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ce</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>installed-browser-extensions.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Installed Browser Extensions</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>64E7E716-0427-41F0-844C-90D39ACC9152</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -704,204 +690,11 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>tampermonkey</string>
-				<key>subtext</key>
-				<string>User Scripts</string>
-				<key>text</key>
-				<string>🐵 Tampermonkey</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>84E909BE-967C-46E7-8E3A-3250AF1317B5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>chrome-extension://dhdgffkkebhmkfjojejmpbldmpobfkfo/options.html#nav=dashboard</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>108297BB-3FFF-4873-84B8-BC4E6B1DD195</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>43</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>,</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.vivaldi.Vivaldi</string>
-					<string>com.brave.Browser</string>
-					<string>org.chromium.Chromium</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>E5B886F0-9286-40B9-9F3E-0475D3256D4F</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>downloads</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>⬇️ Downloads</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>BCBA39EC-1A03-42AE-AC02-3008B7476776</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>chrome://downloads/</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>4B4208D1-E8A7-4F39-B0A9-1DB6D596B5BC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>minimap</string>
-				<key>subtext</key>
-				<string>Scroll Preview Plugin Settings</string>
-				<key>text</key>
-				<string>🗺️ Minimap</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>52D4C860-B68A-4110-82F8-C803E09B0CB7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>chrome-extension://hhpfdnhklmhheldplcmfhfdooeekgpmm/options/options.html</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>76AAF636-1881-4072-A9C5-239C90C7934A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>108297BB-3FFF-4873-84B8-BC4E6B1DD195</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>740</real>
-			<key>ypos</key>
-			<real>640</real>
-		</dict>
 		<key>10C28BFB-0100-4B2F-BAEF-FEA3FC8C44E2</key>
 		<dict>
 			<key>colorindex</key>
@@ -956,16 +749,18 @@
 			<key>xpos</key>
 			<real>740</real>
 			<key>ypos</key>
-			<real>760</real>
+			<real>405</real>
 		</dict>
-		<key>52D4C860-B68A-4110-82F8-C803E09B0CB7</key>
+		<key>64E7E716-0427-41F0-844C-90D39ACC9152</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>3</integer>
+			<key>note</key>
+			<string>chrome extension search</string>
 			<key>xpos</key>
-			<real>560</real>
+			<real>565</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>545</real>
 		</dict>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<dict>
@@ -975,24 +770,6 @@
 			<real>205</real>
 			<key>ypos</key>
 			<real>160</real>
-		</dict>
-		<key>76AAF636-1881-4072-A9C5-239C90C7934A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>735</real>
-			<key>ypos</key>
-			<real>880</real>
-		</dict>
-		<key>84E909BE-967C-46E7-8E3A-3250AF1317B5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>565</real>
-			<key>ypos</key>
-			<real>640</real>
 		</dict>
 		<key>8D2676E8-2C88-4759-9445-2DBC22311D6D</key>
 		<dict>
@@ -1011,6 +788,15 @@
 			<integer>2</integer>
 			<key>xpos</key>
 			<real>740</real>
+			<key>ypos</key>
+			<real>275</real>
+		</dict>
+		<key>8FC1D9E0-2464-40BB-BB54-4BBA6A2F2771</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>565</real>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
@@ -1032,16 +818,7 @@
 			<key>xpos</key>
 			<real>565</real>
 			<key>ypos</key>
-			<real>155</real>
-		</dict>
-		<key>A8E0AB8E-1473-4197-B793-732E24B45E9F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>740</real>
-			<key>ypos</key>
-			<real>290</real>
+			<real>275</real>
 		</dict>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
@@ -1052,15 +829,6 @@
 			<key>ypos</key>
 			<real>295</real>
 		</dict>
-		<key>B6430DD8-BB7B-43C8-ADCA-D14DD9FC0D7A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>565</real>
-			<key>ypos</key>
-			<real>520</real>
-		</dict>
 		<key>BCBA39EC-1A03-42AE-AC02-3008B7476776</key>
 		<dict>
 			<key>colorindex</key>
@@ -1068,7 +836,7 @@
 			<key>xpos</key>
 			<real>565</real>
 			<key>ypos</key>
-			<real>760</real>
+			<real>405</real>
 		</dict>
 		<key>BE7EDFB7-052F-45E8-BC4B-5448613EE413</key>
 		<dict>
@@ -1087,33 +855,6 @@
 			<real>340</real>
 			<key>ypos</key>
 			<real>575</real>
-		</dict>
-		<key>C6C4E59B-E0BE-4C24-A409-FAAE49BE8100</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>565</real>
-			<key>ypos</key>
-			<real>400</real>
-		</dict>
-		<key>C8C9DCF0-A851-471C-9C2A-46D5C9F34BFB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>665</real>
-		</dict>
-		<key>CF0751AB-25B7-45A7-89DE-68E791637C9D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>740</real>
-			<key>ypos</key>
-			<real>520</real>
 		</dict>
 		<key>D14B4522-0A25-4F4D-9985-FF8B04E43832</key>
 		<dict>
@@ -1155,25 +896,14 @@
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>E5B886F0-9286-40B9-9F3E-0475D3256D4F</key>
+		<key>FCB5AB9C-F70B-4589-A0EB-4F040AADDD75</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>vimium settings</string>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>665</real>
-		</dict>
-		<key>F34E5081-7725-4B48-867B-36BC4DFAD990</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>565</real>
-			<key>ypos</key>
-			<real>290</real>
+			<real>545</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

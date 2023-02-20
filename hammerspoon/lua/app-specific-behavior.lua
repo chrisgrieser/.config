@@ -16,17 +16,17 @@ end
 -- hide windows of other apps, except twitter
 ---@param win hs.window the window of the app not to hide
 local function hideOthers(win)
-	-- if not win or not (win:application()) then return end
-	-- local winName = win:application():name()
+	if not win or not (win:application()) then return end
+	local winName = win:application():name()
 
-	-- local wins = win:otherWindowsSameScreen()
-	-- for _, w in pairs(wins) do
-	-- 	local app = w:application()
-	-- 	local browserWithPiP = app and app:name() == "Vivaldi" and app:findWindow("Picture in Picture")
-	-- 	local isTwitter = app and app:name() == "Twitter" 
-	-- 	local isWindowItself = app and app:name() == winName
-	-- 	if app and not(browserWithPiP or isWindowItself or isTwitter) then app:hide() end
-	-- end
+	local wins = win:otherWindowsSameScreen()
+	for _, w in pairs(wins) do
+		local app = w:application()
+		local browserWithPiP = app and app:name() == "Vivaldi" and app:findWindow("Picture in Picture")
+		local isTwitter = app and app:name() == "Twitter"
+		local isWindowItself = app and app:name() == winName
+		if app and not (browserWithPiP or isWindowItself or isTwitter) then app:hide() end
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -53,8 +53,13 @@ end):start()
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
 AutoTileAppWatcher = Aw.new(function(appName, eventType, appObj)
 	local autoTileApps = { "Finder", "Vivaldi" }
-	if eventType == Aw.deactivated and TableContains(autoTileApps, appName) then
-		if #appObj:allWindows() > 1 then appObj:hide() end
+	if
+		eventType == Aw.deactivated
+		and TableContains(autoTileApps, appName)
+		and #appObj:allWindows() > 1
+		and not(appObj:findWindow("Picture in Picture"))
+	then
+		appObj:hide()
 	end
 end):start()
 

@@ -27,7 +27,7 @@
 		]
 	},
 	"shell script": {
-		"prefix": ["shell script", "doShellScript"],
+		"prefix": ["shell script", "app.doShellScript"],
 		"body": "app.doShellScript(`${1:shellscript}`);"
 	},
 	"open": {
