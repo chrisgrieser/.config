@@ -18,7 +18,7 @@ function readFile(path) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const browserConfig = "/Vivaldi/"; // lead the surrounding // for automation purposes
+const browserConfig = "/Vivaldi/"; // surrounding "//" for automation purposes (extra slashes do not affect path reading)
 const extensionFolder = app.pathTo("home folder") + `/Library/Application Support/${browserConfig}/Default/Extensions`;
 
 const jsonArray = app
@@ -36,17 +36,18 @@ const jsonArray = app
 			const messagesJson = JSON.parse(readFile(root + "_locales/en/messages.json"));
 			if (messagesJson.extensionName?.message) name = messagesJson.extensionName.message;
 			else if (messagesJson.name?.message) name = messagesJson.name.message;
-			else "[name missing]";
+			else "[name not found]";
 		}
 
 		// determine options path
 		let optionsPath = "";
 		if (manifest.options_ui?.page) optionsPath = manifest.options_ui.page;
 		else if (manifest.options_page) optionsPath = manifest.options_page;
-		const emoji = optionsPath ? " ⚙️" : "";
 		const optionsUrl = `chrome-extension://${id}/${optionsPath}`;
 
-		const iconPath = root + manifest.icons["128"];
+		// emoji/icon
+		const emoji = optionsPath ? "" : " 🚫"; // indicate no options available
+		const iconPath = root + manifest.icons["128"]; // 128 seems to be the size always available
 
 		return {
 			title: name + emoji,
