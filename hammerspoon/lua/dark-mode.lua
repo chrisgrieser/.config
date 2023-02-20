@@ -1,6 +1,12 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 
+-- CONFIG
+local autoSwitchFreqMin = 20
+local brightnessThreshhold = 90
+
+--------------------------------------------------------------------------------
+
 local function brightnessNotify()
 	local brightness = math.floor(hs.brightness.ambient())
 	Notify("Brightness: ", tostring(brightness))
@@ -77,6 +83,23 @@ end
 function SetDarkmode(toDark)
 	if (not (IsDarkMode()) and toDark) or (IsDarkMode() and not toDark) then toggleDarkMode() end
 end
+
+-- autoswitch dark mode and light mode depending on brightness
+function AutoSwitchDarkmode()
+	local brightness = hs.brightness.ambient()
+	local hasBrightnessSensor = brightness > -1
+	if not hasBrightnessSensor then return end
+
+	if brightness > brightnessThreshhold and IsDarkMode() then
+		SetDarkmode(true)
+	elseif brightness < brightnessThreshhold and not (IsDarkMode()) then
+		SetDarkmode(false)
+	end
+end
+
+BrightnessCheckTimer = hs.timer.doEvery(autoSwitchFreqMin * 60, AutoSwitchDarkmode):start()
+
+--------------------------------------------------------------------------------
 
 -- `del` mapped to f13 (so ⇧+⌫ can still be used for forward-deleting)
 Hotkey({}, "f13", toggleDarkMode)

@@ -1,6 +1,6 @@
 require("lua.utils")
 require("lua.window-management")
-require("lua.system-and-cron")
+require("lua.cronjobs")
 --------------------------------------------------------------------------------
 -- HELPERS
 
