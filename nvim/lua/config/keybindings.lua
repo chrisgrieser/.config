@@ -114,7 +114,7 @@ keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 -- Comments & Annotations
 keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })
 keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
-keymap("n", "qa", function() require("neogen").generate() end, { desc = "Neogen: Annotation Comment" })
+keymap("n", "qc", function() require("neogen").generate() end, { desc = "Neogen: Annotation Comment" })
 
 -- LUASNIP
 keymap({ "i", "s" }, "<D-j>", function()
@@ -146,15 +146,9 @@ keymap("n", "<leader>ls", function() cmd.Telescope("luasnip") end, { desc = "
 
 --------------------------------------------------------------------------------
 
-function bla(str) print("bla") end
-
---------------------------------------------------------------------------------
-
 -- Whitespace Control
 keymap("n", "=", "mzO<Esc>`z", { desc = "add blank line above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "add blank line below" })
-
--- Indentation
 keymap("n", "<Tab>", ">>", { desc = "indent" })
 keymap("n", "<S-Tab>", "<<", { desc = "outdent" })
 keymap("x", "<Tab>", ">gv", { desc = "indent" })

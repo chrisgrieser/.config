@@ -42,7 +42,7 @@ TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 			end
 		end
 
-	-- raise twitter
+	-- raise twitter when switching window
 	elseif eventType == Aw.activated then
 		local win = appObj:mainWindow()
 		if CheckSize(win, PseudoMaximized) and AppIsRunning("Twitter") then App("Twitter"):mainWindow():raise() end
