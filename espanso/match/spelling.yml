@@ -196,5 +196,3 @@ matches:
     word: true
   - trigger: dwon
     replace: down
-    propagate_casing: true
-    word: true

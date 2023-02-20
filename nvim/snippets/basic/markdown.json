@@ -16,20 +16,15 @@
 			"> $0"
 		]
 	},
+	"image": {
+		"prefix": "image",
+		"body": "<img src=\"${1:image_path}\" alt=\"${2:alt text}\" width=\"${3:50%}\">",
+		"description": "HTML syntax for images used to display images with reduced size"
+	},
 	"Insert task": {
 		"prefix": "task",
 		"body": "- [ ] $0",
 		"description": "Insert task"
-	},
-	"Insert 2x2 table": {
-		"prefix": "2x2table",
-		"body": [
-			"| ${1:Column1}   | ${2:Column2}    |",
-			"|--------------- | --------------- |",
-			"| ${3:Item1.1}   | ${4:Item2.1}   |",
-			"${0}"
-		],
-		"description": "Insert table with 2 rows and 2 columns. First row is heading."
 	},
 	"modeline: nospell": {
 		"prefix": "modeline: nospell",
@@ -38,5 +33,15 @@
 	"ignore (vale)": {
 		"prefix": "ignore (vale)",
 		"body": "<!-- vale ${1:provider.rule} = NO -->"
+	},
+	"insert table": {
+		"prefix": "table",
+		"body": [
+			"| ${1:Column1}   | ${2:Column2}    |",
+			"|--------------- | --------------- |",
+			"| ${3:Item1.1}   | ${4:Item2.1}   |",
+			"${0}"
+		],
+		"description": "Insert table with 2 rows and 2 columns. First row is heading."
 	}
 }
