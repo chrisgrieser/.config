@@ -72,14 +72,6 @@ case $APP in
 		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Mail.icns\""
 	INFO_WINDOW=1
 	;;
-"Stellar")
-	osascript -e "tell application \"Finder\"
-			open information window of (\"/Applications/$APP.app\" as POSIX file as alias)
-			activate
-		end tell
-		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/reddit.icns\""
-	INFO_WINDOW=1
-	;;
 #────────────────────────────────────────────────────────────────────────────
 "YouTube" | "Docs")
 	cp -f "$CUSTOM_ICON_FOLDER/$APP.icns" "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
