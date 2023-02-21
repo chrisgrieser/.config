@@ -34,6 +34,11 @@
 			"title": "🧪 Flags",
 			"arg": "chrome://flags/",
 			"uid": "6"
+		},
+		{
+			"title": "🧪 History",
+			"arg": "chrome://history/",
+			"uid": "7"
 		}
 	]
 }
