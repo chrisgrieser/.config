@@ -173,7 +173,9 @@ function ThemeSettings()
 	function SetThemeMode(mode)
 		o.background = mode
 		g.neovide_transparency = mode == "dark" and darkTransparency or lightTransparency
-		cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
+		-- INFO needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
+		-- but can cause issues with other themes https://github.com/EdenEast/nightfox.nvim/issues/314
+		-- cmd.highlight("clear")
 		local targetTheme = mode == "dark" and darkTheme or lightTheme
 		cmd.colorscheme(targetTheme)
 	end
