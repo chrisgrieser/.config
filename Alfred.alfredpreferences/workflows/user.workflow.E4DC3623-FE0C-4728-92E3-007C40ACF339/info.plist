@@ -451,6 +451,25 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>C539C739-DFEF-4D04-8767-7244B05540C3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -522,6 +541,13 @@
 			<real>240</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>C539C739-DFEF-4D04-8767-7244B05540C3</key>
+		<dict>
+			<key>xpos</key>
+			<real>155</real>
+			<key>ypos</key>
+			<real>735</real>
 		</dict>
 		<key>C6DAAB1D-609E-4930-B1D7-F7D3F3D59BC6</key>
 		<dict>
