@@ -1141,6 +1141,29 @@ last reboot | head -n 10 | cut -c 37-</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>click-stats-app.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -1218,6 +1241,37 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<string>FDF63B46-8376-4578-B3D1-6AF2ECC6ABFE</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"RAM","arg":"2"},{"title":"CPU","arg":"1"},{"title":"GPU","arg":"3"},{"title":"Network","arg":"4"}]</string>
+				<key>keyword</key>
+				<string>stats</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Stats</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>6C2BF5E7-7445-414C-9995-3E5E548C9C39</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1329,6 +1383,13 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>430</real>
 		</dict>
+		<key>6C2BF5E7-7445-414C-9995-3E5E548C9C39</key>
+		<dict>
+			<key>xpos</key>
+			<real>640</real>
+			<key>ypos</key>
+			<real>705</real>
+		</dict>
 		<key>7E7254FB-7761-400D-887B-162AB242F68E</key>
 		<dict>
 			<key>colorindex</key>
@@ -1357,6 +1418,13 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<real>975</real>
 			<key>ypos</key>
 			<real>20</real>
+		</dict>
+		<key>90B736C7-5E78-47F5-9234-CC93A823F765</key>
+		<dict>
+			<key>xpos</key>
+			<real>930</real>
+			<key>ypos</key>
+			<real>660</real>
 		</dict>
 		<key>9132689B-E107-4FA3-9CA5-181DAF3FD179</key>
 		<dict>
