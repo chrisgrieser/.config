@@ -46,7 +46,7 @@ local function syncBookmarks()
 	file:write(content)
 	file:close()
 
-	Notify("✅ Bookmarks synced to Chrome Bookmarks")
+	print("✅ Bookmarks synced to Chrome Bookmarks")
 end
 
 BookmarkWatcher = Pw(sourceBookmarkPath, syncBookmarks):start()
