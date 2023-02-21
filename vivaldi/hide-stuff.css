@@ -7,3 +7,9 @@
 	display: none;
 }
 
+
+/* hide tab title and favicon when empty tab */
+img[srcset="/resources/default_favicon_64.png"],
+.favicon:has(img[srcset="/resources/default_favicon_64.png"]) + .title {
+	display: none;
+}
