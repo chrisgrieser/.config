@@ -71,6 +71,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C539C739-DFEF-4D04-8767-7244B05540C3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C6DAAB1D-609E-4930-B1D7-F7D3F3D59BC6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
 		<array>
 			<dict>
@@ -455,13 +468,15 @@
 			<key>config</key>
 			<dict>
 				<key>acceptsfiles</key>
-				<true/>
+				<false/>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>acceptstext</key>
 				<true/>
 				<key>acceptsurls</key>
-				<true/>
+				<false/>
+				<key>name</key>
+				<string>Add Event to Calendar</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -544,10 +559,12 @@
 		</dict>
 		<key>C539C739-DFEF-4D04-8767-7244B05540C3</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
 			<key>xpos</key>
-			<real>155</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>715</real>
 		</dict>
 		<key>C6DAAB1D-609E-4930-B1D7-F7D3F3D59BC6</key>
 		<dict>
