@@ -8,104 +8,100 @@ function alfredMatcher(str) {
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeperated, str].join(" ");
 }
-const home = app.pathTo("home folder");
-const getEnv = path => $.getenv(path).replace(/^~/, home);
 
 //──────────────────────────────────────────────────────────────────────────────
 
 const jsonArray = [];
-const dotfileFolder = getEnv("dotfile_folder");
+const dotfileFolder = $.getenv("dotfile_folder").replace(/^~/, app.pathTo("home folder"));
 /* eslint-disable no-multi-str, quotes */
 const workArray = app
 	.doShellScript(
-		'PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;\
-	cd "' +
+		'PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "' +
 			dotfileFolder +
-			'" ; \
-	fd --hidden --no-ignore \
-	-E "Alfred.alfredpreferences" \
-	-E "alacritty/colors/*" \
-	-E "hammerspoon/Spoons/*" \
-	-E "*/vale/styles/*/*.yml" \
-	-E "*/vale/styles/*/*.adoc" \
-	-E "*/vale/styles/*/*.md" \
-	-E "**/*.app/*" \
-	-E "karabiner/automatic_backups" \
-	-E "visualized-keyboard-layout/*.json" \
-	-E "zsh/plugins/*" \
-	-E "nvim/my-plugins/*" \
-	-E "*.icns" \
-	-E "*.plist" \
-	-E "*.add" \
-	-E "*.spl" \
-	-E "TODO*" \
-	-E "INFO*" \
-	-E "*.png" \
-	-E "Fonts/*" \
-	-E ".DS_Store" \
-	-E ".git/" \
-	-E ".git"',
+			'" ; fd --hidden --no-ignore \
+		-E "Alfred.alfredpreferences" \
+		-E "alacritty/colors/*" \
+		-E "hammerspoon/Spoons/*" \
+		-E "*/vale/styles/*/*.yml" \
+		-E "*/vale/styles/*/*.adoc" \
+		-E "*/vale/styles/*/*.md" \
+		-E "**/*.app/*" \
+		-E "karabiner/automatic_backups" \
+		-E "visualized-keyboard-layout/*.json" \
+		-E "zsh/plugins/*" \
+		-E "nvim/my-plugins/*" \
+		-E "*.icns" \
+		-E "*.plist" \
+		-E "*.add" \
+		-E "*.spl" \
+		-E "TODO*" \
+		-E "INFO*" \
+		-E "*.png" \
+		-E "Fonts/*" \
+		-E ".DS_Store" \
+		-E ".git/" \
+		-E ".git"',
 	)
 	.split("\r");
 /* eslint-enable no-multi-str, quotes */
 
 /* eslint-disable-next-line complexity */
 workArray.forEach(file => {
-	const filePath = dotfileFolder + file;
+	const fPath = dotfileFolder + file;
 	const parts = file.split("/");
 	const isFolder = file.endsWith("/");
 	if (isFolder) parts.pop();
-	const fileName = parts.pop();
+	const name = parts.pop();
 
-	let parentPart = filePath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
+	let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
 	if (parentPart === ".") parentPart = "";
 
-	let iconObj;
-	let ext = isFolder ? "folder" : fileName.split(".").pop();
-	if (ext.includes("rc")) ext = "rc";
+	let iconObj = { path: "./../filetype-icons/" };
+	let ext = isFolder ? "folder" : name.split(".").pop();
+	if (ext.includes("rc")) ext = "rc"; // rc files
 	else if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
 
 	switch (ext) {
 		case "json":
-			iconObj = { path: "icons/json.png" };
+			iconObj.path += "json.png";
 			break;
 		case "lua":
-			iconObj = { path: "icons/lua.png" };
+			iconObj.path += "lua.png";
 			break;
 		case "yaml":
 		case "yml":
-			iconObj = { path: "icons/yaml.png" };
+			iconObj.path += "yaml.png";
 			break;
 		case "md":
-			iconObj = { path: "icons/markdown-file.png" };
+			iconObj.path += "markdown.png";
 			break;
 		case "js":
-			iconObj = { path: "icons/js.png" };
+			iconObj.path += "js.png";
 			break;
 		case "zsh":
 		case "sh":
-			iconObj = { path: "icons/shell.png" };
-			break;
-		case "png":
-			iconObj = { path: filePath }; // if png, use image itself
+			iconObj.path += "shell.png";
 			break;
 		case "rc":
-			iconObj = { path: "icons/rc.png" };
+			iconObj.path += "rc.png";
+			break;
+		case "png":
+			iconObj.path = fPath; // if png, use image itself
 			break;
 		default:
-			iconObj = { type: "fileicon", path: filePath }; // by default, use file icon
+			iconObj = { type: "fileicon", path: fPath }; // by default, use file icon
 	}
-	let matcher = alfredMatcher(`${fileName} ${parentPart}`);
+	let matcher = alfredMatcher(`${name} ${parentPart}`);
 	if (isFolder) matcher += " folder";
 
 	jsonArray.push({
-		title: fileName,
+		title: name,
 		subtitle: "▸ " + parentPart,
 		match: matcher,
 		icon: iconObj,
 		type: "file:skipcheck",
-		uid: filePath,
-		arg: filePath,
+		uid: fPath,
+		arg: fPath,
 	});
 });
 
@@ -123,7 +119,7 @@ jsonArray.push({
 	arg: dotfileFolder,
 });
 
-const pwPath = home + "/.password-store";
+const pwPath = app.pathTo("home folder") + "/.password-store";
 jsonArray.push({
 	title: ".password-store",
 	match: alfredMatcher(pwPath),
