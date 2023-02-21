@@ -26,38 +26,37 @@ const repoArray = app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/b
 		const name = parts.pop();
 		const relativeParentFolder = fPath.slice(folderToSearch.length, -(name.length + 1));
 
-		let iconObj;
+		let iconObj = { "path": "./../filetype-icons/" };
 		let ext = isFolder ? "folder" : name.split(".").pop();
 		if (ext.includes("rc")) ext = "rc"; // rc files
 		else if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
 		switch (ext) {
 			case "json":
-				iconObj = { "path": "icons/json.png" };
+				iconObj.path += "json.png"
 				break;
 			case "lua":
-				iconObj = { "path": "icons/lua.png" };
+				iconObj.path += "lua.png"
 				break;
 			case "yaml":
 			case "yml":
-				iconObj = { "path": "icons/yaml.png" };
+				iconObj.path += "yaml.png"
 				break;
 			case "md":
-				iconObj = { "path": "icons/markdown-file.png" };
+				iconObj.path += "markdown.png"
 				break;
 			case "js":
-				iconObj = { "path": "icons/js.png" };
+				iconObj.path += "js.png"
 				break;
 			case "zsh":
 			case "sh":
-				iconObj = { "path": "icons/shell.png" };
+				iconObj.path += "shell.png"
 				break;
 			case "rc":
-				iconObj = { "path": "icons/rc.png" };
+				iconObj.path += "rc.png"
 				break;
 			case "png":
-				iconObj = { "path": fPath }; // if png, use image itself
+				iconObj.path = fPath // if png, use image itself
 				break;
-			case "": // = folder
 			default:
 				iconObj = { "type": "fileicon", "path": fPath }; // by default, use file icon
 		}
