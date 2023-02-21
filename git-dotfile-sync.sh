@@ -29,6 +29,8 @@ msg="$device_name ($filesChanged)"
 git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
 git pull --recurse-submodules
 git submodule update --remote
+# INFO in case of file changes in the meantime, run a second time
+git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>" 
 git push
 
 # check that everything worked (e.g. submodules are still dirty)

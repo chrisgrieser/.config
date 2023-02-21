@@ -9,6 +9,10 @@
 	display: none;
 }
 
+input#urlFieldInput::placeholder {
+	opacity: 0;
+}
+
 /* hide tab title and favicon when no favicon exists */
 img[srcset="/resources/default_favicon_64.png"],
 .favicon:has(img[srcset="/resources/default_favicon_64.png"]) + .title {
