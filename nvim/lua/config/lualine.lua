@@ -104,7 +104,7 @@ require("lualine").setup {
 			{
 				"filename",
 				file_status = false,
-				fmt = function(str) return str:gsub("zsh;#toggleterm#", "Toggleterm ") end,
+				fmt = function(str) return str:gsub("zsh;#toggleterm# %d", "Toggleterm") end,
 			},
 		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
