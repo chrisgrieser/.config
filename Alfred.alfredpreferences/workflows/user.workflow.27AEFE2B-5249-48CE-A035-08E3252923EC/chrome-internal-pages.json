@@ -1,8 +1,13 @@
 {
 	"items": [
 		{
-			"title": " ⌨️ Extension Keyboard Shortcuts",
-			"arg": "chrome://extensions/shortcuts",
+			"title": "⚙️ Settings",
+			"arg": "chrome://settings/",
+			"uid": "0"
+		},
+		{
+			"title": "⌨️ Extension Keyboard Shortcuts",
+			"arg": "chrome://extensions/shortcuts/",
 			"uid": "1"
 		},
 		{
@@ -21,9 +26,14 @@
 			"uid": "4"
 		},
 		{
+			"title": "❓ About",
+			"arg": "vivaldi://about/",
+			"uid": "5"
+		},
+		{
 			"title": "🧪 Flags",
 			"arg": "chrome://flags/",
-			"uid": "5"
+			"uid": "6"
 		}
 	]
 }
