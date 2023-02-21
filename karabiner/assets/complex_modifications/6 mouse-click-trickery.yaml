@@ -2,7 +2,8 @@ title: "Mouse Click Trickery"
 rules:
   # this basically emulations the "Right-Click Open Link in new Background tab" 
   # Chrome extension. Only done for a brief duration, so holding the right mouse
-  # button still works for mouse gestues.
+  # button still works for mouse gestues. Also, Rocker Gesture (Left) is
+  # restricted by this (right works though).
   - description: "(Mouse) Right-Click (briefly): Open link in new background tab (Browser)"
     manipulators:
       - type: basic
@@ -10,8 +11,7 @@ rules:
           pointing_button: button2
         to_if_alone:
           - {pointing_button: button1, modifiers: [command]}
-        to_if_held_down:
-          - pointing_button: button2
+        to_if_held_down: [pointing_button: button2]
         parameters: {basic.to_if_held_down_threshold_milliseconds: 200}
         conditions:
           - type: frontmost_application_if
@@ -25,38 +25,34 @@ rules:
       - type: basic
         from:
           pointing_button: button2
-        to:
-          - pointing_button: button1
-            modifiers:
-              - command
+        to_if_held_down: [pointing_button: button2]
+        parameters: {basic.to_if_held_down_threshold_milliseconds: 200}
+        to_if_alone:
+          - {pointing_button: button1, modifiers: [command]}
           - key_code: vk_none
             hold_down_milliseconds: 80
-          - key_code: tab
-            modifiers:
-              - command
+          - {key_code: tab, modifiers: [command]}
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
-              - ^org\.chromium\.Chromium # no $ to also affect PWAs
-              - ^com\.brave\.Browser
-              - ^com\.vivaldi\.Vivaldi
+              - ^org\.chromium\.Chromium.* # no $ to also affect PWAs
+              - ^com\.brave\.Browser.*
+              - ^com\.vivaldi\.Vivaldi.*
               - ^com.reederapp.5.macOS$
               - ^maccatalyst\.com\.lireapp\.macOS$
       # Drafts: R-Click opens link in background
       - type: basic
         from:
           pointing_button: button2
-        to:
+        to_if_held_down: [pointing_button: button2]
+        parameters: {basic.to_if_held_down_threshold_milliseconds: 200}
+        to_if_alone:
           - pointing_button: button2
-          - key_code: vk_none
-            hold_down_milliseconds: 10
+          - {key_code: vk_none, hold_down_milliseconds: 10}
           - key_code: o
           - key_code: return_or_enter
-          - key_code: vk_none
-            hold_down_milliseconds: 600
-          - key_code: h
-            modifiers:
-              - command
+          - {key_code: vk_none, hold_down_milliseconds: 600}
+          - {key_code: h, modifiers: [command]}
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -65,7 +61,9 @@ rules:
       - type: basic
         from:
           pointing_button: button2
-        to:
+        to_if_held_down: [pointing_button: button2]
+        parameters: {basic.to_if_held_down_threshold_milliseconds: 200}
+        to_if_alone:
           - pointing_button: button1
           - {key_code: vk_none, hold_down_milliseconds: 200}
           - {key_code: tab, modifiers: [command]}
@@ -302,15 +300,7 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
-  - description: "(Mouse) 6: ⌘↹"
-    manipulators:
-      - type: basic
-        from:
-          pointing_button: button6
-        to:
-          - key_code: tab
-            modifiers:
-              - command
+  #─────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 1+2 (simultaneously): Dictionary Lookup"
     manipulators:
       - type: basic
@@ -320,10 +310,7 @@ rules:
             - pointing_button: button2
         to:
           - pointing_button: button1 # in case it's not the front window
-          - key_code: d
-            modifiers:
-              - command
-              - control
+          - {key_code: d, modifiers: [control, command]}
         parameters:
           basic.simultaneous_threshold_milliseconds: 100
         conditions:
