@@ -28,6 +28,13 @@ rules:
             bundle_identifiers: 
               - ^com\.apple\.finder$
               - ^mindustry\.mac$
+      # disable systemdiagnosis via Hyper+,
+      - type: basic
+        from:
+          key_code: comma
+          modifiers: {mandatory: [control, command, shift, option]}
+        to:
+          - key_code: vk_none
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪ Tab  → Meh/Tab"
     manipulators:
@@ -46,7 +53,7 @@ rules:
             bundle_identifiers: 
               - ^mindustry\.mac$
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "*️⃣  \U0001F4C2 Open Locations (Globally Active)"
+  - description: "*️⃣  \U0001F4C2 Open Locations"
     manipulators:
       # Hyper + ⌫ = Open Trash
       - type: basic
