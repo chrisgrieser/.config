@@ -1,13 +1,15 @@
-title: "\U0001F401 Mouse Click Trickery"
-version: "1.2"
+title: "Mouse Click Trickery"
 rules:
-  # this basically emulations the "Right-Click Open Link in new Background tab" Chrome extension
-  - description: "\U0001F401 R (tap): Open link in new background tab (Browser)"
+  # this basically emulations the "Right-Click Open Link in new Background tab" 
+  # Chrome extension. Only done for a brief duration, so holding the right mouse
+  # button still works for mouse gestues.
+  - description: "(Mouse) R (tap): Open link in new background tab (Browser)"
     manipulators:
       - type: basic
         from:
           pointing_button: button2
         to_if_alone:
+          - {key_utt, modifiers: [command]}
           - pointing_button: button1
             modifiers:
               - command
@@ -18,7 +20,7 @@ rules:
               - ^com\.brave\.Browser$
               - ^com\.apple\.Safari$
               - ^com\.vivaldi\.Vivaldi$
-  - description: "\U0001F401 R (tap): Open link in new background tab (RSS Readers)"
+  - description: "(Mouse) R (tap): Open link in new background tab (RSS Readers)"
     manipulators:
       - type: basic
         from:
@@ -59,7 +61,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.agiletortoise\.Drafts-OSX$
-      # Mimestream: Open and delete
+      # Mimestream: Open link and delete mail (mostly github links)
       - type: basic
         from:
           pointing_button: button2
@@ -75,15 +77,13 @@ rules:
             bundle_identifiers:
               - ^com\.mimestream\.Mimestream$
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "\U0001F401 3: Quit app"
+  - description: "(Mouse) 3: Quit app"
     manipulators:
       - type: basic
         from:
           pointing_button: button3
         to:
-          - key_code: q
-            modifiers:
-              - command
+          - {key_code: q, modifiers: [command]}
         conditions:
           - type: frontmost_application_unless
             file_paths:
@@ -91,13 +91,12 @@ rules:
               - Hammerspoon
               - "[Nn]eovide"
               - "[Mm]industry"
+      # prevent accidental quitting
       - type: basic
         from:
           pointing_button: button3
         to:
-          - key_code: w
-            modifiers:
-              - command
+          - {key_code: w, modifiers: [command]}
         conditions:
           - type: frontmost_application_if
             file_paths:
@@ -116,7 +115,7 @@ rules:
               - "[Nn]eovide"
   #─────────────────────────────────────────────────────────────────────────────
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "\U0001F401 4 (bottom)"
+  - description: "(Mouse) 4 (bottom)"
     manipulators:
       # INFO Browsers already have mouse 4 mapped to "Back"
       # YouTube: Home
@@ -189,7 +188,7 @@ rules:
               - ^com\.apple\.finder$
   #─────────────────────────────────────────────────────────────────────────────
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "\U0001F401 5 (top)"
+  - description: "(Mouse) 5 (top)"
     manipulators:
       # held-down: universal-search
       - type: basic
@@ -303,7 +302,7 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
-  - description: "\U0001F401 6: ⌘↹"
+  - description: "(Mouse) 6: ⌘↹"
     manipulators:
       - type: basic
         from:
@@ -312,7 +311,7 @@ rules:
           - key_code: tab
             modifiers:
               - command
-  - description: "\U0001F401 1+2 (simultaneously): Dictionary Lookup"
+  - description: "(Mouse) 1+2 (simultaneously): Dictionary Lookup"
     manipulators:
       - type: basic
         from:
