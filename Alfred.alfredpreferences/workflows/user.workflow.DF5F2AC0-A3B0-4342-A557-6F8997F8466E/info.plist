@@ -45,6 +45,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3F8BF243-EE01-4E69-8573-2960822A3915</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C8B8FDDD-C5E0-4FAB-9460-6DE156051CF5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6BE47B31-5477-4429-90B6-3AE77A0233EA</key>
 		<array>
 			<dict>
@@ -200,21 +213,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://icons8.com/icons/set/{query}/color</string>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Icon copied</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>795116F8-1CC3-4379-A1AB-2A4A51D41240</string>
+			<string>7067A0A4-D9DA-4775-BECD-24C3249B29E2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -266,21 +279,21 @@ return "{query}"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Icon copied</string>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://icons8.com/icons/set/{query}/color</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>7067A0A4-D9DA-4775-BECD-24C3249B29E2</string>
+			<string>795116F8-1CC3-4379-A1AB-2A4A51D41240</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -366,12 +379,12 @@ return "{query}"</string>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.flaticon.com/search?word={query}</string>
+				<string>https://www.iconfinder.com/search/?q={query}&amp;price=free</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>C35BAC57-E3D9-4FCA-8B09-2C81C2D8D7B9</string>
+			<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -387,12 +400,12 @@ return "{query}"</string>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.iconfinder.com/search/?q={query}&amp;price=free</string>
+				<string>https://www.flaticon.com/search?word={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
+			<string>C35BAC57-E3D9-4FCA-8B09-2C81C2D8D7B9</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -410,6 +423,149 @@ return "{query}"</string>
 			<string>15FF9B9D-0AF2-48F4-84C0-9781E0F3766B</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alfred preference app</string>
+				<key>subtext</key>
+				<string>apply custom app icon</string>
+				<key>text</key>
+				<string>⚙️ Alfred Preference.app</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D59AEC30-AFEC-48B3-92DE-0719210E8506</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>icon</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>macOS icons: '{query}'</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>3F8BF243-EE01-4E69-8573-2960822A3915</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://macosicons.com/#/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>C8B8FDDD-C5E0-4FAB-9460-6DE156051CF5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>Alfred Preferences</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>6BE47B31-5477-4429-90B6-3AE77A0233EA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>icon-updater.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0B2584E5-EDEE-4BE5-9D80-5098C54BD631</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Icon updated</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D6F7AD54-C4BD-4B8F-8D32-D5680EECB192</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.apple.application-bundle</string>
+				</array>
+				<key>name</key>
+				<string>Use Custom Icon</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>BAA2ADF7-2FEB-4F9A-AE98-17378171B5CA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -459,35 +615,18 @@ return "{query}"</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>alfred preference app</string>
+				<string>pwa</string>
 				<key>subtext</key>
-				<string>apply custom app icon</string>
+				<string></string>
 				<key>text</key>
-				<string>⚙️ Alfred Preference.app</string>
+				<string>Update all PWA Icons</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>D59AEC30-AFEC-48B3-92DE-0719210E8506</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>Alfred Preferences</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>6BE47B31-5477-4429-90B6-3AE77A0233EA</string>
+			<string>987848DC-2D1D-4883-8F73-DA101A1B60C2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -509,90 +648,6 @@ return "{query}"</string>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>787AA6A6-CD07-447C-8D73-F4FCD1FEC10D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>icon-updater.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0B2584E5-EDEE-4BE5-9D80-5098C54BD631</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.apple.application-bundle</string>
-				</array>
-				<key>name</key>
-				<string>Use Custom Icon</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>BAA2ADF7-2FEB-4F9A-AE98-17378171B5CA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Icon updated</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D6F7AD54-C4BD-4B8F-8D32-D5680EECB192</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>pwa</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Update all PWA Icons</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>987848DC-2D1D-4883-8F73-DA101A1B60C2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -656,6 +711,15 @@ return "{query}"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>3F8BF243-EE01-4E69-8573-2960822A3915</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>305</real>
+		</dict>
 		<key>4CA334D9-5DCD-4CEF-986C-3ED4283F6C55</key>
 		<dict>
 			<key>colorindex</key>
@@ -663,7 +727,7 @@ return "{query}"</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>465</real>
 		</dict>
 		<key>6BE47B31-5477-4429-90B6-3AE77A0233EA</key>
 		<dict>
@@ -690,7 +754,7 @@ return "{query}"</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>575</real>
 		</dict>
 		<key>795116F8-1CC3-4379-A1AB-2A4A51D41240</key>
 		<dict>
@@ -766,6 +830,15 @@ return "{query}"</string>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
+		<key>C8B8FDDD-C5E0-4FAB-9460-6DE156051CF5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>305</real>
+		</dict>
 		<key>D59AEC30-AFEC-48B3-92DE-0719210E8506</key>
 		<dict>
 			<key>colorindex</key>
@@ -793,7 +866,7 @@ return "{query}"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>515</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

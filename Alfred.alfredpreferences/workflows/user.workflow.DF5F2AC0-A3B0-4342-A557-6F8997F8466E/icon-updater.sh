@@ -22,7 +22,7 @@ case $APP in
 	cp -f "$CUSTOM_ICON_FOLDER/Cryptomator.icns" "$APP.app/Contents/Resources/Cryptomator.icns"
 	;;
 "Alacritty" | "alacritty")
-	cp -f "$CUSTOM_ICON_FOLDER/Alacritty.icns" "$APP.app/Contents/Resources/alacritty.icns"
+	cp -f "$CUSTOM_ICON_FOLDER/Alacritty 2.icns" "$APP.app/Contents/Resources/alacritty.icns"
 	;;
 "AppCleaner")
 	cp -f "$CUSTOM_ICON_FOLDER/AppCleaner.icns" "$APP.app/Contents/Resources/AppCleaner.icns"
@@ -45,7 +45,7 @@ case $APP in
 			open information window of (\"Alfred 5.app/Contents/Preferences/$APP.app\" as POSIX file as alias)
 			activate
 		end tell
-		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Alfred Prefs.icns\""
+		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Alfred 2.icns\""
 	INFO_WINDOW=1
 	;;
 "Microsoft Word")
@@ -69,7 +69,7 @@ case $APP in
 			open information window of (\"/Applications/$APP.app\" as POSIX file as alias)
 			activate
 		end tell
-		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Mail_fancy.icns\""
+		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Mail.icns\""
 	INFO_WINDOW=1
 	;;
 "Stellar")
@@ -105,13 +105,9 @@ if [[ $NONE_FOUND == 1 ]]; then
 fi
 
 if [[ $INFO_WINDOW == 1 ]]; then
-	sleep 0.2
-	osascript -e 'tell application "System Events"
-		keystroke "v" using {command down}
-		delay 0.05
-		keystroke "w" using {command down}
-	end tell'
-	sleep 0.2
+	sleep 0.15
+	osascript -e 'tell application "System Events" to keystroke "v" using {command down}'
+	sleep 0.15
 else
 	touch "$APP.app"
 fi
