@@ -9,10 +9,9 @@ rules:
         from:
           pointing_button: button2
         to_if_alone:
-          - {key_utt, modifiers: [command]}
-          - pointing_button: button1
-            modifiers:
-              - command
+          - {pointing_button: button1, modifiers: [command]}
+        to_if_held_down:
+          - {pointing_button: button1, modifiers: [command]}
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
