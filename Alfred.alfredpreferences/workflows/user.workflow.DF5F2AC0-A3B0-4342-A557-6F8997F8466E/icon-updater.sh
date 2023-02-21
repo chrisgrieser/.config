@@ -45,7 +45,7 @@ case $APP in
 			open information window of (\"Alfred 5.app/Contents/Preferences/$APP.app\" as POSIX file as alias)
 			activate
 		end tell
-		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Alfred 2.icns\""
+		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Alfred 1.icns\""
 	INFO_WINDOW=1
 	;;
 "Microsoft Word")
