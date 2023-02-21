@@ -99,7 +99,7 @@ function acp() {
 	fi
 
 	git add -A && git commit -m "$COMMIT_MSG"
-	git pull
+	git pull --recurse-submodules
 	git push
 
 	# check if variable starts with variable: https://unix.stackexchange.com/a/465907

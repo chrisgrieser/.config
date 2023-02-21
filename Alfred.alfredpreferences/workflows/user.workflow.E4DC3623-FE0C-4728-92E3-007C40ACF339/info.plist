@@ -109,16 +109,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>9B99EEB1-492C-4165-B8CF-DCCBF3E96201</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Add &amp; Edit in BusyCal</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>F4FE8A6C-1141-485C-8B99-0651788E8F5F</key>
 		<array>
@@ -332,29 +322,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>add-reminder.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -404,23 +371,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>concurrently</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>url</key>
-				<string>busycalevent://new/-in {query} days {var:eventText}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>add-reminder.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>9B99EEB1-492C-4165-B8CF-DCCBF3E96201</string>
+			<string>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -506,7 +475,7 @@
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>290</real>
 		</dict>
 		<key>578C08D0-C681-4E8A-AC1A-63359A0F0C34</key>
 		<dict>
@@ -528,7 +497,7 @@
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>290</real>
 		</dict>
 		<key>931A201F-67BF-4D23-845D-15074A56A83D</key>
 		<dict>
@@ -538,15 +507,6 @@
 			<real>555</real>
 			<key>ypos</key>
 			<real>150</real>
-		</dict>
-		<key>9B99EEB1-492C-4165-B8CF-DCCBF3E96201</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>220</real>
-			<key>ypos</key>
-			<real>435</real>
 		</dict>
 		<key>A0AD41AF-569F-405D-BB88-29B96C8DF007</key>
 		<dict>
@@ -564,7 +524,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>575</real>
 		</dict>
 		<key>C6DAAB1D-609E-4930-B1D7-F7D3F3D59BC6</key>
 		<dict>
@@ -573,7 +533,7 @@
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>505</real>
 		</dict>
 		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
 		<dict>
@@ -602,7 +562,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>290</real>
 		</dict>
 		<key>F4FE8A6C-1141-485C-8B99-0651788E8F5F</key>
 		<dict>
@@ -613,7 +573,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>435</real>
 		</dict>
 		<key>FFFCD856-9A0A-4D43-A899-CCA1AE5235BB</key>
 		<dict>
