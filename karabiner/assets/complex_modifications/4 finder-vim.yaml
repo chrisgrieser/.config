@@ -245,13 +245,6 @@ rules:
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
-      # Temporarily deactivate finder-vim-mode
-      - type: basic
-        from: {key_code: delete_or_backspace}
-        to:
-          - *vim-mode-paused-notice
-          - *enter-insert-mode
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # Batch Rename
       - type: basic
         from: {key_code: return_or_enter, modifiers: {mandatory: [shift]}}
@@ -441,23 +434,13 @@ rules:
                   end repeat
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
-      # b = cycle windows (:bnext)
+      # <BS> = cycle windows (:bnext)
       - type: basic
-        from: {key_code: b}
+        from: {key_code: delete_or_backspace}
         to_if_alone:
           - {key_code: grave_accent_and_tilde, modifiers: [command]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
-      # B = Arrange all windows
-      - type: basic
-        from: {key_code: b, modifiers: {mandatory: [shift]}}
-        to_if_alone:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Finder"
-                  click menu item "Arrange in Front" of menu "Window" of menu bar 1
-                end tell'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
-        # t = cycle tabs (:tabnext)
+      # t = cycle tabs (:tabnext)
       - type: basic
         from: {key_code: t}
         to_if_alone:

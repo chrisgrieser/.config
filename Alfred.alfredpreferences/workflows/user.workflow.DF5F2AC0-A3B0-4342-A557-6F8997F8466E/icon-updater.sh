@@ -4,7 +4,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 if ! command -v iconsur &>/dev/null; then echo -n "iconsur not installed." && exit 1; fi
 #───────────────────────────────────────────────────────────────────────────────
 
-# config
+# CONFIG
 CUSTOM_ICON_FOLDER="$DOTFILE_FOLDER/custom-app-icons"
 PWA_FOLDER="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Chrome Apps.localized/"
 [[ "$(scutil --get ComputerName)" =~ Mother ]] && PWA_FOLDER="$HOME/Applications/Chrome Apps.localized"
@@ -13,56 +13,44 @@ PWA_FOLDER="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Chrome 
 
 cd "/Applications/" || exit 1
 
-APP_TO_UPDATE=$(basename "$*" .app)
+APP=$(basename "$*" .app)
 NONE_FOUND=0
 INFO_WINDOW=0
 
-case $APP_TO_UPDATE in
-"Steam")
-	iconsur set "Steam.app" &>/dev/null
+case $APP in
+"Cryptomator")
+	cp -f "$CUSTOM_ICON_FOLDER/Cryptomator.icns" "$APP.app/Contents/Resources/Cryptomator.icns"
 	;;
+"Alacritty" | "alacritty")
+	cp -f "$CUSTOM_ICON_FOLDER/Alacritty.icns" "$APP.app/Contents/Resources/alacritty.icns"
+	;;
+"AppCleaner")
+	cp -f "$CUSTOM_ICON_FOLDER/AppCleaner.icns" "$APP.app/Contents/Resources/AppCleaner.icns"
+	;;
+"Obsidian")
+	cp -f "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" "$APP.app/Contents/Resources/icon.icns"
+	;;
+"Discord")
+	cp -f "$CUSTOM_ICON_FOLDER/Discord Black.icns" "$APP.app/Contents/Resources/electron.icns"
+	;;
+"Vivaldi")
+	cp -f "$CUSTOM_ICON_FOLDER/Vivaldi.icns" "$APP.app/Contents/Resources/app.icns"
+	;;
+"Neovide")
+	cp -f "$CUSTOM_ICON_FOLDER/Neovim-dark.icns" "$APP.app/Contents/Resources/Neovide.icns"
+	;;
+
 "Alfred Preferences")
 	osascript -e "tell application \"Finder\"
-			open information window of (\"Alfred 5.app/Contents/Preferences/Alfred Preferences.app\" as POSIX file as alias)
+			open information window of (\"Alfred 5.app/Contents/Preferences/$APP.app\" as POSIX file as alias)
 			activate
 		end tell
 		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Alfred Prefs.icns\""
 	INFO_WINDOW=1
 	;;
-	# cp -f "$CUSTOM_ICON_FOLDER/Alfred Prefs.icns" 'Alfred 5.app/Contents/Preferences/Alfred Preferences.app/Contents/Resources/appicon.icns'
-	# touch 'Alfred 4.app/Contents/Preferences/Alfred Preferences.app/Contents/Resources/appicon.icns' ;;
-"Cryptomator")
-	cp -f "$CUSTOM_ICON_FOLDER/Cryptomator.icns" 'Cryptomator.app/Contents/Resources/Cryptomator.icns'
-	touch "Cryptomator.app"
-	;;
-"Alacritty" | "alacritty")
-	cp -f "$CUSTOM_ICON_FOLDER/Alacritty.icns" 'Alacritty.app/Contents/Resources/alacritty.icns'
-	touch "Alacritty.app"
-	;;
-"AppCleaner")
-	cp -f "$CUSTOM_ICON_FOLDER/AppCleaner.icns" 'AppCleaner.app/Contents/Resources/AppCleaner.icns'
-	touch "AppCleaner.app"
-	;;
-"Obsidian")
-	cp -f "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" 'Obsidian.app/Contents/Resources/icon.icns'
-	touch "Obsidian.app"
-	;;
-"Discord")
-	cp -f "$CUSTOM_ICON_FOLDER/Discord Black.icns" 'Discord.app/Contents/Resources/electron.icns'
-	touch "Discord.app"
-	;;
-"Vivaldi")
-	cp -f "$CUSTOM_ICON_FOLDER/Vivaldi.icns" 'Vivaldi.app/Contents/Resources/app.icns'
-	touch "Vivaldi.app"
-	;;
-"Neovide")
-	cp -f "$CUSTOM_ICON_FOLDER/Neovim-dark.icns" 'Neovide.app/Contents/Resources/Neovide.icns'
-	touch "Neovide.app"
-	;;
-
 "Microsoft Word")
 	osascript -e "tell application \"Finder\"
-			open information window of (\"/Applications/Microsoft Word.app\" as POSIX file as alias)
+			open information window of (\"/Applications/$APP.app\" as POSIX file as alias)
 			activate
 		end tell
 		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Word.icns\""
@@ -70,7 +58,7 @@ case $APP_TO_UPDATE in
 	;;
 "Microsoft Excel")
 	osascript -e "tell application \"Finder\"
-			open information window of (\"/Applications/Microsoft Excel.app\" as POSIX file as alias)
+			open information window of (\"/Applications/$APP.app\" as POSIX file as alias)
 			activate
 		end tell
 		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Excel.icns\""
@@ -78,50 +66,33 @@ case $APP_TO_UPDATE in
 	;;
 "Mimestream")
 	osascript -e "tell application \"Finder\"
-			open information window of (\"/Applications/Mimestream.app\" as POSIX file as alias)
+			open information window of (\"/Applications/$APP.app\" as POSIX file as alias)
 			activate
 		end tell
 		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Mail_fancy.icns\""
 	INFO_WINDOW=1
 	;;
 "Stellar")
-	cp -f "$CUSTOM_ICON_FOLDER/reddit.icns" 'Stellar.app/Contents/Resources/AppIcon.icns'
 	osascript -e "tell application \"Finder\"
-			open information window of (\"/Applications/Stellar.app\" as POSIX file as alias)
+			open information window of (\"/Applications/$APP.app\" as POSIX file as alias)
 			activate
 		end tell
 		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/reddit.icns\""
 	INFO_WINDOW=1
 	;;
 #────────────────────────────────────────────────────────────────────────────
-"Docs")
-	cp -f "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Docs.app/Contents/Resources/app.icns"
-	touch "$PWA_FOLDER/Docs.app"
+"YouTube" | "Docs")
+	cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
 	;;
-"YouTube" | "Youtube")
-	cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
-	touch "$PWA_FOLDER/YouTube.app"
-	;;
-"Tagesschau")
-	iconsur set "$PWA_FOLDER/Tagesschau.app" &>/dev/null
-	;;
-"CrunchyRoll")
-	iconsur set "$PWA_FOLDER/CrunchyRoll.app" &>/dev/null
-	;;
-"Netflix")
-	iconsur set "$PWA_FOLDER/Netflix.app" &>/dev/null
-	;;
-"Twitch")
-	iconsur set "$PWA_FOLDER/Twitch.app" &>/dev/null
+"Tagesschau" | "CrunchyRoll" | "Netflix" | "Twitch" | "Steam")
+	iconsur set "$PWA_FOLDER/$APP.app" &>/dev/null
 	;;
 "PWAs")
 	cd "$PWA_FOLDER" || exit 1
-	iconsur set --local reddxxx.app &>/dev/null 
-	iconsur set Tagesschau.app Docs.app Netflix.app Twitch.app CrunchyRoll.app &>/dev/null 
+	iconsur set --local reddxxx.app &>/dev/null
+	iconsur set Tagesschau.app Docs.app Netflix.app Twitch.app CrunchyRoll.app &>/dev/null
 	cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
-	touch "$PWA_FOLDER/YouTube.app"
 	cp -f "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Docs.app/Contents/Resources/app.icns"
-	touch "$PWA_FOLDER/Docs.app"
 	;;
 *)
 	NONE_FOUND=1
@@ -129,7 +100,7 @@ case $APP_TO_UPDATE in
 esac
 
 if [[ $NONE_FOUND == 1 ]]; then
-	echo -n "No icon set up for $APP_TO_UPDATE."
+	echo -n "No icon set up for $APP."
 	return 1
 fi
 
@@ -141,18 +112,20 @@ if [[ $INFO_WINDOW == 1 ]]; then
 		keystroke "w" using {command down}
 	end tell'
 	sleep 0.2
+else
+	touch "$APP.app"
 fi
 
 killall "Dock" # INFO pgrep-ing for the Dock does not work, since there is always a process called that?
 
-if [[ "$APP_TO_UPDATE" == "PWAs" ]] ; then
+if [[ "$APP" == "PWAs" ]]; then
 	echo -n "All PWAs"
 	open "$PWA_FOLDER"
-	exit 0	
+	exit 0
 fi
 
-killall "$APP_TO_UPDATE"
-while pgrep -q "$APP_TO_UPDATE"; do sleep 0.1 ; done
+killall "$APP"
+while pgrep -q "$APP"; do sleep 0.1; done
 sleep 0.1
-open -a "$APP_TO_UPDATE"
-echo -n "$APP_TO_UPDATE" # pass for notification
+open -a "$APP"
+echo -n "$APP" # pass for notification
