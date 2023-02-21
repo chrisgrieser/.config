@@ -150,31 +150,30 @@ rules:
             modifiers: [command, control]
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
-  - description: "(Apps) Brave"
+  #───────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Browser"
     manipulators:
       # open dev tools
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
-          - key_code: i
-            modifiers: [command, option]
-          - key_code: vk_none
-            hold_down_milliseconds: 350
-          - key_code: c
-            modifiers: [command, shift]
+          - {key_code: i, modifiers: [command, option]}
+          - {key_code: vk_none, hold_down_milliseconds: 400}
+          - {key_code: c, modifiers: [command, shift]}
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.brave\.Browser] # no $ to also work in PWAs
-      # open extensions
       - type: basic
-        from: { key_code: comma, modifiers: { mandatory: [shift, command] } }
+        from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
-          shell_command: open 'chrome://extensions/'
+          - {key_code: i, modifiers: [command, option]}
+          - {key_code: vk_none, hold_down_milliseconds: 500}
+          - {key_code: c, modifiers: [command, shift]}
+          - {key_code: vk_none, hold_down_milliseconds: 50}
+          - {key_code: tab, modifiers: [command]} # switch to other window, since Vivaldi dev tool is always detachedd
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers:  # no $ to also work in PWAs
-              - ^com\.brave\.Browser
-              - ^com\.vivaldi\.Vivaldi
+            bundle_identifiers: [^com\.vivaldi\.Vivaldi] # no $ to also work in PWAs
   - description: "(Apps) YouTube/Browser: ⇧⌘+P → Picture-in-Picture Mode"
     manipulators:
       - type: basic
