@@ -17,25 +17,23 @@ function man() {
 	local alacrittyConfig="$HOME/.config/alacritty/man-page.yml"
 	local title="man: $1"
 	local isBuiltIn=false
-	# shellcheck disable=2230
-	[[ "$(which "$1")" =~ "built-in" ]] && isBuiltIn=true
+	[[ "$(which "$1")" =~ built-in ]] && isBuiltIn=true
 	if [[ "$1" == "test" ]] || [[ "$1" == "kill" ]]; then # builtIn commands which *do* have a man page
 		isBuiltIn=false
 	fi
 
-	# run in subshell to suppress output
 	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]]; then
-		(alacritty --config-file="$alacrittyConfig" --title="$title" --command less /usr/share/zsh/*/help/"$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command less /usr/share/zsh/*/help/"$1" &) &>/dev/null
 	elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]]; then
-		(alacritty --config-file="$alacrittyConfig" --title="$title" --command less --pattern="$2" /usr/share/zsh/*/help/"$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command less --pattern="$2" /usr/share/zsh/*/help/"$1" &) &>/dev/null
 	elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]]; then
-		(alacritty --config-file="$alacrittyConfig" --title="$title" --command man "$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command man "$1" &) &>/dev/null
 	else
-		(alacritty --config-file="$alacrittyConfig" --title="$title" --command man -P "/usr/bin/less -is --pattern=$2" "$1" &)
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command man -P "/usr/bin/less -is --pattern=$2" "$1" &) &>/dev/null
 	fi
 }
 
-# # simpler version for people reading my dotfiles to snatch
+# # simpler version without alacritty for people reading my dotfiles to snatch
 # function man () {
 # 	command man "$1" -P "/usr/bin/less -is --pattern=$2"
 # }
@@ -48,5 +46,5 @@ export LESS_TERMCAP_us=$'\E[1;35m' # begin underline = MAGENTA
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
 # Pager-specific settings
-# INFO: less' ignore-case is actually smart-case
+# INFO less' --ignore-case is actually smart-case
 export LESS='-R --incsearch --ignore-case --window=-3 --quit-if-one-screen --no-init --tilde'

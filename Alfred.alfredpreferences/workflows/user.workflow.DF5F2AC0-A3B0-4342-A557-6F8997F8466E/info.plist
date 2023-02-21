@@ -846,7 +846,7 @@ return "{query}"</string>
 			<key>note</key>
 			<string>icon for Alfred prefs</string>
 			<key>xpos</key>
-			<real>425</real>
+			<real>430</real>
 			<key>ypos</key>
 			<real>300</real>
 		</dict>
