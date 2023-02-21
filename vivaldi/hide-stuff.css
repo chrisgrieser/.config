@@ -1,4 +1,6 @@
-/* stylelint-disable selector-max-id */
+/* stylelint-disable selector-max-id, custom-property-pattern */
+/* ────────────────────────────────────────────────────────── */
+
 .button-toolbar.newtab, /* new tab button */
 .ContentBlocker-Control, /* content/shield button */
 .toolbar-insideinput .button-toolbar, /* reader view button, password icon */
@@ -7,9 +9,12 @@
 	display: none;
 }
 
-
 /* hide tab title and favicon when no favicon exists */
 img[srcset="/resources/default_favicon_64.png"],
 .favicon:has(img[srcset="/resources/default_favicon_64.png"]) + .title {
 	display: none;
+}
+
+.tab:has(.favicon img[srcset="/resources/default_favicon_64.png"]) {
+	border: 1.5px solid var(--colorBgIntenser);
 }

@@ -57,6 +57,45 @@
 				<false/>
 			</dict>
 		</array>
+		<key>14116972-95C3-4E76-B226-50E53699FF6A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>206BC34E-F989-4F52-AC9F-EB75ED7604AC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>44B26A32-8706-4826-A472-870DFFC7881E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>24A5A826-7ED5-420E-A209-8D03D13C2F0E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>30BDE79A-EDB6-4D0B-B19A-CC25C363DFA5</key>
 		<array>
 			<dict>
@@ -83,6 +122,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>44B26A32-8706-4826-A472-870DFFC7881E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<array>
 			<dict>
@@ -101,6 +153,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>FF66A968-D0D7-445A-9114-B20E01E181C5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5933499F-2695-4601-9947-67ED427D2AFC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>14116972-95C3-4E76-B226-50E53699FF6A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -161,6 +226,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B986765C-128B-4B33-BDA1-7B8454A1F0FB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C129402F-060A-4E14-A919-D21FCE15A4A4</key>
 		<array>
 			<dict>
@@ -187,6 +265,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CA4E71B9-829F-4DEF-993F-76F207281071</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>24A5A826-7ED5-420E-A209-8D03D13C2F0E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</key>
 		<array>
 			<dict>
@@ -205,6 +296,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A4A97FBA-5CBA-4449-9044-CFD69762CA19</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E0796B13-8AD2-474B-9E52-8C2D6FFC7A05</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B986765C-128B-4B33-BDA1-7B8454A1F0FB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -266,27 +370,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>btop</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>btop</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>EE78F081-66E9-4315-B90F-F44AD0541946</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -308,38 +391,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>btop</string>
+				<key>subtext</key>
+				<string></string>
 				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Execution permission granted</string>
+				<string>btop</string>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>8FB4FEF7-6EDD-4B19-ABDB-C587A62A3BF9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>chmod +x</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>EDEB1C89-49E1-443D-98F5-94AFC17DD1EC</string>
+			<string>EE78F081-66E9-4315-B90F-F44AD0541946</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -370,26 +436,40 @@ echo -n "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>sudo pkill bluetoothd
-echo -n "Bluetooth"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>chmod +x</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
-			<string>9132689B-E107-4FA3-9CA5-181DAF3FD179</string>
+			<string>EDEB1C89-49E1-443D-98F5-94AFC17DD1EC</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Execution permission granted</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8FB4FEF7-6EDD-4B19-ABDB-C587A62A3BF9</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -411,6 +491,30 @@ echo -n "Bluetooth"</string>
 			<string>30BDE79A-EDB6-4D0B-B19A-CC25C363DFA5</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>sudo pkill bluetoothd
+echo -n "Bluetooth"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9132689B-E107-4FA3-9CA5-181DAF3FD179</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -478,27 +582,6 @@ echo -n "Bluetooth"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>wifi restart</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔁 Restart WiFi</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -522,6 +605,27 @@ echo -n "WiFi"</string>
 			<string>B23560CE-55AA-460B-8405-275B52CDC10D</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>wifi restart</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔁 Restart WiFi</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -619,37 +723,6 @@ fi</string>
 			<string>0F55C68E-C6D6-4629-B28B-1E323E3CC867</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>25</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>9</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>5045CD8E-1DA6-4CCB-B7CA-D426C2B5B489</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -976,6 +1049,37 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>25</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>9</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>5045CD8E-1DA6-4CCB-B7CA-D426C2B5B489</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -991,6 +1095,48 @@ fi</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>6BF4A116-C3FE-4B51-BFF9-65DE98E2EAD1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>battery</string>
+				<key>subtext</key>
+				<string>Periphery Devices</string>
+				<key>text</key>
+				<string>📊 Show Battery</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F237B22E-6247-4FA6-899C-A9CA938AFED5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🔋 Battery</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A4A97FBA-5CBA-4449-9044-CFD69762CA19</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1020,44 +1166,31 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🔋 Battery</string>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo "🕓 Uptime"
+echo "========="
+uptime | cut -d "," -f 1,2 | cut -c 11-
+echo ""
+echo " 🥾 Last 10 Reboots"
+echo "=============="
+last reboot | head -n 10 | cut -c 37-</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A4A97FBA-5CBA-4449-9044-CFD69762CA19</string>
+			<string>A25DDA0D-DA11-46FF-9CCB-41D3D338B420</string>
 			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>battery</string>
-				<key>subtext</key>
-				<string>Periphery Devices</string>
-				<key>text</key>
-				<string>📊 Show Battery</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>F237B22E-6247-4FA6-899C-A9CA938AFED5</string>
-			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1112,73 +1245,21 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>echo "🕓 Uptime"
-echo "========="
-uptime | cut -d "," -f 1,2 | cut -c 11-
-echo ""
-echo " 🥾 Last 10 Reboots"
-echo "=============="
-last reboot | head -n 10 | cut -c 37-</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A25DDA0D-DA11-46FF-9CCB-41D3D338B420</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>click-stats-app.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>disk space</string>
+				<string>ram</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>📊 Disk Space</string>
+				<string>📊 RAM</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>C581B232-CDA3-4651-BAB4-32144FECFB52</string>
+			<string>206BC34E-F989-4F52-AC9F-EB75ED7604AC</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1245,31 +1326,175 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>fixedorder</key>
-				<false/>
-				<key>items</key>
-				<string>[{"title":"RAM","arg":"2"},{"title":"CPU","arg":"1"},{"title":"GPU","arg":"3"},{"title":"Network","arg":"4"}]</string>
+				<integer>2</integer>
 				<key>keyword</key>
-				<string>stats</string>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
-				<string></string>
+				<string>disk space</string>
 				<key>subtext</key>
 				<string></string>
-				<key>title</key>
-				<string>Stats</string>
+				<key>text</key>
+				<string>📊 Disk Space</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.listfilter</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>6C2BF5E7-7445-414C-9995-3E5E548C9C39</string>
+			<string>C581B232-CDA3-4651-BAB4-32144FECFB52</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>2</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>44B26A32-8706-4826-A472-870DFFC7881E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>cpu</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>📊 CPU</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>5933499F-2695-4601-9947-67ED427D2AFC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>1</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>14116972-95C3-4E76-B226-50E53699FF6A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>click-stats-app.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>gpu</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>📊 GPU</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CA4E71B9-829F-4DEF-993F-76F207281071</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>3</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>24A5A826-7ED5-420E-A209-8D03D13C2F0E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>network</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>📊 network</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E0796B13-8AD2-474B-9E52-8C2D6FFC7A05</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>4</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>B986765C-128B-4B33-BDA1-7B8454A1F0FB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1307,6 +1532,15 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>325</real>
 		</dict>
+		<key>14116972-95C3-4E76-B226-50E53699FF6A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>675</real>
+			<key>ypos</key>
+			<real>805</real>
+		</dict>
 		<key>16256A06-CEDA-44C4-A6E8-38C512624E63</key>
 		<dict>
 			<key>colorindex</key>
@@ -1315,6 +1549,24 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>206BC34E-F989-4F52-AC9F-EB75ED7604AC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>520</real>
+			<key>ypos</key>
+			<real>660</real>
+		</dict>
+		<key>24A5A826-7ED5-420E-A209-8D03D13C2F0E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>675</real>
+			<key>ypos</key>
+			<real>920</real>
 		</dict>
 		<key>30BDE79A-EDB6-4D0B-B19A-CC25C363DFA5</key>
 		<dict>
@@ -1354,6 +1606,15 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>205</real>
 		</dict>
+		<key>44B26A32-8706-4826-A472-870DFFC7881E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>670</real>
+			<key>ypos</key>
+			<real>690</real>
+		</dict>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
 			<key>colorindex</key>
@@ -1374,6 +1635,15 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
+		<key>5933499F-2695-4601-9947-67ED427D2AFC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>520</real>
+			<key>ypos</key>
+			<real>775</real>
+		</dict>
 		<key>6BF4A116-C3FE-4B51-BFF9-65DE98E2EAD1</key>
 		<dict>
 			<key>colorindex</key>
@@ -1382,13 +1652,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<real>485</real>
 			<key>ypos</key>
 			<real>430</real>
-		</dict>
-		<key>6C2BF5E7-7445-414C-9995-3E5E548C9C39</key>
-		<dict>
-			<key>xpos</key>
-			<real>640</real>
-			<key>ypos</key>
-			<real>705</real>
 		</dict>
 		<key>7E7254FB-7761-400D-887B-162AB242F68E</key>
 		<dict>
@@ -1421,10 +1684,14 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 		</dict>
 		<key>90B736C7-5E78-47F5-9234-CC93A823F765</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>click stats menubar item</string>
 			<key>xpos</key>
-			<real>930</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>825</real>
 		</dict>
 		<key>9132689B-E107-4FA3-9CA5-181DAF3FD179</key>
 		<dict>
@@ -1471,6 +1738,15 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
+		<key>B986765C-128B-4B33-BDA1-7B8454A1F0FB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>680</real>
+			<key>ypos</key>
+			<real>1035</real>
+		</dict>
 		<key>C129402F-060A-4E14-A919-D21FCE15A4A4</key>
 		<dict>
 			<key>colorindex</key>
@@ -1489,6 +1765,15 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>685</real>
 		</dict>
+		<key>CA4E71B9-829F-4DEF-993F-76F207281071</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>520</real>
+			<key>ypos</key>
+			<real>890</real>
+		</dict>
 		<key>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</key>
 		<dict>
 			<key>colorindex</key>
@@ -1506,6 +1791,15 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<real>185</real>
 			<key>ypos</key>
 			<real>445</real>
+		</dict>
+		<key>E0796B13-8AD2-474B-9E52-8C2D6FFC7A05</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>520</real>
+			<key>ypos</key>
+			<real>1005</real>
 		</dict>
 		<key>EDEB1C89-49E1-443D-98F5-94AFC17DD1EC</key>
 		<dict>
