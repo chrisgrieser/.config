@@ -17,8 +17,13 @@ function run() {
 	const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 
 	const jsonArray = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`))
-		.filter(item => !item.fork && !item.archived)
-		.sort((a, b) => b.stargazers_count - a.stargazers_count)
+		.filter(item => !item.fork)
+		.sort((a, b) => {
+			// archived at the bottom, then sort by stars
+			if (a.archived && !b.archived) return 1;
+			if (!a.archived && b.archived) return -1;
+			return b.stargazers_count - a.stargazers_count
+		})
 		.map(item => {
 			let repo = item.full_name.split("/")[1];
 			if (repo === username) repo = "My GitHub Profile";
@@ -28,6 +33,7 @@ function run() {
 			const forks = item.forks_count;
 
 			let info = "";
+			if (item.archived) info += "🗄️ ";
 			if (stars > 0) info += `⭐ ${stars}  `;
 			if (issues > 0) info += `🟢 ${issues}  `;
 			if (forks > 0) info += `🍴 ${forks}  `;
@@ -37,7 +43,6 @@ function run() {
 				subtitle: info,
 				match: alfredMatcher(repo),
 				arg: url,
-				uid: repo,
 			};
 		});
 	return JSON.stringify({ items: jsonArray });
