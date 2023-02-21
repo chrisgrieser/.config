@@ -19,15 +19,20 @@ end
 --------------------------------------------------------------------------------
 
 -- Bookmarks synced to Chrome Bookmarks (needed for Alfred)
--- local browserFolder = Home .. "/Library/Application Support/Vivaldi/"
--- BookmarkWatcher = Pw(browserFolder .. "Default/Bookmarks", function()
--- 	hs.execute("BROWSER_FOLDER='" .. browserFolder .. "' ; " .. [[
--- 			mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
--- 			cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
--- 			cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
--- 		]])
--- 	print("Bookmarks synced to Chrome Bookmarks")
--- end):start()
+local browserFolder = Home .. "/Library/Application Support/Vivaldi/" 
+function RemoveDeleted() hs.json.read(browserFolder .. "Default/Bookmarks"") end
+
+BookmarkWatcher = Pw(browserFolder .. "Default/Bookmarks", function()
+	local shellCommand = string.format([[
+		BROWSER_FOLDER="%s";
+		mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
+		cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
+		cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
+		]], browserFolder)
+
+	hs.execute(shellCommand)
+	print("Bookmarks synced to Chrome Bookmarks")
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -103,7 +108,7 @@ FileHubWatcher = Pw(FileHub, function(paths)
 		if extension == "alfredworkflow" or extension == "ics" or extension == "dmg" then
 			-- RunWithDelays(3, function() os.rename(filep, Home .. "/.Trash/" .. fileName) end)
 
-		-- watch later .urls from the office
+			-- watch later .urls from the office
 		elseif extension == "url" and IsIMacAtHome() then
 			os.rename(filep, Home .. "/Downloaded/" .. fileName)
 			Notify("Watch Later URL moved to Video Downloads.")
@@ -143,7 +148,6 @@ FileHubWatcher = Pw(FileHub, function(paths)
 		then
 			os.rename(filep, DotfilesFolder .. "/visualized-keyboard-layout/" .. fileName)
 			Notify("Visualized Keyboard Layout filed away.")
-
 		end
 	end
 end):start()
