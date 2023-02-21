@@ -159,7 +159,7 @@
     "BTTNotchBarNotchMenubarModeHideRightScrollable" : true,
     "BSTSnapAreaDefaultPictoDistanceFromLeft" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "065FB282-C7D3-4C92-8BCA-730451C85876",
+  "BTTPresetUUID" : "9C280541-4D6E-4201-A3C8-6EB82CD26C4A",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "BT.G",
@@ -320,10 +320,10 @@
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTPredefinedActionType" : -1,
           "BTTPredefinedActionName" : "No Action",
-          "BTTLayoutIndependentActionChar" : "UP",
+          "BTTLayoutIndependentActionChar" : "w",
           "BTTAutoAdaptActionToKeyboardLayout" : true,
           "BTTGenericActionConfig" : "autoAdapt",
-          "BTTShortcutToSend" : "55,126",
+          "BTTShortcutToSend" : "55,13",
           "BTTEnabled2" : 1,
           "BTTAlternateModifierKeys" : 0,
           "BTTRepeatDelay" : 0,
