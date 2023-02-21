@@ -2,7 +2,7 @@ return {
 	-- EDITING-SUPPORT
 	{
 		"numToStr/Comment.nvim",
-		keys = { "q", "Q" }, -- (mnemonic: [q]uiet text)
+		keys = { "q", "Q", { "q", mode = "x" } }, -- (mnemonic: [q]uiet text)
 		config = function()
 			require("Comment").setup {
 				ignore = "^$", -- ignore empty lines

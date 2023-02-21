@@ -19,15 +19,15 @@ end
 --------------------------------------------------------------------------------
 
 -- Bookmarks synced to Chrome Bookmarks (needed for Alfred)
-local browserFolder = Home .. "/Library/Application Support/Vivaldi/"
-BookmarkWatcher = Pw(browserFolder .. "Default/Bookmarks", function()
-	hs.execute("BROWSER_FOLDER='" .. browserFolder .. "' ; " .. [[
-			mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
-			cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
-			cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
-		]])
-	print("Bookmarks synced to Chrome Bookmarks")
-end):start()
+-- local browserFolder = Home .. "/Library/Application Support/Vivaldi/"
+-- BookmarkWatcher = Pw(browserFolder .. "Default/Bookmarks", function()
+-- 	hs.execute("BROWSER_FOLDER='" .. browserFolder .. "' ; " .. [[
+-- 			mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
+-- 			cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
+-- 			cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
+-- 		]])
+-- 	print("Bookmarks synced to Chrome Bookmarks")
+-- end):start()
 
 --------------------------------------------------------------------------------
 
