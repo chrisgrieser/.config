@@ -26,18 +26,18 @@
 			"uid": "4"
 		},
 		{
-			"title": "❓ About",
-			"arg": "vivaldi://about/",
+			"title": "🧪 Flags",
+			"arg": "chrome://flags/",
 			"uid": "5"
 		},
 		{
-			"title": "🧪 Flags",
-			"arg": "chrome://flags/",
+			"title": "❓ About",
+			"arg": "vivaldi://about/",
 			"uid": "6"
 		},
 		{
-			"title": "🧪 History",
-			"arg": "chrome://history/",
+			"title": "🕟 History",
+			"arg": "vivaldi://history/",
 			"uid": "7"
 		}
 	]
