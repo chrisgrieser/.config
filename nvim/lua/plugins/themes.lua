@@ -142,6 +142,7 @@ function ThemeSettings()
 			setHighlight("IndentBlanklineChar", "guifg=#deccba")
 			setHighlight("VertSplit", "guifg=#b29b84")
 			setHighlight("ScrollView", "guibg=#303050")
+			linkHighlight("@field.yaml", "@field") -- HACK https://github.com/EdenEast/nightfox.nvim/issues/314
 
 		-- melange
 		elseif theme == "melange" then
@@ -174,8 +175,7 @@ function ThemeSettings()
 		o.background = mode
 		g.neovide_transparency = mode == "dark" and darkTransparency or lightTransparency
 		-- INFO needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
-		-- but can cause issues with other themes https://github.com/EdenEast/nightfox.nvim/issues/314
-		-- cmd.highlight("clear")
+		cmd.highlight("clear")
 		local targetTheme = mode == "dark" and darkTheme or lightTheme
 		cmd.colorscheme(targetTheme)
 	end
