@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-if ! command -v iconsur &>/dev/null; then echo -n "iconsur not installed." && exit 1; fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
@@ -10,6 +8,8 @@ PWA_FOLDER="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Chrome 
 [[ "$(scutil --get ComputerName)" =~ Mother ]] && PWA_FOLDER="$HOME/Applications/Chrome Apps.localized"
 
 #───────────────────────────────────────────────────────────────────────────────
+
+if ! command -v iconsur &>/dev/null; then echo -n "iconsur not installed." && exit 1; fi
 
 cd "/Applications/" || exit 1
 
@@ -82,7 +82,7 @@ case $APP in
 	;;
 #────────────────────────────────────────────────────────────────────────────
 "YouTube" | "Docs")
-	cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
+	cp -f "$CUSTOM_ICON_FOLDER/$APP.icns" "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
 	;;
 "Tagesschau" | "CrunchyRoll" | "Netflix" | "Twitch" | "Steam")
 	iconsur set "$PWA_FOLDER/$APP.app" &>/dev/null
@@ -108,11 +108,13 @@ if [[ $INFO_WINDOW == 1 ]]; then
 	sleep 0.15
 	osascript -e 'tell application "System Events" to keystroke "v" using {command down}'
 	sleep 0.15
-else
-	touch "$APP.app"
+	exit 0 # needs to manually paste and then restart
 fi
 
+touch "$APP.app"
 killall "Dock" # INFO pgrep-ing for the Dock does not work, since there is always a process called that?
+
+#───────────────────────────────────────────────────────────────────────────────
 
 if [[ "$APP" == "PWAs" ]]; then
 	echo -n "All PWAs"

@@ -122,13 +122,11 @@ vmap ü :caseSwitch
 exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nmap M :mergeLines
 
-" WHITESPACE CONTROL
+" Make o and O respect context
 exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
 exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
 nmap &a& :blankAbove
 nmap &b& :blankBelow
-
-" Smarter o and O (inserting prefix for markdown lists)
 nmap o &b&i
 nmap O &a&i
 
