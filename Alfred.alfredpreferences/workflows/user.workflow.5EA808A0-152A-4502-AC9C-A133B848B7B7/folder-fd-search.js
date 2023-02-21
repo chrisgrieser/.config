@@ -21,7 +21,7 @@ const repoArray = app
 		fd --absolute-path --hidden --exclude "/.git/*"`,
 	)
 	.split("\r")
-	.map(fPath => {
+	.map(fPath => { /* eslint-disable-line complexity */
 		const parts = fPath.split("/");
 		const isFolder = fPath.endsWith("/");
 		if (isFolder) parts.pop();
@@ -50,7 +50,11 @@ const repoArray = app
 			case "js":
 				iconObj.path += "js.png";
 				break;
+			case "typescript":
+				iconObj.path += "typescript.png";
+				break;
 			case "zsh":
+			case "bash":
 			case "sh":
 				iconObj.path += "shell.png";
 				break;
