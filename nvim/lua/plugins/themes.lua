@@ -142,7 +142,7 @@ function ThemeSettings()
 			setHighlight("IndentBlanklineChar", "guifg=#deccba")
 			setHighlight("VertSplit", "guifg=#b29b84")
 			setHighlight("ScrollView", "guibg=#303050")
-			linkHighlight("@field.yaml", "@field") -- HACK https://github.com/EdenEast/nightfox.nvim/issues/314
+			-- linkHighlight("@field.yaml", "@field") -- HACK https://github.com/EdenEast/nightfox.nvim/issues/314
 
 		-- melange
 		elseif theme == "melange" then
