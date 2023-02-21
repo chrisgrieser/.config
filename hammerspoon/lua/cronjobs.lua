@@ -17,9 +17,9 @@ local passIcon = "🔑"
 
 -- retrieve configs from zshenv
 -- not local, cause sometimes not available, so set at startup
-DotfilesFolder = Getenv("DOTFILE_FOLDER")
-PasswordStore = Getenv("PASSWORD_STORE_DIR")
-VaultLocation = Getenv("VAULT_PATH")
+DotfilesFolder = os.getenv("DOTFILE_FOLDER")
+PasswordStore = os.getenv("PASSWORD_STORE_DIR")
+VaultLocation = os.getenv("VAULT_PATH")
 
 local gitDotfileScript = DotfilesFolder .. "/git-dotfile-sync.sh"
 local gitVaultScript = VaultLocation .. "/Meta/git-vault-sync.sh"

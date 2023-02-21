@@ -16,9 +16,9 @@ local w = vim.loop.new_fs_event()
 local function readFile(path)
 	local file = io.open(path, "r")
 	if not file then return "" end
-	local content = file:read("*all")
+	local content = file:read("*a")
 	file:close()
-	return content:gsub("\n$", ""):gsub("\r$", "")
+	return content:gsub("\n$", ""):gsub("\r$", "") -- trim trailing newline
 end
 
 local function executeExtCommand()

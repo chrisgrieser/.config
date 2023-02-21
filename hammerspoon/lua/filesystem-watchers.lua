@@ -1,9 +1,9 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 -- CONFIG (not local vars for longevity)
-DotfilesFolder = Getenv("DOTFILE_FOLDER")
-FileHub = Getenv("WD")
-Home = Getenv("HOME")
+DotfilesFolder = os.getenv("DOTFILE_FOLDER") or ""
+FileHub = os.getenv("WD") or ""
+Home = os.getenv("HOME")
 
 --------------------------------------------------------------------------------
 
@@ -19,20 +19,37 @@ end
 --------------------------------------------------------------------------------
 
 -- Bookmarks synced to Chrome Bookmarks (needed for Alfred)
-local browserFolder = Home .. "/Library/Application Support/Vivaldi/" 
-function RemoveDeleted() hs.json.read(browserFolder .. "Default/Bookmarks"") end
+local appSupport = os.getenv("HOME") .. "/Library/Application Support/"
+local sourceBookmarkPath = appSupport .. "/Vivaldi/Default/Bookmarks"
+local sourceStatePath = appSupport .. "/Vivaldi/Local State"
+local chromeBookmarksPath = appSupport .. "/Google/Chrome/Default/Bookmarks"
+local chromeStatePath = appSupport .. "/Google/Chrome/Local State"
 
-BookmarkWatcher = Pw(browserFolder .. "Default/Bookmarks", function()
-	local shellCommand = string.format([[
-		BROWSER_FOLDER="%s";
-		mkdir -p "$HOME/Library/Application Support/Google/Chrome/Default"
-		cp "$BROWSER_FOLDER/Default/Bookmarks" "$HOME/Library/Application Support/Google/Chrome/Default/Bookmarks"
-		cp "$BROWSER_FOLDER/Local State" "$HOME/Library/Application Support/Google/Chrome/Local State"
-		]], browserFolder)
+local function syncBookmarks()
+	-- Bookmarks
+	local bookmarks = hs.json.read(sourceBookmarkPath)
+	if not bookmarks then return end
+	bookmarks.roots.trash = nil -- remove Vivaldi's trash folder for Alfred
+	local success = hs.json.write(bookmarks, chromeBookmarksPath, false, true)
+	if not success then
+		Notify("⚠️ Bookmarks not correctly synced.")
+		return
+	end
 
-	hs.execute(shellCommand)
-	print("Bookmarks synced to Chrome Bookmarks")
-end):start()
+	-- Local State (also required for Alfred to pick up the Bookmarks)
+	local file = io.open(sourceStatePath, "r")
+	if not file then return end
+	local content = file:read("*a")
+	file:close()
+	file = io.open(chromeStatePath, "w")
+	if not file then return end
+	file:write(content)
+	file:close()
+
+	Notify("✅ Bookmarks synced to Chrome Bookmarks")
+end
+
+BookmarkWatcher = Pw(sourceBookmarkPath, syncBookmarks):start()
 
 --------------------------------------------------------------------------------
 
@@ -106,7 +123,7 @@ FileHubWatcher = Pw(FileHub, function(paths)
 
 		-- delete alfredworkflows and ics (iCal)
 		if extension == "alfredworkflow" or extension == "ics" or extension == "dmg" then
-			-- RunWithDelays(3, function() os.rename(filep, Home .. "/.Trash/" .. fileName) end)
+			RunWithDelays(3, function() os.rename(filep, Home .. "/.Trash/" .. fileName) end)
 
 			-- watch later .urls from the office
 		elseif extension == "url" and IsIMacAtHome() then
