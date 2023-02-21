@@ -40,20 +40,6 @@ end
 
 --------------------------------------------------------------------------------
 
----gets shell environment variable. WARN: if .zshenv is changed during
---Hammerspoon's runtime, this	will not work.
----@param VAR string
----@return string
-function Getenv(VAR)
-	local out = hs.execute("echo $" .. VAR):gsub("\n$", "")
-	if not out or out == "" then
-		Notify("⚠️️ $" .. VAR .. " could not be retrieved.")
-		return ""
-	else
-		return out
-	end
-end
-
 ---Repeat a Function multiple times
 ---@param delaySecs number|number[]
 ---@param func function function to repeat
