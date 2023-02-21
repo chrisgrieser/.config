@@ -326,26 +326,12 @@ rules:
           - shell_command: open 'https://www.messenger.com/'
           - *deactivate-leader
           - *remove-notice
-      # [R]eddit: neovim/vim
+      # [R]eddit
       - type: basic
         from: { key_code: r }
         conditions: [*leader-active]
         to:
-          - shell_command: |
-              osascript -e '
-                tell application "Vivaldi"
-                  if (count of window) > 0 then
-                    set theURL to the URL of active tab of front window
-                  else
-                    set theURL to ""
-                  end if
-                  if the theURL contains "reddit.com/r/neovim" then
-                    set the URL of active tab of front window to "https://www.reddit.com/r/vim/"
-                  else
-                    open location "https://www.reddit.com/r/neovim/"
-                  end if
-                  activate
-                end tell'
+          - shell_command: open -a 'Stellar' || open 'https://www.reddit.com/r/neovim/'
           - *deactivate-leader
           - *remove-notice
       # [?] (w/o shift, German keyboard) man page

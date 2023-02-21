@@ -84,8 +84,15 @@ case $APP_TO_UPDATE in
 		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Mail_fancy.icns\""
 	INFO_WINDOW=1
 	;;
-	# cp "$CUSTOM_ICON_FOLDER/Mail_fancy.icns" 'Mimestream.app/Contents/Resources/AppIcon.icns'
-	# touch "Mimestream.app" ;;
+"Stellar")
+	cp -f "$CUSTOM_ICON_FOLDER/reddit.icns" 'Stellar.app/Contents/Resources/AppIcon.icns'
+	osascript -e "tell application \"Finder\"
+			open information window of (\"/Applications/Stellar.app\" as POSIX file as alias)
+			activate
+		end tell
+		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/reddit.icns\""
+	INFO_WINDOW=1
+	;;
 #────────────────────────────────────────────────────────────────────────────
 "Docs")
 	cp -f "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Docs.app/Contents/Resources/app.icns"
