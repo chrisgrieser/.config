@@ -92,7 +92,7 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>cs</string>
+			<string>ce</string>
 			<key>text</key>
 			<string>Chrome Extensions: '{query}'</string>
 			<key>url</key>

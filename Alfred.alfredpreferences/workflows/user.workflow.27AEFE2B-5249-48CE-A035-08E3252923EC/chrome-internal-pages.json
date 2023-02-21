@@ -1,0 +1,29 @@
+{
+	"items": [
+		{
+			"title": " ⌨️ Extension Keyboard Shortcuts",
+			"arg": "chrome://extensions/shortcuts",
+			"uid": "1"
+		},
+		{
+			"title": "⚙️ Extension Overview",
+			"arg": "chrome://extensions/",
+			"uid": "2"
+		},
+		{
+			"title": "⬇️ Downloads",
+			"arg": "chrome://downloads/",
+			"uid": "3"
+		},
+		{
+			"title": "🔖 Bookmarks",
+			"arg": "chrome://bookmarks/",
+			"uid": "4"
+		},
+		{
+			"title": "🧪 Flags",
+			"arg": "chrome://flags/",
+			"uid": "5"
+		}
+	]
+}

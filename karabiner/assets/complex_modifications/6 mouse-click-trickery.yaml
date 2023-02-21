@@ -3,7 +3,7 @@ rules:
   # this basically emulations the "Right-Click Open Link in new Background tab" 
   # Chrome extension. Only done for a brief duration, so holding the right mouse
   # button still works for mouse gestues.
-  - description: "(Mouse) R (tap): Open link in new background tab (Browser)"
+  - description: "(Mouse) Right-Click (briefly): Open link in new background tab (Browser)"
     manipulators:
       - type: basic
         from:
@@ -11,7 +11,8 @@ rules:
         to_if_alone:
           - {pointing_button: button1, modifiers: [command]}
         to_if_held_down:
-          - {pointing_button: button1, modifiers: [command]}
+          - pointing_button: button2
+        parameters: {basic.to_if_held_down_threshold_milliseconds: 200}
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
