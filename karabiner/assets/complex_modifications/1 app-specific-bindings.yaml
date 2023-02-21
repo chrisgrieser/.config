@@ -165,7 +165,17 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.brave\.Browser] # no $ to also work in PWAs
-  - description: "YouTube: ⇧⌘+P → Picture-in-Picture Mode"
+      # open extensions
+      - type: basic
+        from: { key_code: comma, modifiers: { mandatory: [shift, command] } }
+        to:
+          shell_command: open 'chrome://extensions/'
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:  # no $ to also work in PWAs
+              - ^com\.brave\.Browser
+              - ^com\.vivaldi\.Vivaldi
+  - description: "(Apps) YouTube/Browser: ⇧⌘+P → Picture-in-Picture Mode"
     manipulators:
       - type: basic
         from: { key_code: p, modifiers: { mandatory: [shift, command] } }

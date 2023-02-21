@@ -127,13 +127,11 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>gb</string>
+			<string>gi</string>
 			<key>text</key>
 			<string>Google Image Search for '{query}'</string>
 			<key>url</key>
 			<string>https://www.google.de/search?q={query}&amp;tbm=isch</string>
-			<key>utf8</key>
-			<true/>
 		</dict>
 		<key>8F493343-1B11-4713-84B1-8896AF7CA854</key>
 		<dict>
@@ -158,19 +156,6 @@
 			<string>Google News</string>
 			<key>url</key>
 			<string>https://news.google.com/?hl=de&amp;gl=DE&amp;ceid=DE:de</string>
-			<key>utf8</key>
-			<true/>
-		</dict>
-		<key>B140DCCB-90EA-42E2-AEFB-74D5FA18257C</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>fb</string>
-			<key>text</key>
-			<string>Facebook</string>
-			<key>url</key>
-			<string>https://www.facebook.com/</string>
 			<key>utf8</key>
 			<true/>
 		</dict>
