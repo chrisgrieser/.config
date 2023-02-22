@@ -40,6 +40,6 @@ img[srcset="/resources/default_favicon_64.png"],
 }
 
 #panels-container button[name="PanelDownloads"] .progress-bar-container {
-	position: absolute;
+	/* position: absolute; */
 	/* left: 30px; */
 }
