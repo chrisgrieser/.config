@@ -53,7 +53,7 @@ function WorkLayout()
 	HoleCover()
 
 	if not isWeekend() then OpenApp("Slack") end
-	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
+	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts", "Spotify" }
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder" }
 	require("lua.private").closer()
 
@@ -70,6 +70,7 @@ function WorkLayout()
 		"Obsidian",
 		"Drafts",
 		"Mimestream",
+		"Spotify",
 		"alacritty",
 		"Alacritty",
 	})
@@ -81,6 +82,7 @@ function WorkLayout()
 		App("Drafts"):activate()
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
+		App("Spotify"):hide()
 	end)
 end
 
@@ -88,7 +90,7 @@ local function motherHomeModeLayout()
 	setHigherBrightnessDuringDay()
 
 	if not isWeekend() then OpenApp("Slack") end
-	OpenApp { "Discord", "Obsidian", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
+	OpenApp { "Discord", "Obsidian", "Mimestream", "Vivaldi", "Twitter", "Drafts", "Spotify" }
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder" }
 	require("lua.private").closer()
 
@@ -111,6 +113,7 @@ local function motherHomeModeLayout()
 		TwitterToTheSide()
 	end)
 	ShowAllSidebars()
+	App("Spotify"):hide()
 end
 
 local function motherMovieModeLayout()
@@ -124,6 +127,7 @@ local function motherMovieModeLayout()
 			"Obsidian",
 			"Drafts",
 			"Slack",
+			"Spotify",
 			"Discord",
 			"Mimestream",
 			"Alfred Preferences",
@@ -150,6 +154,7 @@ function MovieModeLayout()
 		"Drafts",
 		"Neovide",
 		"neovide",
+		"Spotify",
 		"Slack",
 		"Discord",
 		"BusyCal",

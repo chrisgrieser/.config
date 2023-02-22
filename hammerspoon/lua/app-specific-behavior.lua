@@ -57,7 +57,7 @@ AutoTileAppWatcher = Aw.new(function(appName, eventType, appObj)
 		eventType == Aw.deactivated
 		and TableContains(autoTileApps, appName)
 		and #appObj:allWindows() > 1
-		and not(appObj:findWindow("Picture in Picture"))
+		and not (appObj:findWindow("Picture in Picture"))
 	then
 		appObj:hide()
 	end
@@ -70,22 +70,23 @@ Wf_maxWindows = Wf.new(true):subscribe(Wf.windowUnfocused, function(win)
 	if CheckSize(win, Maximized) then win:application():hide() end
 end)
 
----play/pause spotify with spotifyTUI
+---play/pause spotify with spotifyTUI or Spotify
 ---@param toStatus string pause|play
-local function spotifyTUI(toStatus)
-	local currentStatus = hs.execute(
-		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s"
-	)
-	currentStatus = Trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch
-	if
-		(currentStatus == "▶️" and toStatus == "pause")
-		or (currentStatus == "⏸" and toStatus == "play")
-	then
-		local stdout = hs.execute(
-			"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle"
-		)
-		if toStatus == "play" then Notify(stdout) end ---@diagnostic disable-line: param-type-mismatch
-	end
+local function spotifyControl(toStatus)
+	-- local currentStatus = hs.execute(
+	-- 	"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s"
+	-- )
+	-- currentStatus = Trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch
+	-- if
+	-- 	(currentStatus == "▶️" and toStatus == "pause")
+	-- 	or (currentStatus == "⏸" and toStatus == "play")
+	-- then
+	-- 	local stdout = hs.execute(
+	-- 		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle"
+	-- 	)
+	-- 	if toStatus == "play" then Notify(stdout) end ---@diagnostic disable-line: param-type-mismatch
+	-- end
+	Applescript([[tell application "Spotify" to ]] .. toStatus)
 end
 
 -- auto-pause Spotify on launch of apps w/ sound
@@ -95,9 +96,9 @@ SpotifyAppWatcher = Aw.new(function(appName, eventType)
 	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
 	if TableContains(appsWithSound, appName) then
 		if eventType == Aw.launched then
-			spotifyTUI("pause")
+			spotifyControl("pause")
 		elseif eventType == Aw.terminated then
-			spotifyTUI("play")
+			spotifyControl("play")
 		end
 	end
 end):start()
