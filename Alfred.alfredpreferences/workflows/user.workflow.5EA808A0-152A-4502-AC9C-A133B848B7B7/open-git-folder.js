@@ -10,6 +10,7 @@ const home = app.pathTo("home folder");
 const fileExists = filePath => Application("Finder").exists(Path(filePath));
 //──────────────────────────────────────────────────────────────────────────────
 
+// CONFIG
 const pathsToSearch = [
 	$.getenv("dotfile_folder").replace(/^~/, home),
 	$.getenv("dotfile_folder").replace(/^~/, home) + "/nvim/my-plugins",
@@ -50,12 +51,8 @@ const repoArray = app
 		"export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; fd '\\.git$' --no-ignore --hidden --max-depth=2 " +
 			pathString,
 	)
-	// .doShellScript(
-	// 	"export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; fd '.git$' --no-ignore --hidden --max-depth=2 '/Users/chrisgrieser/.config/nvim/my-plugins'"
-	// )
 	.split("\r")
-	.map(i => i.slice(0, -4))
-	.filter(i => !i.endsWith(".spoon/")); // no hammerspoon spoons
+	.map(i => i.replace(/\.git\/?$/, ""))
 
 repoArray.forEach(localRepoFilePath => {
 	let repoName;
@@ -67,8 +64,8 @@ repoArray.forEach(localRepoFilePath => {
 
 	// Dirty Repo
 	let dirtyIcon = "";
-	// const dirtyRepo = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
-	// if (dirtyRepo) dirtyIcon = " ✴️";
+	const dirtyRepo = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
+	if (dirtyRepo) dirtyIcon = " ✴️";
 
 	let iconpath = "repotype-icons/";
 	if (isAlfredWorkflow) {
@@ -79,7 +76,7 @@ repoArray.forEach(localRepoFilePath => {
 		repoName = JSON.parse(manifest).name;
 		iconpath += "obsidian.png";
 	} else if (isNeovimPlugin) {
-		repoName = localRepoFilePath.replace(/.*\/(.*)/, "$1");
+		repoName = localRepoFilePath.replace(/.*\/(.*)\//, "$1");
 		iconpath += "neovim.png";
 	} else if (localRepoFilePath.endsWith(".config/")) {
 		repoName = "dotfiles";
