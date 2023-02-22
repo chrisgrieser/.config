@@ -706,7 +706,7 @@ rules:
                   ln -sf "$sel" "${sel}-symlink"
                   open -R "${sel}-symlink"
               elif [[ -d "$sel" ]] ; then
-                  sel="$(echo "$sel" | cut -c2-)"
+                  sel="$(echo "$sel" |  | rev | cut -c 2- | rev)"
                   ln -sf "$sel" "${sel}-symlink"
                   open -R "${sel}-symlink"
               fi
