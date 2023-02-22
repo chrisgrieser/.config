@@ -123,6 +123,7 @@ FileHubWatcher = Pw(FileHub, function(paths)
 
 		-- delete alfredworkflows and ics (iCal)
 		if extension == "alfredworkflow" or extension == "ics" or extension == "dmg" then
+			if extension == "dmg" then hs.open(filep) end -- dmg cannot be auto-opened
 			RunWithDelays(3, function() os.rename(filep, Home .. "/.Trash/" .. fileName) end)
 
 			-- watch later .urls from the office

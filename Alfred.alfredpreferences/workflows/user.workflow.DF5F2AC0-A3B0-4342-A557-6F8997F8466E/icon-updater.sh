@@ -18,6 +18,9 @@ NONE_FOUND=0
 INFO_WINDOW=0
 
 case $APP in
+"Steam" | "Spotify")
+	iconsur set "$APP.app"
+	;;
 "Cryptomator")
 	cp -f "$CUSTOM_ICON_FOLDER/Cryptomator.icns" "$APP.app/Contents/Resources/Cryptomator.icns"
 	;;
@@ -76,7 +79,7 @@ case $APP in
 "YouTube" | "Docs")
 	cp -f "$CUSTOM_ICON_FOLDER/$APP.icns" "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
 	;;
-"Tagesschau" | "CrunchyRoll" | "Netflix" | "Twitch" | "Steam")
+"Tagesschau" | "CrunchyRoll" | "Netflix" | "Twitch")
 	iconsur set "$PWA_FOLDER/$APP.app" &>/dev/null
 	;;
 "PWAs")
