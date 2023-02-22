@@ -17,13 +17,6 @@ export ZDOTDIR="$DOTFILE_FOLDER/zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# OpenAI API Key stored outside of public git repo (symlinked file)
-# key is accessed by nvim as well as shell plugins
-OPENAI_API_KEY=$(tr -d "\n" < "$ICLOUD/Dotfolder/private dotfiles/openai_api_key")
-export OPENAI_API_KEY
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # Pass Config
 export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=32
