@@ -278,6 +278,7 @@ return {
 			"hrsh7th/cmp-emoji",
 			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh",
+			"jcdickinson/codeium.nvim", -- ai support
 			"ray-x/cmp-treesitter",
 			{ "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
 			"hrsh7th/cmp-nvim-lsp", -- lsp
@@ -285,6 +286,21 @@ return {
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
 		config = cmpconfig,
+	},
+	{
+		"jcdickinson/codeium.nvim",
+		lazy = true, -- is being loaded by cmp
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"hrsh7th/nvim-cmp",
+		},
+		config = function()
+			require("codeium").setup {
+				config_path = vim.env.ICLOUD .. "Dotfolder/private dotfiles/codium-api-key.json",
+				bin_path = vim.fn.stdpath("data") .. "/codeium",
+			}
+		end,
 	},
 	{
 		"petertriho/cmp-git",

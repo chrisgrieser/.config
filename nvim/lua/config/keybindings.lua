@@ -344,12 +344,6 @@ end
 keymap("n", "#", ":CccPick<CR>")
 keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
 
--- Neural
-keymap("x", "<leader>a", ":NeuralCode complete<CR>", { desc = "ﮧ Code Completion" })
-
--- ChatGPT
-keymap("n", "<leader>a", ":ChatGPT<CR>", { desc = "ﮧ ChatGPT Prompt" })
-
 --------------------------------------------------------------------------------
 -- FILES
 
