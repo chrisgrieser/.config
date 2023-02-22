@@ -26,3 +26,20 @@ img[srcset="/resources/default_favicon_64.png"],
 .tab:has(.favicon img[srcset="/resources/default_favicon_64.png"]) {
 	border: 1px solid var(--colorBgIntenser);
 }
+/* ───────────────────────────────────────────────── */
+/* Panel */
+#panels-container {
+	/* margin-left: -30px; */
+	margin-left: -15px;
+}
+
+#panels-container button[name="PanelDownloads"] {
+	position: absolute;
+	left: 30px;
+	/* margin-left: 30px !important; */
+}
+
+#panels-container button[name="PanelDownloads"] .progress-bar-container {
+	position: absolute;
+	/* left: 30px; */
+}
