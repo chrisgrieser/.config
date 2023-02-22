@@ -24,9 +24,9 @@ done
 
 # globs are necessary, since the exact name of the menubar item changes a bit
 # depending on installation whether mac is M1 or not
-network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*network" | cut -d\" -f2)
-cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | cut -d\" -f2)
-gpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*gpu" | cut -d\" -f2)
+network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*network" | head -n1 | cut -d\" -f2)
+cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | head -n1 | cut -d\" -f2)
+gpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*gpu" | head -n1 | cut -d\" -f2)
 ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*ram" | head -n1 | cut -d\" -f2)
 
 
@@ -91,7 +91,7 @@ sketchybar \
 	--add alias "$gpu_bar_item" $second_row \
 	--set "$gpu_bar_item" width=55 \
 	--add alias "$network_bar_item" $second_row \
-	--set "$network_bar_item" width=65 \
+	--set "$network_bar_item" width=100 \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 \

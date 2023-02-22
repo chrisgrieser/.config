@@ -8,14 +8,6 @@
 	display: none;
 }
 
-.UrlBar-AddressField .button-addressfield.SiteInfoButton.secure {
-	order: 1;
-}
-
-/* .UrlBar-AddressField:not(:hover) .button-addressfield.SiteInfoButton.secure { */
-/* 	opacity: 0; */
-/* } */
-
 
 /* ───────────────────────────────────────────────── */
 
