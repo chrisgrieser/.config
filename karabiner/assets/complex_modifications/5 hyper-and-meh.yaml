@@ -21,18 +21,18 @@ rules:
           key_code: escape
         to_if_alone:
           - key_code: f18
-        # INFO condition to avoid conflict with finder-vim-mode; mapping to f18 
+        # INFO condition to avoid conflict with finder-vim-mode; mapping to f18
         # is done in finder-vim-alfred-addon.yaml
         conditions:
           - type: frontmost_application_unless
-            bundle_identifiers: 
+            bundle_identifiers:
               - ^com\.apple\.finder$
               - ^mindustry\.mac$
       # disable systemdiagnosis via Hyper+,
       - type: basic
         from:
           key_code: comma
-          modifiers: {mandatory: [control, command, shift, option]}
+          modifiers: { mandatory: [control, command, shift, option] }
         to:
           - key_code: vk_none
   #─────────────────────────────────────────────────────────────────────────────
@@ -50,7 +50,7 @@ rules:
               - option
         conditions:
           - type: frontmost_application_unless
-            bundle_identifiers: 
+            bundle_identifiers:
               - ^mindustry\.mac$
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣  \U0001F4C2 Open Locations"
@@ -59,9 +59,14 @@ rules:
       - type: basic
         from:
           key_code: delete_or_backspace
-          modifiers: {mandatory: [control, command, shift, option]}
+          modifiers: { mandatory: [control, command, shift, option] }
         to:
-          - shell_command: open "$HOME/.Trash"
+          - shell_command: |
+              osascript -e '
+                tell application "Finder"
+                  activate
+                  open the trash # opens the unified trash (iCloud trash + user trash)
+              end tell '
           - key_code: vk_none
             hold_down_milliseconds: 200
           - key_code: "2" # list view
@@ -70,7 +75,7 @@ rules:
       - type: basic
         from:
           key_code: f
-          modifiers: {mandatory: [control, command, shift, option]}
+          modifiers: { mandatory: [control, command, shift, option] }
         to:
           # with this method, it's not opened in a new window
           - shell_command: |
@@ -91,7 +96,7 @@ rules:
       - type: basic
         from:
           key_code: r
-          modifiers: {mandatory: [control, command, shift, option]}
+          modifiers: { mandatory: [control, command, shift, option] }
         to:
           # INFO not done via Alfred because of https://github.com/neovide/neovide/issues/1604
           # INFO Quitting via wqall instead of cmd+Q so bufferleaving autocmds are triggered
@@ -117,7 +122,7 @@ rules:
       - type: basic
         from:
           key_code: "5"
-          modifiers: {mandatory: [control, command, shift, option]}
+          modifiers: { mandatory: [control, command, shift, option] }
         to:
           - shell_command: |
               osascript -e 'display notification "" with title "Restarting Alfred…"'
@@ -128,7 +133,7 @@ rules:
               open -a Alfred\ 5
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
   #─────────────────────────────────────────────────────────────────────────────
-  - description: 'Insert Mode Vim: ⇪ Hyper + hjkliomn<space>ö → ←↓↑→↵⌫⇐⇒'
+  - description: "Insert Mode Vim: ⇪ Hyper + hjkliomn<space>ö → ←↓↑→↵⌫⇐⇒"
     manipulators:
       - type: basic
         from:
@@ -193,7 +198,7 @@ rules:
           modifiers:
             mandatory:
               - option
-              - right_shift  # only hyper
+              - right_shift # only hyper
               - command
               - control
         to:
@@ -246,6 +251,6 @@ rules:
             modifiers:
               - option
               - shift
-          - key_code: delete_or_backspace  # delete the selection
-          - key_code: delete_or_backspace  # delete the space
-          - key_code: right_arrow  # go to next word
+          - key_code: delete_or_backspace # delete the selection
+          - key_code: delete_or_backspace # delete the space
+          - key_code: right_arrow # go to next word
