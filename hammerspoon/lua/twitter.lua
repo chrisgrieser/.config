@@ -3,6 +3,8 @@ require("lua.utils")
 
 function TwitterScrollUp()
 	if not (AppIsRunning("Twitter")) then return end
+	Keystroke({ "command" }, "left", 1, App("Twitter")) -- go back
+	Keystroke({ "command" }, "1", 1, App("Twitter")) -- go to home tab
 	Keystroke({ "shift", "command" }, "R", 1, App("Twitter")) -- reload
 	-- needs delay to wait for tweet loading
 	RunWithDelays({ 0.2, 0.4, 0.6, 0.9, 1.2 }, function()
@@ -17,7 +19,6 @@ function TwitterToTheSide()
 	if not win then return end
 	win:raise()
 	win:setFrame(ToTheSide)
-	Keystroke({ "command" }, "1", 1, App("Twitter")) -- home tab
 end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
@@ -29,10 +30,9 @@ TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 			if eventType == Aw.launched then TwitterScrollUp() end
 		end)
 
-	-- auto-close media windows
+	-- auto-close media windows and scroll up when deactivating
 	elseif appName == "Twitter" and eventType == Aw.deactivated then
-		Keystroke({ "command" }, "left", 1, App("Twitter")) -- go back
-		Keystroke({ "command" }, "1", 1, App("Twitter")) -- home tab
+		TwitterScrollUp()
 
 		for _, win in pairs(appObj:allWindows()) do
 			if win:title():find("Media") then
@@ -42,8 +42,8 @@ TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 			end
 		end
 
-	-- raise twitter when switching window
-	elseif eventType == Aw.activated then
+	-- raise twitter when switching window to any app
+	elseif appName and eventType == Aw.activated then
 		local win = appObj:mainWindow()
 		if CheckSize(win, PseudoMaximized) and AppIsRunning("Twitter") then App("Twitter"):mainWindow():raise() end
 	end
