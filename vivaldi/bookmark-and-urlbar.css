@@ -24,41 +24,16 @@
 /* ───────────────────────────────────────────────── */
 /* SECURITY BUTTON */
 .UrlBar-AddressField .SiteInfoButton {
-	order: 1;
-	margin-right: 3vw;
+	order: 1; /* move to the right */
+	margin-right: 4px;
 }
 
-.SiteInfoButton-SecurityBadge:has(svg > g > path:nth-child(2)),
-.toolbar-mainbar:not(:hover, :active) .SiteInfoButton:is(.secure){
+.SiteInfoButton-SecurityBadge:has(svg > g > path:nth-child(2)), /* briefly flashing info icon */
+.toolbar-mainbar:not(:hover, :active) .SiteInfoButton:is(.secure) {
 	opacity: 0;
 }
-
 /* ───────────────────────────────────────────────── */
-
 /* DOWNLOAD BUTTON */
-.button-toolbar button[name="DownloadButton"] {
-	position: absolute;
-}
-
-/* EXTENSION BUTTON */
-/* show extension button only when hovering url bar */
-.toolbar-mainbar:not(:hover, :active) .UrlBar-AddressField ~ .toolbar-extensions {
-	opacity: 0;
-}
-
-/* TODO this only works properly when hiding all extension buttons */
-#browser #main .mainbar .toolbar-extensions {
-	position: absolute;
-	background: none;
-	height: 30px;
-	margin-left: 20px;
-	right: 0;
-}
-
-.toolbar-extensions .button-toolbar:not(.ExtensionIcon) button:hover svg {
-	color: var(--colorHighlightBg);
-}
-
-#browser .toolbar-extensions .button-toolbar:not(.ExtensionIcon) button {
-	background: none;
+button[name="DownloadButton"] {
+	margin-left: -5px;
 }
