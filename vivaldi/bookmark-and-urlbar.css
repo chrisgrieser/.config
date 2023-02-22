@@ -34,10 +34,15 @@
 }
 
 /* ───────────────────────────────────────────────── */
-/* EXTENSION BUTTON */
 
+/* DOWNLOAD BUTTON */
+.button-toolbar button[name="DownloadButton"] {
+	position: absolute;
+}
+
+/* EXTENSION BUTTON */
 /* show extension button only when hovering url bar */
-.toolbar-mainbar:not(:hover, :active) .UrlBar-AddressField + .toolbar-extensions {
+.toolbar-mainbar:not(:hover, :active) .UrlBar-AddressField ~ .toolbar-extensions {
 	opacity: 0;
 }
 
