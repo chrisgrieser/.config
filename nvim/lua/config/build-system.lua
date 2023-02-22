@@ -6,15 +6,17 @@ keymap("n", "<leader>r", function()
 
 	-- sketchybar
 	if parentFolder:find("sketchybar") then
-
 		-- HACK for https://github.com/FelixKratz/SketchyBar/issues/322
-		fn.system([[
-			brew services restart sketchybar
-			sleep 2
-			osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"
-		]])
+		fn.system([[brew services restart sketchybar]])
 
-	-- nvim config
+		---@diagnostic disable: param-type-mismatch
+		--stylua: ignore
+		vim.defer_fn(function ()
+			fn.system([[osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"]])
+		end, 2000)
+		---@diagnostic enable: param-type-mismatch
+
+		-- nvim config
 	elseif ft == "lua" and parentFolder:find("nvim") then
 		cmd.source()
 		vim.notify(expand("%:r") .. " re-sourced")
