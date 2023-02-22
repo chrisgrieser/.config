@@ -1,0 +1,19 @@
+rules:
+  - description: "F keys to media controls"
+    # to be able to quickly change it back; see https://github.com/Rigellute/spotify-tui/issues/1072
+    manipulators:
+      - type: basic
+        from: {key_code: f8}
+        to: 
+          - shell_command: pgrep -q "Spotify" || open -a "Spotify"
+          - consumer_key_code: play_or_pause
+      - type: basic
+        from: {key_code: f9}
+        to:
+          - shell_command: pgrep -q "Spotify" || open -a "Spotify"
+          - consumer_key_code: fast_forward
+      - type: basic
+        from: {key_code: f8}
+        to:
+          - shell_command: pgrep -q "Spotify" || open -a "Spotify"
+          - consumer_key_code: rewind
