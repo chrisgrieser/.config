@@ -1386,7 +1386,7 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>1</string>
+				<string>3</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -1447,7 +1447,7 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>3</string>
+				<string>4</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -1470,7 +1470,7 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>📊 network</string>
+				<string>📊 Network</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -1485,7 +1485,7 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>4</string>
+				<string>1</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>

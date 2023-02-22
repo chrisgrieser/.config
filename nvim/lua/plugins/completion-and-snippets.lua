@@ -345,20 +345,6 @@ return {
 				enable_autosnippets = true,
 			}
 
-			-- SPELLING
-			-- INFO using these instead of vim abbreviations since they do not work with
-			-- added extra undo points
-			local spellAutoFixes = {}
-			local spellfixes = require("config.autocorrects-and-autotriggers")
-			for _, wordPair in pairs(spellfixes) do
-				local parsed = ls.parser.parse_snippet(wordPair[1], wordPair[2])
-				table.insert(spellAutoFixes, parsed)
-			end
-			ls.add_snippets("all", spellAutoFixes, {
-				type = "autosnippets",
-				key = "all_auto",
-			})
-
 			-- VS-code-style snippets
 			-- INFO has to be loaded after the regular luasnip-snippets
 			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
