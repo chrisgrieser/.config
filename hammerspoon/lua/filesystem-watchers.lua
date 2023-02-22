@@ -141,20 +141,25 @@ FileHubWatcher = Pw(FileHub, function(paths)
 			os.rename(filep, browserSettings .. "vimium-c-settings.json")
 			Notify("Vimium-C backup filed away.")
 
-		-- adguard backup
+		-- adguard
 		elseif fileName:match(".*_adg_ext_settings_.*%.json") then
 			os.rename(filep, browserSettings .. "adguard-settings.json")
 			Notify("AdGuard backup filed away.")
 
 		-- sponsor block
 		elseif fileName:match("SponsorBlockConfig_.*%.json") then
-			os.rename(filep, browserSettings .. "SponsorBlockConfig.json")
+			os.rename(filep, browserSettings .. "SponsorBlock-settings.json")
 			Notify("SpondorBlockConfig filed away.")
 
-		-- tampermonkey backup
+		-- tampermonkey
 		elseif fileName:match("tampermonkey%-backup-.+%.txt") then
 			os.rename(filep, browserSettings .. "tampermonkey-settings.json")
 			Notify("TamperMonkey backup filed away.")
+
+		-- Bonjourr
+		elseif fileName:match("bonjourrExport%-.*%.json") then
+			os.rename(filep, browserSettings .. "bonjourr-settings.json")
+			Notify("Bonjourr backup filed away.")
 
 		-- visualised keyboard layouts
 		elseif

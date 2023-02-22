@@ -3,6 +3,10 @@ rules:
     # to be able to quickly change it back; see https://github.com/Rigellute/spotify-tui/issues/1072
     manipulators:
       - type: basic
+        from: {key_code: f3}
+        to: 
+          - shell_command: open -a "Spotify"
+      - type: basic
         from: {key_code: f8}
         to: 
           - shell_command: pgrep -q "Spotify" || open -a "Spotify"

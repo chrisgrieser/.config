@@ -2,12 +2,22 @@
 /* ────────────────────────────────────────────────────────── */
 
 .button-toolbar.newtab, /* new tab button */
-.ContentBlocker-Control, /* content/shield button */
 .toolbar-insideinput .button-toolbar, /* reader view button, password icon */
 .UrlBar-AddressField .pageload-ticker, /* page load numbers (but not progress bar) */
 .UrlBar-AddressField .drop-down-menu { /* dropdown button */
 	display: none;
 }
+
+.UrlBar-AddressField .button-addressfield.SiteInfoButton.secure {
+	order: 1;
+}
+
+/* .UrlBar-AddressField:not(:hover) .button-addressfield.SiteInfoButton.secure { */
+/* 	opacity: 0; */
+/* } */
+
+
+/* ───────────────────────────────────────────────── */
 
 input#urlFieldInput::placeholder { opacity: 0 }
 
