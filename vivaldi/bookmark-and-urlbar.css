@@ -21,15 +21,15 @@
 	display: none;
 }
 
-
 /* ───────────────────────────────────────────────── */
 /* SECURITY BUTTON */
-/* .UrlBar-AddressField .SiteInfoButton { */
-/* 	order: 1; */
-/* 	margin-right: 3vw; */
-/* } */
-.SiteInfoButton-SecurityBadge path:nth-child(2),
-.toolbar-mainbar:not(:hover, :active) .SiteInfoButton:is(.secure, .internal, .certified) {
+.UrlBar-AddressField .SiteInfoButton {
+	order: 1;
+	margin-right: 3vw;
+}
+
+.SiteInfoButton-SecurityBadge:has(svg > g > path:nth-child(2)),
+.toolbar-mainbar:not(:hover, :active) .SiteInfoButton:is(.secure){
 	opacity: 0;
 }
 
