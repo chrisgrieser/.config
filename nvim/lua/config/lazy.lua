@@ -21,7 +21,8 @@ require("lazy").setup("plugins", {
 		-- version = "*", -- install the latest *stable* versions of plugins
 	},
 	dev = {
-		path = vim.fn.stdpath("config") .. "/my-plugins/",
+		path = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos",
+		fallback = true, -- Fallback to git when local plugin doesn't exist
 	},
 	ui = {
 		wrap = true,
