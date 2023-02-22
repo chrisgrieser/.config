@@ -167,9 +167,9 @@ rules:
         from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
           - {key_code: i, modifiers: [command, option]}
-          - {key_code: vk_none, hold_down_milliseconds: 900}
+          - {key_code: vk_none, hold_down_milliseconds: 1000}
           - {key_code: c, modifiers: [command, shift]}
-          - {key_code: vk_none, hold_down_milliseconds: 900}
+          - {key_code: vk_none, hold_down_milliseconds: 500}
           - {key_code: tab, modifiers: [command]} # switch to other window, since Vivaldi dev tool is always detachedd
         conditions:
           - type: frontmost_application_if
@@ -542,11 +542,13 @@ rules:
   #─────────────────────────────────────────────────────────────────
   - description: "(Apps) Cleanshot: Esc -> close/copy annotation image"
     manipulators:
+      # copy to clipboard before quitting
       - type: basic
-        from: { key_code: caps_lock } # hyper
+        from: {key_code: q, modifiers: {mandatory: [command]}}
         to:
           - { key_code: c, modifiers: [command, shift] }
-          - key_code: escape # added so screenshot making can also be escaped
+          - {key_code: vk_none, hold_down_milliseconds: 10}
+          - { key_code: q, modifiers: [command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
       # INFO https://cleanshot.com/docs/api
       # shortcuts implemented here for syncin across devices & more flexibiltiy
