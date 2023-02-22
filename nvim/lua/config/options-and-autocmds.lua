@@ -13,12 +13,23 @@ opt.undofile = true -- enable persistent undo history
 opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 
 -- extra undopoints (= more fine-grained undos)
--- INFO extra undo points prevent vim abbreviations from working
+-- INFO extra undo points prevent vim abbreviations w/ those characters from working
 local undopointChars = { ".", ",", ";", '"' }
 for _, char in pairs(undopointChars) do
 	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char })
 end
 
+-- WARN do not save this file, or codespell will fix all misspellings 🙈
+-- INFO using iabbrev instead of luasnip autotriggers for portability
+cmd.abclear()
+cmd.iabbrev("teh the")
+cmd.iabbrev("keybaord keyboard")
+cmd.iabbrev("sicne since")
+cmd.iabbrev("nto not")
+
+--------------------------------------------------------------------------------
+
+-- GUI
 opt.guifont = "JetBrainsMonoNL Nerd Font:h26"
 opt.guicursor = {
 	"n-sm:block",
