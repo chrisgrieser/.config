@@ -28,9 +28,7 @@ function alfredMatcher(str) {
 
 function readPlist(key, path) {
 	return app
-		.doShellScript(
-			"plutil -extract " + key + " xml1 -o - '" + path + '\' | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1',
-		)
+		.doShellScript(`plutil -extract ${key} xml1 -o - '${path}' | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1`)
 		.replaceAll("&amp;", "&");
 }
 
@@ -52,8 +50,11 @@ const repoArray = app
 		"export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; fd '\\.git$' --no-ignore --hidden --max-depth=2 " +
 			pathString,
 	)
+	// .doShellScript(
+	// 	"export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; fd '.git$' --no-ignore --hidden --max-depth=2 '/Users/chrisgrieser/.config/nvim/my-plugins'"
+	// )
 	.split("\r")
-	.map(i => i.slice(0, -5))
+	.map(i => i.slice(0, -4))
 	.filter(i => !i.endsWith(".spoon/")); // no hammerspoon spoons
 
 repoArray.forEach(localRepoFilePath => {
@@ -66,8 +67,8 @@ repoArray.forEach(localRepoFilePath => {
 
 	// Dirty Repo
 	let dirtyIcon = "";
-	const dirtyRepo = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
-	if (dirtyRepo) dirtyIcon = " ✴️";
+	// const dirtyRepo = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
+	// if (dirtyRepo) dirtyIcon = " ✴️";
 
 	let iconpath = "repotype-icons/";
 	if (isAlfredWorkflow) {

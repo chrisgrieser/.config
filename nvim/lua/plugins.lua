@@ -50,6 +50,7 @@ return {
 	{
 		"chrisgrieser/nvim-genghis",
 		lazy = true,
+		dev = true,
 		dependencies = "stevearc/dressing.nvim",
 		init = function() vim.g.genghis_disable_commands = true end,
 	},
