@@ -1,6 +1,7 @@
 /* stylelint-disable selector-max-id, custom-property-pattern */
 /* ────────────────────────────────────────────────────────── */
 
+.toolbar-extensions, /* extension button */
 .button-toolbar.newtab, /* new tab button */
 .toolbar-insideinput .button-toolbar, /* reader view button, password icon */
 .UrlBar-AddressField .pageload-ticker, /* page load numbers (but not progress bar) */
@@ -20,7 +21,6 @@ img[srcset="/resources/default_favicon_64.png"],
 .favicon:has(img[srcset="/resources/default_favicon_64.png"]) + .title {
 	display: none;
 }
-
 
 .tab:has(.favicon img[srcset="chrome://favicon/size/16@1x/iconurl/chrome-extension://dlnejlppicbjfcfcedcflplfjajinajd/src/assets/favicon-128x128.png 1x,chrome://favicon/size/16@2x/iconurl/chrome-extension://dlnejlppicbjfcfcedcflplfjajinajd/src/assets/favicon-128x128.png 2x"]),
 .tab:has(.favicon img[srcset="/resources/default_favicon_64.png"]) {
