@@ -542,12 +542,14 @@ rules:
   #─────────────────────────────────────────────────────────────────
   - description: "(Apps) Cleanshot: Esc -> close/copy annotation image"
     manipulators:
-      - type: basic # hyper
-        from: { key_code: caps_lock }
+      - type: basic
+        from: { key_code: caps_lock } # hyper
         to:
           - { key_code: c, modifiers: [command, shift] }
+          - key_code: escape # added so screenshot making can also be escaped
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
       # INFO https://cleanshot.com/docs/api
+      # shortcuts implemented here for syncin across devices & more flexibiltiy
       - type: basic
         from: {key_code: "3", modifiers: {mandatory: [shift, command]}}
         to:
