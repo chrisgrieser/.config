@@ -111,11 +111,6 @@ keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 
 --------------------------------------------------------------------------------
 
--- Comments & Annotations
-keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })
-keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
-keymap("n", "qc", function() require("neogen").generate() end, { desc = "Neogen: Annotation Comment" })
-
 -- LUASNIP
 keymap({ "i", "s" }, "<D-j>", function()
 	if require("neogen").jumpable() then
@@ -145,6 +140,12 @@ end, { desc = "LuaSnip: Jump Back" })
 keymap("n", "<leader>ls", function() cmd.Telescope("luasnip") end, { desc = " LuaSnip: Snippets" })
 
 --------------------------------------------------------------------------------
+-- EDITING
+
+-- Comments & Annotations
+keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })
+keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
+keymap("n", "qf", function() require("neogen").generate() end, { desc = "Neogen: Comment Function" })
 
 -- Whitespace Control
 keymap("n", "=", "mzO<Esc>`z", { desc = "add blank line above" })
@@ -153,9 +154,6 @@ keymap("n", "<Tab>", ">>", { desc = "indent" })
 keymap("n", "<S-Tab>", "<<", { desc = "outdent" })
 keymap("x", "<Tab>", ">gv", { desc = "indent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "outdent" })
-
---------------------------------------------------------------------------------
--- EDITING
 
 -- Casing
 keymap("n", "ü", "mzlb~`z", { desc = "toggle capital/lowercase of word" })
