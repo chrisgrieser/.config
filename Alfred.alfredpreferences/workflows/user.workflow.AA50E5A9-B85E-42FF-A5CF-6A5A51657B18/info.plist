@@ -230,7 +230,7 @@
 	<key>description</key>
 	<string>requires Spotify TUI</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>Spotify TUI Control</string>
 	<key>objects</key>
