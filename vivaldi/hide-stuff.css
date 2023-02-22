@@ -4,14 +4,12 @@
 .button-toolbar.newtab, /* new tab button */
 .ContentBlocker-Control, /* content/shield button */
 .toolbar-insideinput .button-toolbar, /* reader view button, password icon */
-.UrlBar-AddressField .pageload, /* page load info */
+.UrlBar-AddressField .pageload-ticker, /* page load numbers (but not progress bar) */
 .UrlBar-AddressField .drop-down-menu { /* dropdown button */
 	display: none;
 }
 
-input#urlFieldInput::placeholder {
-	opacity: 0;
-}
+input#urlFieldInput::placeholder { opacity: 0 }
 
 /* hide tab title and favicon when no favicon exists */
 img[srcset="/resources/default_favicon_64.png"],
