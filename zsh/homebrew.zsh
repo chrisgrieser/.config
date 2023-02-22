@@ -57,7 +57,7 @@ function update (){
 	print-section "DUMP INSTALLS"
 	dump
 	
-	print-section "\033[1;33mREMINDERS"
+	print-section "\033[1;33mREMINDER"
 	echo "If sketchybar or espanso updated, they need to be re-given permissions."
 }
 

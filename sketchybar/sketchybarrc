@@ -112,5 +112,6 @@ sketchybar \
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# Hack for https://github.com/FelixKratz/SketchyBar/issues/322
-osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"
+# HACK for https://github.com/FelixKratz/SketchyBar/issues/322
+sleep 1
+# osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"

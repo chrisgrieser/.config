@@ -28,4 +28,5 @@ require("config.linter")
 
 require("config.textobjects")
 require("config.clipboard")
+require("config.build-system")
 require("config.user-commands")
