@@ -66,9 +66,9 @@ function timezsh(){
 function d () {
 	if ! command -v trash &>/dev/null; then echo "trash-cli not installed." && exit 1; fi
 	if [[ $# == 0 ]]; then
-		trash ./*
+		trash --trash-dir="$HOME/.Trash" ./*
 	else
-		trash "$@"
+		trash --trash-dir="$HOME/.Trash" "$@"
 	fi
 }
 
