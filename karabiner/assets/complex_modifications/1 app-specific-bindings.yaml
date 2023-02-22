@@ -169,7 +169,7 @@ rules:
           - {key_code: i, modifiers: [command, option]}
           - {key_code: vk_none, hold_down_milliseconds: 400}
           - {key_code: c, modifiers: [command, shift]}
-          - {key_code: vk_none, hold_down_milliseconds: 200}
+          - {key_code: vk_none, hold_down_milliseconds: 300}
           - {key_code: tab, modifiers: [command]} # switch to other window, since Vivaldi dev tool is always detachedd
         conditions:
           - type: frontmost_application_if

@@ -18,8 +18,11 @@ NONE_FOUND=0
 INFO_WINDOW=0
 
 case $APP in
-"Steam" | "Spotify")
+"Steam")
 	iconsur set "$APP.app"
+	;;
+"Spotify")
+	cp -f "$CUSTOM_ICON_FOLDER/Spotify.icns" "$APP.app/Contents/Resources/Icon.icns"
 	;;
 "Cryptomator")
 	cp -f "$CUSTOM_ICON_FOLDER/Cryptomator.icns" "$APP.app/Contents/Resources/Cryptomator.icns"
