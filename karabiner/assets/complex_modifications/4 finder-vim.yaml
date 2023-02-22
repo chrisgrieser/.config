@@ -699,17 +699,18 @@ rules:
       - type: basic
         from: {key_code: s, modifiers: {mandatory: [shift]}}
         to: 
+          - shell_command: osascript -e 'display notification "..." with title "beep"'
           - shell_command: |
               sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
               if [[ -f "$sel" ]] ; then
                   ln -sf "$sel" "${sel}-symlink"
                   open -R "${sel}-symlink"
               elif [[ -d "$sel" ]] ; then
-                  sel="${sel:0:-1}"
+                  sel="$(echo "$sel" | cut -c2-)"
                   ln -sf "$sel" "${sel}-symlink"
                   open -R "${sel}-symlink"
               fi
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # z = zip files
       - type: basic
         from: {key_code: "y"} # y and z switched on German keyboard
