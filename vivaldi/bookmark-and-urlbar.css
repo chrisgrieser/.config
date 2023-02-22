@@ -28,8 +28,8 @@
 /* 	order: 1; */
 /* 	margin-right: 3vw; */
 /* } */
-.SiteInfoButton-SecurityBadge,
-.toolbar-mainbar:not(:hover, :active) .SiteInfoButton:is(.secure, .internal) {
+.SiteInfoButton-SecurityBadge path:nth-child(2),
+.toolbar-mainbar:not(:hover, :active) .SiteInfoButton:is(.secure, .internal, .certified) {
 	opacity: 0;
 }
 
