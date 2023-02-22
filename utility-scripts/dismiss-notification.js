@@ -1,3 +1,8 @@
+#!/usr/bin/env osascript -l JavaScript
+// remove macOS notifications via keyboard
+// used by various apps like Alfred, Hammerspoon, neovim, or sketchybar
+//──────────────────────────────────────────────────────────────────────────────
+
 function run(input, parameters) {
 
   const appNames = [];

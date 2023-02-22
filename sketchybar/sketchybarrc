@@ -1,23 +1,35 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
+# vim: filetype=bash (treesitter syntax highlighting)
 #───────────────────────────────────────────────────────────────────────────────
 # INFO: After app update, needs to be re-granted screen recording permissions
 #───────────────────────────────────────────────────────────────────────────────
 
+i=0
 # ensure Stats.app is running
 while ! pgrep "Stats"; do
 	open -a "Stats"
 	sleep 1
+	i=$((i + 1))
+	[[ $i -gt 30 ]] && exit 1
+done
+
+# ensure Stats.app items are all loaded (mostly relevant after system startup)
+i=0
+menu_items=$(sketchybar --query default_menu_items)
+while [[ ! "$menu_items" =~ Stats ]]; do
+	sleep 1
+	menu_items=$(sketchybar --query default_menu_items)
+	i=$((i + 1))
+	[[ $i -gt 30 ]] && exit 1
 done
 
 # globs are necessary, since the exact name of the menubar item changes a bit
 # depending on installation whether mac is M1 or not
-menu_items=$(sketchybar --query default_menu_items)
 network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*network" | cut -d\" -f2)
 cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | cut -d\" -f2)
 gpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*gpu" | cut -d\" -f2)
 ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*ram" | head -n1 | cut -d\" -f2)
 
-[[ -z "$ram_bar_item" ]] && osascript -e 'display notification "" with title "⚠️ RAM Bar missing."'
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -96,3 +108,8 @@ sketchybar \
 # - `repo-files-update` gets triggered via Hammerspoon path watcher after sync events
 # - clock and alias items needs the fixed-width to fix whitespace of the item next (stats)
 # - not using builtin clock, to be able to customize font etc.
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# Hack for https://github.com/FelixKratz/SketchyBar/issues/322
+osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"

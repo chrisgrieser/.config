@@ -473,7 +473,7 @@ keymap("n", "<leader>r", function()
 		fn.system([[
 			brew services restart sketchybar
 			sleep 3
-			osascript -l JavaScript "$DOTFILE_FOLDER/hammerspoon/helpers/dismiss-notification.js"
+			osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"
 		]])
 
 	-- nvim config
