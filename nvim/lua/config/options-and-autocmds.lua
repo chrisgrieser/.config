@@ -106,9 +106,9 @@ opt.history = 400 -- reduce noise for command history search
 opt.cmdheight = 0
 
 -- Character groups
-vim.opt.iskeyword:append("-") -- don't treat "-" as word boundary, useful e.g. for kebab-case-variables
+vim.opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
 
-opt.nrformats:append("unsigned") -- <C-a>/<C-x> only works with positive numbers
+opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
 opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
 
 --------------------------------------------------------------------------------
@@ -127,7 +127,7 @@ autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	end,
 })
 
--- emulate autochdir, which is deprecated
+-- emulate autochdir, since the respective option is deprecated
 augroup("autochdir", {})
 autocmd("BufWinEnter", {
 	group = "autochdir",
@@ -189,7 +189,7 @@ local function remember(mode)
 	if mode == "save" then
 		cmd.mkview(1)
 	else
-		cmd([[silent! loadview 1]]) -- needs silent to avoid error for documents that do not have a view yet (opening first time)
+		cmd([[silent! loadview 1]]) -- silent to avoid error for files w/o view (e.g. after creation)
 		normal("0^") -- to scroll to the left on start
 	end
 end
@@ -210,14 +210,14 @@ autocmd("BufWinEnter", {
 -- Skeletons (Templates)
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
 augroup("Templates", {})
-local skeletonPath = fn.stdpath("config") .. "/templates"
+local skeletonDir = fn.stdpath("config") .. "/templates"
 local filetypeList =
-	fn.system([[ls "]] .. skeletonPath .. [[/skeleton."* | xargs basename | cut -d. -f2]])
+	fn.system([[ls "]] .. skeletonDir .. [[/skeleton."* | xargs basename | cut -d. -f2]])
 local ftWithSkeletons = vim.split(filetypeList, "\n", {})
 
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
-	local readCmd = "keepalt 0r " .. skeletonPath .. "/skeleton." .. ft .. " | normal! G"
+	local readCmd = "keepalt 0r " .. skeletonDir .. "/skeleton." .. ft .. " | normal! G"
 
 	autocmd("BufNewFile", {
 		group = "Templates",
