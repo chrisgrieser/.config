@@ -1,6 +1,4 @@
-#!/usr/bin/env zsh
-# vim: filetype=bash
-# (modeline for treesitter syntax highlighting)
+#!/usr/bin/env bash
 #───────────────────────────────────────────────────────────────────────────────
 # INFO: After app update, needs to be re-granted screen recording permissions
 #───────────────────────────────────────────────────────────────────────────────
@@ -110,7 +108,3 @@ sketchybar \
 # - clock and alias items needs the fixed-width to fix whitespace of the item next (stats)
 # - not using builtin clock, to be able to customize font etc.
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# HACK for https://github.com/FelixKratz/SketchyBar/issues/322
-osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"

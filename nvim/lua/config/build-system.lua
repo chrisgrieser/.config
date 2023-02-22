@@ -6,7 +6,13 @@ keymap("n", "<leader>r", function()
 
 	-- sketchybar
 	if parentFolder:find("sketchybar") then
-		fn.system("brew services restart sketchybar")
+
+		-- HACK for https://github.com/FelixKratz/SketchyBar/issues/322
+		fn.system([[
+			brew services restart sketchybar
+			sleep 2
+			osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"
+		]])
 
 	-- nvim config
 	elseif ft == "lua" and parentFolder:find("nvim") then
