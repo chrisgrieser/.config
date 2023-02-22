@@ -32,6 +32,9 @@ function SystemStart()
 		Notify("Hammerspoon started.")
 		SyncAllGitRepos()
 		Notify("✅ Sync finished.")
+
+		-- HACK for https://github.com/FelixKratz/SketchyBar/issues/322
+		hs.execute([[osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"]])
 	end
 end
 

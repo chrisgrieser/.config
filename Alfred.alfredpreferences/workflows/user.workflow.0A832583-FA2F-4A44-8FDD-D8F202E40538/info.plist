@@ -244,7 +244,11 @@ sketchybar --update</string>
 				<key>script</key>
 				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
-brew services restart sketchybar</string>
+brew services restart sketchybar
+
+# HACK for https://github.com/FelixKratz/SketchyBar/issues/322
+sleep 2
+osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

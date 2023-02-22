@@ -7,7 +7,7 @@ const home = app.pathTo("home folder");
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ");
+	return [clean, camelCaseSeperated, str].join(" ") + " ";
 }
 
 function readFile(path) {
@@ -34,11 +34,11 @@ const formula = JSON.parse(readFile(formulaJson));
 casks.forEach(item => {
 	const name = item.name[0];
 	const id = item.token;
-	const desc = item.desc;
+	const desc = item.desc || "";
 
 	jsonArray.push({
 		title: name,
-		match: alfredMatcher(name),
+		match: alfredMatcher(name) + alfredMatcher(desc),
 		subtitle: `cask         ${desc}`,
 		arg: `${id} --cask`,
 		mods: { cmd: { arg: id } },
@@ -49,11 +49,11 @@ casks.forEach(item => {
 formula.forEach(item => {
 	const name = item.full_name;
 	const id = item.name;
-	const desc = item.desc;
+	const desc = item.desc || "";
 
 	jsonArray.push({
 		title: name,
-		match: alfredMatcher(name),
+		match: alfredMatcher(name) + alfredMatcher(desc),
 		subtitle: `formula    ${desc}`,
 		arg: `${id} --formula`,
 		mods: { cmd: { arg: id } },
