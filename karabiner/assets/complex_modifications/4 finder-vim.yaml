@@ -698,7 +698,7 @@ rules:
       # S = Create Symlink
       - type: basic
         from: {key_code: s, modifiers: {mandatory: [shift]}}
-        to: # TODO: does not work yet on files without extension
+        to: 
           - shell_command: |
               sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
               if [[ -f "$sel" ]] ; then
