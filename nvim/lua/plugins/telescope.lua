@@ -194,7 +194,6 @@ return {
 		},
 		config = function()
 			require("telescope").setup(options)
-			require("telescope").load_extension("notify")
 			require("telescope").load_extension("luasnip")
 		end,
 	},

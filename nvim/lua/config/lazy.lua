@@ -22,7 +22,6 @@ require("lazy").setup("plugins", {
 	},
 	dev = {
 		path = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos",
-		pattern = {"chrisgrieser"},
 		fallback = true, -- Fallback to git when local plugin doesn't exist
 	},
 	ui = {
