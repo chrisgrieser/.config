@@ -196,3 +196,6 @@ matches:
     word: true
   - trigger: dwon
     replace: down
+  - trigger: knwo
+    replace: know
+    word: true

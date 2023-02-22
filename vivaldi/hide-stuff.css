@@ -8,7 +8,6 @@
 	display: none;
 }
 
-
 /* ───────────────────────────────────────────────── */
 
 input#urlFieldInput::placeholder { opacity: 0 }
@@ -25,5 +24,5 @@ img[srcset="/resources/default_favicon_64.png"],
 
 .tab:has(.favicon img[srcset="chrome://favicon/size/16@1x/iconurl/chrome-extension://dlnejlppicbjfcfcedcflplfjajinajd/src/assets/favicon-128x128.png 1x,chrome://favicon/size/16@2x/iconurl/chrome-extension://dlnejlppicbjfcfcedcflplfjajinajd/src/assets/favicon-128x128.png 2x"]),
 .tab:has(.favicon img[srcset="/resources/default_favicon_64.png"]) {
-	border: 1.5px solid var(--colorBgIntenser);
+	border: 1px solid var(--colorBgIntenser);
 }
