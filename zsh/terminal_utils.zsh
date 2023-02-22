@@ -64,11 +64,13 @@ function timezsh(){
 
 # no arg = all files in folder will be deleted
 function d () {
-	if ! command -v trash &>/dev/null; then echo "trash-cli not installed." && exit 1; fi
+	# INFO `trash` is a mac-specific cli supporting the `put back` feature when using `-F
+	# `, if you are not using mac, you want to install trash-cli instead
+	if ! command -v trash &>/dev/null; then echo "trash not installed." && exit 1; fi
 	if [[ $# == 0 ]]; then
-		trash --trash-dir="$HOME/.Trash" ./*
+		trash -Fv ./*
 	else
-		trash --trash-dir="$HOME/.Trash" "$@"
+		trash -Fv "$@"
 	fi
 }
 
