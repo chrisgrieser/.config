@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
-# vim: filetype=bash (treesitter syntax highlighting)
+# vim: filetype=bash
+# (modeline for treesitter syntax highlighting)
 #───────────────────────────────────────────────────────────────────────────────
 # INFO: After app update, needs to be re-granted screen recording permissions
 #───────────────────────────────────────────────────────────────────────────────

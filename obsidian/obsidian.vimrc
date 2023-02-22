@@ -242,10 +242,20 @@ exmap open-terminal obcommand obsidian-terminal-plugin:open-terminal
 " exmap edit-in-terminal obcommand obsidian-terminal-plugin:open-terminal-editor
 nmap 6 :open-terminal
 
+
+""""""""""""""""""""""
+" Comments
+""""""""""""""""""""""
+" basically ts-comment-string, i.e. using the appropriate comment syntax when in
+" a code block
+
+exmap betterComment obcommand contextual-comments:advanced-comments
+nmap qq :betterComment
+
 """"""""""""""""""""""
 " Folding
 """"""""""""""""""""""
-" Emulate vim folding command https://vimhelp.org/fold.txt.html#fold-commands
+" Emulate vim folding command 
 exmap unfoldall obcommand editor:unfold-all
 exmap togglefold obcommand editor:toggle-fold
 exmap foldall obcommand editor:fold-all
