@@ -1,7 +1,7 @@
 return {
 	{
 		"chrisgrieser/nvim-recorder", 
-		dev = false,
+		dev = true,
 		keys = {
 			{ "9", nil, desc = "/ Continue/Play" },
 			{ "8", nil, desc = "/ Breakpoint" },

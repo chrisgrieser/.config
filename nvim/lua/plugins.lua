@@ -24,16 +24,6 @@ return {
 			"SmiteshP/nvim-navic", -- breadcrumbs for statusline/winbar
 			"folke/neodev.nvim", -- lsp for nvim-lua config
 			"b0o/SchemaStore.nvim", -- schemas for json-lsp
-			{
-				"roobert/statusline-action-hints.nvim",
-				enabled = false, -- TODO
-				config = function()
-					require("statusline-action-hints").setup {
-						definition_identifier = "gd",
-						template = "%s ref:%s",
-					}
-				end,
-			},
 		},
 	},
 
@@ -58,7 +48,7 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		config = function()
-			vim.opt.timeoutlen = 800 -- duration until which-key is shown
+			vim.opt.timeoutlen = 600 -- duration until which-key is shown
 			require("which-key").setup {
 				window = {
 					border = "none", -- none to save space

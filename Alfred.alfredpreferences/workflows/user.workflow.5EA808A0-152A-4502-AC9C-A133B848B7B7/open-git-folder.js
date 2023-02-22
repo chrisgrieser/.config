@@ -13,7 +13,6 @@ const fileExists = filePath => Application("Finder").exists(Path(filePath));
 // CONFIG
 const pathsToSearch = [
 	$.getenv("dotfile_folder").replace(/^~/, home),
-	$.getenv("dotfile_folder").replace(/^~/, home) + "/nvim/my-plugins",
 	$.getenv("dotfile_folder").replace(/^~/, home) + "/Alfred.alfredpreferences/workflows",
 	home + "/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development/.obsidian/plugins",
 	home + "/Library/Mobile Documents/com~apple~CloudDocs/Repos",
@@ -91,7 +90,7 @@ repoArray.forEach(localRepoFilePath => {
 		match: alfredMatcher(repoName) + " " + alfredMatcher(repoID),
 		icon: { path: iconpath },
 		arg: localRepoFilePath,
-		uid: localRepoFilePath,
+		uid: repoID,
 	});
 });
 
