@@ -102,7 +102,7 @@
 }
 
 #browser #tabs-container {
-	padding-left: 30px;
+	padding-left: 8px;
 	margin-right: -35px;
 }
 
@@ -111,23 +111,6 @@
 	margin-left: -6px;
 }
 
-.button-toolbar:not(:has(.progress)) {
-	display: none;
-}
-
-#header:not(:has(.button-toolbar:not(:has(.progress)) + #main {
-
-}
-
-/* .button-toolbar button[name="DownloadButton"], */
-/* .button-toolbar button[name="DownloadButton"] + .progress { */
-/* 	margin-left: -5px; */
-/* } */
-
-/* .button-toolbar button[name="DownloadButton"] { */
-	/* margin-left: -5px; */
-	/* visibility: none; */
-/* } */
 
 #tabs-tabbar-container,
 .UrlBar-AddressField {
@@ -155,6 +138,17 @@
 	height: 30px;
 	min-height: unset;
 }
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* show download button only when download is active (`.progress`) */
+.button-toolbar:has([name="PanelDownloads"]):not(:has(.progress)) {
+	display: none;
+}
+
+#header:has(+ #main .button-toolbar .progress) #tabs-container {
+	padding-left: 30px;
+}
+
 
 /* ────────────────────────────────────────────────────────────────────────── */
 /* TAB LOOK */
