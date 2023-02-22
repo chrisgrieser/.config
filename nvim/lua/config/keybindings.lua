@@ -19,7 +19,7 @@ keymap("n", "<leader>M", cmd.Mason, { desc = ":Mason" })
 
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", function()
-	local lastCommand = fn.getreg(":")
+	local lastCommand = fn.getreg(":"):gsub("^I ", "") -- remove `I ` from my inspect command
 	fn.setreg("+", lastCommand)
 	vim.notify("COPIED\n" .. lastCommand)
 end, { desc = "גּ Copy last command" })
