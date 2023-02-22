@@ -24,12 +24,12 @@
 
 /* ───────────────────────────────────────────────── */
 /* SECURITY BUTTON */
-.UrlBar-AddressField .button-addressfield.SiteInfoButton {
-	order: 1;
-	margin-right: 3vw;
-}
-
-.toolbar-mainbar:not(:hover, :active) .UrlBar-AddressField .button-addressfield.SiteInfoButton {
+/* .UrlBar-AddressField .SiteInfoButton { */
+/* 	order: 1; */
+/* 	margin-right: 3vw; */
+/* } */
+.SiteInfoButton-SecurityBadge,
+.toolbar-mainbar:not(:hover, :active) .SiteInfoButton:is(.secure, .internal) {
 	opacity: 0;
 }
 
