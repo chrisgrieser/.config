@@ -32,8 +32,3 @@
 .toolbar-mainbar:not(:hover, :active) .SiteInfoButton:is(.secure) {
 	opacity: 0;
 }
-/* ───────────────────────────────────────────────── */
-/* DOWNLOAD BUTTON */
-button[name="DownloadButton"] {
-	margin-left: -5px;
-}

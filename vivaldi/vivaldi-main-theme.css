@@ -106,6 +106,29 @@
 	margin-right: -35px;
 }
 
+
+.UrlBar-AddressField ~ .button-toolbar {
+	margin-left: -6px;
+}
+
+.button-toolbar:not(:has(.progress)) {
+	display: none;
+}
+
+#header + #main {
+
+}
+
+/* .button-toolbar button[name="DownloadButton"], */
+/* .button-toolbar button[name="DownloadButton"] + .progress { */
+/* 	margin-left: -5px; */
+/* } */
+
+/* .button-toolbar button[name="DownloadButton"] { */
+	/* margin-left: -5px; */
+	/* visibility: none; */
+/* } */
+
 #tabs-tabbar-container,
 .UrlBar-AddressField {
 	transition: var(--animation);
