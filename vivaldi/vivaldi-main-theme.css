@@ -115,7 +115,7 @@
 	display: none;
 }
 
-#header + #main {
+#header:not(:has(.button-toolbar:not(:has(.progress)) + #main {
 
 }
 
