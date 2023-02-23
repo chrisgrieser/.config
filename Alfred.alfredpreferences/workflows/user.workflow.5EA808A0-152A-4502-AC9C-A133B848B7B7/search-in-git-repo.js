@@ -95,7 +95,7 @@ const folderArray = app
 		const relativeParentFolder = fPath.slice(folderToSearch.length, -(name.length + 1));
 		return {
 			title: name,
-			match: alfredMatcher(name),
+			match: alfredMatcher(name) + " folder",
 			subtitle: relativeParentFolder,
 			type: "file:skipcheck",
 			icon: { type: "fileicon", path: fPath },

@@ -12,6 +12,7 @@ require("lua.cronjobs")
 require("lua.filesystem-watchers")
 require("lua.app-specific-behavior")
 require("lua.twitter")
+require("lua.auto-quitter")
 require("lua.hardware-periphery")
 
 if IsIMacAtHome() or IsAtMother() then

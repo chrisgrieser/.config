@@ -48,7 +48,6 @@ const fileArray = app
 		const fPath = dotfileFolder + file;
 		const parts = file.split("/");
 		const name = parts.pop();
-
 		let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
 		if (parentPart === ".") parentPart = "";
 
@@ -58,6 +57,7 @@ const fileArray = app
 		else if (name.startsWith(".")) type = "config";
 		else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
 		else type = name.split(".").pop();
+		const matcher = alfredMatcher(`${name} ${parentPart}`);
 
 		// icon determination
 		let iconObj = { path: "./../filetype-icons/" };
@@ -107,8 +107,6 @@ const fileArray = app
 				iconObj = { type: "fileicon", path: fPath };
 		}
 
-		const matcher = alfredMatcher(`${name} ${parentPart}`);
-
 		return {
 			title: name,
 			subtitle: "▸ " + parentPart,
@@ -122,14 +120,30 @@ const fileArray = app
 
 const folderArray = app
 	.doShellScript(`find "${dotfileFolder}" -type d -not -path "**/.git**" -not -path "**/node_modules**"`)
-	.split("\r");
+	.split("\r")
+	.map(file => {
+		const fPath = dotfileFolder + file;
+		const parts = file.split("/");
+		const name = parts.pop();
+		let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
+		if (parentPart === ".") parentPart = "";
 
+		return {
+			title: name,
+			subtitle: "▸ " + parentPart,
+			match: alfredMatcher(name) + " folder",
+			icon: { type: "fileicon", path: fPath },
+			type: "file:skipcheck",
+			uid: fPath,
+			arg: fPath,
+		};
+	});
 
 // password-store (pass-cli)
 const pwPath = app.pathTo("home folder") + "/.password-store";
 const pwFolder = {
 	title: ".password-store",
-	match: alfredMatcher(pwPath),
+	match: alfredMatcher(pwPath) + " folder",
 	icon: { type: "fileicon", path: pwPath },
 	type: "file:skipcheck",
 	uid: pwPath,
