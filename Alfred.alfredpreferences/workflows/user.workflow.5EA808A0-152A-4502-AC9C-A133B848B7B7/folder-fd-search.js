@@ -13,6 +13,7 @@ function alfredMatcher(str) {
 const jsonArray = [];
 const folderToSearch = $.getenv("folderToSearch");
 
+// using `fd` over `find` for speed and gitignoring
 const repoArray = app
 	.doShellScript(
 		`export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;
@@ -27,10 +28,9 @@ const repoArray = app
 		const name = parts.pop();
 		const relativeParentFolder = fPath.slice(folderToSearch.length, -(name.length + 1));
 
-		const iconObj = { path: "./../filetype-icons/" };
+		let iconObj = { path: "./../filetype-icons/" };
 		let ext = isFolder ? "folder" : name.split(".").pop();
-		if (ext.includes("rc")) ext = "rc"; // rc files
-		else if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
+		if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
 
 		switch (ext) {
 			case "json":
@@ -43,6 +43,7 @@ const repoArray = app
 			case "yml":
 				iconObj.path += "yaml.png";
 				break;
+			case "scss":
 			case "css":
 				iconObj.path += "css.png";
 				break;
@@ -60,17 +61,14 @@ const repoArray = app
 			case "sh":
 				iconObj.path += "sh.png";
 				break;
-			case "rc":
-				iconObj.path += "rc.png";
-				break;
 			case "png":
 				iconObj.path = fPath; // if png, use image itself
 				break;
 			case "folder":
-				iconObj.path = fPath; // folder image
+				iconObj = { type: "fileicon", path: fPath }; 
 				break;
 			default:
-				iconObj.path += "blank.png";
+				iconObj.path += "config.png"; 
 		}
 
 		return {

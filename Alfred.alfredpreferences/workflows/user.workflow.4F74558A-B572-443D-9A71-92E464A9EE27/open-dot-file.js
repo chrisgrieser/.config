@@ -10,7 +10,7 @@ function alfredMatcher(str) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
-
+// using `fd` over `find` for speed and gitignoring
 const jsonArray = [];
 const dotfileFolder = $.getenv("dotfile_folder").replace(/^~/, app.pathTo("home folder"));
 /* eslint-disable no-multi-str, quotes */
@@ -58,8 +58,7 @@ workArray.forEach(file => {
 
 	let iconObj = { path: "./../filetype-icons/" };
 	let ext = isFolder ? "folder" : name.split(".").pop();
-	if (ext.includes("rc")) ext = "rc"; // rc files
-	else if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
+	if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
 
 	switch (ext) {
 		case "json":
@@ -72,29 +71,34 @@ workArray.forEach(file => {
 		case "yml":
 			iconObj.path += "yaml.png";
 			break;
+		case "scss":
+		case "css":
+			iconObj.path += "css.png";
+			break;
 		case "md":
 			iconObj.path += "md.png";
-			break;
-		case "ts":
-			iconObj.path += "ts.png";
 			break;
 		case "js":
 			iconObj.path += "js.png";
 			break;
-		case "bash":
+		case "ts":
+			iconObj.path += "ts.png";
+			break;
 		case "zsh":
+		case "bash":
 		case "sh":
 			iconObj.path += "sh.png";
-			break;
-		case "rc":
-			iconObj.path += "rc.png";
 			break;
 		case "png":
 			iconObj.path = fPath; // if png, use image itself
 			break;
+		case "folder":
+			iconObj = { type: "fileicon", path: fPath }; 
+			break;
 		default:
-			iconObj = { type: "fileicon", path: fPath }; // by default, use file icon
+			iconObj.path += "config.png";
 	}
+
 	let matcher = alfredMatcher(`${name} ${parentPart}`);
 	if (isFolder) matcher += " folder";
 
