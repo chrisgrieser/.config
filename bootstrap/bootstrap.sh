@@ -3,7 +3,7 @@
 
 DOTFILE_FOLDER="$HOME/.config/"
 
-REQUIRED SSH setup
+# REQUIRES SSH setup
 cd ~
 git clone git@github.com:chrisgrieser/main-vault.git
 git clone git@github.com:chrisgrieser/.password-store.git

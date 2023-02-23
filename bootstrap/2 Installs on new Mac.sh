@@ -41,7 +41,7 @@ pip list --not-required
 killall "Vivaldi"
 while pgrep -q "Vivaldi"; do sleep 0.1; done
 sed -i '' \
-	's/"directory_upgrade":true/"directory_upgrade":true,"extensions_to_open":"torrent:zip:alfredworkflow:ics:dmg"/' \
+	's/"directory_upgrade":true/"directory_upgrade":true,"extensions_to_open":"torrent:zip:alfredworkflow:ics"/' \
 	"$HOME/Library/Application Support/Vivaldi/Default/Preferences"
 open -a "Vivaldi"
 
@@ -57,7 +57,7 @@ defaults write "org.hammerspoon.Hammerspoon" "HSUploadCrashData" 0
 defaults write "org.hammerspoon.Hammerspoon" "MJKeepConsoleOnTopKey" 1
 defaults write "org.hammerspoon.Hammerspoon" "SUEnableAutomaticChecks" 1
 
-# Steam UI https://tp69.blog/2020/02/11/how-to-zoom-the-steam-client/
+# Steam UI zoomed https://tp69.blog/2020/02/11/how-to-zoom-the-steam-client/
 steamDataPath="$HOME/Library/Application Support/Steam/Steam.AppBundle/Steam/Contents/MacOS"
 newSkinPath="$steamDataPath/skins/Bigger UI"
 mkdir -p "$newSkinPath/resource/styles/"
