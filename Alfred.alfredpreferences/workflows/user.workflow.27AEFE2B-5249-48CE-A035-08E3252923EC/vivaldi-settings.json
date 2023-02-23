@@ -7,21 +7,25 @@
 		},
 		{
 			"title": "☁️ Sync",
+			"match": "account sync login",
 			"arg": "vivaldi://settings/sync/",
 			"uid": "1"
 		},
 		{
 			"title": "🖌️ Themes",
+			"match": "themes color dark light mode",
 			"arg": "vivaldi://settings/appearance/",
 			"uid": "2"
 		},
 		{
 			"title": "🏁 Start Page",
+			"match": "speed dial start page",
 			"arg": "vivaldi://settings/startpage/",
 			"uid": "3"
 		},
 		{
 			"title": "🗂️ Tab",
+			"match": "tab stack tabs",
 			"arg": "vivaldi://settings/tabs/",
 			"uid": "4"
 		},
@@ -32,6 +36,7 @@
 		},
 		{
 			"title": "🔲 Address Bar",
+			"match": "address bar url",
 			"arg": "vivaldi://settings/addressbar/",
 			"uid": "6"
 		},
@@ -47,6 +52,7 @@
 		},
 		{
 			"title": "⛓️ Quick Commands",
+			"match": "quick commands chain",
 			"arg": "vivaldi://settings/qc/",
 			"uid": "9"
 		},
@@ -57,6 +63,7 @@
 		},
 		{
 			"title": "🖱️ Mouse",
+			"match": "mouse gestues rocker",
 			"arg": "vivaldi://settings/mouse/",
 			"uid": "11"
 		},
