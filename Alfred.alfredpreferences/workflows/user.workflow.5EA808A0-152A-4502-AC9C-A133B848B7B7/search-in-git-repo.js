@@ -10,11 +10,13 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeperated, str].join(" ");
 }
 
-const jsonArray = [];
 const folderToSearch = $.getenv("folderToSearch");
 
-const repoArray = app
-	.doShellScript(`find "${folderToSearch}" -not -path "**/.git**" -not -path "**/node_modules**"`)
+//──────────────────────────────────────────────────────────────────────────────
+
+// FILES
+const fileArray = app
+	.doShellScript(`find "${folderToSearch}" -type f -not -path "**/.git**" -not -path "**/node_modules**"`)
 	.split("\r")
 	/* eslint-disable-next-line complexity */
 	.map(fPath => {
@@ -83,9 +85,29 @@ const repoArray = app
 		};
 	});
 
-if (!repoArray.length) {
+// FOLDERS
+const folderArray = app
+	.doShellScript(`find "${folderToSearch}" -type d -not -path "**/.git**" -not -path "**/node_modules**"`)
+	.split("\r")
+	.map(fPath => {
+		const parts = fPath.split("/");
+		const name = parts.pop();
+		const relativeParentFolder = fPath.slice(folderToSearch.length, -(name.length + 1));
+		return {
+			title: name,
+			match: alfredMatcher(name),
+			subtitle: relativeParentFolder,
+			type: "file:skipcheck",
+			icon: { type: "fileicon", path: fPath },
+			arg: fPath,
+			uid: fPath,
+		};
+	});
+
+const jsonArray = [...fileArray, ...folderArray];
+if (!jsonArray.length) {
 	jsonArray.push({ title: "No file in the current Folder found." });
 	JSON.stringify({ items: jsonArray });
 }
 
-JSON.stringify({ items: repoArray });
+JSON.stringify({ items: jsonArray });
