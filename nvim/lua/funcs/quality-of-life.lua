@@ -73,9 +73,10 @@ function M.wordSwitch()
 		{ "top", "bottom" },
 		{ "width", "height" },
 		{ "relative", "absolute" },
+		{ "low", "high" },
 		{ "dark", "light" },
 		{ "and", "or" },
-		{ "next", "prev" },
+		{ "next", "previous" },
 	}
 	local ft = bo.filetype
 	local ftWords -- 3rd item false if 2nd item shouldn't also switch to first

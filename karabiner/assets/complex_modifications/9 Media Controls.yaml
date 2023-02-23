@@ -1,6 +1,8 @@
 rules:
   - description: "F keys to media controls"
-    # to be able to quickly change it back; see https://github.com/Rigellute/spotify-tui/issues/1072
+    # see also spotify-tui issue https://github.com/Rigellute/spotify-tui/issues/1072
+    # done here to be able to quickly change it back, also using applescript
+    # avoids the needs for media-key forwarding
     manipulators:
       # Open Spotify
       - type: basic
@@ -20,16 +22,19 @@ rules:
         from: {key_code: f8}
         to: 
           - shell_command: pgrep -q "Spotify" || open -a "Spotify"
-          - consumer_key_code: play_or_pause
+          # - consumer_key_code: play_or_pause
+          - shell_command: osascript -e 'tell application "Spotify" to playpause'
       # Forward
       - type: basic
         from: {key_code: f9}
         to:
           - shell_command: pgrep -q "Spotify" || open -a "Spotify"
-          - consumer_key_code: fast_forward
+          # - consumer_key_code: fast_forward
+          - consumer_key_code: osascript -e 'tell application "Spotify" to next track'
       # Back
       - type: basic
         from: {key_code: f8}
         to:
           - shell_command: pgrep -q "Spotify" || open -a "Spotify"
-          - consumer_key_code: rewind
+          # - consumer_key_code: rewind
+                      - consumer_key_code: osascript -e 'tell application "Spotify to previous track'
