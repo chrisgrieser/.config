@@ -106,8 +106,13 @@ function zi() {
 
 # cd to last directory before quitting
 function ld() {
-	last_pwd=$(cat "$DOTFILE_FOLDER/zsh/.last_pwd")
-	z "$last_pwd"
+	last_pwd_location="$DOTFILE_FOLDER/zsh/.last_pwd"
+	if [[ ! -f "$last_pwd_location" ]] ; then
+		print "\033[1;33mNo Last PWD available."	
+	else
+		last_pwd=$(cat "$DOTFILE_FOLDER/zsh/.last_pwd")
+		z "$last_pwd"
+	fi
 }
 
 # copies [l]ast [c]ommand(s)

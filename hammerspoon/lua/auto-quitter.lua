@@ -17,16 +17,23 @@ Thresholds = {
 
 IdleApps = {} ---table containing all apps with their last activation time
 CheckIntervallSecs = 10
-local aw = hs.application.watcher
+
+--Initialize on load: fills `IdleApps` with all running apps and the current time
+for app, _ in pairs(Thresholds) do
+	local now = os.time()
+	IdleApps[app] = now
+end
 
 ---log times when an app has been deactivated
-DeactivationWatcher = aw.new(function(appName, eventType)
-	if not appName or appName == "" then return end
-	if eventType == aw.deactivated then
+local aw = hs.application.watcher
+DeactivationWatcher = aw.new(function(app, event)
+	if not app or app == "" then return end -- safeguard for special apps
+
+	if event == aw.deactivated then
 		local now = os.time()
-		IdleApps[appName] = now
-	elseif eventType == aw.activated and eventType == aw.terminated then
-		IdleApps[appName] = nil -- removes active app from the table
+		IdleApps[app] = now
+	elseif event == aw.activated or event == aw.terminated then
+		IdleApps[app] = nil -- removes active or closed app from table
 	end
 end):start()
 
@@ -60,7 +67,8 @@ AutoQuitterTimer = hs.timer
 		for app, lastActivation in pairs(IdleApps) do
 			local appHasThreshhold = Thresholds[app] ~= nil
 
-			if appHasThreshhold then
+
+			if appHasThreshhold then 
 				local idleTimeSecs = now - lastActivation
 				local thresholdSecs = Thresholds[app] * 60
 				if idleTimeSecs > thresholdSecs then quitter(app) end
