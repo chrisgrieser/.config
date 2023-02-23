@@ -11,9 +11,9 @@
 	display: none;
 }
 
-/* ───────────────────────────────────────────────── */
-
 input#urlFieldInput::placeholder { opacity: 0 }
+
+/* ───────────────────────────────────────────────── */
 
 /* hide tab title and favicon on new tab pages or the new tab page of the
  * Bonjour Extension */
