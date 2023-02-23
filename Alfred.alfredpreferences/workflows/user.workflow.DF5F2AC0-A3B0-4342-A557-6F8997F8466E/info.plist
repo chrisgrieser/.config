@@ -325,7 +325,8 @@ return "{query}"</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string></string>
+				<string># wrapped like this for dotfile folder set in .zshenv
+osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -798,6 +799,8 @@ return "{query}"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
+			<key>note</key>
+			<string>local icons</string>
 			<key>xpos</key>
 			<real>510</real>
 			<key>ypos</key>

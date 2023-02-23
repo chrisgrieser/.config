@@ -1,5 +1,4 @@
 #!/usr/bin/env osascript -l JavaScript
-// requires `fd`
 
 ObjC.import("stdlib");
 const app = Application.currentApplication();
@@ -28,7 +27,7 @@ const repoArray = app
 		const name = parts.pop();
 		const relativeParentFolder = fPath.slice(folderToSearch.length, -(name.length + 1));
 
-		let iconObj = { path: "./../filetype-icons/" };
+		const iconObj = { path: "./../filetype-icons/" };
 		let ext = isFolder ? "folder" : name.split(".").pop();
 		if (ext.includes("rc")) ext = "rc"; // rc files
 		else if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
@@ -43,6 +42,9 @@ const repoArray = app
 			case "yaml":
 			case "yml":
 				iconObj.path += "yaml.png";
+				break;
+			case "css":
+				iconObj.path += "css.png";
 				break;
 			case "md":
 				iconObj.path += "md.png";
@@ -64,8 +66,11 @@ const repoArray = app
 			case "png":
 				iconObj.path = fPath; // if png, use image itself
 				break;
+			case "folder":
+				iconObj.path += "folder.png"; 
+				break;
 			default:
-				iconObj = { type: "fileicon", path: fPath }; // by default, use file icon
+				iconObj.path += "blank.png";
 		}
 
 		return {
