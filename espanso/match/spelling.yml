@@ -199,3 +199,7 @@ matches:
   - trigger: knwo
     replace: know
     word: true
+  - trigger: agian
+    replace: again
+    propagate_casing: true
+    word: true
