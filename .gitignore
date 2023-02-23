@@ -7,6 +7,7 @@
 
 # Activity Data
 dlFolderLastChange
+.last_pwd
 
 # redundant
 .config/karabiner/automatic_backups
