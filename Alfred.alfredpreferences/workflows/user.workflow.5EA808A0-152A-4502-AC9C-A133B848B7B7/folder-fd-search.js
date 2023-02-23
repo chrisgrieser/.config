@@ -45,18 +45,18 @@ const repoArray = app
 				iconObj.path += "yaml.png";
 				break;
 			case "md":
-				iconObj.path += "markdown.png";
+				iconObj.path += "md.png";
 				break;
 			case "js":
 				iconObj.path += "js.png";
 				break;
 			case "ts":
-				iconObj.path += "typescript.png";
+				iconObj.path += "ts.png";
 				break;
 			case "zsh":
 			case "bash":
 			case "sh":
-				iconObj.path += "shell.png";
+				iconObj.path += "sh.png";
 				break;
 			case "rc":
 				iconObj.path += "rc.png";

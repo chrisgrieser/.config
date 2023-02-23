@@ -73,14 +73,15 @@ workArray.forEach(file => {
 			iconObj.path += "yaml.png";
 			break;
 		case "md":
-			iconObj.path += "markdown.png";
+			iconObj.path += "md.png";
 			break;
 		case "ts":
-			iconObj.path += "typescript.png";
+			iconObj.path += "ts.png";
 			break;
 		case "js":
 			iconObj.path += "js.png";
 			break;
+		case "bash":
 		case "zsh":
 		case "sh":
 			iconObj.path += "sh.png";
