@@ -133,8 +133,8 @@ nmap O &a&i
 " Add Blank Line above/below 
 " HACK not using mz...`z since m remapped 
 " HACK adding in ^d$ to clear the line from list markers from the o/O remapping above
-nmap = O<Esc>^d$j
-nmap _ o<Esc>^d$k
+nmap = O<Esc>^"_d$j
+nmap _ o<Esc>^"_d$k
 
 """"""""""""""""""""""""""""
 " Markdown/Obsidian specific
