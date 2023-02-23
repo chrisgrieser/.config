@@ -15,8 +15,6 @@ function M.issueSearch()
 		return
 	end
 	repo = repo:match(":.*%."):sub(2, -2)
-	-- fix for Shimmering Focus theme not being in it's repo
-	if repo == "chrisgrieser/main-vault" then repo = "chrisgrieser/shimmering-focus" end
 
 	-- TODO figure out how to make a proper http request in nvim
 	local max_results = 20
@@ -106,7 +104,7 @@ function M.addCommitPush(prefillMsg)
 
 			-- HACK since autoread fails in these causes, prompting for unsaved
 			-- files on closing after git add-commit-pull-push
-			local changeNeededBcStylelint = expand("%") == "theme.css"
+			local changeNeededBcStylelint = expand("%") == "source.css"
 			local changeNeededBcPanvimdoc = expand("%:p"):find("my%-plugins/.*/README.md")
 			if changeNeededBcPanvimdoc or changeNeededBcStylelint then
 				cmd.mkview(2)
@@ -138,7 +136,7 @@ function M.addCommitPush(prefillMsg)
 		end
 
 		-- Shimmering Focus specific actions instead
-		if expand("%") == "theme.css" then
+		if expand("%") == "source.css" then
 			shimmeringFocusBuild(commitMsg, gitShellOpts)
 			return
 		end
@@ -180,11 +178,6 @@ function M.gitLink()
 	end
 
 	local gitRemote = "https://github.com/" .. repo .. "/blob/" .. branch .. pathInRepo
-
-	-- workaround since shimmering focus theme is symlinked
-	if expand("%:p"):find("/Shimmering Focus/theme.css") then
-		gitRemote = "https://github.com/chrisgrieser/shimmering-focus/blob/main/source.css"
-	end
 
 	local resultUrl = gitRemote .. location
 	os.execute("open '" .. resultUrl .. "'")

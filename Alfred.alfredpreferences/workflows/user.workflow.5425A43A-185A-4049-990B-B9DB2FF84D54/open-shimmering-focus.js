@@ -21,9 +21,7 @@ function run(argv) {
 	const jsonArray = [];
 	let i = 0;
 
-	const vaultPath = argv[0];
-	const sfPath = vaultPath + "/.obsidian/themes/Shimmering Focus/theme.css";
-	console.log("sfPath: " + sfPath);
+	const sfPath = $.getenv("css_path");
 
 	//───────────────────────────────────────────────────────────────────────────
 
