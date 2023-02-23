@@ -21,18 +21,24 @@ const repoArray = app
 		fd --absolute-path --hidden --exclude "/.git/*"`,
 	)
 	.split("\r")
-	.map(fPath => { /* eslint-disable-line complexity */
+	/* eslint-disable-next-line complexity */
+	.map(fPath => {
 		const parts = fPath.split("/");
 		const isFolder = fPath.endsWith("/");
 		if (isFolder) parts.pop();
 		const name = parts.pop();
 		const relativeParentFolder = fPath.slice(folderToSearch.length, -(name.length + 1));
 
+		// type determiniation
+		let type;
+		if (isFolder) type = "folder";
+		if (name.startsWith(".z")) type = "sh"; // zsh config
+		else if (name.startsWith(".")) type = "config";
+		else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
+		else name.split(".").pop();
+		// icon determination
 		let iconObj = { path: "./../filetype-icons/" };
-		let ext = isFolder ? "folder" : name.split(".").pop();
-		if (ext.startsWith("z")) ext = "zsh"; // zsh dotfiles
-
-		switch (ext) {
+		switch (type) {
 			case "json":
 				iconObj.path += "json.png";
 				break;
@@ -56,19 +62,25 @@ const repoArray = app
 			case "ts":
 				iconObj.path += "ts.png";
 				break;
-			case "zsh":
-			case "bash":
 			case "sh":
 				iconObj.path += "sh.png";
 				break;
+			case "icns":
 			case "png":
-				iconObj.path = fPath; // if png, use image itself
+				iconObj.path = fPath; // use image itself
+				break;
+			case "gif":
+				iconObj.path += "image.png";
+				break;
+			case "blank":
+				iconObj.path += "blank.png";
+				break;
+			case "config":
+				iconObj.path += "blank.png";
 				break;
 			case "folder":
-				iconObj = { type: "fileicon", path: fPath }; 
-				break;
 			default:
-				iconObj.path += "config.png"; 
+				iconObj = { type: "fileicon", path: fPath };
 		}
 
 		return {
