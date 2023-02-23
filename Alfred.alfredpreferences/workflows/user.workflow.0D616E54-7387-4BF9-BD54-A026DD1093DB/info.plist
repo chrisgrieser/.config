@@ -58,37 +58,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>43A8089C-8E4B-43AD-B1C0-66A2A7DB65E1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A537AA86-2BA0-4E1B-8A83-6DA05B589BE3</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4E5B84C8-6F38-4660-BF59-079EE3D12150</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>C046315C-70E4-48A1-A057-62723A1FA39D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5E735505-24A6-45E4-AEDA-05E4D5C656A4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>29410773-ADC2-4B3E-8F78-37C96D87DA3F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -114,7 +88,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5E735505-24A6-45E4-AEDA-05E4D5C656A4</string>
+				<string>29410773-ADC2-4B3E-8F78-37C96D87DA3F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -166,19 +140,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>B6A0C425-D9B7-4F43-A579-32BCF3E9003F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A537AA86-2BA0-4E1B-8A83-6DA05B589BE3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>29410773-ADC2-4B3E-8F78-37C96D87DA3F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -824,6 +785,27 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>drafts://x-callback-url/append?uuid=E31A836B-B9D3-41EF-BEE4-5B6ED2B63E06&amp;text=- [ ] {query.trim.capitalcase}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>29410773-ADC2-4B3E-8F78-37C96D87DA3F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -831,7 +813,7 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Supermarkt: "{query}"</string>
+				<string>Shopping List: "{query}"</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -845,20 +827,21 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>E31A836B-B9D3-41EF-BEE4-5B6ED2B63E06</string>
-				<key>passthroughargument</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>variables</key>
-				<dict>
-					<key>item</key>
-					<string>{query}</string>
-				</dict>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>drafts://runaction?text=urlscheme&amp;action=Workspace-Tasklists</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>5E735505-24A6-45E4-AEDA-05E4D5C656A4</string>
+			<string>71C7FFC2-1D66-4561-B433-3F8CEBA479A5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -952,89 +935,6 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<string>BAD44650-CAFD-4C9E-84D9-6710E38A751C</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>drafts://x-callback-url/append?uuid={query}&amp;text=- [ ] {var:item.trim.capitalcase}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>29410773-ADC2-4B3E-8F78-37C96D87DA3F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>drafts://runaction?text=urlscheme&amp;action=Workspace-Tasklists</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>71C7FFC2-1D66-4561-B433-3F8CEBA479A5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ein</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Drogerie: "{query}"</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>43A8089C-8E4B-43AD-B1C0-66A2A7DB65E1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>7853F9F8-8B50-4A44-8D6A-BAB4DF70C57E</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>item</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>A537AA86-2BA0-4E1B-8A83-6DA05B589BE3</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1140,9 +1040,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>270</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>515</real>
 		</dict>
 		<key>42389168-DDFE-4158-93B7-8AD8E3B7564E</key>
 		<dict>
@@ -1164,15 +1064,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>43A8089C-8E4B-43AD-B1C0-66A2A7DB65E1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>650</real>
-		</dict>
 		<key>44ACF59E-80E4-46E2-99C3-E424AAF3B5D8</key>
 		<dict>
 			<key>colorindex</key>
@@ -1190,15 +1081,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>855</real>
 			<key>ypos</key>
 			<real>445</real>
-		</dict>
-		<key>5E735505-24A6-45E4-AEDA-05E4D5C656A4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>545</real>
 		</dict>
 		<key>65FBA979-932F-4451-886B-E14284E89A1E</key>
 		<dict>
@@ -1225,9 +1107,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>360</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>515</real>
 		</dict>
 		<key>76617630-8984-4444-8F08-CE5ECD32EE77</key>
 		<dict>
@@ -1290,15 +1172,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>910</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>A537AA86-2BA0-4E1B-8A83-6DA05B589BE3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>680</real>
 		</dict>
 		<key>B2947FAB-D8BF-4629-854B-015F5A11E9E8</key>
 		<dict>
