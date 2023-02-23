@@ -16,10 +16,13 @@ DeactivationWatcher = Aw.new(function(appName, eventType)
 end):start()
 
 ---check every ten second for idle apps
-hs.timer.doEvery(10, function ()
+hs.timer.doEvery(10, function()
 	local now = os.time()
 	if IdleApps["Spotify"] then
 		local diff = IdleApps["Spotify"] - now
-		local treshhold = 60
+		local threshold = 60
+		if diff < threshold then
+			
+		end
 	end
 end)
