@@ -11,15 +11,13 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 // using `fd` over `find` for speed and gitignoring
-const jsonArray = [];
 const dotfileFolder = $.getenv("dotfile_folder").replace(/^~/, app.pathTo("home folder"));
-/* eslint-disable no-multi-str, quotes */
-const workArray = app
+const fileArray = app
 	.doShellScript(
 		`
 		PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 		cd "${dotfileFolder}"
-		fd --hidden --no-ignore \\
+		fd --type=file --hidden --no-ignore \\
 			-E "Alfred.alfredpreferences" \\
 			-E "alacritty/colors/*" \\
 			-E "hammerspoon/Spoons/*" \\
@@ -44,113 +42,100 @@ const workArray = app
 			-E ".git" \\
 	`,
 	)
-	.split("\r");
-/* eslint-enable no-multi-str, quotes */
+	.split("\r")
+	/* eslint-disable-next-line complexity */
+	.map(file => {
+		const fPath = dotfileFolder + file;
+		const parts = file.split("/");
+		const name = parts.pop();
 
-/* eslint-disable-next-line complexity */
-workArray.forEach(file => {
-	const fPath = dotfileFolder + file;
-	const parts = file.split("/");
-	const isFolder = file.endsWith("/");
-	if (isFolder) parts.pop();
-	const name = parts.pop();
-	console.log("name:", name);
+		let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
+		if (parentPart === ".") parentPart = "";
 
-	let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
-	if (parentPart === ".") parentPart = "";
+		// type determiniation
+		let type;
+		if (name.startsWith(".z")) type = "zsh";
+		else if (name.startsWith(".")) type = "config";
+		else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
+		else type = name.split(".").pop();
 
-	// type determiniation
-	let type;
-	if (isFolder) type = "folder";
-	if (name.startsWith(".z")) type = "zsh";
-	else if (name.startsWith(".")) type = "config";
-	else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
-	else type = name.split(".").pop();
+		// icon determination
+		let iconObj = { path: "./../filetype-icons/" };
+		switch (type) {
+			case "json":
+				iconObj.path += "json.png";
+				break;
+			case "lua":
+				iconObj.path += "lua.png";
+				break;
+			case "yaml":
+			case "yml":
+				iconObj.path += "yaml.png";
+				break;
+			case "scss":
+			case "css":
+				iconObj.path += "css.png";
+				break;
+			case "md":
+				iconObj.path += "md.png";
+				break;
+			case "js":
+				iconObj.path += "js.png";
+				break;
+			case "ts":
+				iconObj.path += "ts.png";
+				break;
+			case "zsh":
+			case "sh":
+				iconObj.path += "sh.png";
+				break;
+			case "icns":
+			case "png":
+				iconObj.path = fPath; // use image itself
+				break;
+			case "gif":
+				iconObj.path += "image.png";
+				break;
+			case "blank":
+				iconObj.path += "blank.png";
+				break;
+			case "config":
+				iconObj.path += "config.png";
+				break;
+			case "folder":
+			default:
+				iconObj = { type: "fileicon", path: fPath };
+		}
 
-	// icon determination
-	let iconObj = { path: "./../filetype-icons/" };
-	switch (type) {
-		case "json":
-			iconObj.path += "json.png";
-			break;
-		case "lua":
-			iconObj.path += "lua.png";
-			break;
-		case "yaml":
-		case "yml":
-			iconObj.path += "yaml.png";
-			break;
-		case "scss":
-		case "css":
-			iconObj.path += "css.png";
-			break;
-		case "md":
-			iconObj.path += "md.png";
-			break;
-		case "js":
-			iconObj.path += "js.png";
-			break;
-		case "ts":
-			iconObj.path += "ts.png";
-			break;
-		case "zsh":
-		case "sh":
-			iconObj.path += "sh.png";
-			break;
-		case "icns":
-		case "png":
-			iconObj.path = fPath; // use image itself
-			break;
-		case "gif":
-			iconObj.path += "image.png";
-			break;
-		case "blank":
-			iconObj.path += "blank.png";
-			break;
-		case "config":
-			iconObj.path += "config.png";
-			break;
-		case "folder":
-		default:
-			iconObj = { type: "fileicon", path: fPath };
-	}
+		const matcher = alfredMatcher(`${name} ${parentPart}`);
 
-	let matcher = alfredMatcher(`${name} ${parentPart}`);
-	if (isFolder) matcher += " folder";
-
-	jsonArray.push({
-		title: name,
-		subtitle: "▸ " + parentPart,
-		match: matcher,
-		icon: iconObj,
-		type: "file:skipcheck",
-		uid: fPath,
-		arg: fPath,
+		return {
+			title: name,
+			subtitle: "▸ " + parentPart,
+			match: matcher,
+			icon: iconObj,
+			type: "file:skipcheck",
+			uid: fPath,
+			arg: fPath,
+		};
 	});
-});
 
-//──────────────────────────────────────────────────────────────────────────────
+const folderArray = app
+	.doShellScript(`find "${dotfileFolder}" -type d -not -path "**/.git**" -not -path "**/node_modules**"`)
+	.split("\r");
 
-// add dotfile folder itself + password-store (pass-cli)
-const self = dotfileFolder.replace(/.*\/(.+)\//, "$1");
-jsonArray.push({
-	title: self,
-	subtitle: "▸ root",
-	match: alfredMatcher(self),
-	icon: { type: "fileicon", path: dotfileFolder },
-	type: "file:skipcheck",
-	uid: self,
-	arg: dotfileFolder,
-});
 
+// password-store (pass-cli)
 const pwPath = app.pathTo("home folder") + "/.password-store";
-jsonArray.push({
+const pwFolder = {
 	title: ".password-store",
 	match: alfredMatcher(pwPath),
 	icon: { type: "fileicon", path: pwPath },
 	type: "file:skipcheck",
 	uid: pwPath,
 	arg: pwPath,
-});
+};
 
+//──────────────────────────────────────────────────────────────────────────────
+const jsonArray = [...fileArray, ...folderArray, pwFolder];
 JSON.stringify({ items: jsonArray });
