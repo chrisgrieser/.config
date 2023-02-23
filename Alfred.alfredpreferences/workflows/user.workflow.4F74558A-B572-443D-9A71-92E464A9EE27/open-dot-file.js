@@ -83,7 +83,7 @@ workArray.forEach(file => {
 			break;
 		case "zsh":
 		case "sh":
-			iconObj.path += "shell.png";
+			iconObj.path += "sh.png";
 			break;
 		case "rc":
 			iconObj.path += "rc.png";
