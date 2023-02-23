@@ -67,7 +67,7 @@ const repoArray = app
 				iconObj.path = fPath; // if png, use image itself
 				break;
 			case "folder":
-				iconObj.path += "folder.png"; 
+				iconObj.path = fPath; // folder image
 				break;
 			default:
 				iconObj.path += "blank.png";
