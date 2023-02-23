@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 
 -- CONFIG
----apps times after which apps should quit, in minutes
+---times after which apps should quit, in minutes
 Thresholds = {
 	Slack = 15,
 	Obsidian = 60,
@@ -65,9 +65,8 @@ AutoQuitterTimer = hs.timer
 		local now = os.time()
 
 		for app, lastActivation in pairs(IdleApps) do
+			-- can't do this with guard clause, since lua has no `continue`
 			local appHasThreshhold = Thresholds[app] ~= nil
-
-
 			if appHasThreshhold then 
 				local idleTimeSecs = now - lastActivation
 				local thresholdSecs = Thresholds[app] * 60
