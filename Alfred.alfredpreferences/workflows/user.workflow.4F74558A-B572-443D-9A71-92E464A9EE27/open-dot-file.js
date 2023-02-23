@@ -75,6 +75,9 @@ workArray.forEach(file => {
 		case "md":
 			iconObj.path += "markdown.png";
 			break;
+		case "ts":
+			iconObj.path += "typescript.png";
+			break;
 		case "js":
 			iconObj.path += "js.png";
 			break;

@@ -50,7 +50,7 @@ const repoArray = app
 			case "js":
 				iconObj.path += "js.png";
 				break;
-			case "typescript":
+			case "ts":
 				iconObj.path += "typescript.png";
 				break;
 			case "zsh":
