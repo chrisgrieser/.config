@@ -227,7 +227,7 @@ local function sleepMovieApps()
 	local minutesIdle = hs.host.idleTime() / 60
 	if minutesIdle < 30 then return end
 	QuitApp { "YouTube", "Twitch", "CrunchyRoll" }
-	-- no need to quit IINA, since it autoquits on finishing playback
+	-- no need to quit IINA and Netflix, since they autoquits / autoquit
 	-- no need to quit Netflix since it autostops
 	Applescript([[
 		tell application "Vivaldi"
