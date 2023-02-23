@@ -6,7 +6,8 @@ function TwitterScrollUp()
 	Keystroke({ "command" }, "left", 1, App("Twitter")) -- go back
 	Keystroke({ "command" }, "1", 1, App("Twitter")) -- go to home tab
 	Keystroke({ "shift", "command" }, "R", 1, App("Twitter")) -- reload
-	-- needs delay to wait for tweet loading
+
+	-- needs delays to wait for tweet loading
 	RunWithDelays({ 0.2, 0.4, 0.6, 0.9, 1.2 }, function()
 		Keystroke({ "command" }, "1", 1, App("Twitter")) -- scroll up
 		Keystroke({ "command" }, "up", 1, App("Twitter")) -- goto top
