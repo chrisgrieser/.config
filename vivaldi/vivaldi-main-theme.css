@@ -141,7 +141,7 @@
 
 /* ────────────────────────────────────────────────────────────────────────── */
 /* show download button only when download is active (`.progress`) */
-.button-toolbar:has([name="PanelDownloads"]):not(:has(.progress)) {
+.button-toolbar:not(:has(.progress)) {
 	display: none;
 }
 
