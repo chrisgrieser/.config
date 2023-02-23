@@ -140,6 +140,8 @@
 }
 
 /* ────────────────────────────────────────────────────────────────────────── */
+/* DOWNLOAD BAR */
+
 /* show download button only when download is active (`.progress`) */
 .button-toolbar:not(:has(.progress)) {
 	display: none;
@@ -149,6 +151,11 @@
 	padding-left: 30px;
 }
 
+
+#browser .button-toolbar button:hover {
+	background: none;
+	color: var(--colorHighlightBg);
+}
 
 /* ────────────────────────────────────────────────────────────────────────── */
 /* TAB LOOK */
