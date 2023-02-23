@@ -13,29 +13,20 @@ function alfredMatcher(str) {
 const jsonArray = [];
 const folderToSearch = $.getenv("folderToSearch");
 
-// using `fd` over `find` for speed and gitignoring
 const repoArray = app
-	.doShellScript(
-		`export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;
-		cd "${folderToSearch}" ;
-		fd --absolute-path --hidden --exclude "/.git/*"`,
-	)
+	.doShellScript(`find "${folderToSearch}" -not -path "**/.git**" -not -path "**/node_modules**"`)
 	.split("\r")
 	/* eslint-disable-next-line complexity */
 	.map(fPath => {
 		const parts = fPath.split("/");
-		const isFolder = fPath.endsWith("/");
-		if (isFolder) parts.pop();
 		const name = parts.pop();
 		const relativeParentFolder = fPath.slice(folderToSearch.length, -(name.length + 1));
 
 		// type determiniation
 		let type;
-		if (isFolder) type = "folder";
-		if (name.startsWith(".z")) type = "sh"; // zsh config
+		if (name.startsWith(".z")) type = "zsh";
 		else if (name.startsWith(".")) type = "config";
-		else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
-		else name.split(".").pop();
+		else type = name.split(".").pop();
 
 		// icon determination
 		let iconObj = { path: "./../filetype-icons/" };
@@ -63,6 +54,7 @@ const repoArray = app
 			case "ts":
 				iconObj.path += "ts.png";
 				break;
+			case "zsh":
 			case "sh":
 				iconObj.path += "sh.png";
 				break;
@@ -73,13 +65,9 @@ const repoArray = app
 			case "gif":
 				iconObj.path += "image.png";
 				break;
-			case "blank":
-				iconObj.path += "blank.png";
-				break;
 			case "config":
-				iconObj.path += "blank.png";
+				iconObj.path += "config.png";
 				break;
-			case "folder":
 			default:
 				iconObj = { type: "fileicon", path: fPath };
 		}

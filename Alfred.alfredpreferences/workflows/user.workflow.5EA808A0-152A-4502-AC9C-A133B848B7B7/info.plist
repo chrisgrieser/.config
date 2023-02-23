@@ -890,7 +890,7 @@ echo "$url"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>folder-fd-search.js</string>
+				<string>search-in-git-repo.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1088,7 +1088,7 @@ echo "$url"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>fd search</string>
+			<string>search in repo</string>
 			<key>xpos</key>
 			<real>140</real>
 			<key>ypos</key>
