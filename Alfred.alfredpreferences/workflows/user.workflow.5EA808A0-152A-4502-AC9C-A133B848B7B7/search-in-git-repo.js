@@ -36,6 +36,7 @@ const repoArray = app
 		else if (name.startsWith(".")) type = "config";
 		else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
 		else name.split(".").pop();
+
 		// icon determination
 		let iconObj = { path: "./../filetype-icons/" };
 		switch (type) {
