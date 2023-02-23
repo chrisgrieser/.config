@@ -121,9 +121,8 @@ const fileArray = app
 const folderArray = app
 	.doShellScript(`find "${dotfileFolder}" -type d -not -path "**/.git**" -not -path "**/node_modules**"`)
 	.split("\r")
-	.map(file => {
-		const fPath = dotfileFolder + file;
-		const parts = file.split("/");
+	.map(fPath => {
+		const parts = fPath.split("/");
 		const name = parts.pop();
 		let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
 		if (parentPart === ".") parentPart = "";

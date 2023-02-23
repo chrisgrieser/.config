@@ -104,14 +104,20 @@ function zi() {
 	directoryInspect
 }
 
-# copies last command(s)
+# cd to last directory before quitting
+function ld() {
+	last_pwd=$(cat "$DOTFILE_FOLDER/zsh/.last_pwd")
+	z "$last_pwd"
+}
+
+# copies [l]ast [c]ommand(s)
 function lc() {
 	num=${1-"1"} # default= 1 -> last command
 	history | tail -n"$num" | cut -c8- | sed 's/"/\"/g' | sed "s/'/\'/g" | sed -E '/^$/d' | pbcopy
 	echo "Copied."
 }
 
-# save last command(s) in Drafts
+# save [l]ast [c]ommand(s) in [D]rafts
 function lcd() {
 	num=${1-"1"} # default: 1 last command
 	local timestamp
@@ -122,7 +128,7 @@ function lcd() {
 	echo "Saved in Drafts."
 }
 
-# copies result of last command(s)
+# copies [r]esult of [l]ast command(s)
 function lr() {
 	num=${1-"1"} # default: 1 last command
 	last_command=$(history | tail -n"$num" | cut -c 8-)
