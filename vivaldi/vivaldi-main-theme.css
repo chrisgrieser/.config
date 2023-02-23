@@ -145,7 +145,7 @@
 /* DOWNLOAD BAR */
 
 /* show download button only when download is active (`.progress`) */
-.button-toolbar:not(:has(.progress)) {
+.button-toolbar:has(button[name="DownloadButton"]):not(:has(.progress)) {
 	display: none;
 }
 
