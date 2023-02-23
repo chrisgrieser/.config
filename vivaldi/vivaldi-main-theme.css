@@ -103,14 +103,16 @@
 
 #browser #tabs-container {
 	padding-left: 8px;
-	margin-right: -35px;
 }
 
+/* HACK, since with one tab the negativ margin leads to buggy right sidebar */
+#browser #tabs-container:has(.tab-strip > span:nth-child(2)) {
+	margin-right: -35px;
+}
 
 .UrlBar-AddressField ~ .button-toolbar {
 	margin-left: -6px;
 }
-
 
 #tabs-tabbar-container,
 .UrlBar-AddressField {
@@ -150,7 +152,6 @@
 #header:has(+ #main .button-toolbar .progress) #tabs-container {
 	padding-left: 30px;
 }
-
 
 #browser .button-toolbar button:hover {
 	background: none;
