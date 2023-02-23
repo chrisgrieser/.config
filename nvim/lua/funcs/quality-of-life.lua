@@ -63,13 +63,13 @@ function M.wordSwitch()
 
 	local words = {
 		{ "true", "false" },
-		{ "<=", ">=" },
 		{ "on", "off" },
 		{ "yes", "no" },
 		{ "disable", "enable" },
 		{ "disabled", "enabled" },
 		{ "show", "hide" },
 		{ "right", "left" },
+		{ "red", "blue" },
 		{ "top", "bottom" },
 		{ "width", "height" },
 		{ "relative", "absolute" },

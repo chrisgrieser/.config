@@ -70,9 +70,12 @@ Wf_maxWindows = Wf.new(true):subscribe(Wf.windowUnfocused, function(win)
 	if CheckSize(win, Maximized) then win:application():hide() end
 end)
 
----play/pause spotify with spotifyTUI or Spotify
+---play/pause spotify with Spotify
 ---@param toStatus string pause|play
 local function spotifyControl(toStatus)
+	Applescript([[tell application "Spotify" to ]] .. toStatus)
+
+	-- version using spotify tui if it is fixed
 	-- local currentStatus = hs.execute(
 	-- 	"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s"
 	-- )
@@ -86,7 +89,6 @@ local function spotifyControl(toStatus)
 	-- 	)
 	-- 	if toStatus == "play" then Notify(stdout) end ---@diagnostic disable-line: param-type-mismatch
 	-- end
-	Applescript([[tell application "Spotify" to ]] .. toStatus)
 end
 
 -- auto-pause Spotify on launch of apps w/ sound
@@ -171,15 +173,17 @@ end
 NeovideWatcher = Aw.new(function(appName, eventType, appObj)
 	if not appName or appName:lower() ~= "neovide" then return end
 
+	-- triggered on activation as well, since neovide as non-native app
+	-- often does not send a "launched" signal
 	if eventType == Aw.activated or eventType == Aw.launched then
 		clipboardFix()
 		-- maximize app
 		RunWithDelays({ 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 }, function()
-			local neovideWin = appObj:mainWindow()
-			if not neovideWin then return end
-			if CheckSize(neovideWin, LeftHalf) or CheckSize(neovideWin, RightHalf) then return end
+			local win = appObj:mainWindow()
+			if not win then return end
+			if CheckSize(win, LeftHalf) or CheckSize(win, RightHalf) or CheckSize(win, LeftHalf) or CheckSize(win, BottomHalf) or CheckSize(win, TopHalf) then return end
 			local size = IsProjector() and Maximized or PseudoMaximized
-			MoveResize(neovideWin, size)
+			MoveResize(win, size)
 		end)
 
 	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
