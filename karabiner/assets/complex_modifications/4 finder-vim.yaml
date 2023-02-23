@@ -757,18 +757,24 @@ rules:
           key_code: h
           modifiers: {mandatory: [control]}
         to_if_alone:
-          - key_code: semicolon # German ö
-            modifiers: [command]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Finder"
+                  click menu item "Back" of menu "Go" of menu bar 1
+                end tell'
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <C-l> = History Forward
       - type: basic
         from:
           key_code: l
           modifiers: {mandatory: [control]}
         to:
-          - key_code: quote # German ä
-            modifiers: [command]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Finder"
+                  click menu item "Forward" of menu "Go" of menu bar 1
+                end tell'
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # FIND MODE
       # Enter/Exit
