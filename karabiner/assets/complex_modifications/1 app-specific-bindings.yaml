@@ -293,7 +293,7 @@ rules:
         from: { key_code: l }
         to:
           - key_code: "v"
-          - {key_code: vk_none, hold_down_milliseconds: 100}
+          - {key_code: vk_none, hold_down_milliseconds: 120}
           - {key_code: "tab", modifiers: [command]}
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.lireapp\.macOS$] }
