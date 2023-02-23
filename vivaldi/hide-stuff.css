@@ -1,6 +1,7 @@
 /* stylelint-disable selector-max-id, custom-property-pattern */
 /* ────────────────────────────────────────────────────────── */
 
+.UrlBar-PrivateWindowIndicator,
 .window-buttongroup, /* macOS traffic lights */
 .toolbar-extensions, /* extension button */
 .button-toolbar.newtab, /* new tab button */
