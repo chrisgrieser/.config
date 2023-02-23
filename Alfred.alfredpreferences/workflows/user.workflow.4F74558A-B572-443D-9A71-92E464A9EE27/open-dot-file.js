@@ -16,31 +16,33 @@ const dotfileFolder = $.getenv("dotfile_folder").replace(/^~/, app.pathTo("home 
 /* eslint-disable no-multi-str, quotes */
 const workArray = app
 	.doShellScript(
-		'PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "' +
-			dotfileFolder +
-			'" ; fd --hidden --no-ignore \
-		-E "Alfred.alfredpreferences" \
-		-E "alacritty/colors/*" \
-		-E "hammerspoon/Spoons/*" \
-		-E "*/vale/styles/*/*.yml" \
-		-E "*/vale/styles/*/*.adoc" \
-		-E "*/vale/styles/*/*.md" \
-		-E "**/*.app/*" \
-		-E "karabiner/automatic_backups" \
-		-E "visualized-keyboard-layout/*.json" \
-		-E "zsh/plugins/*" \
-		-E "nvim/my-plugins/*" \
-		-E "*.icns" \
-		-E "*.plist" \
-		-E "*.add" \
-		-E "*.spl" \
-		-E "TODO*" \
-		-E "INFO*" \
-		-E "*.png" \
-		-E "Fonts/*" \
-		-E ".DS_Store" \
-		-E ".git/" \
-		-E ".git"',
+		`
+		PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+		cd "${dotfileFolder}"
+		fd --hidden --no-ignore \\
+			-E "Alfred.alfredpreferences" \\
+			-E "alacritty/colors/*" \\
+			-E "hammerspoon/Spoons/*" \\
+			-E "*/vale/styles/*/*.yml" \\
+			-E "*/vale/styles/*/*.adoc" \\
+			-E "*/vale/styles/*/*.md" \\
+			-E "**/*.app/*" \\
+			-E "karabiner/automatic_backups" \\
+			-E "visualized-keyboard-layout/*.json" \\
+			-E "zsh/plugins/*" \\
+			-E "nvim/my-plugins/*" \\
+			-E "*.icns" \\
+			-E "*.plist" \\
+			-E "*.add" \\
+			-E "*.spl" \\
+			-E "TODO*" \\
+			-E "INFO*" \\
+			-E "*.png" \\
+			-E "Fonts/*" \\
+			-E ".DS_Store" \\
+			-E ".git/" \\
+			-E ".git" \\
+	`,
 	)
 	.split("\r");
 /* eslint-enable no-multi-str, quotes */
@@ -52,6 +54,7 @@ workArray.forEach(file => {
 	const isFolder = file.endsWith("/");
 	if (isFolder) parts.pop();
 	const name = parts.pop();
+	console.log("name:", name);
 
 	let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
 	if (parentPart === ".") parentPart = "";
@@ -59,7 +62,7 @@ workArray.forEach(file => {
 	// type determiniation
 	let type;
 	if (isFolder) type = "folder";
-	if (name.startsWith(".z")) type = "sh"; // zsh config
+	if (name.startsWith(".z")) type = "zsh";
 	else if (name.startsWith(".")) type = "config";
 	else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
 	else type = name.split(".").pop();
@@ -90,6 +93,7 @@ workArray.forEach(file => {
 		case "ts":
 			iconObj.path += "ts.png";
 			break;
+		case "zsh":
 		case "sh":
 			iconObj.path += "sh.png";
 			break;
@@ -104,7 +108,7 @@ workArray.forEach(file => {
 			iconObj.path += "blank.png";
 			break;
 		case "config":
-			iconObj.path += "blank.png";
+			iconObj.path += "config.png";
 			break;
 		case "folder":
 		default:
