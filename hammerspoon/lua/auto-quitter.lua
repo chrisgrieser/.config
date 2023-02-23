@@ -53,10 +53,9 @@ end
 ---@param app string name of the app
 local function quitter(app)
 	if app == "Drafts" and getDraftsCount() > 0 then return end
-	print("AutoQuitter: Quitting " .. app)
-	local appObj = App.get(app)
-	if appObj then appObj:kill() end
+	hs.application(app):kill()
 	IdleApps[app] = nil
+	print("AutoQuitter: Quitting " .. app)
 end
 
 ---check apps regularly and quit if idle for longer than their thresholds
@@ -67,7 +66,8 @@ AutoQuitterTimer = hs.timer
 		for app, lastActivation in pairs(IdleApps) do
 			-- can't do this with guard clause, since lua has no `continue`
 			local appHasThreshhold = Thresholds[app] ~= nil
-			if appHasThreshhold then 
+			local appIsRunning = hs.application.get(app)
+			if appHasThreshhold and appIsRunning then 
 				local idleTimeSecs = now - lastActivation
 				local thresholdSecs = Thresholds[app] * 60
 				if idleTimeSecs > thresholdSecs then quitter(app) end

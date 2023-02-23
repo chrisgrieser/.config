@@ -62,8 +62,8 @@ end
 JHidesCursor = Hotkey({}, "j", function() hideCurAndPassThrough("j") end):disable()
 KHidesCursor = Hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
 
-Jk_watcher = Aw.new(function(appName, eventType)
-	if eventType == Aw.activated then
+Jk_watcher = hs.application.watcher.new(function(appName, eventType)
+	if eventType == hs.application.watcher.activated then
 		if appName == "Vivaldi" then
 			JHidesCursor:enable()
 			KHidesCursor:enable()
