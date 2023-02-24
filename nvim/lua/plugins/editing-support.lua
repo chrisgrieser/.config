@@ -164,13 +164,20 @@ return {
 							return { { "" }, { "" } }
 						end,
 					},
+					-- disable invalid_key_behavior (= no more surrounds for
+					-- characters not explicitly defined)
+					invalid_key_behavior = {
+						add = {},
+						find = nil,
+						delete = nil,
+						change = {},
+					},
 				},
 			}
 		end,
 	},
 
 	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
-
 	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
 

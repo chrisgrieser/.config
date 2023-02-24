@@ -2,14 +2,18 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-const alfredMatcher = str => str.replace(/[-()_.:]/g, " ") + " " + str + " " + str.replace(/([A-Z])/g, " $1"); // match parts of CamelCase
+
+function alfredMatcher(str) {
+	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
+	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeperated, str].join(" ") + " ";
+}
 
 ObjC.import("Foundation");
-function readFile(path, encoding) {
-	if (!encoding) encoding = $.NSUTF8StringEncoding;
+function readFile(path) {
 	const fm = $.NSFileManager.defaultManager;
 	const data = fm.contentsAtPath(path);
-	const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
 
@@ -31,7 +35,7 @@ categoryArr.forEach(category => {
 		uid: category.name,
 	});
 
-	// categories items
+	// category items
 	category.items.forEach(catItem => {
 		const shortdef = catItem.def.split("->")[0].trim();
 		workArray.push({
@@ -40,7 +44,6 @@ categoryArr.forEach(category => {
 			match: alfredMatcher(shortdef),
 			arg: `https://www.hammerspoon.org/docs/${category.name}.html#${catItem.name}`,
 			uid: `${category.name}_${catItem.name}`,
-			mods: { alt: { arg: shortdef } },
 		});
 	});
 });

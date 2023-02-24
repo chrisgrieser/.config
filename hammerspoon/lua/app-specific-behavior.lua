@@ -140,7 +140,7 @@ end):start()
 -- Add dots when copypasting to from Obsidian devtools
 -- not using window focused, since not reliable
 local function clipboardFix()
-	if not App("neovide"):mainWindow():title():find("%.css$") then return end
+	if not App("neovide"):mainWindow() or not App("neovide"):mainWindow():title():find("%.css$") then return end
 
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
