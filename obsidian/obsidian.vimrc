@@ -297,6 +297,7 @@ nmap ,l :linkjump
 " Substitute
 """"""""""""""""""""""
 " poor man's substitute.nvim 🥲
+unmap s
 nmap ss Vp
 nmap siw viwp
 nmap S vg$p
@@ -308,6 +309,12 @@ nmap S vg$p
 " https://medium.com/@gareth.stretton/obsidian-part-2-system-commands-cdc20836a2b8
 exmap filterThroughShell obcommand templater-obsidian:Meta/Templater/>_pipe_text_through_shell_commands.md
 nmap ! ilterThroughShell
+
+""""""""""""""""""""""
+" Filter through Shell Commands
+""""""""""""""""""""""
+exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
+nmap 6 :toggleDevtools
 
 """"""""""""""""""""""
 " Option Toggling
