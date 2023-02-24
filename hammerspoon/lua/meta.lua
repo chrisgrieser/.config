@@ -6,6 +6,7 @@ local cons = hs.console
 hs.consoleOnTop(false)
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
+hs.application.enableSpotlightForNameSearches(false)
 hs.window.animationDuration = 0
 
 --------------------------------------------------------------------------------
@@ -76,3 +77,4 @@ end)
 
 -- `hammerspoon://clear-console` for Karabiner Elements (⌘K)
 UriScheme("clear-console", cons.clearConsole)
+

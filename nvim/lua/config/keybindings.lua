@@ -317,15 +317,15 @@ if isGui() then
 
 	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 	g.VM_maps = {
-		["Find Under"] = "<D-j>", -- select word under cursor and enter visual-multi (normal mode)
-		["Visual Add"] = "<D-j>", -- enter visual-multi (visual mode)
-		["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi mode)
+		["Find Under"] = "<D-j>", -- select word under cursor & enter visual-multi (normal) / add next occurrence (visual-multi)
+		["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
+		["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
 	}
 
-	-- cut, copy & paste
+	-- copy & paste
 	keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
 	keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
-	keymap("i", "<D-c>", "<C-g>u<C-r><C-o>+", { desc = "paste" }) -- "<C-g>u" = add undopoint before the paste
+	keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = "paste" }) -- "<C-g>u" adds undopoint before the paste
 	keymap("x", "<D-c>", "y", { desc = "copy" }) -- needed for compatibility with automation apps
 
 	-- cmd+e: inline code
