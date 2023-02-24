@@ -3,7 +3,7 @@
 /* stylelint-disable selector-max-id, custom-property-pattern  */
 /* ────────────────────────────────────────────────────────────────────────── */
 :root {
-	--adressbar-width-focussed: 99vw;
+	--adressbar-focussed-width: 99vw; 
 	--adressbar-width-1-tab: 80vw;
 	--adressbar-width-2-tab: 70vw;
 	--adressbar-width-3-tab: 60vw;
@@ -92,14 +92,17 @@
 
 /* ────────────────────────────────────────────────────────────────────────── */
 
-/* extends the width of the url bar addressfield while it is focused */
-#browser #main .UrlBar-AddressField:focus-within:not(:has(#urlFieldInput[value=""])) {
-	width: var(--adressbar-width-focussed);
+/* extends the width of non-empty url bar while it is focused and does have at 
+least 3 tabs */
+#header:has(.tab-strip > span:nth-child(3)) + #main .UrlBar-AddressField:focus-within:not(:has(+ #main #urlFieldInput[value=""])) {
+	width: var(--adressbar-focussed-width);
 }
 
-#header:has(+ #main .UrlBar-AddressField:focus-within):not(:has(+ #main #urlFieldInput[value=""])) #tabs-tabbar-container {
+#header:has(+ #main .UrlBar-AddressField:focus-within):not(:has(+ #main #urlFieldInput[value=""])) #tabs-tabbar-container:has(.tab-strip > span:nth-child(4)) {
 	opacity: 0;
 }
+
+/* ────────────────────────────────────────────────────────────────────────── */
 
 #browser #tabs-container {
 	padding-left: 8px;
