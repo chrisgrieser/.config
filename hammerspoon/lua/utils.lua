@@ -67,6 +67,12 @@ function IsAtOffice()
 end
 
 ---@return boolean
+function IsAtMother() return DeviceName():find("Mother") ~= nil end
+
+---@return boolean
+function IsIMacAtHome() return (DeviceName():find("iMac") and DeviceName():find("Home")) ~= nil end
+
+---@return boolean
 function ScreenIsUnlocked()
 	local _, success = hs.execute(
 		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1'
@@ -80,12 +86,6 @@ function DeviceName()
 	local name, _ = hs.host.localizedName():gsub(".- ", "", 1)
 	return name
 end
-
----@return boolean
-function IsAtMother() return DeviceName():find("Mother") ~= nil end
-
----@return boolean
-function IsIMacAtHome() return (DeviceName():find("iMac") and DeviceName():find("Home")) ~= nil end
 
 ---Send Notification
 function Notify(...)

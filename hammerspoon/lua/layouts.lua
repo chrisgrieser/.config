@@ -52,12 +52,10 @@ function WorkLayout()
 	setHigherBrightnessDuringDay()
 	HoleCover()
 
+	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder" }
 	if not isWeekend() then OpenApp("Slack") end
 	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts", "Spotify" }
-	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder" }
 	require("lua.private").closer()
-
-	dockSwitcher("work")
 
 	local layout = createLayout(PseudoMaximized, IMacDisplay, {
 		"Vivaldi",
@@ -77,51 +75,19 @@ function WorkLayout()
 	hs.layout.apply(layout)
 	TwitterToTheSide()
 	ShowAllSidebars()
-	RunWithDelays({ 0.5, 1 }, function()
+	RunWithDelays({ 0.4, 0.8 }, function()
 		App("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
 		App("Drafts"):activate()
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
 		App("Spotify"):hide()
 	end)
+	dockSwitcher("work")
 end
 
-local function motherHomeModeLayout()
-	setHigherBrightnessDuringDay()
-
-	if not isWeekend() then OpenApp("Slack") end
-	OpenApp { "Discord", "Obsidian", "Mimestream", "Vivaldi", "Twitter", "Drafts", "Spotify" }
-	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder" }
-	require("lua.private").closer()
-
-	dockSwitcher("home")
-
-	local layout = createLayout(PseudoMaximized, IMacDisplay, {
-		"Vivaldi",
-		"Warp",
-		"Slack",
-		"Discord",
-		"Obsidian",
-		"Drafts",
-		"Mimestream",
-		"alacritty",
-		"Alacritty",
-	})
-
-	RunWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
-		hs.layout.apply(layout)
-		TwitterToTheSide()
-	end)
-	ShowAllSidebars()
-	App("Spotify"):hide()
-end
-
-
-
----@param mother boolean? whether to use mother mode
-function MovieModeLayout(mother)
-	if mother then
-		dockSwitcher("mother-movie")
+function MovieModeLayout()
+	if IsAtMother() then
+		dockSwitcher("mother-movie") -- different PWAs due to not being M1 device
 	else
 		dockSwitcher("movie")
 	end
@@ -155,14 +121,10 @@ end
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 local function setLayout()
-	if IsIMacAtHome() and IsProjector() then
+	if IsProjector() then
 		MovieModeLayout()
-	elseif IsAtOffice() or (IsIMacAtHome() and not IsProjector()) then
+	else
 		WorkLayout()
-	elseif IsAtMother() and IsProjector() then
-		MovieModeLayout(true)
-	elseif IsAtMother() and not IsProjector() then
-		motherHomeModeLayout()
 	end
 end
 

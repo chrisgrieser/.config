@@ -29,7 +29,6 @@ cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | head -n1 | cut -d\" 
 gpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*gpu" | head -n1 | cut -d\" -f2)
 ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*ram" | head -n1 | cut -d\" -f2)
 
-
 #───────────────────────────────────────────────────────────────────────────────
 
 if defaults read -g AppleInterfaceStyle | grep -iq "Dark"; then
