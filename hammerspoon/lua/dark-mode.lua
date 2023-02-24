@@ -2,7 +2,7 @@ require("lua.utils")
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local autoSwitchFreqMin = 10
+local autoSwitchFreqMin = 15
 local brightnessThreshhold = 90
 
 --------------------------------------------------------------------------------
@@ -25,7 +25,6 @@ end)
 -- - Hammerspoon Console
 local function toggleDarkMode()
 	brightnessNotify()
-	local prevApp = FrontAppName()
 	local sketchyfont, sketchybg, toMode, pdfbg
 
 	if IsDarkMode() then
@@ -55,6 +54,7 @@ local function toggleDarkMode()
 	Applescript([[
 		tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
 	]])
+	HoleCover() -- redraw hole-covers in proper color
 
 	-- sketchybar
 	-- stylua: ignore
@@ -67,9 +67,6 @@ local function toggleDarkMode()
 		--set covid-stats icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--update
 	]])
-
-	App(prevApp):activate()
-	HoleCover() -- redraw hole-covers in proper color
 end
 
 ---@return boolean
@@ -91,10 +88,10 @@ function AutoSwitchDarkmode()
 	if not hasBrightnessSensor then return end
 
 	if brightness > brightnessThreshhold and IsDarkMode() then
-		SetDarkmode(true)
+		SetDarkmode(false)
 		print("Autoswitching to Dark Mode")
 	elseif brightness < brightnessThreshhold and not (IsDarkMode()) then
-		SetDarkmode(false)
+		SetDarkmode(true)
 		print("Autoswitching to Light Mode")
 	end
 end
