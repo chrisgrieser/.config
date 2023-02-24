@@ -156,23 +156,25 @@ end)
 
 HomeWakeWatcher = caff
 	.new(function(event)
-		if not (IsAtOffice()) and (event == caff.screensDidWake or event == caff.systemDidWake) then
-			TwitterScrollUp()
-			hs.execute("sketchybar --set clock popup.drawing=true")
-
-			-- INFO checks need to run after delay, since display number is not
-			-- immediately picked up after wake
-			RunWithDelays(0.7, function()
-				if IsProjector() then
-					SetDarkmode(true)
-					MovieModeLayout()
-				else
-					WorkLayout()
-					AutoSwitchDarkmode()
-				end
-			end)
-			if event == caff.systemDidWake then SyncAllGitRepos("notify") end
+		if IsAtOffice() or (not (event == caff.screensDidWake) and not (event == caff.systemDidWake)) then
+			return
 		end
+
+		TwitterScrollUp()
+		hs.execute("sketchybar --set clock popup.drawing=true")
+		if event == caff.systemDidWake then SyncAllGitRepos("notify") end
+
+		-- INFO checks need to run after delay, since display number is not
+		-- immediately picked up after wake
+		RunWithDelays(0.7, function()
+			if IsProjector() then
+				SetDarkmode(true)
+				MovieModeLayout()
+			else
+				AutoSwitchDarkmode()
+				WorkLayout()
+			end
+		end)
 	end)
 	:start()
 
@@ -209,12 +211,6 @@ BiweeklyTimer = timer("02:00", "02d", function()
 	trackpadBatteryCheck()
 end, true)
 
--- timers not local for longevity with garbage collection
-DailyEveningTimer = timer("19:00", "01d", function() SetDarkmode(true) end)
-DailyMorningTimer = timer("08:00", "01d", function()
-	if not (IsProjector()) then SetDarkmode(false) end
-end)
-
 ProjectorScreensaverWatcher = caff.new(function(eventType)
 	if eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart then
 		RunWithDelays(2, function()
@@ -243,8 +239,6 @@ end
 --------------------------------------------------------------------------------
 
 if IsIMacAtHome() or IsAtMother() then
-	DailyMorningTimer:start()
-	DailyEveningTimer:start()
 	SleepTimer0 = timer("02:00", "01d", sleepMovieApps, true):start()
 	SleepTimer1 = timer("03:00", "01d", sleepMovieApps, true):start()
 	SleepTimer2 = timer("04:00", "01d", sleepMovieApps, true):start()
