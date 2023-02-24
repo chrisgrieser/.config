@@ -120,6 +120,7 @@ vmap ü :caseSwitch
 " can't remap to J, cause there is no noremap; also the merge from Code Editor 
 " Shortcuts plugin is smarter since it removes list prefixes
 exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
+exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nmap M :mergeLines
 
 " Make o and O respect context
@@ -288,16 +289,25 @@ nmap zR :unfoldall
 exmap lightspeed obcommand mrj-jump-to-link:activate-lightspeed-jump
 nmap ö :lightspeed
 
-" Quick Link Jump (similar to Vimium's f)
+" Link Jump (similar to Vimium's f)
 exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
-nmap q :linkjump
+nmap ,l :linkjump
 
 """"""""""""""""""""""
 " Substitute
 """"""""""""""""""""""
 " poor man's substitute.nvim 🥲
-nmap s Vp
+nmap ss Vp
+nmap siw viwp
 nmap S vg$p
+
+""""""""""""""""""""""
+" Filter through Shell Commands
+""""""""""""""""""""""
+" https://medium.com/@gareth.stretton/obsidian-do-almost-anything-really-with-system-commands-b496ffd0679c
+" https://medium.com/@gareth.stretton/obsidian-part-2-system-commands-cdc20836a2b8
+exmap filterThroughShell obcommand templater-obsidian:Meta/Templater/>_pipe_text_through_shell_commands.md
+nmap ! ilterThroughShell
 
 """"""""""""""""""""""
 " Option Toggling
