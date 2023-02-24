@@ -648,7 +648,7 @@ fi</string>
 				<key>acceptstext</key>
 				<true/>
 				<key>acceptsurls</key>
-				<true/>
+				<false/>
 				<key>name</key>
 				<string>Grep from Text</string>
 			</dict>
