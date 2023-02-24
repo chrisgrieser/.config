@@ -45,6 +45,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>283ACE76-6BC7-495E-B3DC-FB0265AC07F7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9164C4AA-8F08-4315-BFC0-FA1DCE093F36</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2CA5D5B9-442F-45BC-A7D1-E4BF6FEDBA31</key>
 		<array>
 			<dict>
@@ -681,6 +694,26 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>toSearch</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>78208B2A-84BC-4C70-BD07-FC86C3F6DF3D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -723,26 +756,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>toSearch</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>78208B2A-84BC-4C70-BD07-FC86C3F6DF3D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>subtext</key>
@@ -765,22 +778,15 @@ fi</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>result=$(echo "$text" | grep --ignore-case "$*")
-
-if [[ $? == 0 ]] ; then
-	echo "$result" | pbcopy
-	echo -n "✅ copied;;$result"
-else
-	echo -n "🛑 '$*' not found"
-fi</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>pipe-through-shell.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -819,7 +825,7 @@ fi</string>
 				<false/>
 				<key>variables</key>
 				<dict>
-					<key>text</key>
+					<key>selection</key>
 					<string>{query}</string>
 				</dict>
 			</dict>
@@ -829,6 +835,35 @@ fi</string>
 			<string>95327306-FB24-49A8-B3A9-77FD4FD7BF37</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>9164C4AA-8F08-4315-BFC0-FA1DCE093F36</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1006,18 +1041,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>635</real>
+			<real>660</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>465</real>
 		</dict>
 		<key>14BC0F4F-86A6-46AB-ADD7-9759E69297F0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>570</real>
+			<real>595</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>495</real>
 		</dict>
 		<key>234D617E-B383-46DE-B240-AE9B8617D709</key>
 		<dict>
@@ -1141,6 +1176,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>985</real>
 			<key>ypos</key>
 			<real>35</real>
+		</dict>
+		<key>9164C4AA-8F08-4315-BFC0-FA1DCE093F36</key>
+		<dict>
+			<key>xpos</key>
+			<real>630</real>
+			<key>ypos</key>
+			<real>585</real>
 		</dict>
 		<key>95327306-FB24-49A8-B3A9-77FD4FD7BF37</key>
 		<dict>
