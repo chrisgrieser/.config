@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "24/02/2023, 22:11:17",
-	"time": 1677273077405,
+	"@time": "24/02/2023, 23:36:40",
+	"time": 1677278200353,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -20,7 +20,11 @@
 		},
 		{
 			"passKeys": "j k ",
-			"pattern": "^https://www.google.*/"
+			"pattern": "^https://www.google"
+		},
+		{
+			"passKeys": "^ v ",
+			"pattern": "^https://www.google.*tbm=isch"
 		},
 		{
 			"passKeys": "? ",
@@ -94,6 +98,7 @@
 		"map gU goToRoot",
 		"map gs toggleViewSource",
 		"map yy copyCurrentUrl",
+		"\" Copy URLs of all tabs in window",
 		"map Y copyWindowInfo format=\"${url}\"",
 		"map p togglePinTab",
 		"map m toggleMuteTab",
