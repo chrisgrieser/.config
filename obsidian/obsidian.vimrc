@@ -301,14 +301,6 @@ map s Vp
 nmap S vg$p
 
 """"""""""""""""""""""
-" Filter through Shell Commands
-""""""""""""""""""""""
-" https://medium.com/@gareth.stretton/obsidian-do-almost-anything-really-with-system-commands-b496ffd0679c
-" https://medium.com/@gareth.stretton/obsidian-part-2-system-commands-cdc20836a2b8
-exmap filterThroughShell obcommand templater-obsidian:Meta/Templater/>_pipe_text_through_shell_commands.md
-vmap ! :filterThroughShell
-
-""""""""""""""""""""""
 " Toggle Devtools
 """"""""""""""""""""""
 exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
