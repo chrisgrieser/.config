@@ -46,18 +46,7 @@
 			</dict>
 		</array>
 		<key>283ACE76-6BC7-495E-B3DC-FB0265AC07F7</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9164C4AA-8F08-4315-BFC0-FA1DCE093F36</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>2CA5D5B9-442F-45BC-A7D1-E4BF6FEDBA31</key>
 		<array>
 			<dict>
@@ -99,19 +88,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>E99A3FBF-B036-4D0F-8E6C-90DDAA444F97</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>43EF220B-E9F3-4F8D-953C-643B0B4ACDDC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>95327306-FB24-49A8-B3A9-77FD4FD7BF37</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -177,6 +153,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>E97CFCEF-F6E3-4176-9B8A-11B67D5EAB7D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>8491E627-D211-4AFC-82D3-B81DB5793D02</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>95327306-FB24-49A8-B3A9-77FD4FD7BF37</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -694,26 +683,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>toSearch</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>78208B2A-84BC-4C70-BD07-FC86C3F6DF3D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -750,6 +719,26 @@ fi</string>
 			<string>alfred.workflow.utility.split</string>
 			<key>uid</key>
 			<string>14BC0F4F-86A6-46AB-ADD7-9759E69297F0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>toSearch</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>78208B2A-84BC-4C70-BD07-FC86C3F6DF3D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -798,23 +787,33 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
+				<key>action</key>
 				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Pipe through Shell Commands</string>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>20</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>3</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>43EF220B-E9F3-4F8D-953C-643B0B4ACDDC</string>
+			<string>8491E627-D211-4AFC-82D3-B81DB5793D02</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -835,35 +834,6 @@ fi</string>
 			<string>95327306-FB24-49A8-B3A9-77FD4FD7BF37</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>9164C4AA-8F08-4315-BFC0-FA1DCE093F36</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1041,18 +1011,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>660</real>
+			<real>640</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>410</real>
 		</dict>
 		<key>14BC0F4F-86A6-46AB-ADD7-9759E69297F0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>575</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>440</real>
 		</dict>
 		<key>234D617E-B383-46DE-B240-AE9B8617D709</key>
 		<dict>
@@ -1070,7 +1040,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>420</real>
+			<real>415</real>
 			<key>ypos</key>
 			<real>530</real>
 		</dict>
@@ -1104,15 +1074,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>805</real>
-		</dict>
-		<key>43EF220B-E9F3-4F8D-953C-643B0B4ACDDC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>530</real>
 		</dict>
 		<key>4A3BEECD-277B-4862-8BFB-1338069C8574</key>
 		<dict>
@@ -1177,12 +1138,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
-		<key>9164C4AA-8F08-4315-BFC0-FA1DCE093F36</key>
+		<key>8491E627-D211-4AFC-82D3-B81DB5793D02</key>
 		<dict>
+			<key>note</key>
+			<string>Pipe Selection through Shell Command</string>
 			<key>xpos</key>
-			<real>630</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>530</real>
 		</dict>
 		<key>95327306-FB24-49A8-B3A9-77FD4FD7BF37</key>
 		<dict>
