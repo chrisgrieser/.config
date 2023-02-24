@@ -222,13 +222,12 @@ return {
 		config = function() require("treesj").setup { use_default_keymaps = false } end,
 		cmd = "TSJToggle",
 	},
-	-- TODO checkout later if they added support for more filetypes
-	-- {
-	-- 	"ckolkey/ts-node-action",
-	-- 	dependencies = { "nvim-treesitter" },
-	-- 	lazy = true,
-	-- 	config = function() require("ts-node-action").setup() end,
-	-- },
+	{
+		"ckolkey/ts-node-action",
+		dependencies = { "nvim-treesitter" },
+		lazy = true,
+		config = function() require("ts-node-action").setup() end,
+	},
 	{
 		"cshuaimin/ssr.nvim", -- structural search & replace
 		lazy = true,
@@ -280,8 +279,8 @@ return {
 		"dkarter/bullets.vim", -- auto-bullets for markdown-like filetypes
 		ft = {"markdown", "text", "gitcommit"},
 		init = function ()
-				
-		end
+			vim.g.bullets_delete_last_bullet_if_empty = 1
+		end,
 	},
 	{
 		"smjonas/duplicate.nvim",

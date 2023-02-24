@@ -4,11 +4,6 @@ require("config.utils")
 -- spellcheck
 opt_local.spell = true
 
--- HACK to make lists auto-continue via Return in Insert & o in normal mode
--- i.e. replaces bullet.vim based on https://www.reddit.com/r/vim/comments/otpr29/comment/h6yldkj/
-bo.comments = "b:-"
-bo.formatoptions = bo.formatoptions:gsub("[ct]", "") .. "ro"
-
 -- enable wrapping lines
 -- HACK for whatever reason, needs to be wrapped in a condition
 if not opt_local.wrap:get() then require("funcs.quality-of-life").toggleWrap() end
@@ -54,8 +49,4 @@ if isGui() then
 	keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", opts)
 	keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", opts)
 	keymap("i", "<D-i>", "**<Left>", opts)
-
-	-- cmd+4: bullet points
-	keymap("n", "<D-4>", "mzI- <Esc>`z", opts)
-	keymap("x", "<D-4>", ":s/^/- /<CR>", opts)
 end
