@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "24/02/2023, 11:03:34",
-	"time": 1677233014251,
+	"@time": "24/02/2023, 21:52:24",
+	"time": 1677271944896,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -21,6 +21,10 @@
 		{
 			"passKeys": "j k ",
 			"pattern": "^https://www.google.*/"
+		},
+		{
+			"passKeys": "? ",
+			"pattern": ":https://github.com/"
 		}
 	],
 	"grabBackFocus": true,

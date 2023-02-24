@@ -167,10 +167,27 @@ return {
 					-- disable invalid_key_behavior (= no more surrounds for
 					-- characters not explicitly defined)
 					invalid_key_behavior = {
-						add = {},
-						find = nil,
-						delete = nil,
-						change = {},
+						add = function(_) return { { "" }, { "" } } end,
+						find = function(char)
+							return sconfig.get_selection {
+								pattern = vim.pesc(char) .. ".-" .. vim.pesc(char),
+							}
+						end,
+						delete = function(char)
+							return sconfig.get_selections {
+								char = char,
+								pattern = "^(.)().-(.)()$",
+							}
+						end,
+						-- v blsfsfsfsf v
+						change = {
+							target = function(char)
+								return sconfig.get_selections {
+									char = "",
+									pattern = "^(.)().-(.)()$",
+								}
+							end,
+						},
 					},
 				},
 			}
