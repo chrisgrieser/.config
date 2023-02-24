@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "24/02/2023, 21:52:24",
-	"time": 1677271944896,
+	"@time": "24/02/2023, 22:11:17",
+	"time": 1677273077405,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -28,7 +28,7 @@
 		}
 	],
 	"grabBackFocus": true,
-	"keyLayout": 152,
+	"keyLayout": 144,
 	"keyMappings": [
 		"#!no-check",
 		"unmapAll",
@@ -88,12 +88,6 @@
 		"map H goPrevious",
 		"map L goNext",
 		"",
-		"\" Zoom",
-		"map + zoomIn",
-		"map # zoomOut",
-		"unmap 0",
-		"map 0 zoomReset",
-		"",
 		"\" Interaction",
 		"map ge Vomnibar.activateEditUrl",
 		"map gu goUp",
@@ -115,7 +109,6 @@
 	"scrollStepSize": 300,
 	"searchEngines": "g https://www.google.com/search?q=%s",
 	"vimSync": true,
-	"ignoreKeyboardLayout": 1,
 	"ignoreCapsLock": 2,
 	"mapModifier": 2
 }
