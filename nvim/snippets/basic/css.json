@@ -5,13 +5,13 @@
 	},
 	"ignore (stylelint)": {
 		"prefix": "ignore (stylelint)",
-		"body": "/* stylelint-disable-line ${1:rule_name} */"
+		"body": "/* stylelint-disable-line ${1:declaration-no-important} */"
 	},
 	"ignore range (stylelint)": {
 		"prefix": "ignore range (stylelint)",
 		"body": [
-			"/* stylelint-disable ${1:rule_name} */",
-			"/* stylelint-enable ${1:rule_name} */"
+			"/* stylelint-disable ${1:no-duplicate-selectors} */",
+			"/* stylelint-enable ${1:no-duplicate-selectors} */"
 		]
 	}
 }
