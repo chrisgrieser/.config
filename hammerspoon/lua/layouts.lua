@@ -116,40 +116,22 @@ local function motherHomeModeLayout()
 	App("Spotify"):hide()
 end
 
-local function motherMovieModeLayout()
+
+
+---@param mother boolean? whether to use mother mode
+function MovieModeLayout(mother)
+	if mother then
+		dockSwitcher("mother-movie")
+	else
+		dockSwitcher("movie")
+	end
+	SetDarkmode(true)
 	SpotifyDo("pause")
-	App("Vivaldi"):hide()
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
+	SetDarkmode(true)
 
-	RunWithDelays({ 0, 1 }, function()
-		OpenApp("YouTube")
-		QuitApp {
-			"Obsidian",
-			"Drafts",
-			"Slack",
-			"Spotify",
-			"Discord",
-			"Mimestream",
-			"Alfred Preferences",
-			"Warp",
-			"neovide",
-			"Neovide",
-			"alacritty",
-			"Alacritty",
-			"Twitter",
-			"Finder",
-		}
-	end)
-end
-
-function MovieModeLayout()
-	SpotifyDo("pause")
-	App("Vivaldi"):hide()
-	HoleCover("remove")
-	IMacDisplay:setBrightness(0)
-
-	RunWithDelays({ 0, 0.5 }, function() OpenApp("YouTube") end)
+	RunWithDelays({ 0, 1 }, function() OpenApp("YouTube") end)
 	QuitApp {
 		"Obsidian",
 		"Drafts",
@@ -168,8 +150,6 @@ function MovieModeLayout()
 		"alacritty",
 		"Twitter",
 	}
-	dockSwitcher("movie")
-	SetDarkmode(true)
 end
 
 --------------------------------------------------------------------------------
@@ -180,7 +160,7 @@ local function setLayout()
 	elseif IsAtOffice() or (IsIMacAtHome() and not IsProjector()) then
 		WorkLayout()
 	elseif IsAtMother() and IsProjector() then
-		motherMovieModeLayout()
+		MovieModeLayout(true)
 	elseif IsAtMother() and not IsProjector() then
 		motherHomeModeLayout()
 	end
@@ -194,7 +174,30 @@ Hotkey({ "shift" }, "f6", setLayout) -- for Apple keyboard
 --------------------------------------------------------------------------------
 
 -- Open Apps always at Mouse Screen
-Wf_appsOnMouseScreen = Wf.new(true):subscribe(Wf.windowCreated, function(newWin)
+Wf_appsOnMouseScreen = Wf.new({
+	"Drafts",
+	"Vivaldi",
+	"Mimestream",
+	"BetterTouchTool",
+	"Obsidian",
+	"Alacritty",
+	"alacritty",
+	"Warp",
+	"Slack",
+	"IINA",
+	"Hammerspoon",
+	"System Settings",
+	"Discord",
+	"Neovide",
+	"neovide",
+	"Espanso",
+	"BusyCal",
+	"Alfred Preferences",
+	"YouTube",
+	"Netflix",
+	"CrunchyRoll",
+	"Finder",
+}):subscribe(Wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	if not mouseScreen then return end
 	local screenOfWindow = newWin:screen()

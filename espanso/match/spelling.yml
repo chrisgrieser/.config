@@ -203,3 +203,7 @@ matches:
     replace: again
     propagate_casing: true
     word: true
+  - trigger: shwo
+    replace: show
+    propagate_casing: true
+    word: true
