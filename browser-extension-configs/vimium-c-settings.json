@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "24/02/2023, 23:36:40",
-	"time": 1677278200353,
+	"@time": "24/02/2023, 23:49:07",
+	"time": 1677278947645,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -20,11 +20,7 @@
 		},
 		{
 			"passKeys": "j k ",
-			"pattern": "^https://www.google"
-		},
-		{
-			"passKeys": "^ v ",
-			"pattern": "^https://www.google.*tbm=isch"
+			"pattern": "^https:\\/\\/www\\.google(?:.(?!&tbm=isch))*$"
 		},
 		{
 			"passKeys": "? ",
