@@ -72,7 +72,7 @@ end)
 
 ---play/pause spotify with Spotify
 ---@param toStatus string pause|play
-local function spotifyControl(toStatus)
+function SpotifyDo(toStatus)
 	Applescript([[tell application "Spotify" to ]] .. toStatus)
 
 	-- version using spotify tui if it is fixed
@@ -98,9 +98,9 @@ SpotifyAppWatcher = hs.application.watcher.new(function(appName, eventType)
 	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
 	if TableContains(appsWithSound, appName) then
 		if eventType == hs.application.watcher.launched then
-			spotifyControl("pause")
+			SpotifyDo("pause")
 		elseif eventType == hs.application.watcher.terminated then
-			spotifyControl("play")
+			SpotifyDo("play")
 		end
 	end
 end):start()

@@ -143,6 +143,7 @@ local function motherMovieModeLayout()
 end
 
 function MovieModeLayout()
+	SpotifyDo("pause")
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
 
