@@ -14,7 +14,7 @@ Thresholds = {
 	BusyCal = 3,
 	Neovide = 120,
 	["Alfred Preferences"] = 20,
-	Hammerspoon = 3, -- the console, not Hammerspoon itself
+	Hammerspoon = 1, -- the console, not Hammerspoon itself
 	Drafts = 3, -- has the extra condition of having no active Draft – see `quitter()`
 	Finder = 20, -- requires `defaults write com.apple.Finder QuitMenuItem 1`
 }
@@ -71,7 +71,7 @@ local function quitter(app)
 end
 
 ---check apps regularly and quit if idle for longer than their thresholds
-local checkIntervallSecs = 20
+local checkIntervallSecs = 15
 AutoQuitterTimer = hs.timer
 	.doEvery(checkIntervallSecs, function()
 		for app, lastActivation in pairs(IdleApps) do
