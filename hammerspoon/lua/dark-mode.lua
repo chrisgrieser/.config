@@ -2,7 +2,7 @@ require("lua.utils")
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local autoSwitchFreqMin = 20
+local autoSwitchFreqMin = 10
 local brightnessThreshhold = 90
 
 --------------------------------------------------------------------------------
@@ -92,8 +92,10 @@ function AutoSwitchDarkmode()
 
 	if brightness > brightnessThreshhold and IsDarkMode() then
 		SetDarkmode(true)
+		print("Autoswitching to Dark Mode")
 	elseif brightness < brightnessThreshhold and not (IsDarkMode()) then
 		SetDarkmode(false)
+		print("Autoswitching to Light Mode")
 	end
 end
 
