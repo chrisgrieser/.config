@@ -26,6 +26,7 @@ cmd.iabbrev("teh the")
 cmd.iabbrev("keybaord keyboard")
 cmd.iabbrev("sicne since")
 cmd.iabbrev("nto not")
+cmd.iabbrev("shwo show")
 
 --------------------------------------------------------------------------------
 

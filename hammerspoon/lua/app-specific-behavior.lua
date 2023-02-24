@@ -77,11 +77,12 @@ function SpotifyDo(toStatus)
 	Applescript([[tell application "Spotify" to ]] .. toStatus)
 end
 
--- auto-pause Spotify on launch of apps w/ sound
--- auto-resume Spotify on quit of apps w/ sound
+-- auto-pause/resume Spotify on launch/quit of apps with sound
 SpotifyAppWatcher = Aw.new(function(appName, eventType)
 	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
-	if not(ScreenIsUnlocked()) or IsProjector() or not (TableContains(appsWithSound, appName)) then return end
+	if not(ScreenIsUnlocked()) then return end
+	if IsProjector() then return end
+	if not (TableContains(appsWithSound, appName)) then return end
 
 	if eventType == Aw.launched then
 		SpotifyDo("pause")
@@ -320,14 +321,13 @@ end):start()
 DraftsWatcher = Aw.new(function(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
-	-- update counter in sketchybar
 	RunWithDelays({ 0.1, 1 }, function() hs.execute("sketchybar --trigger drafts-counter-update") end)
 
 	if eventType == Aw.launching or eventType == Aw.activated then
 		local workspace = IsAtOffice() and "Office" or "Home"
-		RunWithDelays({ 0.2 }, function()
+		RunWithDelays({ 0.1 }, function()
 			local name = appObject:focusedWindow():title()
-			local isTaskList = name:find("Supermarkt$") or name:find("Drogerie$")
+			local isTaskList = name:find("Supermarkt$")
 			if not isTaskList then appObject:selectMenuItem { "Workspaces", workspace } end
 			appObject:selectMenuItem { "View", "Hide Toolbar" }
 		end)
@@ -351,7 +351,7 @@ Wf_script_editor = Wf
 			RunWithDelays(0.4, function() Keystroke({ "cmd" }, "k") end)
 		end
 	end)
-	-- fix line breaks, e.g. for copypasting into neovide
+	-- fix line breaks for copypasting into other apps
 	:subscribe(Wf.windowUnfocused, function()
 		local clipb = hs.pasteboard.getContents()
 		if not clipb then return end
@@ -378,7 +378,7 @@ DiscordAppWatcher = Aw.new(function(appName, eventType)
 	if eventType == Aw.activated then
 		local hasURL = clipb:match("^https?:%S+$")
 		local hasObsidianURL = clipb:match("^obsidian:%S+$")
-		local isTweet = clipb:match("^https?://twitter%.com") -- for tweets, the previews are actually useful
+		local isTweet = clipb:match("^https?://twitter%.com") -- for tweets, the previews are actually useful since they show the full content
 		if (hasURL or hasObsidianURL) and not isTweet then
 			hs.pasteboard.setContents("<" .. clipb .. ">")
 		end
