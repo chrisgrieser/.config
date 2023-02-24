@@ -44,7 +44,7 @@ return {
 			local regexObjChar = "/"
 
 			-- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L483
-			local sconfig = require("nvim-surround.config")
+			local config = require("nvim-surround.config")
 			require("nvim-surround").setup {
 				aliases = { -- aliases should match the bindings for text objects
 					["b"] = ")",
@@ -79,7 +79,7 @@ return {
 						},
 					},
 					[functionObjChar] = {
-						find = function() return sconfig.get_selection { motion = "a" .. functionObjChar } end,
+						find = function() return config.get_selection { motion = "a" .. functionObjChar } end,
 						delete = function()
 							local ft = bo.filetype
 							local patt
@@ -97,7 +97,7 @@ return {
 								vim.notify("No function-surround defined for " .. ft, logWarn)
 								patt = "()()()()"
 							end
-							return sconfig.get_selections {
+							return config.get_selections {
 								char = functionObjChar,
 								pattern = patt,
 							}
@@ -126,11 +126,11 @@ return {
 						end,
 					},
 					[callObjChar] = {
-						find = function() return sconfig.get_selection { motion = "a" .. callObjChar } end,
+						find = function() return config.get_selection { motion = "a" .. callObjChar } end,
 						delete = "^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
 					},
 					[conditionObjChar] = {
-						find = function() return sconfig.get_selection { motion = "a" .. conditionObjChar } end,
+						find = function() return config.get_selection { motion = "a" .. conditionObjChar } end,
 						delete = function()
 							local ft = bo.filetype
 							local patt
@@ -142,7 +142,7 @@ return {
 								vim.notify("No conditional-surround defined for " .. ft, logWarn)
 								patt = "()()()()"
 							end
-							return sconfig.get_selections {
+							return config.get_selections {
 								char = conditionObjChar,
 								pattern = patt,
 							}
@@ -164,30 +164,19 @@ return {
 							return { { "" }, { "" } }
 						end,
 					},
-					-- disable invalid_key_behavior (= no more surrounds for
-					-- characters not explicitly defined)
+					-- disable "invalid_key_behavior"
+					-- TODO: later set all to "false" https://github.com/kylechui/nvim-surround/discussions/213#discussioncomment-5104562
 					invalid_key_behavior = {
 						add = function(_) return { { "" }, { "" } } end,
 						find = function(char)
-							return sconfig.get_selection {
-								pattern = vim.pesc(char) .. ".-" .. vim.pesc(char),
+							return config.get_selection { pattern = vim.pesc(char) .. ".-" .. vim.pesc(char) } end,
+						delete = function(_)
+							return config.get_selections {
+								char = "",
+								pattern = "^()().-()()$",
 							}
 						end,
-						delete = function(char)
-							return sconfig.get_selections {
-								char = char,
-								pattern = "^(.)().-(.)()$",
-							}
-						end,
-						-- v blsfsfsfsf v
-						change = {
-							target = function(char)
-								return sconfig.get_selections {
-									char = "",
-									pattern = "^(.)().-(.)()$",
-								}
-							end,
-						},
+						change = false,
 					},
 				},
 			}
