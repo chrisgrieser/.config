@@ -16,8 +16,8 @@ return {
 				},
 				extra = {
 					eol = "Q",
-					above = "<Nop>",
-					below = "<Nop>",
+					above = "qO",
+					below = "qo",
 				},
 			}
 		end,
@@ -223,8 +223,8 @@ return {
 		cmd = "TSJToggle",
 	},
 	{
-		"ckolkey/ts-node-action",
-		dependencies = { "nvim-treesitter" },
+		"ckolkey/ts-node-action", -- cycle quotes/operators/boolean/case
+		dependencies = "nvim-treesitter/nvim-treesitter",
 		lazy = true,
 		config = function() require("ts-node-action").setup() end,
 	},
