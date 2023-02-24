@@ -1,6 +1,6 @@
 return {
 
-	-- Treesitter
+	-- Treesitter & Syntax Highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = function() -- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
@@ -12,6 +12,8 @@ return {
 			"mrjones2014/nvim-ts-rainbow",
 		},
 	},
+	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
+	{ "hail2u/vim-css3-syntax", ft = "css" }, -- better syntax highlighting (until treesitter css looks decent…)
 
 	-- LSP
 	{
@@ -37,6 +39,7 @@ return {
 	},
 
 	-- Misc
+	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
 	{
 		"chrisgrieser/nvim-genghis",
 		lazy = true,
@@ -64,8 +67,4 @@ return {
 		end,
 	},
 
-	-- Filetype-specific
-	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
-	{ "hail2u/vim-css3-syntax", ft = "css" }, -- better syntax highlighting (until treesitter css looks decent…)
-	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
 }

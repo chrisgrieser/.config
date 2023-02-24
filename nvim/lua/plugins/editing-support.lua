@@ -277,6 +277,13 @@ return {
 		config = function() require("substitute").setup() end,
 	},
 	{
+		"dkarter/bullets.vim", -- auto-bullets for markdown-like filetypes
+		ft = {"markdown", "text", "gitcommit"},
+		init = function ()
+				
+		end
+	},
+	{
 		"smjonas/duplicate.nvim",
 		keys = { "yd", "R", { "R", mode = "x" } },
 		config = function()

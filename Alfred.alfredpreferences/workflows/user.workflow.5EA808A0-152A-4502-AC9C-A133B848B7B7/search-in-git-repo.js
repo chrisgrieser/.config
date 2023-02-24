@@ -34,42 +34,32 @@ const fileArray = app
 		let iconObj = { path: "./../filetype-icons/" };
 		switch (type) {
 			case "json":
-				iconObj.path += "json.png";
-				break;
 			case "lua":
-				iconObj.path += "lua.png";
-				break;
+			case "html":
+			case "pdf":
+			case "bib":
+			case "css":
+			case "md":
+			case "js":
+			case "ts":
 			case "yaml":
+			case "config":
+			case "blank":
+			case "sh":
+				iconObj.path += type + ".png";
+				break;
 			case "yml":
 				iconObj.path += "yaml.png";
 				break;
 			case "scss":
-			case "css":
 				iconObj.path += "css.png";
-				break;
-			case "md":
-				iconObj.path += "md.png";
-				break;
-			case "js":
-				iconObj.path += "js.png";
-				break;
-			case "ts":
-				iconObj.path += "ts.png";
-				break;
-			case "zsh":
-			case "sh":
-				iconObj.path += "sh.png";
 				break;
 			case "icns":
 			case "png":
+			case "gif":
 				iconObj.path = fPath; // use image itself
 				break;
-			case "gif":
-				iconObj.path += "image.png";
-				break;
-			case "config":
-				iconObj.path += "config.png";
-				break;
+			case "folder":
 			default:
 				iconObj = { type: "fileicon", path: fPath };
 		}

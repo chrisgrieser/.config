@@ -53,7 +53,7 @@ const fileArray = app
 
 		// type determiniation
 		let type;
-		if (name.startsWith(".z")) type = "zsh";
+		if (name.startsWith(".z")) type = "sh";
 		else if (name.startsWith(".")) type = "config";
 		else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
 		else type = name.split(".").pop();
@@ -63,44 +63,30 @@ const fileArray = app
 		let iconObj = { path: "./../filetype-icons/" };
 		switch (type) {
 			case "json":
-				iconObj.path += "json.png";
-				break;
 			case "lua":
-				iconObj.path += "lua.png";
-				break;
+			case "html":
+			case "pdf":
+			case "bib":
+			case "css":
+			case "md":
+			case "js":
+			case "ts":
 			case "yaml":
+			case "config":
+			case "blank":
+			case "sh":
+				iconObj.path += type + ".png";
+				break;
 			case "yml":
 				iconObj.path += "yaml.png";
 				break;
 			case "scss":
-			case "css":
 				iconObj.path += "css.png";
-				break;
-			case "md":
-				iconObj.path += "md.png";
-				break;
-			case "js":
-				iconObj.path += "js.png";
-				break;
-			case "ts":
-				iconObj.path += "ts.png";
-				break;
-			case "zsh":
-			case "sh":
-				iconObj.path += "sh.png";
 				break;
 			case "icns":
 			case "png":
-				iconObj.path = fPath; // use image itself
-				break;
 			case "gif":
-				iconObj.path += "image.png";
-				break;
-			case "blank":
-				iconObj.path += "blank.png";
-				break;
-			case "config":
-				iconObj.path += "config.png";
+				iconObj.path = fPath; // use image itself
 				break;
 			case "folder":
 			default:
