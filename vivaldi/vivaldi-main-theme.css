@@ -3,7 +3,7 @@
 /* stylelint-disable selector-max-id, custom-property-pattern  */
 /* ────────────────────────────────────────────────────────────────────────── */
 :root {
-	--adressbar-focussed-width: 99vw; 
+	--adressbar-focussed-width: 99vw;  /* only applied from 4+ tabs on */
 	--adressbar-width-1-tab: 80vw;
 	--adressbar-width-2-tab: 70vw;
 	--adressbar-width-3-tab: 60vw;
