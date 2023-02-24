@@ -32,12 +32,12 @@ end
 --------------------------------------------------------------------------------
 
 -- AUTOMATIONS FOR MULTIPLE APPS
-TransBgAppWatcher = hs.application.watcher.new(function(appName, eventType, appObject)
+TransBgAppWatcher = Aw.new(function(appName, eventType, appObject)
 	local appsWithTransparency = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
 	if not TableContains(appsWithTransparency, appName) then return end
 	if IsProjector() then return end
 
-	if eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launched then
+	if eventType == Aw.activated or eventType == Aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
 		-- hiding is used for it activation as well
 		RunWithDelays({ 0, 0.1, 0.2, 0.3 }, function()
@@ -45,16 +45,16 @@ TransBgAppWatcher = hs.application.watcher.new(function(appName, eventType, appO
 			if not win then return end
 			if CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized) then hideOthers(win) end
 		end)
-	elseif eventType == hs.application.watcher.terminated then
+	elseif eventType == Aw.terminated then
 		unHideAll()
 	end
 end):start()
 
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
-AutoTileAppWatcher = hs.application.watcher.new(function(appName, eventType, appObj)
+AutoTileAppWatcher = Aw.new(function(appName, eventType, appObj)
 	local autoTileApps = { "Finder", "Vivaldi" }
 	if
-		eventType == hs.application.watcher.deactivated
+		eventType == Aw.deactivated
 		and TableContains(autoTileApps, appName)
 		and #appObj:allWindows() > 1
 		and not (appObj:findWindow("Picture in Picture"))
@@ -70,46 +70,31 @@ Wf_maxWindows = Wf.new(true):subscribe(Wf.windowUnfocused, function(win)
 	if CheckSize(win, Maximized) then win:application():hide() end
 end)
 
----play/pause spotify with Spotify
+---play/pause spotify with Spotify (if running)
 ---@param toStatus string pause|play
 function SpotifyDo(toStatus)
+	if not (AppIsRunning("Spotify")) then return end
 	Applescript([[tell application "Spotify" to ]] .. toStatus)
-
-	-- version using spotify tui if it is fixed
-	-- local currentStatus = hs.execute(
-	-- 	"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s"
-	-- )
-	-- currentStatus = Trim(currentStatus) ---@diagnostic disable-line: param-type-mismatch
-	-- if
-	-- 	(currentStatus == "▶️" and toStatus == "pause")
-	-- 	or (currentStatus == "⏸" and toStatus == "play")
-	-- then
-	-- 	local stdout = hs.execute(
-	-- 		"export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle"
-	-- 	)
-	-- 	if toStatus == "play" then Notify(stdout) end ---@diagnostic disable-line: param-type-mismatch
-	-- end
 end
 
 -- auto-pause Spotify on launch of apps w/ sound
 -- auto-resume Spotify on quit of apps w/ sound
-SpotifyAppWatcher = hs.application.watcher.new(function(appName, eventType)
-	if IsProjector() then return end -- never start music when on projector
+SpotifyAppWatcher = Aw.new(function(appName, eventType)
 	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
-	if TableContains(appsWithSound, appName) then
-		if eventType == hs.application.watcher.launched then
-			SpotifyDo("pause")
-		elseif eventType == hs.application.watcher.terminated then
-			SpotifyDo("play")
-		end
+	if not(ScreenIsUnlocked()) or IsProjector() or not (TableContains(appsWithSound, appName)) then return end
+
+	if eventType == Aw.launched then
+		SpotifyDo("pause")
+	elseif eventType == Aw.terminated then
+		SpotifyDo("play")
 	end
 end):start()
 
 --------------------------------------------------------------------------------
 
 -- PIXELMATOR: open maximized
-PixelmatorWatcher = hs.application.watcher.new(function(appName, eventType, appObj)
-	if appName == "Pixelmator" and eventType == hs.application.watcher.launched then
+PixelmatorWatcher = Aw.new(function(appName, eventType, appObj)
+	if appName == "Pixelmator" and eventType == Aw.launched then
 		RunWithDelays(0.3, function() MoveResize(appObj, Maximized) end)
 	end
 end):start()
@@ -119,8 +104,7 @@ end):start()
 -- BROWSER (Vivaldi)
 Wf_browser = Wf.new("Vivaldi")
 	:setOverrideFilter({
-		-- INFO DevTools windows are titled "" on creation, so need to reject
-		-- those as well
+		-- INFO DevTools windows are titled "" on creation
 		rejectTitles = { " %(Private%)$", "^Picture in Picture$", "^Task Manager$", "^DevTools", "^$" },
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
@@ -140,8 +124,8 @@ Wf_browser_all = Wf.new({ "Vivaldi" })
 --------------------------------------------------------------------------------
 
 -- IINA: Full Screen when on projector
-IinaAppLauncher = hs.application.watcher.new(function(appName, eventType, appObject)
-	if eventType == hs.application.watcher.launched and appName == "IINA" and IsProjector() then
+IinaAppLauncher = Aw.new(function(appName, eventType, appObject)
+	if eventType == Aw.launched and appName == "IINA" and IsProjector() then
 		RunWithDelays(
 			{ 0.05, 0.2 },
 			function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end
@@ -170,24 +154,32 @@ local function clipboardFix()
 	hs.pasteboard.setContents(clipb)
 end
 
-NeovideWatcher = hs.application.watcher.new(function(appName, eventType, appObj)
+NeovideWatcher = Aw.new(function(appName, eventType, appObj)
 	if not appName or appName:lower() ~= "neovide" then return end
 
 	-- triggered on activation as well, since neovide as non-native app
 	-- often does not send a "launched" signal
-	if eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launched then
+	if eventType == Aw.activated or eventType == Aw.launched then
 		clipboardFix()
 		-- maximize app
 		RunWithDelays({ 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 }, function()
 			local win = appObj:mainWindow()
 			if not win then return end
-			if CheckSize(win, LeftHalf) or CheckSize(win, RightHalf) or CheckSize(win, LeftHalf) or CheckSize(win, BottomHalf) or CheckSize(win, TopHalf) then return end
+			if
+				CheckSize(win, LeftHalf)
+				or CheckSize(win, RightHalf)
+				or CheckSize(win, LeftHalf)
+				or CheckSize(win, BottomHalf)
+				or CheckSize(win, TopHalf)
+			then
+				return
+			end
 			local size = IsProjector() and Maximized or PseudoMaximized
 			MoveResize(win, size)
 		end)
 
 	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
-	elseif eventType == hs.application.watcher.terminated then
+	elseif eventType == Aw.terminated then
 		RunWithDelays(5, function() hs.execute("pgrep neovide || killall nvim") end)
 	end
 end):start()
@@ -275,12 +267,12 @@ Wf_finder = Wf.new("Finder")
 	:subscribe(Wf.windowCreated, function() AutoTile(Wf_finder) end)
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_finder) end)
 
-FinderAppWatcher = hs.application.watcher.new(function(appName, eventType, finderAppObj)
-	if eventType == hs.application.watcher.launched and appName == "Finder" then
+FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)
+	if eventType == Aw.launched and appName == "Finder" then
 		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
 		-- properly utilize Finder
 		RunWithDelays({ 3, 5, 10 }, QuitFinderIfNoWindow)
-	elseif eventType == hs.application.watcher.activated and appName == "Finder" then
+	elseif eventType == Aw.activated and appName == "Finder" then
 		AutoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
 		BringAllToFront()
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
@@ -304,8 +296,8 @@ end)
 -- HIGHLIGHTS
 -- - Sync Dark & Light Mode
 -- - Start with Highlight as Selection
-HighlightsAppWatcher = hs.application.watcher.new(function(appName, eventType, appObject)
-	if not (eventType == hs.application.watcher.launched and appName == "Highlights") then return end
+HighlightsAppWatcher = Aw.new(function(appName, eventType, appObject)
+	if not (eventType == Aw.launched and appName == "Highlights") then return end
 
 	local targetView = "Default"
 	if IsDarkMode() then targetView = "Night" end
@@ -325,13 +317,13 @@ end):start()
 -- - Hide Toolbar
 -- - set workspace
 -- - update counter in sketchybar
-DraftsWatcher = hs.application.watcher.new(function(appName, eventType, appObject)
+DraftsWatcher = Aw.new(function(appName, eventType, appObject)
 	if not (appName == "Drafts") then return end
 
 	-- update counter in sketchybar
 	RunWithDelays({ 0.1, 1 }, function() hs.execute("sketchybar --trigger drafts-counter-update") end)
 
-	if eventType == hs.application.watcher.launching or eventType == hs.application.watcher.activated then
+	if eventType == Aw.launching or eventType == Aw.activated then
 		local workspace = IsAtOffice() and "Office" or "Home"
 		RunWithDelays({ 0.2 }, function()
 			local name = appObject:focusedWindow():title()
@@ -370,11 +362,11 @@ Wf_script_editor = Wf
 --------------------------------------------------------------------------------
 
 -- DISCORD
-DiscordAppWatcher = hs.application.watcher.new(function(appName, eventType)
+DiscordAppWatcher = Aw.new(function(appName, eventType)
 	if appName ~= "Discord" then return end
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
-	if eventType == hs.application.watcher.launched then
+	if eventType == Aw.launched then
 		OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 	end
 
@@ -383,14 +375,14 @@ DiscordAppWatcher = hs.application.watcher.new(function(appName, eventType)
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
 
-	if eventType == hs.application.watcher.activated then
+	if eventType == Aw.activated then
 		local hasURL = clipb:match("^https?:%S+$")
 		local hasObsidianURL = clipb:match("^obsidian:%S+$")
 		local isTweet = clipb:match("^https?://twitter%.com") -- for tweets, the previews are actually useful
 		if (hasURL or hasObsidianURL) and not isTweet then
 			hs.pasteboard.setContents("<" .. clipb .. ">")
 		end
-	elseif eventType == hs.application.watcher.deactivated then
+	elseif eventType == Aw.deactivated then
 		local hasEnclosedURL = clipb:match("^<https?:%S+>$")
 		local hasEnclosedObsidianURL = clipb:match("^<obsidian:%S+>$")
 		if hasEnclosedURL or hasEnclosedObsidianURL then

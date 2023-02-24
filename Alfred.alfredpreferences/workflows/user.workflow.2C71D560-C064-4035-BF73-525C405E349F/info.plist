@@ -159,7 +159,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Spelling and word changer</string>
+	<string>Spelling &amp; Word changer</string>
 	<key>objects</key>
 	<array>
 		<dict>

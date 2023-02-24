@@ -1,14 +1,11 @@
 local function dapConfig()
 	local dap = require("dap")
-	local dataPath = vim.fn.stdpath("data")
 	--------------------------------------------------------------------------------
-
 	-- DAP SETUP
 	-- INFO: uses dap-names, not mason-names https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
-	require("mason-nvim-dap").setup {
-		ensure_installed = { "node2" },
-	}
+	require("mason-nvim-dap").setup {}
 
+	-----------------------------------------------------------------------------
 	-- CONFIGURATION OF SPECIFIC DEBUGGERS
 
 	-- Lua (one-step-for-vimkind plugin)
@@ -22,35 +19,6 @@ local function dapConfig()
 	dap.adapters.nlua = function(callback, config)
 		callback { type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 }
 	end
-
-	-- Node2
-	-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#javascript
-	dap.adapters.node2 = {
-		type = "executable",
-		command = "node",
-		args = {
-			dataPath .. "/mason/packages/node-debug2-adapter/out/src/nodeDebug.js",
-		},
-	}
-
-	dap.configurations.javascript = {
-		{
-			name = "Launch",
-			type = "node2",
-			request = "launch",
-			program = "${file}",
-			cwd = vim.fn.getcwd(),
-			sourceMaps = true,
-			protocol = "inspector",
-			console = "integratedTerminal",
-		},
-		{
-			name = "Attach to process",
-			type = "node2",
-			request = "attach",
-			processId = require("dap.utils").pick_process,
-		},
-	}
 
 	--------------------------------------------------------------------------------
 	-- DAP-RELATED PLUGINS
@@ -137,8 +105,8 @@ local function dapLualine()
 	local topSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
 
 	-- INFO inserting needed, to not disrupt existing lualine-segment set by nvim-recorder
-	lualineY = require("lualine").get_config().winbar.lualine_y or {}
-	lualineZ = require("lualine").get_config().winbar.lualine_z or {}
+	local lualineY = require("lualine").get_config().winbar.lualine_y or {}
+	local lualineZ = require("lualine").get_config().winbar.lualine_z or {}
 	table.insert(lualineY, {
 		function()
 			local breakpoints = require("dap.breakpoints").get()
