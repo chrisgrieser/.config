@@ -12,6 +12,7 @@ Thresholds = {
 	Obsidian = 60,
 	Mimestream = 3,
 	BusyCal = 3,
+	Neovide = 120,
 	["Alfred Preferences"] = 20,
 	Drafts = 3, -- has the extra condition of having no active Draft – see `quitter()`
 	Hammerspoon = 3, -- closes console, not Hammerspoon itself
