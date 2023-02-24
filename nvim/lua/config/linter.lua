@@ -51,7 +51,7 @@ null_ls.setup {
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.formatting.shfmt,
 		builtins.diagnostics.shellcheck.with {
-			extra_filetypes = { "zsh" }, 
+			extra_filetypes = { "zsh" },
 			extra_args = { "--shell=bash" },
 		},
 		builtins.code_actions.shellcheck.with {
@@ -112,6 +112,16 @@ null_ls.setup {
 		builtins.completion.spell.with { -- vim's built-in spell-suggestions
 			filetypes = { "markdown", "text", "gitcommit" },
 		},
+	},
+}
+
+-- ts-node integration https://github.com/ckolkey/ts-node-action#null-ls-integration
+null_ls.register {
+	name = "more_actions",
+	method = { require("null-ls").methods.CODE_ACTION },
+	filetypes = { "_all" },
+	generator = {
+		fn = require("ts-node-action").available_actions,
 	},
 }
 
