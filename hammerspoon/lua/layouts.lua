@@ -117,9 +117,10 @@ local function motherHomeModeLayout()
 end
 
 local function motherMovieModeLayout()
-	IMacDisplay:setBrightness(0)
-	dockSwitcher("mother-movie")
+	SpotifyDo("pause")
 	App("Vivaldi"):hide()
+	HoleCover("remove")
+	IMacDisplay:setBrightness(0)
 
 	RunWithDelays({ 0, 1 }, function()
 		OpenApp("YouTube")
@@ -144,12 +145,11 @@ end
 
 function MovieModeLayout()
 	SpotifyDo("pause")
+	App("Vivaldi"):hide()
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
 
 	RunWithDelays({ 0, 0.5 }, function() OpenApp("YouTube") end)
-	App("Vivaldi"):hide()
-
 	QuitApp {
 		"Obsidian",
 		"Drafts",
@@ -193,31 +193,8 @@ Hotkey({ "shift" }, "f6", setLayout) -- for Apple keyboard
 
 --------------------------------------------------------------------------------
 
--- Open at Mouse Screen
-Wf_appsOnMouseScreen = Wf.new({
-	"Drafts",
-	"Vivaldi",
-	"Mimestream",
-	"BetterTouchTool",
-	"Obsidian",
-	"Alacritty",
-	"alacritty",
-	"Warp",
-	"Slack",
-	"IINA",
-	"Hammerspoon",
-	"System Settings",
-	"Discord",
-	"Neovide",
-	"neovide",
-	"Espanso",
-	"BusyCal",
-	"Alfred Preferences",
-	"YouTube",
-	"Netflix",
-	"CrunchyRoll",
-	"Finder",
-}):subscribe(Wf.windowCreated, function(newWin)
+-- Open Apps always at Mouse Screen
+Wf_appsOnMouseScreen = Wf.new(true):subscribe(Wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	if not mouseScreen then return end
 	local screenOfWindow = newWin:screen()

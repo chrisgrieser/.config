@@ -99,6 +99,7 @@ function ToggleWinSidebar(win)
 	end
 end
 
+---show the sidebars of OBsidian, Drafts, and Highlights
 function ShowAllSidebars()
 	if AppIsRunning("Highlights") then App("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
 	OpenLinkInBackground("obsidian://advanced-uri?eval=this.app.workspace.rightSplit.expand%28%29")
@@ -148,12 +149,12 @@ function MoveResize(win, pos)
 		App("Twitter"):mainWindow():raise()
 	end
 
-	-- pseudo-timeout
+	-- timeout
 	local i = 0
 	while i < 20 and CheckSize(win, pos) == false do
 		if not win then return end
 		win:moveToUnit(pos)
-		os.execute("sleep 0.1") -- since lua itself does not have a blocking wait function
+		os.execute("sleep 0.1") -- lua itself does not have a wait function
 		i = i + 1
 	end
 end
@@ -164,9 +165,8 @@ end
 ---bring all windows of front app to the front
 function BringAllToFront()
 	local app = App.frontmostApplication()
-	if #app:allWindows() > 1 then -- HACK to prevent the occasional faulty creation of task manager windows in Brave
-		app:selectMenuItem { "Window", "Bring All to Front" }
-	end
+	if #app:allWindows() < 2 then return end -- the occasional faulty creation of task manager windows in Browser
+	app:selectMenuItem { "Window", "Bring All to Front" }
 end
 
 ---automatically apply per-app auto-tiling of the windows of the app

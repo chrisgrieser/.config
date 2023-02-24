@@ -7,16 +7,16 @@
 Thresholds = {
 	Slack = 15,
 	Obsidian = 60,
-	Finder = 30,
 	Mimestream = 10,
-	BusyCal = 10,
-	Drafts = 5, -- has the extra condition of having no active Draft – see `quitter()`
+	BusyCal = 3,
+	Drafts = 3, -- has the extra condition of having no active Draft – see `quitter()`
+	Hammerspoon = 3, -- closes console, not Hammerspoon itself
+	Finder = 20, -- requires `defaults write com.apple.Finder QuitMenuItem 1`
 }
 
 --------------------------------------------------------------------------------
 
 IdleApps = {} ---table containing all apps with their last activation time
-CheckIntervallSecs = 10
 
 --Initialize on load: fills `IdleApps` with all running apps and the current time
 for app, _ in pairs(Thresholds) do
@@ -53,14 +53,20 @@ end
 ---@param app string name of the app
 local function quitter(app)
 	if app == "Drafts" and getDraftsCount() > 0 then return end
-	hs.application(app):kill()
-	IdleApps[app] = nil
+
 	print("AutoQuitter: Quitting " .. app)
+	IdleApps[app] = nil
+	if app == "Hammerspoon" then
+		hs.closeConsole()				
+	else
+		hs.application(app):kill()
+	end
 end
 
 ---check apps regularly and quit if idle for longer than their thresholds
+local checkIntervallSecs = 20
 AutoQuitterTimer = hs.timer
-	.doEvery(CheckIntervallSecs, function()
+	.doEvery(checkIntervallSecs, function()
 		local now = os.time()
 
 		for app, lastActivation in pairs(IdleApps) do
