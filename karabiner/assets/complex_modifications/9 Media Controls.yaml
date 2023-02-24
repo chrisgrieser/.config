@@ -17,24 +17,42 @@ rules:
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               spt playback --like | sed 's/🔀//' | sed 's/▶️//' |
               xargs -I {} osascript -e 'display notification "{}" with title "🎵 Spotify"'
+      # Back
+      - type: basic
+        from: { key_code: f7 }
+        to:
+          - shell_command: |
+              i=0
+              while ! pgrep "Spotify"; do
+                open -a "Spotify"
+                sleep 0.2
+                i=$((i + 1))
+                [[ $i -gt 30 ]] && exit 1
+              done
+              osascript -e 'tell application "Spotify" to previous track'
       # Play/Pause
       - type: basic
         from: { key_code: f8 }
         to:
-          - shell_command: pgrep -q "Spotify" || open -a "Spotify"
-          # - consumer_key_code: play_or_pause
-          - shell_command: osascript -e 'tell application "Spotify" to playpause'
+          - shell_command: |
+              i=0
+              while ! pgrep "Spotify"; do
+                open -a "Spotify"
+                sleep 0.2
+                i=$((i + 1))
+                [[ $i -gt 30 ]] && exit 1
+              done
+              osascript -e 'tell application "Spotify" to playpause'
       # Forward
       - type: basic
         from: { key_code: f9 }
         to:
-          - shell_command: pgrep -q "Spotify" || open -a "Spotify"
-          # - consumer_key_code: fast_forward
-          - consumer_key_code: osascript -e 'tell application "Spotify" to next track'
-      # Back
-      - type: basic
-        from: { key_code: f8 }
-        to:
-          - shell_command: pgrep -q "Spotify" || open -a "Spotify"
-          # - consumer_key_code: rewind
-          - consumer_key_code: osascript -e 'tell application "Spotify" to previous track'
+          - shell_command: |
+              i=0
+              while ! pgrep "Spotify"; do
+                open -a "Spotify"
+                sleep 0.2
+                i=$((i + 1))
+                [[ $i -gt 30 ]] && exit 1
+              done
+              osascript -e 'tell application "Spotify" to next track'
