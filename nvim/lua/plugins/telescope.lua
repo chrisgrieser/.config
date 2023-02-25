@@ -72,7 +72,7 @@ local options = {
 			},
 			cursor = {
 				preview_cutoff = 9001, -- never use preview here
-				height = 0.9,
+				height = 1,
 			},
 			bottom_pane = {
 				height = 8,
@@ -151,7 +151,7 @@ local options = {
 			prompt_title = false,
 			results_title = false,
 			theme = "cursor",
-			layout_config = { cursor = { width = 0.6 } },
+			layout_config = { cursor = { width = 0.5 } },
 		},
 		quickfix = {
 			trim_text = true,
