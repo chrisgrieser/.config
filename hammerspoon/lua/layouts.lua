@@ -54,7 +54,7 @@ function WorkLayout()
 
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder" }
 	if not isWeekend() then OpenApp("Slack") end
-	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts", "Spotify" }
+	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
 	require("lua.private").closer()
 
 	local layout = createLayout(PseudoMaximized, IMacDisplay, {
@@ -80,17 +80,16 @@ function WorkLayout()
 		App("Drafts"):activate()
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
-		App("Spotify"):hide()
+		OpenApp("Spotify") -- delayed, so SpotifyDo isn not triggered
 	end)
 	dockSwitcher("work")
 end
 
 function MovieModeLayout()
-	if IsAtMother() then
-		dockSwitcher("mother-movie") -- different PWAs due to not being M1 device
-	else
-		dockSwitcher("movie")
-	end
+	-- different PWAs due to not being M1 device
+	local targetMode = IsAtMother() and "mother-movie" or "movie"
+	dockSwitcher(targetMode)
+	
 	SetDarkmode(true)
 	SpotifyDo("pause")
 	HoleCover("remove")
