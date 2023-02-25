@@ -7,16 +7,16 @@ require("lua.utils")
 ---times after which apps should quit, in minutes. (Apps not in this list will
 --simply be ignored and never quit automatically).
 Thresholds = {
-	Slack = 10,
-	Obsidian = 60,
-	Mimestream = 3,
+	Slack = 15,
+	Obsidian = 90,
+	Mimestream = 5,
 	Discord = 180,
 	BusyCal = 3,
-	Neovide = 120,
-	["Alfred Preferences"] = 20,
+	Neovide = 180,
+	["Alfred Preferences"] = 15,
 	Hammerspoon = 1, -- the console, not Hammerspoon itself
 	Drafts = 3, -- has the extra condition of having no active Draft – see `quitter()`
-	Finder = 20, -- requires `defaults write com.apple.Finder QuitMenuItem 1`
+	Finder = 10, -- requires `defaults write com.apple.Finder QuitMenuItem 1`
 }
 
 --------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ DeactivationWatcher = Aw.new(function(app, event)
 	end
 end):start()
 
--- INFO the console is not triggered by Aw.deactivated, so using window filter here
+-- INFO the console is not triggered by the app watcher, so using window filter
 Wf_hammerspoonConsole = Wf.new("Hammerspoon")
 	:subscribe(Wf.windowUnfocused, function() IdleApps["Hammerspoon"] = now() end)
 	:subscribe(Wf.windowFocused, function() IdleApps["Hammerspoon"] = nil end)
