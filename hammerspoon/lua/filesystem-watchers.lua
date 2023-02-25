@@ -125,9 +125,9 @@ FileHubWatcher = Pw(FileHub, function(paths)
 		if extension == "alfredworkflow" or extension == "ics" or extension == "dmg" then
 			-- opening ics and Alfred leads to recursions when opened via this file
 			-- watcher and are therefore opened via browser auto-open instead. .dmg
-			-- though cannot be opened via browser and also does not create recursion, 
+			-- though cannot be opened via browser and also does not create recursion,
 			-- so it is opened here
-			if extension == "dmg" then hs.open(filep) end 
+			if extension == "dmg" then hs.open(filep) end
 			RunWithDelays(3, function() os.rename(filep, Home .. "/.Trash/" .. fileName) end)
 
 			-- watch later .urls from the office
@@ -155,10 +155,12 @@ FileHubWatcher = Pw(FileHub, function(paths)
 			os.rename(filep, browserSettings .. "SponsorBlock-settings.json")
 			Notify("SpondorBlockConfig filed away.")
 
-		-- tampermonkey
-		elseif fileName:match("tampermonkey%-backup-.+%.txt") then
-			os.rename(filep, browserSettings .. "tampermonkey-settings.json")
-			Notify("TamperMonkey backup filed away.")
+		-- violentmonkey
+		elseif fileName:match("violentmonkey") then
+			hs.execute("rm -r '" .. browserSettings .. "violentmonkey'")
+			hs.execute("mv -f '" .. filep .. "' '" .. browserSettings .. "violentmonkey/'")
+			-- os.rename(filep, browserSettings .. "violentmonkey")
+			Notify("Violentmonkey backup filed away.")
 
 		-- Bonjourr
 		elseif fileName:match("bonjourrExport%-.*%.json") then
