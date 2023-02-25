@@ -80,9 +80,9 @@ end
 -- auto-pause/resume Spotify on launch/quit of apps with sound
 SpotifyAppWatcher = Aw.new(function(appName, eventType)
 	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
-	if not(ScreenIsUnlocked()) then return end
-	if IsProjector() then return end
-	if not (TableContains(appsWithSound, appName)) then return end
+	if not (ScreenIsUnlocked()) or IsProjector() or not (TableContains(appsWithSound, appName)) then
+		return
+	end
 
 	if eventType == Aw.launched then
 		SpotifyDo("pause")
@@ -138,10 +138,11 @@ end):start()
 
 -- NEOVIM / NEOVIDE
 
--- Add dots when copypasting to from Obsidian devtools
--- not using window focused, since not reliable
-local function clipboardFix()
-	if not App("neovide"):mainWindow() or not App("neovide"):mainWindow():title():find("%.css$") then return end
+-- Add dots when copypasting to from dev tools
+local function addCssSelectorLeadingDot()
+	if not App("neovide"):mainWindow() or not App("neovide"):mainWindow():title():find("%.css$") then
+		return
+	end
 
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
@@ -161,9 +162,9 @@ NeovideWatcher = Aw.new(function(appName, eventType, appObj)
 	-- triggered on activation as well, since neovide as non-native app
 	-- often does not send a "launched" signal
 	if eventType == Aw.activated or eventType == Aw.launched then
-		clipboardFix()
+		addCssSelectorLeadingDot()
 		-- maximize app
-		RunWithDelays({ 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 }, function()
+		RunWithDelays({ 0.2, 0.5, 1, 1.5 }, function()
 			local win = appObj:mainWindow()
 			if not win then return end
 			if
