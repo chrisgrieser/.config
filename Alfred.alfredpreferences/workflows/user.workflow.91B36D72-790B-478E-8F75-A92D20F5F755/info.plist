@@ -32,6 +32,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>23BC13BE-D621-429D-A93E-15FECE927923</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>283ACE76-6BC7-495E-B3DC-FB0265AC07F7</key>
 		<array>
 			<dict>
@@ -190,6 +203,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>B4DC9895-CBBC-4242-96B2-51E8086716E6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -735,6 +761,69 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo "$*" | awk "NF {p=1} p" | python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Remove Excess Indentation</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>23BC13BE-D621-429D-A93E-15FECE927923</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -917,6 +1006,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>280</real>
 		</dict>
+		<key>23BC13BE-D621-429D-A93E-15FECE927923</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>670</real>
+			<key>ypos</key>
+			<real>445</real>
+		</dict>
 		<key>283ACE76-6BC7-495E-B3DC-FB0265AC07F7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1049,6 +1147,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>625</real>
 		</dict>
+		<key>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>845</real>
+			<key>ypos</key>
+			<real>445</real>
+		</dict>
 		<key>AB99E030-DB45-4C5F-A64F-4234C0998270</key>
 		<dict>
 			<key>colorindex</key>
@@ -1142,6 +1249,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>255</real>
 			<key>ypos</key>
 			<real>280</real>
+		</dict>
+		<key>FDF6DA7A-36B0-47DE-8396-66D12C630E60</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>paste</string>
+			<key>xpos</key>
+			<real>1015</real>
+			<key>ypos</key>
+			<real>445</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

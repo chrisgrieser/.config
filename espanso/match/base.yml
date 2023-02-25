@@ -18,13 +18,15 @@ matches:
   - trigger: "!paypal"
     replace: https://www.paypal.me/ChrisGrieser
   - trigger: "!name"
-    replace: "Christopher Grieser"
+    replace: Christopher Grieser
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!wd"
     replace: "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
   - trigger: "!path"
     replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
-    label: "PATH for homebrew"
+  - trigger: "!debugger"
+    replace: "setTimeout(() => { debugger }, 4000);"
+    label: for pasting in the dev tools
     #───────────────────────────────────────────────────────────────────────────
   - trigger: "!dontask"
     replace: "<https://dontasktoask.com/>"
