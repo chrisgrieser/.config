@@ -197,6 +197,7 @@ local function trackpadBatteryCheck()
 	end
 end
 
+-- backup Vault, Dotfiles, Bookmarks, and extension list
 BiweeklyTimer = timer("02:00", "02d", function()
 	Applescript([[
 		tell application id "com.runningwithcrayons.Alfred"
@@ -207,6 +208,11 @@ BiweeklyTimer = timer("02:00", "02d", function()
 	hs.execute(
 		'cp -f "$HOME/Library/Application Support/Vivaldi/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks.bkp"'
 	)
+	hs.execute([[
+		ls -1 "$HOME/Library/Application Support/Vivaldi/Default/Extensions/" |
+		sed "s|^|https://chrome.google.com/webstore/detail/|" \
+		> "$DOTFILE_FOLDER/browser-extension-configs/list-of-extensions.txt"
+	]])
 	hs.loadSpoon("EmmyLua") -- so it runs not as often
 	trackpadBatteryCheck()
 end, true)

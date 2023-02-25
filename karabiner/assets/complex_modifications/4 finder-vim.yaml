@@ -687,13 +687,20 @@ rules:
               touch "$newFile"
               open -R "$newFile"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # b = Toggle `.bkp` (Backup)
+      - type: basic
+        from: {key_code: b}
+        to:
+          - shell_command: |
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = follow symlink
       - type: basic
         from: {key_code: s}
         to:
           - shell_command: |
-              sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
-              open -R "$(readlink -f "$sel")"
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
+              open -R "$(readlink -f "$selection")"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # S = Create Symlink
       - type: basic

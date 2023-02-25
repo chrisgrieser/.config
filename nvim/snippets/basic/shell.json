@@ -34,7 +34,7 @@
 	},
 	"ext": {
 		"prefix": "ext",
-		"body": "ext=${${1:file_name}shebang*.}"
+		"body": "ext=${${1:file_name}##*.}"
 	},
 	"filename w/o ext": {
 		"prefix": "filename w/o ext",

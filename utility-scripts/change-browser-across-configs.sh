@@ -12,6 +12,12 @@ FROM_BROWSER_PATH="/BraveSoftware/Brave-Browser/" # ~/Library/Application Suppor
 TO_BROWSER_PATH="/Vivaldi/"                       # ~/Library/Application Support/Vivaldi/Default
 
 #───────────────────────────────────────────────────────────────────────────────
+
+# Open all extensions as tabs for easy installation
+# shellcheck disable=2011
+ls "$HOME/Library/Application Support/$FROM_BROWSER_PATH/Default/Extensions/" | xargs -I {} open "https://chrome.google.com/webstore/detail/{}"
+
+#───────────────────────────────────────────────────────────────────────────────
 cd "$DOTFILE_FOLDER" || return 1
 
 sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" "/karabiner/assets/complex_modifications/2 ctrl-leader.yaml"
