@@ -319,17 +319,12 @@ end):start()
 -- - set workspace
 -- - update counter in sketchybar
 DraftsWatcher = Aw.new(function(appName, eventType, appObject)
-	if not (appName == "Drafts") then return end
-
-	RunWithDelays({ 0.1, 1 }, function() hs.execute("sketchybar --trigger drafts-counter-update") end)
-
-	if eventType == Aw.launching or eventType == Aw.activated then
+	if appName == "Drafts" and (eventType == Aw.launching or eventType == Aw.activated) then
 		local workspace = IsAtOffice() and "Office" or "Home"
 		RunWithDelays({ 0.1 }, function()
-			local name = appObject:focusedWindow():title()
-			local isTaskList = name:find("Supermarkt$")
-			if not isTaskList then appObject:selectMenuItem { "Workspaces", workspace } end
+			appObject:selectMenuItem { "Workspaces", workspace }
 			appObject:selectMenuItem { "View", "Hide Toolbar" }
+			hs.execute("sketchybar --trigger drafts-counter-update")
 		end)
 	end
 end):start()
