@@ -83,6 +83,7 @@ function WorkLayout()
 		OpenApp("Spotify") -- delayed, so SpotifyDo isn not triggered
 	end)
 	dockSwitcher("work")
+	RestartApp("AltTab") -- FIX AltTab sometimes not picking up open apps
 end
 
 function MovieModeLayout()
