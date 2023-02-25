@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "25/02/2023, 23:53:49",
-	"time": 1677365629975,
+	"@time": "26/02/2023, 00:19:25",
+	"time": 1677367165455,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -113,6 +113,18 @@
 	"regexFindMode": true,
 	"scrollStepSize": 300,
 	"searchEngines": "g https://www.google.com/search?q=%s",
+	"userDefinedCss": [
+		".HUD { ",
+		"  max-width: 80vw;",
+		"  width: auto;",
+		"  min-width: 600px;",
+		"  height: 21px;",
+		"  line-height: 1;",
+		"  font-size: 18px;",
+		"  padding: 6px;",
+		"}",
+		""
+	],
 	"vimSync": true,
 	"ignoreCapsLock": 2,
 	"mapModifier": 2
