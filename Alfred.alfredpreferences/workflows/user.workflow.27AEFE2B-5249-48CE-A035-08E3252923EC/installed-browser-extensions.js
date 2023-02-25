@@ -44,10 +44,12 @@ const jsonArray = app
 		if (manifest.options_ui?.page) optionsPath = manifest.options_ui.page;
 		else if (manifest.options_page) optionsPath = manifest.options_page;
 		const optionsUrl = `chrome-extension://${id}/${optionsPath}`;
+		const webstoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
 
 		// emoji/icon
 		const emoji = optionsPath ? "" : " 🚫"; // indicate no options available
-		const iconPath = root + manifest.icons["128"]; // 128 seems to be the size always available
+		const icon = manifest.icons["128"] || manifest.icons["64"]
+		const iconPath = root + icon;
 
 		return {
 			title: name + emoji,
@@ -55,6 +57,10 @@ const jsonArray = app
 			icon: { path: iconPath },
 			valid: optionsPath !== "",
 			arg: optionsUrl,
+			mods: {
+				alt: { arg: webstoreUrl },
+				cmd: { arg: webstoreUrl },
+			},
 			uid: id,
 		};
 	});

@@ -3,7 +3,7 @@
 /* stylelint-disable selector-max-id, custom-property-pattern  */
 /* ────────────────────────────────────────────────────────────────────────── */
 :root {
-	--adressbar-focussed-width: 99vw; /* only applied from 4+ tabs on */
+	--adressbar-focussed-width: 99.5vw; /* only applied from 4+ tabs on */
 	--adressbar-width-1-tab: 80vw;
 	--adressbar-width-2-tab: 70vw;
 	--adressbar-width-3-tab: 60vw;
@@ -13,7 +13,7 @@
 	--adressbar-width-7-tab: 35vw;
 	--adressbar-width-8-tab: 30vw;
 	--adressbar-width-9-tab: 25vw;
-	--animation: 60ms ease-in;
+	--animation: 50ms ease-in;
 }
 
 #tabs-tabbar-container {
@@ -94,11 +94,11 @@
 
 /* extends the width of non-empty url bar while it is focused and does have at 
 least 3 tabs */
-#header:has(.tab-strip > span:nth-child(3)) + #main .UrlBar-AddressField:focus-within:not(:has(+ #main #urlFieldInput[value=""])) {
+#header:has(.tab-strip > span:nth-child(5)) + #main .UrlBar-AddressField:focus-within:not(:has(#urlFieldInput[value=""])) {
 	width: var(--adressbar-focussed-width);
 }
 
-#header:has(+ #main .UrlBar-AddressField:focus-within):not(:has(+ #main #urlFieldInput[value=""])) #tabs-tabbar-container:has(.tab-strip > span:nth-child(4)) {
+#header:has(+ #main .UrlBar-AddressField:focus-within):not(:has(+ #main #urlFieldInput[value=""])) #tabs-tabbar-container:has(.tab-strip > span:nth-child(5)) {
 	opacity: 0;
 }
 
