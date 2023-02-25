@@ -1,9 +1,7 @@
 #!/usr/bin/env zsh
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-if ! command -v rg &>/dev/null; then echo "rg not installed." && return 1; fi
-
 #───────────────────────────────────────────────────────────────────────────────
+
 # CONFIG
 FROM_BROWSER="Brave Browser"
 TO_BROWSER="Vivaldi"
@@ -12,15 +10,18 @@ FROM_BROWSER_PATH="/BraveSoftware/Brave-Browser/" # ~/Library/Application Suppor
 TO_BROWSER_PATH="/Vivaldi/"                       # ~/Library/Application Support/Vivaldi/Default
 
 #───────────────────────────────────────────────────────────────────────────────
+if [[ ! -f "$TO_BROWSER_PATH" ]]
+if ! command -v rg &>/dev/null; then echo "rg not installed." && return 1; fi
+#───────────────────────────────────────────────────────────────────────────────
 
 # Open all extensions as tabs for easy installation
 # shellcheck disable=2011
-ls "$HOME/Library/Application Support/$FROM_BROWSER_PATH/Default/Extensions/" | xargs -I {} open "https://chrome.google.com/webstore/detail/{}"
+ls "$HOME/Library/Application Support/$FROM_BROWSER_PATH/Default/Extensions/" | 
+	xargs -I {} open "https://chrome.google.com/webstore/detail/{}"
 
 #───────────────────────────────────────────────────────────────────────────────
 cd "$DOTFILE_FOLDER" || return 1
 
-sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" "/karabiner/assets/complex_modifications/2 ctrl-leader.yaml"
 rg "$FROM_BROWSER" --files-with-matches |
 	grep -v "/complex_modifications/" |
 	grep -v "/shimmering-obsidian/" |
@@ -34,6 +35,7 @@ rg "$FROM_BROWSER" --files-with-matches |
 	grep -v "jxa.json" |
 	grep -v "$0" |
 	xargs -I {} sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" '{}'
+sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" "/karabiner/assets/complex_modifications/2 ctrl-leader.yaml"
 
 rg "$FROM_BROWSER_PATH" --files-with-matches |
 	grep -v "/user.workflow.3BF713ED-02D0-4127-8126-26E36BF15CFC/" |
