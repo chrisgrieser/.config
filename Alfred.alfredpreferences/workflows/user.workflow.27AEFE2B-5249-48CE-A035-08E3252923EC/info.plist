@@ -53,7 +53,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
+				<string>⌥: Copy Chrome Web Store URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
