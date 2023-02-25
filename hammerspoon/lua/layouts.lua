@@ -73,17 +73,18 @@ function WorkLayout()
 		"Alacritty",
 	})
 	hs.layout.apply(layout)
-	TwitterToTheSide()
 	ShowAllSidebars()
-	RunWithDelays({ 0.4, 0.8 }, function()
+	RunWithDelays(0.3, function () OpenApp("Spotify") end) -- delayed, so SpotifyDo isn not triggered
+	RestartApp("AltTab") -- FIX AltTab sometimes not picking up open apps
+
+	local delays = IsAtMother() and {0.5, 1} or 0.1
+	RunWithDelays(delays , function()
 		App("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
 		App("Drafts"):activate()
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
-		OpenApp("Spotify") -- delayed, so SpotifyDo isn not triggered
 	end)
 	dockSwitcher("work")
-	RestartApp("AltTab") -- FIX AltTab sometimes not picking up open apps
 end
 
 function MovieModeLayout()

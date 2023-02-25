@@ -17,7 +17,13 @@ ${selection}
 EOF
 )
 
-# paste via clipboard
-echo -n "$result" | pbcopy
-sleep 0.1
-osascript -e 'tell application "System Events" to keystroke "v" using {command down}'
+# shellcheck disable=2181
+if [[ $? == 0 ]] ; then
+	# paste via clipboard
+	echo -n "$result" | pbcopy
+	sleep 0.1
+	osascript -e 'tell application "System Events" to keystroke "v" using {command down}'
+else
+	echo -n "🛑 non-zero exit code"
+fi
+

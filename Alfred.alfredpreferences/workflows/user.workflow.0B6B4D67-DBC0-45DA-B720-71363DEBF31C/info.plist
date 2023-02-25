@@ -72,19 +72,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>2C3B5193-F64C-473E-BBE5-15F668929269</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D608B123-0780-4E08-A9AD-4BBF4396F654</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<array>
 			<dict>
@@ -223,6 +210,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DCECF168-40C8-45B0-B812-81138DF798D4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D608B123-0780-4E08-A9AD-4BBF4396F654</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -710,37 +710,23 @@ IconIndex=0</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
+				<key>argumenttype</key>
 				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>2</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>D</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
+				<key>keyword</key>
+				<string>vidir</string>
+				<key>subtext</key>
+				<string>Current Finder Window</string>
+				<key>text</key>
+				<string>📁 vidir</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>2C3B5193-F64C-473E-BBE5-15F668929269</string>
+			<string>DCECF168-40C8-45B0-B812-81138DF798D4</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -853,15 +839,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>850</real>
 			<key>ypos</key>
 			<real>540</real>
-		</dict>
-		<key>2C3B5193-F64C-473E-BBE5-15F668929269</key>
-		<dict>
-			<key>note</key>
-			<string>vidir the frontmost window</string>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>525</real>
 		</dict>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<dict>
@@ -1030,6 +1007,13 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>850</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>DCECF168-40C8-45B0-B812-81138DF798D4</key>
+		<dict>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>525</real>
 		</dict>
 		<key>EA84A1D9-5B40-48C6-B910-0E4E2E12B31C</key>
 		<dict>
