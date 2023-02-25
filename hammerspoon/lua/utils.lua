@@ -3,44 +3,59 @@ Alert = hs.alert.show
 Keystroke = hs.eventtap.keyStroke
 Aw = hs.application.watcher
 Wf = hs.window.filter
+Pw = hs.pathwatcher.new
 App = hs.application
 Applescript = hs.osascript.applescript
 UriScheme = hs.urlevent.bind
-Pw = hs.pathwatcher.new
 TableContains = hs.fnutils.contains
---------------------------------------------------------------------------------
 
 Hyper = { "cmd", "alt", "ctrl", "shift" }
 I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
--- general lua utils
 
 ---trims whitespace from string
 ---@param str string
 ---@return string
 function Trim(str)
 	if not str then return "" end
-	str = str:gsub("^%s*(.-)%s*$", "%1")
+	str, _ = str:gsub("^%s*(.-)%s*$", "%1")
 	return str
 end
 
----write to a file, using lua io
----@param filepath string
----@param textToAppend string
-function AppendToFile(filepath, textToAppend)
-	local file, err = io.open(filepath, "a")
-	if file then
-		file:write(textToAppend)
-		file:close()
+---Whether the current time is between startHour & endHour
+---@param startHour number, time between 0 and 24, also accepts floats e.g. 13.5 for 13:30
+---@param endHour number, time between 0 and 24, also accepts floats e.g. 13.5 for 13:30
+---@return boolean|nil
+function BetweenTime(startHour, endHour)
+	if startHour >= 24 or endHour >= 24 or startHour < 0 or endHour < 0 then
+		Notify("BetweenTime: Invalid time range")
+		return nil
+	end
+	local currentHour = hs.timer.localTime() / 60 / 60
+	local goesBeyondMightnight = startHour > endHour
+	if goesBeyondMightnight then
+		return (currentHour > startHour) or (currentHour < endHour)
 	else
-		print("error:", err) 
+		return (currentHour > startHour) and (currentHour < endHour)
 	end
 end
 
+-- Caveat: won't work with Chromium browsers due to bug, but works for URI schemes
+---@param url string
+function OpenLinkInBackground(url) hs.execute('open -g "' .. url .. '"') end
+
 --------------------------------------------------------------------------------
 
----Repeat a Function multiple times
+---@return string
+local function deviceName()
+	-- hs.host.localizedName() is similar to `scutil --get ComputerName`, 
+	-- only native to hammerspoon and therefore a bit more reliable
+	local name, _ = hs.host.localizedName():gsub(".- ", "", 1)
+	return name
+end
+
+---Repeat a function multiple times
 ---@param delaySecs number|number[]
 ---@param func function function to repeat
 function RunWithDelays(delaySecs, func)
@@ -67,10 +82,12 @@ function IsAtOffice()
 end
 
 ---@return boolean
-function IsAtMother() return DeviceName():find("Mother") ~= nil end
+function IsAtMother() return deviceName():find("Mother") ~= nil end
 
 ---@return boolean
-function IsIMacAtHome() return (DeviceName():find("iMac") and DeviceName():find("Home")) ~= nil end
+function IsIMacAtHome() return (deviceName():find("iMac") and deviceName():find("Home")) ~= nil end
+
+--------------------------------------------------------------------------------
 
 ---@return boolean
 function ScreenIsUnlocked()
@@ -80,32 +97,18 @@ function ScreenIsUnlocked()
 	return success ---@diagnostic disable-line: return-type-mismatch
 end
 
----@return string
-function DeviceName()
-	-- similar to `scutil --get ComputerName`, only native to hammerspoon and therefore a bit more reliable
-	local name, _ = hs.host.localizedName():gsub(".- ", "", 1)
-	return name
-end
-
----Send Notification
+---Send Notification, accepting any number of arguments of any type. Converts
+---everything into strings, concatenates them, and then sends it.
 function Notify(...)
 	local safe_args = {}
 	local args = { ... }
 	for _, arg in pairs(args) do
-		table.insert(safe_args, tostring(arg))
+		local safe = (type(arg) == "table") and hs.inspect(arg) or tostring(arg)
+		table.insert(safe_args, safe)
 	end
 	local out = table.concat(safe_args, " ")
 	hs.notify.show("Hammerspoon", "", out)
-	print("Notify: " .. out) -- log in the console, too
-end
-
----Whether the current time is between startHour & endHour
----@param startHour number, e.g. 13.5 = 13:30
----@param endHour number
----@return boolean
-function BetweenTime(startHour, endHour)
-	local currentHour = hs.timer.localTime() / 60 / 60
-	return currentHour > startHour and currentHour < endHour
+	print("Notify: " .. out)
 end
 
 ---@return string
@@ -118,21 +121,34 @@ end
 function AppIsRunning(appName)
 	-- can't use ":isRunning()", since the application object is nil when it
 	-- wasn't running before
-	return hs.application.get(appName) ~= nil
+	return hs.application(appName) ~= nil
+end
+
+---@param appName string
+function RestartApp(appName)
+	local app = hs.application(appName)
+	if not app then return end
+	app:kill()
+	hs.timer.waitUntil(
+		function() return hs.application(appName) == nil end,
+		function() hs.application.open(appName) end,
+		0.1
+	)
 end
 
 ---@param appNames string|string[]
 function OpenApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		local runs = App.get(name)
-		if not runs then App.open(name) end
+		local runs = hs.application(name) ~= nil
+		if not runs then hs.application.open(name) end
 	end
 end
 
 function QuitFinderIfNoWindow()
 	-- quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
-	if App("Finder") and #App("Finder"):allWindows() == 0 then App("Finder"):kill() end
+	local finder = hs.application("Finder")
+	if finder and #finder:allWindows() == 0 then finder:kill() end
 end
 
 ---@param appNames string|string[]
@@ -140,12 +156,8 @@ function QuitApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
 		RunWithDelays({ 0, 0.5 }, function()
-			local appObj = App.get(name)
+			local appObj = hs.application(name)
 			if appObj then appObj:kill() end
 		end)
 	end
 end
-
--- won't work with Chromium browsers due to bug, but good for URI schemes
----@param url string
-function OpenLinkInBackground(url) hs.execute('open -g "' .. url .. '"') end
