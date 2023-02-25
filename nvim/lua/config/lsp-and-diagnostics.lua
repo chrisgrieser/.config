@@ -44,8 +44,8 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- stylua: ignore start
 keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, { desc = "璉Next Diagnostic" })
 keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { desc = "璉Previous Diagnostic" })
-keymap("n", "<leader>d", function() vim.diagnostic.open_float { focusable = false } end, { desc = "璉Show Diagnostic" })
 -- stylua: ignore end
+keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "璉Show Diagnostic" })
 
 local function diagnosticFormat(diagnostic, mode)
 	local msg = diagnostic.message:gsub("^%s*", ""):gsub("%s*$", "")
@@ -53,9 +53,8 @@ local function diagnosticFormat(diagnostic, mode)
 	local code = tostring(diagnostic.code)
 	local out = msg .. " (" .. code .. ")"
 
-	if source == "stylelint" or source == "shellcheck" or code == "nil" then
-		out = msg -- stylelint and shellcheck already includes the code in the message, some linters without code
-	end
+	-- stylelint and already includes the code in the message, some linters without code
+	if source == "stylelint" then out = msg end
 	if diagnostic.source and mode == "float" then out = out .. " [" .. source .. "]" end
 	return out
 end
@@ -66,8 +65,10 @@ vim.diagnostic.config {
 		severity = { min = vim.diagnostic.severity.WARN },
 	},
 	float = {
+		focusable = false,
 		border = BorderStyle,
 		max_width = 50,
+		header = "", -- remove "Diagnostics:" heading
 		format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,
 	},
 }
