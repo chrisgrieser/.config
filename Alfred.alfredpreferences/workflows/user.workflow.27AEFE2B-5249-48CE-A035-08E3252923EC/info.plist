@@ -106,19 +106,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B8325705-BC77-4B2C-A0D5-1706EFA726E1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>BE7EDFB7-052F-45E8-BC4B-5448613EE413</key>
 		<array>
 			<dict>
@@ -518,55 +505,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ch</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string>cat ./vivaldi-settings.json</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>installed-browser-extensions.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Vivaldi Settings</string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>B8325705-BC77-4B2C-A0D5-1706EFA726E1</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
@@ -677,7 +615,7 @@
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>330</real>
 		</dict>
 		<key>14C11AAF-4BA7-4F10-8AE5-C5BF378187DE</key>
 		<dict>
@@ -697,14 +635,14 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>475</real>
 		</dict>
 		<key>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>315</real>
+			<real>305</real>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
@@ -753,7 +691,7 @@
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>475</real>
 		</dict>
 		<key>97E52210-B26B-49B3-AC6D-65A1235A88C9</key>
 		<dict>
@@ -778,20 +716,9 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>315</real>
+			<real>305</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>B8325705-BC77-4B2C-A0D5-1706EFA726E1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>vivaldi internal pages</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>305</real>
 		</dict>
 		<key>BE7EDFB7-052F-45E8-BC4B-5448613EE413</key>
 		<dict>
@@ -851,7 +778,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>330</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

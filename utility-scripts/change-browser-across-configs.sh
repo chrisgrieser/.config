@@ -10,14 +10,14 @@ FROM_BROWSER_PATH="/BraveSoftware/Brave-Browser/" # ~/Library/Application Suppor
 TO_BROWSER_PATH="/Vivaldi/"                       # ~/Library/Application Support/Vivaldi/Default
 
 #───────────────────────────────────────────────────────────────────────────────
-if [[ ! -f "$TO_BROWSER_PATH" ]]
+if [[ ! -f "$TO_BROWSER_PATH" ]] ; then echo "$TO_BROWSER_PATH not right." && return 1; fi 
 if ! command -v rg &>/dev/null; then echo "rg not installed." && return 1; fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # Open all extensions as tabs for easy installation
 # shellcheck disable=2011
 ls "$HOME/Library/Application Support/$FROM_BROWSER_PATH/Default/Extensions/" | 
-	xargs -I {} open "https://chrome.google.com/webstore/detail/{}"
+	xargs -I {} open -a "$TO_BROWSER" "https://chrome.google.com/webstore/detail/{}"
 
 #───────────────────────────────────────────────────────────────────────────────
 cd "$DOTFILE_FOLDER" || return 1
@@ -42,6 +42,7 @@ rg "$FROM_BROWSER_PATH" --files-with-matches |
 	grep -v "$0" |
 	xargs -I {} sed -i '' "s|$FROM_BROWSER_PATH|$TO_BROWSER_PATH|g" '{}'
 
+#───────────────────────────────────────────────────────────────────────────────
 
 # reload karabiner
 karabinerMsg=$(osascript -l JavaScript "$DOTFILE_FOLDER/karabiner/build-karabiner-config.js")
