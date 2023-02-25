@@ -115,7 +115,7 @@ end):start()
 -- Redirects FROM File Hub
 local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
 WatcherActive = true -- to prevent recursion issues
-FileHubWatcher = Pw(FileHub, function(paths)
+FileHubWatcher = Pw(FileHub, function(paths, _)
 	for _, filep in pairs(paths) do
 		if isInSubdirectory(filep, FileHub) then return end
 		local fileName = filep:gsub(".*/", "")
@@ -140,7 +140,7 @@ FileHubWatcher = Pw(FileHub, function(paths)
 			os.rename(filep, browserSettings .. fileName)
 			Notify(fileName .. " filed away.")
 
-			-- vimium-c
+		-- vimium-c
 		elseif fileName:match("vimium_c") then
 			os.rename(filep, browserSettings .. "vimium-c-settings.json")
 			Notify("Vimium-C backup filed away.")
@@ -157,9 +157,10 @@ FileHubWatcher = Pw(FileHub, function(paths)
 
 		-- violentmonkey
 		elseif fileName:match("violentmonkey") then
-			hs.execute("rm -r '" .. browserSettings .. "violentmonkey'")
-			hs.execute("mv -f '" .. filep .. "' '" .. browserSettings .. "violentmonkey/'")
-			-- os.rename(filep, browserSettings .. "violentmonkey")
+			-- `-d` test necessary to rpevent recursion of moving out of directory
+			-- also triggering the rm command
+			hs.execute("[[ -d '" .. filep .. "' ]] && rm -r '" .. browserSettings .. "violentmonkey'")
+			os.rename(filep, browserSettings .. "violentmonkey")
 			Notify("Violentmonkey backup filed away.")
 
 		-- Bonjourr

@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "25/02/2023, 01:00:52",
-	"time": 1677283252297,
+	"@time": "25/02/2023, 23:53:49",
+	"time": 1677365629975,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -34,6 +34,8 @@
 		"\" combine commands: \" https://github.com/gdh1995/vimium-c/wiki/Auto-run-a-tree-of-commands#open-vomnibar-after-creating-a-new-tab",
 		"unmapAll",
 		"\" Google Regex above ensures keys are disabled on googel sites, except the ones the google image search (\"&tbm=isch\")",
+		"\"------------------------------------------------------",
+		"",
 		"",
 		"\" Modes",
 		"map <esc> reset",
