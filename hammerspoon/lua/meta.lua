@@ -31,9 +31,7 @@ function SystemStart()
 	else
 		QuitFinderIfNoWindow()
 		Notify("Hammerspoon started.")
-		SyncAllGitRepos()
-		print("bla")
-		Notify("✅ Sync finished.")
+		SyncAllGitRepos("notify")
 
 		-- HACK for https://github.com/FelixKratz/SketchyBar/issues/322
 		hs.execute([[osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"]])
