@@ -32,7 +32,6 @@ function SystemStart()
 		QuitFinderIfNoWindow()
 		Notify("Hammerspoon started.")
 		SyncAllGitRepos()
-		Notify("beep")
 		Notify("✅ Sync finished.")
 
 		-- HACK for https://github.com/FelixKratz/SketchyBar/issues/322
