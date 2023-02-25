@@ -36,6 +36,7 @@ const jsonArray = app
 			const messagesJson = JSON.parse(readFile(root + "_locales/en/messages.json"));
 			if (messagesJson.extensionName?.message) name = messagesJson.extensionName.message;
 			else if (messagesJson.name?.message) name = messagesJson.name.message;
+			else if (messagesJson.extName?.message) name = messagesJson.extName.message;
 			else "[name not found]";
 		}
 
