@@ -693,6 +693,13 @@ rules:
         to:
           - shell_command: |
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
+              ext=${selection##*.}
+              if [[ "$ext" == "bkp" ]]; then
+                newName=$(echo "$selection" | rev | cut -c5- | rev) # can't use bash expansion here
+                mv "$selection" "$newName"
+              else
+                mv "$selection" "$selection.bkp"
+              fi
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = follow symlink
       - type: basic

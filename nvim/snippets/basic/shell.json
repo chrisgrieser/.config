@@ -9,7 +9,7 @@
 	},
 	"slice": {
 		"prefix": "slice (expansion)",
-		"body": "${${1:var}:${2:start}:${3:length}}"
+		"body": "${${1:var}:${2:start}:${3:end}}"
 	},
 	"substitute": {
 		"prefix": "substitute (expansion)",
@@ -32,8 +32,8 @@
 		"prefix": "parent folder",
 		"body": "$(dirname \"$${1:filepath}\")"
 	},
-	"ext": {
-		"prefix": "ext",
+	"extension": {
+		"prefix": "get extension",
 		"body": "ext=${${1:file_name}##*.}"
 	},
 	"filename w/o ext": {
@@ -73,7 +73,7 @@
 		"body": "osascript -e 'display notification \"\" with title \"${1:msg}\"'"
 	},
 	"if (short)": {
-		"prefix": "if: [[ .. ]] && ..",
+		"prefix": "if (short)",
 		"body": "[[ \"$${1:var}\" ]] && $0"
 	},
 	"then": {
