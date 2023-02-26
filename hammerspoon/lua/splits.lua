@@ -14,8 +14,7 @@ local function runningApps()
 	local appsArr = {}
 	for _, win in pairs(hs.window:allWindows()) do
 		local appName = win:application():name()
-		local isExcludedApp =
-			{ "Hammerspoon", "Gifox", "Twitterrific", "Notification Centre", FrontAppName() }
+		local isExcludedApp = { "Hammerspoon", "Twitter", "Notification Centre", FrontAppName() }
 		if not TableContains(isExcludedApp, appName) then table.insert(appsArr, { text = appName }) end
 	end
 	return appsArr
@@ -25,7 +24,7 @@ end
 
 ---if one of the two is activated, also activate the other
 ---unsplit if one of the two windows has been closed
----@param mode string start|end of paired-activation
+---@param mode string start|stop of paired-activation
 local function pairedActivation(mode)
 	if mode == "stop" then
 		if Wf_pairedActivation then Wf_pairedActivation:unsubscribeAll() end
@@ -73,26 +72,19 @@ function VsplitSetLayout(mode, secondWin)
 		SPLIT_RIGHT = secondWin
 	end
 
-	-- ensure that SPLIT_RIGHT is really the right window
-	if mode == "swap" and (SPLIT_RIGHT:frame().x > SPLIT_LEFT:frame().x) then
-		local temp = SPLIT_RIGHT
-		SPLIT_RIGHT = SPLIT_LEFT
-		SPLIT_LEFT = temp
-	end
-	local f1 = SPLIT_RIGHT:frame()
-	local f2 = SPLIT_LEFT:frame()
-
+	local f1
+	local f2
 	if mode == "split" then
 		pairedActivation("start")
 		f1 = LeftHalf
 		f2 = RightHalf
-	elseif mode == "unsplit" then
-		f1 = PseudoMaximized
-		f2 = PseudoMaximized
-		pairedActivation("stop")
 	elseif mode == "swap" then
 		f1 = RightHalf
 		f2 = LeftHalf
+	elseif mode == "unsplit" then
+		pairedActivation("stop")
+		f1 = PseudoMaximized
+		f2 = PseudoMaximized
 	end
 
 	MoveResize(SPLIT_RIGHT, f1) ---@diagnostic disable-line: param-type-mismatch
