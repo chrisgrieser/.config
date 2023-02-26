@@ -10,7 +10,9 @@ function run(argv) {
 	let url;
 
 	// no input = take URL from browser
-	if (argv[0] === "") {
+	if (argv) {
+		url = argv[0];
+	} else {
 		const frontmostAppName = Application("System Events").applicationProcesses.where({ frontmost: true }).name()[0];
 		const frontmostApp = Application(frontmostAppName);
 		const chromiumVariants = ["Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge"];
@@ -23,8 +25,6 @@ function run(argv) {
 			app.displayNotification("", { withTitle: "You need a supported browser as your frontmost app", subtitle: "" });
 			return;
 		}
-	} else {
-		url = argv[0];
 	}
 
 	const inoreaderURL = "https://www.inoreader.com/search/feeds/" + encodeURIComponent(url);

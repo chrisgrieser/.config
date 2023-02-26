@@ -664,11 +664,11 @@ end tell</string>
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>keyword</key>
 				<string>rss</string>
 				<key>subtext</key>
-				<string>to Inoreader. (leave empty to add current browser tab)</string>
+				<string>to Inoreader (leave empty to add current browser tab)</string>
 				<key>text</key>
 				<string>Add RSS Feed</string>
 				<key>withspace</key>
