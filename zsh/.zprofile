@@ -1,5 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zprofile.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.pre.zsh"
 # Homebrew
 if [[ $(uname -p) == "arm" ]]; then
 	# M1 Mac
@@ -12,5 +10,5 @@ fi
 # Completions for Homebrew, https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zprofile.post.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.post.zsh"
+# Needed for fig
+export PATH=$HOME/.local/bin:$PATH

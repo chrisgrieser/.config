@@ -46,7 +46,6 @@ zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
 # CREATE SYMLINKS
 
 # zsh (ZDOTDIR set in .zshenv for the remaining config)
-[[ -e ~/.zshenv ]] && rm -fv ~/.zshenv
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
 # eslint (eslint LSP does not allow custom config paths, also should be used for
@@ -66,7 +65,6 @@ fi
 ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
 
 # searchlink
-[[ -e ~/.searchlink ]] && rm -f ~/.searchlink
 ln -sf "$DOTFILE_FOLDER/searchlink/.searchlink" ~
 
 # Espanso
@@ -82,10 +80,6 @@ ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.l
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# # Warp
-# [[ -e ~/.warp ]] && rm -rf ~/.warp
-# ln -sf "$DOTFILE_FOLDER/warp" ~/.warp
-
-# # Fig
+# Fig
 # mkdir -p ~/.fig/config
 # ln -sf "$DOTFILE_FOLDER/fig/settings.json" ~/.fig

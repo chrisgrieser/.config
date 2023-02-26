@@ -1,11 +1,12 @@
 # shellcheck disable=SC1090,SC1091,SC2292
 
-# activate completions, also needed for ZSH auto suggestions & completions
-# must be loaded before plugins
-autoload compinit -Uz +X && compinit
+# zsh autocomplete
+source "$(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
-# Fix for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
-[[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w
+# INFO completion setup must be disabled when using zsh-autocomplete
+# activate completions, must be loaded before zsh plugins
+# autoload compinit -Uz +X && compinit
+# [[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w # FIX for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
 
 #───────────────────────────────────────────────────────────────────────────────
 # INFO `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
