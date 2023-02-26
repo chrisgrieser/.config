@@ -16,18 +16,18 @@
 		"body": "const onlineJSON = (url) => JSON.parse(app.doShellScript(`curl -s \"${url}\"`));"
 	},
 	"notification": {
-		"prefix": "notification",
+		"prefix": ["notification", "displayNotification"],
 		"body": "app.displayNotification(\"\", { withTitle: \"${1:title}\", subtitle: \"${2:subtitle}\" })"
 	},
 	"app": {
-		"prefix": "app",
+		"prefix": "app (define)",
 		"body": [
 			"const app = Application.currentApplication()",
 			"app.includeStandardAdditions = true;"
 		]
 	},
 	"shell script": {
-		"prefix": ["shell script", "app.doShellScript"],
+		"prefix": ["shell script", "app.doShellScript", "doShellScript"],
 		"body": "app.doShellScript(`${1:shellscript}`);"
 	},
 	"open": {
@@ -91,7 +91,7 @@
 		]
 	},
 	"browser URL & title (function)": {
-		"prefix": "window path (Finder)",
+		"prefix": "browser URL & title (function)",
 		"body": [
 			"function browserTab() {",
 			"\tconst frontmostAppName = Application(\"System Events\").applicationProcesses.where({ frontmost: true }).name()[0];",

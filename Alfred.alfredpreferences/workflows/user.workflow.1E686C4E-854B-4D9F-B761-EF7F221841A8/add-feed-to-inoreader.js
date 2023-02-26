@@ -7,9 +7,24 @@ function run(argv) {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	const url = argv[0];
-	if (!url) {
-		url
+	let url;
+
+	// no input = take URL from browser
+	if (argv[0] === "") {
+		const frontmostAppName = Application("System Events").applicationProcesses.where({ frontmost: true }).name()[0];
+		const frontmostApp = Application(frontmostAppName);
+		const chromiumVariants = ["Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge"];
+		const webkitVariants = ["Safari", "Webkit"];
+		if (chromiumVariants.some(appName => frontmostAppName.startsWith(appName))) {
+			url = frontmostApp.windows[0].activeTab.url();
+		} else if (webkitVariants.some(appName => frontmostAppName.startsWith(appName))) {
+			url = frontmostApp.documents[0].url();
+		} else {
+			app.displayNotification("", { withTitle: "You need a supported browser as your frontmost app", subtitle: "" });
+			return;
+		}
+	} else {
+		url = argv[0];
 	}
 
 	const inoreaderURL = "https://www.inoreader.com/search/feeds/" + encodeURIComponent(url);

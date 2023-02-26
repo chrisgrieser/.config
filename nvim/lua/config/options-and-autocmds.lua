@@ -27,6 +27,7 @@ cmd.iabbrev("keybaord keyboard")
 cmd.iabbrev("sicne since")
 cmd.iabbrev("nto not")
 cmd.iabbrev("shwo show")
+cmd.iabbrev("retrun return")
 
 --------------------------------------------------------------------------------
 

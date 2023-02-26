@@ -26,13 +26,15 @@ rg "$FROM_BROWSER" --files-with-matches |
 	grep -v "/complex_modifications/" |
 	grep -v "/shimmering-obsidian/" |
 	grep -v "bootstrap.sh" |
+	grep -v "jxa.json" |
+	grep -v "$0" |
 	grep -v "visualized-keyboard-layout/" |
 	grep -v "info.plist" |
 	grep -v "karabiner/karabiner.json" |
 	grep -v ".bttpreset" |
+	grep -v "add-feed-to-inoreader.js" |
+	grep -v "get-url-from-browser.js" |
 	grep -v "chrome-internal-pages.json" |
-	grep -v "jxa.json" |
-	grep -v "$0" |
 	xargs -I {} sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" '{}'
 sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" "/karabiner/assets/complex_modifications/2 ctrl-leader.yaml"
 
