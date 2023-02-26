@@ -71,6 +71,7 @@ vim.on_key(function(char)
 end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
 -- Marks
+require("funcs.mark-cycler").clearMarks() -- = reset marks on startup
 keymap("n", "ä", require("funcs.mark-cycler").gotoMark, { desc = "Goto Next Mark" })
 keymap("n", "Ä", require("funcs.mark-cycler").setMark, { desc = "Set Next Mark" })
 
