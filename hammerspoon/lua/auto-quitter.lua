@@ -12,8 +12,8 @@ Thresholds = {
 	Mimestream = 5,
 	Discord = 180,
 	BusyCal = 3,
-	Neovide = 120,
-	Alacritty = 20,
+	neovide = 120,
+	alacritty = 20,
 	Lire = 2,
 	["Alfred Preferences"] = 15,
 	["System Settings"] = 2,
@@ -44,7 +44,7 @@ DeactivationWatcher = Aw.new(function(app, event)
 	end
 end):start()
 
--- INFO the console is not triggered by the app watcher, so using window filter
+-- INFO the console is not triggered by the app watcher, hence using window filter
 Wf_hammerspoonConsole = Wf.new("Hammerspoon")
 	:subscribe(Wf.windowUnfocused, function() IdleApps["Hammerspoon Console"] = now() end)
 	:subscribe(Wf.windowFocused, function() IdleApps["Hammerspoon Console"] = nil end)
