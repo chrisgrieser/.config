@@ -74,7 +74,7 @@ end, vim.api.nvim_create_namespace("auto_hlsearch"))
 keymap("n", "ä", require("funcs.mark-cycler").gotoMark, { desc = "Goto Next Mark" })
 keymap("n", "Ä", require("funcs.mark-cycler").setMark, { desc = "Set Next Mark" })
 
--- reset marks on startup, needs to be on VimEnter so it's not called too early
+-- reset marks on startup (needs to be on VimEnter so it's not called too early)
 augroup ("marks", {})
 autocmd ("VimEnter", {
 	group = "marks",
@@ -104,12 +104,8 @@ keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
 
 -- make cnext loop back https://vi.stackexchange.com/a/8535
-keymap(
-	"n",
-	"gq",
-	[[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]],
-	{ desc = "next quickfix item" }
-)
+-- stylua: ignore
+keymap( "n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]], { desc = "next quickfix item" })
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickfix list" })
 
 -- Leap
@@ -503,7 +499,7 @@ autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
--- Simple version of the delaytrain plugin
+-- Simple version of the delaytrain.nvim
 for _, key in ipairs { "x", "h", "l" } do
 	local timeout = 4000
 	local maxUsage = 10

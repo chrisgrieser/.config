@@ -3,9 +3,9 @@ require("lua.utils")
 -- INFO This is essentially an implementation of the inspired by the macOS app
 -- [quitter](https://marco.org/apps), this module quits any app if long enough idle
 
--- CONFIG
+---CONFIG
 ---times after which apps should quit, in minutes. (Apps not in this list will
---simply be ignored and never quit automatically).
+---simply be ignored and never quit automatically).
 Thresholds = {
 	Slack = 15,
 	Obsidian = 90,
@@ -16,9 +16,10 @@ Thresholds = {
 	Alacritty = 20,
 	Lire = 2,
 	["Alfred Preferences"] = 15,
-	HammerspoonConsole = 1, 
-	Drafts = 3, -- has the extra condition of having no active Draft – see `quitter()`
-	Finder = 10, -- requires `defaults write com.apple.Finder QuitMenuItem 1`
+	["System Settings"] = 2,
+	["Hammerspoon Console"] = 2,
+	Drafts = 5, -- has extra condition of zero active Draft (see `quitter()`)
+	Finder = 10, -- requires making Finder quittable via `defaults write com.apple.Finder QuitMenuItem 1`
 }
 
 --------------------------------------------------------------------------------
@@ -45,8 +46,8 @@ end):start()
 
 -- INFO the console is not triggered by the app watcher, so using window filter
 Wf_hammerspoonConsole = Wf.new("Hammerspoon")
-	:subscribe(Wf.windowUnfocused, function() IdleApps["HammerspoonConsole"] = now() end)
-	:subscribe(Wf.windowFocused, function() IdleApps["HammerspoonConsole"] = nil end)
+	:subscribe(Wf.windowUnfocused, function() IdleApps["Hammerspoon Console"] = now() end)
+	:subscribe(Wf.windowFocused, function() IdleApps["Hammerspoon Console"] = nil end)
 
 ---OPTIONAL extra utility for Drafts.app
 ---@return number number of currently active Drafts
