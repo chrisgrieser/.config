@@ -57,45 +57,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>14116972-95C3-4E76-B226-50E53699FF6A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>206BC34E-F989-4F52-AC9F-EB75ED7604AC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>44B26A32-8706-4826-A472-870DFFC7881E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>24A5A826-7ED5-420E-A209-8D03D13C2F0E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>30BDE79A-EDB6-4D0B-B19A-CC25C363DFA5</key>
 		<array>
 			<dict>
@@ -122,19 +83,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>44B26A32-8706-4826-A472-870DFFC7881E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<array>
 			<dict>
@@ -153,19 +101,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>FF66A968-D0D7-445A-9114-B20E01E181C5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5933499F-2695-4601-9947-67ED427D2AFC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>14116972-95C3-4E76-B226-50E53699FF6A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -226,19 +161,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B986765C-128B-4B33-BDA1-7B8454A1F0FB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C129402F-060A-4E14-A919-D21FCE15A4A4</key>
 		<array>
 			<dict>
@@ -265,19 +187,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>CA4E71B9-829F-4DEF-993F-76F207281071</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>24A5A826-7ED5-420E-A209-8D03D13C2F0E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</key>
 		<array>
 			<dict>
@@ -296,19 +205,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A4A97FBA-5CBA-4449-9044-CFD69762CA19</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E0796B13-8AD2-474B-9E52-8C2D6FFC7A05</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B986765C-128B-4B33-BDA1-7B8454A1F0FB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1245,27 +1141,6 @@ last reboot | head -n 10 | cut -c 37-</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>ram</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📊 RAM</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>206BC34E-F989-4F52-AC9F-EB75ED7604AC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1344,160 +1219,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>2</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>44B26A32-8706-4826-A472-870DFFC7881E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>cpu</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📊 CPU</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>5933499F-2695-4601-9947-67ED427D2AFC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>3</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>14116972-95C3-4E76-B226-50E53699FF6A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>click-stats-app.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>90B736C7-5E78-47F5-9234-CC93A823F765</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>gpu</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📊 GPU</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>CA4E71B9-829F-4DEF-993F-76F207281071</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>4</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>24A5A826-7ED5-420E-A209-8D03D13C2F0E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>network</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📊 Network</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E0796B13-8AD2-474B-9E52-8C2D6FFC7A05</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>1</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>B986765C-128B-4B33-BDA1-7B8454A1F0FB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -1532,15 +1253,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>325</real>
 		</dict>
-		<key>14116972-95C3-4E76-B226-50E53699FF6A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>675</real>
-			<key>ypos</key>
-			<real>805</real>
-		</dict>
 		<key>16256A06-CEDA-44C4-A6E8-38C512624E63</key>
 		<dict>
 			<key>colorindex</key>
@@ -1549,24 +1261,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>206BC34E-F989-4F52-AC9F-EB75ED7604AC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>520</real>
-			<key>ypos</key>
-			<real>660</real>
-		</dict>
-		<key>24A5A826-7ED5-420E-A209-8D03D13C2F0E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>675</real>
-			<key>ypos</key>
-			<real>920</real>
 		</dict>
 		<key>30BDE79A-EDB6-4D0B-B19A-CC25C363DFA5</key>
 		<dict>
@@ -1606,15 +1300,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>205</real>
 		</dict>
-		<key>44B26A32-8706-4826-A472-870DFFC7881E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>670</real>
-			<key>ypos</key>
-			<real>690</real>
-		</dict>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
 			<key>colorindex</key>
@@ -1634,15 +1319,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<real>680</real>
 			<key>ypos</key>
 			<real>420</real>
-		</dict>
-		<key>5933499F-2695-4601-9947-67ED427D2AFC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>520</real>
-			<key>ypos</key>
-			<real>775</real>
 		</dict>
 		<key>6BF4A116-C3FE-4B51-BFF9-65DE98E2EAD1</key>
 		<dict>
@@ -1681,17 +1357,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<real>975</real>
 			<key>ypos</key>
 			<real>20</real>
-		</dict>
-		<key>90B736C7-5E78-47F5-9234-CC93A823F765</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>click stats menubar item</string>
-			<key>xpos</key>
-			<real>800</real>
-			<key>ypos</key>
-			<real>825</real>
 		</dict>
 		<key>9132689B-E107-4FA3-9CA5-181DAF3FD179</key>
 		<dict>
@@ -1738,15 +1403,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
-		<key>B986765C-128B-4B33-BDA1-7B8454A1F0FB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>680</real>
-			<key>ypos</key>
-			<real>1035</real>
-		</dict>
 		<key>C129402F-060A-4E14-A919-D21FCE15A4A4</key>
 		<dict>
 			<key>colorindex</key>
@@ -1765,15 +1421,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<key>ypos</key>
 			<real>685</real>
 		</dict>
-		<key>CA4E71B9-829F-4DEF-993F-76F207281071</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>520</real>
-			<key>ypos</key>
-			<real>890</real>
-		</dict>
 		<key>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</key>
 		<dict>
 			<key>colorindex</key>
@@ -1791,15 +1438,6 @@ du -sh ~/* | cut -c `echo $(($homef_length + 5))-`,-5</string>
 			<real>185</real>
 			<key>ypos</key>
 			<real>445</real>
-		</dict>
-		<key>E0796B13-8AD2-474B-9E52-8C2D6FFC7A05</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>520</real>
-			<key>ypos</key>
-			<real>1005</real>
 		</dict>
 		<key>EDEB1C89-49E1-443D-98F5-94AFC17DD1EC</key>
 		<dict>
