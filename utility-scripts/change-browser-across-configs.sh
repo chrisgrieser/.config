@@ -31,7 +31,6 @@ rg "$FROM_BROWSER" --files-with-matches |
 	grep -v "karabiner/karabiner.json" |
 	grep -v ".bttpreset" |
 	grep -v "chrome-internal-pages.json" |
-	grep -v "vivaldi-settings.json" |
 	grep -v "jxa.json" |
 	grep -v "$0" |
 	xargs -I {} sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" '{}'

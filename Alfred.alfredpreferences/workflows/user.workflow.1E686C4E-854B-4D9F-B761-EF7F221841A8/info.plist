@@ -668,7 +668,7 @@ end tell</string>
 				<key>keyword</key>
 				<string>rss</string>
 				<key>subtext</key>
-				<string>to Inoreader</string>
+				<string>to Inoreader. (leave empty to add current browser tab)</string>
 				<key>text</key>
 				<string>Add RSS Feed</string>
 				<key>withspace</key>
@@ -851,7 +851,7 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>

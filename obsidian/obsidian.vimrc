@@ -59,7 +59,7 @@ nmap zl :contextMenu
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
 nmap ge :nextSuggestion
 
-" done via Obsdian Hotkeys, so they also work in Preview Mode
+" done via Obsidian Hotkeys, so they also work in Preview Mode
 " nmap <C-h> :back
 " nmap <C-l> :forward
 " nmap <C-j> :nextHeading
@@ -235,23 +235,12 @@ exmap altBuffer obcommand grappling-hook:alternate-note
 nmap <CR> :altBuffer
 
 """"""""""""""""""""""
-" Terminal
-""""""""""""""""""""""
-" requires Obsidian terminal plugin
-
-exmap open-terminal obcommand obsidian-terminal-plugin:open-terminal
-" exmap edit-in-terminal obcommand obsidian-terminal-plugin:open-terminal-editor
-nmap 6 :open-terminal
-
-
-""""""""""""""""""""""
 " Comments
 """"""""""""""""""""""
 " basically ts-comment-string, i.e. using the appropriate comment syntax when in
 " a code block
-
-exmap betterComment obcommand contextual-comments:advanced-comments
-nmap qq :betterComment
+exmap contextualComment obcommand contextual-comments:advanced-comments
+nmap qq contextualCommentomment
 
 """"""""""""""""""""""
 " Folding

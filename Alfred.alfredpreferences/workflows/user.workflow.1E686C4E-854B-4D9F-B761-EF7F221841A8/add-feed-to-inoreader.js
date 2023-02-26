@@ -5,6 +5,14 @@ function run(argv) {
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
 
-	const url = "https://www.inoreader.com/search/feeds/" + encodeURIComponent(argv[0]);
-	app.openLocation(url);
+	//───────────────────────────────────────────────────────────────────────────
+
+	const url = argv[0];
+	if (!url) {
+
+	}
+
+
+	const inoreaderURL = "https://www.inoreader.com/search/feeds/" + encodeURIComponent(url);
+	app.openLocation(inoreaderURL);
 }
