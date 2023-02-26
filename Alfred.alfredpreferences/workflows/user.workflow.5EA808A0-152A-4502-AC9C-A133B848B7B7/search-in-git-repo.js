@@ -51,6 +51,9 @@ const fileArray = app
 			case "yml":
 				iconObj.path += "yaml.png";
 				break;
+			case "zsh":
+				iconObj.path += "sh.png";
+				break;
 			case "scss":
 				iconObj.path += "css.png";
 				break;
