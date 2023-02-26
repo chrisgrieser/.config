@@ -693,7 +693,7 @@
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>`grep -i` from Text</string>
+				<string>grep</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>

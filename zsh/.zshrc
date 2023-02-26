@@ -1,5 +1,8 @@
-printf '\33c\e[3J' # remove last login message https://stackoverflow.com/a/69915614
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 
+# printf '\33c\e[3J' # remove last login message https://stackoverflow.com/a/69915614
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 CONFIG=()
 CONFIG+=('load_plugins')
@@ -28,3 +31,6 @@ for config_file in "${CONFIG[@]}"; do
 	# shellcheck disable=1090
 	source "$DOTFILE_FOLDER/zsh/$config_file.zsh"
 done
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"

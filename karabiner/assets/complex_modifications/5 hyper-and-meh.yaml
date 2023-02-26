@@ -62,12 +62,12 @@ rules:
           modifiers: { mandatory: [control, command, shift, option] }
         to:
           - shell_command: | # opens the unified trash (iCloud trash + user trash)
-              osascript -e '
+              osascript -e'
                 tell application "Finder"
                   activate
                   open the trash
-              end tell '
-          - {key_code: vk_none, hold_down_milliseconds: 150}
+                end tell'
+          - { key_code: vk_none, hold_down_milliseconds: 150 }
           - key_code: "2" # list view
             modifiers: [command]
       # Hyper + F: Open $WD / $DOTFILE_FOLDER
@@ -76,12 +76,17 @@ rules:
           key_code: f
           modifiers: { mandatory: [control, command, shift, option] }
         to:
-          # with this method, it's not opened in a new window
+          # using Finder via Applescript instead of `open` to open in the same
+          # window instead of creating a new one
           - shell_command: |
-              target1="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-              target2="$HOME/.config/"
-              currentWindow=$(osascript -e 'tell application "Finder" to return POSIX path of (target of window 1 as alias)'))
-
+              WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+              DOTFILE_FOLDER="$HOME/.config/"
+              currentWindow=$(osascript -e 'tell application "Finder" to return POSIX path of (insertion location as alias)')
+              if [[ "$currentWindow" != "$WD" ]] ; then
+                target="$WD"
+              else
+                target="$DOTFILE_FOLDER"
+              fi
               osascript -e "
                 set the_folder to (\"$target\") as POSIX file
                 tell application \"Finder\"

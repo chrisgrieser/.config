@@ -20,7 +20,7 @@ on run
 			on error
 				set clipboardPreserved to false
 			end try
-			set the clipboard to POSIX path of (target of window 1 as alias)
+			set the clipboard to POSIX path of (insertion location as alias)
 		end tell
 
 		tell application "Alacritty" to activate
