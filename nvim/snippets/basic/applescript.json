@@ -8,10 +8,10 @@
 		"body": [
 			"tell application \"Finder\"",
 			"\tif ((count windows) is 0) then return \"no window\"",
-			"\treturn POSIX path of (target of window 1 as alias)",
+			"\treturn POSIX path of (insertion location as alias)",
 			"end tell"
 		],
-		"description": "desc"
+		"description": "`insertion locatin` seems to be more reliabe: https://apple.stackexchange.com/a/68901"
 	},
 	"function": {
 		"prefix": "function",

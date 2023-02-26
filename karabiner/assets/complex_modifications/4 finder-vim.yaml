@@ -679,7 +679,7 @@ rules:
         from: {key_code: n}
         to_if_alone:
           - shell_command: |
-              folder=$(osascript -e 'tell application "Finder" to return POSIX path of (target of Finder window 1 as alias)')
+              folder=$(osascript -e 'tell application "Finder" to return POSIX path of (insertion location as alias)')
               newFile="$folder/new-file"
               while [[ -e "$newFile" ]] ; do
                 newFile="$newFile-1"
