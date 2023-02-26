@@ -18,7 +18,7 @@ const fileArray = app
 		PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 		cd "${dotfileFolder}"
 		fd --type=file --hidden --no-ignore \\
-			-E "Alfred.alfredpreferences/**" \\
+			-E "Alfred.alfredpreferences" \\
 			-E "alacritty/colors/*" \\
 			-E "hammerspoon/Spoons/*" \\
 			-E "*/vale/styles/*/*.yml" \\
@@ -112,8 +112,15 @@ const folderArray = app
 		`
 		PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 		cd "${dotfileFolder}" ;
-		fd --type=directory --hidden --no-ignore
-	`)
+		fd --type=directory --hidden --no-ignore \\
+			-E "Alfred.alfredpreferences/**" \\
+			-E "**/*.app/*" \\
+			-E "karabiner/automatic_backups" \\
+			-E "zsh/plugins/*" \\
+			-E "nvim/my-plugins/*" \\
+			-E ".git" \\
+	`,
+	)
 	.split("\r")
 	.map(fPath => {
 		const parts = fPath.split("/");
