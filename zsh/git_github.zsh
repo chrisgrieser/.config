@@ -221,6 +221,7 @@ function gdf() {
 	echo "copy [h]ash of last commit w/ file"
 	print "[a]bort\033[0m"
 
+	echo "> "
 	read -r -k 1 DECISION
 	# shellcheck disable=SC2193
 	if [[ "$DECISION:l" == "c" ]]; then
