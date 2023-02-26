@@ -1,6 +1,6 @@
 #!/usr/bin/env osascript
 
-# has to be a separate script, since the next script is still considered active
+# INFO has to be a separate script, since the next script is still considered active
 # and therefore won't run before alacritty is quit.
 on run
 	if application "Alacritty" is not running then return "not-running"
