@@ -1,0 +1,92 @@
+{
+	"items": [
+		{
+			"title": "⚙️ General",
+			"arg": "vivaldi://settings/general/",
+			"uid": "0"
+		},
+		{
+			"title": "☁️ Sync",
+			"match": "account sync login",
+			"arg": "vivaldi://settings/sync/",
+			"uid": "1"
+		},
+		{
+			"title": "🖌️ Themes",
+			"match": "themes color dark light mode",
+			"arg": "vivaldi://settings/appearance/",
+			"uid": "2"
+		},
+		{
+			"title": "🏁 Start Page",
+			"match": "speed dial start page",
+			"arg": "vivaldi://settings/startpage/",
+			"uid": "3"
+		},
+		{
+			"title": "🗂️ Tab",
+			"match": "tab stack tabs",
+			"arg": "vivaldi://settings/tabs/",
+			"uid": "4"
+		},
+		{
+			"title": "🪟 Panel",
+			"arg": "vivaldi://settings/panel/",
+			"uid": "5"
+		},
+		{
+			"title": "🔲 Address Bar",
+			"match": "address bar url",
+			"arg": "vivaldi://settings/addressbar/",
+			"uid": "6"
+		},
+		{
+			"title": "🔖 Bookmarks",
+			"arg": "vivaldi://settings/",
+			"uid": "7"
+		},
+		{
+			"title": "🔍 Search",
+			"arg": "vivaldi://settings/search/",
+			"uid": "8"
+		},
+		{
+			"title": "⛓️ Quick Commands",
+			"match": "quick commands chain",
+			"arg": "vivaldi://settings/qc/",
+			"uid": "9"
+		},
+		{
+			"title": "⌨️ Keyboard",
+			"match": "keyboard hotkeys shortcuts",
+			"arg": "vivaldi://settings/keyboard/",
+			"uid": "10"
+		},
+		{
+			"title": "🖱️ Mouse",
+			"match": "mouse gestues rocker",
+			"arg": "vivaldi://settings/mouse/",
+			"uid": "11"
+		},
+		{
+			"title": "🛡️ Pricacy and Security",
+			"arg": "vivaldi://settings/privacy/",
+			"uid": "12"
+		},
+		{
+			"title": "⬇️ Downloads",
+			"arg": "vivaldi://settings/downloads/",
+			"uid": "13"
+		},
+		{
+			"title": "🌐 Webpages",
+			"arg": "vivaldi://settings/webpages/",
+			"uid": "14"
+		},
+		{
+			"title": "🖥️ Network",
+			"arg": "vivaldi://settings/network/",
+			"uid": "15"
+		}
+	]
+}
