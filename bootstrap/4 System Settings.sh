@@ -8,7 +8,6 @@
 # ask for permissions upfront
 sudo -v
 
-
 #-------------------------------------------------------------------------------
 # System Prefs
 #-------------------------------------------------------------------------------
@@ -42,12 +41,8 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Libr
 # other settings
 defaults write com.apple.finder FXEnableExtensionChangeWarning -int 0
 defaults write com.apple.finder WarnOnEmptyTrash -int 0
-
-# make finder quittable
-defaults write com.apple.finder QuitMenuItem -bool true
-
-# disable desktop icons & make desktop unfocussable
-defaults write com.apple.finder CreateDesktop false
+defaults write com.apple.finder QuitMenuItem -bool true # make finder quittable
+defaults write com.apple.finder CreateDesktop false # disable desktop icons & make desktop unfocussable
 
 # Automatically open a new Finder window when a volume is mounted
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
@@ -75,16 +70,13 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
 
 # Views
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1 # bigger icons
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool false
 defaults write com.apple.finder ShowStatusBar -bool false
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
-
-#List view as default
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
-# Show the ~/Library folder
-chflags nohidden ~/Library
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv" # List view as default
+chflags nohidden ~/Library # Show the ~/Library folder
 
 # search always current directory
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
@@ -98,7 +90,6 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 killall Finder
 
 #───────────────────────────────────────────────────────────────────────────────
-
 
 # these three need restart
 # mouse speed: 3 = max speed from System Preferences
@@ -150,7 +141,7 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 defaults -currentHost write com.apple.screensaver showClock -int 0
 
 # screenshots
-defaults write com.apple.screencapture disable-shadow -bool true
+defaults write com.apple.screencapture disable-shadow -bool false
 defaults write com.apple.screencapture location -string "$WD"
 defaults write com.apple.screencapture type -string "png"
 killall SystemUIServer
@@ -158,19 +149,12 @@ killall SystemUIServer
 # App Store Update freq
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 2
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
-# Download newly available updates in background
-defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
-# Turn on app auto-update
-defaults write com.apple.commerce AutoUpdate -bool true
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1 # Download newly available updates in background
+defaults write com.apple.commerce AutoUpdate -bool true          # Turn on app auto-update
 
-# Prevent Photos from opening automatically when devices are plugged in
-defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
-
-# Disable the crash reporter
-defaults write com.apple.CrashReporter DialogType -string "none"
-
-# Set Help Viewer windows to non-floating mode
-defaults write com.apple.helpviewer DevMode -bool true
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true # Prevent Photos from opening automatically when devices are plugged in
+defaults write com.apple.CrashReporter DialogType -string "none"             # Disable the crash reporter
+defaults write com.apple.helpviewer DevMode -bool true                       # Set Help Viewer windows to non-floating mode
 
 # Energy Saver Settings
 sudo pmset displaysleep 30 # minutes till display sleep
@@ -196,9 +180,6 @@ defaults write org.gpgtools.common DisableKeychain -bool yes
 # Top right → Notification Center
 defaults write com.apple.dock wvous-tr-corner -int 12
 defaults write com.apple.dock wvous-tr-modifier -int 0
-# Bottom right → Quick Notes (Trigger for Hammerspoon)
-defaults write com.apple.dock wvous-br-corner -int 14
-defaults write com.apple.dock wvous-br-modifier -int 0
 
 killall Dock
 
@@ -206,8 +187,7 @@ killall Dock
 #----------------
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
-# disable automatic backups
-sudo tmutil disable
+sudo tmutil disable # disable automatic backups
 
 # Safari
 #--------------------------------------
@@ -226,22 +206,17 @@ defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
 defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
 
-# Download path
-defaults write com.apple.Safari DownloadsPath -string "$WD"
+defaults write com.apple.Safari DownloadsPath -string "$WD" # Download path
 
 # Activity Monitor
 #------------------
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
-# Show all processes in Activity Monitor
-defaults write com.apple.ActivityMonitor ShowCategory -int 0
-# Sort Activity Monitor results by CPU usage
-defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+defaults write com.apple.ActivityMonitor ShowCategory -int 0 # Show all processes in Activity Monitor
+defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage" # Sort Activity Monitor results by CPU usage
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 # TextEdit
 #------------------
-# Use plain text mode for new TextEdit documents
-defaults write com.apple.TextEdit RichText -int 0
-# Open and save files as UTF-8 in TextEdit
-defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit RichText -int 0 # Use plain text mode for new TextEdit documents
+defaults write com.apple.TextEdit PlainTextEncoding -int 4 # Open and save files as UTF-8 in TextEdit
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4

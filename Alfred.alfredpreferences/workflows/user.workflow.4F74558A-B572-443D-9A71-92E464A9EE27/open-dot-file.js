@@ -18,7 +18,7 @@ const fileArray = app
 		PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 		cd "${dotfileFolder}"
 		fd --type=file --hidden --no-ignore \\
-			-E "Alfred.alfredpreferences" \\
+			-E "Alfred.alfredpreferences/**" \\
 			-E "alacritty/colors/*" \\
 			-E "hammerspoon/Spoons/*" \\
 			-E "*/vale/styles/*/*.yml" \\
@@ -108,7 +108,12 @@ const fileArray = app
 	});
 
 const folderArray = app
-	.doShellScript(`find "${dotfileFolder}" -type d -not -path "**/.git**" -not -path "**/node_modules**"`)
+	.doShellScript(
+		`
+		PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+		cd "${dotfileFolder}" ;
+		fd --type=directory --hidden --no-ignore
+	`)
 	.split("\r")
 	.map(fPath => {
 		const parts = fPath.split("/");

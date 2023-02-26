@@ -17,10 +17,8 @@ setopt INTERACTIVE_COMMENTS
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 xcode-select --install # install core CLIs like git for homebrew
 
-# get passwords
-brew install pinentry-mac pass gnupg
-
 # Install Essential Apps
+brew install pinentry-mac pass gnupg # passwords
 brew install --no-quarantine alfred hammerspoon neovim alacritty karabiner-elements brave-browser
 brew install --no-quarantine --cask neovide
 

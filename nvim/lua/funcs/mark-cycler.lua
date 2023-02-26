@@ -20,6 +20,7 @@ end
 
 function M.gotoMark()
 	if g.markOneGo == nil then g.markOneGo = true end
+	local markToGo
 
 	-- selene: allow(if_same_then_else) --- more readable this way
 	if g.markOneGo and globalMarkIsSet(marks[1]) then
@@ -46,6 +47,11 @@ function M.setMark()
 	g.markOne = not g.markOne
 end
 
+function M.clearMarks()
+	for _, m in pairs(marks) do
+		vim.cmd.delmarks(m)	
+	end
+end
 --------------------------------------------------------------------------------
 
 return M
