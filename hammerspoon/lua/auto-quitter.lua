@@ -12,9 +12,11 @@ Thresholds = {
 	Mimestream = 5,
 	Discord = 180,
 	BusyCal = 3,
-	Neovide = 180,
+	Neovide = 120,
+	Alacritty = 20,
+	Lire = 2,
 	["Alfred Preferences"] = 15,
-	Hammerspoon = 1, -- the console, not Hammerspoon itself
+	HammerspoonConsole = 1, 
 	Drafts = 3, -- has the extra condition of having no active Draft – see `quitter()`
 	Finder = 10, -- requires `defaults write com.apple.Finder QuitMenuItem 1`
 }
@@ -32,6 +34,7 @@ end
 ---log times when an app has been deactivated
 DeactivationWatcher = Aw.new(function(app, event)
 	if not app or app == "" then return end -- safeguard for special apps
+	app = app:lower() -- for consistency with some apps, lowercase
 
 	if event == Aw.deactivated then
 		IdleApps[app] = now()
@@ -42,8 +45,8 @@ end):start()
 
 -- INFO the console is not triggered by the app watcher, so using window filter
 Wf_hammerspoonConsole = Wf.new("Hammerspoon")
-	:subscribe(Wf.windowUnfocused, function() IdleApps["Hammerspoon"] = now() end)
-	:subscribe(Wf.windowFocused, function() IdleApps["Hammerspoon"] = nil end)
+	:subscribe(Wf.windowUnfocused, function() IdleApps["HammerspoonConsole"] = now() end)
+	:subscribe(Wf.windowFocused, function() IdleApps["HammerspoonConsole"] = nil end)
 
 ---OPTIONAL extra utility for Drafts.app
 ---@return number number of currently active Drafts

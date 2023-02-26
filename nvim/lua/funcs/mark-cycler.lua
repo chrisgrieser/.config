@@ -49,7 +49,7 @@ end
 
 function M.clearMarks()
 	for _, m in pairs(marks) do
-		vim.cmd.delmarks(m)	
+		vim.cmd("delmarks " .. m)
 	end
 end
 --------------------------------------------------------------------------------
