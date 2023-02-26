@@ -9,9 +9,8 @@ function run(argv) {
 
 	const url = argv[0];
 	if (!url) {
-
+		url
 	}
-
 
 	const inoreaderURL = "https://www.inoreader.com/search/feeds/" + encodeURIComponent(url);
 	app.openLocation(inoreaderURL);
