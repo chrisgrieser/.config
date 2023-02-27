@@ -98,7 +98,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.google.de/search?q={query}</string>
+				<string>https://www.google.com/search?q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
