@@ -1,0 +1,18 @@
+set clipboard=unnamed
+
+nnoremap Y y$
+nnoremap U <C-r>
+vnoremap U <C-r>
+
+noremap H ^
+noremap L $
+noremap J 5j
+noremap K 5k
+
+nnoremap ü mzlblgueh~`z
+nnoremap M J
+
+nnoremap <Space> "_ciw
+nnoremap <S-Space> "_daw
+
+vnoremap V j
