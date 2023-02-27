@@ -16,10 +16,10 @@ ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide u
 ---@return boolean|nil
 function CheckSize(win, size)
 	if not win then return nil end
-	local invalidWinsByTitle = { -- windows which cannot be resized
-		"Copy",
-		"Move",
-		"Delete",
+	local invalidWinsByTitle = { -- windows which can/should not be resized
+		"Copy", -- Finder windows
+		"Move", -- Finder windows
+		"Delete", -- Finder windows
 		"System Settings",
 		"Transmission",
 		"Twitter",
@@ -55,18 +55,6 @@ local function toggleDraftsSidebar(draftsWin)
 	end)
 end
 
----@param highlightsWin hs.window
-local function toggleHighlightsSidebar(highlightsWin)
-	RunWithDelays(0.3, function()
-		local highlights_w = highlightsWin:frame().w
-		local screen_w = highlightsWin:screen():frame().w
-		local highlightsApp = hs.application("Highlights")
-		highlightsApp:activate()
-		local mode = highlights_w / screen_w > 0.6 and "Show" or "Hide"
-		highlightsApp:selectMenuItem { "View", mode .. " Sidebar" }
-	end)
-end
-
 -- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 ---@param obsiWin hs.window
 local function toggleObsidianSidebar(obsiWin)
@@ -94,14 +82,11 @@ function ToggleWinSidebar(win)
 		toggleDraftsSidebar(win)
 	elseif appOfWin == "Obsidian" then
 		toggleObsidianSidebar(win)
-	elseif appOfWin == "Highlights" then
-		toggleHighlightsSidebar(win)
 	end
 end
 
----show the sidebars of OBsidian, Drafts, and Highlights
+---show the sidebars of Obsidian and Drafts
 function ShowAllSidebars()
-	if AppIsRunning("Highlights") then App("Highlights"):selectMenuItem { "View", "Show Sidebar" } end
 	OpenLinkInBackground("obsidian://advanced-uri?eval=this.app.workspace.rightSplit.expand%28%29")
 	OpenLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 end
