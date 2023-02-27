@@ -156,7 +156,7 @@ end)
 
 HomeWakeWatcher = caff
 	.new(function(event)
-		if IsAtOffice() or (not (event == caff.screensDidWake) and not (event == caff.systemDidWake)) then
+		if IsAtOffice() then
 			return
 		end
 
