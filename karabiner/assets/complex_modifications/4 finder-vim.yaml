@@ -693,14 +693,13 @@ rules:
         to:
           - shell_command: |
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
-              lastFourChars=$(echo "$selection" | rev | cut -c-4 | rev)")
+              lastFourChars=$(echo "$selection" | rev | cut -c-4 | rev)
               if [[ "$lastFourChars" == "-bkp" ]]; then
-                newName=$(echo "$selection" | rev | cut -c5- | rev) # can't use bash expansion in karabiner shell
+                newName=$(echo "$selection" | rev | cut -c5- | rev)
                 mv "$selection" "$newName"
               else
                 mv "$selection" "$selection-bkp"
               fi
-              osascript -e 'tell application "Finder" to tell front window to update every item'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = follow symlink
       - type: basic
