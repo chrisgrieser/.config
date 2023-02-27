@@ -9,7 +9,7 @@ elif [[ $(echo "$VOLUME_NAME" | wc -l) -lt 1 ]] ; then
 	exit 1
 fi
 
-echo "Backing up to $VOLUME_NAME…"
+print "\033[1;34mBacking up to $VOLUME_NAME…\033[0m"
 
 DEVICE_NAME="$(scutil --get ComputerName)"
 
@@ -38,18 +38,21 @@ function bkp() {
 
 # CONTENT TO BACKUP
 
-# WARNING each command has to sync to individual folders, since otherwise
+# WARN each command has to sync to individual folders, since otherwise
 # the --delete option will override the previous contents
-# INFO All paths needs to end with a slash
+# INFO All source paths needs to end with a slash
 # INFO locations defined in zshenv
 bkp "$HOME/Library/Preferences/" ./Library/Preferences
 bkp "$HOME/RomComs/" ./Homefolder/RomComs
-bkp "$DOTFILE_FOLDER" ./Homefolder/config
-bkp "$VAULT_PATH" ./Homefolder/main-vault
-bkp "$ICLOUD" ./iCloud-Folder
-bkp "$PASSWORD_STORE_DIR" ./Homefolder/password-store
+bkp "$DOTFILE_FOLDER/" ./Homefolder/config
+bkp "$VAULT_PATH/" ./Homefolder/main-vault
+bkp "$ICLOUD/" ./iCloud-Folder
+bkp "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
 bkp "$HOME/.gnupg/" ./Homefolder/gnupg
 
+echo
+print "\033[1;34m----------------------------------------------------\033[0m"
+echo
 #───────────────────────────────────────────────────────────────────────────────
 
 # Log (on Mac)
@@ -72,3 +75,9 @@ osascript -e'
 
 # Notify on Completion
 osascript -e 'display notification "" with title "Backup finished." sound name "Blow"'
+
+#───────────────────────────────────────────────────────────────────────────────
+
+sleep 1.2
+print "\033[1;34mEjecting $VOLUME_NAME.\033[0m"
+diskutil eject "$VOLUME_NAME"
