@@ -71,6 +71,7 @@ const fileArray = app
 			case "md":
 			case "js":
 			case "ts":
+			case "log":
 			case "yaml":
 			case "config":
 			case "blank":
