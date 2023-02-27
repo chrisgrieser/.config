@@ -148,7 +148,7 @@ end
 function QuitFinderIfNoWindow()
 	-- quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 	local finder = hs.application("Finder")
-	if finder and #finder:allWindows() == 0 then finder:kill() end
+	if finder and #(finder:allWindows()) == 0 then finder:kill() end
 end
 
 ---@param appNames string|string[]

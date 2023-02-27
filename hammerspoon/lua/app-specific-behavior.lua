@@ -119,7 +119,8 @@ Wf_browser = Wf.new("Vivaldi")
 Wf_browser_all = Wf.new({ "Vivaldi" })
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(Wf.windowDestroyed, function()
-		if #Wf_browser_all:getWindows() == 0 then App("Vivaldi"):hide() end
+		local app = App("Vivaldi")
+		if app and #(app:allWindows()) == 0 then app:hide() end
 	end)
 
 --------------------------------------------------------------------------------
