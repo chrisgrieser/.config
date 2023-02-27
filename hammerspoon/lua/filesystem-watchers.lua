@@ -32,7 +32,7 @@ BookmarkWatcher = Pw(sourceBookmarkPath, function()
 	bookmarks.roots.trash = nil -- remove Vivaldi's trash folder for Alfred
 	local success = hs.json.write(bookmarks, chromeBookmarksPath, false, true)
 	if not success then
-		Notify("⚠️ Bookmarks not correctly synced.")
+		Notify("🔖⚠️ Bookmarks not correctly synced.")
 		return
 	end
 
@@ -43,7 +43,7 @@ BookmarkWatcher = Pw(sourceBookmarkPath, function()
 	file:close()
 	WriteToFile(chromeStatePath, content)
 
-	print("✅ Bookmarks synced to Chrome Bookmarks")
+	print("🔖 Bookmarks synced to Chrome Bookmarks")
 end):start()
 
 --------------------------------------------------------------------------------

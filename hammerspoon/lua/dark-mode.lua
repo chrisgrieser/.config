@@ -9,7 +9,7 @@ local brightnessThreshhold = 90
 
 local function brightnessNotify()
 	local brightness = math.floor(hs.brightness.ambient())
-	Notify("Brightness: ", tostring(brightness))
+	Notify("☀️ Brightness: ", tostring(brightness))
 end
 
 -- notify with ambient brightness for Alfred
