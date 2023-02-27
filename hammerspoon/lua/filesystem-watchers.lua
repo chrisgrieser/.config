@@ -115,6 +115,7 @@ end):start()
 -- Redirects FROM File Hub
 local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
 WatcherActive = true -- to prevent recursion issues
+-- selene: allow(high_cyclomatic_complexity)
 FileHubWatcher = Pw(FileHub, function(paths, _)
 	for _, filep in pairs(paths) do
 		if isInSubdirectory(filep, FileHub) then return end
@@ -168,6 +169,11 @@ FileHubWatcher = Pw(FileHub, function(paths, _)
 			os.rename(filep, browserSettings .. "bonjourr-settings.json")
 			Notify("Bonjourr backup filed away.")
 
+		-- Inoreader
+		elseif fileName:match("Inoreader Feeds .*%.xml") then
+			os.rename(filep, browserSettings .. "Inoreader Feeds.opml")
+			Notify("Inoreader backup filed away.")
+
 		-- visualised keyboard layouts
 		elseif
 			fileName:match("base%-keyboard%-layout%.%w+")
@@ -186,7 +192,7 @@ end):start()
 -- auto-install Obsidian Alpha builds as soon as the file is downloaded
 ObsiAlphaWatcher = Pw(FileHub, function(files)
 	for _, file in pairs(files) do
-		-- needs delay and crdownload check, since the renaming is sometimes not picked up by hammerspoon
+		-- needs delay and `.crdownload` check, since the renaming is sometimes not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
 		RunWithDelays(0.5, function()
 			hs.execute([[cd "]] .. FileHub .. [[" || exit 1
@@ -198,7 +204,8 @@ ObsiAlphaWatcher = Pw(FileHub, function(files)
 				gunzip obsidian-*.*.*.asar.gz
 				while pgrep -q "Obsidian" ; do sleep 0.1; done
 				sleep 0.2
-				open -a "Obsidian"]])
+				open -a "Obsidian"
+			]])
 			-- close the created tab
 			Applescript([[
 				tell application "Vivaldi"

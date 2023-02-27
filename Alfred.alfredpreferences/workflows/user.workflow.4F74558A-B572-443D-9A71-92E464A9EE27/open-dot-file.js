@@ -123,8 +123,9 @@ const folderArray = app
 	`,
 	)
 	.split("\r")
-	.map(fPath => {
-		const parts = fPath.split("/");
+	.map(file => {
+		const fPath = dotfileFolder + file;
+		const parts = file.slice(0, -1).split("/");
 		const name = parts.pop();
 		let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
 		if (parentPart === ".") parentPart = "";

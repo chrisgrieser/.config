@@ -35,9 +35,9 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
-              - ^org\.chromium\.Chromium.* # no $ to also affect PWAs
-              - ^com\.brave\.Browser.*
-              - ^com\.vivaldi\.Vivaldi.*
+              - ^org\.chromium\.Chromium.+ # PWAs
+              - ^com\.brave\.Browser.+
+              - ^com\.vivaldi\.Vivaldi.+
               - ^com.reederapp.5.macOS$
               - ^maccatalyst\.com\.lireapp\.macOS$
       # Drafts: R-Click opens link in background

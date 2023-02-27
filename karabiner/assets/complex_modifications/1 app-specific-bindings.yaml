@@ -570,7 +570,7 @@ rules:
           - type: frontmost_application_if
             file_paths: ["[Nn]eovide"]
   #─────────────────────────────────────────────────────────────────
-  - description: "(Apps) Cleanshot: Esc -> close/copy annotation image"
+  - description: "(Apps) Cleanshot"
     manipulators:
       # copy to clipboard and quit
       - type: basic
