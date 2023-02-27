@@ -4,11 +4,19 @@ rules:
     # done here to be able to quickly change it back, also using applescript
     # avoids the needs for media-key forwarding
     manipulators:
-      # Open Spotify
+      # Open Spotify, if already open, hide it
       - type: basic
         from: { key_code: f3 }
         to:
-          - shell_command: open -a "Spotify"
+          - shell_command: |
+              osascript -e '
+                tell application "Spotify"
+                  if it is frontmost then
+                    tell application "System Events" to tell process "Spotify" to set visible to false
+                  else
+                    activate
+                  end if
+                end tell'
       # Like (only feature still working with Spotify-TUI)
       - type: basic
         from: { key_code: f4 }
@@ -27,7 +35,7 @@ rules:
                 open -a "Spotify"
                 sleep 0.2
                 i=$((i + 1))
-                [[ $i -gt 30 ]] && exit 1
+                [[ $i -gt 15 ]] && exit 1
               done
               osascript -e 'tell application "Spotify" to previous track'
       # Play/Pause
@@ -40,7 +48,7 @@ rules:
                 open -a "Spotify"
                 sleep 0.2
                 i=$((i + 1))
-                [[ $i -gt 30 ]] && exit 1
+                [[ $i -gt 15 ]] && exit 1
               done
               osascript -e 'tell application "Spotify" to playpause'
       # Forward
@@ -53,6 +61,6 @@ rules:
                 open -a "Spotify"
                 sleep 0.2
                 i=$((i + 1))
-                [[ $i -gt 30 ]] && exit 1
+                [[ $i -gt 15 ]] && exit 1
               done
               osascript -e 'tell application "Spotify" to next track'
