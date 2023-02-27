@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "26/02/2023, 23:45:24",
-	"time": 1677451524952,
+	"@time": "27/02/2023, 10:27:39",
+	"time": 1677490059249,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -26,6 +26,24 @@
 			"passKeys": "? ",
 			"pattern": ":https://github.com/"
 		}
+	],
+	"extAllowList": [
+		"# Bonjourr",
+		"dlnejlppicbjfcfcedcflplfjajinajd",
+		"",
+		"# modified versions of X New Tab and PDF Viewer,",
+		"# NewTab Adapter, and Shortcuts Forwarding Tool",
+		"hdnehngglnbnehkfcidabjckinphnief",
+		"nacjakoppgmdcpemlfnfegmlhipddanj",
+		"cglpcedifkgalfdklahhcchnjepcckfn",
+		"clnalilglegcjmlgenoppklmfppddien",
+		"# EdgeTranslate",
+		"bocbaocobfecmglnmeaeppambideimao",
+		"bfdogplmndidlpjfhoijckpakkdjkkil",
+		"# SalaDict",
+		"cdonnmffkdaoajfknoeeecmchibpmkmg",
+		"idghocbbahafpfhjnfhpbfbmpegphmmp",
+		""
 	],
 	"grabBackFocus": true,
 	"keyLayout": 144,
@@ -118,7 +136,7 @@
 		".HUD { ",
 		"  max-width: 80vw;",
 		"  width: auto;",
-		"  min-width: 600px;",
+		"  min-width: 200px;",
 		"  height: 21px;",
 		"  line-height: 1;",
 		"  font-size: 18px;",

@@ -9,7 +9,7 @@
 
 /* global document, window */
 const url = document.URL.replace(
-	/https?:\/\/.*\.zoom\.us\/j\/(\w+)\?pwd=(\w+)$/,
+	/https?:\/\/.*\.zoom\.us\/j\/(\w+)\?pwd=(\w+)(#\w+)?$/,
 	"zoommtg://zoom.us/join?confno=$1&pwd=$2",
 );
 
