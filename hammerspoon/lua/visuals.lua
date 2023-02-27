@@ -1,10 +1,7 @@
 require("lua.utils")
-require("lua.window-management")
-require("lua.dark-mode")
 --------------------------------------------------------------------------------
 
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
--- this mostly round the corners in the bottom
 RoundedCorners = hs.loadSpoon("RoundedCorners")
 RoundedCorners.radius = 9
 RoundedCorners:start()
@@ -14,18 +11,9 @@ RoundedCorners:start()
 function HoleCover(arg)
 	if IsAtOffice() or IsProjector() then return end
 
-	if Cover1 then
-		Cover1:delete()
-		Cover1 = nil
-	end
-	if Cover2 then
-		Cover2:delete()
-		Cover2 = nil
-	end
-	if Cover3 then
-		Cover3:delete()
-		Cover3 = nil
-	end
+	if Cover1 then Cover1 = nil end
+	if Cover2 then Cover2 = nil end
+	if Cover3 then Cover3 = nil end
 	if arg == "remove" then return end
 
 	local bgColor
