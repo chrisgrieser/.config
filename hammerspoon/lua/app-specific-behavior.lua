@@ -352,8 +352,7 @@ Wf_script_editor = Wf
 	:subscribe(Wf.windowCreated, function(newWin)
 		if newWin:title() == "Open" then
 			Keystroke({ "cmd" }, "n")
-			RunWithDelays(0.3, function()
-Notify("beep")
+			RunWithDelays(0.2, function()
 				Keystroke({ "cmd" }, "v")
 				local win = App("Script Editor"):mainWindow() -- cannot use newWin, since it's the open dialog
 				MoveResize(win, Centered)
@@ -377,7 +376,10 @@ DiscordAppWatcher = Aw.new(function(appName, eventType)
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	if eventType == Aw.launched then
-		OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
+		-- stylua: ignore
+		RunWithDelays(1, function()
+			OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
+		end)
 	end
 
 	-- when focused, enclose URL in clipboard with <>
