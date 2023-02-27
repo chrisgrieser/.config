@@ -700,6 +700,7 @@ rules:
               else
                 mv "$selection" "$selection-bkp"
               fi
+              osascript -e 'tell application "Finder" to tell front window to update every item'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = follow symlink
       - type: basic
