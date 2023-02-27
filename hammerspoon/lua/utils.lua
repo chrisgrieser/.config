@@ -45,11 +45,24 @@ end
 ---@param url string
 function OpenLinkInBackground(url) hs.execute('open -g "' .. url .. '"') end
 
+---write to file
+---@param filePath any
+---@param str any
+function WriteToFile(filePath, str)
+	local file, err = io.open(filePath, "w")
+	if file then
+		file:write(str)
+		file:close()
+	else
+		print("Error:", err)
+	end
+end
+
 --------------------------------------------------------------------------------
 
 ---@return string
 local function deviceName()
-	-- hs.host.localizedName() is similar to `scutil --get ComputerName`, 
+	-- hs.host.localizedName() is similar to `scutil --get ComputerName`,
 	-- only native to hammerspoon and therefore a bit more reliable
 	local name, _ = hs.host.localizedName():gsub(".- ", "", 1)
 	return name
@@ -119,9 +132,9 @@ end
 ---@param appName string
 ---@return boolean
 function AppIsRunning(appName)
-	-- can't use ":isRunning()", since the application object is nil when it
-	-- wasn't running before
-	return hs.application(appName) ~= nil
+	local app = hs.application.get(appName)
+	if not app then return false end
+	return app:isRunning()
 end
 
 ---@param appName string

@@ -17,7 +17,7 @@ local function getVar()
 	elseif fn.mode():find("[Vv]") then
 		local prevReg = fn.getreg("z")
 		normal('"zy')
-		varname = fn.getreg("z")
+		varname = fn.getreg("z"):gsub('"', '//"')
 		fn.setreg("z", prevReg)
 	end
 	return varname

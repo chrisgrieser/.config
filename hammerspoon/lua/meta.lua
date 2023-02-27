@@ -14,7 +14,6 @@ hs.window.animationDuration = 0
 -- `hammerspoon://hs-reload` for reloading via Build System
 local reloadIndicator = "/tmp/hs-is-reloading"
 UriScheme("hs-reload", function()
-	if cons.hswindow() then cons.hswindow():close() end -- close console
 	hs.execute("touch " .. reloadIndicator)
 	hs.reload()
 	-- INFO will also run the systemStart function due to reload
@@ -28,6 +27,8 @@ function SystemStart()
 		-- use neovim automation to display the notification in neovim
 		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded.")' > /tmp/nvim-automation]])
 		return
+		-- to make reloads clearer in the console
+		print("\n---------------------------------------------------------------\n") 
 	else
 		QuitFinderIfNoWindow()
 		Notify("Hammerspoon started.")
