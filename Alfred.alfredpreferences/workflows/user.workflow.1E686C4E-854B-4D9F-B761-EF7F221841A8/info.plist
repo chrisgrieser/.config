@@ -842,7 +842,7 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -893,7 +893,7 @@ end tell</string>
 			<key>note</key>
 			<string>front window</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>

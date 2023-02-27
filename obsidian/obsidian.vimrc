@@ -240,9 +240,8 @@ nmap <CR> :altBuffer
 """"""""""""""""""""""
 " basically ts-comment-string, i.e. using the appropriate comment syntax when in
 " a code block
-unmap q
 exmap contextualComment obcommand contextual-comments:advanced-comments
-nmap qq contextualCommentomment
+nmap qq :contextualComment
 
 """"""""""""""""""""""
 " Folding
