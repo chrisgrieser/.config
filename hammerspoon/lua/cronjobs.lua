@@ -194,7 +194,7 @@ BiweeklyTimer = timer("02:00", "02d", function()
 		> "$DOTFILE_FOLDER/browser-extension-configs/list-of-extensions.txt"
 	]])
 	hs.loadSpoon("EmmyLua") -- so it runs not as often
-	peripheryBatteryCheck()
+	PeripheryBatteryCheck("Drafts")
 end, true)
 
 ProjectorScreensaverWatcher = caff.new(function(eventType)

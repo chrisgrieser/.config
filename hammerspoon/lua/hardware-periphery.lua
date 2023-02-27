@@ -4,18 +4,24 @@ require("lua.utils")
 -- BLUETOOTH 
 
 ---notifies & writes to Drafts if battery level of a connected Bluetooth device 
---is low. Works only for Apple Devices.
-function PeripheryBatteryCheck()
-	local warningLevel = 25
+---is low. Caveat: `hs.battery` seems to work only with Apple devices.
+---@param msgWhere string where the information on low battery level should be send. "Drafts"|"notify"
+function PeripheryBatteryCheck(msgWhere)
+	local warningLevel = 20
 	local devices = hs.battery.privateBluetoothBatteryInfo()
 	if not devices then return end
+
 	for _, device in pairs(devices) do
-		local percent = device.batteryPercentSingle
+		local percent = tonumber(device.batteryPercentSingle)
 		if percent < warningLevel then
 			local msg = device.name .. " Battery is low (" .. percent .. "%)"
-			Notify("⚠️", msg)
-			local draftsInbox = Home .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/battery.md"
-			WriteToFile(draftsInbox, msg)
+			if msgWhere == "Drafts" then
+				local draftsInbox = os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/battery.md"
+				WriteToFile(draftsInbox, msg)
+				print("⚠️", msg)
+			else
+				Notify("⚠️", msg)
+			end
 		end
 	end
 end
@@ -45,7 +51,6 @@ OpenSwimWatcher = hs.usb.watcher
 	:start()
 
 -- External Harddrive used for backups
--- TODO add some more functionality later
 ExternalHarddriveWatcher = hs.usb.watcher
 	.new(function(device)
 		if not (device.eventType == "added") then return end
@@ -53,7 +58,7 @@ ExternalHarddriveWatcher = hs.usb.watcher
 
 		local harddriveNames = {
 			externe_A = "ZY603 USB3.0 Device",
-			-- externe_B = "", TODO
+			-- externe_B = "", TODO write down the name I get my hands on it
 			externe_C = "Elements 2621",
 		}
 		for _, productName in pairs(harddriveNames) do

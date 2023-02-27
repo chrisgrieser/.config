@@ -93,7 +93,7 @@ function MovieModeLayout()
 	dockSwitcher(targetMode)
 	
 	SetDarkmode(true)
-	SpotifyDo("pause")
+	hs.spotify.pause()
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
 	SetDarkmode(true)

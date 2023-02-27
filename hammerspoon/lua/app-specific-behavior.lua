@@ -70,13 +70,6 @@ Wf_maxWindows = Wf.new(true):subscribe(Wf.windowUnfocused, function(win)
 	if CheckSize(win, Maximized) then win:application():hide() end
 end)
 
----play/pause spotify with Spotify (if running)
----@param toStatus string pause|play
-function SpotifyDo(toStatus)
-	if not (AppIsRunning("Spotify")) then return end
-	Applescript([[tell application "Spotify" to ]] .. toStatus)
-end
-
 -- auto-pause/resume Spotify on launch/quit of apps with sound
 SpotifyAppWatcher = Aw.new(function(appName, eventType)
 	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
@@ -84,10 +77,10 @@ SpotifyAppWatcher = Aw.new(function(appName, eventType)
 		return
 	end
 
-	if eventType == Aw.launched then
-		SpotifyDo("pause")
+	if eventType == Aw.launched and hs.spotify.isPlaying() then
+		hs.spotify.pause()
 	elseif eventType == Aw.terminated then
-		SpotifyDo("play")
+		hs.spotify.play()
 	end
 end):start()
 
