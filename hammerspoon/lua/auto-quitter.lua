@@ -18,7 +18,7 @@ Thresholds = {
 	Lire = 2,
 	["Alfred Preferences"] = 15,
 	["System Settings"] = 2,
-	["Hammerspoon Console"] = 2,
+	["Hammerspoon Console"] = 0.01,
 	Drafts = 5, -- has extra condition of zero active Draft (see `quitter()`)
 	Finder = 10, -- requires making Finder quittable via `defaults write com.apple.Finder QuitMenuItem 1`
 }
@@ -67,7 +67,7 @@ local function quitter(app)
 	if app == "Drafts" and getDraftsCount() > 0 then return end
 	print("AutoQuitter: Quitting " .. app)
 	IdleApps[app] = nil
-	if app == "Hammerspoon" then
+	if app == "Hammerspoon Console" then
 		hs.closeConsole()
 	else
 		hs.application(app):kill()
@@ -75,7 +75,7 @@ local function quitter(app)
 end
 
 ---check apps regularly and quit if idle for longer than their thresholds
-local checkIntervallSecs = 15
+local checkIntervallSecs = 5
 AutoQuitterTimer = hs.timer
 	.doEvery(checkIntervallSecs, function()
 		for app, lastActivation in pairs(IdleApps) do
