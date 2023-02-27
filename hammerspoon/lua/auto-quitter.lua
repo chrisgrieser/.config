@@ -18,7 +18,6 @@ Thresholds = {
 	Lire = 2,
 	["Alfred Preferences"] = 15,
 	["System Settings"] = 2,
-	["Hammerspoon Console"] = 0.01,
 	Drafts = 5, -- has extra condition of zero active Draft (see `quitter()`)
 	Finder = 10, -- requires making Finder quittable via `defaults write com.apple.Finder QuitMenuItem 1`
 }
@@ -44,11 +43,6 @@ DeactivationWatcher = Aw.new(function(app, event)
 	end
 end):start()
 
--- INFO the console is not triggered by the app watcher, hence using window filter
-Wf_hammerspoonConsole = Wf.new("Hammerspoon")
-	:subscribe(Wf.windowUnfocused, function() IdleApps["Hammerspoon Console"] = now() end)
-	:subscribe(Wf.windowFocused, function() IdleApps["Hammerspoon Console"] = nil end)
-
 ---OPTIONAL extra utility for Drafts.app
 ---@return number number of currently active Drafts
 local function getDraftsCount()
@@ -67,21 +61,19 @@ local function quitter(app)
 	if app == "Drafts" and getDraftsCount() > 0 then return end
 	print("AutoQuitter: Quitting " .. app)
 	IdleApps[app] = nil
-	if app == "Hammerspoon Console" then
-		hs.closeConsole()
-	else
-		hs.application(app):kill()
-	end
+	hs.application(app):kill()
 end
 
 ---check apps regularly and quit if idle for longer than their thresholds
-local checkIntervallSecs = 5
+local checkIntervallSecs = 15
 AutoQuitterTimer = hs.timer
 	.doEvery(checkIntervallSecs, function()
 		for app, lastActivation in pairs(IdleApps) do
+
 			-- can't do this with guard clause, since lua has no `continue`
 			local appHasThreshhold = Thresholds[app] ~= nil
 			local appIsRunning = hs.application.get(app)
+
 			if appHasThreshhold and appIsRunning then
 				local idleTimeSecs = now() - lastActivation
 				local thresholdSecs = Thresholds[app] * 60
