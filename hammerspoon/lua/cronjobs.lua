@@ -156,9 +156,8 @@ end)
 
 HomeWakeWatcher = caff
 	.new(function(event)
-		if IsAtOffice() then
-			return
-		end
+		if IsAtOffice() then return end
+		if (not (event == caff.screensDidWake) and not (event == caff.systemDidWake)) the
 
 		TwitterScrollUp()
 		hs.execute("sketchybar --set clock popup.drawing=true")
