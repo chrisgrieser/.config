@@ -12,7 +12,6 @@ noremap K 5k
 nnoremap ü mzlblgueh~`z
 nnoremap M J
 
-nnoremap <Space> "_ciw
-nnoremap <S-Space> "_daw
+nnoremap <Space> ciw
 
 vnoremap V j

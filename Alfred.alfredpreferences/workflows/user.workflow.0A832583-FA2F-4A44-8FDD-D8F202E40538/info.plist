@@ -65,6 +65,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>65E1B004-A584-4533-8D40-D1980841CCEF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B4B12447-191E-46B8-88E0-B6C12E7086A6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<array>
 			<dict>
@@ -284,6 +297,56 @@ osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>svim</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗️ Restart SketchyVim</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>65E1B004-A584-4533-8D40-D1980841CCEF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+brew services restart svim
+
+# HACK for https://github.com/FelixKratz/SketchyBar/issues/322
+sleep 2
+osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B4B12447-191E-46B8-88E0-B6C12E7086A6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -329,6 +392,17 @@ osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js
 			<key>ypos</key>
 			<real>445</real>
 		</dict>
+		<key>65E1B004-A584-4533-8D40-D1980841CCEF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>restart</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>610</real>
+		</dict>
 		<key>71149DFC-88DE-4E74-9FDA-F9336F759485</key>
 		<dict>
 			<key>colorindex</key>
@@ -346,6 +420,15 @@ osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js
 			<real>220</real>
 			<key>ypos</key>
 			<real>320</real>
+		</dict>
+		<key>B4B12447-191E-46B8-88E0-B6C12E7086A6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>610</real>
 		</dict>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<dict>
