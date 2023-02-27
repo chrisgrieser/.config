@@ -10,10 +10,11 @@ Thresholds = {
 	Slack = 15,
 	Obsidian = 90,
 	Mimestream = 5,
+	Highlights = 90,
 	Discord = 180,
 	BusyCal = 3,
-	neovide = 120,
-	alacritty = 20,
+	neovide = 120, -- needs lowercase
+	alacritty = 20,-- needs lowercase
 	Lire = 2,
 	["Alfred Preferences"] = 15,
 	["System Settings"] = 2,
@@ -35,7 +36,6 @@ end
 ---log times when an app has been deactivated
 DeactivationWatcher = Aw.new(function(app, event)
 	if not app or app == "" then return end -- safeguard for special apps
-	app = app:lower() -- for consistency with some apps, lowercase
 
 	if event == Aw.deactivated then
 		IdleApps[app] = now()
