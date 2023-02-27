@@ -5,7 +5,7 @@ return {
 		keys = { "q", "Q", { "q", mode = "x" } }, -- (mnemonic: [q]uiet text)
 		config = function()
 			require("Comment").setup {
-				ignore = "^$", -- ignore empty lines
+				-- ignore = "^$", -- ignore empty lines
 				opleader = {
 					line = "q",
 					block = "<Nop>",

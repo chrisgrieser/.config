@@ -5,7 +5,7 @@ opt.clipboard = "unnamedplus"
 
 -- keep the register clean
 keymap("n", "x", '"_x')
-keymap("n", "c", '"_c')
+keymap({"n", "x"}, "c", '"_c')
 keymap("n", "cc", '"_cc')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "paste without switching register" })
@@ -30,15 +30,13 @@ autocmd({ "CursorMoved", "VimEnter" }, {
 autocmd("TextYankPost", {
 	group = "yankImprovements",
 	callback = function()
-		-- highlighted yank
-		vim.highlight.on_yank { timeout = 1500 }
-
 		-- deletion does not need stickiness and also already shifts register, so
 		-- only saving the last yank is required
-		if vim.v.event.operator == "d" then
-			g.lastYank = fn.getreg('"')
-			return
-		end
+		if vim.v.event.operator == "d" then g.lastYank = fn.getreg('"') end
+		if vim.v.event.operator ~= "y" then return end
+
+		-- highlighted yank
+		vim.highlight.on_yank { timeout = 1500 }
 
 		-- sticky yank
 		setCursor(0, g.cursorPreYank)

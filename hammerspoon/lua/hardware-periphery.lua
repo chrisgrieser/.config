@@ -1,4 +1,26 @@
 require("lua.utils")
+
+--------------------------------------------------------------------------------
+-- BLUETOOTH 
+
+---notifies & writes to Drafts if battery level of a connected Bluetooth device 
+--is low. Works only for Apple Devices.
+function PeripheryBatteryCheck()
+	local warningLevel = 25
+	local devices = hs.battery.privateBluetoothBatteryInfo()
+	if not devices then return end
+	for _, device in pairs(devices) do
+		local percent = device.batteryPercentSingle
+		if percent < warningLevel then
+			local msg = device.name .. " Battery is low (" .. percent .. "%)"
+			Notify("⚠️", msg)
+			local draftsInbox = Home .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/battery.md"
+			WriteToFile(draftsInbox, msg)
+		end
+	end
+end
+
+
 --------------------------------------------------------------------------------
 -- USB WATCHER
 

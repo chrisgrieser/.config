@@ -43,9 +43,9 @@ keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "K", "2k")
 
 -- e,w,b make small movements, treating _-. as word boundaries
-keymap("", "w", "<Plug>CamelCaseMotion_w", { desc = "camelCase w" })
-keymap("", "e", "<Plug>CamelCaseMotion_e", { desc = "camelCase e" })
-keymap("", "b", "<Plug>CamelCaseMotion_b", { desc = "camelCase b" })
+keymap({"n", "x", "o"}, "w", "<Plug>CamelCaseMotion_w", { desc = "camelCase w" })
+keymap({"n", "x", "o"}, "e", "<Plug>CamelCaseMotion_e", { desc = "camelCase e" })
+keymap({"n", "x", "o"}, "b", "<Plug>CamelCaseMotion_b", { desc = "camelCase b" })
 
 -- add overscroll
 keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)" })

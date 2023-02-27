@@ -177,25 +177,6 @@ HomeWakeWatcher = caff
 	end)
 	:start()
 
--- Drafts to do if trackpadBattery is low
-local function trackpadBatteryCheck()
-	local warningLevel = 20
-	local trackpadPercent = hs.execute(
-		[[ioreg -c AppleDeviceManagementHIDEventService -r -l | grep -i trackpad -A 20 | grep BatteryPercent | cut -d= -f2 | cut -d' ' -f2]]
-	)
-	if not trackpadPercent then return end -- no trackpad connected
-	trackpadPercent = Trim(trackpadPercent)
-	if tonumber(trackpadPercent) < warningLevel then
-		local msg = "Trackpad Battery is low (" .. trackpadPercent .. "%)"
-		-- write to drafts inbox (= new draft without opening Drafts)
-		hs.execute(
-			'echo "'
-				.. msg
-				.. [[" > "$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/battery.md"]]
-		)
-	end
-end
-
 -- backup Vault, Dotfiles, Bookmarks, and extension list
 BiweeklyTimer = timer("02:00", "02d", function()
 	Applescript([[
@@ -213,7 +194,7 @@ BiweeklyTimer = timer("02:00", "02d", function()
 		> "$DOTFILE_FOLDER/browser-extension-configs/list-of-extensions.txt"
 	]])
 	hs.loadSpoon("EmmyLua") -- so it runs not as often
-	trackpadBatteryCheck()
+	peripheryBatteryCheck()
 end, true)
 
 ProjectorScreensaverWatcher = caff.new(function(eventType)
