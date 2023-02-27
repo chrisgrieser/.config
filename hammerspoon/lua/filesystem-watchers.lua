@@ -25,7 +25,7 @@ local sourceStatePath = appSupport .. "/Vivaldi/Local State"
 local chromeBookmarksPath = appSupport .. "/Google/Chrome/Default/Bookmarks"
 local chromeStatePath = appSupport .. "/Google/Chrome/Local State"
 
-local function syncBookmarks()
+BookmarkWatcher = Pw(sourceBookmarkPath, function()
 	-- Bookmarks
 	local bookmarks = hs.json.read(sourceBookmarkPath)
 	if not bookmarks then return end
@@ -41,15 +41,10 @@ local function syncBookmarks()
 	if not file then return end
 	local content = file:read("*a")
 	file:close()
-	file = io.open(chromeStatePath, "w")
-	if not file then return end
-	file:write(content)
-	file:close()
+	WriteToFile(chromeStatePath, content)
 
 	print("✅ Bookmarks synced to Chrome Bookmarks")
-end
-
-BookmarkWatcher = Pw(sourceBookmarkPath, syncBookmarks):start()
+end):start()
 
 --------------------------------------------------------------------------------
 

@@ -20,16 +20,19 @@ UriScheme("hs-reload", function()
 end)
 
 function SystemStart()
-	-- prevent commit spam when updating hammerspoon config regularly
+	-- do not git sync on reload to prevent commit spam when updating hammerspoon
+	-- config regularly
 	local _, isReloading = hs.execute("[[ -e " .. reloadIndicator .. " ]]")
 	if isReloading then
 		os.remove(reloadIndicator)
 		-- use neovim automation to display the notification in neovim
 		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded.")' > /tmp/nvim-automation]])
-		return
 		-- to make reloads clearer in the console
-		print("\n---------------------------------------------------------------\n") 
+		print("\n----------------------------- 🔨 HAMMERSPOON RELOAD ---------------------------------\n")
+		return
 	else
+		HoleCover()
+		PeripheryBatteryCheck("notify")
 		QuitFinderIfNoWindow()
 		Notify("Hammerspoon started.")
 		SyncAllGitRepos("notify")
@@ -77,4 +80,3 @@ end)
 
 -- `hammerspoon://clear-console` for Karabiner Elements (⌘K)
 UriScheme("clear-console", cons.clearConsole)
-

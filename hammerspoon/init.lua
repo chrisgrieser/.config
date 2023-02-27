@@ -16,5 +16,4 @@ require("lua.hardware-periphery")
 
 if IsAtMother() then require("lua.hot-corner-action") end
 
-HoleCover()
 SystemStart()
