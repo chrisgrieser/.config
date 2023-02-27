@@ -1,7 +1,7 @@
 /* stylelint-disable selector-max-id, custom-property-pattern  */
 /* ───────────────────────────────────────────────── */
 
-#browser .UrlFragment--Highlight {
+#browser.theme-dark .UrlFragment--Highlight {
 	font-weight: 600;
 }
 

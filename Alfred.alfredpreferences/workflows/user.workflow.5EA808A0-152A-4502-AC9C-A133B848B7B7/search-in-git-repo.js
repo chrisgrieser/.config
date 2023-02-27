@@ -40,6 +40,7 @@ const fileArray = app
 			case "bib":
 			case "css":
 			case "md":
+			case "log":
 			case "js":
 			case "ts":
 			case "yaml":
