@@ -11,6 +11,10 @@
 		"prefix": "ignore (prettier)",
 		"body": "// prettier-ignore"
 	},
+	"globals (eslint)": {
+		"prefix": "globals (eslint)",
+		"body": "/* global ${1:var} */"
+	},
 	"For Loop": {
 		"prefix": "for",
 		"body": [
