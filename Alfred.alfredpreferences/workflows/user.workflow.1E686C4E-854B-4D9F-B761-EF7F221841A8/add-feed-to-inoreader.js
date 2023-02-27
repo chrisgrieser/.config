@@ -10,7 +10,7 @@ function run(argv) {
 	let url;
 
 	// no input = take URL from browser
-	if (argv) {
+	if (argv[0]) {
 		url = argv[0];
 	} else {
 		const frontmostAppName = Application("System Events").applicationProcesses.where({ frontmost: true }).name()[0];
