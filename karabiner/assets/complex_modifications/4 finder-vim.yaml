@@ -7,6 +7,11 @@ anchors:
       - &finder-app
         type: frontmost_application_if
         bundle_identifiers: [^com\.apple\.finder$]
+      - &finder-or-alfred-app # for Alfred Compatibility Mode
+        type: frontmost_application_if
+        bundle_identifiers: 
+          - ^com\.runningwithcrayons\.Alfred$
+          - ^com\.apple\.finder$
       - &is-German-keyboard
         type: input_source_if
         input_sources:
@@ -297,76 +302,76 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-alfred
-        conditions: [*finder-app, *is-insert-mode]
+        conditions: [*finder-or-alfred-app, *is-insert-mode]
       # Confirm Alfred Mode with various modifiers
       - type: basic
         from: {key_code: return_or_enter, modifiers: {mandatory: [control]}}
         to: [{key_code: return_or_enter, modifiers: [control]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: return_or_enter, modifiers: {mandatory: [command]}}
         to: [{key_code: return_or_enter, modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: return_or_enter, modifiers: {mandatory: [shift]}}
         to: [{key_code: return_or_enter, modifiers: [shift]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: return_or_enter, modifiers: {mandatory: [option]}}
         to: [{key_code: return_or_enter, modifiers: [option]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: return_or_enter, modifiers: {mandatory: [fn]}}
         to: [{key_code: return_or_enter, modifiers: [fn]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic # Hyper+return
         from: {key_code: return_or_enter, modifiers: {mandatory: [command, control, option, shift]}}
         to: [{key_code: return_or_enter, modifiers: [command, control, option, shift]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic # Meh+return
         from: {key_code: return_or_enter, modifiers: {mandatory: [shift, control, option]}}
         to: [{key_code: return_or_enter, modifiers: [shift, control, option]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: "2", modifiers: {mandatory: [command]}}
         to: [{key_code: "2", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: "3", modifiers: {mandatory: [command]}}
         to: [{key_code: "3", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: "4", modifiers: {mandatory: [command]}}
         to: [{key_code: "4", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: "5", modifiers: {mandatory: [command]}}
         to: [{key_code: "5", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: "6", modifiers: {mandatory: [command]}}
         to: [{key_code: "6", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: "7", modifiers: {mandatory: [command]}}
         to: [{key_code: "7", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: "8", modifiers: {mandatory: [command]}}
         to: [{key_code: "8", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: "9", modifiers: {mandatory: [command]}}
         to: [{key_code: "9", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: c, modifiers: {mandatory: [command]}}
         to: [{key_code: c, modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: {key_code: l, modifiers: {mandatory: [command]}}
         to: [{key_code: l, modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-app, *is-insert-mode, *alfred-active]
+        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       # Abort
       - type: basic
         from: {key_code: caps_lock}
@@ -382,7 +387,7 @@ rules:
         to:
           - key_code: right_shift
             modifiers: [command, control, option] # keep hyper binding
-        conditions: [*finder-app]
+        conditions: [*finder-or-alfred-app]
       - type: basic
         from: {key_code: escape}
         to:
@@ -394,7 +399,7 @@ rules:
           - *end-context-menu
           - *end-move
           - *remove-move-notice
-        conditions: [*finder-app]
+        conditions: [*finder-or-alfred-app]
         # Closing window or quitting Finder should also disable Insert mode
       - type: basic
         from: {key_code: w, modifiers: {mandatory: [command]}}
@@ -686,13 +691,7 @@ rules:
               done
               touch "$newFile"
               open -R "$newFile"
-              osascript -e '
-                tell application "Finder" to tell front window to update every item
-                delay 0.05
-                tell application "System Events" to keystroke return
-              '
-          - *enter-insert-mode # enters insert mode since file renaming is also triggered
-          - *insert-notice
+              osascript -e 'tell application "Finder" to tell front window to update every item'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # b = Toggle `.bkp` (Backup)
       - type: basic
