@@ -688,8 +688,11 @@ rules:
               open -R "$newFile"
               osascript -e '
                 tell application "Finder" to tell front window to update every item
+                delay 0.05
                 tell application "System Events" to keystroke return
               '
+          - *enter-insert-mode # enters insert mode since file renaming is also triggered
+          - *insert-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # b = Toggle `.bkp` (Backup)
       - type: basic

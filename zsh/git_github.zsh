@@ -214,14 +214,15 @@ function gdf() {
 
 	# decision on how to act on file
 	echo "$deleted_path"
-	print "\033[1;34m"
+	print "\033[1;34m-----------------------"
 	echo "[r]estore (checkout file)"
 	echo "[s]how file"
 	echo "[c]opy content"
 	echo "copy [h]ash of last commit w/ file"
-	print "[a]bort\033[0m"
+	echo "[a]bort"
+	print "\033[0m-----------------------"
 
-	echo "> "
+	echo -n "> "
 	read -r -k 1 DECISION
 	# shellcheck disable=SC2193
 	if [[ "$DECISION:l" == "c" ]]; then
