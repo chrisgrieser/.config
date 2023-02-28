@@ -10,13 +10,12 @@ function alfredMatcher(str) {
 //──────────────────────────────────────────────────────────────────────────────
 
 const docsURL = "https://api.github.com/repos/eslint/eslint/git/trees/main?recursive=1";
-const baseURL = "https://mikefarah.gitbook.io/yq/";
-const docPathRegex = /^pkg\/yqlib\/doc\/(.*)\.md$/i;
+const baseURL = "https://eslint.org/docs/latest";
 
 const workArray = JSON.parse(app.doShellScript(`curl -s "${docsURL}"`))
-	.tree.filter(file => docPathRegex.test(file.path) && !file.path.includes("/headers/"))
+	.tree.filter(file => file.path.startsWith("docs/src/rules/") || file.path.startsWith("docs/src/use/"))
 	.map(entry => {
-		const subsite = entry.path.replace(docPathRegex, "$1");
+		const subsite = entry.path.slice(9, -3);
 		const category = subsite.split("/")[0];
 		const displayTitle = subsite.split("/")[1];
 		const url = `${baseURL}/${subsite}`;
