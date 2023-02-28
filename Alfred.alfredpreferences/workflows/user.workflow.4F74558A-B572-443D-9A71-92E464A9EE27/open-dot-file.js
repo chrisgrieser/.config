@@ -71,6 +71,7 @@ const fileArray = app
 				iconObj.path = fPath; // use image itself
 				break;
 			case "other":
+			case "url":
 			case "folder":
 				iconObj = { type: "fileicon", path: fPath };
 				break;

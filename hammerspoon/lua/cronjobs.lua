@@ -15,15 +15,25 @@ local passIcon = "🔑"
 
 --------------------------------------------------------------------------------
 
--- retrieve configs from zshenv
--- not local, cause sometimes not available, so set at startup
-DotfilesFolder = os.getenv("DOTFILE_FOLDER")
-PasswordStore = os.getenv("PASSWORD_STORE_DIR")
-VaultLocation = os.getenv("VAULT_PATH")
+-- retrieve configs from zshenv; sometimes not loading properly
+local i = 0
+local dotfilesFolder
+local passwordStore 
+local vaultLocation 
+while not dotfilesFolder do
+	dotfilesFolder = os.getenv("DOTFILE_FOLDER")
+	passwordStore = os.getenv("PASSWORD_STORE_DIR")
+	vaultLocation = os.getenv("VAULT_PATH")
+	hs.execute("sleep 0.2") -- since lua has no own wait command
+	if i > 30 then
+		Notify("Could not retrieve .zshenv")
+		return
+	end
+end
 
-local gitDotfileScript = DotfilesFolder .. "/git-dotfile-sync.sh"
-local gitVaultScript = VaultLocation .. "/Meta/git-vault-sync.sh"
-local gitPassScript = PasswordStore .. "/pass-sync.sh"
+local gitDotfileScript = dotfilesFolder .. "/git-dotfile-sync.sh"
+local gitVaultScript = vaultLocation .. "/Meta/git-vault-sync.sh"
+local gitPassScript = passwordStore .. "/pass-sync.sh"
 
 --------------------------------------------------------------------------------
 

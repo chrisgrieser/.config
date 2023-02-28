@@ -9,7 +9,7 @@ app.includeStandardAdditions = true;
 const iconFolder =
 	app.pathTo("home folder") + "/Library/Mobile Documents/com~apple~CloudDocs/Dokumente/Icon Collection";
 const customIconFolder = iconFolder + "/custom-app-icons";
-const filetypeIconFolder = iconFolder + "/filetype-icons";
+const filetypeIconFolder = iconFolder + "/custom-filetype-icons";
 
 //──────────────────────────────────────────────────────────────────────────────
 
