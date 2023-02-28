@@ -59,7 +59,7 @@ function ThemeSettings()
 
 		-- URLs
 		setHighlight("urls", "cterm=underline gui=underline")
-		fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+]*]])
+		fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
 		-- rainbow brackets without aggressive red
 		setHighlight("rainbowcol1", " guifg=#7e8a95")
