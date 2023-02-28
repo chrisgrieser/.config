@@ -131,7 +131,6 @@ local options = {
 			show_line = false,
 		},
 		find_files = {
-			cwd = "%:p:h",
 			prompt_prefix = " ",
 			hidden = true,
 			follow = true,
