@@ -3,7 +3,7 @@
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # to get auccustic confirmation
-[[ "$1" == "like" ]] && afplay /System/Library/Sounds/Purr.aiff
+[[ "$1" == "like" ]] && afplay /System/Library/Sounds/Bottle.aiff
 
 # run in subshell to avoid output, only pass if for notification
 notification=$(spt playback --$1 --format="$format" 2>&1)
