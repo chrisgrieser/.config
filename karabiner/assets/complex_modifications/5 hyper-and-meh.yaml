@@ -30,36 +30,27 @@ rules:
               - ^mindustry\.mac$
       # disable systemdiagnosis via Hyper+,
       - type: basic
-        from:
-          key_code: comma
-          modifiers: { mandatory: [control, command, shift, option] }
+        from: {key_code: comma, modifiers: {mandatory: [command, control, shift, option]}}
         to:
           - key_code: vk_none
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪ Tab  → Meh/Tab"
     manipulators:
       - type: basic
-        from:
-          key_code: tab
+        from: {key_code: tab}
         to_if_alone:
           - key_code: tab
         to:
-          - key_code: right_shift
-            modifiers:
-              - control
-              - option
+          - {key_code: right_shift, modifiers: [control, option]}
         conditions:
           - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^mindustry\.mac$
+            bundle_identifiers: [^mindustry\.mac$]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣  \U0001F4C2 Open Locations"
     manipulators:
       # Hyper + ⌫ = Open Trash
       - type: basic
-        from:
-          key_code: delete_or_backspace
-          modifiers: { mandatory: [control, command, shift, option] }
+        from: {key_code: delete_or_backspace, modifiers: {mandatory: [command, control, shift, option]}}
         to:
           - shell_command: | # opens the unified trash (iCloud trash + user trash)
               osascript -e'
@@ -72,12 +63,8 @@ rules:
             modifiers: [command]
       # Hyper + F: Open $WD / $DOTFILE_FOLDER
       - type: basic
-        from:
-          key_code: f
-          modifiers: { mandatory: [control, command, shift, option] }
+        from: {key_code: f, modifiers: {mandatory: [command, control, shift, option]}}
         to:
-          # using Finder via Applescript instead of `open` to open in the same
-          # window instead of creating a new one
           - shell_command: |
               osascript -e '
                 set home to POSIX path of (path to home folder as string)
@@ -98,15 +85,12 @@ rules:
                     activate
                     open toOpen
                   end if
-                end tell
-              '
+                end tell'
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣  \U0001F4C2 Restart App"
     manipulators:
       - type: basic
-        from:
-          key_code: r
-          modifiers: { mandatory: [control, command, shift, option] }
+        from: {key_code: r, modifiers: {mandatory: [command, control, shift, option]}}
         to:
           # INFO not done via Alfred because of https://github.com/neovide/neovide/issues/1604
           # INFO Quitting via wqall instead of cmd+Q so bufferleaving autocmds are triggered
@@ -130,9 +114,7 @@ rules:
               fi
       # Restart Alfred
       - type: basic
-        from:
-          key_code: "5"
-          modifiers: { mandatory: [control, command, shift, option] }
+        from: {key_code: "5", modifiers: {mandatory: [command, control, shift, option]}}
         to:
           - shell_command: |
               osascript -e 'display notification "" with title "Restarting Alfred…"'
@@ -143,124 +125,40 @@ rules:
               open -a Alfred\ 5
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Insert Mode Vim: ⇪ Hyper + hjkliomn<space>ö → ←↓↑→↵⌫⇐⇒"
+  - description: "Insert Mode Vim: ⇪ Hyper + hjklio<space> → ←↓↑→"
     manipulators:
       - type: basic
-        from:
-          key_code: h
-          modifiers:
-            mandatory:
-              - option
-              - shift
-              - command
-              - control
+        from: {key_code: h, modifiers: {mandatory: [option, shift, command, control]}}
         to:
           - key_code: left_arrow
       - type: basic
-        from:
-          key_code: j
-          modifiers:
-            mandatory:
-              - option
-              - shift
-              - command
-              - control
+        from: {key_code: j, modifiers: {mandatory: [option, shift, command, control]}}
         to:
           - key_code: down_arrow
       - type: basic
-        from:
-          key_code: k
-          modifiers:
-            mandatory:
-              - option
-              - shift
-              - command
-              - control
+        from: {key_code: k, modifiers: {mandatory: [option, shift, command, control]}}
         to:
           - key_code: up_arrow
       - type: basic
-        from:
-          key_code: l
-          modifiers:
-            mandatory:
-              - option
-              - shift
-              - command
-              - control
+        from: {key_code: l, modifiers: {mandatory: [option, shift, command, control]}}
         to:
           - key_code: right_arrow
-      - type: basic
-        from:
-          key_code: m
-          modifiers:
-            mandatory:
-              - option
-              - shift
-              - command
-              - control
-        to:
-          - key_code: return_or_enter
-
-      # n: backspace/delete
-      - type: basic
-        from:
-          key_code: "n"
-          modifiers:
-            mandatory:
-              - option
-              - right_shift # only hyper
-              - command
-              - control
-        to:
-          - key_code: delete_or_backspace
-
       # word to the left
       - type: basic
-        from:
-          key_code: i
-          modifiers:
-            mandatory:
-              - option
-              - shift
-              - command
-              - control
+        from: {key_code: i, modifiers: {mandatory: [option, shift, command, control]}}
         to:
-          - key_code: left_arrow
-            modifiers:
-              - option
+          - {key_code: left_arrow, modifiers: [option]}
       # word to the right
       - type: basic
-        from:
-          key_code: o
-          modifiers:
-            mandatory:
-              - option
-              - shift
-              - command
-              - control
+        from: {key_code: o, modifiers: {mandatory: [option, shift, command, control]}}
         to:
-          - key_code: right_arrow
-            modifiers:
-              - option
-
+          - {key_code: right_arrow, modifiers: [option]}
       # delete word (use ⌘J from utility hotkeys for changing a word)
       - type: basic
-        from:
-          key_code: spacebar
-          modifiers:
-            mandatory:
-              - option
-              - shift
-              - command
-              - control
+        from: {key_code: spacebar, modifiers: {mandatory: [option, shift, command, control]}}
         to:
-          - key_code: right_arrow
-            modifiers:
-              - option
-          - key_code: left_arrow
-            modifiers:
-              - option
-              - shift
+          - {key_code: right_arrow, modifiers: [option]} # to the right end of the word
+          - {key_code: left_arrow, modifiers: [option, shift]} # select to the left end
           - key_code: delete_or_backspace # delete the selection
           - key_code: delete_or_backspace # delete the space
           - key_code: right_arrow # go to next word
