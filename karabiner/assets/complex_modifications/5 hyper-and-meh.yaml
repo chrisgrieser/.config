@@ -5,20 +5,14 @@ rules:
   - description: "*️⃣ ⇪ Capslock  → Hyper/Esc"
     manipulators:
       - type: basic
-        from:
-          key_code: caps_lock
+        from: {key_code: caps_lock}
         to_if_alone:
           - key_code: escape
         to:
-          - key_code: right_shift
-            modifiers:
-              - command
-              - control
-              - option
+          - {key_code: right_shift, modifiers: [control, option, command]}
       # Map Esc to F18
       - type: basic
-        from:
-          key_code: escape
+        from: {key_code: escape}
         to_if_alone:
           - key_code: f18
         # INFO condition to avoid conflict with finder-vim-mode; mapping to f18
@@ -28,7 +22,7 @@ rules:
             bundle_identifiers:
               - ^com\.apple\.finder$
               - ^mindustry\.mac$
-      # disable systemdiagnosis via Hyper+,
+      # disable systemdiagnosis via `Hyper+,`
       - type: basic
         from: {key_code: comma, modifiers: {mandatory: [command, control, shift, option]}}
         to:

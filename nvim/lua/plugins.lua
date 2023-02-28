@@ -41,15 +41,17 @@ return {
 
 	-- Misc
 	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
-	{
-		"cbochs/grapple.nvim", -- more flexible Harpoon alternative
+	{ -- more flexible Harpoon alternative
+		"cbochs/grapple.nvim", 
 		dependencies = "nvim-lua/plenary.nvim",
 		lazy = true,
 		config = function()
 			require("grapple").setup {
-				---Can be either the name of a builtin scope resolver,
-				---or a custom scope resolver
-				scope = "git",
+				-- https://github.com/cbochs/grapple.nvim#grapplescoperoot
+				scope = require("grapple.scope").fallback {
+					require("grapple.scope").root(".grapple_root"),
+					require("grapple").resolvers.static,
+				},
 			}
 		end,
 	},
