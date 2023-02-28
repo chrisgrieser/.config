@@ -26,6 +26,11 @@ return {
 			"SmiteshP/nvim-navic", -- breadcrumbs for statusline/winbar
 			"folke/neodev.nvim", -- lsp for nvim-lua config
 			"b0o/SchemaStore.nvim", -- schemas for json-lsp
+			{
+				"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+				config = function() require("lsp_lines").setup() end,
+				lazy = true,
+			},
 		},
 	},
 
