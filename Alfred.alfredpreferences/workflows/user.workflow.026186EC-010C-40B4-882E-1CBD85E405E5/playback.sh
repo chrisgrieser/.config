@@ -2,7 +2,7 @@
 # shellcheck disable=SC2086,SC2154
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
-[[ "$1" == "like" ]] && osascript -e "beep"
+[[ "$1" == "like" ]] && osascript -e "beep" # to get auccustic confirmation
 
 # run in subshell to avoid output, only pass if for notification
 notification=$(spt playback --$1 --format="$format" 2>&1)
