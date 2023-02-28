@@ -32,6 +32,7 @@ const fileArray = app
 		else if (name === "obsidian.vimrc") type = "obsidian";
 		else type = name.split(".").pop();
 		if (type === "yml") type = "yaml";
+		if (type.endsWith("-bkp")) type = "other";
 
 		// icon determination
 		let iconObj = { path: "./../../../custom-filetype-icons/" };
