@@ -1,9 +1,4 @@
 require("lua.utils")
---------------------------------------------------------------------------------
--- CONFIG (not local vars for longevity)
-DotfilesFolder = os.getenv("DOTFILE_FOLDER") or ""
-FileHub = os.getenv("WD") or ""
-Home = os.getenv("HOME")
 
 --------------------------------------------------------------------------------
 
@@ -50,7 +45,7 @@ end):start()
 
 -- Download Folder Badge
 -- requires "fileicon" being installed
-local downloadFolder = Home .. "/Downloaded"
+local downloadFolder = os.getenv("HOME") .. "/Downloaded"
 DownloadFolderWatcher = Pw(
 	downloadFolder,
 	function()
@@ -63,7 +58,7 @@ DownloadFolderWatcher = Pw(
 -- FONT rsync (for both directions)
 -- (symlinking the Folder somehow does not work properly, therefore rsync)
 local fontLocation = DotfilesFolder .. "/fonts/" -- source folder needs trailing "/" to copy contents (instead of the folder)
-FontsWatcher1 = Pw(Home .. "/Library/Fonts", function()
+FontsWatcher1 = Pw(os.getenv("HOME") .. "/Library/Fonts", function()
 	hs.execute([[rsync --archive --update --delete "$HOME/Library/Fonts/" "]] .. fontLocation .. [["]])
 	Notify("Fonts synced.")
 end):start()
@@ -75,13 +70,13 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- Redirects TO File Hub
-local scanFolder = Home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
+local scanFolder = os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 ScanFolderWatcher = Pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. FileHub .. "'")
 	Notify("Scan moved to File Hub")
 end):start()
 
-local systemDownloadFolder = Home .. "/Downloads/"
+local systemDownloadFolder = os.getenv("HOME") .. "/Downloads/"
 SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	-- Stats Update file can directly be trashed
 	for _, filePath in pairs(files) do
@@ -96,7 +91,7 @@ SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	Notify("Download moved to File Hub.")
 end):start()
 
-local draftsIcloud = Home .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
+local draftsIcloud = os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
 DraftsIcloudWatcher = Pw(draftsIcloud, function(files)
 	for _, filePath in pairs(files) do
 		if filePath:sub(-3) ~= ".md" or filePath:find("Inbox") then return end
@@ -124,11 +119,11 @@ FileHubWatcher = Pw(FileHub, function(paths, _)
 			-- though cannot be opened via browser and also does not create recursion,
 			-- so it is opened here
 			if extension == "dmg" then hs.open(filep) end
-			RunWithDelays(3, function() os.rename(filep, Home .. "/.Trash/" .. fileName) end)
+			RunWithDelays(3, function() os.rename(filep, os.getenv("HOME") .. "/.Trash/" .. fileName) end)
 
 			-- watch later .urls from the office
 		elseif extension == "url" and IsIMacAtHome() then
-			os.rename(filep, Home .. "/Downloaded/" .. fileName)
+			os.rename(filep, os.getenv("HOME") .. "/Downloaded/" .. fileName)
 			Notify("Watch Later URL moved to Video Downloads.")
 
 		-- ublacklist
