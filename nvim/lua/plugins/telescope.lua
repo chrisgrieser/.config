@@ -131,6 +131,7 @@ local options = {
 			show_line = false,
 		},
 		find_files = {
+			prompt_title = "Project Files",
 			prompt_prefix = " ",
 			hidden = true,
 			follow = true,

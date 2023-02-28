@@ -306,9 +306,9 @@ keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize (+)" })
 keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 
 -- Harpoon/Grapple
-keymap("n", "<D-CR>", function () require("harpoon.ui").nav_next() end, { desc = "ﯠ Next" })
-keymap("n", "g<CR>", function () require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
-keymap("n", "<leader><CR>", function ()
+keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "ﯠ Next" })
+keymap("n", "g<CR>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
+keymap("n", "<leader><CR>", function()
 	require("harpoon.mark").add_file()
 	vim.notify("ﯠ Added File")
 end, { desc = "ﯠ Add File" })
@@ -360,7 +360,10 @@ keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
 -- FILES
 
 -- File Switchers
-keymap("n", "go", function() cmd.Telescope("find_files") end, { desc = " Open File in cwd" })
+keymap("n", "go", function()
+	local projectName = fn.getcwd():gsub(".*/", "")
+	require("telescope.builtin").find_files { prompt_title = projectName }
+end, { desc = " Open file in Project" })
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 keymap("n", "gP", function() cmd.Telescope("projects") end, { desc = " Projects" })

@@ -58,8 +58,14 @@ return {
 			require("project_nvim").setup {
 				-- priority order
 				detection_methods = { "pattern", "lsp" },
-				-- `.harpoon` as file to manually mark project roots in certain directories
-				patterns = { ".git", "Makefile", "package.json", ".luarc.json", ".harpoon" },
+				exclude_dirs = {"node_modules", "build", "dist"},
+				patterns = {
+					".git",
+					"package.json",
+					"info.plist", -- Alfred workflows
+					".luarc.json", -- lua projects
+					".harpoon", -- manually mark project roots in certain directories
+				},
 				datapath = VimDataDir,
 			}
 		end,
