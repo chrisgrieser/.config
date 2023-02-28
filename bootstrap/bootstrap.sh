@@ -2,6 +2,7 @@
 # shellcheck disable=SC2034,SC2164,SC1071
 
 DOTFILE_FOLDER="$HOME/.config/"
+DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder" 
 
 # REQUIRES SSH setup
 cd ~
@@ -64,6 +65,9 @@ ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
 
 # searchlink
 ln -sf "$DOTFILE_FOLDER/searchlink/.searchlink" ~
+
+# Harpoon Marks
+ln -sf "$DATA_DIR/vim-data/harpoon.json" "$HOME/.local/share/nvim/harpoon.json"
 
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"

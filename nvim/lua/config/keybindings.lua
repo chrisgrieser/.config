@@ -362,8 +362,8 @@ keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
 -- File Switchers
 keymap("n", "go", function() cmd.Telescope("find_files") end, { desc = " Open File in cwd" })
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
-keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = " Files in cwd" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
+keymap("n", "gP", function() cmd.Telescope("projects") end, { desc = " Projects" })
 
 -- File Operations
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = " copy filepath" })
@@ -377,10 +377,6 @@ keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = "�
 keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = " create new file" })
 -- stylua: ignore
 keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = " selection to new file" })
-
--- goto file
--- needed, since gf remapped to reference search
-keymap("n", "gP", "gf", { desc = "goto path (gf)" })
 
 --------------------------------------------------------------------------------
 -- GIT
