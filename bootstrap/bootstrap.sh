@@ -66,9 +66,6 @@ ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
 # searchlink
 ln -sf "$DOTFILE_FOLDER/searchlink/.searchlink" ~
 
-# Harpoon Marks
-ln -sf "$DATA_DIR/vim-data/harpoon.json" "$HOME/.local/share/nvim/harpoon.json"
-
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
 [[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"

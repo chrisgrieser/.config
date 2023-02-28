@@ -43,10 +43,16 @@ return {
 	{
 		"ThePrimeagen/harpoon",
 		lazy = true,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"ahmedkhalf/project.nvim",
-		},
+		dependencies = "nvim-lua/plenary.nvim",
+		-- HACK to make Harpoon marks syncable across devices
+		config = function()
+			local symlinkCmd = string.format(
+				"ln -sf '%s' '%s'",
+				VimDataDir .. "/harpoon.json",
+				vim.fn.stdpath("data") .. "/harpoon.json" -- https://github.com/ThePrimeagen/harpoon/blob/master/lua/harpoon/init.lua#L7
+			)
+			vim.fn.system(symlinkCmd)
+		end,
 	},
 
 	-- change cwd per project, mostly used for project-specific scope for Harpoon
@@ -58,7 +64,7 @@ return {
 			require("project_nvim").setup {
 				-- priority order
 				detection_methods = { "pattern", "lsp" },
-				exclude_dirs = {"node_modules", "build", "dist"},
+				exclude_dirs = { "node_modules", "build", "dist" },
 				patterns = {
 					".git",
 					"package.json",
