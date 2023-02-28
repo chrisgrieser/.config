@@ -369,30 +369,7 @@ keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
 -- FILES
 
 -- File Switchers
-keymap("n", "go", function()
-	local isGitRepo = os.execute('test -e "$(git rev-parse --show-toplevel)/.git"') == 0
-	local isSubModule = os.execute('test -f "$(git rev-parse --show-toplevel)/.git"') == 0
-	local cwd = expand("%:p:h")
-	local scope
-	if isSubModule then
-		scope = "git_files"
-	elseif cwd:find("/nvim/") and not (cwd:find("/my%-plugins/")) then
-		scope = "find_files cwd=" .. fn.stdpath("config")
-	elseif cwd:find("/hammerspoon/") then
-		scope = "find_files cwd=" .. vim.env.DOTFILE_FOLDER .. "/hammerspoon/"
-	elseif cwd:find(vim.env.DOTFILE_FOLDER, 1, true) then
-		-- selene: allow(if_same_then_else)
-		scope = "find_files"
-	elseif isGitRepo then
-		-- selene: allow(if_same_then_else)
-		scope = "git_files"
-	else
-		-- selene: allow(if_same_then_else)
-		scope = "find_files"
-	end
-	cmd("Telescope " .. scope)
-end, { desc = " Open File in repo/folder" })
-
+keymap("n", "go", function() cmd.Telescope("find_files") end, { desc = " Open File in cwd" })
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
 keymap("n", "gO", function() cmd.Telescope("find_files") end, { desc = " Files in cwd" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
@@ -491,6 +468,7 @@ autocmd("FileType", {
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
 		"man",
+		"harpoon",
 	},
 	callback = function()
 		local opts = { buffer = true, nowait = true, desc = "close" }
