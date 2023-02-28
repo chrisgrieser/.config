@@ -2,7 +2,6 @@ require("lua.utils")
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local autoSwitchFreqMin = 15
 local brightnessThreshhold = 90
 
 --------------------------------------------------------------------------------
@@ -95,8 +94,6 @@ function AutoSwitchDarkmode()
 		print("☀️ Autoswitching to Light Mode")
 	end
 end
-
-BrightnessCheckTimer = hs.timer.doEvery(autoSwitchFreqMin * 60, AutoSwitchDarkmode):start()
 
 --------------------------------------------------------------------------------
 
