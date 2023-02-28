@@ -84,7 +84,7 @@ case $APP in
 			open information window of (\"/Applications/$APP.app\" as POSIX file as alias)
 			activate
 		end tell
-		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Drafts orange.icns\""
+		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Drafts green.icns\""
 	INFO_WINDOW=1
 	;;
 #────────────────────────────────────────────────────────────────────────────

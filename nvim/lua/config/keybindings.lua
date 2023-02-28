@@ -309,8 +309,9 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 keymap("n", "<D-CR>", function() require("grapple").cycle_forward() end, { desc = "ﯠ Next File" })
 keymap("n", "<leader><CR>", function()
 	require("grapple").toggle()
-	vim.notify("ﯠ Tag/Untag")
-end, { desc = "ﯠ Tag/Untag File" })
+	local msg = require("grapple").exists() and "ﯡ Untag" or "ﯠ Tag"
+	vim.notify(msg)
+end, { desc = "ﯠ/ﯡ Toggle Tag" })
 
 ------------------------------------------------------------------------------
 
@@ -440,7 +441,6 @@ keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = " toggle relat
 keymap("n", "<leader>on", ":set number!<CR>", { desc = " toggle line numbers" })
 keymap("n", "<leader>ow", qol.toggleWrap, { desc = " toggle wrap" })
 keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 璉LSP Restart" })
-
 keymap("n", "<leader>od", function()
 	if g.diagnosticOn == nil then g.diagnosticOn = true end
 	if g.diagnosticOn then

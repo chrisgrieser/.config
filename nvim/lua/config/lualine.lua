@@ -103,8 +103,14 @@ require("lualine").setup {
 			{ -- indicate that the file has a grapple tag
 				function() return "ﯠ" end,
 				cond = require("grapple").exists,
+				padding = {left = 1, right = 0},
 			},
-			{ "filetype", colored = false, icon_only = true },
+			{
+				"filetype",
+				colored = false,
+				padding = {left = 1, right = 0},
+				icon_only = true,
+			},
 			{
 				"filename",
 				file_status = false,
