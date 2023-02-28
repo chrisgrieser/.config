@@ -41,22 +41,30 @@ return {
 
 	-- Misc
 	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
-	{ -- more flexible Harpoon alternative
+	-- more flexible Harpoon alternative
+	{
 		"cbochs/grapple.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
-		-- lazy = true,
-		config = function()
-			require("grapple").setup {
-				-- first looks for a `.grapple_root` file from the current directory
-				-- upwards, if not found uses the git repo, if also not found, the
-				-- current directory
-				-- https://github.com/cbochs/grapple.nvim#scope-api
-				scope = require("grapple.scope").fallback {
-					require("grapple.scope").root { ".luarc.json", "Cargo.toml" },
-					require("grapple").resolvers.git_fallback,
-					require("grapple").resolvers.directory,
-				},
+		init = function()
+			-- first looks for a `.grapple_root` file from the current directory
+			-- upwards, if not found uses the git repo, if also not found, the
+			-- current directory https://github.com/cbochs/grapple.nvim#scope-api
+			local my_resolver = require("grapple.scope").fallback {
+				require("grapple.scope").root(".luarc.json"),
+				require("grapple").resolvers.git_fallback,
+				require("grapple").resolvers.directory,
 			}
+			require("grapple").setup {
+				log_level = "debug",
+				scope = my_resolver,
+			}
+			vim.api.nvim_create_autocmd("BufEnter", {
+				pattern = "*",
+				callback = function()
+					print("beep")
+					require("grapple.scope").update(my_resolver)
+				end,
+			})
 		end,
 	},
 	{
