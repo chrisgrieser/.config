@@ -130,19 +130,20 @@ autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	end,
 })
 
+-- test
 -- emulate autochdir, since the respective option is deprecated
-augroup("autochdir", {})
-autocmd("BufWinEnter", {
-	group = "autochdir",
-	pattern = "?*", -- needed for BufWinEnter to work
-	callback = function()
-		-- needs to exclude commit filetypes: https://github.com/petertriho/cmp-git/issues/47#issuecomment-1374788422
-		local ignoredFT = { "gitcommit", "NeogitCommitMessage", "DiffviewFileHistory", "" }
-		if not vim.tbl_contains(ignoredFT, bo.filetype) and (expand("%:p"):find("^/")) then
-			cmd.lcd(expand("%:p:h"))
-		end
-	end,
-})
+-- augroup("autochdir", {})
+-- autocmd("BufWinEnter", {
+-- 	group = "autochdir",
+-- 	pattern = "?*", -- needed for BufWinEnter to work
+-- 	callback = function()
+-- 		-- needs to exclude commit filetypes: https://github.com/petertriho/cmp-git/issues/47#issuecomment-1374788422
+-- 		local ignoredFT = { "gitcommit", "NeogitCommitMessage", "DiffviewFileHistory", "" }
+-- 		if not vim.tbl_contains(ignoredFT, bo.filetype) and (expand("%:p"):find("^/")) then
+-- 			cmd.lcd(expand("%:p:h"))
+-- 		end
+-- 	end,
+-- })
 
 -- so autochdir does not interfere with saving of views
 opt.viewoptions:remove("curdir")

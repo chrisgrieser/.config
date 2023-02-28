@@ -43,11 +43,18 @@ return {
 	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
 	{
 		"ThePrimeagen/harpoon",
-		config = function()
-			
-		end,
-		dependencies = "nvim-lua/plenary.nvim",
 		lazy = true,
+		dependencies = "nvim-lua/plenary.nvim",
+	},
+	{
+		"ahmedkhalf/project.nvim",
+		config = function()
+			require("project_nvim").setup {
+				detection_methods = { "lsp", "pattern" },
+				ignore_lsp = {"null-ls"},
+				-- refer to the configuration section below
+			}
+		end,
 	},
 
 	-- TODO pending: https://github.com/cbochs/grapple.nvim/issues/62
