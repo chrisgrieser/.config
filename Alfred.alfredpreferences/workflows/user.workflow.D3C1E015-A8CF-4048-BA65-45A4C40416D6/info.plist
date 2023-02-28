@@ -253,6 +253,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D6E5E105-38E3-4BC1-90E3-52BEE556349D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>54BE7AA2-A1C8-4987-96A6-7E9EE03F9F6A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</key>
 		<array/>
 		<key>D9E07FDE-1870-42B0-B6D4-AA209906679E</key>
@@ -852,7 +865,7 @@ Search neovim plugins and online :help via Alfred</string>
 			<key>config</key>
 			<dict>
 				<key>autopaste</key>
-				<false/>
+				<true/>
 				<key>clipboardtext</key>
 				<string>{
 	"{query}",
@@ -917,6 +930,27 @@ Search neovim plugins and online :help via Alfred</string>
 			<string>711DEF51-292E-4367-94F7-C38BEF4B6FB6</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>54BE7AA2-A1C8-4987-96A6-7E9EE03F9F6A</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1041,6 +1075,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>355</real>
 			<key>ypos</key>
 			<real>290</real>
+		</dict>
+		<key>54BE7AA2-A1C8-4987-96A6-7E9EE03F9F6A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>no default branch</string>
+			<key>xpos</key>
+			<real>470</real>
+			<key>ypos</key>
+			<real>970</real>
 		</dict>
 		<key>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</key>
 		<dict>
