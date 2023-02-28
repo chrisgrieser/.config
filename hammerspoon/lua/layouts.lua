@@ -66,7 +66,6 @@ function WorkLayout()
 		"Obsidian",
 		"Drafts",
 		"Mimestream",
-		"Spotify",
 		"alacritty",
 	})
 	hs.layout.apply(layout)
@@ -75,7 +74,6 @@ function WorkLayout()
 
 	local delays = IsAtMother() and { 0.5, 1 } or 0.5
 	RunWithDelays(delays, function()
-		OpenApp("Spotify") -- delayed, so SpotifyAppWatcher isn't not triggered
 		App("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
@@ -101,7 +99,6 @@ function MovieModeLayout()
 		"Drafts",
 		"Neovide",
 		"neovide",
-		"Spotify",
 		"Slack",
 		"Discord",
 		"BusyCal",
@@ -114,11 +111,6 @@ function MovieModeLayout()
 		"Twitter",
 	}
 
-	-- safety net redundancy
-	if hs.spotify.isPlaying() then
-		hs.spotify.pause()
-		QuitApp("Spotify")
-	end
 end
 
 --------------------------------------------------------------------------------
