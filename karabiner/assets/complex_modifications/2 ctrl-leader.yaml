@@ -216,7 +216,7 @@ rules:
         from: { key_code: b, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
-          - shell_command: osascript -e 'tell application "Vivaldi" to activate'
+          - shell_command: open -a 'Vivaldi'
           - { key_code: vk_none, hold_down_milliseconds: 250 }
           - key_code: t
             modifiers: [command, shift]
