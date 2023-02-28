@@ -24,11 +24,11 @@ function SystemStart()
 	-- config regularly
 	local _, isReloading = hs.execute("[[ -e " .. reloadIndicator .. " ]]")
 	if isReloading then
+		print("\n----------------------------- 🔨 HAMMERSPOON RELOAD ---------------------------------\n")
 		os.remove(reloadIndicator)
 		-- use neovim automation to display the notification in neovim
 		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded.")' > /tmp/nvim-automation]])
 		-- to make reloads clearer in the console
-		print("\n----------------------------- 🔨 HAMMERSPOON RELOAD ---------------------------------\n")
 		return
 	else
 		Notify("Hammerspoon started.")
