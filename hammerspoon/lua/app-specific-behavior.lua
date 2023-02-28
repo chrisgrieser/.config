@@ -22,10 +22,12 @@ local function hideOthers(win)
 	local wins = win:otherWindowsSameScreen()
 	for _, w in pairs(wins) do
 		local app = w:application()
-		local browserWithPiP = app and app:name() == "Vivaldi" and app:findWindow("Picture in Picture")
-		local isTwitter = app and app:name() == "Twitter"
-		local isWindowItself = app and app:name() == winName
-		if app and not (browserWithPiP or isWindowItself or isTwitter) then app:hide() end
+		if not app then return end
+		local browserWithPiP = app:name() == "Vivaldi" and app:findWindow("Picture in Picture")
+		local isTwitter = app:name() == "Twitter"
+		local isAlfred = app:name() == "Alfred" -- for Alfred's compatibility mode
+		local isWindowItself = app:name() == winName
+		if not (browserWithPiP or isWindowItself or isTwitter or isAlfred) then app:hide() end
 	end
 end
 
@@ -45,7 +47,7 @@ TransBgAppWatcher = Aw.new(function(appName, eventType, appObject)
 	if eventType == Aw.activated or eventType == Aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
 		-- hiding is used for its activation as well
-		RunWithDelays({ 0.1, 0.3 }, function()
+		RunWithDelays({ 0.15, 0.3 }, function()
 			local win = appObject:mainWindow()
 			if
 				not win
@@ -81,6 +83,29 @@ Wf_maxWindows = Wf.new(true):subscribe(Wf.windowUnfocused, function(win)
 	if CheckSize(win, Maximized) then win:application():hide() end
 end)
 
+---play/pause spotify with Spotify
+---@param toStatus string pause|play
+local function spotifyDo(toStatus)
+	-- INFO keeping both versions here due to potential reoccurence of this bug
+	-- https://github.com/Rigellute/spotify-tui/issues/1072
+
+	-- SPOTIFY-DESKTOP
+	-- if hs.spotify.isPlaying() and toStatus == "pause" then hs.spotify.pause()
+	-- elseif toStatus == "play" then hs.spotify.play() end
+
+	-- SPOTIFY-TUI
+	-- stylua: ignore start
+	local currentStatus = hs.execute( "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s"):gsub("\n$", "")
+	if
+		(currentStatus == "▶️" and toStatus == "pause")
+		or (currentStatus == "⏸" and toStatus == "play")
+	then
+		local stdout = hs.execute( "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle")
+		if toStatus == "play" then Notify(stdout) end ---@diagnostic disable-line: param-type-mismatch
+	end
+	-- stylua: ignore end
+end
+
 -- auto-pause/resume Spotify on launch/quit of apps with sound
 SpotifyAppWatcher = Aw.new(function(appName, eventType)
 	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
@@ -88,10 +113,10 @@ SpotifyAppWatcher = Aw.new(function(appName, eventType)
 		return
 	end
 
-	if eventType == Aw.launched and hs.spotify.isPlaying() then
-		hs.spotify.pause()
+	if eventType == Aw.launched then
+		spotifyDo("pause")
 	elseif eventType == Aw.terminated then
-		hs.spotify.play()
+		spotifyDo("play")
 	end
 end):start()
 
