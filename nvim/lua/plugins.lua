@@ -3,7 +3,8 @@ return {
 	-- Treesitter & Syntax Highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = function() -- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
+		build = function()
+			-- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
 			require("nvim-treesitter.install").update { with_sync = true }
 		end,
 		dependencies = {
@@ -26,11 +27,6 @@ return {
 			"SmiteshP/nvim-navic", -- breadcrumbs for statusline/winbar
 			"folke/neodev.nvim", -- lsp for nvim-lua config
 			"b0o/SchemaStore.nvim", -- schemas for json-lsp
-			{
-				"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-				config = function() require("lsp_lines").setup() end,
-				lazy = true,
-			},
 		},
 	},
 
@@ -51,8 +47,6 @@ return {
 		lazy = true,
 		config = function()
 			require("grapple").setup {
-				log_level = "info",
-
 				---Can be either the name of a builtin scope resolver,
 				---or a custom scope resolver
 				scope = "git",

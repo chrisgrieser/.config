@@ -79,10 +79,11 @@ rules:
           # using Finder via Applescript instead of `open` to open in the same
           # window instead of creating a new one
           - shell_command: |
-              WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-              DOTFILE_FOLDER="$HOME/.config/"
+              WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
+              DOTFILE_FOLDER="$HOME/.config"
               currentWindow=$(osascript -e 'tell application "Finder" to return POSIX path of (insertion location as alias)')
-              if [[ "$currentWindow" != "$WD" ]] ; then
+              if [[ "$currentWindow" == "$WD" ]] ; then
+                open -a "Finder"
                 target="$WD"
               else
                 target="$DOTFILE_FOLDER"
