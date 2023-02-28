@@ -79,11 +79,9 @@ rules:
           # using Finder via Applescript instead of `open` to open in the same
           # window instead of creating a new one
           - shell_command: |
-              
-              if ! pgrep -x "Finder" > /dev/null ; then
-                open -a "Finder"
-                sleep 0.4
-              fi
+
+
+              pgrep -x "Finder" > /dev/null || open -a "Finder"
               osascript -e '
                 set home to POSIX path of (path to home folder as string)
                 set wd to (home & "Library/Mobile Documents/com~apple~CloudDocs/File Hub/")
