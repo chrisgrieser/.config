@@ -1,7 +1,7 @@
 title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 maintainers: [pseudometa (chrisgrieser)]
-version: [1.2.0]
+version: [1.3.0]
 anchors:
   - conditions:
       - &finder-app
@@ -9,7 +9,7 @@ anchors:
         bundle_identifiers: [^com\.apple\.finder$]
       - &finder-or-alfred-app # for Alfred Compatibility Mode
         type: frontmost_application_if
-        bundle_identifiers: 
+        bundle_identifiers:
           - ^com\.runningwithcrayons\.Alfred$
           - ^com\.apple\.finder$
       - &is-German-keyboard
@@ -70,8 +70,9 @@ anchors:
         value: true
   #─────────────────────────────────────────────────────────────────────────────
   - to:
+      # Insert Mode
       - &enter-insert-mode
-        set_variable: # Insert Mode
+        set_variable:
           name: FINDER_INSERT_MODE
           value: true
       - &leave-insert-mode
@@ -90,8 +91,9 @@ anchors:
         set_notification_message:
           id: insert-notice
           text: ""
+      # Find Mode
       - &enter-find-mode
-        set_variable: # Find Mode
+        set_variable:
           name: FINDER_FIND_MODE
           value: true
       - &leave-find-mode
@@ -106,8 +108,9 @@ anchors:
         set_notification_message:
           id: find-notice
           text: ""
+      # Move Active
       - &remove-move-notice
-        set_notification_message: # Move Active
+        set_notification_message:
           id: move-notice
           text: ""
       - &move-notice
@@ -154,36 +157,36 @@ rules:
     manipulators:
       # hjkl, LH
       - type: basic
-        from: {key_code: j}
+        from: { key_code: j }
         to: # no to_if_alone since it blocks repeat
           - key_code: down_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-quicklook]
       - type: basic
-        from: {key_code: k}
+        from: { key_code: k }
         to: # no to_if_alone since it blocks repeat
           - key_code: up_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-quicklook]
       - type: basic
-        from: {key_code: h}
+        from: { key_code: h }
         to_if_alone:
           - key_code: up_arrow
             modifiers: [command]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       - type: basic
-        from: {key_code: l}
+        from: { key_code: l }
         to_if_alone:
           - key_code: down_arrow
             modifiers: [command]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       # L = open file & close window
       - type: basic
-        from: {key_code: l, modifiers: {mandatory: [shift]}}
+        from: { key_code: l, modifiers: { mandatory: [shift] } }
         to:
-          - {key_code: o, modifiers: [command, option]}
+          - { key_code: o, modifiers: [command, option] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # H = Go to last recent folder
       - type: basic
-        from: {key_code: h, modifiers: {mandatory: [shift]}}
+        from: { key_code: h, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: |
               osascript -e 'tell application "System Events" to tell process "Finder"
@@ -192,19 +195,19 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # gg, G, J, K
       - type: basic
-        from: {key_code: g}
+        from: { key_code: g }
         to:
           - key_code: up_arrow
             modifiers: [option]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
-        from: {key_code: g, modifiers: {mandatory: [shift]}}
+        from: { key_code: g, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - key_code: down_arrow
             modifiers: [option]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
-        from: {key_code: j, modifiers: {mandatory: [shift]}}
+        from: { key_code: j, modifiers: { mandatory: [shift] } }
         to:
           - key_code: down_arrow
           - key_code: down_arrow
@@ -214,7 +217,7 @@ rules:
           - key_code: down_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
-        from: {key_code: k, modifiers: {mandatory: [shift]}}
+        from: { key_code: k, modifiers: { mandatory: [shift] } }
         to:
           - key_code: up_arrow
           - key_code: up_arrow
@@ -228,14 +231,14 @@ rules:
       - type: basic
         from:
           key_code: hyphen # "?" on German keyboard
-          modifiers: {mandatory: [shift]}
+          modifiers: { mandatory: [shift] }
         to:
           - shell_command: qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode-cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       - type: basic
         from:
           key_code: slash # "?" on American keyboard
-          modifiers: {mandatory: [shift]}
+          modifiers: { mandatory: [shift] }
         to:
           - shell_command: qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode-cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
@@ -244,7 +247,7 @@ rules:
       # ENTER
       # Rename
       - type: basic
-        from: {key_code: return_or_enter}
+        from: { key_code: return_or_enter }
         to:
           - key_code: return_or_enter
           - *insert-notice
@@ -252,7 +255,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       # Batch Rename
       - type: basic
-        from: {key_code: return_or_enter, modifiers: {mandatory: [shift]}}
+        from: { key_code: return_or_enter, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - shell_command: |
               osascript -e '
@@ -264,39 +267,39 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
         # Switch Directory
       - type: basic
-        from: {key_code: g, modifiers: {mandatory: [command, shift]}}
+        from: { key_code: g, modifiers: { mandatory: [command, shift] } }
         to:
-          - {key_code: g, modifiers: [command, shift]}
+          - { key_code: g, modifiers: [command, shift] }
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
         # Search
       - type: basic
-        from: {key_code: slash}
+        from: { key_code: slash }
         to:
-          - {key_code: f, modifiers: [command]}
+          - { key_code: f, modifiers: [command] }
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       - type: basic
-        from: {key_code: f, modifiers: {mandatory: [command]}}
+        from: { key_code: f, modifiers: { mandatory: [command] } }
         to:
-          - {key_code: f, modifiers: [command]}
+          - { key_code: f, modifiers: [command] }
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       # Alfred: so you can insert text in Alfred/Spotlight while Finder is frontmost
       - type: basic
-        from: {key_code: spacebar, modifiers: {mandatory: [command]}}
+        from: { key_code: spacebar, modifiers: { mandatory: [command] } }
         to:
-          - {key_code: spacebar, modifiers: [command]}
+          - { key_code: spacebar, modifiers: [command] }
           - *enter-insert-mode
           - *start-alfred
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # LEAVE INSERT MODE
       # Confirm Insert Mode
       - type: basic
-        from: {key_code: return_or_enter}
+        from: { key_code: return_or_enter }
         to:
           - key_code: return_or_enter
           - *remove-insert-notice
@@ -305,76 +308,90 @@ rules:
         conditions: [*finder-or-alfred-app, *is-insert-mode]
       # Confirm Alfred Mode with various modifiers
       - type: basic
-        from: {key_code: return_or_enter, modifiers: {mandatory: [control]}}
-        to: [{key_code: return_or_enter, modifiers: [control]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: return_or_enter, modifiers: { mandatory: [control] } }
+        to:
+          [{ key_code: return_or_enter, modifiers: [control] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: return_or_enter, modifiers: {mandatory: [command]}}
-        to: [{key_code: return_or_enter, modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: return_or_enter, modifiers: { mandatory: [command] } }
+        to:
+          [{ key_code: return_or_enter, modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: return_or_enter, modifiers: {mandatory: [shift]}}
-        to: [{key_code: return_or_enter, modifiers: [shift]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: return_or_enter, modifiers: { mandatory: [shift] } }
+        to: [{ key_code: return_or_enter, modifiers: [shift] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: return_or_enter, modifiers: {mandatory: [option]}}
-        to: [{key_code: return_or_enter, modifiers: [option]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: return_or_enter, modifiers: { mandatory: [option] } }
+        to: [{ key_code: return_or_enter, modifiers: [option] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: return_or_enter, modifiers: {mandatory: [fn]}}
-        to: [{key_code: return_or_enter, modifiers: [fn]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: return_or_enter, modifiers: { mandatory: [fn] } }
+        to: [{ key_code: return_or_enter, modifiers: [fn] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic # Hyper+return
-        from: {key_code: return_or_enter, modifiers: {mandatory: [command, control, option, shift]}}
-        to: [{key_code: return_or_enter, modifiers: [command, control, option, shift]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: return_or_enter, modifiers: { mandatory: [command, control, option, shift] } }
+        to:
+          [
+            { key_code: return_or_enter, modifiers: [command, control, option, shift] },
+            *remove-insert-notice,
+            *leave-insert-mode,
+            *end-alfred,
+          ]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic # Meh+return
-        from: {key_code: return_or_enter, modifiers: {mandatory: [shift, control, option]}}
-        to: [{key_code: return_or_enter, modifiers: [shift, control, option]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: return_or_enter, modifiers: { mandatory: [shift, control, option] } }
+        to:
+          [
+            { key_code: return_or_enter, modifiers: [shift, control, option] },
+            *remove-insert-notice,
+            *leave-insert-mode,
+            *end-alfred,
+          ]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: "2", modifiers: {mandatory: [command]}}
-        to: [{key_code: "2", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: "2", modifiers: { mandatory: [command] } }
+        to: [{ key_code: "2", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: "3", modifiers: {mandatory: [command]}}
-        to: [{key_code: "3", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: "3", modifiers: { mandatory: [command] } }
+        to: [{ key_code: "3", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: "4", modifiers: {mandatory: [command]}}
-        to: [{key_code: "4", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: "4", modifiers: { mandatory: [command] } }
+        to: [{ key_code: "4", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: "5", modifiers: {mandatory: [command]}}
-        to: [{key_code: "5", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: "5", modifiers: { mandatory: [command] } }
+        to: [{ key_code: "5", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: "6", modifiers: {mandatory: [command]}}
-        to: [{key_code: "6", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: "6", modifiers: { mandatory: [command] } }
+        to: [{ key_code: "6", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: "7", modifiers: {mandatory: [command]}}
-        to: [{key_code: "7", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: "7", modifiers: { mandatory: [command] } }
+        to: [{ key_code: "7", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: "8", modifiers: {mandatory: [command]}}
-        to: [{key_code: "8", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: "8", modifiers: { mandatory: [command] } }
+        to: [{ key_code: "8", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: "9", modifiers: {mandatory: [command]}}
-        to: [{key_code: "9", modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: "9", modifiers: { mandatory: [command] } }
+        to: [{ key_code: "9", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: c, modifiers: {mandatory: [command]}}
-        to: [{key_code: c, modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: c, modifiers: { mandatory: [command] } }
+        to: [{ key_code: c, modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
-        from: {key_code: l, modifiers: {mandatory: [command]}}
-        to: [{key_code: l, modifiers: [command]}, *remove-insert-notice, *leave-insert-mode, *end-alfred]
+        from: { key_code: l, modifiers: { mandatory: [command] } }
+        to: [{ key_code: l, modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       # Abort
       - type: basic
-        from: {key_code: caps_lock}
+        from: { key_code: caps_lock }
         to_if_alone:
           - key_code: escape
           - *remove-insert-notice
@@ -389,7 +406,7 @@ rules:
             modifiers: [command, control, option] # keep hyper binding
         conditions: [*finder-or-alfred-app]
       - type: basic
-        from: {key_code: escape}
+        from: { key_code: escape }
         to:
           - key_code: escape
           - *remove-insert-notice
@@ -402,18 +419,18 @@ rules:
         conditions: [*finder-or-alfred-app]
         # Closing window or quitting Finder should also disable Insert mode
       - type: basic
-        from: {key_code: w, modifiers: {mandatory: [command]}}
+        from: { key_code: w, modifiers: { mandatory: [command] } }
         to:
-          - {key_code: w, modifiers: [command]}
+          - { key_code: w, modifiers: [command] }
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-quicklook
           - *end-context-menu
         conditions: [*finder-app, *alfred-inactive]
       - type: basic
-        from: {key_code: q, modifiers: {mandatory: [command]}}
+        from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
-          - {key_code: q, modifiers: [command]}
+          - { key_code: q, modifiers: [command] }
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-quicklook
@@ -423,13 +440,13 @@ rules:
       # Window & Tabs
       # w = close window/tab (:[tab]close)
       - type: basic
-        from: {key_code: w}
+        from: { key_code: w }
         to:
-          - {key_code: w, modifiers: [command]}
+          - { key_code: w, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       # w = close other windows (:only)
       - type: basic
-        from: {key_code: w, modifiers: {mandatory: [shift]}}
+        from: { key_code: w, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: |
               osascript -e '
@@ -441,40 +458,40 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       # <BS> = cycle windows (:bnext)
       - type: basic
-        from: {key_code: delete_or_backspace}
+        from: { key_code: delete_or_backspace }
         to_if_alone:
-          - {key_code: grave_accent_and_tilde, modifiers: [command]}
+          - { key_code: grave_accent_and_tilde, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       # t = cycle tabs (:tabnext)
       - type: basic
-        from: {key_code: t}
+        from: { key_code: t }
         to_if_alone:
-          - {key_code: tab, modifiers: [control]}
+          - { key_code: tab, modifiers: [control] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       #─────────────────────────────────────────────────────────────────────────
       # Selections
       # a = select all
       - type: basic
-        from: {key_code: a}
+        from: { key_code: a }
         to_if_alone:
-          - {key_code: a, modifiers: [command]}
+          - { key_code: a, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # A = DEselect all
       - type: basic
-        from: {key_code: a, modifiers: {mandatory: [shift]}}
+        from: { key_code: a, modifiers: { mandatory: [shift] } }
         to_if_alone:
-          - {key_code: a, modifiers: [command, option]}
+          - { key_code: a, modifiers: [command, option] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <S-Space> = add down to selection
       - type: basic
-        from: {key_code: spacebar, modifiers: {mandatory: [shift]}}
+        from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
         to:
-          - {key_code: down_arrow, modifiers: [shift]}
+          - { key_code: down_arrow, modifiers: [shift] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # q = right-click / Context Menu
       - type: basic
-        from: {key_code: q}
+        from: { key_code: q }
         to:
           # yes, Finder needs to activate even though it is already frontmost,
           # since running a shellcommand seems to temporarily take focus, so
@@ -493,27 +510,27 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu, *no-quicklook]
       # close context menu with another q
       - type: basic
-        from: {key_code: q}
+        from: { key_code: q }
         to_if_alone:
           - key_code: escape
           - *end-context-menu
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *context-menu-open]
       # changed navigation in context menu
       - type: basic
-        from: {key_code: l}
+        from: { key_code: l }
         to_if_alone:
           - key_code: right_arrow
             modifiers: [command]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *context-menu-open]
       - type: basic
-        from: {key_code: h}
+        from: { key_code: h }
         to_if_alone:
           - key_code: left_arrow
             modifiers: [command]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *context-menu-open]
       # Confirm Context Menu Selection
       - type: basic
-        from: {key_code: return_or_enter}
+        from: { key_code: return_or_enter }
         to:
           - key_code: return_or_enter
           - *end-context-menu
@@ -521,27 +538,27 @@ rules:
       # INFO: context menu cancellation configured with the insert mode cancellations
       #─────────────────────────────────────────────────────────────────────────
       # Quicklook Mode
-      # start quicklook 
+      # start quicklook
       - type: basic
-        from: {key_code: spacebar}
+        from: { key_code: spacebar }
         to_if_alone:
           - key_code: spacebar
           - *start-quicklook
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu, *no-quicklook]
       # changed navigation in quicklook
       - type: basic
-        from: {key_code: j}
+        from: { key_code: j }
         to:
           - key_code: page_down
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *quicklook-open]
       - type: basic
-        from: {key_code: k}
+        from: { key_code: k }
         to:
           - key_code: page_up
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *quicklook-open]
       # end quicklook
       - type: basic
-        from: {key_code: spacebar}
+        from: { key_code: spacebar }
         to:
           - key_code: spacebar
           - *end-quicklook
@@ -551,43 +568,50 @@ rules:
       # Basic File Operations
       # d = delete
       - type: basic
-        from: {key_code: d}
+        from: { key_code: d }
         to_if_alone:
           - key_code: delete_or_backspace
             modifiers: [command]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # y = yank
       - type: basic
-        from: {key_code: z} # y = z in German Keyboard
+        from: { key_code: z } # y = z in German Keyboard
         to_if_alone:
           - key_code: c
             modifiers: [command]
           - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
       - type: basic
-        from: {key_code: "y"}
+        from: { key_code: "y" }
         to:
           - key_code: c
             modifiers: [command]
           - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
-      # r = replicate (duplicate)
-      - type: basic
-        from: {key_code: r}
-        to_if_alone:
-          - key_code: d
-            modifiers: [command]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # p = paste
       - type: basic
-        from: {key_code: p}
+        from: { key_code: p }
         to_if_alone:
           - key_code: v
             modifiers: [command]
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode]
+      # r = replicate (duplicate)
+      - type: basic
+        from: { key_code: r }
+        to_if_alone:
+          - key_code: d
+            modifiers: [command]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # R = cross-copy (duplicate)
+      - type: basic
+        from: {key_code: r, modifiers: {mandatory: [shift]}}
+        to_if_alone:
+          - key_code: d
+            modifiers: [command]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # x = cross-move items to other Finder window (if exactly 2 Finder windows)
       - type: basic
-        from: {key_code: x}
+        from: { key_code: x }
         to_if_alone:
           - shell_command: |
               osascript -e'
@@ -606,29 +630,50 @@ rules:
                   end if
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # X (shift): cross-move with replacing
+      - type: basic
+        from: {key_code: x, modifiers: {mandatory: [shift]}}
+        to_if_alone:
+          - shell_command: |
+              osascript -e'
+                tell application "Finder"
+                  if (number of windows is not 2) then
+                    display notification "" with title "Failure" subtitle "⚠️ Not exactly two windows"
+                    beep
+                  else if (the selection is {}) then
+                    display notification "" with title "Failure" subtitle "⚠️ No selection"
+                    beep
+                  else
+                    set otherWin to (target of window 2 as alias)
+                    repeat with f in (selection as list)
+                      move f to otherWin with replacing
+                    end repeat
+                  end if
+                end tell'
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # i = info window
       - type: basic
-        from: {key_code: i}
+        from: { key_code: i }
         to:
           - key_code: i
             modifiers: [command]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # v = view window
       - type: basic
-        from: {key_code: v}
+        from: { key_code: v }
         to_if_alone:
           - key_code: j
             modifiers: [command]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # u = undo
       - type: basic
-        from: {key_code: u}
+        from: { key_code: u }
         to_if_alone:
           - key_code: z
             modifiers: [command]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       - type: basic
-        from: {key_code: u}
+        from: { key_code: u }
         to:
           - key_code: "y" # y = z in German keyboard
             modifiers: [command]
@@ -637,7 +682,7 @@ rules:
       - type: basic
         from:
           key_code: u
-          modifiers: {mandatory: [shift]}
+          modifiers: { mandatory: [shift] }
         to:
           - key_code: z
             modifiers: [command, shift]
@@ -645,14 +690,14 @@ rules:
       - type: basic
         from:
           key_code: u
-          modifiers: {mandatory: [shift]}
+          modifiers: { mandatory: [shift] }
         to:
           - key_code: "y" # y = z in German keyboard
             modifiers: [command, shift]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       # e = eject (if volume)
       - type: basic
-        from: {key_code: e}
+        from: { key_code: e }
         to_if_alone:
           - key_code: e
             modifiers: [command]
@@ -661,7 +706,7 @@ rules:
       - type: basic
         from:
           key_code: n
-          modifiers: {mandatory: [shift]}
+          modifiers: { mandatory: [shift] }
         to:
           - key_code: n
             modifiers: [command, shift]
@@ -672,7 +717,7 @@ rules:
       - type: basic
         from:
           key_code: m
-          modifiers: {mandatory: [shift]}
+          modifiers: { mandatory: [shift] }
         to:
           - key_code: n
             modifiers: [command, control]
@@ -681,7 +726,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # n = New File
       - type: basic
-        from: {key_code: n}
+        from: { key_code: n }
         to_if_alone:
           - shell_command: |
               folder=$(osascript -e 'tell application "Finder" to return POSIX path of (insertion location as alias)')
@@ -695,7 +740,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # b = Toggle `.bkp` (Backup)
       - type: basic
-        from: {key_code: b}
+        from: { key_code: b }
         to:
           - shell_command: |
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
@@ -710,7 +755,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = follow symlink
       - type: basic
-        from: {key_code: s}
+        from: { key_code: s }
         to:
           - shell_command: |
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
@@ -718,8 +763,8 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # S = Create Symlink
       - type: basic
-        from: {key_code: s, modifiers: {mandatory: [shift]}}
-        to: 
+        from: { key_code: s, modifiers: { mandatory: [shift] } }
+        to:
           - shell_command: osascript -e 'display notification "..." with title "beep"'
           - shell_command: |
               sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
@@ -735,7 +780,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # z = zip files
       - type: basic
-        from: {key_code: "y"} # y and z switched on German keyboard
+        from: { key_code: "y" } # y and z switched on German keyboard
         to_if_alone:
           - shell_command: |
               osascript -e '
@@ -744,7 +789,7 @@ rules:
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       - type: basic
-        from: {key_code: z}
+        from: { key_code: z }
         to:
           - shell_command: |
               osascript -e '
@@ -754,21 +799,21 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       # toggle hidden files visibility
       - type: basic
-        from: {key_code: period}
+        from: { key_code: period }
         to:
-          - {key_code: period, modifiers: [command, shift]}
+          - { key_code: period, modifiers: [command, shift] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Navigation
       # o = open fold
       - type: basic
-        from: {key_code: o}
+        from: { key_code: o }
         to_if_alone:
           - key_code: right_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # c = close fold
       - type: basic
-        from: {key_code: c}
+        from: { key_code: c }
         to_if_alone:
           - key_code: left_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
@@ -776,7 +821,7 @@ rules:
       - type: basic
         from:
           key_code: h
-          modifiers: {mandatory: [control]}
+          modifiers: { mandatory: [control] }
         to_if_alone:
           - shell_command: |
               osascript -e '
@@ -788,7 +833,7 @@ rules:
       - type: basic
         from:
           key_code: l
-          modifiers: {mandatory: [control]}
+          modifiers: { mandatory: [control] }
         to:
           - shell_command: |
               osascript -e '
@@ -800,177 +845,177 @@ rules:
       # FIND MODE
       # Enter/Exit
       - type: basic
-        from: {key_code: f}
+        from: { key_code: f }
         to_if_alone:
           - *enter-find-mode
           - *find-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
-        from: {key_code: caps_lock}
+        from: { key_code: caps_lock }
         to_if_alone:
           - *leave-find-mode
           - *remove-find-notice
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: escape}
+        from: { key_code: escape }
         to:
           - *leave-find-mode
           - *remove-find-notice
         conditions: [*finder-app, *is-find-mode]
       # One-Char-Searches
       - type: basic
-        from: {key_code: a, modifiers: {optional: [shift]}}
-        to: [{key_code: a}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: a, modifiers: { optional: [shift] } }
+        to: [{ key_code: a }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: b, modifiers: {optional: [shift]}}
-        to: [{key_code: b}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: b, modifiers: { optional: [shift] } }
+        to: [{ key_code: b }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: c, modifiers: {optional: [shift]}}
-        to: [{key_code: c}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: c, modifiers: { optional: [shift] } }
+        to: [{ key_code: c }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: d, modifiers: {optional: [shift]}}
-        to: [{key_code: d}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: d, modifiers: { optional: [shift] } }
+        to: [{ key_code: d }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: e, modifiers: {optional: [shift]}}
-        to: [{key_code: e}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: e, modifiers: { optional: [shift] } }
+        to: [{ key_code: e }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: f, modifiers: {optional: [shift]}}
-        to: [{key_code: f}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: f, modifiers: { optional: [shift] } }
+        to: [{ key_code: f }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: g, modifiers: {optional: [shift]}}
-        to: [{key_code: g}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: g, modifiers: { optional: [shift] } }
+        to: [{ key_code: g }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: h, modifiers: {optional: [shift]}}
-        to: [{key_code: h}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: h, modifiers: { optional: [shift] } }
+        to: [{ key_code: h }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: i, modifiers: {optional: [shift]}}
-        to: [{key_code: i}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: i, modifiers: { optional: [shift] } }
+        to: [{ key_code: i }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: j, modifiers: {optional: [shift]}}
-        to: [{key_code: j}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: j, modifiers: { optional: [shift] } }
+        to: [{ key_code: j }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: k, modifiers: {optional: [shift]}}
-        to: [{key_code: k}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: k, modifiers: { optional: [shift] } }
+        to: [{ key_code: k }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: l, modifiers: {optional: [shift]}}
-        to: [{key_code: l}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: l, modifiers: { optional: [shift] } }
+        to: [{ key_code: l }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: m, modifiers: {optional: [shift]}}
-        to: [{key_code: m}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: m, modifiers: { optional: [shift] } }
+        to: [{ key_code: m }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: n, modifiers: {optional: [shift]}}
-        to: [{key_code: n}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: n, modifiers: { optional: [shift] } }
+        to: [{ key_code: n }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: o, modifiers: {optional: [shift]}}
-        to: [{key_code: o}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: o, modifiers: { optional: [shift] } }
+        to: [{ key_code: o }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: p, modifiers: {optional: [shift]}}
-        to: [{key_code: p}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: p, modifiers: { optional: [shift] } }
+        to: [{ key_code: p }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: q, modifiers: {optional: [shift]}}
-        to: [{key_code: q}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: q, modifiers: { optional: [shift] } }
+        to: [{ key_code: q }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: r, modifiers: {optional: [shift]}}
-        to: [{key_code: r}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: r, modifiers: { optional: [shift] } }
+        to: [{ key_code: r }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: s, modifiers: {optional: [shift]}}
-        to: [{key_code: s}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: s, modifiers: { optional: [shift] } }
+        to: [{ key_code: s }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: t, modifiers: {optional: [shift]}}
-        to: [{key_code: t}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: t, modifiers: { optional: [shift] } }
+        to: [{ key_code: t }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: u, modifiers: {optional: [shift]}}
-        to: [{key_code: u}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: u, modifiers: { optional: [shift] } }
+        to: [{ key_code: u }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: v, modifiers: {optional: [shift]}}
-        to: [{key_code: v}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: v, modifiers: { optional: [shift] } }
+        to: [{ key_code: v }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: w, modifiers: {optional: [shift]}}
-        to: [{key_code: w}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: w, modifiers: { optional: [shift] } }
+        to: [{ key_code: w }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: x, modifiers: {optional: [shift]}}
-        to: [{key_code: x}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: x, modifiers: { optional: [shift] } }
+        to: [{ key_code: x }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: y, modifiers: {optional: [shift]}}
-        to: [{key_code: y}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: y, modifiers: { optional: [shift] } }
+        to: [{ key_code: y }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: z, modifiers: {optional: [shift]}}
-        to: [{key_code: z}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: z, modifiers: { optional: [shift] } }
+        to: [{ key_code: z }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: period}
-        to: [{key_code: period}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: period }
+        to: [{ key_code: period }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: "0"}
-        to: [{key_code: "0"}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: "0" }
+        to: [{ key_code: "0" }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: "1"}
-        to: [{key_code: "1"}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: "1" }
+        to: [{ key_code: "1" }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: "2"}
-        to: [{key_code: "2"}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: "2" }
+        to: [{ key_code: "2" }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: "3"}
-        to: [{key_code: "3"}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: "3" }
+        to: [{ key_code: "3" }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: "4"}
-        to: [{key_code: "4"}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: "4" }
+        to: [{ key_code: "4" }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: "5"}
-        to: [{key_code: "5"}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: "5" }
+        to: [{ key_code: "5" }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: "6"}
-        to: [{key_code: "6"}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: "6" }
+        to: [{ key_code: "6" }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: "7"}
-        to: [{key_code: "7"}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: "7" }
+        to: [{ key_code: "7" }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: "8"}
-        to: [{key_code: "8"}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: "8" }
+        to: [{ key_code: "8" }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       - type: basic
-        from: {key_code: "9"}
-        to: [{key_code: "9"}, *leave-find-mode, *remove-find-notice]
+        from: { key_code: "9" }
+        to: [{ key_code: "9" }, *leave-find-mode, *remove-find-notice]
         conditions: [*finder-app, *is-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # MOVE
       # m = move
       - type: basic
-        from: {key_code: m}
+        from: { key_code: m }
         to:
           - key_code: c
             modifiers: [command]
@@ -979,7 +1024,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # p / cmd+v = paste content marked for move thing
       - type: basic
-        from: {key_code: p}
+        from: { key_code: p }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
         to:
           - key_code: v
@@ -989,7 +1034,7 @@ rules:
       - type: basic
         from:
           key_code: v
-          modifiers: {mandatory: [command]}
+          modifiers: { mandatory: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
         to:
           - key_code: v
@@ -998,7 +1043,7 @@ rules:
           - *remove-move-notice
       # y / cmd+c = yank, which also aborts move
       - type: basic
-        from: {key_code: "y"}
+        from: { key_code: "y" }
         to:
           - key_code: c
             modifiers: [command]
@@ -1007,7 +1052,7 @@ rules:
           - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active, *not-German-keyboard]
       - type: basic
-        from: {key_code: z} # y and z switched on German keyboard
+        from: { key_code: z } # y and z switched on German keyboard
         to:
           - key_code: c
             modifiers: [command]
@@ -1017,7 +1062,7 @@ rules:
       - type: basic
         from:
           key_code: c
-          modifiers: {mandatory: [command]}
+          modifiers: { mandatory: [command] }
         to:
           - key_code: c
             modifiers: [command]
@@ -1028,69 +1073,69 @@ rules:
       #─────────────────────────────────────────────────────────────────────────
       # SORT
       - type: basic # by name
-        from: {key_code: "3"}
+        from: { key_code: "3" }
         to:
-          - {key_code: "1", modifiers: [control, option, command]}
+          - { key_code: "1", modifiers: [control, option, command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by modification date
-        from: {key_code: "4"}
+        from: { key_code: "4" }
         to:
-          - {key_code: "5", modifiers: [control, option, command]}
+          - { key_code: "5", modifiers: [control, option, command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by size
-        from: {key_code: "5"}
+        from: { key_code: "5" }
         to:
-          - {key_code: "6", modifiers: [control, option, command]}
+          - { key_code: "6", modifiers: [control, option, command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by kind
-        from: {key_code: "6"}
+        from: { key_code: "6" }
         to:
-          - {key_code: "2", modifiers: [control, option, command]}
+          - { key_code: "2", modifiers: [control, option, command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Sidebar/Preview/Pathbar Toggle
       - type: basic
         from:
           key_code: "1"
-          modifiers: {optional: [command]}
+          modifiers: { optional: [command] }
         to:
-          - {key_code: "s", modifiers: [option, command]}
+          - { key_code: "s", modifiers: [option, command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from:
           key_code: "0"
-          modifiers: {optional: [command]}
+          modifiers: { optional: [command] }
         to:
-          - {key_code: "p", modifiers: [shift, command]}
+          - { key_code: "p", modifiers: [shift, command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from:
           key_code: "9"
-          modifiers: {optional: [command]}
+          modifiers: { optional: [command] }
         to:
-          - {key_code: "p", modifiers: [option, command]}
+          - { key_code: "p", modifiers: [option, command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # ctrl-p: copy path
       - type: basic
-        from: {key_code: p, modifiers: {mandatory: [control]}}
+        from: { key_code: p, modifiers: { mandatory: [control] } }
         to:
-          - {key_code: "c", modifiers: [option, command]}
+          - { key_code: "c", modifiers: [option, command] }
           - shell_command: osascript -e 'display notification "File path" with title "✅ Copied"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-n: copy name
       - type: basic
-        from: {key_code: n, modifiers: {mandatory: [control]}}
+        from: { key_code: n, modifiers: { mandatory: [control] } }
         to:
           - key_code: return_or_enter
-          - {key_code: "a", modifiers: [command]}
-          - {key_code: "c", modifiers: [command]}
+          - { key_code: "a", modifiers: [command] }
+          - { key_code: "c", modifiers: [command] }
           - key_code: return_or_enter
           - shell_command: osascript -e 'display notification "File name" with title "✅ Copied"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-g: open at github
       - type: basic
-        from: {key_code: g, modifiers: {mandatory: [control]}}
+        from: { key_code: g, modifiers: { mandatory: [control] } }
         to:
           - shell_command: |
               GIT_OPTIONAL_LOCKS=0

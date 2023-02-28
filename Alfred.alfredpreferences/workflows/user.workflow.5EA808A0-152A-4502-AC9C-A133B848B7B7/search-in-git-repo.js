@@ -26,19 +26,16 @@ const fileArray = app
 
 		// type determiniation
 		let type;
-		if (name.startsWith(".z")) type = "zsh";
+		if (name.startsWith(".z")) type = "sh";
 		else if (name.startsWith(".")) type = "config";
+		else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
+		else if (name === "obsidian.vimrc") type = "obsidian";
 		else type = name.split(".").pop();
+		if (type === "yml") type = "yaml";
 
 		// icon determination
 		let iconObj = { path: "./../../../custom-filetype-icons/" };
 		switch (type) {
-			case "yml":
-				type = "yaml" // falls through
-			case "zsh":
-				type = "sh" // falls through
-			case "scss":
-				type = "css" // falls through
 			case "icns":
 			case "png":
 			case "gif":
