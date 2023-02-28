@@ -42,6 +42,10 @@ const fileArray = app
 			case "gif":
 				iconObj.path = fPath; // use image itself
 				break;
+			case "opml":
+			case "other":
+			case "url":
+			case "html":
 			case "folder":
 				iconObj = { type: "fileicon", path: fPath };
 				break;
