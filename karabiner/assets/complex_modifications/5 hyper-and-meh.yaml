@@ -79,25 +79,28 @@ rules:
           # using Finder via Applescript instead of `open` to open in the same
           # window instead of creating a new one
           - shell_command: |
-              WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
-              DOTFILE_FOLDER="$HOME/.config"
-              currentWindow=$(osascript -e 'tell application "Finder" to return POSIX path of (insertion location as alias)')
-              if [[ "$currentWindow" == "$WD" ]] ; then
+              
+              if ! pgrep -x "Finder" > /dev/null ; then
                 open -a "Finder"
-                target="$WD"
-              else
-                target="$DOTFILE_FOLDER"
+                sleep 0.4
               fi
-              osascript -e "
-                set the_folder to (\"$target\") as POSIX file
-                tell application \"Finder\"
-                  activate
-                  if front Finder window exists then
-                    set target of front Finder window to the_folder
-                  else
-                    open the_folder
+              osascript -e '
+                set home to POSIX path of (path to home folder as string)
+                set wd to (home & "Library/Mobile Documents/com~apple~CloudDocs/File Hub/")
+                set dotfile_folder to (home & ".config/")
+                tell application "Finder"
+                  set toOpen to (wd as POSIX file)
+                  if frontmost and front window exists then
+                    set current_path to POSIX path of (target of front window as alias)
+                    if (current_path = wd) then set toOpen to (dotfile_folder as POSIX file)
+                  else if not frontmost and front window exists then
+                    activate
+                    set target of front Finder window to toOpen
+                  else if not (front window exists) then
+                    activate
+                    open toOpen
                   end if
-                end tell"
+                end tell'
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣  \U0001F4C2 Restart App"
     manipulators:

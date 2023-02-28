@@ -71,7 +71,10 @@
 			"set theTextItems to every text item of unresolved_path",
 			"set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))",
 			"set resolved_path to theTextItems as string"
-		],
-		"description": "desc"
+		]
+	},
+	"home": {
+		"prefix": "home",
+		"body": "POSIX path of (path to home folder as string)"
 	}
 }
