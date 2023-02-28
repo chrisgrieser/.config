@@ -132,9 +132,3 @@ rules:
             file_paths:
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
-      #─────────────────────────────────────────────────────────────────
-      # alt+space: Emoji Inserter
-      - type: basic
-        from: {key_code: spacebar, modifiers: {mandatory: [option]}}
-        to:
-          - {key_code: spacebar, modifiers: [command, control]}

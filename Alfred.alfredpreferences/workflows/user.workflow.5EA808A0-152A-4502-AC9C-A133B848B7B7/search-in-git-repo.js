@@ -31,41 +31,24 @@ const fileArray = app
 		else type = name.split(".").pop();
 
 		// icon determination
-		let iconObj = { path: "./../filetype-icons/" };
+		let iconObj = { path: "./../../../custom-filetype-icons/" };
 		switch (type) {
-			case "json":
-			case "lua":
-			case "html":
-			case "pdf":
-			case "bib":
-			case "css":
-			case "md":
-			case "log":
-			case "js":
-			case "ts":
-			case "yaml":
-			case "config":
-			case "blank":
-			case "sh":
-				iconObj.path += type + ".png";
-				break;
 			case "yml":
-				iconObj.path += "yaml.png";
-				break;
+				type = "yaml" // falls through
 			case "zsh":
-				iconObj.path += "sh.png";
-				break;
+				type = "sh" // falls through
 			case "scss":
-				iconObj.path += "css.png";
-				break;
+				type = "css" // falls through
 			case "icns":
 			case "png":
 			case "gif":
 				iconObj.path = fPath; // use image itself
 				break;
 			case "folder":
-			default:
 				iconObj = { type: "fileicon", path: fPath };
+				break;
+			default:
+				iconObj.path += type + ".png";
 		}
 
 		return {

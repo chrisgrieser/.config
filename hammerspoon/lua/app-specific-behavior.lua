@@ -73,7 +73,7 @@ end)
 -- auto-pause/resume Spotify on launch/quit of apps with sound
 SpotifyAppWatcher = Aw.new(function(appName, eventType)
 	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
-	if not (ScreenIsUnlocked()) or IsProjector() or not (TableContains(appsWithSound, appName)) then
+	if not ScreenIsUnlocked() or IsProjector() or not (TableContains(appsWithSound, appName)) then
 		return
 	end
 

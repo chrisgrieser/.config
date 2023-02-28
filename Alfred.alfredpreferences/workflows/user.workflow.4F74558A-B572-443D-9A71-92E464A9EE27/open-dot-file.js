@@ -60,41 +60,18 @@ const fileArray = app
 		const matcher = alfredMatcher(`${name} ${parentPart}`);
 
 		// icon determination
-		let iconObj = { path: "./../filetype-icons/" };
+		let iconObj = { path: "./../../../custom-filetype-icons/" };
 		switch (type) {
-			case "json":
-			case "lua":
-			case "html":
-			case "pdf":
-			case "bib":
-			case "css":
-			case "md":
-			case "js":
-			case "ts":
-			case "log":
-			case "yaml":
-			case "config":
-			case "blank":
-			case "sh":
-				iconObj.path += type + ".png";
-				break;
-			case "yml":
-				iconObj.path += "yaml.png";
-				break;
-			case "zsh":
-				iconObj.path += "sh.png";
-				break;
-			case "scss":
-				iconObj.path += "css.png";
-				break;
 			case "icns":
 			case "png":
 			case "gif":
 				iconObj.path = fPath; // use image itself
 				break;
 			case "folder":
-			default:
 				iconObj = { type: "fileicon", path: fPath };
+				break;
+			default:
+				iconObj.path += type + ".png";
 		}
 
 		return {

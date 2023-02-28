@@ -29,8 +29,8 @@ end
 TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 	-- move twitter and scroll it up
 	if appName == "Twitter" and eventType == Aw.launched then
-		BringAllToFront()
-		RunWithDelays(0.2, function()
+		RunWithDelays(1, function()
+			BringAllToFront()
 			TwitterToTheSide()
 			TwitterScrollUp()
 		end)
@@ -53,7 +53,6 @@ TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 
 	-- raise twitter when switching window to any app
 	elseif appName and eventType == Aw.activated then
-		if not appObj then return end
 		local win = appObj:mainWindow()
 		if CheckSize(win, PseudoMaximized) and AppIsRunning("Twitter") then
 			App("Twitter"):mainWindow():raise()

@@ -9,11 +9,17 @@
 	},
 	"ignore (prettier)": {
 		"prefix": "ignore (prettier)",
-		"body": "// prettier-ignore"
+		"body": "// prettier-ignore",
+		"description": "Ignores the next block of code."
 	},
 	"globals (eslint)": {
 		"prefix": "globals (eslint)",
 		"body": "/* global ${1:var} */"
+	},
+	"fall through (switch, eslint)": {
+		"prefix": "fall through (switch, eslint)",
+		"body": "// falls through",
+		"description": "This comment indicates that a fallthrough in a switch statement is intentional and disables the respective eslint warning. See: https://eslint.org/docs/latest/rules/no-fallthrough"
 	},
 	"For Loop": {
 		"prefix": "for",
