@@ -50,14 +50,16 @@ const fileArray = app
 		const name = parts.pop();
 		let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
 		if (parentPart === ".") parentPart = "";
+		const matcher = alfredMatcher(`${name} ${parentPart}`);
 
 		// type determiniation
 		let type;
 		if (name.startsWith(".z")) type = "sh";
 		else if (name.startsWith(".")) type = "config";
 		else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
+		else if (name === "obsidian.vimrc") type = "obsidian";
 		else type = name.split(".").pop();
-		const matcher = alfredMatcher(`${name} ${parentPart}`);
+		if (type === "yml") type = "yaml";
 
 		// icon determination
 		let iconObj = { path: "./../../../custom-filetype-icons/" };
