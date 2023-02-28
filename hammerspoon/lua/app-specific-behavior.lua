@@ -42,11 +42,10 @@ TransBgAppWatcher = Aw.new(function(appName, eventType, appObject)
 		return
 	end
 
-
 	if eventType == Aw.activated or eventType == Aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
-		-- hiding is used for it activation as well
-		RunWithDelays({ 0, 0.1, 0.2, 0.3 }, function()
+		-- hiding is used for its activation as well
+		RunWithDelays({ 0, 0.15, 0.3 }, function()
 			local win = appObject:mainWindow()
 			if not win then return end
 			if CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized) then hideOthers(win) end

@@ -13,6 +13,21 @@ Hyper = { "cmd", "alt", "ctrl", "shift" }
 I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
+-- ENVIRONMENT: retrieve configs from zshenv; sometimes not loading properly
+local i = 0
+while not DotfilesFolder do
+	DotfilesFolder = os.getenv("DOTFILE_FOLDER")
+	PasswordStore = os.getenv("PASSWORD_STORE_DIR")
+	VaultLocation = os.getenv("VAULT_PATH")
+	FileHub = os.getenv("WD")
+	hs.execute("sleep 0.2") -- since lua has no own wait command
+	if i > 30 then
+		Notify("⚠️ Could not retrieve .zshenv")
+		return
+	end
+end
+
+--------------------------------------------------------------------------------
 
 ---trims whitespace from string
 ---@param str string

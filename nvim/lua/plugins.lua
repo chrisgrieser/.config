@@ -41,6 +41,11 @@ return {
 	-- Misc
 	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
 	{
+		"ThePrimeagen/harpoon",
+		dependencies = "nvim-lua/plenary.nvim",
+		lazy = true,
+	},
+	{
 		"chrisgrieser/nvim-genghis",
 		lazy = true,
 		dev = true,
@@ -66,5 +71,4 @@ return {
 			}
 		end,
 	},
-
 }
