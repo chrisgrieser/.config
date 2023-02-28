@@ -152,7 +152,7 @@
 	},
 	"play sound": {
 		"prefix": ["play sound", "audio"],
-		"body": "afplay /System/Library/Sounds/${1:funk}.aiff"
+		"body": "afplay /System/Library/Sounds/${1:Purr}.aiff"
 	},
 	"while": {
 		"prefix": "while",
