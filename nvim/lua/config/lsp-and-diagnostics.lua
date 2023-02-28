@@ -49,7 +49,7 @@ keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = tru
 -- LSP lines
 vim.keymap.set( "n", "<leader>d", function ()
 	require("lsp_lines").toggle()
-	vim.diagnostic.config.virtual_text = 
+	vim.diagnostic.config.virtual_text = not vim.diagnostic.config.virtual_text
 
 	vim.diagnostic.disable(0)
 	vim.diagnostic.enable(0)
