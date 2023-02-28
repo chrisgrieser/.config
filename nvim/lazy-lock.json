@@ -64,6 +64,7 @@
   "nvim-web-devicons": { "branch": "master", "commit": "c2c2317f356c8b7da0252f5da758f71bb60bb6b2" },
   "one-small-step-for-vimkind": { "branch": "main", "commit": "aef1bdbb8347e6daaf33d5109002f3df243ebfe9" },
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
+  "project.nvim": { "branch": "main", "commit": "1c2e9c93c7c85126c2197f5e770054f53b1926fb" },
   "promise-async": { "branch": "main", "commit": "7fa127fa80e7d4d447e0e2c78e99af4355f4247b" },
   "quick-scope": { "branch": "master", "commit": "428e8698347f254d24b248af9f656194a80081e5" },
   "refactoring.nvim": { "branch": "master", "commit": "57c32c6b7a211e5a3a5e4ddc4ad2033daff5cf9a" },
