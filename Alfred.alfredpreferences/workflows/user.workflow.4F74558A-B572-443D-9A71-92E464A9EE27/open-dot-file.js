@@ -60,6 +60,7 @@ const fileArray = app
 		else if (name === "obsidian.vimrc") type = "obsidian";
 		else type = name.split(".").pop();
 		if (type === "yml") type = "yaml";
+		if (type.endsWith("-bkp")) type = "other";
 
 		// icon determination
 		let iconObj = { path: "./../../../custom-filetype-icons/" };
@@ -69,6 +70,7 @@ const fileArray = app
 			case "gif":
 				iconObj.path = fPath; // use image itself
 				break;
+			case "other":
 			case "folder":
 				iconObj = { type: "fileicon", path: fPath };
 				break;

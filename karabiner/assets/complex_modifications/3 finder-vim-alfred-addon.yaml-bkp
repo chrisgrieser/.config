@@ -1,3 +1,4 @@
+# INFO only needed when *not* using Alfred's compatibility mode
 # INFO has to come before finder-vim-mode.yaml itself
 rules:
   - description: "Addons for Finder-Vim-Mode"

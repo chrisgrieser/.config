@@ -11,13 +11,15 @@ function alfredMatcher(str) {
 
 const docsURL = "https://api.github.com/repos/eslint/eslint/git/trees/main?recursive=1";
 const baseURL = "https://eslint.org/docs/latest";
+const docPathRegex = /^docs\/src\/(?:rules|use)\/(.*)\.md$/i;
 
 const workArray = JSON.parse(app.doShellScript(`curl -s "${docsURL}"`))
-	.tree.filter(file => file.path.startsWith("docs/src/rules/") || file.path.startsWith("docs/src/use/"))
+	.tree.filter(file => docPathRegex.test(file.path))
 	.map(entry => {
 		const subsite = entry.path.slice(9, -3);
-		const category = subsite.split("/")[0];
-		const displayTitle = subsite.split("/")[1];
+		const parts = subsite.split("/");
+		const displayTitle = parts.pop();
+		const category = parts.join("/");
 		const url = `${baseURL}/${subsite}`;
 
 		return {
