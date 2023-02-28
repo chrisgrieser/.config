@@ -92,6 +92,10 @@
 		"prefix": "check installed",
 		"body": "if ! command -v ${1:cli} &>/dev/null; then echo \"${1:cli} not installed.\" && return 1; fi"
 	},
+	"check if in git repo": {
+		"prefix": "check if in git repo",
+		"body": "if ! git rev-parse --is-inside-work-tree &>/dev/null ; then echo \"$file is not ins a git repository.\" && exit 1 ; fi"
+	},
 	"awk (get field)": {
 		"prefix": "awk (field)",
 		"body": "awk '{ print $${1:1} }'",
