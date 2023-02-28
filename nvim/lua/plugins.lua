@@ -42,14 +42,18 @@ return {
 	-- Misc
 	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
 	{ -- more flexible Harpoon alternative
-		"cbochs/grapple.nvim", 
+		"cbochs/grapple.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
-		lazy = true,
+		-- lazy = true,
 		config = function()
 			require("grapple").setup {
+				-- first looks for a `.grapple_root` file from the current directory
+				-- upwards, if not found uses the git repo, if also not found, the
+				-- current directory
 				-- https://github.com/cbochs/grapple.nvim#grapplescoperoot
 				scope = require("grapple.scope").fallback {
 					require("grapple.scope").root(".grapple_root"),
+					require("grapple").resolvers.git_fallback,
 					require("grapple").resolvers.static,
 				},
 			}

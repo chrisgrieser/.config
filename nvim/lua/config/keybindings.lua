@@ -307,10 +307,12 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 
 -- Harpoon/Grapple
 keymap("n", "<D-CR>", function() require("grapple").cycle_forward() end, { desc = "ﯠ Next File" })
+keymap("n", "<leader>+", function() require("grapple").popup_tags() end, { desc = "ﯠ Popup Tags" })
+keymap("n", "<leader>#", function() require("grapple").popup_scopes() end, { desc = "ﯠ Popup Tags" })
 keymap("n", "<leader><CR>", function()
-	require("grapple").toggle()
 	local msg = require("grapple").exists() and "ﯡ Untag" or "ﯠ Tag"
 	vim.notify(msg)
+	require("grapple").toggle()
 end, { desc = "ﯠ/ﯡ Toggle Tag" })
 
 ------------------------------------------------------------------------------
@@ -481,6 +483,7 @@ autocmd("FileType", {
 		"AppleScriptRunOutput",
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
+		"grapple",
 		"man",
 	},
 	callback = function()
