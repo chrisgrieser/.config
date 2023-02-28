@@ -41,30 +41,40 @@ return {
 
 	-- Misc
 	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
-	-- more flexible Harpoon alternative
 	{
-		"cbochs/grapple.nvim",
-		dependencies = "nvim-lua/plenary.nvim",
-		init = function()
-			-- first looks for a `.grapple_root` file from the current directory
-			-- upwards, if not found uses the git repo, if also not found, the
-			-- current directory https://github.com/cbochs/grapple.nvim#scope-api
-			My_resolver = require("grapple.scope").fallback({
-				require("grapple.scope").root(".luarc.json"),
-				require("grapple").resolvers.git_fallback,
-				require("grapple").resolvers.directory,
-			}, { cache = false })
-			require("grapple").setup {
-				scope = My_resolver,
-			}
-			vim.api.nvim_create_autocmd("BufEnter", {
-				pattern = "*",
-				callback = function()
-					require("grapple.scope").update(My_resolver)
-				end,
-			})
+		"ThePrimeagen/harpoon",
+		config = function()
+			
 		end,
+		dependencies = "nvim-lua/plenary.nvim",
+		lazy = true,
 	},
+
+	-- TODO pending: https://github.com/cbochs/grapple.nvim/issues/62
+	-- more flexible Harpoon alternative
+	-- {
+	-- 	"cbochs/grapple.nvim",
+	-- 	dependencies = "nvim-lua/plenary.nvim",
+	-- 	init = function()
+	-- 		-- first looks for a `.grapple_root` file from the current directory
+	-- 		-- upwards, if not found uses the git repo, if also not found, the
+	-- 		-- current directory https://github.com/cbochs/grapple.nvim#scope-api
+	-- 		My_resolver = require("grapple.scope").fallback({
+	-- 			require("grapple.scope").root(".luarc.json"),
+	-- 			require("grapple").resolvers.git_fallback,
+	-- 			require("grapple").resolvers.directory,
+	-- 		}, { cache = false })
+	-- 		require("grapple").setup {
+	-- 			scope = My_resolver,
+	-- 		}
+	-- 		vim.api.nvim_create_autocmd("BufEnter", {
+	-- 			pattern = "*",
+	-- 			callback = function()
+	-- 				require("grapple.scope").update(My_resolver)
+	-- 			end,
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		"chrisgrieser/nvim-genghis",
 		lazy = true,

@@ -100,11 +100,11 @@ local topSeparators = isGui() and { left = "", right = "" } or { left = ""
 require("lualine").setup {
 	sections = {
 		lualine_a = {
-			{ -- indicate that the file has a grapple tag
-				function() return "ﯠ" end,
-				cond = require("grapple").exists,
-				padding = {left = 1, right = 0},
-			},
+			-- { -- indicate that the file has a grapple tag
+			-- 	function() return "ﯠ" end,
+			-- 	cond = require("grapple").exists,
+			-- 	padding = {left = 1, right = 0},
+			-- },
 			{
 				"filetype",
 				colored = false,
