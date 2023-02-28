@@ -15,9 +15,8 @@ const dotfileFolder = $.getenv("dotfile_folder").replace(/^~/, app.pathTo("home 
 const fileArray = app
 	.doShellScript(
 		`
-		PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 		cd "${dotfileFolder}"
-		fd --type=file --hidden --no-ignore \\
+		fd --type=file --hidden --no-ignore --absolute-path \\
 			-E "Alfred.alfredpreferences" \\
 			-E "alacritty/colors/*" \\
 			-E "hammerspoon/Spoons/*" \\
@@ -44,9 +43,8 @@ const fileArray = app
 	)
 	.split("\r")
 	/* eslint-disable-next-line complexity */
-	.map(file => {
-		const fPath = dotfileFolder + file;
-		const parts = file.split("/");
+	.map(fPath => {
+		const parts = fPath.split("/");
 		const name = parts.pop();
 		let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
 		if (parentPart === ".") parentPart = "";
@@ -59,8 +57,10 @@ const fileArray = app
 		else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
 		else if (name === "obsidian.vimrc") type = "obsidian";
 		else type = name.split(".").pop();
+
 		if (type === "yml") type = "yaml";
-		if (type.endsWith("-bkp")) type = "other";
+		else if (type === "mjs") type = "js";
+		else if (type.endsWith("-bkp")) type = "other";
 
 		// icon determination
 		let iconObj = { path: "./../../../custom-filetype-icons/" };

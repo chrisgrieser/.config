@@ -41,9 +41,18 @@ return {
 	-- Misc
 	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
 	{
-		"ThePrimeagen/harpoon",
+		"cbochs/grapple.nvim", -- more flexible Harpoon alternative
 		dependencies = "nvim-lua/plenary.nvim",
 		lazy = true,
+		config = function()
+			require("grapple").setup {
+				log_level = "info",
+
+				---Can be either the name of a builtin scope resolver,
+				---or a custom scope resolver
+				scope = "git",
+			}
+		end,
 	},
 	{
 		"chrisgrieser/nvim-genghis",
