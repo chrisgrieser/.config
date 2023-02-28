@@ -145,10 +145,14 @@
 		"body": "else\n\t${0:command}",
 		"description": "else"
 	},
-	"for_in": {
-		"prefix": "for_in",
+	"for .. in": {
+		"prefix": "for .. in",
 		"body": "for ${1:VAR} in ${0:LIST}\ndo\n\techo \"\\$${1:VAR}\"\ndone\n",
 		"description": "for loop in list"
+	},
+	"play sound": {
+		"prefix": ["play sound", "audio"],
+		"body": "afplay /System/Library/Sounds/${1:funk}.aiff"
 	},
 	"while": {
 		"prefix": "while",
