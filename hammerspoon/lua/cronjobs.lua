@@ -165,7 +165,6 @@ HomeWakeWatcher = caff
 					SetDarkmode(true)
 					MovieModeLayout()
 				else
-					Notify("beep")
 					AutoSwitchDarkmode()
 					WorkLayout()
 				end
