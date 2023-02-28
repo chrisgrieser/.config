@@ -157,23 +157,26 @@ end)
 HomeWakeWatcher = caff
 	.new(function(event)
 		if IsAtOffice() then return end
-		if not (event == caff.screensDidWake) and not (event == caff.systemDidWake) then return end
+		if not (event == caff.screensDidWake or event == caff.screensDidUnlock) then return end
 
 		TwitterScrollUp()
 		hs.execute("sketchybar --set clock popup.drawing=true")
 
-		-- INFO checks need to run after delay, since display number is not
-		-- immediately picked up after wake
-		RunWithDelays(1, function()
-			if IsProjector() then
-				SetDarkmode(true)
-				MovieModeLayout()
-			else
-				AutoSwitchDarkmode()
-				WorkLayout()
-			end
+		hs.timer.waitUntil(ScreenIsUnlocked, function()
+			if event == caff.systemDidWake then SyncAllGitRepos("notify") end
+			-- INFO checks need to run after delay, since display number is not
+			-- immediately picked up after wake
+			RunWithDelays(1, function()
+				if IsProjector() then
+					SetDarkmode(true)
+					MovieModeLayout()
+				else
+					Notify("beep")
+					AutoSwitchDarkmode()
+					WorkLayout()
+				end
+			end)
 		end)
-		if event == caff.systemDidWake then SyncAllGitRepos("notify") end
 	end)
 	:start()
 

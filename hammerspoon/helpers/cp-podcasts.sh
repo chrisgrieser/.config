@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-PODCAST_LOCATION=~"/Library/Group Containers/243LU875E5.groups.com.apple.podcasts/Library/Cache/"
+PODCAST_LOCATION="$HOME/Library/Group Containers/243LU875E5.groups.com.apple.podcasts/Library/Cache/"
 PODCAST_TARGET="/Volumes/OpenSwim/"
 
 #-------------------------------------------------------------------------------
@@ -14,5 +14,5 @@ done
 [[ -e "$PODCAST_TARGET" ]] || exit 1
 
 # -n = do not overwrite existing file
-cp -n "$PODCAST_LOCATION"/*.mp3 "$PODCAST_TARGET" || true
-open "$PODCAST_TARGET" -a "Marta"
+cp -n "$PODCAST_LOCATION"/*.mp3 "$PODCAST_TARGET"
+open "$PODCAST_TARGET" 

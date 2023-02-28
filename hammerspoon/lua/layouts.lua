@@ -60,29 +60,27 @@ function WorkLayout()
 	local layout = createLayout(PseudoMaximized, IMacDisplay, {
 		"Vivaldi",
 		"Highlights",
-		"Neovide",
 		"neovide",
 		"Slack",
 		"Discord",
-		"Warp",
 		"Obsidian",
 		"Drafts",
 		"Mimestream",
 		"Spotify",
 		"alacritty",
-		"Alacritty",
 	})
 	hs.layout.apply(layout)
 	ShowAllSidebars()
-	RunWithDelays(0.3, function () OpenApp("Spotify") end) -- delayed, so SpotifyDo isn not triggered
 	RestartApp("AltTab") -- FIX AltTab sometimes not picking up open apps
 
-	local delays = IsAtMother() and {0.5, 1} or 0.1
-	RunWithDelays(delays , function()
+	local delays = IsAtMother() and { 0.5, 1 } or 0.5
+	RunWithDelays(delays, function()
+		OpenApp("Spotify") -- delayed, so SpotifyAppWatcher isn't not triggered
 		App("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
-		App("Drafts"):activate()
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
+		TwitterToTheSide()
+		App("Drafts"):activate()
 	end)
 	dockSwitcher("work")
 end
@@ -91,9 +89,8 @@ function MovieModeLayout()
 	-- different PWAs due to not being M1 device
 	local targetMode = IsAtMother() and "mother-movie" or "movie"
 	dockSwitcher(targetMode)
-	
+
 	SetDarkmode(true)
-	hs.spotify.pause()
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
 	SetDarkmode(true)
@@ -111,12 +108,17 @@ function MovieModeLayout()
 		"Mimestream",
 		"Alfred Preferences",
 		"Finder",
-		"Warp",
 		"Highlights",
 		"Alacritty",
 		"alacritty",
 		"Twitter",
 	}
+
+	-- safety net redundancy
+	if hs.spotify.isPlaying() then
+		hs.spotify.pause()
+		QuitApp("Spotify")
+	end
 end
 
 --------------------------------------------------------------------------------

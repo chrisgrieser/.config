@@ -355,3 +355,11 @@ rules:
           - shell_command: open -g 'hammerspoon://focus-btop'
           - *deactivate-leader
           - *remove-notice
+      # [space]: Emoji Picker
+      - type: basic
+        from: { key_code: spacebar }
+        conditions: [*leader-active]
+        to:
+          - {key_code: spacebar, modifiers: [command, control]}
+          - *deactivate-leader
+          - *remove-notice

@@ -9,12 +9,13 @@ local brightnessThreshhold = 90
 
 local function brightnessNotify()
 	local brightness = math.floor(hs.brightness.ambient())
-	Notify("☀️ Brightness: ", tostring(brightness))
+	Notify("☀️ Brightness:", tostring(brightness))
 end
 
 -- notify with ambient brightness for Alfred
 UriScheme("ambient-brightness", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
+	print("🌔 Manual Dark Mode Switch")
 	brightnessNotify()
 end)
 
@@ -72,8 +73,7 @@ end
 ---@return boolean
 function IsDarkMode()
 	-- reading this via shell rather than applescript is less laggy
-	local isDark = hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n"
-	return isDark
+	return hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n"
 end
 
 ---@param toDark boolean true = dark, false = light
@@ -89,10 +89,10 @@ function AutoSwitchDarkmode()
 
 	if brightness > brightnessThreshhold and IsDarkMode() then
 		SetDarkmode(false)
-		print("Autoswitching to Dark Mode")
+		print("🌔 Autoswitching to Dark Mode")
 	elseif brightness < brightnessThreshhold and not (IsDarkMode()) then
 		SetDarkmode(true)
-		print("Autoswitching to Light Mode")
+		print("☀️ Autoswitching to Light Mode")
 	end
 end
 
