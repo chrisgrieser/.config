@@ -50,11 +50,11 @@ return {
 				-- first looks for a `.grapple_root` file from the current directory
 				-- upwards, if not found uses the git repo, if also not found, the
 				-- current directory
-				-- https://github.com/cbochs/grapple.nvim#grapplescoperoot
+				-- https://github.com/cbochs/grapple.nvim#scope-api
 				scope = require("grapple.scope").fallback {
-					require("grapple.scope").root(".grapple_root"),
+					require("grapple.scope").root { ".luarc.json", "Cargo.toml" },
 					require("grapple").resolvers.git_fallback,
-					require("grapple").resolvers.static,
+					require("grapple").resolvers.directory,
 				},
 			}
 		end,

@@ -483,7 +483,6 @@ autocmd("FileType", {
 		"AppleScriptRunOutput",
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
-		"grapple",
 		"man",
 	},
 	callback = function()
@@ -496,7 +495,7 @@ autocmd("FileType", {
 -- remove the waiting time from the q, due to conflict with `qq` for comments
 autocmd("FileType", {
 	group = "quickClose",
-	pattern = { "ssr", "TelescopePrompt" },
+	pattern = { "ssr", "TelescopePrompt", "grapple" },
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 		if bo.filetype == "ssr" then
