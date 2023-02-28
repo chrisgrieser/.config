@@ -14,7 +14,7 @@ local function lsp_progress()
 end
 
 local function mixedIndentation()
-	local ignoredFts = { "css", "markdown", "sh", "lazy", "" }
+	local ignoredFts = { "css", "markdown", "sh", "lazy", "grapple", "" }
 	if vim.tbl_contains(ignoredFts, bo.filetype) or fn.mode() == "i" or bo.buftype == "terminal" then
 		return ""
 	end
@@ -33,7 +33,7 @@ local function mixedIndentation()
 	return ""
 end
 
--- show branch info only when not on main/master
+-- show branch info only when *not* on main/master
 augroup("branchChange", {})
 autocmd({ "BufEnter", "FocusGained", "WinEnter", "TabEnter" }, {
 	group = "branchChange",
@@ -135,14 +135,12 @@ require("lualine").setup {
 		},
 		lualine_z = {
 			"location",
-			{ selectionCount },
+			{ selectionCount, padding = {left = 0, right = 1} },
 		},
 	},
 	winbar = {
 		lualine_a = {
 			{ clock },
-			-- TODO
-			-- { require("statusline-action-hints").statusline },
 		},
 		lualine_b = {
 			{
