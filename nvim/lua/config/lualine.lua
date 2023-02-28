@@ -176,6 +176,7 @@ require("lualine").setup {
 			"DressingInput",
 			"DressingSelect",
 			"Mason",
+			"Harpoon",
 			"ccc-ui",
 			"",
 		},

@@ -54,9 +54,7 @@ return {
 		config = function()
 			require("project_nvim").setup {
 				detection_methods = { "pattern", "lsp" }, -- priority order
-				-- ignore_lsp = {"null-ls"},
-				patterns = { ".git", ".luarc.json" },
-				silent_chdir = false,
+				patterns = { ".git", ".luarc.json", ".harpoon" },
 			}
 		end,
 	},
