@@ -16,7 +16,7 @@ const folderToSearch = $.getenv("folderToSearch");
 
 // FILES
 const fileArray = app
-	.doShellScript(`find "${folderToSearch}" -type f -not -path "**/.git**" -not -path "**/node_modules**"`)
+	.doShellScript(`cd "${folderToSearch}" && fd --type=file --hidden --absolute-path --exclude "/.git/*"`)
 	.split("\r")
 	/* eslint-disable-next-line complexity */
 	.map(fPath => {
@@ -31,8 +31,10 @@ const fileArray = app
 		else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
 		else if (name === "obsidian.vimrc") type = "obsidian";
 		else type = name.split(".").pop();
+
 		if (type === "yml") type = "yaml";
-		if (type.endsWith("-bkp")) type = "other";
+		else if (type === "mjs") type = "js";
+		else if (type.endsWith("-bkp")) type = "other";
 
 		// icon determination
 		let iconObj = { path: "./../../../custom-filetype-icons/" };

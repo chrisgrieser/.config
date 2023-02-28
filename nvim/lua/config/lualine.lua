@@ -86,7 +86,7 @@ local function clock()
 	local time = os.date():sub(12, 16)
 
 	-- blinking `:`, requires statusline-refresh interval of 1000
-	if os.time() % 2 == 1 then time = time:gsub(":", " ") end 
+	if os.time() % 2 == 1 then time = time:gsub(":", " ") end
 
 	return " " .. time
 end
@@ -100,6 +100,10 @@ local topSeparators = isGui() and { left = "", right = "" } or { left = ""
 require("lualine").setup {
 	sections = {
 		lualine_a = {
+			{ -- indicate that the file has a grapple tag
+				function() return "ﯠ" end,
+				cond = require("grapple").exists,
+			},
 			{ "filetype", colored = false, icon_only = true },
 			{
 				"filename",

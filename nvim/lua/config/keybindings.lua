@@ -43,9 +43,9 @@ keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "K", "2k")
 
 -- e,w,b make small movements, treating _-. as word boundaries
-keymap({"n", "x", "o"}, "w", "<Plug>CamelCaseMotion_w", { desc = "camelCase w" })
-keymap({"n", "x", "o"}, "e", "<Plug>CamelCaseMotion_e", { desc = "camelCase e" })
-keymap({"n", "x", "o"}, "b", "<Plug>CamelCaseMotion_b", { desc = "camelCase b" })
+keymap({ "n", "x", "o" }, "w", "<Plug>CamelCaseMotion_w", { desc = "camelCase w" })
+keymap({ "n", "x", "o" }, "e", "<Plug>CamelCaseMotion_e", { desc = "camelCase e" })
+keymap({ "n", "x", "o" }, "b", "<Plug>CamelCaseMotion_b", { desc = "camelCase b" })
 
 -- add overscroll
 keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)" })
@@ -75,8 +75,8 @@ keymap("n", "ä", require("funcs.mark-cycler").gotoMark, { desc = "Goto Next Mar
 keymap("n", "Ä", require("funcs.mark-cycler").setMark, { desc = "Set Next Mark" })
 
 -- reset marks on startup (needs to be on VimEnter so it's not called too early)
-augroup ("marks", {})
-autocmd ("VimEnter", {
+augroup("marks", {})
+autocmd("VimEnter", {
 	group = "marks",
 	callback = require("funcs.mark-cycler").clearMarks,
 })
@@ -109,7 +109,7 @@ keymap( "n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><C
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickfix list" })
 
 -- Leap
-keymap({"n", "o", "x"}, "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
+keymap({ "n", "o", "x" }, "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
 keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
 
 --------------------------------------------------------------------------------
@@ -296,7 +296,7 @@ keymap("n", "<S-CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/win
 keymap("n", "<CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
 
 keymap({ "n", "x", "i" }, "<D-w>", altalt.betterClose, { desc = "close buffer/window/tab" })
-keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " open buffers" })
+keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " Open Buffers" })
 
 keymap("", "<C-w>v", ":vsplit #<CR>", { desc = "vertical split (alt file)" }) -- open the alternate file in the split instead of the current file
 keymap("", "<C-w>h", ":split #<CR>", { desc = "horizontal split (alt file)" })
@@ -305,7 +305,14 @@ keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize (-)"
 keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize (+)" })
 keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 
---------------------------------------------------------------------------------
+-- Harpoon/Grapple
+keymap("n", "<D-CR>", function() require("grapple").cycle_forward() end, { desc = "ﯠ Next File" })
+keymap("n", "<leader><CR>", function()
+	require("grapple").toggle()
+	vim.notify("ﯠ Tag/Untag")
+end, { desc = "ﯠ Tag/Untag File" })
+
+------------------------------------------------------------------------------
 
 -- CMD-Keybindings
 if isGui() then
