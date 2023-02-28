@@ -60,7 +60,6 @@ return {
 			}
 		end,
 	},
-
 	{
 		"chrisgrieser/nvim-genghis",
 		lazy = true,
