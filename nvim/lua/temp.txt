@@ -1,0 +1,17 @@
+.
+├── .git
+├── (...other config directories)
+├── hammerspoon
+│   ├── init.lua
+│   ├── .luarc.json
+│   └── lua
+│       ├── app-specific-behavior.lua
+│       └── ....lua
+└── nvim
+    ├── init.lua
+    ├── .luarc.json
+    └── lua
+        ├── config
+        │   ├── ....lua
+        │   └── ....lua
+        └── ....lua
