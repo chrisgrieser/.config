@@ -79,26 +79,27 @@ rules:
           # using Finder via Applescript instead of `open` to open in the same
           # window instead of creating a new one
           - shell_command: |
-
-
-              pgrep -x "Finder" > /dev/null || open -a "Finder"
               osascript -e '
                 set home to POSIX path of (path to home folder as string)
                 set wd to (home & "Library/Mobile Documents/com~apple~CloudDocs/File Hub/")
                 set dotfile_folder to (home & ".config/")
                 tell application "Finder"
+                  launch
                   set toOpen to (wd as POSIX file)
-                  if frontmost and front window exists then
-                    set current_path to POSIX path of (target of front window as alias)
-                    if (current_path = wd) then set toOpen to (dotfile_folder as POSIX file)
-                  else if not frontmost and front window exists then
-                    activate
+                  if (front window exists) then
+                    if frontmost then
+                      set current_path to POSIX path of (target of front window as alias)
+                      if (current_path is wd) then set toOpen to (dotfile_folder as POSIX file)
+                    else
+                      activate
+                    end if
                     set target of front Finder window to toOpen
-                  else if not (front window exists) then
+                  else
                     activate
                     open toOpen
                   end if
-                end tell'
+                end tell
+              '
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣  \U0001F4C2 Restart App"
     manipulators:
