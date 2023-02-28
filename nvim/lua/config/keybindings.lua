@@ -342,7 +342,7 @@ if isGui() then
 		["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
 	}
 
-	-- copy & paste
+	--- copy & paste
 	keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
 	keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
 	keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = "paste" }) -- "<C-g>u" adds undopoint before the paste
