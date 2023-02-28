@@ -351,6 +351,8 @@ Wf_script_editor = Wf
 				MoveResize(win, Centered)
 			end)
 			RunWithDelays(0.4, function() Keystroke({ "cmd" }, "k") end)
+		elseif newWin:title():find("%.sdef$") then
+			MoveResize(newWin, Centered)
 		end
 	end)
 	-- fix line breaks for copypasting into other apps

@@ -565,49 +565,58 @@ rules:
         conditions: [*finder-app, *quicklook-open]
       # INFO: other quicklook cancellation keys configured with the insert mode cancellations
       #─────────────────────────────────────────────────────────────────────────
-      # Basic File Operations
+      # BASIC FILE OPERATIONS
       # d = delete
       - type: basic
         from: { key_code: d }
         to_if_alone:
-          - key_code: delete_or_backspace
-            modifiers: [command]
+          - {key_code: delete_or_backspace, modifiers: [command]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # y = yank
       - type: basic
         from: { key_code: z } # y = z in German Keyboard
         to_if_alone:
-          - key_code: c
-            modifiers: [command]
+          - {key_code: c, modifiers: [command]}
           - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
       - type: basic
         from: { key_code: "y" }
         to:
-          - key_code: c
-            modifiers: [command]
+          - {key_code: c, modifiers: [command]}
           - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
       # p = paste
       - type: basic
         from: { key_code: p }
         to_if_alone:
-          - key_code: v
-            modifiers: [command]
+          - {key_code: v, modifiers: [command]}
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode]
       # r = replicate (duplicate)
       - type: basic
         from: { key_code: r }
         to_if_alone:
-          - key_code: d
-            modifiers: [command]
+          - {key_code: d, modifiers: [command]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # R = cross-copy (duplicate)
       - type: basic
         from: {key_code: r, modifiers: {mandatory: [shift]}}
         to_if_alone:
-          - key_code: d
-            modifiers: [command]
+          - shell_command: |
+              osascript -e'
+                tell application "Finder"
+                  if (number of windows is not 2) then
+                    display notification "" with title "Failure" subtitle "⚠️ Not exactly two windows"
+                    beep
+                  else if (the selection is {}) then
+                    display notification "" with title "Failure" subtitle "⚠️ No selection"
+                    beep
+                  else
+                    set otherWin to (target of window 2 as alias)
+                    repeat with f in (selection as list)
+                      duplicate f to otherWin
+                    end repeat
+                  end if
+                end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # x = cross-move items to other Finder window (if exactly 2 Finder windows)
       - type: basic
@@ -680,47 +689,34 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       # U = redo
       - type: basic
-        from:
-          key_code: u
-          modifiers: { mandatory: [shift] }
+        from: {key_code: u, modifiers: {mandatory: [shift]}}
         to:
-          - key_code: z
-            modifiers: [command, shift]
+          - {key_code: z, modifiers: [shift, command]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       - type: basic
-        from:
-          key_code: u
-          modifiers: { mandatory: [shift] }
+        from: {key_code: u, modifiers: {mandatory: [shift]}}
         to:
-          - key_code: "y" # y = z in German keyboard
-            modifiers: [command, shift]
+          - {key_code: "y", modifiers: [shift, command]} # y = z in German keyboard
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
-      # e = eject (if volume)
+      # e = eject (if volume or disk image)
       - type: basic
         from: { key_code: e }
         to_if_alone:
-          - key_code: e
-            modifiers: [command]
+          - {key_code: e, modifiers: [command]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # N = New Folder
       - type: basic
-        from:
-          key_code: n
-          modifiers: { mandatory: [shift] }
+        from: {key_code: n, modifiers: {mandatory: [shift]}}
         to:
-          - key_code: n
-            modifiers: [command, shift]
+          - {key_code: n, modifiers: [shift, command]}
           - *enter-insert-mode # enters insert mode since folder renaming is also triggered
           - *insert-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # M = Move selection to new folder
       - type: basic
-        from:
-          key_code: m
-          modifiers: { mandatory: [shift] }
+        from: {key_code: m, modifiers: {mandatory: [shift]}}
         to:
-          - key_code: n
-            modifiers: [command, control]
+          - {key_code: n, modifiers: [control, command]}
           - *enter-insert-mode # enters insert mode since folder renaming is also triggered
           - *insert-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
@@ -729,14 +725,12 @@ rules:
         from: { key_code: n }
         to_if_alone:
           - shell_command: |
-              folder=$(osascript -e 'tell application "Finder" to return POSIX path of (insertion location as alias)')
-              newFile="$folder/new-file"
-              while [[ -e "$newFile" ]] ; do
-                newFile="$newFile-1"
-              done
-              touch "$newFile"
-              open -R "$newFile"
-              osascript -e 'tell application "Finder" to tell front window to update every item'
+              osascript -e '
+                tell application "Finder"
+                  set thisFolder to the target of the front window as alias
+                  set newFile to (make new file at thisFolder)
+                  select newFile
+                end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # b = Toggle `.bkp` (Backup)
       - type: basic
@@ -751,7 +745,6 @@ rules:
               else
                 mv "$selection" "$selection-bkp"
               fi
-              osascript -e 'tell application "Finder" to tell front window to update every item'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = follow symlink
       - type: basic
