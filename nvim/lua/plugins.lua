@@ -49,20 +49,18 @@ return {
 			-- first looks for a `.grapple_root` file from the current directory
 			-- upwards, if not found uses the git repo, if also not found, the
 			-- current directory https://github.com/cbochs/grapple.nvim#scope-api
-			local my_resolver = require("grapple.scope").fallback {
+			My_resolver = require("grapple.scope").fallback({
 				require("grapple.scope").root(".luarc.json"),
 				require("grapple").resolvers.git_fallback,
 				require("grapple").resolvers.directory,
-			}
+			}, { cache = false })
 			require("grapple").setup {
-				log_level = "debug",
-				scope = my_resolver,
+				scope = My_resolver,
 			}
 			vim.api.nvim_create_autocmd("BufEnter", {
 				pattern = "*",
 				callback = function()
-					print("beep")
-					require("grapple.scope").update(my_resolver)
+					require("grapple.scope").update(My_resolver)
 				end,
 			})
 		end,
