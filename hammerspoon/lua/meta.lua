@@ -31,14 +31,11 @@ function SystemStart()
 		print("\n----------------------------- 🔨 HAMMERSPOON RELOAD ---------------------------------\n")
 		return
 	else
+		Notify("Hammerspoon started.")
 		HoleCover()
 		PeripheryBatteryCheck("notify")
 		QuitFinderIfNoWindow()
-		Notify("Hammerspoon started.")
 		SyncAllGitRepos("notify")
-
-		-- HACK for https://github.com/FelixKratz/SketchyBar/issues/322
-		hs.execute([[osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"]])
 	end
 end
 

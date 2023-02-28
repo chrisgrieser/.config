@@ -1137,7 +1137,7 @@ rules:
                 return POSIX path of sel
               end tell')
               [[ -f "$SEL" ]] || exit 1
-              cd "$(dirname "$SEL")"
+              cd "$(dirname "$SEL")" || exit 1
 
               BRANCH=$(git branch --show-current)
               ROOT_PATH=$(git rev-parse --show-toplevel)
