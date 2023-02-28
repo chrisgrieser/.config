@@ -58,6 +58,7 @@ AutoTileAppWatcher = Aw.new(function(appName, eventType, appObj)
 		and TableContains(autoTileApps, appName)
 		and #appObj:allWindows() > 1
 		and not (appObj:findWindow("Picture in Picture"))
+		and FrontAppName() ~= "Alfred" -- Alfred compatibility mode
 	then
 		appObj:hide()
 	end

@@ -47,28 +47,6 @@ rules:
           - type: variable_unless
             name: FINDER_FIND_MODE
             value: true
-      # Version History Command
-      - type: basic
-        from:
-          key_code: v
-          modifiers: {mandatory: [shift, control, option]}
-        to:
-          - {key_code: v, modifiers: [shift, control, option]}
-          - set_variable:
-              name: FINDER_INSERT_MODE
-              value: true
-          - set_variable:
-              name: FINDER_ALFRED_ACTIVE
-              value: true
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com\.apple\.finder$]
-          - type: variable_unless
-            name: FINDER_INSERT_MODE
-            value: true
-          - type: variable_unless
-            name: FINDER_FIND_MODE
-            value: true
       # Alfred Custom Clipboard Search
       - type: basic
         from: {key_code: escape}
