@@ -43,7 +43,10 @@ return {
 	{
 		"ThePrimeagen/harpoon",
 		lazy = true,
-		dependencies = "nvim-lua/plenary.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"ahmedkhalf/project.nvim",
+		},
 	},
 
 	-- change cwd per project, mostly used for project-specific scope for Harpoon
@@ -54,9 +57,10 @@ return {
 		config = function()
 			require("project_nvim").setup {
 				-- priority order
-				detection_methods = { "pattern", "lsp" }, 
+				detection_methods = { "pattern", "lsp" },
 				-- `.harpoon` as file to manually mark project roots in certain directories
-				patterns = { ".git", ".luarc.json", ".harpoon" }, 
+				patterns = { ".git", "Makefile", "package.json", ".luarc.json", ".harpoon" },
+				datapath = VimDataDir,
 			}
 		end,
 	},

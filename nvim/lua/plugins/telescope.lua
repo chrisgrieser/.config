@@ -190,10 +190,12 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"benfowler/telescope-luasnip.nvim",
+			"ahmedkhalf/project.nvim",
 		},
 		config = function()
 			require("telescope").setup(options)
 			require("telescope").load_extension("luasnip")
+			require("telescope").load_extension("projects")
 		end,
 	},
 }
