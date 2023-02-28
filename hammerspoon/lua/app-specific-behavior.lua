@@ -34,8 +34,14 @@ end
 -- AUTOMATIONS FOR MULTIPLE APPS
 TransBgAppWatcher = Aw.new(function(appName, eventType, appObject)
 	local appsWithTransparency = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
-	if not TableContains(appsWithTransparency, appName) then return end
-	if IsProjector() then return end
+	if
+		IsProjector()
+		or not (TableContains(appsWithTransparency, appName))
+		or appName == "Alfred" -- needed for Alfred Compatibility Mode
+	then
+		return
+	end
+
 
 	if eventType == Aw.activated or eventType == Aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
@@ -135,7 +141,13 @@ end):start()
 
 -- Add dots when copypasting to from dev tools
 local function addCssSelectorLeadingDot()
-	if not (AppIsRunning("neovide") and App("neovide"):mainWindow() and App("neovide"):mainWindow():title():find("%.css$")) then
+	if
+		not (
+			AppIsRunning("neovide")
+			and App("neovide"):mainWindow()
+			and App("neovide"):mainWindow():title():find("%.css$")
+		)
+	then
 		return
 	end
 

@@ -66,12 +66,14 @@ local function toggleObsidianSidebar(obsiWin)
 		local obsi_width = obsiWin:frame().w
 		local screen_width = obsiWin:screen():frame().w
 
-		-- half -> hide sidebar 
+		-- half -> hide sidebar
 		-- pseudo-maximized -> show sidebar
 		-- max -> hide sidebar (since assuming Obsidian split)
 		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "expand"
 			or "collapse"
-		OpenLinkInBackground("obsidian://advanced-uri?eval=this.app.workspace.rightSplit."..mode.."%28%29")
+		OpenLinkInBackground(
+			"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. mode .. "%28%29"
+		)
 	end)
 end
 
@@ -119,7 +121,13 @@ end
 function MoveResize(win, pos)
 	if not win or not win:application() then return end
 	local appName = win:application():name()
-	if appName == "System Settings" or appName == "Twitter" or appName == "Transmission" then
+	local appsToIgnore = {
+		"System Settings",
+		"Twitter",
+		"Transmission",
+		"Alfred",
+	}
+	if TableContains(appsToIgnore, appName) then
 		Notify(appName .. " cannot be resized properly.")
 		return
 	end
