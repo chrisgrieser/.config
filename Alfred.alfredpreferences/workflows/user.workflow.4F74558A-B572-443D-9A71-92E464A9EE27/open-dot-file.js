@@ -99,6 +99,7 @@ const folderArray = app
 		cd "${dotfileFolder}" ;
 		fd --type=directory --hidden --no-ignore \\
 			-E "Alfred.alfredpreferences/**" \\
+			-E "Spoons" \\
 			-E "**/*.app/*" \\
 			-E "karabiner/automatic_backups" \\
 			-E "zsh/plugins/*" \\

@@ -53,8 +53,10 @@ return {
 		event = "VimEnter",
 		config = function()
 			require("project_nvim").setup {
-				detection_methods = { "pattern", "lsp" }, -- priority order
-				patterns = { ".git", ".luarc.json", ".harpoon" },
+				-- priority order
+				detection_methods = { "pattern", "lsp" }, 
+				-- `.harpoon` as file to manually mark project roots in certain directories
+				patterns = { ".git", ".luarc.json", ".harpoon" }, 
 			}
 		end,
 	},
