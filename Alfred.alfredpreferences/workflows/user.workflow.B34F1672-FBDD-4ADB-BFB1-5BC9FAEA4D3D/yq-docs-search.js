@@ -10,7 +10,7 @@ function alfredMatcher(str) {
 //──────────────────────────────────────────────────────────────────────────────
 
 const docsURL = "https://api.github.com/repos/mikefarah/yq/git/trees/master?recursive=1";
-const baseURL = "https://mikefarah.gitbook.io/yq/";
+const baseURL = "https://mikefarah.gitbook.io/yq";
 const docPathRegex = /^pkg\/yqlib\/doc\/(.*)\.md$/i;
 
 const workArray = JSON.parse(app.doShellScript(`curl -s "${docsURL}"`))

@@ -20,6 +20,7 @@ function CheckSize(win, size)
 		"Copy", -- Finder windows
 		"Move", -- Finder windows
 		"Delete", -- Finder windows
+		"Bin", -- Finder windows
 		"System Settings",
 		"Transmission",
 		"Twitter",
