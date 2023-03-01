@@ -17,3 +17,7 @@ pw.*
 
 # node
 node_modules
+
+# custom files
+.harpoon
+

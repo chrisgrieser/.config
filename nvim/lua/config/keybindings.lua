@@ -376,7 +376,7 @@ keymap("n", "go", function()
 	local pwd = vim.loop.cwd() or ""
 	local projectName = pwd:gsub(".*/", "")
 	local harpoonNumber = harpoonFileNumber() or 0
-	local title = "(" .. tostring(harpoonNumber) .. " ﯠ) " .. projectName
+	local title = "(" .. tostring(harpoonNumber) .. "ﯠ) " .. projectName
 	require("telescope.builtin").find_files { prompt_title = title }
 end, { desc = " Open file in Project" })
 

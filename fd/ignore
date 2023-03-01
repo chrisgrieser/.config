@@ -16,5 +16,9 @@ Icon
 # vim spellcheck binary
 *.spl
 
+# custom files
+INFO*
+.harpoon
+
 # inside Alfred prefs
 *-*-*-*-*.png

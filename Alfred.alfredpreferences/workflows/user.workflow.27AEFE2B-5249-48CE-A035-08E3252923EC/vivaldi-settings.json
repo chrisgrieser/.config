@@ -80,6 +80,7 @@
 		},
 		{
 			"title": "🌐 Webpages",
+			"match": "webpages font",
 			"arg": "vivaldi://settings/webpages/",
 			"uid": "14"
 		},
