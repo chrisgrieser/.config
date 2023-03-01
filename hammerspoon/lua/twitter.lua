@@ -27,7 +27,8 @@ end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
 TwitterWatcher = Aw.new(function(appName, eventType, appObj)
-	if not AppIsRunning("Twitter") then return end
+	if not (AppIsRunning("Twitter") and App("Twitter"):mainWindow()) then return end
+
 	-- move twitter and scroll it up
 	if appName == "Twitter" and eventType == Aw.launched then
 		RunWithDelays(1, function()
@@ -41,7 +42,6 @@ TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 
 	-- auto-close media windows and scroll up when deactivating
 	elseif appName == "Twitter" and eventType == Aw.deactivated then
-		if not App("Twitter"):mainWindow() then return end
 		TwitterScrollUp()
 
 		for _, win in pairs(appObj:allWindows()) do

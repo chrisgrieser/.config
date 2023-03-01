@@ -75,6 +75,7 @@ return {
 				patterns = {
 					".git",
 					"package.json",
+					"=File Hub",
 					"info.plist", -- Alfred workflows
 					".luarc.json", -- lua projects
 					".harpoon", -- manually mark project roots in certain directories
