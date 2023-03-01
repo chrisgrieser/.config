@@ -2,6 +2,7 @@
 	"items": [
 		{
 			"title": "⚙️ General",
+			"match": "general default",
 			"arg": "vivaldi://settings/general/",
 			"uid": "0"
 		},
@@ -52,7 +53,7 @@
 		},
 		{
 			"title": "⛓️ Quick Commands",
-			"match": "quick commands chain",
+			"match": "quick commands chain palette",
 			"arg": "vivaldi://settings/qc/",
 			"uid": "9"
 		},
@@ -64,7 +65,7 @@
 		},
 		{
 			"title": "🖱️ Mouse",
-			"match": "mouse gestues rocker",
+			"match": "mouse gestures rocker",
 			"arg": "vivaldi://settings/mouse/",
 			"uid": "11"
 		},
@@ -80,7 +81,7 @@
 		},
 		{
 			"title": "🌐 Webpages",
-			"match": "webpages font",
+			"match": "webpages font reader images capture screenshots",
 			"arg": "vivaldi://settings/webpages/",
 			"uid": "14"
 		},
