@@ -3,6 +3,20 @@
 // NOTE file needs to be `.mjs` because of top-level `await`
 //──────────────────────────────────────────────────────────────────────────────
 
+// CONFIG
+const temperature = 0;
+const maxTokens = 100;
+const model = "text-davinci-003";
+const staticPromptPart = "Finish the following sentence: ";
+
+//──────────────────────────────────────────────────────────────────────────────
+// MAIN
+const argv = process.argv.slice(2);
+const input = argv[1];
+const apiKey = argv[0];
+
+//──────────────────────────────────────────────────────────────────────────────
+
 async function run(dynamicPromptPart) {
 	try {
 		const response = await fetch("https://api.openai.com/v1/completions", {
@@ -27,19 +41,5 @@ async function run(dynamicPromptPart) {
 	}
 }
 
-// ──────────────────────────────────────────────────────────────────────────────
-// CONFIG
-const temperature = 0;
-const maxTokens = 100;
-const model = "text-davinci-003";
-const staticPromptPart = "Finish the following sentence: ";
-
-//──────────────────────────────────────────────────────────────────────────────
-// MAIN
-const argv = process.argv.slice(2);
-const input = argv[1];
-const apiKey = argv[0];
-
-// bla == fsfs /* eslint-disable-line no-undef */
-const result = await run(input);
+const result = await run(input); 
 console.log(result);
