@@ -287,7 +287,6 @@ return {
 			{"yd", desc = "Duplicate"},
 			{ "R", mode = {"n", "x"}, desc = "Duplicate" },
 		},
-		enabled = false,
 		config = function()
 			require("duplicate").setup {
 				operator = {

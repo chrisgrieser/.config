@@ -48,6 +48,8 @@ return {
 			require("harpoon").setup {
 				menu = {
 					borderchars = BorderChars,
+					width = 45,
+					height = 10,
 				},
 			}
 
@@ -95,6 +97,7 @@ return {
 	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
 	{
 		"folke/which-key.nvim",
+		enabled = false,
 		event = "VeryLazy",
 		config = function()
 			vim.opt.timeoutlen = 600 -- duration until which-key is shown
