@@ -86,9 +86,9 @@
 				<key>keyword</key>
 				<string>ai</string>
 				<key>subtext</key>
-				<string>finish the following sentence</string>
+				<string></string>
 				<key>text</key>
-				<string>AI: {query}</string>
+				<string>Finish the sentence: {query}…</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
