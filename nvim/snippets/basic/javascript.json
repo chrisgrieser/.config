@@ -127,6 +127,11 @@
 		],
 		"description": "If-Else Statement"
 	},
+	"argv (node)": {
+		"prefix": "argv (node)",
+		"body": "const argv = process.argv.slice(2);",
+		"description": "Arguments from the command line. [0] is the node executable path, [1] the path of the file being executed, making [2] the first positional argument."
+	},
 	"New Statement": {
 		"prefix": "new",
 		"body": [
