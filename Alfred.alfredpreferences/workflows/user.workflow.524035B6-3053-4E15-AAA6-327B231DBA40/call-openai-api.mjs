@@ -10,12 +10,9 @@ const model = "text-davinci-003";
 const staticPromptPart = "Finish the following sentence: ";
 
 //──────────────────────────────────────────────────────────────────────────────
-// MAIN
 const argv = process.argv.slice(2);
 const input = argv[1];
 const apiKey = argv[0];
-
-//──────────────────────────────────────────────────────────────────────────────
 
 async function run(dynamicPromptPart) {
 	try {
@@ -34,12 +31,10 @@ async function run(dynamicPromptPart) {
 		});
 		const data = await response.json();
 		const text = data.choices[0].text.trim(); // can also return multiple responses as choices
-		// return `${prompt} ${text}`;
-		return text;
+		process.stdout.write(`${dynamicPromptPart} ${text}`);
 	} catch (error) {
-		return `Error: ${error}`;
+		console.error(`Error: ${error}`);
 	}
 }
 
-const result = await run(input); 
-console.log(result);
+await run(input);
