@@ -4,8 +4,8 @@
     "items" : [
       {
         "workflowobjecttype" : "alfred.workflow.output.clipboard",
-        "uid" : "5BE5BD63-8EAF-4363-8877-F3F1B51F28A9",
-        "note" : "",
+        "uid" : "7F59CB22-957B-4E74-8A9E-3329447A0232",
+        "note" : "paste",
         "workflowobjectconfig" : {
           "ignoredynamicplaceholders" : false,
           "transient" : false,
