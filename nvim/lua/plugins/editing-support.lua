@@ -16,8 +16,8 @@ return {
 				},
 				extra = {
 					eol = "Q",
-					above = "qO",
-					below = "qo",
+					above = "<Nop>",
+					below = "<Nop>",
 				},
 			}
 		end,
@@ -169,7 +169,8 @@ return {
 					invalid_key_behavior = {
 						add = function(_) return { { "" }, { "" } } end,
 						find = function(char)
-							return config.get_selection { pattern = vim.pesc(char) .. ".-" .. vim.pesc(char) } end,
+							return config.get_selection { pattern = vim.pesc(char) .. ".-" .. vim.pesc(char) }
+						end,
 						delete = function(_)
 							return config.get_selections {
 								char = "",
@@ -277,10 +278,8 @@ return {
 	},
 	{
 		"dkarter/bullets.vim", -- auto-bullets for markdown-like filetypes
-		ft = {"markdown", "text", "gitcommit"},
-		init = function ()
-			vim.g.bullets_delete_last_bullet_if_empty = 1
-		end,
+		ft = { "markdown", "text", "gitcommit" },
+		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
 	},
 	{
 		"smjonas/duplicate.nvim",
