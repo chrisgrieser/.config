@@ -86,7 +86,7 @@
 				<key>keyword</key>
 				<string>ai</string>
 				<key>subtext</key>
-				<string></string>
+				<string>finish the following sentence</string>
 				<key>text</key>
 				<string>AI: {query}</string>
 				<key>withspace</key>
@@ -109,7 +109,7 @@
 				<key>script</key>
 				<string># API Key accessed from .zshenv to keep it out of the dotfiles
 prompt=$1
-node ./call-openai-api.js "$OPENAI_API_KEY" "$prompt"</string>
+node ./call-openai-api.mjs "$OPENAI_API_KEY" "$prompt"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -163,7 +163,7 @@ node ./call-openai-api.js "$OPENAI_API_KEY" "$prompt"</string>
 			<key>note</key>
 			<string>requires node</string>
 			<key>xpos</key>
-			<real>270</real>
+			<real>265</real>
 			<key>ypos</key>
 			<real>340</real>
 		</dict>

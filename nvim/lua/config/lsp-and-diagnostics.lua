@@ -160,12 +160,12 @@ autocmd("LspAttach", {
 		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, {desc = "璉Signature", buffer = true})
 		keymap("n", "<leader>h", vim.lsp.buf.hover, {desc = "璉Hover", buffer = true})
 
-		-- Formatters
-
+		-- FORMATTERS
 		-- avoid conflict of tsserver with prettier
 		if client.name == "tsserver" then capabilities.documentFormattingProvider = false end
 
-		keymap({ "n", "i" }, "<D-s>", function()
+		-- Save & Format
+		keymap({ "n", "i", "x" }, "<D-s>", function()
 			if bo.filetype == "applescript" then
 				cmd.mkview(2)
 				normal("gg=G") -- poor man's formatting
