@@ -34,7 +34,7 @@ cmd.iabbrev("onyl only")
 --------------------------------------------------------------------------------
 
 -- GUI
-opt.guifont = "JetBrainsMonoNL Nerd Font:h26"
+opt.guifont = "JetBrainsMonoNL Nerd Font:h26" -- https://www.programmingfonts.org/#oxygen
 opt.guicursor = {
 	"n-sm:block",
 	"i-ci-c-ve:ver25",
