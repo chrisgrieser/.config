@@ -17,7 +17,11 @@ const fileArray = app
 		`
 		cd "${dotfileFolder}"
 		fd --type=file --hidden --no-ignore --absolute-path \\
-			-E "Alfred.alfredpreferences" \\
+			-E "Alfred.alfredpreferences/preferences" \\
+			-E "Alfred.alfredpreferences/remote" \\
+			-E "Alfred.alfredpreferences/resources" \\
+			-E "Alfred.alfredpreferences/themes" \\
+			-E "Alfred.alfredpreferences/workflowextras" \\
 			-E "alacritty/colors/*" \\
 			-E "hammerspoon/Spoons/*" \\
 			-E "*/vale/styles/*/*.yml" \\

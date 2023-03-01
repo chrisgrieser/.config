@@ -192,7 +192,14 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
-		config = function() require("telescope").setup(options) end,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"ahmedkhalf/project.nvim",
+		},
+		config = function()
+			require("telescope").setup(options)
+			require("telescope").load_extension("projects")
+		end,
 	},
 }
