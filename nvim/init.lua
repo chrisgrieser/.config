@@ -6,11 +6,12 @@ UpdateCounterThreshhold = 25 -- for lazy
 
 -- BORDER LOOKS
 -- https://neovim.io/doc/user/api.html#nvim_open_win()
--- Telescope and Harpoon do not take a string arg, but only an array
 BorderStyle = "single" -- none|single|double|rounded|shadow|solid
-BorderChars = { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" }
 
-{ "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+-- Telescope and Harpoon do not take a string arg, but only an array
+-- rounded: { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+-- double:  { "═", "║" ,"═", "║", "╔", "╗", "╝", "╚" }
+BorderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" } -- single
 
 --------------------------------------------------------------------------------
 

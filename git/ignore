@@ -14,3 +14,6 @@ pw.*
 
 # created due to sync issues
 *.icloud
+
+# node
+node_modules
