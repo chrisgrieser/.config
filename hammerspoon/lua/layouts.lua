@@ -49,6 +49,7 @@ end
 -- LAYOUTS
 
 function WorkLayout()
+	print("🔲 Loading WorkLayout")
 	setHigherBrightnessDuringDay()
 	HoleCover()
 
@@ -84,6 +85,7 @@ function WorkLayout()
 end
 
 function MovieModeLayout()
+	print("🔲 Loading MovieModeLayout")
 	-- different PWAs due to not being M1 device
 	local targetMode = IsAtMother() and "mother-movie" or "movie"
 	dockSwitcher(targetMode)
@@ -91,7 +93,6 @@ function MovieModeLayout()
 	SetDarkmode(true)
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
-	SetDarkmode(true)
 
 	RunWithDelays({ 0, 1 }, function() OpenApp("YouTube") end)
 	QuitApp {
