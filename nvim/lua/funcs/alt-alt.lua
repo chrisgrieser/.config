@@ -36,7 +36,7 @@ local function altOldfile()
 		local fileExists = fn.filereadable(oldfile) == 1
 		local isCurrentFile = oldfile == expand("%:p")
 		local commitMsg = oldfile:find("COMMIT_EDITMSG$")
-		local harpoonMenu = oldfile:find("Harpoon Menu$")
+		local harpoonMenu = oldfile:find("harpoon%-menu$")
 	until fileExists and not commitMsg and not isCurrentFile and not harpoonMenu
 	return oldfile
 end
