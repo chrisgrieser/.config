@@ -30,18 +30,7 @@
 			</dict>
 		</array>
 		<key>0DF1D6A0-6590-4132-9ADD-521CFA7EE92C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B34A7977-C7E4-41A8-8DE6-EC67FC2D93B4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>81E13F5F-2CB4-4393-93E9-85601627DF28</key>
 		<array>
 			<dict>
@@ -69,6 +58,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-snippet-at-line.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0DF1D6A0-6590-4132-9ADD-521CFA7EE92C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -82,7 +94,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>sn</string>
+				<string>snip</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -112,58 +124,6 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>0C81ADD1-1180-403C-BAA1-3B6FCB2D0826</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-snippet-at-line.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0DF1D6A0-6590-4132-9ADD-521CFA7EE92C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>B34A7977-C7E4-41A8-8DE6-EC67FC2D93B4</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -217,9 +177,9 @@
 			<key>note</key>
 			<string>snippet search</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>50</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>220</real>
 		</dict>
 		<key>0DF1D6A0-6590-4132-9ADD-521CFA7EE92C</key>
 		<dict>
@@ -243,13 +203,6 @@
 			<real>425</real>
 			<key>ypos</key>
 			<real>325</real>
-		</dict>
-		<key>B34A7977-C7E4-41A8-8DE6-EC67FC2D93B4</key>
-		<dict>
-			<key>xpos</key>
-			<real>610</real>
-			<key>ypos</key>
-			<real>190</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
