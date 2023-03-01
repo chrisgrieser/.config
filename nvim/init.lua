@@ -4,6 +4,8 @@ LinterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
 VimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
 UpdateCounterThreshhold = 25 -- for lazy
 
+--------------------------------------------------------------------------------
+
 -- BORDER LOOKS
 -- https://neovim.io/doc/user/api.html#nvim_open_win()
 BorderStyle = "single" -- none|single|double|rounded|shadow|solid
@@ -38,3 +40,4 @@ require("config.textobjects")
 require("config.clipboard")
 require("config.build-system")
 require("config.user-commands")
+require("config.abbreviations")
