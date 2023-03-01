@@ -48,7 +48,7 @@ return {
 			require("harpoon").setup {
 				menu = {
 					borderchars = BorderChars,
-					width = 45,
+					width = 50,
 					height = 8,
 				},
 			}
@@ -72,15 +72,15 @@ return {
 		config = function()
 			require("project_nvim").setup {
 				detection_methods = { "pattern" },
-				exclude_dirs = { "node_modules", "build", "dist" },
 				patterns = {
 					".git",
-					"package.json",
-					"=File Hub",
+					"package.json", -- node
+					"=File Hub", -- my general-inbox-working-directory
 					"info.plist", -- Alfred workflows
 					".luarc.json", -- lua projects
-					".harpoon", -- manually mark project roots in certain directories
+					".harpoon", -- manually mark certain folders as project roots
 				},
+				exclude_dirs = { "node_modules", "build", "dist" },
 				datapath = VimDataDir,
 			}
 		end,
@@ -97,7 +97,6 @@ return {
 	{ "iamcco/markdown-preview.nvim", ft = "markdown", build = "cd app && npm install" },
 	{
 		"folke/which-key.nvim",
-		enabled = false,
 		event = "VeryLazy",
 		config = function()
 			vim.opt.timeoutlen = 600 -- duration until which-key is shown
@@ -108,15 +107,18 @@ return {
 						motions = false,
 					},
 				},
+				triggers_blacklist = {
+					n = { "y" }, -- FIX weird delay occurring when yanking after a change
+				},
 				window = {
-					border = "none", -- none to save space
+					border = { "", "─", "", "" }, -- no border to the side to save space
 					padding = { 0, 0, 0, 0 },
 					margin = { 0, 0, 0, 0 },
 				},
 				layout = { -- of the columns
 					height = { min = 4, max = 17 },
-					width = { min = 20, max = 33 },
-					spacing = 1,
+					width = { min = 22, max = 33 },
+					spacing = 0,
 				},
 			}
 		end,
