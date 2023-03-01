@@ -49,7 +49,7 @@ return {
 				menu = {
 					borderchars = BorderChars,
 					width = 45,
-					height = 10,
+					height = 8,
 				},
 			}
 
