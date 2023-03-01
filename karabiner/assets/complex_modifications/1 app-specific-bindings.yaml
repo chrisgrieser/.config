@@ -579,8 +579,8 @@ rules:
         to:
           - { key_code: c, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
-      # cmd+shift+4 once to screenshot, a second time to annotate. A third time
-      # to make a new screenshot
+      # cmd+shift+4 once to screenshot, a second time to annotate. Hold to force
+      # new screenshot
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
@@ -591,13 +591,11 @@ rules:
                 else
                   open location "cleanshot://capture-area"
                 end if'
-        conditions: [{ type: frontmost_application_unless, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
-      - type: basic
-        from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
-        to:
-          - { key_code: q, modifiers: [command] }
+        to_if_held_down:
           - shell_command: open "cleanshot://capture-area"
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 500
+          basic.to_if_held_down_threshold_milliseconds: 500
       - type: basic
         from: { key_code: "5", modifiers: { mandatory: [shift, command] } }
         to:
