@@ -18,7 +18,7 @@ BorderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" } -- sing
 require("config.lazy")
 require("config.utils") -- should come after lazy
 
-if isGui() then
+if IsGui() then
 	require("config.gui-settings")
 	ThemeSettings()
 else

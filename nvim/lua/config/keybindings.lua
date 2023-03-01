@@ -85,7 +85,7 @@ autocmd("VimEnter", {
 
 -- Dismiss notifications
 keymap("n", "<Esc>", function()
-	if isGui() then
+	if IsGui() then
 		local clearPending = require("notify").pending() > 10
 		require("notify").dismiss { pending = clearPending }
 	end
@@ -316,7 +316,7 @@ end, { desc = "ﯠ Add File" })
 ------------------------------------------------------------------------------
 
 -- CMD-Keybindings
-if isGui() then
+if IsGui() then
 	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 
 	keymap({ "n", "x" }, "<D-l>", function() -- show file in default GUI file explorer
