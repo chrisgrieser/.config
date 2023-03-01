@@ -115,7 +115,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘: Open Image File</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -208,6 +208,29 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E949687A-0C1F-4C7D-9530-69F26D80A880</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>15FF9B9D-0AF2-48F4-84C0-9781E0F3766B</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open Image File</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -611,51 +634,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Icon copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>7067A0A4-D9DA-4775-BECD-24C3249B29E2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>set the clipboard to POSIX file "{query}"
-return "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -702,6 +680,51 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<string>B2FE0349-860A-44F0-B49D-20C8F895F9C0</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Icon copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>7067A0A4-D9DA-4775-BECD-24C3249B29E2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>set the clipboard to POSIX file "{query}"
+return "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -787,9 +810,9 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>255</real>
+			<real>305</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>780</real>
 		</dict>
 		<key>195F72A9-03B1-4420-AF37-1CD417086F24</key>
 		<dict>
@@ -827,9 +850,9 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>note</key>
 			<string>copy image to clipboard</string>
 			<key>xpos</key>
-			<real>255</real>
+			<real>305</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>655</real>
 		</dict>
 		<key>3F8BF243-EE01-4E69-8573-2960822A3915</key>
 		<dict>
@@ -863,9 +886,9 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>655</real>
 		</dict>
 		<key>787AA6A6-CD07-447C-8D73-F4FCD1FEC10D</key>
 		<dict>
@@ -923,7 +946,7 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>610</real>
 		</dict>
 		<key>BAA2ADF7-2FEB-4F9A-AE98-17378171B5CA</key>
 		<dict>
@@ -997,7 +1020,7 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>note</key>
 			<string>local icons</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>785</real>
 		</dict>

@@ -6,26 +6,25 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 // CONFIG
-const memeFolder =
-	app.pathTo("home folder") + "/Library/Mobile Documents/com~apple~CloudDocs/Photos/Memes";
+const home = app.pathTo("home folder")
+const memeFolder = home + "/Library/Mobile Documents/com~apple~CloudDocs/Images/Memes";
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// `-H` to follow symlinks
-const workArray1 = app.doShellScript(`find "${iconFolder}" -name "*.icns" -or -name "*.png" `).split("\r");
-const workArray2 = app.doShellScript(`find -H "${customIconFolder}" -name "*.icns" -or -name "*.png" `).split("\r");
-const workArray3 = app.doShellScript(`find -H "${filetypeIconFolder}" -name "*.icns" -or -name "*.png" `).split("\r");
-const allIcons = [...workArray1, ...workArray2, ...workArray3].map(iconPath => {
-	const filename = iconPath.replace(/.*\//, "");
-	const shortenedPath = iconPath.replace(/\/Users\/.*?\//g, "~/");
-	return {
-		title: filename,
-		subtitle: shortenedPath,
-		arg: iconPath,
-		icon: { path: iconPath },
-		type: "file:skipcheck",
-		uid: iconPath,
-	};
-});
+const workArray = app
+	.doShellScript(`find "${memeFolder}" -name "*.icns" -or -name "*.png" `)
+	.split("\r")
+	.map(imagePath => {
+		const filename = imagePath.replace(/.*\//, "");
+		const shortenedPath = imagePath.replace(/\/Users\/.*?\//g, "~/");
+		return {
+			title: filename,
+			subtitle: shortenedPath,
+			arg: imagePath,
+			icon: { path: imagePath },
+			type: "file:skipcheck",
+			uid: imagePath,
+		};
+	});
 
-JSON.stringify({ items: allIcons });
+JSON.stringify({ items: workArray });
