@@ -154,19 +154,28 @@ rules:
         from:
           pointing_button: button4
         to:
-          - key_code: "n"
-            modifiers:
-              - command
-              - control
-          - key_code: "3"
-            modifiers:
-              - command
-              - control
+          - {key_code: "n", modifiers: [control, command]}
+          - {key_code: "3", modifiers: [control, command]}
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Comment \U0001F5E3️\"'"
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers:
-              - ^net\.highlightsapp\.universal$
+            bundle_identifiers: [^net\.highlightsapp\.universal$]
+      # Word: Comment
+      - type: basic
+        from:
+          pointing_button: button4
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events"
+                  tell process "Microsoft Word"
+                    set frontmost to true
+                    click menu item "Comment" of menu "Insert" of menu bar 1
+                  end tell
+                end tell'
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.microsoft\.Word$]
       # Finder: back
       - type: basic
         from:

@@ -42,6 +42,8 @@ local options = {
 			"%.data", -- Alfred
 			"%.zcomp", -- zsh completion data
 			"harpoon%-menu", -- harpoon
+			"%.harpoon", -- harpoon
+			"^INFO", -- custom info files
 			"%.string",
 			"%.pdf",
 			"%.log",

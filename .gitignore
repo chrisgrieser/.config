@@ -10,7 +10,7 @@ dlFolderLastChange
 .last_pwd
 
 # redundant
-.config/karabiner/automatic_backups
+karabiner/automatic_backups
 
 # in case of accidental saving of such files in the repo
 *.mp4

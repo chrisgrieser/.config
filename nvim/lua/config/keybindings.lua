@@ -165,15 +165,15 @@ keymap("n", "<BS>", qol.wordSwitch, { desc = "switch common words" })
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
 for _, v in pairs(trailingKeys) do
-	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = "append " .. v .. " to EoL" })
+	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = v .. " to EoL" })
 end
 keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Spelling (mnemonic: [z]pe[l]ling)
-keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "spellsuggest" })
-keymap("n", "gl", "]s", { desc = "next misspelling" })
-keymap("n", "gL", "]s", { desc = "prev misspelling" })
-keymap("n", "za", "mz]s1z=`z", { desc = "autofix spelling" }) -- [a]utofix word under cursor
+keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "暈suggest" })
+keymap("n", "gl", "]s", { desc = "暈next misspelling" })
+keymap("n", "gL", "]s", { desc = "暈prev misspelling" })
+keymap("n", "za", "mz]s1z=`z", { desc = "暈autofix" }) -- [a]utofix word under cursor
 
 -- [S]ubstitute Operator (substitute.nvim)
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })

@@ -9,10 +9,10 @@ return {
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
-		event = "VimEnter", -- not using "VeryLazy", so the lines appear a bit quicker
+		event = "VimEnter", 
 		config = function()
 			require("indent_blankline").setup {
-				show_current_context = true, -- active indent
+				show_current_context = true, -- = active indent
 				use_treesitter = true,
 				filetype_exclude = {"undotree", "help", "man", "lspinfo", ""}
 			}
@@ -43,11 +43,12 @@ return {
 		end,
 	},
 
-	{ -- nicer colorcolumn
-		"xiyaowong/virtcolumn.nvim",
-		init = function() vim.g.virtcolumn_char = "║" end,
-		event = "VeryLazy",
-	},
+	-- deactivated due to `gm` column
+	-- { -- nicer colorcolumn
+	-- 	"xiyaowong/virtcolumn.nvim",
+	-- 	init = function() vim.g.virtcolumn_char = "║" end,
+	-- 	event = "VeryLazy",
+	-- },
 
 	{ -- color previews & color utilities
 		"uga-rosa/ccc.nvim",
