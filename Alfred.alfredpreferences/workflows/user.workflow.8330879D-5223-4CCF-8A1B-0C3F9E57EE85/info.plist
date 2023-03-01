@@ -22,9 +22,9 @@
 				<key>destinationuid</key>
 				<string>81E13F5F-2CB4-4393-93E9-85601627DF28</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy Snippet</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -175,36 +175,60 @@ echo -n $query</string>
 		<key>0C81ADD1-1180-403C-BAA1-3B6FCB2D0826</key>
 		<dict>
 			<key>xpos</key>
-			<real>140</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>175</real>
 		</dict>
 		<key>0DF1D6A0-6590-4132-9ADD-521CFA7EE92C</key>
 		<dict>
 			<key>note</key>
 			<string>open at line</string>
 			<key>xpos</key>
-			<real>390</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>175</real>
 		</dict>
 		<key>81E13F5F-2CB4-4393-93E9-85601627DF28</key>
 		<dict>
 			<key>xpos</key>
-			<real>390</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>325</real>
 		</dict>
 		<key>9DF10EDE-C71E-46AC-B726-8DB96773729B</key>
 		<dict>
 			<key>xpos</key>
-			<real>535</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>325</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Folder containing VS-Code Style Snippets</string>
+			<key>label</key>
+			<string>Snippet Directory</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>snippetDir</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>0.5</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

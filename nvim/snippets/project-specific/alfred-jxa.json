@@ -30,7 +30,7 @@
 		"prefix": "Script Filter (Alfred)",
 		"body": [
 			"const jsonArray = app.doShellScript(`$1`)",
-			"\t.split(\"\r\")",
+			"\t.split(\"\\r\")",
 			"\t.map(item => {",
 			"\t\t$2",
 			"\t\treturn {",

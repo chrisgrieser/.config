@@ -113,19 +113,17 @@
 			"if (${1:condition}) {",
 			"\t$0",
 			"}"
-		],
-		"description": "If Statement"
+		]
 	},
 	"If-Else Statement": {
-		"prefix": "ifelse",
+		"prefix": "if .. else",
 		"body": [
 			"if (${1:condition}) {",
 			"\t$0",
 			"} else {",
 			"\t",
 			"}"
-		],
-		"description": "If-Else Statement"
+		]
 	},
 	"argv (node)": {
 		"prefix": "argv (node)",
