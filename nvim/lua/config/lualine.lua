@@ -91,9 +91,14 @@ local function clock()
 	return " " .. time
 end
 
+local function harpoonIndicator()
+	local harpoonJsonPath = vim.fn.stdpath("data") .. "/harpoon.json"
+end
+
+--------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
--- nerdfont: 'nf-ple'; since separators look off in Terminal
+-- nerdfont: 'nf-ple'
 local bottomSeparators = isGui() and { left = " ", right = " " } or { left = "", right = "" }
 local topSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
 

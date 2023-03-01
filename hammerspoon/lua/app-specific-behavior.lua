@@ -386,13 +386,11 @@ Wf_script_editor = Wf
 	.new("Script Editor")
 	:subscribe(Wf.windowCreated, function(newWin)
 		if newWin:title() == "Open" then
-			Keystroke({ "cmd" }, "n")
-			RunWithDelays(0.7, function()
-				Keystroke({ "cmd" }, "v")
-				-- local win = App("Script Editor"):mainWindow() -- cannot use newWin, since it's the open dialog
-				-- MoveResize(win, Centered)
-			end)
-			-- RunWithDelays(0.5, function() Keystroke({ "cmd" }, "k") end)
+			Keystroke({ "cmd" }, "n") 
+		elseif newWin:title() == "Untitled" then
+			Keystroke({ "cmd" }, "v")
+			RunWithDelays(0.2, function() Keystroke({ "cmd" }, "k") end)
+			MoveResize(newWin, Centered)
 		elseif newWin:title():find("%.sdef$") then
 			MoveResize(newWin, Centered)
 		end

@@ -31,7 +31,7 @@ function SystemStart()
 		-- to make reloads clearer in the console
 		return
 	else
-		Notify("Hammerspoon started.")
+		Notify("Finished loading.")
 		HoleCover()
 		PeripheryBatteryCheck("notify")
 		QuitFinderIfNoWindow()

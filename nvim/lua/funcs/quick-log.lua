@@ -73,7 +73,7 @@ function M.objectlog()
 	elseif ft == "lua" and expand("%:p:h"):find("nvim") then
 		templateStr = 'vim.pretty_print("%s:", %s)'
 	elseif ft == "javascript" or ft == "typescript" then
-		templateStr = 'console.dir("%s:", %s)'
+		templateStr = 'console.log("%s:", %s)'
 	else
 		vim.notify("Objectlog does not support " .. ft .. " yet.", logWarn)
 		return
