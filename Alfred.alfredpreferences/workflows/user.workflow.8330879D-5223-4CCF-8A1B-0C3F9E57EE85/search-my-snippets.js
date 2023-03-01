@@ -18,28 +18,27 @@ function readFile(path) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+const jsonArray = [];
+
 const snippetDir = $.getenv("snippetDir").replace(/^~/, app.pathTo("home folder"));
-const jsonArray = app
-	.doShellScript(`find "${snippetDir}" -type f -name "*.json"`)
+app.doShellScript(`find "${snippetDir}" -type f -name "*.json"`)
 	.split("\r")
 	.filter(path => !path.endsWith("package.json"))
 	.forEach(snippetFile => {
 		const fileName = snippetFile.split("/").pop().slice(0, -5);
 		const snippetJson = JSON.parse(readFile(snippetFile));
 
-		Object.keys(snippetJson).forEach(snippet => {
-			if (!snippet.prefix || !snippet.body) return;
-			let desc = fileName;
-			if (snippet.description) desc += snippet.description;
+		for (const snippet in snippetJson) {
+			const snippetObj = snippetJson[snippet];
 			jsonArray.push({
-				title: snippet.prefix,
-				subtitle: desc,
+				title: snippet,
+				subtitle: fileName,
 				match: alfredMatcher(fileName) + " " + alfredMatcher(snippet),
-				arg: `${snippetFile}/${snippet.prefix}`,
-				mods: { alt: { arg: snippet.body } },
+				arg: [snippetFile, snippet],
+				mods: { alt: { arg: snippetObj.body } },
 				uid: `${fileName}/${snippet}`,
 			});
-		});
+		}
 	});
 
 JSON.stringify({ items: jsonArray });
