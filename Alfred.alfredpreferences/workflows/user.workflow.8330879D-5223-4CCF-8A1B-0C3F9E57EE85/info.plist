@@ -29,6 +29,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>0DF1D6A0-6590-4132-9ADD-521CFA7EE92C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B34A7977-C7E4-41A8-8DE6-EC67FC2D93B4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>81E13F5F-2CB4-4393-93E9-85601627DF28</key>
 		<array>
 			<dict>
@@ -108,17 +121,15 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>query=$1
-
-echo -n $query</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>open-snippet-at-line.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -126,6 +137,35 @@ echo -n $query</string>
 			<string>0DF1D6A0-6590-4132-9ADD-521CFA7EE92C</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>B34A7977-C7E4-41A8-8DE6-EC67FC2D93B4</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -203,6 +243,13 @@ echo -n $query</string>
 			<real>425</real>
 			<key>ypos</key>
 			<real>325</real>
+		</dict>
+		<key>B34A7977-C7E4-41A8-8DE6-EC67FC2D93B4</key>
+		<dict>
+			<key>xpos</key>
+			<real>610</real>
+			<key>ypos</key>
+			<real>190</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
