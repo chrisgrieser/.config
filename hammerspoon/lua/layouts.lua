@@ -60,7 +60,6 @@ function WorkLayout()
 
 	local layout = createLayout(PseudoMaximized, IMacDisplay, {
 		"Vivaldi",
-		"Highlights",
 		"neovide",
 		"Slack",
 		"Discord",
@@ -79,6 +78,7 @@ function WorkLayout()
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
 		TwitterToTheSide()
+		TwitterScrollUp()
 		App("Drafts"):activate()
 	end)
 	dockSwitcher("work")

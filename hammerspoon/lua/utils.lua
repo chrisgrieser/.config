@@ -183,7 +183,7 @@ end
 function QuitApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		RunWithDelays({ 0, 0.5 }, function()
+		RunWithDelays({ 0, 1 }, function()
 			local appObj = hs.application.get(name)
 			if appObj then appObj:kill() end
 		end)
