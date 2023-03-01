@@ -27,5 +27,5 @@ function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 ---whether nvim runs in a GUI
 ---@return boolean
-function isGui() return g.neovide or g.goneovim end
+function IsGui() return g.neovide or g.goneovim end
 

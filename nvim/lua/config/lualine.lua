@@ -91,16 +91,43 @@ local function clock()
 	return " " .. time
 end
 
-local function harpoonIndicator()
+---reads the full fill
+---@param filePath string
+---@return string|nil file content or nil when not reading no successful
+local function readFile(filePath)
+	local file = io.open(filePath, "r")
+	if not file then return end
+	local content = file:read("*a")
+	file:close()
+	return content
+end
+
+function harpoonIndicator()
 	local harpoonJsonPath = vim.fn.stdpath("data") .. "/harpoon.json"
+	local harpoonJson = readFile(harpoonJsonPath)
+	if not harpoonJson then
+		vim.notify("harpoon.json not valid", logWarn)
+		return ""
+	end
+	local harpoonData = vim.json.decode(harpoonJson)
+	local pwd = vim.fn.getcwd()
+	local currentProject = harpoonData.projects[pwd]
+	local markedFiles = currentProject.mark.marks
+	local currentFile = expand("%")
+
+	for _, file in pairs(markedFiles) do
+		if file.filename == currentFile then return "ﯠ" end
+	end
+
+	return "" -- file not marked
 end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 -- nerdfont: 'nf-ple'
-local bottomSeparators = isGui() and { left = " ", right = " " } or { left = "", right = "" }
-local topSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
+local bottomSeparators = IsGui() and { left = " ", right = " " } or { left = "", right = "" }
+local topSeparators = IsGui() and { left = "", right = "" } or { left = "", right = "" }
 
 require("lualine").setup {
 	sections = {
@@ -113,7 +140,7 @@ require("lualine").setup {
 			{
 				"filetype",
 				colored = false,
-				padding = {left = 1, right = 0},
+				padding = { left = 1, right = 0 },
 				icon_only = true,
 			},
 			{
@@ -140,7 +167,7 @@ require("lualine").setup {
 		},
 		lualine_z = {
 			"location",
-			{ selectionCount, padding = {left = 0, right = 1} },
+			{ selectionCount, padding = { left = 0, right = 1 } },
 		},
 	},
 	winbar = {

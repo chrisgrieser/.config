@@ -73,6 +73,18 @@ function WriteToFile(filePath, str)
 	end
 end
 
+---reads the full fill
+---@param filePath string
+---@return string|nil file content or nil when not reading no successful
+function ReadFile(filePath)
+	local file = io.open(filePath, "r")
+	if not file then return end
+	local content = file:read("*a")
+	file:close()
+	return content
+end
+
+--------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 ---@return string

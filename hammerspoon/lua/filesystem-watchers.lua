@@ -32,10 +32,8 @@ BookmarkWatcher = Pw(sourceBookmarkPath, function()
 	end
 
 	-- Local State (also required for Alfred to pick up the Bookmarks)
-	local file = io.open(sourceStatePath, "r")
-	if not file then return end
-	local content = file:read("*a")
-	file:close()
+	local content = ReadFile(sourceStatePath)
+	if not content then return end
 	WriteToFile(chromeStatePath, content)
 
 	print("🔖 Bookmarks synced to Chrome Bookmarks")
