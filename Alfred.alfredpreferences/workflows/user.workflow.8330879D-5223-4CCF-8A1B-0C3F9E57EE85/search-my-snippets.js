@@ -14,7 +14,10 @@ function alfredMatcher(str) {
 const snippetDir = $.getenv("snippetDir").replace(/^~/, app.pathTo("home folder"));
 const jsonArray = app.doShellScript(`find "${snippetDir}" -type f -name "*.json"`)
 	.split("\r")
-	.map(item => {
+	.map(fPath => {
+		const parts = fPath.split("/")
+		const fileName = parts.pop().slice(0, -5);
+		const 
 		
 		return {
 			title: item,

@@ -21,43 +21,32 @@ const fileExists = filePath => Application("Finder").exists(Path(filePath));
 
 //──────────────────────────────────────────────────────────────────────────────
 
+// INFO https://formulae.brew.sh/docs/api/
 const jsonArray = [];
 
-// INFO https://formulae.brew.sh/docs/api/
-const caskJson = home + "/Library/Caches/Homebrew/api/cask.json";
-const formulaJson = home + "/Library/Caches/Homebrew/api/formula.json";
-if (!fileExists(caskJson) || !fileExists(formulaJson)) app.doShellScript(`brew update`);
+const caskTxt = home + "/Library/Caches/Homebrew/api/cask_names.txt";
+const formulaTxt = home + "/Library/Caches/Homebrew/api/formula_names.txt";
+if (!fileExists(formulaTxt) || !fileExists(caskTxt)) app.doShellScript(`brew update`);
 
-const casks = JSON.parse(readFile(caskJson));
-const formula = JSON.parse(readFile(formulaJson));
+const casks = readFile(caskTxt).split("\n");
+const formula = readFile(formulaTxt).split("\n");
 
-casks.forEach(item => {
-	const name = item.name[0];
-	const id = item.token;
-	const desc = item.desc || "";
-
+casks.forEach(name => {
 	jsonArray.push({
 		title: name,
-		match: alfredMatcher(name) + alfredMatcher(desc),
-		subtitle: `cask         ${desc}`,
-		arg: `${id} --cask`,
-		mods: { cmd: { arg: id } },
-		uid: id,
+		match: alfredMatcher(name),
+		subtitle: "cask",
+		arg: `${name} --cask`,
+		uid: name,
 	});
 });
-
-formula.forEach(item => {
-	const name = item.full_name;
-	const id = item.name;
-	const desc = item.desc || "";
-
+formula.forEach(name => {
 	jsonArray.push({
 		title: name,
-		match: alfredMatcher(name) + alfredMatcher(desc),
-		subtitle: `formula    ${desc}`,
-		arg: `${id} --formula`,
-		mods: { cmd: { arg: id } },
-		uid: id,
+		match: alfredMatcher(name),
+		subtitle: "formula",
+		arg: `${name} --formula`,
+		uid: name,
 	});
 });
 
