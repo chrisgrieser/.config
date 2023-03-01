@@ -44,15 +44,21 @@ return {
 		"ThePrimeagen/harpoon",
 		lazy = true,
 		dependencies = "nvim-lua/plenary.nvim",
-		-- HACK to make Harpoon marks syncable across devices by creating symlink
-		-- to the `harpoon.json` that is synced
 		config = function()
+			-- HACK to make Harpoon marks syncable across devices by creating symlink
+			-- to the `harpoon.json` that is synced
 			local symlinkCmd = string.format(
 				"ln -sf '%s' '%s'",
 				VimDataDir .. "/harpoon.json",
 				vim.fn.stdpath("data") .. "/harpoon.json" -- https://github.com/ThePrimeagen/harpoon/blob/master/lua/harpoon/init.lua#L7
 			)
 			vim.fn.system(symlinkCmd)
+
+			require("harpoon").setup {
+				menu = {
+					borderchars = BorderChars,
+				},
+			}
 		end,
 	},
 
