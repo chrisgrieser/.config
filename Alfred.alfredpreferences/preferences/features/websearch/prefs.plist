@@ -245,7 +245,7 @@
 			<key>keyword</key>
 			<string>ai</string>
 			<key>text</key>
-			<string>Chat GPT: '{query}'</string>
+			<string>ChatGPT (online): '{query}'</string>
 			<key>url</key>
 			<string>https://chat.openai.com/chat?q={query}</string>
 		</dict>
