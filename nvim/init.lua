@@ -1,9 +1,16 @@
 -- CORE CONFIG
 vim.g.mapleader = ","
-BorderStyle = "single" -- none|single|double|rounded|shadow|solid
 LinterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
 VimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
-UpdateCounterThreshhold = 25
+UpdateCounterThreshhold = 25 -- for lazy
+
+-- BORDER LOOKS
+-- https://neovim.io/doc/user/api.html#nvim_open_win()
+-- Telescope and Harpoon do not take a string arg, but only an array
+BorderStyle = "single" -- none|single|double|rounded|shadow|solid
+BorderChars = { "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" }
+
+{ "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
 --------------------------------------------------------------------------------
 
