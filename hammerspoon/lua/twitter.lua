@@ -27,6 +27,7 @@ end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
 TwitterWatcher = Aw.new(function(appName, eventType, appObj)
+	if not AppIsRunning("Twitter") then return end
 	-- move twitter and scroll it up
 	if appName == "Twitter" and eventType == Aw.launched then
 		RunWithDelays(1, function()
@@ -54,7 +55,7 @@ TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 	-- raise twitter when switching window to any app
 	elseif appName and eventType == Aw.activated then
 		local win = appObj:mainWindow()
-		if CheckSize(win, PseudoMaximized) and AppIsRunning("Twitter") then
+		if CheckSize(win, PseudoMaximized) then
 			App("Twitter"):mainWindow():raise()
 		end
 	end
