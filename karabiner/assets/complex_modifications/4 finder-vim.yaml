@@ -732,7 +732,8 @@ rules:
                   select newFile
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # b = Toggle `.bkp` (Backup)
+      # b = Toggle `.bkp` (Backup). CAVEAT when used on a symlink, renames the
+      # target instead of the symlink. 🙈
       - type: basic
         from: { key_code: b }
         to:

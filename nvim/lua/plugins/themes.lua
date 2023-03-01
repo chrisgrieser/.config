@@ -37,7 +37,7 @@ function ThemeSettings()
 	-----------------------------------------------------------------------------
 
 	linkHighlight("myAnnotations", "Todo")
-	fn.matchadd("myAnnotations", [[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|NOTE\|FIX\)\>]])
+	fn.matchadd("myAnnotations", [[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|NOTE\|FIX\|CAVEAT\)\>]])
 
 	function CustomHighlights()
 		local highlights = {

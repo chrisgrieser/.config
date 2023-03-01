@@ -39,6 +39,7 @@ local options = {
 			"%.plist", -- Alfred
 			"%.data", -- Alfred
 			"%.zcomp", -- zsh completion data
+			"harpoon%-menu", -- harpoon
 			"%.string",
 			"%.pdf",
 			"%.log",

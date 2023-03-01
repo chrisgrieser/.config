@@ -458,7 +458,6 @@ autocmd("FileType", {
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
 		"man",
-		"harpoon",
 	},
 	callback = function()
 		local opts = { buffer = true, nowait = true, desc = "close" }
@@ -470,12 +469,16 @@ autocmd("FileType", {
 -- remove the waiting time from the q, due to conflict with `qq` for comments
 autocmd("FileType", {
 	group = "quickClose",
-	pattern = { "ssr", "TelescopePrompt", "grapple" },
+	pattern = { "ssr", "TelescopePrompt", "harpoon" },
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 		if bo.filetype == "ssr" then
 			keymap("n", "q", "Q", opts)
-		else
+		elseif bo.filetype == "harpoon" then
+			-- HACK 1ms delay ensures it comes later in the autocmd stack and takes effect
+			---@diagnostic disable-next-line: param-type-mismatch
+			vim.defer_fn(function() keymap("n", "q", "<Esc>", opts) end, 1)
+		elseif bo.filetype == "TelescopePrompt" then
 			keymap("n", "q", "<Esc>", opts)
 		end
 	end,
