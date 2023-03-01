@@ -59,9 +59,9 @@
 			<key>keyword</key>
 			<string>tw</string>
 			<key>text</key>
-			<string>Tweet: '{query}'</string>
+			<string>New Tweet in Twitter</string>
 			<key>url</key>
-			<string>http://twitter.com/intent/tweet?text={query}</string>
+			<string>http://twitter.com/intent/tweet?text=</string>
 		</dict>
 		<key>510A0ED4-31D4-48D5-9318-92A081DCF445</key>
 		<dict>
