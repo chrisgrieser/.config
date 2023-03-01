@@ -102,7 +102,7 @@ local function harpoonIndicator()
 		return ""
 	end
 	local harpoonData = vim.json.decode(harpoonJson)
-	local pwd = fn.getcwd()
+	local pwd = vim.loop.cwd()
 	local currentProject = harpoonData.projects[pwd]
 	local markedFiles = currentProject.mark.marks
 	local currentFile = expand("%")

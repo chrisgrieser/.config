@@ -359,17 +359,27 @@ keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
 --------------------------------------------------------------------------------
 -- FILES
 
+
 -- runs Telescope's find_files on the current project, inserting project name
 -- and number of harpoon files as the prompt title
-keymap("n", "go", function()
-	local pwd = fn.getcwd()
-	local projectName = pwd:gsub(".*/", "")
+---@return string|nil
+local function harpoonTitle()
+	local pwd = vim.loop.cwd()
 	local harpoonJsonPath = fn.stdpath("data") .. "/harpoon.json"
 	local harpoonJson = ReadFile(harpoonJsonPath)
-	if not harpoonJson then return end
+	if not harpoonJson or not pwd then return end
+
 	local harpoonData = vim.json.decode(harpoonJson)
-	local harpoonFileNumber = #(harpoonData.projects[pwd].mark.marks)
+	local harpoonProject = harpoonData.projects[pwd]
+	if not harpoonProject then return end
+	local harpoonFileNumber = #(harpoonProject.mark.marks)
+	local projectName = pwd:gsub(".*/", "")
 	local title = projectName .. " (" .. tostring(harpoonFileNumber) .. "ﯠ)"
+	return title
+end
+
+keymap("n", "go", function()
+	local title = harpoonTitle()
 	require("telescope.builtin").find_files { prompt_title = title }
 end, { desc = " Open file in Project" })
 
