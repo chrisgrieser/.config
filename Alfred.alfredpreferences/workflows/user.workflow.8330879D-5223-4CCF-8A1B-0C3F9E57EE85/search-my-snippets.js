@@ -11,16 +11,15 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const jsonArray = app.doShellScript(`find "${snippetDir}" -type`)
-	.split("")
+const snippetDir = $.getenv("snippetDir").replace(/^~/, app.pathTo("home folder"));
+const jsonArray = app.doShellScript(`find "${snippetDir}" -type f -name "*.json"`)
+	.split("\r")
 	.map(item => {
 		
 		return {
 			title: item,
 			match: alfredMatcher(item),
 			subtitle: item,
-			type: "file:skipcheck",
-			icon: { type: "fileicon", path: item },
 			arg: item,
 			uid: item,
 		};
