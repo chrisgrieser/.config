@@ -283,7 +283,11 @@ return {
 	},
 	{
 		"smjonas/duplicate.nvim",
-		keys = { "yd", "R", { "R", mode = "x" } },
+		keys = {
+			{"yd", desc = "Duplicate"},
+			{ "R", mode = {"n", "x"}, desc = "Duplicate" },
+		},
+		enabled = false,
 		config = function()
 			require("duplicate").setup {
 				operator = {

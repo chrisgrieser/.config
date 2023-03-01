@@ -21,14 +21,15 @@ function CheckSize(win, size)
 		"Move", -- Finder windows
 		"Delete", -- Finder windows
 		"Bin", -- Finder windows
+		"Enki",
 		"System Settings",
 		"Transmission",
 		"Twitter",
 	}
 	if TableContains(invalidWinsByTitle, win:title()) then return nil end
+
 	local maxf = win:screen():frame()
 	local winf = win:frame()
-
 	local diffw = winf.w - size.w * maxf.w
 	local diffh = winf.h - size.h * maxf.h
 	local diffx = size.x * maxf.w + maxf.x - winf.x -- calculated this way for two screens
