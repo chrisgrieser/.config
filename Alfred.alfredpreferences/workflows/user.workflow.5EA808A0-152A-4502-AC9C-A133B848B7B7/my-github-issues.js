@@ -38,6 +38,7 @@ function run() {
 
 		let matcher = alfredMatcher(item.title) + " " + alfredMatcher(repo) + " " + item.state;
 		if (isPR) matcher += " pr";
+		else matcher += " issue";
 
 		return {
 			title: icon + title,

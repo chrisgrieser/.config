@@ -140,8 +140,6 @@ keymap({ "i", "s" }, "<D-S-j>", function()
 	end
 end, { desc = "LuaSnip: Jump Back" })
 
-keymap("n", "<leader>ls", function() cmd.Telescope("luasnip") end, { desc = " LuaSnip: Snippets" })
-
 --------------------------------------------------------------------------------
 -- EDITING
 
