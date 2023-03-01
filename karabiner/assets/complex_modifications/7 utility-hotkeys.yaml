@@ -22,21 +22,14 @@ rules:
       - type: basic
         from: {key_code: spacebar, modifiers: {mandatory: [fn]}}
         to:
-          - key_code: spacebar
-            modifiers:
-              - control
+          - {key_code: spacebar, modifiers: [control]}
   - description: '🔘 ⌘+J → Expand Word'
     manipulators:
       - type: basic
         from: {key_code: j, modifiers: {mandatory: [command]}}
         to:
-          - key_code: right_arrow
-            modifiers:
-              - option
-          - key_code: left_arrow
-            modifiers:
-              - option
-              - shift
+          - {key_code: right_arrow, modifiers: [option]}
+          - {key_code: left_arrow, modifiers: [shift, option]}
         conditions:
           - type: frontmost_application_unless
             file_paths:
@@ -50,66 +43,51 @@ rules:
         from: {key_code: "3", modifiers: {mandatory: [shift]}}
         conditions:
           - type: input_source_if
-            input_sources: {language: ^de$}
+            input_sources: [{language: ^de$ }]
         to:
-          - select_input_source:
-              input_source_id: ^com\.apple\.keylayout\.US$
-          - key_code: vk_none
-            hold_down_milliseconds: 20
-          - key_code: non_us_pound
-            modifiers:
-              - shift
+          - select_input_source: {input_source_id: ^com\.apple\.keylayout\.US$}
+          - {key_code: vk_none, hold_down_milliseconds: 20}
+          - {key_code: non_us_pound, modifiers: [shift]}
         to_after_key_up:
-          - select_input_source:
-              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+          - select_input_source: {input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$}
   - description: "🔘 ° → \\ (+ US Layout); ⌥^ for ° Symbol"
     manipulators:
       - type: basic
         from: {key_code: non_us_backslash, modifiers: {mandatory: [shift]}}
         conditions:
           - type: input_source_if
-            input_sources: [language: ^de$]
+            input_sources: [{language: ^de$ }]
         to:
-          - select_input_source:
-              input_source_id: ^com\.apple\.keylayout\.US$
-          - key_code: vk_none
-            hold_down_milliseconds: 20
+          - select_input_source: {input_source_id: ^com\.apple\.keylayout\.US$}
+          - {key_code: vk_none, hold_down_milliseconds: 20}
           - key_code: non_us_pound
         to_after_key_up:
-          - select_input_source:
-              input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$
+          - select_input_source: {input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$}
       - type: basic
         from: {key_code: non_us_backslash, modifiers: {mandatory: [option]}}
         conditions:
           - type: input_source_if
-            input_sources: [language: ^de$]
+            input_sources: [{language: ^de$ }]
         to:
           - {key_code: non_us_backslash, modifiers: [shift]}
       - type: basic
         from: {key_code: non_us_backslash, modifiers: {mandatory: [command]}}
         conditions:
           - type: input_source_if
-            input_sources: [language: ^de$]
+            input_sources: [{language: ^de$ }]
         to:
           - {key_code: "6", modifiers: [command]}
   - description: "🔘1️⃣ One Stroke ^` (German Layout)"
     manipulators:
       # backtick
       - type: basic
-        from:
-          key_code: equal_sign
-          modifiers:
-            mandatory:
-              - shift
+        from: {key_code: equal_sign, modifiers: {mandatory: [shift]}}
         to:
-          - key_code: equal_sign
-            modifiers:
-              - shift
+          - {key_code: equal_sign, modifiers: [shift]}
           - key_code: spacebar
         conditions:
           - type: input_source_if
-            input_sources:
-              - language: ^de$
+            input_sources: [{language: ^de$ }]
       # the ^
       - type: basic
         from:
@@ -119,8 +97,7 @@ rules:
           - key_code: spacebar
         conditions:
           - type: input_source_if
-            input_sources:
-              - language: ^de$
+            input_sources: [{language: ^de$ }]
           - type: frontmost_application_unless
             file_paths:
               - ^/Applications/Obsidian\.app
