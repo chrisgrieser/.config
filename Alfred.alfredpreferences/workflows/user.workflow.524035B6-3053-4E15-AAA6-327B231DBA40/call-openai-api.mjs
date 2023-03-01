@@ -33,7 +33,7 @@ async function run(dynamicPromptPart) {
 
 		const text = data.choices[0].text.trim(); // can also return multiple responses as choices
 		// const usedTokens = data.usage.total_tokens;
-		process.stdout.write(`${dynamicPromptPart} ${text}`);
+		process.stdout.write(`${dynamicPromptPart} 🤖{cursor}${text}`);
 	} catch (error) {
 		console.error(`Error: ${error}`);
 	}
