@@ -74,7 +74,7 @@ ExternalHarddriveWatcher = hs.usb.watcher
 WifiWatcher = hs.wifi.watcher
 	.new(function(_, msg)
 		local ssid = hs.wifi.currentNetwork() or "none"
-		Notify("WiFi (" .. msg .. "): " .. ssid)
+		Notify("📶 WiFi (" .. msg .. "): " .. ssid)
 	end)
-	:watchingFor({ "SSIDChange", "modeChange", "powerChange" })
+	:watchingFor({ "SSIDChange", "powerChange" })
 	:start()
