@@ -102,12 +102,8 @@ node ./call-openai-api.mjs "$OPENAI_API_KEY" "$prompt"</string>
 				<false/>
 				<key>modsmode</key>
 				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>md.obsidian</string>
-				</array>
 				<key>relatedAppsMode</key>
-				<integer>2</integer>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -189,6 +185,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>92ED8532-D717-4F99-987C-4A3810BC7B5E</key>
 		<dict>
+			<key>note</key>
+			<string>finish the sentence</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
