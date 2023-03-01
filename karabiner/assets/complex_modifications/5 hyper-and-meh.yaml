@@ -119,8 +119,12 @@ rules:
               open -a Alfred\ 5
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Insert Mode Vim: ⇪ Hyper + hjklio<space> → ←↓↑→"
+  - description: "Insert Mode Vim: ⇪ Hyper + hjklion<space> → ⌫←↓↑→"
     manipulators:
+      - type: basic
+        from: {key_code: "n", modifiers: {mandatory: [option, shift, command, control]}}
+        to:
+          - key_code: delete_or_backspace
       - type: basic
         from: {key_code: h, modifiers: {mandatory: [option, shift, command, control]}}
         to:
