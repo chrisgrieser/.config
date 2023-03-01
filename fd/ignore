@@ -4,12 +4,12 @@ Academia/PhD Data/
 # Mac Stuff
 .DS_Store
 .Trash
+
 # Icon must end with two \r
 Icon
 
 
 # useless stuff inside pseudo-apps
-**/*.popclipext/*
 **/*.app/*
 **/*.pxd/*
 
@@ -17,6 +17,4 @@ Icon
 *.spl
 
 # inside Alfred prefs
-Alfred.alfredpreferences/**
-!Alfred.alfredpreferences/workflows/
 *-*-*-*-*.png
