@@ -135,14 +135,11 @@ SleepWatcher = caff
 	:start()
 
 OfficeWakeWatcher = caff.new(function(event)
-	if IsAtOffice() and (event == caff.screensDidWake or event == caff.systemDidWake) then
-		TwitterScrollUp()
-		SyncAllGitRepos()
-		WorkLayout()
-		local toDark = not (BetweenTime(7, 18))
-		SetDarkmode(toDark)
-		return
-	end
+	if not (IsAtOffice()) or event ~= caff.screensDidUnlock then return end
+
+	WorkLayout()
+	local toDark = not (BetweenTime(7, 18))
+	SetDarkmode(toDark)
 end)
 
 --------------------------------------------------------------------------------
@@ -150,10 +147,8 @@ end)
 
 HomeWakeWatcher = caff
 	.new(function(event)
-		if IsAtOffice() then return end
-		if not (event == caff.screensDidWake or event == caff.screensDidUnlock) then return end
+		if IsAtOffice() or event ~= caff.screensDidUnlock then return end
 
-		TwitterScrollUp()
 		hs.execute("sketchybar --set clock popup.drawing=true")
 
 		hs.timer.waitUntil(ScreenIsUnlocked, function()
@@ -193,19 +188,23 @@ BiweeklyTimer = timer("02:00", "02d", function()
 	PeripheryBatteryCheck("Drafts")
 end, true)
 
+-- keep the iMac display dark when projector is connected
 ProjectorScreensaverWatcher = caff.new(function(eventType)
+	if IsAtOffice() then return end
 	if eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart then
 		RunWithDelays(2, function()
 			if IsProjector() then IMacDisplay:setBrightness(0) end
 		end)
 	end
-end)
+end):start()
+
+--------------------------------------------------------------------------------
 
 local function sleepMovieApps()
 	local minutesIdle = hs.host.idleTime() / 60
 	if minutesIdle < 30 then return end
-	QuitApp { "YouTube", "Twitch", "CrunchyRoll" }
-	-- no need to quit IINA and Netflix, since they autoquits / autoquit
+	QuitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix" }
+	-- no need to quit IINA it autoquits / autoquit
 	Applescript([[
 		tell application "Vivaldi"
 			if ((count of window) is not 0)
@@ -218,7 +217,6 @@ local function sleepMovieApps()
 	]])
 end
 
---------------------------------------------------------------------------------
 
 if IsIMacAtHome() or IsAtMother() then
 	SleepTimer0 = timer("02:00", "01d", sleepMovieApps, true):start()
@@ -226,8 +224,4 @@ if IsIMacAtHome() or IsAtMother() then
 	SleepTimer2 = timer("04:00", "01d", sleepMovieApps, true):start()
 	SleepTimer3 = timer("05:00", "01d", sleepMovieApps, true):start()
 	SleepTimer4 = timer("06:00", "01d", sleepMovieApps, true):start()
-	if IsIMacAtHome() then
-		BiweeklyTimer:start()
-		ProjectorScreensaverWatcher:start()
-	end
 end
