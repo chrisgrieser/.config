@@ -13,7 +13,8 @@ opt.undofile = true -- enable persistent undo history
 opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 
 -- extra undopoints (= more fine-grained undos)
--- INFO extra undo points prevent vim abbreviations w/ those characters from working
+-- INFO extra undo points prevent vim abbreviations w/ those characters from 
+-- working, so space should not be added here
 local undopointChars = { ".", ",", ";", '"' }
 for _, char in pairs(undopointChars) do
 	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char })
@@ -102,7 +103,10 @@ opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 opt.signcolumn = "yes:1" -- = gutter
-opt.colorcolumn = "+1" -- relative to textwidth
+
+-- column for `gm`
+local gmColumn = math.floor(fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
+opt.colorcolumn = { "+1", gmColumn } -- relative to textwidth
 
 -- status bar & cmdline
 opt.history = 400 -- reduce noise for command history search
@@ -116,9 +120,7 @@ opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
 
 --------------------------------------------------------------------------------
 
--- Files & Saving
-opt.confirm = true -- ask instead of aborting
-
+-- Auto-Saving
 augroup("autosave", {})
 autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	group = "autosave",
@@ -130,28 +132,10 @@ autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	end,
 })
 
--- test
--- emulate autochdir, since the respective option is deprecated
--- augroup("autochdir", {})
--- autocmd("BufWinEnter", {
--- 	group = "autochdir",
--- 	pattern = "?*", -- needed for BufWinEnter to work
--- 	callback = function()
--- 		-- needs to exclude commit filetypes: https://github.com/petertriho/cmp-git/issues/47#issuecomment-1374788422
--- 		local ignoredFT = { "gitcommit", "NeogitCommitMessage", "DiffviewFileHistory", "" }
--- 		if not vim.tbl_contains(ignoredFT, bo.filetype) and (expand("%:p"):find("^/")) then
--- 			cmd.lcd(expand("%:p:h"))
--- 		end
--- 	end,
--- })
-
--- so autochdir does not interfere with saving of views
-opt.viewoptions:remove("curdir")
-
 --------------------------------------------------------------------------------
 
--- Formatting vim.opt.formatoptions:remove("o") would not work, since it's
--- overwritten by the ftplugins having the o option. therefore needs to be set
+-- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
+-- overwritten by the ftplugins having the `o` option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 augroup("formatopts", {})
 autocmd("FileType", {
@@ -184,6 +168,7 @@ local function remember(mode)
 		"TelescopePrompt",
 		"gitcommit",
 		"toggleterm",
+		"harpoon",
 		"help",
 		"qf",
 	}
@@ -250,7 +235,6 @@ g.markdown_fenced_languages = {
 	"python",
 	"py=python",
 	"yaml",
-	"yml=yaml",
 	"json",
 	"lua",
 	"javascript",

@@ -110,6 +110,7 @@ return {
 				triggers_blacklist = {
 					n = { "y" }, -- FIX weird delay occurring when yanking after a change
 				},
+				hidden = {},
 				window = {
 					border = { "", "─", "", "" }, -- no border to the side to save space
 					padding = { 0, 0, 0, 0 },
@@ -118,7 +119,7 @@ return {
 				layout = { -- of the columns
 					height = { min = 4, max = 17 },
 					width = { min = 22, max = 33 },
-					spacing = 0,
+					spacing = 1,
 				},
 			}
 		end,
