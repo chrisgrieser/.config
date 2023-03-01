@@ -30,10 +30,11 @@ async function run(dynamicPromptPart) {
 			}),
 		});
 		const data = await response.json();
+		// const usedTokens = data.usage.total_tokens;
 
 		const text = data.choices[0].text.trim(); // can also return multiple responses as choices
-		// const usedTokens = data.usage.total_tokens;
-		process.stdout.write(`${dynamicPromptPart} 🤖{cursor}${text}`);
+		// "{cursor}" is dynamic placeholder for Alfred
+		process.stdout.write(`${dynamicPromptPart}{cursor}* ${text}`); 
 	} catch (error) {
 		console.error(`Error: ${error}`);
 	}
