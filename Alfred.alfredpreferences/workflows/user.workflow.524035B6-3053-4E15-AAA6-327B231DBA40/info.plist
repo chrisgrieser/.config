@@ -6,6 +6,19 @@
 	<string>de.chris-grieser.open-ai</string>
 	<key>connections</key>
 	<dict>
+		<key>0FD32B7B-CE8C-4871-A07E-564BB91F0477</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5ADED626-7002-40F9-B059-6618ADE03DCE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D88499E0-8D89-4192-99E6-E4517C300113</key>
 		<array>
 			<dict>
@@ -68,29 +81,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>call-openai-api.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0FD32B7B-CE8C-4871-A07E-564BB91F0477</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -109,6 +99,60 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># API Key accessed from .zshenv to keep it out of the dotfiles
+prompt=$1
+node ./call-openai-api.js "$OPENAI_API_KEY" "$prompt"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0FD32B7B-CE8C-4871-A07E-564BB91F0477</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>5ADED626-7002-40F9-B059-6618ADE03DCE</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -119,7 +163,14 @@
 			<key>note</key>
 			<string>requires node</string>
 			<key>xpos</key>
-			<real>285</real>
+			<real>270</real>
+			<key>ypos</key>
+			<real>340</real>
+		</dict>
+		<key>5ADED626-7002-40F9-B059-6618ADE03DCE</key>
+		<dict>
+			<key>xpos</key>
+			<real>465</real>
 			<key>ypos</key>
 			<real>340</real>
 		</dict>

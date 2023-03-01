@@ -11,7 +11,7 @@ function TwitterScrollUp()
 	Keystroke({ "shift", "command" }, "R", 1, App("Twitter")) -- reload
 
 	-- needs delays to wait for tweet loading
-	RunWithDelays({ 0.2, 0.4, 0.6, 0.9, 1.2 }, function()
+	RunWithDelays({ 0.2, 0.5, 1, 1.5 }, function()
 		Keystroke({ "command" }, "1", 1, App("Twitter")) -- scroll up
 		Keystroke({ "command" }, "up", 1, App("Twitter")) -- goto top
 	end)
@@ -52,10 +52,10 @@ TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 			end
 		end
 
-	-- raise twitter when switching window to any app
+	-- raise twitter when switching window to other app
 	elseif appName and eventType == Aw.activated then
 		local win = appObj:mainWindow()
-		if CheckSize(win, PseudoMaximized) then
+		if CheckSize(win, PseudoMaximized) or CheckSize(win, Centered)then
 			App("Twitter"):mainWindow():raise()
 		end
 	end
