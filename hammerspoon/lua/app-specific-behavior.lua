@@ -35,10 +35,10 @@ end
 
 -- AUTOMATIONS FOR MULTIPLE APPS
 TransBgAppWatcher = Aw.new(function(appName, eventType, appObject)
-	local appsWithTransparency = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
+	local transBgApp = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
 	if
 		IsProjector()
-		or not (TableContains(appsWithTransparency, appName))
+		or not (TableContains(transBgApp, appName))
 		or appName == "Alfred" -- needed for Alfred Compatibility Mode
 	then
 		return
@@ -47,15 +47,15 @@ TransBgAppWatcher = Aw.new(function(appName, eventType, appObject)
 	if eventType == Aw.activated or eventType == Aw.launched then
 		-- some apps like neovide do not set a "launched" signal, so the delayed
 		-- hiding is used for its activation as well
-		RunWithDelays({ 0.15, 0.3 }, function()
+		RunWithDelays({ 0.1 }, function()
 			local win = appObject:mainWindow()
 			if
-				not win
-				or not (TableContains(appsWithTransparency, FrontAppName())) -- extra check somestimes needed
+				win
+				and TableContains(transBgApp, FrontAppName()) -- extra check somestimes needed
+				and (CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized))
 			then
-				return
+				hideOthers(win)
 			end
-			if CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized) then hideOthers(win) end
 		end)
 	elseif eventType == Aw.terminated then
 		unHideAll()
