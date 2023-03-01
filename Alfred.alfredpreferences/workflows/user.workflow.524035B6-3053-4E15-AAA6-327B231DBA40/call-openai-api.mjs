@@ -11,7 +11,7 @@ const staticPromptPart = "Finish the following sentence: ";
 
 //──────────────────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
-const input = argv[1];
+const prompt = argv[1].trim();
 const apiKey = argv[0];
 
 async function run(dynamicPromptPart) {
@@ -30,11 +30,13 @@ async function run(dynamicPromptPart) {
 			}),
 		});
 		const data = await response.json();
+
 		const text = data.choices[0].text.trim(); // can also return multiple responses as choices
+		// const usedTokens = data.usage.total_tokens;
 		process.stdout.write(`${dynamicPromptPart} ${text}`);
 	} catch (error) {
 		console.error(`Error: ${error}`);
 	}
 }
 
-await run(input);
+await run(prompt);

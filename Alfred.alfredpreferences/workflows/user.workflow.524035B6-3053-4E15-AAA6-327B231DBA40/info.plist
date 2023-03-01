@@ -196,8 +196,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>FB4D8632-309B-4BB0-BC22-4F8E12E09362</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
 			<key>note</key>
 			<string>get line under cursor</string>
 			<key>xpos</key>
