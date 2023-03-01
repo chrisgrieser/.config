@@ -2,8 +2,9 @@
 # shellcheck disable=SC2086,SC2154
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
-# run in subshell to avoid output, only pass if for notification
-notification=$(spt playback --$1 --shuffle --format="$format" 2>&1)
+[[ $1 == "play" ]] && shuffle="--shuffle"
+notification=$(spt playback --$1 $shuffle --format="$format" 2>&1)
+
 # shellcheck disable=SC2181
 if [[ "$?" != "0" ]]; then
 	echo -n "$notification"
