@@ -16,13 +16,13 @@
 		"prefix": "globals (eslint)",
 		"body": "/* global ${1:var} */"
 	},
-	"fall through (switch, eslint)": {
+	"fall-through (switch, eslint)": {
 		"prefix": "fall through (switch, eslint)",
 		"body": "// falls through",
 		"description": "This comment indicates that a fallthrough in a switch statement is intentional and disables the respective eslint warning. See: https://eslint.org/docs/latest/rules/no-fallthrough"
 	},
-	"For Loop": {
-		"prefix": "for",
+	"for .. (counter-based loop)": {
+		"prefix": "for ..",
 		"body": [
 			"for (let ${1:index} = 0; ${1:index} < ${2:array}.length; ${1:index}++) {",
 			"\tconst ${3:element} = ${2:array}[${1:index}];",
@@ -31,7 +31,7 @@
 		],
 		"description": "For Loop"
 	},
-	"For-Each": {
+	".forEach": {
 		"prefix": "forEach =>",
 		"body": [
 			".forEach(${1:item} => {",
@@ -39,7 +39,7 @@
 			"});"
 		]
 	},
-	"map (array, complex)": {
+	".map (array, complex)": {
 		"prefix": "map (array, complex)",
 		"body": [
 			"map(${1:item} => {",
@@ -86,8 +86,8 @@
 		"prefix": "ISO date",
 		"body": "new Date().toISOString().slice(0, 10);"
 	},
-	"For-In Loop": {
-		"prefix": "forin",
+	"for .. in (object-key loop)": {
+		"prefix": "for .. in (object-key loop)",
 		"body": [
 			"for (const ${1:key} in ${2:object}) {",
 			"\tif (${2:object}.hasOwnProperty(${1:key})) {",
@@ -95,19 +95,17 @@
 			"\t\t$0",
 			"\t}",
 			"}"
-		],
-		"description": "For-In Loop"
+		]
 	},
-	"For-of Loop": {
-		"prefix": "forof",
+	"for .. of (array loop)": {
+		"prefix": "for .. of (array loop)",
 		"body": [
 			"for (const ${1:iterator} of ${2:object}) {",
 			"\t$0",
 			"}"
-		],
-		"description": "For-Of Loop"
+		]
 	},
-	"If Statement": {
+	"if ..": {
 		"prefix": "if",
 		"body": [
 			"if (${1:condition}) {",
@@ -115,7 +113,7 @@
 			"}"
 		]
 	},
-	"If-Else Statement": {
+	"if .. else": {
 		"prefix": "if .. else",
 		"body": [
 			"if (${1:condition}) {",
@@ -130,14 +128,7 @@
 		"body": "const argv = process.argv.slice(2);",
 		"description": "Arguments from the command line. [0] is the node executable path, [1] the path of the file being executed, making [2] the first positional argument."
 	},
-	"New Statement": {
-		"prefix": "new",
-		"body": [
-			"const ${1:name} = new ${2:type}(${3:arguments});$0"
-		],
-		"description": "New Statement"
-	},
-	"Switch Statement": {
+	"Switch": {
 		"prefix": "switch",
 		"body": [
 			"switch (${1:key}) {",
@@ -147,19 +138,17 @@
 			"\tdefault:",
 			"\t\tbreak;",
 			"}"
-		],
-		"description": "Switch Statement"
+		]
 	},
-	"While Statement": {
+	"While ..": {
 		"prefix": "while ..",
 		"body": [
 			"while (${1:condition}) {",
 			"\t$0",
 			"}"
-		],
-		"description": "While Statement"
+		]
 	},
-	"Do-While Statement": {
+	"do .. while ..": {
 		"prefix": [
 			"do .. while",
 			"repeat until"
@@ -168,10 +157,9 @@
 			"do {",
 			"\t$0",
 			"} while (${1:condition});"
-		],
-		"description": "Do-While Statement"
+		]
 	},
-	"Try-Catch Statement": {
+	"try .. catch": {
 		"prefix": "try .. catch",
 		"body": [
 			"try {",
@@ -179,16 +167,14 @@
 			"} catch (${1:error}) {",
 			"\t",
 			"}"
-		],
-		"description": "Try-Catch Statement"
+		]
 	},
 	"Set Timeout Function": {
-		"prefix": "settimeout",
+		"prefix": ["settimeout", "timeout", "delay"],
 		"body": [
 			"setTimeout(() => {",
 			"\t$0",
 			"}, ${1:timeoutMs});"
-		],
-		"description": "Set Timeout Function"
+		]
 	}
 }

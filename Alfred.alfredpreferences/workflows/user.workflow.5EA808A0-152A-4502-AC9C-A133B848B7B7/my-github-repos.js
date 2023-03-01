@@ -19,7 +19,7 @@ function run() {
 	const jsonArray = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`))
 		.filter(item => !item.fork)
 		.sort((a, b) => {
-			// archived at the bottom, then sort by stars
+			// sort archived at the bottom, then sort by stars
 			if (a.archived && !b.archived) return 1;
 			if (!a.archived && b.archived) return -1;
 			return b.stargazers_count - a.stargazers_count
