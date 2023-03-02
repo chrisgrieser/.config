@@ -10,6 +10,7 @@ rules:
           - key_code: h
             modifiers: [command, shift]
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^us\.zoom\.xos$] }]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Microsoft & Google Office"
     manipulators:
       # export
@@ -35,6 +36,28 @@ rules:
                     set frontmost to true
                     click menu item "Comment" of menu "Insert" of menu bar 1
                   end tell
+                end tell'
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
+      # Toggle Sidebar MS Word
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Microsoft Word"
+                  set frontmost to true
+                  click menu item "Thumbnail" of menu of menu item "Sidebar" of menu "View" of menu bar 1
+                end tell'
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
+        # Zoom in Word: cmd+plus / cmd+minus
+      - type: basic
+        from: { key_code: "close_bracket", modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Microsoft Word"
+                  set frontmost to true
+                  click menu item "Thumbnail" of menu of menu item "Sidebar" of menu "View" of menu bar 1
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
       # Comment in Google Docs

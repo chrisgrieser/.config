@@ -3,7 +3,6 @@ require("lua.window-management")
 require("lua.dark-mode")
 require("lua.layouts")
 local caff = hs.caffeinate.watcher
-
 --------------------------------------------------------------------------------
 
 UnlockWatcher = caff
@@ -31,7 +30,7 @@ UnlockWatcher = caff
 	end)
 	:start()
 
------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 -- keep the iMac display brightness low when projector is connected
 ProjectorScreensaverWatcher = caff

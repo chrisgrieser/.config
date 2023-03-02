@@ -13,6 +13,8 @@ local function cleanupConsole()
 	hs.console.setConsole(out)
 end
 
+--------------------------------------------------------------------------------
+
 ---"hides" the cursor by moving it to the bottom left
 local function pseudoHideCursor()
 	local screen = hs.mouse.getCurrentScreen()
