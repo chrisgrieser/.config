@@ -248,10 +248,6 @@ local function cmpconfig()
 
 	--------------------------------------------------------------------------------
 	-- Command Line Completion
-	-- cmp.setup.cmdline({ "/", "?" }, {
-	-- 	mapping = cmp.mapping.preset.cmdline(),
-	-- 	sources = {}, -- empty cause all suggestions do not help much?
-	-- })
 
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),
@@ -262,6 +258,11 @@ local function cmpconfig()
 			s.cmdline_history,
 		}),
 	})
+
+	-- cmp.setup.cmdline({ "/", "?" }, {
+	-- 	mapping = cmp.mapping.preset.cmdline(),
+	-- 	sources = {}, -- empty cause all suggestions do not help much?
+	-- })
 
 end
 --------------------------------------------------------------------------------
@@ -313,22 +314,28 @@ return {
 					{ name = "git" },
 				},
 			})
+			cmp.setup.filetype("NeogitCommitMessage", {
+				sources = cmp.config.sources {
+					{ name = "git" },
+				},
+			})
 
 			require("cmp_git").setup {
-				git = { commits = { limit = 0 } }, -- 0 = disable completing commits
-				github = {
-					issues = {
-						limit = 100,
-						state = "open", -- open, closed, all
-					},
-					mentions = {
-						limit = 100,
-					},
-					pull_requests = {
-						limit = 10,
-						state = "open",
-					},
-				},
+				filetypes = { "gitcommit", "NeogitCommitMessage" },
+				-- git = { commits = { limit = 10 } }, -- 0 = disable completing commits
+				-- github = {
+				-- 	issues = {
+				-- 		limit = 100,
+				-- 		state = "open", -- open, closed, all
+				-- 	},
+				-- 	mentions = {
+				-- 		limit = 100,
+				-- 	},
+				-- 	pull_requests = {
+				-- 		limit = 10,
+				-- 		state = "open",
+				-- 	},
+				-- },
 			}
 		end,
 	},
