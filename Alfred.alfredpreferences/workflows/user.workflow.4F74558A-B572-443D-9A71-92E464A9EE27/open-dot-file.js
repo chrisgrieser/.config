@@ -16,12 +16,15 @@ const fileArray = app
 	.doShellScript(
 		`
 		cd "${dotfileFolder}"
-		fd --type=file --hidden --no-ignore --absolute-path \\
+		fd --type=file --hidden --absolute-path \\
 			-E "Alfred.alfredpreferences/preferences" \\
 			-E "Alfred.alfredpreferences/remote" \\
 			-E "Alfred.alfredpreferences/resources" \\
 			-E "Alfred.alfredpreferences/themes" \\
 			-E "Alfred.alfredpreferences/workflowextras" \\
+			-E "Alfred.alfredpreferences/workflows/shimmering-obsidian" \\
+			-E "Alfred.alfredpreferences/workflows/alfred-bibtex-citation-picker" \\
+			-E "Alfred.alfredpreferences/workflows/user.workflow.3BF713ED-02D0-4127-8126-26E36BF15CFC/__pycache__" \\
 			-E "alacritty/colors/*" \\
 			-E "hammerspoon/Spoons/*" \\
 			-E "*/vale/styles/*/*.yml" \\
@@ -35,7 +38,6 @@ const fileArray = app
 			-E "*.icns" \\
 			-E "*.plist" \\
 			-E "*.add" \\
-			-E "*.spl" \\
 			-E "TODO*" \\
 			-E "INFO*" \\
 			-E "*.png" \\
