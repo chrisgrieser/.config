@@ -3,7 +3,6 @@
 
 //──────────────────────────────────────────────────────────────────────────────
 function run() {
-
 	const app = Application.currentApplication()
 	app.includeStandardAdditions = true;
 
