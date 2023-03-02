@@ -72,10 +72,10 @@ function WorkLayout()
 	})
 	hs.layout.apply(layout)
 	ShowAllSidebars()
+	dockSwitcher("work")
 	RestartApp("AltTab") -- FIX AltTab sometimes not picking up open apps
 
-	local delays = IsAtMother() and { 0.5, 1 } or 0.5
-	RunWithDelays(delays, function()
+	RunWithDelays({0.5, 1}, function()
 		App("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
@@ -83,7 +83,6 @@ function WorkLayout()
 		TwitterScrollUp()
 		App("Drafts"):activate()
 	end)
-	dockSwitcher("work")
 end
 
 function MovieModeLayout()
