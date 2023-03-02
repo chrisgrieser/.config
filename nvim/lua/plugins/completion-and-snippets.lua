@@ -108,7 +108,7 @@ local function cmpconfig()
 				if cmp.visible() then
 					cmp.abort()
 				else
-					fallback() -- 
+					fallback()
 				end
 			end, { "i", "s" }),
 
@@ -248,10 +248,10 @@ local function cmpconfig()
 
 	--------------------------------------------------------------------------------
 	-- Command Line Completion
-	cmp.setup.cmdline({ "/", "?" }, {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = {}, -- empty cause all suggestions do not help much?
-	})
+	-- cmp.setup.cmdline({ "/", "?" }, {
+	-- 	mapping = cmp.mapping.preset.cmdline(),
+	-- 	sources = {}, -- empty cause all suggestions do not help much?
+	-- })
 
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),

@@ -49,6 +49,7 @@ duti -s "$editorID" json all
 duti -s "$editorID" yml all
 duti -s "$editorID" yaml all
 duti -s "$editorID" xml all
+duti -s "$editorID" fdignore all
 duti -s "$editorID" public.data all # dotfiles without extension
 duti -s "$editorID" vimrc all
 duti -s "$editorID" sketchybarrc all
