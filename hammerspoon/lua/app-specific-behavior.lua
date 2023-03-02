@@ -325,19 +325,21 @@ end):start()
 Wf_zoom = Wf.new("zoom.us"):subscribe(Wf.windowCreated, function()
 	QuitApp("BusyCal") -- mostly only used to open a Zoom link
 	Applescript([[
-			tell application "Vivaldi"
-				set window_list to every window
-				repeat with the_window in window_list
-					set tab_list to every tab in the_window
-					repeat with the_tab in tab_list
-						set the_url to the url of the_tab
-						if the_url contains ("zoom.us") then close the_tab
-					end repeat
+		tell application "Vivaldi"
+			set window_list to every window
+			repeat with the_window in window_list
+				set tab_list to every tab in the_window
+				repeat with the_tab in tab_list
+					set the_url to the url of the_tab
+					if the_url contains ("zoom.us") then close the_tab
 				end repeat
-			end tell
-		]])
-	RunWithDelays(1, function()
-		if #Wf_zoom:getWindows() > 1 then App("zoom.us"):findWindow("^Zoom$"):close() end
+			end repeat
+		end tell
+	]])
+	RunWithDelays(0.5, function()
+		if AppIsRunning("zoom.us") and #Wf_zoom:getWindows() > 1 then
+			App("zoom.us"):findWindow("^Zoom$"):close()
+		end
 	end)
 end)
 
@@ -386,7 +388,7 @@ Wf_script_editor = Wf
 	.new("Script Editor")
 	:subscribe(Wf.windowCreated, function(newWin)
 		if newWin:title() == "Open" then
-			Keystroke({ "cmd" }, "n") 
+			Keystroke({ "cmd" }, "n")
 		elseif newWin:title() == "Untitled" then
 			Keystroke({ "cmd" }, "v")
 			RunWithDelays(0.2, function() Keystroke({ "cmd" }, "k") end)
