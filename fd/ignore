@@ -15,8 +15,3 @@ Icon
 
 # vim spellcheck binary
 *.spl
-
-# custom files
-INFO*
-.harpoon
-

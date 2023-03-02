@@ -56,6 +56,7 @@ function WorkLayout()
 	HoleCover()
 
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder" }
+
 	if not isWeekend() then OpenApp("Slack") end
 	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
 	require("lua.private").closer()
@@ -74,8 +75,9 @@ function WorkLayout()
 	ShowAllSidebars()
 	dockSwitcher("work")
 	RestartApp("AltTab") -- FIX AltTab sometimes not picking up open apps
+	hs.execute("sketchybar --set clock popup.drawing=true") -- fix for 2nd row
 
-	RunWithDelays({0.5, 1}, function()
+	RunWithDelays({ 0.5, 1 }, function()
 		App("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
