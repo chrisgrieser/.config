@@ -6,7 +6,9 @@ local function cleanupConsole()
 	local consoleOutput = tostring(hs.console.getConsole())
 	local out = ""
 	for line in string.gmatch(consoleOutput, "[^\n]+") do -- split by new lines
-		if not (line:find("Loading extension: ") or line:find("hotkey: Enabled hotkey") or line:find("hotkey: Disabled hotkey")) then
+		if
+			not (line:find("Warning:.*LuaSkin: hs.canvas:delete") or line:find("hotkey: .*abled hotkey"))
+		then
 			out = out .. line .. "\n"
 		end
 	end
