@@ -22,7 +22,7 @@ keymap({ "o", "x" }, "iE", function() require("various-textobjs").mdFencedCodeBl
 keymap({ "o", "x" }, "aE", function() require("various-textobjs").mdFencedCodeBlock(false) end, { desc = "outer md code block textobj", buffer = true })
 -- stylua: ignore end
 
-keymap("x", "<D-s>", ":!pandoc -t commonmark_x<CR><CR>", { desc = "format md table", buffer = true })
+keymap("x", "<D-p>", ":!pandoc -t commonmark_x<CR><CR>", { desc = "format md table", buffer = true })
 --------------------------------------------------------------------------------
 
 -- Heading jump to next/prev heading
