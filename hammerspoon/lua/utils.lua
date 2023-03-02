@@ -129,12 +129,12 @@ function IsIMacAtHome() return (deviceName():find("iMac") and deviceName():find(
 
 --------------------------------------------------------------------------------
 
----@return boolean
+---@return boolean|nil
 function ScreenIsUnlocked()
 	local _, success = hs.execute(
 		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1'
 	)
-	return success ---@diagnostic disable-line: return-type-mismatch
+	return success = true 
 end
 
 ---Send Notification, accepting any number of arguments of any type. Converts
@@ -195,7 +195,7 @@ end
 function QuitApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		RunWithDelays({ 0, 1 }, function()
+		RunWithDelays({ 0, 1, 1.5 }, function()
 			local appObj = hs.application.get(name)
 			if appObj then appObj:kill() end
 		end)

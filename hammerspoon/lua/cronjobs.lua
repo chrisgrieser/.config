@@ -19,7 +19,7 @@ UnlockWatcher = caff
 			hs.execute("sketchybar --set clock popup.drawing=true") -- fix for 2nd row
 			-- INFO checks need to be delayed, since display number is not
 			-- immediately picked up after wake
-			RunWithDelays(1, function()
+			RunWithDelays(0.5, function()
 				if IsProjector() then
 					SetDarkmode(true)
 					MovieModeLayout()
@@ -39,7 +39,7 @@ ProjectorScreensaverWatcher = caff
 	.new(function(eventType)
 		if IsAtOffice() then return end
 		if eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart then
-			RunWithDelays(2, function()
+			RunWithDelays(1, function()
 				if IsProjector() then IMacDisplay:setBrightness(0) end
 			end)
 		end
