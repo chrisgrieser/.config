@@ -13,7 +13,9 @@
 	--adressbar-width-7-tab: 35vw;
 	--adressbar-width-8-tab: 30vw;
 	--adressbar-width-9-tab: 25vw;
+
 	--animation: 50ms ease-in;
+	--tab-height: 25px;
 }
 
 #tabs-tabbar-container {
@@ -168,7 +170,7 @@ least 3 tabs */
 }
 
 #tabs-container .tab-strip div {
-	height: 25px;
+	height: var(--tab-height);
 }
 
 #tabs-container .tab-header {
@@ -192,4 +194,9 @@ least 3 tabs */
 
 #tabs-container .unread {
 	background-image: none;
+}
+
+/* emphasize active tab more, e.g. when the tab has the same color as the website accent */
+.tab.active {
+	outline: 1px solid var(--colorAccentFgFaded);
 }
