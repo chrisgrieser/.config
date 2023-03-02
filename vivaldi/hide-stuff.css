@@ -24,3 +24,10 @@ input#urlFieldInput::placeholder { opacity: 0 }
 #browser .BookmarkPopup-LocationSelector {
 	height: 315px;
 }
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* VIMIUM NEW TAB ADAPTER */
+
+#urlFieldInput[value="chrome-extension://cglpcedifkgalfdklahhcchnjepcckfn/newtab.html#content"] + .UrlFragment-Wrapper {
+	display: none;
+}

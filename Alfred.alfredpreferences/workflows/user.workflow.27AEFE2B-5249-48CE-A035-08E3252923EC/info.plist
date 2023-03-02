@@ -171,19 +171,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D556C0BD-9316-4177-B596-F2D95432AC36</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A8CADE9C-D8EF-49BF-B8D9-BF48828F02DB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>E51DFA56-3523-4840-8EF6-40FC832EE3BB</key>
 		<array>
 			<dict>
@@ -617,53 +604,6 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>on run argv
-  set theQuery to item 1 of argv
-  return theQuery
-end run</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A8CADE9C-D8EF-49BF-B8D9-BF48828F02DB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>pip</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Picture-in-Picture: Browser</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>D556C0BD-9316-4177-B596-F2D95432AC36</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
 				<string></string>
@@ -824,13 +764,6 @@ end run</string>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
-		<key>A8CADE9C-D8EF-49BF-B8D9-BF48828F02DB</key>
-		<dict>
-			<key>xpos</key>
-			<real>655</real>
-			<key>ypos</key>
-			<real>460</real>
-		</dict>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
 			<key>colorindex</key>
@@ -908,13 +841,6 @@ end run</string>
 			<real>480</real>
 			<key>ypos</key>
 			<real>160</real>
-		</dict>
-		<key>D556C0BD-9316-4177-B596-F2D95432AC36</key>
-		<dict>
-			<key>xpos</key>
-			<real>480</real>
-			<key>ypos</key>
-			<real>460</real>
 		</dict>
 		<key>E51DFA56-3523-4840-8EF6-40FC832EE3BB</key>
 		<dict>

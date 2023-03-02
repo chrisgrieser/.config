@@ -49,17 +49,6 @@ rules:
                   click menu item "Thumbnail" of menu of menu item "Sidebar" of menu "View" of menu bar 1
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
-        # Zoom in Word: cmd+plus / cmd+minus
-      - type: basic
-        from: { key_code: "close_bracket", modifiers: { mandatory: [command] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Microsoft Word"
-                  set frontmost to true
-                  click menu item "Thumbnail" of menu of menu item "Sidebar" of menu "View" of menu bar 1
-                end tell'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
       # Comment in Google Docs
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [command] } }
@@ -83,6 +72,7 @@ rules:
               bundle_identifiers: [^com.brave.Browser.app.mpnpojknpmmopombnjdcgaaiekajbnjb],
             },
           ]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Highlights"
     manipulators:
       # cmd+l = show in Explorer
@@ -216,22 +206,7 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.vivaldi\.Vivaldi] # no $ to also work in PWAs
-  - description: "(Apps) YouTube/Browser: ⇧⌘+P → Picture-in-Picture Mode"
-    manipulators:
-      - type: basic
-        from: { key_code: p, modifiers: { mandatory: [shift, command] } }
-        to:
-          - software_function: { set_mouse_cursor_position: { x: 50%, y: 50%, screen: 0 } }
-          - pointing_button: button2
-          - pointing_button: button2
-          - { key_code: vk_none, hold_down_milliseconds: 200 }
-          - key_code: p
-          - key_code: return_or_enter
-          - { key_code: vk_none, hold_down_milliseconds: 500 }
-          - { key_code: h, modifiers: [command] }
-        conditions:
-          - type: frontmost_application_if
-            file_paths: [YouTube, Brave Browser, Vivaldi]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
       - type: basic
@@ -248,6 +223,7 @@ rules:
         to:
           - shell_command: open 'hammerspoon://copy-last-command'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^org\.hammerspoon\.Hammerspoon$] }]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(App) Slack"
     # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
     # INFO: cmd+e for inline code is in the Discord-Section

@@ -24,10 +24,11 @@ local function hideOthers(win)
 		local app = w:application()
 		if not app then return end
 		local browserWithPiP = app:name() == "Vivaldi" and app:findWindow("Picture in Picture")
+		local zoomMeeting = app:findWindow("Zoom Meeting") -- either Zoom Meeting transparent, or pseudo-picture-in-picture
 		local isTwitter = app:name() == "Twitter"
 		local isAlfred = app:name() == "Alfred" -- for Alfred's compatibility mode
 		local isWindowItself = app:name() == winName
-		if not (browserWithPiP or isWindowItself or isTwitter or isAlfred) then app:hide() end
+		if not (browserWithPiP or zoomMeeting or isWindowItself or isTwitter or isAlfred) then app:hide() end
 	end
 end
 
