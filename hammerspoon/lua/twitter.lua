@@ -31,7 +31,7 @@ TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 
 	-- move twitter and scroll it up
 	if appName == "Twitter" and eventType == Aw.launched then
-		RunWithDelays(1, function()
+		RunWithDelays({0.5, 1, 2}, function()
 			BringAllToFront()
 			TwitterToTheSide()
 			TwitterScrollUp()
