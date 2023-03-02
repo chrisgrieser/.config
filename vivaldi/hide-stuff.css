@@ -27,7 +27,6 @@ input#urlFieldInput::placeholder { opacity: 0 }
 
 /* ────────────────────────────────────────────────────────────────────────── */
 /* VIMIUM NEW TAB ADAPTER */
-
 #urlFieldInput[value="chrome-extension://cglpcedifkgalfdklahhcchnjepcckfn/newtab.html#content"] + .UrlFragment-Wrapper {
 	display: none;
 }
