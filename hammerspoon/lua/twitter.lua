@@ -4,22 +4,23 @@ require("lua.utils")
 function TwitterScrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence
-	if not (AppIsRunning("Twitter")) or not App("Twitter"):mainWindow() then return end
+	local twitter = App("Twitter")
+	if not (twitter and twitter:mainWindow()) then return end
 
-	Keystroke({ "command" }, "left", 1, App("Twitter")) -- go back
-	Keystroke({ "command" }, "1", 1, App("Twitter")) -- go to home tab
-	Keystroke({ "shift", "command" }, "R", 1, App("Twitter")) -- reload
+	Keystroke({ "command" }, "left", 1, twitter) -- go back
+	Keystroke({ "command" }, "1", 1, twitter) -- go to home tab
+	Keystroke({ "shift", "command" }, "R", 1, twitter) -- reload
 
 	-- needs delays to wait for tweet loading
 	RunWithDelays({ 0.2, 0.5, 1, 1.5 }, function()
-		Keystroke({ "command" }, "1", 1, App("Twitter")) -- scroll up
-		Keystroke({ "command" }, "up", 1, App("Twitter")) -- goto top
+		Keystroke({ "command" }, "1", 1, twitter) -- scroll up
+		Keystroke({ "command" }, "up", 1, twitter) -- goto top
 	end)
 end
 
 function TwitterToTheSide()
-	if not (AppIsRunning("Twitter")) or not App("Twitter"):mainWindow() then return end
-	local win = App("Twitter"):findWindow("Twitter")
+	if not (AppIsRunning("Twitter") and App("Twitter"):mainWindow()) then return end
+	local win = App("Twitter"):mainWindow()
 	if not win then return end
 	win:raise()
 	win:setFrame(ToTheSide)

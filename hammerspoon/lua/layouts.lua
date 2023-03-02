@@ -55,10 +55,10 @@ function WorkLayout()
 	setHigherBrightnessDuringDay()
 	HoleCover()
 
-	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder" }
+	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder", "BetterTouchTool" }
 
-	if not isWeekend() then OpenApp("Slack") end
 	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
+	if not isWeekend() then OpenApp("Slack") end
 	require("lua.private").closer()
 
 	local layout = createLayout(PseudoMaximized, IMacDisplay, {
@@ -75,7 +75,7 @@ function WorkLayout()
 	ShowAllSidebars()
 	dockSwitcher("work")
 	RestartApp("AltTab") -- FIX AltTab sometimes not picking up open apps
-	hs.execute("sketchybar --set clock popup.drawing=true") -- fix for 2nd row
+	hs.execute("sketchybar --set clock popup.drawing=true") -- fix
 
 	RunWithDelays({ 0.5, 1 }, function()
 		App("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
@@ -97,7 +97,7 @@ function MovieModeLayout()
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
 
-	RunWithDelays({ 0, 1 }, function() OpenApp("YouTube") end)
+	RunWithDelays({ 0, 1 }, function() OpenApp{"YouTube", "BetterTouchTool"} end)
 	QuitApp {
 		"Obsidian",
 		"Drafts",
