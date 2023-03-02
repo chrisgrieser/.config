@@ -2,14 +2,27 @@ require("lua.utils")
 local cons = hs.console
 --------------------------------------------------------------------------------
 
--- HAMMERSPOON SETTINGS
-hs.consoleOnTop(false)
-hs.autoLaunch(true)
-hs.automaticallyCheckForUpdates(true)
-hs.application.enableSpotlightForNameSearches(false)
-hs.window.animationDuration = 0
-
---------------------------------------------------------------------------------
+---filter console entries, removing logging for enabling/disabling hotkeys or
+---extention loading. HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
+function CleanupConsole()
+	local consoleOutput = tostring(hs.console.getConsole())
+	local out = ""
+	for line in string.gmatch(consoleOutput, "[^\n]+") do -- split by new lines
+		if
+			not (
+				line:find("Warning:.*LuaSkin: hs.canvas:delete")
+				or line:find("hotkey: .*abled hotkey")
+				or line:find("Loading extensions?: ")
+				or line:find("Loading Spoon: RoundedCorners")
+			)
+		then
+			out = out .. line .. "\n"
+		end
+	end
+	-- capturing digit necessary to prevent repeated triggering of this gsub
+	out = out:gsub("(%d) ERROR:", "%1 🔴 ERROR:") 
+	hs.console.setConsole(out)
+end
 
 -- `hammerspoon://hs-reload` for reloading via Build System
 local reloadIndicator = "/tmp/hs-is-reloading"
@@ -24,11 +37,14 @@ function SystemStart()
 	-- config regularly
 	local _, isReloading = hs.execute("[[ -e " .. reloadIndicator .. " ]]")
 	if isReloading then
-		print("\n----------------------------- 🔨 HAMMERSPOON RELOAD ---------------------------------\n")
+		print(
+			"\n----------------------------- 🔨 HAMMERSPOON RELOAD ---------------------------------\n"
+		)
+		CleanupConsole()
+
 		os.remove(reloadIndicator)
 		-- use neovim automation to display the notification in neovim
 		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded.")' > /tmp/nvim-automation]])
-		-- to make reloads clearer in the console
 		return
 	else
 		Notify("Finished loading.")

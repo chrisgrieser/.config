@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "27/02/2023, 10:27:39",
-	"time": 1677490059249,
+	"@time": "02/03/2023, 23:14:05",
+	"time": 1677795245372,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -19,7 +19,7 @@
 			"pattern": ":https://www.inoreader.com/"
 		},
 		{
-			"passKeys": "j k ",
+			"passKeys": "j k m o ",
 			"pattern": "^https:\\/\\/www\\.google(?:.(?!&tbm=isch))*$"
 		},
 		{
@@ -59,7 +59,6 @@
 		"map <esc> reset",
 		"map v enterVisualMode",
 		"map V enterVisualLineMode",
-		"map a passNextKey",
 		"",
 		"\" Find",
 		"unmap -",
@@ -85,10 +84,10 @@
 		"map u restoreTab",
 		"map yt duplicateTab",
 		"",
-		"map b previousTab",
-		"map e nextTab",
-		"map B moveTabLeft",
-		"map E moveTabRight",
+		"map a previousTab",
+		"map d nextTab",
+		"map b moveTabLeft",
+		"map e moveTabRight",
 		"map gb Vomnibar.activateTabSelection",
 		"map t Vomnibar.activateTabSelection",
 		"",
