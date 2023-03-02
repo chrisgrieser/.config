@@ -235,14 +235,6 @@ return {
 		end,
 	},
 	{
-		"andymass/vim-matchup",
-		event = "BufReadPost", -- other lazyloading methods do not seem to work
-		init = function()
-			vim.g.matchup_text_obj_enabled = 0
-			vim.g.matchup_matchparen_enabled = 1 -- highlight
-		end,
-	},
-	{
 		"nacro90/numb.nvim", -- line previews when ":n"
 		config = function() require("numb").setup() end,
 		keys = ":",

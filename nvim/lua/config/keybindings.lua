@@ -94,8 +94,8 @@ end, { desc = "clear notifications" })
 -- FOLDING
 keymap("n", "^", "za", { desc = "toggle fold" })
 
--- [M]atchUp
-keymap({ "n", "x" }, "m", "<Plug>(matchup-%)", { desc = "matchup", nowait = true })
+-- [M]atchIt
+keymap("n", "m", "%", { remap = true, desc = "MatchIt" }) -- remap needed, since using the builtin matchit plugin
 
 -- Hunks, Changes, and Quicklist
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })

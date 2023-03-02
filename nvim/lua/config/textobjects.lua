@@ -115,6 +115,9 @@ keymap("o", "L", function() require("various-textobjs").url() end, { desc = "lin
 -- n: [n]ear end of the line
 keymap({ "o", "x" }, "n", function() require("various-textobjs").nearEoL() end, { desc = "near EoL textobj" })
 
+-- m: to next closing bracket
+keymap({ "o", "x" }, "m", function() require("various-textobjs").toNextClosingBracket() end, { desc = "to next closing bracket textobj" })
+
 -- o: c[o]lumn textobj
 keymap("o", "o", function() require("various-textobjs").column() end, { desc = "column textobj" })
 
