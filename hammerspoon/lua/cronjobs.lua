@@ -16,7 +16,6 @@ UnlockWatcher = caff
 			local toDark = not (BetweenTime(7, 18))
 			SetDarkmode(toDark)
 		else
-			hs.execute("sketchybar --set clock popup.drawing=true") -- fix for 2nd row
 			-- INFO checks need to be delayed, since display number is not
 			-- immediately picked up after wake
 			RunWithDelays(0.5, function()
