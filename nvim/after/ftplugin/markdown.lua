@@ -30,7 +30,7 @@ keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], { desc = "next heading", 
 keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], { desc = "previous heading", buffer = true })
 
 --KEYBINDINGS WITH THE GUI
-if isGui() then
+if IsGui() then
 	local opts = { buffer = true }
 	-- cmd+r: Markdown Preview
 	keymap("n", "<D-r>", "<Plug>MarkdownPreviewToggle", opts)
