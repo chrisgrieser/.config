@@ -1,21 +1,5 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
----filter console entries, removing logging for enabling/disabling hotkeys or
----extention loading. HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
-local function cleanupConsole()
-	local consoleOutput = tostring(hs.console.getConsole())
-	local out = ""
-	for line in string.gmatch(consoleOutput, "[^\n]+") do -- split by new lines
-		if
-			not (line:find("Warning:.*LuaSkin: hs.canvas:delete") or line:find("hotkey: .*abled hotkey"))
-		then
-			out = out .. line .. "\n"
-		end
-	end
-	hs.console.setConsole(out)
-end
-
---------------------------------------------------------------------------------
 
 ---"hides" the cursor by moving it to the bottom left
 local function pseudoHideCursor()
@@ -33,7 +17,7 @@ end
 local function hideCurAndPassThrough(key)
 	JHidesCursor:disable() -- so it only works the first time
 	KHidesCursor:disable()
-	cleanupConsole()
+	CleanupConsole()
 	pseudoHideCursor()
 	Keystroke({}, key, 1) -- sending globally instead of to Browser, so it still works with Alfred
 end
@@ -46,11 +30,11 @@ Jk_watcher = Aw.new(function(appName, eventType)
 		if appName == "Vivaldi" then
 			JHidesCursor:enable()
 			KHidesCursor:enable()
-			cleanupConsole()
+			CleanupConsole()
 		else
 			JHidesCursor:disable()
 			KHidesCursor:disable()
-			cleanupConsole()
+			CleanupConsole()
 		end
 	end
 end):start()

@@ -2,7 +2,8 @@ require("lua.utils")
 require("lua.window-management")
 --------------------------------------------------------------------------------
 
--- helpers
+-- HELPERS
+
 ---@return boolean whether a split is currently active
 local function splitActive()
 	if SPLIT_RIGHT and SPLIT_LEFT then return true end
@@ -33,10 +34,20 @@ local function pairedActivation()
 		:subscribe(Wf.windowFocused, function(focusedWin)
 			-- not using :focus(), since that would cause infinite recursion
 			-- raising needs small delay, so that focused window is already at front
+			print("focusedWin:", focusedWin:id())
+			print("SPLIT_RIGHT:", SPLIT_RIGHT:id())
+			print("SPLIT_LEFT:", SPLIT_LEFT:id())
+
 			if focusedWin:id() == SPLIT_RIGHT:id() then
-				RunWithDelays(0.02, function() SPLIT_LEFT:raise() end)
+				print("left raised")
+				RunWithDelays(0.2, function()
+					SPLIT_LEFT:raise()
+				end)
 			elseif focusedWin:id() == SPLIT_LEFT:id() then
-				RunWithDelays(0.02, function() SPLIT_RIGHT:raise() end)
+				print("right raised")
+				RunWithDelays(0.2, function()
+					SPLIT_RIGHT:raise()
+				end)
 			end
 		end)
 		-- hide when neither is focused
@@ -56,12 +67,13 @@ local function pairedActivation()
 				or (SPLIT_LEFT:id() == closedWin:id())
 			then
 				VsplitSetLayout("unsplit")
+				print("2️⃣ Split stopped automatically due to one window closing.")
 			end
 		end)
 end
 
 ---main split function
----@param mode string swap|unsplit|split, split will use the secondWin and the current win
+---@param mode string unsplit|split, split will use the secondWin and the current win
 ---@param secondWin? hs.window required when using mode "split"
 function VsplitSetLayout(mode, secondWin)
 	if not (splitActive()) and (mode == "swap" or mode == "unsplit") then
@@ -78,28 +90,27 @@ function VsplitSetLayout(mode, secondWin)
 	local f1
 	local f2
 	if mode == "split" then
+		print("2️⃣ Split started.")
 		pairedActivation()
 		f1 = LeftHalf
 		f2 = RightHalf
-	elseif mode == "swap" then
-		f1 = RightHalf
-		f2 = LeftHalf
 	elseif mode == "unsplit" then
-		if Wf_pairedActivation then Wf_pairedActivation:unsubscribeAll() end
+		Wf_pairedActivation:unsubscribeAll()
 		f1 = PseudoMaximized
 		f2 = PseudoMaximized
 	end
 
-	MoveResize(SPLIT_RIGHT, f1) ---@diagnostic disable-line: param-type-mismatch
-	MoveResize(SPLIT_LEFT, f2) ---@diagnostic disable-line: param-type-mismatch
-	SPLIT_RIGHT:raise()
-	SPLIT_LEFT:raise()
-	RunWithDelays(0.3, function()
-		ToggleWinSidebar(SPLIT_RIGHT) ---@diagnostic disable-line: param-type-mismatch
-		ToggleWinSidebar(SPLIT_LEFT) ---@diagnostic disable-line: param-type-mismatch
-	end)
+	if SPLIT_RIGHT then
+		MoveResize(SPLIT_RIGHT, f1) 
+		SPLIT_RIGHT:raise()
+	end
+	if SPLIT_LEFT then
+		MoveResize(SPLIT_LEFT, f2) 
+		SPLIT_LEFT:raise()
+	end
 
 	if mode == "unsplit" then
+		Wf_pairedActivation = nil ---@diagnostic disable-line: assign-type-mismatch
 		SPLIT_RIGHT = nil
 		SPLIT_LEFT = nil ---@diagnostic disable-line: assign-type-mismatch
 	end
@@ -117,18 +128,18 @@ local function selectSecondWin()
 			VsplitSetLayout("split", secondWin)
 		end)
 		:choices(apps)
-		:rows(#apps - 2) -- for whatever reason, the rows parameter is off by 3?!
+		:rows(#apps - 2) -- for whatever reason, the rows parameter is off by 3?
 		:width(30)
-		:placeholderText("Split " .. FrontAppName() .. " with...")
+		:placeholderText("Split " .. FrontAppName() .. " with…")
 		:show()
 end
 
 --------------------------------------------------------------------------------
 -- HOTKEYS
 
-Hotkey(Hyper, "X", function() VsplitSetLayout("swap") end)
 Hotkey(Hyper, "V", function()
 	if splitActive() then
+		print("2️⃣ Split stopped manually.")
 		VsplitSetLayout("unsplit")
 	else
 		selectSecondWin()

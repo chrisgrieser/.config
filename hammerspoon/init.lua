@@ -1,3 +1,12 @@
+-- HAMMERSPOON SETTINGS
+hs.consoleOnTop(false)
+hs.autoLaunch(true)
+hs.automaticallyCheckForUpdates(true)
+hs.application.enableSpotlightForNameSearches(false)
+hs.window.animationDuration = 0
+
+--------------------------------------------------------------------------------
+
 require("lua.meta")
 require("lua.utils")
 
