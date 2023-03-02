@@ -30,6 +30,7 @@ function run() {
 		let icon = authoredByMe ? "🚩 " : "";
 		if (item.state === "open" && isPR) icon += "🟦 ";
 		else if (item.state === "closed" && isPR && merged) icon += "🟨 ";
+
 		else if (item.state === "closed" && isPR && !merged) icon += "🟥 ";
 		else if (item.state === "closed" && !isPR) icon += "🟣 ";
 		else if (item.state === "open" && !isPR) icon += "🟢 ";
@@ -42,7 +43,7 @@ function run() {
 
 		return {
 			title: icon + title,
-			subtitle: `${repo}   ${comments}`,
+			subtitle: `#${item.number}  ${repo}   ${comments}`,
 			match: matcher,
 			arg: item.html_url,
 		};
