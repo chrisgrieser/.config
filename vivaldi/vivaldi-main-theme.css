@@ -196,7 +196,8 @@ least 3 tabs */
 	background-image: none;
 }
 
-/* emphasize active tab more, e.g. when the tab has the same color as the website accent */
-.tab.active {
+/* emphasize active tab when more than one, useful
+ * e.g. when the tab has the same color as the website accent */
+.tab-strip > span:not(:only-of-type) .tab.active {
 	outline: 1px solid var(--colorAccentFgFaded);
 }
