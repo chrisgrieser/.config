@@ -306,10 +306,7 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 -- Harpoon/Grapple
 keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "ﯠ Next" })
 keymap("n", "g<CR>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
-keymap("n", "<leader><CR>", function()
-	require("harpoon.mark").add_file()
-	vim.notify("ﯠ Added File")
-end, { desc = "ﯠ Add File" })
+keymap("n", "<leader><CR>", function() require("harpoon.mark").add_file() end, { desc = "ﯠ Add File" })
 
 ------------------------------------------------------------------------------
 
@@ -376,7 +373,7 @@ keymap("n", "go", function()
 	local pwd = vim.loop.cwd() or ""
 	local projectName = pwd:gsub(".*/", "")
 	local harpoonNumber = harpoonFileNumber() or 0
-	local title = "(" .. tostring(harpoonNumber) .. "ﯠ) " .. projectName
+	local title = tostring(harpoonNumber) .. "ﯠ " .. projectName
 	require("telescope.builtin").find_files { prompt_title = title }
 end, { desc = " Open file in Project" })
 
