@@ -164,25 +164,17 @@ return {
 							return { { "" }, { "" } }
 						end,
 					},
-					-- disable "invalid_key_behavior"
-					-- TODO: later set all to "false" https://github.com/kylechui/nvim-surround/discussions/213#discussioncomment-5104562
 					invalid_key_behavior = {
-						add = function(_) return { { "" }, { "" } } end,
-						find = function(char)
-							return config.get_selection { pattern = vim.pesc(char) .. ".-" .. vim.pesc(char) }
-						end,
-						delete = function(_)
-							return config.get_selections {
-								char = "",
-								pattern = "^()().-()()$",
-							}
-						end,
+						add = false,
+						find = false,
+						delete = false,
 						change = false,
 					},
 				},
 			}
 		end,
 	},
+	-- "fsfsfsf fsfsf fllllllllllll"
 
 	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
 	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
