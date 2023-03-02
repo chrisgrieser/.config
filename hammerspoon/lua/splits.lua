@@ -24,18 +24,12 @@ end
 
 ---if one of the two is activated, also activate the other
 ---unsplit if one of the two windows has been closed
----@param mode string start|stop of paired-activation
-local function pairedActivation(mode)
-	if mode == "stop" then
-		if Wf_pairedActivation then Wf_pairedActivation:unsubscribeAll() end
-		Wf_pairedActivation = nil
-		return
-	end
-
+local function pairedActivation()
 	local app1 = SPLIT_LEFT:application():name()
 	local app2 = SPLIT_RIGHT:application():name()
 
 	Wf_pairedActivation = Wf.new({ app1, app2 })
+		-- focus windows together
 		:subscribe(Wf.windowFocused, function(focusedWin)
 			-- not using :focus(), since that would cause infinite recursion
 			-- raising needs small delay, so that focused window is already at front
@@ -45,6 +39,15 @@ local function pairedActivation(mode)
 				RunWithDelays(0.02, function() SPLIT_RIGHT:raise() end)
 			end
 		end)
+		-- hide when neither is focused
+		:subscribe(Wf.windowUnfocused, function()
+			local curWin = hs.window.focusedWindow()
+			if curWin:id() ~= SPLIT_LEFT:id() and curWin:id() ~= SPLIT_RIGHT:id() then
+				SPLIT_RIGHT:application():hide()	
+				SPLIT_LEFT:application():hide()	
+			end
+		end)
+		-- stop vertical split when one of the windows is closed
 		:subscribe(Wf.windowDestroyed, function(closedWin)
 			if
 				not SPLIT_LEFT
@@ -75,14 +78,14 @@ function VsplitSetLayout(mode, secondWin)
 	local f1
 	local f2
 	if mode == "split" then
-		pairedActivation("start")
+		pairedActivation()
 		f1 = LeftHalf
 		f2 = RightHalf
 	elseif mode == "swap" then
 		f1 = RightHalf
 		f2 = LeftHalf
 	elseif mode == "unsplit" then
-		pairedActivation("stop")
+		if Wf_pairedActivation then Wf_pairedActivation:unsubscribeAll() end
 		f1 = PseudoMaximized
 		f2 = PseudoMaximized
 	end
