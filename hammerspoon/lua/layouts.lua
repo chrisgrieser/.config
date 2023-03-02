@@ -39,8 +39,10 @@ local function setHigherBrightnessDuringDay()
 		brightness = 100
 	elseif hs.brightness.ambient() > 100 then
 		brightness = 90
-	else
+	elseif hs.brightness.ambient() > 50 then
 		brightness = 80
+	else
+		brightness = 60
 	end
 	hs.screen("Built%-in"):setBrightness(brightness)
 end
@@ -111,7 +113,8 @@ function MovieModeLayout()
 		"alacritty",
 		"Twitter",
 	}
-
+	-- redundancy apparently sometimes needed
+	RunWithDelays(1.5, function() QuitApp("Twitter") end)
 end
 
 --------------------------------------------------------------------------------

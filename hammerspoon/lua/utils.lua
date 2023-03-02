@@ -9,18 +9,19 @@ Applescript = hs.osascript.applescript
 UriScheme = hs.urlevent.bind
 TableContains = hs.fnutils.contains
 
-Hyper = { "cmd", "alt", "ctrl", "shift" }
+Hyper = { "cmd", "alt", "ctrl", "shift" } -- bound to capslock via Karabiner elements
 I = hs.inspect -- to inspect tables in the console
 
 --------------------------------------------------------------------------------
--- ENVIRONMENT: retrieve configs from zshenv; sometimes not loading properly
+-- ENVIRONMENT
+-- retrieve configs from zshenv; looped since sometimes not loading properly
 local i = 0
 while not DotfilesFolder do
 	DotfilesFolder = os.getenv("DOTFILE_FOLDER")
 	PasswordStore = os.getenv("PASSWORD_STORE_DIR")
 	VaultLocation = os.getenv("VAULT_PATH")
 	FileHub = os.getenv("WD")
-	hs.execute("sleep 0.2") -- since lua has no own wait command
+	hs.execute("sleep 0.2") -- since lua has no wait command, using the blocking hs.execute
 	if i > 30 then
 		Notify("⚠️ Could not retrieve .zshenv")
 		return
@@ -29,7 +30,7 @@ end
 
 --------------------------------------------------------------------------------
 
----trims whitespace from string
+---trims all whitespace from string, like javascript's .trim()
 ---@param str string
 ---@return string
 function Trim(str)
@@ -41,7 +42,7 @@ end
 ---Whether the current time is between startHour & endHour
 ---@param startHour number, time between 0 and 24, also accepts floats e.g. 13.5 for 13:30
 ---@param endHour number, time between 0 and 24, also accepts floats e.g. 13.5 for 13:30
----@return boolean|nil
+---@return boolean|nil true/false for valid time ranges, nil for invalid time range
 function BetweenTime(startHour, endHour)
 	if startHour >= 24 or endHour >= 24 or startHour < 0 or endHour < 0 then
 		Notify("BetweenTime: Invalid time range")
@@ -60,9 +61,9 @@ end
 ---@param url string
 function OpenLinkInBackground(url) hs.execute('open -g "' .. url .. '"') end
 
----write to file
----@param filePath any
----@param str any
+---write to file (overwriting)
+---@param filePath string
+---@param str string
 function WriteToFile(filePath, str)
 	local file, err = io.open(filePath, "w")
 	if file then
@@ -73,9 +74,9 @@ function WriteToFile(filePath, str)
 	end
 end
 
----reads the full fill
+---read the full file
 ---@param filePath string
----@return string|nil file content or nil when not reading no successful
+---@return string|nil file content or nil when reading not successful
 function ReadFile(filePath)
 	local file = io.open(filePath, "r")
 	if not file then return end
@@ -89,15 +90,14 @@ end
 
 ---@return string
 local function deviceName()
-	-- hs.host.localizedName() is similar to `scutil --get ComputerName`,
-	-- only native to hammerspoon and therefore a bit more reliable
+	-- host.localizedName() is essentially equivalent to `scutil --get ComputerName`
 	local name, _ = hs.host.localizedName():gsub(".- ", "", 1)
 	return name
 end
 
 ---Repeat a function multiple times
 ---@param delaySecs number|number[]
----@param func function function to repeat
+---@param func function function to be run on delay(s)
 function RunWithDelays(delaySecs, func)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
@@ -129,12 +129,12 @@ function IsIMacAtHome() return (deviceName():find("iMac") and deviceName():find(
 
 --------------------------------------------------------------------------------
 
----@return boolean|nil
+---@return boolean
 function ScreenIsUnlocked()
 	local _, success = hs.execute(
 		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1'
 	)
-	return success = true 
+	return success == true 
 end
 
 ---Send Notification, accepting any number of arguments of any type. Converts
