@@ -138,6 +138,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C98CBF71-E7E2-41B1-9C53-9A50774B67D4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FFE40428-4486-4B45-AD59-024B6311D2D8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CC649DDD-3F1D-47F4-A2BA-EA57ADBA8E06</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C98CBF71-E7E2-41B1-9C53-9A50774B67D4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E8066503-E298-4023-9E9F-3FBA20E03748</key>
 		<array>
 			<dict>
@@ -304,6 +330,50 @@ echo -n "$appid"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>hs</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗️Restart Hammerspoon</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E8066503-E298-4023-9E9F-3FBA20E03748</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>restart-hammerspoon.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4F748E27-E0FA-42A5-9B83-B58EF498DC15</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -406,43 +476,41 @@ window_name</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>hs</string>
+				<string>sync</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>❗️Restart Hammerspoon</string>
+				<string>🔁 Sync Dotfiles, Vault &amp; Password-Store</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>E8066503-E298-4023-9E9F-3FBA20E03748</string>
+			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>browser</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>restart-hammerspoon.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>hammerspoon://sync-repos</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>4F748E27-E0FA-42A5-9B83-B58EF498DC15</string>
+			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -495,103 +563,6 @@ window_name</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>9734FC1B-0242-4229-B9BF-4A809F59C81E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>sync</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔁 Sync Dotfiles, Vault &amp; Password-Store</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>hammerspoon://sync-repos</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>zz</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔓 Zoom Login</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>0CB1384E-FC0D-46E5-8142-2590BB7CE8BD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "zoom.us" to activate
-delay 1
-tell application "System Events" 
-	keystroke tab
-	keystroke space
-	delay 0.2
-	keystroke tab
-	keystroke tab
-	keystroke tab
-	keystroke tab
-	keystroke space
-end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>zoom-login-automation.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -684,6 +655,77 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>height</key>
+					<string>480</string>
+					<key>width</key>
+					<string>370</string>
+					<key>x</key>
+					<string>0</string>
+					<key>y</key>
+					<string>600</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/window-management/windows.current.bounds.set.custom</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>FFE40428-4486-4B45-AD59-024B6311D2D8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>pip</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Picture-in-Picture: Zoom</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CC649DDD-3F1D-47F4-A2BA-EA57ADBA8E06</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "System Events" to tell process "zoom.us"
+	set frontmost to true
+	click menu item "Keep on Top" of menu "Meeting" of menu bar 1
+end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C98CBF71-E7E2-41B1-9C53-9A50774B67D4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -725,6 +767,61 @@ end tell</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>zz</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔓 Zoom Login</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0CB1384E-FC0D-46E5-8142-2590BB7CE8BD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "zoom.us" to activate
+delay 1
+tell application "System Events" 
+	keystroke tab
+	keystroke space
+	delay 0.2
+	keystroke tab
+	keystroke tab
+	keystroke tab
+	keystroke tab
+	keystroke space
+end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>zoom-login-automation.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -733,13 +830,13 @@ end tell</string>
 		<key>0CB1384E-FC0D-46E5-8142-2590BB7CE8BD</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>10</integer>
 			<key>note</key>
 			<string>Zoom Quicker Login</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>460</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>655</real>
 		</dict>
 		<key>0EF2C979-A5B1-4FEC-A8AA-44F249C35BE3</key>
 		<dict>
@@ -764,18 +861,18 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>1020</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>300</real>
 		</dict>
 		<key>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>1020</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>160</real>
 		</dict>
 		<key>496D4848-5FF5-4521-AD62-DA66D955EF60</key>
 		<dict>
@@ -784,16 +881,16 @@ end tell</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>435</real>
 		</dict>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>1020</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>20</real>
 		</dict>
 		<key>549CF69B-FC02-4F67-A40E-B13EA86EDB48</key>
 		<dict>
@@ -802,9 +899,9 @@ end tell</string>
 			<key>note</key>
 			<string>ambient brightness</string>
 			<key>xpos</key>
-			<real>495</real>
+			<real>865</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>300</real>
 		</dict>
 		<key>656E6A0F-FAB7-428D-AB7D-811A3D19C2A1</key>
 		<dict>
@@ -815,7 +912,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>435</real>
 		</dict>
 		<key>7A28D420-9C0D-4499-9FD9-EBBC7DEDAAB7</key>
 		<dict>
@@ -829,7 +926,7 @@ end tell</string>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>1</integer>
 			<key>note</key>
 			<string>quit Karabiner-EventViewer</string>
 			<key>xpos</key>
@@ -849,7 +946,7 @@ end tell</string>
 		<key>9734FC1B-0242-4229-B9BF-4A809F59C81E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>1</integer>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
@@ -873,7 +970,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>580</real>
 		</dict>
 		<key>A356EB3A-B0D3-4C21-8B54-82327BD92BB3</key>
 		<dict>
@@ -904,18 +1001,38 @@ end tell</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>580</real>
+		</dict>
+		<key>C98CBF71-E7E2-41B1-9C53-9A50774B67D4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>keep on top</string>
+			<key>xpos</key>
+			<real>620</real>
+			<key>ypos</key>
+			<real>515</real>
+		</dict>
+		<key>CC649DDD-3F1D-47F4-A2BA-EA57ADBA8E06</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>460</real>
+			<key>ypos</key>
+			<real>515</real>
 		</dict>
 		<key>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>10</integer>
 			<key>note</key>
 			<string>login script</string>
 			<key>xpos</key>
-			<real>190</real>
+			<real>620</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>655</real>
 		</dict>
 		<key>E8066503-E298-4023-9E9F-3FBA20E03748</key>
 		<dict>
@@ -924,9 +1041,9 @@ end tell</string>
 			<key>note</key>
 			<string>restart</string>
 			<key>xpos</key>
-			<real>495</real>
+			<real>865</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>20</real>
 		</dict>
 		<key>E9FF31BC-709C-4387-975A-0B1410418161</key>
 		<dict>
@@ -935,9 +1052,20 @@ end tell</string>
 			<key>note</key>
 			<string>repo sync</string>
 			<key>xpos</key>
-			<real>495</real>
+			<real>865</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>160</real>
+		</dict>
+		<key>FFE40428-4486-4B45-AD59-024B6311D2D8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>move to bottom left</string>
+			<key>xpos</key>
+			<real>780</real>
+			<key>ypos</key>
+			<real>515</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
