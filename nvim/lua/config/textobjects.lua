@@ -169,8 +169,8 @@ autocmd("FileType", {
 	callback = function()
 		local pipeFiletypes = { "sh", "zsh", "bash" }
 		if vim.tbl_contains(pipeFiletypes, bo.filetype) then
-			keymap( { "x", "o" }, "i|", function() require("various-textobjs").indentation(true) end, { buffer = true, desc = "inner pipe textobj" })
-			keymap( { "x", "o" }, "a|", function() require("various-textobjs").indentation(false) end, { buffer = true, desc = "outer pipe textobj" })
+			keymap( { "x", "o" }, "i|", function() require("various-textobjs").shellPipe(true) end, { buffer = true, desc = "inner pipe textobj" })
+			keymap( { "x", "o" }, "a|", function() require("various-textobjs").shellPipe(false) end, { buffer = true, desc = "outer pipe textobj" })
 		end
 	end,
 })
