@@ -4,13 +4,13 @@ return {
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = "Neogit",
 		init = function()
-			-- vim.api.nvim_create_augroup("neogit-additions", {})
-			-- -- HACK https://github.com/TimUntersberger/neogit/issues/405
-			-- vim.api.nvim_create_autocmd("FileType", {
-			-- 	group = "neogit-additions",
-			-- 	pattern = "NeogitCommitMessage",
-			-- 	command = "silent! set filetype=gitcommit",
-			-- })
+			-- HACK https://github.com/TimUntersberger/neogit/issues/405
+			vim.api.nvim_create_augroup("neogit-additions", {})
+			vim.api.nvim_create_autocmd("FileType", {
+				group = "neogit-additions",
+				pattern = "NeogitCommitMessage",
+				command = "silent! set filetype=gitcommit",
+			})
 		end,
 		config = function()
 			require("neogit").setup {

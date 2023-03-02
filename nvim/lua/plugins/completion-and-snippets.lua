@@ -263,7 +263,6 @@ local function cmpconfig()
 	-- 	mapping = cmp.mapping.preset.cmdline(),
 	-- 	sources = {}, -- empty cause all suggestions do not help much?
 	-- })
-
 end
 --------------------------------------------------------------------------------
 
@@ -293,8 +292,8 @@ return {
 		lazy = true, -- is being loaded by cmp
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
 			"hrsh7th/nvim-cmp",
+			-- "MunifTanjim/nui.nvim", -- only needed for authentication: https://github.com/jcdickinson/codeium.nvim/issues/27
 		},
 		config = function()
 			require("codeium").setup {
@@ -314,28 +313,22 @@ return {
 					{ name = "git" },
 				},
 			})
-			cmp.setup.filetype("NeogitCommitMessage", {
-				sources = cmp.config.sources {
-					{ name = "git" },
-				},
-			})
 
 			require("cmp_git").setup {
-				filetypes = { "gitcommit", "NeogitCommitMessage" },
-				-- git = { commits = { limit = 10 } }, -- 0 = disable completing commits
-				-- github = {
-				-- 	issues = {
-				-- 		limit = 100,
-				-- 		state = "open", -- open, closed, all
-				-- 	},
-				-- 	mentions = {
-				-- 		limit = 100,
-				-- 	},
-				-- 	pull_requests = {
-				-- 		limit = 10,
-				-- 		state = "open",
-				-- 	},
-				-- },
+				git = { commits = { limit = 10 } }, -- 0 = disable completing commits
+				github = {
+					issues = {
+						limit = 100,
+						state = "open", -- open, closed, all
+					},
+					mentions = {
+						limit = 100,
+					},
+					pull_requests = {
+						limit = 10,
+						state = "open",
+					},
+				},
 			}
 		end,
 	},
@@ -344,7 +337,7 @@ return {
 		dependencies = "hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		config = function()
-			require("nvim-autopairs").setup{
+			require("nvim-autopairs").setup {
 				enable_check_bracket_line = false,
 			}
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
