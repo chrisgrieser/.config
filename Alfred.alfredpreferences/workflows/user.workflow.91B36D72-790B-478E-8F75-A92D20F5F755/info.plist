@@ -310,7 +310,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Plain Text Utilities</string>
+	<string>Text Utilities</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -860,7 +860,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>| {query}</string>
+				<string>echo "$text" | {query}</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
