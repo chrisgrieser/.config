@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "02/03/2023, 23:14:05",
-	"time": 1677795245372,
+	"@time": "03/03/2023, 02:07:09",
+	"time": 1677805629504,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -81,6 +81,7 @@
 		"map wi moveTabToIncognito",
 		"",
 		"map i removeTab keepWindow=\"mayClose\"",
+		"map s removeTab keepWindow=\"mayClose\"",
 		"map u restoreTab",
 		"map yt duplicateTab",
 		"",
@@ -110,7 +111,7 @@
 		"",
 		"\" Interaction",
 		"map gi focusInput",
-		"map ge Vomnibar.activateEditUrl",
+		"map c Vomnibar.activateEditUrl",
 		"map gu goUp",
 		"map gU goToRoot",
 		"map p togglePinTab",
