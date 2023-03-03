@@ -216,12 +216,6 @@ return {
 		cmd = "TSJToggle",
 	},
 	{
-		"ckolkey/ts-node-action", -- cycle quotes/operators/boolean/case
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		lazy = true,
-		config = function() require("ts-node-action").setup() end,
-	},
-	{
 		"cshuaimin/ssr.nvim", -- structural search & replace
 		lazy = true,
 		config = function()

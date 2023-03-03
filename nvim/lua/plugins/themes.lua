@@ -62,9 +62,9 @@ function ThemeSettings()
 		fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
 		-- horizontal rulers
-		fn.matchadd("HRs", "--------*")
-		fn.matchadd("HRs", ".*───*")
-		setHighlight("HRs", "gui=bold cterm=bold")
+		-- fn.matchadd("HRs", "--------*")
+		-- fn.matchadd("HRs", ".*───*")
+		-- setHighlight("HRs", "gui=bold cterm=bold")
 
 		--------------------------------------------------------------------------
 
