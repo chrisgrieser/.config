@@ -8,7 +8,7 @@ local caff = hs.caffeinate.watcher
 UnlockWatcher = caff
 	.new(function(event)
 		if event ~= caff.screensDidUnlock then return end
-		SyncAllGitRepos("notify")
+		SyncAllGitRepos()
 
 		if IsAtOffice() then
 			WorkLayout()
@@ -54,9 +54,8 @@ BiweeklyTimer = hs.timer
 	.doAt("02:00", "02d", function()
 		if IsAtOffice() then return end
 
-		hs.loadSpoon("EmmyLua") -- so it runs not as often
 		PeripheryBatteryCheck("Drafts")
-
+		hs.loadSpoon("EmmyLua")
 		Applescript([[
 			tell application id "com.runningwithcrayons.Alfred"
 				run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
