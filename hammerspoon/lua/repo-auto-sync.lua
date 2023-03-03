@@ -85,7 +85,7 @@ end
 --------------------------------------------------------------------------------
 
 ---sync all three git repos
----@param sendNotification? string whether to send notification on finished sync
+---@param sendNotification? any whether to send notification on finished sync
 function SyncAllGitRepos(sendNotification)
 	local success1 = gitDotfileSync()
 	local success2 = gitPassSync()
