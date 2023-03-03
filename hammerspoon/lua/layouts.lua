@@ -74,16 +74,16 @@ function WorkLayout()
 	hs.layout.apply(layout)
 	ShowAllSidebars()
 	dockSwitcher("work")
-	RestartApp("AltTab") -- FIX AltTab sometimes not picking up open apps
+	RestartApp("AltTab") 
 	hs.execute("sketchybar --set clock popup.drawing=true") -- fix
 
-	RunWithDelays({ 0.5, 1 }, function()
-		App("Twitter"):mainWindow():focus() -- since it is sometimes not properly raised
+	RunWithDelays({ 0.5, 1.2 }, function()
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
 		TwitterToTheSide()
 		TwitterScrollUp()
 		App("Drafts"):activate()
+		App("Twitter"):mainWindow():raise()
 	end)
 end
 
