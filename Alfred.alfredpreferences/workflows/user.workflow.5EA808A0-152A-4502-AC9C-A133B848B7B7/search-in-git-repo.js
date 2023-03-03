@@ -30,7 +30,7 @@ const fileArray = app
 		const relativeParentFolder = relPath.slice(0, -(name.length + 1));
 
 		const fileIsDirty = dirtyFiles.includes(relPath)
-		const dirtyIcon = fileIsDirty ? " ✴️" : "";
+		const dirtyIcon = fileIsDirty ? ` ${$.getenv("dirty_icon")}` : "";
 		let matcher = alfredMatcher(name)
 		if (fileIsDirty) matcher += " dirty";
 

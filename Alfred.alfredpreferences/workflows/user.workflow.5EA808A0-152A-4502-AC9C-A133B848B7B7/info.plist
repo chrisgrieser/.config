@@ -70,7 +70,7 @@
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>fn: Shallow Clone</string>
+				<string>fn: Shallow Clone to Local Repo Folder</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1500,6 +1500,27 @@ echo "$url"</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>✴️</string>
+				<key>placeholder</key>
+				<string>*</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Indicating dirty repo or file</string>
+			<key>label</key>
+			<string>Dirty Icon</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>dirty_icon</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string></string>
 				<key>filtermode</key>
 				<integer>2</integer>
@@ -1516,6 +1537,48 @@ echo "$url"</string>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>css_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Another folder containing local git repositories to search for `gg`</string>
+			<key>label</key>
+			<string>Extra Folder 1</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>extra_folder_1</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Another folder containing local git repositories to search for `gg`</string>
+			<key>label</key>
+			<string>Extra Folder 2</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>extra_folder_2</string>
 		</dict>
 	</array>
 	<key>version</key>

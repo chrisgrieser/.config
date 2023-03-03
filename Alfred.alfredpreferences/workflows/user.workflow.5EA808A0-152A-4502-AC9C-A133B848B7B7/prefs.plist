@@ -4,6 +4,10 @@
 <dict>
 	<key>css_path</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Repos/shimmering-focus/source.css</string>
+	<key>extra_folder_1</key>
+	<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development/.obsidian/plugins</string>
+	<key>extra_folder_2</key>
+	<string>~/.config/Alfred.alfredpreferences/workflows</string>
 	<key>github_username</key>
 	<string>chrisgrieser</string>
 	<key>local_repo_folder</key>
