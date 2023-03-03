@@ -207,3 +207,5 @@ matches:
     replace: show
     propagate_casing: true
     word: true
+  - trigger: foudn
+    replace: found
