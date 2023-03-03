@@ -32,7 +32,7 @@ TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 
 	-- move twitter and scroll it up
 	if appName == "Twitter" and eventType == Aw.launched then
-		RunWithDelays({0.5, 1, 2}, function()
+		RunWithDelays({ 0.5, 1, 2 }, function()
 			BringAllToFront()
 			TwitterToTheSide()
 			TwitterScrollUp()
@@ -56,8 +56,10 @@ TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 	-- raise twitter when switching window to other app
 	elseif appName and eventType == Aw.activated then
 		local win = appObj:mainWindow()
-		if CheckSize(win, PseudoMaximized) or CheckSize(win, Centered)then
+		if CheckSize(win, PseudoMaximized) or CheckSize(win, Centered) then
 			App("Twitter"):mainWindow():raise()
+			-- in case of active split, prevent left window of covering the sketchybar
+			if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
 		end
 	end
 end):start()

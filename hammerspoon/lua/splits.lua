@@ -2,89 +2,34 @@ require("lua.utils")
 require("lua.window-management")
 --------------------------------------------------------------------------------
 
--- HELPERS
-
----@return boolean whether a split is currently active
-local function splitActive()
-	if SPLIT_RIGHT and SPLIT_LEFT then return true end
-	return false
-end
-
----@return table list of apps that are running, formatted for hs.chooser
-local function runningApps()
-	local appsArr = {}
-	for _, win in pairs(hs.window:allWindows()) do
-		local appName = win:application():name()
-		local isExcludedApp = { "Hammerspoon", "Twitter", "Notification Centre", FrontAppName() }
-		if not TableContains(isExcludedApp, appName) then table.insert(appsArr, { text = appName }) end
-	end
-	return appsArr
-end
-
---------------------------------------------------------------------------------
-
----if one of the two is activated, also activate the other
----unsplit if one of the two windows has been closed
+---activate both apps together,unsplit if one of the two apps are quit.
+---Caveat: using an appwatcher seems much more stable then using window
+---filters, but comes at the cost of not being able to handle it well if one of
+---the two apps have more than one window
 local function pairedActivation()
-	local app1 = SPLIT_LEFT:application():name()
-	local app2 = SPLIT_RIGHT:application():name()
+	PairedActivationWatcher = Aw.new(function(appName, eventType)
+		local rightApp = RIGHT_SPLIT:application()
+		local leftApp = LEFT_SPLIT:application()
 
-	Wf_pairedActivation = Wf.new({ app1, app2 })
-		-- focus windows together
-		:subscribe(Wf.windowFocused, function(focusedWin)
-			-- not using :focus(), since that would cause infinite recursion
-			-- raising needs small delay, so that focused window is already at front
-			print("focusedWin:", focusedWin:id())
-			print("SPLIT_RIGHT:", SPLIT_RIGHT:id())
-			print("SPLIT_LEFT:", SPLIT_LEFT:id())
-
-			if focusedWin:id() == SPLIT_RIGHT:id() then
-				print("left raised")
-				RunWithDelays(0.2, function()
-					SPLIT_LEFT:raise()
-				end)
-			elseif focusedWin:id() == SPLIT_LEFT:id() then
-				print("right raised")
-				RunWithDelays(0.2, function()
-					SPLIT_RIGHT:raise()
-				end)
-			end
-		end)
-		-- hide when neither is focused
-		:subscribe(Wf.windowUnfocused, function()
-			local curWin = hs.window.focusedWindow()
-			if curWin:id() ~= SPLIT_LEFT:id() and curWin:id() ~= SPLIT_RIGHT:id() then
-				SPLIT_RIGHT:application():hide()	
-				SPLIT_LEFT:application():hide()	
-			end
-		end)
-		-- stop vertical split when one of the windows is closed
-		:subscribe(Wf.windowDestroyed, function(closedWin)
-			if
-				not SPLIT_LEFT
-				or not SPLIT_RIGHT
-				or (SPLIT_RIGHT:id() == closedWin:id())
-				or (SPLIT_LEFT:id() == closedWin:id())
-			then
-				VsplitSetLayout("unsplit")
-				print("2️⃣ Split stopped automatically due to one window closing.")
-			end
-		end)
+		if not leftApp or not rightApp then
+			print("2️⃣ Split stopped automatically due app being terminated.")
+			VsplitSetLayout("unsplit")
+		elseif eventType == Aw.activated and appName == rightApp:name() then
+			LEFT_SPLIT:raise()
+		elseif eventType == Aw.activated and appName == leftApp:name() then
+			RIGHT_SPLIT:raise()
+		end
+	end):start()
 end
 
 ---main split function
 ---@param mode string unsplit|split, split will use the secondWin and the current win
 ---@param secondWin? hs.window required when using mode "split"
 function VsplitSetLayout(mode, secondWin)
-	if not (splitActive()) and (mode == "swap" or mode == "unsplit") then
-		Notify("no split active")
-		return
-	end
-
 	-- define split windows
 	if mode == "split" then
-		SPLIT_LEFT = hs.window.focusedWindow()
-		SPLIT_RIGHT = secondWin
+		LEFT_SPLIT = hs.window.focusedWindow()
+		RIGHT_SPLIT = secondWin
 	end
 
 	local f1
@@ -92,39 +37,56 @@ function VsplitSetLayout(mode, secondWin)
 	if mode == "split" then
 		print("2️⃣ Split started.")
 		pairedActivation()
-		f1 = LeftHalf
-		f2 = RightHalf
+		f1 = RightHalf
+		f2 = LeftHalf
 	elseif mode == "unsplit" then
-		Wf_pairedActivation:unsubscribeAll()
+		PairedActivationWatcher:stop()
 		f1 = PseudoMaximized
 		f2 = PseudoMaximized
 	end
 
-	if SPLIT_RIGHT then
-		MoveResize(SPLIT_RIGHT, f1) 
-		SPLIT_RIGHT:raise()
+	if RIGHT_SPLIT then
+		MoveResize(RIGHT_SPLIT, f1)
+		RIGHT_SPLIT:raise()
 	end
-	if SPLIT_LEFT then
-		MoveResize(SPLIT_LEFT, f2) 
-		SPLIT_LEFT:raise()
+	if LEFT_SPLIT then
+		MoveResize(LEFT_SPLIT, f2)
+		LEFT_SPLIT:raise()
 	end
 
 	if mode == "unsplit" then
-		Wf_pairedActivation = nil ---@diagnostic disable-line: assign-type-mismatch
-		SPLIT_RIGHT = nil
-		SPLIT_LEFT = nil ---@diagnostic disable-line: assign-type-mismatch
+		PairedActivationWatcher = nil ---@diagnostic disable-line: assign-type-mismatch
+		RIGHT_SPLIT = nil
+		LEFT_SPLIT = nil ---@diagnostic disable-line: assign-type-mismatch
 	end
+end
+
+---helper for hs.chooser
+---@return table|nil list of apps that are running, formatted for hs.chooser
+local function runningApps()
+	local appsArr = {}
+	for _, win in pairs(hs.window:allWindows()) do
+		local app = win:application()
+		if not app then return end
+		local appName = app:name()
+		local isExcludedApp = { "Hammerspoon", "Twitter", "Notification Centre", FrontAppName() }
+		if not TableContains(isExcludedApp, appName) and app:mainWindow() then
+			table.insert(appsArr, { text = appName })
+		end
+	end
+	return appsArr
 end
 
 ---select a second window to pass to vsplitSetLayout()
 local function selectSecondWin()
 	local apps = runningApps()
+	if #apps == 0 then return end
 	hs
 		.chooser
 		.new(function(selection)
 			if not selection then return end
 			local appName = selection.text
-			local secondWin = hs.application(appName):allWindows()[1]
+			local secondWin = hs.application.get(appName):mainWindow()
 			VsplitSetLayout("split", secondWin)
 		end)
 		:choices(apps)
@@ -138,7 +100,8 @@ end
 -- HOTKEYS
 
 Hotkey(Hyper, "V", function()
-	if splitActive() then
+	local splitActive = LEFT_SPLIT and RIGHT_SPLIT
+	if splitActive then
 		print("2️⃣ Split stopped manually.")
 		VsplitSetLayout("unsplit")
 	else

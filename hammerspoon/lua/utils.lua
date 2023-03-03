@@ -151,9 +151,9 @@ function Notify(...)
 	print("Notify: " .. out)
 end
 
----@return string
+---@return string|nil
 function FrontAppName()
-	return hs.application.frontmostApplication():name() ---@diagnostic disable-line: return-type-mismatch
+	return hs.application.frontmostApplication():name() 
 end
 
 ---@param appName string
