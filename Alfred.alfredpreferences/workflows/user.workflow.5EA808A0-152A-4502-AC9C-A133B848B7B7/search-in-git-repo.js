@@ -28,8 +28,8 @@ const fileArray = app
 		const name = absPath.split("/").pop();
 		const relPath = absPath.slice(folderToSearch.length);
 		const relativeParentFolder = relPath.slice(0, -(name.length + 1));
-		const fileIsDirty = 
-		const dirtyIcon = dirtyFiles.includes(relPath) ? " ✴️" : "";
+		const fileIsDirty = dirtyFiles.includes(relPath)
+		const dirtyIcon = fileIsDirty ? " ✴️" : "";
 		let matcher = alfredMatcher(name)
 		if 
 
