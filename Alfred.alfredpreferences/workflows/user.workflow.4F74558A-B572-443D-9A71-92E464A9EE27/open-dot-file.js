@@ -77,6 +77,7 @@ const fileArray = app
 			case "gif":
 				iconObj.path = fPath; // use image itself
 				break;
+			case "bttpreset":
 			case "opml":
 			case "other":
 			case "url":

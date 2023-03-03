@@ -54,19 +54,18 @@ const repoArray = app
 	.map(i => i.replace(/\.git\/?$/, ""))
 
 repoArray.forEach(localRepoFilePath => {
-	let repoName;
 	const repoID = localRepoFilePath.replace(/.*\//, "");
+
+	// Dirty Repo
+	const repoIsDirty = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
+	const dirtyIcon = repoIsDirty ? " ✴️" : "";
+
+	let repoName;
+	let iconpath = "repotype-icons/";
 
 	const isAlfredWorkflow = fileExists(localRepoFilePath + "/info.plist");
 	const isObsiPlugin = fileExists(localRepoFilePath + "/manifest.json");
 	const isNeovimPlugin = fileExists(localRepoFilePath + "/lua");
-
-	// Dirty Repo
-	let dirtyIcon = "";
-	const dirtyRepo = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
-	if (dirtyRepo) dirtyIcon = " ✴️";
-
-	let iconpath = "repotype-icons/";
 	if (isAlfredWorkflow) {
 		repoName = readPlist("name", localRepoFilePath + "/info.plist");
 		iconpath = localRepoFilePath + "/icon.png";

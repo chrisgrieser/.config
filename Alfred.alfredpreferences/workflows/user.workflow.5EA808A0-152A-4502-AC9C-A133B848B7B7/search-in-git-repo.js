@@ -15,9 +15,8 @@ const folderToSearch = $.getenv("folderToSearch");
 //──────────────────────────────────────────────────────────────────────────────
 
 // FILES
-
 const dirtyFiles = app
-	.doShellScript(`git status --porcelain`)
+	.doShellScript(`cd "${folderToSearch}" && git status --porcelain`)
 	.split("\r")
 	.map(file => file.replace(/^[ Mmd?]* /, ""));
 
@@ -26,10 +25,13 @@ const fileArray = app
 	.split("\r")
 	/* eslint-disable-next-line complexity */
 	.map(absPath => {
-		const parts = absPath.split("/");
-		const name = parts.pop();
-		const relPath = parts
-		const relativeParentFolder = absPath.slice(folderToSearch.length, -(name.length + 1));
+		const name = absPath.split("/").pop();
+		const relPath = absPath.slice(folderToSearch.length);
+		const relativeParentFolder = relPath.slice(0, -(name.length + 1));
+		const fileIsDirty = 
+		const dirtyIcon = dirtyFiles.includes(relPath) ? " ✴️" : "";
+		let matcher = alfredMatcher(name)
+		if 
 
 		// type determiniation
 		let type;
@@ -52,6 +54,7 @@ const fileArray = app
 			case "gif":
 				iconObj.path = absPath; // use image itself
 				break;
+			case "bttpreset":
 			case "opml":
 			case "other":
 			case "url":
@@ -64,7 +67,7 @@ const fileArray = app
 		}
 
 		return {
-			title: name,
+			title: name + dirtyIcon,
 			match: alfredMatcher(name),
 			subtitle: relativeParentFolder,
 			type: "file:skipcheck",
@@ -79,8 +82,7 @@ const folderArray = app
 	.doShellScript(`find "${folderToSearch}" -type d -not -path "**/.git**" -not -path "**/node_modules**"`)
 	.split("\r")
 	.map(fPath => {
-		const parts = fPath.split("/");
-		const name = parts.pop();
+		const name = fPath.split("/").pop();
 		const relativeParentFolder = fPath.slice(folderToSearch.length, -(name.length + 1));
 		return {
 			title: name,
