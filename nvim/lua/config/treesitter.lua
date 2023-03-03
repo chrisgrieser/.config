@@ -88,23 +88,25 @@ require("nvim-treesitter.configs").setup {
 	-----------------------------------------------------------------------------
 	-- plugins
 
-	rainbow = { -- rainbow plugin
+	rainbow = {
 		enable = true,
-		disable = {},
-		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-		max_file_lines = 2000,
+		query = "rainbow-parens",
+		strategy = require("ts-rainbow.strategy.global"),
+		hlgroups = {
+			"rainbowcol1",
+			"rainbowcol2",
+			"rainbowcol3",
+			"rainbowcol4",
+			"rainbowcol5",
+			"rainbowcol6",
+			"rainbowcol7",
+		},
 	},
 
-	matchup = { -- vim-matchup
-		enable = true, -- mandatory, false will disable the whole extension
-		disable = {},
-		disable_virtual_text = true, -- virtual text at the end of function in js
-	},
-
-	refactor = { -- refactor plugin
+	refactor = {
 		highlight_definitions = {
 			enable = true,
-			clear_on_cursor_move = true, -- Set to false if you have an `updatetime` of ~100.
+			clear_on_cursor_move = true, -- set to false if `updatetime` of ~100ms
 		},
 		highlight_current_scope = { enable = false },
 		smart_rename = {

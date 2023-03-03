@@ -10,7 +10,7 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			"mrjones2014/nvim-ts-rainbow",
+			"HiPhish/nvim-ts-rainbow2",
 		},
 	},
 	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
