@@ -42,7 +42,7 @@
 	},
 	"string format": {
 		"prefix": "string format",
-		"body": "string.format(\"%s\", ${1:var})"
+		"body": "string.format(\"$0%s\", ${1:var})"
 	},
 	"for (list)": {
 		"prefix": [

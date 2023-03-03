@@ -412,7 +412,7 @@ keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch() e
 keymap("n", "<leader>gd", function()
 	vim.ui.input({ prompt = "Git Pickaxe (empty = full history)" }, function(query)
 		if not query then return end
-		if query ~= "" then query = " -G" .. query end
+		if query ~= "" then query = string.format(" -G'%s'", query) end
 		cmd("DiffviewFileHistory %" .. query)
 		cmd.wincmd("w") -- go directly to file window
 		cmd.wincmd("|") -- maximize
