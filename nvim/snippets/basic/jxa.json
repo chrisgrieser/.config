@@ -26,8 +26,8 @@
 			"app.includeStandardAdditions = true;"
 		]
 	},
-	"shell script": {
-		"prefix": ["shell script", "app.doShellScript", "doShellScript"],
+	"doShellScript": {
+		"prefix": ["shell script", "doShellScript"],
 		"body": "app.doShellScript(`${1:shellscript}`);"
 	},
 	"open": {
