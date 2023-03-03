@@ -15,14 +15,21 @@ const folderToSearch = $.getenv("folderToSearch");
 //──────────────────────────────────────────────────────────────────────────────
 
 // FILES
+
+const dirtyFiles = app
+	.doShellScript(`git status --porcelain`)
+	.split("\r")
+	.map(file => file.replace(/^[ Mmd?]* /, ""));
+
 const fileArray = app
 	.doShellScript(`cd "${folderToSearch}" && fd --type=file --hidden --absolute-path --exclude "/.git/*"`)
 	.split("\r")
 	/* eslint-disable-next-line complexity */
-	.map(fPath => {
-		const parts = fPath.split("/");
+	.map(absPath => {
+		const parts = absPath.split("/");
 		const name = parts.pop();
-		const relativeParentFolder = fPath.slice(folderToSearch.length, -(name.length + 1));
+		const relPath = parts
+		const relativeParentFolder = absPath.slice(folderToSearch.length, -(name.length + 1));
 
 		// type determiniation
 		let type;
@@ -43,14 +50,14 @@ const fileArray = app
 			case "icns":
 			case "png":
 			case "gif":
-				iconObj.path = fPath; // use image itself
+				iconObj.path = absPath; // use image itself
 				break;
 			case "opml":
 			case "other":
 			case "url":
 			case "html":
 			case "folder":
-				iconObj = { type: "fileicon", path: fPath };
+				iconObj = { type: "fileicon", path: absPath };
 				break;
 			default:
 				iconObj.path += type + ".png";
@@ -62,8 +69,8 @@ const fileArray = app
 			subtitle: relativeParentFolder,
 			type: "file:skipcheck",
 			icon: iconObj,
-			arg: fPath,
-			uid: fPath,
+			arg: absPath,
+			uid: absPath,
 		};
 	});
 
