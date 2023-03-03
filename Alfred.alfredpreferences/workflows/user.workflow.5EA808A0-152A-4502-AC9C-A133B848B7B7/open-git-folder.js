@@ -40,10 +40,10 @@ let pathString = "";
 pathsToSearch.forEach(path => (pathString += '"' + path + '" '));
 
 const jsonArray = app
-	.doShellScript( `
+	.doShellScript(`
 		export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH 
-		fd '\\.git$' --no-ignore --hidden --max-depth=2 ${pathString}`,
-	)
+		fd '\\.git$' --no-ignore --hidden --max-depth=2 ${pathString}
+	`)
 	.split("\r")
 	.map(gitFolder => {
 		const localRepoFilePath = gitFolder.replace(/\.git\/?$/, "");
