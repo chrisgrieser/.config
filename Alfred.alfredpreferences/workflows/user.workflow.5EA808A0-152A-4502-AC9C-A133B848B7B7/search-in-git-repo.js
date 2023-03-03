@@ -18,7 +18,7 @@ const folderToSearch = $.getenv("folderToSearch");
 const dirtyFiles = app
 	.doShellScript(`cd "${folderToSearch}" && git status --porcelain`)
 	.split("\r")
-	.map(file => file.replace(/^[ Mmd?]* /, ""));
+	.map(file => file.replace(/^[ MD?]* /i, ""));
 
 const fileArray = app
 	.doShellScript(`cd "${folderToSearch}" && fd --type=file --hidden --absolute-path --exclude "/.git/*"`)
@@ -28,10 +28,11 @@ const fileArray = app
 		const name = absPath.split("/").pop();
 		const relPath = absPath.slice(folderToSearch.length);
 		const relativeParentFolder = relPath.slice(0, -(name.length + 1));
+
 		const fileIsDirty = dirtyFiles.includes(relPath)
 		const dirtyIcon = fileIsDirty ? " ✴️" : "";
 		let matcher = alfredMatcher(name)
-		if 
+		if (fileIsDirty) matcher += " dirty";
 
 		// type determiniation
 		let type;
@@ -68,8 +69,8 @@ const fileArray = app
 
 		return {
 			title: name + dirtyIcon,
-			match: alfredMatcher(name),
-			subtitle: relativeParentFolder,
+			match: matcher,
+			subtitle: "▸ " + relativeParentFolder,
 			type: "file:skipcheck",
 			icon: iconObj,
 			arg: absPath,
