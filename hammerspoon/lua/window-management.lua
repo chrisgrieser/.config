@@ -165,7 +165,10 @@ function BringAllToFront()
 end
 
 ---automatically apply per-app auto-tiling of the windows of the app
----@param winSrc hs.window.filter|string source for the windows; windowfilter or appname
+---@param winSrc hs.window.filter|string source for the windows; windowfilter or
+---appname. If this function is not triggered by a windowfilter event, the window
+---filter does not contain any windows, therefore we need to get the windows from
+---the appObj instead in those cases
 function AutoTile(winSrc)
 
 	local wins
