@@ -1126,7 +1126,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>70</real>
 			<key>ypos</key>
-			<real>1150</real>
+			<real>1125</real>
 		</dict>
 		<key>0E26657D-87C2-4501-A282-F674945D73C9</key>
 		<dict>
@@ -1137,7 +1137,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>845</real>
+			<real>820</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
@@ -1146,7 +1146,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1120</real>
+			<real>1095</real>
 		</dict>
 		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
 		<dict>
@@ -1155,7 +1155,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>690</real>
 		</dict>
 		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
 		<dict>
@@ -1173,7 +1173,7 @@ echo "$url"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>note</key>
-			<string>search my repos</string>
+			<string>remote repo search</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1253,7 +1253,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>720</real>
 		</dict>
 		<key>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</key>
 		<dict>
@@ -1273,7 +1273,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>140</real>
 			<key>ypos</key>
-			<real>1120</real>
+			<real>1095</real>
 		</dict>
 		<key>8D2069C6-2EDB-40CD-854E-38574F301A4B</key>
 		<dict>
@@ -1282,7 +1282,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
-			<real>980</real>
+			<real>955</real>
 		</dict>
 		<key>9FAD19B2-5BF3-43C8-B76B-80FFD2C17566</key>
 		<dict>
@@ -1300,9 +1300,9 @@ echo "$url"</string>
 			<key>note</key>
 			<string>Open Shimmering Focus at line</string>
 			<key>xpos</key>
-			<real>650</real>
+			<real>660</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>455</real>
 		</dict>
 		<key>A9C9D34F-A692-412A-9152-2BC3E99B51BE</key>
 		<dict>
@@ -1313,16 +1313,18 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>690</real>
 		</dict>
 		<key>AC483565-D8EB-4AAD-99AA-229D0C632CE8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
+			<key>note</key>
+			<string>local repo search</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>690</real>
 		</dict>
 		<key>AF85AB81-9BE3-4518-85D3-C5088521F862</key>
 		<dict>
@@ -1358,9 +1360,9 @@ echo "$url"</string>
 			<key>note</key>
 			<string>open at line</string>
 			<key>xpos</key>
-			<real>815</real>
+			<real>825</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>455</real>
 		</dict>
 		<key>C742BD02-85C0-47F8-9A2A-7DF4DC657EE1</key>
 		<dict>
@@ -1371,12 +1373,14 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>980</real>
+			<real>955</real>
 		</dict>
 		<key>CC245103-888B-4440-A348-64F8A74D87F3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>open at remote</string>
 			<key>xpos</key>
 			<real>655</real>
 			<key>ypos</key>
@@ -1389,7 +1393,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>575</real>
 		</dict>
 		<key>CE6F0B40-E42E-4D8B-833A-537723F42C63</key>
 		<dict>
@@ -1467,7 +1471,7 @@ echo "$url"</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Also search by the local git repo search `gg`.</string>
 			<key>label</key>
 			<string>Dotfile Folder</string>
 			<key>type</key>
@@ -1488,7 +1492,7 @@ echo "$url"</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Location where the remote repo search `ghr` will download clones. Also search by the local git repo search `gg`.</string>
 			<key>label</key>
 			<string>Local Repo Folder</string>
 			<key>type</key>

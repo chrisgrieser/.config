@@ -6,9 +6,6 @@ ObjC.import("stdlib");
 ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-const home = app.pathTo("home folder");
-const fileExists = filePath => Application("Finder").exists(Path(filePath));
-//──────────────────────────────────────────────────────────────────────────────
 
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#]/g, " ");
@@ -29,21 +26,24 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
+const getFullPath = path => $.getenv(path).replace(/^~/, app.pathTo("home folder"));
+const fileExists = filePath => Application("Finder").exists(Path(filePath));
+
 //──────────────────────────────────────────────────────────────────────────────
 
-const pathsToSearch = [$.getenv("dotfile_folder").replace(/^~/, home)];
-if ($.getenv("local_repo_folder")) pathsToSearch.push($.getenv("local_repo_folder").replace(/^~/, home));
-if ($.getenv("extra_folder_1")) pathsToSearch.push($.getenv("extra_folder_1").replace(/^~/, home));
-if ($.getenv("extra_folder_2")) pathsToSearch.push($.getenv("extra_folder_2").replace(/^~/, home));
+const pathsToSearch = [getFullPath("dotfile_folder")];
+if ($.getenv("local_repo_folder")) pathsToSearch.push(getFullPath("local_repo_folder"));
+if ($.getenv("extra_folder_1")) pathsToSearch.push(getFullPath("extra_folder_1"));
+if ($.getenv("extra_folder_2")) pathsToSearch.push(getFullPath("extra_folder_2"));
 
 let pathString = "";
 pathsToSearch.forEach(path => (pathString += '"' + path + '" '));
 
 const jsonArray = app
-	.doShellScript(`
-		export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH 
-		fd '\\.git$' --no-ignore --hidden --max-depth=2 ${pathString}
-	`)
+	.doShellScript(
+		`export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+		fd '\\.git$' --no-ignore --hidden --max-depth=2 ${pathString}`,
+	)
 	.split("\r")
 	.map(gitFolder => {
 		const localRepoFilePath = gitFolder.replace(/\.git\/?$/, "");
