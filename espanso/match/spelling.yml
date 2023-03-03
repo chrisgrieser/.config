@@ -209,3 +209,6 @@ matches:
     word: true
   - trigger: foudn
     replace: found
+  - trigger: yb
+    replace: by
+    word: true
