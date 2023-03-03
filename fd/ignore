@@ -10,8 +10,8 @@ Icon
 
 
 # useless stuff inside pseudo-apps
-**/*.app/*
-**/*.pxd/*
+**/*.app/
+**/*.pxd/
 
 # vim spellcheck binary
 *.spl

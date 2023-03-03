@@ -21,7 +21,10 @@ const dirtyFiles = app
 	.map(file => file.replace(/^[ MD?]* /i, ""));
 
 const fileArray = app
-	.doShellScript(`cd "${folderToSearch}" && fd --type=file --hidden --absolute-path --exclude "/.git/*"`)
+	.doShellScript(
+		`cd "${folderToSearch}"
+		fd --type=file --hidden --absolute-path --exclude ".git/" --exclude ".git"`,
+	)
 	.split("\r")
 	/* eslint-disable-next-line complexity */
 	.map(absPath => {
@@ -29,9 +32,9 @@ const fileArray = app
 		const relPath = absPath.slice(folderToSearch.length);
 		const relativeParentFolder = relPath.slice(0, -(name.length + 1));
 
-		const fileIsDirty = dirtyFiles.includes(relPath)
+		const fileIsDirty = dirtyFiles.includes(relPath);
 		const dirtyIcon = fileIsDirty ? ` ${$.getenv("dirty_icon")}` : "";
-		let matcher = alfredMatcher(name)
+		let matcher = alfredMatcher(name);
 		if (fileIsDirty) matcher += " dirty";
 
 		// type determiniation
