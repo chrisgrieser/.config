@@ -174,7 +174,6 @@ return {
 			}
 		end,
 	},
-	-- "fsfsfsf fsfsf fllllllllllll"
 
 	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
 	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
@@ -229,15 +228,15 @@ return {
 		end,
 	},
 	{
-		"nacro90/numb.nvim", -- line previews when ":n"
-		config = function() require("numb").setup() end,
-		keys = ":",
-	},
-	{
 		"ThePrimeagen/refactoring.nvim",
 		lazy = true,
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
 		config = function() require("refactoring").setup() end,
+	},
+	{
+		"nacro90/numb.nvim", -- line previews when ":n"
+		config = function() require("numb").setup() end,
+		keys = ":",
 	},
 	{ "ggandor/leap.nvim", event = "VeryLazy" },
 	{
