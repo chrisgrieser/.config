@@ -12,6 +12,13 @@ function alfredMatcher(str) {
 //──────────────────────────────────────────────────────────────────────────────
 // using `fd` over `find` for speed and gitignoring
 const dotfileFolder = $.getenv("dotfile_folder").replace(/^~/, app.pathTo("home folder"));
+
+// FILES
+const dirtyFiles = app
+	.doShellScript(`cd "${dotfileFolder}" && git status --porcelain`)
+	.split("\r")
+	.map(file => file.replace(/^[ MD?]* /i, ""));
+
 const fileArray = app
 	.doShellScript(
 		`
@@ -49,12 +56,15 @@ const fileArray = app
 	)
 	.split("\r")
 	/* eslint-disable-next-line complexity */
-	.map(fPath => {
-		const parts = fPath.split("/");
-		const name = parts.pop();
-		let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
-		if (parentPart === ".") parentPart = "";
-		const matcher = alfredMatcher(`${name} ${parentPart}`);
+	.map(absPath => {
+		const name = absPath.split("/").pop();
+		const relPath = absPath.slice(dotfileFolder.length);
+		const relativeParentFolder = relPath.slice(0, -(name.length + 1));
+
+		const fileIsDirty = dirtyFiles.includes(relPath)
+		const dirtyIcon = fileIsDirty ? " ✴️" : "";
+		let matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
+		if (fileIsDirty) matcher += " dirty";
 
 		// type determiniation
 		let type;
@@ -75,7 +85,7 @@ const fileArray = app
 			case "icns":
 			case "png":
 			case "gif":
-				iconObj.path = fPath; // use image itself
+				iconObj.path = absPath; // use image itself
 				break;
 			case "bttpreset":
 			case "opml":
@@ -83,20 +93,20 @@ const fileArray = app
 			case "url":
 			case "html":
 			case "folder":
-				iconObj = { type: "fileicon", path: fPath };
+				iconObj = { type: "fileicon", path: absPath };
 				break;
 			default:
 				iconObj.path += type + ".png";
 		}
 
 		return {
-			title: name,
-			subtitle: "▸ " + parentPart,
+			title: name + dirtyIcon,
 			match: matcher,
+			subtitle: "▸ " + relativeParentFolder,
 			icon: iconObj,
 			type: "file:skipcheck",
-			uid: fPath,
-			arg: fPath,
+			uid: absPath,
+			arg: absPath,
 		};
 	});
 
