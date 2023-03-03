@@ -10,16 +10,6 @@ const home = app.pathTo("home folder");
 const fileExists = filePath => Application("Finder").exists(Path(filePath));
 //──────────────────────────────────────────────────────────────────────────────
 
-// CONFIG
-const pathsToSearch = [
-	$.getenv("dotfile_folder").replace(/^~/, home),
-	$.getenv("local_repo_folder").replace(/^~/, home),
-	$.getenv("dotfile_folder").replace(/^~/, home) + "/Alfred.alfredpreferences/workflows",
-	home + "/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development/.obsidian/plugins",
-];
-
-//──────────────────────────────────────────────────────────────────────────────
-
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
@@ -41,56 +31,59 @@ function readFile(path) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const jsonArray = [];
-let pathString = "";
+const pathsToSearch = [$.getenv("dotfile_folder").replace(/^~/, home)];
+if ($.getenv("local_repo_folder")) pathsToSearch.push($.getenv("local_repo_folder").replace(/^~/, home));
+if ($.getenv("extra_folder_1")) pathsToSearch.push($.getenv("extra_folder_1").replace(/^~/, home));
+if ($.getenv("extra_folder_2")) pathsToSearch.push($.getenv("extra_folder_2").replace(/^~/, home));
 
+let pathString = "";
 pathsToSearch.forEach(path => (pathString += '"' + path + '" '));
-const repoArray = app
-	.doShellScript(
-		"export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; fd '\\.git$' --no-ignore --hidden --max-depth=2 " +
-			pathString,
+
+const jsonArray = app
+	.doShellScript( `
+		export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH 
+		fd '\\.git$' --no-ignore --hidden --max-depth=2 ${pathString}`,
 	)
 	.split("\r")
-	.map(i => i.replace(/\.git\/?$/, ""))
+	.map(gitFolder => {
+		const localRepoFilePath = gitFolder.replace(/\.git\/?$/, "");
+		const repoID = localRepoFilePath.replace(/.*\//, "");
 
-repoArray.forEach(localRepoFilePath => {
-	const repoID = localRepoFilePath.replace(/.*\//, "");
+		// Dirty Repo
+		const repoIsDirty = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
+		const dirtyIcon = repoIsDirty ? ` ${$.getenv("dirty_icon")}` : "";
 
-	// Dirty Repo
-	const repoIsDirty = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
-	const dirtyIcon = repoIsDirty ? " ✴️" : "";
+		let repoName;
+		let iconpath = "repotype-icons/";
 
-	let repoName;
-	let iconpath = "repotype-icons/";
+		const isAlfredWorkflow = fileExists(localRepoFilePath + "/info.plist");
+		const isObsiPlugin = fileExists(localRepoFilePath + "/manifest.json");
+		const isNeovimPlugin = fileExists(localRepoFilePath + "/lua");
+		if (isAlfredWorkflow) {
+			repoName = readPlist("name", localRepoFilePath + "/info.plist");
+			iconpath = localRepoFilePath + "/icon.png";
+		} else if (isObsiPlugin) {
+			const manifest = readFile(localRepoFilePath + "/manifest.json");
+			repoName = JSON.parse(manifest).name;
+			iconpath += "obsidian.png";
+		} else if (isNeovimPlugin) {
+			repoName = localRepoFilePath.replace(/.*\/(.*)\//, "$1");
+			iconpath += "neovim.png";
+		} else if (localRepoFilePath.endsWith(".config/")) {
+			repoName = "dotfiles";
+			iconpath = "icon.png";
+		} else {
+			repoName = localRepoFilePath.replace(/.*\/(.*?)\/$/, "$1");
+			iconpath = "icon.png";
+		}
 
-	const isAlfredWorkflow = fileExists(localRepoFilePath + "/info.plist");
-	const isObsiPlugin = fileExists(localRepoFilePath + "/manifest.json");
-	const isNeovimPlugin = fileExists(localRepoFilePath + "/lua");
-	if (isAlfredWorkflow) {
-		repoName = readPlist("name", localRepoFilePath + "/info.plist");
-		iconpath = localRepoFilePath + "/icon.png";
-	} else if (isObsiPlugin) {
-		const manifest = readFile(localRepoFilePath + "/manifest.json");
-		repoName = JSON.parse(manifest).name;
-		iconpath += "obsidian.png";
-	} else if (isNeovimPlugin) {
-		repoName = localRepoFilePath.replace(/.*\/(.*)\//, "$1");
-		iconpath += "neovim.png";
-	} else if (localRepoFilePath.endsWith(".config/")) {
-		repoName = "dotfiles";
-		iconpath = "icon.png";
-	} else {
-		repoName = localRepoFilePath.replace(/.*\/(.*?)\/$/, "$1");
-		iconpath = "icon.png";
-	}
-
-	jsonArray.push({
-		title: repoName + dirtyIcon,
-		match: alfredMatcher(repoName) + " " + alfredMatcher(repoID),
-		icon: { path: iconpath },
-		arg: localRepoFilePath,
-		uid: repoID,
+		return {
+			title: repoName + dirtyIcon,
+			match: alfredMatcher(repoName) + " " + alfredMatcher(repoID),
+			icon: { path: iconpath },
+			arg: localRepoFilePath,
+			uid: repoID,
+		};
 	});
-});
 
 JSON.stringify({ items: jsonArray });
