@@ -92,6 +92,8 @@ require("nvim-treesitter.configs").setup {
 		enable = true,
 		query = "rainbow-parens",
 		strategy = require("ts-rainbow.strategy.global"),
+		-- compatibility, since the highlight clearing leaves only hl groups from
+		-- the theme, which does not include the rainbow2 hl groups https://github.com/HiPhish/nvim-ts-rainbow2/blob/master/doc/ts-rainbow.txt#L74
 		hlgroups = {
 			"rainbowcol1",
 			"rainbowcol2",
