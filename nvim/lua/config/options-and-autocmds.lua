@@ -13,7 +13,7 @@ opt.undofile = true -- enable persistent undo history
 opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 
 -- extra undopoints (= more fine-grained undos)
--- INFO extra undo points prevent vim abbreviations w/ those characters from 
+-- INFO extra undo points prevent vim abbreviations w/ those characters from
 -- working, so space should not be added here
 local undopointChars = { ".", ",", ";", '"' }
 for _, char in pairs(undopointChars) do
