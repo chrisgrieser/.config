@@ -22,8 +22,8 @@ function TwitterToTheSide()
 	if not (AppIsRunning("Twitter") and App("Twitter"):mainWindow()) then return end
 	local win = App("Twitter"):mainWindow()
 	if not win then return end
-	win:raise()
 	win:setFrame(ToTheSide)
+	win:raise()
 end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden

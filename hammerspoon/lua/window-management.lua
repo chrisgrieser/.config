@@ -165,21 +165,17 @@ function BringAllToFront()
 end
 
 ---automatically apply per-app auto-tiling of the windows of the app
----@param windowSource hs.window.filter|string windowfilter or appname
-function AutoTile(windowSource)
-	---necessary b/c windowfilter is null when not triggered via
-	---windowfilter-subscription-event. This check allows for using app names,
-	---which enables using the autotile-function within app watchers
-	---@param _windowSource hs.window.filter|string windowFilter OR string representing app name
-	---@return hs.window[]
-	local function getWins(_windowSource)
-		if type(_windowSource) == "string" then
-			return App(_windowSource):allWindows()
-		else
-			return _windowSource:getWindows()
-		end
+---@param winSrc hs.window.filter|string source for the windows; windowfilter or appname
+function AutoTile(winSrc)
+
+	local wins
+	if type(winSrc) == "string" and not AppIsRunning(winSrc) then
+		return
+	elseif type(winSrc) == "string" and AppIsRunning(winSrc) then
+		wins = App(winSrc):allWindows()
+	else
+		wins = winSrc:getWindows()
 	end
-	local wins = getWins(windowSource)
 
 	if #wins == 0 and FrontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
