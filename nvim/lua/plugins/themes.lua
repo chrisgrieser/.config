@@ -17,8 +17,8 @@ local themePackages = {
 	-- "savq/melange",
 }
 
-local darkTransparency = 0.94
-local lightTransparency = 0.95
+local darkTransparency = 0.93
+local lightTransparency = 0.94
 
 --------------------------------------------------------------------------------
 
@@ -51,7 +51,7 @@ function ThemeSettings()
 			"SpellBad",
 		}
 		for _, v in pairs(highlights) do
-			setHighlight(v, "gui=underline cterm=underline")
+			setHighlight(v, "gui=underdouble cterm=underline")
 		end
 
 		-- active indent
@@ -61,11 +61,18 @@ function ThemeSettings()
 		setHighlight("urls", "cterm=underline gui=underline")
 		fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
+		-- horizontal rulers
+		fn.matchadd("HRs", "--------*")
+		fn.matchadd("HRs", ".*───*")
+		setHighlight("HRs", "gui=bold cterm=bold")
+
+		--------------------------------------------------------------------------
+
 		-- rainbow brackets without aggressive red
-		setHighlight("rainbowcol1", " guifg=#7e8a95")
+		setHighlight("rainbowcol1", "guifg=#7e8a95")
 
 		-- more visible matchparens
-		setHighlight("MatchParen", " gui=underdotted cterm=underdotted")
+		setHighlight("MatchParen", "gui=inverse cterm=inverse")
 
 		-- Codi
 		linkHighlight("CodiVirtualText", "Comment")

@@ -5,6 +5,9 @@ baseRawURL="https://raw.githubusercontent.com/neovim/neovim/master/runtime/doc/"
 cacheLocation="$alfred_workflow_data"
 #-------------------------------------------------------------------------------
 
+#───────────────────────────────────────────────────────────────────────────────
+
+
 [[ -d "$cacheLocation" ]] || mkdir -p "$cacheLocation"
 
 echo "Downloading doc files…"
