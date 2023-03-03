@@ -6,7 +6,7 @@
 // CONFIG
 const temperature = 0;
 const maxTokens = 100;
-const model = "text-davinci-003";
+const model = "gpt-3.5-turbo"; // https://platform.openai.com/docs/models/gpt-3-5
 const staticPromptPart = "Finish the following sentence: ";
 
 //──────────────────────────────────────────────────────────────────────────────
