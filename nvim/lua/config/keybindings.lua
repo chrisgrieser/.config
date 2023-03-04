@@ -515,3 +515,13 @@ for _, key in ipairs { "x", "h", "l" } do
 end
 
 --------------------------------------------------------------------------------
+
+local buySome, fruits
+
+local foo = {
+	"apple",
+	"orange",
+	"banana"
+}
+buySome(fruits)
+
