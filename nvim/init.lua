@@ -12,7 +12,7 @@ require("config.utils") -- must come after lazy
 
 if IsGui() then
 	require("config.gui-settings")
-	ThemeSettings()
+	InitializeTheme()
 else
 	require("config.terminal-only")
 end
