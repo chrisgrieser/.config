@@ -63,6 +63,10 @@
 		"prefix": "get front process",
 		"body": "tell application \"System Events\" to set frontApp to (name of first process where it is frontmost)"
 	},
+	"hide app": {
+		"prefix": "hide app",
+		"body": "tell application \"System Events\" to tell process \"alacritty\" to set visible to false"
+	},
 	"resolve home": {
 		"prefix": "resolve home",
 		"body": [

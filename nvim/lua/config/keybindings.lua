@@ -372,7 +372,6 @@ end, { desc = " Open file in Project" })
 
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
-keymap("n", "gP", function() cmd.Telescope("projects") end, { desc = " Projects" })
 
 -- File Operations
 keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = " copy filepath" })
