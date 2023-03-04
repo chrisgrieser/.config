@@ -77,7 +77,7 @@ function WorkLayout()
 	RestartApp("AltTab") 
 	hs.execute("sketchybar --set clock popup.drawing=true") -- fix
 
-	RunWithDelays({ 0.5, 1.2 }, function()
+	RunWithDelays({ 0.5, 1 }, function()
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
 		TwitterToTheSide()
