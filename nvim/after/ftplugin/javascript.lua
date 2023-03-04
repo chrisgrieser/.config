@@ -3,8 +3,6 @@ require("config.utils")
 
 bo.path = ".,,../" -- also search parent directory (useful for Alfred)
 
-cmd.iabbrev("<buffer> if if ()<Left>")
-
 --------------------------------------------------------------------------------
 
 -- stylua: ignore start
