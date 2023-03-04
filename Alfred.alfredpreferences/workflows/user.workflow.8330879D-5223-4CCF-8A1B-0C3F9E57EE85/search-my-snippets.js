@@ -32,10 +32,11 @@ app.doShellScript(`find "${snippetDir}" -type f -name "*.json"`)
 
 		// iterate through snippets
 		for (const snippet in snippetJson) {
-			const snippetObj = snippetJson[snippet];
+			const snipObj = snippetJson[snippet];
 
 			// merge body if it's an array
-			const body = typeof snippetObj.body === "object" ? snippetObj.body : snippetObj.body.join("\n")
+			let body = snipObj.body
+			body = typeof body === "object" ? body : body.join("\n")
 
 			jsonArray.push({
 				title: snippet,

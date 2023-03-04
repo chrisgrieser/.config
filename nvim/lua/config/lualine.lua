@@ -1,18 +1,6 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
--- simple alternative to fidget.nvim, via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
-local function lsp_progress()
-	local messages = vim.lsp.util.get_progress_messages()
-	if #messages == 0 then return "" end
-	local client = messages[1].name and messages[1].name .. ": " or ""
-	if client:find("null%-ls") then return "" end
-	local progress = messages[1].percentage or 0
-	local task = messages[1].title or ""
-	task = task:gsub("^(%w+).*", "%1") -- only first word
-	return client .. progress .. "%% " .. task
-end
-
 local function mixedIndentation()
 	local ignoredFts = { "css", "markdown", "sh", "lazy", "grapple", "" }
 	if vim.tbl_contains(ignoredFts, bo.filetype) or fn.mode() == "i" or bo.buftype == "terminal" then
@@ -48,17 +36,6 @@ local function isStandardBranch() -- not checking for branch here, since running
 	local validFiletype = bo.filetype ~= "help" -- vim help files are located in a git repo
 	return notMainBranch and validFiletype
 end
-
--- NAVIC
-local navic = require("nvim-navic")
-navic.setup {
-	icons = { Object = "ﴯ " },
-	separator = "  ",
-	depth_limit = 7,
-	depth_limit_indicator = "…",
-}
-
-local function showNavic() return navic.is_available() and not (bo.filetype == "css") end
 
 local function selectionCount()
 	local isVisualMode = fn.mode():find("[Vv]")
@@ -113,6 +90,10 @@ local function harpoonIndicator()
 	return ""
 end
 
+--------------------------------------------------------------------------------
+
+
+
 local lspRefCount
 local function requestLspRefCount()
 	if fn.mode() ~= "n" then
@@ -121,26 +102,25 @@ local function requestLspRefCount()
 	end
 	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
 	params.context = { includeDeclaration = false }
-	vim.lsp.buf_request(0, "textDocument/references", params, function(err, references, _, _)
+	vim.lsp.buf_request(0, "textDocument/references", params, function(err, refs)
 		lspRefCount = nil
-		if not err and references then lspRefCount = #references end
+		if not err and refs and #refs > 0 then lspRefCount = #refs end
 	end)
 end
 
 local function lspReferencesCountStatusline()
-	local bufferClients = vim.lsp.get_active_clients { bufnr = fn.bufnr() }
-	local lspCapableOfReferences = false
-	for _, client in pairs(bufferClients) do
-		if client.name ~= "null-ls" and client.server_capabilities.referencesProvider then
-			lspCapableOfReferences = true
-		end
+	local currentBufNr = fn.bufnr()
+	local bufClients = vim.lsp.get_active_clients { bufnr = currentBufNr }
+	local lspProvidesRefs = false
+	for _, client in pairs(bufClients) do
+		if client.server_capabilities.referencesProvider then lspProvidesRefs = true end
 	end
-	local lspLoading = #vim.lsp.util.get_progress_messages() > 0
-	if lspLoading or not lspCapableOfReferences then return "" end
+	local lspLoading = #(vim.lsp.util.get_progress_messages()) > 0
+	if not lspProvidesRefs or lspLoading then return "" end
 
 	requestLspRefCount()
 	if not lspRefCount then return "" end
-	return "↪️ " .. lspRefCount
+	return " " .. lspRefCount
 end
 
 --------------------------------------------------------------------------------

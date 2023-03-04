@@ -1,4 +1,4 @@
-local maps = {
+local keymappings = {
 	["<Esc>"] = "close",
 	["<CR>"] = "select_default",
 	["<D-w>"] = "delete_buffer", -- only buffer picker
@@ -25,26 +25,23 @@ local options = {
 		borderchars = BorderChars,
 		history = { path = VimDataDir .. "telescope_history" }, -- sync the history
 		file_ignore_patterns = {
-			"%.DS_Store", -- macOS system file
 			"%.git/",
 			"%.git$", -- git dir in submodules
 			"node_modules/", -- node
 			"venv/", -- python
-			"lib/", -- python
 			"/$", -- folder
+			"%.spl", -- vim spelling file
 			"%.app/", -- internals of mac apps
-			"%.ttf", -- fonts
 			"%.pxd", -- Pixelmator
 			"%.spoon", -- Hammerspoon
 			"%.plist", -- Alfred
 			"%.data", -- Alfred
 			"%.zcomp", -- zsh completion data
 			"harpoon%-menu", -- harpoon
-			"%.harpoon", -- harpoon
+			"%.harpoon", -- harpoon/projects
 			"^INFO", -- custom info files
-			"%.string",
+			"%.ttf", -- fonts
 			"%.pdf",
-			"%.log",
 			"%.png",
 			"%.gif",
 			"%.jpe?g",
@@ -52,8 +49,8 @@ local options = {
 			"%.zip",
 		},
 		mappings = {
-			i = maps,
-			n = maps,
+			i = keymappings,
+			n = keymappings,
 		},
 		vimgrep_arguments = {
 			"rg",
@@ -87,7 +84,7 @@ local options = {
 
 	pickers = {
 		lsp_references = {
-			prompt_prefix = "⬅️",
+			prompt_prefix = " ",
 			show_line = false,
 			trim_text = true,
 			include_declaration = false,
@@ -142,10 +139,6 @@ local options = {
 		keymaps = { prompt_prefix = "  ", modes = { "n", "i", "c", "x", "o", "t" } },
 		oldfiles = { prompt_prefix = " " },
 		highlights = { prompt_prefix = " " },
-		git_files = {
-			prompt_prefix = " ",
-			show_untracked = true,
-		},
 		buffers = {
 			prompt_prefix = "﬘ ",
 			ignore_current_buffer = false,
