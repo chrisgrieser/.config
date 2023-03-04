@@ -75,7 +75,7 @@ function WorkLayout()
 	ShowAllSidebars()
 	dockSwitcher("work")
 	RestartApp("AltTab") 
-	hs.execute("sketchybar --set clock popup.drawing=true") -- fix
+	hs.execute("sketchybar --set clock popup.drawing=true") 
 
 	RunWithDelays({ 0.5, 1 }, function()
 		local workspace = IsAtOffice() and "Office" or "Home"
@@ -85,6 +85,7 @@ function WorkLayout()
 		App("Drafts"):activate()
 		App("Twitter"):mainWindow():raise()
 	end)
+	CleanupConsole()	
 end
 
 function MovieModeLayout()

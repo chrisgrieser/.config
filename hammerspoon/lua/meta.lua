@@ -16,12 +16,13 @@ function CleanupConsole()
 			or line:find("Loading Spoon: RoundedCorners")
 		local layoutInfo = line:find("No windows matched, skipping.")
 
-		if not ignore then
-			if layoutInfo then
-				layoutLinesCount = layoutLinesCount + 1
-			else
-				out = out .. line .. "\n"
-			end
+		if not ignore and not layoutInfo and layoutLinesCount == 0 then
+			out = out .. line .. "\n"
+		elseif layoutLinesCount > 3 then
+			-- skip multiline-log messages from applying a layout without a window open
+			layoutLinesCount = 0
+		elseif layoutInfo or layoutLinesCount > 0 then
+			layoutLinesCount = layoutLinesCount + 1
 		end
 	end
 

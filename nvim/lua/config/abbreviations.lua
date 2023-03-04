@@ -16,3 +16,7 @@ cmd.iabbrev("retrun return")
 cmd.iabbrev("onyl only")
 cmd.iabbrev("esle else")
 
+--------------------------------------------------------------------------------
+
+cmd.iabbrev("if if ()<Left><C-r>")
+	
