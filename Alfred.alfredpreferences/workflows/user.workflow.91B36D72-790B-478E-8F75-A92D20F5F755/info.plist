@@ -386,7 +386,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>| fzf {query}</string>
+				<string>| fzf "{query}"</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -484,7 +484,7 @@
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>fzf</string>
+				<string>pseudo fzf</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -502,7 +502,7 @@
 				<false/>
 				<key>variables</key>
 				<dict>
-					<key>toSearch</key>
+					<key>text</key>
 					<string>{query}</string>
 				</dict>
 			</dict>
@@ -787,7 +787,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>| grep -i {query}</string>
+				<string>| grep -i "{query}"</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -968,7 +968,7 @@
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<true/>
+				<false/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
