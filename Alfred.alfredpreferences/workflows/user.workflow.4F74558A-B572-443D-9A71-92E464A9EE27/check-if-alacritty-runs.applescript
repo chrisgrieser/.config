@@ -3,14 +3,22 @@
 # INFO has to be a separate script, since the next script is still considered active
 # and therefore won't run before alacritty is quit.
 on run
+	# guard clause: if alacritty not running, run next script opening alacritty
 	if application "Alacritty" is not running then return "not-running"
 
-	# If finder is frontmost, cd to finder window
-	tell application "System Events"
+	tell application "System Events" 
 		set frontApp to (name of first process where it is frontmost)
 	end tell
 
-	if frontApp is "Finder" then
+	# If alacritty is frontmost, hide it again for toggling visibility via the hotkey
+	if frontApp is "alacritty" then
+		tell application "System Events" to tell process "alacritty" to set visible to false
+
+	# if alacritty is not frontmost, show it again 
+	else if frontApp is not "Finder" then
+		tell application "Alacritty" to activate
+	# exception: If Finder is frontmost, cd to finder window
+	else
 		tell application "Finder"
 			if ((count windows) is 0) then return
 			-- clipboard cannot be preserved if it contains non-text (image, file)
@@ -37,8 +45,6 @@ on run
 			delay 0.05
 			set the clipboard to prevClipboard
 		end if
-	else
-		tell application "Alacritty" to activate
 	end if
 
 end run

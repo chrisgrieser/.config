@@ -8,3 +8,4 @@ keymap("n", "g/", function()
 	local url = "https://gitspartv.github.io/lua-patterns/?pattern=" .. pattern
 	fn.system("open '" .. url .. "'") -- opening method on macOS
 end, { desc = "Open next lua pattern in regex viewer", buffer = true })
+

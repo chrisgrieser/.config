@@ -115,6 +115,10 @@ end
 
 local lspRefCount
 local function requestLspRefCount()
+	if fn.mode() ~= "n" then
+		lspRefCount = nil
+		return
+	end
 	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
 	params.context = { includeDeclaration = false }
 	vim.lsp.buf_request(0, "textDocument/references", params, function(err, references, _, _)

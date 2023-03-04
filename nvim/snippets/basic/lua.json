@@ -40,6 +40,10 @@
 		"prefix": "return end",
 		"body": "return end"
 	},
+	"guard clause ending (+)": {
+		"prefix": "then return end",
+		"body": "then return end"
+	},
 	"string format": {
 		"prefix": "string format",
 		"body": "string.format(\"$0%s\", ${1:var})"
