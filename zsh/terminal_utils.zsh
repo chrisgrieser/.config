@@ -104,6 +104,11 @@ function zi() {
 	directoryInspect
 }
 
+# macos only
+function p() {
+	qlmanage -p "$1" &>/dev/null
+}
+
 # cd to last directory before quitting
 function ld() {
 	last_pwd_location="$DOTFILE_FOLDER/zsh/.last_pwd"

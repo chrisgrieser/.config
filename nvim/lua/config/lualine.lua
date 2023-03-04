@@ -117,21 +117,20 @@ local lspRefCount
 local function requestLspRefCount()
 	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
 	params.context = { includeDeclaration = false }
-	if fn.mode() ~= "n" then
-		lspRefCount = nil
-		return
-	end
 	vim.lsp.buf_request(0, "textDocument/references", params, function(err, references, _, _)
-		if not err and references then
-			lspRefCount = #references
-		else
-			lspRefCount = nil
-		end
+		lspRefCount = nil
+		if not err and references then lspRefCount = #references end
 	end)
 end
 
 local function lspReferencesCountStatusline()
-	local lspCapableOfReferences = vim.lsp.get_active_clients()[1].server_capabilities.referencesProvider
+	local bufferClients = vim.lsp.get_active_clients { bufnr = fn.bufnr() }
+	local lspCapableOfReferences = false
+	for _, client in pairs(bufferClients) do
+		if client.name ~= "null-ls" and client.server_capabilities.referencesProvider then
+			lspCapableOfReferences = true
+		end
+	end
 	local lspLoading = #vim.lsp.util.get_progress_messages() > 0
 	if lspLoading or not lspCapableOfReferences then return "" end
 

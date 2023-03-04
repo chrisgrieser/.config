@@ -595,7 +595,7 @@ echo "$backup"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>235</real>
+			<real>245</real>
 			<key>ypos</key>
 			<real>440</real>
 		</dict>
@@ -613,7 +613,7 @@ echo "$backup"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>240</real>
+			<real>245</real>
 			<key>ypos</key>
 			<real>690</real>
 		</dict>
