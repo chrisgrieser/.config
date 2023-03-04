@@ -31,14 +31,14 @@ local function setHigherBrightnessDuringDay()
 	else
 		brightness = 60
 	end
-	hs.screen("Built%-in"):setBrightness(brightness)
+	IMacDisplay:setBrightness(brightness)
 end
 
 --------------------------------------------------------------------------------
 -- LAYOUTS
 
 function WorkLayout()
-	print("🔲 Loading WorkLayout")
+	print("🔲 WorkLayout: loading")
 	setHigherBrightnessDuringDay()
 	HoleCover()
 
@@ -71,11 +71,11 @@ function WorkLayout()
 		App("Twitter"):mainWindow():raise()
 	end)
 	CleanupConsole()
-	print("🔲 Loading WorkLayout done")
+	print("🔲 WorkLayout: finished layouting")
 end
 
 function MovieModeLayout()
-	print("🔲 Loading MovieModeLayout")
+	print("🔲 MovieModeLayout: loading")
 	-- different PWAs due to not being M1 device
 	local targetMode = IsAtMother() and "mother-movie" or "movie"
 	dockSwitcher(targetMode)
@@ -103,6 +103,7 @@ function MovieModeLayout()
 	}
 	-- redundancy apparently sometimes needed
 	RunWithDelays(1.5, function() QuitApp("Twitter") end)
+	print("🔲 MovieModeLayout: finished layouting")
 end
 
 --------------------------------------------------------------------------------
