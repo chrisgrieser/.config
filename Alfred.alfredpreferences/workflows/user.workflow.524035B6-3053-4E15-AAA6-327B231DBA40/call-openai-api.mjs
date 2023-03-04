@@ -4,11 +4,13 @@
 //──────────────────────────────────────────────────────────────────────────────
 
 // CONFIG
-const temperature = 0;
-const maxTokens = 100;
-const model = "gpt-3.5-turbo"; // https://platform.openai.com/docs/models/gpt-3-5
-const staticPromptPart = "Finish the following sentence: ";
+const temperature = process.env.temperature;
+const maxTokens = process.env.maxTokens;
+const model = process.env.model;
+const staticPromptPart = process.env.staticPrompt;
 
+
+console.log("beep");
 //──────────────────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
 const prompt = argv[1].trim();
