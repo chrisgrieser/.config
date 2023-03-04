@@ -207,7 +207,105 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>100</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>limit: 4000</string>
+			<key>label</key>
+			<string>maximum tokens</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>maxTokens</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>0.5</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>value between 0 and 1</string>
+			<key>label</key>
+			<string>Temperature</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>temperature</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>gpt-3.5-turbo</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>gpt-3.5-turbo</string>
+						<string>gpt-3.5-turbo</string>
+					</array>
+					<array>
+						<string>text-davinci-003</string>
+						<string>text-davinci-003</string>
+					</array>
+					<array>
+						<string>text-davinci-002</string>
+						<string>text-davinci-002</string>
+					</array>
+					<array>
+						<string>code-davinci-002</string>
+						<string>code-davinci-002</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>https://platform.openai.com/docs/models/gpt-3-5</string>
+			<key>label</key>
+			<string>OpenAI Model</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>model</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Finish the following sentence:</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>String to be suffixed in front of every prompt</string>
+			<key>label</key>
+			<string>Static Prompt</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>staticPrompt</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string>0.9</string>
 	<key>webaddress</key>

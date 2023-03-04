@@ -34,10 +34,11 @@ local function tsConfig()
 		incremental_selection = {
 			enable = true,
 			keymaps = {
-				init_selection = false, -- set to `false` to disable one of the mappings
+			-- set to `false` to disable one of the mappings
 				node_incremental = "<CR>",
-				scope_incremental = false,
 				node_decremental = "<BS>",
+				init_selection = false, -- can init by simply entering visual mode
+				scope_incremental = false,
 			},
 		},
 		-- use treesitter for autoindent with `=`
@@ -62,7 +63,7 @@ local function tsConfig()
 				disable = { "markdown" }, -- so they can be remapped to link text object
 				lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 				keymaps = {
-					["af"] = "@function.outer",
+					["af"] = "@function.outer", -- [f]unction
 					["if"] = "@function.inner",
 					["aa"] = "@parameter.outer", -- [a]rgument
 					["ia"] = "@parameter.inner",
@@ -82,8 +83,7 @@ local function tsConfig()
 			},
 		},
 
-		-----------------------------------------------------------------------------
-		-- plugins
+		-- TREESITTER PLUGINS
 		endwise = { enable = true },
 		rainbow = {
 			enable = true,
@@ -128,20 +128,21 @@ local function tsConfig()
 	})
 end
 
+--------------------------------------------------------------------------------
+
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		event = "VimEnter",
 		config = tsConfig,
-		build = function()
-			-- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
-			require("nvim-treesitter.install").update { with_sync = true }
-		end,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"HiPhish/nvim-ts-rainbow2",
-			"RRethy/nvim-treesitter-endwise",
+			"RRethy/nvim-treesitter-endwise", -- autopair, but for keywords
 		},
+		-- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
+		build = function() require("nvim-treesitter.install").update { with_sync = true } end,
 	},
 	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
 	{ "hail2u/vim-css3-syntax", ft = "css" }, -- better syntax highlighting (until treesitter css looks decent…)
