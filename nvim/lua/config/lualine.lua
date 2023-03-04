@@ -110,8 +110,34 @@ local function harpoonIndicator()
 	for _, file in pairs(markedFiles) do
 		if file.filename == currentFile then return "ﯠ" end
 	end
-	return "" 
+	return ""
 end
+
+---Counts number of LSP references of item under the cursor
+---@param count? number
+local function lspReferencesCount(count)
+	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
+	params.context.includeDeclaration = false
+	vim.pretty_print("params:", params)
+
+	print("count:", count)
+	if count > 0 then
+		return "璉 "..tostring(count)
+	elseif count == 0 then
+		return ""
+	else
+		vim.lsp.buf_request(0, "textDocument/references", params, function(err, references, _, _)
+			if err then
+				vim.notify("Error when finding references: " .. err.message, logError)
+				return
+			end
+			lspReferencesCount(#references)
+		end)
+		return ""
+	end
+end
+
+keymap("n", "<D-f>", lspReferencesCount)
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -160,6 +186,7 @@ require("lualine").setup {
 	winbar = {
 		lualine_a = {
 			{ clock },
+			{ lspReferencesCount },
 		},
 		lualine_b = {
 			{
