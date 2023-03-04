@@ -108,10 +108,6 @@ keymap("n", "gC", "g,", { desc = "goto previous change" })
 keymap( "n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]], { desc = "next quickfix item" })
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickfix list" })
 
--- Leap
-keymap({ "n", "o", "x" }, "ö", "<Plug>(leap-forward-to)", { desc = "Leap forward" })
-keymap("n", "Ö", "<Plug>(leap-backward-to)", { desc = "Leap backward" })
-
 --------------------------------------------------------------------------------
 
 -- LUASNIP
