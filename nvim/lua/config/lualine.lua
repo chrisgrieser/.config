@@ -80,12 +80,12 @@ local function searchCounter()
 	return " " .. current .. "/" .. total .. " " .. searchTerm
 end
 
--- clock, but only when full screen (as it covers the sketchybar then)
 local function clock()
+	-- only show the clock when it covers my menubar clock
 	if fn.winwidth(0) < 110 then return "" end
 	local time = os.date():sub(12, 16)
 
-	-- blinking `:`, requires statusline-refresh interval of 1000
+	-- blinking `:`
 	if os.time() % 2 == 1 then time = time:gsub(":", " ") end
 
 	return " " .. time
@@ -131,9 +131,11 @@ local function requestLspRefCount()
 end
 
 local function lspReferencesCountStatusline()
-	requestLspRefCount()	
+	local lspCapableOfReferences = vim.lsp.get_active_clients()[1].server_capabilities.referencesProvider
+	if not lspCapableOfReferences then return "" end
+	requestLspRefCount()
 	if not lspRefCount then return "" end
-	return "璉" .. lspRefCount	
+	return "↪️ " .. lspRefCount
 end
 
 --------------------------------------------------------------------------------
@@ -161,7 +163,6 @@ require("lualine").setup {
 		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
-			{ lspReferencesCountStatusline },
 			{ searchCounter },
 		},
 		lualine_x = {
@@ -193,6 +194,7 @@ require("lualine").setup {
 			},
 		},
 		lualine_c = {
+			{ lspReferencesCountStatusline },
 			{
 				function() return " " end, -- dummy to avoid bar appearing and disappearing
 				cond = showBreadcrumbs,

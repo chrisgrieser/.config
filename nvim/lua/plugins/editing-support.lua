@@ -239,10 +239,6 @@ return {
 		keys = ":",
 	},
 	{
-		"ggandor/leap.nvim",
-		event = "VeryLazy", -- lazy-loading via keys does not work
-	},
-	{
 		"unblevable/quick-scope",
 		keys = { "f", "F", "t", "T" },
 		init = function()
