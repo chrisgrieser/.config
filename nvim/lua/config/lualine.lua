@@ -132,7 +132,9 @@ end
 
 local function lspReferencesCountStatusline()
 	local lspCapableOfReferences = vim.lsp.get_active_clients()[1].server_capabilities.referencesProvider
-	if not lspCapableOfReferences then return "" end
+	local lspLoading = #vim.lsp.util.get_progress_messages() > 0
+	if lspLoading or not lspCapableOfReferences then return "" end
+
 	requestLspRefCount()
 	if not lspRefCount then return "" end
 	return "↪️ " .. lspRefCount
