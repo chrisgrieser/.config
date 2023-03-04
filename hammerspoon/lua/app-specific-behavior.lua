@@ -415,7 +415,7 @@ DiscordAppWatcher = Aw.new(function(appName, eventType)
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	if eventType == Aw.launched then
 		-- stylua: ignore
-		RunWithDelays({1, 3}, function()
+		RunWithDelays({3, 4}, function()
 			OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 		end)
 	end

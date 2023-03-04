@@ -14,4 +14,5 @@ cmd.iabbrev("nto not")
 cmd.iabbrev("shwo show")
 cmd.iabbrev("retrun return")
 cmd.iabbrev("onyl only")
+cmd.iabbrev("esle else")
 

@@ -1,9 +1,18 @@
 require("config.utils")
 --------------------------------------------------------------------------------
+
 bo.path = ".,,../" -- also search parent directory (useful for Alfred)
 
+cmd.iabbrev("<buffer> if if ()<Left>")
+
+--------------------------------------------------------------------------------
+
+-- stylua: ignore
 keymap({ "o", "x" }, "a/", function() require("various-textobjs").jsRegex(false) end, { desc = "outer regex textobj" })
 keymap({ "o", "x" }, "i/", function() require("various-textobjs").jsRegex(true) end, { desc = "inner regex textobj" })
+
+
+
 
 -- Open regex in regex101 and regexper (railroad diagram)
 keymap("n", "g/", function()
@@ -24,4 +33,4 @@ keymap("n", "g/", function()
 
 	os.execute("open '" .. url1 .. "'") -- opening method on macOS
 	os.execute("open '" .. url2 .. "'") 
-end, { desc = "Open next js regex in regex101" })
+end, { desc = "Open next js regex in regex101", buffer = true })

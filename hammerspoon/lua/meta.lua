@@ -7,20 +7,27 @@ local cons = hs.console
 function CleanupConsole()
 	local consoleOutput = tostring(hs.console.getConsole())
 	local out = ""
+	local layoutLinesCount = 0
+
 	for line in string.gmatch(consoleOutput, "[^\n]+") do -- split by new lines
-		if
-			not (
-				line:find("Warning:.*LuaSkin: hs.canvas:delete")
-				or line:find("hotkey: .*abled hotkey")
-				or line:find("Loading extensions?: ")
-				or line:find("Loading Spoon: RoundedCorners")
-			)
-		then
-			out = out .. line .. "\n"
+		local ignore = line:find("Warning:.*LuaSkin: hs.canvas:delete")
+			or line:find("hotkey: .*abled hotkey")
+			or line:find("Loading extensions?: ")
+			or line:find("Loading Spoon: RoundedCorners")
+		local layoutInfo = line:find("No windows matched, skipping.")
+
+		if not ignore then
+			if layoutInfo then
+				layoutLinesCount = layoutLinesCount + 1
+			else
+				out = out .. line .. "\n"
+			end
 		end
 	end
+
 	-- capturing digit necessary to prevent repeated triggering of this gsub
-	out = out:gsub("(%d) ERROR:", "%1 🔴 ERROR:") 
+	out = out:gsub("(%d) ERROR:", "%1 🔴 ERROR:")
+
 	hs.console.setConsole(out)
 end
 
