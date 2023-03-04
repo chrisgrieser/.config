@@ -31,7 +31,8 @@ const fileArray = app
 			-E "Alfred.alfredpreferences/workflowextras" \\
 			-E "Alfred.alfredpreferences/workflows/shimmering-obsidian" \\
 			-E "Alfred.alfredpreferences/workflows/alfred-bibtex-citation-picker" \\
-			-E "Alfred.alfredpreferences/workflows/user.workflow.3BF713ED-02D0-4127-8126-26E36BF15CFC/__pycache__" \\
+			-E "Alfred.alfredpreferences/workflows/user.workflow.3BF713ED-02D0-4127-8126-26E36BF15CFC" \\
+			-E "Alfred.alfredpreferences/workflows/user.workflow.90A6E1C0-4A00-40C7-9233-FB165AE431F3" \\
 			-E "alacritty/colors/*" \\
 			-E "hammerspoon/Spoons/*" \\
 			-E "*/vale/styles/*/*.yml" \\
