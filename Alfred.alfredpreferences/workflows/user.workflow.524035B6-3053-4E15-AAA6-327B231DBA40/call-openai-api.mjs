@@ -3,19 +3,20 @@
 // NOTE file needs to be `.mjs` because of top-level `await`
 //──────────────────────────────────────────────────────────────────────────────
 
-// CONFIG
-const temperature = process.env.temperature;
-const maxTokens = process.env.maxTokens;
+const temperature = parseInt(process.env.temperature);
+const maxTokens = parseInt(process.env.maxTokens);
 const model = process.env.model;
 const staticPromptPart = process.env.staticPrompt;
 
-
-console.log("beep");
-
-//──────────────────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
 const prompt = argv[1].trim();
-const apiKey = argv[0];
+const apiKey = argv[0] || process.env.apiKey; // read either via zshenv or from Alfred config
+if (!apiKey) {
+	console.error("No API key provided.");
+	process.exit(1);
+}
+
+//──────────────────────────────────────────────────────────────────────────────
 
 async function run(dynamicPromptPart) {
 	try {
@@ -26,18 +27,23 @@ async function run(dynamicPromptPart) {
 				"Authorization": `Bearer ${apiKey}`,
 			},
 			body: JSON.stringify({
-				prompt: staticPromptPart + dynamicPromptPart,
+				prompt: `${staticPromptPart} ${dynamicPromptPart}`,
 				model: model,
 				temperature: temperature,
 				max_tokens: maxTokens /* eslint-disable-line camelcase */,
 			}),
 		});
-		const data = await response.json();
-		// const usedTokens = data.usage.total_tokens;
 
-		const text = data.choices[0].text.trim(); // can also return multiple responses as choices
-		// "{cursor}" is dynamic placeholder for Alfred
-		process.stdout.write(`${dynamicPromptPart}{cursor}* ${text}`); 
+		const data = await response.json();
+		if (data.error) {
+			console.error(data.error);
+			return;
+		}
+
+		// INFO can also return multiple responses as choices
+		const text = data.choices[0].text.trim();
+		// "{cursor}" is dynamic palceholder for Alfred
+		process.stdout.write(`${dynamicPromptPart} *{cursor} ${text}`);
 	} catch (error) {
 		console.error(`Error: ${error}`);
 	}

@@ -62,17 +62,15 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string># API Key accessed from .zshenv to keep it out of the dotfiles
-prompt=$1
-node ./call-openai-api.mjs "$OPENAI_API_KEY" "$prompt"</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>trigger-open-ai-call.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -119,6 +117,25 @@ node ./call-openai-api.mjs "$OPENAI_API_KEY" "$prompt"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>7F59CB22-957B-4E74-8A9E-3329447A0232</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -138,25 +155,6 @@ node ./call-openai-api.mjs "$OPENAI_API_KEY" "$prompt"</string>
 			<string>FB4D8632-309B-4BB0-BC22-4F8E12E09362</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>7F59CB22-957B-4E74-8A9E-3329447A0232</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -183,9 +181,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>785</real>
+			<real>485</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>285</real>
 		</dict>
 		<key>92ED8532-D717-4F99-987C-4A3810BC7B5E</key>
 		<dict>
@@ -294,7 +292,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>description</key>
 			<string>String to be suffixed in front of every prompt</string>
