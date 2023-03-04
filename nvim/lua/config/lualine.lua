@@ -113,29 +113,28 @@ local function harpoonIndicator()
 	return ""
 end
 
-local function lspReferencesCount()
-	local function wrapperForAsyncLspCall(count)
-		if count then
-			return "璉 " .. tostring(count)
-		else
-			local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
-			params.context = { includeDeclaration = false }
-			vim.lsp.buf_request(0, "textDocument/references", params, function(err, references, _, _)
-				if err then
-					vim.notify("Error when finding references: " .. err.message, logError)
-					return
-				end
-				if references and #references > 0 then
-					wrapperForAsyncLspCall(#references)
-				end
-			end)
-			return ""
-		end
+local lspRefCount
+local function requestLspRefCount()
+	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
+	params.context = { includeDeclaration = false }
+	if fn.mode() ~= "n" then
+		lspRefCount = nil
+		return
 	end
-	return wrapperForAsyncLspCall()
+	vim.lsp.buf_request(0, "textDocument/references", params, function(err, references, _, _)
+		if not err and references then
+			lspRefCount = #references
+		else
+			lspRefCount = nil
+		end
+	end)
 end
 
-keymap("n", "<D-f>", lspReferencesCount)
+local function lspReferencesCountStatusline()
+	requestLspRefCount()	
+	if not lspRefCount then return "" end
+	return "璉" .. lspRefCount	
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -162,6 +161,7 @@ require("lualine").setup {
 		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
+			{ lspReferencesCountStatusline },
 			{ searchCounter },
 		},
 		lualine_x = {
@@ -184,7 +184,6 @@ require("lualine").setup {
 	winbar = {
 		lualine_a = {
 			{ clock },
-			-- { lspReferencesCount },
 		},
 		lualine_b = {
 			{
