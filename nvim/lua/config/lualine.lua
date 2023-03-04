@@ -58,8 +58,6 @@ navic.setup {
 	depth_limit_indicator = "…",
 }
 
-local function showBreadcrumbs() return navic.is_available() and not (bo.filetype == "css") end
-
 local function selectionCount()
 	local isVisualMode = fn.mode():find("[Vv]")
 	if not isVisualMode then return "" end
@@ -191,7 +189,7 @@ require("lualine").setup {
 		lualine_b = {
 			{
 				navic.get_location,
-				cond = showBreadcrumbs,
+				cond = navic.is_available,
 				section_separators = topSeparators,
 			},
 		},
@@ -199,7 +197,7 @@ require("lualine").setup {
 			{ lspReferencesCountStatusline },
 			{
 				function() return " " end, -- dummy to avoid bar appearing and disappearing
-				cond = showBreadcrumbs,
+				cond = navic.is_available,
 			},
 		},
 		lualine_x = {
