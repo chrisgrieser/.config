@@ -119,25 +119,6 @@ node ./call-openai-api.mjs "$OPENAI_API_KEY" "$prompt"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>7F59CB22-957B-4E74-8A9E-3329447A0232</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -157,6 +138,25 @@ node ./call-openai-api.mjs "$OPENAI_API_KEY" "$prompt"</string>
 			<string>FB4D8632-309B-4BB0-BC22-4F8E12E09362</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>7F59CB22-957B-4E74-8A9E-3329447A0232</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -183,9 +183,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>485</real>
+			<real>785</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>320</real>
 		</dict>
 		<key>92ED8532-D717-4F99-987C-4A3810BC7B5E</key>
 		<dict>

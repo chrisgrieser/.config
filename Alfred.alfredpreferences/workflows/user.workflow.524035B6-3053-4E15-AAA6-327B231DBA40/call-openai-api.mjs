@@ -11,6 +11,7 @@ const staticPromptPart = process.env.staticPrompt;
 
 
 console.log("beep");
+
 //──────────────────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
 const prompt = argv[1].trim();
