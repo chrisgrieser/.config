@@ -1,20 +1,5 @@
 return {
 
-	-- Treesitter & Syntax Highlighting
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = function()
-			-- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
-			require("nvim-treesitter.install").update { with_sync = true }
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-refactor",
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"HiPhish/nvim-ts-rainbow2",
-		},
-	},
-	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
-	{ "hail2u/vim-css3-syntax", ft = "css" }, -- better syntax highlighting (until treesitter css looks decent…)
 
 	-- LSP
 	{
