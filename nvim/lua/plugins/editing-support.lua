@@ -221,9 +221,9 @@ return {
 			require("ssr").setup {
 				keymaps = { close = "Q" },
 			}
-			autocmd("FileType", {
+			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "ssr",
-				callback = function() wo.sidescrolloff = 0 end,
+				callback = function() vim.wo.sidescrolloff = 0 end,
 			})
 		end,
 	},
@@ -238,7 +238,10 @@ return {
 		config = function() require("numb").setup() end,
 		keys = ":",
 	},
-	{ "ggandor/leap.nvim", event = "VeryLazy" },
+	{
+		"ggandor/leap.nvim",
+		event = "VeryLazy", -- lazy-loading via keys does not work
+	},
 	{
 		"unblevable/quick-scope",
 		keys = { "f", "F", "t", "T" },

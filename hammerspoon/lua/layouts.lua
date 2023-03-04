@@ -15,19 +15,6 @@ local function isWeekend()
 	return weekday == "Sun" or weekday == "Sat"
 end
 
----creates a layout for hs.layout.apply
----@param pos hs.geometry
----@param display hs.screen
----@param apps string[]
----@return table to be used by hs.layout.apply
-local function createLayout(pos, display, apps)
-	local out = {}
-	for _, app in pairs(apps) do
-		table.insert(out, { app, nil, display, pos, nil, nil })
-	end
-	return out
-end
-
 local function setHigherBrightnessDuringDay()
 	local hasBrightnessSensor = hs.brightness.ambient() > -1
 	if not hasBrightnessSensor then return end
@@ -61,31 +48,30 @@ function WorkLayout()
 	if not isWeekend() then OpenApp("Slack") end
 	require("lua.private").closer()
 
-	local layout = createLayout(PseudoMaximized, IMacDisplay, {
-		"Vivaldi",
-		"neovide",
-		"Slack",
-		"Discord",
-		"Obsidian",
-		"Drafts",
-		"Mimestream",
-		"alacritty",
-	})
-	hs.layout.apply(layout)
+	hs.layout.apply {
+		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Obsidian", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Drafts", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
+	}
+
 	ShowAllSidebars()
 	dockSwitcher("work")
-	RestartApp("AltTab") 
-	hs.execute("sketchybar --set clock popup.drawing=true") 
+	RestartApp("AltTab")
+	hs.execute("sketchybar --set clock popup.drawing=true")
 
 	RunWithDelays({ 0.5, 1 }, function()
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
-		TwitterToTheSide()
 		TwitterScrollUp()
+		TwitterToTheSide()
 		App("Drafts"):activate()
 		App("Twitter"):mainWindow():raise()
 	end)
-	CleanupConsole()	
+	CleanupConsole()
+	print("🔲 Loading WorkLayout done")
 end
 
 function MovieModeLayout()
@@ -98,7 +84,7 @@ function MovieModeLayout()
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
 
-	RunWithDelays({ 0, 1 }, function() OpenApp{"YouTube", "BetterTouchTool"} end)
+	RunWithDelays({ 0, 1 }, function() OpenApp { "YouTube", "BetterTouchTool" } end)
 	QuitApp {
 		"Obsidian",
 		"Drafts",
