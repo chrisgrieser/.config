@@ -113,28 +113,26 @@ local function harpoonIndicator()
 	return ""
 end
 
----Counts number of LSP references of item under the cursor
----@param count? number
-local function lspReferencesCount(count)
-	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
-	params.context.includeDeclaration = false
-	vim.pretty_print("params:", params)
-
-	print("count:", count)
-	if count > 0 then
-		return "璉 "..tostring(count)
-	elseif count == 0 then
-		return ""
-	else
-		vim.lsp.buf_request(0, "textDocument/references", params, function(err, references, _, _)
-			if err then
-				vim.notify("Error when finding references: " .. err.message, logError)
-				return
-			end
-			lspReferencesCount(#references)
-		end)
-		return ""
+local function lspReferencesCount()
+	local function wrapperForAsyncLspCall(count)
+		if count then
+			return "璉 " .. tostring(count)
+		else
+			local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
+			params.context = { includeDeclaration = false }
+			vim.lsp.buf_request(0, "textDocument/references", params, function(err, references, _, _)
+				if err then
+					vim.notify("Error when finding references: " .. err.message, logError)
+					return
+				end
+				if references and #references > 0 then
+					wrapperForAsyncLspCall(#references)
+				end
+			end)
+			return ""
+		end
 	end
+	return wrapperForAsyncLspCall()
 end
 
 keymap("n", "<D-f>", lspReferencesCount)
@@ -186,7 +184,7 @@ require("lualine").setup {
 	winbar = {
 		lualine_a = {
 			{ clock },
-			{ lspReferencesCount },
+			-- { lspReferencesCount },
 		},
 		lualine_b = {
 			{
