@@ -2,7 +2,7 @@ require("config.utils")
 --------------------------------------------------------------------------------
 
 local function mixedIndentation()
-	local ignoredFts = { "css", "markdown", "sh", "lazy", "grapple", "" }
+	local ignoredFts = { "css", "markdown", "sh", "lazy", "" }
 	if vim.tbl_contains(ignoredFts, bo.filetype) or fn.mode() == "i" or bo.buftype == "terminal" then
 		return ""
 	end
@@ -91,9 +91,32 @@ local function harpoonIndicator()
 end
 
 --------------------------------------------------------------------------------
+-- LSP-RELATED STATUS COMPONENTS
 
+local navic = require("nvim-navic")
+navic.setup {
+	icons = { Object = "ﴯ " },
+	separator = "  ",
+	depth_limit = 7,
+	depth_limit_indicator = "…",
+}
 
+-- simple alternative to fidget.nvim 
+-- via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
+local function lsp_progress()
+	local messages = vim.lsp.util.get_progress_messages()
+	if #messages == 0 then return "" end
+	local client = messages[1].name and messages[1].name .. ": " or ""
+	if client:find("null%-ls") then return "" end
+	local progress = messages[1].percentage or 0
+	local task = messages[1].title or ""
+	task = task:gsub("^(%w+).*", "%1") -- only first word
+	return client .. progress .. "%% " .. task
+end
 
+local function showNavic() return navic.is_available() and not (bo.filetype == "css") end
+
+-- show number of references for entity under cursor
 local lspRefCount
 local function requestLspRefCount()
 	if fn.mode() ~= "n" then
@@ -102,9 +125,9 @@ local function requestLspRefCount()
 	end
 	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
 	params.context = { includeDeclaration = false }
-	vim.lsp.buf_request(0, "textDocument/references", params, function(err, refs)
+	vim.lsp.buf_request(0, "textDocument/references", params, function(error, refs)
 		lspRefCount = nil
-		if not err and refs and #refs > 0 then lspRefCount = #refs end
+		if not error and refs then lspRefCount = #refs end
 	end)
 end
 

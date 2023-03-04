@@ -20,6 +20,7 @@ local darkTransparency = 0.93
 local lightTransparency = 0.94
 
 --------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ---@param hlgroupfrom string
 ---@param hlgroupto string
@@ -30,11 +31,10 @@ end
 ---@param hlgroup string
 ---@param changes string
 local function setHighlight(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. changes) end
---------------------------------------------------------------------------------
 
 local function customHighlights()
-		-- stylua: ignore
-		local highlights = { "DiagnosticUnderlineError", "DiagnosticUnderlineWarn", "DiagnosticUnderlineHint", "DiagnosticUnderlineInfo", "SpellLocal", "SpellRare", "SpellCap", "SpellBad" }
+	-- stylua: ignore
+	local highlights = { "DiagnosticUnderlineError", "DiagnosticUnderlineWarn", "DiagnosticUnderlineHint", "DiagnosticUnderlineInfo", "SpellLocal", "SpellRare", "SpellCap", "SpellBad" }
 	for _, v in pairs(highlights) do
 		setHighlight(v, "gui=underdouble cterm=underline")
 	end
@@ -56,7 +56,7 @@ local function themeModifications()
 	local mode = opt.background:get()
 	local theme = vim.g.colors_name
 	local modes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
-	-- FIX lualine_a not getting bold in various themes?!
+	-- FIX lualine_a not getting bold in some themes
 	for _, v in pairs(modes) do
 		setHighlight("lualine_a_" .. v, "gui=bold")
 	end
@@ -87,7 +87,7 @@ local function themeModifications()
 	elseif theme == "kanagawa" then
 		setHighlight("ScrollView", "guibg=#303050")
 		setHighlight("VirtColumn", "guifg=#323036")
-		linkHighlight("MoreMsg", "Folded")
+		linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
 
 		-- zephyr
 	elseif theme == "zephyr" then
@@ -126,7 +126,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	end,
 })
 
--- DARK MODE / LIGHT MODE
 ---@param mode string "dark"|"light"
 function SetThemeMode(mode)
 	vim.o.background = mode
@@ -144,4 +143,5 @@ function InitializeTheme()
 	SetThemeMode(targetMode)
 end
 
+-- return the list for lazy.nvim
 return themePackages
