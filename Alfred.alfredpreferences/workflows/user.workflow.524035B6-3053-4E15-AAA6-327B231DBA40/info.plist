@@ -36,6 +36,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>537C9592-CA70-4E39-A6FB-77555752AEB6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>0FD32B7B-CE8C-4871-A07E-564BB91F0477</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -56,6 +66,27 @@
 	<string>OpenAI</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>🤖Thinking…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>537C9592-CA70-4E39-A6FB-77555752AEB6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -176,6 +207,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>285</real>
 		</dict>
+		<key>537C9592-CA70-4E39-A6FB-77555752AEB6</key>
+		<dict>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>145</real>
+		</dict>
 		<key>7F59CB22-957B-4E74-8A9E-3329447A0232</key>
 		<dict>
 			<key>note</key>
@@ -210,6 +248,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>sk-...</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>If empty, will look through `.zshenv` for a variable `$OPENAI_API_KEY`.</string>
+			<key>label</key>
+			<string>OpenAI API Key</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>apiKey</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>100</string>
 				<key>placeholder</key>
 				<string></string>
@@ -219,7 +278,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>limit: 4000</string>
+			<string>between 1 and 4000</string>
 			<key>label</key>
 			<string>maximum tokens</string>
 			<key>type</key>
@@ -240,7 +299,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>value between 0 and 1</string>
+			<string>between 0 and 1</string>
 			<key>label</key>
 			<string>Temperature</string>
 			<key>type</key>
@@ -252,13 +311,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>gpt-3.5-turbo</string>
+				<string>text-davinci-003</string>
 				<key>pairs</key>
 				<array>
-					<array>
-						<string>gpt-3.5-turbo</string>
-						<string>gpt-3.5-turbo</string>
-					</array>
 					<array>
 						<string>text-davinci-003</string>
 						<string>text-davinci-003</string>
