@@ -7,12 +7,10 @@ cmd.iabbrev("<buffer> if if ()<Left>")
 
 --------------------------------------------------------------------------------
 
--- stylua: ignore
+-- stylua: ignore start
 keymap({ "o", "x" }, "a/", function() require("various-textobjs").jsRegex(false) end, { desc = "outer regex textobj" })
 keymap({ "o", "x" }, "i/", function() require("various-textobjs").jsRegex(true) end, { desc = "inner regex textobj" })
-
-
-
+-- stylua: ignore end
 
 -- Open regex in regex101 and regexper (railroad diagram)
 keymap("n", "g/", function()
@@ -32,5 +30,5 @@ keymap("n", "g/", function()
 	local url2 = "https://regexper.com/#" .. pattern
 
 	os.execute("open '" .. url1 .. "'") -- opening method on macOS
-	os.execute("open '" .. url2 .. "'") 
+	os.execute("open '" .. url2 .. "'")
 end, { desc = "Open next js regex in regex101", buffer = true })

@@ -16,8 +16,8 @@ return {
 				},
 				extra = {
 					eol = "Q",
-					above = "<Nop>",
-					below = "<Nop>",
+					above = "qO",
+					below = "qo",
 				},
 			}
 		end,
