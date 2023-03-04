@@ -13,7 +13,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 pipe_cmd="$*"
 result=$(cat <<EOF | ${(z)pipe_cmd}
-${selection}
+${text}
 EOF
 )
 
