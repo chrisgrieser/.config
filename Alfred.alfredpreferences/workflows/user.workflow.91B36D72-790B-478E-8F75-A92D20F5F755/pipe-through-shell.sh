@@ -23,7 +23,8 @@ if [[ $? == 0 ]] ; then
 	echo -n "$result" | pbcopy
 	sleep 0.1
 	osascript -e 'tell application "System Events" to keystroke "v" using {command down}'
+	echo -n "✅ exit 0"
 else
-	echo -n "🛑 non-zero exit code"
+	echo -n "🛑 non-zero exit"
 fi
 

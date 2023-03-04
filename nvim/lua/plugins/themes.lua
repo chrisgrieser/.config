@@ -1,18 +1,17 @@
--- local lightTheme = "rose-pine"
 -- local darkTheme = "bluloco"
-local darkTheme = "tokyonight-moon"
+-- local darkTheme = "tokyonight-moon"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
 local lightTheme = "dawnfox"
 -- local darkTheme = "zephyr"
+local darkTheme = "kanagawa"
 
 local themePackages = {
 	-- { "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
-	-- { "rose-pine/neovim", name = "rose-pine" },
 	"EdenEast/nightfox.nvim",
 	-- "glepnir/zephyr-nvim",
 	"folke/tokyonight.nvim",
-	-- "rebelot/kanagawa.nvim",
+	"rebelot/kanagawa.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",
 }
@@ -61,11 +60,6 @@ function ThemeSettings()
 		setHighlight("urls", "cterm=underline gui=underline")
 		fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
-		-- horizontal rulers
-		-- fn.matchadd("HRs", "--------*")
-		-- fn.matchadd("HRs", ".*───*")
-		-- setHighlight("HRs", "gui=bold cterm=bold")
-
 		--------------------------------------------------------------------------
 
 		-- rainbow brackets without aggressive red
@@ -86,6 +80,10 @@ function ThemeSettings()
 		local mode = opt.background:get()
 		local theme = g.colors_name
 		local modes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
+		-- FIX lualine_a not getting bold in various themes?!
+		for _, v in pairs(modes) do
+			setHighlight("lualine_a_" .. v, "gui=bold")
+		end
 
 		-- tokyonight
 		if theme == "tokyonight" then
@@ -98,9 +96,6 @@ function ThemeSettings()
 			end
 			setHighlight("GitSignsChange", "guifg=#acaa62")
 			setHighlight("GitSignsAdd", "guifg=#7fcc82")
-			for _, v in pairs(modes) do
-				setHighlight("lualine_a_" .. v, "gui=bold")
-			end
 
 		-- oxocarbon
 		elseif theme == "oxocarbon" then
@@ -109,34 +104,14 @@ function ThemeSettings()
 
 		-- blueloco
 		elseif theme == "bluloco" then
-			for _, v in pairs(modes) do
-				setHighlight("lualine_a_" .. v, "gui=bold")
-			end
 			setHighlight("ScrollView", "guibg=#303d50")
 			setHighlight("ColorColumn", "guibg=#2e3742")
-
-		-- rose-pine
-		elseif theme == "rose-pine" then
-			linkHighlight("IndentBlanklineChar", "FloatBorder")
-			setHighlight("VirtColumn", "guifg=#deccba")
-			setHighlight("ColorColumn", "guibg=#eae2d8")
-			local blueHlgroups = {
-				"@keyword",
-				"@include",
-				"@exception",
-				"@repeat",
-				"@conditional",
-				"Conditional",
-				"@string.escape",
-			}
-			for _, hlgroup in pairs(blueHlgroups) do
-				setHighlight(hlgroup, "guifg=#4fa1c3")
-			end
 
 		-- kanagawa
 		elseif theme == "kanagawa" then
 			setHighlight("ScrollView", "guibg=#303050")
 			setHighlight("VirtColumn", "guifg=#323036")
+			linkHighlight("MoreMsg", "Folded")
 
 		-- zephyr
 		elseif theme == "zephyr" then
@@ -151,7 +126,7 @@ function ThemeSettings()
 			setHighlight("ScrollView", "guibg=#303050")
 			-- linkHighlight("@field.yaml", "@field") -- HACK https://github.com/EdenEast/nightfox.nvim/issues/314
 
-		-- melange
+			-- melange
 		elseif theme == "melange" then
 			linkHighlight("Todo", "IncSearch")
 			if mode == "light" then

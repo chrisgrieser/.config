@@ -58,6 +58,8 @@ navic.setup {
 	depth_limit_indicator = "…",
 }
 
+local function showNavic() return navic.is_available() and not (bo.filetype == "css") end
+
 local function selectionCount()
 	local isVisualMode = fn.mode():find("[Vv]")
 	if not isVisualMode then return "" end
@@ -163,6 +165,7 @@ require("lualine").setup {
 		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
+			{ lspReferencesCountStatusline },
 			{ searchCounter },
 		},
 		lualine_x = {
@@ -189,15 +192,14 @@ require("lualine").setup {
 		lualine_b = {
 			{
 				navic.get_location,
-				cond = navic.is_available,
+				cond = showNavic,
 				section_separators = topSeparators,
 			},
 		},
 		lualine_c = {
-			{ lspReferencesCountStatusline },
 			{
 				function() return " " end, -- dummy to avoid bar appearing and disappearing
-				cond = navic.is_available,
+				cond = showNavic,
 			},
 		},
 		lualine_x = {
