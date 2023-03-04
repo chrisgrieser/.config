@@ -3,8 +3,8 @@
 // NOTE file needs to be `.mjs` because of top-level `await`
 //──────────────────────────────────────────────────────────────────────────────
 
-const temperature = parseInt(process.env.temperature);
 const maxTokens = parseInt(process.env.maxTokens);
+const temperature = parseFloat(process.env.temperature);
 const model = process.env.model;
 const staticPromptPart = process.env.staticPrompt;
 
@@ -42,8 +42,8 @@ async function run(dynamicPromptPart) {
 
 		// INFO can also return multiple responses as choices
 		const text = data.choices[0].text.trim();
-		// "{cursor}" is dynamic palceholder for Alfred
-		process.stdout.write(`${dynamicPromptPart} *{cursor} ${text}`);
+		// "{cursor}" is dynamic placeholder for Alfred
+		process.stdout.write(`${dynamicPromptPart} {cursor}${text}`);
 	} catch (error) {
 		console.error(`Error: ${error}`);
 	}
