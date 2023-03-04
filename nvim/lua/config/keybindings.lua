@@ -362,6 +362,8 @@ local function harpoonFileNumber()
 	return fileNumber
 end
 
+-- find files
+-- add project name + number of harpoon files to prompt title
 keymap("n", "go", function()
 	local pwd = vim.loop.cwd() or ""
 	local projectName = pwd:gsub(".*/", "")
