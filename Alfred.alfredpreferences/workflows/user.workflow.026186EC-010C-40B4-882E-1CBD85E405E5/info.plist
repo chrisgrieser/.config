@@ -98,7 +98,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B5509DDA-D7FD-4F86-B58F-383D0CA69124</string>
+				<string>4BC727A5-5799-4FB8-9D08-D414622ADE33</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -212,25 +212,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>alacritty --command spt</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
+				<key>browser</key>
 				<string></string>
-				<key>type</key>
-				<integer>5</integer>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://open.spotify.com</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>B5509DDA-D7FD-4F86-B58F-383D0CA69124</string>
+			<string>4BC727A5-5799-4FB8-9D08-D414622ADE33</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -800,6 +798,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>810</real>
 		</dict>
+		<key>4BC727A5-5799-4FB8-9D08-D414622ADE33</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>325</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
 		<key>5398DB90-D630-4DBA-86DF-B44D5ECD3F6C</key>
 		<dict>
 			<key>colorindex</key>
@@ -836,7 +843,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>🎤</string>
+			<string>Spotify Web App 🌐</string>
 			<key>xpos</key>
 			<real>40</real>
 			<key>ypos</key>
@@ -852,17 +859,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>40</real>
 			<key>ypos</key>
 			<real>420</real>
-		</dict>
-		<key>B5509DDA-D7FD-4F86-B58F-383D0CA69124</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>open spt</string>
-			<key>xpos</key>
-			<real>325</real>
-			<key>ypos</key>
-			<real>15</real>
 		</dict>
 		<key>B8F7B396-5251-46CD-84A6-97B424BEC02E</key>
 		<dict>
