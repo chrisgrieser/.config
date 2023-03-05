@@ -151,7 +151,7 @@ Wf_appsOnMouseScreen = Wf.new({
 	if not IsProjector() or mouseScreen:name() == screenOfWindow:name() then return end
 
 	local appn = newWin:application():name()
-	RunWithDelays({ 0.2, 0.5 }, function()
+	RunWithDelays({ 0.2, 0.6, 1 }, function()
 		if not (mouseScreen:name() == screenOfWindow:name()) then newWin:moveToScreen(mouseScreen) end
 
 		if appn == "Finder" or appn == "Script Editor" or appn == "Hammerspoon" then

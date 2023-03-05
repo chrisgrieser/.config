@@ -54,12 +54,40 @@ function M.log()
 		templateStr = 'echo "(log) %s: $%s"'
 	elseif ft == "applescript" then
 		templateStr = 'log "%s:" & %s'
+	elseif ft == "css" or ft == "scss" then
+		templateStr = "outline: 2px solid red !important;"
 	else
 		vim.notify("Quicklog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
 	local logStatement = string.format(templateStr, varname, varname)
+	append(logStatement)
+end
+
+---adds simple "beep" log statement to check whether conditionals have been
+---triggered. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
+function M.beeplog()
+	local logStatement
+	local ft = bo.filetype
+
+	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
+		logStatement = 'Notify("beep")'
+	elseif ft == "lua" or ft == "python" then
+		logStatement = 'print("beep")'
+	elseif ft == "javascript" or ft == "typescript" then
+		logStatement = 'console.log("beep");'
+	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
+		logStatement = 'echo "(beep)"'
+	elseif ft == "applescript" then
+		logStatement = "beep"
+	elseif ft == "css" or ft == "scss" then
+		logStatement = "outline: 2px solid red !important;"
+	else
+		vim.notify("Beeplog does not support " .. ft .. " yet.", logWarn)
+		return
+	end
+
 	append(logStatement)
 end
 
@@ -129,30 +157,6 @@ function M.timelog()
 	g.timelogStart = not g.timelogStart
 end
 
----adds simple "beep" log statement to check whether conditionals have been
----triggered. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
-function M.beeplog()
-	local logStatement
-	local ft = bo.filetype
-
-	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = 'Notify("beep")'
-	elseif ft == "lua" or ft == "python" then
-		logStatement = 'print("beep")'
-	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = 'console.log("beep");'
-	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		logStatement = 'echo "(beep)"'
-	elseif ft == "applescript" then
-		logStatement = "beep"
-	else
-		vim.notify("Beeplog does not support " .. ft .. " yet.", logWarn)
-		return
-	end
-
-	append(logStatement)
-end
-
 -- simple debug statement
 function M.debuglog()
 	local logStatement
@@ -172,39 +176,41 @@ end
 ---Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.removelogs()
 	local ft = bo.filetype
-	local logCommand
+	local logStatement
 	local numOfLinesBefore = fn.line("$")
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logCommand = {
+		logStatement = {
 			'Notify("beep")',
 			"print",
 		}
 		vim.notify("Only removing beep logs and prints for hammmerspoon, since otherwise not unambiguous")
 	elseif ft == "lua" or ft == "python" then
-		logCommand = "print"
+		logStatement = "print"
 	elseif ft == "javascript" or ft == "typescript" then
-		logCommand = "console.log"
+		logStatement = "console.log"
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		logCommand = {
+		logStatement = {
 			'echo "(beep)"',
 			'echo "(log)', -- no second " to catch full log statement
 			'echo "(time)',
 		}
 	elseif ft == "applescript" then
-		logCommand = { "log", "beep" }
+		logStatement = { "log", "beep" }
+	elseif ft == "css" or ft == "scss" then
+		logStatement = "outline: 2px solid red !important;"
 	else
 		vim.notify("Removelog does not support " .. ft .. " yet.", logWarn)
 	end
 
-	if type(logCommand) == "string" then logCommand = { logCommand } end
-	for _, logCom in pairs(logCommand) do
+	if type(logStatement) == "string" then logStatement = { logStatement } end
+	for _, logCom in pairs(logStatement) do
 		cmd([[g/^\s*]] .. logCom .. [[/d]])
 	end
 	cmd.nohlsearch()
 
 	local linesRemoved = numOfLinesBefore - fn.line("$")
-	local msg = "Cleared " .. tostring(linesRemoved) .. " log statements."
+	local msg = "Removed " .. tostring(linesRemoved) .. " log statements."
 	if linesRemoved == 1 then msg = msg:gsub("s%.$", ".") end -- remove plural
 	vim.notify(msg)
 

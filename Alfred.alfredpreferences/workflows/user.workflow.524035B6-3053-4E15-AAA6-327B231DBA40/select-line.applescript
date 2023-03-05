@@ -1,7 +1,8 @@
 #!/usr/bin/env osascript
 
 tell application "System Events"
-	key code 123 using {command down, shift down} -- word left selection
+	key code 123 using {command down, shift down} -- visual line
+	keystroke "a" using {control down, shift down} -- logical line
 	keystroke "c" using {command down} -- copy
 end tell
 
