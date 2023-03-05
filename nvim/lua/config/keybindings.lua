@@ -296,7 +296,7 @@ keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize (-)"
 keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize (+)" })
 keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 
--- Harpoon/Grapple
+-- Harpoon
 keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "ﯠ Next" })
 keymap("n", "g<CR>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
 keymap("n", "<leader><CR>", function() require("harpoon.mark").add_file() end, { desc = "ﯠ Add File" })
@@ -419,10 +419,10 @@ end, { desc = " File History (Diffview)" })
 --------------------------------------------------------------------------------
 
 -- Option Toggling
-keymap("n", "<leader>os", ":set spell!<CR>", { desc = " toggle spelling" })
-keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = " toggle relative line numbers" })
-keymap("n", "<leader>on", ":set number!<CR>", { desc = " toggle line numbers" })
-keymap("n", "<leader>ow", qol.toggleWrap, { desc = " toggle wrap" })
+keymap("n", "<leader>os", ":set spell!<CR>", { desc = " Toggle Spelling" })
+keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = " Toggle Relative Line Numbers" })
+keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers" })
+keymap("n", "<leader>ow", qol.toggleWrap, { desc = " Toggle Wrap" })
 keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 璉LSP Restart" })
 keymap("n", "<leader>od", function()
 	if g.diagnosticOn == nil then g.diagnosticOn = true end
@@ -432,7 +432,7 @@ keymap("n", "<leader>od", function()
 		vim.diagnostic.enable(0)
 	end
 	g.diagnosticOn = not g.diagnosticOn
-end, { desc = " diagnostics" })
+end, { desc = " 璉 Toggle Diagnostics" })
 
 --------------------------------------------------------------------------------
 
@@ -440,7 +440,7 @@ end, { desc = " diagnostics" })
 keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = "go to next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = "Paste in Terminal Mode" })
 
-keymap("n", "6", ":ToggleTerm size=9<CR>", { desc = "ToggleTerm" })
+keymap("n", "6", ":ToggleTerm size=9<CR>", { desc = ":ToggleTerm" })
 keymap("x", "6", ":ToggleTermSendVisualSelection size=9<CR>", { desc = "Selection to ToggleTerm" })
 
 keymap("n", "5", function()
