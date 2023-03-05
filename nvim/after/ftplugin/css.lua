@@ -45,13 +45,12 @@ keymap({ "o", "x" }, "is", function() require("various-textobjs").cssSelector(tr
 --------------------------------------------------------------------------------
 ---@diagnostic disable: undefined-field, param-type-mismatch
 
--- inspect via document.querySelect
--- Requires: Obsidian advanced URI plugin and `eval` parameter for the plugin
--- enabled
-keymap({"n", "x"}, "<leader>li", function()
+-- Inspect DOM of Obsidian selector
+-- normal mode: current line, visual mode: selection
+-- Requires: Obsidian advanced URI plugin and `eval` parameter for the plugin enabled
+keymap({ "n", "x" }, "<leader>li", function()
 	local selector
-	-- normal mode: current line, visual mode: selection
-	if fn.mode() == "n" then 
+	if fn.mode() == "n" then
 		selector = fn.getline("."):gsub("{.*", "")
 	else
 		normal('"zy')
