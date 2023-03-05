@@ -24,7 +24,7 @@ local function setHigherBrightnessDuringDay()
 		brightness = 0
 	elseif hs.brightness.ambient() > 120 then
 		brightness = 100
-	elseif hs.brightness.ambient() > 100 then
+	elseif hs.brightness.ambient() > 90 then
 		brightness = 90
 	elseif hs.brightness.ambient() > 50 then
 		brightness = 80
@@ -41,6 +41,9 @@ function WorkLayout()
 	print("🔲 WorkLayout: loading")
 	setHigherBrightnessDuringDay()
 	HoleCover()
+	dockSwitcher("work")
+	RestartApp("AltTab")
+	hs.execute("sketchybar --set clock popup.drawing=true")
 
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder", "BetterTouchTool" }
 	require("lua.private").closer()
@@ -54,33 +57,26 @@ function WorkLayout()
 		{ "Drafts", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		{ "Twitter", nil, IMacDisplay, nil, ToTheSide, nil },
 	}
-	hs.timer.waitUntil(AppIsRunning("Drafts"), function() hs.layout.apply(layout) end)
-
-	ShowAllSidebars()
-	dockSwitcher("work")
-	RestartApp("AltTab")
-	hs.execute("sketchybar --set clock popup.drawing=true")
-
-	RunWithDelays({ 0.5, 1 }, function()
+	hs.timer.waitUntil(function() return AppIsRunning("Drafts") end, function()
+		hs.layout.apply(layout)
+		TwitterToTheSide()
 		local workspace = IsAtOffice() and "Office" or "Home"
 		App("Drafts"):selectMenuItem { "Workspaces", workspace }
 		TwitterScrollUp()
-		TwitterToTheSide()
+		ShowAllSidebars()
 		App("Drafts"):activate()
 		App("Twitter"):mainWindow():raise()
 	end)
+
 	CleanupConsole()
-	print("🔲 WorkLayout: finished layouting")
+	print("🔲 WorkLayout: done")
 end
 
 function MovieModeLayout()
 	print("🔲 MovieModeLayout: loading")
-	-- different PWAs due to not being M1 device
-	local targetMode = IsAtMother() and "mother-movie" or "movie"
+	local targetMode = IsAtMother() and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
-
 	SetDarkmode(true)
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
@@ -104,7 +100,7 @@ function MovieModeLayout()
 	}
 	-- redundancy apparently sometimes needed
 	RunWithDelays(1.5, function() QuitApp("Twitter") end)
-	print("🔲 MovieModeLayout: finished layouting")
+	print("🔲 MovieModeLayout: done")
 end
 
 --------------------------------------------------------------------------------
