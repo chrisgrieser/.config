@@ -24,16 +24,15 @@ matches:
     replace: "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
   - trigger: "!path"
     replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
-  - trigger: "!debugger"
+  - triggers: ["!debugger", "!dev"]
     replace: "setTimeout(() => { debugger }, 4000);"
+    label: for pasting in the dev tools
+  - triggers: ["!selector", "!dev"]
+    replace: document.querySelector("$|$")
     label: for pasting in the dev tools
     #───────────────────────────────────────────────────────────────────────────
   - trigger: "!dontask"
     replace: "<https://dontasktoask.com/>"
-  - trigger: "!nohello"
-    replace: "<https://nohello.net/en/>"
-  - trigger: "!xy"
-    replace: "<https://xyproblem.info/>"
   - trigger: "!bug"
     replace: Could you open a bug report at the GitHub repo? Reason being that the bug report forms asks for various information I need to investigate the issue. (also, I don't have the time to look into it right now, so an issue will make sure that I can keep track of it.)
     #───────────────────────────────────────────────────────────────────────────
