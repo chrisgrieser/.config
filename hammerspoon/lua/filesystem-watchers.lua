@@ -1,12 +1,13 @@
 require("lua.utils")
-
 --------------------------------------------------------------------------------
+-- HELPERS
 
----@param f string filepath
----@param folder string folderpath
----@return boolean
-local function isInSubdirectory(f, folder) -- (instead of directly in the folder)
-	local _, fileSlashes = f:gsub("/", "")
+---@param fPath string? filepath
+---@param folder string? folderpath
+---@return boolean|nil returns nil if getting invalid input
+local function isInSubdirectory(fPath, folder) -- (instead of directly in the folder)
+	if not fPath or not folder then return nil end
+	local _, fileSlashes = fPath:gsub("/", "")
 	local _, folderSlashes = folder:gsub("/", "")
 	return fileSlashes > folderSlashes
 end
@@ -68,7 +69,8 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- Redirects TO File Hub
-local scanFolder = os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
+local scanFolder = os.getenv("HOME")
+	.. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 ScanFolderWatcher = Pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. FileHub .. "'")
 	Notify("Scan moved to File Hub")
@@ -89,7 +91,8 @@ SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	Notify("Download moved to File Hub.")
 end):start()
 
-local draftsIcloud = os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
+local draftsIcloud = os.getenv("HOME")
+	.. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
 DraftsIcloudWatcher = Pw(draftsIcloud, function(files)
 	for _, filePath in pairs(files) do
 		if filePath:sub(-3) ~= ".md" or filePath:find("Inbox") then return end
@@ -110,16 +113,22 @@ FileHubWatcher = Pw(FileHub, function(paths, _)
 		local fileName = filep:gsub(".*/", "")
 		local extension = fileName:gsub(".*%.", "")
 
-		-- delete alfredworkflows and ics (iCal)
+		-- alfredworkflows, ics, and dmg (iCal)
 		if extension == "alfredworkflow" or extension == "ics" or extension == "dmg" then
 			-- opening ics and Alfred leads to recursions when opened via this file
-			-- watcher and are therefore opened via browser auto-open instead. .dmg
-			-- though cannot be opened via browser and also does not create recursion,
+			-- watcher and are therefore opened via browser auto-open instead. dmg
+			-- cannot be opened via browser though and also does not create recursion,
 			-- so it is opened here
 			if extension == "dmg" then hs.open(filep) end
 			RunWithDelays(3, function() os.rename(filep, os.getenv("HOME") .. "/.Trash/" .. fileName) end)
 
-			-- watch later .urls from the office
+		-- zip: unzip
+		elseif extension == "zip" and fileName ~= "violentmonkey.zip" then
+			-- done via hammerspoon to differentiate between zips to auto-open and
+			-- zips to archive (like violentmonkey)
+			hs.open(filep)
+
+		-- watch later .urls from the office
 		elseif extension == "url" and IsIMacAtHome() then
 			os.rename(filep, os.getenv("HOME") .. "/Downloaded/" .. fileName)
 			Notify("Watch Later URL moved to Video Downloads.")
@@ -145,17 +154,9 @@ FileHubWatcher = Pw(FileHub, function(paths, _)
 			Notify("SpondorBlockConfig filed away.")
 
 		-- violentmonkey
-		elseif fileName:match("violentmonkey") then
-			-- `-d` test necessary to rpevent recursion of moving out of directory
-			-- also triggering the rm command
-			hs.execute("[[ -d '" .. filep .. "' ]] && rm -r '" .. browserSettings .. "violentmonkey'")
-			os.rename(filep, browserSettings .. "violentmonkey")
+		elseif fileName:match("violentmonkey.zip") then
+			os.rename(filep, browserSettings .. "violentmonkey.zip")
 			Notify("Violentmonkey backup filed away.")
-
-		-- Bonjourr
-		elseif fileName:match("bonjourrExport%-.*%.json") then
-			os.rename(filep, browserSettings .. "bonjourr-settings.json")
-			Notify("Bonjourr backup filed away.")
 
 		-- Inoreader
 		elseif fileName:match("Inoreader Feeds .*%.xml") then
