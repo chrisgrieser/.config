@@ -85,8 +85,7 @@ return {
 					},
 				},
 				triggers_blacklist = {
-					-- FIX "y" needed to fix weird delay occurring when yanking after a change
-					n = { "y", "d", "c" },
+					n = { "y" }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
 				},
 				hidden = {},
 				window = {

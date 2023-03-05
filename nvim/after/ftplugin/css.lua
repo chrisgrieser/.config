@@ -37,19 +37,19 @@ keymap({ "n", "x" }, "<C-j>", [[/^\/\* <<CR>:nohl<CR>]], { buffer = true, desc =
 keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], { buffer = true, desc = "prev section" })
 
 --------------------------------------------------------------------------------
+-- stylua: ignore start
+keymap({ "o", "x" }, "as", function() require("various-textobjs").cssSelector(false) end, { desc = "outer CSS selector textobj", buffer = true })
+keymap({ "o", "x" }, "is", function() require("various-textobjs").cssSelector(true) end, { desc = "inner CSS selector textobj", buffer = true })
+-- stylua: ignore end
 
-keymap(
-	{ "o", "x" },
-	"as",
-	function() require("various-textobjs").cssSelector(false) end,
-	{ desc = "outer CSS selector textobj", buffer = true }
-)
-keymap(
-	{ "o", "x" },
-	"is",
-	function() require("various-textobjs").cssSelector(true) end,
-	{ desc = "inner CSS selector textobj", buffer = true }
-)
+
+--------------------------------------------------------------------------------
+keymap("n", "<leader>li", function ()
+	local uri = "obsidian://a"
+
+	fn.system("open '"..uri.."")	
+end, { desc = "Obsidian: document.querySelect()", buffer = true })
+
 
 --------------------------------------------------------------------------------
 ---@diagnostic disable: undefined-field, param-type-mismatch

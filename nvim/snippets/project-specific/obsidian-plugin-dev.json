@@ -1,20 +1,16 @@
 {
-	"get active file/Tfile": {
+	"get active file/TFile": {
 		"description": "Obsidian: Get the TFile of the currently active note.",
 		"prefix": [
 			"tFile",
 			"active file",
 			"current"
 		],
-		"body": [
-			"const ${1:activeFile} = this.app.workspace.getActiveFile();"
-		]
+		"body": "const ${1:activeFile} = this.app.workspace.getActiveFile();"
 	},
 	"get Tfile of active leaf": {
 		"description": "Obsidian: Get the TFile of a leaf, checking if the active leaf is a markdown file.",
-		"prefix": [
-			"tFile of leaf"
-		],
+		"prefix": "tFile of leaf",
 		"body": [
 			"const currentLeaf = this.app.workspace.activeLeaf();",
 			"const tfile = currentLeaf.view instanceof MarkdownView ? currentLeaf.view.file : null;"
@@ -52,9 +48,7 @@
 			"TFile from file path",
 			"file path to TFile"
 		],
-		"body": [
-			"this.app.vault.getAbstractFileByPath(${1:filepath});"
-		]
+		"body": "this.app.vault.getAbstractFileByPath(${1:filepath});"
 	},
 	"add command": {
 		"description": "Obsidian: Add a command to the command palette, making it also available as a hotkey. Usually added to the `onload()` call of the plugin.",
@@ -118,9 +112,7 @@
 			"multiple cursors",
 			"multiple selections"
 		],
-		"body": [
-			"const hasMultipleCursors = editor.listSelections().length > 1;"
-		]
+		"body": "const hasMultipleCursors = editor.listSelections().length > 1;"
 	},
 	"Write a file": {
 		"description": "Obsidian: Write text to an existing file.",
