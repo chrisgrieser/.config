@@ -83,7 +83,6 @@ function M.wordSwitch()
 	local ftWords -- 3rd item false if 2nd item shouldn't also switch to first
 	if ft == "lua" then
 		ftWords = {
-			{ "~=", "==" },
 			{ "if", "elseif" },
 			{ "function", "local function", false },
 			{ "pairs", "ipairs" },
