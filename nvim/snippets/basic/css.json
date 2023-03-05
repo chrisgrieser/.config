@@ -1,7 +1,7 @@
 {
 	"outline (debug)": {
 		"prefix": "outline (debug)",
-		"body": "outline: 2px solid red;"
+		"body": "outline: 2px solid red !important;"
 	},
 	"ignore (stylelint)": {
 		"prefix": "ignore (stylelint)",

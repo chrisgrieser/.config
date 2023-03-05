@@ -36,7 +36,7 @@ app.doShellScript(`find "${snippetDir}" -type f -name "*.json"`)
 
 			// merge body if it's an array
 			let body = snipObj.body
-			body = typeof body === "object" ? body : body.join("\n")
+			body = typeof body === "object" ? body.join("\n") : body;
 
 			jsonArray.push({
 				title: snippet,

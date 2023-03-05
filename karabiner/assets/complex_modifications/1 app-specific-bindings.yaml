@@ -548,7 +548,7 @@ rules:
           - key_code: "l"
             modifiers: [control]
         conditions: [{ type: frontmost_application_if, file_paths: [alacritty$] }]
-  - description: "(Apps) Alacritty/Brave: shift+space → daw"
+  - description: "(Apps) Alacritty/Brave/Vivaldi: shift+space → daw"
     manipulators:
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
@@ -558,7 +558,7 @@ rules:
           - key_code: w
         conditions:
           - type: frontmost_application_if
-            file_paths: [alacritty$, Brave Browser$] # brave for surfing keys ace editor
+            file_paths: [alacritty$, Brave Browser, Vivaldi] # Browsers for sketchyvim
   - description: "(Apps) Neovide: Fix <S-Space> and cmd+q → ZZ"
     manipulators:
       - type: basic
