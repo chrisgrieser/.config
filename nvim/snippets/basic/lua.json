@@ -48,6 +48,10 @@
 		"prefix": "string format",
 		"body": "string.format(\"$0%s\", ${1:var})"
 	},
+	"home": {
+		"prefix": "home",
+		"body": "os.getenv(\"HOME\")"
+	},
 	"for (list)": {
 		"prefix": [
 			"foreach",

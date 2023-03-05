@@ -56,13 +56,14 @@ DownloadFolderWatcher = Pw(
 
 -- FONT rsync (for both directions)
 -- (symlinking the Folder somehow does not work properly, therefore rsync)
-local fontLocation = DotfilesFolder .. "/fonts/" -- source folder needs trailing "/" to copy contents (instead of the folder)
-FontsWatcher1 = Pw(os.getenv("HOME") .. "/Library/Fonts", function()
-	hs.execute([[rsync --archive --update --delete "$HOME/Library/Fonts/" "]] .. fontLocation .. [["]])
+local fontLocation1 = DotfilesFolder .. "/fonts/" -- source folder needs trailing "/" to copy contents (instead of the folder)
+local fontLocation2 = os.getenv("HOME") .. "/Library/Fonts/" -- needs trailing "/"
+FontsWatcher1 = Pw(fontLocation2, function()
+	hs.execute('rsync --archive --update --delete "' .. fontLocation1 .. '" "' .. fontLocation2 .. '"')
 	Notify("Fonts synced.")
 end):start()
-FontsWatcher2 = Pw(fontLocation, function()
-	hs.execute([[rsync --archive --update --delete "]] .. fontLocation .. [[" "$HOME/Library/Fonts"]])
+FontsWatcher2 = Pw(fontLocation1, function()
+	hs.execute('rsync --archive --update --delete "' .. fontLocation2 .. '" "' .. fontLocation1 .. '"')
 	Notify("Fonts synced.")
 end):start()
 
