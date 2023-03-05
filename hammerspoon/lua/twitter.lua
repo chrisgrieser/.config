@@ -12,7 +12,7 @@ function TwitterScrollUp()
 	Keystroke({ "shift", "command" }, "R", 1, twitter) -- reload
 
 	-- needs delays to wait for tweet loading
-	RunWithDelays({ 0.2, 0.5, 1, 1.5 }, function()
+	RunWithDelays({ 0.5, 1.5 }, function()
 		Keystroke({ "command" }, "1", 1, twitter) -- scroll up
 		Keystroke({ "command" }, "up", 1, twitter) -- goto top
 	end)
