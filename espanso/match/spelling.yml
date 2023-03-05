@@ -212,3 +212,6 @@ matches:
   - trigger: yb
     replace: by
     word: true
+  - trigger: ahrd
+    replace: hard
+    word: true
