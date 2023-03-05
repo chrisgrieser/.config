@@ -46,8 +46,17 @@ keymap({ "o", "x" }, "is", function() require("various-textobjs").cssSelector(tr
 ---@diagnostic disable: undefined-field, param-type-mismatch
 
 -- inspect via document.querySelect
-keymap("n", "<leader>li", function()
-	local selector = fn.getline("."):gsub("{.*", "")
+-- Requires: Obsidian advanced URI plugin and `eval` parameter for the plugin
+-- enabled
+keymap({"n", "x"}, "<leader>li", function()
+	local selector
+	-- normal mode: current line, visual mode: selection
+	if fn.mode() == "n" then 
+		selector = fn.getline("."):gsub("{.*", "")
+	else
+		normal('"zy')
+		selector = fn.getreg("z")
+	end
 	local jsCodeEncoded = [[electronWindow.openDevTools();const%20element%3Ddocument.querySelector("]]
 		.. selector
 		.. [[");console.log(element);]]
