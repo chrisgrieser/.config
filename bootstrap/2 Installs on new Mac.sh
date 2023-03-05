@@ -41,7 +41,7 @@ pip list --not-required
 killall "Vivaldi"
 while pgrep -q "Vivaldi"; do sleep 0.1; done
 sed -i '' \
-	's/"directory_upgrade":true/"directory_upgrade":true,"extensions_to_open":"torrent:zip:alfredworkflow:ics"/' \
+	's/"directory_upgrade":true/"directory_upgrade":true,"extensions_to_open":"torrent:alfredworkflow:ics:"/' \
 	"$HOME/Library/Application Support/Vivaldi/Default/Preferences"
 open -a "Vivaldi"
 
