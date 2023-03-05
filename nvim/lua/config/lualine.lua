@@ -171,7 +171,6 @@ require("lualine").setup {
 		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
-			{ lspReferencesCountStatusline },
 			{ searchCounter },
 		},
 		lualine_x = {
@@ -203,10 +202,8 @@ require("lualine").setup {
 			},
 		},
 		lualine_c = {
-			{
-				function() return " " end, -- dummy to avoid bar appearing and disappearing
-				cond = showNavic,
-			},
+			{ lspReferencesCountStatusline, cond = showNavic },
+			{ function() return " " end, cond = showNavic }, -- dummy to avoid bar flickering
 		},
 		lualine_x = {
 			{
