@@ -43,19 +43,20 @@ function WorkLayout()
 	HoleCover()
 
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder", "BetterTouchTool" }
-
+	require("lua.private").closer()
 	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
 	if not isWeekend() then OpenApp("Slack") end
-	require("lua.private").closer()
 
-	hs.layout.apply {
+	local layout = {
 		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Obsidian", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Drafts", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Twitter", nil, IMacDisplay, nil, ToTheSide, nil },
 	}
+	hs.timer.waitUntil(AppIsRunning("Drafts"), function() hs.layout.apply(layout) end)
 
 	ShowAllSidebars()
 	dockSwitcher("work")
