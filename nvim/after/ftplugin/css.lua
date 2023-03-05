@@ -42,14 +42,14 @@ keymap({ "o", "x" }, "as", function() require("various-textobjs").cssSelector(fa
 keymap({ "o", "x" }, "is", function() require("various-textobjs").cssSelector(true) end, { desc = "inner CSS selector textobj", buffer = true })
 -- stylua: ignore end
 
-
 --------------------------------------------------------------------------------
-keymap("n", "<leader>li", function ()
-	local uri = "obsidian://a"
 
-	fn.system("open '"..uri.."")	
+-- inspect via document.querySelect
+keymap("n", "<leader>li", function()
+	local jsCodeEncoded = [[new%20Notice("foo")]]
+	local uri = "obsidian://advanced-uri?eval=" .. jsCodeEncoded
+	fn.system("open '" .. uri .. "'")
 end, { desc = "Obsidian: document.querySelect()", buffer = true })
-
 
 --------------------------------------------------------------------------------
 ---@diagnostic disable: undefined-field, param-type-mismatch
@@ -61,7 +61,7 @@ keymap("n", "p", function()
 	local regContent = fn.getreg(reg)
 	local isLinewise = fn.getregtype(reg) == "V"
 	if isLinewise and regContent:find("{\n$") then
-		fn.append(".", { "\t", "}" }) 
+		fn.append(".", { "\t", "}" })
 		normal("j")
 	end
 end, { desc = "smarter CSS paste", buffer = true })

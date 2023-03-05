@@ -113,8 +113,8 @@
 		"prefix": "null (pipe)",
 		"body": "&>/dev/null "
 	},
-	"urlencode": {
-		"prefix": "urlencode",
+	"urlEncode": {
+		"prefix": "urlEncode",
 		"body": "osascript -l JavaScript -e \"encodeURIComponent('$SEL')\""
 	},
 	"plist: extract key": {
