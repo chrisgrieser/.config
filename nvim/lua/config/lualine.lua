@@ -143,7 +143,7 @@ local function lspReferencesCountStatusline()
 
 	requestLspRefCount()
 	if not lspRefCount then return "" end
-	return " " .. lspRefCount
+	return "壟" .. lspRefCount
 end
 
 --------------------------------------------------------------------------------
@@ -200,9 +200,9 @@ require("lualine").setup {
 				cond = showNavic,
 				section_separators = topSeparators,
 			},
+			{ lspReferencesCountStatusline, cond = showNavic },
 		},
 		lualine_c = {
-			{ lspReferencesCountStatusline, cond = showNavic },
 			{ function() return " " end, cond = showNavic }, -- dummy to avoid bar flickering
 		},
 		lualine_x = {

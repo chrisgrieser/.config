@@ -102,8 +102,13 @@ local function cmpconfig()
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
 			["<S-Up>"] = cmp.mapping.scroll_docs(-4),
-			["<D-Esc>"] = cmp.mapping.complete(), -- manually trigger completion
+			["<M-Esc>"] = cmp.mapping.complete(), -- manually trigger completion, like in mac
 			["<S-Down>"] = cmp.mapping.scroll_docs(4),
+			-- emacs hippie-expand
+			["<C-h>"] = cmp.mapping(function()
+				cmp.complete()
+				cmp.confirm { select = true }
+			end, { "i", "s" }),
 			["<C-e>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.abort()
@@ -146,7 +151,6 @@ local function cmpconfig()
 				return vim_item
 			end,
 		},
-		-- DEFAULT SOURCES
 		sources = cmp.config.sources(defaultSources),
 	}
 	--------------------------------------------------------------------------------
