@@ -43,16 +43,18 @@ keymap({ "o", "x" }, "is", function() require("various-textobjs").cssSelector(tr
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
+---@diagnostic disable: undefined-field, param-type-mismatch
 
 -- inspect via document.querySelect
 keymap("n", "<leader>li", function()
-	local jsCodeEncoded = [[new%20Notice("foo")]]
-	local uri = "obsidian://advanced-uri?eval=" .. jsCodeEncoded
-	fn.system("open '" .. uri .. "'")
+	local selector = fn.getline("."):gsub("{.*", "")
+	local jsCodeEncoded = [[electronWindow.openDevTools();const%20element%3Ddocument.querySelector("]]
+		.. selector
+		.. [[");console.log(element);]]
+	fn.system("open 'obsidian://advanced-uri?eval=" .. jsCodeEncoded .. "'")
 end, { desc = "Obsidian: document.querySelect()", buffer = true })
 
 --------------------------------------------------------------------------------
----@diagnostic disable: undefined-field, param-type-mismatch
 
 -- if copying a css selection, add the closing bracket as well
 keymap("n", "p", function()
