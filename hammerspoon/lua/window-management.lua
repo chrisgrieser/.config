@@ -245,28 +245,30 @@ local function moveCurWinToOtherDisplay()
 end
 
 local function homeAction()
-	if AppIsRunning("zoom.us") then
+	if #(hs.screen.allScreens()) > 1 then
+		moveCurWinToOtherDisplay()
+	elseif AppIsRunning("zoom.us") then
 		Alert("🔈/🔇") -- toggle mute
 		Keystroke({ "shift", "command" }, "A", 1, App("zoom.us"))
-		return
+	else
+		TwitterScrollUp()
 	end
-	TwitterScrollUp()
 end
 
 local function endAction()
-	if AppIsRunning("zoom.us") then
+	if #(hs.screen.allScreens()) > 1 then
+		moveCurWinToOtherDisplay()
+	elseif AppIsRunning("zoom.us") then
 		Alert("📹") -- toggle video
 		Keystroke({ "shift", "command" }, "V", 1, App("zoom.us"))
-		return
 	end
+		Alert("<Nop>")
 end
 
 --------------------------------------------------------------------------------
 
 -- Hotkeys
 Hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
-Hotkey(Hyper, "pagedown", moveCurWinToOtherDisplay)
-Hotkey(Hyper, "pageup", moveCurWinToOtherDisplay)
 Hotkey({}, "home", homeAction)
 Hotkey({}, "end", endAction)
 Hotkey(Hyper, "right", function() MoveResize(hs.window.focusedWindow(), RightHalf) end)
