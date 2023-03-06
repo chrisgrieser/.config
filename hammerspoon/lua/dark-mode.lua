@@ -1,11 +1,6 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
 
--- CONFIG
-local brightnessThreshhold = 90
-
---------------------------------------------------------------------------------
-
 local function brightnessNotify()
 	local brightness = math.floor(hs.brightness.ambient())
 	Notify("☀️ Brightness:", tostring(brightness))
@@ -80,23 +75,25 @@ function SetDarkmode(toDark)
 	if (not (IsDarkMode()) and toDark) or (IsDarkMode() and not toDark) then toggleDarkMode() end
 end
 
--- autoswitch dark mode and light mode depending on brightness
+-- autoswitch dark mode and light mode
+-- If device has brightness sensor, uses a threshold to determine whether to
+-- change. Otherwise, changes based on the time of day.
 function AutoSwitchDarkmode()
 	local brightness = hs.brightness.ambient()
 	local hasBrightnessSensor = brightness > -1
-	local changeToDark, changeToLight
+	local targetMode
+	local brightnessThreshhold = 90
 
 	if hasBrightnessSensor then
-		toDark = brightness < brightnessThreshhold and not (IsDarkMode())
-		toLight = brightness > brightnessThreshhold and IsDarkMode()
+		targetMode = brightness > brightnessThreshhold and "light" or "dark"
 	else
-		toDark = not (BetweenTime(7, 18))
+		targetMode = BetweenTime(7, 18) and "light" or "dark"
 	end
 
-	if changeToLight then
+	if targetMode == "light" and IsDarkMode() then
 		SetDarkmode(false)
 		print("☀️ Auto-switching to Light Mode")
-	elseif changeToDark then
+	elseif targetMode == "dark" and not (IsDarkMode()) then
 		SetDarkmode(true)
 		print("🌔 Auto-switching to Dark Mode")
 	end

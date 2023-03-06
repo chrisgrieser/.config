@@ -39,7 +39,8 @@ end
 
 function WorkLayout()
 	print("🔲 WorkLayout: loading")
-	-- screen
+
+	-- screen & visuals
 	AutoSwitchDarkmode()
 	setHigherBrightnessDuringDay()
 	HoleCover()
@@ -62,13 +63,14 @@ function WorkLayout()
 	hs.layout.apply(layout)
 	TwitterToTheSide()
 
+	-- setup apps
+	RestartApp("AltTab")
 	local workspace = IsAtOffice() and "Office" or "Home"
 	App("Drafts"):selectMenuItem { "Workspaces", workspace }
 	TwitterScrollUp()
 	ShowAllSidebars()
-	App("Drafts"):activate()
 	App("Twitter"):mainWindow():raise()
-	RestartApp("AltTab")
+	App("Drafts"):activate()
 
 	CleanupConsole()
 	print("🔲 WorkLayout: done")
