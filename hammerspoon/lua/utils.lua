@@ -134,7 +134,7 @@ function ScreenIsUnlocked()
 	local _, success = hs.execute(
 		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1'
 	)
-	return success == true 
+	return success == true
 end
 
 ---Send Notification, accepting any number of arguments of any type. Converts
@@ -152,9 +152,7 @@ function Notify(...)
 end
 
 ---@return string|nil
-function FrontAppName()
-	return hs.application.frontmostApplication():name() 
-end
+function FrontAppName() return hs.application.frontmostApplication():name() end
 
 ---@param appName string
 ---@return boolean
@@ -177,11 +175,19 @@ function RestartApp(appName)
 end
 
 ---@param appNames string|string[]
-function OpenApp(appNames)
+---@param blocking any whether to force waiting till all apps are open
+function OpenApp(appNames, blocking)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
 		local runs = hs.application(name) ~= nil
 		if not runs then hs.application.open(name) end
+	end
+	if not blocking then return end
+	for _, appName in pairs(appNames) do
+		local app = hs.application.get(appName)
+		while blocking and app and app:isRunning() do
+			hs.execute("sleep 0.1")
+		end
 	end
 end
 
