@@ -31,9 +31,6 @@ opt.guicursor = {
 	"a:blinkwait200-blinkoff500-blinkon700",
 }
 
--- timeouts
-opt.updatetime = 250 -- affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
-
 -- Search
 opt.showmatch = true
 opt.smartcase = true
@@ -107,12 +104,14 @@ vim.opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for keba
 opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
 opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
 
---------------------------------------------------------------------------------
+-- Timeouts
+opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 
--- Auto-Saving
-augroup("autosave", {})
+--------------------------------------------------------------------------------
+-- Auto-Saving & Auto-read on change
+augroup("auto-save", {})
 autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
-	group = "autosave",
+	group = "auto-save",
 	pattern = "?*", -- pattern required for some events
 	callback = function()
 		if not bo.readonly and expand("%") ~= "" and bo.buftype == "" and bo.filetype ~= "gitcommit" then
@@ -120,6 +119,9 @@ autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 		end
 	end,
 })
+
+-- Auto-read on external change. Requires `checktime` to actually check for it
+opt.autoread = true
 
 --------------------------------------------------------------------------------
 
