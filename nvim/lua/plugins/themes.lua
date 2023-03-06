@@ -32,6 +32,8 @@ end
 ---@param changes string
 local function setHighlight(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. changes) end
 
+local function clearHighlight(hlgroup) vim.cmd.highlight ("clear "..hlgroup) end
+
 local function customHighlights()
 	-- stylua: ignore
 	local highlights = { "DiagnosticUnderlineError", "DiagnosticUnderlineWarn", "DiagnosticUnderlineHint", "DiagnosticUnderlineInfo", "SpellLocal", "SpellRare", "SpellCap", "SpellBad" }
@@ -88,6 +90,11 @@ local function themeModifications()
 		setHighlight("ScrollView", "guibg=#303050")
 		setHighlight("VirtColumn", "guifg=#323036")
 		linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
+
+		clearHighlight("SignColum")
+		setHighlight("GitSignsAdd", "guibg=NONE")
+		setHighlight("GitSignsDelete", "guibg=NONE")
+		setHighlight("GitSignsChange", "guibg=NONE")
 
 		-- zephyr
 	elseif theme == "zephyr" then
