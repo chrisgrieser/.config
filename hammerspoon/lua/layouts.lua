@@ -76,7 +76,7 @@ function WorkLayout()
 	print("🔲 WorkLayout: done")
 end
 
-function MovieModeLayout()
+local function movieLayout()
 	print("🔲 MovieModeLayout: loading")
 	local targetMode = IsAtMother() and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
@@ -103,6 +103,7 @@ function MovieModeLayout()
 	}
 	-- redundancy apparently sometimes needed
 	RunWithDelays(1.5, function() QuitApp("Twitter") end)
+	CleanupConsole()
 	print("🔲 MovieModeLayout: done")
 end
 
@@ -110,7 +111,7 @@ end
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
 function SelectLayout()
 	if IsProjector() then
-		MovieModeLayout()
+		movieLayout()
 	else
 		WorkLayout()
 	end

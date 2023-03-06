@@ -67,8 +67,9 @@ end
 ---@param commitMsg string
 ---@param gitShellOpts table
 local function shimmeringFocusBuild(commitMsg, gitShellOpts)
-	vim.notify(' Building theme…\n"' .. commitMsg .. '"')
 	local buildscriptLocation = vim.env.ICLOUD .. "/Repos/shimmering-focus/build.sh"
+
+	vim.notify(' Building theme…\n"' .. commitMsg .. '"')
 	fn.jobstart('zsh "' .. buildscriptLocation .. '" "' .. commitMsg .. '"', gitShellOpts)
 end
 
@@ -102,7 +103,7 @@ function M.addCommitPush(prefillMsg)
 			end
 			vim.notify(out, logLevel)
 
-			vim.cmd.checktime() -- reload buffer if changed, e.g. due to linters or pandocvim
+			vim.cmd.checktime() -- reload buffer if changed (e.g., due to linters or pandocvim). Also requires opt.autoread
 			os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
 		end,
 	}
@@ -144,7 +145,7 @@ end
 ---visual mode: link to selected lines
 function M.gitLink()
 	local repo = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1")
-	local branch = fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n", "")
+	local branch = fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", "")
 	if branch:find("^fatal: not a git repository") then
 		vim.notify("Not a git repository.", logWarn)
 		return
