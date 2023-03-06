@@ -60,14 +60,6 @@ anchors:
         type: variable_unless
         name: FINDER_CONTEXT_MENU_ACTIVE
         value: true
-      - &quicklook-open
-        type: variable_if
-        name: FINDER_QUICKLOOK_ACTIVE
-        value: true
-      - &no-quicklook
-        type: variable_unless
-        name: FINDER_QUICKLOOK_ACTIVE
-        value: true
   #─────────────────────────────────────────────────────────────────────────────
   - to:
       # Insert Mode
@@ -141,14 +133,6 @@ anchors:
         set_variable:
           name: FINDER_CONTEXT_MENU_ACTIVE
           value: false
-      - &start-quicklook
-        set_variable:
-          name: FINDER_QUICKLOOK_ACTIVE
-          value: true
-      - &end-quicklook
-        set_variable:
-          name: FINDER_QUICKLOOK_ACTIVE
-          value: false
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -160,12 +144,12 @@ rules:
         from: { key_code: j }
         to: # no to_if_alone since it blocks repeat
           - key_code: down_arrow
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-quicklook]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: k }
         to: # no to_if_alone since it blocks repeat
           - key_code: up_arrow
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-quicklook]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: h }
         to_if_alone:
@@ -397,7 +381,6 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-alfred
-          - *end-quicklook
           - *end-context-menu
           - *end-move
           - *remove-move-notice
@@ -412,7 +395,6 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-alfred
-          - *end-quicklook
           - *end-context-menu
           - *end-move
           - *remove-move-notice
@@ -424,7 +406,6 @@ rules:
           - { key_code: w, modifiers: [command] }
           - *remove-insert-notice
           - *leave-insert-mode
-          - *end-quicklook
           - *end-context-menu
         conditions: [*finder-app, *alfred-inactive]
       - type: basic
@@ -433,7 +414,6 @@ rules:
           - { key_code: q, modifiers: [command] }
           - *remove-insert-notice
           - *leave-insert-mode
-          - *end-quicklook
           - *end-context-menu
         conditions: [*finder-app, *alfred-inactive]
       #─────────────────────────────────────────────────────────────────────────
@@ -507,7 +487,7 @@ rules:
                   tell value of attribute "AXFocusedUIElement" to perform action "AXShowMenu"
                 end tell'
           - *start-context-menu
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu, *no-quicklook]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       # close context menu with another q
       - type: basic
         from: { key_code: q }
@@ -536,34 +516,6 @@ rules:
           - *end-context-menu
         conditions: [*finder-app, *context-menu-open]
       # INFO: context menu cancellation configured with the insert mode cancellations
-      #─────────────────────────────────────────────────────────────────────────
-      # Quicklook Mode
-      # start quicklook
-      - type: basic
-        from: { key_code: spacebar }
-        to_if_alone:
-          - key_code: spacebar
-          - *start-quicklook
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu, *no-quicklook]
-      # changed navigation in quicklook
-      - type: basic
-        from: { key_code: j }
-        to:
-          - key_code: page_down
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *quicklook-open]
-      - type: basic
-        from: { key_code: k }
-        to:
-          - key_code: page_up
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *quicklook-open]
-      # end quicklook
-      - type: basic
-        from: { key_code: spacebar }
-        to:
-          - key_code: spacebar
-          - *end-quicklook
-        conditions: [*finder-app, *quicklook-open]
-      # INFO: other quicklook cancellation keys configured with the insert mode cancellations
       #─────────────────────────────────────────────────────────────────────────
       # BASIC FILE OPERATIONS
       # d = delete
