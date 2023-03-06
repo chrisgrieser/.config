@@ -47,7 +47,7 @@ function WorkLayout()
 
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder", "BetterTouchTool" }
 	require("lua.private").closer()
-	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
+	OpenApp({ "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }, "blocking")
 	if not isWeekend() then OpenApp("Slack") end
 
 	local layout = {
@@ -58,16 +58,14 @@ function WorkLayout()
 		{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
 	}
-	hs.timer.waitUntil(function() return AppIsRunning("Drafts") end, function()
-		hs.layout.apply(layout)
-		TwitterToTheSide()
-		local workspace = IsAtOffice() and "Office" or "Home"
-		App("Drafts"):selectMenuItem { "Workspaces", workspace }
-		TwitterScrollUp()
-		ShowAllSidebars()
-		App("Drafts"):activate()
-		App("Twitter"):mainWindow():raise()
-	end)
+	hs.layout.apply(layout)
+	TwitterToTheSide()
+	local workspace = IsAtOffice() and "Office" or "Home"
+	App("Drafts"):selectMenuItem { "Workspaces", workspace }
+	TwitterScrollUp()
+	ShowAllSidebars()
+	App("Drafts"):activate()
+	App("Twitter"):mainWindow():raise()
 
 	CleanupConsole()
 	print("🔲 WorkLayout: done")
