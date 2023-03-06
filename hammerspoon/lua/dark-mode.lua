@@ -92,6 +92,7 @@ function AutoSwitchDarkmode()
 	else
 		toDark = not (BetweenTime(7, 18))
 	end
+
 	if changeToLight then
 		SetDarkmode(false)
 		print("☀️ Auto-switching to Light Mode")
