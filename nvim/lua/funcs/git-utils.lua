@@ -102,16 +102,7 @@ function M.addCommitPush(prefillMsg)
 			end
 			vim.notify(out, logLevel)
 
-			-- HACK since autoread fails in these causes, prompting for unsaved
-			-- files on closing after git add-commit-pull-push
-			local changeNeededBcStylelint = expand("%") == "source.css"
-			local changeNeededBcPanvimdoc = expand("%:p"):find("my%-plugins/.*/README.md")
-			if changeNeededBcPanvimdoc or changeNeededBcStylelint then
-				cmd.mkview(2)
-				cmd.update()
-				cmd.edit() -- = reload
-				cmd.loadview(2)
-			end
+			vim.cmd.checktime() -- reload buffer if changed, e.g. due to linters or pandocvim
 			os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
 		end,
 	}
