@@ -84,14 +84,20 @@ end
 function AutoSwitchDarkmode()
 	local brightness = hs.brightness.ambient()
 	local hasBrightnessSensor = brightness > -1
-	if not hasBrightnessSensor then return end
+	local changeToDark, changeToLight
 
-	if brightness > brightnessThreshhold and IsDarkMode() then
+	if hasBrightnessSensor then
+		toDark = brightness < brightnessThreshhold and not (IsDarkMode())
+		toLight = brightness > brightnessThreshhold and IsDarkMode()
+	else
+		toDark = not (BetweenTime(7, 18))
+	end
+	if changeToLight then
 		SetDarkmode(false)
-		print("🌔 Autoswitching to Dark Mode")
-	elseif brightness < brightnessThreshhold and not (IsDarkMode()) then
+		print("☀️ Auto-switching to Light Mode")
+	elseif changeToDark then
 		SetDarkmode(true)
-		print("☀️ Autoswitching to Light Mode")
+		print("🌔 Auto-switching to Dark Mode")
 	end
 end
 

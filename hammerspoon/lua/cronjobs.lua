@@ -12,20 +12,10 @@ UnlockWatcher = caff
 
 		if IsAtOffice() then
 			WorkLayout()
-			local toDark = not (BetweenTime(7, 18))
-			SetDarkmode(toDark)
 		else
 			-- INFO checks need to be delayed, since display number is not
 			-- immediately picked up after wake
-			RunWithDelays(0.5, function()
-				if IsProjector() then
-					SetDarkmode(true)
-					MovieModeLayout()
-				else
-					AutoSwitchDarkmode()
-					WorkLayout()
-				end
-			end)
+			RunWithDelays(0.5, SelectLayout)
 		end
 	end)
 	:start()
