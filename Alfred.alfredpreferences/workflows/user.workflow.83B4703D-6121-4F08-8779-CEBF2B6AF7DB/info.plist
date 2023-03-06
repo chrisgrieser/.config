@@ -62,7 +62,7 @@
 			<key>config</key>
 			<dict>
 				<key>acceptsmulti</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>filetypes</key>
 				<array>
 					<string>com.apple.icns</string>
@@ -107,7 +107,7 @@
 			<key>config</key>
 			<dict>
 				<key>acceptsmulti</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>filetypes</key>
 				<array>
 					<string>com.apple.icns</string>
@@ -116,7 +116,7 @@
 					<string>public.png</string>
 				</array>
 				<key>name</key>
-				<string>Upload at Imgur</string>
+				<string>Upload to Imgur</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.action</string>
@@ -135,36 +135,36 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>70</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>190</real>
 		</dict>
 		<key>4774C90D-3D5C-4006-9C4F-C182965FF225</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>240</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>190</real>
 		</dict>
 		<key>AE7F976B-DD26-4AED-B213-12AE0E0FCFEE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>70</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>55</real>
 		</dict>
 		<key>C1A5E973-8284-4910-934C-05CE58EE0B93</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>240</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>55</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

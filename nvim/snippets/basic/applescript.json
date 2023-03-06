@@ -84,9 +84,11 @@
 	"wait until browser tab is loaded": {
 		"prefix": "wait until browser tab is loaded",
 		"body": [
+			"tell application \"Vivaldi\"",
 			"\trepeat until (loading of active tab of front window is false)",
 			"\t\tdelay 0.1",
-			"\tend repeat"
+			"\tend repeat",
+			"end tell"
 		]
 	}
 }
