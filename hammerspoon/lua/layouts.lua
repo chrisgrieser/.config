@@ -39,17 +39,18 @@ end
 
 function WorkLayout()
 	print("🔲 WorkLayout: loading")
+	-- screen
+	AutoSwitchDarkmode()
 	setHigherBrightnessDuringDay()
 	HoleCover()
 	dockSwitcher("work")
-	RestartApp("AltTab")
 	hs.execute("sketchybar --set clock popup.drawing=true")
 
+	-- apps and layout
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder", "BetterTouchTool" }
 	require("lua.private").closer()
 	OpenApp({ "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }, "blocking")
 	if not isWeekend() then OpenApp("Slack") end
-
 	local layout = {
 		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
@@ -60,12 +61,14 @@ function WorkLayout()
 	}
 	hs.layout.apply(layout)
 	TwitterToTheSide()
+
 	local workspace = IsAtOffice() and "Office" or "Home"
 	App("Drafts"):selectMenuItem { "Workspaces", workspace }
 	TwitterScrollUp()
 	ShowAllSidebars()
 	App("Drafts"):activate()
 	App("Twitter"):mainWindow():raise()
+	RestartApp("AltTab")
 
 	CleanupConsole()
 	print("🔲 WorkLayout: done")
@@ -103,7 +106,7 @@ end
 
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
-local function setLayout()
+function SelectLayout()
 	if IsProjector() then
 		MovieModeLayout()
 	else
@@ -112,9 +115,9 @@ local function setLayout()
 end
 
 -- watcher + hotkey
-DisplayCountWatcher = hs.screen.watcher.new(setLayout):start()
-Hotkey(Hyper, "home", setLayout) -- hyper + eject on Apple Keyboard
-Hotkey({ "shift" }, "f6", setLayout) -- for Apple keyboard
+DisplayCountWatcher = hs.screen.watcher.new(SelectLayout):start()
+Hotkey(Hyper, "home", SelectLayout) -- hyper + eject on Apple Keyboard
+Hotkey({ "shift" }, "f6", SelectLayout) -- for Apple keyboard
 
 --------------------------------------------------------------------------------
 

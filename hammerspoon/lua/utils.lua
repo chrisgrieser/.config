@@ -183,10 +183,13 @@ function OpenApp(appNames, blocking)
 		if not runs then hs.application.open(name) end
 	end
 	if not blocking then return end
+
+	local j = 0
 	for _, appName in pairs(appNames) do
 		local app = hs.application.get(appName)
-		while blocking and app and app:isRunning() do
+		while app and app:isRunning() and j < 50 do
 			hs.execute("sleep 0.1")
+			j = j + 1
 		end
 	end
 end
