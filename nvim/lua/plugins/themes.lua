@@ -91,7 +91,7 @@ local function themeModifications()
 		setHighlight("VirtColumn", "guifg=#323036")
 		linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
 
-		clearHighlight("SignColum")
+		clearHighlight("SignColumn")
 		setHighlight("GitSignsAdd", "guibg=NONE")
 		setHighlight("GitSignsDelete", "guibg=NONE")
 		setHighlight("GitSignsChange", "guibg=NONE")

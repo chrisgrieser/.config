@@ -37,7 +37,7 @@ end
 --------------------------------------------------------------------------------
 -- LAYOUTS
 
-function WorkLayout()
+local function workLayout()
 	print("🔲 WorkLayout: loading")
 
 	-- screen & visuals
@@ -77,7 +77,7 @@ function WorkLayout()
 end
 
 local function movieLayout()
-	print("🔲 MovieModeLayout: loading")
+	print("🔲 MovieLayout: loading")
 	local targetMode = IsAtMother() and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
 	SetDarkmode(true)
@@ -113,7 +113,7 @@ function SelectLayout()
 	if IsProjector() then
 		movieLayout()
 	else
-		WorkLayout()
+		workLayout()
 	end
 end
 
