@@ -175,7 +175,7 @@ function RestartApp(appName)
 end
 
 ---@param appNames string|string[]
----@param blocking any whether to force waiting till all apps are open
+---@param blocking? any whether to force waiting till all apps are open
 function OpenApp(appNames, blocking)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
@@ -187,7 +187,7 @@ function OpenApp(appNames, blocking)
 	local j = 0
 	for _, appName in pairs(appNames) do
 		local app = hs.application.get(appName)
-		while app and app:isRunning() and j < 50 do
+		while not (app and app:isRunning()) and j < 50 do
 			hs.execute("sleep 0.1")
 			j = j + 1
 		end
