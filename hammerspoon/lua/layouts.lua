@@ -50,30 +50,33 @@ local function workLayout()
 	-- apps and layout
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder", "BetterTouchTool" }
 	require("lua.private").closer()
-	OpenApp({ "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }, "blocking")
 	if not isWeekend() then OpenApp("Slack") end
-	local layout = {
-		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		{ "Obsidian", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		{ "Drafts", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
-	}
-	hs.layout.apply(layout)
-	TwitterToTheSide()
+	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts", "Obsidian" }
 
-	-- setup apps
-	RestartApp("AltTab")
-	local workspace = IsAtOffice() and "Office" or "Home"
-	App("Drafts"):selectMenuItem { "Workspaces", workspace }
-	TwitterScrollUp()
-	ShowAllSidebars()
-	App("Twitter"):mainWindow():raise()
-	App("Drafts"):activate()
+	RunWithDelays(1, function()
+		local layout = {
+			{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
+			{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
+			{ "Obsidian", nil, IMacDisplay, PseudoMaximized, nil, nil },
+			{ "Drafts", nil, IMacDisplay, PseudoMaximized, nil, nil },
+			{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
+			{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		}
+		hs.layout.apply(layout)
+		TwitterToTheSide()
 
-	CleanupConsole()
-	print("🔲 WorkLayout: done")
+		-- setup apps
+		RestartApp("AltTab")
+		local workspace = IsAtOffice() and "Office" or "Home"
+		App("Drafts"):selectMenuItem { "Workspaces", workspace }
+		TwitterScrollUp()
+		ShowAllSidebars()
+		App("Twitter"):mainWindow():raise()
+		App("Drafts"):activate()
+
+		CleanupConsole()
+		print("🔲 WorkLayout: done")
+	end)
 end
 
 local function movieLayout()
