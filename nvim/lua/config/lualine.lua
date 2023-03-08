@@ -101,7 +101,7 @@ navic.setup {
 	depth_limit_indicator = "…",
 }
 
--- simple alternative to fidget.nvim 
+-- simple alternative to fidget.nvim
 -- via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
 local function lsp_progress()
 	local messages = vim.lsp.util.get_progress_messages()
@@ -118,9 +118,11 @@ local function showNavic() return navic.is_available() and not (bo.filetype == "
 
 -- show number of references for entity under cursor
 local lspRefCount
+local lspDefCount
 local function requestLspRefCount()
 	if fn.mode() ~= "n" then
 		lspRefCount = nil
+		lspDefCount = nil
 		return
 	end
 	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
@@ -129,21 +131,26 @@ local function requestLspRefCount()
 		lspRefCount = nil
 		if not error and refs then lspRefCount = #refs end
 	end)
+	vim.lsp.buf_request(0, "textDocument/definition", params, function(error, defs)
+		lspDefCount = nil
+		if not error and defs then lspDefCount = #defs end
+	end)
 end
 
 local function lspReferencesCountStatusline()
 	local currentBufNr = fn.bufnr()
 	local bufClients = vim.lsp.get_active_clients { bufnr = currentBufNr }
-	local lspProvidesRefs = false
+	local lspCapable = false
 	for _, client in pairs(bufClients) do
-		if client.server_capabilities.referencesProvider then lspProvidesRefs = true end
+		local capable = client.server_capabilities
+		if capable.referencesProvider and capable.definitionProvider then lspCapable = true end
 	end
 	local lspLoading = #(vim.lsp.util.get_progress_messages()) > 0
-	if not lspProvidesRefs or lspLoading then return "" end
+	if not lspCapable or lspLoading then return "" end
 
 	requestLspRefCount()
-	if not lspRefCount then return "" end
-	return "壟" .. lspRefCount
+	if not (lspRefCount and lspDefCount) then return "" end
+	return "壟" .. tostring(lspDefCount) .. "d " .. tostring(lspRefCount) .. "r"
 end
 
 --------------------------------------------------------------------------------
@@ -172,9 +179,9 @@ require("lualine").setup {
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
 			{ searchCounter },
+			{ lsp_progress },
 		},
 		lualine_x = {
-			{ lsp_progress },
 			{
 				"diagnostics",
 				symbols = { error = " ", warn = " ", info = " ", hint = "ﬤ " },
@@ -200,9 +207,9 @@ require("lualine").setup {
 				cond = showNavic,
 				section_separators = topSeparators,
 			},
-			{ lspReferencesCountStatusline, cond = showNavic },
 		},
 		lualine_c = {
+			{ lspReferencesCountStatusline, cond = showNavic },
 			{ function() return " " end, cond = showNavic }, -- dummy to avoid bar flickering
 		},
 		lualine_x = {

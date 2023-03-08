@@ -52,7 +52,7 @@ function SystemStart()
 
 		os.remove(reloadIndicator)
 		-- use neovim automation to display the notification in neovim
-		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded.")' > /tmp/nvim-automation]])
+		hs.execute([[echo 'vim.notify(" Hammerspoon reloaded.")' > /tmp/nvim-automation]])
 		return
 	else
 		Notify("Finished loading.")

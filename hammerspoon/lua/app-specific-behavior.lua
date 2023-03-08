@@ -26,7 +26,7 @@ local function hideOthers(win)
 		local browserWithPiP = app:name() == "Vivaldi" and app:findWindow("Picture in Picture")
 		local zoomMeeting = app:findWindow("Zoom Meeting") -- either Zoom Meeting transparent, or pseudo-picture-in-picture
 		local isTwitter = app:name() == "Twitter"
-		local isAlfred = app:name() == "Alfred" -- for Alfred's compatibility mode
+		local isAlfred = app:name() == "Alfred" -- needed for Alfred compatibility mode
 		local isWindowItself = app:name() == winName
 		if not (browserWithPiP or zoomMeeting or isWindowItself or isTwitter or isAlfred) then
 			app:hide()
@@ -47,22 +47,25 @@ TransBgAppWatcher = Aw.new(function(appName, eventType, appObject)
 		return
 	end
 
-	if eventType == Aw.activated or eventType == Aw.launched then
-		-- some apps like neovide do not set a "launched" signal, so the delayed
-		-- hiding is used for its activation as well
-		RunWithDelays({ 0.1 }, function()
-			local win = appObject:mainWindow()
-			if
-				win
-				and TableContains(transBgApp, FrontAppName()) -- extra check somestimes needed
-				and (CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized))
-			then
-				hideOthers(win)
-			end
-		end)
-	elseif eventType == Aw.terminated then
+	local delay
+	if eventType == Aw.terminated then
 		unHideAll()
+	elseif eventType == Aw.launched or (appName == "neovide" and eventType == Aw.activated) then
+		-- neovide does not send a launch signal
+		delay = {0.1, 0.8}
+	elseif eventType == Aw.activated then
+		delay = {0.1}
 	end
+	RunWithDelays(delay, function()
+		local win = appObject:mainWindow()
+		if
+			win
+			and TableContains(transBgApp, FrontAppName()) -- extra check somestimes needed
+			and (CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized))
+		then
+			hideOthers(win)
+		end
+	end)
 end):start()
 
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
