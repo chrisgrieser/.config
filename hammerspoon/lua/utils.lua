@@ -195,7 +195,10 @@ function QuitApp(appNames)
 	for _, name in pairs(appNames) do
 		RunWithDelays({ 0, 1, 2 }, function()
 			local appObj = hs.application.get(name)
-			if appObj then appObj:kill() end
+			if appObj then
+				print("Quitting " .. name)
+				appObj:kill()
+			end
 		end)
 	end
 end
