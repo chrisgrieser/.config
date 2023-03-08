@@ -17,7 +17,7 @@ local function tsConfig()
 			"python",
 			"lua",
 			"toml",
-			"vim", 
+			"vim",
 			"yaml",
 			"json",
 		},
@@ -34,7 +34,7 @@ local function tsConfig()
 		incremental_selection = {
 			enable = true,
 			keymaps = {
-			-- set to `false` to disable one of the mappings
+				-- set to `false` to disable one of the mappings
 				node_incremental = "<CR>",
 				node_decremental = "<BS>",
 				init_selection = false, -- can init by simply entering visual mode
@@ -56,7 +56,7 @@ local function tsConfig()
 			},
 			select = {
 				enable = true,
-				lookahead = true, 
+				lookahead = true,
 				disable = { "markdown" }, -- so they can be remapped to link text object
 				keymaps = {
 					["af"] = "@function.outer", -- [f]unction
