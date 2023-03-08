@@ -53,7 +53,7 @@ local function workLayout()
 	if not isWeekend() then OpenApp("Slack") end
 	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts", "Obsidian" }
 
-	RunWithDelays(1, function()
+	RunWithDelays({0.5, 1.5}, function()
 		local layout = {
 			{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
 			{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
