@@ -7,22 +7,28 @@ parserOptions:
   ecmaVersion: 2022 # requires at least 2022 so eslint can parse `await` at top level
   sourceType: module
 env:
-  node: true # so `process` and `fetch` are accepted
-  # browser: true
+  node: false # so `process` and `fetch` are accepted
+  browser: false
 
 #───────────────────────────────────────────────────────────────────────────────
 
 rules:
-  # code structure
+  # structure
   complexity: [warn, 15]
   max-depth: [warn, 4]
 
   # variables
+  id-length: 
+    - warn
+    - min: 4
+      max: 25
+      properties: never
+      exceptions: [x, y, i, j]
   no-shadow:
-    - error
+    - warn
     - builtinGlobals: true
       hoist: all
-  no-unused-vars: off # typescript already checks for this
+  no-unused-vars: warn # typescript already checks for this
   camelcase:
     - warn
     - properties: always
@@ -30,21 +36,22 @@ rules:
   no-var: error
   prefer-const: warn
   sort-vars: warn
-  no-use-before-define: error
+  no-use-before-define: warn
   no-multi-assign: error
   no-sequences: error
   no-undefined: error
   one-var-declaration-per-line:
-    - error
+    - warn
     - initializations
 
   # spaces
+  func-call-spacing: warn
   no-mixed-spaces-and-tabs: warn
   no-multi-spaces: warn
   array-bracket-spacing: warn
   space-before-blocks: warn
   semi-spacing: warn
-  no-whitespace-before-property: error
+  no-whitespace-before-property: warn
   no-empty: warn
   arrow-spacing: warn
   keyword-spacing: warn
@@ -59,7 +66,7 @@ rules:
     - multiline: true
   newline-per-chained-call:
     - warn
-    - ignoreChainWithDepth: 3
+    - ignoreChainWithDepth: 2
 
   # Async & Await
   require-await: error
@@ -73,6 +80,10 @@ rules:
     - checkForEach: false
       allowImplicit: true
   no-useless-return: error
+  func-names: warn
+  func-style: 
+    - warn
+    - declaration
 
   # Parenthesis
   no-extra-parens:
@@ -146,7 +157,6 @@ rules:
 
 globals:
   # JXA
-  console: readonly
   ObjC: readonly
   delay: readonly
   Application: readonly
