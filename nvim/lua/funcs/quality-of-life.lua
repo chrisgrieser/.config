@@ -63,6 +63,7 @@ function M.wordSwitch()
 
 	local words = {
 		{ "true", "false" },
+		{ "warn", "error" },
 		{ "on", "off" },
 		{ "yes", "no" },
 		{ "disable", "enable" },
