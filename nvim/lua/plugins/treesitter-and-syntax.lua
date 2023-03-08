@@ -31,16 +31,6 @@ local function tsConfig()
 				"markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
 			},
 		},
-		incremental_selection = {
-			enable = true,
-			keymaps = {
-				-- set to `false` to disable one of the mappings
-				node_incremental = "<CR>",
-				node_decremental = "<BS>",
-				init_selection = false, -- can init by simply entering visual mode
-				scope_incremental = false,
-			},
-		},
 		-- use treesitter for autoindent with `=`
 		indentation = {
 			enable = true,
@@ -57,8 +47,15 @@ local function tsConfig()
 			select = {
 				enable = true,
 				lookahead = true,
-				disable = { "markdown" }, -- so they can be remapped to link text object
+				include_surrounding_whitespace = false,
+				disable = { "markdown" }, -- so `al` can be remapped to link text object
 				keymaps = {
+					["av"] = "@assignment.rhs", -- [v]: value
+					["ak"] = "@assignment.lhs", -- [k]ey
+					["an"] = "@number.inner", 
+					["<CR>"] = "@return.outer", -- <CR>: return (`ar` already = a rectangular bracket)
+					["a/"] = "@regex.outer", -- /regex/
+					["i/"] = "@regex.inner", 
 					["af"] = "@function.outer", -- [f]unction
 					["if"] = "@function.inner",
 					["aa"] = "@parameter.outer", -- [a]rgument
@@ -67,11 +64,12 @@ local function tsConfig()
 					["io"] = "@conditional.inner",
 					["il"] = "@call.inner", -- cal[l]
 					["al"] = "@call.outer",
-					["iL"] = "@loop.inner", -- [L]oop
-					["aL"] = "@loop.outer",
-					["q"] = "@comment.outer", -- @comment.inner not supported yet for most languages
+					["iu"] = "@loop.inner", -- loop (mnemonic: luup)
+					["au"] = "@loop.outer",
+					-- later remapped to q only in operator pendign mode to avoid conflict
+					-- @comment.inner not supported yet for most languages
+					["<<<"] = "@comment.outer", 
 				},
-				include_surrounding_whitespace = false,
 			},
 		},
 
@@ -118,6 +116,9 @@ local function tsConfig()
 		pattern = { "*.sh", "*.zsh", ".zsh*" },
 		command = "silent! set filetype=sh",
 	})
+
+	-- avoid conflict with visual mode comment from Comments.nvim
+	vim.keymap.set("o", "q", "<<<", {desc = "comment", remap = true})
 end
 
 --------------------------------------------------------------------------------

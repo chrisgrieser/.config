@@ -119,7 +119,7 @@ function M.addCommitPush(prefillMsg)
 			commitMsg = "chore"
 		end
 			-- stylua: ignore
-		local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
+		local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs", "deprecate" }
 		local firstWord = commitMsg:match("^%w+")
 		if not vim.tbl_contains(cc, firstWord) then
 			vim.notify("Not using a Conventional Commits keyword.", logWarn)

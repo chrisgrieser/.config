@@ -276,7 +276,6 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode" })
--- INFO <CR> to increment, <BS> to decrement selection defined via treesitter
 
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS & SPLITS
