@@ -36,8 +36,7 @@ function M.commentHr()
 	if ft == "markdown" then hr = "---" end
 
 	local linesToAppend = {"", hr, ""}
-	if ft == "yaml" then linesToAppend = {hr}
-	elseif wasOnBlank then linesToAppend = {hr, ""} end
+	if wasOnBlank then linesToAppend = {hr, ""} end
 
 	fn.append(".", linesToAppend)
 
@@ -76,7 +75,6 @@ function M.wordSwitch()
 		{ "relative", "absolute" },
 		{ "low", "high" },
 		{ "dark", "light" },
-		{ "Dark", "Light" },
 		{ "and", "or" },
 		{ "next", "previous" },
 	}
@@ -155,9 +153,8 @@ function M.undoDuration()
 	local selection = { " present", resetLabel, "15m", "1h" }
 
 	vim.ui.select(selection, { prompt = "Undo…" }, function(choice)
-		if not choice then
-			return
-		elseif choice:find("ago") then
+		if not choice then return end
+		if choice:find("ago") then
 			cmd.earlier(minsPassed .. "m")
 		elseif choice:find("present") then
 			cmd.later(tostring(opt.undolevels:get())) -- redo as much as there are undolevels
@@ -197,13 +194,12 @@ function M.toggleWrap()
 		opt_local.wrap = false
 		opt_local.colorcolumn = opt.colorcolumn:get()
 
-		local del = vim.keymap.del
-		del({ "n", "x" }, "H", opts)
-		del({ "n", "x" }, "L", opts)
-		del({ "n", "x" }, "J", opts)
-		del({ "n", "x" }, "K", opts)
-		del({ "n", "x" }, "k", opts)
-		del({ "n", "x" }, "j", opts)
+		vim.keymap.del({ "n", "x" }, "H", opts)
+		vim.keymap.del({ "n", "x" }, "L", opts)
+		vim.keymap.del({ "n", "x" }, "J", opts)
+		vim.keymap.del({ "n", "x" }, "K", opts)
+		vim.keymap.del({ "n", "x" }, "k", opts)
+		vim.keymap.del({ "n", "x" }, "j", opts)
 	else
 		opt_local.wrap = true
 		opt_local.colorcolumn = ""
