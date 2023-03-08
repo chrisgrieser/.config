@@ -3,9 +3,9 @@ return {
 		"chrisgrieser/nvim-recorder", 
 		dev = true,
 		keys = {
-			{ "9", nil, desc = "/ Continue/Play" },
-			{ "8", nil, desc = "/ Breakpoint" },
-			{ "0", nil, desc = " Start/Stop Recording" },
+			{ "9", desc = "/ Continue/Play" },
+			{ "8", desc = "/ Breakpoint" },
+			{ "0", desc = " Start/Stop Recording" },
 		},
 		config = function()
 			require("recorder").setup {
@@ -22,7 +22,7 @@ return {
 				dapSharedKeymaps = true,
 			}
 
-			local topSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
+			local topSeparators = IsGui() and { left = "", right = "" } or { left = "", right = "" }
 
 			-- INFO inserting needed, to not disrupt existing lualine-segment set by dap
 			local lualineZ = require("lualine").get_config().winbar.lualine_z or {}

@@ -5,16 +5,11 @@ bo.path = ".,,../" -- also search parent directory (useful for Alfred)
 
 --------------------------------------------------------------------------------
 
--- stylua: ignore start
-keymap({ "o", "x" }, "a/", function() require("various-textobjs").jsRegex(false) end, { desc = "outer regex textobj" })
-keymap({ "o", "x" }, "i/", function() require("various-textobjs").jsRegex(true) end, { desc = "inner regex textobj" })
--- stylua: ignore end
-
 -- Open regex in regex101 and regexper (railroad diagram)
 keymap("n", "g/", function()
-	require("various-textobjs").jsRegex(false) -- set visual selection to outer regex
-	normal('"zy')
-	require("various-textobjs").jsRegex(true) -- select inner regex for easy replacement
+	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
+	normal('"zyya/') -- yank outer regex
+	normal('vi/') -- select inner regex for easy replacement
 
 	local regex = fn.getreg("z")
 	local pattern = regex:match("/(.*)/")

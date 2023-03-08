@@ -102,7 +102,7 @@ local function dapConfig()
 end
 
 local function dapLualine()
-	local topSeparators = isGui() and { left = "", right = "" } or { left = "", right = "" }
+	local topSeparators = IsGui() and { left = "", right = "" } or { left = "", right = "" }
 
 	-- INFO inserting needed, to not disrupt existing lualine-segment set by nvim-recorder
 	local lualineY = require("lualine").get_config().winbar.lualine_y or {}
@@ -147,7 +147,7 @@ return {
 		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
 	},
 	keys = {
-		{ "<leader>b", nil, desc = " Select Action" },
+		{ "<leader>b", desc = " Select Action" },
 	},
 	config = function()
 		dapConfig()

@@ -9,15 +9,17 @@ UnlockWatcher = caff
 	.new(function(event)
 		if event ~= caff.screensDidUnlock then return end
 		SyncAllGitRepos()
-		RunWithDelays(0.5, SelectLayout)
+		RunWithDelays(0.5, SelectLayout) -- delay needed to ensure displays are recognized after waking
 	end)
 	:start()
 
 -- keep the iMac display brightness low when projector is connected
 ProjectorScreensaverWatcher = caff
 	.new(function(eventType)
-		if IsAtOffice() then return end
-		if eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart then
+		if
+			not (IsAtOffice())
+			and (eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart)
+		then
 			RunWithDelays(1, function()
 				if IsProjector() then IMacDisplay:setBrightness(0) end
 			end)

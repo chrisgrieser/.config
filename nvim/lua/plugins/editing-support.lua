@@ -2,17 +2,20 @@ return {
 	-- EDITING-SUPPORT
 	{
 		"numToStr/Comment.nvim",
-		keys = { "q", "Q", { "q", mode = "x" } }, -- (mnemonic: [q]uiet text)
+		keys = { -- mnemonic: [q]uiet text
+			{ "Q", desc = "Append Comment at EoL" },
+			{ "q", mode = { "n", "x" }, desc = "Comment" },
+			{ "<leader>q", mode = { "n", "x" }, desc = "Block Comment" },
+		},
 		config = function()
 			require("Comment").setup {
-				-- ignore = "^$", -- ignore empty lines
 				opleader = {
 					line = "q",
-					block = "<Nop>",
+					block = "<leader>q",
 				},
 				toggler = {
 					line = "qq",
-					block = "<Nop>",
+					block = "<leader>qq",
 				},
 				extra = {
 					eol = "Q",
@@ -32,7 +35,7 @@ return {
 		"kylechui/nvim-surround",
 		event = "BufRead",
 		config = function()
-			-- HACK define these manually, since for some reason they do not work by default
+			--[[ -- HACK define these manually, since for some reason they do not work by default ]]
 			vim.keymap.set("n", "yss", "ys_", { remap = true, desc = "surround line" })
 			vim.keymap.set("n", "yS", "ys$", { remap = true, desc = "surround till EoL" })
 
@@ -41,7 +44,6 @@ return {
 			local conditionObjChar = "o"
 			local callObjChar = "l"
 			local doubleSquareBracketObjChar = "R"
-			local regexObjChar = "/"
 
 			-- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L483
 			local config = require("nvim-surround.config")
@@ -68,14 +70,6 @@ return {
 						delete = "(%[%[)().-(%]%])()",
 						change = {
 							target = "(%[%[)().-(%]%])()",
-						},
-					},
-					[regexObjChar] = {
-						find = "/.-/",
-						add = { "/", "/" },
-						delete = "(/)().-(/)()",
-						change = {
-							target = "(/)().-(/)()",
 						},
 					},
 					[functionObjChar] = {
@@ -234,17 +228,16 @@ return {
 		config = function() require("refactoring").setup() end,
 	},
 	{
-		"nacro90/numb.nvim", -- line previews when ":n"
-		config = function() require("numb").setup() end,
+		"nacro90/numb.nvim", -- display line numbers while going to a line with `:`
 		keys = ":",
+		config = function() require("numb").setup() end,
 	},
 	{
-		"unblevable/quick-scope",
+		"rhysd/clever-f.vim",
 		keys = { "f", "F", "t", "T" },
 		init = function()
-			vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
-			vim.cmd.highlight { "def link QuickScopePrimary CurSearch", bang = true }
-			vim.cmd.highlight { "QuickScopePrimary gui=underline", bang = true }
+			vim.g.clever_f_smart_case = 1
+			vim.g.clever_f_mark_direct = 1 -- essentially quickscope
 		end,
 	},
 	{
@@ -260,8 +253,8 @@ return {
 	{
 		"smjonas/duplicate.nvim",
 		keys = {
-			{"yd", desc = "Duplicate"},
-			{ "R", mode = {"n", "x"}, desc = "Duplicate" },
+			{ "yd", desc = "Duplicate" },
+			{ "R", mode = { "n", "x" }, desc = "Duplicate" },
 		},
 		config = function()
 			require("duplicate").setup {

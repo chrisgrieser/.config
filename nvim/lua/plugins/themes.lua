@@ -2,16 +2,18 @@
 -- local darkTheme = "tokyonight-moon"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
-local lightTheme = "dawnfox"
+local lightTheme = "sweetie"
 -- local darkTheme = "zephyr"
 local darkTheme = "kanagawa"
+-- local darkTheme = "sweetie"
 
 local themePackages = {
 	-- { "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
-	"EdenEast/nightfox.nvim",
+	-- "EdenEast/nightfox.nvim",
 	-- "glepnir/zephyr-nvim",
 	-- "folke/tokyonight.nvim",
 	"rebelot/kanagawa.nvim",
+	"NTBBloodbath/sweetie.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",
 }
@@ -32,7 +34,7 @@ end
 ---@param changes string
 local function setHighlight(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. changes) end
 
-local function clearHighlight(hlgroup) vim.cmd.highlight ("clear "..hlgroup) end
+local function clearHighlight(hlgroup) vim.cmd.highlight("clear " .. hlgroup) end
 
 local function customHighlights()
 	-- stylua: ignore
@@ -41,10 +43,13 @@ local function customHighlights()
 		setHighlight(v, "gui=underdouble cterm=underline")
 	end
 
-	setHighlight("urls", "cterm=underline gui=underline") 
+	setHighlight("urls", "cterm=underline gui=underline")
 	vim.fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 	linkHighlight("myAnnotations", "Todo")
-	vim.fn.matchadd("myAnnotations", [[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|NOTE\|FIX\|CAVEAT\)\>]])
+	vim.fn.matchadd(
+		"myAnnotations",
+		[[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|NOTE\|FIX\|CAVEAT\|DEPRECATED\)\>]]
+	)
 
 	linkHighlight("IndentBlanklineContextChar", "Comment") -- active indent
 	setHighlight("rainbowcol1", "guifg=#7e8a95") -- rainbow brackets without aggressive red
@@ -52,10 +57,15 @@ local function customHighlights()
 	linkHighlight("CodiVirtualText", "Comment") -- Codi
 	setHighlight("TSDefinition", " term=underline gui=underdotted") -- treesittter refactor focus
 	setHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
+	setHighlight("CleverFDefaultLabel", "gui=inverse cterm=inverse")
+
+	-- HACK bugfix for https://github.com/neovim/neovim/issues/20456
+	linkHighlight("luaParenError.highlight", "NormalFloat")
+	linkHighlight("luaParenError", "NormalFloat")
 end
 
 local function themeModifications()
-	local mode = opt.background:get()
+	local mode = vim.opt.background:get()
 	local theme = vim.g.colors_name
 	local modes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 	-- FIX lualine_a not getting bold in some themes
@@ -79,6 +89,13 @@ local function themeModifications()
 	elseif theme == "oxocarbon" then
 		linkHighlight("FloatTitle", "TelescopePromptTitle")
 		linkHighlight("@function", "@function.builtin")
+
+		-- sweetie
+	elseif theme == "sweetie" and mode == "light" then
+		linkHighlight("ScrollView", "Visual")
+		linkHighlight("NotifyINFOIcon", "@string")
+		linkHighlight("NotifyINFOTitle", "@string")
+		linkHighlight("NotifyINFOBody", "@string")
 
 		-- blueloco
 	elseif theme == "bluloco" then
