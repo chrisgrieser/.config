@@ -6,9 +6,9 @@ ignorePatterns: ["!.*", "node_modules"] # Lint files in dotfolder https://github
 parserOptions:
   ecmaVersion: 2022 # requires at least 2022 so eslint can parse `await` at top level
   sourceType: module
-env: 
+env:
   node: true # so `process` and `fetch` are accepted
-  # browser: true 
+  # browser: true
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -40,7 +40,6 @@ rules:
 
   # spaces
   no-mixed-spaces-and-tabs: warn
-
   no-multi-spaces: warn
   array-bracket-spacing: warn
   space-before-blocks: warn
@@ -59,7 +58,7 @@ rules:
     - warn
     - multiline: true
   newline-per-chained-call:
-    - error
+    - warn
     - ignoreChainWithDepth: 3
 
   # Async & Await
@@ -105,23 +104,23 @@ rules:
   sort-imports: warn
   dot-notation: error
 
-  # Strings
+  # Strings & Regex
   no-useless-concat: warn
   no-multi-str: error
+  prefer-regex-literals:
+    - error
+    - disallowRedundantWrapping: true
+
 
   # Numbers
   no-magic-numbers:
     - error
-    - ignore: [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 0.1, 0.2, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 100, 1000, 10000, 1024]
+    # prettier-ignore
+    - ignore: [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 0.1, 0.2, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 100, 1000]
       ignoreArrayIndexes: true
       ignoreDefaultValues: true
   no-floating-decimal: warn
   no-implicit-coercion: error
-
-  # Regex
-  prefer-regex-literals:
-    - error
-    - disallowRedundantWrapping: true
 
   # Conditions
   eqeqeq: error
@@ -137,16 +136,15 @@ rules:
   no-mixed-operators:
     - error
     - groups:
-        - ['%', '**']
-        - ['&', '|', ^, "~", <<, '>>', '>>>']
-        - [==, '!=', ===, '!==', '>', '>=', <, <=]
-        - ['&&', '||']
+        - ["%", "**"]
+        - ["&", "|", ^, "~", <<, ">>", ">>>"]
+        - [==, "!=", ===, "!==", ">", ">=", <, <=]
+        - ["&&", "||"]
         - [in, instanceof]
 
 #───────────────────────────────────────────────────────────────────────────────
 
 globals:
-
   # JXA
   console: readonly
   ObjC: readonly
