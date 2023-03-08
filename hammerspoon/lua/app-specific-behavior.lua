@@ -28,7 +28,9 @@ local function hideOthers(win)
 		local isTwitter = app:name() == "Twitter"
 		local isAlfred = app:name() == "Alfred" -- for Alfred's compatibility mode
 		local isWindowItself = app:name() == winName
-		if not (browserWithPiP or zoomMeeting or isWindowItself or isTwitter or isAlfred) then app:hide() end
+		if not (browserWithPiP or zoomMeeting or isWindowItself or isTwitter or isAlfred) then
+			app:hide()
+		end
 	end
 end
 
@@ -257,7 +259,7 @@ UriScheme("focus-btop", function()
 		win:focus()
 		return
 	end
-	-- 1. using hs.execute does note make that command block hammerspoon
+	-- 1. using os.execute does not make that command block hammerspoon
 	-- 2. starting with smaller font be able to read all processes
 	local success = os.execute([[
 			export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
@@ -281,9 +283,8 @@ Wf_quicklook = Wf
 	.new(true) -- BUG for some reason, restricting this to "Finder" does not work
 	:setOverrideFilter({ allowRoles = "Quick Look" })
 	:subscribe(Wf.windowCreated, function(newWin)
-		local _, sel = Applescript([[
-			tell application "Finder" to return POSIX path of (selection as alias)
-		]])
+		local _, sel =
+			Applescript([[tell application "Finder" to return POSIX path of (selection as alias)]])
 		-- do not enlage window for images (which are enlarged already with
 		-- landscape proportions)
 		if
@@ -392,8 +393,8 @@ Wf_script_editor = Wf
 			Keystroke({ "cmd" }, "n")
 		elseif newWin:title() == "Untitled" then
 			Keystroke({ "cmd" }, "v")
-			RunWithDelays(0.2, function() Keystroke({ "cmd" }, "k") end)
 			MoveResize(newWin, Centered)
+			RunWithDelays(0.2, function() Keystroke({ "cmd" }, "k") end)
 		elseif newWin:title():find("%.sdef$") then
 			MoveResize(newWin, Centered)
 		end
@@ -415,7 +416,7 @@ DiscordAppWatcher = Aw.new(function(appName, eventType)
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	if eventType == Aw.launched then
 		-- stylua: ignore
-		RunWithDelays({3, 4}, function()
+		RunWithDelays({3, 5}, function()
 			OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 		end)
 	end
