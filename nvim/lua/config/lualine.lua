@@ -150,7 +150,7 @@ local function lspReferencesCountStatusline()
 
 	requestLspRefCount()
 	if not (lspRefCount and lspDefCount) then return "" end
-	return "壟" .. tostring(lspDefCount) .. "d " .. tostring(lspRefCount) .. "r"
+	return "壟"..tostring(lspDefCount) .. ":" .. tostring(lspRefCount)
 end
 
 --------------------------------------------------------------------------------
@@ -178,8 +178,8 @@ require("lualine").setup {
 		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
+			{ lspReferencesCountStatusline },
 			{ searchCounter },
-			{ lsp_progress },
 		},
 		lualine_x = {
 			{
@@ -187,6 +187,7 @@ require("lualine").setup {
 				symbols = { error = " ", warn = " ", info = " ", hint = "ﬤ " },
 			},
 			{ mixedIndentation },
+			{ lsp_progress },
 		},
 		lualine_y = {
 			"diff",
@@ -209,7 +210,6 @@ require("lualine").setup {
 			},
 		},
 		lualine_c = {
-			{ lspReferencesCountStatusline, cond = showNavic },
 			{ function() return " " end, cond = showNavic }, -- dummy to avoid bar flickering
 		},
 		lualine_x = {
