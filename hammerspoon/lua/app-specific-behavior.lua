@@ -93,8 +93,11 @@ local function spotifyDo(toStatus)
 	-- https://github.com/Rigellute/spotify-tui/issues/1072
 
 	-- SPOTIFY-DESKTOP
-	-- if hs.spotify.isPlaying() and toStatus == "pause" then hs.spotify.pause()
-	-- elseif toStatus == "play" then hs.spotify.play() end
+	-- if hs.spotify.isPlaying() and toStatus == "pause" then
+	-- 	hs.spotify.pause()
+	-- elseif toStatus == "play" then
+	-- 	hs.spotify.play()
+	-- end
 
 	-- SPOTIFY-TUI
 	-- stylua: ignore start
