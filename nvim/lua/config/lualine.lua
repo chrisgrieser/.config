@@ -146,11 +146,11 @@ local function lspReferencesCountStatusline()
 		if capable.referencesProvider and capable.definitionProvider then lspCapable = true end
 	end
 	local lspLoading = #(vim.lsp.util.get_progress_messages()) > 0
-	if not lspCapable or lspLoading then return "" end
+	if lspLoading or not lspCapable then return "" end
 
 	requestLspRefCount()
 	if not (lspRefCount and lspDefCount) then return "" end
-	return "壟"..tostring(lspDefCount) .. ":" .. tostring(lspRefCount)
+	return tostring(lspDefCount) .. "  " .. tostring(lspRefCount)
 end
 
 --------------------------------------------------------------------------------
@@ -178,7 +178,6 @@ require("lualine").setup {
 		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
-			{ lspReferencesCountStatusline },
 			{ searchCounter },
 		},
 		lualine_x = {
@@ -187,6 +186,7 @@ require("lualine").setup {
 				symbols = { error = " ", warn = " ", info = " ", hint = "ﬤ " },
 			},
 			{ mixedIndentation },
+			{ lspReferencesCountStatusline },
 			{ lsp_progress },
 		},
 		lualine_y = {
