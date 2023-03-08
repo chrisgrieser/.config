@@ -5,7 +5,7 @@ opt.clipboard = "unnamedplus"
 
 -- keep the register clean
 keymap("n", "x", '"_x')
-keymap({"n", "x"}, "c", '"_c')
+keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "cc", '"_cc')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "paste without switching register" })
@@ -30,26 +30,25 @@ autocmd({ "CursorMoved", "VimEnter" }, {
 autocmd("TextYankPost", {
 	group = "yankImprovements",
 	callback = function()
-		-- deletion does not need stickiness and also already shifts register, so
-		-- only saving the last yank is required
-		if vim.v.event.operator == "d" then g.lastYank = fn.getreg('"') end
-		if vim.v.event.operator ~= "y" then return end
+		if vim.v.event.operator == "d" then
+			setCursor(0, g.cursorPreYank) -- sticky
+			-- deletion also already shifts register, so only saving the last yank is required
+			g.lastYank = fn.getreg('"')
+		elseif vim.v.event.operator == "y" then
+			setCursor(0, g.cursorPreYank) -- sticky
+			-- highlighted yank
+			vim.highlight.on_yank { timeout = 1500 }
 
-		-- highlighted yank
-		vim.highlight.on_yank { timeout = 1500 }
-
-		-- sticky yank
-		setCursor(0, g.cursorPreYank)
-
-		-- add yanks and deletes to numbered registers
-		if vim.v.event.regname ~= "" then return end
-		for i = 8, 2, -1 do
-			local regcontent = fn.getreg(tostring(i))
-			fn.setreg(tostring(i + 1), regcontent)
+			-- add yanks and deletes to numbered registers
+			if vim.v.event.regname ~= "" then return end
+			for i = 8, 2, -1 do
+				local regcontent = fn.getreg(tostring(i))
+				fn.setreg(tostring(i + 1), regcontent)
+			end
+			fn.setreg("1", fn.getreg("0")) -- so both y and d copy to "1
+			if g.lastYank then fn.setreg("2", g.lastYank) end
+			g.lastYank = fn.getreg('"')
 		end
-		fn.setreg("1", fn.getreg("0")) -- so both y and d copy to "1
-		if g.lastYank then fn.setreg("2", g.lastYank) end
-		g.lastYank = fn.getreg('"')
 	end,
 })
 
