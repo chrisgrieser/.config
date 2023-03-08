@@ -17,7 +17,7 @@ local function tsConfig()
 			"python",
 			"lua",
 			"toml",
-			"vim", -- viml
+			"vim", 
 			"yaml",
 			"json",
 		},
@@ -49,19 +49,15 @@ local function tsConfig()
 		textobjects = { -- textobj plugin
 			move = { -- move to next comment / function
 				enable = true,
-				disable = { "markdown", "css" }, -- so they can be mapped to heading/section navigation
 				set_jumps = true,
-				goto_next_start = {
-					["<C-j>"] = "@function.outer",
-				},
-				goto_previous_start = {
-					["<C-k>"] = "@function.outer",
-				},
+				disable = { "markdown", "css", "scss" }, -- so they can be mapped to heading/section navigation
+				goto_next_start = { ["<C-j>"] = "@function.outer" },
+				goto_previous_start = { ["<C-k>"] = "@function.outer" },
 			},
 			select = {
 				enable = true,
+				lookahead = true, 
 				disable = { "markdown" }, -- so they can be remapped to link text object
-				lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 				keymaps = {
 					["af"] = "@function.outer", -- [f]unction
 					["if"] = "@function.inner",
@@ -73,12 +69,8 @@ local function tsConfig()
 					["al"] = "@call.outer",
 					["iL"] = "@loop.inner", -- [L]oop
 					["aL"] = "@loop.outer",
-					["<<<"] = "@comment.outer", -- HACK later remapped to q, done indirectly to avoid conflict with visual mode comments
+					["q"] = "@comment.outer", -- @comment.inner not supported yet for most languages
 				},
-				-- If you set this to `true` (default is `false`) then any textobject is
-				-- extended to include preceding xor succeeding whitespace. Succeeding
-				-- whitespace has priority in order to act similarly to eg the built-in
-				-- `ap`.
 				include_surrounding_whitespace = false,
 			},
 		},

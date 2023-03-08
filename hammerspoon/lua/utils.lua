@@ -193,12 +193,10 @@ end
 function QuitApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		RunWithDelays({ 0, 1, 2 }, function()
-			local appObj = hs.application.get(name)
-			if appObj then
-				print("Quitting " .. name)
-				appObj:kill()
-			end
-		end)
+		local appObj = hs.application.get(name)
+		if appObj then appObj:kill() end
+		-- apparently, too many kill signals at once interfere with each other,
+		-- making this necessary?
+		hs.execute("sleep 0.05") 
 	end
 end

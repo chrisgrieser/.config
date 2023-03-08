@@ -87,25 +87,24 @@ local function movieLayout()
 	HoleCover("remove")
 	IMacDisplay:setBrightness(0)
 
-	RunWithDelays({ 0, 1 }, function()
-		QuitApp {
-			"Obsidian",
-			"Drafts",
-			"Neovide",
-			"neovide",
-			"Slack",
-			"Discord",
-			"BusyCal",
-			"Mimestream",
-			"Alfred Preferences",
-			"Finder",
-			"Highlights",
-			"Alacritty",
-			"alacritty",
-			"Twitter",
-		}
-		OpenApp { "YouTube", "BetterTouchTool" }
-	end)
+	OpenApp { "YouTube", "BetterTouchTool" }
+	QuitApp {
+		"Obsidian",
+		"Drafts",
+		"Neovide",
+		"neovide",
+		"Slack",
+		"Discord",
+		"BusyCal",
+		"Mimestream",
+		"Alfred Preferences",
+		"Finder",
+		"Highlights",
+		"Alacritty",
+		"alacritty",
+		"Twitter",
+	}
+
 	CleanupConsole()
 	print("🔲 MovieModeLayout: done")
 end
