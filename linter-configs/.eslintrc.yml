@@ -7,7 +7,7 @@ parserOptions:
   ecmaVersion: 2022 # requires at least 2022 so eslint can parse `await` at top level
   sourceType: module
 env:
-  node: false # so `process` and `fetch` are accepted
+  node: false
   browser: false
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -23,7 +23,7 @@ rules:
     - min: 4
       max: 25
       properties: never
-      exceptions: [x, y, i, j]
+      exceptions: [x, y, i, j, id, min, max, app]
   no-shadow:
     - warn
     - builtinGlobals: true
@@ -79,7 +79,7 @@ rules:
     - error
     - checkForEach: false
       allowImplicit: true
-  no-useless-return: error
+  no-useless-return: warn
   func-names: warn
   func-style: 
     - warn
@@ -98,7 +98,7 @@ rules:
   # Semicolon
   no-extra-semi: warn
   semi-style:
-    - error
+    - warn
     - last
 
   # Commas
@@ -125,7 +125,7 @@ rules:
 
   # Numbers
   no-magic-numbers:
-    - error
+    - warn
     # prettier-ignore
     - ignore: [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 0.1, 0.2, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 100, 1000]
       ignoreArrayIndexes: true
@@ -135,13 +135,13 @@ rules:
 
   # Conditions
   eqeqeq: error
-  no-eq-null: error
+  no-eq-null: warn
   no-negated-condition: error
   no-unneeded-ternary: warn
   no-nested-ternary: error
   yoda: warn
   no-else-return:
-    - error
+    - warn
     - allowElseIf: true
   no-lonely-if: warn
   no-mixed-operators:

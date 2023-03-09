@@ -5,7 +5,7 @@ function TwitterScrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence
 	local twitter = App("Twitter")
-	if not (twitter and twitter:mainWindow()) then return end
+	if not twitter or not twitter:mainWindow() then return end
 
 	Keystroke({ "command" }, "left", 1, twitter) -- go back
 	Keystroke({ "command" }, "1", 1, twitter) -- go to home tab
@@ -19,7 +19,7 @@ function TwitterScrollUp()
 end
 
 function TwitterToTheSide()
-	if not (AppIsRunning("Twitter") and App("Twitter"):mainWindow()) then return end
+	if not AppIsRunning("Twitter") or not App("Twitter"):mainWindow() then return end
 	local win = App("Twitter"):mainWindow()
 	if not win then return end
 	win:setFrame(ToTheSide)
@@ -27,22 +27,22 @@ function TwitterToTheSide()
 end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
-TwitterWatcher = Aw.new(function(appName, eventType, appObj)
-	if not (AppIsRunning("Twitter") and App("Twitter"):mainWindow()) then return end
+TwitterWatcher = Aw.new(function(appName, event, appObj)
+	if not AppIsRunning("Twitter") or not App("Twitter"):mainWindow() then return end
 
 	-- move twitter and scroll it up
-	if appName == "Twitter" and eventType == Aw.launched then
+	if appName == "Twitter" and event == Aw.launched then
 		RunWithDelays({ 0.5, 1, 2 }, function()
 			BringAllToFront()
 			TwitterToTheSide()
 			TwitterScrollUp()
 		end)
-	elseif appName == "Twitter" and eventType == Aw.activated then
+	elseif appName == "Twitter" and event == Aw.activated then
 		BringAllToFront()
 		TwitterScrollUp()
 
 	-- auto-close media windows and scroll up when deactivating
-	elseif appName == "Twitter" and eventType == Aw.deactivated then
+	elseif appName == "Twitter" and event == Aw.deactivated then
 		TwitterScrollUp()
 
 		for _, win in pairs(appObj:allWindows()) do
@@ -54,8 +54,8 @@ TwitterWatcher = Aw.new(function(appName, eventType, appObj)
 		end
 
 	-- raise twitter when switching window to other app
-	elseif appName and eventType == Aw.activated then
-		local win = appObj:mainWindow()
+	elseif appName and event == Aw.activated then
+		local win = App("Twitter"):mainWindow()
 		if CheckSize(win, PseudoMaximized) or CheckSize(win, Centered) then
 			App("Twitter"):mainWindow():raise()
 			-- in case of active split, prevent left window of covering the sketchybar

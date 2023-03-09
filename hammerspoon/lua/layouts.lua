@@ -20,9 +20,7 @@ local function setHigherBrightnessDuringDay()
 	if not hasBrightnessSensor then return end
 
 	local brightness
-	if BetweenTime(1, 8) then
-		brightness = 0
-	elseif hs.brightness.ambient() > 120 then
+	if hs.brightness.ambient() > 120 then
 		brightness = 100
 	elseif hs.brightness.ambient() > 90 then
 		brightness = 90
@@ -53,30 +51,32 @@ local function workLayout()
 	if not isWeekend() then OpenApp("Slack") end
 	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts", "Obsidian" }
 
-	RunWithDelays({0.5, 1.5}, function()
-		local layout = {
-			{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
-			{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
-			{ "Obsidian", nil, IMacDisplay, PseudoMaximized, nil, nil },
-			{ "Drafts", nil, IMacDisplay, PseudoMaximized, nil, nil },
-			{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
-			{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		}
-		hs.layout.apply(layout)
+	Wait(1)
+	local layout = {
+		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Obsidian", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Drafts", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
+	}
+	hs.layout.apply(layout)
+
+	-- setup apps
+	RestartApp("AltTab")
+	local workspace = IsAtOffice() and "Office" or "Home"
+	App("Drafts"):selectMenuItem { "Workspaces", workspace }
+	ShowAllSidebars()
+	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
+
+	hs.timer.waitUntil(function() return AppIsRunning("Twitter") end, function()
 		TwitterToTheSide()
-
-		-- setup apps
-		RestartApp("AltTab")
-		local workspace = IsAtOffice() and "Office" or "Home"
-		App("Drafts"):selectMenuItem { "Workspaces", workspace }
 		TwitterScrollUp()
-		ShowAllSidebars()
-		App("Twitter"):mainWindow():raise()
-		App("Drafts"):activate()
-
-		CleanupConsole()
-		print("🔲 WorkLayout: done")
 	end)
+
+	App("Drafts"):activate()
+	CleanupConsole()
+	print("🔲 WorkLayout: done")
 end
 
 local function movieLayout()
