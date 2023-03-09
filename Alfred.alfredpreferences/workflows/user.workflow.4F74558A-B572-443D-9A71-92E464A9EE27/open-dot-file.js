@@ -38,11 +38,11 @@ const fileArray = app
 			-E "*/vale/styles/*/*.yml" \\
 			-E "*/vale/styles/*/*.adoc" \\
 			-E "*/vale/styles/*/*.md" \\
+			-E "*/vale/styles/*/meta.json" \\
 			-E "**/*.app/*" \\
 			-E "karabiner/automatic_backups" \\
 			-E "visualized-keyboard-layout/*.json" \\
 			-E "zsh/plugins/*" \\
-			-E "nvim/my-plugins/*" \\
 			-E "*.icns" \\
 			-E "*.plist" \\
 			-E "*.add" \\

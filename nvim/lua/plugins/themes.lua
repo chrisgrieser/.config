@@ -2,18 +2,19 @@
 -- local darkTheme = "tokyonight-moon"
 -- local lightTheme = "melange"
 -- local darkTheme = "oxocarbon"
-local lightTheme = "sweetie"
+-- local lightTheme = "sweetie"
+local lightTheme = "dawnfox"
 -- local darkTheme = "zephyr"
 local darkTheme = "kanagawa"
 -- local darkTheme = "sweetie"
 
 local themePackages = {
 	-- { "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
-	-- "EdenEast/nightfox.nvim",
+	"EdenEast/nightfox.nvim",
 	-- "glepnir/zephyr-nvim",
 	-- "folke/tokyonight.nvim",
 	"rebelot/kanagawa.nvim",
-	"NTBBloodbath/sweetie.nvim",
+	-- "NTBBloodbath/sweetie.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",
 }
