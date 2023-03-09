@@ -28,18 +28,13 @@ end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
 TwitterWatcher = Aw.new(function(appName, event, appObj)
-	if not AppIsRunning("Twitter") or not App("Twitter"):mainWindow() then return end
-
 	-- move twitter and scroll it up
-	if appName == "Twitter" and event == Aw.launched then
-		RunWithDelays({ 0.5, 1, 2 }, function()
+	if appName == "Twitter" and (event == Aw.launched or event == Aw.activated) then
+		hs.timer.waitUntil(function() return AppIsRunning("Twitter") end, function()
 			BringAllToFront()
 			TwitterToTheSide()
 			TwitterScrollUp()
 		end)
-	elseif appName == "Twitter" and event == Aw.activated then
-		BringAllToFront()
-		TwitterScrollUp()
 
 	-- auto-close media windows and scroll up when deactivating
 	elseif appName == "Twitter" and event == Aw.deactivated then
@@ -55,9 +50,12 @@ TwitterWatcher = Aw.new(function(appName, event, appObj)
 
 	-- raise twitter when switching window to other app
 	elseif appName and event == Aw.activated then
+		if not AppIsRunning("Twitter") then return end
 		local win = App("Twitter"):mainWindow()
+		if not win then return end
+
 		if CheckSize(win, PseudoMaximized) or CheckSize(win, Centered) then
-			App("Twitter"):mainWindow():raise()
+			win:raise()
 			-- in case of active split, prevent left window of covering the sketchybar
 			if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
 		end

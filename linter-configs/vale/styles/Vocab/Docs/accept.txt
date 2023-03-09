@@ -4,6 +4,7 @@ type
 allow
 unzip
 CSS
+disabled
 beta
 BRAT
 PDF

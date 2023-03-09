@@ -109,9 +109,18 @@ local function themeModifications()
 		linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
 
 		clearHighlight("SignColumn")
-		setHighlight("GitSignsAdd", "guibg=NONE")
-		setHighlight("GitSignsDelete", "guibg=NONE")
-		setHighlight("GitSignsChange", "guibg=NONE")
+		local noBackground = {
+			"GitSignsAdd",
+			"GitSignsDelete",
+			"GitSignsChange",
+			"DiagnosticSignHint",
+			"DiagnosticSignInfo",
+			"DiagnosticSignWarn",
+			"DiagnosticSignError",
+		}
+		for _, hlGroup in pairs(noBackground) do
+			setHighlight(hlGroup, "guibg=NONE")	
+		end
 
 		-- zephyr
 	elseif theme == "zephyr" then
