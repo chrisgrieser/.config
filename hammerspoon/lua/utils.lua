@@ -182,6 +182,10 @@ function RestartApp(appName)
 	)
 end
 
+function AsSoonAsAppRuns(appName)
+	hs.timer.waitUntil(AppIsRunning(appName))	
+end
+
 ---@param appNames string|string[]
 function OpenApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
