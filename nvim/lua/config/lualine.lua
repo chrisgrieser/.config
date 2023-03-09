@@ -117,23 +117,34 @@ end
 local function showNavic() return navic.is_available() and not (bo.filetype == "css") end
 
 -- show number of references for entity under cursor
-local lspRefCount
-local lspDefCount
+local lspCount = {}
 local function requestLspRefCount()
 	if fn.mode() ~= "n" then
-		lspRefCount = nil
-		lspDefCount = nil
+		lspCount.refWorkspace = nil
+		lspCount.refFile = nil
+		lspCount.defWorkspace = nil
+		lspCount.defFile = nil
 		return
 	end
 	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
 	params.context = { includeDeclaration = false }
 	vim.lsp.buf_request(0, "textDocument/references", params, function(error, refs)
-		lspRefCount = nil
-		if not error and refs then lspRefCount = #refs end
+		lspCount.refWorkspace = nil
+		lspCount.refFile = nil
+		if not error and refs then lspCount.refWorkspace = #refs end
 	end)
 	vim.lsp.buf_request(0, "textDocument/definition", params, function(error, defs)
-		lspDefCount = nil
-		if not error and defs then lspDefCount = #defs end
+		lspCount.defWorkspace = nil
+		lspCount.defFile = nil
+		if not error and defs then
+			lspCount.defWorkspace = #defs
+			local thisFileUri = vim.uri_from_fname(expand("%:p"))
+			print("thisFileUri:", thisFileUri)
+			lspCount.defFile = 0
+			for _, def in pairs(defs) do
+					
+			end
+		end
 	end)
 end
 
@@ -149,8 +160,16 @@ local function lspReferencesCountStatusline()
 	if lspLoading or not lspCapable then return "" end
 
 	requestLspRefCount()
-	if not (lspRefCount and lspDefCount) then return "" end
-	return tostring(lspDefCount) .. "  " .. tostring(lspRefCount)
+	if not (lspCount.refWorkspace and lspCount.defWorkspace) then return "" end
+	local out = tostring(lspCount.defFile)
+		.. "/"
+		.. tostring(lspCount.defWorkspace)
+		.. "  "
+		.. tostring(lspCount.refFile)
+		.. "/"
+		.. tostring(lspCount.defWorkspace)
+
+	return out
 end
 
 --------------------------------------------------------------------------------
