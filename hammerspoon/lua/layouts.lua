@@ -20,7 +20,9 @@ local function setHigherBrightnessDuringDay()
 	if not hasBrightnessSensor then return end
 
 	local brightness
-	if hs.brightness.ambient() > 120 then
+	if BetweenTime(1, 8) then
+		brightness = 0
+	elseif hs.brightness.ambient() > 120 then
 		brightness = 100
 	elseif hs.brightness.ambient() > 90 then
 		brightness = 90
@@ -64,17 +66,12 @@ local function workLayout()
 
 	-- setup apps
 	RestartApp("AltTab")
-	local workspace = IsAtOffice() and "Office" or "Home"
-	App("Drafts"):selectMenuItem { "Workspaces", workspace }
 	ShowAllSidebars()
 	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 
-	hs.timer.waitUntil(function() return AppIsRunning("Twitter") end, function()
-		TwitterToTheSide()
-		TwitterScrollUp()
-	end)
-
+	Wait(0.5)
 	App("Drafts"):activate()
+
 	CleanupConsole()
 	print("🔲 WorkLayout: done")
 end

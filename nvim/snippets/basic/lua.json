@@ -52,27 +52,12 @@
 		"prefix": "home",
 		"body": "os.getenv(\"HOME\")"
 	},
-	"for (list)": {
-		"prefix": [
-			"foreach",
-			"for (list)"
-		],
+	"for each": {
+		"prefix": "foreach",
 		"body": [
 			"for _, ${1:v} in pairs(${2:table}) do",
 			"\t$0",
 			"end"
 		]
-	},
-	"forline": {
-		"prefix": "forline",
-		"body": [
-			"f = io.open(${1:\"${2:filename}\"}, \"${3:r}\")\n",
-			"while true do",
-			"\tline = f:read()",
-			"\tif line == nil then break end\n",
-			"\t${0:-- code}",
-			"end"
-		],
-		"description": "read file line by line"
 	}
 }

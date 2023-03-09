@@ -122,7 +122,6 @@ rules:
     - error
     - disallowRedundantWrapping: true
 
-
   # Numbers
   no-magic-numbers:
     - warn

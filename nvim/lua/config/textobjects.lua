@@ -68,7 +68,7 @@ keymap("o", "u", commented_lines_textobject, {desc = "Big comment textobj"})
 -- stylua: ignore start
 
 -- space: subword
-keymap({"o", "x"}, "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
+keymap("o", "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
 
 -- L: link
 keymap("o", "L", function() require("various-textobjs").url() end, { desc = "link textobj" })
@@ -87,8 +87,8 @@ keymap( { "x", "o" }, "gG", function() require("various-textobjs").entireBuffer(
 
 -- r: [r]est of paragraph/indentation (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
-keymap("o", "ri", function() require("various-textobjs").restOfParagraph() end, { desc = "rest of paragraph textobj" })
-keymap("o", "rp", function() require("various-textobjs").restOfIndentation() end, { desc = "rest of indentation textobj" })
+keymap("o", "rp", function() require("various-textobjs").restOfParagraph() end, { desc = "rest of paragraph textobj" })
+keymap("o", "ri", function() require("various-textobjs").restOfIndentation() end, { desc = "rest of indentation textobj" })
 
 -- ge: diagnostic textobj (similar to ge for the next diagnostic)
 keymap({ "x", "o" }, "ge", function() require("various-textobjs").diagnostic() end, { desc = "diagnostic textobj" })

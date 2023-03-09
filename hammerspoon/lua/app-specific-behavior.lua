@@ -14,12 +14,14 @@ local function unHideAll()
 end
 
 -- hide windows of other apps, except twitter
----@param win hs.window the window of the app not to hide
-local function hideOthers(win)
-	if not win or not (win:application()) then return end
-	local winName = win:application():name()
+---@param thisWin hs.window the window of the app not to hide
+local function hideOthers(thisWin)
+	if not thisWin or not (thisWin:application()) then return end
+	local winName = thisWin:application():name()
 
-	local wins = win:otherWindowsSameScreen()
+	hs.closeConsole() -- set separately, since it's not regarded a regular window
+
+	local wins = thisWin:otherWindowsSameScreen()
 	for _, w in pairs(wins) do
 		local app = w:application()
 		if not app then return end
@@ -55,9 +57,9 @@ TransBgAppWatcher = Aw.new(function(appName, eventType, appObject)
 	local delay
 	if eventType == Aw.launched or (appName == "neovide" and eventType == Aw.activated) then
 		-- neovide does not send a launch signal
-		delay = {0.1, 0.8}
+		delay = { 0.1, 0.6 }
 	elseif eventType == Aw.activated then
-		delay = {0.1}
+		delay = { 0.1 }
 	else
 		return
 	end
@@ -90,8 +92,7 @@ end):start()
 -- prevent maximized window from covering sketchybar if they are unfocused
 -- pseudomaximized windows always get twitter to the side
 Wf_maxWindows = Wf.new(true):subscribe(Wf.windowUnfocused, function(win)
-	if IsProjector() then return end
-	if CheckSize(win, Maximized) then win:application():hide() end
+	if not (IsProjector()) and CheckSize(win, Maximized) then win:application():hide() end
 end)
 
 ---play/pause spotify with Spotify
@@ -382,12 +383,12 @@ end):start()
 -- - Hide Toolbar
 -- - set workspace
 -- - update counter in sketchybar
-DraftsWatcher = Aw.new(function(appName, eventType, appObject)
-	if appName == "Drafts" and (eventType == Aw.launching or eventType == Aw.activated) then
+DraftsWatcher = Aw.new(function(appName, event, appObj)
+	if appName == "Drafts" and (event == Aw.launching or event == Aw.activated) then
 		local workspace = IsAtOffice() and "Office" or "Home"
 		RunWithDelays({ 0.1 }, function()
-			appObject:selectMenuItem { "Workspaces", workspace }
-			appObject:selectMenuItem { "View", "Hide Toolbar" }
+			appObj:selectMenuItem { "Workspaces", workspace }
+			appObj:selectMenuItem { "View", "Hide Toolbar" }
 			hs.execute("sketchybar --trigger drafts-counter-update")
 		end)
 	end
