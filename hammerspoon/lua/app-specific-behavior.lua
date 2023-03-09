@@ -47,14 +47,19 @@ TransBgAppWatcher = Aw.new(function(appName, eventType, appObject)
 		return
 	end
 
-	local delay
 	if eventType == Aw.terminated then
 		unHideAll()
-	elseif eventType == Aw.launched or (appName == "neovide" and eventType == Aw.activated) then
+		return
+	end
+
+	local delay
+	if eventType == Aw.launched or (appName == "neovide" and eventType == Aw.activated) then
 		-- neovide does not send a launch signal
 		delay = {0.1, 0.8}
 	elseif eventType == Aw.activated then
 		delay = {0.1}
+	else
+		return
 	end
 	RunWithDelays(delay, function()
 		local win = appObject:mainWindow()
@@ -422,7 +427,7 @@ DiscordAppWatcher = Aw.new(function(appName, eventType)
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	if eventType == Aw.launched then
 		-- stylua: ignore
-		RunWithDelays({3, 5}, function()
+		RunWithDelays(3, function()
 			OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 		end)
 	end

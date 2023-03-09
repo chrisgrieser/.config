@@ -35,8 +35,8 @@ function M.commentHr()
 	local hr = comStr:gsub(" ?%%s ?", fullLine)
 	if ft == "markdown" then hr = "---" end
 
-	local linesToAppend = {"", hr, ""}
-	if wasOnBlank then linesToAppend = {hr, ""} end
+	local linesToAppend = { "", hr, "" }
+	if wasOnBlank then linesToAppend = { hr, "" } end
 
 	fn.append(".", linesToAppend)
 
@@ -71,6 +71,7 @@ function M.wordSwitch()
 		{ "right", "left" },
 		{ "red", "blue" },
 		{ "top", "bottom" },
+		{ "min", "max" },
 		{ "width", "height" },
 		{ "relative", "absolute" },
 		{ "low", "high" },
@@ -126,7 +127,7 @@ function M.wordSwitch()
 	end
 
 	if newWord then
-		fn.setreg("z", newWord) -- HACK no idea why, but ciw does not work well with normal, therefore pasting instead
+		fn.setreg("z", newWord)
 		normal([[viw"zP]])
 	else
 		vim.notify("Word under cursor cannot be switched.", vim.log.levels.WARN)
@@ -145,17 +146,18 @@ autocmd("BufReadPost", {
 	callback = function() b.timeOpened = os.time() end,
 })
 
----select between undoing the last 1h, 4h, or 24h
+---select between common undopoints: present, last open, 1h ago, and 15min ago
 function M.undoDuration()
 	local now = os.time() -- saved in epoch secs
-	local minsPassed = math.floor((now - b.timeOpened) / 60)
+	local secsPassed = now - b.timeOpened
+	local minsPassed = math.floor(secsPassed / 60)
 	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
-	local selection = { " present", resetLabel, "15m", "1h" }
+	local undoOptionsPresented = { " present", resetLabel, "15m", "1h", "24h" }
 
-	vim.ui.select(selection, { prompt = "Undo…" }, function(choice)
+	vim.ui.select(undoOptionsPresented, { prompt = "Undo…" }, function(choice)
 		if not choice then return end
 		if choice:find("ago") then
-			cmd.earlier(minsPassed .. "m")
+			cmd.earlier(secsPassed .. "s")
 		elseif choice:find("present") then
 			cmd.later(tostring(opt.undolevels:get())) -- redo as much as there are undolevels
 		else
@@ -213,7 +215,6 @@ function M.toggleWrap()
 		keymap({ "n", "x" }, "j", function() M.overscroll("gj") end, opts)
 	end
 end
-
 
 --------------------------------------------------------------------------------
 -- MOVEMENT

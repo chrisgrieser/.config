@@ -15,10 +15,14 @@ UnlockWatcher = caff
 
 -- keep the iMac display brightness low when projector is connected
 ProjectorScreensaverWatcher = caff
-	.new(function(eventType)
+	.new(function(event)
+		if IsAtOffice() then return end
 		if
-			not (IsAtOffice())
-			and (eventType == caff.screensaverDidStop or eventType == caff.screensaverDidStart)
+			event == caff.screensaverDidStop
+			or event == caff.screensaverDidStart
+			or event == caff.screensDidWake
+			or event == caff.systemDidWake
+			or event == caff.screensDidSleep
 		then
 			RunWithDelays(1, function()
 				if IsProjector() then IMacDisplay:setBrightness(0) end

@@ -149,7 +149,7 @@ function MoveResize(win, pos)
 	while i < 20 and CheckSize(win, pos) == false do
 		if not win then return end
 		win:moveToUnit(pos)
-		os.execute("sleep 0.1") -- lua itself does not have a wait function
+		Wait(0.1)
 		i = i + 1
 	end
 end

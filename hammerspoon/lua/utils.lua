@@ -85,6 +85,14 @@ function ReadFile(filePath)
 	return content
 end
 
+---delay (blocking)
+---@param secs number
+function Wait(secs)
+	-- since lua has not blocking delay, executing shell-sleep since os.execute
+	-- is blocking
+	os.execute("sleep " .. tostring(secs))
+end
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -197,6 +205,6 @@ function QuitApp(appNames)
 		if appObj then appObj:kill() end
 		-- apparently, too many kill signals at once interfere with each other,
 		-- making this necessary?
-		hs.execute("sleep 0.05") 
+		hs.execute("sleep 0.05")
 	end
 end
