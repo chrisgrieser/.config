@@ -2,8 +2,9 @@ require("lua.utils")
 local cons = hs.console
 --------------------------------------------------------------------------------
 
----filter console entries, removing logging for enabling/disabling hotkeys or
----extention loading. HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
+---filter console entries, removing logging for enabling/disabling hotkeys,
+---useless layout info or warnings, or info on extension loading.
+-- HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
 function CleanupConsole()
 	local consoleOutput = tostring(hs.console.getConsole())
 	local out = ""
@@ -14,6 +15,9 @@ function CleanupConsole()
 			or line:find("hotkey: .*abled hotkey")
 			or line:find("Loading extensions?: ")
 			or line:find("Loading Spoon: RoundedCorners")
+			or line:find("Lazy extension loading enabled")
+			or line:find("%-%- Loading .*/init.lua$")
+			or line:find("%-%- Done.$")
 		local layoutInfo = line:find("No windows matched, skipping.")
 
 		if not ignore and not layoutInfo and layoutLinesCount == 0 then
@@ -52,7 +56,7 @@ function SystemStart()
 
 		os.remove(reloadIndicator)
 		-- use neovim automation to display the notification in neovim
-		hs.execute([[echo 'vim.notify(" Hammerspoon reloaded.")' > /tmp/nvim-automation]])
+		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded.")' > /tmp/nvim-automation]])
 		return
 	else
 		Notify("Finished loading.")
@@ -85,8 +89,8 @@ function SetConsoleColors(mode)
 end
 
 -- initialize
-local isDark = hs.execute([[defaults read -g AppleInterfaceStyle]]):find("Dark") and "dark" or "light"
-SetConsoleColors(isDark)
+local mode = hs.execute([[defaults read -g AppleInterfaceStyle]]):find("Dark") and "dark" or "light"
+SetConsoleColors(mode)
 
 -- copy last command to clipboard
 -- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)
