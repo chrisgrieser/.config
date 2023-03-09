@@ -128,21 +128,27 @@ local function requestLspRefCount()
 	end
 	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
 	params.context = { includeDeclaration = false }
+	local thisFileUri = vim.uri_from_fname(expand("%:p"))
+
 	vim.lsp.buf_request(0, "textDocument/references", params, function(error, refs)
 		lspCount.refWorkspace = nil
 		lspCount.refFile = nil
-		if not error and refs then lspCount.refWorkspace = #refs end
+		if not error and refs then
+			lspCount.refWorkspace = #refs
+			lspCount.refFile = 0
+			for _, ref in pairs(refs) do
+				if thisFileUri == ref.uri then lspCount.refFile = lspCount.refFile + 1 end
+			end
+		end
 	end)
 	vim.lsp.buf_request(0, "textDocument/definition", params, function(error, defs)
 		lspCount.defWorkspace = nil
 		lspCount.defFile = nil
 		if not error and defs then
 			lspCount.defWorkspace = #defs
-			local thisFileUri = vim.uri_from_fname(expand("%:p"))
-			print("thisFileUri:", thisFileUri)
 			lspCount.defFile = 0
 			for _, def in pairs(defs) do
-					
+				if thisFileUri == def.targetUri then lspCount.defFile = lspCount.defFile + 1 end
 			end
 		end
 	end)
@@ -160,16 +166,17 @@ local function lspReferencesCountStatusline()
 	if lspLoading or not lspCapable then return "" end
 
 	requestLspRefCount()
-	if not (lspCount.refWorkspace and lspCount.defWorkspace) then return "" end
-	local out = tostring(lspCount.defFile)
-		.. "/"
-		.. tostring(lspCount.defWorkspace)
-		.. "  "
-		.. tostring(lspCount.refFile)
-		.. "/"
-		.. tostring(lspCount.defWorkspace)
+	if not lspCount.refWorkspace then return "" end
 
-	return out
+	local defs = tostring(lspCount.defFile)
+	if lspCount.defFile ~= lspCount.defWorkspace then
+		defs = defs .. "/" .. tostring(lspCount.defWorkspace)
+	end
+	local refs = tostring(lspCount.refFile)
+	if lspCount.refFile ~= lspCount.refWorkspace then
+		refs = refs .. "/" .. tostring(lspCount.refWorkspace)
+	end
+	return defs .. "  " .. refs
 end
 
 --------------------------------------------------------------------------------
