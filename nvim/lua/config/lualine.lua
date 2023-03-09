@@ -168,7 +168,7 @@ local function lspCountStatusline()
 	if lspLoading or not lspCapable then return "" end
 
 	requestLspRefCount()
-	if not lspCount.refWorkspace then return "" end
+	if not (lspCount.refWorkspace and lspCount.defWorkspace) then return "" end
 
 	local defs = tostring(lspCount.defFile)
 	if lspCount.defFile ~= lspCount.defWorkspace then
