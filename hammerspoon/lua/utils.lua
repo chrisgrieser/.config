@@ -183,7 +183,7 @@ function RestartApp(appName)
 end
 
 function AsSoonAsAppRuns(appName)
-	hs.timer.waitUntil(AppIsRunning(appName))	
+	hs.timer.waitUntil(function () AppIsRunning(appName))	
 end
 
 ---@param appNames string|string[]
