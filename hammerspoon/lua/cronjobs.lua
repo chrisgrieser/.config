@@ -39,6 +39,7 @@ BiweeklyTimer = hs.timer
 
 		PeripheryBatteryCheck("Drafts")
 		hs.loadSpoon("EmmyLua")
+
 		Applescript([[
 			tell application id "com.runningwithcrayons.Alfred"
 				run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
