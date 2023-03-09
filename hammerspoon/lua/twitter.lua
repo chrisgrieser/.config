@@ -11,7 +11,7 @@ function TwitterScrollUp()
 	Keystroke({ "command" }, "1", 1, twitter) -- go to home tab
 	Keystroke({ "shift", "command" }, "R", 1, twitter) -- reload
 
-	-- needs delays to wait for tweet loading
+	-- needs delays to wait for tweets loading
 	RunWithDelays({ 0.5, 1.5 }, function()
 		Keystroke({ "command" }, "1", 1, twitter) -- scroll up
 		Keystroke({ "command" }, "up", 1, twitter) -- goto top
@@ -19,7 +19,7 @@ function TwitterScrollUp()
 end
 
 function TwitterToTheSide()
-	if not AppIsRunning("Twitter") or not App("Twitter"):mainWindow() then return end
+	if not AppIsRunning("Twitter") then return end
 	local win = App("Twitter"):mainWindow()
 	if not win then return end
 	win:setFrame(ToTheSide)
@@ -44,7 +44,7 @@ TwitterWatcher = Aw.new(function(appName, event, appObj)
 			if win:title():find("Media") then
 				win:close()
 				-- HACK using keystroke, since closing window does not seem to work reliably
-				Keystroke({ "command" }, "w", 1, App("Twitter")) -- close media window
+				Keystroke({ "command" }, "w", 1, App("Twitter")) 
 			end
 		end
 

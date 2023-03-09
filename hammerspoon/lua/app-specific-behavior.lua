@@ -39,40 +39,26 @@ end
 --------------------------------------------------------------------------------
 
 -- AUTOMATIONS FOR MULTIPLE APPS
-TransBgAppWatcher = Aw.new(function(appName, eventType, appObject)
+TransBgAppWatcher = Aw.new(function(appName, event, appObj)
 	local transBgApp = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
 	if
 		IsProjector()
 		or not (TableContains(transBgApp, appName))
 		or appName == "Alfred" -- needed for Alfred Compatibility Mode
+		or not (TableContains(transBgApp, FrontAppName())) -- extra check for Alfred
 	then
 		return
 	end
 
-	if eventType == Aw.terminated then
+	if event == Aw.terminated then
 		unHideAll()
-		return
+	elseif event == Aw.activated or event == Aw.launched then
+		hs.timer.waitUntil(function() return AppIsRunning(appName) end, function()
+			local win = appObj:mainWindow()
+			if not win then return end
+			if CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized) then hideOthers(win) end
+		end)
 	end
-
-	local delay
-	if eventType == Aw.launched or (appName == "neovide" and eventType == Aw.activated) then
-		-- neovide does not send a launch signal
-		delay = { 0.1, 0.6 }
-	elseif eventType == Aw.activated then
-		delay = { 0.1 }
-	else
-		return
-	end
-	RunWithDelays(delay, function()
-		local win = appObject:mainWindow()
-		if
-			win
-			and TableContains(transBgApp, FrontAppName()) -- extra check somestimes needed
-			and (CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized))
-		then
-			hideOthers(win)
-		end
-	end)
 end):start()
 
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
@@ -215,7 +201,7 @@ NeovideWatcher = Aw.new(function(appName, eventType, appObj)
 	if eventType == Aw.activated or eventType == Aw.launched then
 		addCssSelectorLeadingDot()
 		-- maximize app
-		RunWithDelays({ 0.2, 0.5, 1, 1.5 }, function()
+		({ 0.2, 0.5, 1, 1.5 }, function()
 			local win = appObj:mainWindow()
 			if not win then return end
 			if
