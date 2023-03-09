@@ -4,7 +4,7 @@ Keystroke = hs.eventtap.keyStroke
 Aw = hs.application.watcher
 Wf = hs.window.filter
 Pw = hs.pathwatcher.new
-App = hs.application
+App = hs.application.get
 Applescript = hs.osascript.applescript
 UriScheme = hs.urlevent.bind
 TableContains = hs.fnutils.contains
@@ -41,7 +41,7 @@ end
 
 ---Whether the current time is between startHour & endHour
 ---@param startHour number, time between 0 and 24, also accepts floats e.g. 13.5 for 13:30
----@param endHour number, time between 0 and 24, also accepts floats e.g. 13.5 for 13:30
+---@param endHour number, time between 0 and 24
 ---@return boolean|nil true/false for valid time ranges, nil for invalid time range
 function BetweenTime(startHour, endHour)
 	if startHour >= 24 or endHour >= 24 or startHour < 0 or endHour < 0 then
@@ -170,12 +170,11 @@ function AppIsRunning(appName)
 	return app:isRunning()
 end
 
+---If app is not running, will simply start the app instead
 ---@param appName string
 function RestartApp(appName)
 	local app = hs.application.get(appName)
-	if app then 
-		app:kill()
-	end
+	if app then app:kill() end
 	hs.timer.waitUntil(
 		function() return hs.application.get(appName) == nil end,
 		function() hs.application.open(appName) end,
@@ -186,7 +185,7 @@ end
 ---@param appName string app to wait for
 ---@param callbackFn function function to execute when the app is available
 function AsSoonAsAppRuns(appName, callbackFn)
-	hs.timer.waitUntil(function () AppIsRunning(appName) end, callbackFn, 0.8)
+	hs.timer.waitUntil(function() AppIsRunning(appName) end, callbackFn, 0.5)
 end
 
 ---@param appNames string|string[]

@@ -45,7 +45,7 @@ TransBgAppWatcher = Aw.new(function(appName, event, appObj)
 		IsProjector()
 		or not (TableContains(transBgApp, appName))
 		or appName == "Alfred" -- needed for Alfred Compatibility Mode
-		or not (TableContains(transBgApp, FrontAppName())) -- extra check for Alfred
+		or not (TableContains(transBgApp, FrontAppName())) -- extra check as Alfred in Compatibility Mode sometimes activates under the underlying app's name
 	then
 		return
 	end
@@ -53,7 +53,8 @@ TransBgAppWatcher = Aw.new(function(appName, event, appObj)
 	if event == Aw.terminated then
 		unHideAll()
 	elseif event == Aw.activated or event == Aw.launched then
-		AsSoonAsAppRuns(appName, function ()
+		local delays = (event == Aw.activated and appName == "neovide") and {0.1, 0.8} or 0.1
+		RunWithDelays(delays, function ()
 			local win = appObj:mainWindow()
 			if not win then return end
 			if CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized) then hideOthers(win) end
@@ -299,7 +300,8 @@ Wf_quicklook = Wf
 -- FINDER
 Wf_finder = Wf.new("Finder")
 	:setOverrideFilter({
-		rejectTitles = { "^Quick Look$", "^Move$", "^Copy$", "^Finder Settings$", " Info$", "^$" }, -- "^$" excludes the Desktop, which has no window title
+		-- "^$" excludes the Desktop, which has no window title
+		rejectTitles = { "^Quick Look$", "^Move$", "^Copy$", "^Finder Settings$", " Info$", "^$" }, 
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})

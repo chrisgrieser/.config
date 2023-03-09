@@ -1,6 +1,3 @@
-# https://kampfkarren.github.io/selene/lints/constant_table_comparison.html
-#───────────────────────────────────────────────────────────────────────────────
-
 [lints]
 # disabled since duplication with LSP
 undefined_variable = "allow"
@@ -16,4 +13,4 @@ high_cyclomatic_complexity = "warn"
 if_same_then_else = "warn"
 
 [config]
-high_cyclomatic_complexity = {maximum_complexity = 20}
+high_cyclomatic_complexity = { maximum_complexity = 20 }
