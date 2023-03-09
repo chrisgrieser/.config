@@ -23,7 +23,7 @@ rules:
     - min: 4
       max: 25
       properties: never
-      exceptions: [x, y, i, j, id, min, max, app, str, int]
+      exceptions: [x, y, i, j, id, min, max, app, str, int, out]
   no-shadow:
     - warn
     - builtinGlobals: true
