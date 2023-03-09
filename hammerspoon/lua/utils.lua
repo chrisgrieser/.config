@@ -45,7 +45,7 @@ end
 ---@return boolean|nil true/false for valid time ranges, nil for invalid time range
 function BetweenTime(startHour, endHour)
 	if startHour >= 24 or endHour >= 24 or startHour < 0 or endHour < 0 then
-		Notify("BetweenTime: Invalid time range")
+		print("⚠️ BetweenTime: Invalid time range")
 		return nil
 	end
 	local currentHour = hs.timer.localTime() / 60 / 60
@@ -88,7 +88,7 @@ end
 ---delay (blocking)
 ---@param secs number
 function Wait(secs)
-	-- since lua has not blocking delay, executing shell-sleep since os.execute
+	-- since lua has not blocking delay, executing shells' sleep since os.execute
 	-- is blocking
 	os.execute("sleep " .. tostring(secs))
 end
@@ -105,11 +105,11 @@ end
 
 ---Repeat a function multiple times
 ---@param delaySecs number|number[]
----@param func function function to be run on delay(s)
-function RunWithDelays(delaySecs, func)
+---@param callbackFn function function to be run on delay(s)
+function RunWithDelays(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
-		hs.timer.doAfter(delay, func)
+		hs.timer.doAfter(delay, callbackFn)
 	end
 end
 
@@ -151,8 +151,8 @@ function Notify(...)
 	local safe_args = {}
 	local args = { ... }
 	for _, arg in pairs(args) do
-		local safe = (type(arg) == "table") and hs.inspect(arg) or tostring(arg)
-		table.insert(safe_args, safe)
+		local str = (type(arg) == "table") and hs.inspect(arg) or tostring(arg)
+		table.insert(safe_args, str)
 	end
 	local out = table.concat(safe_args, " ")
 	hs.notify.show("Hammerspoon", "", out)
@@ -172,18 +172,21 @@ end
 
 ---@param appName string
 function RestartApp(appName)
-	local app = hs.application(appName)
-	if not app then return end
-	app:kill()
+	local app = hs.application.get(appName)
+	if app then 
+		app:kill()
+	end
 	hs.timer.waitUntil(
-		function() return hs.application(appName) == nil end,
+		function() return hs.application.get(appName) == nil end,
 		function() hs.application.open(appName) end,
 		0.1
 	)
 end
 
-function AsSoonAsAppRuns(appName)
-	hs.timer.waitUntil(function () AppIsRunning(appName))	
+---@param appName string app to wait for
+---@param callbackFn function function to execute when the app is available
+function AsSoonAsAppRuns(appName, callbackFn)
+	hs.timer.waitUntil(function () AppIsRunning(appName) end, callbackFn, 0.8)
 end
 
 ---@param appNames string|string[]
@@ -197,7 +200,7 @@ end
 
 function QuitFinderIfNoWindow()
 	-- quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
-	local finder = hs.application("Finder")
+	local finder = hs.application.get("Finder")
 	if finder and #(finder:allWindows()) == 0 then finder:kill() end
 end
 
@@ -207,8 +210,8 @@ function QuitApp(appNames)
 	for _, name in pairs(appNames) do
 		local appObj = hs.application.get(name)
 		if appObj then appObj:kill() end
-		-- apparently, too many kill signals at once interfere with each other,
-		-- making this necessary?
+		-- SIC apparently, too many kill signals at once interfere with each other,
+		-- making this waiting necessary
 		hs.execute("sleep 0.05")
 	end
 end

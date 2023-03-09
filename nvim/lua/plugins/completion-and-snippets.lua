@@ -100,15 +100,9 @@ local function cmpconfig()
 			},
 		},
 		mapping = cmp.mapping.preset.insert {
-			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
+			["<CR>"] = cmp.mapping.confirm { select = false }, -- true = autoselect first entry
 			["<S-Up>"] = cmp.mapping.scroll_docs(-4),
-			["<M-Esc>"] = cmp.mapping.complete(), -- manually trigger completion, like in mac
 			["<S-Down>"] = cmp.mapping.scroll_docs(4),
-			-- emacs hippie-expand
-			["<C-h>"] = cmp.mapping(function()
-				cmp.complete()
-				cmp.confirm { select = true }
-			end, { "i", "s" }),
 			["<C-e>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.abort()

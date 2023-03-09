@@ -49,7 +49,7 @@ local function customHighlights()
 	linkHighlight("myAnnotations", "Todo")
 	vim.fn.matchadd(
 		"myAnnotations",
-		[[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|NOTE\|FIX\|CAVEAT\|DEPRECATED\)\>]]
+		[[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|SIC\)\>]]
 	)
 
 	linkHighlight("IndentBlanklineContextChar", "Comment") -- active indent

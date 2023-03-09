@@ -53,7 +53,7 @@ TransBgAppWatcher = Aw.new(function(appName, event, appObj)
 	if event == Aw.terminated then
 		unHideAll()
 	elseif event == Aw.activated or event == Aw.launched then
-		hs.timer.waitUntil(function() return AppIsRunning(appName) end, function()
+		AsSoonAsAppRuns(appName, function ()
 			local win = appObj:mainWindow()
 			if not win then return end
 			if CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized) then hideOthers(win) end
@@ -200,8 +200,9 @@ NeovideWatcher = Aw.new(function(appName, eventType, appObj)
 	-- often does not send a "launched" signal
 	if eventType == Aw.activated or eventType == Aw.launched then
 		addCssSelectorLeadingDot()
+
 		-- maximize app
-		({ 0.2, 0.5, 1, 1.5 }, function()
+		AsSoonAsAppRuns("neovide", function()
 			local win = appObj:mainWindow()
 			if not win then return end
 			if

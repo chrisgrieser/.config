@@ -69,7 +69,7 @@ local function workLayout()
 	ShowAllSidebars()
 	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 
-	Wait(0.5)
+	Wait(0.7)
 	App("Drafts"):activate()
 
 	CleanupConsole()
