@@ -15,7 +15,6 @@ ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide u
 ---@param size hs.geometry
 ---@return boolean|nil
 function CheckSize(win, size)
-	if not win then return nil end
 	local invalidWinsByTitle = { -- windows which can/should not be resized
 		"Copy", -- Finder windows
 		"Move", -- Finder windows
@@ -26,7 +25,7 @@ function CheckSize(win, size)
 		"Transmission",
 		"Twitter",
 	}
-	if TableContains(invalidWinsByTitle, win:title()) then return nil end
+	if not win or TableContains(invalidWinsByTitle, win:title()) then return nil end
 
 	local maxf = win:screen():frame()
 	local winf = win:frame()
@@ -159,7 +158,7 @@ end
 
 ---bring all windows of front app to the front
 function BringAllToFront()
-	local app = App.frontmostApplication()
+	local app = hs.application.frontmostApplication()
 	if #app:allWindows() < 2 then return end -- the occasional faulty creation of task manager windows in Browser
 	app:selectMenuItem { "Window", "Bring All to Front" }
 end
