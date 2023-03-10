@@ -113,19 +113,23 @@ local function cmpconfig()
 
 			-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
 			["<Tab>"] = cmp.mapping(function(fallback)
-				if require("luasnip").jumpable(1) then
-					require("luasnip").jump(1)
-				elseif cmp.visible() then
+				if cmp.visible() then
 					cmp.select_next_item()
+				elseif require("neogen").jumpable() then
+					require("neogen").jump_next()
+				elseif require("luasnip").jumpable(1) then
+					require("luasnip").jump(1)
 				else
 					fallback()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
-				if require("luasnip").jumpable(-1) then
+			if cmp.visible() then
+				cmp.select_prev_item()
+				elseif require("neogen").jumpable(true) then
+					require("neogen").jump_prev()
+				elseif require("luasnip").jumpable(-1) then
 					require("luasnip").jump(-1)
-				elseif cmp.visible() then
-					cmp.select_prev_item()
 				else
 					fallback()
 				end
@@ -364,10 +368,8 @@ return {
 			local ls = require("luasnip")
 
 			ls.setup {
-				history = true, -- allow jumping back into the snippet
 				region_check_events = "InsertEnter", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
-				enable_autosnippets = true,
 			}
 
 			-- VS-code-style snippets

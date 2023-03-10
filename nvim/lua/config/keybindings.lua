@@ -104,25 +104,6 @@ keymap( "n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><C
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickfix list" })
 
 --------------------------------------------------------------------------------
-
--- LUASNIP
-keymap({ "i", "s" }, "<D-j>", function()
-	if require("luasnip").jumpable(1) then
-		require("luasnip").jump(1)
-	else
-		vim.notify("No Jump available.", logWarn)
-	end
-end, { desc = "LuaSnip: Jump" })
-
-keymap({ "i", "s" }, "<D-S-j>", function()
-	if require("luasnip").jumpable(-1) then
-		require("luasnip").jump(-1)
-	else
-		vim.notify("No Jump back available.", logWarn)
-	end
-end, { desc = "LuaSnip: Jump Back" })
-
---------------------------------------------------------------------------------
 -- EDITING
 
 -- Comments & Annotations
