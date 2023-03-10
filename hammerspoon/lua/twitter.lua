@@ -52,21 +52,23 @@ TwitterWatcher = Aw.new(function(appName, event, appObj)
 	elseif event == Aw.activated and appName ~= "Twitter" then
 		if not AppIsRunning("Twitter") then return end
 		local win = App("Twitter"):mainWindow()
-		if not win then return end
 
 		if CheckSize(win, PseudoMaximized) or CheckSize(win, Centered) then
 			win:raise()
-			-- in case of active split, prevent left window of covering the sketchybar
+			-- in case of active split, prevent left window from covering the sketchybar
 			if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
 		end
 
-	-- do not focus Twitter when after an app is terminated
+	-- do not focus Twitter after an app is terminated
 	elseif event == Aw.terminated and appName ~= "Twitter" then
-		Notify("beep")
-		RunWithDelays(0.2, function()
-			if FrontAppName() == "Twitter" then
-				Keystroke({ "cmd" }, "tab")
+		local visibleWins = hs.window:orderedWindows()
+		local nextWin
+		for _, win in pairs(visibleWins) do
+			if win:application():name() ~= "Twitter" then
+				nextWin = win
+				break
 			end
-		end)
+		end
+		nextWin:focus()
 	end
 end):start()
