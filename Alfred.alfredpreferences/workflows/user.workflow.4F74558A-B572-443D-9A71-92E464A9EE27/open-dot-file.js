@@ -24,25 +24,13 @@ const fileArray = app
 		`
 		cd "${dotfileFolder}"
 		fd --type=file --hidden --absolute-path \\
-			-E "Alfred.alfredpreferences/workflows/shimmering-obsidian" \\
-			-E "Alfred.alfredpreferences/workflows/alfred-bibtex-citation-picker" \\
-			-E "Alfred.alfredpreferences/workflows/user.workflow.3BF713ED-02D0-4127-8126-26E36BF15CFC" \\
-			-E "Alfred.alfredpreferences/workflows/user.workflow.90A6E1C0-4A00-40C7-9233-FB165AE431F3" \\
-			-E "alacritty/colors/*" \\
-			-E "hammerspoon/Spoons/*" \\
-			-E "**/*.app/*" \\
-			-E "karabiner/automatic_backups" \\
 			-E "visualized-keyboard-layout/*.json" \\
-			-E "zsh/plugins/*" \\
 			-E "*.icns" \\
 			-E "*.plist" \\
-			-E "*.add" \\
 			-E "TODO*" \\
 			-E "INFO*" \\
 			-E "*.png" \\
 			-E "Fonts/*" \\
-			-E ".git/" \\
-			-E ".git" \\
 	`,
 	)
 	.split("\r")
@@ -52,7 +40,7 @@ const fileArray = app
 		const relPath = absPath.slice(dotfileFolder.length);
 		const relativeParentFolder = relPath.slice(0, -(name.length + 1));
 
-		const fileIsDirty = dirtyFiles.includes(relPath)
+		const fileIsDirty = dirtyFiles.includes(relPath);
 		const dirtyIcon = fileIsDirty ? " ✴️" : "";
 		let matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
 		if (fileIsDirty) matcher += " dirty";
@@ -103,18 +91,9 @@ const fileArray = app
 
 const folderArray = app
 	.doShellScript(
-		`
-		PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+		`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 		cd "${dotfileFolder}" ;
-		fd --type=directory --hidden --no-ignore \\
-			-E "Alfred.alfredpreferences/**" \\
-			-E "Spoons" \\
-			-E "**/*.app/*" \\
-			-E "karabiner/automatic_backups" \\
-			-E "zsh/plugins/*" \\
-			-E "nvim/my-plugins/*" \\
-			-E ".git" \\
-	`,
+		fd --type=directory --hidden`,
 	)
 	.split("\r")
 	.map(file => {
