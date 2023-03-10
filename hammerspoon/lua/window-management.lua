@@ -14,7 +14,7 @@ ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide u
 
 ---@param win hs.window
 ---@param size hs.geometry
----@return boolean|nil
+---@return boolean|nil whether win has the given size. returns nil for invalid win
 function CheckSize(win, size)
 	local invalidWinsByTitle = { -- windows which can/should not be resized
 		"Copy", -- Finder windows
@@ -25,6 +25,7 @@ function CheckSize(win, size)
 		"System Settings",
 		"Transmission",
 		"Twitter",
+		"Alfred",
 	}
 	if not win or TableContains(invalidWinsByTitle, win:title()) then return nil end
 

@@ -28,6 +28,7 @@ end
 
 -- ensure that twitter does not have focus, "falling through" to the next window
 function TwitterFallThrough()
+	if FrontAppName() == "Alfred" then return end -- needed for Alfred Compatibility Mode
 	local visibleWins = hs.window:orderedWindows()
 	local nextWin
 	for _, win in pairs(visibleWins) do

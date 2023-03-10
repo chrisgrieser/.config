@@ -215,3 +215,6 @@ matches:
   - trigger: ahrd
     replace: hard
     word: true
+  - trigger: nru
+    replace: nur
+    word: true

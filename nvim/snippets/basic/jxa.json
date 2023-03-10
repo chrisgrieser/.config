@@ -74,8 +74,7 @@
 		"prefix": "read file",
 		"body": [
 			"function readFile(path) {",
-			"\tconst fm = $.NSFileManager.defaultManager;",
-			"\tconst data = fm.contentsAtPath(path);",
+			"\tconst data = $.NSFileManager.defaultManager.contentsAtPath(path);",
 			"\tconst str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);",
 			"\treturn ObjC.unwrap(str);",
 			"}"
