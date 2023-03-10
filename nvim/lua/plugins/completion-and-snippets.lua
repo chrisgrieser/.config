@@ -234,6 +234,14 @@ local function cmpconfig()
 		},
 	})
 
+	-- config files (e.g. ignore files)
+	cmp.setup.filetype("conf", {
+		sources = cmp.config.sources {
+			s.buffer,
+			s.path,
+		},
+	})
+
 	-- plaintext (e.g., pass editing)
 	cmp.setup.filetype("text", {
 		sources = cmp.config.sources {

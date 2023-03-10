@@ -55,6 +55,7 @@ const fileArray = app
 		if (type === "yml") type = "yaml";
 		else if (type === "mjs") type = "js";
 		else if (type === "zsh") type = "sh";
+		else if (type === "conf") type = "config";
 		else if (type.endsWith("-bkp")) type = "other";
 
 		// icon determination

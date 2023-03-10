@@ -42,11 +42,6 @@ keymap({ "n", "x" }, "K", "6k")
 keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "K", "2k")
 
--- e,w,b make small movements, treating _-. as word boundaries
-keymap({ "n", "x", "o" }, "w", "<Plug>CamelCaseMotion_w", { desc = "camelCase w" })
-keymap({ "n", "x", "o" }, "e", "<Plug>CamelCaseMotion_e", { desc = "camelCase e" })
-keymap({ "n", "x", "o" }, "b", "<Plug>CamelCaseMotion_b", { desc = "camelCase b" })
-
 -- add overscroll
 keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)" })
 keymap({ "n", "x" }, "G", "Gzz")
@@ -493,13 +488,19 @@ autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 -- Simple version of the delaytrain.nvim
-for _, key in ipairs { "x", "h", "l" } do
+-- CamelCaseMotion for e, w, and b
+for _, key in ipairs { "x", "h", "l", "e", "w", "b" } do
 	local timeout = 4000
-	local maxUsage = 10
+	local maxUsage = 8
 
 	local count = 0
 	keymap("n", key, function()
-		if key == "x" then key = [["_x]] end
+		if key == "x" then
+			key = [["_x]]
+		elseif key == "e" or key == "w" or key == "b" then
+			key = "<Plug>CamelCaseMotion_" .. key
+		end
+
 		if fn.reg_executing() ~= "" then return key end
 
 		if count <= maxUsage then
