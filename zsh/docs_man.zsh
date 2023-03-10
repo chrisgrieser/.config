@@ -33,9 +33,13 @@ function man() {
 	fi
 }
 
-# # simpler version without alacritty for people reading my dotfiles to snatch
+# # simpler version for people reading my dotfiles to snatch
 # function man () {
-# 	command man "$1" -P "/usr/bin/less -is --pattern=$2"
+# 	if [[ -n "$2" ]]; then
+# 		command man "$1" -P "/usr/bin/less -is --pattern=$2"
+# 	else
+# 		command man "$1"
+# 	fi
 # }
 
 # colorize less https://wiki.archlinux.org/index.php/Color_output_in_console#less .

@@ -56,8 +56,14 @@ TransBgAppWatcher = Aw.new(function(appName, event, appObj)
 		local delays = (event == Aw.activated and appName == "neovide") and { 0.1, 0.5 } or 0.1
 		RunWithDelays(delays, function()
 			local win = appObj:mainWindow()
-			if not win then return end
-			if CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized) then hideOthers(win) end
+			if
+				not win -- win closed in meantime
+				or FrontAppName() ~= appName -- win switched in meantime
+				or not (CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized))
+			then
+				return
+			end
+			hideOthers(win)
 		end)
 	end
 end):start()
@@ -110,7 +116,8 @@ end
 
 -- auto-pause/resume Spotify on launch/quit of apps with sound
 SpotifyAppWatcher = Aw.new(function(appName, eventType)
-	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll", "Tagesschau" }
+	local appsWithSound =
+		{ "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll", "Tagesschau" }
 	if not ScreenIsUnlocked() or IsProjector() or not (TableContains(appsWithSound, appName)) then
 		return
 	end
