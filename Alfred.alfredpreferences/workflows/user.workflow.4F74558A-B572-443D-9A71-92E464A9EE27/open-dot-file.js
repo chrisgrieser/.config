@@ -24,21 +24,12 @@ const fileArray = app
 		`
 		cd "${dotfileFolder}"
 		fd --type=file --hidden --absolute-path \\
-			-E "Alfred.alfredpreferences/preferences" \\
-			-E "Alfred.alfredpreferences/remote" \\
-			-E "Alfred.alfredpreferences/resources" \\
-			-E "Alfred.alfredpreferences/themes" \\
-			-E "Alfred.alfredpreferences/workflowextras" \\
 			-E "Alfred.alfredpreferences/workflows/shimmering-obsidian" \\
 			-E "Alfred.alfredpreferences/workflows/alfred-bibtex-citation-picker" \\
 			-E "Alfred.alfredpreferences/workflows/user.workflow.3BF713ED-02D0-4127-8126-26E36BF15CFC" \\
 			-E "Alfred.alfredpreferences/workflows/user.workflow.90A6E1C0-4A00-40C7-9233-FB165AE431F3" \\
 			-E "alacritty/colors/*" \\
 			-E "hammerspoon/Spoons/*" \\
-			-E "*/vale/styles/*/*.yml" \\
-			-E "*/vale/styles/*/*.adoc" \\
-			-E "*/vale/styles/*/*.md" \\
-			-E "*/vale/styles/*/meta.json" \\
 			-E "**/*.app/*" \\
 			-E "karabiner/automatic_backups" \\
 			-E "visualized-keyboard-layout/*.json" \\
@@ -50,7 +41,6 @@ const fileArray = app
 			-E "INFO*" \\
 			-E "*.png" \\
 			-E "Fonts/*" \\
-			-E ".DS_Store" \\
 			-E ".git/" \\
 			-E ".git" \\
 	`,

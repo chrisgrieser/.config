@@ -30,12 +30,10 @@ local options = {
 			"node_modules/", -- node
 			"venv/", -- python
 			"/$", -- folder
-			"%.spl", -- vim spelling file
 			"%.app/", -- internals of mac apps
 			"%.pxd", -- Pixelmator
 			"%.spoon", -- Hammerspoon
 			"%.plist", -- Alfred
-			"%.data", -- Alfred
 			"%.zcomp", -- zsh completion data
 			"harpoon%-menu", -- harpoon
 			"%.harpoon", -- harpoon/projects
@@ -135,6 +133,7 @@ local options = {
 			prompt_prefix = " ",
 			hidden = true,
 			follow = true,
+			no_ignore = false,
 		},
 		keymaps = { prompt_prefix = "  ", modes = { "n", "i", "c", "x", "o", "t" } },
 		oldfiles = { prompt_prefix = " " },
