@@ -1,4 +1,4 @@
-printf '\33c\e[3J' # remove last login message https://stackoverflow.com/a/69915614
+# printf '\33c\e[3J' # remove last login message https://stackoverflow.com/a/69915614
 
 CONFIG=()
 CONFIG+=('load_plugins')
@@ -14,7 +14,7 @@ CONFIG+=('homebrew')
 CONFIG+=('vi-mode')
 
 # Terminal specific
-if [[ "$TERM" == "Warp" || "$TERM" == "xterm-kitty" ]]; then
+if [[ "$TERM" == "Warp" ]]; then
 	cd "$WD" || return
 elif [[ "$TERM" == "alacritty" ]]; then
 	# INFO if $TERM is not set for alacritty, reinstall alacritty, which

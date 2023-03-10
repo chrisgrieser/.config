@@ -40,7 +40,7 @@ end
 
 -- AUTOMATIONS FOR MULTIPLE APPS
 TransBgAppWatcher = Aw.new(function(appName, event, appObj)
-	local transBgApp = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty", "kitty" }
+	local transBgApp = { "neovide", "Neovide", "Obsidian", "kitty", "Alacritty", "alacritty" }
 	if
 		IsProjector()
 		or not (TableContains(transBgApp, appName))
@@ -166,10 +166,7 @@ Wf_browser_all = Wf.new({ "Vivaldi" })
 -- IINA: Full Screen when on projector
 IinaAppLauncher = Aw.new(function(appName, eventType, appObject)
 	if eventType == Aw.launched and appName == "IINA" and IsProjector() then
-		RunWithDelays(
-			{ 0.05, 0.2 },
-			function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end
-		)
+		AsSoonAsAppRuns(appName, function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end)
 	end
 end):start()
 

@@ -44,7 +44,7 @@ min_time = 2500
 format = " [羽$duration](bold cyan)"
 
 [directory]
-truncation_length = 3
+truncation_length = 2
 truncation_symbol = "/"
 truncate_to_repo = true
 read_only = "ﮖ  "

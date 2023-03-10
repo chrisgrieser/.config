@@ -9,13 +9,12 @@ if [[ "$FRONT_APP" =~ "Finder" ]]; then
 		if (count windows) is not 0 then set pathToOpen to target of window 1 as alias
 		return POSIX path of pathToOpen
 	end tell')
-	[[ -d "$WD" ]] || exit 1
 elif [[ "$FRONT_APP" =~ "neovide" ]]; then
-	win_title=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
 	# INFO requires vim.opt.titlestring='%{expand(\"%:p\")}'
+	win_title=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
 	WD=$(dirname "$win_title")
 else
 	WD="${working_directory/#\~/$HOME}"
 fi
 
-nohup alacritty --working-directory="$WD" &
+[[ -d "$WD" ]] && nohup alacritty --working-directory="$WD" &
