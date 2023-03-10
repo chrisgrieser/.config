@@ -18,7 +18,7 @@ rules:
   max-depth: [warn, 4]
 
   # variables
-  id-length: 
+  id-length:
     - warn
     - min: 4
       max: 25
@@ -79,9 +79,11 @@ rules:
     - error
     - checkForEach: false
       allowImplicit: true
+  no-confusing-arrow: warn
   no-useless-return: warn
+  consistent-return: warn
   func-names: warn
-  func-style: 
+  func-style:
     - warn
     - declaration
 
@@ -92,8 +94,14 @@ rules:
     - returnAssign: false
 
   # Loops
-  no-unmodified-loop-condition: error
+  no-unmodified-loop-condition: warn
   no-unreachable-loop: error
+
+  # Comments
+  capitalized-comments:
+    - error
+    - always
+    - ignoreInlineComments: true
 
   # Semicolon
   no-extra-semi: warn
@@ -110,12 +118,14 @@ rules:
     - avoidEscape: true
       allowTemplateLiterals: true
 
-  # Imports
-  no-duplicate-imports: warn
+  # Imports & eval
+  no-duplicate-imports: error
   sort-imports: warn
   dot-notation: error
+  no-eval: error
 
   # Strings & Regex
+  no-template-curly-in-string: error
   no-useless-concat: warn
   no-multi-str: error
   prefer-regex-literals:
@@ -133,11 +143,15 @@ rules:
   no-implicit-coercion: error
 
   # Conditions
+  default-case: error # switch/case
+  default-case-last: warn
   eqeqeq: error
+  no-self-compare: error
   no-eq-null: warn
   no-negated-condition: error
   no-unneeded-ternary: warn
   no-nested-ternary: error
+  no-constant-binary-expression: error
   yoda: warn
   no-else-return:
     - warn
