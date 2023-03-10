@@ -44,12 +44,12 @@ TwitterWatcher = Aw.new(function(appName, event, appObj)
 			if win:title():find("Media") then
 				win:close()
 				-- HACK using keystroke, since closing window does not seem to work reliably
-				Keystroke({ "command" }, "w", 1, App("Twitter")) 
+				Keystroke({ "command" }, "w", 1, App("Twitter"))
 			end
 		end
 
 	-- raise twitter when switching window to other app
-	elseif appName and event == Aw.activated then
+	elseif event == Aw.activated and appName ~= "Twitter" then
 		if not AppIsRunning("Twitter") then return end
 		local win = App("Twitter"):mainWindow()
 		if not win then return end
@@ -59,5 +59,14 @@ TwitterWatcher = Aw.new(function(appName, event, appObj)
 			-- in case of active split, prevent left window of covering the sketchybar
 			if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
 		end
+
+	-- do not focus Twitter when after an app is terminated
+	elseif event == Aw.terminated and appName ~= "Twitter" then
+		Notify("beep")
+		RunWithDelays(0.2, function()
+			if FrontAppName() == "Twitter" then
+				Keystroke({ "cmd" }, "tab")
+			end
+		end)
 	end
 end):start()

@@ -45,16 +45,15 @@ TransBgAppWatcher = Aw.new(function(appName, event, appObj)
 		IsProjector()
 		or not (TableContains(transBgApp, appName))
 		or appName == "Alfred" -- needed for Alfred Compatibility Mode
-		or not (TableContains(transBgApp, FrontAppName())) -- extra check as Alfred in Compatibility Mode sometimes activates under the underlying app's name
 	then
 		return
 	end
 
 	if event == Aw.terminated then
 		unHideAll()
+
 	elseif event == Aw.activated or event == Aw.launched then
-		local delays = (event == Aw.activated and appName == "neovide") and { 0.1, 0.5 } or 0.1
-		RunWithDelays(delays, function()
+		AsSoonAsAppRuns(appName, function()
 			local win = appObj:mainWindow()
 			if
 				not win -- win closed in meantime
