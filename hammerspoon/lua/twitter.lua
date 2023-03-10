@@ -26,6 +26,19 @@ function TwitterToTheSide()
 	win:raise()
 end
 
+-- ensure that twitter does not have focus, "falling through" to the next window
+function TwitterFallThrough()
+	local visibleWins = hs.window:orderedWindows()
+	local nextWin
+	for _, win in pairs(visibleWins) do
+		if win:application():name() ~= "Twitter" then
+			nextWin = win
+			break
+		end
+	end
+	if nextWin:id() ~= hs.window.frontmostWindow():id() then nextWin:focus() end
+end
+
 -- TWITTER: fixed size to the side, with the sidebar hidden
 TwitterWatcher = Aw.new(function(appName, event)
 	-- move twitter and scroll it up
@@ -60,20 +73,9 @@ TwitterWatcher = Aw.new(function(appName, event)
 			-- in case of active split, prevent left window of covering the sketchybar
 			if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
 		end
+
+	-- do not focus Twitter after an app is terminated
+	elseif event == Aw.terminated and appName ~= "Twitter" then
+		RunWithDelays(0.1, TwitterFallThrough)
 	end
 end):start()
-
--- FALL THROUGH: after closing any window, do not focus windowless app or Twitter
-Wf_all = Wf.new(true):subscribe(Wf.windowDestroyed, function()
-	RunWithDelays(0.1, function()
-		local visibleWins = hs.window:orderedWindows()
-		local nextWin
-		for _, win in pairs(visibleWins) do
-			if win:application():name() ~= "Twitter" then
-				nextWin = win
-				break
-			end
-		end
-		if nextWin:id() ~= hs.window.frontmostWindow():id() then nextWin:focus() end
-	end)
-end)
