@@ -1,4 +1,5 @@
 require("lua.utils")
+require("lua.twitter")
 
 --------------------------------------------------------------------------------
 IMacDisplay = hs.screen("Built%-in")
@@ -69,7 +70,8 @@ local function toggleObsidianSidebar(obsiWin)
 		-- half -> hide sidebar
 		-- pseudo-maximized -> show sidebar
 		-- max -> hide sidebar (since assuming Obsidian split)
-		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "expand"
+		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99)
+				and "expand"
 			or "collapse"
 		OpenLinkInBackground(
 			"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. mode .. "%28%29"
@@ -169,7 +171,6 @@ end
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
 function AutoTile(winSrc)
-
 	local wins
 	if type(winSrc) == "string" and not AppIsRunning(winSrc) then
 		return
@@ -178,6 +179,8 @@ function AutoTile(winSrc)
 	else
 		wins = winSrc:getWindows()
 	end
+
+	if #wins > 1 then BringAllToFront() end
 
 	if #wins == 0 and FrontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
@@ -207,8 +210,6 @@ function AutoTile(winSrc)
 		MoveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
 		MoveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
 	end
-
-	if #wins > 1 then BringAllToFront() end
 end
 
 --------------------------------------------------------------------------------
@@ -226,8 +227,6 @@ local function controlSpaceAction()
 	end
 	MoveResize(currentWin, pos)
 end
-
---------------------------------------------------------------------------------
 
 local function moveCurWinToOtherDisplay()
 	local win = hs.window.focusedWindow()
@@ -260,8 +259,9 @@ local function endAction()
 	elseif AppIsRunning("zoom.us") then
 		Alert("📹") -- toggle video
 		Keystroke({ "shift", "command" }, "V", 1, App("zoom.us"))
-	end
+	else
 		Alert("<Nop>")
+	end
 end
 
 --------------------------------------------------------------------------------
