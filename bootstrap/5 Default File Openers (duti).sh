@@ -25,6 +25,7 @@ duti -s "$videoplayerID" m4a all
 
 # code
 duti -s "$editorID" conf all
+duti -s "$editorID" fdignore all
 duti -s "$editorID" ini all
 duti -s "$editorID" cfg all
 duti -s "$editorID" com.apple.property-list all # plist

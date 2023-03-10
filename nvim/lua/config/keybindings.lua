@@ -439,8 +439,8 @@ end, { desc = " 璉 Toggle Diagnostics" })
 keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = "go to next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = "Paste in Terminal Mode" })
 
-keymap("n", "6", ":ToggleTerm size=9<CR>", { desc = ":ToggleTerm" })
-keymap("x", "6", ":ToggleTermSendVisualSelection size=9<CR>", { desc = "Selection to ToggleTerm" })
+keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = ":ToggleTerm" })
+keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "Selection to ToggleTerm" })
 
 keymap("n", "5", function()
 	cmd.CodiNew()
