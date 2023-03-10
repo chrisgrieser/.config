@@ -1,13 +1,17 @@
 # ignore file for `fd`
 # INFO for telescope.nvim, cannot be named `.fdignore` and must be named `.ignore`
 
+# Alfred config
 preferences
 remote
 resources
 themes
 workflowextras
 
+# my workflows
 workflows/shimmering-obsidian
 workflows/alfred-bibtex-citation-picker
-workflows/user.workflow.3BF713ED-02D0-4127-8126-26E36BF15CFC
-workflows/user.workflow.90A6E1C0-4A00-40C7-9233-FB165AE431F3
+
+# workflows developed by others
+workflows/powerthesaurus-search
+workflows/browser-history-search

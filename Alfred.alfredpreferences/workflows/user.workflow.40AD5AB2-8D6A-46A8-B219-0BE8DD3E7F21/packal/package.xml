@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<workflow>
-  <name>Mac App Store Search</name>
-  <version>1.1</version>
-  <bundle>com.targumanu.massearch</bundle>
-  <updated>1548596956</updated>
-  <file>mac_app_store_search.alfredworkflow</file>
-</workflow>
