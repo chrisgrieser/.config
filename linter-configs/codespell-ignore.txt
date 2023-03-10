@@ -1,3 +1,6 @@
+# INFO terms here need to be lowercase
 als
 ist
 interaktion
+iterm
+technik
