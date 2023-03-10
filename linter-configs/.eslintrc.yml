@@ -37,6 +37,7 @@ rules:
   no-unused-expressions: error
 
   # variables
+  no-unused-vars: warn 
   id-length:
     - warn
     - min: 4
@@ -48,7 +49,6 @@ rules:
     - warn
     - builtinGlobals: true
       hoist: all
-  no-unused-vars: warn # typescript already checks for this
   camelcase:
     - warn
     - properties: always
@@ -66,9 +66,9 @@ rules:
   no-lone-blocks: error
 
   # Async & Await
-  require-await: error
   no-await-in-loop: error
   require-atomic-updates: error
+  # require-await: error # TODO figure out why this triggers in Obsidian onload function
 
   # Functions
   no-empty-function: warn

@@ -40,7 +40,7 @@ end
 
 -- AUTOMATIONS FOR MULTIPLE APPS
 TransBgAppWatcher = Aw.new(function(appName, event, appObj)
-	local transBgApp = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty", "iTerm", "Kitty" }
+	local transBgApp = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty", "kitty" }
 	if
 		IsProjector()
 		or not (TableContains(transBgApp, appName))
@@ -53,8 +53,8 @@ TransBgAppWatcher = Aw.new(function(appName, event, appObj)
 	if event == Aw.terminated then
 		unHideAll()
 	elseif event == Aw.activated or event == Aw.launched then
-		local delays = (event == Aw.activated and appName == "neovide") and {0.1, 0.5} or 0.1
-		RunWithDelays(delays, function ()
+		local delays = (event == Aw.activated and appName == "neovide") and { 0.1, 0.5 } or 0.1
+		RunWithDelays(delays, function()
 			local win = appObj:mainWindow()
 			if not win then return end
 			if CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized) then hideOthers(win) end
@@ -110,7 +110,7 @@ end
 
 -- auto-pause/resume Spotify on launch/quit of apps with sound
 SpotifyAppWatcher = Aw.new(function(appName, eventType)
-	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
+	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll", "Tagesschau" }
 	if not ScreenIsUnlocked() or IsProjector() or not (TableContains(appsWithSound, appName)) then
 		return
 	end
@@ -127,7 +127,7 @@ end):start()
 -- PIXELMATOR: open maximized
 PixelmatorWatcher = Aw.new(function(appName, eventType, appObj)
 	if appName == "Pixelmator" and eventType == Aw.launched then
-		RunWithDelays(0.3, function() MoveResize(appObj, Maximized) end)
+		AsSoonAsAppRuns("Pixelmator", function() MoveResize(appObj, Maximized) end)
 	end
 end):start()
 
@@ -228,10 +228,11 @@ end):start()
 
 -- ALACRITTY / Kitty
 -- pseudomaximized window
-Wf_alacritty = Wf.new({ "alacritty", "Alacritty", "Kitty" })
+Wf_alacritty = Wf.new({ "alacritty", "Alacritty", "kitty" })
 	:setOverrideFilter({ rejectTitles = { "btop" } })
 	:subscribe(Wf.windowCreated, function(newWin)
-		MoveResize(newWin, PseudoMaximized)
+		local appName = newWin:application():name()
+		AsSoonAsAppRuns(appName, function() MoveResize(newWin, PseudoMaximized) end)
 	end)
 
 -- Man leader hotkey (for Karabiner)
@@ -299,7 +300,7 @@ Wf_quicklook = Wf
 Wf_finder = Wf.new("Finder")
 	:setOverrideFilter({
 		-- "^$" excludes the Desktop, which has no window title
-		rejectTitles = { "^Quick Look$", "^Move$", "^Copy$", "^Finder Settings$", " Info$", "^$" }, 
+		rejectTitles = { "^Quick Look$", "^Move$", "^Copy$", "^Finder Settings$", " Info$", "^$" },
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
