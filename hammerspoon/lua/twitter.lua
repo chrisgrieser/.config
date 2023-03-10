@@ -19,7 +19,6 @@ function TwitterScrollUp()
 end
 
 function TwitterToTheSide()
-	Notify("totheside")
 	if not AppIsRunning("Twitter") then return end
 	local win = App("Twitter"):mainWindow()
 	if not win then return end
@@ -32,7 +31,6 @@ TwitterWatcher = Aw.new(function(appName, event, appObj)
 	-- move twitter and scroll it up
 	if appName == "Twitter" and (event == Aw.launched or event == Aw.activated) then
 		AsSoonAsAppRuns("Twitter", function()
-			Wait(0.2)
 			BringAllToFront()
 			TwitterToTheSide()
 			TwitterScrollUp()
