@@ -12,10 +12,29 @@ env:
 
 #───────────────────────────────────────────────────────────────────────────────
 
+globals:
+  # JXA
+  ObjC: readonly
+  delay: readonly
+  Application: readonly
+  $: readonly
+  Set: readonly
+  Path: readonly
+
+  # Obsidian
+  tp: readonly # templater
+  request: readonly
+
+#───────────────────────────────────────────────────────────────────────────────
+
 rules:
   # structure
   complexity: [warn, 15]
   max-depth: [warn, 4]
+
+  # General
+  no-implicit-coercion: error
+  no-unused-expressions: error
 
   # variables
   id-length:
@@ -24,6 +43,7 @@ rules:
       max: 25
       properties: never
       exceptions: [x, y, i, j, id, min, max, app, str, int, out]
+  no-underscore-dangle: warn
   no-shadow:
     - warn
     - builtinGlobals: true
@@ -33,7 +53,7 @@ rules:
     - warn
     - properties: always
       ignoreImports: true
-  no-var: error
+  no-var: warn
   prefer-const: warn
   sort-vars: warn
   no-use-before-define: warn
@@ -43,30 +63,7 @@ rules:
   one-var-declaration-per-line:
     - warn
     - initializations
-
-  # spaces
-  func-call-spacing: warn
-  no-mixed-spaces-and-tabs: warn
-  no-multi-spaces: warn
-  array-bracket-spacing: warn
-  space-before-blocks: warn
-  semi-spacing: warn
-  no-whitespace-before-property: warn
-  no-empty: warn
-  arrow-spacing: warn
-  keyword-spacing: warn
-  spaced-comment:
-    - warn
-    - always
-    - exceptions: ["-", "_", "─"]
-
-  # new lines
-  object-curly-newline:
-    - warn
-    - multiline: true
-  newline-per-chained-call:
-    - warn
-    - ignoreChainWithDepth: 2
+  no-lone-blocks: error
 
   # Async & Await
   require-await: error
@@ -98,6 +95,10 @@ rules:
   no-unreachable-loop: error
 
   # Comments
+  spaced-comment:
+    - warn
+    - always
+    - exceptions: ["-", "_", "─"]
   capitalized-comments:
     - error
     - always
@@ -123,13 +124,15 @@ rules:
   sort-imports: warn
   dot-notation: error
   no-eval: error
+  no-implied-eval: error
 
   # Strings & Regex
   no-template-curly-in-string: error
   no-useless-concat: warn
   no-multi-str: error
+  prefer-template: warn
   prefer-regex-literals:
-    - error
+    - warn
     - disallowRedundantWrapping: true
 
   # Numbers
@@ -140,7 +143,10 @@ rules:
       ignoreArrayIndexes: true
       ignoreDefaultValues: true
   no-floating-decimal: warn
-  no-implicit-coercion: error
+
+  # Arrays
+  prefer-spread: warn
+  prefer-object-spread: warn
 
   # Conditions
   default-case: error # switch/case
@@ -157,26 +163,4 @@ rules:
     - warn
     - allowElseIf: true
   no-lonely-if: warn
-  no-mixed-operators:
-    - error
-    - groups:
-        - ["%", "**"]
-        - ["&", "|", ^, "~", <<, ">>", ">>>"]
-        - [==, "!=", ===, "!==", ">", ">=", <, <=]
-        - ["&&", "||"]
-        - [in, instanceof]
-
-#───────────────────────────────────────────────────────────────────────────────
-
-globals:
-  # JXA
-  ObjC: readonly
-  delay: readonly
-  Application: readonly
-  $: readonly
-  Set: readonly
-  Path: readonly
-
-  # Obsidian
-  tp: readonly # templater
-  request: readonly
+  no-mixed-operators: error
