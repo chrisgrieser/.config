@@ -60,6 +60,20 @@ TwitterWatcher = Aw.new(function(appName, event)
 			-- in case of active split, prevent left window of covering the sketchybar
 			if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
 		end
-
 	end
 end):start()
+
+-- FALL THROUGH: after closing any window, do not focus windowless app or Twitter
+Wf_all = Wf.new(true):subscribe(Wf.windowDestroyed, function()
+	RunWithDelays(0.1, function()
+		local visibleWins = hs.window:orderedWindows()
+		local nextWin
+		for _, win in pairs(visibleWins) do
+			if win:application():name() ~= "Twitter" then
+				nextWin = win
+				break
+			end
+		end
+		if nextWin:id() ~= hs.window.frontmostWindow():id() then nextWin:focus() end
+	end)
+end)
