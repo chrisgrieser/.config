@@ -14,9 +14,9 @@ CONFIG+=('homebrew')
 CONFIG+=('vi-mode')
 
 # Terminal specific
-if [[ $TERM == "Warp" ]]; then
+if [[ "$TERM" == "Warp" || "$TERM" == "xterm-kitty" ]]; then
 	cd "$WD" || return
-elif [[ $TERM == "alacritty" ]]; then
+elif [[ "$TERM" == "alacritty" ]]; then
 	# INFO if $TERM is not set for alacritty, reinstall alacritty, which
 	# recreates the required ~/.terminfo directory.
 	CONFIG+=('alacritty_theme_utilities')
