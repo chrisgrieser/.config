@@ -16,3 +16,8 @@ Icon
 # vim spellcheck binary
 *.spl
 *.add
+
+# INFO files
+INFO*
+_INFO*
+TODO*

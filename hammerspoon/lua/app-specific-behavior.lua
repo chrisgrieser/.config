@@ -40,7 +40,7 @@ end
 
 -- AUTOMATIONS FOR MULTIPLE APPS
 TransBgAppWatcher = Aw.new(function(appName, event, appObj)
-	local transBgApp = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty" }
+	local transBgApp = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty", "iTerm", "Kitty", "kitty" }
 	if
 		IsProjector()
 		or not (TableContains(transBgApp, appName))
