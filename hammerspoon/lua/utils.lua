@@ -185,7 +185,12 @@ end
 ---@param appName string app to wait for
 ---@param callbackFn function function to execute when the app is available
 function AsSoonAsAppRuns(appName, callbackFn)
-	hs.timer.waitUntil(function() return hs.application.get(appName) ~= nil end, callbackFn)
+	hs.timer.waitUntil(function()
+		local app = hs.application.get(appName)
+		local appRuns = app ~= nil
+		local windowAvailable = app and app:mainWindow()
+		return appRuns and windowAvailable
+	end, callbackFn, 0.2)
 end
 
 ---@param appNames string|string[]

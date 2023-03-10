@@ -525,6 +525,7 @@ end run</string>
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
+					<string>com.vivaldi.Vivaldi</string>
 					<string>com.mimestream.Mimestream</string>
 					<string>com.neovide.neovide</string>
 					<string>com.apple.TextEdit</string>
