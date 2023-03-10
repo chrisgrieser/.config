@@ -124,8 +124,8 @@ local function cmpconfig()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
+				if cmp.visible() then
+					cmp.select_prev_item()
 				elseif require("neogen").jumpable(true) then
 					require("neogen").jump_prev()
 				elseif require("luasnip").jumpable(-1) then
