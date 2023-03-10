@@ -1,22 +1,22 @@
 #!/usr/bin/env osascript
 
 # INFO has to be a separate script, since the next script is still considered active
-# and therefore won't run before alacritty is quit.
+# and therefore won't run before terminal is quit.
 on run
-	# guard clause: if alacritty not running, run next script opening alacritty
-	if application "Alacritty" is not running then return "not-running"
+	# guard clause: if terminal not running, run next script opening terminal
+	if application "alacritty" is not running then return "not-running"
 
 	tell application "System Events" 
 		set frontApp to (name of first process where it is frontmost)
 	end tell
 
-	# If alacritty is frontmost, hide it again for toggling visibility via the hotkey
+	# If terminal is frontmost, hide it again for toggling visibility via the hotkey
 	if frontApp is "alacritty" then
 		tell application "System Events" to tell process "alacritty" to set visible to false
 
-	# if alacritty is not frontmost, show it again 
+	# if terminal is not frontmost, show it again 
 	else if frontApp is not "Finder" then
-		tell application "Alacritty" to activate
+		tell application "alacritty" to activate
 	# exception: If Finder is frontmost, cd to finder window
 	else
 		tell application "Finder"
@@ -31,7 +31,7 @@ on run
 			set the clipboard to POSIX path of (insertion location as alias)
 		end tell
 
-		tell application "Alacritty" to activate
+		tell application "alacritty" to activate
 		delay 0.05
 		tell application "System Events"
 			keystroke "cd '"

@@ -11,10 +11,10 @@ function sh() {
 # GET A BETTER MAN
 # first arg: command, second arg: search term
 function man() {
-	if ! command -v kitty &>/dev/null; then echo "kitty not installed." && exit 1; fi
+	if ! command -v alacritty &>/dev/null; then echo "alacritty not installed." && exit 1; fi
 	if ! command -v "$1" &>/dev/null; then echo "$1 not installed." && exit 1; fi
 	
-	# local alacrittyConfig="$HOME/.config/alacritty/man-page.yml"
+	local alacrittyConfig="$HOME/.config/alacritty/man-page.yml"
 	local title="man: $1"
 	local isBuiltIn=false
 	[[ "$(which "$1")" =~ built-in ]] && isBuiltIn=true
@@ -23,23 +23,19 @@ function man() {
 	fi
 
 	if [[ $isBuiltIn == true ]] && [[ -z "$2" ]]; then
-		(kitty --title="$title" less /usr/share/zsh/*/help/"$1" &) &>/dev/null
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command less /usr/share/zsh/*/help/"$1" &) &>/dev/null
 	elif [[ $isBuiltIn == true ]] && [[ -n "$2" ]]; then
-		(kitty --title="$title" less --pattern="$2" /usr/share/zsh/*/help/"$1" &) &>/dev/null
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command less --pattern="$2" /usr/share/zsh/*/help/"$1" &) &>/dev/null
 	elif [[ $isBuiltIn == false ]] && [[ -z "$2" ]]; then
-		(kitty --title="$title" man "$1" &) &>/dev/null
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command man "$1" &) &>/dev/null
 	else
-		(kitty --title="$title" man -P "less -is --pattern=$2" "$1" &) &>/dev/null
+		(alacritty --config-file="$alacrittyConfig" --title="$title" --command man -P "/usr/bin/less -is --pattern=$2" "$1" &) &>/dev/null
 	fi
 }
 
-# # simpler version for people reading my dotfiles to snatch
+# # simpler version without alacritty for people reading my dotfiles to snatch
 # function man () {
-# 	if [[ -n "$2" ]]; then
-# 		command man "$1" -P "/usr/bin/less -is --pattern=$2"
-# 	else
-# 		command man "$1"
-# 	fi
+# 	command man "$1" -P "/usr/bin/less -is --pattern=$2"
 # }
 
 # colorize less https://wiki.archlinux.org/index.php/Color_output_in_console#less .
