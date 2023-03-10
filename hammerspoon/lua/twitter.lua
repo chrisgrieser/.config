@@ -7,14 +7,14 @@ function TwitterScrollUp()
 	local twitter = App("Twitter")
 	if not twitter or not twitter:mainWindow() then return end
 
-	Keystroke({ "command" }, "left", 1, twitter) -- go back
-	Keystroke({ "command" }, "1", 1, twitter) -- go to home tab
-	Keystroke({ "shift", "command" }, "R", 1, twitter) -- reload
+	Keystroke({ "cmd" }, "left", 1, twitter) -- go back
+	Keystroke({ "cmd" }, "1", 1, twitter) -- go to home tab
+	Keystroke({ "shift", "cmd" }, "R", 1, twitter) -- reload
 
 	-- needs delays to wait for tweets loading
 	RunWithDelays({ 0.5, 1.5 }, function()
-		Keystroke({ "command" }, "1", 1, twitter) -- scroll up
-		Keystroke({ "command" }, "up", 1, twitter) -- goto top
+		Keystroke({ "cmd" }, "1", 1, twitter) -- scroll up
+		Keystroke({ "cmd" }, "up", 1, twitter) -- goto top
 	end)
 end
 
@@ -27,7 +27,7 @@ function TwitterToTheSide()
 end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
-TwitterWatcher = Aw.new(function(appName, event, appObj)
+TwitterWatcher = Aw.new(function(appName, event)
 	-- move twitter and scroll it up
 	if appName == "Twitter" and (event == Aw.launched or event == Aw.activated) then
 		AsSoonAsAppRuns("Twitter", function()
@@ -40,11 +40,12 @@ TwitterWatcher = Aw.new(function(appName, event, appObj)
 	elseif appName == "Twitter" and event == Aw.deactivated then
 		TwitterScrollUp()
 
-		for _, win in pairs(appObj:allWindows()) do
+		local twitter = App("Twitter")
+		for _, win in pairs(twitter:allWindows()) do
 			if win:title():find("Media") then
 				win:close()
 				-- HACK using keystroke, since closing window does not seem to work reliably
-				Keystroke({ "command" }, "w", 1, App("Twitter"))
+				Keystroke({ "cmd" }, "w", 1, twitter)
 			end
 		end
 
@@ -52,23 +53,13 @@ TwitterWatcher = Aw.new(function(appName, event, appObj)
 	elseif event == Aw.activated and appName ~= "Twitter" then
 		if not AppIsRunning("Twitter") then return end
 		local win = App("Twitter"):mainWindow()
+		if not win then return end
 
 		if CheckSize(win, PseudoMaximized) or CheckSize(win, Centered) then
 			win:raise()
-			-- in case of active split, prevent left window from covering the sketchybar
+			-- in case of active split, prevent left window of covering the sketchybar
 			if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
 		end
 
-	-- do not focus Twitter after an app is terminated
-	elseif event == Aw.terminated and appName ~= "Twitter" then
-		local visibleWins = hs.window:orderedWindows()
-		local nextWin
-		for _, win in pairs(visibleWins) do
-			if win:application():name() ~= "Twitter" then
-				nextWin = win
-				break
-			end
-		end
-		nextWin:focus()
 	end
 end):start()

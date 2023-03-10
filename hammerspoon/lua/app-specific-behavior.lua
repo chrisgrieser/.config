@@ -51,9 +51,8 @@ TransBgAppWatcher = Aw.new(function(appName, event, appObj)
 
 	if event == Aw.terminated then
 		unHideAll()
-
 	elseif event == Aw.activated or event == Aw.launched then
-		AsSoonAsAppRuns(appName, function()
+		AsSoonAsAppRuns(appObj, function()
 			local win = appObj:mainWindow()
 			if
 				not win -- win closed in meantime
@@ -128,12 +127,30 @@ SpotifyAppWatcher = Aw.new(function(appName, eventType)
 	end
 end):start()
 
+-- FALL THROUGH: after closing window, do not focus windowless browser or Twitter
+Wf_all = Wf.new(true):subscribe(Wf.windowDestroyed, function()
+	RunWithDelays(0.1, function()
+		local visibleWins = hs.window:orderedWindows()
+		local nextWin
+		for _, win in pairs(visibleWins) do
+			local isTwitter = win:application():name() == "Twitter"
+			local windowlessBrowser = win:application():name() == "Vivaldi" and win:application():allWindows() == 0
+			if not isTwitter and not windowlessBrowser then
+				nextWin = win
+				break
+			end
+		end
+		if nextWin:id() ~= hs.window.frontmostWindow():id() then nextWin:focus() end
+	end)
+end)
+
+--------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 -- PIXELMATOR: open maximized
 PixelmatorWatcher = Aw.new(function(appName, eventType, appObj)
 	if appName == "Pixelmator" and eventType == Aw.launched then
-		AsSoonAsAppRuns("Pixelmator", function() MoveResize(appObj, Maximized) end)
+		AsSoonAsAppRuns(appObj, function() MoveResize(appObj, Maximized) end)
 	end
 end):start()
 
@@ -169,12 +186,9 @@ Wf_browser_all = Wf.new({ "Vivaldi" })
 --------------------------------------------------------------------------------
 
 -- IINA: Full Screen when on projector
-IinaAppLauncher = Aw.new(function(appName, eventType, appObject)
+IinaAppLauncher = Aw.new(function(appName, eventType, appObj)
 	if eventType == Aw.launched and appName == "IINA" and IsProjector() then
-		AsSoonAsAppRuns(
-			appName,
-			function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end
-		)
+		AsSoonAsAppRuns(appObj, function() appObj:selectMenuItem { "Video", "Enter Full Screen" } end)
 	end
 end):start()
 
@@ -215,7 +229,7 @@ NeovideWatcher = Aw.new(function(appName, eventType, appObj)
 		addCssSelectorLeadingDot()
 
 		-- maximize app
-		AsSoonAsAppRuns("neovide", function()
+		AsSoonAsAppRuns(appObj, function()
 			local win = appObj:mainWindow()
 			if
 				not win
@@ -240,11 +254,10 @@ end):start()
 
 -- ALACRITTY / TERMINAL
 -- pseudomaximized window
-Wf_terminal = Wf.new({ "alacritty", "Alacritty", "kitty" })
+Wf_terminal = Wf.new({ "alacritty", "Alacritty" })
 	:setOverrideFilter({ rejectTitles = { "btop" } })
-	:subscribe(Wf.windowCreated, function(newWin)
-		local appName = newWin:application():name()
-		AsSoonAsAppRuns(appName, function() MoveResize(newWin, PseudoMaximized) end)
+	:subscribe(Wf.windowCreated, function(newWin, _, appObj)
+		AsSoonAsAppRuns(appObj, function() MoveResize(newWin, PseudoMaximized) end)
 	end)
 
 -- Man leader hotkey (for Karabiner)
@@ -381,15 +394,13 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- DRAFTS
--- - Hide Toolbar
 -- - set workspace
 -- - update counter in sketchybar
 DraftsWatcher = Aw.new(function(appName, event, appObj)
 	if appName == "Drafts" and (event == Aw.launching or event == Aw.activated) then
 		local workspace = IsAtOffice() and "Office" or "Home"
-		RunWithDelays({ 0.1 }, function()
+		AsSoonAsAppRuns(appObj, function()
 			appObj:selectMenuItem { "Workspaces", workspace }
-			appObj:selectMenuItem { "View", "Hide Toolbar" }
 			hs.execute("sketchybar --trigger drafts-counter-update")
 		end)
 	end
@@ -425,13 +436,13 @@ Wf_script_editor = Wf
 --------------------------------------------------------------------------------
 
 -- DISCORD
-DiscordAppWatcher = Aw.new(function(appName, eventType)
+DiscordAppWatcher = Aw.new(function(appName, eventType, appObj)
 	if appName ~= "Discord" then return end
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	if eventType == Aw.launched then
 		-- stylua: ignore
-		RunWithDelays(3, function()
+		AsSoonAsAppRuns(appObj, function()
 			OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 		end)
 	end
