@@ -30,6 +30,9 @@ case $APP in
 "Alacritty" | "alacritty")
 	cp -f "$CUSTOM_ICON_FOLDER/Alacritty 2.icns" "$APP.app/Contents/Resources/alacritty.icns"
 	;;
+"iTerm" | "iTerm2")
+	cp -f "$CUSTOM_ICON_FOLDER/iTerm.icns" "$APP.app/Contents/Resources/AppIcon.icns"
+	;;
 "AppCleaner")
 	cp -f "$CUSTOM_ICON_FOLDER/AppCleaner.icns" "$APP.app/Contents/Resources/AppCleaner.icns"
 	;;
