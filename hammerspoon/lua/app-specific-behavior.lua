@@ -40,7 +40,7 @@ end
 
 -- AUTOMATIONS FOR MULTIPLE APPS
 TransBgAppWatcher = Aw.new(function(appName, event, appObj)
-	local transBgApp = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty", "iTerm", "Kitty", "kitty" }
+	local transBgApp = { "neovide", "Neovide", "Obsidian", "alacritty", "Alacritty", "iTerm", "Kitty" }
 	if
 		IsProjector()
 		or not (TableContains(transBgApp, appName))
@@ -53,7 +53,7 @@ TransBgAppWatcher = Aw.new(function(appName, event, appObj)
 	if event == Aw.terminated then
 		unHideAll()
 	elseif event == Aw.activated or event == Aw.launched then
-		local delays = (event == Aw.activated and appName == "neovide") and {0.1, 0.8} or 0.1
+		local delays = (event == Aw.activated and appName == "neovide") and {0.1, 0.5} or 0.1
 		RunWithDelays(delays, function ()
 			local win = appObj:mainWindow()
 			if not win then return end
@@ -205,11 +205,10 @@ NeovideWatcher = Aw.new(function(appName, eventType, appObj)
 		-- maximize app
 		AsSoonAsAppRuns("neovide", function()
 			local win = appObj:mainWindow()
-			if not win then return end
 			if
-				CheckSize(win, LeftHalf)
-				or CheckSize(win, RightHalf)
+				not win
 				or CheckSize(win, LeftHalf)
+				or CheckSize(win, RightHalf)
 				or CheckSize(win, BottomHalf)
 				or CheckSize(win, TopHalf)
 			then
@@ -227,12 +226,11 @@ end):start()
 
 --------------------------------------------------------------------------------
 
--- ALACRITTY
+-- ALACRITTY / Kitty
 -- pseudomaximized window
-Wf_alacritty = Wf.new({ "alacritty", "Alacritty" })
+Wf_alacritty = Wf.new({ "alacritty", "Alacritty", "Kitty" })
 	:setOverrideFilter({ rejectTitles = { "btop" } })
 	:subscribe(Wf.windowCreated, function(newWin)
-		if IsProjector() then return end -- has it's own layouting already
 		MoveResize(newWin, PseudoMaximized)
 	end)
 
