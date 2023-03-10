@@ -483,7 +483,7 @@
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>./mdn-search.js "CSS $*"</string>
+				<string>./scripts/mdn-search.js "CSS $*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -672,7 +672,7 @@ cat "${cache}"</string>
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>./mdn-search.js "JavaScript $*"</string>
+				<string>./scripts/mdn-search.js "JavaScript $*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -780,7 +780,7 @@ osascript -l JavaScript -e '
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>./mdn-search.js "HTML $*"</string>
+				<string>./scripts/mdn-search.js "HTML $*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -833,7 +833,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>cheatsheet-pdfs.js</string>
+				<string>./scripts/cheatsheet-pdfs.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -905,7 +905,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>lua-manual-search.js</string>
+				<string>./scripts/lua-manual-search.js</string>
 				<key>subtext</key>
 				<string>Manual + Wiki</string>
 				<key>title</key>
@@ -954,7 +954,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>list-cheatsheets.js</string>
+				<string>./scripts/list-cheatsheets.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1024,7 +1024,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>python-docs.js</string>
+				<string>./scripts/python-docs.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1073,7 +1073,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>can-i-use.js</string>
+				<string>./scripts/can-i-use.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1122,7 +1122,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>git-doc-search.js</string>
+				<string>./scripts/git-doc-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1171,7 +1171,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>espanso-docs-search.js</string>
+				<string>./scripts/espanso-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1220,7 +1220,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>karabiner-docs-search.js</string>
+				<string>./scripts/karabiner-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1309,7 +1309,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>hs-docs-search.js</string>
+				<string>./scripts/hs-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1358,7 +1358,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>sketchybar-docs-search.js</string>
+				<string>./scripts/sketchybar-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1407,7 +1407,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>starship-docs-search.js</string>
+				<string>./scripts/starship-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1456,7 +1456,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>yq-docs-search.js</string>
+				<string>./scripts/yq-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1505,7 +1505,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>eslint-docs-search.js</string>
+				<string>./scripts/eslint-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
