@@ -1,0 +1,8 @@
+# ignore file for `fd`
+# INFO for telescope.nvim, cannot be named `.fdignore` and must be named `.ignore`
+
+styles/Google
+styles/Microsoft
+styles/proselint
+styles/RedHat
+styles/write-good

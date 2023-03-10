@@ -21,7 +21,6 @@ local options = {
 		prompt_prefix = "❱ ",
 		multi_icon = "洛",
 		path_display = { "tail" },
-		border = true,
 		borderchars = BorderChars,
 		history = { path = VimDataDir .. "telescope_history" }, -- sync the history
 		file_ignore_patterns = {
@@ -32,19 +31,18 @@ local options = {
 			"/$", -- folder
 			"%.app/", -- internals of mac apps
 			"%.pxd", -- Pixelmator
-			"%.spoon", -- Hammerspoon
 			"%.plist", -- Alfred
-			"%.zcomp", -- zsh completion data
-			"harpoon%-menu", -- harpoon
 			"%.harpoon", -- harpoon/projects
 			"^INFO", -- custom info files
 			"%.ttf", -- fonts
-			"%.pdf",
 			"%.png",
 			"%.gif",
 			"%.jpe?g",
 			"%.icns",
 			"%.zip",
+			"%.pdf",
+			"%.docx",
+			"%.pptx",
 		},
 		mappings = {
 			i = keymappings,
@@ -132,8 +130,8 @@ local options = {
 			prompt_title = "Project Files",
 			prompt_prefix = " ",
 			hidden = true,
-			follow = true,
-			no_ignore = false,
+			follow = true, -- follow symlinks
+			no_ignore = false, -- use fd ignore files
 		},
 		keymaps = { prompt_prefix = "  ", modes = { "n", "i", "c", "x", "o", "t" } },
 		oldfiles = { prompt_prefix = " " },
