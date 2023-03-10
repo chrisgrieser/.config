@@ -1,11 +1,11 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
--- HELPERS
 
+---is in sub-directory instead of directly in the folder
 ---@param fPath string? filepath
 ---@param folder string? folderpath
 ---@return boolean|nil returns nil if getting invalid input
-local function isInSubdirectory(fPath, folder) -- (instead of directly in the folder)
+local function isInSubdirectory(fPath, folder) 
 	if not fPath or not folder then return nil end
 	local _, fileSlashes = fPath:gsub("/", "")
 	local _, folderSlashes = folder:gsub("/", "")
@@ -60,11 +60,11 @@ local fontLocation1 = DotfilesFolder .. "/fonts/" -- source folder needs trailin
 local fontLocation2 = os.getenv("HOME") .. "/Library/Fonts/" -- needs trailing "/"
 FontsWatcher1 = Pw(fontLocation2, function()
 	hs.execute('rsync --archive --update --delete "' .. fontLocation1 .. '" "' .. fontLocation2 .. '"')
-	Notify("Fonts synced.")
+	print("➡️ Fonts synced.")
 end):start()
 FontsWatcher2 = Pw(fontLocation1, function()
 	hs.execute('rsync --archive --update --delete "' .. fontLocation2 .. '" "' .. fontLocation1 .. '"')
-	Notify("Fonts synced.")
+	print("➡️ Fonts synced.")
 end):start()
 
 --------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ local scanFolder = os.getenv("HOME")
 	.. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 ScanFolderWatcher = Pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. FileHub .. "'")
-	Notify("Scan moved to File Hub")
+	print("➡️ Scan moved to File Hub.")
 end):start()
 
 local systemDownloadFolder = os.getenv("HOME") .. "/Downloads/"
@@ -89,7 +89,7 @@ SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	end
 	-- otherwise move to filehub
 	hs.execute("mv '" .. systemDownloadFolder .. "'/* '" .. FileHub .. "'")
-	Notify("Download moved to File Hub.")
+	print("➡️ Download moved to File Hub.")
 end):start()
 
 local draftsIcloud = os.getenv("HOME")
@@ -98,7 +98,7 @@ DraftsIcloudWatcher = Pw(draftsIcloud, function(files)
 	for _, filePath in pairs(files) do
 		if filePath:sub(-3) ~= ".md" or filePath:find("Inbox") then return end
 		hs.execute("mv '" .. draftsIcloud .. "'/*.md '" .. FileHub .. "'")
-		Notify("Drafts doc moved to File Hub.")
+		print("➡️ Drafts doc moved to File Hub.")
 	end
 end):start()
 
@@ -132,37 +132,37 @@ FileHubWatcher = Pw(FileHub, function(paths, _)
 		-- watch later .urls from the office
 		elseif extension == "url" and IsIMacAtHome() then
 			os.rename(filep, os.getenv("HOME") .. "/Downloaded/" .. fileName)
-			Notify("Watch Later URL moved to Video Downloads.")
+			print("➡️ Watch Later URL moved to Video Downloads.")
 
 		-- ublacklist
 		elseif fileName == "ublacklist-settings.json" then
 			os.rename(filep, browserSettings .. fileName)
-			Notify(fileName .. " filed away.")
+			print("➡️ ".. fileName)
 
 		-- vimium-c
 		elseif fileName:match("vimium_c") then
 			os.rename(filep, browserSettings .. "vimium-c-settings.json")
-			Notify("Vimium-C backup filed away.")
+			print("➡️ Vimium-C backup")
 
 		-- adguard
 		elseif fileName:match(".*_adg_ext_settings_.*%.json") then
 			os.rename(filep, browserSettings .. "adguard-settings.json")
-			Notify("AdGuard backup filed away.")
+			print("➡️ AdGuard backup")
 
 		-- sponsor block
 		elseif fileName:match("SponsorBlockConfig_.*%.json") then
 			os.rename(filep, browserSettings .. "SponsorBlock-settings.json")
-			Notify("SpondorBlockConfig filed away.")
+			print("➡️ SpondorBlockConfig")
 
 		-- violentmonkey
 		elseif fileName:match("violentmonkey.zip") then
 			os.rename(filep, browserSettings .. "violentmonkey.zip")
-			Notify("Violentmonkey backup filed away.")
+			print("➡️ Violentmonkey backup")
 
 		-- Inoreader
 		elseif fileName:match("Inoreader Feeds .*%.xml") then
 			os.rename(filep, browserSettings .. "Inoreader Feeds.opml")
-			Notify("Inoreader backup filed away.")
+			print("➡️ Inoreader backup")
 
 		-- visualised keyboard layouts
 		elseif
@@ -173,7 +173,7 @@ FileHubWatcher = Pw(FileHub, function(paths, _)
 			or fileName:match("single%-keystroke%-bindings%.%w+")
 		then
 			os.rename(filep, DotfilesFolder .. "/visualized-keyboard-layout/" .. fileName)
-			Notify("Visualized Keyboard Layout filed away.")
+			print("➡️ Visualized Keyboard Layout")
 		end
 	end
 end):start()
@@ -211,6 +211,7 @@ ObsiAlphaWatcher = Pw(FileHub, function(files)
 					end repeat
 				end tell
 			]])
+			print("Obsidian Alpha auto-installed.")
 		end)
 	end
 end):start()

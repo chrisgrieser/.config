@@ -5,14 +5,6 @@ require("lua.layouts")
 local caff = hs.caffeinate.watcher
 --------------------------------------------------------------------------------
 
-UnlockWatcher = caff
-	.new(function(event)
-		if event ~= caff.screensDidUnlock then return end
-		SyncAllGitRepos()
-		RunWithDelays(0.5, SelectLayout) -- delay needed to ensure displays are recognized after waking
-	end)
-	:start()
-
 -- keep the iMac display brightness low when projector is connected
 ProjectorScreensaverWatcher = caff
 	.new(function(event)

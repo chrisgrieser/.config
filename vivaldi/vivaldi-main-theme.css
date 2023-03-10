@@ -147,23 +147,6 @@ least 3 tabs */
 }
 
 /* ────────────────────────────────────────────────────────────────────────── */
-/* DOWNLOAD BAR */
-
-/* show download button only when download is active (`.progress`) */
-.button-toolbar:has(button[name="DownloadButton"]):not(:has(.progress)) {
-	display: none;
-}
-
-#header:has(+ #main .button-toolbar .progress) #tabs-container {
-	padding-left: 30px;
-}
-
-#browser .button-toolbar:has(button[name="DownloadButton"]) button:hover {
-	background: none;
-	color: var(--colorHighlightBg);
-}
-
-/* ────────────────────────────────────────────────────────────────────────── */
 /* TAB LOOK */
 #tabs-container .tab {
 	border-radius: var(--radius);
