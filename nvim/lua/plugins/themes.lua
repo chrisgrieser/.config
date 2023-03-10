@@ -19,8 +19,8 @@ local themePackages = {
 	-- "savq/melange",
 }
 
-local darkTransparency = 0.93
-local lightTransparency = 0.94
+local darkTransparency = 0.92
+local lightTransparency = 0.93
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
