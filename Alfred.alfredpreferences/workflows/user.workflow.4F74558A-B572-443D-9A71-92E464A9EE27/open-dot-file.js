@@ -27,10 +27,9 @@ const fileArray = app
 			-E "visualized-keyboard-layout/*.json" \\
 			-E "*.icns" \\
 			-E "*.plist" \\
-			-E "TODO*" \\
-			-E "INFO*" \\
 			-E "*.png" \\
 			-E "Fonts/*" \\
+			-E ".git" \\
 	`,
 	)
 	.split("\r")
@@ -91,9 +90,10 @@ const fileArray = app
 
 const folderArray = app
 	.doShellScript(
-		`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+		` PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 		cd "${dotfileFolder}" ;
-		fd --type=directory --hidden`,
+		fd --type=directory --hidden \\
+		-E ".git"`,
 	)
 	.split("\r")
 	.map(file => {
