@@ -33,7 +33,7 @@ local options = {
 			"%.pxd", -- Pixelmator
 			"%.plist", -- Alfred
 			"%.harpoon", -- harpoon/projects
-			"^INFO", -- custom info files
+			"/INFO ", -- custom info files
 			"%.ttf", -- fonts
 			"%.png",
 			"%.gif",

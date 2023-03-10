@@ -35,7 +35,8 @@ end
 
 -- BORDERS
 require("lspconfig.ui.windows").default_options.border = BorderStyle
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = BorderStyle })
+vim.lsp.handlers["textDocument/hover"] =
+	vim.lsp.with(vim.lsp.handlers.hover, { border = BorderStyle })
 -- stylua: ignore
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = BorderStyle })
 
@@ -284,6 +285,13 @@ lspSettings.jsonls = {
 		validate = { enable = true },
 		format = { enable = true },
 		schemas = require("schemastore").json.schemas(),
+	},
+}
+
+-- FIX keyordering being enabled automatically (sic)
+lspSettings.yamlls = {
+	yaml = {
+		keyOrdering = false,
 	},
 }
 

@@ -1,6 +1,6 @@
 title: "Mouse Click Trickery"
 rules:
-  # this basically emulations the "Right-Click Open Link in new Background tab" 
+  # this basically emulations the "Right-Click Open Link in new Background tab"
   # Chrome extension. Only done for a brief duration, so holding the right mouse
   # button still works for mouse gestues. Also, Rocker Gesture (Left) is
   # restricted by this (right works though).
@@ -10,9 +10,9 @@ rules:
         from:
           pointing_button: button2
         to_if_alone:
-          - {pointing_button: button1, modifiers: [command]}
+          - { pointing_button: button1, modifiers: [command] }
         to_if_held_down: [pointing_button: button2]
-        parameters: {basic.to_if_held_down_threshold_milliseconds: 200}
+        parameters: { basic.to_if_held_down_threshold_milliseconds: 200 }
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -26,12 +26,12 @@ rules:
         from:
           pointing_button: button2
         to_if_held_down: [pointing_button: button2]
-        parameters: {basic.to_if_held_down_threshold_milliseconds: 200}
+        parameters: { basic.to_if_held_down_threshold_milliseconds: 200 }
         to_if_alone:
-          - {pointing_button: button1, modifiers: [command]}
+          - { pointing_button: button1, modifiers: [command] }
           - key_code: vk_none
             hold_down_milliseconds: 80
-          - {key_code: tab, modifiers: [command]}
+          - { key_code: tab, modifiers: [command] }
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -45,14 +45,14 @@ rules:
         from:
           pointing_button: button2
         to_if_held_down: [pointing_button: button2]
-        parameters: {basic.to_if_held_down_threshold_milliseconds: 200}
+        parameters: { basic.to_if_held_down_threshold_milliseconds: 200 }
         to_if_alone:
           - pointing_button: button2
-          - {key_code: vk_none, hold_down_milliseconds: 10}
+          - { key_code: vk_none, hold_down_milliseconds: 10 }
           - key_code: o
           - key_code: return_or_enter
-          - {key_code: vk_none, hold_down_milliseconds: 600}
-          - {key_code: h, modifiers: [command]}
+          - { key_code: vk_none, hold_down_milliseconds: 600 }
+          - { key_code: h, modifiers: [command] }
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -62,14 +62,14 @@ rules:
         from:
           pointing_button: button2
         to_if_held_down: [pointing_button: button2]
-        parameters: {basic.to_if_held_down_threshold_milliseconds: 200}
+        parameters: { basic.to_if_held_down_threshold_milliseconds: 200 }
         to_if_alone:
           - pointing_button: button1
-          - {key_code: vk_none, hold_down_milliseconds: 200}
-          - {key_code: tab, modifiers: [command]}
-          - {key_code: vk_none, hold_down_milliseconds: 100}
+          - { key_code: vk_none, hold_down_milliseconds: 200 }
+          - { key_code: tab, modifiers: [command] }
+          - { key_code: vk_none, hold_down_milliseconds: 100 }
           - key_code: non_us_pound
-          - {key_code: h, modifiers: [command]}
+          - { key_code: h, modifiers: [command] }
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -81,7 +81,7 @@ rules:
         from:
           pointing_button: button3
         to:
-          - {key_code: q, modifiers: [command]}
+          - { key_code: q, modifiers: [command] }
         conditions:
           - type: frontmost_application_unless
             file_paths:
@@ -94,7 +94,7 @@ rules:
         from:
           pointing_button: button3
         to:
-          - {key_code: w, modifiers: [command]}
+          - { key_code: w, modifiers: [command] }
         conditions:
           - type: frontmost_application_if
             file_paths:
@@ -154,8 +154,8 @@ rules:
         from:
           pointing_button: button4
         to:
-          - {key_code: "n", modifiers: [control, command]}
-          - {key_code: "3", modifiers: [control, command]}
+          - { key_code: "n", modifiers: [control, command] }
+          - { key_code: "3", modifiers: [control, command] }
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Comment \U0001F5E3️\"'"
         conditions:
           - type: frontmost_application_if
@@ -219,13 +219,13 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
-      # Twitter: Close Media Window
+      # Twitter: Close Media Window and tab away
       - type: basic
         from:
           pointing_button: button5
         to:
-          - {key_code: w, modifiers: [command]}
-          - {key_code: tab, modifiers: [command]}
+          - { key_code: w, modifiers: [command] }
+          - { key_code: tab, modifiers: [command] }
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -240,7 +240,7 @@ rules:
         from:
           pointing_button: button5
         to_if_alone:
-          - {key_code: w, modifiers: [command]}
+          - { key_code: w, modifiers: [command] }
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -319,7 +319,7 @@ rules:
             - pointing_button: button2
         to:
           - pointing_button: button1 # in case it's not the front window
-          - {key_code: d, modifiers: [control, command]}
+          - { key_code: d, modifiers: [control, command] }
         parameters:
           basic.simultaneous_threshold_milliseconds: 100
         conditions:
