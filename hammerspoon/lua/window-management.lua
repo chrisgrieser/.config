@@ -234,7 +234,7 @@ local function moveCurWinToOtherDisplay()
 	local targetScreen = win:screen():next()
 	win:moveToScreen(targetScreen, true)
 
-	RunWithDelays({ 0.1, 0.2 }, function()
+	RunWithDelays({ 0.1, 0.4 }, function()
 		-- workaround for ensuring proper resizing
 		win = hs.window.focusedWindow()
 		if not win then return end
