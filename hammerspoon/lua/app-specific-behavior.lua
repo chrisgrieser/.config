@@ -127,23 +127,6 @@ SpotifyAppWatcher = Aw.new(function(appName, eventType)
 	end
 end):start()
 
--- FALL THROUGH: after closing window, do not focus windowless browser or Twitter
-Wf_all = Wf.new(true):subscribe(Wf.windowDestroyed, function()
-	RunWithDelays(0.1, function()
-		local visibleWins = hs.window:orderedWindows()
-		local nextWin
-		for _, win in pairs(visibleWins) do
-			local isTwitter = win:application():name() == "Twitter"
-			local windowlessBrowser = win:application():name() == "Vivaldi" and win:application():allWindows() == 0
-			if not isTwitter and not windowlessBrowser then
-				nextWin = win
-				break
-			end
-		end
-		if nextWin:id() ~= hs.window.frontmostWindow():id() then nextWin:focus() end
-	end)
-end)
-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 

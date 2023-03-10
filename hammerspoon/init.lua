@@ -6,7 +6,7 @@ hs.application.enableSpotlightForNameSearches(false)
 hs.window.animationDuration = 0
 
 --------------------------------------------------------------------------------
-
+print("Start Loading Config")
 require("lua.meta")
 require("lua.utils")
 
@@ -26,4 +26,5 @@ require("lua.hardware-periphery")
 
 if IsAtMother() then require("lua.hot-corner-action") end
 
+print("Stop Loading Config")
 SystemStart()
