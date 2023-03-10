@@ -19,6 +19,7 @@ function TwitterScrollUp()
 end
 
 function TwitterToTheSide()
+	Notify("totheside")
 	if not AppIsRunning("Twitter") then return end
 	local win = App("Twitter"):mainWindow()
 	if not win then return end

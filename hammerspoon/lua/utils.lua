@@ -185,7 +185,7 @@ end
 ---@param appName string app to wait for
 ---@param callbackFn function function to execute when the app is available
 function AsSoonAsAppRuns(appName, callbackFn)
-	hs.timer.waitUntil(function() AppIsRunning(appName) end, callbackFn, 0.5)
+	hs.timer.waitUntil(function() return hs.application.get(appName) == nil end, callbackFn)
 end
 
 ---@param appNames string|string[]
