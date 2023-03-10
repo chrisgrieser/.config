@@ -107,24 +107,15 @@ keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickf
 
 -- LUASNIP
 keymap({ "i", "s" }, "<D-j>", function()
-	if require("neogen").jumpable() then
-		require("neogen").jump_next()
-	elseif require("luasnip").jumpable(1) then
+	if require("luasnip").jumpable(1) then
 		require("luasnip").jump(1)
-		-- if after jump at a choice, trigger choice selection
-		if require("luasnip").choice_active() then
-			require("luasnip.extras.select_choice")()
-			return "<Esc>" -- HACK to not end up in insert mode (due to dressing)
-		end
 	else
 		vim.notify("No Jump available.", logWarn)
 	end
-end, { desc = "LuaSnip: Jump & Choice" })
+end, { desc = "LuaSnip: Jump" })
 
 keymap({ "i", "s" }, "<D-S-j>", function()
-	if require("neogen").jumpable(true) then
-		require("neogen").jump_prev()
-	elseif require("luasnip").jumpable(-1) then
+	if require("luasnip").jumpable(-1) then
 		require("luasnip").jump(-1)
 	else
 		vim.notify("No Jump back available.", logWarn)
