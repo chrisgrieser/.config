@@ -108,7 +108,7 @@ end
 
 --------------------------------------------------------------------------------
 -- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
-function SelectLayout()
+local function selectLayout()
 	if IsProjector() then
 		movieLayout()
 	else
@@ -117,9 +117,16 @@ function SelectLayout()
 end
 
 -- watcher + hotkey
-DisplayCountWatcher = hs.screen.watcher.new(SelectLayout):start()
-Hotkey(Hyper, "home", SelectLayout) -- hyper + eject on Apple Keyboard
-Hotkey({ "shift" }, "f6", SelectLayout) -- for Apple keyboard
+DisplayCountWatcher = hs.screen.watcher.new(selectLayout):start()
+Hotkey(Hyper, "home", selectLayout) -- hyper + eject on Apple Keyboard
+Hotkey({ "shift" }, "f6", selectLayout) -- for Apple keyboard
+
+UnlockWatcher = hs.caffeinate.watcher
+	.new(function(event)
+		-- delay needed to ensure displays are recognized after waking
+		if event == hs.caffeinate.watcher.screensDidUnlock then RunWithDelays(0.5, selectLayout) end
+	end)
+	:start()
 
 --------------------------------------------------------------------------------
 

@@ -144,7 +144,13 @@ end):start()
 Wf_browser = Wf.new("Vivaldi")
 	:setOverrideFilter({
 		-- INFO DevTools windows are titled "" on creation
-		rejectTitles = { " %(Private%)$", "^Picture in Picture$", "^Task Manager$", "^DevTools", "^$" },
+		rejectTitles = {
+			" %(Private%)$",
+			"^Picture in Picture$",
+			"^Task Manager$",
+			"^DevTools",
+			"^$",
+		},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
@@ -166,7 +172,10 @@ Wf_browser_all = Wf.new({ "Vivaldi" })
 -- IINA: Full Screen when on projector
 IinaAppLauncher = Aw.new(function(appName, eventType, appObject)
 	if eventType == Aw.launched and appName == "IINA" and IsProjector() then
-		AsSoonAsAppRuns(appName, function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end)
+		AsSoonAsAppRuns(
+			appName,
+			function() appObject:selectMenuItem { "Video", "Enter Full Screen" } end
+		)
 	end
 end):start()
 
@@ -230,9 +239,9 @@ end):start()
 
 --------------------------------------------------------------------------------
 
--- ALACRITTY / Kitty
+-- ALACRITTY / TERMINAL
 -- pseudomaximized window
-Wf_alacritty = Wf.new({ "alacritty", "Alacritty", "kitty" })
+Wf_terminal = Wf.new({ "alacritty", "Alacritty", "kitty" })
 	:setOverrideFilter({ rejectTitles = { "btop" } })
 	:subscribe(Wf.windowCreated, function(newWin)
 		local appName = newWin:application():name()
@@ -262,8 +271,8 @@ UriScheme("focus-btop", function()
 		win:focus()
 		return
 	end
-	-- 1. using os.execute does not make that command block hammerspoon
-	-- 2. starting with smaller font be able to read all processes
+
+	-- starting with smaller font be able to read all processes
 	local success = os.execute([[
 			export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 			if ! command -v btop &>/dev/null; then exit 1 ; fi
@@ -291,7 +300,8 @@ Wf_quicklook = Wf
 		-- do not enlage window for images (which are enlarged already with
 		-- landscape proportions)
 		if
-			sel and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4"))
+			sel
+			and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4"))
 		then
 			return
 		end
@@ -353,7 +363,7 @@ end)
 
 -- HIGHLIGHTS
 -- - Sync Dark & Light Mode
--- - Start with Highlight as Selection
+-- - Start with Highlight Tool enabled
 HighlightsAppWatcher = Aw.new(function(appName, eventType, appObject)
 	if not (eventType == Aw.launched and appName == "Highlights") then return end
 
@@ -388,17 +398,19 @@ end):start()
 
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
--- - auto-paste and lint content
--- - skip new file creation dialog
 Wf_script_editor = Wf
 	.new("Script Editor")
 	:subscribe(Wf.windowCreated, function(newWin)
+		-- skip new file creaton dialogue
 		if newWin:title() == "Open" then
 			Keystroke({ "cmd" }, "n")
+
+		-- auto-paste and lint content; resize window
 		elseif newWin:title() == "Untitled" then
 			Keystroke({ "cmd" }, "v")
 			MoveResize(newWin, Centered)
 			RunWithDelays(0.2, function() Keystroke({ "cmd" }, "k") end)
+		-- resize window
 		elseif newWin:title():find("%.sdef$") then
 			MoveResize(newWin, Centered)
 		end

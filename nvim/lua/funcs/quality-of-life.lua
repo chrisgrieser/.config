@@ -76,6 +76,7 @@ function M.wordSwitch()
 		{ "relative", "absolute" },
 		{ "low", "high" },
 		{ "dark", "light" },
+		{ "before", "after" },
 		{ "and", "or" },
 		{ "next", "previous" },
 	}

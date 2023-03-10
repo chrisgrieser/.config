@@ -10,7 +10,12 @@ keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " Keymaps"
 keymap("n", "<leader>T", function() cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
 
 -- Highlights
-keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
+keymap(
+	"n",
+	"<leader>H",
+	function() cmd.Telescope("highlights") end,
+	{ desc = " Highlight Groups" }
+)
 
 -- Update [P]lugins
 keymap("n", "<leader>p", require("lazy").sync, { desc = ":Lazy sync" })
@@ -109,7 +114,12 @@ keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickf
 -- Comments & Annotations
 keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })
 keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
-keymap("n", "qf", function() require("neogen").generate() end, { desc = "Neogen: Comment Function" })
+keymap(
+	"n",
+	"qf",
+	function() require("neogen").generate() end,
+	{ desc = "Neogen: Comment Function" }
+)
 
 -- Whitespace Control
 keymap("n", "=", "mzO<Esc>`z", { desc = "add blank line above" })
@@ -264,8 +274,18 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 
 -- Harpoon
 keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "ﯠ Next" })
-keymap("n", "g<CR>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
-keymap("n", "<leader><CR>", function() require("harpoon.mark").add_file() end, { desc = "ﯠ Add File" })
+keymap(
+	"n",
+	"g<CR>",
+	function() require("harpoon.ui").toggle_quick_menu() end,
+	{ desc = "ﯠ Menu" }
+)
+keymap(
+	"n",
+	"<leader><CR>",
+	function() require("harpoon.mark").add_file() end,
+	{ desc = "ﯠ Add File" }
+)
 
 ------------------------------------------------------------------------------
 
@@ -342,15 +362,40 @@ keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgr
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 
 -- File Operations
-keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = " copy filepath" })
-keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = " copy filename" })
+keymap(
+	"n",
+	"<C-p>",
+	function() require("genghis").copyFilepath() end,
+	{ desc = " copy filepath" }
+)
+keymap(
+	"n",
+	"<C-n>",
+	function() require("genghis").copyFilename() end,
+	{ desc = " copy filename" }
+)
 keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = " chmod +x" })
 keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = " rename file" })
 -- stylua: ignore
 keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = " move-rename file" })
-keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = " duplicate file" })
-keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = " move file to trash" })
-keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = " create new file" })
+keymap(
+	"n",
+	"<C-d>",
+	function() require("genghis").duplicateFile() end,
+	{ desc = " duplicate file" }
+)
+keymap(
+	"n",
+	"<D-BS>",
+	function() require("genghis").trashFile() end,
+	{ desc = " move file to trash" }
+)
+keymap(
+	"n",
+	"<D-n>",
+	function() require("genghis").createNewFile() end,
+	{ desc = " create new file" }
+)
 -- stylua: ignore
 keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = " selection to new file" })
 

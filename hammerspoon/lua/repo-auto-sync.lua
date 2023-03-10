@@ -111,23 +111,25 @@ function SyncAllGitRepos(sendNotification)
 end
 
 --------------------------------------------------------------------------------
--- CALLING THE SYNC
+-- WHEN TO SYNC
 
 -- 1. on systemstart (see meta.lua)
--- 2. on screen unlock (see cronjobs.lua)
 
--- 3. every x minutes
+-- 2. every x minutes
 RepoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, SyncAllGitRepos):start()
 
--- 4. manually via Alfred: `hammerspoon://sync-repos`
+-- 3. manually via Alfred: `hammerspoon://sync-repos`
 UriScheme("sync-repos", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 	SyncAllGitRepos("notify")
 end)
 
--- 5. when going to sleep
+-- 4. when going to sleep/unlocking
 SleepWatcher = hs.caffeinate.watcher
-	.new(function(eventType)
-		if eventType == hs.caffeinate.watcher.screensDidSleep then SyncAllGitRepos() end
+	.new(function(event)
+		local caff = hs.caffeinate.watcher
+		if event == caff.screensDidSleep or event == caff.screensDidUnlock then
+			SyncAllGitRepos()
+		end
 	end)
 	:start()

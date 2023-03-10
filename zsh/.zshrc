@@ -1,4 +1,4 @@
-# printf '\33c\e[3J' # remove last login message https://stackoverflow.com/a/69915614
+printf '\33c\e[3J' # remove last login message https://stackoverflow.com/a/69915614
 
 CONFIG=()
 CONFIG+=('load_plugins')

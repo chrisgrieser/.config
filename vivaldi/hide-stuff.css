@@ -5,7 +5,7 @@
 .window-buttongroup, /* macOS traffic lights */
 .toolbar-extensions, /* extension button */
 .button-toolbar.newtab, /* new tab button */
-.toolbar-insideinput .button-toolbar, /* reader view button, password icon */
+.toolbar-insideinput .button-toolbar:not(.BookmarkButton-Button), /* reader view button, password icon */
 .UrlBar-AddressField .pageload-ticker, /* page load numbers (but not progress bar) */
 .UrlBar-AddressField .drop-down-menu { /* dropdown button */
 	display: none;
@@ -14,6 +14,45 @@
 input#urlFieldInput::placeholder { opacity: 0 }
 
 /* ────────────────────────────────────────────────────────────────────────── */
+
+/* SECURITY BUTTON hidden when not hovered & not insecure site */
+.UrlBar-AddressField .SiteInfoButton {
+	order: 1; /* move to the right */
+	margin-right: 4px;
+}
+
+.SiteInfoButton-SecurityBadge:has(svg > g > path:nth-child(2)), /* briefly flashing info icon */
+.toolbar-mainbar:not(:hover, :active) .SiteInfoButton:is(.secure) {
+	opacity: 0;
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* DOWNLOAD BUTTON only when download is active (`.progress`) */
+.button-toolbar:has(button[name="DownloadButton"]):not(:has(.progress)) {
+	display: none;
+}
+
+#header:has(+ #main .button-toolbar .progress) #tabs-container {
+	padding-left: 30px;
+}
+
+#browser .button-toolbar:has(button[name="DownloadButton"]) button:hover {
+	background: none;
+	color: var(--colorHighlightBg);
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* BOOKMARKS */
+.BookmarkButton {
+	display: none;
+}
+
+.UrlBar-AddressField:has(.BookmarkButton .button-on)::before {
+	content: "⭐";
+	padding-left: 4px;
+}
 
 /* Bookmark Popup: Remove useless description and nickname fields */
 .BookmarkLocationSelector-Header,
