@@ -288,10 +288,11 @@ lspSettings.jsonls = {
 	},
 }
 
--- FIX keyordering being enabled automatically (sic)
+-- https://github.com/redhat-developer/yaml-language-server#language-server-settings
 lspSettings.yamlls = {
 	yaml = {
-		keyOrdering = false,
+		format = { enable = false }, -- taken care of by prettier
+		keyOrdering = false, -- FIX mapKeyOrder
 	},
 }
 

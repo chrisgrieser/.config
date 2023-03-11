@@ -173,15 +173,15 @@ rules:
           - shell_command: open "chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html"
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers: 
+            bundle_identifiers:
               - ^com\.brave\.Browser
               - ^com\.vivaldi\.Vivaldi
       # Remove bookmark
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
         to:
-          - {key_code: d, modifiers: [command]}
-          - {key_code: tab, modifiers: [shift]}
+          - { key_code: d, modifiers: [command] }
+          - { key_code: tab, modifiers: [shift] }
           - key_code: spacebar
         conditions:
           - type: frontmost_application_if
@@ -193,7 +193,7 @@ rules:
           - shell_command: open "chrome://settings"
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers: 
+            bundle_identifiers:
               - ^com\.brave\.Browser
       # open dev tools (= inspect Vivaldi UI)
       - type: basic
@@ -285,7 +285,7 @@ rules:
         from: { key_code: o, modifiers: { mandatory: [command] } }
         to:
           - { key_code: tab, modifiers: [shift] }
-          - {key_code: vk_none, hold_down_milliseconds: 20}
+          - { key_code: vk_none, hold_down_milliseconds: 20 }
           - key_code: r
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
   #─────────────────────────────────────────────────────────────────────────────
@@ -322,8 +322,8 @@ rules:
         from: { key_code: l }
         to:
           - key_code: "v"
-          - {key_code: vk_none, hold_down_milliseconds: 120}
-          - {key_code: "tab", modifiers: [command]}
+          - { key_code: vk_none, hold_down_milliseconds: 120 }
+          - { key_code: "tab", modifiers: [command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.lireapp\.macOS$] }
       - type: basic # full text
@@ -404,9 +404,9 @@ rules:
         from: { key_code: o, modifiers: { mandatory: [command] } }
         to:
           - key_code: tab
-          - {key_code: vk_none, hold_down_milliseconds: 50}
+          - { key_code: vk_none, hold_down_milliseconds: 50 }
           - key_code: up_arrow
-          - {key_code: vk_none, hold_down_milliseconds: 70}
+          - { key_code: vk_none, hold_down_milliseconds: 70 }
           - key_code: close_bracket
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
       # go 3 up [t]
