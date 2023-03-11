@@ -98,6 +98,17 @@
 			<key>url</key>
 			<string>https://chrome.google.com/webstore/search/{query}</string>
 		</dict>
+		<key>699E64AD-81CD-4CA4-8D89-E0462B5742B4</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>tw</string>
+			<key>text</key>
+			<string>New Tweet</string>
+			<key>url</key>
+			<string>https://twitter.com/intent/tweet?text=</string>
+		</dict>
 		<key>84F18614-4389-4B12-8CD3-4B9F82576401</key>
 		<dict>
 			<key>enabled</key>

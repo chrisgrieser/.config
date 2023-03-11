@@ -197,13 +197,13 @@ end
 function OpenApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		local runs = hs.application(name) ~= nil
+		local runs = hs.application.get(name) ~= nil
 		if not runs then hs.application.open(name) end
 	end
 end
 
+---quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 function QuitFinderIfNoWindow()
-	-- quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 	local finder = hs.application.get("Finder")
 	if finder and #(finder:allWindows()) == 0 then finder:kill() end
 end

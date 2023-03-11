@@ -164,19 +164,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E5D005C3-191E-487D-BE8D-41D9ADAD6A5E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BF95F33C-7CA5-4F93-89F8-904DE1BAC76A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>E8066503-E298-4023-9E9F-3FBA20E03748</key>
 		<array>
 			<dict>
@@ -835,50 +822,6 @@ end tell</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-new-tweet.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BF95F33C-7CA5-4F93-89F8-904DE1BAC76A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>tw</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>New Tweet</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E5D005C3-191E-487D-BE8D-41D9ADAD6A5E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1051,13 +994,6 @@ end tell</string>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
-		<key>BF95F33C-7CA5-4F93-89F8-904DE1BAC76A</key>
-		<dict>
-			<key>xpos</key>
-			<real>785</real>
-			<key>ypos</key>
-			<real>740</real>
-		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
 			<key>colorindex</key>
@@ -1097,15 +1033,6 @@ end tell</string>
 			<real>780</real>
 			<key>ypos</key>
 			<real>580</real>
-		</dict>
-		<key>E5D005C3-191E-487D-BE8D-41D9ADAD6A5E</key>
-		<dict>
-			<key>note</key>
-			<string>new tweet</string>
-			<key>xpos</key>
-			<real>620</real>
-			<key>ypos</key>
-			<real>740</real>
 		</dict>
 		<key>E8066503-E298-4023-9E9F-3FBA20E03748</key>
 		<dict>
