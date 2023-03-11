@@ -156,8 +156,8 @@ autocmd("LspAttach", {
 			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "璉Workspace Symbols", buffer = true })
 		end
 		keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "璉Goto definition", buffer = true })
-		keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "璉Goto Re[f]erence", buffer = true })
-		keymap("n", "gy", function() cmd.Telescope("lsp_type_definitions") end, { desc = "璉Goto T[y]pe Definition", buffer = true })
+		keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "璉Goto Reference", buffer = true })
+		keymap("n", "gy", function() cmd.Telescope("lsp_type_definitions") end, { desc = "璉Goto Type Definition", buffer = true })
 		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, {desc = "璉Signature", buffer = true})
 		keymap("n", "<leader>h", vim.lsp.buf.hover, {desc = "璉Hover", buffer = true})
 

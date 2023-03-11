@@ -44,19 +44,19 @@
 		"prefix": "directory of script",
 		"body": "cd \"$(dirname \"\\$0\")"
 	},
-	"jxa (run script)": {
+	"osascript jxa (run script)": {
 		"prefix": [
 			"jxa (run script)",
 			"osascript -l JavaScript"
 		],
 		"body": "osascript -l JavaScript \"${1:file}\""
 	},
-	"applescript (execute)": {
+	"osascript applescript (execute)": {
 		"prefix": [
 			"applescript (execute)",
 			"osascript -e"
 		],
-		"body": "osascript -e \"${1:command}\""
+		"body": "osascript -e '${1:command}'"
 	},
 	"multiline string": {
 		"prefix": "multiline string",
