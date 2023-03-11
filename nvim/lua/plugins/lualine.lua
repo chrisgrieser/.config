@@ -182,12 +182,19 @@ local function lspCountStatusline()
 	return " " .. defs .. "  " .. refs
 end
 
+local function quickfixListCounter()
+	local count = #vim.fn.getqflist()
+	if count == 0 then return "" end
+	return "壟" .. tostring(count)
+end
+
 --------------------------------------------------------------------------------
 
 -- nerdfont: icons with prefix 'ple-'
--- stylua: ignore
+-- stylua: ignore start
 local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 local topSeparators = vim.g.neovide and { left = " ", right = "" } or { left = "", right = "" }
+-- stylua: ignore end
 
 local function lualineConfig()
 	require("lualine").setup {
@@ -209,6 +216,7 @@ local function lualineConfig()
 			lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 			lualine_c = {
 				{ searchCounter },
+				{ quickfixListCounter },
 			},
 			lualine_x = {
 				{
