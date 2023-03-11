@@ -196,94 +196,92 @@ local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or 
 local topSeparators = vim.g.neovide and { left = " ", right = "" } or { left = "", right = "" }
 -- stylua: ignore end
 
-local function lualineConfig()
-	require("lualine").setup {
-		sections = {
-			lualine_a = {
-				{ harpoonIndicator, padding = { left = 1, right = 0 } },
-				{
-					"filetype",
-					colored = false,
-					padding = { left = 1, right = 0 },
-					icon_only = true,
-				},
-				{
-					"filename",
-					file_status = false,
-					fmt = function(str) return str:gsub("zsh;#toggleterm# %d", "Toggleterm") end,
-				},
+lualineConfig = {
+	sections = {
+		lualine_a = {
+			{ harpoonIndicator, padding = { left = 1, right = 0 } },
+			{
+				"filetype",
+				colored = false,
+				padding = { left = 1, right = 0 },
+				icon_only = true,
 			},
-			lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
-			lualine_c = {
-				{ searchCounter },
-				{ quickfixListCounter },
-			},
-			lualine_x = {
-				{
-					"diagnostics",
-					symbols = { error = " ", warn = " ", info = " ", hint = "ﬤ " },
-				},
-				{ mixedIndentation },
-				{ lspCountStatusline, color = { fg = "grey" } },
-				{ lsp_progress },
-			},
-			lualine_y = {
-				"diff",
-				{ "branch", cond = isStandardBranch },
-			},
-			lualine_z = {
-				"location",
-				{ selectionCount, padding = { left = 0, right = 1 } },
+			{
+				"filename",
+				file_status = false,
+				fmt = function(str) return str:gsub("zsh;#toggleterm# %d", "Toggleterm") end,
 			},
 		},
-		winbar = {
-			lualine_a = {
-				{ clock },
-			},
-			lualine_b = {
-				{ navic.get_location, cond = showNavic, section_separators = topSeparators },
-			},
-			lualine_c = {
-				{ function() return " " end, cond = showNavic }, -- dummy to avoid bar flickering
-			},
-			lualine_x = {
-				{
-					require("lazy.status").updates,
-					cond = function()
-						if not require("lazy.status").has_updates() then return false end
-						local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
-						return numberOfUpdates >= UpdateCounterThreshhold
-					end,
-					color = "NonText",
-				},
-			},
-			-- INFO dap and recording status defined in the respective plugin configs
-			-- for lualine_y and lualine_z
+		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
+		lualine_c = {
+			{ searchCounter },
+			{ quickfixListCounter },
 		},
-		options = {
-			refresh = { statusline = 1000 },
-			ignore_focus = {
-				"TelescopePrompt",
-				"DressingInput",
-				"DressingSelect",
-				"Mason",
-				"harpoon",
-				"ccc-ui",
-				"",
+		lualine_x = {
+			{
+				"diagnostics",
+				symbols = { error = " ", warn = " ", info = " ", hint = "ﬤ " },
 			},
-			globalstatus = true,
-			component_separators = { left = "", right = "" },
-			section_separators = bottomSeparators,
-			disabled_filetypes = {
-				statusline = {},
-				winbar = {
-					"toggleterm",
-					"gitcommit",
-				},
+			{ mixedIndentation },
+			{ lspCountStatusline, color = { fg = "grey" } },
+			{ lsp_progress },
+		},
+		lualine_y = {
+			"diff",
+			{ "branch", cond = isStandardBranch },
+		},
+		lualine_z = {
+			"location",
+			{ selectionCount, padding = { left = 0, right = 1 } },
+		},
+	},
+	winbar = {
+		lualine_a = {
+			{ clock },
+		},
+		lualine_b = {
+			{ navic.get_location, cond = showNavic, section_separators = topSeparators },
+		},
+		lualine_c = {
+			{ function() return " " end, cond = showNavic }, -- dummy to avoid bar flickering
+		},
+		lualine_x = {
+			{
+				require("lazy.status").updates,
+				cond = function()
+					if not require("lazy.status").has_updates() then return false end
+					local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
+					return numberOfUpdates >= UpdateCounterThreshhold
+				end,
+				color = "NonText",
 			},
 		},
-	}
-end
+		-- INFO dap and recording status defined in the respective plugin configs
+		-- for lualine_y and lualine_z
+	},
+	options = {
+		refresh = { statusline = 1000 },
+		ignore_focus = {
+			"TelescopePrompt",
+			"DressingInput",
+			"DressingSelect",
+			"Mason",
+			"harpoon",
+			"ccc-ui",
+			"",
+		},
+		globalstatus = true,
+		component_separators = { left = "", right = "" },
+		section_separators = bottomSeparators,
+		disabled_filetypes = {
+			statusline = {},
+			winbar = {
+				"toggleterm",
+				"gitcommit",
+			},
+		},
+	},
+}
 
 --------------------------------------------------------------------------------
 
@@ -291,6 +289,6 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "VimEnter",
-		config = lualineConfig,
+		config = function() require("lualine").setup(lualineConfig) end,
 	},
 }
