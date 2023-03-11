@@ -63,6 +63,12 @@ input#urlFieldInput::placeholder {
 	display: none;
 }
 
+.BookmarkPopup-Header.DialogHeader {
+	padding-top: 0;
+	padding-bottom: 0;
+	height: 0;
+}
+
 #browser .BookmarkPopup-LocationSelector {
 	height: 315px;
 }
