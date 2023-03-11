@@ -77,6 +77,11 @@
 			"set resolved_path to theTextItems as string"
 		]
 	},
+	"linefeed": {
+		"prefix": ["linefeed", "\\n"],
+		"body": "linefeed",
+		"desc": "Equivalent to `\\n` in Applescript"
+	},
 	"home": {
 		"prefix": "home",
 		"body": "POSIX path of (path to home folder as string)"
