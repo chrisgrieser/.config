@@ -12,7 +12,7 @@ require("config.utils") -- must come after lazy
 
 if vim.g.neovide then
 	require("config.gui-settings")
-	InitializeTheme()
+	require("config.theme-config")
 else
 	require("config.terminal-only")
 end

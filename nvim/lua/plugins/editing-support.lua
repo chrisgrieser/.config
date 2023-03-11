@@ -124,7 +124,9 @@ return {
 						delete = "^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
 					},
 					[conditionObjChar] = {
-						find = function() return config.get_selection { motion = "a" .. conditionObjChar } end,
+						find = function()
+							return config.get_selection { motion = "a" .. conditionObjChar }
+						end,
 						delete = function()
 							local ft = bo.filetype
 							local patt
@@ -170,7 +172,11 @@ return {
 	},
 
 	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
-	{ "mg979/vim-visual-multi", keys = { "<D-j>", { "<D-j>", mode = "x" } } },
+	{ "mg979/vim-visual-multi", 
+		keys = {
+		{ "<D-j>", mode = { "n", "x" }, desc = "Multi-Cursor" },
+		}
+	},
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
 
 	{ "bkad/CamelCaseMotion", event = "BufReadPost" },
@@ -195,7 +201,6 @@ return {
 			})
 		end,
 	},
-
 	{
 		"mizlan/iswap.nvim", -- swapping of nodes
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -205,8 +210,14 @@ return {
 	{
 		"Wansmer/treesj", -- split-join
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		config = function() require("treesj").setup { use_default_keymaps = false } end,
 		cmd = "TSJToggle",
+		config = function()
+			require("treesj").setup {
+				use_default_keymaps = false,
+				cursor_behavior = "start", -- start|end|hold
+				max_join_length = 200,
+			}
+		end,
 	},
 	{
 		"cshuaimin/ssr.nvim", -- structural search & replace
@@ -274,7 +285,9 @@ return {
 					-- smart switching of conditionals
 					if ft == "lua" and line:find("^%s*if.+then$") then
 						line = line:gsub("^(%s*)if", "%1elseif")
-					elseif (ft == "bash" or ft == "zsh" or ft == "sh") and line:find("^%s*if.+then$") then
+					elseif
+						(ft == "bash" or ft == "zsh" or ft == "sh") and line:find("^%s*if.+then$")
+					then
 						line = line:gsub("^(%s*)if", "%1elif")
 					elseif (ft == "javascript" or ft == "typescript") and line:find("^%s*if.+{$") then
 						line = line:gsub("^(%s*)if", "%1} else if")
