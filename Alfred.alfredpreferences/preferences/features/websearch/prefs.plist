@@ -52,17 +52,6 @@
 			<key>utf8</key>
 			<true/>
 		</dict>
-		<key>4114B30B-6993-4273-A533-D78469A7347E</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>tw</string>
-			<key>text</key>
-			<string>New Tweet in Twitter</string>
-			<key>url</key>
-			<string>http://twitter.com/intent/tweet?text=</string>
-		</dict>
 		<key>510A0ED4-31D4-48D5-9318-92A081DCF445</key>
 		<dict>
 			<key>enabled</key>

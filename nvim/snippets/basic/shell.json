@@ -51,6 +51,13 @@
 		],
 		"body": "osascript -l JavaScript \"${1:file}\""
 	},
+	"applescript (execute)": {
+		"prefix": [
+			"applescript (execute)",
+			"osascript -e"
+		],
+		"body": "osascript -e \"${1:command}\""
+	},
 	"multiline string": {
 		"prefix": "multiline string",
 		"body": [
@@ -121,8 +128,8 @@
 		"prefix": "plist: extract key",
 		"body": "plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 	},
-	"running process": {
-		"prefix": "running process",
+	"check if process is running": {
+		"prefix": "check if process is running",
 		"body": "pgrep -x \"${1:process}\" > /dev/null && $0"
 	},
 	"quicklook": {
@@ -158,6 +165,10 @@
 		"prefix": "while",
 		"body": "while [[ ${1:condition} ]]; do\n\t${0}\ndone\n",
 		"description": "A while loop by condition."
+	},
+	"wait until app is running": {
+		"prefix": "wait until app is running",
+		"body": "while ! pgrep -q \"${1:app_name}\"; do sleep 0.1; done"
 	},
 	"restart app": {
 		"prefix": "restart app",
