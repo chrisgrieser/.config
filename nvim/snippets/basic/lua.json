@@ -14,8 +14,8 @@
 		"prefix": "ignore block (stylua)",
 		"body": "-- stylua: ignore"
 	},
-	"ignore (selene)": {
-		"prefix": "ignore (selene)",
+	"ignore rule (selene)": {
+		"prefix": "ignore rule (selene)",
 		"body": "-- selene: allow(${1:rule_name})"
 	},
 	"if": {

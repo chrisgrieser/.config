@@ -60,13 +60,13 @@ local function searchCounter()
 end
 
 local function clock()
-	if vim.fn.winwidth(0) < 110 then return "" end -- only show the clock when it covers my menubar clock
+	if vim.opt.columns:get() < 120 then return "" end -- only show the clock when it covers my menubar clock
 	local time = tostring(os.date()):sub(12, 16)
 
 	-- make the `:` blink
 	if os.time() % 2 == 1 then time = time:gsub(":", " ") end
 
-	return " " .. time
+	return time
 end
 
 ---returns a harpoon icon if the current file is marked in Harpoon. Does not
@@ -196,7 +196,7 @@ local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or 
 local topSeparators = vim.g.neovide and { left = " ", right = "" } or { left = "", right = "" }
 -- stylua: ignore end
 
-lualineConfig = {
+local lualineConfig = {
 	sections = {
 		lualine_a = {
 			{ harpoonIndicator, padding = { left = 1, right = 0 } },
@@ -286,9 +286,7 @@ lualineConfig = {
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"nvim-lualine/lualine.nvim",
-		event = "VimEnter",
-		config = function() require("lualine").setup(lualineConfig) end,
-	},
+	"nvim-lualine/lualine.nvim",
+	event = "VimEnter",
+	config = function() require("lualine").setup(lualineConfig) end,
 }

@@ -72,6 +72,7 @@ function M.wordSwitch()
 		{ "red", "blue" },
 		{ "top", "bottom" },
 		{ "min", "max" },
+		{ "always", "never" },
 		{ "width", "height" },
 		{ "relative", "absolute" },
 		{ "low", "high" },
@@ -84,9 +85,12 @@ function M.wordSwitch()
 	local ftWords -- 3rd item false if 2nd item shouldn't also switch to first
 	if ft == "lua" then
 		ftWords = {
-			{ "if", "elseif" },
+			{ "if", "elseif", false },
+			{ "elseif", "else", false },
+			{ "else", "if", false },
 			{ "function", "local function", false },
 			{ "pairs", "ipairs" },
+			{ "Notify", "print", false }, -- hammerspoon specific
 		}
 	elseif ft == "python" then
 		ftWords = {

@@ -30,9 +30,9 @@ on run argv
 
 	-- http://aspell.net/man-html/Through-A-Pipe.html
 	set theFixedWord to do shell script "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; echo '" & theWord & "' | aspell pipe " & langArg & " | sed -n 2p | cut -d, -f1 | cut -d: -f2 | cut -c2-"
-	if (theFixedWord is "") then 
-
-		return # on error, preserve word
+	if (theFixedWord is "") then # no word to be found
+		tell application "System Events" to key code 123 -- char left -> unselect
+		return
 	end if
 
 	set the clipboard to theFixedWord
