@@ -91,14 +91,14 @@ keymap("n", "<Esc>", function()
 end, { desc = "Clear Notifications" })
 
 -- FOLDING
-keymap("n", "^", "za", { desc = "toggle fold" })
+keymap("n", "^", "za", { desc = "ﬕ toggle fold" })
 
 -- [M]atchIt
 -- remap needed, since using the builtin matchit plugin
 keymap("n", "m", "%", { remap = true, desc = "MatchIt" }) 
 
 -- HUNKS AND CHANGES
-keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
+keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = " :hunkgoto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
@@ -159,42 +159,42 @@ keymap( "n", "sx", function() require("substitute.exchange").operator() end, { d
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
 -- IS[w]ap
-keymap("n", "<leader>w", cmd.ISwapWith, { desc = "swap nodes" })
+keymap("n", "<leader>w", cmd.ISwapWith, { desc = "弄 swap nodes" })
 
 -- search & replace
 keymap(
 	"n",
 	"<leader>f",
 	[[:%s/<C-r>=expand("<cword>")<CR>//gI<Left><Left><Left>]],
-	{ desc = "substitute" }
+	{ desc = "弄 :substitute" }
 )
 keymap("x", "<leader>f", ":s///gI<Left><Left><Left><Left>", { desc = "substitute" })
 keymap(
 	{ "n", "x" },
 	"<leader>F",
 	function() require("ssr").open() end,
-	{ desc = "structural search & replace" }
+	{ desc = "弄 Structural search & replace" }
 )
-keymap("n", "<leader>n", ":%normal ", { desc = ":normal" })
-keymap("x", "<leader>n", ":normal ", { desc = ":normal" })
+keymap("n", "<leader>n", ":%normal ", { desc = "弄 :normal" })
+keymap("x", "<leader>n", ":normal ", { desc = "弄 :normal" })
 
 -- Undo
-keymap({ "n", "x" }, "U", "<C-r>", { desc = "redo" }) -- redo
-keymap("n", "<C-u>", qol.undoDuration, { desc = "undo specific durations" })
-keymap("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "Undotree" })
+keymap({ "n", "x" }, "U", "<C-r>", { desc = "碑 redo" }) -- redo
+keymap("n", "<C-u>", qol.undoDuration, { desc = "碑 undo specific durations" })
+keymap("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "碑 Undotree" })
 
 -- Refactor
 keymap(
 	{ "n", "x" },
 	"<leader>i",
 	function() require("refactoring").refactor("Inline Variable") end,
-	{ desc = "Refactor: Inline Variable" }
+	{ desc = "弄 Inline Variable" }
 )
 keymap(
 	{ "n", "x" },
 	"<leader>e",
 	function() require("refactoring").refactor("Extract Variable") end,
-	{ desc = "Refactor: Extract Variable" }
+	{ desc = "弄 Extract Variable" }
 )
 
 -- Logging & Debugging
@@ -208,7 +208,7 @@ keymap("n", "<leader>ld", qlog.debuglog, { desc = " debugger" })
 
 -- Sort & highlight duplicate lines
 -- stylua: ignore
-keymap( { "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc = "sort & highlight duplicates" })
+keymap( { "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc = "弄 Sort (+ highlight duplicates)" })
 
 -- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()
@@ -219,7 +219,7 @@ keymap("n", "gx", function()
 		local url = fn.getreg("z")
 		os.execute("open '" .. url .. "'")
 	end
-end, { desc = "Smart URL Opener" })
+end, { desc = " Smart URL Opener" })
 
 --------------------------------------------------------------------------------
 
@@ -300,20 +300,20 @@ keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = "paste" }) -- "<C-g>u" adds u
 keymap("x", "<D-c>", "y", { desc = "copy" }) -- needed for compatibility with automation apps
 
 -- cmd+e: inline code
-keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "Inline Code Markup" }) -- no selection = word under cursor
-keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "Inline Code Markup" })
-keymap("i", "<D-e>", "``<Left>", { desc = "Inline Code Markup" })
+keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "  Inline Code" }) -- no selection = word under cursor
+keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "  Inline Code" })
+keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 
 -- cmd+t: template string
-keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b", { desc = "Template String Markup" }) -- no selection = word under cursor
-keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b", { desc = "Template String Markup" })
-keymap("i", "<D-t>", "${}<Left>", { desc = "Template String Markup" })
+keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b", { desc = "Template String" }) -- no selection = word under cursor
+keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b", { desc = "Template String" })
+keymap("i", "<D-t>", "${}<Left>", { desc = "Template String" })
 
 --------------------------------------------------------------------------------
 
 -- Color Picker
-keymap("n", "#", ":CccPick<CR>")
-keymap("n", "'", ":CccConvert<CR>") -- shift-# on German keyboard
+keymap("n", "#", ":CccPick<CR>", {desc = " Color Picker"})
+keymap("n", "'", ":CccConvert<CR>", {desc = " Convert Color"}) -- shift-# on German keyboard
 
 --------------------------------------------------------------------------------
 -- FILES
@@ -341,48 +341,23 @@ keymap("n", "go", function()
 	local harpoonNumber = harpoonFileNumber() or 0
 	local title = tostring(harpoonNumber) .. "ﯠ " .. projectName
 	require("telescope.builtin").find_files { prompt_title = title }
-end, { desc = " Open file in Project" })
+end, { desc = " Open File in Project" })
 
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 
 -- File Operations
-keymap(
-	"n",
-	"<C-p>",
-	function() require("genghis").copyFilepath() end,
-	{ desc = " copy filepath" }
-)
-keymap(
-	"n",
-	"<C-n>",
-	function() require("genghis").copyFilename() end,
-	{ desc = " copy filename" }
-)
+-- stylua: ignore start
+keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = " Copy filepath" })
+keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = " Copy filename" })
 keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = " chmod +x" })
-keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = " rename file" })
--- stylua: ignore
-keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = " move-rename file" })
-keymap(
-	"n",
-	"<C-d>",
-	function() require("genghis").duplicateFile() end,
-	{ desc = " duplicate file" }
-)
-keymap(
-	"n",
-	"<D-BS>",
-	function() require("genghis").trashFile() end,
-	{ desc = " move file to trash" }
-)
-keymap(
-	"n",
-	"<D-n>",
-	function() require("genghis").createNewFile() end,
-	{ desc = " create new file" }
-)
--- stylua: ignore
-keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = " selection to new file" })
+keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = " Rename file" })
+keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = " Move-rename file" })
+keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = " Duplicate file" })
+keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = " Move file to trash" })
+keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = " Create new file" })
+keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = " Selection to new file" })
+-- stylua: ignore end
 
 --------------------------------------------------------------------------------
 -- GIT
@@ -433,11 +408,11 @@ end, { desc = " 璉 Toggle Diagnostics" })
 --------------------------------------------------------------------------------
 
 -- TERMINAL AND CODI
-keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = "go to next window" })
-keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = "Paste in Terminal Mode" })
+keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = " go to next window" })
+keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 
-keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = ":ToggleTerm" })
-keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "Selection to ToggleTerm" })
+keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
+keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = " Selection to ToggleTerm" })
 
 keymap("n", "5", function()
 	cmd.CodiNew()

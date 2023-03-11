@@ -26,30 +26,30 @@ keymap(
 	"x",
 	"<D-p>",
 	":!pandoc -t commonmark_x<CR><CR>",
-	{ desc = "format md table", buffer = true }
+	{ desc = "  Format Table", buffer = true }
 )
 --------------------------------------------------------------------------------
 
 -- Heading jump to next/prev heading
-keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], { desc = "next heading", buffer = true })
-keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], { desc = "previous heading", buffer = true })
+keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], { desc = " next heading", buffer = true })
+keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], { desc = " previous heading", buffer = true })
 
 -- GUI KEYBINDINGS
-local opts = { buffer = true }
+
 -- cmd+r: Markdown Preview
-keymap("n", "<D-r>", "<Plug>MarkdownPreviewToggle", opts)
+keymap("n", "<D-r>", "<Plug>MarkdownPreviewToggle", { desc = "  Preview", buffer = true })
 
 -- cmd+k: markdown link
-keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", opts)
-keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", opts)
-keymap("i", "<D-k>", "[]()<Left><Left><Left>", opts)
+keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = "  Link", buffer = true })
+keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = "  Link", buffer = true })
+keymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = "  Link", buffer = true })
 
 -- cmd+b: bold
-keymap("n", "<D-b>", "bi__<Esc>ea__<Esc>", opts)
-keymap("x", "<D-b>", "<Esc>`<i__<Esc>`>lla__<Esc>", opts)
-keymap("i", "<D-b>", "____<Left><Left>", opts)
+keymap("n", "<D-b>", "bi__<Esc>ea__<Esc>", { desc = "  Bold", buffer = true })
+keymap("x", "<D-b>", "<Esc>`<i__<Esc>`>lla__<Esc>", { desc = "  Bold", buffer = true })
+keymap("i", "<D-b>", "____<Left><Left>", { desc = "  Bold", buffer = true })
 
 -- cmd+i: italics
-keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", opts)
-keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", opts)
-keymap("i", "<D-i>", "**<Left>", opts)
+keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = "  Italics", buffer = true })
+keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = "  Italics", buffer = true })
+keymap("i", "<D-i>", "**<Left>", { desc = "  Italics", buffer = true })
