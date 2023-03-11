@@ -174,6 +174,7 @@ local options = {
 			layout_strategy = "bottom_pane",
 		},
 	},
+	extensions = {},
 }
 
 return {
@@ -184,6 +185,8 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 		},
-		config = function() require("telescope").setup(options) end,
+		config = function()
+			require("telescope").setup(options)
+		end,
 	},
 }
