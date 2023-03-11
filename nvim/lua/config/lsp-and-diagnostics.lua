@@ -158,26 +158,15 @@ autocmd("LspAttach", {
 		keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "璉Goto definition", buffer = true })
 		keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "璉Goto Reference", buffer = true })
 		keymap("n", "gy", function() cmd.Telescope("lsp_type_definitions") end, { desc = "璉Goto Type Definition", buffer = true })
-		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, {desc = "璉Signature", buffer = true})
-		keymap("n", "<leader>h", vim.lsp.buf.hover, {desc = "璉Hover", buffer = true})
-
-		-- FORMATTERS
-		-- avoid conflict of tsserver with prettier
-		if client.name == "tsserver" then capabilities.documentFormattingProvider = false end
+		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "璉Signature", buffer = true })
+		keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "璉Hover", buffer = true })
+		-- stylua: ignore end
 
 		-- Save & Format
 		keymap({ "n", "i", "x" }, "<D-s>", function()
-			if bo.filetype == "applescript" then
-				cmd.mkview(2)
-				normal("gg=G") -- poor man's formatting
-				vim.lsp.buf.format { async = false } -- still used for null-ls-codespell
-				cmd.loadview(2)
-			else
-				vim.lsp.buf.format { async = true }
-			end
+			vim.lsp.buf.format { async = true }
 			cmd.write()
-		end, {buffer = true, desc = "璉 Save & Format"})
-		-- stylua: ignore end
+		end, { buffer = true, desc = "璉Save & Format" })
 	end,
 })
 
@@ -290,37 +279,31 @@ lspSettings.jsonls = {
 
 -- https://github.com/redhat-developer/yaml-language-server#language-server-settings
 lspSettings.yamlls = {
-	yaml = {
-		format = { enable = false }, -- taken care of by prettier
-		keyOrdering = false, -- FIX mapKeyOrder
-	},
+	yaml = { keyOrdering = false }, -- FIX mapKeyOrder
 }
-
---------------------------------------------------------------------------------
 
 lspFileTypes.bashls = { "sh", "zsh", "bash" } -- force lsp to work with zsh
 lspFileTypes.emmet_ls = { "css", "scss", "html" }
 
--- Enable snippet capability for completion (nvim_cmp)
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+--------------------------------------------------------------------------------
 
--- Enable support for UFO-folding
-capabilities.textDocument.foldingRange = {
+-- Enable snippet capability for completion (nvim_cmp)
+local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
+lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
+
+-- Enable folding (nvim-ufo)
+lspCapabilities.textDocument.foldingRange = {
 	dynamicRegistration = false,
 	lineFoldingOnly = true,
 }
 
---------------------------------------------------------------------------------
-
 -- configure all lsp servers
 for _, lsp in pairs(lsp_servers) do
-	local config = { capabilities = capabilities }
-	if lspSettings[lsp] then config.settings = lspSettings[lsp] end
-	if lspFileTypes[lsp] then config.filetypes = lspFileTypes[lsp] end
-
-	-- FIX missing root-directory detection for eslint LSP
-	if lsp == "eslint" then config.root_dir = require("lspconfig.util").find_git_ancestor end
+	local config = {
+		capabilities = lspCapabilities,
+		settings = lspSettings[lsp], -- if no settings, will assign nil and therefore to nothing
+		filetypes = lspFileTypes[lsp],
+	}
 
 	require("lspconfig")[lsp].setup(config)
 end

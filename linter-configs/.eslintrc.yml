@@ -27,7 +27,6 @@ globals:
 
 
 rules:
-
   #─────────────────────────────────────────────────────────────────────────────
 
   # structure
@@ -45,7 +44,7 @@ rules:
     - min: 4
       max: 25
       properties: never
-      exceptions: [x, y, i, j, id, min, max, app, str, int, out, a, b, num, url]
+      exceptions: [x, y, i, j, id, min, max, app, str, int, out, a, b, num, url, run]
   no-underscore-dangle: warn
   no-shadow:
     - warn
