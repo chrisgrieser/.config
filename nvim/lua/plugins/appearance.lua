@@ -1,7 +1,5 @@
 return {
 
-	{ "nvim-lualine/lualine.nvim" }, -- status line
-
 	{ -- highlight function args
 		"m-demare/hlargs.nvim",
 		event = "VeryLazy",
@@ -63,16 +61,8 @@ return {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
 					lsp = true,
-					filetypes = { -- ignoring certain filetypes a bit buggy, therefore whitelisting instead
-						"css",
-						"scss",
-						"lua",
-						"sh",
-						"bash",
-						"toml",
-						"yaml",
-						"json",
-					},
+					-- ignoring certain filetypes a bit buggy, therefore whitelisting instead
+					filetypes = { "css", "scss", "lua", "sh", "bash", "toml", "yaml", "json", "conf" },
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor

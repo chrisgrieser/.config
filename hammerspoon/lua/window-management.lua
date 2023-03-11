@@ -17,10 +17,10 @@ ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide u
 ---@return boolean|nil whether win has the given size. returns nil for invalid win
 function CheckSize(win, size)
 	local invalidWinsByTitle = { -- windows which can/should not be resized
-		"Copy", -- Finder windows
-		"Move", -- Finder windows
-		"Delete", -- Finder windows
-		"Bin", -- Finder windows
+		"Copy", -- Finder
+		"Move", -- Finder
+		"Delete", -- Finder
+		"Bin", -- Finder
 		"Enki",
 		"System Settings",
 		"Transmission",
@@ -35,10 +35,12 @@ function CheckSize(win, size)
 	local diffh = winf.h - size.h * maxf.h
 	local diffx = size.x * maxf.w + maxf.x - winf.x -- calculated this way for two screens
 	local diffy = size.y * maxf.h + maxf.y - winf.y
-	local widthOkay = (diffw > -5 and diffw < 5) -- leeway for rounding
-	local heightOkay = (diffh > -5 and diffh < 5)
-	local posyOkay = (diffy > -5 and diffy < 5)
-	local posxOkay = (diffx > -5 and diffx < 5)
+
+	local leeway = 10 -- for inprecisely resized windows
+	local widthOkay = (diffw > -leeway and diffw < leeway)
+	local heightOkay = (diffh > -leeway and diffh < leeway)
+	local posyOkay = (diffy > -leeway and diffy < leeway)
+	local posxOkay = (diffx > -leeway and diffx < leeway)
 
 	return widthOkay and heightOkay and posxOkay and posyOkay
 end

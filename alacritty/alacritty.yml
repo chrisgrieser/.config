@@ -4,10 +4,9 @@ colors:
   # COLORSCHEME: primary_dark.yaml
   primary:
     # hard contrast: background = '0x1d2021'
-    background: "#231E1A"
+    background: "#352d27"
     foreground: "#E5CFB3"
   normal:
-    # Bright colors
     black: "#000000"
     red: "#F54E42"
     green: "#38B27D"
@@ -24,28 +23,28 @@ colors:
     magenta: "#A993E6"
     white: "#F6E7D5"
   dim:
-    black: "0x31363b"
-    red: "0x783228"
-    green: "0x17a262"
-    yellow: "0xb65619"
-    blue: "0x1b668f"
-    magenta: "0x614a73"
-    cyan: "0x186c60"
-    white: "0x63686d"
+    black: "#31363b"
+    red: "#783228"
+    green: "#17a262"
+    yellow: "#b65619"
+    blue: "#1b668f"
+    magenta: "#614a73"
+    cyan: "#186c60"
+    white: "#63686d"
   indexed_colors: []
   search:
     matches:
-      foreground: "0xb2b2b2"
-      background: "0xb26818"
+      foreground: "#b2b2b2"
+      background: "#b26818"
     focused_match:
       foreground: CellBackground
       background: CellForeground
   vi_mode_cursor:
-    text: "0xe0def4"
-    cursor: "0x56526e"
+    text: "#e0def4"
+    cursor: "#56526e"
   selection:
-    text: "0xe0def4"
-    background: "0x44415a"
+    text: "#e0def4"
+    background: "#44415a"
   line_indicator:
     foreground: None
     background: None
@@ -57,30 +56,25 @@ colors:
       foreground: "#6e6a86"
       background: "#2a273f"
   cursor:
-    text: "0x1d1f21"
-    cursor: "0xffffff"
+    text: "#1d1f21"
+    cursor: "#ffffff"
+
+#───────────────────────────────────────────────────────────────────────────────
 
 font:
   size: 26
-  normal:
-    family: JetBrainsMonoNL Nerd Font
-    style: Regular
-  bold:
-    family: JetBrainsMonoNL Nerd Font
-    style: Bold
-  italic:
-    family: JetBrainsMonoNL Nerd Font
-    style: Italic
-  bold_italic:
-    family: JetBrainsMonoNL Nerd Font
-    style: Bold Italic
+  normal: {family: JetBrainsMonoNL Nerd Font, style: Regular}
+  bold: {family: JetBrainsMonoNL Nerd Font, style: Bold}
+  italic: {family: JetBrainsMonoNL Nerd Font, style: Italic}
+  bold_italic: {family: JetBrainsMonoNL Nerd Font, style: Bold Italic}
   draw_bold_text_with_bright_colors: true
   builtin_box_drawing: true
   offset: {x: 0, y: 0}
   # needs restart
   # x: equivalent to line height. However, some nerdfont looks off with it, so use low values
   # y: equivalent to letter spacing
-  glyph_offset: { y: 1 , x: 1 }
+  glyph_offset: { x: 1, y: 1 }
+
 window:
   decorations: buttonless
   opacity: 0.94
@@ -123,7 +117,7 @@ hints:
 selection:
   save_to_clipboard: true
 
-# ------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
 key_bindings:
   # toggle alacritty's vi mode
