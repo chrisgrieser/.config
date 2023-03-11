@@ -10,7 +10,7 @@ require("config.borderstyle").set("single") -- must come before lazy
 require("config.lazy")
 require("config.utils") -- must come after lazy
 
-if IsGui() then
+if vim.g.neovide then
 	require("config.gui-settings")
 	InitializeTheme()
 else

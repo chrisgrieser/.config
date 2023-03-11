@@ -85,10 +85,9 @@ autocmd("VimEnter", {
 
 -- Dismiss notifications
 keymap("n", "<Esc>", function()
-	if IsGui() then
-		local clearPending = require("notify").pending() > 10
-		require("notify").dismiss { pending = clearPending }
-	end
+	if not vim.g.neovide then return end -- notify.nvim not loaded for Terminal
+	local clearPending = require("notify").pending() > 10
+	require("notify").dismiss { pending = clearPending }
 end, { desc = "clear notifications" })
 
 -- FOLDING
@@ -290,39 +289,37 @@ keymap(
 ------------------------------------------------------------------------------
 
 -- CMD-Keybindings
-if IsGui() then
-	keymap({ "n", "x", "i" }, "<D-s>", cmd.write, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
+keymap({ "n", "x", "i" }, "<D-s>", cmd.write, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 
-	keymap({ "n", "x" }, "<D-l>", function() -- show file in default GUI file explorer
-		fn.system("open -R '" .. expand("%:p") .. "'")
-	end, { desc = "open in file explorer" })
+keymap({ "n", "x" }, "<D-l>", function() -- show file in default GUI file explorer
+	fn.system("open -R '" .. expand("%:p") .. "'")
+end, { desc = "open in file explorer" })
 
-	keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
-	keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
+keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
+keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
 
-	-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
-	g.VM_maps = {
-		["Find Under"] = "<D-j>", -- select word under cursor & enter visual-multi (normal) / add next occurrence (visual-multi)
-		["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
-		["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
-	}
+-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
+g.VM_maps = {
+	["Find Under"] = "<D-j>", -- select word under cursor & enter visual-multi (normal) / add next occurrence (visual-multi)
+	["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
+	["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
+}
 
-	--- copy & paste
-	keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
-	keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
-	keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = "paste" }) -- "<C-g>u" adds undopoint before the paste
-	keymap("x", "<D-c>", "y", { desc = "copy" }) -- needed for compatibility with automation apps
+--- copy & paste
+keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
+keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
+keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = "paste" }) -- "<C-g>u" adds undopoint before the paste
+keymap("x", "<D-c>", "y", { desc = "copy" }) -- needed for compatibility with automation apps
 
-	-- cmd+e: inline code
-	keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "Inline Code Markup" }) -- no selection = word under cursor
-	keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "Inline Code Markup" })
-	keymap("i", "<D-e>", "``<Left>", { desc = "Inline Code Markup" })
+-- cmd+e: inline code
+keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "Inline Code Markup" }) -- no selection = word under cursor
+keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "Inline Code Markup" })
+keymap("i", "<D-e>", "``<Left>", { desc = "Inline Code Markup" })
 
-	-- cmd+t: template string
-	keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b", { desc = "Template String Markup" }) -- no selection = word under cursor
-	keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b", { desc = "Template String Markup" })
-	keymap("i", "<D-t>", "${}<Left>", { desc = "Template String Markup" })
-end
+-- cmd+t: template string
+keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b", { desc = "Template String Markup" }) -- no selection = word under cursor
+keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b", { desc = "Template String Markup" })
+keymap("i", "<D-t>", "${}<Left>", { desc = "Template String Markup" })
 
 --------------------------------------------------------------------------------
 

@@ -22,7 +22,7 @@ return {
 				dapSharedKeymaps = true,
 			}
 
-			local topSeparators = IsGui() and { left = "", right = "" } or { left = "", right = "" }
+			local topSeparators = vim.g.neovide and { left = "", right = "" } or { left = "", right = "" }
 
 			-- INFO inserting needed, to not disrupt existing lualine-segment set by dap
 			local lualineZ = require("lualine").get_config().winbar.lualine_z or {}
