@@ -25,6 +25,7 @@ local function customHighlights()
 
 	setHighlight("urls", "cterm=underline gui=underline")
 	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
+
 	linkHighlight("myAnnotations", "Todo")
 	fn.matchadd("myAnnotations", [[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|SIC\)\>]])
 
@@ -125,7 +126,7 @@ autocmd("ColorScheme", {
 	end,
 })
 
----@param mode enum "dark"|"light"
+---@param mode string "dark"|"light"
 function SetThemeMode(mode)
 	opt.background = mode
 	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
@@ -138,4 +139,3 @@ end
 local isDarkMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
 local targetMode = isDarkMode and "dark" or "light"
 SetThemeMode(targetMode)
-
