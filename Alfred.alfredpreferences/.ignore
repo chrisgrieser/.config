@@ -15,3 +15,5 @@ workflows/alfred-bibtex-citation-picker
 # workflows developed by others
 workflows/powerthesaurus-search
 workflows/browser-history-search
+workflows/ignore-in-alfred
+workflows/app-store-search
