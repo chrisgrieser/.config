@@ -37,7 +37,9 @@ function TwitterFallThrough()
 			break
 		end
 	end
-	if nextWin:id() ~= hs.window.frontmostWindow():id() then nextWin:focus() end
+	if nextWin and nextWin:id() ~= hs.window.frontmostWindow():id() then
+		nextWin:focus()
+	end
 end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
