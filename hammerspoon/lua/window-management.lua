@@ -172,22 +172,16 @@ end
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
 function AutoTile(winSrc)
-	local wins
-	if type(winSrc) == "string" and not AppIsRunning(winSrc) then
-		return
-	elseif type(winSrc) == "string" and AppIsRunning(winSrc) then
-		wins = App(winSrc):allWindows()
-	else
-		wins = winSrc:getWindows()
-	end
+	if type(winSrc) == "string" and not AppIsRunning(winSrc) then return end
 
+	local wins = (type(winSrc) ~= "string") and winSrc:getWindows() or App(winSrc):allWindows()
 	if #wins > 1 then BringAllToFront() end
 
 	if #wins == 0 and FrontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
-		RunWithDelays(1, function()
+		RunWithDelays(0.4, function()
 			-- delay needs to be high enough to since e.g. during quitting fullscreen
-			-- mode, Hammerspoon temporarily cannot detect Finder windows (sic!)
+			-- mode, Hammerspoon temporarily cannot detect Finder windows (SIC!)
 			QuitFinderIfNoWindow()
 		end)
 	elseif #wins == 1 then

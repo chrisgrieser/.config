@@ -185,7 +185,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers: 
               - ^com\.brave\.Browser
-      # open dev tools
+      # open dev tools (= inspect Vivaldi UI)
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
@@ -203,6 +203,16 @@ rules:
           - { key_code: c, modifiers: [command, shift] }
           - { key_code: vk_none, hold_down_milliseconds: 500 }
           - { key_code: tab, modifiers: [command] } # switch to other window, since Vivaldi dev tool is always detachedd
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.vivaldi\.Vivaldi] # no $ to also work in PWAs
+      # open dev console (= inspect websites)
+      - type: basic
+        from: { key_code: escape, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: j, modifiers: [command, option] }
+          - { key_code: vk_none, hold_down_milliseconds: 400 }
+          - { key_code: c, modifiers: [command, shift] }
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.vivaldi\.Vivaldi] # no $ to also work in PWAs

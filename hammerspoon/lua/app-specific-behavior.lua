@@ -142,12 +142,12 @@ end):start()
 -- BROWSER (Vivaldi)
 Wf_browser = Wf.new("Vivaldi")
 	:setOverrideFilter({
-		-- INFO DevTools windows are titled "" on creation
 		rejectTitles = {
 			" %(Private%)$",
 			"^Picture in Picture$",
 			"^Task Manager$",
-			"^DevTools",
+			"^Developer Tools", -- when inspecting websites
+			"^DevTools", -- when inspecting Vivaldi UI, are titled "^$" on creation
 			"^$",
 		},
 		allowRoles = "AXStandardWindow",
