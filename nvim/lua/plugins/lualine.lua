@@ -179,7 +179,7 @@ local function lspCountStatusline()
 	if lspCount.refFile ~= lspCount.refWorkspace then
 		refs = refs .. "(" .. tostring(lspCount.refWorkspace) .. ")"
 	end
-	return "  " .. defs .. "   " .. refs
+	return " " .. defs .. "  " .. refs
 end
 
 --------------------------------------------------------------------------------
