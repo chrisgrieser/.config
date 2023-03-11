@@ -1,15 +1,17 @@
+
+local foldIcon = "  "
+
 return {
 	"kevinhwang91/nvim-ufo",
 	dependencies = "kevinhwang91/promise-async",
-	lazy = false, -- can't lazy load, or folds from previous sessions are opened
+	lazy = false, -- can't lazy load, or folds from previous sessions are not opened
 	config = function()
 		local ufo = require("ufo")
-		local foldIcon = "  "
 		ufo.setup {
 			provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
-				return { "treesitter", "indent" } -- Use Treesitter as fold provider
+				return { "lsp", "treesitter" } -- Use lsp and treesitter as fallback
 			end,
-			open_fold_hl_timeout = 0,
+			-- open_fold_hl_timeout = 0,
 			fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 				-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 				local newVirtText = {}
@@ -39,8 +41,9 @@ return {
 			end,
 		}
 
-		vim.keymap.set("n", "zR", ufo.openAllFolds) -- Using ufo provider need remap `zR` and `zM`
-		vim.keymap.set("n", "zM", ufo.closeAllFolds)
+		-- Using ufo provider need remap `zR` and `zM`
+		vim.keymap.set("n", "zR", ufo.openAllFolds, {desc = " Open all folds"}) 
+		vim.keymap.set("n", "zM", ufo.closeAllFolds, {desc = " Close all folds"})
 
 		-- fold settings required for UFO
 		vim.opt.foldenable = true
