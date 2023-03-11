@@ -1,7 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
 
-/* exported run */
-
 function run(argv) {
 	ObjC.import("stdlib");
 	const app = Application.currentApplication();
@@ -11,8 +9,8 @@ function run(argv) {
 
 	let url;
 
-	// no input = take URL from browser
 	if (argv[0]) {
+		// no input = take URL from browser
 		url = argv[0];
 	} else {
 		const frontmostAppName = Application("System Events").applicationProcesses.where({ frontmost: true }).name()[0];

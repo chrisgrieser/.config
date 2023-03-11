@@ -27,6 +27,11 @@ globals:
 
 
 rules:
+  # Alfred
+  no-unused-vars: 
+    - warn
+    - varsIgnorePattern: "run" # jxa in Alfred
+
   #─────────────────────────────────────────────────────────────────────────────
 
   # structure
@@ -38,7 +43,6 @@ rules:
   no-unused-expressions: error
 
   # variables
-  no-unused-vars: warn 
   id-length:
     - warn
     - min: 4
