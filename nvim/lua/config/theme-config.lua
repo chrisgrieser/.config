@@ -42,7 +42,7 @@ local function customHighlights()
 end
 
 local function themeModifications()
-	local mode = opt.background:get()
+	local mode = vim.opt.background:get()
 	local theme = g.colors_name
 	local modes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 	-- FIX lualine_a not getting bold in some themes
@@ -100,7 +100,6 @@ local function themeModifications()
 		setHighlight("IndentBlanklineChar", "guifg=#deccba")
 		setHighlight("VertSplit", "guifg=#b29b84")
 		setHighlight("ScrollView", "guibg=#303050")
-		-- linkHighlight("@field.yaml", "@field") -- HACK https://github.com/EdenEast/nightfox.nvim/issues/314
 
 		-- melange
 	elseif theme == "melange" then
@@ -126,7 +125,7 @@ autocmd("ColorScheme", {
 	end,
 })
 
----@param mode string "dark"|"light"
+---@param mode enum "dark"|"light"
 function SetThemeMode(mode)
 	opt.background = mode
 	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
