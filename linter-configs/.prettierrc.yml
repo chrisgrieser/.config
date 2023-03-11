@@ -1,5 +1,5 @@
 # https://prettier.io/docs/en/options.html
-printWidth: 100
+printWidth: 120
 tabWidth: 3
 useTabs: true
 bracketSpacing: true
@@ -11,6 +11,6 @@ quoteProps: consistent
 overrides:
   - files: ["*.yaml", "*.yml", "*.json"]
     options:
+      printWidth: 120
       tabWidth: 2
       useTabs: false
-      printWidth: 120
