@@ -78,3 +78,21 @@ input#urlFieldInput::placeholder {
 #urlFieldInput[value="chrome-extension://cglpcedifkgalfdklahhcchnjepcckfn/newtab.html#content"] + .UrlFragment-Wrapper {
 	display: none;
 }
+
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* Command Palette */
+/* hide the "google {query}" entry, since for that I'd use vimium or Alfred
+ * already and since it's the only entry that cannot be disabled in the settings */
+.quick-command-container .quick-command:first-child {
+	display: none;
+}
+
+.quick-command-container .quick-command:first-child ~ div {
+	/* HACK since positioning of the non-first commands is hard coded as `style=top:…` */
+	margin-top: -28px;
+}
+
+.quick-command-container .quick-commands .quick-command {
+	padding: 0 6px;
+}
