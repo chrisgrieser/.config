@@ -20,10 +20,12 @@ end
 
 function TwitterToTheSide()
 	if not AppIsRunning("Twitter") then return end
-	local win = App("Twitter"):mainWindow()
+
+	-- not using mainWindow to not unintentionally move Media or new-tweet window
+	local win = App("Twitter"):findWindow("Twitter") 
 	if not win then return end
+
 	win:setFrame(ToTheSide)
-	win:raise()
 end
 
 -- ensure that twitter does get focus, "falling through" to the next window
