@@ -239,11 +239,8 @@ end):start()
 -- pseudomaximized window
 Wf_terminal = Wf.new({ "alacritty", "Alacritty" })
 	:setOverrideFilter({ rejectTitles = { "btop" } })
-	:subscribe(Wf.windowCreated, function(newWin, appName, appObj)
-		AsSoonAsAppRuns(appObj, function()
-			Notify("beep")
-			MoveResize(newWin, PseudoMaximized)
-		end)
+	:subscribe(Wf.windowCreated, function(newWin, appName, _)
+		AsSoonAsAppRuns(appName, function() MoveResize(newWin, PseudoMaximized) end)
 	end)
 
 -- Man leader hotkey (for Karabiner)

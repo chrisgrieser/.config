@@ -207,15 +207,15 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.vivaldi\.Vivaldi] # no $ to also work in PWAs
       # open dev console (= inspect websites)
-      - type: basic
-        from: { key_code: escape, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: j, modifiers: [command, option] }
-          - { key_code: vk_none, hold_down_milliseconds: 400 }
-          - { key_code: c, modifiers: [command, shift] }
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com\.vivaldi\.Vivaldi] # no $ to also work in PWAs
+      # - type: basic
+      #   from: { key_code: escape, modifiers: { mandatory: [command] } }
+      #   to:
+      #     - { key_code: j, modifiers: [command, option] }
+      #     - { key_code: vk_none, hold_down_milliseconds: 400 }
+      #     - { key_code: c, modifiers: [command, shift] }
+      #   conditions:
+      #     - type: frontmost_application_if
+      #       bundle_identifiers: [^com\.vivaldi\.Vivaldi] # no $ to also work in PWAs
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:

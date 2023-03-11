@@ -93,6 +93,19 @@
 		</array>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<array/>
+		<key>AADFC524-047E-4638-ABAA-646CEC90599D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D909DE7E-1D08-42B3-B048-039BDE823F44</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<array>
 			<dict>
@@ -583,6 +596,48 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
+				<string>adguard</string>
+				<key>subtext</key>
+				<string>User Filters</string>
+				<key>text</key>
+				<string>Adguard</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>AADFC524-047E-4638-ABAA-646CEC90599D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html#user-filter</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>D909DE7E-1D08-42B3-B048-039BDE823F44</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
 				<string>sw</string>
 				<key>subtext</key>
 				<string></string>
@@ -764,6 +819,15 @@
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
+		<key>AADFC524-047E-4638-ABAA-646CEC90599D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>480</real>
+			<key>ypos</key>
+			<real>420</real>
+		</dict>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
 			<key>colorindex</key>
@@ -841,6 +905,15 @@
 			<real>480</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>D909DE7E-1D08-42B3-B048-039BDE823F44</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>655</real>
+			<key>ypos</key>
+			<real>420</real>
 		</dict>
 		<key>E51DFA56-3523-4840-8EF6-40FC832EE3BB</key>
 		<dict>
