@@ -11,7 +11,7 @@ end
 
 ---@return boolean
 local function isWeekend()
-	local weekday = os.date():sub(1, 3)
+	local weekday = tostring(os.date()):sub(1, 3)
 	return weekday == "Sun" or weekday == "Sat"
 end
 
@@ -68,6 +68,8 @@ local function workLayout()
 	RestartApp("AltTab")
 	ShowAllSidebars()
 	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
+	TwitterToTheSide()
+	TwitterScrollUp()
 
 	Wait(0.7)
 	App("Drafts"):activate()

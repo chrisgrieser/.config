@@ -11,7 +11,9 @@
 	display: none;
 }
 
-input#urlFieldInput::placeholder { opacity: 0 }
+input#urlFieldInput::placeholder {
+	opacity: 0;
+}
 
 /* ────────────────────────────────────────────────────────────────────────── */
 
@@ -51,7 +53,7 @@ input#urlFieldInput::placeholder { opacity: 0 }
 
 .UrlBar-AddressField:has(.BookmarkButton .button-on)::before {
 	content: "⭐";
-	filter: grayscale(0.8);
+	filter: grayscale(1);
 	padding-left: 4px;
 }
 
