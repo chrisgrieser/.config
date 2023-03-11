@@ -176,6 +176,16 @@ rules:
             bundle_identifiers: 
               - ^com\.brave\.Browser
               - ^com\.vivaldi\.Vivaldi
+      # Remove bookmark
+      - type: basic
+        from: { key_code: d, modifiers: { mandatory: [command, shift] } }
+        to:
+          - {key_code: d, modifiers: [command]}
+          - {key_code: tab, modifiers: [shift]}
+          - key_code: spacebar
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.vivaldi\.Vivaldi]
       # open extensions
       - type: basic
         from: { key_code: comma, modifiers: { mandatory: [command, shift] } }
