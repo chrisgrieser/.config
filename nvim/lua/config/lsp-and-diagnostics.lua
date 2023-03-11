@@ -304,6 +304,12 @@ lspFileTypes.emmet_ls = { "css", "scss", "html" }
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+-- Enable support for UFO-folding
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
+
 --------------------------------------------------------------------------------
 
 -- configure all lsp servers
