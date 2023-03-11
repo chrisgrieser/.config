@@ -179,14 +179,15 @@ local function lspCountStatusline()
 	if lspCount.refFile ~= lspCount.refWorkspace then
 		refs = refs .. "(" .. tostring(lspCount.refWorkspace) .. ")"
 	end
-	return defs .. "  " .. refs
+	return "  " .. defs .. "   " .. refs
 end
 
-local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
-local topSeparators = vim.g.neovide and { left = "", right = "" } or { left = "", right = "" }
--- nerdfont: 'nf-ple'
-
 --------------------------------------------------------------------------------
+
+-- nerdfont: icons with prefix 'ple-'
+-- stylua: ignore
+local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
+local topSeparators = vim.g.neovide and { left = " ", right = "" } or { left = "", right = "" }
 
 local function lualineConfig()
 	require("lualine").setup {

@@ -87,7 +87,7 @@ local options = {
 			initial_mode = "normal",
 		},
 		lsp_type_definitions = {
-			prompt_prefix = "➡️",
+			prompt_prefix = "ﴰ ",
 			show_line = false,
 			trim_text = true,
 			initial_mode = "normal",
@@ -100,7 +100,7 @@ local options = {
 			},
 		},
 		lsp_definitions = {
-			prompt_prefix = "➡️",
+			prompt_prefix = " ",
 			show_line = false,
 			trim_text = true,
 			initial_mode = "normal",

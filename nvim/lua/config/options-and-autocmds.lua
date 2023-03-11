@@ -170,7 +170,6 @@ local function remember(mode)
 		cmd.mkview(1)
 	else
 		cmd([[silent! loadview 1]]) -- silent to avoid error for files w/o view (e.g. after creation)
-		normal("0^") -- to scroll to the left on start
 	end
 end
 augroup("rememberCursorAndFolds", {})

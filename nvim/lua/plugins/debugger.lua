@@ -102,7 +102,7 @@ local function dapConfig()
 end
 
 local function dapLualine()
-	local topSeparators = IsGui() and { left = "", right = "" } or { left = "", right = "" }
+	local topSeparators = vim.g.neovide and { left = "", right = "" } or { left = "", right = "" }
 
 	-- INFO inserting needed, to not disrupt existing lualine-segment set by nvim-recorder
 	local lualineY = require("lualine").get_config().winbar.lualine_y or {}
