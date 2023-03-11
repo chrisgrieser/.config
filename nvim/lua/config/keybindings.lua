@@ -88,24 +88,27 @@ keymap("n", "<Esc>", function()
 	if not vim.g.neovide then return end -- notify.nvim not loaded for Terminal
 	local clearPending = require("notify").pending() > 10
 	require("notify").dismiss { pending = clearPending }
-end, { desc = "clear notifications" })
+end, { desc = "Clear Notifications" })
 
 -- FOLDING
 keymap("n", "^", "za", { desc = "toggle fold" })
 
 -- [M]atchIt
-keymap("n", "m", "%", { remap = true, desc = "MatchIt" }) -- remap needed, since using the builtin matchit plugin
+-- remap needed, since using the builtin matchit plugin
+keymap("n", "m", "%", { remap = true, desc = "MatchIt" }) 
 
--- Hunks, Changes, and Quicklist
+-- HUNKS AND CHANGES
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
 
+-- QUICKFIX
 -- make cnext loop back https://vi.stackexchange.com/a/8535
 -- stylua: ignore
-keymap( "n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]], { desc = "next quickfix item" })
-keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " quickfix list" })
+keymap( "n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]], { desc = "Next Quickfix" })
+keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " Quickfix list" })
+keymap("n", "dQ", function () cmd.cexpr("[]") end, { desc = "Clear Quickfix List" })
 
 --------------------------------------------------------------------------------
 -- EDITING

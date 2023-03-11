@@ -19,7 +19,7 @@ local themePackages = {
 	-- "savq/melange",
 }
 
-local darkTransparency = 0.92
+local darkTransparency = 0.90
 local lightTransparency = 0.93
 
 --------------------------------------------------------------------------------
@@ -35,7 +35,10 @@ end
 ---@param changes string
 local function setHighlight(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. changes) end
 
+---@param hlgroup string
 local function clearHighlight(hlgroup) vim.cmd.highlight("clear " .. hlgroup) end
+
+--------------------------------------------------------------------------------
 
 local function customHighlights()
 	-- stylua: ignore
@@ -60,7 +63,7 @@ local function customHighlights()
 	setHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
 	setHighlight("CleverFDefaultLabel", "gui=inverse cterm=inverse")
 
-	-- HACK bugfix for https://github.com/neovim/neovim/issues/20456
+	-- HACK for https://github.com/neovim/neovim/issues/20456
 	linkHighlight("luaParenError.highlight", "NormalFloat")
 	linkHighlight("luaParenError", "NormalFloat")
 end
