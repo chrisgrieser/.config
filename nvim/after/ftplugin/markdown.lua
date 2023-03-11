@@ -20,20 +20,16 @@ keymap({ "o", "x" }, "al", function() require("various-textobjs").mdlink(false) 
 -- iE/aE: code block textobj
 keymap({ "o", "x" }, "iE", function() require("various-textobjs").mdFencedCodeBlock(true) end, { desc = "inner md code block textobj", buffer = true })
 keymap({ "o", "x" }, "aE", function() require("various-textobjs").mdFencedCodeBlock(false) end, { desc = "outer md code block textobj", buffer = true })
+
+-- Format Table
+keymap("x", "<D-p>", ":!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table", buffer = true })
 -- stylua: ignore end
 
-keymap(
-	"x",
-	"<D-p>",
-	":!pandoc -t commonmark_x<CR><CR>",
-	{ desc = "  Format Table", buffer = true }
-)
---------------------------------------------------------------------------------
-
 -- Heading jump to next/prev heading
-keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], { desc = " next heading", buffer = true })
-keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], { desc = " previous heading", buffer = true })
+keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], { desc = " # Next Heading", buffer = true })
+keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], { desc = " # Previous Heading", buffer = true })
 
+--------------------------------------------------------------------------------
 -- GUI KEYBINDINGS
 
 -- cmd+r: Markdown Preview
