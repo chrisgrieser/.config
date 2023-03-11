@@ -170,15 +170,14 @@ return {
 			}
 		end,
 	},
-
 	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
-	{ "mg979/vim-visual-multi", 
+	{
+		"mg979/vim-visual-multi",
 		keys = {
-		{ "<D-j>", mode = { "n", "x" }, desc = "Multi-Cursor" },
-		}
+			{ "<D-j>", mode = { "n", "x" }, desc = "Multi-Cursor" },
+		},
 	},
-	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, -- custom textobjects
-
+	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, 
 	{ "bkad/CamelCaseMotion", event = "BufReadPost" },
 	{
 		"mbbill/undotree",
@@ -215,7 +214,7 @@ return {
 			require("treesj").setup {
 				use_default_keymaps = false,
 				cursor_behavior = "start", -- start|end|hold
-				max_join_length = 200,
+				max_join_length = 180,
 			}
 		end,
 	},
