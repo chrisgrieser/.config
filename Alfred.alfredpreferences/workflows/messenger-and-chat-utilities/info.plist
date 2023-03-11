@@ -453,7 +453,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>slack://sosimexil.slack.com/archives/D0109R1G1C7</string>
+				<string>slack://user?team=T010A5PEMBQ&amp;id=UV95WSJJW</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -547,7 +547,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>slack://sosimexil.slack.com/archives/DVBSWTWDP</string>
+				<string>slack://user?team=T010A5PEMBQ&amp;id=U0107UYR988</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -587,7 +587,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>#vips only</string>
+				<string>#vip-only</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -610,7 +610,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>slack://sosimexil.slack.com/archives/C02BV2AE1SN</string>
+				<string>slack://channel?team=T010A5PEMBQ&amp;id=C02BV2AE1SN</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
