@@ -35,10 +35,6 @@ return {
 		"kylechui/nvim-surround",
 		event = "BufRead",
 		config = function()
-			--[[ -- HACK define these manually, since for some reason they do not work by default ]]
-			vim.keymap.set("n", "yss", "ys_", { remap = true, desc = "surround line" })
-			vim.keymap.set("n", "yS", "ys$", { remap = true, desc = "surround till EoL" })
-
 			-- need to be consistent with the text obj mappings
 			local functionObjChar = "f"
 			local conditionObjChar = "o"
@@ -57,12 +53,6 @@ return {
 					["e"] = "`",
 				},
 				move_cursor = false,
-				keymaps = {
-					normal_cur = "<Nop>", -- mapped on my own (see above)
-					normal_line = "<Nop>", -- mapped on my own (see above)
-					normal_cur_line = "<Nop>",
-					visual = "s",
-				},
 				surrounds = {
 					[doubleSquareBracketObjChar] = {
 						find = "%[%[.-%]%]",
@@ -173,9 +163,7 @@ return {
 	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
 	{
 		"mg979/vim-visual-multi",
-		keys = {
-			{ "<D-j>", mode = { "n", "x" }, desc = "Multi-Cursor" },
-		},
+		keys = { { "<D-j>", mode = { "n", "x" }, desc = "Multi-Cursor" } },
 	},
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, 
 	{ "bkad/CamelCaseMotion", event = "BufReadPost" },

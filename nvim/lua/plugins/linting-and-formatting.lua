@@ -1,7 +1,8 @@
 -- INFO these require null-ls name, not mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
 -- INFO linters also need to be added as source below
 local lintersAndFormatters = {
-	"yamllint",
+	"yamllint", -- only for diagnostics, not for formatting
+	"prettier", -- js/ts/yaml
 	"shellcheck", -- needed for bash-lsp
 	"shfmt", -- shell
 	"markdownlint",
@@ -10,7 +11,6 @@ local lintersAndFormatters = {
 	"codespell", -- natural language (common misspellings, autoformatted)
 	"selene", -- lua
 	"stylua", -- lua
-	"prettier", -- only for TS and JS
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
