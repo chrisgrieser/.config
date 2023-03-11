@@ -85,12 +85,8 @@ cursor:
   blink_interval: 500
   unfocused_hollow: true
   thickness: 0.2
-  style:
-    shape: Block
-    blinking: Always
-  vi_mode_style: # alacritty's vi mode, not the zsh vi mode
-    shape: Underline
-    blinking: Always
+  style: { shape: Block, blinking: Always }
+  vi_mode_style: { shape: Underline, blinking: Always } # alacritty's vi mode, not zsh's
 mouse:
   hide_when_typing: true
 live_config_reload: true
@@ -115,6 +111,8 @@ selection:
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# option_as_alt: None
+
 key_bindings:
   # toggle alacritty's vi mode
   - { key: V, mods: Alt, action: ToggleViMode }
@@ -126,13 +124,14 @@ key_bindings:
   - { key: K, mode: ~Search, mods: Command, action: ClearLogNotice }
 
   # open settings (this file)
-  - key: 43
+  - key: Comma
     mods: Command
     command:
       program: sh
       args: [-c, open ~/.config/alacritty/alacritty.yml]
 
-  # fix various special characters for the German keyboard
+  # fix various special characters for the German keyboard https://github.com/alacritty/alacritty/wiki/Keyboard-mappings#mac-os-4
+  # INFO can't find a method to fix the yaml schema error though
   - { key: 28, mods: Alt, chars: "{" }
   - { key: 25, mods: Alt, chars: "}" }
   - { key: 37, mods: Alt, chars: "@" }
