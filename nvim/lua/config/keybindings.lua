@@ -236,10 +236,6 @@ keymap("x", "<Left>", qol.moveSelectionLeft)
 -- Merging / Splitting Lines
 keymap({ "n", "x" }, "M", "J", { desc = "merge line up" })
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "merge line down" })
-keymap("n", "|", "a<CR><Esc>k$", { desc = "split line at cursor" })
-keymap("x", "|", "<Esc>`>a<CR><Esc>`<i<CR><Esc>", { desc = "split around selection" })
-
--- TreeSJ plugin
 keymap("n", "<leader>s", cmd.TSJToggle, { desc = "split/join" })
 
 --------------------------------------------------------------------------------
@@ -267,8 +263,6 @@ keymap("n", "<CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/windo
 keymap({ "n", "x", "i" }, "<D-w>", altalt.betterClose, { desc = "close buffer/window/tab" })
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " Open Buffers" })
 
-keymap("", "<C-w>v", ":vsplit #<CR>", { desc = "vertical split (alt file)" }) -- open the alternate file in the split instead of the current file
-keymap("", "<C-w>h", ":split #<CR>", { desc = "horizontal split (alt file)" })
 keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
 keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize (-)" })
 keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize (+)" })
@@ -276,27 +270,18 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 
 -- Harpoon
 keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "ﯠ Next" })
-keymap(
-	"n",
-	"g<CR>",
-	function() require("harpoon.ui").toggle_quick_menu() end,
-	{ desc = "ﯠ Menu" }
-)
-keymap(
-	"n",
-	"<leader><CR>",
-	function() require("harpoon.mark").add_file() end,
-	{ desc = "ﯠ Add File" }
-)
+-- stylua: ignore start
+keymap("n", "g<CR>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
+keymap("n", "<leader><CR>", function() require("harpoon.mark").add_file() end, { desc = "ﯠ Add File" })
+-- stylua: ignore end
 
 ------------------------------------------------------------------------------
 
 -- CMD-Keybindings
-keymap({ "n", "x", "i" }, "<D-s>", cmd.write, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
+keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 
-keymap({ "n", "x" }, "<D-l>", function() -- show file in default GUI file explorer
-	fn.system("open -R '" .. expand("%:p") .. "'")
-end, { desc = "open in file explorer" })
+-- stylua: ignore
+keymap({ "n", "x" }, "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "Reveal in Finder" })
 
 keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
 keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
