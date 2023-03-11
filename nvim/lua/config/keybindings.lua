@@ -10,12 +10,8 @@ keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " Keymaps"
 keymap("n", "<leader>T", function() cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
 
 -- Highlights
-keymap(
-	"n",
-	"<leader>H",
-	function() cmd.Telescope("highlights") end,
-	{ desc = " Highlight Groups" }
-)
+-- stylua: ignore
+keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- Update [P]lugins
 keymap("n", "<leader>p", require("lazy").sync, { desc = ":Lazy sync" })
@@ -71,14 +67,15 @@ vim.on_key(function(char)
 end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
 -- Marks
-keymap("n", "ä", require("funcs.mark-cycler").gotoMark, { desc = "Goto Next Mark" })
-keymap("n", "Ä", require("funcs.mark-cycler").setMark, { desc = "Set Next Mark" })
+-- stylua: ignore
+keymap("n", "ä", function() require("funcs.mark-cycler").gotoMark() end, { desc = "Goto Next Mark" })
+keymap("n", "Ä", function() require("funcs.mark-cycler").setMark () end, { desc = "Set Next Mark" })
 
 -- reset marks on startup (needs to be on VimEnter so it's not called too early)
 augroup("marks", {})
 autocmd("VimEnter", {
 	group = "marks",
-	callback = require("funcs.mark-cycler").clearMarks,
+	callback = function() require("funcs.mark-cycler").clearMarks() end,
 })
 
 --------------------------------------------------------------------------------
@@ -98,7 +95,7 @@ keymap("n", "^", "za", { desc = "ﬕ toggle fold" })
 keymap("n", "m", "%", { remap = true, desc = "MatchIt" }) 
 
 -- HUNKS AND CHANGES
-keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = " :hunkgoto next hunk" })
+keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
@@ -116,20 +113,16 @@ keymap("n", "dQ", function () cmd.cexpr("[]") end, { desc = "Clear Quickfix List
 -- Comments & Annotations
 keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })
 keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
-keymap(
-	"n",
-	"qf",
-	function() require("neogen").generate() end,
-	{ desc = "Neogen: Comment Function" }
-)
+-- stylua: ignore
+keymap("n", "qf", function() require("neogen").generate() end, { desc = "Neogen: Comment Function" })
 
 -- Whitespace Control
 keymap("n", "=", "mzO<Esc>`z", { desc = "add blank line above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "add blank line below" })
-keymap("n", "<Tab>", ">>", { desc = "indent" })
-keymap("n", "<S-Tab>", "<<", { desc = "outdent" })
-keymap("x", "<Tab>", ">gv", { desc = "indent" })
-keymap("x", "<S-Tab>", "<gv", { desc = "outdent" })
+keymap("n", "<Tab>", ">>", { desc = " indent" })
+keymap("n", "<S-Tab>", "<<", { desc = " outdent" })
+keymap("x", "<Tab>", ">gv", { desc = " indent" })
+keymap("x", "<S-Tab>", "<gv", { desc = " outdent" })
 
 -- Casing
 keymap("n", "ü", "mzlb~`z", { desc = "toggle capital/lowercase of word" })
@@ -162,19 +155,11 @@ keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc 
 keymap("n", "<leader>w", cmd.ISwapWith, { desc = "弄 swap nodes" })
 
 -- search & replace
-keymap(
-	"n",
-	"<leader>f",
-	[[:%s/<C-r>=expand("<cword>")<CR>//gI<Left><Left><Left>]],
-	{ desc = "弄 :substitute" }
-)
+-- stylua: ignore start
+keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//gI<Left><Left><Left>]], { desc = "弄 :substitute" })
 keymap("x", "<leader>f", ":s///gI<Left><Left><Left><Left>", { desc = "substitute" })
-keymap(
-	{ "n", "x" },
-	"<leader>F",
-	function() require("ssr").open() end,
-	{ desc = "弄 Structural search & replace" }
-)
+keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "弄 Structural search & replace" })
+-- stylua: ignore end
 keymap("n", "<leader>n", ":%normal ", { desc = "弄 :normal" })
 keymap("x", "<leader>n", ":normal ", { desc = "弄 :normal" })
 
@@ -184,27 +169,20 @@ keymap("n", "<C-u>", qol.undoDuration, { desc = "碑 undo specific durations" })
 keymap("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "碑 Undotree" })
 
 -- Refactor
-keymap(
-	{ "n", "x" },
-	"<leader>i",
-	function() require("refactoring").refactor("Inline Variable") end,
-	{ desc = "弄 Inline Variable" }
-)
-keymap(
-	{ "n", "x" },
-	"<leader>e",
-	function() require("refactoring").refactor("Extract Variable") end,
-	{ desc = "弄 Extract Variable" }
-)
+-- stylua: ignore start
+keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "弄 Inline Variable" })
+keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Extract Variable") end, { desc = "弄 Extract Variable" })
+-- stylua: ignore end
 
 -- Logging & Debugging
-local qlog = require("funcs.quick-log")
-keymap({ "n", "x" }, "<leader>ll", qlog.log, { desc = " log" })
-keymap({ "n", "x" }, "<leader>lo", qlog.objectlog, { desc = " object log" })
-keymap("n", "<leader>lb", qlog.beeplog, { desc = " beep log" })
-keymap("n", "<leader>lt", qlog.timelog, { desc = " time log" })
-keymap("n", "<leader>lr", qlog.removelogs, { desc = "  remove log" })
-keymap("n", "<leader>ld", qlog.debuglog, { desc = " debugger" })
+-- stylua: ignore start
+keymap({ "n", "x" }, "<leader>ll", function() require("funcs.log").objectlog() end, { desc = " log" })
+keymap({ "n", "x" }, "<leader>lo", function() require("funcs.quick-log").objectlog() end, { desc = " object log" })
+keymap("n", "<leader>lb", function() require("funcs.quick-log").beeplog() end, { desc = " beep log" })
+keymap("n", "<leader>lt", function() require("funcs.quick-log").timelog() end, { desc = " time log" })
+keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end, { desc = "  remove log" })
+keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, { desc = " debugger" })
+-- stylua: ignore end
 
 -- Sort & highlight duplicate lines
 -- stylua: ignore
@@ -256,11 +234,11 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 -- BUFFERS & WINDOWS & SPLITS
 
 -- for consistency with terminal buffers also <S-CR>
-local altalt = require("funcs.alt-alt")
-keymap("n", "<S-CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
-keymap("n", "<CR>", altalt.altBufferWindow, { desc = "switch to alt buffer/window" })
 
-keymap({ "n", "x", "i" }, "<D-w>", altalt.betterClose, { desc = "close buffer/window/tab" })
+keymap("n", "<S-CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
+keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
+
+keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window/tab" })
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " Open Buffers" })
 
 keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
@@ -281,7 +259,7 @@ keymap("n", "<leader><CR>", function() require("harpoon.mark").add_file() end, {
 keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 
 -- stylua: ignore
-keymap({ "n", "x" }, "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "Reveal in Finder" })
+keymap({ "n", "x" }, "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = " Reveal in Finder" })
 
 keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
 keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
