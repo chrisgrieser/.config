@@ -1,5 +1,4 @@
-
-local foldIcon = "  "
+local foldIcon = ""
 
 return {
 	"kevinhwang91/nvim-ufo",
@@ -9,13 +8,13 @@ return {
 		local ufo = require("ufo")
 		ufo.setup {
 			provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
-				return { "lsp", "treesitter" } -- Use lsp and treesitter as fallback
+				return { "lsp", "indent" } -- Use lsp and treesitter as fallback
 			end,
 			-- open_fold_hl_timeout = 0,
 			fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 				-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 				local newVirtText = {}
-				local suffix = foldIcon .. " " .. tostring(endLnum - lnum)
+				local suffix = " " .. foldIcon .. "  " .. tostring(endLnum - lnum)
 				local sufWidth = vim.fn.strdisplaywidth(suffix)
 				local targetWidth = width - sufWidth
 				local curWidth = 0
@@ -42,8 +41,8 @@ return {
 		}
 
 		-- Using ufo provider need remap `zR` and `zM`
-		vim.keymap.set("n", "zR", ufo.openAllFolds, {desc = " Open all folds"}) 
-		vim.keymap.set("n", "zM", ufo.closeAllFolds, {desc = " Close all folds"})
+		vim.keymap.set("n", "zR", ufo.openAllFolds, { desc = " Open all folds" })
+		vim.keymap.set("n", "zM", ufo.closeAllFolds, { desc = " Close all folds" })
 
 		-- fold settings required for UFO
 		vim.opt.foldenable = true
