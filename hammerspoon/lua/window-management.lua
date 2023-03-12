@@ -72,12 +72,8 @@ local function toggleObsidianSidebar(obsiWin)
 		-- half -> hide sidebar
 		-- pseudo-maximized -> show sidebar
 		-- max -> hide sidebar (since assuming Obsidian split)
-		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99)
-				and "expand"
-			or "collapse"
-		OpenLinkInBackground(
-			"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. mode .. "%28%29"
-		)
+		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "expand" or "collapse"
+		OpenLinkInBackground("obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. mode .. "%28%29")
 	end)
 end
 
@@ -100,7 +96,7 @@ end
 
 --------------------------------------------------------------------------------
 
----ensures Obsidian windows are always shown when developing css
+---ensures Obsidian windows are always shown when developing, mostly for developing CSS
 ---@param win hs.window
 ---@param pos hs.geometry
 local function obsidianThemeDevHelper(win, pos)
@@ -123,6 +119,7 @@ end
 ---@param win hs.window
 ---@param pos hs.geometry
 function MoveResize(win, pos)
+	-- guard clauses
 	if not win or not win:application() then return end
 	local appName = win:application():name()
 	local appsToIgnore = {
@@ -131,23 +128,21 @@ function MoveResize(win, pos)
 		"Transmission",
 		"Alfred",
 	}
-	if TableContains(appsToIgnore, appName) or win:title() ~= "Quick Look" then
-
+	if TableContains(appsToIgnore, appName) or win:title() == "Quick Look" then
 		Notify(appName .. " cannot be resized properly.")
 		return
 	end
 
+	-- extras
 	ToggleWinSidebar(win)
 	obsidianThemeDevHelper(win, pos)
-
-	if
-		(pos == PseudoMaximized or pos == Centered)
-		and AppIsRunning("Twitter")
-	then
-		App("Twitter"):mainWindow():raise()
+	if (pos == PseudoMaximized or pos == Centered) and AppIsRunning("Twitter") then
+		TwitterToTheSide()
+	elseif pos == Maximized and AppIsRunning("Twitter") then
+		App("Twitter"):hide()
 	end
 
-	-- timeout
+	-- resize
 	local i = 0
 	while i < 20 and CheckSize(win, pos) == false do
 		if not win then return end

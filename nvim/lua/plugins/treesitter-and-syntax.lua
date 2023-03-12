@@ -16,8 +16,8 @@ local function tsConfig()
 			"python",
 			"lua",
 			"luap", -- lua patterns
-			"toml",
 			"vim",
+			"toml",
 			"ini",
 			"yaml",
 			"json",
