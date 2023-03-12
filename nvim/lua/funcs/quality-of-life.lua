@@ -90,6 +90,7 @@ function M.wordSwitch()
 			{ "else", "if", false },
 			{ "function", "local function", false },
 			{ "pairs", "ipairs" },
+			{ "find", "match" },
 			{ "Notify", "print", false }, -- hammerspoon specific
 		}
 	elseif ft == "python" then
