@@ -1,90 +1,6 @@
 require("lua.utils")
 require("lua.window-management")
-require("lua.cronjobs")
 --------------------------------------------------------------------------------
--- HELPERS
-
--- unhide all apps
-local function unHideAll()
-	local wins = hs.window.allWindows()
-	for _, win in pairs(wins) do
-		local app = win:application()
-		if app and app:isHidden() then app:unhide() end
-	end
-end
-
--- hide windows of other apps, except twitter
----@param thisWin hs.window the window of the app not to hide
-local function hideOthers(thisWin)
-	if not thisWin or not (thisWin:application()) then return end
-	local winName = thisWin:application():name()
-
-	hs.closeConsole() -- set separately, since it's not regarded a regular window
-
-	local wins = thisWin:otherWindowsSameScreen()
-	for _, w in pairs(wins) do
-		local app = w:application()
-		if not app then return end
-		local browserWithPiP = app:name() == "Vivaldi" and app:findWindow("Picture in Picture")
-		local zoomMeeting = app:findWindow("Zoom Meeting") -- either Zoom Meeting transparent, or pseudo-picture-in-picture
-		local isTwitter = app:name() == "Twitter"
-		local isAlfred = app:name() == "Alfred" -- needed for Alfred compatibility mode
-		local isWindowItself = app:name() == winName
-		if not (browserWithPiP or zoomMeeting or isWindowItself or isTwitter or isAlfred) then
-			app:hide()
-		end
-	end
-end
-
---------------------------------------------------------------------------------
-
--- AUTOMATIONS FOR MULTIPLE APPS
-TransBgAppWatcher = Aw.new(function(appName, event, appObj)
-	local transBgApp = { "neovide", "Neovide", "Obsidian", "kitty", "Alacritty", "alacritty" }
-	if
-		IsProjector()
-		or not (TableContains(transBgApp, appName))
-		or appName == "Alfred" -- needed for Alfred Compatibility Mode
-	then
-		return
-	end
-
-	if event == Aw.terminated then
-		unHideAll()
-	elseif event == Aw.activated or event == Aw.launched then
-		AsSoonAsAppRuns(appObj, function()
-			local win = appObj:mainWindow()
-			if
-				not win -- win closed in meantime
-				or FrontAppName() ~= appName -- win switched in meantime
-				or not (CheckSize(win, PseudoMaximized) or CheckSize(win, Maximized))
-			then
-				return
-			end
-			hideOthers(win)
-		end)
-	end
-end):start()
-
--- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
-AutoTileAppWatcher = Aw.new(function(appName, eventType, appObj)
-	local autoTileApps = { "Finder", "Vivaldi" }
-	if
-		eventType == Aw.deactivated
-		and TableContains(autoTileApps, appName)
-		and #appObj:allWindows() > 1
-		and not (appObj:findWindow("Picture in Picture"))
-		and FrontAppName() ~= "Alfred" -- Alfred compatibility mode
-	then
-		appObj:hide()
-	end
-end):start()
-
--- prevent maximized window from covering sketchybar if they are unfocused
--- pseudomaximized windows always get twitter to the side
-Wf_maxWindows = Wf.new(true):subscribe(Wf.windowUnfocused, function(win)
-	if not (IsProjector()) and CheckSize(win, Maximized) then win:application():hide() end
-end)
 
 ---play/pause spotify with Spotify
 ---@param toStatus string pause|play
@@ -114,11 +30,8 @@ end
 
 -- auto-pause/resume Spotify on launch/quit of apps with sound
 SpotifyAppWatcher = Aw.new(function(appName, eventType)
-	local appsWithSound =
-		{ "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll", "Tagesschau" }
-	if not ScreenIsUnlocked() or IsProjector() or not (TableContains(appsWithSound, appName)) then
-		return
-	end
+	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll", "Tagesschau" }
+	if not ScreenIsUnlocked() or IsProjector() or not (TableContains(appsWithSound, appName)) then return end
 
 	if eventType == Aw.launched then
 		spotifyDo("pause")
@@ -194,9 +107,7 @@ local function addCssSelectorLeadingDot()
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
 
-	local hasSelectorAndClass = clipb:find(".%-.")
-		and not (clipb:find("[\n.=]"))
-		and not (clipb:find("^%-%-"))
+	local hasSelectorAndClass = clipb:find(".%-.") and not (clipb:find("[\n.=]")) and not (clipb:find("^%-%-"))
 	if not hasSelectorAndClass then return end
 
 	clipb = clipb:gsub("^", "."):gsub(" ", ".")
@@ -290,16 +201,10 @@ Wf_quicklook = Wf
 	.new(true) -- BUG for some reason, restricting this to "Finder" does not work
 	:setOverrideFilter({ allowRoles = "Quick Look" })
 	:subscribe(Wf.windowCreated, function(newWin)
-		local _, sel =
-			Applescript([[tell application "Finder" to return POSIX path of (selection as alias)]])
+		local _, sel = Applescript([[tell application "Finder" to return POSIX path of (selection as alias)]])
 		-- do not enlage window for images (which are enlarged already with
 		-- landscape proportions)
-		if
-			sel
-			and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4"))
-		then
-			return
-		end
+		if sel and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4")) then return end
 		RunWithDelays(0.4, function() MoveResize(newWin, Centered) end)
 	end)
 
@@ -356,9 +261,7 @@ Wf_zoom = Wf.new("zoom.us"):subscribe(Wf.windowCreated, function()
 		end tell
 	]])
 	RunWithDelays(0.5, function()
-		if AppIsRunning("zoom.us") and #Wf_zoom:getWindows() > 1 then
-			App("zoom.us"):findWindow("^Zoom$"):close()
-		end
+		if AppIsRunning("zoom.us") and #Wf_zoom:getWindows() > 1 then App("zoom.us"):findWindow("^Zoom$"):close() end
 	end)
 end)
 
@@ -446,9 +349,7 @@ DiscordAppWatcher = Aw.new(function(appName, eventType, appObj)
 		local hasURL = clipb:match("^https?:%S+$")
 		local hasObsidianURL = clipb:match("^obsidian:%S+$")
 		local isTweet = clipb:match("^https?://twitter%.com") -- for tweets, the previews are actually useful since they show the full content
-		if (hasURL or hasObsidianURL) and not isTweet then
-			hs.pasteboard.setContents("<" .. clipb .. ">")
-		end
+		if (hasURL or hasObsidianURL) and not isTweet then hs.pasteboard.setContents("<" .. clipb .. ">") end
 	elseif eventType == Aw.deactivated then
 		local hasEnclosedURL = clipb:match("^<https?:%S+>$")
 		local hasEnclosedObsidianURL = clipb:match("^<obsidian:%S+>$")

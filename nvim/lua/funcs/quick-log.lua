@@ -180,11 +180,8 @@ function M.removelogs()
 	local numOfLinesBefore = fn.line("$")
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = {
-			'Notify("beep")',
-			"print",
-		}
-		vim.notify("Only removing beep logs and prints for hammmerspoon, since otherwise not unambiguous")
+		logStatement = 'Notify("beep")'
+		vim.notify("Only removing beep logs for hammmerspoon, since prints are kept")
 	elseif ft == "lua" or ft == "python" then
 		logStatement = "print"
 	elseif ft == "javascript" or ft == "typescript" then

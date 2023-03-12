@@ -2,6 +2,9 @@ require("config.utils")
 -- https://neovide.dev/configuration.html
 --------------------------------------------------------------------------------
 
+-- hide other apps so the GUI transparency is visible
+fn.system("open 'hammerspoon://hide-other-than-neovide'")
+
 -- font size dependent on device
 local device = fn.hostname()
 if device:find("Mother") then
@@ -24,16 +27,17 @@ end)
 g.neovide_confirm_quit = false
 g.neovide_hide_mouse_when_typing = true
 g.neovide_remember_window_size = false -- done via --geometry in `neovide` call
+g.neovide_scroll_animation_length = 0.1
 
 -- Keymaps
 g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
-g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable on macOS
+g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable (on macOS)
 keymap("i", "<M-.>", "…") -- needed when alt is turned into meta key
 keymap("i", "<M-->", "–")
 
 -- Window Appearance
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
--- INFO: Transparency set in themes.lua, since varying with dark/light mode
+-- INFO: Transparency set in theme-config.lua
 
 -- cursor
 g.neovide_cursor_animation_length = 0.003

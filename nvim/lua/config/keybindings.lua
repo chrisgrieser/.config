@@ -173,7 +173,7 @@ keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Ex
 
 -- Logging & Debugging
 -- stylua: ignore start
-keymap({ "n", "x" }, "<leader>ll", function() require("funcs.log").objectlog() end, { desc = " log" })
+keymap({ "n", "x" }, "<leader>ll", function() require("funcs.quick-log").log() end, { desc = " log" })
 keymap({ "n", "x" }, "<leader>lo", function() require("funcs.quick-log").objectlog() end, { desc = " object log" })
 keymap("n", "<leader>lb", function() require("funcs.quick-log").beeplog() end, { desc = " beep log" })
 keymap("n", "<leader>lt", function() require("funcs.quick-log").timelog() end, { desc = " time log" })
