@@ -28,7 +28,7 @@ globals:
 
 rules:
   # Alfred
-  no-unused-vars: 
+  no-unused-vars:
     - warn
     - varsIgnorePattern: run # jxa in Alfred
 
@@ -88,6 +88,7 @@ rules:
   func-style:
     - warn
     - declaration
+    - allowArrowFunctions: true
 
   # Parenthesis
   no-extra-parens:
