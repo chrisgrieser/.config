@@ -113,7 +113,7 @@ local function themeModifications()
 		-- dawnfox
 	elseif theme == "dawnfox" then
 		setHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
-		setHighlight("ColorColumn", "guibg=#e8dcce")
+		setHighlight("ColorColumn", "guibg=#ebe1d5")
 		setHighlight("VertSplit", "guifg=#b29b84")
 		setHighlight("ScrollView", "guibg=#303050")
 		for _, v in pairs(modes) do

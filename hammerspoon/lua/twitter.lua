@@ -32,7 +32,7 @@ end
 
 -- ensure that twitter does not get focus, "falling through" to the next window
 local function twitterFallThrough()
-	if FrontAppName() ~= "Twitter" then return end 
+	if FrontAppName() ~= "Twitter" then return end
 
 	local visibleWins = hs.window:orderedWindows()
 	local nextWin
@@ -45,13 +45,31 @@ local function twitterFallThrough()
 	if nextWin and nextWin:id() ~= hs.window.frontmostWindow():id() then nextWin:focus() end
 end
 
+---Checks clipboard for URL and cleans tracking stuff
 local function twitterCleanUpLink()
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
-	local isTweet = clipb:match("^https?://twitter%.com") 
+	local isTweet = clipb:find("^https?://twitter%.com")
+	if not isTweet then return end -- to not overwrite the clipboard to often for clipboard watchers
 
+	-- https://twitter.com/niklashoehne/status/1634896659992965122?s=61&t=UsI8J7q5JQmZp8X73Kr_Tw
+	local cleanURL = clipb:gsub("%?s=.*t=.*", "")
+	hs.pasteboard.setContents(cleanURL)
 end
 
+local function twitterCloseMediaWindow()
+	local twitter = App("Twitter")
+	local mediaWin = twitter:findWindow("Media")
+	if not mediaWin then return end
+	mediaWin:close()
+
+	-- HACK using keystroke, since closing the window does not
+	-- seem to work reliably
+	if mediaWin then
+		mediaWin:raise()
+		Keystroke({ "cmd" }, "w", 1, twitter)
+	end
+end
 --------------------------------------------------------------------------------
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
@@ -68,15 +86,11 @@ TwitterWatcher = Aw.new(function(appName, event)
 	elseif appName == "Twitter" and event == Aw.deactivated then
 		TwitterScrollUp()
 		twitterCleanUpLink()
+		twitterCloseMediaWindow()
 
-		local twitter = App("Twitter")
-		for _, win in pairs(twitter:allWindows()) do
-			if win:title():find("Media") then
-				win:close()
-				-- HACK using keystroke, since closing window does not seem to work reliably
-				Keystroke({ "cmd" }, "w", 1, twitter)
-			end
-		end
+	-- do not focus Twitter after an app is terminated
+	elseif event == Aw.terminated and appName ~= "Twitter" then
+		RunWithDelays(0.1, twitterFallThrough)
 
 	-- raise twitter when switching window to other app
 	elseif event == Aw.activated and appName ~= "Twitter" then
@@ -90,8 +104,5 @@ TwitterWatcher = Aw.new(function(appName, event)
 			if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
 		end
 
-	-- do not focus Twitter after an app is terminated
-	elseif event == Aw.terminated and appName ~= "Twitter" then
-		RunWithDelays(0.1, twitterFallThrough)
 	end
 end):start()

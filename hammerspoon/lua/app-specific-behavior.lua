@@ -427,7 +427,7 @@ Wf_script_editor = Wf
 
 -- DISCORD
 DiscordAppWatcher = Aw.new(function(appName, eventType, appObj)
-	if not appName == "Discord" then return end
+	if not (appName == "Discord") then return end
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	if eventType == Aw.launched then
