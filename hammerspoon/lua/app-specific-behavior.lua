@@ -309,7 +309,7 @@ Wf_quicklook = Wf
 Wf_finder = Wf.new("Finder")
 	:setOverrideFilter({
 		-- "^$" excludes the Desktop, which has no window title
-		rejectTitles = { "^Quick Look$", "^Move$", "^Copy$", "^Finder Settings$", " Info$", "^$" },
+		rejectTitles = { "^Quick Look$", "^Move$", "^Copy$", "^Finder Settings$", " Info$", "^$", "^Alfred$" },
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
