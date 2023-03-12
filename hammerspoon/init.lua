@@ -4,6 +4,7 @@ hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
 hs.application.enableSpotlightForNameSearches(false)
 hs.window.animationDuration = 0
+hs.window.setShadows(false)
 
 --------------------------------------------------------------------------------
 print("Start Loading Config")

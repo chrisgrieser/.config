@@ -22,6 +22,7 @@ end
 
 function TwitterToTheSide()
 	if not AppIsRunning("Twitter") then return end
+	App("Twitter"):unhide()
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
 	local win = App("Twitter"):findWindow("Twitter")
