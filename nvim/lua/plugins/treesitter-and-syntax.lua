@@ -104,6 +104,14 @@ local function tsConfig()
 				clear_on_cursor_move = true, -- set to false if `updatetime` of ~100ms
 			},
 			highlight_current_scope = { enable = false },
+			smart_rename = {
+				enable = true,
+				keymaps = {
+					-- overwritten by on lsp-attach with LSP's rename, but useful for
+					-- filetypes without lsp-rename-support like shell or yaml
+					smart_rename = "<leader>R",
+				},
+			},
 		},
 	}
 
