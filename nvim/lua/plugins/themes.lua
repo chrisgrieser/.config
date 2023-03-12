@@ -8,6 +8,7 @@ vim.g.lightTransparency = 0.93
 return {
 	"rebelot/kanagawa.nvim",
 	"EdenEast/nightfox.nvim",
+"https://github.com/sainnhe/everforest,"
 	-- { "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
 	-- "glepnir/zephyr-nvim",
 	-- "folke/tokyonight.nvim",
