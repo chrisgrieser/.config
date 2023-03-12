@@ -178,8 +178,8 @@ local function telescopeConfig()
 				display_stat = false,
 				git_status = false,
 				hide_parent_dir = false,
-				use_fd = false,
-
+				-- use_fd = false,
+				hijack_netrw = true,
 				mappings = {
 					["i"] = {
 						-- mappings should be consistent with nvim-ghengis mappings
