@@ -1,4 +1,5 @@
 require("lua.utils")
+-- INFO unused, using auto-hide cursor extension in the browser
 --------------------------------------------------------------------------------
 
 ---"hides" the cursor by moving it to the bottom left
