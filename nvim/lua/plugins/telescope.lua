@@ -29,7 +29,6 @@ local function telescopeConfig()
 				"%.git$", -- git dir in submodules
 				"node_modules/", -- node
 				"venv/", -- python
-				"/$", -- folder
 				"%.app/", -- internals of mac apps
 				"%.pxd", -- Pixelmator
 				"%.plist", -- Alfred
@@ -173,13 +172,15 @@ local function telescopeConfig()
 		},
 		extensions = {
 			file_browser = {
-				depth = false,
+				prompt_prefix = " ",
+				-- depth = false,
+				auto_depth = 99,
 				hidden = true,
 				display_stat = false,
 				git_status = false,
-				hide_parent_dir = false,
-				-- use_fd = false,
-				hijack_netrw = true,
+				group = true,
+				hide_parent_dir = true,
+				select_buffer = true,
 				mappings = {
 					["i"] = {
 						-- mappings should be consistent with nvim-ghengis mappings
