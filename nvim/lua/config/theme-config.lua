@@ -127,6 +127,13 @@ local function themeModifications()
 		linkHighlight("NotifyINFOIcon", "@define")
 		linkHighlight("NotifyINFOTitle", "@define")
 		linkHighlight("NotifyINFOBody", "@define")
+
+		-- everforest
+	elseif theme == "everforest" and mode == "light" then
+		vim.g.everforest_background = "soft"
+	elseif theme == "everforest" and mode == "dark" then
+		vim.g.everforest_background = "hard"
+
 	end
 end
 
