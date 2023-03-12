@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "12/03/2023, 07:05:36",
-	"time": 1678601136338,
+	"@time": "12/03/2023, 09:32:14",
+	"time": 1678609934883,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -80,7 +80,7 @@
 		"map e closeTabsOnRight",
 		"map W closeOtherTabs",
 		"map w removeTab keepWindow=\"mayClose\"",
-		"map ö removeTab keepWindow=\"mayClose\"",
+		"map o removeTab keepWindow=\"mayClose\"",
 		"map x runKey keys=\"copyCurrentUrl+removeTab\"",
 		"map u restoreTab",
 		"map yt duplicateTab",
@@ -117,7 +117,7 @@
 		"map gu goUp",
 		"map gU goToRoot",
 		"map p togglePinTab",
-		"map o openCopiedUrlInNewTab",
+		"map P openCopiedUrlInNewTab",
 		"map m toggleMuteTab",
 		"map r reload",
 		"map R reload hard",
