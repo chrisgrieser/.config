@@ -52,10 +52,10 @@ rules:
                   activate
                   open the trash
                 end tell
-                tell application "System Events\" to tell process "Finder"",
-                set frontmost to true,
-                click menu item \"${2:item}\" of menu \"${3:menu}\" of menu bar 1,
-                  end tell
+                tell application "System Events" to tell process "Finder",
+                  set frontmost to true,
+                  click menu item \"${2:item}\" of menu \"${3:menu}\" of menu bar 1,
+                end tell
                 '
       # Hyper + F: Open $WD / $DOTFILE_FOLDER
       - type: basic
