@@ -1,10 +1,10 @@
 # shellcheck disable=SC2012,SC2016,SC2002
 
 function th() {
-	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && exit 1; fi
-	if ! command -v alacritty-colorscheme &>/dev/null; then echo "alacritty-colorscheme not installed. https://github.com/eendroroy/alacritty-theme" && exit 1; fi
+	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
+	if ! command -v alacritty-colorscheme &>/dev/null; then echo "alacritty-colorscheme not installed. https://github.com/eendroroy/alacritty-theme" && return 1; fi
 	local alacritty_color_schemes="$HOME/.config/alacritty/colors"
-	if ! [[ -d "$alacritty_color_schemes" ]]; then echo "folder $alacritty_color_schemes does not exist." && exit 1; fi
+	if ! [[ -d "$alacritty_color_schemes" ]]; then echo "folder $alacritty_color_schemes does not exist." && return 1; fi
 
 	local selected colordemo original
 	original=$(alacritty-colorscheme status | cut -d. -f1)
@@ -59,7 +59,7 @@ EOM
 }
 
 function opa {
-	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && exit 1; fi
+	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	local original values alacritty_config
 	alacritty_config="$HOME/.config/alacritty/alacritty.yml"
