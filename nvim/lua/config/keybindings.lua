@@ -10,7 +10,6 @@ keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " Keymaps"
 keymap("n", "<leader>T", function() cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
 
 -- Highlights
--- stylua: ignore
 keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- Update [P]lugins
@@ -26,7 +25,8 @@ keymap("n", "<leader>lc", function()
 end, { desc = "גּ Copy last command" })
 
 -- [l]ast command [a]gain
-keymap("n", "<leader>la", "@:", { desc = "גּ Run last command again" })
+-- as opposed to `@:`, this works across restarts of neovim
+keymap("n", "<leader>la", ":<Up><CR>", { desc = "גּ Run last command again" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
