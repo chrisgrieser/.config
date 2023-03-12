@@ -69,7 +69,7 @@ end, vim.api.nvim_create_namespace("auto_hlsearch"))
 -- Marks
 -- stylua: ignore
 keymap("n", "ä", function() require("funcs.mark-cycler").gotoMark() end, { desc = "Goto Next Mark" })
-keymap("n", "Ä", function() require("funcs.mark-cycler").setMark () end, { desc = "Set Next Mark" })
+keymap("n", "Ä", function() require("funcs.mark-cycler").setMark() end, { desc = "Set Next Mark" })
 
 -- reset marks on startup (needs to be on VimEnter so it's not called too early)
 augroup("marks", {})
@@ -92,7 +92,7 @@ keymap("n", "^", "za", { desc = "ﬕ toggle fold" })
 
 -- [M]atchIt
 -- remap needed, since using the builtin matchit plugin
-keymap("n", "m", "%", { remap = true, desc = "MatchIt" }) 
+keymap("n", "m", "%", { remap = true, desc = "MatchIt" })
 
 -- HUNKS AND CHANGES
 keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
@@ -105,7 +105,7 @@ keymap("n", "gC", "g,", { desc = "goto previous change" })
 -- stylua: ignore
 keymap( "n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]], { desc = "Next Quickfix" })
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " Quickfix list" })
-keymap("n", "dQ", function () cmd.cexpr("[]") end, { desc = "Clear Quickfix List" })
+keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = "Clear Quickfix List" })
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -235,10 +235,20 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 
 -- for consistency with terminal buffers also <S-CR>
 
-keymap("n", "<S-CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
+keymap(
+	"n",
+	"<S-CR>",
+	function() require("funcs.alt-alt").altBufferWindow() end,
+	{ desc = "switch to alt buffer/window" }
+)
 keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
 
-keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window/tab" })
+keymap(
+	{ "n", "x", "i" },
+	"<D-w>",
+	function() require("funcs.alt-alt").betterClose() end,
+	{ desc = "close buffer/window/tab" }
+)
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " Open Buffers" })
 
 keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
@@ -290,8 +300,8 @@ keymap("i", "<D-t>", "${}<Left>", { desc = "Template String" })
 --------------------------------------------------------------------------------
 
 -- Color Picker
-keymap("n", "#", ":CccPick<CR>", {desc = " Color Picker"})
-keymap("n", "'", ":CccConvert<CR>", {desc = " Convert Color"}) -- shift-# on German keyboard
+keymap("n", "#", ":CccPick<CR>", { desc = " Color Picker" })
+keymap("n", "'", ":CccConvert<CR>", { desc = " Convert Color" }) -- shift-# on German keyboard
 
 --------------------------------------------------------------------------------
 -- FILES
@@ -318,8 +328,9 @@ keymap("n", "go", function()
 	local projectName = pwd:gsub(".*/", "")
 	local harpoonNumber = harpoonFileNumber() or 0
 	local title = tostring(harpoonNumber) .. "ﯠ " .. projectName
-	require("telescope.builtin").find_files { prompt_title = title }
-end, { desc = " Open File in Project" })
+	require("telescope").extensions.file_browser.file_browser { prompt_title = title }
+	-- require("telescope.builtin").find_files { prompt_title = title }
+end, { desc = " Browse in Project" })
 
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
