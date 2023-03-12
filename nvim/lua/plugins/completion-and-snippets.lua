@@ -142,9 +142,7 @@ local function cmpconfig()
 				-- (height is controlled via pumheight option)
 				local max_length = 50
 				local ellipsis_char = "…"
-				if #vim_item.abbr > max_length then
-					vim_item.abbr = vim_item.abbr:sub(1, max_length) .. ellipsis_char
-				end
+				if #vim_item.abbr > max_length then vim_item.abbr = vim_item.abbr:sub(1, max_length) .. ellipsis_char end
 
 				-- icons
 				local kindIcon = kind_icons[vim_item.kind] or ""
@@ -352,10 +350,15 @@ return {
 		dependencies = "hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		config = function()
-			require("nvim-autopairs").setup{
-				check_ts = true,
-				ts_config = {
-				}
+			local npairs = require("nvim-autopairs")
+			local rule = require("nvim-autopairs.rule")
+			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
+
+			npairs.setup { check_ts = true } -- use treesitter
+
+			npairs.add_rules {
+				-- auto-pair <> if inside string (e.g. for keymaps)
+				rule("<", ">", "lua"):with_pair(isNodeType { "string" }),
 			}
 
 			-- add brackets to cmp completions, e.g. "function" -> "function()"

@@ -21,8 +21,8 @@ local function hideCurAndPassThrough(key)
 	Keystroke({}, key, 1)
 end
 
-JHidesCursor = Hotkey({}, "j", function() hideCurAndPassThrough("j") end)
-KHidesCursor = Hotkey({}, "k", function() hideCurAndPassThrough("k") end)
+JHidesCursor = Hotkey({}, "j", function() hideCurAndPassThrough("j") end):disable()
+KHidesCursor = Hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
 
 -- watches browser, enables when hotkeys when browser is activated
 Jk_watcher = Aw.new(function(appName, eventType)
