@@ -172,7 +172,6 @@ local function telescopeConfig()
 			file_browser = {
 				prompt_prefix = " ",
 				depth = false,
-				-- auto_depth = 99,
 				hidden = true,
 				display_stat = false,
 				git_status = false,
@@ -184,8 +183,8 @@ local function telescopeConfig()
 						-- mappings should be consistent with nvim-ghengis mappings
 						["<D-n>"] = require("telescope._extensions.file_browser.actions").create,
 						["<C-r>"] = require("telescope._extensions.file_browser.actions").rename,
-						["<C-d>"] = require("telescope._extensions.file_browser.actions").copy,
 						["<D-BS>"] = require("telescope._extensions.file_browser.actions").remove,
+
 						["<D-b>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
 						["<D-a>"] = require("telescope._extensions.file_browser.actions").select_all,
 					},

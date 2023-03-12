@@ -9,7 +9,7 @@ end
 
 ---@param hlgroup string
 ---@param changes string
-local function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
+function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
 
 ---@param hlgroup string
 local function clearHighlight(hlgroup) cmd.highlight("clear " .. hlgroup) end
@@ -98,19 +98,20 @@ local function themeModifications()
 
 		-- dawnfox
 	elseif theme == "dawnfox" then
-		setHighlight("IndentBlanklineChar", "guifg=#deccba")
+		setHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		setHighlight("VertSplit", "guifg=#b29b84")
 		setHighlight("ScrollView", "guibg=#303050")
+		for _, v in pairs(modes) do
+			setHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
+		end
 
 		-- melange
-	elseif theme == "melange" then
+	elseif theme == "melange" and mode == "light" then
 		linkHighlight("Todo", "IncSearch")
-		if mode == "light" then
-			linkHighlight("NonText", "Conceal")
-			linkHighlight("NotifyINFOIcon", "@define")
-			linkHighlight("NotifyINFOTitle", "@define")
-			linkHighlight("NotifyINFOBody", "@define")
-		end
+		linkHighlight("NonText", "Conceal")
+		linkHighlight("NotifyINFOIcon", "@define")
+		linkHighlight("NotifyINFOTitle", "@define")
+		linkHighlight("NotifyINFOBody", "@define")
 	end
 end
 
