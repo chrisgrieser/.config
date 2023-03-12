@@ -30,9 +30,10 @@ function TwitterToTheSide()
 	win:setFrame(ToTheSide)
 end
 
--- ensure that twitter does get focus, "falling through" to the next window
+-- ensure that twitter does not get focus, "falling through" to the next window
 function TwitterFallThrough()
-	if FrontAppName() == "Alfred" then return end -- needed for Alfred Compatibility Mode
+	if FrontAppName() ~= "Twitter" then return end 
+
 	local visibleWins = hs.window:orderedWindows()
 	local nextWin
 	for _, win in pairs(visibleWins) do

@@ -308,8 +308,16 @@ Wf_quicklook = Wf
 -- FINDER
 Wf_finder = Wf.new("Finder")
 	:setOverrideFilter({
-		-- "^$" excludes the Desktop, which has no window title
-		rejectTitles = { "^Quick Look$", "^Move$", "^Copy$", "^Finder Settings$", " Info$", "^$", "^Alfred$" },
+		rejectTitles = {
+			"^Quick Look$",
+			"^Move$",
+			"^Copy$",
+			"^Delete$",
+			"^Finder Settings$",
+			" Info$", -- Info window *end* with "Info"
+			"^$", -- Desktop, which has no window title
+			"^Alfred$", -- Alfred Compatibility Mode
+		},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
@@ -394,10 +402,9 @@ end):start()
 Wf_script_editor = Wf
 	.new("Script Editor")
 	:subscribe(Wf.windowCreated, function(newWin)
-		-- skip new file creaton dialogue
+		-- skip new file creation dialogue
 		if newWin:title() == "Open" then
 			Keystroke({ "cmd" }, "n")
-
 		-- auto-paste and lint content; resize window
 		elseif newWin:title() == "Untitled" then
 			Keystroke({ "cmd" }, "v")
@@ -420,7 +427,7 @@ Wf_script_editor = Wf
 
 -- DISCORD
 DiscordAppWatcher = Aw.new(function(appName, eventType, appObj)
-	if appName ~= "Discord" then return end
+	if not appName == "Discord" then return end
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	if eventType == Aw.launched then
