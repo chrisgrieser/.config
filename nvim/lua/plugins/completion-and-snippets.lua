@@ -147,7 +147,9 @@ local function cmpconfig()
 				-- (height is controlled via pumheight option)
 				local max_length = 50
 				local ellipsis_char = "…"
-				if #vim_item.abbr > max_length then vim_item.abbr = vim_item.abbr:sub(1, max_length) .. ellipsis_char end
+				if #vim_item.abbr > max_length then
+					vim_item.abbr = vim_item.abbr:sub(1, max_length) .. ellipsis_char
+				end
 
 				-- icons
 				local kindIcon = kind_icons[vim_item.kind] or ""
@@ -277,10 +279,13 @@ local function cmpconfig()
 		}),
 	})
 
-	-- cmp.setup.cmdline({ "/", "?" }, {
-	-- 	mapping = cmp.mapping.preset.cmdline(),
-	-- 	sources = {}, -- empty cause all suggestions do not help much?
-	-- })
+	-- Wondering what suggestions could make sense there
+	cmp.setup.cmdline({ "/", "?" }, {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = {
+			s.buffer,
+		},
+	})
 end
 --------------------------------------------------------------------------------
 
@@ -289,18 +294,18 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter", "CmdlineEnter" }, -- CmdlineEnter for completions there
 		dependencies = {
-			"hrsh7th/cmp-buffer", -- completion sources
+			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"dmitmel/cmp-cmdline-history",
 			"hrsh7th/cmp-emoji",
 			"chrisgrieser/cmp-nerdfont",
-			"tamago324/cmp-zsh",
+			"tamago324/cmp-zsh", -- some shell completions
 			"jcdickinson/codeium.nvim", -- ai support
 			"ray-x/cmp-treesitter",
+			"hrsh7th/cmp-nvim-lsp",
 			{ "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
-			"hrsh7th/cmp-nvim-lsp", -- lsp
-			"L3MON4D3/LuaSnip", -- snippet
+			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
 		config = cmpconfig,
@@ -348,7 +353,10 @@ return {
 	},
 	{
 		"windwp/nvim-autopairs",
-		dependencies = "hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/nvim-cmp",
+			"nvim-treesitter/nvim-treesitter",
+		},
 		event = "InsertEnter",
 		config = function()
 			local npairs = require("nvim-autopairs")
@@ -360,6 +368,9 @@ return {
 			npairs.add_rules {
 				-- auto-pair <> if inside string (e.g. for keymaps)
 				rule("<", ">", "lua"):with_pair(isNodeType { "string" }),
+				-- auto-pair for markdown syntax
+				rule("*", "*", "markdown"):with_pair(),
+				rule("__", "__", "markdown"):with_pair(),
 			}
 
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
