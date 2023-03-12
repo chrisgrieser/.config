@@ -17,3 +17,4 @@ workflows/powerthesaurus-search
 workflows/browser-history-search
 workflows/ignore-in-alfred
 workflows/app-store-search
+workflows/github-search

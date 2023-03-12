@@ -35,15 +35,11 @@ local function telescopeConfig()
 				"%.plist", -- Alfred
 				"%.harpoon", -- harpoon/projects
 				"/INFO ", -- custom info files
-				"%.ttf", -- fonts
 				"%.png",
 				"%.gif",
 				"%.jpe?g",
 				"%.icns",
 				"%.zip",
-				"%.pdf",
-				"%.docx",
-				"%.pptx",
 			},
 			mappings = {
 				i = keymappings,
@@ -181,17 +177,17 @@ local function telescopeConfig()
 				hidden = true,
 				display_stat = false,
 				git_status = false,
-				hide_parent_dir = true,
-				add_dirs = true,
+				hide_parent_dir = false,
+				use_fd = false,
+
 				mappings = {
 					["i"] = {
+						-- mappings should be consistent with nvim-ghengis mappings
 						["<D-n>"] = require("telescope._extensions.file_browser.actions").create,
 						["<C-r>"] = require("telescope._extensions.file_browser.actions").rename,
-						["<D-S-m>"] = require("telescope._extensions.file_browser.actions").move,
 						["<C-d>"] = require("telescope._extensions.file_browser.actions").copy,
 						["<D-BS>"] = require("telescope._extensions.file_browser.actions").remove,
-						-- ["<C-r>"] = require("telescope._extensions.file_browser.actions").create,
-						-- ["<C-f>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
+						["<D-b>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
 					},
 				},
 			},
