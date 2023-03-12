@@ -1,10 +1,6 @@
 local function mixedIndentation()
 	local ignoredFts = { "css", "markdown", "sh", "lazy", "" }
-	if
-		vim.tbl_contains(ignoredFts, vim.bo.filetype)
-		or vim.fn.mode() == "i"
-		or vim.bo.buftype == "terminal"
-	then
+	if vim.tbl_contains(ignoredFts, vim.bo.filetype) or vim.fn.mode() == "i" or vim.bo.buftype == "terminal" then
 		return ""
 	end
 
@@ -27,8 +23,7 @@ vim.api.nvim_create_augroup("branchChange", {})
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter", "TabEnter" }, {
 	group = "branchChange",
 	callback = function()
-		vim.g.cur_branch =
-			vim.fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "")
+		vim.g.cur_branch = vim.fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "")
 	end,
 })
 
@@ -57,6 +52,12 @@ local function searchCounter()
 	if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
 	if total == 0 then return " 0 " .. searchTerm end
 	return " " .. current .. "/" .. total .. " " .. searchTerm
+end
+
+local function quickfixListCounter()
+	local count = #vim.fn.getqflist()
+	if count == 0 then return "" end
+	return " " .. tostring(count)
 end
 
 local function clock()
@@ -102,6 +103,8 @@ navic.setup {
 	depth_limit_indicator = "…",
 }
 
+local function showNavic() return navic.is_available() and not (bo.filetype == "css") end
+
 -- simple alternative to fidget.nvim
 -- via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
 local function lsp_progress()
@@ -115,16 +118,11 @@ local function lsp_progress()
 	return client .. progress .. "%% " .. task
 end
 
-local function showNavic() return navic.is_available() and not (bo.filetype == "css") end
-
 -- show number of references for entity under cursor
 local lspCount = {}
 local function requestLspRefCount()
 	if vim.fn.mode() ~= "n" then
-		lspCount.refWorkspace = nil
-		lspCount.refFile = nil
-		lspCount.defWorkspace = nil
-		lspCount.defFile = nil
+		lspCount = {}
 		return
 	end
 	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
@@ -158,6 +156,7 @@ local function requestLspRefCount()
 end
 
 local function lspCountStatusline()
+	-- abort when lsp loading or not capable of references
 	local currentBufNr = vim.fn.bufnr()
 	local bufClients = vim.lsp.get_active_clients { bufnr = currentBufNr }
 	local lspCapable = false
@@ -167,25 +166,22 @@ local function lspCountStatusline()
 	end
 	local lspLoading = #(vim.lsp.util.get_progress_messages()) > 0
 	if lspLoading or not lspCapable then return "" end
+	requestLspRefCount() -- needs to be separated due to lsp calls being async
 
-	requestLspRefCount()
-	if not (lspCount.refWorkspace and lspCount.defWorkspace) then return "" end
+	-- abort when no count
+	if
+		not (lspCount.refWorkspace and lspCount.defWorkspace)
+		or (lspCount.refWorkspace == 0 and lspCount.defWorkspace == 0)
+	then
+		return ""
+	end
 
+	-- display the count
 	local defs = tostring(lspCount.defFile)
-	if lspCount.defFile ~= lspCount.defWorkspace then
-		defs = defs .. "(" .. tostring(lspCount.defWorkspace) .. ")"
-	end
+	if lspCount.defFile ~= lspCount.defWorkspace then defs = defs .. "(" .. tostring(lspCount.defWorkspace) .. ")" end
 	local refs = tostring(lspCount.refFile)
-	if lspCount.refFile ~= lspCount.refWorkspace then
-		refs = refs .. "(" .. tostring(lspCount.refWorkspace) .. ")"
-	end
+	if lspCount.refFile ~= lspCount.refWorkspace then refs = refs .. "(" .. tostring(lspCount.refWorkspace) .. ")" end
 	return " " .. defs .. "  " .. refs
-end
-
-local function quickfixListCounter()
-	local count = #vim.fn.getqflist()
-	if count == 0 then return "" end
-	return "壟" .. tostring(count)
 end
 
 --------------------------------------------------------------------------------
@@ -209,7 +205,7 @@ local lualineConfig = {
 			{
 				"filename",
 				file_status = false,
-				fmt = function(str) return str:gsub("zsh;#toggleterm# %d", "Toggleterm") end,
+				fmt = function(str) return str:gsub("%w+;#toggleterm#.*", "Toggleterm") end,
 			},
 		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
