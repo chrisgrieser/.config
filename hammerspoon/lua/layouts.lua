@@ -47,12 +47,13 @@ local function workLayout()
 	dockSwitcher("work")
 	hs.execute("sketchybar --set clock popup.drawing=true")
 
-	-- apps and layout
+	-- start apps
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder", "BetterTouchTool" }
 	require("lua.private").closer()
 	if not isWeekend() then OpenApp("Slack") end
 	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts", "Obsidian" }
 
+	-- layout apps
 	Wait(1)
 	local layout = {
 		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
@@ -70,10 +71,9 @@ local function workLayout()
 	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 	TwitterToTheSide()
 	TwitterScrollUp()
+	RunWithDelays(1, function () App("Drafts"):activate() end)
 
-	Wait(0.7)
-	App("Drafts"):activate()
-
+	-- finish
 	CleanupConsole()
 	print("🔲 WorkLayout: done")
 end
@@ -125,8 +125,9 @@ Hotkey({ "shift" }, "f6", selectLayout) -- for Apple keyboard
 
 UnlockWatcher = hs.caffeinate.watcher
 	.new(function(event)
-		-- delay needed to ensure displays are recognized after waking
-		if event == hs.caffeinate.watcher.screensDidUnlock then RunWithDelays(0.5, selectLayout) end
+		if IdleMins(30) and event == hs.caffeinate.watcher.screensDidUnlock then
+			RunWithDelays(0.5, selectLayout) -- delay needed to ensure displays are recognized after waking
+		end
 	end)
 	:start()
 

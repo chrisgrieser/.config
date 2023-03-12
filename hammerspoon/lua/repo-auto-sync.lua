@@ -124,11 +124,11 @@ UriScheme("sync-repos", function()
 	SyncAllGitRepos("notify")
 end)
 
--- 4. when going to sleep/unlocking
+-- 4. when going to sleep / unlocking with idleTime
 SleepWatcher = hs.caffeinate.watcher
 	.new(function(event)
-		local caff = hs.caffeinate.watcher
-		if event == caff.screensDidSleep or event == caff.screensDidUnlock then
+		local caffeinate = hs.caffeinate.watcher
+		if event == caffeinate.screensDidSleep or (event == caffeinate.screensDidUnlock and IdleMins(30)) then
 			SyncAllGitRepos()
 		end
 	end)
