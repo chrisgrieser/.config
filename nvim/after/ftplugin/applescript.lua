@@ -7,24 +7,15 @@ keymap({ "n", "i", "x" }, "<D-s>", function()
 	vim.lsp.buf.format { async = false } -- still used for null-ls-codespell
 	cmd.loadview(2)
 	cmd.write()
-end, {buffer = true, desc = "Save & Format"})
-
+end, { buffer = true, desc = "Save & Format" })
 
 --------------------------------------------------------------------------------
 
-
-
 -- Build
 keymap("n", "<leader>r", function()
-	cmd.update()
-	local karabinerBuildScp = vim.env.DOTFILE_FOLDER .. "/karabiner/build-karabiner-config.js"
-	local result = fn.system('osascript -l JavaScript "' .. karabinerBuildScp .. '"')
-	result = result:gsub("\n$", "")
-	vim.notify(result)
-end, { buffer = true, desc = " npm run build" })
-
-		cmd.AppleScriptRun()
-		cmd.wincmd("p") -- switch to previous window
+	cmd.AppleScriptRun()
+	cmd.wincmd("p") -- switch to previous window
+end, { buffer = true, desc = " Run Applescript" })
 
 --------------------------------------------------------------------------------
 -- AppleScript Plugin Config
@@ -37,4 +28,3 @@ vim.g.applescript_config = {
 		},
 	},
 }
-
