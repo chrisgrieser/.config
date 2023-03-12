@@ -179,15 +179,16 @@ local function telescopeConfig()
 			file_browser = {
 				depth = false,
 				hidden = true,
-				grouped = true,
-				display_stat = { date = false, size = false },
+				display_stat = false,
 				git_status = false,
+				hide_parent_dir = true,
+				add_dirs = true,
 				mappings = {
 					["i"] = {
-						["<D-n>"] = require("telescope._extensions.file_browser.actions").create_from_prompt,
+						["<D-n>"] = require("telescope._extensions.file_browser.actions").create,
 						["<C-r>"] = require("telescope._extensions.file_browser.actions").rename,
 						["<D-S-m>"] = require("telescope._extensions.file_browser.actions").move,
-						["<D-c>"] = require("telescope._extensions.file_browser.actions").copy,
+						["<C-d>"] = require("telescope._extensions.file_browser.actions").copy,
 						["<D-BS>"] = require("telescope._extensions.file_browser.actions").remove,
 						-- ["<C-r>"] = require("telescope._extensions.file_browser.actions").create,
 						-- ["<C-f>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
@@ -208,8 +209,8 @@ return {
 			"nvim-telescope/telescope-file-browser.nvim",
 		},
 		config = function()
-			require("telescope").load_extension("file_browser")
 			telescopeConfig()
+			require("telescope").load_extension("file_browser")
 		end,
 	},
 }

@@ -1,0 +1,6 @@
+{
+    "runtime.version": "LuaJIT",
+    "diagnostics.disable": [
+        "trailing-space"
+    ]
+}
