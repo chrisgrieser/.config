@@ -68,6 +68,8 @@ local source_icons = {
 	git = "",
 }
 
+--------------------------------------------------------------------------------
+
 local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
@@ -113,11 +115,12 @@ local function cmpconfig()
 
 			-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
 			["<Tab>"] = cmp.mapping(function(fallback)
+				local lineEmpty = vim.fn.getline("."):find("^%s$") ---@diagnostic disable-line: param-type-mismatch, undefined-field
 				if cmp.visible() then
 					cmp.select_next_item()
 				elseif require("neogen").jumpable() then
 					require("neogen").jump_next()
-				elseif require("luasnip").jumpable(1) then
+				elseif require("luasnip").jumpable(1) and not(lineEmpty) then
 					require("luasnip").jump(1)
 				else
 					fallback()
@@ -303,11 +306,7 @@ return {
 	{
 		"jcdickinson/codeium.nvim",
 		lazy = true, -- is being loaded by cmp
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"hrsh7th/nvim-cmp",
-			-- "MunifTanjim/nui.nvim", -- only needed for authentication: https://github.com/jcdickinson/codeium.nvim/issues/27
-		},
+		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
 		config = function()
 			require("codeium").setup {
 				config_path = vim.env.ICLOUD .. "Dotfolder/private dotfiles/codium-api-key.json",
@@ -373,6 +372,7 @@ return {
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
+			-- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
 			local ls = require("luasnip")
 
 			ls.setup {
