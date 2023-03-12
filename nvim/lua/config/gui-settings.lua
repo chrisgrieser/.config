@@ -4,11 +4,18 @@ require("config.utils")
 
 -- hide other apps so the GUI transparency is visible.
 -- See hammerspoons `app-hider.lua`
-augroup("hideOthersViaHammerspoon", {})
+augroup("hammerspoonAutomation", {})
 autocmd("VimEnter", {
-	group = "hideOthersViaHammerspoon",
-	callback = function() fn.system("open -g 'hammerspoon://hide-other-than-neovide'") end,
+	group = "hammerspoonAutomation",
+	callback = function()
+		fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
+
+		-- HACK to fix neovide sometimes not enlarging the window
+		fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
+	end,
 })
+
+--------------------------------------------------------------------------------
 
 -- font size dependent on device
 local device = fn.hostname()

@@ -21,13 +21,19 @@ function TwitterScrollUp()
 end
 
 function TwitterToTheSide()
-	if not AppIsRunning("Twitter") then return end
-	App("Twitter"):unhide()
+	-- in case of active split, prevent left window of covering the sketchybar
+	if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
+
+	local twitter = App("Twitter")
+	if not twitter then return end
+
+	if twitter:isHidden() then twitter:unhide() end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
-	local win = App("Twitter"):findWindow("Twitter")
+	local win = twitter:findWindow("Twitter")
 	if not win then return end
 
+	win:raise()
 	win:setFrame(ToTheSide)
 end
 
@@ -47,7 +53,7 @@ local function twitterFallThrough()
 end
 
 ---Checks clipboard for URL and cleans tracking stuff
-local function twitterCleanUpLink()
+local function twitterCleanupLink()
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
 	local isTweet = clipb:find("^https?://twitter%.com")
@@ -86,7 +92,7 @@ TwitterWatcher = Aw.new(function(appName, event)
 	-- auto-close media windows and scroll up when deactivating
 	elseif appName == "Twitter" and event == Aw.deactivated then
 		TwitterScrollUp()
-		twitterCleanUpLink()
+		twitterCleanupLink()
 		twitterCloseMediaWindow()
 
 	-- do not focus Twitter after an app is terminated
@@ -95,15 +101,14 @@ TwitterWatcher = Aw.new(function(appName, event)
 
 	-- raise twitter when switching window to other app
 	elseif event == Aw.activated and appName ~= "Twitter" then
-		if not AppIsRunning("Twitter") then return end
-		local win = App("Twitter"):mainWindow()
-		if not win then return end
+		local frontWin = hs.window.focusedWindow()
+		local twitter = App("Twitter")
+		if not frontWin or not twitter then return end
 
-		if CheckSize(win, PseudoMaximized) or CheckSize(win, Centered) then
-			win:raise()
-			-- in case of active split, prevent left window of covering the sketchybar
-			if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
+		if CheckSize(frontWin, PseudoMaximized) or CheckSize(frontWin, Centered) then
+			TwitterToTheSide()
+		elseif CheckSize(frontWin, Maximized) then
+			twitter:hide()
 		end
-
 	end
 end):start()

@@ -95,11 +95,9 @@ end):start()
 -- Add dots when copypasting to from dev tools
 local function addCssSelectorLeadingDot()
 	if
-		not (
-			AppIsRunning("neovide")
-			and App("neovide"):mainWindow()
-			and App("neovide"):mainWindow():title():find("%.css$")
-		)
+		not AppIsRunning("neovide")
+		or not App("neovide"):mainWindow()
+		or not App("neovide"):mainWindow():title():find("%.css$")
 	then
 		return
 	end
@@ -114,35 +112,25 @@ local function addCssSelectorLeadingDot()
 	hs.pasteboard.setContents(clipb)
 end
 
-NeovideWatcher = Aw.new(function(appName, eventType, appObj)
+NeovideWatcher = Aw.new(function(appName, eventType)
 	if not appName or appName:lower() ~= "neovide" then return end
 
-	-- triggered on activation as well, since neovide as non-native app
-	-- often does not send a "launched" signal
-	if eventType == Aw.activated or eventType == Aw.launched then
+	if eventType == Aw.activated then
 		addCssSelectorLeadingDot()
-
-		-- maximize app
-		AsSoonAsAppRuns(appObj, function()
-			local win = appObj:mainWindow()
-			if
-				not win
-				or CheckSize(win, LeftHalf)
-				or CheckSize(win, RightHalf)
-				or CheckSize(win, BottomHalf)
-				or CheckSize(win, TopHalf)
-			then
-				return
-			end
-			local size = IsProjector() and Maximized or PseudoMaximized
-			MoveResize(win, size)
-		end)
 
 	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
 	elseif eventType == Aw.terminated then
 		RunWithDelays(5, function() hs.execute("pgrep neovide || killall nvim") end)
 	end
 end):start()
+
+-- HACK since neovide does not send a launch signal, triggering window resizing
+-- via it's URI scheme called on VimEnter
+UriScheme("enlarge-neovide-window", function()
+	local neovideWin = App("neovide"):mainWindow()
+	local size = IsProjector() and Maximized or PseudoMaximized
+	MoveResize(neovideWin, size)
+end)
 
 --------------------------------------------------------------------------------
 

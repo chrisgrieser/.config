@@ -120,15 +120,17 @@ end
 ---@param pos hs.geometry
 function MoveResize(win, pos)
 	-- guard clauses
-	if not win or not win:application() then return end
+	if
+		not win
+		or not win:application()
+		or CheckSize(win, pos) -- already correctly sized
+		or win:title() == "Quick Look"
+	then
+		return
+	end
+	local appsToIgnore = { "System Settings", "Twitter", "Transmission", "Alfred" }
 	local appName = win:application():name()
-	local appsToIgnore = {
-		"System Settings",
-		"Twitter",
-		"Transmission",
-		"Alfred",
-	}
-	if TableContains(appsToIgnore, appName) or win:title() == "Quick Look" then
+	if TableContains(appsToIgnore, appName) then
 		Notify(appName .. " cannot be resized properly.")
 		return
 	end
