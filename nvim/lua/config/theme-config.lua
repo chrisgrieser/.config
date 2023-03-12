@@ -9,10 +9,19 @@ end
 
 ---@param hlgroup string
 ---@param changes string
-function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
+local function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
 
 ---@param hlgroup string
 local function clearHighlight(hlgroup) cmd.highlight("clear " .. hlgroup) end
+
+--------------------------------------------------------------------------------
+
+-- SIGN-COLUMN ICONS
+local signIcons = { Error = "", Warn = "▲", Info = "", Hint = "" }
+for type, icon in pairs(signIcons) do
+	local hl = "DiagnosticSign" .. type
+	fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 --------------------------------------------------------------------------------
 
@@ -41,6 +50,8 @@ local function customHighlights()
 	linkHighlight("luaParenError.highlight", "NormalFloat")
 	linkHighlight("luaParenError", "NormalFloat")
 end
+
+--------------------------------------------------------------------------------
 
 local function themeModifications()
 	local mode = vim.opt.background:get()
@@ -99,6 +110,7 @@ local function themeModifications()
 		-- dawnfox
 	elseif theme == "dawnfox" then
 		setHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
+		setHighlight("ColorColumn", "guibg=#e8dcce")
 		setHighlight("VertSplit", "guifg=#b29b84")
 		setHighlight("ScrollView", "guibg=#303050")
 		for _, v in pairs(modes) do
@@ -114,6 +126,8 @@ local function themeModifications()
 		linkHighlight("NotifyINFOBody", "@define")
 	end
 end
+
+--------------------------------------------------------------------------------
 
 augroup("themeChange", {})
 autocmd("ColorScheme", {
