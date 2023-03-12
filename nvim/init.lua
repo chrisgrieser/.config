@@ -25,6 +25,5 @@ require("config.keybindings")
 
 require("config.textobjects")
 require("config.clipboard")
-require("config.build-system")
 require("config.user-commands")
 require("config.abbreviations")
