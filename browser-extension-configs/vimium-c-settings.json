@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "12/03/2023, 06:47:42",
-	"time": 1678600062674,
+	"@time": "12/03/2023, 07:05:36",
+	"time": 1678601136338,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -45,6 +45,7 @@
 		"idghocbbahafpfhjnfhpbfbmpegphmmp",
 		""
 	],
+	"grabBackFocus": true,
 	"keyLayout": 144,
 	"keyMappings": [
 		"#!no-check",
