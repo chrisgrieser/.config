@@ -48,6 +48,7 @@ end
 local function twitterCleanUpLink()
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
+	local isTweet = clipb:match("^https?://twitter%.com") 
 
 end
 
