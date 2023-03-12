@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "12/03/2023, 09:32:14",
-	"time": 1678609934883,
+	"@time": "12/03/2023, 09:47:18",
+	"time": 1678610838352,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -81,7 +81,7 @@
 		"map W closeOtherTabs",
 		"map w removeTab keepWindow=\"mayClose\"",
 		"map o removeTab keepWindow=\"mayClose\"",
-		"map x runKey keys=\"copyCurrentUrl+removeTab\"",
+		"map s runKey keys=\"copyCurrentUrl+removeTab\"",
 		"map u restoreTab",
 		"map yt duplicateTab",
 		"",
