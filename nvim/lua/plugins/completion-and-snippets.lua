@@ -120,7 +120,9 @@ local function cmpconfig()
 					cmp.select_next_item()
 				elseif require("neogen").jumpable() then
 					require("neogen").jump_next()
-				elseif require("luasnip").jumpable(1) and not(lineIsEmpty) then
+				elseif require("luasnip").jumpable(1) and not lineIsEmpty then
+					-- requiring non-empty line to prevent prevent jumps when
+					-- intending to indent inside a block
 					require("luasnip").jump(1)
 				else
 					fallback()
