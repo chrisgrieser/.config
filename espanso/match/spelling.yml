@@ -218,3 +218,11 @@ matches:
   - trigger: nru
     replace: nur
     word: true
+  - trigger: sjon
+    replace: json
+    propagate_casing: true
+    word: true
+  - trigger: mosue
+    replace: mouse
+    propagate_casing: true
+    word: true

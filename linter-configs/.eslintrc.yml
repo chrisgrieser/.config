@@ -20,17 +20,17 @@ globals:
   $: readonly
   Set: readonly
   Path: readonly
+  console: readonly
 
   # Obsidian
   tp: readonly # templater
   request: readonly
 
-
 rules:
   # Alfred
   no-unused-vars: 
     - warn
-    - varsIgnorePattern: "run" # jxa in Alfred
+    - varsIgnorePattern: run # jxa in Alfred
 
   #─────────────────────────────────────────────────────────────────────────────
 
@@ -48,7 +48,7 @@ rules:
     - min: 4
       max: 25
       properties: never
-      exceptions: [x, y, i, j, id, min, max, app, str, int, out, a, b, num, url, run]
+      exceptions: [x, y, i, j, id, min, max, app, str, int, out, a, b, num, url, run, arr, tag]
   no-underscore-dangle: warn
   no-shadow:
     - warn

@@ -56,23 +56,28 @@ end
 
 --------------------------------------------------------------------------------
 
+-- if an app with bg-transparency is activated, hide all other apps
+-- if such an app is terminated, unhide them again
 TransBgAppWatcher = Aw.new(function(appName, event, appObj)
 	local transBgApp = { "neovide", "Neovide", "Obsidian", "kitty", "Alacritty", "alacritty" }
 	if IsProjector() or not (TableContains(transBgApp, appName)) then return end
 
 	if event == Aw.terminated then
 		unHideAll()
-	elseif event == Aw.launched then
-		AsSoonAsAppRuns(appObj, function() hideOthers(appObj) end)
 	elseif event == Aw.activated then
 		hideOthers(appObj)
+		AsSoonAsAppRuns(appObj, function() hideOthers(appObj) end)
 	end
 end):start()
 
--- extra run for neovide startup necessary, since it does not send a
--- launch signaal and also the "AsSoonAsAppRuns" condition does not work well
--- this UriScheme is triggered on neovim launch
-UriScheme("hide-other-than-neovide", function() hideOthers(App("neovide")) end)
+-- extra run for neovide startup necessary, since they do not send a
+-- launch signal and also the `AsSoonAsAppRuns` condition does not work well.
+-- in addition, `RunDelayed` also does not work well due to varying startup
+-- times. Therefore, this UriScheme is called on neovim startup in
+-- config/gui-settings.lua
+UriScheme("hide-other-than-neovide", function()
+	RunWithDelays({ 0, 0.1, 0.2 }, function() hideOthers(App("neovide")) end)
+end)
 
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
 AutoTileAppWatcher = Aw.new(function(appName, eventType, appObj)
