@@ -51,10 +51,12 @@ rules:
                 tell application "Finder"
                   activate
                   open the trash
-                end tell'
-          - { key_code: vk_none, hold_down_milliseconds: 150 }
-          - key_code: "2" # list view
-            modifiers: [command]
+                end tell
+                tell application "System Events\" to tell process "Finder"",
+                set frontmost to true,
+                click menu item \"${2:item}\" of menu \"${3:menu}\" of menu bar 1,
+                  end tell
+                '
       # Hyper + F: Open $WD / $DOTFILE_FOLDER
       - type: basic
         from: {key_code: f, modifiers: {mandatory: [command, control, shift, option]}}

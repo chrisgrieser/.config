@@ -75,19 +75,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3EBC4FD3-8668-45CA-88AD-94829E028C95</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>AFEFE0A4-FE91-4A87-9942-C5C777CCE5C2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</key>
 		<array>
 			<dict>
@@ -250,19 +237,6 @@
 				<string></string>
 				<key>vitoclose</key>
 				<true/>
-			</dict>
-		</array>
-		<key>AF85AB81-9BE3-4518-85D3-C5088521F862</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3EBC4FD3-8668-45CA-88AD-94829E028C95</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
 			</dict>
 		</array>
 		<key>BC540696-9F8F-4C3E-A49D-75AB31EF690F</key>
@@ -536,148 +510,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>downgit</string>
-				<key>subtext</key>
-				<string>Current Browser Tab</string>
-				<key>text</key>
-				<string>Download via Downgit</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>AF85AB81-9BE3-4518-85D3-C5088521F862</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>downgit.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>AFEFE0A4-FE91-4A87-9942-C5C777CCE5C2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
-
--- funktioniert auch mit der Youtube Webapp</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>../get-url-from-browser.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3EBC4FD3-8668-45CA-88AD-94829E028C95</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>58000537-FC4F-4EEC-90D9-C546C645AA78</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>clone-my-repo.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>5ACE5786-6B82-46EC-86BA-A1727CCF6F8D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⏳Cloning…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -750,15 +582,46 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>path</key>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
 				<string>{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.browseinterminal</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>CC7C190D-D205-4F5B-A0DC-2A6D64736EC7</string>
+			<string>58000537-FC4F-4EEC-90D9-C546C645AA78</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>clone-my-repo.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -818,6 +681,48 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>4C690E73-DC85-438E-B8AA-52CD91D40CDA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>5ACE5786-6B82-46EC-86BA-A1727CCF6F8D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳Cloning…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>CC7C190D-D205-4F5B-A0DC-2A6D64736EC7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1179,17 +1084,6 @@ echo "$url"</string>
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
-		<key>3EBC4FD3-8668-45CA-88AD-94829E028C95</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>get Browser URL</string>
-			<key>xpos</key>
-			<real>825</real>
-			<key>ypos</key>
-			<real>165</real>
-		</dict>
 		<key>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</key>
 		<dict>
 			<key>colorindex</key>
@@ -1206,9 +1100,9 @@ echo "$url"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>980</real>
+			<real>990</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>325</real>
 		</dict>
 		<key>58000537-FC4F-4EEC-90D9-C546C645AA78</key>
 		<dict>
@@ -1302,7 +1196,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>660</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>150</real>
 		</dict>
 		<key>A9C9D34F-A692-412A-9152-2BC3E99B51BE</key>
 		<dict>
@@ -1326,32 +1220,14 @@ echo "$url"</string>
 			<key>ypos</key>
 			<real>690</real>
 		</dict>
-		<key>AF85AB81-9BE3-4518-85D3-C5088521F862</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>655</real>
-			<key>ypos</key>
-			<real>165</real>
-		</dict>
-		<key>AFEFE0A4-FE91-4A87-9942-C5C777CCE5C2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>990</real>
-			<key>ypos</key>
-			<real>165</real>
-		</dict>
 		<key>BC540696-9F8F-4C3E-A49D-75AB31EF690F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>820</real>
+			<real>830</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>325</real>
 		</dict>
 		<key>C5EA77C5-8A78-4563-A304-97626E832D20</key>
 		<dict>
@@ -1362,7 +1238,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>825</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>150</real>
 		</dict>
 		<key>C742BD02-85C0-47F8-9A2A-7DF4DC657EE1</key>
 		<dict>
@@ -1382,9 +1258,9 @@ echo "$url"</string>
 			<key>note</key>
 			<string>open at remote</string>
 			<key>xpos</key>
-			<real>655</real>
+			<real>665</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>325</real>
 		</dict>
 		<key>CC7C190D-D205-4F5B-A0DC-2A6D64736EC7</key>
 		<dict>

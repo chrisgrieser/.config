@@ -95,8 +95,8 @@
 		"prefix": "if .. then",
 		"body": "if [[ \"$${1:var}\" ]]; then\n\t$0\nfi"
 	},
-	"check installed": {
-		"prefix": "check installed",
+	"check if installed": {
+		"prefix": "check if installed",
 		"body": "if ! command -v ${1:cli} &>/dev/null; then echo \"${1:cli} not installed.\" && return 1; fi"
 	},
 	"check if in git repo": {
