@@ -56,8 +56,7 @@ BiweeklyTimer = hs.timer
 --------------------------------------------------------------------------------
 
 local function sleepMovieApps()
-	local minutesIdle = hs.host.idleTime() / 60
-	if minutesIdle < 30 then return end
+	if not IdleMins(30) then return end
 
 	-- no need to quit IINA it autoquits
 	QuitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix" }
