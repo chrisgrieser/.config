@@ -102,8 +102,7 @@ keymap("n", "gC", "g,", { desc = "goto previous change" })
 
 -- QUICKFIX
 -- make cnext loop back https://vi.stackexchange.com/a/8535
--- stylua: ignore
-keymap( "n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]], { desc = "Next Quickfix" })
+keymap("n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]], { desc = "Next Quickfix" })
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " Quickfix list" })
 keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = "Clear Quickfix List" })
 
@@ -155,11 +154,9 @@ keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc 
 keymap("n", "<leader>w", cmd.ISwapWith, { desc = "弄 swap nodes" })
 
 -- search & replace
--- stylua: ignore start
 keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//gI<Left><Left><Left>]], { desc = "弄 :substitute" })
 keymap("x", "<leader>f", ":s///gI<Left><Left><Left><Left>", { desc = "substitute" })
 keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "弄 Structural search & replace" })
--- stylua: ignore end
 keymap("n", "<leader>n", ":%normal ", { desc = "弄 :normal" })
 keymap("x", "<leader>n", ":normal ", { desc = "弄 :normal" })
 
@@ -234,22 +231,13 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 -- BUFFERS & WINDOWS & SPLITS
 
 -- for consistency with terminal buffers also <S-CR>
-
-keymap(
-	"n",
-	"<S-CR>",
-	function() require("funcs.alt-alt").altBufferWindow() end,
-	{ desc = "switch to alt buffer/window" }
-)
+-- stylua: ignore start
+keymap("n", "<S-CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
 keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
 
-keymap(
-	{ "n", "x", "i" },
-	"<D-w>",
-	function() require("funcs.alt-alt").betterClose() end,
-	{ desc = "close buffer/window/tab" }
-)
+keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window/tab" })
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " Open Buffers" })
+-- stylua: ignore end
 
 keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
 keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize (-)" })

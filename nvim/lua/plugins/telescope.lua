@@ -9,10 +9,8 @@ local keymappings = {
 	["<Up>"] = "move_selection_previous",
 	["<Down>"] = "move_selection_next",
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
-	["<Tab>"] = function(prompt) -- multi-select
-		require("telescope.actions").toggle_selection(prompt)
-		require("telescope.actions").move_selection_next(prompt)
-	end,
+	["Tab"] = "toggle_selection", 
+	["<D-a>"] = "select_all", 
 }
 
 local function telescopeConfig()
@@ -109,12 +107,12 @@ local function telescopeConfig()
 				},
 			},
 			lsp_document_symbols = {
-				prompt_prefix = "* ",
+				prompt_prefix = "璉 ",
 				ignore_symbols = { "boolean", "number" }, -- markdown headings are symbol-type "string"
 				fname_width = 17,
 			},
 			lsp_workspace_symbols = {
-				prompt_prefix = "W* ",
+				prompt_prefix = "璉 ",
 				ignore_symbols = { "string", "boolean", "number" },
 				fname_width = 17,
 			},
@@ -130,7 +128,7 @@ local function telescopeConfig()
 				no_ignore = false, -- use fd ignore files
 			},
 			keymaps = { prompt_prefix = "  ", modes = { "n", "i", "c", "x", "o", "t" } },
-			oldfiles = { prompt_prefix = " " },
+			oldfiles = { prompt_prefix = " " },
 			highlights = { prompt_prefix = " " },
 			buffers = {
 				prompt_prefix = "﬘ ",
@@ -173,13 +171,13 @@ local function telescopeConfig()
 		extensions = {
 			file_browser = {
 				prompt_prefix = " ",
-				-- depth = false,
-				auto_depth = 99,
+				depth = false,
+				-- auto_depth = 99,
 				hidden = true,
 				display_stat = false,
 				git_status = false,
 				group = true,
-				hide_parent_dir = true,
+				hide_parent_dir = false,
 				select_buffer = true,
 				mappings = {
 					["i"] = {
@@ -189,6 +187,7 @@ local function telescopeConfig()
 						["<C-d>"] = require("telescope._extensions.file_browser.actions").copy,
 						["<D-BS>"] = require("telescope._extensions.file_browser.actions").remove,
 						["<D-b>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
+						["<D-a>"] = require("telescope._extensions.file_browser.actions").select_all,
 					},
 				},
 			},
