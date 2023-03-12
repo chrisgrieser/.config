@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "12/03/2023, 09:47:18",
-	"time": 1678610838352,
+	"@time": "12/03/2023, 13:18:53",
+	"time": 1678623533837,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -19,7 +19,7 @@
 			"pattern": ":https://www.inoreader.com/"
 		},
 		{
-			"passKeys": "j k m o ",
+			"passKeys": "j k ",
 			"pattern": "^https:\\/\\/www\\.google(?:.(?!&tbm=isch))*$"
 		},
 		{
@@ -87,6 +87,8 @@
 		"",
 		"map a previousTab",
 		"map d nextTab",
+		"map A moveTabLeft",
+		"map D moveTabRight",
 		"map gb Vomnibar.activateTabSelection",
 		"map t Vomnibar.activateTabSelection",
 		"",

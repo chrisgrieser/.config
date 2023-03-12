@@ -12,6 +12,10 @@ if not opt_local.wrap:get() then require("funcs.quality-of-life").toggleWrap() e
 opt_local.signcolumn = "yes:9"
 
 --------------------------------------------------------------------------------
+
+-- Build / Preview
+keymap("n", "<leader>r", "<Plug>MarkdownPreviewToggle", { desc = "  Preview", buffer = true })
+
 -- stylua: ignore start
 -- link textobj
 keymap({ "o", "x" }, "il", function() require("various-textobjs").mdlink(true) end, { desc = "inner md link textobj", buffer = true })
@@ -31,9 +35,6 @@ keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], { desc = " # Previous 
 
 --------------------------------------------------------------------------------
 -- GUI KEYBINDINGS
-
--- cmd+r: Markdown Preview
-keymap("n", "<D-r>", "<Plug>MarkdownPreviewToggle", { desc = "  Preview", buffer = true })
 
 -- cmd+k: markdown link
 keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = "  Link", buffer = true })
