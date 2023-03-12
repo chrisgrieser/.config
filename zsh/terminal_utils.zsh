@@ -1,8 +1,8 @@
 # Quick Open File/Folder
 function o() {
-	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && exit 1; fi
-	if ! command -v fd &>/dev/null; then echo "fd not installed." && exit 1; fi
-	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && exit 1; fi
+	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
+	if ! command -v fd &>/dev/null; then echo "fd not installed." && return 1; fi
+	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
 
 	local selected
 	local input="$*"
@@ -44,7 +44,7 @@ function o() {
 }
 
 function directoryInspect() {
-	if ! command -v exa &>/dev/null; then echo "exa not installed." && exit 1; fi
+	if ! command -v exa &>/dev/null; then echo "exa not installed." && return 1; fi
 
 	if command git --no-optional-locks rev-parse --is-inside-work-tree &>/dev/null; then
 		git --no-optional-locks status --short
@@ -70,6 +70,9 @@ function d() {
 	else
 		mv "$@" ~/.Trash/
 	fi
+	# shellcheck disable=2181
+	# run in background to avoid delay; run in subshell to suppress output
+	[[ $? -eq 0 ]] && (afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
 }
 
 # draws a separator line with terminal width
@@ -84,7 +87,7 @@ function separator() {
 
 # smarter z/cd (alternative to https://blog.meain.io/2019/automatically-ls-after-cd/)
 function z() {
-	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && exit 1; fi
+	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
 	if [[ -f "$1" ]]; then # if a file, go to the file's directory instead of failing
 		__zoxide_z "$(dirname "$1")"
 	else
@@ -95,7 +98,7 @@ function z() {
 }
 
 function zi() {
-	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && exit 1; fi
+	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
 	__zoxide_zi
 	directoryInspect
 }
@@ -105,11 +108,11 @@ function p() {
 	qlmanage -p "$1" &>/dev/null
 }
 
-# cd to last directory before quitting
+# cd to last directory before quitting. Requires setup in `.zlogout`
 function ld() {
 	last_pwd_location="$DOTFILE_FOLDER/zsh/.last_pwd"
-	if [[ ! -f "$last_pwd_location" ]] ; then
-		print "\033[1;33mNo Last PWD available."	
+	if [[ ! -f "$last_pwd_location" ]]; then
+		print "\033[1;33mNo Last PWD available."
 	else
 		last_pwd=$(cat "$DOTFILE_FOLDER/zsh/.last_pwd")
 		z "$last_pwd"
@@ -125,7 +128,7 @@ function lc() {
 
 # save [l]ast [c]ommand(s) in [D]rafts
 function lcd() {
-	num=${1-"1"} # default: 1 last command
+	num=${1-"1"} # default: only one (1) last command
 	local timestamp
 	timestamp="$(date +%Y-%m-%d_%H-%M-%S)"
 	local drafts_inbox="$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/"

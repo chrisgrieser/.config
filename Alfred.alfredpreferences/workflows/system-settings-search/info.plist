@@ -292,19 +292,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4519860D-E07C-496C-B55D-AAEAA2E78F1C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E354F08C-22C8-460C-BE96-7E9206B13CC9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>47194840-EFFD-41C6-A534-A8C1E72054B6</key>
 		<array>
 			<dict>
@@ -331,19 +318,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4E11D9B5-2FBA-48FF-827A-B938A220C520</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>285881D2-1A39-4E8F-9664-D4137DE40140</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5271B0D3-9DE1-4163-9A3E-CF2C294EF1AE</key>
 		<array>
 			<dict>
@@ -362,32 +336,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>47194840-EFFD-41C6-A534-A8C1E72054B6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5E230130-79A0-4603-AA6B-1AD0C5107F52</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B936628E-A67B-4FB7-8D3E-6697DEF9E962</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>62967DDE-6533-4E4A-A093-5E8039C12853</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1E934427-963C-4ADD-A497-A65FF46DAB61</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -479,19 +427,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8DF0DD15-2F02-4FAA-A0EF-B435B4E86A6C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>86B788A2-DC91-4768-9827-A0C7E7B0BC29</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>05B47100-852F-48E0-8250-F0C303EEC2ED</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -879,19 +814,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>ED3CE1D3-721C-448D-8EE9-3F073773C2BA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D9265DEF-6A05-43E3-9D8D-DF376C242E91</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>EEE44FA0-2C27-4B2A-B1AD-EF2CC79BCBF9</key>
 		<array>
 			<dict>
@@ -1013,42 +935,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>sound files</string>
-				<key>subtext</key>
-				<string>/System/Library/Sounds/</string>
-				<key>text</key>
-				<string>Sound Files</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>62967DDE-6533-4E4A-A093-5E8039C12853</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>/System/Library/Sounds</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>1E934427-963C-4ADD-A497-A65FF46DAB61</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string>x-apple.systempreferences:com.apple.SystemProfiler.AboutExtension</string>
 				<key>passthroughargument</key>
@@ -1083,42 +969,6 @@
 			<string>B7B9D159-E1DE-4C44-B7A9-8C7577CD5DBE</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>application support</string>
-				<key>subtext</key>
-				<string>~/Library/Application Support</string>
-				<key>text</key>
-				<string>Application Support</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>5E230130-79A0-4603-AA6B-1AD0C5107F52</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Application Support</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>B936628E-A67B-4FB7-8D3E-6697DEF9E962</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1161,42 +1011,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>E354F08C-22C8-460C-BE96-7E9206B13CC9</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>library</string>
-				<key>subtext</key>
-				<string>~/Library/</string>
-				<key>text</key>
-				<string>Library</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>4519860D-E07C-496C-B55D-AAEAA2E78F1C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string>x-apple.systempreferences:com.apple.Appearance-Settings.extension</string>
 				<key>passthroughargument</key>
@@ -1229,42 +1043,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>10BB0E7F-7A7B-47CA-B6BF-A2E88447DBDA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Preferences</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>285881D2-1A39-4E8F-9664-D4137DE40140</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>preferences</string>
-				<key>subtext</key>
-				<string>~/Library/Preferences</string>
-				<key>text</key>
-				<string>Preferences</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>4E11D9B5-2FBA-48FF-827A-B938A220C520</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1310,42 +1088,6 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>containers</string>
-				<key>subtext</key>
-				<string>~/Library/Containers</string>
-				<key>text</key>
-				<string>Containers</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>86B788A2-DC91-4768-9827-A0C7E7B0BC29</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Containers</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>05B47100-852F-48E0-8250-F0C303EEC2ED</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
 				<string>bluetooth</string>
@@ -1360,42 +1102,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>98B79881-C483-4E18-B1F2-21BDAFB920AA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>D9265DEF-6A05-43E3-9D8D-DF376C242E91</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>home</string>
-				<key>subtext</key>
-				<string>~</string>
-				<key>text</key>
-				<string>🏠 Home Folder</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>ED3CE1D3-721C-448D-8EE9-3F073773C2BA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2501,15 +2207,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 ![Alfred search for screen](images/about/screen.png)</string>
 	<key>uidata</key>
 	<dict>
-		<key>05B47100-852F-48E0-8250-F0C303EEC2ED</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>815</real>
-			<key>ypos</key>
-			<real>525</real>
-		</dict>
 		<key>0608C0AA-05B8-4CE2-BF9D-929EC1D23ED0</key>
 		<dict>
 			<key>xpos</key>
@@ -2575,15 +2272,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>ypos</key>
 			<real>1755</real>
 		</dict>
-		<key>1E934427-963C-4ADD-A497-A65FF46DAB61</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>815</real>
-			<key>ypos</key>
-			<real>40</real>
-		</dict>
 		<key>1F30947A-6478-415C-8496-35E5FF7E3183</key>
 		<dict>
 			<key>colorindex</key>
@@ -2599,15 +2287,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<real>240</real>
 			<key>ypos</key>
 			<real>2475</real>
-		</dict>
-		<key>285881D2-1A39-4E8F-9664-D4137DE40140</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>815</real>
-			<key>ypos</key>
-			<real>405</real>
 		</dict>
 		<key>2CB67EEF-BC29-4898-AE0C-34104B40FE99</key>
 		<dict>
@@ -2698,15 +2377,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>ypos</key>
 			<real>1965</real>
 		</dict>
-		<key>4519860D-E07C-496C-B55D-AAEAA2E78F1C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>610</real>
-			<key>ypos</key>
-			<real>280</real>
-		</dict>
 		<key>47194840-EFFD-41C6-A534-A8C1E72054B6</key>
 		<dict>
 			<key>xpos</key>
@@ -2721,15 +2391,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>ypos</key>
 			<real>185</real>
 		</dict>
-		<key>4E11D9B5-2FBA-48FF-827A-B938A220C520</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>610</real>
-			<key>ypos</key>
-			<real>405</real>
-		</dict>
 		<key>5271B0D3-9DE1-4163-9A3E-CF2C294EF1AE</key>
 		<dict>
 			<key>xpos</key>
@@ -2743,24 +2404,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<real>60</real>
 			<key>ypos</key>
 			<real>1845</real>
-		</dict>
-		<key>5E230130-79A0-4603-AA6B-1AD0C5107F52</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>610</real>
-			<key>ypos</key>
-			<real>160</real>
-		</dict>
-		<key>62967DDE-6533-4E4A-A093-5E8039C12853</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>610</real>
-			<key>ypos</key>
-			<real>40</real>
 		</dict>
 		<key>65BD6A90-B01C-4699-ACA2-9A58F7949E26</key>
 		<dict>
@@ -2810,15 +2453,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<real>240</real>
 			<key>ypos</key>
 			<real>2235</real>
-		</dict>
-		<key>86B788A2-DC91-4768-9827-A0C7E7B0BC29</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>610</real>
-			<key>ypos</key>
-			<real>525</real>
 		</dict>
 		<key>8B7B3372-147B-42C1-9FCC-63D3C98B2227</key>
 		<dict>
@@ -2929,15 +2563,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
-		<key>B936628E-A67B-4FB7-8D3E-6697DEF9E962</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>815</real>
-			<key>ypos</key>
-			<real>160</real>
-		</dict>
 		<key>BDECD53D-5065-4FAF-A7C1-17257C5E9EB6</key>
 		<dict>
 			<key>xpos</key>
@@ -3001,15 +2626,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>ypos</key>
 			<real>1270</real>
 		</dict>
-		<key>D9265DEF-6A05-43E3-9D8D-DF376C242E91</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>815</real>
-			<key>ypos</key>
-			<real>650</real>
-		</dict>
 		<key>DD1926A0-F642-425A-ADD7-8ED32692EE46</key>
 		<dict>
 			<key>xpos</key>
@@ -3030,15 +2646,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<real>240</real>
 			<key>ypos</key>
 			<real>1385</real>
-		</dict>
-		<key>E354F08C-22C8-460C-BE96-7E9206B13CC9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>815</real>
-			<key>ypos</key>
-			<real>280</real>
 		</dict>
 		<key>EA53A7BA-07DA-4429-8B26-5002562C3AF9</key>
 		<dict>
@@ -3062,15 +2669,6 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<real>245</real>
 			<key>ypos</key>
 			<real>3185</real>
-		</dict>
-		<key>ED3CE1D3-721C-448D-8EE9-3F073773C2BA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>610</real>
-			<key>ypos</key>
-			<real>650</real>
 		</dict>
 		<key>EEE44FA0-2C27-4B2A-B1AD-EF2CC79BCBF9</key>
 		<dict>
