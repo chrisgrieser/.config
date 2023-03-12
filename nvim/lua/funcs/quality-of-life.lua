@@ -2,6 +2,7 @@ local M = {}
 --------------------------------------------------------------------------------
 local bo = vim.bo
 local b = vim.b
+local opt = vim.opt
 local fn = vim.fn
 local cmd = vim.cmd
 local lineNo = vim.fn.line
@@ -25,7 +26,7 @@ function M.commentHr()
 	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
 
 	if comStr == "" then
-		vim.notify(" No commentstring for this filetype available.", logWarn)
+		vim.notify(" No commentstring for this filetype available.", vim.log.levels.WARN)
 		return
 	end
 	if comStr:find("-") then linechar = "-" end
@@ -58,7 +59,7 @@ end
 ---switches words under the cursor from `true` to `false` and similar cases
 function M.wordSwitch()
 	local iskeywBefore = opt.iskeyword:get()
-	vim.opt.iskeyword:remove { "_", "-", "." }
+	opt.iskeyword:remove { "_", "-", "." }
 
 	local words = {
 		{ "true", "false" },
@@ -80,6 +81,7 @@ function M.wordSwitch()
 		{ "before", "after" },
 		{ "and", "or" },
 		{ "next", "previous" },
+		{ "read", "write" },
 	}
 	local ft = bo.filetype
 	local ftWords -- 3rd item false if 2nd item shouldn't also switch to first
@@ -146,8 +148,8 @@ end
 -- UNDO
 
 -- Save Open time
-augroup("undoTimeMarker", {})
-autocmd("BufReadPost", {
+vim.api.nvim_create_augroup("undoTimeMarker", {})
+vim.api.nvim_create_autocmd("BufReadPost", {
 	group = "undoTimeMarker",
 	callback = function() b.timeOpened = os.time() end,
 })
