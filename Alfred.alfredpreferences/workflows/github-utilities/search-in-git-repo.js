@@ -61,6 +61,7 @@ const fileArray = app
 			case "bttpreset":
 			case "opml":
 			case "other":
+			case "plist":
 			case "url":
 			case "html":
 			case "folder":

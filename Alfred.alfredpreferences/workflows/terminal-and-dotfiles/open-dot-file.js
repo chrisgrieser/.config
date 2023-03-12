@@ -70,6 +70,7 @@ const fileArray = app
 			case "opml":
 			case "other":
 			case "url":
+			case "plist":
 			case "html":
 			case "folder":
 				iconObj = { type: "fileicon", path: absPath };

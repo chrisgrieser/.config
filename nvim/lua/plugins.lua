@@ -48,7 +48,7 @@ return {
 		event = "VimEnter",
 		config = function()
 			require("project_nvim").setup {
-				detection_methods = { "pattern" },
+				detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp
 				patterns = {
 					".git",
 					"package.json", -- node
@@ -80,7 +80,7 @@ return {
 			require("which-key").setup {
 				plugins = {
 					presets = {
-						operators = false,
+						operators = true,
 						motions = false,
 					},
 				},
