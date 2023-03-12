@@ -11,7 +11,7 @@ return {
 			require("Comment").setup {
 				opleader = {
 					line = "q",
-					block = "<leader>q",
+					block = false,
 				},
 				toggler = {
 					line = "qq",
@@ -41,6 +41,9 @@ return {
 			local callObjChar = "l"
 			local doubleSquareBracketObjChar = "R"
 
+			-- requires unmapping yS in the keymaps below
+			vim.keymap.set("n", "yS", "ys$", { desc = "surround to EoL", remap = true })
+
 			-- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L483
 			local config = require("nvim-surround.config")
 			require("nvim-surround").setup {
@@ -51,6 +54,14 @@ return {
 					["q"] = '"',
 					["z"] = "'",
 					["e"] = "`",
+				},
+				keymaps = {
+					visual = "s",
+					normal_line = "<Nop>",
+					normal_cur_line = "<Nop>",
+					visual_line = "<Nop>",
+					insert_line = "<Nop>",
+					insert = "<Nop>",
 				},
 				move_cursor = false,
 				surrounds = {
@@ -114,9 +125,7 @@ return {
 						delete = "^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
 					},
 					[conditionObjChar] = {
-						find = function()
-							return config.get_selection { motion = "a" .. conditionObjChar }
-						end,
+						find = function() return config.get_selection { motion = "a" .. conditionObjChar } end,
 						delete = function()
 							local ft = bo.filetype
 							local patt
@@ -165,7 +174,7 @@ return {
 		"mg979/vim-visual-multi",
 		keys = { { "<D-j>", mode = { "n", "x" }, desc = "Multi-Cursor" } },
 	},
-	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true }, 
+	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true },
 	{ "bkad/CamelCaseMotion", event = "BufReadPost" },
 	{
 		"mbbill/undotree",
@@ -273,9 +282,7 @@ return {
 					-- smart switching of conditionals
 					if ft == "lua" and line:find("^%s*if.+then$") then
 						line = line:gsub("^(%s*)if", "%1elseif")
-					elseif
-						(ft == "bash" or ft == "zsh" or ft == "sh") and line:find("^%s*if.+then$")
-					then
+					elseif (ft == "bash" or ft == "zsh" or ft == "sh") and line:find("^%s*if.+then$") then
 						line = line:gsub("^(%s*)if", "%1elif")
 					elseif (ft == "javascript" or ft == "typescript") and line:find("^%s*if.+{$") then
 						line = line:gsub("^(%s*)if", "%1} else if")

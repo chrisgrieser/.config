@@ -16,5 +16,7 @@ cmd.iabbrev("retrun return")
 cmd.iabbrev("onyl only")
 cmd.iabbrev("esle else")
 cmd.iabbrev("chroe chore")
+cmd.iabbrev("ture true")
+cmd.iabbrev("treu true")
 
 --------------------------------------------------------------------------------
