@@ -4,9 +4,9 @@
 -- 2) apps should not cover up the sketchybar that I only have in the top right
 -- corner
 
---------------------------------------------------------------------------------
 require("lua.utils")
 require("lua.window-management")
+--------------------------------------------------------------------------------
 
 -- unhide all apps
 local function unHideAll()
@@ -96,5 +96,11 @@ end):start()
 -- prevent maximized window from covering sketchybar if they are unfocused
 -- pseudomaximized windows always get twitter to the side
 Wf_maxWindows = Wf.new(true):subscribe(Wf.windowUnfocused, function(win)
-	if not (IsProjector()) and CheckSize(win, Maximized) then win:application():hide() end
+	if 
+		not (IsProjector()) 
+		and CheckSize(win, Maximized)
+		and FrontAppName() ~= "Alfred" -- Alfred Compatibility Mode
+	then
+		win:application():hide()
+	end
 end)

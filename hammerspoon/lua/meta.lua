@@ -32,7 +32,7 @@ function CleanupConsole()
 	end
 
 	-- emphasize errors and warnings, remove double time-stamps
-	out = out:gsub("%d%d:%d%d:%d%d ERROR: ", "%1 🔴 ERROR") 
+	out = out:gsub("%d%d:%d%d:%d%d ERROR: ", "🔴 ERROR") 
 	out = out:gsub("%d%d:%d%d:%d%d %*%* Warning: ", "⚠️ WARN") 
 
 	hs.console.setConsole(out)
