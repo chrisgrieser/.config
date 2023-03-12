@@ -2,8 +2,13 @@ require("config.utils")
 -- https://neovide.dev/configuration.html
 --------------------------------------------------------------------------------
 
--- hide other apps so the GUI transparency is visible
-fn.system("open 'hammerspoon://hide-other-than-neovide'")
+-- hide other apps so the GUI transparency is visible.
+-- See hammerspoons `app-hider.lua`
+augroup("hideOthersViaHammerspoon", {})
+autocmd("VimEnter", {
+	group = "hideOthersViaHammerspoon",
+	callback = function() fn.system("open -g 'hammerspoon://hide-other-than-neovide'") end,
+})
 
 -- font size dependent on device
 local device = fn.hostname()
@@ -16,12 +21,8 @@ end
 --------------------------------------------------------------------------------
 
 local delta = 1.1
-keymap({"n", "x", "i"}, "<D-+>", function()
-	g.neovide_scale_factor = g.neovide_scale_factor * delta
-end)
-keymap({"n", "x", "i"}, "<D-->", function()
-	g.neovide_scale_factor = g.neovide_scale_factor / delta
-end)
+keymap({ "n", "x", "i" }, "<D-+>", function() g.neovide_scale_factor = g.neovide_scale_factor * delta end)
+keymap({ "n", "x", "i" }, "<D-->", function() g.neovide_scale_factor = g.neovide_scale_factor / delta end)
 
 -- Behavior
 g.neovide_confirm_quit = false
@@ -46,7 +47,7 @@ g.neovide_cursor_unfocused_outline_width = 0.1
 
 g.neovide_cursor_vfx_mode = "" -- railgun|torpedo|pixiedust|sonicboom|ripple|wireframe
 
-local particleModes = {"railgun", "torpedo", "pixiedust"}
+local particleModes = { "railgun", "torpedo", "pixiedust" }
 if vim.tbl_contains(particleModes, g.neovide_cursor_vfx_mode) then
 	g.neovide_cursor_vfx_particle_lifetime = 0.4
 	g.neovide_cursor_vfx_particle_density = 20.0

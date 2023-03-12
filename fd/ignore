@@ -12,6 +12,8 @@ Icon
 # useless stuff inside pseudo-apps
 **/*.app/*
 **/*.pxd/*
+*.alfredworkflow
+
 
 # INFO files
 INFO*

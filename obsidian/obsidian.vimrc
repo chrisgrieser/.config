@@ -118,7 +118,7 @@ vmap ü :caseSwitch
 """"""""""""""""""""""
 
 " [M]erge Lines
-" can't remap to J, cause there is no noremap; also the merge from Code Editor 
+" can't remap to J, cause there is no noremap; also the merge from Code Editor
 " Shortcuts plugin is smarter since it removes list prefixes
 exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
@@ -132,8 +132,8 @@ nmap &b& :blankBelow
 nmap o &b&i
 nmap O &a&i
 
-" Add Blank Line above/below 
-" HACK not using mz...`z since m remapped 
+" Add Blank Line above/below
+" HACK not using mz...`z since m remapped
 " HACK adding in ^d$ to clear the line from list markers from the o/O remapping above
 nmap = O<Esc>^"_d$j
 nmap _ o<Esc>^"_d$k
@@ -144,7 +144,7 @@ nmap _ o<Esc>^"_d$k
 
 " [a]i completion
 exmap aiComplete obcommand obsidian-textgenerator-plugin:generate-text
-nmap ,a :aiComplete 
+nmap ,a :aiComplete
 
 " [i]nspect commands in console
 nmap ,i :obcommand
@@ -243,10 +243,13 @@ nmap <CR> :altBuffer
 exmap contextualComment obcommand contextual-comments:advanced-comments
 nmap qq :contextualComment
 
+" insert horizontal divider, if current line is blank
+nmap qw :.s/^$/---/
+
 """"""""""""""""""""""
 " Folding
 """"""""""""""""""""""
-" Emulate vim folding command 
+" Emulate vim folding command
 exmap unfoldall obcommand editor:unfold-all
 exmap togglefold obcommand editor:toggle-fold
 exmap foldall obcommand editor:fold-all
@@ -313,4 +316,3 @@ map ,os :spellcheck
 map ,ow :readableLineLength
 " [O]ption: [d]iagnostics (language tool check)
 nmap ,od :enableDiagnostics
-

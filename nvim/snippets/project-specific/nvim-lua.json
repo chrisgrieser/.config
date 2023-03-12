@@ -39,8 +39,8 @@
 			"autocmd & augroup"
 		],
 		"body": [
-			"augroup (\"${1:groupname}\", {})",
-			"autocmd (\"${2:event}\", {",
+			"augroup(\"${1:groupname}\", {})",
+			"autocmd(\"${2:event}\", {",
 			"\tgroup = \"${1:groupname}\",",
 			"\tcallback = function()",
 			"\t\t$3",
@@ -54,8 +54,8 @@
 			"FileType autocmd"
 		],
 		"body": [
-			"augroup (\"${1:groupname}\", {})",
-			"autocmd (\"FileType\", {",
+			"augroup(\"${1:groupname}\", {})",
+			"autocmd(\"FileType\", {",
 			"\tgroup = \"${1:groupname}\",",
 			"\tpattern = \"${2:ft}\",",
 			"\tcallback = function()",
