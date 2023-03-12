@@ -131,7 +131,8 @@ function MoveResize(win, pos)
 		"Transmission",
 		"Alfred",
 	}
-	if TableContains(appsToIgnore, appName) then
+	if TableContains(appsToIgnore, appName) or win:title() ~= "Quick Look" then
+
 		Notify(appName .. " cannot be resized properly.")
 		return
 	end
@@ -142,7 +143,6 @@ function MoveResize(win, pos)
 	if
 		(pos == PseudoMaximized or pos == Centered)
 		and AppIsRunning("Twitter")
-		and win:title() ~= "Quick Look"
 	then
 		App("Twitter"):mainWindow():raise()
 	end
