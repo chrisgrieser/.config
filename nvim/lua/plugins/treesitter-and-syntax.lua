@@ -3,23 +3,27 @@ local function tsConfig()
 		ensure_installed = {
 			"javascript",
 			"typescript",
-			"html",
-			"help", -- vim help files
+			"regex",
 			"bash",
 			"css",
+			"scss",
 			"markdown",
 			"markdown_inline", -- fenced code blocks
 			"bibtex",
 			"gitignore",
 			"gitcommit",
 			"diff",
-			"regex",
 			"python",
 			"lua",
+			"luap", -- lua patterns
 			"toml",
 			"vim",
+			"ini",
 			"yaml",
 			"json",
+			"jsonc",
+			"html",
+			"help", -- vim help files
 		},
 		auto_install = false, -- install missing parsers when entering a buffer
 
@@ -28,7 +32,7 @@ local function tsConfig()
 			disable = { -- NOTE: these are the names of the parsers and not the filetype
 				"css", -- looks weird with css: https://github.com/tree-sitter/tree-sitter-css/issues/34
 				"scss",
-				"markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
+				-- "markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
 			},
 		},
 		-- use treesitter for autoindent with `=`
@@ -52,7 +56,7 @@ local function tsConfig()
 				keymaps = {
 					["av"] = "@assignment.rhs", -- [v]: value
 					["ak"] = "@assignment.lhs", -- [k]ey
-					["an"] = "@number.inner", 
+					["an"] = "@number.inner", -- [n]umber
 					["<CR>"] = "@return.outer", -- <CR>: return (`ar` already = a rectangular bracket)
 					["a/"] = "@regex.outer", -- /regex/
 					["i/"] = "@regex.inner", 

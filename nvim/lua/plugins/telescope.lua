@@ -174,7 +174,11 @@ local options = {
 			layout_strategy = "bottom_pane",
 		},
 	},
-	extensions = {},
+	extensions = {
+		file_browser = {
+			auto_depth = true,
+		},
+	},
 }
 
 return {
@@ -184,9 +188,11 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
+			"nvim-telescope/telescope-file-browser.nvim",
 		},
 		config = function()
 			require("telescope").setup(options)
+			require("telescope").load_extension("file_browser")
 		end,
 	},
 }
