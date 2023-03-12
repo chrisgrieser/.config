@@ -4,8 +4,9 @@ require("lua.utils")
 function TwitterScrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence
+	-- when browsing twitter itself, to not change tabs
 	local twitter = App("Twitter")
-	if not twitter or not twitter:mainWindow() then return end
+	if not twitter or not twitter:mainWindow() or FrontAppName() == "Twitter" then return end
 
 	Keystroke({ "cmd" }, "left", 1, twitter) -- go back
 	Keystroke({ "cmd" }, "1", 1, twitter) -- go to home tab
@@ -13,6 +14,7 @@ function TwitterScrollUp()
 
 	-- needs delays to wait for tweets loading
 	RunWithDelays({ 0.5, 1.5 }, function()
+		if FrontAppName() == "Twitter" then return end
 		Keystroke({ "cmd" }, "1", 1, twitter) -- scroll up
 		Keystroke({ "cmd" }, "up", 1, twitter) -- goto top
 	end)
@@ -22,7 +24,7 @@ function TwitterToTheSide()
 	if not AppIsRunning("Twitter") then return end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
-	local win = App("Twitter"):findWindow("Twitter") 
+	local win = App("Twitter"):findWindow("Twitter")
 	if not win then return end
 
 	win:setFrame(ToTheSide)
@@ -39,9 +41,7 @@ function TwitterFallThrough()
 			break
 		end
 	end
-	if nextWin and nextWin:id() ~= hs.window.frontmostWindow():id() then
-		nextWin:focus()
-	end
+	if nextWin and nextWin:id() ~= hs.window.frontmostWindow():id() then nextWin:focus() end
 end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
