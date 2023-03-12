@@ -16,14 +16,6 @@ keymap("n", "<leader>r", function()
 		end, 2000)
 		---@diagnostic enable: param-type-mismatch
 
-		-- nvim config
-	elseif ft == "lua" and parentFolder:find("nvim") then
-		cmd.source()
-		vim.notify(expand("%:r") .. " re-sourced")
-
-	-- Hammerspoon
-	elseif ft == "lua" and parentFolder:find("hammerspoon") then
-		os.execute([[open -g "hammerspoon://hs-reload"]])
 
 	-- Karabiner
 	elseif ft == "yaml" and parentFolder:find("/karabiner") then

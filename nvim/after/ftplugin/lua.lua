@@ -9,3 +9,14 @@ keymap("n", "g/", function()
 	fn.system("open '" .. url .. "'") -- opening method on macOS
 end, { desc = "Open next lua pattern in regex viewer", buffer = true })
 
+-- Build
+keymap("n", "<leader>r", function()
+	cmd.update()
+	local parentFolder = expand("%:p:h")
+	if parentFolder:find("nvim") then
+		cmd.source()
+		vim.notify(expand("%:r") .. " re-sourced.")
+	elseif parentFolder:find("hammerspoon") then
+		os.execute([[open -g "hammerspoon://hs-reload"]])
+	end
+end, {buffer = true, desc = " Reload"})
