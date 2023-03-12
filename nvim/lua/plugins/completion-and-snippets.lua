@@ -115,12 +115,12 @@ local function cmpconfig()
 
 			-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
 			["<Tab>"] = cmp.mapping(function(fallback)
-				local lineEmpty = vim.fn.getline("."):find("^%s$") ---@diagnostic disable-line: param-type-mismatch, undefined-field
+				local lineIsEmpty = vim.fn.getline("."):find("^%s*$") ---@diagnostic disable-line: param-type-mismatch, undefined-field
 				if cmp.visible() then
 					cmp.select_next_item()
 				elseif require("neogen").jumpable() then
 					require("neogen").jump_next()
-				elseif require("luasnip").jumpable(1) and not(lineEmpty) then
+				elseif require("luasnip").jumpable(1) and not(lineIsEmpty) then
 					require("luasnip").jump(1)
 				else
 					fallback()
