@@ -1,41 +1,39 @@
 require("lua.utils")
--- INFO unused, using auto-hide cursor extension in the browser
+-- Companion for Vimium like browser extensions which are unfortunately not able
+-- to hide the cursor properly
 --------------------------------------------------------------------------------
 
----"hides" the cursor by moving it to the bottom left
-local function pseudoHideCursor()
-	local screen = hs.mouse.getCurrentScreen()
-	if not screen then return end
-	local pos = {
-		x = 0,
-		y = screen:frame().h * 0.9,
-	}
-	hs.mouse.setRelativePosition(pos, screen)
-end
-
--- CURSOR HIDING in Browser
--- when Browser activates and j or k is pressed for the first time, hide cursor
+---when Browser activates and j or k is pressed for the first time, hide cursor
+---@param key string character that triggers cursor hiding
 local function hideCurAndPassThrough(key)
-	JHidesCursor:disable() -- so it only works the first time
+	-- disable to it works only once
+	JHidesCursor:disable()
 	KHidesCursor:disable()
 	CleanupConsole()
-	pseudoHideCursor()
-	Keystroke({}, key, 1) -- sending globally instead of to Browser, so it still works with Alfred
+
+	-- hide the cursor
+	local screen = hs.mouse.getCurrentScreen()
+	if not screen then return end
+	local bottomLeftPos = { x = 0, y = screen:frame().h * 0.9 }
+	hs.mouse.setRelativePosition(bottomLeftPos, screen)
+
+	-- pass through the key pressed
+	Keystroke({}, key, 1)
 end
 
-JHidesCursor = Hotkey({}, "j", function() hideCurAndPassThrough("j") end):disable()
-KHidesCursor = Hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
+JHidesCursor = Hotkey({}, "j", function() hideCurAndPassThrough("j") end)
+KHidesCursor = Hotkey({}, "k", function() hideCurAndPassThrough("k") end)
 
+-- watches browser, enables when hotkeys when browser is activated
 Jk_watcher = Aw.new(function(appName, eventType)
-	if eventType == Aw.activated then
-		if appName == "Vivaldi" then
-			JHidesCursor:enable()
-			KHidesCursor:enable()
-			CleanupConsole()
-		else
-			JHidesCursor:disable()
-			KHidesCursor:disable()
-			CleanupConsole()
-		end
+	if not eventType == Aw.activated then return end
+
+	if appName == "Vivaldi" then
+		JHidesCursor:enable()
+		KHidesCursor:enable()
+	else
+		JHidesCursor:disable()
+		KHidesCursor:disable()
 	end
+	CleanupConsole()
 end):start()
