@@ -33,7 +33,7 @@ return {
 			require("satellite").setup {
 				winblend = 60, -- winblend = transparency
 				handlers = {
-					-- displaying marks creates autocmds mapping of things with m,
+					-- displaying marks creates autocmd-mapping of things with m,
 					-- making m-bindings infeasable
 					marks = { enable = false },
 				},
@@ -44,14 +44,14 @@ return {
 	-- deactivated due to `gm` column
 	-- { -- nicer colorcolumn
 	-- 	"xiyaowong/virtcolumn.nvim",
-	-- 	init = function() vim.g.virtcolumn_char = "║" end,
 	-- 	event = "VeryLazy",
+	-- 	init = function() vim.g.virtcolumn_char = "║" end,
 	-- },
 
 	{ -- color previews & color utilities
 		"uga-rosa/ccc.nvim",
 		event = "BufEnter", -- cannot use VeryLazy, since the first buffer entered would not get highlights
-		cond = function() return vim.g.neovide or vim.g.goneovim end, -- only load in GUI
+		cond = vim.g.neovide, -- only load in GUI
 		config = function()
 			local ccc = require("ccc")
 			vim.opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal

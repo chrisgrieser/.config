@@ -31,7 +31,7 @@ function TwitterToTheSide()
 end
 
 -- ensure that twitter does not get focus, "falling through" to the next window
-function TwitterFallThrough()
+local function twitterFallThrough()
 	if FrontAppName() ~= "Twitter" then return end 
 
 	local visibleWins = hs.window:orderedWindows()
@@ -44,6 +44,14 @@ function TwitterFallThrough()
 	end
 	if nextWin and nextWin:id() ~= hs.window.frontmostWindow():id() then nextWin:focus() end
 end
+
+local function twitterCleanUpLink()
+	local clipb = hs.pasteboard.getContents()
+	if not clipb then return end
+
+end
+
+--------------------------------------------------------------------------------
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
 TwitterWatcher = Aw.new(function(appName, event)
@@ -58,6 +66,7 @@ TwitterWatcher = Aw.new(function(appName, event)
 	-- auto-close media windows and scroll up when deactivating
 	elseif appName == "Twitter" and event == Aw.deactivated then
 		TwitterScrollUp()
+		twitterCleanUpLink()
 
 		local twitter = App("Twitter")
 		for _, win in pairs(twitter:allWindows()) do
@@ -82,6 +91,6 @@ TwitterWatcher = Aw.new(function(appName, event)
 
 	-- do not focus Twitter after an app is terminated
 	elseif event == Aw.terminated and appName ~= "Twitter" then
-		RunWithDelays(0.1, TwitterFallThrough)
+		RunWithDelays(0.1, twitterFallThrough)
 	end
 end):start()

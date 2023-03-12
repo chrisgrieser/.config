@@ -93,7 +93,7 @@ end
 
 return {
 	"rcarriga/nvim-notify",
-	-- not lazyloaded, so notifications on entry are still shown
+	lazy = false, -- not lazyloaded, so notifications on entry are still shown
 	config = config,
-	cond = function() return vim.g.neovide or vim.g.goneovim end,
+	cond = vim.g.neovide, -- only load in GUI
 }
