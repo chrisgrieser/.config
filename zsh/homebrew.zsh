@@ -49,14 +49,11 @@ function update (){
 	print-section "NPM"
 	command npm update --location=global
 
-	print-section "Pip3"
-	pip3 install --upgrade "pdfannots"
-	pip3 install --upgrade "pdfminer.six"
-	pip3 install --upgrade "alacritty-colorscheme"
-
 	print-section "DUMP INSTALLS"
 	dump
 	
+	sketchybar --trigger homebrew-update # update counter now that updates have been done
+
 	print-section "\033[1;33mREMINDER"
 	echo "If sketchybar or espanso updated, they need to be re-given permissions."
 	osascript -e 'display notification "" with title "🍺 Homebrew finished."'

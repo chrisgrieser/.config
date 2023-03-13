@@ -108,6 +108,8 @@ sketchybar \
 	--set package-updates update_freq=43200 \
 	script="$PLUGIN_DIR/homebrew-package-tracker.sh" \
 	icon.font="Noto Emoji:Bold:16" \
+	--add event homebrew-update \
+	--subscribe package-updates homebrew-update \
 	\
 	--update
 
