@@ -86,8 +86,8 @@
 		"prefix": "ISO date",
 		"body": "new Date().toISOString().slice(0, 10);"
 	},
-	"for .. in (object-key loop)": {
-		"prefix": "for .. in (object-key loop)",
+	"for .. in (object-key)": {
+		"prefix": "for .. in (object-key)",
 		"body": [
 			"for (const ${1:key} in ${2:object}) {",
 			"\tif (${2:object}.hasOwnProperty(${1:key})) {",
@@ -97,8 +97,8 @@
 			"}"
 		]
 	},
-	"for .. of (array loop)": {
-		"prefix": "for .. of (array loop)",
+	"for .. of (array)": {
+		"prefix": "for .. of (array)",
 		"body": [
 			"for (const ${1:iterator} of ${2:object}) {",
 			"\t$0",

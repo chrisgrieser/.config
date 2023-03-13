@@ -132,11 +132,11 @@ return {
 				},
 				keymaps = {
 					visual = "s",
-					normal_line = "<Nop>",
-					normal_cur_line = "<Nop>",
-					visual_line = "<Nop>",
-					insert_line = "<Nop>",
-					insert = "<Nop>",
+					normal_line = false,
+					normal_cur_line = false,
+					visual_line = false,
+					insert_line = false,
+					insert = false,
 				},
 				move_cursor = false,
 				surrounds = {

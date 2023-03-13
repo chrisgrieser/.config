@@ -110,10 +110,23 @@ keymap(
 	"n",
 	"gq",
 	[[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]],
-	{ desc = "Next Quickfix" }
+	{ desc = " Next Quickfix" }
 )
-keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = "Clear Quickfix List" })
-keymap("n", "<leader>q", , { desc = "" })
+keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = " Clear Quickfix List" })
+
+keymap("n", "<leader>q", function()
+	if #vim.fn.getqflist() == 0 then
+		vim.notify(" Quickfix List empty.", logWarn)
+		return
+	end
+	cmd.copen()
+	require("replacer").run { rename_files = true }
+	for _, v in pairs(t) do
+		
+	end
+	keymap("n", "<D-w>", cmd.write, { desc = "Finish replacing", buffer = true })
+	keymap("n", "q", cmd.write, { desc = "Finish replacing", buffer = true, nowait = true })
+end, { desc = " Edit Quickfix Results" })
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -507,7 +520,6 @@ autocmd("FileType", {
 		"help",
 		"lspinfo",
 		"tsplayground",
-		"qf",
 		"lazy",
 		"notify",
 		"AppleScriptRunOutput",
