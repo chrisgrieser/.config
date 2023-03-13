@@ -1,3 +1,35 @@
+-- lsp attach function
+
+local signatureConfig = {
+
+				floating_window = false,
+				hint_prefix = "﬍ ",
+				hint_scheme = "NonText", -- highlight group
+}
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local bufnr = args.buf
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		local capabilities = client.server_capabilities
+
+		-- stylua: ignore
+		if capabilities.inlayHintProvider then
+			require("lsp-inlayhints").on_attach(client, bufnr)
+		end
+
+		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
+			require("nvim-navic").attach(client, bufnr)
+		end
+
+		if capabilities.signatureHelpProvider then
+			require "lsp_signature".on_attach(signatureConfig, bufnr)
+		end
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 return {
 	{ -- schemas for json-lsp
 		"b0o/SchemaStore.nvim",
@@ -27,7 +59,7 @@ return {
 	},
 	{
 		"ray-x/lsp_signature.nvim",
-		cmd = "InsertEnter", -- signatures only displayed in insert mode
+		lazy = true,
 		config = function()
 			require("lsp_signature").setup {
 				floating_window = false,
@@ -39,7 +71,20 @@ return {
 	{
 		-- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		"lvimuser/lsp-inlayhints.nvim",
-		lazy = true, -- loaded when attaching to supporting lsp servers
+		lazy = true, -- attaching to supporting lsp servers (see init function)
+		init = function()
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					local bufnr = args.buf
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+					local capabilities = client.server_capabilities
+
+					if capabilities.inlayHintProvider then
+						require("lsp-inlayhints").on_attach(client, bufnr)
+					end
+				end,
+			})
+		end,
 		config = function()
 			require("lsp-inlayhints").setup {
 				inlay_hints = {

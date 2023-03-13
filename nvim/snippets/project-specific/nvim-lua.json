@@ -34,25 +34,28 @@
 			"end)"
 		]
 	},
-	"autocmd & augroup": {
-		"prefix": [
-			"autocmd & augroup"
-		],
+	"autocmd (short)": {
+		"prefix": "autocmd (short)",
 		"body": [
-			"augroup(\"${1:groupname}\", {})",
-			"autocmd(\"${2:event}\", {",
-			"\tgroup = \"${1:groupname}\",",
+			"autocmd(\"${1:event}\", {",
 			"\tcallback = function()",
-			"\t\t$3",
+			"\t\t$0",
+			"\tend,",
+			"})"
+		]
+	},
+	"autocmd (long)": {
+		"prefix": "autocmd (long)",
+		"body": [
+			"vim.api.nvim_create_autocmd(\"${1:event}\", {",
+			"\tcallback = function()",
+			"\t\t$0",
 			"\tend,",
 			"})"
 		]
 	},
 	"autocmd (FileType)": {
-		"prefix": [
-			"autocmd",
-			"FileType autocmd"
-		],
+		"prefix": "autocmd (FileType)" ,
 		"body": [
 			"augroup(\"${1:groupname}\", {})",
 			"autocmd(\"FileType\", {",
