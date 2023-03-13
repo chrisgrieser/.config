@@ -11,9 +11,13 @@ return {
 	},
 	-- display line numbers while going to a line with `:`
 	{
-		"nacro90/numb.nvim", 
+		"nacro90/numb.nvim",
 		keys = ":",
 		config = function() require("numb").setup() end,
+	},
+	{
+		"gennaro-tedesco/nvim-jqx",
+		ft = { "json", "yaml" },
 	},
 
 	-----------------------------------------------------------------------------
