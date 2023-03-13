@@ -39,7 +39,7 @@ local function customHighlights()
 	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
 	linkHighlight("myAnnotations", "Todo")
-	fn.matchadd("myAnnotations", [[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|SIC\)\>]])
+	fn.matchadd("myAnnotations", [[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|SIC\|DEPRECATED\)\>]])
 
 	linkHighlight("IndentBlanklineContextChar", "Comment") -- active indent
 	setHighlight("rainbowcol1", "guifg=#7e8a95") -- rainbow brackets without aggressive red
