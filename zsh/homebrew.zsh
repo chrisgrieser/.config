@@ -59,6 +59,7 @@ function update (){
 	
 	print-section "\033[1;33mREMINDER"
 	echo "If sketchybar or espanso updated, they need to be re-given permissions."
+	osascript -e 'display notification "" with title "🍺 Homebrew finished."'
 }
 
 function report (){

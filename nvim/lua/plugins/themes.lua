@@ -15,7 +15,7 @@ local themes = {
 	-- "savq/melange",
 }
 
-g.darkTransparency = 0.90
+g.darkTransparency = 0.91
 g.lightTransparency = 0.92
 
 --------------------------------------------------------------------------------
