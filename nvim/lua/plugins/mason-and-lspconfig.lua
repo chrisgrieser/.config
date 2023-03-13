@@ -167,17 +167,10 @@ return {
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		init = function()
-			-- configure all lsp servers
-			for _, lsp in pairs(lsp_servers) do
-				local config = {
-					capabilities = lspCapabilities,
-					settings = lspSettings[lsp], -- if no settings, will assign nil and therefore to nothing
-					filetypes = lspFileTypes[lsp],
-				}
-				require("lspconfig")[lsp].setup(config)
-			end
 		end,
 		config = function()
+
+
 			-- Border Styling
 			require("lspconfig.ui.windows").default_options.border = BorderStyle
 			vim.lsp.handlers["textDocument/hover"] =
