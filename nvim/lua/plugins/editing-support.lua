@@ -11,11 +11,11 @@ return {
 			require("Comment").setup {
 				opleader = {
 					line = "q",
-					block = false,
+					block = nil,
 				},
 				toggler = {
 					line = "qq",
-					block = "<leader>qq",
+					block = nil,
 				},
 				extra = {
 					eol = "Q",

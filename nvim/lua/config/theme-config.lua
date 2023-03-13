@@ -47,7 +47,7 @@ local function customHighlights()
 	linkHighlight("CodiVirtualText", "Comment") -- Codi
 	setHighlight("TSDefinition", " term=underline gui=underdotted") -- treesittter refactor focus
 	setHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
-	setHighlight("CleverFDefaultLabel", "gui=inverse cterm=inverse") -- clever-f
+	linkHighlight("CleverFDefaultLabel", "Hlargs") -- Clever-F
 
 	-- HACK for https://github.com/neovim/neovim/issues/20456
 	linkHighlight("luaParenError.highlight", "NormalFloat")
@@ -59,15 +59,15 @@ end
 local function themeModifications()
 	local mode = vim.opt.background:get()
 	local theme = g.colors_name
-	local modes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
+	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 	-- FIX lualine_a not getting bold in some themes
-	for _, v in pairs(modes) do
+	for _, v in pairs(vimModes) do
 		setHighlight("lualine_a_" .. v, "gui=bold")
 	end
 
 	-- tokyonight
 	if theme == "tokyonight" then
-		for _, v in pairs(modes) do
+		for _, v in pairs(vimModes) do
 			setHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
 			setHighlight("lualine_y_diff_added_" .. v, "guifg=#8cbf8e")
 		end
@@ -116,7 +116,7 @@ local function themeModifications()
 		setHighlight("ColorColumn", "guibg=#ebe1d5")
 		setHighlight("VertSplit", "guifg=#b29b84")
 		setHighlight("ScrollView", "guibg=#303050")
-		for _, v in pairs(modes) do
+		for _, v in pairs(vimModes) do
 			setHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
 		end
 
@@ -160,7 +160,7 @@ function SetThemeMode(mode)
 	cmd.colorscheme(targetTheme)
 end
 
--- set dark or light mode on neovim startup (requires macos)
+-- initialize dark or light mode on neovim startup (requires macos)
 local isDarkMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
 local targetMode = isDarkMode and "dark" or "light"
 SetThemeMode(targetMode)

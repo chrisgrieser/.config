@@ -6,7 +6,7 @@ function TwitterScrollUp()
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
 	local twitter = App("Twitter")
-	if not twitter or not twitter:mainWindow() or FrontAppName() == "Twitter" then return end
+	if not twitter or not twitter:mainWindow() or not twitter:isFrontmost() then return end
 
 	Keystroke({ "cmd" }, "left", 1, twitter) -- go back
 	Keystroke({ "cmd" }, "1", 1, twitter) -- go to home tab
@@ -14,7 +14,7 @@ function TwitterScrollUp()
 
 	-- needs delays to wait for tweets loading
 	RunWithDelays({ 0.5, 1.5 }, function()
-		if FrontAppName() == "Twitter" then return end
+		if twitter:isFrontmost() then return end
 		Keystroke({ "cmd" }, "1", 1, twitter) -- scroll up
 		Keystroke({ "cmd" }, "up", 1, twitter) -- goto top
 	end)
@@ -39,7 +39,6 @@ end
 
 -- ensure that twitter does not get focus, "falling through" to the next window
 local function twitterFallThrough()
-	Notify("beep")
 	if FrontAppName() ~= "Twitter" then return end
 
 	local visibleWins = hs.window:orderedWindows()
@@ -50,8 +49,9 @@ local function twitterFallThrough()
 			break
 		end
 	end
-	Notify("nextWin:", nextWin:title())
-	if nextWin and nextWin:id() ~= hs.window.frontmostWindow():id() then nextWin:focus() end
+	if not nextWin or nextWin:id() == hs.window.frontmostWindow():id() then return end
+
+	nextWin:focus()
 end
 
 ---Checks clipboard for URL and cleans tracking stuff
@@ -61,7 +61,6 @@ local function twitterCleanupLink()
 	local isTweet = clipb:find("^https?://twitter%.com")
 	if not isTweet then return end -- to not overwrite the clipboard to often for clipboard watchers
 
-	-- https://twitter.com/niklashoehne/status/1634896659992965122?s=61&t=UsI8J7q5JQmZp8X73Kr_Tw
 	local cleanURL = clipb:gsub("%?s=.*t=.*", "")
 	hs.pasteboard.setContents(cleanURL)
 end
@@ -99,10 +98,7 @@ TwitterWatcher = Aw.new(function(appName, event)
 
 	-- do not focus Twitter after an app is terminated
 	elseif event == Aw.terminated and appName ~= "Twitter" then
-		RunWithDelays(0.2, function ()
-			Notify("beep")
-			twitterFallThrough()	
-		end)
+		RunWithDelays({0.1, 0.3}, twitterFallThrough)
 
 	-- raise twitter when switching window to other app
 	elseif event == Aw.activated and appName ~= "Twitter" then
