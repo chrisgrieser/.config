@@ -155,18 +155,14 @@ return {
 			}
 		end,
 	},
-	{ -- lsp for nvim-lua config
-		"folke/neodev.nvim",
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = "folke/neodev.nvim",-- lsp for nvim-lua config
 		init = function()
 			-- INFO plugin must be setup before lua lsp-config setup
 			require("neodev").setup {
 				library = { plugins = false },
 			}
-		end,
-	},
-	{
-		"neovim/nvim-lspconfig",
-		init = function()
 			-- configure all lsp servers
 			for _, lsp in pairs(lsp_servers) do
 				local config = {

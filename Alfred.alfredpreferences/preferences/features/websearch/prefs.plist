@@ -131,19 +131,6 @@
 			<key>url</key>
 			<string>https://www.google.de/search?q={query}&amp;tbm=isch</string>
 		</dict>
-		<key>8F493343-1B11-4713-84B1-8896AF7CA854</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ud</string>
-			<key>text</key>
-			<string>Urban Dictionary: '{query}'</string>
-			<key>url</key>
-			<string>https://www.urbandictionary.com/define.php?term={query}</string>
-			<key>utf8</key>
-			<true/>
-		</dict>
 		<key>9672465E-E164-4221-9824-0E164A40E39B</key>
 		<dict>
 			<key>enabled</key>
