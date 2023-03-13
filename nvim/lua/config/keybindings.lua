@@ -105,14 +105,16 @@ keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
 
 -- QUICKFIX
--- make cnext loop back https://vi.stackexchange.com/a/8535
-keymap(
-	"n",
-	"gq",
-	[[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]],
-	{ desc = " Next Quickfix" }
-)
-keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = " Clear Quickfix List" })
+
+keymap("n", "gq", function()
+	if #vim.fn.getqflist() == 0 then
+		vim.notify(" Quickfix List empty.", logWarn)
+		return
+	end
+	-- [[:silent try | cnext | catch | cexpr [] | catch | endtry<CR><CR>]],
+	local wentToNext = pcall(function() cmd([[silent! cnext]]) end)
+	if not wentToNext then cmd([[silent! cfirst]]) end
+end, { desc = " Next Quickfix (clear on end)" })
 
 keymap("n", "<leader>q", function()
 	if #vim.fn.getqflist() == 0 then
@@ -121,11 +123,12 @@ keymap("n", "<leader>q", function()
 	end
 	cmd.copen()
 	require("replacer").run { rename_files = true }
-	for _, v in pairs(t) do
-		
+	for _, key in pairs { "<D-w>", "<D-s>", "q" } do
+		keymap("n", key, function()
+			cmd.write()
+			vim.notify(" Finished replacing.")
+		end, { desc = " Finish replacing", buffer = true, nowait = true })
 	end
-	keymap("n", "<D-w>", cmd.write, { desc = "Finish replacing", buffer = true })
-	keymap("n", "q", cmd.write, { desc = "Finish replacing", buffer = true, nowait = true })
 end, { desc = " Edit Quickfix Results" })
 
 --------------------------------------------------------------------------------
