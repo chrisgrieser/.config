@@ -4,7 +4,6 @@ return {
 		keys = { -- mnemonic: [q]uiet text
 			{ "Q", desc = "Append Comment at EoL" },
 			{ "q", mode = { "n", "x" }, desc = "Comment" },
-			{ "<leader>q", mode = { "n", "x" }, desc = "Block Comment" },
 		},
 		config = function()
 			require("Comment").setup {
@@ -24,18 +23,18 @@ return {
 			}
 		end,
 	},
-	{
+	{ -- annotation comments
 		"danymat/neogen",
 		lazy = true,
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("neogen").setup() end,
 	},
-	{
-		"gbprod/substitute.nvim", -- substitution & exchange operator
+	{-- substitution & exchange operator
+		"gbprod/substitute.nvim", 
 		lazy = true,
 		config = function() require("substitute").setup() end,
 	},
-	{
+	{-- duplicaton operator
 		"smjonas/duplicate.nvim",
 		keys = {
 			{ "yd", desc = "Duplicate" },

@@ -1,5 +1,5 @@
 return {
-	-- navigation
+	-- NAVIGATION
 	{ "bkad/CamelCaseMotion", event = "BufReadPost" },
 	{
 		"rhysd/clever-f.vim",
@@ -9,8 +9,7 @@ return {
 			vim.g.clever_f_chars_match_any_signs = " " -- space matches special chars
 		end,
 	},
-	-- display line numbers while going to a line with `:`
-	{
+	{ -- display line numbers while going to a line with `:`
 		"nacro90/numb.nvim",
 		keys = ":",
 		config = function() require("numb").setup() end,
@@ -47,8 +46,8 @@ return {
 			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
-	{-- swapping of nodes
-		"mizlan/iswap.nvim", 
+	{ -- swapping of nodes
+		"mizlan/iswap.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("iswap").setup { autoswap = true } end,
 		cmd = "ISwapWith",
@@ -65,8 +64,8 @@ return {
 			}
 		end,
 	},
-	{-- auto-bullets for markdown-like filetypes
-		"dkarter/bullets.vim", 
+	{ -- auto-bullets for markdown-like filetypes
+		"dkarter/bullets.vim",
 		ft = { "markdown", "text" },
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
 	},
