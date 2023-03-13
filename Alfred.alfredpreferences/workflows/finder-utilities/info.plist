@@ -702,17 +702,15 @@ IconIndex=0</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>finderWin=$(osascript -e 'tell application "Finder" to return POSIX path of (target of window 1 as alias)')
-
-alacritty --working-directory="$finderWin" --command vidir</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>browse-finder-win-in-vidir.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -970,7 +968,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<key>DCECF168-40C8-45B0-B812-81138DF798D4</key>
 		<dict>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>525</real>
 		</dict>

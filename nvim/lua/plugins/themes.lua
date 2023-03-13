@@ -4,9 +4,9 @@ local g = vim.g
 -- INFO first theme used for light mode 
 -- second for dark mode
 local themes = {
+	"EdenEast/nightfox.nvim",
 	"sainnhe/everforest",
 	-- "rebelot/kanagawa.nvim",
-	-- "EdenEast/nightfox.nvim",
 	-- { "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
 	-- "glepnir/zephyr-nvim",
 	-- "folke/tokyonight.nvim",
@@ -16,7 +16,7 @@ local themes = {
 }
 
 g.darkTransparency = 0.90
-g.lightTransparency = 0.93
+g.lightTransparency = 0.92
 
 --------------------------------------------------------------------------------
 
@@ -38,6 +38,9 @@ end
 
 g.lightTheme = getName(themes[1])
 g.darkTheme = #themes == 1 and g.lightTheme or getName(themes[2])
+
+-- account for special names
+if g.lightTheme == "nightfox" then g.lightTheme = "dawnfox" end
 
 --------------------------------------------------------------------------------
 
