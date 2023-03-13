@@ -54,7 +54,7 @@ function M.altFileStatusline()
 	elseif altWindow() and altWindow():find("^term:") then
 		return " Terminal" 
 	elseif altWindow() then
-		return "  " .. altWindow()
+		return "  " .. vim.fs.basename(altWindow()) ---@diagnostic disable-line: param-type-mismatch
 	elseif altFile == "" and altOldfile() then
 		return " " .. vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
 	elseif curFile == altFile then -- same name, different file
@@ -79,13 +79,12 @@ function M.altBufferWindow()
 	if require("satellite") then cmd.SatelliteRefresh() end
 end
 
----Close window/buffer in that priority
+---Close window/buffer
 function M.betterClose()
 	local openBuffers = fn.getbufinfo { buflisted = 1 }
 	local bufToDel = expand("%:p")
 
 	if bo.modifiable then cmd.update() end
-	cmd.nohlsearch()
 
 	if #openBuffers == 1 then
 		vim.notify("Only one buffer open.", logWarn)
