@@ -59,7 +59,7 @@ end
 ---@param app string name of the app
 local function quitter(app)
 	if app == "Drafts" and getDraftsCount() > 0 then return end
-	print("⏹️ AutoQuitter: Quitting " .. app)
+	print("⏹️ AutoQuitting: " .. app)
 	IdleApps[app] = nil
 	hs.application(app):kill()
 end

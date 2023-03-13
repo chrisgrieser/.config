@@ -6,7 +6,7 @@ function TwitterScrollUp()
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
 	local twitter = App("Twitter")
-	if not twitter or not twitter:mainWindow() or not twitter:isFrontmost() then return end
+	if not twitter or not twitter:mainWindow() then return end
 
 	Keystroke({ "cmd" }, "left", 1, twitter) -- go back
 	Keystroke({ "cmd" }, "1", 1, twitter) -- go to home tab

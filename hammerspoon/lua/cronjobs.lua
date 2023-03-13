@@ -38,7 +38,7 @@ BiweeklyTimer = hs.timer
 
 		Applescript([[
 			tell application id "com.runningwithcrayons.Alfred"
-				run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
+run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
 				run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles"
 			end tell
 		]])

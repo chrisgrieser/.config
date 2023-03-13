@@ -57,32 +57,6 @@ function M.previous()
 	end
 end
 
----wrapper around replacer.nvim for convenience
----@param closingKeys string[]? keys to save changes and close quickfix window
-function M.replacerWrapper(closingKeys)
-	if quickFixIsEmpty() then return end
-	if not require("replacer") then
-		vim.notify("replacer.nvim not installed.", vim.log.levels.ERROR)
-		return
-	end
-
-	-- if not yet in quickfix window, open it
-	if vim.bo.filetype ~= "qf" then cmd.copen() end
-
-	-- run replacer
-	require("replacer").run { rename_files = true }
-	vim.cmd.file("Quickfix: Replacer") -- set buffer name
-
-	-- set closing keybindings for replacer.nvim
-	if not closingKeys or #closingKeys == 0 then return end
-	for _, key in pairs(closingKeys) do
-		vim.keymap.set("n", key, function()
-			vim.cmd.write()
-			vim.notify(" Finished replacing.", vim.log.levels.INFO)
-		end, { desc = " Finish replacing", buffer = true, nowait = true })
-	end
-end
-
 --------------------------------------------------------------------------------
 
 return M
