@@ -1,8 +1,9 @@
 require("lua.utils")
+require("lua.window-utils")
 local cons = hs.console
 --------------------------------------------------------------------------------
 
--- settings
+-- console settings
 cons.titleVisibility("hidden")
 cons.toolbar(nil)
 cons.consoleFont { name = "JetBrainsMonoNL Nerd Font", size = 22 }
@@ -10,7 +11,7 @@ cons.consoleFont { name = "JetBrainsMonoNL Nerd Font", size = 22 }
 ---filter console entries, removing logging for enabling/disabling hotkeys,
 ---useless layout info or warnings, or info on extension loading.
 -- HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
-function CleanupConsole()
+local function cleanupConsole()
 	local consoleOutput = tostring(hs.console.getConsole())
 	local out = ""
 	local layoutLinesCount = 0
@@ -37,11 +38,15 @@ function CleanupConsole()
 	end
 
 	-- emphasize errors and warnings, remove double time-stamps
-	out = out:gsub("%d%d:%d%d:%d%d ERROR: ", "🔴 ERROR") 
-	out = out:gsub("%d%d:%d%d:%d%d %*%* Warning: ", "⚠️ WARN") 
+	out = out:gsub("%d%d:%d%d:%d%d ERROR: ", "🔴 ERROR")
+	out = out:gsub("%d%d:%d%d:%d%d %*%* Warning: ", "⚠️ WARN")
 
 	hs.console.setConsole(out)
 end
+
+Wf_script_editor = Wf.new("Hammerspoon")
+	:subscribe(Wf.windowCreated, cleanupConsole)
+	:subscribe(Wf.windowUnfocused, hs.closeConsole)
 
 ---@param mode string "dark"|"light""
 function SetConsoleColors(mode)
