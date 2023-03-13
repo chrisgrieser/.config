@@ -62,7 +62,7 @@ TransBgAppWatcher = Aw.new(function(appName, event, appObj)
 	local transBgApp = { "neovide", "Neovide", "Obsidian", "kitty", "Alacritty", "alacritty" }
 	if IsProjector() or not (TableContains(transBgApp, appName)) then return end
 
-	if event == Aw.terminated and FrontAppName() ~= "Twitter" then
+	if event == Aw.terminated then
 		unHideAll()
 	elseif event == Aw.activated then
 		hideOthers(appObj)

@@ -7,7 +7,8 @@ hs.window.animationDuration = 0
 
 --------------------------------------------------------------------------------
 -- self
-require("lua.meta")
+require("lua.console")
+require("lua.reload-and-systemstart")
 require("lua.utils")
 
 -- appearance

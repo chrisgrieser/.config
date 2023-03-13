@@ -166,16 +166,6 @@ rules:
   #───────────────────────────────────────────────────────────────────────
   - description: "(Apps) Browser"
     manipulators:
-      # open vimium-c settings
-      - type: basic
-        from: { key_code: comma, modifiers: { mandatory: [command, option] } }
-        to:
-          - shell_command: open "chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html"
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser
-              - ^com\.vivaldi\.Vivaldi
       # Remove bookmark
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
