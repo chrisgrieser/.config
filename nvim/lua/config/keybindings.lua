@@ -104,9 +104,11 @@ keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
 
--- quickfix
+-- QUICKFIX
 keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
 keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Previous Quickfix" })
+keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Delete Quickfix List" })
+keymap("n", "<leader>q", require("funcs.quickfix").replacerWrapper, { desc = " Replacer.nvim" })
 
 --------------------------------------------------------------------------------
 -- EDITING
