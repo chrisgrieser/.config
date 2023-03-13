@@ -33,6 +33,7 @@ rules:
     - varsIgnorePattern: run # jxa in Alfred
 
   #─────────────────────────────────────────────────────────────────────────────
+  # SHARED WITH TYPESCRIPT
 
   # structure
   complexity: [warn, 15]
@@ -48,7 +49,7 @@ rules:
     - min: 4
       max: 25
       properties: never
-      exceptions: [x, y, i, j, id, min, max, app, str, int, out, a, b, num, url, run, arr, tag]
+      exceptions: [x, y, i, j, id, min, max, app, str, int, out, a, b, num, url, run, arr, tag, ext]
   no-underscore-dangle: warn
   no-shadow:
     - warn
