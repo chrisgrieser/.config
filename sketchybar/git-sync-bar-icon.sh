@@ -31,8 +31,7 @@ passChanges2=$(git status --porcelain --branch | grep -Eo "\d") # to check for a
 
 
 if [[ -z "$label" ]]; then
-	padding=		
-
+	padding="icon.padding_left=2 icon.padding_right=1 label.padding_left=2 label.padding_right=10"
 fi
 
 sketchybar --set "$NAME" icon="$icon" label="$label$configError"
