@@ -128,18 +128,25 @@ local function themeModifications()
 		linkHighlight("NotifyINFOTitle", "@define")
 		linkHighlight("NotifyINFOBody", "@define")
 
-		-- everforest
-	elseif theme == "everforest" and mode == "light" then
-		vim.g.everforest_background = "soft"
-	elseif theme == "everforest" and mode == "dark" then
-		vim.g.everforest_background = "hard"
-
 	end
 end
 
 --------------------------------------------------------------------------------
 
 augroup("themeChange", {})
+autocmd("ColorSchemePre", {
+	group = "themeChange",
+	callback = function()
+		-- everforest requires change before setting colorscheme
+		local mode = vim.opt.background:get()
+		local theme = g.colors_name
+		if theme == "everforest" and mode == "light" then
+			g.everforest_background = "soft"
+		elseif theme == "everforest" and mode == "dark" then
+			g.everforest_background = "hard"
+		end
+	end,
+})
 autocmd("ColorScheme", {
 	group = "themeChange",
 	callback = function()
@@ -151,6 +158,8 @@ autocmd("ColorScheme", {
 	end,
 })
 
+--------------------------------------------------------------------------------
+
 ---@param mode string "dark"|"light"
 function SetThemeMode(mode)
 	opt.background = mode
@@ -160,7 +169,7 @@ function SetThemeMode(mode)
 	cmd.colorscheme(targetTheme)
 end
 
--- initialize dark or light mode on neovim startup (requires macos)
+-- initialize theme on startup
 local isDarkMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
 local targetMode = isDarkMode and "dark" or "light"
 SetThemeMode(targetMode)
