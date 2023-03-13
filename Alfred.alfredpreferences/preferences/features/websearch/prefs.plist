@@ -39,19 +39,6 @@
 			<key>utf8</key>
 			<true/>
 		</dict>
-		<key>2532503D-D8F9-47CA-8438-766CE430EBFE</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>sch</string>
-			<key>text</key>
-			<string>Search Google Scholar for '{query}'</string>
-			<key>url</key>
-			<string>https://scholar.google.de/scholar?hl=en&amp;q={query}</string>
-			<key>utf8</key>
-			<true/>
-		</dict>
 		<key>510A0ED4-31D4-48D5-9318-92A081DCF445</key>
 		<dict>
 			<key>enabled</key>
@@ -170,28 +157,6 @@
 			<key>utf8</key>
 			<true/>
 		</dict>
-		<key>B917FE82-DF9A-41E0-887A-FB63F089584C</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>sci</string>
-			<key>text</key>
-			<string>Libgen: '{query}'</string>
-			<key>url</key>
-			<string>https://libgen.rs/search.php?req={query}</string>
-		</dict>
-		<key>C8DFE5EB-17FB-4D10-B030-4DF965F3584A</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>sci</string>
-			<key>text</key>
-			<string>SciHub</string>
-			<key>url</key>
-			<string>https://sci-hub.ru/{query}</string>
-		</dict>
 		<key>CB53E08B-32B8-4062-98CC-5A36E97438A4</key>
 		<dict>
 			<key>enabled</key>
@@ -261,5 +226,7 @@
 			<string>https://store.steampowered.com/search/?term={query}</string>
 		</dict>
 	</dict>
+	<key>onlyShowEnabledInPrefs</key>
+	<true/>
 </dict>
 </plist>

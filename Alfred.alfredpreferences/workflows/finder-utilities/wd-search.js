@@ -1,33 +1,38 @@
 #!/usr/bin/env osascript -l JavaScript
 
 ObjC.import("stdlib");
-ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-const alfredMatcher = (str) => str.replace (/[-()_.]/g, " ") + " " + str + " ";
+
+
+function alfredMatcher(str) {
+	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
+	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeperated, str].join(" ") + " ";
+}
+
+//──────────────────────────────────────────────────────────────────────────────
 
 const defaultFolder = $.getenv("default_folder").replace(/^~/, app.pathTo("home folder"));
 
-const workArray = app.doShellScript (`ls -1 '${defaultFolder}'`)
+const workArray = app
+	.doShellScript(`ls -1 '${defaultFolder}'`)
 	.split("\r")
 	.map(item => {
 		const itemPath = defaultFolder + "/" + item;
+		const extension = item.split(".").pop();
+		const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "pdf"];
 
 		let iconToDisplay;
-		if (item.endsWith(".png")) iconToDisplay = { "path": itemPath };
-		else {
-			iconToDisplay = {
-				"type": "fileicon",
-				"path": itemPath
-			};
-		}
+		if (imageExtensions.includes(extension)) iconToDisplay = { path: itemPath };
+		else iconToDisplay = { type: "fileicon", path: itemPath };
 
 		return {
-			"title": item,
-			"match": alfredMatcher (item),
-			"type": "file:skipcheck",
-			"arg": itemPath,
-			"icon": iconToDisplay,
+			title: item,
+			match: alfredMatcher(item),
+			type: "file:skipcheck",
+			arg: itemPath,
+			icon: iconToDisplay,
 		};
 	});
 
