@@ -41,11 +41,10 @@ return {
 			}
 		end,
 	},
-
 	{
 		"neovim/nvim-lspconfig",
+		init = function() vim.api.nvim_create_augroup("LSP", {}) end,
 		config = function()
-			vim.api.nvim_create_augroup("LSP", {})
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = "LSP",
 				callback = function(args)
@@ -53,7 +52,9 @@ return {
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
 					local capabilities = client.server_capabilities
 
-					require("lsp-inlayhints").on_attach(client, bufnr)
+					if capabilities.inlayhintProvider then
+						require("lsp-inlayhints").on_attach(client, bufnr)
+					end
 
 					if capabilities.documentSymbolProvider and client.name ~= "cssls" then
 						require("nvim-navic").attach(client, bufnr)

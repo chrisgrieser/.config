@@ -32,6 +32,15 @@ end, { desc = "גּ Copy last command" })
 -- as opposed to `@:`, this works across restarts of neovim
 keymap("n", "<leader>la", ":<Up><CR>", { desc = "גּ Run last command again" })
 
+-- copy [l]ast [n] notification
+keymap("n", "<leader>ln", function ()
+	local history = require("notify").history()
+	local lastNotify = history[#history]
+	local msg = table.concat(lastNotify.message, "\n")
+	fn.setreg("+", msg)
+	vim.notify("Last Notification copied.", logTrace)
+end, { desc = "גּ Copy Last Notification" })
+
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
