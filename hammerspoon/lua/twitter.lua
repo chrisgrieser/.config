@@ -39,6 +39,7 @@ end
 
 -- ensure that twitter does not get focus, "falling through" to the next window
 local function twitterFallThrough()
+	Notify("beep")
 	if FrontAppName() ~= "Twitter" then return end
 
 	local visibleWins = hs.window:orderedWindows()
@@ -49,6 +50,7 @@ local function twitterFallThrough()
 			break
 		end
 	end
+	Notify("nextWin:", nextWin:title())
 	if nextWin and nextWin:id() ~= hs.window.frontmostWindow():id() then nextWin:focus() end
 end
 
@@ -97,7 +99,10 @@ TwitterWatcher = Aw.new(function(appName, event)
 
 	-- do not focus Twitter after an app is terminated
 	elseif event == Aw.terminated and appName ~= "Twitter" then
-		RunWithDelays(0.1, twitterFallThrough)
+		RunWithDelays(0.2, function ()
+			Notify("beep")
+			twitterFallThrough()	
+		end)
 
 	-- raise twitter when switching window to other app
 	elseif event == Aw.activated and appName ~= "Twitter" then
