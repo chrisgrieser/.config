@@ -352,36 +352,6 @@ return {
 		end,
 	},
 	{
-		"windwp/nvim-autopairs",
-		dependencies = {
-			"hrsh7th/nvim-cmp",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		event = "InsertEnter",
-		config = function()
-			local npairs = require("nvim-autopairs")
-			local rule = require("nvim-autopairs.rule")
-			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
-
-			npairs.setup { check_ts = true } -- use treesitter
-
-			npairs.add_rules {
-				-- auto-pair <> if inside string (e.g. for keymaps)
-				rule("<", ">", "lua"):with_pair(isNodeType { "string" }),
-				-- auto-pair for markdown syntax
-				rule("*", "*", "markdown"):with_pair(),
-				rule("__", "__", "markdown"):with_pair(),
-			}
-
-			-- add brackets to cmp completions, e.g. "function" -> "function()"
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-		end,
-	},
-
-	-----------------------------------------------------------------------------
-
-	{
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
