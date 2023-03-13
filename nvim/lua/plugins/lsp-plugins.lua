@@ -62,10 +62,16 @@ return {
 	-----------------------------------------------------------------------------
 
 	{
-			"SmiteshP/nvim-navic", -- breadcrumbs for statusline/winbar
-			config = function()
-
-			end,
+		"SmiteshP/nvim-navic", -- breadcrumbs for statusline/winbar
+		event = "LspAttach",
+		config = function()
+			require("nvim-navic").setup {
+				icons = { Object = "ﴯ " },
+				separator = "  ",
+				depth_limit = 7,
+				depth_limit_indicator = "…",
+			}
+		end,
 	},
 	{
 		"folke/neodev.nvim", -- lsp for nvim-lua config

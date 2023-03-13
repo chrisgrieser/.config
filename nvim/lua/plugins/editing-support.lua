@@ -22,11 +22,11 @@ return {
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true },
 	{
 		"windwp/nvim-autopairs",
+		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/nvim-cmp",
 			"nvim-treesitter/nvim-treesitter",
 		},
-		event = "InsertEnter",
 		config = function()
 			local npairs = require("nvim-autopairs")
 			local rule = require("nvim-autopairs.rule")
@@ -47,14 +47,14 @@ return {
 			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
-	{
-		"mizlan/iswap.nvim", -- swapping of nodes
+	{-- swapping of nodes
+		"mizlan/iswap.nvim", 
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("iswap").setup { autoswap = true } end,
 		cmd = "ISwapWith",
 	},
-	{
-		"Wansmer/treesj", -- split-join
+	{ -- split-join
+		"Wansmer/treesj",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		cmd = "TSJToggle",
 		config = function()
@@ -65,9 +65,60 @@ return {
 			}
 		end,
 	},
-	{
-		"dkarter/bullets.vim", -- auto-bullets for markdown-like filetypes
-		ft = { "markdown", "text", "gitcommit" },
+	{-- auto-bullets for markdown-like filetypes
+		"dkarter/bullets.vim", 
+		ft = { "markdown", "text" },
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
+	},
+	{ -- Folding
+		"kevinhwang91/nvim-ufo",
+		dependencies = "kevinhwang91/promise-async",
+		event = "BufReadPost",
+		config = function()
+			local foldIcon = ""
+			local ufo = require("ufo")
+			ufo.setup {
+				provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
+					return { "lsp", "indent" } -- Use lsp and treesitter as fallback
+				end,
+				-- open_fold_hl_timeout = 0,
+				fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+					-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
+					local newVirtText = {}
+					local suffix = " " .. foldIcon .. "  " .. tostring(endLnum - lnum)
+					local sufWidth = vim.fn.strdisplaywidth(suffix)
+					local targetWidth = width - sufWidth
+					local curWidth = 0
+					for _, chunk in ipairs(virtText) do
+						local chunkText = chunk[1]
+						local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+						if targetWidth > curWidth + chunkWidth then
+							table.insert(newVirtText, chunk)
+						else
+							chunkText = truncate(chunkText, targetWidth - curWidth)
+							local hlGroup = chunk[2]
+							table.insert(newVirtText, { chunkText, hlGroup })
+							chunkWidth = vim.fn.strdisplaywidth(chunkText)
+							if curWidth + chunkWidth < targetWidth then
+								suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+							end
+							break
+						end
+						curWidth = curWidth + chunkWidth
+					end
+					table.insert(newVirtText, { suffix, "MoreMsg" })
+					return newVirtText
+				end,
+			}
+
+			-- Using ufo provider need remap `zR` and `zM`
+			vim.keymap.set("n", "zR", ufo.openAllFolds, { desc = " Open all folds" })
+			vim.keymap.set("n", "zM", ufo.closeAllFolds, { desc = " Close all folds" })
+
+			-- fold settings required for UFO
+			vim.opt.foldenable = true
+			vim.opt.foldlevel = 99
+			vim.opt.foldlevelstart = 99
+		end,
 	},
 }
