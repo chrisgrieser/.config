@@ -52,8 +52,8 @@
 		"prefix": "home",
 		"body": "os.getenv(\"HOME\")"
 	},
-	"for each (array)": {
-		"prefix": "for each",
+	"for each (list)": {
+		"prefix": "for each (list)",
 		"body": [
 			"for _, ${1:v} in pairs(${2:table}) do",
 			"\t$0",
