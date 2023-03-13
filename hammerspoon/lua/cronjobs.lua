@@ -26,19 +26,34 @@ ProjectorScreensaverWatcher = caff
 --------------------------------------------------------------------------------
 -- BACKUP / MAINTENANCE
 
+---@return string three-char string representing the day of the week (English)
+local function getWeekday() return tostring(os.date()):sub(1, 3) end
+
+-- on Mondays shortly before 10:00, open #fg-organisation Slack Channel
+JourfixeTimer = hs.timer
+	.doAt("O9:58", "1d", function()
+		if getWeekday() == "Mon" then
+			hs.execute("open 'slack://channel?team=T010A5PEMBQ&id=CV95T641Y'")
+		end
+	end)
+	:start()
+
 -- Backup Vault, Dotfiles, Bookmarks, and browser extension list
 -- Reload Hammerspoon Annotations (Emmylua Spoon)
 -- Check for low battery of connected bluetooth devices
 BiweeklyTimer = hs.timer
-	.doAt("02:00", "02d", function()
+	.doAt("02:00", "1d", function()
 		if IsAtOffice() then return end
+
+		-- only run wednesday and saturday
+		if getWeekday() ~= "Wed" and getWeekday() ~= "Sat" then return end
 
 		PeripheryBatteryCheck("Drafts")
 		hs.loadSpoon("EmmyLua")
 
 		Applescript([[
 			tell application id "com.runningwithcrayons.Alfred"
-run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
+				run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
 				run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles"
 			end tell
 		]])

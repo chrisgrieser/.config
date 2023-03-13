@@ -96,6 +96,8 @@ function M.enableSpotlightForNameSearches(state, ...) end
 --    - a bundle ID string as per `hs.application:bundleID()`
 --    - a string pattern that matches (via `string.find`) the application name as per `hs.application:name()` (for convenience, the matching will be done on lowercased strings)
 --    - a string pattern that matches (via `string.find`) the application's window title per `hs.window:title()` (for convenience, the matching will be done on lowercased strings)
+--  * exact - a boolean, true to check application names for exact matches, false to use Lua's string:find() method. Defaults to false
+--  * stringLiteral - a boolean, true to interpret the hint string literally, false to interpret it as a Lua Pattern. Defaults to false.
 --
 -- Returns:
 --  * one or more hs.application objects for running applications that match the supplied search criterion, or `nil` if none found
@@ -119,7 +121,7 @@ function M.enableSpotlightForNameSearches(state, ...) end
 -- -- by window title
 -- hs.application'bash':name() --> Terminal
 ---@return hs.application
-function M.find(hint, ...) end
+function M.find(hint, exact, stringLiteral, ...) end
 
 -- Searches the application for a menu item
 --
