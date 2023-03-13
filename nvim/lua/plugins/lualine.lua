@@ -54,12 +54,6 @@ local function searchCounter()
 	return " " .. current .. "/" .. total .. " " .. searchTerm
 end
 
-local function quickfixListCounter()
-	local count = #vim.fn.getqflist()
-	if count == 0 then return "" end
-	return " " .. tostring(count)
-end
-
 local function clock()
 	if vim.opt.columns:get() < 120 then return "" end -- only show the clock when it covers my menubar clock
 	local time = tostring(os.date()):sub(12, 16)
@@ -211,7 +205,7 @@ local lualineConfig = {
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
 			{ searchCounter },
-			{ quickfixListCounter },
+			{ require("funcs.quickfix").counter },
 		},
 		lualine_x = {
 			{

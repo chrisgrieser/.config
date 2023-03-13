@@ -104,32 +104,9 @@ keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
 
--- QUICKFIX
-
-keymap("n", "gq", function()
-	if #vim.fn.getqflist() == 0 then
-		vim.notify(" Quickfix List empty.", logWarn)
-		return
-	end
-	-- [[:silent try | cnext | catch | cexpr [] | catch | endtry<CR><CR>]],
-	local wentToNext = pcall(function() cmd([[silent! cnext]]) end)
-	if not wentToNext then cmd([[silent! cfirst]]) end
-end, { desc = " Next Quickfix (clear on end)" })
-
-keymap("n", "<leader>q", function()
-	if #vim.fn.getqflist() == 0 then
-		vim.notify(" Quickfix List empty.", logWarn)
-		return
-	end
-	cmd.copen()
-	require("replacer").run { rename_files = true }
-	for _, key in pairs { "<D-w>", "<D-s>", "q" } do
-		keymap("n", key, function()
-			cmd.write()
-			vim.notify(" Finished replacing.")
-		end, { desc = " Finish replacing", buffer = true, nowait = true })
-	end
-end, { desc = " Edit Quickfix Results" })
+-- quickfix
+keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
+keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Previous Quickfix" })
 
 --------------------------------------------------------------------------------
 -- EDITING
