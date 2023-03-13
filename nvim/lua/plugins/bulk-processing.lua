@@ -20,6 +20,16 @@ return {
 		"chrisgrieser/replacer.nvim",
 		lazy = true,
 		dev = true,
+		init = function()
+			-- save & quit via "q"
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "replacer",
+				callback = function()
+					-- stylua: ignore
+					vim.keymap.set( "n", "q", vim.cmd.write, { desc = " Finish replacing", buffer = true, nowait = true })
+				end,
+			})
+		end,
 	},
 	{
 		"ThePrimeagen/refactoring.nvim",

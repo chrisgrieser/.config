@@ -32,19 +32,19 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 
 local function diagnosticFormat(diagnostic, mode)
 	local msg = diagnostic.message:gsub("^%s*", ""):gsub("%s*$", "")
-	local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or ""
+local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or ""
 	local code = tostring(diagnostic.code)
 
 	-- stylelint and already includes the code in the message, codespell has no code
 	local out
-	if source == "stylelint" or source == "codespell" then
+if source == "stylelint" or source == "codespell" then
 		out = msg
 	else
 		out = msg .. " (" .. code .. ")"
 	end
 
-	-- append source to float
-	if diagnostic.source and mode == "float" then out = out .. " [" .. source .. "]" end
+-- append source to float
+if diagnostic.source and mode == "float" then out = out .. " [" .. source .. "]" end
 
 	return out
 end

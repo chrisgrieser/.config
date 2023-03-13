@@ -494,7 +494,8 @@ keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = " Sele
 
 keymap("n", "5", function()
 	cmd.CodiNew()
-	cmd.file("Codi: " .. bo.filetype) -- HACK to set buffername, since Codi does not provide a filename for its buffer
+	-- HACK to set buffername, since Codi does not provide a filename for its buffer
+	api.nvim_buf_set_name(0, "Codi: " .. bo.filetype)
 end, { desc = ":CodiNew" })
 
 --------------------------------------------------------------------------------

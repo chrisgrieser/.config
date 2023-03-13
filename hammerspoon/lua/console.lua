@@ -38,15 +38,20 @@ local function cleanupConsole()
 	end
 
 	-- emphasize errors and warnings, remove double time-stamps
-	out = out:gsub("%d%d:%d%d:%d%d ERROR: ", "🔴 ERROR")
+	out = out:gsub("%*%*%* ERROR:", "🔴 ERROR")
 	out = out:gsub("%d%d:%d%d:%d%d %*%* Warning: ", "⚠️ WARN")
 
 	hs.console.setConsole(out)
 end
 
-Wf_script_editor = Wf.new("Hammerspoon")
-	:subscribe(Wf.windowCreated, cleanupConsole)
-	:subscribe(Wf.windowUnfocused, hs.closeConsole)
+-- clean up console as soon as it is opened
+Wf_script_editor = Wf.new("Hammerspoon"):subscribe(Wf.windowCreated, cleanupConsole)
+
+-- close console when unfocused. Using appwatcher, since window filter for
+-- window unfocussing is not working reliably
+ConsoleWatcher = Aw.new(function(appName, event)
+	if appName == "Hammerspoon" and event == Aw.deactivated then hs.closeConsole() end
+end):start()
 
 ---@param mode string "dark"|"light""
 function SetConsoleColors(mode)

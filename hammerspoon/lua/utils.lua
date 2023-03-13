@@ -177,8 +177,7 @@ function FrontAppName() return hs.application.frontmostApplication():name() end
 ---@return boolean
 function AppIsRunning(appName)
 	local app = hs.application.get(appName)
-	if not app then return false end
-	return app:isRunning()
+	return app ~= nil
 end
 
 ---If app is not running, will simply start the app instead
