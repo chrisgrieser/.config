@@ -28,10 +28,3 @@ passChanges2=$(git status --porcelain --branch | grep -Eo "\d") # to check for a
 [[ -n "$passChanges2" ]] && label="$label${passChanges2}p"
 [[ -n "$label" ]] && icon=" "
 [[ $submodulesChanges -eq 1 ]] && icon=" "
-
-if [[ -z "$label" ]]; then
-	sketchybar --remove "$NAME"
-else
-	sketchybar --set "$NAME" icon="$icon" label="$label$configError"
-fi
-
