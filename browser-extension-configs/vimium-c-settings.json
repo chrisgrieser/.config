@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "12/03/2023, 19:29:46",
-	"time": 1678645786208,
+	"@time": "13/03/2023, 10:48:14",
+	"time": 1678700894033,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -11,20 +11,20 @@
 	"exclusionListenHash": false,
 	"exclusionRules": [
 		{
+			"passKeys": "j k o ",
+			"pattern": "^https:\\/\\/www\\.google(?:.(?!&tbm=isch))*$"
+		},
+		{
+			"passKeys": "? ",
+			"pattern": ":https://github.com/"
+		},
+		{
 			"passKeys": "",
 			"pattern": ":https://mail.google.com/"
 		},
 		{
 			"passKeys": "",
 			"pattern": ":https://www.inoreader.com/"
-		},
-		{
-			"passKeys": "j k ",
-			"pattern": "^https:\\/\\/www\\.google(?:.(?!&tbm=isch))*$"
-		},
-		{
-			"passKeys": "? ",
-			"pattern": ":https://github.com/"
 		}
 	],
 	"extAllowList": [
@@ -51,6 +51,8 @@
 		"#!no-check",
 		"\" combine commands: \" https://github.com/gdh1995/vimium-c/wiki/Auto-run-a-tree-of-commands#open-vomnibar-after-creating-a-new-tab",
 		"\" Google Regex above ensures keys are disabled on google sites, except the ones the google image search (\"&tbm=isch\")",
+		"\" Google excludes \"o\" for Grepper",
+		"\" Info on Vimium-C mapping Syntax: https://github.com/gdh1995/vimium-c/issues/873",
 		"\"------------------------------------------------------",
 		"",
 		"unmapAll",
@@ -79,6 +81,7 @@
 		"map q closeTabsOnLeft",
 		"map e closeTabsOnRight",
 		"map W closeOtherTabs",
+		"map x runKey keys=\"closeOtherTabs+removeTab\"",
 		"map w removeTab mayClose",
 		"map m removeTab mayClose",
 		"map s runKey keys=\"copyCurrentUrl+removeTab\"",

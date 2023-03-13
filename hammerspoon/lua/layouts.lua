@@ -71,7 +71,7 @@ local function workLayout()
 	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 	TwitterToTheSide()
 	TwitterScrollUp()
-	RunWithDelays(1, function () App("Drafts"):activate() end)
+	RunWithDelays({0.5, 1}, function () App("Drafts"):activate() end)
 
 	-- finish
 	CleanupConsole()

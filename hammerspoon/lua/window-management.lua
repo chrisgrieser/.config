@@ -136,7 +136,6 @@ function MoveResize(win, pos)
 	end
 
 	-- extras
-	ToggleWinSidebar(win)
 	obsidianThemeDevHelper(win, pos)
 	if (pos == PseudoMaximized or pos == Centered) and AppIsRunning("Twitter") then
 		TwitterToTheSide()
@@ -152,6 +151,7 @@ function MoveResize(win, pos)
 		Wait(0.1)
 		i = i + 1
 	end
+	ToggleWinSidebar(win) -- has to come after resizing
 end
 
 --------------------------------------------------------------------------------

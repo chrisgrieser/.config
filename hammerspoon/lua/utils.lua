@@ -90,7 +90,9 @@ end
 function Wait(secs)
 	-- since lua has not blocking delay, executing shells' sleep since os.execute
 	-- is blocking
-	os.execute("sleep " .. tostring(secs))
+	-- os.execute("sleep " .. tostring(secs))
+
+	hs.timer.usleep(secs * 1000000)
 end
 
 --------------------------------------------------------------------------------
