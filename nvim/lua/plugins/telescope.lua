@@ -1,15 +1,12 @@
 local keymappings = {
+	-- INFO default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua#L133
 	["<Esc>"] = "close",
-	["<CR>"] = "select_default",
 	["<D-w>"] = "delete_buffer", -- only buffer picker
 	["<S-Down>"] = "preview_scrolling_down",
 	["<S-Up>"] = "preview_scrolling_up",
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
-	["<Up>"] = "move_selection_previous",
-	["<Down>"] = "move_selection_next",
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
-	["Tab"] = "toggle_selection", 
 	["<D-a>"] = "select_all", 
 }
 
@@ -206,6 +203,9 @@ return {
 		config = function()
 			telescopeConfig()
 			require("telescope").load_extension("file_browser")
+
+			-- do not color directories differently in file browser
+			vim.cmd.highlight { "def link Directory TelescopeResultsNormal", bang = true }
 		end,
 	},
 }
