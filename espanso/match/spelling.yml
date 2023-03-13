@@ -226,3 +226,7 @@ matches:
     replace: mouse
     propagate_casing: true
     word: true
+  - trigger: palce
+    replace: place
+    propagate_casing: true
+    word: true

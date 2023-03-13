@@ -184,6 +184,7 @@ ObsiAlphaWatcher = Pw(FileHub, function(files)
 	for _, file in pairs(files) do
 		-- needs delay and `.crdownload` check, since the renaming is sometimes not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
+
 		RunWithDelays(0.5, function()
 			hs.execute([[cd "]] .. FileHub .. [[" || exit 1
 				test -f obsidian-*.*.*.asar.gz || exit 1
@@ -211,7 +212,6 @@ ObsiAlphaWatcher = Pw(FileHub, function(files)
 					end repeat
 				end tell
 			]])
-			print("Obsidian Alpha auto-installed.")
 		end)
 	end
 end):start()

@@ -105,7 +105,8 @@ local function telescopeConfig()
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "璉 ",
-				ignore_symbols = { "boolean", "number" }, -- markdown headings are symbol-type "string"
+				-- markdown headings are symbol-type "string"
+				ignore_symbols = { "boolean", "number" }, 
 				fname_width = 17,
 			},
 			lsp_workspace_symbols = {
