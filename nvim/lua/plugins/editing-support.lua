@@ -20,6 +20,16 @@ return {
 	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
 	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true },
 	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		event = "BufEnter",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-refactor",
+		event = "BufEnter",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
+	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		dependencies = {
@@ -45,6 +55,11 @@ return {
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
+	},
+	{ -- autopair, but for keywords
+		"RRethy/nvim-treesitter-endwise",
+		event = "InsertEnter",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- swapping of nodes
 		"mizlan/iswap.nvim",
