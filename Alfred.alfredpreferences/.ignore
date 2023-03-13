@@ -20,3 +20,4 @@ workflows/app-store-search
 workflows/github-search
 workflows/web-screenshot
 workflows/kill-processes
+workflows/urban-dictonary-search
