@@ -1,7 +1,7 @@
 require("lua.utils")
 require("lua.twitter")
-
 --------------------------------------------------------------------------------
+
 IMacDisplay = hs.screen("Built%-in")
 Maximized = hs.layout.maximized
 RightHalf = hs.layout.right50

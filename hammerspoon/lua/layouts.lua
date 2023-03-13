@@ -1,5 +1,5 @@
 require("lua.utils")
-require("lua.window-management")
+require("lua.window-utils")
 require("lua.twitter")
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -74,7 +74,6 @@ local function workLayout()
 	RunWithDelays({0.5, 1}, function () App("Drafts"):activate() end)
 
 	-- finish
-	CleanupConsole()
 	print("🔲 WorkLayout: done")
 end
 
@@ -104,7 +103,6 @@ local function movieLayout()
 		"Twitter",
 	}
 
-	CleanupConsole()
 	print("🔲 MovieModeLayout: done")
 end
 

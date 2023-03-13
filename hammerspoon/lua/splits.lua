@@ -1,5 +1,5 @@
 require("lua.utils")
-require("lua.window-management")
+require("lua.window-utils")
 --------------------------------------------------------------------------------
 
 ---activate both apps together,unsplit if one of the two apps are quit.

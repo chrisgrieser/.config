@@ -5,7 +5,7 @@
 -- corner
 
 require("lua.utils")
-require("lua.window-management")
+require("lua.window-utils")
 --------------------------------------------------------------------------------
 
 -- unhide all apps
@@ -50,8 +50,6 @@ local function hideOthers(appObj)
 			app:hide()
 		end
 	end
-
-	hs.closeConsole() -- set separately, since it's not regarded a regular window
 end
 
 --------------------------------------------------------------------------------

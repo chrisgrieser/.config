@@ -9,7 +9,6 @@ local function hideCurAndPassThrough(key)
 	-- disable to it works only once
 	JHidesCursor:disable()
 	KHidesCursor:disable()
-	CleanupConsole()
 
 	-- hide the cursor
 	local screen = hs.mouse.getCurrentScreen()
@@ -35,5 +34,4 @@ Jk_watcher = Aw.new(function(appName, eventType)
 		JHidesCursor:disable()
 		KHidesCursor:disable()
 	end
-	CleanupConsole()
 end):start()

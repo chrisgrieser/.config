@@ -1,5 +1,5 @@
 require("lua.utils")
-require("lua.window-management")
+require("lua.window-utils")
 --------------------------------------------------------------------------------
 
 ---play/pause spotify with Spotify

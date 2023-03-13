@@ -14,8 +14,7 @@ function SystemStart()
 	-- config regularly
 	local _, isReloading = hs.execute("[[ -e " .. reloadIndicator .. " ]]")
 	if isReloading then
-		print("\n----------------------------- 🔨 HAMMERSPOON RELOAD ---------------------------------\n")
-		CleanupConsole()
+		print("\n--------------------------- 🔨 HAMMERSPOON RELOAD -------------------------------\n")
 
 		os.remove(reloadIndicator)
 		-- use neovim automation to display the notification in neovim
