@@ -1,11 +1,11 @@
 return {
 	{ -- schemas for json-lsp
 		"b0o/SchemaStore.nvim",
-		lazy = true, -- will be loaded on jsonls setup
+		lazy = true, -- loaded on jsonls setup
 	},
 	{ -- breadcrumbs for statusline/winbar
 		"SmiteshP/nvim-navic",
-		event = "LspAttach",
+		lazy = true, -- loaded when attaching to supporting lsp servers
 		config = function()
 			require("nvim-navic").setup {
 				icons = { Object = "ﴯ " },
@@ -17,6 +17,7 @@ return {
 	},
 	{
 		"folke/neodev.nvim", -- lsp for nvim-lua config
+		lazy = false,
 		config = function()
 			-- INFO this must come before lua LSP setup
 			require("neodev").setup {
@@ -38,7 +39,7 @@ return {
 	{
 		-- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		"lvimuser/lsp-inlayhints.nvim",
-		event = "LspAttach",
+		lazy = true, -- loaded when attaching to supporting lsp servers
 		config = function()
 			require("lsp-inlayhints").setup {
 				inlay_hints = {
@@ -62,7 +63,8 @@ return {
 	},
 	{
 		"smjonas/inc-rename.nvim",
-		event = "LspAttach",
+		lazy = true, -- loaded when attaching to supporting lsp servers
+		-- event = "LspAttach",
 		config = function() require("inc_rename").setup {} end,
 	},
 }
