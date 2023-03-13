@@ -76,7 +76,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</string>
+				<string>D32D490E-F78B-4733-A0EC-0672CD8A6E30</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -126,19 +126,6 @@
 		</array>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<array/>
-		<key>7B43FD68-D463-4626-BE13-7D1C65B12ECF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>9536809F-DBBD-4982-90BC-427C6D115A14</key>
 		<array>
 			<dict>
@@ -191,25 +178,23 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D608B123-0780-4E08-A9AD-4BBF4396F654</key>
-		<array/>
-		<key>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</key>
+		<key>D32D490E-F78B-4733-A0EC-0672CD8A6E30</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7B43FD68-D463-4626-BE13-7D1C65B12ECF</string>
+				<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>sourceoutputuid</key>
-				<string>A08176B6-C054-434D-855E-4DF2F119FF6F</string>
+				<string>60377B50-E48C-4CAD-BEC9-6B6FDF7155F9</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
+				<string>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -218,6 +203,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D608B123-0780-4E08-A9AD-4BBF4396F654</key>
+		<array/>
 		<key>DCECF168-40C8-45B0-B812-81138DF798D4</key>
 		<array>
 			<dict>
@@ -258,53 +245,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>wd-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -318,22 +258,28 @@
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>cd "${default_folder/#\~/$HOME}" || exit 1
-
-echo -n $(ls | wc -l | tr -d " ")</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>check-number-of-files.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -376,19 +322,49 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string> </string>
-				<key>passthroughargument</key>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>wd-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
 				<false/>
-				<key>variables</key>
-				<dict/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>7B43FD68-D463-4626-BE13-7D1C65B12ECF</string>
+			<string>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -401,24 +377,24 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>1</integer>
+						<integer>0</integer>
 						<key>matchstring</key>
-						<string>0</string>
+						<string>empty</string>
 						<key>outputlabel</key>
-						<string>&gt; 1</string>
+						<string>empty</string>
 						<key>uid</key>
-						<string>A08176B6-C054-434D-855E-4DF2F119FF6F</string>
+						<string>60377B50-E48C-4CAD-BEC9-6B6FDF7155F9</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>= 0</string>
+				<string>has files</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</string>
+			<string>D32D490E-F78B-4733-A0EC-0672CD8A6E30</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -434,14 +410,6 @@ echo -n $(ls | wc -l | tr -d " ")</string>
 			<string>alfred.workflow.trigger.external</string>
 			<key>uid</key>
 			<string>BF0AEAE4-89C0-4DFF-8F6D-4C1FE0DE091B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -809,7 +777,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>605</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>45</real>
 		</dict>
 		<key>11D8554B-846B-40DD-9CA0-C73F5736472F</key>
 		<dict>
@@ -894,9 +862,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>570</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>15</real>
 		</dict>
 		<key>64FEC427-2CB3-4EB1-8543-392E2319CBFC</key>
 		<dict>
@@ -906,15 +874,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>850</real>
 			<key>ypos</key>
 			<real>290</real>
-		</dict>
-		<key>7B43FD68-D463-4626-BE13-7D1C65B12ECF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>520</real>
-			<key>ypos</key>
-			<real>45</real>
 		</dict>
 		<key>8D046756-BF24-4658-BD57-CAB48FF61B9D</key>
 		<dict>
@@ -983,21 +942,21 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>410</real>
 		</dict>
+		<key>D32D490E-F78B-4733-A0EC-0672CD8A6E30</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>455</real>
+			<key>ypos</key>
+			<real>50</real>
+		</dict>
 		<key>D608B123-0780-4E08-A9AD-4BBF4396F654</key>
 		<dict>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
 			<real>525</real>
-		</dict>
-		<key>DAEC3F77-A08F-483F-ADD1-0DBF21738C6B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>445</real>
-			<key>ypos</key>
-			<real>50</real>
 		</dict>
 		<key>DC23B294-25E4-4CEA-841A-71546D15BD89</key>
 		<dict>

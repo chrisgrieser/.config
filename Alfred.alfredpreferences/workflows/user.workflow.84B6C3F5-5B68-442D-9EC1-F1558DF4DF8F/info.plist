@@ -304,6 +304,8 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>google scholar &amp; scite_</string>
 			<key>xpos</key>
 			<real>40</real>
 			<key>ypos</key>
@@ -331,6 +333,8 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>elicit</string>
 			<key>xpos</key>
 			<real>40</real>
 			<key>ypos</key>
