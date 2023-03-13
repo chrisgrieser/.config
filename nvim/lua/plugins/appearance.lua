@@ -4,15 +4,21 @@ return {
 		"m-demare/hlargs.nvim",
 		event = "VeryLazy",
 		config = function() require("hlargs").setup() end,
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
+	{
+		"HiPhish/nvim-ts-rainbow2",
+		event = "VeryLazy",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
-		event = "VimEnter", 
+		event = "VimEnter",
 		config = function()
 			require("indent_blankline").setup {
 				show_current_context = true, -- = active indent
 				use_treesitter = true,
-				filetype_exclude = {"undotree", "help", "man", "lspinfo", ""}
+				filetype_exclude = { "undotree", "help", "man", "lspinfo", "" },
 			}
 		end,
 	},

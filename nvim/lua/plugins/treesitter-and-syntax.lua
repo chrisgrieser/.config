@@ -29,11 +29,8 @@ local function tsConfig()
 
 		highlight = {
 			enable = true,
-			disable = { -- NOTE: these are the names of the parsers and not the filetype
-				"css", -- looks weird with css: https://github.com/tree-sitter/tree-sitter-css/issues/34
-				"scss",
-				-- "markdown", -- looks worse and enables spellcheck in URLs and Code Blocks 🙈
-			},
+			-- names of the parsers and not filetypes
+			disable = { "css" }, -- pending https://github.com/tree-sitter/tree-sitter-css/issues/34
 		},
 		-- use treesitter for autoindent with `=`
 		indentation = {
@@ -132,16 +129,12 @@ end
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = "VimEnter",
+		event = "VeryLazy",
 		config = tsConfig,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-refactor",
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"HiPhish/nvim-ts-rainbow2",
-			"RRethy/nvim-treesitter-endwise", -- autopair, but for keywords
-		},
-		-- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
-		build = function() require("nvim-treesitter.install").update { with_sync = true } end,
+		build = function()
+			-- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
+			require("nvim-treesitter.install").update { with_sync = true }
+		end,
 	},
 	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
 	{ "hail2u/vim-css3-syntax", ft = "css" }, -- better syntax highlighting (until treesitter css looks decent…)

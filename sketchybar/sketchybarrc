@@ -65,13 +65,17 @@ sketchybar \
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
 	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
 	\
+	\
+	\
 	--add item clock $first_row \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
 	background.padding_left=5 \
+	\
 	--add item covid-stats $first_row \
 	--set covid-stats update_freq=43200 \
 	script="$PLUGIN_DIR/covid-stats.sh" \
+	\
 	--add item weather $first_row \
 	--set weather update_freq=1800 \
 	script="$PLUGIN_DIR/weather.sh" \
@@ -99,7 +103,15 @@ sketchybar \
 	--add event repo-files-update \
 	--subscribe sync-indicator repo-files-update \
 	--subscribe sync-indicator system_woke \
+	\
+	--add item package-updates $second_row \
+	--set package-updates update_freq=43200 \
+	script="$PLUGIN_DIR/homebrew-package-tracker.sh" \
+	icon.font="Noto Emoji:Bold:16" \
+	\
 	--update
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # INFO
 # - `--update` needs to run at the end of config and should not be run in an item script
