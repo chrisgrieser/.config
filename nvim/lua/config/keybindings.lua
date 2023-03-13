@@ -5,6 +5,10 @@ local qol = require("funcs.quality-of-life")
 
 -- search keymaps
 keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " Keymaps" })
+-- stylua: ignore
+keymap( "n", "g?", function()
+	require("telescope.builtin").keymaps { prompt_title = " Buffer Keymaps", only_buf = true }
+end, { desc = " Buffer Keymaps" })
 
 -- Theme Picker
 keymap("n", "<leader>T", function() cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
@@ -102,7 +106,12 @@ keymap("n", "gC", "g,", { desc = "goto previous change" })
 
 -- QUICKFIX
 -- make cnext loop back https://vi.stackexchange.com/a/8535
-keymap("n", "gq", [[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]], { desc = "Next Quickfix" })
+keymap(
+	"n",
+	"gq",
+	[[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]],
+	{ desc = "Next Quickfix" }
+)
 keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " Quickfix list" })
 keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = "Clear Quickfix List" })
 
@@ -154,9 +163,19 @@ keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc 
 keymap("n", "<leader>w", cmd.ISwapWith, { desc = "弄 swap nodes" })
 
 -- search & replace
-keymap("n", "<leader>f", [[:%s/<C-r>=expand("<cword>")<CR>//gI<Left><Left><Left>]], { desc = "弄 :substitute" })
+keymap(
+	"n",
+	"<leader>f",
+	[[:%s/<C-r>=expand("<cword>")<CR>//gI<Left><Left><Left>]],
+	{ desc = "弄 :substitute" }
+)
 keymap("x", "<leader>f", ":s///gI<Left><Left><Left><Left>", { desc = "substitute" })
-keymap({ "n", "x" }, "<leader>F", function() require("ssr").open() end, { desc = "弄 Structural search & replace" })
+keymap(
+	{ "n", "x" },
+	"<leader>F",
+	function() require("ssr").open() end,
+	{ desc = "弄 Structural search & replace" }
+)
 keymap("n", "<leader>n", ":%normal ", { desc = "弄 :normal" })
 keymap("x", "<leader>n", ":normal ", { desc = "弄 :normal" })
 
@@ -317,7 +336,6 @@ keymap("n", "go", function()
 	local harpoonNumber = harpoonFileNumber() or 0
 	local title = tostring(harpoonNumber) .. "ﯠ " .. projectName
 	require("telescope").extensions.file_browser.file_browser { prompt_title = title }
-	-- require("telescope.builtin").find_files { prompt_title = title }
 end, { desc = " Browse in Project" })
 
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
