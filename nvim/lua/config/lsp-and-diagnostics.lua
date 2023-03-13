@@ -15,21 +15,6 @@ local lsp_servers = {
 	"taplo", -- toml
 }
 
-augroup("LSP", {})
-autocmd("LspAttach", {
-	group = "LSP",
-	callback = function(args)
-		local bufnr = args.buf
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		local capabilities = client.server_capabilities
-
-		require("lsp-inlayhints").on_attach(client, bufnr)
-
-		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
-			require("nvim-navic").attach(client, bufnr)
-		end
-	end,
-})
 
 --------------------------------------------------------------------------------
 -- LSP-SERVER-SPECIFIC SETUP

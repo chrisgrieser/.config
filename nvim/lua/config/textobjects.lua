@@ -19,7 +19,7 @@ keymap({ "o", "x" }, "im", "iW")
 -- QUICK TEXTOBJ OPERATIONS
 keymap("n", "<Space>", '"_ciw', { desc = "change word" })
 keymap("n", "<M-S-CR>", '"_daw', { desc = "delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
-keymap("i", "<M-S-CR>", '<Space>') -- prevent accidental triggering in insert mode when typing quickly
+keymap("i", "<M-S-CR>", "<Space>") -- FIX accidental triggering in insert mode when typing quickly
 
 --------------------------------------------------------------------------------
 -- STICKY COMMENT TEXT OBJECT ACTIONS
@@ -27,20 +27,22 @@ keymap("i", "<M-S-CR>", '<Space>') -- prevent accidental triggering in insert mo
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
--- keymap("n", "yq", "y<<<", {remap = true, desc = "yank comment"}) -- BUG highlight does work, but yanking works correctly
-keymap("n", "dq", function ()
+keymap("n", "dq", function()
 	local prevCursor = getCursor(0)
 	cmd.normal { "d<<<" } -- without bang for remapping of COM
 	setCursor(0, prevCursor)
-end, {remap = true, desc = "delete comment"}) 
+end, { remap = true, desc = "delete comment" })
+
+-- INFO omap q <<< is done is treesitter config
+--------------------------------------------------------------------------------
 
 -- TEXTOBJECT FOR ADJACENT COMMENTED LINES
 -- https://github.com/numToStr/Comment.nvim/issues/22#issuecomment-1272569139
 local function commented_lines_textobject()
 	local U = require("Comment.utils")
 	local cl = vim.api.nvim_win_get_cursor(0)[1] -- current line
-	local range = {srow = cl, scol = 0, erow = cl, ecol = 0}
-	local ctx = {ctype = U.ctype.linewise, range = range}
+	local range = { srow = cl, scol = 0, erow = cl, ecol = 0 }
+	local ctx = { ctype = U.ctype.linewise, range = range }
 	local cstr = require("Comment.ft").calculate(ctx) or vim.bo.commentstring
 	local ll, rr = U.unwrap_cstr(cstr)
 	local padding = true
@@ -61,10 +63,10 @@ local function commented_lines_textobject()
 	vim.fn.execute("normal! " .. rs .. "GV" .. re .. "G")
 end
 
-keymap("o", "u", commented_lines_textobject, {desc = "Big comment textobj"})
+keymap("o", "u", commented_lines_textobject, { desc = "Big comment textobj" })
 
 --------------------------------------------------------------------------------
--- VARIOUS TEXTOBJS
+-- VARIOUS TEXTOBJS KEYMAPS
 -- stylua: ignore start
 
 -- space: subword
