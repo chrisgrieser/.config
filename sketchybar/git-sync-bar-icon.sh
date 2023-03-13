@@ -29,12 +29,4 @@ passChanges2=$(git status --porcelain --branch | grep -Eo "\d") # to check for a
 [[ -n "$label" ]] && icon=" "
 [[ $submodulesChanges -eq 1 ]] && icon=" "
 
-
-if [[ -n "$label" ]]; then
-	padding="icon.padding_left=2 icon.padding_right=1 label.padding_left=2 label.padding_right=10"
-else
-	padding="icon.padding_left=0 icon.padding_right=0 label.padding_left=0 label.padding_right=0"
-fi
-
-# shellcheck disable=2086
-sketchybar --set "$NAME" icon="$icon" label="$label$configError" $padding
+sketchybar --set "$NAME" icon="$icon" label="$label$configError"
