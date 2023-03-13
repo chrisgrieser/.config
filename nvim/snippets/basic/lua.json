@@ -1,6 +1,6 @@
 {
 	"trim trailing line break": {
-		"prefix": "trim trailing line break" ,
+		"prefix": "trim trailing line break",
 		"body": ":gsub(\"\\n$\", \"\")"
 	},
 	"ignore start/end (stylua)": {
@@ -51,6 +51,20 @@
 	"home": {
 		"prefix": "home",
 		"body": "os.getenv(\"HOME\")"
+	},
+	"try": {
+		"prefix": [
+			"try",
+			"pcall"
+		],
+		"body": [
+			"local success, _ = pcall(${1:func})",
+			"if success then",
+			"\t$2",
+			"else",
+			"\t$0",
+			"end"
+		]
 	},
 	"for each (list)": {
 		"prefix": "for each (list)",
