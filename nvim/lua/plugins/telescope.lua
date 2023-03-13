@@ -182,8 +182,8 @@ local function telescopeConfig()
 						["<C-r>"] = require("telescope._extensions.file_browser.actions").rename,
 						["<D-BS>"] = require("telescope._extensions.file_browser.actions").remove,
 
-						["<D-b>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
 						["<D-a>"] = require("telescope._extensions.file_browser.actions").select_all,
+						["<D-b>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
 					},
 				},
 			},
@@ -203,9 +203,6 @@ return {
 		config = function()
 			telescopeConfig()
 			require("telescope").load_extension("file_browser")
-
-			-- do not color directories differently in file browser
-			vim.cmd.highlight { "def link Directory TelescopeResultsNormal", bang = true }
 		end,
 	},
 }

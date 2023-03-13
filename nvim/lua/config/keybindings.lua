@@ -112,8 +112,8 @@ keymap(
 	[[:silent try | cnext | catch | cfirst | catch | endtry<CR><CR>]],
 	{ desc = "Next Quickfix" }
 )
-keymap("n", "gQ", function() cmd.Telescope("quickfix") end, { desc = " Quickfix list" })
 keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = "Clear Quickfix List" })
+keymap("n", ",q", , { desc = "" })
 
 --------------------------------------------------------------------------------
 -- EDITING
