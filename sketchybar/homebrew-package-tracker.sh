@@ -5,9 +5,9 @@ outdated=$(brew outdated --quiet | wc -l | tr -d " ")
 threshold=30
 
 # only show menubar item above threshold
-# if [[ $outdated -gt $threshold ]] ; then
+if [[ $outdated -gt $threshold ]] ; then
 	label="$outdated" 
 	icon="🍺"	
-# fi
+fi
 
 sketchybar --set "$NAME" icon="$icon" label="$label"
