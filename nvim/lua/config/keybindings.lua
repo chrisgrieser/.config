@@ -92,7 +92,7 @@ keymap("n", "<Esc>", function()
 end, { desc = "Clear Notifications" })
 
 -- FOLDING
-keymap("n", "^", "za", { desc = "ﬕ toggle fold" })
+keymap("n", "^", "za", { desc = "ﬕ Toggle fold" })
 
 -- [M]atchIt
 -- remap needed, since using the builtin matchit plugin
@@ -108,7 +108,12 @@ keymap("n", "gC", "g,", { desc = "goto previous change" })
 keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
 keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Previous Quickfix" })
 keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Delete Quickfix List" })
-keymap("n", "<leader>q", require("funcs.quickfix").replacerWrapper, { desc = " Replacer.nvim" })
+keymap(
+	"n",
+	"<leader>q",
+	function() require("funcs.quickfix").replacerWrapper { "<D-q>", "<D-s>", "q" } end,
+	{ desc = " Replacer.nvim" }
+)
 
 --------------------------------------------------------------------------------
 -- EDITING

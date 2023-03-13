@@ -71,6 +71,7 @@ function M.replacerWrapper(closingKeys)
 
 	-- run replacer
 	require("replacer").run { rename_files = true }
+	vim.cmd.file("Quickfix: Replacer") -- set buffer name
 
 	-- set closing keybindings for replacer.nvim
 	if not closingKeys or #closingKeys == 0 then return end
