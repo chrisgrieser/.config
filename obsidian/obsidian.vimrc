@@ -243,8 +243,9 @@ nmap <CR> :altBuffer
 exmap contextualComment obcommand contextual-comments:advanced-comments
 nmap qq :contextualComment
 
-" insert horizontal divider, if current line is blank
-nmap qw :.s/^$/---/
+" insert horizontal divider in line below
+nmap &c& :.s/.*/---/
+nmap qw &b&&b&&c&
 
 """"""""""""""""""""""
 " Folding
