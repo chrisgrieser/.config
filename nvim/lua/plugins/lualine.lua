@@ -90,12 +90,6 @@ end
 -- LSP-RELATED STATUS COMPONENTS
 
 local navic = require("nvim-navic")
-navic.setup {
-	icons = { Object = "ﴯ " },
-	separator = "  ",
-	depth_limit = 7,
-	depth_limit_indicator = "…",
-}
 
 local function showNavic() return navic.is_available() and not (bo.filetype == "css") end
 
