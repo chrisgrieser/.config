@@ -17,8 +17,9 @@ return {
 		end,
 	},
 	{
-		"gabrielpoca/replacer.nvim",
+		"chrisgrieser/replacer.nvim",
 		lazy = true,
+		dev = true,
 	},
 	{
 		"ThePrimeagen/refactoring.nvim",

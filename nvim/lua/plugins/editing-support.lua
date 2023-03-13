@@ -1,16 +1,25 @@
 return {
-	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
-	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true },
+	-- navigation
 	{ "bkad/CamelCaseMotion", event = "BufReadPost" },
 	{
 		"rhysd/clever-f.vim",
 		keys = { "f", "F", "t", "T" },
 		init = function()
-			vim.g.clever_f_smart_case = 1
 			vim.g.clever_f_mark_direct = 1 -- essentially quickscope
 			vim.g.clever_f_chars_match_any_signs = " " -- space matches special chars
 		end,
 	},
+	-- display line numbers while going to a line with `:`
+	{
+		"nacro90/numb.nvim", 
+		keys = ":",
+		config = function() require("numb").setup() end,
+	},
+
+	-----------------------------------------------------------------------------
+
+	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
+	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true },
 	{
 		"windwp/nvim-autopairs",
 		dependencies = {
@@ -39,27 +48,6 @@ return {
 		end,
 	},
 	{
-		"mbbill/undotree",
-		cmd = "UndotreeToggle",
-		init = function()
-			vim.g.undotree_WindowLayout = 3
-			vim.g.undotree_DiffpanelHeight = 8
-			vim.g.undotree_ShortIndicators = 1
-			vim.g.undotree_SplitWidth = 30
-			vim.g.undotree_DiffAutoOpen = 0
-			vim.g.undotree_SetFocusWhenToggle = 1
-			vim.g.undotree_DiffCommand = "delta"
-			vim.g.undotree_HelpLine = 1
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "undotree",
-				callback = function()
-					vim.keymap.set("n", "<D-w>", ":UndotreeToggle<CR>", { buffer = true })
-					vim.opt_local.listchars = "space: "
-				end,
-			})
-		end,
-	},
-	{
 		"mizlan/iswap.nvim", -- swapping of nodes
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("iswap").setup { autoswap = true } end,
@@ -76,11 +64,6 @@ return {
 				max_join_length = 180,
 			}
 		end,
-	},
-	{
-		"nacro90/numb.nvim", -- display line numbers while going to a line with `:`
-		keys = ":",
-		config = function() require("numb").setup() end,
 	},
 	{
 		"dkarter/bullets.vim", -- auto-bullets for markdown-like filetypes

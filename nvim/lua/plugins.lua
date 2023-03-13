@@ -1,21 +1,5 @@
 return {
 
-
-	-- LSP
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			"lvimuser/lsp-inlayhints.nvim", -- only temporarily needed, until https://github.com/neovim/neovim/issues/18086
-			"ray-x/lsp_signature.nvim", -- signature hint
-			"SmiteshP/nvim-navic", -- breadcrumbs for statusline/winbar
-			"folke/neodev.nvim", -- lsp for nvim-lua config
-			"b0o/SchemaStore.nvim", -- schemas for json-lsp
-		},
-	},
-
-
 	-- File Switching & File Operation
 	{
 		"ThePrimeagen/harpoon",
@@ -68,6 +52,27 @@ return {
 		dev = true,
 		dependencies = "stevearc/dressing.nvim",
 		init = function() vim.g.genghis_disable_commands = true end,
+	},
+	{
+		"mbbill/undotree",
+		cmd = "UndotreeToggle",
+		init = function()
+			vim.g.undotree_WindowLayout = 3
+			vim.g.undotree_DiffpanelHeight = 8
+			vim.g.undotree_ShortIndicators = 1
+			vim.g.undotree_SplitWidth = 30
+			vim.g.undotree_DiffAutoOpen = 0
+			vim.g.undotree_SetFocusWhenToggle = 1
+			vim.g.undotree_DiffCommand = "delta"
+			vim.g.undotree_HelpLine = 1
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "undotree",
+				callback = function()
+					vim.keymap.set("n", "<D-w>", ":UndotreeToggle<CR>", { buffer = true })
+					vim.opt_local.listchars = "space: "
+				end,
+			})
+		end,
 	},
 
 	-- Misc
