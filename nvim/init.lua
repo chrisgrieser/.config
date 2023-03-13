@@ -17,7 +17,6 @@ if vim.g.neovide then
 else
 	require("config.terminal-only")
 end
-require("config.lsp-and-diagnostics") 
 
 require("config.options-and-autocmds")
 require("config.automating-nvim")
