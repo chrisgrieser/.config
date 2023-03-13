@@ -15,10 +15,6 @@ return {
 		keys = ":",
 		config = function() require("numb").setup() end,
 	},
-	{
-		"gennaro-tedesco/nvim-jqx",
-		ft = { "json", "yaml" },
-	},
 
 	-----------------------------------------------------------------------------
 
