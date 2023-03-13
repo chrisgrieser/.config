@@ -51,10 +51,6 @@ local function tsConfig()
 				include_surrounding_whitespace = false,
 				disable = { "markdown" }, -- so `al` can be remapped to link text object
 				keymaps = {
-					["av"] = "@assignment.rhs", -- [v]: value
-					["iv"] = "@assignment.rhs", 
-					["ak"] = "@assignment.lhs", -- [k]ey
-					["ik"] = "@assignment.lhs", 
 					["an"] = "@number.inner", -- [n]umber
 					["<CR>"] = "@return.outer", -- <CR>: return (`ar` already = a rectangular bracket)
 					["a/"] = "@regex.outer", -- /regex/

@@ -75,6 +75,14 @@ keymap("o", "<Space>", function() require("various-textobjs").subword(true) end,
 -- L: link
 keymap("o", "L", function() require("various-textobjs").url() end, { desc = "link textobj" })
 
+-- iv/av: value textobj
+keymap({ "x", "o" }, "iv", function() require("various-textobjs").value(true) end, { desc = "inner value textobj" })
+keymap({ "x", "o" }, "av", function() require("various-textobjs").value(false) end, { desc = "outer value textobj" })
+
+-- ik/ak: value textobj
+keymap({ "x", "o" }, "ik", function() require("various-textobjs").key(true) end, { desc = "inner key textobj" })
+keymap({ "x", "o" }, "ak", function() require("various-textobjs").key(false) end, { desc = "outer key textobj" })
+
 -- n: [n]ear end of the line
 keymap({ "o", "x" }, "n", function() require("various-textobjs").nearEoL() end, { desc = "near EoL textobj" })
 

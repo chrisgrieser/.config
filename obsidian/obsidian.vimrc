@@ -90,8 +90,8 @@ exmap followNextLink obcommand shukuchi:open-link
 nmap gx :followNextLink
 nmap gd :followNextLink
 
-exmap live-grep obcommand obsidian-another-quick-switcher:grep
-nmap gF :live-grep
+exmap liveGrep obcommand obsidian-another-quick-switcher:grep
+nmap gF :liveGrep
 
 " [g]oto [o]pen file (= Quick Switcher)
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search
@@ -242,10 +242,6 @@ nmap <CR> :altBuffer
 " a code block
 exmap contextualComment obcommand contextual-comments:advanced-comments
 nmap qq :contextualComment
-
-" insert horizontal divider surrounded by blank lines (&b& defined further above)
-nmap &c& :.s/.*/---/
-nmap qw &b&&b&&c&&b&
 
 """"""""""""""""""""""
 " Folding

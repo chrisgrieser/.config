@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # https://chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/
 #-------------------------------------------------------------------------------
-if ! command -v duti &>/dev/null; then echo "duti not installed." && exit 1; fi
+if ! command -v duti &>/dev/null; then echo "duti not installed." && return 1; fi
 
 # Config
 browserID="com.vivaldi.Vivaldi"
@@ -71,12 +71,3 @@ duti -s net.highlightsapp.universal pdf all
 duti -s org.m0k.transmission torrent all
 duti -s com.busymac.busycal3 ics all
 
-
-#───────────────────────────────────────────────────────────────────────────────
-
-# to restore Finder as default file manager
-# defaults delete -g NSFileViewer
-# defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.apple.finder";}'
-# Reference
-# https://binarynights.com/manual#fileviewer
-# https://github.com/marta-file-manager/marta-issues/issues/861
