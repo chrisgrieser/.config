@@ -185,6 +185,43 @@ autocmd("BufWinEnter", {
 })
 
 --------------------------------------------------------------------------------
+-- DIAGNOSTICS
+
+local function diagnosticFormat(diagnostic, mode)
+	local msg = diagnostic.message:gsub("^%s*", ""):gsub("%s*$", "")
+local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or ""
+	local code = tostring(diagnostic.code)
+
+	-- stylelint and already includes the code in the message, codespell has no code
+	local out
+if source == "stylelint" or source == "codespell" then
+		out = msg
+	else
+		out = msg .. " (" .. code .. ")"
+	end
+
+-- append source to float
+if diagnostic.source and mode == "float" then out = out .. " [" .. source .. "]" end
+
+	return out
+end
+
+vim.diagnostic.config {
+	virtual_text = {
+		format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
+		severity = { min = vim.diagnostic.severity.WARN },
+	},
+	float = {
+		focusable = true,
+		border = BorderStyle,
+		max_width = 50,
+		header = "", -- remove "Diagnostics:" heading
+		format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,
+	},
+}
+
+--------------------------------------------------------------------------------
+
 
 -- Skeletons (Templates)
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
