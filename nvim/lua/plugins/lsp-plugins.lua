@@ -1,3 +1,7 @@
+
+--
+--------------------------------------------------------------------------------
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -10,5 +14,10 @@ return {
 			"folke/neodev.nvim", -- lsp for nvim-lua config
 			"b0o/SchemaStore.nvim", -- schemas for json-lsp
 		},
+	},
+	{
+		"smjonas/inc-rename.nvim",
+		event = "LspAttach",
+		config = function() require("inc_rename").setup {} end,
 	},
 }

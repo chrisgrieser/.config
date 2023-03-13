@@ -397,7 +397,12 @@ autocmd("LspAttach", {
 
 		if capabilities.renameProvider then
 			-- overrides treesitter-refactor's rename
-			keymap("n", "<leader>R", vim.lsp.buf.rename, { desc = "璉Var Rename", buffer = true })
+			keymap("n", "<leader>R", function()
+				-- cannot run `cmd.IncRename` since the plugin *has* to use the
+				-- command line
+				return ":IncRename " .. fn.expand("<cword>")
+			end, { desc = "璉IncRename", buffer = true, expr = true })
+			-- keymap("n", "<leader>R", vim.lsp.buf.rename, { desc = "璉Var Rename", buffer = true })
 		end
 
 		-- stylua: ignore start
