@@ -113,7 +113,7 @@ keymap(
 	{ desc = "Next Quickfix" }
 )
 keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = "Clear Quickfix List" })
-keymap("n", ",q", , { desc = "" })
+keymap("n", "<leader>q", , { desc = "" })
 
 --------------------------------------------------------------------------------
 -- EDITING
