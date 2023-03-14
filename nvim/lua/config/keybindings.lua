@@ -33,7 +33,7 @@ end, { desc = "גּ Copy last command" })
 keymap("n", "<leader>la", ":<Up><CR>", { desc = "גּ Run last command again" })
 
 -- copy [l]ast [n] notification
-keymap("n", "<leader>ln", function ()
+keymap("n", "<leader>ln", function()
 	local history = require("notify").history()
 	local lastNotify = history[#history]
 	local msg = table.concat(lastNotify.message, "\n")
@@ -397,25 +397,23 @@ end, { desc = "璉Copy Breadcrumbs" })
 
 autocmd("LspAttach", {
 	callback = function(args)
-		local bufnr = args.buf
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local capabilities = client.server_capabilities
 
-		require("lsp-inlayhints").on_attach(client, bufnr)
-
+		-- overrides treesitter-refactor's rename
 		if capabilities.renameProvider then
-			-- overrides treesitter-refactor's rename
-			keymap("n", "<leader>R", function()
-				-- cannot run `cmd.IncRename` since the plugin *has* to use the
-				-- command line
-				return ":IncRename " .. fn.expand("<cword>")
-			end, { desc = "璉IncRename", buffer = true, expr = true })
-			-- keymap("n", "<leader>R", vim.lsp.buf.rename, { desc = "璉Var Rename", buffer = true })
+			-- cannot run `cmd.IncRename` since the plugin *has* to use the
+			-- command line
+			keymap(
+				"n",
+				"<leader>R",
+				function() return ":IncRename " .. fn.expand("<cword>") end,
+				{ desc = "璉IncRename", buffer = true, expr = true }
+			)
 		end
 
 		-- stylua: ignore start
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
-			require("nvim-navic").attach(client, bufnr)
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "璉Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
 			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "璉Workspace Symbols", buffer = true })
 		end
@@ -428,8 +426,9 @@ autocmd("LspAttach", {
 
 		-- Save & Format
 		keymap({ "n", "i", "x" }, "<D-s>", function()
+			cmd.update()
+			if bo.filetype == "javascript" or bo.filetype == "typescript" then cmd.EslintFixAll() end
 			vim.lsp.buf.format { async = true }
-			cmd.write()
 		end, { buffer = true, desc = "璉Save & Format" })
 	end,
 })
