@@ -35,6 +35,7 @@ local function hideOthers(appObj)
 	local appsNotToHide = {
 		"IINA",
 		"zoom.us",
+		"Cleanshot X",
 		"Twitter",
 		"Alfred", -- needed for Alfred compatibility mode
 		appObj:name(), -- app itself

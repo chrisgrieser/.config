@@ -76,7 +76,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Scholar Searches</string>
+	<string>Academic Searches</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -106,7 +106,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ss</string>
+				<string>as</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -148,11 +148,11 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ss</string>
+				<string>as</string>
 				<key>subtext</key>
 				<string>Google Scholar &amp; Scite_</string>
 				<key>text</key>
-				<string>CItation Searches: {query}</string>
+				<string>Citation Searches: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -190,7 +190,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ss</string>
+				<string>as</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -253,7 +253,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ss</string>
+				<string>as</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
