@@ -7,7 +7,6 @@ local fn = vim.fn
 local cmd = vim.cmd
 local lineNo = vim.fn.line
 local colNo = vim.fn.col
-local expand = vim.fn.expand
 
 ---runs :normal natively with bang
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end

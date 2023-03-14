@@ -12,19 +12,20 @@ end, { buffer = true, desc = "Save & Format" })
 --------------------------------------------------------------------------------
 
 -- Build
-keymap("n", "<leader>r", function()
-	cmd.AppleScriptRun()
-	cmd.wincmd("p") -- switch to previous window
-end, { buffer = true, desc = " Run Applescript" })
+keymap("n", "<leader>r", cmd.AppleScriptRun, { buffer = true, desc = " Run Applescript" })
 
---------------------------------------------------------------------------------
--- AppleScript Plugin Config
--- https://github.com/mityu/vim-applescript
-vim.g.applescript_config = {
+vim.g.applescript_config = { -- https://github.com/mityu/vim-applescript
 	run = {
 		output = {
-			open_command = "8 split",
+			open_command = "7 split",
 			buffer_name = "Applescript Output",
 		},
 	},
 }
+
+autocmd("FileType", {
+	pattern = "AppleScriptRunOutput",
+	callback = function()
+		wo.wrap = true	
+	end,
+})

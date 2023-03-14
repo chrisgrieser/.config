@@ -1,6 +1,7 @@
 #!/usr/bin/env osascript
 on run argv
-	set num to argv as number
+	# set num to argv as number
+	set num to 1
 
 	tell application "System Events"
 		tell process "Twitter" 

@@ -57,9 +57,7 @@
 	"autocmd (FileType)": {
 		"prefix": "autocmd (FileType)" ,
 		"body": [
-			"augroup(\"${1:groupname}\", {})",
 			"autocmd(\"FileType\", {",
-			"\tgroup = \"${1:groupname}\",",
 			"\tpattern = \"${2:ft}\",",
 			"\tcallback = function()",
 			"\t\t$3",
