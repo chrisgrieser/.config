@@ -30,12 +30,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				},
 			}
 			require("lsp-inlayhints").on_attach(client, bufnr)
+
 		end
-		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
+		if
+			capabilities.documentSymbolProvider
+			and client.name ~= "cssls" -- navic not that useful for css
+		then
 			require("nvim-navic").setup {
 				icons = { Object = "ﴯ " },
 				separator = "  ",
-				depth_limit = 7,
+				depth_limit = 8,
 				depth_limit_indicator = "…",
 			}
 			require("nvim-navic").attach(client, bufnr)

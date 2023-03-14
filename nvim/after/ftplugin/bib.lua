@@ -1,4 +1,3 @@
-require("config.utils")
---------------------------------------------------------------------------------
+
 -- do not autowrap
-bo.formatoptions = bo.formatoptions:gsub("t", "") 
+vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "") 
