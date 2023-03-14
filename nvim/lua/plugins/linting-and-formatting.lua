@@ -21,6 +21,9 @@ local lintersAndFormatters = {
 local function nullConfig()
 	local builtins = require("null-ls").builtins
 	require("null-ls").setup {
+		-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/CONFIG.md
+		border = BorderStyle,
+
 		sources = {
 			-- GLOBAL
 			builtins.diagnostics.codespell.with { -- common misspellings. Far less false positives than with cspell
@@ -38,16 +41,7 @@ local function nullConfig()
 			},
 
 			-- PYTHON
-			builtins.formatting.black.with {
-				args = {
-					"--config",
-					LinterConfig .. "/black.toml",
-					"--stdin-filename",
-					"$FILENAME",
-					"--quiet",
-					"-",
-				},
-			},
+			builtins.formatting.black,
 
 			-- SHELL
 			builtins.diagnostics.zsh, -- basic diagnostics via shell -x
@@ -56,6 +50,7 @@ local function nullConfig()
 			builtins.diagnostics.shellcheck.with {
 				extra_filetypes = { "zsh" },
 				extra_args = { "--shell=bash" },
+				-- diagnostics_format = "[#{c}] #{m} (#{s})",
 			},
 			builtins.code_actions.shellcheck.with {
 				extra_filetypes = { "zsh" },
@@ -65,13 +60,13 @@ local function nullConfig()
 			-- JS/TS
 			builtins.formatting.prettier.with {
 				filetypes = { "javascript", "typescript", "yaml" }, -- do not format markdown, css, and so on
-				extra_args = { "--config", LinterConfig .. "/.prettierrc.yml" },
+				-- extra_args = { "--config", LinterConfig .. "/.prettierrc.yml" },
 			},
 
 			-- CSS
 			builtins.formatting.stylelint.with {
 				-- using config without ordering, since ordering on save is confusing
-				extra_args = { "--config", LinterConfig .. "/.stylelintrc-formatting.yml" },
+				-- extra_args = { "--config", LinterConfig .. "/.stylelintrc-formatting.yml" },
 			},
 			builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 				filetypes = { "css" },

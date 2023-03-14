@@ -7,4 +7,7 @@ date=$(date +'%a %e. %b %H:%M')
 # non-monospace font
 (($(date +'%s') % 2 == 1)) && date="${date//:/  }"
 
+apple=""
+
+
 sketchybar --set "$NAME" label="$date"
