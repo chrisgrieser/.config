@@ -35,7 +35,8 @@ cons.consoleFont(baseFont)
 ---useless layout info or warnings, or info on extension loading.
 -- HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
 function CleanupConsole()
-	local consoleOutput = tostring(hs.console.getConsole())
+	local consoleOutput = tostring(cons.getConsole())
+	hs.console.clearConsole()
 	local layoutLinesCount = 0
 
 	local cleanLines = {}
@@ -63,11 +64,11 @@ function CleanupConsole()
 		-- 	:gsub("%*%*%* ERROR:", "ERROR")
 		-- 	:gsub("%d%d:%d%d:%d%d %*%* Warning: ", "WARN")
 		if line:find("ERROR") then
-			hs.console.printStyledtext(colorizeString(line, red))
+			cons.printStyledtext(colorizeString(line, red))
 		elseif line:find("Warning") then
-			hs.console.printStyledtext(colorizeString(line, yellowDark))
+			cons.printStyledtext(colorizeString(line, yellowDark))
 		else
-			hs.console.printStyledtext(colorizeString(line, printColorLight))
+			cons.printStyledtext(colorizeString(line, printColorLight))
 		end
 	end
 end
