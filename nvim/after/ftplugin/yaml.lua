@@ -5,7 +5,6 @@ bo.shiftwidth = 2
 bo.tabstop = 2
 bo.softtabstop = 2
 bo.expandtab = true
-opt_local.listchars = "tab: >,multispace:·,leadmultispace: "
 
 --------------------------------------------------------------------------------
 
@@ -18,5 +17,7 @@ keymap("n", "<leader>r", function()
 		local result = fn.system('osascript -l JavaScript "' .. karabinerBuildScp .. '"')
 		result = result:gsub("\n$", "")
 		vim.notify(result)
+	else
+		vim.notify("Not in Karabiner Directory.", logWarn)
 	end
 end, { buffer = true, desc = " Compile Karabiner Config" })
