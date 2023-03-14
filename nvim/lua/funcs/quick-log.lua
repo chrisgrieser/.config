@@ -51,7 +51,7 @@ function M.log()
 	elseif ft == "javascript" or ft == "typescript" then
 		templateStr = 'console.log("%s:", %s);'
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		templateStr = 'echo "(log) %s: $%s"'
+		templateStr = 'echo "[log] %s: $%s"'
 	elseif ft == "applescript" then
 		templateStr = 'log "%s:" & %s'
 	elseif ft == "css" or ft == "scss" then
@@ -68,27 +68,30 @@ end
 ---adds simple "beep" log statement to check whether conditionals have been
 ---triggered. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.beeplog()
-	local logStatement
+	local templateStr
 	local ft = bo.filetype
-	local emoji = "🤖"
+
+	local emojis = { "🤖", "👽", "👾", "💣" }
+	local randomEmoji = emojis[math.random(1, #emojis)]
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = 'Notify("' .. emoji .. ' beep")'
+		templateStr = 'Notify("%s beep")'
 	elseif ft == "lua" or ft == "python" then
-		logStatement = 'print("' .. emoji .. ' beep")'
+		templateStr = 'print("%s beep")'
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = 'console.log("' .. emoji .. ' beep");'
+		templateStr = 'console.log("%s beep");'
 	elseif ft == "zsh" or ft == "bash" or ft == "sh" then
-		logStatement = 'echo "' .. emoji .. ' [beep]"'
+		templateStr = 'echo "%s [beep]"'
 	elseif ft == "applescript" then
-		logStatement = "beep"
+		templateStr = "beep"
 	elseif ft == "css" or ft == "scss" then
-		logStatement = "outline: 2px solid red !important;"
+		templateStr = "outline: 2px solid red !important;"
 	else
 		vim.notify("Beeplog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
+	local logStatement = string.format(templateStr, randomEmoji)
 	append(logStatement)
 end
 
