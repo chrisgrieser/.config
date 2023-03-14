@@ -187,19 +187,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>96AA9231-3D2B-4928-8B57-134761D56B79</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8A0CB43E-02FF-4AD4-95A2-44117287A5BD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A25DDA0D-DA11-46FF-9CCB-41D3D338B420</key>
 		<array>
 			<dict>
@@ -412,6 +399,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>/System/Library/Sounds</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>B3001FDD-BA68-4941-80C0-52C8088E37E3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -429,21 +431,6 @@
 			<string>46416694-376E-4AFC-B8AD-9861AB53C7C8</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>/System/Library/Sounds</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>B3001FDD-BA68-4941-80C0-52C8088E37E3</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1575,48 +1562,6 @@ echo -n "WiFi"</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>screenshot history</string>
-				<key>subtext</key>
-				<string>CleanShot</string>
-				<key>text</key>
-				<string>Screenshot History</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>96AA9231-3D2B-4928-8B57-134761D56B79</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>cleanshot://open-history</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>8A0CB43E-02FF-4AD4-95A2-44117287A5BD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -1801,13 +1746,6 @@ echo -n "WiFi"</string>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
-		<key>8A0CB43E-02FF-4AD4-95A2-44117287A5BD</key>
-		<dict>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>1355</real>
-		</dict>
 		<key>8B8645C1-776A-41E4-B093-DF59FEF6D696</key>
 		<dict>
 			<key>colorindex</key>
@@ -1852,13 +1790,6 @@ echo -n "WiFi"</string>
 			<real>880</real>
 			<key>ypos</key>
 			<real>515</real>
-		</dict>
-		<key>96AA9231-3D2B-4928-8B57-134761D56B79</key>
-		<dict>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>1355</real>
 		</dict>
 		<key>A0F6F797-B581-4923-B4DA-A0F0A2D0C0CD</key>
 		<dict>

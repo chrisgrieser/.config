@@ -18,7 +18,7 @@ mkdir -p "$BACKUP_DEST"
 cd "$BACKUP_DEST" || exit 1
 
 # Log (on the Mac)
-LOG_LOCATION="$(dirname "$0")/backup.log"
+LOG_LOCATION="$DATA_DIR/backup.log"
 echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >>"$LOG_LOCATION"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -78,6 +78,6 @@ osascript -e 'display notification "" with title "Backup finished." sound name "
 
 #───────────────────────────────────────────────────────────────────────────────
 
-sleep 1.2
+sleep 3
 print "\033[1;34mEjecting $VOLUME_NAME.\033[0m"
 diskutil eject "$VOLUME_NAME"

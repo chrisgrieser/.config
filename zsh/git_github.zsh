@@ -177,7 +177,7 @@ function rel() {
 	elif [[ -f ../../../.release.sh ]]; then
 		zsh ../../../.release.sh "$*"
 	else
-		echo "No '.release.sh' found."
+		print "\033[1;31mNo '.release.sh' found.\033[0m"
 	fi
 }
 
@@ -214,15 +214,16 @@ function gdf() {
 
 	# decision on how to act on file
 	echo "$deleted_path"
-	print "\033[1;34m-----------------------"
+	echo
+	print "\033[1;34m-------------------------------------"
 	echo "[r]estore (checkout file)"
 	echo "[s]how file"
 	echo "[c]opy content"
 	echo "copy [h]ash of last commit w/ file"
 	echo "[a]bort"
-	print "\033[0m-----------------------"
-
+	print "-------------------------------------\033[0m"
 	echo -n "> "
+
 	read -r -k 1 DECISION
 	# shellcheck disable=SC2193
 	if [[ "$DECISION:l" == "c" ]]; then
