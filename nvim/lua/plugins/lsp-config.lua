@@ -33,7 +33,6 @@ lspSettings.lua_ls = {
 		diagnostics = {
 			disable = { "trailing-space" },
 		},
-		-- workspace = { checkThirdParty = false }, -- HACK https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		hint = {
 			enable = true,
 			setType = true,
@@ -100,7 +99,7 @@ lspSettings.jsonls = {
 	json = {
 		validate = { enable = true },
 		format = { enable = true },
-		schemas = require("schemastore").json.schemas(),
+		schemas = function() return require("schemastore").json.schemas() end,
 	},
 }
 
@@ -157,7 +156,7 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = "folke/neodev.nvim",-- lsp for nvim-lua config
+		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = function()
 			-- INFO plugin must be setup before lua lsp-config setup
 			require("neodev").setup {
