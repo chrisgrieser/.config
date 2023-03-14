@@ -93,8 +93,7 @@ live_config_reload: true
 hints:
   enabled:
     # urls
-    - regex:
-        "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\0\
+    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\0\
         -\x1F\x7F-\x9F<>\"\\s{-}\\^⟨⟩`]+"
       hyperlinks: true
       command: open
@@ -118,6 +117,10 @@ key_bindings:
   - { key: V, mods: Alt, action: ToggleViMode }
   - { key: Escape, mode: Vi, action: ToggleViMode }
 
+  # scrolling
+  - { key: PageUp, mode: ~Alt, action: ScrollPageUp }
+  - { key: PageDown, mode: ~Alt, action: ScrollPageDown }
+
   # Clear workaround since the default config does not work
   - { key: K, mode: ~Search, mods: Command, chars: "clear\n" }
   - { key: K, mode: ~Search, mods: Command, action: ClearHistory }
@@ -129,6 +132,7 @@ key_bindings:
     command:
       program: sh
       args: [-c, open ~/.config/alacritty/alacritty.yml]
+
 
   # fix various special characters for the German keyboard https://github.com/alacritty/alacritty/wiki/Keyboard-mappings#mac-os-4
   # INFO can't find a method to fix the yaml schema error though
