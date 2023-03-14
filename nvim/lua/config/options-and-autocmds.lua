@@ -113,10 +113,19 @@ opt.showbreak = "↪ " -- precedes wrapped lines
 -- accordingly
 autocmd("BufReadPost", {
 	callback = function()
-		if bo.expandtab then
-			opt_local.listchars = { tab = " >", leadmultispace = " " }
+		local usesSpaces = bo.expandtab
+		if usesSpaces then
+			opt_local.listchars = {
+				tab = " >",
+				multispace = "·",
+			}
 		else
-			opt_local.listchars = { tab = "  ", leadmultispace = "·" }
+			opt_local.listchars = {
+				tab = "  ",
+				multispace = "·",
+				leadmultispace = "·",
+				lead = "·",
+			}
 		end
 	end,
 })

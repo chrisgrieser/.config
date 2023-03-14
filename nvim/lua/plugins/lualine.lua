@@ -2,20 +2,16 @@ local function indentation()
 	local out = ""
 	local usesSpaces = vim.bo.expandtab
 	local ft = vim.bo.filetype
-	local spaceFiletypes = {"python", "yaml"}
-	local ignoredFiletypes = { "css", "markdown", "lazy", "" }
-	if
-		vim.tbl_contains(ignoredFiletypes, ft)
-		or vim.fn.mode() == "i"
-		or vim.bo.buftype ~= ""
-	then
+	local spaceFiletypes = { "python", "yaml" }
+	local ignoredFiletypes = { "css", "markdown", "" }
+	if vim.tbl_contains(ignoredFiletypes, ft) or vim.fn.mode() == "i" or vim.bo.buftype ~= "" then
 		return ""
 	end
 
 	-- non-default indentation
-	if usesSpaces and not vim.tbl_contains(spaceFiletypes, ft) then 
-		out = out .. tostring(bo.tabstop) .." spaces"
-	elseif not usesSpaces and vim.tbl_contains(spaceFiletypes, ft) then 
+	if usesSpaces and not vim.tbl_contains(spaceFiletypes, ft) then
+		out = out .. tostring(bo.tabstop) .. " spaces"
+	elseif not usesSpaces and vim.tbl_contains(spaceFiletypes, ft) then
 		out = out .. "tabs"
 	end
 
@@ -25,11 +21,11 @@ local function indentation()
 	local mixed = vim.fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then
-		out = out .. "  st"
+		out = out .. " st"
 	elseif hasSpaces and not usesSpaces then
 		out = out .. " s"
 	elseif hasTabs and usesSpaces then
-		out = out .. "t"
+		out = out .. " t"
 	end
 	if out ~= "" then out = " " .. out end
 	return out
