@@ -85,17 +85,17 @@
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>0</integer>
+						<integer>4</integer>
 						<key>matchstring</key>
-						<string></string>
+						<string>\d</string>
 						<key>outputlabel</key>
-						<string></string>
+						<string>yes</string>
 						<key>uid</key>
 						<string>04E666CA-5586-4079-A56A-FA2D24B60973</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>else</string>
+				<string>no</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
@@ -129,8 +129,10 @@
 		</dict>
 		<key>E225BCE0-EFEF-475A-9D6D-B5AE77ED9B4C</key>
 		<dict>
+			<key>note</key>
+			<string>number</string>
 			<key>xpos</key>
-			<real>315</real>
+			<real>316</real>
 			<key>ypos</key>
 			<real>310</real>
 		</dict>
