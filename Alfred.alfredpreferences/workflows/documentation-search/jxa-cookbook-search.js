@@ -18,6 +18,8 @@ const baseURL = "https://github.com";
 
 const ahrefRegex = /.*?href="(.*?)">(.*?)<.*/i;
 
+const bla = category ? 2 : 4;
+
 const workArray = app
 	.doShellScript(`curl -sL "${wikiURL}"`)
 	.split("\r")
@@ -27,7 +29,7 @@ const workArray = app
 		const subsite = line.replace(ahrefRegex, "$1");
 		const title = line.replace(ahrefRegex, "$2");
 		const url = `${baseURL}${subsite}`;
-		const isSubheading = subsite.includes("#")
+		const isSubheading = subsite.includes("#");
 		// https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/iTunes#play-pause-and-stop
 		const category = isSubheading ? url.match(/[\w-]+(?=#)/)[0].replaceAll("-", " ") : "";
 
