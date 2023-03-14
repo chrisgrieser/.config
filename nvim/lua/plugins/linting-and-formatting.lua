@@ -14,6 +14,10 @@ local lintersAndFormatters = {
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
+--------------------------------------------------------------------------------
+-- INFO
+-- eslint, stylua and prettier use project-specific config files
+-- the other linters use a global config file
 
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
@@ -21,17 +25,16 @@ local lintersAndFormatters = {
 local function nullConfig()
 	local builtins = require("null-ls").builtins
 	require("null-ls").setup {
-		-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/CONFIG.md
 		border = BorderStyle,
 
 		sources = {
 			-- GLOBAL
-			builtins.diagnostics.codespell.with { -- common misspellings. Far less false positives than with cspell
+			builtins.diagnostics.codespell.with {
 				disabled_filetypes = { "css", "bib" }, -- base64-encoded fonts cause a lot of errors
 				-- can't use `--skip`, since it null-ls reads from stdin and not from file
 				args = { "--ignore-words", LinterConfig .. "/codespell-ignore.txt", "-" },
 			},
-			builtins.formatting.codespell.with { -- autofix those misspellings
+			builtins.formatting.codespell.with {
 				disabled_filetypes = { "css", "bib" },
 				extra_args = { "--ignore-words", LinterConfig .. "/codespell-ignore.txt" },
 			},
@@ -125,11 +128,8 @@ return {
 	{
 
 		"jayp0521/mason-null-ls.nvim",
-		lazy = true, -- loaded by null-ls
+		lazy = true, 
 		config = function()
-			-- mason-null-ls should be loaded after null-ls and mason
-			-- https://github.com/jayp0521/mason-null-ls.nvim#setup
-
 			require("mason-null-ls").setup {
 				ensure_installed = lintersAndFormatters,
 			}

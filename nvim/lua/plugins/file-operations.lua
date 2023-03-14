@@ -30,10 +30,10 @@ return {
 				detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp
 				patterns = {
 					".git",
-					"package.json", -- node
+					"package.json", -- node projects
 					"=File Hub", -- my general-inbox-working-directory
 					"info.plist", -- Alfred workflows
-					".luarc.json", -- lua projects
+					".stylua.toml", -- lua projects
 					".harpoon", -- manually mark certain folders as project roots
 				},
 				exclude_dirs = { "node_modules", "build", "dist" },
