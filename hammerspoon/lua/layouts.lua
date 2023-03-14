@@ -52,9 +52,10 @@ local function workLayout()
 	require("lua.private").closer()
 	if not isWeekend() then OpenApp("Slack") end
 	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts", "Obsidian" }
+	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 
 	-- layout apps
-	Wait(1)
+	Wait(0.5)
 	local layout = {
 		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
@@ -68,10 +69,9 @@ local function workLayout()
 	-- setup apps
 	RestartApp("AltTab")
 	ShowAllSidebars()
-	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 	TwitterToTheSide()
 	TwitterScrollUp()
-	RunWithDelays({0.5, 1}, function () App("Drafts"):activate() end)
+	RunWithDelays(0.5, function () App("Drafts"):activate() end)
 
 	-- finish
 	print("🔲 WorkLayout: done")
