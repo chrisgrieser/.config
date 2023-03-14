@@ -1,11 +1,5 @@
-local M = {}
 
----runs :normal natively with bang
-local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
-
---------------------------------------------------------------------------------
-
-local words = {
+local generalWords = {
 	{ "true", "false" },
 	{ "warn", "error" },
 	{ "on", "off" },
@@ -29,7 +23,8 @@ local words = {
 	{ "inner", "outer" },
 }
 
-local ftWords = {
+-- INFO `false` indicates that the second element is not exchanged backwards
+local filetypeSpecificWords = {
 	lua = {
 		{ "if", "elseif", false },
 		{ "elseif", "else", false },
@@ -56,26 +51,38 @@ local ftWords = {
 		{ "echo", "print" },
 		{ "exit", "return" },
 	},
+	-- filetypes to link to another filetype
+	typescript = "javascript",
+	bash = "sh",
+	zsh = "sh",
 }
 
 --------------------------------------------------------------------------------
 
----switches words under the cursor from `true` to `false` and similar cases
+local M = {}
+
+---switches words under the cursor to their opposite, e.g. `true` to `false`
 function M.switch()
-	local iskeywBefore = vim.opt.iskeyword:get()
-	vim.opt.iskeyword:remove { "_", "-", "." }
 
 	local ft = vim.bo.filetype
-	local wordsToUse = words
-	if ftWords[ft] then
-		for _, item in pairs(ftWords) do
-			table.insert(words, item)
-		end
+	local wordsToUse
+
+	-- filetype inherits word by other filetype
+	if (filetypeSpecificWords[ft]) == "string" then ft = tostring(filetypeSpecificWords[ft]) end
+
+	if filetypeSpecificWords[ft] then
+		wordsToUse = vim.tbl_extend("force", generalWords, filetypeSpecificWords[ft])
+	else
+		wordsToUse = generalWords
 	end
 
+	-- remove keywords for <cword>
+	local iskeywBefore = vim.opt.iskeyword:get()
+	vim.opt.iskeyword:remove { "_", "-", "." }
 	local cword = vim.fn.expand("<cword>")
+
 	local newWord = nil
-	for _, pair in pairs(words) do
+	for _, pair in pairs(wordsToUse) do
 		if cword == pair[1] then
 			newWord = pair[2]
 			break
@@ -87,7 +94,7 @@ function M.switch()
 
 	if newWord then
 		vim.fn.setreg("z", newWord)
-		normal([[viw"zP]])
+		vim.cmd.normal { 'viw"zP', bang = true }
 	else
 		vim.notify("Word under cursor cannot be switched.", vim.log.levels.WARN)
 	end
