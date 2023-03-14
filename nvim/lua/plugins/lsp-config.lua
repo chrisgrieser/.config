@@ -61,8 +61,8 @@ lspSettings.cssls = {
 	},
 }
 
+-- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
-	-- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 	format = {}, -- not used, since taken care of by prettier
 	inlayHints = {
 		includeInlayEnumMemberValueHints = true,
@@ -78,12 +78,10 @@ local jsAndTsSettings = {
 
 lspSettings.tsserver = {
 	completions = { completeFunctionCalls = true },
-	diagnostics = {
-		-- https://github.com/microsoft/TypeScript/blob/master/src/compiler/diagnosticMessages.json
-		ignoredCode = {},
-	},
 	typescript = jsAndTsSettings,
 	javascript = jsAndTsSettings,
+	-- https://github.com/microsoft/TypeScript/blob/master/src/compiler/diagnosticMessages.json
+	diagnostics = { ignoredCode = {} },
 }
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
@@ -99,7 +97,6 @@ lspSettings.jsonls = {
 	json = {
 		validate = { enable = true },
 		format = { enable = true },
-		schemas = require("schemastore").json.schemas(),
 	},
 }
 
@@ -128,7 +125,7 @@ lspCapabilities.textDocument.foldingRange = {
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- package manager
 		"williamboman/mason.nvim",
 		lazy = true,
 		config = function()
@@ -144,7 +141,7 @@ return {
 			}
 		end,
 	},
-	{
+	{ -- auto-install lsp servers
 		"williamboman/mason-lspconfig.nvim",
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
@@ -154,7 +151,7 @@ return {
 			}
 		end,
 	},
-	{
+	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = function()

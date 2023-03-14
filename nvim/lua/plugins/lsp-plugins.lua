@@ -57,10 +57,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --------------------------------------------------------------------------------
 
 return {
-	{ -- schemas for json-lsp
-		"b0o/SchemaStore.nvim",
-		lazy = false, -- can't find a good way of lazyload it without breaking something :(
-	},
 	{ -- breadcrumbs for statusline/winbar
 		"SmiteshP/nvim-navic",
 		lazy = true, -- loaded when attaching to supporting lsp servers

@@ -70,15 +70,16 @@ end
 function M.beeplog()
 	local logStatement
 	local ft = bo.filetype
+	local emoji = "🤖"
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = 'Notify("beep")'
+		logStatement = 'Notify("' .. emoji .. ' beep")'
 	elseif ft == "lua" or ft == "python" then
-		logStatement = 'print("beep")'
+		logStatement = 'print("' .. emoji .. ' beep")'
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = 'console.log("beep");'
-	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		logStatement = 'echo "(beep)"'
+		logStatement = 'console.log("' .. emoji .. ' beep");'
+	elseif ft == "zsh" or ft == "bash" or ft == "sh" then
+		logStatement = 'echo "' .. emoji .. ' [beep]"'
 	elseif ft == "applescript" then
 		logStatement = "beep"
 	elseif ft == "css" or ft == "scss" then
@@ -141,11 +142,11 @@ function M.timelog()
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" or ft == "fish" then
 		logStatement1 = {
 			"timelogStart=$(date +%s)",
-			'echo "(time) start"',
+			'echo "[time] start"',
 		}
 		logStatement2 = {
 			"timelogEnd=$(date +%s) && runtime = $((timelogEnd - timelogStart))",
-			'echo "(time) ${runtime}s"',
+			'echo "[time] ${runtime}s"',
 		}
 	else
 		vim.notify("Timelog does not support " .. ft .. " yet.", logWarn)
@@ -180,17 +181,20 @@ function M.removelogs()
 	local numOfLinesBefore = fn.line("$")
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = 'Notify("beep")'
-		vim.notify("Only removing beep logs for hammmerspoon, since prints are kept")
+		logStatement = 'Notify(".*beep")'
+		vim.notify("Only removing beep logs for hammmerspoon, since prints are kept.")
 	elseif ft == "lua" or ft == "python" then
 		logStatement = "print"
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = "console.log"
+		logStatement = {
+			"console.log",
+			"debugger",
+		}
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
 		logStatement = {
-			'echo "(beep)"',
-			'echo "(log)', -- no second " to catch full log statement
-			'echo "(time)',
+			'echo "[beep]', -- no closing " to catch full log statement
+			'echo "[log]',
+			'echo "[time]',
 		}
 	elseif ft == "applescript" then
 		logStatement = { "log", "beep" }
