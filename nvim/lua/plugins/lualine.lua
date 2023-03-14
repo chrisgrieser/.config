@@ -1,21 +1,38 @@
-local function mixedIndentation()
-	local ignoredFts = { "css", "markdown", "sh", "lazy", "" }
-	if vim.tbl_contains(ignoredFts, vim.bo.filetype) or vim.fn.mode() == "i" or vim.bo.buftype == "terminal" then
+local function indentation()
+	local out = ""
+	local usesSpaces = vim.bo.expandtab
+	local ft = vim.bo.filetype
+	local spaceFiletypes = {"python", "yaml"}
+	local ignoredFiletypes = { "css", "markdown", "lazy", "" }
+	if
+		vim.tbl_contains(ignoredFiletypes, ft)
+		or vim.fn.mode() == "i"
+		or vim.bo.buftype ~= ""
+	then
 		return ""
 	end
 
+	-- non-default indentation
+	if usesSpaces and not vim.tbl_contains(spaceFiletypes, ft) then 
+		out = out .. tostring(bo.tabstop) .." spaces"
+	elseif not usesSpaces and vim.tbl_contains(spaceFiletypes, ft) then 
+		out = out .. "tabs"
+	end
+
+	-- mixed indentation
 	local hasTabs = vim.fn.search("^\t", "nw") > 0
 	local hasSpaces = vim.fn.search("^ ", "nw") > 0
 	local mixed = vim.fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then
-		return " mixed"
-	elseif hasSpaces and not vim.bo.expandtab then
-		return " noet"
-	elseif hasTabs and vim.bo.expandtab then
-		return " et"
+		out = out .. "  st!"
+	elseif hasSpaces and not usesSpaces then
+		out = out .. "s!"
+	elseif hasTabs and usesSpaces then
+		out = out .. "t!"
 	end
-	return ""
+	if out ~= "" then out = " " .. out end
+	return out
 end
 
 -- show branch info only when *not* on main/master
@@ -166,9 +183,13 @@ local function lspCountStatusline()
 
 	-- display the count
 	local defs = tostring(lspCount.defFile)
-	if lspCount.defFile ~= lspCount.defWorkspace then defs = defs .. "(" .. tostring(lspCount.defWorkspace) .. ")" end
+	if lspCount.defFile ~= lspCount.defWorkspace then
+		defs = defs .. "(" .. tostring(lspCount.defWorkspace) .. ")"
+	end
 	local refs = tostring(lspCount.refFile)
-	if lspCount.refFile ~= lspCount.refWorkspace then refs = refs .. "(" .. tostring(lspCount.refWorkspace) .. ")" end
+	if lspCount.refFile ~= lspCount.refWorkspace then
+		refs = refs .. "(" .. tostring(lspCount.refWorkspace) .. ")"
+	end
 	return " " .. defs .. "  " .. refs
 end
 
@@ -206,7 +227,7 @@ local lualineConfig = {
 				"diagnostics",
 				symbols = { error = " ", warn = " ", info = " ", hint = "ﬤ " },
 			},
-			{ mixedIndentation },
+			{ indentation },
 			{ lspCountStatusline, color = { fg = "grey" } },
 			{ lsp_progress },
 		},
