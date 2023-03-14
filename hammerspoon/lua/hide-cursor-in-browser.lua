@@ -34,4 +34,5 @@ Jk_watcher = Aw.new(function(appName, eventType)
 		JHidesCursor:disable()
 		KHidesCursor:disable()
 	end
+	CleanupConsole()
 end):start()
