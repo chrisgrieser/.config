@@ -1,0 +1,17 @@
+title: 🥾 Foot Pedal Remappings
+homepage: https://github.com/chrisgrieser/dotfiles/karabiner
+rules:
+  - description: "🥾 Pedal: Switch Tabs"
+    manipulators:
+      - type: basic
+        from:
+          key_code: b
+        to:
+          - key_code: tab
+            modifiers:
+              - control
+            repeat: false
+        conditions:
+          - type: "device_if"
+            identifiers:
+              - vendor_id: 6790
