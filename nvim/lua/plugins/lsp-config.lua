@@ -99,7 +99,7 @@ lspSettings.jsonls = {
 	json = {
 		validate = { enable = true },
 		format = { enable = true },
-		schemas = function() return require("schemastore").json.schemas() end,
+		schemas = require("schemastore").json.schemas(),
 	},
 }
 
@@ -162,7 +162,8 @@ return {
 			require("neodev").setup {
 				library = { plugins = false },
 			}
-			-- configure all lsp servers
+
+			-- LSP Server setup
 			for _, lsp in pairs(lsp_servers) do
 				local config = {
 					capabilities = lspCapabilities,
@@ -171,8 +172,7 @@ return {
 				}
 				require("lspconfig")[lsp].setup(config)
 			end
-		end,
-		config = function()
+
 			-- Border Styling
 			require("lspconfig.ui.windows").default_options.border = BorderStyle
 			vim.lsp.handlers["textDocument/hover"] =

@@ -34,7 +34,7 @@
 			"end)"
 		]
 	},
-	"autocmd (short)": {
+	"autocmd": {
 		"prefix": "autocmd (short)",
 		"body": [
 			"autocmd(\"${1:event}\", {",
@@ -44,7 +44,7 @@
 			"})"
 		]
 	},
-	"autocmd (long)": {
+	"autocmd (unabbr)": {
 		"prefix": "autocmd (long)",
 		"body": [
 			"vim.api.nvim_create_autocmd(\"${1:event}\", {",
