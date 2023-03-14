@@ -112,18 +112,28 @@ local function cmpconfig()
 					fallback()
 				end
 			end, { "i", "s" }),
-
+			["<D-j>"] =  cmp.mapping(function(fallback)
+				if require("neogen").jumpable() then
+					require("neogen").jump_next()
+				elseif require("luasnip").jumpable(1) then
+					require("luasnip").jump(1)
+				else
+					fallback()
+				end
+			end),
+			["<D-S-j>"] =  cmp.mapping(function(fallback)
+				if require("neogen").jumpable(true) then
+					require("neogen").jump_prev()
+				elseif require("luasnip").jumpable(-1) then
+					require("luasnip").jump(-1)
+				else
+					fallback()
+				end
+			end),
 			-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
 			["<Tab>"] = cmp.mapping(function(fallback)
-				local lineIsEmpty = vim.fn.getline("."):find("^%s*$") ---@diagnostic disable-line: param-type-mismatch, undefined-field
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif require("neogen").jumpable() then
-					require("neogen").jump_next()
-				elseif require("luasnip").jumpable(1) and not lineIsEmpty then
-					-- requiring non-empty line to prevent prevent jumps when
-					-- intending to indent inside a block
-					require("luasnip").jump(1)
 				else
 					fallback()
 				end
@@ -131,10 +141,6 @@ local function cmpconfig()
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item()
-				elseif require("neogen").jumpable(true) then
-					require("neogen").jump_prev()
-				elseif require("luasnip").jumpable(-1) then
-					require("luasnip").jump(-1)
 				else
 					fallback()
 				end

@@ -378,6 +378,12 @@ keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Docu
 -- actions defined globally so null-ls can use them without LSP
 keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "璉Code Action" })
 
+keymap("n", "<leader>a", function()
+	---@diagnostic disable-next-line: missing-parameter
+	local params = vim.lsp.util.make_position_params(0)
+	vim.lsp.buf_request(0, "textDocument/codeAction", params, function(arg) vim.pretty_print(arg) end)
+end, { desc = "test" })
+
 -- copy breadcrumbs (nvim navic)
 keymap("n", "<D-b>", function()
 	if not require("nvim-navic").is_available() then
