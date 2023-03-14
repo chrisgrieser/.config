@@ -37,9 +37,6 @@ local function toggleDarkMode()
 	-- neovim (requires setup in ~/.config/nvim/lua/file-watcher.lua)
 	hs.execute([[echo "SetThemeMode(']] .. toMode .. [[')" > /tmp/nvim-automation]])
 
-	-- hammerspoon console
-	SetConsoleColors(toMode)
-
 	-- Highlights PDF background
 	if AppIsRunning("Highlights") then
 		App("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfbg }
@@ -49,7 +46,10 @@ local function toggleDarkMode()
 	Applescript([[
 		tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
 	]])
-	HoleCover() -- redraw hole-covers in proper color
+	HoleCover() -- must come after OS color change
+
+	-- hammerspoon console
+	SetConsoleColors() -- must come after OS color change
 
 	-- sketchybar
 	-- stylua: ignore
@@ -62,12 +62,6 @@ local function toggleDarkMode()
 		--set covid-stats icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--update
 	]])
-end
-
----@return boolean
-function IsDarkMode()
-	-- reading this via shell rather than applescript is less laggy
-	return hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n"
 end
 
 ---@param toDark boolean true = dark, false = light

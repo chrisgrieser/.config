@@ -5,24 +5,14 @@ local cons = hs.console
 
 -- Font & Color
 local baseFont = { name = "JetBrainsMonoNL Nerd Font", size = 22 }
-local red = hs.drawing.color.hammerspoon.osx_red
-local yellowLight = { red = 0.6, green = 0.6, blue = 0, alpha = 1 }
-local yellowDark = { red = 1, green = 1, blue = 0, alpha = 1 }
-local printColorLight = { white = 0.9 }
-local printColorDark = { white = 0.1 }
-
----converts string into hs.styledtext (+ the basefont)
----@param str string
----@param color hs.drawing.color
----@return hs.styledtext|nil
-local function colorizeString(str, color)
-	local colored = hs.styledtext.new(str, { color = color, font = baseFont })
-	if colored then
-		return colored
-	else
-		return nil
-	end
-end
+local darkRed = { red = 0.7, green = 0, blue = 0, alpha = 1 }
+local lightRed = { red = 1, green = 0, blue = 0, alpha = 1 }
+local darkYellow = { red = 0.6, green = 0.6, blue = 0, alpha = 1 }
+local lightYellow = { red = 1, green = 1, blue = 0, alpha = 1 }
+local white = { white = 0.9 }
+local black = { white = 0.1 }
+local darkGrey = { white = 0.45 }
+local lightGrey = { white = 0.55 }
 
 -- console settings
 cons.titleVisibility("hidden")
@@ -34,10 +24,12 @@ cons.consoleFont(baseFont)
 ---filter console entries, removing logging for enabling/disabling hotkeys,
 ---useless layout info or warnings, or info on extension loading.
 -- HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
+-- selene: allow(high_cyclomatic_complexity)
 function CleanupConsole()
 	local consoleOutput = tostring(cons.getConsole())
 	hs.console.clearConsole()
 	local layoutLinesCount = 0
+	local isDark = IsDarkMode()
 
 	local cleanLines = {}
 	for line in string.gmatch(consoleOutput, "[^\n]+") do -- split by new lines
@@ -60,16 +52,18 @@ function CleanupConsole()
 		end
 	end
 	for _, line in pairs(cleanLines) do
-		-- line = line
-		-- 	:gsub("%*%*%* ERROR:", "ERROR")
-		-- 	:gsub("%d%d:%d%d:%d%d %*%* Warning: ", "WARN")
-		if line:find("ERROR") then
-			cons.printStyledtext(colorizeString(line, red))
-		elseif line:find("Warning") then
-			cons.printStyledtext(colorizeString(line, yellowDark))
+		local color
+		if line:find("^> ") then -- user input
+			color = isDark and lightGrey or darkGrey
+		elseif line:find("ERROR") or line:find("Error") then
+			color = isDark and lightRed or darkRed
+		elseif line:find("[wW]arning") then
+			color = isDark and lightYellow or darkYellow
 		else
-			cons.printStyledtext(colorizeString(line, printColorLight))
+			color = isDark and white or white
 		end
+		local coloredLine = hs.styledtext.new(line, { color = color, font = baseFont })
+		cons.printStyledtext(coloredLine)
 	end
 end
 
@@ -88,24 +82,22 @@ ConsoleWatcher = Aw.new(function(appName, event)
 	end
 end):start()
 
----@param mode string "dark"|"light""
-function SetConsoleColors(mode)
-	if mode == "dark" then
+function SetConsoleColors()
+	if IsDarkMode() then
 		cons.darkMode(true)
-		cons.outputBackgroundColor { white = 0.1 }
-		cons.consolePrintColor(printColorLight)
-		cons.consoleCommandColor { white = 0.6 }
+		cons.outputBackgroundColor(black)
+		cons.consolePrintColor(white)
+		cons.consoleCommandColor(lightGrey)
 	else
 		cons.darkMode(false)
-		cons.outputBackgroundColor { white = 0.9 }
-		cons.consolePrintColor(printColorDark)
-		cons.consoleCommandColor { white = 0.4 }
+		cons.outputBackgroundColor(white)
+		cons.consolePrintColor(black)
+		cons.consoleCommandColor(darkGrey)
 	end
 end
 
 -- initialize
-local mode = hs.execute([[defaults read -g AppleInterfaceStyle]]):find("Dark") and "dark" or "light"
-SetConsoleColors(mode)
+SetConsoleColors()
 
 -- copy last command to clipboard
 -- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)
