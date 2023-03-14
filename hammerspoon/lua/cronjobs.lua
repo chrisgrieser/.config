@@ -31,7 +31,7 @@ local function getWeekday() return tostring(os.date()):sub(1, 3) end
 
 -- on Mondays shortly before 10:00, open #fg-organisation Slack Channel
 JourfixeTimer = hs.timer
-	.doAt("O9:58", "1d", function()
+	.doAt("09:58", "01d", function()
 		if getWeekday() == "Mon" then
 			hs.execute("open 'slack://channel?team=T010A5PEMBQ&id=CV95T641Y'")
 		end
@@ -42,7 +42,7 @@ JourfixeTimer = hs.timer
 -- Reload Hammerspoon Annotations (Emmylua Spoon)
 -- Check for low battery of connected bluetooth devices
 BiweeklyTimer = hs.timer
-	.doAt("02:00", "1d", function()
+	.doAt("02:00", "01d", function()
 		if IsAtOffice() then return end
 
 		-- only run wednesday and saturday

@@ -595,9 +595,9 @@ window_name</string>
 				<key>keyword</key>
 				<string>brightness</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Current Ambient</string>
 				<key>text</key>
-				<string>🌓 Show current Ambient Brightness</string>
+				<string>🌓 Brightness</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
