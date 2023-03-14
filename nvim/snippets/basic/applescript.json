@@ -45,8 +45,8 @@
 		"prefix": "menu item",
 		"body": [
 			"tell application \"System Events\" to tell process \"${1:process}\"",
-			"set frontmost to true",
-			"click menu item \"${2:item}\" of menu \"${3:menu}\" of menu bar 1",
+			"\tset frontmost to true",
+			"\tclick menu item \"${2:item}\" of menu \"${3:menu}\" of menu bar 1",
 			"end tell"
 		]
 	},
