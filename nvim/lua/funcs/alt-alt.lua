@@ -87,14 +87,18 @@ function M.betterClose()
 	if bo.modifiable then cmd.update() end
 
 	if #openBuffers == 1 then
+		print("openBuffers:", #openBuffers)
 		vim.notify("Only one buffer open.", logWarn)
 		return
 	elseif #openBuffers == 2 then
+		print("openBuffers:", #openBuffers)
 		cmd.bwipeout() -- cannot clear altfile otherwise :/
 		return
 	end
 
+	print("openBuffers:", #openBuffers)
 	cmd.bdelete()
+	if true then return end
 
 	-- ensure new alt file points towards open, non-active buffer, or altoldfile
 	local curFile = expand("%:p")
@@ -108,8 +112,7 @@ function M.betterClose()
 		end
 		newAltBuf = openBuffers[i].name
 	until newAltBuf ~= curFile and newAltBuf ~= bufToDel
-
-	fn.setreg("#", newAltBuf) -- empty string will set the altfile to the current buffer
+	fn.setreg("#", newAltBuf) -- empty string would set the altfile to the current buffer
 end
 
 --------------------------------------------------------------------------------
