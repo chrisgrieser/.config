@@ -6,8 +6,8 @@ local cons = hs.console
 -- Font & Color
 local baseFont = { name = "JetBrainsMonoNL Nerd Font", size = 22 }
 local red = hs.drawing.color.hammerspoon.osx_red
-local yellowLight = { ["red"] = 0.6, ["green"] = 0.6, ["blue"] = 0, ["alpha"] = 1 }
-local yellowDark = { ["red"] = 1, ["green"] = 1, ["blue"] = 0, ["alpha"] = 1 }
+local yellowLight = { red = 0.6, green = 0.6, blue = 0, alpha = 1 }
+local yellowDark = { red = 1, green = 1, blue = 0, alpha = 1 }
 local printColorLight = { white = 0.9 }
 local printColorDark = { white = 0.1 }
 
@@ -36,7 +36,6 @@ cons.consoleFont(baseFont)
 -- HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
 function CleanupConsole()
 	local consoleOutput = tostring(hs.console.getConsole())
-	local out = ""
 	local layoutLinesCount = 0
 
 	local cleanLines = {}
