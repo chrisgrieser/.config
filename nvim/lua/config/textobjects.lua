@@ -33,7 +33,16 @@ keymap("n", "dq", function()
 	setCursor(0, prevCursor)
 end, { remap = true, desc = "delete comment" })
 
--- INFO omap q <<< is done is treesitter config
+-- manually changed cq to preserve the commentstring
+keymap("n", "cq", function()
+	cmd.normal { "d<<<" } -- without bang for remapping
+	cmd.normal { "x" }
+	cmd.normal { "Q" }
+	cmd.startinsert { bang = true }
+end, { desc = "change comment" })
+
+-- INFO omap q <<< is done is treesitter config, takes care of other operators
+-- like `y`
 --------------------------------------------------------------------------------
 
 -- TEXTOBJECT FOR ADJACENT COMMENTED LINES

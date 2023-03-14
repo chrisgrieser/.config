@@ -95,7 +95,11 @@ function Wait(secs)
 	hs.timer.usleep(secs * 1000000)
 end
 
---------------------------------------------------------------------------------
+---@return boolean
+function IsDarkMode()
+	return hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n"
+end
+
 --------------------------------------------------------------------------------
 
 ---@return string
