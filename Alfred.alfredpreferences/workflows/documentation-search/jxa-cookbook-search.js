@@ -11,23 +11,28 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-
 // curl https://github.com/JXA-Cookbook/JXA-Cookbook/wiki | grep 'href="/JXA-Cookbook/JXA-Cookbook/wiki/'
 
 const wikiURL = "https://github.com/JXA-Cookbook/JXA-Cookbook/wiki";
+const baseURL = "https://github.com";
+
 const ahrefRegex = /.*?href="(.*?)">(.*?)<.*/i;
 
-const workArray = app.doShellScript(`curl -sL "${wikiURL}"`)
+const workArray = app
+	.doShellScript(`curl -sL "${wikiURL}"`)
 	.split("\r")
-	.filter(line => line.includes("href"))
+	.filter(line => line.includes('a class="internal present"'))
+	.slice(3) // remove ToC, FOreword and duplicate conventions
 	.map(line => {
 		const subsite = line.replace(ahrefRegex, "$1");
-		const parts = subsite.split("/");
-		const displayTitle = parts.pop();
-		const url = `${wikiURL}/${subsite}`;
+		const title = line.replace(ahrefRegex, "$2");
+		const url = `${baseURL}${subsite}`;
+		const isSubheading = subsite.includes("#")
+		const 
 
 		return {
-			title: displayTitle,
+			title: title,
+			subtitle: category,
 			match: alfredMatcher(subsite),
 			arg: url,
 			uid: subsite,
