@@ -18,16 +18,16 @@
 		"prefix": "ignore rule (selene)",
 		"body": "-- selene: allow(${1:rule_name})"
 	},
-	"if": {
-		"prefix": "if",
+	"if .. then": {
+		"prefix": "if .. then",
 		"body": [
 			"if ${1:true} then",
 			"\t$0",
 			"end"
 		]
 	},
-	"if .. else": {
-		"prefix": "if .. else",
+	"if .. then .. else": {
+		"prefix": "if .. then .. else",
 		"body": [
 			"if ${1:true} then",
 			"\t$2",

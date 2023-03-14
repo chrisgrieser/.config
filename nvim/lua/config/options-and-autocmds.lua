@@ -70,6 +70,25 @@ opt.fillchars = {
 }
 opt.showbreak = "↪ " -- precedes wrapped lines
 
+autocmd("BufReadPost", {
+	callback = function()
+		local usesSpaces = bo.expandtab
+		if usesSpaces then
+			opt_local.listchars = {
+				tab = " >", -- needs two chars
+				lead = "·",
+				leadmultispace = " ",
+			}
+		else
+			opt_local.listchars = {
+				tab = "  ",
+				lead = "·",
+				leadmultispace = "·",
+			}
+		end
+	end,
+})
+
 -- Split
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
@@ -109,7 +128,6 @@ opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refact
 
 --------------------------------------------------------------------------------
 -- Auto-Saving & Auto-read on change
-augroup("auto-save", {})
 autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	group = "auto-save",
 	pattern = "?*", -- pattern required for some events
@@ -128,7 +146,6 @@ opt.autoread = true
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
 -- overwritten by the ftplugins having the `o` option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
-augroup("formatopts", {})
 autocmd("FileType", {
 	group = "formatopts",
 	callback = function()
@@ -172,14 +189,11 @@ local function remember(mode)
 		cmd([[silent! loadview 1]]) -- silent to avoid error for files w/o view (e.g. after creation)
 	end
 end
-augroup("rememberCursorAndFolds", {})
 autocmd("BufWinLeave", {
-	group = "rememberCursorAndFolds",
 	pattern = "?*", -- pattern required, otherwise does not trigger
 	callback = function() remember("save") end,
 })
 autocmd("BufWinEnter", {
-	group = "rememberCursorAndFolds",
 	pattern = "?*",
 	callback = function() remember("load") end,
 })
@@ -189,19 +203,19 @@ autocmd("BufWinEnter", {
 
 local function diagnosticFormat(diagnostic, mode)
 	local msg = diagnostic.message:gsub("^%s*", ""):gsub("%s*$", "")
-local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or ""
+	local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or ""
 	local code = tostring(diagnostic.code)
 
 	-- stylelint and already includes the code in the message, codespell has no code
 	local out
-if source == "stylelint" or source == "codespell" then
+	if source == "stylelint" or source == "codespell" then
 		out = msg
 	else
 		out = msg .. " (" .. code .. ")"
 	end
 
--- append source to float
-if diagnostic.source and mode == "float" then out = out .. " [" .. source .. "]" end
+	-- append source to float
+	if diagnostic.source and mode == "float" then out = out .. " [" .. source .. "]" end
 
 	return out
 end
@@ -221,7 +235,6 @@ vim.diagnostic.config {
 }
 
 --------------------------------------------------------------------------------
-
 
 -- Skeletons (Templates)
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
