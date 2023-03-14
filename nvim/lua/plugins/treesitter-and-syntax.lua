@@ -99,15 +99,10 @@ local function tsConfig()
 			},
 			highlight_current_scope = { enable = false },
 			smart_rename = {
-				enable = function ()
-					local ft = vim.bo.filetype
-					return ft == "sh" or ft == "yaml"
-				end,
-				-- enable = {"bash", "yaml"},
+				enable = true,
 				keymaps = {
-					-- overwritten by on lsp-attach with LSP's rename, but useful for
-					-- filetypes without lsp-rename-support like shell or yaml
-					smart_rename = "<leader>R",
+					-- not using the same hotkey as LSP rename to prevent overwriting it
+					smart_rename = "<leader>t",
 				},
 			},
 		},
