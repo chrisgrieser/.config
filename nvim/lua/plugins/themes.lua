@@ -5,9 +5,9 @@ local g = vim.g
 -- second for dark mode
 local themes = {
 	"EdenEast/nightfox.nvim",
-	"sainnhe/everforest",
+	-- "sainnhe/everforest",
 	-- "rebelot/kanagawa.nvim",
-	-- { "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
+	{ "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
 	-- "glepnir/zephyr-nvim",
 	-- "folke/tokyonight.nvim",
 	-- "NTBBloodbath/sweetie.nvim",
