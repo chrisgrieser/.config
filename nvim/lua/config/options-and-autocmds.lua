@@ -46,49 +46,6 @@ opt.pumwidth = 10 -- min width popup menu
 -- Spelling
 opt.spelllang = "en_us"
 
--- whitespace & indentation
-opt.tabstop = 3
-opt.softtabstop = 3
-opt.shiftwidth = 3
-opt.shiftround = true
-opt.smartindent = true
-
--- invisible chars
-opt.list = true
-opt.listchars = {
-	tab = "  ",
-	multispace = "·",
-	nbsp = "ﮊ",
-	lead = "·",
-	leadmultispace = "·",
-	precedes = "…",
-	extends = "…",
-}
-opt.fillchars = {
-	eob = " ", -- no ~ for the eof
-	fold = " ", -- no dots for folds
-}
-opt.showbreak = "↪ " -- precedes wrapped lines
-
-autocmd("BufReadPost", {
-	callback = function()
-		local usesSpaces = bo.expandtab
-		if usesSpaces then
-			opt_local.listchars = {
-				tab = " >", -- needs two chars
-				lead = "·",
-				leadmultispace = " ",
-			}
-		else
-			opt_local.listchars = {
-				tab = "  ",
-				lead = "·",
-				leadmultispace = "·",
-			}
-		end
-	end,
-})
-
 -- Split
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
@@ -127,9 +84,46 @@ opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
 opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 
 --------------------------------------------------------------------------------
+
+-- whitespace & indentation
+opt.tabstop = 3
+opt.softtabstop = 3
+opt.shiftwidth = 3
+opt.shiftround = true
+opt.smartindent = true
+
+-- invisible chars
+opt.list = true
+opt.listchars = {
+	tab = "  ", -- needs two chars
+	multispace = "·",
+	nbsp = "ﮊ",
+	lead = "·",
+	leadmultispace = "·",
+	precedes = "…",
+	extends = "…",
+}
+opt.fillchars = {
+	eob = " ", -- no ~ for the eof
+	fold = " ", -- no dots for folds
+}
+opt.showbreak = "↪ " -- precedes wrapped lines
+
+-- to be used with an indent-detection plugin, so the listchars are also changed
+-- accordingly
+autocmd("BufReadPost", {
+	callback = function()
+		if bo.expandtab then
+			opt_local.listchars = { tab = " >", leadmultispace = " " }
+		else
+			opt_local.listchars = { tab = "  ", leadmultispace = "·" }
+		end
+	end,
+})
+
+--------------------------------------------------------------------------------
 -- Auto-Saving & Auto-read on change
 autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
-	group = "auto-save",
 	pattern = "?*", -- pattern required for some events
 	callback = function()
 		if not bo.readonly and expand("%") ~= "" and bo.buftype == "" and bo.filetype ~= "gitcommit" then
@@ -147,7 +141,6 @@ opt.autoread = true
 -- overwritten by the ftplugins having the `o` option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("FileType", {
-	group = "formatopts",
 	callback = function()
 		if bo.filetype == "markdown" then return end -- not for markdown, for autolist hack (see markdown.lua)
 		opt_local.formatoptions:remove("o")
@@ -238,7 +231,6 @@ vim.diagnostic.config {
 
 -- Skeletons (Templates)
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
-augroup("Templates", {})
 local skeletonDir = fn.stdpath("config") .. "/templates"
 local filetypeList =
 	fn.system([[ls "]] .. skeletonDir .. [[/skeleton."* | xargs basename | cut -d. -f2]])
@@ -249,7 +241,6 @@ for _, ft in pairs(ftWithSkeletons) do
 	local readCmd = "keepalt 0r " .. skeletonDir .. "/skeleton." .. ft .. " | normal! G"
 
 	autocmd("BufNewFile", {
-		group = "Templates",
 		pattern = "*." .. ft,
 		command = readCmd,
 	})
@@ -257,7 +248,6 @@ for _, ft in pairs(ftWithSkeletons) do
 	-- BufReadPost + empty file as additional condition to also auto-insert
 	-- skeletons when empty files were created by other apps
 	autocmd("BufReadPost", {
-		group = "Templates",
 		pattern = "*." .. ft,
 		callback = function()
 			local curFile = expand("%")
