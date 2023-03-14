@@ -145,7 +145,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = " outdent" })
 keymap("n", "ü", "mzlb~`z", { desc = "toggle capital/lowercase of word" })
 keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
 keymap("n", "~", "~h")
-keymap("n", "<BS>", qol.wordSwitch, { desc = "switch common words" })
+keymap("n", "<BS>", function() require("word-switcher").switch() end, { desc = "switch common words" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
