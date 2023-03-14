@@ -25,11 +25,11 @@ local function indentation()
 	local mixed = vim.fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then
-		out = out .. "  st!"
+		out = out .. "  st"
 	elseif hasSpaces and not usesSpaces then
-		out = out .. "s!"
+		out = out .. " s"
 	elseif hasTabs and usesSpaces then
-		out = out .. "t!"
+		out = out .. "t"
 	end
 	if out ~= "" then out = " " .. out end
 	return out
