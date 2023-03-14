@@ -33,7 +33,7 @@ lspSettings.lua_ls = {
 		diagnostics = {
 			disable = { "trailing-space" },
 		},
-		workspace = { checkThirdParty = false }, -- HACK https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
+		-- workspace = { checkThirdParty = false }, -- HACK https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		hint = {
 			enable = true,
 			setType = true,
