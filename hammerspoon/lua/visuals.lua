@@ -19,9 +19,9 @@ function HoleCover(arg)
 	local bgColor
 	local screen = hs.screen.mainScreen():frame()
 	if IsDarkMode() then
-		bgColor = { ["red"] = 0.2, ["green"] = 0.2, ["blue"] = 0.2, ["alpha"] = 1 }
+		bgColor = { red = 0.2, green = 0.2, blue = 0.2, alpha = 1 }
 	else
-		bgColor = { ["red"] = 0.8, ["green"] = 0.8, ["blue"] = 0.8, ["alpha"] = 1 }
+		bgColor = { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
 	end
 
 	local pseudoMaxCorner = ToTheSide.w + ToTheSide.x
