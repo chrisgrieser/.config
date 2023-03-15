@@ -56,10 +56,10 @@ local function workLayout()
 
 	-- layout apps
 	Wait(0.5)
+	TwitterToTheSide()
 	local layout = {
 		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		{ "Obsidian", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Drafts", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
@@ -67,13 +67,11 @@ local function workLayout()
 	hs.layout.apply(layout)
 
 	-- setup apps
+	TwitterScrollUp()
 	RestartApp("AltTab")
 	ShowAllSidebars()
-	TwitterToTheSide()
-	TwitterScrollUp()
 	RunWithDelays(0.5, function () App("Drafts"):activate() end)
 
-	-- finish
 	print("🔲 WorkLayout: done")
 end
 
@@ -107,7 +105,7 @@ local function movieLayout()
 end
 
 --------------------------------------------------------------------------------
--- SET LAYOUT AUTOMATICALLY + VIA HOTKEY
+-- TRIGGERS FOR LAYOUT CHANGE
 local function selectLayout()
 	if IsProjector() then
 		movieLayout()
@@ -116,11 +114,14 @@ local function selectLayout()
 	end
 end
 
--- watcher + hotkey
+-- 1. Change of screen numbers
 DisplayCountWatcher = hs.screen.watcher.new(selectLayout):start()
+
+-- 2. Hotkey
 Hotkey(Hyper, "home", selectLayout) -- hyper + eject on Apple Keyboard
 Hotkey({ "shift" }, "f6", selectLayout) -- for Apple keyboard
 
+-- 3. Unlocking (with idletime)
 UnlockWatcher = hs.caffeinate.watcher
 	.new(function(event)
 		if IdleMins(30) and event == hs.caffeinate.watcher.screensDidUnlock then
