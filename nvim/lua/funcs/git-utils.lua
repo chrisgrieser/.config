@@ -10,6 +10,7 @@ local logInfo = vim.log.levels.INFO
 local function checkIfInGitRepo()
 	local isinRepo = fn.system("git rev-parse --is-inside-work-tree")
 	if vim.v.shell_error == 0 then
+		return true
 	end
 
 	local repo = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1")
