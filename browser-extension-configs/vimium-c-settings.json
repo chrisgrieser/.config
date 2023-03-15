@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "13/03/2023, 14:25:03",
-	"time": 1678713903098,
+	"@time": "15/03/2023, 16:54:07",
+	"time": 1678895647710,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -81,9 +81,9 @@
 		"map q closeTabsOnLeft",
 		"map e closeTabsOnRight",
 		"map W closeOtherTabs",
-		"map x runKey keys=\"closeOtherTabs+removeTab\"",
 		"map w removeTab mayClose",
 		"map m removeTab mayClose",
+		"map x closeOtherTabs $then=\"w\" $else=\"w\"",
 		"map s runKey keys=\"copyCurrentUrl+removeTab\\u0020mayClose\"",
 		"map u restoreTab",
 		"\" map yt duplicateTab disabled, cause conflicting with duplication-prevention plugin",
@@ -133,6 +133,7 @@
 		"",
 		"\" Help",
 		"map ? showHelp",
+		"map , createTab url=\"chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html\"",
 		""
 	],
 	"regexFindMode": true,

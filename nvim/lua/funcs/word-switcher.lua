@@ -1,29 +1,32 @@
 local generalWords = {
 	{ "true", "false" },
-	{ "warn", "error" },
 	{ "on", "off" },
 	{ "yes", "no" },
 	{ "disable", "enable" },
 	{ "disabled", "enabled" },
+
+	{ "warn", "error" },
 	{ "show", "hide" },
-	{ "right", "left" },
-	{ "red", "blue" },
-	{ "top", "bottom" },
 	{ "min", "max" },
-	{ "always", "never" },
-	{ "width", "height" },
-	{ "relative", "absolute" },
-	{ "low", "high" },
-	{ "dark", "light" },
-	{ "before", "after" },
 	{ "and", "or" },
-	{ "next", "previous" },
 	{ "read", "write" },
+	{ "always", "never" },
+
+	{ "top", "bottom" },
+	{ "right", "left" },
+	{ "relative", "absolute" },
+	{ "width", "height" },
+	{ "next", "previous" },
 	{ "inner", "outer" },
+	{ "before", "after" },
+	{ "low", "high" },
+
+	{ "dark", "light" },
 	{ "black", "white" },
+	{ "red", "blue" },
 }
 
--- INFO `false` indicates that the second element is not exchanged backwards
+-- INFO `false` indicates that the second element is not exchanged with the first
 local filetypeSpecificWords = {
 	lua = {
 		{ "if", "elseif", false },
@@ -79,7 +82,7 @@ function M.switch()
 		end
 	end
 
-	-- remove keywords for <cword>
+	-- remove word-delimiters for <cword>
 	local iskeywBefore = vim.opt.iskeyword:get()
 	vim.opt.iskeyword:remove { "_", "-", "." }
 	local cword = vim.fn.expand("<cword>")
