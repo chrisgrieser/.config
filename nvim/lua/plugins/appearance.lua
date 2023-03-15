@@ -33,6 +33,21 @@ return {
 		end,
 	},
 	{
+		"nvim-tree/nvim-web-devicons",
+		lazy = true, -- loaded by other plugins
+		config = function()
+			require("nvim-web-devicons").setup {
+				override = {
+					applescript = {
+						icon = "",
+						color = "#7f7f7f",
+						name = "Applescript"
+					},
+				},
+			}
+		end,
+	},
+	{
 		"lewis6991/satellite.nvim",
 		event = "VeryLazy",
 		config = function()

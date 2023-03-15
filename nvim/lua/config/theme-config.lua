@@ -39,11 +39,12 @@ local function customHighlights()
 	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
 	linkHighlight("myAnnotations", "Todo")
-	fn.matchadd("myAnnotations", [[\<\(BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|SIC\|DEPRECATED\)\>]])
+	fn.matchadd("myAnnotations", [[\<\(REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
+	fn.matchadd("myAnnotations", [[(SIC)]])
 
 	linkHighlight("IndentBlanklineContextChar", "Comment") -- active indent
 	setHighlight("rainbowcol1", "guifg=#7e8a95") -- rainbow brackets without aggressive red
-	setHighlight("MatchParen", "gui=inverse cterm=inverse") -- more visible matchparens
+	setHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
 	linkHighlight("CodiVirtualText", "Comment") -- Codi
 	setHighlight("TSDefinition", " term=underline gui=underdotted") -- treesittter refactor focus
 	setHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
