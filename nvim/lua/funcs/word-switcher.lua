@@ -19,12 +19,16 @@ local generalWords = {
 	{ "low", "high" },
 	{ "dark", "light" },
 
+	{ "<=", ">=" },
+	{ "!=", "==" },
+
 	{ "years", "months", false },
 	{ "months", "weeks", false },
 	{ "weeks", "days", false },
 	{ "days", "hours", false },
 	{ "hours", "minutes", false },
 	{ "minutes", "seconds", false },
+	{ "mins", "secs" },
 }
 
 local filetypeSpecificWords = {
@@ -57,13 +61,19 @@ local filetypeSpecificWords = {
 		{ "const", "let" },
 		{ "map", "forEach" },
 		{ "replace", "replaceAll" },
+		{ "===", "!==" },
 	},
 	sh = {
+		{ "y", "n" },
+		{ "lt", "gt" },
+		{ "eq", "nq" },
+		{ "&&", "||" },
 		{ "if", "elif", false },
 		{ "elif", "else", false },
 		{ "else", "if", false },
 		{ "echo", "print" },
 		{ "exit", "return" },
+		{ "1", "0" },
 	},
 	-- filetypes to link to another filetype
 	typescript = "javascript",
@@ -96,24 +106,31 @@ function M.switch()
 	-- remove word-delimiters for <cword>
 	local iskeywBefore = vim.opt.iskeyword:get()
 	vim.opt.iskeyword:remove { "_", "-", "." }
+
 	local cword = vim.fn.expand("<cword>")
+	local cBigword = vim.fn.expand("<cWORD>")
+	
+	local alphaNumericUnderCursor = cBigword:find("[%a%d]")
+	local word = alphaNumericUnderCursor and cword or cBigword
 
 	local newWord = nil
 	for _, pair in pairs(wordsToUse) do
-		if cword == pair[1] then
+		if word == pair[1] then
 			newWord = pair[2]
 			break
-		elseif cword == pair[2] and pair[3] ~= false then
+		elseif word == pair[2] and pair[3] ~= false then
 			newWord = pair[1]
 			break
 		end
 	end
 
-	if newWord then
+	local switchWordFound = newWord ~= nil
+	if switchWordFound then
 		vim.fn.setreg("z", newWord)
 		vim.cmd.normal { 'viw"zP', bang = true }
 	else
-		vim.notify("Word under cursor cannot be switched.", vim.log.levels.WARN)
+		-- fallback to `~`
+		vim.cmd.normal { "~", bang = true }
 	end
 
 	vim.opt.iskeyword = iskeywBefore
