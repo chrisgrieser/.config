@@ -18,7 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 -- WARN if plugins are not recognized, try renaming the plugin-spec file https://github.com/folke/lazy.nvim/issues/298
 require("lazy").setup("plugins", {
 	dev = {
-		path = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos",
+path = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos",
 		fallback = true, -- Fallback to github online when local plugin doesn't exist
 	},
 	ui = {

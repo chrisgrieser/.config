@@ -101,7 +101,7 @@ keymap("n", "<Esc>", function()
 end, { desc = "Clear Notifications" })
 
 -- FOLDING
-keymap("n", "zz", "zA", { desc = "ﬕ Toggle fold" })
+keymap("n", "^", "za", { desc = "ﬕ Toggle fold" })
 keymap("n", "z1", ":%foldclose<CR>", { desc = "ﬕ Fold only topmopst level" })
 keymap("n", "zo", "zO", { desc = "ﬕ Open Fold (recursively)" })
 
@@ -122,9 +122,14 @@ keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Delete Qui
 keymap(
 	"n",
 	"<leader>q",
-	function() require("funcs.quickfix").replacerWrapper { "<D-q>", "<D-s>", "q" } end,
+	function() require("replacer").run { rename_files = false } end,
 	{ desc = " Replacer.nvim" }
 )
+
+-- appleffffffff
+-- applefff
+-- orange
+-- appleddd
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -147,7 +152,12 @@ keymap("x", "<S-Tab>", "<gv", { desc = " outdent" })
 keymap("n", "ü", "mzlb~`z", { desc = "toggle capital/lowercase of word" })
 keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
 keymap("n", "~", "~h")
-keymap("n", "<BS>", function() require("funcs.word-switcher").switch() end, { desc = "switch common words" })
+keymap(
+	"n",
+	"<BS>",
+	function() require("funcs.word-switcher").switch() end,
+	{ desc = "switch common words" }
+)
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
@@ -530,7 +540,7 @@ autocmd("FileType", {
 		"tsplayground",
 		"lazy",
 		"notify",
-		"AppleScriptRunOutput",
+"AppleScriptRunOutput",
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
 		"man",

@@ -32,20 +32,17 @@ return {
 			vim.opt.timeoutlen = 600 -- duration until which-key is shown
 			require("which-key").setup {
 				plugins = {
-					presets = {
-						motions = false,
-					},
+					presets = { motions = false },
 				},
 				triggers_blacklist = {
 					n = { "y" }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
 				},
-				hidden = {},
+				hidden = {"<Plug>"},
 				window = {
 					border = { "", "─", "", "" }, -- no border to the side to save space
 					padding = { 0, 0, 0, 0 },
 					margin = { 0, 0, 0, 0 },
 				},
-				triggers = {"<leader>"},
 				layout = { -- of the columns
 					height = { min = 4, max = 17 },
 					width = { min = 30, max = 33 },
