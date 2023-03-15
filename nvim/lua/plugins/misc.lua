@@ -45,6 +45,7 @@ return {
 					padding = { 0, 0, 0, 0 },
 					margin = { 0, 0, 0, 0 },
 				},
+				triggers = {"<leader>"},
 				layout = { -- of the columns
 					height = { min = 4, max = 17 },
 					width = { min = 30, max = 33 },
