@@ -1,9 +1,6 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
--- spellcheck
-opt_local.spell = true
-
 -- enable wrapping lines
 -- HACK for whatever reason, needs to be wrapped in a condition
 if not opt_local.wrap:get() then require("funcs.quality-of-life").toggleWrap() end

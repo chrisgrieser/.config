@@ -49,6 +49,7 @@ shell
 enclosed
 accessible
 WIP
+boolean
 as
 As
 etc.
@@ -57,3 +58,4 @@ filetypes
 allows
 few
 etc
+multiple

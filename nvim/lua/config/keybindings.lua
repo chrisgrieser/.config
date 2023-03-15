@@ -163,9 +163,10 @@ keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "暈suggest" })
-keymap("n", "gl", "]s", { desc = "暈next misspelling" })
-keymap("n", "gL", "]s", { desc = "暈prev misspelling" })
 keymap("n", "za", "mz]s1z=`z", { desc = "暈autofix" }) -- [a]utofix word under cursor
+keymap("n", "zg", function ()
+	
+end, { desc = " 暈Add to accepted words (vale)" })
 
 -- [S]ubstitute Operator (substitute.nvim)
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
@@ -176,7 +177,7 @@ keymap( "n", "sx", function() require("substitute.exchange").operator() end, { d
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
 -- IS[w]ap
-keymap("n", "<leader>w", cmd.ISwapWith, { desc = "弄 swap nodes" })
+keymap("n", "<leader>w", cmd.ISwapWith, { desc = "弄 Swap Nodes" })
 
 -- search & replace
 keymap(
@@ -497,7 +498,6 @@ end, { desc = " File History (Diffview)" })
 --------------------------------------------------------------------------------
 
 -- Option Toggling
-keymap("n", "<leader>os", ":set spell!<CR>", { desc = " Toggle Spelling" })
 keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = " Toggle Relative Line Numbers" })
 keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers" })
 keymap("n", "<leader>ow", qol.toggleWrap, { desc = " Toggle Wrap" })

@@ -44,7 +44,8 @@ opt.pumheight = 15 -- max number of items in popup menu
 opt.pumwidth = 10 -- min width popup menu
 
 -- Spelling
-opt.spelllang = "en_us"
+opt.spell = false -- off, since using vale+null-ls for the lsp-integration
+opt.spelllang = "en_us" -- but used for spellsuggestions
 
 -- Split
 opt.splitright = true -- vsplit right instead of left
