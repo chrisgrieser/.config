@@ -33,7 +33,6 @@ return {
 			require("which-key").setup {
 				plugins = {
 					presets = {
-						operators = true,
 						motions = false,
 					},
 				},
@@ -48,7 +47,7 @@ return {
 				},
 				layout = { -- of the columns
 					height = { min = 4, max = 17 },
-					width = { min = 22, max = 33 },
+					width = { min = 30, max = 33 },
 					spacing = 1,
 				},
 			}
