@@ -26,18 +26,22 @@ local generalWords = {
 	{ "up", "down" },
 	{ "right", "left" },
 	{ "black", "white" },
-	{ "red", "blue" },
+	{ "more", "less", false },
+	{ "less", "fewer", false },
+	{ "fewer", "more", false },
 
 	-- commonly switched between
-	{ "variable", "constant" },
+	{ "red", "blue" }, -- e.g. when testing designs
 	{ "read", "write" },
 	{ "warn", "error" },
 	{ "and", "or" },
 
-	-- comparisons
+	-- comparisons and operators
 	{ "<", ">" },
 	{ "<=", ">=" },
 	{ "!=", "==" },
+	{ "+", "-" },
+	{ "*", "/" },
 
 	-- units
 	{ "years", "months", false },
@@ -46,6 +50,8 @@ local generalWords = {
 	{ "days", "hours", false },
 	{ "hours", "minutes", false },
 	{ "minutes", "seconds", false },
+	{ "seconds", "milliseconds", false },
+	{ "milliseconds", "years", false }, -- just there to cycle back
 	{ "mins", "secs" },
 }
 
@@ -61,13 +67,13 @@ local filetypeSpecificWords = {
 		{ "==", "~=" },
 		{ "nil", "{}" },
 		{ "if", "elseif", false },
-		{ "not", "", false },
 		{ "elseif", "else", false },
 		{ "else", "if", false },
-		{ "function", "local function", false },
 		{ "pairs", "ipairs" },
-		{ "find", "match" },
-		{ "Notify", "print", false }, -- hammerspoon specific
+		{ "find", "match" }, -- string.find and string.match
+		{ "break", "return" },
+		{ "function", "local function", false }, 
+		{ "not", "", false }, -- not way to toggle back
 	},
 	python = {
 		{ "True", "False" },
@@ -80,10 +86,19 @@ local filetypeSpecificWords = {
 		{ "const", "let" },
 		{ "map", "forEach" },
 		{ "replace", "replaceAll" },
+		{ "includes", "match" },
 		{ "===", "!==" },
 		{ "&&", "||" },
-		{ "return", "break" },
+		{ "continue", "break" }, -- loop
 		{ "default", "case" }, -- switch-case statements
+
+		-- console.log -> console.warn
+		{ "debug", "trace", false },
+		{ "trace", "info", false },
+		{ "info", "log", false },
+		{ "log", "warn", false }, 
+		{ "warn", "error", false },
+		{ "error", "debug", false },
 	},
 	sh = {
 		{ "lt", "gt" },
@@ -154,7 +169,7 @@ function M.switch()
 		vim.cmd.normal { 'viw"zP', bang = true }
 	else
 		-- fallback to `~`
-		vim.cmd.normal { "~", bang = true }
+		vim.cmd.normal { "~h", bang = true }
 	end
 
 	vim.opt.iskeyword = iskeywBefore
