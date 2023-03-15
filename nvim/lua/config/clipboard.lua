@@ -30,6 +30,9 @@ autocmd({ "CursorMoved", "VimEnter" }, {
 autocmd("TextYankPost", {
 	group = "yankImprovements",
 	callback = function()
+		-- highlighted yank
+		vim.highlight.on_yank { timeout = 1500 }
+
 		-- abort when recording, since this only leads to bugs then
 		local isRecording = fn.reg_recording() ~= ""
 		local isPlaying = fn.reg_executing() ~= ""
@@ -40,9 +43,6 @@ autocmd("TextYankPost", {
 		if vim.v.event.operator == "d" then g.lastYank = fn.getreg('"') end
 
 		if vim.v.event.operator ~= "y" then return end
-
-		-- highlighted yank
-		vim.highlight.on_yank { timeout = 1500 }
 
 		-- sticky yank & delete
 		setCursor(0, g.cursorPreYank)
