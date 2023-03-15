@@ -40,4 +40,6 @@ function ReadFile(filePath)
 	return content
 end
 
+function AppendToFile(str, filePath)
 
+end

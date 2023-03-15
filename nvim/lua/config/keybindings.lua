@@ -164,9 +164,30 @@ keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 -- Spelling (mnemonic: [z]pe[l]ling)
 keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "暈suggest" })
 keymap("n", "za", "mz]s1z=`z", { desc = "暈autofix" }) -- [a]utofix word under cursor
-keymap("n", "zg", function ()
-	
-end, { desc = " 暈Add to accepted words (vale)" })
+keymap("n", "zg", function()
+	local word = expand("<cword>")
+	local acceptTxt = LinterConfig .. "/vale/styles/Vocab/Docs/accept.txt"
+	local file, err = io.open(acceptTxt, "a")
+	if file then
+		file:write(word)
+		file:close()
+		vim.notify("暈Now accepting:\n" .. word)
+	else
+		vim.notify("Could not write: " .. err, logError)
+	end
+end, { desc = "暈Add to accepted words (vale)" })
+keymap("n", "zw", function()
+	local word = expand("<cword>")
+	local rejectTxt = LinterConfig .. "/vale/styles/Vocab/Docs/reject.txt"
+	local file, err = io.open(rejectTxt, "a")
+	if file then
+		file:write(word)
+		file:close()
+		vim.notify("暈Now rejecting:\n" .. word)
+	else
+		vim.notify("Could not write: " .. err, logError)
+	end
+end, { desc = "暈Add to rejected words (vale)" })
 
 -- [S]ubstitute Operator (substitute.nvim)
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
@@ -223,7 +244,7 @@ keymap( { "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { des
 
 -- Replace Mode
 -- needed, since `R` mapped to duplicate line
-keymap("n", "cR", "R", { desc = "Replace Mode" }) 
+keymap("n", "cR", "R", { desc = "Replace Mode" })
 
 -- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()
@@ -539,7 +560,7 @@ autocmd("FileType", {
 		"tsplayground",
 		"lazy",
 		"notify",
-"AppleScriptRunOutput",
+		"AppleScriptRunOutput",
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
 		"man",
