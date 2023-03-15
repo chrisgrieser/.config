@@ -152,12 +152,11 @@ function ScreenIsUnlocked()
 end
 
 ---whether device has been idle
----@param minutes? number Time idle, defaults to 30 minutes
+---@param mins number Time idle
 ---@return boolean
-function IdleMins(minutes)
-	local mins = minutes or 30
+function IdleMins(mins)
 	local minutesIdle = hs.host.idleTime() / 60
-	return minutesIdle < mins
+	return minutesIdle > mins
 end
 
 ---Send Notification, accepting any number of arguments of any type. Converts
