@@ -69,12 +69,13 @@ function M.switch()
 		table.insert(wordsToUse, v)
 	end
 
-	---@diagnostic disable-next-line: assign-type-mismatch
-	local ftWords = filetypeSpecificWords[ft] ---@type table
 
 	if filetypeSpecificWords[ft] then
 		-- filetype inherits word by other filetype
 		if filetypeSpecificWords[ft] == "string" then ft = tostring(filetypeSpecificWords[ft]) end
+
+		---@diagnostic disable-next-line: assign-type-mismatch
+		local ftWords = filetypeSpecificWords[ft] ---@type table
 	end
 
 	-- remove keywords for <cword>
