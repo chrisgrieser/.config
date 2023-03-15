@@ -126,11 +126,6 @@ keymap(
 	{ desc = " Replacer.nvim" }
 )
 
--- appleffffffff
--- applefff
--- orange
--- appleddd
-
 --------------------------------------------------------------------------------
 -- EDITING
 
@@ -224,6 +219,10 @@ keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, 
 -- Sort & highlight duplicate lines
 -- stylua: ignore
 keymap( { "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc = "弄 Sort (+ highlight duplicates)" })
+
+-- Replace Mode
+-- needed, since `R` mapped to duplicate line
+keymap("n", "cR", "R", { desc = "Replace Mode" }) 
 
 -- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()

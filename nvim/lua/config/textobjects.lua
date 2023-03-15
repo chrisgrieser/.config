@@ -81,6 +81,10 @@ keymap("o", "u", commented_lines_textobject, { desc = "Big comment textobj" })
 -- space: subword
 keymap("o", "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
 
+
+-- _: line (but characterwise)
+keymap("o", "_", function() require("various-textobjs").lineCharacterwise() end, { desc = "line textobj" })
+
 -- L: link
 keymap("o", "L", function() require("various-textobjs").url() end, { desc = "link textobj" })
 
