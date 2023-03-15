@@ -30,6 +30,11 @@ autocmd({ "CursorMoved", "VimEnter" }, {
 autocmd("TextYankPost", {
 	group = "yankImprovements",
 	callback = function()
+		-- abort when recording, since this only leads to bugs then
+		local isRecording = fn.reg_recording() ~= ""
+		local isPlaying = fn.reg_executing() ~= ""
+		if isRecording or isPlaying then return end
+
 		-- deletion does not need stickiness and also already shifts register, so
 		-- only saving the last yank is required
 		if vim.v.event.operator == "d" then g.lastYank = fn.getreg('"') end
