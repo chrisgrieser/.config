@@ -1,9 +1,6 @@
 local M = {}
 local fn = vim.fn
-
 local logWarn = vim.log.levels.WARN
-local logError = vim.log.levels.ERROR
-local logInfo = vim.log.levels.INFO
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -118,6 +115,7 @@ end
 
 function M.amendNoEditPushforce()
 	if not isInGitRepo() then return end
+	vim.notify("  Amending…")
 	output = {}
 	fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
 end
