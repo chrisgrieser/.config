@@ -1,4 +1,4 @@
--- INFO `false` as third list items indicates that the second element is *not* 
+-- INFO `false` as third list items indicates that the second element is *not*
 -- exchanged with the first
 local generalWords = {
 	-- on/off
@@ -44,6 +44,7 @@ local generalWords = {
 	{ "*", "/" },
 
 	-- units
+	{ "mins", "secs" },
 	{ "years", "months", false },
 	{ "months", "weeks", false },
 	{ "weeks", "days", false },
@@ -51,17 +52,16 @@ local generalWords = {
 	{ "hours", "minutes", false },
 	{ "minutes", "seconds", false },
 	{ "seconds", "milliseconds", false },
-	{ "milliseconds", "years", false }, -- just there to cycle back
-	{ "mins", "secs" },
+	{ "milliseconds", "years", false }, -- cycle back
 }
 
 local filetypeSpecificWords = {
 	css = {
+		-- many common css terms already included in general words
 		{ "padding", "margin" },
 		{ "top", "bottom" },
 		{ "relative", "absolute" },
 		{ "width", "height" },
-		-- most common css terms already included in general words
 	},
 	lua = {
 		{ "==", "~=" },
@@ -71,15 +71,24 @@ local filetypeSpecificWords = {
 		{ "else", "if", false },
 		{ "pairs", "ipairs" },
 		{ "find", "match" }, -- string.find and string.match
-		{ "break", "return" },
-		{ "function", "local function", false }, 
+		{ "break", "return" }, -- javascript knows no `continue`
+		{ "function", "local function", false },
 		{ "not", "", false }, -- not way to toggle back
 	},
 	python = {
 		{ "True", "False" },
 	},
+	markdown = {
+		{ "Note", "Warning" }, -- github callouts
+		{ "#", "##", false }, -- heading levels
+		{ "##", "###", false }, 
+		{ "###", "####", false }, 
+		{ "####", "#####", false }, 
+		{ "#####", "######", false }, 
+		{ "#######", "#", false }, 
+	},
 	javascript = {
-		{ "null", "undefined", false },
+		{ "null", "undefined" },
 		{ "if", "} else if", false },
 		{ "else", "else if", false },
 		{ "var", "const", false }, -- don't switch back to var!
@@ -96,7 +105,7 @@ local filetypeSpecificWords = {
 		{ "debug", "trace", false },
 		{ "trace", "info", false },
 		{ "info", "log", false },
-		{ "log", "warn", false }, 
+		{ "log", "warn", false },
 		{ "warn", "error", false },
 		{ "error", "debug", false },
 	},
@@ -138,7 +147,7 @@ function M.switch()
 	end
 
 	-- INFO general words added *after* the filetype-specific words, so that the latter get priority
-	for _, v in pairs(generalWords) do 
+	for _, v in pairs(generalWords) do
 		table.insert(wordsToUse, v)
 	end
 
