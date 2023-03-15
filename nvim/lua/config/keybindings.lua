@@ -547,6 +547,7 @@ autocmd("FileType", {
 		"help",
 		"lspinfo",
 		"tsplayground",
+		"qf",
 		"lazy",
 		"notify",
 		"AppleScriptRunOutput",
@@ -584,8 +585,8 @@ autocmd("FileType", {
 -- Simple version of the delaytrain.nvim
 -- CamelCaseMotion for e, w, and b
 for _, key in ipairs { "x", "h", "l", "e", "w", "b" } do
-	local timeout = 4000
-	local maxUsage = 8
+	local timeout = 3000
+	local maxUsage = 10
 
 	local count = 0
 	keymap("n", key, function()
