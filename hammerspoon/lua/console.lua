@@ -55,10 +55,10 @@ function CleanupConsole()
 		local color
 		if line:find("^> ") then -- user input
 			color = isDark and lightGrey or darkGrey
-		elseif line:find("ERROR") or line:find("Error") then
+		elseif line:lower():find("error") then
 			line = line:gsub("%s+", " ")
 			color = isDark and lightRed or darkRed
-		elseif line:find("[wW]arning") then
+		elseif line:lower():find("warning") then
 			line = line:gsub("%*%* Warning:%s*", "WARN: ")
 			color = isDark and lightYellow or darkYellow
 		else
