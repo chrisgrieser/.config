@@ -1,4 +1,3 @@
-
 local generalWords = {
 	{ "true", "false" },
 	{ "warn", "error" },
@@ -64,17 +63,18 @@ local M = {}
 
 ---switches words under the cursor to their opposite, e.g. `true` to `false`
 function M.switch()
-
 	local ft = vim.bo.filetype
-	local wordsToUse
+	local wordsToUse = {}
+	for _, v in pairs(generalWords) do
+		table.insert(wordsToUse, v)
+	end
 
-	-- filetype inherits word by other filetype
-	if (filetypeSpecificWords[ft]) == "string" then ft = tostring(filetypeSpecificWords[ft]) end
+	---@diagnostic disable-next-line: assign-type-mismatch
+	local ftWords = filetypeSpecificWords[ft] ---@type table
 
 	if filetypeSpecificWords[ft] then
-		wordsToUse = vim.tbl_extend("force", generalWords, filetypeSpecificWords[ft])
-	else
-		wordsToUse = generalWords
+		-- filetype inherits word by other filetype
+		if filetypeSpecificWords[ft] == "string" then ft = tostring(filetypeSpecificWords[ft]) end
 	end
 
 	-- remove keywords for <cword>
