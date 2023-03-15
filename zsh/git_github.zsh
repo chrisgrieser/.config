@@ -10,6 +10,7 @@ alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull"
 alias amend="git commit --amend"
+alias gm="git commit --amend --no-edit" # mnemonic: a[m]end
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 
 # open GitHub repo

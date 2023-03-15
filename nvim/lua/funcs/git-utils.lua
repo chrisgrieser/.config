@@ -7,6 +7,54 @@ local logInfo = vim.log.levels.INFO
 
 --------------------------------------------------------------------------------
 
+local function checkIfInGitRepo()
+	local isinRepo = fn.system("git rev-parse --is-inside-work-tree")
+	if vim.v.shell_error == 0 then
+	end
+
+	local repo = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1")
+	if branch:find("^fatal: not a git repository") then
+		vim.notify("Not a git repository.", logWarn)
+		return
+	end
+end
+
+--------------------------------------------------------------------------------
+
+--NOTE this requires an outer-scope output variable which needs to be emptied
+--before the run
+local output = {}
+local gitShellOpts = {
+	stdout_buffered = true,
+	stderr_buffered = true,
+	detach = true,
+	on_stdout = function(_, data)
+		for _, d in pairs(data) do
+			if not (d[1] == "" and #d == 1) then table.insert(output, d) end
+		end
+	end,
+	on_stderr = function(_, data)
+		for _, d in pairs(data) do
+			if not (d[1] == "" and #d == 1) then table.insert(output, d) end
+		end
+	end,
+	on_exit = function()
+		if #output == 0 then return end
+		local out = table.concat(output, " \n "):gsub("%s*$", "")
+		local logLevel = logInfo
+		if out:lower():find("error") then
+			logLevel = logError
+		elseif out:lower():find("warning") then
+			logLevel = logWarn
+		end
+		vim.notify(out, logLevel)
+
+		vim.cmd.checktime() -- reload buffer if changed (e.g., due to linters or pandocvim). Also requires opt.autoread
+		os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
+	end,
+}
+--------------------------------------------------------------------------------
+
 ---Choose a GitHub issues from the current repo to open in the browser
 function M.issueSearch()
 	local repo = fn.system("git remote -v | head -n1")
@@ -65,48 +113,21 @@ function M.issueSearch()
 end
 
 ---@param commitMsg string
----@param gitShellOpts table
-local function shimmeringFocusBuild(commitMsg, gitShellOpts)
+local function shimmeringFocusBuild(commitMsg)
 	local buildscriptLocation = vim.env.ICLOUD .. "/Repos/shimmering-focus/build.sh"
 
 	vim.notify(' Building theme…\n"' .. commitMsg .. '"')
 	fn.jobstart('zsh "' .. buildscriptLocation .. '" "' .. commitMsg .. '"', gitShellOpts)
 end
 
+local function amendNoEdit()
+	output = {}
+	fn.jobstart("git add -A && git commit --amend --no-edit", gitShellOpts)
+end
+
 ---@param prefillMsg? string
 function M.addCommitPush(prefillMsg)
 	if not prefillMsg then prefillMsg = "" end
-
-	local output = {}
-	local gitShellOpts = {
-		stdout_buffered = true,
-		stderr_buffered = true,
-		detach = true,
-		on_stdout = function(_, data)
-			for _, d in pairs(data) do
-				if not (d[1] == "" and #d == 1) then table.insert(output, d) end
-			end
-		end,
-		on_stderr = function(_, data)
-			for _, d in pairs(data) do
-				if not (d[1] == "" and #d == 1) then table.insert(output, d) end
-			end
-		end,
-		on_exit = function()
-			if #output == 0 then return end
-			local out = table.concat(output, " \n "):gsub("%s*$", "")
-			local logLevel = logInfo
-			if out:lower():find("error") then
-				logLevel = logError
-			elseif out:lower():find("warning") then
-				logLevel = logWarn
-			end
-			vim.notify(out, logLevel)
-
-			vim.cmd.checktime() -- reload buffer if changed (e.g., due to linters or pandocvim). Also requires opt.autoread
-			os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
-		end,
-	}
 
 	vim.ui.input({ prompt = "Commit Message", default = prefillMsg }, function(commitMsg)
 		if not commitMsg then
@@ -118,8 +139,9 @@ function M.addCommitPush(prefillMsg)
 		elseif commitMsg == "" then
 			commitMsg = "chore"
 		end
-			-- stylua: ignore
-		local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs", "deprecate" }
+
+		-- stylua: ignore
+		local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
 		local firstWord = commitMsg:match("^%w+")
 		if not vim.tbl_contains(cc, firstWord) then
 			vim.notify("Not using a Conventional Commits keyword.", logWarn)
@@ -129,11 +151,12 @@ function M.addCommitPush(prefillMsg)
 
 		-- Shimmering Focus specific actions instead
 		if expand("%") == "source.css" then
-			shimmeringFocusBuild(commitMsg, gitShellOpts)
+			shimmeringFocusBuild(commitMsg)
 			return
 		end
 
 		vim.notify(' git add-commit-push\n"' .. commitMsg .. '"')
+		output = {}
 		fn.jobstart(
 			"git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push",
 			gitShellOpts
@@ -144,9 +167,9 @@ end
 ---normal mode: link to file
 ---visual mode: link to selected lines
 function M.gitLink()
-	local repo = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1")
-	local branch = fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", "")
-	if branch:find("^fatal: not a git repository") then
+	
+	
+	if fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", ""):find("^fatal: not a git repository") then
 		vim.notify("Not a git repository.", logWarn)
 		return
 	end
@@ -169,7 +192,7 @@ function M.gitLink()
 		location = "#L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
 	end
 
-	local gitRemote = "https://github.com/" .. repo .. "/blob/" .. branch .. pathInRepo
+	local gitRemote = "https://github.com/" .. fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1") .. "/blob/" .. fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", "") .. pathInRepo
 
 	local resultUrl = gitRemote .. location
 	os.execute("open '" .. resultUrl .. "'")

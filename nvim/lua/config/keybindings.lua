@@ -480,8 +480,8 @@ end, { desc = "璉Copy Breadcrumbs" })
 -- GIT
 
 -- Neo[G]it
-keymap("n", "<leader>gs", ":Neogit<CR>", { desc = " Neogit" })
-keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = " Commit" })
+keymap("n", "<leader>gs", ":Neogit<CR>", { desc = " Status (Neogit)" })
+keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = " Commit (Neogit)" })
 keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = " Add Hunk" })
 keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = " Reset Hunk" })
 keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" })
@@ -502,7 +502,7 @@ keymap("n", "<leader>gd", function()
 		cmd.wincmd("w") -- go directly to file window
 		cmd.wincmd("|") -- maximize
 	end)
-end, { desc = " File History (Diffview)" })
+end, { desc = " Diff (Diffview File History)" })
 
 --------------------------------------------------------------------------------
 

@@ -161,7 +161,7 @@ autocmd("FileType", {
 opt.foldenable = true
 opt.foldlevel = 99
 opt.foldlevelstart = 99
-opt.foldminlines = 2 -- restrict folding amount for batch-folding commands like zM
+opt.foldminlines = 1 -- restrict folding amount for batch-folding commands like zM
 -- opt.foldmethod = "indent" -- if not using UFO for folding
 
 --------------------------------------------------------------------------------
