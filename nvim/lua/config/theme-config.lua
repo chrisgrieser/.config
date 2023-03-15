@@ -39,7 +39,7 @@ local function customHighlights()
 	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
 	linkHighlight("myAnnotations", "Todo")
-	fn.matchadd("myAnnotations", [[\<\(REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
+	fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
 	fn.matchadd("myAnnotations", [[(SIC)]])
 
 	linkHighlight("IndentBlanklineContextChar", "Comment") -- active indent
