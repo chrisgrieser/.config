@@ -118,7 +118,7 @@
 	},
 	"null (pipe)": {
 		"prefix": "null (pipe)",
-		"body": "&>/dev/null "
+		"body": "&>/dev/null"
 	},
 	"urlEncode": {
 		"prefix": "urlEncode",

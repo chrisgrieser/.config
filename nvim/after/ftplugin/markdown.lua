@@ -11,6 +11,8 @@ if not opt_local.wrap:get() then require("funcs.quality-of-life").toggleWrap() e
 -- decrease line length without zen mode plugins
 opt_local.signcolumn = "yes:9"
 
+opt_local.formatoptions:remove("t")
+
 --------------------------------------------------------------------------------
 
 -- Build / Preview
