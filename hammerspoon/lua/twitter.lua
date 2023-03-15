@@ -82,7 +82,7 @@ end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
 TwitterWatcher = Aw.new(function(appName, event)
-	if appName == "Cleanshot X" then return end
+	if appName == "CleanShot X" then return end
 
 	-- move twitter and scroll it up
 	if appName == "Twitter" and (event == Aw.launched or event == Aw.activated) then
@@ -94,6 +94,7 @@ TwitterWatcher = Aw.new(function(appName, event)
 
 	-- auto-close media windows and scroll up when deactivating
 	elseif appName == "Twitter" and event == Aw.deactivated then
+		if FrontAppName() == "CleanShot X" then return end
 		TwitterScrollUp()
 		twitterCleanupLink()
 		twitterCloseMediaWindow()

@@ -1,0 +1,44 @@
+{
+	"items": [
+		{
+			"title": "Fullscreen",
+			"arg": "cleanshot://capture-fullscreen",
+			"uid": "0"
+		},
+		{
+			"title": "Previous Area",
+			"arg": "cleanshot://capture-previous-area",
+			"uid": "1"
+		},
+		{
+			"title": "Screenshot History",
+			"arg": "cleanshot://open-history",
+			"uid": "2"
+		},
+		{
+			"title": "Timed Screenshot",
+			"arg": "cleanshot://self-timer",
+			"uid": "3"
+		},
+		{
+			"title": "Scrolling Capture",
+			"arg": "cleanshot://scrolling-capture",
+			"uid": "4"
+		},
+		{
+			"title": "OCR Screenshot to clipboard",
+			"arg": "cleanshot://capture-text?linebreaks=true",
+			"uid": "5"
+		},
+		{
+			"title": "Screen Recording",
+			"arg": "cleanshot://record-screen",
+			"uid": "6"
+		},
+		{
+			"title": "Pin an Image",
+			"arg": "cleanshot://pin",
+			"uid": "7"
+		}
+	]
+}

@@ -339,6 +339,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D9352E3E-3278-4AE4-AC3C-1BF34C3FF494</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>DB0FF08A-04FB-4663-9EF5-E89C6C4CD8F1</key>
 		<array>
 			<dict>
@@ -1117,6 +1140,55 @@ osascript -l JavaScript -e '
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>cc</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>cat ./scripts/conventional-commits.json</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>jxa-cookbook-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Cnventional Commits</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>D9352E3E-3278-4AE4-AC3C-1BF34C3FF494</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
@@ -1803,6 +1875,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>425</real>
 			<key>ypos</key>
 			<real>250</real>
+		</dict>
+		<key>D9352E3E-3278-4AE4-AC3C-1BF34C3FF494</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>note</key>
+			<string>conventional commits</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>895</real>
 		</dict>
 		<key>DB0FF08A-04FB-4663-9EF5-E89C6C4CD8F1</key>
 		<dict>
