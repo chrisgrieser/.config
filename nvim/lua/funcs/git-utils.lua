@@ -6,21 +6,18 @@ local logError = vim.log.levels.ERROR
 local logInfo = vim.log.levels.INFO
 
 --------------------------------------------------------------------------------
+-- HELPERS
 
-local function checkIfInGitRepo()
-	local isinRepo = fn.system("git rev-parse --is-inside-work-tree")
-	if vim.v.shell_error == 0 then
-		return true
+---also notifies if not in git repo
+---@return boolean
+local function isInGitRepo()
+	fn.system("git rev-parse --is-inside-work-tree")
+	if vim.v.shell_error ~= 0 then
+		vim.notify("Not a GitHub Repo.", logWarn)
+		return false
 	end
-
-	local repo = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1")
-	if branch:find("^fatal: not a git repository") then
-		vim.notify("Not a git repository.", logWarn)
-		return
-	end
+	return true
 end
-
---------------------------------------------------------------------------------
 
 --NOTE this requires an outer-scope output variable which needs to be emptied
 --before the run
@@ -58,12 +55,9 @@ local gitShellOpts = {
 
 ---Choose a GitHub issues from the current repo to open in the browser
 function M.issueSearch()
-	local repo = fn.system("git remote -v | head -n1")
-	if repo:find("^fatal") then
-		vim.notify("Not a GitHub Repo.", logWarn)
-		return
-	end
-	repo = repo:match(":.*%."):sub(2, -2)
+	if not isInGitRepo() then return end
+
+	local repo = fn.system("git remote -v | head -n1"):match(":.*%."):sub(2, -2)
 
 	-- TODO figure out how to make a proper http request in nvim
 	local max_results = 20
@@ -118,16 +112,20 @@ local function shimmeringFocusBuild(commitMsg)
 	local buildscriptLocation = vim.env.ICLOUD .. "/Repos/shimmering-focus/build.sh"
 
 	vim.notify(' Building theme…\n"' .. commitMsg .. '"')
+	output = {}
 	fn.jobstart('zsh "' .. buildscriptLocation .. '" "' .. commitMsg .. '"', gitShellOpts)
 end
 
-local function amendNoEdit()
+function M.amendNoEditPushforce()
+	if not isInGitRepo() then return end
 	output = {}
-	fn.jobstart("git add -A && git commit --amend --no-edit", gitShellOpts)
+	fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
 end
 
 ---@param prefillMsg? string
 function M.addCommitPush(prefillMsg)
+	if not isInGitRepo() then return end
+
 	if not prefillMsg then prefillMsg = "" end
 
 	vim.ui.input({ prompt = "Commit Message", default = prefillMsg }, function(commitMsg)
@@ -168,12 +166,7 @@ end
 ---normal mode: link to file
 ---visual mode: link to selected lines
 function M.gitLink()
-	
-	
-	if fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", ""):find("^fatal: not a git repository") then
-		vim.notify("Not a git repository.", logWarn)
-		return
-	end
+	if not isInGitRepo() then return end
 
 	local filepath = expand("%:p")
 	local gitroot = fn.system([[git --no-optional-locks rev-parse --show-toplevel]])
@@ -193,7 +186,11 @@ function M.gitLink()
 		location = "#L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
 	end
 
-	local gitRemote = "https://github.com/" .. fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1") .. "/blob/" .. fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", "") .. pathInRepo
+	local gitRemote = "https://github.com/"
+		.. fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1")
+		.. "/blob/"
+		.. fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", "")
+		.. pathInRepo
 
 	local resultUrl = gitRemote .. location
 	os.execute("open '" .. resultUrl .. "'")
