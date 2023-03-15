@@ -150,10 +150,7 @@ opt.autoread = true
 -- overwritten by the ftplugins having the `o` option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("FileType", {
-	callback = function()
-		if bo.filetype == "markdown" then return end -- not for markdown, for autolist hack (see markdown.lua)
-		opt_local.formatoptions:remove("o")
-	end,
+	callback = function() opt_local.formatoptions:remove("o") end,
 })
 
 --------------------------------------------------------------------------------

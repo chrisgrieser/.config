@@ -21,6 +21,7 @@ local generalWords = {
 	{ "next", "previous" },
 	{ "read", "write" },
 	{ "inner", "outer" },
+	{ "black", "white" },
 }
 
 -- INFO `false` indicates that the second element is not exchanged backwards

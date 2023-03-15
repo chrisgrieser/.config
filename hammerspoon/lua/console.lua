@@ -7,7 +7,7 @@ local cons = hs.console
 local baseFont = { name = "JetBrainsMonoNL Nerd Font", size = 22 }
 local darkRed = { red = 0.7, green = 0, blue = 0, alpha = 1 }
 local lightRed = { red = 1, green = 0, blue = 0, alpha = 1 }
-local darkYellow = { red = 0.6, green = 0.6, blue = 0, alpha = 1 }
+local darkYellow = { red = 0.7, green = 0.7, blue = 0, alpha = 1 }
 local lightYellow = { red = 1, green = 1, blue = 0, alpha = 1 }
 local white = { white = 0.9 }
 local black = { white = 0.1 }
@@ -56,11 +56,13 @@ function CleanupConsole()
 		if line:find("^> ") then -- user input
 			color = isDark and lightGrey or darkGrey
 		elseif line:find("ERROR") or line:find("Error") then
+			line = line:gsub("%s+", " ")
 			color = isDark and lightRed or darkRed
 		elseif line:find("[wW]arning") then
+			line = line:gsub("%*%* Warning:%s*", "WARN: ")
 			color = isDark and lightYellow or darkYellow
 		else
-			color = isDark and white or white
+			color = isDark and white or black
 		end
 		local coloredLine = hs.styledtext.new(line, { color = color, font = baseFont })
 		cons.printStyledtext(coloredLine)
