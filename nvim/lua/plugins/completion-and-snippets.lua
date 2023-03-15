@@ -120,7 +120,7 @@ local function cmpconfig()
 				else
 					fallback()
 				end
-			end),
+			end, {"i", "s", "n", "x"}),
 			["<D-S-j>"] =  cmp.mapping(function(fallback)
 				if require("neogen").jumpable(true) then
 					require("neogen").jump_prev()
@@ -129,7 +129,7 @@ local function cmpconfig()
 				else
 					fallback()
 				end
-			end),
+			end, {"i", "s", "n", "x"}),
 			-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then

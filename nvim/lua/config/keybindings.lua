@@ -166,27 +166,15 @@ keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "暈su
 keymap("n", "za", "mz]s1z=`z", { desc = "暈autofix" }) -- [a]utofix word under cursor
 keymap("n", "zg", function()
 	local word = expand("<cword>")
-	local acceptTxt = LinterConfig .. "/vale/styles/Vocab/Docs/accept.txt"
-	local file, err = io.open(acceptTxt, "a")
-	if file then
-		file:write(word)
-		file:close()
-		vim.notify("暈Now accepting:\n" .. word)
-	else
-		vim.notify("Could not write: " .. err, logError)
-	end
+	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/accept.txt")
+	if not success then return end -- error message already by AppendToFile
+	vim.notify("暈Now accepting:\n" .. word)
 end, { desc = "暈Add to accepted words (vale)" })
 keymap("n", "zw", function()
 	local word = expand("<cword>")
-	local rejectTxt = LinterConfig .. "/vale/styles/Vocab/Docs/reject.txt"
-	local file, err = io.open(rejectTxt, "a")
-	if file then
-		file:write(word)
-		file:close()
-		vim.notify("暈Now rejecting:\n" .. word)
-	else
-		vim.notify("Could not write: " .. err, logError)
-	end
+	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/reject.txt")
+	if not success then return end 
+	vim.notify("暈Now rejecting:\n" .. word)
 end, { desc = "暈Add to rejected words (vale)" })
 
 -- [S]ubstitute Operator (substitute.nvim)

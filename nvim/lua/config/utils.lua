@@ -29,17 +29,30 @@ function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 ---@return boolean
 function IsGui() return g.neovide or g.goneovim end
 
----reads the full fill
+---reads the full file
 ---@param filePath string
 ---@return string|nil file content or nil when not reading no successful
 function ReadFile(filePath)
-	local file = io.open(filePath, "r")
-	if not file then return end
+	local file, err = io.open(filePath, "r")
+	if not file then 
+		vim.notify("Could not read: " .. err, vim.log.levels.ERROR)
+		return
+	end
 	local content = file:read("*a")
 	file:close()
 	return content
 end
 
+---@param str string
+---@param filePath string
+---@return boolean whether the writing was successful
 function AppendToFile(str, filePath)
-
+	local file, err = io.open(filePath, "a")
+	if not file then
+		vim.notify("Could not append: " .. err, vim.log.levels.ERROR)
+		return false
+	end
+	file:write(str)
+	file:close()
+	return true
 end
