@@ -84,7 +84,7 @@ return {
 		ft = { "markdown", "text" },
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
 	},
-	{ -- Folding
+	{ -- Better Folding
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
 		event = "BufReadPost",
@@ -124,15 +124,11 @@ return {
 					return newVirtText
 				end,
 			}
-
-			-- Using ufo provider need remap `zR` and `zM`
-			vim.keymap.set("n", "zR", ufo.openAllFolds, { desc = " Open all folds" })
-			vim.keymap.set("n", "zM", ufo.closeAllFolds, { desc = " Close all folds" })
-
-			-- fold settings required for UFO
-			vim.opt.foldenable = true
-			vim.opt.foldlevel = 99
-			vim.opt.foldlevelstart = 99
 		end,
+		init = function ()
+			-- Using ufo provider need remap `zR` and `zM`
+			vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = " Open all folds" })
+			vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = " Close all folds" })
+		end
 	},
 }

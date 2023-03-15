@@ -159,14 +159,15 @@ autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- FOLDING
 
+-- fold settings required for UFO
+opt.foldenable = true
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+-- opt.foldmethod = "indent" -- if not using UFO for folding
+
 -- restrict folding amount for batch-folding commands like zM
 opt.foldminlines = 3
-opt.foldnestmax = 2
-
--- if not using UFO for folding
--- opt.foldexpr = "nvim_treesitter#foldexpr()" -- if treesitter folding is used via expr below
--- opt.foldmethod = "expr"
--- opt.foldmethod = "indent"
+opt.foldnestmax = 1
 
 --------------------------------------------------------------------------------
 
