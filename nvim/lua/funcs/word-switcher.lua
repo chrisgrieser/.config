@@ -1,3 +1,5 @@
+
+-- INFO `false` indicates that the second element is not exchanged with the first
 local generalWords = {
 	{ "true", "false" },
 	{ "on", "off" },
@@ -8,28 +10,36 @@ local generalWords = {
 	{ "warn", "error" },
 	{ "show", "hide" },
 	{ "min", "max" },
-	{ "and", "or" },
 	{ "read", "write" },
 	{ "always", "never" },
 
-	{ "top", "bottom" },
-	{ "right", "left" },
-	{ "relative", "absolute" },
-	{ "width", "height" },
 	{ "next", "previous" },
 	{ "inner", "outer" },
 	{ "before", "after" },
 	{ "low", "high" },
-
 	{ "dark", "light" },
-	{ "black", "white" },
-	{ "red", "blue" },
+
+	{ "years", "months", false },
+	{ "months", "weeks", false },
+	{ "weeks", "days", false },
+	{ "days", "hours", false },
+	{ "hours", "minutes", false },
+	{ "minutes", "seconds", false },
 }
 
--- INFO `false` indicates that the second element is not exchanged with the first
 local filetypeSpecificWords = {
+	css = {
+		{ "padding", "margin" },
+		{ "top", "bottom" },
+		{ "right", "left" },
+		{ "relative", "absolute" },
+		{ "width", "height" },
+		{ "black", "white" },
+		{ "red", "blue" },
+	},
 	lua = {
 		{ "if", "elseif", false },
+		{ "and", "or" },
 		{ "elseif", "else", false },
 		{ "else", "if", false },
 		{ "function", "local function", false },
@@ -45,6 +55,7 @@ local filetypeSpecificWords = {
 		{ "else", "else if", false },
 		{ "var", "const", false },
 		{ "const", "let" },
+		{ "map", "forEach" },
 		{ "replace", "replaceAll" },
 	},
 	sh = {
