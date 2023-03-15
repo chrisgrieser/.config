@@ -51,7 +51,7 @@ local function workLayout()
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder", "BetterTouchTool" }
 	require("lua.private").closer()
 	if not isWeekend() then OpenApp("Slack") end
-	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts", "Obsidian" }
+	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
 	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 
 	-- layout apps
