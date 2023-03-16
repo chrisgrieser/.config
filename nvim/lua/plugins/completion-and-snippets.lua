@@ -112,7 +112,7 @@ local function cmpconfig()
 					fallback()
 				end
 			end, { "i", "s" }),
-			["<D-j>"] =  cmp.mapping(function(fallback)
+			["<D-j>"] = cmp.mapping(function(fallback)
 				if require("neogen").jumpable() then
 					require("neogen").jump_next()
 				elseif require("luasnip").jumpable(1) then
@@ -120,8 +120,8 @@ local function cmpconfig()
 				else
 					fallback()
 				end
-			end, {"i", "s", "n", "x"}),
-			["<D-S-j>"] =  cmp.mapping(function(fallback)
+			end, { "i", "s", "n", "x" }),
+			["<D-S-j>"] = cmp.mapping(function(fallback)
 				if require("neogen").jumpable(true) then
 					require("neogen").jump_prev()
 				elseif require("luasnip").jumpable(-1) then
@@ -129,7 +129,7 @@ local function cmpconfig()
 				else
 					fallback()
 				end
-			end, {"i", "s", "n", "x"}),
+			end, { "i", "s", "n", "x" }),
 			-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
@@ -372,7 +372,6 @@ return {
 			}
 
 			-- VS-code-style snippets
-			-- INFO has to be loaded after the regular luasnip-snippets
 			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
 		end,
 	},
