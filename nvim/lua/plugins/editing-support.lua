@@ -6,7 +6,8 @@ return {
 		keys = { "f", "F", "t", "T" },
 		init = function()
 			vim.g.clever_f_mark_direct = 1 -- essentially quickscope
-			vim.g.clever_f_chars_match_any_signs = " " -- space matches special chars
+			-- use space to match special chars, since `E` would be used instead of `f<space>`
+			vim.g.clever_f_chars_match_any_signs = " " 
 		end,
 	},
 	{ -- display line numbers while going to a line with `:`

@@ -540,6 +540,7 @@ keymap("n", "5", function()
 		cmd.CodiNew()
 		api.nvim_buf_set_name(0, "Codi: " .. ft)
 	end
+	local foo = 1 >= 20
 end, { desc = ":CodiNew" })
 
 --------------------------------------------------------------------------------
