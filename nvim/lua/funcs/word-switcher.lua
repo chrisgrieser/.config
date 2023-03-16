@@ -62,6 +62,8 @@ local filetypeSpecificWords = {
 		{ "top", "bottom" },
 		{ "relative", "absolute" },
 		{ "width", "height" },
+		{ "border", "outline" },
+		{ "span", "div" },
 	},
 	lua = {
 		{ "==", "~=" },
