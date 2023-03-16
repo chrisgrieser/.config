@@ -461,6 +461,7 @@ rules:
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
   - description: "(Apps) Drafts"
     manipulators:
+      # actions menu
       - type: basic
         from: { key_code: comma, modifiers: { mandatory: [shift, command] } }
         to:
@@ -470,6 +471,19 @@ rules:
                   click menu item "Manage Actions..." of menu "Actions" of menu bar 1
                 end tell
               end tell'
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.agiletortoise\.Drafts-OSX$] }]
+      # Merge
+      - type: basic
+        from: { key_code: m, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: |
+              osascript -e 'tell application "System Events"
+                tell process "Drafts"
+                  click menu item "Merge..." of menu "File" of menu bar 1
+                end tell
+              end tell'
+          - {key_code: vk_none, hold_down_milliseconds: 300}
+          - {key_code: return_or_enter, modifiers: [command]}
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.agiletortoise\.Drafts-OSX$] }]
       # Archive
       - type: basic
