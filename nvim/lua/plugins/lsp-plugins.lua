@@ -11,30 +11,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- stylua: ignore start
 		if capabilities.inlayHintProvider then
-			require("lsp-inlayhints").setup {
-				inlay_hints = {
-					parameter_hints = {
-						show = true,
-						prefix = " ",
-						remove_colon_start = true,
-						remove_colon_end = true,
-					},
-					type_hints = {
-						show = true,
-						prefix = "   ",
-						remove_colon_start = true,
-						remove_colon_end = true,
-					},
-					only_current_line = true,
-					highlight = "NonText", -- highlight group
-				},
-			}
 			require("lsp-inlayhints").on_attach(client, bufnr)
-
 		end
 		if
 			capabilities.documentSymbolProvider
-			and client.name ~= "cssls" -- navic not that useful for css
+			-- and client.name ~= "cssls" -- navic not that useful for css
 		then
 			require("nvim-navic").setup {
 				icons = { Object = "ﴯ " },
@@ -73,6 +54,26 @@ return {
 		-- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		"lvimuser/lsp-inlayhints.nvim",
 		lazy = true, -- loaded when attaching
+		config = function ()
+			require("lsp-inlayhints").setup {
+				inlay_hints = {
+					parameter_hints = {
+						show = true,
+						prefix = " ",
+						remove_colon_start = true,
+						remove_colon_end = true,
+					},
+					type_hints = {
+						show = true,
+						prefix = "   ",
+						remove_colon_start = true,
+						remove_colon_end = true,
+					},
+					only_current_line = true,
+					highlight = "NonText", -- highlight group
+				},
+			}
+		end,
 	},
 	{
 		"smjonas/inc-rename.nvim",
