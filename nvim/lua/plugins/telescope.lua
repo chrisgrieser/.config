@@ -7,7 +7,7 @@ local keymappings = {
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
-	["<D-a>"] = "select_all", 
+	["<D-a>"] = "select_all",
 }
 
 local function telescopeConfig()
@@ -16,6 +16,29 @@ local function telescopeConfig()
 			selection_caret = "ﰉ ",
 			prompt_prefix = "❱ ",
 			multi_icon = "洛",
+			preview = {
+				mime_hook = function(filepath, bufnr, opts)
+					local isFolder = filepath:find("/$")
+					if isFolder then
+						local term = vim.api.nvim_open_term(bufnr, {})
+						local function send_output(_, data, _)
+							for _, d in ipairs(data) do
+								vim.api.nvim_chan_send(term, d .. "\r\n")
+							end
+						end
+						vim.fn.jobstart({
+							"catimg",
+							filepath, -- Terminal image viewer command
+						}, { on_stdout = send_output, stdout_buffered = true, pty = true })
+					else
+						require("telescope.previewers.utils").set_preview_message(
+							bufnr,
+							opts.winid,
+							"Binary cannot be previewed"
+						)
+					end
+				end,
+			},
 			path_display = { "tail" },
 			borderchars = BorderChars,
 			history = { path = VimDataDir .. "telescope_history" }, -- sync the history
@@ -106,7 +129,7 @@ local function telescopeConfig()
 			lsp_document_symbols = {
 				prompt_prefix = "璉 ",
 				-- markdown headings are symbol-type "string"
-				ignore_symbols = { "boolean", "number" }, 
+				ignore_symbols = { "boolean", "number" },
 				fname_width = 17,
 			},
 			lsp_workspace_symbols = {
@@ -183,7 +206,6 @@ local function telescopeConfig()
 						["<C-r>"] = require("telescope._extensions.file_browser.actions").rename,
 						["<D-BS>"] = require("telescope._extensions.file_browser.actions").remove,
 
-						["<D-a>"] = require("telescope._extensions.file_browser.actions").select_all,
 						["<D-b>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
 					},
 				},
