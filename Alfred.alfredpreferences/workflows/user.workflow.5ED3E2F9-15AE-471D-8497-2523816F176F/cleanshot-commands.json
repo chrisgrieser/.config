@@ -36,11 +36,6 @@
 			"uid": "6"
 		},
 		{
-			"title": "Annotate Image in Clipboard",
-			"arg": "cleanshot://open-from-clipboard",
-			"uid": "7"
-		},
-		{
 			"title": "Screen Recording",
 			"arg": "cleanshot://record-screen",
 			"uid": "8"

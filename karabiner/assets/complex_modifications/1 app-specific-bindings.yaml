@@ -601,21 +601,13 @@ rules:
         to:
           - { key_code: c, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
-      # cmd+shift+4 once to screenshot, a second time to annotate. Hold to force
-      # new screenshot
+      # ⌘⇧4: tap to screenshot, hold to annotate from clipboard
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
-          - shell_command: |
-              osascript -e '
-                tell application "CleanShot X" to quit front window
-                if ((clipboard info) as string) contains "picture" then
-                  open location "cleanshot://open-from-clipboard"
-                else
-                  open location "cleanshot://capture-area"
-                end if'
-        to_if_held_down:
           - shell_command: open "cleanshot://capture-area"
+        to_if_held_down:
+          - shell_command: open "cleanshot://open-from-clipboard"
         parameters:
           basic.to_if_alone_timeout_milliseconds: 300
           basic.to_if_held_down_threshold_milliseconds: 300
