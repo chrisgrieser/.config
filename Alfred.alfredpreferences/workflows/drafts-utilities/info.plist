@@ -161,19 +161,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B54825E1-4FFA-41D2-9B3E-D83891E612C4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>439E285A-5910-4060-8D7A-1470424F6D2F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>B6A0C425-D9B7-4F43-A579-32BCF3E9003F</key>
 		<array>
 			<dict>
@@ -226,6 +213,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CAABCDA0-0DEF-44C3-992E-B52B07F5B8D3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>439E285A-5910-4060-8D7A-1470424F6D2F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F5CD04E3-5A08-4191-9DAA-FB7C95953587</key>
 		<array>
 			<dict>
@@ -263,37 +263,6 @@
 	<string>Drafts Utilities</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>19</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>2</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>B54825E1-4FFA-41D2-9B3E-D83891E612C4</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -362,6 +331,21 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>8479954D-12AF-484E-94BC-FA244E2ECF27</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>drafts-ocr</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>CAABCDA0-0DEF-44C3-992E-B52B07F5B8D3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1002,7 +986,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>550</real>
 			<key>ypos</key>
-			<real>355</real>
+			<real>325</real>
 		</dict>
 		<key>08BA2565-9B60-4A1C-BC0E-7BCD74ADF899</key>
 		<dict>
@@ -1033,7 +1017,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>220</real>
+			<real>190</real>
 		</dict>
 		<key>29410773-ADC2-4B3E-8F78-37C96D87DA3F</key>
 		<dict>
@@ -1042,7 +1026,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>480</real>
 		</dict>
 		<key>42389168-DDFE-4158-93B7-8AD8E3B7564E</key>
 		<dict>
@@ -1109,7 +1093,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>480</real>
 		</dict>
 		<key>76617630-8984-4444-8F08-CE5ECD32EE77</key>
 		<dict>
@@ -1120,7 +1104,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>480</real>
 		</dict>
 		<key>77E992B5-E489-4B56-A178-7C1CB761F733</key>
 		<dict>
@@ -1131,7 +1115,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>205</real>
+			<real>175</real>
 		</dict>
 		<key>79405FF0-A2F1-462E-8A8F-AC1F83CC4C1A</key>
 		<dict>
@@ -1142,7 +1126,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>355</real>
+			<real>325</real>
 		</dict>
 		<key>7B4F8DF4-D76C-419E-A643-E2667687215E</key>
 		<dict>
@@ -1162,7 +1146,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>210</real>
 		</dict>
 		<key>8479954D-12AF-484E-94BC-FA244E2ECF27</key>
 		<dict>
@@ -1184,19 +1168,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>550</real>
 		</dict>
-		<key>B54825E1-4FFA-41D2-9B3E-D83891E612C4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>Screenshot to OCR to Drafts &amp; Clipboard
-
-Recommended Hotkey: ⇧⌘2</string>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>B6A0C425-D9B7-4F43-A579-32BCF3E9003F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1204,7 +1175,7 @@ Recommended Hotkey: ⇧⌘2</string>
 			<key>xpos</key>
 			<real>300</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>235</real>
 		</dict>
 		<key>B970369A-B4DB-46EE-8725-1BF669D561C5</key>
 		<dict>
@@ -1224,7 +1195,7 @@ Recommended Hotkey: ⇧⌘2</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>355</real>
 		</dict>
 		<key>BAD44650-CAFD-4C9E-84D9-6710E38A751C</key>
 		<dict>
@@ -1243,6 +1214,13 @@ Recommended Hotkey: ⇧⌘2</string>
 			<real>910</real>
 			<key>ypos</key>
 			<real>415</real>
+		</dict>
+		<key>CAABCDA0-0DEF-44C3-992E-B52B07F5B8D3</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>E3D6E3BB-81DF-431C-A6F1-175075F74679</key>
 		<dict>
@@ -1273,7 +1251,7 @@ Recommended Hotkey: ⇧⌘2</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>355</real>
+			<real>325</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
