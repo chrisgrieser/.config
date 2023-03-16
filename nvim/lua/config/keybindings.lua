@@ -183,8 +183,10 @@ keymap( "n", "sx", function() require("substitute.exchange").operator() end, { d
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
 -- Node S[w]apping
+-- stylua: ignore start
 keymap("n", "ü", function () require('sibling-swap').swap_with_right() end, { desc = "弄 Swap Siblings" })
 keymap("n", "Ü", function () require('sibling-swap').swap_with_left() end, { desc = "弄 Swap Siblings" })
+-- stylua: ignore end
 
 -- search & replace
 keymap(
@@ -366,7 +368,7 @@ keymap("n", "go", function()
 	require("telescope").extensions.file_browser.file_browser { prompt_title = title }
 end, { desc = " Browse in Project" })
 
-keymap("n", "gO", function ()
+keymap("n", "gO", function()
 	local thisFolder = expand("%:p:h")
 	require("telescope").extensions.file_browser.file_browser { path = thisFolder }
 end, { desc = " Browse in Folder" })
@@ -430,7 +432,7 @@ autocmd("LspAttach", {
 			-- command line; needs defer to not be overwritten by treesitter-
 			-- refactor's smart-rename
 			---@diagnostic disable-next-line: param-type-mismatch
-			vim.defer_fn(function() keymap("n", "<leader>v", ":IncRename ", { desc = "璉IncRename Variable", buffer = true}) end, 1) 
+			vim.defer_fn(function() keymap("n", "<leader>v", ":IncRename ", { desc = "璉IncRename Variable", buffer = true}) end, 1)
 		end
 
 		-- conditional to not overwrite treesitter goto-symbol
@@ -518,24 +520,17 @@ end, { desc = " 璉 Toggle Diagnostics" })
 
 --------------------------------------------------------------------------------
 
--- TERMINAL AND CODI
+-- TERMINAL & CODE RUNNER
 keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = " go to next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 
 keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
 keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = " Selection to ToggleTerm" })
 
-keymap("n", "5", function()
-	local ft = bo.filetype
-	local pwd = vim.loop.cwd() or "" 
-	if ft == "lua" and pwd:find("/nvim/") then
-		cmd.Luapad()	
-		api.nvim_buf_set_name(0, "Luapad")
-	else
-		cmd.CodiNew()
-		api.nvim_buf_set_name(0, "Codi: " .. ft)
-	end
-end, { desc = ":CodiNew" })
+-- stylua: ignore
+keymap("n", "5", function () require("iron.core").repl_for(bo.filetype) end, { desc = " Toggle REPL (Iron)" })
+keymap("n", "4", function () require("iron.core").send_line() end, { desc = " Send Line to REPL (Iron)" })
+keymap("x", "4", function () require("iron.core").visual_send() end, { desc = " Send Selection to REPL (Iron)" })
 
 --------------------------------------------------------------------------------
 
@@ -607,5 +602,3 @@ for _, key in ipairs { "x", "h", "l", "e", "w", "b" } do
 end
 
 --------------------------------------------------------------------------------
-num = 10 + 20
-print(num)
