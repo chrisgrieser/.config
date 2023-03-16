@@ -460,7 +460,6 @@ autocmd("LspAttach", {
 		-- Save & Format
 		keymap({ "n", "i", "x" }, "<D-s>", function()
 			cmd.update()
-			if bo.filetype == "javascript" or bo.filetype == "typescript" then cmd.EslintFixAll() end
 			vim.lsp.buf.format { async = true }
 		end, { buffer = true, desc = "璉Save & Format" })
 	end,
