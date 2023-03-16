@@ -65,7 +65,7 @@
 	},
 	"hide app": {
 		"prefix": "hide app",
-		"body": "tell application \"System Events\" to tell process \"alacritty\" to set visible to false"
+		"body": "tell application \"System Events\" to tell process \"${1:appName}\" to set visible to false"
 	},
 	"resolve home": {
 		"prefix": "resolve home",
