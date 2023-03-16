@@ -29,12 +29,19 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("neogen").setup() end,
 	},
-	{-- substitution & exchange operator
-		"gbprod/substitute.nvim", 
+	{ -- substitution & exchange operator
+		"gbprod/substitute.nvim",
 		lazy = true,
-		config = function() require("substitute").setup() end,
+		config = function()
+			require("substitute").setup {
+				highlight_substituted_text = {
+					enabled = true,
+					timer = 1000,
+				},
+			}
+		end,
 	},
-	{-- duplicaton operator
+	{ -- duplicaton operator
 		"smjonas/duplicate.nvim",
 		keys = {
 			{ "yd", desc = "Duplicate" },
