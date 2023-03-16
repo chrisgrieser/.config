@@ -282,6 +282,7 @@ local function cmpconfig()
 			s.cmdline,
 		}, { -- second array only relevant when no source from the first matches
 			s.cmdline_history,
+			s.buffer, -- e.g. for IncRename
 		}),
 	})
 
@@ -318,7 +319,7 @@ return {
 	},
 	{
 		"jcdickinson/codeium.nvim",
-		lazy = true, -- is being loaded by cmp
+		lazy = true, -- loaded by cmp
 		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
 		config = function()
 			require("codeium").setup {

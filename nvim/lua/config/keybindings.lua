@@ -365,6 +365,10 @@ keymap("n", "go", function()
 	require("telescope").extensions.file_browser.file_browser { prompt_title = title }
 end, { desc = " Browse in Project" })
 
+keymap("n", "gO", function ()
+	local thisFolder = expand("%:p:h")
+	require("telescope").extensions.file_browser.file_browser { path = thisFolder }
+end, { desc = " Browse in Folder" })
 keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 
@@ -423,27 +427,17 @@ autocmd("LspAttach", {
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local capabilities = client.server_capabilities
+		-- stylua: ignore start
 
 		-- overrides treesitter-refactor's rename
 		if capabilities.renameProvider then
 			-- cannot run `cmd.IncRename` since the plugin *has* to use the
-			-- command line
-
-			-- needs delay via defer to not be overwritten by treesitter-refactor's
-			-- smart-rename
-			---@diagnostic disable: param-type-mismatch
-			vim.defer_fn(function()
-				keymap(
-					"n",
-					"<leader>v",
-					function() return ":IncRename " .. fn.expand("<cword>") end,
-					{ desc = "璉IncRename Variable", buffer = true, expr = true }
-				)
-			end, 1)
-			---@diagnostic enable: param-type-mismatch
+			-- command line; needs defer to not be overwritten by treesitter-
+			-- refactor's smart-rename
+			---@diagnostic disable-next-line: param-type-mismatch
+			vim.defer_fn(function() keymap("n", "<leader>v", ":IncRename ", { desc = "璉IncRename Variable", buffer = true}) end, 1) 
 		end
 
-		-- stylua: ignore start
 		-- conditional to not overwrite treesitter goto-symbol
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "璉Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
@@ -496,7 +490,7 @@ keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" 
 keymap({ "n", "x" }, "<leader>gl", function () require("funcs.git-utils").gitLink() end, { desc = " GitHub Link" })
 keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = " Add-Commit-Push" })
 keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch() end, { desc = " GitHub Issues" })
-keymap("n", "<leader>gi", function () require("funcs.git-utils").amendNoEditPushForce() end, { desc = " Git Amend-No-Edit & Force Push" })
+keymap("n", "<leader>gm", function () require("funcs.git-utils").amendNoEditPushForce() end, { desc = " Git Amend-No-Edit & Force Push" })
 -- stylua: ignore end
 
 -- Diffview
