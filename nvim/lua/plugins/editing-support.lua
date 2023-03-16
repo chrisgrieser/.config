@@ -95,7 +95,7 @@ return {
 				provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
 					return { "lsp", "indent" } -- Use lsp and treesitter as fallback
 				end,
-				-- open_fold_hl_timeout = 0,
+				open_fold_hl_timeout = 0,
 				fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 					-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 					local newVirtText = {}
@@ -126,8 +126,11 @@ return {
 			}
 
 			-- Using ufo provider need remap `zR` and `zM`
+
 			vim.keymap.set("n", "zR", ufo.openAllFolds, { desc = "  Open all folds" })
 			vim.keymap.set("n", "zM", ufo.closeAllFolds, { desc = "  Close all folds" })
+			vim.keymap.set("n", "zr", ufo.openFoldsExceptKinds, { desc = "  Open fold" })
+			vim.keymap.set("n", "zm", ufo.closeFoldsWith, { desc = "  Close fold" })
 		end,
 	},
 }
