@@ -18,8 +18,8 @@ vim.opt.rtp:prepend(lazypath)
 -- WARN if plugins are not recognized, try renaming the plugin-spec file https://github.com/folke/lazy.nvim/issues/298
 require("lazy").setup("plugins", {
 	dev = {
-path = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos",
-		fallback = true, -- Fallback to github online when local plugin doesn't exist
+		path = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos",
+		fallback = true, -- use remote repo when local repo doesn't exist
 	},
 	ui = {
 		wrap = true,
@@ -28,15 +28,14 @@ path = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates, required for statusline
-		notify = false, -- get a notification when new updates are found
-		frequency = 86400, -- check for updates every 24 hours
+		notify = false, -- don't a notification when new updates are found
+		frequency = 86400, -- only check for updates every 24 hours
 	},
 	change_detection = { notify = false },
 	performance = {
 		rtp = {
 			disabled_plugins = {
 				-- disable unused builtin plugins from neovim
-				"spellfile",
 				"netrw",
 				"netrwPlugin",
 				"gzip",
