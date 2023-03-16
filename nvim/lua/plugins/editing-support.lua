@@ -68,7 +68,7 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("iswap").setup { autoswap = true } end,
 	},
-	{ -- swapping of sibling nodes
+	{ -- swapping of sibling nodes (better than ISwap)
 		"Wansmer/sibling-swap.nvim",
 		lazy = true, -- required in keymaps
 		dependencies = "nvim-treesitter/nvim-treesitter",
