@@ -100,9 +100,6 @@ keymap("n", "<Esc>", function()
 	require("notify").dismiss { pending = clearPending }
 end, { desc = "Clear Notifications" })
 
-
-function ()print("hi")end
-
 -- FOLDING
 -- with count: close {n} fold levels
 -- without toggle current fold
