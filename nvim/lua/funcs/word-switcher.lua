@@ -148,7 +148,7 @@ function M.switch()
 
 	if filetypeSpecificWords[ft] then
 		-- filetype inherits words by other filetype
-		if filetypeSpecificWords[ft] == "string" then ft = tostring(filetypeSpecificWords[ft]) end
+		if type(filetypeSpecificWords[ft]) == "string" then ft = tostring(filetypeSpecificWords[ft]) end
 
 		---@diagnostic disable-next-line: param-type-mismatch --- type match ensured above
 		for _, v in pairs(filetypeSpecificWords[ft]) do
