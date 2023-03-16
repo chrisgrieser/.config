@@ -62,13 +62,7 @@ return {
 		event = "InsertEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-	{ -- swapping of nodes
-		"mizlan/iswap.nvim",
-		cmd = "ISwapWith",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		config = function() require("iswap").setup { autoswap = true } end,
-	},
-	{ -- swapping of sibling nodes (better than ISwap)
+	{ -- swapping of sibling nodes (works with more nodes than Iswap, but has no hint mode)
 		"Wansmer/sibling-swap.nvim",
 		lazy = true, -- required in keymaps
 		dependencies = "nvim-treesitter/nvim-treesitter",
