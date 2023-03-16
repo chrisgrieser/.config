@@ -35,10 +35,9 @@ return {
 					highlight_last = "IronLastSent",
 					repl_definition = {
 						sh = { command = { "zsh" } },
-						applescript = { command = { "osascript" } },
 						lua = { command = { "lua" } },
 						typescript = { command = { "node" } },
-						javascript = { command = { "node" } }, -- JXA
+						javascript = { command = { "node" } }, 
 						python = { command = { "python3" } },
 					},
 				},

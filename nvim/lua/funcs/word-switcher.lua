@@ -28,6 +28,7 @@ local generalWords = {
 	{ "right", "left" },
 	{ "black", "white" },
 	{ "even", "odd" },
+	{ "start", "end" },
 	{ "more", "less", false },
 	{ "less", "fewer", false },
 	{ "fewer", "more", false },
@@ -39,6 +40,11 @@ local generalWords = {
 	{ "and", "or" },
 
 	-- comparisons and operators
+	{ "(", ")" },
+	{ "[", "]" },
+	{ "[[", "]]" },
+	{ "{", "}" },
+	{ "'", '"' },
 	{ "<", ">" },
 	{ "<=", ">=" },
 	{ "==", "!=" },
@@ -96,7 +102,7 @@ local filetypeSpecificWords = {
 		{ "null", "undefined" },
 		{ "if", "else if", false },
 		{ "else", "else if", false },
-		{ "var", "const", false }, -- don't switch back to var!
+		{ "var", "const", false }, -- don't switch back to var
 		{ "const", "let" },
 		{ "map", "forEach" },
 		{ "replace", "replaceAll" },
@@ -106,7 +112,7 @@ local filetypeSpecificWords = {
 		{ "continue", "break" }, -- loop
 		{ "default", "case" }, -- switch-case statements
 
-		-- console.log -> console.warn
+		-- console.log -> console.warn -> etc.
 		{ "debug", "trace", false },
 		{ "trace", "info", false },
 		{ "info", "log", false },
