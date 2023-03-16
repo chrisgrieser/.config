@@ -536,20 +536,11 @@ keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
 keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = " Selection to ToggleTerm" })
 
--- stylua: ignore
-keymap("n", "5", function () require("iron.core").repl_for(bo.filetype) end, { desc = " Toggle REPL (Iron)" })
-keymap(
-	"n",
-	"4",
-	function() require("iron.core").send_line() end,
-	{ desc = " Send Line to REPL (Iron)" }
-)
-keymap(
-	"x",
-	"4",
-	function() require("iron.core").visual_send() end,
-	{ desc = " Send Selection to REPL (Iron)" }
-)
+-- stylua: ignore start
+keymap("n", "5", function() require("iron.core").repl_for(bo.filetype) end, { desc = " Toggle REPL (Iron)" })
+keymap("n", "4", function() require("iron.core").send_line() end, { desc = " Send Line to REPL (Iron)" })
+keymap("x", "4", function() require("iron.core").visual_send() end, { desc = " Send Selection to REPL (Iron)" })
+-- stylua: ignore end
 
 --------------------------------------------------------------------------------
 
@@ -610,7 +601,10 @@ for _, key in ipairs { "x", "h", "l", "e", "w", "b" } do
 			key = "<Plug>CamelCaseMotion_" .. key
 		end
 
-		if fn.reg_executing() ~= "" then return key end
+		-- abort when recording, since this only leads to bugs then
+		local isRecording = fn.reg_recording() ~= ""
+		local isPlaying = fn.reg_executing() ~= ""
+		if isRecording or isPlaying then return end
 
 		if count <= maxUsage then
 			count = count + 1
