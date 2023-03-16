@@ -26,6 +26,7 @@ local generalWords = {
 	{ "up", "down" },
 	{ "right", "left" },
 	{ "black", "white" },
+	{ "even", "odd" },
 	{ "more", "less", false },
 	{ "less", "fewer", false },
 	{ "fewer", "more", false },
