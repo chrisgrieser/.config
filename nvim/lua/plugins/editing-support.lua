@@ -135,12 +135,6 @@ return {
 					return newVirtText
 				end,
 			}
-
-			-- remappings required for ufo
-			vim.keymap.set("n", "zR", ufo.openAllFolds, { desc = "  Open all folds" })
-			vim.keymap.set("n", "zM", ufo.closeAllFolds, { desc = "  Close all folds" })
-			vim.keymap.set("n", "zr", ufo.openFoldsExceptKinds, { desc = "  Open fold" })
-			vim.keymap.set("n", "zm", ufo.closeFoldsWith, { desc = "  Close fold" })
 		end,
 	},
 }
