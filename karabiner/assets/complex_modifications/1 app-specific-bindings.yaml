@@ -609,6 +609,6 @@ rules:
         to_if_held_down:
           - shell_command: open "cleanshot://open-from-clipboard"
         parameters:
-          basic.to_if_alone_timeout_milliseconds: 300
-          basic.to_if_held_down_threshold_milliseconds: 300
+          basic.to_if_alone_timeout_milliseconds: 200
+          basic.to_if_held_down_threshold_milliseconds: 200
 #─────────────────────────────────────────────────────────────────
