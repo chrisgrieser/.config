@@ -144,9 +144,6 @@ keymap("x", "<Tab>", ">gv", { desc = " indent" })
 keymap("x", "<S-Tab>", "<gv", { desc = " outdent" })
 
 -- Casing
-keymap("n", "ü", "mzlb~`z", { desc = "toggle capital/lowercase of word" })
-keymap("n", "Ü", "gUiw", { desc = "uppercase word" })
-keymap("n", "~", "~h")
 keymap(
 	"n",
 	"<BS>",
@@ -432,6 +429,8 @@ autocmd("LspAttach", {
 			-- cannot run `cmd.IncRename` since the plugin *has* to use the
 			-- command line
 
+			-- needs delay via defer to not be overwritten by treesitter-refactor's
+			-- smart-rename
 			---@diagnostic disable: param-type-mismatch
 			vim.defer_fn(function()
 				keymap(
@@ -445,11 +444,13 @@ autocmd("LspAttach", {
 		end
 
 		-- stylua: ignore start
+		-- conditional to not overwrite treesitter goto-symbol
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "璉Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
 			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "璉Workspace Symbols", buffer = true })
 		end
-		keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "璉Goto definition", buffer = true })
+
+		keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "璉Goto Definition", buffer = true })
 		keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "璉Goto Reference", buffer = true })
 		keymap("n", "gy", function() cmd.Telescope("lsp_type_definitions") end, { desc = "璉Goto Type Definition", buffer = true })
 		keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "璉Signature", buffer = true })
