@@ -30,6 +30,11 @@ return {
 		cmd = { "Codi", "CodiNew", "CodiExpand" },
 	},
 	{
+		"rafcamlet/nvim-luapad",
+		cmd = {"Luapad", "LuaRun"},
+		config = function() require("luapad").setup() end,
+	},
+	{
 		"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm", "ToggleTermSendVisualSelection" },
 		config = function() require("toggleterm").setup() end,
