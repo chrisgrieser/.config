@@ -48,8 +48,6 @@ return {
 				rule("<", ">", "lua"):with_pair(isNodeType { "string", "comment" }),
 				-- auto-pair for markdown syntax
 				rule("*", "*", "markdown"):with_pair(),
-				rule("if", " ()", "javascript"):with_pair(),
-				rule("if", " ()", "typescript"):with_pair(),
 				rule("__", "__", "markdown"):with_pair(),
 			}
 
