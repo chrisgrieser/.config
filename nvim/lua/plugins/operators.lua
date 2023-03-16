@@ -29,7 +29,7 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("neogen").setup() end,
 	},
-	{ -- substitution & exchange operator
+	{
 		"gbprod/substitute.nvim",
 		lazy = true,
 		config = function()
@@ -41,7 +41,7 @@ return {
 			}
 		end,
 	},
-	{ -- duplicaton operator
+	{
 		"smjonas/duplicate.nvim",
 		keys = {
 			{ "yd", desc = "Duplicate" },
@@ -181,10 +181,8 @@ return {
 						add = function()
 							local ft = bo.filetype
 							if ft == "lua" then
-								return {
-									{ "function ()", "\t" },
-									{ "", "end" },
-								}
+								-- function as one line
+								return { { "function () " }, { " end" } }
 							elseif
 								ft == "typescript"
 								or ft == "javascript"
@@ -192,6 +190,7 @@ return {
 								or ft == "zsh"
 								or ft == "sh"
 							then
+								-- function on surrounding lines
 								return {
 									{ "function () {", "\t" },
 									{ "", "}" },
