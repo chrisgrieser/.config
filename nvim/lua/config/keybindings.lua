@@ -105,6 +105,7 @@ keymap("n", "^", "za", { desc = "ﬕ Toggle fold" })
 keymap("n", "z1", ":%foldclose<CR>", { desc = "ﬕ Fold only topmopst level" })
 keymap("n", "zo", "zO", { desc = "ﬕ Open Fold (recursively)" })
 
+
 -- [M]atchIt
 -- remap needed, since using the builtin matchit plugin
 keymap("n", "m", "%", { remap = true, desc = "MatchIt" })
