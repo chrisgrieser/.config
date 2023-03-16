@@ -38,7 +38,7 @@ return {
 						applescript = { command = { "osascript" } },
 						lua = { command = { "lua" } },
 						typescript = { command = { "node" } },
-						javascript = { command = { "osascript -l JavaScript" } }, -- JXA
+						javascript = { command = { "node" } }, -- JXA
 						python = { command = { "python3" } },
 					},
 				},
