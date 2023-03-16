@@ -25,16 +25,37 @@ return {
 			}
 		end,
 	},
-	{ -- only coderunner with virtual text. Alternative: iron.nvim
+	{ -- only coderunner with virtual text
 		"metakirby5/codi.vim",
 		cmd = { "Codi", "CodiNew", "CodiExpand" },
 	},
 	{
+		"hkupty/iron.nvim",
+		-- lazy = true, -- load on require
+		config = function()
+			require("iron.core").setup {
+				config = {
+					repl_open_cmd = require("iron.view").right(35),
+					repl_definition = {
+						sh = { command = { "zsh" } },
+						lua = { command = { "lua" } },
+						typescript = { command = { "node" } },
+						javascript = { command = { "osascript -l JavaScript" } }, -- JXA
+						python = { command = { "python3" } },
+					},
+				},
+				keymaps = {
+					send_line = "4",
+				},
+			}
+		end,
+	},
+	{ -- live code runner for nvim-lua
 		"rafcamlet/nvim-luapad",
-		cmd = {"Luapad", "LuaRun"},
+		cmd = { "Luapad", "LuaRun" },
 		config = function() require("luapad").setup() end,
 	},
-	{
+	{ -- better embedded terminal (+ code runner for shell, somewhat)
 		"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm", "ToggleTermSendVisualSelection" },
 		config = function() require("toggleterm").setup() end,
