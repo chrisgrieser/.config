@@ -102,8 +102,6 @@ end
 --------------------------------------------------------------------------------
 -- LSP-RELATED STATUS COMPONENTS
 
-local navic = require("nvim-navic")
-
 -- simple alternative to fidget.nvim
 -- via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
 local function lsp_progress()
@@ -171,24 +169,21 @@ local function lspCountStatusline()
 	if not lspCount.refWorkspace and not lspCount.defWorkspace then return "" end
 
 	-- display the count
-	local out = " "
-	local defs, refs
-
-	defs = lspCount.defFile and tostring(lspCount.defFile) or ""
-	if lspCount.defFile ~= lspCount.defWorkspace then
-		defs = defs .. "(" .. tostring(lspCount.defWorkspace) .. ")"
+	local defs, refs = "", ""
+	if lspCount.defFile then
+		defs = tostring(lspCount.defFile)
+		if lspCount.defFile ~= lspCount.defWorkspace then
+			defs = defs .. "(" .. tostring(lspCount.defWorkspace) .. ")"
+		end
+		defs = defs .. " "
 	end
-	if defs ~= "" then defs = defs .. " " end
-
 	if lspCount.refFile then
-		refs = tostring(lspCount.refFile)
+		refs = " " .. tostring(lspCount.refFile)
 		if lspCount.refFile ~= lspCount.refWorkspace then
 			refs = refs .. "(" .. tostring(lspCount.refWorkspace) .. ")"
 		end
-		if refs ~= "" then refs = " " .. refs end
 	end
-
-	return out
+	return " " .. defs .. refs
 end
 
 --------------------------------------------------------------------------------
@@ -243,10 +238,10 @@ local lualineConfig = {
 			{ clock },
 		},
 		lualine_b = {
-			{ navic.get_location, cond = navic.is_available, section_separators = topSeparators },
+			{ require("nvim-navic").get_location, cond = require("nvim-navic").is_available, section_separators = topSeparators },
 		},
 		lualine_c = {
-			{ function() return " " end, cond = navic.is_available }, -- dummy to avoid bar flickering
+			{ function() return " " end, cond = require("nvim-navic").is_available }, -- dummy to avoid bar flickering
 		},
 		lualine_x = {
 			{
