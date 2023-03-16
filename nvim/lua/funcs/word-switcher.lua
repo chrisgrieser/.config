@@ -17,6 +17,7 @@ local generalWords = {
 	{ "increase", "decrease" },
 	{ "increased", "decreased" },
 	{ "always", "never" },
+	{ "with", "without" },
 	{ "next", "previous" },
 	{ "inner", "outer" },
 	{ "before", "after" },
@@ -40,12 +41,12 @@ local generalWords = {
 	-- comparisons and operators
 	{ "<", ">" },
 	{ "<=", ">=" },
-	{ "!=", "==" },
+	{ "==", "!=" },
 	{ "+", "-" },
 	{ "*", "/" },
 
 	-- units
-	{ "mins", "secs" },
+	{ "mins", "secs" }, -- not min, since conflict with min-max
 	{ "years", "months", false },
 	{ "months", "weeks", false },
 	{ "weeks", "days", false },
@@ -53,7 +54,12 @@ local generalWords = {
 	{ "hours", "minutes", false },
 	{ "minutes", "seconds", false },
 	{ "seconds", "milliseconds", false },
-	{ "milliseconds", "years", false }, -- cycle back
+	{ "milliseconds", "years", false }, 
+
+	{ "GB", "MB", false }, 
+	{ "MB", "KB", false }, 
+	{ "KB", "B", false }, 
+	{ "B", "GB", false }, 
 }
 
 local filetypeSpecificWords = {
@@ -69,6 +75,7 @@ local filetypeSpecificWords = {
 	lua = {
 		{ "==", "~=" },
 		{ "nil", "{}" },
+		{ "..", "+", false }, -- for type mixup (one-way so + and - can still be swapped)
 		{ "if", "elseif", false },
 		{ "elseif", "else", false },
 		{ "else", "if", false },
@@ -80,15 +87,10 @@ local filetypeSpecificWords = {
 	},
 	python = {
 		{ "True", "False" },
+		{ "print", "assert" },
 	},
 	markdown = {
 		{ "Note", "Warning" }, -- github callouts
-		{ "#", "##", false }, -- heading levels
-		{ "##", "###", false }, 
-		{ "###", "####", false }, 
-		{ "####", "#####", false }, 
-		{ "#####", "######", false }, 
-		{ "#######", "#", false }, 
 	},
 	javascript = {
 		{ "null", "undefined" },
@@ -113,7 +115,7 @@ local filetypeSpecificWords = {
 		{ "error", "debug", false },
 	},
 	sh = {
-		{ "lt", "gt" },
+		{ "lt", "gt" }, -- the leading `-` is ignored
 		{ "eq", "nq" },
 		{ "&&", "||" },
 		{ "if", "elif", false },
@@ -128,6 +130,7 @@ local filetypeSpecificWords = {
 	bash = "sh",
 	zsh = "sh",
 	fish = "sh",
+	html = "css",
 }
 
 --------------------------------------------------------------------------------
