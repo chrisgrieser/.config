@@ -76,7 +76,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Academic Searches</string>
+	<string>Re-Searches</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -106,7 +106,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>as</string>
+				<string>rs</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -148,7 +148,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>as</string>
+				<string>rs</string>
 				<key>subtext</key>
 				<string>Google Scholar &amp; Scite_</string>
 				<key>text</key>
@@ -190,7 +190,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>as</string>
+				<string>rs</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -253,7 +253,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>as</string>
+				<string>rs</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
