@@ -1,5 +1,4 @@
 return {
-	-- NAVIGATION
 	{ "bkad/CamelCaseMotion", event = "BufReadPost" },
 	{
 		"rhysd/clever-f.vim",
@@ -25,12 +24,12 @@ return {
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-	{
+	{ -- highlight word under cursor & batch renamer
 		"nvim-treesitter/nvim-treesitter-refactor",
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-	{
+	{ -- autopair brackets, quotes, and markup
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		dependencies = {
