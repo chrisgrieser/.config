@@ -32,18 +32,23 @@
 		},
 		{
 			"title": "OCR Screenshot into Drafts",
-			"arg": "Drafts",
+			"arg": "drafts",
 			"uid": "6"
+		},
+		{
+			"title": "Annotate Image in Clipboard",
+			"arg": "cleanshot://open-from-clipboard",
+			"uid": "7"
 		},
 		{
 			"title": "Screen Recording",
 			"arg": "cleanshot://record-screen",
-			"uid": "7"
+			"uid": "8"
 		},
 		{
 			"title": "Pin an Image",
 			"arg": "cleanshot://pin",
-			"uid": "8"
+			"uid": "9"
 		}
 	]
 }
