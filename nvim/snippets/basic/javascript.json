@@ -34,7 +34,7 @@
 	".forEach": {
 		"prefix": "forEach =>",
 		"body": [
-			".forEach(${1:item} => {",
+			"forEach(${1:item} => {",
 			"\t$0",
 			"});"
 		]
