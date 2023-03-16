@@ -104,10 +104,10 @@ end, { desc = "Clear Notifications" })
 -- with count: close {n} fold levels
 -- without toggle current fold
 keymap("n", "^", function ()
-	if vim.v.count	then
-		require("ufo").closeFoldsWith(vim.v.count)
-	else
+	if vim.v.count == 0 then
 		return "za"
+	else
+		require("ufo").closeFoldsWith(vim.v.count)
 	end
 end, { desc = "ﬕ Toggle fold / Close {n} foldlevels", expr = true })
 keymap("n", "zR", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })

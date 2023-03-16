@@ -217,11 +217,10 @@ function gdf() {
 	echo "$deleted_path"
 	echo
 	print "\033[1;34m-------------------------------------"
-	echo "[r]estore (checkout file)"
-	echo "[s]how file"
+	echo "[r]estore file (checkout)"
+	echo "[s]how file (bat)"
 	echo "[c]opy content"
-	echo "copy [h]ash of last commit w/ file"
-	echo "[a]bort"
+	echo "[h]ash of last commit w/ file"
 	print "-------------------------------------\033[0m"
 	echo -n "> "
 
@@ -236,7 +235,8 @@ function gdf() {
 	elif [[ "$DECISION:l" == "r" ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
 	elif [[ "$DECISION:l" == "s" ]]; then
-		git show "$last_commit:$deleted_path" | bat
+		ext=${deleted_path##*.}
+		git show "$last_commit:$deleted_path" | bat --language="$ext"
 	fi
 }
 
