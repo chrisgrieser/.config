@@ -1,4 +1,6 @@
 require("config.utils")
+-- INFO vim.filetype.add()
+
 --------------------------------------------------------------------------------
 
 -- pipe textobj
