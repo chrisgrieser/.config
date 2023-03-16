@@ -129,6 +129,13 @@ local filetypeSpecificWords = {
 
 --------------------------------------------------------------------------------
 
+local function fallbackFn ()
+	-- toggle capital/lowercase of word
+	vim.cmd.normal { 'mzlb~`z', bang = true }
+end
+
+--------------------------------------------------------------------------------
+
 local M = {}
 
 ---switches words under the cursor to their opposite, e.g. `true` to `false`
@@ -161,12 +168,13 @@ function M.switch()
 	local alphaNumericUnderCursor = cBigword:find("[%a%d]")
 	local word = alphaNumericUnderCursor and cword or cBigword
 
-	local newWord = nil
+	local newWord
 	for _, pair in pairs(wordsToUse) do
+		local oneWay = pair[3] == false
 		if word == pair[1] then
 			newWord = pair[2]
 			break
-		elseif word == pair[2] and pair[3] ~= false then
+		elseif word == pair[2] and not oneWay then
 			newWord = pair[1]
 			break
 		end
@@ -177,8 +185,7 @@ function M.switch()
 		vim.fn.setreg("z", newWord)
 		vim.cmd.normal { 'viw"zP', bang = true }
 	else
-		-- fallback to `~`
-		vim.cmd.normal { "~h", bang = true }
+		fallbackFn()
 	end
 
 	vim.opt.iskeyword = iskeywBefore

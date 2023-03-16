@@ -98,7 +98,7 @@ exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_rec
 nmap go :quickSwitcher
 nmap gr :quickSwitcher
 
-" go to last change - https://vimhelp.org/motion.txt.html#g%3B
+" go to last change (HACK, only works once…)
 nmap gc u<C-r>
 
 """"""""""""""""""""""
@@ -110,8 +110,8 @@ nmap U <C-r>
 
 " Case Switch via Smarter MD Hotkeys Plugin
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
-nmap ü :caseSwitch
-vmap ü :caseSwitch
+nmap <BS> :caseSwitch
+vmap <BS> :caseSwitch
 
 """"""""""""""""""""""
 " Line-Based Editing
@@ -134,9 +134,9 @@ nmap O &a&i
 
 " Add Blank Line above/below
 " HACK not using mz...`z since m remapped
-" HACK adding in ^d$ to clear the line from list markers from the o/O remapping above
-nmap = O<Esc>^"_d$j
-nmap _ o<Esc>^"_d$k
+" HACK adding in 0d$ to clear the line from list markers from the o/O remapping above
+nmap = O<Esc>0"_d$j
+nmap _ o<Esc>0"_d$k
 
 """"""""""""""""""""""""""""
 " Markdown/Obsidian specific
@@ -260,6 +260,8 @@ nmap zM :foldall
 nmap zr :foldless
 nmap zR :unfoldall
 
+nmap ^ :togglefold
+
 """"""""""""""""""""""""""""
 " Sneak / Hop / Lightspeed
 """"""""""""""""""""""""""""
@@ -300,16 +302,19 @@ vmap ä :toggleDevtools
 """"""""""""""""""""""
 " Option Toggling
 """"""""""""""""""""""
-exmap number obcommand obsidian-smarter-md-hotkeys:toggle-line-numbers
-exmap readableLineLength obcommand obsidian-smarter-md-hotkeys:toggle-readable-line-length
-exmap spellcheck obcommand editor:toggle-spellcheck
-exmap enableDiagnostics obsidian-languagetool-plugin:ltcheck-text
 
 " [O]ption: line [n]umbers
+exmap number obcommand obsidian-smarter-md-hotkeys:toggle-line-numbers
 map ,on :number
+
 " [O]ption: [s]pellcheck
+exmap spellcheck obcommand editor:toggle-spellcheck
 map ,os :spellcheck
+
 " [O]ption: [w]rap
+exmap readableLineLength obcommand obsidian-smarter-md-hotkeys:toggle-readable-line-length
 map ,ow :readableLineLength
+
 " [O]ption: [d]iagnostics (language tool check)
+exmap enableDiagnostics obsidian-languagetool-plugin:ltcheck-text
 nmap ,od :enableDiagnostics

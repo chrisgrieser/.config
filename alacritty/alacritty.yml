@@ -3,7 +3,6 @@
 colors:
   # COLORSCHEME: primary_dark.yaml
   primary:
-    # hard contrast: background = '0x1d2021'
     background: "#352d27"
     foreground: "#E5CFB3"
   normal:
