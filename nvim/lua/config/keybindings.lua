@@ -105,7 +105,6 @@ keymap("n", "^", "za", { desc = "ﬕ Toggle fold" })
 keymap("n", "z1", ":%foldclose<CR>", { desc = "ﬕ Fold only topmopst level" })
 keymap("n", "zo", "zO", { desc = "ﬕ Open Fold (recursively)" })
 
-
 -- [M]atchIt
 -- remap needed, since using the builtin matchit plugin
 keymap("n", "m", "%", { remap = true, desc = "MatchIt" })
@@ -532,9 +531,15 @@ keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
 keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = " Selection to ToggleTerm" })
 
 keymap("n", "5", function()
-	cmd.CodiNew()
-	-- HACK to set buffername, since Codi does not provide a filename for its buffer
-	api.nvim_buf_set_name(0, "Codi: " .. bo.filetype)
+	local ft = bo.filetype
+	local pwd = vim.loop.cwd() or "" 
+	if ft == "lua" and pwd:find("/nvim/") then
+		cmd.Luapad()	
+		api.nvim_buf_set_name(0, "Luapad")
+	else
+		cmd.CodiNew()
+		api.nvim_buf_set_name(0, "Codi: " .. ft)
+	end
 end, { desc = ":CodiNew" })
 
 --------------------------------------------------------------------------------

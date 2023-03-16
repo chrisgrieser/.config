@@ -125,8 +125,7 @@ return {
 				end,
 			}
 
-			-- Using ufo provider need remap `zR` and `zM`
-
+			-- remappings required for ufo
 			vim.keymap.set("n", "zR", ufo.openAllFolds, { desc = "  Open all folds" })
 			vim.keymap.set("n", "zM", ufo.closeAllFolds, { desc = "  Close all folds" })
 			vim.keymap.set("n", "zr", ufo.openFoldsExceptKinds, { desc = "  Open fold" })
