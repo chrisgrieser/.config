@@ -7,7 +7,7 @@ return {
 		init = function()
 			vim.g.clever_f_mark_direct = 1 -- essentially quickscope
 			-- use space to match special chars, since `E` would be used instead of `f<space>`
-			vim.g.clever_f_chars_match_any_signs = " " 
+			vim.g.clever_f_chars_match_any_signs = " "
 		end,
 	},
 	{ -- display line numbers while going to a line with `:`
@@ -64,9 +64,40 @@ return {
 	},
 	{ -- swapping of nodes
 		"mizlan/iswap.nvim",
+		cmd = "ISwapWith",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("iswap").setup { autoswap = true } end,
-		cmd = "ISwapWith",
+	},
+	{ -- swapping of sibling nodes
+		"Wansmer/sibling-swap.nvim",
+		lazy = true, -- required in keymaps
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("sibling-swap").setup {
+				use_default_keymaps = false,
+				allowed_separators = {
+					"..",
+					",",
+					";",
+					"and",
+					"or",
+					"&&",
+					"&",
+					"||",
+					"|",
+					"==",
+					"===",
+					"!=",
+					"!==",
+					"-",
+					"+",
+					["<"] = ">",
+					["<="] = ">=",
+					[">"] = "<",
+					[">="] = "<=",
+				},
+			}
+		end,
 	},
 	{ -- split-join
 		"Wansmer/treesj",

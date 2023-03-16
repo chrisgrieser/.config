@@ -182,8 +182,14 @@ keymap("n", "S", function() require("substitute").eol() end, { desc = "substitut
 keymap( "n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
--- IS[w]ap
-keymap("n", "<leader>w", cmd.ISwapWith, { desc = "弄 Swap Nodes" })
+local function bla()
+	local foo = 2000 + 33333	
+	if bo.filetype == "luia" and foo then return end
+end
+
+-- Node Swapping
+keymap("n", "<leader>w", cmd.ISwapWith, { desc = "弄 Swap Nodes (Iswap)" })
+keymap("n", "<leader>a", function () require('sibling-swap').swap_with_right() end, { desc = "弄 Swap Nodes (Siblings)" })
 
 -- search & replace
 keymap(
@@ -400,12 +406,6 @@ keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Docu
 -- actions defined globally so null-ls can use them without LSP
 keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "璉Code Action" })
 
-keymap("n", "<leader>a", function()
-	---@diagnostic disable-next-line: missing-parameter
-	local params = vim.lsp.util.make_position_params(0)
-	vim.lsp.buf_request(0, "textDocument/codeAction", params, function(arg) vim.pretty_print(arg) end)
-end, { desc = "test" })
-
 -- copy breadcrumbs (nvim navic)
 keymap("n", "<D-b>", function()
 	if not require("nvim-navic").is_available() then
@@ -540,7 +540,6 @@ keymap("n", "5", function()
 		cmd.CodiNew()
 		api.nvim_buf_set_name(0, "Codi: " .. ft)
 	end
-	local foo = 1 >= 20
 end, { desc = ":CodiNew" })
 
 --------------------------------------------------------------------------------
