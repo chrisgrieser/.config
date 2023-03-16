@@ -102,7 +102,7 @@ local function tsConfig()
 				enable = true,
 				keymaps = {
 					-- not using the same hotkey as LSP rename to prevent overwriting it
-					smart_rename = "<leader>t",
+					smart_rename = "<leader>v",
 				},
 			},
 		},

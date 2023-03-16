@@ -58,6 +58,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4D894905-7334-4290-835D-15461122F45A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C47481D2-5DC2-4E5C-9ADA-00CC1D517B1C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4E5B84C8-6F38-4660-BF59-079EE3D12150</key>
 		<array>
 			<dict>
@@ -205,6 +218,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>65FBA979-932F-4451-886B-E14284E89A1E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C47481D2-5DC2-4E5C-9ADA-00CC1D517B1C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>79405FF0-A2F1-462E-8A8F-AC1F83CC4C1A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -525,6 +551,8 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<dict>
 					<key>hotkeyUsed</key>
 					<string>false</string>
+					<key>mode</key>
+					<string>new</string>
 				</dict>
 			</dict>
 			<key>type</key>
@@ -666,6 +694,8 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<dict>
 					<key>hotkeyUsed</key>
 					<string>true</string>
+					<key>mode</key>
+					<string>new</string>
 				</dict>
 			</dict>
 			<key>type</key>
@@ -769,63 +799,57 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>drafts://x-callback-url/append?uuid=E31A836B-B9D3-41EF-BEE4-5B6ED2B63E06&amp;text=- [ ] {query.trim.capitalcase}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>29410773-ADC2-4B3E-8F78-37C96D87DA3F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
+				<key>action</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>ein</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Shopping List: "{query}"</string>
-				<key>withspace</key>
-				<true/>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>6</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>Y</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.agiletortoise.Drafts-OSX</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>2</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>76617630-8984-4444-8F08-CE5ECD32EE77</string>
+			<string>4D894905-7334-4290-835D-15461122F45A</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
+				<key>argument</key>
 				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>drafts://runaction?text=urlscheme&amp;action=Workspace-Tasklists</string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>hotkeyUsed</key>
+					<string>true</string>
+					<key>mode</key>
+					<string>append</string>
+				</dict>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>71C7FFC2-1D66-4561-B433-3F8CEBA479A5</string>
+			<string>C47481D2-5DC2-4E5C-9ADA-00CC1D517B1C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -919,6 +943,69 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<string>BAD44650-CAFD-4C9E-84D9-6710E38A751C</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>drafts://x-callback-url/append?uuid=E31A836B-B9D3-41EF-BEE4-5B6ED2B63E06&amp;text=- [ ] {query.trim.capitalcase}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>29410773-ADC2-4B3E-8F78-37C96D87DA3F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ein</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Shopping List: "{query}"</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>76617630-8984-4444-8F08-CE5ECD32EE77</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>drafts://runaction?text=urlscheme&amp;action=Workspace-Tasklists</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>71C7FFC2-1D66-4561-B433-3F8CEBA479A5</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1026,7 +1113,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>630</real>
 		</dict>
 		<key>42389168-DDFE-4158-93B7-8AD8E3B7564E</key>
 		<dict>
@@ -1056,6 +1143,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>910</real>
 			<key>ypos</key>
 			<real>685</real>
+		</dict>
+		<key>4D894905-7334-4290-835D-15461122F45A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>Apend Selection (or Browser Tab) to LAST Draft</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>475</real>
 		</dict>
 		<key>4E5B84C8-6F38-4660-BF59-079EE3D12150</key>
 		<dict>
@@ -1093,7 +1191,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>630</real>
 		</dict>
 		<key>76617630-8984-4444-8F08-CE5ECD32EE77</key>
 		<dict>
@@ -1104,7 +1202,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>630</real>
 		</dict>
 		<key>77E992B5-E489-4B56-A178-7C1CB761F733</key>
 		<dict>
@@ -1215,6 +1313,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>415</real>
 		</dict>
+		<key>C47481D2-5DC2-4E5C-9ADA-00CC1D517B1C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>505</real>
+		</dict>
 		<key>CAABCDA0-0DEF-44C3-992E-B52B07F5B8D3</key>
 		<dict>
 			<key>xpos</key>
@@ -1247,7 +1354,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>note</key>
-			<string>Save Selection to Drafts, or Brave Tab</string>
+			<string>Save Selection (or Browser Tab) to NEW Draft</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>

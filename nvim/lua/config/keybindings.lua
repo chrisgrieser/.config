@@ -173,7 +173,7 @@ end, { desc = "暈Add to accepted words (vale)" })
 keymap("n", "zw", function()
 	local word = expand("<cword>")
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/reject.txt")
-	if not success then return end 
+	if not success then return end
 	vim.notify("暈Now rejecting:\n" .. word)
 end, { desc = "暈Add to rejected words (vale)" })
 
@@ -431,12 +431,17 @@ autocmd("LspAttach", {
 		if capabilities.renameProvider then
 			-- cannot run `cmd.IncRename` since the plugin *has* to use the
 			-- command line
-			keymap(
-				"n",
-				"<leader>R",
-				function() return ":IncRename " .. fn.expand("<cword>") end,
-				{ desc = "璉IncRename", buffer = true, expr = true }
-			)
+
+			---@diagnostic disable: param-type-mismatch
+			vim.defer_fn(function()
+				keymap(
+					"n",
+					"<leader>v",
+					function() return ":IncRename " .. fn.expand("<cword>") end,
+					{ desc = "璉IncRename Variable", buffer = true, expr = true }
+				)
+			end, 1)
+			---@diagnostic enable: param-type-mismatch
 		end
 
 		-- stylua: ignore start
