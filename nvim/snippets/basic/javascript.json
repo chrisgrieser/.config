@@ -169,8 +169,19 @@
 			"}"
 		]
 	},
+	"if (autosnippet)": {
+		"prefix": "if ",
+		"body": "if ($0)",
+		"luasnip": {
+			"autotrigger": true
+		}
+	},
 	"Set Timeout Function": {
-		"prefix": ["settimeout", "timeout", "delay"],
+		"prefix": [
+			"settimeout",
+			"timeout",
+			"delay"
+		],
 		"body": [
 			"setTimeout(() => {",
 			"\t$0",
