@@ -171,7 +171,7 @@ keymap("n", "zw", function()
 	local word = expand("<cword>")
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/reject.txt")
 	if not success then return end
-	vim.notify("暈Now rejecting:\n" .. word)
+	vim.notify(word .. "暈Now rejecting:\n")
 end, { desc = "暈Add to rejected words (vale)" })
 
 -- [S]ubstitute Operator (substitute.nvim)
@@ -182,14 +182,9 @@ keymap("n", "S", function() require("substitute").eol() end, { desc = "substitut
 keymap( "n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
-local function bla()
-	local foo = 2000 + 33333	
-	if bo.filetype == "luia" and foo then return end
-end
-
--- Node Swapping
-keymap("n", "<leader>w", cmd.ISwapWith, { desc = "弄 Swap Nodes (Iswap)" })
-keymap("n", "<leader>a", function () require('sibling-swap').swap_with_right() end, { desc = "弄 Swap Nodes (Siblings)" })
+-- Node S[w]apping
+keymap("n", "ü", function () require('sibling-swap').swap_with_right() end, { desc = "弄 Swap Siblings" })
+keymap("n", "Ü", function () require('sibling-swap').swap_with_left() end, { desc = "弄 Swap Siblings" })
 
 -- search & replace
 keymap(
@@ -240,7 +235,7 @@ keymap("n", "cR", "R", { desc = "Replace Mode" })
 -- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()
 	require("various-textobjs").url()
-	local foundURL = fn.mode():find("v")
+	local foundURL = fn.mode():find("v") -- will only switch to visual mode if URL found
 	if foundURL then
 		normal([["zy]])
 		local url = fn.getreg("z")

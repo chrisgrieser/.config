@@ -76,25 +76,10 @@ return {
 			require("sibling-swap").setup {
 				use_default_keymaps = false,
 				allowed_separators = {
-					"..",
-					",",
-					";",
-					"and",
-					"or",
-					"&&",
-					"&",
-					"||",
-					"|",
-					"==",
-					"===",
-					"!=",
-					"!==",
-					"-",
-					"+",
-					["<"] = ">",
-					["<="] = ">=",
-					[">"] = "<",
-					[">="] = "<=",
+					"..", -- added for lua string concatenation
+					"*", -- added multiplication
+					["-"] = false, -- since subtraction is not communicative
+					["|"] = false, -- since chaotic with pipes in shell
 				},
 			}
 		end,
