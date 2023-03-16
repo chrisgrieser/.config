@@ -91,7 +91,7 @@ local filetypeSpecificWords = {
 	},
 	javascript = {
 		{ "null", "undefined" },
-		{ "if", "} else if", false },
+		{ "if", "else if", false },
 		{ "else", "else if", false },
 		{ "var", "const", false }, -- don't switch back to var!
 		{ "const", "let" },
