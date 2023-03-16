@@ -53,8 +53,7 @@ rules:
   no-underscore-dangle: warn
   no-shadow:
     - warn
-    - builtinGlobals: true
-      hoist: all
+    - hoist: all
   camelcase:
     - warn
     - properties: always
