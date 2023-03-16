@@ -87,7 +87,7 @@ end
 
 ---switch to alternate window/buffer/oldfile in that priority
 function M.altBufferWindow()
-	if altWindow() then
+	if numberOfWins() > 1 then
 		cmd.wincmd("p")
 	elseif expand("#") ~= "" then
 		cmd.buffer("#")

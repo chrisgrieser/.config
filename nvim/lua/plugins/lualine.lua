@@ -104,8 +104,6 @@ end
 
 local navic = require("nvim-navic")
 
-local function showNavic() return navic.is_available() and not (bo.filetype == "css") end
-
 -- simple alternative to fidget.nvim
 -- via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
 local function lsp_progress()
@@ -170,23 +168,27 @@ local function lspCountStatusline()
 	requestLspRefCount() -- needs to be separated due to lsp calls being async
 
 	-- abort when no count
-	if
-		not (lspCount.refWorkspace and lspCount.defWorkspace)
-		or (lspCount.refWorkspace == 0 and lspCount.defWorkspace == 0)
-	then
-		return ""
-	end
+	if not lspCount.refWorkspace and not lspCount.defWorkspace then return "" end
 
 	-- display the count
-	local defs = tostring(lspCount.defFile)
+	local out = " "
+	local defs, refs
+
+	defs = lspCount.defFile and tostring(lspCount.defFile) or ""
 	if lspCount.defFile ~= lspCount.defWorkspace then
 		defs = defs .. "(" .. tostring(lspCount.defWorkspace) .. ")"
 	end
-	local refs = tostring(lspCount.refFile)
-	if lspCount.refFile ~= lspCount.refWorkspace then
-		refs = refs .. "(" .. tostring(lspCount.refWorkspace) .. ")"
+	if defs ~= "" then defs = defs .. " " end
+
+	if lspCount.refFile then
+		refs = tostring(lspCount.refFile)
+		if lspCount.refFile ~= lspCount.refWorkspace then
+			refs = refs .. "(" .. tostring(lspCount.refWorkspace) .. ")"
+		end
+		if refs ~= "" then refs = " " .. refs end
 	end
-	return " " .. defs .. "  " .. refs
+
+	return out
 end
 
 --------------------------------------------------------------------------------
@@ -241,10 +243,10 @@ local lualineConfig = {
 			{ clock },
 		},
 		lualine_b = {
-			{ navic.get_location, cond = showNavic, section_separators = topSeparators },
+			{ navic.get_location, cond = navic.is_available, section_separators = topSeparators },
 		},
 		lualine_c = {
-			{ function() return " " end, cond = showNavic }, -- dummy to avoid bar flickering
+			{ function() return " " end, cond = navic.is_available }, -- dummy to avoid bar flickering
 		},
 		lualine_x = {
 			{
