@@ -36,6 +36,7 @@ path = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos
 		rtp = {
 			disabled_plugins = {
 				-- disable unused builtin plugins from neovim
+				"spellfile",
 				"netrw",
 				"netrwPlugin",
 				"gzip",

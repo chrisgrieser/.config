@@ -101,11 +101,18 @@ keymap("n", "<Esc>", function()
 end, { desc = "Clear Notifications" })
 
 -- FOLDING
-keymap("n", "^", "za", { desc = "ﬕ Toggle fold" })
-keymap("n", "z1", ":%foldclose<CR>", { desc = "ﬕ Fold only topmopst level" })
-keymap("n", "zo", "zO", { desc = "ﬕ Open Fold (recursively)" })
-
-
+-- with count: close {n} fold levels
+-- without toggle current fold
+keymap("n", "^", function ()
+	if vim.v.count	then
+		require("ufo").closeFoldsWith(vim.v.count)
+	else
+		return "za"
+	end
+end, { desc = "ﬕ Toggle fold / Close {n} foldlevels", expr = true })
+keymap("n", "zR", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
+keymap("n", "zM", function() require("ufo").closeAllFolds() end, { desc = "  Close all folds" })
+-- keymap("n", "z1", ":%foldclose<CR>", { desc = "ﬕ Fold only topmopst level" })
 
 -- [M]atchIt
 -- remap needed, since using the builtin matchit plugin
@@ -531,8 +538,18 @@ keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = " Sele
 
 -- stylua: ignore
 keymap("n", "5", function () require("iron.core").repl_for(bo.filetype) end, { desc = " Toggle REPL (Iron)" })
-keymap("n", "4", function () require("iron.core").send_line() end, { desc = " Send Line to REPL (Iron)" })
-keymap("x", "4", function () require("iron.core").visual_send() end, { desc = " Send Selection to REPL (Iron)" })
+keymap(
+	"n",
+	"4",
+	function() require("iron.core").send_line() end,
+	{ desc = " Send Line to REPL (Iron)" }
+)
+keymap(
+	"x",
+	"4",
+	function() require("iron.core").visual_send() end,
+	{ desc = " Send Selection to REPL (Iron)" }
+)
 
 --------------------------------------------------------------------------------
 
