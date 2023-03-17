@@ -166,6 +166,8 @@ keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Spelling (mnemonic: [z]pe[l]ling)
 
+---add word to vale dictionary
+---@param mode 
 local function valeWord(mode)
 	local word = expand("<cword>")
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
