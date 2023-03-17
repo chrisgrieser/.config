@@ -4,15 +4,15 @@ require("lua.utils")
 -- [quitter](https://marco.org/apps), this module quits any app if long enough idle
 
 ---CONFIG
----times after which apps should quit, in minutes. (Apps not in this list will
----simply be ignored and never quit automatically).
+---times after which apps should quit, in minutes
+---(Apps not in this list will be ignored and never quit automatically).
 Thresholds = {
 	Slack = 15,
 	Obsidian = 90,
 	Mimestream = 5,
 	Highlights = 90,
 	Discord = 180,
-	BusyCal = 1,
+	BusyCal = 2,
 	neovide = 120, -- needs lowercase
 	alacritty = 20,-- needs lowercase
 	Lire = 2,
