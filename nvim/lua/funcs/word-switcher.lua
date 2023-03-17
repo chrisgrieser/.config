@@ -124,6 +124,7 @@ local filetypeSpecificWords = {
 		{ "map", "forEach" },
 		{ "replace", "replaceAll" },
 		{ "includes", "match" },
+		{ "toUpperCase", "toLowerCase" },
 		{ "===", "!==" },
 		{ "&&", "||" },
 		{ "continue", "break" },
