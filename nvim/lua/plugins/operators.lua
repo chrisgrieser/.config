@@ -32,14 +32,7 @@ return {
 	{
 		"gbprod/substitute.nvim",
 		lazy = true,
-		config = function()
-			require("substitute").setup {
-				highlight_substituted_text = {
-					enabled = true,
-					timer = 1000,
-				},
-			}
-		end,
+		config = function() require("substitute").setup() end,
 	},
 	{
 		"smjonas/duplicate.nvim",

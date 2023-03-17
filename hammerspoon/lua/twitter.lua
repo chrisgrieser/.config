@@ -23,6 +23,7 @@ end
 function TwitterToTheSide()
 	-- in case of active split, prevent left window of covering the sketchybar
 	if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
+	if FrontAppName() == "Alfred" then return end
 
 	local twitter = App("Twitter")
 	if not twitter then return end
@@ -82,7 +83,7 @@ end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
 TwitterWatcher = Aw.new(function(appName, event)
-	if appName == "CleanShot X" then return end
+	if appName == "CleanShot X" or appName == "Alfred" then return end
 
 	-- move twitter and scroll it up
 	if appName == "Twitter" and (event == Aw.launched or event == Aw.activated) then
