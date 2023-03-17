@@ -10,7 +10,7 @@
 			"-- stylua: ignore end"
 		]
 	},
-	"ignore block (stylua)": {
+	"ignore (stylua)": {
 		"prefix": "ignore block (stylua)",
 		"body": "-- stylua: ignore"
 	},
