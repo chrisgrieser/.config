@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.zeitlings.duden</string>
+	<key>connections</key>
+	<dict>
+		<key>70F90B12-7711-43E4-B689-F6A70D20573B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5368C258-B1A9-4EEA-A49F-CD194AEF040B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>8A475BB6-A26C-4F56-B904-FF65420A487A</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CA1292B5-C484-481A-A1D9-7284634E3519</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>70F90B12-7711-43E4-B689-F6A70D20573B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Patrick Sy</string>
+	<key>description</key>
+	<string>Search the German spelling dictionary duden.de</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Duden</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>d</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Fetching...</string>
+				<key>script</key>
+				<string>#!/bin/zsh
+
+if [[ "${granted}" -eq 1 ]]; then
+	./sources/scraper "$1"
+else 
+	open -b "com.runningwithcrayons.Alfred" alfred://runtrigger/$alfred_workflow_bundleid/polite
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search duden.de</string>
+				<key>title</key>
+				<string>Duden</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>init</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>CA1292B5-C484-481A-A1D9-7284634E3519</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>5368C258-B1A9-4EEA-A49F-CD194AEF040B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:trigger}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>open_link</string>
+						<key>outputlabel</key>
+						<string>Open External Link</string>
+						<key>uid</key>
+						<string>8A475BB6-A26C-4F56-B904-FF65420A487A</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>70F90B12-7711-43E4-B689-F6A70D20573B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>![Duden Search Icon](icon.png)
+
+# Duden Workflow
+
+Search, navigate and view information from duden.de. Get QuickLook previews for the landing page, grammar, and synonyms (` shift ⇧ `).
+
+![view](duden_preview.jpg)
+
+## Credits
+
+- [SwiftSoup](https://github.com/scinfu/SwiftSoup)</string>
+	<key>uidata</key>
+	<dict>
+		<key>5368C258-B1A9-4EEA-A49F-CD194AEF040B</key>
+		<dict>
+			<key>xpos</key>
+			<real>300</real>
+			<key>ypos</key>
+			<real>55</real>
+		</dict>
+		<key>70F90B12-7711-43E4-B689-F6A70D20573B</key>
+		<dict>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>85</real>
+		</dict>
+		<key>CA1292B5-C484-481A-A1D9-7284634E3519</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>50</real>
+			<key>ypos</key>
+			<real>55</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>variables</key>
+	<dict>
+		<key>granted</key>
+		<string>1</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>granted</string>
+	</array>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/zeitlings/alfred-workflows#11-duden-workflow</string>
+</dict>
+</plist>

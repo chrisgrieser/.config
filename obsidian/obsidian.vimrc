@@ -43,20 +43,17 @@ nmap <Esc> &c&&n&
 nmap j gj
 nmap k gk
 
-" consistent with emacs bindings
-nmap <C-e> A
-
 " HJKL behaves like hjkl, but bigger distance
 map H g0
 map L g$
 map J 6gj
 map K 6gk
 
-" Spelling / Diagnostics
-" Emulate `z=` (and bind it zo `zl` because more convenient; mnemonic: [z]pelling list)
+" [z]pelling [l]ist (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
 nmap zl :contextMenu
 
+" next diagnostic
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
 nmap ge :nextSuggestion
 
@@ -76,7 +73,7 @@ nmap <Right> dlp
 nmap <Left> dlhhp
 
 " [m]atch parenthesis
-" WARNING this prevents any use of `m` for sticky cursor mappings, since there
+" INFO this prevents any use of `m` for sticky cursor mappings, since there
 " is no noremap
 nmap m %
 
@@ -112,6 +109,9 @@ nmap U <C-r>
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
 nmap <BS> :caseSwitch
 vmap <BS> :caseSwitch
+
+" Move words (equivalent to sibling-swap.nvim)
+nmap ü "zdawel"zp
 
 """"""""""""""""""""""
 " Line-Based Editing
@@ -252,15 +252,16 @@ exmap togglefold obcommand editor:toggle-fold
 exmap foldall obcommand editor:fold-all
 exmap foldless obcommand editor:fold-less
 exmap foldmore obcommand editor:fold-more
+
 nmap zo :togglefold
 nmap zc :togglefold
 nmap za :togglefold
+nmap ^ :togglefold
 nmap zm :foldmore
 nmap zM :foldall
 nmap zr :foldless
 nmap zR :unfoldall
 
-nmap ^ :togglefold
 
 """"""""""""""""""""""""""""
 " Sneak / Hop / Lightspeed
@@ -291,13 +292,6 @@ nmap ,l :linkjump
 " poor man's substitute.nvim 🥲
 map s Vp
 nmap S vg$p
-
-""""""""""""""""""""""
-" Toggle Devtools
-""""""""""""""""""""""
-exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
-nmap ä :toggleDevtools
-vmap ä :toggleDevtools
 
 """"""""""""""""""""""
 " Option Toggling
