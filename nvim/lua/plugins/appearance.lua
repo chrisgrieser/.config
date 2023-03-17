@@ -19,6 +19,7 @@ return {
 				show_current_context = true, -- = active indent
 				use_treesitter = true,
 				filetype_exclude = { "undotree", "help", "man", "lspinfo", "" },
+				-- context_char = "┃" -- ┃
 			}
 		end,
 	},
@@ -61,21 +62,13 @@ return {
 			}
 		end,
 	},
-
-	-- deactivated due to `gm` column
-	-- { -- nicer colorcolumn
-	-- 	"xiyaowong/virtcolumn.nvim",
-	-- 	event = "VeryLazy",
-	-- 	init = function() vim.g.virtcolumn_char = "║" end,
-	-- },
-
 	{ -- color previews & color utilities
 		"uga-rosa/ccc.nvim",
 		event = "BufEnter", -- cannot use VeryLazy, since the first buffer entered would not get highlights
 		cond = vim.g.neovide, -- only load in GUI
 		config = function()
-			local ccc = require("ccc")
 			vim.opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal
+			local ccc = require("ccc")
 			ccc.setup {
 				win_opts = { border = BorderStyle },
 				highlighter = {
@@ -101,8 +94,8 @@ return {
 				mappings = {
 					["<Esc>"] = ccc.mapping.quit,
 					["q"] = ccc.mapping.quit,
-					["L"] = ccc.mapping.increase5,
-					["H"] = ccc.mapping.decrease5,
+					["L"] = ccc.mapping.increase10,
+					["H"] = ccc.mapping.decrease10,
 				},
 			}
 		end,
