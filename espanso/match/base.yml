@@ -4,9 +4,6 @@ matches:
   - trigger: "::"
     replace: ":innen"
   #─────────────────────────────────────────────────────────────────────────────
-  - trigger: "!null"
-    replace: "&>/dev/null;"
-  #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!web"
     replace: https://chris-grieser.de/
   - trigger: "!twitter"
@@ -30,6 +27,8 @@ matches:
   - triggers: ["!selector", "!dev"]
     replace: document.querySelector("$|$")
     label: for pasting in the dev tools
+  - trigger: "!null"
+    replace: "&>/dev/null;"
     #───────────────────────────────────────────────────────────────────────────
   - trigger: "!dontask"
     replace: "<https://dontasktoask.com/>"
@@ -108,7 +107,3 @@ matches:
         type: shell
         params:
           cmd: 'osascript -e ''tell application "Finder" to get bounds of window of desktop'' | cut -d '' '' -f 3,4'
-  #─────────────────────────────────────────────────────────────────────
-  - trigger: "!lorem"
-    replace: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a cursus sapien. Aenean sed mollis mauris. Morbi hendrerit eros id tortor facilisis, at consectetur dui iaculis. Nullam pharetra felis sit amet velit porttitor placerat. In vel lectus ipsum. Aliquam vestibulum a erat et sollicitudin. Quisque volutpat odio finibus nisi pellentesque, a efficitur lorem aliquam. Nunc tellus est, lacinia at mattis sed, vulputate sed neque. \n\nEtiam mattis neque quis gravida scelerisque. Sed dictum risus ut lacus aliquam suscipit. Nulla facilisi. Duis sed dolor sagittis, laoreet massa nec, semper lorem. Quisque dictum eleifend condimentum. In condimentum eleifend justo a dapibus. Sed dignissim nibh pharetra tortor malesuada, nec dapibus erat viverra. Cras iaculis dignissim libero, et lobortis nisl.\n\nUt id nibh lacinia tortor aliquam porttitor. Donec blandit erat vitae ex vestibulum interdum. Curabitur molestie finibus purus nec finibus. Name vel turpis vitae metus viverra lobortis non eget ante. Pellentesque efficitur fringilla ex. Maecenas consectetur luctus lectus. Donec et gravida purus, vitae efficitur justo.\n\nMorbi vitae ligula est. Fusce eleifend blandit convallis. Etiam leo massa, fringilla nec imperdiet sit amet, accumsan nec nisi. Suspendisse accumsan id diam et tincidunt. Praesent elementum metus non porttitor dapibus. Curabitur pretium malesuada dolor, tempor mollis lacus hendrerit at. \n\nDonec porta, nibh et placerat bibendum, leo dolor ultrices neque, vel tristique metus mi congue massa. Morbi lobortis placerat tellus, vel fringilla nisi vulputate at. Nulla eu lacinia leo. Curabitur lobortis sed sem quis faucibus. Phasellus efficitur, leo vel blandit luctus, erat ipsum dictum lorem, sed molestie tortor risus ut nunc. Aliquam rhoncus justo eu interdum aliquet."
-    label: "Lorem: 5 paragraphes"

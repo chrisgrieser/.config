@@ -111,7 +111,8 @@ nmap <BS> :caseSwitch
 vmap <BS> :caseSwitch
 
 " Move words (equivalent to sibling-swap.nvim)
-nmap ü "zdawel"zp
+nmap ü "zdawel"zph
+nmap Ü "zdawbh"zph
 
 """"""""""""""""""""""
 " Line-Based Editing
