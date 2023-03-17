@@ -28,6 +28,7 @@ lspSettings.lua_ls = {
 			callSnippet = "Replace",
 			keywordSnippet = "Replace",
 			displayContext = 2,
+			postfix = ".",
 		},
 		-- libraries defined per-project via luarc.json location: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
 		diagnostics = {

@@ -121,22 +121,24 @@ opt.list = true
 opt.fillchars = { eob = " ", fold = " " } -- no dots for folds no ~ for the eof
 opt.showbreak = "↪ " -- precedes wrapped lines
 
+opt.listchars:append { nbsp = "ﮊ" }
+opt.listchars:append { precedes = "…" }
+opt.listchars:append { extends = "…" }
+
 autocmd("BufReadPost", {
 	callback = function()
 		cmd.IndentOMatic() -- trigger again to ensure it's run before determining spaces/tabs
 		local usesSpaces = bo.expandtab
 		if usesSpaces then
-			opt_local.listchars = {
-				tab = " >",
-				multispace = "·",
-			}
+			opt_local.listchars:append { tab = " >" }
+			opt_local.listchars:append { multispace = "·" }
+			opt_local.listchars:append { lead = "·" }
+			opt_local.listchars:append { leadspace = "·" }
 		else
-			opt_local.listchars = {
-				tab = "  ",
-				multispace = "·",
-				leadmultispace = "·",
-				lead = "·",
-			}
+			opt_local.listchars:append { tab = "  " }
+			opt_local.listchars:append { multispace = "·" }
+			opt_local.listchars:append { lead = "·" }
+			opt_local.listchars:append { leadspace = "·" }
 		end
 	end,
 })
@@ -172,9 +174,8 @@ opt.foldenable = true
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldminlines = 1 -- restrict folding amount for batch-folding commands like zM
+opt.foldcolumn = "1"
 -- opt.foldmethod = "indent" -- if not using UFO for folding
-
---------------------------------------------------------------------------------
 
 -- Remember folds and cursor
 local function remember(mode)
