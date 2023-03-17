@@ -1,4 +1,9 @@
--- INFO `false` as third list items indicates that the second element is *not*
+-- WORD DATABASE
+
+-- INFO
+-- 1) these words are checked for lowercase, Capitalcase, and UPPERCASE
+-- since they are not language-specific keywords
+-- 2) `false` as third list items indicates that the second element is *not*
 -- exchanged with the first
 local generalWords = {
 	-- on/off
@@ -60,15 +65,26 @@ local generalWords = {
 	{ "hours", "minutes", false },
 	{ "minutes", "seconds", false },
 	{ "seconds", "milliseconds", false },
-	{ "milliseconds", "years", false }, 
+	{ "milliseconds", "years", false },
 
-	{ "GB", "MB", false }, 
-	{ "MB", "KB", false }, 
-	{ "KB", "B", false }, 
-	{ "B", "GB", false }, 
+	{ "GB", "MB", false },
+	{ "MB", "KB", false },
+	{ "KB", "B", false },
+	{ "B", "GB", false },
 }
 
+-- INFO
+-- 1) checks on these words are case-sensitive, since keywords are case-sensitive
+-- 2) `false` as third list items indicates that the second element is *not*
+-- exchanged with the first
+-- 3) if the value is not table but a string, thiese means that the filetype
+-- inherits the keywords of the named filetype
 local filetypeSpecificWords = {
+	typescript = "javascript",
+	bash = "sh",
+	zsh = "sh",
+	fish = "sh",
+	html = "css",
 	css = {
 		-- many common css terms already included in general words
 		{ "padding", "margin" },
@@ -110,11 +126,9 @@ local filetypeSpecificWords = {
 		{ "includes", "match" },
 		{ "===", "!==" },
 		{ "&&", "||" },
-		{ "continue", "break" }, -- loop
+		{ "continue", "break" }, 
 		{ "default", "case" }, -- switch-case statements
-
-		-- console.log -> console.warn -> etc.
-		{ "debug", "trace", false },
+		{ "debug", "trace", false }, -- console.log -> console.warn -> etc.
 		{ "trace", "info", false },
 		{ "info", "log", false },
 		{ "log", "warn", false },
@@ -131,21 +145,19 @@ local filetypeSpecificWords = {
 		{ "echo", "print" },
 		{ "exit", "return" },
 	},
-
-	-- filetypes to link to another filetype
-	typescript = "javascript",
-	bash = "sh",
-	zsh = "sh",
-	fish = "sh",
-	html = "css",
 }
 
-local function fallbackFn ()
+--runs when no word to switch can be found under the cursor
+local function fallbackFn()
 	-- toggle capital/lowercase of word
-	vim.cmd.normal { 'mzlb~`z', bang = true }
+	vim.cmd.normal { "mzlb~`z", bang = true }
 end
 
 --------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+-- HELPERS
 
 local M = {}
 
@@ -170,50 +182,57 @@ end
 
 ---switches words under the cursor to their opposite, e.g. `true` to `false`
 function M.switch()
-	local ft = vim.bo.filetype
-	local wordsToUse = {}
-
-	if filetypeSpecificWords[ft] then
-		-- filetype inherits words by other filetype
-		if type(filetypeSpecificWords[ft]) == "string" then ft = tostring(filetypeSpecificWords[ft]) end
-
-		---@diagnostic disable-next-line: param-type-mismatch --- type match ensured above
-		for _, v in pairs(filetypeSpecificWords[ft]) do
-			table.insert(wordsToUse, v)
-		end
-	end
-
-	-- INFO general words added *after* the filetype-specific words, so that the latter get priority
-	for _, v in pairs(generalWords) do
-		table.insert(wordsToUse, v)
-	end
-
-	-----------------------------------------------------------------------------
-
-	-- remove word-delimiters for <cword>
-	local iskeywBefore = vim.opt.iskeyword:get()
+	-- determine word to check
+	local iskeywBefore = vim.opt.iskeyword:get() -- remove word-delimiters for <cword>
 	vim.opt.iskeyword:remove { "_", "-", "." }
 
 	local cword = vim.fn.expand("<cword>")
-	local cBigword = vim.fn.expand("<cWORD>")
+	local cBigword = vim.fn.expand("<cWORD>") -- check fo cWORD needed to retrieve non-alphanumeric strings (e.g. "&&")
 
 	local alphaNumericUnderCursor = cBigword:find("[%a%d]")
 	local word = alphaNumericUnderCursor and cword or cBigword
+	local newWord = nil
 
 	-----------------------------------------------------------------------------
 
-	local newWord
-	for _, pair in pairs(wordsToUse) do
-		newWord = checkAlternativeCasings(word, pair[1], pair[2])
-		if newWord then break end
+	-- check for filetype specific words
+	-- - first since higher priority than general words
+	-- - literal matching, since filetype specific words are case-sensitive
+	local ft = vim.bo.filetype
+	if filetypeSpecificWords[ft] then
+		-- filetype inherits words by other filetype
+		if type(filetypeSpecificWords[ft]) == "string" then ft = tostring(filetypeSpecificWords[ft]) end
+		---@diagnostic disable-next-line: assign-type-mismatch
+		local wordList = filetypeSpecificWords[ft] ---@type table
 
-		if not (pair[3] == false) then
-			newWord = checkAlternativeCasings(word, pair[2], pair[1])
-			if newWord then break end
+		for _, pair in pairs(wordList) do
+			if word == pair[1] then
+				newWord = pair[2]
+				break
+			end
+			local oneWay = pair[3] == false
+			if not oneWay and word == pairs[2] then newWord = pairs[1] end
 		end
 	end
 
-	local switchWordFound = newWord ~= nil
+	-----------------------------------------------------------------------------
+	-- check for general words
+	-- - checking for different casing, since they are not keywords
+	if not newWord then
+		for _, pair in pairs(generalWords) do
+			newWord = checkAlternativeCasings(word, pair[1], pair[2])
+			if newWord then break end
+
+			local oneWay = pair[3] == false
+			if not oneWay then
+				newWord = checkAlternativeCasings(word, pair[2], pair[1])
+				if newWord then break end
+			end
+		end
+	end
+
+	-----------------------------------------------------------------------------
+
 	if newWord then
 		vim.fn.setreg("z", newWord)
 		vim.cmd.normal { 'viw"zP', bang = true }
