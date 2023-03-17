@@ -2,8 +2,9 @@
 hs.consoleOnTop(false)
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
-hs.application.enableSpotlightForNameSearches(false)
-hs.window.animationDuration = 0
+hs.application.enableSpotlightForNameSearches(false) -- suppress useless console msgs
+hs.window.animationDuration = 0 -- quicker animations
+hs.allowAppleScript(true) -- allow external control
 
 --------------------------------------------------------------------------------
 -- self

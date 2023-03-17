@@ -58,7 +58,7 @@ function CleanupConsole()
 		elseif line:lower():find("error") then
 			line = line:gsub("%s+", " ")
 			color = isDark and lightRed or darkRed
-		elseif line:lower():find("warning") then
+		elseif line:lower():find("warning") or line:find("WARN") then
 			line = line:gsub("%*%* Warning:%s*", "WARN: ")
 			color = isDark and lightYellow or darkYellow
 		else

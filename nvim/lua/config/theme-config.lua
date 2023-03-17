@@ -48,7 +48,7 @@ local function customHighlights()
 	linkHighlight("CodiVirtualText", "Comment") -- Codi
 	setHighlight("TSDefinition", " term=underline gui=underdotted") -- treesittter refactor focus
 	setHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
-	linkHighlight("QuickScopePrimary", "gui=reverse cterm=reverse") 
+	setHighlight("QuickScopePrimary", "gui=reverse cterm=reverse") 
 	setHighlight("QuickScopeSecondary", "gui=underdouble cterm=underline") 
 
 	-- HACK for https://github.com/neovim/neovim/issues/20456
