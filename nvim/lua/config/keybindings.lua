@@ -41,6 +41,13 @@ keymap("n", "<leader>ln", function()
 	vim.notify("Last Notification copied.", logTrace)
 end, { desc = "גּ Copy Last Notification" })
 
+-- Dismiss notifications
+keymap("n", "<Esc>", function()
+	if not vim.g.neovide then return end -- notify.nvim not loaded for Terminal
+	local clearPending = require("notify").pending() > 10
+	require("notify").dismiss { pending = clearPending }
+end, { desc = "Clear Notifications" })
+
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
@@ -60,11 +67,11 @@ keymap("o", "K", "2k")
 keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)" })
 keymap({ "n", "x" }, "G", "Gzz")
 
--- Jump History
+-- JUMP HISTORY
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
--- Search
+-- SEARCH
 keymap({ "n", "o" }, "-", "/", { desc = "Search" })
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 keymap("n", "+", "*", { desc = "Search word under cursor" })
@@ -79,26 +86,27 @@ vim.on_key(function(char)
 	end
 end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
--- Marks
+-- MARKS
 -- stylua: ignore
 keymap("n", "ä", function() require("funcs.mark-cycler").gotoMark() end, { desc = "Goto Next Mark" })
 keymap("n", "Ä", function() require("funcs.mark-cycler").setMark() end, { desc = "Set Next Mark" })
 
 -- reset marks on startup (needs to be on VimEnter so it's not called too early)
-augroup("marks", {})
 autocmd("VimEnter", {
-	group = "marks",
 	callback = function() require("funcs.mark-cycler").clearMarks() end,
 })
 
---------------------------------------------------------------------------------
+-- HUNKS AND CHANGES
+keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
+keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
+keymap("n", "gc", "g;", { desc = "goto next change" })
+keymap("n", "gC", "g,", { desc = "goto previous change" })
 
--- Dismiss notifications
-keymap("n", "<Esc>", function()
-	if not vim.g.neovide then return end -- notify.nvim not loaded for Terminal
-	local clearPending = require("notify").pending() > 10
-	require("notify").dismiss { pending = clearPending }
-end, { desc = "Clear Notifications" })
+-- [M]atchIt
+-- remap needed, since using the builtin matchit plugin
+keymap("n", "m", "%", { remap = true, desc = "MatchIt" })
+
+--------------------------------------------------------------------------------
 
 -- FOLDING
 -- with count: close {n} fold levels
@@ -114,15 +122,12 @@ keymap("n", "zr", function() require("ufo").openAllFolds() end, { desc = " �
 keymap("n", "zm", function() require("ufo").closeAllFolds() end, { desc = "  Close all folds" })
 keymap("n", "zz", ":%foldclose<CR>", { desc = "ﬕ Close toplevel folds" })
 
--- [M]atchIt
--- remap needed, since using the builtin matchit plugin
-keymap("n", "m", "%", { remap = true, desc = "MatchIt" })
+--------------------------------------------------------------------------------
+-- EDITING
 
--- HUNKS AND CHANGES
-keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
-keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
-keymap("n", "gc", "g;", { desc = "goto next change" })
-keymap("n", "gC", "g,", { desc = "goto previous change" })
+-- NUMBERS
+keymap("n", "<M-a>", "10<C-a>", { desc = "+ 10" })
+keymap("n", "<M-x>", "10<C-x>", { desc = "- 10" })
 
 -- QUICKFIX
 keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
@@ -135,8 +140,6 @@ keymap(
 	{ desc = " Replacer.nvim" }
 )
 
---------------------------------------------------------------------------------
--- EDITING
 
 -- Comments & Annotations
 keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })

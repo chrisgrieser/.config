@@ -4,6 +4,7 @@ return {
 		"rhysd/clever-f.vim",
 		keys = { "f", "F", "t", "T" },
 		init = function()
+			vim.g.clever_f_across_no_line = 1
 			vim.g.clever_f_mark_direct = 1 -- essentially quickscope
 			-- use space to match special chars, since `E` would be used instead of `f<space>`
 			vim.g.clever_f_chars_match_any_signs = " "
@@ -33,11 +34,10 @@ return {
 		},
 		config = function()
 			local npairs = require("nvim-autopairs")
-			local rule = require("nvim-autopairs.rule")
-			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
-
 			npairs.setup { check_ts = true } -- use treesitter
 
+			local rule = require("nvim-autopairs.rule")
+			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
 			npairs.add_rules {
 				-- auto-pair <> if inside string (e.g. for keymaps)
 				rule("<", ">", "lua"):with_pair(isNodeType { "string", "comment" }),
