@@ -44,7 +44,7 @@ function ReadFile(filePath)
 end
 
 ---@param str string
----@param filePath string
+---@param filePath string line(s) to add
 ---@return boolean whether the writing was successful
 function AppendToFile(str, filePath)
 	local file, err = io.open(filePath, "a")
@@ -52,7 +52,7 @@ function AppendToFile(str, filePath)
 		vim.notify("Could not append: " .. err, vim.log.levels.ERROR)
 		return false
 	end
-	file:write(str)
+	file:write(str.. "\n")
 	file:close()
 	return true
 end

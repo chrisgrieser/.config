@@ -45,7 +45,7 @@
 		]
 	},
 	"autocmd (unabbr)": {
-		"prefix": "autocmd (long)",
+		"prefix": "autocmd (unabbr)",
 		"body": [
 			"vim.api.nvim_create_autocmd(\"${1:event}\", {",
 			"\tcallback = function()",
