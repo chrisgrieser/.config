@@ -9,15 +9,17 @@ alias gr="git reset"
 alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull"
-alias amend="git commit --amend"
 alias gm="git commit --amend --no-edit" # a[m]end
+alias gM="git commit --amend" 
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 
 # open GitHub repo
 function getGithubURL() {
 	git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
 }
-function gl() {
+
+# open at github % copy url
+function gh() {
 	getGithubURL | pbcopy
 	open 	"$(getGithubURL)"
 }

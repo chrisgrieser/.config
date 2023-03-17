@@ -102,9 +102,10 @@ local function cmpconfig()
 			},
 		},
 		mapping = cmp.mapping.preset.insert {
-			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
 			["<S-Up>"] = cmp.mapping.scroll_docs(-4),
 			["<S-Down>"] = cmp.mapping.scroll_docs(4),
+
+			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
 			["<C-e>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.abort()
@@ -112,6 +113,8 @@ local function cmpconfig()
 					fallback()
 				end
 			end, { "i", "s" }),
+
+			-- INFO <D-j> will override multi-cursor in snippets though
 			["<D-j>"] = cmp.mapping(function(fallback)
 				if require("neogen").jumpable() then
 					require("neogen").jump_next()
@@ -130,7 +133,7 @@ local function cmpconfig()
 					fallback()
 				end
 			end, { "i", "s", "n", "x" }),
-			-- expand or jump in luasnip snippet https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
+
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
@@ -311,7 +314,7 @@ return {
 			"jcdickinson/codeium.nvim", -- ai support
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp",
-			{ "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
+			"petertriho/cmp-git",
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
@@ -323,14 +326,14 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
 		config = function()
 			require("codeium").setup {
-				config_path = vim.env.ICLOUD .. "Dotfolder/private dotfiles/codium-api-key.json",
+				config_path = vim.env.ICLOUD .. "/Dotfolder/private dotfiles/codium-api-key.json",
 				bin_path = vim.fn.stdpath("data") .. "/codeium",
 			}
 		end,
 	},
 	{
 		"petertriho/cmp-git",
-		lazy = true, -- is being loaded by cmp
+		lazy = true, -- loaded by cmp
 		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
 			local cmp = require("cmp")
