@@ -1,22 +1,20 @@
-require("config.utils")
---------------------------------------------------------------------------------
+
 
 -- WARN do not save this file, or codespell will fix all misspellings 🙈
--- INFO using iabbrev instead of luasnip autotriggers for portability
-cmd.abclear() -- clear for reloads
+local abbreviate = vim.cmd.inoreabbrev
 
 --------------------------------------------------------------------------------
 
-cmd.iabbrev("teh the")
-cmd.iabbrev("keybaord keyboard")
-cmd.iabbrev("sicne since")
-cmd.iabbrev("nto not")
-cmd.iabbrev("shwo show")
-cmd.iabbrev("retrun return")
-cmd.iabbrev("onyl only")
-cmd.iabbrev("esle else")
-cmd.iabbrev("chroe chore")
-cmd.iabbrev("ture true")
-cmd.iabbrev("treu true")
+abbreviate("teh the")
+abbreviate("keybaord keyboard")
+abbreviate("sicne since")
+abbreviate("nto not")
+abbreviate("shwo show")
+abbreviate("retrun return")
+abbreviate("onyl only")
+abbreviate("esle else")
+abbreviate("chroe chore")
+abbreviate("ture true")
+abbreviate("treu true")
+abbreviate("fo of")
 
---------------------------------------------------------------------------------
