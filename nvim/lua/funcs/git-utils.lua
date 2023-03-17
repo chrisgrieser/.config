@@ -48,9 +48,34 @@ local gitShellOpts = {
 		os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
 
 		-- confirmation sound
-		fn.system("afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
+		fn.system(
+			"afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &"
+		)
 	end,
 }
+
+---process a commit message
+---@param commitMsg string
+---@return boolean is the commit message valid?
+---@return string the (modified) commit message
+local function processCommitMsg(commitMsg)
+	if #commitMsg > 50 then
+		vim.notify("Commit Message too long.", logWarn)
+		local shortenedMsg = commitMsg:sub(1, 50)
+		return false, shortenedMsg
+	elseif commitMsg == "" then
+		return true, "chore"
+	end
+	-- stylua: ignore
+	local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
+	local firstWord = commitMsg:match("^%w+")
+	if not vim.tbl_contains(cc, firstWord) then
+		vim.notify("Not using a Conventional Commits keyword.", logWarn)
+		return false, commitMsg
+	end
+	return true, commitMsg
+end
+
 --------------------------------------------------------------------------------
 
 ---Choose a GitHub issues from the current repo to open in the browser
@@ -117,11 +142,21 @@ local function shimmeringFocusBuild(commitMsg)
 	fn.jobstart(command, gitShellOpts)
 end
 
-function M.amendNoEditPushForce()
+---amend
+---@param noedit any
+function M.amendAndPushForce(noedit)
 	if not isInGitRepo() then return end
-	vim.notify("  Amending…")
 	output = {}
-	fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
+	if noedit then
+		vim.notify(" Amend-No-Edit & Force Push")
+		fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
+	else
+		local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
+		vim.ui.input({prompt = "Amend", default = commitMsg}, function (commitMsg)
+			
+		end)
+		vim.notify(" Amend & Force Push")
+	end
 end
 
 ---@param prefillMsg? string
@@ -131,35 +166,26 @@ function M.addCommitPush(prefillMsg)
 	if not prefillMsg then prefillMsg = "" end
 
 	vim.ui.input({ prompt = "Commit Message", default = prefillMsg }, function(commitMsg)
-		if not commitMsg then
-			return
-		elseif #commitMsg > 50 then
-			vim.notify("Commit Message too long.", logWarn)
-			M.addCommitPush(commitMsg:sub(1, 50))
-			return
-		elseif commitMsg == "" then
-			commitMsg = "chore"
-		end
+		if not commitMsg then return end -- aborted input modal
 
-		-- stylua: ignore
-		local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
-		local firstWord = commitMsg:match("^%w+")
-		if not vim.tbl_contains(cc, firstWord) then
-			vim.notify("Not using a Conventional Commits keyword.", logWarn)
-			M.addCommitPush(commitMsg)
+		local validMsg, newMsg = processCommitMsg(commitMsg)
+
+		-- if msg invalid, run again to fix the msg
+		if not validMsg then
+			M.addCommitPush(newMsg)			
 			return
 		end
 
-		-- Shimmering Focus specific actions instead
+		-- run Shimmering Focus specific actions instead
 		if expand("%") == "source.css" then
-			shimmeringFocusBuild(commitMsg)
+			shimmeringFocusBuild(newMsg)
 			return
 		end
 
-		vim.notify(' git add-commit-push\n"' .. commitMsg .. '"')
+		vim.notify(' git add-commit-push\n"' .. newMsg .. '"')
 		output = {}
 		fn.jobstart(
-			"git add -A && git commit -m '" .. commitMsg .. "' ; git pull ; git push",
+			"git add -A && git commit -m '" .. newMsg .. "' ; git pull ; git push",
 			gitShellOpts
 		)
 	end)
