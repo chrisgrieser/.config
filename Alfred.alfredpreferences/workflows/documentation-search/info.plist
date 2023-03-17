@@ -1119,7 +1119,7 @@ osascript -l JavaScript -e '
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>jxa-cookbook-search.js</string>
+				<string>scripts/jxa-cookbook-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
