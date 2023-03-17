@@ -95,7 +95,7 @@ local function tsConfig()
 		refactor = {
 			highlight_definitions = {
 				enable = true,
-				clear_on_cursor_move = true, -- set to false if `updatetime` of ~100ms
+				clear_on_cursor_move = false, -- set to true with a very low updatetime
 			},
 			highlight_current_scope = { enable = false },
 			smart_rename = {
