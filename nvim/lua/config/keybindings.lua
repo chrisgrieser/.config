@@ -558,10 +558,11 @@ keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
 keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = " Selection to ToggleTerm" })
 
 -- stylua: ignore start
-keymap("n", "5", function() require("iron.core").repl_for(bo.filetype) end, { desc = " Toggle REPL (Iron)" })
+keymap({"n", "x"}, "5", function() require("iron.core").repl_for(bo.filetype) end, { desc = " Toggle REPL (Iron)" })
 keymap("n", "4", function() require("iron.core").send_line() end, { desc = " Send Line to REPL (Iron)" })
 keymap("x", "4", function() require("iron.core").visual_send() end, { desc = " Send Selection to REPL (Iron)" })
 -- stylua: ignore end
+print "hi"
 
 --------------------------------------------------------------------------------
 
