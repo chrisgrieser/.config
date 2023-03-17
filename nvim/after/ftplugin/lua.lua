@@ -26,19 +26,33 @@ end, { buffer = true, desc = " Reload" })
 -- INSPECT NVIM OR HAMMERSPOON OBJECTS
 
 -- 1) `:I` or `<leader>li` inspects the passed lua object / selection
-local function inspect(str)
-	local output = vim.inspect(fn.luaeval(str))
-	vim.notify(output, logTrace, {
-		on_open = function(win) -- enable treesitter highlighting in the notification
-			local outputIsStr = output:find('^"') and output:find('"$')
-			if not outputIsStr then
-				local buf = api.nvim_win_get_buf(win)
-				api.nvim_buf_set_option(buf, "filetype", "lua")
-			end
-		end,
-		timeout = 10000, -- 10 seconds
-	})
+local function inspect(strToInspect)
+	local parentDir = expand("%:p:h")
+
+	-- hammerspoon
+	if parentDir:find("hammerspoon") then
+		local hsApplescript =
+			string.format('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"', strToInspect)
+		fn.system("osascript -e '" .. hsApplescript .. "'")
+	-- neovim
+	elseif parentDir:find("nvim") then
+		local output = vim.inspect(fn.luaeval(strToInspect))
+		vim.notify(output, logTrace, {
+			timeout = 10000, -- 10 seconds
+			on_open = function(win) -- enable treesitter highlighting in the notification
+				local outputIsStr = output:find('^"') and output:find('"$')
+				if not outputIsStr then
+					local buf = api.nvim_win_get_buf(win)
+					api.nvim_buf_set_option(buf, "filetype", "lua")
+				end
+			end,
+		})
+	-- neither
+	else
+		vim.notify("Neither in nvim nor in hammerspoon directory.", logError)
+	end
 end
+
 -- stylua: ignore
 keymap("n", "<leader>li", function() inspect(expand("<cWORD>")) end, { desc = " inspect cWORD", buffer = true })
 keymap("x", "<leader>li", function()
@@ -48,10 +62,12 @@ end, { desc = " inspect selection", buffer = true })
 
 vim.api.nvim_buf_create_user_command(0, "I", function(ctx) inspect(ctx.args) end, { nargs = "+" })
 
+--------------------------------------------------------------------------------
+
 -- 2) `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/?utm_source=share&utm_medium=web2x&context=3
 vim.api.nvim_buf_create_user_command(0, "II", function(ctx)
-	if not (expand("%:p"):find("nvim") then
-		vim.notify("Not in a nvim")
+	if not (expand("%:p"):find("nvim")) then
+		vim.notify("Not in a nvim directory", logError)
 		return
 	end
 	os.remove("/tmp/nvim-cmd-output")
