@@ -130,12 +130,12 @@ autocmd("BufReadPost", {
 		cmd.IndentOMatic() -- trigger again to ensure it's run before determining spaces/tabs
 		local usesSpaces = bo.expandtab
 		if usesSpaces then
-			opt_local.listchars:append { tab = " >" }
+			-- opt_local.listchars:append { tab = " >" }
 			opt_local.listchars:append { multispace = "·" }
 			opt_local.listchars:append { lead = "·" }
 			opt_local.listchars:append { leadspace = "·" }
 		else
-			opt_local.listchars:append { tab = "  " }
+			-- opt_local.listchars:append { tab = "  " }
 			opt_local.listchars:append { multispace = "·" }
 			opt_local.listchars:append { lead = "·" }
 			opt_local.listchars:append { leadspace = "·" }
