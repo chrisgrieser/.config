@@ -32,11 +32,9 @@ keymap("n", "zz", ":syntax sync fromstart<CR>", { buffer = true })
 
 -- extra trigger for css files, to work with hot reloads
 autocmd("TextChanged", {
-	callback = function()
-		if bo.filetype == "css" then cmd.update(expand("%:p")) end
-	end,
+	buffer = 0, -- buffer-local autocmd
+	callback = function() cmd.update(expand("%:p")) end,
 })
-
 
 --------------------------------------------------------------------------------
 
