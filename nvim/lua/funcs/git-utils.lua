@@ -55,7 +55,8 @@ local gitShellOpts = {
 	end,
 }
 
----process a commit message
+---process a commit message: less than 50 chars, not empty, adheres to
+---conventional commits
 ---@param commitMsg string
 ---@return boolean is the commit message valid?
 ---@return string the (modified) commit message
@@ -221,7 +222,7 @@ function M.gitLink()
 	local filepath = expand("%:p")
 	local gitroot = fn.system([[git --no-optional-locks rev-parse --show-toplevel]])
 	local pathInRepo = filepath:sub(#gitroot)
-	local remote = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1")
+	local remote = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git.*", "%1")
 	local branch = fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", "")
 
 	local location
@@ -231,14 +232,15 @@ function M.gitLink()
 	if notVisualMode then
 		location = "" -- link just the file itself
 	elseif selStart == selEnd then -- one-line-selection
-		location = "#L" .. tostring(selStart)
+		location = "L" .. tostring(selStart)
 	elseif selStart < selEnd then
-		location = "#L" .. tostring(selStart) .. "-L" .. tostring(selEnd)
+		location = "L" .. tostring(selStart) .. "-L" .. tostring(selEnd)
 	else
-		location = "#L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
+		location = "L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
 	end
 
-	local url = string.format("https://github.com/%s/blob/%s/%s%s", remote, branch, pathInRepo, location)
+	local url = string.format("https://github.com/%s/blob/%s/%s", remote, branch, pathInRepo)
+	if location ~= "" then url = url .. "#" .. location end
 
 	os.execute("open '" .. url .. "'") -- open in browser (macOS cli)
 	fn.setreg("+", url) -- copy to clipboard

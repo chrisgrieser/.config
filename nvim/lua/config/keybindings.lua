@@ -110,7 +110,7 @@ keymap("n", "^", function()
 	if vim.v.count == 0 then
 		return "za"
 	else
-		require("ufo").closeFoldsWith(vim.v.count)
+		require("ufo").closeFoldsWith(vim.v.count - 1) -- -1 as topmost is foldlevel 0
 	end
 end, { desc = "ﬕ Toggle fold / Close {n} foldlevels", expr = true })
 keymap("n", "zr", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
@@ -128,12 +128,8 @@ keymap("n", "<M-x>", "10<C-x>", { desc = "- 10" })
 keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
 keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Previous Quickfix" })
 keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Delete Quickfix List" })
-keymap(
-	"n",
-	"<leader>q",
-	function() require("replacer").run { rename_files = false } end,
-	{ desc = " Replacer.nvim" }
-)
+-- stylua: ignore
+keymap("n", "<leader>q", function() require("replacer").run { rename_files = false } end, { desc = " Replacer.nvim" })
 
 -- COMMENTS & ANNOTATIONS
 keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })

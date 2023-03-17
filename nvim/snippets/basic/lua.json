@@ -11,7 +11,7 @@
 		]
 	},
 	"ignore (stylua)": {
-		"prefix": "ignore block (stylua)",
+		"prefix": "ignore (stylua)",
 		"body": "-- stylua: ignore"
 	},
 	"ignore rule (selene)": {
