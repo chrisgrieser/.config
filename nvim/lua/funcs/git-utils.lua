@@ -46,6 +46,9 @@ local gitShellOpts = {
 
 		vim.cmd.checktime() -- reload buffer if changed (e.g., due to linters or pandocvim). Also requires opt.autoread
 		os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
+
+		-- confirmation sound
+		fn.system("afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
 	end,
 }
 --------------------------------------------------------------------------------
@@ -110,7 +113,8 @@ local function shimmeringFocusBuild(commitMsg)
 
 	vim.notify(' Building theme…\n"' .. commitMsg .. '"')
 	output = {}
-	fn.jobstart('zsh "' .. buildscriptLocation .. '" "' .. commitMsg .. '"', gitShellOpts)
+	local command = string.format("zsh '%s' '%s'", buildscriptLocation, commitMsg)
+	fn.jobstart(command, gitShellOpts)
 end
 
 function M.amendNoEditPushForce()
