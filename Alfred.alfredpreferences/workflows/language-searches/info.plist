@@ -18,29 +18,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>54108A38-6929-4455-A62B-5EFADC3B4CF8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A744F634-72A4-4373-86F2-EBC783690DB8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>43880D3B-C354-4AC9-BFB5-C7A430DAC0DF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
@@ -65,7 +42,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.linguee.com/english-german/search?query={query}&amp;source=auto</string>
+				<string>https://www.linguee.com/english-german/search?query={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -95,69 +72,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://sentencestack.com/q/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>54108A38-6929-4455-A62B-5EFADC3B4CF8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://synonyme.woxikon.de/synonyme/{query}.php</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>43880D3B-C354-4AC9-BFB5-C7A430DAC0DF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>d</string>
-				<key>subtext</key>
-				<string>Woxion &amp; Wortschatz Leipzig</string>
-				<key>text</key>
-				<string>Synonyme: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A744F634-72A4-4373-86F2-EBC783690DB8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -170,25 +84,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>85</real>
-		</dict>
-		<key>43880D3B-C354-4AC9-BFB5-C7A430DAC0DF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>265</real>
-			<key>ypos</key>
-			<real>290</real>
-		</dict>
-		<key>54108A38-6929-4455-A62B-5EFADC3B4CF8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>265</real>
-			<key>ypos</key>
-			<real>150</real>
+			<real>25</real>
 		</dict>
 		<key>8BD829FB-FA30-46D7-ABBE-1255DFE26375</key>
 		<dict>
@@ -198,15 +94,6 @@
 			<real>265</real>
 			<key>ypos</key>
 			<real>20</real>
-		</dict>
-		<key>A744F634-72A4-4373-86F2-EBC783690DB8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>290</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
