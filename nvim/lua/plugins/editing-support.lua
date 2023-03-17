@@ -1,14 +1,12 @@
 return {
-	{ "bkad/CamelCaseMotion", event = "BufReadPost" },
-	{
-		"rhysd/clever-f.vim",
+	{ -- e, w, b move based on CamelCase
+		"bkad/CamelCaseMotion",
+		event = "BufReadPost",
+	},
+	{ -- highlights for ftFT
+		"unblevable/quick-scope",
 		keys = { "f", "F", "t", "T" },
-		init = function()
-			vim.g.clever_f_across_no_line = 1
-			vim.g.clever_f_mark_direct = 1 -- essentially quickscope
-			-- use space to match special chars, since `E` would be used instead of `f<space>`
-			vim.g.clever_f_chars_match_any_signs = " "
-		end,
+		init = function() vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" } end,
 	},
 	{ -- display line numbers while going to a line with `:`
 		"nacro90/numb.nvim",
