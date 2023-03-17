@@ -126,7 +126,7 @@ local filetypeSpecificWords = {
 		{ "includes", "match" },
 		{ "===", "!==" },
 		{ "&&", "||" },
-		{ "continue", "break" }, 
+		{ "continue", "break" },
 		{ "default", "case" }, -- switch-case statements
 		{ "debug", "trace", false }, -- console.log -> console.warn -> etc.
 		{ "trace", "info", false },
