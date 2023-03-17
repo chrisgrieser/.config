@@ -84,13 +84,16 @@ end
 -- TWITTER: fixed size to the side, with the sidebar hidden
 TwitterWatcher = Aw.new(function(appName, event)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
+	local twitter = App("Twitter")
 
 	-- move twitter and scroll it up
 	if appName == "Twitter" and (event == Aw.launched or event == Aw.activated) then
 		AsSoonAsAppRuns("Twitter", function()
-			BringAllToFront()
 			TwitterToTheSide()
 			TwitterScrollUp()
+			-- focus new tweet window if there is one
+			local newTweetWindow = twitter:findWindow("Tweet") 
+			if newTweetWindow then newTweetWindow:focus() end
 		end)
 
 	-- auto-close media windows and scroll up when deactivating
@@ -107,7 +110,6 @@ TwitterWatcher = Aw.new(function(appName, event)
 	-- raise twitter when switching window to other app
 	elseif event == Aw.activated and appName ~= "Twitter" then
 		local frontWin = hs.window.focusedWindow()
-		local twitter = App("Twitter")
 		if not frontWin or not twitter then return end
 
 		if CheckSize(frontWin, PseudoMaximized) or CheckSize(frontWin, Centered) then
