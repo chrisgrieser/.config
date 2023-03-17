@@ -50,7 +50,7 @@ vim.api.nvim_buf_create_user_command(0, "I", function(ctx) inspect(ctx.args) end
 
 -- 2) `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/?utm_source=share&utm_medium=web2x&context=3
 vim.api.nvim_buf_create_user_command(0, "II", function(ctx)
-	if expand("%:p"):find("/nvim/") then
+	if not (expand("%:p"):find("nvim") then
 		vim.notify("Not in a nvim")
 		return
 	end
