@@ -1,7 +1,7 @@
 
 
 -- WARN do not save this file, or codespell will fix all misspellings 🙈
-local abbreviate = vim.cmd.inoreabbrev
+local abbreviate = vim.cmd.noreabbrev
 
 --------------------------------------------------------------------------------
 

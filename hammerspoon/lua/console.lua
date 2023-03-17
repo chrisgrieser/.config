@@ -52,13 +52,25 @@ function CleanupConsole()
 		end
 	end
 	for _, line in pairs(cleanLines) do
+		-- FIX double-timestamp displayed sometimes
+		line = line:gsub("(%d%d:%d%d:%d%d: )%d%d:%d%d:%d%d ?", "%1")
+
+		-- colorize certain messages
 		local color
 		if line:find("^> ") then -- user input
 			color = isDark and lightGrey or darkGrey
 		elseif line:lower():find("error") then
 			line = line:gsub("%s+", " ")
 			color = isDark and lightRed or darkRed
-		elseif line:lower():find("warning") or line:find("WARN") then
+		elseif
+			line:lower():find("warning")
+			or line:find("WARN")
+			or line:find("⚠️️")
+			or line:find("stack traceback")
+			or line:find("^<.*>$")
+			or line:find("%.%.%.")
+			or line:find("in upvalue")
+		then
 			line = line:gsub("%*%* Warning:%s*", "WARN: ")
 			color = isDark and lightYellow or darkYellow
 		else

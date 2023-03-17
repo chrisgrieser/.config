@@ -18,6 +18,8 @@ keymap("n", "<leader>r", function()
 		vim.notify(expand("%:r") .. " re-sourced.")
 	elseif parentFolder:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
+	else
+		vim.notify("Neither in nvim nor in hammerspoon directory.", logError)
 	end
 end, { buffer = true, desc = " Reload" })
 
@@ -29,12 +31,9 @@ end, { buffer = true, desc = " Reload" })
 local function inspect(strToInspect)
 	local parentDir = expand("%:p:h")
 
-	-- hammerspoon
 	if parentDir:find("hammerspoon") then
-		local hsApplescript =
-			string.format('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"', strToInspect)
+		local hsApplescript = string.format('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"', strToInspect)
 		fn.system("osascript -e '" .. hsApplescript .. "'")
-	-- neovim
 	elseif parentDir:find("nvim") then
 		local output = vim.inspect(fn.luaeval(strToInspect))
 		vim.notify(output, logTrace, {
@@ -47,7 +46,6 @@ local function inspect(strToInspect)
 				end
 			end,
 		})
-	-- neither
 	else
 		vim.notify("Neither in nvim nor in hammerspoon directory.", logError)
 	end
