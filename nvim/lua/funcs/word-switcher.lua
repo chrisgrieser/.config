@@ -109,7 +109,6 @@ local filetypeSpecificWords = {
 		{ "print", "assert" },
 	},
 	python = {
-		{ "True", "False" },
 		{ "print", "assert" },
 	},
 	markdown = {
