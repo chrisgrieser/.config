@@ -151,6 +151,7 @@ local function shimmeringFocusBuild(commitMsg)
 	fn.jobstart(command, gitShellOpts)
 end
 
+
 ---amend
 ---@param mode? string no-edit|edit
 ---@param prefillMsg? string
