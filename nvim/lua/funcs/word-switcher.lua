@@ -149,19 +149,22 @@ end
 
 local M = {}
 
-local function checkAlternativeCasings(cword, ifWord, thenWord)
-	if cword == ifWord:lower() then
+---check if input is equal to ifWord in lowercase, titlecase, or uppercase. If
+---so, returns the thenWord in the same case, otherwise returns nil
+---@param input string
+---@param ifWord string
+---@param thenWord string
+---@return string|nil
+local function checkAlternativeCasings(input, ifWord, thenWord)
+	if input == ifWord:lower() then
 		return thenWord:lower()
-	elseif cword == ifWord:upper() then
+	elseif input == ifWord:upper() then
 		return thenWord:upper()
-	-- elseif cword == 
+	elseif input == ifWord:sub(1, 1) .. ifWord:sub(2) then
+		return thenWord:sub(1, 1) .. thenWord:sub(2)
 	end
-
-	cword = "apple"
-
+	return nil
 end
-
-
 
 --------------------------------------------------------------------------------
 
@@ -201,18 +204,17 @@ function M.switch()
 
 	local newWord
 	for _, pair in pairs(wordsToUse) do
-		local oneWay = pair[3] == false
-		if word == pair[1] then
-			newWord = pair[2]
-			break
-		elseif word == pair[2] and not oneWay then
-			newWord = pair[1]
-			break
+		newWord = checkAlternativeCasings(word, pair[1], pair[2])
+		if newWord then break end
+
+		if not (pair[3] == false) then
+			newWord = checkAlternativeCasings(word, pair[2], pair[1])
+			if newWord then break end
 		end
 	end
 
 	local switchWordFound = newWord ~= nil
-	if switchWordFound then
+	if newWord then
 		vim.fn.setreg("z", newWord)
 		vim.cmd.normal { 'viw"zP', bang = true }
 	else
