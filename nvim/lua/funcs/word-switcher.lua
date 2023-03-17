@@ -105,8 +105,8 @@ local filetypeSpecificWords = {
 		{ "pairs", "ipairs" },
 		{ "find", "match" }, -- string.find and string.match
 		{ "break", "return" }, -- javascript knows no `continue`
-		{ "function", "local function", false },
-		{ "not", "", false }, -- not way to toggle back
+		{ "function", "local function", false }, -- cannot toggle back, since not word under cursor
+		{ "print", "assert" },
 	},
 	python = {
 		{ "True", "False" },
@@ -119,7 +119,7 @@ local filetypeSpecificWords = {
 		{ "null", "undefined" },
 		{ "if", "else if", false },
 		{ "else", "else if", false },
-		{ "var", "const", false }, -- don't switch back to var
+		{ "var", "const", false }, -- don't switch back to var, since const/let are preferred
 		{ "const", "let" },
 		{ "map", "forEach" },
 		{ "replace", "replaceAll" },
@@ -147,7 +147,7 @@ local filetypeSpecificWords = {
 	},
 }
 
---runs when no word to switch can be found under the cursor
+---runs when no word to switch can be found under the cursor
 local function fallbackFn()
 	-- toggle capital/lowercase of word
 	vim.cmd.normal { "mzlb~`z", bang = true }
@@ -159,26 +159,28 @@ end
 
 -- HELPERS
 
-local M = {}
-
----check if input is equal to ifWord in lowercase, titlecase, or uppercase. If
+---check if input is equal to ifWord in lowercase, Capitalcase, or UPPERCASE. If
 ---so, returns the thenWord in the same case, otherwise returns nil
 ---@param input string
 ---@param ifWord string
 ---@param thenWord string
 ---@return string|nil
 local function checkAlternativeCasings(input, ifWord, thenWord)
+	local function capitalcase(word) return word:sub(1, 1):upper() .. word:sub(2) end
+
 	if input == ifWord:lower() then
 		return thenWord:lower()
 	elseif input == ifWord:upper() then
 		return thenWord:upper()
-	elseif input == ifWord:sub(1, 1) .. ifWord:sub(2) then
-		return thenWord:sub(1, 1) .. thenWord:sub(2)
+	elseif input == (capitalcase(ifWord)) then
+		return capitalcase(thenWord)
 	end
 	return nil
 end
 
 --------------------------------------------------------------------------------
+
+local M = {}
 
 ---switches words under the cursor to their opposite, e.g. `true` to `false`
 function M.switch()
@@ -186,8 +188,9 @@ function M.switch()
 	local iskeywBefore = vim.opt.iskeyword:get() -- remove word-delimiters for <cword>
 	vim.opt.iskeyword:remove { "_", "-", "." }
 
+	-- TODO more precise retrieval of word under cursor
 	local cword = vim.fn.expand("<cword>")
-	local cBigword = vim.fn.expand("<cWORD>") -- check fo cWORD needed to retrieve non-alphanumeric strings (e.g. "&&")
+	local cBigword = vim.fn.expand("<cWORD>") -- check of cWORD needed to retrieve non-alphanumeric strings (e.g. "&&")
 
 	local alphaNumericUnderCursor = cBigword:find("[%a%d]")
 	local word = alphaNumericUnderCursor and cword or cBigword
@@ -211,7 +214,7 @@ function M.switch()
 				break
 			end
 			local oneWay = pair[3] == false
-			if not oneWay and word == pairs[2] then newWord = pairs[1] end
+			if not oneWay and word == pair[2] then newWord = pair[1] end
 		end
 	end
 
@@ -234,6 +237,7 @@ function M.switch()
 	-----------------------------------------------------------------------------
 
 	if newWord then
+		-- TODO more precise replacement in the editor
 		vim.fn.setreg("z", newWord)
 		vim.cmd.normal { 'viw"zP', bang = true }
 	else
