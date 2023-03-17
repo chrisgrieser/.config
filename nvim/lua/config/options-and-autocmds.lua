@@ -178,7 +178,7 @@ local function remember(mode)
 		"help",
 		"qf",
 	}
-	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype == "nofile" or not bo.modifiable then
+	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype ~= "" or not bo.modifiable then
 		return
 	end
 	if mode == "save" then
@@ -226,7 +226,7 @@ vim.diagnostic.config {
 	float = {
 		focusable = true,
 		border = BorderStyle,
-		max_width = 50,
+		max_width = 60,
 		header = "", -- remove "Diagnostics:" heading
 		format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,
 	},

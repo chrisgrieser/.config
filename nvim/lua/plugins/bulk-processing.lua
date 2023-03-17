@@ -16,6 +16,11 @@ return {
 			})
 		end,
 	},
+	{ -- highlight word under cursor & batch renamer
+		"nvim-treesitter/nvim-treesitter-refactor",
+		event = "BufEnter",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
 	{
 		-- my fork, pending on PR: https://github.com/gabrielpoca/replacer.nvim/pull/12
 		"chrisgrieser/replacer.nvim",

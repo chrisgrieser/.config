@@ -62,6 +62,7 @@ local function commented_lines_textobject()
 	repeat
 		rs = rs - 1
 		line = vim.api.nvim_buf_get_lines(0, rs - 1, rs, false)
+		-- fsfs
 	until next(line) == nil or not is_commented(line[1])
 	rs = rs + 1
 	repeat
@@ -80,10 +81,6 @@ keymap("o", "u", commented_lines_textobject, { desc = "Big comment textobj" })
 
 -- space: subword
 keymap("o", "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
-
-
--- _: line (but characterwise)
-keymap("o", "_", function() require("various-textobjs").lineCharacterwise() end, { desc = "line textobj" })
 
 -- L: link
 keymap("o", "L", function() require("various-textobjs").url() end, { desc = "link textobj" })
