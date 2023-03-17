@@ -118,20 +118,13 @@ local function telescopeConfig()
 				ignore_symbols = { "string", "boolean", "number" },
 				fname_width = 17,
 			},
-			treesitter = {
-				prompt_prefix = " ",
-				show_line = false,
-			},
-			find_files = {
-				prompt_title = "Project Files",
-				prompt_prefix = " ",
-				hidden = true,
-				follow = true, -- follow symlinks
-				no_ignore = false, -- use fd ignore files
-			},
+			treesitter = { prompt_prefix = " ", show_line = false },
+			git_status = { prompt_prefix = " "},
+			git_commit = { prompt_prefix = " "},
 			keymaps = { prompt_prefix = "  ", modes = { "n", "i", "c", "x", "o", "t" } },
 			oldfiles = { prompt_prefix = " " },
 			highlights = { prompt_prefix = " " },
+			loclist = { trim_text = true, prompt_prefix = " " },
 			buffers = {
 				prompt_prefix = "﬘ ",
 				ignore_current_buffer = false,
@@ -142,20 +135,11 @@ local function telescopeConfig()
 				theme = "cursor",
 				layout_config = { cursor = { width = 0.5 } },
 			},
-			quickfix = {
-				trim_text = true,
-				show_line = true,
-				prompt_prefix = " ",
-			},
 			live_grep = {
 				cwd = "%:p:h",
 				disable_coordinates = true,
 				prompt_title = "Search in Folder",
 				prompt_prefix = " ",
-			},
-			loclist = {
-				trim_text = true,
-				prompt_prefix = " ",
 			},
 			spell_suggest = {
 				initial_mode = "normal",

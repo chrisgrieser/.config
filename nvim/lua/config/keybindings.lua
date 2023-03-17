@@ -487,18 +487,19 @@ end, { desc = "璉Copy Breadcrumbs" })
 --------------------------------------------------------------------------------
 -- GIT
 
--- Neo[G]it
-keymap("n", "<leader>gs", ":Neogit<CR>", { desc = " Status (Neogit)" })
+keymap("n", "<leader>gn", cmd.Neogit, { desc = " Commit (Neogit)" })
 keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = " Commit (Neogit)" })
 keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = " Add Hunk" })
 keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = " Reset Hunk" })
 keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" })
 
--- my custom functions
+keymap("n", "<leader>gs", function () cmd.Telescope("git_status") end, { desc = " Status (Telescope)" })
+keymap("n", "<leader>gl", function () cmd.Telescope("git_commit") end, { desc = " Log (Telescope)" })
+
 -- stylua: ignore start
-keymap({ "n", "x" }, "<leader>gl", function () require("funcs.git-utils").gitLink() end, { desc = " GitHub Link" })
+keymap({ "n", "x" }, "<leader>gl", function () require("funcs.git-utils").gitLink() end, { desc = " Link" })
 keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = " Add-Commit-Push" })
-keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch() end, { desc = " GitHub Issues" })
+keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch() end, { desc = " Issues" })
 keymap("n", "<leader>gm", function () require("funcs.git-utils").amendNoEditPushForce() end, { desc = " Amend-No-Edit & Force Push" })
 -- stylua: ignore end
 

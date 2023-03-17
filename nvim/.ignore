@@ -1,5 +1,0 @@
-# ignore file for `fd`
-# INFO for telescope.nvim, cannot be named `.fdignore` and must be named `.ignore`
-
-# neovim spell files
-spell
