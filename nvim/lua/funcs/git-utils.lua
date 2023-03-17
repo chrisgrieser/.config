@@ -48,9 +48,9 @@ local gitShellOpts = {
 		os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
 
 		-- confirmation sound
-		fn.system(
-			"afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &"
-		)
+		-- stylua: ignore
+		fn.system( "afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
+
 		output = {} -- empty for next run
 	end,
 }
@@ -74,9 +74,9 @@ local function processCommitMsg(commitMsg)
 
 	-- ensure conventional commits
 	-- stylua: ignore
-	local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
+	local conventionalCommits = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
 	local firstWord = commitMsg:match("^%w+")
-	if not vim.tbl_contains(cc, firstWord) then
+	if not vim.tbl_contains(conventionalCommits, firstWord) then
 		vim.notify("Not using a Conventional Commits keyword.", logWarn)
 		return false, commitMsg
 	end
