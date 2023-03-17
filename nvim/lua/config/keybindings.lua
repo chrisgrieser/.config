@@ -517,7 +517,8 @@ keymap("n", "<leader>gl", function() cmd.Telescope("git_commit") end, { desc = "
 keymap({ "n", "x" }, "<leader>gl", function () require("funcs.git-utils").gitLink() end, { desc = " Link" })
 keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = " Add-Commit-Push" })
 keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch() end, { desc = " Issues" })
-keymap("n", "<leader>gm", function () require("funcs.git-utils").amendNoEditPushForce() end, { desc = " Amend-No-Edit & Force Push" })
+keymap("n", "<leader>gm", function () require("funcs.git-utils").amendAndPushForce() end, { desc = " Amend-No-Edit & Force Push" })
+keymap("n", "<leader>gM", function () require("funcs.git-utils").amendAndPushForce() end, { desc = " Amend & Force Push" })
 -- stylua: ignore end
 
 -- Diffview
