@@ -135,13 +135,13 @@ keymap(
 	{ desc = " Replacer.nvim" }
 )
 
--- Comments & Annotations
+-- COMMENTS & ANNOTATIONS
 keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })
 keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
 -- stylua: ignore
 keymap("n", "qf", function() require("neogen").generate() end, { desc = "Neogen: Comment Function" })
 
--- Whitespace Control
+-- WHITESPACE CONTROL
 keymap("n", "=", "mzO<Esc>`z", { desc = "add blank line above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "add blank line below" })
 keymap("n", "<Tab>", ">>", { desc = " indent" })
@@ -149,7 +149,7 @@ keymap("n", "<S-Tab>", "<<", { desc = " outdent" })
 keymap("x", "<Tab>", ">gv", { desc = " indent" })
 keymap("x", "<S-Tab>", "<gv", { desc = " outdent" })
 
--- Casing
+-- Word Switcher
 keymap(
 	"n",
 	"<BS>",
@@ -164,10 +164,16 @@ for _, v in pairs(trailingKeys) do
 end
 keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
--- Spelling (mnemonic: [z]pe[l]ling)
+--------------------------------------------------------------------------------
 
----add word to vale dictionary
----@param mode 
+-- SPELLING
+
+-- [z]pelling [l]ist
+keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "暈suggest" })
+keymap("n", "za", "mz]s1z=`z", { desc = "暈autofix" }) -- [a]utofix word under cursor
+
+---add word under cursor to vale dictionary
+---@param mode string accept|reject
 local function valeWord(mode)
 	local word = expand("<cword>")
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
@@ -175,17 +181,10 @@ local function valeWord(mode)
 	cmd.edit() -- reload file for diagnostics to take effect
 	vim.notify("暈Now " .. mode .. "ing:\n" .. word)
 end
-
-keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "暈suggest" })
-keymap("n", "za", "mz]s1z=`z", { desc = "暈autofix" }) -- [a]utofix word under cursor
 keymap("n", "zg", function() valeWord("accept") end, { desc = "暈Add to accepted words (vale)" })
-keymap("n", "zw", function()
-	local word = expand("<cword>")
-	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/reject.txt")
-	if not success then return end
-	cmd.edit() -- reload file for diagnostics to take effect
-	vim.notify(word .. "暈Now rejecting:\n")
-end, { desc = "暈Add to rejected words (vale)" })
+keymap("n", "zw", function() valeWord("reject") end, { desc = "暈Add to rejected words (vale)" })
+
+--------------------------------------------------------------------------------
 
 -- [S]ubstitute Operator (substitute.nvim)
 keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
@@ -209,6 +208,8 @@ autocmd("FileType", {
 })
 -- stylua: ignore end
 
+--------------------------------------------------------------------------------
+
 -- search & replace
 keymap(
 	"n",
@@ -226,16 +227,18 @@ keymap(
 keymap("n", "<leader>n", ":%normal ", { desc = "弄 :normal" })
 keymap("x", "<leader>n", ":normal ", { desc = "弄 :normal" })
 
--- Undo
-keymap({ "n", "x" }, "U", "<C-r>", { desc = "碑 redo" }) -- redo
-keymap("n", "<C-u>", qol.undoDuration, { desc = "碑 undo specific durations" })
-keymap("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "碑 Undotree" })
-
 -- Refactor
 -- stylua: ignore start
 keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "弄 Inline Variable" })
 keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Extract Variable") end, { desc = "弄 Extract Variable" })
 -- stylua: ignore end
+
+--------------------------------------------------------------------------------
+
+-- Undo
+keymap({ "n", "x" }, "U", "<C-r>", { desc = "碑 redo" }) -- redo
+keymap("n", "<C-u>", qol.undoDuration, { desc = "碑 undo specific durations" })
+keymap("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "碑 Undotree" })
 
 -- Logging & Debugging
 -- stylua: ignore start
@@ -323,7 +326,7 @@ keymap("n", "<leader><CR>", function() require("harpoon.mark").add_file() end, {
 
 ------------------------------------------------------------------------------
 
--- CMD-Keybindings
+-- CMD-KEYBINDINGS
 keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 
 -- stylua: ignore
@@ -357,7 +360,7 @@ keymap("i", "<D-t>", "${}<Left>", { desc = "Template String" })
 
 --------------------------------------------------------------------------------
 
--- Color Picker
+-- COLOR PICKER
 keymap("n", "#", ":CccPick<CR>", { desc = " Color Picker" })
 keymap("n", "'", ":CccConvert<CR>", { desc = " Convert Color" }) -- shift-# on German keyboard
 
