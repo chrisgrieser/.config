@@ -58,9 +58,6 @@ opt.titlestring = '%{expand("%:p")}'
 
 -- Editor
 opt.cursorline = true
-opt.scrolloff = 12
-opt.sidescrolloff = 13
-
 opt.textwidth = 80
 opt.wrap = false
 opt.breakindent = false
@@ -83,6 +80,32 @@ opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
 
 -- Timeouts
 opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
+
+--------------------------------------------------------------------------------
+-- SCROLLING
+opt.scrolloff = 12
+opt.sidescrolloff = 13
+
+-- FIX scrolloff work at EoF
+-- https://github.com/Aasim-A/scrollEOF.nvim/blob/master/lua/scrollEOF.lua#L11
+autocmd("CursorMoved", {
+	callback = function()
+		if bo.filetype == "DressingSelect" then return end
+
+		local win_height = api.nvim_win_get_height(0)
+		local win_view = fn.winsaveview()
+		local scrolloff = math.min(opt.scrolloff:get(), math.floor(win_height / 2))
+		local scrolloff_line_count = win_height - (fn.line("w$") - win_view.topline + 1)
+		local distance_to_last_line = fn.line("$") - win_view.lnum
+		if
+			distance_to_last_line < scrolloff
+			and scrolloff_line_count + distance_to_last_line < scrolloff
+		then
+			win_view.topline = win_view.topline + scrolloff - (scrolloff_line_count + distance_to_last_line)
+			vim.fn.winrestview(win_view)
+		end
+	end,
+})
 
 --------------------------------------------------------------------------------
 

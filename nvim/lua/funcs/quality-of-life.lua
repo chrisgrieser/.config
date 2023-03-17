@@ -85,26 +85,6 @@ end
 
 --------------------------------------------------------------------------------
 
----enables overscrolling for that action when close to the last line, depending
----on 'scrolloff' option. Alternative Approach: https://www.reddit.com/r/neovim/comments/10rhoxs/how_to_make_scrolloff_option_scroll_past_end_of/
----@param action string The motion to be executed when not at the EOF
-function M.overscroll(action)
-	if bo.filetype ~= "DressingSelect" then
-		local curLine = lineNo(".")
-		local lastLine = lineNo("$")
-		if (lastLine - curLine) <= vim.wo.scrolloff then normal("zz") end
-	end
-
--- if action includes a count
-	local usedCount = vim.v.count1
-	local actionCount = action:match("%d+") 
-	if actionCount then
-		action = action:gsub("%d+", "")
-		usedCount = tonumber(actionCount) * usedCount
-	end
-	normal(tostring(usedCount) .. action)
-end
-
 ---toggle wrap, colorcolumn, and hjkl visual/logical maps in one go
 function M.toggleWrap()
 	local opts = { buffer = true }
@@ -123,10 +103,10 @@ function M.toggleWrap()
 		vim.opt_local.colorcolumn = ""
 		vim.keymap.set({ "n", "x" }, "H", "g^", opts)
 		vim.keymap.set({ "n", "x" }, "L", "g$", opts)
-		vim.keymap.set({ "n", "x" }, "J", function() M.overscroll("6gj") end, opts)
+		vim.keymap.set({ "n", "x" }, "J", "6gj", opts)
 		vim.keymap.set({ "n", "x" }, "K", "6gk", opts)
+		vim.keymap.set({ "n", "x" }, "j", "gj", opts)
 		vim.keymap.set({ "n", "x" }, "k", "gk", opts)
-		vim.keymap.set({ "n", "x" }, "j", function() M.overscroll("gj") end, opts)
 	end
 end
 

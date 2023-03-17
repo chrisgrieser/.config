@@ -59,3 +59,6 @@ allows
 few
 etc
 multiple
+lua
+linewise
+UNIX

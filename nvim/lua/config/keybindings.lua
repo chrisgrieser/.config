@@ -56,16 +56,11 @@ keymap({ "o", "x" }, "H", "^")
 keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long lines
 keymap({ "n", "x", "o" }, "L", "$")
 
-keymap("n", "J", function() qol.overscroll("6j") end, { desc = "6j (with overscroll)" })
-keymap("x", "J", "6j")
+keymap({ "n", "x" }, "J", "6j")
 keymap({ "n", "x" }, "K", "6k")
 
 keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "K", "2k")
-
--- add overscroll
-keymap("n", "j", function() qol.overscroll("j") end, { desc = "j (with overscroll)" })
-keymap({ "n", "x" }, "G", "Gzz")
 
 -- JUMP HISTORY
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
@@ -111,7 +106,7 @@ keymap("n", "m", "%", { remap = true, desc = "MatchIt" })
 -- FOLDING
 -- with count: close {n} fold levels
 -- without toggle current fold
-keymap("n", "^", function ()
+keymap("n", "^", function()
 	if vim.v.count == 0 then
 		return "za"
 	else
@@ -139,7 +134,6 @@ keymap(
 	function() require("replacer").run { rename_files = false } end,
 	{ desc = " Replacer.nvim" }
 )
-
 
 -- Comments & Annotations
 keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })
@@ -171,18 +165,23 @@ end
 keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Spelling (mnemonic: [z]pe[l]ling)
+
+local function valeWord(mode)
+	local word = expand("<cword>")
+	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
+	if not success then return end -- error message already by AppendToFile
+	cmd.edit() -- reload file for diagnostics to take effect
+	vim.notify("暈Now " .. mode .. "ing:\n" .. word)
+end
+
 keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "暈suggest" })
 keymap("n", "za", "mz]s1z=`z", { desc = "暈autofix" }) -- [a]utofix word under cursor
-keymap("n", "zg", function()
-	local word = expand("<cword>")
-	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/accept.txt")
-	if not success then return end -- error message already by AppendToFile
-	vim.notify("暈Now accepting:\n" .. word)
-end, { desc = "暈Add to accepted words (vale)" })
+keymap("n", "zg", function() valeWord("accept") end, { desc = "暈Add to accepted words (vale)" })
 keymap("n", "zw", function()
 	local word = expand("<cword>")
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/reject.txt")
 	if not success then return end
+	cmd.edit() -- reload file for diagnostics to take effect
 	vim.notify(word .. "暈Now rejecting:\n")
 end, { desc = "暈Add to rejected words (vale)" })
 
@@ -202,8 +201,8 @@ keymap("n", "Ü", function () require('sibling-swap').swap_with_left() end, { de
 autocmd("FileType", {
 	pattern = {"markdown", "text", "gitcommit"},
 	callback = function()
-		keymap("n", "ü", '"zdawel"zph', { desc = "壟 Move Word Right", buffer = true })	
-		keymap("n", "Ü", '"zdawbh"zph', { desc = "鹿 Move Word Left", buffer = true })	
+		keymap("n", "ü", '"zdawel"zph', { desc = "壟 Move Word Right", buffer = true })
+		keymap("n", "Ü", '"zdawbh"zph', { desc = "鹿 Move Word Left", buffer = true })
 	end,
 })
 -- stylua: ignore end
@@ -501,8 +500,13 @@ keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = " Add Hunk" })
 keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = " Reset Hunk" })
 keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" })
 
-keymap("n", "<leader>gs", function () cmd.Telescope("git_status") end, { desc = " Status (Telescope)" })
-keymap("n", "<leader>gl", function () cmd.Telescope("git_commit") end, { desc = " Log (Telescope)" })
+keymap(
+	"n",
+	"<leader>gs",
+	function() cmd.Telescope("git_status") end,
+	{ desc = " Status (Telescope)" }
+)
+keymap("n", "<leader>gl", function() cmd.Telescope("git_commit") end, { desc = " Log (Telescope)" })
 
 -- stylua: ignore start
 keymap({ "n", "x" }, "<leader>gl", function () require("funcs.git-utils").gitLink() end, { desc = " Link" })
