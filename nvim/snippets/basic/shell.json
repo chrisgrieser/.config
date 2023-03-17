@@ -71,7 +71,7 @@
 		"prefix": "xargs (for each line)",
 		"body": "xargs -I {} ${1:some_cmd} '{}'"
 	},
-		"notify (var)": {
+	"notify (var)": {
 		"prefix": "notify (var)",
 		"body": "osascript -e \"display notification \\\"\\\" with title \\\"$${1:var}\\\"\""
 	},
@@ -158,8 +158,13 @@
 		"description": "for loop in list"
 	},
 	"play sound": {
-		"prefix": ["play sound", "audio"],
-		"body": "afplay /System/Library/Sounds/${1:Purr}.aiff"
+		"prefix": [
+			"play sound",
+			"audio",
+			"afplay"
+		],
+		"body": "afplay \"/System/Library/Sounds/${1:Purr}.aiff\" &",
+		"desc": "Running in the background to not block during sound playing"
 	},
 	"while": {
 		"prefix": "while",

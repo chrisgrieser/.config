@@ -1,6 +1,6 @@
 {
 	"VS Code Snippet (short)": {
-		"prefix": "snippet (short)",
+		"prefix": "snippet",
 		"body": [
 			"\"${1:name}\": {",
 			"\t\"prefix\": \"${1:name}\",",
@@ -8,6 +8,10 @@
 			"},"
 		],
 		"description": "VS Code Snippet (short)"
+	},
+	"desc key": {
+		"prefix": "desc",
+		"body": "\"desc\": \"$0\""
 	},
 	"VS Code Snippet (long)": {
 		"prefix": "snippet (long)",

@@ -196,8 +196,16 @@ keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc 
 
 -- Node S[w]apping
 -- stylua: ignore start
-keymap("n", "ü", function () require('sibling-swap').swap_with_right() end, { desc = "弄 Swap Siblings" })
-keymap("n", "Ü", function () require('sibling-swap').swap_with_left() end, { desc = "弄 Swap Siblings" })
+keymap("n", "ü", function () require('sibling-swap').swap_with_right() end, { desc = "壟 Move Node Right" })
+keymap("n", "Ü", function () require('sibling-swap').swap_with_left() end, { desc = "鹿 Move Node Left" })
+
+autocmd("FileType", {
+	pattern = {"markdown", "text", "gitcommit"},
+	callback = function()
+		keymap("n", "ü", '"zdawel"zph', { desc = "壟 Move Word Right", buffer = true })	
+		keymap("n", "Ü", '"zdawbh"zph', { desc = "鹿 Move Word Left", buffer = true })	
+	end,
+})
 -- stylua: ignore end
 
 -- search & replace
