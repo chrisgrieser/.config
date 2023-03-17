@@ -110,9 +110,9 @@ keymap("n", "^", function ()
 		require("ufo").closeFoldsWith(vim.v.count)
 	end
 end, { desc = "ﬕ Toggle fold / Close {n} foldlevels", expr = true })
-keymap("n", "zR", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
-keymap("n", "zM", function() require("ufo").closeAllFolds() end, { desc = "  Close all folds" })
--- keymap("n", "z1", ":%foldclose<CR>", { desc = "ﬕ Fold only topmopst level" })
+keymap("n", "zr", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
+keymap("n", "zm", function() require("ufo").closeAllFolds() end, { desc = "  Close all folds" })
+keymap("n", "zz", ":%foldclose<CR>", { desc = "ﬕ Close toplevel folds" })
 
 -- [M]atchIt
 -- remap needed, since using the builtin matchit plugin
