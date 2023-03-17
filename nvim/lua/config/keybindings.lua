@@ -108,14 +108,13 @@ keymap("n", "m", "%", { remap = true, desc = "MatchIt" })
 -- without toggle current fold
 keymap("n", "^", function()
 	if vim.v.count == 0 then
-		return "za"
+		normal("za")
 	else
 		require("ufo").closeFoldsWith(vim.v.count - 1) -- -1 as topmost is foldlevel 0
-		return ""
 	end
-end, { desc = "ﬕ Toggle fold / Close {n} foldlevels", expr = true, nowait = true })
-keymap("n", "zr", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
-keymap("n", "zm", function() require("ufo").closeAllFolds() end, { desc = "  Close all folds" })
+end, { desc = "ﬕ Toggle fold / Close {n} foldlevels" })
+keymap("n", "zR", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
+keymap("n", "zM", function() require("ufo").closeAllFolds() end, { desc = "  Close all folds" })
 keymap("n", "zz", ":%foldclose<CR>zo", { desc = "ﬕ Close toplevel folds" })
 
 --------------------------------------------------------------------------------
@@ -527,7 +526,7 @@ keymap("n", "<leader>gd", function()
 		cmd.wincmd("w") -- go directly to file window
 		cmd.wincmd("|") -- maximize
 	end)
-end, { desc = " Diff (Diffview File History)" })
+end, { desc = " File History (Diffview)" })
 
 --------------------------------------------------------------------------------
 

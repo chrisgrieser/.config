@@ -36,11 +36,19 @@
 			"end"
 		]
 	},
-	"guard clause ending": {
+	"then .. end": {
+		"prefix": "then .. end",
+		"body": [
+			"then",
+			"\t$0",
+			"end"
+		]
+	},
+	"return end": {
 		"prefix": "return end",
 		"body": "return end"
 	},
-	"guard clause ending (+)": {
+	"then return end": {
 		"prefix": "then return end",
 		"body": "then return end"
 	},
