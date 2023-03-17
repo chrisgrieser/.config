@@ -7,7 +7,7 @@ keymap("n", "g/", function()
 	local pattern = fn.getreg("z"):match('"(.-)"')
 	local url = "https://gitspartv.github.io/lua-patterns/?pattern=" .. pattern
 	fn.system("open '" .. url .. "'") -- opening method on macOS
-end, { desc = "Open next lua pattern in regex viewer", buffer = true })
+end, { desc = " Open lua pattern in regex viewer", buffer = true })
 
 -- Build
 keymap("n", "<leader>r", function()
@@ -15,7 +15,7 @@ keymap("n", "<leader>r", function()
 	local parentFolder = expand("%:p:h")
 	if parentFolder:find("nvim") then
 		cmd.source()
-		vim.notify(expand("%:r") .. " re-sourced.")
+		vim.notify(expand("%:r") .. " re-sourced")
 	elseif parentFolder:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
 	else
@@ -58,14 +58,14 @@ keymap("x", "<leader>li", function()
 	inspect(fn.getreg("z"))
 end, { desc = " inspect selection", buffer = true })
 
-vim.api.nvim_buf_create_user_command(0, "I", function(ctx) inspect(ctx.args) end, { nargs = "+" })
+api.nvim_buf_create_user_command(0, "I", function(ctx) inspect(ctx.args) end, { nargs = "+" })
 
 --------------------------------------------------------------------------------
 
--- 2) `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/?utm_source=share&utm_medium=web2x&context=3
-vim.api.nvim_buf_create_user_command(0, "II", function(ctx)
+-- 2) `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/
+api.nvim_buf_create_user_command(0, "II", function(ctx)
 	if not (expand("%:p"):find("nvim")) then
-		vim.notify("Not in a nvim directory", logError)
+		vim.notify("Not in a nvim directory.", logError)
 		return
 	end
 	os.remove("/tmp/nvim-cmd-output")
