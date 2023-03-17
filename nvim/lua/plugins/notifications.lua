@@ -98,5 +98,4 @@ return {
 	"rcarriga/nvim-notify",
 	lazy = false, -- not lazyloaded, so notifications on entry are still shown
 	config = config,
-	cond = vim.g.neovide, -- only load in GUI
 }

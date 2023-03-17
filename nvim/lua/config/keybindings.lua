@@ -111,6 +111,7 @@ keymap("n", "^", function()
 		return "za"
 	else
 		require("ufo").closeFoldsWith(vim.v.count - 1) -- -1 as topmost is foldlevel 0
+		return ""
 	end
 end, { desc = "ﬕ Toggle fold / Close {n} foldlevels", expr = true })
 keymap("n", "zr", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
