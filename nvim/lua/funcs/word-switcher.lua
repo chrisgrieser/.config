@@ -81,6 +81,7 @@ local filetypeSpecificWords = {
 	lua = {
 		{ "==", "~=" },
 		{ "nil", "{}" },
+		{ "lower", "upper" }, -- str:lower(), str:upper()
 		{ "..", "+", false }, -- for type mixup (one-way so + and - can still be swapped)
 		{ "if", "elseif", false },
 		{ "elseif", "else", false },
@@ -139,8 +140,6 @@ local filetypeSpecificWords = {
 	html = "css",
 }
 
---------------------------------------------------------------------------------
-
 local function fallbackFn ()
 	-- toggle capital/lowercase of word
 	vim.cmd.normal { 'mzlb~`z', bang = true }
@@ -149,6 +148,22 @@ end
 --------------------------------------------------------------------------------
 
 local M = {}
+
+local function checkAlternativeCasings(cword, ifWord, thenWord)
+	if cword == ifWord:lower() then
+		return thenWord:lower()
+	elseif cword == ifWord:upper() then
+		return thenWord:upper()
+	-- elseif cword == 
+	end
+
+	cword = "apple"
+
+end
+
+
+
+--------------------------------------------------------------------------------
 
 ---switches words under the cursor to their opposite, e.g. `true` to `false`
 function M.switch()
@@ -170,6 +185,8 @@ function M.switch()
 		table.insert(wordsToUse, v)
 	end
 
+	-----------------------------------------------------------------------------
+
 	-- remove word-delimiters for <cword>
 	local iskeywBefore = vim.opt.iskeyword:get()
 	vim.opt.iskeyword:remove { "_", "-", "." }
@@ -179,6 +196,8 @@ function M.switch()
 
 	local alphaNumericUnderCursor = cBigword:find("[%a%d]")
 	local word = alphaNumericUnderCursor and cword or cBigword
+
+	-----------------------------------------------------------------------------
 
 	local newWord
 	for _, pair in pairs(wordsToUse) do
