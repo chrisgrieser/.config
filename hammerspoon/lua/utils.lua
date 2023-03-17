@@ -227,8 +227,8 @@ function QuitApp(appNames)
 	for _, name in pairs(appNames) do
 		local appObj = hs.application.get(name)
 		if appObj then appObj:kill() end
-		-- SIC apparently, too many kill signals at once interfere with each other,
+		-- apparently, too many kill signals at once interfere with each other,
 		-- making this waiting necessary
-		hs.execute("sleep 0.05")
+		hs.execute("sleep 0.1")
 	end
 end

@@ -63,6 +63,7 @@ local function workLayout()
 		{ "Drafts", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
+		{ "Obsidian", nil, IMacDisplay, PseudoMaximized, nil, nil },
 	}
 	hs.layout.apply(layout)
 

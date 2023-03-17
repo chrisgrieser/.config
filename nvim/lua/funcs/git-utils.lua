@@ -113,7 +113,7 @@ local function shimmeringFocusBuild(commitMsg)
 	fn.jobstart('zsh "' .. buildscriptLocation .. '" "' .. commitMsg .. '"', gitShellOpts)
 end
 
-function M.amendNoEditPushforce()
+function M.amendNoEditPushForce()
 	if not isInGitRepo() then return end
 	vim.notify("  Amending…")
 	output = {}

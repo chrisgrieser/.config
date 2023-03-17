@@ -37,6 +37,7 @@ autocmd("TextChanged", {
 	end,
 })
 
+
 --------------------------------------------------------------------------------
 
 -- Section instead of function movement
