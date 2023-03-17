@@ -72,8 +72,11 @@ local function toggleObsidianSidebar(obsiWin)
 		-- half -> hide sidebar
 		-- pseudo-maximized -> show sidebar
 		-- max -> hide sidebar (since assuming Obsidian split)
-		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "expand" or "collapse"
-		OpenLinkInBackground("obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. mode .. "%28%29")
+		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "expand"
+			or "collapse"
+		OpenLinkInBackground(
+			"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. mode .. "%28%29"
+		)
 	end)
 end
 
@@ -170,11 +173,15 @@ end
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
 function AutoTile(winSrc)
-	if type(winSrc) == "string" and not AppIsRunning(winSrc) then return end
+	local wins
+	if type(winSrc) == "string" then
+		if not App(winSrc) then return end
+		wins = App(winSrc):allWindows()
+	else
+		wins = winSrc:getWindows()
+	end
 
-	local wins = (type(winSrc) ~= "string") and winSrc:getWindows() or App(winSrc):allWindows()
 	if #wins > 1 then BringAllToFront() end
-
 	if #wins == 0 and FrontAppName() == "Finder" then
 		-- prevent quitting when window is created imminently
 		RunWithDelays(0.4, function()
@@ -239,7 +246,7 @@ local function homeAction()
 	if #(hs.screen.allScreens()) > 1 then
 		moveCurWinToOtherDisplay()
 	elseif AppIsRunning("zoom.us") then
-		Alert("🔈/🔇") -- toggle mute
+		hs.alert("🔈/🔇") -- toggle mute
 		Keystroke({ "shift", "command" }, "A", 1, App("zoom.us"))
 	else
 		TwitterScrollUp()
@@ -250,10 +257,10 @@ local function endAction()
 	if #(hs.screen.allScreens()) > 1 then
 		moveCurWinToOtherDisplay()
 	elseif AppIsRunning("zoom.us") then
-		Alert("📹") -- toggle video
+		hs.alert("📹") -- toggle video
 		Keystroke({ "shift", "command" }, "V", 1, App("zoom.us"))
 	else
-		Alert("<Nop>")
+		hs.alert("<Nop>")
 	end
 end
 

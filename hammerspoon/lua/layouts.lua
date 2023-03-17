@@ -86,7 +86,6 @@ local function movieLayout()
 
 	OpenApp { "YouTube", "BetterTouchTool" }
 	QuitApp {
-		"Obsidian",
 		"Drafts",
 		"Neovide",
 		"neovide",
@@ -100,6 +99,7 @@ local function movieLayout()
 		"Alacritty",
 		"alacritty",
 		"Twitter",
+		"Obsidian",
 	}
 
 	print("🔲 MovieModeLayout: done")

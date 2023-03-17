@@ -1,10 +1,8 @@
 Hotkey = hs.hotkey.bind
-Alert = hs.alert.show
 Keystroke = hs.eventtap.keyStroke
 Aw = hs.application.watcher
 Wf = hs.window.filter
 Pw = hs.pathwatcher.new
-App = hs.application.get
 Applescript = hs.osascript.applescript
 UriScheme = hs.urlevent.bind
 TableContains = hs.fnutils.contains
@@ -148,7 +146,7 @@ function ScreenIsUnlocked()
 	local _, success = hs.execute(
 		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1'
 	)
-	return success == true
+	return success == true -- convert to Boolean
 end
 
 ---whether device has been idle
@@ -173,23 +171,33 @@ function Notify(...)
 	print("Notify: " .. out)
 end
 
+--------------------------------------------------------------------------------
+-- APP UTILS
+
+---get appObject
+---@param appName string (literal & exact match)
+---@return hs.application
+function App(appName)
+	return hs.application.find(appName, true, true)	
+end
+
 ---@return string|nil
 function FrontAppName() return hs.application.frontmostApplication():name() end
 
 ---@param appName string
 ---@return boolean
 function AppIsRunning(appName)
-	local app = hs.application.get(appName)
+	local app = App(appName)
 	return app ~= nil
 end
 
 ---If app is not running, will simply start the app instead
 ---@param appName string
 function RestartApp(appName)
-	local app = hs.application.get(appName)
+	local app = App(appName)
 	if app then app:kill() end
 	hs.timer.waitUntil(
-		function() return hs.application.get(appName) == nil end,
+		function() return App(appName) == nil end,
 		function() hs.application.open(appName) end,
 		0.1
 	)
@@ -198,7 +206,7 @@ end
 ---@param app string|hs.application appName or appObj of app to wait for
 ---@param callbackFn function function to execute when the app is available
 function AsSoonAsAppRuns(app, callbackFn)
-	if type(app) == "string" then app = hs.application.get(app) end
+	if type(app) == "string" then app = App(app) end
 	hs.timer.waitUntil(function()
 		local appRuns = app ~= nil
 		local windowAvailable = app and app:mainWindow()
@@ -210,14 +218,14 @@ end
 function OpenApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		local runs = hs.application.get(name) ~= nil
+		local runs = App(name) ~= nil
 		if not runs then hs.application.open(name) end
 	end
 end
 
 ---quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
 function QuitFinderIfNoWindow()
-	local finder = hs.application.get("Finder")
+	local finder = App("Finder")
 	if finder and #(finder:allWindows()) == 0 then finder:kill() end
 end
 
@@ -225,10 +233,7 @@ end
 function QuitApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		local appObj = hs.application.get(name)
+		local appObj = App(name)
 		if appObj then appObj:kill() end
-		-- apparently, too many kill signals at once interfere with each other,
-		-- making this waiting necessary
-		hs.execute("sleep 0.1")
 	end
 end

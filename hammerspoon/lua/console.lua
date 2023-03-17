@@ -70,6 +70,7 @@ function CleanupConsole()
 			or line:find("^<.*>$")
 			or line:find("%.%.%.")
 			or line:find("in upvalue")
+			or line:find("in function")
 		then
 			line = line:gsub("%*%* Warning:%s*", "WARN: ")
 			color = isDark and lightYellow or darkYellow

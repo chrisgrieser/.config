@@ -1,17 +1,18 @@
 local function indentation()
 	local out = ""
 	local usesSpaces = vim.bo.expandtab
+	local usesTabs = not vim.bo.expandtab
 	local ft = vim.bo.filetype
 	local spaceFiletypes = { "python", "yaml" }
 	local ignoredFiletypes = { "css", "markdown", "" }
-	if vim.tbl_contains(ignoredFiletypes, ft) or vim.fn.mode() == "i" or vim.bo.buftype ~= "" then
+	if vim.tbl_contains(ignoredFiletypes, ft) or vim.fn.mode() ~= "n" or vim.bo.buftype ~= "" then
 		return ""
 	end
 
-	-- non-default indentation
+	-- non-default indentation (e.g. changed via indent-o-matic)
 	if usesSpaces and not vim.tbl_contains(spaceFiletypes, ft) then
 		out = out .. tostring(bo.tabstop) .. " spaces"
-	elseif not usesSpaces and vim.tbl_contains(spaceFiletypes, ft) then
+	elseif usesTabs and vim.tbl_contains(spaceFiletypes, ft) then
 		out = out .. "tabs"
 	end
 
@@ -21,28 +22,25 @@ local function indentation()
 	local mixed = vim.fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then
-		out = out .. " st"
-	elseif hasSpaces and not usesSpaces then
-		out = out .. " s"
-	elseif hasTabs and usesSpaces then
-		out = out .. " t"
+		out = out .. " mixed"
+	elseif usesTabs and hasSpaces then
+		out = out .. " spaces"
+	elseif usesSpaces and hasTabs then
+		out = out .. " tabs"
 	end
 	if out ~= "" then out = " " .. out end
 	return out
 end
 
 -- show branch info only when *not* on main/master
-vim.api.nvim_create_augroup("branchChange", {})
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter", "TabEnter" }, {
-	group = "branchChange",
 	callback = function()
 		vim.g.cur_branch = vim.fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "")
 	end,
 })
 
 local function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
-	local branch = vim.g.cur_branch
-	local notMainBranch = branch ~= "main" and branch ~= "master"
+	local notMainBranch = vim.g.cur_branch ~= "main" and vim.g.cur_branch ~= "master"
 	local validFiletype = vim.bo.filetype ~= "help" -- vim help files are located in a git repo
 	return notMainBranch and validFiletype
 end
@@ -64,11 +62,11 @@ local function searchCounter()
 	local isStarSearch = searchTerm:find([[^\<.*\>$]])
 	if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
 	if total == 0 then return " 0 " .. searchTerm end
-	return " " .. current .. "/" .. total .. " " .. searchTerm
+	return (" %s/%s %s"):format(current, total, searchTerm)
 end
 
 local function clock()
-	if vim.opt.columns:get() < 120 then return "" end -- only show the clock when it covers my menubar clock
+	if vim.opt.columns:get() < 120 then return "" end -- only show the clock when it covers the menubar clock
 	local time = tostring(os.date()):sub(12, 16)
 
 	-- make the `:` blink
@@ -191,7 +189,7 @@ end
 -- nerdfont: icons with prefix 'ple-'
 -- stylua: ignore start
 local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
-local topSeparators = vim.g.neovide and { left = " ", right = "" } or { left = "", right = "" }
+local topSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 -- stylua: ignore end
 
 local lualineConfig = {
@@ -212,6 +210,11 @@ local lualineConfig = {
 		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
+			{
+				lspCountStatusline,
+				color = { fg = "grey" },
+				cond = function() return vim.v.hlsearch == 0 end,
+			},
 			{ searchCounter },
 			{ require("funcs.quickfix").counter },
 		},
@@ -221,7 +224,6 @@ local lualineConfig = {
 				symbols = { error = " ", warn = " ", info = " ", hint = "ﬤ " },
 			},
 			{ indentation },
-			{ lspCountStatusline, color = { fg = "grey" } },
 			{ lsp_progress },
 		},
 		lualine_y = {
@@ -235,10 +237,17 @@ local lualineConfig = {
 	},
 	winbar = {
 		lualine_a = {
-			{ clock },
+			{
+				clock,
+				section_separators = topSeparators,
+			},
 		},
 		lualine_b = {
-			{ require("nvim-navic").get_location, cond = require("nvim-navic").is_available, section_separators = topSeparators },
+			{
+				require("nvim-navic").get_location,
+				cond = require("nvim-navic").is_available,
+				section_separators = topSeparators,
+			},
 		},
 		lualine_c = {
 			{ function() return " " end, cond = require("nvim-navic").is_available }, -- dummy to avoid bar flickering
