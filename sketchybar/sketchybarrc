@@ -16,10 +16,10 @@ done
 i=0
 menu_items=$(sketchybar --query default_menu_items)
 while [[ ! "$menu_items" =~ Stats ]]; do
-	sleep 1
+	sleep 3
 	menu_items=$(sketchybar --query default_menu_items)
 	i=$((i + 1))
-	[[ $i -gt 30 ]] && exit 1
+	[[ $i -gt 20 ]] && exit 1
 done
 
 # globs are necessary, since the exact name of the menubar item changes a bit
@@ -28,6 +28,11 @@ network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*network.*" | head -n1 |
 cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | head -n1 | cut -d\" -f2)
 gpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*gpu" | head -n1 | cut -d\" -f2)
 ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*ram" | head -n1 | cut -d\" -f2)
+
+if [[ -z "$ram_bar_item" || -z "$cpu_bar_item" || -z "$gpu_bar_item" || -z "$network_bar_item" ]]; then
+	osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "not all Stats items are visible"'
+	exit 1
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
