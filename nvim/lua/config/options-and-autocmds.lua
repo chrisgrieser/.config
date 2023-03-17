@@ -58,7 +58,7 @@ opt.titlestring = '%{expand("%:p")}'
 
 -- Editor
 opt.cursorline = true
-opt.scrolloff = 11
+opt.scrolloff = 12
 opt.sidescrolloff = 13
 
 opt.textwidth = 80
@@ -95,25 +95,12 @@ opt.smartindent = true
 
 -- invisible chars
 opt.list = true
-opt.listchars = {
-	tab = "  ", -- needs two chars
-	multispace = "·",
-	nbsp = "ﮊ",
-	lead = "·",
-	leadmultispace = "·",
-	precedes = "…",
-	extends = "…",
-}
-opt.fillchars = {
-	eob = " ", -- no ~ for the eof
-	fold = " ", -- no dots for folds
-}
+opt.fillchars = { eob = " ", fold = " " } -- no dots for folds no ~ for the eof
 opt.showbreak = "↪ " -- precedes wrapped lines
 
--- to be used with an indent-detection plugin, so the listchars are also changed
--- accordingly
 autocmd("BufReadPost", {
 	callback = function()
+		cmd.IndentOMatic() -- trigger again to ensure it's run before determining spaces/tabs
 		local usesSpaces = bo.expandtab
 		if usesSpaces then
 			opt_local.listchars = {
@@ -178,9 +165,7 @@ local function remember(mode)
 		"help",
 		"qf",
 	}
-	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype ~= "" or not bo.modifiable then
-		return
-	end
+	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype ~= "" or not bo.modifiable then return end
 	if mode == "save" then
 		cmd.mkview(1)
 	else

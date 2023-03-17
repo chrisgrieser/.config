@@ -23,7 +23,7 @@ return {
 		event = "LspAttach",
 		config = function()
 			require("nvim-navic").setup {
-				icons = { Object = "ﴯ " },
+				icons = { Object = " " },
 				separator = "  ",
 				depth_limit = 8,
 				depth_limit_indicator = "…",

@@ -1,7 +1,7 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
--- COMMENT MARKS 
+-- COMMENT MARKS
 -- more useful than symbols for theme development
 bo.grepprg = "rg --vimgrep --no-column" -- remove columns
 keymap("n", "gs", function()
@@ -29,6 +29,13 @@ end, { desc = "Search CSS Variables", buffer = true })
 -- however, using treesitter, this is less of an issue, but treesitter css
 -- highlighting isn't good yet, so…
 keymap("n", "zz", ":syntax sync fromstart<CR>", { buffer = true })
+
+-- extra trigger for css files, to work with hot reloads
+autocmd("TextChanged", {
+	callback = function()
+		if bo.filetype == "css" then cmd.update(expand("%:p")) end
+	end,
+})
 
 --------------------------------------------------------------------------------
 
