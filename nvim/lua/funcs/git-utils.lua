@@ -51,6 +51,7 @@ local gitShellOpts = {
 		fn.system(
 			"afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &"
 		)
+		output = {} -- empty for next run
 	end,
 }
 
@@ -59,13 +60,18 @@ local gitShellOpts = {
 ---@return boolean is the commit message valid?
 ---@return string the (modified) commit message
 local function processCommitMsg(commitMsg)
+	-- ensure max 50 chars
 	if #commitMsg > 50 then
 		vim.notify("Commit Message too long.", logWarn)
 		local shortenedMsg = commitMsg:sub(1, 50)
 		return false, shortenedMsg
+
+	-- no commitMsg -> prefill just "chore"
 	elseif commitMsg == "" then
 		return true, "chore"
 	end
+
+	-- ensure conventional commits
 	-- stylua: ignore
 	local cc = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
 	local firstWord = commitMsg:match("^%w+")
@@ -73,6 +79,8 @@ local function processCommitMsg(commitMsg)
 		vim.notify("Not using a Conventional Commits keyword.", logWarn)
 		return false, commitMsg
 	end
+
+	-- message ok
 	return true, commitMsg
 end
 
@@ -143,20 +151,36 @@ local function shimmeringFocusBuild(commitMsg)
 end
 
 ---amend
----@param noedit any
-function M.amendAndPushForce(noedit)
+---@param mode? string no-edit|edit
+---@param prefillMsg? string
+function M.amendAndPushForce(mode, prefillMsg)
 	if not isInGitRepo() then return end
-	output = {}
-	if noedit then
-		vim.notify(" Amend-No-Edit & Force Push")
+	if mode == "no-edit" then
+		vim.notify(" Amend-No-Edit & Force Push…")
 		fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
-	else
-		local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
-		vim.ui.input({prompt = "Amend", default = commitMsg}, function (commitMsg)
-			
-		end)
-		vim.notify(" Amend & Force Push")
+		return
 	end
+
+	if not prefillMsg then
+		local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
+		prefillMsg = lastCommitMsg
+	end
+
+	vim.ui.input({ prompt = "Amend:", default = prefillMsg }, function(commitMsg)
+		if not commitMsg then return end -- aborted input modal
+		local validMsg, newMsg = processCommitMsg(commitMsg)
+
+		if not validMsg then -- if msg invalid, run again to fix the msg
+			M.amendAndPushForce("edit", newMsg)
+			return
+		end
+
+		vim.notify(" Amend & Force Push…")
+		fn.jobstart(
+			"git add -A && git commit --amend -m '" .. newMsg .. "' ; git push --force",
+			gitShellOpts
+		)
+	end)
 end
 
 ---@param prefillMsg? string
@@ -165,14 +189,12 @@ function M.addCommitPush(prefillMsg)
 
 	if not prefillMsg then prefillMsg = "" end
 
-	vim.ui.input({ prompt = "Commit Message", default = prefillMsg }, function(commitMsg)
+	vim.ui.input({ prompt = "Commit Message:", default = prefillMsg }, function(commitMsg)
 		if not commitMsg then return end -- aborted input modal
-
 		local validMsg, newMsg = processCommitMsg(commitMsg)
 
-		-- if msg invalid, run again to fix the msg
-		if not validMsg then
-			M.addCommitPush(newMsg)			
+		if not validMsg then -- if msg invalid, run again to fix the msg
+			M.addCommitPush(newMsg)
 			return
 		end
 
@@ -183,14 +205,14 @@ function M.addCommitPush(prefillMsg)
 		end
 
 		vim.notify(' git add-commit-push\n"' .. newMsg .. '"')
-		output = {}
 		fn.jobstart(
-			"git add -A && git commit -m '" .. newMsg .. "' ; git pull ; git push",
+			"git add -A && git commit -m '" .. newMsg .. "' ; git pull ; git push --force",
 			gitShellOpts
 		)
 	end)
 end
 
+---opens current buffer in the browser & copies the link to the clipboard
 ---normal mode: link to file
 ---visual mode: link to selected lines
 function M.gitLink()
@@ -199,6 +221,8 @@ function M.gitLink()
 	local filepath = expand("%:p")
 	local gitroot = fn.system([[git --no-optional-locks rev-parse --show-toplevel]])
 	local pathInRepo = filepath:sub(#gitroot)
+	local remote = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1")
+	local branch = fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", "")
 
 	local location
 	local selStart = fn.line("v")
@@ -214,15 +238,10 @@ function M.gitLink()
 		location = "#L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
 	end
 
-	local gitRemote = "https://github.com/"
-		.. fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git .*", "%1")
-		.. "/blob/"
-		.. fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", "")
-		.. pathInRepo
+	local url = string.format("https://github.com/%s/blob/%s/%s%s", remote, branch, pathInRepo, location)
 
-	local resultUrl = gitRemote .. location
-	os.execute("open '" .. resultUrl .. "'")
-	fn.setreg("+", resultUrl)
+	os.execute("open '" .. url .. "'") -- open in browser (macOS cli)
+	fn.setreg("+", url) -- copy to clipboard
 end
 
 --------------------------------------------------------------------------------
