@@ -53,7 +53,7 @@ return {
 	},
 	{ -- autopair, but for keywords
 		"RRethy/nvim-treesitter-endwise",
-		event = "InsertEnter",
+		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- swapping of sibling nodes (works with more nodes than Iswap, but has no hint mode)
