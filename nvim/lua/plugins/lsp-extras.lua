@@ -1,16 +1,15 @@
-
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local bufnr = args.buf
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local capabilities = client.server_capabilities
 
-		if capabilities.inlayHintProvider then require("lsp-inlayhints").on_attach(client, bufnr) end
-
 		-- navic not that useful for css
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
 			require("nvim-navic").attach(client, bufnr)
 		end
+
+		if capabilities.inlayHintProvider then require("lsp-inlayhints").on_attach(client, bufnr) end
 	end,
 })
 
@@ -19,8 +18,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 return {
 	{ -- breadcrumbs for statusline/winbar
 		"SmiteshP/nvim-navic",
-		-- loading on require results in ignoring the config, therefore loading on LspAttach already
-		event = "LspAttach",
+		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
 		config = function()
 			require("nvim-navic").setup {
 				icons = { Object = " " },
