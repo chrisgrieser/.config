@@ -95,8 +95,9 @@ function M.overscroll(action)
 		if (lastLine - curLine) <= vim.wo.scrolloff then normal("zz") end
 	end
 
+-- if action includes a count
 	local usedCount = vim.v.count1
-	local actionCount = action:match("%d+") -- if action includes a count
+	local actionCount = action:match("%d+") 
 	if actionCount then
 		action = action:gsub("%d+", "")
 		usedCount = tonumber(actionCount) * usedCount

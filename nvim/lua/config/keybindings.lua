@@ -120,7 +120,7 @@ keymap("n", "^", function ()
 end, { desc = "ﬕ Toggle fold / Close {n} foldlevels", expr = true })
 keymap("n", "zr", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
 keymap("n", "zm", function() require("ufo").closeAllFolds() end, { desc = "  Close all folds" })
-keymap("n", "zz", ":%foldclose<CR>", { desc = "ﬕ Close toplevel folds" })
+keymap("n", "zz", ":%foldclose<CR>zo", { desc = "ﬕ Close toplevel folds" })
 
 --------------------------------------------------------------------------------
 -- EDITING
