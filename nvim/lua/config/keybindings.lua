@@ -316,8 +316,9 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 -- Harpoon
 keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "ﯠ Next" })
 -- stylua: ignore start
-keymap("n", "g<CR>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
-keymap("n", "<leader><CR>", function() require("harpoon.mark").add_file() end, { desc = "ﯠ Add File" })
+-- consistent with adding/removing bookmarks in the Browser/Obsidian
+keymap("n", "<D-d>", function() require("harpoon.mark").add_file() end, { desc = "ﯠ Add File" })
+keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
 -- stylua: ignore end
 
 ------------------------------------------------------------------------------
