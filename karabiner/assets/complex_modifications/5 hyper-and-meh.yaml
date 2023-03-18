@@ -1,18 +1,18 @@
-title: ⇪ Hyper and ↹ Meh Key ↹ 
+title: ⇪ Hyper and ↹ Meh Key ↹
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪ Capslock  → Hyper/Esc"
     manipulators:
       - type: basic
-        from: {key_code: caps_lock}
+        from: { key_code: caps_lock }
         to_if_alone:
           - key_code: escape
         to:
-          - {key_code: right_shift, modifiers: [control, option, command]}
+          - { key_code: right_shift, modifiers: [control, option, command] }
       # Map Esc to F18
       - type: basic
-        from: {key_code: escape}
+        from: { key_code: escape }
         to_if_alone:
           - key_code: f18
         # INFO condition to avoid conflict with finder-vim-mode; mapping to f18
@@ -24,27 +24,27 @@ rules:
               - ^mindustry\.mac$
       # disable systemdiagnosis via `Hyper+,`
       - type: basic
-        from: {key_code: comma, modifiers: {mandatory: [command, control, shift, option]}}
+        from: { key_code: comma, modifiers: { mandatory: [command, control, shift, option] } }
         to:
           - key_code: vk_none
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "*️⃣ ⇪ Tab  → Meh/Tab"
+  - description: "*️⃣  ↹  Tab  → Meh/Tab"
     manipulators:
       - type: basic
-        from: {key_code: tab}
+        from: { key_code: tab }
         to_if_alone:
           - key_code: tab
         to:
-          - {key_code: right_shift, modifiers: [control, option]}
+          - { key_code: right_shift, modifiers: [control, option] }
         conditions:
           - type: frontmost_application_unless
             bundle_identifiers: [^mindustry\.mac$]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "*️⃣  \U0001F4C2 Open Locations"
+  - description: "*️⃣  ⇪ Open Locations"
     manipulators:
       # Hyper + ⌫ = Open Trash
       - type: basic
-        from: {key_code: delete_or_backspace, modifiers: {mandatory: [command, control, shift, option]}}
+        from: { key_code: delete_or_backspace, modifiers: { mandatory: [command, control, shift, option] } }
         to:
           - shell_command: | # opens the unified trash (iCloud trash + user trash)
               osascript -e'
@@ -59,7 +59,7 @@ rules:
                 '
       # Hyper + F: Open $WD / $DOTFILE_FOLDER
       - type: basic
-        from: {key_code: f, modifiers: {mandatory: [command, control, shift, option]}}
+        from: { key_code: f, modifiers: { mandatory: [command, control, shift, option] } }
         to:
           - shell_command: |
               osascript -e '
@@ -83,10 +83,10 @@ rules:
                   end if
                 end tell'
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "*️⃣  \U0001F4C2 Restart App"
+  - description: "*️⃣ ⇪ Restart App"
     manipulators:
       - type: basic
-        from: {key_code: r, modifiers: {mandatory: [command, control, shift, option]}}
+        from: { key_code: r, modifiers: { mandatory: [command, control, shift, option] } }
         to:
           # INFO not done via Alfred because of https://github.com/neovide/neovide/issues/1604
           # INFO Quitting via wqall instead of cmd+Q so bufferleaving autocmds are triggered
@@ -110,7 +110,7 @@ rules:
               fi
       # Restart Alfred
       - type: basic
-        from: {key_code: "5", modifiers: {mandatory: [command, control, shift, option]}}
+        from: { key_code: "5", modifiers: { mandatory: [command, control, shift, option] } }
         to:
           - shell_command: |
               osascript -e 'display notification "" with title "Restarting Alfred…"'
@@ -124,41 +124,41 @@ rules:
   - description: "Insert Mode Vim: ⇪ Hyper + hjklion<space> → ⌫←↓↑→"
     manipulators:
       - type: basic
-        from: {key_code: "n", modifiers: {mandatory: [option, shift, command, control]}}
+        from: { key_code: "n", modifiers: { mandatory: [option, shift, command, control] } }
         to:
           - key_code: delete_or_backspace
       - type: basic
-        from: {key_code: h, modifiers: {mandatory: [option, shift, command, control]}}
+        from: { key_code: h, modifiers: { mandatory: [option, shift, command, control] } }
         to:
           - key_code: left_arrow
       - type: basic
-        from: {key_code: j, modifiers: {mandatory: [option, shift, command, control]}}
+        from: { key_code: j, modifiers: { mandatory: [option, shift, command, control] } }
         to:
           - key_code: down_arrow
       - type: basic
-        from: {key_code: k, modifiers: {mandatory: [option, shift, command, control]}}
+        from: { key_code: k, modifiers: { mandatory: [option, shift, command, control] } }
         to:
           - key_code: up_arrow
       - type: basic
-        from: {key_code: l, modifiers: {mandatory: [option, shift, command, control]}}
+        from: { key_code: l, modifiers: { mandatory: [option, shift, command, control] } }
         to:
           - key_code: right_arrow
       # word to the left
       - type: basic
-        from: {key_code: i, modifiers: {mandatory: [option, shift, command, control]}}
+        from: { key_code: i, modifiers: { mandatory: [option, shift, command, control] } }
         to:
-          - {key_code: left_arrow, modifiers: [option]}
+          - { key_code: left_arrow, modifiers: [option] }
       # word to the right
       - type: basic
-        from: {key_code: o, modifiers: {mandatory: [option, shift, command, control]}}
+        from: { key_code: o, modifiers: { mandatory: [option, shift, command, control] } }
         to:
-          - {key_code: right_arrow, modifiers: [option]}
+          - { key_code: right_arrow, modifiers: [option] }
       # delete word (use ⌘J from utility hotkeys for changing a word)
       - type: basic
-        from: {key_code: spacebar, modifiers: {mandatory: [option, shift, command, control]}}
+        from: { key_code: spacebar, modifiers: { mandatory: [option, shift, command, control] } }
         to:
-          - {key_code: right_arrow, modifiers: [option]} # to the right end of the word
-          - {key_code: left_arrow, modifiers: [option, shift]} # select to the left end
+          - { key_code: right_arrow, modifiers: [option] } # to the right end of the word
+          - { key_code: left_arrow, modifiers: [option, shift] } # select to the left end
           - key_code: delete_or_backspace # delete the selection
           - key_code: delete_or_backspace # delete the space
           - key_code: right_arrow # go to next word

@@ -11,7 +11,6 @@ GIT_OPTIONAL_LOCKS=0
 cd "$DOTFILE_FOLDER" || configError="repo-path wrong"
 dotChanges=$(git status --short | wc -l | tr -d " ")
 git status --short | grep -q " m " && submodulesChanges=1
-echo "(log) dotChanges: $dotChanges"
 
 cd "$VAULT_PATH" || configError="repo-path wrong"
 vaultChanges=$(git status --porcelain | wc -l | tr -d " ")
@@ -27,6 +26,6 @@ passChanges2=$(git status --porcelain --branch | grep -Eo "\d") # to check for a
 [[ "$passChanges1" -ne 0 ]] && label="$label${passChanges1}p"
 [[ -n "$passChanges2" ]] && label="$label${passChanges2}p"
 [[ -n "$label" ]] && icon=" "
-[[ $submodulesChanges -eq 1 ]] && icon=" "
+[[ $submodulesChanges -eq 1 ]] && icon=" "
 
 sketchybar --set "$NAME" icon="$icon" label="$label$configError"

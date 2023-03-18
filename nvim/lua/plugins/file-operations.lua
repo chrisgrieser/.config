@@ -30,7 +30,7 @@ return {
 				detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp
 				patterns = {
 					".git",
-					"package.json", -- node projects
+					"manifest.json", -- node projects
 					"=File Hub", -- my general-inbox-working-directory
 					"info.plist", -- Alfred workflows
 					".stylua.toml", -- lua projects

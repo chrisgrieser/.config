@@ -42,15 +42,13 @@ return {
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
 
-				-- before: (|)			after: ( | )
-				rule(" ", " "):with_pair(function(opts)
-					local pair = opts.line:sub(opts.col - 1, opts.col)
-					return vim.tbl_contains({ "()", "[]", "{}" }, pair)
-				end),
 				-- before: () =>|		after: () => { | }
 				rule("%(.*%)%s*%=>$", " {  }", { "typescript", "javascript" })
 					:use_regex(true)
 					:set_end_pair_length(2),
+
+				-- INFO adding a rule autopairing space will disable space
+				-- triggering `:abbrev` 
 			}
 
 			-- add brackets to cmp completions, e.g. "function" -> "function()"

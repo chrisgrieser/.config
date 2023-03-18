@@ -25,6 +25,7 @@ function CheckSize(win, size)
 		"Transmission",
 		"Twitter",
 		"Alfred",
+		"Hammerspoon",
 	}
 	if not win or TableContains(invalidWinsByTitle, win:title()) then return nil end
 
@@ -131,10 +132,10 @@ function MoveResize(win, pos)
 	then
 		return
 	end
-	local appsToIgnore = { "System Settings", "Twitter", "Transmission", "Alfred" }
+	local appsToIgnore = { "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon" }
 	local appName = win:application():name()
 	if TableContains(appsToIgnore, appName) then
-		Notify(appName .. " cannot be resized properly.")
+		Notify("⚠️ " .. appName .. " cannot be resized properly.")
 		return
 	end
 

@@ -1,15 +1,15 @@
 {
-	"keymap": {
-		"prefix": "keymap",
-		"body": "keymap(\"n\", \"${1:LHS}\", ${2:RHS}, { desc = \"$3\" })"
+	"Keymap": {
+		"prefix": "Keymap",
+		"body": "Keymap(\"n\", \"${1:LHS}\", ${2:RHS}, { desc = \"$3\" })"
 	},
-	"keymap (multi mode)": {
-		"prefix": "keymap (multi-mode)",
-		"body": "keymap({ \"n\", \"x\" }, \"${1:LHS}\", ${2:RHS}, { desc = \"$3\" })"
+	"Keymap (multi mode)": {
+		"prefix": "Keymap (multi-mode)",
+		"body": "Keymap({ \"n\", \"x\" }, \"${1:LHS}\", ${2:RHS}, { desc = \"$3\" })"
 	},
-	"keymap (buffer)": {
-		"prefix": "keymap (buffer)",
-		"body": "keymap(\"n\", \"${1:LHS}\", ${2:RHS}, { desc = \"$3\", buffer = true })"
+	"Keymap (buffer)": {
+		"prefix": "Keymap (buffer)",
+		"body": "Keymap(\"n\", \"${1:LHS}\", ${2:RHS}, { desc = \"$3\", buffer = true })"
 	},
 	"buffer arg for keymap": {
 		"prefix": "buffer = true",
@@ -35,9 +35,9 @@
 		]
 	},
 	"autocmd": {
-		"prefix": "autocmd (short)",
+		"prefix": "Autocmd (short)",
 		"body": [
-			"autocmd(\"${1:event}\", {",
+			"Autocmd(\"${1:event}\", {",
 			"\tcallback = function()",
 			"\t\t$0",
 			"\tend,",
@@ -45,7 +45,7 @@
 		]
 	},
 	"autocmd (unabbr)": {
-		"prefix": "autocmd (unabbr)",
+		"prefix": "Autocmd (unabbr)",
 		"body": [
 			"vim.api.nvim_create_autocmd(\"${1:event}\", {",
 			"\tcallback = function()",
@@ -55,9 +55,9 @@
 		]
 	},
 	"autocmd (FileType)": {
-		"prefix": "autocmd (FileType)" ,
+		"prefix": "Autocmd (FileType)" ,
 		"body": [
-			"autocmd(\"FileType\", {",
+			"Autocmd(\"FileType\", {",
 			"\tpattern = \"${2:ft}\",",
 			"\tcallback = function()",
 			"\t\t$3",

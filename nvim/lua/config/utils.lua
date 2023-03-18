@@ -6,7 +6,6 @@ GetCursor = vim.api.nvim_win_get_cursor
 SetCursor = vim.api.nvim_win_set_cursor
 Keymap = vim.keymap.set
 Expand = vim.fn.expand
-Abbrev = vim.cmd.noreabbrev
 Iabbrev = vim.cmd.inoreabbrev
 
 LogError = vim.log.levels.ERROR
