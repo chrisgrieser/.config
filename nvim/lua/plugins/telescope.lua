@@ -17,7 +17,7 @@ local function telescopeConfig()
 			prompt_prefix = "❱ ",
 			multi_icon = "洛",
 			preview = {
-				filesize_limit = 3, -- in MB, do not preview big files for performance
+				filesize_limit = 2, -- in MB, do not preview big files for performance
 				msg_bg_fillchar = " ",
 			},
 			path_display = { "tail" },

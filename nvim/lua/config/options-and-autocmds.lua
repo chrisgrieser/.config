@@ -95,9 +95,9 @@ opt.sidescrolloff = 13
 -- https://github.com/Aasim-A/scrollEOF.nvim/blob/master/lua/scrollEOF.lua#L11
 Autocmd("CursorMoved", {
 	callback = function()
-		if bo.filetype == "DressingSelect" then return end
+		if Bo.filetype == "DressingSelect" then return end
 
-		local win_height = api.nvim_win_get_height(0)
+		local win_height = vim.api.nvim_win_get_height(0)
 		local win_view = Fn.winsaveview()
 		local scrolloff = math.min(opt.scrolloff:get(), math.floor(win_height / 2))
 		local scrolloff_line_count = win_height - (Fn.line("w$") - win_view.topline + 1)
@@ -137,7 +137,7 @@ opt.listchars = {
 Autocmd("BufReadPost", {
 	callback = function()
 		Cmd.IndentOMatic() -- trigger again to ensure it's run before determining spaces/tabs
-		local usesSpaces = bo.expandtab
+		local usesSpaces = Bo.expandtab
 		if usesSpaces then
 			opt_local.listchars:append { tab = " >" }
 			opt_local.listchars:append { multispace = " " }
@@ -153,7 +153,7 @@ Autocmd("BufReadPost", {
 Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
 	callback = function()
-		if not bo.readonly and Expand("%") ~= "" and bo.buftype == "" and bo.filetype ~= "gitcommit" then
+		if not Bo.readonly and Expand("%") ~= "" and Bo.buftype == "" and Bo.filetype ~= "gitcommit" then
 			Cmd.update(Expand("%:p"))
 		end
 	end,
@@ -193,7 +193,7 @@ local function remember(mode)
 		"help",
 		"qf",
 	}
-	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype ~= "" or not bo.modifiable then return end
+	if vim.tbl_contains(ignoredFts, Bo.filetype) or Bo.buftype ~= "" or not Bo.modifiable then return end
 	if mode == "save" then
 		Cmd.mkview(1)
 	else

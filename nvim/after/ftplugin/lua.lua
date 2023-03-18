@@ -41,8 +41,8 @@ local function inspect(strToInspect)
 			on_open = function(win) -- enable treesitter highlighting in the notification
 				local outputIsStr = output:find('^"') and output:find('"$')
 				if not outputIsStr then
-					local buf = api.nvim_win_get_buf(win)
-					api.nvim_buf_set_option(buf, "filetype", "lua")
+					local buf = vim.api.nvim_win_get_buf(win)
+					vim.api.nvim_buf_set_option(buf, "filetype", "lua")
 				end
 			end,
 		})
@@ -58,12 +58,12 @@ Keymap("x", "<leader>li", function()
 	inspect(Fn.getreg("z"))
 end, { desc = " inspect selection", buffer = true })
 
-api.nvim_buf_create_user_command(0, "I", function(ctx) inspect(ctx.args) end, { nargs = "+" })
+vim.api.nvim_buf_create_user_command(0, "I", function(ctx) inspect(ctx.args) end, { nargs = "+" })
 
 --------------------------------------------------------------------------------
 
 -- 2) `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/
-api.nvim_buf_create_user_command(0, "II", function(ctx)
+vim.api.nvim_buf_create_user_command(0, "II", function(ctx)
 	if not (Expand("%:p"):find("nvim")) then
 		vim.notify("Not in a nvim directory.", LogError)
 		return
@@ -73,7 +73,7 @@ api.nvim_buf_create_user_command(0, "II", function(ctx)
 	local lines = vim.split(output, "\n", { plain = true }) ---@diagnostic disable-line: param-type-mismatch
 	Cmd.vsplit()
 	Cmd.ene()
-	bo.filetype = "lua"
-	api.nvim_buf_set_lines(0, 0, -1, false, lines)
+	Bo.filetype = "lua"
+	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 	Cmd.write { "/tmp/nvim-cmd-output.lua", bang = true }
 end, { nargs = "+" })

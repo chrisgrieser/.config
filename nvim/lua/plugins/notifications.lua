@@ -85,8 +85,8 @@ local function config()
 		-- enable treesitter highlighting in the notification
 		if includesTable then
 			notifyOpts.on_open = function(win)
-				local buf = api.nvim_win_get_buf(win)
-				api.nvim_buf_set_option(buf, "filetype", "lua")
+				local buf = vim.api.nvim_win_get_buf(win)
+				vim.pi.nvim_buf_set_option(buf, "filetype", "lua")
 			end
 		end
 

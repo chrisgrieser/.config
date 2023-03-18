@@ -11,11 +11,11 @@ local function indentation()
 
 	-- non-default indentation (e.g. changed via indent-o-matic)
 	if usesSpaces and not vim.tbl_contains(spaceFiletypes, ft) then
-		out = out .. tostring(bo.tabstop) .. " spaces"
+		out = out .. tostring(vim.bo.tabstop) .. " spaces"
 	elseif usesTabs and vim.tbl_contains(spaceFiletypes, ft) then
-		out = out .. "tabs"
-	elseif usesTabs and bo.tabstop ~= vim.opt.tabstop:get() then
-		out = out .. " tabwidth " .. bo.tabstop
+		out = out .. "↹ "
+	elseif usesTabs and vim.bo.tabstop ~= vim.opt.tabstop:get() then
+		out = out .. " tabwidth " .. vim.bo.tabstop
 	end
 
 	-- mixed indentation
