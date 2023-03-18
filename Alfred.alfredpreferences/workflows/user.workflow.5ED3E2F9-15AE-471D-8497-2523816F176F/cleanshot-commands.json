@@ -6,8 +6,8 @@
 			"uid": "0"
 		},
 		{
-			"title": "Previous Area",
-			"arg": "cleanshot://capture-previous-area",
+			"title": "Annotate Image in Clipboard",
+			"arg": "cleanshot://open-from-clipboard",
 			"uid": "1"
 		},
 		{
