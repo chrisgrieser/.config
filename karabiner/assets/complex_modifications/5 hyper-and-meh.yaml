@@ -1,4 +1,4 @@
-title: ⇪ Hyper and ↹ Meh Key ↹
+title: ⇪ Hyper and ↹ Meh Key
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
   #─────────────────────────────────────────────────────────────────────────────
@@ -23,13 +23,34 @@ rules:
               - ^com\.apple\.finder$
               - ^mindustry\.mac$
       # disable accidental triggering of systemdiagnosis via `Hyper+.` and
-      # `Hyper+,`
+      # `Hyper+,`. Needs different versions to disable it for variants from
+      # quick typing
       - type: basic
         from: { key_code: period, modifiers: { mandatory: [command, control, shift, option] } }
         to:
           - key_code: vk_none
       - type: basic
         from: { key_code: comma, modifiers: { mandatory: [command, control, shift, option] } }
+        to:
+          - key_code: vk_none
+      - type: basic
+        from:
+          simultaneous:
+            - key_code: command
+            - key_code: shift
+            - key_code: control
+            - key_code: option
+            - key_code: period
+        to:
+          - key_code: vk_none
+      - type: basic
+        from:
+          simultaneous:
+            - key_code: command
+            - key_code: shift
+            - key_code: control
+            - key_code: option
+            - key_code: comma
         to:
           - key_code: vk_none
   #─────────────────────────────────────────────────────────────────────────────

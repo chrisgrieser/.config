@@ -75,10 +75,7 @@ end
 local function clock()
 	if vim.opt.columns:get() < 120 then return "" end -- only show the clock when it covers the menubar clock
 	local time = tostring(os.date()):sub(12, 16)
-
-	-- make the `:` blink
-	if os.time() % 2 == 1 then time = time:gsub(":", " ") end
-
+	if os.time() % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
 	return time
 end
 

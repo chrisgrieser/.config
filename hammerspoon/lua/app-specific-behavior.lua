@@ -205,6 +205,7 @@ Wf_finder = Wf.new("Finder")
 			"^Quick Look$",
 			"^Move$",
 			"^Copy$",
+			"^Bin$",
 			"^Delete$",
 			"^Finder Settings$",
 			" Info$", -- Info window *end* with "Info"

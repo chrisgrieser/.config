@@ -20,6 +20,7 @@ function CheckSize(win, size)
 		"Copy", -- Finder
 		"Move", -- Finder
 		"Delete", -- Finder
+		"Bin", -- Finder
 		"Enki",
 		"System Settings",
 		"Transmission",
