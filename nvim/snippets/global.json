@@ -26,7 +26,7 @@
 			"capslock",
 			"hyper"
 		],
-		"body": ""
+		"body": "⇪"
 	},
 	"escape": {
 		"prefix": "escape",
@@ -43,7 +43,7 @@
 	"modeline (vim)": {
 		"prefix": "modeline",
 		"body": "# vim: filetype=${1:bash}",
-		"info": "this should neither be at the top nor at the bottom of the file, so vim does not try to read the modeline itself."
+		"description": "this should neither be at the top nor at the bottom of the file, so vim does not try to read the modeline itself."
 	},
 	"tab": {
 		"prefix": "tab",
