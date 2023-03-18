@@ -5,13 +5,13 @@ require("config.utils")
 bo.formatoptions = bo.formatoptions:gsub("t", "") 
 
 -- link textobj
-keymap(
+Keymap(
 	{ "o", "x" },
 	"il",
 	function() require("various-textobjs").mdlink(true) end,
 	{ desc = "inner md link textobj", buffer = true }
 )
-keymap(
+Keymap(
 	{ "o", "x" },
 	"al",
 	function() require("various-textobjs").mdlink(false) end,

@@ -11,12 +11,12 @@ bo.errorformat = " > %f:%l:%c: %trror: %m" .. ",%-G%.%#" -- = ignore remaining l
 
 -- Build
 -- requires makeprg defined above
-keymap("n", "<leader>r", function()
+Keymap("n", "<leader>r", function()
 	cmd.update()
 	cmd.redir("@z")
 	cmd([[silent make]]) -- silent, to not show up message (redirection still works)
 	local output = fn.getreg("z"):gsub(".-\r", "") -- remove first line
-	local logLevel = output:find("error") and logError or logTrace
+	local logLevel = output:find("error") and LogError or LogTrace
 	vim.notify(output, logLevel)
 	cmd.redir("END")
 end, { buffer = true, desc = " npm run build" })

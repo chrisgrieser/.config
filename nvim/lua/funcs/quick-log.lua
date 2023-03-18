@@ -2,7 +2,7 @@ local M = {}
 --------------------------------------------------------------------------------
 local fn = vim.fn
 local bo = vim.bo
-local expand = vim.fn.expand
+local expand = vim.fn.Expand
 local logWarn = vim.log.levels.WARN
 
 ---runs :normal natively with bang

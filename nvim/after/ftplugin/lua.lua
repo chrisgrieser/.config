@@ -2,7 +2,7 @@ require("config.utils")
 --------------------------------------------------------------------------------
 
 -- lua regex opener
-keymap("n", "g/", function()
+Keymap("n", "g/", function()
 	Normal('"zya"vi"') -- yank and keep selection for quick replacement when done
 	local pattern = fn.getreg("z"):match('"(.-)"')
 	local url = "https://gitspartv.github.io/lua-patterns/?pattern=" .. pattern
@@ -10,16 +10,16 @@ keymap("n", "g/", function()
 end, { desc = " Open lua pattern in regex viewer", buffer = true })
 
 -- Build
-keymap("n", "<leader>r", function()
+Keymap("n", "<leader>r", function()
 	cmd.update()
-	local parentFolder = expand("%:p:h")
+	local parentFolder = Expand("%:p:h")
 	if parentFolder:find("nvim") then
 		cmd.source()
-		vim.notify(expand("%:r") .. " re-sourced")
+		vim.notify(Expand("%:r") .. " re-sourced")
 	elseif parentFolder:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
 	else
-		vim.notify("Neither in nvim nor in hammerspoon directory.", logError)
+		vim.notify("Neither in nvim nor in hammerspoon directory.", LogError)
 	end
 end, { buffer = true, desc = " Reload" })
 
@@ -29,14 +29,14 @@ end, { buffer = true, desc = " Reload" })
 
 -- 1) `:I` or `<leader>li` inspects the passed lua object / selection
 local function inspect(strToInspect)
-	local parentDir = expand("%:p:h")
+	local parentDir = Expand("%:p:h")
 
 	if parentDir:find("hammerspoon") then
 		local hsApplescript = string.format('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"', strToInspect)
 		fn.system("osascript -e '" .. hsApplescript .. "'")
 	elseif parentDir:find("nvim") then
 		local output = vim.inspect(fn.luaeval(strToInspect))
-		vim.notify(output, logTrace, {
+		vim.notify(output, LogTrace, {
 			timeout = 10000, -- 10 seconds
 			on_open = function(win) -- enable treesitter highlighting in the notification
 				local outputIsStr = output:find('^"') and output:find('"$')
@@ -47,13 +47,13 @@ local function inspect(strToInspect)
 			end,
 		})
 	else
-		vim.notify("Neither in nvim nor in hammerspoon directory.", logError)
+		vim.notify("Neither in nvim nor in hammerspoon directory.", LogError)
 	end
 end
 
 -- stylua: ignore
-keymap("n", "<leader>li", function() inspect(expand("<cWORD>")) end, { desc = " inspect cWORD", buffer = true })
-keymap("x", "<leader>li", function()
+Keymap("n", "<leader>li", function() inspect(Expand("<cWORD>")) end, { desc = " inspect cWORD", buffer = true })
+Keymap("x", "<leader>li", function()
 	Normal('"zy')
 	inspect(fn.getreg("z"))
 end, { desc = " inspect selection", buffer = true })
@@ -64,8 +64,8 @@ api.nvim_buf_create_user_command(0, "I", function(ctx) inspect(ctx.args) end, { 
 
 -- 2) `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/
 api.nvim_buf_create_user_command(0, "II", function(ctx)
-	if not (expand("%:p"):find("nvim")) then
-		vim.notify("Not in a nvim directory.", logError)
+	if not (Expand("%:p"):find("nvim")) then
+		vim.notify("Not in a nvim directory.", LogError)
 		return
 	end
 	os.remove("/tmp/nvim-cmd-output")

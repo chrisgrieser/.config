@@ -1,8 +1,6 @@
 local M = {}
 --------------------------------------------------------------------------------
 local bo = vim.bo
-local b = vim.b
-local opt = vim.opt
 local fn = vim.fn
 local cmd = vim.cmd
 local lineNo = vim.fn.line
@@ -60,13 +58,13 @@ end
 
 -- Save Open time
 vim.api.nvim_create_autocmd("BufReadPost", {
-	callback = function() b.timeOpened = os.time() end,
+	callback = function() vim.b.timeOpened = os.time() end,
 })
 
 ---select between common undopoints: present, last open, 1h ago, and 15min ago
 function M.undoDuration()
 	local now = os.time() -- saved in epoch secs
-	local secsPassed = now - b.timeOpened
+	local secsPassed = now - vim.b.timeOpened
 	local minsPassed = math.floor(secsPassed / 60)
 	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
 	local undoOptionsPresented = { " present", resetLabel, "15m", "1h", "24h" }
@@ -76,7 +74,7 @@ function M.undoDuration()
 		if choice:find("ago") then
 			cmd.earlier(secsPassed .. "s")
 		elseif choice:find("present") then
-			cmd.later(tostring(opt.undolevels:get())) -- redo as much as there are undolevels
+			cmd.later(tostring(vim.opt.undolevels:get())) -- redo as much as there are undolevels
 		else
 			cmd.earlier(choice)
 		end
@@ -91,7 +89,7 @@ function M.toggleWrap()
 	local wrapOn = vim.opt_local.wrap:get()
 	if wrapOn then
 		vim.opt_local.wrap = false
-		vim.opt_local.colorcolumn = opt.colorcolumn:get()
+		vim.opt_local.colorcolumn = vim.opt.colorcolumn:get()
 		vim.keymap.del({ "n", "x" }, "H", opts)
 		vim.keymap.del({ "n", "x" }, "L", opts)
 		vim.keymap.del({ "n", "x" }, "J", opts)

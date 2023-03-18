@@ -82,14 +82,14 @@ local function harpoonIndicator()
 	local harpoonJsonPath = vim.fn.stdpath("data") .. "/harpoon.json"
 	local harpoonJson = ReadFile(harpoonJsonPath)
 	if not harpoonJson then
-		vim.notify("harpoon.json not valid", logWarn)
+		vim.notify("harpoon.json not valid", LogWarn)
 		return ""
 	end
 	local harpoonData = vim.json.decode(harpoonJson)
 	local pwd = vim.loop.cwd()
 	local currentProject = harpoonData.projects[pwd]
 	local markedFiles = currentProject.mark.marks
-	local currentFile = expand("%")
+	local currentFile = Expand("%")
 
 	for _, file in pairs(markedFiles) do
 		if file.filename == currentFile then return "ﯠ" end
@@ -122,7 +122,7 @@ local function requestLspRefCount()
 	end
 	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
 	params.context = { includeDeclaration = false }
-	local thisFileUri = vim.uri_from_fname(expand("%:p"))
+	local thisFileUri = vim.uri_from_fname(Expand("%:p"))
 
 	vim.lsp.buf_request(0, "textDocument/references", params, function(error, refs)
 		if not error and refs then
@@ -183,6 +183,7 @@ local function lspCountStatusline()
 	end
 	return " " .. defs .. refs
 end
+local bffff
 
 --------------------------------------------------------------------------------
 
@@ -210,13 +211,13 @@ local lualineConfig = {
 		},
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
+			{ require("funcs.quickfix").counter },
+			{ searchCounter },
 			{
 				lspCountStatusline,
 				color = { fg = "grey" },
 				cond = function() return vim.v.hlsearch == 0 end,
 			},
-			{ searchCounter },
-			{ require("funcs.quickfix").counter },
 		},
 		lualine_x = {
 			{

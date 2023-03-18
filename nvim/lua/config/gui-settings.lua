@@ -1,10 +1,11 @@
 require("config.utils")
+local g = vim.g
 -- https://neovide.dev/configuration.html
 --------------------------------------------------------------------------------
 
 -- hide other apps so the GUI transparency is visible.
 -- See hammerspoons `app-hider.lua`
-autocmd("VimEnter", {
+Autocmd("VimEnter", {
 	callback = function()
 		fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
 
@@ -26,8 +27,8 @@ end
 --------------------------------------------------------------------------------
 
 local delta = 1.1
-keymap({ "n", "x", "i" }, "<D-+>", function() g.neovide_scale_factor = g.neovide_scale_factor * delta end)
-keymap({ "n", "x", "i" }, "<D-->", function() g.neovide_scale_factor = g.neovide_scale_factor / delta end)
+Keymap({ "n", "x", "i" }, "<D-+>", function() g.neovide_scale_factor = g.neovide_scale_factor * delta end)
+Keymap({ "n", "x", "i" }, "<D-->", function() g.neovide_scale_factor = g.neovide_scale_factor / delta end)
 
 -- Behavior
 g.neovide_confirm_quit = false
@@ -38,8 +39,8 @@ g.neovide_scroll_animation_length = 0.1
 -- Keymaps
 g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
 g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable (on macOS)
-keymap("i", "<M-.>", "…") -- needed when alt is turned into meta key
-keymap("i", "<M-->", "–")
+Keymap("i", "<M-.>", "…") -- needed when alt is turned into meta key
+Keymap("i", "<M-->", "–")
 
 -- Window Appearance
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
