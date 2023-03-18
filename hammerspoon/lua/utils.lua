@@ -168,7 +168,7 @@ function Notify(...)
 	end
 	local out = table.concat(safe_args, " ")
 	hs.notify.show("Hammerspoon", "", out)
-	print("Notify: " .. out)
+	print("ℹ️ [Notification] " .. out)
 end
 
 --------------------------------------------------------------------------------

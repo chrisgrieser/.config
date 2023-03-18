@@ -7,7 +7,7 @@ local cons = hs.console
 local baseFont = { name = "JetBrainsMonoNL Nerd Font", size = 22 }
 local darkRed = { red = 0.7, green = 0, blue = 0, alpha = 1 }
 local lightRed = { red = 1, green = 0, blue = 0, alpha = 1 }
-local darkYellow = { red = 0.6, green = 0.6, blue = 0, alpha = 1 }
+local darkYellow = { red = 0.7, green = 0.5, blue = 0, alpha = 1 }
 local lightYellow = { red = 1, green = 1, blue = 0, alpha = 1 }
 local white = { white = 0.9 }
 local black = { white = 0.1 }
@@ -82,8 +82,16 @@ function CleanupConsole()
 	end
 end
 
+--------------------------------------------------------------------------------
+
 -- clean up console as soon as it is opened
-Wf_hsConsole = Wf.new("Hammerspoon"):subscribe(Wf.windowCreated, CleanupConsole)
+Wf_hsConsole = Wf.new("Hammerspoon")
+	:subscribe(Wf.windowCreated, function (newWin)
+		CleanupConsole	()
+		local pos = hs.fnutils.copy(Centered) 
+		pos.h = 0.95 -- leave some space at the bottom for tab completions
+		newWin:moveToUnit(pos)
+	end)
 
 -- close console when unfocused. Using appwatcher, since window filter for
 -- window unfocussing is not working reliably
@@ -96,6 +104,8 @@ ConsoleWatcher = Aw.new(function(appName, event)
 		hs.closeConsole()
 	end
 end):start()
+
+--------------------------------------------------------------------------------
 
 function SetConsoleColors()
 	if IsDarkMode() then

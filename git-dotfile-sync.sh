@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 MAX_FILE_SIZE_MB=10
 
@@ -24,14 +24,15 @@ if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
 	exit 1
 fi
 
-# git add-commit-pull-push
+# sync main repo
 msg="$device_name ($filesChanged)"
 git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
+git pull
+git push
+
+# update submodules
 git pull --recurse-submodules
 git submodule update --remote
-# INFO in case of file changes in the meantime, run a second time
-git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>" 
-git push
 
 # check that everything worked (e.g. submodules are still dirty)
 DIRTY=$(git status --porcelain)
