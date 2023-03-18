@@ -17,10 +17,16 @@ return {
 		config = function()
 			require("indent_blankline").setup {
 				show_current_context = true, -- = active indent
+				-- context_char = "┃" -- thicker line for active indent
 				use_treesitter = true,
 				filetype_exclude = { "undotree", "help", "man", "lspinfo", "" },
-				-- context_char = "┃" -- ┃
 			}
+		end,
+	},
+	{
+		"utilyre/sentiment.nvim",
+		config = function()
+			
 		end,
 	},
 	{ -- git gutter + hunk textobj
@@ -37,7 +43,6 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		lazy = true, -- loaded by other plugins
 		config = function()
-			(bla)
 			require("nvim-web-devicons").setup {
 				override = {
 					applescript = {

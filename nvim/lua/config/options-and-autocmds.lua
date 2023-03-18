@@ -34,9 +34,12 @@ opt.guicursor = {
 }
 
 -- Search
-opt.showmatch = true
 opt.smartcase = true
 opt.ignorecase = true
+
+-- Flash when closing a bracket
+opt.showmatch = true
+opt.matchtime = 1 -- deci-seconds
 
 -- Clipboard
 opt.clipboard = "unnamedplus"
@@ -56,20 +59,22 @@ opt.spelllang = "en_us" -- still used for `z=`
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
 
--- For external apps
+-- So external apps can read the current file path
 opt.title = true
 opt.titlelen = 0 -- do not shorten title
 opt.titlestring = '%{expand("%:p")}'
 
--- Editor
+-- Workspace
 opt.cursorline = true
+opt.signcolumn = "yes:1" -- = gutter
+
+-- Wrapping
 opt.textwidth = 80
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
-opt.signcolumn = "yes:1" -- = gutter
 
--- column for `gm`
+-- guiding column for `gm`
 local gmColumn = math.floor(Fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
 opt.colorcolumn = { "+1", gmColumn } -- relative to textwidth
 
@@ -79,7 +84,6 @@ opt.cmdheight = 0
 
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
-
 opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
 opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
 
