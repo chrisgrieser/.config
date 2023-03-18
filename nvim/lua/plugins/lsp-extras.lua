@@ -68,14 +68,12 @@ return {
 		"smjonas/inc-rename.nvim",
 		event = "LspAttach",
 		config = function()
-			require("inc_rename").setup{
-				post_hook = function (results)
-					vim.tbl_keys(results.changes)
-					for k, v in pairs(table) do
-						
-					end
-					print(#results.changes)	
-				end
+			require("inc_rename").setup {
+				post_hook = function(results)
+					-- if more than one file is changed, save all
+					local filesChanged = #vim.tbl_keys(results.changes)
+					if filesChanged > 1 then vim.cmd.wall() end
+				end,
 			}
 		end,
 	},

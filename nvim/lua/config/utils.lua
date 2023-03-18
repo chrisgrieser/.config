@@ -1,12 +1,9 @@
 ---@diagnostic disable: lowercase-global
 g = vim.g -- global variables
 api = vim.api
-Fn = vim.fn
 bo = vim.bo -- buffer-scoped options
 
-local vvvvvv = 1
-local fff = vvvvvv
-
+Fn = vim.fn
 Cmd = vim.cmd
 Autocmd = vim.api.nvim_create_autocmd
 GetCursor = vim.api.nvim_win_get_cursor
