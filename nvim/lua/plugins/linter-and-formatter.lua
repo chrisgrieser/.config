@@ -63,7 +63,6 @@ local function nullConfig()
 			-- JS/TS
 			builtins.formatting.prettier.with {
 				filetypes = { "javascript", "typescript", "yaml" }, -- do not format markdown, css, and so on
-				-- extra_args = { "--config", LinterConfig .. "/.prettierrc.yml" },
 			},
 
 			-- CSS
