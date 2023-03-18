@@ -16,6 +16,5 @@ Icon
 
 
 # INFO files
-INFO*
-_INFO*
-TODO*
+*INFO*
+*TODO*

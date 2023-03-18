@@ -63,6 +63,7 @@ const fileArray = app
 			case "other":
 			case "plist":
 			case "url":
+			case "webloc":
 			case "html":
 			case "folder":
 				iconObj = { type: "fileicon", path: absPath };
@@ -100,8 +101,23 @@ const folderArray = app
 		};
 	});
 
-const jsonArray = [...fileArray, ...folderArray];
-if (!jsonArray.length) {
+//──────────────────────────────────────────────────────────────────────────────
+// MERGE AND SORT array by important extensions
+// (even though Alfred does sorting since due to the `uid` key, the sorting does
+// only happens for recently visited repos, so for the other cases, this sorting
+// here is useful)
+const jsonArray = [...fileArray, ...folderArray].sort((a, b) => {
+	const aExtension = a.title.split(".").pop();
+	const bExtension = b.title.split(".").pop();
+	const priorityExtensions = ["ts", "md", "js", "lua", "py"];
+	const aHasPriority = priorityExtensions.includes(aExtension);
+	const bHasPriority = priorityExtensions.includes(bExtension);
+	if (aHasPriority && !bHasPriority) return -1;
+	if (!aHasPriority && bHasPriority) return 1;
+	return 0;
+});
+
+if (jsonArray.length === 0) {
 	jsonArray.push({ title: "No file in the current Folder found." });
 	JSON.stringify({ items: jsonArray });
 }

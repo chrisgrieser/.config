@@ -28,7 +28,7 @@ const fileArray = app
 			-E "*.icns" \\
 			-E "*.plist" \\
 			-E "*.png" \\
-			-E "Fonts/*" \\
+			-E "*.ttf" \\
 			-E ".git" \\
 	`,
 	)
@@ -69,6 +69,7 @@ const fileArray = app
 			case "bttpreset":
 			case "opml":
 			case "other":
+			case "webloc":
 			case "url":
 			case "plist":
 			case "html":
@@ -128,5 +129,7 @@ const pwFolder = {
 };
 
 //──────────────────────────────────────────────────────────────────────────────
+
 const jsonArray = [...fileArray, ...folderArray, pwFolder];
+
 JSON.stringify({ items: jsonArray });
