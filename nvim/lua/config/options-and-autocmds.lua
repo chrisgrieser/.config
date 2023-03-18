@@ -134,7 +134,7 @@ opt.listchars = {
 
 Autocmd("BufReadPost", {
 	callback = function()
-		Cmd.IndentOMatic() -- trigger again to ensure it's run before determining spaces/tabs
+		Cmd.IndentOMatic() -- trigger to ensure it's run before determining spaces/tabs
 		opt_local.listchars = opt.listchars:get()
 		local usesSpaces = Bo.expandtab
 		if usesSpaces then
@@ -212,20 +212,12 @@ Autocmd("BufWinEnter", {
 -- DIAGNOSTICS
 
 local function diagnosticFormat(diagnostic, mode)
-	local msg = diagnostic.message:gsub("^%s*", ""):gsub("%s*$", "")
-	local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or ""
-	local code = tostring(diagnostic.code)
+	local source = diagnostic.source:gsub("%.$", "")
+	local code = diagnostic.code
 
-	-- stylelint and already includes the code in the message, codespell has no code
-	local out
-	if source == "stylelint" or source == "codespell" then
-		out = msg
-	else
-		out = msg .. " (" .. code .. ")"
-	end
-
-	-- append source to float
-	if diagnostic.source and mode == "float" then out = out .. " [" .. source .. "]" end
+	local out = diagnostic.message
+	if code then out = out .. " (" .. code .. ")" end -- some linters have no code
+	if source and mode == "float" then out = out .. " [" .. source .. "]" end
 
 	return out
 end
@@ -238,7 +230,7 @@ vim.diagnostic.config {
 	float = {
 		focusable = true,
 		border = BorderStyle,
-		max_width = 60,
+		max_width = 70,
 		header = "", -- remove "Diagnostics:" heading
 		format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,
 	},

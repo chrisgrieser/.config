@@ -53,7 +53,6 @@ local function nullConfig()
 			builtins.diagnostics.shellcheck.with {
 				extra_filetypes = { "zsh" },
 				extra_args = { "--shell=bash" },
-				-- diagnostics_format = "[#{c}] #{m} (#{s})",
 			},
 			builtins.code_actions.shellcheck.with {
 				extra_filetypes = { "zsh" },
