@@ -129,7 +129,7 @@ opt.listchars = {
 	nbsp = "ﮊ",
 	precedes = "…",
 	extends = "…",
-	lead = "·",
+	multispace = "·",
 }
 
 Autocmd("BufReadPost", {
@@ -139,10 +139,10 @@ Autocmd("BufReadPost", {
 		local usesSpaces = Bo.expandtab
 		if usesSpaces then
 			opt_local.listchars:append { tab = "↹ " }
-			opt_local.listchars:append { multispace = " " }
+			opt_local.listchars:append { lead = " " }
 		else
 			opt_local.listchars:append { tab = "  " }
-			opt_local.listchars:append { multispace = "·" }
+			opt_local.listchars:append { lead = "·" }
 		end
 	end,
 })

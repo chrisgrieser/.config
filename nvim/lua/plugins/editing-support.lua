@@ -47,6 +47,9 @@ return {
 					:use_regex(true)
 					:set_end_pair_length(2),
 
+				-- auto-add brackets writing if (can in theory also be implemented as auto-trigger)
+				rule("if ", "()", { "typescript", "javascript" }):set_end_pair_length(1),
+
 				-- INFO adding a rule autopairing space will disable space
 				-- triggering `:abbrev`
 			}
