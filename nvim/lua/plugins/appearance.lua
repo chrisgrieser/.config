@@ -23,10 +23,20 @@ return {
 			}
 		end,
 	},
-	{
+	{ -- better matchparen
 		"utilyre/sentiment.nvim",
+		event = "VeryLazy",
 		config = function()
-			
+			require("sentiment").setup {
+				excluded_filetypes = {},
+				delay = 50,
+				limit = vim.fn.winheight(0), -- limit height to current window
+				pairs = { -- NOTE: Both sides of a pair can't have the same character.
+					{ "(", ")" },
+					{ "{", "}" },
+					{ "[", "]" },
+				},
+			}
 		end,
 	},
 	{ -- git gutter + hunk textobj
@@ -48,7 +58,7 @@ return {
 					applescript = {
 						icon = "",
 						color = "#7f7f7f",
-						name = "Applescript"
+						name = "Applescript",
 					},
 				},
 			}

@@ -15,6 +15,20 @@
 		"prefix": "buffer = true",
 		"body": "buffer = true"
 	},
+	"plugin spec (lazy.nvim)": {
+		"prefix": "plugin spec (lazy.nvim)",
+		"body": [
+			"{ -- ${2:description}",
+			"\t\"${1:github_repo}\",",
+			"\tevent = \"${3:VeryLazy}\"",
+			"\tconfig = function()",
+			"\t\trequire(\"${4:module-name}\").setup{",
+			"\t\t\t$0",
+			"\t\t}",
+			"\tend,",
+			"}"
+		]
+	},
 	"input (vim.ui)": {
 		"prefix": "input (vim.ui)",
 		"body": [
