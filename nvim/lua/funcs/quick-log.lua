@@ -2,7 +2,7 @@ local M = {}
 --------------------------------------------------------------------------------
 local fn = vim.fn
 local bo = vim.bo
-local expand = vim.fn.Expand
+local expand = vim.fn.expand
 local logWarn = vim.log.levels.WARN
 
 ---runs :normal natively with bang
@@ -211,9 +211,9 @@ function M.removelogs()
 
 	if type(logStatement) == "string" then logStatement = { logStatement } end
 	for _, logCom in pairs(logStatement) do
-		cmd([[g/^\s*]] .. logCom .. [[/d]])
+		Cmd([[g/^\s*]] .. logCom .. [[/d]])
 	end
-	cmd.nohlsearch()
+	Cmd.nohlsearch()
 
 	local linesRemoved = numOfLinesBefore - fn.line("$")
 	local msg = "Removed " .. tostring(linesRemoved) .. " log statements."

@@ -70,7 +70,7 @@ opt.linebreak = true -- do not break up full words on wrap
 opt.signcolumn = "yes:1" -- = gutter
 
 -- column for `gm`
-local gmColumn = math.floor(fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
+local gmColumn = math.floor(Fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
 opt.colorcolumn = { "+1", gmColumn } -- relative to textwidth
 
 -- status bar & cmdline
@@ -98,10 +98,10 @@ Autocmd("CursorMoved", {
 		if bo.filetype == "DressingSelect" then return end
 
 		local win_height = api.nvim_win_get_height(0)
-		local win_view = fn.winsaveview()
+		local win_view = Fn.winsaveview()
 		local scrolloff = math.min(opt.scrolloff:get(), math.floor(win_height / 2))
-		local scrolloff_line_count = win_height - (fn.line("w$") - win_view.topline + 1)
-		local distance_to_last_line = fn.line("$") - win_view.lnum
+		local scrolloff_line_count = win_height - (Fn.line("w$") - win_view.topline + 1)
+		local distance_to_last_line = Fn.line("$") - win_view.lnum
 		if
 			distance_to_last_line < scrolloff
 			and scrolloff_line_count + distance_to_last_line < scrolloff
@@ -136,7 +136,7 @@ opt.listchars = {
 
 Autocmd("BufReadPost", {
 	callback = function()
-		cmd.IndentOMatic() -- trigger again to ensure it's run before determining spaces/tabs
+		Cmd.IndentOMatic() -- trigger again to ensure it's run before determining spaces/tabs
 		local usesSpaces = bo.expandtab
 		if usesSpaces then
 			opt_local.listchars:append { tab = " >" }
@@ -154,7 +154,7 @@ Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
 	callback = function()
 		if not bo.readonly and Expand("%") ~= "" and bo.buftype == "" and bo.filetype ~= "gitcommit" then
-			cmd.update(Expand("%:p"))
+			Cmd.update(Expand("%:p"))
 		end
 	end,
 })
@@ -195,9 +195,9 @@ local function remember(mode)
 	}
 	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype ~= "" or not bo.modifiable then return end
 	if mode == "save" then
-		cmd.mkview(1)
+		Cmd.mkview(1)
 	else
-		cmd([[silent! loadview 1]]) -- silent to avoid error for files w/o view (e.g. after creation)
+		Cmd([[silent! loadview 1]]) -- silent to avoid error for files w/o view (e.g. after creation)
 	end
 end
 Autocmd("BufWinLeave", {
@@ -249,9 +249,9 @@ vim.diagnostic.config {
 
 -- Skeletons (Templates)
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
-local skeletonDir = fn.stdpath("config") .. "/templates"
+local skeletonDir = Fn.stdpath("config") .. "/templates"
 local filetypeList =
-	fn.system([[ls "]] .. skeletonDir .. [[/skeleton."* | xargs basename | cut -d. -f2]])
+	Fn.system([[ls "]] .. skeletonDir .. [[/skeleton."* | xargs basename | cut -d. -f2]])
 local ftWithSkeletons = vim.split(filetypeList, "\n", {})
 
 for _, ft in pairs(ftWithSkeletons) do
@@ -269,8 +269,8 @@ for _, ft in pairs(ftWithSkeletons) do
 		pattern = "*." .. ft,
 		callback = function()
 			local curFile = Expand("%")
-			local fileIsEmpty = fn.getfsize(curFile) < 4 -- to account for linebreak weirdness
-			if fileIsEmpty then cmd(readCmd) end
+			local fileIsEmpty = Fn.getfsize(curFile) < 4 -- to account for linebreak weirdness
+			if fileIsEmpty then Cmd(readCmd) end
 		end,
 	})
 end

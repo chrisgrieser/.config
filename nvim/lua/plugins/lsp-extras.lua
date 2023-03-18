@@ -67,6 +67,15 @@ return {
 	{
 		"smjonas/inc-rename.nvim",
 		event = "LspAttach",
-		config = function() require("inc_rename").setup() end,
+		config = function()
+			require("inc_rename").setup{
+				post_hook = function (results)
+					for k, v in pairs(table) do
+						
+					end
+					print(#results.changes)	
+				end
+			}
+		end,
 	},
 }

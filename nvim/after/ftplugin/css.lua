@@ -5,7 +5,7 @@ require("config.utils")
 -- more useful than symbols for theme development
 bo.grepprg = "rg --vimgrep --no-column" -- remove columns
 Keymap("n", "gs", function()
-	cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
+	Cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
 	require("telescope.builtin").loclist {
 		prompt_title = "Navigation Markers",
 		fname_width = 0,
@@ -14,7 +14,7 @@ end, { desc = "Search Navigation Markers", buffer = true })
 
 -- search only for variables
 Keymap("n", "gS", function()
-	cmd([[silent! lgrep "^\s*--" %]]) -- riggrep-search for css variables
+	Cmd([[silent! lgrep "^\s*--" %]]) -- riggrep-search for css variables
 	require("telescope.builtin").loclist {
 		prompt_title = "CSS Variables",
 		prompt_prefix = "",
@@ -33,7 +33,7 @@ Keymap("n", "zz", ":syntax sync fromstart<CR>", { buffer = true })
 -- extra trigger for css files, to work with hot reloads
 Autocmd("TextChanged", {
 	buffer = 0, -- buffer-local autocmd
-	callback = function() cmd.update(Expand("%:p")) end,
+	callback = function() Cmd.update(Expand("%:p")) end,
 })
 
 --------------------------------------------------------------------------------
@@ -56,16 +56,16 @@ Keymap({ "o", "x" }, "is", function() require("various-textobjs").cssSelector(tr
 -- Requires: Obsidian advanced URI plugin and `eval` parameter for the plugin enabled
 Keymap({ "n", "x" }, "<leader>li", function()
 	local selector
-	if fn.mode() == "n" then
-		selector = fn.getline("."):gsub("{.*", "")
+	if Fn.mode() == "n" then
+		selector = Fn.getline("."):gsub("{.*", "")
 	else
 		Normal('"zy')
-		selector = fn.getreg("z")
+		selector = Fn.getreg("z")
 	end
 	local jsCodeEncoded = [[electronWindow.openDevTools();const%20element%3Ddocument.querySelector("]]
 		.. selector
 		.. [[");console.log(element);]]
-	fn.system("open 'obsidian://advanced-uri?eval=" .. jsCodeEncoded .. "'")
+	Fn.system("open 'obsidian://advanced-uri?eval=" .. jsCodeEncoded .. "'")
 end, { desc = "Obsidian: document.querySelect()", buffer = true })
 
 --------------------------------------------------------------------------------
@@ -74,23 +74,23 @@ end, { desc = "Obsidian: document.querySelect()", buffer = true })
 Keymap("n", "p", function()
 	Normal("p") -- paste as always
 	local reg = '"'
-	local regContent = fn.getreg(reg)
-	local isLinewise = fn.getregtype(reg) == "V"
+	local regContent = Fn.getreg(reg)
+	local isLinewise = Fn.getregtype(reg) == "V"
 	if isLinewise and regContent:find("{\n$") then
-		fn.append(".", { "\t", "}" })
+		Fn.append(".", { "\t", "}" })
 		Normal("j")
 	end
 end, { desc = "smarter CSS paste", buffer = true })
 
 -- toggle !important
 Keymap("n", "<leader>i", function()
-	local lineContent = fn.getline(".")
+	local lineContent = Fn.getline(".")
 	if lineContent:find("!important") then
 		lineContent = lineContent:gsub(" !important", "")
 	else
 		lineContent = lineContent:gsub(";", " !important;")
 	end
-	fn.setline(".", lineContent)
+	Fn.setline(".", lineContent)
 end, { buffer = true, desc = "toggle !important" })
 
 -- insert nice divider
@@ -102,10 +102,10 @@ Keymap("n", "qw", function()
 		"",
 		"",
 	}
-	fn.append(".", hr)
+	Fn.append(".", hr)
 	local lineNum = GetCursor(0)[1] + 2
 	local colNum = #hr[2] + 2
 	SetCursor(0, { lineNum, colNum })
-	cmd.startinsert { bang = true }
+	Cmd.startinsert { bang = true }
 end, { buffer = true, desc = "insert comment-heading" })
 ---@diagnostic enable: undefined-field, param-type-mismatch
