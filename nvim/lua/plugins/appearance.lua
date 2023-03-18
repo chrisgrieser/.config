@@ -30,11 +30,6 @@ return {
 			require("sentiment").setup {
 				excluded_filetypes = {},
 				limit = vim.fn.winheight(0), -- limit search for matches to window height
-				pairs = { -- NOTE: Both sides of a pair can't have the same character.
-					{ "(", ")" },
-					{ "{", "}" },
-					{ "[", "]" },
-				},
 			}
 		end,
 	},
@@ -43,7 +38,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("gitsigns").setup {
-				max_file_length = 10000,
+				max_file_length = 7500,
 				preview_config = { border = BorderStyle },
 			}
 		end,
