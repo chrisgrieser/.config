@@ -336,7 +336,7 @@ Keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as 
 Keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
 
 -- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
-g.VM_maps = {
+vim.g.VM_maps = {
 	["Find Under"] = "<D-j>", -- select word under cursor & enter visual-multi (normal) / add next occurrence (visual-multi)
 	["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
 	["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
@@ -540,13 +540,13 @@ Keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers"
 Keymap("n", "<leader>ow", qol.toggleWrap, { desc = " Toggle Wrap" })
 Keymap("n", "<leader>ol", Cmd.LspRestart, { desc = " 璉LSP Restart" })
 Keymap("n", "<leader>od", function()
-	if g.diagnosticOn == nil then g.diagnosticOn = true end
-	if g.diagnosticOn then
+	if vim.g.diagnosticOn == nil then vim.g.diagnosticOn = true end
+	if vim.g.diagnosticOn then
 		vim.diagnostic.disable(0)
 	else
 		vim.diagnostic.enable(0)
 	end
-	g.diagnosticOn = not g.diagnosticOn
+	vim.g.diagnosticOn = not vim.g.diagnosticOn
 end, { desc = " 璉 Toggle Diagnostics" })
 
 --------------------------------------------------------------------------------

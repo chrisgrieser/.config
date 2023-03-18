@@ -1,4 +1,5 @@
 require("config.utils")
+local g = vim.g
 --------------------------------------------------------------------------------
 
 -- keep the register clean

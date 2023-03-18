@@ -175,7 +175,7 @@
 		"luasnip": {
 			"autotrigger": true
 		},
-		"desc": "Luasnip-specific autosnippet: https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vs-code"
+		"description": "Luasnip-specific autosnippet: https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vs-code"
 	},
 	"Set Timeout Function": {
 		"prefix": [
