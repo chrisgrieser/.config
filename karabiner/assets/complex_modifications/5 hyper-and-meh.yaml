@@ -22,7 +22,12 @@ rules:
             bundle_identifiers:
               - ^com\.apple\.finder$
               - ^mindustry\.mac$
-      # disable systemdiagnosis via `Hyper+,`
+      # disable accidental triggering of systemdiagnosis via `Hyper+.` and
+      # `Hyper+,`
+      - type: basic
+        from: { key_code: period, modifiers: { mandatory: [command, control, shift, option] } }
+        to:
+          - key_code: vk_none
       - type: basic
         from: { key_code: comma, modifiers: { mandatory: [command, control, shift, option] } }
         to:

@@ -18,8 +18,6 @@ end, { expr = true })
 
 --------------------------------------------------------------------------------
 
-Keymap("n", "P", '"1p', { desc = "paste previous" })
-
 -- paste charwise reg as linewise & vice versa
 Keymap("n", "gp", function()
 	local reg = "+"
@@ -42,27 +40,24 @@ end, { desc = "paste differently" })
 --------------------------------------------------------------------------------
 
 -- yanking without moving the cursor
-Autocmd({ "CursorMoved", "VimEnter" }, {
-	callback = function() vim.g.cursorPreYank = GetCursor(0) end,
-})
+-- Autocmd({ "CursorMoved", "VimEnter" }, {
+-- 	callback = function() vim.g.cursorPreYank = GetCursor(0) end,
+-- })
 
 -- - yanking without moving the cursor
 -- - highlighted yank
 -- - saves yanks in numbered register, so `"1p` pastes previous yanks.
-Autocmd("TextYankPost", {
-	callback = function()
-		-- highlighted yank
-		vim.highlight.on_yank { timeout = 1500 }
-
-		-- abort when recording, since this only leads to bugs then
-
-		-- only saving the last yank is required
-		if vim.v.event.operator ~= "y" then return end
-		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
-
-
-
-		SetCursor(0, g.cursorPreYank)
-	end,
-})
-
+-- Autocmd("TextYankPost", {
+-- 	callback = function()
+-- 		-- highlighted yank
+-- 		vim.highlight.on_yank { timeout = 1500 }
+--
+-- 		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
+--
+-- 		-- sticky cursor
+-- 		if vim.v.event.operator == "y" then
+-- 			SetCursor(0, g.cursorPreYank)
+-- 		end
+--
+-- 	end,
+-- })
