@@ -1,6 +1,4 @@
-g = vim.g -- global variables
 Bo = vim.bo 
-
 Fn = vim.fn
 Cmd = vim.cmd
 Autocmd = vim.api.nvim_create_autocmd
@@ -19,6 +17,8 @@ LogInfo = vim.log.levels.INFO
 ---runs :normal natively with bang
 ---@param cmdStr any
 function Normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
+
+--------------------------------------------------------------------------------
 
 ---reads the full file
 ---@param filePath string

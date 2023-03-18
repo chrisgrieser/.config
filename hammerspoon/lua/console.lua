@@ -7,7 +7,7 @@ local cons = hs.console
 local baseFont = { name = "JetBrainsMonoNL Nerd Font", size = 22 }
 local darkRed = { red = 0.7, green = 0, blue = 0, alpha = 1 }
 local lightRed = { red = 1, green = 0, blue = 0, alpha = 1 }
-local darkYellow = { red = 0.7, green = 0.7, blue = 0, alpha = 1 }
+local darkYellow = { red = 0.6, green = 0.6, blue = 0, alpha = 1 }
 local lightYellow = { red = 1, green = 1, blue = 0, alpha = 1 }
 local white = { white = 0.9 }
 local black = { white = 0.1 }
