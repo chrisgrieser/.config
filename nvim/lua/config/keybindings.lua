@@ -148,7 +148,7 @@ Keymap("n", "<S-Tab>", "<<", { desc = " outdent" })
 Keymap("x", "<Tab>", ">gv", { desc = " indent" })
 Keymap("x", "<S-Tab>", "<gv", { desc = " outdent" })
 
--- Word Switcher (fallback: switch casing)
+-- Word Switcher (fallback: switch casing) 
 -- stylua: ignore
 Keymap( "n", "<BS>", function() require("funcs.big-wave").switch() end, { desc = "switch common words" })
 
