@@ -38,7 +38,7 @@ return {
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
 			npairs.add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- useful for keymaps
-				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes 
+				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
 
@@ -48,7 +48,7 @@ return {
 					:set_end_pair_length(2),
 
 				-- INFO adding a rule autopairing space will disable space
-				-- triggering `:abbrev` 
+				-- triggering `:abbrev`
 			}
 
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
@@ -86,6 +86,31 @@ return {
 				use_default_keymaps = false,
 				cursor_behavior = "start", -- start|end|hold
 				max_join_length = 180,
+			}
+		end,
+	},
+	{ -- clipboard history / killring
+		"gbprod/yanky.nvim",
+		-- keys = { "p", "P" },
+		init = function()
+			-- 1
+			-- 2
+			vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+			vim.keymap.set("n", "P", "<Plug>(YankyCycleForward)")
+		end,
+		config = function()
+			require("yanky").setup {
+				ring = {
+					history_length = 20,
+					cancel_event = "move", -- move|update
+				},
+				preserve_cursor_position = { enabled = true },
+				-- replaces vim.highlight.on_yank { timeout = 1500 }
+				highlight = {
+					on_put = true,
+					on_yank = true, 
+					timer = 1000,
+				},
 			}
 		end,
 	},
