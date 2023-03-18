@@ -123,20 +123,19 @@ opt.smartindent = true
 
 -- invisible chars
 opt.list = true
-opt.fillchars:append { eob = " " }
-opt.fillchars:append { fold = " " }
-opt.showbreak = "↪ " -- precedes wrapped lines
+opt.fillchars = { eob = " ", fold = " " }
+opt.showbreak = "↪ "
 opt.listchars = {
 	nbsp = "ﮊ",
 	precedes = "…",
 	extends = "…",
 	lead = "·",
-	trail = "·",
 }
 
 Autocmd("BufReadPost", {
 	callback = function()
 		Cmd.IndentOMatic() -- trigger again to ensure it's run before determining spaces/tabs
+		opt_local.listchars = opt.listchars:get()
 		local usesSpaces = Bo.expandtab
 		if usesSpaces then
 			opt_local.listchars:append { tab = "↹ " }
