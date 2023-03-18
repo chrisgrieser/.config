@@ -6,14 +6,14 @@ return {
 		config = function() require("hlargs").setup() end,
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-	{
+	{ -- rainbow brackets
 		"HiPhish/nvim-ts-rainbow2",
 		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
-		event = "VimEnter",
+		event = "UIEnter",
 		config = function()
 			require("indent_blankline").setup {
 				show_current_context = true, -- = active indent
@@ -23,14 +23,13 @@ return {
 			}
 		end,
 	},
-	{ -- better matchparen
+	{ -- matchparen but highlight outside parens as well
 		"utilyre/sentiment.nvim",
 		event = "VeryLazy",
 		config = function()
 			require("sentiment").setup {
 				excluded_filetypes = {},
-				delay = 50,
-				limit = vim.fn.winheight(0), -- limit height to current window
+				limit = vim.fn.winheight(0), -- limit search for matches to window height
 				pairs = { -- NOTE: Both sides of a pair can't have the same character.
 					{ "(", ")" },
 					{ "{", "}" },
@@ -39,7 +38,7 @@ return {
 			}
 		end,
 	},
-	{ -- git gutter + hunk textobj
+	{ -- git sign gutter & hunk textobj
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
 		config = function()
@@ -49,7 +48,7 @@ return {
 			}
 		end,
 	},
-	{
+	{ -- filetype-icons for Telescope and Lualine
 		"nvim-tree/nvim-web-devicons",
 		lazy = true, -- loaded by other plugins
 		config = function()
@@ -64,7 +63,7 @@ return {
 			}
 		end,
 	},
-	{
+	{ -- Scrollbar, also shows search matches and git signs
 		"lewis6991/satellite.nvim",
 		event = "VeryLazy",
 		config = function()
@@ -78,7 +77,7 @@ return {
 			}
 		end,
 	},
-	{ -- color previews & color utilities
+	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
 		event = "BufEnter", -- cannot use VeryLazy, since the first buffer entered would not get highlights
 		config = function()

@@ -44,7 +44,7 @@ local function customHighlights()
 	Fn.matchadd("myAnnotations", [[(SIC)]])
 
 	linkHighlight("IndentBlanklineContextChar", "Comment") -- active indent different color
-	setHighlight("rainbowcol1", "guifg=#7e8a95") -- rainbow brackets without aggressive red
+	setHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
 	setHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
 	linkHighlight("CodiVirtualText", "Comment") -- Codi
 	setHighlight("TSDefinition", " term=underline gui=underdotted") -- treesittter refactor focus

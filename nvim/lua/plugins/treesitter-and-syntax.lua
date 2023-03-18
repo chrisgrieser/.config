@@ -73,25 +73,11 @@ local function tsConfig()
 			},
 		},
 
+		--------------------------------------------------------------------------
 		-- TREESITTER PLUGINS
-		endwise = { enable = true },
-		rainbow = {
-			enable = true,
-			query = "rainbow-parens",
-			strategy = require("ts-rainbow.strategy.global"),
-			-- compatibility, since the highlight clearing leaves only hl groups from
-			-- the theme, which does not include the rainbow2 hl groups https://github.com/HiPhish/nvim-ts-rainbow2/blob/master/doc/ts-rainbow.txt#L74
-			hlgroups = {
-				"rainbowcol1",
-				"rainbowcol2",
-				"rainbowcol3",
-				"rainbowcol4",
-				"rainbowcol5",
-				"rainbowcol6",
-				"rainbowcol7",
-			},
-		},
 
+		endwise = { enable = true },
+		rainbow = { enable = true },
 		refactor = {
 			highlight_definitions = {
 				enable = true,
@@ -132,6 +118,10 @@ return {
 			require("nvim-treesitter.install").update { with_sync = true }
 		end,
 	},
-	{ "mityu/vim-applescript", ft = "applescript" }, -- syntax highlighting
-	{ "hail2u/vim-css3-syntax", ft = "css" }, -- better syntax highlighting (until treesitter css looks decent…)
+
+	-- AppleScript Syntax Highlighting
+	{ "mityu/vim-applescript", ft = "applescript" }, 
+
+	-- treesitter CSS does not look good https://github.com/tree-sitter/tree-sitter-css/issues/34
+	{ "hail2u/vim-css3-syntax", ft = "css" }, 
 }
