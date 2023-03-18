@@ -70,6 +70,7 @@ return {
 		config = function()
 			require("inc_rename").setup{
 				post_hook = function (results)
+					vim.tbl_keys(results.changes)
 					for k, v in pairs(table) do
 						
 					end
