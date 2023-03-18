@@ -9,9 +9,9 @@
 		],
 		"description": "VS Code Snippet (short)"
 	},
-	"desc key": {
-		"prefix": "desc",
-		"body": "\"desc\": \"$0\""
+	"description key": {
+		"prefix": "description (key)",
+		"body": "\"description\": \"$0\""
 	},
 	"VS Code Snippet (long)": {
 		"prefix": "snippet (long)",

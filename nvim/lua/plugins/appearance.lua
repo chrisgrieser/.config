@@ -65,7 +65,6 @@ return {
 	{ -- color previews & color utilities
 		"uga-rosa/ccc.nvim",
 		event = "BufEnter", -- cannot use VeryLazy, since the first buffer entered would not get highlights
-		cond = vim.g.neovide, -- only load in GUI
 		config = function()
 			vim.opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal
 			local ccc = require("ccc")

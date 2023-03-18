@@ -49,6 +49,10 @@
 		"prefix": "tab",
 		"body": "↹ "
 	},
+	"space": {
+		"prefix": "space",
+		"body": "␣"
+	},
 	"nonbreaking space": {
 		"prefix": "nonbreaking space",
 		"body": "&nbsp;"

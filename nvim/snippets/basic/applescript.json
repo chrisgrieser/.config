@@ -80,7 +80,7 @@
 	"linefeed": {
 		"prefix": ["linefeed", "\\n"],
 		"body": "linefeed",
-		"desc": "Equivalent to `\\n` in Applescript"
+		"description": "Equivalent to `\\n` in Applescript."
 	},
 	"home": {
 		"prefix": "home",

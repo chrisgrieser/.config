@@ -2,66 +2,63 @@
 # ------------------------------------------
 
 matches:
-  - triggers: ['!ctrl', "!control"]
+  - triggers: ["!ctrl", "!control"]
     replace: ⌃
-  - trigger: '!space'
+  - trigger: "!space"
     replace: ␣
-  - trigger: '!shift'
+  - trigger: "!shift"
     replace: ⇧
-  - trigger: '!cmd'
+  - trigger: "!cmd"
     replace: ⌘
-  - triggers: ['!alt', "!opt"]
+  - triggers: ["!alt", "!opt"]
     replace: ⌥
-  - triggers: ['!caps', "!hyper"]
+  - triggers: ["!caps", "!hyper"]
     replace: ⇪
-  - trigger: '!esc'
+  - trigger: "!esc"
     replace: ⎋
-  - trigger: '!tab'
+  - trigger: "!tab"
     replace: ↹
-  - triggers: ['!return', "!enter"]
+  - triggers: ["!return", "!enter"]
     replace: ↵
-  - trigger: '!backspace'
+  - trigger: "!backspace"
     replace: ⌫
-  - trigger: '!no'
+  - trigger: "!no"
     replace: ❌
-  - trigger: '!yes'
+  - trigger: "!yes"
     replace: ✅
-  - trigger: '!wait'
+  - trigger: "!wait"
     replace: ⏳
-  - trigger: '!info'
+  - trigger: "!info"
     replace: ℹ️
-  - trigger: '!new'
+  - trigger: "!new"
     replace: 🆕
-  - trigger: '!square'
+  - trigger: "!square"
     replace: ▪︎
-  - trigger: '!warn'
+  - trigger: "!warn"
     replace: ⚠️
-  - trigger: '->'
+  - trigger: "->"
     replace: →
     word: true
-  - trigger: '->>'
+  - trigger: "->>"
     replace: ➡️
-  - trigger: '!ampel'
+  - trigger: "!ampel"
     replace: 🔴🟡🟢
-  - trigger: ' mm'
-    replace: ' 🙈'
-  - trigger: '!eyes'
+  - trigger: " mm"
+    replace: " 🙈"
+  - trigger: "!eyes"
     replace: 👁️👄👁️
 
-
-
-
-  - triggers: [    ':shrug', "!ascii"]
+  - triggers: ["!shrug", "!ascii"]
     replace: ¯\_(ツ)_/¯
-  - triggers: [':gimme', "!ascii"]
+  - triggers: ["!gimme", "!ascii"]
     replace: ༼つ ◕_◕ ༽つ
-  - triggers: [':tableflip', "!ascii"]
+  - triggers: ["!tableflip", "!ascii"]
     replace: (╯°□°)--︻╦╤─ - - -
-  - triggers: [':tableflip', "!ascii"]
+  - triggers: ["!tableflip", "!ascii"]
     replace: (╯°□°）╯︵ ┻━┻
-  - triggers: [':tableflip', "!ascii"]
+  - triggers: ["!tableflip", "!ascii"]
     replace: ┻━┻︵ \\(°□°)\/ ︵ ┻━┻
-  - triggers: [':tableflip', "!ascii"]
+  - triggers: ["!tableflip", "!ascii"]
     replace: (ノಠ_ಠ)ノ彡︵ ┻━┻︵ ┻━┻
-  - triggers: [':tableflip', "!ascii"]
+  - triggers: ["!tableflip", "!ascii"]
     replace: ┬─┬ノ(ಠ_ಠノ)

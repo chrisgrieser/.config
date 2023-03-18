@@ -46,11 +46,11 @@ opt.grepprg = "rg --vimgrep" -- use rg for :grep
 
 -- Popups / Floating Windows
 opt.pumheight = 15 -- max number of items in popup menu
-opt.pumwidth = 10 -- min width popup menu
+opt.pumwidth = 15 -- min width popup menu
 
 -- Spelling
 opt.spell = false -- off, since using vale+null-ls for the lsp-integration
-opt.spelllang = "en_us" -- but used for spellsuggestions
+opt.spelllang = "en_us" -- still used for `z=`
 
 -- Split
 opt.splitright = true -- vsplit right instead of left
@@ -78,7 +78,7 @@ opt.history = 400 -- reduce noise for command history search
 opt.cmdheight = 0
 
 -- Character groups
-vim.opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
+opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
 
 opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
 opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
@@ -107,7 +107,7 @@ Autocmd("CursorMoved", {
 			and scrolloff_line_count + distance_to_last_line < scrolloff
 		then
 			win_view.topline = win_view.topline + scrolloff - (scrolloff_line_count + distance_to_last_line)
-			vim.fn.winrestview(win_view)
+			Fn.winrestview(win_view)
 		end
 	end,
 })
@@ -139,7 +139,7 @@ Autocmd("BufReadPost", {
 		Cmd.IndentOMatic() -- trigger again to ensure it's run before determining spaces/tabs
 		local usesSpaces = Bo.expandtab
 		if usesSpaces then
-			opt_local.listchars:append { tab = " >" }
+			opt_local.listchars:append { tab = "↹ " }
 			opt_local.listchars:append { multispace = " " }
 		else
 			opt_local.listchars:append { tab = "  " }
@@ -278,7 +278,7 @@ end
 --------------------------------------------------------------------------------
 
 -- syntax highlighting in code blocks
-g.markdown_fenced_languages = {
+vim.g.markdown_fenced_languages = {
 	"css",
 	"python",
 	"py=python",
