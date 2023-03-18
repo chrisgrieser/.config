@@ -38,7 +38,7 @@ return {
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
 			npairs.add_rules {
 				-- auto-pair <> if inside string (e.g. for keymaps)
-				rule("<", ">", "lua"):with_pair(isNodeType { "string", "comment" }),
+				rule("<", ">", "lua"):with_pair(isNodeType("string")),
 				-- auto-pair for markdown syntax
 				rule("*", "*", "markdown"):with_pair(),
 				rule("__", "__", "markdown"):with_pair(),

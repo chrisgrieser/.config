@@ -1,4 +1,8 @@
 {
+	"require": {
+		"prefix": "require",
+		"body": "require \" "
+	},
 	"trim trailing line break": {
 		"prefix": "trim trailing line break",
 		"body": ":gsub(\"\\n$\", \"\")"
