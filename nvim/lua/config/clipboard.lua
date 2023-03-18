@@ -17,6 +17,13 @@ Keymap("n", "dd", function()
 end, { expr = true })
 
 --------------------------------------------------------------------------------
+-- Yanky
+vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)", { desc = "paste (Yanky)" })
+vim.keymap.set("n", "P", "<Plug>(YankyCycleForward)", { desc = "Cycle Yankring" })
+
+-- stylua: ignore
+vim.keymap.set("n", "<leader>y", require("telescope").extensions.yank_history.yank_history, { desc = "Yank History" })
+--------------------------------------------------------------------------------
 
 -- paste charwise reg as linewise & vice versa
 Keymap("n", "gp", function()
@@ -40,24 +47,20 @@ end, { desc = "paste differently" })
 --------------------------------------------------------------------------------
 
 -- yanking without moving the cursor
--- Autocmd({ "CursorMoved", "VimEnter" }, {
--- 	callback = function() vim.g.cursorPreYank = GetCursor(0) end,
--- })
+Autocmd({ "CursorMoved", "VimEnter" }, {
+	callback = function() vim.g.cursorPreYank = GetCursor(0) end,
+})
 
--- - yanking without moving the cursor
+-- - sticky yanking (without moving the cursor)
 -- - highlighted yank
--- - saves yanks in numbered register, so `"1p` pastes previous yanks.
--- Autocmd("TextYankPost", {
--- 	callback = function()
--- 		-- highlighted yank
--- 		vim.highlight.on_yank { timeout = 1500 }
---
--- 		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
---
--- 		-- sticky cursor
--- 		if vim.v.event.operator == "y" then
--- 			SetCursor(0, g.cursorPreYank)
--- 		end
---
--- 	end,
--- })
+Autocmd("TextYankPost", {
+	callback = function()
+		-- highlighted yank
+		vim.highlight.on_yank { timeout = 1500 }
+
+		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
+
+		-- sticky cursor
+		if vim.v.event.operator == "y" then SetCursor(0, g.cursorPreYank) end
+	end,
+})
