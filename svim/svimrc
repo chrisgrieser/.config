@@ -9,9 +9,10 @@ noremap L $
 noremap J 5j
 noremap K 5k
 
-nnoremap ü mzlblgueh~`z
 nnoremap M J
+nnoremap R yyp
 
+nnoremap <BS> mzlblgueh~`z
 nnoremap <Space> ciw
 
 vnoremap V j
