@@ -131,5 +131,5 @@ const pwFolder = {
 //──────────────────────────────────────────────────────────────────────────────
 
 const jsonArray = [...fileArray, ...folderArray, pwFolder];
-
+if (jsonArray.length === 0) jsonArray.push({ title: "No file in the current Folder found." });
 JSON.stringify({ items: jsonArray });
