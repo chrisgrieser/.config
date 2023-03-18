@@ -1,7 +1,7 @@
 {
 	"require": {
 		"prefix": "require",
-		"body": "require \" "
+		"body": "require \\ \" \" \" "
 	},
 	"trim trailing line break": {
 		"prefix": "trim trailing line break",

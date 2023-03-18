@@ -14,5 +14,3 @@ if fn.line("$") > 1000 then
 	vim.defer_fn(function () require("ufo").closeFoldsWith(2) end, 1)
 end
 
-
-iabbrev('\\ \\"')
