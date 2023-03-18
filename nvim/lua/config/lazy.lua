@@ -36,6 +36,7 @@ require("lazy").setup("plugins", {
 		rtp = {
 			disabled_plugins = {
 				-- disable unused builtin plugins from neovim
+				"matchit", -- disabled so `%` always goes to brackets (making it more predictable)
 				"netrw",
 				"netrwPlugin",
 				"gzip",

@@ -97,9 +97,9 @@ Keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 Keymap("n", "gc", "g;", { desc = "goto next change" })
 Keymap("n", "gC", "g,", { desc = "goto previous change" })
 
--- [M]atchIt
--- remap needed, since using the builtin matchit plugin
-Keymap("n", "m", "%", { remap = true, desc = "MatchIt" })
+-- [M]atching Bracket
+-- remap needed, if using the builtin matchit plugin (currently disabled)
+Keymap("n", "m", "%", { desc = "Goto Matching Bracket" })
 
 --------------------------------------------------------------------------------
 
@@ -112,7 +112,7 @@ Keymap("n", "^", function()
 	else
 		require("ufo").closeFoldsWith(vim.v.count - 1) -- -1 as topmost is foldlevel 0
 	end
-end, { desc = "ﬕ Toggle fold / Close {n} foldlevels" })
+end, { desc = "ﬕ Toggle fold / Close {n} foldlvls" })
 Keymap("n", "zR", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
 Keymap("n", "zM", function() require("ufo").closeAllFolds() end, { desc = "  Close all folds" })
 Keymap("n", "zz", function()
