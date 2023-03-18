@@ -31,7 +31,12 @@ Keymap("x", "<D-p>", ":!pandoc -t commonmark_x<CR><CR>", { desc = "  Forma
 
 -- Heading jump to next/prev heading
 Keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR>:nohl<CR>]], { desc = " # Next Heading", buffer = true })
-Keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR>:nohl<CR>]], { desc = " # Previous Heading", buffer = true })
+Keymap(
+	{ "n", "x" },
+	"<C-k>",
+	[[?^#\+ <CR>:nohl<CR>]],
+	{ desc = " # Previous Heading", buffer = true }
+)
 
 --------------------------------------------------------------------------------
 -- GUI KEYBINDINGS
