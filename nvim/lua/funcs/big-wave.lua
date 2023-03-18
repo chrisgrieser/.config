@@ -17,29 +17,31 @@ local generalWords = {
 
 	-- opposites
 	{ "show", "hide" },
-	{ "min", "max" },
+	{ "above", "below" },
+	{ "min", "max" }, -- do not cycle "min" to "sec"
 	{ "minimum", "maximum" },
 	{ "increase", "decrease" },
 	{ "increased", "decreased" },
 	{ "always", "never" },
 	{ "with", "without" },
+	{ "forwards", "backwards" },
 	{ "next", "previous" },
 	{ "inner", "outer" },
 	{ "before", "after" },
 	{ "low", "high" },
 	{ "dark", "light" },
+	{ "odd", "even" },
 	{ "first", "last" },
 	{ "up", "down" },
 	{ "right", "left" },
 	{ "black", "white" },
-	{ "even", "odd" },
 	{ "start", "end" },
 	{ "more", "less", false },
 	{ "less", "fewer", false },
 	{ "fewer", "more", false },
 
 	-- commonly switched between
-	{ "red", "blue" }, -- e.g. when testing designs
+	{ "red", "blue" }, -- e.g. when designs testing 
 	{ "read", "write" },
 	{ "warn", "error" },
 	{ "and", "or" },

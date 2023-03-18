@@ -120,8 +120,11 @@ local function cmpconfig()
 					require("neogen").jump_next()
 				elseif require("luasnip").jumpable(1) then
 					require("luasnip").jump(1)
+					-- multi-cursor jump
+				elseif Fn.mode():find("[nvV]") then
+						fallback()
 				else
-					fallback()
+					vim.notify("No more jump forwards.")		
 				end
 			end, { "i", "s", "n", "x" }),
 			["<D-S-j>"] = cmp.mapping(function(fallback)
@@ -129,8 +132,10 @@ local function cmpconfig()
 					require("neogen").jump_prev()
 				elseif require("luasnip").jumpable(-1) then
 					require("luasnip").jump(-1)
-				else
+				elseif Fn.mode():find("[nvV]") then
 					fallback()
+				else
+					vim.notify("No more jump backwards.")		
 				end
 			end, { "i", "s", "n", "x" }),
 

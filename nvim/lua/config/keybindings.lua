@@ -141,20 +141,16 @@ Keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
 Keymap("n", "qf", function() require("neogen").generate() end, { desc = "Neogen: Comment Function" })
 
 -- WHITESPACE CONTROL
-Keymap("n", "=", "mzO<Esc>`z", { desc = "add blank line above" })
-Keymap("n", "_", "mzo<Esc>`z", { desc = "add blank line below" })
+Keymap("n", "=", "mzO<Esc>`z", { desc = " add blank above" })
+Keymap("n", "_", "mzo<Esc>`z", { desc = " add blank below" })
 Keymap("n", "<Tab>", ">>", { desc = " indent" })
 Keymap("n", "<S-Tab>", "<<", { desc = " outdent" })
 Keymap("x", "<Tab>", ">gv", { desc = " indent" })
 Keymap("x", "<S-Tab>", "<gv", { desc = " outdent" })
 
--- Word Switcher
-Keymap(
-	"n",
-	"<BS>",
-	function() require("funcs.word-switcher").switch() end,
-	{ desc = "switch common words" }
-)
+-- Word Switcher (fallback: switch casing)
+-- stylua: ignore
+Keymap( "n", "<BS>", function() require("funcs.big-wave").switch() end, { desc = "switch common words" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
@@ -433,7 +429,6 @@ Keymap("n", "<D-b>", function()
 		vim.notify("No Breadcrumbs available.", LogWarn)
 		return
 	end
-
 	local rawdata = require("nvim-navic").get_data()
 	local breadcrumbs = ""
 	for _, v in pairs(rawdata) do
