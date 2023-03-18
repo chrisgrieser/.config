@@ -12,7 +12,7 @@ return {
 			}
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "ssr",
-				callback = function() vim.wo.sidescrolloff = 0 end,
+				callback = function() vim.opt_local.sidescrolloff = 0 end,
 			})
 		end,
 	},

@@ -1,11 +1,13 @@
 require("config.utils")
+local opt_local = vim.opt_local
+local opt = vim.opt
 --------------------------------------------------------------------------------
 
 -- DIRECTORIES
 opt.directory:prepend(VimDataDir .. "swap//")
 opt.undodir:prepend(VimDataDir .. "undo//")
-opt.viewdir = VimDataDir .. "view"
-opt.shadafile = VimDataDir .. "main.shada"
+vim.opt.viewdir = VimDataDir .. "view"
+vim.opt.shadafile = VimDataDir .. "main.shada"
 
 --------------------------------------------------------------------------------
 -- Undo
@@ -17,7 +19,7 @@ opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 -- working, so space should not be added here
 local undopointChars = { ".", ",", ";", '"' }
 for _, char in pairs(undopointChars) do
-	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char })
+	Keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char })
 end
 
 --------------------------------------------------------------------------------
@@ -35,6 +37,9 @@ opt.guicursor = {
 opt.showmatch = true
 opt.smartcase = true
 opt.ignorecase = true
+
+-- Clipboard
+opt.clipboard = "unnamedplus"
 
 -- Quickfix / Locaton List
 opt.grepprg = "rg --vimgrep" -- use rg for :grep
@@ -88,7 +93,7 @@ opt.sidescrolloff = 13
 
 -- FIX scrolloff work at EoF
 -- https://github.com/Aasim-A/scrollEOF.nvim/blob/master/lua/scrollEOF.lua#L11
-autocmd("CursorMoved", {
+Autocmd("CursorMoved", {
 	callback = function()
 		if bo.filetype == "DressingSelect" then return end
 
@@ -129,7 +134,7 @@ opt.listchars = {
 	trail = "·",
 }
 
-autocmd("BufReadPost", {
+Autocmd("BufReadPost", {
 	callback = function()
 		cmd.IndentOMatic() -- trigger again to ensure it's run before determining spaces/tabs
 		local usesSpaces = bo.expandtab
@@ -145,11 +150,11 @@ autocmd("BufReadPost", {
 
 --------------------------------------------------------------------------------
 -- Auto-Saving & Auto-read on change
-autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
+Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
 	callback = function()
-		if not bo.readonly and expand("%") ~= "" and bo.buftype == "" and bo.filetype ~= "gitcommit" then
-			cmd.update(expand("%:p"))
+		if not bo.readonly and Expand("%") ~= "" and bo.buftype == "" and bo.filetype ~= "gitcommit" then
+			cmd.update(Expand("%:p"))
 		end
 	end,
 })
@@ -162,7 +167,7 @@ opt.autoread = true
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
 -- overwritten by the ftplugins having the `o` option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
-autocmd("FileType", {
+Autocmd("FileType", {
 	callback = function() opt_local.formatoptions:remove("o") end,
 })
 
@@ -195,11 +200,11 @@ local function remember(mode)
 		cmd([[silent! loadview 1]]) -- silent to avoid error for files w/o view (e.g. after creation)
 	end
 end
-autocmd("BufWinLeave", {
+Autocmd("BufWinLeave", {
 	pattern = "?*", -- pattern required, otherwise does not trigger
 	callback = function() remember("save") end,
 })
-autocmd("BufWinEnter", {
+Autocmd("BufWinEnter", {
 	pattern = "?*",
 	callback = function() remember("load") end,
 })
@@ -253,17 +258,17 @@ for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
 	local readCmd = "keepalt 0r " .. skeletonDir .. "/skeleton." .. ft .. " | normal! G"
 
-	autocmd("BufNewFile", {
+	Autocmd("BufNewFile", {
 		pattern = "*." .. ft,
 		command = readCmd,
 	})
 
 	-- BufReadPost + empty file as additional condition to also auto-insert
 	-- skeletons when empty files were created by other apps
-	autocmd("BufReadPost", {
+	Autocmd("BufReadPost", {
 		pattern = "*." .. ft,
 		callback = function()
-			local curFile = expand("%")
+			local curFile = Expand("%")
 			local fileIsEmpty = fn.getfsize(curFile) < 4 -- to account for linebreak weirdness
 			if fileIsEmpty then cmd(readCmd) end
 		end,

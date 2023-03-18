@@ -135,9 +135,7 @@ end
 
 --------------------------------------------------------------------------------
 
-augroup("themeChange", {})
-autocmd("ColorSchemePre", {
-	group = "themeChange",
+Autocmd("ColorSchemePre", {
 	callback = function()
 		-- everforest requires change before setting colorscheme
 		local mode = vim.opt.background:get()
@@ -149,8 +147,7 @@ autocmd("ColorSchemePre", {
 		end
 	end,
 })
-autocmd("ColorScheme", {
-	group = "themeChange",
+Autocmd("ColorScheme", {
 	callback = function()
 		-- HACK defer needed for some modifications to properly take effect
 		for _, delayMs in pairs { 50, 100, 200 } do
@@ -164,7 +161,7 @@ autocmd("ColorScheme", {
 
 ---@param mode string "dark"|"light"
 function SetThemeMode(mode)
-	opt.background = mode
+	vim.opt.background = mode
 	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
 	cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	local targetTheme = mode == "dark" and g.darkTheme or g.lightTheme

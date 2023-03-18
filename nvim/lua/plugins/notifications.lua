@@ -67,7 +67,7 @@ local function config()
 	print = function(...)
 		local args = { ... }
 		if args[1] == nil then
-			vim.notify("NIL", logWarn)
+			vim.notify("NIL", LogWarn)
 			return	
 		end
 
@@ -88,7 +88,7 @@ local function config()
 			end
 		end
 
-		vim.notify(table.concat(safe_args, " "), logInfo, notifyOpts)
+		vim.notify(table.concat(safe_args, " "), LogInfo, notifyOpts)
 	end
 end
 

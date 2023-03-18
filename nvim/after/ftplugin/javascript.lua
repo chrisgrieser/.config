@@ -6,7 +6,7 @@ bo.path = ".,,../" -- also search parent directory (useful for Alfred)
 --------------------------------------------------------------------------------
 
 -- Open regex in regex101 and regexper (railroad diagram)
-keymap("n", "g/", function()
+Keymap("n", "g/", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
 	Normal('"zyya/') -- yank outer regex
 	Normal('vi/') -- select inner regex for easy replacement

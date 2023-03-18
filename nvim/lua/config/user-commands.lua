@@ -11,7 +11,7 @@ end, {})
 
 -- `:ViewDir` opens the nvim view directory
 newCommand("ViewDir", function(_)
-	local viewdir = expand(vim.opt.viewdir:get())
+	local viewdir = Expand(vim.opt.viewdir:get())
 	fn.system('open "' .. viewdir .. '"')
 end, {})
 

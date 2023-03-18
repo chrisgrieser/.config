@@ -36,9 +36,9 @@ local gitShellOpts = {
 	on_exit = function()
 		if #output == 0 then return end
 		local out = table.concat(output, " \n "):gsub("%s*$", "")
-		local logLevel = logInfo
+		local logLevel = LogInfo
 		if out:lower():find("error") then
-			logLevel = logError
+			logLevel = LogError
 		elseif out:lower():find("warning") then
 			logLevel = logWarn
 		end
@@ -201,7 +201,7 @@ function M.addCommitPush(prefillMsg)
 		end
 
 		-- run Shimmering Focus specific actions instead
-		if expand("%") == "source.css" then
+		if Expand("%") == "source.css" then
 			shimmeringFocusBuild(newMsg)
 			return
 		end
@@ -220,7 +220,7 @@ end
 function M.gitLink()
 	if not isInGitRepo() then return end
 
-	local filepath = expand("%:p")
+	local filepath = Expand("%:p")
 	local gitroot = fn.system([[git --no-optional-locks rev-parse --show-toplevel]])
 	local pathInRepo = filepath:sub(#gitroot)
 	local remote = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git.*", "%1")

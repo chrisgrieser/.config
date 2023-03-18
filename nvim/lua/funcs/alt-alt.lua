@@ -54,7 +54,7 @@ local function altOldfile()
 		if i > #vim.v.oldfiles then return nil end
 		oldfile = vim.v.oldfiles[i]
 		local fileExists = fn.filereadable(oldfile) == 1
-		local isCurrentFile = oldfile == expand("%:p")
+		local isCurrentFile = oldfile == Expand("%:p")
 		local commitMsg = oldfile:find("COMMIT_EDITMSG$")
 		local harpoonMenu = oldfile:find("harpoon%-menu$")
 	until fileExists and not commitMsg and not isCurrentFile and not harpoonMenu
@@ -64,8 +64,8 @@ end
 ---shows info on alternate window/buffer/oldfile in that priority
 function M.altFileStatusline()
 	local maxLen = 15
-	local altFile = expand("#:t")
-	local curFile = expand("%:t")
+	local altFile = Expand("#:t")
+	local curFile = Expand("%:t")
 
 	if altFile == "" and not altOldfile() then -- no oldfile and after start
 		return ""
@@ -78,7 +78,7 @@ function M.altFileStatusline()
 	elseif altFile == "" and altOldfile() then
 		return " " .. vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
 	elseif curFile == altFile then -- same name, different file
-		local altParent = expand("#:p:h:t")
+		local altParent = Expand("#:p:h:t")
 		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
 		return "# " .. altParent .. "/" .. altFile
 	end
@@ -89,12 +89,12 @@ end
 function M.altBufferWindow()
 	if numberOfWins() > 1 then
 		cmd.wincmd("p")
-	elseif expand("#") ~= "" then
+	elseif Expand("#") ~= "" then
 		cmd.buffer("#")
 	elseif altOldfile() then
 		cmd.edit(altOldfile())
 	else
-		vim.notify("Nothing to switch to.", logWarn)
+		vim.notify("Nothing to switch to.", LogWarn)
 	end
 	if require("satellite") then cmd.SatelliteRefresh() end
 end
@@ -111,9 +111,9 @@ function M.betterClose()
 
 	-- close buffers
 	local openBuffers = fn.getbufinfo { buflisted = 1 }
-	local bufToDel = expand("%:p")
+	local bufToDel = Expand("%:p")
 	if #openBuffers == 1 then
-		vim.notify("Only one buffer open.", logWarn)
+		vim.notify("Only one buffer open.", LogWarn)
 		return
 	elseif #openBuffers == 2 then
 		cmd.bwipeout() -- cannot clear altfile otherwise :/
@@ -123,7 +123,7 @@ function M.betterClose()
 	cmd.bdelete()
 
 	-- ensure new alt file points towards open, non-active buffer, or altoldfile
-	local curFile = expand("%:p")
+	local curFile = Expand("%:p")
 	local i = 0
 	local newAltBuf = ""
 	repeat
