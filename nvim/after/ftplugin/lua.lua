@@ -4,17 +4,17 @@ require("config.utils")
 -- lua regex opener
 Keymap("n", "g/", function()
 	Normal('"zya"vi"') -- yank and keep selection for quick replacement when done
-	local pattern = fn.getreg("z"):match('"(.-)"')
+	local pattern = Fn.getreg("z"):match('"(.-)"')
 	local url = "https://gitspartv.github.io/lua-patterns/?pattern=" .. pattern
-	fn.system("open '" .. url .. "'") -- opening method on macOS
+	Fn.system("open '" .. url .. "'") -- opening method on macOS
 end, { desc = " Open lua pattern in regex viewer", buffer = true })
 
 -- Build
 Keymap("n", "<leader>r", function()
-	cmd.update()
+	Cmd.update()
 	local parentFolder = Expand("%:p:h")
 	if parentFolder:find("nvim") then
-		cmd.source()
+		Cmd.source()
 		vim.notify(Expand("%:r") .. " re-sourced")
 	elseif parentFolder:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
@@ -33,9 +33,9 @@ local function inspect(strToInspect)
 
 	if parentDir:find("hammerspoon") then
 		local hsApplescript = string.format('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"', strToInspect)
-		fn.system("osascript -e '" .. hsApplescript .. "'")
+		Fn.system("osascript -e '" .. hsApplescript .. "'")
 	elseif parentDir:find("nvim") then
-		local output = vim.inspect(fn.luaeval(strToInspect))
+		local output = vim.inspect(Fn.luaeval(strToInspect))
 		vim.notify(output, LogTrace, {
 			timeout = 10000, -- 10 seconds
 			on_open = function(win) -- enable treesitter highlighting in the notification
@@ -55,7 +55,7 @@ end
 Keymap("n", "<leader>li", function() inspect(Expand("<cWORD>")) end, { desc = " inspect cWORD", buffer = true })
 Keymap("x", "<leader>li", function()
 	Normal('"zy')
-	inspect(fn.getreg("z"))
+	inspect(Fn.getreg("z"))
 end, { desc = " inspect selection", buffer = true })
 
 api.nvim_buf_create_user_command(0, "I", function(ctx) inspect(ctx.args) end, { nargs = "+" })
@@ -69,11 +69,11 @@ api.nvim_buf_create_user_command(0, "II", function(ctx)
 		return
 	end
 	os.remove("/tmp/nvim-cmd-output")
-	local output = "out = " .. vim.inspect(fn.luaeval(ctx.args))
+	local output = "out = " .. vim.inspect(Fn.luaeval(ctx.args))
 	local lines = vim.split(output, "\n", { plain = true }) ---@diagnostic disable-line: param-type-mismatch
-	cmd.vsplit()
-	cmd.ene()
+	Cmd.vsplit()
+	Cmd.ene()
 	bo.filetype = "lua"
 	api.nvim_buf_set_lines(0, 0, -1, false, lines)
-	cmd.write { "/tmp/nvim-cmd-output.lua", bang = true }
+	Cmd.write { "/tmp/nvim-cmd-output.lua", bang = true }
 end, { nargs = "+" })

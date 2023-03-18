@@ -2,17 +2,17 @@ require("config.utils")
 --------------------------------------------------------------------------------
 
 Keymap({ "n", "i", "x" }, "<D-s>", function()
-	cmd.mkview(2)
+	Cmd.mkview(2)
 	Normal("gg=G") -- poor man's formatting
 	vim.lsp.buf.format { async = false } -- still used for null-ls-codespell
-	cmd.loadview(2)
-	cmd.write()
+	Cmd.loadview(2)
+	Cmd.write()
 end, { buffer = true, desc = "Save & Format" })
 
 --------------------------------------------------------------------------------
 
 -- Build
-Keymap("n", "<leader>r", cmd.AppleScriptRun, { buffer = true, desc = " Run Applescript" })
+Keymap("n", "<leader>r", Cmd.AppleScriptRun, { buffer = true, desc = " Run Applescript" })
 
 vim.g.applescript_config = { -- https://github.com/mityu/vim-applescript
 	run = {

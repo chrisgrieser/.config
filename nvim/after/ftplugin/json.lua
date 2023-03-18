@@ -9,7 +9,7 @@ Keymap("x", "<D-p>", ":!yq -o=json<CR><CR>", { desc = "prettify JSON", buffer = 
 Keymap("x", "<D-m>", ":!yq -I=0<CR><CR>", { desc = "minify JSON", buffer = true })
 
 -- in large files, start with some folds closed
-if fn.line("$") > 1000 then
+if Fn.line("$") > 1000 then
 	---@diagnostic disable-next-line: param-type-mismatch
 	vim.defer_fn(function () require("ufo").closeFoldsWith(2) end, 1)
 end

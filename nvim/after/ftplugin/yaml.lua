@@ -10,11 +10,11 @@ bo.expandtab = true
 
 -- Compile Karabiner Config
 Keymap("n", "<leader>r", function()
-	cmd.update()
+	Cmd.update()
 	local parentFolder = Expand("%:p:h")
 	if parentFolder:find("/karabiner") then
 		local karabinerBuildScp = vim.env.DOTFILE_FOLDER .. "/karabiner/build-karabiner-config.js"
-		local result = fn.system('osascript -l JavaScript "' .. karabinerBuildScp .. '"')
+		local result = Fn.system('osascript -l JavaScript "' .. karabinerBuildScp .. '"')
 		result = result:gsub("\n$", "")
 		vim.notify(result)
 	else

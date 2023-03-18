@@ -13,18 +13,18 @@ Keymap({ "o", "x" }, "aP", function() require("various-textobjs").shellPipe(fals
 --------------------------------------------------------------------------------
 -- Reload Sketchybar
 Keymap("n", "<leader>r", function()
-	cmd.update()
+	Cmd.update()
 	local parentFolder = Expand("%:p:h")
 
 	if parentFolder:find("sketchybar") then
-		fn.system([[brew services restart sketchybar]])
+		Fn.system([[brew services restart sketchybar]])
 
 		-- dismiss notification, HACK for https://github.com/FelixKratz/SketchyBar/issues/322
 		--stylua: ignore
 		---@diagnostic disable: param-type-mismatch
-		vim.defer_fn(function() fn.system([[osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"]]) end, 2000)
+		vim.defer_fn(function() Fn.system([[osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"]]) end, 2000)
 	else
-		local output = fn.system("zsh '" .. Expand("%:p").. "'")
+		local output = Fn.system("zsh '" .. Expand("%:p").. "'")
 		local logLevel = vim.v.shell_error > 0 and LogError or LogTrace
 		vim.notify(output, logLevel)
 	end

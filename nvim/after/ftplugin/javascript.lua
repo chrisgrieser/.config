@@ -11,11 +11,11 @@ Keymap("n", "g/", function()
 	Normal('"zyya/') -- yank outer regex
 	Normal('vi/') -- select inner regex for easy replacement
 
-	local regex = fn.getreg("z")
+	local regex = Fn.getreg("z")
 	local pattern = regex:match("/(.*)/")
 	local flags = regex:match("/.*/(%l*)")
 	---@diagnostic disable-next-line: param-type-mismatch, undefined-field
-	local replacement = fn.getline("."):match('replace ?%(/.*/.*, ?"(.-)"')
+	local replacement = Fn.getline("."):match('replace ?%(/.*/.*, ?"(.-)"')
 
 	-- https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
 	local url1 = "https://regex101.com/?regex=" .. pattern .. "&flags=" .. flags

@@ -4,27 +4,27 @@ local qol = require("funcs.quality-of-life")
 -- META
 
 -- search keymaps
-Keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " Keymaps" })
+Keymap("n", "?", function() Cmd.Telescope("keymaps") end, { desc = " Keymaps" })
 -- stylua: ignore
 Keymap( "n", "g?", function()
 	require("telescope.builtin").keymaps { prompt_title = " Buffer Keymaps", only_buf = true }
 end, { desc = " Buffer Keymaps" })
 
 -- Theme Picker
-Keymap("n", "<leader>T", function() cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
+Keymap("n", "<leader>T", function() Cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
 
 -- Highlights
-Keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
+Keymap("n", "<leader>H", function() Cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- Update [P]lugins
 Keymap("n", "<leader>p", require("lazy").sync, { desc = ":Lazy sync" })
 Keymap("n", "<leader>P", require("lazy").home, { desc = ":Lazy home" })
-Keymap("n", "<leader>M", cmd.Mason, { desc = ":Mason" })
+Keymap("n", "<leader>M", Cmd.Mason, { desc = ":Mason" })
 
 -- copy [l]ast ex[c]ommand
 Keymap("n", "<leader>lc", function()
-	local lastCommand = fn.getreg(":"):gsub("^I ", "") -- remove `I ` from my inspect command
-	fn.setreg("+", lastCommand)
+	local lastCommand = Fn.getreg(":"):gsub("^I ", "") -- remove `I ` from my inspect command
+	Fn.setreg("+", lastCommand)
 	vim.notify("COPIED\n" .. lastCommand)
 end, { desc = "גּ Copy last command" })
 
@@ -37,7 +37,7 @@ Keymap("n", "<leader>ln", function()
 	local history = require("notify").history()
 	local lastNotify = history[#history]
 	local msg = table.concat(lastNotify.message, "\n")
-	fn.setreg("+", msg)
+	Fn.setreg("+", msg)
 	vim.notify("Last Notification copied.", LogTrace)
 end, { desc = "גּ Copy Last Notification" })
 
@@ -74,9 +74,9 @@ Keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
 
 -- automatically do `:nohl` when done with search https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
-	if fn.mode() == "n" then
+	if Fn.mode() == "n" then
 		local originalSearchRelatedKeys = { "<CR>", "n", "N", "*", "#", "?", "/" }
-		local new_hlsearch = vim.tbl_contains(originalSearchRelatedKeys, fn.keytrans(char))
+		local new_hlsearch = vim.tbl_contains(originalSearchRelatedKeys, Fn.keytrans(char))
 		if vim.opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
 	end
 end, vim.api.nvim_create_namespace("auto_hlsearch"))
@@ -165,7 +165,7 @@ Keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 -- SPELLING
 
 -- [z]pelling [l]ist
-Keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "暈suggest" })
+Keymap("n", "zl", function() Cmd.Telescope("spell_suggest") end, { desc = "暈suggest" })
 Keymap("n", "za", "mz]s1z=`z", { desc = "暈autofix" }) -- [a]utofix word under cursor
 
 ---add word under cursor to vale dictionary
@@ -174,7 +174,7 @@ local function valeWord(mode)
 	local word = Expand("<cword>")
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
 	if not success then return end -- error message already by AppendToFile
-	cmd.edit() -- reload file for diagnostics to take effect
+	Cmd.edit() -- reload file for diagnostics to take effect
 	vim.notify("暈Now " .. mode .. "ing:\n" .. word)
 end
 Keymap("n", "zg", function() valeWord("accept") end, { desc = "暈Add to accepted words (vale)" })
@@ -257,10 +257,10 @@ Keymap("n", "cR", "R", { desc = "Replace Mode" })
 -- URL Opening (forward-seeking `gx`)
 Keymap("n", "gx", function()
 	require("various-textobjs").url()
-	local foundURL = fn.mode():find("v") -- will only switch to visual mode if URL found
+	local foundURL = Fn.mode():find("v") -- will only switch to visual mode if URL found
 	if foundURL then
 		Normal('"zy')
-		local url = fn.getreg("z")
+		local url = Fn.getreg("z")
 		os.execute("open '" .. url .. "'")
 	end
 end, { desc = " Smart URL Opener" })
@@ -280,7 +280,7 @@ Keymap("x", "<Left>", qol.moveSelectionLeft)
 -- Merging / Splitting Lines
 Keymap({ "n", "x" }, "M", "J", { desc = "merge line up" })
 Keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "merge line down" })
-Keymap("n", "<leader>s", cmd.TSJToggle, { desc = "split/join" })
+Keymap("n", "<leader>s", Cmd.TSJToggle, { desc = "split/join" })
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
@@ -305,7 +305,7 @@ Keymap("n", "<S-CR>", function() require("funcs.alt-alt").altBufferWindow() end,
 Keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
 
 Keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window" })
-Keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " Open Buffers" })
+Keymap("n", "gb", function() Cmd.Telescope("buffers") end, { desc = " Open Buffers" })
 -- stylua: ignore end
 
 Keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
@@ -324,10 +324,10 @@ Keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end,
 ------------------------------------------------------------------------------
 
 -- CMD-KEYBINDINGS
-Keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
+Keymap({ "n", "x", "i" }, "<D-s>", Cmd.update, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 
 -- stylua: ignore
-Keymap({ "n", "x" }, "<D-l>", function() fn.system("open -R '" .. Expand("%:p") .. "'") end, { desc = " Reveal in Finder" })
+Keymap({ "n", "x" }, "<D-l>", function() Fn.system("open -R '" .. Expand("%:p") .. "'") end, { desc = " Reveal in Finder" })
 
 Keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
 Keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
@@ -368,7 +368,7 @@ Keymap("n", "'", ":CccConvert<CR>", { desc = " Convert Color" }) -- shift-# o
 ---@return number|nil
 local function harpoonFileNumber()
 	local pwd = vim.loop.cwd()
-	local jsonPath = fn.stdpath("data") .. "/harpoon.json"
+	local jsonPath = Fn.stdpath("data") .. "/harpoon.json"
 	local json = ReadFile(jsonPath)
 	if not json then return end
 
@@ -393,8 +393,8 @@ Keymap("n", "gO", function()
 	local thisFolder = Expand("%:p:h")
 	require("telescope").extensions.file_browser.file_browser { path = thisFolder }
 end, { desc = " Browse in Folder" })
-Keymap("n", "gF", function() cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
-Keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
+Keymap("n", "gF", function() Cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
+Keymap("n", "gr", function() Cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 
 -- File Operations
 -- stylua: ignore start
@@ -419,7 +419,7 @@ Keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = tru
 
 Keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "璉Show Diagnostic" })
 -- fallback for languages without an action LSP
-Keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
+Keymap("n", "gs", function() Cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
 
 -- actions defined globally so null-ls can use them without LSP
 Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "璉Code Action" })
@@ -437,7 +437,7 @@ Keymap("n", "<D-b>", function()
 		breadcrumbs = breadcrumbs .. v.name .. "."
 	end
 	breadcrumbs = breadcrumbs:sub(1, -2)
-	fn.setreg("+", breadcrumbs)
+	Fn.setreg("+", breadcrumbs)
 	vim.notify("COPIED\n" .. breadcrumbs)
 end, { desc = "璉Copy Breadcrumbs" })
 
@@ -458,20 +458,20 @@ Autocmd("LspAttach", {
 
 		-- conditional to not overwrite treesitter goto-symbol
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
-			Keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "璉Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
-			Keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "璉Workspace Symbols", buffer = true })
+			Keymap("n", "gs", function() Cmd.Telescope("lsp_document_symbols") end, { desc = "璉Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
+			Keymap("n", "gS", function() Cmd.Telescope("lsp_workspace_symbols") end, { desc = "璉Workspace Symbols", buffer = true })
 		end
 
-		Keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "璉Goto Definition", buffer = true })
-		Keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "璉Goto Reference", buffer = true })
-		Keymap("n", "gy", function() cmd.Telescope("lsp_type_definitions") end, { desc = "璉Goto Type Definition", buffer = true })
+		Keymap("n", "gd", function() Cmd.Telescope("lsp_definitions") end, { desc = "璉Goto Definition", buffer = true })
+		Keymap("n", "gf", function() Cmd.Telescope("lsp_references") end, { desc = "璉Goto Reference", buffer = true })
+		Keymap("n", "gy", function() Cmd.Telescope("lsp_type_definitions") end, { desc = "璉Goto Type Definition", buffer = true })
 		Keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "璉Signature", buffer = true })
 		Keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "璉Hover", buffer = true })
 		-- stylua: ignore end
 
 		-- Save & Format
 		Keymap({ "n", "i", "x" }, "<D-s>", function()
-			cmd.update()
+			Cmd.update()
 			vim.lsp.buf.format { async = true }
 		end, { buffer = true, desc = "璉Save & Format" })
 	end,
@@ -486,7 +486,7 @@ Keymap("n", "<D-b>", function()
 			breadcrumbs = breadcrumbs .. v.name .. "."
 		end
 		breadcrumbs = breadcrumbs:sub(1, -2)
-		fn.setreg("+", breadcrumbs)
+		Fn.setreg("+", breadcrumbs)
 		vim.notify("COPIED\n" .. breadcrumbs)
 	else
 		vim.notify("No Breadcrumbs available.", LogWarn)
@@ -496,7 +496,7 @@ end, { desc = "璉Copy Breadcrumbs" })
 --------------------------------------------------------------------------------
 -- GIT
 
-Keymap("n", "<leader>gn", cmd.Neogit, { desc = " Commit (Neogit)" })
+Keymap("n", "<leader>gn", Cmd.Neogit, { desc = " Commit (Neogit)" })
 Keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = " Commit (Neogit)" })
 Keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = " Add Hunk" })
 Keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = " Reset Hunk" })
@@ -505,10 +505,10 @@ Keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" 
 Keymap(
 	"n",
 	"<leader>gs",
-	function() cmd.Telescope("git_status") end,
+	function() Cmd.Telescope("git_status") end,
 	{ desc = " Status (Telescope)" }
 )
-Keymap("n", "<leader>gl", function() cmd.Telescope("git_commit") end, { desc = " Log (Telescope)" })
+Keymap("n", "<leader>gl", function() Cmd.Telescope("git_commit") end, { desc = " Log (Telescope)" })
 
 -- stylua: ignore start
 Keymap({ "n", "x" }, "<leader>gl", function () require("funcs.git-utils").gitLink() end, { desc = " Link" })
@@ -523,9 +523,9 @@ Keymap("n", "<leader>gd", function()
 	vim.ui.input({ prompt = "Git Pickaxe (empty = full history)" }, function(query)
 		if not query then return end
 		if query ~= "" then query = string.format(" -G'%s'", query) end
-		cmd("DiffviewFileHistory %" .. query)
-		cmd.wincmd("w") -- go directly to file window
-		cmd.wincmd("|") -- maximize
+		Cmd("DiffviewFileHistory %" .. query)
+		Cmd.wincmd("w") -- go directly to file window
+		Cmd.wincmd("|") -- maximize
 	end)
 end, { desc = " File History (Diffview)" })
 
@@ -535,7 +535,7 @@ end, { desc = " File History (Diffview)" })
 Keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = " Toggle Relative Line Numbers" })
 Keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers" })
 Keymap("n", "<leader>ow", qol.toggleWrap, { desc = " Toggle Wrap" })
-Keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 璉LSP Restart" })
+Keymap("n", "<leader>ol", Cmd.LspRestart, { desc = " 璉LSP Restart" })
 Keymap("n", "<leader>od", function()
 	if g.diagnosticOn == nil then g.diagnosticOn = true end
 	if g.diagnosticOn then
@@ -579,8 +579,8 @@ Autocmd("FileType", {
 	},
 	callback = function()
 		local opts = { buffer = true, nowait = true, desc = "close" }
-		Keymap("n", "<Esc>", cmd.close, opts)
-		Keymap("n", "q", cmd.close, opts)
+		Keymap("n", "<Esc>", Cmd.close, opts)
+		Keymap("n", "q", Cmd.close, opts)
 	end,
 })
 
@@ -618,8 +618,8 @@ for _, key in ipairs { "x", "h", "l", "e", "w", "b" } do
 		end
 
 		-- abort when recording, since this only leads to bugs then
-		local isRecording = fn.reg_recording() ~= ""
-		local isPlaying = fn.reg_executing() ~= ""
+		local isRecording = Fn.reg_recording() ~= ""
+		local isPlaying = Fn.reg_executing() ~= ""
 		if isRecording or isPlaying then return end
 
 		if count <= maxUsage then

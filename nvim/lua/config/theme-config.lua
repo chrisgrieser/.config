@@ -7,15 +7,15 @@ require("config.utils")
 ---@param hlgroupfrom string
 ---@param hlgroupto string
 local function linkHighlight(hlgroupfrom, hlgroupto)
-	cmd.highlight { "def link " .. hlgroupfrom .. " " .. hlgroupto, bang = true }
+	Cmd.highlight { "def link " .. hlgroupfrom .. " " .. hlgroupto, bang = true }
 end
 
 ---@param hlgroup string
 ---@param changes string
-local function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
+local function setHighlight(hlgroup, changes) Cmd.highlight(hlgroup .. " " .. changes) end
 
 ---@param hlgroup string
-local function clearHighlight(hlgroup) cmd.highlight("clear " .. hlgroup) end
+local function clearHighlight(hlgroup) Cmd.highlight("clear " .. hlgroup) end
 
 --------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ local function clearHighlight(hlgroup) cmd.highlight("clear " .. hlgroup) end
 local signIcons = { Error = "", Warn = "▲", Info = "", Hint = "" }
 for type, icon in pairs(signIcons) do
 	local hl = "DiagnosticSign" .. type
-	fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	Fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 --------------------------------------------------------------------------------
@@ -36,11 +36,11 @@ local function customHighlights()
 	end
 
 	setHighlight("urls", "cterm=underline gui=underline")
-	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
+	Fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
 	linkHighlight("myAnnotations", "Todo")
-	fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
-	fn.matchadd("myAnnotations", [[(SIC)]])
+	Fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
+	Fn.matchadd("myAnnotations", [[(SIC)]])
 
 	linkHighlight("IndentBlanklineContextChar", "Comment") -- active indent different color
 	setHighlight("rainbowcol1", "guifg=#7e8a95") -- rainbow brackets without aggressive red
@@ -163,12 +163,12 @@ Autocmd("ColorScheme", {
 function SetThemeMode(mode)
 	vim.opt.background = mode
 	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
-	cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
+	Cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	local targetTheme = mode == "dark" and g.darkTheme or g.lightTheme
-	cmd.colorscheme(targetTheme)
+	Cmd.colorscheme(targetTheme)
 end
 
 -- initialize theme on startup
-local isDarkMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
+local isDarkMode = Fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
 local targetMode = isDarkMode and "dark" or "light"
 SetThemeMode(targetMode)

@@ -29,16 +29,16 @@ Keymap("i", "<M-S-CR>", "<Space>") -- FIX accidental triggering in insert mode w
 -- position.
 Keymap("n", "dq", function()
 	local prevCursor = GetCursor(0)
-	cmd.normal { "d<<<" } -- without bang for remapping of COM
+	Cmd.normal { "d<<<" } -- without bang for remapping of COM
 	SetCursor(0, prevCursor)
 end, { remap = true, desc = "delete comment" })
 
 -- manually changed cq to preserve the commentstring
 Keymap("n", "cq", function()
-	cmd.normal { "d<<<" } -- without bang for remapping
-	cmd.normal { "x" }
-	cmd.normal { "Q" }
-	cmd.startinsert { bang = true }
+	Cmd.normal { "d<<<" } -- without bang for remapping
+	Cmd.normal { "x" }
+	Cmd.normal { "Q" }
+	Cmd.startinsert { bang = true }
 end, { desc = "change comment" })
 
 -- INFO omap q <<< is done is treesitter config, takes care of other operators

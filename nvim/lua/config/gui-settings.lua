@@ -7,17 +7,17 @@ local g = vim.g
 -- See hammerspoons `app-hider.lua`
 Autocmd("VimEnter", {
 	callback = function()
-		fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
+		Fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
 
 		-- HACK to fix neovide sometimes not enlarging the window
-		fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
+		Fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
 	end,
 })
 
 --------------------------------------------------------------------------------
 
 -- font size dependent on device
-local device = fn.hostname()
+local device = Fn.hostname()
 if device:find("Mother") then
 	g.neovide_scale_factor = 0.94
 elseif device:find("eduroam") or device:find("iMac") then

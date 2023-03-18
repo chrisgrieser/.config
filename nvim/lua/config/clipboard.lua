@@ -10,7 +10,7 @@ Keymap("x", "p", "P", { desc = "paste without switching register" })
 
 -- do not clutter the register if blank line is deleted
 Keymap("n", "dd", function()
-	local isBlankLine = fn.getline("."):find("^%s*$") ---@diagnostic disable-line: param-type-mismatch, undefined-field
+	local isBlankLine = Fn.getline("."):find("^%s*$") ---@diagnostic disable-line: param-type-mismatch, undefined-field
 	local expr = isBlankLine and '"_dd' or "dd"
 	return expr
 end, { expr = true })
@@ -29,13 +29,13 @@ Autocmd("TextYankPost", {
 		vim.highlight.on_yank { timeout = 1500 }
 
 		-- abort when recording, since this only leads to bugs then
-		local isRecording = fn.reg_recording() ~= ""
-		local isPlaying = fn.reg_executing() ~= ""
+		local isRecording = Fn.reg_recording() ~= ""
+		local isPlaying = Fn.reg_executing() ~= ""
 		if isRecording or isPlaying then return end
 
 		-- deletion does not need stickiness and also already shifts register, so
 		-- only saving the last yank is required
-		if vim.v.event.operator == "d" then g.lastYank = fn.getreg('"') end
+		if vim.v.event.operator == "d" then g.lastYank = Fn.getreg('"') end
 
 		if vim.v.event.operator ~= "y" then return end
 
@@ -45,19 +45,19 @@ Autocmd("TextYankPost", {
 		-- add yanks and deletes to numbered registers
 		if vim.v.event.regname ~= "" then return end
 		for i = 8, 2, -1 do
-			local regcontent = fn.getreg(tostring(i))
-			fn.setreg(tostring(i + 1), regcontent)
+			local regcontent = Fn.getreg(tostring(i))
+			Fn.setreg(tostring(i + 1), regcontent)
 		end
-		fn.setreg("1", fn.getreg("0")) -- so both y and d copy to "1
-		if g.lastYank then fn.setreg("2", g.lastYank) end
-		g.lastYank = fn.getreg('"')
+		Fn.setreg("1", Fn.getreg("0")) -- so both y and d copy to "1
+		if g.lastYank then Fn.setreg("2", g.lastYank) end
+		g.lastYank = Fn.getreg('"')
 	end,
 })
 
 -- cycle through the last deletes/yanks ("2 till "9), starting at non-last delete/yank
 Keymap("n", "P", function()
 	if not g.killringCount then g.killringCount = 2 end
-	cmd.undo()
+	Cmd.undo()
 	Normal('"' .. tostring(g.killringCount) .. "p")
 	g.killringCount = g.killringCount + 1
 	if g.killringCount > 9 then
@@ -74,8 +74,8 @@ end, { desc = "paste & reset killring" })
 -- paste charwise reg as linewise & vice versa
 Keymap("n", "gp", function()
 	local reg = "+"
-	local regContent = fn.getreg(reg)
-	local isLinewise = fn.getregtype(reg) == "V"
+	local regContent = Fn.getreg(reg)
+	local isLinewise = Fn.getregtype(reg) == "V"
 
 	local targetRegType
 	if isLinewise then
@@ -85,7 +85,7 @@ Keymap("n", "gp", function()
 		targetRegType = "V"
 	end
 
-	fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
+	Fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
 	Normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
 	if targetRegType == "V" then Normal("==") end
 end, { desc = "paste differently" })

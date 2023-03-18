@@ -1,5 +1,6 @@
 local M = {}
 local g = vim.g
+local cmd = vim.cmd
 
 ---checks whether quickfixlist is empty and notifies
 ---@return boolean
