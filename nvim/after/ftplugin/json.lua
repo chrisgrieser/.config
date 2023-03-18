@@ -13,3 +13,6 @@ if fn.line("$") > 1000 then
 	---@diagnostic disable-next-line: param-type-mismatch
 	vim.defer_fn(function () require("ufo").closeFoldsWith(2) end, 1)
 end
+
+
+iabbrev("")

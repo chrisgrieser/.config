@@ -8,5 +8,5 @@ bo.tabstop = 4
 bo.softtabstop = 4
 
 -- fix habits
-cmd.inoreabbrev("<buffer> true True")
-cmd.inoreabbrev("<buffer> false False")
+iabbrev("<buffer> true True")
+iabbrev("<buffer> false False")
