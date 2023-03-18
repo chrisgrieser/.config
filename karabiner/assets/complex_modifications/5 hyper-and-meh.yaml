@@ -22,37 +22,6 @@ rules:
             bundle_identifiers:
               - ^com\.apple\.finder$
               - ^mindustry\.mac$
-      # disable accidental triggering of systemdiagnosis via `Hyper+.` and
-      # `Hyper+,`. Needs different versions to disable it for variants from
-      # quick typing
-      - type: basic
-        from: { key_code: period, modifiers: { mandatory: [command, control, shift, option] } }
-        to:
-          - key_code: vk_none
-      - type: basic
-        from: { key_code: comma, modifiers: { mandatory: [command, control, shift, option] } }
-        to:
-          - key_code: vk_none
-      - type: basic
-        from:
-          simultaneous:
-            - key_code: command
-            - key_code: shift
-            - key_code: control
-            - key_code: option
-            - key_code: period
-        to:
-          - key_code: vk_none
-      - type: basic
-        from:
-          simultaneous:
-            - key_code: command
-            - key_code: shift
-            - key_code: control
-            - key_code: option
-            - key_code: comma
-        to:
-          - key_code: vk_none
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣  ↹  Tab  → Meh/Tab"
     manipulators:
@@ -188,3 +157,46 @@ rules:
           - key_code: delete_or_backspace # delete the selection
           - key_code: delete_or_backspace # delete the space
           - key_code: right_arrow # go to next word
+
+      #─────────────────────────────────────────────────────────────────────
+
+      # disable accidental triggering of systemdiagnosis via `Hyper+.` and
+      # `Hyper+,`. Needs different versions to disable it for variants from
+      # quick typing
+      - type: basic
+        from: { key_code: period, modifiers: { mandatory: [command, control, shift, option] } }
+        to: [key_code: vk_none]
+      - type: basic
+        from: { key_code: comma, modifiers: { mandatory: [command, control, shift, option] } }
+        to: [key_code: vk_none]
+      - type: basic
+        from:
+          simultaneous:
+            - key_code: command
+            - key_code: shift
+            - key_code: control
+            - key_code: option
+            - key_code: period
+        to: [key_code: vk_none]
+        parameters: { basic.simultaneous_threshold_milliseconds: 150 }
+      - type: basic
+        from:
+          simultaneous:
+            - key_code: command
+            - key_code: shift
+            - key_code: control
+            - key_code: option
+            - key_code: comma
+        to: [key_code: vk_none]
+        parameters: { basic.simultaneous_threshold_milliseconds: 150 }
+      - type: basic
+        from:
+          simultaneous:
+            - key_code: command
+            - key_code: shift
+            - key_code: control
+            - key_code: option
+            - key_code: comma
+            - key_code: period
+        to: [key_code: vk_none]
+        parameters: { basic.simultaneous_threshold_milliseconds: 150 }

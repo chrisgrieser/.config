@@ -2,13 +2,17 @@
 extends: default
 
 yaml-files:
-  - '*.yaml'
-  - '*.yml'
+  - "*.yaml"
+  - "*.yml"
 
 rules:
   line-length: disable
   document-start: disable
   trailing-spaces: disable
-  comments: disable
   braces: disable
-  new-line-at-end-of-file: disable # compatibility with prettier
+  new-line-at-end-of-file: disable
+  comments:
+    min-spaces-from-content: 1
+    require-starting-space: false
+  empty-lines:
+    level: warning
