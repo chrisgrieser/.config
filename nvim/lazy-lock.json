@@ -35,6 +35,7 @@
   "mason-lspconfig.nvim": { "branch": "main", "commit": "d1a76a59371813d16b5ef0deab209b85db5d19cd" },
   "mason-null-ls.nvim": { "branch": "main", "commit": "4070ec7c543b67df16143ee206e436d24bb9c01b" },
   "mason-nvim-dap.nvim": { "branch": "main", "commit": "8c5d0212bb385ce363ac3a00aa2e16d88ac44ba7" },
+  "mason-update-all": { "branch": "main", "commit": "d94cf0ff32a5469ca887dd99914bf4b095ebc24f" },
   "mason.nvim": { "branch": "main", "commit": "9582bee51c8071981283c3428b30560590ad09b5" },
   "neodev.nvim": { "branch": "main", "commit": "ce2bedbfc07b28c1f247102de19c4767602c4fc7" },
   "neogen": { "branch": "main", "commit": "93d997dbddfe084e77ba4541c54a7b8bfd754fb1" },

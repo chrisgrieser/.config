@@ -152,6 +152,7 @@ return {
 			}
 		end,
 	},
+
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config

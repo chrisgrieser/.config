@@ -91,24 +91,16 @@ return {
 	},
 	{ -- clipboard history / killring
 		"gbprod/yanky.nvim",
-		-- keys = { "p", "P" },
-		init = function()
-			-- 1
-			-- 2
-			vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-			vim.keymap.set("n", "P", "<Plug>(YankyCycleForward)")
-		end,
+		event = "BufReadPost",
 		config = function()
 			require("yanky").setup {
 				ring = {
-					history_length = 20,
+					history_length = 15,
 					cancel_event = "move", -- move|update
 				},
-				preserve_cursor_position = { enabled = true },
-				-- replaces vim.highlight.on_yank { timeout = 1500 }
 				highlight = {
+					on_yank = false, -- using for nicer highlights vim.highlight.on_yank()
 					on_put = true,
-					on_yank = true, 
 					timer = 1000,
 				},
 			}

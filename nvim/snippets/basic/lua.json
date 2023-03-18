@@ -1,6 +1,6 @@
 {
 	"require": {
-		"prefix": "require",
+		"prefix": "require (string)",
 		"body": "require (\"$0\")"
 	},
 	"trim trailing line break": {
