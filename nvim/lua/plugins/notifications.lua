@@ -68,7 +68,7 @@ local function config()
 	print = function(...)
 		local args = { ... }
 		if args[1] == nil and #args == 1 then
-			vim.notify("NIL", LogTrace)
+			vim.notify("NIL", vim.log.levels.TRACE)
 			return	
 		end
 
@@ -86,11 +86,11 @@ local function config()
 		if includesTable then
 			notifyOpts.on_open = function(win)
 				local buf = vim.api.nvim_win_get_buf(win)
-				vim.pi.nvim_buf_set_option(buf, "filetype", "lua")
+				vim.api.nvim_buf_set_option(buf, "filetype", "lua")
 			end
 		end
 
-		vim.notify(table.concat(safe_args, " "), LogInfo, notifyOpts)
+		vim.notify(table.concat(safe_args, " "), vim.log.levels.INFO, notifyOpts)
 	end
 end
 
@@ -98,6 +98,6 @@ end
 
 return {
 	"rcarriga/nvim-notify",
-	lazy = false, -- not lazyloaded, so notifications on entry are still shown
+	event = "UIEnter",
 	config = config,
 }

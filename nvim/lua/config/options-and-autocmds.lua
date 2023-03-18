@@ -216,7 +216,7 @@ Autocmd("BufWinEnter", {
 -- DIAGNOSTICS
 
 local function diagnosticFormat(diagnostic, mode)
-	local source = diagnostic.source:gsub("%.$", "")
+	local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or nil
 	local code = diagnostic.code
 	local out = diagnostic.message
 	if code then out = out .. " (" .. code .. ")" end -- some linters have no code
