@@ -37,15 +37,20 @@ return {
 			local rule = require("nvim-autopairs.rule")
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
 			npairs.add_rules {
-				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- e.g. for keymaps
-				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes in json
+				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- useful for keymaps
+				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes 
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
+
+				-- before: (|)			after: ( | )
 				rule(" ", " "):with_pair(function(opts)
-					-- Before: (|) After: ( | )
 					local pair = opts.line:sub(opts.col - 1, opts.col)
 					return vim.tbl_contains({ "()", "[]", "{}" }, pair)
 				end),
+				-- before: () =>|		after: () => { | }
+				rule("%(.*%)%s*%=>$", " {  }", { "typescript", "javascript" })
+					:use_regex(true)
+					:set_end_pair_length(2),
 			}
 
 			-- add brackets to cmp completions, e.g. "function" -> "function()"

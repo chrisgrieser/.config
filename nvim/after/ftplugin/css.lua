@@ -59,7 +59,7 @@ keymap({ "n", "x" }, "<leader>li", function()
 	if fn.mode() == "n" then
 		selector = fn.getline("."):gsub("{.*", "")
 	else
-		normal('"zy')
+		Normal('"zy')
 		selector = fn.getreg("z")
 	end
 	local jsCodeEncoded = [[electronWindow.openDevTools();const%20element%3Ddocument.querySelector("]]
@@ -72,13 +72,13 @@ end, { desc = "Obsidian: document.querySelect()", buffer = true })
 
 -- if copying a css selection, add the closing bracket as well
 keymap("n", "p", function()
-	normal("p") -- paste as always
+	Normal("p") -- paste as always
 	local reg = '"'
 	local regContent = fn.getreg(reg)
 	local isLinewise = fn.getregtype(reg) == "V"
 	if isLinewise and regContent:find("{\n$") then
 		fn.append(".", { "\t", "}" })
-		normal("j")
+		Normal("j")
 	end
 end, { desc = "smarter CSS paste", buffer = true })
 
