@@ -37,6 +37,7 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		lazy = true, -- loaded by other plugins
 		config = function()
+			(bla)
 			require("nvim-web-devicons").setup {
 				override = {
 					applescript = {
@@ -99,35 +100,34 @@ return {
 			}
 		end,
 	},
-	-- Better input fields
-	{
+	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
 		config = function()
-			local gitCommitMsgLength = 50
+			local gitCommitMsgLength = 50 -- make dressing as long as git commit messages
 			require("dressing").setup {
 				input = {
+					insert_only = false, -- enable normal mode
 					border = BorderStyle,
 					relative = "win",
 					max_width = gitCommitMsgLength,
 					min_width = gitCommitMsgLength,
 					win_options = {
 						sidescrolloff = 0,
-						winblend = 0,
+						winblend = 1,
 					},
-					insert_only = false, -- enable normal mode
 				},
 				select = {
-					backend = { "builtin" }, -- Priority list of preferred vim.select implementations
+					backend = { "builtin", "telescope" }, -- Priority list of vim.select implementations
 					trim_prompt = true, -- Trim trailing `:` from prompt
 					builtin = {
 						border = BorderStyle,
 						relative = "cursor",
 						max_width = 80,
 						min_width = 20,
-						max_height = 15,
+						max_height = 20,
 						min_height = 4,
-						win_options = { winblend = 0 },
+						win_options = { winblend = 1 },
 					},
 				},
 			}
