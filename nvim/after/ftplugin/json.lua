@@ -15,4 +15,4 @@ if fn.line("$") > 1000 then
 end
 
 
-iabbrev("")
+iabbrev('\\ \\"')
