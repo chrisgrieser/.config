@@ -60,7 +60,7 @@
 		"prefix": "sort (array)",
 		"body": [
 			"sort((a, b) => {",
-			"\t$return {1:b - a};",
+			"\treturn ${1:b - a};",
 			"})"
 		],
 		"description": "Sort Array with basic a-b-comparator function"
