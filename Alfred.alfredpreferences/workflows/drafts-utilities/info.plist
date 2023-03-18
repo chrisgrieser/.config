@@ -262,6 +262,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E4105FE7-296F-44AB-BCC0-6DE9A0D936B7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B6A0C425-D9B7-4F43-A579-32BCF3E9003F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F5CD04E3-5A08-4191-9DAA-FB7C95953587</key>
 		<array>
 			<dict>
@@ -311,6 +324,27 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
+				<string>drafts://x-callback-url/runAction?action=archive-by-UUID&amp;text={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>4F38A0DE-A1C0-408D-B796-B60D0EDA7993</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
 				<string>drafts://x-callback-url/actionSearch?query={query}</string>
 			</dict>
 			<key>type</key>
@@ -338,27 +372,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>F5CD04E3-5A08-4191-9DAA-FB7C95953587</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>drafts://x-callback-url/runAction?action=archive-by-UUID&amp;text={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>4F38A0DE-A1C0-408D-B796-B60D0EDA7993</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -401,27 +414,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>08BA2565-9B60-4A1C-BC0E-7BCD74ADF899</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>drafts://open?uuid={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>77E992B5-E489-4B56-A178-7C1CB761F733</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -509,22 +501,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
+				<key>browser</key>
 				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>hotkeyUsed</key>
-					<string>false</string>
-					<key>mode</key>
-					<string>new</string>
-				</dict>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>drafts://open?uuid={query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>B6A0C425-D9B7-4F43-A579-32BCF3E9003F</string>
+			<string>77E992B5-E489-4B56-A178-7C1CB761F733</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -573,6 +564,49 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>hotkeyUsed</key>
+					<string>false</string>
+					<key>mode</key>
+					<string>new</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>B6A0C425-D9B7-4F43-A579-32BCF3E9003F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Save in Drafts</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>E4105FE7-296F-44AB-BCC0-6DE9A0D936B7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -611,63 +645,6 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>07FA7C90-3407-4EC9-A790-9846DCDE2A4D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>2</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>D</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.agiletortoise.Drafts-OSX</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>F6A1C8B1-4191-4F60-966D-38C835B0142A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>hotkeyUsed</key>
-					<string>true</string>
-					<key>mode</key>
-					<string>new</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>B9E643D5-8F80-4981-AC73-070D537A1375</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -744,6 +721,63 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>2</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>D</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.agiletortoise.Drafts-OSX</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>F6A1C8B1-4191-4F60-966D-38C835B0142A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>hotkeyUsed</key>
+					<string>true</string>
+					<key>mode</key>
+					<string>new</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>B9E643D5-8F80-4981-AC73-070D537A1375</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -761,63 +795,6 @@
 			<string>4E5B84C8-6F38-4660-BF59-079EE3D12150</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>6</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>Y</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.agiletortoise.Drafts-OSX</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>4D894905-7334-4290-835D-15461122F45A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>hotkeyUsed</key>
-					<string>true</string>
-					<key>mode</key>
-					<string>append</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>C47481D2-5DC2-4E5C-9ADA-00CC1D517B1C</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -892,6 +869,41 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>6</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>Y</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.agiletortoise.Drafts-OSX</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>4D894905-7334-4290-835D-15461122F45A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -909,6 +921,72 @@
 			<string>BAD44650-CAFD-4C9E-84D9-6710E38A751C</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>hotkeyUsed</key>
+					<string>true</string>
+					<key>mode</key>
+					<string>append</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>C47481D2-5DC2-4E5C-9ADA-00CC1D517B1C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>qlmanage -p "qref_templatetags.html"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>44ACF59E-80E4-46E2-99C3-E424AAF3B5D8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>dr templatetags</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Show Template Tag Cheatsheet</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7B4F8DF4-D76C-419E-A643-E2667687215E</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -970,50 +1048,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>71C7FFC2-1D66-4561-B433-3F8CEBA479A5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>qlmanage -p "qref_templatetags.html"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>44ACF59E-80E4-46E2-99C3-E424AAF3B5D8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>dr templatetags</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Show Template Tag Cheatsheet</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7B4F8DF4-D76C-419E-A643-E2667687215E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1135,7 +1169,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>215</real>
+			<real>170</real>
 		</dict>
 		<key>29410773-ADC2-4B3E-8F78-37C96D87DA3F</key>
 		<dict>
@@ -1144,7 +1178,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>805</real>
 		</dict>
 		<key>42389168-DDFE-4158-93B7-8AD8E3B7564E</key>
 		<dict>
@@ -1164,7 +1198,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>960</real>
 		</dict>
 		<key>44ACF59E-80E4-46E2-99C3-E424AAF3B5D8</key>
 		<dict>
@@ -1184,7 +1218,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>565</real>
 		</dict>
 		<key>4E5B84C8-6F38-4660-BF59-079EE3D12150</key>
 		<dict>
@@ -1204,7 +1238,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>60</real>
+			<real>15</real>
 		</dict>
 		<key>65FBA979-932F-4451-886B-E14284E89A1E</key>
 		<dict>
@@ -1233,7 +1267,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>805</real>
 		</dict>
 		<key>76617630-8984-4444-8F08-CE5ECD32EE77</key>
 		<dict>
@@ -1244,7 +1278,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>805</real>
 		</dict>
 		<key>77E992B5-E489-4B56-A178-7C1CB761F733</key>
 		<dict>
@@ -1286,7 +1320,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>190</real>
 		</dict>
 		<key>8479954D-12AF-484E-94BC-FA244E2ECF27</key>
 		<dict>
@@ -1313,9 +1347,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>295</real>
+			<real>300</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>295</real>
 		</dict>
 		<key>B970369A-B4DB-46EE-8725-1BF669D561C5</key>
 		<dict>
@@ -1335,7 +1369,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>445</real>
 		</dict>
 		<key>BAD44650-CAFD-4C9E-84D9-6710E38A751C</key>
 		<dict>
@@ -1362,14 +1396,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>595</real>
 		</dict>
 		<key>CAABCDA0-0DEF-44C3-992E-B52B07F5B8D3</key>
 		<dict>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>960</real>
 		</dict>
 		<key>E3D6E3BB-81DF-431C-A6F1-175075F74679</key>
 		<dict>
@@ -1378,7 +1412,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>960</real>
+		</dict>
+		<key>E4105FE7-296F-44AB-BCC0-6DE9A0D936B7</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>300</real>
 		</dict>
 		<key>F5CD04E3-5A08-4191-9DAA-FB7C95953587</key>
 		<dict>
@@ -1400,7 +1441,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>415</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

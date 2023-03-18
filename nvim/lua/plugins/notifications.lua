@@ -39,6 +39,16 @@ local function config()
 	local function banned(msg) -- https://github.com/rcarriga/nvim-notify/issues/114#issuecomment-1179754969
 		return msg:find("^nvim%-navic:.*Already attached to %w+")
 		or msg:find("^error%(satellite.nvim%):")
+		or msg:find("code = %-32801,")
+
+	-- 	 = { 
+ -- code = -32801, 
+ -- message = "Content modified.", 
+ -- <metatable> = { 
+ -- __tostring = <function 1> 
+ -- } 
+ -- } 
+
 	end
 
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field

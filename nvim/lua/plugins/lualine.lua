@@ -14,6 +14,8 @@ local function indentation()
 		out = out .. tostring(bo.tabstop) .. " spaces"
 	elseif usesTabs and vim.tbl_contains(spaceFiletypes, ft) then
 		out = out .. "tabs"
+	elseif usesTabs and bo.tabstop ~= vim.opt.tabstop:get() then
+		out = out .. " tabwidth " .. bo.tabstop
 	end
 
 	-- mixed indentation
@@ -32,6 +34,8 @@ local function indentation()
 	return out
 end
 
+--------------------------------------------------------------------------------
+
 -- show branch info only when *not* on main/master
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter", "TabEnter" }, {
 	callback = function()
@@ -44,6 +48,8 @@ local function isStandardBranch() -- not checking for branch here, since running
 	local validFiletype = vim.bo.filetype ~= "help" -- vim help files are located in a git repo
 	return notMainBranch and validFiletype
 end
+
+--------------------------------------------------------------------------------
 
 local function selectionCount()
 	local isVisualMode = vim.fn.mode():find("[Vv]")

@@ -115,7 +115,10 @@ Keymap("n", "^", function()
 end, { desc = "ﬕ Toggle fold / Close {n} foldlevels" })
 Keymap("n", "zR", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
 Keymap("n", "zM", function() require("ufo").closeAllFolds() end, { desc = "  Close all folds" })
-Keymap("n", "zz", ":%foldclose<CR>zo", { desc = "ﬕ Close toplevel folds" })
+Keymap("n", "zz", function()
+	Cmd("%foldclose") -- close toplevel folds
+	Cmd("silent! normal! zo") -- open fold cursor is standing on
+end, { desc = "ﬕ Close toplevel folds" })
 
 --------------------------------------------------------------------------------
 -- EDITING
