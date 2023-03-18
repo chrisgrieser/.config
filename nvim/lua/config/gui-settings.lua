@@ -4,9 +4,7 @@ require("config.utils")
 
 -- hide other apps so the GUI transparency is visible.
 -- See hammerspoons `app-hider.lua`
-augroup("hammerspoonAutomation", {})
 autocmd("VimEnter", {
-	group = "hammerspoonAutomation",
 	callback = function()
 		fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
 

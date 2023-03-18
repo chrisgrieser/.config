@@ -5,7 +5,7 @@ opt.clipboard = "unnamedplus"
 
 -- keep the register clean
 keymap("n", "x", '"_x')
-keymap({"n", "x"}, "c", '"_c')
+keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "cc", '"_cc')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "paste without switching register" })
@@ -18,9 +18,7 @@ keymap("n", "dd", function()
 end, { expr = true })
 
 -- yanking without moving the cursor
-augroup("yankImprovements", {})
 autocmd({ "CursorMoved", "VimEnter" }, {
-	group = "yankImprovements",
 	callback = function() g.cursorPreYank = getCursor(0) end,
 })
 
@@ -28,7 +26,6 @@ autocmd({ "CursorMoved", "VimEnter" }, {
 -- - highlighted yank
 -- - saves yanks in numbered register, so `"1p` pastes previous yanks.
 autocmd("TextYankPost", {
-	group = "yankImprovements",
 	callback = function()
 		-- highlighted yank
 		vim.highlight.on_yank { timeout = 1500 }
@@ -63,7 +60,7 @@ autocmd("TextYankPost", {
 keymap("n", "P", function()
 	if not g.killringCount then g.killringCount = 2 end
 	cmd.undo()
-	normal('"' .. tostring(g.killringCount) .. "p")
+	Normal('"' .. tostring(g.killringCount) .. "p")
 	g.killringCount = g.killringCount + 1
 	if g.killringCount > 9 then
 		vim.notify("Reached end of killring.")
@@ -73,7 +70,7 @@ end, { desc = "cycle through killring" })
 
 keymap("n", "p", function()
 	g.killringCount = 2 -- normal pasting resets the killring
-	normal("p")
+	Normal("p")
 end, { desc = "paste & reset killring" })
 
 -- paste charwise reg as linewise & vice versa
@@ -91,6 +88,6 @@ keymap("n", "gp", function()
 	end
 
 	fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
-	normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
-	if targetRegType == "V" then normal("==") end
+	Normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
+	if targetRegType == "V" then Normal("==") end
 end, { desc = "paste differently" })

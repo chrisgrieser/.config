@@ -3,7 +3,7 @@ require("config.utils")
 
 -- lua regex opener
 keymap("n", "g/", function()
-	normal('"zya"vi"') -- yank and keep selection for quick replacement when done
+	Normal('"zya"vi"') -- yank and keep selection for quick replacement when done
 	local pattern = fn.getreg("z"):match('"(.-)"')
 	local url = "https://gitspartv.github.io/lua-patterns/?pattern=" .. pattern
 	fn.system("open '" .. url .. "'") -- opening method on macOS
@@ -54,7 +54,7 @@ end
 -- stylua: ignore
 keymap("n", "<leader>li", function() inspect(expand("<cWORD>")) end, { desc = " inspect cWORD", buffer = true })
 keymap("x", "<leader>li", function()
-	normal('"zy')
+	Normal('"zy')
 	inspect(fn.getreg("z"))
 end, { desc = " inspect selection", buffer = true })
 

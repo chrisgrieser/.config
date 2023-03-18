@@ -26,7 +26,7 @@ logInfo = vim.log.levels.INFO
 
 ---runs :normal natively with bang
 ---@param cmdStr any
-function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
+function Normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 ---whether nvim runs in a GUI
 ---@return boolean

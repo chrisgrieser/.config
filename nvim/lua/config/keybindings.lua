@@ -108,7 +108,7 @@ keymap("n", "m", "%", { remap = true, desc = "MatchIt" })
 -- without toggle current fold
 keymap("n", "^", function()
 	if vim.v.count == 0 then
-		normal("za")
+		Normal("za")
 	else
 		require("ufo").closeFoldsWith(vim.v.count - 1) -- -1 as topmost is foldlevel 0
 	end
@@ -259,7 +259,7 @@ keymap("n", "gx", function()
 	require("various-textobjs").url()
 	local foundURL = fn.mode():find("v") -- will only switch to visual mode if URL found
 	if foundURL then
-		normal([["zy]])
+		Normal('"zy')
 		local url = fn.getreg("z")
 		os.execute("open '" .. url .. "'")
 	end

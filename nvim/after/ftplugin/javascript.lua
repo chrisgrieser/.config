@@ -8,8 +8,8 @@ bo.path = ".,,../" -- also search parent directory (useful for Alfred)
 -- Open regex in regex101 and regexper (railroad diagram)
 keymap("n", "g/", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
-	normal('"zyya/') -- yank outer regex
-	normal('vi/') -- select inner regex for easy replacement
+	Normal('"zyya/') -- yank outer regex
+	Normal('vi/') -- select inner regex for easy replacement
 
 	local regex = fn.getreg("z")
 	local pattern = regex:match("/(.*)/")
