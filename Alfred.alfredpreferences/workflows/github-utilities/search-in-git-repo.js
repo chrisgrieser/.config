@@ -10,9 +10,9 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeperated, str].join(" ");
 }
 
-const folderToSearch = $.getenv("folderToSearch");
-
 //──────────────────────────────────────────────────────────────────────────────
+
+const folderToSearch = $.getenv("folderToSearch");
 
 // FILES
 const dirtyFiles = app
@@ -107,19 +107,15 @@ const folderArray = app
 // only happens for recently visited repos, so for the other cases, this sorting
 // here is useful)
 const jsonArray = [...fileArray, ...folderArray].sort((a, b) => {
-	const aExtension = a.title.split(".").pop();
-	const bExtension = b.title.split(".").pop();
-	const priorityExtensions = ["ts", "md", "js", "lua", "py"];
-	const aHasPriority = priorityExtensions.includes(aExtension);
-	const bHasPriority = priorityExtensions.includes(bExtension);
-	if (aHasPriority && !bHasPriority) return -1;
-	if (!aHasPriority && bHasPriority) return 1;
+	const aExt = a.title.split(".").pop();
+	const bExt = b.title.split(".").pop();
+	const priorityExt = ["ts", "md", "js", "lua", "py"];
+	const aHasPrio = priorityExt.includes(aExt);
+	const bHasPrio = priorityExt.includes(bExt);
+	if (aHasPrio && !bHasPrio) return -1;
+	if (!aHasPrio && bHasPrio) return 1;
 	return 0;
 });
 
-if (jsonArray.length === 0) {
-	jsonArray.push({ title: "No file in the current Folder found." });
-	JSON.stringify({ items: jsonArray });
-}
-
-JSON.stringify({ items: jsonArray });
+if (jsonArray.length === 0) jsonArray.push({ title: "No file in the current Folder found." });
+JSON.stringify({ items: jsonArray }); // direct return

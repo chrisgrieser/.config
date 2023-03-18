@@ -5,7 +5,7 @@ local function indentation()
 	local ft = vim.bo.filetype
 	local tabwidth = vim.bo.tabstop
 	local spaceFiletypes = { "python", "yaml" }
-	local ignoredFiletypes = { "css" }
+	local ignoredFiletypes = { "css", "markdown" }
 	if vim.tbl_contains(ignoredFiletypes, ft) or vim.fn.mode() ~= "n" or vim.bo.buftype ~= "" then
 		return ""
 	end
@@ -14,7 +14,9 @@ local function indentation()
 	if usesSpaces and not vim.tbl_contains(spaceFiletypes, ft) then
 		out = out .. tostring(tabwidth) .. "␣"
 	elseif usesTabs and vim.tbl_contains(spaceFiletypes, ft) then
-		out = out .. tostring(tabwidth) .. "↹ "
+		out = out .. "↹ (" .. tostring(tabwidth) .. ")"
+	elseif usesTabs and vim.opt_global.tabstop:get() ~= tabwidth then
+		out = out .. " ↹ " .. tostring(tabwidth)
 	end
 
 	-- mixed indentation
@@ -23,7 +25,7 @@ local function indentation()
 	local mixed = vim.fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then
-		out = out .. " ↹ ␣"
+		out = out .. " mixed"
 	elseif usesTabs and hasSpaces then
 		out = out .. " ␣"
 	elseif usesSpaces and hasTabs then
@@ -161,7 +163,7 @@ local function lspCountStatusline()
 		if capable.referencesProvider and capable.definitionProvider then lspCapable = true end
 	end
 	local lspLoading = #(vim.lsp.util.get_progress_messages()) > 0
-	if lspLoading or not lspCapable then return "" end
+	if Fn.mode() ~= "n" or lspLoading or not lspCapable then return "" end
 
 	-- trigger count, abort when none
 	requestLspRefCount() -- needs to be separated due to lsp calls being async
