@@ -559,7 +559,7 @@ Keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
 Keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = " Selection to ToggleTerm" })
 
 -- stylua: ignore start
-Keymap({"n", "x"}, "5", function() require("iron.core").repl_for(bo.filetype) end, { desc = " Toggle REPL (Iron)" })
+Keymap({"n", "x"}, "5", function() require("iron.core").repl_for(Bo.filetype) end, { desc = " Toggle REPL (Iron)" })
 Keymap("n", "4", function() require("iron.core").send_line() end, { desc = " Send Line to REPL (Iron)" })
 Keymap("x", "4", function() require("iron.core").visual_send() end, { desc = " Send Selection to REPL (Iron)" })
 -- stylua: ignore end
@@ -592,13 +592,13 @@ Autocmd("FileType", {
 	pattern = { "ssr", "TelescopePrompt", "harpoon" },
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
-		if bo.filetype == "ssr" then
+		if Bo.filetype == "ssr" then
 			Keymap("n", "q", "Q", opts)
-		elseif bo.filetype == "harpoon" then
+		elseif Bo.filetype == "harpoon" then
 			-- HACK 1ms delay ensures it comes later in the autocmd stack and takes effect
 			---@diagnostic disable-next-line: param-type-mismatch
 			vim.defer_fn(function() Keymap("n", "q", "<Esc>", opts) end, 1)
-		elseif bo.filetype == "TelescopePrompt" then
+		elseif Bo.filetype == "TelescopePrompt" then
 			Keymap("n", "q", "<Esc>", opts)
 		end
 	end,

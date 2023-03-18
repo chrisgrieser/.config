@@ -1,7 +1,5 @@
----@diagnostic disable: lowercase-global
 g = vim.g -- global variables
-api = vim.api
-bo = vim.bo -- buffer-scoped options
+Bo = vim.bo 
 
 Fn = vim.fn
 Cmd = vim.cmd

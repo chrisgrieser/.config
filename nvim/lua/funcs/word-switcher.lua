@@ -189,8 +189,8 @@ function M.switch()
 	vim.opt.iskeyword:remove { "_", "-", "." }
 
 	-- TODO more precise retrieval of word under cursor
-	local cword = vim.fn.Expand("<cword>")
-	local cBigword = vim.fn.Expand("<cWORD>") -- check of cWORD needed to retrieve non-alphanumeric strings (e.g. "&&")
+	local cword = vim.fn.expand("<cword>")
+	local cBigword = vim.fn.expand("<cWORD>") -- check of cWORD needed to retrieve non-alphanumeric strings (e.g. "&&")
 
 	local alphaNumericUnderCursor = cBigword:find("[%a%d]")
 	local word = alphaNumericUnderCursor and cword or cBigword

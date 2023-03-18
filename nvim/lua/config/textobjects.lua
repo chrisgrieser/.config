@@ -124,7 +124,7 @@ Keymap({ "x", "o" }, "ai", function() require("various-textobjs").indentation(fa
 Autocmd("FileType", {
 	callback = function()
 		local indentedFts = { "python", "yaml", "markdown", "gitconfig" }
-		if vim.tbl_contains(indentedFts, bo.filetype) then
+		if vim.tbl_contains(indentedFts, Bo.filetype) then
 			Keymap( { "x", "o" }, "ai", function() require("various-textobjs").indentation(false, true) end, { buffer = true, desc = "indent textobj w/ start border" })
 		end
 	end,
@@ -133,7 +133,7 @@ Autocmd("FileType", {
 Autocmd("FileType", {
 	callback = function()
 		local pipeFiletypes = { "sh", "zsh", "bash" }
-		if vim.tbl_contains(pipeFiletypes, bo.filetype) then
+		if vim.tbl_contains(pipeFiletypes, Bo.filetype) then
 			Keymap( { "x", "o" }, "i|", function() require("various-textobjs").shellPipe(true) end, { buffer = true, desc = "inner pipe textobj" })
 			Keymap( { "x", "o" }, "a|", function() require("various-textobjs").shellPipe(false) end, { buffer = true, desc = "outer pipe textobj" })
 		end

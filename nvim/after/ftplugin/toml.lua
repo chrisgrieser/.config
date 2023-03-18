@@ -2,7 +2,7 @@ require("config.utils")
 --------------------------------------------------------------------------------
 
 -- do not autowrap
-bo.formatoptions = bo.formatoptions:gsub("t", "") 
+Bo.formatoptions = Bo.formatoptions:gsub("t", "") 
 
 -- link textobj
 Keymap(

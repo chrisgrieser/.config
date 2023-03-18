@@ -101,7 +101,7 @@ end
 
 ---Close window/buffer
 function M.betterClose()
-	if bo.modifiable then cmd.update() end
+	if vim.bo.modifiable then cmd.update() end
 
 	-- close window
 	if numberOfWins() > 1 then

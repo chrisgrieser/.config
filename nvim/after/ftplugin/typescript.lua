@@ -6,8 +6,8 @@ local javascriptConfig = Fn.stdpath("config") .. "/after/ftplugin/javascript.lua
 Cmd.source(javascriptConfig)
 
 -- setup quickfix list for npm, see also: https://vonheikemen.github.io/devlog/tools/vim-and-the-quickfix-list/
-bo.makeprg = "npm run build"
-bo.errorformat = " > %f:%l:%c: %trror: %m" .. ",%-G%.%#" -- = ignore remaining lines
+Bo.makeprg = "npm run build"
+Bo.errorformat = " > %f:%l:%c: %trror: %m" .. ",%-G%.%#" -- = ignore remaining lines
 
 -- Build
 -- requires makeprg defined above

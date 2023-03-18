@@ -1,10 +1,10 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
-bo.shiftwidth = 2
-bo.tabstop = 2
-bo.softtabstop = 2
-bo.expandtab = true
+Bo.shiftwidth = 2
+Bo.tabstop = 2
+Bo.softtabstop = 2
+Bo.expandtab = true
 
 --------------------------------------------------------------------------------
 

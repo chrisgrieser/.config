@@ -3,7 +3,7 @@ require("config.utils")
 
 -- COMMENT MARKS
 -- more useful than symbols for theme development
-bo.grepprg = "rg --vimgrep --no-column" -- remove columns
+Bo.grepprg = "rg --vimgrep --no-column" -- remove columns
 Keymap("n", "gs", function()
 	Cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
 	require("telescope.builtin").loclist {
