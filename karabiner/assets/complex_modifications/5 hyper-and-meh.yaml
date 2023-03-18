@@ -2,7 +2,7 @@ title: ⇪ Hyper and ↹ Meh Key
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "*️⃣ ⇪ Capslock  → Hyper/Esc"
+  - description: "*️⃣ ⇪ Capslock → Hyper/Esc"
     manipulators:
       - type: basic
         from: { key_code: caps_lock }
@@ -23,7 +23,7 @@ rules:
               - ^com\.apple\.finder$
               - ^mindustry\.mac$
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "*️⃣  ↹  Tab  → Meh/Tab"
+  - description: "*️⃣ ↹ Tab → Meh/Tab"
     manipulators:
       - type: basic
         from: { key_code: tab }
@@ -35,7 +35,7 @@ rules:
           - type: frontmost_application_unless
             bundle_identifiers: [^mindustry\.mac$]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "*️⃣  ⇪ Open Locations"
+  - description: "*️⃣ ⇪ Open Locations"
     manipulators:
       # Hyper + ⌫ = Open Trash
       - type: basic
@@ -78,7 +78,7 @@ rules:
                   end if
                 end tell'
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "*️⃣ ⇪ Restart App"
+  - description: "*️⃣ ⇪R: Restart App"
     manipulators:
       - type: basic
         from: { key_code: r, modifiers: { mandatory: [command, control, shift, option] } }
@@ -99,7 +99,7 @@ rules:
                 sleep 0.03
                 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
                 # bwipeout necessary due to empty buffer created before jumping to '0
-                neovide --frame=buttonless --notabs --geometry=101x32 -- -c "execute \"normal! '0\" | bwipeout #"
+                neovide --frame=buttonless --geometry=101x32 -- -c "execute \"normal! '0\" | bwipeout #"
               else
                 open -a "$FRONT_APP"
               fi
@@ -160,9 +160,9 @@ rules:
 
       #─────────────────────────────────────────────────────────────────────
 
-      # disable accidental triggering of systemdiagnosis via `Hyper+.` and
-      # `Hyper+,`. Needs different versions to disable it for variants from
-      # quick typing
+      # SYSDIAGNOSIS 
+      # disable accidental triggering of via `Hyper+.` and `Hyper+,`. 
+      # Needs different versions to disable it for variants from quick typing
       - type: basic
         from: { key_code: period, modifiers: { mandatory: [command, control, shift, option] } }
         to: [key_code: vk_none]
