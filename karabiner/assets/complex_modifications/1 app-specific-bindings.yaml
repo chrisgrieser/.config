@@ -601,13 +601,13 @@ rules:
         to:
           - { key_code: c, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
-      # ⌘⇧4: tap to screenshot, hold to annotate from clipboard
+      # ⌘⇧4: tap to screenshot, hold to capture previous area
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
           - shell_command: open "cleanshot://capture-area"
         to_if_held_down:
-          - shell_command: open "cleanshot://open-from-clipboard"
+          - shell_command: open "cleanshot://capture-previous-area"
         parameters:
           basic.to_if_alone_timeout_milliseconds: 200
           basic.to_if_held_down_threshold_milliseconds: 200
