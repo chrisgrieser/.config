@@ -40,15 +40,6 @@ local function config()
 		return msg:find("^nvim%-navic:.*Already attached to %w+")
 		or msg:find("^error%(satellite.nvim%):")
 		or msg:find("code = %-32801,")
-
-	-- 	 = { 
- -- code = -32801, 
- -- message = "Content modified.", 
- -- <metatable> = { 
- -- __tostring = <function 1> 
- -- } 
- -- } 
-
 	end
 
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
@@ -76,15 +67,16 @@ local function config()
 	-- selene: allow(incorrect_standard_library_use)
 	print = function(...)
 		local args = { ... }
-		if args[1] == nil then
-			vim.notify("NIL", LogWarn)
+		if args[1] == nil and #args == 1 then
+			vim.notify("NIL", LogTrace)
 			return	
 		end
 
-		local safe_args = {}
 		local includesTable = false
+		local safe_args = {}
+
 		for _, arg in pairs(args) do
-			if type(arg) == "table" then arg = "= " .. vim.inspect(arg) end -- pretty print tables
+			if type(arg) == "table" then arg = vim.inspect(arg) end -- pretty print tables
 			includesTable = true
 			table.insert(safe_args, tostring(arg))
 		end
