@@ -90,12 +90,12 @@ local function cmpconfig()
 		},
 		sorting = {
 			comparators = {
+				-- https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
 				compare.offset,
-				-- disable exact matches getting higher priority https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
-				-- compare.exact,
 				compare.score,
 				compare.recently_used,
 				compare.locality,
+				compare.exact, -- moved down
 				compare.kind,
 				compare.length,
 				compare.order,

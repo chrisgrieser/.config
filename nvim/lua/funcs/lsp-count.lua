@@ -1,19 +1,20 @@
 local M = {}
-
+local lsp = vim.lsp
 --------------------------------------------------------------------------------
 
--- calculate number of references for entity under cursor asynchronously
 local lspCount = {}
+
+-- calculate number of references for entity under cursor asynchronously
 local function requestLspRefCount()
 	if vim.fn.mode() ~= "n" then
 		lspCount = {}
 		return
 	end
-	local params = vim.lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
+	local params = lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
 	params.context = { includeDeclaration = false }
-	local thisFileUri = vim.uri_from_fname(Expand("%:p"))
+	local thisFileUri = vim.uri_from_fname(vim.fn.expand("%:p"))
 
-	vim.lsp.buf_request(0, "textDocument/references", params, function(error, refs)
+	lsp.buf_request(0, "textDocument/references", params, function(error, refs)
 		lspCount.refFile = 0
 		lspCount.refWorkspace = 0
 		if not error and refs then
@@ -23,7 +24,7 @@ local function requestLspRefCount()
 			end
 		end
 	end)
-	vim.lsp.buf_request(0, "textDocument/definition", params, function(error, defs)
+	lsp.buf_request(0, "textDocument/definition", params, function(error, defs)
 		lspCount.defFile = 0
 		lspCount.defWorkspace = 0
 		if not error and defs then
@@ -41,14 +42,22 @@ end
 function M.statusline()
 	-- abort when lsp loading or not capable of references
 	local currentBufNr = vim.fn.bufnr()
-	local bufClients = vim.lsp.get_active_clients { bufnr = currentBufNr }
+	local bufClients = lsp.get_active_clients { bufnr = currentBufNr }
+	local lspLoading = #(lsp.util.get_progress_messages()) > 0
 	local lspCapable = false
+	local isPyright = false
 	for _, client in pairs(bufClients) do
 		local capable = client.server_capabilities
 		if capable.referencesProvider and capable.definitionProvider then lspCapable = true end
+		if client.name == "pyright" then isPyright = true end
 	end
-	local lspLoading = #(vim.lsp.util.get_progress_messages()) > 0
-	if Fn.mode() ~= "n" or lspLoading or not lspCapable then return "" end
+	if 
+		vim.fn.mode() ~= "n" 
+		or (lspLoading and not isPyright) -- FIX pyright bug where it's constantly loading
+		or not lspCapable 
+	then
+		return ""
+	end
 
 	-- trigger count, abort when none
 	requestLspRefCount() -- needs to be separated due to lsp calls being async
