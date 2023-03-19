@@ -16,12 +16,19 @@ return {
 
 	-----------------------------------------------------------------------------
 
-	{ "Darazaki/indent-o-matic" }, -- automatically set right indent for file
-	{ "chrisgrieser/nvim-various-textobjs", dev = true, lazy = true },
-	{
+	{ -- automatically set right indent for file
+		"Darazaki/indent-o-matic",
+		event = "BufReadPre",
+	},
+	{ -- tons of text objects
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
+	{ -- tons of text objects
+		"chrisgrieser/nvim-various-textobjs",
+		lazy = true, -- loaded by keymaps
+		dev = true,
 	},
 	{ -- autopair brackets, quotes, and markup
 		"windwp/nvim-autopairs",
@@ -31,12 +38,11 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		config = function()
-			local npairs = require("nvim-autopairs")
-			npairs.setup { check_ts = true } -- use treesitter
-
+			require("nvim-autopairs").setup { check_ts = true } -- use treesitter
 			local rule = require("nvim-autopairs.rule")
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
-			npairs.add_rules {
+
+			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- useful for keymaps
 				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
@@ -47,10 +53,10 @@ return {
 					:use_regex(true)
 					:set_end_pair_length(2),
 
-				-- auto-add brackets writing if (can in theory also be implemented as auto-trigger)
+				-- auto-add brackets writing if (can in theory also be implemented as snippet with auto-trigger)
 				rule("if ", "()", { "typescript", "javascript" }):set_end_pair_length(1),
 
-				-- INFO adding a rule autopairing space will disable space
+				-- WARN adding a rule autopairing <space> will disable space
 				-- triggering `:abbrev`
 			}
 
@@ -75,7 +81,6 @@ return {
 					"..", -- added for lua string concatenation
 					"*", -- added multiplication
 					["-"] = false, -- since subtraction is not communicative
-					["|"] = false, -- since chaotic with pipes in shell
 				},
 			}
 		end,
