@@ -62,7 +62,7 @@ local function commented_lines_textobject()
 	repeat
 		rs = rs - 1
 		line = vim.api.nvim_buf_get_lines(0, rs - 1, rs, false)
-		-- fsfs
+	-- fsfs
 	until next(line) == nil or not is_commented(line[1])
 	rs = rs + 1
 	repeat
@@ -102,13 +102,14 @@ Keymap({ "o", "x" }, "m", function() require("various-textobjs").toNextClosingBr
 -- o: c[o]lumn textobj
 Keymap("o", "o", function() require("various-textobjs").column() end, { desc = "column textobj" })
 
--- gG: entire buffer textobj
-Keymap( { "x", "o" }, "gG", function() require("various-textobjs").entireBuffer() end, { desc = "entire buffer textobj" })
+-- ag: entire buffer textobj
+Keymap( { "x", "o" }, "ag", function() require("various-textobjs").entireBuffer() end, { desc = "entire buffer textobj" })
 
 -- r: [r]est of paragraph/indentation (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
 Keymap("o", "rp", function() require("various-textobjs").restOfParagraph() end, { desc = "rest of paragraph textobj" })
 Keymap("o", "ri", function() require("various-textobjs").restOfIndentation() end, { desc = "rest of indentation textobj" })
+Keymap({ "x", "o" }, "rg", "G", { desc = "rest of buffer textobj" })
 
 -- ge: diagnostic textobj (similar to ge for the next diagnostic)
 Keymap({ "x", "o" }, "ge", function() require("various-textobjs").diagnostic() end, { desc = "diagnostic textobj" })

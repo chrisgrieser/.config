@@ -1,10 +1,6 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
-Iabbrev("<buffer> ll local")
-
---------------------------------------------------------------------------------
-
 -- lua regex opener
 Keymap("n", "g/", function()
 	Normal('"zya"vi"') -- yank and keep selection for quick replacement when done
@@ -25,7 +21,7 @@ Keymap("n", "<leader>r", function()
 	else
 		vim.notify("Neither in nvim nor in hammerspoon directory.", LogError)
 	end
-end, { buffer = true, desc = " Reload" })
+end, { buffer = true, desc = " Reload Hammerspoon / Resource nvim file" })
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -63,21 +59,3 @@ Keymap("x", "<leader>li", function()
 end, { desc = " inspect selection", buffer = true })
 
 vim.api.nvim_buf_create_user_command(0, "I", function(ctx) inspect(ctx.args) end, { nargs = "+" })
-
---------------------------------------------------------------------------------
-
--- 2) `:II` inspects the passed object and puts it into a new buffer, https://www.reddit.com/r/neovim/comments/zhweuc/comment/izo9br1/
-vim.api.nvim_buf_create_user_command(0, "II", function(ctx)
-	if not (Expand("%:p"):find("nvim")) then
-		vim.notify("Not in a nvim directory.", LogError)
-		return
-	end
-	os.remove("/tmp/nvim-cmd-output")
-	local output = "out = " .. vim.inspect(Fn.luaeval(ctx.args))
-	local lines = vim.split(output, "\n", { plain = true }) ---@diagnostic disable-line: param-type-mismatch
-	Cmd.vsplit()
-	Cmd.ene()
-	Bo.filetype = "lua"
-	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-	Cmd.write { "/tmp/nvim-cmd-output.lua", bang = true }
-end, { nargs = "+" })
