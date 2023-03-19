@@ -91,10 +91,10 @@ local function cmpconfig()
 			comparators = {
 				-- Original order: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
 				-- Definitions of compare function https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
-				compare.kind, -- higher (prioritize snippets)
 				compare.offset,
 				compare.recently_used, -- higher
 				compare.score,
+				compare.kind, -- higher (prioritize snippets)
 				compare.locality,
 				compare.exact, -- lower
 				compare.length,
