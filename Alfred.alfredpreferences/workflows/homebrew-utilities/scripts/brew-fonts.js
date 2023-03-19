@@ -4,9 +4,8 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
 function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ") + " ";
+	const clean = str.replaceAll("-", " ");
+	return clean + " " + str;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -23,6 +22,7 @@ const workArray = JSON.parse(app.doShellScript(`curl -sL "${githubApiUrl}"`))
 			title: fontname,
 			match: alfredMatcher(fontname),
 			arg: cask,
+			mods: { alt: { arg: fontname } },
 			uid: cask,
 		};
 	});

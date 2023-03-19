@@ -140,6 +140,26 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>EB5742BE-90AC-413D-B9D9-FD17A86E999B</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Search at Google Fonts</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F38873E7-462C-4F93-9AD6-56BD4578A162</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: brew home</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
 		<array>
@@ -291,6 +311,27 @@
 			<string>CD40AB53-70F2-460D-BF34-1DF77F46FB38</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://fonts.google.com/?query={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>EB5742BE-90AC-413D-B9D9-FD17A86E999B</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -561,21 +602,6 @@ brew home "$*"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>802369B2-358A-46C9-9516-940B8E3E7940</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsmulti</key>
 				<integer>1</integer>
 				<key>filetypes</key>
@@ -591,6 +617,21 @@ brew home "$*"</string>
 			<string>89F35AB8-AC54-4BB2-B884-9B206671D5AE</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>802369B2-358A-46C9-9516-940B8E3E7940</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -693,7 +734,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 		<key>CD40AB53-70F2-460D-BF34-1DF77F46FB38</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>10</integer>
 			<key>note</key>
 			<string>install from homebrew-cask-fonts</string>
 			<key>xpos</key>
@@ -711,6 +752,15 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>450</real>
+		</dict>
+		<key>EB5742BE-90AC-413D-B9D9-FD17A86E999B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>455</real>
+			<key>ypos</key>
+			<real>155</real>
 		</dict>
 		<key>EDA21286-4E28-4304-A9DB-0BA74AB2C370</key>
 		<dict>

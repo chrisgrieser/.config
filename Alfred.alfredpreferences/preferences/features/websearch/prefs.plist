@@ -39,6 +39,17 @@
 			<key>utf8</key>
 			<true/>
 		</dict>
+		<key>1F94E577-E533-432C-BF98-48EBD1EAA5E5</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>font</string>
+			<key>text</key>
+			<string>Google Fonts: {query}</string>
+			<key>url</key>
+			<string>https://fonts.google.com/?query={query}</string>
+		</dict>
 		<key>510A0ED4-31D4-48D5-9318-92A081DCF445</key>
 		<dict>
 			<key>enabled</key>
