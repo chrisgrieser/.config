@@ -6,7 +6,7 @@ require("lua.utils")
 ---@param fPath string? filepath
 ---@param folder string? folderpath
 ---@return boolean|nil returns nil if getting invalid input
-local function isInSubdirectory(fPath, folder) 
+local function isInSubdirectory(fPath, folder)
 	if not fPath or not folder then return nil end
 	local _, fileSlashes = fPath:gsub("/", "")
 	local _, folderSlashes = folder:gsub("/", "")
@@ -127,7 +127,7 @@ FileHubWatcher = Pw(FileHub, function(paths, _)
 		-- ublacklist
 		elseif fileName == "ublacklist-settings.json" then
 			os.rename(filep, browserSettings .. fileName)
-			print("➡️ ".. fileName)
+			print("➡️ " .. fileName)
 
 		-- vimium-c
 		elseif fileName:match("vimium_c") then
