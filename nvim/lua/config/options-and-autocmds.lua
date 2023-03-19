@@ -143,8 +143,7 @@ Autocmd("BufReadPost", {
 		Cmd.IndentOMatic() -- trigger to ensure it's run before determining spaces/tabs
 
 		opt_local.listchars = vim.opt_global.listchars:get() -- copy the global
-		local usesSpaces = Bo.expandtab
-		if usesSpaces then
+		if Bo.expandtab then
 			opt_local.listchars:append { tab = "↹ " }
 			opt_local.listchars:append { lead = " " }
 		else
