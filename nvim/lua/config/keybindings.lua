@@ -605,9 +605,11 @@ Autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
+Keymap({"n", "o", "x"}, "w", "E", { desc = "w -> E" })
+
 -- Simple version of the delaytrain.nvim
--- CamelCaseMotion for e, w, and b
-for _, key in ipairs { "x", "h", "l", "e", "w", "b" } do
+-- CamelCaseMotion for e, and b
+for _, key in ipairs { "x", "h", "l", "e", "b" } do
 	local timeout = 3000
 	local maxUsage = 10
 
