@@ -1,5 +1,5 @@
 
-local colorPickerFiletypes = {
+local colorPickerFts = {
 	"css",
 	"scss",
 	"lua",
@@ -8,6 +8,7 @@ local colorPickerFiletypes = {
 	"toml",
 	"yaml",
 }
+
 --------------------------------------------------------------------------------
 
 return {
@@ -65,7 +66,7 @@ return {
 			require("satellite").setup {
 				winblend = 60, -- winblend = transparency
 				handlers = {
-					-- displaying marks creates autocmd-mapping of things with m,
+					-- FIX displaying marks creates autocmd-mapping of things with m,
 					-- making m-bindings infeasable
 					marks = { enable = false },
 				},
@@ -74,10 +75,9 @@ return {
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
-		ft = colorPickerFiletypes, -- only load on the filetypes actually using it
-		keys = {"'", "#"}, -- or load when called manually
+		ft = colorPickerFts,
 		config = function()
-			vim.opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal
+			vim.opt.termguicolors = true 
 			local ccc = require("ccc")
 			ccc.setup {
 				win_opts = { border = BorderStyle },
@@ -85,7 +85,7 @@ return {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
 					lsp = true,
-					filetypes = colorPickerFiletypes,
+					filetypes = colorPickerFts,
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
