@@ -68,6 +68,7 @@ end
 
 local function twitterCloseMediaWindow()
 	local twitter = App("Twitter")
+	if not twitter then return end
 	local mediaWin = twitter:findWindow("Media")
 	if not mediaWin then return end
 	mediaWin:close()
