@@ -2,11 +2,18 @@
 # shellcheck disable=SC2012
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
+if ! command -v fileicon &>/dev/null; then 
+	echo "fileicon not installed." && return 1 
+fi
+
+#───────────────────────────────────────────────────────────────────────────────
+
+
 cd "$(dirname "$0")" || exit 1
 folder="$1"
 cache_location="dlFolderLastChange"  # cache necessary to prevent recursion of icon change triggering pathwatcher again
 
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
 itemCount=$(ls "$folder" | wc -l)
 itemCount=$((itemCount-1)) # reduced by one to account for the "?Icon" file in the folder
