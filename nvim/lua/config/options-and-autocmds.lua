@@ -84,8 +84,9 @@ opt.cmdheight = 0
 
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
+
 opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
-opt.nrformats:remove { "bin", "hex" } -- remove edge case ambiguity
+opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use them anyway
 
 -- Timeouts
 opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
@@ -95,7 +96,7 @@ opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refact
 opt.scrolloff = 12
 opt.sidescrolloff = 13
 
--- FIX scrolloff work at EoF
+-- FIX scrolloff at EoF
 -- https://github.com/Aasim-A/scrollEOF.nvim/blob/master/lua/scrollEOF.lua#L11
 Autocmd("CursorMoved", {
 	callback = function()
@@ -140,8 +141,13 @@ opt.listchars = {
 
 Autocmd("BufReadPost", {
 	callback = function()
-		Cmd.IndentOMatic() -- trigger to ensure it's run before determining spaces/tabs
-
+		-- trigger to ensure it's run before determining spaces/tabs
+		local success = pcall(Cmd.IndentOMatic)
+		if not success then
+			vim.notify("IndentOMatic not found.", LogWarn)	
+			return
+		end
+			
 		opt_local.listchars = vim.opt_global.listchars:get() -- copy the global
 		if Bo.expandtab then
 			opt_local.listchars:append { tab = "↹ " }
@@ -183,17 +189,19 @@ Autocmd("FileType", {
 opt.foldenable = true
 opt.foldlevel = 99
 opt.foldlevelstart = 99
-opt.foldminlines = 1 -- restrict folding amount for batch-folding commands like zM
--- opt.foldmethod = "indent" -- if not using UFO for folding
+
+-- if not using UFO for folding
+-- opt.foldmethod = "indent"
 
 -- Remember folds and cursor
 local function remember(mode)
 	local ignoredFts = {
-		"DressingInput",
-		"DressingSelect",
 		"TelescopePrompt",
-		"gitcommit",
+		"DressingSelect",
+		"DressingInput",
 		"toggleterm",
+		"gitcommit",
+		"replacer",
 		"harpoon",
 		"help",
 		"qf",
