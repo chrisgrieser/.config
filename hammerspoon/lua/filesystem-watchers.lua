@@ -1,5 +1,6 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
+-- HELPERS
 
 ---is in sub-directory instead of directly in the folder
 ---@param fPath string? filepath
@@ -14,7 +15,8 @@ end
 
 --------------------------------------------------------------------------------
 
--- Bookmarks synced to Chrome Bookmarks (needed for Alfred)
+-- BOOKMARKS SYNCED TO CHROME BOOKMARKS
+-- (needed for Alfred)
 local appSupport = os.getenv("HOME") .. "/Library/Application Support/"
 local sourceBookmarkPath = appSupport .. "/Vivaldi/Default/Bookmarks"
 local sourceStatePath = appSupport .. "/Vivaldi/Local State"
@@ -42,7 +44,7 @@ end):start()
 
 --------------------------------------------------------------------------------
 
--- Download Folder Badge
+-- DOWNLOAD FOLDER BADGE
 -- requires "fileicon" being installed
 local downloadFolder = os.getenv("HOME") .. "/Downloaded"
 DownloadFolderWatcher = Pw(
@@ -53,23 +55,9 @@ DownloadFolderWatcher = Pw(
 ):start()
 
 --------------------------------------------------------------------------------
+-- TO FILE HUB
 
--- FONT rsync (for both directions)
--- (symlinking the Folder somehow does not work properly, therefore rsync)
-local fontLocation1 = DotfilesFolder .. "/fonts/" -- source folder needs trailing "/" to copy contents (instead of the folder)
-local fontLocation2 = os.getenv("HOME") .. "/Library/Fonts/" -- needs trailing "/"
-FontsWatcher1 = Pw(fontLocation2, function()
-	hs.execute('rsync --archive --update --delete "' .. fontLocation1 .. '" "' .. fontLocation2 .. '"')
-	print("➡️ Fonts synced.")
-end):start()
-FontsWatcher2 = Pw(fontLocation1, function()
-	hs.execute('rsync --archive --update --delete "' .. fontLocation2 .. '" "' .. fontLocation1 .. '"')
-	print("➡️ Fonts synced.")
-end):start()
-
---------------------------------------------------------------------------------
-
--- Redirects TO File Hub
+-- GenuisScan
 local scanFolder = os.getenv("HOME")
 	.. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 ScanFolderWatcher = Pw(scanFolder, function()
@@ -77,6 +65,7 @@ ScanFolderWatcher = Pw(scanFolder, function()
 	print("➡️ Scan moved to File Hub.")
 end):start()
 
+-- Downloads Folder
 local systemDownloadFolder = os.getenv("HOME") .. "/Downloads/"
 SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	-- Stats Update file can directly be trashed
@@ -92,6 +81,7 @@ SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	print("➡️ Download moved to File Hub.")
 end):start()
 
+-- Drafts Icloud
 local draftsIcloud = os.getenv("HOME")
 	.. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
 DraftsIcloudWatcher = Pw(draftsIcloud, function(files)
@@ -103,8 +93,8 @@ DraftsIcloudWatcher = Pw(draftsIcloud, function(files)
 end):start()
 
 --------------------------------------------------------------------------------
+-- FROM FILE HUB
 
--- Redirects FROM File Hub
 local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
 WatcherActive = true -- to prevent recursion issues
 -- selene: allow(high_cyclomatic_complexity)
@@ -179,7 +169,8 @@ FileHubWatcher = Pw(FileHub, function(paths, _)
 end):start()
 
 --------------------------------------------------------------------------------
--- auto-install Obsidian Alpha builds as soon as the file is downloaded
+-- AUTO-INSTALL OBSIDIAN ALPHA
+
 ObsiAlphaWatcher = Pw(FileHub, function(files)
 	for _, file in pairs(files) do
 		-- needs delay and `.crdownload` check, since the renaming is sometimes not picked up by hammerspoon
