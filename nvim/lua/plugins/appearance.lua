@@ -21,12 +21,12 @@ return {
 	},
 	{ -- rainbow brackets
 		"HiPhish/nvim-ts-rainbow2",
-		event = "VeryLazy",
+		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
-		-- event = "UIEnter",
+		event = "UIEnter",
 		config = function()
 			require("indent_blankline").setup {
 				show_current_context = true, -- = active indent
