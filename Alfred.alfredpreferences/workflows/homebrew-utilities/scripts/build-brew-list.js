@@ -11,8 +11,7 @@ function alfredMatcher(str) {
 }
 
 function readFile(path) {
-	const fm = $.NSFileManager.defaultManager;
-	const data = fm.contentsAtPath(path);
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
