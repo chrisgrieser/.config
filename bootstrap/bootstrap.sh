@@ -47,10 +47,6 @@ zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
 # zsh (ZDOTDIR set in .zshenv for the remaining config)
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
-# eslint (eslint LSP does not allow custom config paths, also should be used for
-# projects )
-ln -sf "$DOTFILE_FOLDER/linter-configs/.eslintrc.yml" ~
-
 # GPG config
 mkdir ~/.gnupg
 ln -sf "$DOTFILE_FOLDER/gnupg/gpg-agent.conf" ~/.gnupg
@@ -78,7 +74,3 @@ BROWSER="Chrome" # Chrome = Vivaldi, since Vivaldi does not rename the dir
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# Fig
-# mkdir -p ~/.fig/config
-# ln -sf "$DOTFILE_FOLDER/fig/settings.json" ~/.fig
