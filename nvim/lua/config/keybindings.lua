@@ -304,6 +304,8 @@ Keymap("n", "<S-CR>", function() require("funcs.alt-alt").altBufferWindow() end,
 Keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
 
 Keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window" })
+Keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "reopen last buffer" })
+
 Keymap("n", "gb", function() Cmd.Telescope("buffers") end, { desc = " Open Buffers" })
 -- stylua: ignore end
 
@@ -319,11 +321,6 @@ Keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = 
 Keymap("n", "<D-d>", function() require("harpoon.mark").add_file() end, { desc = "ﯠ Add File" })
 Keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
 -- stylua: ignore end
-
--- reopen last closed buffer
-Keymap("n", "<D-S-t>", function ()
-	local last = 	
-end, { desc = "Reopen last closed buffer" })
 
 ------------------------------------------------------------------------------
 

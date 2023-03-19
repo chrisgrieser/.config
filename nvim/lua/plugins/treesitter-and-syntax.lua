@@ -52,6 +52,7 @@ local function tsConfig()
 				disable = { "markdown" }, -- so `al` can be remapped to link text object
 				keymaps = {
 					["an"] = "@number.inner", -- [n]umber
+					["ik"] = "@assignment.rhs", -- inner [k]ey (INFO outer defined via various textobjs)
 					["a<CR>"] = "@return.outer", -- <CR>: return (`ar` already = a rectangular bracket)
 					["i<CR>"] = "@return.inner", 
 					["a/"] = "@regex.outer", -- /regex/

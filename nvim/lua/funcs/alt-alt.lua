@@ -99,7 +99,7 @@ function M.altBufferWindow()
 	if require("satellite") then cmd.SatelliteRefresh() end
 end
 
----Close window/buffer
+---Close window/buffer, preserving alt-file
 function M.betterClose()
 	if vim.bo.modifiable then cmd.update() end
 
@@ -110,7 +110,7 @@ function M.betterClose()
 	end
 
 	-- close buffers
-	local openBuffers = fn.getbufinfo { buflisted = 1 }
+	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
 	local bufToDel = Expand("%:p")
 	if #openBuffers == 1 then
 		vim.notify("Only one buffer open.", LogWarn)
@@ -135,6 +135,20 @@ function M.betterClose()
 		newAltBuf = openBuffers[i].name
 	until newAltBuf ~= curFile and newAltBuf ~= bufToDel
 	fn.setreg("#", newAltBuf) -- empty string would set the altfile to the current buffer
+end
+
+function M.reopenBuffer()
+	local i = 0
+	local last, bufferNotOpen
+	local openBuffers = vim.fn.getbufinfo{ buflisted = 1 }
+	local openBufPaths = vim.tbl_map(function (obj) return obj.name end, openBuffers)
+	repeat
+		i = i + 1
+		last = vim.v.oldfiles[i]
+		if not last then return end
+		bufferNotOpen = not vim.tbl_contains(openBufPaths, last)
+	until bufferNotOpen
+	cmd.edit(last)
 end
 
 --------------------------------------------------------------------------------

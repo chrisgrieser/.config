@@ -89,9 +89,11 @@ Keymap("o", "L", function() require("various-textobjs").url() end, { desc = "lin
 Keymap({ "x", "o" }, "iv", function() require("various-textobjs").value(true) end, { desc = "inner value textobj" })
 Keymap({ "x", "o" }, "av", function() require("various-textobjs").value(false) end, { desc = "outer value textobj" })
 
--- ik/ak: value textobj
-Keymap({ "x", "o" }, "ik", function() require("various-textobjs").key(true) end, { desc = "inner key textobj" })
-Keymap({ "x", "o" }, "ak", function() require("various-textobjs").key(false) end, { desc = "outer key textobj" })
+-- ak: outer key textobj
+-- INFO `ik` defined via treesitter to exclude `local` and `let`
+-- INFO mapping the *inner* obj to `ak`, since it includes `local` and `let` 
+-- (various textobjs' outer key includes the "=" and ":" as well)
+Keymap({ "x", "o" }, "ak", function() require("various-textobjs").key(true) end, { desc = "outer key textobj" })
 
 -- n: [n]ear end of the line
 Keymap({ "o", "x" }, "n", function() require("various-textobjs").nearEoL() end, { desc = "near EoL textobj" })
