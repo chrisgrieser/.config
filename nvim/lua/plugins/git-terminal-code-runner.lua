@@ -1,4 +1,14 @@
 return {
+	{ -- git sign gutter & hunk textobj
+		"lewis6991/gitsigns.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("gitsigns").setup {
+				max_file_length = 7500,
+				preview_config = { border = BorderStyle },
+			}
+		end,
+	},
 	{
 		"TimUntersberger/neogit",
 		dependencies = "nvim-lua/plenary.nvim",

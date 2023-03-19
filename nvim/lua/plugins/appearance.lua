@@ -1,3 +1,15 @@
+
+local colorPickerFiletypes = {
+	"css",
+	"scss",
+	"lua",
+	"sh",
+	"bash",
+	"toml",
+	"yaml",
+}
+--------------------------------------------------------------------------------
+
 return {
 
 	{ -- highlight function args
@@ -27,20 +39,8 @@ return {
 		"utilyre/sentiment.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("sentiment").setup {
-				excluded_filetypes = {},
-				limit = vim.fn.winheight(0), -- limit search for matches to window height
-			}
-		end,
-	},
-	{ -- git sign gutter & hunk textobj
-		"lewis6991/gitsigns.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("gitsigns").setup {
-				max_file_length = 7500,
-				preview_config = { border = BorderStyle },
-			}
+			-- limit search for matches to window height
+			require("sentiment").setup { limit = vim.fn.winheight(0) }
 		end,
 	},
 	{ -- filetype-icons for Telescope and Lualine
@@ -74,7 +74,8 @@ return {
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
-		event = "BufEnter", -- cannot use VeryLazy, since the first buffer entered would not get highlights
+		ft = colorPickerFiletypes, -- only load on the filetypes actually using it
+		keys = {"'", "#"}, -- or load when called manually
 		config = function()
 			vim.opt.termguicolors = true -- required for color previewing, but also messes up look in the terminal
 			local ccc = require("ccc")
@@ -84,8 +85,7 @@ return {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
 					lsp = true,
-					-- ignoring certain filetypes a bit buggy, therefore whitelisting instead
-					filetypes = { "css", "scss", "lua", "sh", "bash", "toml", "yaml", "json", "conf" },
+					filetypes = colorPickerFiletypes,
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
