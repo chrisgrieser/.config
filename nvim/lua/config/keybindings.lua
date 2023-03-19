@@ -320,6 +320,11 @@ Keymap("n", "<D-d>", function() require("harpoon.mark").add_file() end, { desc =
 Keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
 -- stylua: ignore end
 
+-- reopen last closed buffer
+Keymap("n", "<D-S-t>", function ()
+	local last = 	
+end, { desc = "Reopen last closed buffer" })
+
 ------------------------------------------------------------------------------
 
 -- CMD-KEYBINDINGS
@@ -494,17 +499,22 @@ end, { desc = "璉Copy Breadcrumbs" })
 --------------------------------------------------------------------------------
 -- GIT
 
+-- Neogit
 Keymap("n", "<leader>gn", Cmd.Neogit, { desc = " Neogit" })
 Keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = " Commit (Neogit)" })
+
+-- Gitsigns
 Keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = " Add Hunk" })
-Keymap("n", "<leader>ga", ":Gitsigns preview_hunk<CR>", { desc = " Preview Hunk" })
+Keymap("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = " Preview Hunk" })
 Keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = " Reset Hunk" })
 Keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" })
 
+-- Telescope
 -- stylua: ignore
 Keymap("n", "<leader>gs", function() Cmd.Telescope("git_status") end, { desc = " Status (Telescope)" })
 Keymap("n", "<leader>gl", function() Cmd.Telescope("git_commit") end, { desc = " Log (Telescope)" })
 
+-- My utils
 -- stylua: ignore start
 Keymap({ "n", "x" }, "<leader>gl", function () require("funcs.git-utils").gitLink() end, { desc = " Link" })
 Keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = " Add-Commit-Push" })

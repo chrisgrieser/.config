@@ -1,18 +1,19 @@
 local M = {}
 local lsp = vim.lsp
+local fn = vim.fn
 --------------------------------------------------------------------------------
 
 local lspCount = {}
 
 -- calculate number of references for entity under cursor asynchronously
 local function requestLspRefCount()
-	if vim.fn.mode() ~= "n" then
+	if fn.mode() ~= "n" then
 		lspCount = {}
 		return
 	end
 	local params = lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
 	params.context = { includeDeclaration = false }
-	local thisFileUri = vim.uri_from_fname(vim.fn.expand("%:p"))
+	local thisFileUri = vim.uri_from_fname(fn.expand("%:p"))
 
 	lsp.buf_request(0, "textDocument/references", params, function(error, refs)
 		lspCount.refFile = 0
@@ -41,7 +42,7 @@ end
 ---@return string statusline text
 function M.statusline()
 	-- abort when lsp loading or not capable of references
-	local currentBufNr = vim.fn.bufnr()
+	local currentBufNr = fn.bufnr()
 	local bufClients = lsp.get_active_clients { bufnr = currentBufNr }
 	local lspLoading = #(lsp.util.get_progress_messages()) > 0
 	local lspCapable = false
@@ -52,7 +53,7 @@ function M.statusline()
 		if client.name == "pyright" then isPyright = true end
 	end
 	if 
-		vim.fn.mode() ~= "n" 
+		fn.mode() ~= "n" 
 		or (lspLoading and not isPyright) -- FIX pyright bug where it's constantly loading
 		or not lspCapable 
 	then

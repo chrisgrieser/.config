@@ -64,7 +64,6 @@ local source_icons = {
 	cmdline = "",
 	cmdline_history = "",
 	path = "",
-	omni = "", -- since only used for folders right now
 	git = "",
 }
 
@@ -90,13 +89,14 @@ local function cmpconfig()
 		},
 		sorting = {
 			comparators = {
-				-- https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
+				-- Original order: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
+				-- Definitions of compare function https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
+				compare.kind, -- higher (prioritize snippets)
 				compare.offset,
+				compare.recently_used, -- higher
 				compare.score,
-				compare.recently_used,
 				compare.locality,
-				compare.exact, -- moved down
-				compare.kind,
+				compare.exact, -- lower
 				compare.length,
 				compare.order,
 			},
