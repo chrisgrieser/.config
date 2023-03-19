@@ -59,7 +59,7 @@ opt.spelllang = "en_us" -- still used for `z=`
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
 
--- So external apps can read the current file path
+-- Set title so external apps can read the current file path
 opt.title = true
 opt.titlelen = 0 -- do not shorten title
 opt.titlestring = '%{expand("%:p")}'

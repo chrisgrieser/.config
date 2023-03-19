@@ -605,6 +605,7 @@ Autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
+-- shiftless move
 Keymap({"n", "o", "x"}, "w", "E", { desc = "w -> E" })
 
 -- Simple version of the delaytrain.nvim
@@ -614,7 +615,7 @@ for _, key in ipairs { "x", "h", "l", "e", "b" } do
 	local maxUsage = 10
 
 	local count = 0
-	Keymap("n", key, function()
+	Keymap({"n", "x"}, key, function()
 		if key == "x" then
 			key = [["_x]]
 		elseif key == "e" or key == "w" or key == "b" then
@@ -622,9 +623,7 @@ for _, key in ipairs { "x", "h", "l", "e", "b" } do
 		end
 
 		-- abort when recording, since this only leads to bugs then
-		local isRecording = Fn.reg_recording() ~= ""
-		local isPlaying = Fn.reg_executing() ~= ""
-		if isRecording or isPlaying then return end
+		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
 
 		if count <= maxUsage then
 			count = count + 1

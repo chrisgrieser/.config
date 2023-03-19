@@ -24,6 +24,7 @@ local generalWords = {
 	{ "increased", "decreased" },
 	{ "always", "never" },
 	{ "with", "without" },
+	{ "external", "internal" },
 	{ "forwards", "backwards" },
 	{ "next", "previous" },
 	{ "inner", "outer" },

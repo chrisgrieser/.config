@@ -150,7 +150,7 @@ return {
 					[functionObjChar] = {
 						find = function() return config.get_selection { motion = "a" .. functionObjChar } end,
 						delete = function()
-							local ft = bo.filetype
+							local ft = vim.bo.filetype
 							local patt
 							if ft == "lua" then
 								patt = "^(.-function.-%b() ?)().-( ?end)()$"
@@ -172,7 +172,7 @@ return {
 							}
 						end,
 						add = function()
-							local ft = bo.filetype
+							local ft = vim.bo.filetype
 							if ft == "lua" then
 								-- function as one line
 								return { { "function () " }, { " end" } }
@@ -200,7 +200,7 @@ return {
 					[conditionObjChar] = {
 						find = function() return config.get_selection { motion = "a" .. conditionObjChar } end,
 						delete = function()
-							local ft = bo.filetype
+							local ft = vim.bo.filetype
 							local patt
 							if ft == "lua" then
 								patt = "^(if .- then)().-( ?end)()$"
@@ -216,7 +216,7 @@ return {
 							}
 						end,
 						add = function()
-							local ft = bo.filetype
+							local ft = vim.bo.filetype
 							if ft == "lua" then
 								return {
 									{ "if true then", "\t" },
