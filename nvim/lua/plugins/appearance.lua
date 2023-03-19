@@ -26,7 +26,7 @@ return {
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
-		event = "UIEnter",
+		-- event = "UIEnter",
 		config = function()
 			require("indent_blankline").setup {
 				show_current_context = true, -- = active indent

@@ -14,13 +14,14 @@ I = hs.inspect -- to inspect tables in the console
 -- ENVIRONMENT
 -- retrieve configs from zshenv; looped since sometimes not loading properly
 local i = 0
-while not DotfilesFolder do
+while true do
 	DotfilesFolder = os.getenv("DOTFILE_FOLDER")
 	PasswordStore = os.getenv("PASSWORD_STORE_DIR")
 	VaultLocation = os.getenv("VAULT_PATH")
 	FileHub = os.getenv("WD")
-	hs.execute("sleep 0.2") -- since lua has no wait command, using the blocking hs.execute
-	if i > 30 then
+	if DotfilesFolder then break end
+	Wait(0.1)
+	if i > 10 then
 		Notify("⚠️ Could not retrieve .zshenv")
 		return
 	end
@@ -89,14 +90,11 @@ function Wait(secs)
 	-- since lua has not blocking delay, executing shells' sleep since os.execute
 	-- is blocking
 	-- os.execute("sleep " .. tostring(secs))
-
 	hs.timer.usleep(secs * 1000000)
 end
 
 ---@return boolean
-function IsDarkMode()
-	return hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n"
-end
+function IsDarkMode() return hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n" end
 
 --------------------------------------------------------------------------------
 
@@ -104,6 +102,7 @@ end
 local function deviceName()
 	-- host.localizedName() is essentially equivalent to `scutil --get ComputerName`
 	local name, _ = hs.host.localizedName():gsub(".- ", "", 1)
+
 	return name
 end
 
@@ -177,9 +176,7 @@ end
 ---get appObject
 ---@param appName string (literal & exact match)
 ---@return hs.application
-function App(appName)
-	return hs.application.find(appName, true, true)	
-end
+function App(appName) return hs.application.find(appName, true, true) end
 
 ---@return string|nil
 function FrontAppName() return hs.application.frontmostApplication():name() end

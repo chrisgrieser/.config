@@ -21,16 +21,12 @@ const dirtyFiles = app
 
 const fileArray = app
 	.doShellScript(
-		`
-		cd "${dotfileFolder}"
-		fd --type=file --hidden --absolute-path \\
-			-E "visualized-keyboard-layout/*.json" \\
+		`cd "${dotfileFolder}"
+		 fd --type=file --hidden --absolute-path \\
 			-E "*.icns" \\
 			-E "*.plist" \\
 			-E "*.png" \\
-			-E "*.ttf" \\
-			-E ".git" \\
-	`,
+			-E ".git"`,
 	)
 	.split("\r")
 	/* eslint-disable-next-line complexity */

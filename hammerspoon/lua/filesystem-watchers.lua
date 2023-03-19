@@ -1,6 +1,6 @@
 require("lua.utils")
 --------------------------------------------------------------------------------
--- HELPERS
+-- HELPER
 
 ---is in sub-directory instead of directly in the folder
 ---@param fPath string? filepath
@@ -45,7 +45,6 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- DOWNLOAD FOLDER BADGE
--- requires "fileicon" being installed
 local downloadFolder = os.getenv("HOME") .. "/Downloaded"
 DownloadFolderWatcher = Pw(
 	downloadFolder,
@@ -71,7 +70,7 @@ SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	-- Stats Update file can directly be trashed
 	for _, filePath in pairs(files) do
 		if filePath:find("Stats%.dmg$") then
-			os.execute("sleep 1")
+			Wait(1)
 			os.rename(filePath, os.getenv("HOME") .. "/.Trash/Stats.dmg")
 			return
 		end
@@ -81,7 +80,7 @@ SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	print("➡️ Download moved to File Hub.")
 end):start()
 
--- Drafts Icloud
+-- Drafts iCloud
 local draftsIcloud = os.getenv("HOME")
 	.. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
 DraftsIcloudWatcher = Pw(draftsIcloud, function(files)
@@ -97,7 +96,6 @@ end):start()
 
 local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
 WatcherActive = true -- to prevent recursion issues
--- selene: allow(high_cyclomatic_complexity)
 FileHubWatcher = Pw(FileHub, function(paths, _)
 	for _, filep in pairs(paths) do
 		if isInSubdirectory(filep, FileHub) then return end
@@ -122,7 +120,7 @@ FileHubWatcher = Pw(FileHub, function(paths, _)
 		-- watch later .urls from the office
 		elseif extension == "url" and IsIMacAtHome() then
 			os.rename(filep, os.getenv("HOME") .. "/Downloaded/" .. fileName)
-			print("➡️ Watch Later URL moved to Video Downloads.")
+			print("➡️ Watch Later URL moved to Video Downloads")
 
 		-- ublacklist
 		elseif fileName == "ublacklist-settings.json" then
@@ -154,16 +152,6 @@ FileHubWatcher = Pw(FileHub, function(paths, _)
 			os.rename(filep, browserSettings .. "Inoreader Feeds.opml")
 			print("➡️ Inoreader backup")
 
-		-- visualised keyboard layouts
-		elseif
-			fileName:match("base%-keyboard%-layout%.%w+")
-			or fileName:match("app%-switcher%-layout%.%w+")
-			or fileName:match("vimrc%-remapping%.%w+")
-			or fileName:match("hyper%-bindings%-layout%.%w+")
-			or fileName:match("single%-keystroke%-bindings%.%w+")
-		then
-			os.rename(filep, DotfilesFolder .. "/visualized-keyboard-layout/" .. fileName)
-			print("➡️ Visualized Keyboard Layout")
 		end
 	end
 end):start()
@@ -206,3 +194,6 @@ ObsiAlphaWatcher = Pw(FileHub, function(files)
 		end)
 	end
 end):start()
+
+--------------------------------------------------------------------------------
+
