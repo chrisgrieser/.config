@@ -494,18 +494,15 @@ end, { desc = "璉Copy Breadcrumbs" })
 --------------------------------------------------------------------------------
 -- GIT
 
-Keymap("n", "<leader>gn", Cmd.Neogit, { desc = " Commit (Neogit)" })
+Keymap("n", "<leader>gn", Cmd.Neogit, { desc = " Neogit" })
 Keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = " Commit (Neogit)" })
 Keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = " Add Hunk" })
+Keymap("n", "<leader>ga", ":Gitsigns preview_hunk<CR>", { desc = " Preview Hunk" })
 Keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = " Reset Hunk" })
 Keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" })
 
-Keymap(
-	"n",
-	"<leader>gs",
-	function() Cmd.Telescope("git_status") end,
-	{ desc = " Status (Telescope)" }
-)
+-- stylua: ignore
+Keymap("n", "<leader>gs", function() Cmd.Telescope("git_status") end, { desc = " Status (Telescope)" })
 Keymap("n", "<leader>gl", function() Cmd.Telescope("git_commit") end, { desc = " Log (Telescope)" })
 
 -- stylua: ignore start

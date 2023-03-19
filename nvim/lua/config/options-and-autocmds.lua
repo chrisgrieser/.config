@@ -134,11 +134,14 @@ opt.listchars = {
 	precedes = "…",
 	extends = "…",
 	multispace = "·",
+	tab = "  ",
+	lead = "·",
 }
 
 Autocmd("BufReadPost", {
 	callback = function()
 		Cmd.IndentOMatic() -- trigger to ensure it's run before determining spaces/tabs
+
 		opt_local.listchars = vim.opt_global.listchars:get() -- copy the global
 		local usesSpaces = Bo.expandtab
 		if usesSpaces then
