@@ -12,7 +12,6 @@ function alfredMatcher(str) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
-
 const defaultFolder = $.getenv("default_folder").replace(/^~/, app.pathTo("home folder"));
 
 const workArray = app
@@ -21,11 +20,10 @@ const workArray = app
 	.map(item => {
 		const itemPath = defaultFolder + "/" + item;
 		const extension = item.split(".").pop();
-		const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "pdf"];
 
-		let iconToDisplay;
-		if (imageExtensions.includes(extension)) iconToDisplay = { path: itemPath };
-		else iconToDisplay = { type: "fileicon", path: itemPath };
+		const iconToDisplay = { path: itemPath };
+		const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "pdf"];
+		if (!imageExtensions.includes(extension)) iconToDisplay.type = "fileicon";
 
 		return {
 			title: item,

@@ -29,14 +29,22 @@
 	<string>h</string>
 	<key>hideKeywordEnabled</key>
 	<false/>
+	<key>logoutKeywordEnabled</key>
+	<false/>
 	<key>quitKeyword</key>
 	<string>q</string>
+	<key>quitKeywordEnabled</key>
+	<false/>
 	<key>quitallConfirm</key>
 	<true/>
 	<key>quitallKeywordEnabled</key>
 	<false/>
 	<key>restartConfirm</key>
 	<true/>
+	<key>screensaverKeywordEnabled</key>
+	<false/>
+	<key>showtrashKeywordEnabled</key>
+	<false/>
 	<key>shutdownConfirm</key>
 	<true/>
 	<key>shutdownKeywordEnabled</key>

@@ -11,18 +11,27 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const jsonArray = app.doShellScript(``)
+const home = app.pathTo("home folder")
+const trashLocation1 = home + "/.Trash"
+const trashLocation2 = home + "/Library/Mobile Documents/com~apple~CloudDocs/.Trash"
+
+const jsonArray = app.doShellScript(`find "${trashLocation1}" "${trashLocation2}" -maxdepth 1 -mindepth 1`)
 	.split("\r")
-	.map(item => {
-		
+	.map(path => {
+		const extension = path.split(".").pop();
+		const filename = path.split("/").pop();
+
+		const iconToDisplay = { path: path };
+		const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "pdf"];
+		if (!imageExtensions.includes(extension)) iconToDisplay.type = "fileicon";
+
 		return {
-			title: item,
-			match: alfredMatcher(item),
-			subtitle: item,
+			title: filename,
+			match: alfredMatcher(path),
 			type: "file:skipcheck",
-			icon: { type: "fileicon", path: item },
-			arg: item,
-			uid: item,
+			arg: path,
+			icon: iconToDisplay,
 		};
 	});
+
 JSON.stringify({ items: jsonArray });
