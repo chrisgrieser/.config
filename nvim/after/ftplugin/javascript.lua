@@ -6,7 +6,6 @@ Bo.path = ".,,../" -- also search parent directory (useful for Alfred)
 Iabbrev("<buffer> cc const")
 Iabbrev("<buffer> ll let")
 
-Iabbrev("<buffer> ll local")
 --------------------------------------------------------------------------------
 
 -- Open regex in regex101 and regexper (railroad diagram)

@@ -40,6 +40,7 @@ rules:
   max-depth: [warn, 4]
 
   # General
+  reportUnusedDisableDirectives: warn
   no-implicit-coercion: error
   no-unused-expressions: error
 
