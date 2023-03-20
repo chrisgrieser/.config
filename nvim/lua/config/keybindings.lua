@@ -148,7 +148,7 @@ Keymap("n", "<S-Tab>", "<<", { desc = " outdent" })
 Keymap("x", "<Tab>", ">gv", { desc = " indent" })
 Keymap("x", "<S-Tab>", "<gv", { desc = " outdent" })
 
--- Word Switcher (fallback: switch casing) 
+-- Word Switcher (fallback: switch casing)
 -- stylua: ignore
 Keymap( "n", "<BS>", function() require("funcs.wave").switch() end, { desc = "switch common words" })
 
@@ -209,10 +209,10 @@ Autocmd("FileType", {
 Keymap(
 	"n",
 	"<leader>f",
-	[[:%s/<C-r>=expand("<cword>")<CR>//gI<Left><Left><Left>]],
+	[[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left><Left>]],
 	{ desc = "弄 :substitute" }
 )
-Keymap("x", "<leader>f", ":s///gI<Left><Left><Left><Left>", { desc = "substitute" })
+Keymap("x", "<leader>f", ":s///g<Left><Left><Left><Left>", { desc = "弄 :substitute" })
 Keymap(
 	{ "n", "x" },
 	"<leader>F",
@@ -224,8 +224,8 @@ Keymap("x", "<leader>n", ":normal ", { desc = "弄 :normal" })
 
 -- Refactor
 -- stylua: ignore start
-Keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "弄 Inline Variable" })
-Keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Extract Variable") end, { desc = "弄 Extract Variable" })
+Keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("弄 Inline Variable") end, { desc = "弄 Inline Variable" })
+Keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("弄 Extract Variable") end, { desc = "弄 Extract Variable" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
@@ -606,16 +606,19 @@ Autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 -- shiftless move
-Keymap({"n", "o", "x"}, "w", "E", { desc = "w -> E" })
+Keymap({ "n", "o", "x" }, "w", "E", { desc = "w -> E" })
+
+Keymap("n", "w", function() require("funcs.spider").search("w") end, { desc = "Spider-w" })
+Keymap("n", "e", function() require("funcs.spider").search("e") end, { desc = "Spider-e" })
 
 -- Simple version of the delaytrain.nvim
 -- CamelCaseMotion for e, and b
-for _, key in ipairs { "x", "h", "l", "e", "b" } do
+for _, key in ipairs { "x", "h", "l", "b" } do
 	local timeout = 3000
 	local maxUsage = 10
 
 	local count = 0
-	Keymap({"n", "x"}, key, function()
+	Keymap({ "n", "x" }, key, function()
 		if key == "x" then
 			key = [["_x]]
 		elseif key == "e" or key == "w" or key == "b" then
