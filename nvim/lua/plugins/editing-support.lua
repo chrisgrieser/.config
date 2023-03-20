@@ -12,6 +12,14 @@ return {
 
 	-----------------------------------------------------------------------------
 
+	{ -- description
+		"chrisgrieser/nvim-spider",
+		lazy = true,
+		init = function()
+
+			vim.g.spider_minimum_punctuation = 3
+		end,
+	},
 	{ -- automatically set right indent for file
 		"Darazaki/indent-o-matic",
 		event = "BufReadPre",
