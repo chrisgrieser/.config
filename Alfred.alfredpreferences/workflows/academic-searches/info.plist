@@ -76,7 +76,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Re-Searches</string>
+	<string>Re-Search</string>
 	<key>objects</key>
 	<array>
 		<dict>

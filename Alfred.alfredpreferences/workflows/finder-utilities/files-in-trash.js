@@ -11,11 +11,12 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const home = app.pathTo("home folder")
-const trashLocation1 = home + "/.Trash"
-const trashLocation2 = home + "/Library/Mobile Documents/com~apple~CloudDocs/.Trash"
+const home = app.pathTo("home folder");
+const trashLocation1 = home + "/.Trash";
+const trashLocation2 = home + "/Library/Mobile Documents/com~apple~CloudDocs/.Trash";
 
-const jsonArray = app.doShellScript(`find "${trashLocation1}" "${trashLocation2}" -maxdepth 1 -mindepth 1`)
+const jsonArray = app
+	.doShellScript(`find "${trashLocation1}" "${trashLocation2}" -maxdepth 1 -mindepth 1`)
 	.split("\r")
 	.map(path => {
 		const extension = path.split(".").pop();

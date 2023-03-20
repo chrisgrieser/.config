@@ -3,6 +3,20 @@
 		"prefix": "require (string)",
 		"body": "require (\"$0\")"
 	},
+	"module": {
+		"prefix": "module",
+		"body": [
+			"local M = {}",
+			"--------------------------------------------------------------------------------",
+			"",
+			"function M.${1:funcName} ()",
+			"\t$0",
+			"end",
+			"",
+			"--------------------------------------------------------------------------------",
+			"return M"
+		]
+	},
 	"trim trailing line break": {
 		"prefix": "trim trailing line break",
 		"body": ":gsub(\"\\n$\", \"\")"
