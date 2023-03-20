@@ -165,7 +165,7 @@ Keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- [z]pelling [l]ist
 Keymap("n", "zl", function() Cmd.Telescope("spell_suggest") end, { desc = "暈suggest" })
-Keymap("n", "za", "mz]s1z=`z", { desc = "暈autofix" }) -- [a]utofix word under cursor
+Keymap("n", "za", "1z=", { desc = "暈autofix" }) -- [a]utofix word under cursor
 
 ---add word under cursor to vale dictionary
 ---@param mode string accept|reject

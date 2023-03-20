@@ -1,4 +1,3 @@
-
 local colorPickerFts = {
 	"css",
 	"scss",
@@ -77,7 +76,7 @@ return {
 		"uga-rosa/ccc.nvim",
 		ft = colorPickerFts,
 		config = function()
-			vim.opt.termguicolors = true 
+			vim.opt.termguicolors = true
 			local ccc = require("ccc")
 			ccc.setup {
 				win_opts = { border = BorderStyle },
@@ -123,7 +122,7 @@ return {
 					min_width = gitCommitMsgLength,
 					win_options = {
 						sidescrolloff = 0,
-						winblend = 1,
+						winblend = 0, -- weird shining through
 					},
 				},
 				select = {
@@ -136,7 +135,7 @@ return {
 						min_width = 20,
 						max_height = 20,
 						min_height = 4,
-						win_options = { winblend = 1 },
+						win_options = { winblend = 0 }, -- weird shining through
 					},
 				},
 			}
