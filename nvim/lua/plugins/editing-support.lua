@@ -106,7 +106,7 @@ return {
 				highlight = {
 					on_yank = false, -- using for nicer highlights vim.highlight.on_yank()
 					on_put = true,
-					timer = 1000,
+					timer = 400,
 				},
 			}
 		end,
