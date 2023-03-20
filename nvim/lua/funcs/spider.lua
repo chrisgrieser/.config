@@ -13,7 +13,7 @@ end
 
 local lowerWord = "[%a%d][%l%d]+" -- at least two, first may be uppercase for CamelCase
 local upperWord = "[%u%d][%u%d]+" -- at least two, needed for SCREAMING_SNAKE_CASE
-local singleLetter = "f[%w]%wf[%w]" -- single alphanumeric character
+local singleLetter = "%f[%w]%w[^%w]" -- single alphanumeric character
 local punctuation = "[%p][%p][%p]+" -- at least three
 
 ---get the minimum of the three numbers, considering that any may be nil
@@ -37,7 +37,7 @@ end
 ---@param key string e|w|b (currently only e and w)
 function M.search(key)
 	local row, col = unpack(getCursor(0))
-	col = col + 1 -- to force moving to the next position
+	col = col +a 1 -- force moving to the next position
 	local line = getline(row)
 	local closestPos
 
@@ -45,7 +45,7 @@ function M.search(key)
 	local _, lowerPos = line:find(lowerWord, col)
 	local _, upperPos = line:find(upperWord, col)
 	local _, punctPos = line:find(punctuation, col)
-	local singlePos = line:find(singleLetter, col)
+	local singlePos, _ = line:find(singleLetter, col + 1)
 	local endOfWord = minimum(lowerPos, upperPos, punctPos, singlePos)
 	if not endOfWord then return end
 
@@ -54,7 +54,7 @@ function M.search(key)
 		lowerPos, _ = line:find(lowerWord, endOfWord)
 		upperPos, _ = line:find(upperWord, endOfWord)
 		punctPos, _ = line:find(punctuation, endOfWord)
-		singlePos = line:find(punctuation, endOfWord)
+		singlePos, _ = line:find(singleLetter, endOfWord)
 		closestPos = minimum(lowerPos, upperPos, punctPos, singlePos)
 		if not closestPos then return end
 	elseif key == "e" then
