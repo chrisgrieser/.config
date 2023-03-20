@@ -63,3 +63,5 @@ lua
 linewise
 UNIX
 minimum
+subwords
+however

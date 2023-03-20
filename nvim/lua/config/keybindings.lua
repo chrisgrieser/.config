@@ -173,7 +173,9 @@ local function valeWord(mode)
 	local word = Expand("<cword>")
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
 	if not success then return end -- error message already by AppendToFile
+	Cmd.mkview(2)
 	Cmd.edit() -- reload file for diagnostics to take effect
+	Cmd.loadview(2)
 	vim.notify("暈Now " .. mode .. "ing:\n" .. word)
 end
 Keymap("n", "zg", function() valeWord("accept") end, { desc = "暈Add to accepted words (vale)" })
