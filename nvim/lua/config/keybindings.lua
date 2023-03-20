@@ -606,16 +606,17 @@ Autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 -- shiftless move
-Keymap({ "n", "o", "x" }, "w", "E", { desc = "w -> E" })
+-- Keymap({ "n", "o", "x" }, "w", "E", { desc = "w -> E" })
 
 Keymap({"n", "o", "x"}, "w", function() require("funcs.spider").search("w") end, { desc = "Spider-w" })
 Keymap({"n", "o", "x"}, "e", function() require("funcs.spider").search("e") end, { desc = "Spider-e" })
+Keymap({"n", "o", "x"}, "b", function() require("funcs.spider").search("b") end, { desc = "Spider-b" })
 
 -- Simple version of the delaytrain.nvim
 -- CamelCaseMotion for e, and b
-for _, key in ipairs { "x", "h", "l", "b" } do
-	local timeout = 3000
-	local maxUsage = 10
+for _, key in ipairs { "x", "h", "l" } do
+	local timeout = 4000
+	local maxUsage = 8
 
 	local count = 0
 	Keymap({ "n", "x" }, key, function()
