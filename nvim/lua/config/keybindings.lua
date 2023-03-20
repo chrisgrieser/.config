@@ -606,14 +606,11 @@ Autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 -- shiftless move
--- Keymap({ "n", "o", "x" }, "w", "E", { desc = "w -> E" })
-
-Keymap({"n", "o", "x"}, "w", function() require("funcs.spider").motion("w") end, { desc = "Spider-w" })
+Keymap({ "n", "o", "x" }, "w", "E", { desc = "w -> E" })
 Keymap({"n", "o", "x"}, "e", function() require("funcs.spider").motion("e") end, { desc = "Spider-e" })
 Keymap({"n", "o", "x"}, "b", function() require("funcs.spider").motion("b") end, { desc = "Spider-b" })
 
 -- Simple version of the delaytrain.nvim
--- CamelCaseMotion for e, and b
 for _, key in ipairs { "x", "h", "l" } do
 	local timeout = 4000
 	local maxUsage = 8
@@ -622,8 +619,6 @@ for _, key in ipairs { "x", "h", "l" } do
 	Keymap({ "n", "x" }, key, function()
 		if key == "x" then
 			key = [["_x]]
-		elseif key == "e" or key == "w" or key == "b" then
-			key = "<Plug>CamelCaseMotion_" .. key
 		end
 
 		-- abort when recording, since this only leads to bugs then
