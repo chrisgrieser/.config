@@ -7,11 +7,8 @@ local colorPickerFts = {
 	"toml",
 	"yaml",
 }
-
 --------------------------------------------------------------------------------
-
 return {
-
 	{ -- highlight function args
 		"m-demare/hlargs.nvim",
 		event = "VeryLazy",
@@ -35,7 +32,7 @@ return {
 			}
 		end,
 	},
-	{ -- matchparen but highlight outside parens as well
+	{ -- highlights surrounding matchparens as well
 		"utilyre/sentiment.nvim",
 		event = "VeryLazy",
 		config = function()
@@ -114,16 +111,7 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("headlines").setup {
-				markdown = {
-					codeblock_highlight = "CodeBlock",
-					dash_highlight = "Dash",
-					dash_string = "-",
-					quote_highlight = "Quote",
-					quote_string = "┃",
-					fat_headlines = true,
-					fat_headline_upper_string = "▃",
-					fat_headline_lower_string = "🬂",
-				},
+				markdown = { fat_headlines = false },
 			}
 		end,
 	},
