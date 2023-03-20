@@ -20,7 +20,7 @@ local function setHigherBrightnessDuringDay()
 	if not hasBrightnessSensor then return end
 
 	local brightness
-	if BetweenTime(1, 8) then
+	if BetweenTime(0, 8) then
 		brightness = 0
 	elseif hs.brightness.ambient() > 120 then
 		brightness = 100
@@ -53,9 +53,10 @@ local function workLayout()
 	if not isWeekend() then OpenApp("Slack") end
 	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
 	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
+	OpenLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 
 	-- layout apps
-	Wait(0.5)
+	Wait(1)
 	TwitterToTheSide()
 	local layout = {
 		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
@@ -69,7 +70,6 @@ local function workLayout()
 	-- setup apps
 	TwitterScrollUp()
 	RestartApp("AltTab")
-	ShowAllSidebars()
 	RunWithDelays(0.5, function () App("Drafts"):activate() end)
 
 	print("🔲 WorkLayout: done")
@@ -104,8 +104,6 @@ local function movieLayout()
 	print("🔲 MovieModeLayout: done")
 end
 
---------------------------------------------------------------------------------
--- TRIGGERS FOR LAYOUT CHANGE
 local function selectLayout()
 	if IsProjector() then
 		movieLayout()
@@ -114,6 +112,8 @@ local function selectLayout()
 	end
 end
 
+--------------------------------------------------------------------------------
+-- TRIGGERS FOR LAYOUT CHANGE
 -- 1. Change of screen numbers
 DisplayCountWatcher = hs.screen.watcher.new(selectLayout):start()
 
@@ -124,7 +124,9 @@ Hotkey({ "shift" }, "f6", selectLayout) -- for Apple keyboard
 -- 3. Unlocking (with idletime)
 UnlockWatcher = hs.caffeinate.watcher
 	.new(function(event)
-		if IdleMins(30) and event == hs.caffeinate.watcher.screensDidUnlock then
+		local c = hs.caffeinate.watcher
+		if IdleMins(30) and (event == c.screensDidUnlock or event == c.screensDidWake) then
+
 			RunWithDelays(0.5, selectLayout) -- delay needed to ensure displays are recognized after waking
 		end
 	end)
@@ -132,44 +134,3 @@ UnlockWatcher = hs.caffeinate.watcher
 
 --------------------------------------------------------------------------------
 
--- Open Apps always at Mouse Screen
-Wf_appsOnMouseScreen = Wf.new({
-	"Drafts",
-	"Vivaldi",
-	"Mimestream",
-	"BetterTouchTool",
-	"Obsidian",
-	"Alacritty",
-	"alacritty",
-	"Warp",
-	"Slack",
-	"IINA",
-	"Hammerspoon",
-	"System Settings",
-	"Discord",
-	"Neovide",
-	"neovide",
-	"Espanso",
-	"BusyCal",
-	"Alfred Preferences",
-	"YouTube",
-	"Netflix",
-	"CrunchyRoll",
-	"Finder",
-}):subscribe(Wf.windowCreated, function(newWin)
-	local mouseScreen = hs.mouse.getCurrentScreen()
-	if not mouseScreen then return end
-	local screenOfWindow = newWin:screen()
-	if not IsProjector() or mouseScreen:name() == screenOfWindow:name() then return end
-
-	local appn = newWin:application():name()
-	RunWithDelays({ 0.2, 1, 1.5 }, function()
-		if not (mouseScreen:name() == screenOfWindow:name()) then newWin:moveToScreen(mouseScreen) end
-
-		if appn == "Finder" or appn == "Script Editor" or appn == "Hammerspoon" then
-			MoveResize(newWin, Centered)
-		else
-			MoveResize(newWin, Maximized)
-		end
-	end)
-end)
