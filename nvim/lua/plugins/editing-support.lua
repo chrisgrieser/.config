@@ -1,8 +1,4 @@
 return {
-	{ -- e, w, b move based on CamelCase
-		"bkad/CamelCaseMotion",
-		event = "BufReadPost",
-	},
 	{ -- highlights for ftFT
 		"unblevable/quick-scope",
 		keys = { "f", "F", "t", "T" },
@@ -100,7 +96,7 @@ return {
 		config = function()
 			require("yanky").setup {
 				ring = {
-					history_length = 15,
+					history_length = 20,
 					cancel_event = "move", -- move|update
 				},
 				highlight = {
@@ -124,9 +120,8 @@ return {
 			local foldIcon = ""
 			local ufo = require("ufo")
 			ufo.setup {
-				provider_selector = function(bufnr, filetype, buftype) ---@diagnostic disable-line: unused-local
-					return { "lsp", "indent" } -- Use lsp and treesitter as fallback
-				end,
+				-- Use lsp, and indent as fallback
+				provider_selector = function() return { "lsp", "indent" } end,
 				open_fold_hl_timeout = 500,
 				fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 					-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
