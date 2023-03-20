@@ -31,26 +31,11 @@ local function minimum(pos1, pos2, pos3, pos4)
 	return math.min(pos1, pos2, pos3, pos4)
 end
 
----get the maximum of the four numbers, considering that any may be nil
----@param pos1 number|nil
----@param pos2 number|nil
----@param pos3 number|nil
----@param pos4 number|nil
----@return number|nil returns nil of all numbers are nil
-local function maximum(pos1, pos2, pos3, pos4)
-	if not (pos1 or pos2 or pos3 or pos4) then return nil end
-	pos1 = pos1 or -1 -- -1 will never be the highest number
-	pos2 = pos2 or -1
-	pos3 = pos3 or -1
-	pos4 = pos4 or -1
-	return math.max(pos1, pos2, pos3, pos4)
-end
-
 --------------------------------------------------------------------------------
 
 ---search for the next item to move to
 ---@param key string e|w|b
-function M.search(key)
+function M.motion(key)
 	if not (key == "w" or key == "e" or key == "b") then
 		vim.notify("Invalid key: " .. key .. "\nOnly w, e, and b are supported.", vim.log.levels.ERROR)
 		return
@@ -64,20 +49,23 @@ function M.search(key)
 	-- search
 	if key == "w" or key == "e" then
 		-- force moving to next word
-		col = col + 1
+		col = col + 2
 		-- determine end of word
 		_, lowerPos = line:find(lowerWord, col)
 		_, upperPos = line:find(upperWord, col)
 		_, punctPos = line:find(punctuation, col)
 		singlePos, _ = line:find(singleLetter, col + 1)
 		local endOfWord = minimum(lowerPos, upperPos, punctPos, singlePos)
-		if not endOfWord then return end
+		if not endOfWord then
+			vim.notify("None found in this line.", vim.log.levels.WARN)
+			return
+		end
 		if key == "w" then
 			-- determine start of next word
 			lowerPos, _ = line:find(lowerWord, endOfWord)
 			upperPos, _ = line:find(upperWord, endOfWord)
 			punctPos, _ = line:find(punctuation, endOfWord)
-			singlePos, _ = line:find(singleLetter, endOfWord)
+			-- singlePos, _ = line:find(singleLetter, endOfWord)
 			closestPos = minimum(lowerPos, upperPos, punctPos, singlePos)
 		elseif key == "e" then
 			closestPos = endOfWord
@@ -85,14 +73,14 @@ function M.search(key)
 	elseif key == "b" then
 		line = line
 			:sub(1, col) -- only before the cursor pos
-			:reverse()
-		lowerWord = "[%l%d]+[%a%d]" -- needed due to reversal
-		lowerPos, _ = line:find(lowerWord)
-		upperPos, _ = line:find(upperWord)
-		punctPos, _ = line:find(punctuation)
+			:reverse() -- search backwards to avoid need for loop
+		lowerWord = "[%l%d]+%u?" -- adjustment needed due to reversal
+		_, lowerPos = line:find(lowerWord)
+		_, upperPos = line:find(upperWord)
+		_, punctPos = line:find(punctuation)
 		-- singlePos, _ = line:find(singleLetter)
 		closestPos = minimum(lowerPos, upperPos, punctPos, singlePos)
-		if closestPos then closestPos = #line - closestPos end -- needed due to reversal
+		if closestPos then closestPos = #line - closestPos + 1 end -- needed due to reversal
 	end
 
 	-- validate position
