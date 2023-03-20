@@ -608,8 +608,8 @@ Autocmd("FileType", {
 -- shiftless move
 Keymap({ "n", "o", "x" }, "w", "E", { desc = "w -> E" })
 
-Keymap("n", "w", function() require("funcs.spider").search("w") end, { desc = "Spider-w" })
-Keymap("n", "e", function() require("funcs.spider").search("e") end, { desc = "Spider-e" })
+Keymap({"n", "o", "x"}, "w", function() require("funcs.spider").search("w") end, { desc = "Spider-w" })
+Keymap({"n", "o", "x"}, "e", function() require("funcs.spider").search("e") end, { desc = "Spider-e" })
 
 -- Simple version of the delaytrain.nvim
 -- CamelCaseMotion for e, and b
