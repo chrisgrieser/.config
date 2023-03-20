@@ -54,9 +54,9 @@ local function workLayout()
 	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
 	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 	OpenLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
+	Wait(0.7)	
 
 	-- layout apps
-	Wait(1)
 	TwitterToTheSide()
 	local layout = {
 		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
@@ -70,7 +70,7 @@ local function workLayout()
 	-- setup apps
 	TwitterScrollUp()
 	RestartApp("AltTab")
-	RunWithDelays(0.5, function () App("Drafts"):activate() end)
+	RunWithDelays(0.5, function() App("Drafts"):activate() end)
 
 	print("🔲 WorkLayout: done")
 end
@@ -126,11 +126,10 @@ UnlockWatcher = hs.caffeinate.watcher
 	.new(function(event)
 		local c = hs.caffeinate.watcher
 		if IdleMins(30) and (event == c.screensDidUnlock or event == c.screensDidWake) then
-
-			RunWithDelays(0.5, selectLayout) -- delay needed to ensure displays are recognized after waking
+			-- delay needed to ensure displays are recognized after waking
+			RunWithDelays(0.5, selectLayout)
 		end
 	end)
 	:start()
 
 --------------------------------------------------------------------------------
-
