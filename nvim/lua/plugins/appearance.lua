@@ -108,6 +108,25 @@ return {
 			}
 		end,
 	},
+	{ -- emphasized headers & code blocks
+		"lukas-reineke/headlines.nvim",
+		ft = "markdown",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("headlines").setup {
+				markdown = {
+					codeblock_highlight = "CodeBlock",
+					dash_highlight = "Dash",
+					dash_string = "-",
+					quote_highlight = "Quote",
+					quote_string = "┃",
+					fat_headlines = true,
+					fat_headline_upper_string = "▃",
+					fat_headline_lower_string = "🬂",
+				},
+			}
+		end,
+	},
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
