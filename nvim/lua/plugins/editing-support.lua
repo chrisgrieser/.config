@@ -12,13 +12,11 @@ return {
 
 	-----------------------------------------------------------------------------
 
-	{ -- description
+	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
+		dev = true,
 		lazy = true,
-		init = function()
-
-			vim.g.spider_minimum_punctuation = 3
-		end,
+		init = function() vim.g.spider_minimum_punctuation = 3 end,
 	},
 	{ -- automatically set right indent for file
 		"Darazaki/indent-o-matic",

@@ -607,8 +607,8 @@ Autocmd("FileType", {
 
 -- shiftless move
 Keymap({ "n", "o", "x" }, "w", "E", { desc = "w -> E" })
-Keymap({"n", "o", "x"}, "e", function() require("funcs.spider").motion("e") end, { desc = "Spider-e" })
-Keymap({"n", "o", "x"}, "b", function() require("funcs.spider").motion("b") end, { desc = "Spider-b" })
+Keymap({"n", "o", "x"}, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
+Keymap({"n", "o", "x"}, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
 
 -- Simple version of the delaytrain.nvim
 for _, key in ipairs { "x", "h", "l" } do
