@@ -11,11 +11,6 @@ local function getline(lnum)
 	return lineContent[1]
 end
 
-local lowerWord = "[%a%d][%l%d]+" -- at least two, first may be uppercase for CamelCase
-local upperWord = "[%u%d][%u%d]+" -- at least two, needed for SCREAMING_SNAKE_CASE
-local singleLetter = "%f[%w]%w[^%w]" -- single alphanumeric character
-local punctuation = "[%p][%p][%p]+" -- at least three
-
 ---get the minimum of the four numbers, considering that any may be nil
 ---@param pos1 number|nil
 ---@param pos2 number|nil
@@ -33,6 +28,14 @@ end
 
 --------------------------------------------------------------------------------
 
+local lowerWord = "%u?[%l%d]+" -- at least two, first may be uppercase for CamelCase
+local upperWord = "[%u%d][%u%d]+" -- at least two, needed for SCREAMING_SNAKE_CASE
+
+vim.g.spider_minimum_punctuation = 3
+local punctuation = ("[%p]"):rep(vim.g.spider_minimum_punctuation) .. "+"
+
+--------------------------------------------------------------------------------
+
 ---search for the next item to move to
 ---@param key string e|w|b
 function M.motion(key)
@@ -40,7 +43,7 @@ function M.motion(key)
 		vim.notify("Invalid key: " .. key .. "\nOnly w, e, and b are supported.", vim.log.levels.ERROR)
 		return
 	end
-	local closestPos, lowerPos, upperPos, punctPos, singlePos
+	local closestPos, lowerPos, upperPos, punctPos
 
 	-- get line content to search
 	local row, col = unpack(getCursor(0))
@@ -54,19 +57,18 @@ function M.motion(key)
 		_, lowerPos = line:find(lowerWord, col)
 		_, upperPos = line:find(upperWord, col)
 		_, punctPos = line:find(punctuation, col)
-		singlePos, _ = line:find(singleLetter, col + 1)
-		local endOfWord = minimum(lowerPos, upperPos, punctPos, singlePos)
+		local endOfWord = minimum(lowerPos, upperPos, punctPos)
 		if not endOfWord then
 			vim.notify("None found in this line.", vim.log.levels.WARN)
 			return
 		end
 		if key == "w" then
+			endOfWord = endOfWord + 1 -- next position
 			-- determine start of next word
 			lowerPos, _ = line:find(lowerWord, endOfWord)
 			upperPos, _ = line:find(upperWord, endOfWord)
 			punctPos, _ = line:find(punctuation, endOfWord)
-			-- singlePos, _ = line:find(singleLetter, endOfWord)
-			closestPos = minimum(lowerPos, upperPos, punctPos, singlePos)
+			closestPos = minimum(lowerPos, upperPos, punctPos)
 		elseif key == "e" then
 			closestPos = endOfWord
 		end
@@ -78,8 +80,7 @@ function M.motion(key)
 		_, lowerPos = line:find(lowerWord)
 		_, upperPos = line:find(upperWord)
 		_, punctPos = line:find(punctuation)
-		-- singlePos, _ = line:find(singleLetter)
-		closestPos = minimum(lowerPos, upperPos, punctPos, singlePos)
+		closestPos = minimum(lowerPos, upperPos, punctPos)
 		if closestPos then closestPos = #line - closestPos + 1 end -- needed due to reversal
 	end
 
