@@ -21,14 +21,11 @@ local punctPattern = "[%p][%p][%p]+" -- at least three
 ---@param pos3 number|nil
 ---@return number|nil returns nil of all numbers are nil
 local function minimum(pos1, pos2, pos3)
-	if not (pos1 or pos2 or pos3) then
-		return nil
-	end
+	if not (pos1 or pos2 or pos3) then return nil end
 	pos1 = pos1 or math.huge -- math.huge will never be the smallest number
 	pos2 = pos2 or math.huge
 	pos3 = pos3 or math.huge
-	return = math.min(pos1, pos2, pos3)
-	return closestPos - 1 -- cause `:find` is off by one
+	return math.min(pos1, pos2, pos3)
 end
 
 --------------------------------------------------------------------------------
@@ -37,37 +34,39 @@ end
 ---@param mode string e|w|b (currently only e and w)
 function M.search(mode)
 	local row, col = unpack(getCursor(0))
-	col = col + 1 -- to only find the next position, not the position the cursor is stand on
+	col = col + 1 -- to force moving to the next position
 	local line = getline(row)
 	local lowerPos, upperPos, punctPos
 
 	-- find
-	if mode == "w" then
+	if mode == "w" or mode == "e" then
+		-- determine end of word
 		_, lowerPos = line:find(lowerWordPattern, col)
 		_, upperPos = line:find(upperWordPattern, col)
 		_, punctPos = line:find(lowerWordPattern, col)
-		lowerPos = line:find(lowerWordPattern, lowerPos)
-		upperPos = line:find(upperWordPattern, upperPos)
-		punctPos = line:find(punctPattern, punctPos)
-	elseif mode == "e" then
+		local endOfWord = minimum(lowerPos, upperPos, punctPos)
+		if not endOfWord then return end
+		-- determine start of next word
+		lowerPos = line:find(lowerWordPattern, endOfWord)
+		upperPos = line:find(upperWordPattern, endOfWord)
+		punctPos = line:find(punctPattern, endOfWord)
+	if mode == "e" then
 		_, lowerPos = line:find(lowerWordPattern, col)
 		_, upperPos = line:find(upperWordPattern, col)
 		_, punctPos = line:find(punctPattern, col)
 	end
+	end
 
 	-- determine closest
-	if not (lowerPos or upperPos or punctPos) then
-		vim.notify("None found in this line", vim.log.levels.WARN)
-		return	
+	local closestPos = minimum(lowerPos, upperPos, punctPos)
+	if not closestPos then
+		vim.notify("None found in this line.", vim.log.levels.WARN)
+		return
 	end
-	lowerPos = lowerPos or math.huge -- math.huge will never be the smallest number
-	upperPos = upperPos or math.huge
-	punctPos = punctPos or math.huge
-	local closestPos = math.min(lowerPos, upperPos, punctPos)
 	closestPos = closestPos - 1 -- cause `:find` is off by one
 
 	-- move to new location
-	setCursor(0, {row, closestPos})	
+	setCursor(0, { row, closestPos })
 end
 
 --------------------------------------------------------------------------------
