@@ -11,61 +11,59 @@ local function getline(lnum)
 	return lineContent[1]
 end
 
-local lowerWordPattern = "[%a%d][%l%d]+" -- at least two, first may be uppercase for CamelCase
-local upperWordPattern = "[%u%d][%u%d]+" -- at least two, needed for SCREAMING_SNAKE_CASE
-local punctPattern = "[%p][%p][%p]+" -- at least three
+local lowerWord = "[%a%d][%l%d]+" -- at least two, first may be uppercase for CamelCase
+local upperWord = "[%u%d][%u%d]+" -- at least two, needed for SCREAMING_SNAKE_CASE
+local singleLetter = "f[%w]%wf[%w]" -- single alphanumeric character
+local punctuation = "[%p][%p][%p]+" -- at least three
 
 ---get the minimum of the three numbers, considering that any may be nil
 ---@param pos1 number|nil
 ---@param pos2 number|nil
 ---@param pos3 number|nil
+---@param pos4 number|nil
 ---@return number|nil returns nil of all numbers are nil
-local function minimum(pos1, pos2, pos3)
+local function minimum(pos1, pos2, pos3, pos4)
 	if not (pos1 or pos2 or pos3) then return nil end
 	pos1 = pos1 or math.huge -- math.huge will never be the smallest number
 	pos2 = pos2 or math.huge
 	pos3 = pos3 or math.huge
-	return math.min(pos1, pos2, pos3)
+	pos4 = pos4 or math.huge
+	return math.min(pos1, pos2, pos3, pos4)
 end
 
 --------------------------------------------------------------------------------
 
 ---search for the next item to move to
----@param mode string e|w|b (currently only e and w)
-function M.search(mode)
+---@param key string e|w|b (currently only e and w)
+function M.search(key)
 	local row, col = unpack(getCursor(0))
 	col = col + 1 -- to force moving to the next position
 	local line = getline(row)
-	local lowerPos, upperPos, punctPos
+	local closestPos
 
-	-- find
-	if mode == "w" or mode == "e" then
-		-- determine end of word
-		_, lowerPos = line:find(lowerWordPattern, col)
-		_, upperPos = line:find(upperWordPattern, col)
-		_, punctPos = line:find(lowerWordPattern, col)
-		local endOfWord = minimum(lowerPos, upperPos, punctPos)
-		if not endOfWord then return end
+	-- determine end of word
+	local _, lowerPos = line:find(lowerWord, col)
+	local _, upperPos = line:find(upperWord, col)
+	local _, punctPos = line:find(punctuation, col)
+	local singlePos = line:find(singleLetter, col)
+	local endOfWord = minimum(lowerPos, upperPos, punctPos, singlePos)
+	if not endOfWord then return end
+
+	if key == "w" then
 		-- determine start of next word
-		lowerPos = line:find(lowerWordPattern, endOfWord)
-		upperPos = line:find(upperWordPattern, endOfWord)
-		punctPos = line:find(punctPattern, endOfWord)
-	if mode == "e" then
-		_, lowerPos = line:find(lowerWordPattern, col)
-		_, upperPos = line:find(upperWordPattern, col)
-		_, punctPos = line:find(punctPattern, col)
+		lowerPos, _ = line:find(lowerWord, endOfWord)
+		upperPos, _ = line:find(upperWord, endOfWord)
+		punctPos, _ = line:find(punctuation, endOfWord)
+		singlePos = line:find(punctuation, endOfWord)
+		closestPos = minimum(lowerPos, upperPos, punctPos, singlePos)
+		if not closestPos then return end
+	elseif key == "e" then
+		closestPos = endOfWord
 	end
-	end
-
-	-- determine closest
-	local closestPos = minimum(lowerPos, upperPos, punctPos)
-	if not closestPos then
-		vim.notify("None found in this line.", vim.log.levels.WARN)
-		return
-	end
-	closestPos = closestPos - 1 -- cause `:find` is off by one
+	closestPos = closestPos - 1
 
 	-- move to new location
+	if vim.fn.mode() == "o" then vim.cmd.normal{"v", bang = true} end
 	setCursor(0, { row, closestPos })
 end
 
