@@ -28,11 +28,16 @@ fi
 msg="$device_name ($filesChanged)"
 git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
 git pull
-git push
 
-# update submodules
-git pull --recurse-submodules
-git submodule update --remote
+# loop to catch failures due to files changing during pull
+while true; do
+	git pull --recurse-submodules
+	git submodule update --remote
+	git push
+	# shellcheck disable=2181
+	[[ $? -eq 0 ]] && break
+	sleep 1
+done
 
 # check that everything worked (e.g. submodules are still dirty)
 DIRTY=$(git status --porcelain)
