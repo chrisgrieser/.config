@@ -60,14 +60,11 @@ function M.search(key)
 	-- get line content to search
 	local row, col = unpack(getCursor(0))
 	local line = getline(row)
-	if key == "b" then
-		line = line:sub(1, col)
-	else
-		col = col + 1 -- force moving to the next position
-	end
 
 	-- search
 	if key == "w" or key == "e" then
+		-- force moving to next word
+		col = col + 1
 		-- determine end of word
 		_, lowerPos = line:find(lowerWord, col)
 		_, upperPos = line:find(upperWord, col)
@@ -86,20 +83,28 @@ function M.search(key)
 			closestPos = endOfWord
 		end
 	elseif key == "b" then
-		lowerPos, _ = line:find(lowerWord, col)
-		upperPos, _ = line:find(upperWord, col)
-		punctPos, _ = line:find(punctuation, col)
-		singlePos, _ = line:find(singleLetter, col + 1)
-		closestPos = maximum(lowerPos, upperPos, punctPos, singlePos)
+		line = line:sub(1, col) -- only before the cursor pos
+		local currentPos, nextPos
+		repeat
+			currentPos = nextPos or 1
+			lowerPos, _ = line:find(lowerWord, currentPos)
+			upperPos, _ = line:find(upperWord, currentPos)
+			punctPos, _ = line:find(punctuation, currentPos)
+			singlePos, _ = line:find(singleLetter, currentPos)
+			nextPos = maximum(lowerPos, upperPos, punctPos, singlePos)
+			if not nextPos then break end
+		until false
+		closestPos = currentPos
 	end
 
-	-- move to new location
+	-- validate position
 	if not closestPos then
 		vim.notify("None found in this line.", vim.log.levels.WARN)
 		return
 	end
 	closestPos = closestPos - 1
 
+	-- move to new location
 	if vim.fn.mode() == "o" then vim.cmd.normal { "v", bang = true } end
 	setCursor(0, { row, closestPos })
 end
