@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "17/03/2023, 01:29:00",
-	"time": 1679012940707,
+	"@time": "20/03/2023, 16:06:55",
+	"time": 1679324815973,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -83,10 +83,11 @@
 		"map W closeOtherTabs",
 		"map w removeTab mayClose",
 		"map m removeTab mayClose",
+		"\" -- using  then/else, since runKey does not work with the `mayClose` parameter",
 		"map x closeOtherTabs $then=\"w\" $else=\"w\"",
-		"map s runKey keys=\"copyCurrentUrl+removeTab\\u0020mayClose\"",
+		"map s copyCurrentUrl $then=\"w\" $else=\"w\"",
 		"map u restoreTab",
-		"\" map yt duplicateTab disabled, cause conflicting with duplication-prevention plugin",
+		"\" map yt duplicateTab -- disabled, cause conflicting with duplication-prevention plugin",
 		"",
 		"map a previousTab",
 		"map d nextTab",
