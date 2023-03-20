@@ -377,7 +377,7 @@
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>0</integer>
+						<integer>4</integer>
 						<key>matchstring</key>
 						<string>empty</string>
 						<key>outputlabel</key>
@@ -763,6 +763,70 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>trash</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>files-in-trash.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Files in Trash…</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F51A014F-1ABC-49D4-ADA8-0B83A691533F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>8BB9AF8F-CEC8-418B-8C7E-17659924B55C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -873,6 +937,13 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
+		<key>8BB9AF8F-CEC8-418B-8C7E-17659924B55C</key>
+		<dict>
+			<key>xpos</key>
+			<real>345</real>
+			<key>ypos</key>
+			<real>710</real>
+		</dict>
 		<key>8D046756-BF24-4658-BD57-CAB48FF61B9D</key>
 		<dict>
 			<key>note</key>
@@ -980,6 +1051,15 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>375</real>
 			<key>ypos</key>
 			<real>420</real>
+		</dict>
+		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>695</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
