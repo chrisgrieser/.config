@@ -8,27 +8,26 @@ local function getline(lnum)
 	return lineContent[1]
 end
 
----get the minimum of the four numbers, considering that any may be nil
+---get the minimum of the three positions, considering that any may be nil
 ---@param pos1 number|nil
 ---@param pos2 number|nil
 ---@param pos3 number|nil
----@param pos4 number|nil
 ---@return number|nil returns nil of all numbers are nil
-local function minimum(pos1, pos2, pos3, pos4)
-	if not (pos1 or pos2 or pos3 or pos4) then 
+local function minimum(pos1, pos2, pos3)
+	if not (pos1 or pos2 or pos3) then 
 		vim.notify("None found in this line.", vim.log.levels.WARN)
 		return nil
 	end
 	pos1 = pos1 or math.huge -- math.huge will never be the smallest number
 	pos2 = pos2 or math.huge
 	pos3 = pos3 or math.huge
-	pos4 = pos4 or math.huge
-	return math.min(pos1, pos2, pos3, pos4)
+	return math.min(pos1, pos2, pos3)
 end
 
 --------------------------------------------------------------------------------
 
-local lowerWord = "%u?[%l%d]+" -- at least two, first may be uppercase for CamelCase
+-- PATTERNS
+local lowerWord = "%u?[%l%d]+" -- first may be uppercase for CamelCase
 local upperWord = "[%u%d][%u%d]+" -- at least two, needed for SCREAMING_SNAKE_CASE
 
 -- minimum punctuation configurable by user, default is 3

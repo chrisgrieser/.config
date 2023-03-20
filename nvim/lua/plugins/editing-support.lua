@@ -65,7 +65,7 @@ return {
 	},
 	{ -- swapping of sibling nodes (works with more nodes than Iswap, but has no hint mode)
 		"Wansmer/sibling-swap.nvim",
-		lazy = true, -- required in keymaps
+		lazy = true, -- loaded by keymaps
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("sibling-swap").setup {
