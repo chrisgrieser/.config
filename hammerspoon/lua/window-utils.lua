@@ -93,12 +93,6 @@ function ToggleWinSidebar(win)
 	end
 end
 
----show the sidebars of Obsidian and Drafts
-function ShowAllSidebars()
-	OpenLinkInBackground("obsidian://advanced-uri?eval=this.app.workspace.rightSplit.expand%28%29")
-	OpenLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
-end
-
 --------------------------------------------------------------------------------
 
 ---ensures Obsidian windows are always shown when developing, mostly for developing CSS
@@ -213,6 +207,51 @@ function AutoTile(winSrc)
 		MoveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
 	end
 end
+
+--------------------------------------------------------------------------------
+
+-- Open Apps always at Mouse Screen
+Wf_appsOnMouseScreen = Wf.new({
+	"Drafts",
+	"Vivaldi",
+	"Mimestream",
+	"BetterTouchTool",
+	"Obsidian",
+	"Alacritty",
+	"alacritty",
+	"Warp",
+	"Slack",
+	"IINA",
+	"Hammerspoon",
+	"System Settings",
+	"Discord",
+	"Neovide",
+	"neovide",
+	"Espanso",
+	"BusyCal",
+	"Alfred Preferences",
+	"YouTube",
+	"Netflix",
+	"CrunchyRoll",
+	"Finder",
+}):subscribe(Wf.windowCreated, function(newWin)
+	local mouseScreen = hs.mouse.getCurrentScreen()
+	if not mouseScreen then return end
+	local screenOfWindow = newWin:screen()
+	if not IsProjector() or mouseScreen:name() == screenOfWindow:name() then return end
+
+	local appn = newWin:application():name()
+	RunWithDelays({ 0.2, 1, 1.5 }, function()
+		if not (mouseScreen:name() == screenOfWindow:name()) then newWin:moveToScreen(mouseScreen) end
+
+		if appn == "Finder" or appn == "Script Editor" or appn == "Hammerspoon" then
+			MoveResize(newWin, Centered)
+		else
+			MoveResize(newWin, Maximized)
+		end
+	end)
+end)
+
 
 --------------------------------------------------------------------------------
 -- HOTKEY ACTIONS
