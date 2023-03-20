@@ -83,18 +83,16 @@ function M.search(key)
 			closestPos = endOfWord
 		end
 	elseif key == "b" then
-		line = line:sub(1, col) -- only before the cursor pos
-		local currentPos, nextPos
-		repeat
-			currentPos = nextPos or 1
-			lowerPos, _ = line:find(lowerWord, currentPos)
-			upperPos, _ = line:find(upperWord, currentPos)
-			punctPos, _ = line:find(punctuation, currentPos)
-			singlePos, _ = line:find(singleLetter, currentPos)
-			nextPos = maximum(lowerPos, upperPos, punctPos, singlePos)
-			if not nextPos then break end
-		until false
-		closestPos = currentPos
+		line = line
+			:sub(1, col) -- only before the cursor pos
+			:reverse()
+		lowerWord = "[%l%d]+[%a%d]" -- needed due to reversal
+		lowerPos, _ = line:find(lowerWord)
+		upperPos, _ = line:find(upperWord)
+		punctPos, _ = line:find(punctuation)
+		-- singlePos, _ = line:find(singleLetter)
+		closestPos = minimum(lowerPos, upperPos, punctPos, singlePos)
+		if closestPos then closestPos = #line - closestPos end -- needed due to reversal
 	end
 
 	-- validate position
