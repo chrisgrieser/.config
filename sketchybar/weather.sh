@@ -24,4 +24,4 @@ case "$icon" in
 "⛈") icon=" " ;;
 esac
 
-sketchybar --set "$NAME" icon="$icon" label="$temp" icon.font="JetBrainsMonoNL Nerd Font:Bold:15"
+sketchybar --set "$NAME" icon="$icon" label="$temp"

@@ -63,8 +63,8 @@ sketchybar \
 	padding_left=0 padding_right=0 color="$BG_COLOR" \
 	--default \
 	updates=when_shown drawing=on align=left \
-	icon.font="JetBrainsMonoNL Nerd Font:Bold:17" icon.color="$FONT_COLOR" \
-	label.font="Noto Sans:Semibold:16.5" label.color="$FONT_COLOR" \
+	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" icon.color="$FONT_COLOR" \
+	label.font="Lucida Grande:Regular:16.5" label.color="$FONT_COLOR" \
 	icon.padding_left=2 icon.padding_right=1 \
 	label.padding_left=2 label.padding_right=10 \
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
