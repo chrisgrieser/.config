@@ -9,7 +9,7 @@ else
 	temp=$(echo "$weather" | cut -c2-)
 fi
 
-# replace emoji weather fonts with nerd fonts
+# replace emoji weather fonts with nerd fonts does not seem to be working though :(
 case "$icon" in
 "✨") icon=" " ;;
 "☁️") icon=" " ;;
@@ -24,4 +24,4 @@ case "$icon" in
 "⛈") icon=" " ;;
 esac
 
-sketchybar --set "$NAME" icon="$icon" label="$temp"
+sketchybar --set "$NAME" icon="$icon" label="$temp" icon.font="JetBrainsMonoNL Nerd Font:Bold:15"
