@@ -38,14 +38,14 @@ end
 --------------------------------------------------------------------------------
 
 -- show branch info only when *not* on main/master
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter", "TabEnter" }, {
+vim.api.nvim_create_autocmd({ "BufReadPost", "FocusGained", "UiEnter" }, {
 	callback = function()
-		vim.g.cur_branch = vim.fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "")
+		vim.b.cur_branch = vim.fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "")
 	end,
 })
 
 local function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
-	local notMainBranch = vim.g.cur_branch ~= "main" and vim.g.cur_branch ~= "master"
+	local notMainBranch = vim.b.cur_branch ~= "main" and vim.b.cur_branch ~= "master"
 	local validFiletype = vim.bo.filetype ~= "help" -- vim help files are located in a git repo
 	return notMainBranch and validFiletype
 end
@@ -85,8 +85,6 @@ end
 ---`require` itself, so won't load Harpoon (for when lazyloading Harpoon)
 function UpdateHarpoonIndicator()
 	local harpoonJsonPath = vim.fn.stdpath("data") .. "/harpoon.json"
-	local fileExists = vim.fn.filereadable(harpoonJsonPath)
-	if not fileExists then return end
 	local harpoonJson = ReadFile(harpoonJsonPath)
 	if not harpoonJson then return end
 
@@ -107,9 +105,11 @@ function UpdateHarpoonIndicator()
 	vim.b.harpoonMark = ""
 end
 
+local function harpoonStatusline() return vim.b.harpoonMark end
+
 -- so the harpoon state is only checked once on buffer enter and not every second
 -- also, the command is called on marking a new file
-vim.api.nvim_create_autocmd("BufReadPost", {
+vim.api.nvim_create_autocmd({"BufReadPost", "UiEnter"}, {
 	pattern = "*",
 	callback = UpdateHarpoonIndicator,
 })
@@ -140,7 +140,10 @@ local topSeparators = vim.g.neovide and { left = " ", right = " " } or { l
 local lualineConfig = {
 	sections = {
 		lualine_a = {
-			{ function () return vim.b.harpoonMark end, padding = { left = 1, right = 0 } },
+			{
+				harpoonStatusline,
+				padding = { left = 1, right = 0 },
+			},
 			{
 				"filetype",
 				colored = false,
