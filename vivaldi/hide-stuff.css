@@ -1,6 +1,9 @@
 /* stylelint-disable selector-max-id, custom-property-pattern */
 /* ────────────────────────────────────────────────────────── */
-
+.button-toolbar:has([name="Back"]),
+.button-toolbar:has([name="Forward"]),
+.button-toolbar:has([name="Reload"]),
+.button-toolbar:has([name="Home"]),
 .UrlBar-PrivateWindowIndicator,
 .window-buttongroup, /* macOS traffic lights */
 .toolbar-extensions, /* extension button */

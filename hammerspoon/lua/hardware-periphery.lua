@@ -75,6 +75,7 @@ WifiWatcher = hs.wifi.watcher
 	.new(function(_, msg)
 		local ssid = hs.wifi.currentNetwork() or "none"
 		Notify("📶 WiFi (" .. msg .. "): " .. ssid)
+
 	end)
 	:watchingFor({ "SSIDChange", "powerChange" })
 	:start()
