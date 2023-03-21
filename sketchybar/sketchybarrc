@@ -7,7 +7,7 @@ i=0
 # ensure Stats.app is running
 while ! pgrep "Stats"; do
 	open -a "Stats"
-	sleep 1
+	sleep 5
 	i=$((i + 1))
 	[[ $i -gt 30 ]] && exit 1
 done
