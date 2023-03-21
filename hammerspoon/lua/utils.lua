@@ -179,7 +179,7 @@ function Notify(...)
 	end
 	local out = table.concat(safe_args, " ")
 	hs.notify.show("Hammerspoon", "", out)
-	print("ℹ️ [] " .. out)
+	print("💬 " .. out)
 end
 
 --------------------------------------------------------------------------------
@@ -220,7 +220,7 @@ function AsSoonAsAppRuns(app, callbackFn)
 		local appRuns = app ~= nil
 		local windowAvailable = app and app:mainWindow()
 		return appRuns and windowAvailable
-	end, callbackFn, 0.2)
+	end, callbackFn, 0.1)
 end
 
 ---@param appNames string|string[]

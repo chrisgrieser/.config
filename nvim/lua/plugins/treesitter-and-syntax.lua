@@ -125,4 +125,7 @@ return {
 
 	-- treesitter CSS does not look good https://github.com/tree-sitter/tree-sitter-css/issues/34
 	{ "hail2u/vim-css3-syntax", ft = "css" }, 
+
+	-- log files
+	{ "MTDL9/vim-log-highlighting", ft = "log" }, 
 }
