@@ -3,7 +3,7 @@ return {
 		"ThePrimeagen/harpoon",
 		lazy = true, -- loaded by keybinds
 		dependencies = "nvim-lua/plenary.nvim",
-		init = function()
+		build = function()
 			-- HACK to make Harpoon marks syncable across devices by creating symlink
 			-- to the `harpoon.json` that is synced
 			local symlinkCmd = string.format(
@@ -12,7 +12,6 @@ return {
 				vim.fn.stdpath("data") .. "/harpoon.json" -- https://github.com/ThePrimeagen/harpoon/blob/master/lua/harpoon/init.lua#L7
 			)
 			vim.fn.system(symlinkCmd)
-			-- INFO needs to run in `init`, so the lualine-harpoon indicator works can read it
 		end,
 		config = function()
 			require("harpoon").setup {
