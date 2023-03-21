@@ -25,7 +25,7 @@ function Normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 function ReadFile(filePath)
 	local file, err = io.open(filePath, "r")
 	if not file then 
-		vim.notify("Could not read: " .. err, vim.log.levels.ERROR)
+		vim.notify_once("Could not read: " .. err, vim.log.levels.ERROR)
 		return
 	end
 	local content = file:read("*a")

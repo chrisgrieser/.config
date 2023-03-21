@@ -84,8 +84,6 @@ end
 ---@return string empty string when not marked
 local function harpoonIndicator()
 	local harpoonJsonPath = vim.fn.stdpath("data") .. "/harpoon.json"
-	local fileExists = vim.fn.filereadable()
-	if not fileExists then return "" end
 	local harpoonJson = ReadFile(harpoonJsonPath)
 	if not harpoonJson then return "" end
 
