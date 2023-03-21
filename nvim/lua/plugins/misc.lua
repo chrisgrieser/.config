@@ -25,6 +25,15 @@ return {
 			})
 		end,
 	},
+{ -- description
+	"github_repo",
+	event = "VeryLazy",
+	config = function()
+		require("module-name").setup{
+			
+		}
+	end,
+},	
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",

@@ -42,6 +42,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4A863367-72EB-4F2F-90CC-509F92F6AEA5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2D996A5F-76DB-4596-BAC7-C918B0EFD902</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4B30C050-DEC1-4375-8B11-20FA04A89596</key>
 		<array>
 			<dict>
@@ -66,19 +79,6 @@
 			</dict>
 		</array>
 		<key>4F542EDC-0D2D-48F5-9593-5A78470AFEE4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2D996A5F-76DB-4596-BAC7-C918B0EFD902</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>6CDCB693-818C-4062-A4BC-F0E1288E7A85</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -443,7 +443,7 @@ echo -n "${newFullPath}"</string>
 			<key>type</key>
 			<string>alfred.workflow.trigger.external</string>
 			<key>uid</key>
-			<string>6CDCB693-818C-4062-A4BC-F0E1288E7A85</string>
+			<string>4A863367-72EB-4F2F-90CC-509F92F6AEA5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -474,6 +474,15 @@ Press &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; at any state to reope
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
+		<key>4A863367-72EB-4F2F-90CC-509F92F6AEA5</key>
+		<dict>
+			<key>note</key>
+			<string>to be copypasted after update of the rename workflow</string>
+			<key>xpos</key>
+			<real>95</real>
+			<key>ypos</key>
+			<real>255</real>
+		</dict>
 		<key>4B30C050-DEC1-4375-8B11-20FA04A89596</key>
 		<dict>
 			<key>xpos</key>
@@ -487,15 +496,6 @@ Press &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; at any state to reope
 			<real>215</real>
 			<key>ypos</key>
 			<real>150</real>
-		</dict>
-		<key>6CDCB693-818C-4062-A4BC-F0E1288E7A85</key>
-		<dict>
-			<key>note</key>
-			<string>to be copypasted after update of the rename workflow</string>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>200</real>
 		</dict>
 		<key>947A1C83-3935-488B-BBBC-A01B072DD9A0</key>
 		<dict>
