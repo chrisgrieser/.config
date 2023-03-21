@@ -12,7 +12,7 @@ return {
 				vim.fn.stdpath("data") .. "/harpoon.json" -- https://github.com/ThePrimeagen/harpoon/blob/master/lua/harpoon/init.lua#L7
 			)
 			vim.fn.system(symlinkCmd)
-			-- needs to run in `init`, so the lualine-harpoon indicator works can read it
+			-- INFO needs to run in `init`, so the lualine-harpoon indicator works can read it
 		end,
 		config = function()
 			require("harpoon").setup {
