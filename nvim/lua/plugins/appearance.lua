@@ -133,7 +133,7 @@ return {
 					},
 				},
 				select = {
-					backend = { "builtin", "telescope" }, -- Priority list of vim.select implementations
+					backend = { "telescope", "builtin" }, -- Priority list of vim.select implementations
 					trim_prompt = true, -- Trim trailing `:` from prompt
 					builtin = {
 						border = BorderStyle,
@@ -144,6 +144,10 @@ return {
 						min_height = 4,
 						win_options = { winblend = 0 }, -- weird shining through
 					},
+					get_config = function(opts)
+						-- code actions use builtin for quicker picking
+						if opts.kind == "codeaction" then return { backend = "builtin" } end
+					end,
 				},
 			}
 		end,

@@ -25,11 +25,6 @@ return {
 			})
 		end,
 	},
-	{ -- description
-		"ziontee113/icon-picker.nvim",
-		event = "VeryLazy",
-		config = function() require("icon-picker").setup {} end,
-	},
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",

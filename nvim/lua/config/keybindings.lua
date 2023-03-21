@@ -322,9 +322,12 @@ Keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = 
 -- consistent with adding/removing bookmarks in the Browser/Obsidian
 Keymap("n", "<D-d>", function()
 	require("harpoon.mark").add_file()
-	updateHarpoonIndicator()
+	vim.b.harpoonMark = "ﯠ"
 end, { desc = "ﯠ Add File" })
-Keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
+Keymap("n", "<D-S-d>", function()
+	require("harpoon.ui").toggle_quick_menu()
+	UpdateHarpoonIndicator()
+end, { desc = "ﯠ Menu" })
 -- stylua: ignore end
 
 ------------------------------------------------------------------------------
@@ -613,17 +616,22 @@ Autocmd("FileType", {
 
 -- shiftless move
 Keymap({ "n", "o", "x" }, "w", "E", { desc = "w -> E" })
-Keymap({ "n", "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
-Keymap({ "n", "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
+Keymap({ "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
+Keymap({ "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
 
 -- Simple version of the delaytrain.nvim
-for _, key in ipairs { "x", "h", "l" } do
+for _, key in ipairs { "x", "h", "l", "e", "b" } do
 	local timeout = 4000
 	local maxUsage = 8
 
 	local count = 0
-	Keymap({ "n", "x" }, key, function()
-		if key == "x" then key = [["_x]] end
+	Keymap("n", key, function()
+		if key == "x" then
+			Normal([["_x]])
+		elseif key == "e" or key == "b" then
+			require("spider").motion(key)
+			return
+		end
 
 		-- abort when recording, since this only leads to bugs then
 		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
@@ -631,9 +639,9 @@ for _, key in ipairs { "x", "h", "l" } do
 		if count <= maxUsage then
 			count = count + 1
 			vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
-			return key
+			Normal(key)
 		end
-	end, { expr = true, desc = key .. " (delaytrain)" })
+	end, { desc = key .. " (delaytrain)" })
 end
 
 --------------------------------------------------------------------------------
