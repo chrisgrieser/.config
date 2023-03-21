@@ -81,5 +81,5 @@ WifiWatcher = hs.wifi.watcher
 			AppendToFile("./HBS-WiFi.log", timestamp .. " – " .. msg)
 		end
 	end)
-	:watchingFor({ "SSIDChange", "powerChange" })
+	:watchingFor({ "SSIDChange" })
 	:start()
