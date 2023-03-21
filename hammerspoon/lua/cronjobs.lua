@@ -60,11 +60,6 @@ BiweeklyTimer = hs.timer
 		hs.execute(
 			'cp -f "$HOME/Library/Application Support/Vivaldi/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks.bkp"'
 		)
-		hs.execute([[
-			ls -1 "$HOME/Library/Application Support/Vivaldi/Default/Extensions/" |
-			sed "s|^|https://chrome.google.com/webstore/detail/|" \
-			> "$DOTFILE_FOLDER/browser-extension-configs/list-of-extensions.txt"
-		]])
 	end, true)
 	:start()
 

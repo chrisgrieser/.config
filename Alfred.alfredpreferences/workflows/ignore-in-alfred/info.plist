@@ -533,7 +533,7 @@ Alteratively, search for files and folders via the keywords (defaults: `ignore`,
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2022.3</string>
+	<string>2023.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/ignore-in-alfred-workflow/</string>
 </dict>

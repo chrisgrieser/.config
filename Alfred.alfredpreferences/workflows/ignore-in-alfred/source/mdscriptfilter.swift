@@ -39,6 +39,6 @@ let sfItems: [[String: Any]] = (0..<resultCount).compactMap { resultIndex in
 }
 
 // Output JSON
-let jsonData: Data = try! JSONSerialization.data(withJSONObject: ["items": sfItems])
+let jsonData: Data = try JSONSerialization.data(withJSONObject: ["items": sfItems])
 let jsonString: String = String(data: jsonData, encoding: .utf8)!
 print(jsonString)
