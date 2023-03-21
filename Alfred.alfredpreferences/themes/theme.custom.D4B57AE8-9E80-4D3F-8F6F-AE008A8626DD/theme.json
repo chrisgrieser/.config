@@ -5,20 +5,20 @@
       "subtext" : {
         "size" : 19,
         "colorSelected" : "#DB290CFF",
-        "font" : "Noto Sans",
+        "font" : "Lucida Grande",
         "color" : "#00D5FFFF"
       },
       "shortcut" : {
         "size" : 24,
         "colorSelected" : "#DB290CFF",
-        "font" : "Noto Sans",
+        "font" : "Lucida Grande",
         "color" : "#A9A9A9FF"
       },
       "backgroundSelected" : "#FFBB00FF",
       "text" : {
-        "size" : 31,
+        "size" : 30,
         "colorSelected" : "#590907FF",
-        "font" : "Noto Sans",
+        "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
       },
       "iconPaddingHorizontal" : 7,
@@ -33,7 +33,7 @@
       "text" : {
         "size" : 61,
         "colorSelected" : "#000000FF",
-        "font" : "Noto Sans",
+        "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
       },
       "background" : "#0000007F",
