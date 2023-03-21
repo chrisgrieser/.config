@@ -83,7 +83,7 @@ end
 
 ---returns a harpoon icon if the current file is marked in Harpoon. Does not
 ---`require` itself, so won't load Harpoon (for when lazyloading Harpoon)
-function updateHarpoonIndicator()
+function UpdateHarpoonIndicator()
 	local harpoonJsonPath = vim.fn.stdpath("data") .. "/harpoon.json"
 	local fileExists = vim.fn.filereadable(harpoonJsonPath)
 	if not fileExists then return end
@@ -100,23 +100,18 @@ function updateHarpoonIndicator()
 
 	for _, file in pairs(markedFiles) do
 		if file.filename == currentFile then
-			vim.g.harpoonMark = "ﯠ"
+			vim.b.harpoonMark = "ﯠ"
 			return
 		end
 	end
-	vim.g.harpoonMark = ""
-end
-
-local function harpoonStatusline()
-	local mark = vim.g.harpoonMark or ""
-	return mark
+	vim.b.harpoonMark = ""
 end
 
 -- so the harpoon state is only checked once on buffer enter and not every second
 -- also, the command is called on marking a new file
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("BufReadPost", {
 	pattern = "*",
-	callback = updateHarpoonIndicator,
+	callback = UpdateHarpoonIndicator,
 })
 
 --------------------------------------------------------------------------------
@@ -145,7 +140,7 @@ local topSeparators = vim.g.neovide and { left = " ", right = " " } or { l
 local lualineConfig = {
 	sections = {
 		lualine_a = {
-			{ harpoonStatusline, padding = { left = 1, right = 0 } },
+			{ function () return vim.b.harpoonMark end, padding = { left = 1, right = 0 } },
 			{
 				"filetype",
 				colored = false,
