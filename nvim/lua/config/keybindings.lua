@@ -211,10 +211,10 @@ Autocmd("FileType", {
 Keymap(
 	"n",
 	"<leader>f",
-	[[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left><Left>]],
+	[[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]],
 	{ desc = "弄 :substitute" }
 )
-Keymap("x", "<leader>f", ":s///g<Left><Left><Left><Left>", { desc = "弄 :substitute" })
+Keymap("x", "<leader>f", ":s///g<Left><Left><Left>", { desc = "弄 :substitute" })
 Keymap(
 	{ "n", "x" },
 	"<leader>F",

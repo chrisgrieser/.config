@@ -38,7 +38,7 @@ git clone --recurse-submodules git@github.com:chrisgrieser/.config.git
 cd ~/.config
 git submodule foreach git checkout main
 
-# load Dock from dotfiles
+# Load Dock from dotfiles
 zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 #-------------------------------------------------------------------------------
