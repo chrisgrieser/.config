@@ -320,7 +320,10 @@ Keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 Keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "ﯠ Next" })
 -- stylua: ignore start
 -- consistent with adding/removing bookmarks in the Browser/Obsidian
-Keymap("n", "<D-d>", function() require("harpoon.mark").add_file() end, { desc = "ﯠ Add File" })
+Keymap("n", "<D-d>", function()
+	require("harpoon.mark").add_file()
+	updateHarpoonIndicator()
+end, { desc = "ﯠ Add File" })
 Keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "ﯠ Menu" })
 -- stylua: ignore end
 
@@ -336,6 +339,7 @@ Keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as 
 Keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
 
 -- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
+-- are overridden inside snippet for snipeptjumping
 vim.g.VM_maps = {
 	["Find Under"] = "<D-j>", -- select word under cursor & enter visual-multi (normal) / add next occurrence (visual-multi)
 	["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
@@ -609,8 +613,8 @@ Autocmd("FileType", {
 
 -- shiftless move
 Keymap({ "n", "o", "x" }, "w", "E", { desc = "w -> E" })
-Keymap({"n", "o", "x"}, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
-Keymap({"n", "o", "x"}, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
+Keymap({ "n", "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
+Keymap({ "n", "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
 
 -- Simple version of the delaytrain.nvim
 for _, key in ipairs { "x", "h", "l" } do
@@ -619,9 +623,7 @@ for _, key in ipairs { "x", "h", "l" } do
 
 	local count = 0
 	Keymap({ "n", "x" }, key, function()
-		if key == "x" then
-			key = [["_x]]
-		end
+		if key == "x" then key = [["_x]] end
 
 		-- abort when recording, since this only leads to bugs then
 		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
