@@ -14,5 +14,5 @@ rules:
   comments:
     min-spaces-from-content: 1
     require-starting-space: false
-  empty-lines:
-    level: warning
+  empty-lines: { level: warning }
+  brackets: { level: warning }
