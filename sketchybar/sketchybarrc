@@ -37,7 +37,7 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 if defaults read -g AppleInterfaceStyle | grep -iq "Dark"; then
-	BG_COLOR="0xff333333"
+	# BG_COLOR="0xff333333"
 	FONT_COLOR="0xffffffff"
 else
 	BG_COLOR="0xffcdcdcd"
