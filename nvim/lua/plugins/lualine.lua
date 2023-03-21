@@ -84,11 +84,11 @@ end
 ---@return string empty string when not marked
 local function harpoonIndicator()
 	local harpoonJsonPath = vim.fn.stdpath("data") .. "/harpoon.json"
+	local fileExists = vim.fn.filereadable()
+	if not fileExists then return "" end
 	local harpoonJson = ReadFile(harpoonJsonPath)
-	if not harpoonJson then
-		vim.notify("harpoon.json not valid", LogWarn)
-		return ""
-	end
+	if not harpoonJson then return "" end
+
 	local harpoonData = vim.json.decode(harpoonJson)
 	local pwd = vim.loop.cwd()
 	local currentProject = harpoonData.projects[pwd]
@@ -127,7 +127,11 @@ local topSeparators = vim.g.neovide and { left = " ", right = " " } or { l
 local lualineConfig = {
 	sections = {
 		lualine_a = {
-			{ harpoonIndicator, padding = { left = 1, right = 0 } },
+			{
+				harpoonIndicator,
+				padding = { left = 1, right = 0 },
+				cond = function() return vim.fn.filereadable(vim.fn.stdpath("data") .. "/harpoon.json") end,
+			},
 			{
 				"filetype",
 				colored = false,
