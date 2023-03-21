@@ -25,15 +25,11 @@ return {
 			})
 		end,
 	},
-{ -- description
-	"github_repo",
-	event = "VeryLazy",
-	config = function()
-		require("module-name").setup{
-			
-		}
-	end,
-},	
+	{ -- description
+		"ziontee113/icon-picker.nvim",
+		event = "VeryLazy",
+		config = function() require("icon-picker").setup {} end,
+	},
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -46,7 +42,7 @@ return {
 				triggers_blacklist = {
 					n = { "y" }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
 				},
-				hidden = {"<Plug>"},
+				hidden = { "<Plug>" },
 				window = {
 					border = { "", "─", "", "" }, -- no border to the side to save space
 					padding = { 0, 0, 0, 0 },
