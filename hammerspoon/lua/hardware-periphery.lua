@@ -1,9 +1,9 @@
 require("lua.utils")
 
 --------------------------------------------------------------------------------
--- BLUETOOTH 
+-- BLUETOOTH
 
----notifies & writes to Drafts if battery level of a connected Bluetooth device 
+---notifies & writes to Drafts if battery level of a connected Bluetooth device
 ---is low. Caveat: `hs.battery` seems to work only with Apple devices.
 ---@param msgWhere string where the information on low battery level should be send. "Drafts"|"notify"
 function PeripheryBatteryCheck(msgWhere)
@@ -16,7 +16,8 @@ function PeripheryBatteryCheck(msgWhere)
 		if percent < warningLevel then
 			local msg = device.name .. " Battery is low (" .. percent .. "%)"
 			if msgWhere == "Drafts" then
-				local draftsInbox = os.getenv("HOME") .. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/battery.md"
+				local draftsInbox = os.getenv("HOME")
+					.. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/battery.md"
 				WriteToFile(draftsInbox, msg)
 				print("⚠️", msg)
 			else
@@ -25,7 +26,6 @@ function PeripheryBatteryCheck(msgWhere)
 		end
 	end
 end
-
 
 --------------------------------------------------------------------------------
 -- USB WATCHER
@@ -72,10 +72,14 @@ ExternalHarddriveWatcher = hs.usb.watcher
 
 -- Notify on state changes of the WiFi network
 WifiWatcher = hs.wifi.watcher
-	.new(function(_, msg)
+	.new(function(_, event)
 		local ssid = hs.wifi.currentNetwork() or "none"
-		Notify("📶 WiFi (" .. msg .. "): " .. ssid)
-
+		local msg = event .. ": " .. ssid
+		Notify("📶 " .. msg)
+		if IsAtOffice() then
+			local timestamp = tostring(os.date()):sub(5, -6)
+			AppendToFile("./HBS-WiFi.log", timestamp .. " – " .. msg)
+		end
 	end)
 	:watchingFor({ "SSIDChange", "powerChange" })
 	:start()

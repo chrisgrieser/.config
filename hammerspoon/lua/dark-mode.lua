@@ -3,7 +3,7 @@ require("lua.utils")
 
 local function brightnessNotify()
 	local brightness = math.floor(hs.brightness.ambient())
-	Notify("☀️ Brightness:", tostring(brightness))
+	if brightness > -1 then Notify("☀️ Brightness:", tostring(brightness)) end
 end
 
 -- notify with ambient brightness for Alfred
