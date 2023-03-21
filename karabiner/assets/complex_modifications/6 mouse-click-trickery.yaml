@@ -7,8 +7,7 @@ rules:
   - description: "(Mouse) Right-Click (briefly): Open link in new background tab (Browser)"
     manipulators:
       - type: basic
-        from:
-          pointing_button: button2
+        from: { pointing_button: button2 }
         to_if_alone:
           - { pointing_button: button1, modifiers: [command] }
         to_if_held_down: [pointing_button: button2]
@@ -23,8 +22,7 @@ rules:
   - description: "(Mouse) R (tap): Open link in new background tab (RSS Readers)"
     manipulators:
       - type: basic
-        from:
-          pointing_button: button2
+        from: { pointing_button: button2 }
         to_if_held_down: [pointing_button: button2]
         parameters: { basic.to_if_held_down_threshold_milliseconds: 200 }
         to_if_alone:
@@ -42,8 +40,7 @@ rules:
               - ^maccatalyst\.com\.lireapp\.macOS$
       # Drafts: R-Click opens link in background
       - type: basic
-        from:
-          pointing_button: button2
+        from: { pointing_button: button2 }
         to_if_held_down: [pointing_button: button2]
         parameters: { basic.to_if_held_down_threshold_milliseconds: 200 }
         to_if_alone:
@@ -54,13 +51,10 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 600 }
           - { key_code: h, modifiers: [command] }
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.agiletortoise\.Drafts-OSX$
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.agiletortoise\.Drafts-OSX$] }
       # Mimestream: Open link and delete mail (mostly github links)
       - type: basic
-        from:
-          pointing_button: button2
+        from: { pointing_button: button2 }
         to_if_held_down: [pointing_button: button2]
         parameters: { basic.to_if_held_down_threshold_milliseconds: 200 }
         to_if_alone:
@@ -71,15 +65,12 @@ rules:
           - key_code: non_us_pound
           - { key_code: h, modifiers: [command] }
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.mimestream\.Mimestream$
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 3: Quit app"
     manipulators:
       - type: basic
-        from:
-          pointing_button: button3
+        from: { pointing_button: button3 }
         to:
           - { key_code: q, modifiers: [command] }
         conditions:
@@ -91,26 +82,20 @@ rules:
               - "[Mm]industry"
       # prevent accidental quitting
       - type: basic
-        from:
-          pointing_button: button3
+        from: { pointing_button: button3 }
         to:
           - { key_code: w, modifiers: [command] }
         conditions:
           - type: frontmost_application_if
-            file_paths:
-              - BetterTouchTool
-              - Hammerspoon
+            file_paths: [BetterTouchTool, Hammerspoon]
       # neovide: quit
       - type: basic
-        from:
-          pointing_button: button3
+        from: { pointing_button: button3 }
         to:
           # so cursor position and changes are saved properly
           - shell_command: echo "vim.cmd.wq()" >"/tmp/nvim-automation"
         conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - "[Nn]eovide"
+          - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
@@ -118,8 +103,7 @@ rules:
       # INFO Browsers already have mouse 4 mapped to "Back"
       # YouTube: Home
       - type: basic
-        from:
-          pointing_button: button4
+        from: { pointing_button: button4 }
         to:
           - key_code: escape # to leave full screen
           - shell_command: osascript -e 'tell application "Brave Browser" to set URL of active tab of front window to "https://www.youtube.com"'
@@ -129,30 +113,21 @@ rules:
               - ^com\.brave\.Browser.+ # PWAs
       # Marta & Obsidian: Back
       - type: basic
-        from:
-          pointing_button: button4
+        from: { pointing_button: button4 }
         to:
-          - key_code: h
-            modifiers:
-              - control
+          - { key_code: h, modifiers: [control] }
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^md\.obsidian$
+          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
       # Mimestream: Delete
       - type: basic
-        from:
-          pointing_button: button4
+        from: { pointing_button: button4 }
         to:
           - key_code: non_us_pound # "#"
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.mimestream\.Mimestream$
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
       # Highlights: Free Comment
       - type: basic
-        from:
-          pointing_button: button4
+        from: { pointing_button: button4 }
         to:
           - { key_code: "n", modifiers: [control, command] }
           - { key_code: "3", modifiers: [control, command] }
@@ -162,8 +137,7 @@ rules:
             bundle_identifiers: [^net\.highlightsapp\.universal$]
       # Word: Comment
       - type: basic
-        from:
-          pointing_button: button4
+        from: { pointing_button: button4 }
         to:
           - shell_command: |
               osascript -e '
@@ -178,8 +152,7 @@ rules:
             bundle_identifiers: [^com\.microsoft\.Word$]
       # Finder: back
       - type: basic
-        from:
-          pointing_button: button4
+        from: { pointing_button: button4 }
         to:
           - shell_command: |
               osascript -e '
@@ -190,17 +163,14 @@ rules:
                 end tell
               end tell'
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.apple\.finder$
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.apple\.finder$] }
   #─────────────────────────────────────────────────────────────────────────────
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 5 (top)"
     manipulators:
       # held-down: universal-search
       - type: basic
-        from:
-          pointing_button: button5
+        from: { pointing_button: button5 }
         to_if_alone:
           - pointing_button: button5
         conditions:
@@ -213,6 +183,7 @@ rules:
               - ^com\.mimestream\.Mimestream$
               - ^com\.agiletortoise\.Drafts-OSX$
               - ^net\.highlightsapp\.universal$
+              - ^org\.hammerspoon\.Hammerspoon$
               - ^maccatalyst\.com\.atebits\.Tweetie # twitter
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
@@ -235,7 +206,7 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 250
           basic.to_if_held_down_threshold_milliseconds: 250
-      # Browser & Finder & Obsidian: Close Window
+      # Browser & Finder & Obsidian & Hammerspoon: Close Window
       - type: basic
         from:
           pointing_button: button5
@@ -248,6 +219,7 @@ rules:
               - ^com\.vivaldi\.Vivaldi$
               - ^com\.apple\.finder$
               - ^md\.obsidian$
+              - ^org\.hammerspoon\.Hammerspoon$
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
@@ -258,14 +230,9 @@ rules:
         from:
           pointing_button: button5
         to_if_alone:
-          - key_code: a
-            modifiers:
-              - command
-              - shift
+          - { key_code: a, modifiers: [command, shift] }
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.agiletortoise\.Drafts-OSX$
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.agiletortoise\.Drafts-OSX$] }
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
@@ -276,19 +243,11 @@ rules:
         from:
           pointing_button: button5
         to_if_alone:
-          - key_code: h
-            modifiers:
-              - command
-              - control
-          - key_code: "3"
-            modifiers:
-              - command
-              - control
+          - { key_code: h, modifiers: [command, control] }
+          - { key_code: "3", modifiers: [command, control] }
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^net\.highlightsapp\.universal$
+          - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
@@ -296,14 +255,11 @@ rules:
           basic.to_if_held_down_threshold_milliseconds: 250
       # Archive in Mimestream
       - type: basic
-        from:
-          pointing_button: button5
+        from: { pointing_button: button5 }
         to_if_alone:
           - key_code: e
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.mimestream\.Mimestream$
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
@@ -323,6 +279,5 @@ rules:
         parameters:
           basic.simultaneous_threshold_milliseconds: 100
         conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^md\.obsidian$ # conflicts for some reason with space+dragging in the Canvas plugin
+          # conflicts for some reason with space+dragging in the Canvas plugin
+          - { type: frontmost_application_unless, bundle_identifiers: [^md\.obsidian$] }

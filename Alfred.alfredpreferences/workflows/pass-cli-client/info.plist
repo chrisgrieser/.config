@@ -150,6 +150,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>4CD4709B-D7A9-4FFD-8FDE-D62EC9053E14</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>A6CFA085-84C6-412D-9381-4CCA67DBF464</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -441,6 +451,14 @@ pass git push</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>4CD4709B-D7A9-4FFD-8FDE-D62EC9053E14</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
@@ -466,6 +484,27 @@ pass git push</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -485,27 +524,6 @@ pass git push</string>
 			<string>A6CFA085-84C6-412D-9381-4CCA67DBF464</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -669,6 +687,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>40</real>
 		</dict>
+		<key>4CD4709B-D7A9-4FFD-8FDE-D62EC9053E14</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1120</real>
+			<key>ypos</key>
+			<real>435</real>
+		</dict>
 		<key>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</key>
 		<dict>
 			<key>colorindex</key>
@@ -738,7 +765,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>1080</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>525</real>
 		</dict>
 		<key>D07CE8CB-D920-4F98-A583-6E0D2D8336BF</key>
 		<dict>

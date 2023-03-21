@@ -24,4 +24,6 @@ case "$icon" in
 "⛈") icon=" " ;;
 esac
 
-sketchybar --set "$NAME" icon="$icon" label="$temp"
+sketchybar --set "$NAME" icon="$icon" label="$temp" \
+	icon.font="Twitter Color Emoji:Regular:15" \
+	icon.y_offset=2
