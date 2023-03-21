@@ -1,12 +1,12 @@
 require("config.utils")
-local g = vim.g
 -- https://neovide.dev/configuration.html
 --------------------------------------------------------------------------------
+local g = vim.g
 
--- hide other apps so the GUI transparency is visible.
 -- See hammerspoons `app-hider.lua`
 Autocmd("VimEnter", {
 	callback = function()
+		-- hide other apps so the GUI transparency is visible.
 		Fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
 
 		-- HACK to fix neovide sometimes not enlarging the window

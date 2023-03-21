@@ -76,6 +76,7 @@ opt.linebreak = true -- do not break up full words on wrap
 
 -- guiding column for `gm`
 local gmColumn = math.floor(Fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
+if Fn.hostname():find("eduroam") then gmColumn = gmColumn - 1 end
 opt.colorcolumn = { "+1", gmColumn } -- relative to textwidth
 
 -- status bar & cmdline
