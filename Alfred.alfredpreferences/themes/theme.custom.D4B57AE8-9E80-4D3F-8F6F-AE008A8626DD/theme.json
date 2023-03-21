@@ -5,20 +5,20 @@
       "subtext" : {
         "size" : 19,
         "colorSelected" : "#DB290CFF",
-        "font" : "Recursive Sans Linear",
+        "font" : "Noto Sans",
         "color" : "#00D5FFFF"
       },
       "shortcut" : {
         "size" : 24,
         "colorSelected" : "#DB290CFF",
-        "font" : "Recursive Sans Linear",
+        "font" : "Noto Sans",
         "color" : "#A9A9A9FF"
       },
       "backgroundSelected" : "#FFBB00FF",
       "text" : {
         "size" : 27,
         "colorSelected" : "#590907FF",
-        "font" : "Recursive Sans Linear",
+        "font" : "Noto Sans",
         "color" : "#FDFDFDFF"
       },
       "iconPaddingHorizontal" : 7,
@@ -33,7 +33,7 @@
       "text" : {
         "size" : 57,
         "colorSelected" : "#000000FF",
-        "font" : "Recursive Sans Linear",
+        "font" : "Noto Sans",
         "color" : "#FDFDFDFF"
       },
       "background" : "#0000007F",
