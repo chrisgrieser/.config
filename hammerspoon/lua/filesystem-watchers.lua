@@ -97,6 +97,7 @@ end):start()
 local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
 WatcherActive = true -- to prevent recursion issues
 FileHubWatcher = Pw(FileHub, function(paths, _)
+	if not ScreenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
 		if isInSubdirectory(filep, FileHub) then return end
 		local fileName = filep:gsub(".*/", "")
