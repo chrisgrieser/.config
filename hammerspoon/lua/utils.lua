@@ -75,7 +75,6 @@ end
 
 ---@param filePath string line(s) to add
 ---@param str string
----@return boolean whether the writing was successful
 function AppendToFile(filePath, str)
 	local file, err = io.open(filePath, "a")
 	if file then
@@ -180,7 +179,7 @@ function Notify(...)
 	end
 	local out = table.concat(safe_args, " ")
 	hs.notify.show("Hammerspoon", "", out)
-	print("ℹ️ [Notification] " .. out)
+	print("ℹ️ [] " .. out)
 end
 
 --------------------------------------------------------------------------------
