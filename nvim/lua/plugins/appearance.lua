@@ -1,3 +1,4 @@
+-- filetypes where colorpicker and color highlights will be active
 local colorPickerFts = {
 	"css",
 	"scss",
@@ -144,8 +145,8 @@ return {
 						min_height = 4,
 						win_options = { winblend = 0 }, -- weird shining through
 					},
+					-- code actions use builtin for quicker picking
 					get_config = function(opts)
-						-- code actions use builtin for quicker picking
 						if opts.kind == "codeaction" then return { backend = "builtin" } end
 					end,
 				},
