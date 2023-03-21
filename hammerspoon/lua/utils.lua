@@ -73,6 +73,19 @@ function WriteToFile(filePath, str)
 	end
 end
 
+---@param filePath string line(s) to add
+---@param str string
+---@return boolean whether the writing was successful
+function AppendToFile(filePath, str)
+	local file, err = io.open(filePath, "a")
+	if file then
+		file:write(str .. "\n")
+		file:close()
+	else
+		print("Error:", err)
+	end
+end
+
 ---read the full file
 ---@param filePath string
 ---@return string|nil file content or nil when reading not successful

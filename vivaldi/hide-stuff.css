@@ -4,6 +4,7 @@
 .button-toolbar:has([name="Forward"]),
 .button-toolbar:has([name="Reload"]),
 .button-toolbar:has([name="Home"]),
+.button-toolbar:has([name="AccountButton"]),
 .UrlBar-PrivateWindowIndicator,
 .window-buttongroup, /* macOS traffic lights */
 .toolbar-extensions, /* extension button */

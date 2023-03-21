@@ -1,13 +1,9 @@
 #!/usr/bin/env zsh
 # this script assumes Homebrew is already installed
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
 # INSTALLS
 sudo -v
-
-sudo gem install anystyle-cli
-
-pip3 install pdfannots
 
 # BUG MAS sign in currently broken due https://github.com/mas-cli/mas#-sign-in
 # ➞ sign in manually to start download
@@ -24,18 +20,19 @@ open -a "Appcleaner" \
 	"/Applications/Keynote.app" \
 	"/Applications/iMovie.app"
 
-# NPM https://stackoverflow.com/a/41199625
+# NPM
 # shellcheck disable=SC2002
 cat ~'/Desktop/NPMfile' | xargs npm install --location=global --force
 npm list --location=global
 
-# shellcheck disable=SC2002
-cat ~'/Desktop/Pip3File' | xargs pip3 install
-pip list --not-required
+# Gems & Pip
+sudo gem install anystyle-cli
+pip3 install pdfannots
 
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 # SETTINGS
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
+# VIVALDI
 
 # Vivaldi auto-open files, https://forum.vivaldi.net/topic/42881/how-to-make-vivaldi-open-downloaded-files-automatically
 killall "Vivaldi"
@@ -44,6 +41,19 @@ sed -i '' \
 	's/"directory_upgrade":true/"directory_upgrade":true,"extensions_to_open":"torrent:alfredworkflow:ics:"/' \
 	"$HOME/Library/Application Support/Vivaldi/Default/Preferences"
 open -a "Vivaldi"
+
+# enable custom css in vivaldi
+open -a "Vivaldi" "vivaldi://experiments"
+
+# TOGGLE CSS
+killall "Vivaldi"
+while pgrep -q "Vivaldi" ; do
+  sleep 0.1
+done
+open -a "Vivaldi" "vivaldi://settings/appearance/"
+echo -n "$HOME/.config/vivaldi" | pbcopy
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # Espanso
 espanso service register
