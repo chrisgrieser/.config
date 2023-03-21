@@ -30,8 +30,15 @@ end
 
 -- auto-pause/resume Spotify on launch/quit of apps with sound
 SpotifyAppWatcher = Aw.new(function(appName, eventType)
-local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll", "Tagesschau" }
-if not ScreenIsUnlocked() or IsProjector() or not (TableContains(appsWithSound, appName)) then return end
+	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
+	if
+		not ScreenIsUnlocked()
+		or IsAtOffice()
+		or IsProjector()
+		or not (TableContains(appsWithSound, appName))
+	then
+		return
+	end
 
 	if eventType == Aw.launched then
 		spotifyDo("pause")
@@ -105,7 +112,9 @@ local function addCssSelectorLeadingDot()
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
 
-	local hasSelectorAndClass = clipb:find(".%-.") and not (clipb:find("[\n.=]")) and not (clipb:find("^%-%-"))
+	local hasSelectorAndClass = clipb:find(".%-.")
+		and not (clipb:find("[\n.=]"))
+		and not (clipb:find("^%-%-"))
 	if not hasSelectorAndClass then return end
 
 	clipb = clipb:gsub("^", "."):gsub(" ", ".")
@@ -189,10 +198,15 @@ Wf_quicklook = Wf
 	.new(true) -- BUG for some reason, restricting this to "Finder" does not work
 	:setOverrideFilter({ allowRoles = "Quick Look" })
 	:subscribe(Wf.windowCreated, function(newWin)
-		local _, sel = Applescript([[tell application "Finder" to return POSIX path of (selection as alias)]])
+		local _, sel =
+			Applescript([[tell application "Finder" to return POSIX path of (selection as alias)]])
 		-- do not enlage window for images (which are enlarged already with
 		-- landscape proportions)
-		if sel and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4")) then return end
+		if
+			sel and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4"))
+		then
+			return
+		end
 		RunWithDelays(0.4, function() MoveResize(newWin, Centered) end)
 	end)
 
@@ -250,7 +264,9 @@ Wf_zoom = Wf.new("zoom.us"):subscribe(Wf.windowCreated, function()
 		end tell
 	]])
 	RunWithDelays(0.5, function()
-		if AppIsRunning("zoom.us") and #Wf_zoom:getWindows() > 1 then App("zoom.us"):findWindow("^Zoom$"):close() end
+		if AppIsRunning("zoom.us") and #Wf_zoom:getWindows() > 1 then
+			App("zoom.us"):findWindow("^Zoom$"):close()
+		end
 	end)
 end)
 
@@ -338,7 +354,9 @@ DiscordAppWatcher = Aw.new(function(appName, eventType, appObj)
 		local hasURL = clipb:match("^https?:%S+$")
 		local hasObsidianURL = clipb:match("^obsidian:%S+$")
 		local isTweet = clipb:match("^https?://twitter%.com") -- for tweets, the previews are actually useful since they show the full content
-		if (hasURL or hasObsidianURL) and not isTweet then hs.pasteboard.setContents("<" .. clipb .. ">") end
+		if (hasURL or hasObsidianURL) and not isTweet then
+			hs.pasteboard.setContents("<" .. clipb .. ">")
+		end
 	elseif eventType == Aw.deactivated then
 		local hasEnclosedURL = clipb:match("^<https?:%S+>$")
 		local hasEnclosedObsidianURL = clipb:match("^<obsidian:%S+>$")
