@@ -5,20 +5,20 @@
       "subtext" : {
         "size" : 19,
         "colorSelected" : "#DB290CFF",
-        "font" : "Geneva",
+        "font" : "iA Writer Quattro S",
         "color" : "#00D5FFFF"
       },
       "shortcut" : {
         "size" : 24,
         "colorSelected" : "#DB290CFF",
-        "font" : "Geneva",
+        "font" : "iA Writer Quattro S",
         "color" : "#A9A9A9FF"
       },
       "backgroundSelected" : "#FFBB00FF",
       "text" : {
-        "size" : 27,
+        "size" : 30,
         "colorSelected" : "#590907FF",
-        "font" : "Geneva",
+        "font" : "Damascus",
         "color" : "#FDFDFDFF"
       },
       "iconPaddingHorizontal" : 7,
@@ -31,9 +31,9 @@
       "paddingHorizontal" : 8,
       "spacing" : 3,
       "text" : {
-        "size" : 57,
+        "size" : 64,
         "colorSelected" : "#000000FF",
-        "font" : "Geneva",
+        "font" : "iA Writer Quattro S",
         "color" : "#FDFDFDFF"
       },
       "background" : "#0000007F",

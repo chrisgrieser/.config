@@ -37,7 +37,7 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 if defaults read -g AppleInterfaceStyle | grep -iq "Dark"; then
-	# BG_COLOR="0xff333333"
+	BG_COLOR="0xff333333"
 	FONT_COLOR="0xffffffff"
 else
 	BG_COLOR="0xffcdcdcd"
@@ -63,8 +63,8 @@ sketchybar \
 	padding_left=0 padding_right=0 color="$BG_COLOR" \
 	--default \
 	updates=when_shown drawing=on align=left \
-	icon.font="Noto Emoji:Bold:16" icon.color="$FONT_COLOR" \
-	label.font="Recursive:Medium:15.5" label.color="$FONT_COLOR" \
+	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" icon.color="$FONT_COLOR" \
+	label.font="Noto Sans:Semibold:16.5" label.color="$FONT_COLOR" \
 	icon.padding_left=2 icon.padding_right=1 \
 	label.padding_left=2 label.padding_right=10 \
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
@@ -86,7 +86,6 @@ sketchybar \
 	script="$PLUGIN_DIR/weather.sh" \
 	\
 	--add item drafts $first_row \
-	--set drafts icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
 	script="$PLUGIN_DIR/drafts-counter.sh" \
 	--add event drafts-counter-update \
 	--subscribe drafts drafts-counter-update \
@@ -104,7 +103,6 @@ sketchybar \
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 \
 	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
-	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" \
 	--add event repo-files-update \
 	--subscribe sync-indicator repo-files-update \
 	--subscribe sync-indicator system_woke \
@@ -112,7 +110,6 @@ sketchybar \
 	--add item package-updates $second_row \
 	--set package-updates update_freq=43200 \
 	script="$PLUGIN_DIR/homebrew-package-tracker.sh" \
-	icon.font="Noto Emoji:Bold:16" \
 	--add event homebrew-update \
 	--subscribe package-updates homebrew-update \
 	\
