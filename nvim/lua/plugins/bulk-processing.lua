@@ -1,14 +1,14 @@
 return {
-	{
+	{ -- Multi Cursor
 		"mg979/vim-visual-multi",
 		keys = { { "<D-j>", mode = { "n", "x" }, desc = "Multi-Cursor" } },
 	},
-	{
-		"cshuaimin/ssr.nvim", -- structural search & replace
+	{ -- structural search & replace
+		"cshuaimin/ssr.nvim",
 		lazy = true,
 		config = function()
 			require("ssr").setup {
-				keymaps = { close = "Q" },
+				keymaps = { close = "Q" }, -- needs remap due conflict with commenting otherwise
 			}
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "ssr",
@@ -44,7 +44,7 @@ return {
 		config = function() require("refactoring").setup() end,
 	},
 	{
-		"chrisgrieser/nvim-recorder", 
+		"chrisgrieser/nvim-recorder",
 		dev = true,
 		keys = {
 			{ "9", desc = "/ Continue/Play" },
@@ -66,17 +66,17 @@ return {
 				dapSharedKeymaps = true,
 			}
 
-			local topSeparators = vim.g.neovide and { left = "", right = "" } or { left = "", right = "" }
+			local topSeparators = vim.g.neovide and { left = "", right = "" }
+				or { left = "", right = "" }
 
-			-- INFO inserting needed, to not disrupt existing lualine-segment set by dap
+			-- INFO inserting needed, to not disrupt existing lualine-segment 
 			local lualineZ = require("lualine").get_config().winbar.lualine_z or {}
 			local lualineY = require("lualine").get_config().winbar.lualine_y or {}
-			table.insert(lualineZ, 
+			table.insert(
+				lualineZ,
 				{ require("recorder").recordingStatus, section_separators = topSeparators }
 			)
-			table.insert(lualineY, 
-				{ require("recorder").displaySlots, section_separators = topSeparators }
-			)
+			table.insert(lualineY, { require("recorder").displaySlots, section_separators = topSeparators })
 
 			require("lualine").setup {
 				winbar = {

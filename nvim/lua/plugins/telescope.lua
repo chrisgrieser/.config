@@ -72,7 +72,6 @@ local function telescopeConfig()
 				},
 			},
 		},
-
 		pickers = {
 			lsp_references = {
 				prompt_prefix = " ",
@@ -118,10 +117,13 @@ local function telescopeConfig()
 				ignore_symbols = { "string", "boolean", "number" },
 				fname_width = 17,
 			},
+			git_status = {
+				prompt_prefix = " ",
+				show_untracked = true,
+			},
 			treesitter = { prompt_prefix = " ", show_line = false },
-			git_status = { prompt_prefix = " "},
-			git_commit = { prompt_prefix = " "},
-			keymaps = { prompt_prefix = "  ", modes = { "n", "i", "c", "x", "o", "t" } },
+			git_commits = { prompt_prefix = " "},
+			keymaps = { prompt_prefix = " ", modes = { "n", "i", "c", "x", "o", "t" } },
 			oldfiles = { prompt_prefix = " " },
 			highlights = { prompt_prefix = " " },
 			loclist = { trim_text = true, prompt_prefix = " " },
