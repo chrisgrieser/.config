@@ -522,7 +522,7 @@ Keymap("n", "<leader>gl", function() Cmd.Telescope("git_commit") end, { desc = "
 
 -- My utils
 -- stylua: ignore start
-Keymap({ "n", "x" }, "<leader>gl", function () require("funcs.git-utils").gitLink() end, { desc = " Link" })
+Keymap({ "n", "x" }, "<leader>gh", function () require("funcs.git-utils").gitLink() end, { desc = " Link" })
 Keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = " Add-Commit-Push" })
 Keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch() end, { desc = " Issues" })
 Keymap("n", "<leader>gm", function () require("funcs.git-utils").amendAndPushForce("no-edit") end, { desc = " Amend-No-Edit & Force Push" })
@@ -560,11 +560,11 @@ end, { desc = " 璉 Toggle Diagnostics" })
 --------------------------------------------------------------------------------
 
 -- TERMINAL & CODE RUNNER
-Keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = " go to next window" })
+Keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 Keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 
 Keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
-Keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = " Selection to ToggleTerm" })
+Keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
 
 -- stylua: ignore start
 Keymap({"n", "x"}, "5", function() require("iron.core").repl_for(Bo.filetype) end, { desc = " Toggle REPL (Iron)" })
@@ -621,7 +621,7 @@ Keymap({ "o", "x" }, "b", function() require("spider").motion("b") end, { desc =
 
 -- Simple version of the delaytrain.nvim
 for _, key in ipairs { "x", "h", "l", "e", "b" } do
-	local timeout = 4000
+	local timeout = 3000
 	local maxUsage = 8
 
 	local count = 0

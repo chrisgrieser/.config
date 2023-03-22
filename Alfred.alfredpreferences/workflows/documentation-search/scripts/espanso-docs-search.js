@@ -4,6 +4,8 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const alfredMatcher = (str) => str.replace (/[-()_./]/g, " ") + " " + str + " ";
 
+if 
+
 //──────────────────────────────────────────────────────────────────────────────
 
 const workArray = JSON.parse(app.doShellScript('curl -s "https://api.github.com/repos/espanso/website/git/trees/main?recursive=1"'))
