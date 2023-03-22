@@ -376,6 +376,7 @@ return {
 			ls.setup {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
+				enable_autosnippets = true,
 			}
 
 			-- VS-code-style snippets

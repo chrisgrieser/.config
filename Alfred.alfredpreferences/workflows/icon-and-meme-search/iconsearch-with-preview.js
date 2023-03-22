@@ -6,8 +6,7 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 // CONFIG
-const home = app.pathTo("home folder")
-const iconFolder = home + "/Library/Mobile Documents/com~apple~CloudDocs/Images/Icon Collection";
+const iconFolder = app.pathTo("home folder") + "/Library/Mobile Documents/com~apple~CloudDocs/Images/Icon Collection";
 
 //──────────────────────────────────────────────────────────────────────────────
 
