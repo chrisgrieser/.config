@@ -615,12 +615,12 @@ Autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 -- spider moves
-Keymap({ "n", "o", "x" }, "w", "E", { desc = "w -> E" })
+Keymap({ "o", "x" }, "w", function() require("spider").motion("w") end, { desc = "Spider-w" })
 Keymap({ "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
 Keymap({ "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
 
 -- Simple version of the delaytrain.nvim
-for _, key in ipairs { "x", "h", "l", "e", "b" } do
+for _, key in ipairs { "x", "h", "l", "e", "b", "w" } do
 	local timeout = 3000
 	local maxUsage = 8
 
@@ -628,7 +628,7 @@ for _, key in ipairs { "x", "h", "l", "e", "b" } do
 	Keymap("n", key, function()
 		if key == "x" then
 			Normal([["_x]])
-		elseif key == "e" or key == "b" then
+		elseif key == "e" or key == "b" or key == "w" then
 			require("spider").motion(key)
 			return
 		end
