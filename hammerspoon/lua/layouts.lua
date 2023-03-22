@@ -20,9 +20,7 @@ local function setHigherBrightnessDuringDay()
 	if not hasBrightnessSensor then return end
 
 	local brightness
-	if BetweenTime(0, 8) then
-		brightness = 0
-	elseif hs.brightness.ambient() > 120 then
+	if hs.brightness.ambient() > 120 then
 		brightness = 100
 	elseif hs.brightness.ambient() > 90 then
 		brightness = 90
@@ -42,7 +40,6 @@ local function workLayout()
 
 	-- screen & visuals
 	AutoSwitchDarkmode()
-	setHigherBrightnessDuringDay()
 	HoleCover()
 	dockSwitcher("work")
 	hs.execute("sketchybar --set clock popup.drawing=true")
@@ -54,7 +51,7 @@ local function workLayout()
 	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
 	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
 	OpenLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
-	Wait(0.7)	
+	Wait(0.7)
 
 	-- layout apps
 	TwitterToTheSide()
@@ -81,7 +78,6 @@ local function movieLayout()
 	dockSwitcher(targetMode)
 	SetDarkmode(true)
 	HoleCover("remove")
-	IMacDisplay:setBrightness(0)
 
 	OpenApp { "YouTube", "BetterTouchTool" }
 	QuitApp {
@@ -100,36 +96,42 @@ local function movieLayout()
 		"Twitter",
 		"Obsidian",
 	}
-
 	print("🔲 MovieModeLayout: done")
-end
-
-local function selectLayout()
-	if IsProjector() then
-		movieLayout()
-	else
-		workLayout()
-	end
 end
 
 --------------------------------------------------------------------------------
 -- TRIGGERS FOR LAYOUT CHANGE
+
+---select layout depending on number of screens
+---@param darken? any darken the display on the iMac as well
+local function selectLayout(darken)
+	if IsProjector() then
+		movieLayout()
+		IMacDisplay:brightness(0)
+	else
+		workLayout()
+		if darken then
+			IMacDisplay:brightness(0)
+		else
+			setHigherBrightnessDuringDay()
+		end
+	end
+end
+
 -- 1. Change of screen numbers
-DisplayCountWatcher = hs.screen.watcher.new(selectLayout):start()
+DisplayCountWatcher = hs.screen.watcher.new(function() selectLayout("darken") end):start()
 
 -- 2. Hotkey
 Hotkey(Hyper, "home", selectLayout) -- hyper + eject on Apple Keyboard
-Hotkey({ "shift" }, "f6", selectLayout) -- for Apple keyboard
 
 -- 3. Unlocking (with idletime)
-UnlockWatcher = hs.caffeinate.watcher
-	.new(function(event)
-		local c = hs.caffeinate.watcher
-		if IdleMins(30) and (event == c.screensDidUnlock or event == c.screensDidWake) then
-			-- delay needed to ensure displays are recognized after waking
-			RunWithDelays(0.5, selectLayout)
-		end
-	end)
-	:start()
+local c = hs.caffeinate.watcher
+UnlockWatcher = c.new(function(event)
+	if IdleMins(30) and (event == c.screensDidUnlock or event == c.screensDidWake) then
+		print("🔓 Unlockwatcher triggered.")
+		-- delay needed to ensure displays are recognized after waking
+		RunWithDelays(0.5, selectLayout)
+	end
+end):start()
 
 --------------------------------------------------------------------------------

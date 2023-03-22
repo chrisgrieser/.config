@@ -518,7 +518,7 @@ Keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = " Blame Line" 
 -- Telescope
 -- stylua: ignore
 Keymap("n", "<leader>gs", function() Cmd.Telescope("git_status") end, { desc = " Status (Telescope)" })
-Keymap("n", "<leader>gl", function() Cmd.Telescope("git_commit") end, { desc = " Log (Telescope)" })
+Keymap("n", "<leader>gl", function() Cmd.Telescope("git_commits") end, { desc = " Log (Telescope)" })
 
 -- My utils
 -- stylua: ignore start
@@ -614,7 +614,7 @@ Autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
--- shiftless move
+-- spider moves
 Keymap({ "n", "o", "x" }, "w", "E", { desc = "w -> E" })
 Keymap({ "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
 Keymap({ "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })

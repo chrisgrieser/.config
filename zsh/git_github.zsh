@@ -122,11 +122,11 @@ function acp() {
 # depth (optional)
 #######################################
 function clone() {
-	betterClone "$*" "$2"
+	betterClone "$1" "$2"
 }
 
 function sclone() { # shallow clone
-	betterClone "$*" "shallow"
+	betterClone "$1" "shallow"
 }
 
 function betterClone() {
@@ -137,7 +137,7 @@ function betterClone() {
 	fi
 	if [[ "$2" == "shallow" ]]; then
 		git clone --depth=1 --single-branch --filter=blob:none "$giturl"
-	elif [[ "$2" =~ ^[0-9]+$ ]]; then
+	elif [[ $2 =~ ^[0-9]+$ ]]; then # if a numbered argument, use it for depth
 		git clone --depth="$2" "$giturl"
 	else
 		git clone "$giturl"
@@ -232,7 +232,7 @@ function gdf() {
 	echo "[r]estore file (checkout)"
 	echo "[s]how file (bat)"
 	echo "[c]opy content"
-	echo "[h]ash of last commit w/ file"
+	echo "[h]ash of last commit with the file"
 	print "-------------------------------------\033[0m"
 	echo -n "> "
 
