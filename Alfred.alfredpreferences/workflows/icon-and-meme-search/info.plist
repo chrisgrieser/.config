@@ -212,29 +212,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E949687A-0C1F-4C7D-9530-69F26D80A880</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>15FF9B9D-0AF2-48F4-84C0-9781E0F3766B</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open Image File</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -634,6 +611,51 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Icon copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>7067A0A4-D9DA-4775-BECD-24C3249B29E2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>set the clipboard to POSIX file "{query}"
+return "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -684,51 +706,6 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Icon copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>7067A0A4-D9DA-4775-BECD-24C3249B29E2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>set the clipboard to POSIX file "{query}"
-return "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -738,56 +715,6 @@ return "{query}"</string>
 			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
 			<string>15FF9B9D-0AF2-48F4-84C0-9781E0F3766B</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>meme</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string># wrapped like this for dotfile folder set in .zshenv
-osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>meme-search-with-preview.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search Local Memes</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>E949687A-0C1F-4C7D-9530-69F26D80A880</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -944,9 +871,9 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>note</key>
 			<string>local icons</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>720</real>
 		</dict>
 		<key>BAA2ADF7-2FEB-4F9A-AE98-17378171B5CA</key>
 		<dict>
@@ -1012,17 +939,6 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>410</real>
-		</dict>
-		<key>E949687A-0C1F-4C7D-9530-69F26D80A880</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>local icons</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>785</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
