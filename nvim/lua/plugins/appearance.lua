@@ -33,14 +33,6 @@ return {
 			}
 		end,
 	},
-	{ -- highlights surrounding matchparens as well
-		"utilyre/sentiment.nvim",
-		event = "VeryLazy",
-		config = function()
-			-- limit search for matches to window height
-			require("sentiment").setup { limit = vim.fn.winheight(0) }
-		end,
-	},
 	{ -- filetype-icons for Telescope and Lualine
 		"nvim-tree/nvim-web-devicons",
 		lazy = true, -- loaded by other plugins
@@ -108,11 +100,15 @@ return {
 	},
 	{ -- emphasized headers & code blocks
 		"lukas-reineke/headlines.nvim",
-		ft = "markdown",
+		ft = "markdown", -- can work in other fts, but I only use it in markdown
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("headlines").setup {
-				markdown = { fat_headlines = false },
+				markdown = {
+					fat_headlines = true,
+					fat_headline_upper_string = "",
+					fat_headline_lower_string = "▀",
+				},
 			}
 		end,
 	},
@@ -145,7 +141,8 @@ return {
 						min_height = 4,
 						win_options = { winblend = 0 }, -- weird shining through
 					},
-					-- code actions use builtin for quicker picking
+					-- code actions use builtin for quicker picking, otherwise use
+					-- telescope
 					get_config = function(opts)
 						if opts.kind == "codeaction" then return { backend = "builtin" } end
 					end,

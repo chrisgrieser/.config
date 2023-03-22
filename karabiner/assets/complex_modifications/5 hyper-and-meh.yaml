@@ -178,7 +178,7 @@ rules:
             - key_code: option
             - key_code: period
         to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 150 }
+        parameters: { basic.simultaneous_threshold_milliseconds: 250 }
       - type: basic
         from:
           simultaneous:
@@ -188,7 +188,7 @@ rules:
             - key_code: option
             - key_code: comma
         to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 150 }
+        parameters: { basic.simultaneous_threshold_milliseconds: 250 }
       - type: basic
         from:
           simultaneous:
@@ -199,4 +199,4 @@ rules:
             - key_code: comma
             - key_code: period
         to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 150 }
+        parameters: { basic.simultaneous_threshold_milliseconds: 250 }

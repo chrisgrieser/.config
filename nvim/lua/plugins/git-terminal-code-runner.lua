@@ -2,6 +2,11 @@ return {
 	{ -- Code Runner / Scratchpad
 		"metakirby5/codi.vim",
 		cmd = { "CodiNew", "Codi", "CodiExpand" },
+		init = function ()
+			vim.g.codi = {
+				rightsplit = true,
+			}
+		end,
 	},
 	{ -- better embedded terminal (+ code runner for shell, somewhat)
 		"akinsho/toggleterm.nvim",

@@ -308,6 +308,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter", "CmdlineEnter" }, -- CmdlineEnter for completions there
+		config = cmpconfig,
 		dependencies = {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
@@ -319,11 +320,9 @@ return {
 			"jcdickinson/codeium.nvim", -- ai support
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp",
-			"petertriho/cmp-git",
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
-		config = cmpconfig,
 	},
 	{
 		"jcdickinson/codeium.nvim",
@@ -337,36 +336,6 @@ return {
 		end,
 	},
 	{
-		"petertriho/cmp-git",
-		lazy = true, -- loaded by cmp
-		dependencies = "nvim-lua/plenary.nvim",
-		config = function()
-			local cmp = require("cmp")
-			cmp.setup.filetype("gitcommit", {
-				sources = cmp.config.sources {
-					{ name = "git" },
-				},
-			})
-
-			require("cmp_git").setup {
-				git = { commits = { limit = 10 } }, -- 0 = disable completing commits
-				github = {
-					issues = {
-						limit = 100,
-						state = "open", -- open, closed, all
-					},
-					mentions = {
-						limit = 100,
-					},
-					pull_requests = {
-						limit = 10,
-						state = "open",
-					},
-				},
-			}
-		end,
-	},
-	{
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
@@ -376,7 +345,7 @@ return {
 			ls.setup {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
-				enable_autosnippets = true,
+				enable_autosnippets = true, -- for javascript "if ()"
 			}
 
 			-- VS-code-style snippets

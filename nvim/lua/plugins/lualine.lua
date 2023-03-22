@@ -104,7 +104,9 @@ function UpdateHarpoonIndicator()
 	end
 end
 
-local function harpoonStatusline() return vim.b.harpoonMark end
+local function harpoonStatusline()
+	return vim.b.harpoonMark or ""
+end
 
 -- so the harpoon state is only checked once on buffer enter and not every second
 -- also, the command is called on marking a new file
