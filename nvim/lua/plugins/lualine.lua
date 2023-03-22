@@ -84,6 +84,7 @@ end
 ---returns a harpoon icon if the current file is marked in Harpoon. Does not
 ---`require` itself, so won't load Harpoon (for when lazyloading Harpoon)
 function UpdateHarpoonIndicator()
+	vim.b.harpoonMark = "" -- empty by default
 	local harpoonJsonPath = vim.fn.stdpath("data") .. "/harpoon.json"
 	local harpoonJson = ReadFile(harpoonJsonPath)
 	if not harpoonJson then return end
@@ -99,10 +100,8 @@ function UpdateHarpoonIndicator()
 	for _, file in pairs(markedFiles) do
 		if file.filename == currentFile then
 			vim.b.harpoonMark = "ﯠ"
-			return
 		end
 	end
-	vim.b.harpoonMark = ""
 end
 
 local function harpoonStatusline() return vim.b.harpoonMark end

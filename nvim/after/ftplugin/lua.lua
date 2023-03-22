@@ -28,7 +28,6 @@ Keymap("n", "<leader>r", function()
 end, { buffer = true, desc = " Reload Hammerspoon / Resource nvim file" })
 
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
 -- INSPECT NVIM OR HAMMERSPOON OBJECTS
 
 -- 1) `:I` or `<leader>li` inspects the passed lua object / selection
@@ -36,18 +35,16 @@ local function inspect(strToInspect)
 	local parentDir = Expand("%:p:h")
 
 	if parentDir:find("hammerspoon") then
-		local hsApplescript = string.format('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"', strToInspect)
+		local hsApplescript =
+			string.format('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"', strToInspect)
 		Fn.system("osascript -e '" .. hsApplescript .. "'")
 	elseif parentDir:find("nvim") then
 		local output = vim.inspect(Fn.luaeval(strToInspect))
 		vim.notify(output, LogTrace, {
-			timeout = 10000, -- 10 seconds
+			timeout = 7000, -- ms
 			on_open = function(win) -- enable treesitter highlighting in the notification
-				local outputIsStr = output:find('^"') and output:find('"$')
-				if not outputIsStr then
-					local buf = vim.api.nvim_win_get_buf(win)
-					vim.api.nvim_buf_set_option(buf, "filetype", "lua")
-				end
+				local buf = vim.api.nvim_win_get_buf(win)
+				vim.api.nvim_buf_set_option(buf, "filetype", "lua")
 			end,
 		})
 	else

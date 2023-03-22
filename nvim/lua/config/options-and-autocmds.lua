@@ -145,10 +145,10 @@ Autocmd("BufReadPost", {
 		-- trigger to ensure it's run before determining spaces/tabs
 		local success = pcall(Cmd.IndentOMatic)
 		if not success then
-			vim.notify("IndentOMatic not found.", LogWarn)	
+			vim.notify("IndentOMatic not found.", LogWarn)
 			return
 		end
-			
+
 		opt_local.listchars = vim.opt_global.listchars:get() -- copy the global
 		if Bo.expandtab then
 			opt_local.listchars:append { tab = "↹ " }
@@ -208,6 +208,7 @@ local function remember(mode)
 		"qf",
 	}
 	if vim.tbl_contains(ignoredFts, Bo.filetype) or Bo.buftype ~= "" or not Bo.modifiable then return end
+
 	if mode == "save" then
 		Cmd.mkview(1)
 	else

@@ -1,4 +1,13 @@
 return {
+	{ -- Code Runner / Scratchpad
+		"metakirby5/codi.vim",
+		cmd = { "CodiNew", "Codi", "CodiExpand" },
+	},
+	{ -- better embedded terminal (+ code runner for shell, somewhat)
+		"akinsho/toggleterm.nvim",
+		cmd = { "ToggleTerm", "ToggleTermSendVisualSelection" },
+		config = function() require("toggleterm").setup() end,
+	},
 	{ -- git sign gutter & hunk textobj
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
@@ -63,19 +72,5 @@ return {
 				},
 			}
 		end,
-	},
-	{ -- Code Runner / Scratchpad
-		"metakirby5/codi.vim",
-		cmd = "CodiNew",
-		config = function()
-			require("").setup{
-				
-			}
-		end,
-	},
-	{ -- better embedded terminal (+ code runner for shell, somewhat)
-		"akinsho/toggleterm.nvim",
-		cmd = { "ToggleTerm", "ToggleTermSendVisualSelection" },
-		config = function() require("toggleterm").setup() end,
 	},
 }
