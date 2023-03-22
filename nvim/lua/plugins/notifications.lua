@@ -66,11 +66,11 @@ local function config()
 	-- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
 	-- selene: allow(incorrect_standard_library_use)
 	print = function(...)
-		local args = { ... }
-		if args[1] == nil and #args == 1 then
+		if ... == nil then
 			vim.notify("NIL", vim.log.levels.TRACE)
 			return	
 		end
+		local args = { ... }
 
 		local includesTable = false
 		local safe_args = {}
