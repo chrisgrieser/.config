@@ -618,6 +618,7 @@ Autocmd("FileType", {
 Keymap({ "o", "x" }, "w", function() require("spider").motion("w") end, { desc = "Spider-w" })
 Keymap({ "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
 Keymap({ "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
+Keymap({ "n", "o", "x" }, "ge", function() require("spider").motion("ge") end, { desc = "Spider-ge" })
 
 -- Simple version of the delaytrain.nvim
 for _, key in ipairs { "x", "h", "l", "e", "b", "w" } do
