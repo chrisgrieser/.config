@@ -80,10 +80,10 @@ local function config()
 			includesTable = true
 			table.insert(safe_args, tostring(arg))
 		end
-		local notifyOpts = { timeout = printDurationSecs * 1000 }
 
-		-- enable treesitter highlighting in the notification
+		local notifyOpts = { timeout = printDurationSecs * 1000 }
 		if includesTable then
+			-- enable treesitter highlighting in the notification
 			notifyOpts.on_open = function(win)
 				local buf = vim.api.nvim_win_get_buf(win)
 				vim.api.nvim_buf_set_option(buf, "filetype", "lua")
