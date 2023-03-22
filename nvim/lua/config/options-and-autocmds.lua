@@ -130,7 +130,7 @@ opt.smartindent = true
 -- invisible chars
 opt.list = true
 opt.fillchars = { eob = " ", fold = " " }
-opt.showbreak = "↪ "
+-- opt.showbreak = "↪"
 opt.listchars = {
 	nbsp = "ﮊ",
 	precedes = "…",
