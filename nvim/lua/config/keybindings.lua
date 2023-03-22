@@ -6,9 +6,6 @@ local qol = require("funcs.quality-of-life")
 -- search keymaps
 Keymap("n", "?", function() Cmd.Telescope("keymaps") end, { desc = " Keymaps" })
 -- stylua: ignore
-Keymap( "n", "g?", function()
-	require("telescope.builtin").keymaps { prompt_title = " Buffer Keymaps", only_buf = true }
-end, { desc = " Buffer Keymaps" })
 
 -- Theme Picker
 Keymap("n", "<leader>T", function() Cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
@@ -525,8 +522,8 @@ Keymap("n", "<leader>gl", function() Cmd.Telescope("git_commits") end, { desc = 
 Keymap({ "n", "x" }, "<leader>gh", function () require("funcs.git-utils").githubLink() end, { desc = " GitHub Link" })
 Keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = " Add-Commit-Push" })
 Keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch() end, { desc = " Issues" })
-Keymap("n", "<leader>gm", function () require("funcs.git-utils").amendAndPushForce("no-edit") end, { desc = " Amend-No-Edit & Force Push" })
-Keymap("n", "<leader>gM", function () require("funcs.git-utils").amendAndPushForce("edit") end, { desc = " Amend & Force Push" })
+Keymap("n", "<leader>gm", function () require("funcs.git-utils").amendAndPushForce() end, { desc = " Amend-No-Edit & Force Push" })
+Keymap("n", "<leader>gM", function () require("funcs.git-utils").amendNoEditPushForce() end, { desc = " Amend & Force Push" })
 -- stylua: ignore end
 
 -- Diffview
@@ -567,6 +564,8 @@ Keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
 Keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
 
 -- stylua: ignore start
+
+
 Keymap({"n", "x"}, "5", function() require("iron.core").repl_for(Bo.filetype) end, { desc = " Toggle REPL (Iron)" })
 Keymap("n", "4", function() require("iron.core").send_line() end, { desc = " Send Line to REPL (Iron)" })
 Keymap("x", "4", function() require("iron.core").visual_send() end, { desc = " Send Selection to REPL (Iron)" })
@@ -618,7 +617,6 @@ Autocmd("FileType", {
 Keymap({ "o", "x" }, "w", function() require("spider").motion("w") end, { desc = "Spider-w" })
 Keymap({ "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
 Keymap({ "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
-Keymap({ "n", "o", "x" }, "ge", function() require("spider").motion("ge") end, { desc = "Spider-ge" })
 
 -- Simple version of the delaytrain.nvim
 for _, key in ipairs { "x", "h", "l", "e", "b", "w" } do

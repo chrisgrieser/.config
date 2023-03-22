@@ -36,25 +36,6 @@ return {
 		end,
 	},
 	{
-		"hkupty/iron.nvim",
-		lazy = true, -- load on require
-		config = function()
-			require("iron.core").setup {
-				config = {
-					repl_open_cmd = require("iron.view").bottom(8),
-					highlight_last = "IronLastSent",
-					repl_definition = {
-						sh = { command = { "zsh" } },
-						lua = { command = { "lua" } },
-						typescript = { command = { "node" } },
-						javascript = { command = { "node" } }, 
-						python = { command = { "python3" } },
-					},
-				},
-			}
-		end,
-	},
-	{
 		"sindrets/diffview.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = { "DiffviewFileHistory", "DiffviewOpen" },
@@ -80,6 +61,15 @@ return {
 						{ "n", "<S-CR>", function() vim.cmd.wincmd("w") end, {} },
 					},
 				},
+			}
+		end,
+	},
+	{ -- Code Runner / Scratchpad
+		"metakirby5/codi.vim",
+		cmd = "CodiNew",
+		config = function()
+			require("").setup{
+				
 			}
 		end,
 	},

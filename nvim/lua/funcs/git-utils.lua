@@ -152,16 +152,17 @@ local function shimmeringFocusBuild(commitMsg)
 end
 
 
----amend
----@param mode? string no-edit|edit
----@param prefillMsg? string
-function M.amendAndPushForce(mode, prefillMsg)
+function M.amendNoEditPushForce()
 	if not isInGitRepo() then return end
-	if mode == "no-edit" then
-		vim.notify(" Amend-No-Edit & Force Push…")
-		fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
-		return
-	end
+	local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
+	vim.notify(' Amend-No-Edit & Force Push…\nTo Commit: "'..lastCommitMsg..'"')
+	fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
+end
+
+---amend
+---@param prefillMsg? string
+function M.amendAndPushForce(prefillMsg)
+	if not isInGitRepo() then return end
 
 	if not prefillMsg then
 		local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
@@ -173,11 +174,11 @@ function M.amendAndPushForce(mode, prefillMsg)
 		local validMsg, newMsg = processCommitMsg(commitMsg)
 
 		if not validMsg then -- if msg invalid, run again to fix the msg
-			M.amendAndPushForce("edit", newMsg)
+			M.amendAndPushForce(newMsg)
 			return
 		end
 
-		vim.notify(" Amend & Force Push…")
+		vim.notify(' Amend & Force Push…\n"'..newMsg..'"')
 		fn.jobstart(
 			"git add -A && git commit --amend -m '" .. newMsg .. "' ; git push --force",
 			gitShellOpts
