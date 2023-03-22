@@ -22,6 +22,9 @@ matches:
     replace: ↵
   - trigger: "!backspace"
     replace: ⌫
+
+  #─────────────────────────────────────────────────────────────────────────────
+
   - trigger: "!no"
     replace: ❌
   - trigger: "!yes"
@@ -48,6 +51,8 @@ matches:
   - trigger: "!eyes"
     replace: 👁️👄👁️
 
+  #─────────────────────────────────────────────────────────────────────────────
+
   - triggers: ["!shrug", "!ascii"]
     replace: ¯\_(ツ)_/¯
   - triggers: ["!gimme", "!ascii"]
@@ -62,3 +67,18 @@ matches:
     replace: (ノಠ_ಠ)ノ彡︵ ┻━┻︵ ┻━┻
   - triggers: ["!tableflip", "!ascii"]
     replace: ┬─┬ノ(ಠ_ಠノ)
+
+  #─────────────────────────────────────────────────────────────────────────────
+  # https://espanso.org/docs/matches/basics/#image-matches
+  - triggers: ["!troll", "!meme"]
+    image_path: "$CONFIG/memes/trollface.png"
+    label: Trollface (image)
+  - triggers: ["!isfine", "!meme"]
+    image_path: "$CONFIG/memes/this-is-fine.png"
+    label: This is fine. (image)
+  - triggers: ["!burn", "!meme"]
+    image_path: "$CONFIG/memes/burn-elmo.gif"
+    label: Elmo celebrating burn (image)
+  - triggers: ["!weird", "!meme"]
+    image_path: "$CONFIG/memes/spongebob-weird.gif"
+    label: sPoNgeBObCaSE (image)

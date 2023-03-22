@@ -14,12 +14,12 @@ const workArray = JSON.parse(app.doShellScript('curl -s "https://api.github.com/
 			.slice(5) // remove "docs/"
 			.replace(/\.mdx?$/, ""); // remove file extension
 		const parts = site.split("/");
-		const subsite = parts.pop().replaceAll("-", " ");
+		const displayTitle = parts.pop().replace(/[_-]/g, " ");
 		const parentSite = parts.join("/");
 		const url = "https://espanso.org/docs/" + site;
 
 		return {
-			"title": subsite,
+			"title": displayTitle,
 			"subtitle": parentSite,
 			"match": alfredMatcher (site),
 			"arg": url,
