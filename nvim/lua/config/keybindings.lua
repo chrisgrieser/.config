@@ -565,8 +565,13 @@ Keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
 Keymap( "x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
 
 Keymap("n", "7", function()
-	Cmd.CodiNew()
-	vim.api.nvim_buf_set_name(0, "Codi: " .. Bo.filetype)
+	local isCodiBuffer = Bo.buftype ~= ""
+	if isCodiBuffer then
+		Cmd.CodiExpand() -- multiline output for the current line
+	else
+		Cmd.CodiNew()
+		vim.api.nvim_buf_set_name(0, "Codi: " .. Bo.filetype)
+	end
 end, { desc = " Codi" })
 
 --------------------------------------------------------------------------------

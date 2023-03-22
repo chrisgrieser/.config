@@ -44,8 +44,8 @@ return {
 					margin = { 0, 0, 0, 0 },
 				},
 				layout = { -- of the columns
-					height = { min = 4, max = 17 },
-					width = { min = 33, max = 40 },
+					height = { min = 4, max = 15 },
+					width = { min = 30, max = 33 },
 					spacing = 1,
 				},
 			}
