@@ -217,7 +217,7 @@ end
 ---opens current buffer in the browser & copies the link to the clipboard
 ---normal mode: link to file
 ---visual mode: link to selected lines
-function M.gitLink()
+function M.githubLink()
 	if not isInGitRepo() then return end
 
 	local filepath = Expand("%:p")

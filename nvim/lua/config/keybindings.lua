@@ -522,7 +522,7 @@ Keymap("n", "<leader>gl", function() Cmd.Telescope("git_commit") end, { desc = "
 
 -- My utils
 -- stylua: ignore start
-Keymap({ "n", "x" }, "<leader>gh", function () require("funcs.git-utils").gitLink() end, { desc = " Link" })
+Keymap({ "n", "x" }, "<leader>gh", function () require("funcs.git-utils").githubLink() end, { desc = " GitHub Link" })
 Keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = " Add-Commit-Push" })
 Keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch() end, { desc = " Issues" })
 Keymap("n", "<leader>gm", function () require("funcs.git-utils").amendAndPushForce("no-edit") end, { desc = " Amend-No-Edit & Force Push" })

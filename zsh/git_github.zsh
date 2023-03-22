@@ -116,8 +116,13 @@ function acp() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
+#######################################
+# Arguments:
+# github url
+# depth (optional)
+#######################################
 function clone() {
-	betterClone "$*" "normal"
+	betterClone "$*" "$2"
 }
 
 function sclone() { # shallow clone
@@ -132,6 +137,8 @@ function betterClone() {
 	fi
 	if [[ "$2" == "shallow" ]]; then
 		git clone --depth=1 --single-branch --filter=blob:none "$giturl"
+	elif [[ "$2" =~ ^[0-9]+$ ]]; then
+		git clone --depth="$2" "$giturl"
 	else
 		git clone "$giturl"
 	fi
