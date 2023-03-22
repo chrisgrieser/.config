@@ -1,0 +1,2 @@
+print(vim.bo.filetype)
+

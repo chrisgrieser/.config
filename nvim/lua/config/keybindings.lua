@@ -561,15 +561,13 @@ Keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 Keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 
 Keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
-Keymap("x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
+-- stylua: ignore
+Keymap( "x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
 
--- stylua: ignore start
-
-
-Keymap({"n", "x"}, "5", function() require("iron.core").repl_for(Bo.filetype) end, { desc = " Toggle REPL (Iron)" })
-Keymap("n", "4", function() require("iron.core").send_line() end, { desc = " Send Line to REPL (Iron)" })
-Keymap("x", "4", function() require("iron.core").visual_send() end, { desc = " Send Selection to REPL (Iron)" })
--- stylua: ignore end
+Keymap("n", "7", function()
+	Cmd.CodiNew()
+	vim.api.nvim_buf_set_name(0, "Codi: " .. Bo.filetype)
+end, { desc = " Codi" })
 
 --------------------------------------------------------------------------------
 

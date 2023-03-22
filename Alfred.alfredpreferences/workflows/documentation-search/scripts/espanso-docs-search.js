@@ -4,7 +4,7 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const alfredMatcher = (str) => str.replace (/[-()_./]/g, " ") + " " + str + " ";
 
-if 
+
 
 //──────────────────────────────────────────────────────────────────────────────
 
