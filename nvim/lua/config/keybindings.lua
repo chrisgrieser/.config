@@ -247,7 +247,7 @@ Keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, 
 
 -- Sort & highlight duplicate lines
 -- stylua: ignore
-Keymap( { "n", "x" }, "<leader>S", [[:sort<CR>:g/^\(.*\)$\n\1$/<CR><CR>]], { desc = "弄 Sort (+ highlight duplicates)" })
+Keymap( { "n", "x" }, "<leader>S", ":sort<CR>", { desc = "弄 Sort" })
 
 -- Replace Mode
 -- needed, since `R` mapped to duplicate line
