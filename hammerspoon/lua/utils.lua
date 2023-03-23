@@ -20,7 +20,7 @@ while true do
 	VaultLocation = os.getenv("VAULT_PATH")
 	FileHub = os.getenv("WD")
 	if DotfilesFolder then break end
-	Wait(0.1)
+	hs.timer.usleep(100000) -- = one tenth of a second
 	if i > 10 then
 		Notify("⚠️ Could not retrieve .zshenv")
 		return
