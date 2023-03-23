@@ -30,13 +30,13 @@ function dump() {
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 	brew bundle dump --force --file "$BREWDUMP_PATH/Brewfile_$device_name"
 	command npm list --location=global --parseable | sed "1d" | sed -E "s/.*\///" >"$BREWDUMP_PATH/NPMfile_$device_name"
-	pip3 list --not-required | tail -n+3 | grep -vE "Pillow|pip|pybind|setuptools|six|wheel" | cut -d" " -f1 >"$BREWDUMP_PATH/Pip3file_$device_name"
+	# pip3 list --not-required | tail -n+3 | grep -vE "Pillow|pip|pybind|setuptools|six|wheel" | cut -d" " -f1 >"$BREWDUMP_PATH/Pip3file_$device_name"
 
 	# shellcheck disable=2012
 	ls -1 "$HOME/Library/Application Support/Vivaldi/Default/Extensions/" |
-		sed "s|^|https://chrome.google.com/webstore/detail/|" >"$DOTFILE_FOLDER/browser-extension-configs/list-of-extensions.txt"
+		sed "s|^|https://chrome.google.com/webstore/detail/|" >"$BREWDUMP_PATH/browser-extensions.txt"
 
-	echo "Brewfile, Pip3File & NPM-File dumped at \"$BREWDUMP_PATH\""
+	echo "Brewfile, NPM-File, and list of browser extensions dumped at \"$BREWDUMP_PATH\""
 }
 
 function update() {
@@ -57,10 +57,11 @@ function update() {
 	print-section "DUMP INSTALLS"
 	dump
 
-	sketchybar --trigger homebrew-update # update counter now that updates have been done
 
 	print-section "\033[1;33mREMINDER"
 	echo "If sketchybar or espanso updated, they need to be re-given permissions."
+
+	sketchybar --trigger homebrew-update # update counter now that updates have been done
 	osascript -e 'display notification "" with title "🍺 Homebrew finished."'
 }
 
