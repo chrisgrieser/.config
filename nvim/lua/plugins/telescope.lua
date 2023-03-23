@@ -108,7 +108,8 @@ local function telescopeConfig()
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "璉 ",
-				-- markdown headings are symbol-type "string"
+				-- markdown headings are symbol-type "string", therefore shouldn't
+				-- be ignored
 				ignore_symbols = { "boolean", "number" },
 				fname_width = 17,
 			},
@@ -122,7 +123,10 @@ local function telescopeConfig()
 				show_untracked = true,
 			},
 			treesitter = { prompt_prefix = " ", show_line = false },
-			git_commits = { prompt_prefix = " "},
+			git_commits = {
+				prompt_prefix = " ",
+
+			},
 			keymaps = { prompt_prefix = " ", modes = { "n", "i", "c", "x", "o", "t" } },
 			oldfiles = { prompt_prefix = " " },
 			highlights = { prompt_prefix = " " },

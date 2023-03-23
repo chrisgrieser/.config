@@ -57,7 +57,7 @@ function BetweenTime(startHour, endHour)
 	end
 end
 
--- Caveat: won't work with Chromium browsers due to bug, but works for URI schemes
+-- CAVEAT: won't work with Chromium browsers due to bug, but works for URI schemes
 ---@param url string
 function OpenLinkInBackground(url) hs.execute('open -g "' .. url .. '"') end
 
