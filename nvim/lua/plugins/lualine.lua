@@ -87,6 +87,8 @@ end
 function UpdateHarpoonIndicator()
 	vim.b.harpoonMark = "" -- empty by default
 	local harpoonJsonPath = vim.fn.stdpath("data") .. "/harpoon.json"
+	local fileExists = vim.fn.filereadable(harpoonJsonPath) ~= 0
+	if not fileExists then return end
 	local harpoonJson = ReadFile(harpoonJsonPath)
 	if not harpoonJson then return end
 

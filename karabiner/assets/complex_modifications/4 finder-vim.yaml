@@ -694,9 +694,9 @@ rules:
               lastFourChars=$(echo "$selection" | rev | cut -c-4 | rev) # bash expansion does not work in karabiner
               if [[ "$lastFourChars" == "-bkp" ]]; then
                 newName=$(echo "$selection" | rev | cut -c5- | rev)
-                mv "$selection" "$newName"
+                mv -h "$selection" "$newName"
               else
-                mv "$selection" "$selection-bkp"
+                mv -h "$selection" "$selection-bkp"
               fi
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = follow symlink
