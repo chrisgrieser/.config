@@ -22,7 +22,7 @@ const dirtyFiles = app
 const fileArray = app
 	.doShellScript(
 		`cd "${dotfileFolder}"
-		 fd --type=file --hidden --absolute-path \\
+		fd --type=file --hidden --absolute-path \\
 			-E "*.icns" \\
 			-E "*.plist" \\
 			-E "*.png" \\
@@ -44,14 +44,14 @@ const fileArray = app
 		let type;
 		if (name.startsWith(".z")) type = "sh";
 		else if (name.startsWith(".")) type = "config";
-		else if (!name.includes(".")) type = "blank"; /* eslint-disable-line no-negated-condition */
+		else if (!name.includes(".")) type = "blank";
 		else if (name === "obsidian.vimrc") type = "obsidian";
 		else type = name.split(".").pop();
 
 		if (type === "yml") type = "yaml";
 		else if (type === "mjs") type = "js";
 		else if (type === "zsh") type = "sh";
-		else if (type === "conf") type = "config";
+		else if (type === "conf" || type === "cfg") type = "config";
 		else if (type.endsWith("-bkp")) type = "other";
 
 		// icon determination
