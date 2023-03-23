@@ -60,6 +60,8 @@ const fileArray = app
 			case "icns":
 			case "png":
 			case "gif":
+			case "jpg":
+			case "jpeg":
 				iconObj.path = absPath; // use image itself
 				break;
 			case "bttpreset":
