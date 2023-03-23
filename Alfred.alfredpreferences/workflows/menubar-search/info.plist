@@ -19,6 +19,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>892B9EF8-E33C-4D32-BBEB-591DFBEFFFEC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C8DFF277-2C74-48D3-B685-F304268DF007</key>
 		<array/>
 		<key>CD061C82-1321-458D-B46E-3603B3DB27E0</key>
@@ -48,6 +61,54 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>892B9EF8-E33C-4D32-BBEB-591DFBEFFFEC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>script</key>
+				<string>./menu -click "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C8DFF277-2C74-48D3-B685-F304268DF007</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -73,8 +134,15 @@
 				<key>runningsubtext</key>
 				<string>loading...</string>
 				<key>script</key>
-				<string>./menu -async -cache 5 -max-children "$maxItemsPerMenu" -max-depth "$maxSubMenusToSearch" -show-disabled "$showDisabledItems" -show-apple-menu "$showAppleMenuItems" -query "{query}"
-</string>
+				<string>./menu \
+-cache 2 \
+-max-children "$maxItemsPerMenu" \
+-max-depth "$maxSubMenusToSearch" \
+-show-disabled "$showDisabledItems" \
+-show-apple-menu "$showAppleMenuItems" \
+-async \
+-recache "$recacheOnStartup" \
+-query "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -94,29 +162,6 @@
 			<string>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>4</integer>
-				<key>script</key>
-				<string>./menu -click "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C8DFF277-2C74-48D3-B685-F304268DF007</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -238,36 +283,60 @@ E.g
 - 1.6 - added per app customization settings, `-show-apple-menu` flag
 - 1.7 - universal build for M1 and Intel
 - 1.8 - fixed universal build
-- 1.9 - changed to user configuration, and signed executable (exported using Alfred 5)</string>
+- 1.9 - changed to user configuration, and signed executable (exported using Alfred 5)
+- 2.0 - Alfred workflow gallery support! With added shortcut search, brand new configuration settings, tweaks to caching behaviour, brand new icons</string>
 	<key>uidata</key>
 	<dict>
 		<key>25DA0D72-264A-4CD8-9A6A-9FFD4B652DF1</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>290</real>
+			<real>345</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>165</real>
+		</dict>
+		<key>892B9EF8-E33C-4D32-BBEB-591DFBEFFFEC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>note</key>
+			<string>Thanks for downloading! 
+
+I highly recommend you set a hotkey for this so that it's even easier to trigger it.
+
+I personally set it to double-tapping the ⌘ (command) key.</string>
+			<key>xpos</key>
+			<real>125</real>
+			<key>ypos</key>
+			<real>165</real>
 		</dict>
 		<key>C8DFF277-2C74-48D3-B685-F304268DF007</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>560</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>165</real>
 		</dict>
 		<key>CD061C82-1321-458D-B46E-3603B3DB27E0</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
 			<key>xpos</key>
-			<real>290</real>
+			<real>345</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>320</real>
 		</dict>
 		<key>CE6777D4-DFB9-460C-897D-EB6C45E6A769</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
 			<key>xpos</key>
-			<real>560</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>320</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -360,11 +429,36 @@ Limiting the depth allows for the menus to be loaded quicker.</string>
 			<key>variable</key>
 			<string>showAppleMenuItems</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Refresh on every new search</string>
+			</dict>
+			<key>description</key>
+			<string>When enabled, we will refresh all cached menu items for the current app when starting a new search.
+
+If disabled, the previous cached menu items are loaded (if they exist).
+
+Keeping this enabled incurs a slight delay for new searches, but ensures you will always have menu items that are the latest.
+
+Recommended to keep this enabled always.</string>
+			<key>label</key>
+			<string>Cached menu items</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>recacheOnStartup</string>
+		</dict>
 	</array>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.9</string>
+	<string>2.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/BenziAhamed/Menu-Bar-Search</string>
 </dict>
