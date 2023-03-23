@@ -171,8 +171,11 @@ end
 function AutoTile(winSrc)
 	local wins
 	if type(winSrc) == "string" then
-		if not App(winSrc) then return end
-		wins = App(winSrc):allWindows()
+		if winSrc == "Finder" then
+			wins = Wf_finder:getWindows()
+		else
+			return
+		end
 	else
 		wins = winSrc:getWindows()
 	end
@@ -251,7 +254,6 @@ Wf_appsOnMouseScreen = Wf.new({
 		end
 	end)
 end)
-
 
 --------------------------------------------------------------------------------
 -- HOTKEY ACTIONS

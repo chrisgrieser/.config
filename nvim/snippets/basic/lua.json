@@ -54,14 +54,6 @@
 			"end"
 		]
 	},
-	"then .. end": {
-		"prefix": "then .. end",
-		"body": [
-			"then",
-			"\t$0",
-			"end"
-		]
-	},
 	"return end": {
 		"prefix": "return end",
 		"body": "return end"
