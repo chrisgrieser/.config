@@ -119,6 +119,10 @@ function ld() {
 	fi
 }
 
+function eject() {
+	df -h | grep -io "\s/Volumes/.*" | cut -c2- | fzf
+}
+
 # copies [l]ast [c]ommand(s)
 function lc() {
 	num=${1-"1"} # default= 1 -> last command

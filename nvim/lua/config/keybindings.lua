@@ -374,7 +374,7 @@ Keymap("n", "'", ":CccConvert<CR>", { desc = " Convert Color" }) -- shift-# o
 -- number of harpoon files in the current project
 ---@return number|nil
 local function harpoonFileNumber()
-	local pwd = vim.loop.cwd()
+	local pwd = vim.loop.cwd() or ""
 	local jsonPath = Fn.stdpath("data") .. "/harpoon.json"
 	local json = ReadFile(jsonPath)
 	if not json then return end

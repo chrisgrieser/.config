@@ -75,9 +75,3 @@ osascript -e'
 
 # Notify on Completion
 osascript -e 'display notification "" with title "Backup finished." sound name "Blow"'
-
-#───────────────────────────────────────────────────────────────────────────────
-
-sleep 3
-print "\033[1;34mEjecting $VOLUME_NAME.\033[0m"
-diskutil eject "$VOLUME_NAME"
