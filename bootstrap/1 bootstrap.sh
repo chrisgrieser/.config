@@ -29,7 +29,7 @@ defaults write com.apple.finder QuitMenuItem -bool true      # Finder quitable
 defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "$DOTFILE_FOLDER/hammerspoon/init.lua"
 
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 # DOTFILES / VAULT
 
 cd ~
@@ -41,7 +41,15 @@ git submodule foreach git checkout main
 # Load Dock from dotfiles
 zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
+
+# MACKUP
+[[ -e ~/.mackup.cfg ]] && rm -rf ~/.mackup.cfg
+ln -sf "$DOTFILE_FOLDER/mackup/mackup.cfg" ~/.mackup.cfg
+brew install mackup
+mackup restore
+
+#───────────────────────────────────────────────────────────────────────────────
 # CREATE SYMLINKS
 
 # zsh (ZDOTDIR set in .zshenv for the remaining config)
@@ -58,10 +66,6 @@ fi
 # pandoc
 [[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
 ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
-
-# mackup
-[[ -e ~/.mackup.cfg ]] && rm -rf ~/.mackup.cfg
-ln -sf "$DOTFILE_FOLDER/mackup/mackup.cfg" ~/.mackup.cfg
 
 # searchlink
 ln -sf "$DOTFILE_FOLDER/searchlink/.searchlink" ~
