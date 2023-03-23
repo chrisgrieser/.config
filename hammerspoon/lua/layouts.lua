@@ -107,11 +107,11 @@ end
 local function selectLayout(darken)
 	if IsProjector() then
 		movieLayout()
-		IMacDisplay:brightness(0)
+		hs.brightness.set(0)
 	else
 		workLayout()
 		if darken then
-			IMacDisplay:brightness(0)
+			hs.brightness.set(0)
 		else
 			setHigherBrightnessDuringDay()
 		end
@@ -127,7 +127,7 @@ Hotkey(Hyper, "home", selectLayout) -- hyper + eject on Apple Keyboard
 -- 3. Unlocking (with idletime)
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if IdleMins(30) and (event == c.screensDidUnlock or event == c.screensDidWake) then
+	if event == c.screensDidUnlock then
 		print("🔓 Unlockwatcher triggered.")
 		-- delay needed to ensure displays are recognized after waking
 		RunWithDelays(0.5, selectLayout)
