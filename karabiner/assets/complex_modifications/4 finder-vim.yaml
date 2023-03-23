@@ -75,10 +75,6 @@ anchors:
         set_notification_message:
           id: insert-notice
           text: "✏️  INSERT"
-      - &vim-mode-paused-notice
-        set_notification_message:
-          id: insert-notice
-          text: "⏸️ Finder-Vim-Mode paused. \n(↵ , ⇪, or ⎋ to re-activate.)"
       - &remove-insert-notice
         set_notification_message:
           id: insert-notice
@@ -162,21 +158,6 @@ rules:
           - key_code: down_arrow
             modifiers: [command]
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
-      # L = open file & close window
-      - type: basic
-        from: { key_code: l, modifiers: { mandatory: [shift] } }
-        to:
-          - { key_code: o, modifiers: [command, option] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # H = Go to last recent folder
-      - type: basic
-        from: { key_code: h, modifiers: { mandatory: [shift] } }
-        to:
-          - shell_command: |
-              osascript -e 'tell application "System Events" to tell process "Finder"
-                click first menu item of menu of menu item "Recent Folders" of menu "Go" of menu bar 1
-              end tell'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # gg, G, J, K
       - type: basic
         from: { key_code: g }
@@ -529,13 +510,13 @@ rules:
         from: { key_code: z } # y = z in German Keyboard
         to_if_alone:
           - {key_code: c, modifiers: [command]}
-          - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
+          - shell_command: osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
       - type: basic
         from: { key_code: "y" }
         to:
           - {key_code: c, modifiers: [command]}
-          - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
+          - shell_command: osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
       # p = paste
       - type: basic
@@ -549,27 +530,6 @@ rules:
         to_if_alone:
           - {key_code: d, modifiers: [command]}
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # R = cross-copy (duplicate)
-      - type: basic
-        from: {key_code: r, modifiers: {mandatory: [shift]}}
-        to_if_alone:
-          - shell_command: |
-              osascript -e'
-                tell application "Finder"
-                  if (number of windows is not 2) then
-                    display notification "" with title "Failure" subtitle "⚠️ Not exactly two windows"
-                    beep
-                  else if (the selection is {}) then
-                    display notification "" with title "Failure" subtitle "⚠️ No selection"
-                    beep
-                  else
-                    set otherWin to (target of window 2 as alias)
-                    repeat with f in (selection as list)
-                      duplicate f to otherWin
-                    end repeat
-                  end if
-                end tell'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # x = cross-move items to other Finder window (if exactly 2 Finder windows)
       - type: basic
         from: { key_code: x }
@@ -578,10 +538,10 @@ rules:
               osascript -e'
                 tell application "Finder"
                   if (number of windows is not 2) then
-                    display notification "" with title "Failure" subtitle "⚠️ Not exactly two windows"
+                    display notification "" with title "⚠️ Not exactly two windows" subtitle "Finder Vim Mode"
                     beep
                   else if (the selection is {}) then
-                    display notification "" with title "Failure" subtitle "⚠️ No selection"
+                    display notification "" with title "⚠️ No selection" subtitle "Finder Vim Mode"
                     beep
                   else
                     set otherWin to (target of window 2 as alias)
@@ -591,7 +551,7 @@ rules:
                   end if
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # X (shift): cross-move with replacing
+      # X = cross-copy (duplicate)
       - type: basic
         from: {key_code: x, modifiers: {mandatory: [shift]}}
         to_if_alone:
@@ -599,15 +559,15 @@ rules:
               osascript -e'
                 tell application "Finder"
                   if (number of windows is not 2) then
-                    display notification "" with title "Failure" subtitle "⚠️ Not exactly two windows"
+                    display notification "" with title "Finder Vim Mode" subtitle "⚠️ Not exactly two windows"
                     beep
                   else if (the selection is {}) then
-                    display notification "" with title "Failure" subtitle "⚠️ No selection"
+                    display notification "" with title "Finder Vim Mode" subtitle "⚠️ No selection"
                     beep
                   else
                     set otherWin to (target of window 2 as alias)
                     repeat with f in (selection as list)
-                      move f to otherWin with replacing
+                      duplicate f to otherWin
                     end repeat
                   end if
                 end tell'
@@ -689,14 +649,17 @@ rules:
       - type: basic
         from: { key_code: b }
         to:
+          # INFO if the selection is a symlink, "selection as alias" returns the
+          # path of the target, while "selection as text" returns the path of
+          # the symlink (which is desired here)
           - shell_command: |
-              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
               lastFourChars=$(echo "$selection" | rev | cut -c-4 | rev) # bash expansion does not work in karabiner
               if [[ "$lastFourChars" == "-bkp" ]]; then
                 newName=$(echo "$selection" | rev | cut -c5- | rev)
-                mv -h "$selection" "$newName"
+                mv -n "$selection" "$newName"
               else
-                mv -h "$selection" "$selection-bkp"
+                mv -n "$selection" "$selection-bkp"
               fi
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = follow symlink
@@ -704,16 +667,15 @@ rules:
         from: { key_code: s }
         to:
           - shell_command: |
-              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
               open -R "$(readlink -f "$selection")"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # S = Create Symlink
       - type: basic
         from: { key_code: s, modifiers: { mandatory: [shift] } }
         to:
-          - shell_command: osascript -e 'display notification "..." with title "beep"'
           - shell_command: |
-              sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as alias)')
+              sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
               if [[ -f "$sel" ]] ; then
                   ln -sf "$sel" "${sel}-symlink"
                   open -R "${sel}-symlink"
@@ -995,7 +957,7 @@ rules:
             modifiers: [command]
           - *end-move
           - *remove-move-notice
-          - shell_command: osascript -e 'display notification "File(s)" with title "✅ Copied"'
+          - shell_command: osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active, *not-German-keyboard]
       - type: basic
         from: { key_code: z } # y and z switched on German keyboard
@@ -1067,7 +1029,7 @@ rules:
         from: { key_code: p, modifiers: { mandatory: [control] } }
         to:
           - { key_code: "c", modifiers: [option, command] }
-          - shell_command: osascript -e 'display notification "File path" with title "✅ Copied"'
+          - shell_command: osascript -e 'display notification "✅ Filepath copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-n: copy name
       - type: basic
@@ -1077,7 +1039,7 @@ rules:
           - { key_code: "a", modifiers: [command] }
           - { key_code: "c", modifiers: [command] }
           - key_code: return_or_enter
-          - shell_command: osascript -e 'display notification "File name" with title "✅ Copied"'
+          - shell_command: osascript -e 'display notification "✅ Filename copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-g: open at github
       - type: basic
@@ -1086,18 +1048,16 @@ rules:
           - shell_command: |
               GIT_OPTIONAL_LOCKS=0
               SEL=$(osascript -e 'tell application "Finder"
-                set sel to (item 1 of (selection as list) as alias)
+                set sel to (item 1 of (get selection) as text)
                 return POSIX path of sel
               end tell')
-              if [[ -f "$SEL" ]] ; then 
-                osascript -e 'display notification "" with title " ⚠️ Not a file selected."'
-                echo "$file is not ins a git repository." 
+              if [[ ! -f "$SEL" ]] ; then 
+                osascript -e 'display notification "⚠️ Selection not a file." with title "Finder Vim Mode"'
                 exit 1
               fi
               cd "$(dirname "$SEL")" || exit 1
               if ! git rev-parse --is-inside-work-tree &>/dev/null ; then 
-                osascript -e 'display notification "" with title " ⚠️ Not a git repo."'
-                echo "$file is not ins a git repository." 
+                osascript -e 'display notification "⚠️ File not in a git repo." with title "Finder Vim Mode"'
                 exit 1
               fi
 

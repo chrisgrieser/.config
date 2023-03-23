@@ -22,3 +22,6 @@ nnoremap ü "zdawel"zph
 nnoremap Ü "zdawbh"zph
 
 vnoremap V j
+
+nnoremap = mzO<Esc>`z
+nnoremap _ mzo<Esc>`z
