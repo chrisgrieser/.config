@@ -1,7 +1,6 @@
 local keymappings = {
 	-- INFO default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua#L133
 	["<Esc>"] = "close",
-	["<D-w>"] = "delete_buffer", -- only buffer picker
 	["<S-Down>"] = "preview_scrolling_down",
 	["<S-Up>"] = "preview_scrolling_up",
 	["<C-h>"] = "cycle_history_prev",
@@ -125,7 +124,18 @@ local function telescopeConfig()
 			treesitter = { prompt_prefix = " ", show_line = false },
 			git_commits = {
 				prompt_prefix = " ",
-
+				initial_mode = "normal",
+				mappings = {
+					n = {
+						-- Open in diffview
+						["<D-d>"] = function()
+							local selected_entry = require("telescope.actions.state").get_selected_entry()
+							vim.api.nvim_win_close(0, true) -- close Telescope window properly prior to switching windows
+							-- vim.cmd("stopinsert")
+							vim.schedule(function() vim.cmd(("DiffviewOpen %s^!"):format(selected_entry.value)) end)
+						end,
+					},
+				},
 			},
 			keymaps = { prompt_prefix = " ", modes = { "n", "i", "c", "x", "o", "t" } },
 			oldfiles = { prompt_prefix = " " },
@@ -135,6 +145,7 @@ local function telescopeConfig()
 				prompt_prefix = "﬘ ",
 				ignore_current_buffer = false,
 				initial_mode = "normal",
+				mappings = { n = { ["<D-w>"] = "delete_buffer" } },
 				sort_mru = true,
 				prompt_title = false,
 				results_title = false,
@@ -171,7 +182,7 @@ local function telescopeConfig()
 				hide_parent_dir = false,
 				select_buffer = true,
 				mappings = {
-					["i"] = {
+					i = {
 						-- mappings should be consistent with nvim-ghengis mappings
 						["<D-n>"] = require("telescope._extensions.file_browser.actions").create,
 						["<C-r>"] = require("telescope._extensions.file_browser.actions").rename,
