@@ -4,7 +4,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 # shellcheck disable=2034
 GIT_OPTIONAL_LOCKS=0
 file="$1"
-cd "$(dirname "$file")" || exit
+cd "$(dirname "$file")" || exit 1
 if ! git rev-parse --is-inside-work-tree &>/dev/null ; then echo "$file is not ins a git repository." && exit 1 ; fi
 
 #───────────────────────────────────────────────────────────────────────────────
