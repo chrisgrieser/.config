@@ -3,7 +3,7 @@ require("config.utils")
 
 -- COMMENT MARKS
 -- more useful than symbols for theme development
-Bo.grepprg = "rg --vimgrep --no-column" -- remove columns
+Bo.grepprg = "rg --vimgrep --no-column" -- remove columns for readability
 Keymap("n", "gs", function()
 	Cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
 	require("telescope.builtin").loclist {
@@ -30,7 +30,7 @@ end, { desc = "Search CSS Variables", buffer = true })
 -- highlighting isn't good yet, so…
 Keymap("n", "zz", ":syntax sync fromstart<CR>", { buffer = true })
 
--- extra trigger for css files, to work with hot reloads
+-- extra trigger for css files, to work with live reloads
 Autocmd("TextChanged", {
 	buffer = 0, -- buffer-local autocmd
 	callback = function() Cmd.update(Expand("%:p")) end,
@@ -38,7 +38,7 @@ Autocmd("TextChanged", {
 
 --------------------------------------------------------------------------------
 
--- Section instead of function movement
+-- Section movement
 Keymap({ "n", "x" }, "<C-j>", [[/^\/\* <<CR>:nohl<CR>]], { buffer = true, desc = "next section" })
 Keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], { buffer = true, desc = "prev section" })
 
@@ -51,37 +51,6 @@ Keymap({ "o", "x" }, "is", function() require("various-textobjs").cssSelector(tr
 --------------------------------------------------------------------------------
 ---@diagnostic disable: undefined-field, param-type-mismatch
 
--- Inspect DOM of Obsidian selector
--- normal mode: current line, visual mode: selection
--- Requires: Obsidian advanced URI plugin and `eval` parameter for the plugin enabled
-Keymap({ "n", "x" }, "<leader>li", function()
-	local selector
-	if Fn.mode() == "n" then
-		selector = Fn.getline("."):gsub("{.*", "")
-	else
-		Normal('"zy')
-		selector = Fn.getreg("z")
-	end
-	local jsCodeEncoded = [[electronWindow.openDevTools();const%20element%3Ddocument.querySelector("]]
-		.. selector
-		.. [[");console.log(element);]]
-	Fn.system("open 'obsidian://advanced-uri?eval=" .. jsCodeEncoded .. "'")
-end, { desc = "Obsidian: document.querySelect()", buffer = true })
-
---------------------------------------------------------------------------------
-
--- if copying a css selection, add the closing bracket as well
-Keymap("n", "p", function()
-	Normal("p") -- paste as always
-	local reg = '"'
-	local regContent = Fn.getreg(reg)
-	local isLinewise = Fn.getregtype(reg) == "V"
-	if isLinewise and regContent:find("{\n$") then
-		Fn.append(".", { "\t", "}" })
-		Normal("j")
-	end
-end, { desc = "smarter CSS paste", buffer = true })
-
 -- toggle !important
 Keymap("n", "<leader>i", function()
 	local lineContent = Fn.getline(".")
@@ -93,8 +62,8 @@ Keymap("n", "<leader>i", function()
 	Fn.setline(".", lineContent)
 end, { buffer = true, desc = "toggle !important" })
 
--- insert nice divider
-Keymap("n", "qw", function()
+-- insert nice divider / header comment
+local function cssHeaderComment()
 	local hr = {
 		"/* ───────────────────────────────────────────────── */",
 		"/* << ",
@@ -107,5 +76,13 @@ Keymap("n", "qw", function()
 	local colNum = #hr[2] + 2
 	SetCursor(0, { lineNum, colNum })
 	Cmd.startinsert { bang = true }
-end, { buffer = true, desc = "insert comment-heading" })
+end
+
+Keymap("n", "qw", function()
+	if Expand("%:t"):find("source.css") then
+		cssHeaderComment()
+	else
+		require("funcs.quality-of-life").commentHr()
+	end
+end, { buffer = true, desc = "insert comment divider" })
 ---@diagnostic enable: undefined-field, param-type-mismatch
