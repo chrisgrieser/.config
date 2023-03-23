@@ -59,6 +59,10 @@ fi
 [[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
 ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
 
+# mackup
+[[ -e ~/.mackup.cfg ]] && rm -rf ~/.mackup.cfg
+ln -sf "$DOTFILE_FOLDER/mackup/mackup.cfg" ~/.mackup.cfg
+
 # searchlink
 ln -sf "$DOTFILE_FOLDER/searchlink/.searchlink" ~
 
