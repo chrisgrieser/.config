@@ -21,3 +21,4 @@ workflows/github-search
 workflows/web-screenshot
 workflows/kill-processes
 workflows/urban-dictonary-search
+workflows/duden-search
