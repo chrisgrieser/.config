@@ -1089,8 +1089,17 @@ rules:
                 set sel to (item 1 of (selection as list) as alias)
                 return POSIX path of sel
               end tell')
-              [[ -f "$SEL" ]] || exit 1
+              if [[ -f "$SEL" ]] ; then 
+                osascript -e 'display notification "" with title " ⚠️ Not a file selected."'
+                echo "$file is not ins a git repository." 
+                exit 1
+              fi
               cd "$(dirname "$SEL")" || exit 1
+              if ! git rev-parse --is-inside-work-tree &>/dev/null ; then 
+                osascript -e 'display notification "" with title " ⚠️ Not a git repo."'
+                echo "$file is not ins a git repository." 
+                exit 1
+              fi
 
               BRANCH=$(git branch --show-current)
               ROOT_PATH=$(git rev-parse --show-toplevel)
