@@ -171,6 +171,7 @@ local function valeWord(mode)
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
 	if not success then return end -- error message already by AppendToFile
 	Cmd.mkview(2)
+	Cmd.update()
 	Cmd.edit() -- reload file for diagnostics to take effect
 	Cmd.loadview(2)
 	vim.notify("暈Now " .. mode .. "ing:\n" .. word)

@@ -66,3 +66,16 @@ minimum
 subwords
 however
 subword
+Karabiner
+Karabiner
+capslock
+yq
+reddit
+However
+repo
+TUI
+frontmost
+encounter
+tmux
+rcmd
+iCloud
