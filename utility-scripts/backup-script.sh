@@ -3,10 +3,10 @@
 VOLUME_NAME="$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)"
 if [[ $(echo "$VOLUME_NAME" | wc -l) -gt 1 ]] ; then 
 	print "\033[1;33mMore than one volume connected.\033[0m"
-	exit 1
+	return 1
 elif [[ $(echo "$VOLUME_NAME" | wc -l) -lt 1 ]] ; then 
 	print "\033[1;33mNo volume connected.\033[0m"
-	exit 1
+	return 1
 fi
 
 print "\033[1;34mBacking up to $VOLUME_NAME…\033[0m"
@@ -15,7 +15,7 @@ DEVICE_NAME="$(scutil --get ComputerName)"
 
 BACKUP_DEST="$VOLUME_NAME/Backup_$DEVICE_NAME"
 mkdir -p "$BACKUP_DEST"
-cd "$BACKUP_DEST" || exit 1
+cd "$BACKUP_DEST" || return 1
 
 # Log (on the Mac)
 LOG_LOCATION="$DATA_DIR/backup.log"
