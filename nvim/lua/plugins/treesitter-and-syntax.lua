@@ -3,7 +3,7 @@ local function tsConfig()
 		ensure_installed = {
 			"javascript",
 			"typescript",
-			"regex",
+			"regex", -- patterns
 			"bash",
 			"css",
 			"scss",
@@ -16,6 +16,7 @@ local function tsConfig()
 			"python",
 			"lua",
 			"luap", -- lua patterns
+			"luadoc", -- lua annotations
 			"vim",
 			"toml",
 			"ini",
@@ -23,6 +24,7 @@ local function tsConfig()
 			"json",
 			"jsonc",
 			"html",
+			"http",
 			"help", -- vim help files
 		},
 		auto_install = false, -- install missing parsers when entering a buffer

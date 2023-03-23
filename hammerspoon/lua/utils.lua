@@ -39,7 +39,7 @@ function Trim(str)
 end
 
 ---Whether the current time is between startHour & endHour. Also works for
-------ranges that go beyond midnight, e.g. 23 to 6.
+---ranges that go beyond midnight, e.g. 23 to 6.
 ---@param startHour number, time between 0 and 24, also accepts floats e.g. 13.5 for 13:30
 ---@param endHour number, time between 0 and 24
 ---@return boolean|nil true/false for valid time ranges, nil for invalid time range
