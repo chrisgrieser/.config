@@ -1,18 +1,14 @@
 #!/usr/bin/env zsh
 # shellcheck disable=SC2034,SC2164,SC1071
 
-DOTFILE_FOLDER="$HOME/.config/"
-DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder" 
-
-# REQUIRES SSH setup
-cd ~
-git clone git@github.com:chrisgrieser/main-vault.git
-git clone git@github.com:chrisgrieser/.password-store.git
-
-#-------------------------------------------------------------------------------
 # ask for credentials upfront
 sudo -v
 setopt INTERACTIVE_COMMENTS
+
+DOTFILE_FOLDER="$HOME/.config/"
+DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder" 
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -20,7 +16,7 @@ xcode-select --install # install core CLIs like git for homebrew
 
 # Install Essential Apps
 brew install pinentry-mac pass gnupg # passwords
-brew install --no-quarantine alfred hammerspoon neovim alacritty karabiner-elements brave-browser
+brew install --no-quarantine alfred hammerspoon neovim alacritty karabiner-elements vivaldi
 brew install --no-quarantine --cask neovide
 
 # important settings
@@ -37,6 +33,11 @@ cd ~
 git clone --recurse-submodules git@github.com:chrisgrieser/.config.git
 cd ~/.config
 git submodule foreach git checkout main
+
+# REQUIRES SSH setup
+cd ~
+git clone git@github.com:chrisgrieser/main-vault.git
+git clone git@github.com:chrisgrieser/.password-store.git
 
 # Load Dock from dotfiles
 zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
@@ -63,6 +64,9 @@ if [[ $(uname -p) == "i386" ]]; then # FIX for Intel Macs with different homebre
 	ln -sf /usr/local/bin/pinentry-mac /opt/homebrew/bin/pinentry-mac
 fi
 
+# SSH
+ln -sf "$DATA_DIR/ssh/" ~/.ssh
+
 # pandoc
 [[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
 ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
@@ -77,7 +81,6 @@ ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
 # Browser PWAs
 BROWSER="Chrome" # Chrome = Vivaldi, since Vivaldi does not rename the dir
-# BROWSER="Brave Browser"
 [[ -e ~"/Applications/$BROWSER Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER Apps.localized"
 ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
 
