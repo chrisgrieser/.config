@@ -1,7 +1,7 @@
 {
 	"require": {
 		"prefix": "require (string)",
-		"body": "require (\"$0\")"
+		"body": "require(\"$0\")"
 	},
 	"module": {
 		"prefix": "module",
