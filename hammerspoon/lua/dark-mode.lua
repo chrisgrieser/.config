@@ -35,7 +35,7 @@ local function toggleDarkMode()
 	end
 
 	-- neovim (requires setup in ~/.config/nvim/lua/file-watcher.lua)
-	hs.execute([[echo "SetThemeMode(']] .. toMode .. [[')" > /tmp/nvim-automation]])
+	hs.execute(string.format([[echo "SetThemeMode('%s')" > /tmp/nvim-automation]], toMode))
 
 	-- Highlights PDF background
 	if AppIsRunning("Highlights") then
@@ -95,5 +95,4 @@ end
 
 --------------------------------------------------------------------------------
 
--- `del` mapped to f13 (so ⇧+⌫ can still be used for forward-deleting)
-Hotkey({}, "f13", toggleDarkMode)
+Hotkey({}, "f13", toggleDarkMode) -- del key on Keychron Keyboard

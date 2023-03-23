@@ -1,7 +1,6 @@
 require("config.utils")
 -- https://neovide.dev/configuration.html
 local g = vim.g
-local device = Fn.hostname()
 --------------------------------------------------------------------------------
 
 -- See hammerspoons `app-hider.lua`
@@ -14,8 +13,6 @@ Autocmd("VimEnter", {
 		Fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
 	end,
 })
-
---------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 

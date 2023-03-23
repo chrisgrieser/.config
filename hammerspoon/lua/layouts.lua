@@ -122,7 +122,7 @@ end
 DisplayCountWatcher = hs.screen.watcher.new(function() selectLayout("darken") end):start()
 
 -- 2. Hotkey
-Hotkey(Hyper, "home", selectLayout) -- hyper + eject on Apple Keyboard
+Hotkey(Hyper, "home", selectLayout)
 
 -- 3. Unlocking (with idletime)
 local c = hs.caffeinate.watcher
