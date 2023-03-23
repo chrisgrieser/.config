@@ -20,8 +20,8 @@ while true do
 	VaultLocation = os.getenv("VAULT_PATH")
 	FileHub = os.getenv("WD")
 	if DotfilesFolder then break end
-	hs.timer.usleep(100000) -- = one tenth of a second
-	if i > 10 then
+	hs.timer.usleep(100000) -- = one tenth of a second (don't use wait, since it's a defined later)
+	if i > 15 then
 		Notify("⚠️ Could not retrieve .zshenv")
 		return
 	end
@@ -38,7 +38,8 @@ function Trim(str)
 	return str
 end
 
----Whether the current time is between startHour & endHour
+---Whether the current time is between startHour & endHour. Also works for
+------ranges that go beyond midnight, e.g. 23 to 6.
 ---@param startHour number, time between 0 and 24, also accepts floats e.g. 13.5 for 13:30
 ---@param endHour number, time between 0 and 24
 ---@return boolean|nil true/false for valid time ranges, nil for invalid time range
@@ -99,9 +100,6 @@ end
 ---delay (blocking)
 ---@param secs number
 function Wait(secs)
-	-- since lua has not blocking delay, executing shells' sleep since os.execute
-	-- is blocking
-	-- os.execute("sleep " .. tostring(secs))
 	hs.timer.usleep(secs * 1000000)
 end
 
@@ -114,7 +112,6 @@ function IsDarkMode() return hs.execute([[defaults read -g AppleInterfaceStyle]]
 local function deviceName()
 	-- host.localizedName() is essentially equivalent to `scutil --get ComputerName`
 	local name, _ = hs.host.localizedName():gsub(".- ", "", 1)
-
 	return name
 end
 
