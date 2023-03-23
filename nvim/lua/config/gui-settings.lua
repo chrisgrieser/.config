@@ -1,7 +1,8 @@
 require("config.utils")
 -- https://neovide.dev/configuration.html
---------------------------------------------------------------------------------
 local g = vim.g
+local device = Fn.hostname()
+--------------------------------------------------------------------------------
 
 -- See hammerspoons `app-hider.lua`
 Autocmd("VimEnter", {
@@ -15,14 +16,6 @@ Autocmd("VimEnter", {
 })
 
 --------------------------------------------------------------------------------
-
--- font size dependent on device
-local device = Fn.hostname()
-if device:find("Mother") then
-	g.neovide_scale_factor = 0.94
-elseif device:find("eduroam") or device:find("iMac") then
-	g.neovide_scale_factor = 1
-end
 
 --------------------------------------------------------------------------------
 
@@ -41,20 +34,27 @@ g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable (on macOS)
 Keymap("i", "<M-.>", "…") -- needed when alt is turned into meta key
 Keymap("i", "<M-->", "–") -- en-dash
 
--- Window Appearance
-g.neovide_refresh_rate = 100
-g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
+-- Graphics (dependent on device)
 -- INFO: Transparency set in theme-config.lua
+if device:find("Mother") then
+	g.neovide_scale_factor = 0.93
+	g.neovide_refresh_rate = 45
+elseif device:find("eduroam") or device:find("iMac") then
+	g.neovide_scale_factor = 1
+	g.neovide_refresh_rate = 80
+end
 
--- cursor & scroll
+
+-- Window Appearance
+g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
+g.neovide_scroll_animation_length = 0.1 -- seems to be not working
+
+-- cursor
 g.neovide_cursor_animation_length = 0.003
 g.neovide_cursor_trail_size = 0.7
 g.neovide_cursor_unfocused_outline_width = 0.1
-g.neovide_scroll_animation_length = 0.1
 
--- cursor animation
 g.neovide_cursor_vfx_mode = "railgun" -- railgun|torpedo|pixiedust|sonicboom|ripple|wireframe
-
 if vim.tbl_contains({ "railgun", "torpedo", "pixiedust" }, g.neovide_cursor_vfx_mode) then
 	g.neovide_cursor_vfx_particle_lifetime = 0.5
 	g.neovide_cursor_vfx_particle_density = 20.0
