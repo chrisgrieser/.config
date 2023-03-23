@@ -95,7 +95,7 @@ exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_rec
 nmap go :quickSwitcher
 nmap gr :quickSwitcher
 
-" go to last change (HACK, only works once…)
+" go to last change (HACK, only works to jump to the last location)
 nmap gc u<C-r>
 
 """"""""""""""""""""""
