@@ -36,10 +36,10 @@ Keymap("i", "<M-->", "–") -- en-dash
 
 -- Graphics (dependent on device)
 -- INFO: Transparency set in theme-config.lua
-if device:find("Mother") then
+if Fn.hostname():find("Mother") then
 	g.neovide_scale_factor = 0.93
 	g.neovide_refresh_rate = 45
-elseif device:find("eduroam") or device:find("iMac") then
+elseif Fn.hostname():find("eduroam") or Fn.hostname():find("iMac") then
 	g.neovide_scale_factor = 1
 	g.neovide_refresh_rate = 80
 end
