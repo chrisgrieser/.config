@@ -56,19 +56,16 @@ ExternalHarddriveWatcher = hs.usb.watcher
 		if not (device.eventType == "added") then return end
 		Notify("Mounted: " .. device.productName)
 
-		local isBackupDrive = false
 		local harddriveNames = {
-			externe_A = "ZY603 USB3.0 Device",
-			-- externe_B = "", TODO write down the name I get my hands on it again
-			externe_C = "Elements 2621",
+			"ZY603 USB3.0 Device", -- Externe A
+			-- "", TODO write down the name I get my hands on it again
+			"Elements 2621", -- Externe C
 		}
-		for _, productName in pairs(harddriveNames) do
-			if productName == device.productName then isBackupDrive = true end
-		end
-
+		local isBackupDrive = TableContains(harddriveNames, device.productName)
+		
 		if isBackupDrive then
 			OpenApp("alacritty")
-			hs.eventtap.keyStrokes("bkp")
+			AsSoonAsAppRuns("alacritty", function() hs.eventtap.keyStrokes("bkp") end)
 		else
 			local stdout, success = hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
 			if not success or not stdout then return end
