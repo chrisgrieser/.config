@@ -11,6 +11,7 @@ BottomHalf = { x = 0, y = 0.5, w = 1, h = 0.5 }
 PseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
 Centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
+if IsAtMother() then ToTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
 
 ---@param win hs.window
 ---@param size hs.geometry
