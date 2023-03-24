@@ -36,10 +36,15 @@ local function numberOfWins()
 		local winId = fn.win_getid(i)
 		local winConf = api.nvim_win_get_config(winId)
 
-		local isRegularWin1 = win and win ~= ""
-		local isRegularWin2 = not winConf.external and winConf.focusable and api.nvim_win_is_valid(winId)
-
-		if isRegularWin1 and isRegularWin2 then count = count + 1 end
+		if
+			win
+			and win ~= ""
+			and not (winConf.external)
+			and winConf.focusable
+			and api.nvim_win_is_valid(winId)
+		then
+			count = count + 1
+		end
 	end
 	return count
 end
@@ -101,7 +106,7 @@ end
 
 ---Close window/buffer, preserving alt-file
 function M.betterClose()
-	if vim.bo.modifiable then cmd.update() end
+	if vim.bo.modifiable then cmd.update(fn.expand("%:p")) end
 
 	-- close window
 	if numberOfWins() > 1 then
@@ -146,7 +151,7 @@ function M.reopenBuffer()
 	-- cannot use purely oldfiles, since they are sometimes not updated
 	-- in time after buffer closing
 	local lastClosedBuf = vim.g.last_deleted_buffer or altOldfile()
-	cmd.edit(lastClosedBuf) 
+	cmd.edit(lastClosedBuf)
 end
 
 --------------------------------------------------------------------------------
