@@ -36,8 +36,8 @@ local function customHighlights()
 		setHighlight(v, "gui=underdouble cterm=underline")
 	end
 
-	-- setHighlight("urls", "cterm=underline gui=underline")
-	-- Fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
+	setHighlight("urls", "cterm=underline gui=underline")
+	Fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
 	linkHighlight("myAnnotations", "Todo")
 	Fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
