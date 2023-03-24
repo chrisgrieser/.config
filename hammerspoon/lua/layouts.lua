@@ -103,22 +103,21 @@ end
 -- TRIGGERS FOR LAYOUT CHANGE
 
 ---select layout depending on number of screens
----@param darken? any darken the display on the iMac as well
-local function selectLayout(darken)
+local function selectLayout()
 	if IsProjector() then
 		movieLayout()
-		IMacDisplay:setBrightness(0)
-	elseif not (IsProjector()) and darken then
+	else
 		workLayout()
-		IMacDisplay:setBrightness(0)
-	elseif not (IsProjector()) and not darken then
-		workLayout()
-		setHigherBrightnessDuringDay()
 	end
 end
 
 -- 1. Change of screen numbers
-DisplayCountWatcher = hs.screen.watcher.new(function() selectLayout("darken") end):start()
+DisplayCountWatcher = hs.screen.watcher
+	.new(function()
+		selectLayout()
+		IMacDisplay:setBrightness(0)
+	end)
+	:start()
 
 -- 2. Hotkey
 Hotkey(Hyper, "home", selectLayout)
@@ -126,11 +125,12 @@ Hotkey(Hyper, "home", selectLayout)
 -- 3. Unlocking (with idletime)
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if event == c.screensDidUnlock then
-		print("🔓 Unlockwatcher triggered.")
-		-- delay needed to ensure displays are recognized after waking
-		RunWithDelays(0.5, selectLayout)
-	end
+	if event ~= c.screensDidUnlock then return end
+	print("🔓 Unlockwatcher triggered.")
+	RunWithDelays(0.5, function() -- delay needed to ensure displays are recognized after waking
+		selectLayout()
+		setHigherBrightnessDuringDay()
+	end)
 end):start()
 
 --------------------------------------------------------------------------------
