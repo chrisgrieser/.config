@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --------------------------------------------------------------------------------
 
 return {
-	{ -- breadcrumbs for statusline/winbar
+	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
 		config = function()
@@ -28,9 +28,19 @@ return {
 			}
 		end,
 	},
-	{
+	{ -- better code action
+		"weilbith/nvim-code-action-menu",
+		cmd = "CodeActionMenu",
+		init = function()
+			vim.g.code_action_menu_window_border = BorderStyle
+			vim.g.code_action_menu_show_details = true
+			vim.g.code_action_menu_show_diff = false
+			vim.g.code_action_menu_show_action_kind = false
+		end,
+	},
+	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
-		event = "LspAttach",
+		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
 		config = function()
 			require("lsp_signature").setup {
 				floating_window = false,
@@ -39,10 +49,9 @@ return {
 			}
 		end,
 	},
-	{
-		-- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
-		"lvimuser/lsp-inlayhints.nvim",
-		lazy = true, -- loaded when required in attach function
+	{ -- display inlay hints from LSP
+		"lvimuser/lsp-inlayhints.nvim", -- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
+		lazy = true, -- required in attach function
 		config = function()
 			require("lsp-inlayhints").setup {
 				inlay_hints = {
@@ -64,7 +73,7 @@ return {
 			}
 		end,
 	},
-	{
+	{ -- better LSP rename
 		"smjonas/inc-rename.nvim",
 		event = "LspAttach",
 		config = function()
