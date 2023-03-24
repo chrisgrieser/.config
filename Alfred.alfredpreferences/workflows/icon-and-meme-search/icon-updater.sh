@@ -4,8 +4,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # CONFIG
 CUSTOM_ICON_FOLDER="$DOTFILE_FOLDER/custom-app-icons"
-PWA_FOLDER="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Chrome Apps.localized/"
-# [[ "$(scutil --get ComputerName)" =~ Mother ]] && PWA_FOLDER="$HOME/Applications/Chrome Apps.localized"
+PWA_FOLDER="$HOME/Applications/Chrome Apps.localized"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -97,7 +96,10 @@ case $APP in
 "PWAs")
 	cd "$PWA_FOLDER" || exit 1
 	iconsur set --local reddxxx.app &>/dev/null
-	iconsur set Tagesschau.app Netflix.app Twitch.app CrunchyRoll.app &>/dev/null
+	iconsur set Tagesschau.app &>/dev/null
+	iconsur set Netflix.app &>/dev/null
+	iconsur set Twitch.app &>/dev/null
+	iconsur set CrunchyRoll.app &>/dev/null
 	cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
 	;;
 *)
