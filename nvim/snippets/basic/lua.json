@@ -36,10 +36,12 @@
 		"prefix": "ignore rule (selene)",
 		"body": "-- selene: allow(${1:rule_name})"
 	},
-	"if .. then": {
-		"prefix": "if .. then",
+	"then .. else .. end": {
+		"prefix": "then .. else .. end",
 		"body": [
-			"if ${1:true} then",
+			"then",
+			"\t$1",
+			"else",
 			"\t$0",
 			"end"
 		]
