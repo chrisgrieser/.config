@@ -3,7 +3,7 @@ local function tsConfig()
 		ensure_installed = {
 			"javascript",
 			"typescript",
-			"regex", -- patterns
+			"regex", -- js patterns
 			"jsdoc", -- js annotations
 			"bash",
 			"css",
@@ -13,7 +13,8 @@ local function tsConfig()
 			"python",
 			"lua",
 			"luap", -- lua patterns
-			"luadoc", -- lua annotations
+			-- "luadoc", -- lua annotations
+			"comments", -- TODO comments
 			"gitignore",
 			"gitcommit",
 			"diff",

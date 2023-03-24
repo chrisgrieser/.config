@@ -26,29 +26,28 @@ g.neovide_hide_mouse_when_typing = true
 g.neovide_remember_window_size = false -- done via --geometry in `neovide` call
 
 -- Keymaps
-g.neovide_input_use_logo = true -- logo = `cmd` (on macOS)
-g.neovide_input_macos_alt_is_meta = true -- makes `opt` usable (on macOS)
-Keymap("i", "<M-.>", "…") -- needed when alt is turned into meta key
+g.neovide_input_use_logo = true -- enable `cmd` key on macOS
+g.neovide_input_macos_alt_is_meta = true -- enable `opt` key on macOS
+Keymap("i", "<M-.>", "…") -- helpers when `opt` is turned into meta key
 Keymap("i", "<M-->", "–") -- en-dash
 
 -- Graphics (dependent on device)
 -- INFO: Transparency set in theme-config.lua
 if Fn.hostname():find("Mother") then
 	g.neovide_scale_factor = 0.93
-	g.neovide_refresh_rate = 45
+	g.neovide_refresh_rate = 40
 elseif Fn.hostname():find("eduroam") or Fn.hostname():find("iMac") then
 	g.neovide_scale_factor = 1
 	g.neovide_refresh_rate = 80
 end
 
-
 -- Window Appearance
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
-g.neovide_scroll_animation_length = 0.1 -- seems to be not working
+g.neovide_scroll_animation_length = 1 -- 
 
 -- cursor
-g.neovide_cursor_animation_length = 0.003
-g.neovide_cursor_trail_size = 0.7
+g.neovide_cursor_animation_length = 0.01
+g.neovide_cursor_trail_size = 0.9
 g.neovide_cursor_unfocused_outline_width = 0.1
 
 g.neovide_cursor_vfx_mode = "railgun" -- railgun|torpedo|pixiedust|sonicboom|ripple|wireframe
