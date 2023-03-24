@@ -5,7 +5,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 # CONFIG
 CUSTOM_ICON_FOLDER="$DOTFILE_FOLDER/custom-app-icons"
 PWA_FOLDER="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Chrome Apps.localized/"
-[[ "$(scutil --get ComputerName)" =~ Mother ]] && PWA_FOLDER="$HOME/Applications/Chrome Apps.localized"
+# [[ "$(scutil --get ComputerName)" =~ Mother ]] && PWA_FOLDER="$HOME/Applications/Chrome Apps.localized"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -91,18 +91,14 @@ case $APP in
 	INFO_WINDOW=1
 	;;
 #────────────────────────────────────────────────────────────────────────────
-"YouTube" | "Docs")
+"YouTube")
 	cp -f "$CUSTOM_ICON_FOLDER/$APP.icns" "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
-	;;
-"Tagesschau" | "CrunchyRoll" | "Netflix" | "Twitch")
-	iconsur set "$PWA_FOLDER/$APP.app" &>/dev/null
 	;;
 "PWAs")
 	cd "$PWA_FOLDER" || exit 1
 	iconsur set --local reddxxx.app &>/dev/null
-	iconsur set Tagesschau.app Docs.app Netflix.app Twitch.app CrunchyRoll.app &>/dev/null
+	iconsur set Tagesschau.app Netflix.app Twitch.app CrunchyRoll.app &>/dev/null
 	cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
-	cp -f "$CUSTOM_ICON_FOLDER/Google Docs.icns" "$PWA_FOLDER/Docs.app/Contents/Resources/app.icns"
 	;;
 *)
 	NONE_FOUND=1

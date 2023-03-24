@@ -107,14 +107,13 @@ end
 local function selectLayout(darken)
 	if IsProjector() then
 		movieLayout()
-		hs.brightness.set(0)
-	else
+		IMacDisplay:setBrightness(0)
+	elseif not (IsProjector()) and darken then
 		workLayout()
-		if darken then
-			hs.brightness.set(0)
-		else
-			setHigherBrightnessDuringDay()
-		end
+		IMacDisplay:setBrightness(0)
+	elseif not (IsProjector()) and not darken then
+		workLayout()
+		setHigherBrightnessDuringDay()
 	end
 end
 
