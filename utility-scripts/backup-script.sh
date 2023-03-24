@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+# determine volume
 VOLUME_NAME="$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)"
 if [[ $(echo "$VOLUME_NAME" | wc -l) -gt 1 ]] ; then 
 	print "\033[1;33mMore than one volume connected.\033[0m"
@@ -8,11 +9,10 @@ elif [[ $(echo "$VOLUME_NAME" | wc -l) -lt 1 ]] ; then
 	print "\033[1;33mNo volume connected.\033[0m"
 	return 1
 fi
-
 print "\033[1;34mBacking up to $VOLUME_NAME…\033[0m"
 
+# determine backup destination
 DEVICE_NAME="$(scutil --get ComputerName)"
-
 BACKUP_DEST="$VOLUME_NAME/Backup_$DEVICE_NAME"
 mkdir -p "$BACKUP_DEST"
 cd "$BACKUP_DEST" || return 1
@@ -23,6 +23,7 @@ echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >>"$LOG_LOCATION"
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# Helper function
 function bkp() {
 	print -n "\033[1;34m"
 	echo
@@ -35,25 +36,23 @@ function bkp() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-
 # CONTENT TO BACKUP
 
 # WARN each command has to sync to individual folders, since otherwise
 # the --delete option will override the previous contents
 # INFO All source paths needs to end with a slash
 # INFO locations defined in zshenv
-bkp "$HOME/Library/Preferences/" ./Library/Preferences
+bkp "$ICLOUD/" ./iCloud-Folder
 bkp "$HOME/RomComs/" ./Homefolder/RomComs
 bkp "$DOTFILE_FOLDER/" ./Homefolder/config
 bkp "$VAULT_PATH/" ./Homefolder/main-vault
-bkp "$ICLOUD/" ./iCloud-Folder
 bkp "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
 bkp "$HOME/.gnupg/" ./Homefolder/gnupg
 
+#───────────────────────────────────────────────────────────────────────────────
 echo
 print "\033[1;34m----------------------------------------------------\033[0m"
 echo
-#───────────────────────────────────────────────────────────────────────────────
 
 # Log (on Mac)
 echo "completed: $(date '+%H:%M')" >>"$LOG_LOCATION"
