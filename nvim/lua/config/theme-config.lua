@@ -41,7 +41,6 @@ local function customHighlights()
 
 	linkHighlight("myAnnotations", "Todo")
 	Fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
-	Fn.matchadd("myAnnotations", [[(SIC)]])
 
 	linkHighlight("IndentBlanklineContextChar", "Comment") -- active indent different color
 	setHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
