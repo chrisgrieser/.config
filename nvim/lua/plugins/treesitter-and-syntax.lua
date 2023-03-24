@@ -4,6 +4,7 @@ local function tsConfig()
 			"javascript",
 			"typescript",
 			"regex", -- patterns
+			"jsdoc", -- js annotations
 			"bash",
 			"css",
 			"scss",
@@ -24,7 +25,7 @@ local function tsConfig()
 			"json",
 			"jsonc",
 			"html",
-			"http",
+			"http", -- not sure what this one does
 			"help", -- vim help files
 		},
 		auto_install = false, -- install missing parsers when entering a buffer
@@ -54,7 +55,7 @@ local function tsConfig()
 				disable = { "markdown" }, -- so `al` can be remapped to link text object
 				keymaps = {
 					["an"] = "@number.inner", -- [n]umber
-					["ik"] = "@assignment.rhs", -- inner [k]ey (INFO outer defined via various textobjs)
+					["ik"] = "@assignment.rhs", -- inner [k]ey ( INFO: outer defined via various textobjs)
 					["a<CR>"] = "@return.outer", -- <CR>: return (`ar` already = a rectangular bracket)
 					["i<CR>"] = "@return.inner", 
 					["a/"] = "@regex.outer", -- /regex/

@@ -36,8 +36,8 @@ local function customHighlights()
 		setHighlight(v, "gui=underdouble cterm=underline")
 	end
 
-	setHighlight("urls", "cterm=underline gui=underline")
-	Fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
+	-- setHighlight("urls", "cterm=underline gui=underline")
+	-- Fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
 	linkHighlight("myAnnotations", "Todo")
 	Fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
@@ -53,8 +53,8 @@ local function customHighlights()
 	setHighlight("QuickScopeSecondary", "gui=underdouble cterm=underline") 
 
 	-- HACK for https://github.com/neovim/neovim/issues/20456
-	linkHighlight("luaParenError.highlight", "NormalFloat")
-	linkHighlight("luaParenError", "NormalFloat")
+	-- linkHighlight("luaParenError.highlight", "NormalFloat")
+	-- linkHighlight("luaParenError", "NormalFloat")
 end
 
 --------------------------------------------------------------------------------
