@@ -648,3 +648,6 @@ for _, key in ipairs { "x", "h", "l", "e", "b", "w" } do
 end
 
 --------------------------------------------------------------------------------
+Keymap({ "o", "x" }, "ix", function() require("various-textobjs").htmlAttribute(true) end, { desc = "inner HTML Attribute textobj"})
+Keymap({ "o", "x" }, "ax", function() require("various-textobjs").htmlAttribute(false) end, { desc = "outer HTML Attribute textobj" })
+

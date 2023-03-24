@@ -10,14 +10,14 @@ local function tsConfig()
 			"scss",
 			"markdown",
 			"markdown_inline", -- fenced code blocks
-			"bibtex",
-			"gitignore",
-			"gitcommit",
-			"diff",
 			"python",
 			"lua",
 			"luap", -- lua patterns
 			"luadoc", -- lua annotations
+			"gitignore",
+			"gitcommit",
+			"diff",
+			"bibtex",
 			"vim",
 			"toml",
 			"ini",
@@ -25,7 +25,6 @@ local function tsConfig()
 			"json",
 			"jsonc",
 			"html",
-			"http", -- not sure what this one does
 			"help", -- vim help files
 		},
 		auto_install = false, -- install missing parsers when entering a buffer
