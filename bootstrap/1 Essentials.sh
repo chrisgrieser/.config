@@ -34,21 +34,23 @@ git clone --recurse-submodules git@github.com:chrisgrieser/.config.git
 cd ~/.config
 git submodule foreach git checkout main
 
-# REQUIRES SSH setup
+
+# SSH
+ln -sf "$DATA_DIR/ssh/" ~/.ssh
+
+# SSH required for these
 cd ~
 git clone git@github.com:chrisgrieser/main-vault.git
 git clone git@github.com:chrisgrieser/.password-store.git
 
-# Load Dock from dotfiles
-zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 #───────────────────────────────────────────────────────────────────────────────
+# LOAD CONFIGS
 
-# MACKUP
-[[ -e ~/.mackup.cfg ]] && rm -rf ~/.mackup.cfg
+zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
+
 ln -sf "$DOTFILE_FOLDER/mackup/mackup.cfg" ~/.mackup.cfg
-brew install mackup
-mackup restore
+brew install mackup && mackup restore
 
 #───────────────────────────────────────────────────────────────────────────────
 # CREATE SYMLINKS
@@ -56,16 +58,13 @@ mackup restore
 # zsh (ZDOTDIR set in .zshenv for the remaining config)
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
-# GPG config
+# GPG config (not keys themselves, they are in password store)
 mkdir ~/.gnupg
 ln -sf "$DOTFILE_FOLDER/gnupg/gpg-agent.conf" ~/.gnupg
 if [[ $(uname -p) == "i386" ]]; then # FIX for Intel Macs with different homebrew path
 	mkdir -p /opt/homebrew/bin/
 	ln -sf /usr/local/bin/pinentry-mac /opt/homebrew/bin/pinentry-mac
 fi
-
-# SSH
-ln -sf "$DATA_DIR/ssh/" ~/.ssh
 
 # pandoc
 [[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
