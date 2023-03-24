@@ -8,7 +8,7 @@ require("lua.utils")
 ---(Apps not in this list will be ignored and never quit automatically).
 Thresholds = {
 	Slack = 15,
-	Obsidian = 90,
+	Obsidian = 60,
 	Mimestream = 5,
 	Highlights = 90,
 	Discord = 180,
@@ -19,7 +19,7 @@ Thresholds = {
 	["Alfred Preferences"] = 15,
 	["System Settings"] = 2,
 	Drafts = 5, -- has extra condition of zero active Draft (see `quitter()`)
-	Finder = 10, -- requires making Finder quittable via `defaults write com.apple.Finder QuitMenuItem 1`
+	Finder = 10, -- only removes windows
 }
 
 --------------------------------------------------------------------------------
@@ -43,6 +43,8 @@ DeactivationWatcher = Aw.new(function(app, event)
 	end
 end):start()
 
+--------------------------------------------------------------------------------
+
 ---OPTIONAL extra utility for Drafts.app
 ---@return number number of currently active Drafts
 local function getDraftsCount()
@@ -58,14 +60,23 @@ end
 ---quit app, with the extra condition of Drafts requiring zero drafts
 ---@param app string name of the app
 local function quitter(app)
-	if app == "Drafts" and getDraftsCount() > 0 then return end
+	if app == "Drafts" and getDraftsCount() > 0 then
+		return
+	elseif app == "Finder" then
+		for _, win in pairs(App("Finder"):allWindows()) do
+			win:close()	
+		end
+	else
+		App(app):kill()
+	end
 	print("⏹️ AutoQuitting: " .. app)
 	IdleApps[app] = nil
-	hs.application(app):kill()
 end
 
+--------------------------------------------------------------------------------
+
 ---check apps regularly and quit if idle for longer than their thresholds
-local checkIntervallSecs = 15
+local checkIntervallSecs = 20
 AutoQuitterTimer = hs.timer
 	.doEvery(checkIntervallSecs, function()
 		for app, lastActivation in pairs(IdleApps) do

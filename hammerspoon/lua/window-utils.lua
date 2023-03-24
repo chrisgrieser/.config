@@ -182,14 +182,7 @@ function AutoTile(winSrc)
 	end
 
 	if #wins > 1 then BringAllToFront() end
-	if #wins == 0 and FrontAppName() == "Finder" then
-		-- prevent quitting when window is created imminently
-		RunWithDelays(0.4, function()
-			-- delay needs to be high enough to since e.g. during quitting fullscreen
-			-- mode, Hammerspoon temporarily cannot detect Finder windows (SIC!)
-			QuitFinderIfNoWindow()
-		end)
-	elseif #wins == 1 then
+	if #wins == 1 then
 		if IsProjector() then
 			MoveResize(wins[1], Maximized)
 		elseif FrontAppName() == "Finder" then
@@ -209,6 +202,12 @@ function AutoTile(winSrc)
 		MoveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
 		MoveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
 		MoveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
+	elseif #wins == 5 then
+		MoveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
+		MoveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
+		MoveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
+		MoveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
+		MoveResize(wins[5], { h = 0.5, w = 0.5, x = 0.25, y = 0.25 })
 	end
 end
 
