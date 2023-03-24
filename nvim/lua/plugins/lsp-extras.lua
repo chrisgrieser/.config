@@ -28,16 +28,6 @@ return {
 			}
 		end,
 	},
-	{ -- better code action
-		"weilbith/nvim-code-action-menu",
-		cmd = "CodeActionMenu",
-		init = function()
-			vim.g.code_action_menu_window_border = BorderStyle
-			vim.g.code_action_menu_show_details = true
-			vim.g.code_action_menu_show_diff = false
-			vim.g.code_action_menu_show_action_kind = false
-		end,
-	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
