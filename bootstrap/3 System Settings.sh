@@ -179,7 +179,6 @@ defaults write org.gpgtools.common DisableKeychain -bool yes
 
 # Top right → Notification Center
 defaults write com.apple.dock wvous-tr-corner -int 12
-defaults write com.apple.dock wvous-tr-modifier -int 0
 
 killall Dock
 
@@ -191,32 +190,7 @@ sudo tmutil disable # disable automatic backups
 
 # Safari
 #--------------------------------------
-# Enable the Develop menu and the Web Inspector in Safari
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-
-# Show the full URL in the address bar (note: this still hides the scheme)
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
-
-# Set Safari's home page to `about:blank` for faster loading
-defaults write com.apple.Safari HomePage -string "about:blank"
-
-# Disable auto-playing video
-defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
-defaults write com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
-defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
-
+defaults write com.apple.Safari IncludeDevelopMenu -bool true # Enable Develop menu and Web Inspector
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true # full URL in address bar
+defaults write com.apple.Safari HomePage -string "about:blank" # faster loading
 defaults write com.apple.Safari DownloadsPath -string "$WD" # Download path
-
-# Activity Monitor
-#------------------
-defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
-defaults write com.apple.ActivityMonitor ShowCategory -int 0 # Show all processes in Activity Monitor
-defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage" # Sort Activity Monitor results by CPU usage
-defaults write com.apple.ActivityMonitor SortDirection -int 0
-
-# TextEdit
-#------------------
-defaults write com.apple.TextEdit RichText -int 0 # Use plain text mode for new TextEdit documents
-defaults write com.apple.TextEdit PlainTextEncoding -int 4 # Open and save files as UTF-8 in TextEdit
-defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
