@@ -68,9 +68,9 @@
 				<key>destinationuid</key>
 				<string>5ACE5786-6B82-46EC-86BA-A1727CCF6F8D</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Shallow Clone to Local Repo Folder</string>
+				<string>⌃: Shallow Clone to Local Repo Folder</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1091,7 +1091,7 @@ echo "$url"</string>
 			<key>note</key>
 			<string>shallow clone to local repo folder</string>
 			<key>xpos</key>
-			<real>255</real>
+			<real>250</real>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
@@ -1109,7 +1109,7 @@ echo "$url"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>400</real>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
@@ -1285,7 +1285,7 @@ echo "$url"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>255</real>
+			<real>250</real>
 			<key>ypos</key>
 			<real>415</real>
 		</dict>

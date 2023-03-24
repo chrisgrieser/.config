@@ -79,3 +79,4 @@ encounter
 tmux
 rcmd
 iCloud
+characterwise
