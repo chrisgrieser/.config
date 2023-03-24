@@ -229,12 +229,6 @@ function OpenApp(appNames)
 	end
 end
 
----quitting Finder requires `defaults write com.apple.finder QuitMenuItem -bool true`
-function QuitFinderIfNoWindow()
-	local finder = App("Finder")
-	if finder and #(finder:allWindows()) == 0 then finder:kill() end
-end
-
 ---@param appNames string|string[]
 function QuitApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end

@@ -10,7 +10,7 @@ sudo -v
 open '/System/Applications/App Store.app'
 
 # shellcheck disable=SC2034
-brew bundle install --no-quarantine --verbose --no-lock --file ~'/Desktop/Brewfile'
+brew bundle install --no-quarantine --verbose --no-lock --file "$HOME/Desktop/Brewfile"
 
 # Uninstall unneeded Mac Default apps
 open -a "Appcleaner" \
@@ -29,43 +29,17 @@ npm list --location=global
 sudo gem install anystyle-cli
 pip3 install pdfannots
 
+# Searchlink
+curl -sL "https://github.com/ttscoff/searchlink/releases/latest/download/searchlink.zip" >searchlink.zip
+unzip searchlink.zip
+mv "./SearchLink Services/SearchLink.workflow" "$HOME/Library/Services/SearchLink.workflow"
+rm -r "./Searchlink Services" searchlink.zip
+
 #───────────────────────────────────────────────────────────────────────────────
 # SETTINGS
-#───────────────────────────────────────────────────────────────────────────────
-# VIVALDI
-
-# Vivaldi auto-open files, https://forum.vivaldi.net/topic/42881/how-to-make-vivaldi-open-downloaded-files-automatically
-killall "Vivaldi"
-while pgrep -q "Vivaldi"; do sleep 0.1; done
-sed -i '' \
-	's/"directory_upgrade":true/"directory_upgrade":true,"extensions_to_open":"torrent:alfredworkflow:ics:"/' \
-	"$HOME/Library/Application Support/Vivaldi/Default/Preferences"
-open -a "Vivaldi"
-
-# enable custom css in vivaldi
-open -a "Vivaldi" "vivaldi://experiments"
-
-# TOGGLE CSS
-killall "Vivaldi"
-while pgrep -q "Vivaldi" ; do
-  sleep 0.1
-done
-open -a "Vivaldi" "vivaldi://settings/appearance/"
-echo -n "$HOME/.config/vivaldi" | pbcopy
-
-#───────────────────────────────────────────────────────────────────────────────
-
-# Espanso
-espanso service register
 
 # sketchybar
 brew services start felixkratz/formulae/sketchybar
-
-# Hammerspoon
-defaults write "org.hammerspoon.Hammerspoon" "MJShowMenuIconKey" 0
-defaults write "org.hammerspoon.Hammerspoon" "HSUploadCrashData" 0
-defaults write "org.hammerspoon.Hammerspoon" "MJKeepConsoleOnTopKey" 1
-defaults write "org.hammerspoon.Hammerspoon" "SUEnableAutomaticChecks" 1
 
 # Steam UI zoomed https://tp69.blog/2020/02/11/how-to-zoom-the-steam-client/
 steamDataPath="$HOME/Library/Application Support/Steam/Steam.AppBundle/Steam/Contents/MacOS"

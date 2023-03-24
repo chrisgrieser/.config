@@ -23,7 +23,6 @@ function SystemStart()
 		Notify("Finished loading.")
 		HoleCover()
 		PeripheryBatteryCheck("notify")
-		QuitFinderIfNoWindow()
 		SyncAllGitRepos("notify")
 	end
 end

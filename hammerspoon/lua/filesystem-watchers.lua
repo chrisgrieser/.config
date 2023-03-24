@@ -95,7 +95,6 @@ end):start()
 -- FROM FILE HUB
 
 local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
-WatcherActive = true -- to prevent recursion issues
 FileHubWatcher = Pw(FileHub, function(paths, _)
 	if not ScreenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
@@ -152,7 +151,6 @@ FileHubWatcher = Pw(FileHub, function(paths, _)
 		elseif fileName:match("Inoreader Feeds .*%.xml") then
 			os.rename(filep, browserSettings .. "Inoreader Feeds.opml")
 			print("➡️ Inoreader backup")
-
 		end
 	end
 end):start()
@@ -197,4 +195,3 @@ ObsiAlphaWatcher = Pw(FileHub, function(files)
 end):start()
 
 --------------------------------------------------------------------------------
-

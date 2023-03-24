@@ -134,7 +134,7 @@ NeovideWatcher = Aw.new(function(appName, eventType)
 end):start()
 
 -- HACK since neovide does not send a launch signal, triggering window resizing
--- via it's URI scheme called on VimEnter
+-- via its URI scheme called on VimEnter
 UriScheme("enlarge-neovide-window", function()
 	local neovideWin = App("neovide"):mainWindow()
 	local size = IsProjector() and Maximized or PseudoMaximized
@@ -147,7 +147,7 @@ end)
 -- pseudomaximized window
 Wf_terminal = Wf.new({ "alacritty", "Alacritty" })
 	:setOverrideFilter({ rejectTitles = { "btop" } })
-	:subscribe(Wf.windowCreated, function(newWin, appName, _)
+	:subscribe(Wf.windowCreated, function(newWin, appName)
 		AsSoonAsAppRuns(appName, function() MoveResize(newWin, PseudoMaximized) end)
 	end)
 
@@ -233,13 +233,8 @@ Wf_finder = Wf.new("Finder")
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_finder) end)
 
 FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)
-	if eventType == Aw.launched and appName == "Finder" then
-		-- INFO delay shouldn't be lower than 2-3s, otherwise some scripts cannot
-		-- properly utilize Finder
-		RunWithDelays({ 3, 5, 10 }, QuitFinderIfNoWindow)
-	elseif eventType == Aw.activated and appName == "Finder" then
+	if eventType == Aw.activated and appName == "Finder" then
 		AutoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
-		BringAllToFront()
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
 	end
 end):start()
