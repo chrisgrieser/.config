@@ -13,8 +13,7 @@ local function tsConfig()
 			"python",
 			"lua",
 			"luap", -- lua patterns
-			-- "luadoc", -- lua annotations
-			"comments", -- TODO comments
+			"luadoc", -- lua annotations
 			"gitignore",
 			"gitcommit",
 			"diff",

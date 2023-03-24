@@ -54,7 +54,7 @@ local function altOldfile()
 		if i > #vim.v.oldfiles then return nil end
 		oldfile = vim.v.oldfiles[i]
 		local fileExists = fn.filereadable(oldfile) == 1
-		local isCurrentFile = oldfile == Expand("%:p")
+		local isCurrentFile = oldfile == fn.expand("%:p")
 		local commitMsg = oldfile:find("COMMIT_EDITMSG$")
 		local harpoonMenu = oldfile:find("harpoon%-menu$")
 	until fileExists and not commitMsg and not isCurrentFile and not harpoonMenu
@@ -64,8 +64,8 @@ end
 ---shows info on alternate window/buffer/oldfile in that priority
 function M.altFileStatusline()
 	local maxLen = 15
-	local altFile = Expand("#:t")
-	local curFile = Expand("%:t")
+	local altFile = fn.expand("#:t")
+	local curFile = fn.expand("%:t")
 
 	if altFile == "" and not altOldfile() then -- no oldfile and after start
 		return ""
@@ -78,7 +78,7 @@ function M.altFileStatusline()
 	elseif altFile == "" and altOldfile() then
 		return " " .. vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
 	elseif curFile == altFile then -- same name, different file
-		local altParent = Expand("#:p:h:t")
+		local altParent = fn.expand("#:p:h:t")
 		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
 		return "# " .. altParent .. "/" .. altFile
 	end
@@ -89,7 +89,7 @@ end
 function M.altBufferWindow()
 	if numberOfWins() > 1 then
 		cmd.wincmd("p")
-	elseif Expand("#") ~= "" then
+	elseif fn.expand("#") ~= "" then
 		cmd.buffer("#")
 	elseif altOldfile() then
 		cmd.edit(altOldfile())
@@ -111,11 +111,14 @@ function M.betterClose()
 
 	-- close buffers
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
-	local bufToDel = Expand("%:p")
 	if #openBuffers == 1 then
 		vim.notify("Only one buffer open.", LogWarn)
 		return
-	elseif #openBuffers == 2 then
+	end
+
+	local bufToDel = fn.expand("%:p")
+	vim.g.last_deleted_buffer = bufToDel
+	if #openBuffers == 2 then
 		cmd.bwipeout() -- cannot clear altfile otherwise :/
 		return
 	end
@@ -123,7 +126,7 @@ function M.betterClose()
 	cmd.bdelete()
 
 	-- ensure new alt file points towards open, non-active buffer, or altoldfile
-	local curFile = Expand("%:p")
+	local curFile = fn.expand("%:p")
 	local i = 0
 	local newAltBuf = ""
 	repeat
@@ -137,18 +140,13 @@ function M.betterClose()
 	fn.setreg("#", newAltBuf) -- empty string would set the altfile to the current buffer
 end
 
+---repons last closed buffer, similar to ctrl-shift-t in the browser. If no
+---buffer has been closed this session, opens last oldfile
 function M.reopenBuffer()
-	local i = 0
-	local last, bufferNotOpen
-	local openBuffers = vim.fn.getbufinfo{ buflisted = 1 }
-	local openBufPaths = vim.tbl_map(function (obj) return obj.name end, openBuffers)
-	repeat
-		i = i + 1
-		last = vim.v.oldfiles[i]
-		if not last then return end
-		bufferNotOpen = not vim.tbl_contains(openBufPaths, last)
-	until bufferNotOpen
-	cmd.edit(last)
+	-- cannot use purely oldfiles, since they are sometimes not updated
+	-- in time after buffer closing
+	local lastClosedBuf = vim.g.last_deleted_buffer or altOldfile()
+	cmd.edit(lastClosedBuf) 
 end
 
 --------------------------------------------------------------------------------
