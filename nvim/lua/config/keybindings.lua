@@ -430,8 +430,7 @@ Keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "璉Show Diagnostic
 Keymap("n", "gs", function() Cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
 
 -- actions defined globally so null-ls can use them without LSP
--- Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "璉Code Action" })
-Keymap({ "n", "x" }, "<leader>c", Cmd.CodeActionMenu, { desc = "璉Code Action" })
+Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "璉Code Action" })
 
 -- copy breadcrumbs (nvim navic)
 Keymap("n", "<D-b>", function()

@@ -99,7 +99,7 @@ local function tsConfig()
 
 	-- force treesitter to highlight zsh as if it was bash
 	vim.api.nvim_create_augroup("zshAsBash", {})
-	vim.api.nvim_create_autocmd("BufWinEnter", {
+	vim.api.nvim_create_autocmd("BufReadPost", {
 		group = "zshAsBash",
 		pattern = { "*.sh", "*.zsh", ".zsh*" },
 		command = "silent! set filetype=sh",
@@ -122,12 +122,8 @@ return {
 		end,
 	},
 
-	-- AppleScript Syntax Highlighting
+	-- Syntax highlighting Plugins
 	{ "mityu/vim-applescript", ft = "applescript" }, 
-
-	-- treesitter CSS does not look good https://github.com/tree-sitter/tree-sitter-css/issues/34
-	{ "hail2u/vim-css3-syntax", ft = "css" }, 
-
-	-- log files
+	{ "hail2u/vim-css3-syntax", ft = "css" }, -- https://github.com/tree-sitter/tree-sitter-css/issues/34
 	{ "MTDL9/vim-log-highlighting", ft = "log" }, 
 }
