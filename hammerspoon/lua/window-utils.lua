@@ -182,7 +182,13 @@ function AutoTile(winSrc)
 	end
 
 	if #wins > 1 then BringAllToFront() end
-	if #wins == 1 then
+
+	if #wins == 0 and FrontAppName() == "Finder" then
+		-- hdie finder when no windows
+		RunWithDelays(0.1, function()
+			if #(App("Finder"):allWindows()) == 0 then App("Finder"):hide() end
+		end)
+	elseif #wins == 1 then
 		if IsProjector() then
 			MoveResize(wins[1], Maximized)
 		elseif FrontAppName() == "Finder" then
