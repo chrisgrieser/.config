@@ -269,27 +269,6 @@ rules:
           - shell_command: open -a 'Stellar' || open 'https://www.reddit.com/r/neovim/'
           - *deactivate-leader
           - *remove-notice
-      # [?] (w/o shift, German keyboard) man page
-      - type: basic
-        from: { key_code: hyphen }
-        conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
-          - type: input_source_if
-            input_sources: [{ language: ^de$ }]
-        to:
-          - shell_command: open -g 'hammerspoon://focus-help'
-          - *deactivate-leader
-          - *remove-notice
-      # [esc]: System Monitor (btop)
-      - type: basic
-        from: { key_code: escape }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -g 'hammerspoon://focus-btop'
-          - *deactivate-leader
-          - *remove-notice
       # [space]: Emoji Picker
       - type: basic
         from: { key_code: spacebar }
