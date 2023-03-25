@@ -36,7 +36,7 @@ if ($.getenv("extra_folder_1")) pathsToSearch.push(getFullPath("extra_folder_1")
 if ($.getenv("extra_folder_2")) pathsToSearch.push(getFullPath("extra_folder_2"));
 
 let pathString = "";
-pathsToSearch.forEach(path => (pathString += '"' + path + '" '));
+pathsToSearch.forEach(path => (pathString += `"${path}" `));
 
 const jsonArray = app
 	.doShellScript(
@@ -46,7 +46,7 @@ const jsonArray = app
 	.split("\r")
 	.map(gitFolder => {
 		const localRepoFilePath = gitFolder.replace(/\.git\/?$/, "");
-		const repoID = localRepoFilePath.replace(/.*\//, "");
+		const repoID = localRepoFilePath.replace(/.*\/(.*)\//, "$1");
 
 		// Dirty Repo
 		const repoIsDirty = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
