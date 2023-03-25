@@ -92,7 +92,7 @@ local tsConfig = {
 		smart_rename = {
 			enable = true,
 			-- in LSP filetypes overwritten by LSP rename
-			keymaps = { smart_rename = "<leader>v" }, 
+			keymaps = { smart_rename = "<leader>v" },
 		},
 	},
 }
@@ -120,13 +120,15 @@ return {
 			require("nvim-treesitter.install").update { with_sync = true }
 		end,
 	},
-	{ -- description
-		"nvim-treesitter/playground",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-	},
-
 	-- Syntax Highlighting Plugins
 	{ "mityu/vim-applescript", ft = "applescript" },
 	{ "hail2u/vim-css3-syntax", ft = "css" }, -- https://github.com/tree-sitter/tree-sitter-css/issues/34
 	{ "MTDL9/vim-log-highlighting", ft = "log" },
+
+	-- { -- inspect treesitter related things
+	-- 	"nvim-treesitter/playground",
+	-- 	event = "BufEnter",
+	-- 	dependencies = "nvim-treesitter/nvim-treesitter",
+	-- 	init = function() vim.keymap.set("n", "<leader>t", ":TSPlaygroundToggle<CR>") end,
+	-- },
 }
