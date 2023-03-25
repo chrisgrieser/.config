@@ -6,6 +6,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- navic not that useful for css
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
+
+			require("nvim-navic").setup {
+				icons = { Object = " " },
+				separator = "  ",
+				depth_limit = 8,
+				depth_limit_indicator = "…",
+			}
 			require("nvim-navic").attach(client, bufnr)
 		end
 
@@ -18,13 +25,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 return {
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
-		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
-		opts = {
-			icons = { Object = " " },
-			separator = "  ",
-			depth_limit = 8,
-			depth_limit_indicator = "…",
-		},
+
+		-- event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
+		init = function()
+			require("nvim-navic").setup {
+				icons = { Object = " " },
+				separator = "  ",
+				depth_limit = 8,
+				depth_limit_indicator = "…",
+			}
+		end,
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",

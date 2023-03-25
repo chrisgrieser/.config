@@ -78,12 +78,18 @@ local function visualMultiCursorCount()
 	if not vim.b.VM_Selection then return "" end
 	local cursors = vim.b.VM_Selection.Regions
 	if not cursors then return "" end
-	return " "..tostring(#cursors)
+	return " " .. tostring(#cursors)
 	---@diagnostic enable: undefined-field
 end
 
+-- helper condition for other statusline items
+local function hasNoMultipleCursor()
+	---@diagnostic disable: undefined-field -- defined by visual multi plugin
+	return not (vim.b.VM_Selection and vim.b.VM_Selection.Regions)
+end
+
 local function clock()
-	if vim.opt.columns:get() < 120 then return "" end -- only show the clock when it covers the menubar clock
+	if vim.opt.columns:get() < 110 then return "" end -- only show the clock when it covers the menubar clock
 	local time = tostring(os.date()):sub(12, 16)
 	if os.time() % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
 	return time
@@ -110,19 +116,15 @@ function UpdateHarpoonIndicator()
 	local currentFile = vim.fn.expand("%")
 
 	for _, file in pairs(markedFiles) do
-		if file.filename == currentFile then
-			vim.b.harpoonMark = "ﯠ"
-		end
+		if file.filename == currentFile then vim.b.harpoonMark = "ﯠ" end
 	end
 end
 
-local function harpoonStatusline()
-	return vim.b.harpoonMark or ""
-end
+local function harpoonStatusline() return vim.b.harpoonMark or "" end
 
 -- so the harpoon state is only checked once on buffer enter and not every second
 -- also, the command is called on marking a new file
-vim.api.nvim_create_autocmd({"BufReadPost", "UiEnter"}, {
+vim.api.nvim_create_autocmd({ "BufReadPost", "UiEnter" }, {
 	pattern = "*",
 	callback = UpdateHarpoonIndicator,
 })
@@ -140,6 +142,10 @@ local function lsp_progress()
 	local task = messages[1].title or ""
 	task = task:gsub("^(%w+).*", "%1") -- only first word
 	return client .. progress .. "%% " .. task
+end
+
+local function navicWrapper()
+	return require("nvim-navic").get_location()
 end
 
 --------------------------------------------------------------------------------
@@ -172,17 +178,18 @@ local lualineConfig = {
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
 			{ require("funcs.quickfix").counter },
-			{ searchCounter },
+			{
+				searchCounter,
+				cond = hasNoMultipleCursor,
+			},
 			{ visualMultiCursorCount },
 			{
 				require("funcs.lsp-count").statusline,
 				color = { fg = "grey" },
 				cond = function()
 					local isSearching = vim.v.hlsearch == 0
-					---@diagnostic disable-next-line: undefined-field
-					local isMultiCursor = vim.b.VM_Selection and vim.b.VM_Selection.Regions
-					return not (isSearching or isMultiCursor)
-				end, -- don't show when searching
+					return not isSearching and hasNoMultipleCursor()
+				end,
 			},
 		},
 		lualine_x = {
@@ -205,14 +212,12 @@ local lualineConfig = {
 	winbar = {
 		lualine_a = {
 			{ clock, section_separators = topSeparators },
-		},
-		lualine_b = {
 			{
 				require("nvim-navic").get_location,
-				cond = require("nvim-navic").is_available,
-				section_separators = topSeparators,
+				section_separators = ,
 			},
 		},
+		lualine_b = {},
 		lualine_c = {
 			{ function() return " " end, cond = require("nvim-navic").is_available }, -- dummy to avoid bar flickering
 		},
