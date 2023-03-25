@@ -174,7 +174,7 @@ local function valeWord(mode)
 	Cmd.update()
 	Cmd.edit() -- reload file for diagnostics to take effect
 	Cmd.loadview(2)
-	vim.notify("暈Now " .. mode .. "ing:\n" .. word)
+	vim.notify(string.format('暈Now %sing:\n"%s"', mode, word))
 end
 Keymap("n", "zg", function() valeWord("accept") end, { desc = "暈Add to accepted words (vale)" })
 Keymap("n", "zw", function() valeWord("reject") end, { desc = "暈Add to rejected words (vale)" })
