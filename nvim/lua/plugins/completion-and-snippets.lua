@@ -122,9 +122,9 @@ local function cmpconfig()
 					require("luasnip").jump(1)
 					-- multi-cursor jump
 				elseif Fn.mode():find("[nvV]") then
-						fallback()
+					fallback()
 				else
-					vim.notify("No more jump forwards.")		
+					vim.notify("No more jump forwards.")
 				end
 			end, { "i", "s", "n", "x" }),
 			["<D-S-j>"] = cmp.mapping(function(fallback)
@@ -135,7 +135,7 @@ local function cmpconfig()
 				elseif Fn.mode():find("[nvV]") then
 					fallback()
 				else
-					vim.notify("No more jump backwards.")		
+					vim.notify("No more jump backwards.")
 				end
 			end, { "i", "s", "n", "x" }),
 
@@ -328,12 +328,10 @@ return {
 		"jcdickinson/codeium.nvim",
 		lazy = true, -- loaded by cmp
 		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
-		config = function()
-			require("codeium").setup {
-				config_path = vim.env.ICLOUD .. "/Dotfolder/private dotfiles/codium-api-key.json",
-				bin_path = vim.fn.stdpath("data") .. "/codeium",
-			}
-		end,
+		opts = {
+			config_path = vim.env.ICLOUD .. "/Dotfolder/private dotfiles/codium-api-key.json",
+			bin_path = vim.fn.stdpath("data") .. "/codeium",
+		},
 	},
 	{
 		"L3MON4D3/LuaSnip",
