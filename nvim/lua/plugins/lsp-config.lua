@@ -32,9 +32,7 @@ lspSettings.lua_ls = {
 		},
 		workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		-- libraries defined per-project via luarc.json location: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-		diagnostics = {
-			disable = { "trailing-space" },
-		},
+		diagnostics = { disable = { "trailing-space" } },
 		hint = {
 			enable = true,
 			setType = true,
@@ -96,10 +94,7 @@ lspSettings.eslint = {
 
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
 lspSettings.jsonls = {
-	json = {
-		validate = { enable = true },
-		format = { enable = false }, -- taken care of by prettier
-	},
+	json = { format = { enable = false } }, -- taken care of by prettier
 }
 
 -- https://github.com/redhat-developer/yaml-language-server#language-server-settings
@@ -109,16 +104,14 @@ lspSettings.yamlls = {
 
 --------------------------------------------------------------------------------
 
-lspFileTypes.bashls = { "sh", "zsh", "bash" } -- force lsp to work with zsh
-lspFileTypes.emmet_ls = { "css", "scss", "html" }
+-- Force lsp to work with zsh
+lspFileTypes.bashls = { "sh", "zsh", "bash" }
 
---------------------------------------------------------------------------------
-
--- Enable snippet capability for completion (nvim_cmp)
+-- Enable snippet capability for completion (for nvim_cmp)
 local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
 lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- Enable folding (nvim-ufo)
+-- Enable folding (for nvim-ufo)
 lspCapabilities.textDocument.foldingRange = {
 	dynamicRegistration = false,
 	lineFoldingOnly = true,
@@ -154,10 +147,8 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = function()
-			-- INFO plugin must be setup before lua lsp-config setup
-			require("neodev").setup {
-				library = { plugins = false },
-			}
+			-- INFO must be setup before lua lsp-config setup
+			require("neodev").setup { library = { plugins = false } }
 
 			-- LSP Server setup
 			for _, lsp in pairs(lsp_servers) do
