@@ -30,7 +30,7 @@ lspSettings.lua_ls = {
 			displayContext = 2,
 			postfix = ".",
 		},
-		workspace = { checkThirdParty = false },
+		workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		-- libraries defined per-project via luarc.json location: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
 		diagnostics = {
 			disable = { "trailing-space" },

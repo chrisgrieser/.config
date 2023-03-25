@@ -324,7 +324,7 @@ return {
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
 	},
-	{
+	{ -- AI completion
 		"jcdickinson/codeium.nvim",
 		lazy = true, -- loaded by cmp
 		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
@@ -333,7 +333,7 @@ return {
 			bin_path = vim.fn.stdpath("data") .. "/codeium",
 		},
 	},
-	{
+	{ -- Snippet Engine
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
