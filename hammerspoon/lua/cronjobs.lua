@@ -48,7 +48,7 @@ BiweeklyTimer = hs.timer
 		-- only run wednesday and saturday
 		if getWeekday() ~= "Wed" and getWeekday() ~= "Sat" then return end
 
-		PeripheryBatteryCheck("Drafts")
+		PeripheryBatteryCheck("Reminder")
 		hs.loadSpoon("EmmyLua")
 
 		Applescript([[

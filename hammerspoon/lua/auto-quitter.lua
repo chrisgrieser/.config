@@ -44,7 +44,6 @@ end):start()
 
 --------------------------------------------------------------------------------
 
----quit app, with the extra condition of Drafts requiring zero drafts
 ---@param app string name of the app
 local function quitter(app)
 	if app == "Finder" then

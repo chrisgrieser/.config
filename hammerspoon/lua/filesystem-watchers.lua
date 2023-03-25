@@ -80,17 +80,6 @@ SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	print("➡️ Download moved to File Hub.")
 end):start()
 
--- Drafts iCloud
-local draftsIcloud = os.getenv("HOME")
-	.. "/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/"
-DraftsIcloudWatcher = Pw(draftsIcloud, function(files)
-	for _, filePath in pairs(files) do
-		if filePath:sub(-3) ~= ".md" or filePath:find("Inbox") then return end
-		hs.execute("mv '" .. draftsIcloud .. "'/*.md '" .. FileHub .. "'")
-		print("➡️ Drafts doc moved to File Hub.")
-	end
-end):start()
-
 --------------------------------------------------------------------------------
 -- FROM FILE HUB
 

@@ -9,17 +9,6 @@ anchors:
         type: variable_unless
         name: LEADER_ACTIVE
         value: true
-        # IDs can be seen in the karabiner main app (devices tab)
-      - &not-apple-keyboard
-        type: device_unless
-        identifiers:
-          - vendor_id: 76 # = Apple
-            is_keyboard: true
-      - &is-apple-keyboard
-        type: device_if
-        identifiers:
-          - vendor_id: 76
-            is_keyboard: true
   - to:
       - &deactivate-leader
         set_variable:
@@ -39,18 +28,15 @@ anchors:
           text: "\U0001F53A Leader"
 #───────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: "\U0001F53A L-Ctrl (Non-Apple) / fn (Apple)"
+  - description: "\U0001F53A L-Ctrl"
     manipulators:
-      # non-apple keyboard
       - type: basic
         from: { key_code: left_control }
         to:
           - key_code: left_control
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 600
+        parameters: { basic.to_if_alone_timeout_milliseconds: 300 }
         conditions:
           - *leader-inactive
-          - *not-apple-keyboard
         to_if_alone:
           - key_code: left_control
           - *activate-leader
@@ -62,46 +48,11 @@ rules:
           - key_code: left_control
         conditions:
           - *leader-active
-          - *not-apple-keyboard
-          # Prevent footpedal from accidentally triggering twice.
-          - type: device_if
-            identifiers:
-              - is_pointing_device: false
         to_if_alone:
           - key_code: f19
           - *deactivate-leader
           - *remove-notice
-      # Apple Keyboard
-      - type: basic
-        description: Apple Keyboard
-        from: { key_code: fn }
-        to:
-          - key_code: fn
-        conditions:
-          - *leader-inactive
-          - *is-apple-keyboard
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 600
-        to_if_alone:
-          - key_code: fn
-          - *activate-leader
-          - *set-notice
-      - description: "2x Leader: F19"
-        type: basic
-        from: { key_code: fn }
-        to:
-          - key_code: fn
-        conditions:
-          - *leader-active
-          - *not-apple-keyboard
-        to_if_alone:
-          - key_code: f19
-          - *deactivate-leader
-          - *remove-notice
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "App Switcher Actions"
-    manipulators:
-      # Cancel (Esc/Hyper)
+      # Cancel (Hyper (Esc))
       - type: basic
         description: "Hyper (Esc): Leader Cancel"
         from: { key_code: caps_lock }
@@ -109,6 +60,9 @@ rules:
         to_if_alone:
           - *deactivate-leader
           - *remove-notice
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "App Switcher Actions"
+    manipulators:
       # [C]alendar: BusyCal
       - type: basic
         from: { key_code: c }
@@ -195,23 +149,12 @@ rules:
           - shell_command: open -a 'Mimestream'
           - *deactivate-leader
           - *remove-notice
-      # [b]rowser
+      # [B]rowser
       - type: basic
         from: { key_code: b }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Vivaldi'
-          - *deactivate-leader
-          - *remove-notice
-      # [B]rowser: re-open tab (Shift)
-      - type: basic
-        from: { key_code: b, modifiers: { mandatory: [shift] } }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Vivaldi'
-          - { key_code: vk_none, hold_down_milliseconds: 250 }
-          - key_code: t
-            modifiers: [command, shift]
           - *deactivate-leader
           - *remove-notice
       # [L]: Finder (mnemonic: File [L]ocation)
@@ -262,7 +205,7 @@ rules:
           - shell_command: open -a 'Alfred Preferences'
           - *deactivate-leader
           - *remove-notice
-      # [N]ews Reader: NetNewsWire/Inoreader
+      # [N]ews Reader (RSS)
       - type: basic
         from: { key_code: "n" }
         conditions: [*leader-active]
