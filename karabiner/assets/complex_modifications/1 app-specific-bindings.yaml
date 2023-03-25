@@ -622,11 +622,6 @@ rules:
         from: { key_code: s, modifiers: { mandatory: [command, control, shift, option] } }
         to:
           - { key_code: spacebar, modifiers: [command, option, control] }
-      # NEW Sidenote
-      - type: basic
-        from: { key_code: d, modifiers: { mandatory: [command, control, shift, option] } }
-        to:
-          - { key_code: n, modifiers: [command, option, control] }
       # up/down a note
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [control] } }

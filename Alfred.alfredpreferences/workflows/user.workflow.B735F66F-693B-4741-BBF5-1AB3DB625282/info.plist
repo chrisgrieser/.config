@@ -19,6 +19,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>26469DF4-1A9D-4A84-85DA-A42E21C9C5B2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -36,20 +62,29 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>68</integer>
 				<key>script</key>
-				<string></string>
+				<string>on run argv
+	set theList to "General"
+	set reminderText to argv as string
+	set inDays to 1
+	set dueDate to (current date) + inDays * (60 * 60 * 24)
+	tell application "Reminders"
+		tell (list theList) to make new reminder at end with properties {name:reminderText, allday due date: dueDate}
+		quit
+	end tell
+end run</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>.js</string>
+				<string></string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>6</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</string>
+			<string>26469DF4-1A9D-4A84-85DA-A42E21C9C5B2</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -81,6 +116,31 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>const content = Application("SideNotes").currentNote().text();
+Application("SideNotes").currentNote().delete();
+content // direct return</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>.js</string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -164,12 +224,8 @@
 				<integer>68</integer>
 				<key>script</key>
 				<string>function run(argv) {
-  var query = argv[0];
-
-  let app = new Application("SideNotes");
-  app.openWithId(query);
-
-  return query;
+  const noteId = argv[0];
+  Application("SideNotes").openWithId(noteId);
 }</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -193,7 +249,7 @@
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>search side notes</string>
 			<key>xpos</key>
@@ -201,8 +257,21 @@
 			<key>ypos</key>
 			<real>330</real>
 		</dict>
+		<key>26469DF4-1A9D-4A84-85DA-A42E21C9C5B2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>create reminder tmrw</string>
+			<key>xpos</key>
+			<real>385</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
 		<key>8B0FF1F7-5612-4F4E-B4F5-76241BFFF167</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>open side note</string>
 			<key>xpos</key>
@@ -212,6 +281,8 @@
 		</dict>
 		<key>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>Snooze Sidenote</string>
 			<key>xpos</key>
@@ -221,10 +292,14 @@
 		</dict>
 		<key>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>return note content &amp; create reminder</string>
 			<key>xpos</key>
-			<real>200</real>
+			<real>225</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>185</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
