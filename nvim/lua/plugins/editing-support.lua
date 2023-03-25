@@ -45,7 +45,7 @@ return {
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- useful for keymaps
-				rule("{", "},", "lua"):with_pair(), -- useful for lua tables
+				rule("= {", "},", "lua"):with_pair(), -- add trailing comma for lua tables
 				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
@@ -55,8 +55,8 @@ return {
 					:use_regex(true)
 					:set_end_pair_length(2),
 
-				-- WARN adding a rule with <space> as trigger will disable space
-				-- triggering `:abbrev`
+				-- WARN adding a rule with <space> as *ending* trigger will disable space
+				-- triggering `:abbrev` abbreviations
 			}
 
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
