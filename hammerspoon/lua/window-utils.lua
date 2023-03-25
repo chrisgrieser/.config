@@ -50,19 +50,6 @@ end
 --------------------------------------------------------------------------------
 -- SIDEBARS
 
--- requires these two helper actions for Drafts installed:
--- https://directory.getdrafts.com/a/2BS & https://directory.getdrafts.com/a/2BR
----@param draftsWin hs.window
-local function toggleDraftsSidebar(draftsWin)
-	RunWithDelays({ 0.05, 0.2 }, function()
-		local drafts_w = draftsWin:frame().w
-		local screen_w = draftsWin:screen():frame().w
-		local mode = drafts_w / screen_w > 0.6 and "show" or "hide"
-		OpenLinkInBackground("drafts://x-callback-url/runAction?text=&action=" .. mode .. "-sidebar")
-	end)
-end
-
--- requires Obsidian Sidebar Toggler Plugin https://github.com/chrisgrieser/obsidian-sidebar-toggler
 ---@param obsiWin hs.window
 local function toggleObsidianSidebar(obsiWin)
 	RunWithDelays({ 0.05, 0.2 }, function()
@@ -86,12 +73,7 @@ end
 ---@param win hs.window
 function ToggleWinSidebar(win)
 	if not win or not win:application() then return end
-	local appOfWin = win:application():name()
-	if appOfWin == "Drafts" then
-		toggleDraftsSidebar(win)
-	elseif appOfWin == "Obsidian" then
-		toggleObsidianSidebar(win)
-	end
+	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win) end
 end
 
 --------------------------------------------------------------------------------
@@ -151,7 +133,9 @@ function MoveResize(win, pos)
 		Wait(0.1)
 		i = i + 1
 	end
-	ToggleWinSidebar(win) -- has to come after resizing
+
+	-- has to come after resizing
+	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win) end
 end
 
 --------------------------------------------------------------------------------
@@ -221,7 +205,6 @@ end
 
 -- Open Apps always at Mouse Screen
 Wf_appsOnMouseScreen = Wf.new({
-	"Drafts",
 	"Vivaldi",
 	"Mimestream",
 	"BetterTouchTool",
