@@ -211,7 +211,6 @@ Wf_appsOnMouseScreen = Wf.new({
 	"Obsidian",
 	"Alacritty",
 	"alacritty",
-	"Warp",
 	"Slack",
 	"IINA",
 	"Hammerspoon",
@@ -219,7 +218,7 @@ Wf_appsOnMouseScreen = Wf.new({
 	"Discord",
 	"Neovide",
 	"neovide",
-	"Espanso",
+	"espanso",
 	"BusyCal",
 	"Alfred Preferences",
 	"YouTube",
@@ -299,7 +298,6 @@ end
 --------------------------------------------------------------------------------
 
 -- Hotkeys
-Hotkey({}, "f6", moveCurWinToOtherDisplay) -- for apple keyboard
 Hotkey({}, "home", homeAction)
 Hotkey({}, "end", endAction)
 Hotkey(Hyper, "right", function() MoveResize(hs.window.focusedWindow(), RightHalf) end)
