@@ -534,7 +534,7 @@ Keymap("n", "<leader>gd", function()
 		if query ~= "" then query = string.format(" -G'%s'", query) end
 		Cmd("DiffviewFileHistory %" .. query)
 		Cmd.wincmd("w") -- go directly to file window
-		Cmd.wincmd("|") -- maximize
+		Cmd.wincmd("|") -- maximize it
 	end)
 end, { desc = " File History (Diffview)" })
 
