@@ -320,7 +320,7 @@
 	<key>description</key>
 	<string>OCR, Search, and other Utilities</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>Drafts Utilities</string>
 	<key>objects</key>
