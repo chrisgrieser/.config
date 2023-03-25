@@ -204,42 +204,36 @@ Autocmd("FileType", {
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
+-- RE[F]ACTORING
 
--- Bulk Processing
-Keymap(
-	"n",
-	"<leader>fc",
-	[[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]],
-	{ desc = "弄 :substitute cword" }
-)
-Keymap(
-	"n",
-	"<leader>fk",
-	[[:%s/\(.*\)/\1/g]]..("<Left>"):rep(11),
-	{ desc = "弄 :substitute kirby" }
-)
-Keymap({"n", "x"}, "<leader>ff", ":s///g<Left><Left><Left>", { desc = "弄 :substitute" })
-Keymap(
-	{ "n", "x" },
-	"<leader>fs",
-	function() require("ssr").open() end,
-	{ desc = "弄 Structural search & replace" }
-)
-Keymap("n", "<leader>fn", ":%normal ", { desc = "弄 :normal" })
+Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "弄 :s cword" })
+Keymap("n", "<leader>fk", [[:%s/\(.*\)/\1/g]] .. ("<Left>"):rep(10), { desc = "弄 :s kirby" })
+Keymap("x", "<leader>fk", [[:s/\(.*\)/\1/g]] .. ("<Left>"):rep(10), { desc = "弄 :s kirby" })
+Keymap("n", "<leader>ff", ":%s///g<Left><Left><Left>", { desc = "弄 :s" })
+Keymap("x", "<leader>ff", ":s///g<Left><Left><Left>", { desc = "弄 :s" })
+
+Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc =" 弄 :s cword" })
+Keymap("n", "<leader>fn", ":g//normal "..("<Left>"):rep(8), { desc = "弄 :g - normal" })
 Keymap("x", "<leader>fn", ":normal ", { desc = "弄 :normal" })
+Keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "弄 :g – delete" })
 
--- Refactor
+-- SSRbbbb
+Keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "弄 SSR" })
+-- Refactoring.nvim
 -- stylua: ignore start
-Keymap({ "n", "x" }, "<leader>fi", function() require("refactoring").refactor("Inline Variable") end, { desc = "弄 Inline Variable" })
-Keymap({ "n", "x" }, "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, { desc = "弄 Extract Variable" })
+Keymap({ "n", "x" }, "<leader>fi", function() require("refactoring").refactor("Inline Variable") end, { desc = "弄 Inline Var" })
+Keymap({ "n", "x" }, "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, { desc = "弄 Extract Var" })
+Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("Extract Function") end, { desc = "弄 Extract Func" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
 
 -- Undo
-Keymap({ "n", "x" }, "U", "<C-r>", { desc = "碑 redo" }) -- redo
-Keymap("n", "<C-u>", qol.undoDuration, { desc = "碑 undo specific durations" })
-Keymap("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "碑 Undotree" })
+Keymap({ "n", "x" }, "U", "<C-r>", { desc = "淚 Redo" }) -- redo
+Keymap("n", "<leader>ud", qol.undoDuration, { desc = "碑 Undo specific durations" })
+Keymap("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "碑 Undotree" })
+Keymap("n", "<leader>up", function () Cmd.later(tostring(vim.opt.undolevels:get())) end, { desc = " Redo to Present" })
+Keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = " 淚 Reset Hunk" })
 
 -- Logging & Debugging
 -- stylua: ignore start
@@ -655,5 +649,3 @@ for _, key in ipairs { "x", "h", "l", "e", "b", "w" } do
 end
 
 --------------------------------------------------------------------------------
-
-

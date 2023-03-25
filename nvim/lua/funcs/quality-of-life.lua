@@ -67,14 +67,12 @@ function M.undoDuration()
 	local secsPassed = now - vim.b.timeOpened
 	local minsPassed = math.floor(secsPassed / 60)
 	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
-	local undoOptionsPresented = { " present", resetLabel, "15m", "1h", "24h" }
+	local undoOptionsPresented = {  resetLabel, "15m", "1h", "24h" }
 
 	vim.ui.select(undoOptionsPresented, { prompt = "Undo…" }, function(choice)
 		if not choice then return end
 		if choice:find("ago") then
 			cmd.earlier(secsPassed .. "s")
-		elseif choice:find("present") then
-			cmd.later(tostring(vim.opt.undolevels:get())) -- redo as much as there are undolevels
 		else
 			cmd.earlier(choice)
 		end
