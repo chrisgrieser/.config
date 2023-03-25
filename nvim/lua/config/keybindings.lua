@@ -224,8 +224,8 @@ Keymap("x", "<leader>n", ":normal ", { desc = "弄 :normal" })
 
 -- Refactor
 -- stylua: ignore start
-Keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("弄 Inline Variable") end, { desc = "弄 Inline Variable" })
-Keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("弄 Extract Variable") end, { desc = "弄 Extract Variable" })
+Keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "弄 Inline Variable" })
+Keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Extract Variable") end, { desc = "弄 Extract Variable" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
