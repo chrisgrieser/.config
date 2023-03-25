@@ -6,13 +6,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- navic not that useful for css
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
-
-			require("nvim-navic").setup {
-				icons = { Object = " " },
-				separator = "  ",
-				depth_limit = 8,
-				depth_limit_indicator = "…",
-			}
 			require("nvim-navic").attach(client, bufnr)
 		end
 
@@ -25,16 +18,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 return {
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
-
-		-- event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
-		init = function()
-			require("nvim-navic").setup {
-				icons = { Object = " " },
-				separator = "  ",
-				depth_limit = 8,
-				depth_limit_indicator = "…",
-			}
-		end,
+		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
+		opts = {
+			icons = { Object = " " },
+			separator = "  ",
+			depth_limit = 8,
+			depth_limit_indicator = "…",
+		},
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
@@ -72,7 +62,7 @@ return {
 		event = "LspAttach",
 		opts = {
 			post_hook = function(results)
-				-- if more than one file is changed, save all
+				-- if more than one file is changed, save all buffers
 				local filesChanged = #vim.tbl_keys(results.changes)
 				if filesChanged > 1 then vim.cmd.wall() end
 			end,

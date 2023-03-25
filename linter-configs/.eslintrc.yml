@@ -51,7 +51,7 @@ rules:
     - min: 4
       max: 25
       properties: never
-      exceptions: [x, y, i, j, id, min, max, app, str, int, out, a, b, num, url, run, arr, tag, ext, cmd]
+      exceptions: [x, y, i, j, id, min, max, app, str, int, out, a, b, num, url, run, tag, ext, cmd, key]
   no-underscore-dangle: warn
   no-shadow:
     - warn

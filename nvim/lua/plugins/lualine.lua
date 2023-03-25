@@ -132,8 +132,8 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "UiEnter" }, {
 --------------------------------------------------------------------------------
 
 -- simple alternative to fidget.nvim
--- via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
 local function lsp_progress()
+	-- via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
 	local messages = vim.lsp.util.get_progress_messages()
 	if #messages == 0 then return "" end
 	local client = messages[1].name and messages[1].name .. ": " or ""
@@ -144,8 +144,18 @@ local function lsp_progress()
 	return client .. progress .. "%% " .. task
 end
 
-local function navicWrapper()
+-- wrapper to not require navic directly
+local function navicBreadcrumbs()
+	if not require("nvim-navic").is_available() then return "" end
 	return require("nvim-navic").get_location()
+end
+
+-- return available plugin updates when above a certain threshold
+local function pluginUpdates()
+	if not require("lazy.status").has_updates() then return "" end
+	local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
+	if numberOfUpdates < UpdateCounterThreshhold then return "" end
+	return require("lazy.status").updates
 end
 
 --------------------------------------------------------------------------------
@@ -187,8 +197,8 @@ local lualineConfig = {
 				require("funcs.lsp-count").statusline,
 				color = { fg = "grey" },
 				cond = function()
-					local isSearching = vim.v.hlsearch == 0
-					return not isSearching and hasNoMultipleCursor()
+					local isNotSearching = vim.v.hlsearch == 0
+					return isNotSearching and hasNoMultipleCursor()
 				end,
 			},
 		},
@@ -212,28 +222,18 @@ local lualineConfig = {
 	winbar = {
 		lualine_a = {
 			{ clock, section_separators = topSeparators },
-			{
-				require("nvim-navic").get_location,
-				section_separators = ,
-			},
 		},
-		lualine_b = {},
+		lualine_b = {
+			{ navicBreadcrumbs, section_separators = topSeparators },
+		},
 		lualine_c = {
 			{ function() return " " end, cond = require("nvim-navic").is_available }, -- dummy to avoid bar flickering
 		},
 		lualine_x = {
-			{
-				require("lazy.status").updates,
-				cond = function()
-					if not require("lazy.status").has_updates() then return false end
-					local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
-					return numberOfUpdates >= UpdateCounterThreshhold
-				end,
-				color = "NonText",
-			},
+			{ pluginUpdates, color = "NonText" },
 		},
 		-- INFO dap and recording status defined in the respective plugin configs
-		-- for lualine_y and lualine_z
+		-- for lualine_y and lualine_z for their lazy loading
 	},
 	options = {
 		refresh = { statusline = 1000 },
@@ -250,11 +250,7 @@ local lualineConfig = {
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,
 		disabled_filetypes = {
-			statusline = {},
-			winbar = {
-				"toggleterm",
-				"gitcommit",
-			},
+			winbar = { "toggleterm", "gitcommit" },
 		},
 	},
 }
@@ -264,5 +260,5 @@ local lualineConfig = {
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "VimEnter",
-	config = function() require("lualine").setup(lualineConfig) end,
+	opts = lualineConfig,
 }
