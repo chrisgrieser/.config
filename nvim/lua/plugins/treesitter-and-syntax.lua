@@ -25,6 +25,7 @@ local tsConfig = {
 		"jsonc",
 		"html",
 		"help", -- vim help files
+		"query", -- treesitter query language
 	},
 	auto_install = false, -- install missing parsers when entering a buffer
 
@@ -79,6 +80,9 @@ local tsConfig = {
 	-- TREESITTER PLUGINS
 	endwise = { enable = true },
 	rainbow = { enable = true },
+	playground = {
+		enable = true,
+	},
 	refactor = {
 		highlight_definitions = {
 			enable = true,
@@ -87,7 +91,8 @@ local tsConfig = {
 		highlight_current_scope = { enable = false },
 		smart_rename = {
 			enable = true,
-			keymaps = { smart_rename = "<leader>v" },
+			-- in LSP filetypes overwritten by LSP rename
+			keymaps = { smart_rename = "<leader>v" }, 
 		},
 	},
 }
@@ -114,6 +119,10 @@ return {
 			-- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
 			require("nvim-treesitter.install").update { with_sync = true }
 		end,
+	},
+	{ -- description
+		"nvim-treesitter/playground",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 
 	-- Syntax Highlighting Plugins

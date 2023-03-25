@@ -45,6 +45,7 @@ return {
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- useful for keymaps
+				rule("{", "},", "lua"):with_pair(), -- useful for lua tables
 				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
