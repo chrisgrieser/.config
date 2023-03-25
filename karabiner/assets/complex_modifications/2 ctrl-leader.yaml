@@ -171,14 +171,6 @@ rules:
           - shell_command: osascript -e 'tell application "Neovide" to activate'
           - *deactivate-leader
           - *remove-notice
-      # [j]: Drafts (mnemonic: Jot down)
-      - type: basic
-        from: { key_code: j }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Drafts'
-          - *deactivate-leader
-          - *remove-notice
       # [S]lack
       - type: basic
         from: { key_code: s }
