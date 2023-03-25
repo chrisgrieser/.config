@@ -48,9 +48,8 @@ local function workLayout()
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder", "BetterTouchTool" }
 	require("lua.private").closer()
 	if not isWeekend() then OpenApp("Slack") end
-	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "Drafts" }
+	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter" }
 	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
-	OpenLinkInBackground("drafts://x-callback-url/runAction?text=&action=show-sidebar")
 	Wait(0.7)
 
 	-- layout apps
@@ -58,7 +57,6 @@ local function workLayout()
 	local layout = {
 		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		{ "Drafts", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
 		{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
 	}
@@ -67,7 +65,6 @@ local function workLayout()
 	-- setup apps
 	TwitterScrollUp()
 	RestartApp("AltTab")
-	RunWithDelays(0.5, function() App("Drafts"):activate() end)
 
 	print("🔲 WorkLayout: done")
 end
@@ -81,7 +78,6 @@ local function movieLayout()
 
 	OpenApp { "YouTube", "BetterTouchTool" }
 	QuitApp {
-		"Drafts",
 		"Neovide",
 		"neovide",
 		"Slack",

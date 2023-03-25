@@ -55,7 +55,6 @@ local function toggleDarkMode()
 	-- stylua: ignore
 	hs.execute( 'BG_COLOR="'..sketchybg..'" ; FONT_COLOR="'..sketchyfont..'" ; '..
 	[[sketchybar --bar color="$BG_COLOR" \
-		--set drafts icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--set sync-indicator icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--set clock icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--set weather icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \

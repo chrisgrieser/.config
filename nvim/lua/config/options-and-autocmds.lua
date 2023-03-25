@@ -53,7 +53,7 @@ opt.pumwidth = 15 -- min width popup menu
 
 -- Spelling
 opt.spell = false -- off, since using vale+null-ls for the lsp-integration
-opt.spelllang = "en_us" -- still used for `z=`
+opt.spelllang = "en_us" -- still used for `z=` and `1z=`
 
 -- Split
 opt.splitright = true -- vsplit right instead of left
@@ -282,17 +282,3 @@ for _, ft in pairs(ftWithSkeletons) do
 end
 
 --------------------------------------------------------------------------------
-
--- syntax highlighting in code blocks
-vim.g.markdown_fenced_languages = {
-	"css",
-	"python",
-	"py=python",
-	"yaml",
-	"json",
-	"lua",
-	"javascript",
-	"js=javascript",
-	"bash",
-	"sh=bash",
-}

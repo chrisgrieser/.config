@@ -18,8 +18,7 @@ Thresholds = {
 	Lire = 2,
 	["Alfred Preferences"] = 15,
 	["System Settings"] = 2,
-	Drafts = 5, -- has extra condition of zero active Draft (see `quitter()`)
-	Finder = 10, -- only removes windows
+	Finder = 10, -- only closes windows
 }
 
 --------------------------------------------------------------------------------
@@ -45,24 +44,10 @@ end):start()
 
 --------------------------------------------------------------------------------
 
----OPTIONAL extra utility for Drafts.app
----@return number number of currently active Drafts
-local function getDraftsCount()
-	local exclude = IsAtOffice() and "home" or "office"
-	local stdout, _ = hs.execute(
-		[[python3 "$HOME/.config/sketchybar/numberOfDrafts.py" "tasklist" "]] .. exclude .. [["]]
-	)
-	local count = tonumber(stdout)
-	if not stdout or not count then return 0 end
-	return count
-end
-
 ---quit app, with the extra condition of Drafts requiring zero drafts
 ---@param app string name of the app
 local function quitter(app)
-	if app == "Drafts" and getDraftsCount() > 0 then
-		return
-	elseif app == "Finder" then
+	if app == "Finder" then
 		for _, win in pairs(App("Finder"):allWindows()) do
 			win:close()	
 		end

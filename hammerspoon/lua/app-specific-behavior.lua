@@ -286,21 +286,6 @@ HighlightsAppWatcher = Aw.new(function(appName, eventType, appObject)
 end):start()
 
 --------------------------------------------------------------------------------
-
--- DRAFTS
--- - set workspace
--- - update counter in sketchybar
-DraftsWatcher = Aw.new(function(appName, event, appObj)
-	if appName == "Drafts" and (event == Aw.launching or event == Aw.activated) then
-		local workspace = IsAtOffice() and "Office" or "Home"
-		AsSoonAsAppRuns(appObj, function()
-			appObj:selectMenuItem { "Workspaces", workspace }
-			hs.execute("sketchybar --trigger drafts-counter-update")
-		end)
-	end
-end):start()
-
---------------------------------------------------------------------------------
 -- SCRIPT EDITOR
 Wf_script_editor = Wf
 	.new("Script Editor")
