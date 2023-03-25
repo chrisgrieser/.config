@@ -1,17 +1,19 @@
 #!/usr/bin/env osascript -l JavaScript
 
-//──────────────────────────────────────────────────────────────────────────────
 ObjC.import("stdlib");
+const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
 
-  const folderID = $.getenv("new_note_folder");
-  const text = $.getenv("text");
-  const isPath = $.getenv("isPath");
-  const app = Application("SideNotes");
+function run(argv) {
+	const input = argv[0];
+	const sidenotes = Application("SideNotes");
+	const folder = sidenotes.folders.byName($.getenv("new_note_folder"));
+	const isPath = fileExists(input);
 
-  app.createNote({
-    folder: app.folders.whose({ id: folderID })[0](),
-    text: text,
-    ispath: isPath,
-  });
+	sidenotes.createNote({
+		folder: folder,
+		text: input,
+		ispath: isPath,
+	});
 
-  return text; // direct return for notification
+	return input; // for notification
+}

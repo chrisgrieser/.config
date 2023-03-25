@@ -84,12 +84,6 @@ sketchybar \
 	script="$PLUGIN_DIR/weather.sh" \
 	icon.y_offset=-1 \
 	\
-	--add item drafts $first_row \
-	script="$PLUGIN_DIR/drafts-counter.sh" \
-	--add event drafts-counter-update \
-	--subscribe drafts drafts-counter-update \
-	--subscribe drafts system_woke \
-	\
 	--add alias "$ram_bar_item" $second_row \
 	--set "$ram_bar_item" width=38 \
 	--add alias "$cpu_bar_item" $second_row \

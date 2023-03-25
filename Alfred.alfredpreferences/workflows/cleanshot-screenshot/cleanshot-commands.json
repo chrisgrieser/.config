@@ -31,11 +31,6 @@
 			"uid": "5"
 		},
 		{
-			"title": "OCR Screenshot into Drafts",
-			"arg": "drafts",
-			"uid": "6"
-		},
-		{
 			"title": "Screen Recording",
 			"arg": "cleanshot://record-screen",
 			"uid": "8"
