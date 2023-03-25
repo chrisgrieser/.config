@@ -13,34 +13,31 @@ return {
 			)
 			vim.fn.system(symlinkCmd)
 		end,
-		config = function()
-			require("harpoon").setup {
-				menu = {
-					borderchars = BorderChars,
-					width = 50,
-					height = 8,
-				},
-			}
-		end,
+		opts = {
+			menu = {
+				borderchars = BorderChars,
+				width = 50,
+				height = 8,
+			},
+		},
 	},
 	{ -- change cwd per project
 		"ahmedkhalf/project.nvim",
 		event = "VimEnter",
-		config = function()
-			require("project_nvim").setup {
-				detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp
-				exclude_dirs = { "node_modules", "build", "dist" },
-				datapath = VimDataDir,
-				patterns = {
-					".git",
-					"manifest.json", -- node
-					"info.plist", -- Alfred
-					".stylua.toml", -- lua
-					".harpoon", -- manually marked
-					"=File Hub", 
-				},
-			}
-		end,
+		main = "project_nvim", -- main module name needed
+		opts = {
+			detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp
+			exclude_dirs = { "node_modules", "build", "dist" },
+			datapath = VimDataDir,
+			patterns = {
+				".git",
+				"manifest.json", -- node
+				"info.plist", -- Alfred
+				".stylua.toml", -- lua
+				".harpoon", -- manually marked
+				"=File Hub",
+			},
+		},
 	},
 	{ -- convenience file operations
 		"chrisgrieser/nvim-genghis",

@@ -126,11 +126,7 @@ return {
 	{
 
 		"jayp0521/mason-null-ls.nvim",
-		lazy = true, 
-		config = function()
-			require("mason-null-ls").setup {
-				ensure_installed = lintersAndFormatters,
-			}
-		end,
+		lazy = true,
+		opts = { ensure_installed = lintersAndFormatters },
 	},
 }

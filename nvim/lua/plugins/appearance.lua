@@ -13,7 +13,7 @@ return {
 	{ -- highlight function args
 		"m-demare/hlargs.nvim",
 		event = "VeryLazy",
-		config = function() require("hlargs").setup() end,
+		config = true,
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- rainbow brackets
@@ -24,43 +24,41 @@ return {
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",
-		config = function()
-			require("indent_blankline").setup {
-				show_current_context = true, -- = active indent
-				-- context_char = "┃" -- thicker line for active indent
-				use_treesitter = true,
-				filetype_exclude = { "undotree", "help", "man", "lspinfo", "" },
-			}
-		end,
+		opts = {
+			show_current_context = true, -- = active indent
+			-- context_char = "┃" -- thicker line for active indent
+			use_treesitter = true,
+			filetype_exclude = { "undotree", "help", "man", "lspinfo", "" },
+		},
 	},
 	{ -- filetype-icons for Telescope and Lualine
 		"nvim-tree/nvim-web-devicons",
 		lazy = true, -- loaded by other plugins
-		config = function()
-			require("nvim-web-devicons").setup {
-				override = {
-					applescript = {
-						icon = "",
-						color = "#7f7f7f",
-						name = "Applescript",
-					},
+		opts = {
+			override = {
+				applescript = {
+					icon = "",
+					color = "#7f7f7f",
+					name = "Applescript",
 				},
-			}
-		end,
+				lazy = {
+					icon = "",
+					name = "Lazy",
+				},
+			},
+		},
 	},
 	{ -- Scrollbar, also shows search matches and git signs
 		"lewis6991/satellite.nvim",
 		event = "VeryLazy",
-		config = function()
-			require("satellite").setup {
-				winblend = 60, -- winblend = transparency
-				handlers = {
-					-- FIX displaying marks creates autocmd-mapping of things with m,
-					-- making m-bindings infeasable
-					marks = { enable = false },
-				},
-			}
-		end,
+		opts = {
+			winblend = 60, -- winblend = transparency
+			handlers = {
+				-- FIX displaying marks creates autocmd-mapping of things with m,
+				-- making m-bindings infeasable
+				marks = { enable = false },
+			},
+		},
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
@@ -102,52 +100,47 @@ return {
 		"lukas-reineke/headlines.nvim",
 		ft = "markdown", -- can work in other fts, but I only use it in markdown
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		config = function()
-			require("headlines").setup {
-				markdown = {
-					fat_headlines = true,
-					fat_headline_upper_string = "",
-					fat_headline_lower_string = "▀",
-				},
-			}
-		end,
+		opts = {
+			markdown = {
+				fat_headlines = true,
+				fat_headline_upper_string = "",
+				fat_headline_lower_string = "▀",
+			},
+		},
 	},
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
-		config = function()
-			local gitCommitMsgLength = 50 -- make dressing as long as git commit messages
-			require("dressing").setup {
-				input = {
-					insert_only = false, -- enable normal mode
+		opts = {
+			input = {
+				insert_only = false, -- enable normal mode
+				border = BorderStyle,
+				relative = "win",
+				max_width = 50, -- length of git commit message as visual guide
+				min_width = 50,
+				win_options = {
+					sidescrolloff = 0,
+					winblend = 0, -- weird shining through
+				},
+			},
+			select = {
+				backend = { "telescope", "builtin" }, -- Priority list of vim.select implementations
+				trim_prompt = true, -- Trim trailing `:` from prompt
+				builtin = {
 					border = BorderStyle,
-					relative = "win",
-					max_width = gitCommitMsgLength,
-					min_width = gitCommitMsgLength,
-					win_options = {
-						sidescrolloff = 0,
-						winblend = 0, -- weird shining through
-					},
+					relative = "cursor",
+					max_width = 80,
+					min_width = 20,
+					max_height = 20,
+					min_height = 4,
+					win_options = { winblend = 0 }, -- weird shining through
 				},
-				select = {
-					backend = { "telescope", "builtin" }, -- Priority list of vim.select implementations
-					trim_prompt = true, -- Trim trailing `:` from prompt
-					builtin = {
-						border = BorderStyle,
-						relative = "cursor",
-						max_width = 80,
-						min_width = 20,
-						max_height = 20,
-						min_height = 4,
-						win_options = { winblend = 0 }, -- weird shining through
-					},
-					-- code actions use builtin for quicker picking, otherwise use
-					-- telescope
-					get_config = function(opts)
-						if opts.kind == "codeaction" then return { backend = "builtin" } end
-					end,
-				},
-			}
-		end,
+				-- code actions use builtin for quicker picking, otherwise use
+				-- telescope
+				get_config = function(opts)
+					if opts.kind == "codeaction" then return { backend = "builtin" } end
+				end,
+			},
+		},
 	},
 }

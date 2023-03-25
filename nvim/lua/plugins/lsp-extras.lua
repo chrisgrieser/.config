@@ -19,61 +19,53 @@ return {
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
-		config = function()
-			require("nvim-navic").setup {
-				icons = { Object = " " },
-				separator = "  ",
-				depth_limit = 8,
-				depth_limit_indicator = "…",
-			}
-		end,
+		opts = {
+			icons = { Object = " " },
+			separator = "  ",
+			depth_limit = 8,
+			depth_limit_indicator = "…",
+		},
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
-		config = function()
-			require("lsp_signature").setup {
-				floating_window = false,
-				hint_prefix = "﬍ ",
-				hint_scheme = "NonText", -- highlight group
-			}
-		end,
+		opts = {
+			floating_window = false,
+			hint_prefix = "﬍ ",
+			hint_scheme = "NonText", -- highlight group
+		},
 	},
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim", -- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		lazy = true, -- required in attach function
-		config = function()
-			require("lsp-inlayhints").setup {
-				inlay_hints = {
-					parameter_hints = {
-						show = true,
-						prefix = " ",
-						remove_colon_start = true,
-						remove_colon_end = true,
-					},
-					type_hints = {
-						show = true,
-						prefix = "   ",
-						remove_colon_start = true,
-						remove_colon_end = true,
-					},
-					only_current_line = true,
-					highlight = "NonText", -- highlight group
+		opts = {
+			inlay_hints = {
+				parameter_hints = {
+					show = true,
+					prefix = " ",
+					remove_colon_start = true,
+					remove_colon_end = true,
 				},
-			}
-		end,
+				type_hints = {
+					show = true,
+					prefix = "   ",
+					remove_colon_start = true,
+					remove_colon_end = true,
+				},
+				only_current_line = true,
+				highlight = "NonText", -- highlight group
+			},
+		},
 	},
 	{ -- better LSP rename
 		"smjonas/inc-rename.nvim",
 		event = "LspAttach",
-		config = function()
-			require("inc_rename").setup {
-				post_hook = function(results)
-					-- if more than one file is changed, save all
-					local filesChanged = #vim.tbl_keys(results.changes)
-					if filesChanged > 1 then vim.cmd.wall() end
-				end,
-			}
-		end,
+		opts = {
+			post_hook = function(results)
+				-- if more than one file is changed, save all
+				local filesChanged = #vim.tbl_keys(results.changes)
+				if filesChanged > 1 then vim.cmd.wall() end
+			end,
+		},
 	},
 }
