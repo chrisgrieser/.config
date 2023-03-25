@@ -1,5 +1,4 @@
 #!/usr/bin/env osascript -l JavaScript
-/* eslint-disable complexity */
 function run() {
 	ObjC.import("stdlib");
 	const app = Application.currentApplication();
@@ -17,11 +16,12 @@ function run() {
 	const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 
 	const jsonArray = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`))
-		.filter(item => !item.fork)
 		.sort((a, b) => {
-			// sort archived at the bottom, then sort by stars
-			if (a.archived && !b.archived) return 1;
-			if (!a.archived && b.archived) return -1;
+			// sort archived and forks to the bottom, then sort by stars
+			if (a.fork && !b.fork) return 1;
+			else if (!a.fork && b.fork) return -1;
+			else if (a.archived && !b.archived) return 1;
+			else if (!a.archived && b.archived) return -1;
 			return b.stargazers_count - a.stargazers_count
 		})
 		.map(item => {
@@ -34,6 +34,7 @@ function run() {
 
 			let info = "";
 			if (item.archived) info += "🗄️ ";
+			if (item.fork) info += "[Fork] ";
 			if (stars > 0) info += `⭐ ${stars}  `;
 			if (issues > 0) info += `🟢 ${issues}  `;
 			if (forks > 0) info += `🍴 ${forks}  `;

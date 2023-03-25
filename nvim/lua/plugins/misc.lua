@@ -20,7 +20,7 @@ return {
 				pattern = "undotree",
 				callback = function()
 					vim.keymap.set("n", "<D-w>", ":UndotreeToggle<CR>", { buffer = true })
-					vim.opt_local.listchars = "space: "
+					vim.opt_local.listchars:append("space: ")
 				end,
 			})
 		end,
@@ -28,27 +28,24 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		config = function()
-			vim.opt.timeoutlen = 600 -- duration until which-key is shown
-			require("which-key").setup {
-				plugins = {
-					presets = { motions = false },
-				},
-				triggers_blacklist = {
-					n = { "y" }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
-				},
-				hidden = { "<Plug>" },
-				window = {
-					border = { "", "─", "", "" }, -- no border to the side to save space
-					padding = { 0, 0, 0, 0 },
-					margin = { 0, 0, 0, 0 },
-				},
-				layout = { -- of the columns
-					height = { min = 4, max = 15 },
-					width = { min = 30, max = 33 },
-					spacing = 1,
-				},
-			}
-		end,
+		opts = {
+			plugins = {
+				presets = { motions = false },
+			},
+			triggers_blacklist = {
+				n = { "y" }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
+			},
+			hidden = { "<Plug>" },
+			window = {
+				border = { "", "─", "", "" }, -- no border to the side to save space
+				padding = { 0, 0, 0, 0 },
+				margin = { 0, 0, 0, 0 },
+			},
+			layout = { -- of the columns
+				height = { min = 4, max = 15 },
+				width = { min = 30, max = 33 },
+				spacing = 1,
+			},
+		},
 	},
 }

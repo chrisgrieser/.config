@@ -15,7 +15,7 @@ return {
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
 		dev = true,
-		lazy = true,
+		lazy = true, -- loaded by keybinds
 	},
 	{ -- automatically set right indent for file
 		"Darazaki/indent-o-matic",
