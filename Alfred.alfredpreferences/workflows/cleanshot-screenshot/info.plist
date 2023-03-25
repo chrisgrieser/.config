@@ -90,7 +90,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>ss</string>
+				<string>cs</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -110,7 +110,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Screenshot…</string>
+				<string>Clean Shot…</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>
