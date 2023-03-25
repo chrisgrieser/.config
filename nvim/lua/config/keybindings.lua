@@ -205,27 +205,33 @@ Autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
--- search & replace
+-- Bulk Processing
 Keymap(
 	"n",
-	"<leader>f",
+	"<leader>fc",
 	[[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]],
-	{ desc = "弄 :substitute" }
+	{ desc = "弄 :substitute cword" }
 )
-Keymap("x", "<leader>f", ":s///g<Left><Left><Left>", { desc = "弄 :substitute" })
+Keymap(
+	"n",
+	"<leader>fk",
+	[[:%s/\(.*\)/\1/g]]..("<Left>"):rep(11),
+	{ desc = "弄 :substitute kirby" }
+)
+Keymap({"n", "x"}, "<leader>ff", ":s///g<Left><Left><Left>", { desc = "弄 :substitute" })
 Keymap(
 	{ "n", "x" },
-	"<leader>F",
+	"<leader>fs",
 	function() require("ssr").open() end,
 	{ desc = "弄 Structural search & replace" }
 )
-Keymap("n", "<leader>n", ":%normal ", { desc = "弄 :normal" })
-Keymap("x", "<leader>n", ":normal ", { desc = "弄 :normal" })
+Keymap("n", "<leader>fn", ":%normal ", { desc = "弄 :normal" })
+Keymap("x", "<leader>fn", ":normal ", { desc = "弄 :normal" })
 
 -- Refactor
 -- stylua: ignore start
-Keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "弄 Inline Variable" })
-Keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Extract Variable") end, { desc = "弄 Extract Variable" })
+Keymap({ "n", "x" }, "<leader>fi", function() require("refactoring").refactor("Inline Variable") end, { desc = "弄 Inline Variable" })
+Keymap({ "n", "x" }, "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, { desc = "弄 Extract Variable" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
