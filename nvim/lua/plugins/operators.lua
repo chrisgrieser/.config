@@ -8,11 +8,11 @@ return {
 		opts = {
 			opleader = {
 				line = "q",
-				block = nil,
+				block = "<Nop>", -- cannot be disabled otherwise
 			},
 			toggler = {
 				line = "qq",
-				block = nil,
+				block = "<Nop>", -- cannot be disabled otherwise
 			},
 			extra = {
 				eol = "Q",
