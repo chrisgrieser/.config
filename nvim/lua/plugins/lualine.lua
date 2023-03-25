@@ -73,6 +73,15 @@ local function searchCounter()
 	return (" %s/%s %s"):format(current, total, searchTerm)
 end
 
+local function visualMultiCursorCount()
+	---@diagnostic disable: undefined-field -- defined by visual multi plugin
+	if not vim.b.VM_Selection then return "" end
+	local cursors = vim.b.VM_Selection.Regions
+	if not cursors then return "" end
+	return " "..tostring(#cursors)
+	---@diagnostic enable: undefined-field
+end
+
 local function clock()
 	if vim.opt.columns:get() < 120 then return "" end -- only show the clock when it covers the menubar clock
 	local time = tostring(os.date()):sub(12, 16)
@@ -164,10 +173,16 @@ local lualineConfig = {
 		lualine_c = {
 			{ require("funcs.quickfix").counter },
 			{ searchCounter },
+			{ visualMultiCursorCount },
 			{
 				require("funcs.lsp-count").statusline,
 				color = { fg = "grey" },
-				cond = function() return vim.v.hlsearch == 0 end, -- don't show when searching
+				cond = function()
+					local isSearching = vim.v.hlsearch == 0
+					---@diagnostic disable-next-line: undefined-field
+					local isMultiCursor = vim.b.VM_Selection and vim.b.VM_Selection.Regions
+					return not (isSearching or isMultiCursor)
+				end, -- don't show when searching
 			},
 		},
 		lualine_x = {
