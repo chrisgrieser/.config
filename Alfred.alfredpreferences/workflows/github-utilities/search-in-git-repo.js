@@ -109,7 +109,7 @@ const folderArray = app
 const jsonArray = [...fileArray, ...folderArray].sort((a, b) => {
 	const aExt = a.title.split(".").pop();
 	const bExt = b.title.split(".").pop();
-	const priorityExt = ["ts", "md", "js", "lua", "py"];
+	const priorityExt = ["lua", "ts", "md", "js", "py"];
 	const aHasPrio = priorityExt.includes(aExt);
 	const bHasPrio = priorityExt.includes(bExt);
 	if (aHasPrio && !bHasPrio) return -1;
