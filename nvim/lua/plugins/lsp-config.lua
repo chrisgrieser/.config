@@ -98,7 +98,7 @@ lspSettings.eslint = {
 lspSettings.jsonls = {
 	json = {
 		validate = { enable = true },
-		format = { enable = true },
+		format = { enable = false }, -- taken care of by prettier
 	},
 }
 
