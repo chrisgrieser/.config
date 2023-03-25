@@ -120,9 +120,8 @@ local function cmpconfig()
 					require("neogen").jump_next()
 				elseif require("luasnip").jumpable(1) then
 					require("luasnip").jump(1)
-					-- multi-cursor jump
 				elseif Fn.mode():find("[nvV]") then
-					fallback()
+					fallback() -- multi-cursor jump
 				else
 					vim.notify("No more jump forwards.")
 				end
@@ -139,9 +138,13 @@ local function cmpconfig()
 				end
 			end, { "i", "s", "n", "x" }),
 
+			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
+				local blankLine = vim.fn.getline("."):find("^%s*$")
 				if cmp.visible() then
 					cmp.select_next_item()
+				elseif not blankLine then
+					cmp.complete()
 				else
 					fallback()
 				end
@@ -175,7 +178,7 @@ local function cmpconfig()
 		sources = cmp.config.sources(defaultSources),
 	}
 	--------------------------------------------------------------------------------
-	-- FILETYPE SPECIFIC COMPLETION
+	-- FILETYPE SPECIFIC SETTINGS
 
 	cmp.setup.filetype("lua", {
 		enabled = function() -- disable leading "-"
@@ -270,7 +273,7 @@ local function cmpconfig()
 		},
 	})
 
-	-- plaintext (e.g., pass editing)
+	-- plaintext
 	cmp.setup.filetype("text", {
 		sources = cmp.config.sources {
 			s.snippets,
