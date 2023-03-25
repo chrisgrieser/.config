@@ -7,7 +7,7 @@ function run() {
 	function alfredMatcher(str) {
 		const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 		const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-		return [clean, camelCaseSeperated, str].join(" ");
+		return [clean, camelCaseSeperated, str].join(" ") + " ";
 	}
 
 	//──────────────────────────────────────────────────────────────────────────────
@@ -32,9 +32,17 @@ function run() {
 			const issues = item.open_issues_count;
 			const forks = item.forks_count;
 
+			let matcher = alfredMatcher(repo);
+
 			let info = "";
-			if (item.archived) info += "🗄️ ";
-			if (item.fork) info += "[Fork] ";
+			if (item.archived) {
+				info += "🗄️ ";
+				matcher += "archived "
+			}
+			if (item.fork) {
+				info += "🍽️ ";
+				matcher += "fork "
+			}
 			if (stars > 0) info += `⭐ ${stars}  `;
 			if (issues > 0) info += `🟢 ${issues}  `;
 			if (forks > 0) info += `🍴 ${forks}  `;
@@ -42,7 +50,7 @@ function run() {
 			return {
 				title: repo,
 				subtitle: info,
-				match: alfredMatcher(repo),
+				match: matcher,
 				arg: url,
 			};
 		});
