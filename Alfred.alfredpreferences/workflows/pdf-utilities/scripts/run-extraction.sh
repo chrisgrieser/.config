@@ -36,7 +36,6 @@ extraction_engine=$(echo "$settings" | grep "extraction_engine" | cut -d "=" -f2
 #───────────────────────────────────────────────────────────────────────────────
 # Input
 pdf_path=$(osascript "./scripts/get-pdf-path.applescript")
-# pdf_path="$1"
 
 #───────────────────────────────────────────────────────────────────────────────
 # GUARD CLAUSES & RETRIEVE CITEKEY

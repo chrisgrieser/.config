@@ -10,13 +10,18 @@ on run
 		set frontApp to (name of first process where it is frontmost)
 	end tell
 
-	# If terminal is frontmost, hide it again for toggling visibility via the hotkey
+	# If terminal is frontmost, switch back to previous app
 	if frontApp is "alacritty" then
-		tell application "System Events" to tell process "alacritty" to set visible to false
+		tell application "System Events"
+			keystroke tab using {command down}
+			delay 0.15
+			keystroke return
+		end tell
 
 	# if terminal is not frontmost, show it again 
 	else if frontApp is not "Finder" then
 		tell application "alacritty" to activate
+
 	# exception: If Finder is frontmost, cd to finder window
 	else
 		tell application "Finder"

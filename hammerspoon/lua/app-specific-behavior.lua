@@ -151,46 +151,6 @@ Wf_terminal = Wf.new({ "alacritty", "Alacritty" })
 		AsSoonAsAppRuns(appName, function() MoveResize(newWin, PseudoMaximized) end)
 	end)
 
--- Man leader hotkey (for Karabiner)
--- work around necessary, cause alacritty creates multiple instances, i.e.
--- multiple applications all with the name "alacritty", preventing conventional
--- methods for focussing a window via AppleScript or `open`
-UriScheme("focus-help", function()
-	local win = hs.window.find("man:")
-	if win then
-		win:focus()
-	else
-		Notify("None open.")
-	end
-end)
-
--- btop leader hotkey (for Karabiner and Alfred)
--- work around necessary, cause alacritty creates multiple instances, i.e.
--- multiple applications all with the name "alacritty", preventing conventional
--- methods for focussing a window via AppleScript or `open`
-UriScheme("focus-btop", function()
-	local win = hs.window.find("^btop$")
-	if win then
-		win:focus()
-		return
-	end
-
-	-- starting with smaller font be able to read all processes
-	local success = os.execute([[
-			export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-			if ! command -v btop &>/dev/null; then exit 1 ; fi
-			nohup alacritty --option="font.size=20" --option="colors.primary.background='#000000'" --title="btop" --command btop &
-		]])
-	if success then
-		RunWithDelays({ 0.2, 0.3, 0.4 }, function()
-			local btopWin = hs.window.find("^btop$")
-			MoveResize(btopWin, Maximized)
-		end)
-	else
-		Notify("⚠️ btop not installed")
-	end
-end)
-
 --------------------------------------------------------------------------------
 
 -- QuickLook: bigger window

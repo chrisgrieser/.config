@@ -6,11 +6,88 @@
 	<string>de.chris-grieser.sidenote-tweaks</string>
 	<key>connections</key>
 	<dict>
+		<key>0263CAD1-0B6D-49D4-BB44-5C9B1BA21D75</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C6BC147F-678E-4337-B42F-C7F41268EB96</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>043C5589-2F04-4EC4-9121-5FE2EB2C3180</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>8B0FF1F7-5612-4F4E-B4F5-76241BFFF167</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1DFC6D36-5BCC-4835-B75C-202FFFE1470B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>043C5589-2F04-4EC4-9121-5FE2EB2C3180</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>fileexists</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C6BC147F-678E-4337-B42F-C7F41268EB96</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>26E98B85-F67B-478C-AB5E-20DAB43553A7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1DFC6D36-5BCC-4835-B75C-202FFFE1470B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C6BC147F-678E-4337-B42F-C7F41268EB96</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -32,11 +109,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1DFC6D36-5BCC-4835-B75C-202FFFE1470B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
 		<key>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>26469DF4-1A9D-4A84-85DA-A42E21C9C5B2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -64,27 +167,20 @@
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>on run argv
-	set theList to "General"
-	set reminderText to argv as string
-	set inDays to 1
-	set dueDate to (current date) + inDays * (60 * 60 * 24)
-	tell application "Reminders"
-		tell (list theList) to make new reminder at end with properties {name:reminderText, allday due date: dueDate}
-		quit
-	end tell
-end run</string>
+				<string>const content = Application("SideNotes").currentNote().text();
+Application("SideNotes").currentNote().delete();
+content // direct return</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>.js</string>
 				<key>type</key>
-				<integer>6</integer>
+				<integer>7</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>26469DF4-1A9D-4A84-85DA-A42E21C9C5B2</string>
+			<string>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -127,20 +223,53 @@ end run</string>
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>const content = Application("SideNotes").currentNote().text();
-Application("SideNotes").currentNote().delete();
-content // direct return</string>
+				<string>on run argv
+	set theList to "General"
+	set reminderText to argv as string
+	set inDays to 1
+	set dueDate to (current date) + inDays * (60 * 60 * 24)
+	tell application "Reminders"
+		tell (list theList) to make new reminder at end with properties {name:reminderText, allday due date: dueDate}
+		quit
+	end tell
+end run</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>.js</string>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>26469DF4-1A9D-4A84-85DA-A42E21C9C5B2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>function run(argv) {
+  const noteId = argv[0];
+  Application("SideNotes").openWithId(noteId);
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>type</key>
 				<integer>7</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</string>
+			<string>8B0FF1F7-5612-4F4E-B4F5-76241BFFF167</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -218,34 +347,213 @@ content // direct return</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Save in SideNotes</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Sidenote created</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>function run(argv) {
-  const noteId = argv[0];
-  Application("SideNotes").openWithId(noteId);
-}</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>create-new-sitenote.js</string>
 				<key>type</key>
-				<integer>7</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>8B0FF1F7-5612-4F4E-B4F5-76241BFFF167</string>
+			<string>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>isPath</key>
+					<string>true</string>
+					<key>text</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>043C5589-2F04-4EC4-9121-5FE2EB2C3180</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>2</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>D</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>26E98B85-F67B-478C-AB5E-20DAB43553A7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>fileutivariablename</key>
+				<string></string>
+				<key>outputfileuti</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.file</string>
+			<key>uid</key>
+			<string>1DFC6D36-5BCC-4835-B75C-202FFFE1470B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>dd</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>New Sidenote: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0263CAD1-0B6D-49D4-BB44-5C9B1BA21D75</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>isPath</key>
+					<string>false</string>
+					<key>text</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>C6BC147F-678E-4337-B42F-C7F41268EB96</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0263CAD1-0B6D-49D4-BB44-5C9B1BA21D75</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>715</real>
+		</dict>
+		<key>043C5589-2F04-4EC4-9121-5FE2EB2C3180</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>set path to true, save text</string>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>595</real>
+		</dict>
+		<key>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>745</real>
+			<key>ypos</key>
+			<real>565</real>
+		</dict>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<dict>
 			<key>colorindex</key>
@@ -256,6 +564,15 @@ content // direct return</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>330</real>
+		</dict>
+		<key>1DFC6D36-5BCC-4835-B75C-202FFFE1470B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>620</real>
 		</dict>
 		<key>26469DF4-1A9D-4A84-85DA-A42E21C9C5B2</key>
 		<dict>
@@ -268,6 +585,15 @@ content // direct return</string>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>
+		<key>26E98B85-F67B-478C-AB5E-20DAB43553A7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>600</real>
+		</dict>
 		<key>8B0FF1F7-5612-4F4E-B4F5-76241BFFF167</key>
 		<dict>
 			<key>colorindex</key>
@@ -278,6 +604,17 @@ content // direct return</string>
 			<real>220</real>
 			<key>ypos</key>
 			<real>330</real>
+		</dict>
+		<key>C6BC147F-678E-4337-B42F-C7F41268EB96</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>set path to false, save text</string>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>745</real>
 		</dict>
 		<key>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</key>
 		<dict>
@@ -290,6 +627,15 @@ content // direct return</string>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>
+		<key>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>485</real>
+		</dict>
 		<key>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</key>
 		<dict>
 			<key>colorindex</key>
@@ -301,9 +647,42 @@ content // direct return</string>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>
+		<key>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>590</real>
+			<key>ypos</key>
+			<real>565</real>
+		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Base</string>
+				<key>placeholder</key>
+				<string>Base</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Folder for new Notes</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>new_note_folder</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

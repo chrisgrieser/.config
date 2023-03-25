@@ -64,7 +64,6 @@ local source_icons = {
 	cmdline = "",
 	cmdline_history = "",
 	path = "",
-	git = "",
 }
 
 --------------------------------------------------------------------------------
@@ -120,7 +119,7 @@ local function cmpconfig()
 					require("neogen").jump_next()
 				elseif require("luasnip").jumpable(1) then
 					require("luasnip").jump(1)
-				elseif Fn.mode():find("[nvV]") then
+				elseif vim.fn.mode():find("[nvV]") then
 					fallback() -- multi-cursor jump
 				else
 					vim.notify("No more jump forwards.")
@@ -131,7 +130,7 @@ local function cmpconfig()
 					require("neogen").jump_prev()
 				elseif require("luasnip").jumpable(-1) then
 					require("luasnip").jump(-1)
-				elseif Fn.mode():find("[nvV]") then
+				elseif vim.fn.mode():find("[nvV]") then
 					fallback()
 				else
 					vim.notify("No more jump backwards.")
@@ -143,10 +142,10 @@ local function cmpconfig()
 				local blankLine = vim.fn.getline("."):find("^%s*$")
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif not blankLine then
-					cmp.complete()
-				else
+				elseif blankLine then
 					fallback()
+				else
+					cmp.complete()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
@@ -305,6 +304,7 @@ local function cmpconfig()
 		},
 	})
 end
+
 --------------------------------------------------------------------------------
 
 return {
