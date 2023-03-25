@@ -331,7 +331,7 @@
 	<key>description</key>
 	<string>SideNotes Workflow</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>SideNotes</string>
 	<key>objects</key>
@@ -541,6 +541,10 @@ function run(argv) {
 				<false/>
 				<key>focusedappvariablename</key>
 				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -990,6 +994,8 @@ function run(argv) {
 				</array>
 				<key>elselabel</key>
 				<string>{query}</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -1486,6 +1492,8 @@ https://www.apptorium.com/sidenotes</string>
 			<integer>40</integer>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
