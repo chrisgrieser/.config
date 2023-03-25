@@ -82,6 +82,7 @@ sketchybar \
 	--add item weather $first_row \
 	--set weather update_freq=1800 \
 	script="$PLUGIN_DIR/weather.sh" \
+	icon.y_offset=-1 \
 	\
 	--add item drafts $first_row \
 	script="$PLUGIN_DIR/drafts-counter.sh" \
