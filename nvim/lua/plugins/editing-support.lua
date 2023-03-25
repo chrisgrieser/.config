@@ -7,7 +7,7 @@ return {
 	{ -- display line numbers while going to a line with `:`
 		"nacro90/numb.nvim",
 		keys = ":",
-		config = function() require("numb").setup() end,
+		config = true,
 	},
 
 	-----------------------------------------------------------------------------
@@ -72,45 +72,39 @@ return {
 		"Wansmer/sibling-swap.nvim",
 		lazy = true, -- loaded by keymaps
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		config = function()
-			require("sibling-swap").setup {
-				use_default_keymaps = false,
-				allowed_separators = {
-					"..", -- added for lua string concatenation
-					"*", -- added multiplication
-					["-"] = false, -- since subtraction is not communicative
-				},
-			}
-		end,
+		opts = {
+			use_default_keymaps = false,
+			allowed_separators = {
+				"..", -- added for lua string concatenation
+				"*", -- added multiplication
+				["-"] = false, -- since subtraction is not communicative
+			},
+		},
 	},
 	{ -- split-join
 		"Wansmer/treesj",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		cmd = "TSJToggle",
-		config = function()
-			require("treesj").setup {
-				use_default_keymaps = false,
-				cursor_behavior = "start", -- start|end|hold
-				max_join_length = 180,
-			}
-		end,
+		opts = {
+			use_default_keymaps = false,
+			cursor_behavior = "start", -- start|end|hold
+			max_join_length = 180,
+		},
 	},
 	{ -- clipboard history / killring
 		"gbprod/yanky.nvim",
 		event = "BufReadPost",
-		config = function()
-			require("yanky").setup {
-				ring = {
-					history_length = 20,
-					cancel_event = "move", -- move|update
-				},
-				highlight = {
-					on_yank = false, -- using for nicer highlights vim.highlight.on_yank()
-					on_put = true,
-					timer = 400,
-				},
-			}
-		end,
+		opts = {
+			ring = {
+				history_length = 20,
+				cancel_event = "move", -- move|update
+			},
+			highlight = {
+				on_yank = false, -- using for nicer highlights vim.highlight.on_yank()
+				on_put = true,
+				timer = 400,
+			},
+		},
 	},
 	{ -- auto-bullets for markdown-like filetypes
 		"dkarter/bullets.vim",
@@ -121,41 +115,38 @@ return {
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
 		event = "BufReadPost",
-		config = function()
-			local foldIcon = ""
-			local ufo = require("ufo")
-			ufo.setup {
-				-- Use lsp, and indent as fallback
-				provider_selector = function() return { "lsp", "indent" } end,
-				open_fold_hl_timeout = 500,
-				fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
-					-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
-					local newVirtText = {}
-					local suffix = " " .. foldIcon .. "  " .. tostring(endLnum - lnum)
-					local sufWidth = vim.fn.strdisplaywidth(suffix)
-					local targetWidth = width - sufWidth
-					local curWidth = 0
-					for _, chunk in ipairs(virtText) do
-						local chunkText = chunk[1]
-						local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-						if targetWidth > curWidth + chunkWidth then
-							table.insert(newVirtText, chunk)
-						else
-							chunkText = truncate(chunkText, targetWidth - curWidth)
-							local hlGroup = chunk[2]
-							table.insert(newVirtText, { chunkText, hlGroup })
-							chunkWidth = vim.fn.strdisplaywidth(chunkText)
-							if curWidth + chunkWidth < targetWidth then
-								suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
-							end
-							break
+		opts = {
+			-- Use lsp, and indent as fallback
+			provider_selector = function() return { "lsp", "indent" } end,
+			open_fold_hl_timeout = 500,
+			fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+				-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
+				local foldIcon = ""
+				local newVirtText = {}
+				local suffix = " " .. foldIcon .. "  " .. tostring(endLnum - lnum)
+				local sufWidth = vim.fn.strdisplaywidth(suffix)
+				local targetWidth = width - sufWidth
+				local curWidth = 0
+				for _, chunk in ipairs(virtText) do
+					local chunkText = chunk[1]
+					local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+					if targetWidth > curWidth + chunkWidth then
+						table.insert(newVirtText, chunk)
+					else
+						chunkText = truncate(chunkText, targetWidth - curWidth)
+						local hlGroup = chunk[2]
+						table.insert(newVirtText, { chunkText, hlGroup })
+						chunkWidth = vim.fn.strdisplaywidth(chunkText)
+						if curWidth + chunkWidth < targetWidth then
+							suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
 						end
-						curWidth = curWidth + chunkWidth
+						break
 					end
-					table.insert(newVirtText, { suffix, "MoreMsg" })
-					return newVirtText
-				end,
-			}
-		end,
+					curWidth = curWidth + chunkWidth
+				end
+				table.insert(newVirtText, { suffix, "MoreMsg" })
+				return newVirtText
+			end,
+		},
 	},
 }

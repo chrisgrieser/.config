@@ -130,28 +130,24 @@ return {
 	{ -- package manager
 		"williamboman/mason.nvim",
 		lazy = true,
-		config = function()
-			require("mason").setup {
-				ui = {
-					border = BorderStyle,
-					icons = {
-						package_installed = "✓",
-						package_pending = "羽",
-						package_uninstalled = "✗",
-					},
+		opts = {
+			ui = {
+				border = BorderStyle,
+				icons = {
+					package_installed = "✓",
+					package_pending = "羽",
+					package_uninstalled = "✗",
 				},
-			}
-		end,
+			},
+		},
 	},
 	{ -- auto-install lsp servers
 		"williamboman/mason-lspconfig.nvim",
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
-		config = function()
-			require("mason-lspconfig").setup {
-				ensure_installed = lsp_servers,
-			}
-		end,
+		opts = {
+			ensure_installed = lsp_servers,
+		},
 	},
 
 	{ -- configure LSPs

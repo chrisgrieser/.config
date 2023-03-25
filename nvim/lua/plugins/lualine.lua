@@ -47,8 +47,8 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "FocusGained", "UiEnter" }, {
 local function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
 	local notMainBranch = vim.b.cur_branch ~= "main" and vim.b.cur_branch ~= "master"
 	local validFiletype = vim.bo.filetype ~= "help" -- vim help files are located in a git repo
-	local isTerminal = vim.bo.buftype == "terminal" -- statusline already shows branch
-	return notMainBranch and validFiletype and not isTerminal
+	local notSpecialBuffer = not (vim.bo.buftype ~= "") -- statusline already shows branch
+	return notMainBranch and validFiletype and notSpecialBuffer
 end
 
 --------------------------------------------------------------------------------
