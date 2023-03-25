@@ -14,6 +14,7 @@ vim.opt_local.formatoptions:remove("t")
 --------------------------------------------------------------------------------
 
 -- Build / Preview
+Keymap("n", "<leader>r", "<D-r>", { desc = "  Preview", buffer = true })
 Keymap("n", "<leader>r", "<Plug>MarkdownPreviewToggle", { desc = "  Preview", buffer = true })
 
 -- stylua: ignore start

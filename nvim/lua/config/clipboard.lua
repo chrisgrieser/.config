@@ -20,9 +20,12 @@ end, { expr = true })
 -- Yanky
 vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)", { desc = "paste (Yanky)" })
 vim.keymap.set("n", "P", "<Plug>(YankyCycleForward)", { desc = "Cycle Yankring" })
-
--- stylua: ignore
-vim.keymap.set("n", "<leader>y", require("telescope").extensions.yank_history.yank_history, { desc = "Yank History" })
+vim.keymap.set(
+	"n",
+	"<leader>y",
+	function() require("telescope").extensions.yank_history.yank_history() end,
+	{ desc = "Yank History" }
+)
 --------------------------------------------------------------------------------
 
 -- paste charwise reg as linewise & vice versa
