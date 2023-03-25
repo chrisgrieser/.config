@@ -61,7 +61,7 @@ local function nullConfig()
 
 			-- JS/TS
 			builtins.formatting.prettier.with {
-				filetypes = { "javascript", "typescript", "yaml" }, -- do not format markdown, css, and so on
+				filetypes = { "javascript", "typescript", "yaml", "json" }, -- do not format markdown, css, and so on
 			},
 
 			-- CSS

@@ -479,7 +479,7 @@ Autocmd("LspAttach", {
 		-- Save & Format
 		Keymap({ "n", "i", "x" }, "<D-s>", function()
 			Cmd.update()
-			vim.lsp.buf.format { async = true }
+			vim.lsp.buf.format()
 		end, { buffer = true, desc = "璉Save & Format" })
 	end,
 })

@@ -31,7 +31,9 @@ require("lazy").setup("plugins", {
 		notify = false, -- don't a notification when new updates are found
 		frequency = 86400, -- only check for updates every 24 hours
 	},
+	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
 	change_detection = { notify = false },
+	readme = { enabled = false },
 	performance = {
 		rtp = {
 			disabled_plugins = {
@@ -54,3 +56,11 @@ require("lazy").setup("plugins", {
 	},
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lazy",
+	callback = function()
+		vim.api.nvim_buf_set_name(0, "Lazy")
+		---@diagnostic disable-next-line: param-type-mismatch
+		vim.defer_fn(function() vim.keymap.set("n", "K", "6k", { buffer = true }) end, 1)
+	end,
+})
