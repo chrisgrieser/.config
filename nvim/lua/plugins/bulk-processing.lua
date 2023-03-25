@@ -2,6 +2,8 @@ return {
 	{ -- Multi Cursor
 		"mg979/vim-visual-multi",
 		keys = { { "<D-j>", mode = { "n", "x" }, desc = "Multi-Cursor" } },
+		-- already set via lualine component
+		init = function () vim.g.VM_set_statusline = 0 end,
 	},
 	{ -- structural search & replace
 		"cshuaimin/ssr.nvim",
