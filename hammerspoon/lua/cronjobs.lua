@@ -3,6 +3,10 @@ require("lua.window-utils")
 require("lua.dark-mode")
 require("lua.layouts")
 local caff = hs.caffeinate.watcher
+
+---@return string three-char string representing the day of the week (English)
+local function getWeekday() return tostring(os.date()):sub(1, 3) end
+
 --------------------------------------------------------------------------------
 
 -- keep the iMac display brightness low when projector is connected
@@ -26,19 +30,11 @@ ProjectorScreensaverWatcher = caff
 --------------------------------------------------------------------------------
 -- BACKUP / MAINTENANCE
 
-
-hs.osascript.javascriptFromFile("./helpers/push-todays-reminders-to-sidenotes.js")
-
-
----@return string three-char string representing the day of the week (English)
-local function getWeekday() return tostring(os.date()):sub(1, 3) end
-
 -- on Mondays shortly before 10:00, open #fg-organisation Slack Channel
 JourfixeTimer = hs.timer
 	.doAt("09:58", "01d", function()
-		if getWeekday() == "Mon" then
-			hs.execute("open 'slack://channel?team=T010A5PEMBQ&id=CV95T641Y'")
-		end
+		if getWeekday() ~= "Mon" then return end
+		hs.execute("open 'slack://channel?team=T010A5PEMBQ&id=CV95T641Y'")
 	end)
 	:start()
 
