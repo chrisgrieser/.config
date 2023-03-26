@@ -110,11 +110,11 @@ rules:
             value: false
           - type: frontmost_application_if
             file_paths:
+              - alacritty$
+              - ^/System/Applications/Utilities/Terminal.app
+              - ^/System/Applications/Utilities/Script Editor.app
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
-              - alacritty$
-              - Warp\.app
-              - ^/System/Applications/Utilities/Terminal.app
               - ^/Applications/Discord\.app
               - ^/Applications/Brave Browser\.app
               - ^/Applications/Vivaldi\.app
@@ -129,8 +129,8 @@ rules:
           - type: frontmost_application_if
             file_paths:
               - alacritty$
-              - Warp\.app
               - ^/System/Applications/Utilities/Terminal.app
+              - ^/System/Applications/Utilities/Script Editor.app
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
               - ^/Applications/Discord\.app
