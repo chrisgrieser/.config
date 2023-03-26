@@ -24,4 +24,4 @@ if [[ "$weather" =~ Unknown ]] || [[ "$weather" =~ Sorry ]] || [[ -z "$weather" 
 	temperature="–"
 fi
 
-sketchybar --set "weather" icon="$icon" label="$temperature"
+sketchybar --set "$NAME" icon="$icon" label="$temperature"

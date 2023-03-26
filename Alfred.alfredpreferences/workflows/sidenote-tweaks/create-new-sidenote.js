@@ -18,7 +18,7 @@ function run(argv) {
 	// close sidenotes
 	Application("System Events").keystroke("w", { using: ["command down"] });
 
-	// for notification
+	// send first line to Alfred notification
 	const firstline = input.split("\n").shift();
 	return firstline;
 }
