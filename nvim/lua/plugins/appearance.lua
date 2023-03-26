@@ -25,23 +25,9 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",
 		opts = {
-			show_current_context = true, -- = active indent
-			-- context_highlight_list = { "Comment" },
-
 			use_treesitter = true,
-			char_highlight_list = {
-				"IndentBlanklineIndentChar",
-				"IndentBlanklineIndentChar",
-				"IndentBlanklineIndentChar",
-				"IndentBlanklineIndentChar",
-				"IndentBlanklineIndentChar",
-
-				"Error",
-				"Error",
-				"Error",
-				"Error",
-				"Error",
-			},
+			show_current_context = true, -- = active indent
+			context_highlight_list = { "Comment" }, -- give active indent different color
 			filetype_exclude = { "undotree", "help", "man", "lspinfo", "" },
 		},
 	},
