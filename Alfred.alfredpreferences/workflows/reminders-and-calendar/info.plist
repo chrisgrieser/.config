@@ -176,25 +176,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>add-to-shopping-list.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>title</key>
+				<string>✅ Added "{query}"</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>90F0EAB6-7686-4829-95EC-EE1E363B67F7</string>
+			<string>42AD9AB0-3C2B-48E4-B5F5-6391B8491DAF</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -220,23 +218,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>title</key>
-				<string>✅ Added "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>add-to-shopping-list.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>42AD9AB0-3C2B-48E4-B5F5-6391B8491DAF</string>
+			<string>90F0EAB6-7686-4829-95EC-EE1E363B67F7</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -787,39 +787,6 @@
 			<key>variable</key>
 			<string>bundesland_feiertage</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>General</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>List where new reminders should be added</string>
-			<key>label</key>
-			<string>Reminder List</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>theList</string>
-		</dict>
-	</array>
-	<key>variables</key>
-	<dict>
-		<key>startdate</key>
-		<string>2022-10-14</string>
-		<key>week_no</key>
-		<string>8</string>
-	</dict>
-	<key>variablesdontexport</key>
-	<array>
-		<string>week_no</string>
-		<string>startdate</string>
 	</array>
 	<key>version</key>
 	<string>0.9</string>

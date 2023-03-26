@@ -45,19 +45,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A2FDEB62-2C14-4F55-893C-0E26F2B7368C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2B191270-D98F-4D9A-9100-750E10B16628</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</key>
 		<array>
 			<dict>
@@ -405,50 +392,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>push-todays-reminders-to-sidenotes.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2B191270-D98F-4D9A-9100-750E10B16628</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>today</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Push Today's Reminders to Sidenotes</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A2FDEB62-2C14-4F55-893C-0E26F2B7368C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -492,13 +435,6 @@
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
-		<key>2B191270-D98F-4D9A-9100-750E10B16628</key>
-		<dict>
-			<key>xpos</key>
-			<real>230</real>
-			<key>ypos</key>
-			<real>655</real>
-		</dict>
 		<key>2FE4C0FD-B052-4444-9957-22B0EBCAED50</key>
 		<dict>
 			<key>colorindex</key>
@@ -516,13 +452,6 @@
 			<real>385</real>
 			<key>ypos</key>
 			<real>25</real>
-		</dict>
-		<key>A2FDEB62-2C14-4F55-893C-0E26F2B7368C</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>660</real>
 		</dict>
 		<key>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</key>
 		<dict>

@@ -15,9 +15,16 @@ function PeripheryBatteryCheck(msgWhere)
 		local percent = tonumber(device.batteryPercentSingle)
 		if percent < warningLevel then
 			local msg = device.name .. " Battery is low (" .. percent .. "%)"
-			if msgWhere == "Reminder" then
-				local filename = FileHub.."/"..device.name.." Battery low"
-				WriteToFile(filename, msg)
+			if msgWhere == "Sidenotes" then
+				hs.osascript.javascript(string.format(
+					[[const sidenotes = Application("SideNotes");
+					const folder = sidenotes.folders.byName("Base");
+					sidenotes.createNote({
+						folder: folder,
+						text: "%s",
+					});]],
+					msg
+				))
 				print("⚠️", msg)
 			else
 				Notify("⚠️", msg)
@@ -61,7 +68,7 @@ ExternalHarddriveWatcher = hs.usb.watcher
 			"Elements 2621", -- Externe C
 		}
 		local isBackupDrive = TableContains(harddriveNames, device.productName)
-		
+
 		if isBackupDrive then
 			OpenApp("alacritty")
 			AsSoonAsAppRuns("alacritty", function() hs.eventtap.keyStrokes("bkp") end)
