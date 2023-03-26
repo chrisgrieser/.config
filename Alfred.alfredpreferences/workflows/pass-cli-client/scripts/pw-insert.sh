@@ -8,6 +8,7 @@ entry_name=${entry_name:l}
 
 folder=${folder:1} # cut "*" which marked entry as folder
 
-pbpaste | pass insert --echo "$folder/$entry_name" # new password from clipboard
+# new password from clipboard
+pbpaste | pass insert --echo "$folder/$entry_name" &>/dev/null
 
 echo -n "Password saved for $entry_name"

@@ -22,7 +22,8 @@ end
 
 function TwitterToTheSide()
 	-- in case of active split, prevent left window of covering the sketchybar
-	if LEFT_SPLIT then LEFT_SPLIT:application():hide() end
+	if LEFT_SPLIT and LEFT_SPLIT:application() then LEFT_SPLIT:application():hide() end
+
 	if FrontAppName() == "Alfred" then return end
 
 	local twitter = App("Twitter")

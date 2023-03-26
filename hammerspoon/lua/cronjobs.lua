@@ -43,14 +43,12 @@ JourfixeTimer = hs.timer
 -- Check for low battery of connected bluetooth devices
 BiweeklyTimer = hs.timer
 	.doAt("02:00", "01d", function()
-		if IsAtOffice() then return end
+		if IsAtOffice() or (getWeekday() ~= "Wed" and getWeekday() ~= "Sat") then return end
 
-		-- only run wednesday and saturday
-		if getWeekday() ~= "Wed" and getWeekday() ~= "Sat" then return end
-
-		PeripheryBatteryCheck("Reminder")
+		PeripheryBatteryCheck("Reminder") -- TODO send to sidenotes
 		hs.loadSpoon("EmmyLua")
 
+		-- backups
 		Applescript([[
 			tell application id "com.runningwithcrayons.Alfred"
 				run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
