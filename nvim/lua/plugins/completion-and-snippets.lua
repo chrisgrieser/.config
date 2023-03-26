@@ -105,6 +105,7 @@ local function cmpconfig()
 			["<S-Down>"] = cmp.mapping.scroll_docs(4),
 
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
+			["<M-Esc>"] = cmp.mapping.complete(), -- consistent with macOS autocomplete
 			["<C-e>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.abort()
@@ -139,13 +140,10 @@ local function cmpconfig()
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
-				local blankLine = vim.fn.getline("."):find("^%s*$")
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif blankLine then
-					fallback()
 				else
-					cmp.complete()
+					fallback()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
