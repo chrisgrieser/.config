@@ -13,22 +13,18 @@ function PeripheryBatteryCheck(msgWhere)
 
 	for _, device in pairs(devices) do
 		local percent = tonumber(device.batteryPercentSingle)
-		if percent < warningLevel then
-			local msg = device.name .. " Battery is low (" .. percent .. "%)"
-			if msgWhere == "Sidenotes" then
-				hs.osascript.javascript(string.format(
-					[[const sidenotes = Application("SideNotes");
-					const folder = sidenotes.folders.byName("Base");
-					sidenotes.createNote({
-						folder: folder,
-						text: "%s",
-					});]],
-					msg
-				))
-				print("⚠️", msg)
-			else
-				Notify("⚠️", msg)
-			end
+		if percent > warningLevel then return end
+		local msg = device.name .. " Battery is low (" .. percent .. "%)"
+		if msgWhere == "Sidenotes" then
+			hs.osascript.javascript(string.format(
+				[[const sidenotes = Application("SideNotes");
+				const folder = sidenotes.folders.byName("Base");
+				sidenotes.createNote({ folder: folder, text: "%s" });]],
+				msg
+			))
+			print("⚠️", msg)
+		else
+			Notify("⚠️", msg)
 		end
 	end
 end
@@ -44,14 +40,10 @@ OpenSwimWatcher = hs.usb.watcher
 
 		Notify("⏳ Starting Podcast Sync…")
 		hs.task
-			.new(
-				podcastSyncScript,
-				function(exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
-					local msg = exitCode == 0 and "✅ podcast sync finished"
-						or "⚠️️ podcast sync error" .. stdErr
-					Notify(msg)
-				end
-			)
+			.new(podcastSyncScript, function(exitCode, _, stdErr)
+				local msg = exitCode == 0 and "✅ Podcast Sync" or "⚠️️ Podcast Sync" .. stdErr
+				Notify(msg)
+			end)
 			:start()
 	end)
 	:start()

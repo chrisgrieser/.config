@@ -26,8 +26,22 @@ return {
 		event = "UIEnter",
 		opts = {
 			show_current_context = true, -- = active indent
-			-- context_char = "┃" -- thicker line for active indent
+			-- context_highlight_list = { "Comment" },
+
 			use_treesitter = true,
+			char_highlight_list = {
+				"IndentBlanklineIndentChar",
+				"IndentBlanklineIndentChar",
+				"IndentBlanklineIndentChar",
+				"IndentBlanklineIndentChar",
+				"IndentBlanklineIndentChar",
+
+				"Error",
+				"Error",
+				"Error",
+				"Error",
+				"Error",
+			},
 			filetype_exclude = { "undotree", "help", "man", "lspinfo", "" },
 		},
 	},
