@@ -190,11 +190,17 @@ function App(appName) return hs.application.find(appName, true, true) end
 ---@return string|nil
 function FrontAppName() return hs.application.frontmostApplication():name() end
 
----@param appName string
+
+---returns true when all apps are running
+---@param appNames string|string[] app or apps that should be running
 ---@return boolean
-function AppIsRunning(appName)
-	local app = App(appName)
-	return app ~= nil
+function AppIsRunning(appNames)
+	local allAreRunning = true
+	if type(appNames) == "string" then appNames = { appNames } end
+	for _, name in pairs(appNames) do
+		if not App(name) then allAreRunning = false end
+	end
+	return allAreRunning
 end
 
 ---If app is not running, will simply start the app instead

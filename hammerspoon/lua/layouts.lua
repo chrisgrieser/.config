@@ -21,13 +21,13 @@ local function setHigherBrightnessDuringDay()
 
 	local brightness
 	if hs.brightness.ambient() > 120 then
-		brightness = 100
+		brightness = 1
 	elseif hs.brightness.ambient() > 90 then
-		brightness = 90
+		brightness = 0.9
 	elseif hs.brightness.ambient() > 50 then
-		brightness = 80
+		brightness = 0.8
 	else
-		brightness = 60
+		brightness = 0.6
 	end
 	IMacDisplay:setBrightness(brightness)
 end
@@ -45,26 +45,24 @@ local function workLayout()
 	hs.execute("sketchybar --set clock popup.drawing=true")
 
 	-- start apps
-	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Finder", "BetterTouchTool" }
+	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "BetterTouchTool" }
 	require("lua.private").closer()
 	if not isWeekend() then OpenApp("Slack") end
-	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter" }
-	OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
-	Wait(0.7)
+	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "SideNotes" }
 
-	-- layout apps
-	TwitterToTheSide()
-	local layout = {
-		{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
-		{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
-	}
-	hs.layout.apply(layout)
-
-	-- setup apps
-	TwitterScrollUp()
-	RestartApp("AltTab")
+	-- layout them when they all run
+	hs.timer.waitUntil(
+		function() return AppIsRunning { "Discord", "Mimestream", "Twitter", "SideNotes", "Vivaldi" } end,
+		function()
+			hs.layout.apply {
+				{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
+				{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
+				{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
+			}
+			RestartApp("AltTab")
+		end,
+		0.2
+	)
 
 	print("🔲 WorkLayout: done")
 end
@@ -78,6 +76,7 @@ local function movieLayout()
 
 	OpenApp { "YouTube", "BetterTouchTool" }
 	QuitApp {
+		"SideNotes",
 		"Neovide",
 		"neovide",
 		"Slack",
