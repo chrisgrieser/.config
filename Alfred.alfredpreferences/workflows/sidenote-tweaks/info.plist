@@ -73,6 +73,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CB3C2AF2-F4BD-4EE7-B2AB-ED20CCC756AD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>DB7EDFF2-EF29-4EDB-9ED7-368149133A05</key>
 		<array>
 			<dict>
@@ -301,8 +314,66 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-url-in-sidenote.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>8</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>C</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apptorium.SideNotes-paddle</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>CB3C2AF2-F4BD-4EE7-B2AB-ED20CCC756AD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -575,7 +646,7 @@
 			<key>xpos</key>
 			<real>560</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>730</real>
 		</dict>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<dict>
@@ -586,14 +657,14 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>355</real>
+			<real>525</real>
 		</dict>
 		<key>2232EAF0-A796-49A0-B2A1-19344A4F3BEF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>225</real>
+			<real>220</real>
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
@@ -604,7 +675,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>795</real>
 		</dict>
 		<key>2FE4C0FD-B052-4444-9957-22B0EBCAED50</key>
 		<dict>
@@ -613,7 +684,7 @@
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>545</real>
 		</dict>
 		<key>660ACE51-61E1-4231-AB1E-78745ADC2616</key>
 		<dict>
@@ -627,11 +698,11 @@
 		<key>8499FF4E-79F4-45EB-B3B6-7B25914C723B</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>10</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>915</real>
 		</dict>
 		<key>A0D4A0E0-54A3-4239-B00B-59020FEE6F23</key>
 		<dict>
@@ -646,6 +717,15 @@
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
+		<key>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>355</real>
+		</dict>
 		<key>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</key>
 		<dict>
 			<key>colorindex</key>
@@ -657,12 +737,25 @@
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
+		<key>CB3C2AF2-F4BD-4EE7-B2AB-ED20CCC756AD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>Copy Note content &amp; delete</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>355</real>
+		</dict>
 		<key>DB7EDFF2-EF29-4EDB-9ED7-368149133A05</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>545</real>
 		</dict>
 		<key>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</key>
 		<dict>
@@ -671,7 +764,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>670</real>
 		</dict>
 		<key>E1952981-5610-42C6-967C-9728E176B587</key>
 		<dict>
@@ -682,7 +775,7 @@
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>915</real>
 		</dict>
 		<key>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</key>
 		<dict>
@@ -704,7 +797,7 @@
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>730</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
