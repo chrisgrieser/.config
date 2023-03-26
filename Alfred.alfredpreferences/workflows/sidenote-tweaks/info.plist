@@ -19,13 +19,36 @@
 				<false/>
 			</dict>
 		</array>
-		<key>2232EAF0-A796-49A0-B2A1-19344A4F3BEF</key>
-		<array/>
+		<key>1EA57E38-BF7C-4655-8934-79F1FE5152B0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>71C0B192-0A89-41AF-BC76-029269AB4DCB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>92FBBE16-B8F4-44FF-BF20-3C5A24032D81</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>26E98B85-F67B-478C-AB5E-20DAB43553A7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</string>
+				<string>1EA57E38-BF7C-4655-8934-79F1FE5152B0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -51,7 +74,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2232EAF0-A796-49A0-B2A1-19344A4F3BEF</string>
+				<string>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -142,6 +165,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E8BC01C9-80ED-4B16-BC6E-03702A985178</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -259,7 +295,9 @@
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>openurl-delete</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -300,30 +338,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-url-in-sidenote.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2232EAF0-A796-49A0-B2A1-19344A4F3BEF</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-url-in-sidenote.js</string>
+				<string>openurl-copy-delete-note.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -340,7 +355,46 @@
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>delete</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>51</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>⌫</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
 				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apptorium.SideNotes-paddle</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>CB3C2AF2-F4BD-4EE7-B2AB-ED20CCC756AD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>copy-delete</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -365,9 +419,30 @@
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>CB3C2AF2-F4BD-4EE7-B2AB-ED20CCC756AD</string>
+			<string>E8BC01C9-80ED-4B16-BC6E-03702A985178</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>sidenotes://open/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>2FE4C0FD-B052-4444-9957-22B0EBCAED50</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -421,27 +496,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>sidenotes://open/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>2FE4C0FD-B052-4444-9957-22B0EBCAED50</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -474,21 +528,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<true/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Save in SideNotes</string>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ No selection</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</string>
+			<string>71C0B192-0A89-41AF-BC76-029269AB4DCB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -576,6 +630,59 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>no sel</string>
+						<key>uid</key>
+						<string>92FBBE16-B8F4-44FF-BF20-3C5A24032D81</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>sel</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>1EA57E38-BF7C-4655-8934-79F1FE5152B0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Save in SideNotes</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -604,7 +711,7 @@
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -644,9 +751,9 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>560</real>
+			<real>720</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>830</real>
 		</dict>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<dict>
@@ -657,16 +764,16 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>630</real>
 		</dict>
-		<key>2232EAF0-A796-49A0-B2A1-19344A4F3BEF</key>
+		<key>1EA57E38-BF7C-4655-8934-79F1FE5152B0</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>5</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>180</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>895</real>
 		</dict>
 		<key>26E98B85-F67B-478C-AB5E-20DAB43553A7</key>
 		<dict>
@@ -675,16 +782,16 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>795</real>
+			<real>875</real>
 		</dict>
 		<key>2FE4C0FD-B052-4444-9957-22B0EBCAED50</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>345</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>570</real>
 		</dict>
 		<key>660ACE51-61E1-4231-AB1E-78745ADC2616</key>
 		<dict>
@@ -695,14 +802,23 @@
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
+		<key>71C0B192-0A89-41AF-BC76-029269AB4DCB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>285</real>
+			<key>ypos</key>
+			<real>780</real>
+		</dict>
 		<key>8499FF4E-79F4-45EB-B3B6-7B25914C723B</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>1110</real>
 		</dict>
 		<key>A0D4A0E0-54A3-4239-B00B-59020FEE6F23</key>
 		<dict>
@@ -721,8 +837,10 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
+			<key>note</key>
+			<string>copy/delete note</string>
 			<key>xpos</key>
-			<real>220</real>
+			<real>285</real>
 			<key>ypos</key>
 			<real>355</real>
 		</dict>
@@ -742,7 +860,7 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>Copy Note content &amp; delete</string>
+			<string>Delete Note</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -755,7 +873,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>650</real>
 		</dict>
 		<key>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</key>
 		<dict>
@@ -764,29 +882,40 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>1000</real>
 		</dict>
 		<key>E1952981-5610-42C6-967C-9728E176B587</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>5</integer>
 			<key>note</key>
 			<string>get Browser URL</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>1110</real>
 		</dict>
 		<key>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>return note content &amp; create reminder</string>
+			<string>create reminder for next day for note</string>
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
 			<real>25</real>
+		</dict>
+		<key>E8BC01C9-80ED-4B16-BC6E-03702A985178</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>Copy, then delete Note</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>485</real>
 		</dict>
 		<key>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</key>
 		<dict>
@@ -795,9 +924,9 @@
 			<key>note</key>
 			<string>create new sidenote</string>
 			<key>xpos</key>
-			<real>410</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>830</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

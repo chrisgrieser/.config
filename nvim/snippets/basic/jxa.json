@@ -83,9 +83,9 @@
 	"write file": {
 		"prefix": "write file",
 		"body": [
-			"function writeToFile(file, text) {",
+			"function writeToFile(filepath, text) {",
 			"\tconst str = $.NSString.alloc.initWithUTF8String(text);",
-			"\tstr.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);",
+			"\tstr.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);",
 			"}"
 		]
 	},
