@@ -85,25 +85,19 @@ end
 --------------------------------------------------------------------------------
 
 -- clean up console as soon as it is opened
+-- close console as soon as unfocused
 Wf_hsConsole = Wf.new("Hammerspoon")
-	:subscribe(Wf.windowCreated, function (newWin)
-		CleanupConsole	()
-		local pos = hs.fnutils.copy(Centered) 
-		pos.h = 0.95 -- leave some space at the bottom for tab completions
-		newWin:moveToUnit(pos)
+	:subscribe(Wf.windowCreated, function(newWin)
+		if newWin:title() == "Hammerspoon Console" then
+			CleanupConsole()
+			local pos = hs.fnutils.copy(Centered)
+			pos.h = 0.95 -- leave some space at the bottom for tab completions
+			newWin:moveToUnit(pos)
+		end
 	end)
-
--- close console when unfocused. Using appwatcher, since window filter for
--- window unfocussing is not working reliably
-ConsoleWatcher = Aw.new(function(appName, event)
-	if
-		appName == "Hammerspoon"
-		and event == Aw.deactivated
-		and FrontAppName() ~= "Alfred" -- Alfred Compatibility Mode
-	then
-		hs.closeConsole()
-	end
-end):start()
+	:subscribe(Wf.windowUnfocused, function(win)
+		if win:title() == "Hammerspoon Console" and FrontAppName() ~= "Alfred" then hs.closeConsole() end
+	end)
 
 --------------------------------------------------------------------------------
 
