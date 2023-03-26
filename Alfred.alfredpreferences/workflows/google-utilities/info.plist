@@ -139,7 +139,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>anycomplete.js</string>
+				<string>../word-changer-spelling-anycomplete/anycomplete.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>

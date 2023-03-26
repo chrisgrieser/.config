@@ -14,32 +14,31 @@ local gitVaultScript = VaultLocation .. "/Meta/git-vault-sync.sh"
 local gitPassScript = PasswordStore .. "/pass-sync.sh"
 
 ---@return boolean
-local function gitDotfileSync()
+---@param noSubmodulePull? any
+local function gitDotfileSync(noSubmodulePull)
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
 	if not (ScreenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
 
-	GitDotfileSyncTask = hs.task
-		.new(
-			gitDotfileScript,
-			function(exitCode, _, stdErr) -- wrapped like this, since hs.task objects can only be run one time
-				if exitCode == 0 then
-					print(dotfileIcon, "Dotfile Sync successful.")
-					return
-				end
+	if noSubmodulePull then noSubmodulePull = { "no-submodule-pull" } end
 
-				local stdout = hs.execute("git status --short")
-				if not stdout then return end
-				local submodulesStillDirty = stdout:match(" m ")
-				if submodulesStillDirty then
-					local modules = stdout:gsub(".*/", "")
-					Notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
-				else
-					Notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
-				end
-			end
-		)
-		:start()
+	local function dotfileSyncCallback(exitCode, _, stdErr)
+		if exitCode == 0 then
+			print(dotfileIcon, "Dotfile Sync successful.")
+			return
+		end
 
+		local stdout = hs.execute("git status --short")
+		if not stdout then return end
+		local submodulesStillDirty = stdout:match(" m ")
+		if submodulesStillDirty then
+			local modules = stdout:gsub(".*/", "")
+			Notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
+		else
+			Notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
+		end
+	end
+
+	GitDotfileSyncTask = hs.task.new(gitDotfileScript, dotfileSyncCallback, nil, noSubmodulePull):start()
 	if not GitDotfileSyncTask then return false end
 	return true
 end
@@ -49,6 +48,10 @@ local function gitVaultSync()
 	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return false end
 	if not (ScreenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
 
+
+	local function vaultSyncCallback()
+		
+	end
 	GitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
@@ -85,9 +88,16 @@ end
 --------------------------------------------------------------------------------
 
 ---sync all three git repos
----@param sendNotification? any whether to send notification on finished sync
-function SyncAllGitRepos(sendNotification)
-	local success1 = gitDotfileSync()
+---@param extras? string extra modes, e.g. send notification or ignore
+--submodules for dotfiles
+function SyncAllGitRepos(extras)
+	local success1
+	if extras and extras:find("no%-submodule%-pull") then
+		success1 = gitDotfileSync("no-submodule-pull")
+	else
+		success1 = gitDotfileSync()
+	end
+
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
 	if not (success1 and success2 and success3) then
@@ -101,13 +111,12 @@ function SyncAllGitRepos(sendNotification)
 		local vaultSyncing = GitVaultSyncTask and GitVaultSyncTask:isRunning()
 		return not (dotfilesSyncing or vaultSyncing or passSyncing)
 	end
+	local function updateSketchybar()
+		hs.execute("sketchybar --trigger repo-files-update")
+		if extras and extras:find("notify") then Notify("Sync finished.") end
+	end
 
-	hs.timer
-		.waitUntil(noSyncInProgress, function()
-			hs.execute("sketchybar --trigger repo-files-update")
-			if sendNotification then Notify("Sync finished.") end
-		end)
-		:start()
+	hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
 end
 
 --------------------------------------------------------------------------------
@@ -116,7 +125,9 @@ end
 -- 1. on systemstart (see meta.lua)
 
 -- 2. every x minutes
-RepoSyncTimer = hs.timer.doEvery(repoSyncFreqMin * 60, SyncAllGitRepos):start()
+RepoSyncTimer = hs.timer
+	.doEvery(repoSyncFreqMin * 60, function() SyncAllGitRepos("no-submodule-pull") end)
+	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
 UriScheme("sync-repos", function()
@@ -127,8 +138,8 @@ end)
 -- 4. when going to sleep / unlocking with idleTime
 SleepWatcher = hs.caffeinate.watcher
 	.new(function(event)
-		local caffeinate = hs.caffeinate.watcher
-		if event == caffeinate.screensDidSleep or (event == caffeinate.screensDidUnlock and IdleMins(30)) then
+		local c = hs.caffeinate.watcher
+		if event == c.screensDidSleep or (event == c.screensDidUnlock and IdleMins(30)) then
 			SyncAllGitRepos()
 		end
 	end)

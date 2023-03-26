@@ -18,7 +18,7 @@ if [[ "$filesChanged" == 0 ]] ; then
 fi
 
 # safeguard against accidental pushing of large files
-NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -not -path "**/coc/extensions/**" -size +${MAX_FILE_SIZE_MB}M | wc -l | xargs)
+NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -size +${MAX_FILE_SIZE_MB}M | wc -l | xargs)
 if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
 	echo -n "$NUMBER_LARGE_FILES Large files detected, aborting automatic git sync."
 	exit 1
@@ -30,9 +30,11 @@ git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
 git pull
 git push
 
-# update submodules
-git pull --recurse-submodules
-git submodule update --remote
+# update submodules, if called with extra arg
+if [[ "$1" != "no-submodule-pull" ]] ; then
+	git pull --recurse-submodules
+	git submodule update --remote
+fi
 
 # check that everything worked (e.g. submodules are still dirty)
 DIRTY=$(git status --porcelain)
