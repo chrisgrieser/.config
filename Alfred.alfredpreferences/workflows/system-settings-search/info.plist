@@ -2238,7 +2238,7 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 		<key>10BB0E7F-7A7B-47CA-B6BF-A2E88447DBDA</key>
 		<dict>
 			<key>xpos</key>
-			<real>65</real>
+			<real>60</real>
 			<key>ypos</key>
 			<real>395</real>
 		</dict>
@@ -2254,7 +2254,7 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 		<key>13F012E9-4D28-4459-9E50-AF9A0A3C5C54</key>
 		<dict>
 			<key>xpos</key>
-			<real>65</real>
+			<real>60</real>
 			<key>ypos</key>
 			<real>510</real>
 		</dict>
@@ -2300,14 +2300,14 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>65</real>
+			<real>60</real>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
 		<key>354F777D-BBCC-4FB8-BA07-1F9C33490800</key>
 		<dict>
 			<key>xpos</key>
-			<real>65</real>
+			<real>60</real>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
@@ -2559,7 +2559,7 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 		<key>B7B9D159-E1DE-4C44-B7A9-8C7577CD5DBE</key>
 		<dict>
 			<key>xpos</key>
-			<real>65</real>
+			<real>60</real>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>

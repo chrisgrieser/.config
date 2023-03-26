@@ -599,7 +599,7 @@ Search neovim plugins and online :help via Alfred</string>
 				<key>subtext</key>
 				<string>~/.local/share/nvim</string>
 				<key>text</key>
-				<string>📂 nvim (share)</string>
+				<string>📂 nvim – vim.fn.stdpath("data")</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -635,7 +635,7 @@ Search neovim plugins and online :help via Alfred</string>
 				<key>subtext</key>
 				<string>~/.local/state/nvim</string>
 				<key>text</key>
-				<string>📂 nvim (state)</string>
+				<string>📂 nvim – temp data</string>
 				<key>withspace</key>
 				<false/>
 			</dict>

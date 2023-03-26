@@ -214,6 +214,27 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>cs upload</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Upload screenshot from clipboard</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>3BFC06FB-2FCB-47AB-B54D-FFDABEDAF5FD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -242,27 +263,6 @@ failure 'No image data in clipboard'</string>
 			<string>73BF8CD8-5A95-4C98-B92B-BE206512C72F</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>screenshot</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Upload screenshot from clipboard</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>3BFC06FB-2FCB-47AB-B54D-FFDABEDAF5FD</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
