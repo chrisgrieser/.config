@@ -24,12 +24,13 @@ done
 
 # globs are necessary, since the exact name of the menubar item changes a bit
 # depending on installation whether mac is M1 or not
-network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*network.*" | head -n1 | cut -d\" -f2)
+network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.Network" | head -n1 | cut -d\" -f2)
+disk_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*disk.*" | head -n1 | cut -d\" -f2)
 cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | head -n1 | cut -d\" -f2)
 gpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*gpu" | head -n1 | cut -d\" -f2)
 ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*ram" | head -n1 | cut -d\" -f2)
 
-if [[ -z "$ram_bar_item" || -z "$cpu_bar_item" || -z "$gpu_bar_item" || -z "$network_bar_item" ]]; then
+if [[ -z "$ram_bar_item" || -z "$cpu_bar_item" || -z "$gpu_bar_item" || -z "$network_bar_item" || -z "$disk_bar_item" ]]; then
 	osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "not all Stats items are visible"'
 	exit 1
 fi
@@ -85,11 +86,13 @@ sketchybar \
 	icon.y_offset=-1 \
 	\
 	--add alias "$ram_bar_item" $second_row \
-	--set "$ram_bar_item" width=38 \
+	--set "$ram_bar_item" width=35 \
 	--add alias "$cpu_bar_item" $second_row \
-	--set "$cpu_bar_item" width=60 \
+	--set "$cpu_bar_item" width=55 \
 	--add alias "$gpu_bar_item" $second_row \
-	--set "$gpu_bar_item" width=55 \
+	--set "$gpu_bar_item" width=35 \
+	--add alias "$disk_bar_item" $second_row \
+	--set "$disk_bar_item" width=45 \
 	--add alias "$network_bar_item" $second_row \
 	--set "$network_bar_item" width=95 \
 	\

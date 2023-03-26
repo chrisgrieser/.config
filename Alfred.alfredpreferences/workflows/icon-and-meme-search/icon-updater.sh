@@ -119,7 +119,7 @@ if [[ $INFO_WINDOW == 1 ]]; then
 	exit 0 # needs to manually paste and then restart
 fi
 
-touch "$APP.app"
+[[ "$APP" != "PWAs" ]] && touch "$APP.app"
 killall "Dock" # INFO pgrep-ing for the Dock does not work, since there is always a process called that?
 
 #───────────────────────────────────────────────────────────────────────────────
