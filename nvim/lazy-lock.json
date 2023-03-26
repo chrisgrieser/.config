@@ -51,6 +51,7 @@
   "nvim-navic": { "branch": "master", "commit": "ec0ae4a3855ede3f7c412b6823f14978179828a5" },
   "nvim-notify": { "branch": "master", "commit": "50d037041ada0895aeba4c0215cde6d11b7729c4" },
   "nvim-recorder": { "branch": "main", "commit": "ded8d889ed247d01b793051d64dcfb39b13e14b8" },
+  "nvim-spider": { "branch": "main", "commit": "ed1dd33d16bedd43ade29f20789e19aa0df70c53" },
   "nvim-surround": { "branch": "main", "commit": "056f69ed494198ff6ea0070cfc66997cfe0a6c8b" },
   "nvim-treesitter": { "branch": "master", "commit": "c9ef5e58f7d59aba875324825ff47900d0be61f2" },
   "nvim-treesitter-endwise": { "branch": "master", "commit": "0cf4601c330cf724769a2394df555a57d5fd3f34" },
