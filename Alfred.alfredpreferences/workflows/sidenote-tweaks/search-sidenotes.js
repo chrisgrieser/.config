@@ -2,25 +2,22 @@
 
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	return [clean, str].join(" ") + " ";
+	return [clean, str].join(" ");
 }
 
 //──────────────────────────────────────────────────────────────────────────────
 
-function run(argv) {
-	const query = argv[0];
-	const sidenotes = Application("SideNotes");
-	const results = sidenotes
-		.search(query)
-	for (let res of queryResults) {
-		results.push({
-			title: res.title,
-			match: alfredMatcher(res.title) + " " alfredMatcher(res.details),
-			subtitle: res.details,
-			arg: res.identifier,
-			uid: res.identifier,
-		});
-	}
+const results = Application("SideNotes")
+	.search("") // search for all notes and let Alfred to the filtering
+	.filter(item => item.type !== "folder")
+	.map(item => {
+		return {
+			title: item.title,
+			subtitle: item.details,
+			match: alfredMatcher(item.title + item.details),
+			arg: item.identifier,
+			uid: item.identifier,
+		};
+	});
 
-	return JSON.stringify({ items: results });
-}
+JSON.stringify({ items: results });

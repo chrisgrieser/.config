@@ -30,9 +30,9 @@
 		"prefix": ["shell script", "doShellScript"],
 		"body": "app.doShellScript(`${1:shellscript}`);"
 	},
-	"open": {
-		"prefix": "open",
-		"body": "'app.openLocation(\"${1:url}\");"
+	"open location": {
+		"prefix": "open location",
+		"body": "app.openLocation(\"${1:url}\");"
 	},
 	"clipboard": {
 		"prefix": "clipboard",
