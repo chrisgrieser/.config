@@ -1,5 +1,5 @@
 {
-  "name" : "Remove \\n",
+  "name" : "trim trailing line break",
   "data" : {
     "items" : [
       {
@@ -8,10 +8,10 @@
         "note" : "remove \\n",
         "workflowobjectconfig" : {
           "regexcaseinsensitive" : false,
-          "matchstring" : "\\n$",
+          "matchmode" : 1,
           "regexmultiline" : false,
-          "replacestring" : "",
-          "matchmode" : 1
+          "matchstring" : "\\n$",
+          "replacestring" : ""
         },
         "colorindex" : 0,
         "ypos" : 5,
