@@ -7,17 +7,28 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const results = Application("SideNotes")
-	.search("") // search for all notes and let Alfred to the filtering
-	.filter(item => item.type !== "folder")
-	.map(item => {
-		return {
-			title: item.title,
-			subtitle: item.details,
-			match: alfredMatcher(item.title + item.details),
-			arg: item.identifier,
-			uid: item.identifier,
-		};
-	});
+function run(argv) {
+	const query = argv[0] || "";
+	const results = Application("SideNotes")
+		.search(query)
+		.filter(item => item.type !== "folder")
+		.map(item => {
+			return {
+				title: item.title,
+				subtitle: item.details,
+				match: alfredMatcher(item.title + item.details),
+				arg: item.identifier,
+				uid: item.identifier,
+			};
+		});
 
-JSON.stringify({ items: results });
+	// new note when none matching
+	if (results.length === 0) {
+		results.push({
+			title: "New Sidenote: " + query,
+			arg: query,
+		});
+	}
+
+	return JSON.stringify({ items: results });
+}
