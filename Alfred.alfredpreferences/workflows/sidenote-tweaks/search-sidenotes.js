@@ -8,17 +8,19 @@ function alfredMatcher(str) {
 //──────────────────────────────────────────────────────────────────────────────
 
 function run(argv) {
-	const query = argv[0] || "";
+	const query = argv[0] ? argv[0].trim() : "";
+
 	const results = Application("SideNotes")
-		.search(query)
-		.filter(item => item.type !== "folder")
+		.searchNotes(query)
 		.map(item => {
+			const content = item.title + "\n" + item.details;
 			return {
 				title: item.title,
 				subtitle: item.details,
 				match: alfredMatcher(item.title + item.details),
 				arg: item.identifier,
 				uid: item.identifier,
+				mods: { alt: { arg: content } },
 			};
 		});
 
@@ -27,6 +29,7 @@ function run(argv) {
 		results.push({
 			title: "New Sidenote: " + query,
 			arg: query,
+			mods: { alt: { valid: false } },
 		});
 	}
 
