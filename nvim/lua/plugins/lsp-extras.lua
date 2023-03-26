@@ -5,7 +5,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local capabilities = client.server_capabilities
 
 		-- navic not that useful for css
-		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
+		if
+			capabilities.documentSymbolProvider
+			and client.name ~= "cssls"
+			and client.name ~= "marksman" -- FIX https://github.com/SmiteshP/nvim-navic/issues/99
+		then
 			require("nvim-navic").attach(client, bufnr)
 		end
 
