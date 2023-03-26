@@ -225,7 +225,14 @@ Wf_zoom = Wf.new("zoom.us"):subscribe(Wf.windowCreated, function()
 	end)
 end)
 
-
+-- SIDENOTES
+-- update counter in sketchybar
+SidenotesWatcher = Aw.new(function(appName, event)
+	if appName ~= "SideNotes" then return end
+	if event == Aw.activated or event == Aw.deactivated then
+		hs.execute("sketchybar --trigger update-sidenote-count")
+	end
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -281,9 +288,12 @@ DiscordAppWatcher = Aw.new(function(appName, eventType, appObj)
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	if eventType == Aw.launched then
-		AsSoonAsAppRuns(appObj, function()
-			OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
-		end)
+		AsSoonAsAppRuns(
+			appObj,
+			function()
+				OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
+			end
+		)
 	end
 
 	-- when focused, enclose URL in clipboard with <>

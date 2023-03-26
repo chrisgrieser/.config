@@ -110,6 +110,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>8490AB75-2159-4B22-BD85-E5DCFF9E1E91</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -208,6 +218,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>E8BC01C9-80ED-4B16-BC6E-03702A985178</key>
 		<array>
@@ -224,6 +244,16 @@
 		</array>
 		<key>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</string>
@@ -402,27 +432,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>95F95EF4-4164-4FC1-B288-14C9051B21C8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -446,23 +455,47 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>matchmode</key>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+sketchybar --trigger update-sidenote-count</string>
+				<key>scriptargtype</key>
 				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
+				<key>scriptfile</key>
 				<string></string>
+				<key>type</key>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>8490AB75-2159-4B22-BD85-E5DCFF9E1E91</string>
+			<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>95F95EF4-4164-4FC1-B288-14C9051B21C8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -498,6 +531,27 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>E8BC01C9-80ED-4B16-BC6E-03702A985178</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>8490AB75-2159-4B22-BD85-E5DCFF9E1E91</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -666,9 +720,9 @@
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.vivaldi.Vivaldi</string>
-					<string>com.apptorium.SideNotes-paddle</string>
 					<string>com.apple.Safari</string>
+					<string>com.apptorium.SideNotes-paddle</string>
+					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
@@ -825,8 +879,8 @@
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.apple.Safari</string>
 					<string>com.vivaldi.Vivaldi</string>
+					<string>com.apple.Safari</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -857,7 +911,7 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>720</real>
+			<real>745</real>
 			<key>ypos</key>
 			<real>1025</real>
 		</dict>
@@ -904,7 +958,7 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>385</real>
+			<real>575</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
@@ -924,9 +978,9 @@
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>440</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>515</real>
 		</dict>
 		<key>8499FF4E-79F4-45EB-B3B6-7B25914C723B</key>
 		<dict>
@@ -937,6 +991,17 @@
 			<key>ypos</key>
 			<real>1245</real>
 		</dict>
+		<key>8A20019D-C824-4ACB-8917-F7347E7CEFD9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>update sketchybar counter</string>
+			<key>xpos</key>
+			<real>785</real>
+			<key>ypos</key>
+			<real>355</real>
+		</dict>
 		<key>95F95EF4-4164-4FC1-B288-14C9051B21C8</key>
 		<dict>
 			<key>colorindex</key>
@@ -944,9 +1009,9 @@
 			<key>note</key>
 			<string>only displayed on copy</string>
 			<key>xpos</key>
-			<real>530</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>355</real>
+			<real>485</real>
 		</dict>
 		<key>A0D4A0E0-54A3-4239-B00B-59020FEE6F23</key>
 		<dict>
@@ -1031,7 +1096,7 @@ note</string>
 			<key>note</key>
 			<string>create reminder for next day for note</string>
 			<key>xpos</key>
-			<real>220</real>
+			<real>280</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
