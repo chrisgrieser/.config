@@ -1,5 +1,6 @@
 # shellcheck disable=SC2164
 
+# ALIASES AND SMALLER UTILS
 alias co="git checkout"
 alias gs='git status'
 alias gd='git diff'
@@ -9,7 +10,7 @@ alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull --recurse-submodules"
 alias gm="git commit --amend --no-edit" # a[m]end
-alias gM="git commit --amend" 
+alias gM="git commit --amend"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 
 # open GitHub repo
@@ -20,12 +21,11 @@ function getGithubURL() {
 # open at github % copy url
 function gh() {
 	getGithubURL | pbcopy
-	open 	"$(getGithubURL)"
+	open "$(getGithubURL)"
 }
 alias gi='open "$(getGithubURL)/issues"'
 
 #───────────────────────────────────────────────────────────────────────────────
-
 # GIT LOG
 
 # short (only last 15 messages)
@@ -70,8 +70,29 @@ function gli() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
+# SELECT BRANCH
 
-# git add, commit, (pull) & push
+function gb() {
+	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
+
+	selected_branch=$(
+		git branch --color | fzf \
+			--ansi \
+			--layout=reverse \
+			--no-info \
+			--query "$*" \
+			--height=40% \
+			--header-first --header="↵ : Checkout Branch"
+	)
+	[[ -z "$selected_branch" ]] && return 0
+
+	selected_branch=$(echo "$selected_branch" | tr -d "* ")
+	git checkout "$selected_branch"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+# GIT ADD, COMMIT, (PULL) & PUSH
+
 function acp() {
 	# safeguard against accidental pushing of large files
 	NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M | wc -l | xargs)
@@ -115,11 +136,8 @@ function acp() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-#######################################
-# Arguments:
-# github url
-# depth (optional)
-#######################################
+# $1: github url
+# $2: depth (optional)
 function clone() {
 	betterClone "$1" "$2"
 }
