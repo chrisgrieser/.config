@@ -579,7 +579,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>create-new-sitenote.js</string>
+				<string>create-new-sidenote.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -613,9 +613,9 @@
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.apple.Safari</string>
-					<string>com.apptorium.SideNotes-paddle</string>
 					<string>com.vivaldi.Vivaldi</string>
+					<string>com.apptorium.SideNotes-paddle</string>
+					<string>com.apple.Safari</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
@@ -683,31 +683,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
-
--- funktioniert auch mit der Youtube Webapp</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-url-from-browser.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E1952981-5610-42C6-967C-9728E176B587</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -728,8 +703,8 @@
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.vivaldi.Vivaldi</string>
 					<string>com.apple.Safari</string>
+					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -738,6 +713,31 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>8499FF4E-79F4-45EB-B3B6-7B25914C723B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
+
+-- funktioniert auch mit der Youtube Webapp</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-url-from-browser.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E1952981-5610-42C6-967C-9728E176B587</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -838,7 +838,8 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>copy/delete note</string>
+			<string>openURL / copy / delete
+note</string>
 			<key>xpos</key>
 			<real>285</real>
 			<key>ypos</key>
@@ -922,7 +923,7 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>create new sidenote</string>
+			<string>create new sidenote (and close)</string>
 			<key>xpos</key>
 			<real>570</real>
 			<key>ypos</key>

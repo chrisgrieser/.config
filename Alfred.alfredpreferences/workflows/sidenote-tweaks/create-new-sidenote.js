@@ -15,6 +15,10 @@ function run(argv) {
 		ispath: isPath,
 	});
 
+	// close sidenotes
+	Application("System Events").keystroke("w", { using: ["command down"] });
+
+	// for notification
 	const firstline = input.split("\n").shift();
-	return firstline; // for notification
+	return firstline;
 }

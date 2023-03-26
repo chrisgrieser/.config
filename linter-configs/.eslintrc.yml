@@ -13,6 +13,7 @@ env:
 reportUnusedDisableDirectives: true
 
 #───────────────────────────────────────────────────────────────────────────────
+# JAVASCRIPT-SPECIFIC
 
 globals:
   # JXA
@@ -29,18 +30,18 @@ globals:
   request: readonly
 
 rules:
-  # Alfred
   no-unused-vars:
     - warn
     - varsIgnorePattern: run # jxa in Alfred
+  no-unused-expressions: off # not useful for JXA due to direct return
 
   #─────────────────────────────────────────────────────────────────────────────
   # SHARED WITH TYPESCRIPT
 
-  # Structure / General
+  # Structure / Blocks
   complexity: [warn, 15]
   max-depth: [warn, 4]
-  no-unused-expressions: off # not useful for JXA
+  no-empty: warn
 
   # variables
   no-implicit-coercion: warn

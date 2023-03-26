@@ -11,32 +11,48 @@ function writeToFile(file, text) {
 //──────────────────────────────────────────────────────────────────────────────
 
 function run(argv) {
+	// determine actions
 	const mode = argv[0];
+	let doDelete = mode.includes("delete");
+	const doOpenUrl = mode.includes("openurl");
+	const doCopy = mode.includes("copy");
 
 	// get content
 	const sidenotes = Application("SideNotes");
 	const currentNote = sidenotes.currentNote();
 	const content = currentNote.text();
 
-	if (mode.includes("openurl")) {
+	// open URL (& close sidenotes)
+	if (doOpenUrl) {
+		const url = content.match(/https?:\/\/[^\s]+/)[0];
+		app.openLocation(url);
 
+		// close sidenotes
+		Application("System Events").keystroke("w", { using: ["command down"] });
+
+		// dynamically decide whether to delete
+		const noteHasOnlyUrl = content === url;
+		const secondLineOnlyUrl = content.split("\n")[1] === url;
+		doDelete = noteHasOnlyUrl || secondLineOnlyUrl;
 	}
-	const url = content.match(/https?:\/\/[^\s]+/)[0];
-
-	// close sidenotes
-	Application("System Events").keystroke("w", { using: ["command down"] });
 
 	// Trash Note, but keep copy in trash folder
-	const maxNameLen = 50;
-	let safeTitle = sidenotes
-		.currentNote()
-		.title()
-		.replace(/[/\\:;,"'#()[\]=<>{}]/gm, "");
-	if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
-	const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.txt`;
-	writeToFile(trashNotePath, content);
-	sidenotes.currentNote().delete();
+	if (doDelete) {
+		const maxNameLen = 50;
+		let safeTitle = sidenotes
+			.currentNote()
+			.title()
+			.replace(/[/\\:;,"'#()[\]=<>{}]/gm, "");
+		if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
+		const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.txt`;
+		writeToFile(trashNotePath, content);
+		sidenotes.currentNote().delete();
+	}
 
 	// (optional) copy to clipboard
-	if (mode === "copy-delete") app.setTheClipboardTo(content);
+	if (doCopy) {
+		app.setTheClipboardTo(content);
+	}
+
+	if (doCopy || doOpenUrl)
 }
