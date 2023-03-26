@@ -8,19 +8,6 @@
 	<dict>
 		<key>2856DA0F-7623-47F9-9E7C-DA4CC8F0B448</key>
 		<array/>
-		<key>34386EC6-BB0D-4C32-9050-9E4ECBAF62AA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C0034F9D-C3AB-45C4-B7FD-F2DF921E9D5C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5043B89E-B8D1-4515-ACDA-70F5B4D009FA</key>
 		<array/>
 		<key>548C7E00-D279-4BFE-B4CB-4F94C970637F</key>
@@ -40,7 +27,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>34386EC6-BB0D-4C32-9050-9E4ECBAF62AA</string>
+				<string>C0034F9D-C3AB-45C4-B7FD-F2DF921E9D5C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -430,7 +417,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>../get-url-from-browser.js</string>
+				<string>get-url-from-browser.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -493,27 +480,6 @@
 			<string>C0034F9D-C3AB-45C4-B7FD-F2DF921E9D5C</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>34386EC6-BB0D-4C32-9050-9E4ECBAF62AA</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -593,17 +559,6 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
-		<key>34386EC6-BB0D-4C32-9050-9E4ECBAF62AA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>note</key>
-			<string>remove \n</string>
-			<key>xpos</key>
-			<real>385</real>
-			<key>ypos</key>
-			<real>425</real>
-		</dict>
 		<key>4B06046A-148C-4F17-B241-C48299B1D2F1</key>
 		<dict>
 			<key>colorindex</key>
@@ -638,7 +593,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>note</key>
 			<string>get Browser URL</string>
 			<key>xpos</key>
-			<real>235</real>
+			<real>245</real>
 			<key>ypos</key>
 			<real>395</real>
 		</dict>

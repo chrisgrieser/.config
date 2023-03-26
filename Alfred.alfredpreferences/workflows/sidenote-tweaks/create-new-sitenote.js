@@ -1,7 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
 
 ObjC.import("stdlib");
-const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
+const fileExists = filePath => Application("Finder").exists(Path(filePath));
 
 function run(argv) {
 	const input = argv[0];
@@ -15,5 +15,6 @@ function run(argv) {
 		ispath: isPath,
 	});
 
-	return input; // for notification
+	const firstline = input.split("\n").shift();
+	return firstline; // for notification
 }
