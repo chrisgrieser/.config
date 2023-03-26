@@ -21,14 +21,12 @@ function run(argv) {
 	const sidenotes = Application("SideNotes");
 	const currentNote = sidenotes.currentNote();
 	const content = currentNote.text();
+	const firstLine = currentNote.title();
 
 	// open URL (& close sidenotes)
 	if (doOpenUrl) {
 		const url = content.match(/https?:\/\/[^\s]+/)[0];
 		app.openLocation(url);
-
-		// close sidenotes
-		Application("System Events").keystroke("w", { using: ["command down"] });
 
 		// dynamically decide whether to delete
 		const noteHasOnlyUrl = content === url;
@@ -39,20 +37,22 @@ function run(argv) {
 	// Trash Note, but keep copy in trash folder
 	if (doDelete) {
 		const maxNameLen = 50;
-		let safeTitle = sidenotes
-			.currentNote()
-			.title()
-			.replace(/[/\\:;,"'#()[\]=<>{}]/gm, "");
+		let safeTitle = firstLine.replace(/[/\\:;,"'#()[\]=<>{}]|\.$/gm, "");
 		if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
 		const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.txt`;
 		writeToFile(trashNotePath, content);
 		sidenotes.currentNote().delete();
 	}
 
-	// (optional) copy to clipboard
-	if (doCopy) {
-		app.setTheClipboardTo(content);
+	// close sidenotes
+	if (doCopy || doOpenUrl) {
+		Application("System Events").keystroke("w", { using: ["command down"] });
 	}
 
-	if (doCopy || doOpenUrl)
+	// copy to clipboard
+	if (doCopy) {
+		app.setTheClipboardTo(content);
+		return firstLine; // for notification
+	}
+	return ""; // don't create a notification
 }
