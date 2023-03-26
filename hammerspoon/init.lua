@@ -1,5 +1,4 @@
 -- SETTINGS
-hs.consoleOnTop(false)
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
 hs.application.enableSpotlightForNameSearches(false) -- suppress useless console msgs
