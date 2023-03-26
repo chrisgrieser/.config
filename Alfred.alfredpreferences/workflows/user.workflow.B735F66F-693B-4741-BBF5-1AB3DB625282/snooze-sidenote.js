@@ -6,7 +6,6 @@ function run() {
 
 	const content = sidenotes.currentNote().text();
 	sidenotes.currentNote().delete();
-	sidenotes.vi
 
 	reminders.defaultList().make({ new: "reminder", withProperties: { name: content } });
 	// alternative method
