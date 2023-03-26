@@ -37,15 +37,13 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   # SHARED WITH TYPESCRIPT
 
-  # structure
+  # Structure / General
   complexity: [warn, 15]
   max-depth: [warn, 4]
-
-  # General
-  no-implicit-coercion: error
-  no-unused-expressions: error
+  no-unused-expressions: off # not useful for JXA
 
   # variables
+  no-implicit-coercion: warn
   id-length:
     - warn
     - min: 4
