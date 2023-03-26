@@ -279,12 +279,9 @@ DiscordAppWatcher = Aw.new(function(appName, eventType, appObj)
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	if eventType == Aw.launched then
-		hs.timer.waitUntil(
-			function() return appObj:mainWindow():title() end,
-			function()
-				hs.open("discord://discord.com/channels/686053708261228577/700466324840775831")
-			end
-		)
+		AsSoonAsAppRuns(appObj, function()
+			OpenLinkInBackground("discord://discord.com/channels/686053708261228577/700466324840775831")
+		end)
 	end
 
 	-- when focused, enclose URL in clipboard with <>

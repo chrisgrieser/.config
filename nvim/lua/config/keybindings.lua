@@ -401,7 +401,7 @@ Keymap("n", "gO", function()
 	local thisFolder = Expand("%:p:h")
 	require("telescope").extensions.file_browser.file_browser { path = thisFolder }
 end, { desc = " Browse in Folder" })
-Keymap("n", "gF", function() Cmd.Telescope("live_grep") end, { desc = " ripgrep folder" })
+Keymap("n", "gl", function() Cmd.Telescope("live_grep") end, { desc = " Live Grep in Folder" })
 Keymap("n", "gr", function() Cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 
 -- File Operations

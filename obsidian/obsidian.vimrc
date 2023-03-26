@@ -88,7 +88,7 @@ nmap gx :followNextLink
 nmap gd :followNextLink
 
 exmap liveGrep obcommand obsidian-another-quick-switcher:grep
-nmap gF :liveGrep
+nmap gl :liveGrep
 
 " [g]oto [o]pen file (= Quick Switcher)
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search
