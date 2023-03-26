@@ -32,19 +32,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>26469DF4-1A9D-4A84-85DA-A42E21C9C5B2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>26E98B85-F67B-478C-AB5E-20DAB43553A7</key>
 		<array>
 			<dict>
@@ -88,7 +75,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>26469DF4-1A9D-4A84-85DA-A42E21C9C5B2</string>
+				<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -124,20 +111,39 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Sidenote snoozed</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>const content = Application("SideNotes").currentNote().text();
-Application("SideNotes").currentNote().delete();
-content // direct return</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>.js</string>
+				<string>snooze-sidenote.js</string>
 				<key>type</key>
-				<integer>7</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -176,60 +182,6 @@ content // direct return</string>
 			<string>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>on run argv
-	set theList to "General"
-	set reminderText to argv as string
-	set inDays to 1
-	set dueDate to (current date) + inDays * (60 * 60 * 24)
-	tell application "Reminders"
-		tell (list theList) to make new reminder at end with properties {name:reminderText, allday due date: dueDate}
-		quit
-	end tell
-	return reminderText # for notification
-end run</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>26469DF4-1A9D-4A84-85DA-A42E21C9C5B2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Sidenote snoozed</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -474,17 +426,6 @@ end run</string>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
-		<key>26469DF4-1A9D-4A84-85DA-A42E21C9C5B2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>create reminder tmrw</string>
-			<key>xpos</key>
-			<real>365</real>
-			<key>ypos</key>
-			<real>25</real>
-		</dict>
 		<key>26E98B85-F67B-478C-AB5E-20DAB43553A7</key>
 		<dict>
 			<key>colorindex</key>
@@ -508,7 +449,7 @@ end run</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>510</real>
+			<real>385</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
