@@ -27,6 +27,9 @@ alias mkdir='mkdir -p' # create intermediate directories
 alias pip="pip3"
 alias curl="curl -sL"              # silent & redirect
 
+# misc
+alias prose='ssh nanotipsforvim@prose.sh'
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # EXA (function and not alias for `directoryInspect`)
