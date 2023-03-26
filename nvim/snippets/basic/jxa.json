@@ -89,7 +89,15 @@
 			"}"
 		]
 	},
-	"browser URL & title (function)": {
+	"browser URL": {
+		"prefix": "browser URL",
+		"body": "const url = Application(\"Vivaldi\").windows[0].activeTab.url();"
+	},
+	"browser title": {
+		"prefix": "browser title",
+		"body": "const title = Application(\"Vivaldi\").windows[0].activeTab.title();"
+	},
+	"browser URL & title (all-browser function)": {
 		"prefix": "browser URL & title (function)",
 		"body": [
 			"function browserTab() {",
