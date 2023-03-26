@@ -32,19 +32,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>2B552BA8-0C59-435F-BDBD-098DE6AFEEEC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>50269231-2406-4275-B09D-C8C56303345C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>37395496-78FC-403F-9082-9A707DCD9ABF</key>
 		<array>
 			<dict>
@@ -71,34 +58,8 @@
 				<false/>
 			</dict>
 		</array>
-		<key>59D9B736-8554-4EA2-8960-591B4400DF1B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A0DD7429-3BAA-45F5-9905-252E0AABEE20</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>661DA836-A4F2-4671-80FE-4F378B93EAD0</key>
 		<array/>
-		<key>8BE8ACA3-604D-474D-A934-3B48DF6BDB1D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>31E69F58-B448-43C3-A5EE-E9262AB81918</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>910D559A-3716-434C-8BAB-91AD98EB0E50</key>
 		<array>
 			<dict>
@@ -444,142 +405,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>slack://user?team=T010A5PEMBQ&amp;id=UV95WSJJW</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>A0DD7429-3BAA-45F5-9905-252E0AABEE20</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>markus</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Markus</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>59D9B736-8554-4EA2-8960-591B4400DF1B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>31E69F58-B448-43C3-A5EE-E9262AB81918</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>fixedorder</key>
-				<false/>
-				<key>items</key>
-				<string>[{"title":"Linux people doing Linux things","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/966134631625801729"},{"title":"Vim people doing vim things","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/1056113012999720980"},{"title":"Mac people doing mac things","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/984910828459397270"},{"title":"theme-dev","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/931552763467411487"},{"title":"off-topic","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/700466324840775831"},{"title":"academia","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/722584061087842365"},{"title":"vip-lounge","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/714234422379151400"},{"title":"alpha-testing","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/989603365606531104"},{"title":"knowledge-management","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/710585052769157141"},{"title":"AI doing people things","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/1060148949878571089"},{"title":"plugin-general","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/707816848615407697"},{"title":"plugin-advanced","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/840286238928797736"},{"title":"showcase-notes","arg":"discord:\/\/discord.com\/channels\/686053708261228577\/744933215063638183"}]</string>
-				<key>keyword</key>
-				<string>#</string>
-				<key>matchmode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Discord Channels</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.listfilter</string>
-			<key>uid</key>
-			<string>8BE8ACA3-604D-474D-A934-3B48DF6BDB1D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>slack://user?team=T010A5PEMBQ&amp;id=U0107UYR988</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>50269231-2406-4275-B09D-C8C56303345C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>suse</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Suse</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>2B552BA8-0C59-435F-BDBD-098DE6AFEEEC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -646,24 +471,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>485</real>
 		</dict>
-		<key>2B552BA8-0C59-435F-BDBD-098DE6AFEEEC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>705</real>
-		</dict>
-		<key>31E69F58-B448-43C3-A5EE-E9262AB81918</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>590</real>
-			<key>ypos</key>
-			<real>610</real>
-		</dict>
 		<key>37395496-78FC-403F-9082-9A707DCD9ABF</key>
 		<dict>
 			<key>colorindex</key>
@@ -686,24 +493,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
-		<key>50269231-2406-4275-B09D-C8C56303345C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>210</real>
-			<key>ypos</key>
-			<real>705</real>
-		</dict>
-		<key>59D9B736-8554-4EA2-8960-591B4400DF1B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>585</real>
-		</dict>
 		<key>661DA836-A4F2-4671-80FE-4F378B93EAD0</key>
 		<dict>
 			<key>colorindex</key>
@@ -713,17 +502,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>310</real>
 		</dict>
-		<key>8BE8ACA3-604D-474D-A934-3B48DF6BDB1D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>note</key>
-			<string>discord channels</string>
-			<key>xpos</key>
-			<real>405</real>
-			<key>ypos</key>
-			<real>610</real>
-		</dict>
 		<key>910D559A-3716-434C-8BAB-91AD98EB0E50</key>
 		<dict>
 			<key>colorindex</key>
@@ -731,16 +509,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>820</real>
-		</dict>
-		<key>A0DD7429-3BAA-45F5-9905-252E0AABEE20</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>210</real>
-			<key>ypos</key>
-			<real>585</real>
+			<real>605</real>
 		</dict>
 		<key>A537988D-4030-4E88-82B4-D20AEE30FA86</key>
 		<dict>
@@ -767,7 +536,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>820</real>
+			<real>605</real>
 		</dict>
 		<key>E8CC14AC-2115-4AD9-9732-73890756EFEE</key>
 		<dict>
