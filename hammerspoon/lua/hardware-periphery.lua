@@ -64,7 +64,7 @@ ExternalHarddriveWatcher = hs.usb.watcher
 
 		local harddriveNames = {
 			"ZY603 USB3.0 Device", -- Externe A
-			-- "", TODO write down the name I get my hands on it again
+			"External Disk 3.0", -- Externe B
 			"Elements 2621", -- Externe C
 		}
 		local isBackupDrive = TableContains(harddriveNames, device.productName)
@@ -89,6 +89,7 @@ WifiWatcher = hs.wifi.watcher
 		local ssid = hs.wifi.currentNetwork() or "none"
 		local msg = event .. ": " .. ssid
 		Notify("📶 " .. msg)
+		-- at the office, log the network
 		if IsAtOffice() then
 			local timestamp = tostring(os.date()):sub(5, -6)
 			AppendToFile("./HBS-WiFi.log", timestamp .. " – " .. msg)

@@ -24,7 +24,9 @@ echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >>"$LOG_LOCATION"
 #───────────────────────────────────────────────────────────────────────────────
 
 # Helper function
+errors=""
 function bkp() {
+	[[ ! -d "$1" ]] && errors="$errors\n$1 does not exist."
 	print -n "\033[1;34m"
 	echo
 	echo "----------------------------------------------------"
@@ -53,6 +55,10 @@ bkp "$HOME/.gnupg/" ./Homefolder/gnupg
 echo
 print "\033[1;34m----------------------------------------------------\033[0m"
 echo
+
+if [[ -n "$errors" ]]; then
+	print "\033[1;31m$errors\033[0m"	
+fi
 
 # Log (on Mac)
 echo "completed: $(date '+%H:%M')" >>"$LOG_LOCATION"
