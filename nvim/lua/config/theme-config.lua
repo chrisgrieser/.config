@@ -40,18 +40,19 @@ local function customHighlights()
 	Fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
 	linkHighlight("myAnnotations", "Todo")
-	Fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
+	-- stylua: ignore
+	Fn.matchadd( "myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
 
 	setHighlight("Overnesting", "guibg=#E06C75")
-	Fn.matchadd("Overnesting", "\t\t\t\t\t\t\t*")
+	Fn.matchadd("Overnesting", ("\t"):rep(8) .. "\t*")
 
 	setHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
 	setHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
 	linkHighlight("CodiVirtualText", "Comment") -- Codi
 	setHighlight("TSDefinition", " term=underline gui=underdotted") -- treesittter refactor focus
 	setHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
-	setHighlight("QuickScopePrimary", "gui=reverse cterm=reverse") 
-	setHighlight("QuickScopeSecondary", "gui=underdouble cterm=underline") 
+	setHighlight("QuickScopePrimary", "gui=reverse cterm=reverse")
+	setHighlight("QuickScopeSecondary", "gui=underdouble cterm=underline")
 
 	-- HACK for https://github.com/neovim/neovim/issues/20456
 	-- linkHighlight("luaParenError.highlight", "NormalFloat")
@@ -131,7 +132,6 @@ local function themeModifications()
 		linkHighlight("NotifyINFOIcon", "@define")
 		linkHighlight("NotifyINFOTitle", "@define")
 		linkHighlight("NotifyINFOBody", "@define")
-
 	end
 end
 
