@@ -45,6 +45,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>90F0EAB6-7686-4829-95EC-EE1E363B67F7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>42AD9AB0-3C2B-48E4-B5F5-6391B8491DAF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>931A201F-67BF-4D23-845D-15074A56A83D</key>
 		<array>
 			<dict>
@@ -89,6 +102,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>931A201F-67BF-4D23-845D-15074A56A83D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E206A8A9-ADE8-4A8D-AA62-AC94A971FBB3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>90F0EAB6-7686-4829-95EC-EE1E363B67F7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -147,6 +173,71 @@
 	<string>Calendar &amp; Reminders</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>add-to-shopping-list.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>90F0EAB6-7686-4829-95EC-EE1E363B67F7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ein</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Supermarkt: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E206A8A9-ADE8-4A8D-AA62-AC94A971FBB3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Added "{query}"</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>42AD9AB0-3C2B-48E4-B5F5-6391B8491DAF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -466,16 +557,25 @@
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>190</real>
 		</dict>
 		<key>42A7B9B4-EB45-4703-9232-AF5C99D4512E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>410</real>
+			<real>415</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>450</real>
+		</dict>
+		<key>42AD9AB0-3C2B-48E4-B5F5-6391B8491DAF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>400</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>578C08D0-C681-4E8A-AC1A-63359A0F0C34</key>
 		<dict>
@@ -484,9 +584,9 @@
 			<key>note</key>
 			<string>weekly date generator</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>160</real>
 		</dict>
 		<key>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</key>
 		<dict>
@@ -495,18 +595,27 @@
 			<key>note</key>
 			<string>add reminder in background</string>
 			<key>xpos</key>
-			<real>220</real>
+			<real>225</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>450</real>
+		</dict>
+		<key>90F0EAB6-7686-4829-95EC-EE1E363B67F7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>931A201F-67BF-4D23-845D-15074A56A83D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>555</real>
+			<real>550</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>290</real>
 		</dict>
 		<key>A0AD41AF-569F-405D-BB88-29B96C8DF007</key>
 		<dict>
@@ -515,43 +624,52 @@
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>160</real>
 		</dict>
 		<key>C539C739-DFEF-4D04-8767-7244B05540C3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>735</real>
 		</dict>
 		<key>C6DAAB1D-609E-4930-B1D7-F7D3F3D59BC6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>225</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>665</real>
 		</dict>
 		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>120</real>
+			<real>260</real>
+		</dict>
+		<key>E206A8A9-ADE8-4A8D-AA62-AC94A971FBB3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>F00C2986-4FD7-478F-B72E-810CA90E50D0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>630</real>
+			<real>625</real>
 			<key>ypos</key>
-			<real>120</real>
+			<real>260</real>
 		</dict>
 		<key>F300A89D-7DA2-4976-BF45-0CE5C7EA2C98</key>
 		<dict>
@@ -560,9 +678,9 @@
 			<key>note</key>
 			<string>add reminder</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>450</real>
 		</dict>
 		<key>F4FE8A6C-1141-485C-8B99-0651788E8F5F</key>
 		<dict>
@@ -571,9 +689,9 @@
 			<key>note</key>
 			<string>add event to BusyCal</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>595</real>
 		</dict>
 		<key>FFFCD856-9A0A-4D43-A899-CCA1AE5235BB</key>
 		<dict>
@@ -582,9 +700,9 @@
 			<key>note</key>
 			<string>add week</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>300</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
