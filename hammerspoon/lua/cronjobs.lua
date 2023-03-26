@@ -26,6 +26,10 @@ ProjectorScreensaverWatcher = caff
 --------------------------------------------------------------------------------
 -- BACKUP / MAINTENANCE
 
+
+hs.osascript.javascriptFromFile("./helpers/push-todays-reminders-to-sidenotes.js")
+
+
 ---@return string three-char string representing the day of the week (English)
 local function getWeekday() return tostring(os.date()):sub(1, 3) end
 

@@ -22,14 +22,13 @@
 		"description": "This comment indicates that a fallthrough in a switch statement is intentional and disables the respective eslint warning. See: https://eslint.org/docs/latest/rules/no-fallthrough"
 	},
 	"for .. (counter-based loop)": {
-		"prefix": "for ..",
+		"prefix": "for .. (counter-based)",
 		"body": [
 			"for (let ${1:index} = 0; ${1:index} < ${2:array}.length; ${1:index}++) {",
 			"\tconst ${3:element} = ${2:array}[${1:index}];",
 			"\t$0",
 			"}"
-		],
-		"description": "For Loop"
+		]
 	},
 	".forEach": {
 		"prefix": "forEach =>",
