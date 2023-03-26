@@ -9,13 +9,10 @@ return {
 		keys = ":",
 		config = true,
 	},
-
-	-----------------------------------------------------------------------------
-
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
-		dev = true,
 		lazy = true, -- loaded by keybinds
+		dev = true,
 	},
 	{ -- automatically set right indent for file
 		"Darazaki/indent-o-matic",
@@ -45,7 +42,6 @@ return {
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- useful for keymaps
-				rule("= {", "},", "lua"):with_pair(), -- add trailing comma for lua tables
 				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
@@ -97,11 +93,11 @@ return {
 		event = "BufReadPost",
 		opts = {
 			ring = {
-				history_length = 20,
-				cancel_event = "move", -- move|update
+				history_length = 10,
+				cancel_event = "update", -- move|update
 			},
 			highlight = {
-				on_yank = false, -- using for nicer highlights vim.highlight.on_yank()
+				on_yank = false, -- using for nicer highlights via vim.highlight.on_yank()
 				on_put = true,
 				timer = 400,
 			},

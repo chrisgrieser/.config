@@ -6,7 +6,7 @@ on run argv
 	tell application "Reminders"
 		tell (list theList) to make new reminder at end with properties {name: toBuy}
 		activate
-		# quit # to save in background instead
+		# quit -- to save in background instead
 	end tell
 	return toBuy # for notification
 end run

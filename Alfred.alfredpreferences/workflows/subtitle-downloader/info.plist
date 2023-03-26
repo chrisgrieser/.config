@@ -83,7 +83,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>Download finished</string>
+				<string>✅ Download finished</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
