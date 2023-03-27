@@ -84,3 +84,4 @@ Reddit
 breakpoint
 Nerdfont
 nerdfont
+JXA
