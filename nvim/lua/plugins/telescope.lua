@@ -26,14 +26,16 @@ local function telescopeConfig()
 				"venv/", -- python
 				"%.app/", -- internals of mac apps
 				"%.pxd", -- Pixelmator
-				"%.plist", -- Alfred
-				"%.harpoon", -- harpoon/projects
+				"%.plist$", -- Alfred
+				"%.harpoon$", -- harpoon/projects
 				"/INFO ", -- custom info files
-				"%.png",
-				"%.gif",
-				"%.jpe?g",
+				"%.png$",
+				"%.gif$",
+				"%.jpe?g$",
 				"%.icns",
-				"%.zip",
+				"%.zip$",
+				"%.mkv$",
+				"%.mp4$",
 			},
 			mappings = {
 				i = keymappings,
