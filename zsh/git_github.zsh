@@ -136,16 +136,22 @@ function acp() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# $1: github url
-# $2: depth (optional)
+# regular clone, optionally take depth as first argument and url as second
 function clone() {
-	betterClone "$1" "$2"
+	if [[ "$1" =~ ^[0-9]+$ ]]; then
+		betterClone "$2" "$1" # switch order for betterClone function
+	else
+		betterClone "$1"
+	fi
 }
 
+# shallow clone (depth 1, single branch, no blob)
 function sclone() { # shallow clone
 	betterClone "$1" "shallow"
 }
 
+# 1: remote url (github URL will be converted to SSH)
+# 2: mode - shallow|number shallow clone or clone with depth
 function betterClone() {
 	if [[ "$1" =~ http ]]; then # safety net to not accidentally use https
 		giturl="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
@@ -171,6 +177,7 @@ function betterClone() {
 	fi
 }
 
+# delete and re-clone git repo (with depth 10)
 function nuke {
 	is_submodule=$(git rev-parse --show-superproject-working-tree)
 	if [[ -n "$is_submodule" ]]; then
@@ -185,12 +192,12 @@ function nuke {
 	cd ..
 
 	rm -rvf "$LOCAL_REPO"
-	echo "---"
+	print "\033[1;34m--------------"
 	echo "Local repo removed."
-	echo "Downloading repo again from remote…"
-	echo "---"
+	echo "Cloning repo again from remote… (with depth 10)"
+	print "--------------\033[0m"
 
-	git clone "$SSH_REMOTE" "$LOCAL_REPO" && cd "$LOCAL_REPO" || return 1
+	git clone --depth=10 "$SSH_REMOTE" "$LOCAL_REPO" && cd "$LOCAL_REPO" || return 1
 }
 
 #───────────────────────────────────────────────────────────────────────────────
