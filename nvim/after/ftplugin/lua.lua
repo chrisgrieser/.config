@@ -17,7 +17,9 @@ end, { desc = " Open lua pattern in regex viewer", buffer = true })
 Keymap("n", "<leader>r", function()
 	Cmd.update()
 	local parentFolder = Expand("%:p:h")
+	local package = Expand("%:t")
 	if parentFolder:find("nvim") then
+		-- package.loaded[]
 		Cmd.source()
 		vim.notify(Expand("%:r") .. " re-sourced")
 	elseif parentFolder:find("hammerspoon") then
