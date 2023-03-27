@@ -46,7 +46,7 @@ Keymap("n", "<Esc>", function()
 end, { desc = "Clear Notifications" })
 
 --------------------------------------------------------------------------------
--- NAVIGATION
+-- MOTIONS
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 Keymap({ "o", "x" }, "H", "^")
@@ -59,11 +59,11 @@ Keymap({ "n", "x" }, "K", "6k")
 Keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 Keymap("o", "K", "2k")
 
--- JUMP HISTORY
+-- Jump history
 Keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 Keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
--- SEARCH
+-- Search
 Keymap({ "n", "o" }, "-", "/", { desc = "Search" })
 Keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 Keymap("n", "+", "*", { desc = "Search word under cursor" })
@@ -78,7 +78,7 @@ vim.on_key(function(char)
 	end
 end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
--- MARKS
+-- Marks
 -- stylua: ignore
 Keymap("n", "ä", function() require("funcs.mark-cycler").gotoMark() end, { desc = "Goto Next Mark" })
 Keymap("n", "Ä", function() require("funcs.mark-cycler").setMark() end, { desc = "Set Next Mark" })
@@ -88,7 +88,7 @@ Autocmd("VimEnter", {
 	callback = function() require("funcs.mark-cycler").clearMarks() end,
 })
 
--- HUNKS AND CHANGES
+-- Hunks and Changes
 Keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
 Keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
 Keymap("n", "gc", "g;", { desc = "goto next change" })
@@ -102,6 +102,23 @@ Keymap("n", "m", "%", { desc = "Goto Matching Bracket" })
 -- https://github.com/jeetsukumaran/vim-indentwise#customization
 Keymap("n", "gi", "<Plug>(IndentWiseNextLesserIndent)", { desc = "Next Lesser Indent" })
 Keymap("n", "gI", "<Plug>(IndentWisePreviousLesserIndent)", { desc = "Previous Lesser Indent" })
+
+-- Jump to Parent Symbol
+Keymap("n", "gk", function()
+	if not require("nvim-navic").is_available() then
+		vim.notify("Navic is not available.", LogWarn)
+		return
+	end
+	local symbolPath = require("nvim-navic").get_data()
+	local parent = symbolPath[#symbolPath - 1]
+	if not parent then 
+		vim.notify("Already at the highest parent.")
+		return
+	end
+	local parentPos = parent.scope.start
+	SetCursor(0, { parentPos.line, parentPos.character })
+end, { desc = "璉Jump to Parent" })
+
 
 --------------------------------------------------------------------------------
 
@@ -448,17 +465,6 @@ Keymap("n", "gs", function() Cmd.Telescope("treesitter") end, { desc = " Docu
 
 -- actions defined globally so null-ls can use them without LSP
 Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "璉Code Action" })
-
--- Jump to Parent Symbol
-Keymap("n", "<D-b>", function()
-	if not require("nvim-navic").is_available() then
-		vim.notify("Navic is not available.", LogWarn)
-		return
-	end
-	local symbolPath = require("nvim-navic").get_data()
-	local parent = symbolPath[#symbolPath - 1].scope.start
-	SetCursor(0, { parent.line, parent.character })
-end, { desc = "璉Jump to Parent" })
 
 -- copy breadcrumbs (nvim navic)
 Keymap("n", "<D-b>", function()
