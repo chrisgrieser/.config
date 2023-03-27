@@ -224,6 +224,7 @@ function rel() {
 function gdf() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
+	if [[ $# -eq 0 ]]; then echo "No search term provided." && return 1; fi
 
 	local deleted_path deletion_commit
 	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}" # goto git root

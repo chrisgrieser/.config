@@ -78,8 +78,16 @@ const fileArray = app
 				iconObj.path += type + ".png";
 		}
 
+		// icons to distinguish all these lua files 🙈
+		let icon = ""
+		if (relPath.includes("hammerspoon")) {
+			icon += " 🟡"
+		} else if (relPath.includes("nvim")) {
+			icon += " 🔳"
+		}
+
 		return {
-			title: name + dirtyIcon,
+			title: name + dirtyIcon + icon,
 			match: matcher,
 			subtitle: "▸ " + relativeParentFolder,
 			icon: iconObj,
@@ -88,6 +96,8 @@ const fileArray = app
 			arg: absPath,
 		};
 	});
+
+//──────────────────────────────────────────────────────────────────────────────
 
 const folderArray = app
 	.doShellScript(
@@ -114,6 +124,8 @@ const folderArray = app
 			arg: fPath,
 		};
 	});
+
+//──────────────────────────────────────────────────────────────────────────────
 
 // password-store (pass-cli)
 const pwPath = app.pathTo("home folder") + "/.password-store";

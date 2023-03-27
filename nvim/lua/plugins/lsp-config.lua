@@ -85,6 +85,8 @@ lspSettings.tsserver = {
 }
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
+-- INFO when no eslintrc can be found in a parent dir, `.root_dir` will return
+-- nil and the eslint-LSP will not be started
 lspSettings.eslint = {
 	quiet = false, -- = include warnings
 	codeAction = {
@@ -157,9 +159,6 @@ return {
 					settings = lspSettings[lsp], -- if no settings, will assign nil and therefore to nothing
 					filetypes = lspFileTypes[lsp],
 				}
-
-				-- FIX missing root-directory detection for eslint LSP
-				if lsp == "eslint" then config.root_dir = require("lspconfig.util").find_git_ancestor end
 
 				require("lspconfig")[lsp].setup(config)
 			end
