@@ -12,16 +12,17 @@ function writeToFile(file, text) {
 
 function run(argv) {
 	// determine actions
-	const mode = argv[0];
-	let doDelete = mode.includes("delete");
-	const doOpenUrl = mode.includes("openurl");
-	const doCopy = mode.includes("copy");
-	const doClose = mode.includes("close");
+	let doDelete = argv[0].includes("delete");
+	const doOpenUrl = argv[0].includes("openurl");
+	const doCopy = argv[0].includes("copy");
+	const doClose = argv[0].includes("close");
 
 	// get content
 	const sidenotes = Application("SideNotes");
 	const curNote = sidenotes.currentNote();
 	const content = curNote.text();
+	const details = content.split("\n")[1];
+	const title = curNote.title();
 
 	// open URL (& close sidenotes)
 	if (doOpenUrl) {
@@ -32,14 +33,14 @@ function run(argv) {
 		app.openLocation(urls[0]);
 
 		// dynamically decide whether to delete
-		const isLinkOnlyNote = [curNote.title(), curNote.details()].includes(urls[0]);
+		const isLinkOnlyNote = [title, details].includes(urls[0]);
 		doDelete = isLinkOnlyNote;
 	}
 
-	// Trash Note, but keep copy in trash folder
+	// Delete Note, but keep copy in trash instead of irreversibly removing it
 	if (doDelete) {
 		const maxNameLen = 50;
-		let safeTitle = curNote.title().replace(/[/\\:;,"'#()[\]=<>{}]|\.$/gm, "");
+		let safeTitle = title.replace(/[/\\:;,"'#()[\]=<>{}]|\.$/gm, "");
 		if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
 		const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.txt`;
 		writeToFile(trashNotePath, content);

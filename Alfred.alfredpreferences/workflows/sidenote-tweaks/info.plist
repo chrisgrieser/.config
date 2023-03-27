@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.sidenote-tweaks</string>
+	<string>de.chris-grieser.shimmering-sidenotes</string>
 	<key>connections</key>
 	<dict>
 		<key>0C66F7DF-2BA1-45C6-BF46-E339586EB9DE</key>
@@ -436,7 +436,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>SideNotes Tweaks</string>
+	<string>Shimmering SideNotes</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -567,7 +567,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>openurl-copy-delete-sidenote.js</string>
+				<string>actions-on-current-note.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1702,8 +1702,7 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>openURL / copy / delete / close
-current sidenote</string>
+			<string>actions on current note</string>
 			<key>xpos</key>
 			<real>560</real>
 			<key>ypos</key>
