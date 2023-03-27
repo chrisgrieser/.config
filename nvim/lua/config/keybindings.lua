@@ -147,7 +147,7 @@ Keymap("x", "<S-Tab>", "<gv", { desc = " outdent" })
 
 -- Word Switcher (fallback: switch casing)
 -- stylua: ignore
-Keymap( "n", "<BS>", function() require("funcs.wave").switch() end, { desc = "switch common words" })
+Keymap( "n", "<BS>", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }

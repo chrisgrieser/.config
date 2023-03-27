@@ -15,10 +15,7 @@ local function telescopeConfig()
 			selection_caret = "ﰉ ",
 			prompt_prefix = "❱ ",
 			multi_icon = "洛",
-			preview = {
-				filesize_limit = 2, -- in MB, do not preview big files for performance
-				msg_bg_fillchar = " ",
-			},
+			preview = { filesize_limit = 2 }, -- in MB, do not preview big files for performance
 			path_display = { "tail" },
 			borderchars = BorderChars,
 			history = { path = VimDataDir .. "telescope_history" }, -- sync the history
@@ -132,7 +129,9 @@ local function telescopeConfig()
 							local selected_entry = require("telescope.actions.state").get_selected_entry()
 							vim.api.nvim_win_close(0, true) -- close Telescope window properly prior to switching windows
 							-- vim.cmd("stopinsert")
-							vim.schedule(function() vim.cmd(("DiffviewOpen %s^!"):format(selected_entry.value)) end)
+							vim.schedule(
+								function() vim.cmd(("DiffviewOpen %s^!"):format(selected_entry.value)) end
+							)
 						end,
 					},
 				},
@@ -174,13 +173,14 @@ local function telescopeConfig()
 		extensions = {
 			file_browser = {
 				prompt_prefix = " ",
-				depth = false,
+				depth = 1, -- initial depth (1 = only current folder)
+				auto_depth = true, -- unlimited depth as soon as prompt is non-empty
 				hidden = true,
 				display_stat = false,
 				git_status = false,
 				group = true,
-				hide_parent_dir = false,
-				select_buffer = true,
+				hide_parent_dir = true, -- can go up via <BS> when prompt is empty
+				select_buffer = false,
 				mappings = {
 					i = {
 						-- mappings should be consistent with nvim-ghengis mappings

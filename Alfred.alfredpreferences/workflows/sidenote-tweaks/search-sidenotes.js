@@ -16,7 +16,7 @@ function run(argv) {
 		.searchNotes(query) // CAVEAT currently not possible to get the folder for a note
 		.map(item => {
 			const content = item.title + "\n" + item.details;
-			const url = content.match(/https?:\/\/[^\s]+/);
+			const url = content.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/);
 			const icon = url ? "🔗 " : "";
 
 			return {
