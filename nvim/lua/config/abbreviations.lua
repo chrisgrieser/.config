@@ -19,4 +19,5 @@ abbrev("ture true")
 abbrev("treu true")
 abbrev("fo of")
 abbrev("ntoe note")
+abbrev("Sidenotes SideNotes")
 

@@ -15,8 +15,9 @@ function run(argv) {
 		ispath: isPath,
 	});
 
-	// close sidenotes
-	Application("System Events").keystroke("w", { using: ["command down"] });
+	// hide sidenotes
+	const sidenotesProcess = Application("System Events").applicationProcesses.byName("SideNotes");
+	if (sidenotesProcess) sidenotesProcess.visible = false;
 
 	// send first line to Alfred notification
 	const firstline = input.split("\n").shift();

@@ -77,7 +77,7 @@
 			<key>config</key>
 			<dict>
 				<key>subtext</key>
-				<string>⌥: Autocomplete, ⌘: Ducky</string>
+				<string>⌘: Ducky, ⌥: Autocomplete</string>
 				<key>text</key>
 				<string>Google: {query}</string>
 			</dict>
