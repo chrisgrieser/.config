@@ -217,12 +217,13 @@ Keymap("x", "<leader>fk", [[:s/\(.*\)/\1/g]] .. ("<Left>"):rep(10), { desc = "�
 Keymap("n", "<leader>ff", ":%s///g<Left><Left><Left>", { desc = "弄 :s" })
 Keymap("x", "<leader>ff", ":s///g<Left><Left><Left>", { desc = "弄 :s" })
 
-Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = " 弄 :s cword" })
+Keymap("n", "<leader>f<Tab>", Cmd.retab, { desc = "弄 :retab" })
+
+Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "弄 :s cword" })
 Keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "弄 :g - normal" })
 Keymap("x", "<leader>fn", ":normal ", { desc = "弄 :normal" })
 Keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "弄 :g – delete" })
 
--- SSRbbbb
 Keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "弄 SSR" })
 -- Refactoring.nvim
 -- stylua: ignore start

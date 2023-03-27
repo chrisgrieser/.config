@@ -8,7 +8,7 @@ return {
 		opts = {
 			opleader = {
 				line = "q",
-				block = "<Nop>", 
+				block = "<Nop>",
 			},
 			toggler = {
 				line = "qq",
@@ -30,7 +30,9 @@ return {
 	{
 		"gbprod/substitute.nvim",
 		lazy = true,
-		config = true,
+		opts = {
+			on_substitute = require("yanky.integration").substitute(),
+		},
 	},
 	{
 		"smjonas/duplicate.nvim",
