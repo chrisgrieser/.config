@@ -235,12 +235,17 @@ Keymap("n", "<leader>ff", ":%s///g<Left><Left><Left>", { desc = "󱗘 :s" })
 Keymap("x", "<leader>ff", ":s///g<Left><Left><Left>", { desc = "󱗘 :s" })
 
 Keymap("n", "<leader>f<Tab>", function()
-	Bo.expandtab = not Bo.expandtab
+	Bo.expandtab = false
 	Cmd.retab { bang = true }
-	local now = Bo.expandtab and "Spaces" or "Tabs"
-	if not Bo.expandtab then Bo.tabstop = vim.opt_global.tabstop:get() end
-	vim.notify("Now using: " .. now)
-end, { desc = "󱗘 Tabs ↔ Spaces" })
+	Bo.tabstop = vim.opt_global.tabstop:get()
+	vim.notify("Now using: Tabs ↹ ")
+end, { desc = "↹ Use Tabs" })
+
+Keymap("n", "<leader>f<Spaces>", function()
+	Bo.expandtab = true
+	Cmd.retab { bang = true }
+	vim.notify("Now using: Spaces ␣")
+end, { desc = "␣ Use Spaces" })
 
 Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "󱗘 :s cword" })
 Keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "󱗘 :g - normal" })
