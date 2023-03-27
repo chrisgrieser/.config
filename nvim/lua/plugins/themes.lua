@@ -1,15 +1,18 @@
 local g = vim.g
 --------------------------------------------------------------------------------
 
--- INFO first theme used for light mode 
--- second for dark mode
+-- INFO order defines themes
+-- - first theme used for light mode
+-- - second for dark mode
+-- - rest ignored
+-- - if only one theme, it's used for both light and dark
 local themes = {
 	"EdenEast/nightfox.nvim",
 	-- "sainnhe/everforest",
-	"rebelot/kanagawa.nvim",
+	-- "rebelot/kanagawa.nvim",
 	-- { "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
 	-- "glepnir/zephyr-nvim",
-	-- "folke/tokyonight.nvim",
+	"folke/tokyonight.nvim",
 	-- "NTBBloodbath/sweetie.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",

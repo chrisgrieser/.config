@@ -106,7 +106,8 @@ end
 
 ---Close window/buffer, preserving alt-file
 function M.betterClose()
-	if vim.bo.modifiable then cmd.update(fn.expand("%:p")) end
+	local absPath = fn.expand("%:p")
+	if vim.bo.modifiable and absPath then cmd.update(absPath) end
 
 	-- close window
 	if numberOfWins() > 1 then

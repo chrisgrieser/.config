@@ -1,33 +1,4 @@
 return {
-	{ -- highlights for ftFT
-		"unblevable/quick-scope",
-		keys = { "f", "F", "t", "T" },
-		init = function() vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" } end,
-	},
-	{ -- display line numbers while going to a line with `:`
-		"nacro90/numb.nvim",
-		keys = ":",
-		config = true,
-	},
-	{ -- CamelCase Motion plus
-		"chrisgrieser/nvim-spider",
-		lazy = true, -- loaded by keybinds
-		dev = true,
-	},
-	{ -- automatically set right indent for file
-		"Darazaki/indent-o-matic",
-		event = "BufReadPre",
-	},
-	{ -- tons of text objects
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		event = "BufEnter",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-	},
-	{ -- tons of text objects
-		"chrisgrieser/nvim-various-textobjs",
-		lazy = true, -- loaded by keymaps
-		dev = true,
-	},
 	{ -- autopair brackets, quotes, and markup
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -108,42 +79,27 @@ return {
 		ft = { "markdown", "text" },
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
 	},
-	{ -- Better Folding
-		"kevinhwang91/nvim-ufo",
-		dependencies = "kevinhwang91/promise-async",
-		event = "BufReadPost",
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
 		opts = {
-			-- Use lsp, and indent as fallback
-			provider_selector = function() return { "lsp", "indent" } end,
-			open_fold_hl_timeout = 500,
-			fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
-				-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
-				local foldIcon = ""
-				local newVirtText = {}
-				local suffix = " " .. foldIcon .. "  " .. tostring(endLnum - lnum)
-				local sufWidth = vim.fn.strdisplaywidth(suffix)
-				local targetWidth = width - sufWidth
-				local curWidth = 0
-				for _, chunk in ipairs(virtText) do
-					local chunkText = chunk[1]
-					local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-					if targetWidth > curWidth + chunkWidth then
-						table.insert(newVirtText, chunk)
-					else
-						chunkText = truncate(chunkText, targetWidth - curWidth)
-						local hlGroup = chunk[2]
-						table.insert(newVirtText, { chunkText, hlGroup })
-						chunkWidth = vim.fn.strdisplaywidth(chunkText)
-						if curWidth + chunkWidth < targetWidth then
-							suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
-						end
-						break
-					end
-					curWidth = curWidth + chunkWidth
-				end
-				table.insert(newVirtText, { suffix, "MoreMsg" })
-				return newVirtText
-			end,
+			plugins = {
+				presets = { motions = false },
+			},
+			triggers_blacklist = {
+				n = { "y" }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
+			},
+			hidden = { "<Plug>" },
+			window = {
+				border = { "", "─", "", "" }, -- no border to the side to save space
+				padding = { 0, 0, 0, 0 },
+				margin = { 0, 0, 0, 0 },
+			},
+			layout = { -- of the columns
+				height = { min = 4, max = 15 },
+				width = { min = 30, max = 33 },
+				spacing = 1,
+			},
 		},
 	},
 }

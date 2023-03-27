@@ -414,7 +414,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>openurl-copy-delete-note.js</string>
+				<string>openurl-copy-delete-sidenote.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -751,9 +751,9 @@ sketchybar --trigger update-sidenote-count</string>
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.vivaldi.Vivaldi</string>
-					<string>com.apptorium.SideNotes-paddle</string>
 					<string>com.apple.Safari</string>
+					<string>com.apptorium.SideNotes-paddle</string>
+					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
@@ -910,8 +910,8 @@ sketchybar --trigger update-sidenote-count</string>
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.apple.Safari</string>
 					<string>com.vivaldi.Vivaldi</string>
+					<string>com.apple.Safari</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
