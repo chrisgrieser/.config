@@ -635,9 +635,12 @@ brew home "$*"</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>### Requirements
+	<string># Requirements
 - [Homebrew](https://brew.sh/)
-- [mas-cli](https://github.com/mas-cli/mas/)
+
+# Optional
+- If and [mas-cli](https://github.com/mas-cli/mas/) and [AppCleaner.app](https://freemacsoft.net/appcleaner/) are installed, allows uninstalling App Store apps via `bu` as well by using AppCleaner.
+- If [mackup](https://github.com/lra/mackup) is installed, shows an icon next to an app for which mackup has builtin support.
 
 ---
 
@@ -786,9 +789,31 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>🍏</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Icon to display next to packages for which mackup has builtin support.</string>
+			<key>label</key>
+			<string>Mackup Icon</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>mackup_icon</string>
+		</dict>
+	</array>
 	<key>version</key>
-	<string>1.0</string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

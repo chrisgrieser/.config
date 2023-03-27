@@ -12,6 +12,7 @@ function alfredMatcher(str) {
 //──────────────────────────────────────────────────────────────────────────────
 
 const pluginLocation = $.getenv("plugin_installation_path").replace(/^~/, app.pathTo("home folder"));
+// prettier-ignore
 const jsonArray = app.doShellScript(`
 	find "${pluginLocation}" -path "*/.git" -type d -maxdepth 3 | while read -r line ; do
 		cd "$line"/..
@@ -27,11 +28,10 @@ const jsonArray = app.doShellScript(`
 		return {
 			"title": name,
 			"subtitle": owner,
-			"match": alfredMatcher (repo),
+			"match": alfredMatcher(repo),
 			"arg": repo,
 			"uid": repo,
 		};
 	});
 
 JSON.stringify({ items: jsonArray });
-
