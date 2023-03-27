@@ -217,8 +217,8 @@ Keymap("x", "<leader>fk", [[:s/\(.*\)/\1/g]] .. ("<Left>"):rep(10), { desc = "�
 Keymap("n", "<leader>ff", ":%s///g<Left><Left><Left>", { desc = "弄 :s" })
 Keymap("x", "<leader>ff", ":s///g<Left><Left><Left>", { desc = "弄 :s" })
 
-Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc =" 弄 :s cword" })
-Keymap("n", "<leader>fn", ":g//normal "..("<Left>"):rep(8), { desc = "弄 :g - normal" })
+Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = " 弄 :s cword" })
+Keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "弄 :g - normal" })
 Keymap("x", "<leader>fn", ":normal ", { desc = "弄 :normal" })
 Keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "弄 :g – delete" })
 
@@ -237,7 +237,12 @@ Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("E
 Keymap({ "n", "x" }, "U", "<C-r>", { desc = "淚 Redo" }) -- redo
 Keymap("n", "<leader>ud", qol.undoDuration, { desc = "碑 Undo specific durations" })
 Keymap("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "碑 Undotree" })
-Keymap("n", "<leader>up", function () Cmd.later(tostring(vim.opt.undolevels:get())) end, { desc = " Redo to Present" })
+Keymap(
+	"n",
+	"<leader>up",
+	function() Cmd.later(tostring(vim.opt.undolevels:get())) end,
+	{ desc = " Redo to Present" }
+)
 Keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = " 淚 Reset Hunk" })
 
 -- Logging & Debugging
@@ -437,10 +442,21 @@ Keymap("n", "gs", function() Cmd.Telescope("treesitter") end, { desc = " Docu
 -- actions defined globally so null-ls can use them without LSP
 Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "璉Code Action" })
 
+-- Jump to Parent Symbol
+Keymap("n", "<D-b>", function()
+	if not require("nvim-navic").is_available() then
+		vim.notify("Navic is not available.", LogWarn)
+		return
+	end
+	local symbolPath = require("nvim-navic").get_data()
+	local parent = symbolPath[#symbolPath - 1].scope.start
+	SetCursor(0, { parent.line, parent.character })
+end, { desc = "璉Jump to Parent" })
+
 -- copy breadcrumbs (nvim navic)
 Keymap("n", "<D-b>", function()
 	if not require("nvim-navic").is_available() then
-		vim.notify("No Breadcrumbs available.", LogWarn)
+		vim.notify("Navic is not available.", LogWarn)
 		return
 	end
 	local rawdata = require("nvim-navic").get_data()
