@@ -106,21 +106,12 @@ function acp() {
 	local COMMIT_MSG="$*"
 	[[ -z "$COMMIT_MSG" ]] && COMMIT_MSG="chore"
 
-	# shellcheck disable=2155
-	local first_word=$(echo "$COMMIT_MSG" | grep -oe "^\w*")
-	conventional_commits="feat chore build fix perf refactor style ci docs test revert"
-	local MSG_LENGTH=${#COMMIT_MSG}
-
 	# ensure no overlength
+	local MSG_LENGTH=${#COMMIT_MSG}
 	if [[ $MSG_LENGTH -gt 50 ]]; then
 		echo "Commit Message too long ($MSG_LENGTH chars)."
 		COMMIT_MSG=${COMMIT_MSG::50}
 		print -z "acp \"$COMMIT_MSG\"" # put back into buffer
-		return 1
-	# enforce conventional commits
-	elif ! [[ "$conventional_commits" =~ $first_word ]]; then
-		echo "'$first_word' not a conventional commits keyword."
-		print -z "acp \"$COMMIT_MSG\""
 		return 1
 	fi
 

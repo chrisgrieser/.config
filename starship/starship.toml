@@ -30,7 +30,8 @@ $memory_usage\
 [character]
 success_symbol = " [󰀘](bold green)"
 error_symbol = " [󰇷](bold red)"
-vimcmd_symbol = " [\\[N\\]](bold blue)" # only active on xterm due to cursor shape snippet intefering with it
+# only active on xterm due to cursor shape snippet intefering with it
+vimcmd_symbol = " [\\[N\\]](bold blue)" 
 
 [sudo]
 style = 'fg:green bg:black'
@@ -52,9 +53,10 @@ style = "fg:bright-blue bg:black bold"
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
-"/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
-"/File Hub" = "/󰀶 "
-"/.config/Alfred.alfredpreferences/workflows/user.workflow." = "/ "
+".config" = "󱧼 "
+"main-vault" = "󱉼 "
+"~/Library/Mobile Documents/com~apple~CloudDocs/File Hub" = "/󰀶 "
+"~/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
 
 [custom.folder_number]
 command = "find . -maxdepth 1 -not -name '.git' -not -name '.' -not -name '.DS_Store' | wc -l"
@@ -131,7 +133,7 @@ format = " [$symbol$ram_pct]($style)"
 [package]
 format = "[$symbol$version]($style)"
 version_format = "$raw"
-symbol = " "
+symbol = "  "
 style = "dimmed 208"
 
 [custom.alfred]
@@ -140,7 +142,7 @@ when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
 command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 os = "macos"
 description = "Version number of Alfred Workflow"
-format = '[](purple) [ $output](dimmed 208)'
+format = '[](purple) [󰏗 $output](dimmed 208)'
 
 [nodejs]
 format = " [$symbol$version]($style)"
@@ -153,4 +155,4 @@ format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 version_format = "$major.$minor"
 style = "dimmed yellow"
 python_binary = ["python3"]
-symbol = " "
+symbol = " "

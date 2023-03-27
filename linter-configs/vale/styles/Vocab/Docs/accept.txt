@@ -85,3 +85,9 @@ breakpoint
 Nerdfont
 nerdfont
 JXA
+Flaticon
+Freepik
+config
+Powerpack
+Beta
+backlinks
