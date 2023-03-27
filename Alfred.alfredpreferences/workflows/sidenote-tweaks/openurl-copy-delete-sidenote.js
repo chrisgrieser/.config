@@ -16,6 +16,7 @@ function run(argv) {
 	let doDelete = mode.includes("delete");
 	const doOpenUrl = mode.includes("openurl");
 	const doCopy = mode.includes("copy");
+	const doClose = mode.includes("close");
 
 	// get content
 	const sidenotes = Application("SideNotes");
@@ -49,7 +50,7 @@ function run(argv) {
 	}
 
 	// close sidenotes
-	if (doCopy || doOpenUrl) {
+	if (doClose) {
 		Application("System Events").keystroke("w", { using: ["command down"] });
 	}
 

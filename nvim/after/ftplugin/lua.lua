@@ -13,21 +13,22 @@ Keymap("n", "g/", function()
 	Fn.system("open '" .. url .. "'") -- opening method on macOS
 end, { desc = " Open lua pattern in regex viewer", buffer = true })
 
--- Build
+-- Build / Reload Config
 Keymap("n", "<leader>r", function()
 	Cmd.update()
-	local parentFolder = Expand("%:p:h")
-	local package = Expand("%:t")
-	if parentFolder:find("nvim") then
-		-- package.loaded[]
+	local pwd = vim.loop.cwd() or ""
+	if pwd:find("nvim") then
+		-- unload from lua cache (assuming that the pwd is parent of the lua folder)
+		local packageName = Expand("%:r"):gsub("lua/", ""):gsub("/", ".")
+		package.loaded[packageName] = nil 
 		Cmd.source()
 		vim.notify(Expand("%:r") .. " re-sourced")
-	elseif parentFolder:find("hammerspoon") then
+	elseif pwd:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
 	else
 		vim.notify("Neither in nvim nor in hammerspoon directory.", LogError)
 	end
-end, { buffer = true, desc = " Reload Hammerspoon / Resource nvim file" })
+end, { buffer = true, desc = " Reload Hammerspoon / nvim config" })
 
 --------------------------------------------------------------------------------
 -- INSPECT NVIM OR HAMMERSPOON OBJECTS
