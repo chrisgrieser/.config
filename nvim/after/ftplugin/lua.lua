@@ -1,10 +1,6 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
-Iabbrev("<buffer> ll local")
-
---------------------------------------------------------------------------------
-
 -- lua regex opener
 Keymap("n", "g/", function()
 	Normal('"zya"vi"') -- yank and keep selection for quick replacement when done

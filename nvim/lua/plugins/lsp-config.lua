@@ -157,6 +157,10 @@ return {
 					settings = lspSettings[lsp], -- if no settings, will assign nil and therefore to nothing
 					filetypes = lspFileTypes[lsp],
 				}
+
+				-- FIX missing root-directory detection for eslint LSP
+				if lsp == "eslint" then config.root_dir = require("lspconfig.util").find_git_ancestor end
+
 				require("lspconfig")[lsp].setup(config)
 			end
 

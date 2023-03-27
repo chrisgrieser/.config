@@ -25,7 +25,9 @@ end
 --------------------------------------------------------------------------------
 
 -- GUI
-opt.guifont = "JetBrainsMonoNL Nerd Font:h26" -- https://www.programmingfonts.org/#oxygen
+-- https://www.programmingfonts.org/#oxygen
+opt.guifont = "JetBrainsMonoNL Nerd Font:h26" 
+
 opt.guicursor = {
 	"n-sm:block",
 	"i-ci-c-ve:ver25",
@@ -39,7 +41,7 @@ opt.ignorecase = true
 
 -- Flash when closing a bracket
 opt.showmatch = true
-opt.matchtime = 1 -- deci-seconds
+opt.matchtime = 1 -- deci-seconds (higher amount feels laggy)
 
 -- Clipboard
 opt.clipboard = "unnamedplus"
@@ -74,18 +76,18 @@ opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 
--- Color Column
-Autocmd({ "VimEnter", "VimResized" }, { -- "WinResized" does not seem to work currently
+-- Color Column: textwidth + guiding line for `gm`
+Autocmd({ "VimEnter", "VimResized" }, {
+	-- the "WinResized" autocmd event does not seem to work currently
 	callback = function()
 		if opt_local.wrap:get() then return end
-		-- guiding column for `gm`
 		local gmColumn = math.floor(Fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
 		opt.colorcolumn = { "+1", gmColumn }
 	end,
 })
 
 -- status bar & cmdline
-opt.history = 400 -- reduce noise for command history search
+opt.history = 300 -- reduce noise for command history search
 opt.cmdheight = 0
 
 -- Character groups

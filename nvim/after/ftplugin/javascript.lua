@@ -1,13 +1,6 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
-Bo.path = ".,,../" -- also search parent directory (useful for Alfred)
-
-Iabbrev("<buffer> cc const")
-Iabbrev("<buffer> ll let")
-
---------------------------------------------------------------------------------
-
 -- Open regex in regex101 and regexper (railroad diagram)
 Keymap("n", "g/", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj

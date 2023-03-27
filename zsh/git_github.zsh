@@ -236,6 +236,7 @@ function gdf() {
 		return 1
 	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
 		print "🔍\033[1;34m Multiple files found."
+		echo
 		selection=$(echo "$deleted_path" | fzf --layout=reverse --height=70%)
 		[[ -z "$selection" ]] && return 0
 		deleted_path="$selection"
@@ -257,10 +258,11 @@ function gdf() {
 	echo "[s]how file (bat)"
 	echo "[c]opy content"
 	echo "[h]ash of last commit with the file"
-	print "-------------------------------------\033[0m"
+	print "\-------------------------------------\033[0m"
 	echo -n "> "
-
 	read -r -k 1 DECISION
+	echo
+
 	# shellcheck disable=SC2193
 	if [[ "$DECISION:l" == "c" ]]; then
 		git show "$last_commit:$deleted_path" | pbcopy
