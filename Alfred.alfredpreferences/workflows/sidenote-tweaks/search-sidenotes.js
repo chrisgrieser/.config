@@ -9,6 +9,16 @@ const sidenotes = Application("SideNotes");
 
 //──────────────────────────────────────────────────────────────────────────────
 
+// TODO generate array of notes *objects* with their properties note objects seem 
+// to be retrievable via by supplying noteid *and* folderid:
+// `Application("SideNotes").folders.byId("35BE5A12-DAF4-44FD-AF7D-2689CBB14BF3").notes.byId("0776263A-77FA-41EF-808E-6266C77DBDF9")`
+// `Application("SideNotes").currentNote()` retrieves a note that way. This
+// allows for retrieving notes via ID, when iterating folders *and* notes 🙈
+// Note Objects have more properties (see Script Editor Dictionary) and also
+// also methods like `.delete()`
+
+//──────────────────────────────────────────────────────────────────────────────
+
 function run(argv) {
 	const query = argv[0] ? argv[0].trim() : "";
 

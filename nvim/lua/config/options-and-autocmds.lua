@@ -100,8 +100,10 @@ opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refact
 opt.timeoutlen = 600 -- also affects duration until which-key is shown
 
 --------------------------------------------------------------------------------
+-- PATH (for `gf`)
 
--- add pwd (for `gf`)
+-- pwd is set via projects.nvim
+-- add pwd 
 Autocmd("DirChanged", {
 	callback = function() opt.path:append(vim.loop.cwd()) end,
 })
