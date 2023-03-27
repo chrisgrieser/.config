@@ -16,20 +16,23 @@ function run(argv) {
 		.searchNotes(query) // CAVEAT currently not possible to get the folder for a note
 		.map(item => {
 			const content = item.title + "\n" + item.details;
+
 			// prettier-ignore
 			const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 			const urls = content.match(urlRegex);
-			let urlSubtitle = "⌘: ";
-			let icon = "";
 
+			let urlSubtitle = "";
+			let icon = "";
+			if (content.includes("☐") || content.includes("☑")) icon += "☑️";
 			if (urls) {
-				icon = "🔗 ";
-				const noteHasOnlyUrl = content === urls[0];
-				const secondLineOnlyUrl = content.split("\n")[1] === urls[0];
-				if (noteHasOnlyUrl || secondLineOnlyUrl) urlSubtitle += "Delete note and open ";
-				else urlSubtitle += "Open ";
+				icon += "🔗";
+				urlSubtitle = "⌘: ";
+				const isLinkOnlyNote = [item.title, item.details].includes(urls[0]);
+				if (isLinkOnlyNote) urlSubtitle += "🗑🔗 Delete & Open ";
+				else urlSubtitle += "🔗 Open ";
 				urlSubtitle += urls[0];
 			}
+			if (icon) icon += " "; // padding
 
 			return {
 				title: item.title,
