@@ -82,3 +82,5 @@ iCloud
 characterwise
 Reddit
 breakpoint
+Nerdfont
+nerdfont

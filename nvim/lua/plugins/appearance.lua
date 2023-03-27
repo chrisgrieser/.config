@@ -102,7 +102,7 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
 			markdown = {
-				fat_headlines = true,
+				fat_headlines = false,
 				fat_headline_upper_string = "",
 				fat_headline_lower_string = "▀",
 			},
