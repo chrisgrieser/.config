@@ -1,6 +1,12 @@
 #!/usr/bin/env osascript -l JavaScript
-const url = Application("Vivaldi").windows[0].activeTab.url();
-const title = Application("Vivaldi").windows[0].activeTab.title();
 
-const out = title + "\n" + url;
-out; // direct return
+function run(argv) {
+	const selection = argv[0];
+	const url = Application("Vivaldi").windows[0].activeTab.url();
+	const title = Application("Vivaldi").windows[0].activeTab.title();
+
+	const out = [title, url];
+	if (selection) out.unshift("> " + selection)
+
+	return out.join("\n");
+}
