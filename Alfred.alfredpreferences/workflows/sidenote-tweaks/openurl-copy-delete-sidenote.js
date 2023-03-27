@@ -29,8 +29,8 @@ function run(argv) {
 		// prettier-ignore
 		const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 		const urls = content.match(urlRegex);
-		if (!urls) return "⚠️ No URL found.";  // notification
-		const firstUrl = urls[0]
+		if (!urls) return "⚠️ No URL found."; // notification
+		const firstUrl = urls[0];
 		app.openLocation(firstUrl);
 
 		// dynamically decide whether to delete
@@ -51,15 +51,16 @@ function run(argv) {
 
 	// close sidenotes
 	if (doClose) {
-		// apparently not JXA API for it, therefore done via keystrokes since it
+		// apparently there is JXA API for it, therefore done via keystrokes since it
 		// is ensured that SideNotes is the most frontmost app
 		Application("System Events").keystroke("w", { using: ["command down"] });
 	}
 
 	// copy to clipboard
-	if (doCopy) {
-		app.setTheClipboardTo(content);
-		return "✅ Copied"; // for notification
-	}
+	if (doCopy) app.setTheClipboardTo(content);
+
+	// returns are used for the notification
+	if (doDelete && doOpenUrl) return "🗑 Note Deleted";
+	else if (doCopy) return "✅ Copied";
 	return ""; // don't create a notification
 }

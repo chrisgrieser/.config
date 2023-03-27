@@ -19,8 +19,17 @@ function run(argv) {
 			// prettier-ignore
 			const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 			const urls = content.match(urlRegex);
-			const firstUrl = urls ? urls[0] : null;
-			const icon = urls ? "🔗 " : "";
+			let urlSubtitle = "⌘: ";
+			let icon = "";
+
+			if (urls) {
+				icon = "🔗 ";
+				const noteHasOnlyUrl = content === urls[0];
+				const secondLineOnlyUrl = content.split("\n")[1] === urls[0];
+				if (noteHasOnlyUrl || secondLineOnlyUrl) urlSubtitle += "Delete note and open ";
+				else urlSubtitle += "Open ";
+				urlSubtitle += urls[0];
+			}
 
 			return {
 				title: item.title,
@@ -31,8 +40,7 @@ function run(argv) {
 				mods: {
 					alt: { arg: content },
 					cmd: {
-						arg: firstUrl,
-						subtitle: "⌘: Open first URL",
+						subtitle: urlSubtitle,
 						valid: Boolean(urls),
 					},
 				},
