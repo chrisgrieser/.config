@@ -45,11 +45,12 @@ git clone git@github.com:chrisgrieser/.password-store.git
 
 
 #───────────────────────────────────────────────────────────────────────────────
-# LOAD CONFIGS
+# LOAD CONFIGS (MACKUP)
 
 zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 ln -sf "$DOTFILE_FOLDER/mackup/mackup.cfg" ~/.mackup.cfg
+ln -sf "$DOTFILE_FOLDER/mackup/custom-app-configs" ~/.mackup
 brew install mackup && mackup restore
 
 #───────────────────────────────────────────────────────────────────────────────
