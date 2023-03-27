@@ -12,9 +12,9 @@ local keymappings = {
 local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
-			selection_caret = "ﰉ ",
+			selection_caret = "󰜋 ",
 			prompt_prefix = "❱ ",
-			multi_icon = "洛",
+			multi_icon = "󰐖",
 			preview = { filesize_limit = 2 }, -- in MB, do not preview big files for performance
 			path_display = { "tail" },
 			borderchars = BorderChars,
@@ -70,14 +70,14 @@ local function telescopeConfig()
 		},
 		pickers = {
 			lsp_references = {
-				prompt_prefix = " ",
+				prompt_prefix = "󰈿 ",
 				show_line = false,
 				trim_text = true,
 				include_declaration = false,
 				initial_mode = "normal",
 			},
 			lsp_type_definitions = {
-				prompt_prefix = "ﴰ ",
+				prompt_prefix = "󰠲 ",
 				show_line = false,
 				trim_text = true,
 				initial_mode = "normal",
@@ -90,7 +90,7 @@ local function telescopeConfig()
 				},
 			},
 			lsp_definitions = {
-				prompt_prefix = " ",
+				prompt_prefix = "󰈿 ",
 				show_line = false,
 				trim_text = true,
 				initial_mode = "normal",
@@ -103,24 +103,24 @@ local function telescopeConfig()
 				},
 			},
 			lsp_document_symbols = {
-				prompt_prefix = "璉 ",
+				prompt_prefix = "󰒕 ",
 				-- markdown headings are symbol-type "string", therefore shouldn't
 				-- be ignored
 				ignore_symbols = { "boolean", "number" },
 				fname_width = 17,
 			},
 			lsp_workspace_symbols = {
-				prompt_prefix = "璉 ",
+				prompt_prefix = "󰒕 ",
 				ignore_symbols = { "string", "boolean", "number" },
 				fname_width = 17,
 			},
 			git_status = {
-				prompt_prefix = " ",
+				prompt_prefix = "󰊢 ",
 				show_untracked = true,
 			},
 			treesitter = { prompt_prefix = " ", show_line = false },
 			git_commits = {
-				prompt_prefix = " ",
+				prompt_prefix = "󰊢 ",
 				initial_mode = "normal",
 				mappings = {
 					n = {
@@ -137,11 +137,11 @@ local function telescopeConfig()
 				},
 			},
 			keymaps = { prompt_prefix = " ", modes = { "n", "i", "c", "x", "o", "t" } },
-			oldfiles = { prompt_prefix = " " },
+			oldfiles = { prompt_prefix = "󰋚 " },
 			highlights = { prompt_prefix = " " },
 			loclist = { trim_text = true, prompt_prefix = " " },
 			buffers = {
-				prompt_prefix = "﬘ ",
+				prompt_prefix = "󰽙 ",
 				ignore_current_buffer = false,
 				initial_mode = "normal",
 				mappings = { n = { ["<D-w>"] = "delete_buffer" } },
@@ -159,7 +159,7 @@ local function telescopeConfig()
 			},
 			spell_suggest = {
 				initial_mode = "normal",
-				prompt_prefix = "暈",
+				prompt_prefix = "󰓆",
 				theme = "cursor",
 				layout_config = { cursor = { width = 0.3 } },
 			},

@@ -20,7 +20,7 @@ return {
 		"SmiteshP/nvim-navic",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
 		opts = {
-			icons = { Object = " " },
+			icons = { Object = "󰆧 " },
 			separator = "  ",
 			depth_limit = 8,
 			depth_limit_indicator = "…",
@@ -31,7 +31,7 @@ return {
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
 		opts = {
 			floating_window = false,
-			hint_prefix = "﬍ ",
+			hint_prefix = "󰘎 ",
 			hint_scheme = "NonText", -- highlight group
 		},
 	},
@@ -42,7 +42,7 @@ return {
 			inlay_hints = {
 				parameter_hints = {
 					show = true,
-					prefix = " ",
+					prefix = "󰁍 ",
 					remove_colon_start = true,
 					remove_colon_end = true,
 				},
