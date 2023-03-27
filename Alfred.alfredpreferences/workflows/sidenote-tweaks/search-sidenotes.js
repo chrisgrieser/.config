@@ -45,6 +45,7 @@ function run(argv) {
 			title: "New Sidenote: " + query,
 			arg: query,
 			mods: {
+				ctrl: { valid: false },
 				alt: { valid: false },
 				cmd: { valid: false },
 			},

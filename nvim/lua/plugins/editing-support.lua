@@ -43,9 +43,8 @@ return {
 		opts = {
 			use_default_keymaps = false,
 			allowed_separators = {
-				"..", -- added for lua string concatenation
-				"*", -- added multiplication
-				["-"] = false, -- since subtraction is not communicative
+				"..", -- lua string concatenation
+				"*", -- multiplication
 			},
 		},
 	},
