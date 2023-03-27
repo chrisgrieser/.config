@@ -5,14 +5,27 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const alfredMatcher = str => str.replace(/[-/()_.:]/g, " ") + " " + str + " " + str.replace(/([A-Z])/g, " $1"); // match parts of CamelCase
 
-//------------------------------------------------------------------------------
+//──────────────────────────────────────────────────────────────────────────────
 
-// INFO Not searching awesome neovim, since a comparison showed that
-// neovimcraft covers almost 100% of all plugins listed there already
-
+// INFO Not searching awesome neovim, neovimscraft scraps them
 const neovimcraftURL = "https://nvim.sh/s";
 
-// neovimcraft
+const installedPluginsPath = $.getenv("plugin_installation_path").replace(/^~/, app.pathTo("home folder"));
+// prettier-ignore
+const installedPlugins = app.doShellScript(
+	`find "${installedPluginsPath}" -path "*/.git" -type d -maxdepth 3 | while read -r line ; do
+		cd "$line"/..
+		git remote -v | head -n1
+	done`)
+	.split("\r")
+	.map(remote => {
+		return remote
+			.slice(26, -12)
+			.replaceAll(".git (fetch)", ""); // for lazy.nvim
+	})
+
+//──────────────────────────────────────────────────────────────────────────────
+
 const jsonArray = app
 	.doShellScript(`curl -sL '${neovimcraftURL}'`)
 	.split("\r")
@@ -21,6 +34,8 @@ const jsonArray = app
 		const parts = line.split(/ {2,}/);
 		const repo = parts[0];
 		const name = repo.split("/")[1];
+
+		// subtitles
 		const stars = parts[1];
 		const openIssues = parts[2];
 		const daysAgo = Math.ceil((new Date() - new Date(parts[3])) / 1000 / 3600 / 24);
@@ -30,8 +45,11 @@ const jsonArray = app
 		const desc = parts[4] || "";
 		const subtitle = `★ ${stars} – ${updated} – ${desc}`.replace(/ – $/, "");
 
+		// install icon
+		const installedIcon = installedPlugins.includes(repo) ? " ✅" : "";
+
 		return {
-			title: name,
+			title: name + installedIcon,
 			match: alfredMatcher(repo),
 			subtitle: subtitle,
 			arg: repo,

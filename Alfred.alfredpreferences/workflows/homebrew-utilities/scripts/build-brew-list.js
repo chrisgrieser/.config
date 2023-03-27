@@ -31,7 +31,7 @@ const casks = readFile(caskTxt).split("\n");
 const formula = readFile(formulaTxt).split("\n");
 let mackups = false;
 try {
-	mackups = app.doShellScript(`mackup list`);
+	mackups = app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; mackup list")
 	if (mackups) mackups = mackups.split("\r").map(item => item.slice(3));
 } catch (error) {
 	console.log(error);
@@ -40,7 +40,7 @@ try {
 //──────────────────────────────────────────────────────────────────────────────
 
 casks.forEach(name => {
-	const mackupIcon = mackups && mackups.includes(name) ? $.getenv("mackup_icon") : "";
+	const mackupIcon = mackups && mackups.includes(name) ? " " + $.getenv("mackup_icon") : "";
 	jsonArray.push({
 		title: name + mackupIcon,
 		match: alfredMatcher(name),
@@ -50,7 +50,7 @@ casks.forEach(name => {
 	});
 });
 formula.forEach(name => {
-	const mackupIcon = mackups && mackups.includes(name) ? $.getenv("mackup_icon"): "";
+	const mackupIcon = mackups && mackups.includes(name) ? " " + $.getenv("mackup_icon") : "";
 	jsonArray.push({
 		title: name + mackupIcon,
 		match: alfredMatcher(name),
