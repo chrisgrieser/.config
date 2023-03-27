@@ -14,10 +14,11 @@ local gitVaultScript = VaultLocation .. "/Meta/git-vault-sync.sh"
 local gitPassScript = PasswordStore .. "/pass-sync.sh"
 
 ---@return boolean
----@param noSubmodulePull? any
-function gitDotfileSync(noSubmodulePull)
-	-- local scriptArgs = noSubmodulePull and {} or {"submodule-pull"}
-	local scriptArgs = {"submodule-pull"}
+---@param submodulePull? boolean also update submodules, defaults to **true**
+local function gitDotfileSync(submodulePull)
+	local scriptArgs = {}
+	if submodulePull == nil or submodulePull == true then scriptArgs = { "--submodule-pull" } end
+
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
 	if not (ScreenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
 
@@ -86,8 +87,8 @@ end
 ---sync all three git repos
 ---@param extras? string extra modes
 function SyncAllGitRepos(extras)
-	local args = extras == "no-submodule-pull"
-	local success1 = gitDotfileSync(args)
+	local pullSubmodules = extras ~= "no-submodule-pull"
+	local success1 = gitDotfileSync(pullSubmodules)
 
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
@@ -113,7 +114,8 @@ end
 --------------------------------------------------------------------------------
 -- WHEN TO SYNC
 
--- 1. on systemstart (see meta.lua)
+-- 1. on systemstart
+-- (see meta.lua)
 
 -- 2. every x minutes
 RepoSyncTimer = hs.timer
