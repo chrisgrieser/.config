@@ -21,11 +21,20 @@
 		"body": "// falls through",
 		"description": "This comment indicates that a fallthrough in a switch statement is intentional and disables the respective eslint warning. See: https://eslint.org/docs/latest/rules/no-fallthrough"
 	},
-	"for .. (counter-based loop)": {
-		"prefix": "for .. (counter-based)",
+	"for (i++)": {
+		"prefix": "for (i++)",
 		"body": [
-			"for (let ${1:index} = 0; ${1:index} < ${2:array}.length; ${1:index}++) {",
-			"\tconst ${3:element} = ${2:array}[${1:index}];",
+			"for (let i = 0; i < ${2:array}.length; ${1:index}++) {",
+			"\tconst ${3:element} = ${2:array}[i];",
+			"\t$0",
+			"}"
+		]
+	},
+	"for (i--)": {
+		"prefix": "for (i--)",
+		"body": [
+			"for (let i = 0; i < ${2:array}.length; ${1:index}++) {",
+			"\tconst ${3:element} = ${2:array}[i];",
 			"\t$0",
 			"}"
 		]
