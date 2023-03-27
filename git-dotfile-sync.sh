@@ -30,11 +30,12 @@ git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
 git pull
 git push
 
+osascript -e "display notification \"\" with title \"$1\""
+
 # update submodules, if called with extra arg
 if [[ "$1" == "submodule-pull" ]] ; then
 	git pull --recurse-submodules
 	git submodule update --remote
-	osascript -e 'display notification "" with title "pulled submodules"'
 fi
 
 # check that everything worked (e.g. submodules are still dirty)
