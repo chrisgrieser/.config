@@ -453,8 +453,8 @@ Keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = "�
 Keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = " Create new file" })
 Keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = " Selection to new file" })
 -- stylua: ignore end
-
---------------------------------------------------------------------------------
+:
+------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
 
 -- stylua: ignore start
