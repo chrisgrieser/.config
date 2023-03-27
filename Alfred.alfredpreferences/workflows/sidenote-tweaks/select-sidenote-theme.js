@@ -1,19 +1,20 @@
 #!/usr/bin/env osascript -l JavaScript
-function run(argv) {
-    const query = argv[0];
-    const app = Application("SideNotes");
-    const results = [];
+// list all themes
+const themes = Application("SideNotes")
+	.searchThemes("") // let Alfred filter
+	.map(theme => {
+		return {
+			title: theme.name,
+			subtitle: `Set "${theme.name}" theme`,
+			arg: theme.path,
+		};
+	});
 
-	for (const theme of app.searchThemes(query)) {
-        results.push({
-            uid: theme.path,
-            title: theme.name,
-            subtitle: 'Set "' + theme.name + '" theme',
-            arg: theme.path,
-        });
-    }
+// option to download more themes
+themes.push({
+	title: "Download more themes…",
+	subtitle: "https://www.apptorium.com/sidenotes/themes",
+	arg: "https://www.apptorium.com/sidenotes/themes",
+})
 
-    return JSON.stringify({
-        items: results,
-    });
-}
+JSON.stringify({ items: themes }); // direct return

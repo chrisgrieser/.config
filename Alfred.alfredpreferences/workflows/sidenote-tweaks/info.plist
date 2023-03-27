@@ -1110,7 +1110,7 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -1140,9 +1140,9 @@ sketchybar --trigger update-sidenote-count</string>
 				<key>scriptfile</key>
 				<string>select-sidenote-theme.js</string>
 				<key>subtext</key>
-				<string>Set theme</string>
+				<string></string>
 				<key>title</key>
-				<string>Sidenote Theme</string>
+				<string>Set SideNotes Theme</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1161,20 +1161,15 @@ sketchybar --trigger update-sidenote-count</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>function run(argv) {
-  var query = argv[0];
-  Application("SideNotes").setTheme(query);
-
-  return query;
-}</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>set-sidenote-theme.js</string>
 				<key>type</key>
-				<integer>7</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>

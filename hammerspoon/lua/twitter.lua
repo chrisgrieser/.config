@@ -72,14 +72,13 @@ local function twitterCloseMediaWindow()
 	if not twitter then return end
 	local mediaWin = twitter:findWindow("Media")
 	if not mediaWin then return end
-	mediaWin:close()
 
 	-- HACK using keystroke, since closing the window does not
 	-- seem to work reliably
-	if mediaWin then
-		mediaWin:raise()
-		Keystroke({ "cmd" }, "w", 1, twitter)
-	end
+	mediaWin:raise()
+	Keystroke({ "cmd" }, "w", 1, twitter)
+
+	if mediaWin then mediaWin:close() end
 end
 --------------------------------------------------------------------------------
 
@@ -93,8 +92,10 @@ TwitterWatcher = Aw.new(function(appName, event)
 		AsSoonAsAppRuns("Twitter", function()
 			TwitterToTheSide()
 			TwitterScrollUp()
+			BringAllToFront()
+
 			-- focus new tweet window if there is one
-			local newTweetWindow = twitter:findWindow("Tweet") 
+			local newTweetWindow = twitter:findWindow("Tweet")
 			if newTweetWindow then newTweetWindow:focus() end
 		end)
 
@@ -107,7 +108,7 @@ TwitterWatcher = Aw.new(function(appName, event)
 
 	-- do not focus Twitter after an app is terminated
 	elseif event == Aw.terminated and appName ~= "Twitter" then
-		RunWithDelays({0.1, 0.3}, twitterFallThrough)
+		RunWithDelays({ 0.1, 0.3 }, twitterFallThrough)
 
 	-- raise twitter when switching window to other app
 	elseif event == Aw.activated and appName ~= "Twitter" then
