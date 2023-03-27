@@ -934,9 +934,9 @@ sketchybar --trigger update-sidenote-count</string>
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.apple.Safari</string>
-					<string>com.apptorium.SideNotes-paddle</string>
 					<string>com.vivaldi.Vivaldi</string>
+					<string>com.apptorium.SideNotes-paddle</string>
+					<string>com.apple.Safari</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
@@ -1047,8 +1047,8 @@ sketchybar --trigger update-sidenote-count</string>
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.vivaldi.Vivaldi</string>
 					<string>com.apple.Safari</string>
+					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -1356,7 +1356,7 @@ sketchybar --trigger update-sidenote-count</string>
 				<key>keycode</key>
 				<integer>126</integer>
 				<key>keymod</key>
-				<integer>12189696</integer>
+				<integer>12058624</integer>
 				<key>overridewithargument</key>
 				<false/>
 			</dict>

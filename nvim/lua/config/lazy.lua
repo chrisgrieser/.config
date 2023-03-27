@@ -18,7 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 -- WARN if plugins are not recognized, try renaming the plugin-spec file https://github.com/folke/lazy.nvim/issues/298
 require("lazy").setup("plugins", {
 	dev = {
-		path = os.getenv("HOME") .. "/Repos",
+		path = vim.env.ICLOUD .. "/Repos",
 		fallback = true, -- use remote repo when local repo doesn't exist
 	},
 	ui = {

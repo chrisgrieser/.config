@@ -100,11 +100,11 @@ Keymap("n", "m", "%", { desc = "Goto Matching Bracket" })
 
 -- indentwise motions
 -- https://github.com/jeetsukumaran/vim-indentwise#customization
-Keymap("n", "gi", "<Plug>(IndentWiseNextLesserIndent)", { desc = "Next Lesser Indent" })
-Keymap("n", "gI", "<Plug>(IndentWisePreviousLesserIndent)", { desc = "Previous Lesser Indent" })
+Keymap("n", "gj", "<Plug>(IndentWiseNextLesserIndent)", { desc = "Next Lesser Indent" })
+Keymap("n", "gk", "<Plug>(IndentWisePreviousLesserIndent)", { desc = "Previous Lesser Indent" })
 
 -- Jump to Parent Symbol
-Keymap("n", "gk", function()
+Keymap("n", "g<Tab>", function()
 	if not require("nvim-navic").is_available() then
 		vim.notify("Navic is not available.", LogWarn)
 		return
