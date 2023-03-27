@@ -2,7 +2,7 @@ require("lua.utils")
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local repoSyncFreqMin = 0.3
+local repoSyncFreqMin = 20
 local dotfileIcon = "🔵"
 local vaultIcon = "🟪"
 local passIcon = "🔑"
