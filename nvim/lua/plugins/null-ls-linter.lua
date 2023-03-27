@@ -60,8 +60,11 @@ local function nullConfig()
 			},
 
 			-- JS/TS
+			-- INFO when no prettierrc can be found, will use prettiers default
+			-- config, which includes setting everything to spaces…
 			builtins.formatting.prettier.with {
-				filetypes = { "javascript", "typescript", "yaml", "json" }, -- do not format markdown, css, and so on
+				-- do not format markdown and css
+				filetypes = { "javascript", "typescript", "yaml", "json" }, 
 			},
 
 			-- CSS

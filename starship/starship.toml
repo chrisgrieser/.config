@@ -27,7 +27,6 @@ $jobs\
 $memory_usage\
 """
 
-# ⏼⏻⟐ﰉﰊ★ﮊגּﮏ﫜ﲮﲭﱬﳄﯖﴣﯟﯢﳝﯶﯾ卵擄勞ﮧ閭ﴯﰪﭾ璉ﲅ晴ﲊ羽⚡
 [character]
 success_symbol = " [](bold green)"
 error_symbol = " [](bold red)"
