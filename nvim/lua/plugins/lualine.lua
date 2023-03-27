@@ -82,12 +82,6 @@ local function visualMultiCursorCount()
 	---@diagnostic enable: undefined-field
 end
 
--- helper condition for other statusline items
-local function hasNoMultipleCursor()
-	---@diagnostic disable: undefined-field -- defined by visual multi plugin
-	return not (vim.b.VM_Selection and vim.b.VM_Selection.Regions)
-end
-
 local function clock()
 	if vim.opt.columns:get() < 110 then return "" end -- only show the clock when it covers the menubar clock
 	local time = tostring(os.date()):sub(12, 16)
@@ -188,18 +182,11 @@ local lualineConfig = {
 		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
 		lualine_c = {
 			{ require("funcs.quickfix").counter },
-			{
-				searchCounter,
-				cond = hasNoMultipleCursor,
-			},
-			{ visualMultiCursorCount },
+			{ searchCounter },
 			{
 				require("funcs.lsp-count").statusline,
 				color = { fg = "grey" },
-				cond = function()
-					local isNotSearching = vim.v.hlsearch == 0
-					return isNotSearching and hasNoMultipleCursor()
-				end,
+				cond = function() return vim.v.hlsearch == 0 end,
 			},
 		},
 		lualine_x = {
@@ -215,8 +202,9 @@ local lualineConfig = {
 			{ "branch", cond = isStandardBranch },
 		},
 		lualine_z = {
-			"location",
+			{ visualMultiCursorCount },
 			{ selectionCount, padding = { left = 0, right = 1 } },
+			"location",
 		},
 	},
 	winbar = {
