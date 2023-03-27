@@ -233,12 +233,6 @@ SidenotesWatcher = Aw.new(function(appName)
 	end
 end):start()
 
--- HACK hide when switching to any other app
--- (since SideNotes can only be hidden on mouse click, but not on alt-tab)
-SidenotesWatcher2 = Aw.new(function(appName, event)
-	if appName ~= "SideNotes" and event == Aw.activated then App("SideNotes"):hide() end
-end):start()
-
 --------------------------------------------------------------------------------
 
 -- HIGHLIGHTS
