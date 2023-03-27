@@ -18,7 +18,7 @@ local lightGrey = { white = 0.55 }
 cons.titleVisibility("hidden")
 cons.toolbar(nil)
 cons.consoleFont(baseFont)
-hs.consoleOnTop(true)
+hs.consoleOnTop(false)
 
 --------------------------------------------------------------------------------
 

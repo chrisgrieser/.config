@@ -38,7 +38,7 @@ function gitDotfileSync(noSubmodulePull)
 		end
 	end
 
-	GitDotfileSyncTask = hs.task.new(gitDotfileScript, dotfileSyncCallback, {}, scriptArgs):start()
+	GitDotfileSyncTask = hs.task.new(gitDotfileScript, dotfileSyncCallback, scriptArgs):start()
 	if not GitDotfileSyncTask then return false end
 	return true
 end
