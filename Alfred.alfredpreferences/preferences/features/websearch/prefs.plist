@@ -103,9 +103,9 @@
 			<key>keyword</key>
 			<string>tw</string>
 			<key>text</key>
-			<string>New Tweet</string>
+			<string>New Tweet: {query}</string>
 			<key>url</key>
-			<string>https://twitter.com/intent/tweet?text=</string>
+			<string>https://twitter.com/intent/tweet?text={query}</string>
 		</dict>
 		<key>84F18614-4389-4B12-8CD3-4B9F82576401</key>
 		<dict>
