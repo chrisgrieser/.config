@@ -74,10 +74,15 @@ opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 
--- guiding column for `gm`
-local gmColumn = math.floor(Fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
-if Fn.hostname():find("eduroam") then gmColumn = gmColumn - 1 end
-opt.colorcolumn = { "+1", gmColumn } -- relative to textwidth
+-- Color Column
+
+Autocmd({"VimEnter", "BufWinEnter"}, { 
+	callback = function()
+		-- guiding column for `gm`
+		local gmColumn = math.floor(Fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
+		opt.colorcolumn = { "+1", gmColumn } -- relative to textwidth
+	end,
+})
 
 -- status bar & cmdline
 opt.history = 400 -- reduce noise for command history search

@@ -1,4 +1,8 @@
 {
+	"shebang": {
+		"prefix": "shebang",
+		"body": "#!/usr/bin/env osascript -l JavaScript"
+	},
 	"running check": {
 		"prefix": "running check",
 		"body": "Application(\"${1:appName}\").running()"

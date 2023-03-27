@@ -217,7 +217,13 @@ Keymap("x", "<leader>fk", [[:s/\(.*\)/\1/g]] .. ("<Left>"):rep(10), { desc = "�
 Keymap("n", "<leader>ff", ":%s///g<Left><Left><Left>", { desc = "弄 :s" })
 Keymap("x", "<leader>ff", ":s///g<Left><Left><Left>", { desc = "弄 :s" })
 
-Keymap("n", "<leader>f<Tab>", Cmd.retab, { desc = "弄 :retab" })
+Keymap("n", "<leader>f<Tab>", function()
+	Bo.expandtab = not Bo.expandtab
+	Cmd.retab { bang = true }
+	local now = Bo.expandtab and "Spaces" or "Tabs"
+	if not Bo.expandtab then Bo.tabstop = vim.opt_global.tabstop:get() end
+	vim.notify("Now using: " .. now)
+end, { desc = "弄 Tabs ↔ Spaces" })
 
 Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "弄 :s cword" })
 Keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "弄 :g - normal" })
