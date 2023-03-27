@@ -16,7 +16,7 @@ local gitPassScript = PasswordStore .. "/pass-sync.sh"
 ---@return boolean
 ---@param noSubmodulePull? any
 local function gitDotfileSync(noSubmodulePull)
-	local scriptArgs = noSubmodulePull and {"no-submodule-pull"} or {}
+	local scriptArgs = noSubmodulePull and {} or {"submodule-pull"}
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
 	if not (ScreenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
 

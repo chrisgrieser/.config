@@ -31,7 +31,7 @@ git pull
 git push
 
 # update submodules, if called with extra arg
-if [[ "$1" != "no-submodule-pull" ]] ; then
+if [[ "$1" == "submodule-pull" ]] ; then
 	git pull --recurse-submodules
 	git submodule update --remote
 	osascript -e 'display notification "" with title "pulled submodules"'
