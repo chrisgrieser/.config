@@ -2,7 +2,7 @@ require("lua.utils")
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local repoSyncFreqMin = 20
+local repoSyncFreqMin = 0.3
 local dotfileIcon = "🔵"
 local vaultIcon = "🟪"
 local passIcon = "🔑"
@@ -16,10 +16,9 @@ local gitPassScript = PasswordStore .. "/pass-sync.sh"
 ---@return boolean
 ---@param noSubmodulePull? any
 local function gitDotfileSync(noSubmodulePull)
+	local scriptArgs = noSubmodulePull and {"no-submodule-pull"} or {}
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
 	if not (ScreenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
-
-	local args = noSubmodulePull and { "noSubmodulePull" } or nil
 
 	local function dotfileSyncCallback(exitCode, _, stdErr)
 		if exitCode == 0 then
@@ -38,7 +37,7 @@ local function gitDotfileSync(noSubmodulePull)
 		end
 	end
 
-	GitDotfileSyncTask = hs.task.new(gitDotfileScript, dotfileSyncCallback, {}, args):start()
+	GitDotfileSyncTask = hs.task.new(gitDotfileScript, dotfileSyncCallback, {}, scriptArgs):start()
 	if not GitDotfileSyncTask then return false end
 	return true
 end
@@ -86,8 +85,9 @@ end
 ---sync all three git repos
 ---@param extras? string extra modes
 function SyncAllGitRepos(extras)
-	local noSubmodulePull = extras == "no-submodule-pull"
-	local success1 = gitDotfileSync(noSubmodulePull)
+	local args = extras == "no-submodule-pull"
+	local success1 = gitDotfileSync(args)
+
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
 	if not (success1 and success2 and success3) then
