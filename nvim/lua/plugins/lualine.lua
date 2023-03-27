@@ -31,7 +31,7 @@ local function indentation()
 	elseif usesSpaces and hasTabs then
 		out = out .. " ↹ "
 	end
-	if out ~= "" then out = " " .. out end
+	if out ~= "" then out = "󰉶 " .. out end
 	return out
 end
 
@@ -78,7 +78,7 @@ local function visualMultiCursorCount()
 	if not vim.b.VM_Selection then return "" end
 	local cursors = vim.b.VM_Selection.Regions
 	if not cursors then return "" end
-	return " " .. tostring(#cursors)
+	return "󰇀 " .. tostring(#cursors)
 	---@diagnostic enable: undefined-field
 end
 
@@ -116,7 +116,7 @@ function UpdateHarpoonIndicator()
 	local currentFile = vim.fn.expand("%")
 
 	for _, file in pairs(markedFiles) do
-		if file.filename == currentFile then vim.b.harpoonMark = "ﯠ" end
+		if file.filename == currentFile then vim.b.harpoonMark = "󰛢" end
 	end
 end
 
@@ -205,7 +205,7 @@ local lualineConfig = {
 		lualine_x = {
 			{
 				"diagnostics",
-				symbols = { error = " ", warn = " ", info = " ", hint = "ﬤ " },
+				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
 			{ indentation },
 			{ lsp_progress },

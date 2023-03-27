@@ -128,7 +128,7 @@ return {
 				border = BorderStyle,
 				icons = {
 					package_installed = "✓",
-					package_pending = "羽",
+					package_pending = "󰔟",
 					package_uninstalled = "✗",
 				},
 			},
