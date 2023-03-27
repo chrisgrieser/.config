@@ -20,9 +20,8 @@ function run(argv) {
 
 	// get content
 	const sidenotes = Application("SideNotes");
-	const currentNote = sidenotes.currentNote();
-	const content = currentNote.text();
-	const firstLine = currentNote.title();
+	const curNote = sidenotes.currentNote();
+	const content = curNote.text();
 
 	// open URL (& close sidenotes)
 	if (doOpenUrl) {
@@ -30,19 +29,17 @@ function run(argv) {
 		const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 		const urls = content.match(urlRegex);
 		if (!urls) return "⚠️ No URL found."; // notification
-		const firstUrl = urls[0];
-		app.openLocation(firstUrl);
+		app.openLocation(urls[0]);
 
 		// dynamically decide whether to delete
-		const noteHasOnlyUrl = content === firstUrl;
-		const secondLineOnlyUrl = content.split("\n")[1] === firstUrl;
-		doDelete = noteHasOnlyUrl || secondLineOnlyUrl;
+		const isLinkOnlyNote = [curNote.title(), curNote.details()].includes(urls[0]);
+		doDelete = isLinkOnlyNote;
 	}
 
 	// Trash Note, but keep copy in trash folder
 	if (doDelete) {
 		const maxNameLen = 50;
-		let safeTitle = firstLine.replace(/[/\\:;,"'#()[\]=<>{}]|\.$/gm, "");
+		let safeTitle = curNote.title().replace(/[/\\:;,"'#()[\]=<>{}]|\.$/gm, "");
 		if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
 		const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.txt`;
 		writeToFile(trashNotePath, content);
