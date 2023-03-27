@@ -28,8 +28,8 @@ function run(argv) {
 		// prettier-ignore
 		const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 		const urls = content.match(urlRegex);
-		if (!urls) return "⚠️ No URL found.";  // notification
-		const firstUrl = urls[0]
+		if (!urls) return "⚠️ No URL found."; // notification
+		const firstUrl = urls[0];
 		app.openLocation(firstUrl);
 
 		// dynamically decide whether to delete
@@ -48,9 +48,10 @@ function run(argv) {
 		sidenotes.currentNote().delete();
 	}
 
-	// close sidenotes
+	// hide sidenotes
 	if (doCopy || doOpenUrl) {
-		Application("System Events").keystroke("w", { using: ["command down"] });
+		const sidenotesProcess = Application("System Events").applicationProcesses.byName("SideNotes");
+		if (sidenotesProcess) sidenotesProcess.visible = false;
 	}
 
 	// copy to clipboard

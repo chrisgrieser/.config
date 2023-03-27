@@ -41,6 +41,7 @@ const jsonArray = app
 		const daysAgo = Math.ceil((new Date() - new Date(parts[3])) / 1000 / 3600 / 24);
 		let updated =
 			daysAgo < 31 ? daysAgo.toString() + " days ago" : Math.ceil(daysAgo / 30).toString() + " months ago";
+
 		if (updated.startsWith("1 ")) updated = updated.replace("s ago", " ago"); // remove plural "s"
 		const desc = parts[4] || "";
 		const subtitle = `★ ${stars} – ${updated} – ${desc}`.replace(/ – $/, "");

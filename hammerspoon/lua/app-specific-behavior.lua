@@ -233,6 +233,10 @@ SidenotesWatcher = Aw.new(function(appName, event)
 		hs.execute("sketchybar --trigger update-sidenote-count")
 	end
 end):start()
+-- hide when alt-tab is used
+SidenotesWatcher = Aw.new(function(appName, event)
+	if appName == "Alt-Tab" and event == Aw.activated then App("SideNotes"):hide() end
+end):start()
 
 --------------------------------------------------------------------------------
 
