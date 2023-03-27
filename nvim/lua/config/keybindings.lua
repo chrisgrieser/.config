@@ -111,14 +111,13 @@ Keymap("n", "g<Tab>", function()
 	end
 	local symbolPath = require("nvim-navic").get_data()
 	local parent = symbolPath[#symbolPath - 1]
-	if not parent then 
+	if not parent then
 		vim.notify("Already at the highest parent.")
 		return
 	end
 	local parentPos = parent.scope.start
 	SetCursor(0, { parentPos.line, parentPos.character })
 end, { desc = "󰒕Jump to Parent" })
-
 
 --------------------------------------------------------------------------------
 

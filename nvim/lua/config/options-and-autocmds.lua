@@ -75,8 +75,7 @@ opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 
 -- Color Column
--- HACK "WinResized" does not seem to work currently, therefore using "BufWinEnter" as substitute for now
-Autocmd({ "VimEnter", "BufWinEnter" }, {
+Autocmd({ "VimEnter", "VimResized" }, { -- "WinResized" does not seem to work currently
 	callback = function()
 		if opt_local.wrap:get() then return end
 		-- guiding column for `gm`

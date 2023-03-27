@@ -41,10 +41,12 @@ rules:
   # Structure / Blocks
   complexity: [warn, 15]
   max-depth: [warn, 4]
-  no-empty: [warn, { allowEmptyCatch: true }]
+  no-empty:
+    - warn
+    - allowEmptyCatch: true
 
-  no-implicit-coercion: warn
   # variables
+  no-implicit-coercion: warn
   id-length:
     - warn
     - min: 4
@@ -52,7 +54,9 @@ rules:
       properties: never
       exceptions: [x, y, i, j, id, min, max, app, str, int, out, a, b, num, url, run, tag, ext, cmd, key]
   no-underscore-dangle: warn
-  no-shadow: [warn, { hoist: all }]
+  no-shadow:
+    - warn
+    - hoist: all
   camelcase:
     - warn
     - properties: always
@@ -64,7 +68,9 @@ rules:
   no-multi-assign: error
   no-sequences: error
   no-undefined: error
-  one-var-declaration-per-line: [warn, initializations]
+  one-var-declaration-per-line:
+    - warn
+    - initializations
   no-lone-blocks: error
 
   # Async & Await
@@ -105,7 +111,9 @@ rules:
 
   # Semicolon
   no-extra-semi: warn
-  semi-style: [warn, last]
+  semi-style:
+    - warn
+    - last
 
   # Commas
   comma-spacing: warn
@@ -127,7 +135,9 @@ rules:
   no-template-curly-in-string: error
   no-useless-concat: warn
   no-multi-str: error
-  prefer-regex-literals: [warn, { disallowRedundantWrapping: true }]
+  prefer-regex-literals:
+    - warn
+    - disallowRedundantWrapping: true
 
   # Numbers
   no-magic-numbers:
@@ -153,6 +163,8 @@ rules:
   no-nested-ternary: error
   no-constant-binary-expression: error
   yoda: warn
-  no-else-return: [warn, { allowElseIf: true }]
+  no-else-return:
+    - warn
+    - allowElseIf: true
   no-lonely-if: warn
   no-mixed-operators: error
