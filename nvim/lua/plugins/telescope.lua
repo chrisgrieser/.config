@@ -15,7 +15,7 @@ local function telescopeConfig()
 			selection_caret = "󰜋 ",
 			prompt_prefix = "❱ ",
 			multi_icon = "󰐖",
-			preview = { filesize_limit = 2 }, -- in MB, do not preview big files for performance
+			preview = { filesize_limit = 1 }, -- in MB, do not preview big files for performance
 			path_display = { "tail" },
 			borderchars = BorderChars,
 			history = { path = VimDataDir .. "telescope_history" }, -- sync the history
