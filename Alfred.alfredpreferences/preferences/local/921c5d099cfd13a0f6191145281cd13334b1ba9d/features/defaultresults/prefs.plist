@@ -4,8 +4,6 @@
 <dict>
 	<key>scope</key>
 	<array>
-		<string>~/.config/custom-app-icons</string>
-		<string>~/.config/custom-filetype-icons</string>
 		<string>~/Downloaded</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs</string>
 		<string>~/RomComs/-new</string>
