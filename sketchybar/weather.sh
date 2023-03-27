@@ -8,14 +8,14 @@ icon=$(
 		# replace emoji with nerdfont icons
 		sed 's/🌧//' |
 		sed 's/☁️//' |
-		sed 's/🌫/敖/' |
+		sed 's/🌫//' |
 		sed 's/🌧//' |
 		sed 's/❄️//' |
 		sed 's/🌦//' |
 		sed 's/🌨//' |
 		sed 's/⛅️//' |
 		sed 's/☀️//' |
-		sed 's/🌩/朗/' |
+		sed 's/🌩/󰖓/' |
 		sed 's/⛈//'
 )
 

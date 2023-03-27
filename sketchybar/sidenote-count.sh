@@ -8,7 +8,7 @@ if [[ $count -eq 0 ]]; then
 	icon=""
 	count=""
 else
-	icon="ﯻ"
+	icon="󰛽"
 fi
 
 sketchybar --set "$NAME" icon="$icon" label="$count"

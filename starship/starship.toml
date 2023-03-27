@@ -28,8 +28,8 @@ $memory_usage\
 """
 
 [character]
-success_symbol = " [](bold green)"
-error_symbol = " [](bold red)"
+success_symbol = " [󰀘](bold green)"
+error_symbol = " [󰇷](bold red)"
 vimcmd_symbol = " [\\[N\\]](bold blue)" # only active on xterm due to cursor shape snippet intefering with it
 
 [sudo]
@@ -40,21 +40,21 @@ disabled = false
 
 [cmd_duration]
 min_time = 2500
-format = " [羽$duration](bold cyan)"
+format = " [󰔟$duration](bold cyan)"
 
 [directory]
 truncation_length = 2
 truncation_symbol = "/"
 truncate_to_repo = true
-read_only = "ﮖ  "
+read_only = "󰌾 "
 read_only_style = "red bg:black"
 style = "fg:bright-blue bg:black bold"
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
 "/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
-"/File Hub" = "/柳"
-"/.config/Alfred.alfredpreferences/workflows/user.workflow." = "/  "
+"/File Hub" = "/󰀶 "
+"/.config/Alfred.alfredpreferences/workflows/user.workflow." = "/ "
 
 [custom.folder_number]
 command = "find . -maxdepth 1 -not -name '.git' -not -name '.' -not -name '.DS_Store' | wc -l"
@@ -94,10 +94,10 @@ format = "[$symbol$branch]($style) "
 untracked = '[+$count ](fg:green bg:black)'
 deleted = '[-$count ](fg:red bg:black)'
 modified = '[~$count ](fg:blue bg:black)'
-renamed = '[凜$count ](fg:blue bg:black)'
+renamed = '[󰑕$count ](fg:blue bg:black)'
 staged = '[ $count ](fg:green bg:black)'
 conflicted = '[ $count ](fg:red bg:black)'
-diverged = '[燎$count ](fg:red bg:black)'
+diverged = '[󰓁$count ](fg:red bg:black)'
 ahead = '[⇡$count ](fg:cyan bg:black)'
 behind = '[⇣$count ](fg:yellow bg:black)'
 ignore_submodules=false
@@ -124,7 +124,7 @@ number_threshold = 2
 
 [memory_usage]
 disabled = false
-symbol = " "
+symbol = "󰍛 "
 threshold = 80
 format = " [$symbol$ram_pct]($style)"
 
