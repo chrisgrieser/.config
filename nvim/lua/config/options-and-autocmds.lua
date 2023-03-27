@@ -75,12 +75,13 @@ opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 
 -- Color Column
-
+-- HACK "WinResized" does not seem to work currently, therefore using "BufWinEnter" as substitute for now
 Autocmd({"VimEnter", "BufWinEnter"}, { 
 	callback = function()
+		if opt.wrap then return end
 		-- guiding column for `gm`
 		local gmColumn = math.floor(Fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
-		opt.colorcolumn = { "+1", gmColumn } -- relative to textwidth
+		opt.colorcolumn = { "+1", gmColumn } 
 	end,
 })
 
