@@ -17,17 +17,19 @@ local gitPassScript = PasswordStore .. "/pass-sync.sh"
 ---@param submodulePull? boolean also update submodules, defaults to **true**
 local function gitDotfileSync(submodulePull)
 	local scriptArgs = {}
-	if submodulePull == nil or submodulePull == true then scriptArgs = { "--submodule-pull" } end
+	if submodulePull == nil then submodulePull = true end
+	if submodulePull then scriptArgs = { "--submodule-pull" } end
 
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
 	if not (ScreenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
 
 	local function dotfileSyncCallback(exitCode, _, stdErr)
 		if exitCode == 0 then
-			print(dotfileIcon, "Dotfile Sync successful.")
+			local msg = dotfileIcon .. "Dotfile Sync successful."
+			if submodulePull then msg = msg .. "(with submodules)" end
+			print(msg)
 			return
 		end
-
 		local stdout = hs.execute("git status --short")
 		if not stdout then return end
 		local submodulesStillDirty = stdout:match(" m ")

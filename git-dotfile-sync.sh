@@ -34,7 +34,6 @@ git push
 if [[ "$1" == "--submodule-pull" ]] ; then
 	git pull --recurse-submodules
 	git submodule update --remote
-	osascript -e 'display notification "" with title "submodule-pull"'
 fi
 
 # check that everything worked (e.g. submodules are still dirty)
