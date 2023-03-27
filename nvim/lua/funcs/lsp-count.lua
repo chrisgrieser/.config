@@ -79,7 +79,7 @@ function M.statusline()
 			refs = refs .. "(" .. tostring(lspCount.refWorkspace) .. ")"
 		end
 	end
-	return "󰈿 :reference " .. defs .. refs
+	return "󰈿 " .. defs .. refs
 end
 
 --------------------------------------------------------------------------------
