@@ -29,14 +29,20 @@ if (!fileExists(formulaTxt) || !fileExists(caskTxt)) app.doShellScript(`brew upd
 
 const casks = readFile(caskTxt).split("\n");
 const formula = readFile(formulaTxt).split("\n");
+let mackups = false;
 try {
-	const mackupAvailable = app.doShellScript(`mackup list`);
+	mackups = app.doShellScript(`mackup list`);
+	if (mackups) mackups = mackups.split("\r").map(item => item.slice(3));
 } catch (error) {
+	console.log(error);
 }
 
+//──────────────────────────────────────────────────────────────────────────────
+
 casks.forEach(name => {
+	const mackupIcon = mackups && mackups.includes(name) ? $.getenv("mackup_icon") : "";
 	jsonArray.push({
-		title: name,
+		title: name + mackupIcon,
 		match: alfredMatcher(name),
 		subtitle: "cask",
 		arg: `${name} --cask`,
@@ -44,8 +50,9 @@ casks.forEach(name => {
 	});
 });
 formula.forEach(name => {
+	const mackupIcon = mackups && mackups.includes(name) ? $.getenv("mackup_icon"): "";
 	jsonArray.push({
-		title: name,
+		title: name + mackupIcon,
 		match: alfredMatcher(name),
 		subtitle: "formula",
 		arg: `${name} --formula`,
