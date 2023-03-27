@@ -145,7 +145,7 @@ end
 local function shimmeringFocusBuild(commitMsg)
 	local buildscriptLocation = vim.env.ICLOUD .. "/Repos/shimmering-focus/build.sh"
 
-	vim.notify(' Building theme…\n"' .. commitMsg .. '"')
+	vim.notify('󰊢 Building theme…\n"' .. commitMsg .. '"')
 	output = {}
 	local command = string.format("zsh '%s' '%s'", buildscriptLocation, commitMsg)
 	fn.jobstart(command, gitShellOpts)
@@ -155,7 +155,7 @@ end
 function M.amendNoEditPushForce()
 	if not isInGitRepo() then return end
 	local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
-	vim.notify(' Amend-No-Edit & Force Push…\n("'..lastCommitMsg..'")')
+	vim.notify('󰊢 Amend-No-Edit & Force Push…\n("'..lastCommitMsg..'")')
 	fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
 end
 
@@ -178,7 +178,7 @@ function M.amendAndPushForce(prefillMsg)
 			return
 		end
 
-		vim.notify(' Amend & Force Push…\n"'..newMsg..'"')
+		vim.notify('󰊢 Amend & Force Push…\n"'..newMsg..'"')
 		fn.jobstart(
 			"git add -A && git commit --amend -m '" .. newMsg .. "' ; git push --force",
 			gitShellOpts
@@ -207,7 +207,7 @@ function M.addCommitPush(prefillMsg)
 			return
 		end
 
-		vim.notify(' git add-commit-push\n"' .. newMsg .. '"')
+		vim.notify('󰊢 git add-commit-push\n"' .. newMsg .. '"')
 		fn.jobstart(
 			"git add -A && git commit -m '" .. newMsg .. "' ; git pull ; git push --force",
 			gitShellOpts

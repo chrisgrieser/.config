@@ -152,7 +152,7 @@ opt.list = true
 opt.fillchars = { eob = " ", fold = " " }
 -- opt.showbreak = "↪"
 opt.listchars = {
-	nbsp = "ﮊ",
+	nbsp = "󰚌",
 	precedes = "…",
 	extends = "…",
 	multispace = "·",
