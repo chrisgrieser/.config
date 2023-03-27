@@ -186,7 +186,7 @@ end
 local M = {}
 
 ---switches words under the cursor to their opposite, e.g. `true` to `false`
-function M.switch()
+function M.flipWord()
 	-- determine word to check
 	local iskeywBefore = vim.opt.iskeyword:get() -- remove word-delimiters for <cword>
 	vim.opt.iskeyword:remove { "_", "-", "." }

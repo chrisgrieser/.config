@@ -19,7 +19,7 @@ local function gitDotfileSync(noSubmodulePull)
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
 	if not (ScreenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
 
-	if noSubmodulePull then noSubmodulePull = { "no-submodule-pull" } end
+	local args = noSubmodulePull and { "noSubmodulePull" } or nil
 
 	local function dotfileSyncCallback(exitCode, _, stdErr)
 		if exitCode == 0 then
@@ -38,7 +38,7 @@ local function gitDotfileSync(noSubmodulePull)
 		end
 	end
 
-	GitDotfileSyncTask = hs.task.new(gitDotfileScript, dotfileSyncCallback, nil, noSubmodulePull):start()
+	GitDotfileSyncTask = hs.task.new(gitDotfileScript, dotfileSyncCallback, {}, args):start()
 	if not GitDotfileSyncTask then return false end
 	return true
 end
@@ -48,10 +48,6 @@ local function gitVaultSync()
 	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return false end
 	if not (ScreenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
 
-
-	local function vaultSyncCallback()
-		
-	end
 	GitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
@@ -88,16 +84,10 @@ end
 --------------------------------------------------------------------------------
 
 ---sync all three git repos
----@param extras? string extra modes, e.g. send notification or ignore
---submodules for dotfiles
+---@param extras? string extra modes
 function SyncAllGitRepos(extras)
-	local success1
-	if extras and extras:find("no%-submodule%-pull") then
-		success1 = gitDotfileSync("no-submodule-pull")
-	else
-		success1 = gitDotfileSync()
-	end
-
+	local noSubmodulePull = extras == "no-submodule-pull"
+	local success1 = gitDotfileSync(noSubmodulePull)
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
 	if not (success1 and success2 and success3) then
@@ -113,7 +103,7 @@ function SyncAllGitRepos(extras)
 	end
 	local function updateSketchybar()
 		hs.execute("sketchybar --trigger repo-files-update")
-		if extras and extras:find("notify") then Notify("Sync finished.") end
+		if extras == "notify" then Notify("Sync finished.") end
 	end
 
 	hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
@@ -135,7 +125,7 @@ UriScheme("sync-repos", function()
 	SyncAllGitRepos("notify")
 end)
 
--- 4. when going to sleep / unlocking with idleTime
+-- 4. when going to sleep or when unlocking with idleTime
 SleepWatcher = hs.caffeinate.watcher
 	.new(function(event)
 		local c = hs.caffeinate.watcher

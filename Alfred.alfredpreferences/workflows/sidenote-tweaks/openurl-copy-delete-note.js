@@ -25,7 +25,7 @@ function run(argv) {
 
 	// open URL (& close sidenotes)
 	if (doOpenUrl) {
-		const url = content.match(/https?:\/\/[^\s]+/)[0];
+		const url = content.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/);
 		app.openLocation(url);
 
 		// dynamically decide whether to delete
