@@ -15,7 +15,7 @@ setopt INC_APPEND_HISTORY
 setopt HIST_VERIFY
 setopt EXTENDED_HISTORY
 
-# --------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
 export HIST_DATE_FORMAT='%a %d.%m %H:%M   ' # custom, defined by me
 
