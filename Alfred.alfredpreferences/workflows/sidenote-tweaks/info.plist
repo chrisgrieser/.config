@@ -126,6 +126,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>361348CD-BAD8-4DB4-91B7-6712F1E1266C</key>
+		<array/>
 		<key>423D429B-827C-46B7-BA3A-D18CB38C3216</key>
 		<array>
 			<dict>
@@ -1011,9 +1013,9 @@ sketchybar --trigger update-sidenote-count</string>
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.apple.Safari</string>
-					<string>com.apptorium.SideNotes-paddle</string>
 					<string>com.vivaldi.Vivaldi</string>
+					<string>com.apptorium.SideNotes-paddle</string>
+					<string>com.apple.Safari</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
@@ -1124,8 +1126,8 @@ sketchybar --trigger update-sidenote-count</string>
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.vivaldi.Vivaldi</string>
 					<string>com.apple.Safari</string>
+					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -1258,6 +1260,27 @@ sketchybar --trigger update-sidenote-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>test</string>
+				<key>subtext</key>
+				<string>test</string>
+				<key>text</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>361348CD-BAD8-4DB4-91B7-6712F1E1266C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>count</key>
 				<integer>1</integer>
 				<key>keychar</key>
@@ -1308,6 +1331,29 @@ sketchybar --trigger update-sidenote-count</string>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>D755A9A7-0954-4F6C-B2EB-7DCE0561E449</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>move-office-sidenotes-to-base.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FF7B3107-A06C-4876-9AB3-83D85AD97F03</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1573,6 +1619,13 @@ sketchybar --trigger update-sidenote-count</string>
 			<real>445</real>
 			<key>ypos</key>
 			<real>1030</real>
+		</dict>
+		<key>361348CD-BAD8-4DB4-91B7-6712F1E1266C</key>
+		<dict>
+			<key>xpos</key>
+			<real>535</real>
+			<key>ypos</key>
+			<real>1735</real>
 		</dict>
 		<key>423D429B-827C-46B7-BA3A-D18CB38C3216</key>
 		<dict>
@@ -1865,6 +1918,13 @@ sketchybar --trigger update-sidenote-count</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>2020</real>
+		</dict>
+		<key>FF7B3107-A06C-4876-9AB3-83D85AD97F03</key>
+		<dict>
+			<key>xpos</key>
+			<real>805</real>
+			<key>ypos</key>
+			<real>1760</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
