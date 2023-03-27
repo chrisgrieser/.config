@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 
 add_newline = false
-continuation_prompt = "❯"
+continuation_prompt = "↪️ "
 format = """[$directory\
 ${custom.folder_number}\
 $git_branch\
@@ -133,7 +133,7 @@ format = " [$symbol$ram_pct]($style)"
 [package]
 format = "[$symbol$version]($style)"
 version_format = "$raw"
-symbol = "  "
+symbol = " "
 style = "dimmed 208"
 
 [custom.alfred]
@@ -142,7 +142,7 @@ when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
 command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 os = "macos"
 description = "Version number of Alfred Workflow"
-format = '[](purple) [󰏗 $output](dimmed 208)'
+format = '[](purple) [ $output](dimmed 208)'
 
 [nodejs]
 format = " [$symbol$version]($style)"
