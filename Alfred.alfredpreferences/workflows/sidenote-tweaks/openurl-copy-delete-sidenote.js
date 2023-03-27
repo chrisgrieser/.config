@@ -51,6 +51,8 @@ function run(argv) {
 
 	// close sidenotes
 	if (doClose) {
+		// apparently not JXA API for it, therefore done via keystrokes since it
+		// is ensured that SideNotes is the most frontmost app
 		Application("System Events").keystroke("w", { using: ["command down"] });
 	}
 
