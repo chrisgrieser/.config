@@ -225,20 +225,6 @@ Wf_zoom = Wf.new("zoom.us"):subscribe(Wf.windowCreated, function()
 	end)
 end)
 
--- SIDENOTES
--- update counter in sketchybar
-SidenotesWatcher = Aw.new(function(appName)
-	if appName == "SideNotes" then -- i.e., run on any event related to sidenotes
-		hs.execute("sketchybar --trigger update-sidenote-count")
-	end
-end):start()
-
--- HACK hide when switching to any other app
--- (since SideNotes can only be hidden on mouse click, but not on alt-tab)
-SidenotesWatcher2 = Aw.new(function(appName, event)
-	if appName ~= "SideNotes" and event == Aw.activated then App("SideNotes"):hide() end
-end):start()
-
 --------------------------------------------------------------------------------
 
 -- HIGHLIGHTS
