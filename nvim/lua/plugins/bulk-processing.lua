@@ -49,9 +49,9 @@ return {
 		"chrisgrieser/nvim-recorder",
 		dev = true,
 		keys = {
-			{ "9", desc = "/ Continue/Play" },
-			{ "8", desc = "/ Breakpoint" },
-			{ "0", desc = " Start/Stop Recording" },
+			{ "9", desc = "/ Continue/Play" },
+			{ "8", desc = "/ Breakpoint" },
+			{ "0", desc = " Start/Stop Recording" },
 		},
 		config = function()
 			require("recorder").setup {

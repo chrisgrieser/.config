@@ -81,7 +81,7 @@ function M.altFileStatusline()
 	elseif altWindow() then
 		return "  " .. vim.fs.basename(altWindow()) ---@diagnostic disable-line: param-type-mismatch
 	elseif altFile == "" and altOldfile() then
-		return " " .. vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
+		return "󰋚 " .. vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
 	elseif curFile == altFile then -- same name, different file
 		local altParent = fn.expand("#:p:h:t")
 		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
