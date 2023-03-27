@@ -24,8 +24,8 @@
 	"for (i++)": {
 		"prefix": "for (i++)",
 		"body": [
-			"for (let i = 0; i < ${2:array}.length; ${1:index}++) {",
-			"\tconst ${3:element} = ${2:array}[i];",
+			"for (let i = 0; i < ${1:array}.length; i++) {",
+			"\tconst ${2:element} = ${1:array}[i];",
 			"\t$0",
 			"}"
 		]
@@ -33,8 +33,8 @@
 	"for (i--)": {
 		"prefix": "for (i--)",
 		"body": [
-			"for (let i = 0; i < ${2:array}.length; ${1:index}++) {",
-			"\tconst ${3:element} = ${2:array}[i];",
+			"for (let i = ${1:array}.length - 1; i >= 0; i--) {",
+			"\tconst ${2:element} = ${1:array}[i];",
 			"\t$0",
 			"}"
 		]

@@ -32,5 +32,6 @@ require("lua.hardware-periphery")
 require("lua.hide-cursor-in-browser")
 require("lua.app-specific-behavior")
 require("lua.twitter")
+require("lua.sidenotes")
 
 SystemStart()
