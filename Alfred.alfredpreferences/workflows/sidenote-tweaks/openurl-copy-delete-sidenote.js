@@ -27,13 +27,14 @@ function run(argv) {
 	if (doOpenUrl) {
 		// prettier-ignore
 		const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
-		const url = content.match(urlRegex);
-		if (!url) return "⚠️ No URL found.";  // notification
-		app.openLocation(url[0]);
+		const urls = content.match(urlRegex);
+		if (!urls) return "⚠️ No URL found.";  // notification
+		const firstUrl = urls[0]
+		app.openLocation(firstUrl);
 
 		// dynamically decide whether to delete
-		const noteHasOnlyUrl = content === url;
-		const secondLineOnlyUrl = content.split("\n")[1] === url;
+		const noteHasOnlyUrl = content === firstUrl;
+		const secondLineOnlyUrl = content.split("\n")[1] === firstUrl;
 		doDelete = noteHasOnlyUrl || secondLineOnlyUrl;
 	}
 

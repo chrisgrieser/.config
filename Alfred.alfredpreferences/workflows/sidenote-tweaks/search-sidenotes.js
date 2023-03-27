@@ -5,7 +5,7 @@ function alfredMatcher(str) {
 	return [clean, str].join(" ");
 }
 
-const sidenotes = Application("SideNotes")
+const sidenotes = Application("SideNotes");
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -16,8 +16,11 @@ function run(argv) {
 		.searchNotes(query) // CAVEAT currently not possible to get the folder for a note
 		.map(item => {
 			const content = item.title + "\n" + item.details;
-			const url = content.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/);
-			const icon = url ? "🔗 " : "";
+			// prettier-ignore
+			const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
+			const urls = content.match(urlRegex);
+			const firstUrl = urls ? urls[0] : null;
+			const icon = urls ? "🔗 " : "";
 
 			return {
 				title: item.title,
@@ -28,9 +31,9 @@ function run(argv) {
 				mods: {
 					alt: { arg: content },
 					cmd: {
-						arg: url[0],
+						arg: firstUrl,
 						subtitle: "⌘: Open first URL",
-						valid: Boolean(url),
+						valid: Boolean(urls),
 					},
 				},
 			};

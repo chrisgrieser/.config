@@ -16,6 +16,7 @@
   "codeium.nvim": { "branch": "main", "commit": "6430b50eebe6e30b7849e2d8e004ee7926e40d85" },
   "codi.vim": { "branch": "master", "commit": "83b9859aaf8066d95892e01eb9c01571a4b325dd" },
   "diffview.nvim": { "branch": "main", "commit": "58035354fc79c6ec42fa7b218dab90bd3968615f" },
+  "dracula.nvim": { "branch": "master", "commit": "48bdf295be74d2c4f9a924b59e72af6b1162ba46" },
   "dressing.nvim": { "branch": "master", "commit": "5f44f829481640be0f96759c965ae22a3bcaf7ce" },
   "duplicate.nvim": { "branch": "main", "commit": "f0129f5560f297bb28fc10192c444a853ddb3d98" },
   "gitsigns.nvim": { "branch": "main", "commit": "ca473e28382f1524aa3d2b6f04bcf54f2e6a64cb" },
