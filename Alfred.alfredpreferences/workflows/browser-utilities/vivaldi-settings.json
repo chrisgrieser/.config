@@ -14,9 +14,15 @@
 		},
 		{
 			"title": "🖌️ Themes",
-			"match": "themes color dark light mode",
-			"arg": "vivaldi://settings/appearance/",
+			"match": "themes color dark light mode appearance",
+			"arg": "vivaldi://settings/themes/",
 			"uid": "2"
+		},
+		{
+			"title": "🌈 Appearance",
+			"match": "windows appearance",
+			"arg": "vivaldi://settings/appearance/",
+			"uid": "2.5"
 		},
 		{
 			"title": "🏁 Start Page",
