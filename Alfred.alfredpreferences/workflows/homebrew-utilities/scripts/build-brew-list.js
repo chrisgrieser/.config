@@ -29,6 +29,10 @@ if (!fileExists(formulaTxt) || !fileExists(caskTxt)) app.doShellScript(`brew upd
 
 const casks = readFile(caskTxt).split("\n");
 const formula = readFile(formulaTxt).split("\n");
+try {
+	const mackupAvailable = app.doShellScript(`mackup list`);
+} catch (error) {
+}
 
 casks.forEach(name => {
 	jsonArray.push({

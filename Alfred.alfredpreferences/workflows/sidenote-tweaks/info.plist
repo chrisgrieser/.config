@@ -165,6 +165,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CE5C9260-FAA1-4EA8-A54C-A3F35A1772CB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>16C5F45A-DCED-4A89-B5C9-B04DE9261021</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>DB7EDFF2-EF29-4EDB-9ED7-368149133A05</key>
 		<array>
 			<dict>
@@ -710,6 +723,37 @@ sketchybar --trigger update-sidenote-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>-1</integer>
+				<key>hotmod</key>
+				<integer>524288</integer>
+				<key>hotstring</key>
+				<string>double tap</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>CE5C9260-FAA1-4EA8-A54C-A3F35A1772CB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -751,9 +795,9 @@ sketchybar --trigger update-sidenote-count</string>
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.apple.Safari</string>
-					<string>com.apptorium.SideNotes-paddle</string>
 					<string>com.vivaldi.Vivaldi</string>
+					<string>com.apptorium.SideNotes-paddle</string>
+					<string>com.apple.Safari</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
@@ -910,8 +954,8 @@ sketchybar --trigger update-sidenote-count</string>
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.vivaldi.Vivaldi</string>
 					<string>com.apple.Safari</string>
+					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -955,7 +999,7 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>620</real>
 		</dict>
 		<key>1EA57E38-BF7C-4655-8934-79F1FE5152B0</key>
 		<dict>
@@ -1097,6 +1141,15 @@ note</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>325</real>
+		</dict>
+		<key>CE5C9260-FAA1-4EA8-A54C-A3F35A1772CB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>770</real>
 		</dict>
 		<key>DB7EDFF2-EF29-4EDB-9ED7-368149133A05</key>
 		<dict>
