@@ -95,15 +95,6 @@ local function movieLayout()
 end
 
 
---------------------------------------------------------------------------------
--- REMINDERS -> SIDENOTES
-local function updateSidenotes()
-	local _, success =
-		hs.execute("osascript -l JavaScript './helpers/push-todays-reminders-to-sidenotes.js'")
-	if not success then Notify("⚠️ Reminder-to-Sidenote failed") end
-end
-
-SideNotesTimer = hs.timer.doAt("05:00", "01d", updateSidenotes)
 
 --------------------------------------------------------------------------------
 -- TRIGGERS FOR LAYOUT CHANGE
@@ -136,7 +127,7 @@ UnlockWatcher = c.new(function(event)
 	RunWithDelays(0.5, function() -- delay needed to ensure displays are recognized after waking
 		selectLayout()
 		setHigherBrightnessDuringDay()
-		updateSidenotes()
+		UpdateSidenotes()
 	end)
 end):start()
 

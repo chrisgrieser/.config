@@ -32,7 +32,7 @@ ProjectorScreensaverWatcher = caff
 
 -- on Mondays shortly before 10:00, open #fg-organisation Slack Channel
 JourfixeTimer = hs.timer
-	.doAt("09:58", "01d", function()
+	.doAt("09:59", "01d", function()
 		if getWeekday() ~= "Mon" then return end
 		hs.execute("open 'slack://channel?team=T010A5PEMBQ&id=CV95T641Y'")
 	end)

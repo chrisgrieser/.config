@@ -362,6 +362,9 @@ Keymap("n", "<D-S-d>", function()
 end, { desc = "ﯠ Menu" })
 -- stylua: ignore end
 
+-- gf (needs remapping, since `gf` is used for LSP references)
+Keymap("n", "gF", "gf", { desc = "Follow Path" })
+
 ------------------------------------------------------------------------------
 
 -- CMD-KEYBINDINGS

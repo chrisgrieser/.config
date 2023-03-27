@@ -76,12 +76,12 @@ opt.linebreak = true -- do not break up full words on wrap
 
 -- Color Column
 -- HACK "WinResized" does not seem to work currently, therefore using "BufWinEnter" as substitute for now
-Autocmd({"VimEnter", "BufWinEnter"}, { 
+Autocmd({ "VimEnter", "BufWinEnter" }, {
 	callback = function()
 		if opt_local.wrap:get() then return end
 		-- guiding column for `gm`
 		local gmColumn = math.floor(Fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
-		opt.colorcolumn = { "+1", gmColumn } 
+		opt.colorcolumn = { "+1", gmColumn }
 	end,
 })
 
@@ -98,6 +98,17 @@ opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use the
 -- Timeouts
 opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 opt.timeoutlen = 600 -- also affects duration until which-key is shown
+
+--------------------------------------------------------------------------------
+
+-- add pwd (for `gf`)
+Autocmd("DirChanged", {
+	callback = function() opt.path:append(vim.loop.cwd()) end,
+})
+-- remove old path
+Autocmd("DirChangedPre", {
+	callback = function() opt.path:remove(vim.loop.cwd()) end,
+})
 
 --------------------------------------------------------------------------------
 -- SCROLLING

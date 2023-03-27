@@ -33,7 +33,7 @@ end, { buffer = true, desc = " Reload Hammerspoon / nvim config" })
 --------------------------------------------------------------------------------
 -- INSPECT NVIM OR HAMMERSPOON OBJECTS
 
--- 1) `:I` or `<leader>li` inspects the passed lua object / selection
+-- `:I` or `<leader>li` inspects the passed lua object / selection
 local function inspect(strToInspect)
 	local parentDir = Expand("%:p:h")
 
@@ -62,4 +62,6 @@ Keymap("x", "<leader>li", function()
 	inspect(Fn.getreg("z"))
 end, { desc = " inspect selection", buffer = true })
 
+
+-- :I user command
 vim.api.nvim_buf_create_user_command(0, "I", function(ctx) inspect(ctx.args) end, { nargs = "+" })
