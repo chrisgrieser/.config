@@ -4,9 +4,9 @@ on run argv
 	set theList to "Supermarkt"
 	set toBuy to argv as string
 	tell application "Reminders"
-		tell (list theList) to make new reminder at end with properties {name: toBuy}
 		activate
-		# quit -- to save in background instead
+		show list theList
+		tell (list theList) to make new reminder at end with properties {name: toBuy}
 	end tell
 	return toBuy # for notification
 end run

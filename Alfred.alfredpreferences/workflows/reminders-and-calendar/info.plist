@@ -183,9 +183,9 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Added "{query}"</string>
+				<string>✅ Added</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -573,7 +573,7 @@
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>395</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
