@@ -26,8 +26,10 @@ function run(argv) {
 	// open URL (& close sidenotes)
 	if (doOpenUrl) {
 		// prettier-ignore
-		const url = content.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/)[0];
-		app.openLocation(url);
+		const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
+		const url = content.match(urlRegex);
+		if (!url) return "⚠️ No URL found.";  // notification
+		app.openLocation(url[0]);
 
 		// dynamically decide whether to delete
 		const noteHasOnlyUrl = content === url;
@@ -53,7 +55,7 @@ function run(argv) {
 	// copy to clipboard
 	if (doCopy) {
 		app.setTheClipboardTo(content);
-		return firstLine; // for notification
+		return "✅ Copied"; // for notification
 	}
 	return ""; // don't create a notification
 }

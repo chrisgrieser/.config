@@ -100,8 +100,8 @@ Keymap("n", "m", "%", { desc = "Goto Matching Bracket" })
 
 -- indentwise motions
 -- https://github.com/jeetsukumaran/vim-indentwise#customization
-Keymap("n", "gi", "<Plug>(IndentWiseNextGreaterIndent)", { desc = "Next Greater Indent" })
-Keymap("n", "gI", "<Plug>(IndentWiseNextLesserIndent)", { desc = "Next Lesser Indent" })
+Keymap("n", "gi", "<Plug>(IndentWiseNextLesserIndent)", { desc = "Next Lesser Indent" })
+Keymap("n", "gI", "<Plug>(IndentWisePreviousLesserIndent)", { desc = "Previous Lesser Indent" })
 
 --------------------------------------------------------------------------------
 
