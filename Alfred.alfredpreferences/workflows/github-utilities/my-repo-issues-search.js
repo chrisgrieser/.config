@@ -17,7 +17,7 @@ const repoID = app
 
 // get plugin issues
 const issueAPIURL = "https://api.github.com/repos/" + repoID + "/issues?state=all&per_page=100"; // GitHub API only returns 100 results https://stackoverflow.com/questions/30656761/github-search-api-only-return-30-results
-const issueJSON = JSON.parse(app.doShellScript('curl -s "' + issueAPIURL + '"')).sort(function (x, y) {
+const issueJSON = JSON.parse(app.doShellScript('curl -s "' + issueAPIURL + '"')).sort((x, y) => {
 	// sort open issues on top
 	const a = x.state;
 	const b = y.state;

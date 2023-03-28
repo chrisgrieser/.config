@@ -19,6 +19,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BF79E782-31E9-4840-A0FA-00EE2CB5403A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
 		<array>
 			<dict>
@@ -252,6 +265,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7EA483DA-F1D8-434E-B7BB-44B00E237DB6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C742BD02-85C0-47F8-9A2A-7DF4DC657EE1</key>
 		<array>
 			<dict>
@@ -280,6 +306,16 @@
 		</array>
 		<key>CC25EB33-36DC-49B4-B46D-C70DC2FA45FD</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Search Issues</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>C26B959B-61B3-4026-99EE-D0A7F51E9508</string>
@@ -729,6 +765,94 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>public-issue-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search for Issues on GitHub</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>BF79E782-31E9-4840-A0FA-00EE2CB5403A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7EA483DA-F1D8-434E-B7BB-44B00E237DB6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>repoID</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -861,7 +985,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>issue-search.js</string>
+				<string>my-repo-issues-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1115,7 +1239,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>70</real>
 			<key>ypos</key>
-			<real>1275</real>
+			<real>1430</real>
 		</dict>
 		<key>0E26657D-87C2-4501-A282-F674945D73C9</key>
 		<dict>
@@ -1126,7 +1250,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>970</real>
+			<real>1125</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
@@ -1135,7 +1259,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1245</real>
+			<real>1400</real>
 		</dict>
 		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
 		<dict>
@@ -1144,7 +1268,16 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>995</real>
+		</dict>
+		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>600</real>
 		</dict>
 		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
 		<dict>
@@ -1231,7 +1364,16 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>870</real>
+			<real>1025</real>
+		</dict>
+		<key>7EA483DA-F1D8-434E-B7BB-44B00E237DB6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>420</real>
+			<key>ypos</key>
+			<real>570</real>
 		</dict>
 		<key>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</key>
 		<dict>
@@ -1251,7 +1393,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>140</real>
 			<key>ypos</key>
-			<real>1245</real>
+			<real>1400</real>
 		</dict>
 		<key>8D2069C6-2EDB-40CD-854E-38574F301A4B</key>
 		<dict>
@@ -1260,7 +1402,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
-			<real>1105</real>
+			<real>1260</real>
 		</dict>
 		<key>9FAD19B2-5BF3-43C8-B76B-80FFD2C17566</key>
 		<dict>
@@ -1287,11 +1429,11 @@ echo "$url"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>issue search GitHub</string>
+			<string>my repo issues search</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>995</real>
 		</dict>
 		<key>AC483565-D8EB-4AAD-99AA-229D0C632CE8</key>
 		<dict>
@@ -1302,7 +1444,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>995</real>
 		</dict>
 		<key>BC540696-9F8F-4C3E-A49D-75AB31EF690F</key>
 		<dict>
@@ -1313,6 +1455,17 @@ echo "$url"</string>
 			<key>ypos</key>
 			<real>325</real>
 		</dict>
+		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>public issues search</string>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>570</real>
+		</dict>
 		<key>C26B959B-61B3-4026-99EE-D0A7F51E9508</key>
 		<dict>
 			<key>colorindex</key>
@@ -1320,7 +1473,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>270</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>705</real>
 		</dict>
 		<key>C5EA77C5-8A78-4563-A304-97626E832D20</key>
 		<dict>
@@ -1342,7 +1495,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1105</real>
+			<real>1260</real>
 		</dict>
 		<key>CC245103-888B-4440-A348-64F8A74D87F3</key>
 		<dict>
@@ -1364,7 +1517,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>705</real>
 		</dict>
 		<key>CC7C190D-D205-4F5B-A0DC-2A6D64736EC7</key>
 		<dict>
@@ -1373,7 +1526,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>880</real>
 		</dict>
 		<key>CE6F0B40-E42E-4D8B-833A-537723F42C63</key>
 		<dict>
