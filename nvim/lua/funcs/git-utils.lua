@@ -6,6 +6,7 @@ local logWarn = vim.log.levels.WARN
 -- HELPERS
 
 ---also notifies if not in git repo
+---@nodiscard
 ---@return boolean
 local function isInGitRepo()
 	fn.system("git rev-parse --is-inside-work-tree")
@@ -58,6 +59,7 @@ local gitShellOpts = {
 ---process a commit message: less than 50 chars, not empty, adheres to
 ---conventional commits
 ---@param commitMsg string
+---@nodiscard
 ---@return boolean is the commit message valid?
 ---@return string the (modified) commit message
 local function processCommitMsg(commitMsg)

@@ -21,6 +21,7 @@ function Normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 ---reads the full file
 ---@param filePath string
+---@nodiscard
 ---@return string|nil file content or nil when not reading no successful
 function ReadFile(filePath)
 	local file, err = io.open(filePath, "r")
@@ -35,6 +36,7 @@ end
 
 ---@param str string
 ---@param filePath string line(s) to add
+---@nodiscard
 ---@return boolean whether the writing was successful
 function AppendToFile(str, filePath)
 	local file, err = io.open(filePath, "a")

@@ -167,6 +167,7 @@ end
 ---@param input string
 ---@param ifWord string
 ---@param thenWord string
+---@nodiscard
 ---@return string|nil
 local function checkAlternativeCasings(input, ifWord, thenWord)
 	local function capitalcase(word) return word:sub(1, 1):upper() .. word:sub(2) end

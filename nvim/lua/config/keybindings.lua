@@ -414,6 +414,7 @@ Keymap("n", "'", ":CccConvert<CR>", { desc = " Convert Color" }) -- shift-# o
 -- FILES
 
 -- number of harpoon files in the current project
+---@nodiscard
 ---@return number|nil
 local function harpoonFileNumber()
 	local pwd = vim.loop.cwd() or ""
@@ -539,7 +540,7 @@ Keymap("n", "<D-b>", function()
 	else
 		vim.notify("No Breadcrumbs available.", LogWarn)
 	end
-end, { desc = "󰒕Copy Breadcrumbs" })
+end, { desc = "󰒕 Copy Breadcrumbs" })
 
 --------------------------------------------------------------------------------
 -- GIT
