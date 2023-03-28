@@ -1,4 +1,8 @@
 return {
+	{ -- automatically set right indent for file
+		"Darazaki/indent-o-matic",
+		event = "BufReadPre",
+	},
 	{ -- autopair brackets, quotes, and markup
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
