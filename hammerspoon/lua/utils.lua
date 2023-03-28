@@ -21,7 +21,7 @@ while true do
 	FileHub = os.getenv("WD")
 	if DotfilesFolder then break end
 	hs.timer.usleep(100000) -- = one tenth of a second (don't use wait, since it's a defined later)
-	if i > 15 then
+	if i > 10 then
 		Notify("⚠️ Could not retrieve .zshenv")
 		return
 	end
@@ -31,6 +31,7 @@ end
 
 ---trims all whitespace from string, like javascript's .trim()
 ---@param str string
+---@nodiscard
 ---@return string
 function Trim(str)
 	if not str then return "" end
@@ -42,6 +43,7 @@ end
 ---ranges that go beyond midnight, e.g. 23 to 6.
 ---@param startHour number, time between 0 and 24, also accepts floats e.g. 13.5 for 13:30
 ---@param endHour number, time between 0 and 24
+---@nodiscard
 ---@return boolean|nil true/false for valid time ranges, nil for invalid time range
 function BetweenTime(startHour, endHour)
 	if startHour >= 24 or endHour >= 24 or startHour < 0 or endHour < 0 then
@@ -88,6 +90,7 @@ end
 
 ---read the full file
 ---@param filePath string
+---@nodiscard
 ---@return string|nil file content or nil when reading not successful
 function ReadFile(filePath)
 	local file = io.open(filePath, "r")
@@ -103,11 +106,13 @@ function Wait(secs)
 	hs.timer.usleep(secs * 1000000)
 end
 
+---@nodiscard
 ---@return boolean
 function IsDarkMode() return hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n" end
 
 --------------------------------------------------------------------------------
 
+---@nodiscard
 ---@return string
 local function deviceName()
 	-- host.localizedName() is essentially equivalent to `scutil --get ComputerName`
@@ -125,6 +130,7 @@ function RunWithDelays(delaySecs, callbackFn)
 	end
 end
 
+---@nodiscard
 ---@return boolean
 function IsProjector()
 	local mainDisplayName = hs.screen.primaryScreen():name()
@@ -133,6 +139,7 @@ function IsProjector()
 	return projectorHelmholtz or tvLeuthinger
 end
 
+---@nodiscard
 ---@return boolean
 function IsAtOffice()
 	local mainDisplayName = hs.screen.primaryScreen():name()
@@ -141,14 +148,17 @@ function IsAtOffice()
 	return screenOne or screenTwo
 end
 
+---@nodiscard
 ---@return boolean
 function IsAtMother() return deviceName():find("Mother") ~= nil end
 
+---@nodiscard
 ---@return boolean
 function IsIMacAtHome() return (deviceName():find("iMac") and deviceName():find("Home")) ~= nil end
 
 --------------------------------------------------------------------------------
 
+---@nodiscard
 ---@return boolean
 function ScreenIsUnlocked()
 	local _, success = hs.execute(
@@ -157,6 +167,7 @@ function ScreenIsUnlocked()
 	return success == true -- convert to Boolean
 end
 
+---@nodiscard
 ---whether device has been idle
 ---@param mins number Time idle
 ---@return boolean
@@ -184,15 +195,18 @@ end
 
 ---get appObject
 ---@param appName string (literal & exact match)
+---@nodiscard
 ---@return hs.application
 function App(appName) return hs.application.find(appName, true, true) end
 
+---@nodiscard
 ---@return string|nil
 function FrontAppName() return hs.application.frontmostApplication():name() end
 
 
----returns true when all apps are running
+---true when all apps are running
 ---@param appNames string|string[] app or apps that should be running
+---@nodiscard
 ---@return boolean
 function AppIsRunning(appNames)
 	local allAreRunning = true
@@ -203,6 +217,7 @@ function AppIsRunning(appNames)
 	return allAreRunning
 end
 
+---@async
 ---If app is not running, will simply start the app instead
 ---@param appName string
 function RestartApp(appName)
@@ -215,6 +230,7 @@ function RestartApp(appName)
 	)
 end
 
+---@async
 ---@param app string|hs.application appName or appObj of app to wait for
 ---@param callbackFn function function to execute when the app is available
 function AsSoonAsAppRuns(app, callbackFn)

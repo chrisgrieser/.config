@@ -24,7 +24,7 @@ local lspFileTypes = {}
 lspSettings.lua_ls = {
 	Lua = {
 		completion = {
-			callSnippet = "Both",
+			callSnippet = "Both", -- functions expand to name and snippet
 			keywordSnippet = "Replace",
 			displayContext = 4,
 		},

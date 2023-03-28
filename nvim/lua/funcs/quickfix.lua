@@ -3,6 +3,7 @@ local g = vim.g
 local cmd = vim.cmd
 
 ---checks whether quickfixlist is empty and notifies
+---@nodiscard
 ---@return boolean
 local function quickFixIsEmpty()
 	if #vim.fn.getqflist() == 0 then

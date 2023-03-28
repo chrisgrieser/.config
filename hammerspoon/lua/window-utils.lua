@@ -15,6 +15,7 @@ if IsAtMother() then ToTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
 
 ---@param win hs.window
 ---@param size hs.geometry
+---@nodiscard
 ---@return boolean|nil whether win has the given size. returns nil for invalid win
 function CheckSize(win, size)
 	local invalidWinsByTitle = { -- windows which can/should not be resized
@@ -127,10 +128,10 @@ function MoveResize(win, pos)
 
 	-- resize
 	local i = 0
-	while i < 20 and CheckSize(win, pos) == false do
+	while i < 10 and CheckSize(win, pos) == false do
 		if not win then return end
 		win:moveToUnit(pos)
-		Wait(0.1)
+		Wait(0.1) -- ! blocks hammerspoon for 1 sec if sizing issue
 		i = i + 1
 	end
 

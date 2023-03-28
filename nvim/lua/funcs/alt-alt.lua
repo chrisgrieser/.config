@@ -7,6 +7,7 @@ local M = {}
 --------------------------------------------------------------------------------
 
 ---get the alternate window, accounting for special windows (scrollbars, notify)
+---@nodiscard
 ---@return string|nil path of buffer in altwindow, nil if none exists (= only one window)
 local function altWindow()
 	local i = 0
@@ -27,6 +28,7 @@ end
 
 ---count number of windows, excluding various special windows (scrollbars,
 ---notification windows, etc)
+---@nodiscard
 ---@return number
 local function numberOfWins()
 	local count = 0
@@ -50,6 +52,7 @@ local function numberOfWins()
 end
 
 ---get the alternate oldfile, accounting for non-existing files etc.
+---@nodiscard
 ---@return string|nil path of oldfile, nil if none exists in all oldfiles
 local function altOldfile()
 	local oldfile
@@ -67,6 +70,7 @@ local function altOldfile()
 end
 
 ---shows info on alternate window/buffer/oldfile in that priority
+---@nodiscard
 function M.altFileStatusline()
 	local maxLen = 15
 	local altFile = fn.expand("#:t")
