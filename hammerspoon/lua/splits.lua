@@ -62,6 +62,7 @@ function VsplitSetLayout(mode, secondWin)
 end
 
 ---helper for hs.chooser
+---@nodiscard
 ---@return table|nil list of apps that are running, formatted for hs.chooser
 local function runningApps()
 	local appsArr = {}

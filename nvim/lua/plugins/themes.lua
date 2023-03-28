@@ -31,6 +31,7 @@ g.lightTransparency = 0.92
 
 ---convert lazy.nvim-plugin-spec or github-repo into theme name
 ---@param lazyPlugin string|table either github-repo or plugin-spec with github-repo as first item
+---@nodiscard
 ---@return string name of the color scheme
 local function getName(lazyPlugin)
 	---@diagnostic disable-next-line: assign-type-mismatch

@@ -262,16 +262,27 @@ Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("E
 --------------------------------------------------------------------------------
 
 -- Undo
-Keymap({ "n", "x" }, "U", "<C-r>", { desc = "󰑎 Redo" }) -- redo
-Keymap("n", "<leader>ud", qol.undoDuration, { desc = "󰕌 Undo specific durations" })
-Keymap("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "󰕌 Undotree" })
+Keymap({ "n", "x" }, "U", "<C-r>", { desc = "󰑎 Redo" })
+Keymap({ "n", "x" }, "<leader>ul", "U", { desc = "󰕌 Undo Line" })
+Keymap("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "󰕌  Undotree" })
 Keymap(
 	"n",
 	"<leader>up",
 	function() Cmd.later(tostring(vim.opt.undolevels:get())) end,
-	{ desc = " Redo to Present" }
+	{ desc = "󰑎 󰑎 Redo to Present" }
 )
-Keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = "󰊢 󰑎 Reset Hunk" })
+Keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Reset Hunk" })
+
+-- save open time for each buffer
+Autocmd("BufReadPost", { callback = function() vim.b.timeOpened = os.time() end })
+
+Keymap("n", "<leader>uo", function()
+	local now = os.time() -- saved in epoch secs
+	local secsPassed = now - vim.b.timeOpened
+	Cmd.earlier(tostring(secsPassed) .. "s")
+end, { desc = "󰕌 󰕌 Undo to last open" })
+
+--------------------------------------------------------------------------------
 
 -- Logging & Debugging
 -- stylua: ignore start
