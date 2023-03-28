@@ -62,8 +62,10 @@ function run(argv) {
 
 	// new note when none matching
 	if (results.length === 0) {
+		const currentFolder = sidenotes.currentFolder().name();
 		results.push({
 			title: "New Sidenote: " + query,
+			subtitle: `📂 ${currentFolder}`,
 			arg: query,
 			mods: {
 				ctrl: { valid: false },
