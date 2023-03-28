@@ -94,7 +94,7 @@
 	},
 	"if .. then": {
 		"prefix": "if .. then",
-		"body": "if [[ \"$${1:var}\" ]]; then\n\t$0\nfi"
+		"body": "if [[ $2 \"$${1:var}\" ]]; then\n\t$0\nfi"
 	},
 	"check if installed": {
 		"prefix": "check if installed",
@@ -172,9 +172,13 @@
 		"body": "while [[ ${1:condition} ]]; do\n\t${0}\ndone\n",
 		"description": "A while loop by condition."
 	},
-	"wait until app is running": {
-		"prefix": "wait until app is running",
+	"wait until app running": {
+		"prefix": "wait until app running",
 		"body": "while ! pgrep -q \"${1:app_name}\"; do sleep 0.1; done"
+	},
+	"wait until app terminated": {
+		"prefix": "wait until app terminated",
+		"body": "while pgrep -q \"${1:app_name}\"; do sleep 0.1; done"
 	},
 	"restart app": {
 		"prefix": "restart app",
