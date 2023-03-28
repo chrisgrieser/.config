@@ -584,7 +584,7 @@ end, { desc = "󰊢 File History (Diffview)" })
 Keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = " Toggle Relative Line Numbers" })
 Keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers" })
 Keymap("n", "<leader>ow", qol.toggleWrap, { desc = " Toggle Wrap" })
-Keymap("n", "<leader>ol", Cmd.LspRestart, { desc = " 󰒕LSP Restart" })
+Keymap("n", "<leader>ol", Cmd.LspRestart, { desc = " 󰒕 LSP Restart" })
 Keymap("n", "<leader>od", function()
 	if vim.g.diagnosticOn == nil then vim.g.diagnosticOn = true end
 	if vim.g.diagnosticOn then
