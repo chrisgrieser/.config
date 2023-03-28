@@ -243,10 +243,11 @@ Keymap("x", "<leader>fn", ":normal ", { desc = "󱗘 :normal" })
 Keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g – delete" })
 
 Keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "󱗘 SSR" })
+
 -- Refactoring.nvim
 -- stylua: ignore start
-Keymap({ "n", "x" }, "<leader>fi", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
-Keymap({ "n", "x" }, "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
+Keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
+Keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
 Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("Extract Function") end, { desc = "󱗘 Extract Func" })
 -- stylua: ignore end
 
