@@ -49,10 +49,9 @@ end, { desc = "Clear Notifications" })
 -- MOTIONS
 
 -- spider motions
-Keymap({ "n", "o", "x" }, ",w", function() require("spider").motion("w") end, { desc = "Spider-w" })
-Keymap({ "n", "o", "x" }, ",e", function() require("spider").motion("e") end, { desc = "Spider-e" })
-Keymap({ "n", "o", "x" }, ",b", function() require("spider").motion("b") end, { desc = "Spider-b" })
-Keymap({ "n", "o", "x" }, ",ge", function() require("spider").motion("ge") end, { desc = "Spider-ge" })
+Keymap({ "n", "o", "x" }, "w", function() require("spider").motion("w") end, { desc = "Spider-w" })
+Keymap({ "n", "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
+Keymap({ "n", "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 Keymap({ "o", "x" }, "H", "^")
