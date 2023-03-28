@@ -48,7 +48,7 @@ SidenotesWatcher2 = Aw.new(function(appName, event)
 		if
 			FrontAppName() ~= "SideNotes"
 			and FrontAppName() ~= "Alfred"
-			and FrontAppName() ~= "CleanShot"
+			and FrontAppName() ~= "CleanShot X"
 		then
 			App("SideNotes"):hide()
 		end

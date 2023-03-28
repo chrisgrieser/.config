@@ -48,7 +48,6 @@ SpotifyAppWatcher = Aw.new(function(appName, eventType)
 end):start()
 
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
 
 -- PIXELMATOR: open maximized
 PixelmatorWatcher = Aw.new(function(appName, eventType, appObj)
