@@ -302,27 +302,6 @@ Search neovim plugins and online :help via Alfred</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Index created</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>8A1F6028-B56D-4223-8008-F364B73183A5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -376,6 +355,27 @@ Search neovim plugins and online :help via Alfred</string>
 			<string>alfred.workflow.output.playsound</string>
 			<key>uid</key>
 			<string>8D7A806A-C89F-4527-87FB-F6D2B578A43A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Index created</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8A1F6028-B56D-4223-8008-F364B73183A5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -488,6 +488,25 @@ Search neovim plugins and online :help via Alfred</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>15317DBA-B342-4CB9-9F08-0CBA70D39C07</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -552,25 +571,6 @@ Search neovim plugins and online :help via Alfred</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>14ECFC26-C670-4D39-9A5C-C24B452554F2</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>15317DBA-B342-4CB9-9F08-0CBA70D39C07</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -770,7 +770,7 @@ Search neovim plugins and online :help via Alfred</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -832,7 +832,7 @@ Search neovim plugins and online :help via Alfred</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string> </string>
+				<string></string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
