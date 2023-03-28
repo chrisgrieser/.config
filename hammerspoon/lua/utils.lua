@@ -20,7 +20,7 @@ while true do
 	VaultLocation = os.getenv("VAULT_PATH")
 	FileHub = os.getenv("WD")
 	if DotfilesFolder then break end
-	hs.timer.usleep(100000) -- = one tenth of a second (don't use wait, since it's a defined later)
+	Temp = hs.timer.usleep(100000) -- = one tenth of a second (don't use wait, since it's a defined later)
 	if i > 10 then
 		Notify("⚠️ Could not retrieve .zshenv")
 		return
@@ -103,7 +103,7 @@ end
 ---delay (blocking)
 ---@param secs number
 function Wait(secs)
-	hs.timer.usleep(secs * 1000000)
+	local myTimer = hs.timer.usleep(secs * 1000000)
 end
 
 ---@nodiscard
@@ -125,8 +125,9 @@ end
 ---@param callbackFn function function to be run on delay(s)
 function RunWithDelays(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
+	local myTimer = {}
 	for _, delay in pairs(delaySecs) do
-		hs.timer.doAfter(delay, callbackFn)
+		myTimer[delay] = hs.timer.doAfter(delay, callbackFn)
 	end
 end
 
@@ -223,7 +224,7 @@ end
 function RestartApp(appName)
 	local app = App(appName)
 	if app then app:kill() end
-	hs.timer.waitUntil(
+	local myTimer = hs.timer.waitUntil(
 		function() return App(appName) == nil end,
 		function() hs.application.open(appName) end,
 		0.1
@@ -235,11 +236,11 @@ end
 ---@param callbackFn function function to execute when the app is available
 function AsSoonAsAppRuns(app, callbackFn)
 	if type(app) == "string" then app = App(app) end
-	hs.timer.waitUntil(function()
+	local myTimer = hs.timer.waitUntil(function()
 		local appRuns = app ~= nil
 		local windowAvailable = app and app:mainWindow()
 		return appRuns and windowAvailable
-	end, callbackFn, 0.1)
+	end, callbackFn, 0.1):start()
 end
 
 ---@param appNames string|string[]
