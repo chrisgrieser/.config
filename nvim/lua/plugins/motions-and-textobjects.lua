@@ -16,6 +16,9 @@ return {
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
 		lazy = true, -- loaded by keybinds
+		opts = {
+			skipInsignificantPunctuation = true,
+		},
 		dev = true,
 	},
 
