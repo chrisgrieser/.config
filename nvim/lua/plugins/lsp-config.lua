@@ -25,15 +25,17 @@ lspSettings.lua_ls = {
 	Lua = {
 		format = { enable = false }, -- using stylua instead. Also, sumneko-lsp-formatting has this weird bug where all folds are opened
 		completion = {
-			callSnippet = "Replace",
+			callSnippet = "Both",
 			keywordSnippet = "Replace",
-			displayContext = 2,
+			displayContext = 4,
 			postfix = ".",
 		},
 		workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
-		-- libraries defined per-project via luarc.json location: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-		diagnostics = { disable = { "trailing-space" } },
-		hint = {
+		diagnostics = {
+			disable = { "trailing-space" },
+			-- severity = {}, -- change severity for specific rules https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
+		},
+		hint = { -- LSP inlayhints
 			enable = true,
 			setType = true,
 			paramName = "All",
