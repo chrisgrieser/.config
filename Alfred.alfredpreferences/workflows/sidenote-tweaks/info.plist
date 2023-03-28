@@ -165,6 +165,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>84334C9A-E9AA-461E-B13E-8B77248006FA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>16C5F45A-DCED-4A89-B5C9-B04DE9261021</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>8490AB75-2159-4B22-BD85-E5DCFF9E1E91</key>
 		<array>
 			<dict>
@@ -763,6 +776,37 @@ sketchybar --trigger update-sidenote-count</string>
 			<string>14AE76BC-C491-4DEB-9D17-C01D141AB543</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>-1</integer>
+				<key>hotmod</key>
+				<integer>524288</integer>
+				<key>hotstring</key>
+				<string>double tap</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>84334C9A-E9AA-461E-B13E-8B77248006FA</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1588,6 +1632,15 @@ sketchybar --trigger update-sidenote-count</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>1755</real>
+		</dict>
+		<key>84334C9A-E9AA-461E-B13E-8B77248006FA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>710</real>
 		</dict>
 		<key>8490AB75-2159-4B22-BD85-E5DCFF9E1E91</key>
 		<dict>
