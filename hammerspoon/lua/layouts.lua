@@ -110,6 +110,7 @@ local function selectLayout()
 end
 
 -- 1. Change of screen numbers
+-- (also always darkens iMac)
 DisplayCountWatcher = hs.screen.watcher
 	.new(function()
 		selectLayout()
