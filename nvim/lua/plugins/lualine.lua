@@ -152,7 +152,7 @@ local function pluginUpdates()
 	local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
 	if numberOfUpdates < UpdateCounterThreshhold then return "" end
 	local count = require("lazy.status").updates()
-	return require("lazy.status").updates
+	return count
 end
 
 --------------------------------------------------------------------------------
@@ -223,7 +223,10 @@ local lualineConfig = {
 			{ function() return " " end, cond = require("nvim-navic").is_available }, -- dummy to avoid bar flickering
 		},
 		lualine_x = {
-			{ pluginUpdates, color = "NonText" },
+			{
+				pluginUpdates,
+				color = function() return { fg = GetHighlightValue("NonText", "foreground") } end,
+			},
 		},
 		-- INFO dap and recording status defined in the respective plugin configs
 		-- for lualine_y and lualine_z for their lazy loading
