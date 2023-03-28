@@ -18,6 +18,9 @@ return {
 		lazy = true, -- loaded by keybinds
 		dev = true,
 	},
+
+	-----------------------------------------------------------------------------
+
 	{ -- tons of text objects
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = "BufEnter",
