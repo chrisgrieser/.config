@@ -44,6 +44,8 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "FocusGained", "UiEnter" }, {
 	end,
 })
 
+---@nodiscard
+---@return boolean
 local function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
 	local notMainBranch = vim.b.cur_branch ~= "main" and vim.b.cur_branch ~= "master"
 	local validFiletype = vim.bo.filetype ~= "help" -- vim help files are located in a git repo
