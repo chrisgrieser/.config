@@ -60,7 +60,6 @@ Keymap({ "n", "x", "o" }, "L", "$")
 
 Keymap({ "n", "x" }, "J", "6j")
 Keymap({ "n", "x" }, "K", "6k")
-
 Keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 Keymap("o", "K", "2k")
 

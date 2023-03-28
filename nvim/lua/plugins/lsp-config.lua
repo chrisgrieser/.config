@@ -18,13 +18,17 @@ local lsp_servers = {
 
 local lspSettings = {}
 local lspFileTypes = {}
+local lspOnAttach = {}
+
+--------------------------------------------------------------------------------
+-- LUA
 
 -- https://github.com/LuaLS/lua-language-server/wiki/Annotations#annotations
 -- https://github.com/LuaLS/lua-language-server/wiki/Settings
 lspSettings.lua_ls = {
 	Lua = {
 		completion = {
-			callSnippet = "Replace", 
+			callSnippet = "Replace",
 			keywordSnippet = "Replace",
 			displayContext = 4,
 			postfix = ".",
@@ -45,6 +49,9 @@ lspSettings.lua_ls = {
 	},
 }
 
+--------------------------------------------------------------------------------
+-- CSS
+
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
 lspSettings.cssls = {
 	css = {
@@ -61,6 +68,9 @@ lspSettings.cssls = {
 		colorDecorators = { enable = true }, -- not supported yet
 	},
 }
+
+--------------------------------------------------------------------------------
+-- JAVASCRIPT & TYPESCRIPT
 
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
@@ -85,6 +95,13 @@ lspSettings.tsserver = {
 	diagnostics = { ignoredCode = {} },
 }
 
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
+lspOnAttach.tsserver = function(client, _)
+	-- disable formatting, since taken care of by prettier
+	client.server_capabilities.documentFormattingProvider = false
+	client.server_capabilities.documentRangeFormattingProvider = false
+end
+
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
 -- INFO when no eslintrc can be found in a parent dir, `.root_dir` will return
 -- nil and the eslint-LSP will not be started
@@ -95,6 +112,8 @@ lspSettings.eslint = {
 	},
 }
 
+--------------------------------------------------------------------------------
+-- OTHERS
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
 lspSettings.jsonls = {
 	json = { format = { enable = false } }, -- taken care of by prettier
@@ -105,12 +124,13 @@ lspSettings.yamlls = {
 	yaml = { keyOrdering = false }, -- FIX mapKeyOrder
 }
 
---------------------------------------------------------------------------------
-
 -- Force lsp to work with zsh
 lspFileTypes.bashls = { "sh", "zsh", "bash" }
 
--- Enable snippet capability for completion (for nvim_cmp)
+--------------------------------------------------------------------------------
+-- ENABLE CAPATIBILITES FOR PLUGINS
+
+-- Enable snippets-completion (for nvim_cmp)
 local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
 lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -120,6 +140,29 @@ lspCapabilities.textDocument.foldingRange = {
 	lineFoldingOnly = true,
 }
 
+--------------------------------------------------------------------------------
+
+local function setupAllLsps()
+	-- INFO must be before the lsp-config setup of lua-ls
+	require("neodev").setup {
+		library = {
+			-- only enabling specific plugins, since some plugins do not
+			-- add proper annotations, resulting in false errors
+			plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+		},
+	}
+
+	for _, lsp in pairs(lsp_servers) do
+		local config = {
+			capabilities = lspCapabilities,
+			settings = lspSettings[lsp], -- if no settings, will assign nil and therefore to nothing
+			filetypes = lspFileTypes[lsp],
+			on_attach = lspOnAttach[lsp],
+		}
+
+		require("lspconfig")[lsp].setup(config)
+	end
+end
 --------------------------------------------------------------------------------
 
 return {
@@ -149,31 +192,8 @@ return {
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
-		init = function()
-			-- INFO must be setup before lua lsp-config setup
-			require("neodev").setup {
-				library = {
-					plugins = {
-						-- only enabling specific plugins, since some plugins do not
-						-- add proper annotations, resulting in false errors
-						"nvim-treesitter",
-						"plenary.nvim",
-						"telescope.nvim",
-					},
-				},
-			}
-
-			-- LSP Server setup
-			for _, lsp in pairs(lsp_servers) do
-				local config = {
-					capabilities = lspCapabilities,
-					settings = lspSettings[lsp], -- if no settings, will assign nil and therefore to nothing
-					filetypes = lspFileTypes[lsp],
-				}
-
-				require("lspconfig")[lsp].setup(config)
-			end
-
+		init = setupAllLsps,
+		config = function()
 			-- Border Styling
 			require("lspconfig.ui.windows").default_options.border = BorderStyle
 			vim.lsp.handlers["textDocument/hover"] =
