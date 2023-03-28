@@ -2,7 +2,7 @@
 vim.g.mapleader = ","
 LinterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
 VimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
-UpdateCounterThreshhold = 5 -- for plugin update statusline
+UpdateCounterThreshhold = 20 -- for plugin update statusline
 
 require("config.borderstyle").set("single") -- must come before lazy
 
