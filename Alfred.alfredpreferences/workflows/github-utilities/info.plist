@@ -87,6 +87,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Search Issues</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</key>
 		<array>
@@ -308,6 +318,36 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>CE6F0B40-E42E-4D8B-833A-537723F42C63</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>5ACE5786-6B82-46EC-86BA-A1727CCF6F8D</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Shallow Clone to Local Repo Folder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</string>
 				<key>modifiers</key>
 				<integer>131072</integer>
@@ -315,16 +355,6 @@
 				<string>⇧: Search Issues</string>
 				<key>vitoclose</key>
 				<true/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>C26B959B-61B3-4026-99EE-D0A7F51E9508</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
 			</dict>
 		</array>
 		<key>CE6F0B40-E42E-4D8B-833A-537723F42C63</key>
@@ -766,6 +796,56 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>gh</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string># this way token is read from.zshenv
+osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>public-github-repo-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search public GitHub repos</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>CC25EB33-36DC-49B4-B46D-C70DC2FA45FD</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
@@ -849,77 +929,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>C26B959B-61B3-4026-99EE-D0A7F51E9508</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>gh</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string># this way token is read from.zshenv
-osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>public-github-repo-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search public GitHub repos</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>CC25EB33-36DC-49B4-B46D-C70DC2FA45FD</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1239,7 +1248,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>70</real>
 			<key>ypos</key>
-			<real>1430</real>
+			<real>1260</real>
 		</dict>
 		<key>0E26657D-87C2-4501-A282-F674945D73C9</key>
 		<dict>
@@ -1250,7 +1259,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1125</real>
+			<real>955</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
@@ -1259,7 +1268,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1400</real>
+			<real>1230</real>
 		</dict>
 		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
 		<dict>
@@ -1268,21 +1277,21 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>995</real>
+			<real>825</real>
 		</dict>
 		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>590</real>
 		</dict>
 		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>12</integer>
 			<key>note</key>
 			<string>search my issues</string>
 			<key>xpos</key>
@@ -1335,14 +1344,14 @@ echo "$url"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>175</real>
+			<real>355</real>
 			<key>ypos</key>
 			<real>375</real>
 		</dict>
 		<key>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>12</integer>
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
@@ -1364,16 +1373,16 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1025</real>
+			<real>855</real>
 		</dict>
 		<key>7EA483DA-F1D8-434E-B7BB-44B00E237DB6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>420</real>
+			<real>585</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>560</real>
 		</dict>
 		<key>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</key>
 		<dict>
@@ -1393,7 +1402,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>140</real>
 			<key>ypos</key>
-			<real>1400</real>
+			<real>1230</real>
 		</dict>
 		<key>8D2069C6-2EDB-40CD-854E-38574F301A4B</key>
 		<dict>
@@ -1402,7 +1411,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
-			<real>1260</real>
+			<real>1090</real>
 		</dict>
 		<key>9FAD19B2-5BF3-43C8-B76B-80FFD2C17566</key>
 		<dict>
@@ -1433,7 +1442,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>995</real>
+			<real>825</real>
 		</dict>
 		<key>AC483565-D8EB-4AAD-99AA-229D0C632CE8</key>
 		<dict>
@@ -1444,7 +1453,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>995</real>
+			<real>825</real>
 		</dict>
 		<key>BC540696-9F8F-4C3E-A49D-75AB31EF690F</key>
 		<dict>
@@ -1462,18 +1471,9 @@ echo "$url"</string>
 			<key>note</key>
 			<string>public issues search</string>
 			<key>xpos</key>
-			<real>270</real>
+			<real>435</real>
 			<key>ypos</key>
-			<real>570</real>
-		</dict>
-		<key>C26B959B-61B3-4026-99EE-D0A7F51E9508</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>270</real>
-			<key>ypos</key>
-			<real>705</real>
+			<real>560</real>
 		</dict>
 		<key>C5EA77C5-8A78-4563-A304-97626E832D20</key>
 		<dict>
@@ -1495,7 +1495,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1260</real>
+			<real>1090</real>
 		</dict>
 		<key>CC245103-888B-4440-A348-64F8A74D87F3</key>
 		<dict>
@@ -1517,7 +1517,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>475</real>
 		</dict>
 		<key>CC7C190D-D205-4F5B-A0DC-2A6D64736EC7</key>
 		<dict>
@@ -1526,7 +1526,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>710</real>
 		</dict>
 		<key>CE6F0B40-E42E-4D8B-833A-537723F42C63</key>
 		<dict>

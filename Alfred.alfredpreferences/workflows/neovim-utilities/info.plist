@@ -44,7 +44,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Paste lazy.nvim Line</string>
+				<string>⌘: Copy Repo Name for Plugin Managers</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -169,6 +169,16 @@
 				<string>⇧: Search issues</string>
 				<key>vitoclose</key>
 				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Copy Repo Name for Plugin Managers</string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -854,9 +864,7 @@ Search neovim plugins and online :help via Alfred</string>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
-				<string>{
-	"{query}",
-},</string>
+				<string>"{query}",</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>transient</key>
@@ -1185,7 +1193,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>copy lazy.nvim line</string>
+			<string>copy repo name for plugin managers</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>

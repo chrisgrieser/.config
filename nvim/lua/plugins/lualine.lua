@@ -151,6 +151,7 @@ local function pluginUpdates()
 	if not require("lazy.status").has_updates() then return "" end
 	local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
 	if numberOfUpdates < UpdateCounterThreshhold then return "" end
+	local count = require("lazy.status").updates()
 	return require("lazy.status").updates
 end
 
