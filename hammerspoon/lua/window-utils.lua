@@ -13,6 +13,18 @@ Centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
 if IsAtMother() then ToTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
 
+RejectedFinderWindows = {
+	"^Quick Look$",
+	"^Move$",
+	"^Copy$",
+	"^Bin$",
+	"^Delete$",
+	"^Finder Settings$",
+	" Info$", -- Info window *end* with "Info"
+	"^$", -- Desktop, which has no window title
+	"^Alfred$", -- Alfred Compatibility Mode
+}
+
 ---@param win hs.window
 ---@param size hs.geometry
 ---@nodiscard
@@ -131,7 +143,7 @@ function MoveResize(win, pos)
 	local timeout = false
 	RunWithDelays(keepResizingSecs, function() timeout = true end)
 	repeat
-		if not (win) or timeout then return end
+		if not win or timeout then return end
 		win:moveToUnit(pos)
 	until CheckSize(win, pos)
 
@@ -159,7 +171,12 @@ function AutoTile(winSrc)
 	if type(winSrc) == "string" then
 		-- cannot use windowfilter, since it's empty when not called from a
 		-- window filter subscription
-		wins = App("Finder"):allWindows() 
+		wins = hs.fnutils.filter(
+			App("Finder"):allWindows(),
+			-- reject certain window tiles
+			function(win) return not (TableContains(RejectedFinderWindows, win:title())) end
+		)
+		if not (wins) or #wins == 0 then return end
 	else
 		wins = winSrc:getWindows()
 	end

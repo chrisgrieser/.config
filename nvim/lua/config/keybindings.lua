@@ -108,22 +108,6 @@ Keymap("n", "m", "%", { desc = "Goto Matching Bracket" })
 Keymap("n", "gj", "<Plug>(IndentWiseNextLesserIndent)", { desc = "Next Lesser Indent" })
 Keymap("n", "gk", "<Plug>(IndentWisePreviousLesserIndent)", { desc = "Previous Lesser Indent" })
 
--- Jump to Parent Symbol
-Keymap("n", "<BS>", function()
-	local symbolPath = require("nvim-navic").get_data()
-	if not symbolPath then
-		vim.notify("Navic is not available.", LogWarn)
-		return
-	end
-	local parent = symbolPath[#symbolPath - 1]
-	if not parent then
-		vim.notify("Already at the highest parent.")
-		return
-	end
-	local parentPos = parent.scope.start
-	SetCursor(0, { parentPos.line, parentPos.character })
-end, { desc = "󰒕Jump to Parent" })
-
 --------------------------------------------------------------------------------
 
 -- FOLDING
@@ -173,7 +157,7 @@ Keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
 -- Word Switcher (fallback: switch casing)
 -- stylua: ignore
-Keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
+Keymap( "n", "<BS>", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
