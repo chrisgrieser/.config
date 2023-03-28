@@ -47,20 +47,21 @@ local function workLayout()
 	-- start apps
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "BetterTouchTool" }
 	require("lua.private").closer()
-	if not isWeekend() then OpenApp("Slack") end
 	local appsToOpen = { "Discord", "Mimestream", "Vivaldi", "Twitter" }
+	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	OpenApp(appsToOpen)
 
 	-- layout them when they all run
 	hs.timer.waitUntil(
-		function() return AppIsRunning { "Discord", "Mimestream", "Twitter", "Vivaldi" } end,
+		function() return AppIsRunning (appsToOpen) end,
 		function()
 			hs.layout.apply {
 				{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
 				{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
 				{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
+				{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
 			}
-			RestartApp("AltTab")
+			RestartApp("AltTab") -- FIX AltTab not picking up changes
 		end,
 		0.2
 	)

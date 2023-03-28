@@ -54,27 +54,6 @@ function M.commentHr()
 end
 
 --------------------------------------------------------------------------------
--- UNDO
-
----select between common undopoints: present, last open, 1h ago, and 15min ago
-function M.undoDuration()
-	local now = os.time() -- saved in epoch secs
-	local secsPassed = now - vim.b.timeOpened
-	local minsPassed = math.floor(secsPassed / 60)
-	local resetLabel = "last open (~" .. tostring(minsPassed) .. "m ago)"
-	local undoOptionsPresented = { resetLabel, "15m", "1h", "24h" }
-
-	vim.ui.select(undoOptionsPresented, { prompt = "Undo…" }, function(choice)
-		if not choice then return end
-		if choice:find("ago") then
-			cmd.earlier(secsPassed .. "s")
-		else
-			cmd.earlier(choice)
-		end
-	end)
-end
-
---------------------------------------------------------------------------------
 
 ---toggle wrap, colorcolumn, and hjkl visual/logical maps in one go
 function M.toggleWrap()
