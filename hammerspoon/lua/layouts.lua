@@ -48,11 +48,12 @@ local function workLayout()
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "BetterTouchTool" }
 	require("lua.private").closer()
 	if not isWeekend() then OpenApp("Slack") end
-	OpenApp { "Discord", "Mimestream", "Vivaldi", "Twitter", "SideNotes" }
+	local appsToOpen = { "Discord", "Mimestream", "Vivaldi", "Twitter" }
+	OpenApp(appsToOpen)
 
 	-- layout them when they all run
 	hs.timer.waitUntil(
-		function() return AppIsRunning { "Discord", "Mimestream", "Twitter", "SideNotes", "Vivaldi" } end,
+		function() return AppIsRunning { "Discord", "Mimestream", "Twitter", "Vivaldi" } end,
 		function()
 			hs.layout.apply {
 				{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
@@ -76,7 +77,6 @@ local function movieLayout()
 
 	OpenApp { "YouTube", "BetterTouchTool" }
 	QuitApp {
-		"SideNotes",
 		"Neovide",
 		"neovide",
 		"Slack",

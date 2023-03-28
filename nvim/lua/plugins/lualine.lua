@@ -156,30 +156,11 @@ end
 
 --------------------------------------------------------------------------------
 
--- HELPERS FOR THE CONFIG
-
-
-
----https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
----@param name string name of highlight group
----@param key "foreground"|"background"|"special"
----@nodiscard
----@return any the value
-local function getHighlightValue(name, key)
-	local ok, hl = pcall(vim.api.nvim_get_hl_by_name, name, true)
-	if not ok then return end
-	local value = hl[key]
-	if value then value = string.format("#%06x", value) end
-	return value
-end
-
 -- nerdfont: icons with prefix 'ple-'
 -- stylua: ignore start
 local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 local topSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 -- stylua: ignore end
-
---------------------------------------------------------------------------------
 
 local lualineConfig = {
 	sections = {
@@ -206,11 +187,10 @@ local lualineConfig = {
 			{ searchCounter },
 			{
 				require("funcs.lsp-count").statusline,
-				color = function(_)
-					local fg = vim.api.nvim_get_hl_by_name("NonText", true).foreground
-					return { fg = vim.bo.modified and "#aa3355" or "#33aa88" }
-				end,
 				cond = function() return vim.v.hlsearch == 0 end,
+				-- needs the highlight value, since setting the hlgroup directly
+				-- results in bg color being inherited from main editor
+				color = function() return { fg = GetHighlightValue("Comment", "foreground") } end,
 			},
 		},
 		lualine_x = {
