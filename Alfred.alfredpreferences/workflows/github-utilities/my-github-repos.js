@@ -24,34 +24,35 @@ function run() {
 			else if (!a.archived && b.archived) return -1;
 			return b.stargazers_count - a.stargazers_count
 		})
-		.map(item => {
-			let repo = item.full_name.split("/")[1];
-			if (repo === username) repo = "My GitHub Profile";
-			const url = item.html_url;
-			const stars = item.stargazers_count;
-			const issues = item.open_issues_count;
-			const forks = item.forks_count;
-
-			let matcher = alfredMatcher(repo);
-
-			let info = "";
-			if (item.archived) {
-				info += "🗄️ ";
+		.map(repo => {
+			let name = repo.full_name.split("/")[1];
+			if (name === username) name = "My GitHub Profile";
+			
+			let matcher = alfredMatcher(name);
+			let subtitle = "";
+			if (repo.archived) {
+				subtitle += "🗄️ ";
 				matcher += "archived "
 			}
-			if (item.fork) {
-				info += "🍽️ ";
+			if (repo.fork) {
+				subtitle += "🍽️ ";
 				matcher += "fork "
 			}
-			if (stars > 0) info += `⭐ ${stars}  `;
-			if (issues > 0) info += `🟢 ${issues}  `;
-			if (forks > 0) info += `🍴 ${forks}  `;
+			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
+			if (repo.open_issues_count > 0) subtitle += `🟢 ${repo.open_issues_count}  `;
+			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
 
 			return {
-				title: repo,
-				subtitle: info,
+				title: name,
+				subtitle: subtitle,
 				match: matcher,
-				arg: url,
+				arg: repo.html_url,
+				mods: {
+					shift: {
+						subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
+						arg: repo.full_name,
+					},
+				},
 			};
 		});
 	return JSON.stringify({ items: jsonArray });

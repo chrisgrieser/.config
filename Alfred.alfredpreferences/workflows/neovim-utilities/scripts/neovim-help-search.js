@@ -2,37 +2,35 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-const alfredMatcher = (str) => str.replace (/[-()_.:#]/g, " ")
-	+ " " + str + " "
-	+ str.replace(/([A-Z])/g, " $1"); // match parts of CamelCase
 
-function readFile (path, encoding) {
-	if (!encoding) encoding = $.NSUTF8StringEncoding;
-	const fm = $.NSFileManager.defaultManager;
-	const data = fm.contentsAtPath(path);
-	const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+function alfredMatcher(str) {
+	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
+	return [clean, str].join(" ") + " ";
+}
+
+const fileExists = filePath => Application("Finder").exists(Path(filePath));
+
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
 
-const cacheFile = $.getenv("alfred_workflow_data") + "/url-list.txt";
+//──────────────────────────────────────────────────────────────────────────────
+function run() {
+	const jsonArray = []
 
-const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
-let jsonArray;
+	const cacheFile = $.getenv("alfred_workflow_data") + "/url-list.txt";
+	if (!fileExists(cacheFile)) {
+		jsonArray.push({ title: "Index missing. Create via ':vim'", valid: false });
+		return JSON.stringify({ items: jsonArray });
+	}
 
-//------------------------------------------------------------------------------
-
-if (fileExists(cacheFile)) {
-	jsonArray = readFile(cacheFile)
+	readFile(cacheFile)
 		.split("\n")
-		.map(url => {
-
-			const site = url
-				.split("/").pop()
-				.split(".").shift(); // eslint-disable-line newline-per-chained-call
-			let name = url.split("#").pop()
-				.replaceAll("%3A", ":")
-				.replaceAll("'", "");
-			const subtitle = site;
+		.forEach(url => {
+			const site = url.split("/").pop().split(".").shift();
+			let name = url.split("#").pop().replaceAll("%3A", ":").replaceAll("'", "");
 			let synonyms = "";
 
 			const hasSynonyms = url.includes(",");
@@ -45,22 +43,20 @@ if (fileExists(cacheFile)) {
 				url = url.split("\t").shift();
 				name = name.replace("\t", " ");
 			}
+
+			// matcher improvements
 			let matcher = alfredMatcher(name) + " " + site + " " + alfredMatcher(synonyms);
-			if (name.startsWith("vim.")) matcher += " " + name.slice(4); // better matching
+			if (name.startsWith("vim.")) matcher += " " + name.slice(4);
+			if (site === "builtin") matcher += " fn";
 
-			return {
-				"title": name + synonyms,
-				"match": matcher,
-				"subtitle": subtitle,
-				"arg": url,
-				"uid": url,
-			};
+			jsonArray.push({
+				title: name + synonyms,
+				match: matcher,
+				subtitle: site,
+				arg: url,
+				uid: url,
+			});
 		});
-} else {
-	jsonArray = [{
-		"title": "Index missing. Create via ':vim'",
-		"valid": false,
-	}];
-}
 
-JSON.stringify({ items: jsonArray });
+	return JSON.stringify({ items: jsonArray });
+}
