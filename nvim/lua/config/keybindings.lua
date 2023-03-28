@@ -48,6 +48,11 @@ end, { desc = "Clear Notifications" })
 --------------------------------------------------------------------------------
 -- MOTIONS
 
+-- spider motions
+Keymap({ "n", "o", "x" }, "w", function() require("spider").motion("w") end, { desc = "Spider-w" })
+Keymap({ "n", "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
+Keymap({ "n", "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
+
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 Keymap({ "o", "x" }, "H", "^")
 Keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long lines
@@ -668,23 +673,14 @@ Autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
--- spider moves
-Keymap({ "o", "x" }, "w", function() require("spider").motion("w") end, { desc = "Spider-w" })
-Keymap({ "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
-Keymap({ "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
 
 -- Simple version of the delaytrain.nvim
-for _, key in ipairs {"h", "l", "e", "b", "w" } do
+for _, key in ipairs {"h", "l" } do
 	local timeout = 3000
 	local maxUsage = 8
 
 	local count = 0
 	Keymap("n", key, function()
-		if key == "e" or key == "b" or key == "w" then
-			require("spider").motion(key)
-			return
-		end
-
 		-- abort when recording, since this only leads to bugs then
 		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
 
