@@ -127,13 +127,13 @@ function MoveResize(win, pos)
 	end
 
 	-- resize
-	local i = 0
-	while i < 10 and CheckSize(win, pos) == false do
-		if not win then return end
+	local keepResizingSecs = 1
+	local timeout = false
+	RunWithDelays(keepResizingSecs, function() timeout = true end)
+	repeat
+		if not (win) or timeout then return end
 		win:moveToUnit(pos)
-		Wait(0.1) -- ! blocks hammerspoon for 1 sec if sizing issue
-		i = i + 1
-	end
+	until CheckSize(win, pos)
 
 	-- has to come after resizing
 	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win) end
