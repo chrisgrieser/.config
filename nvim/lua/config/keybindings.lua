@@ -105,11 +105,11 @@ Keymap("n", "gk", "<Plug>(IndentWisePreviousLesserIndent)", { desc = "Previous L
 
 -- Jump to Parent Symbol
 Keymap("n", "g<Tab>", function()
-	if not require("nvim-navic").is_available() then
+	local symbolPath = require("nvim-navic").get_data()
+	if not symbolPath then
 		vim.notify("Navic is not available.", LogWarn)
 		return
 	end
-	local symbolPath = require("nvim-navic").get_data()
 	local parent = symbolPath[#symbolPath - 1]
 	if not parent then
 		vim.notify("Already at the highest parent.")
@@ -243,8 +243,8 @@ end, { desc = "↹ Use Tabs" })
 Keymap("n", "<leader>f<Spaces>", function()
 	Bo.expandtab = true
 	Cmd.retab { bang = true }
-	vim.notify("Now using: Spaces ␣")
-end, { desc = "␣ Use Spaces" })
+	vim.notify("Now using: Spaces 󱁐")
+end, { desc = "󱁐 Use Spaces" })
 
 Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "󱗘 :s cword" })
 Keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "󱗘 :g - normal" })
@@ -269,7 +269,7 @@ Keymap(
 	"n",
 	"<leader>up",
 	function() Cmd.later(tostring(vim.opt.undolevels:get())) end,
-	{ desc = "󰑎 󰑎 Redo to Present" }
+	{ desc = "󰛒 Redo All" }
 )
 Keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Reset Hunk" })
 
@@ -280,7 +280,7 @@ Keymap("n", "<leader>uo", function()
 	local now = os.time() -- saved in epoch secs
 	local secsPassed = now - vim.b.timeOpened
 	Cmd.earlier(tostring(secsPassed) .. "s")
-end, { desc = "󰕌 󰕌 Undo to last open" })
+end, { desc = "󰜊 Undo since last open" })
 
 --------------------------------------------------------------------------------
 
@@ -674,18 +674,15 @@ Autocmd("FileType", {
 Keymap({ "o", "x" }, "w", function() require("spider").motion("w") end, { desc = "Spider-w" })
 Keymap({ "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
 Keymap({ "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
--- Keymap({ "n", "o", "x" }, "ge", function() require("spider").motion("ge") end, { desc = "Spider-ge" })
 
 -- Simple version of the delaytrain.nvim
-for _, key in ipairs { "x", "h", "l", "e", "b", "w" } do
+for _, key in ipairs {"h", "l", "e", "b", "w" } do
 	local timeout = 3000
 	local maxUsage = 8
 
 	local count = 0
 	Keymap("n", key, function()
-		if key == "x" then
-			Normal([["_x]])
-		elseif key == "e" or key == "b" or key == "w" then
+		if key == "e" or key == "b" or key == "w" then
 			require("spider").motion(key)
 			return
 		end
