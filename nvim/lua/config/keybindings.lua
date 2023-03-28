@@ -486,7 +486,7 @@ Keymap("n", "<D-b>", function()
 	breadcrumbs = breadcrumbs:sub(1, -2)
 	Fn.setreg("+", breadcrumbs)
 	vim.notify("COPIED\n" .. breadcrumbs)
-end, { desc = "󰒕Copy Breadcrumbs" })
+end, { desc = "󰒕 Copy Breadcrumbs" })
 
 Autocmd("LspAttach", {
 	callback = function(args)
@@ -500,27 +500,27 @@ Autocmd("LspAttach", {
 			-- command line; needs defer to not be overwritten by treesitter-
 			-- refactor's smart-rename
 			---@diagnostic disable-next-line: param-type-mismatch
-			vim.defer_fn(function() Keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕IncRename Variable", buffer = true}) end, 1)
+			vim.defer_fn(function() Keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true}) end, 1)
 		end
 
 		-- conditional to not overwrite treesitter goto-symbol
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
-			Keymap("n", "gs", function() Cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
-			Keymap("n", "gS", function() Cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕Workspace Symbols", buffer = true })
+			Keymap("n", "gs", function() Cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
+			Keymap("n", "gS", function() Cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 
-		Keymap("n", "gd", function() Cmd.Telescope("lsp_definitions") end, { desc = "󰒕Goto Definition", buffer = true })
-		Keymap("n", "gf", function() Cmd.Telescope("lsp_references") end, { desc = "󰒕Goto Reference", buffer = true })
-		Keymap("n", "gy", function() Cmd.Telescope("lsp_type_definitions") end, { desc = "󰒕Goto Type Definition", buffer = true })
-		Keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕Signature", buffer = true })
-		Keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕Hover", buffer = true })
+		Keymap("n", "gd", function() Cmd.Telescope("lsp_definitions") end, { desc = "󰒕 Goto Definition", buffer = true })
+		Keymap("n", "gf", function() Cmd.Telescope("lsp_references") end, { desc = "󰒕 Goto Reference", buffer = true })
+		Keymap("n", "gy", function() Cmd.Telescope("lsp_type_definitions") end, { desc = "󰒕 Goto Type Definition", buffer = true })
+		Keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
+		Keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover", buffer = true })
 		-- stylua: ignore end
 
 		-- Save & Format
 		Keymap({ "n", "i", "x" }, "<D-s>", function()
 			Cmd.update()
 			vim.lsp.buf.format()
-		end, { buffer = true, desc = "󰒕Save & Format" })
+		end, { buffer = true, desc = "󰒕 Save & Format" })
 	end,
 })
 
