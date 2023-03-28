@@ -21,6 +21,12 @@
 		"prefix": "trim trailing line break",
 		"body": ":gsub(\"\\n$\", \"\")"
 	},
+	"nodiscard": {
+		"prefix": "nodiscard",
+		"body": "---@nodiscard",
+		"description": "Luadoc Annotation that a function's return value should not be discarded. https://github.com/LuaLS/lua-language-server/wiki/Annotations#nodiscard"
+	},
+	
 	"ignore start/end (stylua)": {
 		"prefix": "ignore start/end (stylua)",
 		"body": [
