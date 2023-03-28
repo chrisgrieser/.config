@@ -191,13 +191,11 @@ Wf_finder = Wf.new("Finder")
 	})
 	:subscribe(Wf.windowCreated, function() AutoTile(Wf_finder) end)
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_finder) end)
-	:subscribe(Wf.windowFocused, function() AutoTile(Wf_finder) end)
 
 FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)
 	if eventType == Aw.activated and appName == "Finder" then
 		AutoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
-		BringAllToFront()
 	end
 end):start()
 

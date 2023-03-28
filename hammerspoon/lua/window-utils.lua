@@ -150,18 +150,16 @@ function BringAllToFront()
 end
 
 ---automatically apply per-app auto-tiling of the windows of the app
----@param winSrc hs.window.filter|string source for the windows; windowfilter or
+---@param winSrc hs.window.filter|"Finder" source for the windows; windowfilter or
 ---appname. If this function is not triggered by a windowfilter event, the window
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
 function AutoTile(winSrc)
 	local wins
 	if type(winSrc) == "string" then
-		if winSrc == "Finder" then
-			wins = Wf_finder:getWindows()
-		else
-			return
-		end
+		-- cannot use windowfilter, since it's empty when not called from a
+		-- window filter subscription
+		wins = App("Finder"):allWindows() 
 	else
 		wins = winSrc:getWindows()
 	end
