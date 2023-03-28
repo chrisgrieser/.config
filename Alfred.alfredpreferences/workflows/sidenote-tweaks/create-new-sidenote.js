@@ -2,17 +2,17 @@
 
 ObjC.import("stdlib");
 const fileExists = filePath => Application("Finder").exists(Path(filePath));
+const sidenotes = Application("SideNotes");
+
+//──────────────────────────────────────────────────────────────────────────────
 
 function run(argv) {
 	const input = argv[0];
-	const sidenotes = Application("SideNotes");
-	const folder = sidenotes.folders.byName($.getenv("new_note_folder"));
-	const isPath = fileExists(input);
 
 	sidenotes.createNote({
-		folder: folder,
 		text: input,
-		ispath: isPath,
+		folder: sidenotes.currentFolder(),
+		ispath: fileExists(input),
 	});
 
 	// close sidenotes
