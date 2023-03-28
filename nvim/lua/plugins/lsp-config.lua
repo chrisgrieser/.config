@@ -23,25 +23,23 @@ local lspFileTypes = {}
 -- https://github.com/LuaLS/lua-language-server/wiki/Settings
 lspSettings.lua_ls = {
 	Lua = {
-		format = { enable = false }, -- using stylua instead. Also, sumneko-lsp-formatting has this weird bug where all folds are opened
 		completion = {
 			callSnippet = "Both",
 			keywordSnippet = "Replace",
 			displayContext = 4,
-			postfix = ".",
 		},
-		workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		diagnostics = {
-			disable = { "trailing-space" },
+			disable = { "trailing-space" }, -- formatter already does that
 			-- severity = {}, -- change severity for specific rules https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
 		},
 		hint = { -- LSP inlayhints
 			enable = true,
 			setType = true,
-			paramName = "All",
-			paramType = true,
 			arrayIndex = "Disable",
+			semicolon = "Disable",
 		},
+		workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
+		format = { enable = false }, -- using stylua instead. Also, sumneko-lsp-formatting has this weird bug where all folds are opened
 		telemetry = { enable = false },
 	},
 }

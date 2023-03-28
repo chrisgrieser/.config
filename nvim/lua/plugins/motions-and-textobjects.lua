@@ -28,8 +28,4 @@ return {
 		lazy = true, -- loaded by keymaps
 		dev = true,
 	},
-	{ -- automatically set right indent for file
-		"Darazaki/indent-o-matic",
-		event = "BufReadPre",
-	},
 }
