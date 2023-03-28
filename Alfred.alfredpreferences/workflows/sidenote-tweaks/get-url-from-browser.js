@@ -1,11 +1,12 @@
 #!/usr/bin/env osascript -l JavaScript
 
-const sidenotes = Application("SideNotes")
+function run(argv) {
+	const selection = argv[0];
+	const url = Application("Vivaldi").windows[0].activeTab.url();
+	const title = Application("Vivaldi").windows[0].activeTab.title();
 
-//──────────────────────────────────────────────────────────────────────────────
+	const out = [title, url];
+	if (selection) out.unshift("> " + selection)
 
-const installedThemes = sidenotes.searchThemes("");
-
-
-
-sidenotes.setTheme(selectedTheme);
+	return out.join("\n");
+}

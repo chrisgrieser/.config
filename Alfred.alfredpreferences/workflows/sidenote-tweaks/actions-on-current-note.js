@@ -51,6 +51,7 @@ function run(argv) {
 	if (doClose) {
 		// apparently there is JXA API for it, therefore done via keystrokes since it
 		// is ensured that SideNotes is the most frontmost app
+		delay(0.05); /* eslint-disable-line no-magic-numbers */
 		Application("System Events").keystroke("w", { using: ["command down"] });
 	}
 

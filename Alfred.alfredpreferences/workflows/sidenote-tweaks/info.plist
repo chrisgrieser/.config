@@ -967,9 +967,8 @@ sketchybar --trigger update-sidenote-count</string>
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.vivaldi.Vivaldi</string>
 					<string>com.apptorium.SideNotes-paddle</string>
-					<string>com.apple.Safari</string>
+					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>2</integer>
@@ -1080,7 +1079,6 @@ sketchybar --trigger update-sidenote-count</string>
 				<integer>0</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.apple.Safari</string>
 					<string>com.vivaldi.Vivaldi</string>
 				</array>
 				<key>relatedAppsMode</key>
@@ -1454,7 +1452,7 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>730</real>
+			<real>790</real>
 			<key>ypos</key>
 			<real>1245</real>
 		</dict>
@@ -1815,29 +1813,7 @@ sketchybar --trigger update-sidenote-count</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>Base</string>
-				<key>placeholder</key>
-				<string>Base</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Folder for new Notes</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>new_note_folder</string>
-		</dict>
-	</array>
+	<array/>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
