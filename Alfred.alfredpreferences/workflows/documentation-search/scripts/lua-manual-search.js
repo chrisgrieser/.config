@@ -11,12 +11,14 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const luaManualBaseURL = "https://www.lua.org/manual/5.4/";
+const luaVersion = $.getenv("lua_version")
+const luaManualBaseURL = `https://www.lua.org/manual/${luaVersion}/`;
 const luaWikiBaseURL = "http://lua-users.org";
-const ahrefRegex = /.*?href="(.*?)">(.*?)<.*/i;
-const jsonArr = [];
 
 //──────────────────────────────────────────────────────────────────────────────
+
+const ahrefRegex = /.*?href="(.*?)">(.*?)<.*/i;
+const jsonArr = [];
 
 const rawHTML =
 	app.doShellScript(`curl -sL '${luaManualBaseURL}'`) +

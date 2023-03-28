@@ -1,5 +1,6 @@
 {
-    "runtime.version": "LuaJIT",
+    "runtime.version": "Lua 5.4",
+    "DESC": "Hammerspoon uses Lua 5.4 https://github.com/Hammerspoon/hammerspoon/issues/2217",
     "diagnostics.disable": [
         "trailing-space"
     ]
