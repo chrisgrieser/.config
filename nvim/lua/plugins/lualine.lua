@@ -12,7 +12,7 @@ local function indentation()
 
 	-- non-default indentation (e.g. changed via indent-o-matic)
 	if usesSpaces and not vim.tbl_contains(spaceFiletypes, ft) then
-		out = out .. tostring(tabwidth) .. "␣"
+		out = out .. tostring(tabwidth) .. "󱁐"
 	elseif usesTabs and vim.tbl_contains(spaceFiletypes, ft) then
 		out = out .. "↹ (" .. tostring(tabwidth) .. ")"
 	elseif usesTabs and vim.opt_global.tabstop:get() ~= tabwidth then
@@ -27,7 +27,7 @@ local function indentation()
 	if (hasSpaces and hasTabs) or mixed then
 		out = out .. " mixed"
 	elseif usesTabs and hasSpaces then
-		out = out .. " ␣"
+		out = out .. " 󱁐"
 	elseif usesSpaces and hasTabs then
 		out = out .. " ↹ "
 	end
