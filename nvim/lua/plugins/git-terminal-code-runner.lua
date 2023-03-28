@@ -42,25 +42,28 @@ return {
 		"sindrets/diffview.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = { "DiffviewFileHistory", "DiffviewOpen" },
-		opts = {
-			-- https://github.com/sindrets/diffview.nvim#configuration
-			enhanced_diff_hl = false, -- true = no red for deletes
-			show_help_hints = false,
-			file_history_panel = {
-				win_config = { height = 6 },
-			},
-			keymaps = {
-				view = {
-					{ "n", "<D-w>", vim.cmd.tabclose, {} }, -- close tab instead of window
-					{ "n", "<CR>", function() vim.cmd.wincmd("w") end, {} }, -- consistent with general buffer switcher
-				},
+		config = function() -- needs config, for access to diffview.actions in mappings
+			require("diffview").setup {
+				-- https://github.com/sindrets/diffview.nvim#configuration
+				enhanced_diff_hl = false, -- true = no red for deletes
+				show_help_hints = false,
 				file_history_panel = {
-					{ "n", "<D-w>", vim.cmd.tabclose, {} },
-					-- INFO "<cr>" needs to be lowercase to override the default behavior
-					{ "n", "<cr>", function() vim.cmd.wincmd("w") end, {} },
-					{ "n", "<S-CR>", function() vim.cmd.wincmd("w") end, {} },
+					win_config = { height = 5 },
 				},
-			},
-		},
+				keymaps = {
+					view = {
+						{ "n", "<D-w>", vim.cmd.tabclose, {} }, -- close tab instead of window
+						{ "n", "<CR>", function() vim.cmd.wincmd("w") end, {} }, -- consistent with general buffer switcher
+					},
+					file_history_panel = {
+						{ "n", "<D-w>", vim.cmd.tabclose, {} },
+						{ "n", "?", require("diffview.actions").help("file_history_panel"), {} },
+						{ "n", "<S-CR>", function() vim.cmd.wincmd("w") end, {} },
+						-- INFO "<cr>" needs to be lowercase to override the default behavior
+						{ "n", "<cr>", function() vim.cmd.wincmd("w") end, {} },
+					},
+				},
+			}
+		end,
 	},
 }
