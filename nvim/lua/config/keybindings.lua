@@ -267,7 +267,7 @@ Keymap({ "n", "x" }, "<leader>ul", "U", { desc = "󰕌 Undo Line" })
 Keymap("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "󰕌  Undotree" })
 Keymap(
 	"n",
-	"<leader>up",
+	"<leader>ur",
 	function() Cmd.later(tostring(vim.opt.undolevels:get())) end,
 	{ desc = "󰛒 Redo All" }
 )

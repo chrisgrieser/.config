@@ -24,9 +24,10 @@ local lspFileTypes = {}
 lspSettings.lua_ls = {
 	Lua = {
 		completion = {
-			callSnippet = "Both", -- functions expand to name and snippet
+			callSnippet = "Replace", 
 			keywordSnippet = "Replace",
 			displayContext = 4,
+			postfix = ".",
 		},
 		diagnostics = {
 			disable = { "trailing-space" }, -- formatter already does that
