@@ -182,13 +182,15 @@ Keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 -- SPELLING
 
 -- [z]pelling [l]ist
-Keymap("n", "zl", function() Cmd.Telescope("spell_suggest") end, { desc = "󰓆suggest" })
-Keymap("n", "za", "1z=", { desc = "󰓆autofix" }) -- [a]utofix word under cursor
+Keymap("n", "zl", function() Cmd.Telescope("spell_suggest") end, { desc = "󰓆 suggest" })
+Keymap("n", "za", "1z=", { desc = "󰓆 autofix" }) -- [a]utofix word under cursor
 
 ---add word under cursor to vale dictionary
 ---@param mode string accept|reject
 local function valeWord(mode)
+	vim.opt_local.iskeyword:remove("_")
 	local word = Expand("<cword>")
+	vim.opt_local.iskeyword:append("_")
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
 	if not success then return end -- error message already by AppendToFile
 	Cmd.mkview(2)
@@ -197,8 +199,8 @@ local function valeWord(mode)
 	Cmd.loadview(2)
 	vim.notify(string.format('󰓆Now %sing:\n"%s"', mode, word))
 end
-Keymap("n", "zg", function() valeWord("accept") end, { desc = "󰓆Add to accepted words (vale)" })
-Keymap("n", "zw", function() valeWord("reject") end, { desc = "󰓆Add to rejected words (vale)" })
+Keymap("n", "zg", function() valeWord("accept") end, { desc = "󰓆 Add to accepted words (vale)" })
+Keymap("n", "zw", function() valeWord("reject") end, { desc = "󰓆 Add to rejected words (vale)" })
 
 --------------------------------------------------------------------------------
 
@@ -265,12 +267,8 @@ Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("E
 Keymap({ "n", "x" }, "U", "<C-r>", { desc = "󰑎 Redo" })
 Keymap({ "n", "x" }, "<leader>ul", "U", { desc = "󰕌 Undo Line" })
 Keymap("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "󰕌  Undotree" })
-Keymap(
-	"n",
-	"<leader>ur",
-	function() Cmd.later(tostring(vim.opt.undolevels:get())) end,
-	{ desc = "󰛒 Redo All" }
-)
+-- stylua: ignore
+Keymap("n", "<leader>ur", function() Cmd.later(tostring(vim.opt.undolevels:get())) end, { desc = "󰛒 Redo All" })
 Keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Reset Hunk" })
 
 -- save open time for each buffer
