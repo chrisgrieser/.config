@@ -1992,6 +1992,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>variable</key>
 			<string>python_version</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>5.4</string>
+				<key>placeholder</key>
+				<string>5.3</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Version of the Lua docs to search</string>
+			<key>label</key>
+			<string>Lua Version</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>lua_version</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string>0.9</string>
