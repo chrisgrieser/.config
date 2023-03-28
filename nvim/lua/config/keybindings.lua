@@ -109,7 +109,7 @@ Keymap("n", "gj", "<Plug>(IndentWiseNextLesserIndent)", { desc = "Next Lesser In
 Keymap("n", "gk", "<Plug>(IndentWisePreviousLesserIndent)", { desc = "Previous Lesser Indent" })
 
 -- Jump to Parent Symbol
-Keymap("n", "g<Tab>", function()
+Keymap("n", "<BS>", function()
 	local symbolPath = require("nvim-navic").get_data()
 	if not symbolPath then
 		vim.notify("Navic is not available.", LogWarn)
@@ -173,7 +173,7 @@ Keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
 -- Word Switcher (fallback: switch casing)
 -- stylua: ignore
-Keymap( "n", "<BS>", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
+Keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
