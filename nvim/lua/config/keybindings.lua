@@ -49,9 +49,10 @@ end, { desc = "Clear Notifications" })
 -- MOTIONS
 
 -- spider motions
-Keymap({ "n", "o", "x" }, "w", function() require("spider").motion("w") end, { desc = "Spider-w" })
-Keymap({ "n", "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
-Keymap({ "n", "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
+Keymap({ "n", "o", "x" }, ",w", function() require("spider").motion("w") end, { desc = "Spider-w" })
+Keymap({ "n", "o", "x" }, ",e", function() require("spider").motion("e") end, { desc = "Spider-e" })
+Keymap({ "n", "o", "x" }, ",b", function() require("spider").motion("b") end, { desc = "Spider-b" })
+Keymap({ "n", "o", "x" }, ",ge", function() require("spider").motion("ge") end, { desc = "Spider-ge" })
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 Keymap({ "o", "x" }, "H", "^")
@@ -247,7 +248,7 @@ Keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc 
 -- Refactoring.nvim
 -- stylua: ignore start
 Keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
-Keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
+-- Keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
 Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("Extract Function") end, { desc = "󱗘 Extract Func" })
 -- stylua: ignore end
 

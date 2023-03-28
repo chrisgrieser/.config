@@ -114,7 +114,7 @@ Keymap("o", "ri", function() require("various-textobjs").restOfIndentation() end
 Keymap( "o", "rg", "G", { desc = "rest of buffer textobj" })
 
 -- ge: diagnostic textobj (similar to ge for the next diagnostic)
-Keymap({ "x", "o" }, "ge", function() require("various-textobjs").diagnostic() end, { desc = "diagnostic textobj" })
+-- Keymap({ "x", "o" }, "ge", function() require("various-textobjs").diagnostic() end, { desc = "diagnostic textobj" })
 
 -- iR/aR: double square brackets
 Keymap( { "x", "o" }, "iR", function() require("various-textobjs").doubleSquareBrackets(true) end, { desc = "inner double square bracket" })
