@@ -736,7 +736,10 @@ rules:
                 tell application "System Events" to tell process "Finder"
                   click menu item "Back" of menu "Go" of menu bar 1
                 end tell'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+          # going back aborts searching / renames
+          - key_code: escape
+          - *leave-insert-mode
+        conditions: [*finder-app, *not-find-mode]
       # <C-l> = History Forward
       - type: basic
         from:
