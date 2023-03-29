@@ -148,7 +148,7 @@ Keymap("n", "<leader>q", function() require("replacer").run { rename_files = fal
 Keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })
 Keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
 -- stylua: ignore
-Keymap("n", "qf", function() require("neogen").generate() end, { desc = "Neogen: Comment Function" })
+Keymap("n", "qf", function() require("neogen").generate({}) end, { desc = "Neogen: Comment Function" })
 
 -- WHITESPACE CONTROL
 Keymap("n", "=", "mzO<Esc>`z", { desc = " add blank above" })
@@ -253,7 +253,7 @@ Keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc 
 -- Refactoring.nvim
 -- stylua: ignore start
 Keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
--- Keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
+Keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
 Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("Extract Function") end, { desc = "󱗘 Extract Func" })
 -- stylua: ignore end
 

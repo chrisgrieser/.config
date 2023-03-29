@@ -137,7 +137,11 @@ local function lsp_progress()
 	local progress = messages[1].percentage or 0
 	local task = messages[1].title or ""
 	task = task:gsub("^(%w+).*", "%1") -- only first word
-	return client .. progress .. "%% " .. task
+
+	local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+	local ms = vim.loop.hrtime() / 1000000
+	local frame = math.floor(ms / 120) % #spinners
+	return spinners[frame + 1] .. " " .. client .. progress .. "%% " .. task
 end
 
 -- wrapper to not require navic directly

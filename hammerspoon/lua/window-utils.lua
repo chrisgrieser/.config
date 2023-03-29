@@ -116,7 +116,7 @@ function MoveResize(win, pos)
 	then
 		return
 	end
-	local appsToIgnore = { "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon" }
+	local appsToIgnore = { "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon", "SideNotes", "CleanShot X" }
 	local appName = win:application():name()
 	if TableContains(appsToIgnore, appName) then
 		Notify("⚠️ " .. appName .. " cannot be resized properly.")

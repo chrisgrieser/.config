@@ -40,40 +40,40 @@ function run(argv) {
 	let doDelete = argv[0].includes("delete");
 	const doOpenUrl = argv[0].includes("openurl");
 	const doCopy = argv[0].includes("copy");
-	const doClose = argv[0].includes("close");
 
 	// determine note
-	const theNote = $.getenv("node_id") === "current" ? sidenotes.currentNote() : getNoteObj(theNote);"
+	const id = $.getenv("note_id");
+	const noteObj = id === "current" ? sidenotes.currentNote() : getNoteObj(id);
 
 	// get content
-	const curNote = sidenotes.currentNote();
-	const content = curNote.text(); // full content
-	const details = curNote.content(); // content without title
-	const title = curNote.title();
+	const content = noteObj.text(); // full content
+	const details = noteObj.content(); // content without title
+	const title = noteObj.title().trim();
 
 	// open URL (& close sidenotes)
 	if (doOpenUrl) {
 		const urls = content.match(urlRegex);
 		if (!urls) return "⚠️ No URL found."; // notification
 		app.openLocation(urls[0]);
+		const secondLine = details.split("\n")[0].trim();
 
 		// dynamically decide whether to delete
-		const isLinkOnlyNote = [title, details].includes(urls[0]);
+		const isLinkOnlyNote = [title, secondLine].includes(urls[0]);
 		doDelete = isLinkOnlyNote;
 	}
 
 	// Delete Note, but keep copy in trash instead of irreversibly removing it
 	if (doDelete) {
 		const maxNameLen = 50;
-		let safeTitle = title.replace(/[/\\:;,"'#()[\]=<>{}]|\.$/gm, "");
+		let safeTitle = title.replace(/[/\\:;,"'#()[\]=<>{}?!]|\.$/gm, "-");
 		if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
 		const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.txt`;
 		writeToFile(trashNotePath, content);
-		sidenotes.currentNote().delete();
+		noteObj.delete();
 	}
 
-	// close sidenotes
-	if (doClose) {
+	// close sidenotes if it's the current one
+	if (id === "current") {
 		// apparently there is JXA API for it, therefore done via keystrokes since it
 		// is ensured that SideNotes is the most frontmost app
 		delay(0.05); /* eslint-disable-line no-magic-numbers */
@@ -84,7 +84,7 @@ function run(argv) {
 	if (doCopy) app.setTheClipboardTo(content);
 
 	// returns are used for the notification
-	if (doDelete && doOpenUrl) return "🗑 Note Deleted";
+	if (doDelete && (doOpenUrl || id !== "current")) return "🗑 Note Deleted";
 	else if (doCopy) return "✅ Copied";
 	return ""; // don't create a notification
 }
