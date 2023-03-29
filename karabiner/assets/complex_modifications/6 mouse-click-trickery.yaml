@@ -38,20 +38,6 @@ rules:
               - ^com\.vivaldi\.Vivaldi.+
               - ^com.reederapp.5.macOS$
               - ^maccatalyst\.com\.lireapp\.macOS$
-      # Drafts: R-Click opens link in background
-      - type: basic
-        from: { pointing_button: button2 }
-        to_if_held_down: [pointing_button: button2]
-        parameters: { basic.to_if_held_down_threshold_milliseconds: 200 }
-        to_if_alone:
-          - pointing_button: button2
-          - { key_code: vk_none, hold_down_milliseconds: 10 }
-          - key_code: o
-          - key_code: return_or_enter
-          - { key_code: vk_none, hold_down_milliseconds: 600 }
-          - { key_code: h, modifiers: [command] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.agiletortoise\.Drafts-OSX$] }
       # Mimestream: Open link and delete mail (mostly github links)
       - type: basic
         from: { pointing_button: button2 }
@@ -181,7 +167,6 @@ rules:
               - ^com\.apple\.finder$
               - ^md\.obsidian$
               - ^com\.mimestream\.Mimestream$
-              - ^com\.agiletortoise\.Drafts-OSX$
               - ^net\.highlightsapp\.universal$
               - ^org\.hammerspoon\.Hammerspoon$
               - ^maccatalyst\.com\.atebits\.Tweetie # twitter
@@ -220,19 +205,6 @@ rules:
               - ^com\.apple\.finder$
               - ^md\.obsidian$
               - ^org\.hammerspoon\.Hammerspoon$
-        to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
-      # Drafts: Archive
-      - type: basic
-        from:
-          pointing_button: button5
-        to_if_alone:
-          - { key_code: a, modifiers: [command, shift] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.agiletortoise\.Drafts-OSX$] }
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
         parameters:
