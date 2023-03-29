@@ -9,7 +9,7 @@ alias ga="git add"
 alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull --recurse-submodules"
-alias restore="git restore --source=" # 1: hash, 2: file -> restore file
+alias restore="git restore --source" # 1: hash, 2: file -> restore file
 alias gm="git commit --amend --no-edit" # a[m]end
 alias gM="git commit --amend"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory

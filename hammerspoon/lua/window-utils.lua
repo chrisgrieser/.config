@@ -112,6 +112,7 @@ function MoveResize(win, pos)
 		or not win:application()
 		or CheckSize(win, pos) -- already correctly sized
 		or win:title() == "Quick Look"
+		or win:title() == "qlmanage"
 	then
 		return
 	end
@@ -131,7 +132,7 @@ function MoveResize(win, pos)
 	end
 
 	-- resize
-	RunWithDelays({0, 0.1, 0.2, 0.3, 0.4, 0.5}, function ()
+	RunWithDelays({0, 0.1, 0.3, 0.5, 0.7}, function ()
 		-- check for unequal false, since non-resizable wins return nil
 		if CheckSize(win, pos) ~= false then return end
 		win:moveToUnit(pos)
