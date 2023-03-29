@@ -7,14 +7,13 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// TODO generate array of notes *objects* with their properties note objects seem
-// to be retrievable via by supplying noteid *and* folderid:
-// `Application("SideNotes").folders.byId("35BE5A12-DAF4-44FD-AF7D-2689CBB14BF3").notes.byId("0776263A-77FA-41EF-808E-6266C77DBDF9")`
+// HACK since notes are not directly accessible via their id, but only from
+// inside a folder: `Application("SideNotes").folders.byId("35BE5A12-DAF4-44FD-AF7D-2689CBB14BF3").notes.byId("0776263A-77FA-41EF-808E-6266C77DBDF9")`
 // `Application("SideNotes").currentNote()` retrieves a note that way. This
-// allows for retrieving notes via ID, when iterating folders *and* notes 🙈
-// Note Objects have more properties (see Script Editor Dictionary) and also
-// also methods like `.delete()`
-
+// necessitates iterating folders *and* notes to retrieve them by ID. However, 
+// note objects have more properties like textFormatting, the `.text()` method
+// includes information on whether the note has an image, and methods like
+// `.delete()` are available
 function getNoteObj(noteId) {
 	const sidenotes = Application("SideNotes");
 	const folders = sidenotes.folders;
@@ -37,12 +36,11 @@ function run(argv) {
 
 	const sidenotes = Application("SideNotes");
 	const results = sidenotes
-		.searchNotes(query) // CAVEAT currently not possible to get the folder for a note
+		.searchNotes(query)
 		.map(item => {
 			const noteObj = getNoteObj(item.identifier);
 			if (!noteObj) return false;
 			const content = noteObj.text();
-
 			let icon = "";
 
 			let type = noteObj.textFormatting();
@@ -53,22 +51,21 @@ function run(argv) {
 
 			if (content.includes("[img ")) icon += "🖼️ ";
 			const urls = content.match(urlRegex);
-			let urlSubtitle;
+			let urlSubtitle = "⌘: ";
 			if (urls) {
 				icon += "🔗";
-				urlSubtitle = "⌘: ";
 				const isLinkOnlyNote = [item.title, item.details].includes(urls[0]);
 				if (isLinkOnlyNote) urlSubtitle += "🗑🔗 Delete & Open ";
 				else urlSubtitle += "🔗 Open ";
 				urlSubtitle += urls[0];
 			} else {
-				urlSubtitle = "🚫 Note has no URL.";
+				urlSubtitle += "🚫 Note has no URL";
 			}
 
 			if (icon !== "") icon += " "; // padding
 			return {
 				title: item.title,
-				subtitle: icon + item.details,
+				subtitle: icon + item.details.slice(0, 100),
 				match: alfredMatcher(item.title + item.details),
 				arg: item.identifier,
 				uid: item.identifier,
