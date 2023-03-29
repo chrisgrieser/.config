@@ -39,7 +39,12 @@ return {
 				bottom_char = BorderHorizontal,
 			},
 			list = { width = 0.4 },
-			theme = { mode = "brighten" },
+			hooks = {
+				after_close = function()
+					---@diagnostic disable-next-line: param-type-mismatch
+					vim.cmd.loadview(3)
+				end,
+			},
 		},
 	},
 	{ -- signature hints

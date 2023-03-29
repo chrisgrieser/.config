@@ -128,7 +128,7 @@ Autocmd("CursorMoved", {
 		local win_view = Fn.winsaveview()
 		local scrolloff = math.min(opt.scrolloff:get(), math.floor(win_height / 2))
 		local scrolloff_line_count = win_height - (Fn.line("w$") - win_view.topline + 1)
-		local distance_to_last_line = Fn.line("$") - win_view.lnum
+		local distance_to_last_line = Fn.line("$") - win_view.lnum ---@diagnostic disable-line: undefined-field
 		if
 			distance_to_last_line < scrolloff
 			and scrolloff_line_count + distance_to_last_line < scrolloff
