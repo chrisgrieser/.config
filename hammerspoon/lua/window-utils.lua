@@ -25,6 +25,49 @@ RejectedFinderWindows = {
 	"^Alfred$", -- Alfred Compatibility Mode
 }
 
+--------------------------------------------------------------------------------
+-- OBSIDIAN SIDEBAR
+
+---@param obsiWin hs.window
+local function toggleObsidianSidebar(obsiWin)
+	RunWithDelays({ 0.05, 0.2 }, function()
+		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
+		if numberOfObsiWindows > 1 then return end -- prevent popout window resizing to affect sidebars
+
+		local obsi_width = obsiWin:frame().w
+		local screen_width = obsiWin:screen():frame().w
+
+		-- half -> hide sidebar
+		-- pseudo-maximized -> show sidebar
+		-- max -> hide sidebar (since assuming Obsidian split)
+		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "expand"
+			or "collapse"
+		OpenLinkInBackground(
+			"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. mode .. "%28%29"
+		)
+	end)
+end
+
+---ensures Obsidian windows are always shown when developing, mostly for developing CSS
+---@param win hs.window
+---@param pos hs.geometry
+local function obsidianThemeDevHelper(win, pos)
+	if not win or not win:application() then return end
+	if
+		not (pos == PseudoMaximized or pos == Maximized)
+		and win:application():name():lower() == "neovide"
+		and AppIsRunning("Obsidian")
+	then
+		RunWithDelays(0.15, function()
+			App("Obsidian"):unhide()
+			App("Obsidian"):mainWindow():raise()
+		end)
+	end
+end
+
+--------------------------------------------------------------------------------
+-- WINDOW MOVEMENT
+
 ---@param win hs.window
 ---@param size hs.geometry
 ---@nodiscard
@@ -60,57 +103,6 @@ function CheckSize(win, size)
 	return widthOkay and heightOkay and posxOkay and posyOkay
 end
 
---------------------------------------------------------------------------------
--- SIDEBARS
-
----@param obsiWin hs.window
-local function toggleObsidianSidebar(obsiWin)
-	RunWithDelays({ 0.05, 0.2 }, function()
-		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
-		if numberOfObsiWindows > 1 then return end -- prevent popout window resizing to affect sidebars
-
-		local obsi_width = obsiWin:frame().w
-		local screen_width = obsiWin:screen():frame().w
-
-		-- half -> hide sidebar
-		-- pseudo-maximized -> show sidebar
-		-- max -> hide sidebar (since assuming Obsidian split)
-		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "expand"
-			or "collapse"
-		OpenLinkInBackground(
-			"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. mode .. "%28%29"
-		)
-	end)
-end
-
----@param win hs.window
-function ToggleWinSidebar(win)
-	if not win or not win:application() then return end
-	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win) end
-end
-
---------------------------------------------------------------------------------
-
----ensures Obsidian windows are always shown when developing, mostly for developing CSS
----@param win hs.window
----@param pos hs.geometry
-local function obsidianThemeDevHelper(win, pos)
-	if not win or not win:application() then return end
-	if
-		not (pos == PseudoMaximized or pos == Maximized)
-		and win:application():name():lower() == "neovide"
-		and AppIsRunning("Obsidian")
-	then
-		RunWithDelays(0.15, function()
-			App("Obsidian"):unhide()
-			App("Obsidian"):mainWindow():raise()
-		end)
-	end
-end
-
---------------------------------------------------------------------------------
--- WINDOW MOVEMENT
-
 ---@param win hs.window
 ---@param pos hs.geometry
 function MoveResize(win, pos)
@@ -139,13 +131,11 @@ function MoveResize(win, pos)
 	end
 
 	-- resize
-	local keepResizingSecs = 1
-	local timeout = false
-	RunWithDelays(keepResizingSecs, function() timeout = true end)
-	repeat
-		if not win or timeout then return end
+	RunWithDelays({0, 0.1, 0.2, 0.3, 0.4, 0.5}, function ()
+		-- check for unequal false, since non-resizable wins return nil
+		if CheckSize(win, pos) ~= false then return end
 		win:moveToUnit(pos)
-	until CheckSize(win, pos)
+	end)
 
 	-- has to come after resizing
 	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win) end
@@ -312,8 +302,8 @@ local function endAction()
 end
 
 --------------------------------------------------------------------------------
+-- HOTKEYS
 
--- Hotkeys
 Hotkey({}, "home", homeAction)
 Hotkey({}, "end", endAction)
 Hotkey(Hyper, "right", function() MoveResize(hs.window.focusedWindow(), RightHalf) end)

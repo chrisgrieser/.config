@@ -23,7 +23,6 @@ while true do
 	Temp = hs.timer.usleep(100000) -- = one tenth of a second (don't use wait, since it's a defined later)
 	if i > 10 then
 		Notify("⚠️ Could not retrieve .zshenv")
-		return
 	end
 end
 
@@ -100,12 +99,6 @@ function ReadFile(filePath)
 	return content
 end
 
----delay (blocking)
----@param secs number
-function Wait(secs)
-	local myTimer = hs.timer.usleep(secs * 1000000)
-end
-
 ---@nodiscard
 ---@return boolean
 function IsDarkMode() return hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n" end
@@ -125,9 +118,9 @@ end
 ---@param callbackFn function function to be run on delay(s)
 function RunWithDelays(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
-	local myTimer = {}
+	MyTimer = {}
 	for _, delay in pairs(delaySecs) do
-		myTimer[delay] = hs.timer.doAfter(delay, callbackFn)
+		MyTimer[delay] = hs.timer.doAfter(delay, callbackFn)
 	end
 end
 
@@ -224,7 +217,7 @@ end
 function RestartApp(appName)
 	local app = App(appName)
 	if app then app:kill() end
-	local myTimer = hs.timer.waitUntil(
+	MyTimer = hs.timer.waitUntil(
 		function() return App(appName) == nil end,
 		function() hs.application.open(appName) end,
 		0.1

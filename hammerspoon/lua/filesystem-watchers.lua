@@ -69,12 +69,10 @@ local systemDownloadFolder = os.getenv("HOME") .. "/Downloads/"
 SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	-- Stats Update file can directly be trashed
 	for _, filePath in pairs(files) do
-		if filePath:find("Stats%.dmg$") then
-			Wait(1)
-			os.rename(filePath, os.getenv("HOME") .. "/.Trash/Stats.dmg")
-			return
-		end
+		if not filePath:find("Stats%.dmg$") then return end
+		RunWithDelays(1, function() os.rename(filePath, os.getenv("HOME") .. "/.Trash/Stats.dmg") end)
 	end
+
 	-- otherwise move to filehub
 	hs.execute("mv '" .. systemDownloadFolder .. "'/* '" .. FileHub .. "'")
 	print("➡️ Download moved to File Hub.")
