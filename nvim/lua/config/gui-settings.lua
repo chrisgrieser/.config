@@ -1,6 +1,6 @@
 require("config.utils")
--- https://neovide.dev/configuration.html
 local g = vim.g
+-- INFO https://neovide.dev/configuration.html
 --------------------------------------------------------------------------------
 
 -- See hammerspoons `app-hider.lua`
@@ -15,23 +15,10 @@ Autocmd("VimEnter", {
 })
 
 --------------------------------------------------------------------------------
+-- SIZE
 
-local delta = 1.1
-Keymap({ "n", "x", "i" }, "<D-+>", function() g.neovide_scale_factor = g.neovide_scale_factor * delta end)
-Keymap({ "n", "x", "i" }, "<D-->", function() g.neovide_scale_factor = g.neovide_scale_factor / delta end)
+vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2" -- https://www.programmingfonts.org/#oxygen
 
--- Behavior
-g.neovide_confirm_quit = false
-g.neovide_hide_mouse_when_typing = true
-g.neovide_remember_window_size = false -- done via --geometry in `neovide` call
-
--- Keymaps
-g.neovide_input_use_logo = true -- enable `cmd` key on macOS
-g.neovide_input_macos_alt_is_meta = true -- enable `opt` key on macOS
-Keymap("i", "<M-.>", "…") -- helpers when `opt` is turned into meta key
-Keymap("i", "<M-->", "–") -- en-dash
-
--- Graphics (dependent on device)
 -- INFO: Transparency set in theme-config.lua
 if Fn.hostname():find("Mother") then
 	g.neovide_scale_factor = 0.93
@@ -41,11 +28,37 @@ elseif Fn.hostname():find("eduroam") or Fn.hostname():find("iMac") then
 	g.neovide_refresh_rate = 80
 end
 
+local delta = 1.05
+Keymap({ "n", "x", "i" }, "<D-+>", function() g.neovide_scale_factor = g.neovide_scale_factor * delta end)
+Keymap({ "n", "x", "i" }, "<D-->", function() g.neovide_scale_factor = g.neovide_scale_factor / delta end)
+
+--------------------------------------------------------------------------------
+
+-- Behavior
+g.neovide_confirm_quit = false
+g.neovide_hide_mouse_when_typing = true
+g.neovide_remember_window_size = false -- done via --geometry in `neovide` call, since more reliable
+
+-- Keymaps
+g.neovide_input_use_logo = true -- enable `cmd` key on macOS
+g.neovide_input_macos_alt_is_meta = true -- enable `opt` key on macOS
+Keymap("i", "<M-.>", "…") -- helpers when `opt` is turned into meta key
+Keymap("i", "<M-->", "–") -- en-dash
+
 -- Window Appearance
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
 g.neovide_scroll_animation_length = 1 -- 
 
--- cursor
+--------------------------------------------------------------------------------
+-- CURSOR
+
+vim.opt.guicursor = {
+	"n-sm:block",
+	"i-ci-c-ve:ver25",
+	"r-cr-o-v:hor10",
+	"a:blinkwait200-blinkoff500-blinkon700",
+}
+
 g.neovide_cursor_animation_length = 0.01
 g.neovide_cursor_trail_size = 0.9
 g.neovide_cursor_unfocused_outline_width = 0.1
