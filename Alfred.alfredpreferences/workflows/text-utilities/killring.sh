@@ -6,14 +6,13 @@ readonly reset_mins='1'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-osascript -e 'tell application "System Events" to keystroke "z" using {command down}' # undo last paste
 file_is_older_than_reset_time=$(find "$count_file" -mmin -"$reset_mins")
 if [[ -n "$file_is_older_than_reset_time" ]]; then
 	currentCount=$(cat "$count_file")
 	count=$((currentCount + 1))
 else
 	[[ -f "$count_file" ]] && rm -f "$count_file"
-	count=0
+	count=1 # start at first item in history
 fi
 
 #───────────────────────────────────────────────────────────────────────────────

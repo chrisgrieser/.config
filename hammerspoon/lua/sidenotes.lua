@@ -4,6 +4,7 @@ require("lua.utils")
 -- hs.osascript.javascriptFromFile, fails on first run when Hammerspoon does not
 -- have the needed permission yet
 
+local function updateCounter() hs.execute("sketchybar --trigger update-sidenote-count") end
 --------------------------------------------------------------------------------
 
 -- REMINDERS -> SIDENOTES
@@ -15,6 +16,7 @@ function UpdateSidenotes()
 	else
 		Notify("⚠️ Reminder-to-Sidenote failed")
 	end
+	updateCounter()
 end
 
 SideNotesTimer = hs.timer.doAt("05:00", "01d", UpdateSidenotes)
@@ -27,6 +29,7 @@ local function moveOfficeNotesToBase()
 	else
 		Notify("⚠️ Moving Office SideNotes failed.")
 	end
+	updateCounter()
 end
 
 if IsAtOffice() then moveOfficeNotesToBase() end
@@ -35,9 +38,8 @@ if IsAtOffice() then moveOfficeNotesToBase() end
 
 -- UPDATE COUNTER IN SKETCHYBAR
 SidenotesWatcher = Aw.new(function(appName)
-	if appName == "SideNotes" then -- i.e., run on any event related to sidenotes
-		hs.execute("sketchybar --trigger update-sidenote-count")
-	end
+	-- i.e., run on any event related to sidenotes
+	if appName == "SideNotes" then updateCounter() end
 end):start()
 
 -- HIDE WHEN SWITCHING TO ANY OTHER APP (HACK)
