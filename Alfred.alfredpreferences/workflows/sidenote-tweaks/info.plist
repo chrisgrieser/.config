@@ -113,24 +113,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>423D429B-827C-46B7-BA3A-D18CB38C3216</key>
+		<key>2F608401-E6A9-4090-8926-6E709640B31D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C78BA649-8069-4779-8E48-41410B4A7305</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5458B216-89A2-4ABD-A7EE-2DED81E7ACFB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>86B020A0-301E-455E-914F-2CD4BD23B385</string>
+				<string>7CCFDDEA-E1B7-447E-AA8C-2AC41962D59D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -240,19 +227,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>BE46B865-D64A-42FA-8BF9-1E3899C093C2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F48920EB-0BC1-49DF-BBDF-138021D053ED</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</key>
 		<array>
 			<dict>
@@ -284,19 +258,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>D755A9A7-0954-4F6C-B2EB-7DCE0561E449</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7FB369B3-370D-4F21-BC77-D64B743DFC09</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -397,19 +358,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F92BE4A2-0388-4F09-B807-9D4164C040E8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2BB50A6E-97ED-4B8B-BF8C-CC62465A116B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1200,7 +1148,7 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>BE46B865-D64A-42FA-8BF9-1E3899C093C2</string>
+			<string>2F608401-E6A9-4090-8926-6E709640B31D</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1223,231 +1171,7 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>F48920EB-0BC1-49DF-BBDF-138021D053ED</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>↓</string>
-				<key>keycode</key>
-				<integer>125</integer>
-				<key>keymod</key>
-				<integer>12189696</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>7FB369B3-370D-4F21-BC77-D64B743DFC09</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>38</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>J</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apptorium.SideNotes-paddle</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>D755A9A7-0954-4F6C-B2EB-7DCE0561E449</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>↑</string>
-				<key>keycode</key>
-				<integer>126</integer>
-				<key>keymod</key>
-				<integer>12189696</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>86B020A0-301E-455E-914F-2CD4BD23B385</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>40</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>K</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apptorium.SideNotes-paddle</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>5458B216-89A2-4ABD-A7EE-2DED81E7ACFB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>38</integer>
-				<key>hotmod</key>
-				<integer>262144</integer>
-				<key>hotstring</key>
-				<string>J</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apptorium.SideNotes-paddle</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>F92BE4A2-0388-4F09-B807-9D4164C040E8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>↓</string>
-				<key>keycode</key>
-				<integer>125</integer>
-				<key>keymod</key>
-				<integer>12058624</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>2BB50A6E-97ED-4B8B-BF8C-CC62465A116B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>↑</string>
-				<key>keycode</key>
-				<integer>126</integer>
-				<key>keymod</key>
-				<integer>12058624</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>C78BA649-8069-4779-8E48-41410B4A7305</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>40</integer>
-				<key>hotmod</key>
-				<integer>262144</integer>
-				<key>hotstring</key>
-				<string>K</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apptorium.SideNotes-paddle</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>423D429B-827C-46B7-BA3A-D18CB38C3216</string>
+			<string>7CCFDDEA-E1B7-447E-AA8C-2AC41962D59D</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1516,14 +1240,14 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>ypos</key>
 			<real>680</real>
 		</dict>
-		<key>2BB50A6E-97ED-4B8B-BF8C-CC62465A116B</key>
+		<key>2F608401-E6A9-4090-8926-6E709640B31D</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>12</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>2020</real>
+			<real>1625</real>
 		</dict>
 		<key>2FE4C0FD-B052-4444-9957-22B0EBCAED50</key>
 		<dict>
@@ -1533,28 +1257,6 @@ sketchybar --trigger update-sidenote-count</string>
 			<real>445</real>
 			<key>ypos</key>
 			<real>1030</real>
-		</dict>
-		<key>423D429B-827C-46B7-BA3A-D18CB38C3216</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>move to note above</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>2150</real>
-		</dict>
-		<key>5458B216-89A2-4ABD-A7EE-2DED81E7ACFB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>move note up</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1890</real>
 		</dict>
 		<key>660ACE51-61E1-4231-AB1E-78745ADC2616</key>
 		<dict>
@@ -1585,14 +1287,14 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>ypos</key>
 			<real>375</real>
 		</dict>
-		<key>7FB369B3-370D-4F21-BC77-D64B743DFC09</key>
+		<key>7CCFDDEA-E1B7-447E-AA8C-2AC41962D59D</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>12</integer>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>1755</real>
+			<real>1625</real>
 		</dict>
 		<key>84334C9A-E9AA-461E-B13E-8B77248006FA</key>
 		<dict>
@@ -1622,15 +1324,6 @@ sketchybar --trigger update-sidenote-count</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>1355</real>
-		</dict>
-		<key>86B020A0-301E-455E-914F-2CD4BD23B385</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>1890</real>
 		</dict>
 		<key>8A20019D-C824-4ACB-8917-F7347E7CEFD9</key>
 		<dict>
@@ -1676,24 +1369,6 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>ypos</key>
 			<real>345</real>
 		</dict>
-		<key>BE46B865-D64A-42FA-8BF9-1E3899C093C2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1625</real>
-		</dict>
-		<key>C78BA649-8069-4779-8E48-41410B4A7305</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>2150</real>
-		</dict>
 		<key>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</key>
 		<dict>
 			<key>colorindex</key>
@@ -1735,17 +1410,6 @@ sketchybar --trigger update-sidenote-count</string>
 			<real>440</real>
 			<key>ypos</key>
 			<real>865</real>
-		</dict>
-		<key>D755A9A7-0954-4F6C-B2EB-7DCE0561E449</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>move note down</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1755</real>
 		</dict>
 		<key>DB7EDFF2-EF29-4EDB-9ED7-368149133A05</key>
 		<dict>
@@ -1808,26 +1472,6 @@ sketchybar --trigger update-sidenote-count</string>
 			<real>555</real>
 			<key>ypos</key>
 			<real>1245</real>
-		</dict>
-		<key>F48920EB-0BC1-49DF-BBDF-138021D053ED</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>1625</real>
-		</dict>
-		<key>F92BE4A2-0388-4F09-B807-9D4164C040E8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>move to note below</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>2020</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
