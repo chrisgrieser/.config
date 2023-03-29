@@ -33,6 +33,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>A92D79C6-20D7-4333-93E9-61CABC92891A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>CD07C041-94C2-4BD6-A732-DDF99E139981</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -73,6 +83,29 @@
 	<string>Google Utils</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>quicklook-url.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A92D79C6-20D7-4333-93E9-61CABC92891A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -199,6 +232,15 @@
 			<real>70</real>
 			<key>ypos</key>
 			<real>245</real>
+		</dict>
+		<key>A92D79C6-20D7-4333-93E9-61CABC92891A</key>
+		<dict>
+			<key>note</key>
+			<string>quicklook</string>
+			<key>xpos</key>
+			<real>555</real>
+			<key>ypos</key>
+			<real>105</real>
 		</dict>
 		<key>CD07C041-94C2-4BD6-A732-DDF99E139981</key>
 		<dict>

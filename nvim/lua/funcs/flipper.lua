@@ -142,6 +142,7 @@ local filetypeSpecificWords = {
 		{ "lt", "gt" }, -- the leading `-` is ignored
 		{ "eq", "nq" },
 		{ "&&", "||" },
+		{ ">", ">>" }, -- append/overwrite
 		{ "if", "elif", false },
 		{ "elif", "else", false },
 		{ "else", "if", false },
