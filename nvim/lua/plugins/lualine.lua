@@ -144,12 +144,6 @@ local function lsp_progress()
 	return spinners[frame + 1] .. " " .. client .. progress .. "%% " .. task
 end
 
--- wrapper to not require navic directly
-local function navicBreadcrumbs()
-	if not require("nvim-navic").is_available() then return "" end
-	return require("nvim-navic").get_location()
-end
-
 -- return available plugin updates when above a certain threshold
 local function pluginUpdates()
 	if not require("lazy.status").has_updates() then return "" end
@@ -157,6 +151,22 @@ local function pluginUpdates()
 	if numberOfUpdates < UpdateCounterThreshhold then return "" end
 	local count = require("lazy.status").updates()
 	return count
+end
+
+--------------------------------------------------------------------------------
+
+-- wrapper to not require navic directly
+local function navicBreadcrumbs()
+	if not require("nvim-navic").is_available() then return "" end
+	return require("nvim-navic").get_location()
+end
+
+local function pathToProjectRoot()
+	if not require("nvim-navic").is_available() then return "" end
+	local parentPath = vim.fn.expand("%:p:h")
+	local projectRelPath = parentPath:sub(#vim.loop.cwd() + 2)
+	local nicerDisplay = projectRelPath:gsub("/", "  ")
+	return " " .. nicerDisplay .. " "
 end
 
 --------------------------------------------------------------------------------
@@ -221,6 +231,8 @@ local lualineConfig = {
 			{ clock, section_separators = topSeparators },
 		},
 		lualine_b = {
+				padding = { left = 1, right = 0 },
+			{ pathToProjectRoot, section_separators = topSeparators,  },
 			{ navicBreadcrumbs, section_separators = topSeparators },
 		},
 		lualine_c = {
