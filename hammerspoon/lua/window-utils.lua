@@ -123,23 +123,23 @@ function MoveResize(win, pos)
 		return
 	end
 
-	-- extras
-	obsidianThemeDevHelper(win, pos)
-	if (pos == PseudoMaximized or pos == Centered) and AppIsRunning("Twitter") then
+	-- Twitter Extras
+	if pos == PseudoMaximized or pos == Centered then
 		TwitterToTheSide()
 	elseif pos == Maximized and AppIsRunning("Twitter") then
-		App("Twitter"):hide()
+		if App("Twitter") then App("Twitter"):hide() end
 	end
 
 	-- resize
-	RunWithDelays({0, 0.1, 0.3, 0.5, 0.7}, function ()
+	RunWithDelays({ 0, 0.15, 0.3, 0.5, 0.7 }, function()
 		-- check for unequal false, since non-resizable wins return nil
 		if CheckSize(win, pos) ~= false then return end
 		win:moveToUnit(pos)
 	end)
 
-	-- has to come after resizing
+	-- Obsidian extras (has to come after resizing)
 	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win) end
+	obsidianThemeDevHelper(win, pos)
 end
 
 --------------------------------------------------------------------------------
@@ -167,7 +167,7 @@ function AutoTile(winSrc)
 			-- reject certain window tiles
 			function(win) return not (TableContains(RejectedFinderWindows, win:title())) end
 		)
-		if not (wins) or #wins == 0 then return end
+		if not wins then return end
 	else
 		wins = winSrc:getWindows()
 	end
@@ -175,18 +175,15 @@ function AutoTile(winSrc)
 	if #wins > 1 then BringAllToFront() end
 
 	if #wins == 0 and FrontAppName() == "Finder" then
-		-- hdie finder when no windows
+		-- hide finder when no windows
 		RunWithDelays(0.1, function()
 			if #(App("Finder"):allWindows()) == 0 then App("Finder"):hide() end
 		end)
 	elseif #wins == 1 then
-		if IsProjector() then
-			MoveResize(wins[1], Maximized)
-		elseif FrontAppName() == "Finder" then
-			MoveResize(wins[1], Centered)
-		else
-			MoveResize(wins[1], PseudoMaximized)
-		end
+		local pos = PseudoMaximized
+		if IsProjector() then pos = Maximized end
+		if FrontAppName() == "Finder" then pos = Centered end
+		MoveResize(wins[1], pos)
 	elseif #wins == 2 then
 		MoveResize(wins[1], LeftHalf)
 		MoveResize(wins[2], RightHalf)

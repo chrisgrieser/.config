@@ -165,6 +165,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>660ACE51-61E1-4231-AB1E-78745ADC2616</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>84334C9A-E9AA-461E-B13E-8B77248006FA</key>
 		<array>
 			<dict>
@@ -361,16 +374,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1611,7 +1614,7 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>575</real>
+			<real>405</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
@@ -1678,9 +1681,9 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>note</key>
 			<string>update sketchybar counter</string>
 			<key>xpos</key>
-			<real>1110</real>
+			<real>1085</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>345</real>
 		</dict>
 		<key>95F95EF4-4164-4FC1-B288-14C9051B21C8</key>
 		<dict>
@@ -1820,7 +1823,7 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>note</key>
 			<string>create reminder for next day for note</string>
 			<key>xpos</key>
-			<real>285</real>
+			<real>215</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
