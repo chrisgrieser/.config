@@ -472,7 +472,8 @@ Keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = tru
 Keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { desc = "󰒕Previous Diagnostic" })
 -- stylua: ignore end
 
-Keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Show Diagnostic" })
+Keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Diagnostic under Cursor" })
+Keymap("n", "<leader>D", function() Cmd.Trouble("workspace_diagnostics") end, { desc = "󰒕 Workspace Diagnostic" })
 -- fallback for languages without an action LSP
 Keymap("n", "gs", function() Cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
 
@@ -520,11 +521,11 @@ Autocmd("LspAttach", {
 			Keymap("n", "gS", function() Cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 
-		Keymap("n", "gd", function() Cmd.Glance("definitions") end, { desc = "󰒕 Goto Definitions", buffer = true })
-		Keymap("n", "gf", function() Cmd.Glance("references") end, { desc = "󰒕 Goto References", buffer = true })
-		Keymap("n", "gy", function() Cmd.Glance("type_definitions") end, { desc = "󰒕 Goto Type Definition", buffer = true })
-		Keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
-		Keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover", buffer = true })
+		Keymap("n", "gd", function() Cmd.Trouble("lsp_definitions") end, { desc = "󰒕 Goto Definitions", buffer = true })
+		Keymap("n", "gf", function() Cmd.Trouble("lsp_references") end, { desc = "󰒕 Goto References", buffer = true })
+		Keymap("n", "gy", function() Cmd.Trouble("lsp_type_definitions") end, { desc = "󰒕 Goto Type Definition", buffer = true })
+		Keymap({ "n", "i" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
+		Keymap({ "n", "i" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover", buffer = true })
 		-- stylua: ignore end
 
 		-- Save & Format
