@@ -520,10 +520,11 @@ Autocmd("LspAttach", {
 			Keymap("n", "gS", function() Cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 
-		Keymap("n", "gd", function() Cmd.Glance("definitions") end, { desc = "󰒕 Goto Definitions", buffer = true })
-		Keymap("n", "gf", function() Cmd.Glance("references") end, { desc = "󰒕 Goto References", buffer = true })
-		Keymap("n", "gy", function() Cmd.Glance("type_definitions") end, { desc = "󰒕 Goto Type Definition", buffer = true })
-		Keymap({ "n", "i", "x" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
+		Keymap("n", "gd", function() Cmd.Glance("definitions") end, { desc = "󰒕 Definitions", buffer = true })
+		Keymap("n", "gf", function() Cmd.Glance("references") end, { desc = "󰒕 References", buffer = true })
+		Keymap("n", "gy", function() Cmd.Glance("type_definitions") end, { desc = "󰒕 Type Definition", buffer = true })
+		-- uses "v" instead of "x", so signature can be shown during snippet completion
+		Keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
 		Keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover", buffer = true })
 		-- stylua: ignore end
 
