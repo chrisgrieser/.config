@@ -19,24 +19,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>14AE76BC-C491-4DEB-9D17-C01D141AB543</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CEBC5466-4576-4DA5-98A4-EF772D8A7198</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>460FA6C0-572A-4D6B-AAB7-8F1C72DBC4C0</string>
+				<string>2A299055-454F-491C-9538-B40EEB9C1ED4</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
@@ -46,7 +33,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>14AE76BC-C491-4DEB-9D17-C01D141AB543</string>
+				<string>CEBC5466-4576-4DA5-98A4-EF772D8A7198</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
@@ -139,19 +126,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>460FA6C0-572A-4D6B-AAB7-8F1C72DBC4C0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2A299055-454F-491C-9538-B40EEB9C1ED4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5458B216-89A2-4ABD-A7EE-2DED81E7ACFB</key>
 		<array>
 			<dict>
@@ -170,6 +144,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>771DD115-1E19-4CFC-AB74-649F9A758391</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -231,7 +218,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</string>
+				<string>771DD115-1E19-4CFC-AB74-649F9A758391</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -283,7 +270,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</string>
+				<string>771DD115-1E19-4CFC-AB74-649F9A758391</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -386,7 +373,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</string>
+				<string>771DD115-1E19-4CFC-AB74-649F9A758391</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -645,6 +632,26 @@ sketchybar --trigger update-sidenote-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>openurl close</string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>note_id</key>
+					<string>current</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>771DD115-1E19-4CFC-AB74-649F9A758391</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -724,59 +731,20 @@ sketchybar --trigger update-sidenote-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>sidenotes://open/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>460FA6C0-572A-4D6B-AAB7-8F1C72DBC4C0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string>openurl close</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict/>
+				<dict>
+					<key>note_id</key>
+					<string>{query}</string>
+				</dict>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>2A299055-454F-491C-9538-B40EEB9C1ED4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>sidenotes://open/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>14AE76BC-C491-4DEB-9D17-C01D141AB543</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -815,11 +783,14 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>delete close</string>
+				<string>delete</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict/>
+				<dict>
+					<key>note_id</key>
+					<string>{query}</string>
+				</dict>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
@@ -1503,18 +1474,6 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>ypos</key>
 			<real>1245</real>
 		</dict>
-		<key>14AE76BC-C491-4DEB-9D17-C01D141AB543</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>open note, then pass "delete" to open it
-(HACK since note cannot be deleted by ID)</string>
-			<key>xpos</key>
-			<real>275</real>
-			<key>ypos</key>
-			<real>690</real>
-		</dict>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<dict>
 			<key>colorindex</key>
@@ -1553,9 +1512,9 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>note</key>
 			<string>pass "openurl close"</string>
 			<key>xpos</key>
-			<real>435</real>
+			<real>315</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>680</real>
 		</dict>
 		<key>2BB50A6E-97ED-4B8B-BF8C-CC62465A116B</key>
 		<dict>
@@ -1586,18 +1545,6 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>ypos</key>
 			<real>2150</real>
 		</dict>
-		<key>460FA6C0-572A-4D6B-AAB7-8F1C72DBC4C0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>open note, then pass "openURL" to open it
-(HACK since note cannot be deleted by ID)</string>
-			<key>xpos</key>
-			<real>275</real>
-			<key>ypos</key>
-			<real>520</real>
-		</dict>
 		<key>5458B216-89A2-4ABD-A7EE-2DED81E7ACFB</key>
 		<dict>
 			<key>colorindex</key>
@@ -1626,6 +1573,17 @@ sketchybar --trigger update-sidenote-count</string>
 			<real>280</real>
 			<key>ypos</key>
 			<real>1155</real>
+		</dict>
+		<key>771DD115-1E19-4CFC-AB74-649F9A758391</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>set current note, pass actions</string>
+			<key>xpos</key>
+			<real>310</real>
+			<key>ypos</key>
+			<real>375</real>
 		</dict>
 		<key>7FB369B3-370D-4F21-BC77-D64B743DFC09</key>
 		<dict>
@@ -1751,6 +1709,8 @@ sketchybar --trigger update-sidenote-count</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
+			<key>note</key>
+			<string>delete current</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1761,11 +1721,11 @@ sketchybar --trigger update-sidenote-count</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>pass "delete close"</string>
+			<string>pass "delete"</string>
 			<key>xpos</key>
-			<real>435</real>
+			<real>315</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>780</real>
 		</dict>
 		<key>D3F89D51-C7EA-4A95-8477-B40256917808</key>
 		<dict>
@@ -1831,10 +1791,12 @@ sketchybar --trigger update-sidenote-count</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
+			<key>note</key>
+			<string>copy + delete current</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>490</real>
 		</dict>
 		<key>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</key>
 		<dict>

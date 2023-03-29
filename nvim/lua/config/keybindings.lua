@@ -31,7 +31,11 @@ Keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again" })
 
 -- copy [l]ast [n] notification
 Keymap("n", "<leader>ln", function()
-	local history = require("notify").history()
+	local history = require("notify").history({})
+	if not history then
+		vim.notify("No Notification in this session.", LogWarn)
+		return
+	end
 	local lastNotify = history[#history]
 	local msg = table.concat(lastNotify.message, "\n")
 	Fn.setreg("+", msg)
@@ -468,12 +472,12 @@ Keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = tru
 Keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { desc = "󰒕Previous Diagnostic" })
 -- stylua: ignore end
 
-Keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕Show Diagnostic" })
+Keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Show Diagnostic" })
 -- fallback for languages without an action LSP
 Keymap("n", "gs", function() Cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
 
 -- actions defined globally so null-ls can use them without LSP
-Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕Code Action" })
+Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 
 -- copy breadcrumbs (nvim navic)
 Keymap("n", "<D-b>", function()
@@ -482,6 +486,10 @@ Keymap("n", "<D-b>", function()
 		return
 	end
 	local rawdata = require("nvim-navic").get_data()
+	if not rawdata then
+		vim.notify("No Breadcrumbs available", LogWarn)
+		return
+	end
 	local breadcrumbs = ""
 	for _, v in pairs(rawdata) do
 		breadcrumbs = breadcrumbs .. v.name .. "."
@@ -526,22 +534,6 @@ Autocmd("LspAttach", {
 		end, { buffer = true, desc = "󰒕 Save & Format" })
 	end,
 })
-
--- copy breadcrumbs (nvim navic)
-Keymap("n", "<D-b>", function()
-	if require("nvim-navic").is_available() then
-		local rawdata = require("nvim-navic").get_data()
-		local breadcrumbs = ""
-		for _, v in pairs(rawdata) do
-			breadcrumbs = breadcrumbs .. v.name .. "."
-		end
-		breadcrumbs = breadcrumbs:sub(1, -2)
-		Fn.setreg("+", breadcrumbs)
-		vim.notify("COPIED\n" .. breadcrumbs)
-	else
-		vim.notify("No Breadcrumbs available.", LogWarn)
-	end
-end, { desc = "󰒕 Copy Breadcrumbs" })
 
 --------------------------------------------------------------------------------
 -- GIT
