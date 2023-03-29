@@ -440,8 +440,7 @@ osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR"</stri
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>pass edit "{query}"
-pass git push</string>
+				<string>pass edit "{query}" &amp;&amp; pass git push</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>
