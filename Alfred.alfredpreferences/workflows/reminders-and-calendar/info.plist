@@ -45,19 +45,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>6C5BC683-6B2D-4CFA-8923-6A4B2776AC1F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6DAA6DCE-3DEA-4C84-AFD0-6BE7F6DDE398</key>
 		<array>
 			<dict>
@@ -550,27 +537,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>tel</string>
-				<key>subtext</key>
-				<string>with Facetime</string>
-				<key>text</key>
-				<string>Call '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>6C5BC683-6B2D-4CFA-8923-6A4B2776AC1F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -636,6 +602,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>name</key>
+				<string>Call with Facetime</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.contact</string>
+			<key>uid</key>
+			<string>6DAA6DCE-3DEA-4C84-AFD0-6BE7F6DDE398</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -678,40 +657,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>name</key>
-				<string>Call with Facetime</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.contact</string>
-			<key>uid</key>
-			<string>6DAA6DCE-3DEA-4C84-AFD0-6BE7F6DDE398</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Add Event to Calendar</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>C539C739-DFEF-4D04-8767-7244B05540C3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -745,6 +690,27 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Add Event to Calendar</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>C539C739-DFEF-4D04-8767-7244B05540C3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -764,16 +730,16 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>840</real>
+			<real>795</real>
 			<key>ypos</key>
-			<real>825</real>
+			<real>710</real>
 		</dict>
 		<key>3B742E23-7911-4DD4-A24D-49E02F1AF0AC</key>
 		<dict>
 			<key>xpos</key>
-			<real>655</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>460</real>
 		</dict>
 		<key>42A7B9B4-EB45-4703-9232-AF5C99D4512E</key>
 		<dict>
@@ -804,28 +770,21 @@
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
-		<key>6C5BC683-6B2D-4CFA-8923-6A4B2776AC1F</key>
-		<dict>
-			<key>xpos</key>
-			<real>650</real>
-			<key>ypos</key>
-			<real>465</real>
-		</dict>
 		<key>6DAA6DCE-3DEA-4C84-AFD0-6BE7F6DDE398</key>
 		<dict>
 			<key>xpos</key>
-			<real>655</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>690</real>
+			<real>575</real>
 		</dict>
 		<key>7107C86B-1891-4DC6-B157-D10F2AEF3358</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>655</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>825</real>
+			<real>710</real>
 		</dict>
 		<key>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</key>
 		<dict>
@@ -877,9 +836,9 @@
 		<key>C563AE61-3FFD-4FB3-B63B-7D3655C138BE</key>
 		<dict>
 			<key>xpos</key>
-			<real>1010</real>
+			<real>965</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>460</real>
 		</dict>
 		<key>C6DAAB1D-609E-4930-B1D7-F7D3F3D59BC6</key>
 		<dict>
@@ -902,9 +861,9 @@
 		<key>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</key>
 		<dict>
 			<key>xpos</key>
-			<real>850</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>460</real>
 		</dict>
 		<key>E206A8A9-ADE8-4A8D-AA62-AC94A971FBB3</key>
 		<dict>
