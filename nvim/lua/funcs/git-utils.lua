@@ -87,6 +87,22 @@ local function processCommitMsg(commitMsg)
 	return true, commitMsg
 end
 
+---@param on boolean on/off
+local function hlTooLongCommitMsgs(on)
+	if on then
+	vim.api.nvim_create_augroup("tooLongCommitMsg", {})
+	vim.api.nvim_create_autocmd("FileType", {
+		group = "tooLongCommitMsg",
+		pattern = "DressingInput",
+		callback = function()
+			vim.cmd.highlight("commitmsg", "guibg=#E06C75")
+			vim.g.matchid = fn.matchadd("commitmsg", [[.\{50}\zs.*\ze]])
+		end,
+	})
+else
+end
+end
+
 --------------------------------------------------------------------------------
 
 ---Choose a GitHub issues from the current repo to open in the browser
@@ -153,11 +169,10 @@ local function shimmeringFocusBuild(commitMsg)
 	fn.jobstart(command, gitShellOpts)
 end
 
-
 function M.amendNoEditPushForce()
 	if not isInGitRepo() then return end
 	local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
-	vim.notify('󰊢 Amend-No-Edit & Force Push…\n("'..lastCommitMsg..'")')
+	vim.notify('󰊢 Amend-No-Edit & Force Push…\n("' .. lastCommitMsg .. '")')
 	fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
 end
 
@@ -180,7 +195,7 @@ function M.amendAndPushForce(prefillMsg)
 			return
 		end
 
-		vim.notify('󰊢 Amend & Force Push…\n"'..newMsg..'"')
+		vim.notify('󰊢 Amend & Force Push…\n"' .. newMsg .. '"')
 		fn.jobstart(
 			"git add -A && git commit --amend -m '" .. newMsg .. "' ; git push --force",
 			gitShellOpts
@@ -194,7 +209,13 @@ function M.addCommitPush(prefillMsg)
 
 	if not prefillMsg then prefillMsg = "" end
 
-	vim.ui.input({ prompt = "Commit Message:", default = prefillMsg }, function(commitMsg)
+
+	vim.ui.input({ prompt = "󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
+		-- clear the previously setup hl again, so other Input fields are not affected
+		-- also done early, so the highlight is even deleted on aborting the input
+		vim.api.nvim_del_augroup_by_name("tooLongCommitMsg")
+		fn.matchdelete(vim.g.matchid)
+
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
 
@@ -202,6 +223,7 @@ function M.addCommitPush(prefillMsg)
 			M.addCommitPush(newMsg)
 			return
 		end
+
 
 		-- run Shimmering Focus specific actions instead
 		if Expand("%") == "source.css" then

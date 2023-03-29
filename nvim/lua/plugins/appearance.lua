@@ -109,19 +109,12 @@ return {
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
-		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "DressingInput",
-				callback = function() vim.fn.matchadd("commitmsg", [[.\{50,}]]) end,
-			})
-		end,
 		opts = {
 			input = {
 				insert_only = false, -- enable normal mode
 				border = BorderStyle,
 				relative = "win",
-				max_width = 50, -- length of git commit message as visual guide
-				min_width = 50,
+				min_width = 80,
 				win_options = {
 					sidescrolloff = 0,
 					winblend = 0, -- weird shining through

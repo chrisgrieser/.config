@@ -44,7 +44,6 @@ local function customHighlights()
 	Fn.matchadd( "myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
 
 	setHighlight("Overnesting", "guibg=#E06C75")
-	setHighlight("commitmsg", "guibg=#E06C75") -- for dressing
 	Fn.matchadd("Overnesting", ("\t"):rep(8) .. "\t*")
 
 	setHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
