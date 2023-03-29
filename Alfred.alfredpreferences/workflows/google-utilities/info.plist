@@ -29,15 +29,51 @@
 				<false/>
 			</dict>
 		</array>
-		<key>987F8BB9-8E64-4E46-8ED2-14E1A4412805</key>
+		<key>371F9B42-4370-4A8E-8025-ED527A733984</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A92D79C6-20D7-4333-93E9-61CABC92891A</string>
+				<string>5A2AE042-71CD-47D6-9A72-3373D8EDE642</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>874A59E8-7104-45AF-9C3C-8D9DC1E7C438</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5A2AE042-71CD-47D6-9A72-3373D8EDE642</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0176D911-0B3A-4803-BC08-D71747912549</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>987F8BB9-8E64-4E46-8ED2-14E1A4412805</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>371F9B42-4370-4A8E-8025-ED527A733984</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Copy Ducky URL (Searchlink)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -86,6 +122,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>0176D911-0B3A-4803-BC08-D71747912549</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -95,22 +152,51 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>quicklook-url.sh</string>
+				<string>run-searchlink-and-copy.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A92D79C6-20D7-4333-93E9-61CABC92891A</string>
+			<string>5A2AE042-71CD-47D6-9A72-3373D8EDE642</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>371F9B42-4370-4A8E-8025-ED527A733984</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>"{query}"</string>
+				<key>title</key>
+				<string>⏳ SearchLink running...</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>874A59E8-7104-45AF-9C3C-8D9DC1E7C438</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>subtext</key>
-				<string>⌘: Ducky, ⌥: Autocomplete</string>
+				<string>⌘: Ducky   ⌥: Autocomplete   ⇧: Copy Ducky</string>
 				<key>text</key>
 				<string>Google: {query}</string>
 			</dict>
@@ -139,6 +225,27 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>CD07C041-94C2-4BD6-A732-DDF99E139981</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://duckduckgo.com/?q={query}+!ducky</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -189,32 +296,20 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://duckduckgo.com/?q={query}+!ducky</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0176D911-0B3A-4803-BC08-D71747912549</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>430</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
 		<key>28F85017-1FCE-491E-9A6D-4A426338174F</key>
 		<dict>
 			<key>colorindex</key>
@@ -222,39 +317,61 @@
 			<key>note</key>
 			<string>autocomplete query</string>
 			<key>xpos</key>
-			<real>220</real>
+			<real>180</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>430</real>
+		</dict>
+		<key>371F9B42-4370-4A8E-8025-ED527A733984</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>110</real>
+		</dict>
+		<key>5A2AE042-71CD-47D6-9A72-3373D8EDE642</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>run SearchLink</string>
+			<key>xpos</key>
+			<real>285</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+		<key>874A59E8-7104-45AF-9C3C-8D9DC1E7C438</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>285</real>
+			<key>ypos</key>
+			<real>145</real>
 		</dict>
 		<key>987F8BB9-8E64-4E46-8ED2-14E1A4412805</key>
 		<dict>
 			<key>xpos</key>
-			<real>70</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>245</real>
-		</dict>
-		<key>A92D79C6-20D7-4333-93E9-61CABC92891A</key>
-		<dict>
-			<key>note</key>
-			<string>quicklook</string>
-			<key>xpos</key>
-			<real>555</real>
-			<key>ypos</key>
-			<real>105</real>
+			<real>295</real>
 		</dict>
 		<key>CD07C041-94C2-4BD6-A732-DDF99E139981</key>
 		<dict>
 			<key>xpos</key>
-			<real>555</real>
+			<real>515</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>295</real>
 		</dict>
 		<key>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>555</real>
+			<real>515</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>430</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
