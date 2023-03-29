@@ -28,6 +28,14 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
+	{ -- description
+		"folke/trouble.nvim",
+		cmd = "Trouble",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		opts = {
+			height = 15,
+		}
+	},
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",
 		cmd = "Glance",
@@ -39,10 +47,15 @@ return {
 				bottom_char = BorderHorizontal,
 			},
 			list = { width = 0.4 },
+			-- HACK https://github.com/DNLHC/glance.nvim/issues/45
 			hooks = {
+				before_open = function(results, open, _)
+					vim.cmd.mkview(3)
+					open(results)
+				end,
 				after_close = function()
-					---@diagnostic disable-next-line: param-type-mismatch
-					vim.cmd.loadview(3)
+					local isOnLastLine = vim.fn.line(".") == vim.fn.line("$")
+					if isOnLastLine then vim.cmd.loadview(3) end
 				end,
 			},
 		},
