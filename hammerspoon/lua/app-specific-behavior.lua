@@ -155,7 +155,7 @@ Wf_terminal = Wf.new({ "alacritty", "Alacritty" })
 -- QuickLook: bigger window
 Wf_quicklook = Wf
 	.new(true) -- BUG for some reason, restricting this to "Finder" does not work
-	:setOverrideFilter({ allowRoles = "Quick Look" })
+	:setOverrideFilter({ allowTitles = {"^Quick Look$", "^qlmanage$"} })
 	:subscribe(Wf.windowCreated, function(newWin)
 		local _, sel =
 			Applescript([[tell application "Finder" to return POSIX path of (selection as alias)]])

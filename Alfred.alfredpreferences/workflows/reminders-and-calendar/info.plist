@@ -19,11 +19,63 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3B742E23-7911-4DD4-A24D-49E02F1AF0AC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>578C08D0-C681-4E8A-AC1A-63359A0F0C34</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>12847B13-277D-4EF2-B65C-2F594D522510</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6C5BC683-6B2D-4CFA-8923-6A4B2776AC1F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6DAA6DCE-3DEA-4C84-AFD0-6BE7F6DDE398</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7107C86B-1891-4DC6-B157-D10F2AEF3358</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2893A1EE-7E10-4249-BEE6-08B0F14FEBFB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -110,6 +162,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C563AE61-3FFD-4FB3-B63B-7D3655C138BE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E206A8A9-ADE8-4A8D-AA62-AC94A971FBB3</key>
 		<array>
 			<dict>
@@ -170,30 +235,9 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Calendar &amp; Reminders</string>
+	<string>Calendar &amp; Reminders &amp; Phone &amp; Map</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Added</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>42AD9AB0-3C2B-48E4-B5F5-6391B8491DAF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -241,19 +285,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>subtext</key>
-				<string>Format: YYYY-MM-DD</string>
-				<key>text</key>
-				<string>New Start Date: '{query}'</string>
-				<key>withspace</key>
+				<key>lastpathcomponent</key>
 				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Added</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>A0AD41AF-569F-405D-BB88-29B96C8DF007</string>
+			<string>42AD9AB0-3C2B-48E4-B5F5-6391B8491DAF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -275,6 +321,25 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>578C08D0-C681-4E8A-AC1A-63359A0F0C34</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>subtext</key>
+				<string>Format: YYYY-MM-DD</string>
+				<key>text</key>
+				<string>New Start Date: '{query}'</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A0AD41AF-569F-405D-BB88-29B96C8DF007</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -392,23 +457,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{var:selection}</string>
-				<key>title</key>
-				<string>✅ Added "{var:reminderText}"</string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>add-reminder.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>42A7B9B4-EB45-4703-9232-AF5C99D4512E</string>
+			<string>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -462,6 +529,90 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{var:selection}</string>
+				<key>title</key>
+				<string>✅ Added "{var:reminderText}"</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>42A7B9B4-EB45-4703-9232-AF5C99D4512E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>tel</string>
+				<key>subtext</key>
+				<string>with Facetime</string>
+				<key>text</key>
+				<string>Call '{query}'</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>6C5BC683-6B2D-4CFA-8923-6A4B2776AC1F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Call with Facetime</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>3B742E23-7911-4DD4-A24D-49E02F1AF0AC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>tel://{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -471,14 +622,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>add-reminder.applescript</string>
+				<string>click-call.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</string>
+			<string>C563AE61-3FFD-4FB3-B63B-7D3655C138BE</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -527,6 +678,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>name</key>
+				<string>Call with Facetime</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.contact</string>
+			<key>uid</key>
+			<string>6DAA6DCE-3DEA-4C84-AFD0-6BE7F6DDE398</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -545,6 +709,42 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Open Adress in Maps</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>7107C86B-1891-4DC6-B157-D10F2AEF3358</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>searcher</key>
+				<integer>1635216737</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemwebsearch</string>
+			<key>uid</key>
+			<string>2893A1EE-7E10-4249-BEE6-08B0F14FEBFB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -558,6 +758,22 @@
 			<real>180</real>
 			<key>ypos</key>
 			<real>190</real>
+		</dict>
+		<key>2893A1EE-7E10-4249-BEE6-08B0F14FEBFB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>840</real>
+			<key>ypos</key>
+			<real>825</real>
+		</dict>
+		<key>3B742E23-7911-4DD4-A24D-49E02F1AF0AC</key>
+		<dict>
+			<key>xpos</key>
+			<real>655</real>
+			<key>ypos</key>
+			<real>575</real>
 		</dict>
 		<key>42A7B9B4-EB45-4703-9232-AF5C99D4512E</key>
 		<dict>
@@ -587,6 +803,29 @@
 			<real>35</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>6C5BC683-6B2D-4CFA-8923-6A4B2776AC1F</key>
+		<dict>
+			<key>xpos</key>
+			<real>650</real>
+			<key>ypos</key>
+			<real>465</real>
+		</dict>
+		<key>6DAA6DCE-3DEA-4C84-AFD0-6BE7F6DDE398</key>
+		<dict>
+			<key>xpos</key>
+			<real>655</real>
+			<key>ypos</key>
+			<real>690</real>
+		</dict>
+		<key>7107C86B-1891-4DC6-B157-D10F2AEF3358</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>655</real>
+			<key>ypos</key>
+			<real>825</real>
 		</dict>
 		<key>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</key>
 		<dict>
@@ -635,6 +874,13 @@
 			<key>ypos</key>
 			<real>735</real>
 		</dict>
+		<key>C563AE61-3FFD-4FB3-B63B-7D3655C138BE</key>
+		<dict>
+			<key>xpos</key>
+			<real>1010</real>
+			<key>ypos</key>
+			<real>575</real>
+		</dict>
 		<key>C6DAAB1D-609E-4930-B1D7-F7D3F3D59BC6</key>
 		<dict>
 			<key>colorindex</key>
@@ -652,6 +898,13 @@
 			<real>395</real>
 			<key>ypos</key>
 			<real>260</real>
+		</dict>
+		<key>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</key>
+		<dict>
+			<key>xpos</key>
+			<real>850</real>
+			<key>ypos</key>
+			<real>575</real>
 		</dict>
 		<key>E206A8A9-ADE8-4A8D-AA62-AC94A971FBB3</key>
 		<dict>

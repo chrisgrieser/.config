@@ -176,9 +176,12 @@ Keymap("n", "za", "1z=", { desc = "󰓆 autofix" }) -- [a]utofix word under curs
 ---add word under cursor to vale dictionary
 ---@param mode string accept|reject
 local function valeWord(mode)
-	vim.opt_local.iskeyword:remove("_")
+	-- remove word-delimiters for <cword>
+	local iskeywBefore = vim.opt_local.iskeyword:get() 
+	vim.opt_local.iskeyword:remove { "_", "-", "." } 
 	local word = Expand("<cword>")
-	vim.opt_local.iskeyword:append("_")
+	vim.opt_local.iskeyword = iskeywBefore
+
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
 	if not success then return end -- error message already by AppendToFile
 	Cmd.mkview(2)
