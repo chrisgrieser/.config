@@ -148,6 +148,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5838E38B-833B-40D5-B0F3-3D1AB4C92BE3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>72466122-ECAE-4FC2-AE72-6403B4FE3007</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>DAE52107-17B7-484A-94FD-81AB73840546</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Browse in Terminal</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7D148F55-D796-4CAC-A60A-71F4C2BCD8A7</key>
 		<array>
 			<dict>
@@ -1109,6 +1132,106 @@ echo -n "Bluetooth"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>vv</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading...</string>
+				<key>script</key>
+				<string>app = Application.currentApplication();
+app.includeStandardAdditions = true;
+volumeList = app.doShellScript("ls /Volumes");
+var single_volumes = volumeList.split("\r");
+
+//function to remove elements from Array
+function arrayRemove(arr, value) {
+    return arr.filter(function(elem){
+        return !elem.includes(value);
+    });
+}
+var single_volumes = arrayRemove(single_volumes, "TimeMachine");
+var single_volumes = arrayRemove(single_volumes, "Macintosh");
+var single_volumes = arrayRemove(single_volumes, "HDD");
+var single_volumes = arrayRemove(single_volumes, "SSD");
+
+let volume_array = [];
+if (single_volumes.length == 0) {
+    volume_array.push ({
+        'title': "No mounted volume recognized.",
+        'subtitle': "Press [Esc] to abort.",
+        'arg': "no volume"
+    });
+} else {
+    single_volumes.forEach(element =&gt; {
+        let disk_space = app.doShellScript('df -h | grep "' + element + '" | cut -c 16-42');
+        disk_space = disk_space.replace(/^(.{6}) (.{6}) (.{6}) *(.*)/gm,"Total:$1   Available:$3   Used:$2 ($4)");
+        volume_array.push ({
+            'title': element,
+            'subtitle': disk_space,
+            'arg': "/Volumes/"+ element
+        })
+    });
+}
+
+JSON.stringify({ 'items': volume_array });
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>volume-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Select a Volume</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>5838E38B-833B-40D5-B0F3-3D1AB4C92BE3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>72466122-ECAE-4FC2-AE72-6403B4FE3007</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1151,6 +1274,19 @@ echo -n "WiFi"</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>CACB4DE4-F9A3-4981-AD0F-D34E76816F74</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>DAE52107-17B7-484A-94FD-81AB73840546</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1653,6 +1789,13 @@ echo -n "WiFi"</string>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
+		<key>5838E38B-833B-40D5-B0F3-3D1AB4C92BE3</key>
+		<dict>
+			<key>xpos</key>
+			<real>675</real>
+			<key>ypos</key>
+			<real>895</real>
+		</dict>
 		<key>6BF4A116-C3FE-4B51-BFF9-65DE98E2EAD1</key>
 		<dict>
 			<key>colorindex</key>
@@ -1661,6 +1804,13 @@ echo -n "WiFi"</string>
 			<real>485</real>
 			<key>ypos</key>
 			<real>320</real>
+		</dict>
+		<key>72466122-ECAE-4FC2-AE72-6403B4FE3007</key>
+		<dict>
+			<key>xpos</key>
+			<real>885</real>
+			<key>ypos</key>
+			<real>895</real>
 		</dict>
 		<key>7D148F55-D796-4CAC-A60A-71F4C2BCD8A7</key>
 		<dict>
@@ -1825,6 +1975,13 @@ echo -n "WiFi"</string>
 			<real>185</real>
 			<key>ypos</key>
 			<real>335</real>
+		</dict>
+		<key>DAE52107-17B7-484A-94FD-81AB73840546</key>
+		<dict>
+			<key>xpos</key>
+			<real>885</real>
+			<key>ypos</key>
+			<real>1025</real>
 		</dict>
 		<key>E0D44BD2-FD8D-4010-ACEF-CA1859174163</key>
 		<dict>

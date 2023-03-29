@@ -596,11 +596,11 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>adguard</string>
+				<string>user rules</string>
 				<key>subtext</key>
-				<string>User Filters</string>
-				<key>text</key>
 				<string>Adguard</string>
+				<key>text</key>
+				<string>User Rules</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -823,6 +823,8 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
+			<key>note</key>
+			<string>adguard user rules</string>
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
