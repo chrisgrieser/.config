@@ -146,9 +146,7 @@ local function setupAllLsps()
 	-- INFO must be before the lsp-config setup of lua-ls
 	require("neodev").setup {
 		library = {
-			-- only enabling specific plugins, since some plugins do not
-			-- add proper annotations, resulting in false errors
-			plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+			plugins = true, -- not perfect: https://github.com/folke/neodev.nvim/issues/148
 		},
 	}
 
