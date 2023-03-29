@@ -33,24 +33,23 @@ return {
 		"dnlhc/glance.nvim",
 		cmd = "Glance",
 		opts = {
-			height = 15,
+			height = 20,
 			border = {
 				enable = true,
 				top_char = BorderHorizontal,
 				bottom_char = BorderHorizontal,
 			},
-			list = { width = 0.4 },
+			list = { width = 0.35 },
 			-- HACK https://github.com/DNLHC/glance.nvim/issues/45
-			-- hooks = {
-			-- 	before_open = function(results, open, _)
-			-- 		vim.cmd.mkview(3)
-			-- 		open(results)
-			-- 	end,
-			-- 	after_close = function()
-			-- 		local isOnLastLine = vim.fn.line(".") == vim.fn.line("$")
-			-- 		if isOnLastLine then vim.cmd.loadview(3) end
-			-- 	end,
-			-- },
+			hooks = {
+				before_open = function(results, open, _)
+					vim.opt_local.scrolloff = 0
+					open(results)
+				end,
+				after_close = function()
+					vim.opt_local.scrolloff = vim.opt_global.scrolloff:get()
+				end,
+			},
 		},
 	},
 	{ -- signature hints
