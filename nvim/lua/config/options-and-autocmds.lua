@@ -26,7 +26,7 @@ end
 
 -- GUI
 -- https://www.programmingfonts.org/#oxygen
-opt.guifont = "JetBrainsMonoNL Nerd Font:h26" 
+opt.guifont = "JetBrainsMonoNL Nerd Font:h26"
 
 opt.guicursor = {
 	"n-sm:block",
@@ -104,7 +104,7 @@ opt.timeoutlen = 600 -- also affects duration until which-key is shown
 -- PATH (for `gf`)
 
 -- pwd is set via projects.nvim
--- add pwd 
+-- add pwd
 Autocmd("DirChanged", {
 	callback = function() opt.path:append(vim.loop.cwd()) end,
 })
@@ -243,6 +243,17 @@ Autocmd("BufWinLeave", {
 Autocmd("BufWinEnter", {
 	pattern = "?*",
 	callback = function() remember("load") end,
+})
+
+--------------------------------------------------------------------------------
+-- Add missing buffer names
+Autocmd("FileType", {
+	pattern = {"Glance", "lazy"},
+	callback = function()
+		local name = vim.fn.expand("<amatch>")
+		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize
+		vim.api.nvim_buf_set_name(0, name)
+	end,
 })
 
 --------------------------------------------------------------------------------

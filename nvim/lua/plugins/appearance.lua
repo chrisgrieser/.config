@@ -41,10 +41,8 @@ return {
 					color = "#7f7f7f",
 					name = "Applescript",
 				},
-				lazy = {
-					icon = "",
-					name = "Lazy",
-				},
+				lazy = { icon = "", name = "Lazy" },
+				Glance = { icon = "󰒕", name = "Glance" },
 			},
 		},
 	},
