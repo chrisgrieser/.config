@@ -82,11 +82,6 @@ return {
 		ft = { "markdown", "text" },
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
 	},
-	{ -- Command Palette
-		"mrjones2014/legendary.nvim",
-		-- event = "VeryLazy",
-		config = true,
-	},
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -99,7 +94,7 @@ return {
 			},
 			hidden = { "<Plug>" },
 			window = {
-				border = { "", "─", "", "" }, -- no border to the side to save space
+				border = { "", BorderHorizontal, "", "" }, -- only horizontal border to save space
 				padding = { 0, 0, 0, 0 },
 				margin = { 0, 0, 0, 0 },
 			},

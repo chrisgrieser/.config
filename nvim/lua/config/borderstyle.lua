@@ -11,12 +11,16 @@ function M.set(str)
 
 	if str == "single" then
 		BorderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+		BorderHorizontal = "─"
 	elseif str == "double" then
 		BorderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
+		BorderHorizontal = "═"
 	elseif str == "rounded" then
 		BorderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+		BorderHorizontal = "─"
 	elseif str == "none" then
 		BorderChars = { "", "", "", "", "", "", "", "" }
+		BorderHorizontal = ""
 	end
 	-- default: rounded
 	if not BorderChars then BorderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" } end

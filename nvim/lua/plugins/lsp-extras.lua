@@ -9,7 +9,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			require("nvim-navic").attach(client, bufnr)
 		end
 
-		if capabilities.inlayHintProvider then require("lsp-inlayhints").on_attach(client, bufnr) end
+		if capabilities.inlayHintProvider then
+			require("lsp-inlayhints").on_attach(client, bufnr, false)
+		end
 	end,
 })
 
@@ -24,6 +26,20 @@ return {
 			separator = "  ",
 			depth_limit = 8,
 			depth_limit_indicator = "…",
+		},
+	},
+	{ -- better references/definitions
+		"dnlhc/glance.nvim",
+		cmd = "Glance",
+		opts = {
+			height = 20,
+			border = {
+				enable = true,
+				top_char = BorderHorizontal,
+				bottom_char = BorderHorizontal,
+			},
+			list = { width = 0.4 },
+			theme = { mode = "brighten" },
 		},
 	},
 	{ -- signature hints
