@@ -20,7 +20,9 @@ local function setHigherBrightnessDuringDay()
 	if not hasBrightnessSensor then return end
 
 	local brightness
-	if hs.brightness.ambient() > 120 then
+	if BetweenTime(1, 7) then  -- when turning of projector at night
+		brightness = 0
+	elseif hs.brightness.ambient() > 120 then
 		brightness = 1
 	elseif hs.brightness.ambient() > 90 then
 		brightness = 0.9
@@ -44,27 +46,22 @@ local function workLayout()
 	dockSwitcher("work")
 	hs.execute("sketchybar --set clock popup.drawing=true")
 
-	-- start apps
+	-- apps
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "BetterTouchTool" }
 	require("lua.private").closer()
-	local appsToOpen = { "Discord", "Mimestream", "Vivaldi", "Twitter" }
+
+	local appsToOpen = { "Discord", "Mimestream", "Vivaldi" }
 	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	OpenApp(appsToOpen)
+	OpenApp("Twitter")
 
 	-- layout them when they all run
-	hs.timer.waitUntil(
-		function() return AppIsRunning (appsToOpen) end,
-		function()
-			hs.layout.apply {
-				{ "Vivaldi", nil, IMacDisplay, PseudoMaximized, nil, nil },
-				{ "Discord", nil, IMacDisplay, PseudoMaximized, nil, nil },
-				{ "Mimestream", nil, IMacDisplay, PseudoMaximized, nil, nil },
-				{ "Slack", nil, IMacDisplay, PseudoMaximized, nil, nil },
-			}
-			RestartApp("AltTab") -- FIX AltTab not picking up changes
-		end,
-		0.2
-	)
+	hs.timer.waitUntil(function() return AppIsRunning(appsToOpen) end, function()
+		for _, appName in pairs(appsToOpen) do
+			MoveResize(App(appName):mainWindow(), PseudoMaximized)		
+		end
+		RestartApp("AltTab") -- fix AltTab not picking up changes
+	end, 0.2)
 
 	print("🔲 WorkLayout: done")
 end
@@ -73,6 +70,7 @@ local function movieLayout()
 	print("🔲 MovieLayout: loading")
 	local targetMode = IsAtMother() and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
+	IMacDisplay:setBrightness(0)
 	SetDarkmode(true)
 	HoleCover("remove")
 
@@ -95,8 +93,6 @@ local function movieLayout()
 	print("🔲 MovieModeLayout: done")
 end
 
-
-
 --------------------------------------------------------------------------------
 -- TRIGGERS FOR LAYOUT CHANGE
 
@@ -110,13 +106,7 @@ local function selectLayout()
 end
 
 -- 1. Change of screen numbers
--- (also always darkens iMac)
-DisplayCountWatcher = hs.screen.watcher
-	.new(function()
-		selectLayout()
-		IMacDisplay:setBrightness(0)
-	end)
-	:start()
+DisplayCountWatcher = hs.screen.watcher.new(selectLayout):start()
 
 -- 2. Hotkey
 Hotkey(Hyper, "home", selectLayout)
