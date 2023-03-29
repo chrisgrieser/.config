@@ -24,22 +24,11 @@ end
 
 --------------------------------------------------------------------------------
 
--- GUI
--- https://www.programmingfonts.org/#oxygen
-opt.guifont = "JetBrainsMonoNL Nerd Font:h26"
-
-opt.guicursor = {
-	"n-sm:block",
-	"i-ci-c-ve:ver25",
-	"r-cr-o-v:hor10",
-	"a:blinkwait200-blinkoff500-blinkon700",
-}
-
 -- Search
 opt.smartcase = true
 opt.ignorecase = true
 
--- Flash when closing a bracket
+-- Briefly flash when closing a bracket
 opt.showmatch = true
 opt.matchtime = 1 -- deci-seconds (higher amount feels laggy)
 

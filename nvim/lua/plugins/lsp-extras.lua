@@ -39,6 +39,16 @@ return {
 				bottom_char = BorderHorizontal,
 			},
 			list = { width = 0.35 },
+			hooks = {
+				-- jump directly to definition if there is only one https://github.com/dnlhc/glance.nvim#before_open
+				before_open = function(results, open, jump)
+					if #results == 1 then
+						jump() 
+					else
+						open() 
+					end
+				end,
+			},
 		},
 	},
 	{ -- signature hints
