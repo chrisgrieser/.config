@@ -71,6 +71,14 @@ local function telescopeConfig()
 			},
 		},
 		pickers = {
+			git_status = { prompt_prefix = "󰊢 ", show_untracked = true },
+			treesitter = { prompt_prefix = " ", show_line = false },
+			git_commits = { prompt_prefix = "󰊢 ", initial_mode = "normal" },
+			keymaps = { prompt_prefix = " ", modes = { "n", "i", "c", "x", "o", "t" } },
+			oldfiles = { prompt_prefix = "󰋚 " },
+			highlights = { prompt_prefix = " " },
+			loclist = { prompt_prefix = " ", trim_text = true },
+			live_grep = { prompt_prefix = " ", disable_coordinates = true },
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
 				-- markdown headings are symbol-type "string", therefore shouldn't
@@ -83,19 +91,6 @@ local function telescopeConfig()
 				ignore_symbols = { "string", "boolean", "number" },
 				fname_width = 17,
 			},
-			git_status = {
-				prompt_prefix = "󰊢 ",
-				show_untracked = true,
-			},
-			treesitter = { prompt_prefix = " ", show_line = false },
-			git_commits = {
-				prompt_prefix = "󰊢 ",
-				initial_mode = "normal",
-			},
-			keymaps = { prompt_prefix = " ", modes = { "n", "i", "c", "x", "o", "t" } },
-			oldfiles = { prompt_prefix = "󰋚 " },
-			highlights = { prompt_prefix = " " },
-			loclist = { trim_text = true, prompt_prefix = " " },
 			buffers = {
 				prompt_prefix = "󰽙 ",
 				ignore_current_buffer = false,
@@ -106,10 +101,6 @@ local function telescopeConfig()
 				results_title = false,
 				theme = "cursor",
 				layout_config = { cursor = { width = 0.5 } },
-			},
-			live_grep = {
-				disable_coordinates = true,
-				prompt_prefix = " ",
 			},
 			spell_suggest = {
 				initial_mode = "normal",
@@ -131,10 +122,10 @@ local function telescopeConfig()
 				auto_depth = true, -- unlimited depth as soon as prompt is non-empty
 				hidden = true,
 				display_stat = false,
-				git_status = false,
+				git_status = false, -- does not work?
 				group = true,
 				hide_parent_dir = false,
-				select_buffer = false,
+				select_buffer = true,
 				mappings = {
 					i = {
 						-- mappings should be consistent with nvim-ghengis mappings

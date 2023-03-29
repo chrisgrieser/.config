@@ -164,7 +164,7 @@ end
 -- simple barbecue,nvim replacement
 local function pathToProjectRoot()
 	if not require("nvim-navic").is_available() then return "" end
-	local parentPath = vim.fn.expand("%:p")
+	local parentPath = vim.fn.expand("%:p:h")
 	local projectRelPath = parentPath:sub(#vim.loop.cwd() + 2)
 	local nicerDisplay = projectRelPath:gsub("/", "  ") -- same separator as navic
 	return nicerDisplay
@@ -235,7 +235,7 @@ local lualineConfig = {
 			{ pathToProjectRoot, section_separators = topSeparators },
 		},
 		lualine_c = {
-			{ navicBreadcrumbs, section_separators = topSeparators, padding = { left = 0, right = 1}},
+			{ navicBreadcrumbs, section_separators = topSeparators },
 			{ function() return " " end, cond = require("nvim-navic").is_available }, -- dummy to avoid bar flickering
 		},
 		lualine_x = {
