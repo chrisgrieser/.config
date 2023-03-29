@@ -190,12 +190,13 @@ local M = {}
 ---switches words under the cursor to their opposite, e.g. `true` to `false`
 function M.flipWord()
 	-- determine word to check
-	local iskeywBefore = vim.opt.iskeyword:get() -- remove word-delimiters for <cword>
-	vim.opt.iskeyword:remove { "_", "-", "." }
+	local iskeywBefore = vim.opt.iskeyword:get()
+	vim.opt.iskeyword:remove { "_", "-", "." } -- remove word-delimiters for <cword>
 
 	-- TODO more precise retrieval of word under cursor
 	local cword = vim.fn.expand("<cword>")
 	local cBigword = vim.fn.expand("<cWORD>") -- check of cWORD needed to retrieve non-alphanumeric strings (e.g. "&&")
+	vim.opt.iskeyword = iskeywBefore
 
 	local alphaNumericUnderCursor = cBigword:find("[%a%d]")
 	local word = alphaNumericUnderCursor and cword or cBigword
@@ -249,7 +250,6 @@ function M.flipWord()
 		fallbackFn()
 	end
 
-	vim.opt.iskeyword = iskeywBefore
 end
 
 --------------------------------------------------------------------------------

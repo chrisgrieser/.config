@@ -6,11 +6,78 @@
 	<string>de.chris-grieser.pdf-renaming-helper</string>
 	<key>connections</key>
 	<dict>
+		<key>0E4A0733-E898-4FB7-BC62-446FBD10A76E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</key>
+		<array/>
+		<key>4D63817E-E093-44ED-99F7-2762E817BB90</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>53419BE9-8E0D-4F3E-9460-5F3E4DE84406</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>53419BE9-8E0D-4F3E-9460-5F3E4DE84406</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5BA10A69-99A4-4C37-A8B1-9C39FE1273E9</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>B8227F7E-A929-4447-8912-00AD8F5CB234</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>698B1D06-326B-43D2-8ABB-DE676CE3661A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>83E378DD-0BAE-4A5F-B0D5-20FE53C32A85</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8DDB7CE3-56BA-4890-A2A7-FC6E967C73AF</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -32,11 +99,47 @@
 				<false/>
 			</dict>
 		</array>
+		<key>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0E4A0733-E898-4FB7-BC62-446FBD10A76E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B42ED178-4437-4D4D-BEF0-63B085EF7730</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -53,7 +156,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>PDF Utils</string>
+	<string>PDF &amp; Pandoc Utils</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -70,6 +173,29 @@
 			<string>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/run-extraction.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -123,65 +249,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<true/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Open with Preview</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>5BA10A69-99A4-4C37-A8B1-9C39FE1273E9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Applications/Preview.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>B8227F7E-A929-4447-8912-00AD8F5CB234</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/run-extraction.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -215,11 +282,308 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Applications/Preview.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>B8227F7E-A929-4447-8912-00AD8F5CB234</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Open with Preview</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>5BA10A69-99A4-4C37-A8B1-9C39FE1273E9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>acodes</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Cheatsheet for PDF Annotation Extractor</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>83E378DD-0BAE-4A5F-B0D5-20FE53C32A85</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>qlmanage -p "./cheatsheet-pdf-annotation-extractor.md"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>8DDB7CE3-56BA-4890-A2A7-FC6E967C73AF</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"German","arg":"deu","subtitle":""},{"title":"English","arg":"eng","subtitle":""},{"title":"Bilingual: German &amp; English","arg":"eng+deu","subtitle":""}]</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Select Language of the PDF</string>
+				<key>title</key>
+				<string>OCRmyPDF</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ OCR complete</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+{query}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>run-ocrmypdf.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0E4A0733-E898-4FB7-BC62-446FBD10A76E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>name</key>
+				<string>Run OCR on the PDF</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>698B1D06-326B-43D2-8ABB-DE676CE3661A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>input_path</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳ running OCR...</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>call-pandoc.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>53419BE9-8E0D-4F3E-9460-5F3E4DE84406</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>dyn.ah62d4rv4ge8043a</string>
+					<string>net.daringfireball.markdown</string>
+				</array>
+				<key>name</key>
+				<string>Convert with Pandoc</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>4D63817E-E093-44ED-99F7-2762E817BB90</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0E4A0733-E898-4FB7-BC62-446FBD10A76E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>run ocrmypdf</string>
+			<key>xpos</key>
+			<real>400</real>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
 		<key>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</key>
 		<dict>
 			<key>colorindex</key>
@@ -229,6 +593,33 @@
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
+		<key>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>550</real>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
+		<key>4D63817E-E093-44ED-99F7-2762E817BB90</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>675</real>
+		</dict>
+		<key>53419BE9-8E0D-4F3E-9460-5F3E4DE84406</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>675</real>
+		</dict>
 		<key>5BA10A69-99A4-4C37-A8B1-9C39FE1273E9</key>
 		<dict>
 			<key>colorindex</key>
@@ -236,27 +627,67 @@
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>185</real>
+		</dict>
+		<key>698B1D06-326B-43D2-8ABB-DE676CE3661A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
+		<key>83E378DD-0BAE-4A5F-B0D5-20FE53C32A85</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>cheatsheet for PDF Annotation Extractor</string>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>185</real>
 		</dict>
 		<key>84C07023-C7E9-4DAD-8EF8-0700B1CB05E3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
+			<key>note</key>
+			<string>search PDFs</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
-		<key>B42ED178-4437-4D4D-BEF0-63B085EF7730</key>
+		<key>8DDB7CE3-56BA-4890-A2A7-FC6E967C73AF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>545</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
+		<key>B42ED178-4437-4D4D-BEF0-63B085EF7730</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>run PDF annotation extractor</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>390</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>30</real>
 		</dict>
 		<key>B8227F7E-A929-4447-8912-00AD8F5CB234</key>
 		<dict>
@@ -265,18 +696,47 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>185</real>
+		</dict>
+		<key>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>485</real>
+		</dict>
+		<key>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>380</real>
 		</dict>
 		<key>E37A9BDD-290E-4BCD-9832-06488718A4BD</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>run extraction</string>
 			<key>xpos</key>
-			<real>190</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>30</real>
+		</dict>
+		<key>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>show error messages</string>
+			<key>xpos</key>
+			<real>350</real>
+			<key>ypos</key>
+			<real>675</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
