@@ -45,25 +45,19 @@ function M.statusline()
 	-- abort when lsp loading or not capable of references
 	local currentBufNr = fn.bufnr()
 	local bufClients = lsp.get_active_clients { bufnr = currentBufNr }
-	local lspLoading = #(lsp.util.get_progress_messages()) > 0
+	local lspProgress = lsp.util.get_progress_messages()
+	local lspLoading = lspProgress.title and lspProgress.title:find("[Ll]oad")
 	local lspCapable = false
-	local isPyright = false
 	for _, client in pairs(bufClients) do
 		local capable = client.server_capabilities
 		if capable.referencesProvider and capable.definitionProvider then lspCapable = true end
-		if client.name == "pyright" then isPyright = true end
 	end
-	if 
-		fn.mode() ~= "n" 
-		or (lspLoading and not isPyright) -- FIX pyright bug where it's constantly loading
-		or not lspCapable 
-	then
-		return ""
-	end
+	if fn.mode() ~= "n" or lspLoading or not lspCapable then return "" end
 
 	-- trigger count, abort when none
 	requestLspRefCount() -- needs to be separated due to lsp calls being async
 	if lspCount.refWorkspace == 0 and lspCount.defWorkspace == 0 then return "" end
+	if not (lspCount.refWorkspace) then return "" end
 
 	-- display the count
 	local defs, refs = "", ""
