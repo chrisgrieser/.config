@@ -122,7 +122,7 @@ local function telescopeConfig()
 				auto_depth = true, -- unlimited depth as soon as prompt is non-empty
 				hidden = true,
 				display_stat = false,
-				git_status = false, -- does not work?
+				git_status = true, -- seems to sometimes be buggy
 				group = true,
 				hide_parent_dir = false,
 				select_buffer = true,

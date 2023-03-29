@@ -450,12 +450,11 @@ Keymap("n", "go", function()
 end, { desc = " Browse in Project" })
 
 Keymap("n", "gO", function()
-	local thisFolder = Expand("%:p:h")
 	require("telescope").extensions.file_browser.file_browser {
-		path = thisFolder,
-		prompt_title = thisFolder,
+		path = Expand("%:p:h"),
+		prompt_title = "󰝰 " .. Expand("%:p:h:t"),
 	}
-end, { desc = " Browse in Folder" })
+end, { desc = " Browse in current Folder" })
 -- stylua: ignore
 Keymap("n", "gl", function()
 	require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() }
