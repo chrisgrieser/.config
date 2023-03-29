@@ -87,20 +87,24 @@ local function processCommitMsg(commitMsg)
 	return true, commitMsg
 end
 
----@param on boolean on/off
+---@param on boolean true = highlights on, false = highlights off
 local function hlTooLongCommitMsgs(on)
 	if on then
-	vim.api.nvim_create_augroup("tooLongCommitMsg", {})
-	vim.api.nvim_create_autocmd("FileType", {
-		group = "tooLongCommitMsg",
-		pattern = "DressingInput",
-		callback = function()
-			vim.cmd.highlight("commitmsg", "guibg=#E06C75")
-			vim.g.matchid = fn.matchadd("commitmsg", [[.\{50}\zs.*\ze]])
-		end,
-	})
-else
-end
+		vim.api.nvim_create_augroup("tooLongCommitMsg", {})
+		vim.api.nvim_create_autocmd("FileType", {
+			group = "tooLongCommitMsg",
+			pattern = "DressingInput",
+			callback = function()
+				vim.cmd.highlight("commitmsg", "guibg=#E06C75")
+				vim.g.matchid = fn.matchadd("commitmsg", [[.\{50}\zs.*\ze]])
+			end,
+		})
+	else
+		-- clear the previously setup hl again, so other Input fields are not affected
+		-- also done early, so the highlight is even deleted on aborting the input
+		vim.api.nvim_del_augroup_by_name("tooLongCommitMsg")
+		fn.matchdelete(vim.g.matchid)
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -206,15 +210,11 @@ end
 ---@param prefillMsg? string
 function M.addCommitPush(prefillMsg)
 	if not isInGitRepo() then return end
-
 	if not prefillMsg then prefillMsg = "" end
-
+	hlTooLongCommitMsgs(true)
 
 	vim.ui.input({ prompt = "󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
-		-- clear the previously setup hl again, so other Input fields are not affected
-		-- also done early, so the highlight is even deleted on aborting the input
-		vim.api.nvim_del_augroup_by_name("tooLongCommitMsg")
-		fn.matchdelete(vim.g.matchid)
+		hlTooLongCommitMsgs(false) -- early, so also done on cancellation
 
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
@@ -223,7 +223,6 @@ function M.addCommitPush(prefillMsg)
 			M.addCommitPush(newMsg)
 			return
 		end
-
 
 		-- run Shimmering Focus specific actions instead
 		if Expand("%") == "source.css" then

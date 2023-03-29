@@ -114,7 +114,7 @@ return {
 				insert_only = false, -- enable normal mode
 				border = BorderStyle,
 				relative = "win",
-				min_width = 80,
+				min_width = {0.7, 70},
 				win_options = {
 					sidescrolloff = 0,
 					winblend = 0, -- weird shining through
