@@ -12,9 +12,9 @@ local keymappings = {
 local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
-			selection_caret = "󰜋 ",
+			selection_caret = "󰫢 ",
 			prompt_prefix = "❱ ",
-			multi_icon = " 󰒆  󰐖",
+			multi_icon = "󰒆 ",
 			preview = { filesize_limit = 1 }, -- in MB, do not preview big files for performance
 			path_display = { "tail" },
 			borderchars = BorderChars,

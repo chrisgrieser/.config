@@ -39,6 +39,10 @@ local function customHighlights()
 	setHighlight("urls", "cterm=underline gui=underline")
 	Fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
+local function setHighlight(hlgroup, changes) Cmd.highlight(hlgroup .. " " .. changes) end
+	vim.cmd.highlight("urls", "guibg=underline")
+	vim.fn.matchadd("commitmsg", [[.\{50}]])
+
 	linkHighlight("myAnnotations", "Todo")
 	-- stylua: ignore
 	Fn.matchadd( "myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])

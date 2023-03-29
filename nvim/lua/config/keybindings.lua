@@ -31,7 +31,7 @@ Keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again" })
 
 -- copy [l]ast [n] notification
 Keymap("n", "<leader>ln", function()
-	local history = require("notify").history({})
+	local history = require("notify").history {}
 	if not history then
 		vim.notify("No Notification in this session.", LogWarn)
 		return
@@ -181,8 +181,8 @@ Keymap("n", "za", "1z=", { desc = "󰓆 autofix" }) -- [a]utofix word under curs
 ---@param mode string accept|reject
 local function valeWord(mode)
 	-- remove word-delimiters for <cword>
-	local iskeywBefore = vim.opt_local.iskeyword:get() 
-	vim.opt_local.iskeyword:remove { "_", "-", "." } 
+	local iskeywBefore = vim.opt_local.iskeyword:get()
+	vim.opt_local.iskeyword:remove { "_", "-", "." }
 	local word = Expand("<cword>")
 	vim.opt_local.iskeyword = iskeywBefore
 
@@ -426,7 +426,6 @@ local function harpoonFileNumber()
 	local jsonPath = Fn.stdpath("data") .. "/harpoon.json"
 	local json = ReadFile(jsonPath)
 	if not json then return end
-
 	local data = vim.json.decode(json)
 	local project = data.projects[pwd]
 	if not project then return end
@@ -434,21 +433,33 @@ local function harpoonFileNumber()
 	return fileNumber
 end
 
+---@nodiscard
+---@return string name of the current project
+local function projectName()
+	local pwd = vim.loop.cwd() or ""
+	local name = pwd:gsub(".*/", "")
+	return name
+end
+
 -- find files
 -- add project name + number of harpoon files to prompt title
 Keymap("n", "go", function()
-	local pwd = vim.loop.cwd() or ""
-	local projectName = pwd:gsub(".*/", "")
 	local harpoonNumber = harpoonFileNumber() or 0
-	local title = tostring(harpoonNumber) .. "󰛢 " .. projectName
+	local title = tostring(harpoonNumber) .. "󰛢 " .. projectName()
 	require("telescope").extensions.file_browser.file_browser { prompt_title = title }
 end, { desc = " Browse in Project" })
 
 Keymap("n", "gO", function()
 	local thisFolder = Expand("%:p:h")
-	require("telescope").extensions.file_browser.file_browser { path = thisFolder }
+	require("telescope").extensions.file_browser.file_browser {
+		path = thisFolder,
+		prompt_title = thisFolder,
+	}
 end, { desc = " Browse in Folder" })
-Keymap("n", "gl", function() Cmd.Telescope("live_grep") end, { desc = " Live Grep in Folder" })
+-- stylua: ignore
+Keymap("n", "gl", function()
+	require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() }
+end, { desc = " Live Grep in Project" })
 Keymap("n", "gr", function() Cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 
 -- File Operations
@@ -653,9 +664,8 @@ Autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
-
 -- Simple version of the delaytrain.nvim
-for _, key in ipairs {"h", "l" } do
+for _, key in ipairs { "h", "l" } do
 	local timeout = 3000
 	local maxUsage = 8
 
