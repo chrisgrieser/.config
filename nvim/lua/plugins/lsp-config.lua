@@ -145,8 +145,10 @@ lspCapabilities.textDocument.foldingRange = {
 local function setupAllLsps()
 	-- INFO must be before the lsp-config setup of lua-ls
 	require("neodev").setup {
-		-- specifying all plugins leads to a ton of loading time
-		library = { plugins = false },
+		library = {
+			-- not enabling all, since too slow for LSP
+			plugins = { "telescope.nvim", "nvim-various-textobjs" },
+		},
 	}
 
 	for _, lsp in pairs(lsp_servers) do
