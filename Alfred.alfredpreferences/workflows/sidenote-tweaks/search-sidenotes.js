@@ -5,7 +5,6 @@ function alfredMatcher(str) {
 	return [clean, str].join(" ");
 }
 
-const sidenotes = Application("SideNotes");
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -17,11 +16,25 @@ const sidenotes = Application("SideNotes");
 // Note Objects have more properties (see Script Editor Dictionary) and also
 // also methods like `.delete()`
 
+function getNoteObj(noteId) {
+	const sidenotes = Application("SideNotes");
+	const folders = sidenotes.folders
+	for (let i = 0; i < folders.length; i++) {
+		const notesInFolder = folders[i].notes;
+		for (let j = 0; j < notesInFolder.length; j++) {
+			const note = notesInFolder[j];
+			if (note.id() === noteId) return note;
+		}			
+	}
+	return false
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 function run(argv) {
 	const query = argv[0] ? argv[0].trim() : "";
 
+	const sidenotes = Application("SideNotes");
 	const results = sidenotes
 		.searchNotes(query) // CAVEAT currently not possible to get the folder for a note
 		.map(item => {
