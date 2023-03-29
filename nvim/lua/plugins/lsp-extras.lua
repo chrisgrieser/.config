@@ -29,23 +29,28 @@ return {
 		},
 	},
 
-	{ -- better definitions / references
-		-- not using Glance due to https://github.com/DNLHC/glance.nvim/issues/45
-		"folke/trouble.nvim",
-		cmd = "Trouble",
-		dependencies = "nvim-tree/nvim-web-devicons",
+	{ -- better references/definitions
+		"dnlhc/glance.nvim",
+		cmd = "Glance",
 		opts = {
-			height = 10,
-			padding = false,
-			action_keys = {
-				close = { "q", "<esc>" },
-				cancel = {},
-				jump_close = { "<cr>" },
-				jump = {},
+			height = 15,
+			border = {
+				enable = true,
+				top_char = BorderHorizontal,
+				bottom_char = BorderHorizontal,
 			},
-			signs = {
-				information = "",
-			}
+			list = { width = 0.4 },
+			-- HACK https://github.com/DNLHC/glance.nvim/issues/45
+			-- hooks = {
+			-- 	before_open = function(results, open, _)
+			-- 		vim.cmd.mkview(3)
+			-- 		open(results)
+			-- 	end,
+			-- 	after_close = function()
+			-- 		local isOnLastLine = vim.fn.line(".") == vim.fn.line("$")
+			-- 		if isOnLastLine then vim.cmd.loadview(3) end
+			-- 	end,
+			-- },
 		},
 	},
 	{ -- signature hints
