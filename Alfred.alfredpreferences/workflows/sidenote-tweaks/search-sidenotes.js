@@ -5,10 +5,9 @@ function alfredMatcher(str) {
 	return [clean, str].join(" ");
 }
 
-
 //──────────────────────────────────────────────────────────────────────────────
 
-// TODO generate array of notes *objects* with their properties note objects seem 
+// TODO generate array of notes *objects* with their properties note objects seem
 // to be retrievable via by supplying noteid *and* folderid:
 // `Application("SideNotes").folders.byId("35BE5A12-DAF4-44FD-AF7D-2689CBB14BF3").notes.byId("0776263A-77FA-41EF-808E-6266C77DBDF9")`
 // `Application("SideNotes").currentNote()` retrieves a note that way. This
@@ -18,16 +17,18 @@ function alfredMatcher(str) {
 
 function getNoteObj(noteId) {
 	const sidenotes = Application("SideNotes");
-	const folders = sidenotes.folders
+	const folders = sidenotes.folders;
 	for (let i = 0; i < folders.length; i++) {
 		const notesInFolder = folders[i].notes;
 		for (let j = 0; j < notesInFolder.length; j++) {
 			const note = notesInFolder[j];
 			if (note.id() === noteId) return note;
-		}			
+		}
 	}
-	return false
+	return false;
 }
+
+const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -38,15 +39,21 @@ function run(argv) {
 	const results = sidenotes
 		.searchNotes(query) // CAVEAT currently not possible to get the folder for a note
 		.map(item => {
-			const content = item.title + "\n" + item.details;
+			const noteObj = getNoteObj(item.identifier);
+			if (!noteObj) return false;
+			const content = noteObj.text();
 
-			// prettier-ignore
-			const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
-			const urls = content.match(urlRegex);
-
-			let urlSubtitle = "";
 			let icon = "";
-			if (content.includes("☐") || content.includes("☑")) icon += "☑️";
+
+			let type = noteObj.textFormatting();
+			if (type === "markdown" && content.match(/☐|☑/)) type = "tasklist";
+			if (type === "code") icon += "👨‍💻";
+			if (type === "tasklist") icon += "☑️ ";
+			if (type === "plain") icon += "📃";
+
+			if (content.includes("[img ")) icon += "🖼️ ";
+			const urls = content.match(urlRegex);
+			let urlSubtitle;
 			if (urls) {
 				icon += "🔗";
 				urlSubtitle = "⌘: ";
@@ -54,9 +61,11 @@ function run(argv) {
 				if (isLinkOnlyNote) urlSubtitle += "🗑🔗 Delete & Open ";
 				else urlSubtitle += "🔗 Open ";
 				urlSubtitle += urls[0];
+			} else {
+				urlSubtitle = "🚫 Note has no URL.";
 			}
-			if (icon) icon += " "; // padding
 
+			if (icon !== "") icon += " "; // padding
 			return {
 				title: item.title,
 				subtitle: icon + item.details,
