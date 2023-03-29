@@ -109,6 +109,12 @@ return {
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "DressingInput",
+				callback = function() vim.fn.matchadd("commitmsg", [[.\{50,}]]) end,
+			})
+		end,
 		opts = {
 			input = {
 				insert_only = false, -- enable normal mode
