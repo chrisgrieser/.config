@@ -58,6 +58,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>23C1AE62-C827-4B23-9E79-84A30D5B88C4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>32837F88-8CB6-48C2-A830-3E6AD189C1F0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>283ACE76-6BC7-495E-B3DC-FB0265AC07F7</key>
 		<array>
 			<dict>
@@ -263,6 +276,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A705B881-2D50-41C6-957A-E337FD627118</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>23C1AE62-C827-4B23-9E79-84A30D5B88C4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>ACEFCAB6-39BB-471F-BAC1-324B1B72BC1C</key>
 		<array>
 			<dict>
@@ -329,7 +355,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>32837F88-8CB6-48C2-A830-3E6AD189C1F0</string>
+				<string>A705B881-2D50-41C6-957A-E337FD627118</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1069,7 +1095,7 @@
 				<key>keyword</key>
 				<string>k</string>
 				<key>subtext</key>
-				<string>copy link to clipboard</string>
+				<string></string>
 				<key>text</key>
 				<string>SearchLink for: {query}</string>
 				<key>withspace</key>
@@ -1079,6 +1105,46 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>D66DC52E-1758-40FB-B56B-15E2E477C3FC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>run-searchlink.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>23C1AE62-C827-4B23-9E79-84A30D5B88C4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}!!</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>A705B881-2D50-41C6-957A-E337FD627118</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1244,6 +1310,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>370</real>
 		</dict>
+		<key>23C1AE62-C827-4B23-9E79-84A30D5B88C4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>run SearchLink</string>
+			<key>xpos</key>
+			<real>285</real>
+			<key>ypos</key>
+			<real>775</real>
+		</dict>
 		<key>283ACE76-6BC7-495E-B3DC-FB0265AC07F7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1260,7 +1337,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>340</real>
+			<real>575</real>
 			<key>ypos</key>
 			<real>775</real>
 		</dict>
@@ -1280,7 +1357,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>430</real>
 			<key>ypos</key>
 			<real>775</real>
 		</dict>
@@ -1406,6 +1483,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>370</real>
+		</dict>
+		<key>A705B881-2D50-41C6-957A-E337FD627118</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>just the link</string>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>805</real>
 		</dict>
 		<key>AB99E030-DB45-4C5F-A64F-4234C0998270</key>
 		<dict>
