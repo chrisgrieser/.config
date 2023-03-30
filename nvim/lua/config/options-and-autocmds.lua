@@ -175,7 +175,12 @@ Autocmd("BufReadPost", {
 Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
 	callback = function()
-		if not Bo.readonly and Expand("%") ~= "" and Bo.buftype == "" and Bo.filetype ~= "gitcommit" then
+		if
+			not Bo.readonly
+			and Expand("%") ~= ""
+			and (Bo.buftype == "" or Bo.buftype == "acwrite")
+			and Bo.filetype ~= "gitcommit"
+		then
 			Cmd.update(Expand("%:p"))
 		end
 	end,
@@ -237,7 +242,7 @@ Autocmd("BufWinEnter", {
 --------------------------------------------------------------------------------
 -- Add missing buffer names
 Autocmd("FileType", {
-	pattern = {"Glance", "lazy"},
+	pattern = { "Glance", "lazy" },
 	callback = function()
 		local name = vim.fn.expand("<amatch>")
 		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize

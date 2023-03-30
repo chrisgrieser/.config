@@ -114,34 +114,14 @@ local function cmpconfig()
 				end
 			end, { "i", "s" }),
 
-			-- INFO <D-j> will override multi-cursor in snippets though
-			["<D-j>"] = cmp.mapping(function(fallback)
-				if require("neogen").jumpable() then
-					require("neogen").jump_next()
-				elseif require("luasnip").jumpable(1) then
-					require("luasnip").jump(1)
-				elseif vim.fn.mode():find("[nvV]") then
-					fallback() -- multi-cursor jump
-				else
-					vim.notify("No more jump forwards.")
-				end
-			end, { "i", "s", "n", "x" }),
-			["<D-S-j>"] = cmp.mapping(function(fallback)
-				if require("neogen").jumpable(true) then
-					require("neogen").jump_prev()
-				elseif require("luasnip").jumpable(-1) then
-					require("luasnip").jump(-1)
-				elseif vim.fn.mode():find("[nvV]") then
-					fallback()
-				else
-					vim.notify("No more jump backwards.")
-				end
-			end, { "i", "s", "n", "x" }),
-
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
+				elseif require("neogen").jumpable() then
+					require("neogen").jump_next()
+				elseif require("luasnip").jumpable(1) then
+					require("luasnip").jump(1)
 				else
 					fallback()
 				end
@@ -149,8 +129,22 @@ local function cmpconfig()
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item()
+				elseif require("neogen").jumpable(true) then
+					require("neogen").jump_prev()
+				elseif require("luasnip").jumpable(-1) then
+					require("luasnip").jump(-1)
 				else
 					fallback()
+				end
+			end, { "i", "s" }),
+			-- Force jumping
+			["<D-j>"] = cmp.mapping(function(_)
+				if require("neogen").jumpable() then
+					require("neogen").jump_next()
+				elseif require("luasnip").jumpable(1) then
+					require("luasnip").jump(1)
+				else
+					vim.notify("No more jump forwards.")
 				end
 			end, { "i", "s" }),
 		},
@@ -316,7 +310,7 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"dmitmel/cmp-cmdline-history",
 			"hrsh7th/cmp-emoji",
-			{"chrisgrieser/cmp-nerdfont", dev = true},
+			{ "chrisgrieser/cmp-nerdfont", dev = true },
 			"tamago324/cmp-zsh", -- some shell completions
 			"jcdickinson/codeium.nvim", -- ai support
 			"ray-x/cmp-treesitter",

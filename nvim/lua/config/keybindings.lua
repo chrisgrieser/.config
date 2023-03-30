@@ -621,6 +621,9 @@ Keymap("n", "7", function()
 	end
 end, { desc = " Codi" })
 
+Keymap("n", "5", function ()
+	
+end, { desc = ":InlineEdit" })
 --------------------------------------------------------------------------------
 
 -- q / Esc to close special windows
