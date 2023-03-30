@@ -5,7 +5,7 @@ require("lua.utils")
 
 ---notifies & writes reminder
 ---is low. Caveat: `hs.battery` seems to work only with Apple devices.
----@param msgWhere string where the information on low battery level should be send. "Reminder"|"notify"
+---@param msgWhere "SideNotes"|"notify" where the information on low battery level should be send. "Reminder"|"notify"
 function PeripheryBatteryCheck(msgWhere)
 	local warningLevel = 20
 	local devices = hs.battery.privateBluetoothBatteryInfo()
@@ -15,7 +15,7 @@ function PeripheryBatteryCheck(msgWhere)
 		local percent = tonumber(device.batteryPercentSingle)
 		if percent > warningLevel then return end
 		local msg = device.name .. " Battery is low (" .. percent .. "%)"
-		if msgWhere == "Sidenotes" then
+		if msgWhere == "SideNotes" then
 			hs.osascript.javascript(string.format(
 				[[const sidenotes = Application("SideNotes");
 				const folder = sidenotes.folders.byName("Base");

@@ -12,14 +12,11 @@ Icon
 *.key
 pw.*
 
-# 
+# prevent accidental inclusion
+*.part
 
 # created due to sync issues
 *.icloud
 
 # node
 node_modules
-
-# custom files
-.project-root
-

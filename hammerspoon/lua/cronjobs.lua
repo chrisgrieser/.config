@@ -45,7 +45,7 @@ BiweeklyTimer = hs.timer
 	.doAt("02:00", "01d", function()
 		if IsAtOffice() or (getWeekday() ~= "Wed" and getWeekday() ~= "Sat") then return end
 
-		PeripheryBatteryCheck("Reminder") -- TODO send to sidenotes
+		PeripheryBatteryCheck("SideNotes") 
 		hs.loadSpoon("EmmyLua")
 
 		-- backups
