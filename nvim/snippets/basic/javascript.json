@@ -23,12 +23,7 @@
 	},
 	"for (i++)": {
 		"prefix": "for (i++)",
-		"body": [
-			"for (let i = 0; i < ${1:array}.length; i++) {",
-			"\tconst ${2:element} = ${1:array}[i];",
-			"\t$0",
-			"}"
-		]
+		"body": ["for (let i = 0; i < ${1:array}.length; i++) {", "\tconst ${2:element} = ${1:array}[i];", "\t$0", "}"]
 	},
 	"for (i--)": {
 		"prefix": "for (i--)",
@@ -41,20 +36,11 @@
 	},
 	".forEach": {
 		"prefix": "forEach =>",
-		"body": [
-			"forEach(${1:item} => {",
-			"\t$0",
-			"});"
-		]
+		"body": ["forEach(${1:item} => {", "\t$0", "});"]
 	},
 	".map (array, complex)": {
 		"prefix": "map (array, complex)",
-		"body": [
-			"map(${1:item} => {",
-			"\t$0",
-			"\treturn ${1:item};",
-			"})"
-		]
+		"body": ["map(${1:item} => {", "\t$0", "\treturn ${1:item};", "})"]
 	},
 	"map (array)": {
 		"prefix": "map (array)",
@@ -66,29 +52,16 @@
 	},
 	"sort (array)": {
 		"prefix": "sort (array)",
-		"body": [
-			"sort((a, b) => {",
-			"\treturn ${1:b - a};",
-			"})"
-		],
+		"body": ["sort((a, b) => {", "\treturn ${1:b - a};", "})"],
 		"description": "Sort Array with basic a-b-comparator function"
 	},
 	"today's date": {
-		"prefix": [
-			"today",
-			"date"
-		],
+		"prefix": ["today", "date"],
 		"body": "const today = new Date();"
 	},
 	"tomorrow's date": {
-		"prefix": [
-			"tomorrow",
-			"date"
-		],
-		"body": [
-			"const tomorrow = new Date();",
-			"tomorrow.setDate(tomorrow.getDate() + 1);"
-		]
+		"prefix": ["tomorrow", "date"],
+		"body": ["const tomorrow = new Date();", "tomorrow.setDate(tomorrow.getDate() + 1);"]
 	},
 	"today as ISO 8601 string": {
 		"prefix": "ISO date",
@@ -107,29 +80,15 @@
 	},
 	"for .. of (array)": {
 		"prefix": "for .. of (array)",
-		"body": [
-			"for (const ${1:iterator} of ${2:object}) {",
-			"\t$0",
-			"}"
-		]
+		"body": ["for (const ${1:iterator} of ${2:object}) {", "\t$0", "}"]
 	},
 	"if ..": {
 		"prefix": "if",
-		"body": [
-			"if (${1:condition}) {",
-			"\t$0",
-			"}"
-		]
+		"body": ["if (${1:condition}) {", "\t$0", "}"]
 	},
 	"if .. else": {
 		"prefix": "if .. else",
-		"body": [
-			"if (${1:condition}) {",
-			"\t$0",
-			"} else {",
-			"\t",
-			"}"
-		]
+		"body": ["if (${1:condition}) {", "\t$0", "} else {", "\t", "}"]
 	},
 	"argv (node)": {
 		"prefix": "argv (node)",
@@ -138,44 +97,19 @@
 	},
 	"Switch": {
 		"prefix": "switch",
-		"body": [
-			"switch (${1:key}) {",
-			"\tcase ${2:value}:",
-			"\t\t$0",
-			"\t\tbreak;",
-			"\tdefault:",
-			"\t\tbreak;",
-			"}"
-		]
+		"body": ["switch (${1:key}) {", "\tcase ${2:value}:", "\t\t$0", "\t\tbreak;", "\tdefault:", "\t\tbreak;", "}"]
 	},
 	"While ..": {
 		"prefix": "while ..",
-		"body": [
-			"while (${1:condition}) {",
-			"\t$0",
-			"}"
-		]
+		"body": ["while (${1:condition}) {", "\t$0", "}"]
 	},
 	"do .. while ..": {
-		"prefix": [
-			"do .. while",
-			"repeat until"
-		],
-		"body": [
-			"do {",
-			"\t$0",
-			"} while (${1:condition});"
-		]
+		"prefix": ["do .. while", "repeat until"],
+		"body": ["do {", "\t$0", "} while (${1:condition});"]
 	},
 	"try .. catch": {
 		"prefix": "try .. catch",
-		"body": [
-			"try {",
-			"\t$0",
-			"} catch (${1:error}) {",
-			"\t",
-			"}"
-		]
+		"body": ["try {", "\t$0", "} catch (${1:error}) {", "\t", "}"]
 	},
 	"if (autosnippet)": {
 		"prefix": "if ",
@@ -186,15 +120,7 @@
 		"description": "Luasnip-specific autosnippet: https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vs-code"
 	},
 	"Set Timeout Function": {
-		"prefix": [
-			"settimeout",
-			"timeout",
-			"delay"
-		],
-		"body": [
-			"setTimeout(() => {",
-			"\t$0",
-			"}, ${1:timeoutMs});"
-		]
+		"prefix": ["settimeout", "timeout", "delay"],
+		"body": ["setTimeout(() => {", "\t$0", "}, ${1:timeoutMs});"]
 	}
 }
