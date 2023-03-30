@@ -33,8 +33,10 @@ return {
 				".git",
 				"manifest.json", -- node
 				"info.plist", -- Alfred
+				"stylua.toml", -- lua
 				".stylua.toml", -- lua
 				".harpoon", -- manually marked
+				".project-root", -- manually marked
 				"=File Hub",
 			},
 		},
