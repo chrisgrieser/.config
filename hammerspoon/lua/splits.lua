@@ -12,7 +12,7 @@ local function pairedActivation()
 		local leftApp = LEFT_SPLIT:application()
 
 		if not leftApp or not rightApp then
-			print("2️⃣ Split stopped automatically due app being terminated.")
+			Notify("2️⃣ Split stopped as app quit.")
 			VsplitSetLayout("unsplit")
 		elseif eventType == Aw.activated and appName == rightApp:name() then
 			LEFT_SPLIT:raise()
@@ -35,7 +35,7 @@ function VsplitSetLayout(mode, secondWin)
 	local f1
 	local f2
 	if mode == "split" then
-		print("2️⃣ Split started.")
+		print("2️⃣ Split started. ")
 		pairedActivation()
 		f1 = RightHalf
 		f2 = LeftHalf
@@ -103,7 +103,7 @@ end
 Hotkey(Hyper, "V", function()
 	local splitActive = LEFT_SPLIT and RIGHT_SPLIT
 	if splitActive then
-		print("2️⃣ Split stopped manually.")
+		Notify("2️⃣ Split stopped manually.")
 		VsplitSetLayout("unsplit")
 	else
 		selectSecondWin()
