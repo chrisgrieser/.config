@@ -105,3 +105,8 @@ Strikethrough
 subfolder
 Callout
 blazingly
+callouts
+callout
+infobox
+Dataview
+Tweaker
