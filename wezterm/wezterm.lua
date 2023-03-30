@@ -2,18 +2,25 @@
 --------------------------------------------------------------------------------
 local wezterm = require("wezterm")
 local act = wezterm.action
-
-local isAtOffice = wezterm.hostname():find("mini")
-local isAtMother = wezterm.hostname():find("Mother")
 local log = wezterm.log_info
 
 --------------------------------------------------------------------------------
+
+local isAtOffice = wezterm.hostname():find("mini")
+local isAtMother = wezterm.hostname():find("Mother")
 log("hostname:", wezterm.hostname())
+log("beep")
 
 --------------------------------------------------------------------------------
 -- device specific settings
 local obscurePassword = isAtOffice
 local fps = isAtMother and 40 or 60
+
+-- on start, move window to the side ("pseudomaximized")
+wezterm.on("gui-startup", function(cmd)
+	local _, _, window = wezterm.mux.spawn_window(cmd or {})
+	window:gui_window():set_position(707, 0)
+end)
 
 local config = {
 	-- Meta
@@ -30,35 +37,36 @@ local config = {
 	-- Mouse & Cursor
 	hide_mouse_cursor_when_typing = true,
 	cursor_thickness = "0.07cell",
-	cursor_blink_rate = 900,
-	force_reverse_video_cursor = true, -- true = color is reverse, false = color by color scheme
+	cursor_blink_rate = 1100,
+	force_reverse_video_cursor = false, -- true = color is reverse, false = color by color scheme
 
 	-- Font / Size
-	font_size = 26,
+	font_size = 27,
+	command_palette_font_size = 29,
 	font = wezterm.font("JetBrains Mono"), -- bundled by wezterm, using nerdfont as fallback https://wezfurlong.org/wezterm/config/fonts
 	cell_width = 1.0,
 	line_height = 1.0,
-	initial_cols = 90,
+	initial_cols = 97,
 	initial_rows = 30,
 
 	-- Appearance
 	color_scheme = "AdventureTime", -- work programmatically w/ color schemes: https://wezfurlong.org/wezterm/config/lua/wezterm/get_builtin_color_schemes.html
 	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
+	bold_brightens_ansi_colors = "BrightAndBold",
 	window_background_opacity = 0.95,
 	macos_window_background_blur = 2,
-	native_macos_fullscreen_mode = false,
 	max_fps = fps,
-	bold_brightens_ansi_colors = "BrightAndBold",
+	native_macos_fullscreen_mode = false,
 	window_padding = {
-		left = 10,
-		right = 35, -- if scrollbar enabled, controls its width, too
-		top = 12,
-		bottom = 15,
+		left = "0.5cell",
+		right = "1.2cell", -- if scrollbar enabled, controls its width, too
+		top = "0.2cell",
+		bottom = "0.4cell",
 	},
 
 	-- Scroll
 	enable_scroll_bar = true,
-	min_scroll_bar_height = "2cell",
+	min_scroll_bar_height = "3cell",
 	scrollback_lines = 4000,
 
 	-- Tabs
@@ -74,13 +82,16 @@ local config = {
 	keys = {
 		{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 		{ key = "q", mods = "CMD", action = act.QuitApplication },
+		{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
+		{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 		{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
 		{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
-		{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 		{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
+		{ key = "ESC", mods = "CTRL", action = wezterm.action.ShowDebugOverlay },
+
+		{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 		{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
 		{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
-		{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
 
 		-- MODES
 		-- copy mode https://wezfurlong.org/wezterm/copymode.html
@@ -89,14 +100,13 @@ local config = {
 		-- hint mode https://wezfurlong.org/wezterm/quickselect.html
 		{ key = "f", mods = "CMD|SHIFT", action = act.QuickSelect },
 	},
-mouse_bindings = {
-  -- Ctrl-click will open the link under the mouse cursor
-  {
-    event = { Up = { streak = 1, button = 'Left' } },
-    mods = 'CTRL',
-    action = wezterm.action.OpenLinkAtMouseCursor,
-  },
-}
+	mouse_bindings = {
+		{ -- cmd will open the link under the mouse cursor
+			event = { Up = { streak = 1, button = "Left" } },
+			mods = "CMD",
+			action = act.OpenLinkAtMouseCursor,
+		},
+	},
 }
 
 --------------------------------------------------------------------------------
