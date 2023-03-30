@@ -15,11 +15,7 @@
 	},
 	"function": {
 		"prefix": "function",
-		"body": [
-			"on ${1:func} (${2:argv})",
-			"\t$0",
-			"end ${1:func}"
-		]
+		"body": ["on ${1:func} (${2:argv})", "\t$0", "end ${1:func}"]
 	},
 	"browser URL": {
 		"prefix": "browser URL",
