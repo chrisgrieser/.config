@@ -147,10 +147,9 @@ end
 -- return available plugin updates when above a certain threshold
 local function pluginUpdates()
 	if not require("lazy.status").has_updates() then return "" end
-	local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
+	local numberOfUpdates = require("lazy.status").updates()
 	if numberOfUpdates < UpdateCounterThreshhold then return "" end
-	local count = require("lazy.status").updates()
-	return count
+	return numberOfUpdates
 end
 
 --------------------------------------------------------------------------------
@@ -177,6 +176,9 @@ end
 local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 local topSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 -- stylua: ignore end
+
+vim.opt.showtabline = 0 -- never show tabline, since displayed in winbar by lualine
+
 
 local lualineConfig = {
 	sections = {
@@ -230,13 +232,19 @@ local lualineConfig = {
 	winbar = {
 		lualine_a = {
 			{ clock, section_separators = topSeparators },
+			{
+				"tabs",
+				mode = 2,
+				max_length = vim.o.columns / 2,
+				cond = function () return vim.fn.tabpagenr("$") > 1 end,
+			},
 		},
 		lualine_b = {
 			{ pathToProjectRoot, section_separators = topSeparators },
 		},
 		lualine_c = {
-			{ navicBreadcrumbs, section_separators = topSeparators },
-			{ function() return " " end, cond = require("nvim-navic").is_available }, -- dummy to avoid bar flickering
+			-- "draw_empty" to prevent glithcing if its the only one in winbar
+			{ navicBreadcrumbs, section_separators = topSeparators, draw_empty = true },
 		},
 		lualine_x = {
 			{
