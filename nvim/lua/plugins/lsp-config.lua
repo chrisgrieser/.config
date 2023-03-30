@@ -30,12 +30,14 @@ lspSettings.lua_ls = {
 		completion = {
 			callSnippet = "Replace",
 			keywordSnippet = "Replace",
-			displayContext = 4,
+			displayContext = 5,
 			postfix = ".",
 		},
 		diagnostics = {
 			disable = { "trailing-space" }, -- formatter already does that
-			-- severity = {}, -- change severity for specific rules https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
+			severity = {-- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
+				["return-type-mismatch"] = "Error",
+			}, 
 		},
 		hint = { -- LSP inlayhints
 			enable = true,
@@ -146,15 +148,14 @@ local function setupAllLsps()
 	-- INFO must be before the lsp-config setup of lua-ls
 	require("neodev").setup {
 		library = {
-			-- not enabling all, since too slow for LSP
-			plugins = { "telescope.nvim", "nvim-various-textobjs", "lazy.nvim", "lualine.nvim" },
+			plugins = { "lazy.nvim" }, -- not enabling all, since too slow for LSP
 		},
 	}
 
 	for _, lsp in pairs(lsp_servers) do
 		local config = {
 			capabilities = lspCapabilities,
-			settings = lspSettings[lsp], -- if no settings, will assign nil and therefore to nothing
+			settings = lspSettings[lsp], -- if no settings, will assign nil and therefore do nothing
 			filetypes = lspFileTypes[lsp],
 			on_attach = lspOnAttach[lsp],
 		}

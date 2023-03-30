@@ -99,7 +99,7 @@ function M.altFileStatusline()
 		icon = "#"
 		name = altFile
 	end
-	if #name > maxLen then name = name:sub(1, maxLen) .. "…" end
+	if #name > maxLen then name = "…" .. name:sub(#name - #maxLen, #maxLen) end
 	return icon .. " " .. name
 end
 
