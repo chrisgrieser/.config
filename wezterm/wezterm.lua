@@ -12,25 +12,26 @@ log("hostname:", wezterm.hostname())
 
 --------------------------------------------------------------------------------
 -- device specific settings
-local obscurePassword = isAtOffice 
+local obscurePassword = isAtOffice
 local fps = isAtMother and 40 or 60
-
 
 local config = {
 	-- Meta
 	check_for_updates = true,
 	automatically_reload_config = true, -- causes errors too quickly
 	check_for_updates_interval_seconds = 86400,
+	detect_password_input = obscurePassword,
+
+	-- Start/Close
 	quit_when_all_windows_are_closed = true,
 	window_close_confirmation = "NeverPrompt",
-
-	default_cwd = wezterm.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub",
-	detect_password_input = obscurePassword, 
+	default_cwd = wezterm.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/",
 
 	-- Mouse & Cursor
 	hide_mouse_cursor_when_typing = true,
 	cursor_thickness = "0.07cell",
 	cursor_blink_rate = 900,
+	force_reverse_video_cursor = true, -- true = color is reverse, false = color by color scheme
 
 	-- Font / Size
 	font_size = 26,
@@ -49,15 +50,15 @@ local config = {
 	max_fps = fps,
 	bold_brightens_ansi_colors = "BrightAndBold",
 	window_padding = {
-		left = 2,
-		right = 2, -- if scrollbar enabled, controls its width, too
-		top = 1,
-		bottom = 1,
+		left = 10,
+		right = 35, -- if scrollbar enabled, controls its width, too
+		top = 12,
+		bottom = 15,
 	},
 
 	-- Scroll
 	enable_scroll_bar = true,
-	min_scroll_bar_hright = "2cell",
+	min_scroll_bar_height = "2cell",
 	scrollback_lines = 4000,
 
 	-- Tabs
@@ -71,14 +72,31 @@ local config = {
 	disable_default_key_bindings = false,
 	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
 	keys = {
+		{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 		{ key = "q", mods = "CMD", action = act.QuitApplication },
-		-- { key = "w", mods = "CMD", action = act.CloseCurrentTab },
-		-- { key = "f", mods = "CMD", action = act.Search },
-		-- { key = "k", mods = "CMD", action = wezterm.action.ClearScrollback("ScrollbackAndViewport") },
+		{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
+		{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
+		{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
+		{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
+		{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
+		{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
+		{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
+
+		-- MODES
+		-- copy mode https://wezfurlong.org/wezterm/copymode.html
+		{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
 
 		-- hint mode https://wezfurlong.org/wezterm/quickselect.html
-		-- { key = "f", mods = "CTRL", action = act.QuickSelect },
+		{ key = "f", mods = "CMD|SHIFT", action = act.QuickSelect },
 	},
+mouse_bindings = {
+  -- Ctrl-click will open the link under the mouse cursor
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'CTRL',
+    action = wezterm.action.OpenLinkAtMouseCursor,
+  },
+}
 }
 
 --------------------------------------------------------------------------------
