@@ -233,3 +233,6 @@ matches:
   - trigger: dont
     replace: don't
     word: true
+  - trigger: mri
+    replace: mir
+    word: true
