@@ -61,6 +61,7 @@ local function workLayout()
 			MoveResize(App(appName):mainWindow(), PseudoMaximized)		
 		end
 		RestartApp("AltTab") -- fix AltTab not picking up changes
+		App("Mimestream"):activate()
 	end, 0.2)
 
 	print("🔲 WorkLayout: done")
