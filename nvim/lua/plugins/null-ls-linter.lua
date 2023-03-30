@@ -65,7 +65,7 @@ local function nullConfig()
 			-- config, which includes setting everything to spaces…
 			builtins.formatting.prettier.with {
 				-- do not format markdown and css
-				filetypes = { "javascript", "typescript", "yaml", "json" }, 
+				filetypes = { "javascript", "typescript", "yaml", "json" },
 			},
 
 			-- CSS
@@ -97,11 +97,11 @@ local function nullConfig()
 			builtins.diagnostics.vale.with {
 				extra_args = { "--config", LinterConfig .. "/vale/vale.ini" },
 			},
-			builtins.formatting.cbfmt.with {-- code blocks
+			builtins.formatting.cbfmt.with { -- code blocks
 				extra_args = { "--config", LinterConfig .. "/cbfmt.toml" },
-			}, 
+			},
 			builtins.formatting.markdownlint.with {
-				extra_args = { "--config", LinterConfig .. "/markdownlintrc" },
+				extra_args = { "--config", LinterConfig .. "/markdownlintrc.json" },
 			},
 			builtins.diagnostics.markdownlint.with {
 				-- disabling rules that are autofixed already

@@ -1,0 +1,16 @@
+# https://github.com/lukas-reineke/cbfmt#config
+# INFO: "Each format command needs to read from stdin and write to stdout."
+#───────────────────────────────────────────────────────────────────────────────
+
+[languages]
+lua = ["stylua -s -"]
+python = ["black --fast -"]
+yaml = ["prettier"]
+json = ["prettier"]
+javascript = ["prettier"]
+typescript = ["prettier"]
+bash = ["shfmt -"]
+zsh = ["shfmt -"]
+sh = ["shfmt -"]
+css = ["stylelint --fix"]
+markdown = ["markdownlint --stdin --fix"]
