@@ -36,6 +36,7 @@ local function hideOthers(appObj)
 		"IINA",
 		"zoom.us",
 		"CleanShot X",
+		"SideNotes",
 		"Twitter",
 		"Alfred", -- needed for Alfred compatibility mode
 		appObj:name(), -- app itself
