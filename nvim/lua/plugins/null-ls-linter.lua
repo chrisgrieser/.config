@@ -66,6 +66,7 @@ local function nullConfig()
 				-- do not format markdown and css
 				filetypes = { "javascript", "typescript", "yaml", "json" }, 
 			},
+			builtins.diagnostics.tsc, -- typescript compiler
 
 			-- CSS
 			builtins.formatting.stylelint.with {

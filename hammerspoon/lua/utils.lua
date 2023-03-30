@@ -229,7 +229,7 @@ end
 ---@param callbackFn function function to execute when the app is available
 function AsSoonAsAppRuns(app, callbackFn)
 	if type(app) == "string" then app = App(app) end
-	local myTimer = hs.timer.waitUntil(function()
+	MyTimer = hs.timer.waitUntil(function()
 		local appRuns = app ~= nil
 		local windowAvailable = app and app:mainWindow()
 		return appRuns and windowAvailable

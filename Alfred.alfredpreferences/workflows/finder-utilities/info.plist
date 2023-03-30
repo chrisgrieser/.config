@@ -126,6 +126,21 @@
 		</array>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<array/>
+		<key>5CCD4941-B4C3-444A-8318-2DDBF741229A</key>
+		<array/>
+		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9536809F-DBBD-4982-90BC-427C6D115A14</key>
 		<array>
 			<dict>
@@ -195,7 +210,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
+				<string>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -284,10 +299,23 @@
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>ℹ️ No file</string>
+			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
+			<string>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -348,6 +376,84 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>empty</string>
+						<key>outputlabel</key>
+						<string>empty</string>
+						<key>uid</key>
+						<string>60377B50-E48C-4CAD-BEC9-6B6FDF7155F9</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>has files</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>D32D490E-F78B-4733-A0EC-0672CD8A6E30</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>file-hub-cycle</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>BF0AEAE4-89C0-4DFF-8F6D-4C1FE0DE091B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>move-to-frontmost-Finder-window.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -391,76 +497,6 @@
 			<string>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>empty</string>
-						<key>outputlabel</key>
-						<string>empty</string>
-						<key>uid</key>
-						<string>60377B50-E48C-4CAD-BEC9-6B6FDF7155F9</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>has files</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>D32D490E-F78B-4733-A0EC-0672CD8A6E30</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>file-hub-cycle</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>BF0AEAE4-89C0-4DFF-8F6D-4C1FE0DE091B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>move-to-frontmost-Finder-window.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -892,9 +928,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>200</real>
 		</dict>
 		<key>11D8554B-846B-40DD-9CA0-C73F5736472F</key>
 		<dict>
@@ -979,9 +1015,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>60</real>
 		</dict>
 		<key>64FEC427-2CB3-4EB1-8543-392E2319CBFC</key>
 		<dict>
@@ -991,6 +1027,15 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>850</real>
 			<key>ypos</key>
 			<real>290</real>
+		</dict>
+		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>580</real>
+			<key>ypos</key>
+			<real>30</real>
 		</dict>
 		<key>8D046756-BF24-4658-BD57-CAB48FF61B9D</key>
 		<dict>
@@ -1090,6 +1135,8 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		</dict>
 		<key>D608B123-0780-4E08-A9AD-4BBF4396F654</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
@@ -1106,6 +1153,8 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		</dict>
 		<key>DCECF168-40C8-45B0-B812-81138DF798D4</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
