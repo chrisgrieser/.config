@@ -288,12 +288,10 @@ local function cmpconfig()
 		}),
 	})
 
-	-- Wondering what suggestions could make sense there
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
-		sources = {
-			s.buffer,
-		},
+		-- Wondering what suggestions could make sense there, other than buffer
+		sources = { s.buffer },
 	})
 end
 

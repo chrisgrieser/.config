@@ -320,6 +320,7 @@ Keymap("n", "<Left>", function()
 	return [["zdh"zph]]
 end, { desc = "Move Char Left", expr = true })
 
+-- "silent" necessary for 3+ lines due to cmdheight=0
 Keymap("x", "<Down>", [[<Esc>:silent '<,'>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
 Keymap("x", "<Up>", [[<Esc>:silent '<,'>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
 Keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })

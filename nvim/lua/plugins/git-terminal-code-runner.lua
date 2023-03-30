@@ -15,11 +15,9 @@ return {
 				show_http_info = true,
 				show_headers = false,
 				formatters = {
-					-- run yq on the result, prettier does not seem to work
-					json = function(body)
-						return vim.fn.system({ "prettier --parser=json" }, body)
-					end,
-					html = false,
+					-- use prettier, since installation ensured via mason
+					json = function(body) return vim.fn.system("prettier --parser=json", body) end,
+					html = function(body) return vim.fn.system("prettier --parser=html", body) end,
 				},
 			},
 		},

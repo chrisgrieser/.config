@@ -4,7 +4,17 @@ return {
 		event = "BufReadPre",
 	},
 	{ -- autopair brackets, quotes, and markup
+		"echasnovski/mini.pairs",
+		event = "InsertEnter",
+		main = "mini.pairs",
+		opts = {
+			modes = { insert = true, command = true, terminal = false },
+
+		},
+	},
+	{ -- autopair brackets, quotes, and markup
 		"windwp/nvim-autopairs",
+		enabled = false,
 		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/nvim-cmp",
