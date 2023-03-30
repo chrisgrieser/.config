@@ -165,7 +165,8 @@ local function pathToProjectRoot()
 	if not require("nvim-navic").is_available() then return "" end
 	local parentPath = vim.fn.expand("%:p:h")
 	local projectRelPath = parentPath:sub(#vim.loop.cwd() + 2)
-	local nicerDisplay = projectRelPath -- :gsub("/", " / ") 
+	local nicerDisplay = projectRelPath:gsub("/", "  ") 
+	if nicerDisplay:find("^%s*$") then return "" end
 	return "󰝰 " .. nicerDisplay
 end
 
@@ -179,6 +180,39 @@ local emptySeparators = { left = "", right = "" }
 -- stylua: ignore end
 
 local lualineConfig = {
+	-- INFO using the tabline will override vim's default tabline, so the tabline
+	-- should always include the tab element
+	tabline = {
+		lualine_a = {
+			{ clock, section_separators = emptySeparators },
+			{
+				"tabs",
+				mode = 2,
+				max_length = vim.o.columns * 0.7,
+				section_separators = emptySeparators,
+				cond = function() return vim.fn.tabpagenr("$") > 1 end,
+			},
+		},
+		lualine_b = {
+			{
+				pathToProjectRoot,
+				section_separators = topSeparators,
+				cond = function() return vim.fn.tabpagenr("$") == 1 end,
+			},
+		},
+		lualine_c = {
+			-- "draw_empty" to prevent glitching if its the only one in tabline
+			{ navicBreadcrumbs, section_separators = topSeparators, draw_empty = true },
+		},
+		lualine_x = {
+			{
+				pluginUpdates,
+				color = function() return { fg = GetHighlightValue("NonText", "foreground") } end,
+			},
+		},
+		-- INFO dap and recording status defined in the respective plugin configs
+		-- for lualine_y and lualine_z for their lazy loading
+	},
 	sections = {
 		lualine_a = {
 			{
@@ -226,39 +260,6 @@ local lualineConfig = {
 			{ selectionCount, padding = { left = 0, right = 1 } },
 			"location",
 		},
-	},
-	-- INFO using the tabline will override vim's default tabline, so the tabline
-	-- should always include the tab element
-	tabline = {
-		lualine_a = {
-			{ clock, section_separators = emptySeparators },
-			{
-				"tabs",
-				mode = 2,
-				max_length = vim.o.columns * 0.7,
-				section_separators = emptySeparators,
-				cond = function() return vim.fn.tabpagenr("$") > 1 end,
-			},
-		},
-		lualine_b = {
-			{
-				pathToProjectRoot,
-				section_separators = topSeparators,
-				cond = function() return vim.fn.tabpagenr("$") == 1 end,
-			},
-		},
-		lualine_c = {
-			-- "draw_empty" to prevent glitching if its the only one in tabline
-			{ navicBreadcrumbs, section_separators = topSeparators, draw_empty = true },
-		},
-		lualine_x = {
-			{
-				pluginUpdates,
-				color = function() return { fg = GetHighlightValue("NonText", "foreground") } end,
-			},
-		},
-		-- INFO dap and recording status defined in the respective plugin configs
-		-- for lualine_y and lualine_z for their lazy loading
 	},
 	options = {
 		refresh = { statusline = 1000 },

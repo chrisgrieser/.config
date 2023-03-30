@@ -380,6 +380,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Sidenote snoozed</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -411,27 +432,6 @@
 			<string>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Sidenote snoozed</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -525,7 +525,7 @@
 				<integer>102</integer>
 				<key>script</key>
 				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-sketchybar --trigger update-sidenote-count</string>
+sketchybar --trigger update-sidenotes-count</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -771,6 +771,25 @@ sketchybar --trigger update-sidenote-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>0C66F7DF-2BA1-45C6-BF46-E339586EB9DE</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -814,25 +833,6 @@ sketchybar --trigger update-sidenote-count</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>16C5F45A-DCED-4A89-B5C9-B04DE9261021</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>0C66F7DF-2BA1-45C6-BF46-E339586EB9DE</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1025,6 +1025,31 @@ sketchybar --trigger update-sidenote-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
+
+-- funktioniert auch mit der Youtube Webapp</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-url-from-browser.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E1952981-5610-42C6-967C-9728E176B587</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1054,31 +1079,6 @@ sketchybar --trigger update-sidenote-count</string>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>8499FF4E-79F4-45EB-B3B6-7B25914C723B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
-
--- funktioniert auch mit der Youtube Webapp</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-url-from-browser.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E1952981-5610-42C6-967C-9728E176B587</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
