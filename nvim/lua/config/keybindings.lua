@@ -377,8 +377,8 @@ Keymap("n", "<D-S-d>", function()
 end, { desc = "󰛢 Menu" })
 -- stylua: ignore end
 
--- gf (needs remapping, since `gf` is used for LSP references)
-Keymap("n", "gF", "gf", { desc = "Follow Path" })
+-- P[a]th gf needs remapping, since `gf` is used for LSP references
+Keymap("n", "ga", "gf", { desc = "Follow Path" })
 
 ------------------------------------------------------------------------------
 
