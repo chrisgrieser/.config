@@ -18,7 +18,7 @@ CONFIG_FILES=(
 # INFO if $TERM is not set for alacritty, reinstall alacritty, which
 # recreates the required ~/.terminfo directory.
 [[ "$TERM" == "alacritty" ]] && CONFIG_FILES+=('alacritty_theme_utilities')
-[[ "$TERM" != "xterm-256color" ]] && CONFIG_FILES+=('intro-messages')
+[[ "$TERM" != "xterm-256color" && "$TERM_PROGRAM" != "WezTerm" ]] && CONFIG_FILES+=('intro-messages')
 
 for config_file in "${CONFIG_FILES[@]}"; do
 	# shellcheck disable=1090

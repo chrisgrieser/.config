@@ -145,8 +145,7 @@ end)
 
 -- ALACRITTY / TERMINAL
 -- pseudomaximized window
-Wf_terminal = Wf.new({ "alacritty", "Alacritty" })
-	:setOverrideFilter({ rejectTitles = { "btop" } })
+Wf_terminal = Wf.new({ "alacritty", "Alacritty", "WezTerm" })
 	:subscribe(Wf.windowCreated, function(newWin, appName)
 		AsSoonAsAppRuns(appName, function() MoveResize(newWin, PseudoMaximized) end)
 	end)
