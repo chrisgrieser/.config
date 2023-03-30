@@ -4,7 +4,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # CONFIG
 CUSTOM_ICON_FOLDER="$DOTFILE_FOLDER/custom-app-icons"
-PWA_FOLDER="$HOME/Applications/Chrome Apps.localized"
+PWA_FOLDER="$HOME/Applications/Chrome Apps.localized" # INFO "Vivaldi Apps" is internally still named "Chrome Apps"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -22,9 +22,6 @@ case $APP in
 	;;
 "Spotify")
 	cp -f "$CUSTOM_ICON_FOLDER/Spotify.icns" "$APP.app/Contents/Resources/Icon.icns"
-	;;
-"Cryptomator")
-	cp -f "$CUSTOM_ICON_FOLDER/Cryptomator.icns" "$APP.app/Contents/Resources/Cryptomator.icns"
 	;;
 "Alacritty" | "alacritty")
 	cp -f "$CUSTOM_ICON_FOLDER/Alacritty 2.icns" "$APP.app/Contents/Resources/alacritty.icns"
@@ -81,15 +78,10 @@ case $APP in
 		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Mail.icns\""
 	INFO_WINDOW=1
 	;;
-"Drafts")
-	osascript -e "tell application \"Finder\"
-			open information window of (\"/Applications/$APP.app\" as POSIX file as alias)
-			activate
-		end tell
-		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Drafts green.icns\""
-	INFO_WINDOW=1
-	;;
+
 #────────────────────────────────────────────────────────────────────────────
+#────────────────────────────────────────────────────────────────────────────
+
 "YouTube")
 	cp -f "$CUSTOM_ICON_FOLDER/$APP.icns" "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
 	;;
@@ -99,6 +91,7 @@ case $APP in
 	iconsur set Tagesschau.app &>/dev/null
 	iconsur set Netflix.app &>/dev/null
 	iconsur set Twitch.app &>/dev/null
+	iconsur set CrunchyRoll.app &>/dev/null
 	iconsur set CrunchyRoll.app &>/dev/null
 	cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
 	;;
