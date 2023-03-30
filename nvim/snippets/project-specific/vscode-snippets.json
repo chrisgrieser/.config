@@ -1,12 +1,7 @@
 {
 	"VS Code Snippet (short)": {
 		"prefix": "snippet",
-		"body": [
-			"\"${1:name}\": {",
-			"\t\"prefix\": \"${1:name}\",",
-			"\t\"body\": \"$2\"",
-			"},"
-		],
+		"body": ["\"${1:name}\": {", "\t\"prefix\": \"${1:name}\",", "\t\"body\": \"$2\"", "},"],
 		"description": "VS Code Snippet (short)"
 	},
 	"description key": {

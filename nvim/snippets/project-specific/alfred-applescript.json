@@ -3,7 +3,7 @@
 		"prefix": "Get Alfred Env",
 		"body": "set ${1:envvar} to (system attribute \"${1:envvar}\")"
 	},
-	"argv" :{
+	"argv": {
 		"prefix": "argv",
 		"body": "set input to argv as string"
 	}
