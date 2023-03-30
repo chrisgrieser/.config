@@ -72,26 +72,31 @@ end
 ---shows info on alternate window/buffer/oldfile in that priority
 ---@nodiscard
 function M.altFileStatusline()
-	local maxLen = 15
+	local maxLen = 20
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
 
+	local out, icon
 	if altFile == "" and not altOldfile() then -- no oldfile and after start
-		return ""
+		out = ""
 	elseif altWindow() and altWindow():find("^diffview:") then
-		return " File History"
+		out = "File History"
+		icon = ""
 	elseif altWindow() and altWindow():find("^term:") then
-		return " Terminal"
+		out = " Terminal"
+
 	elseif altWindow() then
-		return "  " .. vim.fs.basename(altWindow()) ---@diagnostic disable-line: param-type-mismatch
+		out =  "  " .. vim.fs.basename(altWindow()) ---@diagnostic disable-line: param-type-mismatch
 	elseif altFile == "" and altOldfile() then
-		return "󰋚 " .. vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
+		out = "󰋚 " .. vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
 	elseif curFile == altFile then -- same name, different file
 		local altParent = fn.expand("#:p:h:t")
-		if #altParent > maxLen then altParent = altParent:sub(1, maxLen) .. "…" end
-		return "# " .. altParent .. "/" .. altFile
+		out = "# " .. altParent .. "/" .. altFile
+	else
+		out =  "# " .. altFile
 	end
-	return "# " .. altFile
+	if #out > maxLen then out = out:sub(1, maxLen) .. "…" end
+	return out
 end
 
 ---switch to alternate window/buffer/oldfile in that priority
