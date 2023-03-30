@@ -5,17 +5,6 @@ require("lua.window-utils")
 ---play/pause spotify with Spotify
 ---@param toStatus string pause|play
 local function spotifyDo(toStatus)
-	-- INFO keeping both versions here due to potential reoccurence of this bug
-	-- https://github.com/Rigellute/spotify-tui/issues/1072
-
-	-- SPOTIFY-DESKTOP
-	-- if hs.spotify.isPlaying() and toStatus == "pause" then
-	-- 	hs.spotify.pause()
-	-- elseif toStatus == "play" then
-	-- 	hs.spotify.play()
-	-- end
-
-	-- SPOTIFY-TUI
 	-- stylua: ignore start
 	local currentStatus = hs.execute( "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s"):gsub("\n$", "")
 	if
@@ -143,19 +132,10 @@ end)
 
 --------------------------------------------------------------------------------
 
--- ALACRITTY / TERMINAL
--- pseudomaximized window
-Wf_terminal = Wf.new({ "alacritty", "Alacritty", "WezTerm" })
-	:subscribe(Wf.windowCreated, function(newWin, appName)
-		AsSoonAsAppRuns(appName, function() MoveResize(newWin, PseudoMaximized) end)
-	end)
-
---------------------------------------------------------------------------------
-
 -- QuickLook: bigger window
 Wf_quicklook = Wf
 	.new(true) -- BUG for some reason, restricting this to "Finder" does not work
-	:setOverrideFilter({ allowTitles = {"^Quick Look$", "^qlmanage$"} })
+	:setOverrideFilter({ allowTitles = { "^Quick Look$", "^qlmanage$" } })
 	:subscribe(Wf.windowCreated, function(newWin)
 		local _, sel =
 			Applescript([[tell application "Finder" to return POSIX path of (selection as alias)]])

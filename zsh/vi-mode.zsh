@@ -94,7 +94,7 @@ bindkey -M vicmd 'q' normal-mode-exit
 # INFO does not work with xterm, therefore using starship indicator instead
 # INFO if $TERM is not set for alacritty, reinstall alacritty, which
 # recreates the required ~/.terminfo directory.
-if [[ "$TERM" != "xterm-256color" || "$TERM_PROGRAM" == "WezTerm" ]]; then
+if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
 	function zle-keymap-select () {
 			case $KEYMAP in
 				vicmd) echo -ne '\e[1 q';;      # block

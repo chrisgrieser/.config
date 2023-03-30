@@ -131,7 +131,7 @@ function MoveResize(win, pos)
 	end
 
 	-- resize
-	RunWithDelays({ 0, 0.2, 0.4 }, function()
+	RunWithDelays({ 0, 0.2, 0.4, 0.7 }, function()
 		-- check for unequal false, since non-resizable wins return nil
 		if CheckSize(win, pos) == true or CheckSize(win, pos) == nil then return end
 		win:moveToUnit(pos)
@@ -218,10 +218,9 @@ Wf_appsOnMouseScreen = Wf.new({
 	"Mimestream",
 	"BetterTouchTool",
 	"Obsidian",
-	"Alacritty",
-	"alacritty",
 	"Slack",
 	"IINA",
+	"WezTerm",
 	"Hammerspoon",
 	"System Settings",
 	"Discord",

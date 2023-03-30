@@ -101,6 +101,7 @@ rules:
                 # bwipeout necessary due to empty buffer created before jumping to '0
                 neovide --frame=buttonless --geometry=101x32 -- -c "execute \"normal! '0\" | bwipeout #"
               else
+                [[ "$FRONT_APP" == "wezterm-gui" ]] && FRONT_APP="WezTerm"
                 open -a "$FRONT_APP"
               fi
       # Restart Alfred
