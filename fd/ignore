@@ -14,6 +14,8 @@ Icon
 **/*.pxd/*
 *.alfredworkflow
 
+# custom markers
+.project-root
 
 # INFO files
 *INFO*
