@@ -4,7 +4,7 @@ require("lua.utils")
 -- hs.osascript.javascriptFromFile, fails on first run when Hammerspoon does not
 -- have the needed permission yet
 
-local function updateCounter() hs.execute("sketchybar --trigger update-sidenote-count") end
+local function updateCounter() hs.execute("sketchybar --trigger update-sidenotes-count") end
 --------------------------------------------------------------------------------
 
 -- REMINDERS -> SIDENOTES
@@ -19,7 +19,8 @@ function UpdateSidenotes()
 	updateCounter()
 end
 
-SideNotesTimer = hs.timer.doAt("05:00", "01d", UpdateSidenotes)
+SideNotesTimer1 = hs.timer.doAt("05:00", "01d", UpdateSidenotes)
+SideNotesTimer2 = hs.timer.doAt("05:30", "01d", UpdateSidenotes) -- redundancy for safety
 
 -- MOVE OFFICE NOTES TO BASE (when loading hammerspoon in office)
 local function moveOfficeNotesToBase()

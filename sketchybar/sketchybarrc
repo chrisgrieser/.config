@@ -85,11 +85,11 @@ sketchybar \
 	script="$PLUGIN_DIR/weather.sh" \
 	icon.y_offset=-1 \
 	\
-	--add item sidenote-count $first_row \
-	--set sidenote-count \
-	script="$PLUGIN_DIR/sidenote-count.sh" \
-	--add event update-sidenote-count \
-	--subscribe sidenote-count update-sidenote-count \
+	--add item sidenotes-count $first_row \
+	--set sidenotes-count \
+	script="$PLUGIN_DIR/sidenotes-count.sh" \
+	--add event update-sidenotes-count \
+	--subscribe sidenotes-count update-sidenotes-count \
 	\
 	--add alias "$ram_bar_item" $second_row \
 	--set "$ram_bar_item" width=35 \

@@ -9,16 +9,17 @@ const sidenotes = Application("SideNotes");
 function run(argv) {
 	const input = argv[0];
 
+	// without the folder field, uses the setting from SideNotes to determine new
+	// note location
 	sidenotes.createNote({
 		text: input,
-		folder: sidenotes.currentFolder(),
 		ispath: fileExists(input),
 	});
 
 	// close sidenotes
 	Application("System Events").keystroke("w", { using: ["command down"] });
 
-	// send first line to Alfred notification
+	// first line for Alfred notification
 	const firstline = input.split("\n").shift();
 	return firstline;
 }
