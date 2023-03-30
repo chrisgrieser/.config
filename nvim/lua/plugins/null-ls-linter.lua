@@ -67,42 +67,41 @@ local function nullConfig()
 				-- do not format markdown and css
 				filetypes = { "javascript", "typescript", "yaml", "json" }, 
 			},
-			builtins.diagnostics.tsc, -- typescript compiler
 
 			-- CSS
 			builtins.formatting.stylelint.with {
 				-- using config without ordering, since ordering on save is confusing
-				-- extra_args = { "--config", LinterConfig .. "/.stylelintrc-formatting.yml" },
+				extra_args = { "--config", LinterConfig .. "/stylelintrc-formatting.yml" },
 			},
 			builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 				filetypes = { "css" },
 				extra_args = {
 					"--quiet", -- only errors, no warnings
 					"--config",
-					LinterConfig .. "/.stylelintrc.yml",
+					LinterConfig .. "/stylelintrc.yml",
 				},
 			},
 
 			-- LUA
-			builtins.formatting.stylua.with {
-				extra_args = { "--config-path", LinterConfig .. "/.stylua.toml" },
-			},
+			builtins.formatting.stylua,
 			builtins.diagnostics.selene.with {
 				extra_args = { "--config", LinterConfig .. "/selene.toml" },
 			},
 
 			-- YAML
 			builtins.diagnostics.yamllint.with {
-				extra_args = { "--config-file", LinterConfig .. "/.yamllint.yaml" },
+				extra_args = { "--config-file", LinterConfig .. "/yamllint.yaml" },
 			},
 
 			-- MARKDOWN & PROSE
 			builtins.diagnostics.vale.with {
-				extra_args = { "--config", LinterConfig .. "/vale/.vale.ini" },
+				extra_args = { "--config", LinterConfig .. "/vale/vale.ini" },
 			},
-			builtins.formatting.cbfmt, -- code blocks
+			builtins.formatting.cbfmt.with {-- code blocks
+				extra_args = { "--config", LinterConfig .. "/cbfmt.toml" },
+			}, 
 			builtins.formatting.markdownlint.with {
-				extra_args = { "--config", LinterConfig .. "/.markdownlintrc" },
+				extra_args = { "--config", LinterConfig .. "/markdownlintrc" },
 			},
 			builtins.diagnostics.markdownlint.with {
 				-- disabling rules that are autofixed already
@@ -111,7 +110,7 @@ local function nullConfig()
 					"trailing-spaces",
 					"no-multiple-blanks",
 					"--config",
-					LinterConfig .. "/.markdownlintrc",
+					LinterConfig .. "/markdownlintrc",
 				},
 			},
 			builtins.completion.spell.with { -- vim's built-in spell-suggestions
