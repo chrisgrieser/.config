@@ -166,7 +166,7 @@ local function pathToProjectRoot()
 	local parentPath = vim.fn.expand("%:p:h")
 	local projectRelPath = parentPath:sub(#vim.loop.cwd() + 2)
 	local nicerDisplay = projectRelPath:gsub("/", "  ") -- same separator as navic
-	return nicerDisplay
+	return "󰝰 " .. nicerDisplay
 end
 
 --------------------------------------------------------------------------------
@@ -176,9 +176,6 @@ end
 local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 local topSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 -- stylua: ignore end
-
-vim.opt.showtabline = 0 -- never show tabline, since displayed in winbar by lualine
-
 
 local lualineConfig = {
 	sections = {
@@ -229,21 +226,27 @@ local lualineConfig = {
 			"location",
 		},
 	},
-	winbar = {
+	-- INFO using the tabline will override vim's default tabline, so the tabline
+	-- should always include the tab element
+	tabline = {
 		lualine_a = {
 			{ clock, section_separators = topSeparators },
 			{
 				"tabs",
 				mode = 2,
-				max_length = vim.o.columns / 2,
-				cond = function () return vim.fn.tabpagenr("$") > 1 end,
+				max_length = vim.o.columns * 0.7,
+				cond = function() return vim.fn.tabpagenr("$") > 1 end,
 			},
 		},
 		lualine_b = {
-			{ pathToProjectRoot, section_separators = topSeparators },
+			{
+				pathToProjectRoot,
+				section_separators = topSeparators,
+				cond = function() return vim.fn.tabpagenr("$") == 1 end,
+			},
 		},
 		lualine_c = {
-			-- "draw_empty" to prevent glithcing if its the only one in winbar
+			-- "draw_empty" to prevent glitching if its the only one in winbar
 			{ navicBreadcrumbs, section_separators = topSeparators, draw_empty = true },
 		},
 		lualine_x = {

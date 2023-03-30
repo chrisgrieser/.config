@@ -69,6 +69,13 @@ return {
 				file_history_panel = {
 					win_config = { height = 5 },
 				},
+				hooks = {
+					diff_buf_read = function()
+						vim.opt_local.list = false
+
+						vim.api.nvim_buf_set_name(0, "Codi: " .. Bo.filetype)
+					end,
+				},
 				keymaps = {
 					view = {
 						{ "n", "<D-w>", vim.cmd.tabclose, {} }, -- close tab instead of window

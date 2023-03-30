@@ -105,8 +105,8 @@ local function dapLualine()
 	local topSeparators = vim.g.neovide and { left = "", right = "" } or { left = "", right = "" }
 
 	-- INFO inserting needed, to not disrupt existing lualine-segment set by nvim-recorder
-	local lualineY = require("lualine").get_config().winbar.lualine_y or {}
-	local lualineZ = require("lualine").get_config().winbar.lualine_z or {}
+	local lualineY = require("lualine").get_config().tabline.lualine_y or {}
+	local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
 	table.insert(lualineY, {
 		function()
 			local breakpoints = require("dap.breakpoints").get()
@@ -130,7 +130,7 @@ local function dapLualine()
 
 	require("lualine").setup {
 		extensions = { "nvim-dap-ui" },
-		winbar = {
+		tabline = {
 			lualine_y = lualineY,
 			lualine_z = lualineZ,
 		},
