@@ -1,11 +1,7 @@
 {
 	"get active file/TFile": {
 		"description": "Obsidian: Get the TFile of the currently active note.",
-		"prefix": [
-			"tFile",
-			"active file",
-			"current"
-		],
+		"prefix": ["tFile", "active file", "current"],
 		"body": "const ${1:activeFile} = this.app.workspace.getActiveFile();"
 	},
 	"get Tfile of active leaf": {
@@ -18,20 +14,12 @@
 	},
 	"recent files": {
 		"description": "Obsidian: Get the 10 most recent files, as an array of file-path strings. (The 10 most recent files are the ones visible in the Quick Switcher, when there no input yet.)",
-		"prefix": [
-			"recent files",
-			"Quick Switcher: recent files",
-			"last opened files"
-		],
+		"prefix": ["recent files", "Quick Switcher: recent files", "last opened files"],
 		"body": "const recentFiles = this.app.workspace.getLastOpenFiles();"
 	},
 	"get editor": {
 		"description": "Obsidian: Get the editor of the currently active note.",
-		"prefix": [
-			"editor",
-			"active file",
-			"current"
-		],
+		"prefix": ["editor", "active file", "current"],
 		"body": [
 			"// getActiveViewOfType will return null if the active view is",
 			"// null or not of type MarkdownView.",
@@ -44,18 +32,12 @@
 	},
 	"get TFile from path": {
 		"description": "Obsidian: Get the TFile corresponding to the (vault-relative) file path string.",
-		"prefix": [
-			"TFile from file path",
-			"file path to TFile"
-		],
+		"prefix": ["TFile from file path", "file path to TFile"],
 		"body": "this.app.vault.getAbstractFileByPath(${1:filepath});"
 	},
 	"add command": {
 		"description": "Obsidian: Add a command to the command palette, making it also available as a hotkey. Usually added to the `onload()` call of the plugin.",
-		"prefix": [
-			"add command",
-			"register command"
-		],
+		"prefix": ["add command", "register command"],
 		"body": [
 			"this.addCommand({",
 			"\tid: \"${1:command-id}\",",
@@ -66,10 +48,7 @@
 	},
 	"add editor command": {
 		"description": "Obsidian: Add a command to the command palette that is only active in edit mode and passes the currently active editor to the respective method.",
-		"prefix": [
-			"add editor command",
-			"register editor command"
-		],
+		"prefix": ["add editor command", "register editor command"],
 		"body": [
 			"this.addCommand({",
 			"\tid: \"${1:command-id}\",",
@@ -107,45 +86,27 @@
 	},
 	"Multiple Cursors?": {
 		"description": "Obsidian: Check whether there are currently multiple cursors.",
-		"prefix": [
-			"cursors",
-			"multiple cursors",
-			"multiple selections"
-		],
+		"prefix": ["cursors", "multiple cursors", "multiple selections"],
 		"body": "const hasMultipleCursors = editor.listSelections().length > 1;"
 	},
 	"Write a file": {
 		"description": "Obsidian: Write text to an existing file.",
-		"prefix": [
-			"modify file",
-			"write to file",
-			"change file"
-		],
+		"prefix": ["modify file", "write to file", "change file"],
 		"body": "this.app.vault.modify(${1:TFile}, ${2:text});"
 	},
 	"get selection (edit mode)": {
 		"description": "Obsidian: Get the selection in Live Preview / Source mode.",
-		"prefix": [
-			"selection",
-			"selected text"
-		],
+		"prefix": ["selection", "selected text"],
 		"body": "const selection = editor.getSelection();"
 	},
 	"get selection (reading mode)": {
 		"description": "Obsidian: Get the selection in Reading Mode. (Note that this will retrieve plain text without formatting.)",
-		"prefix": [
-			"selection",
-			"selected text"
-		],
+		"prefix": ["selection", "selected text"],
 		"body": "const selection = activeWindow.getSelection().toString();"
 	},
 	"Notification": {
 		"description": "Obsidian: Create notification",
-		"prefix": [
-			"notice",
-			"notify",
-			"notification"
-		],
+		"prefix": ["notice", "notify", "notification"],
 		"body": "new Notice (\"${1:msg}\");"
 	}
 }
