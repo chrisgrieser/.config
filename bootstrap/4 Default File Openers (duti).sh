@@ -24,6 +24,8 @@ duti -s "$videoplayerID" mkv all
 duti -s "$videoplayerID" m4a all
 
 # code
+editorID="com.apple.automator.Neovim"
+duti -s "$editorID" http all
 duti -s "$editorID" conf all
 duti -s "$editorID" fdignore all
 duti -s "$editorID" ignore all

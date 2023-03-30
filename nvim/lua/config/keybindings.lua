@@ -31,11 +31,11 @@ Keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again" })
 -- copy [l]ast [n] notification
 Keymap("n", "<leader>ln", function()
 	local history = require("notify").history {}
-	if not history then
+	local lastNotify = history[#history]
+	if not lastNotify then
 		vim.notify("No Notification in this session.", LogWarn)
 		return
 	end
-	local lastNotify = history[#history]
 	local msg = table.concat(lastNotify.message, "\n")
 	Fn.setreg("+", msg)
 	vim.notify("Last Notification copied.", LogTrace)
@@ -320,8 +320,8 @@ Keymap("n", "<Left>", function()
 	return [["zdh"zph]]
 end, { desc = "Move Char Left", expr = true })
 
-Keymap("x", "<Down>", [[:move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
-Keymap("x", "<Up>", [[:move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
+Keymap("x", "<Down>", [[<Esc>:silent '<,'>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
+Keymap("x", "<Up>", [[<Esc>:silent '<,'>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
 Keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })
 Keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "Move selection left" })
 
@@ -685,8 +685,9 @@ Autocmd("FileType", {
 		"help",
 		"lspinfo",
 		"tsplayground",
-		"qf",
+		"qf", -- quickfix
 		"lazy",
+		"httpResult", -- rest.nvim
 		"notify",
 		"AppleScriptRunOutput",
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`

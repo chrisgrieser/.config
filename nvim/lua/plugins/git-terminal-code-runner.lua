@@ -14,11 +14,13 @@ return {
 				show_url = false,
 				show_http_info = true,
 				show_headers = false,
-			},
-			formatters = {
-				-- run prettier on the result (prettier is installed via Mason)
-				json = function(body) return vim.fn.system({ "prettier" }, body) end,
-				html = false,
+				formatters = {
+					-- run yq on the result, prettier does not seem to work
+					json = function(body)
+						return vim.fn.system({ "prettier --parser=json" }, body)
+					end,
+					html = false,
+				},
 			},
 		},
 	},

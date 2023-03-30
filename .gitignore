@@ -18,6 +18,7 @@ karabiner/automatic_backups
 
 # in case of accidental saving of such files in the repo
 *.mp4
+*.mkv
 *.part
 
 # tokens and credentials that some apps annoyingly store in .config 😠
