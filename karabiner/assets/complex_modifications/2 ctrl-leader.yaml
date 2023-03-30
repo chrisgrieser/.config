@@ -258,7 +258,7 @@ rules:
         from: { key_code: i }
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://www.instagram.com/'
+          - shell_command: open 'https://www.instagram.com/direct/t/340282366841710301281160592483616662553'
           - *deactivate-leader
           - *remove-notice
       # [T]elegram

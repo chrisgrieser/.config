@@ -23,7 +23,7 @@ return {
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
 		opts = {
 			icons = { Object = "󰆧 " },
-			separator = "  ",
+			separator = "  ",
 			depth_limit = 7,
 			depth_limit_indicator = "…",
 		},
