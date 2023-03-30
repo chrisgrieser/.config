@@ -120,15 +120,26 @@ return {
 			require("nvim-treesitter.install").update { with_sync = true }
 		end,
 	},
+	{ -- Embedded filetypes
+		"AndrewRadev/inline_edit.vim",
+		-- cmd = "InlineEdit",
+		init = function()
+			vim.g.inline_edit_autowrite = 1
+			vim.g.inline_edit_new_buffer_command = "new"
+			vim.g.inline_edit_proxy_type = "scratch"
+			-- -- https://github.com/AndrewRadev/inline_edit.vim/blob/main/doc/inline_edit.txt#L281
+			-- vim.g.inline_edit_patterns = {
+			-- 	main_filetype = "lua",
+			-- 	sub_filetype = "applescript",
+			-- 	indent_adjustment = 0,
+			-- 	start = "Applescript([[",
+			-- 	["end"] = "]])",
+			-- }
+		end,
+	},
+
 	-- Syntax Highlighting Plugins
 	{ "mityu/vim-applescript", ft = "applescript" },
 	{ "hail2u/vim-css3-syntax", ft = "css" }, -- https://github.com/tree-sitter/tree-sitter-css/issues/34
 	{ "MTDL9/vim-log-highlighting", ft = "log" },
-
-	-- { -- inspect treesitter related things
-	-- 	"nvim-treesitter/playground",
-	-- 	event = "BufEnter",
-	-- 	dependencies = "nvim-treesitter/nvim-treesitter",
-	-- 	init = function() vim.keymap.set("n", "<leader>t", ":TSPlaygroundToggle<CR>") end,
-	-- },
 }
