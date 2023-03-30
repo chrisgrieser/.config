@@ -21,6 +21,14 @@ return {
 			},
 		},
 	},
+	{ -- auto-close inactive buffers
+		"chrisgrieser/nvim-retire-early",
+		dev = true,
+		event = "VeryLazy", -- delay does not hurt really
+		opts = {
+			notificationOnAutoClose = true
+		},
+	},
 	{ -- change cwd per project
 		"ahmedkhalf/project.nvim",
 		event = "VimEnter",

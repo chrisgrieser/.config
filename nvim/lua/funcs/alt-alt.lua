@@ -41,7 +41,7 @@ local function numberOfWins()
 		if
 			win
 			and win ~= ""
-			and not (winConf.external)
+			and not winConf.external
 			and winConf.focusable
 			and api.nvim_win_is_valid(winId)
 		then
@@ -72,31 +72,35 @@ end
 ---shows info on alternate window/buffer/oldfile in that priority
 ---@nodiscard
 function M.altFileStatusline()
-	local maxLen = 20
+	local maxLen = 25
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
 
-	local out, icon
+	local name, icon
 	if altFile == "" and not altOldfile() then -- no oldfile and after start
-		out = ""
+		name = ""
 	elseif altWindow() and altWindow():find("^diffview:") then
-		out = "File History"
+		name = "File History"
 		icon = ""
 	elseif altWindow() and altWindow():find("^term:") then
-		out = " Terminal"
-
+		name = "Terminal"
+		icon = ""
 	elseif altWindow() then
-		out =  "  " .. vim.fs.basename(altWindow()) ---@diagnostic disable-line: param-type-mismatch
+		name = vim.fs.basename(altWindow()) ---@diagnostic disable-line: param-type-mismatch
+		icon = " "
 	elseif altFile == "" and altOldfile() then
-		out = "󰋚 " .. vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
+		name = vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
+		icon = "󰋚"
 	elseif curFile == altFile then -- same name, different file
 		local altParent = fn.expand("#:p:h:t")
-		out = "# " .. altParent .. "/" .. altFile
+		icon = "#"
+		name = altParent .. "/" .. altFile
 	else
-		out =  "# " .. altFile
+		icon = "#"
+		name = altFile
 	end
-	if #out > maxLen then out = out:sub(1, maxLen) .. "…" end
-	return out
+	if #name > maxLen then name = name:sub(1, maxLen) .. "…" end
+	return icon .. " " .. name
 end
 
 ---switch to alternate window/buffer/oldfile in that priority

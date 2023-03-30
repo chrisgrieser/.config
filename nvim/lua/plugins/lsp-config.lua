@@ -147,7 +147,7 @@ local function setupAllLsps()
 	require("neodev").setup {
 		library = {
 			-- not enabling all, since too slow for LSP
-			plugins = { "telescope.nvim", "nvim-various-textobjs", "lazy.nvim" },
+			plugins = { "telescope.nvim", "nvim-various-textobjs", "lazy.nvim", "lualine.nvim" },
 		},
 	}
 

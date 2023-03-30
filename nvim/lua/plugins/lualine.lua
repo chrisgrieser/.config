@@ -165,9 +165,16 @@ local function pathToProjectRoot()
 	if not require("nvim-navic").is_available() then return "" end
 	local parentPath = vim.fn.expand("%:p:h")
 	local projectRelPath = parentPath:sub(#vim.loop.cwd() + 2)
-	local nicerDisplay = projectRelPath:gsub("/", "  ") 
+	local nicerDisplay = projectRelPath:gsub("/", "  ")
 	if nicerDisplay:find("^%s*$") then return "" end
 	return "󰝰 " .. nicerDisplay
+end
+
+local function openBufferCount()
+	local openBuffers = #(vim.fn.getbufinfo { buflisted = 1 })
+	local nonListedBuffers = openBuffers - 2 -- current file and alt file
+	if nonListedBuffers <= 0 then return "" end
+	return "+" .. tostring(nonListedBuffers)
 end
 
 --------------------------------------------------------------------------------
@@ -231,7 +238,15 @@ local lualineConfig = {
 				fmt = function(str) return str:gsub("%w+;#toggleterm#.*", "Toggleterm") end,
 			},
 		},
-		lualine_b = { { require("funcs.alt-alt").altFileStatusline } },
+		lualine_b = {
+			{
+				require("funcs.alt-alt").altFileStatusline,
+				component_separators = { right = "", left = ""},
+			},
+			{
+				openBufferCount,
+			},
+		},
 		lualine_c = {
 			{ require("funcs.quickfix").counter },
 			{ searchCounter },
