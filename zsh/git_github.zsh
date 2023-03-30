@@ -265,6 +265,7 @@ function gdf() {
 		echo "Hash \"$last_commit\" copied."
 	elif [[ "$DECISION:l" == "r" ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
+		echo "File restored."
 	elif [[ "$DECISION:l" == "s" ]]; then
 		ext=${deleted_path##*.}
 		git show "$last_commit:$deleted_path" | bat --language="$ext"
