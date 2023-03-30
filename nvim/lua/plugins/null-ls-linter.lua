@@ -6,6 +6,7 @@ local lintersAndFormatters = {
 	"shellcheck", -- needed for bash-lsp
 	"shfmt", -- shell
 	"markdownlint",
+	"cbfmt", -- use other linters to format codeblocks in markdown
 	"black", -- python formatter
 	"vale", -- natural language
 	"codespell", -- natural language (common misspellings, autoformatted)
@@ -99,6 +100,7 @@ local function nullConfig()
 			builtins.diagnostics.vale.with {
 				extra_args = { "--config", LinterConfig .. "/vale/.vale.ini" },
 			},
+			builtins.formatting.cbfmt, -- code blocks
 			builtins.formatting.markdownlint.with {
 				extra_args = { "--config", LinterConfig .. "/.markdownlintrc" },
 			},
