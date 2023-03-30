@@ -1,18 +1,19 @@
 -- https://wezfurlong.org/wezterm/config/files.html#quick-start
 --------------------------------------------------------------------------------
 local wezterm = require("wezterm")
+local act = wezterm.action
 
-local isAtOffice = wezterm.hostname()
+local isAtOffice = wezterm.hostname():find("mini")
+local isAtMother = wezterm.hostname():find("Mother")
 local log = wezterm.log_info
 
 --------------------------------------------------------------------------------
-log("hostname:", hostname)
+log("hostname:", wezterm.hostname())
 
 --------------------------------------------------------------------------------
 -- device specific settings
-local obscurePassword = hostname:find("mini") -- only hide in office
-local fps = hostname:find("mini") -- only hide in office
-
+local obscurePassword = isAtOffice 
+local fps = isAtMother and 40 or 60
 
 
 local config = {
@@ -21,29 +22,27 @@ local config = {
 	automatically_reload_config = true, -- causes errors too quickly
 	check_for_updates_interval_seconds = 86400,
 	quit_when_all_windows_are_closed = true,
+	window_close_confirmation = "NeverPrompt",
 
-	-- TODO change dynamically
 	default_cwd = wezterm.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub",
 	detect_password_input = obscurePassword, 
 
 	-- Mouse & Cursor
 	hide_mouse_cursor_when_typing = true,
-	cursor_thickness = "0.2cell",
-	cursor_blink_ease_out = "EaseInOut",
-	cursor_blink_ease_in = "EaseInOut",
-	cursor_blink_rate = 500,
+	cursor_thickness = "0.07cell",
+	cursor_blink_rate = 900,
 
 	-- Font / Size
 	font_size = 26,
-	font = wezterm.font("JetBrains Mono"), -- bundled by wezterm, and using nerdfont already as fallback https://wezfurlong.org/wezterm/config/fonts
+	font = wezterm.font("JetBrains Mono"), -- bundled by wezterm, using nerdfont as fallback https://wezfurlong.org/wezterm/config/fonts
 	cell_width = 1.0,
 	line_height = 1.0,
 	initial_cols = 90,
 	initial_rows = 30,
 
 	-- Appearance
-	-- can work programmatically with color schemes: https://wezfurlong.org/wezterm/config/lua/wezterm/get_builtin_color_schemes.html
-	color_scheme = "AdventureTime", 
+	color_scheme = "AdventureTime", -- work programmatically w/ color schemes: https://wezfurlong.org/wezterm/config/lua/wezterm/get_builtin_color_schemes.html
+	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
 	window_background_opacity = 0.95,
 	macos_window_background_blur = 2,
 	native_macos_fullscreen_mode = false,
@@ -69,16 +68,15 @@ local config = {
 	hide_tab_bar_if_only_one_tab = true,
 
 	-- Keybindings
-	disable_default_key_bindings = false,
 	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
+	-- hint mode https://wezfurlong.org/wezterm/quickselect.html
+	disable_default_key_bindings = false,
 	keys = {
-		{ key = "q", mods = "CMD", action = wezterm.action.QuitApplication },
-		{ key = "w", mods = "CMD", action = wezterm.action.CloseCurrentTab },
-		{ key = "k", mods = "CMD", action = wezterm.action.CleaScrollback },
+		{ key = "q", mods = "CMD", action = act.QuitApplication },
+		{ key = "w", mods = "CMD", action = act.CloseCurrentTab },
+		{ key = "f", mods = "CMD", action = act.Search },
 
-		-- hint mode https://wezfurlong.org/wezterm/quickselect.html
-		{ key = "f", mods = "CMD", action = wezterm.action.QuickSelect },
-		{ key = "f", mods = "CTRL", action = wezterm.action.QuickSelect },
+		-- { key = "f", mods = "CTRL", action = act.QuickSelect },
 	},
 }
 
