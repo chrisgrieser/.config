@@ -3,14 +3,16 @@ local ignoredFiletypes, retirementAgeMins
 
 -- https://neovim.io/doc/user/builtin.html#getbufinfo() iterate all buffer and close outdated, non-special buffers
 local function checkOutdatedBuffer()
-	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
+	local openBuffers
+	vim.schedule_wrap( function() openBuffers = vim.fn.getbufinfo { buflisted = 1 } end)()
+
+	if openBuffers == nil then
+		print("offenbuffers is nil")
+		return
+	end
 	for _, buf in pairs(openBuffers) do
-		local bufFt = "?" -- TODO figure out how to get filetype from buffer
-		local ignoredFt = vim.tbl_contains(ignoredFiletypes, bufFt)
 		local recentlyUsed = (os.time() - buf.lastused) > retirementAgeMins * 60
-		if not ignoredFt and not recentlyUsed then
-			vim.cmd.bdelete(buf.bufnr)
-		end
+		if not recentlyUsed then vim.api.nvim_buf_delete(buf.bufnr, { force = false, unload = false }) end
 	end
 end
 
@@ -23,7 +25,7 @@ function M.setup(opts)
 	-- setup timer https://neovim.io/doc/user/luvref.html#uv.new_timer()
 	local timer = vim.loop.new_timer()
 	if not timer then return end
-	timer:start(0,  1000, checkOutdatedBuffer)
+	timer:start(0, 5000, checkOutdatedBuffer)
 end
 
 return M

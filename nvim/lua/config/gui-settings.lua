@@ -10,7 +10,7 @@ Autocmd("VimEnter", {
 		Fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
 
 		-- HACK to fix neovide sometimes not enlarging the window
-		Fn.system("open -g 'enlarge-neovide-window-and-fix-sidenotes'")
+		Fn.system("open -g 'hammerspoon://enlarge-neovide-window-and-fix-sidenotes'")
 	end,
 })
 

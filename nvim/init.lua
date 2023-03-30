@@ -25,4 +25,4 @@ require("config.abbreviations")
 
 --------------------------------------------------------------------------------
 
--- require("funcs.auto-closer").setup { retirementAgeMins = 5 }
+require("funcs.auto-closer").setup { retirementAgeMins = 1 }

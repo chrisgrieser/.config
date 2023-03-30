@@ -131,7 +131,7 @@ function MoveResize(win, pos)
 	end
 
 	-- resize
-	RunWithDelays({ 0, 0.2, 0.4, 0.6, 0.8 }, function()
+	RunWithDelays({ 0, 0.2, 0.4 }, function()
 		-- check for unequal false, since non-resizable wins return nil
 		if CheckSize(win, pos) == true or CheckSize(win, pos) == nil then return end
 		win:moveToUnit(pos)
