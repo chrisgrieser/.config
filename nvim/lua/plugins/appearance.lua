@@ -36,12 +36,9 @@ return {
 		lazy = true, -- loaded by other plugins
 		opts = {
 			override = {
-				applescript = {
-					icon = "",
-					color = "#7f7f7f",
-					name = "Applescript",
-				},
+				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
 				lazy = { icon = "", name = "Lazy" },
+				http = { icon = "󰴚", name = "http" },
 				Glance = { icon = "󰒕", name = "Glance" },
 			},
 		},

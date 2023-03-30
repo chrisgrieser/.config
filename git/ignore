@@ -12,6 +12,8 @@ Icon
 *.key
 pw.*
 
+# 
+
 # created due to sync issues
 *.icloud
 
@@ -19,5 +21,5 @@ pw.*
 node_modules
 
 # custom files
-.harpoon
+.project-root
 
