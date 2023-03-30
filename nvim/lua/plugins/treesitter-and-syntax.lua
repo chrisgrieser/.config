@@ -26,6 +26,7 @@ local tsConfig = {
 		"html",
 		"help", -- vim help files
 		"query", -- treesitter query language
+		"http", -- http requests as format, used for rest.nvim
 	},
 	auto_install = false, -- install missing parsers when entering a buffer
 
