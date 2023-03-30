@@ -22,3 +22,7 @@ require("config.textobjects")
 require("config.clipboard")
 require("config.user-commands")
 require("config.abbreviations")
+
+--------------------------------------------------------------------------------
+
+-- require("funcs.auto-closer").setup { retirementAgeMins = 5 }

@@ -138,7 +138,7 @@ UriScheme("enlarge-neovide-window-and-fix-sidenotes", function()
 	local neovideWin = App("neovide"):mainWindow()
 	local size = IsProjector() and Maximized or PseudoMaximized
 	MoveResize(neovideWin, size)
-	App("SideNotes"):hide() -- FIX weird sidentoes bug when restarting neovide
+	App("SideNotes"):hide() -- FIX weird sidenotes bug when restarting neovide
 end)
 
 --------------------------------------------------------------------------------
