@@ -2,24 +2,19 @@
 --------------------------------------------------------------------------------
 local wezterm = require("wezterm")
 local act = wezterm.action
-local log = wezterm.log_info
-
---------------------------------------------------------------------------------
-
-local isAtOffice = wezterm.hostname():find("mini")
-local isAtMother = wezterm.hostname():find("Mother")
-log("hostname:", wezterm.hostname())
-log("beep")
+-- local log = wezterm.log_info
 
 --------------------------------------------------------------------------------
 -- device specific settings
+local isAtOffice = wezterm.hostname():find("mini")
+local isAtMother = wezterm.hostname():find("Mother")
 local obscurePassword = isAtOffice
 local fps = isAtMother and 40 or 60
 
 -- on start, move window to the side ("pseudomaximized")
 wezterm.on("gui-startup", function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
-	window:gui_window():set_position(707, 0)
+	window:gui_window():set_position(705, 0)
 end)
 
 local config = {
@@ -76,9 +71,18 @@ local config = {
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
 
+	mouse_bindings = {
+		{ -- cmd will open the link under the mouse cursor
+			event = { Up = { streak = 1, button = "Left" } },
+			mods = "CMD",
+			action = act.OpenLinkAtMouseCursor,
+		},
+	},
+
 	-- Keybindings
+	-- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
+	-- Keynames: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
 	disable_default_key_bindings = false,
-	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
 	keys = {
 		{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 		{ key = "q", mods = "CMD", action = act.QuitApplication },
@@ -87,25 +91,21 @@ local config = {
 		{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
 		{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
 		{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
-		{ key = "ESC", mods = "CTRL", action = wezterm.action.ShowDebugOverlay },
 
 		{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 		{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
 		{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
 
+		--------------------------------------------------------------------------
 		-- MODES
+		-- Console / REPL
+		{ key = "Escape", mods = "CTRL", action = wezterm.action.ShowDebugOverlay },
+
 		-- copy mode https://wezfurlong.org/wezterm/copymode.html
 		{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
 
 		-- hint mode https://wezfurlong.org/wezterm/quickselect.html
 		{ key = "f", mods = "CMD|SHIFT", action = act.QuickSelect },
-	},
-	mouse_bindings = {
-		{ -- cmd will open the link under the mouse cursor
-			event = { Up = { streak = 1, button = "Left" } },
-			mods = "CMD",
-			action = act.OpenLinkAtMouseCursor,
-		},
 	},
 }
 

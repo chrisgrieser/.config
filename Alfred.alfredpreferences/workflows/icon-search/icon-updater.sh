@@ -20,15 +20,6 @@ case $APP in
 "Steam")
 	iconsur set "$APP.app"
 	;;
-"Spotify")
-	cp -f "$CUSTOM_ICON_FOLDER/Spotify.icns" "$APP.app/Contents/Resources/Icon.icns"
-	;;
-"Alacritty" | "alacritty")
-	cp -f "$CUSTOM_ICON_FOLDER/Alacritty 2.icns" "$APP.app/Contents/Resources/alacritty.icns"
-	;;
-"kitty" | "Kitty")
-	cp -f "$CUSTOM_ICON_FOLDER/kitty.icns" "$APP.app/Contents/Resources/kitty.icns"
-	;;
 "AppCleaner")
 	cp -f "$CUSTOM_ICON_FOLDER/AppCleaner.icns" "$APP.app/Contents/Resources/AppCleaner.icns"
 	;;
