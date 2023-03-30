@@ -1,31 +1,45 @@
 local M = {}
-local ignoredFiletypes, retirementAgeMins
+local ignoredFiletypes, retirementAgeMins, notificationOnAutoClose
+--------------------------------------------------------------------------------
 
--- https://neovim.io/doc/user/builtin.html#getbufinfo() iterate all buffer and close outdated, non-special buffers
+-- iterate all buffer and close inactive, non-special buffers
 local function checkOutdatedBuffer()
-	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
+	local openBuffers = vim.fn.getbufinfo { buflisted = 1 } -- https://neovim.io/doc/user/builtin.html#getbufinfo
+
 	for _, buf in pairs(openBuffers) do
 		local usedSecsGo = os.time() - buf.lastused
 		local recentlyUsed = usedSecsGo < retirementAgeMins * 60
-		local bufFt = vim.api.nvim_buf_get_option(buf.bufnr)
-		if not recentlyUsed then
+		local bufFt = vim.api.nvim_buf_get_option(buf.bufnr, "filetype")
+		local isIgnoredFt = vim.tbl_contains(ignoredFiletypes, bufFt)
+		local isSpecialBuffer = vim.api.nvim_buf_get_option(buf.bufnr, "buftype") ~= ""
+
+		if not (recentlyUsed or isIgnoredFt or isSpecialBuffer) then
 			local filename = buf.name:gsub(".*/", "")
-			print("Closing Buffer" .. filename)
+			if notificationOnAutoClose then vim.notify("Auto-Closing Buffer: " .. filename) end
 			vim.api.nvim_buf_delete(buf.bufnr, { force = false, unload = false })
 		end
 	end
 end
 
----@param opts table
+--------------------------------------------------------------------------------
+
+---@class opts
+---@field retirementAgeMins number minutes after which an inactive buffer is closed
+---@field ignoredFiletypes string[] list of filetypes to never close
+---@field notificationOnAutoClose boolean list of filetypes to never close
+
+---@param opts opts
 function M.setup(opts)
 	if not opts then opts = {} end
-	retirementAgeMins = opts.retirementAgeMins or 30
-	ignoredFiletypes = opts.ignoredFiletypes or {}
+	-- default values
+	retirementAgeMins = opts.retirementAgeMins or 10
+	ignoredFiletypes = opts.ignoredFiletypes or { "lazy" }
+	notificationOnAutoClose = opts.notificationOnAutoClose or false
 
-	-- setup timer https://neovim.io/doc/user/luvref.html#uv.new_timer()
-	local timer = vim.loop.new_timer()
+	local timer = vim.loop.new_timer() -- https://neovim.io/doc/user/luvref.html#uv.new_timer()
 	if not timer then return end
-	timer:start(0, 5000, vim.schedule_wrap(checkOutdatedBuffer))
+	timer:start(0, 5000, vim.schedule_wrap(checkOutdatedBuffer)) -- schedule wrapper required for timers
 end
 
+--------------------------------------------------------------------------------
 return M
