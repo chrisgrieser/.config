@@ -1,3 +1,5 @@
+-- https://wezfurlong.org/wezterm/config/files.html#quick-start
+--------------------------------------------------------------------------------
 local wezterm = require("wezterm") -- Pull in the wezterm API
 local config = {} -- This table will hold the configuration.
 
@@ -10,6 +12,7 @@ if wezterm.config_builder then config = wezterm.config_builder() end
 
 -- For example, changing the color scheme:
 config.color_scheme = "AdventureTime"
+config.font_size = 25
 
 --------------------------------------------------------------------------------
 
