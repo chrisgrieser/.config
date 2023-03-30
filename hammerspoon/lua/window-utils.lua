@@ -180,9 +180,14 @@ function AutoTile(winSrc)
 			if #(App("Finder"):allWindows()) == 0 then App("Finder"):hide() end
 		end)
 	elseif #wins == 1 then
-		local pos = PseudoMaximized
-		if IsProjector() then pos = Maximized end
-		if FrontAppName() == "Finder" then pos = Centered end
+		local pos
+		if IsProjector() then
+			pos = Maximized
+		elseif FrontAppName() == "Finder" then
+			pos = Centered
+		else
+			pos = PseudoMaximized
+		end
 		MoveResize(wins[1], pos)
 	elseif #wins == 2 then
 		MoveResize(wins[1], LeftHalf)
