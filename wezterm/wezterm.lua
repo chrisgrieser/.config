@@ -4,12 +4,9 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 -- local log = wezterm.log_info
 
---------------------------------------------------------------------------------
--- device specific settings
 local isAtOffice = wezterm.hostname():find("mini")
 local isAtMother = wezterm.hostname():find("Mother")
-local obscurePassword = isAtOffice
-local fps = isAtMother and 40 or 60
+--------------------------------------------------------------------------------
 
 -- on start, move window to the side ("pseudomaximized")
 wezterm.on("gui-startup", function(cmd)
@@ -17,12 +14,14 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():set_position(705, 0)
 end)
 
+--------------------------------------------------------------------------------
+
 local config = {
 	-- Meta
 	check_for_updates = true,
 	automatically_reload_config = true, -- causes errors too quickly
 	check_for_updates_interval_seconds = 86400,
-	detect_password_input = obscurePassword,
+	detect_password_input = isAtOffice,
 
 	-- Start/Close
 	quit_when_all_windows_are_closed = true,
@@ -50,11 +49,11 @@ local config = {
 	bold_brightens_ansi_colors = "BrightAndBold",
 	window_background_opacity = 0.95,
 	macos_window_background_blur = 2,
-	max_fps = fps,
+	max_fps = isAtMother and 40 or 60,
 	native_macos_fullscreen_mode = false,
 	window_padding = {
 		left = "0.5cell",
-		right = "1.2cell", -- if scrollbar enabled, controls its width, too
+		right = "1.3cell", -- if scrollbar enabled, controls its width, too
 		top = "0.2cell",
 		bottom = "0.4cell",
 	},
@@ -66,6 +65,7 @@ local config = {
 
 	-- Tabs
 	enable_tab_bar = true,
+	tab_max_width = 30,
 	use_fancy_tab_bar = true,
 	show_tabs_in_tab_bar = true,
 	show_new_tab_button_in_tab_bar = false,
