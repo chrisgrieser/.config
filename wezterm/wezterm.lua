@@ -68,14 +68,15 @@ local config = {
 	hide_tab_bar_if_only_one_tab = true,
 
 	-- Keybindings
-	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
-	-- hint mode https://wezfurlong.org/wezterm/quickselect.html
 	disable_default_key_bindings = false,
+	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
 	keys = {
 		{ key = "q", mods = "CMD", action = act.QuitApplication },
-		{ key = "w", mods = "CMD", action = act.CloseCurrentTab },
-		{ key = "f", mods = "CMD", action = act.Search },
+		-- { key = "w", mods = "CMD", action = act.CloseCurrentTab },
+		-- { key = "f", mods = "CMD", action = act.Search },
+		-- { key = "k", mods = "CMD", action = wezterm.action.ClearScrollback("ScrollbackAndViewport") },
 
+		-- hint mode https://wezfurlong.org/wezterm/quickselect.html
 		-- { key = "f", mods = "CTRL", action = act.QuickSelect },
 	},
 }
