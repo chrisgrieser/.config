@@ -3,6 +3,12 @@ return {
 		"metakirby5/codi.vim",
 		cmd = { "CodiNew", "Codi", "CodiExpand" },
 	},
+	{ -- HTTP requester (tet APIs)
+		"rest-nvim/rest.nvim",
+		ft = "http",
+		dependencies = "nvim-lua/plenary.nvim",
+		config = true,
+	},
 	{ -- better embedded terminal (+ code runner for shell, somewhat)
 		"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm", "ToggleTermSendVisualSelection" },
