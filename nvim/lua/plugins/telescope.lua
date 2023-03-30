@@ -100,7 +100,7 @@ local function telescopeConfig()
 				prompt_title = false,
 				results_title = false,
 				theme = "cursor",
-				layout_config = { cursor = { width = 0.5 } },
+				layout_config = { cursor = { width = 0.5, height = 0.4 } },
 			},
 			spell_suggest = {
 				initial_mode = "normal",
