@@ -165,13 +165,13 @@ local function pathToProjectRoot()
 	if not require("nvim-navic").is_available() then return "" end
 	local parentPath = vim.fn.expand("%:p:h")
 	local projectRelPath = parentPath:sub(#vim.loop.cwd() + 2)
-	local nicerDisplay = projectRelPath:gsub("/", "  ") -- same separator as navic
+	local nicerDisplay = projectRelPath -- :gsub("/", " / ") 
 	return "󰝰 " .. nicerDisplay
 end
 
 --------------------------------------------------------------------------------
 
--- nerdfont: icons with prefix 'ple-'
+-- nerdfont: powerline icons have the prefix 'ple-'
 -- stylua: ignore start
 local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 local topSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
@@ -273,9 +273,6 @@ local lualineConfig = {
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,
-		disabled_filetypes = {
-			winbar = { "toggleterm", "gitcommit" },
-		},
 	},
 }
 
@@ -283,6 +280,6 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "VimEnter",
+	event = "UIEnter",
 	opts = lualineConfig,
 }
