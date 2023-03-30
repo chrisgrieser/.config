@@ -316,7 +316,7 @@ Keymap("n", "<Right>", function()
 	return [["zx"zp]]
 end, { desc = "Move Char Right", expr = true })
 Keymap("n", "<Left>", function()
-	if vim.fn.col(".") >= 1 then return end
+	if vim.fn.col(".") == 1 then return end
 	return [["zdh"zph]]
 end, { desc = "Move Char Left", expr = true })
 

@@ -29,14 +29,14 @@ function M.commentHr()
 	-- shorten if it was on blank line, since fn.indent() does not return indent
 	-- line would have if it has content
 	if wasOnBlank then
-		vim.cmd.normal{"j==", bang = true}
+		vim.cmd.normal { "j==", bang = true }
 		local hrIndent = vim.fn.indent(".")
 		-- cannot use simply :sub, since it assumes one-byte-size chars
 		local hrLine = vim.fn.getline(".") ---@diagnostic disable-next-line: assign-type-mismatch, undefined-field
 		hrLine = hrLine:gsub(linechar, "", hrIndent)
 		vim.fn.setline(".", hrLine)
 	else
-		vim.cmd.normal{"jj==", bang = true}
+		vim.cmd.normal { "jj==", bang = true }
 	end
 	---@diagnostic enable: param-type-mismatch
 end
