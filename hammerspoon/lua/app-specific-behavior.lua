@@ -125,7 +125,6 @@ NeovideWatcher = Aw.new(function(appName, eventType)
 
 	if eventType == Aw.activated then
 		addCssSelectorLeadingDot()
-		App("SideNotes"):hide() -- FIX weird sidenotes bug?
 
 	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
 	elseif eventType == Aw.terminated then
@@ -135,10 +134,11 @@ end):start()
 
 -- HACK since neovide does not send a launch signal, triggering window resizing
 -- via its URI scheme called on VimEnter
-UriScheme("enlarge-neovide-window", function()
+UriScheme("enlarge-neovide-window-and-fix-sidenotes", function()
 	local neovideWin = App("neovide"):mainWindow()
 	local size = IsProjector() and Maximized or PseudoMaximized
 	MoveResize(neovideWin, size)
+	App("SideNotes"):hide() -- FIX weird sidentoes bug when restarting neovide
 end)
 
 --------------------------------------------------------------------------------
