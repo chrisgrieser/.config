@@ -1,9 +1,9 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
--- enable wrapping lines
--- HACK for whatever reason, needs to be wrapped in a condition
-if not vim.opt_local.wrap:get() then require("funcs.quality-of-life").toggleWrap() end
+-- Rnable wrapping lines
+-- HACK needs to be wrapped in a condition, probably due to some recursion thing
+if not vim.opt_local.wrap:get() then Cmd.normal(",ow") end
 
 -- decrease line length without zen mode plugins
 vim.opt_local.signcolumn = "yes:9"

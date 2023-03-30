@@ -1,5 +1,4 @@
 require("config.utils")
-local qol = require("funcs.quality-of-life")
 --------------------------------------------------------------------------------
 -- META
 
@@ -145,7 +144,7 @@ Keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Delete Qui
 Keymap("n", "<leader>q", function() require("replacer").run { rename_files = false } end, { desc = " Replacer.nvim" })
 
 -- COMMENTS & ANNOTATIONS
-Keymap("n", "qw", qol.commentHr, { desc = "Horizontal Divider" })
+Keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = "Horizontal Divider" })
 Keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
 -- stylua: ignore
 Keymap("n", "qf", function() require("neogen").generate({}) end, { desc = "Neogen: Comment Function" })
@@ -227,8 +226,8 @@ Autocmd("FileType", {
 Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "󱗘 :s cword" })
 Keymap("n", "<leader>fk", [[:%s/\(.*\)/\1/g]] .. ("<Left>"):rep(10), { desc = "󱗘 :s kirby" })
 Keymap("x", "<leader>fk", [[:s/\(.*\)/\1/g]] .. ("<Left>"):rep(10), { desc = "󱗘 :s kirby" })
-Keymap("n", "<leader>ff", ":%s///g<Left><Left><Left>", { desc = "󱗘 :s" })
-Keymap("x", "<leader>ff", ":s///g<Left><Left><Left>", { desc = "󱗘 :s" })
+Keymap("n", "<leader>ff", ":%s///g<Left><Left><Left>", { desc = "󱗘 :substitute" })
+Keymap("x", "<leader>ff", ":s///g<Left><Left><Left>", { desc = "󱗘 :substitute in selection" })
 
 Keymap("n", "<leader>f<Tab>", function()
 	Bo.expandtab = false
@@ -308,21 +307,28 @@ Keymap("n", "gx", function()
 end, { desc = "󰌹 Smart URL Opener" })
 
 --------------------------------------------------------------------------------
+-- LINE & CHARACTER MOVEMENT
 
--- Line & Character Movement
-Keymap("n", "<Down>", qol.moveLineDown)
-Keymap("n", "<Up>", qol.moveLineUp)
-Keymap("x", "<Down>", qol.moveSelectionDown)
-Keymap("x", "<Up>", qol.moveSelectionUp)
-Keymap("n", "<Right>", qol.moveCharRight)
-Keymap("n", "<Left>", qol.moveCharLeft)
-Keymap("x", "<Right>", qol.moveSelectionRight)
-Keymap("x", "<Left>", qol.moveSelectionLeft)
+Keymap("n", "<Down>", [[:. move +1<CR>==]], { desc = "Move Line Down" })
+Keymap("n", "<Up>", [[:. move -2<CR>==]], { desc = "Move Line Up" })
+Keymap("n", "<Right>", function()
+	if vim.fn.col(".") >= vim.fn.col("$") - 1 then return end
+	return [["zx"zp]]
+end, { desc = "Move Char Right", expr = true })
+Keymap("n", "<Left>", function()
+	if vim.fn.col(".") >= 1 then return end
+	return [["zdh"zph]]
+end, { desc = "Move Char Left", expr = true })
+
+Keymap("x", "<Down>", [[:move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
+Keymap("x", "<Up>", [[:move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
+Keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })
+Keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "Move selection left" })
 
 -- Merging / Splitting Lines
+Keymap("n", "<leader>s", Cmd.TSJToggle, { desc = "split/join" })
 Keymap({ "n", "x" }, "M", "J", { desc = "merge line up" })
 Keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "merge line down" })
-Keymap("n", "<leader>s", Cmd.TSJToggle, { desc = "split/join" })
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
@@ -449,12 +455,17 @@ Keymap("n", "go", function()
 	require("telescope").extensions.file_browser.file_browser { prompt_title = title }
 end, { desc = " Browse in Project" })
 
-Keymap("n", "gO", function()
-	require("telescope").extensions.file_browser.file_browser {
-		path = Expand("%:p:h"),
-		prompt_title = "󰝰 " .. Expand("%:p:h:t"),
-	}
-end, { desc = " Browse in current Folder" })
+Keymap(
+	"n",
+	"gO",
+	function()
+		require("telescope").extensions.file_browser.file_browser {
+			path = Expand("%:p:h"),
+			prompt_title = "󰝰 " .. Expand("%:p:h:t"),
+		}
+	end,
+	{ desc = " Browse in current Folder" }
+)
 -- stylua: ignore
 Keymap("n", "gl", function()
 	require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() }
@@ -585,12 +596,12 @@ Keymap("n", "<leader>gd", function()
 end, { desc = "󰊢 File History (Diffview)" })
 
 --------------------------------------------------------------------------------
+-- OPTION TOGGLING
 
--- Option Toggling
 Keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = " Toggle Relative Line Numbers" })
 Keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers" })
-Keymap("n", "<leader>ow", qol.toggleWrap, { desc = " Toggle Wrap" })
 Keymap("n", "<leader>ol", Cmd.LspRestart, { desc = " 󰒕 LSP Restart" })
+
 Keymap("n", "<leader>od", function()
 	if vim.g.diagnosticOn == nil then vim.g.diagnosticOn = true end
 	if vim.g.diagnosticOn then
@@ -600,6 +611,29 @@ Keymap("n", "<leader>od", function()
 	end
 	vim.g.diagnosticOn = not vim.g.diagnosticOn
 end, { desc = " 󰒕 Toggle Diagnostics" })
+
+Keymap("n", "<leader>ow", function()
+	local wrapOn = vim.opt_local.wrap:get()
+	if wrapOn then
+		vim.opt_local.wrap = false
+		vim.opt_local.colorcolumn = vim.opt.colorcolumn:get()
+		vim.keymap.del({ "n", "x" }, "H", { buffer = true })
+		vim.keymap.del({ "n", "x" }, "L", { buffer = true })
+		vim.keymap.del({ "n", "x" }, "J", { buffer = true })
+		vim.keymap.del({ "n", "x" }, "K", { buffer = true })
+		vim.keymap.del({ "n", "x" }, "k", { buffer = true })
+		vim.keymap.del({ "n", "x" }, "j", { buffer = true })
+	else
+		vim.opt_local.wrap = true
+		vim.opt_local.colorcolumn = ""
+		Keymap({ "n", "x" }, "H", "g^", { buffer = true })
+		Keymap({ "n", "x" }, "L", "g$", { buffer = true })
+		Keymap({ "n", "x" }, "J", "6gj", { buffer = true })
+		Keymap({ "n", "x" }, "K", "6gk", { buffer = true })
+		Keymap({ "n", "x" }, "j", "gj", { buffer = true })
+		Keymap({ "n", "x" }, "k", "gk", { buffer = true })
+	end
+end, { desc = " Toggle Wrap" })
 
 --------------------------------------------------------------------------------
 
@@ -621,9 +655,28 @@ Keymap("n", "7", function()
 	end
 end, { desc = " Codi" })
 
-Keymap("n", "5", function ()
-	
+-- edit embedded filetype
+Keymap("n", "5", function()
+	if Bo.filetype ~= "markdown" then
+		vim.notify("Only markdown codeblocks can be edited without a selection.")
+		return
+	end
+	Cmd.InlineEdit()
+	Keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
 end, { desc = ":InlineEdit" })
+Keymap("x", "5", function()
+	local fts = { "applescript", "bash", "vim" }
+	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
+		if not ft then return end
+		-- leave visual mode
+		local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
+		vim.api.nvim_feedkeys(escKey, "nx", false)
+
+		Cmd("'<,'>InlineEdit " .. ft)
+		Keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
+	end)
+end, { desc = ":InlineEdit" })
+
 --------------------------------------------------------------------------------
 
 -- q / Esc to close special windows
