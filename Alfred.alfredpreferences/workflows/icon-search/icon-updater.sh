@@ -88,10 +88,10 @@ case $APP in
 "PWAs")
 	cd "$PWA_FOLDER" || exit 1
 	iconsur set --local reddxxx.app &>/dev/null
+	iconsur set --input="$CUSTOM_ICON_FOLDER" --scale=1.1 BunnyFap.app &>/dev/null
 	iconsur set Tagesschau.app &>/dev/null
 	iconsur set Netflix.app &>/dev/null
 	iconsur set Twitch.app &>/dev/null
-	iconsur set CrunchyRoll.app &>/dev/null
 	iconsur set CrunchyRoll.app &>/dev/null
 	cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
 	;;
@@ -99,6 +99,8 @@ case $APP in
 	NONE_FOUND=1
 	;;
 esac
+
+#───────────────────────────────────────────────────────────────────────────────
 
 if [[ $NONE_FOUND == 1 ]]; then
 	echo -n "No icon set up for $APP."
