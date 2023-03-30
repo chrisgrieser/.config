@@ -70,7 +70,7 @@ local function runningApps()
 		local app = win:application()
 		if not app then return end
 		local appName = app:name()
-		local isExcludedApp = { "Hammerspoon", "Twitter", "Notification Centre", FrontAppName() }
+		local isExcludedApp = { "SideNotes", "CleanShot X", "Hammerspoon", "Twitter", "Notification Centre", FrontAppName() }
 		if not TableContains(isExcludedApp, appName) and app:mainWindow() then
 			table.insert(appsArr, { text = appName })
 		end

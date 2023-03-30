@@ -32,15 +32,8 @@ local function hideOthers(appObj)
 	-- only hide when bigger window
 	if not (CheckSize(thisWin, PseudoMaximized) or CheckSize(thisWin, Maximized)) then return end
 
-	local appsNotToHide = {
-		"IINA",
-		"zoom.us",
-		"CleanShot X",
-		"SideNotes",
-		"Twitter",
-		"Alfred", -- needed for Alfred compatibility mode
-		appObj:name(), -- app itself
-	}
+	local appsNotToHide =
+		{ "IINA", "zoom.us", "CleanShot X", "SideNotes", "Twitter", "Alfred", appObj:name() }
 	for _, w in pairs(thisWin:otherWindowsSameScreen()) do
 		local app = w:application()
 		if
@@ -59,7 +52,7 @@ end
 -- if an app with bg-transparency is activated, hide all other apps
 -- if such an app is terminated, unhide them again
 TransBgAppWatcher = Aw.new(function(appName, event, appObj)
-	local transBgApp = { "neovide", "Neovide", "Obsidian", "kitty", "Alacritty", "alacritty" }
+	local transBgApp = { "neovide", "Neovide", "Obsidian", "kitty", "Alacritty", "alacritty", "WezTerm" }
 	if IsProjector() or not (TableContains(transBgApp, appName)) then return end
 
 	if event == Aw.terminated then
@@ -88,6 +81,8 @@ AutoTileAppWatcher = Aw.new(function(appName, eventType, appObj)
 		and #appObj:allWindows() > 1
 		and not (appObj:findWindow("Picture in Picture"))
 		and FrontAppName() ~= "Alfred" -- Alfred compatibility mode
+		and FrontAppName() ~= "SideNotes"
+		and FrontAppName() ~= "CleanShot X"
 	then
 		appObj:hide()
 	end
@@ -101,6 +96,7 @@ Wf_maxWindows = Wf.new(true):subscribe(Wf.windowUnfocused, function(win)
 		and CheckSize(win, Maximized)
 		and FrontAppName() ~= "Alfred" -- Alfred Compatibility Mode
 		and FrontAppName() ~= "CleanShot X"
+		and FrontAppName() ~= "SideNotes"
 	then
 		win:application():hide()
 	end
