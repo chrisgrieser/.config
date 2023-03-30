@@ -101,7 +101,7 @@ local function nullConfig()
 				extra_args = { "--config", LinterConfig .. "/cbfmt.toml" },
 			},
 			builtins.formatting.markdownlint.with {
-				extra_args = { "--config", LinterConfig .. "/markdownlintrc.json" },
+				extra_args = { "--config", LinterConfig .. "/markdownlintrc" },
 			},
 			builtins.diagnostics.markdownlint.with {
 				-- disabling rules that are autofixed already

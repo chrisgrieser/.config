@@ -3,7 +3,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 [languages]
-lua = ["stylua -s -"]
+lua = ["stylua --search-parent-directories -"]
 python = ["black --fast -"]
 yaml = ["prettier"]
 json = ["prettier"]
