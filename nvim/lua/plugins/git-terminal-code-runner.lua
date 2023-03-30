@@ -71,9 +71,8 @@ return {
 				},
 				hooks = {
 					diff_buf_read = function()
-						vim.opt_local.list = false
-
-						vim.api.nvim_buf_set_name(0, "Codi: " .. Bo.filetype)
+						-- set buffername, mostly for tabline (lualine)
+						pcall(function() vim.api.nvim_buf_set_name(0, "Diffview") end)
 					end,
 				},
 				keymaps = {

@@ -24,7 +24,7 @@ require("lazy").setup("plugins", {
 	ui = {
 		wrap = true,
 		border = BorderStyle,
-		size = { width = 1, height = 1 }, -- full sized
+		size = { width = 0.9, height = 0.8 }, -- full sized
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates, required for statusline

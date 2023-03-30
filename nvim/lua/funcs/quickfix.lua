@@ -29,7 +29,10 @@ end
 -- keymaps
 
 ---delete the quickfixlist
-function M.deleteList() vim.cmd.cexpr("[]") end
+function M.deleteList()
+	vim.cmd.cexpr("[]")
+	vim.notify("Quickfix List emptied.")
+end
 
 ---goto next quickfix and wrap around
 function M.next()

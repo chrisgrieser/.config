@@ -175,6 +175,7 @@ end
 -- stylua: ignore start
 local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 local topSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
+local emptySeparators = { left = "", right = "" }
 -- stylua: ignore end
 
 local lualineConfig = {
@@ -230,11 +231,12 @@ local lualineConfig = {
 	-- should always include the tab element
 	tabline = {
 		lualine_a = {
-			{ clock, section_separators = topSeparators },
+			{ clock, section_separators = emptySeparators },
 			{
 				"tabs",
 				mode = 2,
 				max_length = vim.o.columns * 0.7,
+				section_separators = emptySeparators,
 				cond = function() return vim.fn.tabpagenr("$") > 1 end,
 			},
 		},
@@ -246,7 +248,7 @@ local lualineConfig = {
 			},
 		},
 		lualine_c = {
-			-- "draw_empty" to prevent glitching if its the only one in winbar
+			-- "draw_empty" to prevent glitching if its the only one in tabline
 			{ navicBreadcrumbs, section_separators = topSeparators, draw_empty = true },
 		},
 		lualine_x = {
@@ -267,7 +269,6 @@ local lualineConfig = {
 			"Mason",
 			"harpoon",
 			"ccc-ui",
-			"",
 		},
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
