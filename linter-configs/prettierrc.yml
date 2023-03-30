@@ -9,7 +9,7 @@ quoteProps: consistent
 
 # filetype-spefic overrides
 overrides:
-  - files: ["*.yaml", "*.yml", "*.json"]
+  - files: ["*.yaml", "*.yml"]
     options:
       printWidth: 120
       tabWidth: 2

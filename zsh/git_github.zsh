@@ -266,6 +266,7 @@ function gdf() {
 	elif [[ "$DECISION:l" == "r" ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
 		echo "File restored."
+		open -R "$deleted_path" # reveal in macOS Finder
 	elif [[ "$DECISION:l" == "s" ]]; then
 		ext=${deleted_path##*.}
 		git show "$last_commit:$deleted_path" | bat --language="$ext"

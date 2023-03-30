@@ -159,7 +159,7 @@ Keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
 -- Word Switcher (fallback: switch casing)
 -- stylua: ignore
-Keymap( "n", "<BS>", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
+Keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
@@ -352,6 +352,7 @@ Keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 -- stylua: ignore start
 Keymap("n", "<S-CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
 Keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
+Keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "Cycle Buffers" })
 
 Keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window" })
 Keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "reopen last buffer" })
