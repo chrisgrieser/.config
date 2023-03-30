@@ -26,7 +26,10 @@ return {
 		dev = true,
 		event = "VeryLazy", -- delay does not hurt really
 		opts = {
-			notificationOnAutoClose = true
+			retirementAgeMins = 10,
+			ignoredFiletypes = { "lazy" },
+			notificationOnAutoClose = true,
+			neverCloseAltFile = true,
 		},
 	},
 	{ -- change cwd per project
