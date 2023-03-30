@@ -3,14 +3,25 @@ return {
 		"Darazaki/indent-o-matic",
 		event = "BufReadPre",
 	},
-	{ -- autopair brackets, quotes, and markup
+	{ -- autopair brackets, quotes, and markup; as opposed to nvim-autopairs
+		-- it supports the cmdline as well
 		"echasnovski/mini.pairs",
 		event = "InsertEnter",
-		main = "mini.pairs",
-		opts = {
-			modes = { insert = true, command = true, terminal = false },
-
-		},
+		config = function()
+			require("mini.pairs").setup {
+				modes = { insert = true, command = true, terminal = false },
+			}
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "markdown",
+				callback = function()
+					---@diagnostic disable: undefined-global
+					MiniPairs.map_buf(0, 'i', '$', {action = 'closeopen', pair = '$$'})
+					MiniPairs.map_buf(0, 'i', '*', {action = 'closeopen', pair = '**'})	
+					MiniPairs.map_buf(0, 'i', '__', {action = 'closeopen', pair = '____'})	
+					---@diagnostic enable: undefined-global
+				end,
+			})
+		end,
 	},
 	{ -- autopair brackets, quotes, and markup
 		"windwp/nvim-autopairs",
