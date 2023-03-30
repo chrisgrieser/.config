@@ -162,11 +162,13 @@ end
 
 -- simple barbecue,nvim replacement
 local function pathToProjectRoot()
+	local maxLen = 30
 	if not require("nvim-navic").is_available() then return "" end
 	local parentPath = vim.fn.expand("%:p:h")
 	local projectRelPath = parentPath:sub(#vim.loop.cwd() + 2)
 	local nicerDisplay = projectRelPath:gsub("/", "  ")
 	if nicerDisplay:find("^%s*$") then return "" end
+	if #nicerDisplay > maxLen then nicerDisplay = "…" .. nicerDisplay:sub(#nicerDisplay - maxLen, #nicerDisplay) end
 	return "󰝰 " .. nicerDisplay
 end
 
