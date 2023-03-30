@@ -8,24 +8,15 @@
 		"body": "⇧"
 	},
 	"opt": {
-		"prefix": [
-			"opt",
-			"alt"
-		],
+		"prefix": ["opt", "alt"],
 		"body": "⌥"
 	},
 	"ctrl": {
-		"prefix": [
-			"control",
-			"ctrl"
-		],
+		"prefix": ["control", "ctrl"],
 		"body": "⌃"
 	},
 	"capslock": {
-		"prefix": [
-			"capslock",
-			"hyper"
-		],
+		"prefix": ["capslock", "hyper"],
 		"body": "⇪"
 	},
 	"escape": {
