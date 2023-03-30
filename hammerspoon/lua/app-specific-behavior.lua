@@ -125,6 +125,7 @@ NeovideWatcher = Aw.new(function(appName, eventType)
 
 	if eventType == Aw.activated then
 		addCssSelectorLeadingDot()
+		App("SideNotes"):hide() -- FIX weird sidenotes bug?
 
 	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
 	elseif eventType == Aw.terminated then

@@ -139,7 +139,7 @@ Keymap("n", "<M-x>", "10<C-x>", { desc = "- 10" })
 -- QUICKFIX
 Keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
 Keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Previous Quickfix" })
-Keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Delete Quickfix List" })
+Keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quickfix List" })
 -- stylua: ignore
 Keymap("n", "<leader>q", function() require("replacer").run { rename_files = false } end, { desc = " Replacer.nvim" })
 
@@ -150,8 +150,8 @@ Keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
 Keymap("n", "qf", function() require("neogen").generate({}) end, { desc = "Neogen: Comment Function" })
 
 -- WHITESPACE CONTROL
-Keymap("n", "=", "mzO<Esc>`z", { desc = " add blank above" })
-Keymap("n", "_", "mzo<Esc>`z", { desc = " add blank below" })
+Keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
+Keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
 Keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
 Keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 Keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
