@@ -3,11 +3,24 @@ return {
 		"metakirby5/codi.vim",
 		cmd = { "CodiNew", "Codi", "CodiExpand" },
 	},
-	{ -- HTTP requester (tet APIs)
+	{ -- HTTP requester (e.g., test APIs)
 		"rest-nvim/rest.nvim",
 		ft = "http",
 		dependencies = "nvim-lua/plenary.nvim",
-		config = true,
+		opts = {
+			result_split_horizontal = true,
+			encode_url = true, -- Encode URL before making request
+			result = {
+				show_url = false,
+				show_http_info = true,
+				show_headers = false,
+			},
+			formatters = {
+				-- run prettier on the result (prettier is installed via Mason)
+				json = function(body) return vim.fn.system({ "prettier" }, body) end,
+				html = false,
+			},
+		},
 	},
 	{ -- better embedded terminal (+ code runner for shell, somewhat)
 		"akinsho/toggleterm.nvim",
