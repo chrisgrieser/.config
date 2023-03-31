@@ -5,7 +5,8 @@ app.includeStandardAdditions = true;
 
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	return [clean, str].join(" ");
+	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeperated, str].join(" ");
 }
 
 //──────────────────────────────────────────────────────────────────────────────

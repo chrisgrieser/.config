@@ -99,6 +99,8 @@ return {
 		{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 		{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
 		{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
+		{ key = 'Enter', mods = 'SHIFT', action = act.ActivateTabRelative(1) },
+
 
 		-- using the mapping from the terminal_keybindings.zsh
 		{ key = "l", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },

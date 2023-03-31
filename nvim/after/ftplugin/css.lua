@@ -85,7 +85,7 @@ Keymap("n", "qw", function()
 	if Expand("%:t"):find("source.css") then
 		cssHeaderComment()
 	else
-		require("funcs.quality-of-life").commentHr()
+		require("funcs.comment-divider").commentHr()
 	end
 end, { buffer = true, desc = "insert comment divider" })
 ---@diagnostic enable: undefined-field, param-type-mismatch
