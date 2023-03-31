@@ -9,12 +9,34 @@ local actFun = wezterm.action_callback
 
 local isAtOffice = wezterm.hostname():find("mini")
 local isAtMother = wezterm.hostname():find("Mother")
+
 --------------------------------------------------------------------------------
+
+---selects the color scheme depending on Dark/Light Mode
+---@param 
+---@return string name of the string to set in config.colorscheme
+local function selectScheme(appearance)
+  if appearance:find 'Dark' then
+    return 'Builtin Solarized Dark'
+  else
+    return 'Builtin Solarized Light'
+  end
+end
+
+
+--------------------------------------------------------------------------------
+-- set window position on startup
+local windowPos = {
+	x = 705, -- true pixel
+	y = 0,
+	w = 97, -- cells
+	h = 30,
+}
 
 -- on start, move window to the side ("pseudomaximized")
 wezterm.on("gui-startup", function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
-	window:gui_window():set_position(705, 0)
+	window:gui_window():set_position(windowPos.x, windowPos.y)
 end)
 
 --------------------------------------------------------------------------------
@@ -42,8 +64,8 @@ return {
 	font = wezterm.font("JetBrains Mono"), -- bundled by wezterm, using nerdfont as fallback https://wezfurlong.org/wezterm/config/fonts
 	cell_width = 1.0,
 	line_height = 1.0,
-	initial_cols = 97,
-	initial_rows = 30,
+	initial_cols = windowPos.w,
+	initial_rows = windowPos.h,
 
 	-- Appearance
 	color_scheme = "AdventureTime", -- work programmatically w/ color schemes: https://wezfurlong.org/wezterm/config/lua/wezterm/get_builtin_color_schemes.html
@@ -74,11 +96,8 @@ return {
 	hide_tab_bar_if_only_one_tab = true,
 
 	mouse_bindings = {
-		{ -- cmd will open the link under the mouse cursor
-			event = { Up = { streak = 1, button = "Left" } },
-			mods = "CMD",
-			action = act.OpenLinkAtMouseCursor,
-		},
+		-- open link at normal leftclick
+		{ event = { Up = { streak = 1, button = "Left" } }, mods = "", action = act.OpenLinkAtMouseCursor },
 	},
 
 	-- Keybindings
@@ -99,11 +118,9 @@ return {
 		{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 		{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
 		{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
-		{ key = 'Enter', mods = 'SHIFT', action = act.ActivateTabRelative(1) },
-
+		{ key = "Enter", mods = "SHIFT", action = act.ActivateTabRelative(1) },
 
 		-- using the mapping from the terminal_keybindings.zsh
-		{ key = "l", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
 		{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
 		{ key = "b", mods = "CMD", action = act.SendKey { key = "b", mods = "CTRL" } },
 
@@ -111,6 +128,24 @@ return {
 			key = ",",
 			mods = "CMD",
 			action = actFun(function() wezterm.open_with(wezterm.config_file) end),
+		},
+		{ -- cmd+l -> open current location in Finder
+			key = "l",
+			mods = "CMD",
+			action = actFun(function(_, pane)
+				local cwd = pane:get_current_working_dir()
+				wezterm.open_with(cwd, "Finder")
+			end),
+		},
+		{ -- Theme Cycler
+			key = "t",
+			mods = "SHIFT|CTRL|ALT",
+			action = actFun(function(window, _)
+				local schemes = {}
+				for name, _ in pairs(wezterm.color.get_builtin_schemes()) do
+					table.insert(schemes, name)
+				end
+			end),
 		},
 
 		--------------------------------------------------------------------------
