@@ -20,8 +20,8 @@ function getGithubURL() {
 	git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
 }
 
-# open at github % copy url
-function gh() {
+# Github Url: open & copy url
+function gu() {
 	getGithubURL | pbcopy
 	open "$(getGithubURL)"
 }
@@ -34,7 +34,7 @@ alias g.='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git
 # GIT LOG
 
 # short (only last 15 messages)
-alias gu="git log -n 15 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; echo '(…)'"
+alias gl="git log -n 15 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; echo '(…)'"
 
 # long
 # append `true` to avoid exit code 141: https://www.ingeniousmalarkey.com/2016/07/git-log-exit-code-141.html
