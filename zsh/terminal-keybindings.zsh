@@ -10,8 +10,9 @@ bindEverywhere "^E" end-of-line
 bindEverywhere "^K" kill-line
 bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
-bindEverywhere "^B" copy-buffer
-bindEverywhere "^L" open-location # remapped to cmd+l via karabiner
+bindEverywhere "^B" copy-buffer # wezterm: cmd+b
+bindEverywhere "^Z" undo # wezterm: cmd+z
+bindEverywhere "^L" open-location # wezterm: cmd+l
 bindEverywhere '…' insert-last-word # …=alt+.
 
 # [f]orward to $EDITOR
