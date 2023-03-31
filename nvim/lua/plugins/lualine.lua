@@ -176,7 +176,7 @@ local function openBufferCount()
 	local openBuffers = #(vim.fn.getbufinfo { buflisted = 1 })
 	local nonListedBuffers = openBuffers - 2 -- current file and alt file
 	if nonListedBuffers <= 0 then return "" end
-	return "+" .. tostring(nonListedBuffers)
+	return "+ " .. tostring(nonListedBuffers) .. "󰽙"
 end
 
 --------------------------------------------------------------------------------
@@ -243,7 +243,7 @@ local lualineConfig = {
 		lualine_b = {
 			{
 				require("funcs.alt-alt").altFileStatusline,
-				component_separators = { right = "", left = ""},
+				component_separators = { right = "", left = " "},
 			},
 			{
 				openBufferCount,

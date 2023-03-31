@@ -9,10 +9,10 @@ local g = vim.g
 local themes = {
 	"EdenEast/nightfox.nvim",
 	-- "sainnhe/everforest",
-	-- "rebelot/kanagawa.nvim",
+	"rebelot/kanagawa.nvim",
 	-- { "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
 	-- "glepnir/zephyr-nvim",
-	"folke/tokyonight.nvim",
+	-- "folke/tokyonight.nvim",
 	-- "NTBBloodbath/sweetie.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",

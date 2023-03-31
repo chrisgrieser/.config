@@ -53,15 +53,15 @@ return {
 		},
 	},
 	{ -- auto-close inactive buffers
-		"chrisgrieser/nvim-retire-early",
+		"chrisgrieser/nvim-early-retirement",
 		dev = true,
-		event = "VeryLazy", -- delay does not hurt really
+		event = "VeryLazy", 
 		opts = {
 			retirementAgeMins = 20,
 			ignoredFiletypes = {},
 			notificationOnAutoClose = false,
 			ignoreAltFile = true,
-			ignoreModifiedBufs = false,
+			ignoreUnsavedChangesBufs = false,
 		},
 	},
 	{ -- change cwd per project
