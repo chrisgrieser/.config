@@ -9,5 +9,5 @@ target="${local_repo_folder/#\~/$HOME}"
 [[ ! -e "$target" ]] && mkdir -p "$target"
 
 cd "$target" || exit 1
-git clone --depth=1 "$url" || echo "Error"
+git clone --depth=1 "$url" || echo "❌ Error"
 open "$target/$reponame"
