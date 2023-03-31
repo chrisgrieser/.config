@@ -14,11 +14,8 @@ return {
 		event = "BufReadPost",
 	},
 	{ -- CamelCase Motion plus
-		"chrisgrieser/nvim-spider",
-		lazy = true, -- loaded by keybinds
-		opts = {
-			skipInsignificantPunctuation = true,
-		},
+		"vypxl/nvim-spider",
+		-- lazy = true, -- loaded by keybinds
 		dev = true,
 	},
 
