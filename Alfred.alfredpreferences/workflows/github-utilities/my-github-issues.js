@@ -30,7 +30,6 @@ function run() {
 		let icon = authoredByMe ? "🚩 " : "";
 		if (item.state === "open" && isPR) icon += "🟦 ";
 		else if (item.state === "closed" && isPR && merged) icon += "🟨 ";
-
 		else if (item.state === "closed" && isPR && !merged) icon += "🟥 ";
 		else if (item.state === "closed" && !isPR) icon += "🟣 ";
 		else if (item.state === "open" && !isPR) icon += "🟢 ";
@@ -46,6 +45,12 @@ function run() {
 			subtitle: `#${item.number}  ${repo}   ${comments}`,
 			match: matcher,
 			arg: item.html_url,
+			mods: {
+				shift: {
+					subtitle: `⇧: Search Issues (${item.open_issues} open)`,
+					arg: item.full_name,
+				},
+			},
 		};
 	});
 	return JSON.stringify({ items: issues });
