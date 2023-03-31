@@ -97,11 +97,7 @@ return {
 		ft = "markdown", -- can work in other fts, but I only use it in markdown
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
-			markdown = {
-				fat_headlines = false,
-				fat_headline_upper_string = "",
-				fat_headline_lower_string = "▀",
-			},
+			markdown = { fat_headlines = false },
 		},
 	},
 	{ -- Better input/selection fields
@@ -112,7 +108,7 @@ return {
 				insert_only = false, -- enable normal mode
 				border = BorderStyle,
 				relative = "win",
-				min_width = { 0.7, 70 },
+				min_width = { 0.5, 60 },
 				win_options = {
 					sidescrolloff = 0,
 					winblend = 0, -- weird shining through

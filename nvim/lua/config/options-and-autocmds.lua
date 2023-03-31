@@ -227,7 +227,7 @@ local function remember(mode)
 	if mode == "save" then
 		Cmd.mkview(1)
 	else
-		Cmd([[silent! loadview 1]]) -- silent to avoid error for files w/o view (e.g. after creation)
+		pcall(function () Cmd.loadview(1) end) -- pcall, since cannot load view of newly opened files
 	end
 end
 Autocmd("BufWinLeave", {

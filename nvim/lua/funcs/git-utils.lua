@@ -1,6 +1,5 @@
 local M = {}
 local fn = vim.fn
-local logWarn = vim.log.levels.WARN
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -11,7 +10,7 @@ local logWarn = vim.log.levels.WARN
 local function isInGitRepo()
 	fn.system("git rev-parse --is-inside-work-tree")
 	if vim.v.shell_error ~= 0 then
-		vim.notify("Not a GitHub Repo.", logWarn)
+		vim.notify("Not a GitHub Repo.", vim.log.levels.WARN)
 		return false
 	end
 	return true
@@ -37,11 +36,11 @@ local gitShellOpts = {
 	on_exit = function()
 		if #output == 0 then return end
 		local out = table.concat(output, " \n "):gsub("%s*$", "")
-		local logLevel = LogInfo
+		local logLevel = vim.log.levels.INFO
 		if out:lower():find("error") then
-			logLevel = LogError
+			logLevel = vim.log.levels.ERROR
 		elseif out:lower():find("warning") then
-			logLevel = logWarn
+			logLevel = vim.log.levels.WARN
 		end
 		vim.notify(out, logLevel)
 
@@ -65,7 +64,7 @@ local gitShellOpts = {
 local function processCommitMsg(commitMsg)
 	-- ensure max 50 chars
 	if #commitMsg > 50 then
-		vim.notify("Commit Message too long.", logWarn)
+		vim.notify("Commit Message too long.", vim.log.levels.WARN)
 		local shortenedMsg = commitMsg:sub(1, 50)
 		return false, shortenedMsg
 
@@ -79,7 +78,7 @@ local function processCommitMsg(commitMsg)
 	local conventionalCommits = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
 	local firstWord = commitMsg:match("^%w+")
 	if not vim.tbl_contains(conventionalCommits, firstWord) then
-		vim.notify("Not using a Conventional Commits keyword.", logWarn)
+		vim.notify("Not using a Conventional Commits keyword.", vim.log.levels.WARN)
 		return false, commitMsg
 	end
 
@@ -103,7 +102,7 @@ local function hlTooLongCommitMsgs(on)
 		-- clear the previously setup hl again, so other Input fields are not affected
 		-- also done early, so the highlight is even deleted on aborting the input
 		vim.api.nvim_del_augroup_by_name("tooLongCommitMsg")
-		fn.matchdelete(vim.g.matchid)
+		pcall(function () fn.matchdelete(vim.g.matchid) end)
 	end
 end
 
@@ -127,7 +126,7 @@ function M.issueSearch()
 	local issues = vim.json.decode(rawJSON)
 
 	if #issues == 0 then
-		vim.notify("There are no issues or PRs for this repo.", logWarn)
+		vim.notify("There are no issues or PRs for this repo.", vim.log.levels.WARN)
 		return
 	end
 
@@ -225,7 +224,7 @@ function M.addCommitPush(prefillMsg)
 		end
 
 		-- run Shimmering Focus specific actions instead
-		if Expand("%") == "source.css" then
+		if fn.expand("%") == "source.css" then
 			shimmeringFocusBuild(newMsg)
 			return
 		end
@@ -244,7 +243,7 @@ end
 function M.githubLink()
 	if not isInGitRepo() then return end
 
-	local filepath = Expand("%:p")
+	local filepath = fn.expand("%:p")
 	local gitroot = fn.system([[git --no-optional-locks rev-parse --show-toplevel]])
 	local pathInRepo = filepath:sub(#gitroot)
 	local remote = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git.*", "%1")
