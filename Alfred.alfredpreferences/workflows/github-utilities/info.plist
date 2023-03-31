@@ -95,7 +95,7 @@
 				<key>modifiersubtext</key>
 				<string>⇧: Search Issues</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</key>
