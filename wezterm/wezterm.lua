@@ -2,6 +2,7 @@
 --------------------------------------------------------------------------------
 local wezterm = require("wezterm")
 local act = wezterm.action
+local actFun = wezterm.action_callback
 -- local os = require("os")
 -- local io = require("io")
 -- local log = wezterm.log_info
@@ -16,19 +17,12 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():set_position(705, 0)
 end)
 
-wezterm.on("open-wezterm-settings", function(window, pane)
-end)
-
-
-
-
 --------------------------------------------------------------------------------
 
 return {
 	-- Meta
 	check_for_updates = true,
 	automatically_reload_config = true, -- causes errors too quickly
-	check_for_updates_interval_seconds = 86400,
 	detect_password_input = isAtOffice,
 
 	-- Start/Close
@@ -106,10 +100,16 @@ return {
 		{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
 		{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
 
-		-- open location in Finder (using the mapping from the terminal keybinds)
-		{ key = "l", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" }, },
+		-- { key = " ", mods = "SHIFT", action = act.ScrollByPage(-0.8) },
 
-		{ key = ",", mods = "CMD", action = act.emitEvent ("open-wezterm-settings"), },
+		-- open location in Finder (using the mapping from the terminal_keybindings.zsh)
+		{ key = "l", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
+
+		{ -- cmd+, -> open this config file
+			key = ",",
+			mods = "CMD",
+			action = actFun(function() wezterm.open_with(wezterm.config_file) end),
+		},
 
 		--------------------------------------------------------------------------
 		-- MODES
