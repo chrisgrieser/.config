@@ -67,8 +67,8 @@ return {
 
 	-- Tabs
 	enable_tab_bar = true,
-	tab_max_width = 30,
-	use_fancy_tab_bar = true,
+	tab_max_width = 40,
+	use_fancy_tab_bar = false, -- `false` makes the tabs bigger
 	show_tabs_in_tab_bar = true,
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
@@ -100,10 +100,10 @@ return {
 		{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
 		{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
 
-		-- { key = " ", mods = "SHIFT", action = act.ScrollByPage(-0.8) },
-
-		-- open location in Finder (using the mapping from the terminal_keybindings.zsh)
+		-- using the mapping from the terminal_keybindings.zsh
 		{ key = "l", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
+		{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
+		{ key = "b", mods = "CMD", action = act.SendKey { key = "b", mods = "CTRL" } },
 
 		{ -- cmd+, -> open this config file
 			key = ",",
