@@ -11,6 +11,7 @@ yaml = ["prettier --parser=yaml --config=/Users/chrisgrieser/.config/linter-conf
 json = ["prettier --parser=json --config=/Users/chrisgrieser/.config/linter-configs/prettierrc.yml"]
 javascript = ["prettier --parser=babel --config=/Users/chrisgrieser/.config/linter-configs/prettierrc.yml"]
 typescript = ["prettier --parser=typescript --config=/Users/chrisgrieser/.config/linter-configs/prettierrc.yml"]
+html = ["prettier --parser=html --config=/Users/chrisgrieser/.config/linter-configs/prettierrc.yml"]
 bash = ["shfmt -"]
 zsh = ["shfmt -"]
 sh = ["shfmt -"]

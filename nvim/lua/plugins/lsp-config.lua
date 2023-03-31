@@ -12,6 +12,7 @@ local lsp_servers = {
 	"eslint", -- ts/js
 	"bashls", -- also used for zsh
 	"taplo", -- toml
+	"html",
 }
 
 --------------------------------------------------------------------------------
@@ -67,7 +68,7 @@ lspSettings.cssls = {
 			duplicateProperties = "ignore",
 			emptyRules = "warning",
 		},
-		colorDecorators = { enable = true }, -- not supported yet
+		colorDecorators = { enable = false }, -- not supported yet
 	},
 }
 
