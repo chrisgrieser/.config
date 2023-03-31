@@ -41,6 +41,7 @@ return {
 				http = { icon = "󰴚", name = "http" },
 				Glance = { icon = "󰒕", name = "Glance" },
 				toggleterm = { icon = "", name = "ToggleTerm" },
+				bibtex = { icon = "", name = "BiBTeX" },
 			},
 		},
 	},

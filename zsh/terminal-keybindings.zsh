@@ -12,7 +12,6 @@ bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
 bindEverywhere "^B" copy-buffer # wezterm: cmd+b
 bindEverywhere "^Z" undo # wezterm: cmd+z
-bindEverywhere "^L" open-location # wezterm: cmd+l
 bindEverywhere '…' insert-last-word # …=alt+.
 
 # [f]orward to $EDITOR
@@ -34,13 +33,6 @@ copy-location () {
 	zle -M "'$PWD' copied."
 }
 zle -N copy-location
-
-alias l="open-location" # alias since `bindkey` not supported in Warp
-
-open-location () {
-	open .
-}
-zle -N open-location
 
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/copybuffer/copybuffer.plugin.zsh
 copy-buffer () {
