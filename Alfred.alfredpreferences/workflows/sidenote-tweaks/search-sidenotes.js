@@ -1,5 +1,6 @@
 #!/usr/bin/env osascript -l JavaScript
 
+ObjC.import("stdlib");
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	return [clean, str].join(" ");
@@ -33,10 +34,12 @@ const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]
 
 function run(argv) {
 	const query = argv[0] ? argv[0].trim() : "";
+	const ignoredTitle = $.getenv("ignored_title");
 
 	const sidenotes = Application("SideNotes");
 	const results = sidenotes
 		.searchNotes(query)
+		.filter(item => item.title !== ignoredTitle)
 		.map(item => {
 			const noteObj = getNoteObj(item.identifier);
 			if (!noteObj) return false;

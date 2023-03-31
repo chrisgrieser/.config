@@ -46,7 +46,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>cs</string>
+				<string>4</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -109,6 +109,8 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>4 like the popular cmd+shift+4</string>
 			<key>xpos</key>
 			<real>45</real>
 			<key>ypos</key>

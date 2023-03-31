@@ -84,19 +84,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>90F0EAB6-7686-4829-95EC-EE1E363B67F7</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>42AD9AB0-3C2B-48E4-B5F5-6391B8491DAF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>931A201F-67BF-4D23-845D-15074A56A83D</key>
 		<array>
 			<dict>
@@ -166,7 +153,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>90F0EAB6-7686-4829-95EC-EE1E363B67F7</string>
+				<string>4D043F24-F2CC-45D6-A315-F4F576D06E6B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -235,7 +222,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Supermarkt: {query}</string>
+				<string>Öffne Einkaufsliste</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -249,44 +236,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>browser</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>add-to-shopping-list.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>sidenotes://open/8A69A2C0-BF90-4079-A6DA-5B9F9F7D7628</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>90F0EAB6-7686-4829-95EC-EE1E363B67F7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Added</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>42AD9AB0-3C2B-48E4-B5F5-6391B8491DAF</string>
+			<string>4D043F24-F2CC-45D6-A315-F4F576D06E6B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -750,12 +714,12 @@
 			<key>ypos</key>
 			<real>450</real>
 		</dict>
-		<key>42AD9AB0-3C2B-48E4-B5F5-6391B8491DAF</key>
+		<key>4D043F24-F2CC-45D6-A315-F4F576D06E6B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>395</real>
+			<real>245</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -796,15 +760,6 @@
 			<real>225</real>
 			<key>ypos</key>
 			<real>450</real>
-		</dict>
-		<key>90F0EAB6-7686-4829-95EC-EE1E363B67F7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>240</real>
-			<key>ypos</key>
-			<real>15</real>
 		</dict>
 		<key>931A201F-67BF-4D23-845D-15074A56A83D</key>
 		<dict>
