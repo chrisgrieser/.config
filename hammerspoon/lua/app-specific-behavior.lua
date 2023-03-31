@@ -132,6 +132,31 @@ end)
 
 --------------------------------------------------------------------------------
 
+-- FINDER
+Wf_finder = Wf.new("Finder")
+	:setOverrideFilter({
+		rejectTitles = RejectedFinderWindows,
+		allowRoles = "AXStandardWindow",
+		hasTitlebar = true,
+	})
+	:subscribe(Wf.windowCreated, function()
+		-- only trigger this when Finder is not frontmost, since otherwise, the
+		-- creation as well as the app activation both trigger auto-tiling,
+		-- resulting in a glitchy movement since both resize finder
+		if FrontAppName() == "Finder" then return end
+		AutoTile(Wf_finder)
+	end)
+	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_finder) end)
+
+FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)
+	if eventType == Aw.activated and appName == "Finder" then
+		AutoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
+		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
+	end
+end):start()
+
+--------------------------------------------------------------------------------
+
 -- QuickLook: bigger window
 Wf_quicklook = Wf
 	.new(true) -- BUG for some reason, restricting this to "Finder" does not work
@@ -148,25 +173,6 @@ Wf_quicklook = Wf
 		end
 		RunWithDelays(0.4, function() MoveResize(newWin, Centered) end)
 	end)
-
---------------------------------------------------------------------------------
-
--- FINDER
-Wf_finder = Wf.new("Finder")
-	:setOverrideFilter({
-		rejectTitles = RejectedFinderWindows,
-		allowRoles = "AXStandardWindow",
-		hasTitlebar = true,
-	})
-	:subscribe(Wf.windowCreated, function() AutoTile(Wf_finder) end)
-	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_finder) end)
-
-FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)
-	if eventType == Aw.activated and appName == "Finder" then
-		AutoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
-		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
-	end
-end):start()
 
 --------------------------------------------------------------------------------
 
