@@ -10,6 +10,7 @@ autoload compinit -Uz +X && compinit
 #───────────────────────────────────────────────────────────────────────────────
 # INFO `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 
+source "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
 source "$(brew --prefix)/share/zsh-autopair/autopair.zsh"
 source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
