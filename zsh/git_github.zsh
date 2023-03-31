@@ -3,7 +3,8 @@
 # ALIASES AND SMALLER UTILS
 alias co="git checkout"
 alias gs='git status'
-alias gd='git diff'
+# alias gd='git diff'
+alias gd='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 alias gc="git commit -m"
 alias ga="git add"
 alias grh="git reset --hard"
