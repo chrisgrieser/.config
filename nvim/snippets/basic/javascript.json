@@ -55,6 +55,10 @@
 		"body": ["sort((a, b) => {", "\treturn ${1:b - a};", "})"],
 		"description": "Sort Array with basic a-b-comparator function"
 	},
+	"unique items": {
+		"prefix": "unique items",
+		"body": "${1:arr} = [...new Set(${2:arr})];"
+	},
 	"today's date": {
 		"prefix": ["today", "date"],
 		"body": "const today = new Date();"
