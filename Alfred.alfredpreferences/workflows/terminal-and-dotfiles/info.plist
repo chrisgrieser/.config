@@ -461,7 +461,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>355</real>
 		</dict>
 		<key>222B531F-8CC2-406A-BEFD-1DB401A7880C</key>
 		<dict>
@@ -490,7 +490,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>355</real>
 		</dict>
 		<key>5D832920-C82B-4DD3-8853-68ABE3D3552A</key>
 		<dict>
@@ -508,7 +508,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>175</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>440</real>
 		</dict>
 		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
 		<dict>
@@ -517,7 +517,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>480</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
@@ -533,7 +533,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>355</real>
 		</dict>
 		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<dict>
@@ -553,7 +553,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>475</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -7,7 +7,6 @@ local actFun = wezterm.action_callback
 -- local os = require("os")
 -- local io = require("io")
 
----@diagnostic disable-next-line: unused-local
 local log = wezterm.log_info
 
 local isAtOffice = wezterm.hostname():find("mini")
@@ -17,7 +16,9 @@ local isAtMother = wezterm.hostname():find("Mother")
 ---@return string name of the string to set in config.colorscheme
 local function autoToggleTheme()
 	local currentMode = wezterm.gui.get_appearance()
-	local colorscheme = currentMode:find("Dark") and "AdventureTime" or "AdventureTime"
+	local darkTheme = "AdventureTime"
+	local lightTheme = "Ivory Dark (terminal.sexy)"
+	local colorscheme = currentMode:find("Dark") and darkTheme or lightTheme
 	return colorscheme
 end
 
@@ -44,7 +45,6 @@ local function themeCycler(window, _)
 	local currentScheme = window:effective_config().color_scheme
 	local found = false
 
-
 	-- find the first matching key, then on next iteration set that theme
 	for scheme, _ in pairs(allSchemes) do
 		if scheme == currentScheme then
@@ -52,7 +52,7 @@ local function themeCycler(window, _)
 		elseif found then
 			overrides.color_scheme = scheme
 			window:set_config_overrides(overrides)
-			window:toast_notification("Now", scheme)
+			log("Switched to: " .. scheme)
 			return
 		end
 	end
