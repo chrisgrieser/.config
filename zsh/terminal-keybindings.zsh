@@ -7,7 +7,6 @@ function bindEverywhere () {
 }
 bindEverywhere "^A" beginning-of-line
 bindEverywhere "^E" end-of-line
-bindEverywhere "^K" kill-line
 bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
 bindEverywhere "^B" copy-buffer # wezterm: cmd+b

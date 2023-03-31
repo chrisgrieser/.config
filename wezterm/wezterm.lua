@@ -65,7 +65,7 @@ return {
 	initial_rows = windowPos.h,
 
 	-- Appearance
-	color_scheme = autoToggleTheme(),  
+	color_scheme = autoToggleTheme(),
 	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
 	bold_brightens_ansi_colors = "BrightAndBold",
 	window_background_opacity = 0.95,
@@ -125,6 +125,10 @@ return {
 		{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
 		{ key = "b", mods = "CMD", action = act.SendKey { key = "b", mods = "CTRL" } },
 
+		-- scroll-to-prompt - not working yet
+		-- { key = "K", mods = "CTRL", action = act.ScrollToPrompt(-1) },
+		-- { key = "J", mods = "CTRL", action = act.ScrollToPrompt(1) },
+
 		{ -- cmd+, -> open this config file
 			key = ",",
 			mods = "CMD",
@@ -157,7 +161,6 @@ return {
 						return
 					end
 				end
-
 			end),
 		},
 
