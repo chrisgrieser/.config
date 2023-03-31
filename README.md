@@ -8,7 +8,7 @@ Most people tell me they find the following configurations useful:
 - [Pandoc configs & pointers on how to use pandoc](/pandoc)
 - [complex modifications for Karabiner Elements](/karabiner)
 - [obsidian.vimrc](obsidian-vim/obsidian.vimrc) via the [vimrc Support Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support)
-- [Starship Prompt](/starship/starship.toml) – see below
+- [Starship Prompt](/starship/starship.toml) ⬇️
 
 <img width=60% alt="Starship Prompt" src="https://user-images.githubusercontent.com/73286100/229211019-e763d775-d89f-43da-99ef-06c57fd1e485.png">
 
