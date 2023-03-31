@@ -11,7 +11,11 @@ function sh() {
 # GET A BETTER MAN
 # first arg: command, second arg: search term
 function man () {
-	command man "$1" -P "/usr/bin/less -is --pattern=$2"
+	if [[ -z "$2" ]]; then
+		command man "$1"
+	else
+		command man -P "/usr/bin/less -is --pattern=$2" "$1" 
+	fi	
 }
 
 #───────────────────────────────────────────────────────────────────────────────
