@@ -27,6 +27,9 @@ function gh() {
 }
 alias gi='open "$(getGithubURL)/issues"'
 
+# goto git root
+alias g.='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
+
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
 
