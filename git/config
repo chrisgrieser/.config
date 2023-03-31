@@ -24,18 +24,3 @@
 	detachedHead = false
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# Diff-related
-[core]
-	pager = delta
-[interactive]
-	diffFilter = delta --color-only
-[merge]
-	conflictstyle = diff3
-[diff]
-	colorMoved = default
-[delta]
-	# side-by-side-view: deactivate line numbers in but keep vertical separator
-	line-numbers-left-format = ""
-	line-numbers-right-format = "│ "
-

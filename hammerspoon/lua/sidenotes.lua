@@ -47,7 +47,7 @@ end):start()
 -- (since SideNotes can only be hidden on mouse click, but not on alt-tab)
 SidenotesWatcher2 = Aw.new(function(appName, event)
 	if appName == "SideNotes" or event ~= Aw.activated then return end
-	RunWithDelays(0.25, function()
+	RunWithDelays(0.15, function()
 		if
 			FrontAppName() ~= "SideNotes"
 			and FrontAppName() ~= "Alfred"

@@ -59,7 +59,7 @@ return {
 		opts = {
 			retirementAgeMins = 20,
 			ignoredFiletypes = {},
-			notificationOnAutoClose = true,
+			notificationOnAutoClose = false,
 			ignoreAltFile = true,
 			ignoreModifiedBufs = false,
 		},
