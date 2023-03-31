@@ -243,7 +243,7 @@ local lualineConfig = {
 		lualine_b = {
 			{
 				require("funcs.alt-alt").altFileStatusline,
-				component_separators = { right = "", left = " "},
+				component_separators = { right = "", left = ""},
 			},
 			{
 				openBufferCount,
