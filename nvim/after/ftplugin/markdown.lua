@@ -19,12 +19,12 @@ Keymap("n", "<leader>r", "<Plug>MarkdownPreviewToggle", { desc = "  Previe
 
 -- stylua: ignore start
 -- link textobj
-Keymap({ "o", "x" }, "il", function() require("various-textobjs").mdlink(true) end, { desc = "inner md link textobj", buffer = true })
-Keymap({ "o", "x" }, "al", function() require("various-textobjs").mdlink(false) end, { desc = "outer md link textobj", buffer = true })
+Keymap({ "o", "x" }, "il", "<cmd>lua require('various-textobjs').mdlink(true)<CR>", { desc = "inner md link textobj", buffer = true })
+Keymap({ "o", "x" }, "al", "<cmd>lua require('various-textobjs').mdlink(false)<CR>", { desc = "outer md link textobj", buffer = true })
 
 -- iE/aE: code block textobj
-Keymap({ "o", "x" }, "iE", function() require("various-textobjs").mdFencedCodeBlock(true) end, { desc = "inner md code block textobj", buffer = true })
-Keymap({ "o", "x" }, "aE", function() require("various-textobjs").mdFencedCodeBlock(false) end, { desc = "outer md code block textobj", buffer = true })
+Keymap({ "o", "x" }, "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock(true)<CR>", { desc = "inner md code block textobj", buffer = true })
+Keymap({ "o", "x" }, "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock(false)<CR>", { desc = "outer md code block textobj", buffer = true })
 
 -- Format Table
 Keymap("x", "<D-p>", ":!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table", buffer = true })

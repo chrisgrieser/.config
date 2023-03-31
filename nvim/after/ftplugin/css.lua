@@ -44,11 +44,11 @@ Keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], { buffer = true, desc =
 
 --------------------------------------------------------------------------------
 -- stylua: ignore start
-Keymap({ "o", "x" }, "is", function() require("various-textobjs").cssSelector(true) end, { desc = "inner CSS Selector textobj", buffer = true })
-Keymap({ "o", "x" }, "as", function() require("various-textobjs").cssSelector(false) end, { desc = "outer CSS Selector textobj", buffer = true })
+Keymap({ "o", "x" }, "is", "<cmd>lua require('various-textobjs').cssSelector(true)<CR>", { desc = "inner CSS Selector textobj", buffer = true })
+Keymap({ "o", "x" }, "as", "<cmd>lua require('various-textobjs').cssSelector(false)<CR>", { desc = "outer CSS Selector textobj", buffer = true })
 
-Keymap({ "o", "x" }, "ix", function() require("various-textobjs").htmlAttribute(true) end, { desc = "inner HTML Attribute textobj", buffer = true })
-Keymap({ "o", "x" }, "ax", function() require("various-textobjs").htmlAttribute(false) end, { desc = "outer HTML Attribute textobj", buffer = true })
+Keymap({ "o", "x" }, "ix", "<cmd>lua require('various-textobjs').htmlAttribute(true)<CR>", { desc = "inner HTML Attribute textobj", buffer = true })
+Keymap({ "o", "x" }, "ax", "<cmd>lua require('various-textobjs').htmlAttribute(false)<CR>", { desc = "outer HTML Attribute textobj", buffer = true })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------

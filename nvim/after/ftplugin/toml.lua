@@ -8,12 +8,12 @@ Bo.formatoptions = Bo.formatoptions:gsub("t", "")
 Keymap(
 	{ "o", "x" },
 	"il",
-	function() require("various-textobjs").mdlink(true) end,
+	"<cmd>lua require('various-textobjs').mdlink(true)<CR>",
 	{ desc = "inner md link textobj", buffer = true }
 )
 Keymap(
 	{ "o", "x" },
 	"al",
-	function() require("various-textobjs").mdlink(false) end,
+	"<cmd>lua require('various-textobjs').mdlink(false)<CR>",
 	{ desc = "outer md link textobj", buffer = true }
 )
