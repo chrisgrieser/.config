@@ -51,13 +51,12 @@ end, { desc = "Clear Notifications" })
 --------------------------------------------------------------------------------
 -- MOTIONS
 
--- spider motions
-Keymap({ "n", "o", "x" }, "w", "<Plug>(spider-motion-w)", { desc = "Spider-w" })
--- Keymap({ "n", "o", "x" }, "e", "<Plug>(spider-motion-e)", { desc = "Spider-e" })
--- Keymap({ "n", "o", "x" }, "b", "<Plug>(spider-motion-b)", { desc = "Spider-b" })
--- Keymap({ "n", "o", "x" }, "w", function() require("spider").motion("w") end, { desc = "Spider-w" })
--- Keymap({ "n", "o", "x" }, "e", function() require("spider").motion("e") end, { desc = "Spider-e" })
--- Keymap({ "n", "o", "x" }, "b", function() require("spider").motion("b") end, { desc = "Spider-b" })
+-- sp mo  woo annnnnnnnnnnnnnnnnd shorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrt
+
+
+Keymap({ "n", "o", "x" }, "w", '<cmd>lua require("spider").motion("w")<CR>', { desc = "Spider-w" })
+Keymap({ "n", "o", "x" }, "e", '<cmd>lua require("spider").motion("e")<CR>', { desc = "Spider-e" })
+Keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { desc = "Spider-b" })
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 Keymap({ "o", "x" }, "H", "^")
@@ -324,8 +323,18 @@ Keymap("n", "<Left>", function()
 end, { desc = "Move Char Left", expr = true })
 
 -- "silent" necessary for 3+ lines due to cmdheight=0
-Keymap("x", "<Down>", [[<Esc>:silent '<,'>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
-Keymap("x", "<Up>", [[<Esc>:silent '<,'>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
+Keymap(
+	"x",
+	"<Down>",
+	[[<Esc>:silent '<,'>move '>+1<CR>:normal! gv=gv<CR>]],
+	{ desc = "Move selection down" }
+)
+Keymap(
+	"x",
+	"<Up>",
+	[[<Esc>:silent '<,'>move '<-2<CR>:normal! gv=gv<CR>]],
+	{ desc = "Move selection up" }
+)
 Keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })
 Keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "Move selection left" })
 

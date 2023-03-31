@@ -77,20 +77,20 @@ function M.altFileStatusline()
 	local curFile = fn.expand("%:t")
 
 	local name, icon
-	if altFile == "" and not (altOldfile()) then -- no oldfile and after start
-		name = ""
+	if altFile == "" and altOldfile() == nil then -- no oldfile and after start
+		return ""
 	elseif altWindow() and altWindow():find("^diffview:") then
-		name = "File History"
 		icon = ""
+		name = "File History"
 	elseif altWindow() and altWindow():find("^term:") then
-		name = "Terminal"
 		icon = ""
+		name = "Terminal"
 	elseif altWindow() then
-		name = vim.fs.basename(altWindow()) ---@diagnostic disable-line: param-type-mismatch
 		icon = " "
+		name = vim.fs.basename(altWindow()) ---@diagnostic disable-line: param-type-mismatch
 	elseif altFile == "" and altOldfile() then
-		name = vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
 		icon = "󰋚"
+		name = vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
 	elseif curFile == altFile then -- same name, different file
 		local altParent = fn.expand("#:p:h:t")
 		icon = "#"
