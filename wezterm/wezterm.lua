@@ -12,15 +12,6 @@ local log = wezterm.log_info
 local isAtOffice = wezterm.hostname():find("mini")
 local isAtMother = wezterm.hostname():find("Mother")
 
----selects the color scheme depending on Dark/Light Mode
----@return string name of the string to set in config.colorscheme
-local function autoToggleTheme()
-	local currentMode = wezterm.gui.get_appearance()
-	local darkTheme = "AdventureTime"
-	local lightTheme = "Ivory Dark (terminal.sexy)"
-	local colorscheme = currentMode:find("Dark") and darkTheme or lightTheme
-	return colorscheme
-end
 
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
@@ -38,6 +29,18 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 --------------------------------------------------------------------------------
+-- THEME
+
+local darkTheme = "Ivory Dark (terminal.sexy)"
+local lightTheme = "Ivory Light (terminal.sexy)"
+
+---selects the color scheme depending on Dark/Light Mode
+---@return string name of the string to set in config.colorscheme
+local function autoToggleTheme()
+	local currentMode = wezterm.gui.get_appearance()
+	local colorscheme = currentMode:find("Dark") and darkTheme or lightTheme
+	return colorscheme
+end
 
 local function themeCycler(window, _)
 	local overrides = window:get_config_overrides() or {}
@@ -45,8 +48,7 @@ local function themeCycler(window, _)
 	local currentScheme = window:effective_config().color_scheme
 	local found = false
 
-	-- find the first matching key, then on next iteration set that theme
-	for scheme, _ in pairs(allSchemes) do
+	for scheme, _ in pairs(allSchemes) do -- find the first matching key, then on next iteration set that theme
 		if scheme == currentScheme then
 			found = true
 		elseif found then
@@ -81,6 +83,7 @@ return {
 	font_size = 27,
 	command_palette_font_size = 29,
 	font = wezterm.font("JetBrains Mono"), -- bundled by wezterm, using nerdfont as fallback https://wezfurlong.org/wezterm/config/fonts
+	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	cell_width = 1.0,
 	line_height = 1.0,
 	initial_cols = windowPos.w,

@@ -99,13 +99,13 @@ Keymap({ "x", "o" }, "ak", "<cmd>lua require('various-textobjs').key(true)<CR>",
 Keymap({ "o", "x" }, "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", { desc = "near EoL textobj" })
 
 -- m: to next closing bracket
-Keymap({ "o", "x" }, "m", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "to next closing bracket textobj" })
+Keymap({ "o", "x" }, "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", { desc = "to next closing bracket textobj" })
 
 -- o: c[o]lumn textobj
 Keymap("o", "o", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "column textobj" })
 
 -- ag: entire buffer textobj
-Keymap( { "x", "o" }, "ag", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "entire buffer textobj" })
+Keymap( { "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "entire buffer textobj" })
 
 -- r: [r]est of paragraph/indentation (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
