@@ -162,7 +162,8 @@ function betterClone() {
 		git clone "$giturl"
 	fi
 	# shellcheck disable=SC2012
-	cd "$(ls -1 -t | head -n1)" || return
+	cd "$(ls -1 -t | head -n1)" || return 1
+	ls -G
 
 	if grep -q "obsidian" package.json &>/dev/null; then
 		print "\n\033[1;34mDetected Obsidian plugin. Installing NPM dependencies…\033[0m"

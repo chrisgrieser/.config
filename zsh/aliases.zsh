@@ -3,7 +3,6 @@
 # aliases not triggering "you should use"
 export YSU_IGNORED_ALIASES=("bi" "bu") # due to homebrew Alfred workflow
 
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # z & cd
