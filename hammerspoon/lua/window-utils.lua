@@ -108,7 +108,8 @@ end
 function MoveResize(win, pos)
 	-- guard clauses
 	if
-		not win
+		ResizeActive
+		or not win
 		or not win:application()
 		or CheckSize(win, pos) -- already correctly sized
 		or win:title() == "Quick Look"

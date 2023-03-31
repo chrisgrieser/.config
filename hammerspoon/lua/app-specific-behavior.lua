@@ -139,13 +139,7 @@ Wf_finder = Wf.new("Finder")
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(Wf.windowCreated, function()
-		-- only trigger this when Finder is not frontmost, since otherwise, the
-		-- creation as well as the app activation both trigger auto-tiling,
-		-- resulting in a glitchy movement since both resize finder
-		if FrontAppName() == "Finder" then return end
-		AutoTile(Wf_finder)
-	end)
+	:subscribe(Wf.windowCreated, function() AutoTile(Wf_finder) end)
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_finder) end)
 
 FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)

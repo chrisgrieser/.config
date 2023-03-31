@@ -9,8 +9,8 @@ local actFun = wezterm.action_callback
 
 local log = wezterm.log_info
 
-local isAtOffice = wezterm.hostname():find("mini")
-local isAtMother = wezterm.hostname():find("Mother")
+local isAtOffice = wezterm.hostname():find("mini") ~= nil
+local isAtMother = wezterm.hostname():find("Mother") ~= nil
 
 
 --------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ end)
 --------------------------------------------------------------------------------
 -- THEME
 
-local darkTheme = "Ivory Dark (terminal.sexy)"
+local darkTheme = "AdventureTime"
 local lightTheme = "Ivory Light (terminal.sexy)"
 
 ---selects the color scheme depending on Dark/Light Mode
