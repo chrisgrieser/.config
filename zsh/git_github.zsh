@@ -20,6 +20,14 @@ function getGithubURL() {
 	git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
 }
 
+# Pull Request
+# (and creates fork if no writing access)
+function pr () {
+	if ! command -v gh &>/dev/null; then echo "gh not installed." && return 1; fi
+	gh create pr --fill # --fill adds title/body from commit msg
+	gh pr view
+}
+
 # Github Url: open & copy url
 function gu() {
 	getGithubURL | pbcopy

@@ -54,6 +54,8 @@ SidenotesWatcher2 = Aw.new(function(appName, event)
 			and FrontAppName() ~= "CleanShot X"
 			and FrontAppName() ~= "Espanso"
 		then
+			-- INFO if sidenotes glitches, it is the "Hot Side" setting causing
+			-- glitches when mouse is close, not Hammerspoon
 			App("SideNotes"):hide()
 		end
 	end)
