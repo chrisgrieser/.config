@@ -1,31 +1,28 @@
 -- https://wezfurlong.org/wezterm/config/files.html#quick-start
 --------------------------------------------------------------------------------
+-- UTILS
 local wezterm = require("wezterm")
 local act = wezterm.action
 local actFun = wezterm.action_callback
 -- local os = require("os")
 -- local io = require("io")
--- local log = wezterm.log_info
+
+---@diagnostic disable-next-line: unused-local
+local log = wezterm.log_info
 
 local isAtOffice = wezterm.hostname():find("mini")
 local isAtMother = wezterm.hostname():find("Mother")
 
---------------------------------------------------------------------------------
-
 ---selects the color scheme depending on Dark/Light Mode
----@param 
 ---@return string name of the string to set in config.colorscheme
-local function selectScheme(appearance)
-  if appearance:find 'Dark' then
-    return 'Builtin Solarized Dark'
-  else
-    return 'Builtin Solarized Light'
-  end
+local function autoToggleTheme()
+	local currentMode = wezterm.gui.get_appearance()
+	local colorscheme = currentMode:find("Dark") and "AdventureTime" or "AdventureTime"
+	return colorscheme
 end
 
-
 --------------------------------------------------------------------------------
--- set window position on startup
+-- SET WINDOW POSITION ON STARTUP
 local windowPos = {
 	x = 705, -- true pixel
 	y = 0,
@@ -40,7 +37,7 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 --------------------------------------------------------------------------------
-
+-- MAIN CONFIG
 return {
 	-- Meta
 	check_for_updates = true,
@@ -68,7 +65,7 @@ return {
 	initial_rows = windowPos.h,
 
 	-- Appearance
-	color_scheme = "AdventureTime", -- work programmatically w/ color schemes: https://wezfurlong.org/wezterm/config/lua/wezterm/get_builtin_color_schemes.html
+	color_scheme = autoToggleTheme(),  
 	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
 	bold_brightens_ansi_colors = "BrightAndBold",
 	window_background_opacity = 0.95,
@@ -97,10 +94,14 @@ return {
 
 	mouse_bindings = {
 		-- open link at normal leftclick
-		{ event = { Up = { streak = 1, button = "Left" } }, mods = "", action = act.OpenLinkAtMouseCursor },
+		{
+			event = { Up = { streak = 1, button = "Left" } },
+			mods = "",
+			action = act.OpenLinkAtMouseCursor,
+		},
 	},
 
-	-- Keybindings
+	-- KEYBINDINGS
 	-- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
 	-- Keynames: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
 	disable_default_key_bindings = false,
@@ -141,10 +142,22 @@ return {
 			key = "t",
 			mods = "SHIFT|CTRL|ALT",
 			action = actFun(function(window, _)
-				local schemes = {}
-				for name, _ in pairs(wezterm.color.get_builtin_schemes()) do
-					table.insert(schemes, name)
+				local overrides = window:get_config_overrides() or {}
+				local allSchemes = wezterm.color.get_builtin_schemes()
+				local currentScheme = window:effective_config().color_scheme
+				local found = false
+
+				-- find the first matching key, then on next iteration set that theme
+				for scheme, _ in pairs(allSchemes) do
+					if scheme == currentScheme then
+						found = true
+					elseif found then
+						overrides.color_scheme = scheme
+						window:set_config_overrides(overrides)
+						return
+					end
 				end
+
 			end),
 		},
 
