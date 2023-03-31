@@ -79,11 +79,14 @@ return {
 	cursor_blink_rate = 1100,
 	force_reverse_video_cursor = false, -- true = color is reverse, false = color by color scheme
 
-	-- Font / Size
+	-- Font
 	font_size = 27,
 	command_palette_font_size = 29,
 	font = wezterm.font("JetBrains Mono"), -- bundled by wezterm, using nerdfont as fallback https://wezfurlong.org/wezterm/config/fonts
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
+
+	-- Size
+	adjust_window_size_when_changing_font_size = false,
 	cell_width = 1.0,
 	line_height = 1.0,
 	initial_cols = windowPos.w,

@@ -103,12 +103,14 @@ function CheckSize(win, size)
 	return widthOkay and heightOkay and posxOkay and posyOkay
 end
 
+
+ResizeOngoing = false
 ---@param win hs.window
 ---@param pos hs.geometry
 function MoveResize(win, pos)
 	-- guard clauses
 	if
-		ResizeActive
+		ResizeOngoing
 		or not win
 		or not win:application()
 		or CheckSize(win, pos) -- already correctly sized
@@ -124,6 +126,7 @@ function MoveResize(win, pos)
 		return
 	end
 
+
 	-- Twitter Extras
 	if pos == PseudoMaximized or pos == Centered then
 		TwitterToTheSide()
@@ -131,8 +134,12 @@ function MoveResize(win, pos)
 		if App("Twitter") then App("Twitter"):hide() end
 	end
 
+	-- to prevent multiple concurrent runs
+	ResizeOngoing = true
+	RunWithDelays(0.4, function () ResizeOngoing = false end)
+
 	-- resize
-	RunWithDelays({ 0, 0.1, 0.2, 0.3, 0.4, 0.5 }, function()
+	RunWithDelays({ 0, 0.1, 0.2, 0.3, 0.4 }, function()
 		-- check for unequal false, since non-resizable wins return nil
 		if CheckSize(win, pos) ~= false then return end
 		win:moveToUnit(pos)
