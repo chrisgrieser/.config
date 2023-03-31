@@ -110,3 +110,4 @@ callout
 infobox
 Dataview
 Tweaker
+bufferline
