@@ -30,8 +30,7 @@ $memory_usage\
 [character]
 success_symbol = " [󰀘](bold green)"
 error_symbol = " [󰇷](bold red)"
-# only active on xterm due to cursor shape snippet intefering with it
-vimcmd_symbol = " [](bold blue)" 
+vimcmd_symbol = " [](bold blue)" # only active on embedded terminals due to cursor shape snippet intefering with it
 
 [sudo]
 style = 'fg:green bg:black'
@@ -41,7 +40,7 @@ disabled = false
 
 [cmd_duration]
 min_time = 2500
-format = " [󰔟$duration](bold cyan)"
+format = " [󰔟 $duration](bold cyan)"
 
 [directory]
 truncation_length = 2
