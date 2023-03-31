@@ -1,11 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>application</key>
-	<integer>1</integer>
-	<key>custom</key>
-	<string>on alfred_script(q)
+# to be entered in the Alfred Terminal settings. Kept here for reference.
+--------------------------------------------------------------------------------
+
+on alfred_script(q)
 	set prevClipboard to the clipboard
 	delay 0.05
 	set the clipboard to q
@@ -26,6 +22,4 @@
 
 	delay 0.05
 	set the clipboard to prevClipboard
-end alfred_script</string>
-</dict>
-</plist>
+end alfred_script
