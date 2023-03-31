@@ -17,4 +17,4 @@ else
 	WD="${working_directory/#\~/$HOME}"
 fi
 
-[[ -d "$WD" ]] && nohup alacritty --working-directory="$WD" &
+[[ -d "$WD" ]] && nohup wezterm start --cwd="$WD" &

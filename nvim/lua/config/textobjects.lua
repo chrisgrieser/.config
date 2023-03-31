@@ -96,25 +96,25 @@ Keymap({ "x", "o" }, "av", "<cmd>lua require('various-textobjs').value(false)<CR
 Keymap({ "x", "o" }, "ak", "<cmd>lua require('various-textobjs').key(true)<CR>", { desc = "outer key textobj" })
 
 -- n: [n]ear end of the line
-Keymap({ "o", "x" }, "n", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "near EoL textobj" })
+Keymap({ "o", "x" }, "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", { desc = "near EoL textobj" })
 
 -- m: to next closing bracket
 Keymap({ "o", "x" }, "m", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "to next closing bracket textobj" })
 
 -- o: c[o]lumn textobj
-Keymap("o", "o", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "column textobj" })
+Keymap("o", "o", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "column textobj" })
 
 -- ag: entire buffer textobj
 Keymap( { "x", "o" }, "ag", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "entire buffer textobj" })
 
 -- r: [r]est of paragraph/indentation (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
-Keymap("o", "rp", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "rest of paragraph textobj" })
-Keymap("o", "ri", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "rest of indentation textobj" })
+Keymap("o", "rp", "<cmd>lua require('various-textobjs').restOfIndentation()<CR>", { desc = "rest of paragraph textobj" })
+Keymap("o", "ri", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", { desc = "rest of indentation textobj" })
 Keymap( "o", "rg", "G", { desc = "rest of buffer textobj" })
 
 -- ge: diagnostic textobj (similar to ge for the next diagnostic)
-Keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "diagnostic textobj" })
+Keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", { desc = "diagnostic textobj" })
 
 -- iR/aR: double square brackets
 Keymap( { "x", "o" }, "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(true)<CR>", { desc = "inner double square bracket" })
