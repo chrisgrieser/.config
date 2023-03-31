@@ -80,6 +80,7 @@ function CheckSize(win, size)
 		"Bin", -- Finder
 		"Enki",
 		"System Settings",
+		"Espanso",
 		"Transmission",
 		"Twitter",
 		"Alfred",
@@ -104,14 +105,12 @@ function CheckSize(win, size)
 end
 
 
-ResizeOngoing = false
 ---@param win hs.window
 ---@param pos hs.geometry
 function MoveResize(win, pos)
 	-- guard clauses
 	if
-		ResizeOngoing
-		or not win
+		not win
 		or not win:application()
 		or CheckSize(win, pos) -- already correctly sized
 		or win:title() == "Quick Look"
@@ -133,10 +132,6 @@ function MoveResize(win, pos)
 	elseif pos == Maximized and AppIsRunning("Twitter") then
 		if App("Twitter") then App("Twitter"):hide() end
 	end
-
-	-- to prevent multiple concurrent runs
-	ResizeOngoing = true
-	RunWithDelays(0.4, function () ResizeOngoing = false end)
 
 	-- resize
 	RunWithDelays({ 0, 0.1, 0.2, 0.3, 0.4 }, function()
@@ -234,7 +229,7 @@ Wf_appsOnMouseScreen = Wf.new({
 	"Discord",
 	"Neovide",
 	"neovide",
-	"espanso",
+	"Espanso",
 	"BusyCal",
 	"Alfred Preferences",
 	"YouTube",

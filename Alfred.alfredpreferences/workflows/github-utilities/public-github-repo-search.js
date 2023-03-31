@@ -38,7 +38,6 @@ function run(argv) {
 						subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
 						arg: repo.full_name,
 					},
-					fn: { arg: repo.full_name },
 				},
 			};
 		});

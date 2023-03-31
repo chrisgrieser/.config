@@ -82,3 +82,6 @@ matches:
   - triggers: ["!weird", "!meme"]
     image_path: "$CONFIG/memes/spongebob-weird.gif"
     label: sPoNgeBObCaSE (image)
+  - triggers: ["!weird", "!meme"]
+    image_path: "$CONFIG/memes/vim-brain-space.jpg"
+    label: Vim Brain Space (image)
