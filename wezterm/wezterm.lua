@@ -2,6 +2,8 @@
 --------------------------------------------------------------------------------
 local wezterm = require("wezterm")
 local act = wezterm.action
+-- local os = require("os")
+-- local io = require("io")
 -- local log = wezterm.log_info
 
 local isAtOffice = wezterm.hostname():find("mini")
@@ -14,9 +16,15 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():set_position(705, 0)
 end)
 
+wezterm.on("open-wezterm-settings", function(window, pane)
+end)
+
+
+
+
 --------------------------------------------------------------------------------
 
-local config = {
+return {
 	-- Meta
 	check_for_updates = true,
 	automatically_reload_config = true, -- causes errors too quickly
@@ -89,15 +97,26 @@ local config = {
 		{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
 		{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 		{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
-		{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
-		{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
+		{ key = "+", mods = "CMD", action = act.IncreaseFontSize },
+		{ key = "-", mods = "CMD", action = act.DecreaseFontSize },
+		{ key = "0", mods = "CMD", action = act.ResetFontSize },
 
+		{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
 		{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 		{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
 		{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
 
+		-- open location in Finder (using the mapping from the terminal keybinds)
+		{ key = "l", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" }, },
+
+		{ key = ",", mods = "CMD", action = act.emitEvent ("open-wezterm-settings"), },
+
 		--------------------------------------------------------------------------
 		-- MODES
+
+		-- Search
+		{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
+
 		-- Console / REPL
 		{ key = "Escape", mods = "CTRL", action = wezterm.action.ShowDebugOverlay },
 
@@ -108,7 +127,3 @@ local config = {
 		{ key = "f", mods = "CMD|SHIFT", action = act.QuickSelect },
 	},
 }
-
---------------------------------------------------------------------------------
-
-return config
