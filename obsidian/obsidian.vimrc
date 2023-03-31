@@ -107,8 +107,8 @@ nmap U <C-r>
 
 " Case Switch via Smarter MD Hotkeys Plugin
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
-nmap <BS> :caseSwitch
-vmap <BS> :caseSwitch
+nmap ö :caseSwitch
+vmap ö :caseSwitch
 
 " Move words (equivalent to sibling-swap.nvim)
 nmap ü "zdawel"zph
@@ -229,6 +229,7 @@ nmap <C-w>o :only
 " Tabs
 exmap nextTab obcommand workspace:next-tab
 exmap prevTab obcommand workspace:previous-tab
+nmap <BS> :nextTab
 nmap gt :nextTab
 nmap gT :prevTab
 
