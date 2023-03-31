@@ -4,14 +4,14 @@
 # and therefore won't run before terminal is quit.
 on run
 	# guard clause: if terminal not running, run next script opening terminal
-	if application "alacritty" is not running then return "not-running"
+	if application "WezTerm" is not running then return "not-running"
 
 	tell application "System Events" 
-		set frontApp to (name of first process where it is frontmost)
+		set frontProcess to (name of first process where it is frontmost)
 	end tell
 
 	# If terminal is frontmost, switch back to previous app
-	if frontApp is "alacritty" then
+	if frontProcess is "wezterm-gui" then
 		tell application "System Events"
 			keystroke tab using {command down}
 			delay 0.15
@@ -19,8 +19,8 @@ on run
 		end tell
 
 	# if terminal is not frontmost, show it again 
-	else if frontApp is not "Finder" then
-		tell application "alacritty" to activate
+	else if frontProcess is not "Finder" then
+		tell application "WezTerm" to activate
 
 	# exception: If Finder is frontmost, cd to finder window
 	else
