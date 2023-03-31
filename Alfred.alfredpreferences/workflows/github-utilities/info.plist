@@ -147,19 +147,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7DDEC09A-D8F5-45AC-A2C3-08EE9AB09FC5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>58000537-FC4F-4EEC-90D9-C546C645AA78</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>80310399-4092-49D2-B048-D91D9184B37F</key>
 		<array>
 			<dict>
@@ -361,16 +348,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>FB39F39C-D732-45BD-9067-44FEEE52AF1D</string>
-				<key>modifiers</key>
-				<integer>8388608</integer>
-				<key>modifiersubtext</key>
-				<string>fn: Fork &amp; Shallow Clone</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</string>
 				<key>modifiers</key>
 				<integer>131072</integer>
@@ -385,29 +362,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>FB39F39C-D732-45BD-9067-44FEEE52AF1D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>7DDEC09A-D8F5-45AC-A2C3-08EE9AB09FC5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -889,37 +843,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<integer>3</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>FB39F39C-D732-45BD-9067-44FEEE52AF1D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>fork-public-repo.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>7DDEC09A-D8F5-45AC-A2C3-08EE9AB09FC5</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
@@ -1325,7 +1248,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>70</real>
 			<key>ypos</key>
-			<real>1370</real>
+			<real>1190</real>
 		</dict>
 		<key>0E26657D-87C2-4501-A282-F674945D73C9</key>
 		<dict>
@@ -1336,7 +1259,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1065</real>
+			<real>885</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
@@ -1345,7 +1268,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1340</real>
+			<real>1160</real>
 		</dict>
 		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
 		<dict>
@@ -1354,7 +1277,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>755</real>
 		</dict>
 		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
 		<dict>
@@ -1363,7 +1286,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>375</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>565</real>
 		</dict>
 		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
 		<dict>
@@ -1450,18 +1373,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>965</real>
-		</dict>
-		<key>7DDEC09A-D8F5-45AC-A2C3-08EE9AB09FC5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>FORK &amp; shallow clone</string>
-			<key>xpos</key>
-			<real>435</real>
-			<key>ypos</key>
-			<real>535</real>
+			<real>785</real>
 		</dict>
 		<key>7EA483DA-F1D8-434E-B7BB-44B00E237DB6</key>
 		<dict>
@@ -1470,7 +1382,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>535</real>
 		</dict>
 		<key>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</key>
 		<dict>
@@ -1490,7 +1402,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>140</real>
 			<key>ypos</key>
-			<real>1340</real>
+			<real>1160</real>
 		</dict>
 		<key>8D2069C6-2EDB-40CD-854E-38574F301A4B</key>
 		<dict>
@@ -1499,7 +1411,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
-			<real>1200</real>
+			<real>1020</real>
 		</dict>
 		<key>9FAD19B2-5BF3-43C8-B76B-80FFD2C17566</key>
 		<dict>
@@ -1530,7 +1442,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>755</real>
 		</dict>
 		<key>AC483565-D8EB-4AAD-99AA-229D0C632CE8</key>
 		<dict>
@@ -1541,7 +1453,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>755</real>
 		</dict>
 		<key>BC540696-9F8F-4C3E-A49D-75AB31EF690F</key>
 		<dict>
@@ -1561,7 +1473,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>535</real>
 		</dict>
 		<key>C5EA77C5-8A78-4563-A304-97626E832D20</key>
 		<dict>
@@ -1583,7 +1495,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1200</real>
+			<real>1020</real>
 		</dict>
 		<key>CC245103-888B-4440-A348-64F8A74D87F3</key>
 		<dict>
@@ -1614,7 +1526,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>820</real>
+			<real>640</real>
 		</dict>
 		<key>CE6F0B40-E42E-4D8B-833A-537723F42C63</key>
 		<dict>
@@ -1633,15 +1545,6 @@ echo "$url"</string>
 			<real>435</real>
 			<key>ypos</key>
 			<real>415</real>
-		</dict>
-		<key>FB39F39C-D732-45BD-9067-44FEEE52AF1D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>345</real>
-			<key>ypos</key>
-			<real>495</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
