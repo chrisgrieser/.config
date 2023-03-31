@@ -80,55 +80,55 @@ Keymap("o", "u", commented_lines_textobject, { desc = "Big comment textobj" })
 -- stylua: ignore start
 
 -- space: subword
-Keymap({"o", "x"}, "<Space>", function() require("various-textobjs").subword(true) end, { desc = "inner subword textobj" })
+Keymap({"o", "x"}, "<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "inner subword textobj" })
 
 -- L: link
-Keymap("o", "L", function() require("various-textobjs").url() end, { desc = "link textobj" })
+Keymap("o", "L", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "link textobj" })
 
 -- iv/av: value textobj
-Keymap({ "x", "o" }, "iv", function() require("various-textobjs").value(true) end, { desc = "inner value textobj" })
-Keymap({ "x", "o" }, "av", function() require("various-textobjs").value(false) end, { desc = "outer value textobj" })
+Keymap({ "x", "o" }, "iv", "<cmd>lua require('various-textobjs').value(true)<CR>", { desc = "inner value textobj" })
+Keymap({ "x", "o" }, "av", "<cmd>lua require('various-textobjs').value(false)<CR>", { desc = "outer value textobj" })
 
 -- ak: outer key textobj
 -- INFO `ik` defined via treesitter to exclude `local` and `let`
 -- INFO mapping the *inner* obj to `ak`, since it includes `local` and `let` 
 -- (various textobjs' outer key includes the "=" and ":" as well)
-Keymap({ "x", "o" }, "ak", function() require("various-textobjs").key(true) end, { desc = "outer key textobj" })
+Keymap({ "x", "o" }, "ak", "<cmd>lua require('various-textobjs').key(true)<CR>", { desc = "outer key textobj" })
 
 -- n: [n]ear end of the line
-Keymap({ "o", "x" }, "n", function() require("various-textobjs").nearEoL() end, { desc = "near EoL textobj" })
+Keymap({ "o", "x" }, "n", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "near EoL textobj" })
 
 -- m: to next closing bracket
-Keymap({ "o", "x" }, "m", function() require("various-textobjs").toNextClosingBracket() end, { desc = "to next closing bracket textobj" })
+Keymap({ "o", "x" }, "m", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "to next closing bracket textobj" })
 
 -- o: c[o]lumn textobj
-Keymap("o", "o", function() require("various-textobjs").column() end, { desc = "column textobj" })
+Keymap("o", "o", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "column textobj" })
 
 -- ag: entire buffer textobj
-Keymap( { "x", "o" }, "ag", function() require("various-textobjs").entireBuffer() end, { desc = "entire buffer textobj" })
+Keymap( { "x", "o" }, "ag", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "entire buffer textobj" })
 
 -- r: [r]est of paragraph/indentation (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
-Keymap("o", "rp", function() require("various-textobjs").restOfParagraph() end, { desc = "rest of paragraph textobj" })
-Keymap("o", "ri", function() require("various-textobjs").restOfIndentation() end, { desc = "rest of indentation textobj" })
+Keymap("o", "rp", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "rest of paragraph textobj" })
+Keymap("o", "ri", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "rest of indentation textobj" })
 Keymap( "o", "rg", "G", { desc = "rest of buffer textobj" })
 
 -- ge: diagnostic textobj (similar to ge for the next diagnostic)
-Keymap({ "x", "o" }, "ge", function() require("various-textobjs").diagnostic() end, { desc = "diagnostic textobj" })
+Keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "diagnostic textobj" })
 
 -- iR/aR: double square brackets
-Keymap( { "x", "o" }, "iR", function() require("various-textobjs").doubleSquareBrackets(true) end, { desc = "inner double square bracket" })
-Keymap( { "x", "o" }, "aR", function() require("various-textobjs").doubleSquareBrackets(false) end, { desc = "outer double square bracket" })
+Keymap( { "x", "o" }, "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(true)<CR>", { desc = "inner double square bracket" })
+Keymap( { "x", "o" }, "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(false)<CR>", { desc = "outer double square bracket" })
 
 -- ii/ai: indentation textobj
-Keymap({ "x", "o" }, "ii", function() require("various-textobjs").indentation(true, true) end, { desc = "inner indent textobj" })
-Keymap({ "x", "o" }, "ai", function() require("various-textobjs").indentation(false, false) end, { desc = "outer indent textobj" })
+Keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(true, true)<CR>", { desc = "inner indent textobj" })
+Keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "outer indent textobj" })
 
 Autocmd("FileType", {
 	callback = function()
 		local indentedFts = { "python", "yaml", "markdown", "gitconfig" }
 		if vim.tbl_contains(indentedFts, Bo.filetype) then
-			Keymap( { "x", "o" }, "ai", function() require("various-textobjs").indentation(false, true) end, { buffer = true, desc = "indent textobj w/ start border" })
+			Keymap( { "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { buffer = true, desc = "indent textobj w/ start border" })
 		end
 	end,
 })
@@ -137,8 +137,8 @@ Autocmd("FileType", {
 	callback = function()
 		local pipeFiletypes = { "sh", "zsh", "bash" }
 		if vim.tbl_contains(pipeFiletypes, Bo.filetype) then
-			Keymap( { "x", "o" }, "i|", function() require("various-textobjs").shellPipe(true) end, { buffer = true, desc = "inner pipe textobj" })
-			Keymap( { "x", "o" }, "a|", function() require("various-textobjs").shellPipe(false) end, { buffer = true, desc = "outer pipe textobj" })
+			Keymap( { "x", "o" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { buffer = true, desc = "inner pipe textobj" })
+			Keymap( { "x", "o" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { buffer = true, desc = "outer pipe textobj" })
 		end
 	end,
 })
