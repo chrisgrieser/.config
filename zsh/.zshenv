@@ -19,11 +19,17 @@ export ZDOTDIR="$DOTFILE_FOLDER/zsh"
 OPENAI_API_KEY=$(tr -d "\n" <"$ICLOUD/Dotfolder/private dotfiles/openai-api-key.txt")
 export OPENAI_API_KEY
 
+# OpenAI API Key stored outside of public git repo (symlinked file)
+GITHUB_TOKEN=$(tr -d "\n" <"$ICLOUD/Dotfolder/private dotfiles/github_token.txt")
+export GITHUB_TOKEN
+
 # Pass Config
 export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=32
 export PASSWORD_STORE_ENABLE_EXTENSIONS=false
 export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # vidir availability
 export PATH="$DOTFILE_FOLDER/zsh/plugins":$PATH
