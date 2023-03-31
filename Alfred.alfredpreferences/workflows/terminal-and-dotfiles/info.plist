@@ -481,7 +481,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>190</real>
 		</dict>
 		<key>4852BD0B-45FE-4BD1-9B24-75D32B5EAA7D</key>
 		<dict>
@@ -524,7 +524,7 @@ echo "$backup"</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>190</real>
 		</dict>
 		<key>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</key>
 		<dict>

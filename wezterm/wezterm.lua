@@ -37,6 +37,28 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 --------------------------------------------------------------------------------
+
+local function themeCycler(window, _)
+	local overrides = window:get_config_overrides() or {}
+	local allSchemes = wezterm.color.get_builtin_schemes()
+	local currentScheme = window:effective_config().color_scheme
+	local found = false
+
+
+	-- find the first matching key, then on next iteration set that theme
+	for scheme, _ in pairs(allSchemes) do
+		if scheme == currentScheme then
+			found = true
+		elseif found then
+			overrides.color_scheme = scheme
+			window:set_config_overrides(overrides)
+			window:toast_notification("Now", scheme)
+			return
+		end
+	end
+end
+
+--------------------------------------------------------------------------------
 -- MAIN CONFIG
 return {
 	-- Meta
@@ -145,23 +167,7 @@ return {
 		{ -- Theme Cycler
 			key = "t",
 			mods = "SHIFT|CTRL|ALT",
-			action = actFun(function(window, _)
-				local overrides = window:get_config_overrides() or {}
-				local allSchemes = wezterm.color.get_builtin_schemes()
-				local currentScheme = window:effective_config().color_scheme
-				local found = false
-
-				-- find the first matching key, then on next iteration set that theme
-				for scheme, _ in pairs(allSchemes) do
-					if scheme == currentScheme then
-						found = true
-					elseif found then
-						overrides.color_scheme = scheme
-						window:set_config_overrides(overrides)
-						return
-					end
-				end
-			end),
+			action = actFun(themeCycler),
 		},
 
 		--------------------------------------------------------------------------
