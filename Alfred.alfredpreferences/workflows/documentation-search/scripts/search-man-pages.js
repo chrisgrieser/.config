@@ -14,23 +14,22 @@ function alfredMatcher(str) {
 const baseURL = "https://man.cx/";
 
 let binaries = app
-	.doShellScript("echo $PATH | tr ':' '\n' | xargs -I {} find {} -maxdepth 1 -type f -perm '++x'")
+	.doShellScript("echo $PATH | tr ':' '\n' | xargs -I {} find {} -maxdepth 1 -type f -or -type l -perm '++x'")
 	.split("\r")
 	.map(path => path.replaceAll("//", "/"));
 
 binaries = [...new Set(binaries)] // only unique
-	.sort((a, b) => {
-		if (a.includes("homebrew") && b.includes("homebrew"))
-		return b - a;
+	.sort((a, b) => { // sort homebrew installs first
+		if (a.includes("brew") && !b.includes("brew")) return -1;
+		if (!a.includes("brew") && b.includes("brew")) return 1;
+		return 0;
 	})
 	.map(binary => {
 		const cmd = binary.split("/").pop();
-		let type = "";
-		if (binary.includes("homebrew")) type = "homebrew";
-		else if (binary.includes("bin")) type = "builtin";
+		let icon = "";
+		if (binary.includes("brew")) icon += " 🍺";
 		return {
-			title: cmd,
-			subtitle: type,
+			title: cmd + icon,
 			match: alfredMatcher(cmd),
 			arg: baseURL + cmd,
 			uid: cmd,
