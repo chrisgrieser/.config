@@ -175,13 +175,15 @@ Autocmd("BufReadPost", {
 Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
 	callback = function()
+		local filepath = Expand("%:p")
 		if
-			not Bo.readonly
+			Fn.filereadable(filepath) == 1
+			and not Bo.readonly
 			and Expand("%") ~= ""
 			and (Bo.buftype == "" or Bo.buftype == "acwrite")
 			and Bo.filetype ~= "gitcommit"
 		then
-			Cmd.update(Expand("%:p"))
+			Cmd.update(filepath)
 		end
 	end,
 })

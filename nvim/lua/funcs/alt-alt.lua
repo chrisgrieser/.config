@@ -77,7 +77,7 @@ function M.altFileStatusline()
 	local curFile = fn.expand("%:t")
 
 	local name, icon
-	if altFile == "" and not altOldfile() then -- no oldfile and after start
+	if altFile == "" and not (altOldfile()) then -- no oldfile and after start
 		name = ""
 	elseif altWindow() and altWindow():find("^diffview:") then
 		name = "File History"
