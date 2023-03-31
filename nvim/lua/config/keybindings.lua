@@ -189,7 +189,7 @@ local function valeWord(mode)
 	Cmd.update()
 	Cmd.edit() -- reload file for diagnostics to take effect
 	Cmd.loadview(2)
-	vim.notify(string.format('󰓆Now %sing:\n"%s"', mode, word))
+	vim.notify(string.format('󰓆 Now %sing:\n"%s"', mode, word))
 end
 Keymap("n", "zg", function() valeWord("accept") end, { desc = "󰓆 Add to accepted words (vale)" })
 Keymap("n", "zw", function() valeWord("reject") end, { desc = "󰓆 Add to rejected words (vale)" })
