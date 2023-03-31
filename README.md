@@ -1,13 +1,16 @@
 # pseudometa's dotfiles
 
-## Configurations of interest
+## Configurations of Interest
 Most people tell me they find the following configurations useful:
-- [neovim config](/nvim)
-- [.zshrc setup](/zsh)
-- [Starship Prompt](/starship/starship-alacritty.toml)
+- [neovim config](/nvim) (5000+ LoC)
+- [hammerspoon config](/hammerspoon) (2000+ LoC)
+- [.zshrc](/zsh) (1400+ LoC)
 - [Pandoc configs & pointers on how to use pandoc](/pandoc)
 - [complex modifications for Karabiner Elements](/karabiner)
 - [obsidian.vimrc](obsidian-vim/obsidian.vimrc) via the [vimrc Support Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support)
+- [Starship Prompt](/starship/starship.toml) – see below
+
+<img width=60% alt="Starship Prompt" src="https://user-images.githubusercontent.com/73286100/229211019-e763d775-d89f-43da-99ef-06c57fd1e485.png">
 
 > __Note__  
 > I also have a [blog for intermediary-advanced neovim tips](https://nanotipsforvim.prose.sh/)
