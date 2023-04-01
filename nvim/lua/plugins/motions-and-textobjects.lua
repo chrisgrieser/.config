@@ -35,9 +35,5 @@ return {
 		"mfussenegger/nvim-treehopper",
 		lazy = true, -- loaded by keymaps
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function()
-			vim.keymap.set( "x" , "h", ":lua require('tsht').nodes()<CR>")
-			vim.keymap.set( "o" , "h", ":<C-U>lua require('tsht').nodes()<CR>")
-		end,
 	},
 }
