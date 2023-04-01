@@ -10,4 +10,5 @@ target="${local_repo_folder/#\~/$HOME}"
 
 cd "$target" || exit 1
 git clone --depth=1 "$url" || echo "❌ Error"
+
 open "$target/$reponame"

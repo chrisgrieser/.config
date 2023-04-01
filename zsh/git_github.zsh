@@ -21,11 +21,22 @@ function getGithubURL() {
 }
 
 # Pull Request
-# (and creates fork if no writing access)
+# - add all & commit with $1 (or prompted)
+# - creates fork if no writing access
+# - create PR and autofills is with commit msg
+# - opens PR in the web
 function pr () {
 	if ! command -v gh &>/dev/null; then echo "gh not installed." && return 1; fi
+	if [[ -n "$msg" ]] ; then
+		echo "Commit Message:"
+		read -r msg
+	fi
+	git add . && git commit -m "$msg"
+	origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
+	gh repo set-default "$origin"
+
 	gh create pr --fill # --fill adds title/body from commit msg
-	gh pr view
+	gh pr view --web
 }
 
 # Github Url: open & copy url

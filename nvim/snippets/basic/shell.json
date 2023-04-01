@@ -71,7 +71,7 @@
 	},
 	"if (short)": {
 		"prefix": "if (short)",
-		"body": "[[ \"$${1:var}\" ]] && $0"
+		"body": "[[ ${2:-z} \"$${1:var}\" ]] && $0"
 	},
 	"then": {
 		"prefix": "then .. fi",
