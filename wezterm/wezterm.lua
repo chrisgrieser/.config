@@ -107,7 +107,7 @@ return {
 	native_macos_fullscreen_mode = false,
 	window_padding = {
 		left = "0.5cell",
-		right = "1.5cell", -- if scrollbar enabled, controls its width, too
+		right = "1.2cell", -- if scrollbar enabled, controls its width, too
 		top = "0.2cell",
 		bottom = "0.4cell",
 	},
@@ -157,8 +157,8 @@ return {
 		{ key = "b", mods = "CMD", action = act.SendKey { key = "b", mods = "CTRL" } },
 
 		-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
-		{ key = "K", mods = "CTRL", action = act.ScrollToPrompt(-1) },
-		{ key = "J", mods = "CTRL", action = act.ScrollToPrompt(1) },
+		{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
+		{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
 
 		{ -- cmd+, -> open this config file
 			key = ",",

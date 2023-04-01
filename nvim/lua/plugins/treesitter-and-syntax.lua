@@ -108,10 +108,11 @@ return {
 		opts = tsConfig,
 		init = function()
 			-- force treesitter to highlight zsh as if it was bash
-			-- BufReadPre to early, BufReadPost has race condition with treesitter
-			vim.api.nvim_create_autocmd("BufRead", {
+			vim.api.nvim_create_autocmd("BufReadPost", {
 				pattern = { "*.sh", "*.zsh", ".zsh*" },
-				command = "silent! set filetype=sh",
+				callback = function()
+					pcall(function() vim.bo.filetype = "sh" end)
+				end,
 			})
 
 			-- avoid conflict with visual mode comment from Comments.nvim
