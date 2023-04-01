@@ -17,6 +17,10 @@ NONE_FOUND=0
 INFO_WINDOW=0
 
 case $APP in
+
+"WezTerm")
+	iconsur set "$APP.app"
+	;;
 "Steam")
 	iconsur set "$APP.app"
 	;;
