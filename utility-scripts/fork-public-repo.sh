@@ -17,19 +17,24 @@ set -e # abort if any step fails
 
 function commit_push_pr_view() {
 	local msg="$1"
+	local body="$2"
 	git add .
 	git commit -m "$msg"
-	gh pr create --fill # --fill = use commit ino
-
-	# open in web just to check
-	gh pr view --web
+	if [[ -n "$body" ]] ; then
+		gh pr create --title="$msg" --body="$body"
+	else
+		gh pr create --fill # --fill = use commit info
+	fi
+	gh pr view --web # open in web just to check
 }
 
 function shallow_fork() {
 	repo="$1"
 	name=$(echo "$repo" | cut -d/ -f2)
+
 	origin=$(git remote -v | grep origin | head -n1 | cut -d/ -f4- | cut -d. -f1)
 	gh repo set-default "$origin"
+
 	gh repo fork "$repo" --clone=false # separate clone command for shallow clone
 	gh repo clone "$github_user/$name" -- --depth=1
 	cd "./$name"
@@ -75,11 +80,26 @@ echo "------------------------------------------------------------"
 cd "$TEMP_DIR"
 shallow_fork "rockerBOO/awesome-neovim"
 
-line_to_add="[$plugin_name]($github_url) – $plugin_desc"
-echo "$line_to_add | pbcopy"
+line_to_add="- [$plugin_name]($github_url) - $plugin_desc"
+# TODO check for dot as last character
+# TODO check spelling of words
+
+# https://github.com/rockerBOO/awesome-neovim/blob/main/.github/pull_request_template.md
+checklist="Checklist:
+
+- [x] The plugin is specifically built for Neovim, or if it's a colorscheme, it supports treesitter syntax.
+- [x] The lines end with a \`.\`. This is to conform to \`awesome-list\` linting and requirements.
+- [x] The title of the pull request is \`\`\`Add/Update/Remove \`username/repo\` \`\`\` (notice the backticks around \`\`\` \`username/repo\` \`\`\`) when adding a new plugin.
+- [x] The description doesn't mention that it's a Neovim plugin, it's obvious from the rest of the document. No mentions of the word \`plugin\` unless it's related to something else.
+- [x] The description doesn't contain emojis.
+- [x] Neovim is spelled as \`Neovim\` (not \`nvim\`, \`NeoVim\` or \`neovim\`), Vim is spelled as \`Vim\` (capitalized), Lua is spelled as \`Lua\` (capitalized), Tree-sitter is spelled as \`Tree-sitter\`.
+- [x] Acronyms should be fully capitalized, for example \`LSP\`, \`TS\`, \`YAML\`, etc.
+"
+
+echo "$line_to_add" | pbcopy
 nvim "./README.md"
 
-commit_push_pr_view "Add \`$repo\`"
+commit_push_pr_view "Add \`$repo\`" "$checklist"
 echo "------------------------------------------------------------"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -92,6 +112,7 @@ gh repo clone "$plugin_name/this-week-in-neovim-contents" -- --depth=1
 # INFO needs to switch to most recent branch :S
 
 commit_push_pr_view "Add $plugin_name"
+echo "------------------------------------------------------------"
 
 #───────────────────────────────────────────────────────────────────────────────
 # FINISH
