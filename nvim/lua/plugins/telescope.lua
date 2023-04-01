@@ -7,7 +7,10 @@ local keymappings = {
 	["<C-l>"] = "cycle_history_next",
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<D-a>"] = "select_all",
-	["<Space>"] = "move_selection_Prev",
+	["<Tab>"] = "move_selection_prev",
+	["<S-Tab>"] = "move_selection_better",
+	["<Space>"] = "move_selection_worse",
+	["?"] = "which_key",
 }
 
 local function telescopeConfig()
