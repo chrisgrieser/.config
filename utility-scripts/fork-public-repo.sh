@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # INPUT
-echo "Paste GitHub URL"
+echo -n "Paste GitHub URL: "
 read -r github_url
 
 echo "Enter tag for neovimcraft (Check tags at: https://neovimcraft.com/)"
@@ -23,8 +23,8 @@ function shallow_fork() {
 	gh repo clone "$github_user/$name" -- --depth=1
 	cd "./$name"
 
-	origin=$(git remote -v | grep origin | head -n1 | cut -d/ -f4- | cut -d. -f1)
-	gh repo set-default "$origin"
+	upstream=$(git remote -v | grep upstream | head -n1 | cut -d/ -f4- | cut -d. -f1)
+	gh repo set-default "$upstream"
 }
 
 function commit_push_pr_view() {
