@@ -32,7 +32,7 @@ end)
 -- THEME
 
 local darkTheme = "AdventureTime"
-local lightTheme = "Ivory Light (terminal.sexy)"
+local lightTheme = "ayu_light"
 
 ---selects the color scheme depending on Dark/Light Mode
 ---@return string name of the string to set in config.colorscheme
@@ -75,6 +75,7 @@ return {
 
 	-- Mouse & Cursor
 	hide_mouse_cursor_when_typing = true,
+	default_cursor_style = "BlinkingBar", -- mostly overwritten by vi-mode.zsh
 	cursor_thickness = "0.07cell",
 	cursor_blink_rate = 1100,
 	force_reverse_video_cursor = false, -- true = color is reverse, false = color by color scheme
