@@ -14,8 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 
 --------------------------------------------------------------------------------
 -- config https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
--- INFO `.` lazy requires dot as separator to recognize the plugin module
--- WARN if plugins are not recognized, try renaming the plugin-spec file https://github.com/folke/lazy.nvim/issues/298
 require("lazy").setup("plugins", {
 	dev = {
 		path = vim.env.ICLOUD .. "/Repos",

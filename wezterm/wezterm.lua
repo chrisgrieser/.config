@@ -31,7 +31,7 @@ end)
 
 --------------------------------------------------------------------------------
 -- THEME
-
+-- TODO modify theme colors https://wezfurlong.org/wezterm/config/lua/wezterm.color/get_default_colors.html
 local darkTheme = "AdventureTime"
 local lightTheme = "RoséPineDawn (Gogh)"
 
@@ -100,8 +100,7 @@ return {
 	color_scheme = autoToggleTheme(),
 	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
 	bold_brightens_ansi_colors = "BrightAndBold",
-	window_background_opacity = 0.95,
-	macos_window_background_blur = 2,
+	window_background_opacity = 0.96,
 	max_fps = isAtMother and 40 or 60,
 	native_macos_fullscreen_mode = false,
 	window_padding = {
@@ -127,7 +126,7 @@ return {
 	-- Mouse Bindings
 	disable_default_mouse_bindings = false,
 	mouse_bindings = {
-		-- open link at normal leftclick
+		-- open link at normal leftclick & auto-copy selection
 		{
 			event = { Up = { streak = 1, button = "Left" } },
 			mods = "",

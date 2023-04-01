@@ -46,10 +46,7 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
 			use_default_keymaps = false,
-			allowed_separators = {
-				"..", -- lua string concatenation
-				"*", -- multiplication
-			},
+			allowed_separators = { "..", "*" }, -- multiplication & lua string concatenation
 		},
 	},
 	{ -- split-join
