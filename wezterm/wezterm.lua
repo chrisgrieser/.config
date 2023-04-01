@@ -18,7 +18,7 @@ local isAtMother = wezterm.hostname():find("Mother") ~= nil
 local windowPos = {
 	x = 710, -- true pixel
 	y = 0,
-	w = 97, -- cells
+	w = 96, -- cells
 	h = 30,
 }
 
