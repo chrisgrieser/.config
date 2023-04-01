@@ -10,6 +10,7 @@ local lintersAndFormatters = {
 	"black", -- python formatter
 	"vale", -- natural language
 	"codespell", -- natural language (common misspellings, autoformatted)
+	"misspell",
 	"selene", -- lua
 	"stylua", -- lua
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
@@ -43,6 +44,7 @@ local function nullConfig()
 			builtins.formatting.trim_whitespace.with {
 				disabled_filetypes = { "markdown" }, -- do not remove spaces due to two-space-rule
 			},
+			builtins.diagnostics.misspell,
 
 			-- PYTHON
 			builtins.formatting.black,

@@ -111,9 +111,6 @@ function pr() {
 	fi
 	git add . && git commit -m "$msg"
 
-	origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
-	gh repo set-default "$origin"
-
 	if [[ "$mode" == "w" ]]; then
 		gh pr create --fill --web
 	else
@@ -125,7 +122,11 @@ function pr() {
 		cd ..
 		rm -r "$repopath"
 	fi
-	[[ "$mode" == "t" ]] && gh pr view --web
+	if [[ "$mode" == "t" ]]; then
+		origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
+		gh repo set-default "$origin"
+		gh pr view --web
+	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────
