@@ -174,9 +174,8 @@ end
 
 local function openBufferCount()
 	local openBuffers = #(vim.fn.getbufinfo { buflisted = 1 })
-	local nonListedBuffers = openBuffers - 2 -- current file and alt file
-	if nonListedBuffers <= 0 then return "" end
-	return "+" .. tostring(nonListedBuffers) .. " 󰽙"
+	if openBuffers <= 2 then return "" end -- don't show when only current + alt file
+	return "Σ " .. tostring(openBuffers) .. " 󰽙"
 end
 
 --------------------------------------------------------------------------------

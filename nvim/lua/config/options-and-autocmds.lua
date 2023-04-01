@@ -253,32 +253,6 @@ Autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
--- DIAGNOSTICS
-
-local function diagnosticFormat(diagnostic, mode)
-	local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or nil
-	local code = diagnostic.code
-	local out = diagnostic.message
-	if code then out = out .. " (" .. code .. ")" end -- some linters have no code
-	if source and mode == "float" then out = out .. " [" .. source .. "]" end
-	return out
-end
-
-vim.diagnostic.config {
-	virtual_text = {
-		format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
-		severity = { min = vim.diagnostic.severity.WARN },
-	},
-	float = {
-		focusable = true,
-		border = BorderStyle,
-		max_width = 70,
-		header = "", -- remove "Diagnostics:" heading
-		format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,
-	},
-}
-
---------------------------------------------------------------------------------
 
 -- Skeletons (Templates)
 -- apply templates for any filetype named `./templates/skeleton.{ft}`

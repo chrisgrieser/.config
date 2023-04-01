@@ -28,6 +28,10 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
+	{ -- better virtualtext diagnostics
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		opts = true,
+	},
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",
 		cmd = "Glance",
@@ -43,9 +47,9 @@ return {
 				-- jump directly to definition if there is only one https://github.com/dnlhc/glance.nvim#before_open
 				before_open = function(results, open, jump)
 					if #results == 1 then
-						jump() 
+						jump()
 					else
-						open() 
+						open()
 					end
 				end,
 			},
