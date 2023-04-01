@@ -19,19 +19,6 @@ LogInfo = vim.log.levels.INFO
 ---@param cmdStr string
 function Normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
----https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
----@param name string name of highlight group
----@param key "foreground"|"background"|"special"
----@nodiscard
----@return string|nil the value, or nil if hlgroup or key is not available
-function GetHighlightValue(name, key)
-	local ok, hl = pcall(vim.api.nvim_get_hl_by_name, name, true)
-	if not ok then return end
-	local value = hl[key]
-	if not value then return end
-	return string.format("#%06x", value)
-end
-
 --------------------------------------------------------------------------------
 
 ---reads the full file

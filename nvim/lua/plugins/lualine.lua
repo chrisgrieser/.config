@@ -1,3 +1,21 @@
+
+-- HELPER
+
+---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
+---@param name string name of highlight group
+---@param key "foreground"|"background"|"special"
+---@nodiscard
+---@return string|nil the value, or nil if hlgroup or key is not available
+local function getHighlightValue(name, key)
+	local ok, hl = pcall(vim.api.nvim_get_hl_by_name, name, true)
+	if not ok then return end
+	local value = hl[key]
+	if not value then return end
+	return string.format("#%06x", value)
+end
+
+--------------------------------------------------------------------------------
+
 local function indentation()
 	local out = ""
 	local usesSpaces = vim.bo.expandtab
@@ -215,7 +233,7 @@ local lualineConfig = {
 		lualine_x = {
 			{
 				pluginUpdates,
-				color = function() return { fg = GetHighlightValue("NonText", "foreground") } end,
+				color = function() return { fg = getHighlightValue("NonText", "foreground") } end,
 			},
 		},
 		-- INFO dap and recording status defined in the respective plugin configs
@@ -256,7 +274,7 @@ local lualineConfig = {
 				cond = function() return vim.v.hlsearch == 0 end,
 				-- needs the highlight value, since setting the hlgroup directly
 				-- results in bg color being inherited from main editor
-				color = function() return { fg = GetHighlightValue("Comment", "foreground") } end,
+				color = function() return { fg = getHighlightValue("Comment", "foreground") } end,
 			},
 		},
 		lualine_x = {
@@ -297,6 +315,6 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "UIEnter",
+	lazy = false, -- so UI is there quicker
 	opts = lualineConfig,
 }

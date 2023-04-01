@@ -18,14 +18,14 @@ INFO_WINDOW=0
 
 case $APP in
 
-"WezTerm")
-	iconsur set "$APP.app"
+"Neovide")
+	cp -f "$CUSTOM_ICON_FOLDER/Neovim-dark.icns" "$APP.app/Contents/Resources/Neovide.icns"
 	;;
 "Steam")
 	iconsur set "$APP.app"
 	;;
 "AppCleaner")
-	cp -f "$CUSTOM_ICON_FOLDER/AppCleaner.icns" "$APP.app/Contents/Resources/AppCleaner.icns"
+	cp -f "$CUSTOM_ICON_FOLDER/AppCleaner.icns" "$APP.app/Contents/Resources/$APP.icns"
 	;;
 "Obsidian")
 	cp -f "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" "$APP.app/Contents/Resources/icon.icns"
@@ -36,9 +36,6 @@ case $APP in
 	;;
 "Vivaldi")
 	cp -f "$CUSTOM_ICON_FOLDER/Vivaldi.icns" "$APP.app/Contents/Resources/app.icns"
-	;;
-"Neovide")
-	cp -f "$CUSTOM_ICON_FOLDER/Neovim-dark.icns" "$APP.app/Contents/Resources/Neovide.icns"
 	;;
 
 "Alfred Preferences")
