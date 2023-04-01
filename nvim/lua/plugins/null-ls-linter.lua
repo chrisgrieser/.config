@@ -73,14 +73,14 @@ local function nullConfig()
 				-- using config without ordering, since ordering on save is confusing
 				extra_args = { "--config", LinterConfig .. "/stylelintrc-formatting.yml" },
 			},
-			builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
-				filetypes = { "css" },
-				extra_args = {
-					"--quiet", -- only errors, no warnings
-					"--config",
-					LinterConfig .. "/stylelintrc.yml",
-				},
-			},
+			-- builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
+			-- 	filetypes = { "css" },
+			-- 	extra_args = {
+			-- 		"--quiet", -- only errors, no warnings
+			-- 		"--config",
+			-- 		LinterConfig .. "/stylelintrc.yml",
+			-- 	},
+			-- },
 
 			-- LUA
 			builtins.formatting.stylua,
