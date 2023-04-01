@@ -111,7 +111,8 @@ return {
 			vim.api.nvim_create_autocmd("BufReadPost", {
 				pattern = { "*.sh", "*.zsh", ".zsh*" },
 				callback = function()
-					pcall(function() vim.bo.filetype = "sh" end)
+					---@diagnostic disable-next-line: param-type-mismatch
+					vim.defer_fn(function () vim.bo.filetype = "sh" end, 1)
 				end,
 			})
 
