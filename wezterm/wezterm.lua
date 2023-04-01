@@ -16,16 +16,17 @@ local isAtMother = wezterm.hostname():find("Mother") ~= nil
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
 local windowPos = {
-	x = 710, -- true pixel
+	x = 705,
 	y = 0,
-	w = 96, -- cells
-	h = 30,
+	w = 3140,
+	h = 2170,
 }
 
 -- on start, move window to the side ("pseudomaximized")
 wezterm.on("gui-startup", function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
 	window:gui_window():set_position(windowPos.x, windowPos.y)
+	window:gui_window():set_inner_size(windowPos.w, windowPos.h)
 end)
 
 --------------------------------------------------------------------------------
@@ -94,8 +95,6 @@ return {
 	adjust_window_size_when_changing_font_size = false,
 	cell_width = 1.0,
 	line_height = 1.0,
-	initial_cols = windowPos.w,
-	initial_rows = windowPos.h,
 
 	-- Appearance
 	color_scheme = autoToggleTheme(),
@@ -129,7 +128,11 @@ return {
 	disable_default_mouse_bindings = false,
 	mouse_bindings = {
 		-- open link at normal leftclick
-		{ event = { Up = { streak = 1, button = "Left" } }, mods = "", action = act.OpenLinkAtMouseCursor },
+		{
+			event = { Up = { streak = 1, button = "Left" } },
+			mods = "",
+			action = act.CompleteSelectionOrOpenLinkAtMouseCursor("Clipboard"),
+		},
 	},
 
 	-- KEYBINDINGS
