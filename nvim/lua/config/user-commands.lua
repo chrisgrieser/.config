@@ -18,5 +18,5 @@ end, {})
 -- `:PluginDir` opens the nvim data path, where mason and lazy install their stuff
 newCommand("PluginDir", function(_) Fn.system('open "' .. Fn.stdpath("data") .. '"') end, {})
 
---------------------------------------------------------------------------------
-
+-- quicker evaluation
+vim.cmd.cnoreabbrev("ii lua=")

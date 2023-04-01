@@ -1240,7 +1240,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>70</real>
 			<key>ypos</key>
-			<real>1355</real>
+			<real>1260</real>
 		</dict>
 		<key>0E26657D-87C2-4501-A282-F674945D73C9</key>
 		<dict>
@@ -1251,7 +1251,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1050</real>
+			<real>955</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
@@ -1260,7 +1260,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1325</real>
+			<real>1230</real>
 		</dict>
 		<key>2272192E-81AD-4662-A0D4-58300A23360E</key>
 		<dict>
@@ -1269,7 +1269,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>920</real>
+			<real>825</real>
 		</dict>
 		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
 		<dict>
@@ -1356,10 +1356,12 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>950</real>
+			<real>855</real>
 		</dict>
 		<key>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
@@ -1392,7 +1394,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>140</real>
 			<key>ypos</key>
-			<real>1325</real>
+			<real>1230</real>
 		</dict>
 		<key>8D2069C6-2EDB-40CD-854E-38574F301A4B</key>
 		<dict>
@@ -1401,7 +1403,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
-			<real>1185</real>
+			<real>1090</real>
 		</dict>
 		<key>9FAD19B2-5BF3-43C8-B76B-80FFD2C17566</key>
 		<dict>
@@ -1432,7 +1434,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>920</real>
+			<real>825</real>
 		</dict>
 		<key>AC483565-D8EB-4AAD-99AA-229D0C632CE8</key>
 		<dict>
@@ -1443,7 +1445,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>920</real>
+			<real>825</real>
 		</dict>
 		<key>BC540696-9F8F-4C3E-A49D-75AB31EF690F</key>
 		<dict>
@@ -1485,7 +1487,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1185</real>
+			<real>1090</real>
 		</dict>
 		<key>CC245103-888B-4440-A348-64F8A74D87F3</key>
 		<dict>
@@ -1516,7 +1518,7 @@ echo "$url"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>805</real>
+			<real>710</real>
 		</dict>
 		<key>CE6F0B40-E42E-4D8B-833A-537723F42C63</key>
 		<dict>
