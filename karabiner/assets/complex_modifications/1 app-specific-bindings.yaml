@@ -519,6 +519,16 @@ rules:
           basic.to_if_alone_timeout_milliseconds: 200
           basic.to_if_held_down_threshold_milliseconds: 200
   #─────────────────────────────────────────────────────────────────
+  - description: "(Apps) Alfred: Space goes down"
+    manipulators:
+      # INFO https://cleanshot.com/docs/api
+      # copy to clipboard and quit
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: c, modifiers: [command, shift] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
+  #─────────────────────────────────────────────────────────────────
   - description: "(Apps) Sidenotes"
     manipulators:
       # INFO https://www.apptorium.com/sidenotes/articles/keyboard-shortcuts

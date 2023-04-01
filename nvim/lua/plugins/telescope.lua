@@ -7,7 +7,7 @@ local keymappings = {
 	["<C-l>"] = "cycle_history_next",
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<D-a>"] = "select_all",
-	["<Space>"] = "move_selection_down",
+	["<Space>"] = "move_selection_Prev",
 }
 
 local function telescopeConfig()
@@ -17,7 +17,7 @@ local function telescopeConfig()
 			prompt_prefix = "❱ ",
 			multi_icon = "󰒆 ",
 			preview = { filesize_limit = 1 }, -- in MB, do not preview big files for performance
-			path_display = { "tail" },
+			path_display = { "tail" }, -- smart|tail (rest isn't that useful)
 			borderchars = BorderChars,
 			history = { path = VimDataDir .. "telescope_history" }, -- sync the history
 			file_ignore_patterns = {
@@ -55,9 +55,10 @@ local function telescopeConfig()
 			layout_strategy = "horizontal",
 			layout_config = {
 				horizontal = {
-					height = 0.9,
-					preview_cutoff = 70,
+					anchor = "S",
+					height = 0.8,
 					width = 0.9,
+					preview_cutoff = 70,
 					preview_width = { 0.55, min = 30 },
 					prompt_position = "top",
 				},
@@ -124,7 +125,7 @@ local function telescopeConfig()
 				auto_depth = true, -- unlimited depth as soon as prompt is non-empty
 				hidden = true,
 				display_stat = false,
-				git_status = true, -- seems to sometimes be buggy
+				git_status = false, -- seems to sometimes be buggy
 				group = true,
 				hide_parent_dir = false,
 				select_buffer = true,
