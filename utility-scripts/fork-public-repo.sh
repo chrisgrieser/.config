@@ -22,24 +22,28 @@ function commit_push_pr_view() {
 	gh pr create --fill # --fill = use commit ino
 
 	# open in web just to check
-	origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
-	gh repo set-default "$origin"
 	gh pr view --web
 }
 
-repo
-plugin_name=$(echo "$REPO" | cut -d/ -f2)
-github_user=$(echo "$REPO" | cut -d/ -f1)
+function shallow_fork() {
+	repo="$1"
+	name=$(echo "$repo" | cut -d/ -f2)
+	origin=$(git remote -v | grep origin | head -n1 | cut -d/ -f4- | cut -d. -f1)
+	gh repo set-default "$origin"
+	gh repo fork "$repo" --clone=false # separate clone command for shallow clone
+	gh repo clone "$github_user/$name" -- --depth=1
+	cd "./$name"
+}
 
-# desc can be inferred from github description (not using jq for portability)
-plugin_desc=$(curl -sL "https://api.github.com/repos/$REPO" | grep "description" | head -n1 | cut -d'"' -f4)
+repo=$(echo "$github_url" | cut -d/ -f4-)
+plugin_name=$(echo "$repo" | cut -d/ -f2)
+github_user=$(echo "$repo" | cut -d/ -f1)
+plugin_desc=$(curl -sL "https://api.github.com/repos/$repo" | grep "description" | head -n1 | cut -d'"' -f4)
 
 #───────────────────────────────────────────────────────────────────────────────
 # NEOVIMCRAFT
 cd "$TEMP_DIR"
-gh repo fork "neurosnap/neovimcraft" --clone=false # separate clone command for shallow clone
-gh repo clone "$github_user/neovimcraft" -- --depth=1
-cd "neovimcraft"
+shallow_fork "neurosnap/neovimcraft"
 
 # to avoid the installation of `deno` and the interactive `make resource`,
 # enter the new plugin data automatically
@@ -63,20 +67,20 @@ sed -i '' "$ d" "$target"
 echo -n "$to_add" >>"$target"
 
 commit_push_pr_view "Add $plugin_name"
+echo "------------------------------------------------------------"
 
 #───────────────────────────────────────────────────────────────────────────────
 # AWESOME NEOVIM
 
 cd "$TEMP_DIR"
-gh repo fork "rockerBOO/awesome-neovim" --clone=false
-gh repo clone "$plugin_name/awesome-neovim" -- --depth=1
-cd "awesome-neovim"
+shallow_fork "rockerBOO/awesome-neovim"
 
-line_to_add="[$plugin_name]($github_link) – $plugin_desc"
+line_to_add="[$plugin_name]($github_url) – $plugin_desc"
 echo "$line_to_add | pbcopy"
+nvim "./README.md"
 
-# TODO Add to markdown
-commit_push_pr_view "Add \`$REPO\`"
+commit_push_pr_view "Add \`$repo\`"
+echo "------------------------------------------------------------"
 
 #───────────────────────────────────────────────────────────────────────────────
 # THIS WEEK IN NEOVIM
