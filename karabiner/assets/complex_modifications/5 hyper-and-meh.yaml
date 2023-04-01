@@ -99,7 +99,7 @@ rules:
                 sleep 0.03
                 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
                 # bwipeout necessary due to empty buffer created before jumping to '0
-                neovide --frame=buttonless --geometry=101x32 -- -c "execute \"normal! '0\" | bwipeout #"
+                neovide --frame=buttonless --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #"
               else
                 [[ "$FRONT_APP" == "wezterm-gui" ]] && FRONT_APP="WezTerm"
                 open -a "$FRONT_APP"

@@ -210,10 +210,12 @@ return {
 				if source and mode == "float" then out = out .. " [" .. source .. "]" end
 				return out
 			end
-			error
 
 			vim.diagnostic.config {
-				virtual_lines = true,
+				virtual_lines = {
+					format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
+					severity = { min = vim.diagnostic.severity.WARN },
+				},
 				virtual_text = false,
 				-- virtual_text = {
 				-- 	format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,

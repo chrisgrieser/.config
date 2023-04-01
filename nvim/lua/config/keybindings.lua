@@ -498,16 +498,18 @@ Keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { d
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
 
--- stylua: ignore start
-Keymap("n", "ge", function() vim.diagnostic.goto_next { wrap = true, float = true } end, { desc = "󰒕Next Diagnostic" })
-Keymap("n", "gE", function() vim.diagnostic.goto_prev { wrap = true, float = true } end, { desc = "󰒕Previous Diagnostic" })
--- stylua: ignore end
+-- Global (so usable by null-ls)
+Keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
+Keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
-Keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Show Diagnostic" })
--- fallback for languages without an action LSP
+-- Keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Show Diagnostic" })
+Keymap("n", "<leader>d", function()
+	require("lsp_lines").toggle()
+end, { desc = "󰒕 Show Diagnostics" })
 Keymap("n", "gs", function() Cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
 
--- actions defined globally so null-ls can use them without LSP
+errr
+
 Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 
 -- copy breadcrumbs (nvim navic)
