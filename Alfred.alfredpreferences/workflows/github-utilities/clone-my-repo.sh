@@ -11,7 +11,6 @@ target="${local_repo_folder/#\~/$HOME}"
 cd "$target" || exit 1
 git clone --depth=1 "$url" || return 1
 
-# open
-open "$target/$reponame" # open in Finder
-echo -n "$PWD" # to open terminal at the location
+# open in terminal via Alfred
+echo -n "$target/$reponame"
 

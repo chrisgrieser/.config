@@ -19,7 +19,6 @@ alias q='exit'
 alias notify="osascript -e 'display notification \"\" with title \"Terminal Process finished.\" subtitle \"\" sound name \"\"'"
 
 # added verbosity
-alias rm='rm -v'
 alias mv='mv -v'
 alias ln='ln -v'
 alias cp='cp -v'

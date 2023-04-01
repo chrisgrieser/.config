@@ -3,11 +3,10 @@
 # ALIASES AND SMALLER UTILS
 alias co="git checkout"
 alias gs='git status'
-# alias gd='git diff'
 alias gd='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
-alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 alias gc="git commit -m"
 alias ga="git add"
+alias unshallow="git add"
 alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull --recurse-submodules"
@@ -182,47 +181,18 @@ function acp() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# regular clone, optionally take depth as first argument and url as second
 function clone() {
-	if [[ "$1" =~ ^[0-9]+$ ]]; then
-		betterClone "$2" "$1" # switch order for betterClone function
-	else
-		betterClone "$1"
-	fi
-}
-
-# shallow clone (depth 1, single branch, no blob)
-function sclone() { # shallow clone
-	betterClone "$1" "shallow"
-}
-
-# 1: remote url (github URL will be converted to SSH)
-# 2: mode - shallow|number shallow clone or clone with depth
-function betterClone() {
 	# turn http into SSH remotes
 	if [[ "$1" =~ http ]]; then
 		giturl="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 	else
 		giturl="$1"
 	fi
-	if [[ "$2" == "shallow" ]]; then
-		git clone --depth=1 --single-branch --filter=blob:none "$giturl"
-	elif [[ $2 =~ ^[0-9]+$ ]]; then # if a numbered argument, use it for depth
-		git clone --depth="$2" "$giturl"
-	else
-		git clone "$giturl"
-	fi
+
+	git clone --depth=1 "$giturl"
 	# shellcheck disable=SC2012
 	cd "$(ls -1 -t | head -n1)" || return 1
-	ls -G
-
-	if grep -q "obsidian" package.json &>/dev/null; then
-		print "\n\033[1;34mDetected Obsidian plugin. Installing NPM dependencies…\033[0m"
-		if ! command -v node &>/dev/null; then print "\033[1;33mnode not installed, not running npm." && return 0; fi
-		npm i
-		print "\n\033[1;34mBuilding…\033[0m"
-		npm run build
-	fi
+	exagit
 }
 
 # delete and re-clone git repo (with depth 10)
