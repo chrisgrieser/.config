@@ -13,6 +13,7 @@ function run(argv) {
 	//──────────────────────────────────────────────────────────────────────────────
 
 	const query = argv[0];
+	if (query.match(/^\s*$/)) return; // don't run for empty query
 	const apiURL = `https://api.github.com/search/repositories?q=${query}`;
 
 	const jsonArray = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`))
