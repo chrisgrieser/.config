@@ -84,38 +84,44 @@ function gli() {
 # - create PR and autofills is with commit msg
 # - opens PR in the web
 # - offers to delete local repo
-# - `-w` opens in web browser
-function create_pull_request() {
+function pr() {
 	if ! command -v gh &>/dev/null; then echo "gh not installed." && return 1; fi
-	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	echo -n "Delete the local repo afterwards? (y/n) "
-	read -r -k 1 decision
+	read -r -k 1 delete_after
 
-	echo -n "Delete the local repo afterwards? (y/n) "
-	read -r -k 1 decision
+	echo -n "PR in the web interface or from the terminal? (w/t)"
+	read -r -k 1 mode
 
 	if [[ -n "$1" ]]; then
 		echo -n "Commit Message:"
 		read -r msg
+	fi
+	# ensure no overlength
+	local MSG_LENGTH=${#COMMIT_MSG}
+	if [[ $MSG_LENGTH -gt 50 ]]; then
+		echo "Commit Message too long ($MSG_LENGTH chars)."
+		COMMIT_MSG=${COMMIT_MSG::50}
+		print -z "pr \"$COMMIT_MSG\"" # put back into buffer
+		return 1
 	fi
 	git add . && git commit -m "$msg"
 
 	origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
 	gh repo set-default "$origin"
 
-	gh create pr --fill # --fill adds title/body from commit msg
+	if [[ "$mode" == "w" ]]; then
+		gh create pr --fill --web
+	else
+		gh create pr --fill
+	fi
 
-	if [[ "$decision" == "y" ]]; then
+	if [[ "$delete_after" == "y" ]]; then
 		repopath=$(pwd)
 		cd ..
 		rm -r "$repopath"
 	fi
-	gh pr view --web
-}
-
-function pr() {
-	create_pull_request "$1" "--web"
+	[[ "$mode" == "t" ]] && gh pr view --web
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -129,7 +135,6 @@ function gb() {
 			--ansi \
 			--layout=reverse \
 			--no-info \
-			--disabled \
 			--query "$*" \
 			--height=40% \
 			--header-first --header="↵ : Checkout Branch"
