@@ -77,11 +77,6 @@ Keymap("o", "u", commented_lines_textobject, { desc = "Big comment textobj" })
 
 --------------------------------------------------------------------------------
 
--- HINT TEXTOBJECT (TREEHOP)
-vim.keymap.set("x", "h", ":lua require('tsht').nodes()<CR>")
-vim.keymap.set("o", "h", ":<C-U>lua require('tsht').nodes()<CR>")
-
---------------------------------------------------------------------------------
 -- VARIOUS TEXTOBJS KEYMAPS
 -- stylua: ignore start
 
