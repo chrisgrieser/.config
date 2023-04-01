@@ -9,7 +9,7 @@ require("config.borderstyle").set("single") -- must come before lazy
 --------------------------------------------------------------------------------
 
 require("config.lazy")
-require("config.utils") -- must come after lazy
+require("config.utils") 
 
 if vim.g.neovide then require("config.gui-settings") end
 require("config.theme-config")
@@ -18,7 +18,7 @@ require("config.options-and-autocmds")
 require("config.keybindings")
 
 require("config.automating-nvim")
-require("config.textobjects")
+require("config.textobject-keymaps")
 require("config.clipboard")
 require("config.user-commands")
 require("config.abbreviations")
