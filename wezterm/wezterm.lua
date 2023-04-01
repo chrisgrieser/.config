@@ -16,7 +16,7 @@ local isAtMother = wezterm.hostname():find("Mother") ~= nil
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
 local windowPos = {
-	x = 705, -- true pixel
+	x = 710, -- true pixel
 	y = 0,
 	w = 97, -- cells
 	h = 30,
@@ -32,7 +32,7 @@ end)
 -- THEME
 
 local darkTheme = "AdventureTime"
-local lightTheme = "ayu_light"
+local lightTheme = "RoséPineDawn (Gogh)"
 
 ---selects the color scheme depending on Dark/Light Mode
 ---@return string name of the string to set in config.colorscheme
@@ -83,7 +83,9 @@ return {
 	-- Font
 	font_size = 27,
 	command_palette_font_size = 29,
-	font = wezterm.font("JetBrains Mono"), -- bundled by wezterm, using nerdfont as fallback https://wezfurlong.org/wezterm/config/fonts
+	-- even though symbols and nerd font are bundled with wezterm, some symbols
+	-- due have a sizing issues, therefore explicitly using the Nerd Font here
+	font = wezterm.font("JetBrainsMono Nerd Font"),
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 
 	-- Size
@@ -103,7 +105,7 @@ return {
 	native_macos_fullscreen_mode = false,
 	window_padding = {
 		left = "0.5cell",
-		right = "1.3cell", -- if scrollbar enabled, controls its width, too
+		right = "1.5cell", -- if scrollbar enabled, controls its width, too
 		top = "0.2cell",
 		bottom = "0.4cell",
 	},
@@ -117,17 +119,15 @@ return {
 	enable_tab_bar = true,
 	tab_max_width = 40,
 	use_fancy_tab_bar = false, -- `false` makes the tabs bigger
-	show_tabs_in_tab_bar = true,
+	show_tabs_in_tab_bar = true, -- can show a status line in the tab bar
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
 
+	-- Mouse Bindings
+	disable_default_mouse_bindings = false,
 	mouse_bindings = {
 		-- open link at normal leftclick
-		{
-			event = { Up = { streak = 1, button = "Left" } },
-			mods = "",
-			action = act.OpenLinkAtMouseCursor,
-		},
+		{ event = { Up = { streak = 1, button = "Left" } }, mods = "", action = act.OpenLinkAtMouseCursor },
 	},
 
 	-- KEYBINDINGS
