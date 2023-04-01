@@ -36,9 +36,9 @@ lspSettings.lua_ls = {
 		},
 		diagnostics = {
 			disable = { "trailing-space" }, -- formatter already does that
-			severity = {-- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
+			severity = { -- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
 				["return-type-mismatch"] = "Error",
-			}, 
+			},
 		},
 		hint = { -- LSP inlayhints
 			enable = true,
@@ -189,7 +189,6 @@ return {
 			ensure_installed = lsp_servers,
 		},
 	},
-
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
@@ -201,6 +200,33 @@ return {
 				vim.lsp.with(vim.lsp.handlers.hover, { border = BorderStyle })
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = BorderStyle })
+
+			-- Diagnostics
+			local function diagnosticFormat(diagnostic, mode)
+				local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or nil
+				local code = diagnostic.code
+				local out = diagnostic.message
+				if code then out = out .. " (" .. code .. ")" end -- some linters have no code
+				if source and mode == "float" then out = out .. " [" .. source .. "]" end
+				return out
+			end
+			error
+
+			vim.diagnostic.config {
+				virtual_lines = true,
+				virtual_text = false,
+				-- virtual_text = {
+				-- 	format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
+				-- 	severity = { min = vim.diagnostic.severity.WARN },
+				-- },
+				float = {
+					focusable = true,
+					border = BorderStyle,
+					max_width = 70,
+					header = "", -- remove "Diagnostics:" heading
+					format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,
+				},
+			}
 		end,
 	},
 }

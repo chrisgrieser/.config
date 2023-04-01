@@ -94,8 +94,9 @@ local function hlTooLongCommitMsgs(on)
 			group = "tooLongCommitMsg",
 			pattern = "DressingInput",
 			callback = function()
-				vim.cmd.highlight("commitmsg", "guibg=#E06C75")
 				vim.g.matchid = fn.matchadd("commitmsg", [[.\{50}\zs.*\ze]])
+				vim.opt_local.colorcolumn = "50"
+				vim.cmd.highlight("commitmsg", "guibg=#E06C75")
 			end,
 		})
 	else

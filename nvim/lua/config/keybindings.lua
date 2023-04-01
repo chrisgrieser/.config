@@ -718,12 +718,10 @@ Autocmd("FileType", {
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 		if Bo.filetype == "ssr" then
 			Keymap("n", "q", "Q", opts)
-		elseif Bo.filetype == "harpoon" then
+		else
 			-- HACK 1ms delay ensures it comes later in the autocmd stack and takes effect
 			---@diagnostic disable-next-line: param-type-mismatch
 			vim.defer_fn(function() Keymap("n", "q", "<Esc>", opts) end, 1)
-		elseif Bo.filetype == "TelescopePrompt" then
-			Keymap("n", "q", "<Esc>", opts)
 		end
 	end,
 })

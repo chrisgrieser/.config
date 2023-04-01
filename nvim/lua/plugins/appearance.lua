@@ -36,12 +36,14 @@ return {
 		lazy = true, -- loaded by other plugins
 		opts = {
 			override = {
+				-- filetypes
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
-				lazy = { icon = "", name = "Lazy" },
+				bibtex = { icon = "", name = "BibTeX" },
 				http = { icon = "󰴚", name = "http" },
+				-- plugins
+				lazy = { icon = "", name = "Lazy" },
 				Glance = { icon = "󰒕", name = "Glance" },
 				toggleterm = { icon = "", name = "ToggleTerm" },
-				bibtex = { icon = "", name = "BiBTeX" },
 			},
 		},
 	},
@@ -108,7 +110,7 @@ return {
 			input = {
 				insert_only = false, -- enable normal mode
 				border = BorderStyle,
-				relative = "win",
+				relative = "editor",
 				min_width = { 0.5, 60 },
 				win_options = {
 					sidescrolloff = 0,
