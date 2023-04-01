@@ -72,11 +72,11 @@ file="$1"
 
 if pgrep "neovide"; then
 	# this part requires the setup in /lua/file-watcher.lua
-	echo "vim.cmd[[edit $LINE $file]]" &gt;"/tmp/nvim-automation" 
+	echo "vim.cmd[[edit $LINE $file]]" &gt;"/tmp/nvim-automation"
 	osascript -e 'tell application "Neovide" to activate'
 else
 	# shellcheck disable=2086
-	neovide --geometry=101x32 --notabs --frame="buttonless" $LINE "$file"
+	neovide --geometry=104x33 --frame="buttonless" $LINE "$file"
 fi</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
