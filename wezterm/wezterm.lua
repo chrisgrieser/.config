@@ -77,7 +77,9 @@ return {
 	hide_mouse_cursor_when_typing = true,
 	default_cursor_style = "BlinkingBar", -- mostly overwritten by vi-mode.zsh
 	cursor_thickness = "0.07cell",
-	cursor_blink_rate = 1100,
+	cursor_blink_rate = 700,
+	cursor_blink_ease_in = "Constant", -- "Constant" = no fading
+	cursor_blink_ease_out = "Constant",
 	force_reverse_video_cursor = false, -- true = color is reverse, false = color by color scheme
 
 	-- Font
@@ -154,9 +156,9 @@ return {
 		{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
 		{ key = "b", mods = "CMD", action = act.SendKey { key = "b", mods = "CTRL" } },
 
-		-- scroll-to-prompt - not working yet
-		-- { key = "K", mods = "CTRL", action = act.ScrollToPrompt(-1) },
-		-- { key = "J", mods = "CTRL", action = act.ScrollToPrompt(1) },
+		-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
+		{ key = "K", mods = "CTRL", action = act.ScrollToPrompt(-1) },
+		{ key = "J", mods = "CTRL", action = act.ScrollToPrompt(1) },
 
 		{ -- cmd+, -> open this config file
 			key = ",",
