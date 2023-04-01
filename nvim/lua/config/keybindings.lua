@@ -508,10 +508,8 @@ Keymap("n", "<leader>d", function()
 	local nextState = vim.g.prevVirtText or false
 	vim.g.prevVirtText = vim.diagnostic.config().virtual_text
 	vim.diagnostic.config { virtual_text = nextState }
-end, { desc = "󰒕 Show Diagnostics" })
+end, { desc = "󰒕 Toggle Multi-Line Diagnostics" })
 Keymap("n", "gs", function() Cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
-
-errr
 
 Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 

@@ -10,8 +10,7 @@ function alfredMatcher(str) {
 }
 
 function readFile(path) {
-	const fm = $.NSFileManager.defaultManager;
-	const data = fm.contentsAtPath(path);
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
@@ -46,10 +45,12 @@ const jsonArray = app
 		else if (manifest.options_page) optionsPath = manifest.options_page;
 		const optionsUrl = `chrome-extension://${id}/${optionsPath}`;
 		const webstoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
+		const localFolder = extensionFolder + "/" + id;
 
 		// emoji/icon
 		const emoji = optionsPath ? "" : " 🚫"; // indicate no options available
-		const icon = manifest.icons["128"] || manifest.icons["64"]
+		let icon = manifest.icons["128"] || manifest.icons["64"];
+		if (!icon) icon = manifest.icons["48"]; // old extensions
 		const iconPath = root + icon;
 
 		return {
@@ -61,6 +62,7 @@ const jsonArray = app
 			mods: {
 				alt: { arg: webstoreUrl },
 				cmd: { arg: webstoreUrl },
+				ctrl: { arg: localFolder },
 			},
 			uid: id,
 		};
