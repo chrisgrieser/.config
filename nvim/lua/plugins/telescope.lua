@@ -1,5 +1,5 @@
 local keymappings = {
-	-- INFO default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua#L133
+	-- INFO default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
 	["<Esc>"] = "close",
 	["<S-Down>"] = "preview_scrolling_down",
 	["<S-Up>"] = "preview_scrolling_up",
@@ -7,12 +7,13 @@ local keymappings = {
 	["<C-l>"] = "cycle_history_next",
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<D-a>"] = "select_all",
+	["<Space>"] = "move_selection_down",
 }
 
 local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
-			selection_caret = "󰫢 ",
+			selection_caret = "󰜋 ",
 			prompt_prefix = "❱ ",
 			multi_icon = "󰒆 ",
 			preview = { filesize_limit = 1 }, -- in MB, do not preview big files for performance
@@ -58,6 +59,7 @@ local function telescopeConfig()
 					preview_cutoff = 70,
 					width = 0.9,
 					preview_width = { 0.55, min = 30 },
+					prompt_position = "top",
 				},
 				cursor = {
 					preview_cutoff = 9001, -- never use preview here

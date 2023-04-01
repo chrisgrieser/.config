@@ -149,7 +149,7 @@ local function setupAllLsps()
 	-- INFO must be before the lsp-config setup of lua-ls
 	require("neodev").setup {
 		library = {
-			plugins = { "lazy.nvim" }, -- not enabling all, since too slow for LSP
+			plugins = { "lazy.nvim", "telescope.nvim" }, -- not enabling all, since too slow for LSP
 		},
 	}
 
