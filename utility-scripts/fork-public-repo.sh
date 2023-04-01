@@ -15,29 +15,25 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 if ! command -v gh &>/dev/null; then echo "⚠️ gh not installed." && return 1; fi
 set -e # abort if any step fails
 
-function shallow_clone() {
+function shallow_fork() {
 	repo="$1"
 	name=$(echo "$repo" | cut -d/ -f2)
-
-	remote_ssh="$(git remote -v | grep origin | head -n1 | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
-
-	origin=$(git remote -v | grep origin | head -n1 | cut -d/ -f4- | cut -d. -f1)
-
-	git clone --depth=1 "$remote_ssg"
 
 	gh repo fork "$repo" --clone=false # separate clone command for shallow clone
 	gh repo clone "$github_user/$name" -- --depth=1
 	cd "./$name"
 
+	origin=$(git remote -v | grep origin | head -n1 | cut -d/ -f4- | cut -d. -f1)
 	gh repo set-default "$origin"
 }
 
 function commit_push_pr_view() {
 	local msg="$1"
 	local body="$2"
-	git add . && git commit -m "$msg"
-	if [[ -n "$body" ]]; then
-		gh pr create --head --title="$msg" --body="$body"
+	git add .
+	git commit -m "$msg"
+	if [[ -n "$body" ]] ; then
+		gh pr create --title="$msg" --body="$body"
 	else
 		gh pr create --fill # --fill = use commit info
 	fi

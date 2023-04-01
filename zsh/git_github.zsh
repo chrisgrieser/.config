@@ -14,6 +14,7 @@ alias pull="git pull --recurse-submodules"
 alias restore="git restore --source" # 1: hash, 2: file -> restore file
 alias gm="git commit --amend --no-edit" # a[m]end
 alias gM="git commit --amend"
+alias grem="git remote --verbose"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 
 # open GitHub repo
@@ -21,35 +22,6 @@ function getGithubURL() {
 	git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
 }
 
-# Pull Request
-# - add all & commit with $1 (or prompted)
-# - creates fork if no writing access
-# - create PR and autofills is with commit msg
-# - opens PR in the web
-# - offers to delete local repo
-function pr () {
-	if ! command -v gh &>/dev/null; then echo "gh not installed." && return 1; fi
-
-	if [[ -n "$1" ]] ; then
-		echo "Commit Message:"
-		read -r msg
-	fi
-	git add . && git commit -m "$msg"
-
-	origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
-	gh repo set-default "$origin"
-
-	gh create pr --fill # --fill adds title/body from commit msg
-	gh pr view --web
-
-	echo "Delete the local repo?"
-	read -r -k 1 decision
-	if [[ "$decision" == "y" ]]; then
-		repopath=$(pwd)
-		cd ..
-		dm -r "$repopath"	
-	fi
-}
 
 # Github Url: open & copy url
 function gu() {
@@ -104,6 +76,65 @@ function gli() {
 		git checkout "$hash"
 	fi
 }
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# Pull Request
+# - add all & commit with $1 (or prompted)
+# - creates fork if no writing access
+# - create PR and autofills is with commit msg
+# - opens PR in the web
+# - offers to delete local repo
+function pr () {
+	if ! command -v gh &>/dev/null; then echo "gh not installed." && return 1; fi
+
+	if [[ -n "$1" ]] ; then
+		echo "Commit Message:"
+		read -r msg
+	fi
+	git add . && git commit -m "$msg"
+
+	origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
+	gh repo set-default "$origin"
+
+	gh create pr --fill # --fill adds title/body from commit msg
+
+	echo -n "Delete the local repo? (y/n) "
+	read -r -k 1 decision
+
+	gh pr view --web
+	if [[ "$decision" == "y" ]]; then
+		repopath=$(pwd)
+		cd ..
+		dm -r "$repopath"	
+	fi
+}
+
+function prweb () {
+	if ! command -v gh &>/dev/null; then echo "gh not installed." && return 1; fi
+
+	if [[ -n "$1" ]] ; then
+		echo "Commit Message:"
+		read -r msg
+	fi
+	git add . && git commit -m "$msg"
+
+	origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
+	gh repo set-default "$origin"
+
+
+
+
+	gh create pr --fill --web # --fill adds title/body from commit msg
+
+	if [[ "$decision" == "y" ]]; then
+		repopath=$(pwd)
+		cd ..
+		dm -r "$repopath"	
+	fi
+}
+
+
 
 #───────────────────────────────────────────────────────────────────────────────
 # SELECT BRANCH
