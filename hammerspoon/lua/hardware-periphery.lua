@@ -62,8 +62,8 @@ ExternalHarddriveWatcher = hs.usb.watcher
 		local isBackupDrive = TableContains(harddriveNames, device.productName)
 
 		if isBackupDrive then
-			OpenApp("alacritty")
-			AsSoonAsAppRuns("alacritty", function() hs.eventtap.keyStrokes("bkp") end)
+			OpenApp("WezTerm")
+			AsSoonAsAppRuns("WezTerm", function() hs.eventtap.keyStrokes("bkp") end)
 		else
 			local stdout, success = hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
 			if not success or not stdout then return end
