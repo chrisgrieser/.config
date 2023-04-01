@@ -6,11 +6,12 @@ alias gs='git status'
 alias gd='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 alias gc="git commit -m"
 alias ga="git add"
-alias unshallow="git add"
+alias unshallow="git fetch --unshallow"
+alias deepen="git fetch --deepen" # add more depth to shallow clone
 alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull --recurse-submodules"
-alias restore="git restore --source"    # 1: hash, 2: file -> restore file
+alias restore="git restore --source"    # 1: hash, 2: file -> restore (existing) file
 alias gm="git commit --amend --no-edit" # a[m]end
 alias gM="git commit --amend"
 alias grem="git remote --verbose"
@@ -88,13 +89,16 @@ function pr() {
 
 	echo -n "Delete the local repo afterwards? (y/n) "
 	read -r -k 1 delete_after
+	echo
 
 	echo -n "PR in the web interface or from the terminal? (w/t)"
 	read -r -k 1 mode
+	echo
 
-	if [[ -n "$1" ]]; then
+	if [[ -z "$1" ]]; then
 		echo -n "Commit Message:"
 		read -r msg
+		echo
 	fi
 	# ensure no overlength
 	local MSG_LENGTH=${#COMMIT_MSG}
