@@ -26,9 +26,11 @@ function getGithubURL() {
 # - creates fork if no writing access
 # - create PR and autofills is with commit msg
 # - opens PR in the web
+# - offers to delete local repo
 function pr () {
 	if ! command -v gh &>/dev/null; then echo "gh not installed." && return 1; fi
-	if [[ -n "$msg" ]] ; then
+
+	if [[ -n "$1" ]] ; then
 		echo "Commit Message:"
 		read -r msg
 	fi
@@ -39,6 +41,14 @@ function pr () {
 
 	gh create pr --fill # --fill adds title/body from commit msg
 	gh pr view --web
+
+	echo "Delete the local repo?"
+	read -r -k 1 decision
+	if [[ "$decision" == "y" ]]; then
+		repopath=$(pwd)
+		cd ..
+		dm -r "$repopath"	
+	fi
 }
 
 # Github Url: open & copy url
