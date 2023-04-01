@@ -505,7 +505,7 @@
 				<key>acceptsurls</key>
 				<true/>
 				<key>name</key>
-				<string>encode URL</string>
+				<string>Encode URL</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -601,7 +601,7 @@
 				<key>acceptsurls</key>
 				<true/>
 				<key>name</key>
-				<string>decote URL</string>
+				<string>Decode URL</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>

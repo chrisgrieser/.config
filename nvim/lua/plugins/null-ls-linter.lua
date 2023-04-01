@@ -9,7 +9,7 @@ local lintersAndFormatters = {
 	"cbfmt", -- use other linters to format codeblocks in markdown
 	"black", -- python formatter
 	"vale", -- natural language
-	"codespell", -- natural language (common misspellings, autoformatted)
+	"codespell", 
 	"misspell",
 	"selene", -- lua
 	"stylua", -- lua
@@ -20,7 +20,6 @@ local lintersAndFormatters = {
 -- INFO
 -- eslint, stylua and prettier use project-specific config files
 -- the other linters use a global config file
-
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
@@ -40,11 +39,16 @@ local function nullConfig()
 				disabled_filetypes = { "css", "bib" },
 				extra_args = { "--ignore-words", LinterConfig .. "/codespell-ignore.txt" },
 			},
+			-- https://github.com/client9/misspell#how-can-i-ignore-rules
+			builtins.diagnostics.misspell.with {
+				disabled_filetypes = { "bib" },
+				-- extra_args = { "-i", "" }, -- ignore terms (comma separated)
+			},
+
 			builtins.formatting.trim_newlines, -- trim trailing whitespace & newlines
 			builtins.formatting.trim_whitespace.with {
 				disabled_filetypes = { "markdown" }, -- do not remove spaces due to two-space-rule
 			},
-			builtins.diagnostics.misspell,
 
 			-- PYTHON
 			builtins.formatting.black,

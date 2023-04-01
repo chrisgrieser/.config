@@ -54,8 +54,6 @@
 	<false/>
 	<key>showWithFn</key>
 	<false/>
-	<key>showWithTab</key>
-	<true/>
 	<key>sortByUsage</key>
 	<true/>
 </dict>
