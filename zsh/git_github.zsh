@@ -14,7 +14,7 @@ alias pull="git pull --recurse-submodules"
 alias restore="git restore --source"    # 1: hash, 2: file -> restore (existing) file
 alias gm="git commit --amend --no-edit" # a[m]end
 alias gM="git commit --amend"
-alias grem="git remote --verbose"
+alias grem="git remote -v"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 
 # open GitHub repo
@@ -91,16 +91,17 @@ function pr() {
 	read -r -k 1 delete_after
 	echo
 
-	echo -n "PR in the web interface or from the terminal? (w/t)"
+	echo -n "web interface or terminal? (w/t) "
 	read -r -k 1 mode
 	echo
 
-	if [[ -z "$1" ]]; then
+	if [[ -z "$*" ]]; then
 		echo -n "Commit Message:"
 		read -r msg
 		echo
+	else
+		msg="$*"
 	fi
-	# ensure no overlength
 	local MSG_LENGTH=${#COMMIT_MSG}
 	if [[ $MSG_LENGTH -gt 50 ]]; then
 		echo "Commit Message too long ($MSG_LENGTH chars)."
@@ -114,9 +115,9 @@ function pr() {
 	gh repo set-default "$origin"
 
 	if [[ "$mode" == "w" ]]; then
-		gh create pr --fill --web
+		gh pr create --fill --web
 	else
-		gh create pr --fill
+		gh pr create --fill
 	fi
 
 	if [[ "$delete_after" == "y" ]]; then
