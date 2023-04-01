@@ -30,7 +30,10 @@ return {
 	},
 	{ -- better virtualtext diagnostics
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		opts = true,
+		config = true,
+		lazy = true, -- loaded by keymaps
+		-- off at start
+		init = function() vim.diagnostic.config { virtual_lines = false } end,
 	},
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",

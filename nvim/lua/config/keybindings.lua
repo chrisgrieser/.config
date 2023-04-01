@@ -505,6 +505,9 @@ Keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" 
 -- Keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Show Diagnostic" })
 Keymap("n", "<leader>d", function()
 	require("lsp_lines").toggle()
+	local nextState = vim.g.prevVirtText or false
+	vim.g.prevVirtText = vim.diagnostic.config().virtual_text
+	vim.diagnostic.config { virtual_text = nextState }
 end, { desc = "󰒕 Show Diagnostics" })
 Keymap("n", "gs", function() Cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
 

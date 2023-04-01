@@ -212,15 +212,10 @@ return {
 			end
 
 			vim.diagnostic.config {
-				virtual_lines = {
+				virtual_text = {
 					format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
 					severity = { min = vim.diagnostic.severity.WARN },
 				},
-				virtual_text = false,
-				-- virtual_text = {
-				-- 	format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
-				-- 	severity = { min = vim.diagnostic.severity.WARN },
-				-- },
 				float = {
 					focusable = true,
 					border = BorderStyle,
