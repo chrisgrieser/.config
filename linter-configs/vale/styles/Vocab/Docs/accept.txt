@@ -115,3 +115,4 @@ netrw
 Dev
 keymap
 Lua
+Wishlist

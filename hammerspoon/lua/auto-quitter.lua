@@ -14,11 +14,11 @@ Thresholds = {
 	Discord = 180,
 	BusyCal = 2,
 	neovide = 120, -- needs lowercase
-	alacritty = 20,-- needs lowercase
+	["wezterm-gui"] = 45,
 	Lire = 2,
 	["Alfred Preferences"] = 15,
 	["System Settings"] = 2,
-	Finder = 10, -- only closes windows
+	Finder = 15, -- only closes windows
 }
 
 --------------------------------------------------------------------------------
