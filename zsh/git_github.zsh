@@ -180,7 +180,8 @@ function sclone() { # shallow clone
 # 1: remote url (github URL will be converted to SSH)
 # 2: mode - shallow|number shallow clone or clone with depth
 function betterClone() {
-	if [[ "$1" =~ http ]]; then # safety net to not accidentally use https
+	# turn http into SSH remotes
+	if [[ "$1" =~ http ]]; then
 		giturl="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 	else
 		giturl="$1"
