@@ -44,12 +44,14 @@ function bkp() {
 # INFO All source paths needs to end with a slash
 # INFO locations defined in zshenv
 bkp "$ICLOUD/" ./iCloud-Folder
-bkp "$HOME/RomComs/" ./Homefolder/RomComs
 bkp "$HOME/Applications/" ./Homefolder/Applications
 bkp "$DOTFILE_FOLDER/" ./Homefolder/config
 bkp "$VAULT_PATH/" ./Homefolder/main-vault
 bkp "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
 bkp "$HOME/.gnupg/" ./Homefolder/gnupg
+
+bkp "$HOME/RomComs/" ./Homefolder/RomComs
+bkp "$HOME/Diss-Daten/" ./Homefolder/Diss-Daten
 
 #───────────────────────────────────────────────────────────────────────────────
 echo
