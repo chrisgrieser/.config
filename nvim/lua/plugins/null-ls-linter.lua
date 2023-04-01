@@ -9,7 +9,7 @@ local lintersAndFormatters = {
 	"cbfmt", -- use other linters to format codeblocks in markdown
 	"black", -- python formatter
 	"vale", -- natural language
-	"codespell", 
+	"codespell",
 	"misspell",
 	"selene", -- lua
 	"stylua", -- lua
@@ -76,7 +76,8 @@ local function nullConfig()
 
 			-- CSS
 			builtins.formatting.stylelint.with {
-				-- using config without ordering, since ordering on save is confusing
+				-- using config without ordering, since automatic re-ordering can be
+				-- confusing. Config with stylelint-order is only run on build.
 				extra_args = { "--config", LinterConfig .. "/stylelintrc-formatting.yml" },
 			},
 			builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
