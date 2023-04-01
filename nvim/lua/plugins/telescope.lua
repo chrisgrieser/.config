@@ -7,9 +7,12 @@ local keymappings = {
 	["<C-l>"] = "cycle_history_next",
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<D-a>"] = "select_all",
-	["<Tab>"] = "move_selection_prev",
+	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
-	["<Space>"] = "move_selection_worse",
+	["<Space>"] = function(prompt_bufnr)
+		require("telescope.actions").toggle_selection(prompt_bufnr)
+		require("telescope.actions").move_selection_down(prompt_bufnr)
+	end,
 	["?"] = "which_key",
 }
 
