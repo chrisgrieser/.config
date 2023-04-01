@@ -76,6 +76,12 @@ end
 Keymap("o", "u", commented_lines_textobject, { desc = "Big comment textobj" })
 
 --------------------------------------------------------------------------------
+
+-- HINT TEXTOBJECT (TREEHOP)
+vim.keymap.set("x", "h", ":lua require('tsht').nodes()<CR>")
+vim.keymap.set("o", "h", ":<C-U>lua require('tsht').nodes()<CR>")
+
+--------------------------------------------------------------------------------
 -- VARIOUS TEXTOBJS KEYMAPS
 -- stylua: ignore start
 
@@ -91,7 +97,7 @@ Keymap({ "x", "o" }, "av", "<cmd>lua require('various-textobjs').value(false)<CR
 
 -- ak: outer key textobj
 -- INFO `ik` defined via treesitter to exclude `local` and `let`
--- INFO mapping the *inner* obj to `ak`, since it includes `local` and `let` 
+-- INFO mapping the *inner* obj to `ak`, since it includes `local` and `let`
 -- (various textobjs' outer key includes the "=" and ":" as well)
 Keymap({ "x", "o" }, "ak", "<cmd>lua require('various-textobjs').key(true)<CR>", { desc = "outer key textobj" })
 
