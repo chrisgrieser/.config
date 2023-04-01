@@ -18,7 +18,8 @@ local generalWords = {
 	-- opposites
 	{ "show", "hide" },
 	{ "above", "below" },
-	{ "min", "max" }, -- do not cycle "min" to "sec"
+	{ "vertical", "horizontal" },
+	{ "min", "max" }, -- this means that "min" won't cycle to "sec"
 	{ "minimum", "maximum" },
 	{ "increase", "decrease" },
 	{ "increased", "decreased" },
