@@ -8,28 +8,19 @@ function sh() {
 	echo "$CHEAT_CODE_ONLY" | pbcopy
 }
 
-# function man () {
-# 	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
-# 		wezterm cli spawn -- man
-# 	fi
-# 	if [[ -z "$2" ]]; then
-# 		command man "$1"
-# 	else
-# 		command man -P "/usr/bin/less -is --pattern=$2" "$1" 
-# 	fi	
-# }
-
 # GET A BETTER MAN
-# opens man in a new tab
+# if in wezterm, opens man in a new tab
 # first arg: command, second arg: search term
 function man() {
-	if [[ "$TERM_PROGRAM" != "WezTerm" ]]; then
+	if [[ "$TERM_PROGRAM" != "WezTerm" && -n "$2" ]]; then
+		command man -P "/usr/bin/less -is --pattern=$2" "$1"
+	elif [[ "$TERM_PROGRAM" != "WezTerm" ]]; then
 		command man "$1"
 	elif [[ -n "$2" ]]; then
-		wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$2" "$1" 
+		wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$2" "$1"
 	else
-		wezterm cli spawn -- man "$1" 
-	fi	
+		wezterm cli spawn -- man "$1"
+	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -40,7 +31,7 @@ export LESS_TERMCAP_md=$'\E[1;33m' # begin blink = YELLOW
 export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
 export LESS_TERMCAP_us=$'\E[1;35m' # begin underline = MAGENTA
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
-export LESSHISTFILE=- # don't clutter the home directory with usless `.lesshst` file
+export LESSHISTFILE=-              # don't clutter the home directory with usless `.lesshst` file
 
 # Pager-specific settings
 # INFO less' --ignore-case is actually smart-case

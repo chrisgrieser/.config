@@ -33,7 +33,7 @@ end)
 -- THEME
 -- TODO modify theme colors https://wezfurlong.org/wezterm/config/lua/wezterm.color/get_default_colors.html
 local darkTheme = "AdventureTime"
-local lightTheme = "RoséPineDawn (Gogh)"
+local lightTheme = "NordLight (Gogh)"
 
 ---selects the color scheme depending on Dark/Light Mode
 ---@return string name of the string to set in config.colorscheme

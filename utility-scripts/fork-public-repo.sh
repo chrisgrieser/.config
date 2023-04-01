@@ -7,7 +7,7 @@ read -r REPO
 TEMP_DIR="$WD"
 
 #───────────────────────────────────────────────────────────────────────────────
-# PREPARATORY
+# PREPARATION
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 if ! command -v gh &>/dev/null; then echo "⚠️ gh not installed." && return 1; fi
 set -e # abort if any step fails
