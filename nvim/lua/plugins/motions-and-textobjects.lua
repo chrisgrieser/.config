@@ -31,9 +31,4 @@ return {
 		lazy = true, -- loaded by keymaps
 		dev = true,
 	},
-	{ -- hint-based textobject
-		"mfussenegger/nvim-treehopper",
-		lazy = true, -- loaded by keymaps
-		dependencies = "nvim-treesitter/nvim-treesitter",
-	},
 }

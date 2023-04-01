@@ -8,13 +8,27 @@ function sh() {
 	echo "$CHEAT_CODE_ONLY" | pbcopy
 }
 
+# function man () {
+# 	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+# 		wezterm cli spawn -- man
+# 	fi
+# 	if [[ -z "$2" ]]; then
+# 		command man "$1"
+# 	else
+# 		command man -P "/usr/bin/less -is --pattern=$2" "$1" 
+# 	fi	
+# }
+
 # GET A BETTER MAN
+# opens man in a new tab
 # first arg: command, second arg: search term
-function man () {
-	if [[ -z "$2" ]]; then
+function man() {
+	if [[ "$TERM_PROGRAM" != "WezTerm" ]]; then
 		command man "$1"
+	elif [[ -n "$2" ]]; then
+		wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$2" "$1" 
 	else
-		command man -P "/usr/bin/less -is --pattern=$2" "$1" 
+		wezterm cli spawn -- man "$1" 
 	fi	
 }
 
