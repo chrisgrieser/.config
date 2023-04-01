@@ -520,14 +520,19 @@ rules:
           basic.to_if_held_down_threshold_milliseconds: 200
   #─────────────────────────────────────────────────────────────────
   - description: "(Apps) Alfred: Space goes down"
+    # INFO requires compatibility mode to recognize Alfred as frontmost app
     manipulators:
-      # INFO https://cleanshot.com/docs/api
-      # copy to clipboard and quit
       - type: basic
-        from: { key_code: q, modifiers: { mandatory: [command] } }
+        from: { key_code: tab }
         to:
-          - { key_code: c, modifiers: [command, shift] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
+          - { key_code: down_arrow }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
+      # shift: insert real space
+      - type: basic
+        from: { key_code: tab, modifiers: { mandatory: [shift] } }
+        to:
+          - { key_code: up_arrow }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
   #─────────────────────────────────────────────────────────────────
   - description: "(Apps) Sidenotes"
     manipulators:
