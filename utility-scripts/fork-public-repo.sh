@@ -1,8 +1,11 @@
 #!/usr/bin/env zsh
 
-# CONFIG
+# INPUT
 echo "Enter Repo (format: owner/name)"
 read -r REPO
+
+echo "Enter tag for neovimcraft"
+read -r tag
 
 TEMP_DIR="$WD"
 
@@ -35,8 +38,19 @@ gh repo fork "neurosnap/neovimcraft" --clone=false # separate clone command for 
 gh repo clone "$github_user/neovimcraft" -- --depth=1
 cd "neovimcraft"
 
-# TODO add to json manually (skip annoying deno installation)
-# make resource
+# TODO add to json manually (skip annoying deno installation) 
+# https://github.com/neurosnap/neovimcraft/pull/290/files
+to_add="},
+    {
+      \"type\": \"github\",
+      \"username\": \"$github_user\",
+      \"repo\": \"$plugin_name\",
+      \"tags\": [
+        \"plugin\",
+        \"$tag\",
+      ]"
+
+
 
 commit_push_pr_view "Add $plugin_name"
 

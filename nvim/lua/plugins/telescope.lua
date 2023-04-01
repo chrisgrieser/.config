@@ -61,12 +61,10 @@ local function telescopeConfig()
 			layout_strategy = "horizontal",
 			layout_config = {
 				horizontal = {
-					anchor = "S",
-					height = 0.8,
+					height = 0.85,
 					width = 0.9,
 					preview_cutoff = 70,
 					preview_width = { 0.55, min = 30 },
-					prompt_position = "top",
 				},
 				cursor = {
 					preview_cutoff = 9001, -- never use preview here

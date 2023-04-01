@@ -5,6 +5,7 @@ alias co="git checkout"
 alias gs='git status'
 # alias gd='git diff'
 alias gd='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
+alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 alias gc="git commit -m"
 alias ga="git add"
 alias grh="git reset --hard"
@@ -32,6 +33,7 @@ function pr () {
 		read -r msg
 	fi
 	git add . && git commit -m "$msg"
+
 	origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
 	gh repo set-default "$origin"
 

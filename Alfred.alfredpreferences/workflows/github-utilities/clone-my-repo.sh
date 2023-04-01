@@ -9,6 +9,9 @@ target="${local_repo_folder/#\~/$HOME}"
 [[ ! -e "$target" ]] && mkdir -p "$target"
 
 cd "$target" || exit 1
-git clone --depth=1 "$url" || echo "❌ Error"
+git clone --depth=1 "$url" || return 1
 
-open "$target/$reponame"
+# open
+open "$target/$reponame" # open in Finder
+echo -n "$PWD" # to open terminal at the location
+
