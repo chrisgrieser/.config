@@ -45,9 +45,9 @@ defaults write com.apple.finder QuitMenuItem -bool true # make finder quittable
 defaults write com.apple.finder CreateDesktop false # disable desktop icons & make desktop unfocussable
 
 # Automatically open a new Finder window when a volume is mounted
-defaults read com.apple.frameworks.diskimages auto-open-ro-root 
-defaults read com.apple.frameworks.diskimages auto-open-rw-root 
-defaults read com.apple.finder OpenWindowForNewRemovableDisk 
+defaults read com.apple.frameworks.diskimages auto-open-ro-root -bool true
+defaults read com.apple.frameworks.diskimages auto-open-rw-root -bool true
+defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 # Enable snap-to-grid for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
