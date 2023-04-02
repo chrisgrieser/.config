@@ -45,13 +45,13 @@ if command -v npm &> /dev/null; then
 	}
 fi
 
-if command -v pip3 &> /dev/null; then
-	pip3(){
-		unfunction "$0"
-		$0 "$@"
-		eval "$(pip3 completion --zsh)"# https://askubuntu.com/a/1026594
-	}
-fi
+# if command -v pip3 &> /dev/null; then
+# 	pip3(){
+# 		unfunction "$0"
+# 		$0 "$@"
+# 		eval "$(pip3 completion --zsh)"# https://askubuntu.com/a/1026594
+# 	}
+# fi
 
 if command -v pandoc &> /dev/null; then
 	pandoc(){
