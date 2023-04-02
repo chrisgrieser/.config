@@ -63,7 +63,6 @@ ExternalHarddriveWatcher = hs.usb.watcher
 
 		if isBackupDrive then
 			OpenApp("WezTerm")
-			AsSoonAsAppRuns("WezTerm", function() hs.eventtap.keyStrokes("bkp") end)
 		else
 			local stdout, success = hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
 			if not success or not stdout then return end

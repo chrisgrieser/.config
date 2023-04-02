@@ -114,9 +114,9 @@ return {
 				min_width = { 0.5, 60 },
 				win_options = {
 					sidescrolloff = 0,
-					winblend = 0, -- weird shining through
 					list = true,
-					listchars = "precedes:…,extends:…",
+					listchars = "precedes:…,extends:…", -- https://github.com/stevearc/dressing.nvim/issues/94
+					winblend = 0, -- weird shining through
 				},
 			},
 			select = {

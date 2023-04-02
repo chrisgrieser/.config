@@ -163,16 +163,15 @@ end
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
 function AutoTile(winSrc)
-	local wins
+	local wins = {}
 	if type(winSrc) == "string" then
 		-- cannot use windowfilter, since it's empty when not called from a
 		-- window filter subscription
-		wins = hs.fnutils.filter(
-			App("Finder"):allWindows(),
-			-- reject certain window tiles
-			function(win) return not (TableContains(RejectedFinderWindows, win:title())) end
-		)
-		if not wins then return end
+		for _, win in pairs(App("Finder"):allWindows()) do
+			if not (TableContains(RejectedFinderWindows, win:title())) then 
+				table.insert(wins, win)
+			end
+		end
 	else
 		wins = winSrc:getWindows()
 	end
