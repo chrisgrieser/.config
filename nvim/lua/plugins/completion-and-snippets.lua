@@ -327,10 +327,19 @@ return {
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp",
 			"L3MON4D3/LuaSnip", -- snippet engine
-			{ "L3MON4D3/cmp-luasnip-choice", config = true }, -- extra for choice snippets
+			{ "L3MON4D3/cmp-luasnip-choice" }, -- extra for choice snippets
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
 	},
+{
+  'doxnit/cmp-luasnip-choice',
+  lazy = true, -- loaded by cmp
+  config = function()
+    require('cmp_luasnip_choice').setup({
+        auto_open = true, -- Automatically open nvim-cmp on choice node (default: true)
+    });
+  end,
+},
 
 	{ -- AI completion
 		"jcdickinson/codeium.nvim",

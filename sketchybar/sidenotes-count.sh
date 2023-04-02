@@ -2,7 +2,9 @@
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 folder="Base"
-count=$(osascript -l JavaScript -e "Application('SideNotes').folders.byName(\"$folder\").notes().length")
+count=$(osascript -l JavaScript -e "
+	Application('SideNotes').folders.byName(\"$folder\").notes().length
+")
 
 if [[ $count -eq 0 ]]; then
 	icon=""

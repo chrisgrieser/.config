@@ -20,7 +20,7 @@
 		"body": [
 			"{ -- ${2:description}",
 			"\t\"${1:github_repo}\",",
-			"\t${3|event = \"VeryLazy\"|event = \"LspAttach\"|lazy = true|cmd = \"\"|},",
+			"\t${3|event = \"VeryLazy\",event = \"LspAttach\",lazy = true,cmd = \"\"|},",
 			"\topts = {",
 			"\t\t$0",
 			"\t},",
@@ -49,7 +49,7 @@
 	"autocmd": {
 		"prefix": "Autocmd (short)",
 		"body": [
-			"Autocmd(\"${1|BufReadPost|VimEnter|UIEnter|BufReadPre|VeryLazy|LspAttach|WinEnter|FocusGained|FocusLost|WinLeave|BufLeave|BufWritePre|BufWritePost|}\", {",
+			"Autocmd(\"${1|BufReadPost,VimEnter,UIEnter,BufReadPre,VeryLazy,LspAttach,WinEnter,FocusGained,FocusLost,WinLeave,BufLeave,BufWritePre,BufWritePost|}\", {",
 			"\tcallback = function()",
 			"\t\t$0",
 			"\tend,",
@@ -59,7 +59,7 @@
 	"autocmd (unabbr)": {
 		"prefix": "Autocmd (unabbr)",
 		"body": [
-			"vim.api.nvim_create_autocmd(\"${1:event}\", {",
+			"vim.api.nvim_create_autocmd(\"${1|BufReadPost,VimEnter,UIEnter,BufReadPre,VeryLazy,LspAttach,WinEnter,FocusGained,FocusLost,WinLeave,BufLeave,BufWritePre,BufWritePost|}\", {",
 			"\tcallback = function()",
 			"\t\t$0",
 			"\tend,",
