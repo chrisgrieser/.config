@@ -41,7 +41,7 @@ local function customHighlights()
 
 	linkHighlight("myAnnotations", "Todo")
 	-- stylua: ignore
-	Fn.matchadd( "myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
+	Fn.matchadd( "myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
 
 	setHighlight("Overnesting", "guibg=#E06C75")
 	Fn.matchadd("Overnesting", ("\t"):rep(8) .. "\t*")
@@ -111,7 +111,7 @@ local function themeModifications()
 
 		-- zephyr
 	elseif theme == "zephyr" then
-setHighlight("IncSearch", "guifg=#FFFFFF")
+		setHighlight("IncSearch", "guifg=#FFFFFF")
 		linkHighlight("TabLineSel", "lualine_a_normal")
 		linkHighlight("TabLineFill", "lualine_c_normal")
 
