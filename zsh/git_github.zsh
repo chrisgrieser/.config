@@ -3,7 +3,6 @@
 # ALIASES AND SMALLER UTILS
 alias co="git checkout"
 alias gs='git status'
-alias gd='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 alias gc="git commit -m"
 alias ga="git add"
 alias unshallow="git fetch --unshallow"
@@ -31,6 +30,21 @@ alias gi='open "$(getGithubURL)/issues"'
 
 # goto git root
 alias g.='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
+
+#───────────────────────────────────────────────────────────────────────────────
+# GIT DIFF
+# use delta for small diffs and diff2html for big diffs
+function gd() {
+	local threshold_lines=50
+	if [[ $(git diff | wc -l) -gt $threshold_lines ]]; then
+		if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
+		diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"
+	else
+		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
+		git diff # uses git delta (configured so in gitconfig)
+		echo "small"
+	fi
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
