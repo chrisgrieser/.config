@@ -171,20 +171,12 @@ rules:
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
         to:
           - { key_code: d, modifiers: [command] }
+          - {key_code: vk_none, hold_down_milliseconds: 40}
           - { key_code: tab, modifiers: [shift] }
           - key_code: spacebar
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.vivaldi\.Vivaldi]
-      # open extensions
-      - type: basic
-        from: { key_code: comma, modifiers: { mandatory: [command, shift] } }
-        to:
-          - shell_command: open "chrome://settings"
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser
       # open dev tools (= inspect Vivaldi UI)
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }
@@ -206,6 +198,16 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.vivaldi\.Vivaldi] # no $ to also work in PWAs
+      # shift+space → daw (for sketchyvim)
+      - type: basic
+        from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
+        to:
+          - key_code: d
+          - key_code: a
+          - key_code: w
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.vivaldi\.Vivaldi$]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
@@ -469,17 +471,6 @@ rules:
         to:
           - { key_code: g, modifiers: [command, control] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
-  - description: "(Apps) Vivaldi: shift+space → daw (for sketchyvim)"
-    manipulators:
-      - type: basic
-        from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
-        to:
-          - key_code: d
-          - key_code: a
-          - key_code: w
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com#.vivaldi\.Vivaldi$]
   - description: "(Apps) Neovide: Fix <S-Space> and cmd+q → ZZ"
     manipulators:
       - type: basic
@@ -519,7 +510,7 @@ rules:
           basic.to_if_alone_timeout_milliseconds: 200
           basic.to_if_held_down_threshold_milliseconds: 200
   #─────────────────────────────────────────────────────────────────
-  - description: "(Apps) Alfred: Space goes down"
+  - description: "(Apps) Alfred: Tab Selects"
     # INFO requires compatibility mode to recognize Alfred as frontmost app
     manipulators:
       - type: basic

@@ -11,7 +11,7 @@ function alfredMatcher(str) {
 // HACK since notes are not directly accessible via their id, but only from
 // inside a folder: `Application("SideNotes").folders.byId("35BE5A12-DAF4-44FD-AF7D-2689CBB14BF3").notes.byId("0776263A-77FA-41EF-808E-6266C77DBDF9")`
 // `Application("SideNotes").currentNote()` retrieves a note that way. This
-// necessitates iterating folders *and* notes to retrieve them by ID. However, 
+// necessitates iterating folders *and* notes to retrieve them by ID. However,
 // note objects have more properties like textFormatting, the `.text()` method
 // includes information on whether the note has an image, and methods like
 // `.delete()` are available
@@ -22,10 +22,11 @@ function getNoteObjAndFolder(noteId) {
 		const notesInFolder = folders[i].notes;
 		for (let j = 0; j < notesInFolder.length; j++) {
 			const note = notesInFolder[j];
-			if (note.id() === noteId) return {
-				noteObj: note,
-				folder: folders[i].name(),
-			};
+			if (note.id() === noteId)
+				return {
+					noteObj: note,
+					folder: folders[i].name(),
+				};
 		}
 	}
 	return false;
@@ -51,7 +52,7 @@ function run(argv) {
 			const foldername = temp.folder;
 			const noteObj = temp.noteObj;
 			const content = noteObj.text();
-			const secondLine = content.split("\n")[1];
+			const secondLine = content.split("\n")[1] || "";
 			let icon = "";
 
 			let type = noteObj.textFormatting();
@@ -74,7 +75,7 @@ function run(argv) {
 			}
 			if (icon !== "") icon += " "; // padding
 
-			const folderSub = foldername === currentFolder ? "" : `[📂 ${foldername}] `
+			const folderSub = foldername === currentFolder ? "" : `[📂 ${foldername}] `;
 			const subtitle = folderSub + icon + secondLine;
 
 			return {
