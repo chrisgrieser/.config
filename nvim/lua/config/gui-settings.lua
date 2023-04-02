@@ -10,7 +10,7 @@ Autocmd("VimEnter", {
 		Fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
 
 		-- HACK to fix neovide sometimes not enlarging the window
-		Fn.system("open -g 'hammerspoon://enlarge-neovide-window-and-fix-sidenotes'")
+		Fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
 	end,
 })
 
@@ -53,9 +53,9 @@ g.neovide_scroll_animation_length = 1 --
 -- CURSOR
 
 vim.opt.guicursor = {
-	"n-sm:block",
+	"n-v:block",
 	"i-ci-c-ve:ver25",
-	"r-cr-o-v:hor10",
+	"r-cr-o:hor10",
 	"a:blinkwait200-blinkoff500-blinkon700",
 }
 

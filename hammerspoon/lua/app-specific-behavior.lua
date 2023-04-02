@@ -123,7 +123,7 @@ end):start()
 
 -- HACK since neovide does not send a launch signal, triggering window resizing
 -- via its URI scheme called on VimEnter
-UriScheme("enlarge-neovide-window-and-fix-sidenotes", function()
+UriScheme("enlarge-neovide-window", function()
 	local neovideWin = App("neovide"):mainWindow()
 	local size = IsProjector() and Maximized or PseudoMaximized
 	MoveResize(neovideWin, size)

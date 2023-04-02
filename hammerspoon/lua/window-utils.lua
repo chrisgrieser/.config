@@ -168,6 +168,10 @@ function AutoTile(winSrc)
 		-- cannot use windowfilter, since it's empty when not called from a
 		-- window filter subscription
 		for _, win in pairs(App("Finder"):allWindows()) do
+			local rejected = false
+			for _, bannedTitle in pairs(RejectedFinderWindows) do
+				
+			end
 			if not (TableContains(RejectedFinderWindows, win:title())) then 
 				table.insert(wins, win)
 			end
