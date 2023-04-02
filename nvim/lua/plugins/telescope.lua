@@ -70,11 +70,6 @@ local function telescopeConfig()
 					preview_cutoff = 9001, -- never use preview here
 					height = 1,
 				},
-				bottom_pane = {
-					height = 8,
-					preview_cutoff = 70,
-					prompt_position = "bottom",
-				},
 			},
 		},
 		pickers = {
@@ -119,7 +114,15 @@ local function telescopeConfig()
 				enable_preview = true,
 				prompt_prefix = " ",
 				results_title = false,
-				layout_strategy = "bottom_pane",
+				layout_strategy = "horizontal",
+				layout_config = {
+					horizontal = {
+						height = 0.3,
+						width = 0.3,
+						anchor = "SE",
+						preview_width = 1, -- needs preview for live preview of the theme
+					},
+				},
 			},
 		},
 		extensions = {

@@ -19,6 +19,7 @@ local generalWords = {
 	{ "show", "hide" },
 	{ "above", "below" },
 	{ "vertical", "horizontal" },
+	{ "width", "height" },
 	{ "min", "max" }, -- this means that "min" won't cycle to "sec"
 	{ "minimum", "maximum" },
 	{ "increase", "decrease" },
@@ -94,7 +95,6 @@ local filetypeSpecificWords = {
 		{ "padding", "margin" },
 		{ "top", "bottom" },
 		{ "relative", "absolute" },
-		{ "width", "height" },
 		{ "border", "outline" },
 		{ "span", "div" },
 	},
