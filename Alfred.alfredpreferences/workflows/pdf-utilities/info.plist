@@ -47,19 +47,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>5BA10A69-99A4-4C37-A8B1-9C39FE1273E9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B8227F7E-A929-4447-8912-00AD8F5CB234</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>698B1D06-326B-43D2-8ABB-DE676CE3661A</key>
 		<array>
 			<dict>
@@ -177,29 +164,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/run-extraction.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -249,6 +213,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/run-extraction.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E37A9BDD-290E-4BCD-9832-06488718A4BD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -281,42 +268,6 @@
 			<string>B42ED178-4437-4D4D-BEF0-63B085EF7730</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Applications/Preview.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>B8227F7E-A929-4447-8912-00AD8F5CB234</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<true/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Open with Preview</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>5BA10A69-99A4-4C37-A8B1-9C39FE1273E9</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -580,9 +531,9 @@
 			<key>note</key>
 			<string>run ocrmypdf</string>
 			<key>xpos</key>
-			<real>400</real>
+			<real>405</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>490</real>
 		</dict>
 		<key>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</key>
 		<dict>
@@ -598,45 +549,36 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>550</real>
+			<real>555</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>490</real>
 		</dict>
 		<key>4D63817E-E093-44ED-99F7-2762E817BB90</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>4</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>775</real>
 		</dict>
 		<key>53419BE9-8E0D-4F3E-9460-5F3E4DE84406</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>4</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>675</real>
-		</dict>
-		<key>5BA10A69-99A4-4C37-A8B1-9C39FE1273E9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>185</real>
+			<real>775</real>
 		</dict>
 		<key>698B1D06-326B-43D2-8ABB-DE676CE3661A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>490</real>
 		</dict>
 		<key>83E378DD-0BAE-4A5F-B0D5-20FE53C32A85</key>
 		<dict>
@@ -645,9 +587,9 @@
 			<key>note</key>
 			<string>cheatsheet for PDF Annotation Extractor</string>
 			<key>xpos</key>
-			<real>390</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>330</real>
 		</dict>
 		<key>84C07023-C7E9-4DAD-8EF8-0700B1CB05E3</key>
 		<dict>
@@ -665,18 +607,18 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>545</real>
-			<key>ypos</key>
 			<real>185</real>
+			<key>ypos</key>
+			<real>330</real>
 		</dict>
 		<key>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>490</real>
 		</dict>
 		<key>B42ED178-4437-4D4D-BEF0-63B085EF7730</key>
 		<dict>
@@ -685,36 +627,27 @@
 			<key>note</key>
 			<string>run PDF annotation extractor</string>
 			<key>xpos</key>
-			<real>390</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>30</real>
-		</dict>
-		<key>B8227F7E-A929-4447-8912-00AD8F5CB234</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>185</real>
+			<real>175</real>
 		</dict>
 		<key>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>625</real>
 		</dict>
 		<key>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>520</real>
 		</dict>
 		<key>E37A9BDD-290E-4BCD-9832-06488718A4BD</key>
 		<dict>
@@ -723,20 +656,20 @@
 			<key>note</key>
 			<string>run extraction</string>
 			<key>xpos</key>
-			<real>540</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>30</real>
+			<real>175</real>
 		</dict>
 		<key>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>4</integer>
 			<key>note</key>
 			<string>show error messages</string>
 			<key>xpos</key>
-			<real>350</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>775</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

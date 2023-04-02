@@ -49,18 +49,16 @@ BiweeklyTimer = hs.timer
 		hs.loadSpoon("EmmyLua")
 
 		-- backups
-		Applescript([[
-			tell application id "com.runningwithcrayons.Alfred"
-				run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"
-				run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles"
-			end tell
-		]])
+		-- stylua: ignore start
 		local isodate = os.date("%Y-%m-%d")
-		hs.execute(
-			'cp -f "$HOME/Library/Application Support/Vivaldi/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks/'
-				.. isodate
-				.. "'"
-		)
+		hs.execute( 'cp -f "$HOME/Library/Application Support/Vivaldi/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks/' .. isodate .. "'")
+		hs.task.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
+			local msg = exitCode == 0 and "✅ Dotfile Backup successful." or "⚠️ Dotfile Backup failed: " .. stdErr
+			Notify(msg)
+		end)
+		Applescript( [[ tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound" end tell ]])
+
+		-- stylua: ignore end
 	end, true)
 	:start()
 
@@ -70,7 +68,7 @@ local function sleepMovieApps()
 	if not IdleMins(30) then return end
 
 	-- no need to quit IINA it autoquits
-	QuitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix" }
+	QuitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
 
 	-- close browser tabs running YouTube
 	Applescript([[
