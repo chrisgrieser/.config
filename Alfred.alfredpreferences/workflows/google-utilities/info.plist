@@ -71,9 +71,9 @@
 				<key>destinationuid</key>
 				<string>371F9B42-4370-4A8E-8025-ED527A733984</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Copy Ducky URL (Searchlink)</string>
+				<string>⌥: Copy Ducky URL (Searchlink)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -101,9 +101,9 @@
 				<key>destinationuid</key>
 				<string>28F85017-1FCE-491E-9A6D-4A426338174F</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Complete</string>
+				<string>⇧: Complete</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -196,7 +196,7 @@
 			<key>config</key>
 			<dict>
 				<key>subtext</key>
-				<string>⌘: Ducky   ⌥: Autocomplete   ⇧: Copy Ducky</string>
+				<string>⌘: Ducky   ⇧: Autocomplete   ⌥: Copy First URL</string>
 				<key>text</key>
 				<string>Google: {query}</string>
 			</dict>
