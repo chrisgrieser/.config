@@ -19,8 +19,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</key>
-		<array/>
 		<key>222B531F-8CC2-406A-BEFD-1DB401A7880C</key>
 		<array>
 			<dict>
@@ -47,19 +45,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4852BD0B-45FE-4BD1-9B24-75D32B5EAA7D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>877D0FB8-C312-4433-A6EF-6CA2A683D76F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5D832920-C82B-4DD3-8853-68ABE3D3552A</key>
 		<array>
 			<dict>
@@ -75,59 +60,8 @@
 				<false/>
 			</dict>
 		</array>
-		<key>877D0FB8-C312-4433-A6EF-6CA2A683D76F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>97B7CF87-4080-4394-87B8-2074B83B59A7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
-		<array/>
-		<key>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<array/>
-		<key>FE91F5F4-DB81-40FB-95B9-20859076AB23</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>877D0FB8-C312-4433-A6EF-6CA2A683D76F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -293,17 +227,18 @@
 				<key>runningsubtext</key>
 				<string>loading...</string>
 				<key>script</key>
-				<string></string>
+				<string># running here to pass variables from zshenv
+osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-dot-file.js</string>
+				<string></string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string>Open a dotfile</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -313,130 +248,6 @@
 			<string>4694D7EB-2482-44FA-881E-2597A9A90F9C</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>timestamp=`date '+%Y-%m-%d_%H-%M'`
-resolved_bkp_dest=~`echo -n $backup_location | sed -e "s/~//"`
-backup="$resolved_bkp_dest""/Alfred-Backup_""$timestamp"".zip"
-vault=~`echo -n $vault_path | sed -e "s/~//"`
-
-# directory change necessary to avoid zipping root folder
-# https://unix.stackexchange.com/questions/245856/zip-a-file-without-including-the-parent-directory
-cd $vault
-zip -r --quiet $backup ./*
-
-# restrict number of backups
-actual_number=$((max_number_of_bkps + 1))
-cd $resolved_bkp_dest
-ls -t | tail -n +$actual_number | tr '\n' '\0' | xargs -0 rm
-
-echo "$backup"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>dotfile-bkp.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>bkp dotfiles</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Backup: dotfiles</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>4852BD0B-45FE-4BD1-9B24-75D32B5EAA7D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>'{query}'</string>
-				<key>title</key>
-				<string>✅ Dotfiles Backup finished</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>877D0FB8-C312-4433-A6EF-6CA2A683D76F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>backup-dotfiles</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>FE91F5F4-DB81-40FB-95B9-20859076AB23</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>dotfiles</string>
-				<key>title</key>
-				<string>⏳ Creating Backup...</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>97B7CF87-4080-4394-87B8-2074B83B59A7</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -453,15 +264,6 @@ echo "$backup"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>20</real>
-		</dict>
-		<key>1A820AA0-CFDD-4B5A-9E6D-BF2990A3E581</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>390</real>
-			<key>ypos</key>
-			<real>355</real>
 		</dict>
 		<key>222B531F-8CC2-406A-BEFD-1DB401A7880C</key>
 		<dict>
@@ -483,15 +285,6 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
-		<key>4852BD0B-45FE-4BD1-9B24-75D32B5EAA7D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>355</real>
-		</dict>
 		<key>5D832920-C82B-4DD3-8853-68ABE3D3552A</key>
 		<dict>
 			<key>colorindex</key>
@@ -501,39 +294,12 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>50</real>
 		</dict>
-		<key>877D0FB8-C312-4433-A6EF-6CA2A683D76F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>175</real>
-			<key>ypos</key>
-			<real>440</real>
-		</dict>
-		<key>97B7CF87-4080-4394-87B8-2074B83B59A7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>245</real>
-			<key>ypos</key>
-			<real>480</real>
-		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
 			<real>190</real>
-		</dict>
-		<key>A0F4AE0E-4A85-4D7A-AAF1-54C04E9DE25D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>245</real>
-			<key>ypos</key>
-			<real>355</real>
 		</dict>
 		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
 		<dict>
@@ -546,30 +312,9 @@ echo "$backup"</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>FE91F5F4-DB81-40FB-95B9-20859076AB23</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>475</real>
-		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
-	<key>variables</key>
-	<dict>
-		<key>dotfile_folder</key>
-		<string>~/.config/</string>
-		<key>working_directory</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/</string>
-	</dict>
-	<key>variablesdontexport</key>
-	<array>
-		<string>working_directory</string>
-		<string>dotfile_folder</string>
-	</array>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>

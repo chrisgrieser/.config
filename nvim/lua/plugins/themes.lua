@@ -8,11 +8,9 @@ local g = vim.g
 -- - if only one theme, it's used for both light and dark
 local themes = {
 	"EdenEast/nightfox.nvim",
-	-- "Shatur/neovim-ayu",
 	-- "sainnhe/everforest",
 	-- "rebelot/kanagawa.nvim",
-	{ "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
-	-- "glepnir/zephyr-nvim",
+	"glepnir/zephyr-nvim",
 	-- "folke/tokyonight.nvim",
 	-- "NTBBloodbath/sweetie.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",

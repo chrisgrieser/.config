@@ -53,9 +53,9 @@ g.neovide_scroll_animation_length = 1 --
 -- CURSOR
 
 vim.opt.guicursor = {
-	"n-v:block",
-	"i-ci-c-ve:ver25",
-	"r-cr-o:hor10",
+	"n-sm:block",
+	"i-ci-c:ver25",
+	"r-cr-o-v:hor10",
 	"a:blinkwait200-blinkoff500-blinkon700",
 }
 
