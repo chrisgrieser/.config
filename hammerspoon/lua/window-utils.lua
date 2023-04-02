@@ -263,6 +263,9 @@ local function controlSpaceAction()
 	local pos
 	if FrontAppName() == "Finder" or FrontAppName() == "Script Editor" then
 		pos = Centered
+	elseif FrontAppName() == "SideNotes" then
+		ToggleSideNotesSize()
+		return
 	elseif not CheckSize(currentWin, PseudoMaximized) then
 		pos = PseudoMaximized
 	else

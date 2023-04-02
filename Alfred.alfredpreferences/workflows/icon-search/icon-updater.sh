@@ -27,12 +27,8 @@ case $APP in
 "AppCleaner")
 	cp -f "$CUSTOM_ICON_FOLDER/AppCleaner.icns" "$APP.app/Contents/Resources/$APP.icns"
 	;;
-"Twitter")
-	cp -f "$CUSTOM_ICON_FOLDER/Twitter 2.icns" "$APP.app/Contents/Resources/ProductionAppIcon.icns"
-	;;
 "Obsidian")
 	cp -f "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" "$APP.app/Contents/Resources/icon.icns"
-	# cp -f "$CUSTOM_ICON_FOLDER/Obsidian Space.icns" "$APP.app/Contents/Resources/icon.icns"
 	;;
 "Discord")
 	cp -f "$CUSTOM_ICON_FOLDER/Discord Black.icns" "$APP.app/Contents/Resources/electron.icns"
@@ -71,6 +67,14 @@ case $APP in
 			activate
 		end tell
 		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Mail.icns\""
+	INFO_WINDOW=1
+	;;
+"Twitter")
+	osascript -e "tell application \"Finder\"
+			open information window of (\"/Applications/$APP.app\" as POSIX file as alias)
+			activate
+		end tell
+		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Twitter 2.icns\""
 	INFO_WINDOW=1
 	;;
 
