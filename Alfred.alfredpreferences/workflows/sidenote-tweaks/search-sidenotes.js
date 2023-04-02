@@ -44,10 +44,11 @@ function run(argv) {
 			const noteObj = getNoteObj(item.identifier);
 			if (!noteObj) return false;
 			const content = noteObj.text();
+			console.log("content:", content);
 			let icon = "";
 
 			let type = noteObj.textFormatting();
-			if (type === "markdown" && content.match(/☐|☑/)) type = "tasklist";
+			if (type === "markdown" && content.match(/\[[x ]\]/)) type = "tasklist";
 			if (type === "code") icon += "👨‍💻";
 			if (type === "tasklist") icon += "☑️ ";
 			if (type === "plain") icon += "📃";
