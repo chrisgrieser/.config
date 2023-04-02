@@ -121,9 +121,9 @@ local function cmpconfig()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif require("neogen").jumpable() then
+				elseif require("neogen").locally_jumpable() then
 					require("neogen").jump_next()
-				elseif require("luasnip").jumpable(1) then
+				elseif require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
 				else
 					fallback()
@@ -132,9 +132,9 @@ local function cmpconfig()
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item()
-				elseif require("neogen").jumpable(true) then
+				elseif require("neogen").locally_jumpable(true) then
 					require("neogen").jump_prev()
-				elseif require("luasnip").jumpable(-1) then
+				elseif require("luasnip").locally_jumpable(-1) then
 					require("luasnip").jump(-1)
 				else
 					fallback()
@@ -142,29 +142,22 @@ local function cmpconfig()
 			end, { "i", "s" }),
 			-- Force jumping
 			["<D-j>"] = cmp.mapping(function(_)
-				if require("neogen").jumpable() then
+				if require("neogen").locally_jumpable() then
 					require("neogen").jump_next()
-				elseif require("luasnip").jumpable(1) then
+				elseif require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
 				else
 					vim.notify("No more jump forwards.")
 				end
-			end, { "i", "s", "n" }),
+			end, { "i", "s" }),
 			-- Cycle Choices
-			["<D-k>"] = cmp.mapping(function(fallback)
+			["<D-k>"] = cmp.mapping(function(_)
 				if require("luasnip").choice_active() then
 					require("luasnip").change_choice(1)
 				else
-					fallback()
+					vim.notify("No choices available.")
 				end
-			end, { "i", "s", "n" }),
-			["<D-S-k>"] = cmp.mapping(function(fallback)
-				if require("luasnip").choice_active() then
-					require("luasnip").change_choice(-1)
-				else
-					fallback()
-				end
-			end, { "i", "s", "n" }),
+			end, { "i", "s" }),
 		},
 		formatting = {
 			fields = { "kind", "abbr", "menu" }, -- order of the fields
@@ -342,7 +335,7 @@ return {
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp",
 			"L3MON4D3/LuaSnip", -- snippet engine
-			{"L3MON4D3/cmp-luasnip-choice", config = true} , -- extra for choice snippets
+			{ "L3MON4D3/cmp-luasnip-choice", config = true }, -- extra for choice snippets
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
 	},
@@ -365,6 +358,13 @@ return {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
 				enable_autosnippets = true, -- for javascript "if ()"
+				ext_opts = {
+					[require("luasnip.util.types").choiceNode] = {
+						active = {
+							virt_text = { { "●", "GruvboxOrange" } },
+						},
+					},
+				},
 			}
 
 			-- VS-code-style snippets
