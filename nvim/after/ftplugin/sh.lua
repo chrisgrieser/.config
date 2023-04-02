@@ -1,5 +1,4 @@
 require("config.utils")
--- INFO vim.filetype.add()
 
 --------------------------------------------------------------------------------
 
@@ -24,7 +23,7 @@ Keymap("n", "<leader>r", function()
 		---@diagnostic disable: param-type-mismatch
 		vim.defer_fn(function() Fn.system([[osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"]]) end, 3000)
 	else
-		local output = Fn.system("zsh '" .. Expand("%:p") .. "'")
+		local output = Fn.system(('zsh "%s"'):format(Expand("%:p")))
 		local logLevel = vim.v.shell_error > 0 and LogError or LogTrace
 		vim.notify(output, logLevel)
 	end

@@ -9,16 +9,16 @@ Iabbrev("cosnt const")
 -- Build
 Keymap("n", "<leader>r", function()
 	Cmd.update()
-	local output = Fn.system("")
-
-	vim.notify(output)
-end, { buffer = true, desc = " npm run build" })
+	local output = Fn.system(('osascript -l JavaScript "%s"'):format(Expand("%:p")))
+	local logLevel = vim.v.shell_error > 0 and LogError or LogTrace
+	vim.notify(output, logLevel)
+end, { buffer = true, desc = " JXA run" })
 
 -- Open regex in regex101 and regexper (railroad diagram)
 Keymap("n", "g/", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
 	Normal('"zyya/') -- yank outer regex
-	Normal('vi/') -- select inner regex for easy replacement
+	Normal("vi/") -- select inner regex for easy replacement
 
 	local regex = Fn.getreg("z")
 	local pattern = regex:match("/(.*)/")
