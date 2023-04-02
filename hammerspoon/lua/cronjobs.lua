@@ -45,7 +45,7 @@ BiweeklyTimer = hs.timer
 	.doAt("02:00", "01d", function()
 		if IsAtOffice() or (getWeekday() ~= "Wed" and getWeekday() ~= "Sat") then return end
 
-		PeripheryBatteryCheck("SideNotes") 
+		PeripheryBatteryCheck("SideNotes")
 		hs.loadSpoon("EmmyLua")
 
 		-- backups
@@ -55,8 +55,11 @@ BiweeklyTimer = hs.timer
 				run trigger "backup-dotfiles" in workflow "de.chris-grieser.terminal-dotfiles"
 			end tell
 		]])
+		local isodate = os.date("%Y-%m-%d")
 		hs.execute(
-			'cp -f "$HOME/Library/Application Support/Vivaldi/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks.bkp"'
+			'cp -f "$HOME/Library/Application Support/Vivaldi/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks/'
+				.. isodate
+				.. "'"
 		)
 	end, true)
 	:start()

@@ -106,7 +106,6 @@ function CheckSize(win, size)
 	return widthOkay and heightOkay and posxOkay and posyOkay
 end
 
-
 ---@param win hs.window
 ---@param pos hs.geometry
 function MoveResize(win, pos)
@@ -120,13 +119,13 @@ function MoveResize(win, pos)
 	then
 		return
 	end
-	local appsToIgnore = { "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon", "CleanShot X" }
+	local appsToIgnore =
+		{ "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon", "CleanShot X" }
 	local appName = win:application():name()
 	if TableContains(appsToIgnore, appName) then
 		Notify("⚠️ " .. appName .. " cannot be resized properly.")
 		return
 	end
-
 
 	-- Twitter Extras
 	if pos == PseudoMaximized or pos == Centered then
@@ -167,14 +166,12 @@ function AutoTile(winSrc)
 	if type(winSrc) == "string" then
 		-- cannot use windowfilter, since it's empty when not called from a
 		-- window filter subscription
-		for _, win in pairs(App("Finder"):allWindows()) do
+		for _, finderWin in pairs(App("Finder"):allWindows()) do
 			local rejected = false
 			for _, bannedTitle in pairs(RejectedFinderWindows) do
-				
+				if finderWin:title():find(bannedTitle) then rejected = true end
 			end
-			if not (TableContains(RejectedFinderWindows, win:title())) then 
-				table.insert(wins, win)
-			end
+			if not rejected then table.insert(wins, finderWin) end
 		end
 	else
 		wins = winSrc:getWindows()
