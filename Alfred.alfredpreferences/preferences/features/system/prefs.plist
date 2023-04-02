@@ -13,8 +13,6 @@
 	</array>
 	<key>ejectKeyword</key>
 	<string>vv</string>
-	<key>ejectKeywordEnabled</key>
-	<true/>
 	<key>emptytrashConfirm</key>
 	<true/>
 	<key>emptytrashKeyword</key>
