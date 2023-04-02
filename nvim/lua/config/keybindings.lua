@@ -587,7 +587,8 @@ Keymap("n", "<leader>gl", function() Cmd.Telescope("git_commits") end, { desc = 
 -- stylua: ignore start
 Keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubLink() end, { desc = "󰊢 GitHub Link" })
 Keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
-Keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch() end, { desc = "󰊢 Issues" })
+Keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch("open") end, { desc = "󰊢 Open Issues" })
+Keymap("n", "<leader>gI", function () require("funcs.git-utils").issueSearch("closed") end, { desc = "󰊢 Closed Issues" })
 Keymap("n", "<leader>gm", function () require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
 Keymap("n", "<leader>gM", function () require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
 -- stylua: ignore end

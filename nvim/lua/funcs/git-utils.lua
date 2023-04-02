@@ -109,25 +109,24 @@ end
 
 --------------------------------------------------------------------------------
 
----Choose a GitHub issues from the current repo to open in the browser
-function M.issueSearch()
+---Choose a GitHub issues from the current repo to open in the browser. Due to
+---GitHub API liminations, only the last 100 issues are shown.
+---@param state "open"|"closed"|"all"
+function M.issueSearch(state)
 	if not isInGitRepo() then return end
 
 	local repo = fn.system("git remote -v | head -n1"):match(":.*%."):sub(2, -2)
 
 	-- TODO figure out how to make a proper http request in nvim
-	local max_results = 20
 	local rawJSON = fn.system(
-		string.format(
-			[[curl -sL "https://api.github.com/repos/%s/issues?per_page=%s&state=open"]],
-			repo,
-			max_results
-		)
+		([[curl -sL "https://api.github.com/repos/%s/issues?per_page=100&state=%s"]]):format(repo, state)
 	)
 	local issues = vim.json.decode(rawJSON)
 
 	if #issues == 0 then
-		vim.notify("There are no issues or PRs for this repo.", vim.log.levels.WARN)
+		local type = state .. " "
+		if state == "all" then type = "" end
+		vim.notify(("There are no %sissues or PRs for this repo."):format(type), vim.log.levels.WARN)
 		return
 	end
 
