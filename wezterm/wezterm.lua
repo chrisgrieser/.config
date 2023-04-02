@@ -7,6 +7,7 @@ local actFun = wezterm.action_callback
 -- local os = require("os")
 -- local io = require("io")
 
+---@diagnostic disable-next-line: unused-local
 local log = wezterm.log_info
 
 local isAtOffice = wezterm.hostname():find("mini") ~= nil
@@ -190,11 +191,8 @@ return {
 				wezterm.open_with(cwd, "Finder")
 			end),
 		},
-		{ -- Theme Cycler
-			key = "t",
-			mods = "SHIFT|CTRL|ALT",
-			action = actFun(themeCycler),
-		},
+		-- Theme Cycler
+		{ key = "t", mods = "SHIFT|CTRL|ALT", action = wezterm.action_callback(themeCycler) },
 
 		--------------------------------------------------------------------------
 		-- MODES
