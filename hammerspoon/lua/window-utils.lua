@@ -97,7 +97,7 @@ function CheckSize(win, size)
 	local diffx = size.x * maxf.w + maxf.x - winf.x -- calculated this way for two screens
 	local diffy = size.y * maxf.h + maxf.y - winf.y
 
-	local leeway = 5 -- for inprecisely resized windows
+	local leeway = 10 -- terminal cell widths creating some imprecision
 	local widthOkay = (diffw > -leeway and diffw < leeway)
 	local heightOkay = (diffh > -leeway and diffh < leeway)
 	local posyOkay = (diffy > -leeway and diffy < leeway)
