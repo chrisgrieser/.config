@@ -37,18 +37,21 @@ const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]
 
 function run(argv) {
 	const query = argv[0] ? argv[0].trim() : "";
-	const ignoredTitle = $.getenv("ignored_title");
-
 	const sidenotes = Application("SideNotes");
+
+	const ignoredTitle = $.getenv("ignored_title");
+	const currentFolder = sidenotes.currentFolder().name();
+
 	const results = sidenotes
 		.searchNotes(query)
 		.filter(item => item.title !== ignoredTitle)
 		.map(item => {
 			const temp = getNoteObjAndFolder(item.identifier);
 			if (!temp) return false;
-			const folder = temp.folder;
+			const foldername = temp.folder;
 			const noteObj = temp.noteObj;
 			const content = noteObj.text();
+			const secondLine = content.split("\n")[1];
 			let icon = "";
 
 			let type = noteObj.textFormatting();
@@ -62,19 +65,22 @@ function run(argv) {
 			let urlSubtitle = "⌘: ";
 			if (urls) {
 				icon += "🔗";
-				const isLinkOnlyNote = [item.title, item.details].includes(urls[0]);
+				const isLinkOnlyNote = (item.title + secondLine).includes(urls[0]);
 				if (isLinkOnlyNote) urlSubtitle += "🗑🔗 Delete & Open ";
 				else urlSubtitle += "🔗 Open ";
 				urlSubtitle += urls[0];
 			} else {
 				urlSubtitle += "🚫 Note has no URL";
 			}
-
 			if (icon !== "") icon += " "; // padding
+
+			const folderSub = foldername === currentFolder ? "" : `[📂 ${foldername}] `
+			const subtitle = folderSub + icon + secondLine;
+
 			return {
 				title: item.title,
-				subtitle: icon + item.details.slice(0, 100),
-				match: alfredMatcher(item.title + item.details),
+				subtitle: subtitle,
+				match: alfredMatcher(item.title + " " + item.details),
 				arg: item.identifier,
 				uid: item.identifier,
 				mods: {
@@ -87,7 +93,7 @@ function run(argv) {
 			};
 		});
 
-	// new note when none matching
+	// new note when no match found
 	if (results.length === 0) {
 		results.push({
 			title: "New Sidenote: " + query,
