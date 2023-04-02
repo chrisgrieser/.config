@@ -63,17 +63,11 @@ end):start()
 
 --------------------------------------------------------------------------------
 
--- toggle sizes of the sidenotes window (+ font size)
+-- toggle sizes of the sidenotes window 
 function ToggleSideNotesSize()
 	local snWin = App("SideNotes"):mainWindow()
 	local narrow = { x = 0, y = 0, w = 0.2, h = 1 }
-	local wide = { x = 0, y = 0, w = 0.5, h = 1 }
-	if CheckSize(snWin, narrow) then
-		MoveResize(snWin, wide)
-		Keystroke({"cmd"}, "+")
-	else
-		MoveResize(snWin, narrow)
-		Keystroke({"cmd"}, "-")
-	end
+	local wide = { x = 0, y = 0, w = 0.35, h = 1 }
+	local changeTo = CheckSize(snWin, narrow) and wide or narrow
+	MoveResize(snWin, changeTo)
 end
-
