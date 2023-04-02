@@ -64,9 +64,12 @@ ExternalHarddriveWatcher = hs.usb.watcher
 		if isBackupDrive then
 			OpenApp("WezTerm")
 		else
-			local stdout, success = hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
-			if not success or not stdout then return end
-			hs.open(Trim(stdout))
+			RunWithDelays(1, function()
+				local stdout, success =
+					hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
+				if not success or not stdout then return end
+				hs.open(Trim(stdout))
+			end)
 		end
 	end)
 	:start()
