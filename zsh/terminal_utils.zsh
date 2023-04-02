@@ -8,10 +8,7 @@ function o() {
 	local input="$*"
 
 	# skip `fzf` if file is fully named, e.g. through tab completion
-	if [[ -d "$input" ]]; then
-		z "$input"
-		return 0
-	elif [[ -f "$input" ]]; then
+	if [[ -f "$input" ]]; then
 		open "$input"
 		return 0
 	fi

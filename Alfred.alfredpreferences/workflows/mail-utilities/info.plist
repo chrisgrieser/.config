@@ -6,21 +6,6 @@
 	<string></string>
 	<key>connections</key>
 	<dict>
-		<key>1A2A5FF6-BADA-4BD7-AE6D-765E6891E0A6</key>
-		<array/>
-		<key>47528376-3FAB-4282-8213-DC8E45C19F7B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4D67ED53-EADE-458A-B761-7F5070BEABA6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5BD7290A-4D3C-4A41-A4D4-668385E514AB</key>
 		<array>
 			<dict>
@@ -39,19 +24,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>95028977-E511-4F96-8A31-8A1EA3939515</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>7613AED8-E386-43CC-827A-45FEB206FD74</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1A2A5FF6-BADA-4BD7-AE6D-765E6891E0A6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -214,30 +186,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>mailto:?body=
-
-Viele Grüße
-Chris</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>95028977-E511-4F96-8A31-8A1EA3939515</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -270,6 +218,30 @@ Chris</string>
 			<string>5F4417F9-1E15-4514-8C37-FEBEE68D292A</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>mailto:?body=
+
+Viele Grüße
+Chris</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>95028977-E511-4F96-8A31-8A1EA3939515</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -331,122 +303,11 @@ end tell</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://mail.google.com/mail/u/0/#snoozed</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>4D67ED53-EADE-458A-B761-7F5070BEABA6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>snoozed</string>
-				<key>subtext</key>
-				<string>at Gmail Web</string>
-				<key>text</key>
-				<string>💤 Snoozed Mails</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>47528376-3FAB-4282-8213-DC8E45C19F7B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>filters</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Filters in Gmail</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7613AED8-E386-43CC-827A-45FEB206FD74</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://mail.google.com/mail/u/0/#settings/filters</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>1A2A5FF6-BADA-4BD7-AE6D-765E6891E0A6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>1A2A5FF6-BADA-4BD7-AE6D-765E6891E0A6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>590</real>
-		</dict>
-		<key>47528376-3FAB-4282-8213-DC8E45C19F7B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>470</real>
-		</dict>
-		<key>4D67ED53-EADE-458A-B761-7F5070BEABA6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>470</real>
-		</dict>
 		<key>50B66C20-4163-4A8A-A8C9-AFC175AEA52D</key>
 		<dict>
 			<key>colorindex</key>
@@ -479,15 +340,6 @@ end tell</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>165</real>
-		</dict>
-		<key>7613AED8-E386-43CC-827A-45FEB206FD74</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>590</real>
 		</dict>
 		<key>919C67AD-F9F2-4691-A835-0E3807CABF9F</key>
 		<dict>

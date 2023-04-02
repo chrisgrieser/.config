@@ -544,7 +544,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Documentation Searches</string>
+	<string>Docs Searches</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -1062,27 +1062,6 @@ osascript -l JavaScript -e '
 			<string>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://man.cx/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>3723039F-2794-4012-BF3C-F02AA09E48F0</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1919,15 +1898,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>130</real>
-		</dict>
-		<key>3723039F-2794-4012-BF3C-F02AA09E48F0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>925</real>
-			<key>ypos</key>
-			<real>480</real>
 		</dict>
 		<key>3CA7F398-9E2A-467B-B1B1-CC0DBBCB20A5</key>
 		<dict>
