@@ -7,10 +7,11 @@ local g = vim.g
 -- - rest ignored
 -- - if only one theme, it's used for both light and dark
 local themes = {
-	"EdenEast/nightfox.nvim",
+	-- "EdenEast/nightfox.nvim",
+	"Shatur/neovim-ayu",
 	-- "sainnhe/everforest",
-	"rebelot/kanagawa.nvim",
-	-- { "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
+	-- "rebelot/kanagawa.nvim",
+	{ "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
 	-- "glepnir/zephyr-nvim",
 	-- "folke/tokyonight.nvim",
 	-- "NTBBloodbath/sweetie.nvim",
@@ -19,7 +20,7 @@ local themes = {
 }
 
 g.darkTransparency = 0.91
-g.lightTransparency = 0.93
+g.lightTransparency = 0.95
 
 --------------------------------------------------------------------------------
 
@@ -36,7 +37,7 @@ g.lightTransparency = 0.93
 local function getName(lazyPlugin)
 	---@diagnostic disable-next-line: assign-type-mismatch
 	local repoName = type(lazyPlugin) == "table" and lazyPlugin[1] or lazyPlugin ---@type string
-	local name = repoName:gsub(".*/", ""):gsub("[.%-]?nvim", "")
+	local name = repoName:gsub(".*/", ""):gsub("[.%-]?nvim", ""):gsub("neovim%-?", "")
 	return name
 end
 

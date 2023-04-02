@@ -21,6 +21,7 @@ return {
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
+		init = function() vim.g.navic_silence = true end, -- suppress notifications on errors
 		opts = {
 			icons = { Object = "󰆧 " },
 			separator = "  ",
