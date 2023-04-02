@@ -52,7 +52,7 @@ end
 -- if an app with bg-transparency is activated, hide all other apps
 -- if such an app is terminated, unhide them again
 TransBgAppWatcher = Aw.new(function(appName, event, appObj)
-	local transBgApp = { "neovide", "Neovide", "Obsidian", "kitty", "Alacritty", "alacritty", "WezTerm" }
+	local transBgApp = { "neovide", "Neovide", "Obsidian", "wezterm-gui" }
 	if IsProjector() or not (TableContains(transBgApp, appName)) then return end
 
 	if event == Aw.terminated then

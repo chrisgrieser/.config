@@ -1,5 +1,13 @@
 -- https://wezfurlong.org/wezterm/config/files.html#quick-start
 --------------------------------------------------------------------------------
+
+-- THEME
+local darkTheme = "AdventureTime"
+local lightTheme = "seoulbones_light"
+-- local lightTheme = "ayu_light"
+local opacity = 0.94
+
+--------------------------------------------------------------------------------
 -- UTILS
 local wezterm = require("wezterm")
 local act = wezterm.action
@@ -15,26 +23,16 @@ local isAtMother = wezterm.hostname():find("Mother") ~= nil
 
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
-local windowPos = {
-	x = 705,
-	y = 0,
-	w = 3140,
-	h = 2170,
-}
 
 -- on start, move window to the side ("pseudomaximized")
 wezterm.on("gui-startup", function(cmd)
+	local pos = { x = 705, y = 0, w = 3140, h = 2170 }
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
-	window:gui_window():set_position(windowPos.x, windowPos.y)
-	window:gui_window():set_inner_size(windowPos.w, windowPos.h)
+	window:gui_window():set_position(pos.x, pos.y)
+	window:gui_window():set_inner_size(pos.w, pos.h)
 end)
 
 --------------------------------------------------------------------------------
--- THEME
--- TODO modify theme colors https://wezfurlong.org/wezterm/config/lua/wezterm.color/get_default_colors.html
-local darkTheme = "AdventureTime"
-local lightTheme = "seoulbones_light"
--- local lightTheme = "ayu_light"
 
 ---selects the color scheme depending on Dark/Light Mode
 ---@return string name of the string to set in config.colorscheme
@@ -68,8 +66,8 @@ local function themeCycler(window, _)
 	for i = 1, #schemesToSearch, 1 do
 		if schemesToSearch[i] == currentScheme then
 			local overrides = window:get_config_overrides() or {}
-			overrides.color_scheme = schemesToSearch[i+1]
-			wezterm.log_info("Switched to: " .. schemesToSearch[i+1])
+			overrides.color_scheme = schemesToSearch[i + 1]
+			wezterm.log_info("Switched to: " .. schemesToSearch[i + 1])
 			window:set_config_overrides(overrides)
 			return
 		end
@@ -115,7 +113,7 @@ return {
 	color_scheme = autoToggleTheme(),
 	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
 	bold_brightens_ansi_colors = "BrightAndBold",
-	window_background_opacity = 0.96,
+	window_background_opacity = opacity,
 	max_fps = isAtMother and 40 or 60,
 	native_macos_fullscreen_mode = false,
 	window_padding = {
@@ -177,11 +175,17 @@ return {
 		{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
 		{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
 
-
-		{ -- cmd+, -> open this config file
-			key = ",",
+		{ -- cmd+o -> open link
+			key = "o",
 			mods = "CMD",
-			action = actFun(function() wezterm.open_with(wezterm.config_file) end),
+			action = act.QuickSelectArgs {
+				patterns = { "https?://\\S+" },
+				label = "open URL",
+				action = actFun(function(window, pane)
+					local url = window:get_selection_text_for_pane(pane)
+					wezterm.open_with(url)
+				end),
+			},
 		},
 		{ -- cmd+, -> open this config file
 			key = ",",

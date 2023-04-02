@@ -7,8 +7,8 @@ local g = vim.g
 -- - rest ignored
 -- - if only one theme, it's used for both light and dark
 local themes = {
-	-- "EdenEast/nightfox.nvim",
-	"Shatur/neovim-ayu",
+	"EdenEast/nightfox.nvim",
+	-- "Shatur/neovim-ayu",
 	-- "sainnhe/everforest",
 	-- "rebelot/kanagawa.nvim",
 	{ "uloco/bluloco.nvim", dependencies = "rktjmp/lush.nvim" },
@@ -20,7 +20,7 @@ local themes = {
 }
 
 g.darkTransparency = 0.91
-g.lightTransparency = 0.95
+g.lightTransparency = 0.92
 
 --------------------------------------------------------------------------------
 
