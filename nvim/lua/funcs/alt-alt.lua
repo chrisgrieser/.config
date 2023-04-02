@@ -99,7 +99,13 @@ function M.altFileStatusline()
 		icon = "#"
 		name = altFile
 	end
-	if #name > maxLen then name = "…" .. name:sub(1, maxLen) end
+
+	-- truncate
+	local nameNoExt = name:gsub("%.%w+$", "")
+	if #nameNoExt > maxLen then
+		local ext = name:match("%.%w+$")
+		name = nameNoExt:sub(1, maxLen) .. "…" .. ext
+	end
 	return icon .. " " .. name
 end
 
