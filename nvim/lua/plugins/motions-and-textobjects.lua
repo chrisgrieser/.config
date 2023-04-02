@@ -9,10 +9,6 @@ return {
 		keys = ":",
 		config = true,
 	},
-	{ -- indent-based motions
-		"jeetsukumaran/vim-indentwise",
-		event = "BufReadPost",
-	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
 		lazy = true, -- loaded by keybinds

@@ -33,7 +33,9 @@ rules:
           - { key_code: right_shift, modifiers: [control, option] }
         conditions:
           - type: frontmost_application_unless
-            bundle_identifiers: [^mindustry\.mac$]
+            file_path:
+              - "[Mm]industry"
+              - "[Nn]eovide" # quicker completion selection
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪ Open Locations"
     manipulators:

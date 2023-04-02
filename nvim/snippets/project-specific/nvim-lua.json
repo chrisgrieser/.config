@@ -48,11 +48,23 @@
 	},
 	"autocmd": {
 		"prefix": "Autocmd (short)",
-		"body": ["Autocmd(\"${1:event}\", {", "\tcallback = function()", "\t\t$0", "\tend,", "})"]
+		"body": [
+			"Autocmd(\"${1|BufReadPost|VimEnter|UiEnter}\", {",
+			"\tcallback = function()",
+			"\t\t$0",
+			"\tend,",
+			"})"
+		]
 	},
 	"autocmd (unabbr)": {
 		"prefix": "Autocmd (unabbr)",
-		"body": ["vim.api.nvim_create_autocmd(\"${1:event}\", {", "\tcallback = function()", "\t\t$0", "\tend,", "})"]
+		"body": [
+			"vim.api.nvim_create_autocmd(\"${1:event}\", {",
+			"\tcallback = function()",
+			"\t\t$0",
+			"\tend,",
+			"})"
+		]
 	},
 	"autocmd (FileType)": {
 		"prefix": "Autocmd (FileType)",
