@@ -28,7 +28,7 @@
 	},
 	"enum": {
 		"prefix": "enum",
-		"body": "\"value1\"|\"value2\"",
+		"body": "\"${1:value1}\"|\"${2:value2}\"",
 		"description": "Luadoc Custom Parameter Type for a function. https://github.com/LuaLS/lua-language-server/wiki/Annotations#param"
 	},
 	"ignore start/end (stylua)": {
