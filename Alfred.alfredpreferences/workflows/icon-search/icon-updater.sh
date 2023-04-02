@@ -27,6 +27,9 @@ case $APP in
 "AppCleaner")
 	cp -f "$CUSTOM_ICON_FOLDER/AppCleaner.icns" "$APP.app/Contents/Resources/$APP.icns"
 	;;
+"Twitter")
+	cp -f "$CUSTOM_ICON_FOLDER/Twitter 2.icns" "$APP.app/Contents/Resources/ProductionAppIcon.icns"
+	;;
 "Obsidian")
 	cp -f "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" "$APP.app/Contents/Resources/icon.icns"
 	# cp -f "$CUSTOM_ICON_FOLDER/Obsidian Space.icns" "$APP.app/Contents/Resources/icon.icns"
