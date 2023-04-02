@@ -542,7 +542,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>actions-on-current-note.js</string>
+				<string>actions-on-sidenote.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>

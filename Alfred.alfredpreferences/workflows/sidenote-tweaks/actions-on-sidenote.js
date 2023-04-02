@@ -72,8 +72,9 @@ function run(argv) {
 		noteObj.delete();
 	}
 
-	// close sidenotes if it's the current one
-	if (id === "current") {
+	// close sidenotes if it's the current one 
+	// (except opening an URL since page already gets opened then)
+	if (id === "current" && !doOpenUrl) {
 		// apparently there is JXA API for it, therefore done via keystrokes since it
 		// is ensured that SideNotes is the most frontmost app
 		delay(0.05); /* eslint-disable-line no-magic-numbers */
