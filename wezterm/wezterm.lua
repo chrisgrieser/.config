@@ -34,6 +34,7 @@ end)
 -- TODO modify theme colors https://wezfurlong.org/wezterm/config/lua/wezterm.color/get_default_colors.html
 local darkTheme = "AdventureTime"
 local lightTheme = "seoulbones_light"
+-- local lightTheme = "ayu_light"
 
 ---selects the color scheme depending on Dark/Light Mode
 ---@return string name of the string to set in config.colorscheme
@@ -176,6 +177,12 @@ return {
 		{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
 		{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
 
+
+		{ -- cmd+, -> open this config file
+			key = ",",
+			mods = "CMD",
+			action = actFun(function() wezterm.open_with(wezterm.config_file) end),
+		},
 		{ -- cmd+, -> open this config file
 			key = ",",
 			mods = "CMD",
