@@ -71,6 +71,10 @@ local source_icons = {
 
 --------------------------------------------------------------------------------
 
+
+
+--------------------------------------------------------------------------------
+
 local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
@@ -121,7 +125,7 @@ local function cmpconfig()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif require("neogen").locally_jumpable() then
+				elseif require("neogen").jumpable() then
 					require("neogen").jump_next()
 				elseif require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
@@ -132,7 +136,7 @@ local function cmpconfig()
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item()
-				elseif require("neogen").locally_jumpable(true) then
+				elseif require("neogen").jumpable(true) then
 					require("neogen").jump_prev()
 				elseif require("luasnip").locally_jumpable(-1) then
 					require("luasnip").jump(-1)
@@ -142,7 +146,7 @@ local function cmpconfig()
 			end, { "i", "s" }),
 			-- Force jumping
 			["<D-j>"] = cmp.mapping(function(_)
-				if require("neogen").locally_jumpable() then
+				if require("neogen").jumpable() then
 					require("neogen").jump_next()
 				elseif require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
@@ -182,139 +186,10 @@ local function cmpconfig()
 	--------------------------------------------------------------------------------
 	-- FILETYPE SPECIFIC SETTINGS
 
-	cmp.setup.filetype("lua", {
-		enabled = function() -- disable leading "-"
-			local lineContent = vim.fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
-			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
-		end,
-		sources = cmp.config.sources {
-			s.snip_choice,
-			s.snippets,
-			s.lsp,
-			s.codeium,
-			s.nerdfont, -- add nerdfont for config
-			s.emojis,
-			s.treesitter,
-			s.buffer,
-		},
-	})
-
-	cmp.setup.filetype("toml", {
-		sources = cmp.config.sources {
-			s.snip_choice,
-			s.snippets,
-			s.lsp,
-			s.codeium,
-			s.nerdfont, -- add nerdfont for config
-			s.emojis,
-			s.treesitter,
-			s.buffer,
-		},
-	})
-
-	-- css
-	cmp.setup.filetype("css", {
-		sources = cmp.config.sources {
-			s.snip_choice,
-			s.snippets,
-			s.lsp,
-			s.codeium,
-			s.emojis,
-			-- buffer and treesitter too slow on big files
-		},
-	})
-
-	-- markdown
-	cmp.setup.filetype("markdown", {
-		sources = cmp.config.sources {
-			s.snip_choice,
-			s.snippets,
-			s.path, -- e.g. image paths
-			s.lsp,
-			s.emojis,
-		},
-	})
-
-	cmp.setup.filetype("yaml", {
-		sources = cmp.config.sources {
-			s.lsp,
-			s.snip_choice,
-			s.snippets,
-			s.treesitter, -- treesitter works good on yaml
-			s.codeium,
-			s.emojis,
-			s.buffer,
-		},
-	})
-
-	-- ZSH
-	cmp.setup.filetype("sh", {
-		sources = cmp.config.sources {
-			s.snip_choice,
-			s.snippets,
-			s.zsh,
-			s.lsp,
-			s.path,
-			s.codeium,
-			s.treesitter,
-			s.buffer,
-			s.emojis,
-			s.nerdfont, -- used for some configs
-		},
-	})
-
-	-- bibtex
-	cmp.setup.filetype("bib", {
-		sources = cmp.config.sources {
-			s.snip_choice,
-			s.snippets,
-			s.treesitter,
-			s.buffer,
-		},
-	})
-
-	-- config files (e.g. ignore files)
-	cmp.setup.filetype("conf", {
-		sources = cmp.config.sources {
-			s.snip_choice,
-			s.snippets,
-			s.path,
-			s.codeium,
-			s.buffer,
-		},
-	})
-
-	-- plaintext
-	cmp.setup.filetype("text", {
-		sources = cmp.config.sources {
-			s.snip_choice,
-			s.snippets,
-			s.buffer,
-			s.emojis,
-			s.codeium,
-		},
-	})
-
-	--------------------------------------------------------------------------------
-	-- Command Line Completion
-
-	cmp.setup.cmdline(":", {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = cmp.config.sources({
-			s.path,
-			s.cmdline,
-		}, { -- second array only relevant when no source from the first matches
-			s.cmdline_history,
-			s.buffer, -- e.g. for IncRename
-		}),
-	})
-
-	cmp.setup.cmdline({ "/", "?" }, {
-		mapping = cmp.mapping.preset.cmdline(),
-		-- Wondering what suggestions could make sense there, other than buffer
-		sources = { s.buffer },
-	})
 end
+
+
+
 
 --------------------------------------------------------------------------------
 
@@ -353,15 +228,17 @@ return {
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
+
 			-- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
 			require("luasnip").setup {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
 				enable_autosnippets = true, -- for javascript "if ()"
+				-- highlight when at a choice node
 				ext_opts = {
 					[require("luasnip.util.types").choiceNode] = {
 						active = {
-							virt_text = { { "●", "GruvboxOrange" } },
+							virt_text = { { source_icons.luasnip_choice, "DiagnosticHint" } },
 						},
 					},
 				},
