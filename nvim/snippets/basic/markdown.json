@@ -30,6 +30,14 @@
 		"prefix": "ignore (vale)",
 		"body": "<!-- vale ${1:provider.rule} = NO -->"
 	},
+	"Markdown Codeblock": {
+		"prefix": [",,", "Codeblock"],
+		"body": [
+			"```${1:lang}",
+			"$0",
+			"```"
+		]
+	},
 	"insert table": {
 		"prefix": "table",
 		"body": [

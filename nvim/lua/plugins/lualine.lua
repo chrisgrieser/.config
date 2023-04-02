@@ -190,12 +190,6 @@ local function pathToProjectRoot()
 	return "󰝰 " .. nicerDisplay
 end
 
-local function openBufferCount()
-	local openBuffers = #(vim.fn.getbufinfo { buflisted = 1 })
-	if openBuffers <= 2 then return "" end -- don't show when only current + alt file
-	return tostring(openBuffers) .. " 󰽙"
-end
-
 --------------------------------------------------------------------------------
 
 -- nerdfont: powerline icons have the prefix 'ple-'
@@ -222,7 +216,7 @@ local lualineConfig = {
 		lualine_b = {
 			{
 				pathToProjectRoot,
-				section_separators = topSeparators,
+				section_separators = emptySeparators,
 				cond = function() return vim.fn.tabpagenr("$") == 1 end,
 			},
 		},
@@ -261,9 +255,6 @@ local lualineConfig = {
 			{
 				require("funcs.alt-alt").altFileStatusline,
 				component_separators = { right = "", left = " "},
-			},
-			{
-				openBufferCount,
 			},
 		},
 		lualine_c = {
@@ -308,6 +299,13 @@ local lualineConfig = {
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,
+	},
+	extensions = {
+		"lazy",
+		"man",
+		"toggleterm",
+		"quickfix",
+		"nvim-dap-ui",
 	},
 }
 

@@ -15,6 +15,7 @@ if IsAtMother() then ToTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
 
 RejectedFinderWindows = {
 	"^Quick Look$",
+	"^qlmanage$",
 	"^Move$",
 	"^Copy$",
 	"^Bin$",
@@ -82,6 +83,7 @@ function CheckSize(win, size)
 		"System Settings",
 		"Espanso",
 		"Transmission",
+		"CleanShot X",
 		"Twitter",
 		"Alfred",
 		"Hammerspoon",

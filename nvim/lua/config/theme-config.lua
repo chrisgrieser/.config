@@ -111,7 +111,7 @@ local function themeModifications()
 
 		-- zephyr
 	elseif theme == "zephyr" then
-		setHighlight("IncSearch", "guifg=#FFFFFF")
+setHighlight("IncSearch", "guifg=#FFFFFF")
 		linkHighlight("TabLineSel", "lualine_a_normal")
 		linkHighlight("TabLineFill", "lualine_c_normal")
 

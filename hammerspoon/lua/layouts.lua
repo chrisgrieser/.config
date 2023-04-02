@@ -48,6 +48,9 @@ local function workLayout()
 
 	-- apps
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "BetterTouchTool" }
+	for _, win in pairs(App("Finder"):allWindows()) do
+		win:close()
+	end
 	require("lua.private").closer()
 
 	local appsToOpen = { "Discord", "Mimestream", "Vivaldi" }
