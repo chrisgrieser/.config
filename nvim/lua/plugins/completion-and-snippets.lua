@@ -11,9 +11,11 @@ local s = {
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 3 },
 	cmdline = { name = "cmdline" },
+	snip_choice = { name = "luasnip_choice" },
 }
 
 local defaultSources = {
+	s.snip_choice,
 	s.snippets,
 	s.codeium,
 	s.lsp,
@@ -59,6 +61,7 @@ local source_icons = {
 	nvim_lsp = "󰒕",
 	codeium = "",
 	luasnip = "󰞘",
+	luasnip_choice = "󰝮",
 	emoji = "󰇵",
 	nerdfont = "󰇳",
 	cmdline = "",
@@ -146,7 +149,7 @@ local function cmpconfig()
 				else
 					vim.notify("No more jump forwards.")
 				end
-			end, { "i", "s" }),
+			end, { "i", "s", "n" }),
 		},
 		formatting = {
 			fields = { "kind", "abbr", "menu" }, -- order of the fields
@@ -177,6 +180,7 @@ local function cmpconfig()
 			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
 		end,
 		sources = cmp.config.sources {
+			s.snip_choice,
 			s.snippets,
 			s.lsp,
 			s.codeium,
@@ -189,6 +193,7 @@ local function cmpconfig()
 
 	cmp.setup.filetype("toml", {
 		sources = cmp.config.sources {
+			s.snip_choice,
 			s.snippets,
 			s.lsp,
 			s.codeium,
@@ -202,6 +207,7 @@ local function cmpconfig()
 	-- css
 	cmp.setup.filetype("css", {
 		sources = cmp.config.sources {
+			s.snip_choice,
 			s.snippets,
 			s.lsp,
 			s.codeium,
@@ -213,6 +219,7 @@ local function cmpconfig()
 	-- markdown
 	cmp.setup.filetype("markdown", {
 		sources = cmp.config.sources {
+			s.snip_choice,
 			s.snippets,
 			s.path, -- e.g. image paths
 			s.lsp,
@@ -223,6 +230,7 @@ local function cmpconfig()
 	cmp.setup.filetype("yaml", {
 		sources = cmp.config.sources {
 			s.lsp,
+			s.snip_choice,
 			s.snippets,
 			s.treesitter, -- treesitter works good on yaml
 			s.codeium,
@@ -234,6 +242,7 @@ local function cmpconfig()
 	-- ZSH
 	cmp.setup.filetype("sh", {
 		sources = cmp.config.sources {
+			s.snip_choice,
 			s.snippets,
 			s.zsh,
 			s.lsp,
@@ -249,6 +258,7 @@ local function cmpconfig()
 	-- bibtex
 	cmp.setup.filetype("bib", {
 		sources = cmp.config.sources {
+			s.snip_choice,
 			s.snippets,
 			s.treesitter,
 			s.buffer,
@@ -258,6 +268,8 @@ local function cmpconfig()
 	-- config files (e.g. ignore files)
 	cmp.setup.filetype("conf", {
 		sources = cmp.config.sources {
+			s.snip_choice,
+			s.snippets,
 			s.path,
 			s.codeium,
 			s.buffer,
@@ -267,6 +279,7 @@ local function cmpconfig()
 	-- plaintext
 	cmp.setup.filetype("text", {
 		sources = cmp.config.sources {
+			s.snip_choice,
 			s.snippets,
 			s.buffer,
 			s.emojis,
@@ -314,9 +327,11 @@ return {
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp",
 			"L3MON4D3/LuaSnip", -- snippet engine
+			{ "L3MON4D3/cmp-luasnip-choice", config = true }, -- extra for choice snippets
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
 	},
+
 	{ -- AI completion
 		"jcdickinson/codeium.nvim",
 		lazy = true, -- loaded by cmp

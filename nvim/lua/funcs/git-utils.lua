@@ -158,11 +158,7 @@ function M.issueSearch()
 		{ prompt = "Select Issue:", kind = "github_issue", format_item = formatter },
 		function(choice)
 			if not choice then return end
-			if vim.bo.filetype == "DressingInput" then
-				vim.cmd.normal { "i(#" .. tostring(choice.number) .. ")", bang = true }
-			else
-				fn.system("open '" .. choice.html_url .. "'")
-			end
+			fn.system("open '" .. choice.html_url .. "'")
 		end
 	)
 end

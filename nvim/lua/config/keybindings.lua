@@ -100,13 +100,8 @@ Keymap("n", "gc", "g;", { desc = "goto next change" })
 Keymap("n", "gC", "g,", { desc = "goto previous change" })
 
 -- [M]atching Bracket
--- remap needed, if using the builtin matchit plugin (currently disabled)
-Keymap("n", "m", "%", { desc = "Goto Matching Bracket" })
-
--- indentwise motions
--- https://github.com/jeetsukumaran/vim-indentwise#customization
-Keymap("n", "gj", "<Plug>(IndentWiseNextLesserIndent)", { desc = "Next Lesser Indent" })
-Keymap("n", "gk", "<Plug>(IndentWisePreviousLesserIndent)", { desc = "Previous Lesser Indent" })
+-- remap needed, if using the builtin matchit plugin 
+Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 
 --------------------------------------------------------------------------------
 

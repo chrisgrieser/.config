@@ -195,7 +195,7 @@ end
 -- nerdfont: powerline icons have the prefix 'ple-'
 -- stylua: ignore start
 local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
-local topSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
+local topSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 local emptySeparators = { left = "", right = "" }
 -- stylua: ignore end
 
@@ -216,7 +216,7 @@ local lualineConfig = {
 		lualine_b = {
 			{
 				pathToProjectRoot,
-				section_separators = emptySeparators,
+				section_separators = topSeparators,
 				cond = function() return vim.fn.tabpagenr("$") == 1 end,
 			},
 		},
