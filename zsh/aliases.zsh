@@ -34,7 +34,14 @@ alias curl="curl -sL" # silent & redirect
 # misc
 alias prose='ssh nanotipsforvim@prose.sh'
 
-alias pip3\ update="pip3 install --upgrade"
+# effectively alias `pip3 update` to `pip3 install --upgrade`
+function pip3() {
+	if [[ "$1" == "update" ]]; then
+		shift
+		set -- install --upgrade "$@"
+	fi
+	command pip3 "$@"
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 

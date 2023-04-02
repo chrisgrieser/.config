@@ -12,7 +12,6 @@ local log = wezterm.log_info
 local isAtOffice = wezterm.hostname():find("mini") ~= nil
 local isAtMother = wezterm.hostname():find("Mother") ~= nil
 
-
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
 local windowPos = {
@@ -43,19 +42,33 @@ local function autoToggleTheme()
 	return colorscheme
 end
 
+---cycle through builtin dark schemes in dark mode, and through light schemes in
+---light mode
 local function themeCycler(window, _)
-	local overrides = window:get_config_overrides() or {}
 	local allSchemes = wezterm.color.get_builtin_schemes()
+	local currentMode = wezterm.gui.get_appearance()
 	local currentScheme = window:effective_config().color_scheme
-	local found = false
+	local darkSchemes = {}
+	local lightSchemes = {}
 
-	for scheme, _ in pairs(allSchemes) do -- find the first matching key, then on next iteration set that theme
-		if scheme == currentScheme then
-			found = true
-		elseif found then
-			overrides.color_scheme = scheme
+	for name, scheme in pairs(allSchemes) do
+		local bg = wezterm.color.parse(scheme.background) -- parse into a color object
+		---@diagnostic disable-next-line: unused-local
+		local h, s, l, a = bg:hsla() -- and extract HSLA information
+		if l < 0.4 then
+			table.insert(darkSchemes, name)
+		else
+			table.insert(lightSchemes, name)
+		end
+	end
+	local schemesToSearch = currentMode:find("Dark") and darkSchemes or lightSchemes
+
+	for i = 1, #schemesToSearch, 1 do
+		if schemesToSearch[i] == currentScheme then
+			local overrides = window:get_config_overrides() or {}
+			overrides.color_scheme = schemesToSearch[i+1]
+			wezterm.log_info("Switched to: " .. schemesToSearch[i+1])
 			window:set_config_overrides(overrides)
-			log("Switched to: " .. scheme)
 			return
 		end
 	end
@@ -66,7 +79,7 @@ end
 return {
 	-- Meta
 	check_for_updates = true,
-	automatically_reload_config = true, -- causes errors too quickly
+	automatically_reload_config = false, -- causes errors too quickly
 	detect_password_input = isAtOffice,
 
 	-- Start/Close
@@ -167,6 +180,8 @@ return {
 			mods = "CMD",
 			action = actFun(function() wezterm.open_with(wezterm.config_file) end),
 		},
+		{ key = "r", mods = "CMD", action = act.ReloadConfiguration },
+
 		{ -- cmd+l -> open current location in Finder
 			key = "l",
 			mods = "CMD",
