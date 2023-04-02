@@ -103,7 +103,7 @@ local function hlTooLongCommitMsgs(on)
 		-- clear the previously setup hl again, so other Input fields are not affected
 		-- also done early, so the highlight is even deleted on aborting the input
 		vim.api.nvim_del_augroup_by_name("tooLongCommitMsg")
-		pcall(function () fn.matchdelete(vim.g.matchid) end)
+		pcall(function() fn.matchdelete(vim.g.matchid) end)
 	end
 end
 
@@ -118,11 +118,11 @@ function M.issueSearch()
 	-- TODO figure out how to make a proper http request in nvim
 	local max_results = 20
 	local rawJSON = fn.system(
-		[[curl -sL "https://api.github.com/repos/]]
-			.. repo
-			.. [[/issues?per_page=]]
-			.. max_results
-			.. [[&state=open"]]
+		string.format(
+			[[curl -sL "https://api.github.com/repos/%s/issues?per_page=%s&state=open"]],
+			repo,
+			max_results
+		)
 	)
 	local issues = vim.json.decode(rawJSON)
 
@@ -158,7 +158,11 @@ function M.issueSearch()
 		{ prompt = "Select Issue:", kind = "github_issue", format_item = formatter },
 		function(choice)
 			if not choice then return end
-			fn.system("open '" .. choice.html_url .. "'")
+			if vim.bo.filetype == "DressingInput" then
+				vim.cmd.normal { "i(#" .. tostring(choice.number) .. ")", bang = true }
+			else
+				fn.system("open '" .. choice.html_url .. "'")
+			end
 		end
 	)
 end
@@ -180,7 +184,6 @@ function M.amendNoEditPushForce()
 	fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
 end
 
----amend
 ---@param prefillMsg? string
 function M.amendAndPushForce(prefillMsg)
 	if not isInGitRepo() then return end

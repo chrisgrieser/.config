@@ -9,7 +9,7 @@ local keymappings = {
 	["<D-a>"] = "select_all",
 	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
-	["<Space>"] = function(prompt_bufnr)
+	["<D-CR>"] = function(prompt_bufnr)
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_down(prompt_bufnr)
 	end,
@@ -125,11 +125,11 @@ local function telescopeConfig()
 		extensions = {
 			file_browser = {
 				prompt_prefix = " ",
-				depth = 1, -- initial depth (1 = only current folder)
+				depth = 2, -- initial depth (1 = only current folder)
 				auto_depth = true, -- unlimited depth as soon as prompt is non-empty
 				hidden = true,
 				display_stat = false,
-				git_status = false, -- seems to sometimes be buggy
+				git_status = true, -- seems to sometimes be buggy
 				group = true,
 				hide_parent_dir = false,
 				select_buffer = true,
