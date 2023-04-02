@@ -1,9 +1,10 @@
 require("config.utils")
---------------------------------------------------------------------------------
 
 -- typescript uses same config as javascript ftplugin
 local javascriptConfig = Fn.stdpath("config") .. "/after/ftplugin/javascript.lua"
 Cmd.source(javascriptConfig)
+
+--------------------------------------------------------------------------------
 
 -- setup quickfix list for npm, see also: https://vonheikemen.github.io/devlog/tools/vim-and-the-quickfix-list/
 Bo.makeprg = "npm run build"

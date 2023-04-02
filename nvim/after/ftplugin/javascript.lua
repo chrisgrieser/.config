@@ -1,6 +1,19 @@
 require("config.utils")
 --------------------------------------------------------------------------------
 
+-- Abbreviations
+Iabbrev("cosnt const")
+
+--------------------------------------------------------------------------------
+
+-- Build
+Keymap("n", "<leader>r", function()
+	Cmd.update()
+	local output = Fn.system("")
+
+	vim.notify(output)
+end, { buffer = true, desc = " npm run build" })
+
 -- Open regex in regex101 and regexper (railroad diagram)
 Keymap("n", "g/", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
