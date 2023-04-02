@@ -150,6 +150,14 @@ local function cmpconfig()
 					vim.notify("No more jump forwards.")
 				end
 			end, { "i", "s", "n" }),
+			-- Cycle Choices
+			["<D-k>"] = cmp.mapping(function(fallback)
+				if require("luasnip").choice_active() then
+					require("luasnip").change_choice(1)
+				else
+					fallback()
+				end
+			end, { "i", "s", "n" }),
 		},
 		formatting = {
 			fields = { "kind", "abbr", "menu" }, -- order of the fields
@@ -311,7 +319,7 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- Completion Engine + Sources
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter", "CmdlineEnter" }, -- CmdlineEnter for completions there
 		config = cmpconfig,
@@ -327,19 +335,24 @@ return {
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp",
 			"L3MON4D3/LuaSnip", -- snippet engine
-			{ "L3MON4D3/cmp-luasnip-choice" }, -- extra for choice snippets
+			"L3MON4D3/cmp-luasnip-choice" , -- extra for choice snippets
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
 	},
-{
-  'doxnit/cmp-luasnip-choice',
-  lazy = true, -- loaded by cmp
-  config = function()
-    require('cmp_luasnip_choice').setup({
-        auto_open = true, -- Automatically open nvim-cmp on choice node (default: true)
-    });
-  end,
-},
+	{
+		"L3MON4D3/cmp-luasnip-choice",
+		lazy = true, -- loaded by cmp
+		config = function()
+			require("cmp_luasnip_choice").setup {
+				auto_open = true, 
+			}
+			vim.api.nvim_create_autocmd(" ", {
+				callback = function()
+					
+				end,
+			})
+		end,
+	},
 
 	{ -- AI completion
 		"jcdickinson/codeium.nvim",
@@ -355,9 +368,7 @@ return {
 		event = "InsertEnter",
 		config = function()
 			-- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
-			local ls = require("luasnip")
-
-			ls.setup {
+			require("luasnip").setup {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
 				enable_autosnippets = true, -- for javascript "if ()"
