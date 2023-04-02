@@ -20,7 +20,7 @@
 		"body": [
 			"{ -- ${2:description}",
 			"\t\"${1:github_repo}\",",
-			"\t${3:event = \"VeryLazy\"},",
+			"\t${3|event = \"VeryLazy\"|event = \"LspAttach\"|lazy = true|cmd = \"\"|},",
 			"\topts = {",
 			"\t\t$0",
 			"\t},",
@@ -49,7 +49,7 @@
 	"autocmd": {
 		"prefix": "Autocmd (short)",
 		"body": [
-			"Autocmd(\"${1|BufReadPost|VimEnter|UiEnter}\", {",
+			"Autocmd(\"${1|BufReadPost|VimEnter|UIEnter|BufReadPre|VeryLazy|LspAttach|WinEnter|FocusGained|FocusLost|WinLeave|BufLeave|BufWritePre|BufWritePost|}\", {",
 			"\tcallback = function()",
 			"\t\t$0",
 			"\tend,",

@@ -99,7 +99,7 @@ function M.altFileStatusline()
 		icon = "#"
 		name = altFile
 	end
-	if #name > maxLen then name = "…" .. name:sub(#name - maxLen, maxLen) end
+	if #name > maxLen then name = "…" .. name:sub(1, maxLen) end
 	return icon .. " " .. name
 end
 
@@ -112,7 +112,7 @@ function M.altBufferWindow()
 	elseif altOldfile() then
 		cmd.edit(altOldfile())
 	else
-		vim.notify("Nothing to switch to.", LogWarn)
+		vim.notify("Nothing to switch to.", vim.log.levels.WARN)
 	end
 	if require("satellite") then cmd.SatelliteRefresh() end
 end
@@ -132,7 +132,7 @@ function M.betterClose()
 	-- close buffers
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
 	if #openBuffers == 1 then
-		vim.notify("Only one buffer open.", LogWarn)
+		vim.notify("Only one buffer open.", vim.log.levels.WARN)
 		return
 	end
 

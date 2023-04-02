@@ -115,6 +115,8 @@ return {
 				win_options = {
 					sidescrolloff = 0,
 					winblend = 0, -- weird shining through
+					list = true,
+					listchars = "precedes:…,extends:…",
 				},
 			},
 			select = {
