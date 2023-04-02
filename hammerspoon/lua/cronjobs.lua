@@ -38,6 +38,7 @@ JourfixeTimer = hs.timer
 	end)
 	:start()
 
+
 -- Backup Vault, Dotfiles, Bookmarks, and browser extension list
 -- Reload Hammerspoon Annotations (Emmylua Spoon)
 -- Check for low battery of connected bluetooth devices
