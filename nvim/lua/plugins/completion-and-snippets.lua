@@ -158,6 +158,13 @@ local function cmpconfig()
 					fallback()
 				end
 			end, { "i", "s", "n" }),
+			["<D-S-k>"] = cmp.mapping(function(fallback)
+				if require("luasnip").choice_active() then
+					require("luasnip").change_choice(-1)
+				else
+					fallback()
+				end
+			end, { "i", "s", "n" }),
 		},
 		formatting = {
 			fields = { "kind", "abbr", "menu" }, -- order of the fields

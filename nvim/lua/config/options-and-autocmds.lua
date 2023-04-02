@@ -87,7 +87,7 @@ opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use the
 
 -- Timeouts
 opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
-opt.timeoutlen = 600 -- also affects duration until which-key is shown
+opt.timeoutlen = 900 -- also affects duration until which-key is shown
 
 --------------------------------------------------------------------------------
 -- PATH (for `gf`)
