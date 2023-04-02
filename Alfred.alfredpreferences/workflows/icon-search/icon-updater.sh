@@ -9,23 +9,25 @@ PWA_FOLDER="$HOME/Applications/Chrome Apps.localized" # INFO "Vivaldi Apps" is i
 #───────────────────────────────────────────────────────────────────────────────
 
 if ! command -v iconsur &>/dev/null; then echo -n "iconsur not installed." && exit 1; fi
-
 cd "/Applications/" || exit 1
-
 APP=$(basename "$*" .app)
 NONE_FOUND=0
 INFO_WINDOW=0
 
-case $APP in
+#───────────────────────────────────────────────────────────────────────────────
 
+case $APP in
 "Neovide")
-	cp -f "$CUSTOM_ICON_FOLDER/Neovim-dark.icns" "$APP.app/Contents/Resources/Neovide.icns"
+	cp -f "$CUSTOM_ICON_FOLDER/Neovide 1.icns" "$APP.app/Contents/Resources/Neovide.icns"
 	;;
 "Steam")
 	iconsur set "$APP.app"
 	;;
 "AppCleaner")
 	cp -f "$CUSTOM_ICON_FOLDER/AppCleaner.icns" "$APP.app/Contents/Resources/$APP.icns"
+	;;
+"Slack")
+	cp -f "$CUSTOM_ICON_FOLDER/Slack 3.icns" "$APP.app/Contents/Resources/electron.icns"
 	;;
 "Obsidian")
 	cp -f "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" "$APP.app/Contents/Resources/icon.icns"
@@ -36,7 +38,6 @@ case $APP in
 "Vivaldi")
 	cp -f "$CUSTOM_ICON_FOLDER/Vivaldi.icns" "$APP.app/Contents/Resources/app.icns"
 	;;
-
 "Alfred Preferences")
 	osascript -e "tell application \"Finder\"
 			open information window of (\"Alfred 5.app/Contents/Preferences/$APP.app\" as POSIX file as alias)
@@ -74,13 +75,9 @@ case $APP in
 			open information window of (\"/Applications/$APP.app\" as POSIX file as alias)
 			activate
 		end tell
-		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Twitter 2.icns\""
+		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Twitter.icns\""
 	INFO_WINDOW=1
 	;;
-
-#────────────────────────────────────────────────────────────────────────────
-#────────────────────────────────────────────────────────────────────────────
-
 "YouTube")
 	cp -f "$CUSTOM_ICON_FOLDER/$APP.icns" "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
 	;;
@@ -101,31 +98,33 @@ esac
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# No icon found
 if [[ $NONE_FOUND == 1 ]]; then
 	echo -n "No icon set up for $APP."
 	return 1
 fi
 
+# Info Window Icon
 if [[ $INFO_WINDOW == 1 ]]; then
 	sleep 0.15
 	osascript -e 'tell application "System Events" to keystroke "v" using {command down}'
 	sleep 0.15
-	exit 0 # needs to manually paste and then restart
+	return 0 # need to manually paste and then restart
 fi
 
-[[ "$APP" != "PWAs" ]] && touch "$APP.app"
-killall "Dock" # INFO pgrep-ing for the Dock does not work, since there is always a process called that?
-
-#───────────────────────────────────────────────────────────────────────────────
-
+# Restart
 if [[ "$APP" == "PWAs" ]]; then
+	# All PWA update
+	killall "Dock" # INFO pgrep-ing for the Dock does not work, since there is always a process called that?
 	echo -n "All PWAs"
 	open "$PWA_FOLDER"
 	exit 0
+else
+	touch "$APP.app"
+	killall "Dock"
+	killall "$APP"
+	while pgrep -q "$APP"; do sleep 0.1; done
+	sleep 0.1
+	open -a "$APP"
+	echo -n "$APP" # pass for notification
 fi
-
-killall "$APP"
-while pgrep -q "$APP"; do sleep 0.1; done
-sleep 0.1
-open -a "$APP"
-echo -n "$APP" # pass for notification
