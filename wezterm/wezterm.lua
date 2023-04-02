@@ -111,6 +111,7 @@ return {
 
 	-- Appearance
 	color_scheme = autoToggleTheme(),
+	front_end = "WebGpu", -- better rendering on newer Macs
 	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
 	bold_brightens_ansi_colors = "BrightAndBold",
 	window_background_opacity = opacity,
@@ -175,12 +176,12 @@ return {
 		{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
 		{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
 
-		{ -- cmd+o -> open link
+		{ -- cmd+o -> open link (like f in vimium)
 			key = "o",
 			mods = "CMD",
 			action = act.QuickSelectArgs {
 				patterns = { "https?://\\S+" },
-				label = "open URL",
+				label = "Open URL",
 				action = actFun(function(window, pane)
 					local url = window:get_selection_text_for_pane(pane)
 					wezterm.open_with(url)
