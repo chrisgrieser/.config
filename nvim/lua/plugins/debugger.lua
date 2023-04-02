@@ -129,7 +129,6 @@ local function dapLualine()
 	})
 
 	require("lualine").setup {
-		extensions = { "nvim-dap-ui" },
 		tabline = {
 			lualine_y = lualineY,
 			lualine_z = lualineZ,
