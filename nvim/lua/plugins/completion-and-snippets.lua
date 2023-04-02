@@ -71,10 +71,6 @@ local source_icons = {
 
 --------------------------------------------------------------------------------
 
-
-
---------------------------------------------------------------------------------
-
 local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
@@ -183,13 +179,144 @@ local function cmpconfig()
 		},
 		sources = cmp.config.sources(defaultSources),
 	}
-	--------------------------------------------------------------------------------
-	-- FILETYPE SPECIFIC SETTINGS
-
 end
 
+--------------------------------------------------------------------------------
 
+local function filetypeCompletionConfig()
+	local cmp = require("cmp")
 
+	cmp.setup.filetype("lua", {
+		enabled = function() -- disable leading "-"
+			local lineContent = vim.fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
+			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
+		end,
+		sources = cmp.config.sources {
+			s.snip_choice,
+			s.snippets,
+			s.lsp,
+			s.codeium,
+			s.nerdfont, -- add nerdfont for config
+			s.emojis,
+			s.treesitter,
+			s.buffer,
+		},
+	})
+
+	cmp.setup.filetype("toml", {
+		sources = cmp.config.sources {
+			s.snip_choice,
+			s.snippets,
+			s.lsp,
+			s.codeium,
+			s.nerdfont, -- add nerdfont for config
+			s.emojis,
+			s.treesitter,
+			s.buffer,
+		},
+	})
+
+	-- css
+	cmp.setup.filetype("css", {
+		sources = cmp.config.sources {
+			s.snip_choice,
+			s.snippets,
+			s.lsp,
+			s.codeium,
+			s.emojis,
+			-- buffer and treesitter too slow on big files
+		},
+	})
+
+	-- markdown
+	cmp.setup.filetype("markdown", {
+		sources = cmp.config.sources {
+			s.snip_choice,
+			s.snippets,
+			s.path, -- e.g. image paths
+			s.lsp,
+			s.emojis,
+		},
+	})
+
+	cmp.setup.filetype("yaml", {
+		sources = cmp.config.sources {
+			s.snip_choice,
+			s.snippets,
+			s.treesitter, -- treesitter works good on yaml
+			s.lsp,
+			s.codeium,
+			s.emojis,
+			s.buffer,
+		},
+	})
+
+	-- ZSH
+	cmp.setup.filetype("sh", {
+		sources = cmp.config.sources {
+			s.snip_choice,
+			s.snippets,
+			s.zsh,
+			s.lsp,
+			s.path,
+			s.codeium,
+			s.treesitter,
+			s.buffer,
+			s.emojis,
+			s.nerdfont, -- used for some configs
+		},
+	})
+
+	-- bibtex
+	cmp.setup.filetype("bib", {
+		sources = cmp.config.sources {
+			s.snip_choice,
+			s.snippets,
+			s.treesitter,
+			s.buffer,
+		},
+	})
+
+	-- config files (e.g. ignore files)
+	cmp.setup.filetype("conf", {
+		sources = cmp.config.sources {
+			s.snip_choice,
+			s.snippets,
+			s.path,
+			s.codeium,
+			s.buffer,
+		},
+	})
+
+	-- plaintext
+	cmp.setup.filetype("text", {
+		sources = cmp.config.sources {
+			s.snip_choice,
+			s.snippets,
+			s.buffer,
+			s.emojis,
+			s.codeium,
+		},
+	})
+
+	-- Command Line Completion
+	cmp.setup.cmdline(":", {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({
+			s.path,
+			s.cmdline,
+		}, { -- second array only relevant when no source from the first matches
+			s.cmdline_history,
+			s.buffer, -- e.g. for IncRename
+		}),
+	})
+
+	cmp.setup.cmdline({ "/", "?" }, {
+		mapping = cmp.mapping.preset.cmdline(),
+		-- Wondering what suggestions could make sense there, other than buffer
+		sources = { s.buffer },
+	})
+end
 
 --------------------------------------------------------------------------------
 
@@ -197,7 +324,10 @@ return {
 	{ -- Completion Engine + Sources
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter", "CmdlineEnter" }, -- CmdlineEnter for completions there
-		config = cmpconfig,
+		config = function()
+			cmpconfig()
+			filetypeCompletionConfig()
+		end,
 		dependencies = {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
@@ -228,7 +358,6 @@ return {
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
-
 			-- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
 			require("luasnip").setup {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
