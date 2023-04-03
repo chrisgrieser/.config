@@ -47,7 +47,8 @@ app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH; brew le
 
 // MAS apps
 try {
-	app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; mas list")
+	// using mdfind to not have to rely on `mas` for this
+	app.doShellScript("mdfind kMDItemAppStoreHasReceipt=1 | sed 's/.*\\///' | sort -df")
 		.split("\r")
 		.forEach(item => {
 			item = item.replace(/\d+ +([\w ]+?) +\(.*/, "$1").trim();
