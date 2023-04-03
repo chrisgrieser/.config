@@ -216,11 +216,11 @@ Autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- RE[F]ACTORING
 
-Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "󱗘 :s cword" })
-Keymap("n", "<leader>fk", [[:%s/\(.*\)/\1/g]] .. ("<Left>"):rep(11), { desc = "󱗘 :s kirby" })
-Keymap("x", "<leader>fk", [[:s/\(.*\)/\1/g]] .. ("<Left>"):rep(11), { desc = "󱗘 :s kirby" })
-Keymap("n", "<leader>ff", ":%s///g<Left><Left><Left>", { desc = "󱗘 :substitute" })
-Keymap("x", "<leader>ff", ":s///g<Left><Left><Left>", { desc = "󱗘 :substitute in selection" })
+Keymap("n", "<leader>fc", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "󱗘 :smagic cword" })
+Keymap("n", "<leader>fk", [[:%sm/(.*)/\1/g]] .. ("<Left>"):rep(11), { desc = "󱗘 :smagic kirby" })
+Keymap("x", "<leader>fk", [[:sm/(.*)/\1/g]] .. ("<Left>"):rep(11), { desc = "󱗘 :smagic kirby" })
+Keymap("n", "<leader>ff", ":%sm///g<Left><Left><Left>", { desc = "󱗘 :smagic" })
+Keymap("x", "<leader>ff", ":sm///g<Left><Left><Left>", { desc = "󱗘 :smagic in sel" })
 
 Keymap("n", "<leader>f<Tab>", function()
 	Bo.expandtab = false
@@ -229,13 +229,12 @@ Keymap("n", "<leader>f<Tab>", function()
 	vim.notify("Now using: Tabs ↹ ")
 end, { desc = "↹ Use Tabs" })
 
-Keymap("n", "<leader>f<Spaces>", function()
+Keymap("n", "<leader>f<Space>", function()
 	Bo.expandtab = true
 	Cmd.retab { bang = true }
 	vim.notify("Now using: Spaces 󱁐")
 end, { desc = "󱁐 Use Spaces" })
 
-Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "󱗘 :s cword" })
 Keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "󱗘 :g - normal" })
 Keymap("x", "<leader>fn", ":normal ", { desc = "󱗘 :normal" })
 Keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g – delete" })
@@ -510,10 +509,6 @@ Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code A
 
 -- copy breadcrumbs (nvim navic)
 Keymap("n", "<D-b>", function()
-	if not require("nvim-navic").is_available() then
-		vim.notify("Navic is not available.", LogWarn)
-		return
-	end
 	local rawdata = require("nvim-navic").get_data()
 	if not rawdata then
 		vim.notify("No Breadcrumbs available", LogWarn)
@@ -574,6 +569,7 @@ Keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = "󰊢 Commit (Neogit)" 
 
 -- Gitsigns
 Keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
+Keymap("n", "<leader>gA", ":Gitsigns stage_buffer<CR>", { desc = "󰊢 Add Buffer" })
 Keymap("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "󰊢 Preview Hunk" })
 Keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
 Keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
@@ -597,7 +593,7 @@ Keymap("n", "<leader>gM", function () require("funcs.git-utils").amendAndPushFor
 Keymap("n", "<leader>gd", function()
 	vim.ui.input({ prompt = "Git Pickaxe (empty = full history)" }, function(query)
 		if not query then return end
-		if query ~= "" then query = string.format(" -G'%s'", query) end
+		if query ~= "" then query = (" -G'%s'"):format(query) end
 		Cmd("DiffviewFileHistory %" .. query)
 		Cmd.wincmd("w") -- go directly to file window
 		Cmd.wincmd("|") -- maximize it
