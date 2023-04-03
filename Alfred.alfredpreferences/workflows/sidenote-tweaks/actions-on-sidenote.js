@@ -86,6 +86,7 @@ function run(argv) {
 
 	// returns are used for the notification
 	if (doDelete && (doOpenUrl || id !== "current")) return "🗑 Note Deleted";
+	else if (doCopy && doDelete) return "✅ Copied & Deleted";
 	else if (doCopy) return "✅ Copied";
 	return ""; // don't create a notification
 }

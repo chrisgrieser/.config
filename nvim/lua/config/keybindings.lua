@@ -217,8 +217,8 @@ Autocmd("FileType", {
 -- RE[F]ACTORING
 
 Keymap("n", "<leader>fc", [[:%s/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "󱗘 :s cword" })
-Keymap("n", "<leader>fk", [[:%s/\(.*\)/\1/g]] .. ("<Left>"):rep(10), { desc = "󱗘 :s kirby" })
-Keymap("x", "<leader>fk", [[:s/\(.*\)/\1/g]] .. ("<Left>"):rep(10), { desc = "󱗘 :s kirby" })
+Keymap("n", "<leader>fk", [[:%s/\(.*\)/\1/g]] .. ("<Left>"):rep(11), { desc = "󱗘 :s kirby" })
+Keymap("x", "<leader>fk", [[:s/\(.*\)/\1/g]] .. ("<Left>"):rep(11), { desc = "󱗘 :s kirby" })
 Keymap("n", "<leader>ff", ":%s///g<Left><Left><Left>", { desc = "󱗘 :substitute" })
 Keymap("x", "<leader>ff", ":s///g<Left><Left><Left>", { desc = "󱗘 :substitute in selection" })
 
@@ -677,10 +677,7 @@ Keymap("x", "5", function()
 	local fts = { "applescript", "bash", "vim" }
 	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 		if not ft then return end
-		-- leave visual mode
-		local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
-		vim.api.nvim_feedkeys(escKey, "nx", false)
-
+		LeaveVisualMode()
 		Cmd("'<,'>InlineEdit " .. ft)
 		Keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
 	end)

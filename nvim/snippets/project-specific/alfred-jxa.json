@@ -6,15 +6,24 @@
 	"matcher (CamelCase)": {
 		"prefix": "matcher (CamelCase)",
 		"body": [
-			function alfredMatcher(str) {
-				const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-				const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-				return [clean, camelCaseSeperated, str].join(" ") + " ";
-			}
+			"function alfredMatcher(str) {",
+				"const clean = str.replace(/[-()_.:#/\\\\;,[\\]]/g, \" \");",
+				"const camelCaseSeperated = str.replace(/([A-Z])/g, \" \\$1\");",
+				"return [clean, camelCaseSeperated, str].join(\" \") + \" \";",
+			"}"
 		],
-		"description": "desc"
+		"description": "Make Alfred Match CamelCase Results. https://www.alfredapp.com/help/workflows/inputs/script-filter/json/"
 	},
+	"bla": {
+		"body": [
 
+"function alfredMatcher(str) {",
+	"const clean = str.replace(/[-()_.:#/\\\\;,[\\]]/g, \" \");",
+	"const camelCaseSeperated = str.replace(/([A-Z])/g, \" $1\");",
+	"return [clean, camelCaseSeperated, str].join(\" \") + \" \";",
+"}"
+		]
+	},
 	"Get Alfred Env": {
 		"prefix": "Get Alfred Env",
 		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\");"

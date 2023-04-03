@@ -1,4 +1,4 @@
-Bo = vim.bo 
+Bo = vim.bo
 Fn = vim.fn
 Cmd = vim.cmd
 Autocmd = vim.api.nvim_create_autocmd
@@ -19,6 +19,11 @@ LogInfo = vim.log.levels.INFO
 ---@param cmdStr string
 function Normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
+function LeaveVisualMode()
+	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
+	vim.api.nvim_feedkeys(escKey, "nx", false)
+end
+
 --------------------------------------------------------------------------------
 
 ---reads the full file
@@ -27,7 +32,7 @@ function Normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 ---@return string|nil file content or nil when not reading no successful
 function ReadFile(filePath)
 	local file, err = io.open(filePath, "r")
-	if not file then 
+	if not file then
 		vim.notify_once("Could not read: " .. err, vim.log.levels.ERROR)
 		return
 	end
@@ -46,7 +51,7 @@ function AppendToFile(str, filePath)
 		vim.notify("Could not append: " .. err, vim.log.levels.ERROR)
 		return false
 	end
-	file:write(str.. "\n")
+	file:write(str .. "\n")
 	file:close()
 	return true
 end
