@@ -40,6 +40,22 @@ return {
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
+	{ -- AI Support
+		".cm-hmd-barelink ",
+		event = "VeryLazy",
+		opts = {
+			
+		},
+	},	
+	{ -- Jump out of scope in insert mode
+		"abecodes/tabout.nvim",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = "InsertEnter",
+		opts = {
+			act_as_shift_tab = true,
+			ignore_beginning = true,
+		},
+	},
 	{ -- swapping of sibling nodes (works with more nodes than Iswap, but has no hint mode)
 		"Wansmer/sibling-swap.nvim",
 		lazy = true, -- loaded by keymaps
