@@ -201,7 +201,7 @@ function IsFront(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	local oneIsFrontmost = false
 	for _, name in pairs(appNames) do
-		if App(name):isFrontmost() then oneIsFrontmost = true end
+		if App(name) and App(name):isFrontmost() then oneIsFrontmost = true end
 	end
 	return oneIsFrontmost
 end
