@@ -106,7 +106,7 @@ local function clock()
 	if vim.opt.columns:get() < 110 then return "" end -- only show the clock when it covers the menubar clock
 	local time = tostring(os.date()):sub(12, 16)
 	if os.time() % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
-	return time
+	return "󰅐 " .. time
 end
 
 --------------------------------------------------------------------------------
@@ -178,7 +178,7 @@ local function navicBreadcrumbs()
 	return require("nvim-navic").get_location()
 end
 
--- simple barbecue,nvim replacement
+-- simple barbecue.nvim replacement
 local function pathToProjectRoot()
 	local maxLen = 30
 	if not require("nvim-navic").is_available() then return "" end
@@ -196,7 +196,6 @@ end
 -- stylua: ignore start
 local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
 local topSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
-local emptySeparators = { left = "", right = "" }
 -- stylua: ignore end
 
 local lualineConfig = {
@@ -204,12 +203,11 @@ local lualineConfig = {
 	-- should always include the tab element
 	tabline = {
 		lualine_a = {
-			{ clock, section_separators = emptySeparators },
+			{ clock },
 			{
 				"tabs",
 				mode = 2,
 				max_length = vim.o.columns * 0.7,
-				section_separators = emptySeparators,
 				cond = function() return vim.fn.tabpagenr("$") > 1 end,
 			},
 		},

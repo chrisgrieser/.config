@@ -50,7 +50,7 @@ end, { desc = "Clear Notifications" })
 
 --------------------------------------------------------------------------------
 -- MOTIONS
-Keymap({ "n", "o", "x" }, "w", '<cmd>lua require("spider").motion("w")<CR>', { desc = "Spider-w" })
+Keymap({ "n", "o", "x" }, "w", "E")
 Keymap({ "n", "o", "x" }, "e", '<cmd>lua require("spider").motion("e")<CR>', { desc = "Spider-e" })
 Keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { desc = "Spider-b" })
 
@@ -100,7 +100,7 @@ Keymap("n", "gc", "g;", { desc = "goto next change" })
 Keymap("n", "gC", "g,", { desc = "goto previous change" })
 
 -- [M]atching Bracket
--- remap needed, if using the builtin matchit plugin 
+-- remap needed, if using the builtin matchit plugin
 Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 
 --------------------------------------------------------------------------------
@@ -137,10 +137,10 @@ Keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quic
 Keymap("n", "<leader>q", function() require("replacer").run { rename_files = false } end, { desc = " Replacer.nvim" })
 
 -- COMMENTS & ANNOTATIONS
-Keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = "Horizontal Divider" })
-Keymap("n", "qd", "Rkqqj", { desc = "Duplicate Line as Comment", remap = true })
+Keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = " Horizontal Divider" })
+Keymap("n", "qd", "Rkqqj", { desc = " Duplicate Line as Comment", remap = true })
 -- stylua: ignore
-Keymap("n", "qf", function() require("neogen").generate({}) end, { desc = "Neogen: Comment Function" })
+Keymap("n", "qf", function() require("neogen").generate({}) end, { desc = " Comment Function" })
 
 -- WHITESPACE CONTROL
 Keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
@@ -207,8 +207,8 @@ Keymap("n", "Ü", function () require('sibling-swap').swap_with_left() end, { de
 Autocmd("FileType", {
 	pattern = {"markdown", "text", "gitcommit"},
 	callback = function()
-		Keymap("n", "ü", '"zdawel"zph', { desc = "󰑃 Move Word Right", buffer = true })
-		Keymap("n", "Ü", '"zdawbh"zph', { desc = "󰑁 Move Word Left", buffer = true })
+		Keymap("n", "ü", '"zdawel"zph', { desc = "➡️ Move Word Right", buffer = true })
+		Keymap("n", "Ü", '"zdawbh"zph', { desc = "⬅️ Move Word Left", buffer = true })
 	end,
 })
 -- stylua: ignore end
@@ -216,11 +216,17 @@ Autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- RE[F]ACTORING
 
-Keymap("n", "<leader>fc", [[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]], { desc = "󱗘 :smagic cword" })
+Keymap(
+	"n",
+	"<leader>fc",
+	[[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]],
+	{ desc = "󱗘 :smagic cword" }
+)
 Keymap("n", "<leader>fk", [[:%sm/(.*)/\1/g]] .. ("<Left>"):rep(11), { desc = "󱗘 :smagic kirby" })
 Keymap("x", "<leader>fk", [[:sm/(.*)/\1/g]] .. ("<Left>"):rep(11), { desc = "󱗘 :smagic kirby" })
 Keymap("n", "<leader>ff", ":%sm///g<Left><Left><Left>", { desc = "󱗘 :smagic" })
 Keymap("x", "<leader>ff", ":sm///g<Left><Left><Left>", { desc = "󱗘 :smagic in sel" })
+Keymap("x", "<leader>f<Down>", ":sort", { desc = "󱗘 :sort" })
 
 Keymap("n", "<leader>f<Tab>", function()
 	Bo.expandtab = false
@@ -235,16 +241,16 @@ Keymap("n", "<leader>f<Space>", function()
 	vim.notify("Now using: Spaces 󱁐")
 end, { desc = "󱁐 Use Spaces" })
 
-Keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "󱗘 :g - normal" })
+Keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "󱗘 :g normal" })
 Keymap("x", "<leader>fn", ":normal ", { desc = "󱗘 :normal" })
-Keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g – delete" })
+Keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g delete" })
 
-Keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "󱗘 SSR" })
+Keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "󱗘 Structural S & R" })
 
 -- Refactoring.nvim
 -- stylua: ignore start
 Keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
-Keymap({ "n", "x" }, "<leader>e", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
+Keymap({ "n", "x" }, "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
 Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("Extract Function") end, { desc = "󱗘 Extract Func" })
 -- stylua: ignore end
 
@@ -278,10 +284,6 @@ Keymap("n", "<leader>lt", function() require("funcs.quick-log").timelog() end, {
 Keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end, { desc = "  remove log" })
 Keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, { desc = " debugger" })
 -- stylua: ignore end
-
--- Sort & highlight duplicate lines
--- stylua: ignore
-Keymap( { "n", "x" }, "<leader>S", ":sort<CR>", { desc = "󱗘 Sort" })
 
 -- Replace Mode
 -- needed, since `R` mapped to duplicate line
@@ -382,7 +384,7 @@ end, { desc = "󰛢 Menu" })
 -- stylua: ignore end
 
 -- P[a]th gf needs remapping, since `gf` is used for LSP references
-Keymap("n", "ga", "gf", { desc = "Follow Path" })
+Keymap("n", "ga", "gf", { desc = "Goto Path" })
 
 ------------------------------------------------------------------------------
 
@@ -396,7 +398,7 @@ Keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as 
 Keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
 
 -- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
--- are overridden inside snippet for snipeptjumping
+-- are overridden inside snippet for snippetjumping
 vim.g.VM_maps = {
 	["Find Under"] = "<D-j>", -- select word under cursor & enter visual-multi (normal) / add next occurrence (visual-multi)
 	["Visual Add"] = "<D-j>", -- enter visual-multi (visual)

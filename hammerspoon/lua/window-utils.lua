@@ -38,13 +38,16 @@ local function toggleObsidianSidebar(obsiWin)
 		local obsi_width = obsiWin:frame().w
 		local screen_width = obsiWin:screen():frame().w
 
-		-- half -> hide sidebar
-		-- pseudo-maximized -> show sidebar
-		-- max -> hide sidebar (since assuming Obsidian split)
-		local mode = (obsi_width / screen_width > 0.6 and obsi_width / screen_width < 0.99) and "expand"
-			or "collapse"
+		-- half -> hide right sidebar
+		-- pseudo-maximized -> show right sidebar
+		-- max -> show both sidebars
+		local modeRight = (obsi_width / screen_width > 0.6) and "expand" or "collapse"
 		OpenLinkInBackground(
-			"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. mode .. "%28%29"
+			"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29"
+		)
+		local modeLeft = (obsi_width / screen_width > 0.99) and "expand" or "collapse"
+		OpenLinkInBackground(
+			"obsidian://advanced-uri?eval=this.app.workspace.leftSplit." .. modeLeft .. "%28%29"
 		)
 	end)
 end
