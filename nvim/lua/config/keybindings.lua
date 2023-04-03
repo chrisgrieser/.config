@@ -157,7 +157,7 @@ Keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
 for _, v in pairs(trailingKeys) do
-	Keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = v .. " to EoL" })
+	Keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = v .. " to EoL (no-whichkey)" })
 end
 Keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
