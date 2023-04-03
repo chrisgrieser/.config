@@ -313,6 +313,6 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = false, -- so UI is there quicker
+	event = "UIEnter",
 	opts = lualineConfig,
 }
