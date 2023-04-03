@@ -115,15 +115,13 @@ return {
 		event = "VeryLazy",
 		opts = {
 			plugins = {
-				presets = {
-					motions = false,
-					textobjects = true,
-				},
+				presets = { motions = false },
 			},
 			triggers_blacklist = {
 				n = { "y" }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
 			},
-			-- INFO ignore a mapping by giving it the label "which_key_ignore"
+			-- INFO ignore a mapping by giving it the label "which_key_ignore", not
+			-- by using the "hidden" key here
 			hidden = { "<Plug>", "^:lua " },
 			window = {
 				border = { "", BorderHorizontal, "", "" }, -- only horizontal border to save space

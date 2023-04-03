@@ -4,6 +4,11 @@ return {
 		keys = { "f", "F", "t", "T" },
 		init = function() vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" } end,
 	},
+	{ -- display line numbers when using `:` to go to a line with
+		"nacro90/numb.nvim",
+		keys = ":",
+		config = true,
+	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
 		lazy = true, -- loaded by keybinds

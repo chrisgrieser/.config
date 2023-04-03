@@ -171,17 +171,6 @@ Autocmd("BufReadPost", {
 })
 
 --------------------------------------------------------------------------------
--- LINE NUMBERS ONLY IN COMMAND LINE
--- not using `CmdLineEnter` because it also affects searching and only triggers
--- with after entering a character after `:`
-opt.number = false
-opt.relativenumber = false
-
-Keymap("n", ":", ":set number<CR>:")
-Keymap("c", "<CR>", "<CR>:set nonumber<CR>")
-Keymap("c", "<Esc>", "<Esc>:set nonumber<CR>")
-
---------------------------------------------------------------------------------
 -- AUTO-SAVING & AUTO-READ ON CHANGE
 Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
