@@ -7,22 +7,12 @@
 		"prefix": "matcher (CamelCase)",
 		"body": [
 			"function alfredMatcher(str) {",
-				"const clean = str.replace(/[-()_.:#/\\\\;,[\\]]/g, \" \");",
-				"const camelCaseSeperated = str.replace(/([A-Z])/g, \" \\$1\");",
-				"return [clean, camelCaseSeperated, str].join(\" \") + \" \";",
+			"\tconst clean = str.replace(/[-()_.:#/\\\\;,[\\]]/g, \" \");",
+			"\tconst camelCaseSeperated = str.replace(/([A-Z])/g, \" \\$1\");",
+			"\treturn [clean, camelCaseSeperated, str].join(\" \") + \" \";",
 			"}"
 		],
 		"description": "Make Alfred Match CamelCase Results. https://www.alfredapp.com/help/workflows/inputs/script-filter/json/"
-	},
-	"bla": {
-		"body": [
-
-"function alfredMatcher(str) {",
-	"const clean = str.replace(/[-()_.:#/\\\\;,[\\]]/g, \" \");",
-	"const camelCaseSeperated = str.replace(/([A-Z])/g, \" $1\");",
-	"return [clean, camelCaseSeperated, str].join(\" \") + \" \";",
-"}"
-		]
 	},
 	"Get Alfred Env": {
 		"prefix": "Get Alfred Env",
