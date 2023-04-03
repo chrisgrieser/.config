@@ -107,17 +107,6 @@
 			<key>url</key>
 			<string>https://twitter.com/intent/tweet?text={query}</string>
 		</dict>
-		<key>84F18614-4389-4B12-8CD3-4B9F82576401</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>sg</string>
-			<key>text</key>
-			<string>Sourcegraph: '{query}'</string>
-			<key>url</key>
-			<string>https://sourcegraph.com/search?q={query}</string>
-		</dict>
 		<key>84F64B41-9C2A-49F0-AAB4-E6FFB0BCB143</key>
 		<dict>
 			<key>enabled</key>
