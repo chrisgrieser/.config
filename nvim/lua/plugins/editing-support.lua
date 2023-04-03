@@ -44,10 +44,16 @@ return {
 		"aduros/ai.vim",
 		cmd = "AI",
 		init = function ()
-			-- https://github.com/aduros/ai.vim/issues/4
-			vim.g.ai_context_before = 20
-			vim.g.ai_context_after = 20
-			vim.keymap.set("n", "<leader>a", ":AI<CR>", { desc = "󱙺 ai.vim"})
+			vim.g.ai_context_before = 10
+			vim.g.ai_context_after = 10
+			vim.g.ai_completions_model = "gpt-3.5-turbo" -- https://platform.openai.com/docs/models/gpt-3-5
+			vim.g.ai_edits_model = "gpt-3.5-turbo" 
+			vim.g.ai_temperature = 0 -- -0 with 1 meaning high randomness
+			vim.g.ai_indicator_text = "󱙺"
+			vim.g.ai_no_mappings = 1 -- disable default mappings (which overwrite <C-a> in Normal mode…)
+			vim.keymap.set("n", "<leader>a", ":AI<CR>", { desc = "󱙺 Complete with GPT"})
+			vim.keymap.set("x", "<leader>a", ":AI ", { desc = "󱙺 Prompt GPT"})
+			vim.keymap.set("x", "<leader>fa", ":AI Refactor to improve this code<CR>", { desc = "󱙺 Refactor with GPT"})
 		end,
 	},	
 	{ -- Jump out of scope in insert mode
