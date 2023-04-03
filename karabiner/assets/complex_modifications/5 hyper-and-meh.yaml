@@ -33,7 +33,7 @@ rules:
           - { key_code: right_shift, modifiers: [control, option] }
         conditions:
           - type: frontmost_application_unless
-            file_path:
+            file_paths:
               - "[Mm]industry"
               - "[Nn]eovide" # quicker completion selection
   #─────────────────────────────────────────────────────────────────────────────

@@ -171,7 +171,9 @@ Autocmd("BufReadPost", {
 })
 
 --------------------------------------------------------------------------------
--- Line Numbers only in Command line
+-- LINE NUMBERS ONLY IN COMMAND LINE
+-- not using `CmdLineEnter` because it also affects searching and only triggers
+-- with after entering a character after `:`
 opt.number = false
 opt.relativenumber = false
 
@@ -180,7 +182,7 @@ Keymap("c", "<CR>", "<CR>:set nonumber<CR>")
 Keymap("c", "<Esc>", "<Esc>:set nonumber<CR>")
 
 --------------------------------------------------------------------------------
--- Auto-Saving & Auto-read on change
+-- AUTO-SAVING & AUTO-READ ON CHANGE
 Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
 	callback = function()
@@ -238,7 +240,7 @@ local function remember(mode)
 	if mode == "save" then
 		Cmd.mkview(1)
 	else
-		pcall(function () Cmd.loadview(1) end) -- pcall, since cannot load view of newly opened files
+		pcall(function() Cmd.loadview(1) end) -- pcall, since cannot load view of newly opened files
 	end
 end
 Autocmd("BufWinLeave", {

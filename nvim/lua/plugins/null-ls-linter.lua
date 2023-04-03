@@ -10,7 +10,6 @@ local lintersAndFormatters = {
 	"black", -- python formatter
 	"vale", -- natural language
 	"codespell",
-	"misspell",
 	"selene", -- lua
 	"stylua", -- lua
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
@@ -39,12 +38,6 @@ local function nullConfig()
 				disabled_filetypes = { "css", "bib" },
 				extra_args = { "--ignore-words", LinterConfig .. "/codespell-ignore.txt" },
 			},
-			-- https://github.com/client9/misspell#how-can-i-ignore-rules
-			builtins.diagnostics.misspell.with {
-				disabled_filetypes = { "bib" },
-				-- extra_args = { "-i", "" }, -- ignore terms (comma separated)
-			},
-
 			builtins.formatting.trim_newlines, -- trim trailing whitespace & newlines
 			builtins.formatting.trim_whitespace.with {
 				disabled_filetypes = { "markdown" }, -- do not remove spaces due to two-space-rule
