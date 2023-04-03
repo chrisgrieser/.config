@@ -364,9 +364,11 @@ return {
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
 				enable_autosnippets = true, -- for javascript "if ()"
 				-- highlight when at a choice node
+				-- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts
 				ext_opts = {
 					[require("luasnip.util.types").choiceNode] = {
 						active = {
+							hl_group = { "DiagnosticHint" },
 							virt_text = { { source_icons.luasnip_choice, "DiagnosticHint" } },
 						},
 					},
