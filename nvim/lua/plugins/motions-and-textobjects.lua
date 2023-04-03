@@ -10,6 +10,8 @@ return {
 		dev = true,
 	},
 
+	-----------------------------------------------------------------------------
+
 	{ -- tons of text objects
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = "BufEnter",

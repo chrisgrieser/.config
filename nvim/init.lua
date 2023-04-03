@@ -2,24 +2,25 @@
 vim.g.mapleader = ","
 LinterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
 VimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
-UpdateCounterThreshhold = 20 -- for plugin update statusline
+UpdateCounterThreshhold = 25 -- for plugin update statusline
 
-require("config.borderstyle").set("single") -- must come before lazy
+local ok, borderstyle = pcall(require, "config.borderstyle")
+if ok then borderstyle.set("single") end-- should come before lazy
 
 --------------------------------------------------------------------------------
 
-require("config.lazy")
-require("config.utils") 
+pcall(require, "config.lazy")
+pcall(require, "config.utils") 
 
-if vim.g.neovide then require("config.gui-settings") end
-require("config.theme-config")
+if vim.g.neovide then pcall(require, "config.gui-settings") end
+pcall(require, "config.theme-config")
 
-require("config.options-and-autocmds")
-require("config.keybindings")
+pcall(require, "config.options-and-autocmds")
+pcall(require, "config.keybindings")
 
-require("config.automating-nvim")
-require("config.textobject-keymaps")
-require("config.clipboard")
-require("config.user-commands")
-require("config.abbreviations")
+pcall(require, "config.automating-nvim")
+pcall(require, "config.textobject-keymaps")
+pcall(require, "config.clipboard")
+pcall(require, "config.user-commands")
+pcall(require, "config.abbreviations")
 

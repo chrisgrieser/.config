@@ -175,12 +175,9 @@ Autocmd("BufReadPost", {
 opt.number = false
 opt.relativenumber = false
 
-Autocmd("CmdlineEnter", {
-	callback = function() opt_local.number = true end,
-})
-Autocmd("CmdlineLeave", {
-	callback = function() opt_local.number = false end,
-})
+Keymap("n", ":", ":set number<CR>:")
+Keymap("c", "<CR>", "<CR>:set nonumber<CR>")
+Keymap("c", "<Esc>", "<Esc>:set nonumber<CR>")
 
 --------------------------------------------------------------------------------
 -- Auto-Saving & Auto-read on change

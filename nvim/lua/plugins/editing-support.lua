@@ -3,6 +3,11 @@ return {
 		"Darazaki/indent-o-matic",
 		event = "BufReadPre",
 	},
+	{ -- display line numbers when using `:` to go to a line with
+		"nacro90/numb.nvim",
+		keys = ":",
+		config = true,
+	},
 	{ -- autopair brackets, quotes, and markup (mini.pairs does not support multi-char pairs)
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -43,19 +48,25 @@ return {
 	{ -- AI Support
 		"aduros/ai.vim",
 		cmd = "AI",
-		init = function ()
+		init = function()
+			-- INFO requires openai api key from .zshenv
 			vim.g.ai_context_before = 10
 			vim.g.ai_context_after = 10
 			vim.g.ai_completions_model = "gpt-3.5-turbo" -- https://platform.openai.com/docs/models/gpt-3-5
-			vim.g.ai_edits_model = "gpt-3.5-turbo" 
+			vim.g.ai_edits_model = "gpt-3.5-turbo"
 			vim.g.ai_temperature = 0 -- -0 with 1 meaning high randomness
 			vim.g.ai_indicator_text = "󱙺"
 			vim.g.ai_no_mappings = 1 -- disable default mappings (which overwrite <C-a> in Normal mode…)
-			vim.keymap.set("n", "<leader>a", ":AI<CR>", { desc = "󱙺 Complete with GPT"})
-			vim.keymap.set("x", "<leader>a", ":AI ", { desc = "󱙺 Prompt GPT"})
-			vim.keymap.set("x", "<leader>fa", ":AI Refactor to improve this code<CR>", { desc = "󱙺 Refactor with GPT"})
+			vim.keymap.set("n", "<leader>a", ":AI<CR>", { desc = "󱙺 Complete with GPT" })
+			vim.keymap.set("x", "<leader>a", ":AI ", { desc = "󱙺 Prompt GPT" })
+			vim.keymap.set(
+				"x",
+				"<leader>fa",
+				":AI Refactor to improve this code<CR>",
+				{ desc = "󱙺 Refactor with GPT" }
+			)
 		end,
-	},	
+	},
 	{ -- Jump out of scope in insert mode
 		"abecodes/tabout.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
