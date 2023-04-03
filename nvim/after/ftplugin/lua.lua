@@ -7,7 +7,7 @@ Keymap("n", "g/", function()
 	local pattern = Fn.getreg("z"):match('"(.-)"')
 	local url = "https://gitspartv.github.io/lua-patterns/?pattern=" .. pattern
 	Fn.system("open '" .. url .. "'") -- opening method on macOS
-end, { desc = " Open lua pattern in regex viewer", buffer = true })
+end, { desc = " lua pattern in regex viewer", buffer = true })
 
 -- Build / Reload Config
 Keymap("n", "<leader>r", function()
@@ -24,7 +24,7 @@ Keymap("n", "<leader>r", function()
 	else
 		vim.notify("Neither in nvim nor in hammerspoon directory.", LogError)
 	end
-end, { buffer = true, desc = " Reload Hammerspoon / nvim config" })
+end, { buffer = true, desc = " Reload" })
 
 --------------------------------------------------------------------------------
 -- INSPECT NVIM OR HAMMERSPOON OBJECTS
