@@ -61,7 +61,7 @@
 	},
 	"string format": {
 		"prefix": "string format",
-		"body": "string.format(\"$0%s\", ${1:var})"
+		"body": "(\"$0%s\"):format(${1:var})"
 	},
 	"home": {
 		"prefix": "home",
