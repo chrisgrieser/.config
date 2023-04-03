@@ -1,11 +1,23 @@
 {
-	"Get Alfred Env": {
-		"prefix": "Get Alfred Env",
-		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\");"
-	},
 	"keystroke": {
 		"prefix": "keystroke",
 		"body": "Application(\"System Events\").keystroke(\"${1:key}\", {using: [\"${2:command} down\"]});"
+	},
+	"matcher (CamelCase)": {
+		"prefix": "matcher (CamelCase)",
+		"body": [
+			function alfredMatcher(str) {
+				const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
+				const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
+				return [clean, camelCaseSeperated, str].join(" ") + " ";
+			}
+		],
+		"description": "desc"
+	},
+
+	"Get Alfred Env": {
+		"prefix": "Get Alfred Env",
+		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\");"
 	},
 	"Get Alfred Env (+ resolve home)": {
 		"prefix": "Get Alfred Env (+ resolve home)",
