@@ -39,7 +39,7 @@ opt.clipboard = "unnamedplus"
 opt.grepprg = "rg --vimgrep" -- use rg for :grep
 
 -- Popups / Floating Windows
-opt.pumheight = 15 -- max number of items in popup menu
+opt.pumheight = 17 -- max number of items in popup menu
 opt.pumwidth = 15 -- min width popup menu
 
 -- Spelling
@@ -168,6 +168,18 @@ Autocmd("BufReadPost", {
 			opt_local.listchars:append { lead = "·" }
 		end
 	end,
+})
+
+--------------------------------------------------------------------------------
+-- Line Numbers only in Command line
+opt.number = false
+opt.relativenumber = false
+
+Autocmd("CmdlineEnter", {
+	callback = function() opt_local.number = true end,
+})
+Autocmd("CmdlineLeave", {
+	callback = function() opt_local.number = false end,
 })
 
 --------------------------------------------------------------------------------

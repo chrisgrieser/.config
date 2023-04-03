@@ -368,7 +368,7 @@ return {
 				ext_opts = {
 					[require("luasnip.util.types").choiceNode] = {
 						active = {
-							hl_group = { "DiagnosticHint" },
+							hl_group = "DiagnosticHint" ,
 							virt_text = { { source_icons.luasnip_choice, "DiagnosticHint" } },
 						},
 					},
