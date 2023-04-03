@@ -59,7 +59,7 @@ local function workLayout()
 	OpenApp("Twitter")
 
 	-- layout them when they all run
-	MyTimer = hs.timer.waitUntil(function() return AppIsRunning(appsToOpen) end, function()
+	MyTimer = hs.timer.waitUntil(function() return AppRunning(appsToOpen) end, function()
 		for _, appName in pairs(appsToOpen) do
 			MoveResize(App(appName):mainWindow(), PseudoMaximized)
 		end

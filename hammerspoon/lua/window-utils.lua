@@ -53,17 +53,19 @@ end
 ---@param win hs.window
 ---@param pos hs.geometry
 local function obsidianThemeDevHelper(win, pos)
-	if not win or not win:application() then return end
 	if
-		not (pos == PseudoMaximized or pos == Maximized)
-		and win:application():name():lower() == "neovide"
-		and AppIsRunning("Obsidian")
+		not win
+		or not win:application()
+		or not win:application():name():lower() == "neovide"
+		or not (pos == PseudoMaximized or pos == Maximized)
+		or not AppRunning("Obsidian")
 	then
-		RunWithDelays(0.15, function()
-			App("Obsidian"):unhide()
-			App("Obsidian"):mainWindow():raise()
-		end)
+		return
 	end
+	RunWithDelays(0.15, function()
+		App("Obsidian"):unhide()
+		App("Obsidian"):mainWindow():raise()
+	end)
 end
 
 --------------------------------------------------------------------------------
@@ -79,7 +81,6 @@ function CheckSize(win, size)
 		"Move", -- Finder
 		"Delete", -- Finder
 		"Bin", -- Finder
-		"Enki",
 		"System Settings",
 		"Espanso",
 		"Transmission",
@@ -97,7 +98,7 @@ function CheckSize(win, size)
 	local diffx = size.x * maxf.w + maxf.x - winf.x -- calculated this way for two screens
 	local diffy = size.y * maxf.h + maxf.y - winf.y
 
-	local leeway = 10 -- terminal cell widths creating some imprecision
+	local leeway = 5 -- terminal cell widths creating some imprecision
 	local widthOkay = (diffw > -leeway and diffw < leeway)
 	local heightOkay = (diffh > -leeway and diffh < leeway)
 	local posyOkay = (diffy > -leeway and diffy < leeway)
@@ -130,7 +131,7 @@ function MoveResize(win, pos)
 	-- Twitter Extras
 	if pos == PseudoMaximized or pos == Centered then
 		TwitterToTheSide()
-	elseif pos == Maximized and AppIsRunning("Twitter") then
+	elseif pos == Maximized and AppRunning("Twitter") then
 		if App("Twitter") then App("Twitter"):hide() end
 	end
 
@@ -212,6 +213,13 @@ function AutoTile(winSrc)
 		MoveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
 		MoveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
 		MoveResize(wins[5], { h = 0.5, w = 0.5, x = 0.25, y = 0.25 })
+	elseif #wins == 6 then
+		MoveResize(wins[1], { h = 0.5, w = 0.33, x = 0, y = 0 })
+		MoveResize(wins[2], { h = 0.5, w = 0.33, x = 0, y = 0.5 })
+		MoveResize(wins[3], { h = 0.5, w = 0.33, x = 0.33, y = 0 })
+		MoveResize(wins[4], { h = 0.5, w = 0.33, x = 0.33, y = 0.5 })
+		MoveResize(wins[5], { h = 0.5, w = 0.33, x = 0.66, y = 0 })
+		MoveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 })
 	end
 end
 
@@ -262,7 +270,7 @@ end)
 local function controlSpaceAction()
 	local currentWin = hs.window.focusedWindow()
 	local pos
-	if IsFront{"Finder", "Script Editor"} then
+	if IsFront { "Finder", "Script Editor" } then
 		pos = Centered
 	elseif IsFront("SideNotes") then
 		ToggleSideNotesSize()
@@ -292,7 +300,7 @@ end
 local function homeAction()
 	if #(hs.screen.allScreens()) > 1 then
 		moveCurWinToOtherDisplay()
-	elseif AppIsRunning("zoom.us") then
+	elseif AppRunning("zoom.us") then
 		hs.alert("🔈/🔇") -- toggle mute
 		Keystroke({ "shift", "command" }, "A", 1, App("zoom.us"))
 	else
@@ -303,7 +311,7 @@ end
 local function endAction()
 	if #(hs.screen.allScreens()) > 1 then
 		moveCurWinToOtherDisplay()
-	elseif AppIsRunning("zoom.us") then
+	elseif AppRunning("zoom.us") then
 		hs.alert("📹") -- toggle video
 		Keystroke({ "shift", "command" }, "V", 1, App("zoom.us"))
 	else

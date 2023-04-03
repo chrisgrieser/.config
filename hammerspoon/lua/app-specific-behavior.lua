@@ -90,7 +90,7 @@ end):start()
 -- Add dots when copypasting to from dev tools
 local function addCssSelectorLeadingDot()
 	if
-		not AppIsRunning("neovide")
+		not AppRunning("neovide")
 		or not App("neovide"):mainWindow()
 		or not App("neovide"):mainWindow():title():find("%.css$")
 	then
