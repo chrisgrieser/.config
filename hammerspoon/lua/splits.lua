@@ -61,6 +61,10 @@ function VsplitSetLayout(mode, secondWin)
 	end
 end
 
+--------------------------------------------------------------------------------
+
+local frontApp = hs.application.frontmostApplication
+
 ---helper for hs.chooser
 ---@nodiscard
 ---@return table|nil list of apps that are running, formatted for hs.chooser
@@ -70,7 +74,16 @@ local function runningApps()
 		local app = win:application()
 		if not app then return end
 		local appName = app:name()
-		local isExcludedApp = { "SideNotes", "CleanShot X", "Hammerspoon", "Twitter", "Notification Centre", FrontAppName() }
+		local isExcludedApp = {
+			frontApp:name(),
+			"SideNotes",
+			"CleanShot X",
+			"Hammerspoon",
+			"Twitter",
+			"Alfred",
+			"Espanso",
+			"Notification Centre",
+		}
 		if not TableContains(isExcludedApp, appName) and app:mainWindow() then
 			table.insert(appsArr, { text = appName })
 		end
@@ -93,7 +106,7 @@ local function selectSecondWin()
 		:choices(apps)
 		:rows(#apps - 2) -- for whatever reason, the rows parameter is off by 3?
 		:width(30)
-		:placeholderText("Split " .. FrontAppName() .. " with…")
+		:placeholderText("Split " .. frontApp:name() .. " with…")
 		:show()
 end
 

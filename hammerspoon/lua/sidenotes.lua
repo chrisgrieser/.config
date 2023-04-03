@@ -48,12 +48,7 @@ end):start()
 SidenotesWatcher2 = Aw.new(function(appName, event)
 	if appName == "SideNotes" or event ~= Aw.activated then return end
 	RunWithDelays(0.15, function()
-		if
-			FrontAppName() ~= "SideNotes"
-			and FrontAppName() ~= "Alfred"
-			and FrontAppName() ~= "CleanShot X"
-			and FrontAppName() ~= "Espanso"
-		then
+		if not (IsFront { "SideNotes", "Alfred", "CleanShot X", "Espanso" }) then
 			-- INFO if sidenotes glitches, it is the "Hot Side" setting causing
 			-- glitches when mouse is close, not Hammerspoon
 			App("SideNotes"):hide()
@@ -62,12 +57,12 @@ SidenotesWatcher2 = Aw.new(function(appName, event)
 end):start()
 
 --------------------------------------------------------------------------------
+SideNotesWide = { x = 0, y = 0, w = 0.35, h = 1 }
 
--- toggle sizes of the sidenotes window 
+-- toggle sizes of the sidenotes window
 function ToggleSideNotesSize()
 	local snWin = App("SideNotes"):mainWindow()
 	local narrow = { x = 0, y = 0, w = 0.2, h = 1 }
-	local wide = { x = 0, y = 0, w = 0.35, h = 1 }
-	local changeTo = CheckSize(snWin, narrow) and wide or narrow
+	local changeTo = CheckSize(snWin, narrow) and SideNotesWide or narrow
 	MoveResize(snWin, changeTo)
 end

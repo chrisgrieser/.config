@@ -193,18 +193,25 @@ end
 ---@return hs.application
 function App(appName) return hs.application.find(appName, true, true) end
 
+---@param appNames string|string[]|nil app or apps that should be checked
 ---@nodiscard
----@return string|nil
-function FrontAppName() return hs.application.frontmostApplication():name() end
+---@return boolean true when *one* of the apps is frontmost
+function IsFront(appNames)
+	if appNames == nil then return false end
+	if type(appNames) == "string" then appNames = { appNames } end
+	local oneIsFrontmost = false
+	for _, name in pairs(appNames) do
+		if App(name):isFrontmost() then oneIsFrontmost = true end
+	end
+	return oneIsFrontmost
+end
 
-
----true when all apps are running
 ---@param appNames string|string[] app or apps that should be running
 ---@nodiscard
----@return boolean
+---@return boolean true when all apps are running
 function AppIsRunning(appNames)
-	local allAreRunning = true
 	if type(appNames) == "string" then appNames = { appNames } end
+	local allAreRunning = true
 	for _, name in pairs(appNames) do
 		if not App(name) then allAreRunning = false end
 	end

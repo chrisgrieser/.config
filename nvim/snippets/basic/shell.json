@@ -127,20 +127,10 @@
 		"body": "qlmanage -p \"${1:filepath}\"",
 		"description": "QuickLook the file. MacOS only."
 	},
-	"echo": {
-		"prefix": "echo",
-		"body": "echo \"${0:message}\"",
-		"description": "Echo a message."
-	},
 	"elseif": {
 		"prefix": "elseif",
 		"body": "elif [[ ${1:condition} ]]; then\n\t${0}",
 		"description": "Add an elseif to an if statement."
-	},
-	"else": {
-		"prefix": "else",
-		"body": "else\n\t${0:command}",
-		"description": "else"
 	},
 	"for .. in": {
 		"prefix": "for .. in",
@@ -149,7 +139,7 @@
 	},
 	"play sound": {
 		"prefix": ["play sound", "audio", "afplay"],
-		"body": "afplay \"/System/Library/Sounds/${1:Purr}.aiff\" &",
+"body": "afplay \"/System/Library/Sounds/${1|Basso,Blow,Bottle,Frog,Funk,Glass,Hero,Morse,Ping,Pop,Purr,Sosumi,Submarine,Tink|}.aiff\" &",
 		"description": "Running in the background to not block during sound playing"
 	},
 	"while": {

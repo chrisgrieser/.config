@@ -111,7 +111,7 @@ sketchybar \
 	\
 	--add item package-updates $second_row \
 	--set package-updates update_freq=43200 \
-	script="$PLUGIN_DIR/homebrew-package-tracker.sh" \
+	script="$PLUGIN_DIR/homebrew-update-tracker.sh" \
 	--add event homebrew-update \
 	--subscribe package-updates homebrew-update \
 	\

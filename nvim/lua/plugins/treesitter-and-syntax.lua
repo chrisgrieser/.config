@@ -113,7 +113,7 @@ return {
 				callback = function()
 					-- apparently needs delay to avoid conflicting race with treesitter's autocomd
 					---@diagnostic disable-next-line: param-type-mismatch
-					vim.defer_fn(function () vim.bo.filetype = "sh" end, 100)
+					vim.defer_fn(function () vim.bo.filetype = "sh" end, 200)
 				end,
 			})
 
