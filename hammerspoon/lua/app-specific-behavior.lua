@@ -63,7 +63,7 @@ Wf_browser = Wf.new("Vivaldi")
 	})
 	:subscribe(Wf.windowCreated, function() AutoTile(Wf_browser) end)
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_browser) end)
-	:subscribe(Wf.windowFocused, BringAllToFront)
+	:subscribe(Wf.windowFocused, BringAllWinsToFront)
 
 -- Automatically hide Browser has when no window
 -- requires wider window-filter to not hide PiP windows etc
