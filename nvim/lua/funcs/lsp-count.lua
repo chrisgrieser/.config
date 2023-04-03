@@ -6,7 +6,7 @@ local fn = vim.fn
 local lspCount = {}
 
 ---@async
--- calculate number of references for entity under cursor asynchronously
+---calculate number of references for entity under cursor asynchronously
 local function requestLspRefCount()
 	if fn.mode() ~= "n" then
 		lspCount = {}
