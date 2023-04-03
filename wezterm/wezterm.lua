@@ -110,6 +110,7 @@ return {
 	line_height = 1.0,
 
 	-- Appearance
+	audible_bell = "Disabled",
 	color_scheme = autoToggleTheme(),
 	front_end = "WebGpu", -- better rendering on newer Macs
 	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
@@ -140,7 +141,7 @@ return {
 	-- Mouse Bindings
 	disable_default_mouse_bindings = false,
 	mouse_bindings = {
-		-- open link at normal leftclick & auto-copy selection
+		-- open link at normal leftclick & auto-copy selection if not a link
 		{
 			event = { Up = { streak = 1, button = "Left" } },
 			mods = "",
@@ -151,7 +152,7 @@ return {
 	-- KEYBINDINGS
 	-- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
 	-- Keynames: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
-	disable_default_key_bindings = false,
+	disable_default_key_bindings = true,
 	keys = {
 		{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 		{ key = "q", mods = "CMD", action = act.QuitApplication },

@@ -28,7 +28,7 @@ local now = os.time
 
 --Initialize on load: fills `IdleApps` with all running apps and the current time
 for app, _ in pairs(Thresholds) do
-	if AppIsRunning(app) then IdleApps[app] = now() end
+	if AppRunning(app) then IdleApps[app] = now() end
 end
 
 ---log times when an app has been deactivated

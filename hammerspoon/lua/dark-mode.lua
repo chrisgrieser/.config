@@ -38,7 +38,7 @@ local function toggleDarkMode()
 	hs.execute(string.format([[echo "SetThemeMode('%s')" > /tmp/nvim-automation]], toMode))
 
 	-- Highlights PDF background
-	if AppIsRunning("Highlights") then
+	if AppRunning("Highlights") then
 		App("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfbg }
 	end
 

@@ -209,7 +209,7 @@ end
 ---@param appNames string|string[] app or apps that should be running
 ---@nodiscard
 ---@return boolean true when all apps are running
-function AppIsRunning(appNames)
+function AppRunning(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	local allAreRunning = true
 	for _, name in pairs(appNames) do
