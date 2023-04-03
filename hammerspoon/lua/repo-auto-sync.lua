@@ -25,8 +25,8 @@ local function gitDotfileSync(submodulePull)
 
 	local function dotfileSyncCallback(exitCode, _, stdErr)
 		if exitCode == 0 then
-			local msg = dotfileIcon .. "Dotfile Sync successful."
-			if submodulePull then msg = msg .. "(with submodules)" end
+			local msg = dotfileIcon .. " Dotfile Sync successful"
+			if submodulePull then msg = msg .. " (with submodules)" end
 			print(msg)
 			return
 		end
