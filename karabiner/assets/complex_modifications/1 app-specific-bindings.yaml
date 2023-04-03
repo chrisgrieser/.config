@@ -550,6 +550,12 @@ rules:
         to:
           - { key_code: up_arrow, modifiers: [command, option, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apptorium\.SideNotes-paddle$] }]
+      # ctrl+h: back to base folder
+      - type: basic
+        from: { key_code: h, modifiers: { mandatory: [control] } }
+        to:
+          shell_command: open 'sidenotes://open/35BE5A12-DAF4-44FD-AF7D-2689CBB14BF3'
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apptorium\.SideNotes-paddle$] }]
       # Meh+s: Change to Code Syntax
       - type: basic
         from: { key_code: s, modifiers: { mandatory: [control, shift, option] } }
