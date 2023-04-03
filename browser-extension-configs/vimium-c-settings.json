@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "30/03/2023, 21:27:05",
-	"time": 1680204425178,
+	"@time": "03/04/2023, 12:44:28",
+	"time": 1680518668523,
 	"environment": {
 		"extension": "1.99.97",
 		"platform": "mac",
@@ -72,7 +72,7 @@
 		"",
 		"\" Link Mode",
 		"map f LinkHints.activate",
-		"map F LinkHints.activateOpenInNewTab",
+		"map b LinkHints.activateOpenInNewTab",
 		"map yf LinkHints.activateCopyLinkUrl",
 		"map yi LinkHints.activateCopyImage",
 		"map yh LinkHints.activateHover showURL",
@@ -108,7 +108,7 @@
 		"map K scrollUp count=4",
 		"map gg scrollToTop",
 		"map G scrollToBottom",
-		"map b nextFrame",
+		"map F nextFrame",
 		"",
 		"",
 		"\" History",

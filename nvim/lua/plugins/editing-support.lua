@@ -41,11 +41,14 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- AI Support
-		".cm-hmd-barelink ",
-		event = "VeryLazy",
-		opts = {
-			
-		},
+		"aduros/ai.vim",
+		cmd = "AI",
+		init = function ()
+			-- https://github.com/aduros/ai.vim/issues/4
+			vim.g.ai_context_before = 20
+			vim.g.ai_context_after = 20
+			vim.keymap.set("n", "<leader>a", ":AI<CR>", { desc = "󱙺 ai.vim"})
+		end,
 	},	
 	{ -- Jump out of scope in insert mode
 		"abecodes/tabout.nvim",

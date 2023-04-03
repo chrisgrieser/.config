@@ -197,7 +197,6 @@ function M.flipWord()
 	-- TODO more precise retrieval of word under cursor
 	local cword = vim.fn.expand("<cword>")
 	local cBigword = vim.fn.expand("<cWORD>") -- check of cWORD needed to retrieve non-alphanumeric strings (e.g. "&&")
-	vim.opt.iskeyword = iskeywBefore
 
 	local alphaNumericUnderCursor = cBigword:find("[%a%d]")
 	local word = alphaNumericUnderCursor and cword or cBigword
@@ -250,6 +249,10 @@ function M.flipWord()
 	else
 		fallbackFn()
 	end
+
+
+	-- restore
+	vim.opt.iskeyword = iskeywBefore
 
 end
 
