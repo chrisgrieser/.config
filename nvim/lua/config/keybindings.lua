@@ -13,9 +13,9 @@ Keymap("n", "<leader>T", function() Cmd.Telescope("colorscheme") end, { desc = "
 Keymap("n", "<leader>H", function() Cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- Update [P]lugins
-Keymap("n", "<leader>p", require("lazy").sync, { desc = ":Lazy sync" })
-Keymap("n", "<leader>P", require("lazy").home, { desc = ":Lazy home" })
-Keymap("n", "<leader>M", Cmd.Mason, { desc = ":Mason" })
+Keymap("n", "<leader>p", require("lazy").sync, { desc = " Lazy Sync" })
+Keymap("n", "<leader>P", require("lazy").home, { desc = " Lazy Home" })
+Keymap("n", "<leader>M", Cmd.Mason, { desc = " Mason" })
 
 -- copy [l]ast ex[c]ommand
 Keymap("n", "<leader>lc", function()

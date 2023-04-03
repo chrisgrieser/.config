@@ -14,7 +14,7 @@ local function requestLspRefCount()
 	end
 	local params = lsp.util.make_position_params(0) ---@diagnostic disable-line: missing-parameter
 	params.context = { includeDeclaration = false }
-	local thisFileUri = vim.uri_from_fname(fn.expand("%:p"))
+	local thisFileUri = vim.uri_from_fname(fn.expand("%:p")) -- identifier in LSP response
 
 	lsp.buf_request(0, "textDocument/references", params, function(error, refs)
 		lspCount.refFile = 0
@@ -57,9 +57,9 @@ function M.statusline()
 	-- trigger count, abort when none
 	requestLspRefCount() -- needs to be separated due to lsp calls being async
 	if lspCount.refWorkspace == 0 and lspCount.defWorkspace == 0 then return "" end
-	if not (lspCount.refWorkspace) then return "" end
+	if not lspCount.refWorkspace then return "" end
 
-	-- display the count
+	-- format lsp references/definitions count to be displayed in the status bar
 	local defs, refs = "", ""
 	if lspCount.defWorkspace then
 		defs = tostring(lspCount.defFile)
