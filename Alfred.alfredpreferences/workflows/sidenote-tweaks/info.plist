@@ -1407,7 +1407,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>440</real>
+			<real>450</real>
 			<key>ypos</key>
 			<real>790</real>
 		</dict>
