@@ -3,11 +3,6 @@ return {
 		"Darazaki/indent-o-matic",
 		event = "BufReadPre",
 	},
-	{ -- display line numbers when using `:` to go to a line with
-		"nacro90/numb.nvim",
-		keys = ":",
-		config = true,
-	},
 	{ -- autopair brackets, quotes, and markup (mini.pairs does not support multi-char pairs)
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
