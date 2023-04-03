@@ -245,7 +245,12 @@ Keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "󱗘 :g 
 Keymap("x", "<leader>fn", ":normal ", { desc = "󱗘 :normal" })
 Keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g delete" })
 
-Keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "󱗘 Structural S & R" })
+Keymap(
+	{ "n", "x" },
+	"<leader>fs",
+	function() require("ssr").open() end,
+	{ desc = "󱗘 Structural S & R" }
+)
 
 -- Refactoring.nvim
 -- stylua: ignore start
@@ -538,6 +543,7 @@ Autocmd("LspAttach", {
 			-- refactor's smart-rename
 			---@diagnostic disable-next-line: param-type-mismatch
 			vim.defer_fn(function() Keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true}) end, 1)
+			Keymap("n", "<leader>V", ":IncRename "..Expand("<cword>"), { desc = "󰒕 IncRename cword", buffer = true})
 		end
 
 		-- conditional to not overwrite treesitter goto-symbol

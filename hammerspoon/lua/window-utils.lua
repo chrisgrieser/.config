@@ -154,7 +154,7 @@ end
 -- WINDOW TILING (OF SAME APP)
 
 ---bring all windows of front app to the front
-function BringAllToFront()
+function BringAllWinsToFront()
 	local app = hs.application.frontmostApplication()
 	if #app:allWindows() < 2 then return end -- the occasional faulty creation of task manager windows in Browser
 	app:selectMenuItem { "Window", "Bring All to Front" }
@@ -181,7 +181,7 @@ function AutoTile(winSrc)
 		wins = winSrc:getWindows()
 	end
 
-	if #wins > 1 then BringAllToFront() end
+	if #wins > 1 then BringAllWinsToFront() end
 
 	if #wins == 0 and IsFront("Finder") then
 		-- hide finder when no windows
