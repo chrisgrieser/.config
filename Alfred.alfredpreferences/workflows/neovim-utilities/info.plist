@@ -278,6 +278,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9552C60A-4AD9-4038-BB96-EDB2C60D13C6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E57C0934-F1B5-4522-9943-202EEAAF8012</key>
 		<array>
 			<dict>
@@ -861,6 +874,27 @@ Search neovim plugins and online :help via Alfred</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9552C60A-4AD9-4038-BB96-EDB2C60D13C6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -1129,6 +1163,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>1090</real>
 			<key>ypos</key>
 			<real>20</real>
+		</dict>
+		<key>9552C60A-4AD9-4038-BB96-EDB2C60D13C6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>no default branch</string>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>830</real>
 		</dict>
 		<key>95F8B76E-A041-4B9B-BBC0-4D875DC184A2</key>
 		<dict>

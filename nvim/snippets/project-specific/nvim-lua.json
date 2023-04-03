@@ -19,7 +19,7 @@
 		"prefix": "plugin spec (lazy.nvim)",
 		"body": [
 			"{ -- ${2:description}",
-			"\t\"${1:github_repo}\",",
+			"\t\"$CLIPBOARD\",",
 			"\t${3|event = \"VeryLazy\",event = \"LspAttach\",lazy = true,cmd = \"\"|},",
 			"\topts = {",
 			"\t\t$0",
