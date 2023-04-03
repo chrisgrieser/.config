@@ -173,7 +173,9 @@ local function shimmeringFocusBuild(commitMsg)
 end
 
 function M.amendNoEditPushForce()
+	vim.cmd.update()
 	if not isInGitRepo() then return end
+
 	local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
 	vim.notify('󰊢 Amend-No-Edit & Force Push…\n("' .. lastCommitMsg .. '")')
 	fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
@@ -181,6 +183,7 @@ end
 
 ---@param prefillMsg? string
 function M.amendAndPushForce(prefillMsg)
+	vim.cmd.update()
 	if not isInGitRepo() then return end
 
 	if not prefillMsg then
@@ -207,6 +210,7 @@ end
 
 ---@param prefillMsg? string
 function M.addCommitPush(prefillMsg)
+	vim.cmd.update()
 	if not isInGitRepo() then return end
 	if not prefillMsg then prefillMsg = "" end
 	hlTooLongCommitMsgs(true)
