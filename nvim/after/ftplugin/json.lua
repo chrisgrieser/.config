@@ -14,3 +14,12 @@ if Fn.line("$") > 1000 then
 	vim.defer_fn(function () require("ufo").closeFoldsWith(2) end, 1)
 end
 
+-- escape stuff properly
+Keymap("x", "<leader>\\", function ()
+	LeaveVisualMode()
+	Cmd[['<,'>s/\\/\\\\/g]] -- escape the escaping backslashes
+	Cmd[['<,'>s/"/\\"/g]] -- escape the double quotes
+	Cmd[['<,'>s/$/\\$/g]] -- escape the $ signs
+	Cmd[['<,'>s/^\(\s*\)\(.*\)/\1"\2",/]] -- surround non-whitespace with quotes and comma
+	Cmd[['>s/,$//]] -- remove trailing comma at last line
+end, { desc = "JSON: for VS Code Snippet", buffer = true })
