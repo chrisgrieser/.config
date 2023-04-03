@@ -11,6 +11,7 @@ local themes = {
 	-- "sainnhe/everforest",
 	-- "rebelot/kanagawa.nvim",
 	"glepnir/zephyr-nvim",
+	{"rose-pine/neovim", name = "rose-pine"},
 	-- "folke/tokyonight.nvim",
 	-- "NTBBloodbath/sweetie.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
@@ -29,14 +30,13 @@ g.lightTransparency = 0.92
 -- setting up the themes
 
 ---convert lazy.nvim-plugin-spec or github-repo into theme name
----@param lazyPlugin string|table either github-repo or plugin-spec with github-repo as first item
+---@param repoName string|table either github-repo or plugin-spec with github-repo as first item
 ---@nodiscard
 ---@return string name of the color scheme
-local function getName(lazyPlugin)
-	---@diagnostic disable-next-line: assign-type-mismatch
-	local repoName = type(lazyPlugin) == "table" and lazyPlugin[1] or lazyPlugin ---@type string
-	local name = repoName:gsub(".*/", ""):gsub("[.%-]?nvim", ""):gsub("neovim%-?", "")
-	return name
+local function getName(repoName)
+	if type(repoName) == "table" then repoName =repoName[1] end
+	repoName = repoName:gsub(".*/", ""):gsub("[.%-]?nvim", ""):gsub("neovim%-?", "")
+	return repoName
 end
 
 g.lightTheme = getName(themes[1])

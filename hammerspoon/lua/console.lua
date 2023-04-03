@@ -97,7 +97,7 @@ Wf_hsConsole = Wf.new("Hammerspoon")
 		end
 	end)
 	:subscribe(Wf.windowUnfocused, function(win)
-		if win:title() == "Hammerspoon Console" and FrontAppName() ~= "Alfred" then hs.closeConsole() end
+		if win:title() == "Hammerspoon Console" and not (IsFront("Alfred")) then hs.closeConsole() end
 	end)
 
 --------------------------------------------------------------------------------

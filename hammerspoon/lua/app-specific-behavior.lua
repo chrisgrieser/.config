@@ -138,10 +138,7 @@ Wf_finder = Wf.new("Finder")
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(Wf.windowCreated, function()
-		-- to prevent running autotile twice when activating & creating
-		if FrontAppName() == "Finder" then AutoTile(Wf_finder) end
-	end)
+	:subscribe(Wf.windowCreated, function() AutoTile(Wf_finder) end)
 	:subscribe(Wf.windowDestroyed, function() AutoTile(Wf_finder) end)
 
 FinderAppWatcher = Aw.new(function(appName, eventType, finderAppObj)

@@ -24,7 +24,7 @@ function TwitterToTheSide()
 	-- in case of active split, prevent left window of covering the sketchybar
 	if LEFT_SPLIT and LEFT_SPLIT:application() then LEFT_SPLIT:application():hide() end
 
-	if FrontAppName() == "Alfred" then return end
+	if IsFront("Alfred") then return end
 
 	local twitter = App("Twitter")
 	if not twitter then return end
@@ -41,7 +41,7 @@ end
 
 -- ensure that twitter does not get focus, "falling through" to the next window
 local function twitterFallThrough()
-	if FrontAppName() ~= "Twitter" then return end
+	if not IsFront("Twitter") then return end
 
 	local visibleWins = hs.window:orderedWindows()
 	local nextWin
@@ -101,7 +101,7 @@ TwitterWatcher = Aw.new(function(appName, event)
 
 	-- auto-close media windows and scroll up when deactivating
 	elseif appName == "Twitter" and event == Aw.deactivated then
-		if FrontAppName() == "CleanShot X" then return end
+		if IsFront("CleanShot X") then return end
 		TwitterScrollUp()
 		twitterCleanupLink()
 		twitterCloseMediaWindow()

@@ -20,7 +20,7 @@ local function setHigherBrightnessDuringDay()
 	if not hasBrightnessSensor then return end
 
 	local brightness
-	if BetweenTime(1, 7) then  -- when turning of projector at night
+	if BetweenTime(1, 7) then -- when turning of projector at night
 		brightness = 0
 	elseif hs.brightness.ambient() > 120 then
 		brightness = 1
@@ -59,12 +59,13 @@ local function workLayout()
 	OpenApp("Twitter")
 
 	-- layout them when they all run
-	hs.timer.waitUntil(function() return AppIsRunning(appsToOpen) end, function()
+	MyTimer = hs.timer.waitUntil(function() return AppIsRunning(appsToOpen) end, function()
 		for _, appName in pairs(appsToOpen) do
-			MoveResize(App(appName):mainWindow(), PseudoMaximized)		
+			MoveResize(App(appName):mainWindow(), PseudoMaximized)
 		end
 		RestartApp("AltTab") -- fix AltTab not picking up changes
 		App("Mimestream"):activate()
+		MoveResize(App("SidesNotes"):mainWindow(), SideNotesWide)
 	end, 0.2)
 
 	print("🔲 WorkLayout: done")
@@ -118,12 +119,23 @@ Hotkey(Hyper, "home", selectLayout)
 -- 3. Unlocking (with idletime)
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if event ~= c.screensDidUnlock then return end
+	if not event == c.screensDidUnlock then return end
 	print("🔓 Unlockwatcher triggered.")
-	RunWithDelays(0.5, function() -- delay needed to ensure displays are recognized after waking
-		selectLayout()
-		setHigherBrightnessDuringDay()
-		UpdateSidenotes()
+
+	-- HACK since `screensDidUnlock` actually triggered on wake, not unlock…
+	MyTimer = hs.timer.waitUntil(ScreenIsUnlocked, function()
+		RunWithDelays(0.5, function() 
+			selectLayout()
+			setHigherBrightnessDuringDay()
+			UpdateSidenotes()
+		end)
+	end, 0.2)
+	-- deactivate the timer in the screen is woken but not unlocked
+	RunWithDelays(20, function ()
+		if MyTimer and MyTimer:running() then 
+			MyTimer:stop()
+			MyTimer = nil
+		end
 	end)
 end):start()
 

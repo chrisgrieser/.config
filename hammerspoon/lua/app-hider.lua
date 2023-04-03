@@ -22,8 +22,8 @@ end
 local function hideOthers(appObj)
 	if
 		not appObj
-		or not (appObj:mainWindow())
-		or not (FrontAppName() == appObj:name()) -- win not switched in meantime
+		or not appObj:mainWindow()
+		or not IsFront(appObj:name())-- win not switched in meantime
 	then
 		return
 	end
@@ -80,9 +80,7 @@ AutoTileAppWatcher = Aw.new(function(appName, eventType, appObj)
 		and TableContains(autoTileApps, appName)
 		and #appObj:allWindows() > 1
 		and not (appObj:findWindow("Picture in Picture"))
-		and FrontAppName() ~= "Alfred" -- Alfred compatibility mode
-		and FrontAppName() ~= "SideNotes"
-		and FrontAppName() ~= "CleanShot X"
+		and not (IsFront {"Alfred", "SideNotes", "CleanShot X"})
 	then
 		appObj:hide()
 	end
@@ -94,9 +92,7 @@ Wf_maxWindows = Wf.new(true):subscribe(Wf.windowUnfocused, function(win)
 	if
 		not (IsProjector())
 		and CheckSize(win, Maximized)
-		and FrontAppName() ~= "Alfred" -- Alfred Compatibility Mode
-		and FrontAppName() ~= "CleanShot X"
-		and FrontAppName() ~= "SideNotes"
+		and not (IsFront {"Alfred", "SideNotes", "CleanShot X"})
 	then
 		win:application():hide()
 	end

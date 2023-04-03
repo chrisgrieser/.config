@@ -74,6 +74,7 @@
   "refactoring.nvim": { "branch": "master", "commit": "57c32c6b7a211e5a3a5e4ddc4ad2033daff5cf9a" },
   "replacer.nvim": { "branch": "master", "commit": "a40188a9f37bbc4eee7b827464bf44131be68353" },
   "rest.nvim": { "branch": "main", "commit": "0fdb69f328529b34a2279c14be63b3325dc52740" },
+  "rose-pine": { "branch": "main", "commit": "f8e210df52a4f418eae3690eb744b06c13a6c556" },
   "satellite.nvim": { "branch": "main", "commit": "e122514460f6b388f79f0ff634df8dd02702ccb8" },
   "sibling-swap.nvim": { "branch": "main", "commit": "fd412b3804eaa6eb09e4db6e6e930a35930ba72d" },
   "ssr.nvim": { "branch": "main", "commit": "a30674d07b220304ed81f1f46a8f1de36ce74c38" },
