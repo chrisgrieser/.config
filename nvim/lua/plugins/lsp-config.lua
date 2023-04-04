@@ -194,6 +194,14 @@ return {
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = setupAllLsps,
 		config = function()
+			-- FIX for multi-space workspace https://github.com/neovim/nvim-lspconfig/issues/2366#issuecomment-1367098168
+			vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)
+				local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
+				local bufnr = vim.api.nvim_get_current_buf()
+				vim.diagnostic.reset(ns, bufnr)
+				return true
+			end
+
 			-- Border Styling
 			require("lspconfig.ui.windows").default_options.border = BorderStyle
 			vim.lsp.handlers["textDocument/hover"] =
