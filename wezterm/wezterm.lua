@@ -14,8 +14,6 @@ local act = wt.action
 local actFun = wt.action_callback
 local os = require("os")
 local io = require("io")
-
----@diagnostic disable-next-line: unused-local
 local log = wt.log_info
 
 local isAtOffice = wt.hostname():find("mini") ~= nil
@@ -74,9 +72,10 @@ local function themeCycler(window, _)
 			overrides.color_scheme = nextScheme
 			window:set_config_overrides(overrides)
 
-			wt.log_info("Switched to: " .. schemesToSearch[i + 1])
-			window:toast_notification("Theme:", nextScheme)
 			window:copy_to_clipboard(nextScheme)
+			-- for notifications to work correctly, they need to be set to "alert"
+			-- in the macOS notification settings
+			window:toast_notification("Theme:", nextScheme, nil, 4000)
 			return
 		end
 	end
