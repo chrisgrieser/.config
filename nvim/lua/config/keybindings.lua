@@ -110,7 +110,8 @@ Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 -- without toggle current fold
 Keymap("n", "^", function()
 	if vim.v.count == 0 then
-		Normal("za")
+		local ok = pcall(Normal, "za")
+		if not ok then vim.notify("No Fold available", LogWarn) end
 	else
 		require("ufo").closeFoldsWith(vim.v.count - 1) -- -1 as topmost is foldlevel 0
 	end
