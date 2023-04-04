@@ -110,9 +110,8 @@ Keymap( { "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()
 
 -- r: [r]est of paragraph/indentation (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
-Keymap("o", "rp", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", { desc = "rest of paragraph textobj" })
-Keymap("o", "ri", "<cmd>lua require('various-textobjs').restOfIndentation()<CR>", { desc = "rest of indentation textobj" })
-Keymap( "o", "rg", "G", { desc = "rest of buffer textobj" })
+Keymap("o", "r", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", { desc = "rest of paragraph textobj" })
+Keymap("o", "R", "<cmd>lua require('various-textobjs').restOfIndentation()<CR>", { desc = "rest of indentation textobj" })
 
 -- ge: diagnostic textobj (similar to ge for the next diagnostic)
 Keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", { desc = "diagnostic textobj" })

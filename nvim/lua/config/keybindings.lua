@@ -150,16 +150,29 @@ Keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 Keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
 Keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
--- Word Switcher (fallback: switch casing)
--- stylua: ignore
-Keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
-
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
 for _, v in pairs(trailingKeys) do
 	Keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = "which_key_ignore" })
 end
 Keymap("n", "X", "mz$x`z", { desc = "delete last character" })
+
+-- case_conversion
+Keymap("n", "cru", ":lua require('textcase').current_word('to_upper_case')<CR>", { desc = "UPPER CASE" })
+Keymap("n", "crl", ":lua require('textcase').current_word('to_lower_case')<CR>", { desc = "lower case" })
+Keymap("n", "crt", ":lua require('textcase').current_word('to_title_case')<CR>", { desc = "Title Case" })
+Keymap("n", "crc", ":lua require('textcase').current_word('to_camel_case')<CR>", { desc = "camelCase" })
+Keymap("n", "crp", ":lua require('textcase').current_word('to_pascal_case')<CR>", { desc = "PascalCase" })
+Keymap("n", "cre", ":lua require('textcase').current_word('to_phrase_case')<CR>", { desc = "Sentence case" })
+Keymap("n", "cr-", ":lua require('textcase').current_word('to_dash_case')<CR>", { desc = "dash-case" })
+Keymap("n", "cr/", ":lua require('textcase').current_word('to_path_case')<CR>", { desc = "path/case" })
+Keymap("n", "cr.", ":lua require('textcase').current_word('to_dot_case')<CR>", { desc = "dot.case" })
+Keymap("n", "cr_", ":lua require('textcase').current_word('to_constant_case')<CR>", { desc = "SCREAMING_SNAKE_CASE" })
+Keymap("n", "crs", ":lua require('textcase').current_word('to_snake_case')<CR>", { desc = "snake_case" })
+
+-- Word Switcher (fallback: switch casing)
+-- stylua: ignore
+Keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
 
 --------------------------------------------------------------------------------
 
