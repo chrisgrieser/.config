@@ -226,7 +226,8 @@ Keymap("n", "<leader>fk", [[:%sm/(.*)/\1/g]] .. ("<Left>"):rep(11), { desc = "�
 Keymap("x", "<leader>fk", [[:sm/(.*)/\1/g]] .. ("<Left>"):rep(11), { desc = "󱗘 :smagic kirby" })
 Keymap("n", "<leader>ff", ":%sm///g<Left><Left><Left>", { desc = "󱗘 :smagic" })
 Keymap("x", "<leader>ff", ":sm///g<Left><Left><Left>", { desc = "󱗘 :smagic in sel" })
-Keymap("x", "<leader>f<Down>", ":sort", { desc = "󱗘 :sort" })
+Keymap("x", "<leader>f<CR>", ":sort<CR>", { desc = "󱗘 :sort paragraph" })
+Keymap("n", "<leader>f<CR>", "vip:sort<CR>", { desc = "󱗘 :sort" })
 
 Keymap("n", "<leader>f<Tab>", function()
 	Bo.expandtab = false
