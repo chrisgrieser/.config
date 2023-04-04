@@ -76,11 +76,10 @@ Keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
 
 -- automatically do `:nohl` when done with search https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
-	if Fn.mode() == "n" then
-		local originalSearchRelatedKeys = { "<CR>", "n", "N", "*", "#", "?", "/" }
-		local new_hlsearch = vim.tbl_contains(originalSearchRelatedKeys, Fn.keytrans(char))
-		if vim.opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
-	end
+	if Fn.mode() ~= "n" then return end
+	local originalSearchRelatedKeys = { "<CR>", "n", "N", "*", "#", "?", "/" }
+	local new_hlsearch = vim.tbl_contains(originalSearchRelatedKeys, Fn.keytrans(char))
+	if vim.opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
 end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
 -- Marks
