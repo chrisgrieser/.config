@@ -19,4 +19,4 @@ else
 	dir_to_open="$WD" # defined in .zshenv
 fi
 
-[[ -d "$dir_to_open" ]] && nohup wezterm start --cwd="$dir_to_open" &
+nohup wezterm start --cwd="$dir_to_open" &
