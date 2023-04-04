@@ -64,15 +64,7 @@ return {
 	},
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
-		lazy = true, -- loaded by keymaps
-		init = function ()
-			-- stylua: ignore start
-			vim.keymap.set("n", "cru", ":lua require('textcase').current_word('to_upper_case')<CR>", {desc = "UPPER CASE"})
-			vim.keymap.set("n", "crl", ":lua require('textcase').current_word('to_lower_case')<CR>", {desc = "lower case"})
-			vim.keymap.set("n", "crd", ":lua require('textcase').current_word('to_dash_case')<CR>", {desc = "dash case"})
-			vim.keymap.set("n", "crp", ":lua require('textcase').current_word('to_path_case')<CR>", {desc = "path case"})
-			-- stylua: ignore end
-		end
+		-- lazy = true, -- loaded by keymaps
 	},
 	{ -- Jump out of scope in insert mode
 		"abecodes/tabout.nvim",

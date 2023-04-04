@@ -18,13 +18,13 @@ local tsConfig = {
 		"diff",
 		"bibtex",
 		"vim",
+		"vimdoc", -- help files
 		"toml",
 		"ini",
 		"yaml",
 		"json",
 		"jsonc",
 		"html",
-		"help", -- vim help files
 		"query", -- treesitter query language
 		"http", -- http requests as format, used for rest.nvim
 	},
