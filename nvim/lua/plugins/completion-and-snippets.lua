@@ -116,7 +116,9 @@ local function cmpconfig()
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
-				if cmp.visible() then
+				if require("luasnip").choice_active() then
+					require("luasnip").change_choice(1)
+				elseif cmp.visible() then
 					cmp.select_next_item()
 				elseif require("neogen").jumpable() then
 					require("neogen").jump_next()
@@ -127,7 +129,9 @@ local function cmpconfig()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
-				if cmp.visible() then
+				if require("luasnip").choice_active() then
+					require("luasnip").change_choice(-1)
+				elseif cmp.visible() then
 					cmp.select_prev_item()
 				elseif require("neogen").jumpable(true) then
 					require("neogen").jump_prev()
@@ -145,14 +149,6 @@ local function cmpconfig()
 					require("luasnip").jump(1)
 				else
 					vim.notify("No more jump forwards.")
-				end
-			end, { "i", "s" }),
-			-- Cycle Choices
-			["<D-k>"] = cmp.mapping(function(_)
-				if require("luasnip").choice_active() then
-					require("luasnip").change_choice(1)
-				else
-					vim.notify("No choices available.")
 				end
 			end, { "i", "s" }),
 		},
