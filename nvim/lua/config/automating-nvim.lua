@@ -10,23 +10,22 @@ require("config.utils")
 local watchedFile = "/tmp/nvim-automation"
 local w = vim.loop.new_fs_event()
 
-
+-- ensure file existence for watcher to work reliably
+-- INFO needs to come before watcher is started
+if not Fn.filereadable(watchedFile) then
+	local file, err = io.open(watchedFile, "w")
+	if not file then
+		vim.notify("Could not append: " .. err, vim.log.levels.ERROR)
+		return false
+	end
+	file:write("foo")
+	file:close()
+end
 
 --------------------------------------------------------------------------------
 
----reads file from disk, removing trailing newlines
----@param path string
----@return string filecontent
-local function readFile(path)
-	local file = io.open(path, "r")
-	if not file then return "" end
-	local content = file:read("*a")
-	file:close()
-	return content:gsub("[\n\r]$", "")
-end
-
 local function executeExtCommand()
-	local commandStr = readFile(watchedFile)
+	local commandStr = ReadFile(watchedFile):gsub("[\n\r]$", "")
 	local command = load(commandStr) -- `load()` is the lua equivalent of `eval()`
 	if command then command() end
 
