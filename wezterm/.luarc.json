@@ -1,0 +1,6 @@
+{
+	"diagnostics.unusedLocalExclude": [
+		"io",
+		"os"
+	]
+}

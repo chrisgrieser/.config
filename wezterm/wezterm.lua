@@ -3,31 +3,31 @@
 
 -- THEME
 local darkTheme = "AdventureTime"
+-- local lightTheme = "One Light"
 local lightTheme = "seoulbones_light"
--- local lightTheme = "ayu_light"
 local opacity = 0.94
 
 --------------------------------------------------------------------------------
 -- UTILS
-local wezterm = require("wezterm")
-local act = wezterm.action
-local actFun = wezterm.action_callback
--- local os = require("os")
--- local io = require("io")
+local wt = require("wezterm")
+local act = wt.action
+local actFun = wt.action_callback
+local os = require("os")
+local io = require("io")
 
 ---@diagnostic disable-next-line: unused-local
-local log = wezterm.log_info
+local log = wt.log_info
 
-local isAtOffice = wezterm.hostname():find("mini") ~= nil
-local isAtMother = wezterm.hostname():find("Mother") ~= nil
+local isAtOffice = wt.hostname():find("mini") ~= nil
+local isAtMother = wt.hostname():find("Mother") ~= nil
 
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
 
 -- on start, move window to the side ("pseudomaximized")
-wezterm.on("gui-startup", function(cmd)
+wt.on("gui-startup", function(cmd)
 	local pos = { x = 705, y = 0, w = 3140, h = 2170 }
-	local _, _, window = wezterm.mux.spawn_window(cmd or {})
+	local _, _, window = wt.mux.spawn_window(cmd or {})
 	window:gui_window():set_position(pos.x, pos.y)
 	window:gui_window():set_inner_size(pos.w, pos.h)
 end)
@@ -37,7 +37,7 @@ end)
 ---selects the color scheme depending on Dark/Light Mode
 ---@return string name of the string to set in config.colorscheme
 local function autoToggleTheme()
-	local currentMode = wezterm.gui.get_appearance()
+	local currentMode = wt.gui.get_appearance()
 	local colorscheme = currentMode:find("Dark") and darkTheme or lightTheme
 	return colorscheme
 end
@@ -45,14 +45,14 @@ end
 ---cycle through builtin dark schemes in dark mode, and through light schemes in
 ---light mode
 local function themeCycler(window, _)
-	local allSchemes = wezterm.color.get_builtin_schemes()
-	local currentMode = wezterm.gui.get_appearance()
+	local allSchemes = wt.color.get_builtin_schemes()
+	local currentMode = wt.gui.get_appearance()
 	local currentScheme = window:effective_config().color_scheme
 	local darkSchemes = {}
 	local lightSchemes = {}
 
 	for name, scheme in pairs(allSchemes) do
-		local bg = wezterm.color.parse(scheme.background) -- parse into a color object
+		local bg = wt.color.parse(scheme.background) -- parse into a color object
 		---@diagnostic disable-next-line: unused-local
 		local h, s, l, a = bg:hsla() -- and extract HSLA information
 		if l < 0.4 then
@@ -67,7 +67,7 @@ local function themeCycler(window, _)
 		if schemesToSearch[i] == currentScheme then
 			local overrides = window:get_config_overrides() or {}
 			overrides.color_scheme = schemesToSearch[i + 1]
-			wezterm.log_info("Switched to: " .. schemesToSearch[i + 1])
+			wt.log_info("Switched to: " .. schemesToSearch[i + 1])
 			window:set_config_overrides(overrides)
 			return
 		end
@@ -85,7 +85,7 @@ return {
 	-- Start/Close
 	quit_when_all_windows_are_closed = true,
 	window_close_confirmation = "NeverPrompt",
-	default_cwd = wezterm.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/",
+	default_cwd = wt.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/",
 
 	-- Mouse & Cursor
 	hide_mouse_cursor_when_typing = true,
@@ -101,7 +101,7 @@ return {
 	command_palette_font_size = 29,
 	-- even though symbols and nerd font are bundled with wezterm, some symbols
 	-- due have a sizing issues, therefore explicitly using the Nerd Font here
-	font = wezterm.font("JetBrainsMono Nerd Font"),
+	font = wt.font("JetBrainsMono Nerd Font"),
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 
 	-- Size
@@ -186,14 +186,14 @@ return {
 				label = "Open URL",
 				action = actFun(function(window, pane)
 					local url = window:get_selection_text_for_pane(pane)
-					wezterm.open_with(url)
+					wt.open_with(url)
 				end),
 			},
 		},
 		{ -- cmd+, -> open this config file
 			key = ",",
 			mods = "CMD",
-			action = actFun(function() wezterm.open_with(wezterm.config_file) end),
+			action = actFun(function() wt.open_with(wt.config_file) end),
 		},
 		{ key = "r", mods = "CMD", action = act.ReloadConfiguration },
 
@@ -202,11 +202,11 @@ return {
 			mods = "CMD",
 			action = actFun(function(_, pane)
 				local cwd = pane:get_current_working_dir()
-				wezterm.open_with(cwd, "Finder")
+				wt.open_with(cwd, "Finder")
 			end),
 		},
 		-- Theme Cycler
-		{ key = "t", mods = "SHIFT|CTRL|ALT", action = wezterm.action_callback(themeCycler) },
+		{ key = "t", mods = "SHIFT|CTRL|ALT", action = wt.action_callback(themeCycler) },
 
 		--------------------------------------------------------------------------
 		-- MODES
@@ -215,7 +215,7 @@ return {
 		{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
 
 		-- Console / REPL
-		{ key = "Escape", mods = "CTRL", action = wezterm.action.ShowDebugOverlay },
+		{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
 
 		-- copy mode https://wezfurlong.org/wezterm/copymode.html
 		{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
