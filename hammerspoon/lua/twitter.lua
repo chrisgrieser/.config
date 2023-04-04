@@ -92,7 +92,6 @@ TwitterWatcher = Aw.new(function(appName, event)
 		AsSoonAsAppRuns("Twitter", function()
 			TwitterToTheSide()
 			TwitterScrollUp()
-			BringAllWinsToFront()
 
 			-- focus new tweet window if there is one
 			local newTweetWindow = twitter:findWindow("Tweet")
