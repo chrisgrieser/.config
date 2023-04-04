@@ -4,12 +4,11 @@ return {
 		ft = "markdown",
 		build = "cd app && npm install",
 	},
-	{ -- Ai Suggestions for Readable Code
+	{ -- AI Suggestions for Readable Code
 		"james1236/backseat.nvim",
 		cmd = { "Backseat", "BackseatClear", "Backseat" },
 		init = function() vim.keymap.set("n", "<leader>A", vim.cmd.Backseat, {desc = "󰚩 Readability Suggestions"}) end,
 		opts = {
-			openai_api_key = vim.env.OPENAI_API_KEY, -- via .zshenv
 			openai_model_id = "gpt-3.5-turbo", --gpt-4
 			-- additional_instruction = "Respond snarkily", 
 			highlight = {
