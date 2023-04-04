@@ -58,8 +58,7 @@ local function themeCycler(window, _)
 
 	for name, scheme in pairs(allSchemes) do
 		local bg = wt.color.parse(scheme.background) -- parse into a color object
-		---@diagnostic disable-next-line: unused-local
-		local h, s, l, a = bg:hsla() -- and extract HSLA information
+		local h, s, l, a = bg:hsla() ---@diagnostic disable-line: unused-local
 		if l < 0.45 then
 			table.insert(darkSchemes, name)
 		else
