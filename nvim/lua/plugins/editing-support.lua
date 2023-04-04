@@ -52,19 +52,12 @@ return {
 			vim.g.ai_temperature = 0 -- -0 with 1 meaning high randomness
 			vim.g.ai_indicator_text = "󱙺"
 			vim.g.ai_no_mappings = 1 -- disable default mappings (which overwrite <C-a> in Normal mode…)
-			vim.keymap.set("n", "<leader>a", ":AI<CR>", { desc = "󱙺 Complete with GPT" })
-			vim.keymap.set("x", "<leader>a", ":AI ", { desc = "󱙺 Prompt GPT" })
-			vim.keymap.set(
-				"x",
-				"<leader>fa",
-				":AI Refactor to improve this code<CR>",
-				{ desc = "󱙺 Refactor with GPT" }
-			)
 		end,
 	},
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
-		-- lazy = true, -- loaded by keymaps
+		lazy = true, -- loaded by keymaps
+		commit = "2cbe6b6", -- https://github.com/johmsalas/text-case.nvim/issues/40
 	},
 	{ -- Jump out of scope in insert mode
 		"abecodes/tabout.nvim",
