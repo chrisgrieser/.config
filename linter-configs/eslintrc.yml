@@ -50,7 +50,7 @@ rules:
     - min: 4
       max: 25
       properties: never
-      exceptions: [x, y, i, j, id, min, max, app, str, int, out, a, b, num, url, run, tag, ext, cmd, key]
+      exceptions: [x, y, i, j, id, min, max, app, str, int, out, a, b, num, url, run, tag, ext, cmd, key, msg]
   no-underscore-dangle: warn
   no-shadow: [warn, { hoist: all }]
   camelcase:

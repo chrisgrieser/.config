@@ -1,7 +1,0 @@
-bibtex_library_path="~/.config/pandoc/main-bibliography.bib"
-
-# If path is in Obsidian vault, will open the note in Obsidian afterwards
-output_path="~/main-vault/Literature Notes"
-
-# pdfannots2json or pdfannots. Should normally stay "pdfannots2json"
-extraction_engine="pdfannots2json"

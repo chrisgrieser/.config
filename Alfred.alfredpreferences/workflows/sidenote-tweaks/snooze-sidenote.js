@@ -12,7 +12,6 @@ function writeToFile(file, text) {
 //──────────────────────────────────────────────────────────────────────────────
 
 const sidenotes = Application("Sidenotes");
-const reminders = Application("Reminders");
 const content = sidenotes.currentNote().text();
 
 // Trash Note, but keep copy in trash folder
@@ -26,11 +25,25 @@ const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.txt`;
 writeToFile(trashNotePath, content);
 sidenotes.currentNote().delete();
 
-// create reminder
-reminders.defaultList().make({ new: "reminder", withProperties: { name: content } });
+//──────────────────────────────────────────────────────────────────────────────
+// CREATE REMINDER
+
+const reminders = Application("Reminders");
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+reminders.defaultList().make({
+	new: "reminder",
+	withProperties: {
+		name: content,
+		alldayDueDate: tomorrow,
+	},
+});
 // alternative method
 // const newReminder = reminders.Reminder({ name: "Title for reminder", body: "Notes for the reminder" });
 // reminders.lists.byName("List Name").reminders.push(newReminder);
 
-// direct return for notification
-content;
+reminders.activate(); // TODO quit, when date selection is implemented
+
+const msg = "💤 Snoozed to tomorrow;;" + content;
+msg; // direct return for notification

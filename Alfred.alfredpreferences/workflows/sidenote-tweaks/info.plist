@@ -152,6 +152,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>77E50339-2F7F-49F6-8E05-99B0118186A7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>84334C9A-E9AA-461E-B13E-8B77248006FA</key>
 		<array>
 			<dict>
@@ -321,7 +334,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
+				<string>77E50339-2F7F-49F6-8E05-99B0118186A7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -387,9 +400,9 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>{query}</string>
+				<string>{var:split2}</string>
 				<key>title</key>
-				<string>✅ Sidenote snoozed</string>
+				<string>{var:split1}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -455,6 +468,27 @@
 			<string>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>;;</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>split</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>77E50339-2F7F-49F6-8E05-99B0118186A7</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1263,7 +1297,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>450</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
@@ -1286,6 +1320,15 @@ sketchybar --trigger update-sidenotes-count</string>
 			<real>310</real>
 			<key>ypos</key>
 			<real>390</real>
+		</dict>
+		<key>77E50339-2F7F-49F6-8E05-99B0118186A7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>375</real>
+			<key>ypos</key>
+			<real>55</real>
 		</dict>
 		<key>7CCFDDEA-E1B7-447E-AA8C-2AC41962D59D</key>
 		<dict>
