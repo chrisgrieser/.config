@@ -116,3 +116,4 @@ Dev
 keymap
 Lua
 Wishlist
+Nano
