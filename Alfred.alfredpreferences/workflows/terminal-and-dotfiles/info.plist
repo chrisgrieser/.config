@@ -126,8 +126,6 @@
 				<integer>0</integer>
 				<key>argument</key>
 				<integer>3</integer>
-				<key>argumenttext</key>
-				<string>alacritty</string>
 				<key>focusedappvariable</key>
 				<true/>
 				<key>focusedappvariablename</key>
@@ -259,7 +257,7 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>Quake Mode</string>
+			<string>Open Terminal in appropriate dir</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -297,7 +295,7 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
 			<key>xpos</key>
-			<real>245</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>190</real>
 		</dict>

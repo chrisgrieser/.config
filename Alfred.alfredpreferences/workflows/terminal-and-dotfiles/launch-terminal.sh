@@ -5,16 +5,18 @@ export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
 FRONT_APP=$(osascript -e 'tell application "System Events" to set frontApp to (name of first process where it is frontmost)')
 if [[ "$FRONT_APP" =~ "Finder" ]]; then
-	WD=$(osascript -e 'tell application "Finder"
-		if (count windows) is not 0 then set pathToOpen to target of window 1 as alias
-		return POSIX path of pathToOpen
-	end tell')
+	dir_to_open=$(osascript -e '
+		tell application "Finder"
+			if (count windows) is not 0 then set pathToOpen to target of window 1 as alias
+			return POSIX path of pathToOpen
+		end tell
+	')
 elif [[ "$FRONT_APP" =~ "neovide" ]]; then
 	# INFO requires vim.opt.titlestring='%{expand(\"%:p\")}'
 	win_title=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
-	WD=$(dirname "$win_title")
+	dir_to_open=$(dirname "$win_title")
 else
-	WD="${working_directory/#\~/$HOME}"
+	dir_to_open="$WD" # defined in .zshenv
 fi
 
-[[ -d "$WD" ]] && nohup wezterm start --cwd="$WD" &
+[[ -d "$dir_to_open" ]] && nohup wezterm start --cwd="$dir_to_open" &

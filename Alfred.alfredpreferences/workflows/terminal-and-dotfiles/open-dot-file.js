@@ -52,7 +52,7 @@ function run(argv) {
 			if (type === "yml") type = "yaml";
 			else if (type === "mjs") type = "js";
 			else if (type === "zsh") type = "sh";
-			else if (type === "conf" || type === "cfg") type = "config";
+			else if (type === "conf" || type === "cfg" || type === "ini") type = "config";
 			else if (type.endsWith("-bkp")) type = "other";
 
 			// icon determination
