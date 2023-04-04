@@ -1,7 +1,3 @@
-[submodule "Alfred.alfredpreferences/workflows/alfred-bibtex-citation-picker"]
-	path = Alfred.alfredpreferences/workflows/alfred-bibtex-citation-picker
-	url = git@github.com:chrisgrieser/alfred-bibtex-citation-picker.git
-	update = rebase
 [submodule "Alfred.alfredpreferences/workflows/shimmering-obsidian"]
 	path = Alfred.alfredpreferences/workflows/shimmering-obsidian
 	url = git@github.com:chrisgrieser/shimmering-obsidian.git
