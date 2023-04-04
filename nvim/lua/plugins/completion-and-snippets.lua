@@ -127,7 +127,7 @@ local function cmpconfig()
 				else
 					fallback()
 				end
-			end, { "i", "s" }),
+			end, { "i", "s", "c" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if require("luasnip").choice_active() then
 					require("luasnip").change_choice(-1)
@@ -140,7 +140,7 @@ local function cmpconfig()
 				else
 					fallback()
 				end
-			end, { "i", "s" }),
+			end, { "i", "s", "c" }),
 			-- Force jumping
 			["<D-j>"] = cmp.mapping(function(_)
 				if require("neogen").jumpable() then
