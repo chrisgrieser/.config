@@ -132,6 +132,10 @@ local function themeModifications()
 		linkHighlight("NotifyINFOIcon", "@define")
 		linkHighlight("NotifyINFOTitle", "@define")
 		linkHighlight("NotifyINFOBody", "@define")
+
+	elseif theme == "rose-pine" and mode == "light" then
+		setHighlight("IndentBlanklineChar", "guifg=#cfcfcf")
+
 	end
 end
 

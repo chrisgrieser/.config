@@ -114,13 +114,7 @@ end
 ---@param pos hs.geometry
 function MoveResize(win, pos)
 	-- guard clauses
-	if
-		not win
-		or not win:application()
-		or CheckSize(win, pos) -- already correctly sized
-		or win:title() == "Quick Look"
-		or win:title() == "qlmanage"
-	then
+	if not win or not win:application() or win:title() == "Quick Look" or win:title() == "qlmanage" then
 		return
 	end
 	local appsToIgnore =
@@ -139,11 +133,11 @@ function MoveResize(win, pos)
 	end
 
 	-- resize
-	RunWithDelays({ 0, 0.1, 0.2, 0.3, 0.4, 0.5 }, function()
-		-- check for unequal false, since non-resizable wins return nil
-		if CheckSize(win, pos) ~= false then return end
-		win:moveToUnit(pos)
-	end)
+	local function resize(_win, _pos)
+		if CheckSize(_win, _pos) ~= false then return end -- check for unequal false, since non-resizable wins return nil
+		_win:moveToUnit(_pos)
+	end
+	resize(win, pos)
 
 	-- Obsidian extras (has to come after resizing)
 	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win) end
