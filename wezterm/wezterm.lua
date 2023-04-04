@@ -3,8 +3,8 @@
 
 -- THEME
 local darkTheme = "AdventureTime"
--- local lightTheme = "One Light"
-local lightTheme = "seoulbones_light"
+local lightTheme = "Mocha (light) (terminal.sexy)"
+-- local lightTheme = "seoulbones_light"
 local opacity = 0.94
 
 --------------------------------------------------------------------------------
@@ -12,8 +12,10 @@ local opacity = 0.94
 local wt = require("wezterm")
 local act = wt.action
 local actFun = wt.action_callback
-local os = require("os")
-local io = require("io")
+-- selene: allow(incorrect_standard_library_use)
+os = require("os")
+-- selene: allow(incorrect_standard_library_use)
+io = require("io")
 
 ---@diagnostic disable-next-line: unused-local
 local log = wt.log_info
