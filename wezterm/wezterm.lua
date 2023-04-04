@@ -57,7 +57,7 @@ local function themeCycler(window, _)
 		local bg = wt.color.parse(scheme.background) -- parse into a color object
 		---@diagnostic disable-next-line: unused-local
 		local h, s, l, a = bg:hsla() -- and extract HSLA information
-		if l < 0.4 then
+		if l < 0.45 then
 			table.insert(darkSchemes, name)
 		else
 			table.insert(lightSchemes, name)
@@ -68,9 +68,13 @@ local function themeCycler(window, _)
 	for i = 1, #schemesToSearch, 1 do
 		if schemesToSearch[i] == currentScheme then
 			local overrides = window:get_config_overrides() or {}
-			overrides.color_scheme = schemesToSearch[i + 1]
-			wt.log_info("Switched to: " .. schemesToSearch[i + 1])
+			local nextScheme = schemesToSearch[i + 1]
+			overrides.color_scheme = nextScheme
 			window:set_config_overrides(overrides)
+
+			wt.log_info("Switched to: " .. schemesToSearch[i + 1])
+			window:toast_notification("Theme:", nextScheme)
+			window:copy_to_clipboard(nextScheme)
 			return
 		end
 	end
@@ -81,7 +85,7 @@ end
 return {
 	-- Meta
 	check_for_updates = true,
-	automatically_reload_config = false, -- causes errors too quickly
+	automatically_reload_config = true, -- causes errors too quickly
 	detect_password_input = isAtOffice,
 
 	-- Start/Close
