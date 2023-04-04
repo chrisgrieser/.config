@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 
 -- THEME
-local darkTheme = "AdventureTime"
+local darkTheme = "Paraiso Dark"
 local lightTheme = "Mocha (light) (terminal.sexy)"
 -- local lightTheme = "seoulbones_light"
 local opacity = 0.94
