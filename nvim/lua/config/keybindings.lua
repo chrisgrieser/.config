@@ -157,17 +157,32 @@ for _, v in pairs(trailingKeys) do
 end
 Keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
--- case_conversion
+-- case-conversion
 Keymap("n", "cru", ":lua require('textcase').current_word('to_upper_case')<CR>", { desc = "UPPER CASE" })
 Keymap("n", "crl", ":lua require('textcase').current_word('to_lower_case')<CR>", { desc = "lower case" })
 Keymap("n", "crt", ":lua require('textcase').current_word('to_title_case')<CR>", { desc = "Title Case" })
 Keymap("n", "crc", ":lua require('textcase').current_word('to_camel_case')<CR>", { desc = "camelCase" })
-Keymap("n", "crp", ":lua require('textcase').current_word('to_pascal_case')<CR>", { desc = "PascalCase" })
-Keymap("n", "cre", ":lua require('textcase').current_word('to_phrase_case')<CR>", { desc = "Sentence case" })
+Keymap(
+	"n",
+	"crp",
+	":lua require('textcase').current_word('to_pascal_case')<CR>",
+	{ desc = "PascalCase" }
+)
+Keymap(
+	"n",
+	"cre",
+	":lua require('textcase').current_word('to_phrase_case')<CR>",
+	{ desc = "Sentence case" }
+)
 Keymap("n", "cr-", ":lua require('textcase').current_word('to_dash_case')<CR>", { desc = "dash-case" })
 Keymap("n", "cr/", ":lua require('textcase').current_word('to_path_case')<CR>", { desc = "path/case" })
 Keymap("n", "cr.", ":lua require('textcase').current_word('to_dot_case')<CR>", { desc = "dot.case" })
-Keymap("n", "cr_", ":lua require('textcase').current_word('to_constant_case')<CR>", { desc = "SCREAMING_SNAKE_CASE" })
+Keymap(
+	"n",
+	"cr_",
+	":lua require('textcase').current_word('to_constant_case')<CR>",
+	{ desc = "SCREAMING_SNAKE_CASE" }
+)
 Keymap("n", "crs", ":lua require('textcase').current_word('to_snake_case')<CR>", { desc = "snake_case" })
 
 -- Word Switcher (fallback: switch casing)
@@ -235,8 +250,8 @@ Keymap(
 	[[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]],
 	{ desc = "󱗘 :smagic cword" }
 )
-Keymap("n", "<leader>fk", [[:%sm/(.*)/\1/g]] .. ("<Left>"):rep(11), { desc = "󱗘 :smagic kirby" })
-Keymap("x", "<leader>fk", [[:sm/(.*)/\1/g]] .. ("<Left>"):rep(11), { desc = "󱗘 :smagic kirby" })
+Keymap("n", "<leader>fk", [[:%sm/(.*)/\1/g]] .. ("<Left>"):rep(9), { desc = "󱗘 :smagic kirby" })
+Keymap("x", "<leader>fk", [[:sm/(.*)/\1/g]] .. ("<Left>"):rep(9), { desc = "󱗘 :smagic kirby" })
 Keymap("n", "<leader>ff", ":%sm///g<Left><Left><Left>", { desc = "󱗘 :smagic" })
 Keymap("x", "<leader>ff", ":sm///g<Left><Left><Left>", { desc = "󱗘 :smagic in sel" })
 Keymap("x", "<leader>f<Down>", ":sort<CR>", { desc = "󱗘 :sort paragraph" })
@@ -271,7 +286,15 @@ Keymap(
 Keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
 Keymap({ "n", "x" }, "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
 Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("Extract Function") end, { desc = "󱗘 Extract Func" })
+
+Keymap( "x", "<leader>fa", ":AI Refactor to improve this code<CR>", { desc = "󱙺 Refactor with GPT" })
 -- stylua: ignore end
+
+--------------------------------------------------------------------------------
+-- AI Support
+
+Keymap("n", "<leader>a", ":AI<CR>", { desc = "󱙺 Complete with GPT" })
+Keymap("x", "<leader>a", ":AI ", { desc = "󱙺 Prompt GPT" })
 
 --------------------------------------------------------------------------------
 

@@ -10,6 +10,10 @@ require("config.utils")
 local watchedFile = "/tmp/nvim-automation"
 local w = vim.loop.new_fs_event()
 
+
+
+--------------------------------------------------------------------------------
+
 ---reads file from disk, removing trailing newlines
 ---@param path string
 ---@return string filecontent
