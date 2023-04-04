@@ -118,9 +118,8 @@ end
 ---@param callbackFn function function to be run on delay(s)
 function RunWithDelays(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
-	MyTimer = {}
 	for _, delay in pairs(delaySecs) do
-		MyTimer[delay] = hs.timer.doAfter(delay, callbackFn)
+		hs.timer.doAfter(delay, callbackFn)
 	end
 end
 
