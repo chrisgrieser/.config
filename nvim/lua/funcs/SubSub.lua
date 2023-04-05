@@ -23,6 +23,8 @@ local function processParameters(opts, curBufNum)
 	return line1, line2, bufferLines, toSearch, toReplace, singleRepl
 end
 
+
+
 --------------------------------------------------------------------------------
 
 ---more complicated than just running gsub on each line, since the shift in
@@ -30,11 +32,11 @@ end
 ---@param opts table
 ---@param ns integer namespace id to use for highlights
 ---@param curBufNum integer buffer id
-local function highlightReplacements(opts, ns, curBufNum)
+local function previewAndHlReplacements(opts, ns, curBufNum)
 	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts, curBufNum)
 	if not toReplace then return end
 
-	-- preview Buffer
+	-- preview changes
 	local newBufferLines = {}
 	local occurrences = singleRepl and 1 or nil
 	for _, line in pairs(bufferLines) do
@@ -43,7 +45,7 @@ local function highlightReplacements(opts, ns, curBufNum)
 	end
 	vim.api.nvim_buf_set_lines(curBufNum, line1 - 1, line2, false, newBufferLines)
 
-	-- iterate lines
+	-- add highlights
 	for i, line in ipairs(bufferLines) do
 		local lineIdx = line1 + i - 2
 
@@ -124,7 +126,7 @@ local function previewSubstitution(opts, ns, preview_buf)
 	if not toReplace then
 		highlightSearches(opts, ns, curBufNum)
 	else
-		highlightReplacements(opts, ns, curBufNum)
+		previewAndHlReplacements(opts, ns, curBufNum)
 	end
 
 	return 2 -- return the value of the preview type
