@@ -64,7 +64,6 @@ local function workLayout()
 			MoveResize(App(appName):mainWindow(), PseudoMaximized)
 		end
 		RestartApp("AltTab") -- fix AltTab not picking up changes
-		MoveResize(App("SidesNotes"):mainWindow(), SideNotesWide)
 		TwitterToTheSide()
 		TwitterScrollUp()
 		App("Mimestream"):activate()
