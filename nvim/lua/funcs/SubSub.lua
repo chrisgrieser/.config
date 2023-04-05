@@ -23,10 +23,10 @@ end
 ---@return integer end line of range
 ---@return string[] buffer lines
 ---@return string term to search
----@return string replacement
+---@return string|nil replacement
 local function processParameters(opts)
 	-- "trimempty" allows to leave out the first and third "/" from regular `:s`
-	local input = vim.split(opts.args, "/", { trimempty = true, plain = true })
+	local input = vim.split(opts.args, "/", { trimempty = true })
 	local toSearch = input[1]
 	local toReplace = input[2]
 
@@ -86,9 +86,9 @@ local function previewSubstitution(opts, ns, preview_buf)
 	return 2 -- return the value of the preview type
 end
 
--- adds the usercommand as ":S" and ":Substitute"
+-- adds the usercommand
 function M.setup()
-	local commands = { "S", "Substitute" }
+	local commands = { "S", "SubSub" }
 	for _, cmd in pairs(commands) do
 		vim.api.nvim_create_user_command(cmd, executeSubstitution, {
 			nargs = "?",
