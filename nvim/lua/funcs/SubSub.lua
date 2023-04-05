@@ -1,48 +1,6 @@
 local M = {}
 --------------------------------------------------------------------------------
 
----@class lineWithShift
----@field lineContent string
----@field shifts integer[]
-
----iterate lines and replace.
----more complecated than just running gsub on each line, since the shift in
----length needs to be determined for each substitution, for the preview highlight
----@param lines string[]
----@param toSearch string
----@param toReplace string
----@param singleRepl boolean single replacement or not
----@nodiscard
----@return lineWithShift[]
-local function substituteLines(lines, toSearch, toReplace, singleRepl)
-	local newBufferLines = {} ---@type lineWithShift[]
-	local occurrences = singleRepl and 1 or nil
-
-	for _, line in pairs(lines) do -- iterate lines
-		local matches = {}
-		for i in line:gmatch("()" .. toSearch) do
-			table.insert(matches, i)
-			if singleRepl then break end
-		end
-
-		local lineLengthShifts = {} -- how each substitution shifted the length of the line. needed for highlights
-		local sumOfShifts = 0 -- needed to factor in the previous shifts in the calculation of shifts
-		for idx, match in ipairs(matches) do -- iterate matches in given line
-			local lineWithIdxSubstititons = line:gsub(match, toReplace, idx)
-			local lengthDiff = #lineWithIdxSubstititons - #line - sumOfShifts
-			table.insert(lineLengthShifts, lengthDiff)
-			sumOfShifts = sumOfShifts + lengthDiff
-		end
-
-		-- perform the actual substitution of text in the line
-		local newLine = line:gsub(toSearch, toReplace, occurrences)
-
-		table.insert(newBufferLines, { line = newLine, posShift = lineLengthShifts })
-	end
-
-	return newBufferLines
-end
-
 ---process the parameters given in the user command (ranges, args, etc.)
 ---@param opts table
 ---@nodiscard
@@ -64,6 +22,43 @@ local function processParameters(opts)
 	return line1, line2, bufferLines, toSearch, toReplace, singleRepl
 end
 
+--------------------------------------------------------------------------------
+
+---more complecated than just running gsub on each line, since the shift in
+---length needs to be determined for each substitution, for the preview highlight
+---@param lines string[]
+---@param toSearch string
+---@param toReplace string
+---@param singleRepl boolean single replacement or not
+---@nodiscard
+---@return table[integer[]] -- shiftsInEveryLine
+local function calculateLineShifts(lines, toSearch, toReplace, singleRepl)
+	local shiftsInEveryLine = {}
+
+	-- iterate lines
+	for _, line in pairs(lines) do
+		local matches = {}
+		for i in line:gmatch("()" .. toSearch) do
+			table.insert(matches, i)
+			if singleRepl then break end
+		end
+		local shiftsInThisLine = {}
+		local sumOfShifts = 0 -- needed to factor in the previous shifts in the calculation of shifts
+
+		-- iterate matches in given line
+		for idx, match in ipairs(matches) do
+			local lineWithIdxSubstititons = line:gsub(match, toReplace, idx)
+			local lengthDiff = #lineWithIdxSubstititons - #line - sumOfShifts
+			sumOfShifts = sumOfShifts + lengthDiff
+			table.insert(shiftsInThisLine, lengthDiff)
+		end
+
+		table.insert(shiftsInEveryLine, shiftsInThisLine)
+	end
+
+	return shiftsInEveryLine
+end
+
 ---the substitution to perform when the commandline is confirmed with <CR>
 ---@param opts table
 local function executeSubstitution(opts)
@@ -72,7 +67,12 @@ local function executeSubstitution(opts)
 		vim.notify("No replacement value given, cannot perform substitution.", vim.log.levels.ERROR)
 		return
 	end
-	local newBufferLines = substituteLines(bufferLines, toSearch, toReplace, singleRepl)
+	local newBufferLines = {}
+	local occurrences = singleRepl and 1 or nil
+	for _, line in pairs(bufferLines) do
+		local newLine = line:gsub(toSearch, toReplace, occurrences)
+		table.insert(newBufferLines, newLine)
+	end
 	vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
 end
 
@@ -89,25 +89,17 @@ local function previewSubstitution(opts, ns, preview_buf)
 		)
 		return
 	end
-	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts)
+	local line1, _, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts)
 
 	-- live preview the changes
-	if toReplace then
-		local newBufferLines = substituteLines(bufferLines, toSearch, toReplace, singleRepl)
-		vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
+	if not toReplace then
+
+	else
+		executeSubstitution(opts)
 	end
 
-	-- Highlights //
+	-- Highlight the changes
 	for i, line in ipairs(bufferLines) do
-		local matchesInLine = {}
-		local startIdx, endIdx = 0, 0
-
-		while true do
-			startIdx, endIdx = line:find(toSearch, startIdx + 1)
-			if not startIdx then break end
-			table.insert(matchesInLine, { startPos = startIdx, endPos = endIdx })
-			if singleRepl then break end -- only needs first match
-		end
 
 		for _, match in pairs(matchesInLine) do
 			-- TODO make this work with dynamic length of replacement
