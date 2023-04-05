@@ -248,16 +248,13 @@ require("funcs.SubSub").setup()
 
 Keymap(
 	"n",
-	"<leader>fc",
-	[[:S<CR>//g<Left><Left>]],
-	{ desc = "󱗘 :smagic cword", expr = true }
+	"<leader>ff",
+	function() return ":S " .. Expand("<cword>") .. "//g<Left><Left>" end,
+	{ desc = "󱗘 :SubSub cword", expr = true }
 )
-Keymap("n", "<leader>fk", [[:%sm/(.*)/\1/g]] .. ("<Left>"):rep(9), { desc = "󱗘 :smagic kirby" })
-Keymap("x", "<leader>fk", [[:sm/(.*)/\1/g]] .. ("<Left>"):rep(9), { desc = "󱗘 :smagic kirby" })
-Keymap("n", "<leader>ff", ":%sm///g<Left><Left><Left>", { desc = "󱗘 :smagic" })
-Keymap("x", "<leader>ff", ":sm///g<Left><Left><Left>", { desc = "󱗘 :smagic in sel" })
-Keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort paragraph" })
-Keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort" })
+Keymap({"n", "x"}, "<leader>fk", [[:S/(.*)/%1/g]] .. ("<Left>"):rep(9), { desc = "󱗘 :SubSub kirby" })
+Keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
+Keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
 
 Keymap("n", "<leader>f<Tab>", function()
 	Bo.expandtab = false
@@ -291,7 +288,6 @@ Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("E
 
 Keymap( "x", "<leader>fa", ":AI Refactor to improve this code<CR>", { desc = "󱙺 Refactor with GPT" })
 -- stylua: ignore end
-
 
 --------------------------------------------------------------------------------
 -- AI Support

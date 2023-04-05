@@ -31,7 +31,7 @@ end
 ---@return boolean whether to search first or all occurrences in line
 local function processParameters(opts)
 	-- "trimempty" allows to leave out the first and third "/" from regular `:s`
-	local input = vim.split(opts.args, "/", { trimempty = true })
+	local input = vim.split(opts.args, "/", { trimempty = true, plain = false })
 	local toSearch, toReplace, flags = input[1], input[2], input[3]
 	local singleRepl = (flags and flags:find("g")) == nil
 
@@ -73,7 +73,7 @@ local function previewSubstitution(opts, ns, preview_buf)
 		vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
 	end
 
-	-- Highlights
+	-- Highlights //
 	for i, line in ipairs(bufferLines) do
 		local matchesInLine = {}
 		local startIdx, endIdx = 0, 0
