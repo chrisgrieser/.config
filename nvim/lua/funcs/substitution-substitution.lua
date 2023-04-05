@@ -60,12 +60,12 @@ local function previewSubstitution(opts, ns, preview_buf)
 		local newBufferLines = substituteLines(bufferLines, toSearch, toReplace)
 		vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
 
-		-- add highlights for the replacement. 
-		-- INFO uses indices from the search values, so not highlight existing 
+		-- add highlights for the replacement
+		-- INFO uses indices from the search values, to not highlight existing 
 		-- instances of the replacement value in the buffer
 		for i, line in ipairs(bufferLines) do
-			local startIdx, _ = line:find(toSearch)
-			local endIdx = startIdx + #toReplace
+			local startIdx, endIdx = line:find(toSearch)
+			endIdx = endIdx - 1
 			if startIdx then
 				vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startIdx - 1, endIdx)
 			end
