@@ -45,7 +45,6 @@ local function executeSubstitution(opts)
 		vim.notify("No replacement value given, cannot perform substitution.", vim.log.levels.ERROR)
 		return
 	end
-
 	local newBufferLines = substituteLines(bufferLines, toSearch, toReplace)
 	vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
 end
@@ -75,8 +74,14 @@ local function previewSubstitution(opts, ns, preview_buf)
 	-- if no replacement entered yet: highlight search term
 	-- if replacement entered: highlight replacement
 	for i, line in ipairs(bufferLines) do
-		local startIdx, endIdx = line:find(toSearch)
-		if startIdx then
+		local matchesInLine = {}
+		local start, _end = 0, 0
+		while true do
+			start, _end = line:find(toSearch, start + 1)
+			if not start then break end
+			table.insert(matchesInLine, {start, _end})
+		end
+		if not vim.tbl_isempty(matchesInLine) then
 			-- TODO make this work with dynamic length of replacement
 			if toReplace then endIdx = startIdx + #toReplace - 1 end
 			vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startIdx - 1, endIdx)
