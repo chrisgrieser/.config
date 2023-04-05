@@ -1,10 +1,7 @@
 local M = {}
 --------------------------------------------------------------------------------
 
--- TODO ranges
 -- TODO flags
--- credit: [inc-rename.nvim](https://github.com/smjonas/inc-rename.nvim) for a
--- reference how to work with replacement previews
 
 --------------------------------------------------------------------------------
 
@@ -12,7 +9,7 @@ local M = {}
 local function substituteLines(lines, toSearch, toReplace)
 	local newBufferLines = {}
 	for _, line in pairs(lines) do
-		local newLine = line:gsub(toSearch, toReplace)
+		local newLine = line:gsub(toSearch, toReplace) -- TODO different substitution engine here
 		table.insert(newBufferLines, newLine)
 	end
 	return newBufferLines
@@ -61,13 +58,15 @@ local function previewSubstitution(opts, ns, preview_buf)
 		vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
 
 		-- add highlights for the replacement
-		-- INFO uses indices from the search values, to not highlight existing 
+		-- INFO uses indices from the search values, to not highlight existing
 		-- instances of the replacement value in the buffer
 		for i, line in ipairs(bufferLines) do
-			local startIdx, endIdx = line:find(toSearch)
-			endIdx = endIdx - 1
+			local lineIdx = line1 + i - 2
+			local startIdx, _ = line:find(toSearch)
 			if startIdx then
-				vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startIdx - 1, endIdx)
+				-- TODO make this work with dynamic length of replacement
+				local endIdx = startIdx + #toReplace - 1 
+				vim.api.nvim_buf_add_highlight(0, ns, "Substitute", lineIdx, startIdx - 1, endIdx)
 			end
 		end
 	end
@@ -76,7 +75,7 @@ local function previewSubstitution(opts, ns, preview_buf)
 	return 2
 end
 
--- adds the usercommand as ":S" and ":Substitute"
+-- adds the usercommand as ":S" and ":LuaSubstitute"
 function M.setup()
 	vim.api.nvim_create_user_command("S", executeSubstitution, {
 		nargs = "?",
@@ -84,7 +83,7 @@ function M.setup()
 		addr = "lines",
 		preview = previewSubstitution,
 	})
-	vim.api.nvim_create_user_command("Substitute", executeSubstitution, {
+	vim.api.nvim_create_user_command("LuaSubstitute", executeSubstitution, {
 		nargs = "?",
 		range = "%",
 		addr = "lines",
