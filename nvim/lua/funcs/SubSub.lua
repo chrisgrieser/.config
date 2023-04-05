@@ -34,6 +34,7 @@ local function highlightReplacements(opts, ns, curBufNum)
 	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts, curBufNum)
 	if not toReplace then return end
 
+	-- preview Buffer
 	local newBufferLines = {}
 	local occurrences = singleRepl and 1 or nil
 	for _, line in pairs(bufferLines) do
@@ -58,7 +59,7 @@ local function highlightReplacements(opts, ns, curBufNum)
 		for ii, startPos in ipairs(startPositions) do
 			local _, endPos = line:find(toSearch, startPos)
 			local lineWithSomeSubs = line:gsub(toSearch, toReplace, ii)
-			local diff = (#lineWithSomeSubs - #line) + previousShift
+			local diff = (#lineWithSomeSubs - #line)
 			startPos = startPos + previousShift
 			endPos = endPos + diff -- shift of end position due to replacement
 			previousShift = previousShift + diff -- remember shift for next iteration
@@ -68,22 +69,33 @@ local function highlightReplacements(opts, ns, curBufNum)
 	end
 end
 
+---@param opts table
+---@param ns integer namespace id to use for highlights
+---@param curBufNum integer buffer id
+local function highlightSearches(opts, ns, curBufNum)
+	local line1, _, bufferLines, toSearch, _, _ = processParameters(opts, curBufNum)
+	for i, line in ipairs(bufferLines) do
+		-- only highlighting first match, since the g-flag can only be entered
+		-- when there is a substitution value
+		local startPos, endPos = line:find(toSearch)
+		if startPos then
+			-- stylua: ignore
+			vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startPos - 1, endPos)
+		end
+	end
+end
+
 ---the substitution to perform when the commandline is confirmed with <CR>
 ---@param opts table
 local function performSubstitition(opts)
-	local line1 = opts.line1
-	local line2 = opts.line2
 	local curBufNum = vim.api.nvim_get_current_buf()
-	local bufferLines = vim.api.nvim_buf_get_lines(curBufNum, line1 - 1, line2, false)
-
-	local input = vim.split(opts.args, "/", { trimempty = true, plain = false })
-	local toSearch, toReplace, flags = input[1], input[2], input[3]
-	local singleRepl = (flags and flags:find("g")) == nil
+	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts, curBufNum)
 
 	if not toReplace then
 		vim.notify("No replacement value given, cannot perform substitution.", vim.log.levels.ERROR)
 		return
 	end
+
 	local newBufferLines = {}
 	local occurrences = singleRepl and 1 or nil
 	for _, line in pairs(bufferLines) do
@@ -100,30 +112,18 @@ end
 ---@return integer? -- value of preview type
 local function previewSubstitution(opts, ns, preview_buf)
 	if preview_buf then
-		vim.notify_once(
-			"SubSub does not support 'inccommand=split' yet. Please use 'inccommand=unsplit'.",
-			vim.log.levels.WARN
-		)
+		-- stylua: ignore
+		vim.notify_once( "SubSub does not support 'inccommand=split' yet. Please use 'inccommand=unsplit'.", vim.log.levels.WARN)
 		return
 	end
 	local curBufNum = vim.api.nvim_get_current_buf()
-	local line1, _, bufferLines, toSearch, toReplace, _ = processParameters(opts, curBufNum)
 
-	-- NO REPLACE VALUE YET = ONLY SEARCH TERMS TO HIGHLIGHT
+	local input = vim.split(opts.args, "/", { trimempty = true, plain = false })
+	local toReplace = input[2]
+
 	if not toReplace then
-		for i, line in ipairs(bufferLines) do
-			-- only highlighting first match, since the g-flag can only be entered
-			-- when there is a substitution value
-			local startPos, endPos = line:find(toSearch)
-			if startPos then
-				-- stylua: ignore
-				vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startPos - 1, endPos)
-			end
-		end
-
-	-- WITH REPLACE VALUE: PREVIEW CHANGES & HIGHLIGHT THEM
+		highlightSearches(opts, ns, curBufNum)
 	else
-		-- preview the changes
 		highlightReplacements(opts, ns, curBufNum)
 	end
 
