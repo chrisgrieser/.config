@@ -47,9 +47,9 @@ return {
 			-- INFO requires openai api key from .zshenv
 			vim.g.ai_context_before = 10
 			vim.g.ai_context_after = 10
-			vim.g.ai_completions_model = "gpt-3.5-turbo" -- https://platform.openai.com/docs/models/gpt-3-5
-			vim.g.ai_edits_model = "gpt-3.5-turbo"
-			vim.g.ai_temperature = 0 -- -0 with 1 meaning high randomness
+			-- vim.g.ai_completions_model = "gpt-3.5-turbo" -- https://platform.openai.com/docs/models/gpt-3-5
+			-- vim.g.ai_edits_model = "gpt-3.5-turbo"
+			-- vim.g.ai_temperature = 0 -- -0 with 1 meaning high randomness
 			vim.g.ai_indicator_text = "󱙺"
 			vim.g.ai_no_mappings = 1 -- disable default mappings (which overwrite <C-a> in Normal mode…)
 		end,

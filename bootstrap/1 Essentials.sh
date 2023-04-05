@@ -53,8 +53,19 @@ ln -sf "$DOTFILE_FOLDER/mackup/mackup.cfg" ~/.mackup.cfg
 ln -sf "$DOTFILE_FOLDER/mackup/custom-app-configs" ~/.mackup
 brew install mackup && mackup restore
 
+
+# prevent apps from overwriting symlink files https://github.com/lra/mackup/issues/1854
+cd "$DOTFILE_FOLDER/mackup/backups/Library/Preferences/"
 chflags nouchg
 
+# for loop for every file in the folder
+for file in *; do
+	echo "$file"
+done
+
+# restore flags
+chflags uchg
+cd -
 
 #───────────────────────────────────────────────────────────────────────────────
 # CREATE SYMLINKS

@@ -1,6 +1,12 @@
 require("config.utils")
+--------------------------------------------------------------------------------
 
-
+Keymap(
+	"n",
+	"<leader>h",
+	function() return "<cmd>tab Man " .. Expand("<cword>") .. "<CR>" end,
+	{ desc = "Man page in new tab", buffer = true, expr = true }
+)
 
 --------------------------------------------------------------------------------
 
