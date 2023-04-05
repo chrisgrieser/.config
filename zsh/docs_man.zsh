@@ -17,9 +17,9 @@ function man() {
 	elif [[ "$TERM_PROGRAM" != "WezTerm" ]]; then
 		command man "$1"
 	elif [[ -n "$2" ]]; then
-		wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$2" "$1"
+		wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$2" "$1" &>/dev/null
 	else
-		wezterm cli spawn -- man "$1"
+		wezterm cli spawn -- man "$1" &>/dev/null
 	fi
 }
 
