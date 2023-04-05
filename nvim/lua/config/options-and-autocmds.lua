@@ -102,7 +102,7 @@ Autocmd("DirChangedPre", {
 
 --------------------------------------------------------------------------------
 -- SCROLLING
-opt.scrolloff = 14
+opt.scrolloff = 13
 opt.sidescrolloff = 13
 
 -- FIX scrolloff at EoF

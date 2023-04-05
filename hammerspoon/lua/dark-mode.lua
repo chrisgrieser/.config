@@ -6,13 +6,6 @@ local function brightnessNotify()
 	if brightness > -1 then Notify("☀️ Brightness:", tostring(brightness)) end
 end
 
--- notify with ambient brightness for Alfred
-UriScheme("ambient-brightness", function()
-	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
-	print("🌔 Manual Dark Mode Switch")
-	brightnessNotify()
-end)
-
 -- done manually to include app-specific toggling for:
 -- - Neovim
 -- - Highlights PDF appearance
