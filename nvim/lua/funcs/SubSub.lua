@@ -22,6 +22,19 @@ local function processParameters(opts)
 	return line1, line2, bufferLines, toSearch, toReplace, singleRepl
 end
 
+---@param str string
+---@param toSearch string lua pattern string
+---@param singleRepl boolean true: first match, false: all matches
+---@return integer[] startposition of matches
+local function matchesInString(str, toSearch, singleRepl)
+	local matches = {}
+	for i in str:gmatch("()" .. toSearch) do
+		table.insert(matches, i)
+		if singleRepl then break end
+	end
+	return matches
+end
+
 --------------------------------------------------------------------------------
 
 ---more complecated than just running gsub on each line, since the shift in
@@ -37,20 +50,20 @@ local function calculateLineShifts(lines, toSearch, toReplace, singleRepl)
 
 	-- iterate lines
 	for _, line in pairs(lines) do
-		local matches = {}
-		for i in line:gmatch("()" .. toSearch) do
-			table.insert(matches, i)
+		local numOfMatches = 0
+		for _ in line:gmatch("()" .. toSearch) do
+			numOfMatches = numOfMatches + 1
 			if singleRepl then break end
 		end
-		local shiftsInThisLine = {}
-		local sumOfShifts = 0 -- needed to factor in the previous shifts in the calculation of shifts
 
 		-- iterate matches in given line
-		for idx, match in ipairs(matches) do
-			local lineWithIdxSubstititons = line:gsub(match, toReplace, idx)
-			local lengthDiff = #lineWithIdxSubstititons - #line - sumOfShifts
-			sumOfShifts = sumOfShifts + lengthDiff
-			table.insert(shiftsInThisLine, lengthDiff)
+		local shiftsInThisLine = {}
+		local sum = 0 -- needed to factor in the previous shifts in the calculation of shifts
+		for idx = 1, #numOfMatches, 1 do
+			local lineWithSomeSubs = line:gsub(toSearch, toReplace, idx)
+			local diff = #lineWithSomeSubs - #line - sum
+			sum = sum + diff
+			table.insert(shiftsInThisLine, diff)
 		end
 
 		table.insert(shiftsInEveryLine, shiftsInThisLine)
@@ -91,28 +104,31 @@ local function previewSubstitution(opts, ns, preview_buf)
 	end
 	local line1, _, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts)
 
-	-- live preview the changes
+	-- no replace value yet = only search terms to highlight
 	if not toReplace then
-
-	else
-		executeSubstitution(opts)
-	end
-
-	-- Highlight the changes
-	for i, line in ipairs(bufferLines) do
-
-		for _, match in pairs(matchesInLine) do
-			-- TODO make this work with dynamic length of replacement
-			if toReplace then match.endPos = match.startPos + #toReplace - 1 end
-			vim.api.nvim_buf_add_highlight(
-				0,
-				ns,
-				"Substitute",
-				line1 + i - 2,
-				match.startPos - 1,
-				match.endPos
-			)
+		-- iterate lines
+		for i, line in ipairs(bufferLines) do
+			local matchesInLine = {}
+			for startPos in line:gmatch("()" .. toSearch) do
+				table.insert(matchesInLine, startPos)
+				if singleRepl then break end
+			end
+			-- iterate matches in that line
+			for _, match in pairs(matchesInLine) do
+				vim.api.nvim_buf_add_highlight(
+					0,
+					ns,
+					"Substitute",
+					line1 + i - 2,
+					match.startPos - 1,
+					match.endPos
+				)
+			end
 		end
+	else
+		-- preview the changes
+		executeSubstitution(opts)
+		-- TODO get shifts and create highlights based on that
 	end
 
 	return 2 -- return the value of the preview type
