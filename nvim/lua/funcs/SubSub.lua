@@ -1,6 +1,9 @@
 local M = {}
-local delimiter, regexFlavor
 local warn = vim.log.levels.WARN
+local delimiter = "/"
+local hlgroup = "Substitute"
+local regexFlavor
+
 --------------------------------------------------------------------------------
 
 -- TODO replace these for example with `node` for js like regex?
@@ -108,7 +111,7 @@ local function previewAndHighlightReplacements(opts, ns, curBufNum)
 			endPos = endPos + diff -- shift of end position due to replacement
 			previousShift = previousShift + diff -- remember shift for next iteration
 
-			vim.api.nvim_buf_add_highlight(curBufNum, ns, "Substitute", lineIdx, startPos - 1, endPos)
+			vim.api.nvim_buf_add_highlight(curBufNum, ns, hlgroup, lineIdx, startPos - 1, endPos)
 		end
 	end
 end
@@ -123,7 +126,7 @@ local function highlightSearches(opts, ns, curBufNum)
 		-- when there is a substitution value
 		local startPos, endPos = useFind(line, toSearch, 1, regexFlavor)
 		if startPos and endPos then
-			vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startPos - 1, endPos)
+			vim.api.nvim_buf_add_highlight(0, ns, hlgroup, line1 + i - 2, startPos - 1, endPos)
 		end
 	end
 end
@@ -174,7 +177,6 @@ end
 --------------------------------------------------------------------------------
 
 ---@class config
----@field delimiter string string that separates search from replacement value (and flags) in the cmdline
 ---@field regexFlavor "lua" currently only "lua" is supported
 
 ---@param opts? config
@@ -182,7 +184,6 @@ function M.setup(opts)
 	-- default values
 	if not opts then opts = {} end
 	regexFlavor = opts.regexFlavor or "lua"
-	delimiter = opts.delimiter or "/"
 
 	-- validation
 	local supportedLangs = {
@@ -191,10 +192,6 @@ function M.setup(opts)
 	}
 	if not supportedLangs[regexFlavor] then
 		vim.notify(regexFlavor .. " is not supported as a regexFlavor", warn)
-		return
-	end
-	if #delimiter ~= 1 then
-		vim.notify("Delimiter must be a single character.", warn)
 		return
 	end
 
@@ -209,5 +206,7 @@ function M.setup(opts)
 		})
 	end
 end
+
+--------------------------------------------------------------------------------
 
 return M
