@@ -60,13 +60,13 @@ local function workLayout()
 
 	-- layout them when they all run
 	MyTimer = hs.timer.waitUntil(function() return AppRunning(appsToOpen) end, function()
+		RestartApp("AltTab") -- fix AltTab not picking up changes
 		for _, appName in pairs(appsToOpen) do
 			MoveResize(App(appName):mainWindow(), PseudoMaximized)
 		end
-		RestartApp("AltTab") -- fix AltTab not picking up changes
+		App("Mimestream"):activate()
 		TwitterToTheSide()
 		TwitterScrollUp()
-		App("Mimestream"):activate()
 	end, 0.2)
 
 	print("🔲 WorkLayout: done")
