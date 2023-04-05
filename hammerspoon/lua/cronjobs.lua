@@ -38,7 +38,6 @@ JourfixeTimer = hs.timer
 	end)
 	:start()
 
-
 -- Backup Vault, Dotfiles, Bookmarks, and browser extension list
 -- Reload Hammerspoon Annotations (Emmylua Spoon)
 -- Check for low battery of connected bluetooth devices
@@ -64,12 +63,15 @@ BiweeklyTimer = hs.timer
 	:start()
 
 --------------------------------------------------------------------------------
+local function closeOtherSpaces()
+	local allSpaces = hs.spaces.allSpaces()	
+end
 
 local function sleepMovieApps()
 	if not IdleMins(30) then return end
 
-	-- no need to quit IINA it autoquits
-	QuitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
+	-- no need to quit IINA autoquits, but 
+	QuitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau", "IINA" }
 
 	-- close browser tabs running YouTube
 	Applescript([[
