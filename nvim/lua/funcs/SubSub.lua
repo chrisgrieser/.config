@@ -32,13 +32,10 @@ end
 local function processParameters(opts)
 	-- "trimempty" allows to leave out the first and third "/" from regular `:s`
 	local input = vim.split(opts.args, "/", { trimempty = true })
-	local toSearch = input[1]
-	local toReplace = input[2]
-	local flags = input[3]
+	local toSearch, toReplace, flags = input[1], input[2], input[3]
 	local singleRepl = (flags and flags:find("g")) == nil
 
-	local line1 = opts.line1
-	local line2 = opts.line2
+	local line1, line2 = opts.line1, opts.line2
 	local bufferLines = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
 
 	return line1, line2, bufferLines, toSearch, toReplace, singleRepl
@@ -79,14 +76,13 @@ local function previewSubstitution(opts, ns, preview_buf)
 	-- Highlights
 	for i, line in ipairs(bufferLines) do
 		local matchesInLine = {}
+		local startIdx, endIdx = 0, 0
 
-		-- iterate to find all matches in the line
-		local start, _end = 0, 0
 		while true do
-			start, _end = line:find(toSearch, start + 1)
-			if not start then break end
-			local match = { startPos = start, endPos = _end }
-			table.insert(matchesInLine, match)
+			startIdx, endIdx = line:find(toSearch, startIdx + 1)
+			if not startIdx then break end
+			table.insert(matchesInLine, { startPos = startIdx, endPos = endIdx })
+			if singleRepl then break end -- only needs first match
 		end
 
 		for _, match in pairs(matchesInLine) do

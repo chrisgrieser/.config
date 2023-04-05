@@ -249,8 +249,8 @@ require("funcs.SubSub").setup()
 Keymap(
 	"n",
 	"<leader>fc",
-	[[:%sm/<C-r>=expand("<cword>")<CR>//g<Left><Left>]],
-	{ desc = "󱗘 :smagic cword" }
+	[[:S<CR>//g<Left><Left>]],
+	{ desc = "󱗘 :smagic cword", expr = true }
 )
 Keymap("n", "<leader>fk", [[:%sm/(.*)/\1/g]] .. ("<Left>"):rep(9), { desc = "󱗘 :smagic kirby" })
 Keymap("x", "<leader>fk", [[:sm/(.*)/\1/g]] .. ("<Left>"):rep(9), { desc = "󱗘 :smagic kirby" })
