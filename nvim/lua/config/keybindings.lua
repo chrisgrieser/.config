@@ -244,7 +244,7 @@ Autocmd("FileType", {
 -- RE[F]ACTORING
 
 -- TODO remove this from here
-require("funcs.substitution-substitution").setup()
+require("funcs.SubSub").setup()
 
 Keymap(
 	"n",
