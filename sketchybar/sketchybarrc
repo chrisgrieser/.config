@@ -9,30 +9,15 @@ while ! pgrep "Stats"; do
 	open -a "Stats"
 	sleep 2
 	i=$((i + 1))
-	[[ $i -gt 30 ]] && exit 1
+	[[ $i -gt 10 ]] && return 1
 done
 
-# ensure Stats.app items are all loaded (mostly relevant after system startup)
-i=0
-menu_items=$(sketchybar --query default_menu_items)
-while [[ ! "$menu_items" =~ Stats ]]; do
-	sleep 3
-	menu_items=$(sketchybar --query default_menu_items)
-	i=$((i + 1))
-	[[ $i -gt 20 ]] && exit 1
-done
+# REQUIRED Stats being set as one combined module
+stats="Stats,CombinedModules"
 
-# globs are necessary, since the exact name of the menubar item changes a bit
-# depending on installation whether mac is M1 or not
-network_bar_item=$(echo "$menu_items" | grep -Ei "Stats.Network" | head -n1 | cut -d\" -f2)
-disk_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*disk.*" | head -n1 | cut -d\" -f2)
-cpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*cpu" | head -n1 | cut -d\" -f2)
-gpu_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*gpu" | head -n1 | cut -d\" -f2)
-ram_bar_item=$(echo "$menu_items" | grep -Ei "Stats.*ram" | head -n1 | cut -d\" -f2)
-
-if [[ -z "$ram_bar_item" || -z "$cpu_bar_item" || -z "$gpu_bar_item" || -z "$network_bar_item" || -z "$disk_bar_item" ]]; then
-	osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "not all Stats items are visible"'
-	exit 1
+if sketchybar --query default_menu_items | grep -q "$stats"; then
+	osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats Combined Module not found"'
+	return 1
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -91,16 +76,8 @@ sketchybar \
 	--add event update-sidenotes-count \
 	--subscribe sidenotes-count update-sidenotes-count \
 	\
-	--add alias "$ram_bar_item" $second_row \
-	--set "$ram_bar_item" width=35 \
-	--add alias "$cpu_bar_item" $second_row \
-	--set "$cpu_bar_item" width=55 \
-	--add alias "$gpu_bar_item" $second_row \
-	--set "$gpu_bar_item" width=35 \
-	--add alias "$disk_bar_item" $second_row \
-	--set "$disk_bar_item" width=45 \
-	--add alias "$network_bar_item" $second_row \
-	--set "$network_bar_item" width=95 \
+	--add alias "$stats" $second_row \
+	--set "$stats" width=230 \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 \
