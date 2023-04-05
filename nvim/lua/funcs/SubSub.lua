@@ -2,7 +2,6 @@ local M = {}
 --------------------------------------------------------------------------------
 
 -- iterate lines and replace
-
 ---@param lines string[]
 ---@param toSearch string
 ---@param toReplace string
@@ -11,12 +10,28 @@ local M = {}
 ---@return string[]
 local function substituteLines(lines, toSearch, toReplace, singleRepl)
 	local newBufferLines = {}
-	local occurrences = singleRepl and 1 or nil
-	for _, line in pairs(lines) do
-		-- TODO different substitution engine here
-		local newLine = line:gsub(toSearch, toReplace, occurrences)
-		table.insert(newBufferLines, newLine)
+
+	for _, line in pairs(lines) do -- iterate lines
+		local newLine = line
+		local matches = {}
+		for i in line:gmatch("()"..toSearch) do
+			table.insert(matches, i)	
+		end
+		local lineLengthShifts = {} -- how each substitution shifted the length of the line. needed for highlights
+
+		for _, match in pairs(matches) do -- interate matches in given line
+		
+			if singleRepl then break end -- single replacement
+		end
+		while true do -- iterate individual substitutions in that line
+			newLine = line:gsub(toSearch, toReplace, 1) 
+			local lengthDiff = #newLine - #line
+			table.insert(lineLengthShifts, lengthDiff)
+			if singleRepl or not (newLine:find(toSearch)) then break end
+		end
+		table.insert(newBufferLines, {line = newLine, posShift = lineLengthShifts})
 	end
+
 	return newBufferLines
 end
 
