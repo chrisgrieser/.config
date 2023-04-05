@@ -112,12 +112,7 @@ return {
 				border = BorderStyle,
 				relative = "editor",
 				min_width = { 0.5, 60 },
-				win_options = {
-					sidescrolloff = 0,
-					list = true,
-					listchars = "precedes:…,extends:…", -- https://github.com/stevearc/dressing.nvim/issues/94
-					winblend = 0, -- weird shining through
-				},
+				win_options = { winblend = 0 }, -- weird shining through
 			},
 			select = {
 				backend = { "telescope", "builtin" }, -- Priority list of vim.select implementations
