@@ -23,7 +23,21 @@ local function processParameters(opts, curBufNum)
 	return line1, line2, bufferLines, toSearch, toReplace, singleRepl
 end
 
-
+---function performing the actual string substitution, using lua's string.gsub
+---@param inputLines string[]
+---@param toSearch string
+---@param toReplace string
+---@param numOfReplacement integer|nil nil will perform all replacements
+---@return string[]
+local function useGsub(inputLines, toSearch, toReplace, numOfReplacement)
+	local outputLines = {}
+	local occurrences = numOfReplacement or nil
+	for _, line in pairs(inputLines) do
+		local newLine = line:gsub(toSearch, toReplace, occurrences)
+		table.insert(outputLines, newLine)
+	end
+	return outputLines
+end
 
 --------------------------------------------------------------------------------
 
@@ -37,12 +51,8 @@ local function previewAndHlReplacements(opts, ns, curBufNum)
 	if not toReplace then return end
 
 	-- preview changes
-	local newBufferLines = {}
-	local occurrences = singleRepl and 1 or nil
-	for _, line in pairs(bufferLines) do
-		local newLine = line:gsub(toSearch, toReplace, occurrences)
-		table.insert(newBufferLines, newLine)
-	end
+	local numOfReplacement = singleRepl and 1 or nil
+	local newBufferLines = useGsub(bufferLines, toSearch, toReplace, numOfReplacement)
 	vim.api.nvim_buf_set_lines(curBufNum, line1 - 1, line2, false, newBufferLines)
 
 	-- add highlights
@@ -60,7 +70,7 @@ local function previewAndHlReplacements(opts, ns, curBufNum)
 		local previousShift = 0
 		for ii, startPos in ipairs(startPositions) do
 			local _, endPos = line:find(toSearch, startPos)
-			local lineWithSomeSubs = line:gsub(toSearch, toReplace, ii)
+			local lineWithSomeSubs = useGsub({ line }, toSearch, toReplace, ii)
 			local diff = (#lineWithSomeSubs - #line)
 			startPos = startPos + previousShift
 			endPos = endPos + diff -- shift of end position due to replacement
@@ -87,9 +97,11 @@ local function highlightSearches(opts, ns, curBufNum)
 	end
 end
 
+--------------------------------------------------------------------------------
+
 ---the substitution to perform when the commandline is confirmed with <CR>
 ---@param opts table
-local function performSubstitition(opts)
+local function confirmSubstitution(opts)
 	local curBufNum = vim.api.nvim_get_current_buf()
 	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts, curBufNum)
 
@@ -98,12 +110,8 @@ local function performSubstitition(opts)
 		return
 	end
 
-	local newBufferLines = {}
-	local occurrences = singleRepl and 1 or nil
-	for _, line in pairs(bufferLines) do
-		local newLine = line:gsub(toSearch, toReplace, occurrences)
-		table.insert(newBufferLines, newLine)
-	end
+	local numOfReplacement = singleRepl and 1 or nil
+	local newBufferLines = useGsub(bufferLines, toSearch, toReplace, numOfReplacement)
 	vim.api.nvim_buf_set_lines(curBufNum, line1 - 1, line2, false, newBufferLines)
 end
 
@@ -121,9 +129,9 @@ local function previewSubstitution(opts, ns, preview_buf)
 	local curBufNum = vim.api.nvim_get_current_buf()
 
 	local input = vim.split(opts.args, "/", { trimempty = true, plain = false })
-	local toReplace = input[2]
+	local hasReplacementValue = input[2]
 
-	if not toReplace then
+	if not hasReplacementValue then
 		highlightSearches(opts, ns, curBufNum)
 	else
 		previewAndHlReplacements(opts, ns, curBufNum)
@@ -136,7 +144,7 @@ end
 function M.setup()
 	local commands = { "S", "SubSub" }
 	for _, cmd in pairs(commands) do
-		vim.api.nvim_create_user_command(cmd, performSubstitition, {
+		vim.api.nvim_create_user_command(cmd, confirmSubstitution, {
 			nargs = "?",
 			range = "%", -- defaults to whole buffer
 			addr = "lines",
