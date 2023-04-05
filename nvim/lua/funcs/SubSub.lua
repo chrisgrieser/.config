@@ -4,13 +4,14 @@ local warn = vim.log.levels.WARN
 --------------------------------------------------------------------------------
 
 -- TODO replace these for example with `node` for js like regex?
+-- TODO escape the delimiter string from cmdline
 
 ---function performing the actual string substitution, using lua's string.gsub
 ---@param inputLines string[]
 ---@param toSearch string
 ---@param toReplace string
 ---@param numOfReplacement integer|nil nil will perform all replacements
----@param language "lua" currently only lua
+---@param language "lua"|"javascript"
 ---@nodiscard
 ---@return string[] outputLines
 local function useGsub(inputLines, toSearch, toReplace, numOfReplacement, language)
@@ -21,6 +22,7 @@ local function useGsub(inputLines, toSearch, toReplace, numOfReplacement, langua
 			local newLine = line:gsub(toSearch, toReplace, occurrences)
 			table.insert(outputLines, newLine)
 		end
+	elseif language == "javascript" then
 	end
 	return outputLines
 end
@@ -29,7 +31,7 @@ end
 ---@param str string
 ---@param toSearch string
 ---@param fromIdx integer perform find from this index
----@param language "lua" currently only lua
+---@param language "lua"|"javascript"
 ---@nodiscard
 ---@return integer startPos of match, nil if no match
 ---@return integer endPos of match, nil if no match
@@ -37,6 +39,7 @@ local function useFind(str, toSearch, fromIdx, language)
 	local startPos, endPos
 	if language == "lua" then
 		startPos, endPos = str:find(toSearch, fromIdx)
+	elseif language == "javascript" then
 	end
 	return startPos, endPos
 end
@@ -174,19 +177,28 @@ end
 ---@field delimiter string string that separates search from replacement value (and flags) in the cmdline
 ---@field regexFlavor "lua" currently only "lua" is supported
 
--- adds the usercommand & sets up some config
----@param opts config
+---@param opts? config
 function M.setup(opts)
+	-- default values
 	if not opts then opts = {} end
-	local supportedLangs = { lua = true }
-
 	regexFlavor = opts.regexFlavor or "lua"
-	if not supportedLangs[regexFlavor] then 
-		vim.notify(regexFlavor.. " is not supported as a regexFlavor", warn)
-		return
-	end
 	delimiter = opts.delimiter or "/"
 
+	-- validation
+	local supportedLangs = {
+		lua = true,
+		javascript = false,
+	}
+	if not supportedLangs[regexFlavor] then
+		vim.notify(regexFlavor .. " is not supported as a regexFlavor", warn)
+		return
+	end
+	if #delimiter ~= 1 then
+		vim.notify("Delimiter must be a single character.", warn)
+		return
+	end
+
+	-- setup user commands
 	local commands = { "S", "SubSub" }
 	for _, cmd in pairs(commands) do
 		vim.api.nvim_create_user_command(cmd, confirmSubstitution, {
