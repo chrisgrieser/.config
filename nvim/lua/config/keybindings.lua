@@ -170,6 +170,18 @@ Keymap("n", "cr/", ":lua require('textcase').current_word('to_path_case')<CR>", 
 Keymap("n", "cr.", ":lua require('textcase').current_word('to_dot_case')<CR>", { desc = "dot.case" })
 Keymap("n", "cr_", ":lua require('textcase').current_word('to_constant_case')<CR>", { desc = "SCREAMING_SNAKE_CASE" })
 Keymap("n", "crs", ":lua require('textcase').current_word('to_snake_case')<CR>", { desc = "snake_case" })
+
+Keymap("n", "cRu", ":lua require('textcase').lsp_rename('to_upper_case')<CR>", { desc = "󰒕 UPPER CASE" })
+Keymap("n", "cRl", ":lua require('textcase').lsp_rename('to_lower_case')<CR>", { desc = "󰒕 lower case" })
+Keymap("n", "cRt", ":lua require('textcase').lsp_rename('to_title_case')<CR>", { desc = "󰒕 Title Case" })
+Keymap("n", "cRc", ":lua require('textcase').lsp_rename('to_camel_case')<CR>", { desc = "󰒕 camelCase" })
+Keymap("n", "cRp", ":lua require('textcase').lsp_rename('to_pascal_case')<CR>", { desc = "󰒕 PascalCase" })
+Keymap("n", "cRe", ":lua require('textcase').lsp_rename('to_phrase_case')<CR>", { desc = "󰒕 Sentence case" })
+Keymap("n", "cR-", ":lua require('textcase').lsp_rename('to_dash_case')<CR>", { desc = "󰒕 dash-case" })
+Keymap("n", "cR/", ":lua require('textcase').lsp_rename('to_path_case')<CR>", { desc = "󰒕 path/case" })
+Keymap("n", "cR.", ":lua require('textcase').lsp_rename('to_dot_case')<CR>", { desc = "󰒕 dot.case" })
+Keymap("n", "cR_", ":lua require('textcase').lsp_rename('to_constant_case')<CR>", { desc = "󰒕 SCREAMING_SNAKE_CASE" })
+Keymap("n", "cRs", ":lua require('textcase').lsp_rename('to_snake_case')<CR>", { desc = "󰒕 snake_case" })
 -- stylua: ignore end
 
 -- Word Switcher (fallback: switch casing)
@@ -231,6 +243,9 @@ Autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- RE[F]ACTORING
 
+-- TODO remove this from here
+require("funcs.substitution-substitution").setup()
+
 Keymap(
 	"n",
 	"<leader>fc",
@@ -277,7 +292,6 @@ Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("E
 Keymap( "x", "<leader>fa", ":AI Refactor to improve this code<CR>", { desc = "󱙺 Refactor with GPT" })
 -- stylua: ignore end
 
-require("funcs.no-vim-regex").setup()
 
 --------------------------------------------------------------------------------
 -- AI Support
@@ -316,8 +330,8 @@ Keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, 
 -- stylua: ignore end
 
 -- Replace Mode
--- needed, since `R` mapped to duplicate line
-Keymap("n", "cR", "R", { desc = "Replace Mode" })
+-- needed, since `R` mapped to duplicate line, and <C-r> is free since remapped to U
+Keymap("n", "<C-r>", "R", { desc = "Replace Mode" })
 
 -- URL Opening (forward-seeking `gx`)
 Keymap("n", "gx", function()

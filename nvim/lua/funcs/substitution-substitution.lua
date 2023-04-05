@@ -9,7 +9,7 @@ local M = {}
 --------------------------------------------------------------------------------
 
 -- iterate lines and replace
-local function substitute(lines, toSearch, toReplace)
+local function substituteLines(lines, toSearch, toReplace)
 	local newBufferLines = {}
 	for _, line in pairs(lines) do
 		local newLine = line:gsub(toSearch, toReplace)
@@ -28,12 +28,12 @@ local function executeSubstitution(opts)
 	local line2 = opts.line2
 	local bufferLines = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
 
-	local newBufferLines = substitute(bufferLines, toSearch, toReplace)
+	local newBufferLines = substituteLines(bufferLines, toSearch, toReplace)
 	vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
 end
 
 -- https://neovim.io/doc/user/map.html#%3Acommand-preview
-local function previewFunc(opts, ns, preview_buf)
+local function previewSubstitution(opts, ns, preview_buf)
 	if preview_buf then
 		vim.notify("vim.opt.inccommand = 'split' has not been implemented yet", vim.log.levels.WARN)
 		return
@@ -45,7 +45,7 @@ local function previewFunc(opts, ns, preview_buf)
 	local toSearch = input[1]
 	local toReplace = input[2]
 
-	-- highlights for search (if no replacement value given yet)
+	-- preview for search (if no replacement value given yet)
 	if not toReplace then
 		for i, line in ipairs(bufferLines) do
 			local start_idx, end_idx = line:find(toSearch)
@@ -53,14 +53,21 @@ local function previewFunc(opts, ns, preview_buf)
 				vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, start_idx - 1, end_idx)
 			end
 		end
-	-- highlights for replacement (as soon as replacement value is found)
+
+	-- preview for replacement (as soon as replacement value is found)
 	else
-		local newBufferLines = substitute(bufferLines, toSearch, toReplace)
+		-- live preview the changes
+		local newBufferLines = substituteLines(bufferLines, toSearch, toReplace)
 		vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
-		for i, line in ipairs(newBufferLines) do
-			local start_idx, end_idx = line:find(toReplace)
-			if start_idx then
-				vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, start_idx - 1, end_idx)
+
+		-- add highlights for the replacement. 
+		-- INFO uses indices from the search values, so not highlight existing 
+		-- instances of the replacement value in the buffer
+		for i, line in ipairs(bufferLines) do
+			local startIdx, _ = line:find(toSearch)
+			local endIdx = startIdx + #toReplace
+			if startIdx then
+				vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startIdx - 1, endIdx)
 			end
 		end
 	end
@@ -69,12 +76,19 @@ local function previewFunc(opts, ns, preview_buf)
 	return 2
 end
 
+-- adds the usercommand as ":S" and ":Substitute"
 function M.setup()
 	vim.api.nvim_create_user_command("S", executeSubstitution, {
 		nargs = "?",
 		range = "%",
 		addr = "lines",
-		preview = previewFunc,
+		preview = previewSubstitution,
+	})
+	vim.api.nvim_create_user_command("Substitute", executeSubstitution, {
+		nargs = "?",
+		range = "%",
+		addr = "lines",
+		preview = previewSubstitution,
 	})
 end
 

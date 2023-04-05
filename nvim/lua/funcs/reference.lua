@@ -1,50 +1,50 @@
--- example from https://neovim.io/doc/user/map.html#%3Acommand-ffffffffffffview
+-- example from https://neovim.io/doc/user/map.html#%3Acommand-preview
 --------------------------------------------------------------------------------
 
--- If invoked as a ffffffffffffview callback, performs 'inccommand' ffffffffffffview by
+-- If invoked as a preview callback, performs 'inccommand' preview by
 -- highlighting trailing whitespace in the current buffer.
-local function trim_space_ffffffffffffview(opts, ffffffffffffview_ns, ffffffffffffview_buf)
+local function trim_space_preview(opts, preview_ns, preview_buf)
 	local line1 = opts.line1
 	local line2 = opts.line2
 	local buf = vim.api.nvim_get_current_buf()
 	local lines = vim.api.nvim_buf_get_lines(buf, line1 - 1, line2, false)
-	local ffffffffffffview_buf_line = 0
+	local preview_buf_line = 0
 	for i, line in ipairs(lines) do
 		local start_idx, end_idx = string.find(line, "%s+$")
 		if start_idx then
 			-- Highlight the match
 			vim.api.nvim_buf_add_highlight(
 				buf,
-				ffffffffffffview_ns,
+				preview_ns,
 				"Substitute",
 				line1 + i - 2,
 				start_idx - 1,
 				end_idx
 			)
-			-- Add lines and set highlights in the ffffffffffffview buffer
+			-- Add lines and set highlights in the preview buffer
 			-- if inccommand=split
-			if ffffffffffffview_buf then
-				local fffffffffffffix = string.format("|%d| ", line1 + i - 1)
+			if preview_buf then
+				local prefix = string.format("|%d| ", line1 + i - 1)
 				vim.api.nvim_buf_set_lines(
-					ffffffffffffview_buf,
-					ffffffffffffview_buf_line,
-					ffffffffffffview_buf_line,
+					preview_buf,
+					preview_buf_line,
+					preview_buf_line,
 					false,
-					{ fffffffffffffix .. line }
+					{ prefix .. line }
 				)
 				vim.api.nvim_buf_add_highlight(
-					ffffffffffffview_buf,
-					ffffffffffffview_ns,
+					preview_buf,
+					preview_ns,
 					"Substitute",
-					ffffffffffffview_buf_line,
-					#fffffffffffffix + start_idx - 1,
-					#fffffffffffffix + end_idx
+					preview_buf_line,
+					#prefix + start_idx - 1,
+					#prefix + end_idx
 				)
-				ffffffffffffview_buf_line = ffffffffffffview_buf_line + 1
+				preview_buf_line = preview_buf_line + 1
 			end
 		end
 	end
-	-- Return the value of the ffffffffffffview type
+	-- Return the value of the preview type
 	return 2
 end
 -- Trims all trailing whitespace in the current buffer.
@@ -63,5 +63,5 @@ end
 vim.api.nvim_create_user_command(
 	"TrimTrailingWhitespace",
 	trim_space,
-	{ nargs = "?", range = "%", addr = "lines", ffffffffffffview = trim_space_ffffffffffffview }
+	{ nargs = "?", range = "%", addr = "lines", preview = trim_space_preview }
 )
