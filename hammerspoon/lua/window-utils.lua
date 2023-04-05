@@ -177,7 +177,7 @@ function AutoTile(winSrc)
 
 	if #wins > 1 then BringAllWinsToFront() end
 
-	if #wins == 0 and IsFront("Finder") then
+	if #wins == 0 and IsFront("Finder") and not (IsProjector()) then
 		-- hide finder when no windows
 		RunWithDelays(0.1, function()
 			if #(App("Finder"):allWindows()) == 0 then App("Finder"):hide() end
@@ -265,13 +265,14 @@ end)
 -- HOTKEY ACTIONS
 
 local function controlSpaceAction()
+	if IsFront("SideNotes") then
+		ToggleSideNotesSize()
+		return
+	end
 	local currentWin = hs.window.focusedWindow()
 	local pos
 	if IsFront { "Finder", "Script Editor" } then
 		pos = Centered
-	elseif IsFront("SideNotes") then
-		ToggleSideNotesSize()
-		return
 	elseif not CheckSize(currentWin, PseudoMaximized) then
 		pos = PseudoMaximized
 	else

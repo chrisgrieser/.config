@@ -53,6 +53,9 @@ ln -sf "$DOTFILE_FOLDER/mackup/mackup.cfg" ~/.mackup.cfg
 ln -sf "$DOTFILE_FOLDER/mackup/custom-app-configs" ~/.mackup
 brew install mackup && mackup restore
 
+chflags nouchg
+
+
 #───────────────────────────────────────────────────────────────────────────────
 # CREATE SYMLINKS
 

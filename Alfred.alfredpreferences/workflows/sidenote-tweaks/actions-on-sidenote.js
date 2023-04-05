@@ -85,8 +85,9 @@ function run(argv) {
 	if (doCopy) app.setTheClipboardTo(content);
 
 	// returns are used for the notification
-	if (doDelete && (doOpenUrl || id !== "current")) return "🗑 Note Deleted";
+	if (doDelete && doOpenUrl) return "🔗 Opened & Deleted";
 	else if (doCopy && doDelete) return "✅ Copied & Deleted";
 	else if (doCopy) return "✅ Copied";
-	return ""; // don't create a notification
+	else if (doDelete) return "🗑 Note Deleted";
+	return ""; 
 }
