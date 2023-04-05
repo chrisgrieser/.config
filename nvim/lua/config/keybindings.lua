@@ -546,7 +546,7 @@ Keymap("n", "<leader>d", function()
 	local nextState = vim.g.prevVirtText or false
 	vim.g.prevVirtText = vim.diagnostic.config().virtual_text
 	vim.diagnostic.config { virtual_text = nextState }
-end, { desc = "󰒕 Toggle Multi-Line Diagnostics" })
+end, { desc = "󰒕 Toggle LSP Lines" })
 Keymap("n", "gs", function() Cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
 
 Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
@@ -571,17 +571,22 @@ Autocmd("LspAttach", {
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local capabilities = client.server_capabilities
-		-- stylua: ignore start
 
 		-- overrides treesitter-refactor's rename
 		if capabilities.renameProvider then
 			-- cannot run `cmd.IncRename` since the plugin *has* to use the
 			-- command line; needs defer to not be overwritten by treesitter-
 			-- refactor's smart-rename
-			---@diagnostic disable-next-line: param-type-mismatch
-			vim.defer_fn(function() Keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true}) end, 1)
-			Keymap("n", "<leader>V", ":IncRename "..Expand("<cword>"), { desc = "󰒕 IncRename cword", buffer = true})
+			-- stylua: ignore
+			vim.defer_fn( function() Keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1) ---@diagnostic disable-line: param-type-mismatch
+			Keymap(
+				"n",
+				"<leader>V",
+				function() return ":IncRename " .. Expand("<cword>") end,
+				{ desc = "󰒕 IncRename cword", buffer = true, expr = true }
+			)
 		end
+		-- stylua: ignore start
 
 		-- conditional to not overwrite treesitter goto-symbol
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
