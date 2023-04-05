@@ -29,10 +29,18 @@ end
 ---length needs to be determined for each substitution, for the preview highlight
 ---@param opts table
 ---@param ns integer namespace id to use for highlights
----@param curBufNum integer buffer id 
+---@param curBufNum integer buffer id
 local function highlightReplacements(opts, ns, curBufNum)
-	local line1, _, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts, curBufNum)
+	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts, curBufNum)
 	if not toReplace then return end
+
+	local newBufferLines = {}
+	local occurrences = singleRepl and 1 or nil
+	for _, line in pairs(bufferLines) do
+		local newLine = line:gsub(toSearch, toReplace, occurrences)
+		table.insert(newBufferLines, newLine)
+	end
+	vim.api.nvim_buf_set_lines(curBufNum, line1 - 1, line2, false, newBufferLines)
 
 	-- iterate lines
 	for i, line in ipairs(bufferLines) do
@@ -41,7 +49,6 @@ local function highlightReplacements(opts, ns, curBufNum)
 		-- find all startPositions in the line
 		local startPositions = {}
 		for col in line:gmatch("()" .. toSearch) do
-			print("col:", col)
 			table.insert(startPositions, col)
 			if singleRepl then break end
 		end
@@ -49,17 +56,14 @@ local function highlightReplacements(opts, ns, curBufNum)
 		-- iterate matches in given line
 		local previousShift = 0
 		for ii, startPos in ipairs(startPositions) do
-			startPos = 1
-			endPos = -1
+			local _, endPos = line:find(toSearch, startPos)
+			local lineWithSomeSubs = line:gsub(toSearch, toReplace, ii)
+			local diff = (#lineWithSomeSubs - #line) + previousShift
+			startPos = startPos + previousShift
+			endPos = endPos + diff -- shift of end position due to replacement
+			previousShift = previousShift + diff -- remember shift for next iteration
 
-			-- local _, endPos = line:find(toSearch, startPos + 1)
-			-- local lineWithSomeSubs = line:gsub(toSearch, toReplace, ii)
-			-- local diff = (#lineWithSomeSubs - #line) + previousShift
-			-- startPos = startPos + previousShift
-			-- endPos = endPos + previousShift + diff -- shift of end position due to replacement
-			-- previousShift = previousShift + diff -- remember shift for next iteration
-
-			vim.api.nvim_buf_add_highlight(0, ns, "Substitute", lineIdx, startPos - 1, endPos)
+			vim.api.nvim_buf_add_highlight(curBufNum, ns, "Substitute", lineIdx, startPos - 1, endPos)
 		end
 	end
 end
@@ -86,8 +90,6 @@ local function performSubstitition(opts)
 		local newLine = line:gsub(toSearch, toReplace, occurrences)
 		table.insert(newBufferLines, newLine)
 	end
-	-- INFO during previeing, this will only replace the values in the buffer
-	-- preview, not the actual buffer
 	vim.api.nvim_buf_set_lines(curBufNum, line1 - 1, line2, false, newBufferLines)
 end
 
@@ -122,7 +124,6 @@ local function previewSubstitution(opts, ns, preview_buf)
 	-- WITH REPLACE VALUE: PREVIEW CHANGES & HIGHLIGHT THEM
 	else
 		-- preview the changes
-		performSubstitition(opts)
 		highlightReplacements(opts, ns, curBufNum)
 	end
 
