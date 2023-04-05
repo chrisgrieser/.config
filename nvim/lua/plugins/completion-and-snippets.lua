@@ -103,7 +103,7 @@ local function cmpconfig()
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
 			["<M-Esc>"] = cmp.mapping.complete(), -- consistent with macOS autocomplete
-			["<C-e>"] = cmp.mapping.abort(), 
+			["<C-e>"] = cmp.mapping.abort(),
 			["<S-Up>"] = cmp.mapping.scroll_docs(-4),
 			["<S-Down>"] = cmp.mapping.scroll_docs(4),
 
@@ -271,6 +271,10 @@ local function filetypeCompletionConfig()
 	-- Command Line Completion
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),
+		view = {
+			-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#menu-type
+			entries = { name = "wildmenu", separator = "|" },
+		},
 		sources = cmp.config.sources({
 			s.path,
 			s.cmdline,
@@ -282,7 +286,10 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
-		-- Wondering what suggestions could make sense there, other than buffer
+		view = {
+			-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#menu-type
+			entries = { name = "wildmenu", separator = "|" },
+		},
 		sources = { s.buffer },
 	})
 end
@@ -335,7 +342,7 @@ return {
 				ext_opts = {
 					[require("luasnip.util.types").choiceNode] = {
 						active = {
-							hl_group = "DiagnosticHint" ,
+							hl_group = "DiagnosticHint",
 							virt_text = { { "󰝮", "DiagnosticHint" } },
 						},
 					},
