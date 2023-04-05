@@ -1,5 +1,6 @@
 local M = {}
 local delimiter, regexFlavor
+local warn = vim.log.levels.WARN
 --------------------------------------------------------------------------------
 
 -- TODO replace these for example with `node` for js like regex?
@@ -46,7 +47,6 @@ end
 ---process the parameters given in the user command (ranges, args, etc.)
 ---@param opts table
 ---@param curBufNum integer
----@param delimitingStr string character delimiting search from replacement value
 ---@nodiscard
 ---@return integer start line of range
 ---@return integer end line of range
@@ -54,9 +54,9 @@ end
 ---@return string term to search
 ---@return string|nil replacement
 ---@return boolean whether to search first or all occurrences in line
-local function processParameters(opts, curBufNum, delimitingStr)
+local function processParameters(opts, curBufNum)
 	-- "trimempty" allows to leave out the first and third "/" from regular `:s`
-	local input = vim.split(opts.args, delimitingStr, { trimempty = true, plain = false })
+	local input = vim.split(opts.args, delimiter, { trimempty = true, plain = false })
 	local toSearch, toReplace, flags = input[1], input[2], input[3]
 	local singleRepl = (flags and flags:find("g")) == nil
 
@@ -73,8 +73,8 @@ end
 ---@param opts table
 ---@param ns integer namespace id to use for highlights
 ---@param curBufNum integer buffer id
-local function previewAndHighlightReplacements(opts, ns, curBufNum, delimitingStr)
-	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts, curBufNum, delimitingStr)
+local function previewAndHighlightReplacements(opts, ns, curBufNum)
+	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts, curBufNum)
 	if not toReplace then return end
 
 	-- preview changes
@@ -113,8 +113,8 @@ end
 ---@param opts table
 ---@param ns integer namespace id to use for highlights
 ---@param curBufNum integer buffer id
-local function highlightSearches(opts, ns, curBufNum, delimitingStr)
-	local line1, _, bufferLines, toSearch, _, _ = processParameters(opts, curBufNum, delimitingStr)
+local function highlightSearches(opts, ns, curBufNum)
+	local line1, _, bufferLines, toSearch, _, _ = processParameters(opts, curBufNum)
 	for i, line in ipairs(bufferLines) do
 		-- only highlighting first match, since the g-flag can only be entered
 		-- when there is a substitution value
@@ -129,12 +129,12 @@ end
 
 ---the substitution to perform when the commandline is confirmed with <CR>
 ---@param opts table
-local function confirmSubstitution(opts, delimitingStr)
+local function confirmSubstitution(opts)
 	local curBufNum = vim.api.nvim_get_current_buf()
-	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts, curBufNum, delimitingStr)
+	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts, curBufNum)
 
 	if not toReplace then
-		vim.notify("No replacement value given, cannot perform substitution.", vim.log.levels.ERROR)
+		vim.notify("No replacement value given, cannot perform substitution.", warn)
 		return
 	end
 
@@ -151,12 +151,12 @@ end
 local function previewSubstitution(opts, ns, preview_buf)
 	if preview_buf then
 		-- stylua: ignore
-		vim.notify_once( "SubSub does not support 'inccommand=split' yet. Please use 'inccommand=unsplit'.", vim.log.levels.WARN)
+		vim.notify("'inccommand=split' is not supported yet. Please use 'inccommand=unsplit' instead.", warn)
 		return
 	end
 	local curBufNum = vim.api.nvim_get_current_buf()
 
-	local input = vim.split(opts.args, "/", { trimempty = true, plain = false })
+	local input = vim.split(opts.args, delimiter, { trimempty = true, plain = false })
 	local hasReplacementValue = input[2]
 
 	if not hasReplacementValue then
@@ -170,10 +170,23 @@ end
 
 --------------------------------------------------------------------------------
 
----@class opts
+---@class config
+---@field delimiter string string that separates search from replacement value (and flags) in the cmdline
+---@field regexFlavor "lua" currently only "lua" is supported
 
--- adds the usercommand
+-- adds the usercommand & sets up some config
+---@param opts config
 function M.setup(opts)
+	if not opts then opts = {} end
+	local supportedLangs = { lua = true }
+
+	regexFlavor = opts.regexFlavor or "lua"
+	if not supportedLangs[regexFlavor] then 
+		vim.notify(regexFlavor.. " is not supported as a regexFlavor", warn)
+		return
+	end
+	delimiter = opts.delimiter or "/"
+
 	local commands = { "S", "SubSub" }
 	for _, cmd in pairs(commands) do
 		vim.api.nvim_create_user_command(cmd, confirmSubstitution, {
