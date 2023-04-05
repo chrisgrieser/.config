@@ -2,15 +2,19 @@ local M = {}
 --------------------------------------------------------------------------------
 
 -- iterate lines and replace
+
 ---@param lines string[]
 ---@param toSearch string
 ---@param toReplace string
+---@param singleRepl boolean single replacement or not
 ---@nodiscard
 ---@return string[]
-local function substituteLines(lines, toSearch, toReplace)
+local function substituteLines(lines, toSearch, toReplace, singleRepl)
 	local newBufferLines = {}
+	local occurrences = singleRepl and 1 or nil
 	for _, line in pairs(lines) do
-		local newLine = line:gsub(toSearch, toReplace) -- TODO different substitution engine here
+		-- TODO different substitution engine here
+		local newLine = line:gsub(toSearch, toReplace, occurrences)
 		table.insert(newBufferLines, newLine)
 	end
 	return newBufferLines
@@ -24,28 +28,30 @@ end
 ---@return string[] buffer lines
 ---@return string term to search
 ---@return string|nil replacement
+---@return boolean whether to search first or all occurrences in line
 local function processParameters(opts)
 	-- "trimempty" allows to leave out the first and third "/" from regular `:s`
 	local input = vim.split(opts.args, "/", { trimempty = true })
 	local toSearch = input[1]
 	local toReplace = input[2]
+	local flags = input[3]
+	local singleRepl = (flags and flags:find("g")) == nil
 
 	local line1 = opts.line1
 	local line2 = opts.line2
 	local bufferLines = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
 
-	return line1, line2, bufferLines, toSearch, toReplace
+	return line1, line2, bufferLines, toSearch, toReplace, singleRepl
 end
 
----main function running the substitution
 ---@param opts table
 local function executeSubstitution(opts)
-	local line1, line2, bufferLines, toSearch, toReplace = processParameters(opts)
+	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts)
 	if not toReplace then
 		vim.notify("No replacement value given, cannot perform substitution.", vim.log.levels.ERROR)
 		return
 	end
-	local newBufferLines = substituteLines(bufferLines, toSearch, toReplace)
+	local newBufferLines = substituteLines(bufferLines, toSearch, toReplace, singleRepl)
 	vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
 end
 
@@ -62,29 +68,38 @@ local function previewSubstitution(opts, ns, preview_buf)
 		)
 		return
 	end
-	local line1, line2, bufferLines, toSearch, toReplace = processParameters(opts)
+	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts)
 
 	-- live preview the changes
 	if toReplace then
-		local newBufferLines = substituteLines(bufferLines, toSearch, toReplace)
+		local newBufferLines = substituteLines(bufferLines, toSearch, toReplace, singleRepl)
 		vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
 	end
 
 	-- Highlights
-	-- if no replacement entered yet: highlight search term
-	-- if replacement entered: highlight replacement
 	for i, line in ipairs(bufferLines) do
 		local matchesInLine = {}
+
+		-- iterate to find all matches in the line
 		local start, _end = 0, 0
 		while true do
 			start, _end = line:find(toSearch, start + 1)
 			if not start then break end
-			table.insert(matchesInLine, {start, _end})
+			local match = { startPos = start, endPos = _end }
+			table.insert(matchesInLine, match)
 		end
-		if not vim.tbl_isempty(matchesInLine) then
+
+		for _, match in pairs(matchesInLine) do
 			-- TODO make this work with dynamic length of replacement
-			if toReplace then endIdx = startIdx + #toReplace - 1 end
-			vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startIdx - 1, endIdx)
+			if toReplace then match.endPos = match.startPos + #toReplace - 1 end
+			vim.api.nvim_buf_add_highlight(
+				0,
+				ns,
+				"Substitute",
+				line1 + i - 2,
+				match.startPos - 1,
+				match.endPos
+			)
 		end
 	end
 
