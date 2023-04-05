@@ -3,8 +3,7 @@
 
 -- THEME
 local darkTheme = "Paraiso Dark"
-local lightTheme = "Mocha (light) (terminal.sexy)"
--- local lightTheme = "seoulbones_light"
+local lightTheme = "Silk Light (base16)"
 local opacity = 0.94
 
 --------------------------------------------------------------------------------
@@ -107,13 +106,11 @@ return {
 	font_size = 27,
 	command_palette_font_size = 29,
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
-	-- even though symbols and nerd font are bundled with wezterm, some symbols
-	-- due have a sizing issues, therefore explicitly using the Nerd Font here
-	font = wt.font("JetBrainsMono Nerd Font", {weight = "SemiBold"}),
-
-	-- Font Rendering
-	freetype_load_flags = "NO_BITMAP", -- NO_BITMAP|FORCE_AUTOHINT|MONOCHROME|NO_AUTOHINT|NO_HINTING
-	freetype_load_target = "Normal", -- Normal|Light|Mono|HorizontalLcd
+	-- INFO even though symbols and nerd font are bundled with wezterm, some
+	-- icons have a sizing issues, therefore explicitly using the Nerd Font here
+	font = wt.font("JetBrainsMono Nerd Font", {
+		weight = "Medium", -- tad thicker than "Regular"
+	}),
 
 	-- Size
 	adjust_window_size_when_changing_font_size = false,
