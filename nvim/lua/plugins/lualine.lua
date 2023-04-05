@@ -1,4 +1,3 @@
-
 -- HELPER
 
 ---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
@@ -186,7 +185,9 @@ local function pathToProjectRoot()
 	local projectRelPath = parentPath:sub(#vim.loop.cwd() + 2)
 	local nicerDisplay = projectRelPath:gsub("/", "  ")
 	if nicerDisplay:find("^%s*$") then return "" end
-	if #nicerDisplay > maxLen then nicerDisplay = "…" .. nicerDisplay:sub(#nicerDisplay - maxLen, #nicerDisplay) end
+	if #nicerDisplay > maxLen then
+		nicerDisplay = "…" .. nicerDisplay:sub(#nicerDisplay - maxLen, #nicerDisplay)
+	end
 	return "󰝰 " .. nicerDisplay
 end
 
@@ -202,7 +203,7 @@ local lualineConfig = {
 	-- should always include the tab element
 	tabline = {
 		lualine_a = {
-			{ clock, section_separators = emptySeparators, },
+			{ clock, section_separators = emptySeparators },
 			{
 				"tabs",
 				mode = 1,
@@ -252,7 +253,7 @@ local lualineConfig = {
 		lualine_b = {
 			{
 				require("funcs.alt-alt").altFileStatusline,
-				component_separators = { right = "", left = " "},
+				component_separators = { right = "", left = " " },
 			},
 		},
 		lualine_c = {
