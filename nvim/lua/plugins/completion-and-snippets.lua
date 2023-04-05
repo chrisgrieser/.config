@@ -267,14 +267,27 @@ local function filetypeCompletionConfig()
 			s.codeium,
 		},
 	})
+end
 
-	-- Command Line Completion
+local function cmdlineCompletionConfig()
+	local cmp = require("cmp")
+
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),
 		view = {
 			-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#menu-type
 			entries = { name = "wildmenu", separator = "|" },
 		},
+		enabled = function()
+			-- https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-cmdline-completion-for-certain-commands-such-as-increname
+			local disabled = {
+				IncRename = true,
+			}
+			local cmd = vim.fn.getcmdline():match("%S+") -- Get first word of cmdline
+			-- Return true if cmd isn't disabled
+			-- else call/return cmp.close(), which returns false
+			return not disabled[cmd] or cmp.close()
+		end,
 		sources = cmp.config.sources({
 			s.path,
 			s.cmdline,
@@ -303,6 +316,7 @@ return {
 		config = function()
 			cmpconfig()
 			filetypeCompletionConfig()
+			cmdlineCompletionConfig()
 		end,
 		dependencies = {
 			"hrsh7th/cmp-buffer",
