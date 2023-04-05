@@ -169,25 +169,25 @@ Autocmd("BufReadPost", {
 })
 
 --------------------------------------------------------------------------------
--- AUTO-SAVING & AUTO-READ ON CHANGE
+-- AUTO-SAVING
 opt.autowrite = true
 opt.autowriteall = true
 
--- Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
--- 	pattern = "?*", -- pattern required for some events
--- 	callback = function()
--- 		local filepath = Expand("%:p")
--- 		if
--- 			Fn.filereadable(filepath) == 1
--- 			and not Bo.readonly
--- 			and Expand("%") ~= ""
--- 			and (Bo.buftype == "" or Bo.buftype == "acwrite")
--- 			and Bo.filetype ~= "gitcommit"
--- 		then
--- 			Cmd.update(filepath)
--- 		end
--- 	end,
--- })
+Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
+	pattern = "?*", -- pattern required for some events
+	callback = function()
+		local filepath = Expand("%:p")
+		if
+			Fn.filereadable(filepath) == 1
+			and not Bo.readonly
+			and Expand("%") ~= ""
+			and (Bo.buftype == "" or Bo.buftype == "acwrite")
+			and Bo.filetype ~= "gitcommit"
+		then
+			Cmd.update(filepath)
+		end
+	end,
+})
 
 --------------------------------------------------------------------------------
 
