@@ -3,6 +3,7 @@ local M = {}
 
 ---process the parameters given in the user command (ranges, args, etc.)
 ---@param opts table
+---@param curBufNum integer
 ---@nodiscard
 ---@return integer start line of range
 ---@return integer end line of range
@@ -10,15 +11,14 @@ local M = {}
 ---@return string term to search
 ---@return string|nil replacement
 ---@return boolean whether to search first or all occurrences in line
-local function processParameters(opts)
+local function processParameters(opts, curBufNum)
 	-- "trimempty" allows to leave out the first and third "/" from regular `:s`
 	local input = vim.split(opts.args, "/", { trimempty = true, plain = false })
 	local toSearch, toReplace, flags = input[1], input[2], input[3]
 	local singleRepl = (flags and flags:find("g")) == nil
 
-	local curBuffer = vim.api.nvim_get_current_buf()
 	local line1, line2 = opts.line1, opts.line2
-	local bufferLines = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
+	local bufferLines = vim.api.nvim_buf_get_lines(curBufNum, line1 - 1, line2, false)
 
 	return line1, line2, bufferLines, toSearch, toReplace, singleRepl
 end
@@ -29,8 +29,9 @@ end
 ---length needs to be determined for each substitution, for the preview highlight
 ---@param opts table
 ---@param ns integer namespace id to use for highlights
-local function highlightReplacements(opts, ns)
-	local line1, _, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts)
+---@param curBufNum integer buffer id 
+local function highlightReplacements(opts, ns, curBufNum)
+	local line1, _, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts, curBufNum)
 	if not toReplace then return end
 
 	-- iterate lines
@@ -39,37 +40,42 @@ local function highlightReplacements(opts, ns)
 
 		-- find all startPositions in the line
 		local startPositions = {}
-		print("line:", line)
 		for col in line:gmatch("()" .. toSearch) do
 			print("col:", col)
-			-- table.insert(startPositions, col)
-			-- if singleRepl then break end
+			table.insert(startPositions, col)
+			if singleRepl then break end
 		end
 
 		-- iterate matches in given line
-		-- local previousShift = 0
-		-- for ii, startPos in ipairs(startPositions) do
+		local previousShift = 0
+		for ii, startPos in ipairs(startPositions) do
+			startPos = 1
+			endPos = -1
 
-			-- vim.api.nvim_buf_add_highlight(0, ns, "Substitute", lineIdx, 1, -1)
-			-- local endPos = -1
-			-- startPos = 3
 			-- local _, endPos = line:find(toSearch, startPos + 1)
-			-- local endPos = startPos + 5
 			-- local lineWithSomeSubs = line:gsub(toSearch, toReplace, ii)
 			-- local diff = (#lineWithSomeSubs - #line) + previousShift
 			-- startPos = startPos + previousShift
 			-- endPos = endPos + previousShift + diff -- shift of end position due to replacement
 			-- previousShift = previousShift + diff -- remember shift for next iteration
 
-			-- vim.api.nvim_buf_add_highlight(0, ns, "Substitute", lineIdx, startPos - 1, endPos)
-		-- end
+			vim.api.nvim_buf_add_highlight(0, ns, "Substitute", lineIdx, startPos - 1, endPos)
+		end
 	end
 end
 
 ---the substitution to perform when the commandline is confirmed with <CR>
 ---@param opts table
 local function performSubstitition(opts)
-	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts)
+	local line1 = opts.line1
+	local line2 = opts.line2
+	local curBufNum = vim.api.nvim_get_current_buf()
+	local bufferLines = vim.api.nvim_buf_get_lines(curBufNum, line1 - 1, line2, false)
+
+	local input = vim.split(opts.args, "/", { trimempty = true, plain = false })
+	local toSearch, toReplace, flags = input[1], input[2], input[3]
+	local singleRepl = (flags and flags:find("g")) == nil
+
 	if not toReplace then
 		vim.notify("No replacement value given, cannot perform substitution.", vim.log.levels.ERROR)
 		return
@@ -82,7 +88,7 @@ local function performSubstitition(opts)
 	end
 	-- INFO during previeing, this will only replace the values in the buffer
 	-- preview, not the actual buffer
-	vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
+	vim.api.nvim_buf_set_lines(curBufNum, line1 - 1, line2, false, newBufferLines)
 end
 
 -- https://neovim.io/doc/user/map.html#%3Acommand-preview
@@ -98,7 +104,8 @@ local function previewSubstitution(opts, ns, preview_buf)
 		)
 		return
 	end
-	local line1, _, bufferLines, toSearch, toReplace, _ = processParameters(opts)
+	local curBufNum = vim.api.nvim_get_current_buf()
+	local line1, _, bufferLines, toSearch, toReplace, _ = processParameters(opts, curBufNum)
 
 	-- NO REPLACE VALUE YET = ONLY SEARCH TERMS TO HIGHLIGHT
 	if not toReplace then
@@ -116,7 +123,7 @@ local function previewSubstitution(opts, ns, preview_buf)
 	else
 		-- preview the changes
 		performSubstitition(opts)
-		highlightReplacements(opts, ns)
+		highlightReplacements(opts, ns, curBufNum)
 	end
 
 	return 2 -- return the value of the preview type
