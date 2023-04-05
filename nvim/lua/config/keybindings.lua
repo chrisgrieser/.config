@@ -277,6 +277,8 @@ Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("E
 Keymap( "x", "<leader>fa", ":AI Refactor to improve this code<CR>", { desc = "󱙺 Refactor with GPT" })
 -- stylua: ignore end
 
+require("funcs.no-vim-regex").setup()
+
 --------------------------------------------------------------------------------
 -- AI Support
 Keymap({ "n", "x" }, "<leader>a", ":AI<CR>", { desc = "󱙺 Complete with GPT" })
