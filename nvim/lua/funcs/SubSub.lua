@@ -6,31 +6,30 @@ local regexFlavor
 
 --------------------------------------------------------------------------------
 
--- TODO replace these for example with `node` for js like regex?
--- TODO escape the delimiter string from cmdline
-
----function performing the actual string substitution, using lua's string.gsub
+---function performing the actual string substitution
 ---@param inputLines string[]
 ---@param toSearch string
 ---@param toReplace string
----@param numOfReplacement integer|nil nil will perform all replacements
+---@param numOfReplacements integer|nil nil will perform all replacements
 ---@param language "lua"|"javascript"
 ---@nodiscard
 ---@return string[] outputLines
-local function useGsub(inputLines, toSearch, toReplace, numOfReplacement, language)
+---@return integer totalReplacementCount
+local function replace(inputLines, toSearch, toReplace, numOfReplacements, language)
 	local outputLines = {}
+	local totalReplacementCount = 0
 	if language == "lua" then
-		local occurrences = numOfReplacement or nil
+		local occurrences = numOfReplacements or nil
 		for _, line in pairs(inputLines) do
 			local newLine = line:gsub(toSearch, toReplace, occurrences)
 			table.insert(outputLines, newLine)
 		end
 	elseif language == "javascript" then
 	end
-	return outputLines
+	return outputLines, totalReplacementCount
 end
 
----function performing a search, using lua's string.find
+---function performing a search
 ---@param str string
 ---@param toSearch string
 ---@param fromIdx integer perform find from this index
@@ -38,7 +37,7 @@ end
 ---@nodiscard
 ---@return integer startPos of match, nil if no match
 ---@return integer endPos of match, nil if no match
-local function useFind(str, toSearch, fromIdx, language)
+local function find(str, toSearch, fromIdx, language)
 	local startPos, endPos
 	if language == "lua" then
 		startPos, endPos = str:find(toSearch, fromIdx)
@@ -85,7 +84,7 @@ local function previewAndHighlightReplacements(opts, ns, curBufNum)
 
 	-- preview changes
 	local numOfReplacement = singleRepl and 1 or nil
-	local newBufferLines = useGsub(bufferLines, toSearch, toReplace, numOfReplacement, regexFlavor)
+	local newBufferLines = replace(bufferLines, toSearch, toReplace, numOfReplacement, regexFlavor)
 	vim.api.nvim_buf_set_lines(curBufNum, line1 - 1, line2, false, newBufferLines)
 
 	-- add highlights
@@ -96,7 +95,7 @@ local function previewAndHighlightReplacements(opts, ns, curBufNum)
 		local startPositions = {}
 		local start = 0
 		while true do
-			start, _ = useFind(line, toSearch, start + 1, regexFlavor)
+			start, _ = find(line, toSearch, start + 1, regexFlavor)
 			if not start then break end
 			table.insert(startPositions, start)
 		end
@@ -104,8 +103,8 @@ local function previewAndHighlightReplacements(opts, ns, curBufNum)
 		-- iterate matches in given line
 		local previousShift = 0
 		for ii, startPos in ipairs(startPositions) do
-			local _, endPos = useFind(line, toSearch, startPos, regexFlavor)
-			local lineWithSomeSubs = (useGsub({ line }, toSearch, toReplace, ii, regexFlavor))[1]
+			local _, endPos = find(line, toSearch, startPos, regexFlavor)
+			local lineWithSomeSubs = (replace({ line }, toSearch, toReplace, ii, regexFlavor))[1]
 			local diff = (#lineWithSomeSubs - #line)
 			startPos = startPos + previousShift
 			endPos = endPos + diff -- shift of end position due to replacement
@@ -124,7 +123,7 @@ local function highlightSearches(opts, ns, curBufNum)
 	for i, line in ipairs(bufferLines) do
 		-- only highlighting first match, since the g-flag can only be entered
 		-- when there is a substitution value
-		local startPos, endPos = useFind(line, toSearch, 1, regexFlavor)
+		local startPos, endPos = find(line, toSearch, 1, regexFlavor)
 		if startPos and endPos then
 			vim.api.nvim_buf_add_highlight(0, ns, hlgroup, line1 + i - 2, startPos - 1, endPos)
 		end
@@ -145,8 +144,9 @@ local function confirmSubstitution(opts)
 	end
 
 	local numOfReplacement = singleRepl and 1 or nil
-	local newBufferLines = useGsub(bufferLines, toSearch, toReplace, numOfReplacement, regexFlavor)
+	local newBufferLines, totalReplacementCount = replace(bufferLines, toSearch, toReplace, numOfReplacement, regexFlavor)
 	vim.api.nvim_buf_set_lines(curBufNum, line1 - 1, line2, false, newBufferLines)
+	vim.notify("Replaced "..tostring(totalReplacementCount).." instances.")
 end
 
 -- https://neovim.io/doc/user/map.html#%3Acommand-preview
