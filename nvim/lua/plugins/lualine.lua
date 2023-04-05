@@ -215,7 +215,7 @@ local lualineConfig = {
 		lualine_b = {
 			{
 				pathToProjectRoot,
-				section_separators = { left = " ", right = " " },
+				section_separators = { left = " ", right = " " },
 				cond = function() return vim.fn.tabpagenr("$") == 1 end,
 			},
 		},

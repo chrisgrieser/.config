@@ -24,6 +24,10 @@ end
 
 --------------------------------------------------------------------------------
 
+---@class hlPos Position of an highlight to apply
+---@field startCol number
+---@field endCol number
+
 ---more complicated than just running gsub on each line, since the shift in
 ---length needs to be determined for each substitution, for the preview highlight
 ---@param lines string[]
@@ -31,32 +35,38 @@ end
 ---@param toReplace string
 ---@param singleRepl boolean single replacement or not
 ---@nodiscard
----@return table[integer[], integer[]] -- shiftsInEveryLine
+---@return table[hlPos[]] hlPosInAllLines
 local function calcReplHighlights(lines, toSearch, toReplace, singleRepl)
-	local shiftsInEveryLine = {}
+	local hlPosInAllLines = {}
 
 	-- iterate lines
 	for _, line in pairs(lines) do
-		local numOfMatches = 0
-		for _ in line:gmatch("()" .. toSearch) do
-			numOfMatches = numOfMatches + 1
+		-- find all startPositions in the line
+		local startPositions = {}
+		for col in line:gmatch("()" .. toSearch) do
+			table.insert(startPositions, col)
 			if singleRepl then break end
 		end
 
 		-- iterate matches in given line
-		local shiftsInThisLine = {}
-		local sum = 0 -- needed to factor in the previous shifts in the calculation of shifts
-		for idx = 1, #numOfMatches, 1 do
-			local lineWithSomeSubs = line:gsub(toSearch, toReplace, idx)
-			local diff = #lineWithSomeSubs - #line - sum
-			sum = sum + diff
-			table.insert(shiftsInThisLine, diff)
+		local hlPosInThisLine = {}
+		local previousShift = 0
+		for i, startPos in ipairs(startPositions) do
+			local _, endPos = line:find(toSearch, startPos + 1)
+
+			local lineWithSomeSubs = line:gsub(toSearch, toReplace, i)
+			local diff = (#lineWithSomeSubs - #line) + previousShift
+			startPositions = startPositions + previousShift
+			endPos = endPos + previousShift + diff -- shift of end position due to replacement
+
+			table.insert(hlPosInThisLine, { startCol = startPos, endCol = endPos })
+			previousShift = previousShift + diff -- remember shift 
 		end
 
-		table.insert(shiftsInEveryLine, shiftsInThisLine)
+		table.insert(hlPosInAllLines, hlPosInThisLine)
 	end
 
-	return shiftsInEveryLine
+	return hlPosInAllLines
 end
 
 ---the substitution to perform when the commandline is confirmed with <CR>
@@ -98,10 +108,10 @@ local function previewSubstitution(opts, ns, preview_buf)
 		for i, line in ipairs(bufferLines) do
 			-- only highlighting first match, since the g-flag can only be entered
 			-- when there is a substitution value
-			local startPos = line:find(toSearch)
+			local startPos, endPos = line:find(toSearch)
 			if startPos then
 				-- stylua: ignore
-				vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startPos - 1, startPos + #toSearch - 1)
+				vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startPos - 1, endPos)
 			end
 		end
 
@@ -110,11 +120,14 @@ local function previewSubstitution(opts, ns, preview_buf)
 		-- preview the changes
 		performSubstitition(opts)
 		local shiftsInEveryLine = calcReplHighlights(bufferLines, toSearch, toReplace, singleRepl)
-		-- for i, shiftsInLine in pairs(shiftsInEveryLine) do
-		-- 	for _, shift in pairs(shiftsInLine) do
-		-- 		vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startPos - 1, endPos)
-		-- 	end	
-		-- end
+
+		-- iterate lines
+		for i, shiftsInLine in pairs(hlPosInAllLines) do
+			-- iterate positions to highlight in each line
+			for _, hlPos in pairs(positionsInLine) do
+				vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + i - 2, startPos - 1, endPos)
+			end
+		end
 	end
 
 	return 2 -- return the value of the preview type
