@@ -2,7 +2,7 @@ local M = {}
 local warn = vim.log.levels.WARN
 local delimiter = "/"
 local hlgroup = "Substitute"
-local regexFlavor
+local regexFlavor, showNotification
 
 --------------------------------------------------------------------------------
 
@@ -18,13 +18,14 @@ local regexFlavor
 local function replace(inputLines, toSearch, toReplace, numOfReplacements, language)
 	local outputLines = {}
 	local totalReplacementCount = 0
-	if language == "lua" then
-		local occurrences = numOfReplacements or nil
-		for _, line in pairs(inputLines) do
-			local newLine = line:gsub(toSearch, toReplace, occurrences)
-			table.insert(outputLines, newLine)
+	for _, line in pairs(inputLines) do
+		local newLine, replMade
+		if language == "lua" then
+			newLine, replMade = line:gsub(toSearch, toReplace, numOfReplacements)
+		elseif language == "javascript" then
 		end
-	elseif language == "javascript" then
+		totalReplacementCount = totalReplacementCount + replMade
+		table.insert(outputLines, newLine)
 	end
 	return outputLines, totalReplacementCount
 end
@@ -144,9 +145,12 @@ local function confirmSubstitution(opts)
 	end
 
 	local numOfReplacement = singleRepl and 1 or nil
-	local newBufferLines, totalReplacementCount = replace(bufferLines, toSearch, toReplace, numOfReplacement, regexFlavor)
+	local newBufferLines, totalReplacementCount =
+		replace(bufferLines, toSearch, toReplace, numOfReplacement, regexFlavor)
 	vim.api.nvim_buf_set_lines(curBufNum, line1 - 1, line2, false, newBufferLines)
-	vim.notify("Replaced "..tostring(totalReplacementCount).." instances.")
+	if showNotification then
+		vim.notify("Replaced " .. tostring(totalReplacementCount) .. " instances.")
+	end
 end
 
 -- https://neovim.io/doc/user/map.html#%3Acommand-preview
@@ -157,7 +161,7 @@ end
 local function previewSubstitution(opts, ns, preview_buf)
 	if preview_buf then
 		-- stylua: ignore
-		vim.notify("'inccommand=split' is not supported yet. Please use 'inccommand=unsplit' instead.", warn)
+		vim.notify_once("'inccommand=split' is not supported yet. Please use 'inccommand=unsplit' instead.", warn)
 		return
 	end
 	local curBufNum = vim.api.nvim_get_current_buf()
@@ -177,13 +181,15 @@ end
 --------------------------------------------------------------------------------
 
 ---@class config
----@field regexFlavor "lua" currently only "lua" is supported
+---@field regexFlavor "lua"|"javascript" default: lua
+---@field showNotification boolean whether to show the "x replacements made" notice, default: true
 
 ---@param opts? config
 function M.setup(opts)
 	-- default values
 	if not opts then opts = {} end
 	regexFlavor = opts.regexFlavor or "lua"
+	showNotification = opts.showNotification or true
 
 	-- validation
 	local supportedLangs = {
@@ -191,7 +197,7 @@ function M.setup(opts)
 		javascript = false,
 	}
 	if not supportedLangs[regexFlavor] then
-		vim.notify(regexFlavor .. " is not supported as a regexFlavor", warn)
+		vim.notify(regexFlavor .. " is not supported as a regex flavor.", warn)
 		return
 	end
 
