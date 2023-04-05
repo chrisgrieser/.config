@@ -193,18 +193,16 @@ end
 --------------------------------------------------------------------------------
 
 -- nerdfont: powerline icons have the prefix 'ple-'
--- stylua: ignore start
-local bottomSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
-local topSeparators = vim.g.neovide and { left = " ", right = " " } or { left = "", right = "" }
+local bottomSeparators = { left = " ", right = " " }
+local topSeparators = { left = " ", right = " " }
 local emptySeparators = { left = "", right = "" }
--- stylua: ignore end
 
 local lualineConfig = {
 	-- INFO using the tabline will override vim's default tabline, so the tabline
 	-- should always include the tab element
 	tabline = {
 		lualine_a = {
-			{ clock },
+			{ clock, section_separators = emptySeparators, },
 			{
 				"tabs",
 				mode = 1,
@@ -216,7 +214,7 @@ local lualineConfig = {
 		lualine_b = {
 			{
 				pathToProjectRoot,
-				section_separators = topSeparators,
+				section_separators = { left = " ", right = " " },
 				cond = function() return vim.fn.tabpagenr("$") == 1 end,
 			},
 		},

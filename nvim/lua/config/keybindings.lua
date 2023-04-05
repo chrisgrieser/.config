@@ -292,9 +292,8 @@ Keymap( "x", "<leader>fa", ":AI Refactor to improve this code<CR>", { desc = "�
 
 --------------------------------------------------------------------------------
 -- AI Support
-
-Keymap("n", "<leader>a", ":AI<CR>", { desc = "󱙺 Complete with GPT" })
-Keymap("x", "<leader>a", ":AI ", { desc = "󱙺 Prompt GPT" })
+Keymap({ "n", "x" }, "<leader>a", ":AI<CR>", { desc = "󱙺 Complete with GPT" })
+Keymap("x", "<leader>A", ":AI ", { desc = "󱙺 Prompt GPT" })
 
 --------------------------------------------------------------------------------
 
