@@ -1,35 +1,43 @@
 local M = {}
 --------------------------------------------------------------------------------
 
--- iterate lines and replace
+---@class lineWithShift
+---@field lineContent string
+---@field shifts integer[]
+
+---iterate lines and replace.
+---more complecated than just running gsub on each line, since the shift in
+---length needs to be determined for each substitution, for the preview highlight
 ---@param lines string[]
 ---@param toSearch string
 ---@param toReplace string
 ---@param singleRepl boolean single replacement or not
 ---@nodiscard
----@return string[]
+---@return lineWithShift[]
 local function substituteLines(lines, toSearch, toReplace, singleRepl)
-	local newBufferLines = {}
+	local newBufferLines = {} ---@type lineWithShift[]
+	local occurrences = singleRepl and 1 or nil
 
 	for _, line in pairs(lines) do -- iterate lines
-		local newLine = line
 		local matches = {}
-		for i in line:gmatch("()"..toSearch) do
-			table.insert(matches, i)	
+		for i in line:gmatch("()" .. toSearch) do
+			table.insert(matches, i)
+			if singleRepl then break end
 		end
-		local lineLengthShifts = {} -- how each substitution shifted the length of the line. needed for highlights
 
-		for _, match in pairs(matches) do -- interate matches in given line
-		
-			if singleRepl then break end -- single replacement
-		end
-		while true do -- iterate individual substitutions in that line
-			newLine = line:gsub(toSearch, toReplace, 1) 
-			local lengthDiff = #newLine - #line
+		local lineLengthShifts = {} -- how each substitution shifted the length of the line. needed for highlights
+		local sumOfShifts = 0 -- needed to factor in the previous shifts in the calculation of shifts
+		for idx, match in ipairs(matches) do -- iterate matches in given line
+			local lineWithIdxSubstititons = line:gsub(match, toReplace, idx)
+			local lengthDiff = #lineWithIdxSubstititons - #line - sumOfShifts
 			table.insert(lineLengthShifts, lengthDiff)
-			if singleRepl or not (newLine:find(toSearch)) then break end
+			sumOfShifts = sumOfShifts + lengthDiff
 		end
-		table.insert(newBufferLines, {line = newLine, posShift = lineLengthShifts})
+
+		-- perform the actual substitution of text in the line
+		local newLine = line:gsub(toSearch, toReplace, occurrences)
+
+		table.insert(newBufferLines, { line = newLine, posShift = lineLengthShifts })
 	end
 
 	return newBufferLines
@@ -56,6 +64,7 @@ local function processParameters(opts)
 	return line1, line2, bufferLines, toSearch, toReplace, singleRepl
 end
 
+---the substitution to perform when the commandline is confirmed with <CR>
 ---@param opts table
 local function executeSubstitution(opts)
 	local line1, line2, bufferLines, toSearch, toReplace, singleRepl = processParameters(opts)
