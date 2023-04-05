@@ -1,13 +1,12 @@
--- https://wezfurlong.org/wezterm/config/files.html#quick-start
---------------------------------------------------------------------------------
-
 -- THEME
+
 local darkTheme = "Paraiso Dark"
 local lightTheme = "Silk Light (base16)"
 local opacity = 0.94
 
 --------------------------------------------------------------------------------
 -- UTILS
+
 local wt = require("wezterm")
 local act = wt.action
 local actFun = wt.action_callback
@@ -35,6 +34,7 @@ wt.on("gui-startup", function(cmd)
 end)
 
 --------------------------------------------------------------------------------
+-- THEME UTILS
 
 ---selects the color scheme depending on Dark/Light Mode
 ---@return string name of the string to set in config.colorscheme
@@ -81,11 +81,80 @@ local function themeCycler(window, _)
 end
 
 --------------------------------------------------------------------------------
--- MAIN CONFIG
-return {
+-- keybindings
+
+local keybindings = {
+	-- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
+	-- Keynames: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
+	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
+	{ key = "q", mods = "CMD", action = act.QuitApplication },
+	{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
+	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
+	{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
+	{ key = "+", mods = "CMD", action = act.IncreaseFontSize },
+	{ key = "-", mods = "CMD", action = act.DecreaseFontSize },
+	{ key = "0", mods = "CMD", action = act.ResetFontSize },
+	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
+	{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
+	{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
+	{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
+	{ key = "Enter", mods = "SHIFT", action = act.ActivateTabRelative(1) },
+	{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
+
+	-- using the mapping from the terminal_keybindings.zsh
+	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
+	{ key = "b", mods = "CMD", action = act.SendKey { key = "b", mods = "CTRL" } },
+
+	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
+	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
+	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
+
+	{ -- cmd+o -> open link (like f in vimium)
+		key = "o",
+		mods = "CMD",
+		action = act.QuickSelectArgs {
+			patterns = { "https?://\\S+" },
+			label = "Open URL",
+			action = actFun(function(window, pane)
+				local url = window:get_selection_text_for_pane(pane)
+				wt.open_with(url)
+			end),
+		},
+	},
+	{ -- cmd+, -> open this config file
+		key = ",",
+		mods = "CMD",
+		action = actFun(function() wt.open_with(wt.config_file) end),
+	},
+	{ -- cmd+l -> open current location in Finder
+		key = "l",
+		mods = "CMD",
+		action = actFun(function(_, pane)
+			local cwd = pane:get_current_working_dir()
+			wt.open_with(cwd, "Finder")
+		end),
+	},
+	-- Theme Cycler
+	{ key = "t", mods = "SHIFT|CTRL|ALT", action = wt.action_callback(themeCycler) },
+
+	-- MODES
+	-- Search
+	{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
+
+	-- Console / REPL
+	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
+
+	-- copy mode https://wezfurlong.org/wezterm/copymode.html
+	{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
+
+	-- hint mode https://wezfurlong.org/wezterm/quickselect.html
+	{ key = "f", mods = "CMD|SHIFT", action = act.QuickSelect },
+}
+
+local config = {
 	-- Meta
 	check_for_updates = true,
-	automatically_reload_config = true, -- causes errors too quickly
+	automatically_reload_config = true,
 	detect_password_input = isAtOffice,
 
 	-- Start/Close
@@ -157,78 +226,10 @@ return {
 		},
 	},
 
-	-- KEYBINDINGS
-	-- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
-	-- Keynames: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
 	disable_default_key_bindings = true,
-	keys = {
-		{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
-		{ key = "q", mods = "CMD", action = act.QuitApplication },
-		{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
-		{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
-		{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
-		{ key = "+", mods = "CMD", action = act.IncreaseFontSize },
-		{ key = "-", mods = "CMD", action = act.DecreaseFontSize },
-		{ key = "0", mods = "CMD", action = act.ResetFontSize },
-
-		{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
-		{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
-		{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
-		{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
-		{ key = "Enter", mods = "SHIFT", action = act.ActivateTabRelative(1) },
-		{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
-
-		-- using the mapping from the terminal_keybindings.zsh
-		{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
-		{ key = "b", mods = "CMD", action = act.SendKey { key = "b", mods = "CTRL" } },
-
-		-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
-		{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
-		{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
-
-		{ -- cmd+o -> open link (like f in vimium)
-			key = "o",
-			mods = "CMD",
-			action = act.QuickSelectArgs {
-				patterns = { "https?://\\S+" },
-				label = "Open URL",
-				action = actFun(function(window, pane)
-					local url = window:get_selection_text_for_pane(pane)
-					wt.open_with(url)
-				end),
-			},
-		},
-		{ -- cmd+, -> open this config file
-			key = ",",
-			mods = "CMD",
-			action = actFun(function() wt.open_with(wt.config_file) end),
-		},
-		{ key = "r", mods = "CMD", action = act.ReloadConfiguration },
-
-		{ -- cmd+l -> open current location in Finder
-			key = "l",
-			mods = "CMD",
-			action = actFun(function(_, pane)
-				local cwd = pane:get_current_working_dir()
-				wt.open_with(cwd, "Finder")
-			end),
-		},
-		-- Theme Cycler
-		{ key = "t", mods = "SHIFT|CTRL|ALT", action = wt.action_callback(themeCycler) },
-
-		--------------------------------------------------------------------------
-		-- MODES
-
-		-- Search
-		{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
-
-		-- Console / REPL
-		{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
-
-		-- copy mode https://wezfurlong.org/wezterm/copymode.html
-		{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
-
-		-- hint mode https://wezfurlong.org/wezterm/quickselect.html
-		{ key = "f", mods = "CMD|SHIFT", action = act.QuickSelect },
-	},
+	keys = keybindings,
 }
+
+--------------------------------------------------------------------------------
+
+return config
