@@ -15,7 +15,7 @@ opt.undofile = true -- enable persistent undo history
 opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 
 -- extra undopoints (= more fine-grained undos)
--- REQUIRED remap, otherwise extra undo points prevent vim abbreviations w/ those 
+-- REQUIRED remap, otherwise extra undo points prevent vim abbreviations w/ those
 -- characters from working
 local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
 for _, char in pairs(undopointChars) do
@@ -93,18 +93,16 @@ opt.timeoutlen = 900 -- also affects duration until which-key is shown
 -- PATH (for `gf`)
 
 -- pwd is set via projects.nvim
--- add pwd
 Autocmd("DirChanged", {
 	callback = function() opt.path:append(vim.loop.cwd()) end,
 })
--- remove old path
 Autocmd("DirChangedPre", {
 	callback = function() opt.path:remove(vim.loop.cwd()) end,
 })
 
 --------------------------------------------------------------------------------
 -- SCROLLING
-opt.scrolloff = 12
+opt.scrolloff = 14
 opt.sidescrolloff = 13
 
 -- FIX scrolloff at EoF
@@ -117,7 +115,7 @@ Autocmd("CursorMoved", {
 		local win_view = Fn.winsaveview()
 		local scrolloff = math.min(opt.scrolloff:get(), math.floor(win_height / 2))
 		local scrolloff_line_count = win_height - (Fn.line("w$") - win_view.topline + 1)
-		local distance_to_last_line = Fn.line("$") - win_view.lnum ---@diagnostic disable-line: undefined-field
+		local distance_to_last_line = Fn.line("$") - win_view.lnum 
 		if
 			distance_to_last_line < scrolloff
 			and scrolloff_line_count + distance_to_last_line < scrolloff
@@ -155,7 +153,7 @@ Autocmd("BufReadPost", {
 		-- trigger to ensure it's run before determining spaces/tabs
 		local success = pcall(Cmd.IndentOMatic)
 		if not success then
-			vim.notify("IndentOMatic not found.", LogWarn)
+			vim.notify("Indent-o-Matic not found.", LogWarn)
 			return
 		end
 
@@ -172,24 +170,24 @@ Autocmd("BufReadPost", {
 
 --------------------------------------------------------------------------------
 -- AUTO-SAVING & AUTO-READ ON CHANGE
-Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
-	pattern = "?*", -- pattern required for some events
-	callback = function()
-		local filepath = Expand("%:p")
-		if
-			Fn.filereadable(filepath) == 1
-			and not Bo.readonly
-			and Expand("%") ~= ""
-			and (Bo.buftype == "" or Bo.buftype == "acwrite")
-			and Bo.filetype ~= "gitcommit"
-		then
-			Cmd.update(filepath)
-		end
-	end,
-})
+opt.autowrite = true
+opt.autowriteall = true
 
--- Auto-read on external change. Requires `checktime` to actually check for it
-opt.autoread = true
+-- Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
+-- 	pattern = "?*", -- pattern required for some events
+-- 	callback = function()
+-- 		local filepath = Expand("%:p")
+-- 		if
+-- 			Fn.filereadable(filepath) == 1
+-- 			and not Bo.readonly
+-- 			and Expand("%") ~= ""
+-- 			and (Bo.buftype == "" or Bo.buftype == "acwrite")
+-- 			and Bo.filetype ~= "gitcommit"
+-- 		then
+-- 			Cmd.update(filepath)
+-- 		end
+-- 	end,
+-- })
 
 --------------------------------------------------------------------------------
 

@@ -22,10 +22,11 @@ while true do
 	if DotfilesFolder then break end
 
 	hs.timer.usleep(10000) -- = one hundreth second (Blocking!)
-	if i > 10 then
-		Notify("⚠️ Could not retrieve .zshenv")
-	end
 	i = i + 1
+	if i > 50 then
+		Notify("⚠️ Could not retrieve .zshenv")
+		break
+	end
 end
 
 --------------------------------------------------------------------------------
