@@ -567,6 +567,7 @@ end, { desc = "󰒕 Copy Breadcrumbs" })
 
 Autocmd("LspAttach", {
 	callback = function(args)
+		-- stylua: ignore start
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local capabilities = client.server_capabilities
 
@@ -577,14 +578,8 @@ Autocmd("LspAttach", {
 			-- refactor's smart-rename
 			-- stylua: ignore
 			vim.defer_fn( function() Keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1) ---@diagnostic disable-line: param-type-mismatch
-			Keymap(
-				"n",
-				"<leader>V",
-				function() return ":IncRename " .. Expand("<cword>") end,
-				{ desc = "󰒕 IncRename cword", buffer = true, expr = true }
-			)
+			Keymap("n", "<leader>V", function() return ":IncRename " .. Expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
 		end
-		-- stylua: ignore start
 
 		-- conditional to not overwrite treesitter goto-symbol
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
@@ -603,7 +598,9 @@ Autocmd("LspAttach", {
 		-- Save & Format
 		Keymap({ "n", "i", "x" }, "<D-s>", function()
 			Cmd.update()
+			Cmd.mkview(9) -- to preserve folding
 			vim.lsp.buf.format()
+			Cmd.loadview(9)
 		end, { buffer = true, desc = "󰒕 Save & Format" })
 	end,
 })
