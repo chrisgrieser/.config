@@ -106,10 +106,14 @@ return {
 	-- Font
 	font_size = 27,
 	command_palette_font_size = 29,
+	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	-- even though symbols and nerd font are bundled with wezterm, some symbols
 	-- due have a sizing issues, therefore explicitly using the Nerd Font here
-	font = wt.font("JetBrainsMono Nerd Font"),
-	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
+	font = wt.font("JetBrainsMono Nerd Font", {weight = "SemiBold"}),
+
+	-- Font Rendering
+	freetype_load_flags = "NO_BITMAP", -- NO_BITMAP|FORCE_AUTOHINT|MONOCHROME|NO_AUTOHINT|NO_HINTING
+	freetype_load_target = "Normal", -- Normal|Light|Mono|HorizontalLcd
 
 	-- Size
 	adjust_window_size_when_changing_font_size = false,
@@ -117,9 +121,9 @@ return {
 	line_height = 1.0,
 
 	-- Appearance
+	front_end = "WebGpu", -- better rendering on newer Macs
 	audible_bell = "Disabled",
 	color_scheme = autoToggleTheme(),
-	front_end = "WebGpu", -- better rendering on newer Macs
 	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
 	bold_brightens_ansi_colors = "BrightAndBold",
 	window_background_opacity = opacity,
