@@ -5,6 +5,7 @@ local M = {}
 ---@param lines string[]
 ---@param toSearch string
 ---@param toReplace string
+---@nodiscard
 ---@return string[]
 local function substituteLines(lines, toSearch, toReplace)
 	local newBufferLines = {}
@@ -15,27 +16,35 @@ local function substituteLines(lines, toSearch, toReplace)
 	return newBufferLines
 end
 
+---process the parameters given in the user command (ranges, args, etc.)
+---@param opts table
+---@nodiscard
+---@return integer start line of range
+---@return integer end line of range
+---@return string[] buffer lines
+---@return string term to search
+---@return string replacement
 local function processParameters(opts)
-	
+	-- "trimempty" allows to leave out the first and third "/" from regular `:s`
+	local input = vim.split(opts.args, "/", { trimempty = true, plain = true })
+	local toSearch = input[1]
+	local toReplace = input[2]
+
+	local line1 = opts.line1
+	local line2 = opts.line2
+	local bufferLines = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
+
+	return line1, line2, bufferLines, toSearch, toReplace
 end
 
 ---main function running the substitution
 ---@param opts table
 local function executeSubstitution(opts)
-	-- "trimempty" allows to leave out the first and third "/" from regular `:s`
-	-- "plain" required since special characters should only be processed at substitution
-	local input = vim.split(opts.args, "/", { trimempty = true, plain = true })
-
-	local toSearch = input[1]
-	local toReplace = input[2]
-	-- local flags = input[3] -- TODO flags
+	local line1, line2, bufferLines, toSearch, toReplace = processParameters(opts)
 	if not toReplace then
 		vim.notify("No replacement value given, cannot perform substitution.", vim.log.levels.ERROR)
 		return
 	end
-	local line1 = opts.line1
-	local line2 = opts.line2
-	local bufferLines = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
 
 	local newBufferLines = substituteLines(bufferLines, toSearch, toReplace)
 	vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, newBufferLines)
@@ -49,17 +58,12 @@ end
 local function previewSubstitution(opts, ns, preview_buf)
 	if preview_buf then
 		vim.notify_once(
-			"SubSub does not support 'inccommand=split' yet. Please use 'inccommand=unplit'.",
+			"SubSub does not support 'inccommand=split' yet. Please use 'inccommand=unsplit'.",
 			vim.log.levels.WARN
 		)
 		return
 	end
-	local input = vim.split(opts.args, "/", { trimempty = true, plain = true })
-	local line1 = opts.line1
-	local line2 = opts.line2
-	local bufferLines = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
-	local toSearch = input[1]
-	local toReplace = input[2]
+	local line1, line2, bufferLines, toSearch, toReplace = processParameters(opts)
 
 	-- live preview the changes
 	if toReplace then
@@ -79,7 +83,7 @@ local function previewSubstitution(opts, ns, preview_buf)
 		end
 	end
 
-	return 2 -- Return the value of the preview type
+	return 2 -- return the value of the preview type
 end
 
 -- adds the usercommand as ":S" and ":Substitute"
