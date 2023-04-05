@@ -63,15 +63,27 @@ BiweeklyTimer = hs.timer
 	:start()
 
 --------------------------------------------------------------------------------
-local function closeOtherSpaces()
-	local allSpaces = hs.spaces.allSpaces()	
+
+local function closeFullscreenSpaces()
+	local allSpaces = hs.spaces.allSpaces()
+	if not allSpaces then return end
+	for _, spaces in pairs(allSpaces) do
+		for _, spaceId in pairs(spaces) do
+			if hs.spaces.spaceType(spaceId) == "fullscreen" then
+				hs.spaces.removeSpace(spaceId)
+			end
+		end	
+	end
 end
 
 local function sleepMovieApps()
 	if not IdleMins(30) then return end
 
-	-- no need to quit IINA autoquits, but 
-	QuitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau", "IINA" }
+	-- no need to quit IINA since it autoquits
+	QuitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
+
+	-- close leftover fullscreen spaces
+	closeFullscreenSpaces()
 
 	-- close browser tabs running YouTube
 	Applescript([[
@@ -88,7 +100,7 @@ end
 
 if IsIMacAtHome() or IsAtMother() then
 	-- yes my sleep rhythm is abnormal
-	SleepTimer0 = hs.timer.doAt("02:00", "01d", sleepMovieApps, true):start()
+	SleepTimer0 = hs.timer.doAt("02:00", "01h", sleepMovieApps, true):start()
 	SleepTimer1 = hs.timer.doAt("03:00", "01d", sleepMovieApps, true):start()
 	SleepTimer2 = hs.timer.doAt("04:00", "01d", sleepMovieApps, true):start()
 	SleepTimer3 = hs.timer.doAt("05:00", "01d", sleepMovieApps, true):start()
