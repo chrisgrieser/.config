@@ -16,6 +16,7 @@ local function processParameters(opts)
 	local toSearch, toReplace, flags = input[1], input[2], input[3]
 	local singleRepl = (flags and flags:find("g")) == nil
 
+	local curBuffer = vim.api.nvim_get_current_buf()
 	local line1, line2 = opts.line1, opts.line2
 	local bufferLines = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
 
@@ -33,27 +34,35 @@ local function highlightReplacements(opts, ns)
 	if not toReplace then return end
 
 	-- iterate lines
-	for _, line in pairs(bufferLines) do
+	for i, line in ipairs(bufferLines) do
+		local lineIdx = line1 + i - 2
+
 		-- find all startPositions in the line
 		local startPositions = {}
+		print("line:", line)
 		for col in line:gmatch("()" .. toSearch) do
-			table.insert(startPositions, col)
-			if singleRepl then break end
+			print("col:", col)
+			-- table.insert(startPositions, col)
+			-- if singleRepl then break end
 		end
 
 		-- iterate matches in given line
-		local previousShift = 0
-		for i, startPos in ipairs(startPositions) do
-			-- local _, endPos = line:find(toSearch, startPos + 1)
-			local endPos = startPos + 5
-			local lineWithSomeSubs = line:gsub(toSearch, toReplace, i)
-			local diff = (#lineWithSomeSubs - #line) + previousShift
-			startPos = startPos + previousShift
-			endPos = endPos + previousShift + diff -- shift of end position due to replacement
-			previousShift = previousShift + diff -- remember shift for next iteration
+		-- local previousShift = 0
+		-- for ii, startPos in ipairs(startPositions) do
 
-			vim.api.nvim_buf_add_highlight(0, ns, "Substitute", line1 + line - 2, startPos - 1, endPos)
-		end
+			-- vim.api.nvim_buf_add_highlight(0, ns, "Substitute", lineIdx, 1, -1)
+			-- local endPos = -1
+			-- startPos = 3
+			-- local _, endPos = line:find(toSearch, startPos + 1)
+			-- local endPos = startPos + 5
+			-- local lineWithSomeSubs = line:gsub(toSearch, toReplace, ii)
+			-- local diff = (#lineWithSomeSubs - #line) + previousShift
+			-- startPos = startPos + previousShift
+			-- endPos = endPos + previousShift + diff -- shift of end position due to replacement
+			-- previousShift = previousShift + diff -- remember shift for next iteration
+
+			-- vim.api.nvim_buf_add_highlight(0, ns, "Substitute", lineIdx, startPos - 1, endPos)
+		-- end
 	end
 end
 
