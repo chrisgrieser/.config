@@ -157,33 +157,20 @@ for _, v in pairs(trailingKeys) do
 end
 Keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
--- case-conversion
+-- Case Conversion
+-- stylua: ignore start
 Keymap("n", "cru", ":lua require('textcase').current_word('to_upper_case')<CR>", { desc = "UPPER CASE" })
 Keymap("n", "crl", ":lua require('textcase').current_word('to_lower_case')<CR>", { desc = "lower case" })
 Keymap("n", "crt", ":lua require('textcase').current_word('to_title_case')<CR>", { desc = "Title Case" })
 Keymap("n", "crc", ":lua require('textcase').current_word('to_camel_case')<CR>", { desc = "camelCase" })
-Keymap(
-	"n",
-	"crp",
-	":lua require('textcase').current_word('to_pascal_case')<CR>",
-	{ desc = "PascalCase" }
-)
-Keymap(
-	"n",
-	"cre",
-	":lua require('textcase').current_word('to_phrase_case')<CR>",
-	{ desc = "Sentence case" }
-)
+Keymap("n", "crp", ":lua require('textcase').current_word('to_pascal_case')<CR>", { desc = "PascalCase" })
+Keymap("n", "cre", ":lua require('textcase').current_word('to_phrase_case')<CR>", { desc = "Sentence case" })
 Keymap("n", "cr-", ":lua require('textcase').current_word('to_dash_case')<CR>", { desc = "dash-case" })
 Keymap("n", "cr/", ":lua require('textcase').current_word('to_path_case')<CR>", { desc = "path/case" })
 Keymap("n", "cr.", ":lua require('textcase').current_word('to_dot_case')<CR>", { desc = "dot.case" })
-Keymap(
-	"n",
-	"cr_",
-	":lua require('textcase').current_word('to_constant_case')<CR>",
-	{ desc = "SCREAMING_SNAKE_CASE" }
-)
+Keymap("n", "cr_", ":lua require('textcase').current_word('to_constant_case')<CR>", { desc = "SCREAMING_SNAKE_CASE" })
 Keymap("n", "crs", ":lua require('textcase').current_word('to_snake_case')<CR>", { desc = "snake_case" })
+-- stylua: ignore end
 
 -- Word Switcher (fallback: switch casing)
 -- stylua: ignore
@@ -254,8 +241,8 @@ Keymap("n", "<leader>fk", [[:%sm/(.*)/\1/g]] .. ("<Left>"):rep(9), { desc = "�
 Keymap("x", "<leader>fk", [[:sm/(.*)/\1/g]] .. ("<Left>"):rep(9), { desc = "󱗘 :smagic kirby" })
 Keymap("n", "<leader>ff", ":%sm///g<Left><Left><Left>", { desc = "󱗘 :smagic" })
 Keymap("x", "<leader>ff", ":sm///g<Left><Left><Left>", { desc = "󱗘 :smagic in sel" })
-Keymap("x", "<leader>f<Down>", ":sort<CR>", { desc = "󱗘 :sort paragraph" })
-Keymap("n", "<leader>f<Down>", "vip:sort<CR>", { desc = "󱗘 :sort" })
+Keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort paragraph" })
+Keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort" })
 
 Keymap("n", "<leader>f<Tab>", function()
 	Bo.expandtab = false

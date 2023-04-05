@@ -81,8 +81,7 @@ local function themeCycler(window, _)
 end
 
 --------------------------------------------------------------------------------
--- keybindings
-
+-- KEYBINDINGS
 local keybindings = {
 	-- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
 	-- Keynames: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
@@ -151,6 +150,9 @@ local keybindings = {
 	{ key = "f", mods = "CMD|SHIFT", action = act.QuickSelect },
 }
 
+--------------------------------------------------------------------------------
+-- SETTINGS
+
 local config = {
 	-- Meta
 	check_for_updates = true,
@@ -195,12 +197,8 @@ local config = {
 	window_background_opacity = opacity,
 	max_fps = isAtMother and 40 or 60,
 	native_macos_fullscreen_mode = false,
-	window_padding = {
-		left = "0.5cell",
-		right = "1.2cell", -- if scrollbar enabled, controls its width, too
-		top = "0.2cell",
-		bottom = "0.4cell",
-	},
+	-- if scrollbar enabled, "rights" controls its width, too
+	window_padding = { left = "0.5cell", right = "1.2cell", top = "0.2cell", bottom = "0.4cell" },
 
 	-- Scroll
 	enable_scroll_bar = true,

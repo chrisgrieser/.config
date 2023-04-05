@@ -9,7 +9,7 @@ local lintersAndFormatters = {
 	"cbfmt", -- use other linters to format codeblocks in markdown
 	"black", -- python formatter
 	"vale", -- natural language
-	"codespell",
+	"codespell", -- superset of `misspell`, therefore only using codespell
 	"selene", -- lua
 	"stylua", -- lua
 	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
