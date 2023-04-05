@@ -9,9 +9,9 @@ local g = vim.g
 local themes = {
 	-- "EdenEast/nightfox.nvim",
 	{ "rose-pine/neovim", name = "rose-pine" },
+	"glepnir/zephyr-nvim",
 	-- "sainnhe/everforest",
 	-- "rebelot/kanagawa.nvim",
-	"glepnir/zephyr-nvim",
 	-- "folke/tokyonight.nvim",
 	-- "NTBBloodbath/sweetie.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
