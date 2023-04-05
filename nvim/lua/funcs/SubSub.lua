@@ -28,7 +28,8 @@ end
 ---@param toSearch string
 ---@param toReplace string
 ---@param numOfReplacement integer|nil nil will perform all replacements
----@return string[]
+---@nodiscard
+---@return string[] outputLines
 local function useGsub(inputLines, toSearch, toReplace, numOfReplacement)
 	local outputLines = {}
 	local occurrences = numOfReplacement or nil
@@ -37,6 +38,18 @@ local function useGsub(inputLines, toSearch, toReplace, numOfReplacement)
 		table.insert(outputLines, newLine)
 	end
 	return outputLines
+end
+
+---function performing a search, using lua's string.find
+---@param str string
+---@param toSearch string
+---@param fromIdx integer perform find from this index
+---@nodiscard
+---@return integer|nil startPos of match, nil if no match
+---@return integer|nil startPos of match, nil if no match
+local function useFind(str, toSearch, fromIdx)
+	local startPos, endPos = str:find(toSearch, fromIdx)
+	return startPos, endPos
 end
 
 --------------------------------------------------------------------------------
@@ -70,7 +83,7 @@ local function previewAndHlReplacements(opts, ns, curBufNum)
 		local previousShift = 0
 		for ii, startPos in ipairs(startPositions) do
 			local _, endPos = line:find(toSearch, startPos)
-			local lineWithSomeSubs = useGsub({ line }, toSearch, toReplace, ii)
+			local lineWithSomeSubs = (useGsub({ line }, toSearch, toReplace, ii))[1]
 			local diff = (#lineWithSomeSubs - #line)
 			startPos = startPos + previousShift
 			endPos = endPos + diff -- shift of end position due to replacement
