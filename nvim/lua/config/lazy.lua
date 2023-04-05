@@ -45,7 +45,6 @@ require("lazy").setup("plugins", {
 				"tarPlugin",
 				"tutor",
 				"rplugin",
-				"man",
 				"health",
 				"tohtml",
 				"zipPlugin",

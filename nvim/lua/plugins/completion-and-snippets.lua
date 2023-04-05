@@ -101,18 +101,11 @@ local function cmpconfig()
 			},
 		},
 		mapping = cmp.mapping.preset.insert {
-			["<S-Up>"] = cmp.mapping.scroll_docs(-4),
-			["<S-Down>"] = cmp.mapping.scroll_docs(4),
-
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
 			["<M-Esc>"] = cmp.mapping.complete(), -- consistent with macOS autocomplete
-			["<C-e>"] = cmp.mapping(function(fallback)
-				if cmp.visible() then
-					cmp.abort()
-				else
-					fallback()
-				end
-			end, { "i", "s" }),
+			["<C-e>"] = cmp.mapping.abort(), 
+			["<S-Up>"] = cmp.mapping.scroll_docs(-4),
+			["<S-Down>"] = cmp.mapping.scroll_docs(4),
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
@@ -120,10 +113,6 @@ local function cmpconfig()
 					require("luasnip").change_choice(1)
 				elseif cmp.visible() then
 					cmp.select_next_item()
-				elseif require("neogen").jumpable() then
-					require("neogen").jump_next()
-				elseif require("luasnip").locally_jumpable(1) then
-					require("luasnip").jump(1)
 				else
 					fallback()
 				end
@@ -133,10 +122,6 @@ local function cmpconfig()
 					require("luasnip").change_choice(-1)
 				elseif cmp.visible() then
 					cmp.select_prev_item()
-				elseif require("neogen").jumpable(true) then
-					require("neogen").jump_prev()
-				elseif require("luasnip").locally_jumpable(-1) then
-					require("luasnip").jump(-1)
 				else
 					fallback()
 				end
@@ -148,7 +133,7 @@ local function cmpconfig()
 				elseif require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
 				else
-					vim.notify("No more jump forwards.")
+					vim.notify("No more jumps.")
 				end
 			end, { "i", "s" }),
 		},
