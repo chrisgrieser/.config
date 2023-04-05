@@ -2,7 +2,8 @@
 
 local darkTheme = "Paraiso Dark"
 local lightTheme = "Silk Light (base16)"
-local opacity = 0.94
+local lightOpacity = 0.94
+local darkOpacity = 0.92
 
 --------------------------------------------------------------------------------
 -- UTILS
@@ -42,6 +43,14 @@ local function autoToggleTheme()
 	local currentMode = wt.gui.get_appearance()
 	local colorscheme = currentMode:find("Dark") and darkTheme or lightTheme
 	return colorscheme
+end
+
+---selects the opacity depending on Dark/Light Mode
+---@return integer name of the string to set in config.colorscheme
+local function autoSetOpacity()
+	local currentMode = wt.gui.get_appearance()
+	local opacity = currentMode:find("Dark") and darkOpacity or lightOpacity
+	return opacity
 end
 
 ---cycle through builtin dark schemes in dark mode, and through light schemes in
@@ -176,11 +185,11 @@ local config = {
 	-- Font
 	font_size = 27,
 	command_palette_font_size = 29,
-	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
+	-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	-- INFO even though symbols and nerd font are bundled with wezterm, some
 	-- icons have a sizing issues, therefore explicitly using the Nerd Font here
 	font = wt.font("JetBrainsMono Nerd Font", {
-		weight = "Medium", -- tad thicker than "Regular"
+		weight = "Medium", -- tad thicker
 	}),
 
 	-- Size
