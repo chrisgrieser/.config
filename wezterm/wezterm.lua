@@ -1,4 +1,4 @@
--- THEME
+-- THEME SETTINGS
 
 local darkTheme = "Paraiso Dark"
 local lightTheme = "Silk Light (base16)"
@@ -9,6 +9,7 @@ local darkOpacity = 0.92
 -- UTILS
 
 local wt = require("wezterm")
+local theme = require("theme-utils")
 local act = wt.action
 local actFun = wt.action_callback
 local os = require("os")
@@ -33,61 +34,6 @@ wt.on("gui-startup", function(cmd)
 	window:gui_window():set_position(pos.x, pos.y)
 	window:gui_window():set_inner_size(pos.w, pos.h)
 end)
-
---------------------------------------------------------------------------------
--- THEME UTILS
-
----selects the color scheme depending on Dark/Light Mode
----@return string name of the string to set in config.colorscheme
-local function autoToggleTheme()
-	local currentMode = wt.gui.get_appearance()
-	local colorscheme = currentMode:find("Dark") and darkTheme or lightTheme
-	return colorscheme
-end
-
----selects the opacity depending on Dark/Light Mode
----@return integer name of the string to set in config.colorscheme
-local function autoSetOpacity()
-	local currentMode = wt.gui.get_appearance()
-	local opacity = currentMode:find("Dark") and darkOpacity or lightOpacity
-	return opacity
-end
-
----cycle through builtin dark schemes in dark mode, and through light schemes in
----light mode
-local function themeCycler(window, _)
-	local allSchemes = wt.color.get_builtin_schemes()
-	local currentMode = wt.gui.get_appearance()
-	local currentScheme = window:effective_config().color_scheme
-	local darkSchemes = {}
-	local lightSchemes = {}
-
-	for name, scheme in pairs(allSchemes) do
-		local bg = wt.color.parse(scheme.background) -- parse into a color object
-		local h, s, l, a = bg:hsla() ---@diagnostic disable-line: unused-local
-		if l < 0.45 then
-			table.insert(darkSchemes, name)
-		else
-			table.insert(lightSchemes, name)
-		end
-	end
-	local schemesToSearch = currentMode:find("Dark") and darkSchemes or lightSchemes
-
-	for i = 1, #schemesToSearch, 1 do
-		if schemesToSearch[i] == currentScheme then
-			local overrides = window:get_config_overrides() or {}
-			local nextScheme = schemesToSearch[i + 1]
-			overrides.color_scheme = nextScheme
-			window:set_config_overrides(overrides)
-
-			window:copy_to_clipboard(nextScheme)
-			-- for notifications to work correctly, they need to be set to "alert"
-			-- in the macOS notification settings
-			window:toast_notification("Theme:", nextScheme, nil, 4000)
-			return
-		end
-	end
-end
 
 --------------------------------------------------------------------------------
 -- KEYBINDINGS
@@ -143,7 +89,7 @@ local keybindings = {
 		end),
 	},
 	-- Theme Cycler
-	{ key = "t", mods = "SHIFT|CTRL|ALT", action = wt.action_callback(themeCycler) },
+	{ key = "t", mods = "SHIFT|CTRL|ALT", action = wt.action_callback(theme.cycle) },
 
 	-- MODES
 	-- Search
@@ -198,12 +144,12 @@ local config = {
 	line_height = 1.0,
 
 	-- Appearance
-	front_end = "WebGpu", -- better rendering on newer Macs
+	front_end = "WebGpu", -- better performance on newer Macs
 	audible_bell = "Disabled",
-	color_scheme = autoToggleTheme(),
+	color_scheme = theme.autoScheme(darkTheme, lightTheme),
+	window_background_opacity = theme.autoOpacity(darkOpacity, lightOpacity),
 	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
 	bold_brightens_ansi_colors = "BrightAndBold",
-	window_background_opacity = opacity,
 	max_fps = isAtMother and 40 or 60,
 	native_macos_fullscreen_mode = false,
 	-- if scrollbar enabled, "rights" controls its width, too
