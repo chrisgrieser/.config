@@ -121,9 +121,7 @@ return {
 		"chrisgrieser/nvim-alt-substitute",
 		dev = true,
 		cmd = { "S", "AltSubstitute" },
-		opts = {
-			regexFlavor = "javascript",
-		},
+		opts = true,
 	},
 	{ -- automatically set right indent for file
 		"Darazaki/indent-o-matic",
