@@ -15,13 +15,14 @@ opt.undofile = true -- enable persistent undo history
 opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 
 -- extra undopoints (= more fine-grained undos)
--- REQUIRED remap, otherwise extra undo points prevent vim abbreviations w/ those
--- characters from working
+-- WARN requires remap, otherwise prevents vim abbrev. w/ those chars from working
 local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
 for _, char in pairs(undopointChars) do
 	Keymap("i", char, function ()
-			
-	end, { desc = "extra undopoint for " .. char, remap = true })
+		local expr = char .. "<C-g>u"
+		if Bo.filetype == "TelescopePrompt" then expr = char end -- FIX interference with telescope otherwise
+		return expr
+	end, { desc = "extra undopoint for " .. char, remap = true, expr = true })
 end
 
 --------------------------------------------------------------------------------
