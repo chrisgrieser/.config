@@ -27,6 +27,9 @@ end
 
 --------------------------------------------------------------------------------
 
+-- Motions
+opt.startofline = true -- motions like "G" also move to the first char
+
 -- Search
 opt.smartcase = true
 opt.ignorecase = true
@@ -44,6 +47,7 @@ opt.grepprg = "rg --vimgrep" -- use rg for :grep
 -- Popups / Floating Windows
 opt.pumheight = 12 -- max number of items in popup menu
 opt.pumwidth = 15 -- min width popup menu
+opt.previewheight = 20
 
 -- Spelling
 opt.spell = false -- off, since using vale+null-ls for the lsp-integration
@@ -64,6 +68,7 @@ opt.signcolumn = "yes:1" -- = gutter
 
 -- Wrapping
 opt.textwidth = 80
+opt.wrapmargin = 2 -- especially useful when using a scrollbar
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
