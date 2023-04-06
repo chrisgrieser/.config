@@ -214,8 +214,6 @@ opt.foldenable = true
 
 -- if not using UFO for folding
 opt.foldmethod = "indent"
-opt.foldnestmax = 4
-opt.foldminlines = 2
 
 -- Remember folds and cursor
 local function remember(mode)

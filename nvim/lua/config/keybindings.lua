@@ -105,8 +105,9 @@ Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 --------------------------------------------------------------------------------
 
 -- FOLDING
--- with count: close {n} fold levels
--- without toggle current fold
+
+-- toggle current fold
+vim.keymap.del({"o", "x"}, "^") -- prevent accidental triggering
 Keymap("n", "^", function() pcall(Normal, "za") end, { desc = "󰘖 Toggle fold" })
 Keymap("n", "zz", function()
 	Cmd("%foldclose") -- close toplevel folds
