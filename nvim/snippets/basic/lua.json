@@ -33,7 +33,10 @@
 	},
 	"ignore start/end (stylua)": {
 		"prefix": "ignore start/end (stylua)",
-		"body": ["-- stylua: ignore start", "-- stylua: ignore end"]
+		"body": [
+			"-- stylua: ignore start",
+			"-- stylua: ignore end"
+		]
 	},
 	"ignore (stylua)": {
 		"prefix": "ignore (stylua)",
@@ -45,11 +48,23 @@
 	},
 	"then .. else .. end": {
 		"prefix": "then .. else .. end",
-		"body": ["then", "\t$1", "else", "\t$0", "end"]
+		"body": [
+			"then",
+			"\t$1",
+			"else",
+			"\t$0",
+			"end"
+		]
 	},
 	"if .. then .. else": {
 		"prefix": "if .. then .. else",
-		"body": ["if ${1:true} then", "\t$2", "else", "\t$0", "end"]
+		"body": [
+			"if ${1:true} then",
+			"\t$2",
+			"else",
+			"\t$0",
+			"end"
+		]
 	},
 	"return end": {
 		"prefix": "return end",
@@ -68,11 +83,32 @@
 		"body": "os.getenv(\"HOME\")"
 	},
 	"try": {
-		"prefix": ["try", "pcall"],
-		"body": ["local success = pcall(${1:func})", "if not success then", "\t$0", "\treturn", "end"]
+		"prefix": [
+			"try",
+			"pcall"
+		],
+		"body": [
+			"local success = pcall(${1:func})",
+			"if not success then",
+			"\t$0",
+			"\treturn",
+			"end"
+		]
 	},
 	"for each (list)": {
 		"prefix": "for each (list)",
-		"body": ["for _, ${1:v} in pairs(${2:table}) do", "\t$0", "end"]
+		"body": [
+			"for _, ${1:v} in pairs(${2:table}) do",
+			"\t$0",
+			"end"
+		]
+	},
+	"gmatch (loop)": {
+		"prefix": "gmatch (loop)",
+		"body": [
+			"for capture in ${1:str}:gmatch($2) do",
+			"\t${3:print(capture)}",
+			"end"
+		]
 	}
 }
