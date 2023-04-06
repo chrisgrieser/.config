@@ -131,7 +131,10 @@ return {
 		event = "VeryLazy",
 		opts = {
 			plugins = {
-				presets = { motions = false },
+				presets = {
+					motions = false,
+					text_objects = false,
+				},
 			},
 			triggers_blacklist = {
 				n = { "y" }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
