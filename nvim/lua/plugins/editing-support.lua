@@ -107,7 +107,13 @@ return {
 		ft = { "markdown", "text" },
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
 	},
-	{
+	{ -- :substitute, but with lua pattern / js regex
+		"chrisgrieser/nvim-sane-substitute",
+		dev = true,
+		cmd = {"S", "SaneSubstitute"},
+		opts = true,
+	},	
+	{ -- key chord hints
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {

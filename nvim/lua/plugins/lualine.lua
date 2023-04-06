@@ -179,7 +179,7 @@ end
 
 -- simple barbecue,nvim replacement
 local function pathToProjectRoot()
-	local maxLen = 30
+	local maxLen = 45
 	if not require("nvim-navic").is_available() then return "" end
 	local parentPath = vim.fn.expand("%:p:h")
 	local projectRelPath = parentPath:sub(#vim.loop.cwd() + 2)
