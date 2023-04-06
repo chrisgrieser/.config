@@ -30,16 +30,18 @@ function man() {
 function ai() {
 	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
 
-	query="$*" # WARN do not use "prompt" as a variable in zsh, it's a reserved keyword
+	query="$*"
+	# WARN do not use "$prompt" as a variable in zsh, it's a reserved keyword
+	the_prompt="The following request is concerned with shell script. $query"
 	curl "https://api.openai.com/v1/chat/completions" \
 		-H "Content-Type: application/json" \
 		-H "Authorization: Bearer $OPENAI_API_KEY" \
 		-d "{
-		\"model\": \"gpt-3.5-turbo\",
-		\"messages\": [{\"role\": \"user\", \"content\": \"$query\"}],
-		\"temperature\": 0
-	}" |
-	yq -r '.choices[].message.content'
+			\"model\": \"gpt-3.5-turbo\",
+			\"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}],
+			\"temperature\": 0
+		}" |
+		yq -r '.choices[].message.content'
 }
 
 #───────────────────────────────────────────────────────────────────────────────
