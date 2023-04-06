@@ -208,6 +208,42 @@ Autocmd("FileType", {
 
 
 --------------------------------------------------------------------------------
+-- FOLDING
+
+-- fold settings 
+opt.foldenable = true
+opt.foldlevelstart = 7 -- only applies to new buffers
+
+-- Remember folds and cursor
+local function remember(mode)
+	local ignoredFts = {
+		"TelescopePrompt",
+		"DressingSelect",
+		"DressingInput",
+		"toggleterm",
+		"gitcommit",
+		"replacer",
+		"harpoon",
+		"help",
+		"qf",
+	}
+	if vim.tbl_contains(ignoredFts, Bo.filetype) or Bo.buftype ~= "" or not Bo.modifiable then return end
+
+	if mode == "save" then
+		Cmd.mkview(1)
+	else
+		pcall(function() Cmd.loadview(1) end) -- pcall, since cannot load view of newly opened files
+	end
+end
+Autocmd("BufWinLeave", {
+	pattern = "?*", -- pattern required, otherwise does not trigger
+	callback = function() remember("save") end,
+})
+Autocmd("BufWinEnter", {
+	pattern = "?*",
+	callback = function() remember("load") end,
+})
+--------------------------------------------------------------------------------
 -- Add missing buffer names
 Autocmd("FileType", {
 	pattern = { "Glance", "lazy" },

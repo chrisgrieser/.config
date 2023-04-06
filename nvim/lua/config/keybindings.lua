@@ -102,6 +102,22 @@ Keymap("n", "gC", "g,", { desc = "goto previous change" })
 -- remap needed, if using the builtin matchit plugin
 Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 
+
+--------------------------------------------------------------------------------
+-- FOLDING
+
+-- toggle current fold
+Keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
+Keymap("n", "<f1>", function() pcall(Normal, "za") end, { desc = "󰘖 Toggle Fold" })
+Keymap("n", "1", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
+Keymap("n", "!", "zi", { desc = "󰘖 Toggle Fold Globally" })
+
+-- toggle all toplevel folds
+Keymap("n", "zz", function()
+	Cmd("%foldclose") -- close toplevel folds
+	Cmd("silent! normal! zo") -- open fold cursor is standing on
+end, { desc = "󰘖 Close toplevel folds" })
+
 --------------------------------------------------------------------------------
 -- EDITING
 
@@ -221,20 +237,6 @@ Keymap("n", "S", function() require("substitute").eol() end, { desc = "substitut
 Keymap( "n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
 Keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
--- Node S[w]apping
--- stylua: ignore start
-Keymap("n", "ü", function () require('sibling-swap').swap_with_right() end, { desc = "󰑃 Move Node Right" })
-Keymap("n", "Ü", function () require('sibling-swap').swap_with_left() end, { desc = "󰑁 Move Node Left" })
-
-Autocmd("FileType", {
-	pattern = {"markdown", "text", "gitcommit"},
-	callback = function()
-		Keymap("n", "ü", '"zdawel"zph', { desc = "➡️ Move Word Right", buffer = true })
-		Keymap("n", "Ü", '"zdawbh"zph', { desc = "⬅️ Move Word Left", buffer = true })
-	end,
-})
--- stylua: ignore end
-
 --------------------------------------------------------------------------------
 -- RE[F]ACTORING
 
@@ -341,6 +343,20 @@ end, { desc = "󰌹 Smart URL Opener" })
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
+-- Node Swapping
+-- stylua: ignore start
+Keymap("n", "ü", function () require('sibling-swap').swap_with_right() end, { desc = "󰑃 Move Node Right" })
+Keymap("n", "Ü", function () require('sibling-swap').swap_with_left() end, { desc = "󰑁 Move Node Left" })
+-- stylua: ignore end
+Autocmd("FileType", {
+	pattern = {"markdown", "text", "gitcommit"},
+	callback = function()
+		Keymap("n", "ü", '"zdawel"zph', { desc = "➡️ Move Word Right", buffer = true })
+		Keymap("n", "Ü", '"zdawbh"zph', { desc = "⬅️ Move Word Left", buffer = true })
+	end,
+})
+
+
 Keymap("n", "<Down>", [[:. move +1<CR>==]], { desc = "Move Line Down" })
 Keymap("n", "<Up>", [[:. move -2<CR>==]], { desc = "Move Line Up" })
 Keymap("n", "<Right>", function()
@@ -353,18 +369,10 @@ Keymap("n", "<Left>", function()
 end, { desc = "Move Char Left", expr = true })
 
 -- "silent" necessary for 3+ lines due to cmdheight=0
-Keymap(
-	"x",
-	"<Down>",
-	[[<Esc>:silent '<,'>move '>+1<CR>:normal! gv=gv<CR>]],
-	{ desc = "Move selection down" }
-)
-Keymap(
-	"x",
-	"<Up>",
-	[[<Esc>:silent '<,'>move '<-2<CR>:normal! gv=gv<CR>]],
-	{ desc = "Move selection up" }
-)
+-- stylua: ignore start
+Keymap("x", "<Down>", [[<Esc>:silent '<,'>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
+Keymap("x", "<Up>", [[<Esc>:silent '<,'>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
+-- stylua: ignore end
 Keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })
 Keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "Move selection left" })
 
