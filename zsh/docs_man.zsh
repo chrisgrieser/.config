@@ -1,6 +1,6 @@
 # search cht.sh for information
 # aggregates stackoverflow, tl;dr and many other help pages
-function sh() {
+function h() {
 	QUERY=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
 	CHEAT_INFO=$(curl -s "https://cht.sh/$QUERY")   # https://cht.sh/:help
 	CHEAT_CODE_ONLY=$(curl -s "https://cht.sh/$QUERY?QT")
@@ -22,6 +22,13 @@ function man() {
 		wezterm cli spawn -- man "$1" &>/dev/null
 	fi
 }
+
+#───────────────────────────────────────────────────────────────────────────────
+# ChatGPT
+curl -X POST \
+	-H "Content-Type: application/json" \
+	-H "Authorization: Bearer $OPENAI_API_KEY" \
+	-d '{"model": "text-davinci-002", "prompt": "Prompt text goes here", "temperature": 0.5, "max_tokens": 100}' "https://api.openai.com/v1/completions"
 
 #───────────────────────────────────────────────────────────────────────────────
 # LESS config

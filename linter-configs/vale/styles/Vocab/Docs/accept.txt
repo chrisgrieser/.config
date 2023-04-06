@@ -119,3 +119,4 @@ Lua
 Wishlist
 Nano
 flavor
+So

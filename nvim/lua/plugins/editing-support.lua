@@ -66,7 +66,16 @@ return {
 		opts = {
 			act_as_shift_tab = true,
 			ignore_beginning = true,
-
+			tabouts = {
+				{ open = "'", close = "'" },
+				{ open = '"', close = '"' },
+				{ open = "`", close = "`" },
+				{ open = "(", close = ")" },
+				{ open = "[", close = "]" },
+				{ open = "{", close = "}" },
+				{ open = "*", close = "*" }, -- markdown italics (multi-char not supported by tabout)
+				{ open = "<", close = ">" }, -- tags / keybindings in lua
+			},
 		},
 	},
 	{ -- swapping of sibling nodes (works with more nodes than Iswap, but has no hint mode)
@@ -111,9 +120,9 @@ return {
 	{ -- :substitute, but with lua pattern / js regex
 		"chrisgrieser/nvim-alt-substitute",
 		dev = true,
-		cmd = {"S", "AltSubstitute"},
+		cmd = { "S", "AltSubstitute" },
 		opts = true,
-	},	
+	},
 	{ -- key chord hints
 		"folke/which-key.nvim",
 		event = "VeryLazy",
