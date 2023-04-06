@@ -191,6 +191,10 @@ local function pathToProjectRoot()
 	return "󰝰 " .. nicerDisplay
 end
 
+local function foldLevel()
+	
+end
+
 --------------------------------------------------------------------------------
 
 -- nerdfont: powerline icons have the prefix 'ple-'
