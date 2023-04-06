@@ -1,5 +1,5 @@
 return {
-	{ -- autopair brackets, quotes, and markup (mini.pairs does not support multi-char pairs)
+	{ -- autopair 
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		dependencies = {
@@ -21,7 +21,6 @@ return {
 				rule("%(.*%)%s*%=>$", " {  }", { "typescript", "javascript" })
 					:use_regex(true)
 					:set_end_pair_length(2),
-
 				-- WARN adding a rule with <space> as *ending* trigger will disable space
 				-- triggering `:abbrev` abbreviations
 			}
