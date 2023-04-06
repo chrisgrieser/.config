@@ -39,7 +39,7 @@ end)
 -- KEYBINDINGS
 local keybindings = {
 	-- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
-	-- Keynames: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
+	-- Key-Names: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
 	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "q", mods = "CMD", action = act.QuitApplication },
 	{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
@@ -56,7 +56,9 @@ local keybindings = {
 	{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
 
 	-- using the mapping from the terminal_keybindings.zsh
+	-- undo
 	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
+	-- copy buffer
 	{ key = "b", mods = "CMD", action = act.SendKey { key = "b", mods = "CTRL" } },
 
 	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
@@ -115,9 +117,9 @@ local config = {
 	detect_password_input = isAtOffice,
 
 	-- Start/Close
+	default_cwd = wt.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/",
 	quit_when_all_windows_are_closed = true,
 	window_close_confirmation = "NeverPrompt",
-	default_cwd = wt.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/",
 
 	-- Mouse & Cursor
 	hide_mouse_cursor_when_typing = true,
@@ -131,12 +133,12 @@ local config = {
 	-- Font
 	font_size = 27,
 	command_palette_font_size = 29,
-	-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	-- INFO even though symbols and nerd font are bundled with wezterm, some
 	-- icons have a sizing issues, therefore explicitly using the Nerd Font here
 	font = wt.font("JetBrainsMono Nerd Font", {
 		weight = "Medium", -- tad thicker
 	}),
+	-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 
 	-- Size
 	adjust_window_size_when_changing_font_size = false,
@@ -152,7 +154,7 @@ local config = {
 	bold_brightens_ansi_colors = "BrightAndBold",
 	max_fps = isAtMother and 40 or 60,
 	native_macos_fullscreen_mode = false,
-	-- if scrollbar enabled, "rights" controls its width, too
+	-- if scrollbar enabled, "rights" controls scrollbar width
 	window_padding = { left = "0.5cell", right = "1.2cell", top = "0.2cell", bottom = "0.4cell" },
 
 	-- Scroll
@@ -171,14 +173,14 @@ local config = {
 	-- Mouse Bindings
 	disable_default_mouse_bindings = false,
 	mouse_bindings = {
-		-- open link at normal leftclick & auto-copy selection if not a link
-		{
+		{ -- open link at normal leftclick & auto-copy selection if not a link
 			event = { Up = { streak = 1, button = "Left" } },
 			mods = "",
 			action = act.CompleteSelectionOrOpenLinkAtMouseCursor("Clipboard"),
 		},
 	},
 
+	-- Keybindings
 	disable_default_key_bindings = true,
 	keys = keybindings,
 }
