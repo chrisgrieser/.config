@@ -25,10 +25,24 @@ function man() {
 
 #───────────────────────────────────────────────────────────────────────────────
 # ChatGPT
-curl -X POST \
-	-H "Content-Type: application/json" \
-	-H "Authorization: Bearer $OPENAI_API_KEY" \
-	-d '{"model": "text-davinci-002", "prompt": "Prompt text goes here", "temperature": 0.5, "max_tokens": 100}' "https://api.openai.com/v1/completions"
+# https://platform.openai.com/docs/api-reference/making-requests
+# uses OPENAI_API_KEY saved in .zshenv
+function ai() {
+	prompt="$*"
+	curl -sL "cheat.sh/help"
+	# curl "https://api.openai.com/v1/chat/completions" \
+	# 	-H "Content-Type: application/json" \
+	# 	-H "Authorization: Bearer $OPENAI_API_KEY" \
+	# 	-d "{
+	# 	\"model\": \"gpt-3.5-turbo\",
+	# 	\"messages\": [{\"role\": \"user\", \"content\": \"$prompt\"}],
+	# 	\"temperature\": 0
+	# }"
+}
+
+function foo () {
+	curl -sL "cheat.sh/help"
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 # LESS config

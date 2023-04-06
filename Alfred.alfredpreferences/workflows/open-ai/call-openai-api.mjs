@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-undef */
 // https://news.ycombinator.com/item?id=34615673
 // NOTE file needs to be `.mjs` because of top-level `await`
 //──────────────────────────────────────────────────────────────────────────────
@@ -18,6 +19,8 @@ if (!apiKey) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+// TODO use gpt3.5 turbo for better performance and lower price
+// requires different URL and request body though
 async function run(dynamicPromptPart) {
 	try {
 		const response = await fetch("https://api.openai.com/v1/completions", {
