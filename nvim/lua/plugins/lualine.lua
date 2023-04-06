@@ -192,14 +192,15 @@ local function pathToProjectRoot()
 end
 
 local function foldLevel()
-	
+	local level = vim.opt_local.foldlevel:get()
+	return "󰘖 "	..tostring(level)
 end
 
 --------------------------------------------------------------------------------
 
 -- nerdfont: powerline icons have the prefix 'ple-'
 local bottomSeparators = { left = " ", right = " " }
-local topSeparators = { left = " ", right = " " }
+local topSeparators = { left = " ", right = " " }
 local emptySeparators = { left = "", right = "" }
 
 local lualineConfig = {
@@ -231,7 +232,14 @@ local lualineConfig = {
 			{
 				pluginUpdates,
 				color = function() return { fg = getHighlightValue("NonText", "foreground") } end,
+				section_separators = topSeparators,
 			},
+		},
+		lualine_y = {
+			{
+				foldLevel,
+				section_separators = topSeparators,
+			}
 		},
 		-- INFO dap and recording status defined in the respective plugin configs
 		-- for lualine_y and lualine_z for their lazy loading
