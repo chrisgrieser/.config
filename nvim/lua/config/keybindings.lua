@@ -199,11 +199,16 @@ Keymap("n", "za", "1z=", { desc = "󰓆 autofix" }) -- [a]utofix word under curs
 ---add word under cursor to vale dictionary
 ---@param mode string accept|reject
 local function valeWord(mode)
-	-- remove word-delimiters for <cword>
-	local iskeywBefore = vim.opt_local.iskeyword:get()
-	vim.opt_local.iskeyword:remove { "_", "-", "." }
-	local word = Expand("<cword>")
-	vim.opt_local.iskeyword = iskeywBefore
+	local word
+	if Fn.mode() == "n" then
+		local iskeywBefore = vim.opt_local.iskeyword:get() -- remove word-delimiters for <cword>
+		vim.opt_local.iskeyword:remove { "_", "-", "." }
+		word = Expand("<cword>")
+		vim.opt_local.iskeyword = iskeywBefore
+	else
+		Normal('"zy')
+		word = Fn.getreg("z")
+	end
 
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
 	if not success then return end -- error message already by AppendToFile
@@ -213,8 +218,8 @@ local function valeWord(mode)
 	Cmd.loadview(2)
 	vim.notify(string.format('󰓆 Now %sing:\n"%s"', mode, word))
 end
-Keymap("n", "zg", function() valeWord("accept") end, { desc = "󰓆 Add to accepted words (vale)" })
-Keymap("n", "zw", function() valeWord("reject") end, { desc = "󰓆 Add to rejected words (vale)" })
+Keymap({"n", "x"}, "zg", function() valeWord("accept") end, { desc = "󰓆 Add to accepted words (vale)" })
+Keymap({"n", "x"}, "zw", function() valeWord("reject") end, { desc = "󰓆 Add to rejected words (vale)" })
 
 --------------------------------------------------------------------------------
 
