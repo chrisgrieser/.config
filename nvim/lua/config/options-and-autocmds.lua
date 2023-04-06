@@ -18,7 +18,7 @@ opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 -- WARN requires remap, otherwise prevents vim abbrev. w/ those chars from working
 local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
 for _, char in pairs(undopointChars) do
-	Keymap("i", char, function ()
+	Keymap("i", char, function()
 		local expr = char .. "<C-g>u"
 		if Bo.filetype == "TelescopePrompt" then expr = char end -- FIX interference with telescope otherwise
 		return expr
@@ -123,7 +123,7 @@ Autocmd("CursorMoved", {
 		local win_view = Fn.winsaveview()
 		local scrolloff = math.min(opt.scrolloff:get(), math.floor(win_height / 2))
 		local scrolloff_line_count = win_height - (Fn.line("w$") - win_view.topline + 1)
-		local distance_to_last_line = Fn.line("$") - win_view.lnum 
+		local distance_to_last_line = Fn.line("$") - win_view.lnum
 		if
 			distance_to_last_line < scrolloff
 			and scrolloff_line_count + distance_to_last_line < scrolloff
@@ -213,7 +213,9 @@ Autocmd("FileType", {
 opt.foldenable = true
 
 -- if not using UFO for folding
-opt.foldmethod = "indent"
+-- opt.foldmethod = "indent"
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- Remember folds and cursor
 local function remember(mode)
