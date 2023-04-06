@@ -19,7 +19,9 @@ opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 -- characters from working
 local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
 for _, char in pairs(undopointChars) do
-	Keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char, remap = true })
+	Keymap("i", char, function ()
+			
+	end, { desc = "extra undopoint for " .. char, remap = true })
 end
 
 --------------------------------------------------------------------------------
