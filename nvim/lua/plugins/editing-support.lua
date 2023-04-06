@@ -66,6 +66,7 @@ return {
 		opts = {
 			act_as_shift_tab = true,
 			ignore_beginning = true,
+
 		},
 	},
 	{ -- swapping of sibling nodes (works with more nodes than Iswap, but has no hint mode)
@@ -108,9 +109,9 @@ return {
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
 	},
 	{ -- :substitute, but with lua pattern / js regex
-		"chrisgrieser/nvim-sane-substitute",
+		"chrisgrieser/nvim-alt-substitute",
 		dev = true,
-		cmd = {"S", "SaneSubstitute"},
+		cmd = {"S", "AltSubstitute"},
 		opts = true,
 	},	
 	{ -- key chord hints

@@ -53,10 +53,11 @@ local function workLayout()
 	end
 	require("lua.private").closer()
 
-	local appsToOpen = { "Discord", "Mimestream", "Vivaldi" }
-	if not isWeekend() then table.insert(appsToOpen, "Slack") end
-	OpenApp(appsToOpen)
 	OpenApp("Twitter")
+	local appsToOpen = { "Discord", "Vivaldi", "Mimestream" }
+	-- insert in front so it starts earlier and ends with Mimestream
+	if not isWeekend() then table.insert(appsToOpen, 1, "Slack") end 
+	OpenApp(appsToOpen)
 
 	-- layout them when they all run
 	MyTimer = hs.timer.waitUntil(function() return AppRunning(appsToOpen) end, function()
@@ -64,7 +65,6 @@ local function workLayout()
 		for _, appName in pairs(appsToOpen) do
 			MoveResize(App(appName):mainWindow(), PseudoMaximized)
 		end
-		App("Mimestream"):activate()
 		TwitterToTheSide()
 		TwitterScrollUp()
 	end, 0.2)
@@ -125,15 +125,15 @@ UnlockWatcher = c.new(function(event)
 
 	-- HACK since `screensDidUnlock` actually triggered on wake, not unlock…
 	MyTimer = hs.timer.waitUntil(ScreenIsUnlocked, function()
-		RunWithDelays(0.5, function() 
+		RunWithDelays(0.5, function()
 			selectLayout()
 			setHigherBrightnessDuringDay()
 			UpdateSidenotes()
 		end)
 	end, 0.2)
 	-- deactivate the timer in the screen is woken but not unlocked
-	RunWithDelays(20, function ()
-		if MyTimer and MyTimer:running() then 
+	RunWithDelays(20, function()
+		if MyTimer and MyTimer:running() then
 			MyTimer:stop()
 			MyTimer = nil
 		end
