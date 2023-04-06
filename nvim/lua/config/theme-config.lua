@@ -53,10 +53,6 @@ local function customHighlights()
 	setHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
 	setHighlight("QuickScopePrimary", "gui=reverse cterm=reverse")
 	setHighlight("QuickScopeSecondary", "gui=underdouble cterm=underline")
-
-	-- HACK for https://github.com/neovim/neovim/issues/20456
-	-- linkHighlight("luaParenError.highlight", "NormalFloat")
-	-- linkHighlight("luaParenError", "NormalFloat")
 end
 
 --------------------------------------------------------------------------------
@@ -135,6 +131,7 @@ local function themeModifications()
 
 	elseif theme == "rose-pine" and mode == "light" then
 		setHighlight("IndentBlanklineChar", "guifg=#cfcfcf")
+		setHighlight("Headline", "gui=bold")
 
 	end
 end
