@@ -134,7 +134,7 @@ local function telescopeConfig()
 				display_stat = false,
 				git_status = true, -- seems to sometimes be buggy
 				group = true,
-				hide_parent_dir = false,
+				hide_parent_dir = true,
 				select_buffer = true,
 				mappings = {
 					i = {
