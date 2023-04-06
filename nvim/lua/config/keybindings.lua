@@ -108,7 +108,7 @@ Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 
 -- toggle current fold
 Keymap("n", "<f1>", function() pcall(Normal, "za") end, { desc = "󰘖 Toggle fold" })
-Keymap("i", "<f1>", "", { desc = "󰘖 fold" })
+Keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
 Keymap("n", "zz", function()
 	Cmd("%foldclose") -- close toplevel folds
 	Cmd("silent! normal! zo") -- open fold cursor is standing on
