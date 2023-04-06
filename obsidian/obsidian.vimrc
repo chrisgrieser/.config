@@ -258,12 +258,13 @@ exmap foldmore obcommand editor:fold-more
 nmap zo :togglefold
 nmap zc :togglefold
 nmap za :togglefold
-nmap ^ :togglefold
 nmap zm :foldmore
 nmap zM :foldall
 nmap zr :foldless
 nmap zR :unfoldall
 
+" mapped via karabiner
+nmap <F1> :togglefold
 
 """"""""""""""""""""""""""""
 " Sneak / Hop / Lightspeed
