@@ -1,3 +1,11 @@
+
+local function numOfFoldedLines()
+	local lines = vim.v.foldend - vim.v.foldstart + 1
+	return tostring(lines) .. " 󰘖"
+end
+
+--------------------------------------------------------------------------------
+
 return {
 	{
 		"jghauser/fold-cycle.nvim",
@@ -12,9 +20,8 @@ return {
 			keep_indentation = true,
 			fill_char = " ",
 			sections = {
-				-- stylua: ignore
-				left = { "content" },
-				right = { " ", "number_of_folded_lines", "        " },
+				left = { "content", "   ", numOfFoldedLines },
+				right = { },
 			},
 		},
 	},
