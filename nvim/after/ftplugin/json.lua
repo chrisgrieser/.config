@@ -11,7 +11,7 @@ Keymap("x", "<leader>m", ":!yq -I=0<CR><CR>", { desc = "minify JSON", buffer = t
 -- when opening large files, start with some folds closed
 if Fn.line("$") > 1000 then
 	---@diagnostic disable-next-line: param-type-mismatch
-	vim.defer_fn(function () require("ufo").closeFoldsWith(2) end, 1)
+	vim.defer_fn(function () vim.opt_local.foldlevel = 1 end, 1)
 end
 
 -- escape stuff properly for VS Code Style snippet

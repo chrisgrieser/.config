@@ -215,7 +215,7 @@ opt.foldenable = true
 -- if not using UFO for folding
 -- opt.foldmethod = "indent"
 opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- Remember folds and cursor
 local function remember(mode)
