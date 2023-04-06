@@ -92,7 +92,7 @@ return {
 	},
 	{ -- better LSP rename
 		"smjonas/inc-rename.nvim",
-		event = "LspAttach",
+		event = "LspAttach", -- loading on `:IncRename` would disable preview on first run
 		opts = {
 			post_hook = function(results)
 				-- if more than one file is changed, save all buffers
