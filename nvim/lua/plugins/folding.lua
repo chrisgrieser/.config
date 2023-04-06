@@ -1,21 +1,23 @@
 return {
-	{ 
+	{
 		"jghauser/fold-cycle.nvim",
 		opts = true,
-		init = function()
-			-- stylua: ignore
-			vim.keymap.set("n", "<", function() require("fold-cycle").close() end, { nowait = true, desc = " Cycle-Close Fold" })
-		end,
 	},
-	{ 
+	{
 		"anuvyklack/pretty-fold.nvim",
 		event = "VeryLazy",
 		opts = {
 			process_comment_signs = false,
-			fill_char = " ",
+			keep_indentation = false,
+			fill_char = "━",
+			sections = {
+				-- stylua: ignore
+				left = { "┣━━", "content" },
+				right = { " ", "number_of_folded_lines", " ━━━━┫" },
+			},
 		},
 	},
-	{ 
+	{ -- not in use for now
 		"kevinhwang91/nvim-ufo",
 		enabled = false,
 		dependencies = "kevinhwang91/promise-async",
