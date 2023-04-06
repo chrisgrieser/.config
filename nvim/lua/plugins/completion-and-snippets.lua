@@ -104,8 +104,8 @@ local function cmpconfig()
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
 			["<M-Esc>"] = cmp.mapping.complete(), -- consistent with macOS autocomplete
 			["<C-e>"] = cmp.mapping.abort(),
-			["<S-Up>"] = cmp.mapping.scroll_docs(-4),
-			["<S-Down>"] = cmp.mapping.scroll_docs(4),
+			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
+			["<PageDown>"] = cmp.mapping.scroll_docs(4),
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)

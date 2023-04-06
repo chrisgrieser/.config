@@ -1,8 +1,8 @@
 local keymappings = {
 	-- INFO default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
 	["<Esc>"] = "close",
-	["<S-Down>"] = "preview_scrolling_down",
-	["<S-Up>"] = "preview_scrolling_up",
+	["<PageDown>"] = "preview_scrolling_down",
+	["<PageUp>"] = "preview_scrolling_up",
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
 	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
@@ -74,8 +74,8 @@ local function telescopeConfig()
 		},
 		pickers = {
 			git_status = { prompt_prefix = "󰊢 ", show_untracked = true },
-			treesitter = { prompt_prefix = " ", show_line = false },
 			git_commits = { prompt_prefix = "󰊢 ", initial_mode = "normal" },
+			treesitter = { prompt_prefix = " ", show_line = false },
 			keymaps = { prompt_prefix = " ", modes = { "n", "i", "c", "x", "o", "t" } },
 			oldfiles = { prompt_prefix = "󰋚 " },
 			highlights = { prompt_prefix = " " },
