@@ -52,7 +52,6 @@ return {
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
 		lazy = true, -- loaded by keymaps
-		commit = "2cbe6b6", -- https://github.com/johmsalas/text-case.nvim/issues/40
 	},
 	{ -- Jump out of scope in insert mode
 		"abecodes/tabout.nvim",
@@ -86,7 +85,7 @@ return {
 			interline_swaps_witout_separator = false,
 		},
 	},
-	{ -- split-join
+	{ -- split-join lines
 		"Wansmer/treesj",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		cmd = "TSJToggle",
@@ -116,7 +115,7 @@ return {
 		ft = { "markdown", "text" },
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
 	},
-	{ -- :substitute, but with lua pattern / js regex
+	{ -- :substitute, but with lua pattern
 		"chrisgrieser/nvim-alt-substitute",
 		dev = true,
 		cmd = { "S", "AltSubstitute" },
