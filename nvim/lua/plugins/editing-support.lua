@@ -1,8 +1,4 @@
 return {
-	{ -- automatically set right indent for file
-		"Darazaki/indent-o-matic",
-		event = "BufReadPre",
-	},
 	{ -- autopair brackets, quotes, and markup (mini.pairs does not support multi-char pairs)
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -128,6 +124,10 @@ return {
 		opts = {
 			regexFlavor = "javascript",
 		},
+	},
+	{ -- automatically set right indent for file
+		"Darazaki/indent-o-matic",
+		event = "BufReadPre",
 	},
 	{ -- key chord hints
 		"folke/which-key.nvim",
