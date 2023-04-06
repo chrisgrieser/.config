@@ -85,6 +85,10 @@ return {
 		opts = {
 			use_default_keymaps = false,
 			allowed_separators = { "..", "*" }, -- multiplication & lua string concatenation
+			highlight_node_at_cursor = true,
+			ignore_injected_langs = true,
+			allow_interline_swaps = true,
+			interline_swaps_witout_separator = false,
 		},
 	},
 	{ -- split-join
@@ -122,7 +126,7 @@ return {
 		dev = true,
 		cmd = { "S", "AltSubstitute" },
 		opts = {
-			regexFlavor = "glob",
+			regexFlavor = "javascript",
 		},
 	},
 	{ -- key chord hints
