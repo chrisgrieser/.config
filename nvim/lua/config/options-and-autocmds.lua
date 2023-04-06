@@ -209,11 +209,11 @@ Autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- FOLDING
 
--- fold settings required for UFO
+-- fold settings 
 opt.foldenable = true
+opt.foldlevelstart = 7 -- only applies to new buffers
 
--- if not using UFO for folding
--- opt.foldmethod = "indent"
+-- use treesitter folding
 opt.foldmethod = "expr"
 opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
