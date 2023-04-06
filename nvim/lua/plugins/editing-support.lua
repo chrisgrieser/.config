@@ -137,10 +137,10 @@ return {
 				},
 			},
 			triggers_blacklist = {
-				n = { "y" }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
+				-- FIX "y" needed to fix weird delay occurring when yanking after a change
+				n = { "y" }, 
 			},
-			-- INFO ignore a mapping by giving it the label "which_key_ignore", not
-			-- by using the "hidden" key here
+			-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
 			hidden = { "<Plug>", "^:lua " },
 			window = {
 				border = { "", BorderHorizontal, "", "" }, -- only horizontal border to save space
