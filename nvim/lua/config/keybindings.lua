@@ -107,8 +107,9 @@ Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 
 -- toggle current fold
 Keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
-Keymap("n", "<f1>", function() pcall(Normal, "za") end, { desc = "󰘖 Toggle fold" })
-Keymap("n", "1", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle-Close Fold" })
+Keymap("n", "<f1>", function() pcall(Normal, "za") end, { desc = "󰘖 Toggle Fold" })
+Keymap("n", "1", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
+Keymap("n", "!", "zi", { desc = "󰘖 Toggle Fold Globally" })
 
 -- toggle all toplevel folds
 Keymap("n", "zz", function()

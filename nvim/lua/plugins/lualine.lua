@@ -193,7 +193,10 @@ end
 
 local function foldLevel()
 	local level = vim.opt_local.foldlevel:get()
-	return "󰘖 "	..tostring(level)
+	if level > 10 then return "" end
+	local foldenabled = vim.opt_local.foldenable:get()
+	local icon = foldenabled and "󰘖 " or "󰘖  "
+	return icon .. " " .. tostring(level)
 end
 
 --------------------------------------------------------------------------------
@@ -239,7 +242,7 @@ local lualineConfig = {
 			{
 				foldLevel,
 				section_separators = topSeparators,
-			}
+			},
 		},
 		-- INFO dap and recording status defined in the respective plugin configs
 		-- for lualine_y and lualine_z for their lazy loading
