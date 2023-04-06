@@ -44,6 +44,7 @@ g.neovide_input_use_logo = true -- enable `cmd` key on macOS
 g.neovide_input_macos_alt_is_meta = true -- enable `opt` key on macOS
 Keymap("i", "<M-.>", "…") -- helpers when `opt` is turned into meta key
 Keymap("i", "<M-->", "–") -- en-dash
+Keymap("i", "<M-7>", "|")
 
 -- Window Appearance
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
