@@ -117,3 +117,4 @@ keymap
 Lua
 Wishlist
 Nano
+flavor
