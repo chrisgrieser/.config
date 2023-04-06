@@ -21,6 +21,7 @@ pcall(require, "config.keybindings")
 pcall(require, "config.automating-nvim")
 pcall(require, "config.textobject-keymaps")
 pcall(require, "config.clipboard")
+pcall(require, "config.folding")
 pcall(require, "config.user-commands")
 pcall(require, "config.abbreviations")
 

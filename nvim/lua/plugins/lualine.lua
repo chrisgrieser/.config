@@ -177,7 +177,7 @@ local function navicBreadcrumbs()
 	return require("nvim-navic").get_location()
 end
 
--- simple barbecue,nvim replacement
+-- simple barbecue.nvim replacement
 local function pathToProjectRoot()
 	local maxLen = 45
 	if not require("nvim-navic").is_available() then return "" end
@@ -193,7 +193,6 @@ end
 
 local function foldLevel()
 	local level = vim.opt_local.foldlevel:get()
-	if level > 10 then return "" end
 	local foldenabled = vim.opt_local.foldenable:get()
 	local icon = foldenabled and "󰘖 " or "󰘖  "
 	return icon .. " " .. tostring(level)

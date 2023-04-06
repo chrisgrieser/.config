@@ -1,7 +1,34 @@
 
-local function numOfFoldedLines()
-	local lines = vim.v.foldend - vim.v.foldstart + 1
-	return tostring(lines) .. " 󰘖"
+--------------------------------------------------------------------------------
+local foldIcon = ""
+--------------------------------------------------------------------------------
+
+-- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
+local function foldTextFormatter(virtText, lnum, endLnum, width, truncate)
+	local newVirtText = {}
+	local suffix = "  " .. foldIcon .. "  " .. tostring(endLnum - lnum)
+	local sufWidth = vim.fn.strdisplaywidth(suffix)
+	local targetWidth = width - sufWidth
+	local curWidth = 0
+	for _, chunk in ipairs(virtText) do
+		local chunkText = chunk[1]
+		local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+		if targetWidth > curWidth + chunkWidth then
+			table.insert(newVirtText, chunk)
+		else
+			chunkText = truncate(chunkText, targetWidth - curWidth)
+			local hlGroup = chunk[2]
+			table.insert(newVirtText, { chunkText, hlGroup })
+			chunkWidth = vim.fn.strdisplaywidth(chunkText)
+			if curWidth + chunkWidth < targetWidth then
+				suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+			end
+			break
+		end
+		curWidth = curWidth + chunkWidth
+	end
+	table.insert(newVirtText, { suffix, "MoreMsg" })
+	return newVirtText
 end
 
 --------------------------------------------------------------------------------
@@ -13,16 +40,13 @@ return {
 		opts = true,
 	},
 	{
-		"anuvyklack/pretty-fold.nvim",
-		event = "UIEnter",
+		"kevinhwang91/nvim-ufo",
+		dependencies = "kevinhwang91/promise-async",
+		event = "BufReadPost",
 		opts = {
-			process_comment_signs = false,
-			keep_indentation = true,
-			fill_char = " ",
-			sections = {
-				left = { "content", "   ", numOfFoldedLines },
-				right = { },
-			},
+			provider_selector = function() return { "lsp", "treesitter" } end,
+			open_fold_hl_timeout = 500,
+			fold_virt_text_handler = foldTextFormatter,
 		},
 	},
 }

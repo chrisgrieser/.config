@@ -103,21 +103,6 @@ Keymap("n", "gC", "g,", { desc = "goto previous change" })
 Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 
 --------------------------------------------------------------------------------
--- FOLDING
-
--- toggle current fold
-Keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
-Keymap("n", "<f1>", function() pcall(Normal, "za") end, { desc = "󰘖 Toggle Fold" })
-Keymap("n", "1", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
-Keymap("n", "!", "zi", { desc = "󰘖 Toggle Fold Globally" })
-
--- toggle all toplevel folds
-Keymap("n", "zz", function()
-	Cmd("%foldclose") -- close toplevel folds
-	Cmd("silent! normal! zo") -- open fold cursor is standing on
-end, { desc = "󰘖 Close toplevel folds" })
-
---------------------------------------------------------------------------------
 -- EDITING
 
 -- NUMBERS
