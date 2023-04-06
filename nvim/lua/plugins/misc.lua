@@ -1,21 +1,8 @@
 return {
-	{
+	{ -- preview markdown
 		"iamcco/markdown-preview.nvim",
 		ft = "markdown",
 		build = "cd app && npm install",
-	},
-	{ -- AI Suggestions for Readable Code
-		"james1236/backseat.nvim",
-		cmd = { "Backseat", "BackseatClear", "Backseat" },
-		init = function() vim.keymap.set("n", "<leader>A", vim.cmd.Backseat, {desc = "󰚩 Readability Suggestions"}) end,
-		opts = {
-			openai_model_id = "gpt-3.5-turbo", --gpt-4
-			-- additional_instruction = "Respond snarkily", 
-			highlight = {
-				icon = "󱍄",
-				group = "DiagnosticInfo",
-			},
-		},
 	},
 	{
 		"mbbill/undotree",
@@ -38,10 +25,30 @@ return {
 			})
 		end,
 	},
-	{ -- Better Folding
+	{ -- Folding
+		"fold-cycle.nvim",
+		event = "VeryLazy",
+		opts = true,
+	},
+	{ -- Folding
+		"fold-cycle.nvim",
+		event = "VeryLazy",
+		opts = true,
+	},
+	{ -- Folding (disabled)
 		"kevinhwang91/nvim-ufo",
+		enabled = false,
 		dependencies = "kevinhwang91/promise-async",
 		event = "BufReadPost",
+		init = function()
+			-- stylua: ignore start
+			vim.keymap.set("n", "zR", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
+			vim.keymap.set("n", "zM", function() require("ufo").closeAllFolds() end, { desc = "  Close all folds" })
+
+			vim.opt.foldlevel = 99
+			vim.opt.foldlevelstart = 99
+			-- stylua: ignore end
+		end,
 		opts = {
 			-- Use lsp, and indent as fallback
 			provider_selector = function() return { "lsp", "indent" } end,
