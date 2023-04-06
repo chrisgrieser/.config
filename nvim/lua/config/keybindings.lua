@@ -107,16 +107,7 @@ Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 -- FOLDING
 -- with count: close {n} fold levels
 -- without toggle current fold
-Keymap("n", "^", function()
-	if vim.v.count == 0 then
-		local ok = pcall(Normal, "za")
-		if not ok then vim.notify("No Fold available", LogWarn) end
-	else
-		require("ufo").closeFoldsWith(vim.v.count - 1) -- -1 as topmost is foldlevel 0
-	end
-end, { desc = "󰘖 Toggle fold / Close {n} foldlvls" })
-Keymap("n", "zR", function() require("ufo").openAllFolds() end, { desc = "  Open all folds" })
-Keymap("n", "zM", function() require("ufo").closeAllFolds() end, { desc = "  Close all folds" })
+Keymap("n", "^", function() pcall(Normal, "za") end, { desc = "󰘖 Toggle fold" })
 Keymap("n", "zz", function()
 	Cmd("%foldclose") -- close toplevel folds
 	Cmd("silent! normal! zo") -- open fold cursor is standing on

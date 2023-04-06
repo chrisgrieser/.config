@@ -27,8 +27,9 @@ end
 
 --------------------------------------------------------------------------------
 
--- Motions
+-- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
+opt.matchpairs:append("<:>") -- added pairs must be different (e.g. not two double quotes)
 
 -- Search
 opt.smartcase = true
@@ -89,7 +90,6 @@ opt.cmdheight = 0
 
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
-
 opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
 opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use them anyway
 
@@ -211,11 +211,11 @@ Autocmd("FileType", {
 
 -- fold settings required for UFO
 opt.foldenable = true
-opt.foldlevel = 99
-opt.foldlevelstart = 99
 
 -- if not using UFO for folding
--- opt.foldmethod = "indent"
+opt.foldmethod = "indent"
+opt.foldnestmax = 4
+opt.foldminlines = 2
 
 -- Remember folds and cursor
 local function remember(mode)
