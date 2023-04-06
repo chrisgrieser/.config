@@ -28,20 +28,18 @@ function man() {
 # https://platform.openai.com/docs/api-reference/making-requests
 # uses OPENAI_API_KEY saved in .zshenv
 function ai() {
-	prompt="$*"
-	curl -sL "cheat.sh/help"
-	# curl "https://api.openai.com/v1/chat/completions" \
-	# 	-H "Content-Type: application/json" \
-	# 	-H "Authorization: Bearer $OPENAI_API_KEY" \
-	# 	-d "{
-	# 	\"model\": \"gpt-3.5-turbo\",
-	# 	\"messages\": [{\"role\": \"user\", \"content\": \"$prompt\"}],
-	# 	\"temperature\": 0
-	# }"
-}
+	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
 
-function foo () {
-	curl -sL "cheat.sh/help"
+	query="$*" # WARN do not use "prompt" as a variable in zsh, it's a reserved keyword
+	curl "https://api.openai.com/v1/chat/completions" \
+		-H "Content-Type: application/json" \
+		-H "Authorization: Bearer $OPENAI_API_KEY" \
+		-d "{
+		\"model\": \"gpt-3.5-turbo\",
+		\"messages\": [{\"role\": \"user\", \"content\": \"$query\"}],
+		\"temperature\": 0
+	}" |
+	yq -r '.choices[].message.content'
 }
 
 #───────────────────────────────────────────────────────────────────────────────
