@@ -27,6 +27,7 @@ Keymap({ "o", "x" }, "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlo
 Keymap({ "o", "x" }, "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock(false)<CR>", { desc = "outer md code block textobj", buffer = true })
 
 -- Format Table
+Keymap("n", "<D-p>", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table", buffer = true })
 Keymap("x", "<D-p>", ":!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table", buffer = true })
 -- stylua: ignore end
 
