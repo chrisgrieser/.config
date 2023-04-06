@@ -61,19 +61,14 @@ rules:
               - ^com\.vivaldi\.Vivaldi$
               - ^com\.apptorium\.SideNotes-paddle$
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "🔘 § → | (+ US Layout)"
+  - description: "🔘 § → |"
     manipulators:
       - type: basic
         from: {key_code: "3", modifiers: {mandatory: [shift]}}
         conditions:
-          - type: input_source_if
-            input_sources: [{language: ^de$ }]
+          - { type: input_source_if, input_sources: [{language: ^de$}] }
         to:
-          - select_input_source: {input_source_id: ^com\.apple\.keylayout\.US$}
-          - {key_code: vk_none, hold_down_milliseconds: 20}
-          - {key_code: non_us_pound, modifiers: [shift]}
-        to_after_key_up:
-          - select_input_source: {input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$}
+          - {key_code: , modifiers: [shift]}
   - description: "🔘 ° → \\ (+ US Layout); ⌥^ for ° Symbol"
     manipulators:
       - type: basic

@@ -47,7 +47,7 @@ end):start()
 -- (since SideNotes can only be hidden on mouse click, but not on alt-tab)
 SidenotesWatcher2 = Aw.new(function(appName, event)
 	if appName == "SideNotes" or event ~= Aw.activated then return end
-	RunWithDelays(0.15, function()
+	RunWithDelays(0.05, function()
 		if not (IsFront { "SideNotes", "Alfred", "CleanShot X", "Espanso" }) then
 			-- INFO if sidenotes glitches, it is the "Hot Side" setting causing
 			-- glitches when mouse is close, not Hammerspoon

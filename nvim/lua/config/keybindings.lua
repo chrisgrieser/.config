@@ -107,8 +107,8 @@ Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 -- FOLDING
 
 -- toggle current fold
-vim.keymap.del({"o", "x"}, "^") -- prevent accidental triggering
-Keymap("n", "^", function() pcall(Normal, "za") end, { desc = "󰘖 Toggle fold" })
+Keymap("n", "<f1>", function() pcall(Normal, "za") end, { desc = "󰘖 Toggle fold" })
+Keymap("i", "<f1>", "", { desc = "󰘖 fold" })
 Keymap("n", "zz", function()
 	Cmd("%foldclose") -- close toplevel folds
 	Cmd("silent! normal! zo") -- open fold cursor is standing on
@@ -210,8 +210,18 @@ local function valeWord(mode)
 	Cmd.loadview(2)
 	vim.notify(string.format('󰓆 Now %sing:\n"%s"', mode, word))
 end
-Keymap({"n", "x"}, "zg", function() valeWord("accept") end, { desc = "󰓆 Add to accepted words (vale)" })
-Keymap({"n", "x"}, "zw", function() valeWord("reject") end, { desc = "󰓆 Add to rejected words (vale)" })
+Keymap(
+	{ "n", "x" },
+	"zg",
+	function() valeWord("accept") end,
+	{ desc = "󰓆 Add to accepted words (vale)" }
+)
+Keymap(
+	{ "n", "x" },
+	"zw",
+	function() valeWord("reject") end,
+	{ desc = "󰓆 Add to rejected words (vale)" }
+)
 
 --------------------------------------------------------------------------------
 
@@ -501,20 +511,15 @@ Keymap("n", "go", function()
 	require("telescope").extensions.file_browser.file_browser { prompt_title = title }
 end, { desc = " Browse in Project" })
 
-Keymap(
-	"n",
-	"gO",
-	function()
-		require("telescope").extensions.file_browser.file_browser {
-			path = Expand("%:p:h"),
-			prompt_title = "󰝰 " .. Expand("%:p:h:t"),
-		}
-	end,
-	{ desc = " Browse in current Folder" }
-)
 -- stylua: ignore
-Keymap("n", "gl", function()
-	require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() }
+Keymap( "n", "gO", function() require("telescope").extensions.file_browser.file_browser {
+	path = Expand("%:p:h"),
+	prompt_title = "󰝰 " .. Expand("%:p:h:t"),
+} end, { desc = " Browse in current Folder" })
+
+-- stylua: ignore
+Keymap("n", "gl", function() require("telescope.builtin").live_grep {
+	prompt_title = "Live Grep: " .. projectName() }
 end, { desc = " Live Grep in Project" })
 Keymap("n", "gr", function() Cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 

@@ -3,7 +3,8 @@ return {
 		"jghauser/fold-cycle.nvim",
 		opts = true,
 		init = function()
-			vim.keymap.set("n", "<", function() require("fold-cycle").open() end)
+			-- stylua: ignore
+			vim.keymap.set("n", "<", function() require("fold-cycle").close() end, { nowait = true, desc = " Cycle-Close Fold" })
 		end,
 	},
 	{ 
