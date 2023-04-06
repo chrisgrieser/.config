@@ -121,7 +121,9 @@ return {
 		"chrisgrieser/nvim-alt-substitute",
 		dev = true,
 		cmd = { "S", "AltSubstitute" },
-		opts = true,
+		opts = {
+			regexFlavor = "glob",
+		},
 	},
 	{ -- key chord hints
 		"folke/which-key.nvim",
