@@ -138,10 +138,10 @@ local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
 lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Enable folding (for nvim-ufo)
--- lspCapabilities.textDocument.foldingRange = {
--- 	dynamicRegistration = false,
--- 	lineFoldingOnly = true,
--- }
+lspCapabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
 
 --------------------------------------------------------------------------------
 
