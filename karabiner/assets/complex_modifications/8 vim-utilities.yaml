@@ -110,7 +110,7 @@ rules:
             value: false
           - type: frontmost_application_if
             file_paths:
-              - alacritty$
+              - wezterm-gui$
               - ^/System/Applications/Utilities/Terminal.app
               - ^/System/Applications/Utilities/Script Editor.app
               - ^/Applications/Obsidian\.app
@@ -128,7 +128,7 @@ rules:
           - { type: input_source_if, input_sources: [language: ^de$] }
           - type: frontmost_application_if
             file_paths:
-              - alacritty$
+              - wezterm-gui$
               - ^/System/Applications/Utilities/Terminal.app
               - ^/System/Applications/Utilities/Script Editor.app
               - ^/Applications/Obsidian\.app
