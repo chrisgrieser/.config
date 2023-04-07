@@ -19,9 +19,7 @@ zip -r --quiet "$backup_file" ./* ./.{gitmodule,gitignore}
 
 # restrict number of backups
 # shellcheck disable=SC2154
+cd "$bkp_destination" || return 1
 actual_number=$((max_number_of_bkps + 1))
-cd "$bkp_destination" || exit 1
 # shellcheck disable=SC2012,SC2248
 ls -t | tail -n +$actual_number | tr '\n' '\0' | xargs -0 rm
-
-echo -n "$backup_file"
