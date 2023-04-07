@@ -126,3 +126,4 @@ for free
 using
 therefore
 so
+case insensitive
