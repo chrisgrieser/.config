@@ -19,4 +19,5 @@ end, {})
 newCommand("PluginDir", function(_) Fn.system('open "' .. Fn.stdpath("data") .. '"') end, {})
 
 -- quicker evaluation
-vim.cmd.cnoreabbrev("ii lua=")
+vim.cmd.cnoreabbrev("i lua=")
+vim.cmd.cnoreabbrev("I lua=")
