@@ -12,14 +12,15 @@ function writeToFile(file, text) {
 //──────────────────────────────────────────────────────────────────────────────
 
 const sidenotes = Application("Sidenotes");
-const content = sidenotes.currentNote().text();
+const content = sidenotes.currentNote().content();
+const title = sidenotes.currentNote().title();
 
 // Trash Note, but keep copy in trash folder
 const maxNameLen = 50;
 let safeTitle = sidenotes
 	.currentNote()
 	.title()
-	.replace(/[/\\:;,"'#()[\]=<>{}]/gm, "");
+	.replace(/[/\\:;,"'#()[\]=<>{}|]/gm, "");
 if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
 const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.txt`;
 writeToFile(trashNotePath, content);
@@ -35,8 +36,9 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 reminders.defaultList().make({
 	new: "reminder",
 	withProperties: {
-		name: content,
+		name: title,
 		alldayDueDate: tomorrow,
+		body: content,
 	},
 });
 // alternative method
