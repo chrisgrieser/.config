@@ -207,33 +207,24 @@ Autocmd("FileType", {
 	callback = function() opt_local.formatoptions:remove("o") end,
 })
 
-
 --------------------------------------------------------------------------------
 -- FOLDING
 
 -- fold settings 
 opt.foldenable = true
 opt.foldlevelstart = 6 -- close deep folds at the beginning; only applies to new buffers
+opt.foldopen:remove{"search", "hor"} -- less unintentional opening of folds
 
 -- Remember folds and cursor
 local function remember(mode)
-	local ignoredFts = {
-		"TelescopePrompt",
-		"DressingSelect",
-		"DressingInput",
-		"toggleterm",
-		"gitcommit",
-		"replacer",
-		"harpoon",
-		"help",
-		"qf",
-	}
+	-- stylua: ignore
+	local ignoredFts = { "TelescopePrompt", "DressingSelect", "DressingInput", "toggleterm", "gitcommit", "replacer", "harpoon", "help", "qf" }
 	if vim.tbl_contains(ignoredFts, Bo.filetype) or Bo.buftype ~= "" or not Bo.modifiable then return end
 
 	if mode == "save" then
 		Cmd.mkview(1)
 	else
-		pcall(function() Cmd.loadview(1) end) -- pcall, since cannot load view of newly opened files
+		pcall(function() Cmd.loadview(1) end) -- pcall, since new files have no view yet
 	end
 end
 Autocmd("BufWinLeave", {
