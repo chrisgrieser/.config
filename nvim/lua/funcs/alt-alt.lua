@@ -75,32 +75,36 @@ function M.altFileStatusline()
 	local maxLen = 25
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
+	local altWin = altWindow()
+	local altOld = altOldfile()
 	local name, icon
-	if altFile == "" and altOldfile() == nil then return "" end
-	local altWindow = altWindow()
+	local hasAltFile = altFile ~= "" and fn.filereadable(altFile)
 
 	-- no oldfile and after start
-	if altWindow then 
-		if altWindow:find("^diffview:") then
-		icon = ""
-		name = "File History"
-	else
-	elseif altWindow() and altWindow():find("^term:") then
-		icon = ""
-		name = "Terminal"
-	elseif altWindow() then
-		icon = " "
-		name = vim.fs.basename(altWindow()) ---@diagnostic disable-line: param-type-mismatch
-	elseif altFile == "" and altOldfile() then
-		icon = "󰋚"
-		name = vim.fs.basename(altOldfile()) ---@diagnostic disable-line: param-type-mismatch
-	elseif curFile == altFile then -- same name, different file
-		local altParent = fn.expand("#:p:h:t")
-		icon = "#"
-		name = altParent .. "/" .. altFile
-	else
+	if altWin then
+		if altWin:find("^diffview:") then
+			icon = ""
+			name = "File History"
+		elseif altWin:find("^term:") then
+			icon = ""
+			name = "Terminal"
+		else
+			icon = " "
+			name = vim.fs.basename(altWin)
+		end
+	elseif hasAltFile then
 		icon = "#"
 		name = altFile
+		-- same name, different file: append parent of altfile
+		if curFile == altFile then
+			local altParent = fn.expand("#:p:h:t")
+			name = altParent .. "/" .. altFile
+		end
+	elseif altOld then
+		icon = "󰋚"
+		name = vim.fs.basename(altOld)
+	else
+		return ""
 	end
 
 	-- truncate
@@ -109,6 +113,7 @@ function M.altFileStatusline()
 		local ext = name:match("%.%w+$")
 		name = nameNoExt:sub(1, maxLen) .. "…" .. ext
 	end
+
 	return icon .. " " .. name
 end
 
