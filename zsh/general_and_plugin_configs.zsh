@@ -8,6 +8,12 @@ export LC_CTYPE="en_US.UTF-8"
 setopt AUTO_CD              # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
 
+# automatically quote URLs
+# https://github.com/johan/zsh/blob/master/Functions/Zle/url-quote-magic
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+setopt nomatch
+
 #───────────────────────────────────────────────────────────────────────────────
 
 

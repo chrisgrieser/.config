@@ -29,6 +29,7 @@ function man() {
 # uses OPENAI_API_KEY saved in .zshenv
 function ai() {
 	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
+	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
 
 	query="$*"
 	# WARN do not use "$prompt" as a variable in zsh, it's a reserved keyword
@@ -42,7 +43,7 @@ function ai() {
 			\"temperature\": 0
 		}" |
 		yq -r '.choices[].message.content' |
-		bat --language=markdown
+		bat --language=markdown --style=grid
 }
 
 #───────────────────────────────────────────────────────────────────────────────
