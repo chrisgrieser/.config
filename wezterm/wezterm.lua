@@ -56,6 +56,7 @@ local keybindings = {
 	{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
 
 	-- fix keys for German Keyboard, if not done via Karabiner
+	{ key = "7", mods = "META", action = act.SendString("|") },
 	-- { key = "l", mods = "META", action = act.SendString("@") },
 	-- { key = "8", mods = "META", action = act.SendString("{") },
 	-- { key = "9", mods = "META", action = act.SendString("}") },
