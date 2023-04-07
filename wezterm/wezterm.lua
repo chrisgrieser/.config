@@ -55,6 +55,11 @@ local keybindings = {
 	{ key = "Enter", mods = "SHIFT", action = act.ActivateTabRelative(1) },
 	{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
 
+	-- fix keys for German Keyboard, if not done via Karabiner
+	-- { key = "l", mods = "META", action = act.SendString("@") },
+	-- { key = "8", mods = "META", action = act.SendString("{") },
+	-- { key = "9", mods = "META", action = act.SendString("}") },
+
 	-- using the mapping from the terminal_keybindings.zsh
 	-- undo
 	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
