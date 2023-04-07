@@ -128,7 +128,7 @@ lspSettings.yamlls = {
 }
 
 -- Force lsp to work with zsh
-lspFileTypes.bashls = { "sh", "zsh", "bash" }
+-- lspFileTypes.bashls = { "sh", "zsh", "bash" }
 
 --------------------------------------------------------------------------------
 -- ENABLE CAPATIBILITES FOR PLUGINS
