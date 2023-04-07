@@ -59,7 +59,7 @@ local function obsidianThemeDevHelper(win, pos)
 	if
 		not win
 		or not win:application()
-		or not win:application():name():lower() == "neovide"
+		or not (win:application():name():lower() == "neovide")
 		or not (pos == PseudoMaximized or pos == Maximized)
 		or not AppRunning("Obsidian")
 	then
