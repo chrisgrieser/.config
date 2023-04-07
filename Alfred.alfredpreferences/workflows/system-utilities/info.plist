@@ -165,6 +165,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>6CCE0D85-1112-4445-9282-F834D4C265B1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B65E17C9-5DA8-4C46-BE52-2150F4FD7843</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9132689B-E107-4FA3-9CA5-181DAF3FD179</key>
 		<array>
 			<dict>
@@ -1212,6 +1225,50 @@ echo -n "WiFi"</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>toggle-rain.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B65E17C9-5DA8-4C46-BE52-2150F4FD7843</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>rain</string>
+				<key>subtext</key>
+				<string>lo-rain</string>
+				<key>text</key>
+				<string>Toggle Rain</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>6CCE0D85-1112-4445-9282-F834D4C265B1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
 				<string>function run(input, parameters) {
@@ -1676,6 +1733,15 @@ echo -n "WiFi"</string>
 			<key>ypos</key>
 			<real>320</real>
 		</dict>
+		<key>6CCE0D85-1112-4445-9282-F834D4C265B1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>540</real>
+			<key>ypos</key>
+			<real>920</real>
+		</dict>
 		<key>70B0257C-5EA4-4CFD-9BF8-65D151BC0B56</key>
 		<dict>
 			<key>colorindex</key>
@@ -1785,6 +1851,15 @@ echo -n "WiFi"</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>915</real>
+		</dict>
+		<key>B65E17C9-5DA8-4C46-BE52-2150F4FD7843</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>710</real>
+			<key>ypos</key>
+			<real>920</real>
 		</dict>
 		<key>B6FB4D02-567F-4A67-B8CD-1321C65F9A59</key>
 		<dict>
