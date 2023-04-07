@@ -75,24 +75,24 @@ local function themeModifications()
 		setHighlight("GitSignsChange", "guifg=#acaa62")
 		setHighlight("GitSignsAdd", "guifg=#7fcc82")
 
-		-- oxocarbon
+	-- oxocarbon
 	elseif theme == "oxocarbon" then
 		linkHighlight("FloatTitle", "TelescopePromptTitle")
 		linkHighlight("@function", "@function.builtin")
 
-		-- sweetie
+	-- sweetie
 	elseif theme == "sweetie" and mode == "light" then
 		linkHighlight("ScrollView", "Visual")
 		linkHighlight("NotifyINFOIcon", "@string")
 		linkHighlight("NotifyINFOTitle", "@string")
 		linkHighlight("NotifyINFOBody", "@string")
 
-		-- blueloco
+	-- blueloco
 	elseif theme == "bluloco" then
 		setHighlight("ScrollView", "guibg=#303d50")
 		setHighlight("ColorColumn", "guibg=#2e3742")
 
-		-- kanagawa
+	-- kanagawa
 	elseif theme == "kanagawa" then
 		setHighlight("ScrollView", "guibg=#303050")
 		setHighlight("VirtColumn", "guifg=#323036")
@@ -105,23 +105,23 @@ local function themeModifications()
 			setHighlight(hlGroup, "guibg=NONE")
 		end
 
-		-- zephyr
+	-- zephyr
 	elseif theme == "zephyr" then
 		setHighlight("IncSearch", "guifg=#FFFFFF")
 		linkHighlight("TabLineSel", "lualine_a_normal")
 		linkHighlight("TabLineFill", "lualine_c_normal")
 
-		-- dawnfox
+	-- dawnfox
 	elseif theme == "dawnfox" then
 		setHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
+		setHighlight("ScrollView", "guibg=#303050")
 		setHighlight("ColorColumn", "guibg=#ebe1d5")
 		setHighlight("VertSplit", "guifg=#b29b84")
-		setHighlight("ScrollView", "guibg=#303050")
 		for _, v in pairs(vimModes) do
 			setHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
 		end
 
-		-- melange
+	-- melange
 	elseif theme == "melange" and mode == "light" then
 		linkHighlight("Todo", "IncSearch")
 		linkHighlight("NonText", "Conceal")
@@ -129,11 +129,12 @@ local function themeModifications()
 		linkHighlight("NotifyINFOTitle", "@define")
 		linkHighlight("NotifyINFOBody", "@define")
 
+	-- rose-pine
 	elseif theme == "rose-pine" and mode == "light" then
-		setHighlight("IndentBlanklineChar", "guifg=#cfcfcf")
-		local headlineBg = get
-		setHighlight("Headline", "gui=bold")
-
+		setHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
+		setHighlight("ScrollView", "guibg=#505030")
+		setHighlight("ColorColumn", "guibg=#eee6dc")
+		setHighlight("Headline", "gui=bold guibg=#ebe1d5")
 	end
 end
 
