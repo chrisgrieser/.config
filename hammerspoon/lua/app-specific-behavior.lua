@@ -55,8 +55,8 @@ Wf_browser = Wf.new("Vivaldi")
 			"^Picture in Picture$",
 			"^Task Manager$",
 			"^Developer Tools", -- when inspecting websites
-			"^DevTools", -- when inspecting Vivaldi UI, are titled "^$" on creation
-			"^$",
+			"^DevTools",
+			"^$", -- when inspecting Vivaldi UI, are titled "^$" on creation
 		},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
@@ -73,15 +73,6 @@ Wf_browser_all = Wf.new({ "Vivaldi" })
 		local app = App("Vivaldi")
 		if app and #(app:allWindows()) == 0 then app:hide() end
 	end)
-
---------------------------------------------------------------------------------
-
--- IINA: Full Screen when on projector
-IinaAppLauncher = Aw.new(function(appName, eventType, appObj)
-	if eventType == Aw.launched and appName == "IINA" and IsProjector() then
-		AsSoonAsAppRuns(appObj, function() appObj:selectMenuItem { "Video", "Enter Full Screen" } end)
-	end
-end):start()
 
 --------------------------------------------------------------------------------
 
