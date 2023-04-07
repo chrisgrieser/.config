@@ -102,7 +102,6 @@ Keymap("n", "gC", "g,", { desc = "goto previous change" })
 -- remap needed, if using the builtin matchit plugin
 Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 
-
 --------------------------------------------------------------------------------
 -- FOLDING
 
@@ -117,6 +116,17 @@ Keymap("n", "zz", function()
 	Cmd("%foldclose") -- close toplevel folds
 	Cmd("silent! normal! zo") -- open fold cursor is standing on
 end, { desc = "󰘖 Close toplevel folds" })
+
+Keymap("n", "zj", function()
+	local lnum = Fn.line(".")
+	local lastLine = Fn.line("$")
+	repeat
+		if lnum >= lastLine then return end
+		lnum = lnum + 1
+		local isClosedFold = Fn.foldclosed(lnum) > 0
+	until isClosedFold
+	Normal(tostring(lnum) .. "G")
+end, { desc = "󰘖 Goto next Fold" })
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -349,13 +359,12 @@ Keymap("n", "ü", function () require('sibling-swap').swap_with_right() end, { d
 Keymap("n", "Ü", function () require('sibling-swap').swap_with_left() end, { desc = "󰑁 Move Node Left" })
 -- stylua: ignore end
 Autocmd("FileType", {
-	pattern = {"markdown", "text", "gitcommit"},
+	pattern = { "markdown", "text", "gitcommit" },
 	callback = function()
 		Keymap("n", "ü", '"zdawel"zph', { desc = "➡️ Move Word Right", buffer = true })
 		Keymap("n", "Ü", '"zdawbh"zph', { desc = "⬅️ Move Word Left", buffer = true })
 	end,
 })
-
 
 Keymap("n", "<Down>", [[:. move +1<CR>==]], { desc = "Move Line Down" })
 Keymap("n", "<Up>", [[:. move -2<CR>==]], { desc = "Move Line Up" })
