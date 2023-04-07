@@ -32,6 +32,12 @@ alias gi='open "$(getGithubURL)/issues"'
 alias g.='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
 
 #───────────────────────────────────────────────────────────────────────────────
+
+function name() {
+	
+}
+
+#───────────────────────────────────────────────────────────────────────────────
 # GIT DIFF
 # use delta for small diffs and diff2html for big diffs
 function gd() {
