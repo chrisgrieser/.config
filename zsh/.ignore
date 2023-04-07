@@ -7,7 +7,7 @@
 .zsh_sessions
 
 # to sync plugins
-plugins
+plugins/*
 
 # to have the last directory command
 .last_pwd

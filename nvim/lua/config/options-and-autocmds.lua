@@ -213,7 +213,7 @@ Autocmd("FileType", {
 
 -- fold settings 
 opt.foldenable = true
-opt.foldlevelstart = 7 -- only applies to new buffers
+opt.foldlevelstart = 6 -- close deep folds at the beginning; only applies to new buffers
 
 -- Remember folds and cursor
 local function remember(mode)

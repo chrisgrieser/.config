@@ -8,8 +8,13 @@ autoload compinit -Uz +X && compinit
 [[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w
 
 #───────────────────────────────────────────────────────────────────────────────
-# INFO `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 
+# "fzf-tab needs to be loaded after compinit, but before plugins which will wrap
+# widgets, such as zsh-autosuggestions or fast-syntax-highlighting"
+source ~/somewhere/fzf-tab.plugin.zsh
+
+
+# INFO `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 source "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
 source "$(brew --prefix)/share/zsh-autopair/autopair.zsh"
 source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

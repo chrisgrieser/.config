@@ -117,16 +117,36 @@ Keymap("n", "zz", function()
 	Cmd("silent! normal! zo") -- open fold cursor is standing on
 end, { desc = "󰘖 Close toplevel folds" })
 
-Keymap("n", "zj", function()
+Keymap("n", "gz", function()
 	local lnum = Fn.line(".")
 	local lastLine = Fn.line("$")
+	local endOfFold = Fn.foldclosedend(lnum)
+	if endOfFold > 0 then lnum = endOfFold end
 	repeat
-		if lnum >= lastLine then return end
+		if lnum >= lastLine then
+			vim.notify("No more fold in this file.")
+			return
+		end
 		lnum = lnum + 1
 		local isClosedFold = Fn.foldclosed(lnum) > 0
 	until isClosedFold
 	Normal(tostring(lnum) .. "G")
-end, { desc = "󰘖 Goto next Fold" })
+end, { desc = "󰘖 Goto next closed fold" })
+
+Keymap("n", "gZ", function()
+	local lnum = Fn.line(".")
+	local startOfFold = Fn.foldclosed(lnum)
+	if startOfFold > 0 then lnum = startOfFold end
+	repeat
+		if lnum <= 1 then
+			vim.notify("No more closed fold in this file.")
+			return
+		end
+		lnum = lnum - 1
+		local isClosedFold = Fn.foldclosed(lnum) > 0
+	until isClosedFold
+	Normal(tostring(lnum) .. "G")
+end, { desc = "󰘖 Goto previous closed fold" })
 
 --------------------------------------------------------------------------------
 -- EDITING
