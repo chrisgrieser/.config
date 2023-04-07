@@ -17,6 +17,7 @@ function o() {
 	selected=$(
 		fd --hidden --color=always | fzf \
 			-0 -1 \
+			--type=file --type=symlink \
 			--ansi \
 			--query="$input" \
 			--cycle \

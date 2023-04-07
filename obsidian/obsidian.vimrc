@@ -102,7 +102,7 @@ nmap gc u<C-r>
 " Editing
 """"""""""""""""""""""
 
-" UNDO consistently on one key
+" undo consistently on one key
 nmap U <C-r>
 
 " Case Switch via Smarter MD Hotkeys Plugin
