@@ -75,13 +75,16 @@ function M.altFileStatusline()
 	local maxLen = 25
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
-
 	local name, icon
-	if altFile == "" and altOldfile() == nil then -- no oldfile and after start
-		return ""
-	elseif altWindow() and altWindow():find("^diffview:") then
+	if altFile == "" and altOldfile() == nil then return "" end
+	local altWindow = altWindow()
+
+	-- no oldfile and after start
+	if altWindow then 
+		if altWindow:find("^diffview:") then
 		icon = ""
 		name = "File History"
+	else
 	elseif altWindow() and altWindow():find("^term:") then
 		icon = ""
 		name = "Terminal"
