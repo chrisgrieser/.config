@@ -57,7 +57,3 @@ Keymap("x", "<leader>li", function()
 	Normal('"zy')
 	inspect(Fn.getreg("z"))
 end, { desc = " inspect selection", buffer = true })
-
-
--- :I user command
-vim.api.nvim_buf_create_user_command(0, "I", function(ctx) inspect(ctx.args) end, { nargs = "+" })

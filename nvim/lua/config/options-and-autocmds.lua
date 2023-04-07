@@ -87,6 +87,7 @@ Autocmd({ "VimEnter", "VimResized" }, {
 -- status bar & cmdline
 opt.history = 300 -- reduce noise for command history search
 opt.cmdheight = 0
+-- opt.showcmdloc = "statusline"
 
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
