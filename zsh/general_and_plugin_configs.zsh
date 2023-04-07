@@ -12,7 +12,7 @@ setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasti
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --hidden'
-export FZF_DEFAULT_OPTS='--pointer=⟐ --prompt="❱ " --ellipsis=… --tabstop=3 --scroll-off=2'
+export FZF_DEFAULT_OPTS='--pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3'
 
 # magic enter
 export MAGIC_ENTER_GIT_COMMAND="exagit"
