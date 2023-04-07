@@ -15,9 +15,8 @@ function o() {
 
 	# --delimiter and --nth options ensure only file name and parent folder are displayed
 	selected=$(
-		fd --hidden --color=always | fzf \
+		fd --type=file --type=symlink --hidden --color=always | fzf \
 			-0 -1 \
-			--type=file --type=symlink \
 			--ansi \
 			--query="$input" \
 			--cycle \

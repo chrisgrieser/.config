@@ -75,6 +75,8 @@ function M.altFileStatusline()
 	local maxLen = 25
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
+	local altPath = fn.expand("#:p")
+	local curPath = fn.expand("%:p")
 	local altWin = altWindow()
 	local altOld = altOldfile()
 	local name, icon
@@ -92,7 +94,7 @@ function M.altFileStatusline()
 			icon = " "
 			name = vim.fs.basename(altWin)
 		end
-	elseif hasAltFile then
+	elseif hasAltFile and (altPath ~= curPath) then
 		icon = "#"
 		name = altFile
 		-- same name, different file: append parent of altfile
@@ -119,9 +121,14 @@ end
 
 ---switch to alternate window/buffer/oldfile in that priority
 function M.altBufferWindow()
+	local altFile = fn.expand("#:t")
+	local hasAltFile = altFile ~= "" and fn.filereadable(altFile)
+	local altPath = fn.expand("#:p")
+	local curPath = fn.expand("%:p")
+
 	if numberOfWins() > 1 then
 		cmd.wincmd("p")
-	elseif fn.expand("#") ~= "" then
+	elseif hasAltFile and (altPath ~= curPath) then
 		cmd.buffer("#")
 	elseif altOldfile() then
 		cmd.edit(altOldfile())
