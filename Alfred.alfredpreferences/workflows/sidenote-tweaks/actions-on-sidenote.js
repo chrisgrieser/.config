@@ -65,7 +65,7 @@ function run(argv) {
 	// Delete Note, but keep copy in trash instead of irreversibly removing it
 	if (doDelete) {
 		const maxNameLen = 50;
-		let safeTitle = title.replace(/[/\\:;,"'#()[\]=<>{}?!]|\.$/gm, "-");
+		let safeTitle = title.replace(/[/\\:;,"'#()[\]=<>{}?!|§]|\.$/gm, "-");
 		if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
 		const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.txt`;
 		writeToFile(trashNotePath, content);
