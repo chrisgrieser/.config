@@ -44,7 +44,7 @@ return {
 		dependencies = "kevinhwang91/promise-async",
 		event = "BufReadPost",
 		opts = {
-			provider_selector = function() return { "lsp", "treesitter" } end,
+			provider_selector = function() return { "lsp", "indent" } end,
 			open_fold_hl_timeout = 500,
 			fold_virt_text_handler = foldTextFormatter,
 		},

@@ -46,27 +46,29 @@ local function workLayout()
 	dockSwitcher("work")
 	hs.execute("sketchybar --set clock popup.drawing=true")
 
-	-- apps
+	-- close
 	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "BetterTouchTool" }
 	for _, win in pairs(App("Finder"):allWindows()) do
 		win:close()
 	end
 	require("lua.private").closer()
 
+	-- twitter
 	OpenApp("Twitter")
-	local appsToOpen = { "Discord", "Vivaldi", "Mimestream" }
-	-- insert in front so it starts earlier and ends with Mimestream
-	if not isWeekend() then table.insert(appsToOpen, 1, "Slack") end 
-	OpenApp(appsToOpen)
+	AsSoonAsAppRuns("Twitter", TwitterToTheSide)
+	AsSoonAsAppRuns("Twitter", TwitterScrollUp)
 
-	-- layout them when they all run
+	-- open
+	local appsToOpen = { "Discord", "Vivaldi", "Mimestream" }
+	if not isWeekend() then table.insert(appsToOpen, 1, "Slack") end
+	OpenApp(appsToOpen)
+	for _, app in pairs(appsToOpen) do
+		AsSoonAsAppRuns(app, function() MoveResize(App(app):mainWindow(), PseudoMaximized) end)
+	end
+
 	MyTimer = hs.timer.waitUntil(function() return AppRunning(appsToOpen) end, function()
 		RestartApp("AltTab") -- fix AltTab not picking up changes
-		for _, appName in pairs(appsToOpen) do
-			MoveResize(App(appName):mainWindow(), PseudoMaximized)
-		end
-		TwitterToTheSide()
-		TwitterScrollUp()
+		App("Mimestream"):activate()
 	end, 0.2)
 
 	print("🔲 WorkLayout: done")
@@ -135,7 +137,7 @@ UnlockWatcher = c.new(function(event)
 	RunWithDelays(20, function()
 		if MyTimer and MyTimer:running() then
 			MyTimer:stop()
-			MyTimer = nil
+			MyTimer = nil ---@diagnostic disable-line: assign-type-mismatch
 		end
 	end)
 end):start()
