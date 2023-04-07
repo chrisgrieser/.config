@@ -82,10 +82,10 @@ function M.altFileStatusline()
 
 	-- no oldfile and after start
 	if altWin then
-		if altWin:find("^diffview:") then
+		if altWin:find("^diffview://") then
 			icon = ""
 			name = "File History"
-		elseif altWin:find("^term:") then
+		elseif altWin:find("^term://") then
 			icon = ""
 			name = "Terminal"
 		else
