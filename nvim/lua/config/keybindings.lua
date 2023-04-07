@@ -4,7 +4,6 @@ require("config.utils")
 
 -- search keymaps
 Keymap("n", "?", function() Cmd.Telescope("keymaps") end, { desc = " Keymaps" })
--- stylua: ignore
 
 -- Theme Picker
 Keymap("n", "<leader>T", function() Cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
@@ -406,8 +405,10 @@ Keymap("x", "<Up>", [[<Esc>:silent '<,'>move '<-2<CR>:normal! gv=gv<CR>]], { des
 Keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })
 Keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "Move selection left" })
 
--- Merging / Splitting Lines
-Keymap("n", "<leader>s", Cmd.TSJToggle, { desc = "split/join" })
+-- Merging / Splitting
+-- Lines
+Keymap("n", "<leader>s", Cmd.TSJToggle, { desc = "split/join lines" })
+Keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "split around selection" })
 Keymap({ "n", "x" }, "M", "J", { desc = "merge line up" })
 Keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "merge line down" })
 
