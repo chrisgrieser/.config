@@ -117,6 +117,7 @@ Keymap("n", "zz", function()
 	Cmd("silent! normal! zo") -- open fold cursor is standing on
 end, { desc = "󰘖 Close toplevel folds" })
 
+-- goto next/prev closed fold
 Keymap("n", "gz", function()
 	local lnum = Fn.line(".")
 	local lastLine = Fn.line("$")
