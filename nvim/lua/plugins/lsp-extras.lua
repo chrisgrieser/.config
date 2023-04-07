@@ -94,8 +94,9 @@ return {
 		"smjonas/inc-rename.nvim",
 		event = "LspAttach", -- loading on `:IncRename` would disable preview on first run
 		opts = {
+			preview_empty_name = true,
+			-- if more than one file is changed, save all buffers
 			post_hook = function(results)
-				-- if more than one file is changed, save all buffers
 				local filesChanged = #vim.tbl_keys(results.changes)
 				if filesChanged > 1 then vim.cmd.wall() end
 			end,
