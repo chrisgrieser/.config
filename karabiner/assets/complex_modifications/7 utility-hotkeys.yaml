@@ -188,6 +188,7 @@ rules:
             file_paths:
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
+              - wezterm-gui$
         to:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
           - { key_code: vk_none, hold_down_milliseconds: 20 }
@@ -203,6 +204,7 @@ rules:
             file_paths:
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
+              - wezterm-gui$
         to:
           - { select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ } }
           - { key_code: vk_none, hold_down_milliseconds: 20 }
@@ -218,6 +220,7 @@ rules:
             file_paths:
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
+              - wezterm-gui$
         to:
           - { key_code: "f1"}
       # Tilde ~
