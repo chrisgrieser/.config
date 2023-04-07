@@ -9,12 +9,14 @@ CONFIG_FILES=(
 	aliases
 	history_config
 	general_and_plugin_configs
-	completions
+	# completions # not in use when using fzf-tab
+	fzf-tab-settings
 	terminal_keybindings
 	docs_man
 	git_github
 	homebrew
 	vi_mode
+	lazyload-cli-completions
 )
 
 # no intro messages for embedded terminals, since I use them with lower height

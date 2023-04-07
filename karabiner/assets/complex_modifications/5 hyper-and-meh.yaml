@@ -36,6 +36,7 @@ rules:
             file_paths:
               - "[Mm]industry"
               - "[Nn]eovide" # quicker completion selection
+              - "wezterm-gui" # quicker completion selection
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪ Open Locations"
     manipulators:
