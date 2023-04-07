@@ -69,7 +69,7 @@ opt.signcolumn = "yes:1" -- = gutter
 
 -- Wrapping
 opt.textwidth = 80
-opt.wrapmargin = 4 -- especially useful when using a scrollbar
+opt.wrapmargin = 2 -- especially useful when using a scrollbar
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap

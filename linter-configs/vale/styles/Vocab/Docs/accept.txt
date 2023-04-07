@@ -127,3 +127,6 @@ using
 therefore
 so
 case insensitive
+And
+and
+us
