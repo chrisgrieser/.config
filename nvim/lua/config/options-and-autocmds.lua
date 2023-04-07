@@ -46,7 +46,7 @@ opt.clipboard = "unnamedplus"
 opt.grepprg = "rg --vimgrep" -- use rg for :grep
 
 -- Popups / Floating Windows
-opt.pumheight = 12 -- max number of items in popup menu
+opt.pumheight = 15 -- max number of items in popup menu
 opt.pumwidth = 15 -- min width popup menu
 opt.previewheight = 20
 
