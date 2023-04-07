@@ -10,6 +10,11 @@ setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasti
 
 #───────────────────────────────────────────────────────────────────────────────
 
+
+# you should use
+export YSU_IGNORED_ALIASES=("bi" "bu") # due to homebrew Alfred workflow
+export YSU_MESSAGE_POSITION="after"
+
 # fzf
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='--pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3'

@@ -44,8 +44,18 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':fzf-tab:*' fzf-bindings 'space:accept'
 zstyle ':fzf-tab:*' accept-line enter
 
+# CONTINUOUS-TRIGGER
+# It specifies the key to trigger a continuous completion (accept the result and
+# start another completion immediately). It's useful when completing a long path.
+# here: configured so z and cd go accept & trigger the next completion
+zstyle ':fzf-tab:*z*' continuous-trigger 'space'
+zstyle ':fzf-tab:*cd*' continuous-trigger 'space'
+
 #───────────────────────────────────────────────────────────────────────────────
-# COLORS
+# COLORS / APPEARANCE
+
+# Disable prefix
+zstyle ':fzf-tab:*' prefix ''
 
 # set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}

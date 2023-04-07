@@ -64,7 +64,7 @@ local function telescopeConfig()
 					height = 0.85,
 					width = 0.9,
 					preview_cutoff = 70,
-					preview_width = { 0.55, min = 30 },
+					preview_width = { 0.50, min = 30 },
 				},
 				cursor = {
 					preview_cutoff = 9001, -- never use preview here
