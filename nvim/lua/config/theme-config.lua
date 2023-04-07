@@ -131,6 +131,7 @@ local function themeModifications()
 
 	elseif theme == "rose-pine" and mode == "light" then
 		setHighlight("IndentBlanklineChar", "guifg=#cfcfcf")
+		local headlineBg = get
 		setHighlight("Headline", "gui=bold")
 
 	end
