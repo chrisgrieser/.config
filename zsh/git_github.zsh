@@ -31,10 +31,9 @@ alias gi='open "$(getGithubURL)/issues"'
 # goto git root
 alias g.='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
 
-#───────────────────────────────────────────────────────────────────────────────
-
-function name() {
-	
+# remove the lock file
+function unlock() {
+	rm "$(git rev-parse --git-dir)/index.lock"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
