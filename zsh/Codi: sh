@@ -20,17 +20,14 @@ alias bu='brew uninstall --zap'
 #───────────────────────────────────────────────────────────────────────────────
 
 function brew-switch() {
-	
-pkg=$1
-version=$2
-
-brew unlink "$pkg"
-(
-  cd "$(brew --prefix)/opt" 
-  rm -f "$pkg"
-  ln -s "../Cellar/$pkg/$version" "$pkg"
-)
-brew link "$pkg"
+	# https://github.com/orgs/Homebrew/discussions/339#discussioncomment-350814
+	pkg=$1
+	version=$2
+	brew unlink "$pkg"
+	cd "$(brew --prefix)/opt" || return 1
+	rm -f "$pkg"
+	ln -s "../Cellar/$pkg/$version" "$pkg"
+	brew link "$pkg"
 }
 
 
