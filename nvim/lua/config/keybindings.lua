@@ -30,12 +30,8 @@ end, { desc = "󰘳 Copy last command" })
 Keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again" })
 
 -- search command history
-Keymap(
-	"n",
-	"<leader>lh",
-	function() Cmd.Telescope("command_history") end,
-	{ desc = "󰘳 Copy last command" }
-)
+-- stylua: ignore
+Keymap("n", "<leader>lh", function() Cmd.Telescope("command_history") end, { desc = "󰘳 Copy last command" })
 
 -- copy [l]ast [n] notification
 Keymap("n", "<leader>ln", function()
@@ -65,7 +61,7 @@ Keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { d
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 Keymap({ "o", "x" }, "H", "^")
-Keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long lines
+Keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long indented lines
 Keymap({ "n", "x", "o" }, "L", "$")
 
 Keymap({ "n", "x" }, "J", "6j")
@@ -124,7 +120,7 @@ Keymap("n", "<f1>", function()
 		vim.api.nvim_buf_set_mark(0, "f", row, col, {})
 	end
 end, { desc = "󰘖 Toggle Fold" })
-Keymap("n", "\\", "mz`fza`z", { desc = "󰘖 Undo Last Fold Toggle" })
+Keymap("n", "zu", "mz`fza`z", { desc = "󰘖 Undo Last Fold Toggle" })
 Keymap("n", "1", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
 Keymap("n", "!", "zi", { desc = "󰘖 Toggle Fold Globally" })
 
@@ -165,6 +161,15 @@ Keymap("n", "gZ", function()
 	until isClosedFold
 	Normal(tostring(lnum) .. "G")
 end, { desc = "󰘖 Goto previous closed fold" })
+
+-- preview fold
+Keymap("n", "zp", function () require("ufo").peekFoldedLinesUnderCursor(false, true) end, { desc = "󰘖 󰈈 Preview Fold" })
+
+-- make n preview fold (since opt.foldopen does not include search)
+Keymap("n", "n", function ()
+	Normal("n")	
+	require("ufo").peekFoldedLinesUnderCursor(false, true)
+end, { desc = "n + preview fold" })
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -651,7 +656,7 @@ Autocmd("LspAttach", {
 		Keymap({ "n", "i", "x" }, "<D-s>", function()
 			Cmd.update()
 			Cmd.mkview(9) -- to preserve folding
-			vim.lsp.buf.format()
+			vim.lsp.buf.format { async = false } -- needs to be async for loadview
 			Cmd.loadview(9)
 		end, { buffer = true, desc = "󰒕 Save & Format" })
 	end,
@@ -833,7 +838,7 @@ for _, key in ipairs { "h", "l" } do
 		vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
 
 		local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-		if shouldOpenFold and (key == "h" or key == "l" ) then Normal("zv") end
+		if shouldOpenFold and (key == "h" or key == "l") then Normal("zv") end
 		Normal(key)
 	end, { desc = key .. " (delaytrain)" })
 end
