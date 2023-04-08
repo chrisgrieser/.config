@@ -1,4 +1,3 @@
-
 --------------------------------------------------------------------------------
 local foldIcon = ""
 --------------------------------------------------------------------------------
@@ -47,6 +46,13 @@ return {
 			provider_selector = function() return { "lsp", "indent" } end,
 			open_fold_hl_timeout = 500,
 			fold_virt_text_handler = foldTextFormatter,
+			preview = {
+				win_config = {
+					border = BorderStyle,
+					winblend = 1,
+					maxheight = 20,
+				},
+			},
 		},
 	},
 }

@@ -85,7 +85,7 @@ nmap gs :gotoHeading
 " [g]oto definition / link (shukuchi makes it forward-seeking)
 exmap followNextLink obcommand shukuchi:open-link
 nmap gx :followNextLink
-nmap gd :followNextLink
+nmap ga :followNextLink
 
 exmap liveGrep obcommand obsidian-another-quick-switcher:grep
 nmap gl :liveGrep
@@ -161,6 +161,7 @@ nmap ,y 3ggA
 " requires Footnotes Shortcut Plugin
 exmap gotoFootnoteDefinition obcommand obsidian-footnotes:insert-footnote
 nmap gf :gotoFootnoteDefinition
+nmap gd :gotoFootnoteDefinition
 
 " Blockquote
 exmap toggleBlockquote obcommand editor:toggle-blockquote
