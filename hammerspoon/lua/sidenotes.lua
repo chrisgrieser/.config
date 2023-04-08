@@ -37,26 +37,31 @@ if IsAtOffice() then moveOfficeNotesToBase() end
 
 --------------------------------------------------------------------------------
 
--- UPDATE COUNTER IN SKETCHYBAR
-SidenotesWatcher = Aw.new(function(appName)
+SidenotesWatcher = Aw.new(function(appName, event, appObj)
+	-- UPDATE COUNTER IN SKETCHYBAR
 	-- i.e., run on any event related to sidenotes
 	if appName == "SideNotes" then updateCounter() end
-end):start()
 
--- HIDE WHEN SWITCHING TO ANY OTHER APP (HACK)
--- (since SideNotes can only be hidden on mouse click, but not on alt-tab)
-SidenotesWatcher2 = Aw.new(function(appName, event)
-	if appName == "SideNotes" or event ~= Aw.activated then return end
+	-- HIDE WHEN SWITCHING TO ANY OTHER APP
+	-- (HACK since SideNotes can only be hidden on mouse click, but not on alt-tab)
+	if appName ~= "SideNotes" and event == Aw.activated then return end
 	RunWithDelays(0.05, function()
+		-- INFO if sidenotes glitches, it is the "Hot Side" setting causing
+		-- glitches when mouse is close, not Hammerspoon
 		if not (IsFront { "SideNotes", "Alfred", "CleanShot X", "Espanso" }) then
-			-- INFO if sidenotes glitches, it is the "Hot Side" setting causing
-			-- glitches when mouse is close, not Hammerspoon
 			App("SideNotes"):hide()
 		end
 	end)
+
+	-- enlarge on startup
+	if appName == "SideNotes" and event == Aw.launched then
+		local win = appObj:mainWindow()
+		MoveResize(win, SideNotesWide)
+	end
 end):start()
 
 --------------------------------------------------------------------------------
+
 SideNotesWide = { x = 0, y = 0, w = 0.35, h = 1 }
 
 -- toggle sizes of the sidenotes window

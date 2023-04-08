@@ -39,18 +39,13 @@ function inspect() {
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		git status --short
-		echo
+		separator
 		git log -n 5 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'
-		echo
+		separator
 	fi
 
 	# shellcheck disable=2012
-	if [[ $(ls | wc -l) -lt 30 ]]; then
-		exa
-	else
-		exa | head -n15
-		echo "(…)"
-	fi
+	exa
 }
 
 # measure zsh loading time, https://blog.jonlu.ca/posts/speeding-up-zsh
