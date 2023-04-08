@@ -243,12 +243,12 @@ end
 ---opens current buffer in the browser & copies the link to the clipboard
 ---normal mode: link to file
 ---visual mode: link to selected lines
-function M.githubLink()
+function M.githubUrl()
 	if not isInGitRepo() then return end
 
 	local filepath = fn.expand("%:p")
 	local gitroot = fn.system([[git --no-optional-locks rev-parse --show-toplevel]])
-	local pathInRepo = filepath:sub(#gitroot)
+	local pathInRepo = filepath:sub(#gitroot + 1)
 	local remote = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git.*", "%1")
 	local branch = fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", "")
 
