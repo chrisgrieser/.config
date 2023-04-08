@@ -81,7 +81,8 @@ local tsConfig = {
 	-- TREESITTER PLUGINS
 	endwise = { enable = true },
 	rainbow = { enable = true },
-	fsfsf
+	playground = {
+		enable = true,
 	},
 	refactor = {
 		highlight_definitions = {
