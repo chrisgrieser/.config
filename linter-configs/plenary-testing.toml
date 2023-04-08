@@ -1,0 +1,48 @@
+# when doing busted-style testing via plenary.nvim, some globals are added
+# which require this extra library
+# https://github.com/nvim-lua/plenary.nvim/blob/master/TESTS_README.md
+#───────────────────────────────────────────────────────────────────────────────
+
+[selene]
+base = "lua51"
+name = "plenary-testing"
+
+[[describe.args]]
+type = "string"
+[[describe.args]]
+type = "function"
+
+[[it.args]]
+type = "string"
+[[it.args]]
+type = "function"
+
+[[before_each.args]]
+type = "function"
+[[after_each.args]]
+type = "function"
+
+[assert.is_not]
+any = true
+
+[[assert.equals.args]]
+type = "any"
+[[assert.equals.args]]
+type = "any"
+[[assert.equals.args]]
+type = "any"
+required = false
+
+[[assert.same.args]]
+type = "any"
+[[assert.same.args]]
+type = "any"
+
+[[assert.truthy.args]]
+type = "any"
+
+[[assert.spy.args]]
+type = "any"
+
+[[assert.stub.args]]
+type = "any"
