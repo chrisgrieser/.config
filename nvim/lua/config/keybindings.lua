@@ -655,9 +655,7 @@ Autocmd("LspAttach", {
 		-- Save & Format
 		Keymap({ "n", "i", "x" }, "<D-s>", function()
 			Cmd.update()
-			Cmd.mkview(9) -- to preserve folding
-			vim.lsp.buf.format { async = false } -- needs to be async for loadview
-			Cmd.loadview(9)
+			vim.lsp.buf.format { async = true }
 		end, { buffer = true, desc = "󰒕 Save & Format" })
 	end,
 })
