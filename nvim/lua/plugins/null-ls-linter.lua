@@ -84,7 +84,9 @@ local function nullConfig()
 
 			-- LUA
 			builtins.formatting.stylua,
-			builtins.diagnostics.selene,
+			builtins.diagnostics.selene.with {
+				condition = function(utils) return utils.root_has_file { "selene.toml" } end,
+			},
 
 			-- YAML
 			builtins.diagnostics.yamllint.with {
