@@ -113,10 +113,9 @@ Keymap( { "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()
 Keymap( { "x", "o" }, "a<f1>", "<cmd>lua require('various-textobjs').closedFold(false)<CR>", { desc = "outer fold textobj" })
 Keymap( { "x", "o" }, "i<f1>", "<cmd>lua require('various-textobjs').closedFold(true)<CR>", { desc = "inner fold textobj" })
 
--- a^/i^: fold textobj
--- (f1 remapped via Karabiner)
-Keymap( { "x", "o" }, "a<f1>", "<cmd>lua require('various-textobjs').closedFold(false)<CR>", { desc = "outer fold textobj" })
-Keymap( { "x", "o" }, "i<f1>", "<cmd>lua require('various-textobjs').closedFold(true)<CR>", { desc = "inner fold textobj" })
+-- a./i.: chainMember textobj
+Keymap( { "x", "o" }, "a.", "<cmd>lua require('various-textobjs').chainMember(false)<CR>", { desc = "outer chainMember textobj" })
+Keymap( { "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember(true)<CR>", { desc = "inner chainMember textobj" })
 
 -- r: [r]est of paragraph/indentation (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
