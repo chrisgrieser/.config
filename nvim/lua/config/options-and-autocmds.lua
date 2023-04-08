@@ -88,6 +88,10 @@ Autocmd({ "VimEnter", "VimResized" }, {
 opt.history = 300 -- reduce noise for command history search
 opt.cmdheight = 0
 -- opt.showcmdloc = "statusline"
+opt.shortmess:append {
+	a = true,
+	S = true,
+}
 
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
@@ -210,10 +214,10 @@ Autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- FOLDING
 
--- fold settings 
+-- fold settings
 opt.foldenable = true
 opt.foldlevelstart = 6 -- close deep folds at the beginning; only applies to new buffers
-opt.foldopen:remove{"search", "hor"} -- less unintentional opening of folds
+opt.foldopen:remove { "search", "hor" } -- less unintentional opening of folds
 
 -- Remember folds and cursor
 local function remember(mode)

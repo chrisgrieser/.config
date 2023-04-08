@@ -4,14 +4,26 @@ LinterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
 VimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
 UpdateCounterThreshhold = 25 -- for plugin update statusline
 
+local ok, borderstyle = pcall(require, "config.borderstyle")
+if ok then borderstyle.set("single") end -- should come before lazy
 
---------------------------------------------------------------------------------
-
+---try to require the module, and do not error when one of them cannot be
+---loaded. But do notify if there was an error.
+---@param module string module to load
 local function tryRequire(module)
-	local success = tryRequire(module)
-	if not success then vim.cmd.echoerr("Error loading " .. module) end
+	local success = pcall(require, module)
+	if not success then
+		local msg = "Error loading " .. module
+		local notifyInstalled, notify = pcall(require, "notify")
+		if notifyInstalled then
+			notify(" " .. msg)
+		else
+			vim.cmd.echoerr(msg)
+		end
+	end
 end
 
+--------------------------------------------------------------------------------
 
 tryRequire("config.lazy")
 tryRequire("config.utils")
