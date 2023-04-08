@@ -40,6 +40,8 @@ function pip3() {
 	command pip3 "$@"
 }
 
+alias bkp='zsh "$DOTFILE_FOLDER/utility-scripts/backup-script.sh"'
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # EXA (function and not alias for `directoryInspect`)

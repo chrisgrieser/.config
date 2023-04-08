@@ -32,25 +32,26 @@ function o() {
 	fi
 }
 
-# show files, git status, and breif git log in the current directory
+# show files, git status, and brief git log in the current directory
 function inspect() {
 	if ! command -v exa &>/dev/null; then echo "exa not installed." && return 1; fi
 	if ! command -v git &>/dev/null; then echo "git not installed." && return 1; fi
 
-	if command git --no-optional-locks rev-parse --is-inside-work-tree &>/dev/null; then
+	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		git status --short
 		echo
 		git log -n 5 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'
-		echo "(…)"
 		echo
 	fi
+
 	# shellcheck disable=2012
-	if [[ $(ls | wc -l) -lt 20 ]]; then
+	if [[ $(ls | wc -l) -lt 30 ]]; then
 		exa
+	else
+		exa | head -n15
+		echo "(…)"
 	fi
 }
-
-alias bkp='zsh "$DOTFILE_FOLDER/utility-scripts/backup-script.sh"'
 
 # measure zsh loading time, https://blog.jonlu.ca/posts/speeding-up-zsh
 function timezsh() {
