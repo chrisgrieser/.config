@@ -1,5 +1,3 @@
-std="plenary-testing"
-
 [lints]
 # disabled since duplication with LSP
 undefined_variable = "allow"
