@@ -53,6 +53,8 @@ function gd() {
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
+# https://git-scm.com/docs/git-log#_pretty_formats
+
 
 # short (only last 15 messages)
 alias gl="git log -n 15 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; echo '(…)'"
@@ -217,7 +219,7 @@ function clone() {
 	git clone --depth=1 "$giturl"
 	# shellcheck disable=SC2012
 	cd "$(ls -1 -t | head -n1)" || return 1
-	exagit
+	inspect
 }
 
 # delete and re-clone git repo (with depth 10)
