@@ -11,6 +11,9 @@ Icon
 **/*.pxd/*
 *.alfredworkflow
 
+# git isn't ignored by default?
+.git
+
 # custom markers
 .project-root
 

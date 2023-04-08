@@ -26,8 +26,8 @@ export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='--pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3'
 
 # magic enter
-export MAGIC_ENTER_GIT_COMMAND="exagit"
-export MAGIC_ENTER_OTHER_COMMAND="exa"
+export MAGIC_ENTER_GIT_COMMAND="inspect"
+export MAGIC_ENTER_OTHER_COMMAND="inspect"
 
 # zoxide
 export _ZO_DATA_DIR="$DATA_DIR/zoxide/"

@@ -2,7 +2,6 @@
 function o() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v fd &>/dev/null; then echo "fd not installed." && return 1; fi
-	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
 
 	local selected
 	local input="$*"
@@ -21,18 +20,11 @@ function o() {
 			--query="$input" \
 			--cycle \
 			--info=inline \
-			--delimiter=/ --with-nth=-2.. --nth=-2.. \
-			--header-first \
-			--header="↵  :open/cd, ↹ : only dirs, ⇧↹ : depth=1" \
-			--bind="tab:reload(fd --hidden --color=always --type=directory)+change-prompt(↪ )" \
-			--bind="shift-tab:reload(fd --hidden --color=always --max-depth=1)" \
 			--preview-window="border-left" \
-			--preview 'if [[ -d {} ]] ; then echo "\\033[1;33m"{}"\\033[0m" ; echo ; exa  --icons --oneline {} ; else ; bat --color=always --style=snip --wrap=never --tabs=1 {} ; fi'
+			--preview 'bat --color=always --style=snip --wrap=never --tabs=2 {}'
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted
 		return 0
-	elif [[ -d "$selected" ]]; then
-		z "$selected"
 	elif [[ -f "$selected" ]]; then
 		open "$selected"
 	else
@@ -40,11 +32,16 @@ function o() {
 	fi
 }
 
-function directoryInspect() {
+# show files, git status, and breif git log in the current directory
+function inspect() {
 	if ! command -v exa &>/dev/null; then echo "exa not installed." && return 1; fi
+	if ! command -v git &>/dev/null; then echo "git not installed." && return 1; fi
 
 	if command git --no-optional-locks rev-parse --is-inside-work-tree &>/dev/null; then
-		git --no-optional-locks status --short
+		git status --short
+		echo
+		git log -n 5 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'
+		echo "(…)"
 		echo
 	fi
 	# shellcheck disable=2012
@@ -91,13 +88,13 @@ function z() {
 		__zoxide_z "$1"
 	fi
 	# shellcheck disable=2181
-	[[ $? -eq 0 ]] && directoryInspect
+	[[ $? -eq 0 ]] && inspect
 }
 
 function zi() {
 	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
 	__zoxide_zi
-	directoryInspect
+	inspect
 }
 
 # macos only
@@ -123,7 +120,7 @@ function eject() {
 		print "\033[1;33mNo volume connected.\033[0m"
 		return 1
 	fi
-	
+
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	# if one volume, will auto-eject due to `-1`
