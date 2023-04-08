@@ -38,14 +38,18 @@ function inspect() {
 	if ! command -v git &>/dev/null; then echo "git not installed." && return 1; fi
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		git status --short
+		gitstatus=$(git status --short --porcelain)
+		if [[ -n "$gitstatus" ]]; then
+			git status --short # run again for color
+			separator
+		fi
+		git log -n 4 --all --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'
 		separator
-		git log -n 4 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'
-		separator
-		exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git
-	else
-		exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
 	fi
+	exa --long --all --grid \
+		--sort=modified --group-directories-first \
+		--icons --git --no-user --no-permissions --no-time --no-filesize \
+		--git-ignore --ignore-glob=.git --ignore-glob=.DS_Store
 }
 
 # measure zsh loading time, https://blog.jonlu.ca/posts/speeding-up-zsh

@@ -1,7 +1,3 @@
-# shellcheck disable=SC2139
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # z & cd
 alias zz='z -' # back to last dir
 alias .="open ."
@@ -42,9 +38,6 @@ function pip3() {
 
 alias bkp='zsh "$DOTFILE_FOLDER/utility-scripts/backup-script.sh"'
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# EXA (function and not alias for `directoryInspect`)
 
 alias l='command exa --all --long --git --icons --group-directories-first --sort=modified'
 alias t='command exa --tree -L4 --icons --git-ignore'
@@ -59,7 +52,6 @@ alias -g G="| grep --ignore-case --color"
 alias -g B="| bat"
 alias -g C="| pbcopy ; echo 'Copied.'"                               # copy
 alias -g J="| yq --prettyPrint --output-format=json --colors | less" # beautify in JSON
-alias -g L="| less"                                                  # Less
 alias -g N="| wc -l | tr -d ' '"                                     # count lines
 
 # highlights for them
@@ -69,5 +61,4 @@ ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
