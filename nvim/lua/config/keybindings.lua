@@ -548,6 +548,7 @@ Keymap( "n", "gO", function() require("telescope").extensions.file_browser.file_
 Keymap("n", "gl", function() require("telescope.builtin").live_grep {
 	prompt_title = "Live Grep: " .. projectName() }
 end, { desc = " Live Grep in Project" })
+Keymap("n", "gL", Cmd.Telescope("grep_string"), { desc = " Grep cword in Project" })
 Keymap("n", "gr", function() Cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 
 -- File Operations

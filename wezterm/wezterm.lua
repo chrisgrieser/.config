@@ -67,12 +67,6 @@ local keybindings = {
 	{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
 	{ key = "v", mods = "CMD", action = actFun(autoQuotePastedUrls) },
 
-	-- fix keys for German Keyboard
-	{ key = "7", mods = "META", action = act.SendString("|") },
-	{ key = "l", mods = "META", action = act.SendString("@") },
-	{ key = "8", mods = "META", action = act.SendString("{") },
-	{ key = "9", mods = "META", action = act.SendString("}") },
-
 	-- using the mapping from the terminal_keybindings.zsh
 	-- undo
 	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
@@ -201,6 +195,10 @@ local config = {
 	-- Keybindings
 	disable_default_key_bindings = true,
 	keys = keybindings,
+
+	-- fix @{}~ etc. on German keyboard
+	send_composed_key_when_left_alt_is_pressed = true,
+	send_composed_key_when_right_alt_is_pressed = true,
 }
 
 --------------------------------------------------------------------------------
