@@ -17,7 +17,7 @@ local lintersAndFormatters = {
 }
 --------------------------------------------------------------------------------
 -- INFO
--- eslint, stylua and prettier use project-specific config files
+-- eslint, stylua, selene and prettier use project-specific config files
 -- the other linters use a global config file
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
@@ -84,9 +84,7 @@ local function nullConfig()
 
 			-- LUA
 			builtins.formatting.stylua,
-			builtins.diagnostics.selene.with {
-				extra_args = { "--config", LinterConfig .. "/selene.toml" },
-			},
+			builtins.diagnostics.selene,
 
 			-- YAML
 			builtins.diagnostics.yamllint.with {
