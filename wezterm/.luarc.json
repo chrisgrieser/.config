@@ -1,7 +1,0 @@
-{
-	"diagnostics.unusedLocalExclude": [
-		"log",
-		"io",
-		"os"
-	]
-}
