@@ -787,6 +787,7 @@ Autocmd("FileType", {
 		"help",
 		"lspinfo",
 		"tsplayground",
+		"PlenaryTestPopup",
 		"qf", -- quickfix
 		"lazy",
 		"httpResult", -- rest.nvim

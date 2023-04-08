@@ -43,7 +43,8 @@ function inspect() {
 			git status --short # run again for color
 			separator
 		fi
-		git log -n 4 --all --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'
+		git log -n 5 --all --color --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | sed -e 's/origin/o/g'
+		echo
 		separator
 	fi
 	exa --long --all --grid \
