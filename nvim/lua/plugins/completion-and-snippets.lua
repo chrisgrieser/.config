@@ -275,14 +275,12 @@ local function cmdlineCompletionConfig()
 
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),
-		view = {
-			-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#menu-type
-			entries = { name = "wildmenu", separator = "|" },
-		},
 		enabled = function()
 			-- https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-cmdline-completion-for-certain-commands-such-as-increname
 			local disabled = {
 				IncRename = true,
+				S = true, -- :AltSubstitute
+				s = true, -- :substitute
 			}
 			local cmd = vim.fn.getcmdline():match("%S+") -- Get first word of cmdline
 			-- Return true if cmd isn't disabled
@@ -300,10 +298,6 @@ local function cmdlineCompletionConfig()
 
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
-		view = {
-			-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#menu-type
-			entries = { name = "wildmenu", separator = "|" },
-		},
 		sources = { s.buffer },
 	})
 end

@@ -50,7 +50,7 @@ return {
 				win_config = {
 					border = BorderStyle,
 					winblend = 1,
-					maxheight = 20,
+					maxheight = 10,
 				},
 			},
 		},
