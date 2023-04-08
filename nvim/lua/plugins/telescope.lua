@@ -5,7 +5,8 @@ local keymappings = {
 	["<PageUp>"] = "preview_scrolling_up",
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
-	["^"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
+	-- INFO remapped from ^ via karabiner
+	["<f1>"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<D-a>"] = "select_all",
 	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
@@ -81,6 +82,11 @@ local function telescopeConfig()
 			highlights = { prompt_prefix = " " },
 			loclist = { prompt_prefix = " ", trim_text = true },
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
+			grep_string = { prompt_prefix = " ", disable_coordinates = true },
+			command_history = {
+				prompt_prefix = "󰘳 ",
+				mappings = { i = { ["<D-CR>"] = "edit_command_line" } },
+			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
 				-- markdown headings are symbol-type "string", therefore shouldn't

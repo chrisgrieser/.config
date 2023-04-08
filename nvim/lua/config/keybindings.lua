@@ -16,6 +16,8 @@ Keymap("n", "<leader>p", require("lazy").sync, { desc = " Lazy Sync" })
 Keymap("n", "<leader>P", require("lazy").home, { desc = " Lazy Home" })
 Keymap("n", "<leader>M", Cmd.Mason, { desc = " Mason" })
 
+--------------------------------------------------------------------------------
+
 -- copy [l]ast ex[c]ommand
 Keymap("n", "<leader>lc", function()
 	local lastCommand = Fn.getreg(":"):gsub("^I ", "") -- remove `I ` from my inspect command
@@ -26,6 +28,14 @@ end, { desc = "󰘳 Copy last command" })
 -- [l]ast command [a]gain
 -- as opposed to `@:`, this works across restarts of neovim
 Keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again" })
+
+-- search command history
+Keymap(
+	"n",
+	"<leader>lh",
+	function() Cmd.Telescope("command_history") end,
+	{ desc = "󰘳 Copy last command" }
+)
 
 -- copy [l]ast [n] notification
 Keymap("n", "<leader>ln", function()
@@ -548,7 +558,8 @@ Keymap( "n", "gO", function() require("telescope").extensions.file_browser.file_
 Keymap("n", "gl", function() require("telescope.builtin").live_grep {
 	prompt_title = "Live Grep: " .. projectName() }
 end, { desc = " Live Grep in Project" })
-Keymap("n", "gL", Cmd.Telescope("grep_string"), { desc = " Grep cword in Project" })
+-- stylua: ignore
+Keymap({ "n", "x" }, "gL", function() Cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
 Keymap("n", "gr", function() Cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 
 -- File Operations
