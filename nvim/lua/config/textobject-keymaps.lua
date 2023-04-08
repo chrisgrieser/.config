@@ -152,5 +152,10 @@ Autocmd("FileType", {
 	end,
 })
 
+--------------------------------------------------------------------------------
+
+-- hint textobj
+Keymap({"o", "x"}, "h", function() require("tsht").nodes() end, { desc = "hint textobj" })
+
 -- Git Hunks
 Keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })

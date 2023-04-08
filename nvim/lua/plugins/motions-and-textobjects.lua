@@ -26,4 +26,9 @@ return {
 		lazy = true, -- loaded by keymaps
 		dev = true,
 	},
+	{ -- remote textobj
+		"mfussenegger/nvim-treehopper",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		lazy = true, -- loaded by keymaps
+	},
 }

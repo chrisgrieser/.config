@@ -50,6 +50,8 @@ local function quitter(app)
 		for _, win in pairs(App("Finder"):allWindows()) do
 			win:close()	
 		end
+	elseif app == "wezterm-gui" then
+		App(app):kill9() -- needs kill9 to avoid confirmation
 	else
 		App(app):kill()
 	end
