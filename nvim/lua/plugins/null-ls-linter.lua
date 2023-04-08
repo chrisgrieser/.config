@@ -121,8 +121,9 @@ return {
 			require("null-ls").setup {
 				border = BorderStyle,
 				sources = nullSources(),
-				-- nil = use cwd (which is determined by projects.nvim) https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/CONFIG.md#root_dir-function
-				root_dir = nil,
+				-- selene only dynamically finds it's config file, when the root dir
+				-- contains it, therefore setting the root dir to it
+				root_dir = require("null-ls.utils").root_pattern(".project-root", ".git", "selene.toml"),
 			}
 		end,
 	},
