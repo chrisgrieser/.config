@@ -76,6 +76,14 @@ end
 Keymap("o", "u", commented_lines_textobject, { desc = "Big comment textobj" })
 
 --------------------------------------------------------------------------------
+-- MISC Plugins
+-- hint textobj
+Keymap({ "o", "x" }, "h", function() require("tsht").nodes() end, { desc = "hint textobj" })
+
+-- Git Hunks
+Keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
+
+--------------------------------------------------------------------------------
 
 -- VARIOUS TEXTOBJS KEYMAPS
 -- stylua: ignore start
@@ -151,11 +159,3 @@ Autocmd("FileType", {
 		end
 	end,
 })
-
---------------------------------------------------------------------------------
-
--- hint textobj
-Keymap({"o", "x"}, "h", function() require("tsht").nodes() end, { desc = "hint textobj" })
-
--- Git Hunks
-Keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
