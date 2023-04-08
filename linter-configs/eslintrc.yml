@@ -148,7 +148,7 @@ rules:
   eqeqeq: error
   no-self-compare: error
   no-eq-null: warn
-  no-negated-condition: error
+  no-negated-condition: warn
   no-unneeded-ternary: warn
   no-nested-ternary: error
   no-constant-binary-expression: error
