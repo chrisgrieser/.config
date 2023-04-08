@@ -82,6 +82,9 @@ local function nullSources()
 		},
 
 		-- LUA
+		-- INFO stylua configs should be in the cwd, while selene configs should
+		-- be in the root where null-ls is spawned (which also cannot be changed
+		-- to the cwd, since switching between projects otherwise breaks null-ls)
 		builtins.formatting.stylua,
 		builtins.diagnostics.selene,
 
@@ -121,9 +124,6 @@ return {
 			require("null-ls").setup {
 				border = BorderStyle,
 				sources = nullSources(),
-				-- selene only dynamically finds it's config file, when the root dir
-				-- contains it, therefore setting the root dir to it
-				root_dir = require("null-ls.utils").root_pattern(".project-root", ".git", "selene.toml"),
 			}
 		end,
 	},
