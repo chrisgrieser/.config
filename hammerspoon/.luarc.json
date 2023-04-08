@@ -1,5 +1,7 @@
 {
     "workspace.library": [
         "/Spoons/EmmyLua.spoon/annotations"
-    ]
+    ],
+    "runtime.version": "Lua 5.4",
+    "INFO": "Hammerspoon uses Lua 5.4 https://github.com/Hammerspoon/hammerspoon/issues/2217"
 }

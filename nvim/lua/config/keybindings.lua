@@ -116,7 +116,15 @@ Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 
 -- toggle current fold
 Keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
-Keymap("n", "<f1>", function() pcall(Normal, "za") end, { desc = "󰘖 Toggle Fold" })
+Keymap("n", "<f1>", function()
+	local thereWasAFold = pcall(Normal, "za")
+	-- mark `f` for fold position
+	if thereWasAFold then
+		local row, col = unpack(GetCursor(0))
+		vim.api.nvim_buf_set_mark(0, "f", row, col, {})
+	end
+end, { desc = "󰘖 Toggle Fold" })
+Keymap("n", "\\", "mz`fza`z", { desc = "󰘖 Undo Last Fold Toggle" })
 Keymap("n", "1", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
 Keymap("n", "!", "zi", { desc = "󰘖 Toggle Fold Globally" })
 
