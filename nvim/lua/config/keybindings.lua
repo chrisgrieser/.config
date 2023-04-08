@@ -163,11 +163,16 @@ Keymap("n", "gZ", function()
 end, { desc = "󰘖 Goto previous closed fold" })
 
 -- preview fold
-Keymap("n", "zp", function () require("ufo").peekFoldedLinesUnderCursor(false, true) end, { desc = "󰘖 󰈈 Preview Fold" })
+Keymap(
+	"n",
+	"zp",
+	function() require("ufo").peekFoldedLinesUnderCursor(false, true) end,
+	{ desc = "󰘖 󰈈 Preview Fold" }
+)
 
 -- make n preview fold (since opt.foldopen does not include search)
-Keymap("n", "n", function ()
-	Normal("n")	
+Keymap("n", "n", function()
+	Normal("n")
 	require("ufo").peekFoldedLinesUnderCursor(false, true)
 end, { desc = "n + preview fold" })
 
@@ -402,8 +407,8 @@ end, { desc = "󰌹 Smart URL Opener" })
 
 -- Node Swapping
 -- stylua: ignore start
-Keymap("n", "ü", function () require('sibling-swap').swap_with_right() end, { desc = "󰑃 Move Node Right" })
-Keymap("n", "Ü", function () require('sibling-swap').swap_with_left() end, { desc = "󰑁 Move Node Left" })
+Keymap("n", "ü", function () require("sibling-swap").swap_with_right() end, { desc = "󰑃 Move Node Right" })
+Keymap("n", "Ü", function () require("sibling-swap").swap_with_left() end, { desc = "󰑁 Move Node Left" })
 -- stylua: ignore end
 Autocmd("FileType", {
 	pattern = { "markdown", "text", "gitcommit" },
