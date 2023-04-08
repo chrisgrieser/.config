@@ -57,11 +57,11 @@ function gd() {
 
 
 # short (only last 15 messages)
-alias gl="git log -n 15 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; echo '(…)'"
+alias gl="git log -n 15 --color --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | sed -e 's/origin/o/g'; echo ; echo '(…)'"
 
 # long
 # append `true` to avoid exit code 141: https://www.ingeniousmalarkey.com/2016/07/git-log-exit-code-141.html
-alias gll="git log --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' ; true"
+alias gll="git log --color --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | sed -e 's/origin/o/g' ; echo ; true"
 
 # interactive
 function gli() {
