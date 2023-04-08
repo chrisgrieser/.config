@@ -54,7 +54,7 @@ function M.cycle(window, _)
 			window:copy_to_clipboard(nextScheme)
 			-- for notifications to work correctly, they need to be set to "alert"
 			-- in the macOS notification settings
-			window:toast_notification("Theme:", nextScheme, nil, 4000)
+			window:toast_notification("Theme:".. nextScheme, nil, 4000)
 			return
 		end
 	end

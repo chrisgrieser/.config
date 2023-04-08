@@ -12,9 +12,6 @@ local wt = require("wezterm")
 local theme = require("theme-utils")
 local act = wt.action
 local actFun = wt.action_callback
-local os = require("os")
-local io = require("io")
-local log = wt.log_info
 
 local isAtOffice = wt.hostname():find("mini") ~= nil
 local isAtMother = wt.hostname():find("Mother") ~= nil
@@ -36,6 +33,20 @@ wt.on("gui-startup", function(cmd)
 end)
 
 --------------------------------------------------------------------------------
+-- BETTER PASTE
+local function autoQuotePaste(window, pane)
+	local success, clipb, stderr = wt.run_child_process("pbpaste")
+	if not success then
+		local msg = "pbpaste failed: " .. stderr
+		wt.log_info(msg)
+		window:toast_notification(msg, nil, 4000)
+		return
+	end
+	if clipb:find("^https?://") then clipb = '"' .. clipb .. '"' end
+	pane:paste(clipb)
+end
+
+--------------------------------------------------------------------------------
 -- KEYBINDINGS
 local keybindings = {
 	-- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
@@ -43,7 +54,6 @@ local keybindings = {
 	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "q", mods = "CMD", action = act.QuitApplication },
 	{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
-	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 	{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
 	{ key = "+", mods = "CMD", action = act.IncreaseFontSize },
 	{ key = "-", mods = "CMD", action = act.DecreaseFontSize },
@@ -54,12 +64,14 @@ local keybindings = {
 	{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
 	{ key = "Enter", mods = "SHIFT", action = act.ActivateTabRelative(1) },
 	{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
+	-- { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
+	{ key = "v", mods = "CMD", action = actFun(autoQuotePaste) },
 
-	-- fix keys for German Keyboard, if not done via Karabiner
+	-- fix keys for German Keyboard
 	{ key = "7", mods = "META", action = act.SendString("|") },
-	-- { key = "l", mods = "META", action = act.SendString("@") },
-	-- { key = "8", mods = "META", action = act.SendString("{") },
-	-- { key = "9", mods = "META", action = act.SendString("}") },
+	{ key = "l", mods = "META", action = act.SendString("@") },
+	{ key = "8", mods = "META", action = act.SendString("{") },
+	{ key = "9", mods = "META", action = act.SendString("}") },
 
 	-- using the mapping from the terminal_keybindings.zsh
 	-- undo
@@ -97,7 +109,7 @@ local keybindings = {
 		end),
 	},
 	-- Theme Cycler
-	{ key = "t", mods = "SHIFT|CTRL|ALT", action = wt.action_callback(theme.cycle) },
+	{ key = "t", mods = "SHIFT|CTRL|ALT", action = actFun(theme.cycle) },
 
 	-- MODES
 	-- Search
