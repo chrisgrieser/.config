@@ -114,12 +114,19 @@ Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 Keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
 Keymap("n", "<f1>", function()
 	local thereWasAFold = pcall(Normal, "za")
-	-- mark `f` for fold position
-	if thereWasAFold then
+	if thereWasAFold then -- mark `f` for fold position
 		local row, col = unpack(GetCursor(0))
 		vim.api.nvim_buf_set_mark(0, "f", row, col, {})
 	end
 end, { desc = "󰘖 Toggle Fold" })
+
+-- set foldlevel
+for _, lvl in pairs({0, 1, 2, 3, 4, 5, 6, 7, 8, 9}) do
+	Keymap("n", "z"..tostring(lvl), function ()
+		vim.opt_local.foldlevel = lvl
+	end, { desc = "󰘖 " })
+end
+
 Keymap("n", "zu", "mz`fza`z", { desc = "󰘖 Undo Last Fold Toggle" })
 Keymap("n", "1", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
 Keymap("n", "!", "zi", { desc = "󰘖 Toggle Fold Globally" })

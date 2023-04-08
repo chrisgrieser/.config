@@ -55,7 +55,7 @@ return {
 	{ -- auto-close inactive buffers
 		"chrisgrieser/nvim-early-retirement",
 		dev = true,
-		event = "VeryLazy", 
+		event = "VeryLazy",
 		opts = {
 			retirementAgeMins = 20,
 			ignoredFiletypes = {},
@@ -74,8 +74,7 @@ return {
 				".git",
 				"manifest.json", -- node
 				"info.plist", -- Alfred
-				"stylua.toml", -- lua
-				"selene.toml", -- lua
+				".luarc.json", -- lua
 				".project-root", -- manually marked
 				"=File Hub",
 			},
