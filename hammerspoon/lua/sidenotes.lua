@@ -48,9 +48,9 @@ SidenotesWatcher = Aw.new(function(appName, event, appObj)
 	RunWithDelays(0.05, function()
 		-- INFO if sidenotes glitches, it is the "Hot Side" setting causing
 		-- glitches when mouse is close, not Hammerspoon
-		if not (IsFront { "SideNotes", "Alfred", "CleanShot X", "Espanso" }) then
-			App("SideNotes"):hide()
-		end
+		if IsFront { "SideNotes", "Alfred", "CleanShot X", "Espanso" } then return end
+		local app = App("SideNotes")
+		if app then app:hide() end
 	end)
 
 	-- enlarge on startup
