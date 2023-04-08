@@ -22,3 +22,4 @@ workflows/web-screenshot
 workflows/kill-processes
 workflows/urban-dictonary-search
 workflows/duden-search
+workflows/utf-search

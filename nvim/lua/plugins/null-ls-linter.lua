@@ -12,7 +12,7 @@ local lintersAndFormatters = {
 	"codespell", -- superset of `misspell`, therefore only using codespell
 	"selene", -- lua
 	"stylua", -- lua
-	-- stylelint not available: https://github.com/williamboman/mason.nvim/issues/695
+	"stylelint", -- not its plugins though… https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
 --------------------------------------------------------------------------------
