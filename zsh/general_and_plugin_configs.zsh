@@ -8,14 +8,7 @@ export LC_CTYPE="en_US.UTF-8"
 setopt AUTO_CD              # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
 
-# be lazy and skeip the need to quote URLs when pasting in the terminal
-# https://github.com/johan/zsh/blob/master/Functions/Zle/url-quote-magic
-autoload -U url-quote-magic
-zle -N self-insert url-quote-magic
-setopt +o nomatch # needed, so `?` in URLs is not used as pattern
-
 #───────────────────────────────────────────────────────────────────────────────
-
 
 # you should use
 export YSU_IGNORED_ALIASES=("bi" "bu") # due to homebrew Alfred workflow

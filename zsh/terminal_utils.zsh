@@ -40,12 +40,12 @@ function inspect() {
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		git status --short
 		separator
-		git log -n 5 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'
+		git log -n 4 --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)'
 		separator
+		exa --long --grid --git --git-ignore --no-user --no-permissions --no-time --no-filesize --ignore-glob=.git
+	else
+		exa --all --icons --group-directories-first --sort=modified --ignore-glob=.DS_Store
 	fi
-
-	# shellcheck disable=2012
-	exa
 }
 
 # measure zsh loading time, https://blog.jonlu.ca/posts/speeding-up-zsh
@@ -91,11 +91,6 @@ function zi() {
 	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
 	__zoxide_zi
 	inspect
-}
-
-# macos only
-function p() {
-	qlmanage -p "$1" &>/dev/null
 }
 
 # cd to last directory before quitting. Requires setup in `.zlogout`
