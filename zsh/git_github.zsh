@@ -11,9 +11,9 @@ alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull --recurse-submodules"
 alias restore="git restore --source"    # 1: hash, 2: file -> restore (existing) file
-alias gm="git commit --amend --no-edit" # a[m]end
+alias gm="git add . && git commit --amend --no-edit && git push --force" # a[m]end
 alias gM="git commit --amend"
-alias grem="git remote -v"
+alias rem="git remote -v"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 
 # open GitHub repo
