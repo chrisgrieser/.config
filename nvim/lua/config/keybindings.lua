@@ -368,7 +368,7 @@ end, { desc = "󰜊 Undo since last open" })
 
 --------------------------------------------------------------------------------
 
--- Logging & Debugging
+-- LOGGING & DEBUGGING
 -- stylua: ignore start
 Keymap({ "n", "x" }, "<leader>ll", function() require("funcs.quick-log").log() end, { desc = " log" })
 Keymap({ "n", "x" }, "<leader>lo", function() require("funcs.quick-log").objectlog() end, { desc = " object log" })
@@ -377,6 +377,10 @@ Keymap("n", "<leader>lt", function() require("funcs.quick-log").timelog() end, {
 Keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end, { desc = "  remove log" })
 Keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, { desc = " debugger" })
 -- stylua: ignore end
+
+Keymap("n", "<leader>t", "<Plug>PlenaryTestFile", { desc = " Test Current Spec File" })
+
+--------------------------------------------------------------------------------
 
 -- Replace Mode
 -- needed, since `R` mapped to duplicate line
