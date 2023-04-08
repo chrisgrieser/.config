@@ -34,6 +34,15 @@ local function setHigherBrightnessDuringDay()
 	IMacDisplay:setBrightness(brightness)
 end
 
+local function closeAllFinderWins()
+	local finderWins = App("Finder"):allWindows()
+	if finderWins then
+		for _, win in pairs(finderWins) do
+			win:close()
+		end
+	end
+end
+
 --------------------------------------------------------------------------------
 -- LAYOUTS
 
@@ -47,11 +56,9 @@ local function workLayout()
 	hs.execute("sketchybar --set clock popup.drawing=true")
 
 	-- close
-	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "BetterTouchTool" }
-	for _, win in pairs(App("Finder"):allWindows()) do
-		win:close()
-	end
+	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "BetterTouchTool", "lo-rain" }
 	require("lua.private").closer()
+	closeAllFinderWins()
 
 	-- twitter
 	OpenApp("Twitter")
@@ -65,7 +72,6 @@ local function workLayout()
 	for _, app in pairs(appsToOpen) do
 		AsSoonAsAppRuns(app, function() MoveResize(App(app):mainWindow(), PseudoMaximized) end)
 	end
-
 	MyTimer = hs.timer.waitUntil(function() return AppRunning(appsToOpen) end, function()
 		RestartApp("AltTab") -- fix AltTab not picking up changes
 		App("Mimestream"):activate()
@@ -85,6 +91,7 @@ local function movieLayout()
 	OpenApp { "YouTube", "BetterTouchTool" }
 	QuitApp {
 		"Neovide",
+		"lo-rain",
 		"neovide",
 		"Slack",
 		"Discord",
@@ -125,8 +132,8 @@ UnlockWatcher = c.new(function(event)
 	if not event == c.screensDidUnlock then return end
 	print("🔓 Unlockwatcher triggered.")
 
-	-- HACK since `screensDidUnlock` actually triggered on wake, not unlock…
-	MyTimer = hs.timer.waitUntil(ScreenIsUnlocked, function()
+	-- HACK since `screensDidUnlock` actually triggers on wake, not unlock…
+	UnlockTimer = hs.timer.waitUntil(ScreenIsUnlocked, function()
 		RunWithDelays(0.5, function()
 			selectLayout()
 			setHigherBrightnessDuringDay()
@@ -135,9 +142,9 @@ UnlockWatcher = c.new(function(event)
 	end, 0.2)
 	-- deactivate the timer in the screen is woken but not unlocked
 	RunWithDelays(20, function()
-		if MyTimer and MyTimer:running() then
-			MyTimer:stop()
-			MyTimer = nil ---@diagnostic disable-line: assign-type-mismatch
+		if UnlockTimer and UnlockTimer:running() then
+			UnlockTimer:stop()
+			UnlockTimer = nil ---@diagnostic disable-line: assign-type-mismatch
 		end
 	end)
 end):start()
