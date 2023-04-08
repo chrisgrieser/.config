@@ -75,7 +75,7 @@ return {
 				"manifest.json", -- node
 				"info.plist", -- Alfred
 				"stylua.toml", -- lua
-				".stylua.toml", -- lua
+				"selene.toml", -- lua
 				".project-root", -- manually marked
 				"=File Hub",
 			},
