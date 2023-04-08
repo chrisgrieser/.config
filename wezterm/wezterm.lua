@@ -34,8 +34,9 @@ end)
 
 --------------------------------------------------------------------------------
 -- BETTER PASTE
-local function autoQuotePaste(window, pane)
-	local success, clipb, stderr = wt.run_child_process("pbpaste")
+local function autoQuotePastedUrls(window, pane)
+	local pasteCmd = "pbpaste" -- change this if not on macOS
+	local success, clipb, stderr = wt.run_child_process { pasteCmd }
 	if not success then
 		local msg = "pbpaste failed: " .. stderr
 		wt.log_info(msg)
@@ -64,8 +65,7 @@ local keybindings = {
 	{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
 	{ key = "Enter", mods = "SHIFT", action = act.ActivateTabRelative(1) },
 	{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
-	-- { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
-	{ key = "v", mods = "CMD", action = actFun(autoQuotePaste) },
+	{ key = "v", mods = "CMD", action = actFun(autoQuotePastedUrls) },
 
 	-- fix keys for German Keyboard
 	{ key = "7", mods = "META", action = act.SendString("|") },
