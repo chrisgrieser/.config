@@ -17,7 +17,7 @@ local lintersAndFormatters = {
 }
 --------------------------------------------------------------------------------
 -- INFO
--- eslint, stylua, selene and prettier use project-specific config files
+-- eslint, stylua, and prettier use project-specific config files
 -- the other linters use a global config file
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
@@ -58,13 +58,12 @@ local function nullSources()
 		},
 
 		-- JS/TS
+		-- INFO when no prettierrc can be found, will use prettier's default
+		-- config, which includes setting everything to spaces. Therefore only
+		-- activating when config file is found
 		builtins.formatting.prettier.with {
 			-- using different linters for them
 			disabled_filetypes = { "css", "markdown" },
-			-- INFO when no prettierrc can be found, will use prettier's default
-			-- config, which includes setting everything to spaces. Therefore only
-			-- activating when config file is found
-			condition = function(utils) return utils.root_has_file_matches ( "%.prettierrc" ) end,
 		},
 
 		-- CSS
@@ -83,12 +82,8 @@ local function nullSources()
 		},
 
 		-- LUA
-		builtins.formatting.stylua.with {
-			-- condition = function(utils) return utils.root_has_file { "stylua.toml", ".stylua.toml" } end,
-		},
-		builtins.diagnostics.selene.with {
-			-- condition = function(utils) return utils.root_has_file { "selene.toml" } end,
-		},
+		builtins.formatting.stylua,
+		builtins.diagnostics.selene,
 
 		-- YAML
 		builtins.diagnostics.yamllint.with {
@@ -107,13 +102,8 @@ local function nullSources()
 		},
 		builtins.diagnostics.markdownlint.with {
 			-- disabling rules that are autofixed already
-			extra_args = {
-				"--disable",
-				"trailing-spaces",
-				"no-multiple-blanks",
-				"--config",
-				LinterConfig .. "/markdownlintrc",
-			},
+			-- stylua: ignore
+			extra_args = { "--disable", "trailing-spaces", "no-multiple-blanks", "--config", LinterConfig .. "/markdownlintrc" },
 		},
 		builtins.completion.spell.with { -- vim's built-in spell-suggestions
 			filetypes = { "markdown", "text", "gitcommit" },
@@ -130,9 +120,9 @@ return {
 		config = function()
 			require("null-ls").setup {
 				border = BorderStyle,
-				-- `.project-root` also used for projects.nvim
-				root_dir = require("null-ls.utils").root_pattern(".project-root", ".git", "selene.toml"),
 				sources = nullSources(),
+				-- nil = use cwd (which is determined by projects.nvim) https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/CONFIG.md#root_dir-function
+				root_dir = nil,
 			}
 		end,
 	},
