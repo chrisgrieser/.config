@@ -58,11 +58,13 @@ local function nullSources()
 		},
 
 		-- JS/TS
-		-- INFO when no prettierrc can be found, will use prettiers default
-		-- config, which includes setting everything to spaces…
 		builtins.formatting.prettier.with {
-			disabled_filetypes = { "css", "markdown" }, -- using different linters for them
-			condition = function(utils) return utils.root_has_file { "selene.toml" } end,
+			-- using different linters for them
+			disabled_filetypes = { "css", "markdown" },
+			-- INFO when no prettierrc can be found, will use prettier's default
+			-- config, which includes setting everything to spaces. Therefore only
+			-- activating when config file is found
+			condition = function(utils) return utils.root_has_file_matches ( "%.prettierrc" ) end,
 		},
 
 		-- CSS
@@ -81,8 +83,12 @@ local function nullSources()
 		},
 
 		-- LUA
-		builtins.formatting.stylua,
-		builtins.diagnostics.selene,
+		builtins.formatting.stylua.with {
+			-- condition = function(utils) return utils.root_has_file { "stylua.toml", ".stylua.toml" } end,
+		},
+		builtins.diagnostics.selene.with {
+			-- condition = function(utils) return utils.root_has_file { "selene.toml" } end,
+		},
 
 		-- YAML
 		builtins.diagnostics.yamllint.with {
