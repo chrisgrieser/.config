@@ -833,9 +833,7 @@ for _, key in ipairs { "h", "l" } do
 		vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
 
 		local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-		if shouldOpenFold and (key == "h" or key == "l" ) then
-			key = key .. "zv"
-		end
+		if shouldOpenFold and (key == "h" or key == "l" ) then Normal("zv") end
 		Normal(key)
 	end, { desc = key .. " (delaytrain)" })
 end
