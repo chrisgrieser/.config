@@ -379,8 +379,8 @@ Keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, 
 -- stylua: ignore end
 
 -- Replace Mode
--- needed, since `R` mapped to duplicate line, and <C-r> is free since remapped to U
-Keymap("n", "<C-r>", "R", { desc = "Replace Mode" })
+-- needed, since `R` mapped to duplicate line
+Keymap("n", "<leader>R", "R", { desc = "Replace Mode" })
 
 -- URL Opening (forward-seeking `gx`)
 Keymap("n", "gx", function()
