@@ -31,9 +31,5 @@ fortune -n270 -s | sed 's/--/\n--/g' | $say_or_think -W$width "$random_emotion"
 # show files in current directory
 
 echo
-# shellcheck disable=SC2012
-if [[ $(ls | wc -l) -lt 20 ]] && [[ $(ls | wc -l) -gt 0 ]]; then
-	separator
-	exa
-	echo
-fi
+separator
+inspect

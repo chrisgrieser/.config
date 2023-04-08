@@ -827,11 +827,16 @@ for _, key in ipairs { "h", "l" } do
 		-- abort when recording, since this only leads to bugs then
 		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
 
-		if count <= maxUsage then
-			count = count + 1
-			vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
-			Normal(key)
+		if count > maxUsage then return end
+
+		count = count + 1
+		vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
+
+		local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
+		if shouldOpenFold and (key == "h" or key == "l" ) then
+			key = key .. "zv"
 		end
+		Normal(key)
 	end, { desc = key .. " (delaytrain)" })
 end
 
