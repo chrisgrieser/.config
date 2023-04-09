@@ -65,7 +65,7 @@ Keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { d
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 Keymap({ "o", "x" }, "H", "^")
 Keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long indented lines
-Keymap({ "n", "x", "o" }, "L", "$")
+Keymap({ "n", "x" }, "L", "$") -- not using "o", since used for link textobj
 
 Keymap({ "n", "x" }, "J", "6j")
 Keymap({ "n", "x" }, "K", "6k")
@@ -77,6 +77,7 @@ Keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 Keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
+Keymap("n", "-", "/") -- better for German keyboard
 Keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 Keymap("n", "+", "*", { desc = "Search word under cursor" })
 Keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
