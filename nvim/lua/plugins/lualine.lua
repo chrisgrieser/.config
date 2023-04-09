@@ -337,6 +337,6 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "UIEnter",
+	lazy = false, -- so there is less flickering of the UI on startup
 	opts = lualineConfig,
 }
