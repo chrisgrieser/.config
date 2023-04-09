@@ -209,7 +209,7 @@ rules:
           - { key_code: "2", modifiers: [shift] }
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
-      # Grave ^ -> f12, and that in turn remapped in the app (switching keyboard layout laggy)
+      # Grave ^ -> f1, and that in turn remapped in the app (switching keyboard layout laggy)
       - type: basic
         from: { key_code: non_us_backslash }
         conditions:
@@ -219,7 +219,7 @@ rules:
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
         to:
-          - { key_code: "f1" }
+          - { key_code: f1 }
       # Tilde ~
       - type: basic
         from: { key_code: "n", modifiers: { mandatory: [option] } }

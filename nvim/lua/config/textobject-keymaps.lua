@@ -1,22 +1,26 @@
+local keymap = vim.keymap.set
+local cmd = vim.cmd
+--------------------------------------------------------------------------------
+
 -- REMAPPING OF BUILTIN TEXT OBJECTS
-Keymap({ "o", "x" }, "iq", 'i"') -- [q]uote
-Keymap({ "o", "x" }, "aq", 'a"')
-Keymap({ "o", "x" }, "iy", "i'") -- s[y]ngle quote
-Keymap({ "o", "x" }, "ay", "a'")
-Keymap({ "o", "x" }, "ae", "a`") -- t[e]mplate-string / inline cod[e]
-Keymap({ "o", "x" }, "ie", "i`")
-Keymap({ "o", "x" }, "ir", "i]") -- [r]ectangular brackets
-Keymap({ "o", "x" }, "ar", "a]")
-Keymap({ "o", "x" }, "ic", "i}") -- [c]urly brackets
-Keymap({ "o", "x" }, "ac", "a}")
-Keymap({ "o", "x" }, "am", "aW") -- [m]assive word
-Keymap({ "o", "x" }, "im", "iW")
+keymap({ "o", "x" }, "iq", 'i"') -- [q]uote
+keymap({ "o", "x" }, "aq", 'a"')
+keymap({ "o", "x" }, "iy", "i'") -- s[y]ngle quote
+keymap({ "o", "x" }, "ay", "a'")
+keymap({ "o", "x" }, "ae", "a`") -- t[e]mplate-string / inline cod[e]
+keymap({ "o", "x" }, "ie", "i`")
+keymap({ "o", "x" }, "ir", "i]") -- [r]ectangular brackets
+keymap({ "o", "x" }, "ar", "a]")
+keymap({ "o", "x" }, "ic", "i}") -- [c]urly brackets
+keymap({ "o", "x" }, "ac", "a}")
+keymap({ "o", "x" }, "am", "aW") -- [m]assive word
+keymap({ "o", "x" }, "im", "iW")
 
 --------------------------------------------------------------------------------
 -- QUICK TEXTOBJ OPERATIONS
-Keymap("n", "<Space>", '"_ciw', { desc = "change word" })
-Keymap("n", "<M-S-CR>", '"_daw', { desc = "delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
-Keymap("i", "<M-S-CR>", "<Space>") -- FIX accidental triggering in insert mode when typing quickly
+keymap("n", "<Space>", '"_ciw', { desc = "change word" })
+keymap("n", "<F2>", '"_daw', { desc = "delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
+keymap("i", "<F2>", "<Space>") -- FIX accidental triggering in insert mode when typing quickly
 
 --------------------------------------------------------------------------------
 -- STICKY COMMENT TEXT OBJECT ACTIONS
@@ -24,18 +28,18 @@ Keymap("i", "<M-S-CR>", "<Space>") -- FIX accidental triggering in insert mode w
 -- overlap in visual mode where q can be object and operator. However, this
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
-Keymap("n", "dq", function()
+keymap("n", "dq", function()
 	local prevCursor = GetCursor(0)
-	Cmd.normal { "d&&&" } -- without bang for remapping of COM
+	cmd.normal { "d&&&" } -- without bang for remapping of COM
 	SetCursor(0, prevCursor)
 end, { remap = true, desc = "delete comment" })
 
 -- manually changed cq to preserve the commentstring
-Keymap("n", "cq", function()
-	Cmd.normal { "d&&&" } -- without bang for remapping
-	Cmd.normal { "x" }
-	Cmd.normal { "Q" }
-	Cmd.startinsert { bang = true }
+keymap("n", "cq", function()
+	cmd.normal { "d&&&" } -- without bang for remapping
+	cmd.normal { "x" }
+	cmd.normal { "Q" }
+	cmd.startinsert { bang = true }
 end, { desc = "change comment" })
 
 -- INFO omap q &&& is done is treesitter config, takes care of other operators
@@ -70,15 +74,15 @@ local function commented_lines_textobject()
 	vim.fn.execute("normal! " .. rs .. "GV" .. re .. "G")
 end
 
-Keymap("o", "u", commented_lines_textobject, { desc = "Big comment textobj" })
+keymap("o", "u", commented_lines_textobject, { desc = "Big comment textobj" })
 
 --------------------------------------------------------------------------------
 -- MISC Plugins
 -- hint textobj
-Keymap({ "o", "x" }, "h", function() require("tsht").nodes() end, { desc = "hint textobj" })
+keymap({ "o", "x" }, "h", function() require("tsht").nodes() end, { desc = "hint textobj" })
 
 -- Git Hunks
-Keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
+keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
 
 --------------------------------------------------------------------------------
 
@@ -86,63 +90,63 @@ Keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" 
 -- stylua: ignore start
 
 -- space: subword
-Keymap({"o", "x"}, "<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "inner subword textobj" })
+keymap({"o", "x"}, "<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "inner subword textobj" })
 
 -- L: link
-Keymap("o", "L", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "link textobj" })
+keymap("o", "L", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "link textobj" })
 
 -- iv/av: value textobj
-Keymap({ "x", "o" }, "iv", "<cmd>lua require('various-textobjs').value(true)<CR>", { desc = "inner value textobj" })
-Keymap({ "x", "o" }, "av", "<cmd>lua require('various-textobjs').value(false)<CR>", { desc = "outer value textobj" })
+keymap({ "x", "o" }, "iv", "<cmd>lua require('various-textobjs').value(true)<CR>", { desc = "inner value textobj" })
+keymap({ "x", "o" }, "av", "<cmd>lua require('various-textobjs').value(false)<CR>", { desc = "outer value textobj" })
 
 -- ak: outer key textobj
 -- INFO `ik` defined via treesitter to exclude `local` and `let`
 -- INFO mapping the *inner* obj to `ak`, since it includes `local` and `let`
 -- (various textobjs' outer key includes the "=" and ":" as well)
-Keymap({ "x", "o" }, "ak", "<cmd>lua require('various-textobjs').key(true)<CR>", { desc = "outer key textobj" })
+keymap({ "x", "o" }, "ak", "<cmd>lua require('various-textobjs').key(true)<CR>", { desc = "outer key textobj" })
 
 -- n: [n]ear end of the line
-Keymap({ "o", "x" }, "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", { desc = "near EoL textobj" })
+keymap({ "o", "x" }, "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", { desc = "near EoL textobj" })
 
 -- m: to next closing bracket
-Keymap({ "o", "x" }, "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", { desc = "to next closing bracket textobj" })
+keymap({ "o", "x" }, "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", { desc = "to next closing bracket textobj" })
 
 -- o: c[o]lumn textobj
-Keymap("o", "o", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "column textobj" })
+keymap("o", "o", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "column textobj" })
 
 -- ag: entire buffer textobj
-Keymap( { "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "entire buffer textobj" })
+keymap( { "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "entire buffer textobj" })
 
 -- az/iz: fold textobj
-Keymap( { "x", "o" }, "az", "<cmd>lua require('various-textobjs').closedFold(false)<CR>", { desc = "outer fold textobj" })
-Keymap( { "x", "o" }, "iz", "<cmd>lua require('various-textobjs').closedFold(true)<CR>", { desc = "inner fold textobj" })
+keymap( { "x", "o" }, "az", "<cmd>lua require('various-textobjs').closedFold(false)<CR>", { desc = "outer fold textobj" })
+keymap( { "x", "o" }, "iz", "<cmd>lua require('various-textobjs').closedFold(true)<CR>", { desc = "inner fold textobj" })
 
 -- a./i.: chainMember textobj
-Keymap( { "x", "o" }, "a.", "<cmd>lua require('various-textobjs').chainMember(false)<CR>", { desc = "outer chainMember textobj" })
-Keymap( { "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember(true)<CR>", { desc = "inner chainMember textobj" })
+keymap( { "x", "o" }, "a.", "<cmd>lua require('various-textobjs').chainMember(false)<CR>", { desc = "outer chainMember textobj" })
+keymap( { "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember(true)<CR>", { desc = "inner chainMember textobj" })
 
 -- r: [r]est of paragraph/indentation (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
-Keymap("o", "rp", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", { desc = "󰠲 rest of paragraph textobj" })
-Keymap("o", "ri", "<cmd>lua require('various-textobjs').restOfIndentation()<CR>", { desc = "󰠲 rest of indentation textobj" })
-Keymap("o", "rg", "G", { desc = "󰠲 rest of buffer textobj" })
+keymap("o", "rp", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", { desc = "󱡔 rest of paragraph textobj" })
+keymap("o", "ri", "<cmd>lua require('various-textobjs').restOfIndentation()<CR>", { desc = "󱡔 rest of indentation textobj" })
+keymap("o", "rg", "G", { desc = "󱡔 rest of buffer textobj" })
 
 -- ge: diagnostic textobj (similar to ge for the next diagnostic)
-Keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", { desc = "diagnostic textobj" })
+keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", { desc = "diagnostic textobj" })
 
 -- iR/aR: double square brackets
-Keymap( { "x", "o" }, "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(true)<CR>", { desc = "inner double square bracket" })
-Keymap( { "x", "o" }, "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(false)<CR>", { desc = "outer double square bracket" })
+keymap( { "x", "o" }, "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(true)<CR>", { desc = "inner double square bracket" })
+keymap( { "x", "o" }, "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(false)<CR>", { desc = "outer double square bracket" })
 
 -- ii/ai: indentation textobj
-Keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(true, true)<CR>", { desc = "inner indent textobj" })
-Keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "outer indent textobj" })
+keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(true, true)<CR>", { desc = "inner indent textobj" })
+keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "outer indent textobj" })
 
 Autocmd("FileType", {
 	callback = function()
 		local indentedFts = { "python", "yaml", "markdown", "gitconfig" }
 		if vim.tbl_contains(indentedFts, Bo.filetype) then
-			Keymap( { "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { buffer = true, desc = "indent textobj w/ start border" })
+			keymap( { "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { buffer = true, desc = "indent textobj w/ start border" })
 		end
 	end,
 })
@@ -151,8 +155,8 @@ Autocmd("FileType", {
 	callback = function()
 		local pipeFiletypes = { "sh", "zsh", "bash" }
 		if vim.tbl_contains(pipeFiletypes, Bo.filetype) then
-			Keymap( { "x", "o" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { buffer = true, desc = "inner pipe textobj" })
-			Keymap( { "x", "o" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { buffer = true, desc = "outer pipe textobj" })
+			keymap( { "x", "o" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { buffer = true, desc = "inner pipe textobj" })
+			keymap( { "x", "o" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { buffer = true, desc = "outer pipe textobj" })
 		end
 	end,
 })

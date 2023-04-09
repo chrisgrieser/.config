@@ -1,24 +1,25 @@
-require("config.utils")
 local g = vim.g
+local keymap = vim.keymap.set
+local fn = vim.fn
 --------------------------------------------------------------------------------
 
 -- keep the register clean
-Keymap("n", "x", '"_x')
-Keymap({ "n", "x" }, "c", '"_c')
-Keymap("n", "cc", '"_cc')
-Keymap("n", "C", '"_C')
-Keymap("x", "p", "P", { desc = "paste without switching register" })
+keymap("n", "x", '"_x')
+keymap({ "n", "x" }, "c", '"_c')
+keymap("n", "cc", '"_cc')
+keymap("n", "C", '"_C')
+keymap("x", "p", "P", { desc = "Paste without switching register" })
 
 -- do not clutter the register if blank line is deleted
-Keymap("n", "dd", function()
-	local isBlankLine = Fn.getline("."):find("^%s*$") ---@diagnostic disable-line: param-type-mismatch, undefined-field
+keymap("n", "dd", function()
+	local isBlankLine = fn.getline("."):find("^%s*$") ---@diagnostic disable-line: param-type-mismatch, undefined-field
 	local expr = isBlankLine and '"_dd' or "dd"
 	return expr
 end, { expr = true })
 
 --------------------------------------------------------------------------------
 -- Yanky
-vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)", { desc = "paste (Yanky)" })
+vim.keymap.set("n", "p", "<Plug>(YankyPutAfter)", { desc = "Paste (Yanky)" })
 vim.keymap.set("n", "P", "<Plug>(YankyCycleForward)", { desc = "Cycle Yankring" })
 vim.keymap.set(
 	"n",
@@ -29,10 +30,10 @@ vim.keymap.set(
 --------------------------------------------------------------------------------
 
 -- paste charwise reg as linewise & vice versa
-Keymap("n", "gp", function()
+keymap("n", "gp", function()
 	local reg = "+"
-	local regContent = Fn.getreg(reg)
-	local isLinewise = Fn.getregtype(reg) == "V"
+	local regContent = fn.getreg(reg)
+	local isLinewise = fn.getregtype(reg) == "V"
 
 	local targetRegType
 	if isLinewise then
@@ -42,7 +43,7 @@ Keymap("n", "gp", function()
 		targetRegType = "V"
 	end
 
-	Fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
+	fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
 	Normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
 	if targetRegType == "V" then Normal("==") end
 end, { desc = "paste differently" })
@@ -61,7 +62,7 @@ Autocmd("TextYankPost", {
 		-- highlighted yank
 		vim.highlight.on_yank { timeout = 1500 }
 
-		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
+		if fn.reg_recording() ~= "" or fn.reg_executing() ~= "" then return end
 
 		-- sticky cursor
 		if vim.v.event.operator == "y" then SetCursor(0, g.cursorPreYank) end
