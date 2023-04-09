@@ -1,3 +1,7 @@
+local fn = vim.fn
+local b = vim.b
+--------------------------------------------------------------------------------
+
 -- set foldlevel
 for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
 	-- stylua: ignore
@@ -16,9 +20,9 @@ end, { desc = "󰘖 Close toplevel folds" })
 
 -- goto next/prev closed fold
 Keymap("n", "gz", function()
-	local lnum = Fn.line(".")
-	local lastLine = Fn.line("$")
-	local endOfFold = Fn.foldclosedend(lnum)
+	local lnum = fn.line(".")
+	local lastLine = fn.line("$")
+	local endOfFold = fn.foldclosedend(lnum)
 	if endOfFold > 0 then lnum = endOfFold end
 	repeat
 		if lnum >= lastLine then
@@ -52,15 +56,15 @@ Keymap("n", "zp", function() require("ufo").peekFoldedLinesUnderCursor(false, tr
 
 -- make n preview fold (since opt.foldopen does not include search)
 Keymap("n", "n", function()
-	Normal("nzv")
-
+	Normal("n")
+	require("ufo").peekFoldedLinesUnderCursor(false, true)
 end, { desc = "n + open fold + remember" })
 
 -- h closes (similar to how l opens due to opt.foldopen="hor")
 Keymap("n", "h", function()
 	local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-	local firstColumn = vim.fn.col(".") == 1
-	local notOnFold = vim.fn.foldclosed(".") == -1 ---@diagnostic disable-line: param-type-mismatch
+	local firstColumn = fn.col(".") == 1
+	local notOnFold = fn.foldclosed(".") == -1 ---@diagnostic disable-line: param-type-mismatch
 	if firstColumn and shouldOpenFold and notOnFold then
 		pcall(Normal, "zc")
 	else
@@ -70,7 +74,7 @@ end, { desc = "h (+ close fold at BoL)" })
 
 Keymap("n", "l", function()
 	local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-	local isOnFold = vim.fn.foldclosed(".") > -1 ---@diagnostic disable-line: param-type-mismatch
+	local isOnFold = fn.foldclosed(".") > -1 ---@diagnostic disable-line: param-type-mismatch
 	if shouldOpenFold and isOnFold then
 		local hasOpendFold = pcall(Normal, "zo")
 		if hasOpendFold then Normal("mf") end -- remember last opened fold in f mark

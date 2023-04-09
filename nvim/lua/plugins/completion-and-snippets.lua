@@ -9,7 +9,7 @@ local s = {
 	snippets = { name = "luasnip" },
 	lsp = { name = "nvim_lsp" },
 	treesitter = { name = "treesitter" },
-	cmdline_history = { name = "cmdline_history", keyword_length = 3 },
+	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },
 }
 
@@ -61,7 +61,7 @@ local source_icons = {
 	luasnip = "󰞘",
 	emoji = "󰇵",
 	nerdfont = "󰇳",
-	cmdline = "",
+	cmdline = " ⌘",
 	cmdline_history = "󰋚",
 	path = "",
 }
@@ -298,7 +298,11 @@ local function cmdlineCompletionConfig()
 
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
-		sources = { s.buffer },
+		sources = {
+			s.cmdline_history, -- also gets search history when used here
+		}, { -- second array only relevant when no source from the first matches
+			s.buffer,
+		},
 	})
 end
 
