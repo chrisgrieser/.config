@@ -53,18 +53,28 @@ return {
 					position = "left",
 				},
 				mappings = {
-					list = {
-						["<S-CR>"] = actions.enter_win("preview"),
-					},
-					preview = {
-						["<S-CR>"] = actions.enter_win("list"),
-					},
+					list = { ["<S-CR>"] = actions.enter_win("preview") },
+					preview = { ["<S-CR>"] = actions.enter_win("list") },
 				},
 				hooks = {
 					-- jump directly to definition if there is only one https://github.com/dnlhc/glance.nvim#before_open
-					before_open = function(results, open, jump)
+					before_open = function(results, open, jump, method)
+						print(method)
+						-- filter out current line
+						local curLn = vim.fn.line(".")
+						print("curLn:", curLn)
+						local curUri = vim.uri_from_bufnr(0)
+						print("curUri:", curUri)
+						results = vim.tbl_filter(function(result)
+							local targetLine = result.range.start.line
+							print("targetLine:", targetLine)
+							local targetUri = result.uri or result.targetUri
+							print("targetUri:", targetUri)
+							local isCurrentLine = (targetLine == curLn) and (targetUri == curUri)
+							return not isCurrentLine
+						end, results)
 						if #results == 1 then
-							jump()
+							jump(results[1])
 						else
 							open()
 						end
