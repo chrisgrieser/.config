@@ -4,8 +4,8 @@ require("config.utils")
 -- REMAPPING OF BUILTIN TEXT OBJECTS
 Keymap({ "o", "x" }, "iq", 'i"') -- [q]uote
 Keymap({ "o", "x" }, "aq", 'a"')
-Keymap({ "o", "x" }, "iz", "i'") -- [z]ingle quote
-Keymap({ "o", "x" }, "az", "a'")
+Keymap({ "o", "x" }, "iy", "i'") -- s[y]ngle quote
+Keymap({ "o", "x" }, "ay", "a'")
 Keymap({ "o", "x" }, "ae", "a`") -- t[e]mplate-string / inline cod[e]
 Keymap({ "o", "x" }, "ie", "i`")
 Keymap({ "o", "x" }, "ir", "i]") -- [r]ectangular brackets
@@ -116,10 +116,9 @@ Keymap("o", "o", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "
 -- ag: entire buffer textobj
 Keymap( { "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "entire buffer textobj" })
 
--- a^/i^: fold textobj
--- (f1 remapped via Karabiner)
-Keymap( { "x", "o" }, "a<f1>", "<cmd>lua require('various-textobjs').closedFold(false)<CR>", { desc = "outer fold textobj" })
-Keymap( { "x", "o" }, "i<f1>", "<cmd>lua require('various-textobjs').closedFold(true)<CR>", { desc = "inner fold textobj" })
+-- az/iz: fold textobj
+Keymap( { "x", "o" }, "az", "<cmd>lua require('various-textobjs').closedFold(false)<CR>", { desc = "outer fold textobj" })
+Keymap( { "x", "o" }, "iz", "<cmd>lua require('various-textobjs').closedFold(true)<CR>", { desc = "inner fold textobj" })
 
 -- a./i.: chainMember textobj
 Keymap( { "x", "o" }, "a.", "<cmd>lua require('various-textobjs').chainMember(false)<CR>", { desc = "outer chainMember textobj" })
