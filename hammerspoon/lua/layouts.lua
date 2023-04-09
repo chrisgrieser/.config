@@ -72,10 +72,11 @@ local function workLayout()
 	for _, app in pairs(appsToOpen) do
 		AsSoonAsAppRuns(app, function() MoveResize(App(app):mainWindow(), PseudoMaximized) end)
 	end
-	MyTimer = hs.timer.waitUntil(function() return AppRunning(appsToOpen) end, function()
-		RestartApp("AltTab") -- fix AltTab not picking up changes
-		App("Mimestream"):activate()
-	end, 0.2)
+	MyTimer = hs.timer.waitUntil(
+		function() return AppRunning(appsToOpen) end,
+		function() App("Mimestream"):activate() end,
+		0.2
+	)
 
 	print("🔲 WorkLayout: done")
 end
