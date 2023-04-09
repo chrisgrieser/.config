@@ -1,5 +1,9 @@
-require("config.utils")
+
+require("config.folding-keymaps")
+require("config.textobject-keymaps")
+
 --------------------------------------------------------------------------------
+
 -- META
 
 -- search keymaps
@@ -108,80 +112,6 @@ Keymap("n", "gC", "g,", { desc = "goto previous change" })
 Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 
 --------------------------------------------------------------------------------
--- FOLDING
-
--- toggle current fold
-Keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
-Keymap("n", "<f1>", function()
-	local thereWasAFold = pcall(Normal, "za")
-	if thereWasAFold then -- mark `f` for fold position
-		local row, col = unpack(GetCursor(0))
-		vim.api.nvim_buf_set_mark(0, "f", row, col, {})
-	end
-end, { desc = "󰘖 Toggle Fold" })
-
--- set foldlevel
-for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
-	-- stylua: ignore
-	Keymap("n", "z"..tostring(lvl), function () vim.opt_local.foldlevel = lvl end, { desc = "󰘖 Set Fold Level" })
-end
-
-Keymap("n", "zu", "mz`fza`z", { desc = "󰘖 Undo Last Fold Toggle" })
-Keymap("n", "1", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
-
--- toggle all toplevel folds
-Keymap("n", "zz", function()
-	Cmd("%foldclose") -- close toplevel folds
-	Cmd("silent! normal! zo") -- open fold cursor is standing on
-end, { desc = "󰘖 Close toplevel folds" })
-
--- goto next/prev closed fold
-Keymap("n", "gz", function()
-	local lnum = Fn.line(".")
-	local lastLine = Fn.line("$")
-	local endOfFold = Fn.foldclosedend(lnum)
-	if endOfFold > 0 then lnum = endOfFold end
-	repeat
-		if lnum >= lastLine then
-			vim.notify("No more fold in this file.")
-			return
-		end
-		lnum = lnum + 1
-		local isClosedFold = Fn.foldclosed(lnum) > 0
-	until isClosedFold
-	Normal(tostring(lnum) .. "G")
-end, { desc = "󰘖 Goto next closed fold" })
-
-Keymap("n", "gZ", function()
-	local lnum = Fn.line(".")
-	local startOfFold = Fn.foldclosed(lnum)
-	if startOfFold > 0 then lnum = startOfFold end
-	repeat
-		if lnum <= 1 then
-			vim.notify("No more closed fold in this file.")
-			return
-		end
-		lnum = lnum - 1
-		local isClosedFold = Fn.foldclosed(lnum) > 0
-	until isClosedFold
-	Normal(tostring(lnum) .. "G")
-end, { desc = "󰘖 Goto previous closed fold" })
-
--- preview fold
-Keymap(
-	"n",
-	"zp",
-	function() require("ufo").peekFoldedLinesUnderCursor(false, true) end,
-	{ desc = "󰘖 󰈈 Preview Fold" }
-)
-
--- make n preview fold (since opt.foldopen does not include search)
-Keymap("n", "n", function()
-	Normal("n")
-	require("ufo").peekFoldedLinesUnderCursor(false, true)
-end, { desc = "n + preview fold" })
-
---------------------------------------------------------------------------------
 -- EDITING
 
 -- NUMBERS
@@ -253,7 +183,6 @@ Keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = 
 
 -- [z]pelling [l]ist
 Keymap("n", "zl", function() Cmd.Telescope("spell_suggest") end, { desc = "󰓆 suggest" })
-Keymap("n", "za", "1z=", { desc = "󰓆 autofix" }) -- [a]utofix word under cursor
 
 ---add word under cursor to vale dictionary
 ---@param mode string accept|reject
@@ -388,8 +317,6 @@ Keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end
 Keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, { desc = " debugger" })
 -- stylua: ignore end
 
-Keymap("n", "<leader>t", "<Plug>PlenaryTestFile", { desc = " Test Current Spec File" })
-
 --------------------------------------------------------------------------------
 
 -- Replace Mode
@@ -468,9 +395,9 @@ Keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 
 -- for consistency with terminal buffers also <S-CR>
 -- stylua: ignore start
-Keymap("n", "<S-CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
-Keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "switch to alt buffer/window" })
-Keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "Cycle Buffers" })
+Keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "alt buffer" })
+Keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "Cybu: Next Buffer" })
+Keymap("n", "<S-CR>", "<C-w>w", { desc = "Next window" })
 
 Keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window" })
 Keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "reopen last buffer" })
@@ -760,11 +687,12 @@ end, { desc = " Toggle Wrap" })
 Keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 Keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 
-Keymap("n", "6", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
+Keymap("n", "<leader>tt", "<Plug>PlenaryTestFile", { desc = " Test Current Spec File" })
+Keymap("n", "<leader>te", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
 -- stylua: ignore
-Keymap( "x", "6", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
+Keymap( "x", "<leader>te", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
 
-Keymap("n", "7", function()
+Keymap("n", "<leader>tc", function()
 	local isCodiBuffer = Bo.buftype ~= ""
 	if isCodiBuffer then
 		Cmd.CodiExpand() -- multiline output for the current line
@@ -775,15 +703,15 @@ Keymap("n", "7", function()
 end, { desc = " Codi" })
 
 -- edit embedded filetype
-Keymap("n", "5", function()
+Keymap("n", "<leader>ti", function()
 	if Bo.filetype ~= "markdown" then
 		vim.notify("Only markdown codeblocks can be edited without a selection.")
 		return
 	end
 	Cmd.InlineEdit()
 	Keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
-end, { desc = ":InlineEdit" })
-Keymap("x", "5", function()
+end, { desc = " InlineEdit" })
+Keymap("x", "<leader>ti", function()
 	local fts = { "applescript", "bash", "vim" }
 	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 		if not ft then return end
@@ -791,7 +719,7 @@ Keymap("x", "5", function()
 		Cmd("'<,'>InlineEdit " .. ft)
 		Keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
 	end)
-end, { desc = ":InlineEdit" })
+end, { desc = " InlineEdit" })
 
 --------------------------------------------------------------------------------
 
@@ -832,28 +760,5 @@ Autocmd("FileType", {
 		end
 	end,
 })
-
---------------------------------------------------------------------------------
-
--- -- Simple version of the delaytrain.nvim
--- for _, key in ipairs { "h", "l" } do
--- 	local timeout = 3000
--- 	local maxUsage = 8
---
--- 	local count = 0
--- 	Keymap("n", key, function()
--- 		-- abort when recording, since this only leads to bugs then
--- 		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
---
--- 		if count > maxUsage then return end
---
--- 		count = count + 1
--- 		vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
---
--- 		local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
--- 		if shouldOpenFold and (key == "h" or key == "l") then Normal("zv") end
--- 		Normal(key)
--- 	end, { desc = key .. " (delaytrain)" })
--- end
 
 --------------------------------------------------------------------------------
