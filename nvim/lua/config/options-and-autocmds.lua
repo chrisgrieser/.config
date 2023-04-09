@@ -211,9 +211,7 @@ Autocmd("FileType", {
 -- FOLDING
 
 -- fold settings
-opt.foldenable = true
-opt.foldminlines = 2
-opt.foldlevelstart = 6 -- close deep folds at the beginning; only applies to new buffers
+opt.foldlevelstart = 5 -- close deep folds at the beginning; only applies to new buffers
 opt.foldopen:remove { "search" } -- less unintentional opening of folds
 
 -- Remember folds and cursor

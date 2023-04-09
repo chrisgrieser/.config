@@ -1,9 +1,8 @@
-
+-- require more keymaps
 require("config.folding-keymaps")
 require("config.textobject-keymaps")
 
 --------------------------------------------------------------------------------
-
 -- META
 
 -- search keymaps
@@ -535,6 +534,8 @@ Keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { d
 -- Global (so usable by null-ls)
 Keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 Keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
+-- stylua: ignore
+Keymap("n", "<leader>e", function() Cmd.Telescope("diagnostics") end, { desc = " 󰒕 Search Diagnostics" })
 
 -- Keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Show Diagnostic" })
 Keymap("n", "<leader>d", function()
