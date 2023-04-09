@@ -17,7 +17,7 @@ INFO_WINDOW=0
 #───────────────────────────────────────────────────────────────────────────────
 
 case $APP in
-"Neovide")
+"Neovide" | "neovide")
 	cp -f "$CUSTOM_ICON_FOLDER/Neovide 1.icns" "$APP.app/Contents/Resources/Neovide.icns"
 	;;
 "Steam")

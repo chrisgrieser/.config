@@ -1,15 +1,15 @@
 {
-	"Keymap": {
-		"prefix": "Keymap",
-		"body": "Keymap(\"n\", \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
+	"keymap": {
+		"prefix": "keymap",
+		"body": "keymap(\"n\", \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
 	},
-	"Keymap (multi mode)": {
-		"prefix": "Keymap (multi-mode)",
-		"body": "Keymap({ \"n\", \"x\" }, \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
+	"keymap (multi mode)": {
+		"prefix": "keymap (multi-mode)",
+		"body": "keymap({ \"n\", \"x\" }, \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
 	},
-	"Keymap (buffer)": {
-		"prefix": "Keymap (buffer)",
-		"body": "Keymap(\"n\", \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\", buffer = true })"
+	"keymap (buffer)": {
+		"prefix": "keymap (buffer)",
+		"body": "keymap(\"n\", \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\", buffer = true })"
 	},
 	"buffer arg for keymap": {
 		"prefix": "buffer = true",

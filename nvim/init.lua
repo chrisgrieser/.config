@@ -35,7 +35,7 @@ end
 tryRequire("config.lazy")
 tryRequire("config.utils")
 
-if vim.g.neovide then tryRequire("config.gui-settings") end
+if vim.fn.has("gui_running") then tryRequire("config.gui-settings") end
 tryRequire("config.theme-config")
 
 tryRequire("config.options-and-autocmds")

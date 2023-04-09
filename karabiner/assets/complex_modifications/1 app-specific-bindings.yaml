@@ -171,7 +171,7 @@ rules:
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
         to:
           - { key_code: d, modifiers: [command] }
-          - {key_code: vk_none, hold_down_milliseconds: 40}
+          - { key_code: vk_none, hold_down_milliseconds: 40 }
           - { key_code: tab, modifiers: [shift] }
           - key_code: spacebar
         conditions:
@@ -476,7 +476,7 @@ rules:
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
         to:
-          - { key_code: return_or_enter, modifiers: [option, shift] }
+          - key_code: f2
         conditions:
           - type: frontmost_application_if
             file_paths: ["[Nn]eovide"]

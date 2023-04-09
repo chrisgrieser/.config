@@ -1,43 +1,45 @@
 -- require more keymaps
 require("config.folding-keymaps")
 require("config.textobject-keymaps")
+local fn = vim.fn
+local cmd = vim.cmd
+local keymap = vim.keymap.set
 
 --------------------------------------------------------------------------------
 -- META
 
 -- search keymaps
-Keymap("n", "?", function() Cmd.Telescope("keymaps") end, { desc = " Keymaps" })
+keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " keymaps" })
 
 -- Theme Picker
-Keymap("n", "<leader>T", function() Cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
+keymap("n", "<leader>T", function() cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
 
 -- Highlights
-Keymap("n", "<leader>H", function() Cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
+keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- Update [P]lugins
-Keymap("n", "<leader>p", require("lazy").sync, { desc = " Lazy Sync" })
-Keymap("n", "<leader>P", require("lazy").home, { desc = " Lazy Home" })
-Keymap("n", "<leader>M", Cmd.Mason, { desc = " Mason" })
+keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Sync" })
+keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason" })
 
 --------------------------------------------------------------------------------
 
 -- copy [l]ast ex[c]ommand
-Keymap("n", "<leader>lc", function()
-	local lastCommand = Fn.getreg(":"):gsub("^lua ?=? ?", "")
-	Fn.setreg("+", lastCommand)
+keymap("n", "<leader>lc", function()
+	local lastCommand = fn.getreg(":"):gsub("^lua ?=? ?", "")
+	fn.setreg("+", lastCommand)
 	vim.notify("COPIED\n" .. lastCommand)
 end, { desc = "󰘳 Copy last command" })
 
 -- [l]ast command [a]gain
 -- as opposed to `@:`, this works across restarts of neovim
-Keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again" })
+keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again" })
 
 -- search command history
 -- stylua: ignore
-Keymap("n", "<leader>lh", function() Cmd.Telescope("command_history") end, { desc = "󰘳 Copy last command" })
+keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { desc = "󰘳 Copy last command" })
 
 -- copy [l]ast [n] notification
-Keymap("n", "<leader>ln", function()
+keymap("n", "<leader>ln", function()
 	local history = require("notify").history {}
 	local lastNotify = history[#history]
 	if not lastNotify then
@@ -45,46 +47,56 @@ Keymap("n", "<leader>ln", function()
 		return
 	end
 	local msg = table.concat(lastNotify.message, "\n")
-	Fn.setreg("+", msg)
+	fn.setreg("+", msg)
 	vim.notify("Last Notification copied.", LogTrace)
 end, { desc = "󰘳 Copy Last Notification" })
 
--- Dismiss notifications
-Keymap("n", "<Esc>", function()
-	if not vim.g.neovide then return end -- notify.nvim not loaded for Terminal
+-- Dismiss notifications & re-enable fold after search
+keymap("n", "<Esc>", function()
+	vim.opt.foldenable = true
 	local clearPending = require("notify").pending() > 10
 	require("notify").dismiss { pending = clearPending }
 end, { desc = "Clear Notifications" })
 
 --------------------------------------------------------------------------------
 -- MOTIONS
-Keymap({ "n", "o", "x" }, "w", "E")
-Keymap({ "n", "o", "x" }, "e", '<cmd>lua require("spider").motion("e")<CR>', { desc = "Spider-e" })
-Keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { desc = "Spider-b" })
+keymap({ "n", "o", "x" }, "w", "E")
+keymap({ "n", "o", "x" }, "e", '<cmd>lua require("spider").motion("e")<CR>', { desc = "Spider-e" })
+keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { desc = "Spider-b" })
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
-Keymap({ "o", "x" }, "H", "^")
-Keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long indented lines
-Keymap({ "n", "x" }, "L", "$") -- not using "o", since used for link textobj
+keymap({ "o", "x" }, "H", "^")
+keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long indented lines
+keymap({ "n", "x" }, "L", "$") -- not using "o", since used for link textobj
 
-Keymap({ "n", "x" }, "J", "6j")
-Keymap({ "n", "x" }, "K", "6k")
-Keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
-Keymap("o", "K", "2k")
+keymap({ "n", "x" }, "J", "6j")
+keymap({ "n", "x" }, "K", "6k")
+keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
+keymap("o", "K", "2k")
 
 -- Jump history
-Keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
-Keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
+keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
+keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
-Keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
-Keymap("n", "+", "*", { desc = "Search word under cursor" })
-Keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
+keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
+keymap("n", "+", "*", { desc = "Search word under cursor" })
+keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
+
+-- while searching: enable hlsearch -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
+vim.on_key(function(char)
+	local searchKeys = { "n", "N", "*", "#", "/", "?" }
+	local searchConfirmed = (fn.keytrans(char):upper() == "<CR>" and fn.mode() == "c")
+	if not (searchConfirmed or fn.mode() == "n") then return end
+	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
+	if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
+end, vim.api.nvim_create_namespace("auto_pause_folding"))
+
 
 -- Marks
 -- stylua: ignore
-Keymap("n", "ä", function() require("funcs.mark-cycler").gotoMark() end, { desc = "Goto Next Mark" })
-Keymap("n", "Ä", function() require("funcs.mark-cycler").setMark() end, { desc = "Set Next Mark" })
+keymap("n", "ä", function() require("funcs.mark-cycler").gotoMark() end, { desc = "Goto Next Mark" })
+keymap("n", "Ä", function() require("funcs.mark-cycler").setMark() end, { desc = "Set Next Mark" })
 
 -- reset marks on startup (needs to be on VimEnter so it's not called too early)
 Autocmd("VimEnter", {
@@ -92,117 +104,117 @@ Autocmd("VimEnter", {
 })
 
 -- Hunks and Changes
-Keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
-Keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
-Keymap("n", "gc", "g;", { desc = "goto next change" })
-Keymap("n", "gC", "g,", { desc = "goto previous change" })
+keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
+keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
+keymap("n", "gc", "g;", { desc = "goto next change" })
+keymap("n", "gC", "g,", { desc = "goto previous change" })
 
 -- [M]atching Bracket
 -- remap needed, if using the builtin matchit plugin
-Keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
+keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 
 --------------------------------------------------------------------------------
 -- EDITING
 
 -- NUMBERS
-Keymap("n", "<M-a>", "10<C-a>", { desc = "+ 10" })
-Keymap("n", "<M-x>", "10<C-x>", { desc = "- 10" })
+keymap("n", "<M-a>", "10<C-a>", { desc = "+ 10" })
+keymap("n", "<M-x>", "10<C-x>", { desc = "- 10" })
 
 -- QUICKFIX
-Keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
-Keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Previous Quickfix" })
-Keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quickfix List" })
+keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
+keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Previous Quickfix" })
+keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quickfix List" })
 -- stylua: ignore
-Keymap("n", "<leader>q", function() require("replacer").run { rename_files = false } end, { desc = " Replacer.nvim" })
+keymap("n", "<leader>q", function() require("replacer").run { rename_files = false } end, { desc = " Replacer.nvim" })
 
 -- COMMENTS & ANNOTATIONS
-Keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = " Horizontal Divider" })
-Keymap("n", "qd", "Rkqqj", { desc = " Duplicate Line as Comment", remap = true })
+keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = " Horizontal Divider" })
+keymap("n", "qd", "Rkqqj", { desc = " Duplicate Line as Comment", remap = true })
 -- stylua: ignore
-Keymap("n", "qf", function() require("neogen").generate({}) end, { desc = " Comment Function" })
+keymap("n", "qf", function() require("neogen").generate({}) end, { desc = " Comment Function" })
 
 -- WHITESPACE CONTROL
-Keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
-Keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
-Keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
-Keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
-Keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
-Keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
+keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
+keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
+keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
+keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
+keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
+keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
 for _, v in pairs(trailingKeys) do
-	Keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = "which_key_ignore" })
+	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = "which_key_ignore" })
 end
-Keymap("n", "X", "mz$x`z", { desc = "delete last character" })
+keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Case Conversion
 -- stylua: ignore start
-Keymap("n", "cru", ":lua require('textcase').current_word('to_upper_case')<CR>", { desc = "UPPER CASE" })
-Keymap("n", "crl", ":lua require('textcase').current_word('to_lower_case')<CR>", { desc = "lower case" })
-Keymap("n", "crt", ":lua require('textcase').current_word('to_title_case')<CR>", { desc = "Title Case" })
-Keymap("n", "crc", ":lua require('textcase').current_word('to_camel_case')<CR>", { desc = "camelCase" })
-Keymap("n", "crp", ":lua require('textcase').current_word('to_pascal_case')<CR>", { desc = "PascalCase" })
-Keymap("n", "cre", ":lua require('textcase').current_word('to_phrase_case')<CR>", { desc = "Sentence case" })
-Keymap("n", "cr-", ":lua require('textcase').current_word('to_dash_case')<CR>", { desc = "dash-case" })
-Keymap("n", "cr/", ":lua require('textcase').current_word('to_path_case')<CR>", { desc = "path/case" })
-Keymap("n", "cr.", ":lua require('textcase').current_word('to_dot_case')<CR>", { desc = "dot.case" })
-Keymap("n", "cr_", ":lua require('textcase').current_word('to_constant_case')<CR>", { desc = "SCREAMING_SNAKE_CASE" })
-Keymap("n", "crs", ":lua require('textcase').current_word('to_snake_case')<CR>", { desc = "snake_case" })
+keymap("n", "cru", ":lua require('textcase').current_word('to_upper_case')<CR>", { desc = "UPPER CASE" })
+keymap("n", "crl", ":lua require('textcase').current_word('to_lower_case')<CR>", { desc = "lower case" })
+keymap("n", "crt", ":lua require('textcase').current_word('to_title_case')<CR>", { desc = "Title Case" })
+keymap("n", "crc", ":lua require('textcase').current_word('to_camel_case')<CR>", { desc = "camelCase" })
+keymap("n", "crp", ":lua require('textcase').current_word('to_pascal_case')<CR>", { desc = "PascalCase" })
+keymap("n", "cre", ":lua require('textcase').current_word('to_phrase_case')<CR>", { desc = "Sentence case" })
+keymap("n", "cr-", ":lua require('textcase').current_word('to_dash_case')<CR>", { desc = "dash-case" })
+keymap("n", "cr/", ":lua require('textcase').current_word('to_path_case')<CR>", { desc = "path/case" })
+keymap("n", "cr.", ":lua require('textcase').current_word('to_dot_case')<CR>", { desc = "dot.case" })
+keymap("n", "cr_", ":lua require('textcase').current_word('to_constant_case')<CR>", { desc = "SCREAMING_SNAKE_CASE" })
+keymap("n", "crs", ":lua require('textcase').current_word('to_snake_case')<CR>", { desc = "snake_case" })
 
-Keymap("n", "cRu", ":lua require('textcase').lsp_rename('to_upper_case')<CR>", { desc = "󰒕 UPPER CASE" })
-Keymap("n", "cRl", ":lua require('textcase').lsp_rename('to_lower_case')<CR>", { desc = "󰒕 lower case" })
-Keymap("n", "cRt", ":lua require('textcase').lsp_rename('to_title_case')<CR>", { desc = "󰒕 Title Case" })
-Keymap("n", "cRc", ":lua require('textcase').lsp_rename('to_camel_case')<CR>", { desc = "󰒕 camelCase" })
-Keymap("n", "cRp", ":lua require('textcase').lsp_rename('to_pascal_case')<CR>", { desc = "󰒕 PascalCase" })
-Keymap("n", "cRe", ":lua require('textcase').lsp_rename('to_phrase_case')<CR>", { desc = "󰒕 Sentence case" })
-Keymap("n", "cR-", ":lua require('textcase').lsp_rename('to_dash_case')<CR>", { desc = "󰒕 dash-case" })
-Keymap("n", "cR/", ":lua require('textcase').lsp_rename('to_path_case')<CR>", { desc = "󰒕 path/case" })
-Keymap("n", "cR.", ":lua require('textcase').lsp_rename('to_dot_case')<CR>", { desc = "󰒕 dot.case" })
-Keymap("n", "cR_", ":lua require('textcase').lsp_rename('to_constant_case')<CR>", { desc = "󰒕 SCREAMING_SNAKE_CASE" })
-Keymap("n", "cRs", ":lua require('textcase').lsp_rename('to_snake_case')<CR>", { desc = "󰒕 snake_case" })
+keymap("n", "cRu", ":lua require('textcase').lsp_rename('to_upper_case')<CR>", { desc = "󰒕 UPPER CASE" })
+keymap("n", "cRl", ":lua require('textcase').lsp_rename('to_lower_case')<CR>", { desc = "󰒕 lower case" })
+keymap("n", "cRt", ":lua require('textcase').lsp_rename('to_title_case')<CR>", { desc = "󰒕 Title Case" })
+keymap("n", "cRc", ":lua require('textcase').lsp_rename('to_camel_case')<CR>", { desc = "󰒕 camelCase" })
+keymap("n", "cRp", ":lua require('textcase').lsp_rename('to_pascal_case')<CR>", { desc = "󰒕 PascalCase" })
+keymap("n", "cRe", ":lua require('textcase').lsp_rename('to_phrase_case')<CR>", { desc = "󰒕 Sentence case" })
+keymap("n", "cR-", ":lua require('textcase').lsp_rename('to_dash_case')<CR>", { desc = "󰒕 dash-case" })
+keymap("n", "cR/", ":lua require('textcase').lsp_rename('to_path_case')<CR>", { desc = "󰒕 path/case" })
+keymap("n", "cR.", ":lua require('textcase').lsp_rename('to_dot_case')<CR>", { desc = "󰒕 dot.case" })
+keymap("n", "cR_", ":lua require('textcase').lsp_rename('to_constant_case')<CR>", { desc = "󰒕 SCREAMING_SNAKE_CASE" })
+keymap("n", "cRs", ":lua require('textcase').lsp_rename('to_snake_case')<CR>", { desc = "󰒕 snake_case" })
 -- stylua: ignore end
 
 -- Word Switcher (fallback: switch casing)
 -- stylua: ignore
-Keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
+keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
 
 --------------------------------------------------------------------------------
 
 -- SPELLING
 
 -- [z]pelling [l]ist
-Keymap("n", "zl", function() Cmd.Telescope("spell_suggest") end, { desc = "󰓆 suggest" })
+keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 suggest" })
 
 ---add word under cursor to vale dictionary
 ---@param mode string accept|reject
 local function valeWord(mode)
 	local word
-	if Fn.mode() == "n" then
+	if fn.mode() == "n" then
 		local iskeywBefore = vim.opt_local.iskeyword:get() -- remove word-delimiters for <cword>
 		vim.opt_local.iskeyword:remove { "_", "-", "." }
 		word = Expand("<cword>")
 		vim.opt_local.iskeyword = iskeywBefore
 	else
 		Normal('"zy')
-		word = Fn.getreg("z")
+		word = fn.getreg("z")
 	end
 
 	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
 	if not success then return end -- error message already by AppendToFile
-	Cmd.mkview(2)
-	Cmd.update()
-	Cmd.edit() -- reload file for diagnostics to take effect
-	Cmd.loadview(2)
+	cmd.mkview(2)
+	cmd.update()
+	cmd.edit() -- reload file for diagnostics to take effect
+	cmd.loadview(2)
 	vim.notify(string.format('󰓆 Now %sing:\n"%s"', mode, word))
 end
-Keymap(
+keymap(
 	{ "n", "x" },
 	"zg",
 	function() valeWord("accept") end,
 	{ desc = "󰓆 Add to accepted words (vale)" }
 )
-Keymap(
+keymap(
 	{ "n", "x" },
 	"zw",
 	function() valeWord("reject") end,
@@ -212,45 +224,45 @@ Keymap(
 --------------------------------------------------------------------------------
 
 -- [S]ubstitute Operator (substitute.nvim)
-Keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
-Keymap("n", "ss", function() require("substitute").line() end, { desc = "substitute line" })
-Keymap("n", "S", function() require("substitute").eol() end, { desc = "substitute to end of line" })
+keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
+keymap("n", "ss", function() require("substitute").line() end, { desc = "substitute line" })
+keymap("n", "S", function() require("substitute").eol() end, { desc = "substitute to end of line" })
 -- stylua: ignore
-Keymap( "n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
-Keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
+keymap( "n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
+keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
 --------------------------------------------------------------------------------
 -- RE[F]ACTORING
 
-Keymap(
+keymap(
 	{ "n", "x" },
 	"<leader>fc",
 	function() return ":S /" .. Expand("<cword>") .. "//g<Left><Left>" end,
 	{ desc = "󱗘 :AltSubstitute cword", expr = true }
 )
-Keymap({ "n", "x" }, "<leader>ff", [[:S ///g<Left><Left><Left>]], { desc = "󱗘 :AltSubstitute" })
+keymap({ "n", "x" }, "<leader>ff", [[:S ///g<Left><Left><Left>]], { desc = "󱗘 :AltSubstitute" })
 
-Keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
-Keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
+keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
+keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
 
-Keymap("n", "<leader>f<Tab>", function()
+keymap("n", "<leader>f<Tab>", function()
 	Bo.expandtab = false
-	Cmd.retab { bang = true }
+	cmd.retab { bang = true }
 	Bo.tabstop = vim.opt_global.tabstop:get()
 	vim.notify("Now using: Tabs ↹ ")
 end, { desc = "↹ Use Tabs" })
 
-Keymap("n", "<leader>f<Space>", function()
+keymap("n", "<leader>f<Space>", function()
 	Bo.expandtab = true
-	Cmd.retab { bang = true }
+	cmd.retab { bang = true }
 	vim.notify("Now using: Spaces 󱁐")
 end, { desc = "󱁐 Use Spaces" })
 
-Keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "󱗘 :g normal" })
-Keymap("x", "<leader>fn", ":normal ", { desc = "󱗘 :normal" })
-Keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g delete" })
+keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "󱗘 :g normal" })
+keymap("x", "<leader>fn", ":normal ", { desc = "󱗘 :normal" })
+keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g delete" })
 
-Keymap(
+keymap(
 	{ "n", "x" },
 	"<leader>fs",
 	function() require("ssr").open() end,
@@ -259,62 +271,62 @@ Keymap(
 
 -- Refactoring.nvim
 -- stylua: ignore start
-Keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
-Keymap({ "n", "x" }, "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
-Keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("Extract Function") end, { desc = "󱗘 Extract Func" })
+keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
+keymap({ "n", "x" }, "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
+keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("Extract Function") end, { desc = "󱗘 Extract Func" })
 
-Keymap( "x", "<leader>fa", ":AI Refactor to improve this code<CR>", { desc = "󱙺 Refactor with GPT" })
+keymap( "x", "<leader>fa", ":AI Refactor to improve this code<CR>", { desc = "󱙺 Refactor with GPT" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
 -- AI Support
-Keymap({ "n", "x" }, "<leader>a", ":AI<CR>", { desc = "󱙺 Complete with GPT" })
-Keymap("x", "<leader>A", ":AI ", { desc = "󱙺 Prompt GPT" })
+keymap({ "n", "x" }, "<leader>a", ":AI<CR>", { desc = "󱙺 Complete with GPT" })
+keymap("x", "<leader>A", ":AI ", { desc = "󱙺 Prompt GPT" })
 
 --------------------------------------------------------------------------------
 
 -- Undo
-Keymap({ "n", "x" }, "U", "<C-r>", { desc = "󰑎 Redo" })
-Keymap({ "n", "x" }, "<leader>ul", "U", { desc = "󰕌 Undo Line" })
-Keymap("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "󰕌  Undotree" })
+keymap({ "n", "x" }, "U", "<C-r>", { desc = "󰑎 Redo" })
+keymap({ "n", "x" }, "<leader>ul", "U", { desc = "󰕌 Undo Line" })
+keymap("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "󰕌  Undotree" })
 -- stylua: ignore
-Keymap("n", "<leader>ur", function() Cmd.later(tostring(vim.opt.undolevels:get())) end, { desc = "󰛒 Redo All" })
-Keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Reset Hunk" })
+keymap("n", "<leader>ur", function() cmd.later(tostring(vim.opt.undolevels:get())) end, { desc = "󰛒 Redo All" })
+keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Reset Hunk" })
 
 -- save open time for each buffer
 Autocmd("BufReadPost", { callback = function() vim.b.timeOpened = os.time() end })
 
-Keymap("n", "<leader>uo", function()
+keymap("n", "<leader>uo", function()
 	local now = os.time() -- saved in epoch secs
 	local secsPassed = now - vim.b.timeOpened
-	Cmd.earlier(tostring(secsPassed) .. "s")
+	cmd.earlier(tostring(secsPassed) .. "s")
 end, { desc = "󰜊 Undo since last open" })
 
 --------------------------------------------------------------------------------
 
 -- LOGGING & DEBUGGING
 -- stylua: ignore start
-Keymap({ "n", "x" }, "<leader>ll", function() require("funcs.quick-log").log() end, { desc = " log" })
-Keymap({ "n", "x" }, "<leader>lo", function() require("funcs.quick-log").objectlog() end, { desc = " object log" })
-Keymap("n", "<leader>lb", function() require("funcs.quick-log").beeplog() end, { desc = " beep log" })
-Keymap("n", "<leader>lt", function() require("funcs.quick-log").timelog() end, { desc = " time log" })
-Keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end, { desc = "  remove log" })
-Keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, { desc = " debugger" })
+keymap({ "n", "x" }, "<leader>ll", function() require("funcs.quick-log").log() end, { desc = " log" })
+keymap({ "n", "x" }, "<leader>lo", function() require("funcs.quick-log").objectlog() end, { desc = " object log" })
+keymap("n", "<leader>lb", function() require("funcs.quick-log").beeplog() end, { desc = " beep log" })
+keymap("n", "<leader>lt", function() require("funcs.quick-log").timelog() end, { desc = " time log" })
+keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end, { desc = "  remove log" })
+keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, { desc = " debugger" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
 
 -- Replace Mode
 -- needed, since `R` mapped to duplicate line
-Keymap("n", "<leader>R", "R", { desc = "Replace Mode" })
+keymap("n", "<leader>R", "R", { desc = "Replace Mode" })
 
 -- URL Opening (forward-seeking `gx`)
-Keymap("n", "gx", function()
+keymap("n", "gx", function()
 	require("various-textobjs").url()
-	local foundURL = Fn.mode():find("v") -- will only switch to visual mode if URL found
+	local foundURL = fn.mode():find("v") -- will only switch to visual mode if URL found
 	if foundURL then
 		Normal('"zy')
-		local url = Fn.getreg("z")
+		local url = fn.getreg("z")
 		os.execute("open '" .. url .. "'")
 	end
 end, { desc = "󰌹 Smart URL Opener" })
@@ -324,104 +336,104 @@ end, { desc = "󰌹 Smart URL Opener" })
 
 -- Node Swapping
 -- stylua: ignore start
-Keymap("n", "ü", function () require("sibling-swap").swap_with_right() end, { desc = "󰑃 Move Node Right" })
-Keymap("n", "Ü", function () require("sibling-swap").swap_with_left() end, { desc = "󰑁 Move Node Left" })
+keymap("n", "ü", function () require("sibling-swap").swap_with_right() end, { desc = "󰑃 Move Node Right" })
+keymap("n", "Ü", function () require("sibling-swap").swap_with_left() end, { desc = "󰑁 Move Node Left" })
 -- stylua: ignore end
 Autocmd("FileType", {
 	pattern = { "markdown", "text", "gitcommit" },
 	callback = function()
-		Keymap("n", "ü", '"zdawel"zph', { desc = "➡️ Move Word Right", buffer = true })
-		Keymap("n", "Ü", '"zdawbh"zph', { desc = "⬅️ Move Word Left", buffer = true })
+		keymap("n", "ü", '"zdawel"zph', { desc = "➡️ Move Word Right", buffer = true })
+		keymap("n", "Ü", '"zdawbh"zph', { desc = "⬅️ Move Word Left", buffer = true })
 	end,
 })
 
-Keymap("n", "<Down>", [[:. move +1<CR>==]], { desc = "Move Line Down" })
-Keymap("n", "<Up>", [[:. move -2<CR>==]], { desc = "Move Line Up" })
-Keymap("n", "<Right>", function()
+keymap("n", "<Down>", [[:. move +1<CR>==]], { desc = "Move Line Down" })
+keymap("n", "<Up>", [[:. move -2<CR>==]], { desc = "Move Line Up" })
+keymap("n", "<Right>", function()
 	if vim.fn.col(".") >= vim.fn.col("$") - 1 then return end
 	return [["zx"zp]]
 end, { desc = "Move Char Right", expr = true })
-Keymap("n", "<Left>", function()
+keymap("n", "<Left>", function()
 	if vim.fn.col(".") == 1 then return end
 	return [["zdh"zph]]
 end, { desc = "Move Char Left", expr = true })
 
 -- "silent" necessary for 3+ lines due to cmdheight=0
 -- stylua: ignore start
-Keymap("x", "<Down>", [[<Esc>:silent '<,'>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
-Keymap("x", "<Up>", [[<Esc>:silent '<,'>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
+keymap("x", "<Down>", [[<Esc>:silent '<,'>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
+keymap("x", "<Up>", [[<Esc>:silent '<,'>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
 -- stylua: ignore end
-Keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })
-Keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "Move selection left" })
+keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })
+keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "Move selection left" })
 
 -- Merging / Splitting
 -- Lines
-Keymap("n", "<leader>s", Cmd.TSJToggle, { desc = "split/join lines" })
-Keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "split around selection" })
-Keymap({ "n", "x" }, "M", "J", { desc = "merge line up" })
-Keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "merge line down" })
+keymap("n", "<leader>s", cmd.TSJToggle, { desc = "split/join lines" })
+keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "split around selection" })
+keymap({ "n", "x" }, "M", "J", { desc = "merge line up" })
+keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "merge line down" })
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
-Keymap("i", "<C-e>", "<Esc>A") -- EoL
-Keymap("i", "<C-k>", "<Esc>lDi") -- kill line
-Keymap("i", "<C-a>", "<Esc>I") -- BoL
-Keymap("c", "<C-a>", "<Home>")
-Keymap("c", "<C-e>", "<End>")
-Keymap("c", "<C-u>", "<C-e><C-u>") -- clear
+keymap("i", "<C-e>", "<Esc>A") -- EoL
+keymap("i", "<C-k>", "<Esc>lDi") -- kill line
+keymap("i", "<C-a>", "<Esc>I") -- BoL
+keymap("c", "<C-a>", "<Home>")
+keymap("c", "<C-e>", "<End>")
+keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
-Keymap("x", "V", "j", { desc = "repeated V selects more lines" })
-Keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode" })
+keymap("x", "V", "j", { desc = "repeated V selects more lines" })
+keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode" })
 
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS & SPLITS
 
 -- for consistency with terminal buffers also <S-CR>
 -- stylua: ignore start
-Keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "alt buffer" })
-Keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "Cybu: Next Buffer" })
-Keymap("n", "<S-CR>", "<C-w>w", { desc = "Next window" })
+keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "alt buffer" })
+keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "Cybu: Next Buffer" })
+keymap("n", "<S-CR>", "<C-w>w", { desc = "Next window" })
 
-Keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window" })
-Keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "reopen last buffer" })
+keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window" })
+keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "reopen last buffer" })
 
-Keymap("n", "gb", function() Cmd.Telescope("buffers") end, { desc = " Open Buffers" })
+keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " Open Buffers" })
 -- stylua: ignore end
 
-Keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
-Keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize (-)" })
-Keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize (+)" })
-Keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
+keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
+keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize (-)" })
+keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize (+)" })
+keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
 
 -- Harpoon
-Keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "󰛢 Next" })
+keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "󰛢 Next" })
 -- stylua: ignore start
 -- consistent with adding/removing bookmarks in the Browser/Obsidian
-Keymap("n", "<D-d>", function()
+keymap("n", "<D-d>", function()
 	require("harpoon.mark").add_file()
 	vim.b.harpoonMark = "󰛢"
 end, { desc = "󰛢 Add File" })
-Keymap("n", "<D-S-d>", function()
+keymap("n", "<D-S-d>", function()
 	require("harpoon.ui").toggle_quick_menu()
 	UpdateHarpoonIndicator()
 end, { desc = "󰛢 Menu" })
 -- stylua: ignore end
 
 -- P[a]th gf needs remapping, since `gf` is used for LSP references
-Keymap("n", "ga", "gf", { desc = "Goto Path" })
+keymap("n", "ga", "gf", { desc = "Goto Path" })
 
 ------------------------------------------------------------------------------
 
 -- CMD-KEYBINDINGS
-Keymap({ "n", "x", "i" }, "<D-s>", Cmd.update, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
+keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 
 -- stylua: ignore
-Keymap({ "n", "x" }, "<D-l>", function() Fn.system("open -R '" .. Expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
+keymap({ "n", "x" }, "<D-l>", function() fn.system("open -R '" .. Expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
 
-Keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
-Keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
+keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
+keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
 
 -- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 -- are overridden inside snippet for snippetjumping
@@ -432,26 +444,26 @@ vim.g.VM_maps = {
 }
 
 --- copy & paste
-Keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
-Keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
-Keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = "paste" }) -- "<C-g>u" adds undopoint before the paste
-Keymap("x", "<D-c>", "y", { desc = "copy" }) -- needed for compatibility with automation apps
+keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
+keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
+keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = "paste" }) -- "<C-g>u" adds undopoint before the paste
+keymap("x", "<D-c>", "y", { desc = "copy" }) -- needed for compatibility with automation apps
 
 -- cmd+e: inline code
-Keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "  Inline Code" }) -- no selection = word under cursor
-Keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "  Inline Code" })
-Keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
+keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "  Inline Code" }) -- no selection = word under cursor
+keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "  Inline Code" })
+keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 
 -- cmd+t: template string
-Keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b", { desc = "Template String" }) -- no selection = word under cursor
-Keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b", { desc = "Template String" })
-Keymap("i", "<D-t>", "${}<Left>", { desc = "Template String" })
+keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b", { desc = "Template String" }) -- no selection = word under cursor
+keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b", { desc = "Template String" })
+keymap("i", "<D-t>", "${}<Left>", { desc = "Template String" })
 
 --------------------------------------------------------------------------------
 
 -- COLOR PICKER
-Keymap("n", "#", ":CccPick<CR>", { desc = " Color Picker" })
-Keymap("n", "'", ":CccConvert<CR>", { desc = " Convert Color" }) -- shift-# on German keyboard
+keymap("n", "#", ":CccPick<CR>", { desc = " Color Picker" })
+keymap("n", "'", ":CccConvert<CR>", { desc = " Convert Color" }) -- shift-# on German keyboard
 
 --------------------------------------------------------------------------------
 -- FILES
@@ -461,7 +473,7 @@ Keymap("n", "'", ":CccConvert<CR>", { desc = " Convert Color" }) -- shift-# o
 ---@return number|nil
 local function harpoonFileNumber()
 	local pwd = vim.loop.cwd() or ""
-	local jsonPath = Fn.stdpath("data") .. "/harpoon.json"
+	local jsonPath = fn.stdpath("data") .. "/harpoon.json"
 	local json = ReadFile(jsonPath)
 	if not json then return end
 	local data = vim.json.decode(json)
@@ -481,64 +493,64 @@ end
 
 -- find files
 -- add project name + number of harpoon files to prompt title
-Keymap("n", "go", function()
+keymap("n", "go", function()
 	local harpoonNumber = harpoonFileNumber() or 0
 	local title = tostring(harpoonNumber) .. "󰛢 " .. projectName()
 	require("telescope").extensions.file_browser.file_browser { prompt_title = title }
 end, { desc = " Browse in Project" })
 
 -- stylua: ignore
-Keymap( "n", "gO", function() require("telescope").extensions.file_browser.file_browser {
+keymap( "n", "gO", function() require("telescope").extensions.file_browser.file_browser {
 	path = Expand("%:p:h"),
 	prompt_title = "󰝰 " .. Expand("%:p:h:t"),
 } end, { desc = " Browse in current Folder" })
 
 -- stylua: ignore
-Keymap("n", "gP", function() require("telescope").extensions.projects.projects { } end, { desc = " Projects" })
+keymap("n", "gP", function() require("telescope").extensions.projects.projects { } end, { desc = " Projects" })
 
 -- stylua: ignore
-Keymap("n", "gl", function() require("telescope.builtin").live_grep {
+keymap("n", "gl", function() require("telescope.builtin").live_grep {
 	prompt_title = "Live Grep: " .. projectName() }
 end, { desc = " Live Grep in Project" })
 -- stylua: ignore
-Keymap({ "n", "x" }, "gL", function() Cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
-Keymap("n", "gr", function() Cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
+keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
+keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 
 -- File Operations
 -- stylua: ignore start
-Keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = " Copy filepath" })
-Keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = " Copy filename" })
-Keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = " chmod +x" })
-Keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = " Rename file" })
-Keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = " Move-rename file" })
-Keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = " Duplicate file" })
-Keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = " Move file to trash" })
-Keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = " Create new file" })
-Keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = " Selection to new file" })
+keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = " Copy filepath" })
+keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = " Copy filename" })
+keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = " chmod +x" })
+keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = " Rename file" })
+keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = " Move-rename file" })
+keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = " Duplicate file" })
+keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = " Move file to trash" })
+keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = " Create new file" })
+keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = " Selection to new file" })
 -- stylua: ignore end
 
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
 
 -- Global (so usable by null-ls)
-Keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
-Keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
+keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
+keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 -- stylua: ignore
-Keymap("n", "<leader>e", function() Cmd.Telescope("diagnostics") end, { desc = " 󰒕 Search Diagnostics" })
+keymap("n", "<leader>e", function() cmd.Telescope("diagnostics") end, { desc = " 󰒕 Search Diagnostics" })
 
--- Keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Show Diagnostic" })
-Keymap("n", "<leader>d", function()
+-- keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Show Diagnostic" })
+keymap("n", "<leader>d", function()
 	require("lsp_lines").toggle()
 	local nextState = vim.g.prevVirtText or false
 	vim.g.prevVirtText = vim.diagnostic.config().virtual_text
 	vim.diagnostic.config { virtual_text = nextState }
 end, { desc = "󰒕 Toggle LSP Lines" })
-Keymap("n", "gs", function() Cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
+keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbol" })
 
-Keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
+keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 
 -- copy breadcrumbs (nvim navic)
-Keymap("n", "<D-b>", function()
+keymap("n", "<D-b>", function()
 	local rawdata = require("nvim-navic").get_data()
 	if not rawdata then
 		vim.notify("No Breadcrumbs available", LogWarn)
@@ -549,7 +561,7 @@ Keymap("n", "<D-b>", function()
 		breadcrumbs = breadcrumbs .. v.name .. "."
 	end
 	breadcrumbs = breadcrumbs:sub(1, -2)
-	Fn.setreg("+", breadcrumbs)
+	fn.setreg("+", breadcrumbs)
 	vim.notify("COPIED\n" .. breadcrumbs)
 end, { desc = "󰒕 Copy Breadcrumbs" })
 
@@ -565,27 +577,27 @@ Autocmd("LspAttach", {
 			-- command line; needs defer to not be overwritten by treesitter-
 			-- refactor's smart-rename
 			-- stylua: ignore
-			vim.defer_fn( function() Keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1) ---@diagnostic disable-line: param-type-mismatch
-			Keymap("n", "<leader>V", function() return ":IncRename " .. Expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
+			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1) ---@diagnostic disable-line: param-type-mismatch
+			keymap("n", "<leader>V", function() return ":IncRename " .. Expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
 		end
 
 		-- conditional to not overwrite treesitter goto-symbol
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
-			Keymap("n", "gs", function() Cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
-			Keymap("n", "gS", function() Cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
+			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
+			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 
-		Keymap("n", "gd", function() Cmd.Glance("definitions") end, { desc = "󰒕 Definitions", buffer = true })
-		Keymap("n", "gf", function() Cmd.Glance("references") end, { desc = "󰒕 References", buffer = true })
-		Keymap("n", "gy", function() Cmd.Glance("type_definitions") end, { desc = "󰒕 Type Definition", buffer = true })
+		keymap("n", "gd", function() cmd.Glance("definitions") end, { desc = "󰒕 Definitions", buffer = true })
+		keymap("n", "gf", function() cmd.Glance("references") end, { desc = "󰒕 References", buffer = true })
+		keymap("n", "gy", function() cmd.Glance("type_definitions") end, { desc = "󰒕 Type Definition", buffer = true })
 		-- uses "v" instead of "x", so signature can be shown during snippet completion
-		Keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
-		Keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover", buffer = true })
+		keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
+		keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover", buffer = true })
 		-- stylua: ignore end
 
 		-- Save & Format
-		Keymap({ "n", "i", "x" }, "<D-s>", function()
-			Cmd.update()
+		keymap({ "n", "i", "x" }, "<D-s>", function()
+			cmd.update()
 			vim.lsp.buf.format { async = true }
 		end, { buffer = true, desc = "󰒕 Save & Format" })
 	end,
@@ -595,58 +607,58 @@ Autocmd("LspAttach", {
 -- GIT
 
 -- Neogit
-Keymap("n", "<leader>gn", Cmd.Neogit, { desc = "󰊢 Neogit" })
-Keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = "󰊢 Commit (Neogit)" })
+keymap("n", "<leader>gn", cmd.Neogit, { desc = "󰊢 Neogit" })
+keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = "󰊢 Commit (Neogit)" })
 
 -- Gitsigns
-Keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
-Keymap("n", "<leader>gA", ":Gitsigns stage_buffer<CR>", { desc = "󰊢 Add Buffer" })
-Keymap("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "󰊢 Preview Hunk" })
-Keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
-Keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
+keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
+keymap("n", "<leader>gA", ":Gitsigns stage_buffer<CR>", { desc = "󰊢 Add Buffer" })
+keymap("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "󰊢 Preview Hunk" })
+keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
+keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
 
 -- Telescope
 -- stylua: ignore
-Keymap("n", "<leader>gs", function() Cmd.Telescope("git_status") end, { desc = "󰊢 Status (Telescope)" })
-Keymap("n", "<leader>gl", function() Cmd.Telescope("git_commits") end, { desc = "󰊢 Log (Telescope)" })
+keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = "󰊢 Status (Telescope)" })
+keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = "󰊢 Log (Telescope)" })
 
 -- My utils
 -- stylua: ignore start
-Keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
-Keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
-Keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch("open") end, { desc = "󰊢 Open Issues" })
-Keymap("n", "<leader>gI", function () require("funcs.git-utils").issueSearch("closed") end, { desc = "󰊢 Closed Issues" })
-Keymap("n", "<leader>gm", function () require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
-Keymap("n", "<leader>gM", function () require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
+keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
+keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
+keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch("open") end, { desc = "󰊢 Open Issues" })
+keymap("n", "<leader>gI", function () require("funcs.git-utils").issueSearch("closed") end, { desc = "󰊢 Closed Issues" })
+keymap("n", "<leader>gm", function () require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
+keymap("n", "<leader>gM", function () require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
 -- stylua: ignore end
 
 -- Diffview
-Keymap("n", "<leader>gd", function()
+keymap("n", "<leader>gd", function()
 	vim.ui.input({ prompt = "Git Pickaxe (empty = full history)" }, function(query)
 		if not query then return end
 		if query ~= "" then query = (" -G'%s'"):format(query) end
-		Cmd("DiffviewFileHistory %" .. query)
-		Cmd.wincmd("w") -- go directly to file window
-		Cmd.wincmd("|") -- maximize it
+		cmd("DiffviewFileHistory %" .. query)
+		cmd.wincmd("w") -- go directly to file window
+		cmd.wincmd("|") -- maximize it
 	end)
 end, { desc = "󰊢 File History (Diffview)" })
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
-Keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = " Toggle Relative Line Numbers" })
-Keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers" })
-Keymap("n", "<leader>ol", Cmd.LspRestart, { desc = " 󰒕 LSP Restart" })
+keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = " Toggle Relative Line Numbers" })
+keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers" })
+keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 󰒕 LSP Restart" })
 
-Keymap("n", "<leader>od", function()
-	if vim.diagnostic.is_disabled() then
+keymap("n", "<leader>od", function()
+	if vim.diagnostic.is_disabled(0) then
 		vim.diagnostic.enable(0)
 	else
 		vim.diagnostic.disable(0)
 	end
 end, { desc = " 󰒕 Toggle Diagnostics" })
 
-Keymap("n", "<leader>ow", function()
+keymap("n", "<leader>ow", function()
 	local wrapOn = vim.opt_local.wrap:get()
 	if wrapOn then
 		vim.opt_local.wrap = false
@@ -660,54 +672,57 @@ Keymap("n", "<leader>ow", function()
 	else
 		vim.opt_local.wrap = true
 		vim.opt_local.colorcolumn = ""
-		Keymap({ "n", "x" }, "H", "g^", { buffer = true })
-		Keymap({ "n", "x" }, "L", "g$", { buffer = true })
-		Keymap({ "n", "x" }, "J", "6gj", { buffer = true })
-		Keymap({ "n", "x" }, "K", "6gk", { buffer = true })
-		Keymap({ "n", "x" }, "j", "gj", { buffer = true })
-		Keymap({ "n", "x" }, "k", "gk", { buffer = true })
+		keymap({ "n", "x" }, "H", "g^", { buffer = true })
+		keymap({ "n", "x" }, "L", "g$", { buffer = true })
+		keymap({ "n", "x" }, "J", "6gj", { buffer = true })
+		keymap({ "n", "x" }, "K", "6gk", { buffer = true })
+		keymap({ "n", "x" }, "j", "gj", { buffer = true })
+		keymap({ "n", "x" }, "k", "gk", { buffer = true })
 	end
 end, { desc = " Toggle Wrap" })
 
 --------------------------------------------------------------------------------
 
 -- TERMINAL & CODE RUNNER
-Keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
-Keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
+keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
+keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 
-Keymap("n", "<leader>tt", "<Plug>PlenaryTestFile", { desc = " Test Current Spec File" })
-Keymap("n", "<leader>te", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
+keymap("n", "<leader>tr", "<Plug>PlenaryTestFile", { desc = " Run Test (Current Spec)" })
+keymap("n", "<leader>tt", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
 -- stylua: ignore
-Keymap( "x", "<leader>te", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
+keymap( "x", "<leader>tt", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
 
-Keymap("n", "<leader>tc", function()
+keymap("n", "<leader>tc", function()
 	local isCodiBuffer = Bo.buftype ~= ""
 	if isCodiBuffer then
-		Cmd.CodiExpand() -- multiline output for the current line
+		cmd.CodiExpand() -- multiline output for the current line
 	else
-		Cmd.CodiNew()
+		cmd.CodiNew()
 		vim.api.nvim_buf_set_name(0, "Codi: " .. Bo.filetype)
 	end
 end, { desc = " Codi" })
 
 -- edit embedded filetype
-Keymap("n", "<leader>ti", function()
+keymap("n", "<leader>te", function()
 	if Bo.filetype ~= "markdown" then
 		vim.notify("Only markdown codeblocks can be edited without a selection.")
 		return
 	end
-	Cmd.InlineEdit()
-	Keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
+	cmd.InlineEdit()
+	keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
 end, { desc = " InlineEdit" })
-Keymap("x", "<leader>ti", function()
+keymap("x", "<leader>te", function()
 	local fts = { "applescript", "bash", "vim" }
 	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 		if not ft then return end
 		LeaveVisualMode()
-		Cmd("'<,'>InlineEdit " .. ft)
-		Keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
+		cmd("'<,'>InlineEdit " .. ft)
+		keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
 	end)
 end, { desc = " InlineEdit" })
+
+keymap("n", "<leader>tr", cmd.InspectTree, { desc = " InspectTree" })
+keymap("n", "<leader>ti", cmd.InspectTree, { desc = " Inspect" })
 
 --------------------------------------------------------------------------------
 
@@ -729,8 +744,8 @@ Autocmd("FileType", {
 	},
 	callback = function()
 		local opts = { buffer = true, nowait = true, desc = "close" }
-		Keymap("n", "<Esc>", Cmd.close, opts)
-		Keymap("n", "q", Cmd.close, opts)
+		keymap("n", "<Esc>", cmd.close, opts)
+		keymap("n", "q", cmd.close, opts)
 	end,
 })
 
@@ -740,11 +755,11 @@ Autocmd("FileType", {
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 		if Bo.filetype == "ssr" then
-			Keymap("n", "q", "Q", opts)
+			keymap("n", "q", "Q", opts)
 		else
 			-- HACK 1ms delay ensures it comes later in the autocmd stack and takes effect
 			---@diagnostic disable-next-line: param-type-mismatch
-			vim.defer_fn(function() Keymap("n", "q", "<Esc>", opts) end, 1)
+			vim.defer_fn(function() keymap("n", "q", "<Esc>", opts) end, 1)
 		end
 	end,
 })

@@ -81,9 +81,6 @@ local tsConfig = {
 	-- TREESITTER PLUGINS
 	endwise = { enable = true },
 	rainbow = { enable = true },
-	playground = {
-		enable = true,
-	},
 	refactor = {
 		highlight_definitions = {
 			enable = true,
@@ -118,7 +115,7 @@ return {
 			})
 
 			-- avoid conflict with visual mode comment from Comments.nvim
-			vim.keymap.set("o", "q", "<<<", { desc = "comment", remap = true })
+			vim.keymap.set("o", "q", "&&&", { desc = "comment", remap = true })
 		end,
 		build = function()
 			-- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
