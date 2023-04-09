@@ -198,7 +198,7 @@ end
 
 local function foldLevel()
 	local level = vim.opt_local.foldlevel:get()
-	local foldenabled = vim.opt_local.foldenable:get()
+	local foldenabled = vim.opt_local.foldenable:get() and vim.bo.filetype ~= "Glance"
 	local icon = foldenabled and "󰘖 " or "󰘖  "
 	return icon .. " " .. tostring(level)
 end

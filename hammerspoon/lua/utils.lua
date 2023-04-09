@@ -2,32 +2,12 @@ Hotkey = hs.hotkey.bind
 Keystroke = hs.eventtap.keyStroke
 Aw = hs.application.watcher
 Wf = hs.window.filter
-Pw = hs.pathwatcher.new
 Applescript = hs.osascript.applescript
 UriScheme = hs.urlevent.bind
 TableContains = hs.fnutils.contains
 
 Hyper = { "cmd", "alt", "ctrl", "shift" } -- bound to capslock via Karabiner elements
 I = hs.inspect -- to inspect tables in the console
-
---------------------------------------------------------------------------------
--- ENVIRONMENT
--- retrieve configs from zshenv; looped since sometimes not loading properly
-local i = 0
-while true do
-	DotfilesFolder = os.getenv("DOTFILE_FOLDER")
-	PasswordStore = os.getenv("PASSWORD_STORE_DIR")
-	VaultLocation = os.getenv("VAULT_PATH")
-	FileHub = os.getenv("WD")
-	if DotfilesFolder then break end
-
-	hs.timer.usleep(10000) -- = one hundreth second (Blocking!)
-	i = i + 1
-	if i > 50 then
-		Notify("⚠️ Could not retrieve .zshenv")
-		break
-	end
-end
 
 --------------------------------------------------------------------------------
 
