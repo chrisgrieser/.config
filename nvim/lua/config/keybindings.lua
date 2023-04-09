@@ -77,18 +77,9 @@ Keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 Keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
-Keymap("n", "-", "/") -- better for German keyboard
 Keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 Keymap("n", "+", "*", { desc = "Search word under cursor" })
 Keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
-
--- automatically do `:nohl` when done with search https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
-vim.on_key(function(char)
-	if Fn.mode() ~= "n" then return end
-	local originalSearchRelatedKeys = { "<CR>", "n", "N", "*", "#", "?", "/" }
-	local new_hlsearch = vim.tbl_contains(originalSearchRelatedKeys, Fn.keytrans(char))
-	if vim.opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
-end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
 -- Marks
 -- stylua: ignore
