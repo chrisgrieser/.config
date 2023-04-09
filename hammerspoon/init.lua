@@ -6,7 +6,25 @@ hs.window.animationDuration = 0 -- quicker animations
 hs.allowAppleScript(true) -- allow external control
 
 --------------------------------------------------------------------------------
--- self
+-- ENVIRONMENT
+-- retrieve configs from zshenv; looped since sometimes not loading properly
+local i = 0
+while true do
+	DotfilesFolder = os.getenv("DOTFILE_FOLDER")
+	PasswordStore = os.getenv("PASSWORD_STORE_DIR")
+	VaultLocation = os.getenv("VAULT_PATH")
+	FileHub = os.getenv("WD")
+	if DotfilesFolder then break end
+	hs.timer.usleep(10000) -- = one hundreth second (Blocking!)
+	i = i + 1
+	if i > 50 then
+		Notify("⚠️ Could not retrieve .zshenv")
+		break
+	end
+end
+
+--------------------------------------------------------------------------------
+-- meta
 require("lua.console")
 require("lua.reload-and-systemstart")
 require("lua.utils")

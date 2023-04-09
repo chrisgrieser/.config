@@ -45,7 +45,7 @@ reminders.defaultList().make({
 // const newReminder = reminders.Reminder({ name: "Title for reminder", body: "Notes for the reminder" });
 // reminders.lists.byName("List Name").reminders.push(newReminder);
 
-reminders.activate(); // TODO quit, when date selection is implemented
+reminders.quit();
 
 const msg = "💤 Snoozed to tomorrow;;" + content;
 msg; // direct return for notification

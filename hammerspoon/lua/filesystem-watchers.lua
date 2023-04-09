@@ -1,6 +1,4 @@
-require("lua.utils")
---------------------------------------------------------------------------------
--- HELPER
+local pw = hs.pathwatcher.new
 
 ---is in sub-directory instead of directly in the folder
 ---@param fPath string? filepath
@@ -23,7 +21,7 @@ local sourceStatePath = appSupport .. "/Vivaldi/Local State"
 local chromeBookmarksPath = appSupport .. "/Google/Chrome/Default/Bookmarks"
 local chromeStatePath = appSupport .. "/Google/Chrome/Local State"
 
-BookmarkWatcher = Pw(sourceBookmarkPath, function()
+BookmarkWatcher = pw(sourceBookmarkPath, function()
 	-- Bookmarks
 	local bookmarks = hs.json.read(sourceBookmarkPath)
 	if not bookmarks then return end
@@ -46,7 +44,7 @@ end):start()
 
 -- DOWNLOAD FOLDER BADGE
 local downloadFolder = os.getenv("HOME") .. "/Downloaded"
-DownloadFolderWatcher = Pw(
+DownloadFolderWatcher = pw(
 	downloadFolder,
 	function()
 		hs.execute("zsh ./helpers/download-folder-badge/download-folder-icon.sh " .. downloadFolder)
@@ -59,14 +57,14 @@ DownloadFolderWatcher = Pw(
 -- GenuisScan
 local scanFolder = os.getenv("HOME")
 	.. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
-ScanFolderWatcher = Pw(scanFolder, function()
+ScanFolderWatcher = pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. FileHub .. "'")
 	print("➡️ Scan moved to File Hub.")
 end):start()
 
 -- Downloads Folder
 local systemDownloadFolder = os.getenv("HOME") .. "/Downloads/"
-SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
+SystemDlFolderWatcher = pw(systemDownloadFolder, function(files)
 	-- Stats Update file can directly be trashed
 	for _, filePath in pairs(files) do
 		if not filePath:find("Stats%.dmg$") then break end
@@ -74,7 +72,7 @@ SystemDlFolderWatcher = Pw(systemDownloadFolder, function(files)
 	end
 
 	-- otherwise move to filehub
-	hs.execute("mv '" .. systemDownloadFolder .. "'/* '" .. FileHub .. "'")
+	os.execute("mv '" .. systemDownloadFolder .. "'/* '" .. FileHub .. "'")
 	print("➡️ Download moved to File Hub.")
 end):start()
 
@@ -82,7 +80,7 @@ end):start()
 -- FROM FILE HUB
 
 local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
-FileHubWatcher = Pw(FileHub, function(paths, _)
+FileHubWatcher = pw(FileHub, function(paths, _)
 	if not ScreenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
 		if isInSubdirectory(filep, FileHub) then return end
@@ -145,7 +143,7 @@ end):start()
 --------------------------------------------------------------------------------
 -- AUTO-INSTALL OBSIDIAN ALPHA
 
-ObsiAlphaWatcher = Pw(FileHub, function(files)
+ObsiAlphaWatcher = pw(FileHub, function(files)
 	for _, file in pairs(files) do
 		-- needs delay and `.crdownload` check, since the renaming is sometimes not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end

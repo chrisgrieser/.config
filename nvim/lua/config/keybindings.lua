@@ -235,15 +235,10 @@ Keymap(
 	{ "n", "x" },
 	"<leader>fc",
 	function() return ":S /" .. Expand("<cword>") .. "//g<Left><Left>" end,
-	{ desc = "󱗘 :SaneSubstitute cword", expr = true }
+	{ desc = "󱗘 :AltSubstitute cword", expr = true }
 )
-Keymap({ "n", "x" }, "<leader>ff", [[:S ///g<Left><Left><Left>]], { desc = "󱗘 :SaneSubstitute" })
-Keymap(
-	{ "n", "x" },
-	"<leader>fk",
-	[[:S /(.*)/%1/g]] .. ("<Left>"):rep(9),
-	{ desc = "󱗘 :SaneSubstitute kirby" }
-)
+Keymap({ "n", "x" }, "<leader>ff", [[:S ///g<Left><Left><Left>]], { desc = "󱗘 :AltSubstitute" })
+
 Keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
 Keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
 
