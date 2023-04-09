@@ -314,34 +314,36 @@ keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end
 keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, { desc = " debugger" })
 -- stylua: ignore end
 
--- INFO toggling breakpoints already done via nvim-recorder
 keymap("n", "<leader>bu", function() require("dapui").toggle() end, { desc = " Toggle DAP-UI" })
 keymap("n", "<leader>bv", function() require("dap").step_over() end, { desc = " Step Over" })
 keymap("n", "<leader>bo", function() require("dap").step_out() end, { desc = " Step Out" })
 keymap("n", "<leader>bi", function() require("dap").step_into() end, { desc = " Step Into" })
-	-- stylua: ignore start
-	keymap("n", "<leader>bc", function() require("dap").run_to_cursor() end, { desc = " Run to Cursor" })
-	keymap("n", "<leader>br", function() require("dap").clear_breakpoints() end, { desc = "  Remove Breakpoints" })
-	keymap("n", "<leader>bq", function() require("dap").list_breakpoints() end, { desc = "  Breakpoints to QuickFix" })
+-- INFO toggling breakpoints done via nvim-recorder
+-- stylua: ignore start
+keymap("n", "<leader>bc", function() require("dap").run_to_cursor() end, { desc = " Run to Cursor" })
+keymap("n", "<leader>br", function() require("dap").clear_breakpoints() end, { desc = "  Remove Breakpoints" })
+keymap("n", "<leader>bq", function() require("dap").list_breakpoints() end, { desc = "  Breakpoints to QuickFix" })
 -- stylua: ignore end
+
 keymap("n", "<leader>bt", function()
 	vim.opt_local.number = false
 	require("dapui").close()
 	require("dap").terminate()
 end, { desc = " Terminate" })
-keymap("n", "<leader>bl", function()
+keymap("n", "<leader>bn", function()
 	vim.opt_local.number = true
 	-- INFO is the only one that needs manual starting, other debuggers
 	-- start with `continue` by themselves
-	local dapRunning = require("dap").status() ~= ""
-	if dapRunning then
-		vim.notify("Debugger already running.", vim.log.levels.WARN)
-	elseif not vim.bo.filetype == "lua" then
-		vim.notify("Not a lua file.", vim.log.levels.WARN)
-	else
-		require("osv").run_this() -- start lua debugger
+	if require("dap").status() ~= "" then
+		vim.notify("Debugger already running.", LogWarn)
+		return
 	end
-end, { desc = "  Start nvim debugger" })
+	if not Bo.filetype == "lua" then
+		vim.notify("Not a lua file.", LogWarn)
+		return
+	end
+	require("osv").run_this() 
+end, { desc = "  Start nvim-lua debugger" })
 
 --------------------------------------------------------------------------------
 

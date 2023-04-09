@@ -78,14 +78,12 @@ return {
 				keymaps = {
 					view = {
 						{ "n", "<D-w>", vim.cmd.tabclose, {} }, -- close tab instead of window
-						{ "n", "<CR>", function() vim.cmd.wincmd("w") end, {} }, -- consistent with general buffer switcher
+						{ "n", "<S-CR>", function() vim.cmd.wincmd("w") end, {} }, -- consistent with general buffer switcher
 					},
 					file_history_panel = {
 						{ "n", "<D-w>", vim.cmd.tabclose, {} },
 						{ "n", "?", require("diffview.actions").help("file_history_panel"), {} },
 						{ "n", "<S-CR>", function() vim.cmd.wincmd("w") end, {} },
-						-- INFO "<cr>" needs to be lowercase to override the default behavior
-						{ "n", "<cr>", function() vim.cmd.wincmd("w") end, {} },
 					},
 				},
 			}
