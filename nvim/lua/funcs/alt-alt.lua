@@ -119,16 +119,14 @@ function M.altFileStatusline()
 	return icon .. " " .. name
 end
 
----switch to alternate window/buffer/oldfile in that priority
+---switch to alternate buffer/oldfile (in that priority)
 function M.altBufferWindow()
 	local altFile = fn.expand("#:t")
 	local hasAltFile = altFile ~= "" and fn.filereadable(altFile)
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
 
-	if numberOfWins() > 1 then
-		cmd.wincmd("p")
-	elseif hasAltFile and (altPath ~= curPath) then
+	if hasAltFile and (altPath ~= curPath) then
 		cmd.buffer("#")
 	elseif altOldfile() then
 		cmd.edit(altOldfile())
