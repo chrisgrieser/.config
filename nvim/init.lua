@@ -1,37 +1,34 @@
--- TEMP to avoid trouble with devices not upgraded yet
-Isv09 = vim.version().major > 0 or vim.version().minor >= 9
-
-if Isv09 then vim.loader.enable() end -- experimental loader
-
---------------------------------------------------------------------------------
-
 -- CORE CONFIG
 vim.g.mapleader = ","
 LinterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
 VimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
 UpdateCounterThreshhold = 25 -- for plugin update statusline
 
-local ok, borderstyle = pcall(require, "config.borderstyle")
-if ok then borderstyle.set("single") end -- should come before lazy
+-- TEMP to avoid trouble with devices not upgraded yet
+if vim.version().minor >= 9 then vim.loader.enable() end 
+
+--------------------------------------------------------------------------------
 
 ---try to require the module, and do not error when one of them cannot be
 ---loaded. But do notify if there was an error.
 ---@param module string module to load
 local function tryRequire(module)
-	local success = pcall(require, module)
-	if not success then
-		local msg = "Error loading " .. module
-		local notifyInstalled, notify = pcall(require, "notify")
-		if notifyInstalled then
-			notify(" " .. msg)
-		else
-			vim.cmd.echoerr(msg)
-		end
+	local success, req = pcall(require, module)
+	if success then return req end
+
+	local msg = "Error loading " .. module
+	local notifyInstalled, notify = pcall(require, "notify")
+	if notifyInstalled then
+		notify(" " .. msg)
+	else
+		vim.cmd.echoerr(msg)
 	end
 end
 
 --------------------------------------------------------------------------------
 
+local borderstyle = tryRequire("config.borderstyle")
+if borderstyle then borderstyle.set("single") end -- should come before lazy
 tryRequire("config.lazy")
 tryRequire("config.utils")
 
