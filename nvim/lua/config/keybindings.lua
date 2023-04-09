@@ -310,6 +310,7 @@ keymap("n", "<leader>lb", function() require("funcs.quick-log").beeplog() end, {
 keymap("n", "<leader>lt", function() require("funcs.quick-log").timelog() end, { desc = " time log" })
 keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end, { desc = "  remove log" })
 keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, { desc = " debugger" })
+keymap("n", "<leader>lt", cmd.Inspect, { desc = " Treesitter Inspect" })
 -- stylua: ignore end
 
 keymap("n", "<leader>bu", function() require("dapui").toggle() end, { desc = " Toggle DAP-UI" })
@@ -732,7 +733,7 @@ keymap("n", "<leader>tc", function()
 end, { desc = " Codi" })
 
 -- edit embedded filetype
-keymap("n", "<leader>te", function()
+keymap("n", "<leader>ti", function()
 	if bo.filetype ~= "markdown" then
 		vim.notify("Only markdown codeblocks can be edited without a selection.")
 		return
@@ -740,7 +741,8 @@ keymap("n", "<leader>te", function()
 	cmd.InlineEdit()
 	keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
 end, { desc = " InlineEdit" })
-keymap("x", "<leader>te", function()
+
+keymap("x", "<leader>ti", function()
 	local fts = { "applescript", "bash", "vim" }
 	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 		if not ft then return end
@@ -750,8 +752,6 @@ keymap("x", "<leader>te", function()
 	end)
 end, { desc = " InlineEdit" })
 
-keymap("n", "<leader>tr", cmd.InspectTree, { desc = " InspectTree" })
-keymap("n", "<leader>ti", cmd.Inspect, { desc = " Inspect" })
 
 --------------------------------------------------------------------------------
 
