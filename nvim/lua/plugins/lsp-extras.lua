@@ -48,6 +48,7 @@ return {
 					top_char = BorderHorizontal,
 					bottom_char = BorderHorizontal,
 				},
+				preview_win_opts = { number = false },
 				list = {
 					width = 0.4,
 					position = "left",
@@ -59,24 +60,24 @@ return {
 				hooks = {
 					-- jump directly to definition if there is only one https://github.com/dnlhc/glance.nvim#before_open
 					before_open = function(results, open, jump, method)
-						print(method)
 						-- filter out current line
 						local curLn = vim.fn.line(".")
-						print("curLn:", curLn)
 						local curUri = vim.uri_from_bufnr(0)
-						print("curUri:", curUri)
-						results = vim.tbl_filter(function(result)
-							local targetLine = result.range.start.line
-							print("targetLine:", targetLine)
+						local filtered = {}
+						for _, result in pairs(results) do
+							local targetLine = result.range.start.line + 1 -- LSP counts off-by-one
 							local targetUri = result.uri or result.targetUri
-							print("targetUri:", targetUri)
-							local isCurrentLine = (targetLine == curLn) and (targetUri == curUri)
-							return not isCurrentLine
-						end, results)
-						if #results == 1 then
-							jump(results[1])
+							local isCurrentLine = targetLine == curLn and (targetUri == curUri)
+							if not isCurrentLine then table.insert(filtered, result) end
+						end
+
+						if #filtered == 0 then
+							vim.notify("No " .. method .. "found")
+							return
+						elseif #filtered == 1 then
+							jump(filtered[1])
 						else
-							open()
+							open(filtered)
 						end
 					end,
 				},
