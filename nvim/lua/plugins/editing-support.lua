@@ -43,7 +43,7 @@ return {
 			vim.g.ai_edits_model = "gpt-3.5-turbo"
 			vim.g.ai_temperature = 0 -- -0 with 1 meaning high randomness
 			vim.g.ai_indicator_text = "󱙺"
-			vim.g.ai_no_mappings = 1 -- disable default mappings (which overwrite <C-a> in Normal mode…)
+			vim.g.ai_no_mappings = 1 -- disable default mappings (which overwrite <C-a> in Normal mode)
 		end,
 	},
 	{ -- case conversion
@@ -97,7 +97,7 @@ return {
 		event = "BufReadPost",
 		opts = {
 			ring = {
-				history_length = 10,
+				history_length = 30,
 				cancel_event = "update", -- move|update
 			},
 			highlight = {
@@ -129,22 +129,23 @@ return {
 					z = false,
 				},
 			},
-			operator = {
+			ignore_missing = true,
+			triggers_blacklist = { n = { "y" } }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
+			-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
+			hidden = { "<Plug>", "^:lua ", "<cmd>" },
+			operator = { -- seems these are not working?
 				w = "Duplicate",
 				q = "Comment",
 				s = "Substitute",
 			},
-			key_labels = {
-				["<CR>"] = "↵ ",
-				["<BS>"] = "⌫",
-				["<Space>"] = "␣",
-				["<Tab>"] = "↹ ",
-				["<Esc>"] = "⎋",
-				["<F1>"] = "^", -- karabiner remapping
+			key_labels = { -- seems these are not working?
+				["<cr>"] = "↵ ",
+				["<bs>"] = "⌫",
+				["<space>"] = "␣",
+				["<tab>"] = "↹ ",
+				["<esc>"] = "⎋",
+				["<f1>"] = "^", -- karabiner remapping
 			},
-			triggers_blacklist = { n = { "y" } }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
-			hidden = { "<Plug>", "^:lua ", "<cmd>" },
-			-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
 			window = {
 				border = { "", BorderHorizontal, "", "" }, -- only horizontal border to save space
 				padding = { 0, 0, 0, 0 },
@@ -156,34 +157,20 @@ return {
 			},
 			layout = { -- of the columns
 				height = { min = 4, max = 13 },
-				width = { min = 28, max = 31 },
-				spacing = 1,
-				align = "center",
+				width = { min = 37, max = 40 },
+				spacing = 2,
+				align = "left",
 			},
 		},
 		config = function()
 			require("which-key").register({
-				f = {
-					name = "refactor…",
-				},
-				t = {
-					name = "terminal/code-runners…",
-				},
-				b = {
-					name = "debugger…",
-				},
-				u = {
-					name = "undo…",
-				},
-				l = {
-					name = "log/command…",
-				},
-				g = {
-					name = "git…",
-				},
-				o = {
-					name = "option-toggle…",
-				},
+				f = { name = "refactor" },
+				t = { name = "terminal / code runners" },
+				b = { name = "debugger" },
+				u = { name = "undo" },
+				l = { name = "log / cmdline" },
+				g = { name = "git" },
+				o = { name = "option" },
 			}, { prefix = "<leader>" })
 		end,
 	},

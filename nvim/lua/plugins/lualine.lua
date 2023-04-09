@@ -149,9 +149,8 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "UiEnter" }, {
 
 --------------------------------------------------------------------------------
 
--- simple alternative to fidget.nvim
+-- simple alternative to fidget.nvim -> https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
 local function lsp_progress()
-	-- via https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
 	local messages = vim.lsp.util.get_progress_messages()
 	if #messages == 0 then return "" end
 	local client = messages[1].name and messages[1].name .. ": " or ""
@@ -196,11 +195,18 @@ local function pathToProjectRoot()
 	return "󰝰 " .. nicerDisplay
 end
 
+-- only show fold level than different from foldlevelstart
+-- also show pause icon if fold is paused
 local function foldLevel()
+	local startLevel = vim.opt.foldlevelstart:get()
 	local level = vim.opt_local.foldlevel:get()
 	local foldenabled = vim.opt_local.foldenable:get() and vim.bo.filetype ~= "Glance"
-	local icon = foldenabled and "󰘖 " or "󰘖  "
-	return icon .. " " .. tostring(level)
+
+	local icon = startLevel == level and "" or "󰘖 "
+	local label = startLevel == level and "" or tostring(level)
+	if not foldenabled then icon = icon .. " " end
+
+	return icon .. label
 end
 
 --------------------------------------------------------------------------------
