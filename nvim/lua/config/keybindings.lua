@@ -751,7 +751,7 @@ keymap("x", "<leader>te", function()
 	end)
 end, { desc = " InlineEdit" })
 
-keymap("n", "<leader>tr", cmd.InspectTree, { desc = " InspectTree" })
+keymap("n", "<leader>tI", cmd.InspectTree, { desc = " InspectTree" })
 keymap("n", "<leader>ti", cmd.InspectTree, { desc = " Inspect" })
 
 --------------------------------------------------------------------------------
