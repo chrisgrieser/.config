@@ -4,8 +4,6 @@ for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
 	Keymap("n", "z" .. tostring(lvl), function () vim.opt_local.foldlevel = lvl end, { desc = "󰘖 Set Fold Level" })
 end
 
-Keymap("n", "zu", "mz`fza`z", { desc = "󰘖 Undo Last Fold Toggle" })
-
 -- f1 = ^ (Karabiner Remap)
 Keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
 Keymap("n", "<f1>", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
@@ -78,8 +76,11 @@ Keymap("n", "l", function()
 	local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
 	local isOnFold = vim.fn.foldclosed(".") > -1 ---@diagnostic disable-line: param-type-mismatch
 	if shouldOpenFold and isOnFold then
-		pcall(Normal, "zo")
+		local hasOpendFold = pcall(Normal, "zo")
+		if hasOpendFold then Normal("mf") end -- remember last opened fold in f mark
 	else
 		Normal("l")
 	end
 end, { desc = "l (or open fold)" })
+
+Keymap("n", "zu", "mz`fza`z", { desc = "󰘖 Undo Last Fold Toggle" })

@@ -35,7 +35,6 @@ tryRequire("config.options-and-autocmds")
 tryRequire("config.keybindings")
 
 tryRequire("config.automating-nvim")
-tryRequire("config.textobject-keymaps")
 tryRequire("config.clipboard")
 tryRequire("config.user-commands")
 tryRequire("config.abbreviations")
