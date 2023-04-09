@@ -61,7 +61,7 @@ local source_icons = {
 	luasnip = "󰞘",
 	emoji = "󰇵",
 	nerdfont = "󰇳",
-	cmdline = " ⌘",
+	cmdline = "󰘳",
 	cmdline_history = "󰋚",
 	path = "",
 }

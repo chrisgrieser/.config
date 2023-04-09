@@ -54,8 +54,12 @@ end, { desc = "󰘖 Goto previous closed fold" })
 -- stylua: ignore
 Keymap("n", "zp", function() require("ufo").peekFoldedLinesUnderCursor(false, true) end, { desc = "󰘖 󰈈 Preview Fold" })
 
--- make n preview fold (since opt.foldopen does not include search)
+-- make search preview fold (since opt.foldopen does not include search)
 Keymap("n", "n", function()
+	Normal("n")
+	require("ufo").peekFoldedLinesUnderCursor(false, true)
+end, { desc = "n + open fold + remember" })
+Keymap("c", "<CR>", function()
 	Normal("n")
 	require("ufo").peekFoldedLinesUnderCursor(false, true)
 end, { desc = "n + open fold + remember" })
