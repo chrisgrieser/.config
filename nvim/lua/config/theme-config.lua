@@ -151,9 +151,11 @@ local function themeModifications()
 		setHighlight("ColorColumn", "guibg=#eee6dc")
 		setHighlight("Headline", "gui=bold guibg=#ebe1d5")
 
-	-- oh-lucy
+	-- oh-lucy 
 	elseif theme == "oh-lucy" then
-		setHighlight("Todo", "guifg=bold guibg=#ebe1d5")
+		setHighlight("Todo", "guifg=#111111")
+		setHighlight("Error", "gui=NONE") -- no bold
+		setHighlight("NonText", "gui=NONE") -- no bold
 	end
 end
 

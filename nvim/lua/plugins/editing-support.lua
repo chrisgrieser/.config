@@ -131,7 +131,7 @@ return {
 				n = { "y" }, 
 			},
 			-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
-			hidden = { "<Plug>", "^:lua " },
+			hidden = { "<Plug>", "^:lua ", "<cmd>" },
 			window = {
 				border = { "", BorderHorizontal, "", "" }, -- only horizontal border to save space
 				padding = { 0, 0, 0, 0 },

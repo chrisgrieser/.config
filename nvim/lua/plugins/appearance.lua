@@ -40,7 +40,8 @@ return {
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
 				bibtex = { icon = "", name = "BibTeX" },
 				http = { icon = "󰴚", name = "http" },
-				-- plugins
+				-- -- plugins
+				PlenaryTestPopup = { icon = "", name = "PlenaryTestPopup" },
 				lazy = { icon = "", name = "Lazy" },
 				Glance = { icon = "󰒕", name = "Glance" },
 				toggleterm = { icon = "", name = "ToggleTerm" },
