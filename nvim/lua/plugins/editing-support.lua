@@ -1,5 +1,5 @@
 return {
-	{ -- autopair 
+	{ -- autopair
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		dependencies = { "hrsh7th/nvim-cmp", "nvim-treesitter/nvim-treesitter" },
@@ -122,26 +122,69 @@ return {
 		opts = {
 			plugins = {
 				presets = {
+					operators = false,
 					motions = false,
 					text_objects = false,
+					g = false,
+					z = false,
 				},
 			},
-			triggers_blacklist = {
-				-- FIX "y" needed to fix weird delay occurring when yanking after a change
-				n = { "y" }, 
+			operator = {
+				w = "Duplicate",
+				q = "Comment",
+				s = "Substitute",
 			},
-			-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
+			key_labels = {
+				["<CR>"] = "↵ ",
+				["<BS>"] = "⌫",
+				["<Space>"] = "␣",
+				["<Tab>"] = "↹ ",
+				["<Esc>"] = "⎋",
+				["<F1>"] = "^", -- karabiner remapping
+			},
+			triggers_blacklist = { n = { "y" } }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
 			hidden = { "<Plug>", "^:lua ", "<cmd>" },
+			-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
 			window = {
 				border = { "", BorderHorizontal, "", "" }, -- only horizontal border to save space
 				padding = { 0, 0, 0, 0 },
 				margin = { 0, 0, 0, 0 },
 			},
+			popup_mappings = {
+				scroll_down = "<PageDown>", 
+				scroll_up = "<PageUp>", 
+			},
 			layout = { -- of the columns
-				height = { min = 4, max = 15 },
-				width = { min = 30, max = 33 },
-				spacing = 2,
+				height = { min = 4, max = 13 },
+				width = { min = 28, max = 31 },
+				spacing = 1,
+				align = "center",
 			},
 		},
+		config = function()
+			require("which-key").register({
+				f = {
+					name = "refactor…",
+				},
+				t = {
+					name = "terminal/code-runners…",
+				},
+				b = {
+					name = "debugger…",
+				},
+				u = {
+					name = "undo…",
+				},
+				l = {
+					name = "log/command…",
+				},
+				g = {
+					name = "git…",
+				},
+				o = {
+					name = "option-toggle…",
+				},
+			}, { prefix = "<leader>" })
+		end,
 	},
 }

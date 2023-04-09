@@ -154,8 +154,10 @@ local function themeModifications()
 	-- oh-lucy 
 	elseif theme == "oh-lucy" then
 		setHighlight("Todo", "guifg=#111111")
-		setHighlight("Error", "gui=NONE") -- no bold
-		setHighlight("NonText", "gui=NONE") -- no bold
+		-- no bold
+		setHighlight("Error", "gui=NONE") 
+		setHighlight("@error", "gui=NONE") 
+		setHighlight("NonText", "gui=NONE") 
 	end
 end
 
