@@ -4,6 +4,7 @@ require("config.textobject-keymaps")
 local fn = vim.fn
 local cmd = vim.cmd
 local keymap = vim.keymap.set
+local bo = vim.bo
 
 --------------------------------------------------------------------------------
 -- META
@@ -243,14 +244,14 @@ keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
 keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
 
 keymap("n", "<leader>f<Tab>", function()
-	Bo.expandtab = false
+	bo.expandtab = false
 	cmd.retab { bang = true }
-	Bo.tabstop = vim.opt_global.tabstop:get()
+	bo.tabstop = vim.opt_global.tabstop:get()
 	vim.notify("Now using: Tabs ↹ ")
 end, { desc = "↹ Use Tabs" })
 
 keymap("n", "<leader>f<Space>", function()
-	Bo.expandtab = true
+	bo.expandtab = true
 	cmd.retab { bang = true }
 	vim.notify("Now using: Spaces 󱁐")
 end, { desc = "󱁐 Use Spaces" })
@@ -335,29 +336,12 @@ keymap("n", "<leader>bn", function()
 		vim.notify("Debugger already running.", LogWarn)
 		return
 	end
-	if not Bo.filetype == "lua" then
+	if not bo.filetype == "lua" then
 		vim.notify("Not a lua file.", LogWarn)
 		return
 	end
 	require("osv").run_this()
 end, { desc = "  Start nvim-lua debugger" })
-
---------------------------------------------------------------------------------
-
--- Replace Mode
--- needed, since `R` mapped to duplicate line
-keymap("n", "<leader>R", "R", { desc = "Replace Mode" })
-
--- URL Opening (forward-seeking `gx`)
-keymap("n", "gx", function()
-	require("various-textobjs").url()
-	local foundURL = fn.mode():find("v") -- will only switch to visual mode if URL found
-	if foundURL then
-		Normal('"zy')
-		local url = fn.getreg("z")
-		os.execute("open '" .. url .. "'")
-	end
-end, { desc = "󰌹 Smart URL Opener" })
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
@@ -400,6 +384,17 @@ keymap("n", "<leader>s", cmd.TSJToggle, { desc = "split/join lines" })
 keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "split around selection" })
 keymap({ "n", "x" }, "M", "J", { desc = "merge line up" })
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "merge line down" })
+
+-- URL Opening (forward-seeking `gx`)
+keymap("n", "gx", function()
+	require("various-textobjs").url()
+	local foundURL = fn.mode():find("v") -- will only switch to visual mode if URL found
+	if foundURL then
+		Normal('"zy')
+		local url = fn.getreg("z")
+		os.execute("open '" .. url .. "'")
+	end
+end, { desc = "󰌹 Smart URL Opener" })
 
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
@@ -717,23 +712,28 @@ keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 keymap("n", "<leader>tf", "<Plug>PlenaryTestFile", { desc = " Test File" })
 keymap("n", "<leader>td", "<cmd>PlenaryBustedDirectory .<CR>", { desc = " Tests in Directory" })
 
+keymap("n", "<leader>th", function ()
+	cmd.edit("test-request.http")
+	fn.system("open https://github.com/rest-nvim/rest.nvim/tree/main/tests")
+end, { desc = "󰴚 Test HTTP request" })
+
 keymap("n", "<leader>tt", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
 -- stylua: ignore
 keymap( "x", "<leader>tt", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
 
 keymap("n", "<leader>tc", function()
-	local isCodiBuffer = Bo.buftype ~= ""
+	local isCodiBuffer = bo.buftype ~= ""
 	if isCodiBuffer then
 		cmd.CodiExpand() -- multiline output for the current line
 	else
 		cmd.CodiNew()
-		vim.api.nvim_buf_set_name(0, "Codi: " .. Bo.filetype)
+		vim.api.nvim_buf_set_name(0, "Codi: " .. bo.filetype)
 	end
 end, { desc = " Codi" })
 
 -- edit embedded filetype
 keymap("n", "<leader>te", function()
-	if Bo.filetype ~= "markdown" then
+	if bo.filetype ~= "markdown" then
 		vim.notify("Only markdown codeblocks can be edited without a selection.")
 		return
 	end
@@ -751,7 +751,7 @@ keymap("x", "<leader>te", function()
 end, { desc = " InlineEdit" })
 
 keymap("n", "<leader>tr", cmd.InspectTree, { desc = " InspectTree" })
-keymap("n", "<leader>ti", cmd.InspectTree, { desc = " Inspect" })
+keymap("n", "<leader>ti", cmd.Inspect, { desc = " Inspect" })
 
 --------------------------------------------------------------------------------
 
@@ -783,7 +783,7 @@ Autocmd("FileType", {
 	pattern = { "ssr", "TelescopePrompt", "harpoon" },
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
-		if Bo.filetype == "ssr" then
+		if bo.filetype == "ssr" then
 			keymap("n", "q", "Q", opts)
 		else
 			-- HACK 1ms delay ensures it comes later in the autocmd stack and takes effect

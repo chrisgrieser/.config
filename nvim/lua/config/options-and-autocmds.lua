@@ -234,9 +234,9 @@ Autocmd("BufWinEnter", {
 	callback = function() remember("load") end,
 })
 --------------------------------------------------------------------------------
--- Add missing buffer names
+-- Add missing buffer names, e.g. for status bar
 Autocmd("FileType", {
-	pattern = { "Glance", "lazy" },
+	pattern = { "Glance", "lazy", "PlenaryTestPopup" },
 	callback = function()
 		local name = vim.fn.expand("<amatch>")
 		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize
