@@ -53,14 +53,12 @@ end, { desc = "󰘳 Copy Last Notification" })
 
 -- Dismiss notifications & re-enable fold after search
 keymap("n", "<Esc>", function()
-	vim.opt.foldenable = true
 	local clearPending = require("notify").pending() > 10
 	require("notify").dismiss { pending = clearPending }
 end, { desc = "Clear Notifications" })
 
 --------------------------------------------------------------------------------
 -- MOTIONS
-keymap({ "n", "o", "x" }, "w", "E")
 keymap({ "n", "o", "x" }, "e", '<cmd>lua require("spider").motion("e")<CR>', { desc = "Spider-e" })
 keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { desc = "Spider-b" })
 
@@ -90,8 +88,7 @@ vim.on_key(function(char)
 	if not (searchConfirmed or fn.mode() == "n") then return end
 	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
 	if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
-end, vim.api.nvim_create_namespace("auto_pause_folding"))
-
+end, vim.api.nvim_create_namespace("auto_nohl"))
 
 -- Marks
 -- stylua: ignore
@@ -717,7 +714,9 @@ end, { desc = " Toggle Wrap" })
 keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 
-keymap("n", "<leader>tr", "<Plug>PlenaryTestFile", { desc = " Run Test (Current Spec)" })
+keymap("n", "<leader>tf", "<Plug>PlenaryTestFile", { desc = " Test File" })
+keymap("n", "<leader>td", "<cmd>PlenaryBustedDirectory .<CR>", { desc = " Tests in Directory" })
+
 keymap("n", "<leader>tt", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
 -- stylua: ignore
 keymap( "x", "<leader>tt", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
@@ -751,7 +750,7 @@ keymap("x", "<leader>te", function()
 	end)
 end, { desc = " InlineEdit" })
 
-keymap("n", "<leader>tI", cmd.InspectTree, { desc = " InspectTree" })
+keymap("n", "<leader>tr", cmd.InspectTree, { desc = " InspectTree" })
 keymap("n", "<leader>ti", cmd.InspectTree, { desc = " Inspect" })
 
 --------------------------------------------------------------------------------

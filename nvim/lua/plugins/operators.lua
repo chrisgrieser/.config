@@ -36,15 +36,12 @@ return {
 	},
 	{
 		"smjonas/duplicate.nvim",
-		keys = {
-			{ "yd", desc = "Duplicate" },
-			{ "R", mode = { "n", "x" }, desc = "Duplicate" },
-		},
+		keys = { { "w", desc = "Duplicate" } },
 		opts = {
 			operator = {
-				normal_mode = "yd",
-				visual_mode = "R",
-				line = "R",
+				normal_mode = "w",
+				visual_mode = "w",
+				line = "ww",
 			},
 			-- selene: allow(high_cyclomatic_complexity)
 			transform = function(lines)
