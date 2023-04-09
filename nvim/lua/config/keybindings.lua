@@ -77,7 +77,6 @@ Keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 Keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Search
-Keymap({ "n", "o" }, "-", "/", { desc = "Search" })
 Keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 Keymap("n", "+", "*", { desc = "Search word under cursor" })
 Keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })

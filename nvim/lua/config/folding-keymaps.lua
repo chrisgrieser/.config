@@ -1,6 +1,8 @@
 local fn = vim.fn
-local b = vim.b
 --------------------------------------------------------------------------------
+
+-- disable folds while searching or substituting
+Keymap("", "-", "<cmd>set nofoldenable<CR>/", { desc = "󰘖 Disable folds when searching" })
 
 -- set foldlevel
 for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
@@ -60,9 +62,9 @@ Keymap("n", "n", function()
 	require("ufo").peekFoldedLinesUnderCursor(false, true)
 end, { desc = "n + open fold + remember" })
 Keymap("c", "<CR>", function()
-	Normal("n")
-	require("ufo").peekFoldedLinesUnderCursor(false, true)
-end, { desc = "n + open fold + remember" })
+	if fn.getcmdtype() ~= "/" then return "<CR>" end
+	return '<CR><cmd>lua require("ufo").peekFoldedLinesUnderCursor(false, true)<CR>'
+end, { expr = true, desc = "n + open fold + remember" })
 
 -- h closes (similar to how l opens due to opt.foldopen="hor")
 Keymap("n", "h", function()
