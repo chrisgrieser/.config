@@ -1,3 +1,10 @@
+-- TEMP to avoid trouble with devices not upgraded yet
+Isv09 = vim.version().major > 0 or vim.version().minor >= 9
+
+if Isv09 then vim.loader.enable() end -- experimental loader
+
+--------------------------------------------------------------------------------
+
 -- CORE CONFIG
 vim.g.mapleader = ","
 LinterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
