@@ -18,8 +18,8 @@ keymap("n", "<leader>T", function() cmd.Telescope("colorscheme") end, { desc = "
 keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- Update [P]lugins
-keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Sync" })
-keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason" })
+keymap("n", "<leader>p", require("lazy").sync, { desc = " Lazy Sync" })
+keymap("n", "<leader>M", cmd.Mason, { desc = " Mason" })
 
 --------------------------------------------------------------------------------
 
@@ -342,7 +342,7 @@ keymap("n", "<leader>bn", function()
 		vim.notify("Not a lua file.", LogWarn)
 		return
 	end
-	require("osv").run_this() 
+	require("osv").run_this()
 end, { desc = "  Start nvim-lua debugger" })
 
 --------------------------------------------------------------------------------
@@ -624,7 +624,6 @@ Autocmd("LspAttach", {
 		-- uses "v" instead of "x", so signature can be shown during snippet completion
 		keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
 		keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover", buffer = true })
-		-- stylua: ignore end
 
 		-- Save & Format
 		keymap({ "n", "i", "x" }, "<D-s>", function()
