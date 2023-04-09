@@ -639,13 +639,11 @@ Keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers"
 Keymap("n", "<leader>ol", Cmd.LspRestart, { desc = " 󰒕 LSP Restart" })
 
 Keymap("n", "<leader>od", function()
-	if vim.g.diagnosticOn == nil then vim.g.diagnosticOn = true end
-	if vim.g.diagnosticOn then
-		vim.diagnostic.disable(0)
-	else
+	if vim.diagnostic.is_disabled() then
 		vim.diagnostic.enable(0)
+	else
+		vim.diagnostic.disable(0)
 	end
-	vim.g.diagnosticOn = not vim.g.diagnosticOn
 end, { desc = " 󰒕 Toggle Diagnostics" })
 
 Keymap("n", "<leader>ow", function()
