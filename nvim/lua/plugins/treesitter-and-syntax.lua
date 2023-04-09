@@ -70,9 +70,9 @@ local tsConfig = {
 				["al"] = "@call.outer",
 				["iu"] = "@loop.inner", -- loop (mnemonic: luup)
 				["au"] = "@loop.outer",
-				-- later remapped to q only in operator pendign mode to avoid conflict
+				-- later remapped to q only in operator pending mode to avoid conflict
 				-- @comment.inner not supported yet for most languages
-				["<<<"] = "@comment.outer",
+				["&&&"] = "@comment.outer",
 			},
 		},
 	},

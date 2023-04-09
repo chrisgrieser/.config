@@ -1,8 +1,15 @@
 local fn = vim.fn
 --------------------------------------------------------------------------------
 
--- disable folds while searching or substituting
-Keymap("", "-", "<cmd>set nofoldenable<CR>/", { desc = "󰘖 Disable folds when searching" })
+-- while searching, disable folds, similar to https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
+vim.on_key(function(char)
+	local searchKeys = { "n", "N", "*", "#", "?", "/" }
+	local searchKeyUsed = (vim.tbl_contains(searchKeys, fn.keytrans(char)) and fn.mode() == "n")
+		or (fn.keytrans(char):upper() == "<CR>" and fn.mode() == "c")
+	if vim.opt.foldenable:get() ~= not searchKeyUsed then vim.opt.foldenable = not searchKeyUsed end
+end, vim.api.nvim_create_namespace("auto_pause_folding"))
+
+--------------------------------------------------------------------------------
 
 -- set foldlevel
 for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
@@ -55,16 +62,6 @@ end, { desc = "󰘖 Goto previous closed fold" })
 -- preview fold
 -- stylua: ignore
 Keymap("n", "zp", function() require("ufo").peekFoldedLinesUnderCursor(false, true) end, { desc = "󰘖 󰈈 Preview Fold" })
-
--- make search preview fold (since opt.foldopen does not include search)
-Keymap("n", "n", function()
-	Normal("n")
-	require("ufo").peekFoldedLinesUnderCursor(false, true)
-end, { desc = "n + open fold + remember" })
-Keymap("c", "<CR>", function()
-	if fn.getcmdtype() ~= "/" then return "<CR>" end
-	return '<CR><cmd>lua require("ufo").peekFoldedLinesUnderCursor(false, true)<CR>'
-end, { expr = true, desc = "n + open fold + remember" })
 
 -- h closes (similar to how l opens due to opt.foldopen="hor")
 Keymap("n", "h", function()
