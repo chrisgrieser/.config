@@ -42,7 +42,7 @@
 	},
 	"ignore rule (selene)": {
 		"prefix": "ignore rule (selene)",
-		"body": "-- selene: allow(${1:rule_name})"
+		"body": "-- selene: allow(${1:high_cyclomatic_complexity})"
 	},
 	"if .. then .. else": {
 		"prefix": "if .. then .. else",

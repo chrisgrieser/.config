@@ -59,9 +59,13 @@ end
 
 --------------------------------------------------------------------------------
 
+-- selene: allow(high_cyclomatic_complexity)
 local function themeModifications()
 	local mode = vim.opt.background:get()
 	local theme = g.colors_name
+	-- some themes do not set g.colors_name
+	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
+
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 	-- FIX lualine_a not getting bold in some themes
 	for _, v in pairs(vimModes) do
@@ -146,6 +150,10 @@ local function themeModifications()
 		setHighlight("ScrollView", "guibg=#505030")
 		setHighlight("ColorColumn", "guibg=#eee6dc")
 		setHighlight("Headline", "gui=bold guibg=#ebe1d5")
+
+	-- oh-lucy
+	elseif theme == "oh-lucy" then
+		setHighlight("Todo", "guifg=bold guibg=#ebe1d5")
 	end
 end
 
