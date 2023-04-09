@@ -39,25 +39,39 @@ return {
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",
 		cmd = "Glance",
-		opts = {
-			height = 20,
-			border = {
-				enable = true,
-				top_char = BorderHorizontal,
-				bottom_char = BorderHorizontal,
-			},
-			list = { width = 0.35 },
-			hooks = {
-				-- jump directly to definition if there is only one https://github.com/dnlhc/glance.nvim#before_open
-				before_open = function(results, open, jump)
-					if #results == 1 then
-						jump()
-					else
-						open()
-					end
-				end,
-			},
-		},
+		config = function()
+			local actions = require("glance").actions
+			require("glance").setup {
+				height = 20,
+				border = {
+					enable = true,
+					top_char = BorderHorizontal,
+					bottom_char = BorderHorizontal,
+				},
+				list = {
+					width = 0.4,
+					position = "left",
+				},
+				mappings = {
+					list = {
+						["<S-CR>"] = actions.enter_win("preview"),
+					},
+					preview = {
+						["<S-CR>"] = actions.enter_win("list"),
+					},
+				},
+				hooks = {
+					-- jump directly to definition if there is only one https://github.com/dnlhc/glance.nvim#before_open
+					before_open = function(results, open, jump)
+						if #results == 1 then
+							jump()
+						else
+							open()
+						end
+					end,
+				},
+			}
+		end,
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
