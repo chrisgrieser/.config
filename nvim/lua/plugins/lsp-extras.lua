@@ -39,50 +39,45 @@ return {
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",
 		cmd = "Glance",
-		config = function()
-			local actions = require("glance").actions
-			require("glance").setup {
-				height = 20,
-				border = {
-					enable = true,
-					top_char = BorderHorizontal,
-					bottom_char = BorderHorizontal,
-				},
-				preview_win_opts = { number = false },
-				list = {
-					width = 0.4,
-					position = "left",
-				},
-				mappings = {
-					list = { ["<S-CR>"] = actions.enter_win("preview") },
-					preview = { ["<S-CR>"] = actions.enter_win("list") },
-				},
-				hooks = {
-					-- jump directly to definition if there is only one https://github.com/dnlhc/glance.nvim#before_open
-					before_open = function(results, open, jump, method)
-						-- filter out current line
+		opts = {
+			height = 23,
+			border = {
+				enable = true,
+				top_char = BorderHorizontal,
+				bottom_char = BorderHorizontal,
+			},
+			preview_win_opts = { number = false },
+			list = {
+				width = 0.4,
+				position = "left",
+			},
+			hooks = {
+				-- jump directly if there is only one references
+				-- filter out current line, if references
+				before_open = function(results, open, jump, method)
+					if method == "references" then
+						local filtered = {}
 						local curLn = vim.fn.line(".")
 						local curUri = vim.uri_from_bufnr(0)
-						local filtered = {}
 						for _, result in pairs(results) do
 							local targetLine = result.range.start.line + 1 -- LSP counts off-by-one
 							local targetUri = result.uri or result.targetUri
 							local isCurrentLine = targetLine == curLn and (targetUri == curUri)
 							if not isCurrentLine then table.insert(filtered, result) end
 						end
+						results = filtered
+					end
 
-						if #filtered == 0 then
-							vim.notify("No " .. method .. "found")
-							return
-						elseif #filtered == 1 then
-							jump(filtered[1])
-						else
-							open(filtered)
-						end
-					end,
-				},
-			}
-		end,
+					if #results == 0 then
+						vim.notify("No " .. method .. "found")
+					elseif #results == 1 then
+						jump(results[1])
+					else
+						open(results)
+					end
+				end,
+			},
+		}
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
