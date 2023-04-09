@@ -19,8 +19,8 @@ end, vim.api.nvim_create_namespace("auto_pause_folds"))
 
 -- set foldlevel
 for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
-	-- stylua: ignore
-	keymap("n", "z" .. tostring(lvl), function () vim.opt_local.foldlevel = lvl end, { desc = "󰘖 Set Fold Level" })
+	local desc = lvl < 3 and "󰘖 Set Fold Level" or "which_key_ignore"
+	keymap("n", "z" .. tostring(lvl), function() vim.opt_local.foldlevel = lvl end, { desc = desc })
 end
 
 -- f1 = ^ (Karabiner Remap)
