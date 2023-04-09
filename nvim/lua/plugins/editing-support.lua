@@ -165,7 +165,7 @@ return {
 		config = function()
 			require("which-key").register({
 				f = { name = "refactor" },
-				t = { name = "terminal / code runners" },
+				t = { name = "terminal / test" },
 				b = { name = "debugger" },
 				u = { name = "undo" },
 				l = { name = "log / cmdline" },
