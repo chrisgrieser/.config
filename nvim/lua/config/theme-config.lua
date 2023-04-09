@@ -129,6 +129,15 @@ local function themeModifications()
 		linkHighlight("NotifyINFOTitle", "@define")
 		linkHighlight("NotifyINFOBody", "@define")
 
+	-- mellifluous
+	elseif theme == "mellifluous" and mode == "light" then
+		linkHighlight("NotifyINFOIcon", "NotifyINFOBorder")
+		linkHighlight("NotifyINFOTitle", "NotifyINFOBorder")
+		linkHighlight("NotifyINFOBody", "NotifyINFOBorder")
+		for _, v in pairs(vimModes) do
+			setHighlight("lualine_y_diff_added_" .. v, "guifg=#53964f")
+		end
+
 	-- rose-pine
 	elseif theme == "rose-pine" and mode == "light" then
 		setHighlight("IndentBlanklineChar", "guifg=#e3d4c4")

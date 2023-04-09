@@ -3,8 +3,8 @@
 # INFO: After app update, needs to be re-granted screen recording permissions
 #───────────────────────────────────────────────────────────────────────────────
 
-i=0
 # ensure Stats.app is running
+i=0
 while ! pgrep "Stats"; do
 	open -a "Stats"
 	sleep 2
@@ -15,9 +15,9 @@ done
 # REQUIRED Stats being set as one combined module
 stats="Stats,CombinedModules"
 
-if sketchybar --query default_menu_items | grep -q "$stats"; then
+if ! sketchybar --query default_menu_items | grep -q "$stats"; then
 	osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats Combined Module not found"'
-	return 1
+	exit 1
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -77,7 +77,7 @@ sketchybar \
 	--subscribe sidenotes-count update-sidenotes-count \
 	\
 	--add alias "$stats" $second_row \
-	--set "$stats" width=230 \
+	--set "$stats" width=245 \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 \

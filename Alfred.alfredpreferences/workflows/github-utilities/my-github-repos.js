@@ -35,7 +35,7 @@ function run() {
 				matcher += "archived "
 			}
 			if (repo.fork) {
-				subtitle += "🍽️ ";
+				subtitle += "🍴 ";
 				matcher += "fork "
 			}
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
