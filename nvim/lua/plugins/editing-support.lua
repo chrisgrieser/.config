@@ -2,10 +2,7 @@ return {
 	{ -- autopair 
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		dependencies = {
-			"hrsh7th/nvim-cmp",
-			"nvim-treesitter/nvim-treesitter",
-		},
+		dependencies = { "hrsh7th/nvim-cmp", "nvim-treesitter/nvim-treesitter" },
 		config = function()
 			require("nvim-autopairs").setup { check_ts = true } -- use treesitter
 			local rule = require("nvim-autopairs.rule")
@@ -114,12 +111,6 @@ return {
 		"dkarter/bullets.vim",
 		ft = { "markdown", "text" },
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
-	},
-	{ -- :substitute, but with lua pattern
-		"chrisgrieser/nvim-alt-substitute",
-		dev = true,
-		cmd = { "S", "AltSubstitute" },
-		opts = true,
 	},
 	{ -- automatically set right indent for file
 		"Darazaki/indent-o-matic",

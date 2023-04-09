@@ -503,6 +503,9 @@ Keymap( "n", "gO", function() require("telescope").extensions.file_browser.file_
 } end, { desc = " Browse in current Folder" })
 
 -- stylua: ignore
+Keymap("n", "gP", function() require("telescope").extensions.projects.projects { } end, { desc = " Projects" })
+
+-- stylua: ignore
 Keymap("n", "gl", function() require("telescope.builtin").live_grep {
 	prompt_title = "Live Grep: " .. projectName() }
 end, { desc = " Live Grep in Project" })
