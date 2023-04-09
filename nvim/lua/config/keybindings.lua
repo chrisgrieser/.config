@@ -121,15 +121,13 @@ Keymap("n", "<f1>", function()
 end, { desc = "󰘖 Toggle Fold" })
 
 -- set foldlevel
-for _, lvl in pairs({0, 1, 2, 3, 4, 5, 6, 7, 8, 9}) do
-	Keymap("n", "z"..tostring(lvl), function ()
-		vim.opt_local.foldlevel = lvl
-	end, { desc = "󰘖 " })
+for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
+	-- stylua: ignore
+	Keymap("n", "z"..tostring(lvl), function () vim.opt_local.foldlevel = lvl end, { desc = "󰘖 Set Fold Level" })
 end
 
 Keymap("n", "zu", "mz`fza`z", { desc = "󰘖 Undo Last Fold Toggle" })
 Keymap("n", "1", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
-Keymap("n", "!", "zi", { desc = "󰘖 Toggle Fold Globally" })
 
 -- toggle all toplevel folds
 Keymap("n", "zz", function()
@@ -837,25 +835,25 @@ Autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
--- Simple version of the delaytrain.nvim
-for _, key in ipairs { "h", "l" } do
-	local timeout = 3000
-	local maxUsage = 8
-
-	local count = 0
-	Keymap("n", key, function()
-		-- abort when recording, since this only leads to bugs then
-		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
-
-		if count > maxUsage then return end
-
-		count = count + 1
-		vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
-
-		local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-		if shouldOpenFold and (key == "h" or key == "l") then Normal("zv") end
-		Normal(key)
-	end, { desc = key .. " (delaytrain)" })
-end
+-- -- Simple version of the delaytrain.nvim
+-- for _, key in ipairs { "h", "l" } do
+-- 	local timeout = 3000
+-- 	local maxUsage = 8
+--
+-- 	local count = 0
+-- 	Keymap("n", key, function()
+-- 		-- abort when recording, since this only leads to bugs then
+-- 		if Fn.reg_recording() ~= "" or Fn.reg_executing() ~= "" then return end
+--
+-- 		if count > maxUsage then return end
+--
+-- 		count = count + 1
+-- 		vim.defer_fn(function() count = count - 1 end, timeout) ---@diagnostic disable-line: param-type-mismatch
+--
+-- 		local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
+-- 		if shouldOpenFold and (key == "h" or key == "l") then Normal("zv") end
+-- 		Normal(key)
+-- 	end, { desc = key .. " (delaytrain)" })
+-- end
 
 --------------------------------------------------------------------------------
