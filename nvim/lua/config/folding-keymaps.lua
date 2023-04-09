@@ -47,18 +47,14 @@ Keymap("n", "gZ", function()
 end, { desc = "󰘖 Goto previous closed fold" })
 
 -- preview fold
-Keymap(
-	"n",
-	"zp",
-	function() require("ufo").peekFoldedLinesUnderCursor(false, true) end,
-	{ desc = "󰘖 󰈈 Preview Fold" }
-)
+-- stylua: ignore
+Keymap("n", "zp", function() require("ufo").peekFoldedLinesUnderCursor(false, true) end, { desc = "󰘖 󰈈 Preview Fold" })
 
 -- make n preview fold (since opt.foldopen does not include search)
 Keymap("n", "n", function()
-	Normal("n")
-	require("ufo").peekFoldedLinesUnderCursor(false, true)
-end, { desc = "n + preview fold" })
+	Normal("nzv")
+
+end, { desc = "n + open fold + remember" })
 
 -- h closes (similar to how l opens due to opt.foldopen="hor")
 Keymap("n", "h", function()
