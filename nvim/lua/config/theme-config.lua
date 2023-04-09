@@ -1,5 +1,7 @@
 require("config.utils")
 local g = vim.g
+local cmd = vim.cmd
+local fn = vim.fn
 --------------------------------------------------------------------------------
 
 -- INFO not using `api.nvim_set_hl` yet as it overwrites an update group instead
@@ -8,15 +10,15 @@ local g = vim.g
 ---@param hlgroupfrom string
 ---@param hlgroupto string
 local function linkHighlight(hlgroupfrom, hlgroupto)
-	Cmd.highlight { "def link " .. hlgroupfrom .. " " .. hlgroupto, bang = true }
+	cmd.highlight { "def link " .. hlgroupfrom .. " " .. hlgroupto, bang = true }
 end
 
 ---@param hlgroup string
 ---@param changes string
-local function setHighlight(hlgroup, changes) Cmd.highlight(hlgroup .. " " .. changes) end
+local function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
 
 ---@param hlgroup string
-local function clearHighlight(hlgroup) Cmd.highlight("clear " .. hlgroup) end
+local function clearHighlight(hlgroup) cmd.highlight("clear " .. hlgroup) end
 
 --------------------------------------------------------------------------------
 
@@ -24,7 +26,7 @@ local function clearHighlight(hlgroup) Cmd.highlight("clear " .. hlgroup) end
 local signIcons = { Error = "", Warn = "▲", Info = "", Hint = "" }
 for type, icon in pairs(signIcons) do
 	local hl = "DiagnosticSign" .. type
-	Fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 --------------------------------------------------------------------------------
@@ -37,14 +39,14 @@ local function customHighlights()
 	end
 
 	setHighlight("urls", "cterm=underline gui=underline")
-	Fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
+	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
 	linkHighlight("myAnnotations", "Todo")
 	-- stylua: ignore
-	Fn.matchadd( "myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
+	fn.matchadd( "myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
 
 	setHighlight("Overnesting", "guibg=#E06C75")
-	Fn.matchadd("Overnesting", ("\t"):rep(8) .. "\t*")
+	fn.matchadd("Overnesting", ("\t"):rep(8) .. "\t*")
 
 	setHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
 	setHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
@@ -177,12 +179,12 @@ Autocmd("ColorScheme", {
 function SetThemeMode(mode)
 	vim.opt.background = mode
 	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
-	Cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
+	cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	local targetTheme = mode == "dark" and g.darkTheme or g.lightTheme
-	Cmd.colorscheme(targetTheme)
+	cmd.colorscheme(targetTheme)
 end
 
 -- initialize theme on startup
-local isDarkMode = Fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
+local isDarkMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
 local targetMode = isDarkMode and "dark" or "light"
 SetThemeMode(targetMode)

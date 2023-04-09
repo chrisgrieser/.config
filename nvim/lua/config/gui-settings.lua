@@ -1,36 +1,35 @@
-require("config.utils")
 local g = vim.g
--- INFO https://neovide.dev/configuration.html
+local fn = vim.fn
+local keymap = vim.keymap.set
 --------------------------------------------------------------------------------
 
 -- See hammerspoons `app-hider.lua`
 Autocmd("VimEnter", {
 	callback = function()
 		-- hide other apps so the GUI transparency is visible.
-		Fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
+		fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
 
 		-- HACK to fix neovide sometimes not enlarging the window
-		Fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
+		fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
 	end,
 })
 
 --------------------------------------------------------------------------------
 -- SIZE
-
 vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2" -- https://www.programmingfonts.org/#oxygen
 
 -- INFO: Transparency set in theme-config.lua
-if Fn.hostname():find("Mother") then
+if fn.hostname():find("Mother") then
 	g.neovide_scale_factor = 0.93
 	g.neovide_refresh_rate = 40
-elseif Fn.hostname():find("eduroam") or Fn.hostname():find("iMac") then
+elseif fn.hostname():find("eduroam") or fn.hostname():find("iMac") then
 	g.neovide_scale_factor = 1
 	g.neovide_refresh_rate = 80
 end
 
 local delta = 1.05
-Keymap({ "n", "x", "i" }, "<D-+>", function() g.neovide_scale_factor = g.neovide_scale_factor * delta end)
-Keymap({ "n", "x", "i" }, "<D-->", function() g.neovide_scale_factor = g.neovide_scale_factor / delta end)
+keymap({ "n", "x", "i" }, "<D-+>", function() g.neovide_scale_factor = g.neovide_scale_factor * delta end)
+keymap({ "n", "x", "i" }, "<D-->", function() g.neovide_scale_factor = g.neovide_scale_factor / delta end)
 
 --------------------------------------------------------------------------------
 
@@ -39,12 +38,9 @@ g.neovide_confirm_quit = false
 g.neovide_hide_mouse_when_typing = true
 g.neovide_remember_window_size = false -- done via --geometry in `neovide` call, since more reliable
 
--- Keymaps
+-- keymaps
 g.neovide_input_use_logo = true -- enable `cmd` key on macOS
-g.neovide_input_macos_alt_is_meta = true -- enable `opt` key on macOS
-Keymap("i", "<M-.>", "…") -- helpers when `opt` is turned into meta key
-Keymap("i", "<M-->", "–") -- en-dash
-Keymap("i", "<M-7>", "|")
+g.neovide_input_macos_alt_is_meta = false -- false, so {@~ etc can be used
 
 -- Window Appearance
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
@@ -52,7 +48,6 @@ g.neovide_scroll_animation_length = 1 --
 
 --------------------------------------------------------------------------------
 -- CURSOR
-
 vim.opt.guicursor = {
 	"n-sm:block",
 	"i-ci-c:ver25",

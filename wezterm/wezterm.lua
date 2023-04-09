@@ -124,7 +124,7 @@ local keybindings = {
 
 local config = {
 	-- Meta
-	check_for_updates = true,
+	check_for_updates = false, -- done via homebrew, does not need to be so regularly
 	automatically_reload_config = true,
 	detect_password_input = isAtOffice,
 
