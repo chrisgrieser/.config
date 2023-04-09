@@ -6,6 +6,17 @@ local keymap = vim.keymap.set
 -- disable fold when searching
 keymap("n", "-", ":set nofoldenable<CR>/")
 
+-- while searching: pause folds -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
+vim.on_key(function(char)
+	local searchKeys = { "n", "N", "*", "#", "/", "?" }
+	local searchConfirmed = (fn.keytrans(char):upper() == "<CR>" and fn.mode() == "c")
+	if not (searchConfirmed or fn.mode() == "n") then return end
+	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
+	if vim.opt.foldenable:get() == searchKeyUsed then vim.opt.foldenable = not searchKeyUsed end
+end, vim.api.nvim_create_namespace("auto_pause_folds"))
+
+--------------------------------------------------------------------------------
+
 -- set foldlevel
 for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
 	-- stylua: ignore

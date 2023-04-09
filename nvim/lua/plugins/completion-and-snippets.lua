@@ -298,11 +298,7 @@ local function cmdlineCompletionConfig()
 
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
-		sources = {
-			s.cmdline_history, -- also gets search history when used here
-		}, { -- second array only relevant when no source from the first matches
-			s.buffer,
-		},
+		sources = { s.cmdline_history }, -- also gets search history when used here
 	})
 end
 
