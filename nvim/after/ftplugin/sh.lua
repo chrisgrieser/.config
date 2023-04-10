@@ -33,7 +33,6 @@ keymap("n", "<leader>r", function()
 
 		-- dismiss notification, HACK for https://github.com/FelixKratz/SketchyBar/issues/322
 		--stylua: ignore
-		---@diagnostic disable: param-type-mismatch
 		vim.defer_fn(function() fn.system([[osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"]]) end, 3000)
 	else
 		local output = fn.system(('zsh "%s"'):format(expand("%:p")))
