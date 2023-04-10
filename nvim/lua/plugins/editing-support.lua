@@ -118,14 +118,14 @@ return {
 	},
 	{ -- key chord hints
 		"folke/which-key.nvim",
-		event = "VeryLazy",
+		-- enabled = false,
 		opts = {
 			plugins = {
 				presets = {
-					operators = false,
-					motions = false,
-					text_objects = false,
-					g = false,
+					-- operators = false,
+					-- motions = false,
+					-- text_objects = false,
+					-- g = false,
 					z = false,
 				},
 			},
@@ -147,7 +147,8 @@ return {
 				["<f1>"] = "^", -- karabiner remapping
 			},
 			window = {
-				border = { "", BorderHorizontal, "", "" }, -- only horizontal border to save space
+				-- only horizontal border to save space
+				border = { "", require("config.utils").borderHorizontal, "", "" }, 
 				padding = { 0, 0, 0, 0 },
 				margin = { 0, 0, 0, 0 },
 			},
@@ -159,19 +160,18 @@ return {
 				height = { min = 4, max = 13 },
 				width = { min = 37, max = 40 },
 				spacing = 2,
-				align = "left",
 			},
 		},
-		config = function()
-			require("which-key").register({
-				f = { name = "refactor" },
-				t = { name = "terminal / test" },
-				b = { name = "debugger" },
-				u = { name = "undo" },
-				l = { name = "log / cmdline" },
-				g = { name = "git" },
-				o = { name = "option" },
-			}, { prefix = "<leader>" })
-		end,
+		-- config = function()
+		-- 	require("which-key").register({
+		-- 		f = { name = "refactor" },
+		-- 		t = { name = "terminal / test" },
+		-- 		b = { name = "debugger" },
+		-- 		u = { name = "undo" },
+		-- 		l = { name = "log / cmdline" },
+		-- 		g = { name = "git" },
+		-- 		o = { name = "option" },
+		-- 	}, { prefix = "<leader>" })
+		-- end,
 	},
 }
