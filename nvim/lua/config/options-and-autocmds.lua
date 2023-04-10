@@ -34,7 +34,6 @@ end
 
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
-opt.matchpairs:append("<:>") -- added pairs must be different (e.g. not two double quotes)
 
 -- Search
 opt.smartcase = true

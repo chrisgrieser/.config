@@ -1,12 +1,13 @@
 local M = {}
 local lsp = vim.lsp
 local fn = vim.fn
+-- similar to: https://github.com/VidocqH/lsp-lens.nvim
 --------------------------------------------------------------------------------
 
 local lspCount = {}
 
----@async
 ---calculate number of references for entity under cursor asynchronously
+---@async
 local function requestLspRefCount()
 	if fn.mode() ~= "n" then
 		lspCount = {}
