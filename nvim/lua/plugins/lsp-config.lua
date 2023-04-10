@@ -227,7 +227,7 @@ return {
 				float = {
 					focusable = true,
 					border = u.borderStyle,
-					max_width = 70,
+					max_width = 60,
 					header = "", -- remove "Diagnostics:" heading
 					format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,
 				},

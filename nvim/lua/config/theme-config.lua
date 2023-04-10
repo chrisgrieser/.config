@@ -5,18 +5,16 @@ local g = vim.g
 
 --------------------------------------------------------------------------------
 
--- INFO not using `api.nvim_set_hl` yet as it overwrites an update group instead
--- of overwriting it
-
 ---@param hlgroupfrom string
 ---@param hlgroupto string
 local function linkHighlight(hlgroupfrom, hlgroupto)
-	cmd.highlight { "def link " .. hlgroupfrom .. " " .. hlgroupto, bang = true }
+	vim.api.nvim_set_hl(0, hlgroupfrom, { link = hlgroupto, default = true })
 end
 
+---INFO not using `api.nvim_set_hl` yet as it overwrites a group instead of updating it
 ---@param hlgroup string
 ---@param changes string
-local function setHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
+local function updateHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
 
 ---@param hlgroup string
 local function clearHighlight(hlgroup) cmd.highlight("clear " .. hlgroup) end
@@ -36,29 +34,27 @@ local function customHighlights()
 	-- stylua: ignore
 	local highlights = { "DiagnosticUnderlineError", "DiagnosticUnderlineWarn", "DiagnosticUnderlineHint", "DiagnosticUnderlineInfo", "SpellLocal", "SpellRare", "SpellCap", "SpellBad" }
 	for _, v in pairs(highlights) do
-		setHighlight(v, "gui=underdouble cterm=underline")
+		updateHighlight(v, "gui=underdouble cterm=underline")
 	end
 
-	setHighlight("urls", "cterm=underline gui=underline")
+	updateHighlight("urls", "cterm=underline gui=underline")
 	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
 
 	linkHighlight("myAnnotations", "Todo")
 	-- stylua: ignore
-	fn.matchadd( "myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
+	fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
 
-	setHighlight("Overnesting", "guibg=#E06C75")
+	updateHighlight("Overnesting", "guibg=#E06C75")
 	fn.matchadd("Overnesting", ("\t"):rep(8) .. "\t*")
 
-	setHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
-	setHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
+	updateHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
+	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
 	linkHighlight("CodiVirtualText", "Comment") -- Codi
-	setHighlight("TSDefinition", " term=underline gui=underdotted") -- treesittter refactor focus
-	setHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
-	setHighlight("QuickScopePrimary", "gui=reverse cterm=reverse")
-	setHighlight("QuickScopeSecondary", "gui=underdouble cterm=underline")
+	updateHighlight("TSDefinition", " term=underline gui=underdotted") -- treesittter refactor focus
+	updateHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
+	updateHighlight("QuickScopePrimary", "gui=reverse cterm=reverse")
+	updateHighlight("QuickScopeSecondary", "gui=underdouble cterm=underline")
 end
-
---------------------------------------------------------------------------------
 
 -- selene: allow(high_cyclomatic_complexity)
 local function themeModifications()
@@ -70,17 +66,17 @@ local function themeModifications()
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 	-- FIX lualine_a not getting bold in some themes
 	for _, v in pairs(vimModes) do
-		setHighlight("lualine_a_" .. v, "gui=bold")
+		updateHighlight("lualine_a_" .. v, "gui=bold")
 	end
 
 	-- tokyonight
 	if theme == "tokyonight" then
 		for _, v in pairs(vimModes) do
-			setHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
-			setHighlight("lualine_y_diff_added_" .. v, "guifg=#8cbf8e")
+			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
+			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#8cbf8e")
 		end
-		setHighlight("GitSignsChange", "guifg=#acaa62")
-		setHighlight("GitSignsAdd", "guifg=#7fcc82")
+		updateHighlight("GitSignsChange", "guifg=#acaa62")
+		updateHighlight("GitSignsAdd", "guifg=#7fcc82")
 
 	-- oxocarbon
 	elseif theme == "oxocarbon" then
@@ -96,36 +92,36 @@ local function themeModifications()
 
 	-- blueloco
 	elseif theme == "bluloco" then
-		setHighlight("ScrollView", "guibg=#303d50")
-		setHighlight("ColorColumn", "guibg=#2e3742")
+		updateHighlight("ScrollView", "guibg=#303d50")
+		updateHighlight("ColorColumn", "guibg=#2e3742")
 
 	-- kanagawa
 	elseif theme == "kanagawa" then
-		setHighlight("ScrollView", "guibg=#303050")
-		setHighlight("VirtColumn", "guifg=#323036")
+		updateHighlight("ScrollView", "guibg=#303050")
+		updateHighlight("VirtColumn", "guifg=#323036")
 		linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
 
 		clearHighlight("SignColumn")
 		-- stylua: ignore
 		local noBackground = { "GitSignsAdd", "GitSignsDelete", "GitSignsChange", "DiagnosticSignHint", "DiagnosticSignInfo", "DiagnosticSignWarn", "DiagnosticSignError" }
 		for _, hlGroup in pairs(noBackground) do
-			setHighlight(hlGroup, "guibg=NONE")
+			updateHighlight(hlGroup, "guibg=NONE")
 		end
 
 	-- zephyr
 	elseif theme == "zephyr" then
-		setHighlight("IncSearch", "guifg=#FFFFFF")
+		updateHighlight("IncSearch", "guifg=#FFFFFF")
 		linkHighlight("TabLineSel", "lualine_a_normal")
 		linkHighlight("TabLineFill", "lualine_c_normal")
 
 	-- dawnfox
 	elseif theme == "dawnfox" then
-		setHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
-		setHighlight("ScrollView", "guibg=#303050")
-		setHighlight("ColorColumn", "guibg=#ebe1d5")
-		setHighlight("VertSplit", "guifg=#b29b84")
+		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
+		updateHighlight("ScrollView", "guibg=#303050")
+		updateHighlight("ColorColumn", "guibg=#ebe1d5")
+		updateHighlight("VertSplit", "guifg=#b29b84")
 		for _, v in pairs(vimModes) do
-			setHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
+			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
 		end
 
 	-- melange
@@ -142,25 +138,44 @@ local function themeModifications()
 		linkHighlight("NotifyINFOTitle", "NotifyINFOBorder")
 		linkHighlight("NotifyINFOBody", "NotifyINFOBorder")
 		for _, v in pairs(vimModes) do
-			setHighlight("lualine_y_diff_added_" .. v, "guifg=#53964f")
+			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#53964f")
 		end
 
 	-- rose-pine
 	elseif theme == "rose-pine" and mode == "light" then
-		setHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
-		setHighlight("ScrollView", "guibg=#505030")
-		setHighlight("ColorColumn", "guibg=#eee6dc")
-		setHighlight("Headline", "gui=bold guibg=#ebe1d5")
+		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
+		updateHighlight("ScrollView", "guibg=#505030")
+		updateHighlight("ColorColumn", "guibg=#eee6dc")
+		updateHighlight("Headline", "gui=bold guibg=#ebe1d5")
 
-	-- oh-lucy 
+	-- oh-lucy
 	elseif theme == "oh-lucy" then
-		setHighlight("Todo", "guifg=#111111")
-		-- no bold
-		setHighlight("Error", "gui=NONE") 
-		setHighlight("@error", "gui=NONE") 
-		setHighlight("NonText", "gui=NONE") 
+		updateHighlight("Todo", "guifg=#111111")
+		updateHighlight("Error", "gui=NONE") -- no bold
+		updateHighlight("@error", "gui=NONE")
+		updateHighlight("NonText", "gui=NONE")
 	end
 end
+
+--------------------------------------------------------------------------------
+
+-- https://www.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90/
+local semanticHighlight = {
+	["@lsp.type.namespace"] = "@namespace",
+	["@lsp.type.type"] = "@type",
+	["@lsp.type.class"] = "@type",
+	["@lsp.type.enum"] = "@type",
+	["@lsp.type.interface"] = "@type",
+	["@lsp.type.struct"] = "@structure",
+	["@lsp.type.parameter"] = "@parameter",
+	["@lsp.type.variable"] = "@variable",
+	["@lsp.type.property"] = "@property",
+	["@lsp.type.enumMember"] = "@constant",
+	["@lsp.type.function"] = "@function",
+	["@lsp.type.method"] = "@method",
+	["@lsp.type.macro"] = "@macro",
+	["@lsp.type.decorator"] = "@function",
+}
 
 --------------------------------------------------------------------------------
 

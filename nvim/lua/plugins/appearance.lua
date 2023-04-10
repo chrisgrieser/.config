@@ -12,12 +12,6 @@ local colorPickerFts = {
 
 --------------------------------------------------------------------------------
 return {
-	{ -- highlight function args
-		"m-demare/hlargs.nvim",
-		event = "VeryLazy",
-		config = true,
-		dependencies = "nvim-treesitter/nvim-treesitter",
-	},
 	{ -- rainbow brackets
 		"HiPhish/nvim-ts-rainbow2",
 		event = "BufEnter",

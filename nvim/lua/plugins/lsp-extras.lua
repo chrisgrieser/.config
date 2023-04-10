@@ -43,8 +43,8 @@ return {
 			height = 23,
 			border = {
 				enable = true,
-				top_char = BorderHorizontal,
-				bottom_char = BorderHorizontal,
+				top_char = require("config.utils").borderHorizontal,
+				bottom_char = require("config.utils").borderHorizontal,
 			},
 			preview_win_opts = { number = false },
 			list = {
