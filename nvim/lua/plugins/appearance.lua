@@ -37,7 +37,6 @@ return {
 				bibtex = { icon = "", name = "BibTeX" },
 				http = { icon = "󰴚", name = "http" },
 				-- -- plugins
-				PlenaryTestPopup = { icon = "", name = "PlenaryTestPopup" },
 				lazy = { icon = "", name = "Lazy" },
 				Glance = { icon = "󰒕", name = "Glance" },
 				toggleterm = { icon = "", name = "ToggleTerm" },
