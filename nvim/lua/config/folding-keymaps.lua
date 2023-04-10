@@ -25,9 +25,13 @@ for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
 	keymap("n", "z" .. tostring(lvl), function() vim.opt_local.foldlevel = lvl end, { desc = desc })
 end
 
--- f1 = ^ (Karabiner Remap)
+-- Cycle Folds (f1 = ^ Karabiner Remap)
 keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
 keymap("n", "<f1>", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
+
+
+
+--------------------------------------------------------------------------------
 
 -- toggle all toplevel folds
 keymap("n", "zz", function()
