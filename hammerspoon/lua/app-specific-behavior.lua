@@ -108,7 +108,7 @@ NeovideWatcher = Aw.new(function(appName, eventType)
 
 	-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
 	elseif eventType == Aw.terminated then
-		RunWithDelays(5, function()
+		RunWithDelays({5, 10}, function()
 			print("🗡️ Killing leftover nvim processes")
 			hs.execute("pgrep neovide || killall -KILL nvim")
 		end)
