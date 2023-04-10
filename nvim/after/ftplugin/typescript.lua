@@ -1,4 +1,9 @@
-require("config.utils")
+local bo = vim.bo
+local cmd = vim.cmd
+local fn = vim.fn
+local keymap = vim.keymap.set
+local u = require("config.utils")
+--------------------------------------------------------------------------------
 
 -- typescript uses same config as javascript ftplugin
 local javascriptConfig = fn.stdpath("config") .. "/after/ftplugin/javascript.lua"
@@ -17,7 +22,7 @@ keymap("n", "<leader>r", function()
 	cmd.redir("@z")
 	cmd([[silent make]]) -- silent, to not show up message (redirection still works)
 	local output = fn.getreg("z"):gsub(".-\r", "") -- remove first line
-	local logLevel = output:find("error") and logError or logTrance
+	local logLevel = output:find("error") and u.logError or u.logTrance
 	vim.notify(output, logLevel)
 	cmd.redir("END")
 end, { buffer = true, desc = " npm run build" })

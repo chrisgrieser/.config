@@ -1,4 +1,3 @@
-require("config.utils")
 local opt_local = vim.opt_local
 local opt = vim.opt
 local bo = vim.bo

@@ -1,4 +1,5 @@
-require("config.utils")
+local bo = vim.bo
+local keymap = vim.keymap.set
 --------------------------------------------------------------------------------
 
 -- do not autowrap

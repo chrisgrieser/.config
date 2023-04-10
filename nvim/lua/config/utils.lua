@@ -1,11 +1,13 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------
+
 M.logError = vim.log.levels.ERROR
 M.logWarn = vim.log.levels.WARN
 M.logTrance = vim.log.levels.TRACE
-M.GetCursor = vim.api.nvim_win_get_cursor
-M.SetCursor = vim.api.nvim_win_set_cursor
+M.getCursor = vim.api.nvim_win_get_cursor
+M.setCursor = vim.api.nvim_win_set_cursor
 
 ---runs :normal natively with bang
 ---@param cmdStr string
@@ -35,7 +37,7 @@ end
 ---@param filePath string line(s) to add
 ---@nodiscard
 ---@return boolean whether the writing was successful
-function M.appendToFile(str, filePath)
+function M.appendToFile(filePath, str)
 	local file, err = io.open(filePath, "a")
 	if not file then
 		vim.notify("Could not append: " .. err, vim.log.levels.ERROR)

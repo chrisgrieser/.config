@@ -30,9 +30,7 @@ local function indentation()
 	local tabwidth = bo.tabstop
 	local spaceFiletypes = { "python", "yaml" }
 	local ignoredFiletypes = { "css", "markdown", "gitcommit" }
-	if vim.tbl_contains(ignoredFiletypes, ft) or fn.mode() ~= "n" or bo.buftype ~= "" then
-		return ""
-	end
+	if vim.tbl_contains(ignoredFiletypes, ft) or fn.mode() ~= "n" or bo.buftype ~= "" then return "" end
 
 	-- non-default indentation (e.g. changed via indent-o-matic)
 	if usesSpaces and not vim.tbl_contains(spaceFiletypes, ft) then
@@ -169,9 +167,10 @@ end
 
 -- return available plugin updates when above a certain threshold
 local function pluginUpdates()
+	local threshold = 20
 	if not require("lazy.status").has_updates() then return "" end
 	local numberOfUpdates = require("lazy.status").updates()
-	if numberOfUpdates < UpdateCounterThreshhold then return "" end
+	if numberOfUpdates < threshold then return "" end
 	return numberOfUpdates
 end
 

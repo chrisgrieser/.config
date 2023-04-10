@@ -1,4 +1,7 @@
-require("config.utils")
+local cmd = vim.cmd
+local fn = vim.fn
+local keymap = vim.keymap.set
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 vim.opt_local.conceallevel = 2 -- hides quotes in JSON, making it actually more readable
@@ -16,12 +19,12 @@ end
 
 -- escape stuff properly for VS Code Style snippet
 keymap("n", "<leader>\\", function ()
-	normal("'[v']") -- select last paste
-	leaveVisualMode() -- -> sects '<,'> marks
+	u.normal("'[v']") -- select last paste
+	u.leaveVisualMode() -- -> sects '<,'> marks
 	cmd[['<,'>s/\\/\\\\/g]] -- escape the escaping backslashes
 	cmd[['<,'>s/"/\\"/g]] -- escape the double quotes
 	cmd[['<,'>s/\$/\\\\$/g]] -- escape the $ signs
 	cmd[['<,'>s/^\(\s*\)\(.*\)/\1"\2",/]] -- surround non-whitespace with quotes and comma
 	cmd[['>s/,$//]] -- remove trailing comma at last line
-	normal("gv=") -- auto-indent everything
+	u.normal("gv=") -- auto-indent everything
 end, { desc = "JSON: Escape for VS Code Snippet", buffer = true })

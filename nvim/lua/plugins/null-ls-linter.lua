@@ -15,6 +15,7 @@ local lintersAndFormatters = {
 	"stylelint", -- not its plugins though… https://github.com/williamboman/mason.nvim/issues/695
 	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
+
 --------------------------------------------------------------------------------
 -- INFO
 -- eslint, stylua, and prettier use project-specific config files

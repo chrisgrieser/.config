@@ -1,4 +1,10 @@
-require("config.utils")
+local autocmd = vim.api.nvim_create_autocmd
+local bo = vim.bo
+local cmd = vim.cmd
+local expand = vim.fn.expand
+local fn = vim.fn
+local keymap = vim.keymap.set
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- COMMENT MARKS
@@ -75,9 +81,9 @@ local function cssHeaderComment()
 		"",
 	}
 	fn.append(".", hr)
-	local lineNum = GetCursor(0)[1] + 2
+	local lineNum = u.getCursor(0)[1] + 2
 	local colNum = #hr[2] + 2
-	SetCursor(0, { lineNum, colNum })
+	u.getCursor(0, { lineNum, colNum })
 	cmd.startinsert { bang = true }
 end
 
