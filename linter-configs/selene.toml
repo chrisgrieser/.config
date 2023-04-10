@@ -1,5 +1,4 @@
-# uncomment if to be used with plenary's testing framework
-# std="plenary-testing"
+std="plenary-testing"
 
 [lints]
 # disabled since duplication with LSP
