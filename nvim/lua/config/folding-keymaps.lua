@@ -13,6 +13,7 @@ vim.on_key(function(char)
 	local searchConfirmed = (fn.keytrans(char):upper() == "<CR>" and fn.mode() == "c")
 	if not (searchConfirmed or fn.mode() == "n") then return end
 	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
+	---@diagnostic disable-next-line: param-type-mismatch
 	if vim.opt.foldenable:get() == searchKeyUsed then vim.opt.foldenable = not searchKeyUsed end
 end, vim.api.nvim_create_namespace("auto_pause_folds"))
 
