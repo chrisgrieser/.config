@@ -1,4 +1,3 @@
---------------------------------------------------------------------------------
 -- HELPERS
 
 ---@param targetMode string
@@ -124,18 +123,20 @@ DisplayCountWatcher = hs.screen.watcher.new(selectLayout):start()
 Hotkey(Hyper, "home", selectLayout)
 
 -- 3. Waking
+local unlockInProgress = false
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if not (event == c.systemDidWake or event == c.screensDidWake) then return end
+	if unlockInProgress or not (event == c.systemDidWake or event == c.screensDidWake) then return end
 	print("🔓 System/Screen did wake.")
 
 	UnlockTimer = hs.timer.waitUntil(ScreenIsUnlocked, function()
-		RunWithDelays(0.5, function()
+		unlockInProgress = true -- block multiple concurrent runs
+		reminderToSidenotes()
+		RunWithDelays(0.5, function() -- delay for recognizing screens
 			setHigherBrightnessDuringDay()
 			selectLayout()
-			UpdateSidenotes()
-			unlockInProgress
 		end)
+		RunWithDelays(5, function() unlockInProgress = false end)
 	end, 0.2)
 	-- deactivate the timer in the screen is woken but not unlocked
 	RunWithDelays(20, function()
@@ -145,5 +146,3 @@ UnlockWatcher = c.new(function(event)
 		end
 	end)
 end):start()
-
---------------------------------------------------------------------------------
