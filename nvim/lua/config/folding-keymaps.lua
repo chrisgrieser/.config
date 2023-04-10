@@ -86,8 +86,8 @@ keymap("n", "l", function()
 	local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
 	local isOnFold = fn.foldclosed(".") > -1 ---@diagnostic disable-line: param-type-mismatch
 	if shouldOpenFold and isOnFold then
-		local hasOpendFold = pcall(u.normal, "zo")
-		if hasOpendFold then u.normal("mf") end -- remember last opened fold in f mark
+		local hasOpenFold = pcall(u.normal, "zo")
+		if hasOpenFold then u.normal("mf") end -- remember last opened fold in f mark
 	else
 		u.normal("l")
 	end
