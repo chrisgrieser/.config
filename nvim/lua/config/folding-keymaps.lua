@@ -90,15 +90,27 @@ end, { desc = "󰘖 Goto previous closed fold" })
 
 -- h closes (similar to how l opens due to opt.foldopen="hor")
 -- works well with vim's startofline option
+---@diagnostic disable: param-type-mismatch
 keymap("n", "h", function()
-
 	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-
-	local isFirstNonBlank = vim.fn.col(".") * vim.bo.tabstop <= vim.fn.indent(".")
-	local notOnFold = fn.foldclosed(".") == -1 ---@diagnostic disable-line: param-type-mismatch
+	local isFirstNonBlank = (vim.fn.col(".") + 1 <= vim.fn.indent(".")) or vim.fn.col(".") == 1
+	local notOnFold = fn.foldclosed(".") == -1 
 	if isFirstNonBlank and shouldCloseFold and notOnFold then
 		pcall(u.normal, "zc")
 	else
 		u.normal("h")
 	end
 end, { desc = "h (+ close fold at BoL)" })
+
+-- ensure that `l` does not move to the right when opening a fold, otherwise
+-- this is the same behavior as with foldopen="hor" already
+keymap("n", "l", function()
+	local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
+	local isOnFold = fn.foldclosed(".") > -1 
+	if shouldOpenFold and isOnFold then
+		pcall(u.normal, "zo")
+	else
+		u.normal("l")
+	end
+end, { desc = "h (+ close fold at BoL)" })
+---@diagnostic enable: param-type-mismatch
