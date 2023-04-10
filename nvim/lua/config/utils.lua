@@ -1,11 +1,11 @@
-Bo = vim.bo
-Fn = vim.fn
-Cmd = vim.cmd
-Autocmd = vim.api.nvim_create_autocmd
+bo = vim.bo
+fn = vim.fn
+cmd = vim.cmd
+autocmd = vim.api.nvim_create_autocmd
 GetCursor = vim.api.nvim_win_get_cursor
 SetCursor = vim.api.nvim_win_set_cursor
-Keymap = vim.keymap.set
-Expand = vim.fn.expand
+keymap = vim.keymap.set
+expand = vim.fn.expand
 Iabbrev = vim.cmd.inoreabbrev
 
 LogError = vim.log.levels.ERROR

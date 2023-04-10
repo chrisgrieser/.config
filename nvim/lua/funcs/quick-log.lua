@@ -212,9 +212,9 @@ function M.removelogs()
 
 	if type(logStatement) == "string" then logStatement = { logStatement } end
 	for _, logCom in pairs(logStatement) do
-		Cmd([[g/^\s*]] .. logCom .. [[/d]])
+		cmd([[g/^\s*]] .. logCom .. [[/d]])
 	end
-	Cmd.nohlsearch()
+	cmd.nohlsearch()
 
 	local linesRemoved = numOfLinesBefore - fn.line("$")
 	local msg = "Removed " .. tostring(linesRemoved) .. " log statements."

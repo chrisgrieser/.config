@@ -163,7 +163,7 @@ end
 
 --------------------------------------------------------------------------------
 
-Autocmd("ColorSchemePre", {
+autocmd("ColorSchemePre", {
 	callback = function()
 		-- everforest requires change before setting colorscheme
 		local mode = vim.opt.background:get()
@@ -175,7 +175,7 @@ Autocmd("ColorSchemePre", {
 		end
 	end,
 })
-Autocmd("ColorScheme", {
+autocmd("ColorScheme", {
 	callback = function()
 		-- HACK defer needed for some modifications to properly take effect
 		for _, delayMs in pairs { 50, 100, 200 } do

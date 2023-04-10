@@ -18,9 +18,9 @@ opt.undolevels = 500 -- less undos saved for quicker loading of undo history
 -- WARN requires remap, otherwise prevents vim abbrev. w/ those chars from working
 local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
 for _, char in pairs(undopointChars) do
-	Keymap("i", char, function()
+	keymap("i", char, function()
 		local expr = char .. "<C-g>u"
-		if Bo.filetype == "TelescopePrompt" then expr = char end -- FIX interference with telescope otherwise
+		if bo.filetype == "TelescopePrompt" then expr = char end -- FIX interference with telescope otherwise
 		return expr
 	end, { desc = "extra undopoint for " .. char, remap = true, expr = true })
 end
@@ -75,11 +75,11 @@ opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 
 -- Color Column: textwidth + guiding line for `gm`
-Autocmd({ "VimEnter", "VimResized" }, {
+autocmd({ "VimEnter", "VimResized" }, {
 	-- the "WinResized" autocmd event does not seem to work currently
 	callback = function()
 		if opt_local.wrap:get() then return end
-		local gmColumn = math.floor(Fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
+		local gmColumn = math.floor(fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
 		opt.colorcolumn = { "+1", gmColumn }
 	end,
 })
@@ -101,10 +101,10 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 -- PATH (for `gf`)
 
 -- pwd is set via projects.nvim
-Autocmd("DirChanged", {
+autocmd("DirChanged", {
 	callback = function() opt.path:append(vim.loop.cwd()) end,
 })
-Autocmd("DirChangedPre", {
+autocmd("DirChangedPre", {
 	callback = function() opt.path:remove(vim.loop.cwd()) end,
 })
 
@@ -115,21 +115,21 @@ opt.sidescrolloff = 13
 
 -- FIX scrolloff at EoF
 -- https://github.com/Aasim-A/scrollEOF.nvim/blob/master/lua/scrollEOF.lua#L11
-Autocmd("CursorMoved", {
+autocmd("CursorMoved", {
 	callback = function()
-		if Bo.filetype == "DressingSelect" then return end
+		if bo.filetype == "DressingSelect" then return end
 
 		local win_height = vim.api.nvim_win_get_height(0)
-		local win_view = Fn.winsaveview()
+		local win_view = fn.winsaveview()
 		local scrolloff = math.min(opt.scrolloff:get(), math.floor(win_height / 2))
-		local scrolloff_line_count = win_height - (Fn.line("w$") - win_view.topline + 1)
-		local distance_to_last_line = Fn.line("$") - win_view.lnum
+		local scrolloff_line_count = win_height - (fn.line("w$") - win_view.topline + 1)
+		local distance_to_last_line = fn.line("$") - win_view.lnum
 		if
 			distance_to_last_line < scrolloff
 			and scrolloff_line_count + distance_to_last_line < scrolloff
 		then
 			win_view.topline = win_view.topline + scrolloff - (scrolloff_line_count + distance_to_last_line)
-			Fn.winrestview(win_view)
+			fn.winrestview(win_view)
 		end
 	end,
 })
@@ -156,17 +156,17 @@ opt.listchars = {
 	lead = "·",
 }
 
-Autocmd("BufReadPost", {
+autocmd("BufReadPost", {
 	callback = function()
 		-- trigger to ensure it's run before determining spaces/tabs
-		local success = pcall(Cmd.IndentOMatic)
+		local success = pcall(cmd.IndentOMatic)
 		if not success then
 			vim.notify("Indent-o-Matic not found.", LogWarn)
 			return
 		end
 
 		opt_local.listchars = vim.opt_global.listchars:get() -- copy the global
-		if Bo.expandtab then
+		if bo.expandtab then
 			opt_local.listchars:append { tab = "↹ " }
 			opt_local.listchars:append { lead = " " }
 		else
@@ -181,18 +181,18 @@ Autocmd("BufReadPost", {
 opt.autowrite = true
 opt.autowriteall = true
 
-Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
+autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
 	callback = function()
-		local filepath = Expand("%:p")
+		local filepath = expand("%:p")
 		if
-			Fn.filereadable(filepath) == 1
-			and not Bo.readonly
-			and Expand("%") ~= ""
-			and (Bo.buftype == "" or Bo.buftype == "acwrite")
-			and Bo.filetype ~= "gitcommit"
+			fn.filereadable(filepath) == 1
+			and not bo.readonly
+			and expand("%") ~= ""
+			and (bo.buftype == "" or bo.buftype == "acwrite")
+			and bo.filetype ~= "gitcommit"
 		then
-			Cmd.update(filepath)
+			cmd.update(filepath)
 		end
 	end,
 })
@@ -202,7 +202,7 @@ Autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
 -- overwritten by the ftplugins having the `o` option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
-Autocmd("FileType", {
+autocmd("FileType", {
 	callback = function() opt_local.formatoptions:remove("o") end,
 })
 
@@ -217,25 +217,25 @@ opt.foldopen:remove { "search" } -- less unintentional opening of folds
 local function remember(mode)
 	-- stylua: ignore
 	local ignoredFts = { "TelescopePrompt", "DressingSelect", "DressingInput", "toggleterm", "gitcommit", "replacer", "harpoon", "help", "qf" }
-	if vim.tbl_contains(ignoredFts, Bo.filetype) or Bo.buftype ~= "" or not Bo.modifiable then return end
+	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype ~= "" or not bo.modifiable then return end
 
 	if mode == "save" then
-		Cmd.mkview(1)
+		cmd.mkview(1)
 	else
-		pcall(function() Cmd.loadview(1) end) -- pcall, since new files have no view yet
+		pcall(function() cmd.loadview(1) end) -- pcall, since new files have no view yet
 	end
 end
-Autocmd("BufWinLeave", {
+autocmd("BufWinLeave", {
 	pattern = "?*", -- pattern required, otherwise does not trigger
 	callback = function() remember("save") end,
 })
-Autocmd("BufWinEnter", {
+autocmd("BufWinEnter", {
 	pattern = "?*",
 	callback = function() remember("load") end,
 })
 --------------------------------------------------------------------------------
 -- Add missing buffer names, e.g. for status bar
-Autocmd("FileType", {
+autocmd("FileType", {
 	pattern = { "Glance", "lazy", "PlenaryTestPopup" },
 	callback = function()
 		local name = vim.fn.expand("<amatch>")
@@ -248,28 +248,28 @@ Autocmd("FileType", {
 
 -- Skeletons (Templates)
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
-local skeletonDir = Fn.stdpath("config") .. "/templates"
+local skeletonDir = fn.stdpath("config") .. "/templates"
 local filetypeList =
-	Fn.system([[ls "]] .. skeletonDir .. [[/skeleton."* | xargs basename | cut -d. -f2]])
+	fn.system([[ls "]] .. skeletonDir .. [[/skeleton."* | xargs basename | cut -d. -f2]])
 local ftWithSkeletons = vim.split(filetypeList, "\n", {})
 
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
 	local readCmd = "keepalt 0r " .. skeletonDir .. "/skeleton." .. ft .. " | normal! G"
 
-	Autocmd("BufNewFile", {
+	autocmd("BufNewFile", {
 		pattern = "*." .. ft,
 		command = readCmd,
 	})
 
 	-- BufReadPost + empty file as additional condition to also auto-insert
 	-- skeletons when empty files were created by other apps
-	Autocmd("BufReadPost", {
+	autocmd("BufReadPost", {
 		pattern = "*." .. ft,
 		callback = function()
-			local curFile = Expand("%")
-			local fileIsEmpty = Fn.getfsize(curFile) < 4 -- to account for linebreak weirdness
-			if fileIsEmpty then Cmd(readCmd) end
+			local curFile = expand("%")
+			local fileIsEmpty = fn.getfsize(curFile) < 4 -- to account for linebreak weirdness
+			if fileIsEmpty then cmd(readCmd) end
 		end,
 	})
 end

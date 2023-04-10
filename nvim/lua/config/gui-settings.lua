@@ -4,7 +4,7 @@ local keymap = vim.keymap.set
 --------------------------------------------------------------------------------
 
 -- See hammerspoons `app-hider.lua`
-Autocmd("VimEnter", {
+autocmd("VimEnter", {
 	callback = function()
 		-- hide other apps so the GUI transparency is visible.
 		fn.system("open -g 'hammerspoon://hide-other-than-neovide'")

@@ -2,16 +2,16 @@ require("config.utils")
 --------------------------------------------------------------------------------
 
 -- do not autowrap
-Bo.formatoptions = Bo.formatoptions:gsub("t", "") 
+bo.formatoptions = bo.formatoptions:gsub("t", "") 
 
 -- link textobj
-Keymap(
+keymap(
 	{ "o", "x" },
 	"il",
 	"<cmd>lua require('various-textobjs').mdlink(true)<CR>",
 	{ desc = "inner md link textobj", buffer = true }
 )
-Keymap(
+keymap(
 	{ "o", "x" },
 	"al",
 	"<cmd>lua require('various-textobjs').mdlink(false)<CR>",

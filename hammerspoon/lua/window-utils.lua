@@ -1,5 +1,3 @@
-require("lua.utils")
-require("lua.twitter")
 --------------------------------------------------------------------------------
 
 IMacDisplay = hs.screen("Built%-in")

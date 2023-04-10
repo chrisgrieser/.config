@@ -142,19 +142,19 @@ keymap( { "x", "o" }, "aR", "<cmd>lua require('various-textobjs').doubleSquareBr
 keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(true, true)<CR>", { desc = "inner indent textobj" })
 keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "outer indent textobj" })
 
-Autocmd("FileType", {
+autocmd("FileType", {
 	callback = function()
 		local indentedFts = { "python", "yaml", "markdown", "gitconfig" }
-		if vim.tbl_contains(indentedFts, Bo.filetype) then
+		if vim.tbl_contains(indentedFts, bo.filetype) then
 			keymap( { "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { buffer = true, desc = "indent textobj w/ start border" })
 		end
 	end,
 })
 
-Autocmd("FileType", {
+autocmd("FileType", {
 	callback = function()
 		local pipeFiletypes = { "sh", "zsh", "bash" }
-		if vim.tbl_contains(pipeFiletypes, Bo.filetype) then
+		if vim.tbl_contains(pipeFiletypes, bo.filetype) then
 			keymap( { "x", "o" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { buffer = true, desc = "inner pipe textobj" })
 			keymap( { "x", "o" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { buffer = true, desc = "outer pipe textobj" })
 		end

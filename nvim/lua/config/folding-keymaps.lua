@@ -45,14 +45,14 @@ keymap("n", "gz", function()
 			return
 		end
 		lnum = lnum + 1
-		local isClosedFold = Fn.foldclosed(lnum) > 0
+		local isClosedFold = fn.foldclosed(lnum) > 0
 	until isClosedFold
 	Normal(tostring(lnum) .. "G")
 end, { desc = "󰘖 Goto next closed fold" })
 
 keymap("n", "gZ", function()
-	local lnum = Fn.line(".")
-	local startOfFold = Fn.foldclosed(lnum)
+	local lnum = fn.line(".")
+	local startOfFold = fn.foldclosed(lnum)
 	if startOfFold > 0 then lnum = startOfFold end
 	repeat
 		if lnum <= 1 then
@@ -60,7 +60,7 @@ keymap("n", "gZ", function()
 			return
 		end
 		lnum = lnum - 1
-		local isClosedFold = Fn.foldclosed(lnum) > 0
+		local isClosedFold = fn.foldclosed(lnum) > 0
 	until isClosedFold
 	Normal(tostring(lnum) .. "G")
 end, { desc = "󰘖 Goto previous closed fold" })
