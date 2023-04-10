@@ -8,7 +8,9 @@ local newCommand = vim.api.nvim_create_user_command
 -- as opposed to `:lua = `, this shows the result in a notification and with
 -- syntax highlighting
 newCommand("I", function(ctx)
-	local output = vim.inspect(fn.luaeval(ctx.args))
+	local str = ctx.args
+	if vim.startswith(str, "fn") or vim.startswith(str, "bo") then str = "vim." .. str end
+	local output = vim.inspect(fn.luaeval(str))
 	vim.notify(output, "trace", {
 		timeout = 6000, -- ms
 		on_open = function(win) -- enable treesitter highlighting in the notification
@@ -18,25 +20,28 @@ newCommand("I", function(ctx)
 	})
 end, { nargs = "+" })
 
--- view capabilities of current lsp
+-- inspect capabilities of current lsp
 newCommand("LspCapabilities", function()
 	local curBuf = vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_active_clients({ bufnr = curBuf })
+	local clients = vim.lsp.get_active_clients { bufnr = curBuf }
 
 	-- ignore null-ls
 	local client = clients[1].name ~= "null-ls" and clients[1] or clients[2]
 
 	local capAsList = {}
 	for key, value in pairs(client.server_capabilities) do
-		if value and key:find("Provider") then table.insert(capAsList, "- " .. key) end
+		if value and key:find("Provider") then
+			local capability = key:gsub("Provider$", "")
+			table.insert(capAsList, "- " .. capability)
+		end
 	end
 	local msg = "# " .. client.name .. "\n" .. table.concat(capAsList, "\n")
-	vim.notify(msg, "info", {
+	vim.notify(msg, "trace", {
 		on_open = function(win)
 			local buf = vim.api.nvim_win_get_buf(win)
 			vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
 		end,
-		timeout = 12000,
+		timeout = 14000,
 	})
 	fn.setreg("+", "Capabilities = " .. vim.inspect(client.server_capabilities))
 end, {})

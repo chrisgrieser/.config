@@ -3,7 +3,7 @@ local function notifyConfig()
 	--------------------------------------------------------------------------------
 	-- Base config
 	local notifyWidth = 55
-	local printDurationSecs = 6
+	local printDurationSecs = 7
 
 	require("notify").setup {
 		render = "minimal",
