@@ -196,20 +196,6 @@ local function pathToProjectRoot()
 	return "󰝰 " .. nicerDisplay
 end
 
--- only show fold level than different from foldlevelstart
--- also show pause icon if fold is paused
-local function foldLevel()
-	local startLevel = vim.opt.foldlevelstart:get()
-	local level = vim.opt_local.foldlevel:get()
-	local foldenabled = vim.opt_local.foldenable:get() and bo.filetype ~= "Glance"
-
-	local icon = startLevel == level and "" or "󰘖 "
-	local label = startLevel == level and "" or tostring(level)
-	if not foldenabled then icon = icon .. " " end
-
-	return icon .. label
-end
-
 --------------------------------------------------------------------------------
 
 -- nerdfont: powerline icons have the prefix 'ple-'
@@ -250,10 +236,6 @@ local lualineConfig = {
 			},
 		},
 		lualine_y = {
-			{
-				foldLevel,
-				section_separators = topSeparators,
-			},
 		},
 		-- INFO dap and recording status defined in the respective plugin configs
 		-- for lualine_y and lualine_z for their lazy loading

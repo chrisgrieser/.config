@@ -18,26 +18,38 @@ vim.on_key(function(char)
 end, vim.api.nvim_create_namespace("auto_pause_folds"))
 
 --------------------------------------------------------------------------------
+-- MACRO FOLD COMMANDS
+-- UFO replacements of fold commands
 
--- set foldlevel
+-- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
+-- auto-closing them after leaving insert mode, however ufo does not seem to
+-- have equivalents for zr and zm because there is no saved fold level.
+-- Consequently, the vim-internal fold levels need to be disabled by setting
+-- them to 99
+vim.opt.foldlevel = 99 
+vim.o.foldlevelstart = 99
+
+keymap("n", "zr", function () require("ufo").openFoldsExceptKinds() end, { desc = "󰘖 󱃄 Open All Folds except comments" })
+keymap("n", "zm", function () require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
+
+-- set foldlevel via z{n}
 for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
 	local desc = lvl < 3 and "󰘖 Set Fold Level" or "which_key_ignore"
-	keymap("n", "z" .. tostring(lvl), function() vim.opt_local.foldlevel = lvl end, { desc = desc })
+	keymap("n", "z" .. tostring(lvl), function() require("ufo").closeFoldsWith(lvl) end, { desc = desc })
 end
 
--- Cycle Folds (f1 = ^ Karabiner Remap)
-keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
-keymap("n", "<f1>", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
-
-
-
---------------------------------------------------------------------------------
-
--- toggle all toplevel folds
+-- toggle all toplevel folds, but not the
 keymap("n", "zz", function()
 	cmd("%foldclose") -- close toplevel folds
 	cmd("silent! normal! zo") -- open fold cursor is standing on
 end, { desc = "󰘖 Close toplevel folds" })
+
+--------------------------------------------------------------------------------
+-- MICRO FOLD COMMANDS
+
+-- Cycle Folds (f1 = ^ Karabiner Remap)
+keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
+keymap("n", "<f1>", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
 
 -- goto next/prev closed fold
 keymap("n", "gz", function()
@@ -70,10 +82,6 @@ keymap("n", "gZ", function()
 	until isClosedFold
 	u.normal(tostring(lnum) .. "G")
 end, { desc = "󰘖 Goto previous closed fold" })
-
--- preview fold
--- stylua: ignore
-keymap("n", "zp", function() require("ufo").peekFoldedLinesUnderCursor(false, true) end, { desc = "󰘖 󰈈 Preview Fold" })
 
 -- h closes (similar to how l opens due to opt.foldopen="hor")
 -- works well with vim's startofline option
