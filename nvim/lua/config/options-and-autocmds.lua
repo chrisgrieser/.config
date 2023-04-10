@@ -10,10 +10,9 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- DIRECTORIES
-opt.directory:prepend(u.vimDataDir .. "swap//")
 opt.undodir:prepend(u.vimDataDir .. "undo//")
-vim.opt.viewdir = u.vimDataDir .. "view"
-vim.opt.shadafile = u.vimDataDir .. "main.shada"
+opt.viewdir = u.vimDataDir .. "view"
+opt.shadafile = u.vimDataDir .. "main.shada"
 
 --------------------------------------------------------------------------------
 -- Undo
@@ -81,8 +80,7 @@ opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 
 -- Color Column: textwidth + guiding line for `gm`
-autocmd({ "VimEnter", "VimResized" }, {
-	-- the "WinResized" autocmd event does not seem to work currently
+autocmd({ "VimEnter", "VimResized" }, { -- the "WinResized" autocmd event does not seem to work currently
 	callback = function()
 		if opt_local.wrap:get() then return end
 		local gmColumn = math.floor(fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
@@ -142,7 +140,6 @@ opt.smartindent = true
 -- invisible chars
 opt.list = true
 opt.fillchars = { eob = " ", fold = " " }
--- opt.showbreak = "↪"
 opt.listchars = {
 	nbsp = "󰚌",
 	precedes = "…",
@@ -176,6 +173,7 @@ autocmd("BufReadPost", {
 -- AUTO-SAVING
 opt.autowrite = true
 opt.autowriteall = true
+opt.swapfile = false
 
 autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
