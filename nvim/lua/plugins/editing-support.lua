@@ -118,60 +118,60 @@ return {
 	},
 	{ -- key chord hints
 		"folke/which-key.nvim",
-		-- enabled = false,
-		opts = {
-			plugins = {
-				presets = {
-					-- operators = false,
-					-- motions = false,
-					-- text_objects = false,
-					-- g = false,
-					z = false,
+		config = function()
+			require("which-key").setup {
+				plugins = {
+					presets = {
+						operators = false,
+						motions = false,
+						text_objects = false,
+						g = false,
+						z = false,
+					},
 				},
-			},
-			ignore_missing = true,
-			triggers_blacklist = { n = { "y" } }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
-			-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
-			hidden = { "<Plug>", "^:lua ", "<cmd>" },
-			operator = { -- seems these are not working?
-				w = "Duplicate",
-				q = "Comment",
-				s = "Substitute",
-			},
-			key_labels = { -- seems these are not working?
-				["<cr>"] = "↵ ",
-				["<bs>"] = "⌫",
-				["<space>"] = "␣",
-				["<tab>"] = "↹ ",
-				["<esc>"] = "⎋",
-				["<f1>"] = "^", -- karabiner remapping
-			},
-			window = {
-				-- only horizontal border to save space
-				border = { "", require("config.utils").borderHorizontal, "", "" }, 
-				padding = { 0, 0, 0, 0 },
-				margin = { 0, 0, 0, 0 },
-			},
-			popup_mappings = {
-				scroll_down = "<PageDown>", 
-				scroll_up = "<PageUp>", 
-			},
-			layout = { -- of the columns
-				height = { min = 4, max = 13 },
-				width = { min = 37, max = 40 },
-				spacing = 2,
-			},
-		},
-		-- config = function()
-		-- 	require("which-key").register({
-		-- 		f = { name = "refactor" },
-		-- 		t = { name = "terminal / test" },
-		-- 		b = { name = "debugger" },
-		-- 		u = { name = "undo" },
-		-- 		l = { name = "log / cmdline" },
-		-- 		g = { name = "git" },
-		-- 		o = { name = "option" },
-		-- 	}, { prefix = "<leader>" })
-		-- end,
+				triggers_blacklist = { n = { "y" } }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
+				-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
+				hidden = { "<Plug>", "^:lua ", "<cmd>" },
+				operator = { -- seems these are not working?
+					w = "Duplicate",
+					q = "Comment",
+					s = "Substitute",
+				},
+				key_labels = { -- seems these are not working?
+					["<CR>"] = "↵ ",
+					["<BS>"] = "⌫",
+					["<Space>"] = "󱁐",
+					["<Tab>"] = "↹ ",
+					["<Esc>"] = "⎋",
+					["<F1>"] = "^", -- karabiner remapping
+					["<F2>"] = "<S-Space>", -- karabiner remapping
+				},
+				window = {
+					-- only horizontal border to save space
+					border = { "", require("config.utils").borderHorizontal, "", "" },
+					padding = { 0, 0, 0, 0 },
+					margin = { 0, 0, 0, 0 },
+				},
+				popup_mappings = {
+					scroll_down = "<PageDown>",
+					scroll_up = "<PageUp>",
+				},
+				layout = { -- of the columns
+					height = { min = 4, max = 11 },
+					width = { min = 33, max = 35 },
+					spacing = 2,
+					align = "center",
+				},
+			}
+			require("which-key").register({
+				f = { name = "refactor" },
+				t = { name = "terminal / test" },
+				b = { name = "debugger" },
+				u = { name = "undo" },
+				l = { name = "log / cmdline" },
+				g = { name = "git" },
+				o = { name = "option" },
+			}, { prefix = "<leader>" })
+		end,
 	},
 }
