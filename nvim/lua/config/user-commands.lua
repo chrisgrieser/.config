@@ -5,7 +5,9 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
--- :I inspect nvim-lua
+-- :I inspect lua code
+-- as opposed to `:lua = `, this shows the result in a notification and with
+-- syntax highlighting
 newCommand("I", function(ctx)
 	local output = vim.inspect(fn.luaeval(ctx.args))
 	vim.notify(output, "trace", {
@@ -19,16 +21,21 @@ end, { nargs = "+" })
 
 -- view capabilities of current lsp
 newCommand("LspCapabilities", function()
-	local capabilities = vim.lsp.get_active_clients()[1].server_capabilities
-	local capAsStr = vim.inspect(capabilities)
-	vim.notify(capAsStr, "trace", {
+	local curBuf = vim.api.nvim_get_current_buf()
+	local client = vim.lsp.get_active_clients({ bufnr = curBuf })[1]
+	local capAsList = {}
+	for key, value in pairs(client.server_capabilities) do
+		if value then table.insert(capAsList, "- " .. key) end
+	end
+	local msg = "# " .. client.name .. "\n" .. table.concat(capAsList, "\n")
+	vim.notify(msg, "info", {
 		on_open = function(win)
 			local buf = vim.api.nvim_win_get_buf(win)
-			vim.api.nvim_buf_set_option(buf, "filetype", "lua")
+			vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
 		end,
-		timeout = 6000,
+		timeout = 12000,
 	})
-	fn.setreg("+", "capabilities = " .. capAsStr)
+	fn.setreg("+", "Capabilities = " .. vim.inspect(client.server_capabilities))
 end, {})
 
 -- `:SwapDeleteAll` deletes all swap files
