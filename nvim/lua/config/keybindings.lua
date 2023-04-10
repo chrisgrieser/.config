@@ -20,6 +20,7 @@ keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = "�
 
 -- Update [P]lugins
 keymap("n", "<leader>p", require("lazy").sync, { desc = " Lazy Sync" })
+keymap("n", "<leader>P", require("lazy").home, { desc = " Lazy Home" })
 keymap("n", "<leader>M", cmd.Mason, { desc = " Mason" })
 
 --------------------------------------------------------------------------------
@@ -181,7 +182,7 @@ keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = 
 keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 suggest" })
 
 ---add word under cursor to vale dictionary
----@param mode string accept|reject
+---@param mode "accept"|"reject"
 local function valeWord(mode)
 	local word
 	if fn.mode() == "n" then
@@ -595,7 +596,7 @@ autocmd("LspAttach", {
 			-- command line; needs defer to not be overwritten by treesitter-
 			-- refactor's smart-rename
 			-- stylua: ignore
-			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1) ---@diagnostic disable-line: param-type-mismatch
+			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1) 
 			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
 		end
 

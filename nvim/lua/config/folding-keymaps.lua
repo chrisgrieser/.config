@@ -15,7 +15,6 @@ vim.on_key(function(char)
 	local searchConfirmed = (fn.keytrans(char):upper() == "<CR>" and fn.mode() == "c")
 	if not (searchConfirmed or fn.mode() == "n") then return end
 	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
-	---@diagnostic disable-next-line: param-type-mismatch
 	if vim.opt.foldenable:get() == searchKeyUsed then vim.opt.foldenable = not searchKeyUsed end
 end, vim.api.nvim_create_namespace("auto_pause_folds"))
 
@@ -33,9 +32,7 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 
 keymap("n", "zr", function () require("ufo").openFoldsExceptKinds() end, { desc = "󰘖 󱃄 Open All Folds except kinds" })
-keymap("n", "zR", function () require("ufo").openFoldsExceptKinds() end, { desc = "󰘖 󱃄 Open All Folds except kinds" })
 keymap("n", "zm", function () require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
-keymap("n", "zM", function () require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
 
 -- set foldlevel via z{n}
 for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do

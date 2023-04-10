@@ -12,8 +12,10 @@ keymap("x", "<leader>b", ":!yq -o=json<CR><CR>", { desc = "prettify JSON", buffe
 keymap("x", "<leader>m", ":!yq -I=0<CR><CR>", { desc = "minify JSON", buffer = true })
 
 -- when opening large files, start with some folds closed
-if fn.line("$") > 1000 then
-	vim.defer_fn(function () vim.opt_local.foldlevel = 1 end, 1)
+if fn.line("$") > 400 then
+	vim.defer_fn(function ()
+		require("ufo").closeFoldsWith(1) -- = fold level one
+	end, 1)
 end
 
 -- escape stuff properly for VS Code Style snippet
