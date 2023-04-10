@@ -2,6 +2,7 @@ require("config.utils")
 local g = vim.g
 local cmd = vim.cmd
 local fn = vim.fn
+local autocmd = vim.api.nvim_create_autocmd
 --------------------------------------------------------------------------------
 
 -- INFO not using `api.nvim_set_hl` yet as it overwrites an update group instead

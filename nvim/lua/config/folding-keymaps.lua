@@ -47,7 +47,7 @@ keymap("n", "gz", function()
 		lnum = lnum + 1
 		local isClosedFold = fn.foldclosed(lnum) > 0
 	until isClosedFold
-	Normal(tostring(lnum) .. "G")
+	normal(tostring(lnum) .. "G")
 end, { desc = "󰘖 Goto next closed fold" })
 
 keymap("n", "gZ", function()
@@ -62,7 +62,7 @@ keymap("n", "gZ", function()
 		lnum = lnum - 1
 		local isClosedFold = fn.foldclosed(lnum) > 0
 	until isClosedFold
-	Normal(tostring(lnum) .. "G")
+	normal(tostring(lnum) .. "G")
 end, { desc = "󰘖 Goto previous closed fold" })
 
 -- preview fold
@@ -75,9 +75,9 @@ keymap("n", "h", function()
 	local firstColumn = fn.col(".") == 1
 	local notOnFold = fn.foldclosed(".") == -1 ---@diagnostic disable-line: param-type-mismatch
 	if firstColumn and shouldOpenFold and notOnFold then
-		pcall(Normal, "zc")
+		pcall(normal, "zc")
 	else
-		Normal("h")
+		normal("h")
 	end
 end, { desc = "h (+ close fold at BoL)" })
 
@@ -85,10 +85,10 @@ keymap("n", "l", function()
 	local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
 	local isOnFold = fn.foldclosed(".") > -1 ---@diagnostic disable-line: param-type-mismatch
 	if shouldOpenFold and isOnFold then
-		local hasOpendFold = pcall(Normal, "zo")
-		if hasOpendFold then Normal("mf") end -- remember last opened fold in f mark
+		local hasOpendFold = pcall(normal, "zo")
+		if hasOpendFold then normal("mf") end -- remember last opened fold in f mark
 	else
-		Normal("l")
+		normal("l")
 	end
 end, { desc = "l (or open fold)" })
 

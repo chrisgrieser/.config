@@ -1,5 +1,6 @@
-require("config.utils")
 local newCommand = vim.api.nvim_create_user_command
+local fn = vim.fn
+local expand = vim.fn.expand
 --------------------------------------------------------------------------------
 
 -- `:SwapDeleteAll` deletes all swap files

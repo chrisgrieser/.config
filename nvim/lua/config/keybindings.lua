@@ -1,11 +1,11 @@
 -- require more keymaps
-require("config.folding-keymaps")
-require("config.textobject-keymaps")
 local fn = vim.fn
 local cmd = vim.cmd
 local keymap = vim.keymap.set
 local bo = vim.bo
-
+local autocmd = vim.api.nvim_create_autocmd
+local expand = vim.fn.expand
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 -- META
 
@@ -44,12 +44,12 @@ keymap("n", "<leader>ln", function()
 	local history = require("notify").history {}
 	local lastNotify = history[#history]
 	if not lastNotify then
-		vim.notify("No Notification in this session.", LogWarn)
+		vim.notify("No Notification in this session.", u.logWarn)
 		return
 	end
 	local msg = table.concat(lastNotify.message, "\n")
 	fn.setreg("+", msg)
-	vim.notify("Last Notification copied.", LogTrace)
+	vim.notify("Last Notification copied.", u.logTrance)
 end, { desc = "󰘳 Copy Last Notification" })
 
 -- Dismiss notifications & re-enable fold after search
@@ -194,11 +194,11 @@ local function valeWord(mode)
 		word = expand("<cword>")
 		vim.opt_local.iskeyword = iskeywBefore
 	else
-		Normal('"zy')
+		u.normal('"zy')
 		word = fn.getreg("z")
 	end
 
-	local success = AppendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
+	local success = u.appendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
 	if not success then return end -- error message already by AppendToFile
 	cmd.mkview(2)
 	cmd.update()
@@ -334,11 +334,11 @@ keymap("n", "<leader>bn", function()
 	-- INFO is the only one that needs manual starting, other debuggers
 	-- start with `continue` by themselves
 	if require("dap").status() ~= "" then
-		vim.notify("Debugger already running.", LogWarn)
+		vim.notify("Debugger already running.", u.logWarn)
 		return
 	end
 	if not bo.filetype == "lua" then
-		vim.notify("Not a lua file.", LogWarn)
+		vim.notify("Not a lua file.", u.logWarn)
 		return
 	end
 	require("osv").run_this()
@@ -391,7 +391,7 @@ keymap("n", "gx", function()
 	require("various-textobjs").url()
 	local foundURL = fn.mode():find("v") -- will only switch to visual mode if URL found
 	if foundURL then
-		Normal('"zy')
+		u.normal('"zy')
 		local url = fn.getreg("z")
 		os.execute("open '" .. url .. "'")
 	end
@@ -439,10 +439,7 @@ keymap("n", "<D-d>", function()
 	require("harpoon.mark").add_file()
 	vim.b.harpoonMark = "󰛢"
 end, { desc = "󰛢 Add File" })
-keymap("n", "<D-S-d>", function()
-	require("harpoon.ui").toggle_quick_menu()
-	UpdateHarpoonIndicator()
-end, { desc = "󰛢 Menu" })
+keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "󰛢 Menu" })
 -- stylua: ignore end
 
 -- P[a]th gf needs remapping, since `gf` is used for LSP references
@@ -498,7 +495,7 @@ keymap("n", "'", ":CccConvert<CR>", { desc = " Convert Color" }) -- shift-# o
 local function harpoonFileNumber()
 	local pwd = vim.loop.cwd() or ""
 	local jsonPath = fn.stdpath("data") .. "/harpoon.json"
-	local json = ReadFile(jsonPath)
+	local json = u.readFile(jsonPath)
 	if not json then return end
 	local data = vim.json.decode(json)
 	local project = data.projects[pwd]
@@ -577,7 +574,7 @@ keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code A
 keymap("n", "<D-b>", function()
 	local rawdata = require("nvim-navic").get_data()
 	if not rawdata then
-		vim.notify("No Breadcrumbs available", LogWarn)
+		vim.notify("No Breadcrumbs available", u.logWarn)
 		return
 	end
 	local breadcrumbs = ""
@@ -746,7 +743,7 @@ keymap("x", "<leader>ti", function()
 	local fts = { "applescript", "bash", "vim" }
 	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 		if not ft then return end
-		LeaveVisualMode()
+		u.leaveVisualMode()
 		cmd("'<,'>InlineEdit " .. ft)
 		keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
 	end)

@@ -1,6 +1,13 @@
 require("config.utils")
 local opt_local = vim.opt_local
 local opt = vim.opt
+local bo = vim.bo
+local fn = vim.fn
+local cmd = vim.cmd
+local autocmd = vim.api.nvim_create_autocmd
+local keymap = vim.keymap.set
+local expand = vim.fn.expand
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- DIRECTORIES
@@ -161,7 +168,7 @@ autocmd("BufReadPost", {
 		-- trigger to ensure it's run before determining spaces/tabs
 		local success = pcall(cmd.IndentOMatic)
 		if not success then
-			vim.notify("Indent-o-Matic not found.", LogWarn)
+			vim.notify("Indent-o-Matic not found.", u.logWarn)
 			return
 		end
 

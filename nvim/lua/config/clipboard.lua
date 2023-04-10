@@ -44,8 +44,8 @@ keymap("n", "gp", function()
 	end
 
 	fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
-	Normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
-	if targetRegType == "V" then Normal("==") end
+	normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
+	if targetRegType == "V" then normal("==") end
 end, { desc = "paste differently" })
 
 --------------------------------------------------------------------------------
