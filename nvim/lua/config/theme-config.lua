@@ -160,7 +160,7 @@ end
 --------------------------------------------------------------------------------
 
 -- https://www.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90/
-local semanticHighlight = {
+local semanticToTreesitterHl = {
 	["@lsp.type.namespace"] = "@namespace",
 	["@lsp.type.type"] = "@type",
 	["@lsp.type.class"] = "@type",
@@ -193,10 +193,19 @@ autocmd("ColorSchemePre", {
 })
 autocmd("ColorScheme", {
 	callback = function()
-		-- HACK defer needed for some modifications to properly take effect
+		-- add SEMANTIC HIGHLIGHTS to themes that do not have it yet https://www.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90/
+		---@diagnostic disable-next-line: undefined-field
+		local themeHasSemanticHl = vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@lsp.type.function" }))
+		if not themeHasSemanticHl then
+			for semanticHl, treesitterHl in pairs(semanticToTreesitterHl) do
+				linkHighlight(semanticHl, treesitterHl)
+			end
+		end
+
+		-- defer needed for some modifications to properly take effect
 		for _, delayMs in pairs { 50, 100, 200 } do
-			vim.defer_fn(customHighlights, delayMs) ---@diagnostic disable-line: param-type-mismatch
-			vim.defer_fn(themeModifications, delayMs) ---@diagnostic disable-line: param-type-mismatch
+			vim.defer_fn(customHighlights, delayMs)
+			vim.defer_fn(themeModifications, delayMs)
 		end
 	end,
 })
