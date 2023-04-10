@@ -26,14 +26,13 @@ safeRequire("config.lazy")
 
 if vim.fn.has("gui_running") then safeRequire("config.gui-settings") end
 safeRequire("config.theme-config")
-
-safeRequire("config.options-and-autocmds")
 safeRequire("config.keybindings")
-safeRequire("config.folding-keymaps")
+safeRequire("config.options-and-autocmds")
+
 safeRequire("config.textobject-keymaps")
+safeRequire("config.folding")
 safeRequire("config.clipboard")
 
 safeRequire("config.automating-nvim")
-safeRequire("config.clipboard")
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")

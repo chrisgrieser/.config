@@ -8,7 +8,6 @@ local g = vim.g
 -- - if only one theme, it's used for both light and dark
 local themes = {
 	"EdenEast/nightfox.nvim",
-	-- { "ramojus/mellifluous.nvim", dependencies = "rktjmp/lush.nvim" },
 	"Yazeed1s/oh-lucy.nvim",
 	-- "kvrohit/mellow.nvim",
 	-- { "rose-pine/neovim", name = "rose-pine" },
