@@ -1,5 +1,4 @@
--- INFO: Server names are LSP names, not Mason names
--- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
+local u = require("config.utils")
 local lsp_servers = {
 	"lua_ls",
 	"yamlls",
@@ -166,13 +165,14 @@ local function setupAllLsps()
 end
 --------------------------------------------------------------------------------
 
+
 return {
 	{ -- package manager
 		"williamboman/mason.nvim",
 		lazy = true,
 		opts = {
 			ui = {
-				border = BorderStyle,
+				border = u.borderStyle,
 				icons = {
 					package_installed = "✓",
 					package_pending = "󰔟",
@@ -203,11 +203,11 @@ return {
 			end
 
 			-- Border Styling
-			require("lspconfig.ui.windows").default_options.border = BorderStyle
+			require("lspconfig.ui.windows").default_options.border = u.borderStyle
 			vim.lsp.handlers["textDocument/hover"] =
-				vim.lsp.with(vim.lsp.handlers.hover, { border = BorderStyle })
+				vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
 			vim.lsp.handlers["textDocument/signatureHelp"] =
-				vim.lsp.with(vim.lsp.handlers.signature_help, { border = BorderStyle })
+				vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
 			-- Diagnostics
 			local function diagnosticFormat(diagnostic, mode)
@@ -222,11 +222,11 @@ return {
 			vim.diagnostic.config {
 				virtual_text = {
 					format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
-					severity = { min = vim.diagnostic.severity.WARN },
+					severity = { min = u.logWarn },
 				},
 				float = {
 					focusable = true,
-					border = BorderStyle,
+					border = u.borderStyle,
 					max_width = 70,
 					header = "", -- remove "Diagnostics:" heading
 					format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,

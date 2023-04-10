@@ -1,8 +1,7 @@
 local M = {}
 --------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------
-
+M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
 M.logError = vim.log.levels.ERROR
 M.logWarn = vim.log.levels.WARN
 M.logTrance = vim.log.levels.TRACE
@@ -46,6 +45,25 @@ function M.appendToFile(filePath, str)
 	file:write(str .. "\n")
 	file:close()
 	return true
+end
+
+--------------------------------------------------------------------------------
+
+---Sets the global BorderStyle variable and the matching BorderChars Variable.
+---See also https://neovim.io/doc/user/api.html#nvim_open_win()
+---(BorderChars is needed for Harpoon and Telescope, both of which do not accept
+---a Borderstyle string.)
+local borderstyle = "single"
+
+M.borderStyle = borderstyle
+M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" } -- default: rounded
+M.borderHorizontal = "─" -- default: single
+
+if borderstyle == "single" then
+	M.borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+elseif borderstyle == "double" then
+	M.borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
+	M.borderHorizontal = "═"
 end
 
 --------------------------------------------------------------------------------

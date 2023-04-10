@@ -1,11 +1,13 @@
-local newCommand = vim.api.nvim_create_user_command
-local fn = vim.fn
 local expand = vim.fn.expand
+local fn = vim.fn
+local newCommand = vim.api.nvim_create_user_command
+local u = require("config.utils")
+
 --------------------------------------------------------------------------------
 
 -- `:SwapDeleteAll` deletes all swap files
 newCommand("SwapDeleteAll", function(_)
-	local swapdir = VimDataDir .. "swap/"
+	local swapdir = u.vimDataDir .. "swap/"
 	local out = fn.system([[rm -vf "]] .. swapdir .. [["* ]])
 	vim.notify("Deleted:\n" .. out)
 end, {})

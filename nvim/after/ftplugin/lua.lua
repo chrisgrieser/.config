@@ -2,11 +2,12 @@ local fn = vim.fn
 local cmd = vim.cmd
 local keymap = vim.keymap.set
 local expand = vim.fn.expand
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- lua regex opener
 keymap("n", "g/", function()
-	normal('"zya"vi"') -- yank and keep selection for quick replacement when done
+	u.normal('"zya"vi"') -- yank and keep selection for quick replacement when done
 	local pattern = fn.getreg("z"):match('"(.-)"')
 	local url = "https://gitspartv.github.io/lua-patterns/?pattern=" .. pattern
 	fn.system("open '" .. url .. "'") -- opening method on macOS
@@ -25,7 +26,7 @@ keymap("n", "<leader>r", function()
 	elseif pwd:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
 	else
-		vim.notify("Neither in nvim nor in hammerspoon directory.", logError)
+		vim.notify("Neither in nvim nor in hammerspoon directory.", u.logError)
 	end
 end, { buffer = true, desc = " Reload" })
 
@@ -42,7 +43,7 @@ local function inspect(strToInspect)
 		fn.system("osascript -e '" .. hsApplescript .. "'")
 	elseif parentDir:find("nvim") then
 		local output = vim.inspect(fn.luaeval(strToInspect))
-		vim.notify(output, logTrance, {
+		vim.notify(output, u.logTrance, {
 			timeout = 7000, -- ms
 			on_open = function(win) -- enable treesitter highlighting in the notification
 				local buf = vim.api.nvim_win_get_buf(win)
@@ -50,13 +51,13 @@ local function inspect(strToInspect)
 			end,
 		})
 	else
-		vim.notify("Neither in nvim nor in hammerspoon directory.", logError)
+		vim.notify("Neither in nvim nor in hammerspoon directory.", u.logError)
 	end
 end
 
 -- stylua: ignore
 keymap("n", "<leader>li", function() inspect(expand("<cWORD>")) end, { desc = " inspect cWORD", buffer = true })
 keymap("x", "<leader>li", function()
-	normal('"zy')
+	u.normal('"zy')
 	inspect(fn.getreg("z"))
 end, { desc = " inspect selection", buffer = true })

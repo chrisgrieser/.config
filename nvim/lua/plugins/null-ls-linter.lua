@@ -1,5 +1,7 @@
--- INFO these require null-ls name, not mason name: https://github.com/jayp0521/mason-null-ls.nvim#available-null-ls-sources
--- INFO linters also need to be added as source below
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
+--------------------------------------------------------------------------------
+
+local linterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
 local lintersAndFormatters = {
 	"yamllint", -- only for diagnostics, not for formatting
 	"prettier", -- js/ts/yaml
@@ -17,12 +19,6 @@ local lintersAndFormatters = {
 }
 
 --------------------------------------------------------------------------------
--- INFO
--- eslint, stylua, and prettier use project-specific config files
--- the other linters use a global config file
---------------------------------------------------------------------------------
--- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
--- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
 local function nullSources()
 	local builtins = require("null-ls").builtins
 
@@ -31,11 +27,11 @@ local function nullSources()
 		builtins.diagnostics.codespell.with {
 			disabled_filetypes = { "css", "bib" }, -- base64-encoded fonts cause a lot of errors
 			-- can't use `--skip`, since it null-ls reads from stdin and not from file
-			args = { "--ignore-words", LinterConfig .. "/codespell-ignore.txt", "-" },
+			args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt", "-" },
 		},
 		builtins.formatting.codespell.with {
 			disabled_filetypes = { "css", "bib" },
-			extra_args = { "--ignore-words", LinterConfig .. "/codespell-ignore.txt" },
+			extra_args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" },
 		},
 		builtins.formatting.trim_newlines, -- trim trailing whitespace & newlines
 		builtins.formatting.trim_whitespace.with {
@@ -71,14 +67,14 @@ local function nullSources()
 		builtins.formatting.stylelint.with {
 			-- using config without ordering, since automatic re-ordering can be
 			-- confusing. Config with stylelint-order is only run on build.
-			extra_args = { "--config", LinterConfig .. "/stylelintrc-formatting.yml" },
+			extra_args = { "--config", linterConfig .. "/stylelintrc-formatting.yml" },
 		},
 		builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 			filetypes = { "css" },
 			extra_args = {
 				"--quiet", -- only errors, no warnings
 				"--config",
-				LinterConfig .. "/stylelintrc.yml",
+				linterConfig .. "/stylelintrc.yml",
 			},
 		},
 
@@ -91,23 +87,23 @@ local function nullSources()
 
 		-- YAML
 		builtins.diagnostics.yamllint.with {
-			extra_args = { "--config-file", LinterConfig .. "/yamllint.yaml" },
+			extra_args = { "--config-file", linterConfig .. "/yamllint.yaml" },
 		},
 
 		-- MARKDOWN & PROSE
 		builtins.diagnostics.vale.with {
-			extra_args = { "--config", LinterConfig .. "/vale/vale.ini" },
+			extra_args = { "--config", linterConfig .. "/vale/vale.ini" },
 		},
 		builtins.formatting.cbfmt.with { -- code blocks
-			extra_args = { "--config", LinterConfig .. "/cbfmt.toml" },
+			extra_args = { "--config", linterConfig .. "/cbfmt.toml" },
 		},
 		builtins.formatting.markdownlint.with {
-			extra_args = { "--config", LinterConfig .. "/markdownlintrc" },
+			extra_args = { "--config", linterConfig .. "/markdownlintrc" },
 		},
 		builtins.diagnostics.markdownlint.with {
 			-- disabling rules that are autofixed already
 			-- stylua: ignore
-			extra_args = { "--disable", "trailing-spaces", "no-multiple-blanks", "--config", LinterConfig .. "/markdownlintrc" },
+			extra_args = { "--disable", "trailing-spaces", "no-multiple-blanks", "--config", linterConfig .. "/markdownlintrc" },
 		},
 		builtins.completion.spell.with { -- vim's built-in spell-suggestions
 			filetypes = { "markdown", "text", "gitcommit" },
@@ -123,7 +119,7 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "jayp0521/mason-null-ls.nvim" },
 		config = function()
 			require("null-ls").setup {
-				border = BorderStyle,
+				border = require("config.utils").borderStyle,
 				sources = nullSources(),
 			}
 		end,

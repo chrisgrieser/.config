@@ -1,3 +1,5 @@
+local u = require("config.utils")
+
 return {
 	{ -- quick file siwtcher
 		"ThePrimeagen/harpoon",
@@ -8,7 +10,7 @@ return {
 			-- to the `harpoon.json` that is synced
 			local symlinkCmd = string.format(
 				"ln -sf '%s' '%s'",
-				VimDataDir .. "/harpoon.json",
+				require("config.utils").vimDataDir .. "/harpoon.json",
 				vim.fn.stdpath("data") .. "/harpoon.json" -- https://github.com/ThePrimeagen/harpoon/blob/master/lua/harpoon/init.lua#L7
 			)
 			vim.fn.system(symlinkCmd)
@@ -69,7 +71,7 @@ return {
 		opts = {
 			detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp
 			exclude_dirs = { "node_modules", "build", "dist" },
-			datapath = VimDataDir,
+			datapath = u.vimDataDir,
 			patterns = {
 				".git",
 				"manifest.json", -- node

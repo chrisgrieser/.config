@@ -1,3 +1,4 @@
+local u = require("config.utils")
 -- filetypes where colorpicker and color highlights will be active
 local colorPickerFts = {
 	"css",
@@ -8,6 +9,7 @@ local colorPickerFts = {
 	"toml",
 	"yaml",
 }
+
 --------------------------------------------------------------------------------
 return {
 	{ -- highlight function args
@@ -67,7 +69,7 @@ return {
 			vim.opt.termguicolors = true
 			local ccc = require("ccc")
 			ccc.setup {
-				win_opts = { border = BorderStyle },
+				win_opts = { border = u.borderStyle },
 				highlighter = {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
@@ -110,7 +112,7 @@ return {
 		opts = {
 			input = {
 				insert_only = false, -- enable normal mode
-				border = BorderStyle,
+				border = u.borderStyle,
 				relative = "editor",
 				min_width = { 0.5, 60 },
 				win_options = { winblend = 0 }, -- weird shining through
@@ -119,7 +121,7 @@ return {
 				backend = { "telescope", "builtin" }, -- Priority list of vim.select implementations
 				trim_prompt = true, -- Trim trailing `:` from prompt
 				builtin = {
-					border = BorderStyle,
+					border = u.borderStyle,
 					relative = "cursor",
 					max_width = 80,
 					min_width = 20,

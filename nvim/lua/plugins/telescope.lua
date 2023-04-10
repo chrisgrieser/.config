@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 local keymappings = {
 	-- INFO default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
 	["<Esc>"] = "close",
@@ -17,6 +20,7 @@ local keymappings = {
 	["?"] = "which_key",
 }
 
+
 local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
@@ -25,8 +29,8 @@ local function telescopeConfig()
 			multi_icon = "󰒆 ",
 			preview = { filesize_limit = 1 }, -- in MB, do not preview big files for performance
 			path_display = { "tail" }, -- smart|tail (rest isn't that useful)
-			borderchars = BorderChars,
-			history = { path = VimDataDir .. "telescope_history" }, -- sync the history
+			borderchars = require("config.utils").borderChars,
+			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			file_ignore_patterns = {
 				"%.git/",
 				"%.git$", -- git dir in submodules
