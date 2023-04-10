@@ -71,6 +71,7 @@ local source_icons = {
 local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
+	local u = require("config.utils")
 
 	cmp.setup {
 		snippet = {
@@ -80,10 +81,10 @@ local function cmpconfig()
 		window = {
 			completion = {
 				side_padding = 0,
-				border = BorderStyle,
+				border = u.borderStyle,
 			},
 			documentation = {
-				border = BorderStyle,
+				border = u.borderStyle,
 			},
 		},
 		sorting = {

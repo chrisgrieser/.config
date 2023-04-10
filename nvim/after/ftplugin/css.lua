@@ -83,7 +83,7 @@ local function cssHeaderComment()
 	fn.append(".", hr)
 	local lineNum = u.getCursor(0)[1] + 2
 	local colNum = #hr[2] + 2
-	u.getCursor(0, { lineNum, colNum })
+	u.setCursor(0, { lineNum, colNum })
 	cmd.startinsert { bang = true }
 end
 

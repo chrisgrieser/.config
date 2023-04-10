@@ -1,7 +1,7 @@
 local fn = vim.fn
 local cmd = vim.cmd
 local keymap = vim.keymap.set
-
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- Abbreviations / spelling
@@ -12,16 +12,16 @@ vim.cmd.inoreabbrev ("<buffer> cosnt const")
 -- Build
 keymap("n", "<leader>r", function()
 	cmd.update()
-	local output = fn.system(('osascript -l JavaScript "%s"'):format(expand("%:p")))
-	local logLevel = vim.v.shell_error > 0 and logError or logTrance
+	local output = fn.system(('osascript -l JavaScript "%s"'):format(u.expand("%:p")))
+	local logLevel = vim.v.shell_error > 0 and u.logError or u.logTrance
 	vim.notify(output, logLevel)
 end, { buffer = true, desc = " JXA run" })
 
 -- Open regex in regex101 and regexper (railroad diagram)
 keymap("n", "g/", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
-	normal('"zyya/') -- yank outer regex
-	normal("vi/") -- select inner regex for easy replacement
+	u.normal('"zyya/') -- yank outer regex
+	u.normal("vi/") -- select inner regex for easy replacement
 
 	local regex = fn.getreg("z")
 	local pattern = regex:match("/(.*)/")

@@ -16,7 +16,7 @@ local function config()
 		top_down = false,
 		on_open = function(win)
 			if vim.api.nvim_win_is_valid(win) then
-				vim.api.nvim_win_set_config(win, { border = BorderStyle })
+				vim.api.nvim_win_set_config(win, { border = require("config.utils").borderStyle })
 			end
 		end,
 	}

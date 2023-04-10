@@ -1,13 +1,9 @@
--- CORE CONFIG
+--------------------------------------------------------------------------------
 vim.g.mapleader = ","
-VimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
 
---------------------------------------------------------------------------------
-
--- TEMP to avoid trouble with devices not upgraded yet
-if vim.version().minor >= 9 then vim.loader.enable() end 
-
---------------------------------------------------------------------------------
+if vim.version().minor >= 9 then -- TODO remove this condition later on
+	vim.loader.enable()
+end 
 
 ---try to require the module, and do not error when one of them cannot be
 ---loaded. But do notify if there was an error.
@@ -15,7 +11,6 @@ if vim.version().minor >= 9 then vim.loader.enable() end
 local function tryRequire(module)
 	local success, req = pcall(require, module)
 	if success then return req end
-
 	local msg = "Error loading " .. module
 	local notifyInstalled, notify = pcall(require, "notify")
 	if notifyInstalled then
@@ -27,33 +22,7 @@ end
 
 --------------------------------------------------------------------------------
 
----Sets the global BorderStyle variable and the matching BorderChars Variable.
----See also https://neovim.io/doc/user/api.html#nvim_open_win()
----(BorderChars is needed for Harpoon and Telescope, both of which do not accept
----a Borderstyle string.)
----@param str string none|single|double|rounded|shadow|solid
-local function setBorderstyle(str)
-	BorderStyle = str
-	if str == "single" then
-		BorderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
-		BorderHorizontal = "─"
-	elseif str == "double" then
-		BorderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
-		BorderHorizontal = "═"
-	elseif str == "rounded" then
-		BorderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-		BorderHorizontal = "─"
-	elseif str == "none" then
-		BorderChars = { "", "", "", "", "", "", "", "" }
-		BorderHorizontal = ""
-	end
-	-- default: rounded
-	if not BorderChars then BorderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" } end
-end
-
-setBorderstyle("single") -- should come before lazy
-
-tryRequire("config.utils")
+require("config.utils").setBorderstyle("single") -- should come before lazy
 
 tryRequire("config.lazy")
 
