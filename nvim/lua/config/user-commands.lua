@@ -5,20 +5,30 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
--- quicker evaluation
-vim.cmd.cnoreabbrev("i lua =")
+-- :I inspect nvim-lua
+newCommand("I", function(ctx)
+	local output = vim.inspect(fn.luaeval(ctx.args))
+	vim.notify(output, "trace", {
+		timeout = 6000, -- ms
+		on_open = function(win) -- enable treesitter highlighting in the notification
+			local buf = vim.api.nvim_win_get_buf(win)
+			vim.api.nvim_buf_set_option(buf, "filetype", "lua")
+		end,
+	})
+end, { nargs = "+" })
 
+-- view capabilities of current lsp
 newCommand("LspCapabilities", function()
 	local capabilities = vim.lsp.get_active_clients()[1].server_capabilities
 	local capAsStr = vim.inspect(capabilities)
-	vim.notify(capAsStr, "info", {
+	vim.notify(capAsStr, "trace", {
 		on_open = function(win)
 			local buf = vim.api.nvim_win_get_buf(win)
 			vim.api.nvim_buf_set_option(buf, "filetype", "lua")
 		end,
 		timeout = 6000,
 	})
-	fn.setreg("+", "capabilities = "..capAsStr)
+	fn.setreg("+", "capabilities = " .. capAsStr)
 end, {})
 
 -- `:SwapDeleteAll` deletes all swap files

@@ -26,14 +26,14 @@ keymap("n", "<leader>r", function()
 	elseif pwd:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
 	else
-		vim.notify("Neither in nvim nor in hammerspoon directory.", u.logError)
+		vim.notify("Neither in nvim nor in hammerspoon directory.", u.error)
 	end
 end, { buffer = true, desc = " Reload" })
 
 --------------------------------------------------------------------------------
 -- INSPECT NVIM OR HAMMERSPOON OBJECTS
 
--- `:I` or `<leader>li` inspects the passed lua object / selection
+-- inspects the passed lua object / selection
 local function inspect(strToInspect)
 	local parentDir = expand("%:p:h")
 
@@ -43,7 +43,7 @@ local function inspect(strToInspect)
 		fn.system("osascript -e '" .. hsApplescript .. "'")
 	elseif parentDir:find("nvim") then
 		local output = vim.inspect(fn.luaeval(strToInspect))
-		vim.notify(output, u.logTrance, {
+		vim.notify(output, u.trace, {
 			timeout = 7000, -- ms
 			on_open = function(win) -- enable treesitter highlighting in the notification
 				local buf = vim.api.nvim_win_get_buf(win)
@@ -51,7 +51,7 @@ local function inspect(strToInspect)
 			end,
 		})
 	else
-		vim.notify("Neither in nvim nor in hammerspoon directory.", u.logError)
+		vim.notify("Neither in nvim nor in hammerspoon directory.", u.error)
 	end
 end
 

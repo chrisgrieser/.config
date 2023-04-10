@@ -20,7 +20,7 @@ end, { buffer = true, desc = "Save & Format" })
 keymap("n", "<leader>r", function()
 	cmd.update()
 	local output = fn.system(('osascript "%s"'):format(expand("%:p")))
-	local logLevel = vim.v.shell_error > 0 and u.logError or u.logTrance
+	local logLevel = vim.v.shell_error > 0 and u.error or u.trace
 	vim.notify(output, logLevel)
 end, { buffer = true, desc = " AppleScript run" })
 

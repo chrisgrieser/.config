@@ -1,15 +1,15 @@
-local function config()
+local function notifyConfig()
 	vim.opt.termguicolors = true -- required for the plugin
 	--------------------------------------------------------------------------------
 	-- Base config
 	local notifyWidth = 55
-	local printDurationSecs = 8
+	local printDurationSecs = 6
 
 	require("notify").setup {
 		render = "minimal",
 		stages = "slide",
 		level = 0, -- minimum severity level to display (0 = display all)
-		max_height = 25,
+		max_height = 30,
 		max_width = notifyWidth, -- HACK see below
 		minimum_width = 13,
 		timeout = 4000,
@@ -90,7 +90,7 @@ local function config()
 			end
 		end
 
-		vim.notify(table.concat(safe_args, " "), vim.log.levels.INFO, notifyOpts)
+		vim.notify(table.concat(safe_args, " "), "info", notifyOpts)
 	end
 end
 
@@ -99,5 +99,5 @@ end
 return {
 	"rcarriga/nvim-notify",
 	event = "UIEnter",
-	config = config,
+	config = notifyConfig,
 }
