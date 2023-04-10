@@ -1,6 +1,7 @@
 local g = vim.g
 local fn = vim.fn
 local keymap = vim.keymap.set
+local autocmd = vim.api.nvim_create_autocmd
 --------------------------------------------------------------------------------
 
 -- See hammerspoons `app-hider.lua`
@@ -15,8 +16,9 @@ autocmd("VimEnter", {
 })
 
 --------------------------------------------------------------------------------
--- SIZE
-vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2" -- https://www.programmingfonts.org/#oxygen
+-- SIZE & FONT
+-- https://www.programmingfonts.org/#oxygen
+vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2" 
 
 -- INFO: Transparency set in theme-config.lua
 if fn.hostname():find("Mother") then

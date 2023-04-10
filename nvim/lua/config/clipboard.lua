@@ -1,6 +1,9 @@
+local autocmd = vim.api.nvim_create_autocmd
+local fn = vim.fn
 local g = vim.g
 local keymap = vim.keymap.set
-local fn = vim.fn
+local u = require("config.utils")
+
 --------------------------------------------------------------------------------
 
 -- keep the register clean
@@ -19,9 +22,9 @@ end, { expr = true })
 
 --------------------------------------------------------------------------------
 -- Yanky
-vim.keymap.set("n", "p", "<Plug>(YankyPutAfter)", { desc = "Paste (Yanky)" })
-vim.keymap.set("n", "P", "<Plug>(YankyCycleForward)", { desc = "Cycle Yankring" })
-vim.keymap.set(
+keymap("n", "p", "<Plug>(YankyPutAfter)", { desc = "Paste (Yanky)" })
+keymap("n", "P", "<Plug>(YankyCycleForward)", { desc = "Cycle Yankring" })
+keymap(
 	"n",
 	"<leader>y",
 	function() require("telescope").extensions.yank_history.yank_history() end,
@@ -44,15 +47,15 @@ keymap("n", "gp", function()
 	end
 
 	fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
-	normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
-	if targetRegType == "V" then normal("==") end
+	u.normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
+	if targetRegType == "V" then u.normal("==") end
 end, { desc = "paste differently" })
 
 --------------------------------------------------------------------------------
 
 -- yanking without moving the cursor
 autocmd({ "CursorMoved", "VimEnter" }, {
-	callback = function() vim.g.cursorPreYank = GetCursor(0) end,
+	callback = function() vim.g.cursorPreYank = u.getCursor(0) end,
 })
 
 -- - sticky yanking (without moving the cursor)
@@ -65,6 +68,6 @@ autocmd("TextYankPost", {
 		if fn.reg_recording() ~= "" or fn.reg_executing() ~= "" then return end
 
 		-- sticky cursor
-		if vim.v.event.operator == "y" then SetCursor(0, g.cursorPreYank) end
+		if vim.v.event.operator == "y" then u.setCursor(0, g.cursorPreYank) end
 	end,
 })

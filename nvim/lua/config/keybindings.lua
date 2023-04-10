@@ -1,11 +1,11 @@
--- require more keymaps
-local fn = vim.fn
-local cmd = vim.cmd
-local keymap = vim.keymap.set
-local bo = vim.bo
 local autocmd = vim.api.nvim_create_autocmd
+local bo = vim.bo
+local cmd = vim.cmd
 local expand = vim.fn.expand
+local fn = vim.fn
+local keymap = vim.keymap.set
 local u = require("config.utils")
+
 --------------------------------------------------------------------------------
 -- META
 
@@ -198,7 +198,8 @@ local function valeWord(mode)
 		word = fn.getreg("z")
 	end
 
-	local success = u.appendToFile(word, LinterConfig .. "/vale/styles/Vocab/Docs/" .. mode .. ".txt")
+	local filepath = vim.env.DOTFILE_FOLDER .. "/linter-configs/vale/styles/Vocab/Docs/" .. mode .. ".txt"
+	local success = u.appendToFile(filepath, word)
 	if not success then return end -- error message already by AppendToFile
 	cmd.mkview(2)
 	cmd.update()
@@ -710,7 +711,7 @@ keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 keymap("n", "<leader>tf", "<Plug>PlenaryTestFile", { desc = " Test File" })
 keymap("n", "<leader>td", "<cmd>PlenaryBustedDirectory .<CR>", { desc = " Tests in Directory" })
 
-keymap("n", "<leader>th", function ()
+keymap("n", "<leader>th", function()
 	cmd.edit("test-request.http")
 	fn.system("open https://github.com/rest-nvim/rest.nvim/tree/main/tests")
 end, { desc = "󰴚 Test HTTP request" })
@@ -748,7 +749,6 @@ keymap("x", "<leader>ti", function()
 		keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
 	end)
 end, { desc = " InlineEdit" })
-
 
 --------------------------------------------------------------------------------
 

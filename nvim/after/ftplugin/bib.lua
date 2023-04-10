@@ -1,8 +1,9 @@
-require("config.utils")
+local bo = vim.bo
+local fn = vim.fn
 --------------------------------------------------------------------------------
 
 -- do not autowrap
-bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
+bo.formatoptions = bo.formatoptions:gsub("t", "")
 
 -- when opening large files, start with some folds closed
 if fn.line("$") > 100 then

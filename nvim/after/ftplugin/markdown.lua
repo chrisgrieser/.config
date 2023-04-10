@@ -1,4 +1,5 @@
-require("config.utils")
+local cmd = vim.cmd
+local keymap = vim.keymap.set
 --------------------------------------------------------------------------------
 
 -- Rnable wrapping lines

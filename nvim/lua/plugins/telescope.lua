@@ -76,6 +76,7 @@ local function telescopeConfig()
 		pickers = {
 			git_status = { prompt_prefix = "󰊢 ", show_untracked = true },
 			git_commits = { prompt_prefix = "󰊢 ", initial_mode = "normal" },
+			diagnostics = { prompt_prefix = "󰒕 ", no_sign = true },
 			treesitter = { prompt_prefix = " ", show_line = false },
 			keymaps = { prompt_prefix = " ", modes = { "n", "i", "c", "x", "o", "t" } },
 			oldfiles = { prompt_prefix = "󰋚 " },
