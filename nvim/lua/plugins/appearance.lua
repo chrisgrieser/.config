@@ -1,5 +1,4 @@
 local u = require("config.utils")
--- filetypes where colorpicker and color highlights will be active
 local colorPickerFts = {
 	"css",
 	"scss",
@@ -10,8 +9,32 @@ local colorPickerFts = {
 	"yaml",
 }
 
+local semanticHighlightingFts = {
+	"lua",
+	"typescript",
+	"python",
+}
+
 --------------------------------------------------------------------------------
+
 return {
+	{ -- highlight parameters (simple version of semantic highlights)
+		"m-demare/hlargs.nvim",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		ft = semanticHighlightingFts,
+		opts = {
+			-- excluding the filetypes which have semantic highlights via LSP
+			excluded_filetypes = semanticHighlightingFts,
+			extras = { named_parameters = true },
+			excluded_argnames = {
+				declarations = {},
+				usages = {
+					python = {},
+					lua = {},
+				},
+			},
+		},
+	},
 	{ -- rainbow brackets
 		"HiPhish/nvim-ts-rainbow2",
 		event = "BufEnter",
@@ -36,7 +59,7 @@ return {
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
 				bibtex = { icon = "", name = "BibTeX" },
 				http = { icon = "󰴚", name = "http" },
-				-- -- plugins
+				-- plugins
 				lazy = { icon = "", name = "Lazy" },
 				Glance = { icon = "󰒕", name = "Glance" },
 				toggleterm = { icon = "", name = "ToggleTerm" },

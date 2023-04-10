@@ -2,9 +2,11 @@ local cmd = vim.cmd
 local fn = vim.fn
 local keymap = vim.keymap.set
 local u = require("config.utils")
---------------------------------------------------------------------------------
 
--- disable fold when searching
+--------------------------------------------------------------------------------
+-- PAUSE FOLDS WHEN SEARCHING
+
+vim.opt.foldopen:remove { "search" } -- no auto-open when searching
 keymap("n", "-", ":set nofoldenable<CR>/")
 
 -- while searching: pause folds -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
@@ -19,7 +21,8 @@ end, vim.api.nvim_create_namespace("auto_pause_folds"))
 
 --------------------------------------------------------------------------------
 -- MACRO FOLD COMMANDS
--- UFO replacements of fold commands
+
+-- UFO REPLACEMENTS OF FOLD COMMANDS
 
 -- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
 -- auto-closing them after leaving insert mode, however ufo does not seem to
@@ -27,10 +30,12 @@ end, vim.api.nvim_create_namespace("auto_pause_folds"))
 -- Consequently, the vim-internal fold levels need to be disabled by setting
 -- them to 99
 vim.opt.foldlevel = 99 
-vim.o.foldlevelstart = 99
+vim.opt.foldlevelstart = 99
 
-keymap("n", "zr", function () require("ufo").openFoldsExceptKinds() end, { desc = "󰘖 󱃄 Open All Folds except comments" })
+keymap("n", "zr", function () require("ufo").openFoldsExceptKinds() end, { desc = "󰘖 󱃄 Open All Folds except kinds" })
+keymap("n", "zR", function () require("ufo").openFoldsExceptKinds() end, { desc = "󰘖 󱃄 Open All Folds except kinds" })
 keymap("n", "zm", function () require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
+keymap("n", "zM", function () require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
 
 -- set foldlevel via z{n}
 for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
