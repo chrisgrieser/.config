@@ -4,6 +4,8 @@ LinterConfig = vim.env.DOTFILE_FOLDER .. "/linter-configs/" -- read from .zshenv
 VimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
 UpdateCounterThreshhold = 25 -- for plugin update statusline
 
+--------------------------------------------------------------------------------
+
 -- TEMP to avoid trouble with devices not upgraded yet
 if vim.version().minor >= 9 then vim.loader.enable() end 
 
@@ -37,6 +39,8 @@ tryRequire("config.theme-config")
 
 tryRequire("config.options-and-autocmds")
 tryRequire("config.keybindings")
+tryRequire("config.folding-keymaps")
+tryRequire("config.clipboard")
 
 tryRequire("config.automating-nvim")
 tryRequire("config.clipboard")

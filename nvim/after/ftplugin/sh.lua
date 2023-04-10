@@ -1,6 +1,11 @@
-require("config.utils")
+local fn = vim.fn
+local cmd = vim.cmd
+local keymap = vim.keymap.set
+local expand = vim.fn.expand
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+-- hover -> man page
 keymap(
 	"n",
 	"<leader>h",
@@ -32,7 +37,7 @@ keymap("n", "<leader>r", function()
 		vim.defer_fn(function() fn.system([[osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"]]) end, 3000)
 	else
 		local output = fn.system(('zsh "%s"'):format(expand("%:p")))
-		local logLevel = vim.v.shell_error > 0 and LogError or LogTrace
+		local logLevel = vim.v.shell_error > 0 and u.logError or u.logTrance
 		vim.notify(output, logLevel)
 	end
 end, { buffer = true, desc = " Run Shell Script" })

@@ -1,4 +1,3 @@
-require("config.utils")
 -- Runs arbitrary lua commands when written to the watchedFile
 
 -- INFO
@@ -7,6 +6,8 @@ require("config.utils")
 -- https://neovim.io/doc/user/lua.html#lua-loop
 --------------------------------------------------------------------------------
 
+local fn = vim.fn
+local u = require("config.utils")
 local watchedFile = "/tmp/nvim-automation"
 local w = vim.loop.new_fs_event()
 
@@ -25,7 +26,7 @@ end
 --------------------------------------------------------------------------------
 
 local function executeExtCommand()
-	local commandStr = ReadFile(watchedFile):gsub("[\n\r]$", "")
+	local commandStr = u.readFile(watchedFile):gsub("[\n\r]$", "")
 	local command = load(commandStr) -- `load()` is the lua equivalent of `eval()`
 	if command then command() end
 

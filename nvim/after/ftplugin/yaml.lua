@@ -1,4 +1,9 @@
-require("config.utils")
+local bo = vim.bo
+local fn = vim.fn
+local cmd = vim.cmd
+local keymap = vim.keymap.set
+local expand = vim.fn.expand
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 bo.shiftwidth = 2
@@ -18,6 +23,6 @@ keymap("n", "<leader>r", function()
 		result = result:gsub("\n$", "")
 		vim.notify(result)
 	else
-		vim.notify("Not in Karabiner Directory.", LogWarn)
+		vim.notify("Not in Karabiner Directory.", u.logWarn)
 	end
 end, { buffer = true, desc = " Compile Karabiner Config" })

@@ -13,15 +13,15 @@ vim.cmd.inoreabbrev ("<buffer> cosnt const")
 keymap("n", "<leader>r", function()
 	cmd.update()
 	local output = fn.system(('osascript -l JavaScript "%s"'):format(expand("%:p")))
-	local logLevel = vim.v.shell_error > 0 and LogError or LogTrace
+	local logLevel = vim.v.shell_error > 0 and logError or logTrance
 	vim.notify(output, logLevel)
 end, { buffer = true, desc = " JXA run" })
 
 -- Open regex in regex101 and regexper (railroad diagram)
 keymap("n", "g/", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
-	Normal('"zyya/') -- yank outer regex
-	Normal("vi/") -- select inner regex for easy replacement
+	normal('"zyya/') -- yank outer regex
+	normal("vi/") -- select inner regex for easy replacement
 
 	local regex = fn.getreg("z")
 	local pattern = regex:match("/(.*)/")

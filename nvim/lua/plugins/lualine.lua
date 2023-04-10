@@ -1,4 +1,6 @@
--- HELPERS
+local bo = vim.bo
+local fn = vim.fn
+local u = require("config.utils")
 
 ---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
 ---@param name string name of highlight group
@@ -22,13 +24,13 @@ end
 
 local function indentation()
 	local out = ""
-	local usesSpaces = vim.bo.expandtab
-	local usesTabs = not vim.bo.expandtab
-	local ft = vim.bo.filetype
-	local tabwidth = vim.bo.tabstop
+	local usesSpaces = bo.expandtab
+	local usesTabs = not bo.expandtab
+	local ft = bo.filetype
+	local tabwidth = bo.tabstop
 	local spaceFiletypes = { "python", "yaml" }
 	local ignoredFiletypes = { "css", "markdown", "gitcommit" }
-	if vim.tbl_contains(ignoredFiletypes, ft) or vim.fn.mode() ~= "n" or vim.bo.buftype ~= "" then
+	if vim.tbl_contains(ignoredFiletypes, ft) or fn.mode() ~= "n" or bo.buftype ~= "" then
 		return ""
 	end
 
@@ -42,9 +44,9 @@ local function indentation()
 	end
 
 	-- mixed indentation
-	local hasTabs = vim.fn.search("^\t", "nw") > 0
-	local hasSpaces = vim.fn.search("^ ", "nw") > 0
-	local mixed = vim.fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
+	local hasTabs = fn.search("^\t", "nw") > 0
+	local hasSpaces = fn.search("^ ", "nw") > 0
+	local mixed = fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then
 		out = out .. " mixed"
@@ -62,7 +64,7 @@ end
 -- show branch info only when *not* on main/master
 vim.api.nvim_create_autocmd({ "BufReadPost", "FocusGained", "UiEnter" }, {
 	callback = function()
-		vim.b.cur_branch = vim.fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "")
+		vim.b.cur_branch = fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "")
 	end,
 })
 
@@ -70,27 +72,27 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "FocusGained", "UiEnter" }, {
 ---@return boolean
 local function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
 	local notMainBranch = vim.b.cur_branch ~= "main" and vim.b.cur_branch ~= "master"
-	local validFiletype = vim.bo.filetype ~= "help" -- vim help files are located in a git repo
-	local notSpecialBuffer = not (vim.bo.buftype ~= "") -- statusline already shows branch
+	local validFiletype = bo.filetype ~= "help" -- vim help files are located in a git repo
+	local notSpecialBuffer = not (bo.buftype ~= "") -- statusline already shows branch
 	return notMainBranch and validFiletype and notSpecialBuffer
 end
 
 --------------------------------------------------------------------------------
 
 local function selectionCount()
-	local isVisualMode = vim.fn.mode():find("[Vv]")
+	local isVisualMode = fn.mode():find("[Vv]")
 	if not isVisualMode then return "" end
-	local starts = vim.fn.line("v")
-	local ends = vim.fn.line(".")
+	local starts = fn.line("v")
+	local ends = fn.line(".")
 	local lines = starts <= ends and ends - starts + 1 or starts - ends + 1
-	return " " .. tostring(lines) .. "L " .. tostring(vim.fn.wordcount().visual_chars) .. "C"
+	return " " .. tostring(lines) .. "L " .. tostring(fn.wordcount().visual_chars) .. "C"
 end
 
 local function searchCounter()
-	if vim.fn.mode() ~= "n" or vim.v.hlsearch == 0 then return "" end
-	local total = vim.fn.searchcount().total
-	local current = vim.fn.searchcount().current
-	local searchTerm = vim.fn.getreg("/")
+	if fn.mode() ~= "n" or vim.v.hlsearch == 0 then return "" end
+	local total = fn.searchcount().total
+	local current = fn.searchcount().current
+	local searchTerm = fn.getreg("/")
 	local isStarSearch = searchTerm:find([[^\<.*\>$]])
 	if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
 	if total == 0 then return " 0 " .. searchTerm end
@@ -117,12 +119,12 @@ end
 
 ---returns a harpoon icon if the current file is marked in Harpoon. Does not
 ---`require` itself, so won't load Harpoon (for when lazyloading Harpoon)
-function UpdateHarpoonIndicator()
+local function updateHarpoonIndicator()
 	vim.b.harpoonMark = "" -- empty by default
-	local harpoonJsonPath = vim.fn.stdpath("data") .. "/harpoon.json"
-	local fileExists = vim.fn.filereadable(harpoonJsonPath) ~= 0
+	local harpoonJsonPath = fn.stdpath("data") .. "/harpoon.json"
+	local fileExists = fn.filereadable(harpoonJsonPath) ~= 0
 	if not fileExists then return end
-	local harpoonJson = ReadFile(harpoonJsonPath)
+	local harpoonJson = u.readFile(harpoonJsonPath)
 	if not harpoonJson then return end
 
 	local harpoonData = vim.json.decode(harpoonJson)
@@ -131,7 +133,7 @@ function UpdateHarpoonIndicator()
 	local currentProject = harpoonData.projects[pwd]
 	if not currentProject then return end
 	local markedFiles = currentProject.mark.marks
-	local currentFile = vim.fn.expand("%")
+	local currentFile = fn.expand("%")
 
 	for _, file in pairs(markedFiles) do
 		if file.filename == currentFile then vim.b.harpoonMark = "󰛢" end
@@ -144,7 +146,7 @@ local function harpoonStatusline() return vim.b.harpoonMark or "" end
 -- also, the command is called on marking a new file
 vim.api.nvim_create_autocmd({ "BufReadPost", "UiEnter" }, {
 	pattern = "*",
-	callback = UpdateHarpoonIndicator,
+	callback = updateHarpoonIndicator,
 })
 
 --------------------------------------------------------------------------------
@@ -185,7 +187,7 @@ end
 local function pathToProjectRoot()
 	local maxLen = 45
 	if not require("nvim-navic").is_available() then return "" end
-	local parentPath = vim.fn.expand("%:p:h")
+	local parentPath = fn.expand("%:p:h")
 	local projectRelPath = parentPath:sub(#vim.loop.cwd() + 2)
 	local nicerDisplay = projectRelPath:gsub("/", "  ")
 	if nicerDisplay:find("^%s*$") then return "" end
@@ -200,7 +202,7 @@ end
 local function foldLevel()
 	local startLevel = vim.opt.foldlevelstart:get()
 	local level = vim.opt_local.foldlevel:get()
-	local foldenabled = vim.opt_local.foldenable:get() and vim.bo.filetype ~= "Glance"
+	local foldenabled = vim.opt_local.foldenable:get() and bo.filetype ~= "Glance"
 
 	local icon = startLevel == level and "" or "󰘖 "
 	local label = startLevel == level and "" or tostring(level)
@@ -227,14 +229,14 @@ local lualineConfig = {
 				mode = 1,
 				max_length = vim.o.columns * 0.7,
 				section_separators = emptySeparators,
-				cond = function() return vim.fn.tabpagenr("$") > 1 end,
+				cond = function() return fn.tabpagenr("$") > 1 end,
 			},
 		},
 		lualine_b = {
 			{
 				pathToProjectRoot,
 				section_separators = { left = " ", right = " " },
-				cond = function() return vim.fn.tabpagenr("$") == 1 end,
+				cond = function() return fn.tabpagenr("$") == 1 end,
 			},
 		},
 		lualine_c = {

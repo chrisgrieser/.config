@@ -1,5 +1,8 @@
 local keymap = vim.keymap.set
 local cmd = vim.cmd
+local bo = vim.bo
+local autocmd = vim.api.nvim_create_autocmd
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- REMAPPING OF BUILTIN TEXT OBJECTS
@@ -29,9 +32,9 @@ keymap("i", "<F2>", "<Space>") -- FIX accidental triggering in insert mode when 
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
 keymap("n", "dq", function()
-	local prevCursor = GetCursor(0)
+	local prevCursor = u.getCursor(0)
 	cmd.normal { "d&&&" } -- without bang for remapping of COM
-	SetCursor(0, prevCursor)
+	u.setCursor(0, prevCursor)
 end, { remap = true, desc = "delete comment" })
 
 -- manually changed cq to preserve the commentstring

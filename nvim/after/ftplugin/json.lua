@@ -16,12 +16,12 @@ end
 
 -- escape stuff properly for VS Code Style snippet
 keymap("n", "<leader>\\", function ()
-	Normal("'[v']") -- select last paste
-	LeaveVisualMode() -- -> sects '<,'> marks
+	normal("'[v']") -- select last paste
+	leaveVisualMode() -- -> sects '<,'> marks
 	cmd[['<,'>s/\\/\\\\/g]] -- escape the escaping backslashes
 	cmd[['<,'>s/"/\\"/g]] -- escape the double quotes
 	cmd[['<,'>s/\$/\\\\$/g]] -- escape the $ signs
 	cmd[['<,'>s/^\(\s*\)\(.*\)/\1"\2",/]] -- surround non-whitespace with quotes and comma
 	cmd[['>s/,$//]] -- remove trailing comma at last line
-	Normal("gv=") -- auto-indent everything
+	normal("gv=") -- auto-indent everything
 end, { desc = "JSON: Escape for VS Code Snippet", buffer = true })
