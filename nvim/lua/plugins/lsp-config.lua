@@ -185,9 +185,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
-		opts = {
-			ensure_installed = lsp_servers,
-		},
+		opts = { ensure_installed = lsp_servers },
 	},
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
@@ -210,26 +208,22 @@ return {
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
 			-- Diagnostics
-			local function diagnosticFormat(diagnostic, mode)
-				local source = diagnostic.source and diagnostic.source:gsub("%.$", "") or nil
-				local code = diagnostic.code
-				local out = diagnostic.message
-				if code then out = out .. " (" .. code .. ")" end -- some linters have no code
-				if source and mode == "float" then out = out .. " [" .. source .. "]" end
-				return out
+			local function fmt(diag)
+				local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
+				local msg = diag.message
+				return msg .. source
 			end
 
 			vim.diagnostic.config {
 				virtual_text = {
-					format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
-					severity = { min = u.warn },
+					severity = { min = vim.log.levels.WARN },
 				},
 				float = {
+					format = function(diag) return fmt(diag) end,
 					focusable = true,
 					border = u.borderStyle,
-					max_width = 60,
+					max_width = 70,
 					header = "", -- remove "Diagnostics:" heading
-					format = function(diagnostic) return diagnosticFormat(diagnostic, "float") end,
 				},
 			}
 		end,
