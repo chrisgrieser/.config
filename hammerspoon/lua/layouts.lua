@@ -134,6 +134,7 @@ UnlockWatcher = c.new(function(event)
 			setHigherBrightnessDuringDay()
 			selectLayout()
 			UpdateSidenotes()
+			unlockInProgress
 		end)
 	end, 0.2)
 	-- deactivate the timer in the screen is woken but not unlocked
