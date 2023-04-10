@@ -72,6 +72,7 @@ end, { desc = "󰘖 Goto previous closed fold" })
 keymap("n", "zp", function() require("ufo").peekFoldedLinesUnderCursor(false, true) end, { desc = "󰘖 󰈈 Preview Fold" })
 
 -- h closes (similar to how l opens due to opt.foldopen="hor")
+-- works well with vim's startofline option
 keymap("n", "h", function()
 	local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
 	local firstColumn = fn.col(".") == 1
