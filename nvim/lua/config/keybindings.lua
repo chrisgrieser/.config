@@ -610,7 +610,12 @@ autocmd("LspAttach", {
 		keymap("n", "gy", function() cmd.Glance("type_definitions") end, { desc = "󰒕 Type Definition", buffer = true })
 		-- uses "v" instead of "x", so signature can be shown during snippet completion
 		keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
-		keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover", buffer = true })
+
+		-- stylua: ignore end
+		keymap("n", "<leader>h", function()
+			local isOnFold = require("ufo").peekFoldedLinesUnderCursor()
+			if not isOnFold then vim.lsp.buf.hover() end
+		end, { desc = "󰒕 󱃄 Hover", buffer = true })
 
 		-- Save & Format
 		keymap({ "n", "i", "x" }, "<D-s>", function()
