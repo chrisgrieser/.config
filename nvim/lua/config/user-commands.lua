@@ -5,6 +5,22 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
+-- quicker evaluation
+vim.cmd.cnoreabbrev("i lua =")
+
+newCommand("LspCapabilities", function()
+	local capabilities = vim.lsp.get_active_clients()[1].server_capabilities
+	local capAsStr = vim.inspect(capabilities)
+	vim.notify(capAsStr, "info", {
+		on_open = function(win)
+			local buf = vim.api.nvim_win_get_buf(win)
+			vim.api.nvim_buf_set_option(buf, "filetype", "lua")
+		end,
+		timeout = 6000,
+	})
+	fn.setreg("+", "capabilities = "..capAsStr)
+end, {})
+
 -- `:SwapDeleteAll` deletes all swap files
 newCommand("SwapDeleteAll", function(_)
 	local swapdir = u.vimDataDir .. "swap/"
@@ -20,6 +36,3 @@ end, {})
 
 -- `:PluginDir` opens the nvim data path, where mason and lazy install their stuff
 newCommand("PluginDir", function(_) fn.system('open "' .. fn.stdpath("data") .. '"') end, {})
-
--- quicker evaluation
-vim.cmd.cnoreabbrev("i lua =")

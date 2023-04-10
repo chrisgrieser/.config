@@ -57,7 +57,6 @@ require("lazy").setup("plugins", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lazy",
 	callback = function()
-		---@diagnostic disable-next-line: param-type-mismatch
 		vim.defer_fn(function() vim.keymap.set("n", "K", "6k", { buffer = true }) end, 1)
 	end,
 })

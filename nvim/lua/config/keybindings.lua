@@ -417,14 +417,14 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 
 -- for consistency with terminal buffers also <S-CR>
 -- stylua: ignore start
-keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "alt buffer" })
-keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "Cybu: Next Buffer" })
-keymap("n", "<S-CR>", "<C-w>w", { desc = "Next window" })
+keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "Alt Buffer" })
+keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "Next Buffer" })
+keymap("n", "<S-CR>", "<C-w>w", { desc = "Next Window" })
 
 keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window" })
 keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "reopen last buffer" })
 
-keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " Open Buffers" })
+keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " Buffers" })
 -- stylua: ignore end
 
 keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
@@ -762,7 +762,6 @@ autocmd("FileType", {
 		"qf", -- quickfix
 		"lazy",
 		"httpResult", -- rest.nvim
-		"notify",
 		"AppleScriptRunOutput",
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
@@ -784,7 +783,6 @@ autocmd("FileType", {
 			keymap("n", "q", "Q", opts)
 		else
 			-- HACK 1ms delay ensures it comes later in the autocmd stack and takes effect
-			---@diagnostic disable-next-line: param-type-mismatch
 			vim.defer_fn(function() keymap("n", "q", "<Esc>", opts) end, 1)
 		end
 	end,
