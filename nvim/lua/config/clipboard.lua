@@ -51,13 +51,13 @@ end, { desc = "paste differently" })
 --------------------------------------------------------------------------------
 
 -- yanking without moving the cursor
-Autocmd({ "CursorMoved", "VimEnter" }, {
+autocmd({ "CursorMoved", "VimEnter" }, {
 	callback = function() vim.g.cursorPreYank = GetCursor(0) end,
 })
 
 -- - sticky yanking (without moving the cursor)
 -- - highlighted yank
-Autocmd("TextYankPost", {
+autocmd("TextYankPost", {
 	callback = function()
 		-- highlighted yank
 		vim.highlight.on_yank { timeout = 1500 }

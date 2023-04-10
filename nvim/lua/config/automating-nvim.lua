@@ -12,7 +12,7 @@ local w = vim.loop.new_fs_event()
 
 -- ensure file existence for watcher to work reliably
 -- INFO needs to come before watcher is started
-if not Fn.filereadable(watchedFile) then
+if not fn.filereadable(watchedFile) then
 	local file, err = io.open(watchedFile, "w")
 	if not file then
 		vim.notify("Could not append: " .. err, vim.log.levels.ERROR)

@@ -1,12 +1,12 @@
-require("config.utils")
+local bo = vim.bo
 --------------------------------------------------------------------------------
 
 -- make stuff compatible with `black`
-Bo.expandtab = true
-Bo.shiftwidth = 4
-Bo.tabstop = 4
-Bo.softtabstop = 4
+bo.expandtab = true
+bo.shiftwidth = 4
+bo.tabstop = 4
+bo.softtabstop = 4
 
 -- fix habits
-Iabbrev("<buffer> true True")
-Iabbrev("<buffer> false False")
+vim.cmd.inoreabbrev("<buffer> true True")
+vim.cmd.inoreabbrev("<buffer> false False")

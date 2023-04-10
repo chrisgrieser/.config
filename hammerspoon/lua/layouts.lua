@@ -1,6 +1,3 @@
-require("lua.utils")
-require("lua.window-utils")
-require("lua.twitter")
 --------------------------------------------------------------------------------
 -- HELPERS
 
@@ -20,7 +17,7 @@ local function setHigherBrightnessDuringDay()
 	if not hasBrightnessSensor then return end
 
 	local brightness
-	if BetweenTime(1, 7) then -- when turning of projector at night
+	if BetweenTime(1, 7) or IsProjector() then -- when turning off projector at night
 		brightness = 0
 	elseif hs.brightness.ambient() > 120 then
 		brightness = 1
@@ -35,11 +32,10 @@ local function setHigherBrightnessDuringDay()
 end
 
 local function closeAllFinderWins()
-	local finderWins = App("Finder"):allWindows()
-	if finderWins then
-		for _, win in pairs(finderWins) do
-			win:close()
-		end
+	local finder = App("Finder")
+	if not finder then return end
+	for _, win in pairs(finder:allWindows()) do
+		win:close()
 	end
 end
 
@@ -127,17 +123,16 @@ DisplayCountWatcher = hs.screen.watcher.new(selectLayout):start()
 -- 2. Hotkey
 Hotkey(Hyper, "home", selectLayout)
 
--- 3. Unlocking (with idletime)
+-- 3. Waking
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if not event == c.screensDidUnlock then return end
-	print("🔓 Unlockwatcher triggered.")
+	if not (event == c.systemDidWake or event == c.screensDidWake) then return end
+	print("🔓 System/Screen did wake.")
 
-	-- HACK since `screensDidUnlock` actually triggers on wake, not unlock…
 	UnlockTimer = hs.timer.waitUntil(ScreenIsUnlocked, function()
 		RunWithDelays(0.5, function()
-			selectLayout()
 			setHigherBrightnessDuringDay()
+			selectLayout()
 			UpdateSidenotes()
 		end)
 	end, 0.2)

@@ -97,7 +97,7 @@ keymap("n", "ä", function() require("funcs.mark-cycler").gotoMark() end, { desc
 keymap("n", "Ä", function() require("funcs.mark-cycler").setMark() end, { desc = "Set Next Mark" })
 
 -- reset marks on startup (needs to be on VimEnter so it's not called too early)
-Autocmd("VimEnter", {
+autocmd("VimEnter", {
 	callback = function() require("funcs.mark-cycler").clearMarks() end,
 })
 
@@ -191,7 +191,7 @@ local function valeWord(mode)
 	if fn.mode() == "n" then
 		local iskeywBefore = vim.opt_local.iskeyword:get() -- remove word-delimiters for <cword>
 		vim.opt_local.iskeyword:remove { "_", "-", "." }
-		word = Expand("<cword>")
+		word = expand("<cword>")
 		vim.opt_local.iskeyword = iskeywBefore
 	else
 		Normal('"zy')
@@ -235,7 +235,7 @@ keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc 
 keymap(
 	{ "n", "x" },
 	"<leader>fc",
-	function() return ":S /" .. Expand("<cword>") .. "//g<Left><Left>" end,
+	function() return ":S /" .. expand("<cword>") .. "//g<Left><Left>" end,
 	{ desc = "󱗘 :AltSubstitute cword", expr = true }
 )
 keymap({ "n", "x" }, "<leader>ff", [[:S ///g<Left><Left><Left>]], { desc = "󱗘 :AltSubstitute" })
@@ -292,7 +292,7 @@ keymap("n", "<leader>ur", function() cmd.later(tostring(vim.opt.undolevels:get()
 keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Reset Hunk" })
 
 -- save open time for each buffer
-Autocmd("BufReadPost", { callback = function() vim.b.timeOpened = os.time() end })
+autocmd("BufReadPost", { callback = function() vim.b.timeOpened = os.time() end })
 
 keymap("n", "<leader>uo", function()
 	local now = os.time() -- saved in epoch secs
@@ -352,7 +352,7 @@ end, { desc = "  Start nvim-lua debugger" })
 keymap("n", "ü", function () require("sibling-swap").swap_with_right() end, { desc = "󰑃 Move Node Right" })
 keymap("n", "Ü", function () require("sibling-swap").swap_with_left() end, { desc = "󰑁 Move Node Left" })
 -- stylua: ignore end
-Autocmd("FileType", {
+autocmd("FileType", {
 	pattern = { "markdown", "text", "gitcommit" },
 	callback = function()
 		keymap("n", "ü", '"zdawel"zph', { desc = "➡️ Move Word Right", buffer = true })
@@ -454,7 +454,7 @@ keymap("n", "ga", "gf", { desc = "Goto Path" })
 keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 
 -- stylua: ignore
-keymap({ "n", "x" }, "<D-l>", function() fn.system("open -R '" .. Expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
+keymap({ "n", "x" }, "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
 
 keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
 keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
@@ -525,8 +525,8 @@ end, { desc = " Browse in Project" })
 
 -- stylua: ignore
 keymap( "n", "gO", function() require("telescope").extensions.file_browser.file_browser {
-	path = Expand("%:p:h"),
-	prompt_title = "󰝰 " .. Expand("%:p:h:t"),
+	path = expand("%:p:h"),
+	prompt_title = "󰝰 " .. expand("%:p:h:t"),
 } end, { desc = " Browse in current Folder" })
 
 -- stylua: ignore
@@ -589,7 +589,7 @@ keymap("n", "<D-b>", function()
 	vim.notify("COPIED\n" .. breadcrumbs)
 end, { desc = "󰒕 Copy Breadcrumbs" })
 
-Autocmd("LspAttach", {
+autocmd("LspAttach", {
 	callback = function(args)
 		-- stylua: ignore start
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -602,7 +602,7 @@ Autocmd("LspAttach", {
 			-- refactor's smart-rename
 			-- stylua: ignore
 			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1) ---@diagnostic disable-line: param-type-mismatch
-			keymap("n", "<leader>V", function() return ":IncRename " .. Expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
+			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
 		end
 
 		-- conditional to not overwrite treesitter goto-symbol
@@ -756,7 +756,7 @@ end, { desc = " InlineEdit" })
 --------------------------------------------------------------------------------
 
 -- q / Esc to close special windows
-Autocmd("FileType", {
+autocmd("FileType", {
 	pattern = {
 		"help",
 		"lspinfo",
@@ -779,7 +779,7 @@ Autocmd("FileType", {
 })
 
 -- remove the waiting time from the q, due to conflict with `qq` for comments
-Autocmd("FileType", {
+autocmd("FileType", {
 	pattern = { "ssr", "TelescopePrompt", "harpoon" },
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }

@@ -2,23 +2,23 @@ require("config.utils")
 --------------------------------------------------------------------------------
 
 -- lua regex opener
-Keymap("n", "g/", function()
+keymap("n", "g/", function()
 	Normal('"zya"vi"') -- yank and keep selection for quick replacement when done
-	local pattern = Fn.getreg("z"):match('"(.-)"')
+	local pattern = fn.getreg("z"):match('"(.-)"')
 	local url = "https://gitspartv.github.io/lua-patterns/?pattern=" .. pattern
-	Fn.system("open '" .. url .. "'") -- opening method on macOS
+	fn.system("open '" .. url .. "'") -- opening method on macOS
 end, { desc = " lua pattern in regex viewer", buffer = true })
 
 -- Build / Reload Config
-Keymap("n", "<leader>r", function()
-	Cmd.update()
+keymap("n", "<leader>r", function()
+	cmd.update()
 	local pwd = vim.loop.cwd() or ""
 	if pwd:find("nvim") then
 		-- unload from lua cache (assuming that the pwd is parent of the lua folder)
-		local packageName = Expand("%:r"):gsub("lua/", ""):gsub("/", ".")
+		local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
 		package.loaded[packageName] = nil 
-		Cmd.source()
-		vim.notify(Expand("%:r") .. " re-sourced")
+		cmd.source()
+		vim.notify(expand("%:r") .. " re-sourced")
 	elseif pwd:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
 	else
@@ -31,14 +31,14 @@ end, { buffer = true, desc = " Reload" })
 
 -- `:I` or `<leader>li` inspects the passed lua object / selection
 local function inspect(strToInspect)
-	local parentDir = Expand("%:p:h")
+	local parentDir = expand("%:p:h")
 
 	if parentDir:find("hammerspoon") then
 		local hsApplescript =
 			string.format('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"', strToInspect)
-		Fn.system("osascript -e '" .. hsApplescript .. "'")
+		fn.system("osascript -e '" .. hsApplescript .. "'")
 	elseif parentDir:find("nvim") then
-		local output = vim.inspect(Fn.luaeval(strToInspect))
+		local output = vim.inspect(fn.luaeval(strToInspect))
 		vim.notify(output, LogTrace, {
 			timeout = 7000, -- ms
 			on_open = function(win) -- enable treesitter highlighting in the notification
@@ -52,8 +52,8 @@ local function inspect(strToInspect)
 end
 
 -- stylua: ignore
-Keymap("n", "<leader>li", function() inspect(Expand("<cWORD>")) end, { desc = " inspect cWORD", buffer = true })
-Keymap("x", "<leader>li", function()
+keymap("n", "<leader>li", function() inspect(expand("<cWORD>")) end, { desc = " inspect cWORD", buffer = true })
+keymap("x", "<leader>li", function()
 	Normal('"zy')
-	inspect(Fn.getreg("z"))
+	inspect(fn.getreg("z"))
 end, { desc = " inspect selection", buffer = true })

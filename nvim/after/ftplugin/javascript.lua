@@ -1,30 +1,33 @@
-require("config.utils")
+local fn = vim.fn
+local cmd = vim.cmd
+local keymap = vim.keymap.set
+
 --------------------------------------------------------------------------------
 
 -- Abbreviations / spelling
-Iabbrev("<buffer> cosnt const")
+vim.cmd.inoreabbrev ("<buffer> cosnt const")
 
 --------------------------------------------------------------------------------
 
 -- Build
-Keymap("n", "<leader>r", function()
-	Cmd.update()
-	local output = Fn.system(('osascript -l JavaScript "%s"'):format(Expand("%:p")))
+keymap("n", "<leader>r", function()
+	cmd.update()
+	local output = fn.system(('osascript -l JavaScript "%s"'):format(expand("%:p")))
 	local logLevel = vim.v.shell_error > 0 and LogError or LogTrace
 	vim.notify(output, logLevel)
 end, { buffer = true, desc = " JXA run" })
 
 -- Open regex in regex101 and regexper (railroad diagram)
-Keymap("n", "g/", function()
+keymap("n", "g/", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
 	Normal('"zyya/') -- yank outer regex
 	Normal("vi/") -- select inner regex for easy replacement
 
-	local regex = Fn.getreg("z")
+	local regex = fn.getreg("z")
 	local pattern = regex:match("/(.*)/")
 	local flags = regex:match("/.*/(%l*)")
 	---@diagnostic disable-next-line: param-type-mismatch, undefined-field
-	local replacement = Fn.getline("."):match('replace ?%(/.*/.*, ?"(.-)"')
+	local replacement = fn.getline("."):match('replace ?%(/.*/.*, ?"(.-)"')
 
 	-- https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
 	local url1 = "https://regex101.com/?regex=" .. pattern .. "&flags=" .. flags

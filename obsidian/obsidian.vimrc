@@ -185,7 +185,8 @@ nmap <S-Space> "_daw
 
 " [R]eplicate (duplicate)
 exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
-nmap R :duplicate
+unmap w
+nmap ww :duplicate
 
 """"""""""""""""""""""
 " Visual Mode
@@ -272,12 +273,6 @@ nmap <F1> :togglefold
 """"""""""""""""""""""""""""
 " emulate various vim motion plugins
 
-" Sneak
-" exmap sneakForward jsfile Meta/obsidian-vim-helpers.js {moveToChars(true)}
-" exmap sneakBack jsfile Meta/obsidian-vim-helpers.js {moveToChars(false)}
-" nmap ö :sneakForward
-" nmap Ö :sneakBack
-
 " Hop
 " exmap hop obcommand mrj-jump-to-link:activate-jump-to-anywhere
 " nmap ö :hop
@@ -294,7 +289,8 @@ nmap ,l :linkjump
 " Substitute
 """"""""""""""""""""""
 " poor man's substitute.nvim 🥲
-map s Vp
+unmap s
+map ss Vp
 nmap S vg$p
 
 """"""""""""""""""""""
