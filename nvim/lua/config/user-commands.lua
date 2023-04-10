@@ -25,7 +25,7 @@ newCommand("LspCapabilities", function()
 	local client = vim.lsp.get_active_clients({ bufnr = curBuf })[1]
 	local capAsList = {}
 	for key, value in pairs(client.server_capabilities) do
-		if value then table.insert(capAsList, "- " .. key) end
+		if value and key:find("Provider") then table.insert(capAsList, "- " .. key) end
 	end
 	local msg = "# " .. client.name .. "\n" .. table.concat(capAsList, "\n")
 	vim.notify(msg, "info", {
