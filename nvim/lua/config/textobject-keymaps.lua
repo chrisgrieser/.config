@@ -82,7 +82,7 @@ keymap("o", "u", commented_lines_textobject, { desc = "Big comment textobj" })
 --------------------------------------------------------------------------------
 -- MISC Plugins
 -- hint textobj
-keymap({ "o", "x" }, "h", function() require("tsht").nodes() end, { desc = "hint textobj" })
+keymap("o", "h", function() require("tsht").nodes() end, { desc = "hint textobj" })
 
 -- Git Hunks
 keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })

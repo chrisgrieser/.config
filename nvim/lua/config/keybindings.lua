@@ -26,7 +26,7 @@ keymap("n", "<leader>M", cmd.Mason, { desc = " Mason" })
 
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", function()
-	local lastCommand = fn.getreg(":"):gsub("^lua ?=? ?", "")
+	local lastCommand = fn.getreg(":"):gsub("^I ", "")
 	fn.setreg("+", lastCommand)
 	vim.notify("COPIED\n" .. lastCommand)
 end, { desc = "󰘳 Copy last command" })
