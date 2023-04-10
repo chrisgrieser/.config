@@ -1,7 +1,6 @@
 local expand = vim.fn.expand
 local fn = vim.fn
 local newCommand = vim.api.nvim_create_user_command
-local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
@@ -22,7 +21,11 @@ end, { nargs = "+" })
 -- view capabilities of current lsp
 newCommand("LspCapabilities", function()
 	local curBuf = vim.api.nvim_get_current_buf()
-	local client = vim.lsp.get_active_clients({ bufnr = curBuf })[1]
+	local clients = vim.lsp.get_active_clients({ bufnr = curBuf })
+
+	-- ignore null-ls
+	local client = clients[1].name ~= "null-ls" and clients[1] or clients[2]
+
 	local capAsList = {}
 	for key, value in pairs(client.server_capabilities) do
 		if value and key:find("Provider") then table.insert(capAsList, "- " .. key) end

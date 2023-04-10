@@ -203,9 +203,6 @@ autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- FOLDING
 
--- fold settings
-opt.foldlevelstart = 5 -- close deep folds at the beginning; only applies to new buffers
-opt.foldopen:remove { "search" } -- less unintentional opening of folds
 
 -- Remember folds and cursor
 local function remember(mode)
