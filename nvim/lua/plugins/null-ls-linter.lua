@@ -79,11 +79,12 @@ local function nullSources()
 		},
 
 		-- LUA
-		-- INFO stylua configs should be in the cwd, while selene configs should
-		-- be in the root where null-ls is spawned (which also cannot be changed
-		-- to the cwd, since switching between projects otherwise breaks null-ls)
 		builtins.formatting.stylua,
-		builtins.diagnostics.selene,
+		builtins.diagnostics.selene.with {
+			-- INFO not dynamically determining config file, since that breaks
+			-- selene when switching workspaces
+			extra_args = { "--config", linterConfig .. "/selene.toml" },
+		},
 
 		-- YAML
 		builtins.diagnostics.yamllint.with {
