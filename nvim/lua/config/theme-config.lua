@@ -45,7 +45,7 @@ local function customHighlights()
 	fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
 
 	updateHighlight("Overnesting", "guibg=#E06C75")
-	fn.matchadd("Overnesting", ("\t"):rep(8) .. "\t*")
+	fn.matchadd("Overnesting", ("\t"):rep(7) .. "\t*")
 
 	updateHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
 	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
@@ -132,15 +132,6 @@ local function themeModifications()
 		linkHighlight("NotifyINFOTitle", "@define")
 		linkHighlight("NotifyINFOBody", "@define")
 
-	-- mellifluous
-	elseif theme == "mellifluous" and mode == "light" then
-		linkHighlight("NotifyINFOIcon", "NotifyINFOBorder")
-		linkHighlight("NotifyINFOTitle", "NotifyINFOBorder")
-		linkHighlight("NotifyINFOBody", "NotifyINFOBorder")
-		for _, v in pairs(vimModes) do
-			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#53964f")
-		end
-
 	-- rose-pine
 	elseif theme == "rose-pine" and mode == "light" then
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
@@ -196,7 +187,7 @@ autocmd("ColorScheme", {
 		-- add SEMANTIC HIGHLIGHTS to themes that do not have it yet https://www.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90/
 		---@diagnostic disable-next-line: undefined-field
 		local themeHasSemanticHl = vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@lsp.type.function" }))
-		if not themeHasSemanticHl then
+		if themeHasSemanticHl then
 			for semanticHl, treesitterHl in pairs(semanticToTreesitterHl) do
 				linkHighlight(semanticHl, treesitterHl)
 			end
