@@ -114,10 +114,6 @@ keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 --------------------------------------------------------------------------------
 -- EDITING
 
--- NUMBERS
-keymap("n", "<M-a>", "10<C-a>", { desc = "+ 10" })
-keymap("n", "<M-x>", "10<C-x>", { desc = "- 10" })
-
 -- QUICKFIX
 keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
 keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Previous Quickfix" })

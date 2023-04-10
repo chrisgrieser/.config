@@ -21,8 +21,8 @@ require("lazy").setup("plugins", {
 	},
 	ui = {
 		wrap = true,
-		border = BorderStyle,
-		size = { width = 1, height = 1 }, -- full sized
+		border = require("config.utils").borderStyle,
+		size = { width = 1, height = 0.85 }, -- full sized
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates, required for statusline
@@ -34,9 +34,8 @@ require("lazy").setup("plugins", {
 	readme = { enabled = false },
 	performance = {
 		rtp = {
+			-- disable unused builtin plugins from neovim
 			disabled_plugins = {
-				-- disable unused builtin plugins from neovim
-				-- "matchit", -- disabled so `%` always goes to brackets (making it more predictable)
 				"netrw",
 				"netrwPlugin",
 				"gzip",
