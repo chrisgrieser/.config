@@ -17,7 +17,7 @@ return {
 		end,
 		opts = {
 			menu = {
-				borderchars = BorderChars,
+				borderchars = u.borderChars,
 				width = 50,
 				height = 8,
 			},
@@ -35,7 +35,7 @@ return {
 				vertical_offset = 3,
 			},
 			style = {
-				border = BorderStyle,
+				border = u.borderStyle,
 				padding = 7,
 				path = "tail",
 				hide_buffer_id = true,

@@ -8,7 +8,7 @@ end
 ---try to require the module, and do not error when one of them cannot be
 ---loaded. But do notify if there was an error.
 ---@param module string module to load
-local function tryRequire(module)
+local function safeRequire(module)
 	local success, req = pcall(require, module)
 	if success then return req end
 	local msg = "Error loading " .. module
@@ -22,20 +22,18 @@ end
 
 --------------------------------------------------------------------------------
 
-require("config.utils").setBorderstyle("single") -- should come before lazy
+safeRequire("config.lazy")
 
-tryRequire("config.lazy")
+if vim.fn.has("gui_running") then safeRequire("config.gui-settings") end
+safeRequire("config.theme-config")
 
-if vim.fn.has("gui_running") then tryRequire("config.gui-settings") end
-tryRequire("config.theme-config")
+safeRequire("config.options-and-autocmds")
+safeRequire("config.keybindings")
+safeRequire("config.folding-keymaps")
+safeRequire("config.textobject-keymaps")
+safeRequire("config.clipboard")
 
-tryRequire("config.options-and-autocmds")
-tryRequire("config.keybindings")
-tryRequire("config.folding-keymaps")
-tryRequire("config.textobject-keymaps")
-tryRequire("config.clipboard")
-
-tryRequire("config.automating-nvim")
-tryRequire("config.clipboard")
-tryRequire("config.user-commands")
-tryRequire("config.abbreviations")
+safeRequire("config.automating-nvim")
+safeRequire("config.clipboard")
+safeRequire("config.user-commands")
+safeRequire("config.abbreviations")

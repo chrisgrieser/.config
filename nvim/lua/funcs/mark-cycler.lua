@@ -32,7 +32,7 @@ function M.gotoMark()
 	elseif globalMarkIsSet(marks[2]) then
 		markToGo = marks[2]
 	else
-		vim.notify("No mark set yet.", logWarn)
+		vim.notify("No mark set yet.", vim.log.levels.WARN)
 		return
 	end
 	normal("`" .. markToGo)

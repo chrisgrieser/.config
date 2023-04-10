@@ -104,17 +104,7 @@ opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refact
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
 --------------------------------------------------------------------------------
--- PATH (for `gf`)
 
--- pwd is set via projects.nvim
-autocmd("DirChanged", {
-	callback = function() opt.path:append(vim.loop.cwd()) end,
-})
-autocmd("DirChangedPre", {
-	callback = function() opt.path:remove(vim.loop.cwd()) end,
-})
-
---------------------------------------------------------------------------------
 -- SCROLLING
 opt.scrolloff = 13
 opt.sidescrolloff = 13

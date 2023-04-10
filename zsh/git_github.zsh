@@ -17,17 +17,14 @@ alias gM="git commit --amend"
 alias rem="git remote -v"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 
-# open GitHub repo
-function getGithubURL() {
-	git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//'
-}
-
 # Github Url: open & copy url
 function gu() {
-	getGithubURL | pbcopy
-	open "$(getGithubURL)"
+	url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
+	echo "$url" | pbcopy
+	open "$(url)"
 }
-alias gi='open "$(getGithubURL)/issues"'
+
+alias gi='gh issue list'
 
 # goto git root
 alias g.='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
