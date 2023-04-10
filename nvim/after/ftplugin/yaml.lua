@@ -23,6 +23,6 @@ keymap("n", "<leader>r", function()
 		result = result:gsub("\n$", "")
 		vim.notify(result)
 	else
-		vim.notify("Not in Karabiner Directory.", u.logWarn)
+		vim.notify("Not in Karabiner Directory.", u.warn)
 	end
 end, { buffer = true, desc = " Compile Karabiner Config" })

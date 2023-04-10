@@ -222,7 +222,7 @@ return {
 			vim.diagnostic.config {
 				virtual_text = {
 					format = function(diagnostic) return diagnosticFormat(diagnostic, "virtual_text") end,
-					severity = { min = u.logWarn },
+					severity = { min = u.warn },
 				},
 				float = {
 					focusable = true,

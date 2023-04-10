@@ -2,9 +2,9 @@ local M = {}
 --------------------------------------------------------------------------------
 
 M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
-M.logError = vim.log.levels.ERROR
-M.logWarn = vim.log.levels.WARN
-M.logTrance = vim.log.levels.TRACE
+M.error = vim.log.levels.ERROR
+M.warn = vim.log.levels.WARN
+M.trace = vim.log.levels.TRACE
 M.getCursor = vim.api.nvim_win_get_cursor
 M.setCursor = vim.api.nvim_win_set_cursor
 

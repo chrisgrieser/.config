@@ -44,12 +44,12 @@ keymap("n", "<leader>ln", function()
 	local history = require("notify").history {}
 	local lastNotify = history[#history]
 	if not lastNotify then
-		vim.notify("No Notification in this session.", u.logWarn)
+		vim.notify("No Notification in this session.", u.warn)
 		return
 	end
 	local msg = table.concat(lastNotify.message, "\n")
 	fn.setreg("+", msg)
-	vim.notify("Last Notification copied.", u.logTrance)
+	vim.notify("Last Notification copied.", u.trace)
 end, { desc = "󰘳 Copy Last Notification" })
 
 -- Dismiss notifications & re-enable fold after search
@@ -335,11 +335,11 @@ keymap("n", "<leader>bn", function()
 	-- INFO is the only one that needs manual starting, other debuggers
 	-- start with `continue` by themselves
 	if require("dap").status() ~= "" then
-		vim.notify("Debugger already running.", u.logWarn)
+		vim.notify("Debugger already running.", u.warn)
 		return
 	end
 	if not bo.filetype == "lua" then
-		vim.notify("Not a lua file.", u.logWarn)
+		vim.notify("Not a lua file.", u.warn)
 		return
 	end
 	require("osv").run_this()
@@ -575,7 +575,7 @@ keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code A
 keymap("n", "<D-b>", function()
 	local rawdata = require("nvim-navic").get_data()
 	if not rawdata then
-		vim.notify("No Breadcrumbs available", u.logWarn)
+		vim.notify("No Breadcrumbs available", u.warn)
 		return
 	end
 	local breadcrumbs = ""

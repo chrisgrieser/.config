@@ -22,7 +22,7 @@ keymap("n", "<leader>r", function()
 	cmd.redir("@z")
 	cmd([[silent make]]) -- silent, to not show up message (redirection still works)
 	local output = fn.getreg("z"):gsub(".-\r", "") -- remove first line
-	local logLevel = output:find("error") and u.logError or u.logTrance
+	local logLevel = output:find("error") and u.error or u.trace
 	vim.notify(output, logLevel)
 	cmd.redir("END")
 end, { buffer = true, desc = " npm run build" })

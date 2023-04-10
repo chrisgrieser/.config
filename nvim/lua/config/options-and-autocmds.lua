@@ -157,7 +157,7 @@ autocmd("BufReadPost", {
 		-- trigger to ensure it's run before determining spaces/tabs
 		local success = pcall(cmd.IndentOMatic)
 		if not success then
-			vim.notify("Indent-o-Matic not found.", u.logWarn)
+			vim.notify("Indent-o-Matic not found.", u.warn)
 			return
 		end
 
