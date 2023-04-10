@@ -232,7 +232,7 @@ autocmd("BufWinEnter", {
 --------------------------------------------------------------------------------
 -- Add missing buffer names, e.g. for status bar
 autocmd("FileType", {
-	pattern = { "Glance", "lazy", "PlenaryTestPopup" },
+	pattern = { "Glance", "lazy" },
 	callback = function()
 		local name = vim.fn.expand("<amatch>")
 		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize
