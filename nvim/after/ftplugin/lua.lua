@@ -34,15 +34,16 @@ end, { buffer = true, desc = " Reload" })
 -- INSPECT NVIM OR HAMMERSPOON OBJECTS
 
 -- inspects the passed lua object / selection
-local function inspect(strToInspect)
+local function inspect(str)
 	local parentDir = expand("%:p:h")
 
 	if parentDir:find("hammerspoon") then
 		local hsApplescript =
-			string.format('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"', strToInspect)
+			string.format('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"', str)
 		fn.system("osascript -e '" .. hsApplescript .. "'")
 	elseif parentDir:find("nvim") then
-		local output = vim.inspect(fn.luaeval(strToInspect))
+		if vim.startswith(str, "fn") or vim.startswith(str, "bo") then str = "vim." .. str end
+		local output = vim.inspect(fn.luaeval(str))
 		vim.notify(output, u.trace, {
 			timeout = 7000, -- ms
 			on_open = function(win) -- enable treesitter highlighting in the notification

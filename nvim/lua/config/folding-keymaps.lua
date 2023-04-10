@@ -91,25 +91,14 @@ end, { desc = "󰘖 Goto previous closed fold" })
 -- h closes (similar to how l opens due to opt.foldopen="hor")
 -- works well with vim's startofline option
 keymap("n", "h", function()
-	local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-	local firstColumn = fn.col(".") == 1
+
+	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
+
+	local isFirstNonBlank = vim.fn.col(".") * vim.bo.tabstop <= vim.fn.indent(".")
 	local notOnFold = fn.foldclosed(".") == -1 ---@diagnostic disable-line: param-type-mismatch
-	if firstColumn and shouldOpenFold and notOnFold then
+	if isFirstNonBlank and shouldCloseFold and notOnFold then
 		pcall(u.normal, "zc")
 	else
 		u.normal("h")
 	end
 end, { desc = "h (+ close fold at BoL)" })
-
-keymap("n", "l", function()
-	local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-	local isOnFold = fn.foldclosed(".") > -1 ---@diagnostic disable-line: param-type-mismatch
-	if shouldOpenFold and isOnFold then
-		local hasOpenFold = pcall(u.normal, "zo")
-		if hasOpenFold then u.normal("mf") end -- remember last opened fold in f mark
-	else
-		u.normal("l")
-	end
-end, { desc = "l (or open fold)" })
-
-keymap("n", "zu", "mz`fza`z", { desc = "󰘖 Undo Last Fold Toggle" })
