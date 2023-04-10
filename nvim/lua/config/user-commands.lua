@@ -38,13 +38,6 @@ newCommand("LspCapabilities", function()
 	fn.setreg("+", "Capabilities = " .. vim.inspect(client.server_capabilities))
 end, {})
 
--- `:SwapDeleteAll` deletes all swap files
-newCommand("SwapDeleteAll", function(_)
-	local swapdir = u.vimDataDir .. "swap/"
-	local out = fn.system([[rm -vf "]] .. swapdir .. [["* ]])
-	vim.notify("Deleted:\n" .. out)
-end, {})
-
 -- `:ViewDir` opens the nvim view directory
 newCommand("ViewDir", function(_)
 	local viewdir = expand(vim.opt.viewdir:get())
