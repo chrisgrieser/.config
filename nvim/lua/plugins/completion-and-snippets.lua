@@ -168,8 +168,8 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.filetype("lua", {
 		enabled = function() -- disable leading "-"
-			local lineContent = vim.fn.getline(".") ---@diagnostic disable-line: param-type-mismatch
-			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$")) ---@diagnostic disable-line: undefined-field
+			local lineContent = vim.fn.getline(".") 
+			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$")) 
 		end,
 		sources = cmp.config.sources {
 			s.snippets,
@@ -226,11 +226,15 @@ local function filetypeCompletionConfig()
 		},
 	})
 
-	-- ZSH
+	-- ZSH / Shell
 	cmp.setup.filetype("sh", {
+		enabled = function() -- disable `\[`
+			local lineContent = vim.fn.getline(".") 
+			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$")) 
+		end,
 		sources = cmp.config.sources {
 			s.snippets,
-			s.zsh,
+			s.zsh, -- completion from zsh itself
 			s.lsp,
 			s.path,
 			s.codeium,
