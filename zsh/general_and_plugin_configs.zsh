@@ -16,7 +16,7 @@ export YSU_MESSAGE_POSITION="after"
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --hidden'
-export FZF_DEFAULT_OPTS='--pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --bind="tab:up,shift-tab:down"'
+export FZF_DEFAULT_OPTS='--pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --cycle --bind="tab:up,shift-tab:down"'
 
 # magic enter
 export MAGIC_ENTER_GIT_COMMAND="inspect"

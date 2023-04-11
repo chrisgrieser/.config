@@ -33,7 +33,7 @@ function hs {
 	SELECTED=$(
 		history -t "$HIST_DATE_FORMAT" 1 | cut -c8- | fzf \
 			--tac --no-sort \
-			--layout=reverse \
+			--layout=reverse --bind="tab:down,shift-tab:up" \
 			--no-info \
 			--query "$*" \
 			--height=60%

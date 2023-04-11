@@ -72,7 +72,7 @@ function gli() {
 				--nth=2.. \
 				--with-nth=2.. \
 				--no-sort \
-				--layout=reverse-list \
+				--layout=reverse --bind="tab:down,shift-tab:up" \
 				--no-info \
 				--header-first --header="↵ : Checkout  ^H: Copy [H]ash  ^R: [R]eset Hard" \
 				--expect="ctrl-h,ctrl-r" \
@@ -155,11 +155,10 @@ function gb() {
 	selected=$(
 		git branch --all --color |
 			grep -v "HEAD" |
-			fzf \
+			fzf -0 \
 				--ansi \
-				--layout=reverse \
+				--layout=reverse --bind="tab:down,shift-tab:up" \
 				--no-info \
-				--query "$*" \
 				--height=40% \
 				--header-first --header="↵ : Checkout Branch"
 	)
@@ -169,11 +168,13 @@ function gb() {
 	if [[ $selected == remotes/* ]]; then
 		remote=$(echo "$selected" | cut -d/ -f2-)
 		git checkout "$remote"
+		echo eeeee
 		selected=$(echo "$selected" | cut -d/ -f3)
+		git checkout "$selected"
 	else
 		selected=$(echo "$selected" | tr -d "* ")
+		git checkout "$selected"
 	fi
-	git checkout "$selected"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -292,7 +293,7 @@ function gdf() {
 	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
 		print "🔍\033[1;34m Multiple files found."
 		echo
-		selection=$(echo "$deleted_path" | fzf --layout=reverse --height=70%)
+		selection=$(echo "$deleted_path" | fzf --layout=reverse --height=70% --bind="tab:down,shift-tab:up")
 		[[ -z "$selection" ]] && return 0
 		deleted_path="$selection"
 	fi
