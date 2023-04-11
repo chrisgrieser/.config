@@ -1,4 +1,4 @@
-require("lua.utils")
+local u = require("lua.utils")
 --------------------------------------------------------------------------------
 -- INFO This is essentially an implementation of the inspired by the macOS app
 -- [quitter](https://marco.org/apps), this module quits any app if long enough idle

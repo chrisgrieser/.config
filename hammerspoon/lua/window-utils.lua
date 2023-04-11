@@ -1,17 +1,16 @@
+local M = {}
+
+local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
-IMacDisplay = hs.screen("Built%-in")
-Maximized = hs.layout.maximized
-RightHalf = hs.layout.right50
-LeftHalf = hs.layout.left50
-TopHalf = { x = 0, y = 0, w = 1, h = 0.5 }
-BottomHalf = { x = 0, y = 0.5, w = 1, h = 0.5 }
-PseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
-Centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
-ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
-if u.isAtMother() then ToTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
+wu.iMacDisplay = hs.screen("Built%-in")
+wu.Maximized = hs.layout.maximized
+if CheckSize(frontWin, wu.pseudoMax) or CheckSize(frontWin, wu.centered) then
+wu.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
+wu.toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
+if u.isAtMother() then wu.toTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
 
-RejectedFinderWindows = {
+wu.ejectedFinderWins = {
 	"^Quick Look$",
 	"^qlmanage$",
 	"^Move$",
@@ -58,7 +57,7 @@ local function obsidianThemeDevHelper(win, pos)
 		not win
 		or not win:application()
 		or not (win:application():name():lower() == "neovide")
-		or not (pos == PseudoMaximized or pos == Maximized)
+		or not (pos == wu.pseudoMax or pos == wu.Maximized)
 		or not u.appRunning("Obsidian")
 	then
 		return
@@ -124,9 +123,9 @@ function MoveResize(win, pos)
 	end
 
 	-- Twitter Extras
-	if pos == PseudoMaximized or pos == Centered then
+	if pos == wu.pseudoMax or pos == wu.centered then
 		TwitterToTheSide()
-	elseif pos == Maximized and u.appRunning("Twitter") then
+	elseif pos == wu.Maximized and u.appRunning("Twitter") then
 		if u.app("Twitter") then u.app("Twitter"):hide() end
 	end
 
@@ -164,7 +163,7 @@ function AutoTile(winSrc)
 		-- window filter subscription
 		for _, finderWin in pairs(u.app("Finder"):allWindows()) do
 			local rejected = false
-			for _, bannedTitle in pairs(RejectedFinderWindows) do
+			for _, bannedTitle in pairs(wu.ejectedFinderWins) do
 				if finderWin:title():find(bannedTitle) then rejected = true end
 			end
 			if not rejected then table.insert(wins, finderWin) end
@@ -183,16 +182,16 @@ function AutoTile(winSrc)
 	elseif #wins == 1 then
 		local pos
 		if u.isProjector() then
-			pos = Maximized
+			pos = wu.Maximized
 		elseif u.isFront("Finder") then
-			pos = Centered
+			pos = wu.centered
 		else
-			pos = PseudoMaximized
+			pos = wu.pseudoMax
 		end
 		MoveResize(wins[1], pos)
 	elseif #wins == 2 then
-		MoveResize(wins[1], LeftHalf)
-		MoveResize(wins[2], RightHalf)
+		MoveResize(wins[1], u.leftHalf)
+		MoveResize(wins[2], u.rightHalf)
 	elseif #wins == 3 then
 		MoveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 })
 		MoveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 })
@@ -252,9 +251,9 @@ Wf_appsOnMouseScreen = u.wf.new({
 		if mouseScreen:name() ~= screenOfWindow:name() then newWin:moveToScreen(mouseScreen) end
 
 		if appn == "Finder" or appn == "Script Editor" then
-			MoveResize(newWin, Centered)
+			MoveResize(newWin, wu.centered)
 		else
-			MoveResize(newWin, Maximized)
+			MoveResize(newWin, wu.Maximized)
 		end
 	end)
 end)
@@ -270,11 +269,11 @@ local function controlSpaceAction()
 	local currentWin = hs.window.focusedWindow()
 	local pos
 	if u.isFront { "Finder", "Script Editor" } then
-		pos = Centered
-	elseif not CheckSize(currentWin, PseudoMaximized) then
-		pos = PseudoMaximized
+		pos = wu.centered
+	elseif not CheckSize(currentWin, wu.pseudoMax) then
+		pos = wu.pseudoMax
 	else
-		pos = Maximized
+		pos = wu.Maximized
 	end
 	MoveResize(currentWin, pos)
 end
@@ -317,11 +316,13 @@ end
 
 --------------------------------------------------------------------------------
 -- HOTKEYS
-
 u.hotkey({}, "home", homeAction)
 u.hotkey({}, "end", endAction)
-u.hotkey(u.hyper, "right", function() MoveResize(hs.window.focusedWindow(), RightHalf) end)
-u.hotkey(u.hyper, "left", function() MoveResize(hs.window.focusedWindow(), LeftHalf) end)
-u.hotkey(u.hyper, "down", function() MoveResize(hs.window.focusedWindow(), BottomHalf) end)
-u.hotkey(u.hyper, "up", function() MoveResize(hs.window.focusedWindow(), TopHalf) end)
+u.hotkey(u.hyper, "right", function() MoveResize(hs.window.focusedWindow(), hs.layout.right50) end)
+u.hotkey(u.hyper, "left", function() MoveResize(hs.window.focusedWindow(), hs.layout.left50) end)
+u.hotkey(u.hyper, "down", function() MoveResize(hs.window.focusedWindow(), { x = 0, y = 0.5, w = 1, h = 0.5 }) end)
+u.hotkey(u.hyper, "up", function() MoveResize(hs.window.focusedWindow(), { x = 0, y = 0, w = 1, h = 0.5 }) end)
 u.hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
+
+--------------------------------------------------------------------------------
+return M

@@ -1,4 +1,4 @@
-require("lua.utils")
+local u = require("lua.utils")
 require("lua.window-utils")
 --------------------------------------------------------------------------------
 
@@ -37,12 +37,12 @@ function VsplitSetLayout(mode, secondWin)
 	if mode == "split" then
 		print("2️⃣ Split started. ")
 		pairedActivation()
-		f1 = RightHalf
-		f2 = LeftHalf
+		f1 = hs.layout.right50
+		f2 = hs.layout.left50
 	elseif mode == "unsplit" then
 		PairedActivationWatcher:stop()
-		f1 = PseudoMaximized
-		f2 = PseudoMaximized
+		f1 = wu.pseudoMax
+		f2 = wu.pseudoMax
 	end
 
 	if RIGHT_SPLIT then

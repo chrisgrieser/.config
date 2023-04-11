@@ -4,7 +4,7 @@
 -- 2) apps should not cover up the sketchybar that I only have in the top right
 -- corner
 
-require("lua.utils")
+local u = require("lua.utils")
 require("lua.window-utils")
 --------------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ local function hideOthers(appObj)
 	local thisWin = appObj:mainWindow()
 
 	-- only hide when bigger window
-	if not (CheckSize(thisWin, PseudoMaximized) or CheckSize(thisWin, Maximized)) then return end
+if not (CheckSize(thisWin, wu.pseudoMax) or CheckSize(thisWin, wu.Maximized)) then return end
 
 	local appsNotToHide =
 		{ "IINA", "zoom.us", "CleanShot X", "SideNotes", "Twitter", "Alfred", appObj:name() }
@@ -92,7 +92,7 @@ end):start()
 Wf_maxWindows = u.wf.new(true):subscribe(u.wf.windowUnfocused, function(win)
 	if
 		not (u.isProjector())
-		and CheckSize(win, Maximized)
+		and CheckSize(win, wu.Maximized)
 		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X" })
 	then
 		win:application():hide()

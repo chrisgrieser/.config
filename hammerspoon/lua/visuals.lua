@@ -1,4 +1,4 @@
-require("lua.utils")
+local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
@@ -24,7 +24,7 @@ function HoleCover(arg)
 		bgColor = { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
 	end
 
-	local pseudoMaxCorner = ToTheSide.w + ToTheSide.x
+	local pseudoMaxCorner = wu.toTheSide.w + wu.toTheSide.x
 
 	-- three points, forming roughly a triangle
 	Cover1 = hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 }

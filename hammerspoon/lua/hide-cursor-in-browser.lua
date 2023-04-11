@@ -1,4 +1,4 @@
-require("lua.utils")
+local u = require("lua.utils")
 -- Companion for Vimium like browser extensions which are unfortunately not able
 -- to hide the cursor properly
 --------------------------------------------------------------------------------

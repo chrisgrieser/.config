@@ -1,4 +1,4 @@
-require("lua.utils")
+local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
 local function brightnessNotify()
