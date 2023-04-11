@@ -59,11 +59,29 @@ function gd() {
 # https://git-scm.com/docs/git-log#_pretty_formats
 
 # short (only last 15 messages)
-alias gl="git log -n 15 --color --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | sed -e 's/origin/o/g'; echo ; echo '(…)'"
+function gitlog () {
+	local length
+	[[ -n "$1" ]] && length="-n $1"
+	# shellcheck disable=2086
+	git log $length --all --color --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | 
+		sed -e 's/origin\//󰅡 /g' |
+		sed -e 's/grafted,/ /g' | 
+		less
+	# INFO less is configured not to start the pager if the output short enough
+	# to fit on one screen
+}
 
-# long
-# append `true` to avoid exit code 141: https://www.ingeniousmalarkey.com/2016/07/git-log-exit-code-141.html
-alias gll="git log --color --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | sed -e 's/origin/o/g' ; echo ; true"
+# brief git log
+function gl() {
+	gitlog 15	
+	echo "(…)"
+}
+
+# full git log
+function gll() {
+	# append `true` to avoid exit code 141: https://www.ingeniousmalarkey.com/2016/07/git-log-exit-code-141.html
+	gitlog
+}
 
 # interactive
 function gli() {
