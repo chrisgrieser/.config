@@ -210,7 +210,6 @@ rules:
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
       # Grave ^ -> f1, and that in turn remapped in the app (switching keyboard layout laggy)
-            ~
       - type: basic
         from: { key_code: non_us_backslash }
         conditions:

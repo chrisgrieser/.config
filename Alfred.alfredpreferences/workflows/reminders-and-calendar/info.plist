@@ -216,13 +216,13 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>keyword</key>
 				<string>ein</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Öffne Einkaufsliste</string>
+				<string>Open Shopping List</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -719,7 +719,7 @@
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>240</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
