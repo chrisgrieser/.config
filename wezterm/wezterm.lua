@@ -43,6 +43,7 @@ local function autoQuotePastedUrls(window, pane)
 		window:toast_notification(msg, nil, 4000)
 		return
 	end
+	
 	if clipb:find("^https?://") then clipb = '"' .. clipb .. '"' end
 	pane:paste(clipb)
 end
@@ -199,6 +200,7 @@ local config = {
 	-- fix @{}~ etc. on German keyboard
 	send_composed_key_when_left_alt_is_pressed = true,
 	send_composed_key_when_right_alt_is_pressed = true,
+	{ key = "n", mods = "META", action = act.SendString("~") },
 }
 
 --------------------------------------------------------------------------------

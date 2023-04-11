@@ -145,7 +145,8 @@ local function themeModifications()
 		updateHighlight("Error", "gui=NONE") -- no bold
 		updateHighlight("@error", "gui=NONE")
 		updateHighlight("NonText", "gui=NONE")
-		linkHighlight("@lsp.type.parameter", "@macro")
+		updateHighlight("Visual", "gui=NONE")
+		linkHighlight("@lsp.type.parameter", "@macro") -- fix for semantic hls
 	end
 end
 
