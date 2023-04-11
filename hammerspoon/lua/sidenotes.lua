@@ -8,7 +8,7 @@ local function updateCounter() hs.execute("sketchybar --trigger update-sidenotes
 --------------------------------------------------------------------------------
 
 -- REMINDERS -> SIDENOTES
-function reminderToSidenotes()
+function ReminderToSidenotes()
 	local _, success =
 		hs.execute("osascript -l JavaScript './helpers/push-todays-reminders-to-sidenotes.js'")
 	if success then
@@ -18,9 +18,6 @@ function reminderToSidenotes()
 	end
 	updateCounter()
 end
-
-SideNotesTimer1 = hs.timer.doAt("05:00", "01d", reminderToSidenotes)
-SideNotesTimer2 = hs.timer.doAt("05:30", "01d", reminderToSidenotes) -- redundancy for safety
 
 -- MOVE OFFICE NOTES TO BASE (when loading hammerspoon in office)
 local function moveOfficeNotesToBase()

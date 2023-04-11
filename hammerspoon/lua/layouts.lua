@@ -69,7 +69,10 @@ local function workLayout()
 	end
 	MyTimer = hs.timer.waitUntil(
 		function() return AppRunning(appsToOpen) end,
-		function() App("Mimestream"):activate() end,
+		function()
+			App("Mimestream"):activate()
+			RestartApp("AltTab")
+		end,
 		0.2
 	)
 
