@@ -6,26 +6,6 @@ local cmd = vim.cmd
 
 --------------------------------------------------------------------------------
 
----get the alternate window, accounting for special windows (scrollbars, notify)
----@nodiscard
----@return string|nil path of buffer in altwindow, nil if none exists (= only one window)
-local function altWindow()
-	local i = 0
-	local altWin
-	repeat
-		-- two checks for regular window to catch all edge cases
-		altWin = fn.bufname(fn.winbufnr(i))
-		local winId = fn.win_getid(i)
-		local isRegularWin1 = altWin and altWin ~= fn.bufname() and altWin ~= ""
-		local winConf = api.nvim_win_get_config(winId) -- https://github.com/dstein64/nvim-scrollview/issues/83
-		local isRegularWin2 = not winConf.external and winConf.focusable and api.nvim_win_is_valid(winId)
-
-		i = i + 1
-		if i > fn.winnr("$") then return nil end
-	until isRegularWin1 and isRegularWin2
-	return altWin
-end
-
 ---count number of windows, excluding various special windows (scrollbars,
 ---notification windows, etc)
 ---@nodiscard
@@ -77,24 +57,12 @@ function M.altFileStatusline()
 	local curFile = fn.expand("%:t")
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
-	local altWin = altWindow()
 	local altOld = altOldfile()
 	local name, icon
 	local hasAltFile = altFile ~= "" and fn.filereadable(altFile)
 
 	-- no oldfile and after start
-	if altWin then
-		if altWin:find("^diffview://") then
-			icon = ""
-			name = "File History"
-		elseif altWin:find("^term://") then
-			icon = ""
-			name = "Terminal"
-		else
-			icon = " "
-			name = vim.fs.basename(altWin)
-		end
-	elseif hasAltFile and (altPath ~= curPath) then
+	if hasAltFile and (altPath ~= curPath) then
 		icon = "#"
 		name = altFile
 		-- same name, different file: append parent of altfile
