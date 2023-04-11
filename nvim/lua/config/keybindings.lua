@@ -119,8 +119,6 @@ keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
 keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Previous Quickfix" })
 keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quickfix List" })
--- stylua: ignore
-keymap("n", "<leader>q", function() require("replacer").run { rename_files = false } end, { desc = " Replacer.nvim" })
 
 -- COMMENTS & ANNOTATIONS
 keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = " Horizontal Divider" })
@@ -229,7 +227,7 @@ keymap( "n", "sx", function() require("substitute.exchange").operator() end, { d
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
 --------------------------------------------------------------------------------
--- RE[F]ACTORING
+-- REFACTORING
 
 keymap(
 	{ "n", "x" },
@@ -259,12 +257,10 @@ keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "󱗘 :g 
 keymap("x", "<leader>fn", ":normal ", { desc = "󱗘 :normal" })
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g delete" })
 
-keymap(
-	{ "n", "x" },
-	"<leader>fs",
-	function() require("ssr").open() end,
-	{ desc = "󱗘 Structural S & R" }
-)
+-- stylua: ignore
+keymap("n", "<leader>fq", function() require("replacer").run { rename_files = false } end, { desc = "󱗘  replacer.nvim" })
+-- stylua: ignore
+keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "󱗘 Structural S & R" })
 
 -- Refactoring.nvim
 -- stylua: ignore start
