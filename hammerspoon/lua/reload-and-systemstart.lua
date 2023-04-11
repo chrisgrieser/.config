@@ -1,4 +1,6 @@
 local u = require("lua.utils")
+local periphery = require("lua.hardware-periphery")
+--------------------------------------------------------------------------------
 
 -- `hammerspoon://hs-reload` for reloading via Build System
 local reloadIndicator = "/tmp/hs-is-reloading"
@@ -21,7 +23,7 @@ function SystemStart()
 	else
 		u.notify("Finished loading.")
 		HoleCover()
-		PeripheryBatteryCheck("notify")
+		periphery.batteryCheck("SideNotes")
 		SyncAllGitRepos("notify")
 	end
 end

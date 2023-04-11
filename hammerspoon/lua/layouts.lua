@@ -1,4 +1,6 @@
 local u = require("lua.utils")
+local wu = require("lua.window-utils")
+local darkmode = require("lua.dark-mode")
 --------------------------------------------------------------------------------
 
 -- HELPERS
@@ -48,7 +50,7 @@ local function workLayout()
 	print("🔲 WorkLayout: loading")
 
 	-- screen & visuals
-	AutoSwitchDarkmode()
+	darkmode.AutoSwitch()
 	HoleCover()
 	dockSwitcher("work")
 	hs.execute("sketchybar --set clock popup.drawing=true")
@@ -69,7 +71,7 @@ local function workLayout()
 	u.openApps(appsToOpen)
 	u.app("Mimestream"):activate() -- activation instead of opening to put it into the foreground
 	for _, app in pairs(appsToOpen) do
-u.asSoonAsAppRuns(app, function()
+		u.asSoonAsAppRuns(app, function() wu.moveResize(u.app(app):mainWindow(), u.pseudoMax) end)
 	end
 	MyTimer = hs.timer.waitUntil(
 		function() return u.appRunning(appsToOpen) end,
@@ -85,7 +87,7 @@ local function movieLayout()
 	local targetMode = u.isAtMother() and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
 	wu.iMacDisplay:setBrightness(0)
-	SetDarkmode(true)
+	darkmode.set(true)
 	HoleCover("remove")
 
 	u.openApps { "YouTube", "BetterTouchTool" }

@@ -5,7 +5,7 @@
 -- corner
 
 local u = require("lua.utils")
-require("lua.window-utils")
+local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 
 -- unhide all apps
@@ -30,7 +30,7 @@ local function hideOthers(appObj)
 	local thisWin = appObj:mainWindow()
 
 	-- only hide when bigger window
-if not (CheckSize(thisWin, wu.pseudoMax) or CheckSize(thisWin, wu.Maximized)) then return end
+	if not (wu.CheckSize(thisWin, u.pseudoMax) or wu.CheckSize(thisWin, u.Maximized)) then return end
 
 	local appsNotToHide =
 		{ "IINA", "zoom.us", "CleanShot X", "SideNotes", "Twitter", "Alfred", appObj:name() }
@@ -92,7 +92,7 @@ end):start()
 Wf_maxWindows = u.wf.new(true):subscribe(u.wf.windowUnfocused, function(win)
 	if
 		not (u.isProjector())
-		and CheckSize(win, wu.Maximized)
+		and wu.CheckSize(win, wu.Maximized)
 		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X" })
 	then
 		win:application():hide()

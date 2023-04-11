@@ -1,35 +1,6 @@
 local u = require("lua.utils")
 
 --------------------------------------------------------------------------------
--- BLUETOOTH
-
----notifies & writes reminder
----is low. Caveat: `hs.battery` seems to work only with Apple devices.
----@param msgWhere "SideNotes"|"notify" where the information on low battery level should be send. "Reminder"|"notify"
-function PeripheryBatteryCheck(msgWhere)
-	local warningLevel = 20
-	local devices = hs.battery.privateBluetoothBatteryInfo()
-	if not devices then return end
-
-	for _, device in pairs(devices) do
-		local percent = tonumber(device.batteryPercentSingle)
-		if percent > warningLevel then return end
-		local msg = device.name .. " Battery is low (" .. percent .. "%)"
-		if msgWhere == "SideNotes" then
-			hs.osascript.javascript(string.format(
-				[[const sidenotes = Application("SideNotes");
-				const folder = sidenotes.folders.byName("Base");
-				sidenotes.createNote({ folder: folder, text: "%s" });]],
-				msg
-			))
-			print("⚠️", msg)
-		else
-			u.notify("⚠️", msg)
-		end
-	end
-end
-
---------------------------------------------------------------------------------
 -- USB WATCHER
 
 -- Podcasts onto OpenSwim-Player
@@ -91,3 +62,35 @@ WifiWatcher = hs.wifi.watcher
 	end)
 	:watchingFor({ "SSIDChange" })
 	:start()
+
+--------------------------------------------------------------------------------
+-- BLUETOOTH
+
+local M = {}
+
+---notifies & writes reminder
+---is low. Caveat: `hs.battery` seems to work only with Apple devices.
+---@param msgWhere "SideNotes"|"notify" where the information on low battery level should be send. "Reminder"|"notify"
+function M.batteryCheck(msgWhere)
+	local warningLevel = 20
+	local devices = hs.battery.privateBluetoothBatteryInfo()
+	if not devices then return end
+	for _, device in pairs(devices) do
+		local percent = tonumber(device.batteryPercentSingle)
+		if percent > warningLevel then return end
+		local msg = device.name .. " Battery is low (" .. percent .. "%)"
+		if msgWhere == "SideNotes" then
+			hs.osascript.javascript(string.format(
+				[[const sidenotes = Application("SideNotes");
+				const folder = sidenotes.folders.byName("Base");
+				sidenotes.createNote({ folder: folder, text: "%s" });]],
+				msg
+			))
+			print("⚠️", msg)
+		else
+			u.notify("⚠️", msg)
+		end
+	end
+end
+
+return M

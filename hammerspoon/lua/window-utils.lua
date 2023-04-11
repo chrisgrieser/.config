@@ -3,14 +3,14 @@ local M = {}
 local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
-wu.iMacDisplay = hs.screen("Built%-in")
-wu.Maximized = hs.layout.maximized
-if CheckSize(frontWin, wu.pseudoMax) or CheckSize(frontWin, wu.centered) then
-wu.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
-wu.toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
-if u.isAtMother() then wu.toTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
+M.iMacDisplay = hs.screen("Built%-in")
+M.Maximized = hs.layout.maximized
+M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
+M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
+M.toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
+if u.isAtMother() then M.toTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
 
-wu.ejectedFinderWins = {
+M.ejectedFinderWins = {
 	"^Quick Look$",
 	"^qlmanage$",
 	"^Move$",
@@ -57,7 +57,7 @@ local function obsidianThemeDevHelper(win, pos)
 		not win
 		or not win:application()
 		or not (win:application():name():lower() == "neovide")
-		or not (pos == wu.pseudoMax or pos == wu.Maximized)
+		or not (pos == M.pseudoMax or pos == M.Maximized)
 		or not u.appRunning("Obsidian")
 	then
 		return
@@ -75,7 +75,7 @@ end
 ---@param size hs.geometry
 ---@nodiscard
 ---@return boolean|nil whether win has the given size. returns nil for invalid win
-function CheckSize(win, size)
+function M.CheckSize(win, size)
 	local invalidWinsByTitle = { -- windows which can/should not be resized
 		"Copy", -- Finder
 		"Move", -- Finder
@@ -109,7 +109,7 @@ end
 
 ---@param win hs.window
 ---@param pos hs.geometry
-function MoveResize(win, pos)
+function M.moveResize(win, pos)
 	-- guard clauses
 	if not win or not win:application() or win:title() == "Quick Look" or win:title() == "qlmanage" then
 		return
@@ -123,15 +123,15 @@ function MoveResize(win, pos)
 	end
 
 	-- Twitter Extras
-	if pos == wu.pseudoMax or pos == wu.centered then
+	if pos == M.pseudoMax or pos == M.centered then
 		TwitterToTheSide()
-	elseif pos == wu.Maximized and u.appRunning("Twitter") then
+	elseif pos == M.Maximized and u.appRunning("Twitter") then
 		if u.app("Twitter") then u.app("Twitter"):hide() end
 	end
 
 	-- resize
 	local function resize(_win, _pos)
-		if CheckSize(_win, _pos) ~= false then return end -- check for unequal false, since non-resizable wins return nil
+		if M.CheckSize(_win, _pos) ~= false then return end -- check for unequal false, since non-resizable wins return nil
 		_win:moveToUnit(_pos)
 	end
 	resize(win, pos)
@@ -145,7 +145,7 @@ end
 -- WINDOW TILING (OF SAME APP)
 
 ---bring all windows of front app to the front
-function BringAllWinsToFront()
+function M.bringAllWinsToFront()
 	local app = hs.application.frontmostApplication()
 	if #app:allWindows() < 2 then return end -- the occasional faulty creation of task manager windows in Browser
 	app:selectMenuItem { "Window", "Bring All to Front" }
@@ -156,14 +156,14 @@ end
 ---appname. If this function is not triggered by a windowfilter event, the window
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
-function AutoTile(winSrc)
+function M.autoTile(winSrc)
 	local wins = {}
 	if type(winSrc) == "string" then
 		-- cannot use windowfilter, since it's empty when not called from a
 		-- window filter subscription
 		for _, finderWin in pairs(u.app("Finder"):allWindows()) do
 			local rejected = false
-			for _, bannedTitle in pairs(wu.ejectedFinderWins) do
+			for _, bannedTitle in pairs(M.ejectedFinderWins) do
 				if finderWin:title():find(bannedTitle) then rejected = true end
 			end
 			if not rejected then table.insert(wins, finderWin) end
@@ -172,7 +172,7 @@ function AutoTile(winSrc)
 		wins = winSrc:getWindows()
 	end
 
-	if #wins > 1 then BringAllWinsToFront() end
+	if #wins > 1 then M.bringAllWinsToFront() end
 
 	if #wins == 0 and u.isFront("Finder") and not (u.isProjector()) then
 		-- hide finder when no windows
@@ -182,38 +182,38 @@ function AutoTile(winSrc)
 	elseif #wins == 1 then
 		local pos
 		if u.isProjector() then
-			pos = wu.Maximized
+			pos = M.Maximized
 		elseif u.isFront("Finder") then
-			pos = wu.centered
+			pos = M.centered
 		else
-			pos = wu.pseudoMax
+			pos = M.pseudoMax
 		end
-		MoveResize(wins[1], pos)
+		M.moveResize(wins[1], pos)
 	elseif #wins == 2 then
-		MoveResize(wins[1], u.leftHalf)
-		MoveResize(wins[2], u.rightHalf)
+		M.moveResize(wins[1], u.leftHalf)
+		M.moveResize(wins[2], u.rightHalf)
 	elseif #wins == 3 then
-		MoveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 })
-		MoveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 })
-		MoveResize(wins[3], { h = 1, w = 0.33, x = 0.67, y = 0 })
+		M.moveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 })
+		M.moveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 })
+		M.moveResize(wins[3], { h = 1, w = 0.33, x = 0.67, y = 0 })
 	elseif #wins == 4 then
-		MoveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
-		MoveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
-		MoveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
-		MoveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
+		M.moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
+		M.moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
+		M.moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
+		M.moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
 	elseif #wins == 5 then
-		MoveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
-		MoveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
-		MoveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
-		MoveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
-		MoveResize(wins[5], { h = 0.5, w = 0.5, x = 0.25, y = 0.25 })
+		M.moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
+		M.moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
+		M.moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
+		M.moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
+		M.moveResize(wins[5], { h = 0.5, w = 0.5, x = 0.25, y = 0.25 })
 	elseif #wins == 6 then
-		MoveResize(wins[1], { h = 0.5, w = 0.33, x = 0, y = 0 })
-		MoveResize(wins[2], { h = 0.5, w = 0.33, x = 0, y = 0.5 })
-		MoveResize(wins[3], { h = 0.5, w = 0.33, x = 0.33, y = 0 })
-		MoveResize(wins[4], { h = 0.5, w = 0.33, x = 0.33, y = 0.5 })
-		MoveResize(wins[5], { h = 0.5, w = 0.33, x = 0.66, y = 0 })
-		MoveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 })
+		M.moveResize(wins[1], { h = 0.5, w = 0.33, x = 0, y = 0 })
+		M.moveResize(wins[2], { h = 0.5, w = 0.33, x = 0, y = 0.5 })
+		M.moveResize(wins[3], { h = 0.5, w = 0.33, x = 0.33, y = 0 })
+		M.moveResize(wins[4], { h = 0.5, w = 0.33, x = 0.33, y = 0.5 })
+		M.moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.66, y = 0 })
+		M.moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 })
 	end
 end
 
@@ -251,9 +251,9 @@ Wf_appsOnMouseScreen = u.wf.new({
 		if mouseScreen:name() ~= screenOfWindow:name() then newWin:moveToScreen(mouseScreen) end
 
 		if appn == "Finder" or appn == "Script Editor" then
-			MoveResize(newWin, wu.centered)
+			M.moveResize(newWin, M.centered)
 		else
-			MoveResize(newWin, wu.Maximized)
+			M.moveResize(newWin, M.Maximized)
 		end
 	end)
 end)
@@ -269,13 +269,13 @@ local function controlSpaceAction()
 	local currentWin = hs.window.focusedWindow()
 	local pos
 	if u.isFront { "Finder", "Script Editor" } then
-		pos = wu.centered
-	elseif not CheckSize(currentWin, wu.pseudoMax) then
-		pos = wu.pseudoMax
+		pos = M.centered
+	elseif not M.CheckSize(currentWin, u.pseudoMax) then
+		pos = M.pseudoMax
 	else
-		pos = wu.Maximized
+		pos = M.Maximized
 	end
-	MoveResize(currentWin, pos)
+	M.moveResize(currentWin, pos)
 end
 
 local function moveCurWinToOtherDisplay()
@@ -318,10 +318,10 @@ end
 -- HOTKEYS
 u.hotkey({}, "home", homeAction)
 u.hotkey({}, "end", endAction)
-u.hotkey(u.hyper, "right", function() MoveResize(hs.window.focusedWindow(), hs.layout.right50) end)
-u.hotkey(u.hyper, "left", function() MoveResize(hs.window.focusedWindow(), hs.layout.left50) end)
-u.hotkey(u.hyper, "down", function() MoveResize(hs.window.focusedWindow(), { x = 0, y = 0.5, w = 1, h = 0.5 }) end)
-u.hotkey(u.hyper, "up", function() MoveResize(hs.window.focusedWindow(), { x = 0, y = 0, w = 1, h = 0.5 }) end)
+u.hotkey(u.hyper, "right", function() M.moveResize(hs.window.focusedWindow(), hs.layout.right50) end)
+u.hotkey(u.hyper, "left", function() M.moveResize(hs.window.focusedWindow(), hs.layout.left50) end)
+u.hotkey(u.hyper, "down", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0.5, w = 1, h = 0.5 }) end)
+u.hotkey(u.hyper, "up", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0, w = 1, h = 0.5 }) end)
 u.hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
 
 --------------------------------------------------------------------------------

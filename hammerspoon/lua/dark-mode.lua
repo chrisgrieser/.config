@@ -1,4 +1,5 @@
 local u = require("lua.utils")
+local console = require("lua.console")
 --------------------------------------------------------------------------------
 
 local function brightnessNotify()
@@ -42,7 +43,7 @@ local function toggleDarkMode()
 	HoleCover() -- must come after OS color change
 
 	-- hammerspoon console
-	SetConsoleColors() -- must come after OS color change
+	console.setConsoleColors() -- must come after OS color change
 
 	-- sketchybar
 	-- stylua: ignore
@@ -57,15 +58,22 @@ local function toggleDarkMode()
 	]])
 end
 
+u.hotkey({}, "f13", toggleDarkMode) -- del key on Keychron Keyboard
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+local M = {}
+
 ---@param toDark boolean true = dark, false = light
-function SetDarkmode(toDark)
+function M.set(toDark)
 	if (not (u.isDarkMode()) and toDark) or (u.isDarkMode() and not toDark) then toggleDarkMode() end
 end
 
 -- autoswitch dark mode and light mode
 -- If device has brightness sensor, uses a threshold to determine whether to
 -- change. Otherwise, changes based on the time of day.
-function AutoSwitchDarkmode()
+function M.AutoSwitch()
 	local brightness = hs.brightness.ambient()
 	local hasBrightnessSensor = brightness > -1
 	local targetMode
@@ -78,14 +86,13 @@ function AutoSwitchDarkmode()
 	end
 
 	if targetMode == "light" and u.isDarkMode() then
-		SetDarkmode(false)
+		M.set(false)
 		print("☀️ Auto-switching to Light Mode")
 	elseif targetMode == "dark" and not (u.isDarkMode()) then
-		SetDarkmode(true)
+		M.set(true)
 		print("🌔 Auto-switching to Dark Mode")
 	end
 end
 
 --------------------------------------------------------------------------------
-
-u.hotkey({}, "f13", toggleDarkMode) -- del key on Keychron Keyboard
+return M

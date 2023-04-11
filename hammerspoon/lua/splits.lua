@@ -1,5 +1,5 @@
 local u = require("lua.utils")
-require("lua.window-utils")
+local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 
 ---activate both apps together,unsplit if one of the two apps are quit.
@@ -46,11 +46,11 @@ function VsplitSetLayout(mode, secondWin)
 	end
 
 	if RIGHT_SPLIT then
-		MoveResize(RIGHT_SPLIT, f1)
+		wu.moveResize(RIGHT_SPLIT, f1)
 		RIGHT_SPLIT:raise()
 	end
 	if LEFT_SPLIT then
-		MoveResize(LEFT_SPLIT, f2)
+		wu.moveResize(LEFT_SPLIT, f2)
 		LEFT_SPLIT:raise()
 	end
 

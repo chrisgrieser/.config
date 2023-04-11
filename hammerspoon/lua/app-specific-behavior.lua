@@ -1,5 +1,5 @@
 local u = require("lua.utils")
-require("lua.window-utils")
+local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 
 ---play/pause spotify with Spotify
@@ -41,7 +41,7 @@ end):start()
 -- PIXELMATOR: open maximized
 PixelmatorWatcher = u.aw.new(function(appName, eventType, appObj)
 	if appName == "Pixelmator" and eventType == u.aw.launched then
-		u.asSoonAsAppRuns(appObj, function() MoveResize(appObj, wu.Maximized) end)
+		u.asSoonAsAppRuns(appObj, function() wu.moveResize(appObj, wu.Maximized) end)
 	end
 end):start()
 
@@ -61,9 +61,9 @@ Wf_browser = u.wf.new("Vivaldi")
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(u.wf.windowCreated, function() AutoTile(Wf_browser) end)
-	:subscribe(u.wf.windowDestroyed, function() AutoTile(Wf_browser) end)
-	:subscribe(u.wf.windowFocused, BringAllWinsToFront)
+	:subscribe(u.wf.windowCreated, function() wu.autoTile(Wf_browser) end)
+	:subscribe(u.wf.windowDestroyed, function() wu.autoTile(Wf_browser) end)
+	:subscribe(u.wf.windowFocused, wu.bringAllWinsToFront)
 
 -- Automatically hide Browser has when no window
 -- requires wider window-filter to not hide PiP windows etc
@@ -121,7 +121,7 @@ u.urischeme("enlarge-neovide-window", function()
 	u.asSoonAsAppRuns("neovide", function()
 		local neovideWin = u.app("neovide"):mainWindow()
 		local size = u.isProjector() and wu.Maximized or wu.pseudoMax
-		MoveResize(neovideWin, size)
+		wu.moveResize(neovideWin, size)
 	end)
 end)
 
@@ -134,12 +134,12 @@ Wf_finder = u.wf.new("Finder")
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(u.wf.windowCreated, function() AutoTile(Wf_finder) end)
-	:subscribe(u.wf.windowDestroyed, function() AutoTile(Wf_finder) end)
+	:subscribe(u.wf.windowCreated, function() wu.autoTile(Wf_finder) end)
+	:subscribe(u.wf.windowDestroyed, function() wu.autoTile(Wf_finder) end)
 
 FinderAppWatcher = u.aw.new(function(appName, eventType, finderAppObj)
 	if eventType == u.aw.activated and appName == "Finder" then
-		AutoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
+		wu.autoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
 	end
 end):start()
@@ -160,7 +160,7 @@ Wf_quicklook = u.wf
 		then
 			return
 		end
-		u.runWithDelays(0.4, function() MoveResize(newWin, wu.centered) end)
+		u.runWithDelays(0.4, function() wu.moveResize(newWin, wu.centered) end)
 	end)
 
 --------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ HighlightsAppWatcher = u.aw.new(function(appName, eventType, appObject)
 	appObject:selectMenuItem { "Tools", "Color", "Yellow" }
 	appObject:selectMenuItem { "View", "Hide Toolbar" }
 
-	MoveResize(appObject:mainWindow(), wu.pseudoMax)
+	wu.moveResize(appObject:mainWindow(), wu.pseudoMax)
 end):start()
 
 --------------------------------------------------------------------------------
@@ -220,11 +220,11 @@ Wf_script_editor = u.wf
 		-- auto-paste and lint content; resize window
 		elseif newWin:title() == "Untitled" then
 			u.keystroke({ "cmd" }, "v")
-			MoveResize(newWin, wu.centered)
+			wu.moveResize(newWin, wu.centered)
 			u.runWithDelays(0.2, function() u.keystroke({ "cmd" }, "k") end)
 		-- resize window
 		elseif newWin:title():find("%.sdef$") then
-			MoveResize(newWin, wu.centered)
+			wu.moveResize(newWin, wu.centered)
 		end
 	end)
 	-- fix line breaks for copypasting into other apps
