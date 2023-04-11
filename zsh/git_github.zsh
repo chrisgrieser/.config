@@ -27,7 +27,7 @@ function gu() {
 alias gi='gh issue list'
 
 # goto git root
-alias g.='r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"'
+alias g.='cd "$(git rev-parse --show-toplevel)"'
 
 # remove the lock file
 function unlock() {
@@ -239,17 +239,18 @@ function nuke {
 	SSH_REMOTE=$(git remote -v | head -n1 | cut -d" " -f1 | cut -d$'	' -f2)
 
 	# go to git repo root
-	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}"
-	LOCAL_REPO=$(pwd)
+	cd "$(git rev-parse --show-toplevel)"
+	local_repo_path=$(pwd)
+	# shellcheck disable=2103
 	cd ..
 
-	rm -rvf "$LOCAL_REPO"
+	rm -rvf "$local_repo_path"
 	print "\033[1;34m--------------"
 	echo "Local repo removed."
 	echo "Cloning repo again from remote… (with depth 10)"
 	print "--------------\033[0m"
 
-	git clone --depth=10 "$SSH_REMOTE" "$LOCAL_REPO" && cd "$LOCAL_REPO" || return 1
+	git clone --depth=10 "$SSH_REMOTE" "$local_repo_path" && cd "$local_repo_path" || return 1
 	separator
 }
 
@@ -280,7 +281,8 @@ function gdf() {
 	if [[ $# -eq 0 ]]; then echo "No search term provided." && return 1; fi
 
 	local deleted_path deletion_commit
-	r=$(git rev-parse --git-dir) && r=$(cd "$r" && pwd)/ && cd "${r%%/.git/*}" # goto git root
+	# goto git root
+	cd "$(git rev-parse --show-toplevel)"
 
 	# alternative method: `git rev-list -n 1 HEAD -- "**/*$1*"` to get the commit of a deleted file
 	deleted_path=$(git log --diff-filter=D --summary | grep delete | grep -i "$*" | cut -d" " -f5-)
