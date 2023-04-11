@@ -11,7 +11,7 @@ alias deepen="git fetch --deepen" # add more depth to shallow clone
 alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull --recurse-submodules"
-alias restore="git restore --source"    # 1: hash, 2: file -> restore (existing) file
+alias restore="git restore --source"                                      # 1: hash, 2: file -> restore (existing) file
 alias gm="git add -A && git commit --amend --no-edit && git push --force" # a[m]end
 alias gM="git commit --amend"
 alias rem="git remote -v"
@@ -52,7 +52,6 @@ function gd() {
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
 # https://git-scm.com/docs/git-log#_pretty_formats
-
 
 # short (only last 15 messages)
 alias gl="git log -n 15 --color --all --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | sed -e 's/origin/o/g'; echo ; echo '(…)'"
@@ -154,19 +153,28 @@ function pr() {
 function gb() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
-	selected_branch=$(
-		git branch --color | fzf \
-			--ansi \
-			--layout=reverse \
-			--no-info \
-			--query "$*" \
-			--height=40% \
-			--header-first --header="↵ : Checkout Branch"
+	selected=$(
+		git branch --all --color |
+			grep -v "HEAD" |
+			fzf \
+				--ansi \
+				--layout=reverse \
+				--no-info \
+				--query "$*" \
+				--height=40% \
+				--header-first --header="↵ : Checkout Branch"
 	)
-	[[ -z "$selected_branch" ]] && return 0
+	[[ -z "$selected" ]] && return 0
 
-	selected_branch=$(echo "$selected_branch" | tr -d "* ")
-	git checkout "$selected_branch"
+	# how to checkout remote branches: https://stackoverflow.com/questions/67699/how-do-i-clone-all-remote-branches
+	if [[ $selected == remotes/* ]]; then
+		remote=$(echo "$selected" | cut -d/ -f2-)
+		git checkout "$remote"
+		selected=$(echo "$selected" | cut -d/ -f3)
+	else
+		selected=$(echo "$selected" | tr -d "* ")
+	fi
+	git checkout "$selected"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
