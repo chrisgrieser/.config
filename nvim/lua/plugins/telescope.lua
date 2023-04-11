@@ -15,11 +15,10 @@ local keymappings = {
 	["<S-Tab>"] = "move_selection_better",
 	["<D-CR>"] = function(prompt_bufnr)
 		require("telescope.actions").toggle_selection(prompt_bufnr)
-		require("telescope.actions").move_selection_down(prompt_bufnr)
+		require("telescope.actions").move_selection_worse(prompt_bufnr)
 	end,
 	["?"] = "which_key",
 }
-
 
 local function telescopeConfig()
 	require("telescope").setup {

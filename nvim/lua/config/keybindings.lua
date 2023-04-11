@@ -103,8 +103,8 @@ autocmd("VimEnter", {
 })
 
 -- Hunks and Changes
-keymap("n", "gh", ":Gitsigns next_hunk<CR>", { desc = "goto next hunk" })
-keymap("n", "gH", ":Gitsigns prev_hunk<CR>", { desc = "goto previous hunk" })
+keymap("n", "gh", ":Gitsigns next_hunk<CR>zv", { desc = "goto next hunk" })
+keymap("n", "gH", ":Gitsigns prev_hunk<CR>zv", { desc = "goto previous hunk" })
 keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
 
@@ -145,6 +145,7 @@ keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Case Conversion
 -- stylua: ignore start
+
 keymap("n", "cru", ":lua require('textcase').current_word('to_upper_case')<CR>", { desc = "UPPER CASE" })
 keymap("n", "crl", ":lua require('textcase').current_word('to_lower_case')<CR>", { desc = "lower case" })
 keymap("n", "crt", ":lua require('textcase').current_word('to_title_case')<CR>", { desc = "Title Case" })

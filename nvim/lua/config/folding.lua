@@ -28,11 +28,12 @@ end, vim.api.nvim_create_namespace("auto_pause_folds"))
 -- have equivalents for zr and zm because there is no saved fold level.
 -- Consequently, the vim-internal fold levels need to be disabled by setting
 -- them to 99
-vim.opt.foldlevel = 99 
+vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 
-keymap("n", "zr", function () require("ufo").openFoldsExceptKinds() end, { desc = "󰘖 󱃄 Open All Folds except kinds" })
-keymap("n", "zm", function () require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
+-- stylua: ignore
+keymap("n", "zr", function() require("ufo").openFoldsExceptKinds { "comments" } end, { desc = "󰘖 󱃄 Open All Folds except comments" })
+keymap("n", "zm", function() require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
 
 -- set foldlevel via z{n}
 for _, lvl in pairs { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
@@ -50,7 +51,7 @@ end, { desc = "󰘖 Close toplevel folds" })
 -- MICRO FOLD COMMANDS
 
 -- Cycle Folds (f1 = ^ Karabiner Remap)
-keymap({"c", "i"}, "<f1>", "^", { desc = "HACK for karabiner rebinding" })
+keymap({ "c", "i" }, "<f1>", "^", { desc = "HACK for karabiner rebinding" })
 keymap("n", "<f1>", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
 
 -- goto next/prev closed fold
@@ -90,8 +91,9 @@ end, { desc = "󰘖 Goto previous closed fold" })
 ---@diagnostic disable: param-type-mismatch
 keymap("n", "h", function()
 	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-	local isFirstNonBlank = (vim.fn.col(".") - 1 <= vim.fn.indent(".") / vim.bo.tabstop) or vim.fn.col(".") == 1
-	local notOnFold = fn.foldclosed(".") == -1 
+	local isFirstNonBlank = (vim.fn.col(".") - 1 <= vim.fn.indent(".") / vim.bo.tabstop)
+		or vim.fn.col(".") == 1
+	local notOnFold = fn.foldclosed(".") == -1
 	if isFirstNonBlank and shouldCloseFold and notOnFold then
 		pcall(u.normal, "zc")
 	else
@@ -103,7 +105,7 @@ end, { desc = "h (+ close fold at BoL)" })
 -- this is the same behavior as with foldopen="hor" already
 keymap("n", "l", function()
 	local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-	local isOnFold = fn.foldclosed(".") > -1 
+	local isOnFold = fn.foldclosed(".") > -1
 	if shouldOpenFold and isOnFold then
 		pcall(u.normal, "zo")
 	else
