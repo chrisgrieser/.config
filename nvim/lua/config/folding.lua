@@ -7,7 +7,7 @@ local u = require("config.utils")
 -- PAUSE FOLDS WHEN SEARCHING
 
 vim.opt.foldopen:remove { "search" } -- no auto-open when searching
-keymap("n", "-", ":set nofoldenable<CR>/")
+keymap("n", "-", "zn/")
 
 -- while searching: pause folds -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
