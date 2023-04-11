@@ -30,7 +30,7 @@ local function hideOthers(appObj)
 	local thisWin = appObj:mainWindow()
 
 	-- only hide when bigger window
-	if not (wu.CheckSize(thisWin, u.pseudoMax) or wu.CheckSize(thisWin, u.Maximized)) then return end
+	if not (wu.CheckSize(thisWin, wu.pseudoMax) or wu.CheckSize(thisWin, wu.Maximized)) then return end
 
 	local appsNotToHide =
 		{ "IINA", "zoom.us", "CleanShot X", "SideNotes", "Twitter", "Alfred", appObj:name() }
