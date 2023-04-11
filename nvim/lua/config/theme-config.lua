@@ -145,6 +145,7 @@ local function themeModifications()
 		updateHighlight("Error", "gui=NONE") -- no bold
 		updateHighlight("@error", "gui=NONE")
 		updateHighlight("NonText", "gui=NONE")
+		linkHighlight("@parameter", "@macro")
 	end
 end
 
