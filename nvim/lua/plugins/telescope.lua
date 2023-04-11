@@ -84,6 +84,12 @@ local function telescopeConfig()
 				-- adding "--all" to see future commits as well
 				git_command = { "git", "log", "--all", "--pretty=oneline", "--abbrev-commit", "--", "." },
 			},
+			git_bcommits = {
+				prompt_prefix = "󰊢 ",
+				initial_mode = "normal",
+				-- adding "--all" to see future commits as well
+				git_command = { "git", "log", "--all", "--pretty=oneline", "--abbrev-commit" },
+			},
 			diagnostics = { prompt_prefix = "󰒕 ", no_sign = true },
 			treesitter = { prompt_prefix = " ", show_line = false },
 			keymaps = { prompt_prefix = " ", modes = { "n", "i", "c", "x", "o", "t" } },
