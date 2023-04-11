@@ -95,8 +95,7 @@ end, { desc = "󰘖 Goto previous closed fold" })
 ---@diagnostic disable: param-type-mismatch
 keymap("n", "h", function()
 	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-	local isFirstNonBlank = (vim.fn.col(".") - 1 <= vim.fn.indent(".") / vim.bo.tabstop)
-		or vim.fn.col(".") == 1
+	local isFirstNonBlank = vim.fn.col(".") - 1 <= vim.fn.indent(".") / vim.bo.tabstop
 	local notOnFold = fn.foldclosed(".") == -1
 	if isFirstNonBlank and shouldCloseFold and notOnFold then
 		pcall(u.normal, "zc")

@@ -1,8 +1,5 @@
 --------------------------------------------------------------------------------
 local foldIcon = ""
---------------------------------------------------------------------------------
-
--- https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
 local function foldTextFormatter(virtText, lnum, endLnum, width, truncate)
 	local newVirtText = {}
 	local suffix = "  " .. foldIcon .. "  " .. tostring(endLnum - lnum)
