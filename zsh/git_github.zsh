@@ -21,7 +21,7 @@ alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to
 function gu() {
 	url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
 	echo "$url" | pbcopy
-	open "$(url)"
+	open "$url"
 }
 
 alias gi='gh issue list'
@@ -217,6 +217,7 @@ function clone() {
 	git clone --depth=1 "$giturl"
 	# shellcheck disable=SC2012
 	cd "$(ls -1 -t | head -n1)" || return 1
+	separator
 	inspect
 }
 
@@ -241,6 +242,7 @@ function nuke {
 	print "--------------\033[0m"
 
 	git clone --depth=10 "$SSH_REMOTE" "$LOCAL_REPO" && cd "$LOCAL_REPO" || return 1
+	separator
 }
 
 #───────────────────────────────────────────────────────────────────────────────

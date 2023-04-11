@@ -270,7 +270,7 @@ local function controlSpaceAction()
 	local pos
 	if u.isFront { "Finder", "Script Editor" } then
 		pos = M.centered
-	elseif not M.CheckSize(currentWin, u.pseudoMax) then
+	elseif not M.CheckSize(currentWin, M.pseudoMax) then
 		pos = M.pseudoMax
 	else
 		pos = M.Maximized
