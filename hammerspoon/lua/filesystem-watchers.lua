@@ -1,4 +1,6 @@
 local pw = hs.pathwatcher.new
+local u = require("lua.utils")
+--------------------------------------------------------------------------------
 
 ---is in sub-directory instead of directly in the folder
 ---@param fPath string? filepath
