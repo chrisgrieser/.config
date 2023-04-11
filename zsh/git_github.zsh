@@ -45,7 +45,6 @@ function gd() {
 	else
 		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
 		git diff # uses git delta (configured so in gitconfig)
-		echo "small"
 	fi
 }
 
