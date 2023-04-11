@@ -108,8 +108,8 @@ return {
 			vim.api.nvim_create_autocmd("BufReadPost", {
 				pattern = { "*.sh", "*.zsh", ".zsh*" },
 				callback = function()
-					-- apparently needs delay to avoid conflicting race with treesitter's autocomd
-					vim.defer_fn(function () vim.bo.filetype = "sh" end, 100)
+					-- apparently needs delay to avoid conflicting race with treesitter's autocomd?
+					vim.defer_fn(function () vim.bo.filetype = "sh" end, 200)
 				end,
 			})
 

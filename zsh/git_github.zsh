@@ -6,7 +6,6 @@ alias gs='git status'
 alias gc="git commit -m"
 alias ga="git add"
 alias gA="git add -A"
-alias unshallow="git fetch --unshallow"
 alias deepen="git fetch --deepen" # add more depth to shallow clone
 alias grh="git reset --hard"
 alias push="git push"
@@ -32,6 +31,13 @@ alias g.='cd "$(git rev-parse --show-toplevel)"'
 # remove the lock file
 function unlock() {
 	rm "$(git rev-parse --git-dir)/index.lock"
+}
+
+# https://stackoverflow.com/a/17937889
+function unshallow() {
+	git fetch --unshallow
+	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+	git fetch origin
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -222,7 +228,7 @@ function clone() {
 		giturl="$1"
 	fi
 
-	git clone --depth=1 "$giturl"
+	git clone --depth=1 --filter=blob:none "$giturl"
 	# shellcheck disable=SC2012
 	cd "$(ls -1 -t | head -n1)" || return 1
 	separator
