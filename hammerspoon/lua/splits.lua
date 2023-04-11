@@ -41,16 +41,16 @@ function VsplitSetLayout(mode, secondWin)
 		f2 = hs.layout.left50
 	elseif mode == "unsplit" then
 		PairedActivationWatcher:stop()
-		f1 = wu.pseudoMax
-		f2 = wu.pseudoMax
+f1 = wu.pseudoMax
+f2 = wu.pseudoMax
 	end
 
 	if RIGHT_SPLIT then
-		wu.moveResize(RIGHT_SPLIT, f1)
+wu.moveResize(RIGHT_SPLIT, f1)
 		RIGHT_SPLIT:raise()
 	end
 	if LEFT_SPLIT then
-		wu.moveResize(LEFT_SPLIT, f2)
+wu.moveResize(LEFT_SPLIT, f2)
 		LEFT_SPLIT:raise()
 	end
 

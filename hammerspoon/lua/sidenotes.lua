@@ -54,7 +54,7 @@ SidenotesWatcher = u.aw.new(function(appName, event, appObj)
 	-- enlarge on startup
 	if appName == "SideNotes" and event == u.aw.launched then
 		local win = appObj:mainWindow()
-		wu.moveResize(win, SideNotesWide)
+wu.moveResize(win, SideNotesWide)
 	end
 end):start()
 
@@ -66,6 +66,6 @@ SideNotesWide = { x = 0, y = 0, w = 0.35, h = 1 }
 function ToggleSideNotesSize()
 	local snWin = u.app("SideNotes"):mainWindow()
 	local narrow = { x = 0, y = 0, w = 0.2, h = 1 }
-	local changeTo = wu.CheckSize(snWin, narrow) and SideNotesWide or narrow
-	wu.moveResize(snWin, changeTo)
+local changeTo = wu.CheckSize(snWin, narrow) and SideNotesWide or narrow
+wu.moveResize(snWin, changeTo)
 end
