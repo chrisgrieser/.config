@@ -46,7 +46,10 @@ function inspect() {
 			separator
 		fi
 		if [[ $(git rev-parse --show-toplevel) == $(pwd) ]]; then
-			git log -n 5 --all --color --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | sed -e 's/origin/o/g'
+			git log -n 5 --all --color --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | 
+				sed -e 's/origin/o/g' |
+				sed -e 's/grafted, / :fs /g' 
+				" "
 			separator
 		fi
 	fi
@@ -65,9 +68,9 @@ function timezsh() {
 # no arg = all files in folder will be deleted
 function d() {
 	if [[ $# == 0 ]]; then
-		mv ./* ~/.Trash/
+		mv -f ./* ~/.Trash/
 	else
-		mv "$@" ~/.Trash/
+		mv -f "$@" ~/.Trash/
 	fi
 	# shellcheck disable=2181
 	# run in background to avoid delay; run in subshell to suppress output

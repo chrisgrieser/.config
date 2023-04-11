@@ -213,7 +213,6 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.filetype("yaml", {
 		sources = cmp.config.sources {
-			s.choice,
 			s.snippets,
 			s.treesitter, -- treesitter works good on yaml
 			s.lsp,
@@ -230,7 +229,6 @@ local function filetypeCompletionConfig()
 			return not (lineContent:match("\\$"))
 		end,
 		sources = cmp.config.sources {
-			s.choice,
 			s.snippets,
 			s.zsh, -- completion from zsh itself
 			s.lsp,
