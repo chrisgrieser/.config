@@ -46,7 +46,10 @@ return {
 			provider_selector = function() return { "lsp", "indent" } end,
 			-- open opening the buffer, close these fold kinds
 			-- use `:UfoInspect` to get available fold kinds from the LSP
-			close_fold_kinds = { "imports" }, 
+			close_fold_kinds = {
+				"comment",
+				"imports",
+			}, 
 			open_fold_hl_timeout = 500,
 			fold_virt_text_handler = foldTextFormatter,
 		},

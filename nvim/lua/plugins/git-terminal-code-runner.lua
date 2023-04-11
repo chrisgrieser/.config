@@ -32,7 +32,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			max_file_length = 7500,
-			preview_config = { border = BorderStyle },
+			preview_config = { border = require("config.utils").border_style },
 		},
 	},
 	{
@@ -54,6 +54,11 @@ return {
 			signs = {
 				section = { "", "" },
 				item = { "", "" },
+			},
+			mappings = {
+				status = {
+					["<D-w>"] = "close",
+				},
 			},
 		},
 	},
