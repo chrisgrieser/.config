@@ -36,8 +36,8 @@ function o() {
 # + git status (if in git dir)
 # + brief git log (if at git root)
 function inspect() {
-	if ! command -v exa &>/dev/null; then echo "exa not installed." && return 1; fi
-	if ! command -v git &>/dev/null; then echo "git not installed." && return 1; fi
+	if ! command -v exa &>/dev/null; then echo "exa not installed." && return 0; fi
+	if ! command -v git &>/dev/null; then echo "git not installed." && return 0; fi
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		gitstatus=$(git status --short --porcelain)
@@ -46,10 +46,7 @@ function inspect() {
 			separator
 		fi
 		if [[ $(git rev-parse --show-toplevel) == $(pwd) ]]; then
-			git log -n 5 --all --color --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | 
-				sed -e 's/origin/o/g' |
-				sed -e 's/grafted, / :fs /g' 
-				" "
+			gitlog 5 # custom function defined in git_github.zsh
 			separator
 		fi
 	fi
