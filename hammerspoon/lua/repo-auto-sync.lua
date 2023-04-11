@@ -21,7 +21,7 @@ local function gitDotfileSync(submodulePull)
 	if submodulePull then scriptArgs = { "--submodule-pull" } end
 
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
-	if not (ScreenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
+	if not (u.screenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
 
 	local function dotfileSyncCallback(exitCode, _, stdErr)
 		if exitCode == 0 then
@@ -35,9 +35,9 @@ local function gitDotfileSync(submodulePull)
 		local submodulesStillDirty = stdout:match(" m ")
 		if submodulesStillDirty then
 			local modules = stdout:gsub(".*/", "")
-			Notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
+			u.notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
 		else
-			Notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
+			u.notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
 		end
 	end
 
@@ -49,7 +49,7 @@ end
 ---@return boolean
 local function gitVaultSync()
 	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return false end
-	if not (ScreenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
+	if not (u.screenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
 
 	GitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
@@ -57,7 +57,7 @@ local function gitVaultSync()
 				print(vaultIcon, "Vault Sync successful.")
 				return
 			end
-			Notify(vaultIcon .. "⚠️️ vault " .. stdErr)
+			u.notify(vaultIcon .. "⚠️️ vault " .. stdErr)
 		end)
 		:start()
 
@@ -68,7 +68,7 @@ end
 ---@return boolean
 local function gitPassSync()
 	if GitPassSyncTask and GitPassSyncTask:isRunning() then return true end
-	if not ScreenIsUnlocked() then return true end -- prevent of standby home device background sync when in office
+	if not u.screenIsUnlocked() then return true end -- prevent of standby home device background sync when in office
 
 	GitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
@@ -76,7 +76,7 @@ local function gitPassSync()
 				print(passIcon, "Password-Store Sync successful.")
 				return
 			end
-			Notify(passIcon .. "⚠️️ password-store " .. stdErr)
+			u.notify(passIcon .. "⚠️️ password-store " .. stdErr)
 		end)
 		:start()
 
@@ -95,7 +95,7 @@ function SyncAllGitRepos(extras)
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
 	if not (success1 and success2 and success3) then
-		Notify("⚠️️ Sync Error.")
+		u.notify("⚠️️ Sync Error.")
 		return
 	end
 
@@ -107,7 +107,7 @@ function SyncAllGitRepos(extras)
 	end
 	local function updateSketchybar()
 		hs.execute("sketchybar --trigger repo-files-update")
-		if extras == "notify" then Notify("Sync finished.") end
+		if extras == "notify" then u.notify("Sync finished.") end
 	end
 
 	hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
@@ -125,7 +125,7 @@ RepoSyncTimer = hs.timer
 	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
-UriScheme("sync-repos", function()
+u.urischeme("sync-repos", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
 	SyncAllGitRepos("notify")
 end)
@@ -134,7 +134,7 @@ end)
 SleepWatcher = hs.caffeinate.watcher
 	.new(function(event)
 		local c = hs.caffeinate.watcher
-		if event == c.screensDidSleep or (event == c.screensDidUnlock and IdleMins(30)) then
+		if event == c.screensDidSleep or (event == c.screensDidUnlock and u.idleMins(30)) then
 			SyncAllGitRepos()
 		end
 	end)

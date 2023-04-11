@@ -28,14 +28,14 @@ BookmarkWatcher = pw(sourceBookmarkPath, function()
 	bookmarks.roots.trash = nil -- remove Vivaldi's trash folder for Alfred
 	local success = hs.json.write(bookmarks, chromeBookmarksPath, false, true)
 	if not success then
-		Notify("🔖⚠️ Bookmarks not correctly synced.")
+		u.notify("🔖⚠️ Bookmarks not correctly synced.")
 		return
 	end
 
 	-- Local State (also required for Alfred to pick up the Bookmarks)
-	local content = ReadFile(sourceStatePath)
+	local content = u.readFile(sourceStatePath)
 	if not content then return end
-	WriteToFile(chromeStatePath, content)
+	u.writeToFile(chromeStatePath, content)
 
 	print("🔖 Bookmarks synced to Chrome Bookmarks")
 end):start()
@@ -68,7 +68,7 @@ SystemDlFolderWatcher = pw(systemDownloadFolder, function(files)
 	-- Stats Update file can directly be trashed
 	for _, filePath in pairs(files) do
 		if not filePath:find("Stats%.dmg$") then break end
-		RunWithDelays(1, function() os.rename(filePath, os.getenv("HOME") .. "/.Trash/Stats.dmg") end)
+		u.runWithDelays(1, function() os.rename(filePath, os.getenv("HOME") .. "/.Trash/Stats.dmg") end)
 	end
 
 	-- otherwise move to filehub
@@ -81,7 +81,7 @@ end):start()
 
 local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
 FileHubWatcher = pw(FileHub, function(paths, _)
-	if not ScreenIsUnlocked() then return end
+	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
 		if isInSubdirectory(filep, FileHub) then return end
 		local fileName = filep:gsub(".*/", "")
@@ -94,7 +94,7 @@ FileHubWatcher = pw(FileHub, function(paths, _)
 			-- cannot be opened via browser though and also does not create recursion,
 			-- so it is opened here
 			if extension == "dmg" then hs.open(filep) end
-			RunWithDelays(3, function() os.rename(filep, os.getenv("HOME") .. "/.Trash/" .. fileName) end)
+			u.runWithDelays(3, function() os.rename(filep, os.getenv("HOME") .. "/.Trash/" .. fileName) end)
 
 		-- zip: unzip
 		elseif extension == "zip" and fileName ~= "violentmonkey.zip" then
@@ -103,7 +103,7 @@ FileHubWatcher = pw(FileHub, function(paths, _)
 			hs.open(filep)
 
 		-- watch later .urls from the office
-		elseif extension == "url" and IsIMacAtHome() then
+		elseif extension == "url" and u.isAtHome() then
 			os.rename(filep, os.getenv("HOME") .. "/Downloaded/" .. fileName)
 			print("➡️ Watch Later URL moved to Video Downloads")
 
@@ -148,7 +148,7 @@ ObsiAlphaWatcher = pw(FileHub, function(files)
 		-- needs delay and `.crdownload` check, since the renaming is sometimes not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
 
-		RunWithDelays(0.5, function()
+		u.runWithDelays(0.5, function()
 			hs.execute([[cd "]] .. FileHub .. [[" || exit 1
 				test -f obsidian-*.*.*.asar.gz || exit 1
 				killall Obsidian
@@ -161,7 +161,7 @@ ObsiAlphaWatcher = pw(FileHub, function(files)
 				open -a "Obsidian"
 			]])
 			-- close the created tab
-			Applescript([[
+			u.applescript([[
 				tell application "Vivaldi"
 					set window_list to every window
 					repeat with the_window in window_list

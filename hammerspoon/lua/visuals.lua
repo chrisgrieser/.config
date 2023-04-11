@@ -9,7 +9,7 @@ RoundedCorners:start()
 ---to stop wallpaper shining through
 ---@param arg? string
 function HoleCover(arg)
-	if IsAtOffice() or IsProjector() then return end
+	if u.isAtOffice() or u.isProjector() then return end
 
 	if Cover1 then Cover1 = nil end
 	if Cover2 then Cover2 = nil end
@@ -18,7 +18,7 @@ function HoleCover(arg)
 
 	local bgColor
 	local screen = hs.screen.mainScreen():frame()
-	if IsDarkMode() then
+	if u.isDarkMode() then
 		bgColor = { red = 0.2, green = 0.2, blue = 0.2, alpha = 1 }
 	else
 		bgColor = { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }

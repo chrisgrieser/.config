@@ -5,18 +5,18 @@ function TwitterScrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
-	local twitter = App("Twitter")
+	local twitter = u.app("Twitter")
 	if not twitter or not twitter:mainWindow() then return end
 
-	Keystroke({ "cmd" }, "left", 1, twitter) -- go back
-	Keystroke({ "cmd" }, "1", 1, twitter) -- go to home tab
-	Keystroke({ "shift", "cmd" }, "R", 1, twitter) -- reload
+	u.keystroke({ "cmd" }, "left", 1, twitter) -- go back
+	u.keystroke({ "cmd" }, "1", 1, twitter) -- go to home tab
+	u.keystroke({ "shift", "cmd" }, "R", 1, twitter) -- reload
 
 	-- needs delays to wait for tweets loading
-	RunWithDelays({ 0.5, 1.5 }, function()
+	u.runWithDelays({ 0.5, 1.5 }, function()
 		if twitter:isFrontmost() then return end
-		Keystroke({ "cmd" }, "1", 1, twitter) -- scroll up
-		Keystroke({ "cmd" }, "up", 1, twitter) -- goto top
+		u.keystroke({ "cmd" }, "1", 1, twitter) -- scroll up
+		u.keystroke({ "cmd" }, "up", 1, twitter) -- goto top
 	end)
 end
 
@@ -24,9 +24,9 @@ function TwitterToTheSide()
 	-- in case of active split, prevent left window of covering the sketchybar
 	if LEFT_SPLIT and LEFT_SPLIT:application() then LEFT_SPLIT:application():hide() end
 
-	if IsFront("Alfred") then return end
+	if u.isFront("Alfred") then return end
 
-	local twitter = App("Twitter")
+	local twitter = u.app("Twitter")
 	if not twitter then return end
 
 	if twitter:isHidden() then twitter:unhide() end
@@ -41,7 +41,7 @@ end
 
 -- ensure that twitter does not get focus, "falling through" to the next window
 local function twitterFallThrough()
-	if not IsFront("Twitter") then return end
+	if not u.isFront("Twitter") then return end
 
 	local visibleWins = hs.window:orderedWindows()
 	local nextWin
@@ -68,7 +68,7 @@ local function twitterCleanupLink()
 end
 
 local function twitterCloseMediaWindow()
-	local twitter = App("Twitter")
+	local twitter = u.app("Twitter")
 	if not twitter then return end
 	local mediaWin = twitter:findWindow("Media")
 	if not mediaWin then return end
@@ -76,20 +76,20 @@ local function twitterCloseMediaWindow()
 	-- HACK using keystroke, since closing the window does not
 	-- seem to work reliably
 	mediaWin:raise()
-	Keystroke({ "cmd" }, "w", 1, twitter)
+	u.keystroke({ "cmd" }, "w", 1, twitter)
 
 	if mediaWin then mediaWin:close() end
 end
 --------------------------------------------------------------------------------
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
-TwitterWatcher = Aw.new(function(appName, event)
+TwitterWatcher = u.aw.new(function(appName, event)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
-	local twitter = App("Twitter")
+	local twitter = u.app("Twitter")
 
 	-- move twitter and scroll it up
-	if appName == "Twitter" and (event == Aw.launched or event == Aw.activated) then
-		AsSoonAsAppRuns("Twitter", function()
+	if appName == "Twitter" and (event == u.aw.launched or event == u.aw.activated) then
+		u.asSoonAsAppRuns("Twitter", function()
 			TwitterToTheSide()
 			TwitterScrollUp()
 			BringAllWinsToFront()
@@ -100,18 +100,18 @@ TwitterWatcher = Aw.new(function(appName, event)
 		end)
 
 	-- auto-close media windows and scroll up when deactivating
-	elseif appName == "Twitter" and event == Aw.deactivated then
-		if IsFront("CleanShot X") then return end
+	elseif appName == "Twitter" and event == u.aw.deactivated then
+		if u.isFront("CleanShot X") then return end
 		TwitterScrollUp()
 		twitterCleanupLink()
 		twitterCloseMediaWindow()
 
 	-- do not focus Twitter after an app is terminated
-	elseif event == Aw.terminated and appName ~= "Twitter" then
-		RunWithDelays({ 0.1, 0.3 }, twitterFallThrough)
+	elseif event == u.aw.terminated and appName ~= "Twitter" then
+		u.runWithDelays({ 0.1, 0.3 }, twitterFallThrough)
 
 	-- raise twitter when switching window to other app
-	elseif event == Aw.activated and appName ~= "Twitter" then
+	elseif event == u.aw.activated and appName ~= "Twitter" then
 		local frontWin = hs.window.focusedWindow()
 		if not frontWin or not twitter then return end
 

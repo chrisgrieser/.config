@@ -50,7 +50,7 @@ end, { desc = "󰘖 Close toplevel folds" })
 -- MICRO FOLD COMMANDS
 
 -- Cycle Folds (f1 = ^ Karabiner Remap)
-keymap("i", "<f1>", "^", { desc = "HACK for karabiner rebinding" })
+keymap({"c", "i"}, "<f1>", "^", { desc = "HACK for karabiner rebinding" })
 keymap("n", "<f1>", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
 
 -- goto next/prev closed fold

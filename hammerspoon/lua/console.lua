@@ -30,7 +30,7 @@ function CleanupConsole()
 	local consoleOutput = tostring(cons.getConsole())
 	hs.console.clearConsole()
 	local layoutLinesCount = 0
-	local isDark = IsDarkMode()
+	local isDark = u.isDarkMode()
 
 	local cleanLines = {}
 	for line in string.gmatch(consoleOutput, "[^\n]+") do -- split by new lines
@@ -87,8 +87,8 @@ end
 
 -- clean up console as soon as it is opened
 -- close console as soon as unfocused
-Wf_hsConsole = Wf.new("Hammerspoon")
-	:subscribe(Wf.windowCreated, function(newWin)
+Wf_hsConsole = u.wf.new("Hammerspoon")
+	:subscribe(u.wf.windowCreated, function(newWin)
 		if newWin:title() == "Hammerspoon Console" then
 			CleanupConsole()
 			local pos = hs.fnutils.copy(Centered)
@@ -96,14 +96,14 @@ Wf_hsConsole = Wf.new("Hammerspoon")
 			newWin:moveToUnit(pos)
 		end
 	end)
-	:subscribe(Wf.windowUnfocused, function(win)
-		if win:title() == "Hammerspoon Console" and not (IsFront("Alfred")) then hs.closeConsole() end
+	:subscribe(u.wf.windowUnfocused, function(win)
+		if win:title() == "Hammerspoon Console" and not (u.isFront("Alfred")) then hs.closeConsole() end
 	end)
 
 --------------------------------------------------------------------------------
 
 function SetConsoleColors()
-	if IsDarkMode() then
+	if u.isDarkMode() then
 		cons.darkMode(true)
 		cons.outputBackgroundColor(black)
 		cons.consolePrintColor(white)
@@ -121,14 +121,14 @@ SetConsoleColors()
 
 -- copy last command to clipboard
 -- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)
-UriScheme("copy-last-command", function()
+u.urischeme("copy-last-command", function()
 	local consoleHistory = cons.getHistory()
 	if not consoleHistory then return end
 	local lastcommand = consoleHistory[#consoleHistory]
-	lastcommand = Trim(lastcommand)
+	lastcommand = u.trim(lastcommand)
 	hs.pasteboard.setContents(lastcommand)
-	Notify("Copied: '" .. lastcommand .. "'")
+	u.notify("Copied: '" .. lastcommand .. "'")
 end)
 
 -- `hammerspoon://clear-console` for Karabiner Elements (⌘K)
-UriScheme("clear-console", cons.clearConsole)
+u.urischeme("clear-console", cons.clearConsole)

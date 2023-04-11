@@ -28,16 +28,16 @@ local now = os.time
 
 --Initialize on load: fills `IdleApps` with all running apps and the current time
 for app, _ in pairs(Thresholds) do
-	if AppRunning(app) then IdleApps[app] = now() end
+	if u.appRunning(app) then IdleApps[app] = now() end
 end
 
 ---log times when an app has been deactivated
-DeactivationWatcher = Aw.new(function(app, event)
+DeactivationWatcher = u.aw.new(function(app, event)
 	if not app or app == "" then return end -- safeguard for special apps
 
-	if event == Aw.deactivated then
+	if event == u.aw.deactivated then
 		IdleApps[app] = now()
-	elseif event == Aw.activated or event == Aw.terminated then
+	elseif event == u.aw.activated or event == u.aw.terminated then
 		IdleApps[app] = nil -- removes active or closed app from table
 	end
 end):start()
@@ -47,13 +47,13 @@ end):start()
 ---@param app string name of the app
 local function quitter(app)
 	if app == "Finder" then
-		for _, win in pairs(App("Finder"):allWindows()) do
+		for _, win in pairs(u.app("Finder"):allWindows()) do
 			win:close()	
 		end
 	elseif app == "wezterm-gui" then
-		App(app):kill9() -- needs kill9 to avoid confirmation
+		u.app(app):kill9() -- needs kill9 to avoid confirmation
 	else
-		App(app):kill()
+		u.app(app):kill()
 	end
 	print("⏹️ AutoQuitting: " .. app)
 	IdleApps[app] = nil

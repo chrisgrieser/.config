@@ -9,7 +9,7 @@ BottomHalf = { x = 0, y = 0.5, w = 1, h = 0.5 }
 PseudoMaximized = { x = 0.184, y = 0, w = 0.817, h = 1 }
 Centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 ToTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
-if IsAtMother() then ToTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
+if u.isAtMother() then ToTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
 
 RejectedFinderWindows = {
 	"^Quick Look$",
@@ -29,7 +29,7 @@ RejectedFinderWindows = {
 
 ---@param obsiWin hs.window
 local function toggleObsidianSidebar(obsiWin)
-	RunWithDelays({ 0.05, 0.2 }, function()
+	u.runWithDelays({ 0.05, 0.2 }, function()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
 		if numberOfObsiWindows > 1 then return end -- prevent popout window resizing to affect sidebars
 
@@ -40,11 +40,11 @@ local function toggleObsidianSidebar(obsiWin)
 		-- pseudo-maximized -> show right sidebar
 		-- max -> show both sidebars
 		local modeRight = (obsi_width / screen_width > 0.6) and "expand" or "collapse"
-		OpenLinkInBackground(
+		u.openLinkInBg(
 			"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29"
 		)
 		local modeLeft = (obsi_width / screen_width > 0.99) and "expand" or "collapse"
-		OpenLinkInBackground(
+		u.openLinkInBg(
 			"obsidian://advanced-uri?eval=this.app.workspace.leftSplit." .. modeLeft .. "%28%29"
 		)
 	end)
@@ -59,13 +59,13 @@ local function obsidianThemeDevHelper(win, pos)
 		or not win:application()
 		or not (win:application():name():lower() == "neovide")
 		or not (pos == PseudoMaximized or pos == Maximized)
-		or not AppRunning("Obsidian")
+		or not u.appRunning("Obsidian")
 	then
 		return
 	end
-	RunWithDelays(0.15, function()
-		App("Obsidian"):unhide()
-		App("Obsidian"):mainWindow():raise()
+	u.runWithDelays(0.15, function()
+		u.app("Obsidian"):unhide()
+		u.app("Obsidian"):mainWindow():raise()
 	end)
 end
 
@@ -90,7 +90,7 @@ function CheckSize(win, size)
 		"Alfred",
 		"Hammerspoon",
 	}
-	if not win or TableContains(invalidWinsByTitle, win:title()) then return nil end
+	if not win or u.tbl_contains(invalidWinsByTitle, win:title()) then return nil end
 
 	local maxf = win:screen():frame()
 	local winf = win:frame()
@@ -118,16 +118,16 @@ function MoveResize(win, pos)
 	local appsToIgnore =
 		{ "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon", "CleanShot X" }
 	local appName = win:application():name()
-	if TableContains(appsToIgnore, appName) then
-		Notify("⚠️ " .. appName .. " cannot be resized properly.")
+	if u.tbl_contains(appsToIgnore, appName) then
+		u.notify("⚠️ " .. appName .. " cannot be resized properly.")
 		return
 	end
 
 	-- Twitter Extras
 	if pos == PseudoMaximized or pos == Centered then
 		TwitterToTheSide()
-	elseif pos == Maximized and AppRunning("Twitter") then
-		if App("Twitter") then App("Twitter"):hide() end
+	elseif pos == Maximized and u.appRunning("Twitter") then
+		if u.app("Twitter") then u.app("Twitter"):hide() end
 	end
 
 	-- resize
@@ -162,7 +162,7 @@ function AutoTile(winSrc)
 	if type(winSrc) == "string" then
 		-- cannot use windowfilter, since it's empty when not called from a
 		-- window filter subscription
-		for _, finderWin in pairs(App("Finder"):allWindows()) do
+		for _, finderWin in pairs(u.app("Finder"):allWindows()) do
 			local rejected = false
 			for _, bannedTitle in pairs(RejectedFinderWindows) do
 				if finderWin:title():find(bannedTitle) then rejected = true end
@@ -175,16 +175,16 @@ function AutoTile(winSrc)
 
 	if #wins > 1 then BringAllWinsToFront() end
 
-	if #wins == 0 and IsFront("Finder") and not (IsProjector()) then
+	if #wins == 0 and u.isFront("Finder") and not (u.isProjector()) then
 		-- hide finder when no windows
-		RunWithDelays(0.1, function()
-			if #(App("Finder"):allWindows()) == 0 then App("Finder"):hide() end
+		u.runWithDelays(0.1, function()
+			if #(u.app("Finder"):allWindows()) == 0 then u.app("Finder"):hide() end
 		end)
 	elseif #wins == 1 then
 		local pos
-		if IsProjector() then
+		if u.isProjector() then
 			pos = Maximized
-		elseif IsFront("Finder") then
+		elseif u.isFront("Finder") then
 			pos = Centered
 		else
 			pos = PseudoMaximized
@@ -221,7 +221,7 @@ end
 --------------------------------------------------------------------------------
 
 -- Open Apps always at Mouse Screen
-Wf_appsOnMouseScreen = Wf.new({
+Wf_appsOnMouseScreen = u.wf.new({
 	"Vivaldi",
 	"Mimestream",
 	"BetterTouchTool",
@@ -241,14 +241,14 @@ Wf_appsOnMouseScreen = Wf.new({
 	"Netflix",
 	"CrunchyRoll",
 	"Finder",
-}):subscribe(Wf.windowCreated, function(newWin)
+}):subscribe(u.wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	if not mouseScreen then return end
 	local screenOfWindow = newWin:screen()
-	if not (IsProjector()) or mouseScreen:name() == screenOfWindow:name() then return end
+	if not (u.isProjector()) or mouseScreen:name() == screenOfWindow:name() then return end
 
 	local appn = newWin:application():name()
-	RunWithDelays({0, 0.2, 0.5, 0.8, 1.1 }, function()
+	u.runWithDelays({0, 0.2, 0.5, 0.8, 1.1 }, function()
 		if mouseScreen:name() ~= screenOfWindow:name() then newWin:moveToScreen(mouseScreen) end
 
 		if appn == "Finder" or appn == "Script Editor" then
@@ -263,13 +263,13 @@ end)
 -- HOTKEY ACTIONS
 
 local function controlSpaceAction()
-	if IsFront("SideNotes") then
+	if u.isFront("SideNotes") then
 		ToggleSideNotesSize()
 		return
 	end
 	local currentWin = hs.window.focusedWindow()
 	local pos
-	if IsFront { "Finder", "Script Editor" } then
+	if u.isFront { "Finder", "Script Editor" } then
 		pos = Centered
 	elseif not CheckSize(currentWin, PseudoMaximized) then
 		pos = PseudoMaximized
@@ -285,7 +285,7 @@ local function moveCurWinToOtherDisplay()
 	local targetScreen = win:screen():next()
 	win:moveToScreen(targetScreen, true)
 
-	RunWithDelays({ 0.1, 0.4 }, function()
+	u.runWithDelays({ 0.1, 0.4 }, function()
 		-- workaround for ensuring proper resizing
 		win = hs.window.focusedWindow()
 		if not win then return end
@@ -296,9 +296,9 @@ end
 local function homeAction()
 	if #(hs.screen.allScreens()) > 1 then
 		moveCurWinToOtherDisplay()
-	elseif AppRunning("zoom.us") then
+	elseif u.appRunning("zoom.us") then
 		hs.alert("🔈/🔇") -- toggle mute
-		Keystroke({ "shift", "command" }, "A", 1, App("zoom.us"))
+		u.keystroke({ "shift", "command" }, "A", 1, u.app("zoom.us"))
 	else
 		TwitterScrollUp()
 	end
@@ -307,9 +307,9 @@ end
 local function endAction()
 	if #(hs.screen.allScreens()) > 1 then
 		moveCurWinToOtherDisplay()
-	elseif AppRunning("zoom.us") then
+	elseif u.appRunning("zoom.us") then
 		hs.alert("📹") -- toggle video
-		Keystroke({ "shift", "command" }, "V", 1, App("zoom.us"))
+		u.keystroke({ "shift", "command" }, "V", 1, u.app("zoom.us"))
 	else
 		hs.alert("<Nop>")
 	end
@@ -318,10 +318,10 @@ end
 --------------------------------------------------------------------------------
 -- HOTKEYS
 
-Hotkey({}, "home", homeAction)
-Hotkey({}, "end", endAction)
-Hotkey(Hyper, "right", function() MoveResize(hs.window.focusedWindow(), RightHalf) end)
-Hotkey(Hyper, "left", function() MoveResize(hs.window.focusedWindow(), LeftHalf) end)
-Hotkey(Hyper, "down", function() MoveResize(hs.window.focusedWindow(), BottomHalf) end)
-Hotkey(Hyper, "up", function() MoveResize(hs.window.focusedWindow(), TopHalf) end)
-Hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
+u.hotkey({}, "home", homeAction)
+u.hotkey({}, "end", endAction)
+u.hotkey(u.hyper, "right", function() MoveResize(hs.window.focusedWindow(), RightHalf) end)
+u.hotkey(u.hyper, "left", function() MoveResize(hs.window.focusedWindow(), LeftHalf) end)
+u.hotkey(u.hyper, "down", function() MoveResize(hs.window.focusedWindow(), BottomHalf) end)
+u.hotkey(u.hyper, "up", function() MoveResize(hs.window.focusedWindow(), TopHalf) end)
+u.hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner

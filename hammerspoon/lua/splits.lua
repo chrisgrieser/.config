@@ -7,16 +7,16 @@ require("lua.window-utils")
 ---filters, but comes at the cost of not being able to handle it well if one of
 ---the two apps have more than one window
 local function pairedActivation()
-	PairedActivationWatcher = Aw.new(function(appName, eventType)
+	PairedActivationWatcher = u.aw.new(function(appName, eventType)
 		local rightApp = RIGHT_SPLIT:application()
 		local leftApp = LEFT_SPLIT:application()
 
 		if not leftApp or not rightApp then
-			Notify("2️⃣ Split stopped as app quit.")
+			u.notify("2️⃣ Split stopped as app quit.")
 			VsplitSetLayout("unsplit")
-		elseif eventType == Aw.activated and appName == rightApp:name() then
+		elseif eventType == u.aw.activated and appName == rightApp:name() then
 			LEFT_SPLIT:raise()
-		elseif eventType == Aw.activated and appName == leftApp:name() then
+		elseif eventType == u.aw.activated and appName == leftApp:name() then
 			RIGHT_SPLIT:raise()
 		end
 	end):start()
@@ -84,7 +84,7 @@ local function runningApps()
 			"Espanso",
 			"Notification Centre",
 		}
-		if not TableContains(isExcludedApp, appName) and app:mainWindow() then
+		if not u.tbl_contains(isExcludedApp, appName) and app:mainWindow() then
 			table.insert(appsArr, { text = appName })
 		end
 	end
@@ -113,10 +113,10 @@ end
 --------------------------------------------------------------------------------
 -- HOTKEYS
 
-Hotkey(Hyper, "V", function()
+u.hotkey(u.hyper, "V", function()
 	local splitActive = LEFT_SPLIT and RIGHT_SPLIT
 	if splitActive then
-		Notify("2️⃣ Split stopped manually.")
+		u.notify("2️⃣ Split stopped manually.")
 		VsplitSetLayout("unsplit")
 	else
 		selectSecondWin()

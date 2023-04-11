@@ -24,7 +24,7 @@ function PeripheryBatteryCheck(msgWhere)
 			))
 			print("⚠️", msg)
 		else
-			Notify("⚠️", msg)
+			u.notify("⚠️", msg)
 		end
 	end
 end
@@ -38,11 +38,11 @@ OpenSwimWatcher = hs.usb.watcher
 	.new(function(device)
 		if not (device.eventType == "added" and device.productName == "LC8234xx_17S EVK") then return end
 
-		Notify("⏳ Starting Podcast Sync…")
+		u.notify("⏳ Starting Podcast Sync…")
 		hs.task
 			.new(podcastSyncScript, function(exitCode, _, stdErr)
 				local msg = exitCode == 0 and "✅ Podcast Sync" or "⚠️️ Podcast Sync" .. stdErr
-				Notify(msg)
+				u.notify(msg)
 			end)
 			:start()
 	end)
@@ -52,23 +52,23 @@ OpenSwimWatcher = hs.usb.watcher
 ExternalHarddriveWatcher = hs.usb.watcher
 	.new(function(device)
 		if not (device.eventType == "added") then return end
-		Notify("Mounted: " .. device.productName)
+		u.notify("Mounted: " .. device.productName)
 
 		local harddriveNames = {
 			"ZY603 USB3.0 Device", -- Externe A
 			"External Disk 3.0", -- Externe B
 			"Elements 2621", -- Externe C
 		}
-		local isBackupDrive = TableContains(harddriveNames, device.productName)
+		local isBackupDrive = u.tbl_contains(harddriveNames, device.productName)
 
 		if isBackupDrive then
-			OpenApp("WezTerm")
+			u.app("WerTerm"):activate()
 		else
-			RunWithDelays(1, function()
+			u.runWithDelays(1, function()
 				local stdout, success =
 					hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
 				if not success or not stdout then return end
-				hs.open(Trim(stdout))
+				hs.open(u.trim(stdout))
 			end)
 		end
 	end)
@@ -82,11 +82,11 @@ WifiWatcher = hs.wifi.watcher
 	.new(function(_, event)
 		local ssid = hs.wifi.currentNetwork() or "none"
 		local msg = event .. ": " .. ssid
-		Notify("📶 " .. msg)
+		u.notify("📶 " .. msg)
 		-- at the office, log the network
-		if IsAtOffice() then
+		if u.isAtOffice() then
 			local timestamp = tostring(os.date()):sub(5, -6)
-			AppendToFile("./HBS-WiFi.log", timestamp .. " – " .. msg)
+			u.appendToFile("./HBS-WiFi.log", timestamp .. " – " .. msg)
 		end
 	end)
 	:watchingFor({ "SSIDChange" })
