@@ -145,6 +145,7 @@ local function themeModifications()
 		updateHighlight("Error", "gui=NONE") -- no bold
 		updateHighlight("@error", "gui=NONE")
 		updateHighlight("NonText", "gui=NONE")
+		updateHighlight("lualine_a_normal", "guibg=#b3880a")
 	end
 end
 
