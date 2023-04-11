@@ -12,7 +12,7 @@ keymap("n", "-", "zn/")
 -- while searching: pause folds -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
 	local searchKeys = { "n", "N", "*", "#", "/", "?" }
-	local searchConfirmed = (fn.keytrans(char):upper() == "<CR>" and fn.mode() == "c")
+	local searchConfirmed = (fn.keytrans(char):upper() == "<CR>" and fn.getcmdtype():find("[/?]"))
 	if not (searchConfirmed or fn.mode() == "n") then return end
 	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
 	if vim.opt.foldenable:get() == searchKeyUsed then vim.opt.foldenable = not searchKeyUsed end
@@ -98,7 +98,10 @@ keymap("n", "h", function()
 	local isFirstNonBlank = vim.fn.col(".") - 1 <= vim.fn.indent(".") / vim.bo.tabstop
 	local notOnFold = fn.foldclosed(".") == -1
 	if isFirstNonBlank and shouldCloseFold and notOnFold then
-		pcall(u.normal, "zc")
+		local wasFolded = pcall(u.normal, "zc")
+		-- fallback: the line didn't have a closable fold, then use h to go the
+		-- intention space
+		if not wasFolded then u.normal("h") end
 	else
 		u.normal("h")
 	end
