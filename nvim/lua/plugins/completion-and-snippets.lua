@@ -307,8 +307,6 @@ local function cmdlineCompletionConfig()
 	})
 end
 
-
--- deviceModel2022
 --------------------------------------------------------------------------------
 
 return {
