@@ -134,7 +134,7 @@ UnlockWatcher = c.new(function(event)
 
 	UnlockTimer = hs.timer.waitUntil(ScreenIsUnlocked, function()
 		unlockInProgress = true -- block multiple concurrent runs
-		reminderToSidenotes()
+		ReminderToSidenotes()
 		RunWithDelays(0.5, function() -- delay for recognizing screens
 			setHigherBrightnessDuringDay()
 			selectLayout()
