@@ -1,7 +1,6 @@
 local u = require("lua.utils")
-require("lua.window-utils")
-require("lua.dark-mode")
-require("lua.layouts")
+local wu = require("lua.window-utils")
+local periphery = require("lua.hardware-periphery")
 local caff = hs.caffeinate.watcher
 
 ---@return string three-char string representing the day of the week (English)
@@ -45,7 +44,7 @@ BiweeklyTimer = hs.timer
 	.doAt("02:00", "01d", function()
 		if u.isAtOffice() or (getWeekday() ~= "Wed" and getWeekday() ~= "Sat") then return end
 
-		PeripheryBatteryCheck("SideNotes")
+		periphery.batteryCheck("SideNotes")
 		hs.loadSpoon("EmmyLua")
 
 		-- backups

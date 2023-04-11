@@ -1,5 +1,5 @@
 local u = require("lua.utils")
-require("lua.window-utils")
+local wu = require("lua.window-utils")
 local cons = hs.console
 --------------------------------------------------------------------------------
 
@@ -102,23 +102,6 @@ Wf_hsConsole = u.wf.new("Hammerspoon")
 
 --------------------------------------------------------------------------------
 
-function SetConsoleColors()
-	if u.isDarkMode() then
-		cons.darkMode(true)
-		cons.outputBackgroundColor(black)
-		cons.consolePrintColor(white)
-		cons.consoleCommandColor(lightGrey)
-	else
-		cons.darkMode(false)
-		cons.outputBackgroundColor(white)
-		cons.consolePrintColor(black)
-		cons.consoleCommandColor(darkGrey)
-	end
-end
-
--- initialize
-SetConsoleColors()
-
 -- copy last command to clipboard
 -- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)
 u.urischeme("copy-last-command", function()
@@ -132,3 +115,24 @@ end)
 
 -- `hammerspoon://clear-console` for Karabiner Elements (⌘K)
 u.urischeme("clear-console", cons.clearConsole)
+
+--------------------------------------------------------------------------------
+local M = {}
+
+function M.setConsoleColors()
+	if u.isDarkMode() then
+		cons.darkMode(true)
+		cons.outputBackgroundColor(black)
+		cons.consolePrintColor(white)
+		cons.consoleCommandColor(lightGrey)
+	else
+		cons.darkMode(false)
+		cons.outputBackgroundColor(white)
+		cons.consolePrintColor(black)
+		cons.consoleCommandColor(darkGrey)
+	end
+end
+M.setConsoleColors() -- initialize
+
+--------------------------------------------------------------------------------
+return M
