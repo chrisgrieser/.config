@@ -118,6 +118,10 @@ local keybindings = {
 
 	-- hint mode https://wezfurlong.org/wezterm/quickselect.html
 	{ key = "f", mods = "CMD|SHIFT", action = act.QuickSelect },
+
+	-- works with `send_composed_key_when_right_alt_is_pressed = true`
+	-- but expects another character, so this mapping fixes it
+	{ key = "n", mods = "META", action = act.SendString("~") },
 }
 
 --------------------------------------------------------------------------------
@@ -200,7 +204,6 @@ local config = {
 	-- fix @{}~ etc. on German keyboard
 	send_composed_key_when_left_alt_is_pressed = true,
 	send_composed_key_when_right_alt_is_pressed = true,
-	{ key = "n", mods = "META", action = act.SendString("~") },
 }
 
 --------------------------------------------------------------------------------
