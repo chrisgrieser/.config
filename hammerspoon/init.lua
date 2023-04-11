@@ -1,3 +1,6 @@
+local u = require("lua.utils")
+--------------------------------------------------------------------------------
+
 -- SETTINGS
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
@@ -27,7 +30,6 @@ end
 -- meta
 require("lua.console")
 require("lua.reload-and-systemstart")
-require("lua.utils")
 
 -- appearance
 require("lua.visuals")

@@ -1,4 +1,4 @@
-require("lua.utils")
+local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
 function TwitterScrollUp()
@@ -36,7 +36,7 @@ function TwitterToTheSide()
 	if not win then return end
 
 	win:raise()
-	win:setFrame(ToTheSide)
+	win:setFrame(wu.toTheSide)
 end
 
 -- ensure that twitter does not get focus, "falling through" to the next window
@@ -115,9 +115,9 @@ TwitterWatcher = u.aw.new(function(appName, event)
 		local frontWin = hs.window.focusedWindow()
 		if not frontWin or not twitter then return end
 
-		if CheckSize(frontWin, PseudoMaximized) or CheckSize(frontWin, Centered) then
+MoveResize(appObject:mainWindow(), wu.pseudoMax)
 			TwitterToTheSide()
-		elseif CheckSize(frontWin, Maximized) then
+		elseif CheckSize(frontWin, wu.Maximized) then
 			twitter:hide()
 		end
 	end

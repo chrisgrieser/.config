@@ -1,4 +1,4 @@
-require("lua.utils")
+local u = require("lua.utils")
 
 -- INFO using hs.execute("osascript -l JavaScript") instead of
 -- hs.osascript.javascriptFromFile, fails on first run when Hammerspoon does not

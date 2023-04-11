@@ -1,4 +1,4 @@
-require("lua.utils")
+local u = require("lua.utils")
 require("lua.window-utils")
 require("lua.dark-mode")
 require("lua.layouts")
@@ -21,7 +21,7 @@ ProjectorScreensaverWatcher = caff
 			or event == caff.screensDidSleep
 		then
 			u.runWithDelays(1, function()
-				if u.isProjector() then IMacDisplay:setBrightness(0) end
+				if u.isProjector() then wu.iMacDisplay:setBrightness(0) end
 			end)
 		end
 	end)

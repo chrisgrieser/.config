@@ -1,4 +1,4 @@
-require("lua.utils")
+local u = require("lua.utils")
 
 -- `hammerspoon://hs-reload` for reloading via Build System
 local reloadIndicator = "/tmp/hs-is-reloading"

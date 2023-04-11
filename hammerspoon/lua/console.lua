@@ -1,4 +1,4 @@
-require("lua.utils")
+local u = require("lua.utils")
 require("lua.window-utils")
 local cons = hs.console
 --------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ Wf_hsConsole = u.wf.new("Hammerspoon")
 	:subscribe(u.wf.windowCreated, function(newWin)
 		if newWin:title() == "Hammerspoon Console" then
 			CleanupConsole()
-			local pos = hs.fnutils.copy(Centered)
+			local pos = hs.fnutils.copy(wu.centered)
 			pos.h = 0.95 -- leave some space at the bottom for tab completions
 			newWin:moveToUnit(pos)
 		end

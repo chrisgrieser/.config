@@ -1,4 +1,4 @@
-require("lua.utils")
+local u = require("lua.utils")
 require("lua.window-utils")
 --------------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ end):start()
 -- PIXELMATOR: open maximized
 PixelmatorWatcher = u.aw.new(function(appName, eventType, appObj)
 	if appName == "Pixelmator" and eventType == u.aw.launched then
-		u.asSoonAsAppRuns(appObj, function() MoveResize(appObj, Maximized) end)
+		u.asSoonAsAppRuns(appObj, function() MoveResize(appObj, wu.Maximized) end)
 	end
 end):start()
 
@@ -120,7 +120,7 @@ end):start()
 u.urischeme("enlarge-neovide-window", function()
 	u.asSoonAsAppRuns("neovide", function()
 		local neovideWin = u.app("neovide"):mainWindow()
-		local size = u.isProjector() and Maximized or PseudoMaximized
+		local size = u.isProjector() and wu.Maximized or wu.pseudoMax
 		MoveResize(neovideWin, size)
 	end)
 end)
@@ -130,7 +130,7 @@ end)
 -- FINDER
 Wf_finder = u.wf.new("Finder")
 	:setOverrideFilter({
-		rejectTitles = RejectedFinderWindows,
+		rejectTitles = wu.ejectedFinderWins,
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
@@ -160,7 +160,7 @@ Wf_quicklook = u.wf
 		then
 			return
 		end
-		u.runWithDelays(0.4, function() MoveResize(newWin, Centered) end)
+		u.runWithDelays(0.4, function() MoveResize(newWin, wu.centered) end)
 	end)
 
 --------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ HighlightsAppWatcher = u.aw.new(function(appName, eventType, appObject)
 	appObject:selectMenuItem { "Tools", "Color", "Yellow" }
 	appObject:selectMenuItem { "View", "Hide Toolbar" }
 
-	MoveResize(appObject:mainWindow(), PseudoMaximized)
+	MoveResize(appObject:mainWindow(), wu.pseudoMax)
 end):start()
 
 --------------------------------------------------------------------------------
@@ -220,11 +220,11 @@ Wf_script_editor = u.wf
 		-- auto-paste and lint content; resize window
 		elseif newWin:title() == "Untitled" then
 			u.keystroke({ "cmd" }, "v")
-			MoveResize(newWin, Centered)
+			MoveResize(newWin, wu.centered)
 			u.runWithDelays(0.2, function() u.keystroke({ "cmd" }, "k") end)
 		-- resize window
 		elseif newWin:title():find("%.sdef$") then
-			MoveResize(newWin, Centered)
+			MoveResize(newWin, wu.centered)
 		end
 	end)
 	-- fix line breaks for copypasting into other apps

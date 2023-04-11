@@ -1,3 +1,6 @@
+local u = require("lua.utils")
+--------------------------------------------------------------------------------
+
 -- HELPERS
 
 ---@param targetMode string
@@ -27,7 +30,7 @@ local function setHigherBrightnessDuringDay()
 	else
 		brightness = 0.6
 	end
-	IMacDisplay:setBrightness(brightness)
+	wu.iMacDisplay:setBrightness(brightness)
 end
 
 local function closeAllFinderWins()
@@ -66,7 +69,7 @@ local function workLayout()
 	u.openApps(appsToOpen)
 	u.app("Mimestream"):activate() -- activation instead of opening to put it into the foreground
 	for _, app in pairs(appsToOpen) do
-		u.asSoonAsAppRuns(app, function() MoveResize(u.app(app):mainWindow(), PseudoMaximized) end)
+u.asSoonAsAppRuns(app, function()
 	end
 	MyTimer = hs.timer.waitUntil(
 		function() return u.appRunning(appsToOpen) end,
@@ -81,7 +84,7 @@ local function movieLayout()
 	print("🔲 MovieLayout: loading")
 	local targetMode = u.isAtMother() and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
-	IMacDisplay:setBrightness(0)
+	wu.iMacDisplay:setBrightness(0)
 	SetDarkmode(true)
 	HoleCover("remove")
 
