@@ -20,7 +20,6 @@ local source_icons = {
 	nvim_lsp = "󰒕",
 	codeium = "",
 	luasnip = "󰞘",
-	luasnip_choice = " ",
 	emoji = "󰇵",
 	nerdfont = "󰇳",
 	cmdline = "󰘳",
@@ -105,7 +104,7 @@ local function cmpconfig()
 		},
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
-			["<M-Esc>"] = cmp.mapping.complete(), -- consistent with macOS autocomplete
+			["<D-Esc>"] = cmp.mapping.complete(), -- like with macOS autocomplete
 			["<C-e>"] = cmp.mapping.abort(),
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
 			["<PageDown>"] = cmp.mapping.scroll_docs(4),
@@ -171,7 +170,7 @@ local function filetypeCompletionConfig()
 	cmp.setup.filetype("lua", {
 		enabled = function() -- disable leading "-"
 			local lineContent = vim.fn.getline(".")
-			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$")) 
+			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$"))
 		end,
 		sources = cmp.config.sources {
 			s.snippets,
@@ -208,7 +207,6 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.filetype("markdown", {
 		sources = cmp.config.sources {
-			s.otter, -- embedded filetypes
 			s.snippets,
 			s.path, -- e.g. image paths
 			s.lsp,
@@ -218,6 +216,7 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.filetype("yaml", {
 		sources = cmp.config.sources {
+			s.choice,
 			s.snippets,
 			s.treesitter, -- treesitter works good on yaml
 			s.lsp,
@@ -229,11 +228,12 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.filetype("sh", {
 		-- disable `\[`
-		enabled = function() 
+		enabled = function()
 			local lineContent = vim.fn.getline(".")
 			return not (lineContent:match("\\$"))
 		end,
 		sources = cmp.config.sources {
+			s.choice,
 			s.snippets,
 			s.zsh, -- completion from zsh itself
 			s.lsp,
@@ -307,6 +307,8 @@ local function cmdlineCompletionConfig()
 	})
 end
 
+
+-- deviceModel2022
 --------------------------------------------------------------------------------
 
 return {
@@ -330,7 +332,6 @@ return {
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
-			"jmbuhr/otter.nvim", -- completion for embedded filetypes
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
 	},
