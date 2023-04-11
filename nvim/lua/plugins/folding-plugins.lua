@@ -43,12 +43,14 @@ return {
 		dependencies = "kevinhwang91/promise-async",
 		event = "BufReadPost",
 		opts = {
-			provider_selector = function()
+			provider_selector = function(_, ft, _)
+				-- markdown LSP has no folding capabilities, but treesitter does
+				if ft == "markdown" then return { "treesitter", "indent" } end
 				return { "lsp", "indent" }
 			end,
 			-- open opening the buffer, close these fold kinds
 			-- use `:UfoInspect` to get available fold kinds from the LSP
-			close_fold_kinds = { "comment", "imports" }, 
+			close_fold_kinds = { "comment", "imports" },
 			open_fold_hl_timeout = 500,
 			fold_virt_text_handler = foldTextFormatter,
 		},
