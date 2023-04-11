@@ -97,25 +97,23 @@ function gli() {
 
 # Pull Request
 # - add all & commit with $1 (or prompted)
-# - creates fork if no writing access
-# - create PR and autofills is with commit msg
+# - creates fork (if no writing access)
+# - create PR and autofills is with commit msg (merges into *current branch*, not the default branch)
 # - opens PR in the web
 # - offers to delete local repo
 function pr() {
 	if ! command -v gh &>/dev/null; then echo "gh not installed." && return 1; fi
 
+	# settings
 	echo -n "Delete the local repo afterwards? (y/n) "
-	read -r -k 1 delete_after
-	echo
-
+	read -r -k 1 delete_after && echo
 	echo -n "web interface or terminal? (w/t) "
-	read -r -k 1 mode
-	echo
+	read -r -k 1 mode && echo
 
+	# get and validate commit msg
 	if [[ -z "$*" ]]; then
 		echo -n "Commit Message:"
-		read -r msg
-		echo
+		read -r msg && echo
 	else
 		msg="$*"
 	fi
@@ -126,19 +124,23 @@ function pr() {
 		print -z "pr \"$COMMIT_MSG\"" # put back into buffer
 		return 1
 	fi
-	git add . && git commit -m "$msg"
 
+	git add . && git commit -m "$msg"
+	current_branch=$(git branch --show-current)
+
+	# create PR *into current branch* (not the default branch)
 	if [[ "$mode" == "w" ]]; then
-		gh pr create --fill --web
+		gh pr create --web --fill --base="$current_branch" 
 	else
-		gh pr create --fill
+		gh pr create --fill --base="$current_branch"
 	fi
 
 	if [[ "$delete_after" == "y" ]]; then
 		repopath=$(pwd)
 		cd ..
-		rm -r "$repopath"
+		rm -rf "$repopath"
 	fi
+	# if created in terminal, open the webview afterwards
 	if [[ "$mode" == "t" ]]; then
 		origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
 		gh repo set-default "$origin"
@@ -163,18 +165,16 @@ function gb() {
 				--header-first --header="↵ : Checkout Branch"
 	)
 	[[ -z "$selected" ]] && return 0
+	selected=$(echo "$selected" | tr -d "* ")
 
 	# how to checkout remote branches: https://stackoverflow.com/questions/67699/how-do-i-clone-all-remote-branches
+
 	if [[ $selected == remotes/* ]]; then
 		remote=$(echo "$selected" | cut -d/ -f2-)
 		git checkout "$remote"
-		echo eeeee
 		selected=$(echo "$selected" | cut -d/ -f3)
-		git checkout "$selected"
-	else
-		selected=$(echo "$selected" | tr -d "* ")
-		git checkout "$selected"
 	fi
+	git checkout "$selected"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
