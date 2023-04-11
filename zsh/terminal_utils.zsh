@@ -32,7 +32,9 @@ function o() {
 	fi
 }
 
-# show files, git status, and brief git log in the current directory
+# show files
+# + git status (if in git dir)
+# + brief git log (if at git root)
 function inspect() {
 	if ! command -v exa &>/dev/null; then echo "exa not installed." && return 1; fi
 	if ! command -v git &>/dev/null; then echo "git not installed." && return 1; fi
@@ -43,9 +45,10 @@ function inspect() {
 			git status --short # run again for color
 			separator
 		fi
-		git log -n 5 --all --color --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | sed -e 's/origin/o/g'
-		echo
-		separator
+		if [[ $(git rev-parse --show-toplevel) == $(pwd) ]]; then
+			git log -n 5 --all --color --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%ch) %C(bold blue)<%an>%C(reset)' | sed -e 's/origin/o/g'
+			separator
+		fi
 	fi
 	exa --long --all --grid \
 		--sort=modified --group-directories-first \

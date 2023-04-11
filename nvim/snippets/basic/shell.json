@@ -93,6 +93,10 @@
 		"prefix": "check if in git repo",
 		"body": "if ! git rev-parse --is-inside-work-tree &>/dev/null ; then echo \"$file is not ins a git repository.\" && exit 1 ; fi"
 	},
+	"goto git root": {
+		"prefix": "goto git root",
+		"body": "cd \"$(git rev-parse --show-toplevel)\""
+	},
 	"awk (get field)": {
 		"prefix": "awk (field)",
 		"body": "awk '{ print $${1:1} }'",
