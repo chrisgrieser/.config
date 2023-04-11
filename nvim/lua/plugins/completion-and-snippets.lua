@@ -13,6 +13,21 @@ local s = {
 	cmdline = { name = "cmdline" },
 }
 
+local source_icons = {
+	buffer = "󰽙",
+	treesitter = "",
+	zsh = "",
+	nvim_lsp = "󰒕",
+	codeium = "",
+	luasnip = "󰞘",
+	luasnip_choice = " ",
+	emoji = "󰇵",
+	nerdfont = "󰇳",
+	cmdline = "󰘳",
+	cmdline_history = "󰋚",
+	path = "",
+}
+
 local defaultSources = {
 	s.snippets,
 	s.codeium,
@@ -21,8 +36,6 @@ local defaultSources = {
 	s.treesitter,
 	s.buffer,
 }
-
---------------------------------------------------------------------------------
 
 local kind_icons = {
 	Text = "",
@@ -52,20 +65,6 @@ local kind_icons = {
 	TypeParameter = "󰅲",
 }
 
-local source_icons = {
-	buffer = "󰽙",
-	treesitter = "",
-	zsh = "",
-	nvim_lsp = "󰒕",
-	codeium = "",
-	luasnip = "󰞘",
-	emoji = "󰇵",
-	nerdfont = "󰇳",
-	cmdline = "󰘳",
-	cmdline_history = "󰋚",
-	path = "",
-}
-
 --------------------------------------------------------------------------------
 
 local function cmpconfig()
@@ -77,6 +76,9 @@ local function cmpconfig()
 		snippet = {
 			-- REQUIRED a snippet engine must be specified and installed
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
+		},
+		experimental = {
+			ghost_text = { hl_group = "NonText" },
 		},
 		window = {
 			completion = {
@@ -168,7 +170,7 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.filetype("lua", {
 		enabled = function() -- disable leading "-"
-			local lineContent = vim.fn.getline(".") 
+			local lineContent = vim.fn.getline(".")
 			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$")) 
 		end,
 		sources = cmp.config.sources {
@@ -194,7 +196,6 @@ local function filetypeCompletionConfig()
 		},
 	})
 
-	-- css
 	cmp.setup.filetype("css", {
 		sources = cmp.config.sources {
 			s.snippets,
@@ -205,9 +206,9 @@ local function filetypeCompletionConfig()
 		},
 	})
 
-	-- markdown
 	cmp.setup.filetype("markdown", {
 		sources = cmp.config.sources {
+			s.otter, -- embedded filetypes
 			s.snippets,
 			s.path, -- e.g. image paths
 			s.lsp,
@@ -226,11 +227,11 @@ local function filetypeCompletionConfig()
 		},
 	})
 
-	-- ZSH / Shell
 	cmp.setup.filetype("sh", {
-		enabled = function() -- disable `\[`
-			local lineContent = vim.fn.getline(".") 
-			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$")) 
+		-- disable `\[`
+		enabled = function() 
+			local lineContent = vim.fn.getline(".")
+			return not (lineContent:match("\\$"))
 		end,
 		sources = cmp.config.sources {
 			s.snippets,
@@ -245,7 +246,6 @@ local function filetypeCompletionConfig()
 		},
 	})
 
-	-- bibtex
 	cmp.setup.filetype("bib", {
 		sources = cmp.config.sources {
 			s.snippets,
@@ -330,6 +330,7 @@ return {
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
+			"jmbuhr/otter.nvim", -- completion for embedded filetypes
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
 	},

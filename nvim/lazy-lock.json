@@ -70,6 +70,7 @@
   "nvim-web-devicons": { "branch": "master", "commit": "f16ec8f6e5d23e4349501dae46e0a661918e086e" },
   "oh-lucy.nvim": { "branch": "main", "commit": "706c74fe8dcc2014dc17bbc861a05d27623e06e3" },
   "one-small-step-for-vimkind": { "branch": "main", "commit": "167fc4f5821b94db62a57b64fba50de1fa14151d" },
+  "otter.nvim": { "branch": "main", "commit": "131c866ebb56d338affddaffc3f8a642dcce3d51" },
   "plenary.nvim": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "promise-async": { "branch": "main", "commit": "e94f35161b8c5d4a4ca3b6ff93dd073eb9214c0e" },
