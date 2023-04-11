@@ -79,7 +79,10 @@ local function nullSources()
 		},
 
 		-- LUA
-		builtins.formatting.stylua,
+		builtins.formatting.stylua.with {
+			-- only active when there is a stylua config
+			condition = function(utils) return utils.root_has_file { "stylua.toml", ".stylua.toml" } end,
+		},
 		builtins.diagnostics.selene.with {
 			-- INFO not dynamically determining config file, since that breaks
 			-- selene when switching workspaces
