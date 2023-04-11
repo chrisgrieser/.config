@@ -202,7 +202,6 @@ autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- FOLDING
 
-
 -- Remember folds and cursor
 local function remember(mode)
 	-- stylua: ignore

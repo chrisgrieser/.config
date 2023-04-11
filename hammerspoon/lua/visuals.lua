@@ -25,7 +25,7 @@ function HoleCover(arg)
 		bgColor = { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
 	end
 
-	local pseudoMaxCorner = wu.toTheSide.w + wu.toTheSide.x
+local pseudoMaxCorner = wu.toTheSide.w + wu.toTheSide.x
 
 	-- three points, forming roughly a triangle
 	Cover1 = hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 }
