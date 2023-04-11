@@ -90,9 +90,16 @@ local function telescopeConfig()
 				-- adding "--all" to see future commits as well
 				git_command = { "git", "log", "--all", "--pretty=oneline", "--abbrev-commit" },
 			},
+			keymaps = {
+				prompt_prefix = " ",
+				modes = { "n", "i", "c", "x", "o", "t" },
+				-- do not show mappings with "<Plug>"
+				show_plug = false,
+				-- remove which-key mappings
+				lhs_filter = function (lhs) return not lhs:find("Þ") end,
+			},
 			diagnostics = { prompt_prefix = "󰒕 ", no_sign = true },
 			treesitter = { prompt_prefix = " ", show_line = false },
-			keymaps = { prompt_prefix = " ", modes = { "n", "i", "c", "x", "o", "t" } },
 			oldfiles = { prompt_prefix = "󰋚 " },
 			highlights = { prompt_prefix = " " },
 			loclist = { prompt_prefix = " ", trim_text = true },
