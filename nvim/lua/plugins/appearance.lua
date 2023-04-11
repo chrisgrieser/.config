@@ -38,6 +38,8 @@ return {
 				http = { icon = "󰴚", name = "http" },
 				-- plugins
 				lazy = { icon = "", name = "Lazy" },
+				mason = { icon = "", name = "Mason" },
+				NeogitStatus = { icon = "󰊢", name = "NeogitStatus" },
 				Glance = { icon = "󰒕", name = "Glance" },
 				toggleterm = { icon = "", name = "ToggleTerm" },
 			},
