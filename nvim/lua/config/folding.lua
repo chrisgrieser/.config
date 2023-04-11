@@ -48,11 +48,15 @@ keymap("n", "zz", function()
 end, { desc = "󰘖 Close toplevel folds" })
 
 --------------------------------------------------------------------------------
--- MICRO FOLD COMMANDS
+-- MESO FOLD COMMANDS
+-- (cycles multiple folds, but not all)
 
 -- Cycle Folds (f1 = ^ Karabiner Remap)
 keymap({ "c", "i" }, "<f1>", "^", { desc = "HACK for karabiner rebinding" })
 keymap("n", "<f1>", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
+
+--------------------------------------------------------------------------------
+-- MICRO FOLD COMMANDS
 
 -- goto next/prev closed fold
 keymap("n", "gz", function()
