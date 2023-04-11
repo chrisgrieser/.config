@@ -190,8 +190,8 @@ function M.autoTile(winSrc)
 		end
 		M.moveResize(wins[1], pos)
 	elseif #wins == 2 then
-		M.moveResize(wins[1], u.leftHalf)
-		M.moveResize(wins[2], u.rightHalf)
+		M.moveResize(wins[1], hs.layout.left50)
+		M.moveResize(wins[2], hs.layout.right50)
 	elseif #wins == 3 then
 		M.moveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 })
 		M.moveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 })
