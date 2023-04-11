@@ -51,6 +51,7 @@ function inspect() {
 		--sort=modified --group-directories-first \
 		--icons --git --no-user --no-permissions --no-time --no-filesize \
 		--git-ignore --ignore-glob=.git --ignore-glob=.DS_Store
+	echo
 }
 
 # measure zsh loading time, https://blog.jonlu.ca/posts/speeding-up-zsh
