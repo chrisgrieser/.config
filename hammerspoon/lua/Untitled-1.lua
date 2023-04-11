@@ -1,3 +1,0 @@
-foooooobar ffff
-foobar
-foobar
