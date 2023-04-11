@@ -36,7 +36,6 @@ return {
 	},
 	{
 		"smjonas/duplicate.nvim",
-		enabled = false,
 		keys = { { "w", mode = { "n", "x" }, desc = "Duplicate" } },
 		opts = {
 			operator = {
