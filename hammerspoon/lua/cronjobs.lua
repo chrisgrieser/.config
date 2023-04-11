@@ -12,7 +12,7 @@ local function getWeekday() return tostring(os.date()):sub(1, 3) end
 -- keep the iMac display brightness low when projector is connected
 ProjectorScreensaverWatcher = caff
 	.new(function(event)
-		if IsAtOffice() then return end
+		if u.isAtOffice() then return end
 		if
 			event == caff.screensaverDidStop
 			or event == caff.screensaverDidStart
@@ -20,8 +20,8 @@ ProjectorScreensaverWatcher = caff
 			or event == caff.systemDidWake
 			or event == caff.screensDidSleep
 		then
-			RunWithDelays(1, function()
-				if IsProjector() then IMacDisplay:setBrightness(0) end
+			u.runWithDelays(1, function()
+				if u.isProjector() then IMacDisplay:setBrightness(0) end
 			end)
 		end
 	end)
@@ -43,7 +43,7 @@ JourfixeTimer = hs.timer
 -- Check for low battery of connected bluetooth devices
 BiweeklyTimer = hs.timer
 	.doAt("02:00", "01d", function()
-		if IsAtOffice() or (getWeekday() ~= "Wed" and getWeekday() ~= "Sat") then return end
+		if u.isAtOffice() or (getWeekday() ~= "Wed" and getWeekday() ~= "Sat") then return end
 
 		PeripheryBatteryCheck("SideNotes")
 		hs.loadSpoon("EmmyLua")
@@ -54,9 +54,9 @@ BiweeklyTimer = hs.timer
 		hs.execute( 'cp -f "$HOME/Library/Application Support/Vivaldi/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks/' .. isodate .. "'")
 		hs.task.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
 			local msg = exitCode == 0 and "✅ Dotfile Backup successful." or "⚠️ Dotfile Backup failed: " .. stdErr
-			Notify(msg)
+			u.notify(msg)
 		end)
-		Applescript( [[ tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound" end tell ]])
+		u.applescript( [[ tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound" end tell ]])
 
 		-- stylua: ignore end
 	end, true)
@@ -77,16 +77,16 @@ local function closeFullscreenSpaces()
 end
 
 local function sleepMovieApps()
-	if not IdleMins(30) then return end
+	if not u.idleMins(30) then return end
 
 	-- no need to quit IINA since it autoquits
-	QuitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
+	u.quitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
 
 	-- close leftover fullscreen spaces
 	closeFullscreenSpaces()
 
 	-- close browser tabs running YouTube
-	Applescript([[
+	u.applescript([[
 		tell application "Vivaldi"
 			if ((count of window) is not 0)
 				if ((count of tab of front window) is not 0)
@@ -98,7 +98,7 @@ local function sleepMovieApps()
 	]])
 end
 
-if IsIMacAtHome() or IsAtMother() then
+if u.isAtHome() or u.isAtMother() then
 	-- yes my sleep rhythm is abnormal
 	SleepTimer0 = hs.timer.doAt("02:00", "01h", sleepMovieApps, true):start()
 	SleepTimer1 = hs.timer.doAt("03:00", "01d", sleepMovieApps, true):start()

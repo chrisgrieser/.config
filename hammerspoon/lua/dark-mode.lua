@@ -3,7 +3,7 @@ require("lua.utils")
 
 local function brightnessNotify()
 	local brightness = math.floor(hs.brightness.ambient())
-	if brightness > -1 then Notify("☀️ Brightness:", tostring(brightness)) end
+	if brightness > -1 then u.notify("☀️ Brightness:", tostring(brightness)) end
 end
 
 -- done manually to include app-specific toggling for:
@@ -15,7 +15,7 @@ local function toggleDarkMode()
 	brightnessNotify()
 	local sketchyfont, sketchybg, toMode, pdfbg
 
-	if IsDarkMode() then
+	if u.isDarkMode() then
 		pdfbg = "Default"
 		toMode = "light"
 		sketchybg = "0xffcdcdcd"
@@ -31,12 +31,12 @@ local function toggleDarkMode()
 	hs.execute(string.format([[echo "SetThemeMode('%s')" > /tmp/nvim-automation]], toMode))
 
 	-- Highlights PDF background
-	if AppRunning("Highlights") then
-		App("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfbg }
+	if u.appRunning("Highlights") then
+		u.app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfbg }
 	end
 
 	-- System
-	Applescript([[
+	u.applescript([[
 		tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
 	]])
 	HoleCover() -- must come after OS color change
@@ -59,7 +59,7 @@ end
 
 ---@param toDark boolean true = dark, false = light
 function SetDarkmode(toDark)
-	if (not (IsDarkMode()) and toDark) or (IsDarkMode() and not toDark) then toggleDarkMode() end
+	if (not (u.isDarkMode()) and toDark) or (u.isDarkMode() and not toDark) then toggleDarkMode() end
 end
 
 -- autoswitch dark mode and light mode
@@ -74,13 +74,13 @@ function AutoSwitchDarkmode()
 	if hasBrightnessSensor then
 		targetMode = brightness > brightnessThreshhold and "light" or "dark"
 	else
-		targetMode = BetweenTime(7, 18) and "light" or "dark"
+		targetMode = u.betweenTime(7, 18) and "light" or "dark"
 	end
 
-	if targetMode == "light" and IsDarkMode() then
+	if targetMode == "light" and u.isDarkMode() then
 		SetDarkmode(false)
 		print("☀️ Auto-switching to Light Mode")
-	elseif targetMode == "dark" and not (IsDarkMode()) then
+	elseif targetMode == "dark" and not (u.isDarkMode()) then
 		SetDarkmode(true)
 		print("🌔 Auto-switching to Dark Mode")
 	end
@@ -88,4 +88,4 @@ end
 
 --------------------------------------------------------------------------------
 
-Hotkey({}, "f13", toggleDarkMode) -- del key on Keychron Keyboard
+u.hotkey({}, "f13", toggleDarkMode) -- del key on Keychron Keyboard

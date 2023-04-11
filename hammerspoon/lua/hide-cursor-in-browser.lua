@@ -17,15 +17,15 @@ local function hideCurAndPassThrough(key)
 	hs.mouse.setRelativePosition(bottomLeftPos, screen)
 
 	-- pass through the key pressed
-	Keystroke({}, key, 1)
+	u.keystroke({}, key, 1)
 end
 
-JHidesCursor = Hotkey({}, "j", function() hideCurAndPassThrough("j") end):disable()
-KHidesCursor = Hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
+JHidesCursor = u.hotkey({}, "j", function() hideCurAndPassThrough("j") end):disable()
+KHidesCursor = u.hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
 
 -- watches browser, enables when hotkeys when browser is activated
-Jk_watcher = Aw.new(function(appName, eventType)
-	if not eventType == Aw.activated then return end
+Jk_watcher = u.aw.new(function(appName, eventType)
+	if not eventType == u.aw.activated then return end
 
 	if appName == "Vivaldi" then
 		JHidesCursor:enable()

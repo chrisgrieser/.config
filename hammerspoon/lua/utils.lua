@@ -1,13 +1,16 @@
-Hotkey = hs.hotkey.bind
-Keystroke = hs.eventtap.keyStroke
-Aw = hs.application.watcher
-Wf = hs.window.filter
-Applescript = hs.osascript.applescript
-UriScheme = hs.urlevent.bind
-TableContains = hs.fnutils.contains
+local M = {}
+--------------------------------------------------------------------------------
 
-Hyper = { "cmd", "alt", "ctrl", "shift" } -- bound to capslock via Karabiner elements
-I = hs.inspect -- to inspect tables in the console
+M.hotkey = hs.hotkey.bind
+M.keystroke = hs.eventtap.keyStroke
+M.aw = hs.application.watcher
+M.wf = hs.window.filter
+M.applescript = hs.osascript.applescript
+M.urischeme = hs.urlevent.bind
+M.tbl_contains = hs.fnutils.contains
+
+M.hyper = { "cmd", "alt", "ctrl", "shift" } -- bound to capslock via Karabiner elements
+I = hs.inspect -- to inspect tables in the console more quickly
 
 --------------------------------------------------------------------------------
 
@@ -15,7 +18,7 @@ I = hs.inspect -- to inspect tables in the console
 ---@param str string
 ---@nodiscard
 ---@return string
-function Trim(str)
+function M.trim(str)
 	if not str then return "" end
 	str, _ = str:gsub("^%s*(.-)%s*$", "%1")
 	return str
@@ -27,7 +30,7 @@ end
 ---@param endHour number, time between 0 and 24
 ---@nodiscard
 ---@return boolean|nil true/false for valid time ranges, nil for invalid time range
-function BetweenTime(startHour, endHour)
+function M.betweenTime(startHour, endHour)
 	if startHour >= 24 or endHour >= 24 or startHour < 0 or endHour < 0 then
 		print("⚠️ BetweenTime: Invalid time range")
 		return nil
@@ -43,12 +46,12 @@ end
 
 -- CAVEAT: won't work with Chromium browsers due to bug, but works for URI schemes
 ---@param url string
-function OpenLinkInBackground(url) hs.execute('open -g "' .. url .. '"') end
+function M.openLinkInBg(url) hs.execute('open -g "' .. url .. '"') end
 
 ---write to file (overwriting)
 ---@param filePath string
 ---@param str string
-function WriteToFile(filePath, str)
+function M.writeToFile(filePath, str)
 	local file, err = io.open(filePath, "w")
 	if file then
 		file:write(str)
@@ -60,7 +63,7 @@ end
 
 ---@param filePath string line(s) to add
 ---@param str string
-function AppendToFile(filePath, str)
+function M.appendToFile(filePath, str)
 	local file, err = io.open(filePath, "a")
 	if file then
 		file:write(str .. "\n")
@@ -74,7 +77,7 @@ end
 ---@param filePath string
 ---@nodiscard
 ---@return string|nil file content or nil when reading not successful
-function ReadFile(filePath)
+function M.readFile(filePath)
 	local file = io.open(filePath, "r")
 	if not file then return end
 	local content = file:read("*a")
@@ -84,7 +87,17 @@ end
 
 ---@nodiscard
 ---@return boolean
-function IsDarkMode() return hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n" end
+function M.isDarkMode() return hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n" end
+
+---Repeat a function multiple times
+---@param delaySecs number|number[]
+---@param callbackFn function function to be run on delay(s)
+function M.runWithDelays(delaySecs, callbackFn)
+	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
+	for _, delay in pairs(delaySecs) do
+		hs.timer.doAfter(delay, callbackFn)
+	end
+end
 
 --------------------------------------------------------------------------------
 
@@ -96,19 +109,9 @@ local function deviceName()
 	return name
 end
 
----Repeat a function multiple times
----@param delaySecs number|number[]
----@param callbackFn function function to be run on delay(s)
-function RunWithDelays(delaySecs, callbackFn)
-	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
-	for _, delay in pairs(delaySecs) do
-		hs.timer.doAfter(delay, callbackFn)
-	end
-end
-
 ---@nodiscard
 ---@return boolean
-function IsProjector()
+function M.isProjector()
 	local mainDisplayName = hs.screen.primaryScreen():name()
 	local projectorHelmholtz = mainDisplayName == "ViewSonic PJ"
 	local tvLeuthinger = mainDisplayName == "TV_MONITOR"
@@ -117,7 +120,7 @@ end
 
 ---@nodiscard
 ---@return boolean
-function IsAtOffice()
+function M.isAtOffice()
 	local mainDisplayName = hs.screen.primaryScreen():name()
 	local screenOne = mainDisplayName == "HP E223"
 	local screenTwo = mainDisplayName == "Acer CB241HY"
@@ -126,17 +129,17 @@ end
 
 ---@nodiscard
 ---@return boolean
-function IsAtMother() return deviceName():find("Mother") ~= nil end
+function M.isAtMother() return deviceName():find("Mother") ~= nil end
 
 ---@nodiscard
 ---@return boolean
-function IsIMacAtHome() return (deviceName():find("iMac") and deviceName():find("Home")) ~= nil end
+function M.isAtHome() return (deviceName():find("iMac") and deviceName():find("Home")) ~= nil end
 
 --------------------------------------------------------------------------------
 
 ---@nodiscard
 ---@return boolean
-function ScreenIsUnlocked()
+function M.screenIsUnlocked()
 	local _, success = hs.execute(
 		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1'
 	)
@@ -147,14 +150,14 @@ end
 ---whether device has been idle
 ---@param mins number Time idle
 ---@return boolean
-function IdleMins(mins)
+function M.idleMins(mins)
 	local minutesIdle = hs.host.idleTime() / 60
 	return minutesIdle > mins
 end
 
 ---Send Notification, accepting any number of arguments of any type. Converts
 ---everything into strings, concatenates them, and then sends it.
-function Notify(...)
+function M.notify(...)
 	local safe_args = {}
 	local args = { ... }
 	for _, arg in pairs(args) do
@@ -173,17 +176,17 @@ end
 ---@param appName string (literal & exact match)
 ---@nodiscard
 ---@return hs.application
-function App(appName) return hs.application.find(appName, true, true) end
+function M.app(appName) return hs.application.find(appName, true, true) end
 
 ---@param appNames string|string[]|nil app or apps that should be checked
 ---@nodiscard
 ---@return boolean true when *one* of the apps is frontmost
-function IsFront(appNames)
+function M.isFront(appNames)
 	if appNames == nil then return false end
 	if type(appNames) == "string" then appNames = { appNames } end
 	local oneIsFrontmost = false
 	for _, name in pairs(appNames) do
-		if App(name) and App(name):isFrontmost() then oneIsFrontmost = true end
+		if M.app(name) and M.app(name):isFrontmost() then oneIsFrontmost = true end
 	end
 	return oneIsFrontmost
 end
@@ -191,54 +194,57 @@ end
 ---@param appNames string|string[] app or apps that should be running
 ---@nodiscard
 ---@return boolean true when all apps are running
-function AppRunning(appNames)
+function M.appRunning(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	local allAreRunning = true
 	for _, name in pairs(appNames) do
-		if not App(name) then allAreRunning = false end
+		if not M.app(name) then allAreRunning = false end
 	end
 	return allAreRunning
 end
 
----@async
 ---If app is not running, will simply start the app instead
 ---@param appName string
-function RestartApp(appName)
-	local app = App(appName)
+---@async
+function M.restartApp(appName)
+	local app = M.app(appName)
 	if app then app:kill() end
 	MyTimer = hs.timer.waitUntil(
-		function() return App(appName) == nil end,
+		function() return M.app(appName) == nil end,
 		function() hs.application.open(appName) end,
 		0.1
 	)
 end
 
----@async
 ---@param app string|hs.application appName or appObj of app to wait for
 ---@param callbackFn function function to execute when the app is available
-function AsSoonAsAppRuns(app, callbackFn)
-	if type(app) == "string" then app = App(app) end
+---@async
+function M.asSoonAsAppRuns(app, callbackFn)
+	if type(app) == "string" then app = M.app(app) end
 	MyTimer = hs.timer.waitUntil(function()
 		local appRuns = app ~= nil
 		local windowAvailable = app and app:mainWindow()
 		return appRuns and windowAvailable
-	end, callbackFn, 0.1):start()
+	end, callbackFn, 0.05):start()
 end
 
 ---@param appNames string|string[]
-function OpenApp(appNames)
+function M.openApps(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		local runs = App(name) ~= nil
+		local runs = M.app(name) ~= nil
 		if not runs then hs.application.open(name) end
 	end
 end
 
 ---@param appNames string|string[]
-function QuitApp(appNames)
+function M.quitApp(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
-		local appObj = App(name)
+		local appObj = M.app(name)
 		if appObj then appObj:kill() end
 	end
 end
+
+--------------------------------------------------------------------------------
+return M

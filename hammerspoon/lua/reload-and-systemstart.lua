@@ -2,7 +2,7 @@ require("lua.utils")
 
 -- `hammerspoon://hs-reload` for reloading via Build System
 local reloadIndicator = "/tmp/hs-is-reloading"
-UriScheme("hs-reload", function()
+u.urischeme("hs-reload", function()
 	hs.execute("touch " .. reloadIndicator)
 	hs.reload()
 	-- INFO will also run the systemStart function due to reload
@@ -19,7 +19,7 @@ function SystemStart()
 		-- use neovim automation to display the notification in neovim
 		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded. ")' > /tmp/nvim-automation]])
 	else
-		Notify("Finished loading.")
+		u.notify("Finished loading.")
 		HoleCover()
 		PeripheryBatteryCheck("notify")
 		SyncAllGitRepos("notify")

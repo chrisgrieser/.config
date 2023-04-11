@@ -23,7 +23,7 @@ local function hideOthers(appObj)
 	if
 		not appObj
 		or not appObj:mainWindow()
-		or not IsFront(appObj:name()) -- win not switched in meantime
+		or not u.isFront(appObj:name()) -- win not switched in meantime
 	then
 		return
 	end
@@ -39,7 +39,7 @@ local function hideOthers(appObj)
 		if
 			app
 			and not (app:findWindow("Picture in Picture"))
-			and not (TableContains(appsNotToHide, app:name()))
+			and not (u.tbl_contains(appsNotToHide, app:name()))
 			and not (app:isHidden())
 		then
 			app:hide()
@@ -51,15 +51,15 @@ end
 
 -- if an app with bg-transparency is activated, hide all other apps
 -- if such an app is terminated, unhide them again
-TransBgAppWatcher = Aw.new(function(appName, event, appObj)
+TransBgAppWatcher = u.aw.new(function(appName, event, appObj)
 	local transBgApp = { "neovide", "Neovide", "Obsidian", "wezterm-gui", "WezTerm" }
-	if IsProjector() or not (TableContains(transBgApp, appName)) then return end
+	if u.isProjector() or not (u.tbl_contains(transBgApp, appName)) then return end
 
-	if event == Aw.terminated then
+	if event == u.aw.terminated then
 		unHideAll()
-	elseif event == Aw.activated then
+	elseif event == u.aw.activated then
 		hideOthers(appObj)
-		AsSoonAsAppRuns(appObj, function() hideOthers(appObj) end)
+		u.asSoonAsAppRuns(appObj, function() hideOthers(appObj) end)
 	end
 end):start()
 
@@ -68,20 +68,20 @@ end):start()
 -- in addition, `RunDelayed` also does not work well due to varying startup
 -- times. Therefore, this UriScheme is called on neovim startup in
 -- config/gui-settings.lua
-UriScheme("hide-other-than-neovide", function()
-	RunWithDelays({ 0, 0.1, 0.2 }, function() hideOthers(App("neovide")) end)
+u.urischeme("hide-other-than-neovide", function()
+	u.runWithDelays({ 0, 0.1, 0.2 }, function() hideOthers(u.app("neovide")) end)
 end)
 
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
-AutoTileAppWatcher = Aw.new(function(appName, eventType, appObj)
+AutoTileAppWatcher = u.aw.new(function(appName, eventType, appObj)
 	local autoTileApps = { "Finder", "Vivaldi" }
 	if
-		eventType == Aw.deactivated
-		and TableContains(autoTileApps, appName)
+		eventType == u.aw.deactivated
+		and u.tbl_contains(autoTileApps, appName)
 		and #appObj:allWindows() > 1
 		and not (appObj:findWindow("Picture in Picture"))
-		and not (IsProjector())
-		and not (IsFront { "Alfred", "SideNotes", "CleanShot X" })
+		and not (u.isProjector())
+		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X" })
 	then
 		appObj:hide()
 	end
@@ -89,11 +89,11 @@ end):start()
 
 -- prevent maximized window from covering sketchybar if they are unfocused
 -- pseudomaximized windows always get twitter to the side
-Wf_maxWindows = Wf.new(true):subscribe(Wf.windowUnfocused, function(win)
+Wf_maxWindows = u.wf.new(true):subscribe(u.wf.windowUnfocused, function(win)
 	if
-		not (IsProjector())
+		not (u.isProjector())
 		and CheckSize(win, Maximized)
-		and not (IsFront { "Alfred", "SideNotes", "CleanShot X" })
+		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X" })
 	then
 		win:application():hide()
 	end

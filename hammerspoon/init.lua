@@ -18,7 +18,7 @@ while true do
 	hs.timer.usleep(10000) -- = one hundreth second (Blocking!)
 	i = i + 1
 	if i > 50 then
-		Notify("⚠️ Could not retrieve .zshenv")
+		u.notify("⚠️ Could not retrieve .zshenv")
 		break
 	end
 end

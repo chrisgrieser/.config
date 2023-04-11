@@ -16,7 +16,7 @@ local function setHigherBrightnessDuringDay()
 	if not hasBrightnessSensor then return end
 
 	local brightness
-	if BetweenTime(1, 7) or IsProjector() then -- when turning off projector at night
+	if u.betweenTime(1, 7) or u.isProjector() then -- when turning off projector at night
 		brightness = 0
 	elseif hs.brightness.ambient() > 120 then
 		brightness = 1
@@ -31,7 +31,7 @@ local function setHigherBrightnessDuringDay()
 end
 
 local function closeAllFinderWins()
-	local finder = App("Finder")
+	local finder = u.app("Finder")
 	if not finder then return end
 	for _, win in pairs(finder:allWindows()) do
 		win:close()
@@ -51,28 +51,26 @@ local function workLayout()
 	hs.execute("sketchybar --set clock popup.drawing=true")
 
 	-- close
-	QuitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "BetterTouchTool", "lo-rain" }
+	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "BetterTouchTool", "lo-rain" }
 	require("lua.private").closer()
 	closeAllFinderWins()
 
 	-- twitter
-	OpenApp("Twitter")
-	AsSoonAsAppRuns("Twitter", TwitterToTheSide)
-	AsSoonAsAppRuns("Twitter", TwitterScrollUp)
+	u.openApps("Twitter")
+	u.asSoonAsAppRuns("Twitter", TwitterToTheSide)
+	u.asSoonAsAppRuns("Twitter", TwitterScrollUp)
 
 	-- open
-	local appsToOpen = { "Discord", "Vivaldi", "Mimestream" }
+	local appsToOpen = { "Discord", "Vivaldi" }
 	if not isWeekend() then table.insert(appsToOpen, 1, "Slack") end
-	OpenApp(appsToOpen)
+	u.openApps(appsToOpen)
+	u.app("Mimestream"):activate() -- activation instead of opening to put it into the foreground
 	for _, app in pairs(appsToOpen) do
-		AsSoonAsAppRuns(app, function() MoveResize(App(app):mainWindow(), PseudoMaximized) end)
+		u.asSoonAsAppRuns(app, function() MoveResize(u.app(app):mainWindow(), PseudoMaximized) end)
 	end
 	MyTimer = hs.timer.waitUntil(
-		function() return AppRunning(appsToOpen) end,
-		function()
-			App("Mimestream"):activate()
-			RestartApp("AltTab")
-		end,
+		function() return u.appRunning(appsToOpen) end,
+		function() u.restartApp("AltTab") end,
 		0.2
 	)
 
@@ -81,14 +79,14 @@ end
 
 local function movieLayout()
 	print("🔲 MovieLayout: loading")
-	local targetMode = IsAtMother() and "mother-movie" or "movie" -- different PWAs due to not being M1 device
+	local targetMode = u.isAtMother() and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
 	IMacDisplay:setBrightness(0)
 	SetDarkmode(true)
 	HoleCover("remove")
 
-	OpenApp { "YouTube", "BetterTouchTool" }
-	QuitApp {
+	u.openApps { "YouTube", "BetterTouchTool" }
+	u.quitApp {
 		"Neovide",
 		"lo-rain",
 		"neovide",
@@ -112,7 +110,7 @@ end
 
 ---select layout depending on number of screens
 local function selectLayout()
-	if IsProjector() then
+	if u.isProjector() then
 		movieLayout()
 	else
 		workLayout()
@@ -123,7 +121,7 @@ end
 DisplayCountWatcher = hs.screen.watcher.new(selectLayout):start()
 
 -- 2. Hotkey
-Hotkey(Hyper, "home", selectLayout)
+u.hotkey(u.hyper, "home", selectLayout)
 
 -- 3. Waking
 local unlockInProgress = false
@@ -132,17 +130,17 @@ UnlockWatcher = c.new(function(event)
 	if unlockInProgress or not (event == c.systemDidWake or event == c.screensDidWake) then return end
 	print("🔓 System/Screen did wake.")
 
-	UnlockTimer = hs.timer.waitUntil(ScreenIsUnlocked, function()
+	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
 		unlockInProgress = true -- block multiple concurrent runs
 		ReminderToSidenotes()
-		RunWithDelays(0.5, function() -- delay for recognizing screens
+		u.runWithDelays(0.5, function() -- delay for recognizing screens
 			setHigherBrightnessDuringDay()
 			selectLayout()
 		end)
-		RunWithDelays(5, function() unlockInProgress = false end)
+		u.runWithDelays(5, function() unlockInProgress = false end)
 	end, 0.2)
 	-- deactivate the timer in the screen is woken but not unlocked
-	RunWithDelays(20, function()
+	u.runWithDelays(20, function()
 		if UnlockTimer and UnlockTimer:running() then
 			UnlockTimer:stop()
 			UnlockTimer = nil ---@diagnostic disable-line: assign-type-mismatch
