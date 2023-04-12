@@ -141,7 +141,7 @@ when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
 command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 os = "macos"
 description = "Version number of Alfred Workflow"
-format = '[](purple) [ $output](dimmed 208)'
+format = '[󰾺](purple) [ $output](dimmed 208)'
 
 [nodejs]
 format = " [$symbol$version]($style)"
