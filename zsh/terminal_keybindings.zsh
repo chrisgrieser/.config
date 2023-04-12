@@ -11,15 +11,18 @@ bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
 bindEverywhere "^B" copy-buffer # wezterm: cmd+b
 bindEverywhere "^Z" undo # wezterm: cmd+z
-bindEverywhere '…' insert-last-word # …=alt+.
+bindEverywhere "…" insert-last-word # …=alt+.
 
 # [f]orward to $EDITOR
 autoload edit-command-line
 zle -N edit-command-line
-bindEverywhere '^F' edit-command-line
+bindEverywhere "^F" edit-command-line
 
-# shift+tab: Cycle through base directories
-bindEverywhere "^[[Z" dir-cycler
+# accept ghost text from zsh-autosugget
+bindEverywhere "^[[Z" autosuggest-accept
+
+# ctrl+O (bound to cmd+enter via wezterm): base directories (Mini-Harpoon)
+bindEverywhere "^O" dir-cycler
 
 #-------------------------------------------------------------------------------
 # INFO: use ctrl-v and then a key combination to get the shell binding
