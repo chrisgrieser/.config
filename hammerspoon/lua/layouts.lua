@@ -1,6 +1,7 @@
+local darkmode = require("lua.dark-mode")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local darkmode = require("lua.dark-mode")
+local twitter = require("lua.twitter")
 --------------------------------------------------------------------------------
 
 -- HELPERS
@@ -32,7 +33,7 @@ local function setHigherBrightnessDuringDay()
 	else
 		brightness = 0.6
 	end
-wu.iMacDisplay:setBrightness(brightness)
+	wu.iMacDisplay:setBrightness(brightness)
 end
 
 local function closeAllFinderWins()
@@ -62,24 +63,20 @@ local function workLayout()
 
 	-- twitter
 	u.openApps("Twitter")
-	u.asSoonAsAppRuns("Twitter", TwitterToTheSide)
-	u.asSoonAsAppRuns("Twitter", TwitterScrollUp)
+	u.asSoonAsAppRuns("Twitter", twitter.toTheSide)
+	u.asSoonAsAppRuns("Twitter", twitter.ScrollUp)
 
 	-- open
 	local appsToOpen = { "Discord", "Vivaldi", "Mimestream" }
 	if not isWeekend() then table.insert(appsToOpen, 1, "Slack") end
 	u.openApps(appsToOpen)
 	for _, app in pairs(appsToOpen) do
-u.asSoonAsAppRuns(app, function() wu.moveResize(u.app(app):mainWindow(), u.pseudoMax) end)
+		u.asSoonAsAppRuns(app, function() wu.moveResize(u.app(app):mainWindow(), wu.pseudoMax) end)
 	end
-	MyTimer = hs.timer.waitUntil(
-		function() return u.appRunning(appsToOpen) end,
-		function()
-			u.app("Mimestream"):activate() 
-			u.restartApp("AltTab")
-		end,
-		0.2
-	)
+	MyTimer = hs.timer.waitUntil(function() return u.appRunning(appsToOpen) end, function()
+		u.app("Mimestream"):activate()
+		u.restartApp("AltTab")
+	end, 0.2)
 
 	print("🔲 WorkLayout: done")
 end
@@ -88,7 +85,7 @@ local function movieLayout()
 	print("🔲 MovieLayout: loading")
 	local targetMode = u.isAtMother() and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
-wu.iMacDisplay:setBrightness(0)
+	wu.iMacDisplay:setBrightness(0)
 	darkmode.set(true)
 	HoleCover("remove")
 

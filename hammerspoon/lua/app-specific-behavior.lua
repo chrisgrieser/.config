@@ -41,7 +41,7 @@ end):start()
 -- PIXELMATOR: open maximized
 PixelmatorWatcher = u.aw.new(function(appName, eventType, appObj)
 	if appName == "Pixelmator" and eventType == u.aw.launched then
-u.asSoonAsAppRuns(appObj, function() wu.moveResize(appObj, wu.Maximized) end)
+u.asSoonAsAppRuns(appObj, function() wu.moveResize(appObj, wu.maximized) end)
 	end
 end):start()
 
@@ -120,7 +120,7 @@ end):start()
 u.urischeme("enlarge-neovide-window", function()
 	u.asSoonAsAppRuns("neovide", function()
 		local neovideWin = u.app("neovide"):mainWindow()
-local size = u.isProjector() and wu.Maximized or wu.pseudoMax
+local size = u.isProjector() and wu.maximized or wu.pseudoMax
 wu.moveResize(neovideWin, size)
 	end)
 end)
@@ -130,7 +130,7 @@ end)
 -- FINDER
 Wf_finder = u.wf.new("Finder")
 	:setOverrideFilter({
-rejectTitles = wu.ejectedFinderWins,
+rejectTitles = wu.rejectedFinderWins,
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
