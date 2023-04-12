@@ -49,14 +49,15 @@ BiweeklyTimer = hs.timer
 
 		-- backups
 		-- stylua: ignore start
-		local isodate = os.date("%Y-%m-%d")
-		hs.execute( 'cp -f "$HOME/Library/Application Support/Vivaldi/Default/Bookmarks" "$DATA_DIR/Backups/Browser-Bookmarks/' .. isodate .. "'")
+		hs.task.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
+			local msg = exitCode == 0 and "✅ Bookmark Backup successful." or "⚠️ Bookmark Backup failed: " .. stdErr
+			u.notify(msg)
+		end):start()
 		hs.task.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
 			local msg = exitCode == 0 and "✅ Dotfile Backup successful." or "⚠️ Dotfile Backup failed: " .. stdErr
 			u.notify(msg)
-		end)
-		u.applescript( [[ tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound" end tell ]])
-
+		end):start()
+		u.applescript([[tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"]])
 		-- stylua: ignore end
 	end, true)
 	:start()
