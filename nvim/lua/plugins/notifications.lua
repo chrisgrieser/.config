@@ -1,6 +1,4 @@
 local function notifyConfig()
-	vim.opt.termguicolors = true -- required for the plugin
-	--------------------------------------------------------------------------------
 	-- Base config
 	local notifyWidth = 55
 	local printDurationSecs = 7
@@ -43,8 +41,14 @@ local function notifyConfig()
 	end
 
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
-		if msg == nil then msg = "NIL" end
-		if banned(msg) then return end
+		if msg == nil then
+			msg = "NIL"
+		elseif banned(msg) then
+			return
+		elseif msg == "" then
+			msg = '""' -- make empty string more apparent
+		end
+
 		msg = vim.split(msg, "\n", { trimepty = true })
 		local truncated = {}
 		for _, line in pairs(msg) do
@@ -55,7 +59,6 @@ local function notifyConfig()
 			end
 		end
 		local out = table.concat(truncated, "\n")
-		if out == ""
 		return require("notify")(out, level, opts)
 	end
 
@@ -63,7 +66,7 @@ local function notifyConfig()
 
 	-- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
 	-- selene: allow(incorrect_standard_library_use)
-	print = function(...)
+	function print(...)
 		local args = { ... }
 		if vim.tbl_isempty(args) or (args[1] == nil and #args == 1) then
 			vim.notify("NIL", vim.log.levels.TRACE)
@@ -97,5 +100,6 @@ end
 return {
 	"rcarriga/nvim-notify",
 	event = "UIEnter",
+	init = function () vim.opt.termguicolors = true end, -- required for the plugin
 	config = notifyConfig,
 }
