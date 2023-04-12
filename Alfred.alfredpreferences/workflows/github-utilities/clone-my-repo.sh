@@ -9,7 +9,7 @@ target="${local_repo_folder/#\~/$HOME}"
 [[ ! -e "$target" ]] && mkdir -p "$target"
 
 cd "$target" || exit 1
-if [[ -f "$reponame" ]] ; then
+if [[ -e "$reponame" ]] ; then
 	osascript -e 'display notification "" with title "⚠️ Repo already exists."'
 else
 	git clone --depth=1 "$url" || return 1
