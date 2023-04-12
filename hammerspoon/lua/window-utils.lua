@@ -146,7 +146,7 @@ function M.moveResize(win, pos)
 
 	-- Twitter Extras
 	if pos == M.pseudoMax or pos == M.centered then
-		M.toTheSide()
+		M.twitterToTheSide()
 	elseif pos == M.maximized and u.appRunning("Twitter") then
 		if u.app("Twitter") then u.app("Twitter"):hide() end
 	end
@@ -319,8 +319,6 @@ local function homeAction()
 	elseif u.appRunning("zoom.us") then
 		hs.alert("🔈/🔇") -- toggle mute
 		u.keystroke({ "shift", "command" }, "A", 1, u.app("zoom.us"))
-	else
-		twitter.ScrollUp()
 	end
 end
 

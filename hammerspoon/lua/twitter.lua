@@ -100,7 +100,7 @@ TwitterWatcher = u.aw.new(function(appName, event)
 		if not frontWin or not twitter then return end
 
 	if wu.CheckSize(frontWin, wu.pseudoMax) or wu.CheckSize(frontWin, wu.centered) then
-			M.toTheSide()
+			wu.twitterToTheSide()
 			elseif wu.CheckSize(frontWin, wu.maximized) then
 			twitter:hide()
 		end
