@@ -6,10 +6,10 @@ function finderFrontWindow() {
 
 function run() {
 	const winPath = finderFrontWindow();
-	if (!winPath.includes("Alfred.alfredpreferences/workflows")) return "Not in Alfred directory";
+	if (!winPath.includes("Alfred.alfredpreferences/workflows")) return "Not in Alfred directory.";
 
 	const workflowId = winPath.match(/Alfred\.alfredpreferences\/workflows\/([^/]+)/)[1];
-	console.log("workflowId:", workflowId);
+
 	Application("com.runningwithcrayons.Alfred").revealWorkflow(workflowId);
 	return null;
 }
