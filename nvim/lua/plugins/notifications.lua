@@ -68,9 +68,14 @@ local function notifyConfig()
 	print = function(...)
 		if ... == nil then
 			vim.notify("NIL", vim.log.levels.TRACE)
-			return	
+			return
 		end
+		echo "yes"
 		local args = { ... }
+		if args[1] == nil and #args >= 1 then
+			vim.notify("NIL", vim.log.levels.TRACE)
+			return
+		end
 
 		local includesTable = false
 		local safe_args = {}
