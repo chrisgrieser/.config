@@ -53,10 +53,14 @@ function gd() {
 		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
 
 		# dynamically change theme
-		defaults read -g AppleInterfaceStyle | grep -q "Dark" && light="false" || light="true"
-		git -c delta.light="$light" diff --word-diff
-
-		# --word-diff
+		if defaults read -g AppleInterfaceStyle | grep -q "Dark" ; then
+			light="false" 
+			theme="Dracula"
+		else
+			light="true"
+			theme="OneHalfLight"
+		fi 
+		git -c delta.light="$light" -c delta.syntax-theme="$theme" diff
 	fi
 }
 
