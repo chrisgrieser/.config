@@ -446,8 +446,20 @@ keymap("n", "ga", "gf", { desc = "Goto Path" })
 keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
 
 -- stylua: ignore
-keymap({ "n", "x" }, "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
-
+keymap("", "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
+-- stylua: ignore
+keymap( "", "<D-S-l>", function()
+	local parentFolder = expand("%:p:h")
+	if not parentFolder:find("Alfred%.alfredpreferences") then
+		vim.notify("Not in an Alfred directory.", u.warn)
+		return
+	end
+	local workflowId = parentFolder:match("workflows/([^/])+")
+	print("parentFolder:", parentFolder)
+	print("workflowId:", workflowId)
+	local command = ([[osascript -e 'tell application id "com.runningwithcrayons.Alfred" to reveal workflow "%s"']]):format(workflowId)
+	fn.system(command)
+end, { desc = "󰾺 Reveal Workflow in Alfred" })
 keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
 keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
 
@@ -593,7 +605,7 @@ autocmd("LspAttach", {
 			-- command line; needs defer to not be overwritten by treesitter-
 			-- refactor's smart-rename
 			-- stylua: ignore
-			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1) 
+			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1)
 			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
 		end
 
@@ -788,5 +800,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
--- ßßß+++++ßß+++ßß++ß+ß+++>>>>>>"""""""lll"
---	ßßßßß++++ßßßß+++0ßßßß++^^^^^^^^^
