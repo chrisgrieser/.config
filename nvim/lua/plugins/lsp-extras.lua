@@ -23,10 +23,22 @@ return {
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
 		init = function() vim.g.navic_silence = true end, -- suppress notifications on errors
 		opts = {
+			lsp = { auto_attach = true },
 			icons = { Object = "󰆧 " },
 			separator = "  ",
 			depth_limit = 7,
 			depth_limit_indicator = "…",
+		},
+	},
+	{ -- better goto-symbol
+		"SmiteshP/nvim-navbuddy",
+		event = "LspAttach",
+		dependencies = { "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
+		opts = {
+			window = {
+				border = require("config.utils").borderStyle,
+			},
+			lsp = { auto_attach = true },
 		},
 	},
 	{ -- better virtualtext diagnostics
@@ -77,7 +89,7 @@ return {
 					end
 				end,
 			},
-		}
+		},
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
