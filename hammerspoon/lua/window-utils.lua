@@ -152,8 +152,8 @@ function M.moveResize(win, pos)
 	end
 
 	-- resize
-	-- check for unequal false, since non-resizable wins return nil
-	if M.CheckSize(win, pos) ~= false then win:moveToUnit(pos) end
+	-- check for false, since non-resizable wins return nil
+	if M.CheckSize(win, pos) == false then win:moveToUnit(pos) end
 
 	-- Obsidian extras (has to come after resizing)
 	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win) end
