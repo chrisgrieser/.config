@@ -5,15 +5,15 @@ local g = vim.g
 -- - first theme used for light mode
 -- - second for dark mode
 -- - rest ignored
--- - if only one theme, it's used for both light and dark
+-- - if only one theme, it's used for both light and dark 
 local themes = {
 	"EdenEast/nightfox.nvim",
-	"Yazeed1s/oh-lucy.nvim",
+	-- "Yazeed1s/oh-lucy.nvim",
 	-- "kvrohit/mellow.nvim",
 	-- { "rose-pine/neovim", name = "rose-pine" },
 	-- "glepnir/zephyr-nvim",
 	-- "sainnhe/everforest",
-	-- "rebelot/kanagawa.nvim",
+	"rebelot/kanagawa.nvim",
 	-- "folke/tokyonight.nvim",
 	-- "NTBBloodbath/sweetie.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
