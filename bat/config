@@ -1,7 +1,12 @@
-# `bat --list-themes`
---theme="Sublime Snazzy"
+# `bat --list-themes` to list all available themes
+# INFO themes often depend on light/dark mode, so setting a theme here might
+# break the look of `bat` in dark/light terminals. The default themes works in
+# both modes though: https://github.com/sharkdp/bat/pull/2197
+# alternatively, the theme can dynamically be chosen by bat: 
+# https://github.com/sharkdp/bat#dark-mode
 
-# --italic-text=never
+#───────────────────────────────────────────────────────────────────────────────
+
 --wrap=never
 --tabs=2
 --terminal-width="-1"
@@ -10,5 +15,5 @@
 # header-filename, header-filesize, grid, rule, numbers, snip.
 --style="header-filesize,header-filename,grid,snip"
 
-# show percentage indicator
+# shows percentage indicator by going fully down (G) and then up again (g)
 --pager="less -RF --long-prompt +Gg"
