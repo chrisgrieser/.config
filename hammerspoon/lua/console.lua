@@ -96,9 +96,6 @@ Wf_hsConsole = u.wf.new("Hammerspoon")
 			newWin:moveToUnit(pos)
 		end
 	end)
-	:subscribe(u.wf.windowUnfocused, function(win)
-		if win:title() == "Hammerspoon Console" and not (u.isFront("Alfred")) then hs.closeConsole() end
-	end)
 
 --------------------------------------------------------------------------------
 

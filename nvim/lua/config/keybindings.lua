@@ -61,7 +61,7 @@ end, { desc = "Clear Notifications" })
 
 --------------------------------------------------------------------------------
 -- MOTIONS
-keymap({ "n", "o", "x" }, "w", '<cmd>lua require("spider").motion("w")<CR>', { desc = "󱇪 w" })
+-- keymap({ "n", "o", "x" }, "w", '<cmd>lua require("spider").motion("w")<CR>', { desc = "󱇪 w" })
 keymap({ "n", "o", "x" }, "e", '<cmd>lua require("spider").motion("e")<CR>', { desc = "󱇪 e" })
 keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { desc = "󱇪 b" })
 
@@ -123,7 +123,7 @@ keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quic
 
 -- COMMENTS & ANNOTATIONS
 keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = " Horizontal Divider" })
-keymap("n", "qd", "Rkqqj", { desc = " Duplicate Line as Comment", remap = true })
+keymap("n", "qd", "yypkqqj", { desc = " Duplicate Line as Comment", remap = true })
 -- stylua: ignore
 keymap("n", "qf", function() require("neogen").generate({}) end, { desc = " Comment Function" })
 
