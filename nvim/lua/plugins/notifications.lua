@@ -38,17 +38,14 @@ local function notifyConfig()
 	-- HACK filter out annoying buggy messages from the satellite plugin: https://github.com/lewis6991/satellite.nvim/issues/36
 	local function banned(msg) -- https://github.com/rcarriga/nvim-notify/issues/114#issuecomment-1179754969
 		return msg:find("^nvim%-navic:.*Already attached to %w+")
-		or msg:find("^error%(satellite.nvim%):")
-		or msg:find("code = %-32801,")
+			or msg:find("^error%(satellite.nvim%):")
+			or msg:find("code = %-32801,")
 	end
 
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
+		if msg == nil then msg = "NIL" end
 		if banned(msg) then return end
-		if type(msg) == "string" then
-			local isCodeOutput = msg:find("^%s*{")
-			if isCodeOutput then return require("notify")(msg, level, opts) end
-			msg = vim.split(msg, "\n", { trimepty = true })
-		end
+		msg = vim.split(msg, "\n", { trimepty = true })
 		local truncated = {}
 		for _, line in pairs(msg) do
 			local new_lines = split_length(line, notifyWidth)
@@ -57,8 +54,9 @@ local function notifyConfig()
 				if nl and nl ~= "" then table.insert(truncated, " " .. nl .. " ") end
 			end
 		end
-
-		return require("notify")(truncated, level, opts)
+		local out = table.concat(truncated, "\n")
+		if out == ""
+		return require("notify")(out, level, opts)
 	end
 
 	-----------------------------------------------------------------------------
@@ -66,13 +64,8 @@ local function notifyConfig()
 	-- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
 	-- selene: allow(incorrect_standard_library_use)
 	print = function(...)
-		if ... == nil then
-			vim.notify("NIL", vim.log.levels.TRACE)
-			return
-		end
-		echo "yes"
 		local args = { ... }
-		if args[1] == nil and #args >= 1 then
+		if vim.tbl_isempty(args) or (args[1] == nil and #args == 1) then
 			vim.notify("NIL", vim.log.levels.TRACE)
 			return
 		end
