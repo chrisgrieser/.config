@@ -14,8 +14,8 @@ local s = {
 }
 
 local source_icons = {
-	buffer = "󰽙",
 	treesitter = "",
+	buffer = "󰽙",
 	zsh = "",
 	nvim_lsp = "󰒕",
 	codeium = "",
