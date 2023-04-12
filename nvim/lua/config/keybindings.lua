@@ -448,16 +448,14 @@ keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = "save" }) -- cmd+s, will
 -- stylua: ignore
 keymap("", "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
 -- stylua: ignore
-keymap( "", "<D-S-l>", function()
+keymap("", "<D-S-l>", function()
 	local parentFolder = expand("%:p:h")
 	if not parentFolder:find("Alfred%.alfredpreferences") then
 		vim.notify("Not in an Alfred directory.", u.warn)
 		return
 	end
-	local workflowId = parentFolder:match("workflows/([^/])+")
-	print("parentFolder:", parentFolder)
-	print("workflowId:", workflowId)
-	local command = ([[osascript -e 'tell application id "com.runningwithcrayons.Alfred" to reveal workflow "%s"']]):format(workflowId)
+	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
+	local command = ([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(workflowId)
 	fn.system(command)
 end, { desc = "󰾺 Reveal Workflow in Alfred" })
 keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
