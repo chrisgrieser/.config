@@ -49,8 +49,12 @@ function gd() {
 		if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
 		diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"
 	else
+		# uses git delta (configured so in gitconfig)
 		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
-		git diff # uses git delta (configured so in gitconfig)
+
+		# dynamically change theme
+		defaults read -g AppleInterfaceStyle | grep -q "Dark" && light="false" || light="true"
+		git -c delta.light="$light" diff
 	fi
 }
 

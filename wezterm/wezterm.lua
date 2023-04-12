@@ -157,7 +157,7 @@ local config = {
 	font = wt.font("JetBrainsMono Nerd Font", {
 		weight = "Medium", -- tad thicker
 	}),
-	-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
+	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 
 	-- Size
 	adjust_window_size_when_changing_font_size = false,

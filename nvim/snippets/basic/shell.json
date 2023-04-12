@@ -7,6 +7,10 @@
 		"prefix": "default arg value",
 		"body": "${1:input}=${1-\"${2:default_value}\"}"
 	},
+	"check if dark mode (macOS)": {
+		"prefix": "check if dark mode (macOS)",
+		"body": "defaults read -g AppleInterfaceStyle | grep -q \"Dark\""
+	},
 	"slice": {
 		"prefix": "slice (expansion)",
 		"body": "${${1:var}:${2:start}:${3:end}}"
