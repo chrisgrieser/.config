@@ -54,7 +54,9 @@ function gd() {
 
 		# dynamically change theme
 		defaults read -g AppleInterfaceStyle | grep -q "Dark" && light="false" || light="true"
-		git -c delta.light="$light" diff
+		git -c delta.light="$light" diff --word-diff
+
+		# --word-diff
 	fi
 }
 
