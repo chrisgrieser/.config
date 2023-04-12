@@ -33,17 +33,15 @@ function o() {
 }
 
 # show files
-# + git status (if in git dir)
+# + git status
 # + brief git log (if at git root)
 function inspect() {
-	if ! command -v exa &>/dev/null; then echo "exa not installed." && return 0; fi
-	if ! command -v git &>/dev/null; then echo "git not installed." && return 0; fi
+	if ! command -v exa &>/dev/null; then echo "exa not installed." && return 1; fi
+	if ! command -v git &>/dev/null; then echo "git not installed." && return 1; fi
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		if [[ $(git rev-parse --show-toplevel) == $(pwd) ]]; then
-			gitlog 5 # custom function defined in git_github.zsh
-			separator
-		fi
+		gitlog 5 # custom function defined in git_github.zsh
+		separator
 		if [[ -n "$(git status --short --porcelain)" ]]; then
 			git status --short # run again for color
 			separator

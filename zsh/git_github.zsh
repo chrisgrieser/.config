@@ -80,8 +80,8 @@ function gitlog () {
 		sed -e 's/HEAD/󱍀/g' |
 		sed -e 's/grafted,/ /g' | 
 		less
-	# INFO less is configured not to start the pager if the output short enough
-	# to fit on one screen
+		# INFO less is configured not to start the pager if the output short enough 
+		# to fit on one screen
 }
 
 # brief git log
