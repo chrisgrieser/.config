@@ -4,13 +4,13 @@ local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
 M.iMacDisplay = hs.screen("Built%-in")
-M.Maximized = hs.layout.maximized
+M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 M.toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
 if u.isAtMother() then M.toTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
 
-M.ejectedFinderWins = {
+M.rejectedFinderWins = {
 	"^Quick Look$",
 	"^qlmanage$",
 	"^Move$",
@@ -57,7 +57,7 @@ local function obsidianThemeDevHelper(win, pos)
 		not win
 		or not win:application()
 		or not (win:application():name():lower() == "neovide")
-		or not (pos == M.pseudoMax or pos == M.Maximized)
+		or not (pos == M.pseudoMax or pos == M.maximized)
 		or not u.appRunning("Obsidian")
 	then
 		return
@@ -66,6 +66,28 @@ local function obsidianThemeDevHelper(win, pos)
 		u.app("Obsidian"):unhide()
 		u.app("Obsidian"):mainWindow():raise()
 	end)
+end
+
+--------------------------------------------------------------------------------
+-- TWITTER
+
+function M.twitterToTheSide()
+	-- in case of active split, prevent left window of covering the sketchybar
+	if LEFT_SPLIT and LEFT_SPLIT:application() then LEFT_SPLIT:application():hide() end
+
+	if u.isFront("Alfred") then return end
+
+	local app = u.app("Twitter")
+	if not app then return end
+
+	if app:isHidden() then app:unhide() end
+
+	-- not using mainWindow to not unintentionally move Media or new-tweet window
+	local win = app:findWindow("Twitter")
+	if not win then return end
+
+	win:raise()
+	win:setFrame(M.toTheSide)
 end
 
 --------------------------------------------------------------------------------
@@ -124,17 +146,14 @@ function M.moveResize(win, pos)
 
 	-- Twitter Extras
 	if pos == M.pseudoMax or pos == M.centered then
-		TwitterToTheSide()
-	elseif pos == M.Maximized and u.appRunning("Twitter") then
+		M.toTheSide()
+	elseif pos == M.maximized and u.appRunning("Twitter") then
 		if u.app("Twitter") then u.app("Twitter"):hide() end
 	end
 
 	-- resize
-	local function resize(_win, _pos)
-		if M.CheckSize(_win, _pos) ~= false then return end -- check for unequal false, since non-resizable wins return nil
-		_win:moveToUnit(_pos)
-	end
-	resize(win, pos)
+	-- check for unequal false, since non-resizable wins return nil
+	if M.CheckSize(win, pos) ~= false then win:moveToUnit(pos) end
 
 	-- Obsidian extras (has to come after resizing)
 	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win) end
@@ -163,7 +182,7 @@ function M.autoTile(winSrc)
 		-- window filter subscription
 		for _, finderWin in pairs(u.app("Finder"):allWindows()) do
 			local rejected = false
-			for _, bannedTitle in pairs(M.ejectedFinderWins) do
+			for _, bannedTitle in pairs(M.rejectedFinderWins) do
 				if finderWin:title():find(bannedTitle) then rejected = true end
 			end
 			if not rejected then table.insert(wins, finderWin) end
@@ -182,7 +201,7 @@ function M.autoTile(winSrc)
 	elseif #wins == 1 then
 		local pos
 		if u.isProjector() then
-			pos = M.Maximized
+			pos = M.maximized
 		elseif u.isFront("Finder") then
 			pos = M.centered
 		else
@@ -220,43 +239,45 @@ end
 --------------------------------------------------------------------------------
 
 -- Open Apps always at Mouse Screen
-Wf_appsOnMouseScreen = u.wf.new({
-	"Vivaldi",
-	"Mimestream",
-	"BetterTouchTool",
-	"Obsidian",
-	"Slack",
-	"IINA",
-	"WezTerm",
-	"Hammerspoon",
-	"System Settings",
-	"Discord",
-	"Neovide",
-	"neovide",
-	"Espanso",
-	"BusyCal",
-	"Alfred Preferences",
-	"YouTube",
-	"Netflix",
-	"CrunchyRoll",
-	"Finder",
-}):subscribe(u.wf.windowCreated, function(newWin)
-	local mouseScreen = hs.mouse.getCurrentScreen()
-	if not mouseScreen then return end
-	local screenOfWindow = newWin:screen()
-	if not (u.isProjector()) or mouseScreen:name() == screenOfWindow:name() then return end
+Wf_appsOnMouseScreen = u.wf
+	.new({
+		"Vivaldi",
+		"Mimestream",
+		"BetterTouchTool",
+		"Obsidian",
+		"Slack",
+		"IINA",
+		"WezTerm",
+		"Hammerspoon",
+		"System Settings",
+		"Discord",
+		"Neovide",
+		"neovide",
+		"Espanso",
+		"BusyCal",
+		"Alfred Preferences",
+		"YouTube",
+		"Netflix",
+		"CrunchyRoll",
+		"Finder",
+	})
+	:subscribe(u.wf.windowCreated, function(newWin)
+		local mouseScreen = hs.mouse.getCurrentScreen()
+		if not mouseScreen then return end
+		local screenOfWindow = newWin:screen()
+		if not (u.isProjector()) or mouseScreen:name() == screenOfWindow:name() then return end
 
-	local appn = newWin:application():name()
-	u.runWithDelays({0, 0.2, 0.5, 0.8, 1.1 }, function()
-		if mouseScreen:name() ~= screenOfWindow:name() then newWin:moveToScreen(mouseScreen) end
+		local appn = newWin:application():name()
+		u.runWithDelays({ 0, 0.2, 0.5, 0.8, 1.1 }, function()
+			if mouseScreen:name() ~= screenOfWindow:name() then newWin:moveToScreen(mouseScreen) end
 
-		if appn == "Finder" or appn == "Script Editor" then
-			M.moveResize(newWin, M.centered)
-		else
-			M.moveResize(newWin, M.Maximized)
-		end
+			if appn == "Finder" or appn == "Script Editor" then
+				M.moveResize(newWin, M.centered)
+			else
+				M.moveResize(newWin, M.maximized)
+			end
+		end)
 	end)
-end)
 
 --------------------------------------------------------------------------------
 -- HOTKEY ACTIONS
@@ -273,7 +294,7 @@ local function controlSpaceAction()
 	elseif not M.CheckSize(currentWin, M.pseudoMax) then
 		pos = M.pseudoMax
 	else
-		pos = M.Maximized
+		pos = M.maximized
 	end
 	M.moveResize(currentWin, pos)
 end
@@ -299,7 +320,7 @@ local function homeAction()
 		hs.alert("🔈/🔇") -- toggle mute
 		u.keystroke({ "shift", "command" }, "A", 1, u.app("zoom.us"))
 	else
-		TwitterScrollUp()
+		twitter.ScrollUp()
 	end
 end
 
@@ -320,8 +341,10 @@ u.hotkey({}, "home", homeAction)
 u.hotkey({}, "end", endAction)
 u.hotkey(u.hyper, "right", function() M.moveResize(hs.window.focusedWindow(), hs.layout.right50) end)
 u.hotkey(u.hyper, "left", function() M.moveResize(hs.window.focusedWindow(), hs.layout.left50) end)
+-- stylua: ignore start
 u.hotkey(u.hyper, "down", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0.5, w = 1, h = 0.5 }) end)
 u.hotkey(u.hyper, "up", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0, w = 1, h = 0.5 }) end)
+-- stylua: ignore end
 u.hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
 
 --------------------------------------------------------------------------------

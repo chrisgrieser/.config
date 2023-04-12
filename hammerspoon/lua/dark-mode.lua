@@ -1,3 +1,5 @@
+local M = {}
+
 local u = require("lua.utils")
 local console = require("lua.console")
 --------------------------------------------------------------------------------
@@ -61,9 +63,6 @@ end
 u.hotkey({}, "f13", toggleDarkMode) -- del key on Keychron Keyboard
 
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-local M = {}
 
 ---@param toDark boolean true = dark, false = light
 function M.set(toDark)

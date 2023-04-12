@@ -3,6 +3,7 @@ local M = {}
 local fn = vim.fn
 local bo = vim.bo
 local g = vim.g
+local cmd = vim.cmd
 local expand = vim.fn.expand
 local logWarn = vim.log.levels.WARN
 

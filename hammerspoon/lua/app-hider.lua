@@ -30,7 +30,7 @@ local function hideOthers(appObj)
 	local thisWin = appObj:mainWindow()
 
 	-- only hide when bigger window
-	if not (wu.CheckSize(thisWin, wu.pseudoMax) or wu.CheckSize(thisWin, wu.Maximized)) then return end
+	if not (wu.CheckSize(thisWin, wu.pseudoMax) or wu.CheckSize(thisWin, wu.maximized)) then return end
 
 	local appsNotToHide =
 		{ "IINA", "zoom.us", "CleanShot X", "SideNotes", "Twitter", "Alfred", appObj:name() }
@@ -92,7 +92,7 @@ end):start()
 Wf_maxWindows = u.wf.new(true):subscribe(u.wf.windowUnfocused, function(win)
 	if
 		not (u.isProjector())
-		and wu.CheckSize(win, wu.Maximized)
+		and wu.CheckSize(win, wu.maximized)
 		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X" })
 	then
 		win:application():hide()

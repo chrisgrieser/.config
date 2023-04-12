@@ -1,8 +1,10 @@
+local M = {}
+
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 
-function TwitterScrollUp()
+function M.ScrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
@@ -19,25 +21,6 @@ function TwitterScrollUp()
 		u.keystroke({ "cmd" }, "1", 1, twitter) -- scroll up
 		u.keystroke({ "cmd" }, "up", 1, twitter) -- goto top
 	end)
-end
-
-function TwitterToTheSide()
-	-- in case of active split, prevent left window of covering the sketchybar
-	if LEFT_SPLIT and LEFT_SPLIT:application() then LEFT_SPLIT:application():hide() end
-
-	if u.isFront("Alfred") then return end
-
-	local twitter = u.app("Twitter")
-	if not twitter then return end
-
-	if twitter:isHidden() then twitter:unhide() end
-
-	-- not using mainWindow to not unintentionally move Media or new-tweet window
-	local win = twitter:findWindow("Twitter")
-	if not win then return end
-
-	win:raise()
-win:setFrame(wu.toTheSide)
 end
 
 -- ensure that twitter does not get focus, "falling through" to the next window
@@ -91,8 +74,8 @@ TwitterWatcher = u.aw.new(function(appName, event)
 	-- move twitter and scroll it up
 	if appName == "Twitter" and (event == u.aw.launched or event == u.aw.activated) then
 		u.asSoonAsAppRuns("Twitter", function()
-			TwitterToTheSide()
-			TwitterScrollUp()
+			wu.twitterToTheSide()
+			M.ScrollUp()
 			wu.bringAllWinsToFront()
 
 			-- focus new tweet window if there is one
@@ -103,7 +86,7 @@ TwitterWatcher = u.aw.new(function(appName, event)
 	-- auto-close media windows and scroll up when deactivating
 	elseif appName == "Twitter" and event == u.aw.deactivated then
 		if u.isFront("CleanShot X") then return end
-		TwitterScrollUp()
+		M.ScrollUp()
 		twitterCleanupLink()
 		twitterCloseMediaWindow()
 
@@ -116,10 +99,13 @@ TwitterWatcher = u.aw.new(function(appName, event)
 		local frontWin = hs.window.focusedWindow()
 		if not frontWin or not twitter then return end
 
-if wu.CheckSize(frontWin, wu.pseudoMax) or wu.CheckSize(frontWin, wu.centered) then
-			TwitterToTheSide()
-elseif wu.CheckSize(frontWin, wu.Maximized) then
+	if wu.CheckSize(frontWin, wu.pseudoMax) or wu.CheckSize(frontWin, wu.centered) then
+			M.toTheSide()
+			elseif wu.CheckSize(frontWin, wu.maximized) then
 			twitter:hide()
 		end
 	end
 end):start()
+
+--------------------------------------------------------------------------------
+return M
