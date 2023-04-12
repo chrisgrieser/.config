@@ -40,13 +40,12 @@ function inspect() {
 	if ! command -v git &>/dev/null; then echo "git not installed." && return 0; fi
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		gitstatus=$(git status --short --porcelain)
-		if [[ -n "$gitstatus" ]]; then
-			git status --short # run again for color
-			separator
-		fi
 		if [[ $(git rev-parse --show-toplevel) == $(pwd) ]]; then
 			gitlog 5 # custom function defined in git_github.zsh
+			separator
+		fi
+		if [[ -n "$(git status --short --porcelain)" ]]; then
+			git status --short # run again for color
 			separator
 		fi
 	fi
@@ -124,12 +123,11 @@ function eject() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	# if one volume, will auto-eject due to `-1`
-	selected=$(echo "$volumes" | 
+	selected=$(echo "$volumes" |
 		fzf -0 -1 \
 			--layout=reverse --bind="tab:down,shift-tab:up" \
 			--no-info \
-			--height=30%\
-	)
+			--height=30%)
 	[[ -z "$selected" ]] && return 0 # fzf aborted
 
 	diskutil eject "$selected"

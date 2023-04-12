@@ -7,8 +7,10 @@
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# saves spaces
 --wrap=never
 --tabs=2
+
 --terminal-width="-1"
 
 # Possible values: *default*, full, auto, plain, changes, header,
