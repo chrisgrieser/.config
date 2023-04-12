@@ -190,8 +190,10 @@ function M.amendAndPushForce(prefillMsg)
 		local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
 		prefillMsg = lastCommitMsg
 	end
+	hlTooLongCommitMsgs(true)
 
 	vim.ui.input({ prompt = "Amend:", default = prefillMsg }, function(commitMsg)
+		hlTooLongCommitMsgs(false) -- early, so also done on cancellation
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
 
