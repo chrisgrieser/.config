@@ -10,7 +10,7 @@ return {
 			lsp = { auto_attach = true },
 			icons = { Object = "󰆧 " },
 			separator = "  ",
-			depth_limit = 7,
+			depth_limit = 8,
 			depth_limit_indicator = "…",
 		},
 	},
@@ -19,9 +19,10 @@ return {
 		event = "LspAttach",
 		dependencies = { "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
 		opts = {
+			lsp = { auto_attach = true },
 			window = {
 				border = u.borderStyle,
-				size = { height = "50%", width = "85%" },
+				size = { height = "55%", width = "90%" },
 				scrolloff = nil,
 				sections = {
 					left = { size = "30%" },
@@ -29,7 +30,6 @@ return {
 					right = { preview = "never" }, -- leaf|always|never
 				},
 			},
-			lsp = { auto_attach = true },
 		},
 	},
 	{ -- better virtualtext diagnostics
