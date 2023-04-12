@@ -66,16 +66,18 @@ local function workLayout()
 	u.asSoonAsAppRuns("Twitter", TwitterScrollUp)
 
 	-- open
-	local appsToOpen = { "Discord", "Vivaldi" }
+	local appsToOpen = { "Discord", "Vivaldi", "Mimestream" }
 	if not isWeekend() then table.insert(appsToOpen, 1, "Slack") end
 	u.openApps(appsToOpen)
-	u.app("Mimestream"):activate() -- activation instead of opening to put it into the foreground
 	for _, app in pairs(appsToOpen) do
 u.asSoonAsAppRuns(app, function() wu.moveResize(u.app(app):mainWindow(), u.pseudoMax) end)
 	end
 	MyTimer = hs.timer.waitUntil(
 		function() return u.appRunning(appsToOpen) end,
-		function() u.restartApp("AltTab") end,
+		function()
+			u.app("Mimestream"):activate() 
+			u.restartApp("AltTab")
+		end,
 		0.2
 	)
 
