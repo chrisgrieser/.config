@@ -1,8 +1,11 @@
+<!-- vale Google.FirstPerson = NO -->
 ## Plugins
 
 ▶️ [Nice overview of my dotfiles](https://dotfyle.com/chrisgrieser/config-nvim).
 
+<!-- vale Vale.Spelling = NO -->
 Unfortunately, dotfyle's scrapping seems to be a bit off (missing about 40 plugins 😅). You can get a *full* list of all plugins I use directly from the [lazy.lock](./lazy-lock.json), and the configs of those plugins can be found in [the plugins folder](./lua/plugins)
+<!-- vale Vale.Spelling = YES -->
 
 Also, you can check out [the plugins I authored myself](https://github.com/chrisgrieser?tab=repositories&q=nvim&type=source&language=&sort=stargazers).
 

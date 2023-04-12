@@ -41,7 +41,7 @@
 	},
 	"ignore (vale)": {
 		"prefix": "ignore (vale)",
-		"body": "<!-- vale ${1:provider.rule} = NO -->"
+		"body": "<!-- vale ${1|Vale.Spelling,Google.FirstPerson,Google.Will|} = NO -->"
 	},
 	"ignore start/end (vale)": {
 		"prefix": "ignore start/end (vale)",
