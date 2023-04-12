@@ -61,6 +61,7 @@ end, { desc = "Clear Notifications" })
 
 --------------------------------------------------------------------------------
 -- MOTIONS
+keymap({ "n", "o", "x" }, "w", '<cmd>lua require("spider").motion("w")<CR>', { desc = "󱇪 w" })
 keymap({ "n", "o", "x" }, "e", '<cmd>lua require("spider").motion("e")<CR>', { desc = "󱇪 e" })
 keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { desc = "󱇪 b" })
 
