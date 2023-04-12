@@ -15,9 +15,9 @@ Thresholds = {
 	BusyCal = 2,
 	neovide = 120, -- needs lowercase
 	["wezterm-gui"] = 45,
-	Hammerspoon = 5, -- affects the console
+	Hammerspoon = 1, -- affects the console
 	Lire = 2,
-	["Alfred Preferences"] = 15,
+	["Alfred Preferences"] = 10,
 	["System Settings"] = 2,
 	Finder = 15, -- only closes windows
 }
@@ -34,7 +34,7 @@ end
 
 ---log times when an app has been deactivated
 DeactivationWatcher = u.aw.new(function(app, event)
-	if not app or app == "" then return end -- safeguard for special apps
+	if not app or app == "" then return end -- empty string as safeguard for special apps
 
 	if event == u.aw.deactivated then
 		IdleApps[app] = now()
