@@ -3,6 +3,14 @@
 		"prefix": "require(string)",
 		"body": "require(\"$0\")"
 	},
+	"block comment": {
+		"prefix": "block comment",
+		"body": [
+			"--[[",
+			"$0",
+			"--]]"
+		]
+	},
 	"module": {
 		"prefix": "module",
 		"body": [
