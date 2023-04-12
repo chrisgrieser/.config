@@ -83,7 +83,7 @@ opt.linebreak = true -- do not break up full words on wrap
 autocmd({ "VimEnter", "VimResized" }, { -- the "WinResized" autocmd event does not seem to work currently
 	callback = function()
 		if opt_local.wrap:get() then return end
-		local gmColumn = math.floor(fn.winwidth("%") / 2) ---@diagnostic disable-line: param-type-mismatch
+		local gmColumn = math.floor(vim.api.nvim_win_get_width(0) / 2) 
 		opt.colorcolumn = { "+1", gmColumn }
 	end,
 })
