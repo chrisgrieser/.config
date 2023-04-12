@@ -37,6 +37,7 @@
 	colorMoved = default
 [delta]
 	navigate = true # use n and N to move between diff sections
+	tabs = 3
 
 	# side-by-side-view: deactivate line numbers in but keep vertical separator
 	line-numbers-left-format = ""
