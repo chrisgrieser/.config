@@ -66,7 +66,7 @@ local function telescopeConfig()
 			layout_config = {
 				horizontal = {
 					height = 0.85,
-					width = 0.9,
+					width = 0.95,
 					preview_cutoff = 70,
 					preview_width = { 0.50, min = 30 },
 				},

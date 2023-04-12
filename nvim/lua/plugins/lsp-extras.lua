@@ -1,20 +1,4 @@
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		local bufnr = args.buf
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		local capabilities = client.server_capabilities
-
-		-- navic not that useful for css
-		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
-			require("nvim-navic").attach(client, bufnr)
-		end
-
-		if capabilities.inlayHintProvider then
-			require("lsp-inlayhints").on_attach(client, bufnr, false)
-		end
-	end,
-})
-
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
@@ -36,7 +20,14 @@ return {
 		dependencies = { "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
 		opts = {
 			window = {
-				border = require("config.utils").borderStyle,
+				border = u.borderStyle,
+				size = { height = "50%", width = "85%" },
+				scrolloff = nil,
+				sections = {
+					left = { size = "30%" },
+					mid = { size = "40%" },
+					right = { preview = "never" }, -- leaf|always|never
+				},
 			},
 			lsp = { auto_attach = true },
 		},
@@ -55,8 +46,8 @@ return {
 			height = 23,
 			border = {
 				enable = true,
-				top_char = require("config.utils").borderHorizontal,
-				bottom_char = require("config.utils").borderHorizontal,
+				top_char = u.borderHorizontal,
+				bottom_char = u.borderHorizontal,
 			},
 			preview_win_opts = { number = false },
 			list = {
@@ -103,6 +94,18 @@ return {
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim", -- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		lazy = true, -- required in attach function
+		init = function()
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					local bufnr = args.buf
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+					local capabilities = client.server_capabilities
+					if capabilities.inlayHintProvider then
+						require("lsp-inlayhints").on_attach(client, bufnr, false)
+					end
+				end,
+			})
+		end,
 		opts = {
 			inlay_hints = {
 				parameter_hints = {
