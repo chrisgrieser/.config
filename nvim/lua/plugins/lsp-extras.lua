@@ -35,8 +35,8 @@ return {
 	{ -- better virtualtext diagnostics
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		config = true,
-		lazy = true, -- loaded by keymaps
-		-- off at start
+		lazy = true, -- loaded by keymap
+		-- disabled at start
 		init = function() vim.diagnostic.config { virtual_lines = false } end,
 	},
 	{ -- better references/definitions
@@ -54,7 +54,9 @@ return {
 				width = 0.4,
 				position = "left",
 			},
+			folds = { folded = true },
 			hooks = {
+
 				-- jump directly if there is only one references
 				-- filter out current line, if references
 				before_open = function(results, open, jump, method)
