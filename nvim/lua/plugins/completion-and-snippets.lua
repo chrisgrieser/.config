@@ -101,6 +101,7 @@ local function cmpconfig()
 		},
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
+			["<D-x>"] = cmp.mapping.complete_common_string() , 
 			["<D-Esc>"] = cmp.mapping.complete(), -- like with macOS autocomplete
 			["<C-e>"] = cmp.mapping.abort(),
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
@@ -163,7 +164,6 @@ end
 
 local function filetypeCompletionConfig()
 	local cmp = require("cmp")
-
 	cmp.setup.filetype("lua", {
 		enabled = function() -- disable leading "-"
 			local lineContent = vim.fn.getline(".")

@@ -15,6 +15,7 @@ Thresholds = {
 	BusyCal = 2,
 	neovide = 120, -- needs lowercase
 	["wezterm-gui"] = 45,
+	Hammerspoon = 5, -- affects the console
 	Lire = 2,
 	["Alfred Preferences"] = 15,
 	["System Settings"] = 2,
@@ -45,11 +46,13 @@ end):start()
 --------------------------------------------------------------------------------
 
 ---@param app string name of the app
-local function quitter(app)
+local function quit(app)
 	if app == "Finder" then
 		for _, win in pairs(u.app("Finder"):allWindows()) do
 			win:close()	
 		end
+	elseif app == "Hammerspoon" then
+		hs.closeConsole()
 	elseif app == "wezterm-gui" then
 		u.app(app):kill9() -- needs kill9 to avoid confirmation
 	else
@@ -57,6 +60,7 @@ local function quitter(app)
 	end
 	print("⏹️ AutoQuitting: " .. app)
 	IdleApps[app] = nil
+	print()
 end
 
 --------------------------------------------------------------------------------
@@ -69,12 +73,12 @@ AutoQuitterTimer = hs.timer
 
 			-- can't do this with guard clause, since lua has no `continue`
 			local appHasThreshhold = Thresholds[app] ~= nil
-			local appIsRunning = hs.application.get(app)
+			local appIsRunning = u.appRunning(app)
 
 			if appHasThreshhold and appIsRunning then
 				local idleTimeSecs = now() - lastActivation
 				local thresholdSecs = Thresholds[app] * 60
-				if idleTimeSecs > thresholdSecs then quitter(app) end
+				if idleTimeSecs > thresholdSecs then quit(app) end
 			end
 		end
 	end)
