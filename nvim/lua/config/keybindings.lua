@@ -610,7 +610,8 @@ autocmd("LspAttach", {
 
 		-- conditional to not overwrite treesitter goto-symbol
 		if capabilities.documentSymbolProvider and client.name ~= "cssls" then
-			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
+			keymap("n", "gs", function() require("nvim-navbuddy").open() end, { desc = "󰒕 Symbols (navbuddy)", buffer = true }) -- overrides treesitter symbols browsing
+			-- keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
 			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 
@@ -786,7 +787,7 @@ autocmd("FileType", {
 
 -- remove the waiting time from the q, due to conflict with `qq` for comments
 autocmd("FileType", {
-	pattern = { "ssr", "TelescopePrompt", "harpoon" },
+	pattern = { "ssr", "TelescopePrompt", "harpoon", "NavBuddy" },
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 		if bo.filetype == "ssr" then

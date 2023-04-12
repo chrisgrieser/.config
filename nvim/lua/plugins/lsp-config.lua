@@ -71,6 +71,11 @@ lspSettings.cssls = {
 	},
 }
 
+-- disable symbols, since not all to useful here
+lspOnAttach.cssls = function(client, _)
+	client.server_capabilities.documentSymbolProvider = false
+end
+
 --------------------------------------------------------------------------------
 -- JAVASCRIPT & TYPESCRIPT
 
@@ -192,7 +197,8 @@ return {
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = setupAllLsps,
 		config = function()
-			-- FIX for multi-space workspace https://github.com/neovim/nvim-lspconfig/issues/2366#issuecomment-1367098168
+
+			-- (not well working) FIX for multi-space workspace https://github.com/neovim/nvim-lspconfig/issues/2366#issuecomment-1367098168
 			vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)
 				local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
 				local bufnr = vim.api.nvim_get_current_buf()

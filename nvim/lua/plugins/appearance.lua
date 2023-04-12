@@ -37,6 +37,7 @@ return {
 				bibtex = { icon = "", name = "BibTeX" },
 				http = { icon = "󰴚", name = "http" },
 				-- plugins
+				NavBuddy = { icon = "󰆋", name = "Navbuddy" },
 				replacer = { icon = "", name = "replacer" },
 				lazy = { icon = "", name = "Lazy" },
 				mason = { icon = "", name = "Mason" },

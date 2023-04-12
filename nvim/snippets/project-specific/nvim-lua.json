@@ -3,6 +3,10 @@
 		"prefix": "keymap",
 		"body": "keymap(\"n\", \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
 	},
+	"utils (require)": {
+		"prefix": "utils (require)",
+		"body": "local u = require(\"config.utils\")"
+	},
 	"keymap (multi mode)": {
 		"prefix": "keymap (multi-mode)",
 		"body": "keymap({ \"n\", \"x\" }, \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
