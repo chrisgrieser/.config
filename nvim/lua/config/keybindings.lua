@@ -738,9 +738,9 @@ keymap("n", "<leader>th", function()
 	fn.system("open https://github.com/rest-nvim/rest.nvim/tree/main/tests")
 end, { desc = "󰴚 Test HTTP request" })
 
-keymap("n", "<leader>tt", ":ToggleTerm size=8<CR>", { desc = " ToggleTerm" })
+keymap("n", "<leader>tt", ":ToggleTerm size=10<CR>", { desc = " ToggleTerm" })
 -- stylua: ignore
-keymap( "x", "<leader>tt", ":ToggleTermSendVisualSelection size=8<CR>", { desc = "  Run Selection in ToggleTerm" })
+keymap( "x", "<leader>tt", ":ToggleTermSendVisualSelection size=10<CR>", { desc = "  Run Selection in ToggleTerm" })
 
 keymap("n", "<leader>tc", function()
 	local isCodiBuffer = bo.buftype ~= ""
