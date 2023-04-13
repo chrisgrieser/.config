@@ -32,9 +32,7 @@ function o() {
 	fi
 }
 
-# show files
-# + git status
-# + brief git log (if at git root)
+# show files + git status + brief git log
 function inspect() {
 	if ! command -v exa &>/dev/null; then echo "exa not installed." && return 1; fi
 	if ! command -v git &>/dev/null; then echo "git not installed." && return 1; fi
@@ -47,9 +45,7 @@ function inspect() {
 			separator
 		fi
 	fi
-	exa --long --all --grid \
-		--sort=modified --group-directories-first \
-		--icons --git --no-user --no-permissions --no-time --no-filesize \
+	exa --all --icons --sort=modified --group-directories-first \
 		--git-ignore --ignore-glob=.git --ignore-glob=.DS_Store
 	echo
 }
