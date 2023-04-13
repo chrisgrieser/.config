@@ -131,11 +131,8 @@ lspSettings.yamlls = {
 	yaml = { keyOrdering = false }, -- FIX mapKeyOrder
 }
 
--- Force lsp to work with zsh
--- lspFileTypes.bashls = { "sh", "zsh", "bash" }
-
 --------------------------------------------------------------------------------
--- ENABLE CAPATIBILITES FOR PLUGINS
+-- ENABLE CAPABILITIES FOR PLUGINS
 
 -- Enable snippets-completion (for nvim_cmp)
 local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
