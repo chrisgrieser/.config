@@ -1,6 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
 
-ObjC.import("stdlib");
 const fileExists = filePath => Application("Finder").exists(Path(filePath));
 const sidenotes = Application("SideNotes");
 
@@ -9,7 +8,7 @@ const sidenotes = Application("SideNotes");
 function run(argv) {
 	const input = argv[0];
 
-	// without the folder field, uses the setting from SideNotes to determine new
+   // without the folder field, uses the setting from SideNotes to determine new
 	// note location
 	sidenotes.createNote({
 		text: input,
@@ -19,7 +18,6 @@ function run(argv) {
 	// close sidenotes
 	Application("System Events").keystroke("w", { using: ["command down"] });
 
-	// first line for Alfred notification
 	const firstline = input.split("\n").shift();
-	return firstline;
+	return firstline; // first line for Alfred notification
 }
