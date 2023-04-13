@@ -346,14 +346,9 @@ return {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
 				enable_autosnippets = true, -- for javascript "if ()"
-				-- highlight when at a choice node
-				-- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts
-				ext_opts = {
+				ext_opts = { -- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts highlight when at a choice node
 					[require("luasnip.util.types").choiceNode] = {
-						active = {
-							hl_group = "DiagnosticHint",
-							virt_text = { { "󰝮", "DiagnosticHint" } },
-						},
+						active = { hl_group = "DiagnosticHint", virt_text = { { "󰊖", "DiagnosticHint" } } },
 					},
 				},
 			}

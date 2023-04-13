@@ -28,7 +28,6 @@ hs.consoleOnTop(false)
 function CleanupConsole()
 	local consoleOutput = tostring(cons.getConsole())
 	hs.console.clearConsole()
-	local layoutLinesCount = 0
 	local isDark = u.isDarkMode()
 
 	local cleanLines = {}
@@ -41,15 +40,7 @@ function CleanupConsole()
 			or line:find("%-%- Loading .*/init.lua$")
 			or line:find("%-%- Done.$")
 
-		local layoutInfo = line:find("No windows matched, skipping.")
-		if not ignore and not layoutInfo and layoutLinesCount == 0 then
-			table.insert(cleanLines, line)
-		-- skip multiline-log messages from applying a layout without a window open
-		elseif layoutLinesCount > 3 then
-			layoutLinesCount = 0
-		elseif layoutInfo or layoutLinesCount > 0 then
-			layoutLinesCount = layoutLinesCount + 1
-		end
+		if not ignore then table.insert(cleanLines, line) end
 	end
 	for _, line in pairs(cleanLines) do
 		-- FIX double-timestamp displayed sometimes
@@ -86,9 +77,13 @@ end
 
 -- clean up console as soon as it is opened
 -- close console as soon as unfocused
-Wf_hsConsole = u.wf.new("Hammerspoon")
+Wf_hsConsole = u.wf
+	.new("Hammerspoon")
 	:subscribe(u.wf.windowCreated, function(newWin)
 		if newWin:title() == "Hammerspoon Console" then CleanupConsole() end
+	end)
+	:subscribe(u.wf.windowUnfocused, function(newWin)
+		if newWin:title() == "Hammerspoon Console" then u.app("Hammerspoon"):hide() end
 	end)
 
 --------------------------------------------------------------------------------

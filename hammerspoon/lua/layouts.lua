@@ -64,7 +64,7 @@ local function workLayout()
 	-- twitter
 	u.openApps("Twitter")
 	u.asSoonAsAppRuns("Twitter", twitter.toTheSide)
-	u.asSoonAsAppRuns("Twitter", twitter.ScrollUp)
+	u.asSoonAsAppRuns("Twitter", twitter.scrollUp)
 
 	-- open
 	local appsToOpen = { "Discord", "Vivaldi", "Mimestream" }
@@ -147,7 +147,6 @@ UnlockWatcher = c.new(function(event)
 	u.runWithDelays(20, function()
 		if UnlockTimer and UnlockTimer:running() then
 			UnlockTimer:stop()
-			UnlockTimer = nil ---@diagnostic disable-line: assign-type-mismatch
 		end
 	end)
 end):start()

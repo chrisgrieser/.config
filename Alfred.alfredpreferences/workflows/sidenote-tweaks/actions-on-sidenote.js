@@ -72,22 +72,21 @@ function run(argv) {
 		noteObj.delete();
 	}
 
-	// close sidenotes if it's the current one 
-	// (except opening an URL since page already gets opened then)
-	if (id === "current" && !doOpenUrl) {
+	// copy to clipboard
+	if (doCopy) {
+		app.setTheClipboardTo(content);
 		// apparently there is JXA API for it, therefore done via keystrokes since it
 		// is ensured that SideNotes is the most frontmost app
-		delay(0.05); /* eslint-disable-line no-magic-numbers */
-		Application("System Events").keystroke("w", { using: ["command down"] });
+		if (id === "current") {
+			delay(0.05); /* eslint-disable-line no-magic-numbers */
+			Application("System Events").keystroke("w", { using: ["command down"] });
+		}
 	}
-
-	// copy to clipboard
-	if (doCopy) app.setTheClipboardTo(content);
 
 	// returns are used for the notification
 	if (doDelete && doOpenUrl) return "🔗 Opened & Deleted";
 	else if (doCopy && doDelete) return "✅ Copied & Deleted";
 	else if (doCopy) return "✅ Copied";
 	else if (doDelete) return "🗑 Note Deleted";
-	return ""; 
+	return "";
 }

@@ -180,7 +180,9 @@ function M.autoTile(winSrc)
 	if type(winSrc) == "string" then
 		-- cannot use windowfilter, since it's empty when not called from a
 		-- window filter subscription
-		for _, finderWin in pairs(u.app("Finder"):allWindows()) do
+		local finder = u.app("Finder")
+		if not finder then return end
+		for _, finderWin in pairs(finder:allWindows()) do
 			local rejected = false
 			for _, bannedTitle in pairs(M.rejectedFinderWins) do
 				if finderWin:title():find(bannedTitle) then rejected = true end
@@ -266,12 +268,13 @@ Wf_appsOnMouseScreen = u.wf
 		if not mouseScreen then return end
 		local screenOfWindow = newWin:screen()
 		if not (u.isProjector()) or mouseScreen:name() == screenOfWindow:name() then return end
+		local app = newWin:application()
+		if not app then return end
 
-		local appn = newWin:application():name()
 		u.runWithDelays({ 0, 0.2, 0.5, 0.8, 1.1 }, function()
 			if mouseScreen:name() ~= screenOfWindow:name() then newWin:moveToScreen(mouseScreen) end
 
-			if appn == "Finder" or appn == "Script Editor" then
+			if app:name() == "Finder" or app:name() == "Script Editor" then
 				M.moveResize(newWin, M.centered)
 			else
 				M.moveResize(newWin, M.maximized)
