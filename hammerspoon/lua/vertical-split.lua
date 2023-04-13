@@ -3,16 +3,42 @@ local wu = require("lua.window-utils")
 local frontApp = hs.application.frontmostApplication
 --------------------------------------------------------------------------------
 
+---activate both apps together,unsplit if one of the two apps are quit.
+---Caveat: using an appwatcher seems much more stable then using window
+---filters, but comes at the cost of not being able to handle it well if one of
+---the two apps have more than one window
+local function pairedActivation()
+	PairedActivationWatcher = u.aw.new(function(appName, eventType)
+		local rightApp = RIGHT_SPLIT:application()
+		local leftApp = LEFT_SPLIT:application()
+		if not leftApp or not rightApp then
+			u.notify("2️⃣ Split stopped as app quit.")
+			VsplitSetLayout("unsplit")
+		elseif eventType == u.aw.activated and appName == rightApp:name() then
+			LEFT_SPLIT:raise()
+		elseif eventType == u.aw.activated and appName == leftApp:name() then
+			RIGHT_SPLIT:raise()
+		end
+	end):start()
+end
+
 local function switchSplit()
 	if not (LEFT_SPLIT and RIGHT_SPLIT) then
 		u.notify("No split active.")
 		return
 	end
 
+	wu.moveResize(RIGHT_SPLIT, hs.layout.left50)
+	wu.moveResize(LEFT_SPLIT, hs.layout.right50)
+
+	local temp = RIGHT_SPLIT
+	RIGHT_SPLIT = LEFT_SPLIT
+	LEFT_SPLIT = temp
 end
 
 ---main split function
----@param mode string unsplit|split, split will use the secondWin and the current win
+---(needs to be global, since pairedActivation and VsplitSetLayout call each other)
+---@param mode "unsplit"|"split" split will use the secondWin and the current win
 ---@param secondWin? hs.window required when using mode "split"
 function VsplitSetLayout(mode, secondWin)
 	-- define split windows
@@ -48,8 +74,6 @@ function VsplitSetLayout(mode, secondWin)
 		LEFT_SPLIT = nil ---@diagnostic disable-line: assign-type-mismatch
 	end
 end
-
-
 
 --------------------------------------------------------------------------------
 
@@ -111,4 +135,4 @@ u.hotkey(u.hyper, "V", function()
 	end
 end)
 
-u.hotkey(u.hyper, "X", function() VsplitSetLayout("switch") end)
+u.hotkey(u.hyper, "X", switchSplit)
