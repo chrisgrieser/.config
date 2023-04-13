@@ -78,6 +78,7 @@ function gitlog () {
 		sed -E 's/ days? ago\)/d ago)/g' |
 		sed -e 's/origin\//󰅡 /g' |
 		sed -e 's/HEAD/󱍀/g' |
+		sed -e 's/->//g' |
 		sed -e 's/grafted,/ /g' | 
 		less
 		# INFO less is configured not to start the pager if the output short enough 

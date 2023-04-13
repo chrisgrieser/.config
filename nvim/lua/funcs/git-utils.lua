@@ -192,7 +192,7 @@ function M.amendAndPushForce(prefillMsg)
 	end
 	hlTooLongCommitMsgs(true)
 
-	vim.ui.input({ prompt = "Amend:", default = prefillMsg }, function(commitMsg)
+	vim.ui.input({ prompt = " 󰊢 Amend", default = prefillMsg }, function(commitMsg)
 		hlTooLongCommitMsgs(false) -- early, so also done on cancellation
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
@@ -217,7 +217,7 @@ function M.addCommitPush(prefillMsg)
 	if not prefillMsg then prefillMsg = "" end
 	hlTooLongCommitMsgs(true)
 
-	vim.ui.input({ prompt = "󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
+	vim.ui.input({ prompt = " 󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
 		hlTooLongCommitMsgs(false) -- early, so also done on cancellation
 
 		if not commitMsg then return end -- aborted input modal
