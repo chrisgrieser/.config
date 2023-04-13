@@ -44,7 +44,7 @@ end
 -- toggle all toplevel folds, but not the
 keymap("n", "zz", function()
 	cmd("%foldclose") -- close toplevel folds
-	cmd("silent! normal! zo") -- open fold cursor is standing on
+	pcall(u.normal, "zo") -- open fold under cursor
 end, { desc = "󰘖 Close toplevel folds" })
 
 --------------------------------------------------------------------------------

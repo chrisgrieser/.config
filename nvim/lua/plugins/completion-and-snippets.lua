@@ -244,11 +244,10 @@ local function filetypeCompletionConfig()
 		},
 	})
 
+	-- in big bibliographies, other stuff performs too slow
 	cmp.setup.filetype("bib", {
 		sources = cmp.config.sources {
 			s.snippets,
-			s.treesitter,
-			s.buffer,
 		},
 	})
 
