@@ -22,10 +22,13 @@ return {
 			},
 		},
 	},
-	{ -- better embedded terminal (+ code runner for shell, somewhat)
+	{ -- better embedded terminal
 		"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm", "ToggleTermSendVisualSelection" },
-		config = true,
+		opts = {
+			size = 12,
+			direction = "horizontal",
+		},
 	},
 	{ -- git sign gutter & hunk textobj
 		"lewis6991/gitsigns.nvim",
