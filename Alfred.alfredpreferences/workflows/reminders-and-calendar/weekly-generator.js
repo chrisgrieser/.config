@@ -54,7 +54,6 @@ function run(argv) {
 	writeData("week_no", weekCounter.toString()); // set week counter for next run
 
 	// calculate new date
-
 	const dayOne = startDate.getDate(); // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
 	const nextweekDay = dayOne + 7 * weekCounter; // the next weeks date as days from from the StartDate's day
 
