@@ -3,6 +3,7 @@ local s = {
 	emojis = { name = "emoji", keyword_length = 2 },
 	nerdfont = { name = "nerdfont", keyword_length = 2 },
 	buffer = { name = "buffer", keyword_length = 3 },
+	fuzzybuffer = { name = "fuzzy_buffer" },
 	path = { name = "path" },
 	zsh = { name = "zsh" },
 	codeium = { name = "codeium" },
@@ -16,6 +17,7 @@ local s = {
 local source_icons = {
 	treesitter = "",
 	buffer = "󰽙",
+	fuzzy_buffer = "f",
 	zsh = "",
 	nvim_lsp = "󰒕",
 	codeium = "",
@@ -298,7 +300,10 @@ local function cmdlineCompletionConfig()
 
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
-		sources = { s.cmdline_history }, -- also gets search history when used here
+		sources = {
+			s.fuzzybuffer,
+			s.cmdline_history, -- gets search history when used here
+		},
 	})
 end
 
@@ -315,6 +320,7 @@ return {
 		end,
 		dependencies = {
 			"hrsh7th/cmp-buffer",
+			"tzachar/cmp-fuzzy-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"dmitmel/cmp-cmdline-history",
@@ -326,6 +332,17 @@ return {
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
+		},
+	},
+	{ -- for fuzzy searching the buffer via /
+		"tzachar/cmp-fuzzy-buffer",
+		lazy = true, -- loaded by cmp
+		dependencies = {
+			"hrsh7th/nvim-cmp",
+			{
+				"tzachar/fuzzy.nvim",
+				dependencies = { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			},
 		},
 	},
 	{ -- AI completion
