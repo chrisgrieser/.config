@@ -3,27 +3,33 @@ local wu = require("lua.window-utils")
 local frontApp = hs.application.frontmostApplication
 --------------------------------------------------------------------------------
 
+local function splitIsActive()
+	return (LEFT_SPLIT and RIGHT_SPLIT) ~= nil
+end
+
 ---activate both apps together,unsplit if one of the two apps are quit.
 ---Caveat: using an appwatcher seems much more stable then using window
 ---filters, but comes at the cost of not being able to handle it well if one of
 ---the two apps have more than one window
 local function pairedActivation()
-	PairedActivationWatcher = u.aw.new(function(appName, eventType)
-		local rightApp = RIGHT_SPLIT:application()
-		local leftApp = LEFT_SPLIT:application()
-		if not leftApp or not rightApp then
-			u.notify("2️⃣ Split stopped as app quit.")
-			VsplitSetLayout("unsplit")
-		elseif eventType == u.aw.activated and appName == rightApp:name() then
-			LEFT_SPLIT:raise()
-		elseif eventType == u.aw.activated and appName == leftApp:name() then
-			RIGHT_SPLIT:raise()
-		end
-	end):start()
+	PairedActivationWatcher = u.aw
+		.new(function(appName, eventType)
+			local rightApp = RIGHT_SPLIT:application()
+			local leftApp = LEFT_SPLIT:application()
+			if not leftApp or not rightApp then
+				u.notify("2️⃣ Split stopped as app quit")
+				VsplitSetLayout("unsplit")
+			elseif eventType == u.aw.activated and appName == rightApp:name() then
+				LEFT_SPLIT:raise()
+			elseif eventType == u.aw.activated and appName == leftApp:name() then
+				RIGHT_SPLIT:raise()
+			end
+		end)
+		:start()
 end
 
 local function switchSplit()
-	if not (LEFT_SPLIT and RIGHT_SPLIT) then
+	if not (splitIsActive()) then
 		u.notify("No split active.")
 		return
 	end
@@ -111,8 +117,12 @@ local function selectSecondWin()
 		.chooser
 		.new(function(selection)
 			if not selection then return end
-			local appName = selection.text
-			local secondWin = hs.application.get(appName):mainWindow()
+			local app = u.app(selection.text)
+			if not app then
+				u.notify(selection.text .. " has already closed. Aborting split.")
+				return
+			end
+			local secondWin = app:mainWindow()
 			VsplitSetLayout("split", secondWin)
 		end)
 		:choices(apps)
@@ -126,10 +136,9 @@ end
 -- HOTKEYS
 
 u.hotkey(u.hyper, "V", function()
-	local splitActive = LEFT_SPLIT and RIGHT_SPLIT
-	if splitActive then
-		u.notify("2️⃣ Split stopped manually.")
+	if splitIsActive() then
 		VsplitSetLayout("unsplit")
+		u.notify("2️⃣ Split stopped manually.")
 	else
 		selectSecondWin()
 	end
