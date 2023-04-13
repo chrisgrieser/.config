@@ -96,7 +96,7 @@ local function telescopeConfig()
 				-- do not show mappings with "<Plug>"
 				show_plug = false,
 				-- remove which-key mappings
-				lhs_filter = function (lhs) return not lhs:find("Þ") end,
+				lhs_filter = function(lhs) return not lhs:find("Þ") end,
 			},
 			diagnostics = { prompt_prefix = "󰒕 ", no_sign = true },
 			treesitter = { prompt_prefix = " ", show_line = false },
@@ -188,11 +188,17 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"nvim-telescope/telescope-file-browser.nvim",
+
+			"nvim-telescope/telescope-fzf-native.nvim",
 		},
 		config = function()
 			telescopeConfig()
 			require("telescope").load_extension("file_browser")
 			require("telescope").load_extension("projects")
+
+			-- INFO since used for cmp-fuzzy-buffer anyway, might as well plug it in
+			-- here, even though performance wise vanilla telescope is fine for me
+			require("telescope").load_extension("fzf")
 		end,
 	},
 }
