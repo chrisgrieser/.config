@@ -75,7 +75,7 @@ local function runningApps()
 		if not app then return end
 		local appName = app:name()
 		local isExcludedApp = {
-			frontApp:name(),
+			frontApp():name(),
 			"SideNotes",
 			"CleanShot X",
 			"Hammerspoon",
@@ -106,7 +106,7 @@ local function selectSecondWin()
 		:choices(apps)
 		:rows(#apps - 2) -- for whatever reason, the rows parameter is off by 3?
 		:width(30)
-		:placeholderText("Split " .. frontApp:name() .. " with…")
+		:placeholderText("Split " .. frontApp():name() .. " with…")
 		:show()
 end
 
