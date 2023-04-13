@@ -35,7 +35,7 @@ return {
 			preview_config = { border = require("config.utils").border_style },
 		},
 	},
-	{
+	{ -- git client
 		"TimUntersberger/neogit",
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = "Neogit",
@@ -62,7 +62,7 @@ return {
 			},
 		},
 	},
-	{
+	{ -- diff / merge
 		"sindrets/diffview.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = { "DiffviewFileHistory", "DiffviewOpen" },

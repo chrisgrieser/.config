@@ -7,9 +7,9 @@ local u = require("config.utils")
 vim.opt_local.conceallevel = 2 -- hides quotes in JSON, making it actually more readable
 
 -- https://mikefarah.gitbook.io/yq/usage/convert
-keymap("n", "<leader>b", ":.!yq -o=json<CR><CR>", { desc = "prettify JSON", buffer = true })
-keymap("x", "<leader>b", ":!yq -o=json<CR><CR>", { desc = "prettify JSON", buffer = true })
-keymap("x", "<leader>m", ":!yq -I=0<CR><CR>", { desc = "minify JSON", buffer = true })
+keymap("n", "!b", ":.!yq -o=json<CR><CR>", { desc = "Prettify Line JSON", buffer = true })
+keymap("x", "!b", ":!yq -o=json<CR><CR>", { desc = "Prettify Selection JSON", buffer = true })
+keymap("x", "!m", ":!yq -I=0<CR><CR>", { desc = "Minify Selection JSON", buffer = true })
 
 -- when opening large files, start with some folds closed
 if fn.line("$") > 400 then

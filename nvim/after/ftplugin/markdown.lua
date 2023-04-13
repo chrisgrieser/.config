@@ -28,8 +28,8 @@ keymap({ "o", "x" }, "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlo
 keymap({ "o", "x" }, "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock(false)<CR>", { desc = "outer md code block textobj", buffer = true })
 
 -- Format Table
-keymap("n", "<D-p>", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table", buffer = true })
-keymap("x", "<D-p>", ":!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table", buffer = true })
+keymap("n", "!p", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table", buffer = true })
+keymap("x", "!p", ":!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table", buffer = true })
 -- stylua: ignore end
 
 -- Heading jump to next/prev heading

@@ -30,7 +30,7 @@ $memory_usage\
 [character]
 success_symbol = " [󰀘](bold green)"
 error_symbol = " [󰇷](bold red)"
-vimcmd_symbol = " [](bold blue)" # only active on embedded terminals due to cursor shape snippet intefering with it
+vimcmd_symbol = " [](bold blue)" # only active when the vi mode cursor shape snippet is off
 
 [sudo]
 style = 'fg:green bg:black'
