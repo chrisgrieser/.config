@@ -162,7 +162,7 @@ local function setupAllLsps()
 			capabilities = lspCapabilities,
 			settings = lspSettings[lsp], -- if no settings, will assign nil and therefore do nothing
 			filetypes = lspFileTypes[lsp],
-			on_attach = lspOnAttach[lsp],
+			on_attach = lspOnAttach[lsp], -- mostly disables some settings
 		}
 
 		require("lspconfig")[lsp].setup(config)
