@@ -42,7 +42,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>6DAA6DCE-3DEA-4C84-AFD0-6BE7F6DDE398</key>
@@ -685,7 +685,7 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>190</real>
 		</dict>

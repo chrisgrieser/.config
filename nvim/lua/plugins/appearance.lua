@@ -34,11 +34,9 @@ return {
 			override = {
 				-- filetypes
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
-				bibtex = { icon = "", name = "BibTeX" },
+				bib = { icon = "", name = "BibTeX" },
 				http = { icon = "󰴚", name = "http" },
 				-- plugins
-				NavBuddy = { icon = "󰆋", name = "Navbuddy" },
-				replacer = { icon = "", name = "replacer" },
 				lazy = { icon = "", name = "Lazy" },
 				mason = { icon = "", name = "Mason" },
 				NeogitStatus = { icon = "󰊢", name = "NeogitStatus" },
