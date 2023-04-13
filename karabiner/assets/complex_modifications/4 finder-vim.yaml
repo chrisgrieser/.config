@@ -713,23 +713,31 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Navigation
-      # o = open fold
+      # o = open/expand fold (O: do it recursively)
       - type: basic
         from: { key_code: o }
         to_if_alone:
           - key_code: right_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # c = close fold
+      - type: basic
+        from: { key_code: o, modifiers: {mandatory: [shift]} }
+        to_if_alone:
+          - { key_code: right_arrow, modifiers: [option] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # c = close/collapse fold (C: do it recursively)
       - type: basic
         from: { key_code: c }
         to_if_alone:
           - key_code: left_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic
+        from: { key_code: c, modifiers: {mandatory: [shift]} }
+        to_if_alone:
+          - { key_code: left_arrow, modifiers: [option] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <C-h> = History Back
       - type: basic
-        from:
-          key_code: h
-          modifiers: { mandatory: [control] }
+        from: { key_code: h, modifiers: {mandatory: [control]} }
         to_if_alone:
           - shell_command: |
               osascript -e '
@@ -742,9 +750,7 @@ rules:
         conditions: [*finder-app, *not-find-mode]
       # <C-l> = History Forward
       - type: basic
-        from:
-          key_code: l
-          modifiers: { mandatory: [control] }
+        from: { key_code: l, modifiers: {mandatory: [control]} }
         to:
           - shell_command: |
               osascript -e '
