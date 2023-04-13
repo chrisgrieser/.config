@@ -1,25 +1,14 @@
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
+local frontApp = hs.application.frontmostApplication
 --------------------------------------------------------------------------------
 
----activate both apps together,unsplit if one of the two apps are quit.
----Caveat: using an appwatcher seems much more stable then using window
----filters, but comes at the cost of not being able to handle it well if one of
----the two apps have more than one window
-local function pairedActivation()
-	PairedActivationWatcher = u.aw.new(function(appName, eventType)
-		local rightApp = RIGHT_SPLIT:application()
-		local leftApp = LEFT_SPLIT:application()
+local function switchSplit()
+	if not (LEFT_SPLIT and RIGHT_SPLIT) then
+		u.notify("No split active.")
+		return
+	end
 
-		if not leftApp or not rightApp then
-			u.notify("2️⃣ Split stopped as app quit.")
-			VsplitSetLayout("unsplit")
-		elseif eventType == u.aw.activated and appName == rightApp:name() then
-			LEFT_SPLIT:raise()
-		elseif eventType == u.aw.activated and appName == leftApp:name() then
-			RIGHT_SPLIT:raise()
-		end
-	end):start()
 end
 
 ---main split function
@@ -32,25 +21,24 @@ function VsplitSetLayout(mode, secondWin)
 		RIGHT_SPLIT = secondWin
 	end
 
-	local f1
-	local f2
+	local f1, f2
 	if mode == "split" then
-		print("2️⃣ Split started. ")
+		print("2️⃣ Split started")
 		pairedActivation()
 		f1 = hs.layout.right50
 		f2 = hs.layout.left50
 	elseif mode == "unsplit" then
 		PairedActivationWatcher:stop()
-f1 = wu.pseudoMax
-f2 = wu.pseudoMax
+		f1 = wu.pseudoMax
+		f2 = wu.pseudoMax
 	end
 
 	if RIGHT_SPLIT then
-wu.moveResize(RIGHT_SPLIT, f1)
+		wu.moveResize(RIGHT_SPLIT, f1)
 		RIGHT_SPLIT:raise()
 	end
 	if LEFT_SPLIT then
-wu.moveResize(LEFT_SPLIT, f2)
+		wu.moveResize(LEFT_SPLIT, f2)
 		LEFT_SPLIT:raise()
 	end
 
@@ -61,9 +49,9 @@ wu.moveResize(LEFT_SPLIT, f2)
 	end
 end
 
---------------------------------------------------------------------------------
 
-local frontApp = hs.application.frontmostApplication
+
+--------------------------------------------------------------------------------
 
 ---helper for hs.chooser
 ---@nodiscard
@@ -122,3 +110,5 @@ u.hotkey(u.hyper, "V", function()
 		selectSecondWin()
 	end
 end)
+
+u.hotkey(u.hyper, "X", function() VsplitSetLayout("switch") end)
