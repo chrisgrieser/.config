@@ -296,27 +296,6 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>test</string>
-				<key>subtext</key>
-				<string>󰝰       </string>
-				<key>text</key>
-				<string>󰀶  Reveal in Finder</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>55158272-2848-4DA9-BF31-703D775824AD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -350,13 +329,6 @@
 			<real>205</real>
 			<key>ypos</key>
 			<real>110</real>
-		</dict>
-		<key>55158272-2848-4DA9-BF31-703D775824AD</key>
-		<dict>
-			<key>xpos</key>
-			<real>320</real>
-			<key>ypos</key>
-			<real>675</real>
 		</dict>
 		<key>5A2AE042-71CD-47D6-9A72-3373D8EDE642</key>
 		<dict>
