@@ -79,19 +79,7 @@ keymap("o", "K", "2k")
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
--- Search
-keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
-keymap("n", "+", "*", { desc = "Search word under cursor" })
-keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
-
--- while searching: enable hlsearch -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
-vim.on_key(function(char)
-	local searchKeys = { "n", "N", "*", "#", "/", "?" }
-	local searchConfirmed = (fn.keytrans(char):upper() == "<CR>" and fn.mode() == "c")
-	if not (searchConfirmed or fn.mode() == "n") then return end
-	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
-	if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
-end, vim.api.nvim_create_namespace("auto_nohl"))
+--------------------------------------------------------------------------------
 
 -- Marks
 -- stylua: ignore
@@ -112,6 +100,22 @@ keymap("n", "gC", "g,", { desc = "goto previous change" })
 -- [M]atching Bracket
 -- remap needed, if using the builtin matchit plugin
 keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
+
+--------------------------------------------------------------------------------
+
+-- SEARCH
+keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
+keymap("n", "+", "*", { desc = "Search word under cursor" })
+keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
+
+-- while searching: enable hlsearch -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
+vim.on_key(function(char)
+	local searchKeys = { "n", "N", "*", "#", "/", "?" }
+	local searchConfirmed = (fn.keytrans(char):upper() == "<CR>" and fn.mode() == "c")
+	if not (searchConfirmed or fn.mode() == "n") then return end
+	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
+	if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
+end, vim.api.nvim_create_namespace("auto_nohl"))
 
 --------------------------------------------------------------------------------
 -- EDITING

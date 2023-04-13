@@ -92,6 +92,16 @@ return {
 			max_join_length = 180,
 		},
 	},
+	{
+		"IndianBoy42/fuzzy_slash.nvim",
+		dependencies = {
+			{
+				"IndianBoy42/fuzzy.nvim",
+				dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
+			},
+		},
+		config = true,
+	},
 	{ -- clipboard history / killring
 		"gbprod/yanky.nvim",
 		event = "BufReadPost",

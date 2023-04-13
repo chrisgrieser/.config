@@ -4,7 +4,7 @@ local u = require("lua.utils")
 local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 
-function M.ScrollUp()
+function M.scrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
@@ -75,7 +75,7 @@ TwitterWatcher = u.aw.new(function(appName, event)
 	if appName == "Twitter" and (event == u.aw.launched or event == u.aw.activated) then
 		u.asSoonAsAppRuns("Twitter", function()
 			wu.twitterToTheSide()
-			M.ScrollUp()
+			M.scrollUp()
 			wu.bringAllWinsToFront()
 
 			-- focus new tweet window if there is one
@@ -86,7 +86,7 @@ TwitterWatcher = u.aw.new(function(appName, event)
 	-- auto-close media windows and scroll up when deactivating
 	elseif appName == "Twitter" and event == u.aw.deactivated then
 		if u.isFront("CleanShot X") then return end
-		M.ScrollUp()
+		M.scrollUp()
 		twitterCleanupLink()
 		twitterCloseMediaWindow()
 
