@@ -3,7 +3,7 @@ local s = {
 	emojis = { name = "emoji", keyword_length = 2 },
 	nerdfont = { name = "nerdfont", keyword_length = 2 },
 	buffer = { name = "buffer", keyword_length = 3 },
-	fuzzybuffer = { name = "fuzzy_buffer" },
+	fuzzybuffer = { name = "fuzzy_buffer", max_item_count = 8 },
 	path = { name = "path" },
 	zsh = { name = "zsh" },
 	codeium = { name = "codeium" },
@@ -89,6 +89,7 @@ local function cmpconfig()
 		},
 		sorting = {
 			comparators = {
+				require('cmp_fuzzy_buffer.compare'),
 				-- Original order: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
 				-- Definitions of compare function https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
 				compare.offset,
@@ -145,16 +146,16 @@ local function cmpconfig()
 			format = function(entry, vim_item)
 				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
 				-- (height is controlled via pumheight option)
-				local max_length = 50
-				local ellipsis_char = "…"
+				local max_length = 45
 				if #vim_item.abbr > max_length then
-					vim_item.abbr = vim_item.abbr:sub(1, max_length) .. ellipsis_char
+					vim_item.abbr = vim_item.abbr:sub(1, max_length) .. "…"
 				end
 
 				-- icons
 				local kindIcon = kind_icons[vim_item.kind] or ""
 				vim_item.kind = " " .. kindIcon .. " "
 				vim_item.menu = source_icons[entry.source.name]
+				if entry.source.name == "fuzzy_buffer" then vim_item.kind = "" end
 				return vim_item
 			end,
 		},
@@ -302,7 +303,7 @@ local function cmdlineCompletionConfig()
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = {
 			s.fuzzybuffer,
-			s.cmdline_history, -- gets search history when used here
+			-- s.cmdline_history, -- gets search history when used here
 		},
 	})
 end
