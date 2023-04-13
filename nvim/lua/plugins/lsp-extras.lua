@@ -20,26 +20,21 @@ return {
 		dependencies = { "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
 		opts = {
 			lsp = { auto_attach = true },
-			source_buffer = { scrolloff = 3 },
+			source_buffer = { scrolloff = 2 },
 			window = {
-				border = u.borderStyle,
+				scrolloff = 1,
 				-- navbuddy at the bottom
 				position = { row = "100%", col = "50%" }, 
 				size = { height = "30%", width = "100%" },
-				scrolloff = nil,
 				sections = {
-					left = { size = "30%" },
-					mid = { size = "40%" },
-					right = { preview = "never" }, -- leaf|always|never
+					left = { size = "32.5%" },
+					mid = { size = "35%" },
+					right = { preview = "never" }, 
 				},
 			},
 			icons = { Object = "󰆧 " },
 			node_markers = {
-				icons = {
-					leaf = "  ",
-					leaf_selected = "  ",
-					branch = "  ",
-				},
+				icons = { leaf = " 󰧞 ", leaf_selected = "  ", branch = "  " },
 			},
 		},
 	},

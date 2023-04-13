@@ -152,9 +152,8 @@ lspCapabilities.textDocument.foldingRange = {
 local function setupAllLsps()
 	-- INFO must be before the lsp-config setup of lua-ls
 	require("neodev").setup {
-		library = {
-			plugins = { "lazy.nvim", "telescope.nvim" }, -- not enabling all, since too slow for LSP
-		},
+		-- helpful for stuff like plenary, but also slows down lsp loading
+		library = { plugins = false },
 	}
 
 	for _, lsp in pairs(lsp_servers) do
@@ -197,7 +196,6 @@ return {
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = setupAllLsps,
 		config = function()
-
 			-- (not well working) FIX for multi-space workspace https://github.com/neovim/nvim-lspconfig/issues/2366#issuecomment-1367098168
 			vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)
 				local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
