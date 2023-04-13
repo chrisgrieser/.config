@@ -197,7 +197,8 @@ return {
 			require("telescope").load_extension("projects")
 
 			-- INFO since used for cmp-fuzzy-buffer anyway, might as well plug it in
-			-- here, even though performance wise vanilla telescope is fine for me
+			-- here, even though performance-wise vanilla telescope is fine for me
+			-- does add the minor benefit of having nicer query syntax though
 			require("telescope").load_extension("fzf")
 		end,
 	},
