@@ -91,6 +91,7 @@ rules:
   no-extra-parens:
     - warn
     - all
+    - nestedBinaryExpressions: false
     - returnAssign: false
 
   # Loops
@@ -155,4 +156,4 @@ rules:
   yoda: warn
   no-else-return: [warn, { allowElseIf: true }]
   no-lonely-if: warn
-  no-mixed-operators: error
+  no-mixed-operators: warn

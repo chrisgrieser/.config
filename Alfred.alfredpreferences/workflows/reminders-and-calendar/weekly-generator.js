@@ -1,34 +1,37 @@
 #!/usr/bin/env osascript -l JavaScript
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
 
-function run (argv) {
-	ObjC.import("stdlib");
-	ObjC.import("Foundation");
+ObjC.import("stdlib");
+ObjC.import("Foundation");
 
-	const app = Application.currentApplication();
-	app.includeStandardAdditions = true;
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
 
-	function onlineJSON (url) {
-		return JSON.parse (app.doShellScript('curl -s "' + url + '"'));
-	}
+function onlineJSON(url) {
+	return JSON.parse(app.doShellScript('curl -s "' + url + '"'));
+}
 
-	function readData (key) {
-		const fileExists = (filePath) => Application("Finder").exists(Path(filePath));
-		const dataPath = $.getenv("alfred_workflow_data") + "/" + $.getenv("alfred_workflow_bundleid") + key;
-		if (!fileExists(dataPath)) return "data does not exist.";
-		const data = $.NSFileManager.defaultManager.contentsAtPath(dataPath);
-		const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
-		return ObjC.unwrap(str);
-	}
+function readData(key) {
+	const fileExists = filePath => Application("Finder").exists(Path(filePath));
+	const dataPath = $.getenv("alfred_workflow_data") + "/" + key;
+	if (!fileExists(dataPath)) return "data does not exist.";
+	const data = $.NSFileManager.defaultManager.contentsAtPath(dataPath);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
 
-	function writeData (key, newValue) {
-		const dataPath = $.getenv("alfred_workflow_data") + "/" + $.getenv("alfred_workflow_bundleid") + key;
-		const str = $.NSString.alloc.initWithUTF8String(newValue);
-		str.writeToFileAtomicallyEncodingError(dataPath, true, $.NSUTF8StringEncoding, null);
-	}
+function writeData(key, newValue) {
+	const dataPath = $.getenv("alfred_workflow_data") + "/" + key;
+	app.doShellScript(`
+			mkdir -p "$(dirname "${dataPath}")"
+			touch "${dataPath}"
+		`);
+	const str = $.NSString.alloc.initWithUTF8String(newValue);
+	str.writeToFileAtomicallyEncodingError(dataPath, true, $.NSUTF8StringEncoding, null);
+}
 
-	//──────────────────────────────────────────────────────────────────────────────
+//──────────────────────────────────────────────────────────────────────────────
 
+function run(argv) {
 	const dateFormatOption = { year: "numeric", month: "short", day: "2-digit" };
 	const language = $.getenv("lang");
 	const resultInBrackets = $.getenv("in_brackets") === "1";
@@ -38,12 +41,9 @@ function run (argv) {
 	let weekCounter;
 	let startDate;
 
-	// MAIN
-	//──────────────────────────────────────────────────────────────────────────────
-
 	// date input → set startdate + reset week counter
 	if (dateInput) {
-		writeData ("startdate", dateInput);
+		writeData("startdate", dateInput);
 		weekCounter = 0;
 		startDate = new Date(dateInput);
 	} else {
@@ -51,11 +51,12 @@ function run (argv) {
 		weekCounter++;
 		startDate = new Date(readData("startdate"));
 	}
-	writeData ("week_no", weekCounter.toString()); // set week counter for next run
+	writeData("week_no", weekCounter.toString()); // set week counter for next run
 
 	// calculate new date
+
 	const dayOne = startDate.getDate(); // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
-	const nextweekDay = dayOne + 7*weekCounter; // the next weeks date as days from from the StartDate's day
+	const nextweekDay = dayOne + 7 * weekCounter; // the next weeks date as days from from the StartDate's day
 
 	const nextWeek = startDate; // counts from startdate
 	nextWeek.setDate(nextweekDay); // counting from the startDate, update to the new day
@@ -64,13 +65,9 @@ function run (argv) {
 	// consider state-specific German holidays
 	const bundesland = $.getenv("bundesland_feiertage");
 	if (bundesland) {
-		const url =
-			"https://feiertage-api.de/api/?jahr="
-			+ nextWeek.getFullYear()
-			+ "&nur_land="
-			+ bundesland;
+		const url = `https://feiertage-api.de/api/?jahr=${nextWeek.getFullYear()}&nur_land=${bundesland}`;
 		const feiertageJSON = onlineJSON(url);
-		const feiertage = Object.keys(feiertageJSON).map (function (tag) {
+		const feiertage = Object.keys(feiertageJSON).map(function (tag) {
 			const isoDate = feiertageJSON[tag].datum;
 			const desc = tag + " " + feiertageJSON[tag].hinweis;
 			return [isoDate, desc];
@@ -88,4 +85,3 @@ function run (argv) {
 	if (addLineBreak) output += "\n";
 	return output;
 }
-
