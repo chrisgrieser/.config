@@ -9,15 +9,15 @@ local keymappings = {
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
 	-- INFO remapped from ^ via karabiner
-	["<f1>"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
+	["<D-s>"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<D-a>"] = "select_all",
 	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
+	["?"] = "which_key",
 	["<D-CR>"] = function(prompt_bufnr)
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_worse(prompt_bufnr)
 	end,
-	["?"] = "which_key",
 }
 
 local function telescopeConfig()
@@ -26,7 +26,7 @@ local function telescopeConfig()
 			selection_caret = "󰜋 ",
 			prompt_prefix = "❱ ",
 			multi_icon = "󰒆 ",
-			preview = { filesize_limit = 1 }, -- in MB, do not preview big files for performance
+			preview = { filesize_limit = 0.5 }, -- in MB, do not preview big files for performance
 			path_display = { "tail" }, -- smart|tail (rest isn't that useful)
 			borderchars = require("config.utils").borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
@@ -169,6 +169,7 @@ local function telescopeConfig()
 						-- mappings should be consistent with nvim-ghengis mappings
 						["<D-n>"] = require("telescope._extensions.file_browser.actions").create,
 						["<C-r>"] = require("telescope._extensions.file_browser.actions").rename,
+						["<D-Up>"] = require("telescope._extensions.file_browser.actions").goto_parent_dir,
 						["<D-BS>"] = require("telescope._extensions.file_browser.actions").remove,
 						-- Toggle Files/Folders
 						["<D-b>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
@@ -189,6 +190,8 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"nvim-telescope/telescope-file-browser.nvim",
 
+			-- also listed here as dependency, so it can be used by telescope
+			-- before cmp is loaded
 			"nvim-telescope/telescope-fzf-native.nvim",
 		},
 		config = function()
