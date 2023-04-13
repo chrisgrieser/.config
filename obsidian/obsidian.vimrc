@@ -257,15 +257,15 @@ exmap foldall obcommand editor:fold-all
 exmap foldless obcommand editor:fold-less
 exmap foldmore obcommand editor:fold-more
 
-nmap zo :togglefold
-nmap zc :togglefold
-nmap za :togglefold
+" nmap zo :togglefold
+" nmap zc :togglefold
+" nmap za :togglefold
 nmap zm :foldmore
 nmap zM :foldall
 nmap zr :foldless
 nmap zR :unfoldall
 
-" mapped via karabiner
+" mapped to ^ via karabiner
 nmap <F1> :togglefold
 
 """"""""""""""""""""""""""""
