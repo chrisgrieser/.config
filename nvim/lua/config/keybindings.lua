@@ -374,10 +374,9 @@ keymap("n", "<Left>", function()
 	return [["zdh"zph]]
 end, { desc = "Move Char Left", expr = true })
 
--- "silent" necessary for 3+ lines due to cmdheight=0
 -- stylua: ignore start
-keymap("x", "<Down>", [[<Esc>:silent '<,'>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
-keymap("x", "<Up>", [[<Esc>:silent '<,'>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
+keymap("x", "<Down>", [[:'<,'>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
+keymap("x", "<Up>", [[:'<,'>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
 -- stylua: ignore end
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "Move selection left" })

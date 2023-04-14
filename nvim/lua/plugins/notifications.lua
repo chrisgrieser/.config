@@ -27,9 +27,8 @@ local function notifyConfig()
 		timeout = 4000,
 		top_down = false,
 		on_open = function(win)
-			if vim.api.nvim_win_is_valid(win) then
-				vim.api.nvim_win_set_config(win, { border = require("config.utils").borderStyle })
-			end
+			if not vim.api.nvim_win_is_valid(win) then return end
+			vim.api.nvim_win_set_config(win, { border = require("config.utils").borderStyle })
 		end,
 	}
 
@@ -43,15 +42,15 @@ local function notifyConfig()
 		end
 
 		local msgLines = vim.split(msg, "\n", { trimepty = true })
-		local truncated = {}
+		local wrappesLines = {}
 		for _, line in pairs(msgLines) do
 			local new_lines = split_length(line, notifyWidth)
 			for _, nl in ipairs(new_lines) do
-				nl = nl:gsub("^%s*", ""):gsub("%s*$", "")
-				if nl and nl ~= "" then table.insert(truncated, " " .. nl .. " ") end
+				-- nl = nl:gsub("^%s*", ""):gsub("%s*$", "")
+				if nl and nl ~= "" then table.insert(wrappesLines, " " .. nl .. " ") end
 			end
 		end
-		local out = table.concat(truncated, "\n")
+		local out = table.concat(wrappesLines, "\n")
 		return require("notify")(out, level, opts)
 	end
 end

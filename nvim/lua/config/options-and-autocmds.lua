@@ -91,6 +91,9 @@ autocmd({ "VimEnter", "VimResized" }, { -- the "WinResized" autocmd event does n
 -- status bar & cmdline
 opt.history = 300 -- reduce noise for command history search
 opt.cmdheight = 0
+opt.shortmess:append("s") -- reduce info in :messages
+opt.shortmess:append("S")
+opt.report = 9999 -- disable "x more/fewer lines" messages
 
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
