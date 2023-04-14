@@ -65,7 +65,7 @@ return {
 		local printDurationSecs = 7
 
 		-- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
-		function print(...)
+		function print (...)
 			local args = { ... }
 			if vim.tbl_isempty(args) then
 				vim.notify("NIL", vim.log.levels.TRACE)

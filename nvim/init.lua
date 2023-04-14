@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------
 vim.g.mapleader = ","
+vim.g.maplocalleader = "!"
 
 if vim.version().minor >= 9 then -- TODO remove this condition later on
 	vim.loader.enable()

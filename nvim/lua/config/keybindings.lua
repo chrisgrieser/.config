@@ -426,7 +426,7 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 -- for consistency with terminal buffers also <S-CR>
 -- stylua: ignore start
 keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "Alt Buffer" })
-keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "Next Buffer" })
+keymap("n", "<BS>", "<Plug>(CybuPrev)", { desc = "Next Buffer" })
 keymap("n", "<S-CR>", "<C-w>w", { desc = "Next Window" })
 
 keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window" })
@@ -687,6 +687,7 @@ keymap("n", "<leader>gd", function()
 		cmd.wincmd("|") -- maximize it
 	end)
 end, { desc = "󰊢 File History (Diffview)" })
+keymap("x", "<leader>gd", ":DiffviewFileHistory<CR><C-w>w<C-w>|", { desc = "󰊢 File History of Selection" })
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
