@@ -114,10 +114,9 @@ keymap("c", "<C-S-n>", "<C-t>", { desc = "Next Match (when inc. search)" })
 -- while searching: enable hlsearch -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
 	local searchKeys = { "n", "N", "*", "#", "/", "?" }
-	local searchConfirmed = (fn.keytrans(char) == "<CR>" and fn.getcmdtype():find("[/?]"))
+	local searchConfirmed = (fn.keytrans(char):upper() == "<CR>" and fn.getcmdtype():find("[/?]"))
 	if not (searchConfirmed or fn.mode() == "n") then return end
 	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
-	if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
 end, vim.api.nvim_create_namespace("auto_nohl"))
 
 --------------------------------------------------------------------------------
@@ -374,9 +373,10 @@ keymap("n", "<Left>", function()
 	return [["zdh"zph]]
 end, { desc = "Move Char Left", expr = true })
 
+-- "silent" necessary for 3+ lines due to cmdheight=0
 -- stylua: ignore start
-keymap("x", "<Down>", [[:'<,'>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
-keymap("x", "<Up>", [[:'<,'>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
+keymap("x", "<Down>", [[<Esc>:silent '<,'>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
+keymap("x", "<Up>", [[<Esc>:silent '<,'>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
 -- stylua: ignore end
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "Move selection left" })
