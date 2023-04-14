@@ -104,8 +104,6 @@ keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 --------------------------------------------------------------------------------
 
 -- SEARCH
-keymap("n", "-", "zn/", { desc = "/ & Pause Folds" })
-
 keymap("x", "-", "zn<Esc>/\\%V", { desc = "Search within selection" })
 keymap("n", "+", "*", { desc = "Search word under cursor" })
 keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
@@ -116,7 +114,7 @@ keymap("c", "<C-S-n>", "<C-t>", { desc = "Next Match (when inc. search)" })
 -- while searching: enable hlsearch -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
 	local searchKeys = { "n", "N", "*", "#", "/", "?" }
-	local searchConfirmed = (fn.keytrans(char):upper() == "<CR>" and fn.mode() == "c")
+	local searchConfirmed = (fn.keytrans(char) == "<CR>" and fn.getcmdtype():find("[/?]"))
 	if not (searchConfirmed or fn.mode() == "n") then return end
 	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
 	if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end

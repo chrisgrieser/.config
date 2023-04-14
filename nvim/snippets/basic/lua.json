@@ -11,8 +11,8 @@
 			"--]]"
 		]
 	},
-	"module": {
-		"prefix": "module",
+	"export module": {
+		"prefix": "export module",
 		"body": [
 			"local M = {}",
 			"--------------------------------------------------------------------------------",
@@ -22,6 +22,14 @@
 			"--------------------------------------------------------------------------------",
 			"return M"
 		]
+	},
+	"import module": {
+		"prefix": "import module",
+		"body": "local ${1:name} = require(\"${1:name}\")"
+	},
+	"import submodule": {
+		"prefix": "import submodule",
+		"body": "local ${1:name} = require(\"${2:module}.${1:name}\")"
 	},
 	"trim trailing line break": {
 		"prefix": "trim trailing line break",
