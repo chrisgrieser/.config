@@ -1,16 +1,17 @@
 # pseudometa's dotfiles
+<!-- vale Google.FirstPerson = NO -->
 
 ## Configurations of Interest
 Most people tell me they find the following configurations useful:
-- [neovim config](/nvim) (5000+ LoC)
-- [hammerspoon config](/hammerspoon) (2000+ LoC)
-- [.zshrc](/zsh) (1400+ LoC)
+- [neovim config](/nvim) (~6500 LoC)
+- [hammerspoon config](/hammerspoon) (~2500 LoC)
+- [.zshrc](/zsh) (~1500 LoC)
 - [Pandoc configs & pointers on how to use pandoc](/pandoc)
 - [complex modifications for Karabiner Elements](/karabiner)
 - [obsidian.vimrc](obsidian-vim/obsidian.vimrc) via the [vimrc Support Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support)
-- [Starship Prompt](/starship/starship.toml) ⬇️
+- [starship prompt](/starship/starship.toml) ⬇️
 
-<img width=60% alt="Starship Prompt" src="https://user-images.githubusercontent.com/73286100/229211019-e763d775-d89f-43da-99ef-06c57fd1e485.png">
+<img width=60% alt="starship prompt" src="https://user-images.githubusercontent.com/73286100/229211019-e763d775-d89f-43da-99ef-06c57fd1e485.png">
 
 ## Blog on Neovim
 I also have a [blog for intermediary-advanced neovim tips](https://nanotipsforvim.prose.sh/).
@@ -19,7 +20,6 @@ I also have a [blog for intermediary-advanced neovim tips](https://nanotipsforvi
 - Read this [primer what dotfiles are](https://www.freecodecamp.org/news/dotfiles-what-is-a-dot-file-and-how-to-create-it-in-mac-and-linux/).
 - Here is an interesting [report on common contents of dotfiles](https://github.com/Kharacternyk/dotcommon).
 
-<!-- vale Google.FirstPerson = NO --> <!-- vale Microsoft.FirstPerson = NO -->
 ## About me
 In my day job, I am a sociologist studying the social mechanisms underlying the digital economy. For my PhD project, I investigate the governance of the app economy and how software ecosystems manage the tension between innovation and compatibility. If you are interested in this subject, feel free to get in touch.
 
