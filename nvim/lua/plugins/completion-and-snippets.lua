@@ -292,7 +292,7 @@ local function cmdlineCompletionConfig()
 		sources = cmp.config.sources({
 			s.path,
 			s.cmdline,
-		-- }, { -- second array only relevant when no source from the first matches
+		}, { -- second array only relevant when no source from the first matches
 			s.cmdline_history,
 		}),
 	})
@@ -301,7 +301,7 @@ local function cmdlineCompletionConfig()
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = {
 			s.fuzzybuffer,
-			s.cmdline_history, -- gets search history when used here
+			-- s.cmdline_history, -- gets search history when used here
 		},
 	})
 end
