@@ -9,13 +9,17 @@ local u = require("config.utils")
 vim.opt.foldopen:remove { "search" } -- no auto-open when searching
 keymap("n", "-", "zn/", { desc = "/ & Pause Folds" })
 
+
 -- while searching: pause folds -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
 	local searchKeys = { "n", "N", "*", "#", "/", "?" }
 	local searchConfirmed = (fn.keytrans(char):upper() == "<CR>" and fn.getcmdtype():find("[/?]"))
 	if not (searchConfirmed or fn.mode() == "n") then return end
 	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
-	if vim.opt.foldenable:get() == searchKeyUsed then vim.opt.foldenable = not searchKeyUsed end
+	local notInSync = vim.opt.foldenable:get() == searchKeyUsed
+	if notInSync then
+		vim.opt.foldenable = not searchKeyUsed
+	end
 end, vim.api.nvim_create_namespace("auto_pause_folds"))
 
 --------------------------------------------------------------------------------
