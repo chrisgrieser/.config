@@ -294,7 +294,6 @@ local function cmdlineCompletionConfig()
 			s.cmdline,
 		}, { -- second array only relevant when no source from the first matches
 			s.cmdline_history,
-			s.buffer, -- e.g. for IncRename
 		}),
 	})
 
@@ -302,7 +301,7 @@ local function cmdlineCompletionConfig()
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = {
 			s.fuzzybuffer,
-			-- s.cmdline_history, -- gets search history when used here
+			s.cmdline_history, -- gets search history when used here
 		},
 	})
 end
