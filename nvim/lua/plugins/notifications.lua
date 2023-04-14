@@ -68,7 +68,7 @@ local function notifyConfig()
 	-- selene: allow(incorrect_standard_library_use)
 	function print(...)
 		local args = { ... }
-		if vim.tbl_isempty(args) or (args[1] == nil and #args == 1) then
+		if vim.tbl_isempty(args) then
 			vim.notify("NIL", vim.log.levels.TRACE)
 			return
 		end
@@ -91,7 +91,7 @@ local function notifyConfig()
 			end
 		end
 
-		vim.notify(table.concat(safe_args, " "), "info", notifyOpts)
+		vim.notify(table.concat(safe_args, " "), vim.log.levels.INFO, notifyOpts)
 	end
 end
 
