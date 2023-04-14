@@ -17,13 +17,6 @@ return {
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-	{ -- UI overhaul for messages
-		"folke/noice.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify",
-		},
-		event = "UIEnter",
-		opts = {},
-	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",
