@@ -61,7 +61,6 @@ end, { desc = "Clear Notifications" })
 
 --------------------------------------------------------------------------------
 -- MOTIONS
--- keymap({ "n", "o", "x" }, "w", '<cmd>lua require("spider").motion("w")<CR>', { desc = "󱇪 w" })
 keymap({ "n", "o", "x" }, "e", '<cmd>lua require("spider").motion("e")<CR>', { desc = "󱇪 e" })
 keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { desc = "󱇪 b" })
 
@@ -113,13 +112,18 @@ keymap("c", "<C-S-n>", "<C-t>", { desc = "Next Match (when inc. search)" })
 
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
-	local searchKeys = { "n", "N", "*", "#", "/", "?" }
-	local searchConfirmed = (fn.keytrans(char) == "<CR>" and fn.mode() == "c")
+	local searchKeys = { "n", "N", "*", "#" }
+	local searchConfirmed = (fn.keytrans(char) == "<CR>" and fn.getcmdtype():find("[/?]") ~= nil)
 	if not (searchConfirmed or fn.mode() == "n") then return end
 	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
 	if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
 end, vim.api.nvim_create_namespace("auto_nohl"))
 
+autocmd("CmdlineEnter", {
+	callback = function()
+		if fn.getcmdtype():find("[/?]") then vim.opt.hlsearch = true end
+	end,
+})
 
 --------------------------------------------------------------------------------
 -- EDITING
