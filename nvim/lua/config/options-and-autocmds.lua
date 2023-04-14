@@ -10,6 +10,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- DIRECTORIES
+opt.directory:prepend(u.vimDataDir .. "swap//")
 opt.undodir:prepend(u.vimDataDir .. "undo//")
 opt.viewdir = u.vimDataDir .. "view"
 opt.shadafile = u.vimDataDir .. "main.shada"
@@ -83,7 +84,7 @@ opt.linebreak = true -- do not break up full words on wrap
 autocmd({ "VimEnter", "VimResized" }, { -- the "WinResized" autocmd event does not seem to work currently
 	callback = function()
 		if opt_local.wrap:get() then return end
-		local gmColumn = math.floor(vim.api.nvim_win_get_width(0) / 2) 
+		local gmColumn = math.floor(vim.api.nvim_win_get_width(0) / 2)
 		opt.colorcolumn = { "+1", gmColumn }
 	end,
 })
@@ -93,6 +94,8 @@ opt.history = 300 -- reduce noise for command history search
 opt.cmdheight = 0
 opt.shortmess:append("s") -- reduce info in :messages
 opt.shortmess:append("S")
+opt.shortmess:append("A") -- no swap file message
+opt.shortmess:append("W") -- no write file message
 opt.report = 9999 -- disable "x more/fewer lines" messages
 
 -- Character groups
@@ -176,7 +179,6 @@ autocmd("BufReadPost", {
 -- AUTO-SAVING
 opt.autowrite = true
 opt.autowriteall = true
-opt.swapfile = false
 
 autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
