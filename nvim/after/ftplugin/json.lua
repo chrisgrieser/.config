@@ -7,9 +7,9 @@ local u = require("config.utils")
 vim.opt_local.conceallevel = 2 -- hides quotes in JSON, making it actually more readable
 
 -- https://mikefarah.gitbook.io/yq/usage/convert
-keymap("n", "!b", ":.!yq -o=json<CR><CR>", { desc = "Prettify Line JSON", buffer = true })
-keymap("x", "!b", ":!yq -o=json<CR><CR>", { desc = "Prettify Selection JSON", buffer = true })
-keymap("x", "!m", ":!yq -I=0<CR><CR>", { desc = "Minify Selection JSON", buffer = true })
+keymap("n", "<localleader>b", ":.!yq -o=json<CR><CR>", { desc = "Prettify Line JSON", buffer = true })
+keymap("x", "<localleader>b", ":!yq -o=json<CR><CR>", { desc = "Prettify Selection JSON", buffer = true })
+keymap("x", "<localleader>m", ":!yq -I=0<CR><CR>", { desc = "Minify Selection JSON", buffer = true })
 
 -- when opening large files, start with some folds closed
 if fn.line("$") > 400 then
@@ -19,7 +19,7 @@ if fn.line("$") > 400 then
 end
 
 -- escape stuff properly for VS Code Style snippet
-keymap("n", "<leader>\\", function ()
+keymap("n", "<localleader>q", function ()
 	u.normal("'[v']") -- select last paste
 	u.leaveVisualMode() -- -> sects '<,'> marks
 	cmd[['<,'>s/\\/\\\\/g]] -- escape the escaping backslashes

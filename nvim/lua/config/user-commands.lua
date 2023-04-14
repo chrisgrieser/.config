@@ -1,6 +1,7 @@
 local expand = vim.fn.expand
 local fn = vim.fn
 local newCommand = vim.api.nvim_create_user_command
+local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
@@ -44,6 +45,13 @@ newCommand("LspCapabilities", function()
 		timeout = 14000,
 	})
 	fn.setreg("+", "Capabilities = " .. vim.inspect(client.server_capabilities))
+end, {})
+
+-- `:SwapDeleteAll` deletes all swap files
+newCommand("SwapDeleteAll", function(_)
+	local swapdir = u.vimDataDir .. "swap/"
+	local out = fn.system([[rm -vf "]] .. swapdir .. [["* ]])
+	vim.notify("Deleted:\n" .. out)
 end, {})
 
 -- `:ViewDir` opens the nvim view directory

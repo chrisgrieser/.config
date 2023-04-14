@@ -2,9 +2,8 @@
 vim.g.mapleader = ","
 vim.g.maplocalleader = "!"
 
-if vim.version().minor >= 9 then -- TODO remove this condition later on
-	vim.loader.enable()
-end 
+-- TODO remove this condition later on
+if vim.version().minor >= 9 then vim.loader.enable() end 
 
 ---try to require the module, and do not error when one of them cannot be
 ---loaded. But do notify if there was an error.
