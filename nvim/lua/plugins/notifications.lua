@@ -1,7 +1,21 @@
+-- HACK requires custom wrapping setup https://github.com/rcarriga/nvim-notify/issues/129
+-- replaces vim.notify = require("notify")
+local function split_length(text, length)
+	local lines = {}
+	local next_line
+	while true do
+		if #text == 0 then return lines end
+		next_line, text = text:sub(1, length), text:sub(length)
+		lines[#lines + 1] = next_line
+	end
+end
+
+-- filter out annoying buggy messages from the satellite plugin: https://github.com/lewis6991/satellite.nvim/issues/36
+local function banned(msg) return msg:find("^error%(satellite.nvim%):") or msg:find("code = %-32801,") end
+
 local function notifyConfig()
 	-- Base config
 	local notifyWidth = 55
-	local printDurationSecs = 7
 
 	require("notify").setup {
 		render = "minimal",
@@ -19,27 +33,6 @@ local function notifyConfig()
 		end,
 	}
 
-	--------------------------------------------------------------------------------
-
-	-- HACK requires custom wrapping setup https://github.com/rcarriga/nvim-notify/issues/129
-	-- replaces vim.notify = require("notify")
-	local function split_length(text, length)
-		local lines = {}
-		local next_line
-		while true do
-			if #text == 0 then return lines end
-			next_line, text = text:sub(1, length), text:sub(length)
-			lines[#lines + 1] = next_line
-		end
-	end
-
-	-- HACK filter out annoying buggy messages from the satellite plugin: https://github.com/lewis6991/satellite.nvim/issues/36
-	local function banned(msg) -- https://github.com/rcarriga/nvim-notify/issues/114#issuecomment-1179754969
-		return msg:find("^nvim%-navic:.*Already attached to %w+")
-			or msg:find("^error%(satellite.nvim%):")
-			or msg:find("code = %-32801,")
-	end
-
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
 		if msg == nil then
 			msg = "NIL"
@@ -49,9 +42,9 @@ local function notifyConfig()
 			msg = '""' -- make empty string more apparent
 		end
 
-		msg = vim.split(msg, "\n", { trimepty = true })
+		local msgLines = vim.split(msg, "\n", { trimepty = true })
 		local truncated = {}
-		for _, line in pairs(msg) do
+		for _, line in pairs(msgLines) do
 			local new_lines = split_length(line, notifyWidth)
 			for _, nl in ipairs(new_lines) do
 				nl = nl:gsub("^%s*", ""):gsub("%s*$", "")
@@ -61,38 +54,6 @@ local function notifyConfig()
 		local out = table.concat(truncated, "\n")
 		return require("notify")(out, level, opts)
 	end
-
-	-----------------------------------------------------------------------------
-
-	-- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
-	-- selene: allow(incorrect_standard_library_use)
-	function print(...)
-		local args = { ... }
-		if vim.tbl_isempty(args) then
-			vim.notify("NIL", vim.log.levels.TRACE)
-			return
-		end
-
-		local includesTable = false
-		local safe_args = {}
-
-		for _, arg in pairs(args) do
-			if type(arg) == "table" then arg = vim.inspect(arg) end -- pretty print tables
-			includesTable = true
-			table.insert(safe_args, tostring(arg))
-		end
-
-		local notifyOpts = { timeout = printDurationSecs * 1000 }
-		if includesTable then
-			-- enable treesitter highlighting in the notification
-			notifyOpts.on_open = function(win)
-				local buf = vim.api.nvim_win_get_buf(win)
-				vim.api.nvim_buf_set_option(buf, "filetype", "lua")
-			end
-		end
-
-		vim.notify(table.concat(safe_args, " "), vim.log.levels.INFO, notifyOpts)
-	end
 end
 
 --------------------------------------------------------------------------------
@@ -100,6 +61,30 @@ end
 return {
 	"rcarriga/nvim-notify",
 	event = "UIEnter",
-	init = function () vim.opt.termguicolors = true end, -- required for the plugin
+	init = function()
+		vim.opt.termguicolors = true
+		local printDurationSecs = 7
+
+		-- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
+		function print(...)
+			local args = { ... }
+			if vim.tbl_isempty(args) then
+				vim.notify("NIL", vim.log.levels.TRACE)
+				return
+			end
+			args = vim.tbl_map(function(arg) return vim.inspect(arg) end, args)
+			local out = table.concat(args, " ")
+			-- filetype enables treesitter highlighting in the notification
+			local ft = type(args[1]) ~= "string" and "lua" or "text"
+
+			vim.notify(out, vim.log.levels.INFO, {
+				timeout = printDurationSecs * 1000,
+				on_open = function(win)
+					local buf = vim.api.nvim_win_get_buf(win)
+					vim.api.nvim_buf_set_option(buf, "filetype", ft)
+				end,
+			})
+		end
+	end,
 	config = notifyConfig,
 }
