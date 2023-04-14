@@ -138,3 +138,9 @@ deliberately
 dotfiles
 Unfortunately
 PhD
+hammerspoon
+pandoc
+starship
+LoC
+ResearchGate
+LinkedIn
