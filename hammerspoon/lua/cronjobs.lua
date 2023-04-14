@@ -19,8 +19,8 @@ ProjectorScreensaverWatcher = caff
 			or event == caff.systemDidWake
 			or event == caff.screensDidSleep
 		then
-			u.runWithDelays(1, function()
-if u.isProjector() then wu.iMacDisplay:setBrightness(0) end
+			u.runWithDelays({0, 1, 3}, function()
+				if u.isProjector() then wu.iMacDisplay:setBrightness(0) end
 			end)
 		end
 	end)
