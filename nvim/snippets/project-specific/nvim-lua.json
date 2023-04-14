@@ -51,9 +51,9 @@
 		]
 	},
 	"autocmd": {
-		"prefix": "Autocmd (short)",
+		"prefix": "autocmd (short)",
 		"body": [
-			"Autocmd(\"${1|BufReadPost,VimEnter,UIEnter,BufReadPre,VeryLazy,LspAttach,WinEnter,FocusGained,FocusLost,WinLeave,BufLeave,BufWritePre,BufWritePost|}\", {",
+			"autocmd(\"${1|BufReadPost,VimEnter,UIEnter,BufReadPre,VeryLazy,LspAttach,WinEnter,FocusGained,FocusLost,WinLeave,BufLeave,BufWritePre,BufWritePost|}\", {",
 			"\tcallback = function()",
 			"\t\t$0",
 			"\tend,",
@@ -61,7 +61,7 @@
 		]
 	},
 	"autocmd (unabbr)": {
-		"prefix": "Autocmd (unabbr)",
+		"prefix": "autocmd (unabbr)",
 		"body": [
 			"vim.api.nvim_create_autocmd(\"${1|BufReadPost,VimEnter,UIEnter,BufReadPre,VeryLazy,LspAttach,WinEnter,FocusGained,FocusLost,WinLeave,BufLeave,BufWritePre,BufWritePost|}\", {",
 			"\tcallback = function()",
@@ -71,9 +71,9 @@
 		]
 	},
 	"autocmd (FileType)": {
-		"prefix": "Autocmd (FileType)",
+		"prefix": "autocmd (FileType)",
 		"body": [
-			"Autocmd(\"FileType\", {",
+			"autocmd(\"FileType\", {",
 			"\tpattern = \"${2:ft}\",",
 			"\tcallback = function()",
 			"\t\t$3",

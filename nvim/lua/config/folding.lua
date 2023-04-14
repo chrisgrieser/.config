@@ -7,13 +7,14 @@ local u = require("config.utils")
 -- PAUSE FOLDS WHEN SEARCHING
 
 vim.opt.foldopen:remove { "search" } -- no auto-open when searching
-keymap("n", "-", "<cmd>set hlsearch<CR>zn/", { desc = "/ & Pause Folds" })
 
--- while searching: pause folds -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
+keymap("n", "-", "zn/", { desc = "/ & Pause Folds" })
+
+-- while searching: pause folds
 vim.on_key(function(char)
 	local key = fn.keytrans(char)
 	local searchKeys = { "n", "N", "*", "#", "/", "?" }
-	local searchConfirmed = (key == "<CR>" and fn.getcmdtype():find("[/?]"))
+	local searchConfirmed = (key == "<CR>" and fn.getcmdtype():find("[/?]") ~= nil)
 	if not (searchConfirmed or fn.mode() == "n") then return end
 	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, key))
 
@@ -23,7 +24,7 @@ vim.on_key(function(char)
 		vim.opt.foldenable = false
 	elseif unpauseFold then
 		vim.opt.foldenable = true
-		u.normal("zv") -- after 
+		u.normal("zv") -- after closing folds, keep the *current* fold open
 	end
 end, vim.api.nvim_create_namespace("auto_pause_folds"))
 

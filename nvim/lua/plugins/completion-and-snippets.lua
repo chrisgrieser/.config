@@ -3,7 +3,7 @@ local s = {
 	emojis = { name = "emoji", keyword_length = 2 },
 	nerdfont = { name = "nerdfont", keyword_length = 2 },
 	buffer = { name = "buffer", keyword_length = 3 },
-	fuzzybuffer = { name = "fuzzy_buffer", max_item_count = 8 },
+	fuzzybuffer = { name = "fuzzy_buffer", max_item_count = 5 },
 	path = { name = "path" },
 	zsh = { name = "zsh" },
 	codeium = { name = "codeium" },
@@ -292,7 +292,7 @@ local function cmdlineCompletionConfig()
 		sources = cmp.config.sources({
 			s.path,
 			s.cmdline,
-		}, { -- second array only relevant when no source from the first matches
+		-- }, { -- second array only relevant when no source from the first matches
 			s.cmdline_history,
 		}),
 	})
@@ -364,7 +364,7 @@ return {
 				enable_autosnippets = true, -- for javascript "if ()"
 				ext_opts = { -- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts highlight when at a choice node
 					[require("luasnip.util.types").choiceNode] = {
-						active = { hl_group = "DiagnosticHint", virt_text = { { "󰊖", "DiagnosticHint" } } },
+						active = { hl_group = "DiagnosticHint", virt_text = { { "󰊖 ", "DiagnosticHint" } } },
 					},
 				},
 			}
