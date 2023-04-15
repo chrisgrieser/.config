@@ -36,6 +36,8 @@ local gitShellOpts = {
 	on_exit = function()
 		if #output == 0 then return end
 		local out = table.concat(output, " \n "):gsub("%s*$", "")
+		out = out:gsub("\r", "\n")
+
 		local logLevel = vim.log.levels.INFO
 		if out:lower():find("error") then
 			logLevel = vim.log.levels.ERROR

@@ -11,5 +11,5 @@ function run() {
 	const workflowId = winPath.match(/Alfred\.alfredpreferences\/workflows\/([^/]+)/)[1];
 
 	Application("com.runningwithcrayons.Alfred").revealWorkflow(workflowId);
-	return null;
+	return;
 }
