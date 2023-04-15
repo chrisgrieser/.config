@@ -289,7 +289,7 @@ nmap ,l :linkjump
 " Substitute
 """"""""""""""""""""""
 " poor man's substitute.nvim 🥲
-unmap s
+" unmap s
 map ss Vp
 nmap S vg$p
 
