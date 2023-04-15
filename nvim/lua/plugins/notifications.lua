@@ -65,21 +65,21 @@ return {
 		local printDurationSecs = 7
 
 		-- replace lua's print message with notify.nvim → https://www.reddit.com/r/neovim/comments/xv3v68/tip_nvimnotify_can_be_used_to_display_print/
-		function print (...)
-			local args = { ... }
-			if vim.tbl_isempty(args) then
-				vim.notify("NIL", vim.log.levels.TRACE)
-				return
-			end
-			args = vim.tbl_map(function(arg) return vim.inspect(arg) end, args)
+		function print(...)
+			local hasNonString = false
+			local args = vim.tbl_map(function(arg)
+				if type(arg) == "string" then return arg end
+				hasNonString = true
+				return vim.inspect(arg)
+			end, { ... })
 			local out = table.concat(args, " ")
-			-- filetype enables treesitter highlighting in the notification
-			local ft = type(args[1]) ~= "string" and "lua" or "text"
+			local ft = hasNonString and "lua" or "text"
 
 			vim.notify(out, vim.log.levels.INFO, {
 				timeout = printDurationSecs * 1000,
 				on_open = function(win)
 					local buf = vim.api.nvim_win_get_buf(win)
+					-- filetype enables treesitter highlighting in the notification
 					vim.api.nvim_buf_set_option(buf, "filetype", ft)
 				end,
 			})
