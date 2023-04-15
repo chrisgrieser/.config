@@ -13,7 +13,6 @@ local s = {
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },
 }
-
 local source_icons = {
 	treesitter = "",
 	buffer = "󰽙",
@@ -28,7 +27,6 @@ local source_icons = {
 	cmdline_history = "󰋚",
 	path = "",
 }
-
 local defaultSources = {
 	s.snippets,
 	s.codeium,
@@ -37,7 +35,6 @@ local defaultSources = {
 	s.treesitter,
 	s.buffer,
 }
-
 local kind_icons = {
 	Text = "",
 	Method = "󰆧",
@@ -65,7 +62,6 @@ local kind_icons = {
 	Operator = "󰆕",
 	TypeParameter = "󰅲",
 }
-
 --------------------------------------------------------------------------------
 
 local function cmpconfig()
@@ -78,6 +74,14 @@ local function cmpconfig()
 			-- REQUIRED a snippet engine must be specified and installed
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
 		},
+		matching = {
+			-- default: false, false, true, false, false
+			disallow_fuzzy_matching = false,
+			disallow_fullfuzzy_matching = false,
+			disallow_partial_fuzzy_matching = true,
+			disallow_partial_matching = false,
+			disallow_prefix_unmatching = false,
+		},
 		window = {
 			completion = {
 				side_padding = 0,
@@ -89,7 +93,7 @@ local function cmpconfig()
 		},
 		sorting = {
 			comparators = {
-				require('cmp_fuzzy_buffer.compare'),
+				require("cmp_fuzzy_buffer.compare"),
 				-- Original order: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
 				-- Definitions of compare function https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
 				compare.offset,
