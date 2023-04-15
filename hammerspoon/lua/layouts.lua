@@ -57,7 +57,7 @@ local function workLayout()
 	hs.execute("sketchybar --set clock popup.drawing=true")
 
 	-- close
-	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "BetterTouchTool", "lo-rain" }
+	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "lo-rain" }
 	require("lua.private").closer()
 	closeAllFinderWins()
 
@@ -78,7 +78,7 @@ local function workLayout()
 	MyTimers.layouts = hs.timer.waitUntil(function() return u.appRunning(appsToOpen) end, function()
 		u.app("Mimestream"):activate()
 		u.restartApp("AltTab")
-	end, 0.2)
+	end, 0.1)
 
 	print("🔲 WorkLayout: done")
 end
@@ -91,7 +91,7 @@ local function movieLayout()
 	darkmode.set(true)
 	HoleCover("remove")
 
-	u.openApps { "YouTube", "BetterTouchTool" }
+	u.openApps("YouTube")
 	u.quitApp {
 		"Neovide",
 		"lo-rain",

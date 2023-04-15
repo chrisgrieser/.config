@@ -144,3 +144,5 @@ starship
 LoC
 ResearchGate
 LinkedIn
+QuickLook
+OCR
