@@ -12,6 +12,8 @@ M.tbl_contains = hs.fnutils.contains
 M.hyper = { "cmd", "alt", "ctrl", "shift" } -- bound to capslock via Karabiner elements
 I = hs.inspect -- to inspect tables in the console more quickly
 
+-- need to catch timers in variables to ensure they don't get garbage collected
+MyTimers = {} 
 --------------------------------------------------------------------------------
 
 ---trims all whitespace from string, like javascript's .trim()
@@ -209,7 +211,7 @@ end
 function M.restartApp(appName)
 	local app = M.app(appName)
 	if app then app:kill() end
-	MyTimer = hs.timer.waitUntil(
+	MyTimers[appName] = hs.timer.waitUntil(
 		function() return M.app(appName) == nil end,
 		function() hs.application.open(appName) end,
 		0.1
@@ -221,7 +223,7 @@ end
 ---@async
 function M.asSoonAsAppRuns(app, callbackFn)
 	if type(app) == "string" then app = M.app(app) end
-	MyTimer = hs.timer.waitUntil(function()
+	MyTimers[app] = hs.timer.waitUntil(function()
 		local appRuns = app ~= nil
 		local windowAvailable = app and app:mainWindow()
 		return appRuns and windowAvailable
