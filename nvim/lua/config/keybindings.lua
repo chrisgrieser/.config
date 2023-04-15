@@ -461,7 +461,6 @@ keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = "save" }) -- cmd+s, will
 
 -- stylua: ignore
 keymap("", "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
--- stylua: ignore
 keymap("", "<D-S-l>", function()
 	local parentFolder = expand("%:p:h")
 	if not parentFolder:find("Alfred%.alfredpreferences") then
@@ -469,6 +468,7 @@ keymap("", "<D-S-l>", function()
 		return
 	end
 	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
+	-- stylua: ignore
 	local command = ([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(workflowId)
 	fn.system(command)
 end, { desc = "󰾺 Reveal Workflow in Alfred" })
@@ -687,7 +687,12 @@ keymap("n", "<leader>gd", function()
 		cmd.wincmd("|") -- maximize it
 	end)
 end, { desc = "󰊢 File History (Diffview)" })
-keymap("x", "<leader>gd", ":DiffviewFileHistory<CR><C-w>w<C-w>|", { desc = "󰊢 File History of Selection" })
+keymap(
+	"x",
+	"<leader>gd",
+	":DiffviewFileHistory<CR><C-w>w<C-w>|",
+	{ desc = "󰊢 File History of Selection" }
+)
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING

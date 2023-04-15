@@ -151,9 +151,11 @@ function M.moveResize(win, pos)
 		if u.app("Twitter") then u.app("Twitter"):hide() end
 	end
 
-	-- resize
-	-- check for false, since non-resizable wins return nil
-	if M.CheckSize(win, pos) == false then win:moveToUnit(pos) end
+	-- resize with safety redundancy
+	u.runWithDelays({ 0, 0.2 }, function()
+		-- check for false, since non-resizable wins return nil
+		if M.CheckSize(win, pos) == false then win:moveToUnit(pos) end
+	end)
 
 	-- Obsidian extras (has to come after resizing)
 	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win) end
