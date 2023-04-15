@@ -1,7 +1,7 @@
 local darkmode = require("lua.dark-mode")
+local twitter = require("lua.twitter")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local twitter = require("lua.twitter")
 --------------------------------------------------------------------------------
 
 -- HELPERS
@@ -61,10 +61,12 @@ local function workLayout()
 	require("lua.private").closer()
 	closeAllFinderWins()
 
-	-- twitter
+	-- Twitter
 	u.openApps("Twitter")
-	u.asSoonAsAppRuns("Twitter", twitter.toTheSide)
-	u.asSoonAsAppRuns("Twitter", twitter.scrollUp)
+	u.asSoonAsAppRuns("Twitter", function()
+		wu.twitterToTheSide()
+		twitter.scrollUp()
+	end)
 
 	-- open
 	local appsToOpen = { "Discord", "Vivaldi", "Mimestream" }
@@ -73,7 +75,7 @@ local function workLayout()
 	for _, app in pairs(appsToOpen) do
 		u.asSoonAsAppRuns(app, function() wu.moveResize(u.app(app):mainWindow(), wu.pseudoMax) end)
 	end
-	MyTimer = hs.timer.waitUntil(function() return u.appRunning(appsToOpen) end, function()
+	MyTimers.layouts = hs.timer.waitUntil(function() return u.appRunning(appsToOpen) end, function()
 		u.app("Mimestream"):activate()
 		u.restartApp("AltTab")
 	end, 0.2)
@@ -141,12 +143,10 @@ UnlockWatcher = c.new(function(event)
 			setHigherBrightnessDuringDay()
 			selectLayout()
 		end)
-		u.runWithDelays(5, function() unlockInProgress = false end)
+		u.runWithDelays(4, function() unlockInProgress = false end)
 	end, 0.2)
 	-- deactivate the timer in the screen is woken but not unlocked
 	u.runWithDelays(20, function()
-		if UnlockTimer and UnlockTimer:running() then
-			UnlockTimer:stop()
-		end
+		if UnlockTimer and UnlockTimer:running() then UnlockTimer:stop() end
 	end)
 end):start()

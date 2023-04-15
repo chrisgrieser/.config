@@ -226,7 +226,7 @@ local function filetypeCompletionConfig()
 	})
 
 	cmp.setup.filetype("sh", {
-		-- disable `\[`
+		-- disable the `\[` suggestion
 		enabled = function()
 			local lineContent = vim.fn.getline(".")
 			return not (lineContent:match("\\$"))
@@ -299,10 +299,7 @@ local function cmdlineCompletionConfig()
 
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
-		sources = {
-			s.fuzzybuffer,
-			-- s.cmdline_history, -- gets search history when used here
-		},
+		sources = { s.fuzzybuffer },
 	})
 end
 

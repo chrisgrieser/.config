@@ -47,9 +47,13 @@ keymap("n", "zm", function() require("ufo").closeAllFolds() end, { desc = "󰘖 
 
 -- set foldlevel via z{n}
 for _, lvl in pairs { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } do
-	lvl = lvl - 1 -- folds are zero-based, but I can't think that way
-	local desc = lvl < 3 and "󰘖 Set Fold Level" or "which_key_ignore"
-	keymap("n", "z" .. tostring(lvl), function() require("ufo").closeFoldsWith(lvl) end, { desc = desc })
+	local desc = lvl < 4 and "󰘖 Set Fold Level" or "which_key_ignore"
+	keymap(
+		"n",
+		"z" .. tostring(lvl),
+		function() require("ufo").closeFoldsWith(lvl - 1) end,
+		{ desc = desc }
+	)
 end
 
 -- toggle all toplevel folds, but not the
