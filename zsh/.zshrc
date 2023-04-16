@@ -9,18 +9,19 @@ CONFIG_FILES=(
 	aliases
 	history_config
 	general_and_plugin_configs
-	# completions # not in use when using fzf-tab
 	fzf-tab-settings
 	terminal_keybindings
 	docs_man
 	git_github
 	homebrew
-	vi_mode
 	lazyload-cli-completions
 )
 
 # no intro messages for embedded terminals, since I use them with lower height
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && CONFIG_FILES+=('intro_messages')
+if [[ "$TERM_PROGRAM" == "WezTerm" ]] ; then
+	CONFIG_FILES+=('intro_messages')
+	CONFIG_FILES+=('vi_mode')
+fi 
 
 #───────────────────────────────────────────────────────────────────────────────
 

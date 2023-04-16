@@ -1,9 +1,9 @@
 {
 	"name": "Vimium C",
-	"@time": "03/04/2023, 12:44:28",
-	"time": 1680518668523,
+	"@time": "16/04/2023, 19:38:08",
+	"time": 1681666688903,
 	"environment": {
-		"extension": "1.99.97",
+		"extension": "1.99.98",
 		"platform": "mac",
 		"chromium": 110
 	},
@@ -110,7 +110,6 @@
 		"map G scrollToBottom",
 		"map F nextFrame",
 		"",
-		"",
 		"\" History",
 		"map h goBack",
 		"map l goForward",
@@ -132,6 +131,8 @@
 		"",
 		"\" Copy URLs",
 		"map yy copyCurrentUrl",
+		"\" copy github part of an url",
+		"map yg copyCurrentUrl sed=\"s=https?://github.com/(.+?/.[^/]+).*=$1=\"",
 		"map yw copyWindowInfo format=\"${url}\"",
 		"",
 		"\" Help",
