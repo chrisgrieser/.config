@@ -12,7 +12,7 @@ Icon
 *.key
 pw.*
 
-# prevent accidental inclusion
+# partial downloads
 *.part
 
 # created due to sync issues
@@ -20,3 +20,6 @@ pw.*
 
 # node
 node_modules
+
+# lab.nvim code runner test files
+󰙨 Lab.*
