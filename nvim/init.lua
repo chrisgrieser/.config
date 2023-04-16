@@ -9,8 +9,8 @@ if vim.version().minor >= 9 then vim.loader.enable() end
 ---loaded. But do notify if there was an error.
 ---@param module string module to load
 local function safeRequire(module)
-	local success, req = pcall(require, module)
-	if success then return req end
+	local success, loadedModule = pcall(require, module)
+	if success then return loadedModule end
 	local msg = "Error loading " .. module
 	local notifyLoaded, notify = pcall(require, "notify")
 	if notifyLoaded then
@@ -19,12 +19,6 @@ local function safeRequire(module)
 		vim.cmd.echoerr(msg)
 	end
 end
-
-pcall(function ()
-	vim.g.t_SI .= "\<Esc>[3 q"
-	vim.g.t_SR .= "\<Esc>[3 q"
-	vim.g.t_EI .= "\<Esc>[3 q"
-end)
 
 --------------------------------------------------------------------------------
 
