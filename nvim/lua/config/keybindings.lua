@@ -81,14 +81,10 @@ keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 --------------------------------------------------------------------------------
 
 -- Marks
--- stylua: ignore
-keymap("n", "ä", function() require("funcs.mark-cycler").gotoMark() end, { desc = "Goto Next Mark" })
-keymap("n", "Ä", function() require("funcs.mark-cycler").setMark() end, { desc = "Set Next Mark" })
-
--- reset marks on startup (needs to be on VimEnter so it's not called too early)
-autocmd("VimEnter", {
-	callback = function() require("funcs.mark-cycler").clearMarks() end,
-})
+keymap("n", "Ä", cmd.BookmarkToggle, { desc = " Toggle Bookmark" })
+keymap("n", "ä", cmd.BookmarkNext, { desc = " Next Bookmark" })
+keymap("n", "dä", cmd.BookmarkClearAll, { desc = " Clear All Bookmark" })
+keymap("n", "gä", cmd.BookmarkShowAll, { desc = "  Bookmarks to Quickfix" })
 
 -- Hunks and Changes
 keymap("n", "gh", ":Gitsigns next_hunk<CR>zv", { desc = "goto next hunk" })
@@ -507,6 +503,7 @@ local function harpoonFileNumber()
 	local json = u.readFile(jsonPath)
 	if not json then return end
 	local data = vim.json.decode(json)
+	if not data then return end
 	local project = data.projects[pwd]
 	if not project then return end
 	local fileNumber = #project.mark.marks

@@ -49,11 +49,11 @@ local function customHighlights()
 
 	updateHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
 	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
-	linkHighlight("CodiVirtualText", "Comment") -- Codi
 	updateHighlight("TSDefinition", " term=underline gui=underdotted") -- treesittter refactor focus
 	updateHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
 	updateHighlight("QuickScopePrimary", "gui=reverse cterm=reverse")
 	updateHighlight("QuickScopeSecondary", "gui=underdouble cterm=underline")
+	linkHighlight("BookmarkSign", "DiagnosticSignHint")
 end
 
 -- selene: allow(high_cyclomatic_complexity)
