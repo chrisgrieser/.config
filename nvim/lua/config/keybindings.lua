@@ -753,11 +753,21 @@ keymap( "x", "<leader>tt", cmd.ToggleTermSendVisualSelection, { desc = "  
 keymap("n", "<leader>tl", function()
 	-- supported languages: https://github.com/0x100101/lab.nvim#languages
 	local ft = bo.filetype
-	if not vim.tbl_contains({ "lua", "javascript", "typescript", "python" }, ft) then return end
-	-- cmd.enew()
-
-
-end, { desc = " Codi" })
+	local ftmaps = {
+		lua = "lua",
+		javascript = "js",
+		typescript = "ts",
+		python = "py",
+	}
+	cmd.edit("󰙨 Lab." .. ftmaps[ft])
+	cmd.write()
+	cmd("Lab code run")
+	-- overwrite macro/debugger keymaps for play/run/breakpoint
+	keymap("n", "9", "<cmd>Lab code run<CR>", { desc = "󰙨 Run Code", buffer = true })
+	keymap("n", "<leader>r", "<cmd>Lab code run<CR>", { desc = "󰙨 Run Code", buffer = true })
+	keymap("n", "0", "<cmd>Lab code stop<CR>", { desc = "󰙨 Stop Lab", buffer = true })
+	keymap("n", "8", "<cmd>Lab code panel<CR>", { desc = "󰙨 Lab Results Panel", buffer = true })
+end, { desc = "󰙨 Lab" })
 
 -- edit embedded filetype
 keymap("n", "<leader>ti", function()
@@ -770,7 +780,7 @@ keymap("n", "<leader>ti", function()
 end, { desc = " InlineEdit" })
 
 keymap("x", "<leader>ti", function()
-	local fts = { "applescript", "bash", "vim" }
+	local fts = { "sh", "applescript", "vim" }
 	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 		if not ft then return end
 		u.leaveVisualMode()
