@@ -5,22 +5,22 @@
 
 CONFIG_FILES=(
 	load_plugins
+	general_and_plugin_configs
 	terminal_utils
+	terminal_keybindings
+	vi_mode
 	aliases
 	history_config
-	general_and_plugin_configs
-	fzf-tab-settings
-	terminal_keybindings
+	fzf_tab_settings
 	docs_man
 	git_github
 	homebrew
-	lazyload-cli-completions
+	lazyload_cli_completions
 )
 
 # no intro messages for embedded terminals, since I use them with lower height
 if [[ "$TERM_PROGRAM" == "WezTerm" ]] ; then
 	CONFIG_FILES+=('intro_messages')
-	CONFIG_FILES+=('vi_mode')
 fi 
 
 #───────────────────────────────────────────────────────────────────────────────
