@@ -156,13 +156,11 @@ keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Case Conversion
 -- stylua: ignore start
-
 keymap("n", "cru", ":lua require('textcase').current_word('to_upper_case')<CR>", { desc = "UPPER CASE" })
 keymap("n", "crl", ":lua require('textcase').current_word('to_lower_case')<CR>", { desc = "lower case" })
 keymap("n", "crt", ":lua require('textcase').current_word('to_title_case')<CR>", { desc = "Title Case" })
 keymap("n", "crc", ":lua require('textcase').current_word('to_camel_case')<CR>", { desc = "camelCase" })
 keymap("n", "crp", ":lua require('textcase').current_word('to_pascal_case')<CR>", { desc = "PascalCase" })
-keymap("n", "cre", ":lua require('textcase').current_word('to_phrase_case')<CR>", { desc = "Sentence case" })
 keymap("n", "cr-", ":lua require('textcase').current_word('to_dash_case')<CR>", { desc = "dash-case" })
 keymap("n", "cr/", ":lua require('textcase').current_word('to_path_case')<CR>", { desc = "path/case" })
 keymap("n", "cr.", ":lua require('textcase').current_word('to_dot_case')<CR>", { desc = "dot.case" })
@@ -174,7 +172,6 @@ keymap("n", "cRl", ":lua require('textcase').lsp_rename('to_lower_case')<CR>", {
 keymap("n", "cRt", ":lua require('textcase').lsp_rename('to_title_case')<CR>", { desc = "󰒕 Title Case" })
 keymap("n", "cRc", ":lua require('textcase').lsp_rename('to_camel_case')<CR>", { desc = "󰒕 camelCase" })
 keymap("n", "cRp", ":lua require('textcase').lsp_rename('to_pascal_case')<CR>", { desc = "󰒕 PascalCase" })
-keymap("n", "cRe", ":lua require('textcase').lsp_rename('to_phrase_case')<CR>", { desc = "󰒕 Sentence case" })
 keymap("n", "cR-", ":lua require('textcase').lsp_rename('to_dash_case')<CR>", { desc = "󰒕 dash-case" })
 keymap("n", "cR/", ":lua require('textcase').lsp_rename('to_path_case')<CR>", { desc = "󰒕 path/case" })
 keymap("n", "cR.", ":lua require('textcase').lsp_rename('to_dot_case')<CR>", { desc = "󰒕 dot.case" })
@@ -280,14 +277,7 @@ keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc 
 keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
 keymap({ "n", "x" }, "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
 keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("Extract Function") end, { desc = "󱗘 Extract Func" })
-
-keymap( "x", "<leader>fa", ":AI Refactor to improve this code<CR>", { desc = "󱙺 Refactor with GPT" })
 -- stylua: ignore end
-
---------------------------------------------------------------------------------
--- AI Support
-keymap({ "n", "x" }, "<leader>a", ":AI<CR>", { desc = "󱙺 Complete with GPT" })
-keymap("x", "<leader>A", ":AI ", { desc = "󱙺 Prompt GPT" })
 
 --------------------------------------------------------------------------------
 
@@ -572,13 +562,12 @@ keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { d
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
 
--- Global (so usable by null-ls)
+-- INFO some LSP bindings done globally, so they can be used by null-ls as well
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 -- stylua: ignore
 keymap("n", "<leader>e", function() cmd.Telescope("diagnostics") end, { desc = " 󰒕 Search Diagnostics" })
 
--- keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Show Diagnostic" })
 keymap("n", "<leader>d", function()
 	require("lsp_lines").toggle()
 	local nextState = vim.g.prevVirtText or false
@@ -605,6 +594,22 @@ keymap("n", "<D-b>", function()
 	vim.notify("COPIED\n" .. breadcrumbs)
 end, { desc = "󰒕 Copy Breadcrumbs" })
 
+-- Save & Format
+keymap({ "n", "i", "x" }, "<D-s>", function()
+	cmd.update()
+	vim.lsp.buf.format { async = true }
+end, { buffer = true, desc = "󰒕 Save & Format" })
+
+-- stylua: ignore end
+keymap("n", "<leader>h", function()
+	local isOnFold = require("ufo").peekFoldedLinesUnderCursor()
+	if not isOnFold then vim.lsp.buf.hover() end
+end, { desc = "󰒕 󱃄 Hover", buffer = true })
+
+-- uses "v" instead of "x", so signature can be shown during snippet completion
+-- stylua: ignore
+keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
+
 autocmd("LspAttach", {
 	callback = function(args)
 		-- stylua: ignore start
@@ -616,7 +621,6 @@ autocmd("LspAttach", {
 			-- cannot run `cmd.IncRename` since the plugin *has* to use the
 			-- command line; needs defer to not be overwritten by treesitter-
 			-- refactor's smart-rename
-			-- stylua: ignore
 			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1)
 			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
 		end
@@ -628,23 +632,16 @@ autocmd("LspAttach", {
 			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 
-		keymap("n", "gd", function() cmd.Glance("definitions") end, { desc = "󰒕 Definitions", buffer = true })
-		keymap("n", "gf", function() cmd.Glance("references") end, { desc = "󰒕 References", buffer = true })
-		keymap("n", "gy", function() cmd.Glance("type_definitions") end, { desc = "󰒕 Type Definition", buffer = true })
-		-- uses "v" instead of "x", so signature can be shown during snippet completion
-		keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
-
+		if capabilities.definitionProvider then
+			keymap("n", "gd", function() cmd.Glance("definitions") end, { desc = "󰒕 Definitions", buffer = true })
+		end
+		if capabilities.referencesProvider then
+			keymap("n", "gf", function() cmd.Glance("references") end, { desc = "󰒕 References", buffer = true })
+		end
+		if capabilities.typeDefinitionProvider then
+			keymap("n", "gy", function() cmd.Glance("type_definitions") end, { desc = "󰒕 Type Definition", buffer = true })
+		end
 		-- stylua: ignore end
-		keymap("n", "<leader>h", function()
-			local isOnFold = require("ufo").peekFoldedLinesUnderCursor()
-			if not isOnFold then vim.lsp.buf.hover() end
-		end, { desc = "󰒕 󱃄 Hover", buffer = true })
-
-		-- Save & Format
-		keymap({ "n", "i", "x" }, "<D-s>", function()
-			cmd.update()
-			vim.lsp.buf.format { async = true }
-		end, { buffer = true, desc = "󰒕 Save & Format" })
 	end,
 })
 
@@ -679,7 +676,7 @@ keymap("n", "<leader>gM", function () require("funcs.git-utils").amendAndPushFor
 
 -- Diffview
 keymap("n", "<leader>gd", function()
-	vim.ui.input({ prompt = "Git Pickaxe (empty = full history)" }, function(query)
+	vim.ui.input({ prompt = "󰢷 Git Pickaxe (empty = full history)" }, function(query)
 		if not query then return end
 		if query ~= "" then query = (" -G'%s'"):format(query) end
 		cmd("DiffviewFileHistory %" .. query)
@@ -691,7 +688,7 @@ keymap(
 	"x",
 	"<leader>gd",
 	":DiffviewFileHistory<CR><C-w>w<C-w>|",
-	{ desc = "󰊢 File History of Selection" }
+	{ desc = "󰊢 Line History (Diffview)" }
 )
 
 --------------------------------------------------------------------------------
@@ -748,25 +745,16 @@ end, { desc = "󰴚 Test HTTP request" })
 
 keymap("n", "<leader>tt", cmd.ToggleTerm, { desc = " ToggleTerm" })
 -- stylua: ignore
-keymap( "x", "<leader>tt", cmd.ToggleTermSendVisualSelection, { desc = "  Run Selection in ToggleTerm" })
+keymap("x", "<leader>tt", cmd.ToggleTermSendVisualSelection, { desc = "  Run Selection in ToggleTerm" })
 
 keymap("n", "<leader>tl", function()
 	-- supported languages: https://github.com/0x100101/lab.nvim#languages
-	local ft = bo.filetype
-	local ftmaps = {
-		lua = "lua",
-		javascript = "js",
-		typescript = "ts",
-		python = "py",
-	}
-	cmd.edit("󰙨 Lab." .. ftmaps[ft])
+	local ftmaps = { lua = "lua", javascript = "js", typescript = "ts", python = "py" }
+	cmd.edit("󰙨 Lab." .. ftmaps[bo.filetype])
 	cmd.write()
 	cmd("Lab code run")
-	-- overwrite macro/debugger keymaps for play/run/breakpoint
-	keymap("n", "9", "<cmd>Lab code run<CR>", { desc = "󰙨 Run Code", buffer = true })
 	keymap("n", "<leader>r", "<cmd>Lab code run<CR>", { desc = "󰙨 Run Code", buffer = true })
-	keymap("n", "0", "<cmd>Lab code stop<CR>", { desc = "󰙨 Stop Lab", buffer = true })
-	keymap("n", "8", "<cmd>Lab code panel<CR>", { desc = "󰙨 Lab Results Panel", buffer = true })
+	keymap("n", "<leader>tl", "<cmd>Lab code stop<CR>", { desc = "󰙨 Stop Lab", buffer = true })
 end, { desc = "󰙨 Lab" })
 
 -- edit embedded filetype
