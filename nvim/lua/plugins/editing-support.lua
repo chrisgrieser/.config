@@ -1,3 +1,5 @@
+local u = require("config.utils")
+
 return {
 	{ -- autopair
 		"windwp/nvim-autopairs",
@@ -34,10 +36,15 @@ return {
 	},
 	{ -- better marks
 		"MattesGroeger/vim-bookmarks",
-		-- event = "VeryLazy",
-		opts = {
-			
-		},
+		cmd = { "BookmarkToggle", "BookmarkNext", "BookmarkPrev", "BookmarkClear", "BookmarkShowAll" },
+		init = function()
+			vim.g.bookmark_no_default_key_mappings = 1
+			vim.g.bookmark_sign = ""
+			vim.g.bookmark_highlight_lines = 0
+			-- vim.g.bookmark_save_per_working_dir = 1
+			vim.g.bookmark_auto_save_file = u.vimDataDir .. "/bookmarks"
+
+		end,
 	},
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
