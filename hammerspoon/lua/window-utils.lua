@@ -154,7 +154,7 @@ function M.moveResize(win, pos)
 	-- resize with safety redundancy
 	u.runWithDelays({ 0, 0.1, 0.2, 0.3 }, function()
 		-- check for false, since non-resizable wins return nil
-		if M.CheckSize(win, pos) ~= false then return end 
+		if M.CheckSize(win, pos) ~= false then return end
 		win:moveToUnit(pos)
 	end)
 
@@ -306,17 +306,29 @@ local function controlSpaceAction()
 end
 
 local function moveCurWinToOtherDisplay()
+	if #hs.screen.allScreens() < 2 then return end
 	local win = hs.window.focusedWindow()
 	if not win then return end
 	local targetScreen = win:screen():next()
 	win:moveToScreen(targetScreen, true)
 
-	u.runWithDelays({ 0.1, 0.4 }, function()
+	u.runWithDelays({ 0.1, 0.4, 0.7 }, function()
 		-- workaround for ensuring proper resizing
 		win = hs.window.focusedWindow()
 		if not win then return end
 		win:setFrameInScreenBounds(win:frame())
 	end)
+end
+
+local function moveAllWinsToProjectorScreen()
+	if #hs.screen.allScreens() < 2 then return end
+	if not u.isProjector() then return end
+
+	local projectorScreen = hs.screen.primaryScreen()
+	for _, win in pairs(hs.window:orderedWindows()) do
+		win:moveToScreen(projectorScreen, true)
+		u.runWithDelays(0.1, function() win:setFrameInScreenBounds(win:frame()) end)
+	end
 end
 
 local function homeAction()
@@ -350,6 +362,9 @@ u.hotkey(u.hyper, "down", function() M.moveResize(hs.window.focusedWindow(), { x
 u.hotkey(u.hyper, "up", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0, w = 1, h = 0.5 }) end)
 -- stylua: ignore end
 u.hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
+
+-- for adding to Shortcuts.app
+u.urischeme("move-all-wins-to-projector", moveAllWinsToProjectorScreen)
 
 --------------------------------------------------------------------------------
 return M

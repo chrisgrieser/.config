@@ -120,8 +120,8 @@ end):start()
 u.urischeme("enlarge-neovide-window", function()
 	u.asSoonAsAppRuns("neovide", function()
 		local neovideWin = u.app("neovide"):mainWindow()
-local size = u.isProjector() and wu.maximized or wu.pseudoMax
-wu.moveResize(neovideWin, size)
+		local size = u.isProjector() and wu.maximized or wu.pseudoMax
+		wu.moveResize(neovideWin, size)
 	end)
 end)
 
