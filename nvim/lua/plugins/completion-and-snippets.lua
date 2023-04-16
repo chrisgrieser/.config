@@ -171,6 +171,10 @@ end
 
 local function filetypeCompletionConfig()
 	local cmp = require("cmp")
+
+	-- disable in special filetypes
+	cmp.setup.filetype("", { enabled = false })
+
 	cmp.setup.filetype("lua", {
 		enabled = function() -- disable leading "-"
 			local lineContent = vim.fn.getline(".")

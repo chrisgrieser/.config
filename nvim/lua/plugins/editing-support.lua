@@ -37,15 +37,16 @@ return {
 	{ -- AI support
 		"Bryley/neoai",
 		dependencies = "MunifTanjim/nui.nvim",
-		-- stylua: ignore
-		cmd = { "NeoAI", "NeoAIOpen", "NeoAIClose", "NeoAIToggle", "NeoAIContext", "NeoAIContextOpen", "NeoAIContextClose", "NeoAIInject", "NeoAIInjectCode", "NeoAIInjectContext", "NeoAIInjectContextCode" },
+		cmd = { "NeoAI", "NeoAIContext", "NeoAIInject", "NeoAIInjectCode", "NeoAIInjectContextCode" },
 		opts = {
-			ui = {
-				output_popup_text = "NeoAI",
-				input_popup_text = "Prompt",
-				width = 30, -- As percentage eg. 30%
-				output_popup_height = 80, -- As percentage eg. 80%
+			ui = { -- percentages
+				width = 40, 
+				output_popup_height = 75, 
 			},
+			inject = {
+				cutoff_width = vim.opt.textwidth:get() + 5,
+			},
+			shortcuts = {}, -- disable built-in shortcuts
 		},
 	},
 	{ -- better marks
