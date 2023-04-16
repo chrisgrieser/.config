@@ -12,8 +12,8 @@ local function safeRequire(module)
 	local success, req = pcall(require, module)
 	if success then return req end
 	local msg = "Error loading " .. module
-	local notifyInstalled, notify = pcall(require, "notify")
-	if notifyInstalled then
+	local notifyLoaded, notify = pcall(require, "notify")
+	if notifyLoaded then
 		notify(" " .. msg, vim.log.levels.ERROR)
 	else
 		vim.cmd.echoerr(msg)

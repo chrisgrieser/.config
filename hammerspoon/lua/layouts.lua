@@ -13,7 +13,7 @@ end
 
 ---@return boolean
 local function isWeekend()
-	local weekday = tostring(os.date()):sub(1, 3)
+	local weekday = os.date("%a")
 	return weekday == "Sun" or weekday == "Sat"
 end
 
