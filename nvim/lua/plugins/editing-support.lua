@@ -40,10 +40,7 @@ return {
 		init = function()
 			vim.g.bookmark_no_default_key_mappings = 1
 			vim.g.bookmark_sign = ""
-			vim.g.bookmark_highlight_lines = 0
-			-- vim.g.bookmark_save_per_working_dir = 1
 			vim.g.bookmark_auto_save_file = u.vimDataDir .. "/bookmarks"
-
 		end,
 	},
 	{ -- case conversion
