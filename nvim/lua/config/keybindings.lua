@@ -598,17 +598,17 @@ end, { desc = "󰒕 Copy Breadcrumbs" })
 keymap({ "n", "i", "x" }, "<D-s>", function()
 	cmd.update()
 	vim.lsp.buf.format { async = true }
-end, { buffer = true, desc = "󰒕 Save & Format" })
+end, { desc = "󰒕 Save & Format" })
 
 -- stylua: ignore end
 keymap("n", "<leader>h", function()
 	local isOnFold = require("ufo").peekFoldedLinesUnderCursor()
 	if not isOnFold then vim.lsp.buf.hover() end
-end, { desc = "󰒕 󱃄 Hover", buffer = true })
+end, { desc = "󰒕 󱃄 Hover" })
 
 -- uses "v" instead of "x", so signature can be shown during snippet completion
 -- stylua: ignore
-keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature", buffer = true })
+keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature" })
 
 autocmd("LspAttach", {
 	callback = function(args)
