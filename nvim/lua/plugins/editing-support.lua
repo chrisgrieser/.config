@@ -32,6 +32,13 @@ return {
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
+	{ -- better marks
+		"MattesGroeger/vim-bookmarks",
+		-- event = "VeryLazy",
+		opts = {
+			
+		},
+	},
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
 		lazy = true, -- loaded by keymaps

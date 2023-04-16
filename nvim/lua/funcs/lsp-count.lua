@@ -53,7 +53,7 @@ function M.statusline()
 		local capable = client.server_capabilities
 		if capable.referencesProvider and capable.definitionProvider then lspCapable = true end
 	end
-	if fn.mode() ~= "n" or lspLoading or not lspCapable then return "" end
+	if vim.api.nvim_get_mode().mode ~= "n" or lspLoading or not lspCapable then return "" end
 
 	-- trigger count, abort when none
 	requestLspRefCount() -- needs to be separated due to lsp calls being async

@@ -13,7 +13,8 @@ local function getHighlightValue(name, key)
 	elseif key == "fg" then
 		key = "foreground"
 	end
-	local ok, hl = pcall(vim.api.nvim_get_hl_by_name, name, true)
+
+	local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name })
 	if not ok then return end
 	local value = hl[key]
 	if not value then return end
@@ -127,7 +128,7 @@ local function updateHarpoonIndicator()
 
 	local harpoonData = vim.json.decode(harpoonJson)
 	local pwd = vim.loop.cwd()
-	if not pwd then return end
+	if not pwd or not harpoonData then return end
 	local currentProject = harpoonData.projects[pwd]
 	if not currentProject then return end
 	local markedFiles = currentProject.mark.marks
@@ -235,8 +236,7 @@ local lualineConfig = {
 				section_separators = topSeparators,
 			},
 		},
-		lualine_y = {
-		},
+		lualine_y = {},
 		-- INFO dap and recording status defined in the respective plugin configs
 		-- for lualine_y and lualine_z for their lazy loading
 	},
