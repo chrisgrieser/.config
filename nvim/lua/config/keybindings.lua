@@ -750,14 +750,13 @@ keymap("n", "<leader>tt", cmd.ToggleTerm, { desc = " ToggleTerm" })
 -- stylua: ignore
 keymap( "x", "<leader>tt", cmd.ToggleTermSendVisualSelection, { desc = "  Run Selection in ToggleTerm" })
 
-keymap("n", "<leader>tc", function()
-	local isCodiBuffer = bo.buftype ~= ""
-	if isCodiBuffer then
-		cmd.CodiExpand() -- multiline output for the current line
-	else
-		cmd.CodiNew()
-		vim.api.nvim_buf_set_name(0, "Codi: " .. bo.filetype)
-	end
+keymap("n", "<leader>tl", function()
+	-- supported languages: https://github.com/0x100101/lab.nvim#languages
+	local ft = bo.filetype
+	if not vim.tbl_contains({ "lua", "javascript", "typescript", "python" }, ft) then return end
+	-- cmd.enew()
+
+
 end, { desc = " Codi" })
 
 -- edit embedded filetype
