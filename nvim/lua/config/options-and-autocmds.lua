@@ -33,6 +33,9 @@ end
 
 --------------------------------------------------------------------------------
 
+-- Disable Mouse
+opt.mouse = ""
+
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select more
