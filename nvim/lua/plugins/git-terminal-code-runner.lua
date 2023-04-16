@@ -28,6 +28,13 @@ return {
 			},
 		},
 	},
+	{ -- edit terminal
+		"chomosuke/term-edit.nvim",
+		ft = "toggleterm",
+		opts = {
+			prompt_end = '󰀘 ',
+		},
+	},
 	{ -- better embedded terminal
 		"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm", "ToggleTermSendVisualSelection" },
