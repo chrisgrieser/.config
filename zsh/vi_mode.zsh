@@ -92,7 +92,7 @@ bindkey -M vicmd 'q' normal-mode-exit
 # Ps = 6 -> steady bar (xterm)
 
 # INFO does not work with xterm, therefore using starship indicator instead
-# [[ "$TERM_PROGRAM" == "WezTerm" || "$TERM" == "alacritty" ]] || return 0
+[[ "$TERM_PROGRAM" == "WezTerm" || "$TERM" == "alacritty" ]] || return 0
 
 function zle-keymap-select () {
 		case $KEYMAP in

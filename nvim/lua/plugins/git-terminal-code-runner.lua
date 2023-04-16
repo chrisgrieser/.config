@@ -28,19 +28,13 @@ return {
 			},
 		},
 	},
-	{ -- edit terminal
-		"chomosuke/term-edit.nvim",
-		ft = "toggleterm",
-		opts = {
-			prompt_end = '󰀘 ',
-		},
-	},
 	{ -- better embedded terminal
 		"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm", "ToggleTermSendVisualSelection" },
 		opts = {
 			size = 12,
 			direction = "horizontal",
+			autochdir = true, -- when nvim changes pwd, will also change its pwd
 		},
 	},
 	{ -- git sign gutter & hunk textobj

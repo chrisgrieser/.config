@@ -20,6 +20,12 @@ local function safeRequire(module)
 	end
 end
 
+pcall(function ()
+	vim.g.t_SI .= "\<Esc>[3 q"
+	vim.g.t_SR .= "\<Esc>[3 q"
+	vim.g.t_EI .= "\<Esc>[3 q"
+end)
+
 --------------------------------------------------------------------------------
 
 safeRequire("config.lazy")
