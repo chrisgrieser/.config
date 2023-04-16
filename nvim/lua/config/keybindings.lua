@@ -491,6 +491,10 @@ keymap("i", "<D-t>", "${}<Left>", { desc = "Template String" })
 keymap("n", "#", ":CccPick<CR>", { desc = " Color Picker" })
 keymap("n", "'", ":CccConvert<CR>", { desc = " Convert Color" }) -- shift-# on German keyboard
 
+-- AI
+keymap("n", "<leader>a", cmd.NeoAI, { desc = "󰚩 NeoAI" })
+keymap("x", "<leader>a", cmd.NeoAIContext, { desc = "󰚩 NeoAI Context" })
+
 --------------------------------------------------------------------------------
 -- FILES
 
@@ -800,7 +804,7 @@ autocmd("FileType", {
 
 -- remove the waiting time from the q, due to conflict with `qq` for comments
 autocmd("FileType", {
-	pattern = { "ssr", "TelescopePrompt", "harpoon", "NavBuddy" },
+	pattern = { "ssr", "TelescopePrompt", "harpoon", "NavBuddy"}, -- e.g. NeoAI,
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 		if bo.filetype == "ssr" then

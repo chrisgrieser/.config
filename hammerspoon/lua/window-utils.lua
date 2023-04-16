@@ -152,7 +152,7 @@ function M.moveResize(win, pos)
 	end
 
 	-- resize with safety redundancy
-	u.runWithDelays({ 0, 0.1, 0.2, 0.3 }, function()
+	u.runWithDelays({ 0, 0.2, 0.4, 0.6, 0.8 }, function()
 		-- check for false, since non-resizable wins return nil
 		if M.CheckSize(win, pos) ~= false then return end
 		win:moveToUnit(pos)
