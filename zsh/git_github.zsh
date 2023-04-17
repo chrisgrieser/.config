@@ -6,7 +6,6 @@ alias gs='git status'
 alias gc="git commit -m"
 alias ga="git add"
 alias gA="git add -A"
-alias deepen="git fetch --deepen" # add more depth to shallow clone
 alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull --recurse-submodules"
@@ -53,13 +52,13 @@ function gd() {
 		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
 
 		# dynamically change theme // see themes: `delta --show-syntax-themes`
-		if defaults read -g AppleInterfaceStyle | grep -q "Dark" ; then
-			light="false" 
+		if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
+			light="false"
 			theme="Dracula"
 		else
 			light="true"
 			theme="OneHalfLight"
-		fi 
+		fi
 		git -c delta.light="$light" -c delta.syntax-theme="$theme" diff
 	fi
 }
@@ -69,26 +68,26 @@ function gd() {
 # https://git-scm.com/docs/git-log#_pretty_formats
 
 # short (only last 15 messages)
-function gitlog () {
+function gitlog() {
 	local length
 	[[ -n "$1" ]] && length="-n $1"
 	# shellcheck disable=2086
-	git log $length --all --color --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' | 
+	git log $length --all --color --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
 		sed -E 's/ hours? ago\)/h ago)/g' |
 		sed -E 's/ days? ago\)/d ago)/g' |
 		sed -e 's/origin\//󰅡 /g' |
 		sed -e 's/HEAD/󱍀/g' |
 		sed -e 's/->//g' |
-		sed -e 's/grafted,/ /g' | 
+		sed -e 's/grafted,/ /g' |
 		less
-		# INFO less is configured not to start the pager if the output short enough 
-		# to fit on one screen
+	# INFO less is configured not to start the pager if the output short enough
+	# to fit on one screen
 }
 
 # brief git log
 function gl() {
 	local cutoff=15
-	gitlog $cutoff	
+	gitlog $cutoff
 	# add `(…)` if commits were shortened
 	[[ "$(git log --oneline | wc -l)" -gt $cutoff ]] && echo "(…)"
 }
@@ -170,7 +169,7 @@ function pr() {
 
 	# create PR *into current branch* (not the default branch)
 	if [[ "$mode" == "w" ]]; then
-		gh pr create --web --fill --base="$current_branch" 
+		gh pr create --web --fill --base="$current_branch"
 	else
 		gh pr create --fill --base="$current_branch"
 	fi
