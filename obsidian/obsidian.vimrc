@@ -309,5 +309,5 @@ exmap readableLineLength obcommand obsidian-smarter-md-hotkeys:toggle-readable-l
 map ,ow :readableLineLength
 
 " [O]ption: [d]iagnostics (language tool check)
-exmap enableDiagnostics obsidian-languagetool-plugin:ltcheck-text
+exmap enableDiagnostics obcommand obsidian-languagetool-plugin:ltcheck-text
 nmap ,od :enableDiagnostics
