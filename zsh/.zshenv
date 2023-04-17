@@ -19,9 +19,13 @@ export ZDOTDIR="$DOTFILE_FOLDER/zsh"
 OPENAI_API_KEY=$(tr -d "\n" <"$ICLOUD/Dotfolder/private dotfiles/openai-api-key.txt")
 export OPENAI_API_KEY
 
-# OpenAI API Key stored outside of public git repo (symlinked file)
+# gh-cli
 GITHUB_TOKEN=$(tr -d "\n" <"$ICLOUD/Dotfolder/private dotfiles/github_token.txt")
 export GITHUB_TOKEN
+
+# nvim-github-codesearch
+GITHUB_AUTH_TOKEN=$(tr -d "\n" <"$ICLOUD/Dotfolder/private dotfiles/github_token2.txt")
+export GITHUB_AUTH_TOKEN
 
 # Pass Config
 export PASSWORD_STORE_CLIP_TIME=60
