@@ -60,7 +60,6 @@ local function quit(app)
 	end
 	print("⏹️ AutoQuitting: " .. app)
 	IdleApps[app] = nil
-	print()
 end
 
 --------------------------------------------------------------------------------
