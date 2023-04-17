@@ -1,24 +1,14 @@
+local M = {}
+--------------------------------------------------------------------------------
+
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 
--- INFO using hs.execute("osascript -l JavaScript") instead of
--- hs.osascript.javascriptFromFile, fails on first run when Hammerspoon does not
--- have the needed permission yet
+local sideNotesWide = { x = 0, y = 0, w = 0.35, h = 1 }
 
-local function updateCounter() hs.execute("sketchybar --trigger update-sidenotes-count") end
 --------------------------------------------------------------------------------
 
--- REMINDERS -> SIDENOTES
-function ReminderToSidenotes()
-	local _, success =
-		hs.execute("osascript -l JavaScript './helpers/push-todays-reminders-to-sidenotes.js'")
-	if success then
-		print("🗒️ Reminder -> SideNotes")
-	else
-		u.notify("⚠️ Reminder-to-Sidenote failed")
-	end
-	updateCounter()
-end
+local function updateCounter() hs.execute("sketchybar --trigger update-sidenotes-count") end
 
 -- MOVE OFFICE NOTES TO BASE (when loading hammerspoon in office)
 local function moveOfficeNotesToBase()
@@ -54,18 +44,33 @@ SidenotesWatcher = u.aw.new(function(appName, event, appObj)
 	-- enlarge on startup
 	if appName == "SideNotes" and event == u.aw.launched then
 		local win = appObj:mainWindow()
-wu.moveResize(win, SideNotesWide)
+		wu.moveResize(win, sideNotesWide)
 	end
 end):start()
 
 --------------------------------------------------------------------------------
 
-SideNotesWide = { x = 0, y = 0, w = 0.35, h = 1 }
 
 -- toggle sizes of the sidenotes window
-function ToggleSideNotesSize()
+function M.toggleSideNotesSize()
 	local snWin = u.app("SideNotes"):mainWindow()
 	local narrow = { x = 0, y = 0, w = 0.2, h = 1 }
-local changeTo = wu.CheckSize(snWin, narrow) and SideNotesWide or narrow
-wu.moveResize(snWin, changeTo)
+	local changeTo = wu.CheckSize(snWin, narrow) and sideNotesWide or narrow
+	wu.moveResize(snWin, changeTo)
 end
+
+-- REMINDERS -> SIDENOTES
+function M.reminderToSidenotes()
+	local _, success =
+		hs.execute("osascript -l JavaScript './helpers/push-todays-reminders-to-sidenotes.js'")
+	if success then
+		print("🗒️ Reminder -> SideNotes")
+	else
+		u.notify("⚠️ Reminder-to-Sidenote failed")
+	end
+	updateCounter()
+end
+
+--------------------------------------------------------------------------------
+
+return M
