@@ -23,6 +23,8 @@ M.rejectedFinderWins = {
 	"^Alfred$", -- Alfred Compatibility Mode
 }
 
+M.sideNotesWide = { x = 0, y = 0, w = 0.35, h = 1 }
+
 --------------------------------------------------------------------------------
 -- OBSIDIAN SIDEBAR
 
@@ -67,6 +69,16 @@ local function obsidianThemeDevHelper(win, pos)
 		u.app("Obsidian"):mainWindow():raise()
 	end)
 end
+
+
+-- toggle sizes of the sidenotes window
+local function toggleSideNotesSize()
+	local snWin = u.app("SideNotes"):mainWindow()
+	local narrow = { x = 0, y = 0, w = 0.2, h = 1 }
+	local changeTo = M.CheckSize(snWin, narrow) and M.sideNotesWide or narrow
+	M.moveResize(snWin, changeTo)
+end
+
 
 --------------------------------------------------------------------------------
 -- TWITTER
@@ -290,7 +302,7 @@ Wf_appsOnMouseScreen = u.wf
 
 local function controlSpaceAction()
 	if u.isFront("SideNotes") then
-		ToggleSideNotesSize()
+		toggleSideNotesSize()
 		return
 	end
 	local currentWin = hs.window.focusedWindow()

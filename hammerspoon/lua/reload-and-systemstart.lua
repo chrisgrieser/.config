@@ -1,5 +1,6 @@
 local u = require("lua.utils")
 local periphery = require("lua.hardware-periphery")
+local visuals = require("lua.visuals")
 --------------------------------------------------------------------------------
 
 -- `hammerspoon://hs-reload` for reloading via Build System
@@ -22,7 +23,7 @@ function SystemStart()
 		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded. ")' > /tmp/nvim-automation]])
 	else
 		u.notify("Finished loading.")
-		HoleCover()
+		visuals.holeCover()
 		periphery.batteryCheck("SideNotes")
 		SyncAllGitRepos("notify")
 	end

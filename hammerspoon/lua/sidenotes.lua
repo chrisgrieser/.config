@@ -4,8 +4,6 @@ local M = {}
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 
-local sideNotesWide = { x = 0, y = 0, w = 0.35, h = 1 }
-
 --------------------------------------------------------------------------------
 
 local function updateCounter() hs.execute("sketchybar --trigger update-sidenotes-count") end
@@ -44,20 +42,11 @@ SidenotesWatcher = u.aw.new(function(appName, event, appObj)
 	-- enlarge on startup
 	if appName == "SideNotes" and event == u.aw.launched then
 		local win = appObj:mainWindow()
-		wu.moveResize(win, sideNotesWide)
+		wu.moveResize(win, wu.sideNotesWide)
 	end
 end):start()
 
 --------------------------------------------------------------------------------
-
-
--- toggle sizes of the sidenotes window
-function M.toggleSideNotesSize()
-	local snWin = u.app("SideNotes"):mainWindow()
-	local narrow = { x = 0, y = 0, w = 0.2, h = 1 }
-	local changeTo = wu.CheckSize(snWin, narrow) and sideNotesWide or narrow
-	wu.moveResize(snWin, changeTo)
-end
 
 -- REMINDERS -> SIDENOTES
 function M.reminderToSidenotes()

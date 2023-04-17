@@ -8,12 +8,12 @@ local g = vim.g
 -- - if only one theme, it's used for both light and dark 
 local themes = {
 	"EdenEast/nightfox.nvim",
+	"rebelot/kanagawa.nvim",
 	-- "Yazeed1s/oh-lucy.nvim",
 	-- "kvrohit/mellow.nvim",
 	-- { "rose-pine/neovim", name = "rose-pine" },
 	-- "glepnir/zephyr-nvim",
 	-- "sainnhe/everforest",
-	"rebelot/kanagawa.nvim",
 	-- "folke/tokyonight.nvim",
 	-- "NTBBloodbath/sweetie.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
@@ -21,7 +21,7 @@ local themes = {
 }
 
 g.darkTransparency = 0.92
-g.lightTransparency = 0.95
+g.lightTransparency = 0.94
 
 --------------------------------------------------------------------------------
 
