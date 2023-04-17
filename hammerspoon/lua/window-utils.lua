@@ -87,14 +87,16 @@ function M.twitterToTheSide()
 
 	if u.isFront("Alfred") then return end
 
-	local app = u.app("Twitter")
-	if not app then return end
+	local twitter = u.app("Twitter")
+	if not twitter then return end
 
-	if app:isHidden() then app:unhide() end
+	u.notify("👽 beep")
+	if twitter:isHidden() then twitter:unhide() end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
-	local win = app:findWindow("Twitter")
+	local win = twitter:findWindow("Twitter")
 	if not win then return end
+	u.notify("👾 beep")
 
 	win:raise()
 	win:setFrame(M.toTheSide)
