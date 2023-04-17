@@ -61,6 +61,7 @@ return {
 		"uga-rosa/ccc.nvim",
 		ft = colorPickerFts,
 		config = function()
+			local test = ""
 			vim.opt.termguicolors = true
 			local ccc = require("ccc")
 			ccc.setup {
