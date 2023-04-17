@@ -274,12 +274,12 @@ nmap <F1> :togglefold
 " emulate various vim motion plugins
 
 " Hop
-" exmap hop obcommand mrj-jump-to-link:activate-jump-to-anywhere
-" nmap ö :hop
+exmap hop obcommand mrj-jump-to-link:activate-jump-to-anywhere
+nmap ö :hop
 
 " Lightspeed
-exmap lightspeed obcommand mrj-jump-to-link:activate-lightspeed-jump
-nmap ö :lightspeed
+" exmap lightspeed obcommand mrj-jump-to-link:activate-lightspeed-jump
+" nmap ö :lightspeed
 
 " Link Jump (similar to Vimium's f)
 exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
@@ -289,8 +289,7 @@ nmap ,l :linkjump
 " Substitute
 """"""""""""""""""""""
 " poor man's substitute.nvim 🥲
-" unmap s
-map ss Vp
+map s Vp
 nmap S vg$p
 
 """"""""""""""""""""""
