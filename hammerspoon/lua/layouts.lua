@@ -1,7 +1,9 @@
 local darkmode = require("lua.dark-mode")
 local twitter = require("lua.twitter")
+local sidenotes = require("lua.sidenotes")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
+local visuals = require("lua.visuals")
 --------------------------------------------------------------------------------
 
 -- HELPERS
@@ -52,7 +54,7 @@ local function workLayout()
 
 	-- screen & visuals
 	darkmode.AutoSwitch()
-	HoleCover()
+	visuals.holeCover()
 	dockSwitcher("work")
 	hs.execute("sketchybar --set clock popup.drawing=true")
 
@@ -73,7 +75,10 @@ local function workLayout()
 	if not isWeekend() then table.insert(appsToOpen, 1, "Slack") end
 	u.openApps(appsToOpen)
 	for _, app in pairs(appsToOpen) do
-		u.asSoonAsAppRuns(app, function() wu.moveResize(u.app(app):mainWindow(), wu.pseudoMax) end)
+		u.asSoonAsAppRuns(app, function()
+			local win = u.app(app):mainWindow()
+			wu.moveResize(win, wu.pseudoMax)
+		end)
 	end
 	MyTimers.layouts = hs.timer.waitUntil(function() return u.appRunning(appsToOpen) end, function()
 		u.app("Mimestream"):activate()
@@ -89,7 +94,7 @@ local function movieLayout()
 	dockSwitcher(targetMode)
 	wu.iMacDisplay:setBrightness(0)
 	darkmode.set(true)
-	HoleCover("remove")
+	visuals.holeCover("remove")
 
 	u.openApps("YouTube")
 	u.quitApp {
@@ -138,10 +143,10 @@ UnlockWatcher = c.new(function(event)
 
 	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
 		unlockInProgress = true -- block multiple concurrent runs
-		ReminderToSidenotes()
 		u.runWithDelays(0.5, function() -- delay for recognizing screens
 			setHigherBrightnessDuringDay()
 			selectLayout()
+			sidenotes.reminderToSidenotes()
 		end)
 		u.runWithDelays(5, function() unlockInProgress = false end)
 	end, 0.2)

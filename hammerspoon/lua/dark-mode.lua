@@ -2,6 +2,7 @@ local M = {}
 
 local u = require("lua.utils")
 local console = require("lua.console")
+local visuals = require("lua.visuals")
 --------------------------------------------------------------------------------
 
 local function brightnessNotify()
@@ -42,7 +43,7 @@ local function toggleDarkMode()
 	u.applescript([[
 		tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
 	]])
-	HoleCover() -- must come after OS color change
+	visuals.holeCover() -- must come after OS color change
 
 	-- hammerspoon console
 	console.setConsoleColors() -- must come after OS color change

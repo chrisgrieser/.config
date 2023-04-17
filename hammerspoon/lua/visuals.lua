@@ -1,15 +1,17 @@
+local M = {}
+
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
-RoundedCorners = hs.loadSpoon("RoundedCorners")
-RoundedCorners.radius = 9
-RoundedCorners:start()
+local roundedCorners = hs.loadSpoon("RoundedCorners")
+roundedCorners.radius = 9
+if roundedCorners then roundedCorners:start() end
 
 ---to stop wallpaper shining through
 ---@param arg? string
-function HoleCover(arg)
+function M.holeCover(arg)
 	if u.isAtOffice() or u.isProjector() then return end
 
 	if Cover1 then Cover1 = nil end
@@ -51,3 +53,6 @@ local pseudoMaxCorner = wu.toTheSide.w + wu.toTheSide.x
 	Cover3:setStrokeColor(bgColor)
 	Cover3:show()
 end
+
+--------------------------------------------------------------------------------
+return M
