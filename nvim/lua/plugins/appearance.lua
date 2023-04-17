@@ -59,7 +59,6 @@ return {
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
 		ft = colorPickerFts,
-		commit = "d8c3a875444f70ef381458f32a2494cc37bb4193",
 		config = function()
 			vim.opt.termguicolors = true
 			local ccc = require("ccc")
@@ -72,6 +71,9 @@ return {
 					filetypes = colorPickerFts,
 				},
 				pickers = {
+					ccc.picker.hex,
+					ccc.picker.css_rgb,
+					ccc.picker.css_hsl,
 					ccc.picker.ansi_escape {
 						black = "#0c0c0c",
 						red = "#c50f1f",
