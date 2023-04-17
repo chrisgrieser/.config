@@ -218,16 +218,16 @@ function M.restartApp(appName)
 	)
 end
 
----@param app string|hs.application appName or appObj of app to wait for
+---@param appName string
 ---@param callbackFn function function to execute when the app is available
 ---@async
-function M.asSoonAsAppRuns(app, callbackFn)
-	if type(app) == "string" then app = M.app(app) end
-	MyTimers[app] = hs.timer.waitUntil(function()
+function M.asSoonAsAppRuns(appName, callbackFn)
+	MyTimers[appName] = hs.timer.waitUntil(function()
+		local app = M.app(appName)
 		local appRuns = app ~= nil
 		local windowAvailable = app and app:mainWindow()
 		return appRuns and windowAvailable
-	end, callbackFn, 0.1):start()
+	end, callbackFn, 0.1)
 end
 
 ---@param appNames string|string[]

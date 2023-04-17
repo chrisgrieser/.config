@@ -16,7 +16,7 @@ local function glanceConfig()
 			position = "left",
 		},
 		folds = { folded = false },
-		mapping = {
+		mappings = {
 			list = {
 				["<D-s>"] = actions.quickfix, -- consistent with the respective keymap for telescope
 				["<S-CR>"] = actions.enter_win("preview"),

@@ -311,7 +311,6 @@ local lualineConfig = {
 		"lazy",
 		"man",
 		"toggleterm",
-		"quickfix",
 		"nvim-dap-ui",
 	},
 }
