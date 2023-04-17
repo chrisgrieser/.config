@@ -264,7 +264,7 @@ keymap("x", "<leader>fn", ":normal ", { desc = "󱗘 :normal" })
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g delete" })
 
 -- stylua: ignore
-keymap("n", "<leader>fq", function() require("replacer").run { rename_files = false } end, { desc = "󱗘  replacer.nvim" })
+keymap("n", "<leader>fq", function() require("replacer").run { rename_files = true } end, { desc = "󱗘  replacer.nvim" })
 -- stylua: ignore
 keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "󱗘 Structural S & R" })
 
