@@ -8,7 +8,7 @@ M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 M.toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
-if u.isAtMother() then M.toTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
+if u.isAtMother then M.toTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
 
 M.rejectedFinderWins = {
 	"^Quick Look$",
@@ -70,7 +70,6 @@ local function obsidianThemeDevHelper(win, pos)
 	end)
 end
 
-
 -- toggle sizes of the sidenotes window
 local function toggleSideNotesSize()
 	local snWin = u.app("SideNotes"):mainWindow()
@@ -78,7 +77,6 @@ local function toggleSideNotesSize()
 	local changeTo = M.CheckSize(snWin, narrow) and M.sideNotesWide or narrow
 	M.moveResize(snWin, changeTo)
 end
-
 
 --------------------------------------------------------------------------------
 -- TWITTER
@@ -132,7 +130,7 @@ function M.CheckSize(win, size)
 	local diffx = size.x * maxf.w + maxf.x - winf.x -- calculated this way for two screens
 	local diffy = size.y * maxf.h + maxf.y - winf.y
 
-	local leeway = 5 -- terminal cell widths creating some imprecision
+	local leeway = 5 -- terminal cell widths creating some minor imprecision
 	local widthOkay = (diffw > -leeway and diffw < leeway)
 	local heightOkay = (diffh > -leeway and diffh < leeway)
 	local posyOkay = (diffy > -leeway and diffy < leeway)
@@ -185,12 +183,19 @@ function M.bringAllWinsToFront()
 	app:selectMenuItem { "Window", "Bring All to Front" }
 end
 
+local autoTilingInProgress = false
+
 ---automatically apply per-app auto-tiling of the windows of the app
 ---@param winSrc hs.window.filter|"Finder" source for the windows; windowfilter or
 ---appname. If this function is not triggered by a windowfilter event, the window
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
+-- selene: allow(high_cyclomatic_complexity)
 function M.autoTile(winSrc)
+	-- prevent concurrent runs
+	if autoTilingInProgress then return end
+	autoTilingInProgress = true
+
 	local wins = {}
 	if type(winSrc) == "string" then
 		-- cannot use windowfilter, since it's empty when not called from a
@@ -237,20 +242,17 @@ function M.autoTile(winSrc)
 		M.moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
 		M.moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
 		M.moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
-	elseif #wins == 5 then
-		M.moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
-		M.moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
-		M.moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
-		M.moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
-		M.moveResize(wins[5], { h = 0.5, w = 0.5, x = 0.25, y = 0.25 })
-	elseif #wins == 6 then
+	elseif #wins == 5 or #wins == 6 then
 		M.moveResize(wins[1], { h = 0.5, w = 0.33, x = 0, y = 0 })
 		M.moveResize(wins[2], { h = 0.5, w = 0.33, x = 0, y = 0.5 })
 		M.moveResize(wins[3], { h = 0.5, w = 0.33, x = 0.33, y = 0 })
 		M.moveResize(wins[4], { h = 0.5, w = 0.33, x = 0.33, y = 0.5 })
 		M.moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.66, y = 0 })
-		M.moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 })
+		if #wins == 6  then
+			M.moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 })
+		end
 	end
+	u.runWithDelays(0.1, function() autoTilingInProgress = false end)
 end
 
 --------------------------------------------------------------------------------

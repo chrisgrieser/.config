@@ -22,7 +22,7 @@ SpotifyAppWatcher = u.aw.new(function(appName, eventType)
 	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
 	if
 		not u.screenIsUnlocked()
-		or u.isAtOffice()
+		or u.isAtOffice
 		or u.isProjector()
 		or not (u.tbl_contains(appsWithSound, appName))
 	then
@@ -139,7 +139,7 @@ rejectTitles = wu.rejectedFinderWins,
 
 FinderAppWatcher = u.aw.new(function(appName, eventType, finderAppObj)
 	if eventType == u.aw.activated and appName == "Finder" then
-wu.autoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
+		wu.autoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
 		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
 	end
 end):start()

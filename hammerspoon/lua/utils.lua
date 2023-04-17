@@ -13,7 +13,7 @@ M.hyper = { "cmd", "alt", "ctrl", "shift" } -- bound to capslock via Karabiner e
 I = hs.inspect -- to inspect tables in the console more quickly
 
 -- need to catch timers in variables to ensure they don't get garbage collected
-MyTimers = {} 
+MyTimers = {}
 --------------------------------------------------------------------------------
 
 ---trims all whitespace from string, like javascript's .trim()
@@ -96,21 +96,15 @@ function M.isDarkMode() return hs.execute([[defaults read -g AppleInterfaceStyle
 ---@param callbackFn function function to be run on delay(s)
 function M.runWithDelays(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
+	local rng = tostring(math.random())
 	for _, delay in pairs(delaySecs) do
-		hs.timer.doAfter(delay, callbackFn)
+		MyTimers[rng] = hs.timer.doAfter(delay, callbackFn)
 	end
 end
 
 --------------------------------------------------------------------------------
 
----@nodiscard
----@return string
-local function deviceName()
-	-- host.localizedName() is essentially equivalent to `scutil --get ComputerName`
-	local name, _ = hs.host.localizedName():gsub(".- ", "", 1)
-	return name
-end
-
+---not using static variable, since projector connection can vary
 ---@nodiscard
 ---@return boolean
 function M.isProjector()
@@ -119,23 +113,10 @@ function M.isProjector()
 	local tvLeuthinger = mainDisplayName == "TV_MONITOR"
 	return projectorHelmholtz or tvLeuthinger
 end
-
----@nodiscard
----@return boolean
-function M.isAtOffice()
-	local mainDisplayName = hs.screen.primaryScreen():name()
-	local screenOne = mainDisplayName == "HP E223"
-	local screenTwo = mainDisplayName == "Acer CB241HY"
-	return screenOne or screenTwo
-end
-
----@nodiscard
----@return boolean
-function M.isAtMother() return deviceName():find("Mother") ~= nil end
-
----@nodiscard
----@return boolean
-function M.isAtHome() return (deviceName():find("iMac") and deviceName():find("Home")) ~= nil end
+local deviceName = hs.host.localizedName():gsub(".- ", "", 1)
+M.isAtOffice = deviceName:find("[Mm]ini") ~= nil
+M.isAtHome = deviceName:find("Mother") ~= nil
+M.isAtMother = (deviceName:find("iMac") and deviceName:find("Home")) ~= nil
 
 --------------------------------------------------------------------------------
 
