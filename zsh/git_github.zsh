@@ -350,6 +350,7 @@ function gdf() {
 	echo "$deleted_path"
 	echo
 	print "\033[1;34m-------------------------------------"
+	# print "\u001b[44m"
 	echo "[r]estore file (checkout)"
 	echo "[s]how file (bat)"
 	echo "[c]opy content"
