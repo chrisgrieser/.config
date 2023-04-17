@@ -274,8 +274,8 @@ nmap <F1> :togglefold
 " emulate various vim motion plugins
 
 " Hop
-exmap hop obcommand mrj-jump-to-link:activate-jump-to-anywhere
-nmap ö :hop
+" exmap hop obcommand mrj-jump-to-link:activate-jump-to-anywhere
+" nmap ö :hop
 
 " Lightspeed
 " exmap lightspeed obcommand mrj-jump-to-link:activate-lightspeed-jump
