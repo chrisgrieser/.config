@@ -90,7 +90,7 @@ end
 
 local function movieLayout()
 	print("🔲 MovieLayout: loading")
-	local targetMode = u.isAtMother() and "mother-movie" or "movie" -- different PWAs due to not being M1 device
+	local targetMode = u.isAtMother and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
 	wu.iMacDisplay:setBrightness(0)
 	darkmode.set(true)

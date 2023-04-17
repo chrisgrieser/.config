@@ -55,7 +55,7 @@ WifiWatcher = hs.wifi.watcher
 		local msg = event .. ": " .. ssid
 		u.notify("📶 " .. msg)
 		-- at the office, log the network
-		if u.isAtOffice() then
+		if u.isAtOffice then
 			local timestamp = tostring(os.date()):sub(5, -6)
 			u.appendToFile("./HBS-WiFi.log", timestamp .. " – " .. msg)
 		end

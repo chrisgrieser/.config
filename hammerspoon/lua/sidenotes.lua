@@ -19,7 +19,7 @@ local function moveOfficeNotesToBase()
 	updateCounter()
 end
 
-if u.isAtOffice() then moveOfficeNotesToBase() end
+if u.isAtOffice then moveOfficeNotesToBase() end
 
 --------------------------------------------------------------------------------
 

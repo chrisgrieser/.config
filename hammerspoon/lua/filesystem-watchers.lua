@@ -105,7 +105,7 @@ FileHubWatcher = pw(FileHub, function(paths, _)
 			hs.open(filep)
 
 		-- watch later .urls from the office
-		elseif extension == "url" and u.isAtHome() then
+		elseif extension == "url" and u.isAtHome then
 			os.rename(filep, os.getenv("HOME") .. "/Downloaded/" .. fileName)
 			print("➡️ Watch Later URL moved to Video Downloads")
 
