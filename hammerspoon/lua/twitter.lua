@@ -67,45 +67,47 @@ end
 --------------------------------------------------------------------------------
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
-TwitterWatcher = u.aw.new(function(appName, event)
-	if appName == "CleanShot X" or appName == "Alfred" then return end
-	local twitter = u.app("Twitter")
+TwitterWatcher = u.aw
+	.new(function(appName, event)
+		if appName == "CleanShot X" or appName == "Alfred" then return end
+		local twitter = u.app("Twitter")
 
-	-- move twitter and scroll it up
-	if appName == "Twitter" and (event == u.aw.launched or event == u.aw.activated) then
-		u.asSoonAsAppRuns("Twitter", function()
-			wu.twitterToTheSide()
+		-- move twitter and scroll it up
+		if appName == "Twitter" and (event == u.aw.launched or event == u.aw.activated) then
+			u.asSoonAsAppRuns("Twitter", function()
+				wu.twitterToTheSide()
+				wu.bringAllWinsToFront()
+				M.scrollUp()
+
+				-- focus new tweet window if there is one
+				local newTweetWindow = twitter:findWindow("Tweet")
+				if newTweetWindow then newTweetWindow:focus() end
+			end)
+
+		-- auto-close media windows and scroll up when deactivating
+		elseif appName == "Twitter" and event == u.aw.deactivated then
+			if u.isFront("CleanShot X") then return end
 			M.scrollUp()
-			wu.bringAllWinsToFront()
+			twitterCleanupLink()
+			twitterCloseMediaWindow()
 
-			-- focus new tweet window if there is one
-			local newTweetWindow = twitter:findWindow("Tweet")
-			if newTweetWindow then newTweetWindow:focus() end
-		end)
+		-- do not focus Twitter after an app is terminated
+		elseif event == u.aw.terminated and appName ~= "Twitter" then
+			u.runWithDelays({ 0.1, 0.3 }, twitterFallThrough)
 
-	-- auto-close media windows and scroll up when deactivating
-	elseif appName == "Twitter" and event == u.aw.deactivated then
-		if u.isFront("CleanShot X") then return end
-		M.scrollUp()
-		twitterCleanupLink()
-		twitterCloseMediaWindow()
+		-- raise twitter when switching window to other app
+		elseif event == u.aw.activated and appName ~= "Twitter" then
+			local frontWin = hs.window.focusedWindow()
+			if not frontWin or not twitter then return end
 
-	-- do not focus Twitter after an app is terminated
-	elseif event == u.aw.terminated and appName ~= "Twitter" then
-		u.runWithDelays({ 0.1, 0.3 }, twitterFallThrough)
-
-	-- raise twitter when switching window to other app
-	elseif event == u.aw.activated and appName ~= "Twitter" then
-		local frontWin = hs.window.focusedWindow()
-		if not frontWin or not twitter then return end
-
-	if wu.CheckSize(frontWin, wu.pseudoMax) or wu.CheckSize(frontWin, wu.centered) then
-			wu.twitterToTheSide()
+			if wu.CheckSize(frontWin, wu.pseudoMax) or wu.CheckSize(frontWin, wu.centered) then
+				wu.twitterToTheSide()
 			elseif wu.CheckSize(frontWin, wu.maximized) then
-			twitter:hide()
+				twitter:hide()
+			end
 		end
-	end
-end):start()
+	end)
+	:start()
 
 --------------------------------------------------------------------------------
 return M
