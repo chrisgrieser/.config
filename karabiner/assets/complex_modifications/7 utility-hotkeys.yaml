@@ -164,7 +164,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "⚒️ {}@^~|: German to US layout"
     manipulators:
-      # Brace {
+      # Curly Brace {
       - type: basic
         from: { key_code: "8", modifiers: { mandatory: [option] } }
         conditions:
@@ -179,7 +179,7 @@ rules:
           - { key_code: open_bracket, modifiers: [shift] }
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
-      # Brace }
+      # Curly Brace }
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [option] } }
         conditions:
