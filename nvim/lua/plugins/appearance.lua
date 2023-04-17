@@ -61,7 +61,6 @@ return {
 		"uga-rosa/ccc.nvim",
 		ft = colorPickerFts,
 		config = function()
-			local test = ""
 			vim.opt.termguicolors = true
 			local ccc = require("ccc")
 			ccc.setup {
@@ -79,6 +78,7 @@ return {
 					ccc.output.css_hsl,
 					ccc.output.css_rgb,
 					ccc.output.hex,
+					
 				},
 				convert = {
 					{ ccc.picker.hex, ccc.output.css_hsl },
