@@ -4,6 +4,7 @@ local colorPickerFts = {
 	"scss",
 	"lua",
 	"sh",
+	"zsh",
 	"bash",
 	"toml",
 	"yaml",
@@ -71,6 +72,26 @@ return {
 					lsp = true,
 					filetypes = colorPickerFts,
 				},
+				pickers = {
+					ccc.picker.ansi_escape {
+						black = "#0c0c0c",
+						red = "#c50f1f",
+						green = "#13a10e",
+						yellow = "#c19c00",
+						blue = "#0037da",
+						magenta = "#881798",
+						cyan = "#3a96dd",
+						white = "#cccccc",
+						bright_black = "#767676",
+						bright_red = "#e74856",
+						bright_green = "#16c60c",
+						bright_yellow = "#f9f1a5",
+						bright_blue = "#3b78ff",
+						bright_magenta = "#b4009e",
+						bright_cyan = "#61d6d6",
+						bright_white = "#f2f2f2",
+					},
+				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
 				inputs = { ccc.input.hsl },
@@ -78,7 +99,6 @@ return {
 					ccc.output.css_hsl,
 					ccc.output.css_rgb,
 					ccc.output.hex,
-					
 				},
 				convert = {
 					{ ccc.picker.hex, ccc.output.css_hsl },
