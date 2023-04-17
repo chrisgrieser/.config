@@ -48,7 +48,7 @@ function inspect() {
 			separator
 		fi
 	fi
-	if [[ $(find . -max-depth 1 | wc -l) -lt 60 ]]; then
+	if [[ $(find . -maxdepth 1 | wc -l) -lt 60 ]]; then
 		exa --all --icons --sort=modified --group-directories-first \
 			--git-ignore --ignore-glob=.git --ignore-glob=.DS_Store
 	fi

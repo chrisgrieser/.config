@@ -3,6 +3,11 @@
 		"prefix": "shebang",
 		"body": "#!/usr/bin/env zsh"
 	},
+	"ls → find": {
+		"prefix": "ls → find",
+		"body": "find . -maxdepth 1",
+		"description": "shellcheck recommends using find instead of ls for most cases."
+	},
 	"default arg value": {
 		"prefix": "default arg value",
 		"body": "${1:input}=${1-\"${2:default_value}\"}"
