@@ -142,6 +142,7 @@ autocmd("CursorMoved", {
 
 -- whitespace & indentation
 opt.tabstop = 3
+opt.vartabstop = { 3, 3, 3, 3, 3, 5 }
 opt.softtabstop = 3
 opt.shiftwidth = 3
 opt.shiftround = true
