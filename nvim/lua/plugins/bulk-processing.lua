@@ -1,23 +1,23 @@
 return {
 	{ -- Multi Cursor
 		"mg979/vim-visual-multi",
-		keys = { { "<D-j>", mode = { "n", "x" }, desc = "Multi-Cursor" } },
+		keys = { { "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" } },
 		-- already set via lualine component
-		init = function () vim.g.VM_set_statusline = 0 end,
+		init = function() vim.g.VM_set_statusline = 0 end,
 	},
 	{ -- :substitute, but with lua pattern
 		"chrisgrieser/nvim-alt-substitute",
 		dev = true,
 		event = "CmdlineEnter", -- loading with `cmd =` does not work with incremental preview
-		opts = true,
+		config = true,
 	},
 	{ -- structural search & replace
 		"cshuaimin/ssr.nvim",
 		lazy = true,
-		config = function()
-			require("ssr").setup {
-				keymaps = { close = "Q" }, -- needs remap due conflict with commenting otherwise
-			}
+		opts = {
+			keymaps = { close = "Q" }, -- needs remap due conflict with commenting otherwise
+		},
+		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "ssr",
 				callback = function() vim.opt_local.sidescrolloff = 0 end,
@@ -33,7 +33,18 @@ return {
 		-- my fork, pending on PR: https://github.com/gabrielpoca/replacer.nvim/pull/12
 		"chrisgrieser/replacer.nvim",
 		lazy = true,
-		dev = true,
+		-- add keymaps for quicker closing + confirmation
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "replacer",
+				callback = function()
+					-- stylua: ignore
+					vim.keymap.set("n", "q", vim.cmd.close, { desc = "Abort replacements", buffer = true, nowait = true })
+					-- stylua: ignore
+					vim.keymap.set("n", "<CR>", vim.cmd.write, { desc = "Confirm replacements", buffer = true, nowait = true })
+				end,
+			})
+		end,
 	},
 	{
 		"ThePrimeagen/refactoring.nvim",
@@ -66,7 +77,7 @@ return {
 
 			local topSeparators = { left = " ", right = " " }
 
-			-- INFO inserting needed, to not disrupt existing lualine-segment 
+			-- INFO inserting needed, to not disrupt existing lualine-segment
 			local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
 			local lualineY = require("lualine").get_config().tabline.lualine_y or {}
 			table.insert(
