@@ -72,15 +72,6 @@ return {
 			},
 		},
 	},
-	{ -- code search
-		"napisani/nvim-github-codesearch",
-		lazy = true, -- loaded by keymaps
-		build = "make",
-		opts = {
-			github_auth_token = vim.env.GITHUB_AUTH_TOKEN, -- .zshenv
-			use_telescope = false,
-		},
-	},
 	{ -- diff / merge
 		"sindrets/diffview.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
