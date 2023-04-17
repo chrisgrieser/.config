@@ -74,9 +74,9 @@ local function workLayout()
 	local appsToOpen = { "Discord", "Vivaldi", "Mimestream" }
 	if not isWeekend() then table.insert(appsToOpen, 1, "Slack") end
 	u.openApps(appsToOpen)
-	for _, app in pairs(appsToOpen) do
-		u.asSoonAsAppRuns(app, function()
-			local win = u.app(app):mainWindow()
+	for _, appName in pairs(appsToOpen) do
+		u.asSoonAsAppRuns(appName, function()
+			local win = u.app(appName):mainWindow()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end

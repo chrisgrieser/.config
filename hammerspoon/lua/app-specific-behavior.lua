@@ -41,7 +41,7 @@ end):start()
 -- PIXELMATOR: open maximized
 PixelmatorWatcher = u.aw.new(function(appName, eventType, appObj)
 	if appName == "Pixelmator" and eventType == u.aw.launched then
-u.asSoonAsAppRuns(appObj, function() wu.moveResize(appObj, wu.maximized) end)
+u.asSoonAsAppRuns(appName, function() wu.moveResize(appObj, wu.maximized) end)
 	end
 end):start()
 
@@ -238,13 +238,13 @@ wu.moveResize(newWin, wu.centered)
 --------------------------------------------------------------------------------
 
 -- DISCORD
-DiscordAppWatcher = u.aw.new(function(appName, eventType, appObj)
+DiscordAppWatcher = u.aw.new(function(appName, eventType)
 	if not (appName == "Discord") then return end
 
 	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 	if eventType == u.aw.launched then
 		u.asSoonAsAppRuns(
-			appObj,
+			appName,
 			function()
 				u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
 			end
