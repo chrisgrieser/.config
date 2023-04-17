@@ -115,8 +115,8 @@ function M.isProjector()
 end
 local deviceName = hs.host.localizedName():gsub(".- ", "", 1)
 M.isAtOffice = deviceName:find("[Mm]ini") ~= nil
-M.isAtHome = deviceName:find("Mother") ~= nil
-M.isAtMother = (deviceName:find("iMac") and deviceName:find("Home")) ~= nil
+M.isAtHome = (deviceName:find("iMac") and deviceName:find("Home")) ~= nil
+M.isAtMother = deviceName:find("Mother") ~= nil
 
 --------------------------------------------------------------------------------
 
