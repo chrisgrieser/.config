@@ -13,9 +13,9 @@ while ! pgrep "Stats"; do
 done
 
 # REQUIRED Stats being set as one combined module
-stats="Stats,CombinedModules"
+stats=$(sketchybar --query default_menu_items | grep "Stats" | head -n1 | cut -d\" -f2)
 
-if ! sketchybar --query default_menu_items | grep -q "$stats"; then
+if [[ -z "$stats" ]]; then
 	osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats Combined Module not found"'
 	exit 1
 fi
