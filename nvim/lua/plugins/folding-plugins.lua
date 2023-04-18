@@ -41,9 +41,12 @@ return {
 		event = "BufReadPost",
 		opts = {
 			provider_selector = function(_, ft, _)
-				-- markdown LSP has no folding capabilities, but treesitter does
-				if ft == "markdown" then return { "treesitter", "indent" } end
-				return { "lsp", "indent" }
+				local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh" }
+				if vim.tbl_contains(lspWithOutFolding, ft) then
+					return { "treesitter", "indent" }
+				else
+					return { "lsp", "indent" }
+				end
 			end,
 			-- open opening the buffer, close these fold kinds
 			-- use `:UfoInspect` to get available fold kinds from the LSP

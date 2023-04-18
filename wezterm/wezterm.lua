@@ -23,9 +23,9 @@ local isAtMother = wt.hostname():find("Mother") ~= nil
 wt.on("gui-startup", function(cmd)
 	local pos = { x = 705, y = 0, w = 3140, h = 2170 }
 	if isAtOffice then
-		pos = { x = 500, y = 0, w = 2800, h = 1800 }
+		pos = { x = 200, y = 0, w = 2500, h = 2170 }
 	elseif isAtMother then
-		-- pos = { x = 500, y = 0, w = 2800, h = 1800 }
+		pos = { x = 500, y = 0, w = 2800, h = 1800 }
 	end
 	local _, _, window = wt.mux.spawn_window(cmd or {})
 	window:gui_window():set_position(pos.x, pos.y)
