@@ -60,7 +60,6 @@ return {
 		event = "VeryLazy",
 		opts = {
 			retirementAgeMins = 20,
-			ignoredFiletypes = {},
 			ignoreUnsavedChangesBufs = false,
 		},
 	},
@@ -69,7 +68,7 @@ return {
 		event = "VimEnter",
 		main = "project_nvim", -- main module name needed
 		opts = {
-			detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp
+			detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp root
 			exclude_dirs = { "node_modules", "build", "dist" },
 			datapath = u.vimDataDir,
 			patterns = {
