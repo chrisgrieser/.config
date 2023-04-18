@@ -141,7 +141,6 @@ autocmd("CursorMoved", {
 
 -- whitespace & indentation
 opt.tabstop = 3
-opt.vartabstop = { 3, 3, 3, 3, 3, 5 }
 opt.softtabstop = 3
 opt.shiftwidth = 3
 opt.shiftround = true
@@ -149,7 +148,10 @@ opt.smartindent = true
 
 -- invisible chars
 opt.list = true
-opt.fillchars = { eob = " ", fold = " " }
+opt.fillchars = {
+	eob = " ",
+	fold = " ",
+}
 opt.listchars = {
 	nbsp = "󰚌",
 	precedes = "…",
