@@ -178,6 +178,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>74ADAF5C-9288-4E9B-9E39-4B9D04EC8453</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FB5076F1-24FB-44E0-90AE-35E220AB19F2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9132689B-E107-4FA3-9CA5-181DAF3FD179</key>
 		<array>
 			<dict>
@@ -334,6 +347,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>FB5076F1-24FB-44E0-90AE-35E220AB19F2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>43331380-A614-4A95-986C-65E821FD6224</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -355,6 +381,48 @@
 			<string>alfred.workflow.action.revealfile</string>
 			<key>uid</key>
 			<string>FB94CA85-1A72-4A36-8AA0-E1301CFCC28D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>invert</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Invert Display</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>00C49F8A-E3D2-4751-A79C-A814251AFF30</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>8</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1835008</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>3427988B-35D1-4145-BB72-8CFF0445F63C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -441,48 +509,6 @@
 			<string>F2F6FDBE-D7AC-4BDF-9183-9ABBC4A29308</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>invert</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Invert Display</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>00C49F8A-E3D2-4751-A79C-A814251AFF30</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>8</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1835008</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>3427988B-35D1-4145-BB72-8CFF0445F63C</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1095,13 +1121,44 @@ JSON.stringify({ 'items': volume_array });
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>path</key>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>toggle-rain.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.browseinterminal</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>DAE52107-17B7-484A-94FD-81AB73840546</string>
+			<string>B65E17C9-5DA8-4C46-BE52-2150F4FD7843</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>rain</string>
+				<key>subtext</key>
+				<string>lo-rain</string>
+				<key>text</key>
+				<string>Toggle Rain</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>6CCE0D85-1112-4445-9282-F834D4C265B1</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1153,21 +1210,13 @@ echo -n "Bluetooth"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>path</key>
 				<string></string>
-				<key>title</key>
-				<string>⏳Restarting {query}…</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.browseinterminal</string>
 			<key>uid</key>
-			<string>43331380-A614-4A95-986C-65E821FD6224</string>
+			<string>DAE52107-17B7-484A-94FD-81AB73840546</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1222,23 +1271,45 @@ echo -n "WiFi"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳Restarting {query}…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>43331380-A614-4A95-986C-65E821FD6224</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>102</integer>
 				<key>script</key>
-				<string></string>
+				<string>killall bird
+echo -n "iCloud Sync"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>toggle-rain.sh</string>
+				<string></string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>B65E17C9-5DA8-4C46-BE52-2150F4FD7843</string>
+			<string>FB5076F1-24FB-44E0-90AE-35E220AB19F2</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1248,18 +1319,18 @@ echo -n "WiFi"</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>rain</string>
+				<string>icloud</string>
 				<key>subtext</key>
-				<string>lo-rain</string>
+				<string></string>
 				<key>text</key>
-				<string>Toggle Rain</string>
+				<string>❗ Restart iCloud Sync</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>6CCE0D85-1112-4445-9282-F834D4C265B1</string>
+			<string>74ADAF5C-9288-4E9B-9E39-4B9D04EC8453</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1630,7 +1701,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>15</real>
 		</dict>
 		<key>0F55C68E-C6D6-4629-B28B-1E323E3CC867</key>
 		<dict>
@@ -1639,7 +1710,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>215</real>
+			<real>180</real>
 		</dict>
 		<key>29742B56-0961-4337-86AB-98F01A6253A0</key>
 		<dict>
@@ -1648,7 +1719,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>530</real>
 		</dict>
 		<key>30BDE79A-EDB6-4D0B-B19A-CC25C363DFA5</key>
 		<dict>
@@ -1657,7 +1728,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>785</real>
+			<real>750</real>
 		</dict>
 		<key>3427988B-35D1-4145-BB72-8CFF0445F63C</key>
 		<dict>
@@ -1668,16 +1739,16 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>15</real>
 		</dict>
 		<key>43331380-A614-4A95-986C-65E821FD6224</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>345</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>845</real>
+			<real>880</real>
 		</dict>
 		<key>43E5DA64-2A89-4571-A4EB-54CAF43E0792</key>
 		<dict>
@@ -1704,7 +1775,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>160</real>
 		</dict>
 		<key>5045CD8E-1DA6-4CCB-B7CA-D426C2B5B489</key>
 		<dict>
@@ -1713,9 +1784,9 @@ echo -n "WiFi"</string>
 			<key>note</key>
 			<string>dismiss notifications</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1085</real>
 		</dict>
 		<key>5838E38B-833B-40D5-B0F3-3D1AB4C92BE3</key>
 		<dict>
@@ -1731,16 +1802,16 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>485</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>285</real>
 		</dict>
 		<key>6CCE0D85-1112-4445-9282-F834D4C265B1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>920</real>
+			<real>685</real>
 		</dict>
 		<key>70B0257C-5EA4-4CFD-9BF8-65D151BC0B56</key>
 		<dict>
@@ -1749,7 +1820,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>530</real>
 		</dict>
 		<key>72466122-ECAE-4FC2-AE72-6403B4FE3007</key>
 		<dict>
@@ -1757,6 +1828,15 @@ echo -n "WiFi"</string>
 			<real>895</real>
 			<key>ypos</key>
 			<real>510</real>
+		</dict>
+		<key>74ADAF5C-9288-4E9B-9E39-4B9D04EC8453</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>970</real>
 		</dict>
 		<key>7E7254FB-7761-400D-887B-162AB242F68E</key>
 		<dict>
@@ -1767,7 +1847,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>145</real>
 		</dict>
 		<key>8B8645C1-776A-41E4-B093-DF59FEF6D696</key>
 		<dict>
@@ -1776,16 +1856,16 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>415</real>
 		</dict>
 		<key>9132689B-E107-4FA3-9CA5-181DAF3FD179</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>785</real>
+			<real>750</real>
 		</dict>
 		<key>93A30DCD-3F5B-4D29-9677-EB0B153B7759</key>
 		<dict>
@@ -1803,7 +1883,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>640</real>
 		</dict>
 		<key>A0F6F797-B581-4923-B4DA-A0F0A2D0C0CD</key>
 		<dict>
@@ -1821,7 +1901,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>415</real>
 		</dict>
 		<key>A4A97FBA-5CBA-4449-9044-CFD69762CA19</key>
 		<dict>
@@ -1830,7 +1910,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>300</real>
 		</dict>
 		<key>AA5C04E1-1B2F-4CEA-8B5D-6E4E4ECD0D8B</key>
 		<dict>
@@ -1841,25 +1921,25 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>160</real>
 		</dict>
 		<key>B23560CE-55AA-460B-8405-275B52CDC10D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>860</real>
 		</dict>
 		<key>B65E17C9-5DA8-4C46-BE52-2150F4FD7843</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>525</real>
 			<key>ypos</key>
-			<real>920</real>
+			<real>685</real>
 		</dict>
 		<key>B6FB4D02-567F-4A67-B8CD-1321C65F9A59</key>
 		<dict>
@@ -1875,7 +1955,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>415</real>
 		</dict>
 		<key>C74E8D1D-FCE2-4350-A77D-526F9FBEFA4D</key>
 		<dict>
@@ -1893,7 +1973,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>860</real>
 		</dict>
 		<key>D6190251-1CA6-4563-B6A9-600A8F0DD885</key>
 		<dict>
@@ -1902,7 +1982,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>300</real>
 		</dict>
 		<key>DAE52107-17B7-484A-94FD-81AB73840546</key>
 		<dict>
@@ -1927,7 +2007,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>530</real>
 		</dict>
 		<key>E41FC709-455B-4D8A-A701-5171B6DC4EE4</key>
 		<dict>
@@ -1945,16 +2025,25 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>300</real>
 		</dict>
 		<key>F2F6FDBE-D7AC-4BDF-9183-9ABBC4A29308</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>680</real>
+			<real>685</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>FB5076F1-24FB-44E0-90AE-35E220AB19F2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>970</real>
 		</dict>
 		<key>FB94CA85-1A72-4A36-8AA0-E1301CFCC28D</key>
 		<dict>
@@ -1972,7 +2061,7 @@ echo -n "WiFi"</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1085</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

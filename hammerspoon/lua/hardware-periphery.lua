@@ -46,24 +46,6 @@ ExternalHarddriveWatcher = hs.usb.watcher
 	:start()
 
 --------------------------------------------------------------------------------
--- WIFI WATCHER
-
--- Notify on state changes of the WiFi network
-WifiWatcher = hs.wifi.watcher
-	.new(function(_, event)
-		local ssid = hs.wifi.currentNetwork() or "none"
-		local msg = event .. ": " .. ssid
-		u.notify("📶 " .. msg)
-		-- at the office, log the network
-		if u.isAtOffice then
-			local timestamp = tostring(os.date()):sub(5, -6)
-			u.appendToFile("./HBS-WiFi.log", timestamp .. " – " .. msg)
-		end
-	end)
-	:watchingFor({ "SSIDChange" })
-	:start()
-
---------------------------------------------------------------------------------
 -- BLUETOOTH
 
 local M = {}
