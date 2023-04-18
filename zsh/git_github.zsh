@@ -9,11 +9,13 @@ alias gA="git add -A"
 alias grh="git reset --hard"
 alias push="git push"
 alias pull="git pull --recurse-submodules"
-alias restore="git restore --source"                                      # 1: hash, 2: file -> restore (existing) file
 alias gm="git add -A && git commit --amend --no-edit && git push --force" # a[m]end
 alias gM="git commit --amend"
+alias restore="git restore --source" # 1: hash, 2: file -> restore (existing) file
 alias rem="git remote -v"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
+alias gi='gh issue list'
+alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 # Github Url: open & copy url
 function gu() {
@@ -21,11 +23,6 @@ function gu() {
 	echo "$url" | pbcopy
 	open "$url"
 }
-
-alias gi='gh issue list'
-
-# goto git root
-alias g.='cd "$(git rev-parse --show-toplevel)"'
 
 # remove the lock file
 function unlock() {
@@ -41,6 +38,7 @@ function unshallow() {
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT DIFF
+
 # use delta for small diffs and diff2html for big diffs
 function gd() {
 	local threshold_lines=50
@@ -71,7 +69,9 @@ function gitlog() {
 	local length
 	[[ -n "$1" ]] && length="-n $1"
 	# shellcheck disable=2086
-	git log $length --all --color --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
+	git log $length --all --color --graph --pretty=format: \
+		'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
+		sed -E 's/ seconds ago\)/s)/g' |
 		sed -E 's/ minutes ago\)/min)/g' |
 		sed -E 's/ hours ago\)/h)/g' |
 		sed -E 's/ days ago\)/d)/g' |
