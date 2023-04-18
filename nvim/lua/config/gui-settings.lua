@@ -24,7 +24,10 @@ vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2"
 if fn.hostname():find("Mother") then
 	g.neovide_scale_factor = 0.93
 	g.neovide_refresh_rate = 40
-elseif fn.hostname():find("eduroam") or fn.hostname():find("iMac") then
+elseif fn.hostname():find("mini") or fn.hostname():find("eduroam") then
+	g.neovide_scale_factor = 1.055
+	g.neovide_refresh_rate = 60
+elseif fn.hostname():find("iMac") then
 	g.neovide_scale_factor = 1
 	g.neovide_refresh_rate = 80
 end

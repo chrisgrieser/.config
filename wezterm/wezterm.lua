@@ -13,7 +13,7 @@ local theme = require("theme-utils")
 local act = wt.action
 local actFun = wt.action_callback
 
-local isAtOffice = wt.hostname():find("mini") ~= nil
+local isAtOffice = (wt.hostname():find("mini") or wt.hostname():find("eduroam")) ~= nil
 local isAtMother = wt.hostname():find("Mother") ~= nil
 
 --------------------------------------------------------------------------------
@@ -21,15 +21,16 @@ local isAtMother = wt.hostname():find("Mother") ~= nil
 
 -- on start, move window to the side ("pseudomaximized")
 wt.on("gui-startup", function(cmd)
-	local pos = { x = 705, y = 0, w = 3140, h = 2170 }
+	local pos = { x = 705, y = 0, w = 3140 }
 	if isAtOffice then
-		pos = { x = 200, y = 0, w = 2500, h = 2170 }
+		pos = { x = 375, y = -100, w = 1675 }
 	elseif isAtMother then
-		pos = { x = 500, y = 0, w = 2800, h = 1800 }
+		pos = { x = 500, y = 0, w = 2800 }
 	end
+	local height = 3000 -- automatically truncated to maximum
 	local _, _, window = wt.mux.spawn_window(cmd or {})
 	window:gui_window():set_position(pos.x, pos.y)
-	window:gui_window():set_inner_size(pos.w, pos.h)
+	window:gui_window():set_inner_size(pos.w, height)
 end)
 
 --------------------------------------------------------------------------------
@@ -169,7 +170,7 @@ local config = {
 	audible_bell = "Disabled",
 	color_scheme = theme.autoScheme(darkTheme, lightTheme),
 	window_background_opacity = theme.autoOpacity(darkOpacity, lightOpacity),
-	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
+	window_decorations = "RESIZE",
 	bold_brightens_ansi_colors = "BrightAndBold",
 	max_fps = isAtMother and 40 or 60,
 	native_macos_fullscreen_mode = false,
@@ -202,9 +203,7 @@ local config = {
 	-- Keybindings
 	disable_default_key_bindings = true,
 	keys = keybindings,
-
-	-- fix @{}~ etc. on German keyboard
-	send_composed_key_when_left_alt_is_pressed = true,
+	send_composed_key_when_left_alt_is_pressed = true, -- fix @{}~ etc. on German keyboard
 	send_composed_key_when_right_alt_is_pressed = true,
 }
 
