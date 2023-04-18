@@ -67,7 +67,6 @@ function gd() {
 # GIT LOG
 # https://git-scm.com/docs/git-log#_pretty_formats
 
-# short (only last 15 messages)
 function gitlog() {
 	local length
 	[[ -n "$1" ]] && length="-n $1"
@@ -75,6 +74,7 @@ function gitlog() {
 	git log $length --all --color --graph --pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
 		sed -E 's/ hours? ago\)/h ago)/g' |
 		sed -E 's/ days? ago\)/d ago)/g' |
+		sed -E 's/ minutes? ago\)/m ago)/g' |
 		sed -e 's/origin\//󰅡 /g' |
 		sed -e 's/HEAD/󱍀/g' |
 		sed -e 's/->//g' |
@@ -84,7 +84,7 @@ function gitlog() {
 	# to fit on one screen
 }
 
-# brief git log
+# brief git log (only last 15)
 function gl() {
 	local cutoff=15
 	gitlog $cutoff
