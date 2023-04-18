@@ -7,8 +7,14 @@ M.iMacDisplay = hs.screen("Built%-in")
 M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
-M.toTheSide = hs.geometry.rect(-70.0, 54.0, 425.0, 1026.0) -- negative x to hide useless sidebar
-if u.isAtMother then M.toTheSide = hs.geometry.rect(-70.0, 54.0, 380.0, 890.0) end
+
+if u.isAtMother then
+	M.toTheSide = hs.geometry.rect(-70, 54, 380, 890)
+elseif u.isAtOffice then
+	M.toTheSide = hs.geometry.rect(-75, 54, 450, 1200)
+else
+	M.toTheSide = hs.geometry.rect(-70, 54, 425, 1026) -- negative x to hide useless sidebar
+end
 
 M.rejectedFinderWins = {
 	"^Quick Look$",
@@ -248,9 +254,7 @@ function M.autoTile(winSrc)
 		M.moveResize(wins[3], { h = 0.5, w = 0.33, x = 0.33, y = 0 })
 		M.moveResize(wins[4], { h = 0.5, w = 0.33, x = 0.33, y = 0.5 })
 		M.moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.66, y = 0 })
-		if #wins == 6  then
-			M.moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 })
-		end
+		if #wins == 6 then M.moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 }) end
 	end
 	u.runWithDelays(0.1, function() autoTilingInProgress = false end)
 end
