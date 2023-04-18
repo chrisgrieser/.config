@@ -35,6 +35,7 @@ on run
 		keystroke "cd '"
 		delay 0.05
 		keystroke "v" using {command down}
+		delay 0.05
 		keystroke "'"
 		keystroke return
 	end tell
