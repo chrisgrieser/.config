@@ -14,7 +14,7 @@ local function moveOfficeNotesToBase()
 	if success then
 		print("🗒️ Office Sidenotes -> Base")
 	else
-		u.notify("⚠️ Moving Office SideNotes failed.")
+		u.notify("⚠️ Moving Office-SideNotes failed.")
 	end
 	updateCounter()
 end
