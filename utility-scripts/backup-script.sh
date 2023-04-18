@@ -18,7 +18,7 @@ mkdir -p "$BACKUP_DEST"
 cd "$BACKUP_DEST" || return 1
 
 # Log (on the Mac)
-LOG_LOCATION="$DATA_DIR/backup.log"
+LOG_LOCATION="$DATA_DIR/backups-to-external-drives.log"
 echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >>"$LOG_LOCATION"
 
 #───────────────────────────────────────────────────────────────────────────────
