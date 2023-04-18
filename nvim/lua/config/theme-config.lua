@@ -8,7 +8,11 @@ local g = vim.g
 ---@param hlgroupfrom string
 ---@param hlgroupto string
 local function linkHighlight(hlgroupfrom, hlgroupto)
-	vim.api.nvim_set_hl(0, hlgroupfrom, { link = hlgroupto, default = true })
+	if vim.version().minor >= 9 then
+		vim.api.nvim_set_hl(0, hlgroupfrom, { link = hlgroupto, default = true })
+	else
+		cmd.highlight { "def link " .. hlgroupto .. " " .. hlgroupfrom, bang = true }
+	end
 end
 
 ---INFO not using `api.nvim_set_hl` yet as it overwrites a group instead of updating it
@@ -186,12 +190,15 @@ autocmd("ColorSchemePre", {
 })
 autocmd("ColorScheme", {
 	callback = function()
-		-- add SEMANTIC HIGHLIGHTS to themes that do not have it yet https://www.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90/
-		---@diagnostic disable-next-line: undefined-field
-		local themeHasNoSemanticHl = vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@lsp.type.function" }))
-		if themeHasNoSemanticHl then
-			for semanticHl, treesitterHl in pairs(semanticToTreesitterHl) do
-				linkHighlight(semanticHl, treesitterHl)
+		if vim.version().minor >= 9 then
+			-- add SEMANTIC HIGHLIGHTS to themes that do not have it yet https://www.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90/
+			---@diagnostic disable-next-line: undefined-field
+			local themeHasNoSemanticHl =
+				vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@lsp.type.function" }))
+			if themeHasNoSemanticHl then
+				for semanticHl, treesitterHl in pairs(semanticToTreesitterHl) do
+					linkHighlight(semanticHl, treesitterHl)
+				end
 			end
 		end
 
