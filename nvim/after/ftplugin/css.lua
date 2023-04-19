@@ -15,8 +15,6 @@ keymap({ "o", "x" }, "ix", "<cmd>lua require('various-textobjs').htmlAttribute(t
 keymap({ "o", "x" }, "ax", "<cmd>lua require('various-textobjs').htmlAttribute(false)<CR>", { desc = "outer HTML Attribute textobj", buffer = true })
 -- stylua: ignore end
 
---------------------------------------------------------------------------------
-
 -- toggle !important
 keymap("n", "<leader>i", function()
 	local lineContent = fn.getline(".")
@@ -29,17 +27,24 @@ keymap("n", "<leader>i", function()
 end, { buffer = true, desc = "toggle !important" })
 
 --------------------------------------------------------------------------------
+
+-- extra trigger for auto-saving to work with hot reloads
+autocmd("TextChanged", {
+	buffer = 0, -- buffer-local autocmd
+	callback = function() cmd.update(expand("%:p")) end,
+})
+
+--------------------------------------------------------------------------------
 -- SHIMMERING FOCUS SPECIFIC
 
 if expand("%:t") == "source.css" then
-	-- comment marks (deferred, to override lsp-gotosymbol)
+	-- goto comment marks (deferred, to override lsp-gotosymbol)
 	vim.defer_fn(function()
 		bo.grepprg = "rg --vimgrep --no-column" -- remove columns for readability
 		keymap("n", "gs", function()
 			cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
 			require("telescope.builtin").loclist {
 				prompt_title = "Navigation Markers",
-				fname_width = 0,
 			}
 		end, { desc = "Search Navigation Markers", buffer = true })
 		-- search only for variables
@@ -48,14 +53,23 @@ if expand("%:t") == "source.css" then
 			require("telescope.builtin").loclist {
 				prompt_title = "CSS Variables",
 				prompt_prefix = "",
-				fname_width = 0,
 			}
 		end, { desc = "Search CSS Variables", buffer = true })
 	end, 300)
 
-	-- move to comment marks
-	keymap({ "n", "x" }, "<C-j>", [[/^\/\* <<CR>:nohl<CR>]], { buffer = true, desc = "next section" })
-	keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], { buffer = true, desc = "prev section" })
+	-- next/prev comment marks
+	keymap(
+		{ "n", "x" },
+		"<C-j>",
+		[[/^\/\* <<CR>:nohl<CR>]],
+		{ buffer = true, desc = "next comment mark" }
+	)
+	keymap(
+		{ "n", "x" },
+		"<C-k>",
+		[[?^\/\* <<CR>:nohl<CR>]],
+		{ buffer = true, desc = "prev comment mark" }
+	)
 
 	-- create comment mark
 	keymap("n", "qw", function()
@@ -73,14 +87,9 @@ if expand("%:t") == "source.css" then
 		cmd.startinsert { bang = true }
 	end, { buffer = true })
 
-	-- INFO: fix syntax highlighting with ':syntax sync fromstart'
+	-- INFO: fix syntax highlighting
 	-- various other solutions are described here: https://github.com/vim/vim/issues/2790
-	-- however, using treesitter, this is less of an issue, but treesitter css
+	-- using treesitter, this is less of an issue, but treesitter css
 	-- highlighting isn't good yet, so…
 	keymap("n", "zz", ":syntax sync fromstart<CR>", { buffer = true })
-	-- extra trigger for css files, to work with live reloads
-	autocmd("TextChanged", {
-		buffer = 0, -- buffer-local autocmd
-		callback = function() cmd.update(expand("%:p")) end,
-	})
 end

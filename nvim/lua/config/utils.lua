@@ -53,11 +53,14 @@ end
 ---See also https://neovim.io/doc/user/api.html#nvim_open_win()
 ---(BorderChars is needed for Harpoon and Telescope, both of which do not accept
 ---a Borderstyle string.)
-local borderstyle = "single"
+local borderstyle = "rounded"
+
+--------------------------------------------------------------------------------
 
 M.borderStyle = borderstyle
-M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" } -- default: rounded
-M.borderHorizontal = "─" -- default: single
+-- default: single/rounded
+M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" } 
+M.borderHorizontal = "─" 
 
 if borderstyle == "single" then
 	M.borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
@@ -66,5 +69,4 @@ elseif borderstyle == "double" then
 	M.borderHorizontal = "═"
 end
 
---------------------------------------------------------------------------------
 return M
