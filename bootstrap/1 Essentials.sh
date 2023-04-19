@@ -40,8 +40,25 @@ ln -sf "$DATA_DIR/ssh/" ~/.ssh
 # SSH required for these
 cd ~
 git clone git@github.com:chrisgrieser/main-vault.git
+
+
+
+#───────────────────────────────────────────────────────────────────────────────
+# PASSWORDS & GPG
+
+# Passwords
+cd ~
 git clone git@github.com:chrisgrieser/.password-store.git
 
+# Keys
+ln -sf "$DATA_DIR/gpg/" ~/.gpg
+chmod 700 ~/.gnupg
+
+# gpg config
+if [[ $(uname -p) == "i386" ]]; then # FIX for Intel Macs with different homebrew path
+	mkdir -p /opt/homebrew/bin/
+	ln -sf /usr/local/bin/pinentry-mac /opt/homebrew/bin/pinentry-mac
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # LOAD CONFIGS (MACKUP)
@@ -63,14 +80,6 @@ done
 
 # zsh (ZDOTDIR set in .zshenv for the remaining config)
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
-
-# GPG config (not keys themselves, they are in password store)
-mkdir ~/.gnupg
-ln -sf "$DOTFILE_FOLDER/gnupg/gpg-agent.conf" ~/.gnupg
-if [[ $(uname -p) == "i386" ]]; then # FIX for Intel Macs with different homebrew path
-	mkdir -p /opt/homebrew/bin/
-	ln -sf /usr/local/bin/pinentry-mac /opt/homebrew/bin/pinentry-mac
-fi
 
 # pandoc
 [[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
