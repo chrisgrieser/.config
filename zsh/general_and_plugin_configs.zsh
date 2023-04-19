@@ -17,7 +17,7 @@ export YSU_MESSAGE_POSITION="after"
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --hidden'
-export FZF_DEFAULT_OPTS='--pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --cycle --bind="tab:up,shift-tab:down"'
+export FZF_DEFAULT_OPTS='--pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --cycle --layout=reverse --bind="tab:down,shift-tab:up" --preview-window=border-left'
 
 # magic enter
 export MAGIC_ENTER_GIT_COMMAND="inspect"
@@ -25,7 +25,6 @@ export MAGIC_ENTER_OTHER_COMMAND="inspect"
 
 # zoxide
 export _ZO_DATA_DIR="$DATA_DIR/zoxide/"
-# export _ZO_EXCLUDE_DIRS=""
 eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 
 #───────────────────────────────────────────────────────────────────────────────

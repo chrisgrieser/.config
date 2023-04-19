@@ -18,9 +18,8 @@ function o() {
 			-0 -1 \
 			--ansi \
 			--query="$input" \
-			--cycle \
 			--info=inline \
-			--preview-window="border-left" \
+			--height=80% \
 			--preview 'bat --color=always --style=snip --wrap=never --tabs=2 {}'
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted
@@ -87,13 +86,11 @@ function fzf-folder() {
 	if ! command -v fg &>/dev/null; then printf "\033[1;33mfg not installed.\033[0m" && return 1; fi
 		
 	# shellcheck disable=2016
-	selected=$(fd . --hidden --type=directory --color=always |
+	selected=$(fd --hidden --type=directory --color=always |
 		fzf -0 \
 			--ansi \
-			--query="$input" \
-			--cycle \
-			--info=inline \
-			--preview-window="border-left" \
+			--query="$1" \
+			--height=70% \
 			--preview 'exa -1 --icons --git {}')
 	[[ -z "$selected" ]] && return 0 # fzf aborted
 	__zoxide_z "$selected"
@@ -151,7 +148,6 @@ function eject() {
 	# if one volume, will auto-eject due to `-1`
 	selected=$(echo "$volumes" |
 		fzf -0 -1 \
-			--layout=reverse --bind="tab:down,shift-tab:up" \
 			--no-info \
 			--height=30%)
 	[[ -z "$selected" ]] && return 0 # fzf aborted
