@@ -1,4 +1,0 @@
-
-This file tells broot you refused the installation of the companion shell function.
-If you want to install it run
-    broot -- install

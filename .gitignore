@@ -1,9 +1,12 @@
 # don't add "node_modules" here since some Alfred workflows actually rely on it
 
-# ZSH Completion Data (shouldn't be synced since some machines have different
-# CLIs installed)
+# ZSH Completion Data 
+# (shouldn't be synced since some machines have different CLIs installed)
 .zcompcache
 .zcompdump
+
+# temporary zsh data
+.zsh_sessions
 
 # potentially sensitive data
 .zsh_history
