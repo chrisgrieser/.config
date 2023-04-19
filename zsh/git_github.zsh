@@ -71,7 +71,6 @@ function gitlog() {
 	# shellcheck disable=2086
 	git log $length --all --color --graph --pretty=format: \
 		'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
-		sed -E 's/ seconds ago\)/s)/g' |
 		sed -E 's/ minutes ago\)/min)/g' |
 		sed -E 's/ hours ago\)/h)/g' |
 		sed -E 's/ days ago\)/d)/g' |
@@ -91,7 +90,7 @@ function gl() {
 	local cutoff=15
 	gitlog $cutoff
 	# add `(…)` if commits were shortened
-	[[ "$(git log --oneline | wc -l)" -gt $cutoff ]] && echo "(…)"
+	[[ $(git log --oneline | wc -l) -gt $cutoff ]] && echo "(…)"
 }
 
 # full git log

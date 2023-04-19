@@ -179,7 +179,7 @@ end
 
 -- wrapper to not require navic directly
 local function navicBreadcrumbs()
-	if not require("nvim-navic").is_available() then return "" end
+	if bo.filetype == "css" or not require("nvim-navic").is_available() then return "" end
 	return require("nvim-navic").get_location()
 end
 
