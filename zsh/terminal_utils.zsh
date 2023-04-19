@@ -82,33 +82,43 @@ function separator() {
 	echo "$SEP"
 }
 
-function broot-folder() {
-	if ! command -v broot &>/dev/null; then echo "broot not installed." && return 1; fi
-	# Broot Shell function https://dystroy.org/broot/install-br/
-	# (renamed `broot-shell` to avoid conflict with `br` for `brew reinstall`)
-	eval "$(broot --print-shell-function zsh | sed -e 's/function br /function broot-shell /')"
-	broot-shell --only-folders --show-git-info --cmd="$1"
+function fzf-folder() {
+	if ! command -v fzf &>/dev/null; then printf "\033[1;33mfzf not installed.\033[0m" && return 1; fi
+	if ! command -v fg &>/dev/null; then printf "\033[1;33mfg not installed.\033[0m" && return 1; fi
+		
+	# shellcheck disable=2016
+	selected=$(fd . --hidden --type=directory --color=always |
+		fzf -0 \
+			--ansi \
+			--query="$input" \
+			--cycle \
+			--info=inline \
+			--preview-window="border-left" \
+			--preview 'exa -1 --icons --git {}')
+	[[ -z "$selected" ]] && return 0 # fzf aborted
+	__zoxide_z "$selected"
+	inspect
 }
 
 # smarter z/cd
-# - no arg/match: broot folders
+# - no arg/match: fzf to a subfolder
 # - file: goto directory of file
 # - after entering new folder, inspect it (exa, git log, git status, etc.)
 function z() {
 	local query="$1"
 	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
 	if [[ -z "$query" ]]; then
-		broot-folder
+		fzf-folder
 		return
 	fi
 	[[ -f "$query" ]] && query="$(dirname "$1")"
 	__zoxide_z "$query" &>/dev/null
 
 	# shellcheck disable=2181
-	if [[ $? -eq 0 ]] ; then
+	if [[ $? -eq 0 ]]; then
 		inspect
-	else 
-		broot-folder "$query"
+	else
+		fzf-folder "$query"
 	fi
 
 }
