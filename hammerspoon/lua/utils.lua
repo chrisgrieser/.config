@@ -150,7 +150,7 @@ end
 ---@return hs.application
 function M.app(appName) return hs.application.find(appName, true, true) end
 
----@param appNames string|string[]|nil app or apps that should be checked
+---@param appNames string|string[] app or apps that should be checked
 ---@nodiscard
 ---@return boolean true when *one* of the apps is frontmost
 function M.isFront(appNames)

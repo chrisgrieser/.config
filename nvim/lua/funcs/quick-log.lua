@@ -97,28 +97,6 @@ function M.beeplog()
 	append(logStatement)
 end
 
-function M.objectlog()
-	local varname = getVar()
-	local templateStr
-	local ft = bo.filetype
-
-	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		templateStr = 'print("%s:", hs.inspect(%s))'
-	elseif ft == "lua" and expand("%:p:h"):find("nvim") then
-		templateStr = 'vim.pretty_print("%s:", %s)'
-	elseif ft == "javascript" then
-		templateStr = 'console.log("%s:", JSON.stringify(%s))'
-	elseif ft == "typescript" then
-		templateStr = 'console.log("%s:", %s)'
-	else
-		vim.notify("Objectlog does not support " .. ft .. " yet.", logWarn)
-		return
-	end
-
-	local logStatement = string.format(templateStr, varname, varname)
-	append(logStatement)
-end
-
 function M.timelog()
 	if g.timelogStart == nil then g.timelogStart = true end
 	local logStatement1, logStatement2
