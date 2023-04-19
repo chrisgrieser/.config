@@ -82,25 +82,35 @@ function separator() {
 	echo "$SEP"
 }
 
+function broot-folder() {
+	if ! command -v broot &>/dev/null; then echo "broot not installed." && return 1; fi
+	# Broot Shell function https://dystroy.org/broot/install-br/
+	# (renamed `broot-shell` to avoid conflict with `br` for `brew reinstall`)
+	eval "$(broot --print-shell-function zsh | sed -e 's/function br /function broot-shell /')"
+	broot-shell --only-folders --show-git-info --cmd="$1"
+}
+
 # smarter z/cd
-# - no arg: broot only folders
+# - no arg/match: broot folders
 # - file: goto directory of file
 # - after entering new folder, inspect it (exa, git log, git status, etc.)
 function z() {
+	local query="$1"
 	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
-	if [[ -z "$1" ]]; then
-		if ! command -v broot &>/dev/null; then echo "broot not installed." && return 1; fi
-		# Broot Shell function https://dystroy.org/broot/install-br/
-		# (renamed `broot-shell` to avoid conflict with `br` for `brew reinstall`)
-		eval "$(broot --print-shell-function zsh | sed -e 's/function br /function broot-shell /')"
-		broot-shell --only-folders
-	elif [[ -f "$1" ]]; then
-		__zoxide_z "$(dirname "$1")"
-	else
-		__zoxide_z "$1"
+	if [[ -z "$query" ]]; then
+		broot-folder
+		return
 	fi
+	[[ -f "$query" ]] && query="$(dirname "$1")"
+	__zoxide_z "$query" &>/dev/null
+
 	# shellcheck disable=2181
-	[[ $? -eq 0 ]] && inspect
+	if [[ $? -eq 0 ]] ; then
+		inspect
+	else 
+		broot-folder "$query"
+	fi
+
 }
 
 function zi() {
