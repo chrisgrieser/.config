@@ -234,10 +234,11 @@ local function filetypeCompletionConfig()
 	})
 
 	cmp.setup.filetype("sh", {
-		-- disable the `\[` suggestion
+		-- disable the annoying `\[` suggestion
 		enabled = function()
-			local lineContent = vim.fn.getline(".")
-			return not (lineContent:match("\\$"))
+			local col = vim.fn.col(".")
+			local charBefore = vim.fn.getline("."):sub(col, col)
+			return charBefore ~= "\\"
 		end,
 		sources = cmp.config.sources {
 			s.snippets,
