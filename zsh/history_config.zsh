@@ -1,6 +1,6 @@
 # Don't clutter home directory with useless `.node_repl_history`
 # https://nodejs.org/api/repl.html#repl_environment_variable_options
-# export NODE_REPL_HISTORY=""
+export NODE_REPL_HISTORY=""
 
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.soberkoder.com/better-zsh-history/
@@ -24,7 +24,7 @@ setopt EXTENDED_HISTORY
 export HIST_DATE_FORMAT='%a %d.%m %H:%M   ' # custom, defined by me
 
 # SEARCH HISTORY FOR A COMMAND
-# enter ➞ write to buffer
+# enter ➞ write to buffer (without sending)
 # alt+enter ➞ copy to clipboard
 
 DATE_CHAR_COUNT=$(date "+$HIST_DATE_FORMAT" | wc -m | tr -d " ")
