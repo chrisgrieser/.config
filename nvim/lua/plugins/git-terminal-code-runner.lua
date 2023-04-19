@@ -1,6 +1,6 @@
 return {
 	{ -- Code Runner / Scratchpad
-	-- currently only supports js/ts, python, and lua: https://github.com/0x100101/lab.nvim#languages
+		-- currently only supports js/ts, python, and lua: https://github.com/0x100101/lab.nvim#languages
 		"0x100101/lab.nvim",
 		cmd = "Lab",
 		dependencies = "nvim-lua/plenary.nvim",
@@ -35,6 +35,7 @@ return {
 			size = 12,
 			direction = "horizontal",
 			autochdir = true, -- when nvim changes pwd, will also change its pwd
+			env = { TERM_PROGRAM = "ToggleTerm" },
 		},
 	},
 	{ -- git sign gutter & hunk textobj

@@ -1,6 +1,6 @@
 # Don't clutter home directory with useless `.node_repl_history`
 # https://nodejs.org/api/repl.html#repl_environment_variable_options
-export NODE_REPL_HISTORY=""
+# export NODE_REPL_HISTORY=""
 
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.soberkoder.com/better-zsh-history/
