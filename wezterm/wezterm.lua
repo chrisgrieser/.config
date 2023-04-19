@@ -8,8 +8,8 @@ local darkOpacity = 0.92
 --------------------------------------------------------------------------------
 -- UTILS
 
-local wt = require("wezterm")
 local theme = require("theme-utils")
+local wt = require("wezterm")
 local act = wt.action
 local actFun = wt.action_callback
 
@@ -44,7 +44,7 @@ local function autoQuotePastedUrls(window, pane)
 		window:toast_notification(msg, nil, 4000)
 		return
 	end
-	
+
 	if clipb:find("^https?://") then clipb = '"' .. clipb .. '"' end
 	pane:paste(clipb)
 end
@@ -85,7 +85,7 @@ local keybindings = {
 		key = "o",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
-			patterns = { "https?://\\S+" },
+			patterns = { "https?://\\S+",  },
 			label = "Open URL",
 			action = actFun(function(window, pane)
 				local url = window:get_selection_text_for_pane(pane)
@@ -126,6 +126,22 @@ local keybindings = {
 	-- but expects another character, so this mapping fixes it
 	{ key = "n", mods = "META", action = act.SendString("~") },
 }
+
+--------------------------------------------------------------------------------
+-- HYPERLINK RULES
+local myHyperlinkRules = wt.default_hyperlink_rules()
+
+-- make github links of the form `owner/repo` clickable
+table.insert(myHyperlinkRules, {
+	regex = [[["]?([\w\d]{1}[-\w\d]+)(/){1}([-\w\d\.]+)["]?]],
+	format = "https://github.com/$1/$3",
+})
+
+-- links that are probably file paths
+table.insert(myHyperlinkRules, {
+	regex = "/\\b\\S*\\b",
+	format = "file://$0",
+})
 
 --------------------------------------------------------------------------------
 -- SETTINGS
@@ -181,6 +197,9 @@ local config = {
 	enable_scroll_bar = true,
 	min_scroll_bar_height = "3cell",
 	scrollback_lines = 4000,
+
+	-- Hyperlinks
+	hyperlink_rules = myHyperlinkRules,
 
 	-- Tabs
 	enable_tab_bar = true,
