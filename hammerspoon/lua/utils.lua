@@ -12,19 +12,10 @@ M.tbl_contains = hs.fnutils.contains
 M.hyper = { "cmd", "alt", "ctrl", "shift" } -- bound to capslock via Karabiner elements
 I = hs.inspect -- to inspect tables in the console more quickly
 
--- need to catch timers in variables to ensure they don't get garbage collected
-MyTimers = {}
 --------------------------------------------------------------------------------
 
----trims all whitespace from string, like javascript's .trim()
----@param str string
----@nodiscard
----@return string
-function M.trim(str)
-	if not str then return "" end
-	str, _ = str:gsub("^%s*(.-)%s*$", "%1")
-	return str
-end
+-- need to catch timers in variables to ensure they don't get garbage collected
+MyTimers = {}
 
 ---Whether the current time is between startHour & endHour. Also works for
 ---ranges that go beyond midnight, e.g. 23 to 6.
@@ -141,13 +132,11 @@ end
 ---Send Notification, accepting any number of arguments of any type. Converts
 ---everything into strings, concatenates them, and then sends it.
 function M.notify(...)
-	local safe_args = {}
-	local args = { ... }
-	for _, arg in pairs(args) do
-		local str = (type(arg) == "table") and hs.inspect(arg) or tostring(arg)
-		table.insert(safe_args, str)
-	end
-	local out = table.concat(safe_args, " ")
+	local args = hs.fnutils.map({...}, function(arg)
+		local safeArg = (type(arg) == "table") and hs.inspect(arg) or tostring(arg)
+		return safeArg
+	end)
+	local out = table.concat(args, " ") ---@diagnostic disable-line: param-type-mismatch
 	hs.notify.show("Hammerspoon", "", out)
 	print("💬 " .. out)
 end

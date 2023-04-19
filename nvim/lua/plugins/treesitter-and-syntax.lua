@@ -101,24 +101,19 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
+		-- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
+		build = function() require("nvim-treesitter.install").update { with_sync = true } end,
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 		init = function()
 			-- force treesitter to highlight zsh as if it was bash
-			vim.api.nvim_create_autocmd("BufReadPost", {
-				pattern = { "*.sh", "*.zsh", ".zsh*" },
-				callback = function()
-					-- apparently needs delay to avoid conflicting race with treesitter's autocomd?
-					vim.defer_fn(function () vim.bo.filetype = "sh" end, 200)
-				end,
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "zsh",
+				callback = function() vim.bo.filetype = "sh" end,
 			})
 
 			-- avoid conflict with visual mode comment from Comments.nvim
 			vim.keymap.set("o", "q", "&&&", { desc = "comment", remap = true })
-		end,
-		build = function()
-			-- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
-			require("nvim-treesitter.install").update { with_sync = true }
 		end,
 	},
 	{ -- Embedded filetypes
