@@ -195,14 +195,12 @@ function gb() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	selected=$(
-		git branch --all --color |
-			grep -v "HEAD" |
-			fzf -0 \
-				--ansi \
-				--layout=reverse --bind="tab:down,shift-tab:up" \
-				--no-info \
-				--height=40% \
-				--header-first --header="↵ : Checkout Branch"
+		git branch --all --color | grep -v "HEAD" | fzf \
+			--ansi \
+			--layout=reverse --bind="tab:down,shift-tab:up" \
+			--no-info \
+			--height=40% \
+			--header-first --header="↵ : Checkout Branch"
 	)
 	[[ -z "$selected" ]] && return 0
 	selected=$(echo "$selected" | tr -d "* ")
