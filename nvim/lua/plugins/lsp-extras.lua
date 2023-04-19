@@ -84,7 +84,7 @@ return {
 				position = { row = "100%", col = "50%" },
 				size = { height = "30%", width = "100%" },
 				sections = {
-					left = { size = "25%" },
+					left = { size = "30%" },
 					mid = { size = "40%" },
 					right = { preview = "never" },
 				},

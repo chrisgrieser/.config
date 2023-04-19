@@ -71,11 +71,6 @@ lspSettings.cssls = {
 	},
 }
 
--- disable symbols, since not all to useful here
-lspOnAttach.cssls = function(client, _)
-	client.server_capabilities.documentSymbolProvider = false
-end
-
 --------------------------------------------------------------------------------
 -- JAVASCRIPT & TYPESCRIPT
 

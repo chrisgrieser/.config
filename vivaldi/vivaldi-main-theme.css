@@ -149,6 +149,7 @@ least 3 tabs */
 
 /* ────────────────────────────────────────────────────────────────────────── */
 /* TAB LOOK */
+
 #tabs-container .tab {
 	border-radius: var(--radius);
 }

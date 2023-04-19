@@ -605,7 +605,7 @@ end, { desc = "󰒕 Copy Breadcrumbs" })
 -- Save & Format
 keymap({ "n", "i", "x" }, "<D-s>", function()
 	cmd.update()
-	vim.lsp.buf.format { async = true }
+	vim.lsp.buf.format()
 end, { desc = "󰒕 Save & Format" })
 
 -- stylua: ignore end
@@ -615,43 +615,34 @@ keymap("n", "<leader>h", function()
 end, { desc = "󰒕 󱃄 Hover" })
 
 -- uses "v" instead of "x", so signature can be shown during snippet completion
+-- stylua: ignore
 keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature" })
 
-
--- stylua: ignore start
--- cannot run `cmd.IncRename` since the plugin *has* to use the
--- command line; needs defer to not be overwritten by treesitter-
--- refactor's smart-rename
-vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1)
-keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
-
-			keymap("n", "gs", function() require("nvim-navbuddy").open() end, { desc = "󰒕 Symbols (navbuddy)", buffer = true }) -- overrides treesitter symbols browsing
-			keymap("n", "gS", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
-			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
-
-
-			keymap("n", "gd", function() cmd.Glance("definitions") end, { desc = "󰒕 Definitions", buffer = true })
-			keymap("n", "gf", function() cmd.Glance("references") end, { desc = "󰒕 References", buffer = true })
-			keymap("n", "gy", function() cmd.Glance("type_definitions") end, { desc = "󰒕 Type Definition", buffer = true })
+keymap("n", "gd", function() cmd.Glance("definitions") end, { desc = "󰒕 Definitions" })
+keymap("n", "gf", function() cmd.Glance("references") end, { desc = "󰒕 References" })
+-- stylua: ignore
+keymap("n", "gD", function() cmd.Glance("type_definitions") end, { desc = "󰒕 Type Definition" })
 
 autocmd("LspAttach", {
 	callback = function(args)
+		-- stylua: ignore start
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local capabilities = client.server_capabilities
 
 		-- overrides treesitter-refactor's rename
 		if capabilities.renameProvider then
+			-- cannot run `cmd.IncRename` since the plugin *has* to use the
+			-- command line; needs defer to not be overwritten by treesitter-
+			-- refactor's smart-rename
+			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1)
+			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
 		end
 
-		-- conditional to not overwrite treesitter goto-symbol
+		-- overwrites treesitter goto-symbol
 		if capabilities.documentSymbolProvider then
-		end
-
-		if capabilities.definitionProvider then
-		end
-		if capabilities.referencesProvider then
-		end
-		if capabilities.typeDefinitionProvider then
+			keymap("n", "gs", function() require("nvim-navbuddy").open() end, { desc = "󰒕 Symbols (navbuddy)", buffer = true }) -- overrides treesitter symbols browsing
+			keymap("n", "gS", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
+			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 		-- stylua: ignore end
 	end,
