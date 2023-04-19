@@ -40,6 +40,14 @@ keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again" })
 -- stylua: ignore
 keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { desc = "󰘳 Copy last command" })
 
+-- show current filetype & buftype
+keymap("n", "<leader>lf", function()
+	local icon = require("nvim-web-devicons").get_icon(fn.bufname(), bo.filetype)
+	local out = ("filetype: %s %s"):format(icon, bo.filetype)
+	if bo.buftype ~= "" then out = out + "\nbuftype: " .. bo.buftype end
+	vim.notify(out, u.trace)
+end, { desc = "󰽘 Inspect FileType & BufType" })
+
 -- copy [l]ast [n] notification
 keymap("n", "<leader>ln", function()
 	local history = require("notify").history {}
@@ -298,8 +306,7 @@ end, { desc = "󰜊 Undo since last open" })
 
 -- LOGGING & DEBUGGING
 -- stylua: ignore start
-keymap({ "n", "x" }, "<leader>ll", function() require("funcs.quick-log").log() end, { desc = " log" })
-keymap({ "n", "x" }, "<leader>lo", function() require("funcs.quick-log").objectlog() end, { desc = " object log" })
+keymap({ "n", "x" }, "<leader>ll", function() require("funcs.quick-log").log() end, { desc = " log variable" })
 keymap("n", "<leader>lb", function() require("funcs.quick-log").beeplog() end, { desc = " beep log" })
 keymap("n", "<leader>l1", function() require("funcs.quick-log").timelog() end, { desc = " time log" })
 keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end, { desc = "  remove log" })
@@ -322,7 +329,7 @@ keymap("n", "<leader>bt", function()
 	vim.opt_local.number = false
 	require("dapui").close()
 	require("dap").terminate()
-end, { desc = " Terminate" })
+end, { desc = "  Terminate" })
 keymap("n", "<leader>bn", function()
 	vim.opt_local.number = true
 	-- INFO is the only one that needs manual starting, other debuggers
@@ -804,7 +811,7 @@ autocmd("FileType", {
 
 -- remove the waiting time from the q, due to conflict with `qq` for comments
 autocmd("FileType", {
-	pattern = { "ssr", "TelescopePrompt", "harpoon", "NavBuddy"}, -- e.g. NeoAI,
+	pattern = { "ssr", "TelescopePrompt", "harpoon", "NavBuddy" }, -- e.g. NeoAI,
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 		if bo.filetype == "ssr" then
