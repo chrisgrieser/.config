@@ -25,6 +25,7 @@ duti -s "$videoplayerID" m4a all
 
 # code
 editorID="com.apple.automator.Neovim"
+duti -s "$editorID" hjson all
 duti -s "$editorID" http all
 duti -s "$editorID" conf all
 duti -s "$editorID" fdignore all

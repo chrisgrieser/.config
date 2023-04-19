@@ -31,8 +31,5 @@ export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# vidir availability
-export PATH="$DOTFILE_FOLDER/zsh/plugins":$PATH
-
 # NEOVIM: so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
