@@ -3,7 +3,7 @@ local wu = require("lua.window-utils")
 local periphery = require("lua.hardware-periphery")
 local caff = hs.caffeinate.watcher
 
----@return string three-char string representing the day of the week (English)
+---@return string string consisting of three-chars representing the day of the week (English)
 local function getWeekday() return tostring(os.date()):sub(1, 3) end
 
 --------------------------------------------------------------------------------
@@ -76,8 +76,11 @@ local function closeFullscreenSpaces()
 	end
 end
 
-local function sleepMovieApps()
-	if not u.idleMins(30) then return end
+-- between 1:30 and 6:00, check every half hour if device has been idle for 30
+-- minutes. if so, quit video apps and related things.
+SleepTimer = hs.timer.doEvery(1800, function ()
+	if not (u.betweenTime(1.5, 6) and u.idleMins(30)) then return end
+	u.notify("💤 SleepTimer triggered.")
 
 	-- no need to quit IINA since it autoquits
 	u.quitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
@@ -96,13 +99,4 @@ local function sleepMovieApps()
 			end if
 		end tell
 	]])
-end
-
-if u.isAtHome or u.isAtMother then
-	-- yes my sleep rhythm is abnormal
-	SleepTimer0 = hs.timer.doAt("02:00", "01h", sleepMovieApps, true):start()
-	SleepTimer1 = hs.timer.doAt("03:00", "01d", sleepMovieApps, true):start()
-	SleepTimer2 = hs.timer.doAt("04:00", "01d", sleepMovieApps, true):start()
-	SleepTimer3 = hs.timer.doAt("05:00", "01d", sleepMovieApps, true):start()
-	SleepTimer4 = hs.timer.doAt("06:00", "01d", sleepMovieApps, true):start()
-end
+end):start()
