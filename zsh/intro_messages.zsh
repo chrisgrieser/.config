@@ -1,25 +1,28 @@
 # shellcheck disable=SC2164,SC1009,SC1073,SC1056
 
-if ! command -v cowsay &>/dev/null; then echo "cowsay not installed." && return 1; fi
-if ! command -v fortune &>/dev/null; then echo "fortune not installed." && return 1; fi
-
 ## don't show the intro messages on terminals with lower height (e.g. embedded ones)
 [[ $(tput lines) -gt 20 ]] || return 0
 
+if ! command -v cowsay &>/dev/null; then echo "cowsay not installed." && return 1; fi
+if ! command -v fortune &>/dev/null; then echo "fortune not installed." && return 1; fi
+
 #───────────────────────────────────────────────────────────────────────────────
 
-# cow & fortune
-arr[1]=""   # standard
-arr[2]="-b" # Borg Mode
-arr[3]="-d" # dead
-arr[4]="-g" # greedy
-arr[5]="-p" # paranoia
-arr[6]="-s" # stoned
-arr[7]="-t" # tired
-arr[8]="-w" # wake/wired
-arr[9]="-y" # youthful
-rand=$((RANDOM % ${#arr[@]}))
-random_emotion=${arr[$rand]}
+# COW & FORTUNE
+mode=(
+	""   # standard
+	"-b" # Borg Mode
+	"-d" # dead
+	"-g" # greedy
+	"-p" # paranoia
+	"-s" # stoned
+	"-t" # tired
+	"-w" # wake/wired
+	"-y" # youthful
+)
+
+rand=$((RANDOM % ${#mode[@]}))
+random_emotion=${mode[$rand]}
 cow_maxwidth=70
 
 width=$(($(tput cols) - 10))
