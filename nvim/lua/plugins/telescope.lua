@@ -2,13 +2,12 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 local keymappings = {
-	-- INFO default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
+	-- default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
 	["<Esc>"] = "close",
 	["<PageDown>"] = "preview_scrolling_down",
 	["<PageUp>"] = "preview_scrolling_up",
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
-	-- INFO remapped from ^ via karabiner
 	["<D-s>"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<D-a>"] = "select_all",
 	["<Tab>"] = "move_selection_worse",
@@ -77,18 +76,15 @@ local function telescopeConfig()
 			},
 		},
 		pickers = {
-			git_status = { prompt_prefix = "󰊢 ", show_untracked = true },
+			git_status = {
+				prompt_prefix = "󰊢 ",
+				show_untracked = true,
+			},
 			git_commits = {
 				prompt_prefix = "󰊢 ",
 				initial_mode = "normal",
 				-- adding "--all" to see future commits as well
 				git_command = { "git", "log", "--all", "--pretty=oneline", "--abbrev-commit", "--", "." },
-			},
-			git_bcommits = {
-				prompt_prefix = "󰊢 ",
-				initial_mode = "normal",
-				-- adding "--all" to see future commits as well
-				git_command = { "git", "log", "--all", "--pretty=oneline", "--abbrev-commit" },
 			},
 			keymaps = {
 				prompt_prefix = " ",
@@ -99,22 +95,19 @@ local function telescopeConfig()
 				lhs_filter = function(lhs) return not lhs:find("Þ") end,
 			},
 			diagnostics = { prompt_prefix = "󰒕 ", no_sign = true },
-			treesitter = { prompt_prefix = " ", show_line = false },
+			treesitter = { prompt_prefix = " ", show_line = false },
 			oldfiles = { prompt_prefix = "󰋚 " },
 			highlights = { prompt_prefix = " " },
-			loclist = { prompt_prefix = " ", trim_text = true },
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
 			grep_string = { prompt_prefix = " ", disable_coordinates = true },
+			loclist = {
+				prompt_prefix = " ",
+				trim_text = true,
+				fname_width = 0,
+			},
 			command_history = {
 				prompt_prefix = "󰘳 ",
 				mappings = { i = { ["<D-CR>"] = "edit_command_line" } },
-			},
-			lsp_document_symbols = {
-				prompt_prefix = "󰒕 ",
-				-- markdown headings are symbol-type "string", therefore shouldn't
-				-- be ignored
-				ignore_symbols = { "boolean", "number" },
-				fname_width = 17,
 			},
 			lsp_workspace_symbols = {
 				prompt_prefix = "󰒕 ",
