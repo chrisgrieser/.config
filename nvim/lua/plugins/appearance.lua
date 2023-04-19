@@ -35,7 +35,6 @@ return {
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
 				bib = { icon = "", name = "BibTeX" },
 				http = { icon = "󰴚", name = "http" },
-				hjson = { icon = "", name = "hjson" }, -- used by `broot`
 				-- plugins
 				lazy = { icon = "", name = "Lazy" },
 				mason = { icon = "", name = "Mason" },

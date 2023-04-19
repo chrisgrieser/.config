@@ -212,6 +212,7 @@ rules:
               - "[Nn]eovide"
               - "Obsidian.app"
               - "Highlights.app"
+              - "Finder.app"
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
