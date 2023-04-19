@@ -19,10 +19,10 @@ MyTimers = {}
 
 ---Whether the current time is between startHour & endHour. Also works for
 ---ranges that go beyond midnight, e.g. 23 to 6.
----@param startHour number, time between 0 and 24, also accepts floats e.g. 13.5 for 13:30
+---@param startHour number, time between 0 and 24. also accepts floats e.g. 13.5 for 13:30
 ---@param endHour number, time between 0 and 24
 ---@nodiscard
----@return boolean|nil true/false for valid time ranges, nil for invalid time range
+---@return boolean|nil isInBetween nil for invalid time ranges (e.g., 2 to 66)
 function M.betweenTime(startHour, endHour)
 	if startHour >= 24 or endHour >= 24 or startHour < 0 or endHour < 0 then
 		print("⚠️ BetweenTime: Invalid time range")
@@ -30,11 +30,13 @@ function M.betweenTime(startHour, endHour)
 	end
 	local currentHour = hs.timer.localTime() / 60 / 60
 	local goesBeyondMightnight = startHour > endHour
+	local isInBetween
 	if goesBeyondMightnight then
-		return (currentHour > startHour) or (currentHour < endHour)
+		isInBetween = (currentHour > startHour) or (currentHour < endHour)
 	else
-		return (currentHour > startHour) and (currentHour < endHour)
+		isInBetween = (currentHour > startHour) and (currentHour < endHour)
 	end
+	return isInBetween
 end
 
 -- CAVEAT: won't work with Chromium browsers due to bug, but works for URI schemes
