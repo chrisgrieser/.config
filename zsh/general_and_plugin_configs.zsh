@@ -11,10 +11,6 @@ setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasti
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# Broot Shell function https://dystroy.org/broot/install-br/
-# (renamed `broot-shell` to avoid conflict with `br` for `brew reinstall`)
-eval "$(broot --print-shell-function zsh | sed -e 's/function br /function broot-shell /')"
-
 # you should use
 export YSU_IGNORED_ALIASES=("bi" "bu") # due to homebrew Alfred workflow
 export YSU_MESSAGE_POSITION="after"

@@ -82,10 +82,19 @@ function separator() {
 	echo "$SEP"
 }
 
-# smarter z/cd (alternative to https://blog.meain.io/2019/automatically-ls-after-cd/)
+# smarter z/cd
+# - no arg: broot only folders
+# - file: goto directory of file
+# - after entering new folder, inspect it (exa, git log, git status, etc.)
 function z() {
 	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
-	if [[ -f "$1" ]]; then # if a file, go to the file's directory instead of failing
+	if [[ -z "$1" ]]; then
+		if ! command -v broot &>/dev/null; then echo "broot not installed." && return 1; fi
+		# Broot Shell function https://dystroy.org/broot/install-br/
+		# (renamed `broot-shell` to avoid conflict with `br` for `brew reinstall`)
+		eval "$(broot --print-shell-function zsh | sed -e 's/function br /function broot-shell /')"
+		broot-shell --only-folders
+	elif [[ -f "$1" ]]; then
 		__zoxide_z "$(dirname "$1")"
 	else
 		__zoxide_z "$1"
@@ -100,7 +109,7 @@ function zi() {
 	inspect
 }
 
-# cd to last directory before quitting. Requires setup in `.zlogout`
+# cd to pwd from last session. Requires setup in `.zlogout`
 function ld() {
 	last_pwd_location="$DOTFILE_FOLDER/zsh/.last_pwd"
 	if [[ ! -f "$last_pwd_location" ]]; then
@@ -118,9 +127,7 @@ function eject() {
 		print "\033[1;33mNo volume connected.\033[0m"
 		return 1
 	fi
-
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
-
 	# if one volume, will auto-eject due to `-1`
 	selected=$(echo "$volumes" |
 		fzf -0 -1 \
@@ -128,31 +135,19 @@ function eject() {
 			--no-info \
 			--height=30%)
 	[[ -z "$selected" ]] && return 0 # fzf aborted
-
 	diskutil eject "$selected"
 }
 
 # copies [l]ast [c]ommand(s)
 function lc() {
-	num=${1-"1"} # default= 1 -> last command
+	num=${1-"1"} # default= 1 -> just last command
 	history | tail -n"$num" | cut -c8- | sed 's/"/\"/g' | sed "s/'/\'/g" | sed -E '/^$/d' | pbcopy
 	echo "Copied."
 }
 
-# save [l]ast [c]ommand(s) in [D]rafts
-function lcd() {
-	num=${1-"1"} # default: only one (1) last command
-	local timestamp
-	timestamp="$(date +%Y-%m-%d_%H-%M-%S)"
-	local drafts_inbox="$HOME/Library/Mobile Documents/iCloud~com~agiletortoise~Drafts5/Documents/Inbox/"
-	mkdir -p "$drafts_inbox"
-	history | tail -n"$num" | cut -c8- | sed -E '/^$/d' >"$drafts_inbox/$timestamp.md"
-	echo "Saved in Drafts."
-}
-
 # copies [r]esult of [l]ast command(s)
 function lr() {
-	num=${1-"1"} # default: 1 last command
+	num=${1-"1"} # default= 1 -> just last command
 	last_command=$(history | tail -n"$num" | cut -c 8-)
 	echo -n "$(eval "$last_command")" | pbcopy
 	echo "Copied."
