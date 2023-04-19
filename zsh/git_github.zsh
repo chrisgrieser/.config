@@ -69,8 +69,8 @@ function gitlog() {
 	local length
 	[[ -n "$1" ]] && length="-n $1"
 	# shellcheck disable=2086
-	git log $length --all --color --graph --pretty=format: \
-		'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
+	git log $length --all --color --graph \
+		--pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
 		sed -E 's/ minutes ago\)/min)/g' |
 		sed -E 's/ hours ago\)/h)/g' |
 		sed -E 's/ days ago\)/d)/g' |
