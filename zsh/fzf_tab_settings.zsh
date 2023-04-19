@@ -1,3 +1,7 @@
+# shellcheck disable=2016
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # https://github.com/Aloxaf/fzf-tab#configure
 # https://github.com/Aloxaf/fzf-tab/wiki/Configuration
 #───────────────────────────────────────────────────────────────────────────────
@@ -23,6 +27,13 @@ zstyle ':fzf-tab:*' show-group full
 
 # What to show when there is only one group
 zstyle ':fzf-tab:*' single-group color prefix
+
+
+#───────────────────────────────────────────────────────────────────────────────
+# MATCHING
+# case insensitive path-completion - https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
+# not needed with fzf-tab
+# zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -58,6 +69,7 @@ zstyle ':fzf-tab:*cd*' continuous-trigger 'space'
 zstyle ':fzf-tab:*' prefix ''
 
 # set list-colors to enable filename colorizing
+# shellcheck disable=2086,2296
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # color when no group
@@ -69,4 +81,5 @@ FZF_TAB_GROUP_COLORS=(
     $'\033[38;5;100m' $'\033[38;5;98m' $'\033[91m' $'\033[38;5;80m' $'\033[92m' \
     $'\033[38;5;214m' $'\033[38;5;165m' $'\033[38;5;124m' $'\033[38;5;120m'
 )
+# shellcheck disable=2086,2128
 zstyle ':fzf-tab:*' group-colors $FZF_TAB_GROUP_COLORS
