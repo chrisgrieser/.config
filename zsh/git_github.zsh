@@ -26,7 +26,7 @@ function gu() {
 
 # remove the lock file
 function unlock() {
-	rm "$(git rev-parse --git-dir)/index.lock"
+	rm -v "$(git rev-parse --git-dir)/index.lock"
 }
 
 # https://stackoverflow.com/a/17937889
