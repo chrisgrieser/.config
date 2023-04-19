@@ -35,7 +35,7 @@ function o() {
 # show files + git status + brief git log
 function inspect() {
 	# do not use on embedded terminals, since too small there
-	[[ "$TERM_PROGRAM" == "WezTerm" || "$TERM" == "alacritty" ]] || return 0
+	[[ $(tput lines) -gt 20 ]] || return 0
 
 	if ! command -v exa &>/dev/null; then echo "exa not installed." && return 1; fi
 	if ! command -v git &>/dev/null; then echo "git not installed." && return 1; fi

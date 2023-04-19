@@ -244,21 +244,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D608B123-0780-4E08-A9AD-4BBF4396F654</key>
-		<array/>
-		<key>DCECF168-40C8-45B0-B812-81138DF798D4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D608B123-0780-4E08-A9AD-4BBF4396F654</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>DE5C8EA8-DB35-4395-8823-AFB2B7E441A0</key>
 		<array>
 			<dict>
@@ -889,50 +874,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>vidir</string>
-				<key>subtext</key>
-				<string>Current Finder Window</string>
-				<key>text</key>
-				<string>📁 vidir</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>DCECF168-40C8-45B0-B812-81138DF798D4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>browse-finder-win-in-vidir.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D608B123-0780-4E08-A9AD-4BBF4396F654</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1209,7 +1150,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>660</real>
 		</dict>
 		<key>BF0AEAE4-89C0-4DFF-8F6D-4C1FE0DE091B</key>
 		<dict>
@@ -1238,7 +1179,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>410</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>660</real>
 		</dict>
 		<key>D04D747E-97EE-434F-A844-51FF56BF67F2</key>
 		<dict>
@@ -1258,15 +1199,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>50</real>
 		</dict>
-		<key>D608B123-0780-4E08-A9AD-4BBF4396F654</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>225</real>
-			<key>ypos</key>
-			<real>645</real>
-		</dict>
 		<key>DC23B294-25E4-4CEA-841A-71546D15BD89</key>
 		<dict>
 			<key>colorindex</key>
@@ -1275,15 +1207,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>850</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>DCECF168-40C8-45B0-B812-81138DF798D4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>645</real>
 		</dict>
 		<key>DE5C8EA8-DB35-4395-8823-AFB2B7E441A0</key>
 		<dict>
@@ -1310,7 +1233,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>660</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

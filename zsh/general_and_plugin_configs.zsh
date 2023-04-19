@@ -1,5 +1,6 @@
 # shellcheck disable=SC2190
 
+# sets English everywhere, so that programs behave predictably
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
@@ -9,6 +10,10 @@ setopt AUTO_CD              # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
 
 #───────────────────────────────────────────────────────────────────────────────
+
+# Broot Shell function https://dystroy.org/broot/install-br/
+# (renamed `broot-shell` to avoid conflict with `br` for `brew reinstall`)
+eval "$(broot --print-shell-function zsh | sed -e 's/function br /function broot-shell /')"
 
 # you should use
 export YSU_IGNORED_ALIASES=("bi" "bu") # due to homebrew Alfred workflow
