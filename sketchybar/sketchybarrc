@@ -61,10 +61,6 @@ sketchybar \
 	script="$PLUGIN_DIR/clock.sh" \
 	background.padding_left=5 \
 	\
-	--add item covid-stats $first_row \
-	--set covid-stats update_freq=43200 \
-	script="$PLUGIN_DIR/covid-stats.sh" \
-	\
 	--add item weather $first_row \
 	--set weather update_freq=1800 \
 	script="$PLUGIN_DIR/weather.sh" \
