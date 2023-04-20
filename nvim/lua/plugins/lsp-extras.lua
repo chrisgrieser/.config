@@ -4,7 +4,11 @@ local function glanceConfig()
 	local actions = require("glance").actions
 
 	require("glance").setup {
-		height = 23,
+		height = 25,
+		list = {
+			width = 0.35,
+			position = "left",
+		},
 		border = {
 			enable = true,
 			top_char = u.borderHorizontal,
@@ -13,10 +17,6 @@ local function glanceConfig()
 		preview_win_opts = {
 			number = false,
 			wrap = false,
-		},
-		list = {
-			width = 0.4,
-			position = "left",
 		},
 		folds = { folded = false },
 		mappings = {

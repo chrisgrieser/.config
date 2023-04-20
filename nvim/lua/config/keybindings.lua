@@ -667,12 +667,11 @@ keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk"
 keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
 
 -- Telescope
--- stylua: ignore
-keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = "󰊢 Status (Telescope)" })
-keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = "󰊢 Log (Telescope)" })
+-- stylua: ignore start
+keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = "󰊢  Status" })
+keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = "󰊢  Log / Commits" })
 
 -- My utils
--- stylua: ignore start
 keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
 keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
 keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch("open") end, { desc = "󰊢 Open Issues" })
