@@ -115,7 +115,7 @@ rules:
       # Highlights: Free Comment (held down: red underline)
       - type: basic
         from: { pointing_button: button4 }
-        to:
+        to_if_alone:
           - { key_code: "n", modifiers: [control, command] }
           - { key_code: "3", modifiers: [control, command] }
           - shell_command: 'osascript -e ''display notification "Tool" with title "Comment ✏️ "'''
