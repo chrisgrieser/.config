@@ -37,18 +37,17 @@ const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]
 //──────────────────────────────────────────────────────────────────────────────
 
 function run(argv) {
-	const query = argv[0] ? argv[0].trim() : "";
+	const query = "";
 	const sidenotes = Application("SideNotes");
 
-	const ignoredTitle = $.getenv("ignored_title");
+	const ignoredFolder = $.getenv("ignored_folder");
 	const currentFolder = sidenotes.currentFolder().name();
+	if (!currentFolder) return; // = folder selection menu
 
 	const results = sidenotes
 		.searchNotes(query)
-		.filter(item => item.title !== ignoredTitle)
 		.map(item => {
 			const temp = getNoteObjAndFolder(item.identifier);
-			if (!temp) return false;
 			const foldername = temp.folder;
 			const noteObj = temp.noteObj;
 			const content = noteObj.text();
@@ -91,8 +90,10 @@ function run(argv) {
 						valid: Boolean(urls),
 					},
 				},
+				folder: foldername, // only set to filter afterwards
 			};
-		});
+		})
+		.filter(item => item.folder !== ignoredFolder);
 
 	// new note when no match found
 	if (results.length === 0) {

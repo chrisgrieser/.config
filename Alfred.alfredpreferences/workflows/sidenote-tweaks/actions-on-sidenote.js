@@ -11,6 +11,11 @@ function writeToFile(file, text) {
 
 const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
+const export_folder = $.getenv("envVar").replace(/^~/, app.pathTo("home folder"));
+let beee = 424242 + 22    3;
+
+//──────────────────────────────────────────────────────────────────────────────
+
 // HACK since notes are not directly accessible via their id, but only from
 // inside a folder: `Application("SideNotes").folders.byId("35BE5A12-DAF4-44FD-AF7D-2689CBB14BF3").notes.byId("0776263A-77FA-41EF-808E-6266C77DBDF9")`
 // `Application("SideNotes").currentNote()` retrieves a note that way. This
@@ -40,6 +45,7 @@ function run(argv) {
 	let doDelete = argv[0].includes("delete");
 	const doOpenUrl = argv[0].includes("openurl");
 	const doCopy = argv[0].includes("copy");
+	const doExport = argv[0].includes("export");
 
 	// determine note
 	const id = $.getenv("note_id");
@@ -73,14 +79,16 @@ function run(argv) {
 	}
 
 	// copy to clipboard
-	if (doCopy) {
-		app.setTheClipboardTo(content);
-		// apparently there is JXA API for it, therefore done via keystrokes since it
-		// is ensured that SideNotes is the most frontmost app
-		if (id === "current") {
-			delay(0.05); /* eslint-disable-line no-magic-numbers */
-			Application("System Events").keystroke("w", { using: ["command down"] });
-		}
+	if (doCopy) app.setTheClipboardTo(content);
+
+	if (doExport) {
+	}
+
+	if ((doCopy || doExport) && id === "current") {
+		// apparently there is no JXA API for it, therefore done via keystrokes
+		// since it is ensured that SideNotes is the most frontmost app
+		delay(0.05); /* eslint-disable-line no-magic-numbers */
+		Application("System Events").keystroke("w", { using: ["command down"] });
 	}
 
 	// returns are used for the notification
