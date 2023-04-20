@@ -19,6 +19,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>0D892222-53BF-48BA-BE59-AFBF81353E3B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>771DD115-1E19-4CFC-AB74-649F9A758391</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<array>
 			<dict>
@@ -681,7 +694,7 @@ sketchybar --trigger update-sidenotes-count</string>
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>copy delete close</string>
+				<string>copy delete</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -707,6 +720,43 @@ sketchybar --trigger update-sidenotes-count</string>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>E8BC01C9-80ED-4B16-BC6E-03702A985178</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>export delete</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>14</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>E</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apptorium.SideNotes-paddle</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>0D892222-53BF-48BA-BE59-AFBF81353E3B</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -829,7 +879,7 @@ sketchybar --trigger update-sidenotes-count</string>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -845,7 +895,7 @@ sketchybar --trigger update-sidenotes-count</string>
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
@@ -861,7 +911,7 @@ sketchybar --trigger update-sidenotes-count</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -1219,18 +1269,29 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>280</real>
+			<real>285</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>965</real>
+		</dict>
+		<key>0D892222-53BF-48BA-BE59-AFBF81353E3B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>export + delete current</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>625</real>
 		</dict>
 		<key>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>790</real>
+			<real>795</real>
 			<key>ypos</key>
-			<real>1130</real>
+			<real>1305</real>
 		</dict>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<dict>
@@ -1239,18 +1300,18 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>search side notes</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>965</real>
 		</dict>
 		<key>1EA57E38-BF7C-4655-8934-79F1FE5152B0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>1115</real>
+			<real>1290</real>
 		</dict>
 		<key>26E98B85-F67B-478C-AB5E-20DAB43553A7</key>
 		<dict>
@@ -1259,9 +1320,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>create new note from selection</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1095</real>
+			<real>1270</real>
 		</dict>
 		<key>2A299055-454F-491C-9538-B40EEB9C1ED4</key>
 		<dict>
@@ -1270,27 +1331,27 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>pass "openurl close"</string>
 			<key>xpos</key>
-			<real>315</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>780</real>
 		</dict>
 		<key>2F608401-E6A9-4090-8926-6E709640B31D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1500</real>
+			<real>1675</real>
 		</dict>
 		<key>2FE4C0FD-B052-4444-9957-22B0EBCAED50</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>450</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>930</real>
+			<real>1105</real>
 		</dict>
 		<key>660ACE51-61E1-4231-AB1E-78745ADC2616</key>
 		<dict>
@@ -1306,9 +1367,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>280</real>
+			<real>285</real>
 			<key>ypos</key>
-			<real>1045</real>
+			<real>1220</real>
 		</dict>
 		<key>771DD115-1E19-4CFC-AB74-649F9A758391</key>
 		<dict>
@@ -1335,18 +1396,18 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>1500</real>
+			<real>1675</real>
 		</dict>
 		<key>84334C9A-E9AA-461E-B13E-8B77248006FA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>810</real>
 		</dict>
 		<key>8490AB75-2159-4B22-BD85-E5DCFF9E1E91</key>
 		<dict>
@@ -1364,9 +1425,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1240</real>
+			<real>1415</real>
 		</dict>
 		<key>8A20019D-C824-4ACB-8917-F7347E7CEFD9</key>
 		<dict>
@@ -1441,36 +1502,36 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>pass "delete"</string>
 			<key>xpos</key>
-			<real>315</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>880</real>
 		</dict>
 		<key>D3F89D51-C7EA-4A95-8477-B40256917808</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>450</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>965</real>
 		</dict>
 		<key>DB7EDFF2-EF29-4EDB-9ED7-368149133A05</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>275</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>960</real>
+			<real>1135</real>
 		</dict>
 		<key>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1370</real>
+			<real>1545</real>
 		</dict>
 		<key>E1952981-5610-42C6-967C-9728E176B587</key>
 		<dict>
@@ -1479,9 +1540,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>get Browser URL</string>
 			<key>xpos</key>
-			<real>185</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>1240</real>
+			<real>1415</real>
 		</dict>
 		<key>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</key>
 		<dict>
@@ -1512,9 +1573,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>create new sidenote (and close)</string>
 			<key>xpos</key>
-			<real>555</real>
+			<real>560</real>
 			<key>ypos</key>
-			<real>1130</real>
+			<real>1305</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1523,7 +1584,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>Einkaufsliste</string>
+				<string>Shopping</string>
 				<key>placeholder</key>
 				<string>shopping list</string>
 				<key>required</key>
@@ -1532,13 +1593,34 @@ sketchybar --trigger update-sidenotes-count</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>title of a note to ignore in search, e.g. a shopping list</string>
+			<string>folder to ignore in search, e.g. a shopping lists</string>
 			<key>label</key>
-			<string>ignore note in search</string>
+			<string>ignore folder in search</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>ignored_title</string>
+			<string>ignored_folder</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/</string>
+				<key>placeholder</key>
+				<string>~/Desktop</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>destination for exports</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>export_folder</string>
 		</dict>
 	</array>
 	<key>version</key>
