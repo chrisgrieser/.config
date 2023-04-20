@@ -82,7 +82,7 @@ return {
 				scrolloff = 1,
 				-- navbuddy at the bottom
 				position = { row = "100%", col = "50%" },
-				size = { height = "30%", width = "100%" },
+				size = { height = "40%", width = "100%" },
 				sections = {
 					left = { size = "30%" },
 					mid = { size = "40%" },

@@ -47,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>54CDB333-A1B6-4990-AF4C-4A48BA06D092</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>698B1D06-326B-43D2-8ABB-DE676CE3661A</key>
 		<array>
 			<dict>
@@ -101,6 +114,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -488,7 +514,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>call-pandoc.sh</string>
+				<string>pandoc-md2docx.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -510,7 +536,7 @@
 					<string>net.daringfireball.markdown</string>
 				</array>
 				<key>name</key>
-				<string>Convert with Pandoc</string>
+				<string>Pandoc: md → docx</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.action</string>
@@ -518,6 +544,49 @@
 			<string>4D63817E-E093-44ED-99F7-2762E817BB90</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>dyn.ah62d4rv4ge8043a</string>
+					<string>net.daringfireball.markdown</string>
+				</array>
+				<key>name</key>
+				<string>Pandoc: md → pdf</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>54CDB333-A1B6-4990-AF4C-4A48BA06D092</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>pandoc-md2pdf.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -557,6 +626,8 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>4</integer>
+			<key>note</key>
+			<string>to docx</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -570,6 +641,17 @@
 			<real>195</real>
 			<key>ypos</key>
 			<real>485</real>
+		</dict>
+		<key>54CDB333-A1B6-4990-AF4C-4A48BA06D092</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>note</key>
+			<string>to pdf</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>615</real>
 		</dict>
 		<key>698B1D06-326B-43D2-8ABB-DE676CE3661A</key>
 		<dict>
@@ -619,6 +701,15 @@
 			<real>650</real>
 			<key>ypos</key>
 			<real>35</real>
+		</dict>
+		<key>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>615</real>
 		</dict>
 		<key>B42ED178-4437-4D4D-BEF0-63B085EF7730</key>
 		<dict>
