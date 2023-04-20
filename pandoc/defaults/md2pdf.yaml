@@ -10,12 +10,13 @@ pdf-engine: wkhtmltopdf
 dpi: 96 # default: 96
 
 # html options https://pandoc.org/MANUAL.html#variables-for-html
-marginTop: 25
-marginRight: 25
-marginBottom: 25
-marginLeft: 25
-pageSize: A4
-fontsize: 16px
+# require template though
+# marginTop: 25
+# marginRight: 25
+# marginBottom: 25
+# marginLeft: 25
+# pageSize: A4
+# fontsize: 16px
 
 # General
 verbosity: INFO

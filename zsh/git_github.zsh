@@ -340,6 +340,7 @@ function gdf() {
 	else
 		print "🔍\033[1;32m Selected file:"
 	fi
+	echo "Last Commit: $last_commit"
 
 	# decision on how to act on file
 	echo "$deleted_path"
@@ -348,7 +349,6 @@ function gdf() {
 	echo "[r]estore file (checkout)"
 	echo "[s]how file (bat)"
 	echo "[c]opy content"
-	echo "[h]ash of last commit with the file"
 	print "\-------------------------------------\033[0m"
 	echo -n "> "
 	read -r -k 1 DECISION
@@ -358,9 +358,6 @@ function gdf() {
 	if [[ "$DECISION:l" == "c" ]]; then
 		git show "$last_commit:$deleted_path" | pbcopy
 		echo "Content copied."
-	elif [[ "$DECISION:l" == "h" ]]; then
-		echo "$last_commit" | pbcopy
-		echo "Hash \"$last_commit\" copied."
 	elif [[ "$DECISION:l" == "r" ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
 		echo "File restored."
