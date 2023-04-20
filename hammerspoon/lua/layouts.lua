@@ -1,5 +1,4 @@
 local darkmode = require("lua.dark-mode")
-local twitter = require("lua.twitter")
 local sidenotes = require("lua.sidenotes")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
@@ -67,7 +66,7 @@ local function workLayout()
 	u.openApps("Twitter")
 	u.asSoonAsAppRuns("Twitter", function()
 		wu.twitterToTheSide()
-		twitter.scrollUp()
+		wu.twitterScrollUp()
 	end)
 
 	-- open

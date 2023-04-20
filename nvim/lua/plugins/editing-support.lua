@@ -51,23 +51,14 @@ return {
 	},
 	{ -- better marks
 		"tomasky/bookmarks.nvim",
-		lazy = true, -- loaded by keymaps
+		event = "VeryLazy", -- cannot be loaded on keymaps due to the bookmark signs
 		opts = {
 			save_file = u.vimDataDir .. "/bookmarks",
-			keywords = {
-
-			},
+			signs = {
+				add = { text = "" }
+			}
 		},
 	},
-	-- { -- better marks
-	-- 	"MattesGroeger/vim-bookmarks",
-	-- 	cmd = { "BookmarkToggle", "BookmarkNext", "BookmarkPrev", "BookmarkClear", "BookmarkShowAll" },
-	-- 	init = function()
-	-- 		vim.g.bookmark_no_default_key_mappings = 1
-	-- 		vim.g.bookmark_sign = ""
-	-- 		vim.g.bookmark_auto_save_file = u.vimDataDir .. "/bookmarks"
-	-- 	end,
-	-- },
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
 		lazy = true, -- loaded by keymaps
