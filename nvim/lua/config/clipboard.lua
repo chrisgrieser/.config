@@ -33,7 +33,7 @@ keymap(
 --------------------------------------------------------------------------------
 
 -- paste charwise reg as linewise & vice versa
-keymap("n", "gp", function()
+keymap("n", "zp", function()
 	local reg = "+"
 	local regContent = fn.getreg(reg)
 	local isLinewise = fn.getregtype(reg) == "V"

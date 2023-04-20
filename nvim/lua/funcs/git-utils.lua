@@ -51,7 +51,8 @@ local gitShellOpts = {
 
 		-- confirmation sound
 		-- stylua: ignore
-		fn.system( "afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
+		fn.system( "afplay '/System/Library/Sounds/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
+		fn.system( "afplay '/System/Library/Sounds/Library.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
 
 		output = {} -- empty for next run
 	end,
