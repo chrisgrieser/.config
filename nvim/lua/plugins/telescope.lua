@@ -51,16 +51,6 @@ local function telescopeConfig()
 				i = keymappings,
 				n = keymappings,
 			},
-			vimgrep_arguments = {
-				"rg",
-				"--color=never",
-				"--no-heading",
-				"--with-filename",
-				"--line-number",
-				"--column",
-				"--smart-case",
-				"--trim", -- this added to trim results
-			},
 			layout_strategy = "horizontal",
 			layout_config = {
 				horizontal = {
