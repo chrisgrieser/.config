@@ -32,6 +32,7 @@ __Lingo__
 
 
 ## Extensions
+
 ```bash
 # list default extensions for a file format
 # (+: enabled, -: disabled)
