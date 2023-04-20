@@ -11,7 +11,7 @@ M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 if u.isAtMother then
 	M.toTheSide = hs.geometry.rect(-70, 54, 380, 890)
 elseif u.isAtOffice then
-	M.toTheSide = hs.geometry.rect(-75, 54, 450, 1200)
+	M.toTheSide = hs.geometry.rect(-75, 54, 450, 1100)
 else
 	M.toTheSide = hs.geometry.rect(-70, 54, 425, 1026) -- negative x to hide useless sidebar
 end
