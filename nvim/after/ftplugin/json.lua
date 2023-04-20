@@ -22,10 +22,10 @@ end
 keymap("n", "<localleader>q", function ()
 	u.normal("'[v']") -- select last paste
 	u.leaveVisualMode() -- -> sects '<,'> marks
-	cmd[['<,'>s/\\/\\\\/g]] -- escape the escaping backslashes
-	cmd[['<,'>s/"/\\"/g]] -- escape the double quotes
-	cmd[['<,'>s/\$/\\\\$/g]] -- escape the $ signs
-	cmd[['<,'>s/^\(\s*\)\(.*\)/\1"\2",/]] -- surround non-whitespace with quotes and comma
-	cmd[['>s/,$//]] -- remove trailing comma at last line
+	cmd[['<,'>s/\\/\\\\/ge]] -- escape the escaping backslashes
+	cmd[['<,'>s/"/\\"/ge]] -- escape the double quotes
+	-- cmd[['<,'>s/\$/\\\\$/ge]] -- escape the $ signs
+	cmd[['<,'>s/^\(\s*\)\(.*\)/\1"\2",/e]] -- surround non-whitespace with quotes and comma
+	cmd[['>s/,$//e]] -- remove trailing comma at last line
 	u.normal("gv=") -- auto-indent everything
 end, { desc = "JSON: Escape for VS Code Snippet", buffer = true })
