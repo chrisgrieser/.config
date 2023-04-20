@@ -8,12 +8,6 @@ local u = require("config.utils")
 ---@nodiscard
 ---@return string|nil the value, or nil if hlgroup or key is not available
 local function getHighlightValue(name, key)
-	if key == "bg" then
-		key = "background"
-	elseif key == "fg" then
-		key = "foreground"
-	end
-
 	local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name })
 	if not ok then return end
 	local value = hl[key]
