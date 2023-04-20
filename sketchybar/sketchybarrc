@@ -7,9 +7,12 @@
 i=0
 while ! pgrep "Stats"; do
 	open -a "Stats"
-	sleep 2
+	sleep 3
 	i=$((i + 1))
-	[[ $i -gt 10 ]] && return 1
+	if [[ $i -gt 20 ]] ; then
+		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats not running"'
+		return 1
+	fi
 done
 
 # REQUIRED Stats being set as one combined module

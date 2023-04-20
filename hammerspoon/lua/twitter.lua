@@ -4,7 +4,6 @@ local u = require("lua.utils")
 local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 
-
 -- ensure that twitter does not get focus, "falling through" to the next window
 local function twitterFallThrough()
 	if not u.isFront("Twitter") then return end

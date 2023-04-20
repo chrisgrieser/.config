@@ -20,7 +20,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>335056B8-CF17-4C0A-AC12-6F8AD5A5D685</string>
+				<string>A2EAECE1-704A-4ED1-AA7B-540C6CF7180B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -65,11 +65,89 @@
 				<false/>
 			</dict>
 		</array>
+		<key>22B968D5-63B6-4B37-A640-00613A9D4D1C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>65E1B004-A584-4533-8D40-D1980841CCEF</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B4B12447-191E-46B8-88E0-B6C12E7086A6</string>
+				<string>CBE953E6-1671-4004-B196-F2811F5075A9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9375BAAE-6771-40FC-9629-E1217F6566F6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9F779266-3F18-4010-AAE4-F87E6752D956</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9375BAAE-6771-40FC-9629-E1217F6566F6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A2EAECE1-704A-4ED1-AA7B-540C6CF7180B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CBE953E6-1671-4004-B196-F2811F5075A9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E7A73C98-CE10-4B15-A021-493A3947456A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>22B968D5-63B6-4B37-A640-00613A9D4D1C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -250,35 +328,6 @@ sketchybar --update</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-brew services restart sketchybar
-
-# HACK for https://github.com/FelixKratz/SketchyBar/issues/322
-sleep 2
-osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>335056B8-CF17-4C0A-AC12-6F8AD5A5D685</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -294,6 +343,23 @@ osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>0EB9ED7D-4AE6-43BF-A788-F34C046B3732</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>sketchybar</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>A2EAECE1-704A-4ED1-AA7B-540C6CF7180B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -321,31 +387,118 @@ osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>svim</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>CBE953E6-1671-4004-B196-F2811F5075A9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-brew services restart svim
-
-# HACK for https://github.com/FelixKratz/SketchyBar/issues/322
-sleep 2
-osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>restart-app.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>B4B12447-191E-46B8-88E0-B6C12E7086A6</string>
+			<string>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alttab</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗Restart AltTab</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>9F779266-3F18-4010-AAE4-F87E6752D956</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>AltTab</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>9375BAAE-6771-40FC-9629-E1217F6566F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>rocket</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗Restart Rocket</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E7A73C98-CE10-4B15-A021-493A3947456A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>Rocket</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>22B968D5-63B6-4B37-A640-00613A9D4D1C</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -356,19 +509,17 @@ osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
-			<key>note</key>
-			<string>restart</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>390</real>
 		</dict>
 		<key>15B1A722-85AB-4042-B9F7-B755D027674F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>load</string>
+			<string>save or load dock layout</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -383,25 +534,23 @@ osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>335056B8-CF17-4C0A-AC12-6F8AD5A5D685</key>
+		<key>22B968D5-63B6-4B37-A640-00613A9D4D1C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>750</real>
 		</dict>
 		<key>65E1B004-A584-4533-8D40-D1980841CCEF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
-			<key>note</key>
-			<string>restart</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>500</real>
 		</dict>
 		<key>71149DFC-88DE-4E74-9FDA-F9336F759485</key>
 		<dict>
@@ -412,23 +561,72 @@ osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js
 			<key>ypos</key>
 			<real>70</real>
 		</dict>
+		<key>9375BAAE-6771-40FC-9629-E1217F6566F6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>640</real>
+		</dict>
 		<key>986C033D-6BCE-4098-9098-F4A46BF1703B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>reload</string>
 			<key>xpos</key>
-			<real>220</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>275</real>
 		</dict>
-		<key>B4B12447-191E-46B8-88E0-B6C12E7086A6</key>
+		<key>9F779266-3F18-4010-AAE4-F87E6752D956</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>610</real>
+		</dict>
+		<key>A2EAECE1-704A-4ED1-AA7B-540C6CF7180B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>420</real>
+		</dict>
+		<key>CBE953E6-1671-4004-B196-F2811F5075A9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>530</real>
+		</dict>
+		<key>E7A73C98-CE10-4B15-A021-493A3947456A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>720</real>
+		</dict>
+		<key>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>restart</string>
+			<key>xpos</key>
+			<real>350</real>
+			<key>ypos</key>
+			<real>535</real>
 		</dict>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<dict>
@@ -437,7 +635,7 @@ osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>135</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
