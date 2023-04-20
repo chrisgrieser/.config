@@ -86,6 +86,24 @@ end
 
 --------------------------------------------------------------------------------
 -- TWITTER
+local function twitterScrollUp()
+	-- after quitting, it takes a few seconds until Twitter is fully quit,
+	-- therefore also checking for the main window existence
+	-- when browsing twitter itself, to not change tabs
+	local twitter = u.app("Twitter")
+	if not twitter or not twitter:mainWindow() then return end
+
+	u.keystroke({ "cmd" }, "left", 1, twitter) -- go back
+	u.keystroke({ "cmd" }, "1", 1, twitter) -- go to home tab
+	u.keystroke({ "shift", "cmd" }, "R", 1, twitter) -- reload
+
+	-- needs delays to wait for tweets loading
+	u.runWithDelays({ 0.5, 1.5 }, function()
+		if twitter:isFrontmost() then return end
+		u.keystroke({ "cmd" }, "1", 1, twitter) -- scroll up
+		u.keystroke({ "cmd" }, "up", 1, twitter) -- goto top
+	end)
+end
 
 function M.twitterToTheSide()
 	-- in case of active split, prevent left window of covering the sketchybar
@@ -350,11 +368,15 @@ local function moveAllWinsToProjectorScreen()
 end
 
 local function homeAction()
-	if #(hs.screen.allScreens()) > 1 then
+	if u.appRunning("Twitter") then
+		twitterScrollUp()
+	elseif #(hs.screen.allScreens()) > 1 then
 		moveCurWinToOtherDisplay()
 	elseif u.appRunning("zoom.us") then
 		hs.alert("🔈/🔇") -- toggle mute
 		u.keystroke({ "shift", "command" }, "A", 1, u.app("zoom.us"))
+	else
+		hs.alert("<Nop>")
 	end
 end
 
