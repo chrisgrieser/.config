@@ -19,10 +19,13 @@ OpenSwimWatcher = hs.usb.watcher
 	end)
 	:start()
 
--- External Harddrive used for backups
+-- notify when new USB device is plugged in
+-- if backup device: open terminal
+-- otherwise: open volume
 ExternalHarddriveWatcher = hs.usb.watcher
 	.new(function(device)
 		if not (device.eventType == "added") then return end
+		if device.productName == "Integrated RGB Camera" then return end -- spammy connection
 		u.notify("Mounted: " .. device.productName)
 
 		local harddriveNames = {
@@ -34,7 +37,7 @@ ExternalHarddriveWatcher = hs.usb.watcher
 
 		if isBackupDrive then
 			u.app("WerTerm"):activate()
-		else
+		else -- open volume
 			u.runWithDelays(1, function()
 				local stdout, success =
 					hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])

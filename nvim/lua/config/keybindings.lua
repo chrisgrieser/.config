@@ -547,7 +547,8 @@ keymap( "n", "gO", function() require("telescope").extensions.file_browser.file_
 } end, { desc = " Browse in current Folder" })
 
 -- stylua: ignore
-keymap("n", "gP", function() require("telescope").extensions.projects.projects { } end, { desc = " Projects" })
+-- goto projects
+keymap("n", "gp", function() require("telescope").extensions.projects.projects { } end, { desc = " Projects" })
 
 -- stylua: ignore
 keymap("n", "gl", function() require("telescope.builtin").live_grep {

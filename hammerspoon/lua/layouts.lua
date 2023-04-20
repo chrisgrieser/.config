@@ -138,16 +138,16 @@ local unlockInProgress = false
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
 	if unlockInProgress or not (event == c.systemDidWake or event == c.screensDidWake) then return end
+	unlockInProgress = true -- block multiple concurrent runs
 	print("🔓 System/Screen did wake.")
 
 	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
-		unlockInProgress = true -- block multiple concurrent runs
 		u.runWithDelays(0.5, function() -- delay for recognizing screens
 			setHigherBrightnessDuringDay()
 			selectLayout()
 			sidenotes.reminderToSidenotes()
 		end)
-		u.runWithDelays(5, function() unlockInProgress = false end)
+		u.runWithDelays(4, function() unlockInProgress = false end)
 	end, 0.2)
 	-- deactivate the timer in the screen is woken but not unlocked
 	u.runWithDelays(20, function()
