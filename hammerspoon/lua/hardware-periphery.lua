@@ -25,15 +25,21 @@ OpenSwimWatcher = hs.usb.watcher
 ExternalHarddriveWatcher = hs.usb.watcher
 	.new(function(device)
 		if not (device.eventType == "added") then return end
-		if device.productName == "Integrated RGB Camera" then return end -- spammy connection
-		u.notify("Mounted: " .. device.productName)
+		local name = device.productName
+
+		-- Docking Station in office does spammy reports
+		if name == "Integrated RGB Camera" or name == "USB 10/100/1000 LAN" or name == "T27hv-20" then
+			return
+		end
+
+		u.notify("Mounted: " .. name)
 
 		local harddriveNames = {
 			"ZY603 USB3.0 Device", -- Externe A
 			"External Disk 3.0", -- Externe B
 			"Elements 2621", -- Externe C
 		}
-		local isBackupDrive = u.tbl_contains(harddriveNames, device.productName)
+		local isBackupDrive = u.tbl_contains(harddriveNames, name)
 
 		if isBackupDrive then
 			u.app("WerTerm"):activate()
