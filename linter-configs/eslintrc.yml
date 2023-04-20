@@ -92,7 +92,7 @@ rules:
     - warn
     - all
     - nestedBinaryExpressions: false
-    - returnAssign: false
+      returnAssign: false
 
   # Loops
   no-unmodified-loop-condition: warn
