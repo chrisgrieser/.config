@@ -29,7 +29,7 @@ M.rejectedFinderWins = {
 	"^Alfred$", -- Alfred Compatibility Mode
 }
 
-M.sideNotesWide = { x = 0, y = 0, w = 0.35, h = 1 }
+M.sideNotesWide = { x = 0, y = 0, w = 0.4, h = 1 }
 
 --------------------------------------------------------------------------------
 -- OBSIDIAN SIDEBAR
