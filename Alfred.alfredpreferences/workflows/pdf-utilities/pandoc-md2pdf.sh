@@ -4,7 +4,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 function md2pdf () {
 	cd "$(dirname "$1")" || return 1
 	INPUT_FILE="$(basename "$*")"
-	OUTPUT_FILE="${INPUT_FILE%.*}_CG.docx"
+	OUTPUT_FILE="${INPUT_FILE%.*}_CG.pdf"
 
 	pandoc \
 		"$INPUT_FILE" \

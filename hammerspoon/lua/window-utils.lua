@@ -218,7 +218,6 @@ local autoTilingInProgress = false
 function M.autoTile(winSrc)
 	-- prevent concurrent runs
 	if autoTilingInProgress then return end
-	autoTilingInProgress = true
 
 	local wins = {}
 	if type(winSrc) == "string" then
@@ -236,6 +235,8 @@ function M.autoTile(winSrc)
 	else
 		wins = winSrc:getWindows()
 	end
+
+	autoTilingInProgress = true
 
 	if #wins > 1 then M.bringAllWinsToFront() end
 
