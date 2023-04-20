@@ -50,14 +50,24 @@ return {
 		},
 	},
 	{ -- better marks
-		"MattesGroeger/vim-bookmarks",
-		cmd = { "BookmarkToggle", "BookmarkNext", "BookmarkPrev", "BookmarkClear", "BookmarkShowAll" },
-		init = function()
-			vim.g.bookmark_no_default_key_mappings = 1
-			vim.g.bookmark_sign = ""
-			vim.g.bookmark_auto_save_file = u.vimDataDir .. "/bookmarks"
-		end,
+		"tomasky/bookmarks.nvim",
+		lazy = true, -- loaded by keymaps
+		opts = {
+			save_file = u.vimDataDir .. "/bookmarks",
+			keywords = {
+
+			},
+		},
 	},
+	-- { -- better marks
+	-- 	"MattesGroeger/vim-bookmarks",
+	-- 	cmd = { "BookmarkToggle", "BookmarkNext", "BookmarkPrev", "BookmarkClear", "BookmarkShowAll" },
+	-- 	init = function()
+	-- 		vim.g.bookmark_no_default_key_mappings = 1
+	-- 		vim.g.bookmark_sign = ""
+	-- 		vim.g.bookmark_auto_save_file = u.vimDataDir .. "/bookmarks"
+	-- 	end,
+	-- },
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
 		lazy = true, -- loaded by keymaps
