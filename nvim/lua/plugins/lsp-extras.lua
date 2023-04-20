@@ -10,7 +10,10 @@ local function glanceConfig()
 			top_char = u.borderHorizontal,
 			bottom_char = u.borderHorizontal,
 		},
-		preview_win_opts = { number = false },
+		preview_win_opts = {
+			number = false,
+			wrap = false,
+		},
 		list = {
 			width = 0.4,
 			position = "left",
