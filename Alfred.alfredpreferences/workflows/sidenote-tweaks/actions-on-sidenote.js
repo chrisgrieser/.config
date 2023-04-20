@@ -10,9 +10,8 @@ function writeToFile(file, text) {
 }
 
 const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
-
-const export_folder = $.getenv("envVar").replace(/^~/, app.pathTo("home folder"));
-let beee = 424242 + 22    3;
+const exportFolder = $.getenv("export_folder").replace(/^~/, app.pathTo("home folder"));
+const maxNameLen = 50;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -38,6 +37,7 @@ function getNoteObj(noteId) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/* eslint-disable-next-line complexity */
 function run(argv) {
 	const sidenotes = Application("SideNotes");
 
@@ -55,6 +55,8 @@ function run(argv) {
 	const content = noteObj.text(); // full content
 	const details = noteObj.content(); // content without title
 	const title = noteObj.title().trim();
+	let safeTitle = title.replace(/[/\\:;,"'#()[\]=<>{}?!|§]|\.$/gm, "-");
+	if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
 
 	// open URL (& close sidenotes)
 	if (doOpenUrl) {
@@ -70,10 +72,7 @@ function run(argv) {
 
 	// Delete Note, but keep copy in trash instead of irreversibly removing it
 	if (doDelete) {
-		const maxNameLen = 50;
-		let safeTitle = title.replace(/[/\\:;,"'#()[\]=<>{}?!|§]|\.$/gm, "-");
-		if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
-		const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.txt`;
+		const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.md`;
 		writeToFile(trashNotePath, content);
 		noteObj.delete();
 	}
@@ -82,9 +81,12 @@ function run(argv) {
 	if (doCopy) app.setTheClipboardTo(content);
 
 	if (doExport) {
+		const exportPath = `${exportFolder}/${safeTitle}.md`;
+		writeToFile(exportPath, content);
+		app.doShellScript(`open -R "${exportPath}"`);
 	}
 
-	if ((doCopy || doExport) && id === "current") {
+	if (doCopy && id === "current") {
 		// apparently there is no JXA API for it, therefore done via keystrokes
 		// since it is ensured that SideNotes is the most frontmost app
 		delay(0.05); /* eslint-disable-line no-magic-numbers */
@@ -95,6 +97,7 @@ function run(argv) {
 	if (doDelete && doOpenUrl) return "🔗 Opened & Deleted";
 	else if (doCopy && doDelete) return "✅ Copied & Deleted";
 	else if (doCopy) return "✅ Copied";
+	else if (doExport) return "✅ Exported";
 	else if (doDelete) return "🗑 Note Deleted";
 	return "";
 }
