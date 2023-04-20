@@ -2,6 +2,7 @@ local cmd = vim.cmd
 local fn = vim.fn
 local keymap = vim.keymap.set
 local u = require("config.utils")
+local bo = vim.bo
 
 --------------------------------------------------------------------------------
 -- PAUSE FOLDS WHEN SEARCHING
@@ -31,8 +32,13 @@ end, vim.api.nvim_create_namespace("auto_pause_folds"))
 --------------------------------------------------------------------------------
 -- MACRO FOLD COMMANDS
 
--- UFO REPLACEMENTS OF FOLD COMMANDS
+-- toggle all toplevel folds, but not the
+keymap("n", "zz", function()
+	cmd("%foldclose") -- close toplevel folds
+	pcall(u.normal, "zo") -- open fold under cursor
+end, { desc = "󰘖 Close toplevel folds" })
 
+-- UFO REPLACEMENTS OF FOLD COMMANDS
 -- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
 -- auto-closing them after leaving insert mode, however ufo does not seem to
 -- have equivalents for zr and zm because there is no saved fold level.
@@ -55,12 +61,6 @@ for _, lvl in pairs { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } do
 		{ desc = desc }
 	)
 end
-
--- toggle all toplevel folds, but not the
-keymap("n", "zz", function()
-	cmd("%foldclose") -- close toplevel folds
-	pcall(u.normal, "zo") -- open fold under cursor
-end, { desc = "󰘖 Close toplevel folds" })
 
 --------------------------------------------------------------------------------
 -- MESO FOLD COMMANDS
@@ -110,12 +110,12 @@ end, { desc = "󰘖 Goto previous closed fold" })
 ---@diagnostic disable: param-type-mismatch
 keymap("n", "h", function()
 	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-	local isFirstNonBlank = vim.fn.col(".") - 1 <= vim.fn.indent(".") / vim.bo.tabstop
 	local notOnFold = fn.foldclosed(".") == -1
+	local isFirstNonBlank = (bo.expandtab and (fn.col(".") - 1 <= fn.indent(".") / bo.tabstop)) or (not bo.expandtab and (fn.))
 	if isFirstNonBlank and shouldCloseFold and notOnFold then
 		local wasFolded = pcall(u.normal, "zc")
-		-- fallback: the line didn't have a closable fold, then use h to go the
-		-- intention space
+		-- fallback: the line didn't have a closable fold, then use h to go into
+		-- into the indentation
 		if not wasFolded then u.normal("h") end
 	else
 		u.normal("h")

@@ -34,25 +34,28 @@ local gitShellOpts = {
 		end
 	end,
 	on_exit = function()
+		-- reload buffer if changed, e.g., due to linters or pandocvim
+		-- (also requires opt.autoread being enabled)
+		vim.cmd.checktime()
+		os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
+
 		if #output == 0 then return end
 		local out = table.concat(output, " \n "):gsub("%s*$", "")
 		out = out:gsub("\r", "\n")
 
-		local logLevel = vim.log.levels.INFO
+		local logLevel
 		if out:lower():find("error") then
 			logLevel = vim.log.levels.ERROR
+			fn.system("afplay '/System/Library/Sounds/Basso.aiff' &")
 		elseif out:lower():find("warning") then
 			logLevel = vim.log.levels.WARN
+			fn.system("afplay '/System/Library/Sounds/Basso.aiff' &")
+		else
+			logLevel = vim.log.levels.INFO
+			-- stylua: ignore
+			fn.system("afplay '/System/Library/Sounds/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
 		end
 		vim.notify(out, logLevel)
-
-		vim.cmd.checktime() -- reload buffer if changed (e.g., due to linters or pandocvim). Also requires opt.autoread
-		os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
-
-		-- confirmation sound
-		-- stylua: ignore
-		fn.system( "afplay '/System/Library/Sounds/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
-		fn.system( "afplay '/System/Library/Sounds/Library.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
 
 		output = {} -- empty for next run
 	end,
@@ -126,7 +129,7 @@ function M.issueSearch(state)
 	)
 	local issues = vim.json.decode(rawJSON)
 
-	if #issues == 0 then
+	if not issues or #issues == 0 then
 		local type = state .. " "
 		if state == "all" then type = "" end
 		vim.notify(("There are no %sissues or PRs for this repo."):format(type), vim.log.levels.WARN)
