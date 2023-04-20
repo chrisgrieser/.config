@@ -35,7 +35,6 @@ return {
 			size = 12,
 			direction = "horizontal",
 			autochdir = true, -- when nvim changes pwd, will also change its pwd
-			env = { TERM_PROGRAM = "ToggleTerm" },
 		},
 	},
 	{ -- git sign gutter & hunk textobj
