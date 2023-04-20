@@ -7,10 +7,11 @@ standalone: true
 
 # html-based PDF-engine
 pdf-engine: wkhtmltopdf
+css: ${USERDATA}/css/nice-pandoc.css
+template: formal
 dpi: 96 # default: 96
 
 # html options https://pandoc.org/MANUAL.html#variables-for-html
-# require template though
 # marginTop: 25
 # marginRight: 25
 # marginBottom: 25
@@ -29,7 +30,7 @@ resource-path:
   - ${HOME}/Main Vault/ # Vault path for images
 
 # Markdown-Reader
-reader: markdown+lists_without_preceding_blankline
+reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
 strip-comments: true
 number-sections: true
 
