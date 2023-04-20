@@ -13,8 +13,8 @@ local gitDotfileScript = DotfilesFolder .. "/git-dotfile-sync.sh"
 local gitVaultScript = VaultLocation .. "/Meta/git-vault-sync.sh"
 local gitPassScript = PasswordStore .. "/pass-sync.sh"
 
----@return boolean
 ---@param submodulePull? boolean also update submodules, defaults to **true**
+---@return boolean
 local function gitDotfileSync(submodulePull)
 	local scriptArgs = {}
 	if submodulePull == nil then submodulePull = true end
@@ -134,7 +134,7 @@ end)
 SleepWatcher = hs.caffeinate.watcher
 	.new(function(event)
 		local c = hs.caffeinate.watcher
-		if event == c.screensDidSleep or (event == c.screensDidUnlock and u.idleMins(30)) then
+		if (event == c.screensDidWake and event == c.systemDidWake) and u.idleMins(30) then
 			SyncAllGitRepos()
 		end
 	end)
