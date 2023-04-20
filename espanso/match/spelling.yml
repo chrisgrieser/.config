@@ -236,3 +236,7 @@ matches:
   - trigger: mri
     replace: mir
     word: true
+  - trigger: ahs
+    replace: has
+    propagate_casing: true
+    word: true
