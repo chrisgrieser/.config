@@ -4,24 +4,6 @@ local u = require("lua.utils")
 local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 
-function M.scrollUp()
-	-- after quitting, it takes a few seconds until Twitter is fully quit,
-	-- therefore also checking for the main window existence
-	-- when browsing twitter itself, to not change tabs
-	local twitter = u.app("Twitter")
-	if not twitter or not twitter:mainWindow() then return end
-
-	u.keystroke({ "cmd" }, "left", 1, twitter) -- go back
-	u.keystroke({ "cmd" }, "1", 1, twitter) -- go to home tab
-	u.keystroke({ "shift", "cmd" }, "R", 1, twitter) -- reload
-
-	-- needs delays to wait for tweets loading
-	u.runWithDelays({ 0.5, 1.5 }, function()
-		if twitter:isFrontmost() then return end
-		u.keystroke({ "cmd" }, "1", 1, twitter) -- scroll up
-		u.keystroke({ "cmd" }, "up", 1, twitter) -- goto top
-	end)
-end
 
 -- ensure that twitter does not get focus, "falling through" to the next window
 local function twitterFallThrough()

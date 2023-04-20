@@ -72,8 +72,14 @@ sketchybar \
 	--add event update-sidenotes-count \
 	--subscribe sidenotes-count update-sidenotes-count \
 	\
+	--add item package-updates $first_row \
+	--set package-updates update_freq=43200 \
+	script="$PLUGIN_DIR/homebrew-update-tracker.sh" \
+	--add event homebrew-update \
+	--subscribe package-updates homebrew-update \
+	\
 	--add alias "$stats" $second_row \
-	--set "$stats" width=245 \
+	--set "$stats" width=255 \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 \
@@ -81,12 +87,6 @@ sketchybar \
 	--add event repo-files-update \
 	--subscribe sync-indicator repo-files-update \
 	--subscribe sync-indicator system_woke \
-	\
-	--add item package-updates $second_row \
-	--set package-updates update_freq=43200 \
-	script="$PLUGIN_DIR/homebrew-update-tracker.sh" \
-	--add event homebrew-update \
-	--subscribe package-updates homebrew-update \
 	\
 	--update
 
