@@ -99,8 +99,8 @@
 		"body": "const argv = process.argv.slice(2);",
 		"description": "Arguments from the command line. [0] is the node executable path, [1] the path of the file being executed, making [2] the first positional argument."
 	},
-	"Switch": {
-		"prefix": "switch",
+	"switch .. case": {
+		"prefix": "switch .. case",
 		"body": ["switch (${1:key}) {", "\tcase ${2:value}:", "\t\t$0", "\t\tbreak;", "\tdefault:", "\t\tbreak;", "}"]
 	},
 	"While ..": {
