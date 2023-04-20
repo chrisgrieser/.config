@@ -39,7 +39,8 @@ ExternalHarddriveWatcher = hs.usb.watcher
 				local stdout, success =
 					hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
 				if not success or not stdout then return end
-				hs.open(u.trim(stdout))
+				local path = stdout:gsub("\n", "")
+				hs.open(path)
 			end)
 		end
 	end)

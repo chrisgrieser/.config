@@ -86,7 +86,7 @@ end
 
 --------------------------------------------------------------------------------
 -- TWITTER
-local function twitterScrollUp()
+function M.twitterScrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
@@ -369,7 +369,7 @@ end
 
 local function homeAction()
 	if u.appRunning("Twitter") then
-		twitterScrollUp()
+		M.twitterScrollUp()
 	elseif #(hs.screen.allScreens()) > 1 then
 		moveCurWinToOtherDisplay()
 	elseif u.appRunning("zoom.us") then

@@ -58,7 +58,7 @@ TwitterWatcher = u.aw
 			u.asSoonAsAppRuns("Twitter", function()
 				wu.twitterToTheSide()
 				wu.bringAllWinsToFront()
-				M.scrollUp()
+				wu.twitterScrollUp()
 
 				-- focus new tweet window if there is one
 				local newTweetWindow = twitter:findWindow("Tweet")
@@ -68,7 +68,7 @@ TwitterWatcher = u.aw
 		-- auto-close media windows and scroll up when deactivating
 		elseif appName == "Twitter" and event == u.aw.deactivated then
 			if u.isFront("CleanShot X") then return end
-			M.scrollUp()
+			wu.twitterScrollUp()
 			twitterCleanupLink()
 			twitterCloseMediaWindow()
 

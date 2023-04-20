@@ -89,17 +89,13 @@ keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 --------------------------------------------------------------------------------
 
 -- Marks
--- keymap("n", "Ä", cmd.BookmarkToggle, { desc = " Toggle Bookmark" })
--- keymap("n", "ä", cmd.BookmarkNext, { desc = " Next Bookmark" })
--- keymap("n", "dä", cmd.BookmarkClearAll, { desc = " Clear All Bookmark" })
--- keymap("n", "gä", cmd.BookmarkShowAll, { desc = "  Bookmarks to Quickfix" })
 
-keymap("n", "Ä", function() require("bookmarks").bookmark_ann() end, { desc = " Toggle Bookmark" })
+-- stylua: ignore start
+keymap("n", "Ä", function() require("bookmarks").bookmark_toggle() end, { desc = " Toggle Bookmark" })
 keymap("n", "ä", function() require("bookmarks").bookmark_next() end, { desc = " Next Bookmark" })
--- stylua: ignore
 keymap("n", "dä", function() require("bookmarks").bookmark_clean() end, { desc = " Clear All Bookmark" })
--- stylua: ignore
 keymap("n", "gä", function() require("bookmarks").bookmark_list() end, { desc = "  Bookmarks to Quickfix" })
+-- stylua: ignore end
 
 -- Hunks and Changes
 keymap("n", "gh", ":Gitsigns next_hunk<CR>zv", { desc = "goto next hunk" })
