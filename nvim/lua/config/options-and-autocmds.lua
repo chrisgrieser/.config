@@ -26,14 +26,15 @@ local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
 for _, char in pairs(undopointChars) do
 	keymap("i", char, function()
 		local expr = char .. "<C-g>u"
-		if bo.filetype == "TelescopePrompt" then expr = char end -- FIX interference with telescope otherwise
+		-- FIX interference with telescope-file-browser keymapping
+		if bo.filetype == "TelescopePrompt" then expr = char end 
 		return expr
 	end, { desc = "extra undopoint for " .. char, remap = true, expr = true })
 end
 
 --------------------------------------------------------------------------------
 
--- Disable Mouse
+-- Disable Mouse completely
 opt.mouse = ""
 
 -- Motions & Editing
@@ -44,15 +45,12 @@ opt.virtualedit = "block" -- visual-block mode can select more
 opt.smartcase = true
 opt.ignorecase = true
 
--- Briefly flash when closing a bracket
+-- when closing a bracket, briefly flash the matching one
 opt.showmatch = true
 opt.matchtime = 1 -- deci-seconds (higher amount feels laggy)
 
 -- Clipboard
 opt.clipboard = "unnamedplus"
-
--- Quickfix / Locaton List
-opt.grepprg = "rg --vimgrep" -- use rg for :grep
 
 -- Popups / Floating Windows
 opt.pumheight = 15 -- max number of items in popup menu
