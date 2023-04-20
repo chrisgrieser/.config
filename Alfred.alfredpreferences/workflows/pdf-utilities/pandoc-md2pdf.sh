@@ -17,5 +17,8 @@ function md2pdf () {
 
 # copy / pipe output, e.g. for information on missing citekeys
 output=$(md2pdf "$*" 2>&1)
-echo "$output" | pbcopy
-echo "$output"
+# shellcheck disable=2181
+if [[ $? -ne 0 ]] ; then
+	echo "$output" | pbcopy
+	echo "$output"
+fi
