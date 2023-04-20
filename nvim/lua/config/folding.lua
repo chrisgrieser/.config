@@ -109,9 +109,15 @@ end, { desc = "󰘖 Goto previous closed fold" })
 -- works well with vim's startofline option
 ---@diagnostic disable: param-type-mismatch
 keymap("n", "h", function()
+	local col = fn.col(".")
+	local indent = fn.indent(".")
+	local tabs = not bo.expandtab
+	local tabwidth = bo.tabstop
+
+	local isFirstNonBlank = (tabs and (col - 1 <= indent / tabwidth)) or (not tabs and (col <= indent))
 	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
 	local notOnFold = fn.foldclosed(".") == -1
-	local isFirstNonBlank = (bo.expandtab and (fn.col(".") - 1 <= fn.indent(".") / bo.tabstop)) or (not bo.expandtab and (fn.))
+
 	if isFirstNonBlank and shouldCloseFold and notOnFold then
 		local wasFolded = pcall(u.normal, "zc")
 		-- fallback: the line didn't have a closable fold, then use h to go into
