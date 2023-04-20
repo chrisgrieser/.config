@@ -177,6 +177,22 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.vivaldi\.Vivaldi]
+      # Toggle Sidebar
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: p, modifiers: [command, option] }
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.vivaldi\.Vivaldi]
+      # Command Palette
+      - type: basic
+        from: { key_code: p, modifiers: { mandatory: [command] } }
+        to:
+          - key_code: f2
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.vivaldi\.Vivaldi]
       # open dev tools (= inspect Vivaldi UI)
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }

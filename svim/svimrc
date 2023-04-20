@@ -37,6 +37,11 @@ nnoremap R yyp
 
 nnoremap <Space> ciw
 
+nnoremap <Right> dlp
+nnoremap <Left> dlhhp
+
+nnoremap <C-e> A
+
 nnoremap ü "zdawel"zph
 nnoremap Ü "zdawbh"zph
 
