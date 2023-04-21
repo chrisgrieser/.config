@@ -184,6 +184,7 @@ return {
 				l = { name = "log / cmdline" },
 				g = { name = "git" },
 				o = { name = "option" },
+				p = { name = "package" },
 			}, { prefix = "<leader>" })
 		end,
 	},

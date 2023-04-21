@@ -47,6 +47,19 @@ function M.appendToFile(filePath, str)
 	return true
 end
 
+---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
+---@param name string name of highlight group
+---@param key "fg"|"bg"
+---@nodiscard
+---@return string|nil the value, or nil if hlgroup or key is not available
+function M.getHighlightValue(name, key)
+	local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name })
+	if not ok then return end
+	local value = hl[key]
+	if not value then return end
+	return string.format("#%06x", value)
+end
+
 --------------------------------------------------------------------------------
 
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.

@@ -8,8 +8,8 @@ local g = vim.g
 -- - if only one theme, it's used for both light and dark
 local themes = {
 	"EdenEast/nightfox.nvim",
-	"ofirgall/ofirkai.nvim",
-	-- "rebelot/kanagawa.nvim",
+	"tanvirtin/monokai.nvim",
+	-- "rebelot/kanagawa.nvim",,
 	-- "Yazeed1s/oh-lucy.nvim",
 	-- "kvrohit/mellow.nvim",
 	-- { "rose-pine/neovim", name = "rose-pine" },
@@ -48,7 +48,7 @@ g.darkTheme = #themes == 1 and g.lightTheme or getName(themes[2])
 
 -- account for special names
 if g.lightTheme == "nightfox" then g.lightTheme = "dawnfox" end
-
+if g.darkTheme == "monokai" then g.darkTheme = "monokai_pro" end
 --------------------------------------------------------------------------------
 
 return themes

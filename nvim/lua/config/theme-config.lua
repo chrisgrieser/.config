@@ -2,6 +2,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
+local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
@@ -49,7 +50,7 @@ local function customHighlights()
 	fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
 
 	updateHighlight("Overnesting", "guibg=#E06C75")
-	fn.matchadd("Overnesting", ("\t"):rep(7) .. "\t*")
+	fn.matchadd("Overnesting", ("\t"):rep(6) .. "\t*")
 
 	updateHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
 	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
@@ -73,7 +74,6 @@ local function themeModifications()
 		updateHighlight("lualine_a_" .. v, "gui=bold")
 	end
 
-	-- tokyonight
 	if theme == "tokyonight" then
 		for _, v in pairs(vimModes) do
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
@@ -81,25 +81,20 @@ local function themeModifications()
 		end
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 		updateHighlight("GitSignsAdd", "guifg=#7fcc82")
-
-	-- oxocarbon
 	elseif theme == "oxocarbon" then
 		linkHighlight("FloatTitle", "TelescopePromptTitle")
 		linkHighlight("@function", "@function.builtin")
-
-	-- sweetie
+	elseif theme == "monokai" then
+		local monokaiCyan = u.getHighlightValue("Constant", "bg")
+		linkHighlight("GitSignsChange", "Constant")
 	elseif theme == "sweetie" and mode == "light" then
 		linkHighlight("ScrollView", "Visual")
 		linkHighlight("NotifyINFOIcon", "@string")
 		linkHighlight("NotifyINFOTitle", "@string")
 		linkHighlight("NotifyINFOBody", "@string")
-
-	-- blueloco
 	elseif theme == "bluloco" then
 		updateHighlight("ScrollView", "guibg=#303d50")
 		updateHighlight("ColorColumn", "guibg=#2e3742")
-
-	-- kanagawa
 	elseif theme == "kanagawa" then
 		updateHighlight("ScrollView", "guibg=#303050")
 		updateHighlight("VirtColumn", "guifg=#323036")
@@ -111,14 +106,10 @@ local function themeModifications()
 		for _, hlGroup in pairs(noBackground) do
 			updateHighlight(hlGroup, "guibg=NONE")
 		end
-
-	-- zephyr
 	elseif theme == "zephyr" then
 		updateHighlight("IncSearch", "guifg=#FFFFFF")
 		linkHighlight("TabLineSel", "lualine_a_normal")
 		linkHighlight("TabLineFill", "lualine_c_normal")
-
-	-- dawnfox
 	elseif theme == "dawnfox" then
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ScrollView", "guibg=#303050")
@@ -127,23 +118,17 @@ local function themeModifications()
 		for _, v in pairs(vimModes) do
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
 		end
-
-	-- melange
 	elseif theme == "melange" and mode == "light" then
 		linkHighlight("Todo", "IncSearch")
 		linkHighlight("NonText", "Conceal")
 		linkHighlight("NotifyINFOIcon", "@define")
 		linkHighlight("NotifyINFOTitle", "@define")
 		linkHighlight("NotifyINFOBody", "@define")
-
-	-- rose-pine
 	elseif theme == "rose-pine" and mode == "light" then
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ScrollView", "guibg=#505030")
 		updateHighlight("ColorColumn", "guibg=#eee6dc")
 		updateHighlight("Headline", "gui=bold guibg=#ebe1d5")
-
-	-- oh-lucy
 	elseif theme == "oh-lucy" then
 		updateHighlight("Todo", "guifg=#111111")
 		updateHighlight("Error", "gui=NONE") -- no bold
@@ -203,7 +188,7 @@ autocmd("ColorScheme", {
 		end
 
 		-- defer needed for some modifications to properly take effect
-		for _, delayMs in pairs { 50 } do
+		for _, delayMs in pairs { 50, 200 } do
 			vim.defer_fn(customHighlights, delayMs)
 			vim.defer_fn(themeModifications, delayMs)
 		end
@@ -212,7 +197,7 @@ autocmd("ColorScheme", {
 
 --------------------------------------------------------------------------------
 
----@param mode string "dark"|"light"
+---@param mode "dark"|"light"
 function SetThemeMode(mode)
 	vim.opt.background = mode
 	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
