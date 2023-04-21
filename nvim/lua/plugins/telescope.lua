@@ -9,7 +9,6 @@ local keymappings = {
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
 	["<D-s>"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
-	["<D-a>"] = "select_all",
 	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
 	["?"] = "which_key",
@@ -87,7 +86,14 @@ local function telescopeConfig()
 			diagnostics = { prompt_prefix = "󰒕 ", no_sign = true },
 			treesitter = { prompt_prefix = " ", show_line = false },
 			oldfiles = { prompt_prefix = "󰋚 " },
-			highlights = { prompt_prefix = " " },
+			highlights = {
+				layout_config = {
+					horizontal = {
+						preview_width = { 0.7, min = 30 },
+					},
+				},
+				prompt_prefix = " ",
+			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
 			grep_string = { prompt_prefix = " ", disable_coordinates = true },
 			loclist = {
@@ -128,7 +134,7 @@ local function telescopeConfig()
 				layout_strategy = "horizontal",
 				layout_config = {
 					horizontal = {
-						height = 0.3,
+						height = 0.4,
 						width = 0.3,
 						anchor = "SE",
 						preview_width = 1, -- needs preview for live preview of the theme

@@ -10,7 +10,6 @@ local themes = {
 	"EdenEast/nightfox.nvim",
 	"tanvirtin/monokai.nvim",
 	-- "rebelot/kanagawa.nvim",,
-	-- "Yazeed1s/oh-lucy.nvim",
 	-- "kvrohit/mellow.nvim",
 	-- { "rose-pine/neovim", name = "rose-pine" },
 	-- "glepnir/zephyr-nvim",
