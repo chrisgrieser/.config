@@ -67,7 +67,6 @@ sketchybar \
 	--add item clock $first_row \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
-	background.padding_left=5 \
 	\
 	--add item weather $first_row \
 	--set weather update_freq=1800 \
