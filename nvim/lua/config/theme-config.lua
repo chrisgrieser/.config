@@ -2,7 +2,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
-local u = require("config.utils")
+-- local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ local function customHighlights()
 	fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
 
 	updateHighlight("Overnesting", "guibg=#E06C75")
-	fn.matchadd("Overnesting", ("\t"):rep(6) .. "\t*")
+	fn.matchadd("Overnesting", ("\t"):rep(7) .. "\t*")
 
 	updateHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
 	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
@@ -84,9 +84,8 @@ local function themeModifications()
 	elseif theme == "oxocarbon" then
 		linkHighlight("FloatTitle", "TelescopePromptTitle")
 		linkHighlight("@function", "@function.builtin")
-	elseif theme == "monokai" then
-		local monokaiCyan = u.getHighlightValue("Constant", "bg")
-		linkHighlight("GitSignsChange", "Constant")
+	elseif theme:find("monokai") then
+		linkHighlight("GitSignsChange", "@character")
 	elseif theme == "sweetie" and mode == "light" then
 		linkHighlight("ScrollView", "Visual")
 		linkHighlight("NotifyINFOIcon", "@string")
@@ -98,9 +97,9 @@ local function themeModifications()
 	elseif theme == "kanagawa" then
 		updateHighlight("ScrollView", "guibg=#303050")
 		updateHighlight("VirtColumn", "guifg=#323036")
-		linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
-
 		clearHighlight("SignColumn")
+		-- linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
+
 		-- stylua: ignore
 		local noBackground = { "GitSignsAdd", "GitSignsDelete", "GitSignsChange", "DiagnosticSignHint", "DiagnosticSignInfo", "DiagnosticSignWarn", "DiagnosticSignError" }
 		for _, hlGroup in pairs(noBackground) do
@@ -158,8 +157,6 @@ local semanticToTreesitterHl = {
 	["@lsp.type.macro"] = "@macro",
 	["@lsp.type.decorator"] = "@function",
 }
-
---------------------------------------------------------------------------------
 
 autocmd("ColorSchemePre", {
 	callback = function()
