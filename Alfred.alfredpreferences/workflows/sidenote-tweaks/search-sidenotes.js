@@ -37,12 +37,11 @@ const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]
 //──────────────────────────────────────────────────────────────────────────────
 
 function run(argv) {
-	const query = "";
+	const query = argv[0] || "";
 	const sidenotes = Application("SideNotes");
 
 	const ignoredFolder = $.getenv("ignored_folder");
-	const currentFolder = sidenotes.currentFolder().name();
-	if (!currentFolder) return; // = folder selection menu
+	const currentFolder = sidenotes.currentFolder() ? sidenotes.currentFolder().name() : "";
 
 	const results = sidenotes
 		.searchNotes(query)
@@ -98,7 +97,7 @@ function run(argv) {
 	// new note when no match found
 	if (results.length === 0) {
 		results.push({
-			title: "New Sidenote: " + query,
+			title: " 🆕 New Sidenote: " + query,
 			subtitle: "SideNotes Default Folder",
 			arg: query,
 			mods: {
