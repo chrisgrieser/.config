@@ -53,7 +53,7 @@ local gitShellOpts = {
 		else
 			logLevel = vim.log.levels.INFO
 			-- stylua: ignore
-			fn.system("afplay '/System/Library/Sounds/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
+			fn.system("afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
 		end
 		vim.notify(out, logLevel)
 
