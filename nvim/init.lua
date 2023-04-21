@@ -3,7 +3,7 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = "!"
 
 -- TODO remove this condition later on
-if vim.version().minor >= 9 then vim.loader.enable() end 
+if vim.version().minor >= 9 then vim.loader.enable() end
 
 ---try to require the module, and do not error when one of them cannot be
 ---loaded. But do notify if there was an error.
@@ -16,7 +16,7 @@ local function safeRequire(module)
 	if notifyLoaded then
 		vim.notify(" " .. msg, vim.log.levels.ERROR)
 	else
-		vim.cmd('echohl WarningMsg | echo "'..msg..'" | echohl None')
+		vim.cmd('echohl Error | echo "' .. msg .. '" | echohl None')
 	end
 end
 

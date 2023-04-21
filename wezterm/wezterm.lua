@@ -150,7 +150,11 @@ local config = {
 	-- Meta
 	check_for_updates = false, -- done via homebrew, does not need to be so regularly
 	automatically_reload_config = true,
-	detect_password_input = isAtOffice,
+
+	-- Passwords
+	-- INFO `sudo visudo`, and change line `Defaults env_reset` to `Defaults env_reset,pwfeedback`
+	-- to see asterisks in general
+	detect_password_input = false,
 
 	-- Start/Close
 	default_cwd = wt.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/",
