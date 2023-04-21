@@ -16,7 +16,7 @@ local function safeRequire(module)
 	if notifyLoaded then
 		vim.notify(" " .. msg, vim.log.levels.ERROR)
 	else
-		vim.cmd.echoerr(msg)
+		vim.cmd('echohl WarningMsg | echo "'..msg..'" | echohl None')
 	end
 end
 
