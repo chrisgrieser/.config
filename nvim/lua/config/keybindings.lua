@@ -12,16 +12,16 @@ local u = require("config.utils")
 -- search keymaps
 keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " keymaps" })
 
--- Theme Picker
-keymap("n", "<leader>T", function() cmd.Telescope("colorscheme") end, { desc = " Colorschemes" })
-
 -- Highlights
 keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
--- Update [P]lugins
-keymap("n", "<leader>p", require("lazy").sync, { desc = " Lazy Sync" })
-keymap("n", "<leader>P", require("lazy").home, { desc = " Lazy Home" })
-keymap("n", "<leader>M", cmd.Mason, { desc = " Mason" })
+-- Theme Picker
+keymap("n", "<leader>pt", function() cmd.Telescope("colorscheme") end, { desc = "  Colorschemes" })
+
+-- [P]lugins
+keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Sync" })
+keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
+keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason" })
 
 --------------------------------------------------------------------------------
 
