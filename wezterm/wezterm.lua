@@ -162,7 +162,7 @@ local config = {
 	default_cursor_style = "BlinkingBar", -- mostly overwritten by vi-mode.zsh
 	cursor_thickness = "0.07cell",
 	cursor_blink_rate = 700,
-	cursor_blink_ease_in = "Constant", -- "Constant" = no fading
+	cursor_blink_ease_in = "Constant", -- Constant = no fading
 	cursor_blink_ease_out = "Constant",
 	force_reverse_video_cursor = false, -- true = color is reverse, false = color by color scheme
 
@@ -182,7 +182,6 @@ local config = {
 	line_height = 1.0,
 
 	-- Appearance
-	front_end = "WebGpu", -- better performance on newer Macs
 	audible_bell = "Disabled",
 	color_scheme = theme.autoScheme(darkTheme, lightTheme),
 	window_background_opacity = theme.autoOpacity(darkOpacity, lightOpacity),
