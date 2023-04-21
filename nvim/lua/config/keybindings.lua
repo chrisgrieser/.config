@@ -44,7 +44,7 @@ keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { des
 keymap("n", "<leader>lf", function()
 	local icon = require("nvim-web-devicons").get_icon(fn.bufname(), bo.filetype)
 	local out = ("filetype: %s %s"):format(icon, bo.filetype)
-	if bo.buftype ~= "" then out = out + "\nbuftype: " .. bo.buftype end
+	if bo.buftype ~= "" then out = out .. "\nbuftype: " .. bo.buftype end
 	vim.notify(out, u.trace)
 end, { desc = "󰽘 Inspect FileType & BufType" })
 
