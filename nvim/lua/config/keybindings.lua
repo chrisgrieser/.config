@@ -799,6 +799,8 @@ autocmd("FileType", {
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
 		"man",
+		"neoai-input",
+		"neoai-output",
 	},
 	callback = function()
 		local opts = { buffer = true, nowait = true, desc = "close" }
@@ -807,9 +809,10 @@ autocmd("FileType", {
 	end,
 })
 
+-- just "q" to close special window
 -- remove the waiting time from the q, due to conflict with `qq` for comments
 autocmd("FileType", {
-	pattern = { "ssr", "TelescopePrompt", "harpoon", "NavBuddy" }, -- e.g. NeoAI,
+	pattern = { "ssr", "TelescopePrompt", "harpoon", "NavBuddy" }, 
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 		if bo.filetype == "ssr" then

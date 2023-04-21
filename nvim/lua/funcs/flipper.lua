@@ -30,6 +30,7 @@ local generalWords = {
 	{ "forwards", "backwards" },
 	{ "next", "previous" },
 	{ "inner", "outer" },
+	{ "input", "output" },
 	{ "before", "after" },
 	{ "low", "high" },
 	{ "dark", "light" },
