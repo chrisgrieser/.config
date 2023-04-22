@@ -40,22 +40,17 @@ nmap <Esc> &c&&n&
 """"""""""""""""""""""
 
 " Have j and k navigate visual lines rather than logical ones
-nmap j gj
-nmap k gk
+noremap j gj
+noremap k gk
 
 " HJKL behaves like hjkl, but bigger distance
-nmap H g0
-nmap L g$
+noremap H g0
+noremap L g$
 nmap J 6gj
 nmap K 6gk
 
-vmap H g0
-vmap L g$
-vmap J 6gj
-vmap K 6gk
-
-omap H g0
-omap L g$
+omap J 3j
+omap K 3k
 
 " [z]pelling [l]ist (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
