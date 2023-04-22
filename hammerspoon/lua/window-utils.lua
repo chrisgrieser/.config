@@ -330,16 +330,15 @@ local function controlSpaceAction()
 		toggleSideNotesSize()
 		return
 	end
-	local currentWin = hs.window.focusedWindow()
+
+	local curWin = hs.window.focusedWindow()
 	local pos
 	if u.isFront { "Finder", "Script Editor" } then
-		pos = M.centered
-	elseif not M.CheckSize(currentWin, M.pseudoMax) then
-		pos = M.pseudoMax
+		pos = M.CheckSize(curWin, M.centered) and M.maximized or M.centered
 	else
-		pos = M.maximized
+		pos = M.CheckSize(curWin, M.pseudoMax) and M.maximized or M.pseudoMax
 	end
-	M.moveResize(currentWin, pos)
+	M.moveResize(curWin, pos)
 end
 
 local function moveCurWinToOtherDisplay()

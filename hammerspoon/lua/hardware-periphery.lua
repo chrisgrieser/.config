@@ -41,7 +41,7 @@ ExternalHarddriveWatcher = hs.usb.watcher
 		}
 
 		if u.tbl_contains(harddriveNames, name) then
-			u.app("WezTerm"):activate()
+			hs.application.open("WezTerm")
 		else -- open volume
 			u.runWithDelays(1, function()
 				local stdout, success =

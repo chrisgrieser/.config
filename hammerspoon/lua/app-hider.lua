@@ -23,6 +23,7 @@ local function hideOthers(appObj)
 	if
 		not appObj
 		or not appObj:mainWindow()
+		---@diagnostic disable-next-line: param-type-mismatch
 		or not u.isFront(appObj:name()) -- win not switched in meantime
 	then
 		return
@@ -81,7 +82,7 @@ AutoTileAppWatcher = u.aw.new(function(appName, eventType, appObj)
 		and #appObj:allWindows() > 1
 		and not (appObj:findWindow("Picture in Picture"))
 		and not (u.isProjector())
-		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X" })
+		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X", "IINA" })
 	then
 		appObj:hide()
 	end
@@ -93,7 +94,7 @@ Wf_maxWindows = u.wf.new(true):subscribe(u.wf.windowUnfocused, function(win)
 	if
 		not (u.isProjector())
 		and wu.CheckSize(win, wu.maximized)
-		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X" })
+		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X", "IINA" })
 	then
 		win:application():hide()
 	end
