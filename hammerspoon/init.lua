@@ -38,7 +38,7 @@ require("lua.dark-mode")
 -- window management
 require("lua.window-utils")
 require("lua.layouts")
--- require("lua.app-hider")
+require("lua.app-hider")
 require("lua.vertical-split")
 
 -- system

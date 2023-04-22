@@ -242,7 +242,9 @@ function M.autoTile(winSrc)
 
 	if #wins == 0 and u.isFront("Finder") and not (u.isProjector()) then
 		-- hide finder when no windows
-		u.runWithDelays(0.1, function()
+		-- delay needed for quitting fullscreen apps, which are sometimes counted
+		-- as finder windows (SIC)
+		u.runWithDelays(0.5, function()
 			if #(u.app("Finder"):allWindows()) == 0 then u.app("Finder"):hide() end
 		end)
 	elseif #wins == 1 then
