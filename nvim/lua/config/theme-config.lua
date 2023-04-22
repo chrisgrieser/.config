@@ -86,7 +86,6 @@ local function customHighlights()
 	updateHighlight("TSDefinitionUsage", " term=underline gui=underdotted")
 	updateHighlight("QuickScopePrimary", "gui=reverse cterm=reverse")
 	updateHighlight("QuickScopeSecondary", "gui=underdouble cterm=underline")
-	linkHighlight("BookmarkSign", "DiagnosticSignHint")
 end
 
 -- selene: allow(high_cyclomatic_complexity)
@@ -117,6 +116,7 @@ local function themeModifications()
 	elseif theme:find("monokai") then
 		linkHighlight("GitSignsChange", "@character")
 		linkHighlight("@lsp.type.parameter", "@parameter")
+		linkHighlight("@lsp.type.property", "@constructor")
 	elseif theme == "sweetie" and mode == "light" then
 		linkHighlight("ScrollView", "Visual")
 		linkHighlight("NotifyINFOIcon", "@string")
@@ -189,7 +189,9 @@ autocmd("ColorScheme", {
 			-- add SEMANTIC HIGHLIGHTS to themes that do not have it yet https://www.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90/
 			---@diagnostic disable-next-line: undefined-field
 			local themeHasNoSemanticHl = vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@lsp.type.function" }))
-			if themeHasNoSemanticHl then fixSemanticHighlighting() end
+			if themeHasNoSemanticHl then
+				fixSemanticHighlighting()
+			end
 		end
 
 		-- defer needed for some modifications to properly take effect

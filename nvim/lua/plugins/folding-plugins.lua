@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------
 local foldIcon = ""
+local hlgroup = "NonText"
 local function foldTextFormatter(virtText, lnum, endLnum, width, truncate)
 	local newVirtText = {}
 	local suffix = "  " .. foldIcon .. "  " .. tostring(endLnum - lnum)
@@ -23,7 +24,7 @@ local function foldTextFormatter(virtText, lnum, endLnum, width, truncate)
 		end
 		curWidth = curWidth + chunkWidth
 	end
-	table.insert(newVirtText, { suffix, "MoreMsg" })
+	table.insert(newVirtText, { suffix, hlgroup })
 	return newVirtText
 end
 
