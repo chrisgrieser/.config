@@ -114,8 +114,8 @@ keymap("o", "o", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "
 -- ag: entire buffer textobj
 keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "󱡔 entire buffer textobj" })
 
--- V: visible in window
-keymap("o" , "V", "<cmd>lua require('various-textobjs').visibleInWindow()<CR>", { desc = "󱡔 visible in window textobj" })
+-- v: visible in window
+keymap("o" , "v", "<cmd>lua require('various-textobjs').visibleInWindow()<CR>", { desc = "󱡔 visible in window textobj" })
 
 -- az/iz: fold textobj
 keymap( { "x", "o" }, "az", "<cmd>lua require('various-textobjs').closedFold(false)<CR>", { desc = "󱡔 outer fold textobj" })
@@ -127,7 +127,7 @@ keymap( { "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember(tr
 
 -- r: [r]est of ... (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
-keymap("o", "rw", "<cmd>lua require('various-textobjs').restOfWindow()<CR>", { desc = "󱡔 rest of window textobj" })
+keymap("o", "rv", "<cmd>lua require('various-textobjs').restOfWindow()<CR>", { desc = "󱡔 rest of viewpower textobj" })
 keymap("o", "rp", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", { desc = "󱡔 rest of paragraph textobj" })
 keymap("o", "ri", "<cmd>lua require('various-textobjs').restOfIndentation()<CR>", { desc = "󱡔 rest of indentation textobj" })
 keymap("o", "rg", "G", { desc = "󱡔 rest of buffer textobj" })
