@@ -8,7 +8,13 @@ local s = {
 	zsh = { name = "zsh" },
 	codeium = { name = "codeium" },
 	snippets = { name = "luasnip" },
-	lsp = { name = "nvim_lsp" },
+	lsp = {
+		name = "nvim_lsp",
+		-- filter all "Text" types from the LSP
+		entry_filter = function(entry, _)
+			return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+		end,
+	},
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },
@@ -73,14 +79,6 @@ local function cmpconfig()
 		snippet = {
 			-- REQUIRED a snippet engine must be specified and installed
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
-		},
-		matching = {
-			-- default: false, false, true, false, false
-			disallow_fuzzy_matching = false,
-			disallow_fullfuzzy_matching = false,
-			disallow_partial_fuzzy_matching = true,
-			disallow_partial_matching = false,
-			disallow_prefix_unmatching = false,
 		},
 		window = {
 			completion = {
