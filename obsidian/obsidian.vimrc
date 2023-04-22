@@ -27,7 +27,7 @@ nmap C "_d$a
 nmap + *
 
 " Find Mode (by mirroring American keyboard layout on German keyboard layout)
-map - /
+nmap - /
 
 " <Esc> clears notices & highlights (:nohl)
 exmap clearNotices obcommand obsidian-smarter-md-hotkeys:hide-notice
@@ -56,8 +56,6 @@ vmap K 6gk
 
 omap H g0
 omap L g$
-omap J 3j
-omap K 3k
 
 " [z]pelling [l]ist (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
@@ -79,15 +77,13 @@ exmap lineUp obcommand editor:swap-line-up
 exmap lineDown obcommand editor:swap-line-down
 nmap <Up> :lineUp
 nmap <Down> :lineDown
-vmap <Up> :lineUp
-xmap <Down> :lineDown
 nmap <Right> dlp
 nmap <Left> dlhhp
 
 " [m]atch parenthesis
-" INFO this prevents any use of `m` for sticky cursor mappings, since there
-" is no noremap
-nmap m %
+" INFO `noremap` is only supported for mappings that are included in default
+" mappings https://github.com/replit/codemirror-vim/blob/master/src/vim.js#L765
+noremap m %
 
 " [g]oto [s]ymbol
 " requires Another Quick Switcher Plugin
@@ -204,7 +200,7 @@ nmap ww :duplicate
 """"""""""""""""""""""
 
 " so VV... in normal mode selects more lines
-vmap V j
+vmap V gj
 
 " so vv goes to visual block mode
 vmap v <C-v>
@@ -300,8 +296,8 @@ nmap ,l :linkjump
 " Substitute
 """"""""""""""""""""""
 " poor man's substitute.nvim 🥲
-unmap s
-nmap ss Vp
+" unmap s
+nmap s Vp
 nmap S vg$p
 
 """"""""""""""""""""""
@@ -314,11 +310,11 @@ nmap ,on :number
 
 " [O]ption: [s]pellcheck
 exmap spellcheck obcommand editor:toggle-spellcheck
-map ,os :spellcheck
+nmap ,os :spellcheck
 
 " [O]ption: [w]rap
 exmap readableLineLength obcommand obsidian-smarter-md-hotkeys:toggle-readable-line-length
-map ,ow :readableLineLength
+nmap ,ow :readableLineLength
 
 " [O]ption: [d]iagnostics (language tool check)
 exmap enableDiagnostics obcommand obsidian-languagetool-plugin:ltcheck-text
