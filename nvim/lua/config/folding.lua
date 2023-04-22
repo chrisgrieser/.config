@@ -73,6 +73,24 @@ keymap("n", "<f1>", function() require("fold-cycle").close() end, { desc = "󰘖
 --------------------------------------------------------------------------------
 -- MICRO FOLD COMMANDS
 
+-- goto next closed fold & open
+keymap("n", "gz", function()
+	local lnum = fn.line(".")
+	local lastLine = fn.line("$")
+	local endOfFold = fn.foldclosedend(lnum)
+	if endOfFold > 0 then lnum = endOfFold end
+	repeat
+		if lnum >= lastLine then
+			vim.notify("No more fold in this file.")
+			return
+		end
+		lnum = lnum + 1
+		local isClosedFold = fn.foldclosed(lnum) > 0
+	until isClosedFold
+	u.normal(tostring(lnum) .. "Gzv")
+end, { desc = "󰘖 Goto next fold & open" })
+
+
 -- h closes (similar to how l opens due to opt.foldopen="hor")
 -- works well with vim's startofline option
 ---@diagnostic disable: param-type-mismatch

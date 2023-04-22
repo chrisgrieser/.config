@@ -463,7 +463,7 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 -- for consistency with terminal buffers also <S-CR>
 -- stylua: ignore start
 keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "Alt Buffer" })
-keymap("n", "<BS>", "<Plug>(CybuPrev)", { desc = "Next Buffer" })
+keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "Next Buffer" })
 keymap("n", "<S-CR>", "<C-w>w", { desc = "Next Window" })
 
 keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window" })
@@ -643,7 +643,20 @@ end, { desc = " Document Symbol" })
 
 keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 
-
+vim.keymap.set("n", "gk", function()
+	if not require("nvim-navic").is_available() then
+		vim.notify("Navic is not available.")
+		return
+	end
+	local symbolPath = require("nvim-navic").get_data()
+	local parent = symbolPath[#symbolPath - 1]
+	if not parent then 
+		vim.notify("Already at the highest parent.")
+		return
+	end
+	local parentPos = parent.scope.start
+	vim.api.nvim_win_set_cursor(0, { parentPos.line, parentPos.character })
+end, { desc = "Up one parent to Parent" })
 
 -- copy breadcrumbs (nvim navic)
 keymap("n", "<D-b>", function()
