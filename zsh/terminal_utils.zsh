@@ -47,8 +47,8 @@ function inspect() {
 		fi
 	fi
 	if [[ $(find . -maxdepth 1 | wc -l) -lt 60 ]]; then
-		exa --all --icons --sort=modified --group-directories-first \
-			--git-ignore --ignore-glob=.git --ignore-glob=.DS_Store
+		exa --all --icons --sort=name --group-directories-first \
+			--git-ignore --ignore-glob=.DS_Store
 	fi
 	echo
 }

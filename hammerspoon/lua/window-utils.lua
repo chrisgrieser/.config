@@ -244,7 +244,7 @@ function M.autoTile(winSrc)
 		-- hide finder when no windows
 		-- delay needed for quitting fullscreen apps, which are sometimes counted
 		-- as finder windows (SIC)
-		u.runWithDelays(0.5, function()
+		u.runWithDelays(0.2, function()
 			if #(u.app("Finder"):allWindows()) == 0 then u.app("Finder"):hide() end
 		end)
 	elseif #wins == 1 then

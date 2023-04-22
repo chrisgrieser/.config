@@ -448,11 +448,8 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
 -- indent properly when entering insert mode on empty lines
 keymap("n", "i", function()
-	if #vim.fn.getline(".") == 0 then
-		return [["_cc]]
-	else
-		return "i"
-	end
+	if #vim.fn.getline(".") == 0 then return [["_cc]] end
+	return "i"
 end, {expr = true, desc = "better i"})
 
 --------------------------------------------------------------------------------
@@ -645,6 +642,8 @@ keymap("n", "gs", function()
 end, { desc = " Document Symbol" })
 
 keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
+
+
 
 -- copy breadcrumbs (nvim navic)
 keymap("n", "<D-b>", function()
