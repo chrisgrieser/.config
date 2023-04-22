@@ -66,7 +66,6 @@ local function commented_lines_textobject()
 	repeat
 		rs = rs - 1
 		line = vim.api.nvim_buf_get_lines(0, rs - 1, rs, false)
-	-- fsfs
 	until next(line) == nil or not is_commented(line[1])
 	rs = rs + 1
 	repeat
@@ -77,15 +76,10 @@ local function commented_lines_textobject()
 	vim.fn.execute("normal! " .. rs .. "GV" .. re .. "G")
 end
 
-keymap("o", "u", commented_lines_textobject, { desc = "Big comment textobj" })
-
---------------------------------------------------------------------------------
--- MISC Plugins
--- hint textobj
-keymap("o", "h", function() require("tsht").nodes() end, { desc = "hint textobj" })
+keymap("o", "u", commented_lines_textobject, { desc = "󱡔 Big Comment textobj" })
 
 -- Git Hunks
-keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" })
+keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "󱡔 󰊢 hunk textobj" })
 
 --------------------------------------------------------------------------------
 
@@ -93,63 +87,67 @@ keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "hunk textobj" 
 -- stylua: ignore start
 
 -- space: subword
-keymap({"o", "x"}, "<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "inner subword textobj" })
+keymap({"o", "x"}, "<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "󱡔 inner subword textobj" })
 
 -- L: link
-keymap("o", "L", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "link textobj" })
+keymap("o", "L", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "󱡔 link textobj" })
 
 -- iv/av: value textobj
-keymap({ "x", "o" }, "iv", "<cmd>lua require('various-textobjs').value(true)<CR>", { desc = "inner value textobj" })
-keymap({ "x", "o" }, "av", "<cmd>lua require('various-textobjs').value(false)<CR>", { desc = "outer value textobj" })
+keymap({ "x", "o" }, "iv", "<cmd>lua require('various-textobjs').value(true)<CR>", { desc = "󱡔 inner value textobj" })
+keymap({ "x", "o" }, "av", "<cmd>lua require('various-textobjs').value(false)<CR>", { desc = "󱡔 outer value textobj" })
 
 -- ak: outer key textobj
 -- INFO `ik` defined via treesitter to exclude `local` and `let`
 -- INFO mapping the *inner* obj to `ak`, since it includes `local` and `let`
 -- (various textobjs' outer key includes the "=" and ":" as well)
-keymap({ "x", "o" }, "ak", "<cmd>lua require('various-textobjs').key(true)<CR>", { desc = "outer key textobj" })
+keymap({ "x", "o" }, "ak", "<cmd>lua require('various-textobjs').key(true)<CR>", { desc = "󱡔 outer key textobj" })
 
 -- n: [n]ear end of the line
-keymap({ "o", "x" }, "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", { desc = "near EoL textobj" })
+keymap({ "o", "x" }, "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", { desc = "󱡔 near EoL textobj" })
 
 -- m: to next closing bracket
-keymap({ "o", "x" }, "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", { desc = "to next closing bracket textobj" })
+keymap({ "o", "x" }, "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", { desc = "󱡔 to next closing bracket textobj" })
 
 -- o: c[o]lumn textobj
-keymap("o", "o", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "column textobj" })
+keymap("o", "o", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "󱡔 column textobj" })
 
 -- ag: entire buffer textobj
-keymap( { "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "entire buffer textobj" })
+keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "󱡔 entire buffer textobj" })
+
+-- V: visible in window
+keymap("o" , "V", "<cmd>lua require('various-textobjs').visibleInWindow()<CR>", { desc = "󱡔 visible in window textobj" })
 
 -- az/iz: fold textobj
-keymap( { "x", "o" }, "az", "<cmd>lua require('various-textobjs').closedFold(false)<CR>", { desc = "outer fold textobj" })
-keymap( { "x", "o" }, "iz", "<cmd>lua require('various-textobjs').closedFold(true)<CR>", { desc = "inner fold textobj" })
+keymap( { "x", "o" }, "az", "<cmd>lua require('various-textobjs').closedFold(false)<CR>", { desc = "󱡔 outer fold textobj" })
+keymap( { "x", "o" }, "iz", "<cmd>lua require('various-textobjs').closedFold(true)<CR>", { desc = "󱡔 inner fold textobj" })
 
 -- a./i.: chainMember textobj
-keymap( { "x", "o" }, "a.", "<cmd>lua require('various-textobjs').chainMember(false)<CR>", { desc = "outer chainMember textobj" })
-keymap( { "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember(true)<CR>", { desc = "inner chainMember textobj" })
+keymap( { "x", "o" }, "a.", "<cmd>lua require('various-textobjs').chainMember(false)<CR>", { desc = "󱡔 outer chainMember textobj" })
+keymap( { "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember(true)<CR>", { desc = "󱡔 inner chainMember textobj" })
 
--- r: [r]est of paragraph/indentation (linewise)
+-- r: [r]est of ... (linewise)
 -- INFO not setting in visual mode, to keep visual block mode replace
+keymap("o", "rw", "<cmd>lua require('various-textobjs').restOfWindow()<CR>", { desc = "󱡔 rest of window textobj" })
 keymap("o", "rp", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", { desc = "󱡔 rest of paragraph textobj" })
 keymap("o", "ri", "<cmd>lua require('various-textobjs').restOfIndentation()<CR>", { desc = "󱡔 rest of indentation textobj" })
 keymap("o", "rg", "G", { desc = "󱡔 rest of buffer textobj" })
 
 -- ge: diagnostic textobj (similar to ge for the next diagnostic)
-keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", { desc = "diagnostic textobj" })
+keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", { desc = "󱡔 diagnostic textobj" })
 
 -- iR/aR: double square brackets
-keymap( { "x", "o" }, "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(true)<CR>", { desc = "inner double square bracket" })
-keymap( { "x", "o" }, "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(false)<CR>", { desc = "outer double square bracket" })
+keymap( { "x", "o" }, "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(true)<CR>", { desc = "󱡔 inner double square bracket" })
+keymap( { "x", "o" }, "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(false)<CR>", { desc = "󱡔 outer double square bracket" })
 
 -- ii/ai: indentation textobj
-keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(true, true)<CR>", { desc = "inner indent textobj" })
-keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "outer indent textobj" })
+keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(true, true)<CR>", { desc = "󱡔 inner indent textobj" })
+keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "󱡔 outer indent textobj" })
 
 autocmd("FileType", {
 	callback = function()
 		local indentedFts = { "python", "yaml", "markdown", "gitconfig" }
 		if vim.tbl_contains(indentedFts, bo.filetype) then
-			keymap( { "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { buffer = true, desc = "indent textobj w/ start border" })
+			keymap( { "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { buffer = true, desc = "󱡔 indent textobj w/ start border" })
 		end
 	end,
 })
@@ -158,8 +156,8 @@ autocmd("FileType", {
 	callback = function()
 		local pipeFiletypes = { "sh", "zsh", "bash" }
 		if vim.tbl_contains(pipeFiletypes, bo.filetype) then
-			keymap( { "x", "o" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { buffer = true, desc = "inner pipe textobj" })
-			keymap( { "x", "o" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { buffer = true, desc = "outer pipe textobj" })
+			keymap( { "x", "o" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { buffer = true, desc = "󱡔 inner pipe textobj" })
+			keymap( { "x", "o" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { buffer = true, desc = "󱡔 outer pipe textobj" })
 		end
 	end,
 })
