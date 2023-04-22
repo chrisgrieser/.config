@@ -39,10 +39,9 @@ ExternalHarddriveWatcher = hs.usb.watcher
 			"External Disk 3.0", -- Externe B
 			"Elements 2621", -- Externe C
 		}
-		local isBackupDrive = u.tbl_contains(harddriveNames, name)
 
-		if isBackupDrive then
-			u.app("WerTerm"):activate()
+		if u.tbl_contains(harddriveNames, name) then
+			u.app("WezTerm"):activate()
 		else -- open volume
 			u.runWithDelays(1, function()
 				local stdout, success =

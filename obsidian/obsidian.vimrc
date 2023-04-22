@@ -154,8 +154,8 @@ nmap _ o<Esc>0"_d$k
 exmap aiComplete obcommand obsidian-textgenerator-plugin:generate-text
 nmap ,a :aiComplete
 
-" [i]nspect commands in console
-nmap ,i :obcommand
+" [l]og commands in console
+nmap ,l :obcommand
 
 " [c]lean alias part of next Wikilink
 " (or Link Homepage when using Auto Title Plugin)
