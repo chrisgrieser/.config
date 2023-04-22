@@ -121,6 +121,7 @@ return {
 	},
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim", -- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
+		commit = "84ca3abe8aaecbb5b30ad89e4701d4a9c821b72c", -- https://github.com/lvimuser/lsp-inlayhints.nvim/issues/42
 		lazy = true, -- required in attach function
 		init = function()
 			vim.api.nvim_create_autocmd("LspAttach", {

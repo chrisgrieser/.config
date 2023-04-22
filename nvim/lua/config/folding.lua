@@ -84,9 +84,8 @@ keymap("n", "h", function()
 
 	local isFirstNonBlank = (tabs and (col <= indent / tabwidth)) or (not tabs and (col <= indent))
 	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-	local notOnFold = fn.foldclosed(".") == -1
 
-	if isFirstNonBlank and shouldCloseFold and notOnFold then
+	if isFirstNonBlank and shouldCloseFold then
 		local wasFolded = pcall(u.normal, "zc")
 		-- fallback: the line didn't have a closable fold, then use h to go into
 		-- into the indentation
