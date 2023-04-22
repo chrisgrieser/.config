@@ -1,5 +1,5 @@
 return {
-	{
+	{ -- comment
 		"numToStr/Comment.nvim",
 		keys = { -- mnemonic: [q]uiet text
 			{ "Q", desc = "Append Comment at EoL" },
@@ -21,22 +21,23 @@ return {
 			},
 		},
 	},
-	{ -- annotation comments
+	{ -- annotation comment
 		"danymat/neogen",
 		lazy = true,
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = true,
 	},
-	{
+	{ -- substitute
 		"gbprod/substitute.nvim",
 		lazy = true,
 		opts = {
 			on_substitute = require("yanky.integration").substitute(),
 		},
 	},
-	{
+	{ -- duplicate
 		"smjonas/duplicate.nvim",
 		keys = { { "w", mode = { "n", "x" }, desc = "Duplicate" } },
+		init = function() vim.keymap.set("n", "W", "w$", { remap = true, desc = "Duplicate to EoL" }) end,
 		opts = {
 			operator = {
 				normal_mode = "w",
@@ -100,7 +101,7 @@ return {
 			end,
 		},
 	},
-	{
+	{ -- surround
 		"kylechui/nvim-surround",
 		event = "BufRead",
 		config = function()

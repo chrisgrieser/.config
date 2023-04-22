@@ -1203,7 +1203,7 @@ sketchybar --trigger update-sidenotes-count</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>:theme</string>
+				<string>sidenotes theme</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>

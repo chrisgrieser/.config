@@ -240,19 +240,16 @@ keymap("n", "s", function() require("substitute").operator() end, { desc = "subs
 keymap("n", "ss", function() require("substitute").line() end, { desc = "substitute line" })
 keymap("n", "S", function() require("substitute").eol() end, { desc = "substitute to end of line" })
 -- stylua: ignore
-keymap( "n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
+keymap("n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
+keymap("n", "sX", "sx$", { remap = true, desc = "exchange to EoL" })
 keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap(
-	{ "n", "x" },
-	"<leader>fc",
-	function() return ":S /" .. expand("<cword>") .. "//g<Left><Left>" end,
-	{ desc = "󱗘 :AltSubstitute cword", expr = true }
-)
-keymap({ "n", "x" }, "<leader>ff", [[:S ///g<Left><Left><Left>]], { desc = "󱗘 :AltSubstitute" })
+keymap("n", "<leader>fc", function() return ":%s /" .. expand("<cword>") .. "//g<Left><Left>" end, { desc = "󱗘 :substitute (magic & cword)", expr = true })
+keymap("n", "<leader>ff", [[:%sm ///g<Left><Left><Left>]], { desc = "󱗘 :substitute (magic)" })
+keymap("x", "<leader>ff", [[:sm ///g<Left><Left><Left>]], { desc = "󱗘 :substitute (magic)" })
 
 keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
 keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })

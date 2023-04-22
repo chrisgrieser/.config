@@ -292,6 +292,7 @@ local function cmdlineCompletionConfig()
 				IncRename = true,
 				S = true, -- :AltSubstitute
 				s = true, -- :substitute
+				sm = true, -- :substitute (magic)
 			}
 			local cmd = vim.fn.getcmdline():match("%S+") -- Get first word of cmdline
 			-- Return true if cmd isn't disabled

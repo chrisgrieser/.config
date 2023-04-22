@@ -14,8 +14,8 @@ function run(argv) {
 	const sidenotes = Application("SideNotes");
 	sidenotes.setTheme(theme);
 
-	// activate to also have a look at it ( HACK since app.activate() does not
-	// show sidenotes, opening the current note 🙈)
+	// activate to also have a look at it 
+	// (HACK since app.activate() does not show sidenotes, opening the current note 🙈)
 	const currentNoteId = sidenotes.currentNote().id();
 	sidenotes.openWithId(currentNoteId);
 }
