@@ -19,7 +19,6 @@ function o() {
 			--ansi \
 			--query="$input" \
 			--info=inline \
-			--height=80% \
 			--preview 'bat --color=always --style=snip --wrap=never --tabs=2 {}'
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted

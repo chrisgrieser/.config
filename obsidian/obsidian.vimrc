@@ -44,10 +44,20 @@ nmap j gj
 nmap k gk
 
 " HJKL behaves like hjkl, but bigger distance
-map H g0
-map L g$
-map J 6gj
-map K 6gk
+nmap H g0
+nmap L g$
+nmap J 6gj
+nmap K 6gk
+
+vmap H g0
+vmap L g$
+vmap J 6gj
+vmap K 6gk
+
+omap H g0
+omap L g$
+omap J 3j
+omap K 3k
 
 " [z]pelling [l]ist (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
@@ -69,6 +79,8 @@ exmap lineUp obcommand editor:swap-line-up
 exmap lineDown obcommand editor:swap-line-down
 nmap <Up> :lineUp
 nmap <Down> :lineDown
+vmap <Up> :lineUp
+xmap <Down> :lineDown
 nmap <Right> dlp
 nmap <Left> dlhhp
 
@@ -108,7 +120,6 @@ nmap U <C-r>
 " Case Switch via Smarter MD Hotkeys Plugin
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
 nmap ö :caseSwitch
-vmap ö :caseSwitch
 
 " Move words (equivalent to sibling-swap.nvim)
 nmap ü "zdawel"zph
@@ -203,18 +214,18 @@ vmap v <C-v>
 """"""""""""""""""""""
 " quicker access to [m]assive word, [q]uote, [z]ingle quote, inline cod[e],
 " [r]ectangular bracket, and [c]urly braces
-map am aW
-map im iW
-map aq a"
-map iq i"
-map az a'
-map iz i'
-map ae a`
-map ie i`
-map ir i[
-map ar a[
-map ac a{
-map ic i{
+omap am aW
+omap im iW
+omap aq a"
+omap iq i"
+omap az a'
+omap iz i'
+omap ae a`
+omap ie i`
+omap ir i[
+omap ar a[
+omap ac a{
+omap ic i{
 
 """"""""""""""""""""""
 " Tabs, Splits & Alt-file
@@ -289,7 +300,8 @@ nmap ,l :linkjump
 " Substitute
 """"""""""""""""""""""
 " poor man's substitute.nvim 🥲
-map s Vp
+unmap s
+nmap ss Vp
 nmap S vg$p
 
 """"""""""""""""""""""
@@ -298,7 +310,7 @@ nmap S vg$p
 
 " [O]ption: line [n]umbers
 exmap number obcommand obsidian-smarter-md-hotkeys:toggle-line-numbers
-map ,on :number
+nmap ,on :number
 
 " [O]ption: [s]pellcheck
 exmap spellcheck obcommand editor:toggle-spellcheck
