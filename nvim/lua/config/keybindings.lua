@@ -211,7 +211,7 @@ local function valeWord(mode)
 		word = fn.getreg("z")
 	end
 
-	local filepath = vim.env.DOTFILE_FOLDER .. "/linter-configs/vale/styles/Vocab/Docs/" .. mode .. ".txt"
+	local filepath = vim.env.DOTFILE_FOLDER .. "/_linter-configs/vale/styles/Vocab/Docs/" .. mode .. ".txt"
 	local success = u.appendToFile(filepath, word)
 	if not success then return end -- error message already by AppendToFile
 	cmd.mkview(2)

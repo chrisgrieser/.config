@@ -81,7 +81,7 @@ end):start()
 --------------------------------------------------------------------------------
 -- FROM FILE HUB
 
-local browserSettings = DotfilesFolder .. "/browser-extension-configs/"
+local browserSettings = DotfilesFolder .. "/_browser-extension-configs/"
 FileHubWatcher = pw(FileHub, function(paths, _)
 	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do

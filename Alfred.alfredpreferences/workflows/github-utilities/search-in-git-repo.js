@@ -51,7 +51,7 @@ const fileArray = app
 		else if (type.endsWith("-bkp")) type = "other";
 
 		// icon determination
-		let iconObj = { path: "./../../../custom-filetype-icons/" };
+		let iconObj = { path: "./../../../_custom-filetype-icons/" };
 		switch (type) {
 			case "icns":
 			case "png":

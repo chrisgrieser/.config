@@ -23,3 +23,5 @@ workflows/kill-processes
 workflows/urban-dictonary-search
 workflows/duden-search
 workflows/utf-search
+workflows/youtube-search
+
