@@ -5,12 +5,6 @@ return {
 		-- already set via lualine component
 		init = function() vim.g.VM_set_statusline = 0 end,
 	},
-	{ -- :substitute, but with lua pattern
-		"chrisgrieser/nvim-alt-substitute",
-		dev = true,
-		event = "CmdlineEnter", -- loading with `cmd =` does not work with incremental preview
-		config = true,
-	},
 	{ -- structural search & replace
 		"cshuaimin/ssr.nvim",
 		lazy = true,

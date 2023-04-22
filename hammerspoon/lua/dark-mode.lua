@@ -1,7 +1,7 @@
 local M = {}
 
-local u = require("lua.utils")
 local console = require("lua.console")
+local u = require("lua.utils")
 local visuals = require("lua.visuals")
 --------------------------------------------------------------------------------
 
@@ -15,20 +15,26 @@ end
 -- - Highlights PDF appearance
 -- - Sketchybar
 -- - Hammerspoon Console
+-- - SideNotes
 local function toggleDarkMode()
+	local sidenotesDark = "City Lights"
+	local sidenotesLight = "Graphite Gray"
+
 	brightnessNotify()
-	local sketchyfont, sketchybg, toMode, pdfbg
+	local sketchyfont, sketchybg, toMode, pdfbg, sidenotesTheme
 
 	if u.isDarkMode() then
 		pdfbg = "Default"
 		toMode = "light"
 		sketchybg = "0xffcdcdcd"
 		sketchyfont = "0xff000000"
+		sidenotesTheme = sidenotesLight
 	else
 		pdfbg = "Night"
 		toMode = "dark"
 		sketchybg = "0xff333333"
 		sketchyfont = "0xffffffff"
+		sidenotesTheme = sidenotesDark
 	end
 
 	-- neovim (requires setup in ~/.config/nvim/lua/file-watcher.lua)
@@ -59,9 +65,19 @@ local function toggleDarkMode()
 		--set covid-stats icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--update
 	]])
+
+	-- SideNotes
+	-- stylua: ignore
+	local builtInThemes = {"Classic", "Retro", "Dark Blue", "Graphite Gray", "Default"}
+	local themePath = os.getenv("HOME") .. "/Library/Application Support/com.apptorium.SideNotes-paddle/themes"
+	if u.tbl_contains(builtInThemes, sidenotesTheme) then themePath = "/Applications/SideNotes.app/Contents/Resources" end
+	local jxaCmd = ([[Application("SideNotes").setTheme("%s/%s.sntheme")]]):format(themePath, sidenotesTheme)
+	print("jxaCmd:", jxaCmd)
+	local shellCmd = ([[osascript -l JavaScript -e '%s']]):format(jxaCmd)
+	hs.execute(shellCmd)
 end
 
-u.hotkey({}, "f13", toggleDarkMode) -- del key on Keychron Keyboard
+u.hotkey({}, "f13", toggleDarkMode) -- `del` key on Keychron Keyboard
 
 --------------------------------------------------------------------------------
 
