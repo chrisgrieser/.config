@@ -36,7 +36,7 @@ function pip3() {
 	command pip3 "$@"
 }
 
-alias bkp='zsh "$DOTFILE_FOLDER/utility-scripts/backup-script.sh"'
+alias bkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-script.sh"'
 
 
 alias l='exa --all --long --git --icons --group-directories-first --sort=modified'
