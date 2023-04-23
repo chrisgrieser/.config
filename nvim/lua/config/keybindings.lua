@@ -448,9 +448,11 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
 -- indent properly when entering insert mode on empty lines
 keymap("n", "i", function()
-	if #vim.fn.getline(".") == 0 then return [["_cc]] end
+	if #vim.fn.getline(".") == 0 then
+		return [["_cc]]
+	end
 	return "i"
-end, {expr = true, desc = "better i"})
+end, { expr = true, desc = "better i" })
 
 --------------------------------------------------------------------------------
 -- VISUAL MODE
@@ -590,10 +592,12 @@ keymap("n", "go", function()
 end, { desc = " Browse in Project" })
 
 -- stylua: ignore
-keymap( "n", "gO", function() require("telescope").extensions.file_browser.file_browser {
-	path = expand("%:p:h"),
-	prompt_title = "󰝰 " .. expand("%:p:h:t"),
-} end, { desc = " Browse in current Folder" })
+keymap( "n", "gO", function()
+	require("telescope").extensions.file_browser.file_browser {
+		path = expand("%:p:h"),
+		prompt_title = "󰝰 " .. expand("%:p:h:t"),
+	}
+end, { desc = " Browse in Current Folder" })
 
 -- stylua: ignore
 -- goto projects
@@ -650,7 +654,7 @@ vim.keymap.set("n", "gk", function()
 	end
 	local symbolPath = require("nvim-navic").get_data()
 	local parent = symbolPath[#symbolPath - 1]
-	if not parent then 
+	if not parent then
 		vim.notify("Already at the highest parent.")
 		return
 	end
