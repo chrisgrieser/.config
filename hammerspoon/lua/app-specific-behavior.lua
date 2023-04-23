@@ -68,7 +68,7 @@ Wf_browser = u.wf
 	})
 	:subscribe(u.wf.windowCreated, function()
 		wu.autoTile(Wf_browser)
-		u.runWithDelays({ 0.2, 0.5, 1 }, function()
+		u.runWithDelays({ 0.2, 0.5 }, function()
 			u.closeTab("newtab.html")
 			u.closeTab("chrome://newtab/")
 		end)
