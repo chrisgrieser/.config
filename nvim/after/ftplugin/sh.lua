@@ -6,24 +6,20 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- hover -> man page
-keymap(
-	"n",
-	"<leader>h",
-	function() return "<cmd>tab Man " .. expand("<cword>") .. "<CR>" end,
-	{ desc = "Man page in new tab", buffer = true, expr = true }
-)
+keymap("n", "<leader>h", function()
+	return "<cmd>tab Man " .. expand("<cword>") .. "<CR>"
+end, { desc = "Man page in new tab", buffer = true, expr = true })
 
---------------------------------------------------------------------------------
 
 -- pipe textobj
-
 --stylua: ignore
-keymap({ "o", "x" }, "iP", function() require("various-textobjs").shellPipe(true) end, { desc = "inner shellPipe textobj", buffer = true })
+keymap({ "o", "x" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { desc = "inner shellPipe textobj", buffer = true })
 --stylua: ignore
-keymap({ "o", "x" }, "aP", function() require("various-textobjs").shellPipe(false) end, { desc = "outer shellPipe textobj", buffer = true })
+keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { desc = "outer shellPipe textobj", buffer = true })
 
 --------------------------------------------------------------------------------
 -- Reload Sketchybar
+
 keymap("n", "<leader>r", function()
 	cmd.update()
 	local parentFolder = expand("%:p:h")
