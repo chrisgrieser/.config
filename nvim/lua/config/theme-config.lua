@@ -12,21 +12,17 @@ local function linkHighlight(hlgroupfrom, hlgroupto)
 	if vim.version().minor >= 9 then
 		vim.api.nvim_set_hl(0, hlgroupfrom, { link = hlgroupto, default = true })
 	else
-		cmd.highlight({ "def link " .. hlgroupto .. " " .. hlgroupfrom, bang = true })
+		cmd.highlight { "def link " .. hlgroupto .. " " .. hlgroupfrom, bang = true }
 	end
 end
 
 ---INFO not using `api.nvim_set_hl` yet as it overwrites a group instead of updating it
 ---@param hlgroup string
 ---@param changes string
-local function updateHighlight(hlgroup, changes)
-	cmd.highlight(hlgroup .. " " .. changes)
-end
+local function updateHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
 
 ---@param hlgroup string
-local function clearHighlight(hlgroup)
-	cmd.highlight("clear " .. hlgroup)
-end
+local function clearHighlight(hlgroup) cmd.highlight("clear " .. hlgroup) end
 
 -- https://www.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90/
 local function fixSemanticHighlighting()
@@ -93,9 +89,7 @@ local function themeModifications()
 	local mode = vim.opt.background:get()
 	local theme = g.colors_name
 	-- some themes do not set g.colors_name
-	if not theme then
-		theme = mode == "light" and g.lightTheme or g.darkTheme
-	end
+	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
 
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 	-- FIX lualine_a not getting bold in some themes
@@ -188,14 +182,13 @@ autocmd("ColorScheme", {
 		if vim.version().minor >= 9 then
 			-- add SEMANTIC HIGHLIGHTS to themes that do not have it yet https://www.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90/
 			---@diagnostic disable-next-line: undefined-field
-			local themeHasNoSemanticHl = vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@lsp.type.function" }))
-			if themeHasNoSemanticHl then
-				fixSemanticHighlighting()
-			end
+			local themeHasNoSemanticHl =
+				vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@lsp.type.function" }))
+			if themeHasNoSemanticHl then fixSemanticHighlighting() end
 		end
 
 		-- defer needed for some modifications to properly take effect
-		for _, delayMs in pairs({ 50, 200 }) do
+		for _, delayMs in pairs { 50, 200, 500 } do
 			vim.defer_fn(customHighlights, delayMs)
 			vim.defer_fn(themeModifications, delayMs)
 		end
