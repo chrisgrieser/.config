@@ -51,7 +51,7 @@ return {
 	},
 	{ -- better marks
 		"tomasky/bookmarks.nvim",
-		event = "VeryLazy", -- cannot be loaded on keymaps due to the bookmark signs
+		event = "VimEnter", -- cannot be loaded on keymaps due to the bookmark signs
 		opts = {
 			save_file = u.vimDataDir .. "/bookmarks",
 			signs = {
