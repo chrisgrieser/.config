@@ -7,7 +7,7 @@
 i=0
 while ! pgrep "Stats"; do
 	open -a "Stats"
-	sleep 3
+	sleep 2
 	i=$((i + 1))
 	if [[ $i -gt 20 ]]; then
 		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats not running"'
@@ -18,7 +18,7 @@ done
 i=0
 while true; do
 	# REQUIRED Stats being set as one combined module
-	stats=$(sketchybar --query default_menu_items | grep "Combined" | head -n1 | cut -d\" -f2)
+	stats=$(sketchybar --query default_menu_items | grep --max-count=1 "Combined" | cut -d\" -f2)
 	[[ -n "$stats" ]] && break
 	sleep 2
 	i=$((i + 1))
@@ -32,7 +32,7 @@ done
 
 PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
-if defaults read -g AppleInterfaceStyle | grep -iq "Dark"; then
+if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
 	BG_COLOR="0xff333333"
 	FONT_COLOR="0xffffffff"
 else
@@ -101,6 +101,6 @@ sketchybar \
 
 # INFO
 # - `--update` needs to run at the end of config and should not be run in an item script
-# - `repo-files-update` gets triggered via Hammerspoon path watcher after sync events
+# - `repo-files-update` gets triggered via Hammerspoon after sync events
 # - clock and alias items needs the fixed-width to fix whitespace of the item next (stats)
 # - not using builtin clock, to be able to customize font etc.
