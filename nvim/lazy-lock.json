@@ -32,7 +32,7 @@
   "inline_edit.vim": { "branch": "main", "commit": "b5bff636fd2ca9d00ba0001398159f47145a8cdf" },
   "lab.nvim": { "branch": "main", "commit": "8cb3370055fe195959c51d3c9d23a77802eb8d1c" },
   "lazy.nvim": { "branch": "main", "commit": "fe28f4b73e0df887ec20196a00a1eddd12a2cf5f" },
-  "lsp-inlayhints.nvim": { "branch": "main", "commit": "84ca3abe8aaecbb5b30ad89e4701d4a9c821b72c" },
+  "lsp-inlayhints.nvim": { "branch": "main", "commit": "975828df701cbf33dae682f5d016bf2be56f1bdd" },
   "lsp_lines.nvim": { "branch": "main", "commit": "d9c8a71b8b6e6bfa2b5cf015f59450472dbf06fe" },
   "lsp_signature.nvim": { "branch": "master", "commit": "1fdc742af68f4725a22c05c132f971143be447fc" },
   "lualine.nvim": { "branch": "master", "commit": "84ffb80e452d95e2c46fa29a98ea11a240f7843e" },
