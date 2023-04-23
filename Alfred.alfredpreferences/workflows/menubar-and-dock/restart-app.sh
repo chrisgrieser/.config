@@ -13,6 +13,6 @@ case "$app" in
 	brew services restart "$app"
 	# HACK for https://github.com/FelixKratz/SketchyBar/issues/322
 	sleep 2
-	osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/dismiss-notification.js"
+	osascript -l JavaScript "$DOTFILE_FOLDER/utility-scripts/_dismiss-notification.js"
 	;;
 esac

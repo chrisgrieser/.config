@@ -2,7 +2,6 @@ local cmd = vim.cmd
 local fn = vim.fn
 local keymap = vim.keymap.set
 local u = require("config.utils")
-local bo = vim.bo
 
 --------------------------------------------------------------------------------
 -- PAUSE FOLDS WHEN SEARCHING
@@ -95,15 +94,11 @@ end, { desc = "󰘖 Goto next fold & open" })
 -- works well with vim's startofline option
 ---@diagnostic disable: param-type-mismatch
 keymap("n", "h", function()
-	local col = fn.col(".") - 1
-	local indent = fn.indent(".")
-	local tabs = not bo.expandtab
-	local tabwidth = bo.tabstop
-
-	local isFirstNonBlank = (tabs and (col <= indent / tabwidth)) or (not tabs and (col <= indent))
+	-- `virtcol` accounts for tab indentation
+	local onIndentOrFirstNonBlank = fn.virtcol(".") <= fn.indent(".") + 1
 	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
 
-	if isFirstNonBlank and shouldCloseFold then
+	if onIndentOrFirstNonBlank and shouldCloseFold then
 		local wasFolded = pcall(u.normal, "zc")
 		-- fallback: the line didn't have a closable fold, then use h to go into
 		-- into the indentation

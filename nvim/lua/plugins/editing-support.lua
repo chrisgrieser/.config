@@ -82,7 +82,7 @@ return {
 			},
 		},
 	},
-	{ -- swapping of sibling nodes (works with more nodes than Iswap, but has no hint mode)
+	{ -- swapping of sibling nodes
 		"Wansmer/sibling-swap.nvim",
 		lazy = true, -- loaded by keymaps
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -153,7 +153,7 @@ return {
 				key_labels = { -- seems these are not working?
 					["<CR>"] = "↵ ",
 					["<BS>"] = "⌫",
-					["<Space>"] = "󱁐",
+					["<space>"] = "󱁐",
 					["<Tab>"] = "↹ ",
 					["<Esc>"] = "⎋",
 					["<F1>"] = "^", -- karabiner remapping
