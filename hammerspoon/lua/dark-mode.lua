@@ -72,7 +72,6 @@ local function toggleDarkMode()
 	local themePath = os.getenv("HOME") .. "/Library/Application Support/com.apptorium.SideNotes-paddle/themes"
 	if u.tbl_contains(builtInThemes, sidenotesTheme) then themePath = "/Applications/SideNotes.app/Contents/Resources" end
 	local jxaCmd = ([[Application("SideNotes").setTheme("%s/%s.sntheme")]]):format(themePath, sidenotesTheme)
-	print("jxaCmd:", jxaCmd)
 	local shellCmd = ([[osascript -l JavaScript -e '%s']]):format(jxaCmd)
 	hs.execute(shellCmd)
 end

@@ -68,6 +68,10 @@ Wf_browser = u.wf
 	})
 	:subscribe(u.wf.windowCreated, function()
 		wu.autoTile(Wf_browser)
+		-- stylua: ignore
+		u.runWithDelays({1}, function ()
+			u.closeTab("cglpcedifkgalfdklahhcchnjepcckfn")	
+		end)
 	end)
 	:subscribe(u.wf.windowDestroyed, function() wu.autoTile(Wf_browser) end)
 	:subscribe(u.wf.windowFocused, wu.bringAllWinsToFront)
