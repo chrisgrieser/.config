@@ -34,7 +34,7 @@ return {
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-	{
+	{ -- editable quickfix list
 		-- my fork, pending on PR: https://github.com/gabrielpoca/replacer.nvim/pull/12
 		"chrisgrieser/replacer.nvim",
 		lazy = true,
@@ -51,13 +51,13 @@ return {
 			})
 		end,
 	},
-	{
+	{ -- refactoring utilities
 		"ThePrimeagen/refactoring.nvim",
 		lazy = true,
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
 		config = true,
 	},
-	{
+	{ -- better macros
 		"chrisgrieser/nvim-recorder",
 		dev = true,
 		keys = {
