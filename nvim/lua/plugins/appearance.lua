@@ -34,12 +34,10 @@ return {
 				-- filetypes
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
 				bib = { icon = "", name = "BibTeX" },
-				http = { icon = "󰴚", name = "http" },
+				http = { icon = "󰴚", name = "http request" },
 				-- plugins
 				lazy = { icon = "", name = "Lazy" },
 				mason = { icon = "", name = "Mason" },
-				NeogitStatus = { icon = "󰊢", name = "NeogitStatus" },
-				toggleterm = { icon = "", name = "ToggleTerm" },
 			},
 		},
 	},

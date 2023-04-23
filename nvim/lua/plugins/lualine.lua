@@ -289,9 +289,7 @@ local lualineConfig = {
 		section_separators = bottomSeparators,
 	},
 	extensions = {
-		"lazy",
 		"man",
-		"toggleterm",
 		"nvim-dap-ui",
 	},
 }
