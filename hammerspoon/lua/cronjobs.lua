@@ -88,15 +88,6 @@ SleepTimer = hs.timer.doEvery(1800, function ()
 	-- close leftover fullscreen spaces
 	closeFullscreenSpaces()
 
-	-- close browser tabs running YouTube
-	u.applescript([[
-		tell application "Vivaldi"
-			if ((count of window) is not 0)
-				if ((count of tab of front window) is not 0)
-					set currentTabUrl to URL of active tab of front window
-					if (currentTabUrl contains "youtu") then close active tab of front window
-				end if
-			end if
-		end tell
-	]])
+	-- close browser tabs running YouTube (not full name for youtube shorturls)
+	u.closeTab("youtu") 
 end):start()

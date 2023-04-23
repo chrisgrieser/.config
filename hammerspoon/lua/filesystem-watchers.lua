@@ -163,20 +163,7 @@ ObsiAlphaWatcher = pw(FileHub, function(files)
 				open -a "Obsidian"
 			]])
 			-- close the created tab
-			u.applescript([[
-				tell application "Vivaldi"
-					set window_list to every window
-					repeat with the_window in window_list
-						set tab_list to every tab in the_window
-						repeat with the_tab in tab_list
-							set the_url to the url of the_tab
-							if the_url contains ("https://cdn.discordapp.com/attachments") then
-								close the_tab
-							end if
-						end repeat
-					end repeat
-				end tell
-			]])
+			u.closeTab("https://cdn.discordapp.com/attachments")
 		end)
 	end
 end):start()

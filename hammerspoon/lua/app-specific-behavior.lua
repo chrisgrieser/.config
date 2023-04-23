@@ -44,9 +44,7 @@ SpotifyAppWatcher = u.aw
 PixelmatorWatcher = u.aw
 	.new(function(appName, eventType, appObj)
 		if appName == "Pixelmator" and eventType == u.aw.launched then
-			u.asSoonAsAppRuns(appName, function()
-				wu.moveResize(appObj, wu.maximized)
-			end)
+			u.asSoonAsAppRuns(appName, function() wu.moveResize(appObj, wu.maximized) end)
 		end
 	end)
 	:start()
@@ -71,9 +69,7 @@ Wf_browser = u.wf
 	:subscribe(u.wf.windowCreated, function()
 		wu.autoTile(Wf_browser)
 	end)
-	:subscribe(u.wf.windowDestroyed, function()
-		wu.autoTile(Wf_browser)
-	end)
+	:subscribe(u.wf.windowDestroyed, function() wu.autoTile(Wf_browser) end)
 	:subscribe(u.wf.windowFocused, wu.bringAllWinsToFront)
 
 -- Automatically hide Browser has when no window
@@ -83,9 +79,7 @@ Wf_browser_all = u.wf
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(u.wf.windowDestroyed, function()
 		local app = u.app("Vivaldi")
-		if app and #(app:allWindows()) == 0 then
-			app:hide()
-		end
+		if app and #(app:allWindows()) == 0 then app:hide() end
 	end)
 
 --------------------------------------------------------------------------------
@@ -102,14 +96,12 @@ local function addCssSelectorLeadingDot()
 	end
 
 	local clipb = hs.pasteboard.getContents()
-	if not clipb then
-		return
-	end
+	if not clipb then return end
 
-	local hasSelectorAndClass = clipb:find(".%-.") and not (clipb:find("[\n.=]")) and not (clipb:find("^%-%-"))
-	if not hasSelectorAndClass then
-		return
-	end
+	local hasSelectorAndClass = clipb:find(".%-.")
+		and not (clipb:find("[\n.=]"))
+		and not (clipb:find("^%-%-"))
+	if not hasSelectorAndClass then return end
 
 	clipb = clipb:gsub("^", "."):gsub(" ", ".")
 	hs.pasteboard.setContents(clipb)
@@ -117,9 +109,7 @@ end
 
 NeovideWatcher = u.aw
 	.new(function(appName, eventType)
-		if not appName or appName:lower() ~= "neovide" then
-			return
-		end
+		if not appName or appName:lower() ~= "neovide" then return end
 
 		if eventType == u.aw.activated then
 			addCssSelectorLeadingDot()
@@ -154,18 +144,14 @@ Wf_finder = u.wf
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(u.wf.windowCreated, function()
-		wu.autoTile(Wf_finder)
-	end)
-	:subscribe(u.wf.windowDestroyed, function()
-		wu.autoTile(Wf_finder)
-	end)
+	:subscribe(u.wf.windowCreated, function() wu.autoTile(Wf_finder) end)
+	:subscribe(u.wf.windowDestroyed, function() wu.autoTile(Wf_finder) end)
 
 FinderAppWatcher = u.aw
 	.new(function(appName, eventType, finderAppObj)
 		if eventType == u.aw.activated and appName == "Finder" then
 			wu.autoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
-			finderAppObj:selectMenuItem({ "View", "Hide Sidebar" })
+			finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
 		end
 	end)
 	:start()
@@ -178,15 +164,16 @@ Wf_quicklook = u
 	.new(true) -- BUG for some reason, restricting this to "Finder" does not work
 	:setOverrideFilter({ allowTitles = { "^Quick Look$", "^qlmanage$" } })
 	:subscribe(u.wf.windowCreated, function(newWin)
-		local _, sel = u.applescript([[tell application "Finder" to return POSIX path of (selection as alias)]])
+		local _, sel =
+			u.applescript([[tell application "Finder" to return POSIX path of (selection as alias)]])
 		-- do not enlage window for images (which are enlarged already with
 		-- landscape proportions)
-		if sel and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4")) then
+		if
+			sel and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4"))
+		then
 			return
 		end
-		u.runWithDelays(0.4, function()
-			wu.moveResize(newWin, wu.centered)
-		end)
+		u.runWithDelays(0.4, function() wu.moveResize(newWin, wu.centered) end)
 	end)
 
 --------------------------------------------------------------------------------
@@ -196,23 +183,10 @@ Wf_quicklook = u
 -- don't leave browser tab behind when opening zoom
 Wf_zoom = u.wf.new("zoom.us"):subscribe(u.wf.windowCreated, function()
 	u.quitApp("BusyCal") -- mostly only used to open a Zoom link
-	u.applescript([[
-		tell application "Vivaldi"
-			set window_list to every window
-			repeat with the_window in window_list
-				set tab_list to every tab in the_window
-				repeat with the_tab in tab_list
-					set the_url to the url of the_tab
-					if the_url contains ("zoom.us") then close the_tab
-				end repeat
-			end repeat
-		end tell
-	]])
+	u.closeTab("zoom.us")
 	u.runWithDelays(0.5, function()
 		local zoom = u.app("zoom.us")
-		if not (zoom and zoom:findWindow("^Zoom$")) then
-			return
-		end
+		if not (zoom and zoom:findWindow("^Zoom$")) then return end
 		zoom:findWindow("^Zoom$"):close()
 	end)
 end)
@@ -224,20 +198,16 @@ end)
 -- - Start with Highlight Tool enabled
 HighlightsAppWatcher = u.aw
 	.new(function(appName, eventType, appObject)
-		if not (eventType == u.aw.launched and appName == "Highlights") then
-			return
-		end
+		if not (eventType == u.aw.launched and appName == "Highlights") then return end
 
 		local targetView = "Default"
-		if u.isDarkMode() then
-			targetView = "Night"
-		end
-		appObject:selectMenuItem({ "View", "PDF Appearance", targetView })
+		if u.isDarkMode() then targetView = "Night" end
+		appObject:selectMenuItem { "View", "PDF Appearance", targetView }
 
 		-- pre-select yellow highlight tool & hide toolbar
-		appObject:selectMenuItem({ "Tools", "Highlight" })
-		appObject:selectMenuItem({ "Tools", "Color", "Yellow" })
-		appObject:selectMenuItem({ "View", "Hide Toolbar" })
+		appObject:selectMenuItem { "Tools", "Highlight" }
+		appObject:selectMenuItem { "Tools", "Color", "Yellow" }
+		appObject:selectMenuItem { "View", "Hide Toolbar" }
 
 		wu.moveResize(appObject:mainWindow(), wu.pseudoMax)
 	end)
@@ -256,9 +226,7 @@ Wf_script_editor = u
 		elseif newWin:title() == "Untitled" then
 			u.keystroke({ "cmd" }, "v")
 			wu.moveResize(newWin, wu.centered)
-			u.runWithDelays(0.2, function()
-				u.keystroke({ "cmd" }, "k")
-			end)
+			u.runWithDelays(0.2, function() u.keystroke({ "cmd" }, "k") end)
 		-- resize window
 		elseif newWin:title():find("%.sdef$") then
 			wu.moveResize(newWin, wu.centered)
@@ -267,9 +235,7 @@ Wf_script_editor = u
 	-- fix line breaks for copypasting into other apps
 	:subscribe(u.wf.windowUnfocused, function()
 		local clipb = hs.pasteboard.getContents()
-		if not clipb then
-			return
-		end
+		if not clipb then return end
 		clipb = clipb:gsub("\r", "\n")
 		hs.pasteboard.setContents(clipb)
 	end)
@@ -279,23 +245,22 @@ Wf_script_editor = u
 -- DISCORD
 DiscordAppWatcher = u.aw
 	.new(function(appName, eventType)
-		if not (appName == "Discord") then
-			return
-		end
+		if not (appName == "Discord") then return end
 
 		-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
 		if eventType == u.aw.launched then
-			u.asSoonAsAppRuns(appName, function()
-				u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
-			end)
+			u.asSoonAsAppRuns(
+				appName,
+				function()
+					u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
+				end
+			)
 		end
 
 		-- when focused, enclose URL in clipboard with <>
 		-- when unfocused, removes <> from URL in clipboard
 		local clipb = hs.pasteboard.getContents()
-		if not clipb then
-			return
-		end
+		if not clipb then return end
 
 		if eventType == u.aw.activated then
 			local hasURL = clipb:match("^https?:%S+$")

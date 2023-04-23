@@ -95,23 +95,24 @@ function M.runWithDelays(delaySecs, callbackFn)
 	end
 end
 
---------------------------------------------------------------------------------
-
----not using static variable, since projector connection can vary
----@nodiscard
----@return boolean
-function M.isProjector()
-	local mainDisplayName = hs.screen.primaryScreen():name()
-	local projectorHelmholtz = mainDisplayName == "ViewSonic PJ"
-	local tvLeuthinger = mainDisplayName == "TV_MONITOR"
-	return projectorHelmholtz or tvLeuthinger
+---close all tabs which contain urlPart
+---@param urlPart string
+function M.closeTab(urlPart)
+	local browser = "Vivaldi"
+	local applescript = ([[
+		tell application "%s"
+			set window_list to every window
+			repeat with the_window in window_list
+				set tab_list to every tab in the_window
+				repeat with the_tab in tab_list
+					set the_url to the url of the_tab
+					if the_url contains ("%s") then close the_tab
+				end repeat
+			end repeat
+		end tell
+	]]):format(browser, urlPart)
+	hs.osascript.applescript(applescript)
 end
-local deviceName = hs.host.localizedName():gsub(".- ", "", 1)
-M.isAtOffice = (deviceName:find("[Mm]ini") or deviceName:find("eduroam")) ~= nil
-M.isAtHome = (deviceName:find("iMac") and deviceName:find("Home")) ~= nil
-M.isAtMother = deviceName:find("Mother") ~= nil
-
---------------------------------------------------------------------------------
 
 ---@nodiscard
 ---@return boolean
@@ -134,13 +135,30 @@ end
 ---Send Notification, accepting any number of arguments of any type. Converts
 ---everything into strings, concatenates them, and then sends it.
 function M.notify(...)
-	local args = hs.fnutils.map({...}, function(arg)
+	local args = hs.fnutils.map({ ... }, function(arg)
 		local safeArg = (type(arg) == "table") and hs.inspect(arg) or tostring(arg)
 		return safeArg
 	end)
 	local out = table.concat(args, " ") ---@diagnostic disable-line: param-type-mismatch
 	hs.notify.show("Hammerspoon", "", out)
 	print("💬 " .. out)
+end
+
+--------------------------------------------------------------------------------
+-- DEVICE
+
+local deviceName = hs.host.localizedName():gsub(".- ", "", 1)
+M.isAtOffice = (deviceName:find("[Mm]ini") or deviceName:find("eduroam")) ~= nil
+M.isAtHome = (deviceName:find("iMac") and deviceName:find("Home")) ~= nil
+M.isAtMother = deviceName:find("Mother") ~= nil
+---not using static variable, since projector connection can vary
+---@nodiscard
+---@return boolean
+function M.isProjector()
+	local mainDisplayName = hs.screen.primaryScreen():name()
+	local projectorHelmholtz = mainDisplayName == "ViewSonic PJ"
+	local tvLeuthinger = mainDisplayName == "TV_MONITOR"
+	return projectorHelmholtz or tvLeuthinger
 end
 
 --------------------------------------------------------------------------------
