@@ -68,9 +68,9 @@ Wf_browser = u.wf
 	})
 	:subscribe(u.wf.windowCreated, function()
 		wu.autoTile(Wf_browser)
-		-- stylua: ignore
-		u.runWithDelays({1}, function ()
-			u.closeTab("cglpcedifkgalfdklahhcchnjepcckfn")	
+		u.runWithDelays({ 0.2, 0.5, 1 }, function()
+			u.closeTab("newtab.html")
+			u.closeTab("chrome://newtab/")
 		end)
 	end)
 	:subscribe(u.wf.windowDestroyed, function() wu.autoTile(Wf_browser) end)
