@@ -1645,7 +1645,7 @@ echo -n "iCloud Sync"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>~/.config/utility-scripts/dismiss-notification.js</string>
+				<string>~/.config/_utility-scripts/dismiss-notification.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
