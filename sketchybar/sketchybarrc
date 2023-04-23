@@ -7,9 +7,9 @@
 i=0
 while ! pgrep "Stats"; do
 	open -a "Stats"
-	sleep 2
+	sleep 3
 	i=$((i + 1))
-	if [[ $i -gt 20 ]] ; then
+	if [[ $i -gt 20 ]]; then
 		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats not running"'
 		return 1
 	fi
@@ -22,13 +22,15 @@ while true; do
 	[[ -n "$stats" ]] && break
 	sleep 2
 	i=$((i + 1))
-	if [[ $i -gt 20 ]] ; then
+	if [[ $i -gt 20 ]]; then
 		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats Combined Module not found"'
 		return 1
 	fi
 done
 
 #───────────────────────────────────────────────────────────────────────────────
+
+PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
 if defaults read -g AppleInterfaceStyle | grep -iq "Dark"; then
 	BG_COLOR="0xff333333"
@@ -38,31 +40,28 @@ else
 	FONT_COLOR="0xff000000"
 fi
 
-# HACK using popup for second row. the popup only refers to the clock item to anchor it to the leftmost item,
-# it actually has nothing to do with the clock
+# HACK using popup for second row. the popup only refers to the clock item to
+# anchor it to the leftmost item, it actually has nothing to do with the clock
+# other method (requiring running multiple instances): https://felixkratz.github.io/SketchyBar/config/Tricks#multiple-bars
 first_row="left"
 second_row="popup.clock"
-
-POPUP_Y_OFFSET=-35
-HEIGHT=60                    # extra height for second row & to cover the holes at the corner where the wallpaper shines through
-ITEM_Y_OFFSET=18             # needs to be adjusted for Height
-PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
 sketchybar \
 	--bar \
-	height="$HEIGHT" position=top display=all \
+	height="60" position="top" display="all" \
 	padding_left=0 padding_right=0 color="$BG_COLOR" \
 	--default \
-	updates=when_shown drawing=on align=left \
+	updates="when_shown" drawing="on" align="left" \
 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" icon.color="$FONT_COLOR" \
 	label.font="Lucida Grande:Regular:16.5" label.color="$FONT_COLOR" \
 	icon.padding_left=2 icon.padding_right=1 \
 	label.padding_left=2 label.padding_right=10 \
+	\
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
-	popup.y_offset="$POPUP_Y_OFFSET" y_offset="$ITEM_Y_OFFSET" \
+	popup.y_offset="-35" y_offset="18" \
 	\
 	--add item clock $first_row \
 	--set clock update_freq=1 \
