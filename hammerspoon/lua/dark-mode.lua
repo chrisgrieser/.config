@@ -18,7 +18,7 @@ end
 -- - SideNotes
 local function toggleDarkMode()
 	local sidenotesDark = "City Lights"
-	local sidenotesLight = "Graphite Gray"
+	local sidenotesLight = "Marshmallow"
 
 	brightnessNotify()
 	local sketchyfont, sketchybg, toMode, pdfbg, sidenotesTheme
