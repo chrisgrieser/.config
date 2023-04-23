@@ -661,17 +661,9 @@ rules:
                 mv -n "$selection" "$selection-bkp"
               fi
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # s = follow symlink
+      # s = Create Symlink
       - type: basic
         from: { key_code: s }
-        to:
-          - shell_command: |
-              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
-              open -R "$(readlink -f "$selection")"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # S = Create Symlink
-      - type: basic
-        from: { key_code: s, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: |
               sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
@@ -684,6 +676,14 @@ rules:
                   ln -sf "$sel" "${sel}-symlink"
                   open -R "${sel}-symlink"
               fi
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # S = follow symlink
+      - type: basic
+        from: { key_code: s, modifiers: { mandatory: [shift] } }
+        to:
+          - shell_command: |
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
+              open -R "$(readlink -f "$selection")"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # z = zip files
       - type: basic
