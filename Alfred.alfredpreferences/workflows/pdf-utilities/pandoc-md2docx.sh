@@ -11,7 +11,6 @@ function md2docx () {
 		--output="$OUTPUT_FILE" \
 		--data-dir="$DOTFILE_FOLDER/pandoc"\
 		--defaults="md2docx" \
-		--metadata=date:"$(date "+%d. %B %Y")" \
 	&& open -R "$OUTPUT_FILE" \
 	&& open "$OUTPUT_FILE"
 }
@@ -22,3 +21,4 @@ echo "$output" | pbcopy
 echo "$output"
 
 
+# --metadata=date:"$(date "+%d. %B %Y")" \

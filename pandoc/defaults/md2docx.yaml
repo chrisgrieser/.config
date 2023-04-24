@@ -20,7 +20,7 @@ reference-doc: ${USERDATA}/reference-docs/academic-paper.docx
 reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
 strip-comments: true
 number-sections: true
-shift-heading-level-by: "-1"
+shift-heading-level-by: -1
 
 # Academic
 citeproc: true
@@ -28,4 +28,8 @@ bibliography: ${USERDATA}/main-bibliography.bib
 
 # needs to be set in metadata-file so it is overwritten by metadata in the
 # document yaml. (setting them here makes them override the document yaml.)
-metadata-files: [academic.yaml]
+metadata-file: academic.yaml
+
+# Filter
+filters: 
+  - set-date-metadata.lua
