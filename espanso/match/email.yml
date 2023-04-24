@@ -1,8 +1,8 @@
 matches:
   # Greetings
-  - triggers: ["!mail", "!sm"]
+  - trigger: "!mail"
     replace: "Dear sir or madam,\n\n"
-  - triggers: ["!mail", "!dh"]
+  - trigger: "!mail"
     replace: |
       Sehr geehrte Damen und Herren,
 
@@ -10,7 +10,7 @@ matches:
 
       Mit freundlichen Grüßen
       Christopher Grieser
-  - trigger: "!greet"
+  - trigger: "!mail"
     replace: "Sehr geehrte $|$,\n\n"
 
   # Signatures
@@ -35,14 +35,14 @@ matches:
       Mit freundlichen Grüßen
       Christopher Grieser
     label: Mit freundlichen Grüßen
-  - triggers: ["!kr", "!mail"]
+  - trigger: "!mail"
     replace: |-
       $|$
 
       Kind Regards
       Chris Grieser
     label: Kind Regards
-  - triggers: ["!best", "!mail"]
+  - trigger: "!mail"
     replace: |-
       $|$
 

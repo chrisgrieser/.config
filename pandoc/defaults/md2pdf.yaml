@@ -1,18 +1,14 @@
 # https://pandoc.org/MANUAL.html#defaults-files
-# ---------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
 # PDF-Writer
 writer: pdf
-standalone: true
 
 # html-based PDF-engine
 pdf-engine: wkhtmltopdf
 css: ${USERDATA}/css/nice-pandoc.css
 template: empty
 dpi: 96
-
-metadata:
-  lang: en-US
 
 # https://pandoc.org/MANUAL.html#variables-for-wkhtmltopdf
 # https://pandoc.org/MANUAL.html#variables-for-html
