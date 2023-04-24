@@ -125,9 +125,6 @@ lspSettings.jsonls = {
 lspSettings.yamlls = {
 	yaml = {
 		keyOrdering = false,-- FIX mapKeyOrder warning
-		schemas = {
-			["Ansible Vars File"] = "xxxxx.yml",
-		}
 	}, 
 }
 
