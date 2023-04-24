@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=false cannot turn off entirely: https://github.com/redhat-developer/yaml-language-server/issues/446
 # https://pandoc.org/MANUAL.html#defaults-files
 # INFO $USERDATA set via pandoc option `--data-dir` to this directory
 #───────────────────────────────────────────────────────────────────────────────
@@ -9,10 +10,10 @@ template: empty
 # https://pandoc.org/MANUAL.html#variables-for-wkhtmltopdf
 # https://pandoc.org/MANUAL.html#variables-for-html
 pdf-engine: wkhtmltopdf
-pdf-engine-opts: [ "--log-level", "warn" ] # so pandoc verbosity can be set to WARNING
+pdf-engine-opts: ["--log-level", "warn"] # so pandoc verbosity can be set to WARNING
 css: ${USERDATA}/css/nice-pandoc.css # html-based PDF engine only
 variables:
-  margin-left: 0 
+  margin-left: 0
   margin-right: 0
   margin-top: 20
   margin-bottom: 20

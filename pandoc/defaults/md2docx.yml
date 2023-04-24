@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=undefined
+# yaml-language-server: $schema=false cannot turn off entirely: https://github.com/redhat-developer/yaml-language-server/issues/446
 # https://pandoc.org/MANUAL.html#defaults-files
 # INFO $USERDATA set via pandoc option `--data-dir` to this directory
 #───────────────────────────────────────────────────────────────────────────────
