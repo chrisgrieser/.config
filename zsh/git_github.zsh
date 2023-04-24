@@ -340,16 +340,13 @@ function gdf() {
 	else
 		print "🔍\033[1;32m Selected file:"
 	fi
-	echo "Last Commit: $last_commit"
 
 	# decision on how to act on file
-	echo "$deleted_path"
+	echo "$deleted_path @$last_commit"
 	echo
-	print "\033[1;34m-------------------------------------"
-	echo "[r]estore file (checkout)"
-	echo "[s]how file (bat)"
-	echo "[c]opy content"
-	print "\-------------------------------------\033[0m"
+	printf "\033[1;34m[r]estore file (checkout)"
+	printf "[s]how file (bat)"
+	printf "[c]opy content\033[0m"
 	echo -n "> "
 	read -r -k 1 DECISION
 	echo
