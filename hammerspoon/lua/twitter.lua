@@ -61,6 +61,7 @@ TwitterWatcher = u.aw
 				wu.twitterScrollUp()
 
 				-- focus new tweet window if there is one
+				if not twitter then return end
 				local newTweetWindow = twitter:findWindow("Tweet")
 				if newTweetWindow then newTweetWindow:focus() end
 			end)

@@ -14,7 +14,7 @@ I = hs.inspect -- to inspect tables in the console more quickly
 
 --------------------------------------------------------------------------------
 
--- need to catch timers in variables to ensure they don't get garbage collected
+-- need to catch timers in global vars to ensure they don't get garbage collected
 MyTimers = {}
 
 ---Whether the current time is between startHour & endHour. Also works for

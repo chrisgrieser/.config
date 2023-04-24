@@ -370,12 +370,12 @@ local function moveAllWinsToProjectorScreen()
 end
 
 local function homeAction()
-	if u.appRunning("Twitter") then
-		M.twitterScrollUp()
-	elseif #(hs.screen.allScreens()) > 1 then
+	if #(hs.screen.allScreens()) > 1 then
 		moveCurWinToOtherDisplay()
 	elseif u.appRunning("zoom.us") then
 		hs.alert("🔈/🔇") -- toggle mute
+	elseif u.appRunning("Twitter") then
+		M.twitterScrollUp()
 		u.keystroke({ "shift", "command" }, "A", 1, u.app("zoom.us"))
 	else
 		hs.alert("<Nop>")
