@@ -7,6 +7,7 @@ vnoremap U <C-r>
 nnoremap x "_x
 vnoremap x "_x
 nnoremap c "_c
+vnoremap c "_c
 nnoremap C "_C
 
 noremap H ^
@@ -14,7 +15,6 @@ noremap L $
 noremap J 5j
 noremap K 5k
 
-onoremap im iw
 onoremap am aW
 onoremap im iW
 onoremap aq a"
