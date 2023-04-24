@@ -78,12 +78,6 @@ input#urlFieldInput::placeholder {
 }
 
 /* ────────────────────────────────────────────────────────────────────────── */
-/* VIMIUM NEW TAB ADAPTER */
-#urlFieldInput[value="chrome-extension://cglpcedifkgalfdklahhcchnjepcckfn/newtab.html#content"] + .UrlFragment-Wrapper {
-	display: none;
-}
-
-/* ────────────────────────────────────────────────────────────────────────── */
 
 /* Command Palette */
 /* hide the "google {query}" entry, since for that I'd use vimium or Alfred

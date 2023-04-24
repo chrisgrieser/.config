@@ -89,5 +89,5 @@ SleepTimer = hs.timer.doEvery(1800, function ()
 	closeFullscreenSpaces()
 
 	-- close browser tabs running YouTube (not full name for youtube shorturls)
-	u.closeTab("youtu") 
+	u.closeTabWith("youtu") 
 end):start()
