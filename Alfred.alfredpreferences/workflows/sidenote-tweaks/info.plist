@@ -126,19 +126,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>2F608401-E6A9-4090-8926-6E709640B31D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7CCFDDEA-E1B7-447E-AA8C-2AC41962D59D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>660ACE51-61E1-4231-AB1E-78745ADC2616</key>
 		<array>
 			<dict>
@@ -1187,78 +1174,6 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>sidenotes theme</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Loading themes...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>select-sidenote-theme.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Set SideNotes Theme</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>2F608401-E6A9-4090-8926-6E709640B31D</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>set-sidenote-theme.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>7CCFDDEA-E1B7-447E-AA8C-2AC41962D59D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1335,15 +1250,6 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>ypos</key>
 			<real>780</real>
 		</dict>
-		<key>2F608401-E6A9-4090-8926-6E709640B31D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>1675</real>
-		</dict>
 		<key>2FE4C0FD-B052-4444-9957-22B0EBCAED50</key>
 		<dict>
 			<key>colorindex</key>
@@ -1390,15 +1296,6 @@ sketchybar --trigger update-sidenotes-count</string>
 			<real>375</real>
 			<key>ypos</key>
 			<real>55</real>
-		</dict>
-		<key>7CCFDDEA-E1B7-447E-AA8C-2AC41962D59D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>1675</real>
 		</dict>
 		<key>84334C9A-E9AA-461E-B13E-8B77248006FA</key>
 		<dict>
