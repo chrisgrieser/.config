@@ -13,6 +13,11 @@ export DATA_DIR="$ICLOUD/Dotfolder" # to prevent commit spam on dotfile repo, st
 # defines location of the rest of the zsh config
 export ZDOTDIR="$DOTFILE_FOLDER/zsh"
 
+# define default pandoc location (HACK since pandoc does not allow default data-dirs)
+function pandoc () {
+	command pandoc --data-dir="$DOTFILE_FOLDER/pandoc" "$@"
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # OpenAI API Key stored outside of public git repo (symlinked file)
