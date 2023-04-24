@@ -44,14 +44,23 @@ local function nullSources()
 		-- SHELL
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.formatting.shfmt,
-		-- force shellcheck to work with zsh
 		builtins.diagnostics.shellcheck.with {
-			extra_filetypes = { "zsh" },
-			extra_args = { "--shell=bash" },
+			extra_filetypes = { "zsh" }, -- force shellcheck to work with zsh
+			extra_args = {
+				"--shell=bash",
+				"--external-sources",
+				"--check-sourced",
+				"--exclude=SC2181",
+			},
 		},
 		builtins.code_actions.shellcheck.with {
 			extra_filetypes = { "zsh" },
-			extra_args = { "--shell=bash" },
+			extra_args = {
+				"--shell=bash",
+				"--external-sources",
+				"--check-sourced",
+				"--exclude=SC2181",
+			},
 		},
 
 		-- JS/TS
