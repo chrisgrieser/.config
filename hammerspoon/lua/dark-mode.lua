@@ -25,14 +25,14 @@ local function toggleDarkMode()
 	local sketchyfont, sketchybg, toMode, pdfbg, sidenotesTheme
 
 	if u.isDarkMode() then
-		pdfbg = "Default"
 		toMode = "light"
+		pdfbg = "Default"
 		sketchybg = "0xffcdcdcd"
 		sketchyfont = "0xff000000"
 		sidenotesTheme = sidenotesLight
 	else
-		pdfbg = "Night"
 		toMode = "dark"
+		pdfbg = "Night"
 		sketchybg = "0xff333333"
 		sketchyfont = "0xffffffff"
 		sidenotesTheme = sidenotesDark
@@ -69,8 +69,8 @@ local function toggleDarkMode()
 
 	-- SideNotes
 	-- stylua: ignore
-	local builtInThemes = {"Classic", "Retro", "Dark Blue", "Graphite Gray", "Default"}
 	local themePath = os.getenv("HOME") .. "/Library/Application Support/com.apptorium.SideNotes-paddle/themes"
+	local builtInThemes = {"Classic", "Retro", "Dark Blue", "Graphite Gray", "Default"}
 	if u.tbl_contains(builtInThemes, sidenotesTheme) then themePath = "/Applications/SideNotes.app/Contents/Resources" end
 	local jxaCmd = ([[Application("SideNotes").setTheme("%s/%s.sntheme")]]):format(themePath, sidenotesTheme)
 	local shellCmd = ([[osascript -l JavaScript -e '%s']]):format(jxaCmd)
