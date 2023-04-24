@@ -1,6 +1,6 @@
 # https://pandoc.org/MANUAL.html#defaults-files
-#───────────────────────────────────────────────────────────────────────────────
 # INFO $USERDATA set via pandoc option `--data-dir` to this directory
+#───────────────────────────────────────────────────────────────────────────────
 
 # General
 verbosity: WARNING
@@ -20,6 +20,7 @@ reference-doc: ${USERDATA}/reference-docs/academic-paper.docx
 reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
 strip-comments: true
 number-sections: true
+shift-heading-level-by: "-1"
 
 # Academic
 citeproc: true

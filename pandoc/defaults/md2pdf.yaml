@@ -37,3 +37,4 @@ resource-path:
 reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
 strip-comments: true
 number-sections: true
+shift-heading-level-by: -1
