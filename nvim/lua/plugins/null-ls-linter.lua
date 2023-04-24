@@ -47,10 +47,10 @@ local function nullSources()
 		builtins.diagnostics.shellcheck.with {
 			extra_filetypes = { "zsh" }, -- force shellcheck to work with zsh
 			extra_args = {
-				"--shell=bash",
+				"--shell=bash", -- force shellcheck to work with zsh
 				"--external-sources",
 				"--check-sourced",
-				"--exclude=SC2181",
+				"--exclude=SC2181", -- rule results in less readable code
 			},
 		},
 		builtins.code_actions.shellcheck.with {

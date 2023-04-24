@@ -10,9 +10,10 @@ if ! command -v wkhtmltopdf &>/dev/null; then echo "wkhtmltopdf not installed." 
 INPUT="$*"
 OUTPUT="${INPUT%.*}_CG.pdf"
 
-stdout=$(pandoc "$*" --output="$OUTPUT" --defaults="md2pdf" 2>&1)
-if [[ $? -eq 0 ]] ; then
+stdout=$(pandoc "$INPUT" --output="$OUTPUT" --defaults="md2pdf" 2>&1)
+if [[ -z "$stdout" ]] ; then
 	open "$OUTPUT"
+	open -R "$OUTPUT"
 else
 	echo "$stdout"
 fi
