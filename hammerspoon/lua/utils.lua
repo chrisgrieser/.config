@@ -97,7 +97,7 @@ end
 
 ---close all tabs which contain urlPart
 ---@param urlPart string
-function M.closeTab(urlPart)
+function M.closeTabWith(urlPart)
 	local browser = "Vivaldi"
 	local applescript = ([[
 		tell application "%s"
