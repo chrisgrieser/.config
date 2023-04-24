@@ -10,7 +10,7 @@ toc-depth: 3
 resource-path:
   - .
   - ./attachments
-  - ${HOME}/main-vault/ # Vault path for images in vault
+  - ${VAULT_PATH} # Vault path for images
 
 # Word-Writer
 writer: docx+native_numbering
