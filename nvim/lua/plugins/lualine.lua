@@ -98,7 +98,7 @@ end
 --------------------------------------------------------------------------------
 
 ---returns a harpoon icon if the current file is marked in Harpoon. Does not
----`require` itself, so won't load Harpoon (for when lazyloading Harpoon)
+---`require` Harpoon itself (allowing harpoon to still be lazy-loaded)
 local function updateHarpoonIndicator()
 	vim.b.harpoonMark = "" -- empty by default
 	local harpoonJsonPath = fn.stdpath("data") .. "/harpoon.json"
