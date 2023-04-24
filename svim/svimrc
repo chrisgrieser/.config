@@ -15,19 +15,6 @@ noremap L $
 noremap J 5j
 noremap K 5k
 
-onoremap am aW
-onoremap im iW
-onoremap aq a"
-onoremap iq i"
-onoremap az a'
-onoremap iz i'
-onoremap ae a`
-onoremap ie i`
-onoremap ir i[
-onoremap ar a[
-onoremap ac a{
-onoremap ic i{
-
 nnoremap m %
 vnoremap m %
 

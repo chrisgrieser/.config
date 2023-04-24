@@ -26,10 +26,6 @@ keymap("n", "<leader>r", function()
 
 	if parentFolder:find("sketchybar") then
 		fn.system([[brew services restart sketchybar]])
-
-		-- dismiss notification, HACK for https://github.com/FelixKratz/SketchyBar/issues/322
-		--stylua: ignore
-		vim.defer_fn(function() fn.system([[osascript -l JavaScript "$DOTFILE_FOLDER/_utility-scripts/dismiss-notification.js"]]) end, 3000)
 	else
 		local output = fn.system(('zsh "%s"'):format(expand("%:p")))
 		local logLevel = vim.v.shell_error > 0 and u.error or u.trace
