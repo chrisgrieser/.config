@@ -149,3 +149,4 @@ OCR
 ai
 SlRvb
 outdention
+NFTs

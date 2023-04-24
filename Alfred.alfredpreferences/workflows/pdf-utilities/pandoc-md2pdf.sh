@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
+if ! command -v wkhtmltopdf &>/dev/null; then echo "wkhtmltopdf not installed." && return 1; fi
+
 function md2pdf () {
 	cd "$(dirname "$1")" || return 1
 	INPUT_FILE="$(basename "$*")"

@@ -148,7 +148,7 @@ local filetypeSpecificWords = {
 		{ "if", "elif", false },
 		{ "elif", "else", false },
 		{ "else", "if", false },
-		{ "echo", "print" },
+		{ "echo", "printf" },
 		{ "exit", "return" },
 	},
 }
