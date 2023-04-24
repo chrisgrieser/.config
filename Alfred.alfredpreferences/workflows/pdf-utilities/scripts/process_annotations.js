@@ -1,4 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
+/* eslint-disable func-names */
 
 function run(argv) {
 	ObjC.import("stdlib");
@@ -44,11 +45,7 @@ function run(argv) {
 			return this.map(a => {
 				a.quote = a.text;
 				a.comment = a.contents;
-				switch (a.type) {
-					case "text":
-						a.type = "Free Comment";
-						break;
-				}
+				if (a.type === "text") a.type = "Free Comment";
 				return a;
 			});
 
@@ -71,6 +68,7 @@ function run(argv) {
 				case "image":
 					a.type = "Image";
 					break;
+				default:
 			}
 			return a;
 		});
@@ -181,6 +179,7 @@ function run(argv) {
 				case "Image":
 					output = `\n![[${a.image}]]\n`;
 					break;
+				default:
 			}
 			return output;
 		});
@@ -279,7 +278,7 @@ function run(argv) {
 
 		// Merge & Save both
 		if (newKeywords.length) {
-			newKeywords = [...new Set(newKeywords)].map(kw => kw.trim().replaceAll(" ", "-"));
+			newKeywords = [...new Set(newKeywords)].map(keyword => keyword.trim().replaceAll(" ", "-"));
 			tagsForYaml = newKeywords.join(", ") + ", ";
 		}
 
@@ -312,7 +311,7 @@ function run(argv) {
 		}
 
 		// parse BibTeX entry
-		const m = {
+		const data = {
 			title: "",
 			ptype: "",
 			firstPage: "",
@@ -326,24 +325,24 @@ function run(argv) {
 
 		bibtexEntry.split("\n").forEach(property => {
 			if (/\stitle =/i.test(property)) {
-				m.title = extract(property)
+				data.title = extract(property)
 					.replaceAll('"', "'") // to avoid invalid yaml, since title is wrapped in ""
 					.replaceAll(":", "."); // to avoid invalid yaml
-			} else if (property.includes("@")) m.ptype = property.replace(/@(.*)\{.*/, "$1");
-			else if (property.includes("pages =")) m.firstPage = property.match(/\d+/)[0];
-			else if (property.includes("author =")) m.author = extract(property);
-			else if (/\syear =/i.test(property)) m.year = property.match(/\d{4}/)[0];
-			else if (property.includes("date =")) m.year = property.match(/\d{4}/)[0];
+			} else if (property.includes("@")) data.ptype = property.replace(/@(.*)\{.*/, "$1");
+			else if (property.includes("pages =")) data.firstPage = property.match(/\d+/)[0];
+			else if (property.includes("author =")) data.author = extract(property);
+			else if (/\syear =/i.test(property)) data.year = property.match(/\d{4}/)[0];
+			else if (property.includes("date =")) data.year = property.match(/\d{4}/)[0];
 			else if (property.includes("keywords =")) {
-				m.keywords = extract(property).replaceAll(", ", ",").replaceAll(" ", "-"); // no spaces allowed in tags
+				data.keywords = extract(property).replaceAll(", ", ",").replaceAll(" ", "-"); // no spaces allowed in tags
 			} else if (property.includes("doi =")) {
-				m.url = "https://doi.org/" + extract(property);
-				m.doi = extract(property);
-			} else if (property.includes("url =")) m.url = extract(property);
+				data.url = "https://doi.org/" + extract(property);
+				data.doi = extract(property);
+			} else if (property.includes("url =")) data.url = extract(property);
 		});
 
 		// prompt for page number if needed
-		if (!m.firstPage) {
+		if (!data.firstPage) {
 			let response;
 			let validInput = false;
 			while (!validInput) {
@@ -354,10 +353,10 @@ function run(argv) {
 				validInput = response.textReturned.match(/^\d+$/);
 				if (!validInput) app.displayNotification("", { withTitle: "⚠️ Input not a number." });
 			}
-			m.firstPage = response.textReturned;
+			data.firstPage = response.textReturned;
 		}
 
-		return m;
+		return data;
 	}
 
 	//──────────────────────────────────────────────────────────────────────────────
