@@ -123,7 +123,12 @@ lspSettings.jsonls = {
 
 -- https://github.com/redhat-developer/yaml-language-server#language-server-settings
 lspSettings.yamlls = {
-	yaml = { keyOrdering = false }, -- FIX mapKeyOrder warning
+	yaml = {
+		keyOrdering = false,-- FIX mapKeyOrder warning
+		schemas = {
+			["Ansible Vars File"] = "xxxxx.yml",
+		}
+	}, 
 }
 
 --------------------------------------------------------------------------------
