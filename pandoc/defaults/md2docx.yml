@@ -5,7 +5,7 @@
 # General
 verbosity: WARNING
 fail-if-warnings: true # turn on to abort if citekeys are missing
-table-of-contents: false
+table-of-contents: true
 toc-depth: 3
 resource-path:
   - .
