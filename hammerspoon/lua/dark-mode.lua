@@ -7,7 +7,8 @@ local visuals = require("lua.visuals")
 
 local function brightnessNotify()
 	local brightness = math.floor(hs.brightness.ambient())
-	if brightness > -1 then u.notify("☀️ Brightness:", tostring(brightness)) end
+	local hasBrightnessSensor = brightness > -1
+	if hasBrightnessSensor then u.notify("☀️ Brightness:", tostring(brightness)) end
 end
 
 -- done manually to include app-specific toggling for:
@@ -18,7 +19,7 @@ end
 -- - SideNotes
 local function toggleDarkMode()
 	local sidenotesDark = "City Lights"
-	local sidenotesLight = "Marshmallow"
+	local sidenotesLight = "Monterey"
 
 	brightnessNotify()
 	local sketchyfont, sketchybg, toMode, pdfbg, sidenotesTheme
