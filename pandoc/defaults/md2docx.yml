@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=undefined
 # https://pandoc.org/MANUAL.html#defaults-files
 # INFO $USERDATA set via pandoc option `--data-dir` to this directory
 #───────────────────────────────────────────────────────────────────────────────
