@@ -650,17 +650,21 @@ keymap("n", "<leader>h", function()
 end, { desc = "󰒕 󱃄 Hover" })
 
 -- uses "v" instead of "x", so signature can be shown during snippet completion
--- stylua: ignore
+-- stylua: ignore start
 keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature" })
 
 keymap("n", "gd", function() cmd.Glance("definitions") end, { desc = "󰒕 Definitions" })
 keymap("n", "gf", function() cmd.Glance("references") end, { desc = "󰒕 References" })
--- stylua: ignore
 keymap("n", "gD", function() cmd.Glance("type_definitions") end, { desc = "󰒕 Type Definition" })
+
+-- overwrites treesitter goto-symbol
+keymap("n", "gs", function() require("nvim-navbuddy").open() end, { desc = "󰒕 Symbols (navbuddy)", buffer = true }) -- overrides treesitter symbols browsing
+keymap("n", "gS", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
+keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
+-- stylua: ignore end
 
 autocmd("LspAttach", {
 	callback = function(args)
-		-- stylua: ignore start
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local capabilities = client.server_capabilities
 
@@ -669,17 +673,11 @@ autocmd("LspAttach", {
 			-- cannot run `cmd.IncRename` since the plugin *has* to use the
 			-- command line; needs defer to not be overwritten by treesitter-
 			-- refactor's smart-rename
+			-- stylua: ignore
 			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1)
+			-- stylua: ignore
 			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
 		end
-
-		-- overwrites treesitter goto-symbol
-		if capabilities.documentSymbolProvider then
-			keymap("n", "gs", function() require("nvim-navbuddy").open() end, { desc = "󰒕 Symbols (navbuddy)", buffer = true }) -- overrides treesitter symbols browsing
-			keymap("n", "gS", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
-			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
-		end
-		-- stylua: ignore end
 	end,
 })
 

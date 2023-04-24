@@ -32,16 +32,14 @@ function CleanupConsole()
 
 	local cleanLines = {}
 	for line in string.gmatch(consoleOutput, "[^\n]+") do -- split by new lines
-		local ignore = line:find("Warning:.*LuaSkin: hs.canvas:delete")
-			or line:find("hotkey: .*abled hotkey")
+		local ignore = line:find("hotkey: Enabled hotkey")
+			or line:find("hotkey: Disabled hotkey")
 			or line:find("Loading extensions?: ")
 			or line:find("Loading Spoon: RoundedCorners")
-			or line:find("Lazy extension loading enabled")
-			or line:find("%-%- Loading .*/init.lua$")
-			or line:find("%-%- Done.$")
 
 		if not ignore then table.insert(cleanLines, line) end
 	end
+
 	for _, line in pairs(cleanLines) do
 		-- FIX double-timestamp displayed sometimes
 		line = line:gsub("(%d%d:%d%d:%d%d: )%d%d:%d%d:%d%d ?", "%1")
@@ -51,19 +49,17 @@ function CleanupConsole()
 		if line:find("^> ") then -- user input
 			color = isDark and lightGrey or darkGrey
 		elseif line:lower():find("error") then
-			line = line:gsub("%s+", " ")
 			color = isDark and lightRed or darkRed
 		elseif
 			line:lower():find("warning")
 			or line:find("WARN")
 			or line:find("⚠️️")
 			or line:find("stack traceback")
-			or line:find("^<.*>$")
+			or line:find("^<")
 			or line:find("%.%.%.")
 			or line:find("in upvalue")
 			or line:find("in function")
 		then
-			line = line:gsub("%*%* Warning:%s*", "WARN: ")
 			color = isDark and lightYellow or darkYellow
 		else
 			color = isDark and white or black

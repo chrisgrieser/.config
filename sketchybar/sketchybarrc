@@ -59,7 +59,6 @@ sketchybar \
 	label.font="Lucida Grande:Regular:16.5" label.color="$FONT_COLOR" \
 	icon.padding_left=2 icon.padding_right=1 \
 	label.padding_left=2 label.padding_right=10 \
-	\
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
 	popup.y_offset="-35" y_offset="18" \
 	\
