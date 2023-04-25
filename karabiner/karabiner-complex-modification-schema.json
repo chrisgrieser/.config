@@ -5,9 +5,42 @@
 	"title": "Complex Modification for the macOS app Karabiner Elements",
 	"type": "object",
 	"definitions": {
+		"modifier": {
+			"type": "string",
+			"enum": ["command", "control", "fn", "shift", "option"]
+		},
 		"rule": {
 			"type": "object",
 			"properties": {
+				"type": {
+					"type": "string",
+					"enum": ["basic"]
+				},
+				"from": {
+					"type": "object",
+					"properties": {
+						"key_code": {
+							"type": "string"
+						},
+						"modifiers": {
+							"type": "object",
+							"properties": {
+								"mandatory": {
+									"type": "array",
+									"items": {
+										"$ref": "#/definitions/modifier"
+									}
+								},
+								"optional": {
+									"type": "array",
+									"items": {
+										"$ref": "#/definitions/modifier"
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -25,7 +58,7 @@
 		},
 		"rules": {
 			"title": "Ruleset",
-			"description": "Rulesert of the Complex Modification",
+			"description": "Ruleset of the Complex Modification",
 			"type": "array",
 			"items": {
 				"type": "object",
