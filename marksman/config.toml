@@ -1,4 +1,0 @@
-# https://github.com/artempyanykh/marksman/blob/main/Tests/default.marksman.toml
-
-[code_action]
-toc.enable = true
