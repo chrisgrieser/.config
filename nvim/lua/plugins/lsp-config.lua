@@ -153,8 +153,9 @@ end
 
 -- REQUIRED path to java runtime engine (the builtin from ltex does not seem to work)
 -- here: using `openjdk`, w/ default M1 mac installation path (`brew install openjdk`)
--- HACK set need to set JAVA_HOME, since ltex.java.path does not seem to work properly
+-- HACK set need to set $JAVA_HOME, since `ltex.java.path` does not seem to work
 vim.env.JAVA_HOME = "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+
 lspSettings.ltex = {
 	ltex = {
 		completionEnabled = true,
@@ -164,11 +165,11 @@ lspSettings.ltex = {
 			["de-DE"] = words,
 		},
 		disabledRules = {
-			["en-US"] = { "EN_QUOTES" },
+			["en-US"] = { "EN_QUOTES" }, -- don't expect smart quotes
 		},
 		diagnosticSeverity = {
-			PASSIVE_VOICE = "hint",
-			default = "information",
+			default = "hint",
+			MORFOLOGIK_RULE_EN_US = "warning", -- spelling
 		},
 		additionalRules = { enablePickyRules = true },
 		markdown = { -- https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
