@@ -1,11 +1,20 @@
 # https://docs.brew.sh/Manpage#environment
 
-export HOMEBREW_NO_ANALYTICS=1
+# install / update
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_CASK_OPTS="--no-quarantine"
+export HOMEBREW_DISPLAY_INSTALL_TIMES=1
+export HOMEBREW_NO_INSTALL_UPGRADE=1 # brew install won't updagrade at the same time
+
+# Cleanup
+export HOMEBREW_AUTOREMOVE=1
+export HOMEBREW_NO_INSTALL_CLEANUP=1
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
 export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
-export HOMEBREW_NO_INSTALL_CLEANUP=1
-export HOMEBREW_AUTOREMOVE=1
-export HOMEBREW_CASK_OPTS="--no-quarantine"
+
+# Misc
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_BAT=1 # for `brew cat`
 export HOMEBREW_NO_ENV_HINTS=1
 
 BREWDUMP_PATH="$DOTFILE_FOLDER/_installed-apps-and-packages/"
