@@ -6,7 +6,7 @@ sudo -v
 setopt INTERACTIVE_COMMENTS
 
 DOTFILE_FOLDER="$HOME/.config/"
-DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder" 
+DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -40,8 +40,6 @@ ln -sf "$DATA_DIR/ssh/" ~/.ssh
 # SSH required for these
 cd ~
 git clone git@github.com:chrisgrieser/main-vault.git
-
-
 
 #───────────────────────────────────────────────────────────────────────────────
 # PASSWORDS & GPG
