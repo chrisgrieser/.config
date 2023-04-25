@@ -26,6 +26,7 @@
 					"description": "ESLint rule\n\n\"off\" - turns the rule off\n\"warn\" - turn the rule on as a warning (doesn't affect exit code)\n\"error\" - turn the rule on as an error (exit code is 1 when triggered)\n",
 					"type": "string",
 					"enum": ["off", "warn", "error"]
+
 				},
 				{
 					"type": "array"
