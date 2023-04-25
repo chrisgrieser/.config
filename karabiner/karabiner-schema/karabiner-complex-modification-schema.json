@@ -45,15 +45,19 @@
 		}
 	},
 	"properties": {
+		"$schema" : {
+			"type": "string",
+			"format": "uri-reference"
+		},
 		"title": {
 			"title": "Title",
-			"description": "Title of the Complex Modification",
-			"type": ["string", "null"]
+			"type": "string",
+			"description": "Title of the Complex Modification"
 		},
 		"homepage": {
 			"title": "Homepage",
 			"description": "Homepage of the Complex Modification",
-			"type": ["string", "null"],
+			"type": "string",
 			"format": "uri-reference"
 		},
 		"rules": {
