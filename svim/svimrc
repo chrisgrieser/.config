@@ -22,17 +22,8 @@ nnoremap M J
 
 nnoremap R yyp
 
-nnoremap <Space> ciw
-
-nnoremap <right> dlp
-nnoremap <left> dlhhp
+nnoremap <Space> xp
 
 nnoremap <C-e> A
 
-nnoremap ü "zdawel"zph
-nnoremap Ü "zdawbh"zph
-
 vnoremap V j
-
-nnoremap = mzO<Esc>`z
-nnoremap _ mzo<Esc>`z
