@@ -51,12 +51,15 @@ local function telescopeConfig()
 				n = keymappings,
 			},
 			layout_strategy = "horizontal",
+			sorting_strategy = "ascending",
 			layout_config = {
 				horizontal = {
-					height = 0.85,
-					width = 0.95,
+					prompt_position = "top",
+					height = 0.7,
+					width = 0.99,
 					preview_cutoff = 70,
 					preview_width = { 0.50, min = 30 },
+					-- anchor = "SE",
 				},
 				cursor = {
 					preview_cutoff = 9001, -- never use preview here
