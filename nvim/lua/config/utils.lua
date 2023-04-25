@@ -2,6 +2,8 @@ local M = {}
 --------------------------------------------------------------------------------
 
 M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- read from .zshenv
+M.linterConfigFolder = vim.env.DOTFILE_FOLDER .. "/_linter-configs/" -- read from .zshenv
+
 M.error = vim.log.levels.ERROR
 M.warn = vim.log.levels.WARN
 M.trace = vim.log.levels.TRACE
