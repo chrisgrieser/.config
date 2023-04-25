@@ -50,20 +50,19 @@ local function telescopeConfig()
 				i = keymappings,
 				n = keymappings,
 			},
+			sorting_strategy = "ascending", -- so layout is correctly orientated with prompt_position "top"
 			layout_strategy = "horizontal",
-			sorting_strategy = "ascending",
 			layout_config = {
 				horizontal = {
 					prompt_position = "top",
-					height = 0.7,
+					height = 0.75,
 					width = 0.99,
 					preview_cutoff = 70,
 					preview_width = { 0.50, min = 30 },
-					-- anchor = "SE",
+					anchor = "S",
 				},
 				cursor = {
 					preview_cutoff = 9001, -- never use preview here
-					height = 1,
 				},
 			},
 		},
