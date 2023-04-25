@@ -12,7 +12,7 @@ local lsp_servers = {
 	"bashls", -- also used for zsh
 	"taplo", -- toml
 	"html",
-	"ltex",
+	"ltex", -- latex/languagetool (requires `openjdk`)
 }
 
 --------------------------------------------------------------------------------
@@ -125,8 +125,8 @@ lspSettings.jsonls = {
 -- https://github.com/redhat-developer/yaml-language-server#language-server-settings
 lspSettings.yamlls = {
 	yaml = {
-		keyOrdering = false,-- FIX mapKeyOrder warning
-	}, 
+		keyOrdering = false, -- FIX mapKeyOrder warning
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -163,7 +163,6 @@ local function setupAllLsps()
 	end
 end
 --------------------------------------------------------------------------------
-
 
 return {
 	{ -- package manager
@@ -215,7 +214,7 @@ return {
 
 			vim.diagnostic.config {
 				virtual_text = {
-					severity = { min = vim.log.levels.WARN },
+					severity = { min = vim.diagnostic.severity.WARN },
 				},
 				float = {
 					format = function(diag) return fmt(diag) end,
