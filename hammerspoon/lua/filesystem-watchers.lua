@@ -22,7 +22,6 @@ local sourceBookmarkPath = appSupport .. "/Vivaldi/Default/Bookmarks"
 local sourceStatePath = appSupport .. "/Vivaldi/Local State"
 local chromeBookmarksPath = appSupport .. "/Google/Chrome/Default/Bookmarks"
 local chromeStatePath = appSupport .. "/Google/Chrome/Local State"
-
 BookmarkWatcher = pw(sourceBookmarkPath, function()
 	-- Bookmarks
 	local bookmarks = hs.json.read(sourceBookmarkPath)
@@ -87,32 +86,32 @@ FileHubWatcher = pw(FileHub, function(paths, _)
 	for _, filep in pairs(paths) do
 		if isInSubdirectory(filep, FileHub) then return end
 		local fileName = filep:gsub(".*/", "")
-		local extension = fileName:gsub(".*%.", "")
+		local ext = fileName:gsub(".*%.", "")
 
 		-- alfredworkflows, ics, and dmg (iCal)
-		if extension == "alfredworkflow" or extension == "ics" or extension == "dmg" then
+		if ext == "alfredworkflow" or ext == "ics" or ext == "dmg" then
 			-- opening ics and Alfred leads to recursions when opened via this file
 			-- watcher and are therefore opened via browser auto-open instead. dmg
 			-- cannot be opened via browser though and also does not create recursion,
 			-- so it is opened here
-			if extension == "dmg" then hs.open(filep) end
+			if ext == "dmg" and not (fileName == "Stats.dmg") then hs.open(filep) end
 			u.runWithDelays(3, function() os.rename(filep, os.getenv("HOME") .. "/.Trash/" .. fileName) end)
 
 		-- zip: unzip
-		elseif extension == "zip" and fileName ~= "violentmonkey.zip" then
+		elseif ext == "zip" and fileName ~= "violentmonkey.zip" then
 			-- done via hammerspoon to differentiate between zips to auto-open and
 			-- zips to archive (like violentmonkey)
 			hs.open(filep)
 
 		-- watch later .urls from the office
-		elseif extension == "url" and u.isAtHome then
+		elseif ext == "url" and u.isAtHome then
 			os.rename(filep, os.getenv("HOME") .. "/Downloaded/" .. fileName)
 			print("➡️ Watch Later URL moved to Video Downloads")
 
 		-- ublacklist
 		elseif fileName == "ublacklist-settings.json" then
 			os.rename(filep, browserSettings .. fileName)
-			print("➡️ " .. fileName)
+			print("➡️ ublacklist backup")
 
 		-- vimium-c
 		elseif fileName:match("vimium_c") then
@@ -127,7 +126,7 @@ FileHubWatcher = pw(FileHub, function(paths, _)
 		-- sponsor block
 		elseif fileName:match("SponsorBlockConfig_.*%.json") then
 			os.rename(filep, browserSettings .. "SponsorBlock-settings.json")
-			print("➡️ SpondorBlockConfig")
+			print("➡️ SponsorBlockConfig backup")
 
 		-- violentmonkey
 		elseif fileName:match("violentmonkey.zip") then

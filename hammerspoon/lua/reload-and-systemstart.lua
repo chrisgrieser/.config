@@ -1,7 +1,10 @@
-local u = require("lua.utils")
+local M = {}
+
 local periphery = require("lua.hardware-periphery")
-local visuals = require("lua.visuals")
+local repos = require("lua.repo-auto-sync")
 local sidenotes = require("lua.sidenotes")
+local u = require("lua.utils")
+local visuals = require("lua.visuals")
 
 --------------------------------------------------------------------------------
 
@@ -13,7 +16,7 @@ u.urischeme("hs-reload", function()
 	-- INFO will also run the systemStart function due to reload
 end)
 
-function SystemStart()
+function M.systemStart()
 	-- do not git sync on reload to prevent commit spam when updating hammerspoon
 	-- config regularly
 	local _, isReloading = hs.execute("[[ -e " .. reloadIndicator .. " ]]")
@@ -24,11 +27,16 @@ function SystemStart()
 		-- use neovim automation to display the notification in neovim
 		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded. ")' > /tmp/nvim-automation]])
 	else
+		if u.isAtOffice then
+			sidenotes.MoveOfficeNotesToBase()
 
-		if u.isAtOffice then sidenotes.MoveOfficeNotesToBase() end
+		end
 		u.notify("Finished loading.")
 		visuals.holeCover()
 		periphery.batteryCheck("SideNotes")
-		SyncAllGitRepos("notify")
+		repos.syncAllGitRepos("notify")
 	end
 end
+
+--------------------------------------------------------------------------------
+return M
