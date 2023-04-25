@@ -841,6 +841,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>variable</key>
 			<string>auto_push</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>32</string>
+				<key>placeholder</key>
+				<string>32</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>when generating a new password</string>
+			<key>label</key>
+			<string>password length</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>password_length</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string>0.9.0</string>

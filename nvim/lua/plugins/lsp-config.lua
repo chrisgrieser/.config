@@ -1,6 +1,7 @@
 local u = require("config.utils")
 local lspSettings = {}
 local lspOnAttach = {}
+local lspRootDir = {}
 
 --------------------------------------------------------------------------------
 
@@ -131,6 +132,21 @@ lspSettings.yamlls = {
 }
 
 --------------------------------------------------------------------------------
+-- BASH / ZSH
+
+-- force bashls (and treesitter) to highlight zsh as if it was bash
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "zsh",
+	callback = function() vim.bo.filetype = "sh" end,
+})
+local util = require("lspconfig.util")
+lspRootDir.bashls = function(fname)
+	local primary = util.root_pattern(".shellcheckrc")(fname)
+	local fallback = util.find_git_ancestor()
+	return primary or fallback
+end
+
+--------------------------------------------------------------------------------
 -- LTEX
 -- https://valentjn.github.io/ltex/settings.html
 
@@ -142,7 +158,9 @@ for word in io.open(dictfile, "r"):lines() do
 	table.insert(words, word)
 end
 
-
+-- REQUIRED path to java runtime engine (the builtin from ltex does not seem to work)
+-- here: using `openjdk`, w/ default M1 mac installation path (`brew install openjdk`)
+-- HACK set need to set JAVA_HOME, since ltex.java.path does not seem to work properly
 vim.env.JAVA_HOME = "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 lspSettings.ltex = {
 	ltex = {
@@ -193,6 +211,7 @@ local function setupAllLsps()
 		local config = {
 			capabilities = lspCapabilities,
 			settings = lspSettings[lsp], -- if no settings, will assign nil and therefore do nothing
+			root_dir = lspRootDir[lsp],
 			on_attach = lspOnAttach[lsp], -- mostly disables some settings
 		}
 

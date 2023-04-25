@@ -106,12 +106,6 @@ return {
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 		init = function()
-			-- force treesitter to highlight zsh as if it was bash
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "zsh",
-				callback = function() vim.bo.filetype = "sh" end,
-			})
-
 			-- avoid conflict with visual mode comment from Comments.nvim
 			vim.keymap.set("o", "q", "&&&", { desc = "comment", remap = true })
 		end,
