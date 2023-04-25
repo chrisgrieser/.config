@@ -44,5 +44,6 @@
 	line-numbers-right-format = "│ "
 
 	# grep output as clickable links https://dandavison.github.io/delta/grep.html
+	# this also makes links from git-log clickable (https://github.com/wez/wezterm/discussions/3618)
 	hyperlinks = true
 	hyperlinks-file-link-format = "file-line://{path}:{line}"
