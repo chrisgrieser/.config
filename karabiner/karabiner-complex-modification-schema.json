@@ -1,0 +1,36 @@
+{
+	"$comment": "https://docs.github.com/en/github/administering-a-repository/displaying-a-sponsor-button-in-your-repository",
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"additionalProperties": false,
+	"title": "GitHub Funding",
+	"type": "object",
+	"definitions": {
+		"a_rule": {
+			"type": "object",
+			"maxLength": 39,
+			"pattern": "^[a-zA-Z0-9](-?[a-zA-Z0-9])*$",
+			"examples": ["SampleUserName"]
+		}
+	},
+	"properties": {
+		"title": {
+			"title": "Title",
+			"description": "Title of the Complex Modification",
+			"type": ["string", "null"]
+		},
+		"homepage": {
+			"title": "Homepage",
+			"description": "Homepage of the Complex Modification",
+			"type": ["string", "null"],
+			"format": "uri-reference"
+		},
+		"rules": {
+			"title": "Rules",
+			"description": "Rules of the Complex Modification",
+			"type": "array",
+			"items": {
+				"type": ["string", "null"]
+			}
+		}
+	}
+}
