@@ -2,8 +2,8 @@ local cmd = vim.cmd
 local keymap = vim.keymap.set
 --------------------------------------------------------------------------------
 
--- Rnable wrapping lines
--- HACK needs to be wrapped in a condition, probably due to some recursion thing
+-- Enable wrapping lines
+-- needs to be wrapped in a condition, probably due to some recursion thing
 if not vim.opt_local.wrap:get() then cmd.normal(",ow") end
 
 -- decrease line length without zen mode plugins

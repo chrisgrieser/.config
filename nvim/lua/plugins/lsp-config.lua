@@ -134,7 +134,7 @@ lspSettings.yamlls = {
 -- LTEX
 -- https://valentjn.github.io/ltex/settings.html
 
-local dictfile =  u.linterConfigFolder .. "/languagetool-dictionary.txt"
+local dictfile = u.linterConfigFolder .. "/languagetool-dictionary.txt"
 local words = {}
 for word in io.open(dictfile, "r"):lines() do
 	table.insert(words, word)
@@ -149,13 +149,13 @@ lspSettings.ltex = {
 		java = {
 			path = "",
 		},
-		language = "en-US",
+		language = "en-US", -- default language, can be set per-file via md yaml header
 		dictionary = {
 			["en-US"] = words,
 			["de-DE"] = words,
 		},
 		disabledRules = {
-			["en-US"] = {},
+			["en-US"] = { "EN_QUOTES" },
 			["de-DE"] = {},
 		},
 		diagnosticSeverity = {

@@ -388,8 +388,7 @@ keymap("x", "<Up>", [[:move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selecti
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "Move selection left" })
 
--- Merging / Splitting
--- Lines
+-- Merging / Splitting Lines
 keymap("n", "<leader>s", cmd.TSJToggle, { desc = "split/join lines" })
 keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "split around selection" })
 keymap("n", "<leader>S", "gww", { desc = "split line" })
