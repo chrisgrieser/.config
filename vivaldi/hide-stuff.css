@@ -56,8 +56,8 @@ input#urlFieldInput::placeholder {
 }
 
 .UrlBar-AddressField:has(.BookmarkButton .button-on)::before {
+	filter: grayscale(1) saturate(1.4);
 	content: "⭐";
-	filter: grayscale(1);
 	padding-left: 4px;
 }
 

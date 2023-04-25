@@ -116,17 +116,31 @@ lspSettings.eslint = {
 }
 
 --------------------------------------------------------------------------------
--- OTHERS
+-- JSON
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
 lspSettings.jsonls = {
 	json = { format = { enable = false } }, -- taken care of by prettier
 }
 
+--------------------------------------------------------------------------------
+-- YAML
 -- https://github.com/redhat-developer/yaml-language-server#language-server-settings
 lspSettings.yamlls = {
 	yaml = {
 		keyOrdering = false, -- FIX mapKeyOrder warning
 	},
+}
+
+--------------------------------------------------------------------------------
+-- LTEX
+-- https://valentjn.github.io/ltex/settings.html
+lspSettings.ltex = {
+	ltex = {
+		language = "en-US", -- German: de-DE
+		dictionary = {
+			{"en-US": ["adaptivity", "precomputed", "subproblem"], "de-DE": ["B-Splines", ":/path/to/externalFile.txt"]}
+		}
+	}
 }
 
 --------------------------------------------------------------------------------
