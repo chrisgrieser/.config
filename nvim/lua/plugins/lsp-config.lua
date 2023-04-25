@@ -140,8 +140,13 @@ local dict = dictfile and vim.split(dictfile, "\n") or {}
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work
 
+lspFileTypes = { "gitcommit", "markdown", "text" } -- disable for bibtex, since too large
 lspSettings.ltex = {
 	ltex = {
+		completionEnabled = true,
+		java = {
+			path = "",
+		},
 		language = "en-US",
 		dictionary = {
 			["en-US"] = dict,
@@ -151,9 +156,17 @@ lspSettings.ltex = {
 			["en-US"] = dict,
 			["de-DE"] = dict,
 		},
-		bibtex = {
-			fields = {
-				
+		diagnosticSeverity = {
+			PASSIVE_VOICE = "hint",
+			default = "information",
+		},
+		additionalRules = {
+			enablePickyRules = true,
+			motherTongue = "de-DE",
+		},
+		markdown = { -- https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
+			nodes = {
+
 			}
 		}
 	},
