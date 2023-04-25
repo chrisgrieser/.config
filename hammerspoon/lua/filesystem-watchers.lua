@@ -163,7 +163,7 @@ ObsiAlphaWatcher = pw(FileHub, function(files)
 				open -a "Obsidian"
 			]])
 			-- close the created tab
-			u.closeTabWith("https://cdn.discordapp.com/attachments")
+			u.closeTabsContaining("https://cdn.discordapp.com/attachments")
 		end)
 	end
 end):start()
