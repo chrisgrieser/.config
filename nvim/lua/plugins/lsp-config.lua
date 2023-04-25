@@ -18,7 +18,6 @@ local lsp_servers = {
 --------------------------------------------------------------------------------
 
 local lspSettings = {}
-local lspFileTypes = {}
 local lspOnAttach = {}
 
 --------------------------------------------------------------------------------
@@ -135,12 +134,15 @@ lspSettings.yamlls = {
 -- LTEX
 -- https://valentjn.github.io/ltex/settings.html
 
-local dictfile = u.readFile("/Users/chrisgrieser/.config/_linter-configs/languagetool-dictionary.txt")
-local dict = dictfile and vim.split(dictfile, "\n") or {}
+local dictfile =  u.linterConfigFolder .. "/languagetool-dictionary.txt"
+local words = {}
+for word in io.open(dictfile, "r"):lines() do
+	table.insert(words, word)
+end
+
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work
 
-lspFileTypes = { "gitcommit", "markdown", "text" } -- disable for bibtex, since too large
 lspSettings.ltex = {
 	ltex = {
 		completionEnabled = true,
@@ -149,34 +151,30 @@ lspSettings.ltex = {
 		},
 		language = "en-US",
 		dictionary = {
-			["en-US"] = dict,
-			["de-DE"] = dict,
+			["en-US"] = words,
+			["de-DE"] = words,
 		},
 		disabledRules = {
-			["en-US"] = dict,
-			["de-DE"] = dict,
+			["en-US"] = {},
+			["de-DE"] = {},
 		},
 		diagnosticSeverity = {
 			PASSIVE_VOICE = "hint",
 			default = "information",
 		},
-		additionalRules = {
-			enablePickyRules = true,
-			motherTongue = "de-DE",
-		},
+		additionalRules = { enablePickyRules = true },
 		markdown = { -- https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
-			nodes = {
-
-			}
-		}
+			nodes = {},
+		},
 	},
 }
 
 --------------------------------------------------------------------------------
 -- ENABLE CAPABILITIES FOR PLUGINS
 
--- Enable snippets-completion (for nvim_cmp)
 local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
+
+-- Enable snippets-completion (for nvim_cmp)
 lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Enable folding (for nvim-ufo)
@@ -198,7 +196,6 @@ local function setupAllLsps()
 		local config = {
 			capabilities = lspCapabilities,
 			settings = lspSettings[lsp], -- if no settings, will assign nil and therefore do nothing
-			filetypes = lspFileTypes[lsp],
 			on_attach = lspOnAttach[lsp], -- mostly disables some settings
 		}
 

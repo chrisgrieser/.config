@@ -153,3 +153,4 @@ NFTs
 dotfiles
 Grieser
 CLI
+Config

@@ -1,7 +1,7 @@
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
 --------------------------------------------------------------------------------
 
-local linterConfig = vim.env.DOTFILE_FOLDER .. "/_linter-configs/" -- read from .zshenv
+local linterConfig = require("config.utils").linterConfigFolder
 local lintersAndFormatters = {
 	"yamllint", -- only for diagnostics, not for formatting
 	"prettier", -- js/ts/yaml
