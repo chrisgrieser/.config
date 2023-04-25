@@ -7,4 +7,4 @@ entry_name=${entry_name:l}
 
 folder=${folder:1} # cut "*" which marked entry as folder
 
-pass generate --clip --no-symbols "$folder/$entry_name" "$password_length" | tail -n1
+pass generate --clip --no-symbols "$folder/$entry_name" "${password_length:?}" | tail -n1

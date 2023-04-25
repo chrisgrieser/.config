@@ -3,10 +3,15 @@
 		"prefix": "shebang",
 		"body": "#!/usr/bin/env zsh"
 	},
+	"global variable": {
+		"prefix": "global (shellcheck)",
+		"body": "\\${${1:global_var}:?}",
+		"description": "shellcheck recommends failing if global variable is undefined (SC2054). Useful for example for Alfred Environment Variables."
+	},
 	"ls → find": {
 		"prefix": "ls → find",
 		"body": "find . -maxdepth 1",
-		"description": "shellcheck recommends using find instead of ls for most cases."
+		"description": "shellcheck recommends using find instead of ls for most cases (SC2045)."
 	},
 	"default arg value": {
 		"prefix": "default arg value",
