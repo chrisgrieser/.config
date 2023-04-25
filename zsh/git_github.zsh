@@ -71,15 +71,16 @@ function gitlog() {
 	# shellcheck disable=2086
 	git log $length --all --color --graph \
 		--pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
-		sed -E 's/ minutes ago\)/min)/g' |
-		sed -E 's/ hours ago\)/h)/g' |
-		sed -E 's/ days ago\)/d)/g' |
-		sed -E 's/ weeks ago\)/w)/g' |
-		sed -E 's/ months ago\)/m)/g' |
+		sed -E 's/ minutes ago\)/min)/' |
+		sed -E 's/ hours ago\)/h)/' |
+		sed -E 's/ days ago\)/d)/' |
+		sed -E 's/ weeks ago\)/w)/' |
+		sed -E 's/ months ago\)/m)/' |
 		sed -e 's/origin\//󰅡 /g' |
 		sed -e 's/HEAD/󱍀/g' |
 		sed -e 's/->//g' |
-		sed -e 's/grafted,/ /g' |
+		sed -e 's/grafted,/ /' |
+		sed -E 's|^([[:alnum:]]+)|\1|' |
 		less
 	# INFO less is configured not to start the pager if the output short enough
 	# to fit on one screen

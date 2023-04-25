@@ -24,8 +24,8 @@ nnoremap R yyp
 
 nnoremap <Space> ciw
 
-nnoremap <Right> dlp
-nnoremap <Left> dlhhp
+nnoremap <right> dlp
+nnoremap <left> dlhhp
 
 nnoremap <C-e> A
 
