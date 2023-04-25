@@ -133,6 +133,8 @@ DisplayCountWatcher = hs.screen.watcher.new(selectLayout):start()
 -- 2. Hotkey
 u.hotkey(u.hyper, "home", selectLayout)
 
+-- 3. Systemstart
+
 -- 3. Waking
 local unlockInProgress = false
 local c = hs.caffeinate.watcher

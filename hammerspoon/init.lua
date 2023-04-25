@@ -1,4 +1,5 @@
 local u = require("lua.utils")
+local system = require("lua.reload-and-systemstart")
 --------------------------------------------------------------------------------
 
 -- SETTINGS
@@ -18,18 +19,17 @@ while true do
 	VaultLocation = os.getenv("VAULT_PATH")
 	FileHub = os.getenv("WD")
 	if DotfilesFolder then break end
-	hs.timer.usleep(10000) -- = one hundreth second (Blocking!)
+	hs.timer.usleep(1000000) -- = one second (Blocking!)
 	i = i + 1
-	if i > 50 then
+	if i > 30 then
 		u.notify("⚠️ Could not retrieve .zshenv")
-		break
+		return
 	end
 end
 
 --------------------------------------------------------------------------------
 -- meta
 require("lua.console")
-require("lua.reload-and-systemstart")
 
 -- appearance
 require("lua.visuals")
@@ -54,4 +54,4 @@ require("lua.app-specific-behavior")
 require("lua.twitter")
 require("lua.sidenotes")
 
-SystemStart()
+system.systemStart()

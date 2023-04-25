@@ -1,4 +1,6 @@
+local M = {}
 local u = require("lua.utils")
+
 --------------------------------------------------------------------------------
 
 -- CONFIG
@@ -89,7 +91,7 @@ end
 
 ---sync all three git repos
 ---@param extras? string extra modes
-function SyncAllGitRepos(extras)
+function M.syncAllGitRepos(extras)
 	local pullSubmodules = extras ~= "no-submodule-pull"
 	local success1 = gitDotfileSync(pullSubmodules)
 
@@ -122,13 +124,13 @@ end
 
 -- 2. every x minutes
 RepoSyncTimer = hs.timer
-	.doEvery(repoSyncFreqMin * 60, function() SyncAllGitRepos("no-submodule-pull") end)
+	.doEvery(repoSyncFreqMin * 60, function() M.syncAllGitRepos("no-submodule-pull") end)
 	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
 u.urischeme("sync-repos", function()
 	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
-	SyncAllGitRepos("notify")
+	M.syncAllGitRepos("notify")
 end)
 
 -- 4. when going to sleep or when unlocking with idleTime
@@ -136,7 +138,10 @@ SleepWatcher = hs.caffeinate.watcher
 	.new(function(event)
 		local c = hs.caffeinate.watcher
 		if (event == c.screensDidWake and event == c.systemDidWake) and u.idleMins(30) then
-			SyncAllGitRepos()
+			M.syncAllGitRepos()
 		end
 	end)
 	:start()
+
+--------------------------------------------------------------------------------
+return M
