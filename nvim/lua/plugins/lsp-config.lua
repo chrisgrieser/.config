@@ -12,6 +12,7 @@ local lsp_servers = {
 	"bashls", -- also used for zsh
 	"taplo", -- toml
 	"html",
+	"ltex",
 }
 
 --------------------------------------------------------------------------------
