@@ -144,11 +144,12 @@ end
 
 lspSettings.ltex = {
 	ltex = {
-		completionEnabled = true,
+		completionEnabled = false,
 		java = {
 			-- REQUIRED path to java runtime engine (the builtin from ltex does not seem to work)
 			-- here: using `openjdk`, w/ default M1 mac installation path (`brew install openjdk`)
-			path = "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk",
+			-- sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+			path = vim.env.JAVA_HOME,
 		},
 		language = "en-US", -- default language, can be set per-file via markdown yaml header
 		dictionary = {

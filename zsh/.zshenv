@@ -38,3 +38,5 @@ export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
 
 # NEOVIM: so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
+
+export JAVA_HOME="/opt/homebrew/opt/openjdk/libexec/openjdk.jdk"
