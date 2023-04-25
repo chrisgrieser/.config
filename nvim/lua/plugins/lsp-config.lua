@@ -1,7 +1,6 @@
 local u = require("config.utils")
 local lspSettings = {}
 local lspOnAttach = {}
-local lspRootDir = {}
 
 --------------------------------------------------------------------------------
 
@@ -139,12 +138,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "zsh",
 	callback = function() vim.bo.filetype = "sh" end,
 })
-local util = require("lspconfig.util")
-lspRootDir.bashls = function(fname)
-	local primary = util.root_pattern(".shellcheckrc")(fname)
-	local fallback = util.find_git_ancestor()
-	return primary or fallback
-end
 
 --------------------------------------------------------------------------------
 -- LTEX
@@ -211,9 +204,16 @@ local function setupAllLsps()
 		local config = {
 			capabilities = lspCapabilities,
 			settings = lspSettings[lsp], -- if no settings, will assign nil and therefore do nothing
-			root_dir = lspRootDir[lsp],
 			on_attach = lspOnAttach[lsp], -- mostly disables some settings
 		}
+		if lsp == "bashls" then
+			config.root_dir = require("lspconfig.util").root_pattern(".shellcheckrc")
+			-- config.root_dir = function(fname)
+			-- 	local primary = require("lspconfig.util").root_pattern(".shellcheckrc")(fname)
+			-- 	local fallback = require("lspconfig.util").find_git_ancestor()
+			-- 	return primary or fallback
+			-- end
+		end
 
 		require("lspconfig")[lsp].setup(config)
 	end
