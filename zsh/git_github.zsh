@@ -80,9 +80,10 @@ function gitlog() {
 		sed -e 's/HEAD/󱍀/g' |
 		sed -e 's/->//g' |
 		sed -e 's/grafted,/ /' |
-		less
-	# INFO less is configured not to start the pager if the output short enough
-	# to fit on one screen
+		delta 
+	# INFO piping though delta as pager makes commit hashes clickable https://github.com/wez/wezterm/discussions/3618
+	# also, delta pipes then to less, which is configured not to start the pager 
+	# if the output short enough to fit on one screen
 }
 
 # brief git log (only last 15)
