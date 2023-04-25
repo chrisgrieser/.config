@@ -80,7 +80,6 @@ function gitlog() {
 		sed -e 's/HEAD/󱍀/g' |
 		sed -e 's/->//g' |
 		sed -e 's/grafted,/ /' |
-		sed -E 's|^([[:alnum:]]+)|\1|' |
 		less
 	# INFO less is configured not to start the pager if the output short enough
 	# to fit on one screen
