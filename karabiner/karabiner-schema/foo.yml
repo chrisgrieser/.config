@@ -4,4 +4,9 @@ title: fsfs
 rules:
   - description: "some desc"
     manipulators:
-      - 222
+      - type: basic
+        from:
+          key_code: "a"
+          modifiers:
+            mandatory:
+              - control
