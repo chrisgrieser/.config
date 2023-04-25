@@ -43,6 +43,13 @@
 		"prefix": "ignore (vale)",
 		"body": "<!-- vale ${1|Vale.Spelling,Google.FirstPerson,Google.Will|} = NO -->"
 	},
+	"ignore start/end (ltex)": {
+		"prefix": "ignore (vale)",
+		"body": [
+			"<!-- LTeX: enabled=false -->",
+			"<!-- LTeX: enabled=true -->"
+		]
+	},
 	"ignore start/end (vale)": {
 		"prefix": "ignore start/end (vale)",
 		"body": [
