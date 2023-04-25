@@ -1,4 +1,9 @@
 local u = require("config.utils")
+local lspSettings = {}
+local lspOnAttach = {}
+
+--------------------------------------------------------------------------------
+
 local lsp_servers = {
 	"lua_ls",
 	"yamlls",
@@ -14,11 +19,6 @@ local lsp_servers = {
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
 }
-
---------------------------------------------------------------------------------
-
-local lspSettings = {}
-local lspOnAttach = {}
 
 --------------------------------------------------------------------------------
 -- LUA
@@ -72,7 +72,7 @@ lspSettings.cssls = {
 }
 
 --------------------------------------------------------------------------------
--- JAVASCRIPT & TYPESCRIPT
+-- TSSERVER & ESLINT
 
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
@@ -134,29 +134,29 @@ lspSettings.yamlls = {
 -- LTEX
 -- https://valentjn.github.io/ltex/settings.html
 
+-- HACK since reading external file with the method described in the ltex docs
+-- does not work
 local dictfile = u.linterConfigFolder .. "/languagetool-dictionary.txt"
 local words = {}
 for word in io.open(dictfile, "r"):lines() do
 	table.insert(words, word)
 end
 
--- HACK since reading external file with the method described in the ltex docs
--- does not work
-
 lspSettings.ltex = {
 	ltex = {
 		completionEnabled = true,
 		java = {
-			path = "",
+			-- REQUIRED path to java runtime engine (the builtin from ltex does not seem to work)
+			-- here: using `openjdk`, w/ default M1 mac installation path (`brew install openjdk`)
+			path = "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk",
 		},
-		language = "en-US", -- default language, can be set per-file via md yaml header
+		language = "en-US", -- default language, can be set per-file via markdown yaml header
 		dictionary = {
 			["en-US"] = words,
 			["de-DE"] = words,
 		},
 		disabledRules = {
 			["en-US"] = { "EN_QUOTES" },
-			["de-DE"] = {},
 		},
 		diagnosticSeverity = {
 			PASSIVE_VOICE = "hint",
