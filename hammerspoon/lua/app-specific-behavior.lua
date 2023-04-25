@@ -68,7 +68,7 @@ Wf_browser = u.wf
 	})
 	:subscribe(u.wf.windowCreated, function()
 		wu.autoTile(Wf_browser)
-		u.runWithDelays({ 0.2, 0.5 }, function() u.closeTabWith("chrome://vivaldi-webui") end)
+		u.runWithDelays({ 0.2, 0.5 }, function() u.closeTabsContaining("chrome://vivaldi-webui") end)
 	end)
 	:subscribe(u.wf.windowDestroyed, function() wu.autoTile(Wf_browser) end)
 	:subscribe(u.wf.windowFocused, wu.bringAllWinsToFront)
@@ -184,7 +184,7 @@ Wf_quicklook = u
 -- don't leave browser tab behind when opening zoom
 Wf_zoom = u.wf.new("zoom.us"):subscribe(u.wf.windowCreated, function()
 	u.quitApp("BusyCal") -- mostly only used to open a Zoom link
-	u.closeTabWith("zoom.us")
+	u.closeTabsContaining("zoom.us")
 	u.runWithDelays(0.5, function()
 		local zoom = u.app("zoom.us")
 		if not (zoom and zoom:findWindow("^Zoom$")) then return end
