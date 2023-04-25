@@ -55,7 +55,6 @@ opt.clipboard = "unnamedplus"
 -- Popups / Floating Windows
 opt.pumheight = 15 -- max number of items in popup menu
 opt.pumwidth = 15 -- min width popup menu
-opt.previewheight = 20
 
 -- Spelling
 opt.spell = false -- off, since using vale+null-ls for the lsp-integration
@@ -95,8 +94,7 @@ opt.history = 300 -- reduce noise for command history search
 opt.cmdheight = 0
 opt.shortmess:append("s") -- reduce info in :messages
 opt.shortmess:append("S")
-opt.shortmess:append("A") -- no swap file message
-opt.shortmess:append("W") -- no write file message
+opt.shortmess:append("A") -- no swap file alerts
 opt.report = 9999 -- disable "x more/fewer lines" messages
 
 -- Character groups
@@ -232,7 +230,9 @@ autocmd("BufWinEnter", {
 	pattern = "?*",
 	callback = function() remember("load") end,
 })
+
 --------------------------------------------------------------------------------
+
 -- Add missing buffer names, e.g. for status bar
 autocmd("FileType", {
 	pattern = { "Glance", "lazy", "mason", "Navbuddy" },

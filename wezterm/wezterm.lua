@@ -133,13 +133,15 @@ local myHyperlinkRules = wt.default_hyperlink_rules()
 
 -- make github links of the form `owner/repo` clickable
 table.insert(myHyperlinkRules, {
-	regex = [[["]?([\w\d]{1}[-\w\d]+)(/){1}([-\w\d\.]+)["]?]],
-	format = "https://github.com/$1/$3",
+	regex = [["?(\b[-\w]+)/([-\w.]+)"?]], 
+	highlight = 0,
+	format = "https://github.com/$1/$2",
 })
 
 -- links that are probably file paths
 table.insert(myHyperlinkRules, {
-	regex = "/\\b\\S*\\b",
+	regex = [[/\b\S*\b]],
+	highlight = 0,
 	format = "file://$0",
 })
 
