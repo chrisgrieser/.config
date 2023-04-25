@@ -20,9 +20,7 @@ vnoremap m %
 
 nnoremap M J
 
-nnoremap R yyp
-
-nnoremap <Space> xp
+nnoremap <Space> ciw
 
 nnoremap <C-e> A
 
