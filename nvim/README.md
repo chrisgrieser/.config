@@ -9,7 +9,7 @@ Unfortunately, dotfyle's scrapping seems to be a bit off (missing about 40 plugi
 
 Also, you can check out [the nvim plugins I authored myself](https://github.com/chrisgrieser?tab=repositories&q=nvim&type=source&language=&sort=stargazers).
 
-## Neovim config structure
+## nvim config structure
 
 ```bash
 nvim

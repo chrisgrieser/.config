@@ -134,13 +134,29 @@ lspSettings.yamlls = {
 --------------------------------------------------------------------------------
 -- LTEX
 -- https://valentjn.github.io/ltex/settings.html
+
+local dictfile = u.readFile("/Users/chrisgrieser/.config/_linter-configs/languagetool-dictionary.txt")
+local dict = dictfile and vim.split(dictfile, "\n") or {}
+-- HACK since reading external file with the method described in the ltex docs
+-- does not work
+
 lspSettings.ltex = {
 	ltex = {
-		language = "en-US", -- German: de-DE
+		language = "en-US",
 		dictionary = {
-			{"en-US": ["adaptivity", "precomputed", "subproblem"], "de-DE": ["B-Splines", ":/path/to/externalFile.txt"]}
+			["en-US"] = dict,
+			["de-DE"] = dict,
+		},
+		disabledRules = {
+			["en-US"] = dict,
+			["de-DE"] = dict,
+		},
+		bibtex = {
+			fields = {
+				
+			}
 		}
-	}
+	},
 }
 
 --------------------------------------------------------------------------------
