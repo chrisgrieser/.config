@@ -18,17 +18,17 @@ const jsonArr = [];
 
 app.doShellScript(`curl -sL '${baseURL}'`)
 	.split("\r")
-	.slice(3)
+	.slice(3, -1)
 	.forEach(line => {
 		const subsite = line.replace(ahrefRegex, "$1");
-		if (subsite) return;
+		if (subsite === "</li>") return;
 		const desc = line.replace(ahrefRegex, "$2").replaceAll("&ndash;", "").trim();
 		const url = baseURL + subsite;
 
 		jsonArr.push({
 			title: subsite,
 			subtitle: desc,
-			match: alfredMatcher(subsite) + alfredMatcher(desc),
+			match: alfredMatcher(subsite) + desc,
 			arg: url,
 			uid: url,
 		});
