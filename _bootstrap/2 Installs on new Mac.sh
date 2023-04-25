@@ -35,9 +35,6 @@ unzip searchlink.zip
 mv "./SearchLink Services/SearchLink.workflow" "$HOME/Library/Services/SearchLink.workflow"
 rm -r "./Searchlink Services" searchlink.zip
 
-# java runtime engine for ltex-ls
-sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
-
 #───────────────────────────────────────────────────────────────────────────────
 # SETTINGS
 
