@@ -9,7 +9,7 @@ local function updateCounter() hs.execute("sketchybar --trigger update-sidenotes
 
 -- MOVE OFFICE NOTES TO BASE (when loading hammerspoon in office)
 -- run as task so it's non-blocking
-function M.moveOfficeNotesToBase()
+local function moveOfficeNotesToBase()
 	local script = "./helpers/move-office-sidenotes-to-base.js"
 	if PushOfficeNotesTask and PushOfficeNotesTask:isRunning() then return end
 
@@ -17,14 +17,17 @@ function M.moveOfficeNotesToBase()
 		.new(script, function(exitCode, _, stdErr)
 			if exitCode == 0 then
 				print("🗒️ Office Sidenotes -> Base")
-			else 
-				u.notify("⚠️ Moving Office-SideNotes failed: ".. stdErr)
+			else
+				u.notify("⚠️ Moving Office-SideNotes failed: " .. stdErr)
 			end
 		end)
 		:start()
 
 	updateCounter()
 end
+
+-- trigger once when starting in office
+if u.isAtOffice then moveOfficeNotesToBase() end
 
 --------------------------------------------------------------------------------
 

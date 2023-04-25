@@ -116,7 +116,7 @@ local function movieLayout()
 end
 
 --------------------------------------------------------------------------------
--- TRIGGERS FOR LAYOUT CHANGE
+-- WHEN TO SET LAYOUT
 
 ---select layout depending on number of screens
 local function selectLayout()
@@ -134,8 +134,9 @@ DisplayCountWatcher = hs.screen.watcher.new(selectLayout):start()
 u.hotkey(u.hyper, "home", selectLayout)
 
 -- 3. Systemstart
+selectLayout() -- = first time this file is required
 
--- 3. Waking
+-- 4. Waking
 local unlockInProgress = false
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
