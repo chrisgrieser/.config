@@ -85,7 +85,7 @@ sketchybar \
 	--subscribe package-updates homebrew-update \
 	\
 	--add alias "$stats" $second_row \
-	--set "$stats" width=240 \
+	--set "$stats" width=250 \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 \
