@@ -1,2 +1,7 @@
 # yaml-language-server: $schema=/Users/chrisgrieser/.config/karabiner/karabiner-complex-modification-schema.json
-homepage: 232
+homepage: bla
+title: fsfs
+rules:
+  - description: "some desc"
+    manipulators:
+      - 222
