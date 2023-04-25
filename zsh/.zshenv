@@ -28,15 +28,7 @@ export OPENAI_API_KEY
 GITHUB_TOKEN=$(tr -d "\n" <"$ICLOUD/Dotfolder/private dotfiles/github_token.txt")
 export GITHUB_TOKEN
 
-# Pass Config
-export PASSWORD_STORE_CLIP_TIME=60
-export PASSWORD_STORE_GENERATED_LENGTH=32
-export PASSWORD_STORE_ENABLE_EXTENSIONS=false
-export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # NEOVIM: so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
-
-export JAVA_HOME="/opt/homebrew/opt/openjdk/libexec/openjdk.jdk"
