@@ -40,7 +40,7 @@ osascript -e 'display notification "⏳ Running Extraction…" with title "Annot
 if [[ "$extraction_engine" == "pdfannots" ]]; then
 	annotations=$(pdfannots --no-group --format=json "$pdf_path")
 else
-	wd="$PWD"
+	prevDir="$PWD"
 	IMAGE_FOLDER="${output_path/#\~/$HOME}/attachments/image_temp"
 	mkdir -p "$IMAGE_FOLDER" && cd "$IMAGE_FOLDER"
 
@@ -49,7 +49,7 @@ else
 	# IMAGE EXTRACTION
 	# shellcheck disable=SC2012
 	NUMBER_OF_IMAGES=$(ls | wc -l | tr -d " ")
-	[[ $NUMBER_OF_IMAGES -eq 0 ]] && exit 0 # abort if no images
+	[[ $NUMBER_OF_IMAGES -gt 0 ]] 
 
 	# HACK: fix zero-padding for low page numbers by giving all images 4 digits
 	# see https://github.com/mgmeyers/pdfannots2json/issues/16
@@ -66,7 +66,7 @@ else
 	done
 
 	rmdir "$IMAGE_FOLDER" # remove temp folder
-	cd "$wd"
+	cd "$prevDir"
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
