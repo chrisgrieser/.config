@@ -6,7 +6,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 pdf_path=$(osascript "./scripts/get-pdf-path.applescript")
 
 #───────────────────────────────────────────────────────────────────────────────
-# GUARD CLAUSES & RETRIEVE CITEKEY
+# GUARD CLAUSES & CITEKEY RETRIEVAL
 
 if [[ ! -f "$bibtex_library_path" ]]; then
 	echo "⚠️ Library file does not exist."
@@ -49,21 +49,21 @@ else
 	# IMAGE EXTRACTION
 	# shellcheck disable=SC2012
 	NUMBER_OF_IMAGES=$(ls | wc -l | tr -d " ")
-	[[ $NUMBER_OF_IMAGES -gt 0 ]] 
+	if [[ $NUMBER_OF_IMAGES -gt 0 ]]; then
+		# HACK: fix zero-padding for low page numbers by giving all images 4 digits
+		# see https://github.com/mgmeyers/pdfannots2json/issues/16
+		for image in *; do
+			leftPadded=$(echo "$image" | sed -E 's/-([[:digit:]])-/-000\1-/' | sed -E 's/-([[:digit:]][[:digit:]])-/-00\1-/' | sed -E 's/-([[:digit:]][[:digit:]][[:digit:]])-/-0\1-/')
+			mv "$image" "$leftPadded"
+		done
 
-	# HACK: fix zero-padding for low page numbers by giving all images 4 digits
-	# see https://github.com/mgmeyers/pdfannots2json/issues/16
-	for image in *; do
-		leftPadded=$(echo "$image" | sed -E 's/-([[:digit:]])-/-000\1-/' | sed -E 's/-([[:digit:]][[:digit:]])-/-00\1-/' | sed -E 's/-([[:digit:]][[:digit:]][[:digit:]])-/-0\1-/')
-		mv "$image" "$leftPadded"
-	done
-
-	# rename for workflow
-	i=1
-	for image in *; do
-		mv -f "$image" ../"${citekey}_image${i}.png"
-		i=$((i + 1))
-	done
+		# rename images
+		i=1
+		for image in *; do
+			mv -f "$image" ../"${citekey}_image${i}.png"
+			i=$((i + 1))
+		done
+	fi
 
 	rmdir "$IMAGE_FOLDER" # remove temp folder
 	cd "$prevDir"

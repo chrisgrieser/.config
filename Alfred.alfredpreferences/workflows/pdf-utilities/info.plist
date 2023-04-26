@@ -178,7 +178,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>14A10611-259C-4F80-96E9-954B1532C5FA</string>
+				<string>CFFC8BC6-A518-49C8-9B3E-9D9E67ABDFA7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -422,6 +422,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CFFC8BC6-A518-49C8-9B3E-9D9E67ABDFA7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -454,27 +475,6 @@
 			<string>B42ED178-4437-4D4D-BEF0-63B085EF7730</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>CFFC8BC6-A518-49C8-9B3E-9D9E67ABDFA7</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -519,35 +519,6 @@
 			<string>83E378DD-0BAE-4A5F-B0D5-20FE53C32A85</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>14A10611-259C-4F80-96E9-954B1532C5FA</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -730,13 +701,6 @@
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
-		<key>14A10611-259C-4F80-96E9-954B1532C5FA</key>
-		<dict>
-			<key>xpos</key>
-			<real>600</real>
-			<key>ypos</key>
-			<real>340</real>
-		</dict>
 		<key>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</key>
 		<dict>
 			<key>colorindex</key>
@@ -886,10 +850,12 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>reports error messages</string>
 			<key>xpos</key>
-			<real>480</real>
+			<real>350</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>175</real>
 		</dict>
 		<key>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</key>
 		<dict>
