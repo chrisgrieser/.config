@@ -19,6 +19,28 @@ local keymappings = {
 }
 
 local function telescopeConfig()
+
+	-- https://github.com/nvim-telescope/telescope.nvim/issues/605
+	local deltaPreviewer = require("telescope.previewers").new_termopen_previewer {
+		get_command = function(entry)
+			-- note we can't use pipes
+			-- this command is for git_commits and git_bcommits
+			return {
+				"git",
+				"-c",
+				"core.pager=delta",
+				"-c",
+				"delta.side-by-side=false",
+				"diff",
+				entry.value .. "^!",
+			}
+			-- this is for status
+			-- You can get the AM things in entry.status. So we are displaying file if entry.status == '??' or 'A '
+			-- just do an if and return a different command
+			-- return { 'git', '-c', 'core.pager=delta', '-c', 'delta.side-by-side=false', 'diff', entry.value }
+		end,
+	}
+
 	require("telescope").setup {
 		defaults = {
 			selection_caret = "󰜋 ",
@@ -74,6 +96,7 @@ local function telescopeConfig()
 				-- adding "--all" to see future commits, adding delta for nicer preview
 				git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)", "--abbrev-commit", "--", "." },
 				results_title = "git log",
+				previewer = deltaPreviewer,
 			},
 			keymaps = {
 				prompt_prefix = " ",
