@@ -7,7 +7,7 @@ local wu = require("lua.window-utils")
 
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 local roundedCorners = hs.loadSpoon("RoundedCorners")
-roundedCorners.radius = 9
+roundedCorners.radius = 8
 if roundedCorners then roundedCorners:start() end
 
 ---to stop wallpaper shining through
@@ -40,7 +40,6 @@ function M.holeCover(arg)
 	CoverParts[2] = hs.drawing.rectangle { x = pseudoMaxCorner - 6, y = screen.h - 6, w = 12, h = 3 }
 	CoverParts[3] = hs.drawing.rectangle { x = pseudoMaxCorner - 3, y = screen.h - 9, w = 6, h = 3 }
 
-	-- for some reason, these cannot be put into a function :/
 	for _, cover in pairs(CoverParts) do
 		cover:setFillColor(bgColor)
 		cover:sendToBack()
