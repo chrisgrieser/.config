@@ -1,6 +1,6 @@
 matches:
-  - trigger: "... "
-    replace: "… "
+  - trigger: "..."
+    replace: "…"
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!web"
     replace: https://chris-grieser.de/
