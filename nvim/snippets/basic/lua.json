@@ -95,6 +95,7 @@
 			"end"
 		]
 	},
+
 	"for each (list)": {
 		"prefix": "for each (list)",
 		"body": [

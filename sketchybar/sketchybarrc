@@ -11,7 +11,7 @@ while ! pgrep "Stats"; do
 	i=$((i + 1))
 	if [[ $i -gt 20 ]]; then
 		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats not running"'
-		return 1
+		exit 1
 	fi
 done
 
@@ -24,7 +24,7 @@ while true; do
 	i=$((i + 1))
 	if [[ $i -gt 20 ]]; then
 		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats Combined Module not found"'
-		return 1
+		exit 1
 	fi
 done
 

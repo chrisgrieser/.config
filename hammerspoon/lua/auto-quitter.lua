@@ -53,6 +53,7 @@ local function quit(app)
 		end
 	elseif app == "Hammerspoon" then
 		hs.closeConsole()
+		app = "Hammerspoon Console"
 	elseif app == "wezterm-gui" then
 		u.app(app):kill9() -- needs kill9 to avoid confirmation
 	else
