@@ -104,7 +104,8 @@ function run(argv) {
 	};
 
 	// underlines
-	Array.prototype.splitOffUnderlinesToDrafts = function () {
+	Array.prototype.splitOffUnderlines
+= function () {
 		const underlineAnnos = this.filter(a => a.type === "Underline");
 
 		const underScoreHls = [];
@@ -428,7 +429,8 @@ ${annos}`;
 		.insertImage4pdfannots2json(citekey)
 
 		// finalize
-		.splitOffUnderlinesToDrafts()
+		.splitOffUnderlines
+	()
 		.JSONtoMD(citekey); // returns a string
 
 	writeNote(annotations, metadata, outPath);
