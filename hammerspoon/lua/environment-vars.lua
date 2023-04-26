@@ -21,8 +21,10 @@ local function readZshEnv(varname)
 	end
 	varvalue = varvalue
 		:gsub("$HOME", os.getenv("HOME")) -- resole $HOME
-		:gsub("#.*$", "") -- bash comments
+		:gsub(" ?#.*$", "") -- bash comments
 		:gsub('"', "") -- quotes
+		:gsub(" *$", "") -- trim
+		:gsub("^ *", "")
 	return varvalue
 end
 
