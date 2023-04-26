@@ -465,9 +465,9 @@ window_name</string>
 				<key>keyword</key>
 				<string>sync</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Dotfiles, Vault &amp; Password-Store</string>
 				<key>text</key>
-				<string>🔁 Sync Dotfiles, Vault &amp; Password-Store</string>
+				<string>🔁 Sync Repos</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
