@@ -2,6 +2,7 @@ local M = {}
 
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
+local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html

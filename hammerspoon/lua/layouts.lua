@@ -123,7 +123,7 @@ end
 
 ---select layout depending on number of screens
 function M.selectLayout()
-	if u.isProjector() then
+	if env.isProjector() then
 		movieLayout()
 	else
 		workLayout()
