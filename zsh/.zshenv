@@ -6,8 +6,9 @@ export PAGER=less
 export DOTFILE_FOLDER="$HOME/.config/"
 export VAULT_PATH="$HOME/main-vault/"
 export PASSWORD_STORE_DIR="$HOME/.password-store/" # default value, but still needed for bkp script
+export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-export WD="$ICLOUD/File Hub/"
 export DATA_DIR="$ICLOUD/Dotfolder" # to prevent commit spam on dotfile repo, store data in iCloud instead
 
 # defines location of the rest of the zsh config
