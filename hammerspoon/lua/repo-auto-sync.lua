@@ -71,7 +71,6 @@ end
 ---@return boolean
 local function gitPassSync()
 	local gitPassScript = env.passwordStore .. "pass-sync.sh"
-	u.notify("gitPassScript:", gitPassScript)
 	if GitPassSyncTask and GitPassSyncTask:isRunning() then return true end
 	if not u.screenIsUnlocked() then return true end -- prevent of standby home device background sync when in office
 
