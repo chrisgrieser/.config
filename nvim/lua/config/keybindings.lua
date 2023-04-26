@@ -691,12 +691,14 @@ keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" }
 keymap("n", "<leader>gA", ":Gitsigns stage_buffer<CR>", { desc = "󰊢 Add Buffer" })
 keymap("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "󰊢 Preview Hunk" })
 keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
-keymap("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
+keymap("n", "<leader>g?", ":Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
 
 -- Telescope
 -- stylua: ignore start
 keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = "󰊢  Status" })
 keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = "󰊢  Log / Commits" })
+keymap("n", "<leader>gb", function() cmd.Telescope("git_bcommits") end, { desc = "󰊢  Buffer Commits" })
+keymap("n", "<leader>gB", function() cmd.Telescope("git_branches") end, { desc = "󰊢  Buffer Commits" })
 
 -- My utils
 keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
