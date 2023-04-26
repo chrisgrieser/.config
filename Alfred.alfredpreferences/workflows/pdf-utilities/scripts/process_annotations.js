@@ -104,7 +104,7 @@ function run(argv) {
 	};
 
 	// underlines
-	Array.prototype.splitOffUnderlines = function () {
+	Array.prototype.splitOffUnderlines = function (_citekey) {
 		const underlineAnnos = this.filter(a => a.type === "Underline");
 
 		const underScoreHls = [];
@@ -117,7 +117,8 @@ function run(argv) {
 
 		const annosToSplitOff = [...underlineAnnos, ...underScoreHls];
 		if (annosToSplitOff.length > 0) {
-			Application("SideNotes").createNote({ text: annosToSplitOff.JSONtoMD() });
+			const text = annosToSplitOff.JSONtoMD(_citekey);
+			Application("SideNotes").createNote({ text: text });
 		}
 		return this.filter(a => a.type !== "Underline");
 	};
@@ -367,6 +368,7 @@ function run(argv) {
 		const noteContent = `---
 aliases: "${metad.title}"
 tags: literature-note, ${tagsForYaml}
+cssclass: pdf-annotations
 obsidianUIMode: preview
 citekey: ${metad.citekey}
 year: ${metad.year}
@@ -424,11 +426,11 @@ ${annos}`;
 		.mergeQuotes()
 		.transformHeadings()
 		.questionCallout()
-		.transformTag4yaml()
+		.transformTag4yaml(metadata.keywords)
 		.insertImage4pdfannots2json(citekey)
 
 		// finalize
-		.splitOffUnderlines()
+		.splitOffUnderlines(citekey)
 		.JSONtoMD(citekey); // returns a string
 
 	writeNote(annotations, metadata, outPath);
