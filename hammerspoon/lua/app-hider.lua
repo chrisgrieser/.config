@@ -6,6 +6,7 @@
 
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
+local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 -- unhide all apps
@@ -54,7 +55,7 @@ end
 -- if such an app is terminated, unhide them again
 TransBgAppWatcher = u.aw.new(function(appName, event, appObj)
 	local transBgApp = { "neovide", "Neovide", "Obsidian", "wezterm-gui", "WezTerm" }
-	if u.isProjector() or not (u.tbl_contains(transBgApp, appName)) then return end
+	if env.isProjector() or not (u.tbl_contains(transBgApp, appName)) then return end
 
 	if event == u.aw.terminated then
 		unHideAll()
@@ -81,7 +82,7 @@ AutoTileAppWatcher = u.aw.new(function(appName, eventType, appObj)
 		and u.tbl_contains(autoTileApps, appName)
 		and #appObj:allWindows() > 1
 		and not (appObj:findWindow("Picture in Picture"))
-		and not (u.isProjector())
+		and not (env.isProjector())
 		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X", "IINA" })
 	then
 		appObj:hide()
@@ -92,7 +93,7 @@ end):start()
 -- pseudomaximized windows always get twitter to the side
 Wf_maxWindows = u.wf.new(true):subscribe(u.wf.windowUnfocused, function(win)
 	if
-		not (u.isProjector())
+		not (env.isProjector())
 		and wu.CheckSize(win, wu.maximized)
 		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X", "IINA" })
 	then

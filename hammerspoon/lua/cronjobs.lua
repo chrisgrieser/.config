@@ -2,6 +2,7 @@ local u = require("lua.utils")
 local wu = require("lua.window-utils")
 local periphery = require("lua.hardware-periphery")
 local caff = hs.caffeinate.watcher
+local env = require("lua.environment-vars")
 
 ---@return string string consisting of three-chars representing the day of the week (English)
 local function getWeekday() return tostring(os.date()):sub(1, 3) end
@@ -11,7 +12,7 @@ local function getWeekday() return tostring(os.date()):sub(1, 3) end
 -- keep the iMac display brightness low when projector is connected
 ProjectorScreensaverWatcher = caff
 	.new(function(event)
-		if u.isAtOffice then return end
+		if env.isAtOffice then return end
 		if
 			event == caff.screensaverDidStop
 			or event == caff.screensaverDidStart
@@ -20,7 +21,7 @@ ProjectorScreensaverWatcher = caff
 			or event == caff.screensDidSleep
 		then
 			u.runWithDelays({0, 1, 3}, function()
-				if u.isProjector() then wu.iMacDisplay:setBrightness(0) end
+				if env.isProjector() then wu.iMacDisplay:setBrightness(0) end
 			end)
 		end
 	end)
@@ -42,7 +43,7 @@ JourfixeTimer = hs.timer
 -- Check for low battery of connected bluetooth devices
 BiweeklyTimer = hs.timer
 	.doAt("02:00", "01d", function()
-		if u.isAtOffice or (getWeekday() ~= "Wed" and getWeekday() ~= "Sat") then return end
+		if env.isAtOffice or (getWeekday() ~= "Wed" and getWeekday() ~= "Sat") then return end
 
 		periphery.batteryCheck("SideNotes")
 		hs.loadSpoon("EmmyLua")

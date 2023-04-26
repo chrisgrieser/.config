@@ -1,8 +1,11 @@
+local M = {}
+
 local darkmode = require("lua.dark-mode")
 local sidenotes = require("lua.sidenotes")
 local u = require("lua.utils")
-local wu = require("lua.window-utils")
 local visuals = require("lua.visuals")
+local wu = require("lua.window-utils")
+local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 -- HELPERS
@@ -23,7 +26,7 @@ local function setHigherBrightnessDuringDay()
 	if not hasBrightnessSensor then return end
 
 	local brightness
-	if u.betweenTime(1, 7) or u.isProjector() then -- when turning off projector at night
+	if u.betweenTime(1, 7) or env.isProjector() then -- when turning off projector at night
 		brightness = 0
 	elseif hs.brightness.ambient() > 120 then
 		brightness = 1
@@ -89,7 +92,7 @@ end
 
 local function movieLayout()
 	print("🔲 MovieLayout: loading")
-	local targetMode = u.isAtMother and "mother-movie" or "movie" -- different PWAs due to not being M1 device
+	local targetMode = env.isAtMother and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
 	wu.iMacDisplay:setBrightness(0)
 	darkmode.set(true)
@@ -119,7 +122,7 @@ end
 -- WHEN TO SET LAYOUT
 
 ---select layout depending on number of screens
-local function selectLayout()
+function M.selectLayout()
 	if u.isProjector() then
 		movieLayout()
 	else
@@ -128,13 +131,13 @@ local function selectLayout()
 end
 
 -- 1. Change of screen numbers
-DisplayCountWatcher = hs.screen.watcher.new(selectLayout):start()
+DisplayCountWatcher = hs.screen.watcher.new(M.selectLayout):start()
 
 -- 2. Hotkey
-u.hotkey(u.hyper, "home", selectLayout)
+u.hotkey(u.hyper, "home", M.selectLayout)
 
 -- 3. Systemstart
-selectLayout() -- = first time this file is required
+-- done
 
 -- 4. Waking
 local unlockInProgress = false
@@ -147,7 +150,7 @@ UnlockWatcher = c.new(function(event)
 	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
 		u.runWithDelays(0.5, function() -- delay for recognizing screens
 			setHigherBrightnessDuringDay()
-			selectLayout()
+			M.selectLayout()
 			sidenotes.reminderToSidenotes()
 		end)
 		u.runWithDelays(7, function() unlockInProgress = false end)
@@ -157,3 +160,6 @@ UnlockWatcher = c.new(function(event)
 		if UnlockTimer and UnlockTimer:running() then UnlockTimer:stop() end
 	end)
 end):start()
+
+--------------------------------------------------------------------------------
+return M

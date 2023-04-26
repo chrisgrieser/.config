@@ -1,9 +1,12 @@
 local M = {}
 
+local layouts = require("lua.layouts")
 local periphery = require("lua.hardware-periphery")
 local repos = require("lua.repo-auto-sync")
+local sidenotes = require("lua.sidenotes")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
+local env = require("lua.environment-vars")
 
 --------------------------------------------------------------------------------
 
@@ -31,6 +34,9 @@ function M.systemStart()
 		visuals.holeCover()
 		periphery.batteryCheck("SideNotes")
 		repos.syncAllGitRepos("notify")
+		layouts.selectLayout()
+		sidenotes.reminderToSidenotes()
+		if env.isAtOffice then sidenotes.moveOfficeNotesToBase() end
 	end
 end
 
