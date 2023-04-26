@@ -17,7 +17,6 @@ local passIcon = "🔑"
 ---@return boolean
 local function gitDotfileSync(submodulePull)
 	local gitDotfileScript = env.dotfilesFolder .. "git-dotfile-sync.sh"
-	print("gitDotfileScript:".. gitDotfileScript)
 
 	local scriptArgs = {}
 	if submodulePull == nil then submodulePull = true end
@@ -72,6 +71,7 @@ end
 ---@return boolean
 local function gitPassSync()
 	local gitPassScript = env.passwordStore .. "pass-sync.sh"
+	u.notify("gitPassScript:", gitPassScript)
 	if GitPassSyncTask and GitPassSyncTask:isRunning() then return true end
 	if not u.screenIsUnlocked() then return true end -- prevent of standby home device background sync when in office
 
