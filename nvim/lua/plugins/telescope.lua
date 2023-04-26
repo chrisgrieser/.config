@@ -93,10 +93,22 @@ local function telescopeConfig()
 			git_commits = {
 				prompt_prefix = "󰊢 ",
 				initial_mode = "normal",
-				-- adding "--all" to see future commits, adding delta for nicer preview
-				git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)", "--abbrev-commit", "--", "." },
+				-- adding "--all" to see future commits
+				git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)", "--", "." },
+				results_title = "git log (current buffer)",
+				previewer = deltaPreviewer,
+			},
+			git_bcommits = {
+				prompt_prefix = "󰊢 ",
+				initial_mode = "normal",
+				-- adding "--all" to see future commits
+				git_command = {"git","log", "--all", "--pretty=%h %s (%cr)"},
 				results_title = "git log",
 				previewer = deltaPreviewer,
+			},
+			git_branches = {
+				prompt_prefix = "󰊢 ",
+				initial_mode = "normal",
 			},
 			keymaps = {
 				prompt_prefix = " ",
