@@ -10,8 +10,14 @@ local function split_length(text, length)
 	end
 end
 
--- filter out annoying buggy messages from the satellite plugin: https://github.com/lewis6991/satellite.nvim/issues/36
-local function banned(msg) return msg:find("^error%(satellite.nvim%):") or msg:find("code = %-32801,") end
+-- filter out annoying buggy messages from plugins:
+local function banned(msg)
+	-- satellite https://github.com/lewis6991/satellite.nvim/issues/36
+	-- guess-indent https://github.com/NMAC427/guess-indent.nvim/issues/13
+	return msg:find("^error%(satellite.nvim%):")
+		or msg:find("code = %-32801,")
+		or msg == "Did set indentation to tabs." 
+end
 
 local function notifyConfig()
 	-- Base config

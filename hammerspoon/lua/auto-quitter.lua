@@ -47,19 +47,23 @@ end):start()
 
 ---@param app string name of the app
 local function quit(app)
+	local suffix = ""
 	if app == "Finder" then
 		for _, win in pairs(u.app("Finder"):allWindows()) do
 			win:close()	
 		end
+		suffix = " (windows closed)"	
 	elseif app == "Hammerspoon" then
 		hs.closeConsole()
-		app = "Hammerspoon Console"
+		app = "Hammerspoon"
+		suffix = " (Console)"	
 	elseif app == "wezterm-gui" then
 		u.app(app):kill9() -- needs kill9 to avoid confirmation
+		suffix = " (kill9)"	
 	else
 		u.app(app):kill()
 	end
-	print("⏹️ AutoQuitting: " .. app)
+	print("⏹️ AutoQuitting: " .. app .. suffix)
 	IdleApps[app] = nil
 end
 
