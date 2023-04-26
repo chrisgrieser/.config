@@ -46,9 +46,7 @@ function M.log()
 	local templateStr
 	local ft = bo.filetype
 
-	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		templateStr = 'u.notify("%s:", %s)'
-	elseif ft == "lua" or ft == "python" then
+	if ft == "lua" or ft == "python" then
 		templateStr = 'print("%s:", %s)'
 	elseif ft == "javascript" or ft == "typescript" then
 		templateStr = 'console.log("%s:", %s);'
@@ -76,9 +74,7 @@ function M.beeplog()
 	local emojis = { "🤖", "👽", "👾", "💣" }
 	local randomEmoji = emojis[math.random(1, #emojis)]
 
-	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		templateStr = 'u.notify("%s beep")'
-	elseif ft == "lua" or ft == "python" then
+	if ft == "lua" or ft == "python" then
 		templateStr = 'print("%s beep")'
 	elseif ft == "javascript" or ft == "typescript" then
 		templateStr = 'console.log("%s beep");'
@@ -166,7 +162,7 @@ function M.removelogs()
 	local numOfLinesBefore = fn.line("$")
 
 	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = 'u.otify(".*beep")'
+		logStatement = 'print(".*beep")'
 		vim.notify("Only removing beep logs for hammmerspoon, since prints are kept.")
 	elseif ft == "lua" or ft == "python" then
 		logStatement = "print"
