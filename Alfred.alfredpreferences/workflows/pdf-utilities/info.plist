@@ -548,6 +548,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>dyn.ah62d4rv4ge8043a</string>
+					<string>net.daringfireball.markdown</string>
+				</array>
+				<key>name</key>
+				<string>Pandoc: md → pdf</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>54CDB333-A1B6-4990-AF4C-4A48BA06D092</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -571,20 +591,31 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
+				<key>argumenttrimmode</key>
 				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>dyn.ah62d4rv4ge8043a</string>
-					<string>net.daringfireball.markdown</string>
-				</array>
-				<key>name</key>
-				<string>Pandoc: md → pdf</string>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"#question","arg":"#question","subtitle":"⚪"},{"title":"#gap","arg":"#gap","subtitle":"⚪"}]</string>
+				<key>keyword</key>
+				<string>at</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Annotation Tags</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
+			<string>alfred.workflow.input.listfilter</string>
 			<key>uid</key>
-			<string>54CDB333-A1B6-4990-AF4C-4A48BA06D092</string>
+			<string>30311AAD-EB1D-430B-894D-13034A05FDB0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -612,6 +643,13 @@
 			<real>190</real>
 			<key>ypos</key>
 			<real>30</real>
+		</dict>
+		<key>30311AAD-EB1D-430B-894D-13034A05FDB0</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>780</real>
 		</dict>
 		<key>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</key>
 		<dict>
