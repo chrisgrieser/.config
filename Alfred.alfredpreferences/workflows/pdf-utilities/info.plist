@@ -19,6 +19,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>30311AAD-EB1D-430B-894D-13034A05FDB0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CA20D1DD-9AE8-4C18-B8CC-A7B0F669B4AC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</key>
 		<array/>
 		<key>4D63817E-E093-44ED-99F7-2762E817BB90</key>
@@ -239,27 +252,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ OCR complete</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -283,6 +275,27 @@
 			<string>alfred.workflow.input.listfilter</string>
 			<key>uid</key>
 			<string>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ OCR complete</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -548,26 +561,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>dyn.ah62d4rv4ge8043a</string>
-					<string>net.daringfireball.markdown</string>
-				</array>
-				<key>name</key>
-				<string>Pandoc: md → pdf</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>54CDB333-A1B6-4990-AF4C-4A48BA06D092</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -591,14 +584,53 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>dyn.ah62d4rv4ge8043a</string>
+					<string>net.daringfireball.markdown</string>
+				</array>
+				<key>name</key>
+				<string>Pandoc: md → pdf</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>54CDB333-A1B6-4990-AF4C-4A48BA06D092</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>CA20D1DD-9AE8-4C18-B8CC-A7B0F669B4AC</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"title":"#question","arg":"#question","subtitle":"⚪"},{"title":"#gap","arg":"#gap","subtitle":"⚪"}]</string>
+				<string>[{"title":"question","arg":"#question","subtitle":"❓"},{"title":"gap","arg":"#gap","subtitle":"🕳️"},{"title":"critique","arg":"#critique","subtitle":"🟣"},{"title":"agree","arg":"#agree","subtitle":"🟩"},{"title":"disagree","arg":"#disagree","subtitle":"🟥"},{"title":"summary","arg":"#summary","subtitle":"✴️"},{"title":"important","arg":"#important","subtitle":"❗"},{"title":"epistemic break","arg":"#epistemic-break","subtitle":"⚡"},{"title":"idea","arg":"#idea","subtitle":"🤔"},{"title":"definition","arg":"#definition","subtitle":"💡"},{"title":"example","arg":"#example","subtitle":"⚛️"},{"title":"main","arg":"#main","subtitle":"Ⓜ️"},{"title":"method","arg":"#method","subtitle":"🔬"},{"title":"data","arg":"#data","subtitle":"🔢"},{"title":"sidenote","arg":"#sidenote","subtitle":"📔"},{"title":"quote","arg":"#quote","subtitle":"💬"},{"title":"lit review","arg":"#lit-review","subtitle":"📚"}]</string>
 				<key>keyword</key>
 				<string>at</string>
 				<key>matchmode</key>
@@ -646,6 +678,8 @@
 		</dict>
 		<key>30311AAD-EB1D-430B-894D-13034A05FDB0</key>
 		<dict>
+			<key>note</key>
+			<string>annotation tags</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -759,6 +793,15 @@
 			<real>35</real>
 			<key>ypos</key>
 			<real>175</real>
+		</dict>
+		<key>CA20D1DD-9AE8-4C18-B8CC-A7B0F669B4AC</key>
+		<dict>
+			<key>note</key>
+			<string>paste</string>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>780</real>
 		</dict>
 		<key>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</key>
 		<dict>
