@@ -52,15 +52,17 @@ rules:
               last3CharsOfFilename=$(echo "$filepathNoExt" | rev | cut -c-3 | rev)
               if [[ "$last3CharsOfFilename" == "_CG" ]]; then
                 nameWithoutSig=$(echo "$filepathNoExt" | rev | cut -c4- | rev)
-                mv -n "$selection" "$nameWithoutSig.$ext"
+                newName="$nameWithoutSig.$ext"
               else
-                mv -n "$selection" "${filepathNoExt}_CG.$ext"
+                newName="${filepathNoExt}_CG.$ext"
               fi
+              mv -n "$selection" "$newName"
+              open -R "$newName" # forces refresh of Finder
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.apple\.finder$]
           - type: variable_unless
-            name: FINDER_ALFRED_MODE
+            name: FINDER_FIND_MODE
             value: true
           - type: variable_unless
             name: FINDER_INSERT_MODE
