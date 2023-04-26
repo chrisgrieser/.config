@@ -25,10 +25,7 @@ local function telescopeConfig()
 			prompt_prefix = "❱ ",
 			multi_icon = "󰒆 ",
 			preview = { filesize_limit = 0.5 }, -- in MB, do not preview big files for performance
-			path_display = function(_, path)
-				local tail = require("telescope.utils").path_tail(path)
-				return tail .. "(" .. path .. ")"
-			end,
+			path_display = { "tail" },
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			file_ignore_patterns = {
@@ -58,11 +55,11 @@ local function telescopeConfig()
 			layout_config = {
 				horizontal = {
 					prompt_position = "top",
-					height = 0.75,
+					height = 0.7,
 					width = 0.99,
 					preview_cutoff = 70,
 					preview_width = { 0.50, min = 30 },
-					anchor = "S",
+					-- anchor = "S",
 				},
 			},
 		},
