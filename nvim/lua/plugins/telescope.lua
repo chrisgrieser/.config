@@ -25,8 +25,11 @@ local function telescopeConfig()
 			prompt_prefix = "❱ ",
 			multi_icon = "󰒆 ",
 			preview = { filesize_limit = 0.5 }, -- in MB, do not preview big files for performance
-			path_display = { "tail" }, -- smart|tail (rest isn't that useful)
-			borderchars = require("config.utils").borderChars,
+			path_display = function(_, path)
+				local tail = require("telescope.utils").path_tail(path)
+				return tail .. "(" .. path .. ")"
+			end,
+			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			file_ignore_patterns = {
 				"%.git/",
@@ -59,10 +62,7 @@ local function telescopeConfig()
 					width = 0.99,
 					preview_cutoff = 70,
 					preview_width = { 0.50, min = 30 },
-					-- anchor = "S",
-				},
-				cursor = {
-					preview_cutoff = 9001, -- never use preview here
+					anchor = "S",
 				},
 			},
 		},
@@ -75,7 +75,8 @@ local function telescopeConfig()
 				prompt_prefix = "󰊢 ",
 				initial_mode = "normal",
 				-- adding "--all" to see future commits, adding delta for nicer preview
-				git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)", "--abbrev-commit", "--", ".", "|" },
+				git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)", "--abbrev-commit", "--", "." },
+				results_title = "git log",
 			},
 			keymaps = {
 				prompt_prefix = " ",
@@ -121,12 +122,14 @@ local function telescopeConfig()
 				prompt_title = false,
 				results_title = false,
 				theme = "cursor",
+				previewer = false,
 				layout_config = { cursor = { width = 0.5, height = 0.4 } },
 			},
 			spell_suggest = {
 				initial_mode = "normal",
 				prompt_prefix = "󰓆",
 				theme = "cursor",
+				previewer = false,
 				layout_config = { cursor = { width = 0.3 } },
 			},
 			colorscheme = {
