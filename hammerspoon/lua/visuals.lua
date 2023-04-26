@@ -12,7 +12,7 @@ if roundedCorners then roundedCorners:start() end
 ---to stop wallpaper shining through
 ---@param arg? string
 function M.holeCover(arg)
-	if u.isProjector() then return end
+	if env.isProjector() then return end
 
 	if Cover1 then Cover1 = nil end
 	if Cover2 then Cover2 = nil end

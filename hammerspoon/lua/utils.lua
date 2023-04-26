@@ -145,23 +145,6 @@ function M.notify(...)
 end
 
 --------------------------------------------------------------------------------
--- DEVICE
-
-local deviceName = hs.host.localizedName():gsub(".- ", "", 1)
-M.isAtOffice = (deviceName:find("[Mm]ini") or deviceName:find("eduroam")) ~= nil
-M.isAtHome = (deviceName:find("iMac") and deviceName:find("Home")) ~= nil
-M.isAtMother = deviceName:find("Mother") ~= nil
----not using static variable, since projector connection can vary
----@nodiscard
----@return boolean
-function M.isProjector()
-	local mainDisplayName = hs.screen.primaryScreen():name()
-	local projectorHelmholtz = mainDisplayName == "ViewSonic PJ"
-	local tvLeuthinger = mainDisplayName == "TV_MONITOR"
-	return projectorHelmholtz or tvLeuthinger
-end
-
---------------------------------------------------------------------------------
 -- APP UTILS
 
 ---get appObject

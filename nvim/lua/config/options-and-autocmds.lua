@@ -27,7 +27,7 @@ for _, char in pairs(undopointChars) do
 	keymap("i", char, function()
 		local expr = char .. "<C-g>u"
 		-- FIX interference with telescope-file-browser keymapping
-		if bo.filetype == "TelescopePrompt" then expr = char end 
+		if bo.filetype == "TelescopePrompt" then expr = char end
 		return expr
 	end, { desc = "extra undopoint for " .. char, remap = true, expr = true })
 end
@@ -159,21 +159,19 @@ opt.listchars = {
 
 autocmd("BufReadPost", {
 	callback = function()
-		-- trigger to ensure it's run before determining spaces/tabs
-		local success = pcall(cmd.IndentOMatic)
-		if not success then
-			vim.notify("Indent-o-Matic not found.", u.warn)
-			return
-		end
+		if bo.filetype == "undotree" then return end
 
-		opt_local.listchars = vim.opt_global.listchars:get() -- copy the global
-		if bo.expandtab then
-			opt_local.listchars:append { tab = "↹ " }
-			opt_local.listchars:append { lead = " " }
-		else
-			opt_local.listchars:append { tab = "  " }
-			opt_local.listchars:append { lead = "·" }
-		end
+		-- run delayed, to ensure it runs after `:GuessIndent`
+		vim.defer_fn(function()
+			opt_local.listchars = vim.opt_global.listchars:get() -- copy the global
+			if bo.expandtab then
+				opt_local.listchars:append { tab = "↹ " }
+				opt_local.listchars:append { lead = " " }
+			else
+				opt_local.listchars:append { tab = "  " }
+				opt_local.listchars:append { lead = "·" }
+			end
+		end, 5)
 	end,
 })
 

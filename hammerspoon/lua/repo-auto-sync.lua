@@ -1,5 +1,6 @@
 local M = {}
 local u = require("lua.utils")
+local env = require("lua.environment-vars")
 
 --------------------------------------------------------------------------------
 
@@ -15,7 +16,7 @@ local passIcon = "🔑"
 ---@param submodulePull? boolean also update submodules, defaults to **true**
 ---@return boolean
 local function gitDotfileSync(submodulePull)
-	local gitDotfileScript = DotfilesFolder .. "/git-dotfile-sync.sh"
+	local gitDotfileScript = env.dotfilesFolder .. "/git-dotfile-sync.sh"
 
 	local scriptArgs = {}
 	if submodulePull == nil then submodulePull = true end
@@ -49,7 +50,7 @@ end
 
 ---@return boolean
 local function gitVaultSync()
-	local gitVaultScript = VaultLocation .. "/Meta/git-vault-sync.sh"
+	local gitVaultScript = env.vaultLocation .. "/Meta/git-vault-sync.sh"
 	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return false end
 	if not (u.screenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
 
@@ -69,7 +70,7 @@ end
 
 ---@return boolean
 local function gitPassSync()
-	local gitPassScript = PasswordStore .. "/pass-sync.sh"
+	local gitPassScript = env.passwordStore .. "/pass-sync.sh"
 	if GitPassSyncTask and GitPassSyncTask:isRunning() then return true end
 	if not u.screenIsUnlocked() then return true end -- prevent of standby home device background sync when in office
 

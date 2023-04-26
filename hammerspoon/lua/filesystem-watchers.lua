@@ -1,5 +1,6 @@
 local pw = hs.pathwatcher.new
 local u = require("lua.utils")
+local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 ---is in sub-directory instead of directly in the folder
@@ -59,7 +60,7 @@ DownloadFolderWatcher = pw(
 local scanFolder = os.getenv("HOME")
 	.. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 ScanFolderWatcher = pw(scanFolder, function()
-	hs.execute("mv '" .. scanFolder .. "'/* '" .. FileHub .. "'")
+	hs.execute("mv '" .. scanFolder .. "'/* '" .. env.fileHub .. "'")
 	print("➡️ Scan moved to File Hub.")
 end):start()
 
@@ -73,18 +74,18 @@ SystemDlFolderWatcher = pw(systemDownloadFolder, function(files)
 	end
 
 	-- otherwise move to filehub
-	os.execute("mv '" .. systemDownloadFolder .. "'/* '" .. FileHub .. "'")
+	os.execute("mv '" .. systemDownloadFolder .. "'/* '" .. env.fileHub .. "'")
 	print("➡️ Download moved to File Hub.")
 end):start()
 
 --------------------------------------------------------------------------------
 -- FROM FILE HUB
 
-local browserSettings = DotfilesFolder .. "/_browser-extension-configs/"
-FileHubWatcher = pw(FileHub, function(paths, _)
+local browserSettings = env.dotfilesFolder .. "/_browser-extension-configs/"
+FileHubWatcher = pw(env.fileHub, function(paths, _)
 	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
-		if isInSubdirectory(filep, FileHub) then return end
+		if isInSubdirectory(filep, env.fileHub) then return end
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 
@@ -104,7 +105,7 @@ FileHubWatcher = pw(FileHub, function(paths, _)
 			hs.open(filep)
 
 		-- watch later .urls from the office
-		elseif ext == "url" and u.isAtHome then
+		elseif ext == "url" and env.isAtHome then
 			os.rename(filep, os.getenv("HOME") .. "/Downloaded/" .. fileName)
 			print("➡️ Watch Later URL moved to Video Downloads")
 
@@ -144,13 +145,13 @@ end):start()
 --------------------------------------------------------------------------------
 -- AUTO-INSTALL OBSIDIAN ALPHA
 
-ObsiAlphaWatcher = pw(FileHub, function(files)
+ObsiAlphaWatcher = pw(env.fileHub, function(files)
 	for _, file in pairs(files) do
 		-- needs delay and `.crdownload` check, since the renaming is sometimes not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
 
 		u.runWithDelays(0.5, function()
-			hs.execute([[cd "]] .. FileHub .. [[" || exit 1
+			hs.execute([[cd "]] .. env.fileHub .. [[" || exit 1
 				test -f obsidian-*.*.*.asar.gz || exit 1
 				killall Obsidian
 				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"

@@ -1,6 +1,7 @@
 local M = {}
 
 local u = require("lua.utils")
+local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 M.iMacDisplay = hs.screen("Built%-in")
@@ -8,9 +9,9 @@ M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 
-if u.isAtMother then
+if env.isAtMother then
 	M.toTheSide = hs.geometry.rect(-70, 54, 380, 890)
-elseif u.isAtOffice then
+elseif env.isAtOffice then
 	M.toTheSide = hs.geometry.rect(-75, 54, 450, 1100)
 else
 	M.toTheSide = hs.geometry.rect(-70, 54, 425, 1026) -- negative x to hide useless sidebar
@@ -240,7 +241,7 @@ function M.autoTile(winSrc)
 
 	if #wins > 1 then M.bringAllWinsToFront() end
 
-	if #wins == 0 and u.isFront("Finder") and not (u.isProjector()) then
+	if #wins == 0 and u.isFront("Finder") and not (env.isProjector()) then
 		-- hide finder when no windows
 		-- delay needed for quitting fullscreen apps, which are sometimes counted
 		-- as finder windows (SIC)
@@ -249,7 +250,7 @@ function M.autoTile(winSrc)
 		end)
 	elseif #wins == 1 then
 		local pos
-		if u.isProjector() then
+		if env.isProjector() then
 			pos = M.maximized
 		elseif u.isFront("Finder") then
 			pos = M.centered
@@ -309,7 +310,7 @@ Wf_appsOnMouseScreen = u.wf
 		local mouseScreen = hs.mouse.getCurrentScreen()
 		if not mouseScreen then return end
 		local screenOfWindow = newWin:screen()
-		if not (u.isProjector()) or mouseScreen:name() == screenOfWindow:name() then return end
+		if not (env.isProjector()) or mouseScreen:name() == screenOfWindow:name() then return end
 		local app = newWin:application()
 		if not app then return end
 
@@ -360,7 +361,7 @@ end
 
 local function moveAllWinsToProjectorScreen()
 	if #hs.screen.allScreens() < 2 then return end
-	if not u.isProjector() then return end
+	if not env.isProjector() then return end
 
 	local projectorScreen = hs.screen.primaryScreen()
 	for _, win in pairs(hs.window:orderedWindows()) do

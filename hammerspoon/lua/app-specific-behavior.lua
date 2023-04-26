@@ -1,5 +1,6 @@
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
+local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 ---play/pause spotify with Spotify
@@ -23,8 +24,8 @@ SpotifyAppWatcher = u.aw
 		local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll" }
 		if
 			not u.screenIsUnlocked()
-			or u.isAtOffice
-			or u.isProjector()
+			or env.isAtOffice
+			or env.isProjector()
 			or not (u.tbl_contains(appsWithSound, appName))
 		then
 			return
@@ -130,7 +131,7 @@ NeovideWatcher = u.aw
 u.urischeme("enlarge-neovide-window", function()
 	u.asSoonAsAppRuns("neovide", function()
 		local neovideWin = u.app("neovide"):mainWindow()
-		local size = u.isProjector() and wu.maximized or wu.pseudoMax
+		local size = env.isProjector() and wu.maximized or wu.pseudoMax
 		wu.moveResize(neovideWin, size)
 	end)
 end)

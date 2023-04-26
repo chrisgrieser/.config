@@ -41,8 +41,8 @@ return {
 		cmd = { "NeoAI", "NeoAIContext", "NeoAIInject", "NeoAIInjectCode", "NeoAIInjectContextCode" },
 		opts = {
 			ui = { -- percentages
-				width = 40, 
-				output_popup_height = 75, 
+				width = 40,
+				output_popup_height = 75,
 			},
 			inject = {
 				cutoff_width = vim.opt.textwidth:get() + 5,
@@ -56,8 +56,8 @@ return {
 		opts = {
 			save_file = u.vimDataDir .. "/bookmarks",
 			signs = {
-				add = { text = "" }
-			}
+				add = { text = "" },
+			},
 		},
 	},
 	{ -- case conversion
@@ -127,8 +127,11 @@ return {
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
 	},
 	{ -- automatically set right indent for file
-		"Darazaki/indent-o-matic",
+		"nmac427/guess-indent.nvim",
 		event = "BufReadPre",
+		opts = {
+			override_editorconfig = false,
+		},
 	},
 	{ -- key chord hints
 		"folke/which-key.nvim",
