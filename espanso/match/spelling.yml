@@ -240,3 +240,7 @@ matches:
     replace: has
     propagate_casing: true
     word: true
+  - triggers: [aht, hta]
+    replace: hat
+    propagate_casing: true
+    word: true
