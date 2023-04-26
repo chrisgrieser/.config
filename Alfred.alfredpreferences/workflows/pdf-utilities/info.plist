@@ -174,6 +174,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E37A9BDD-290E-4BCD-9832-06488718A4BD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>14A10611-259C-4F80-96E9-954B1532C5FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -185,21 +198,6 @@
 	<string>PDF &amp; Pandoc Utils</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -252,6 +250,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ OCR complete</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -281,21 +315,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ OCR complete</string>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>name</key>
+				<string>Run OCR on the PDF</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
-			<string>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</string>
+			<string>698B1D06-326B-43D2-8ABB-DE676CE3661A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -322,25 +354,6 @@
 			<string>0E4A0733-E898-4FB7-BC62-446FBD10A76E</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.adobe.pdf</string>
-				</array>
-				<key>name</key>
-				<string>Run OCR on the PDF</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>698B1D06-326B-43D2-8ABB-DE676CE3661A</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -445,21 +458,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>acodes</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Cheatsheet for PDF Annotation Extractor</string>
-				<key>withspace</key>
+				<key>lastpathcomponent</key>
 				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>83E378DD-0BAE-4A5F-B0D5-20FE53C32A85</string>
+			<string>CFFC8BC6-A518-49C8-9B3E-9D9E67ABDFA7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -485,6 +498,56 @@
 			<string>8DDB7CE3-56BA-4890-A2A7-FC6E967C73AF</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>acodes</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Cheatsheet for PDF Annotation Extractor</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>83E378DD-0BAE-4A5F-B0D5-20FE53C32A85</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>14A10611-259C-4F80-96E9-954B1532C5FA</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -561,29 +624,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>pandoc-md2pdf.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -604,21 +644,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
+				<key>concurrently</key>
 				<false/>
-				<key>transient</key>
-				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>pandoc-md2pdf.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>CA20D1DD-9AE8-4C18-B8CC-A7B0F669B4AC</string>
+			<string>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -651,6 +695,25 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>CA20D1DD-9AE8-4C18-B8CC-A7B0F669B4AC</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -666,6 +729,13 @@
 			<real>805</real>
 			<key>ypos</key>
 			<real>35</real>
+		</dict>
+		<key>14A10611-259C-4F80-96E9-954B1532C5FA</key>
+		<dict>
+			<key>xpos</key>
+			<real>600</real>
+			<key>ypos</key>
+			<real>340</real>
 		</dict>
 		<key>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</key>
 		<dict>
@@ -761,7 +831,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>185</real>
+			<real>190</real>
 			<key>ypos</key>
 			<real>330</real>
 		</dict>
@@ -812,6 +882,15 @@
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
+		<key>CFFC8BC6-A518-49C8-9B3E-9D9E67ABDFA7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>480</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
 		<key>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</key>
 		<dict>
 			<key>colorindex</key>
@@ -828,7 +907,7 @@
 			<key>note</key>
 			<string>run extraction</string>
 			<key>xpos</key>
-			<real>185</real>
+			<real>190</real>
 			<key>ypos</key>
 			<real>175</real>
 		</dict>

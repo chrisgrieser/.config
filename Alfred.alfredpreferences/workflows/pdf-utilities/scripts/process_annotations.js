@@ -104,8 +104,7 @@ function run(argv) {
 	};
 
 	// underlines
-	Array.prototype.splitOffUnderlines
-= function () {
+	Array.prototype.splitOffUnderlines = function () {
 		const underlineAnnos = this.filter(a => a.type === "Underline");
 
 		const underScoreHls = [];
@@ -116,9 +115,9 @@ function run(argv) {
 			underScoreHls.push(anno);
 		});
 
-		const textToDrafts = [...underlineAnnos, ...underScoreHls];
-		if (textToDrafts.length > 0) {
-			Application("Drafts").Draft({ content: textToDrafts.JSONtoMD() }).make();
+		const annosToSplitOff = [...underlineAnnos, ...underScoreHls];
+		if (annosToSplitOff.length > 0) {
+			Application("SideNotes").createNote({ text: annosToSplitOff.JSONtoMD() });
 		}
 		return this.filter(a => a.type !== "Underline");
 	};
@@ -429,8 +428,7 @@ ${annos}`;
 		.insertImage4pdfannots2json(citekey)
 
 		// finalize
-		.splitOffUnderlines
-	()
+		.splitOffUnderlines()
 		.JSONtoMD(citekey); // returns a string
 
 	writeNote(annotations, metadata, outPath);
