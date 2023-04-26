@@ -16,7 +16,7 @@ local function banned(msg)
 	-- guess-indent https://github.com/NMAC427/guess-indent.nvim/issues/13
 	return msg:find("^error%(satellite.nvim%):")
 		or msg:find("code = %-32801,")
-		or msg == "Did set indentation to tabs." 
+		or vim.startswith(msg, "Did set indentation to ")
 end
 
 local function notifyConfig()
