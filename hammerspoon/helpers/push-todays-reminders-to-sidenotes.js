@@ -8,6 +8,7 @@ function run() {
 
 	const today = new Date();
 	const folder = sidenotes.folders.byName("Base");
+	const delayMs = 0.05;
 
 	// https://leancrew.com/all-this/2017/08/my-jxa-problem/
 	// https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
@@ -15,7 +16,7 @@ function run() {
 
 	if (todaysTasks.length === 0) {
 		reminders.quit();
-		return
+		return;
 	}
 
 	// - needs iterating for loop since JXA Record Array cannot be looped with `foreach` or `for in`
@@ -33,9 +34,10 @@ function run() {
 		task.delete();
 	}
 
+	delay(delayMs);
 	reminders.quit();
 
 	// close sidenotes again
-	delay(0.05); /* eslint-disable-line no-magic-numbers */
+	delay(delayMs);
 	Application("System Events").keystroke("w", { using: ["command down"] });
 }
