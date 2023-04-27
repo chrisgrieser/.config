@@ -145,7 +145,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work
-local dictfile = u.linterConfigFolder .. "/languagetool-dictionary.txt"
+local dictfile = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
 local words = {}
 for word in io.open(dictfile, "r"):lines() do
 	table.insert(words, word)

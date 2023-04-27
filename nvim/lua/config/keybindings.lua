@@ -199,7 +199,7 @@ keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 
 
 ---add word under cursor to vale dictionary
 ---@param mode "accept"|"reject"
-local function valeWord(mode)
+keymap({ "n", "x" }, "zg", function()
 	local word
 	if fn.mode() == "n" then
 		local iskeywBefore = vim.opt_local.iskeyword:get() -- remove word-delimiters for <cword>
@@ -210,7 +210,6 @@ local function valeWord(mode)
 		u.normal('"zy')
 		word = fn.getreg("z")
 	end
-
 	local filepath = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
 	local success = u.appendToFile(filepath, word)
 	if not success then return end -- error message already by AppendToFile
@@ -218,14 +217,8 @@ local function valeWord(mode)
 	cmd.update()
 	cmd.edit() -- reload file for diagnostics to take effect
 	cmd.loadview(2)
-	vim.notify(string.format('󰓆 Now %sing:\n"%s"', mode, word))
-end
-keymap(
-	{ "n", "x" },
-	"zg",
-	function() valeWord("accept") end,
-	{ desc = "󰓆 Add to accepted words (vale)" }
-)
+	vim.notify(string.format('󰓆 Now accepting:\n"%s"', word))
+end, { desc = "󰓆 Add to accepted words (vale)" })
 
 --------------------------------------------------------------------------------
 
