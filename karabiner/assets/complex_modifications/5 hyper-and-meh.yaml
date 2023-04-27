@@ -35,8 +35,8 @@ rules:
           - type: frontmost_application_unless
             file_paths:
               - "[Mm]industry"
-              - "[Nn]eovide" # quicker completion selection
-              - "wezterm-gui" # quicker completion selection
+              - "[Nn]eovide" # allow repeats for quicker completion selection
+              - "wezterm-gui" # ^
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪ Open Locations"
     manipulators:

@@ -1,6 +1,6 @@
+local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 ---play/pause spotify with Spotify
@@ -118,10 +118,7 @@ NeovideWatcher = u.aw
 
 		-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
 		elseif eventType == u.aw.terminated then
-			u.runWithDelays({ 5, 10 }, function()
-				print("🗡️ Killing leftover nvim processes")
-				hs.execute("pgrep neovide || killall -KILL nvim")
-			end)
+			u.runWithDelays({ 5, 10 }, function() hs.execute("pgrep neovide || killall -KILL nvim") end)
 		end
 	end)
 	:start()

@@ -1,6 +1,6 @@
+local periphery = require("lua.hardware-periphery")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local periphery = require("lua.hardware-periphery")
 local caff = hs.caffeinate.watcher
 local env = require("lua.environment-vars")
 
@@ -20,7 +20,7 @@ ProjectorScreensaverWatcher = caff
 			or event == caff.systemDidWake
 			or event == caff.screensDidSleep
 		then
-			u.runWithDelays({0, 1, 3}, function()
+			u.runWithDelays({ 0, 1, 3 }, function()
 				if env.isProjector() then wu.iMacDisplay:setBrightness(0) end
 			end)
 		end
@@ -70,25 +70,25 @@ local function closeFullscreenSpaces()
 	if not allSpaces then return end
 	for _, spaces in pairs(allSpaces) do
 		for _, spaceId in pairs(spaces) do
-			if hs.spaces.spaceType(spaceId) == "fullscreen" then
-				hs.spaces.removeSpace(spaceId)
-			end
-		end	
+			if hs.spaces.spaceType(spaceId) == "fullscreen" then hs.spaces.removeSpace(spaceId) end
+		end
 	end
 end
 
 -- between 1:30 and 6:00, check every half hour if device has been idle for 30
 -- minutes. if so, quit video apps and related things.
-SleepTimer = hs.timer.doEvery(1800, function ()
-	if not (u.betweenTime(1.5, 6) and u.idleMins(30)) then return end
-	u.notify("💤 SleepTimer triggered.")
+SleepTimer = hs.timer
+	.doEvery(1800, function()
+		if not (u.betweenTime(1.5, 6) and u.idleMins(30) and u.screenIsUnlocked()) then return end
+		u.notify("💤 SleepTimer triggered.")
 
-	-- no need to quit IINA since it autoquits
-	u.quitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
+		-- no need to quit IINA since it autoquits
+		u.quitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
 
-	-- close leftover fullscreen spaces
-	closeFullscreenSpaces()
+		-- close leftover fullscreen spaces
+		closeFullscreenSpaces()
 
-	-- close browser tabs running YouTube (not full name for youtube shorturls)
-	u.closeTabsContaining("youtu") 
-end):start()
+		-- close browser tabs running YouTube (not full name for youtube shorturls)
+		u.closeTabsContaining("youtu")
+	end)
+	:start()

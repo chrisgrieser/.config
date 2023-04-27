@@ -104,11 +104,6 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 			-- zips to archive (like violentmonkey)
 			hs.open(filep)
 
-		-- watch later .urls from the office
-		elseif ext == "url" and env.isAtHome then
-			os.rename(filep, os.getenv("HOME") .. "/Downloaded/" .. fileName)
-			print("➡️ Watch Later URL moved to Video Downloads")
-
 		-- ublacklist
 		elseif fileName == "ublacklist-settings.json" then
 			os.rename(filep, browserSettings .. fileName)

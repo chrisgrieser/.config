@@ -26,23 +26,30 @@ hs.consoleOnTop(false)
 -- HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
 -- selene: allow(high_cyclomatic_complexity)
 function CleanupConsole()
-	local consoleOutput = tostring(cons.getConsole())
-	hs.console.clearConsole()
 	local isDark = u.isDarkMode()
 
+	local consoleOutput = tostring(cons.getConsole())
+	hs.console.clearConsole()
+	local consoleLines = hs.fnutils.split(consoleOutput, "\n+")
+	if not consoleLines then return end
+
 	local cleanLines = {}
-	for line in string.gmatch(consoleOutput, "[^\n]+") do -- split by new lines
+	for _, line in ipairs(consoleLines) do
 		local ignore = line:find("hotkey: Enabled hotkey")
 			or line:find("hotkey: Disabled hotkey")
 			or line:find("Loading extensions?: ")
 			or line:find("Loading Spoon: RoundedCorners")
+			or line:find("Done.$")
+			or line:find("Lazy extension loading enabled$")
+			or line:find("Loading .*/init.lua")
+			or line:find("wfilter .* is STILL not registered") -- FIX https://github.com/Hammerspoon/hammerspoon/issues/3462
 
 		if not ignore then table.insert(cleanLines, line) end
 	end
 
 	for _, line in pairs(cleanLines) do
 		-- FIX double-timestamp displayed sometimes
-		line = line:gsub("(%d%d:%d%d:%d%d: )%d%d:%d%d:%d%d ?", "%1")
+		-- line = line:gsub("(%d%d:%d%d:%d%d: )%d%d:%d%d:%d%d ?", "%1")
 
 		-- colorize certain messages
 		local color
@@ -52,13 +59,9 @@ function CleanupConsole()
 			color = isDark and lightRed or darkRed
 		elseif
 			line:lower():find("warning")
-			or line:find("WARN")
 			or line:find("⚠️️")
 			or line:find("stack traceback")
 			or line:find("^<")
-			or line:find("%.%.%.")
-			or line:find("in upvalue")
-			or line:find("in function")
 		then
 			color = isDark and lightYellow or darkYellow
 		else

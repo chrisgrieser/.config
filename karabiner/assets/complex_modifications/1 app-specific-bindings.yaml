@@ -370,14 +370,9 @@ rules:
       # select with tab (REQUIRED compatibility mode to recognize Alfred as frontmost app)
       - type: basic
         from: { key_code: tab }
-        to_if_held_down:
-          - { key_code: right_shift, modifiers: [control, option] }
-        to_if_alone:
+        to:
           - { key_code: down_arrow }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 200
-          basic.to_if_held_down_threshold_milliseconds: 200
       - type: basic
         from: { key_code: tab, modifiers: { mandatory: [shift] } }
         to:

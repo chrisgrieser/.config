@@ -1,9 +1,8 @@
-# yaml-language-server: $schema=false cannot turn off entirely: https://github.com/redhat-developer/yaml-language-server/issues/446
 # https://pandoc.org/MANUAL.html#defaults-files
 # INFO $USERDATA set via pandoc option `--data-dir` to this directory
 #───────────────────────────────────────────────────────────────────────────────
 
-# PDF-Writer
+# PDF-WRITER
 writer: pdf
 template: empty
 
@@ -19,7 +18,12 @@ variables:
   margin-bottom: 20
   papersize: A4
 
-# General
+# suppress irrelevant warning about missing title if file has no h1
+metadata: { title: "foobar" } 
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# GENERAL
 verbosity: WARNING
 fail-if-warnings: false
 table-of-contents: false
@@ -29,8 +33,7 @@ resource-path:
   - ./attachments
   - ${VAULT_PATH} # Vault path for images
 
-# Markdown-Reader
+# MARKDOWN-READER
 reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
-strip-comments: true
 number-sections: true
 shift-heading-level-by: -1
