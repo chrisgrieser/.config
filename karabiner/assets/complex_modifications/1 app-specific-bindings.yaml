@@ -236,7 +236,7 @@ rules:
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
         to:
           - { key_code: d, modifiers: [command] }
-          - { key_code: vk_none, hold_down_milliseconds: 40 }
+          - { key_code: vk_none, hold_down_milliseconds: 100 }
           - { key_code: tab, modifiers: [shift] }
           - key_code: spacebar
         conditions:
@@ -259,15 +259,6 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.vivaldi\.Vivaldi]
       # open dev tools (= inspect Vivaldi UI)
-      - type: basic
-        from: { key_code: escape, modifiers: { mandatory: [control] } }
-        to:
-          - { key_code: i, modifiers: [command, option] }
-          - { key_code: vk_none, hold_down_milliseconds: 400 }
-          - { key_code: c, modifiers: [command, shift] }
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com\.brave\.Browser] # no $ to also work in PWAs
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
@@ -312,7 +303,7 @@ rules:
           - shell_command: open 'hammerspoon://copy-last-command'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^org\.hammerspoon\.Hammerspoon$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(App) Slack"
+  - description: "(Apps) Slack"
     # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
     manipulators:
       # go to next unread message
@@ -358,7 +349,7 @@ rules:
             modifiers: [option]
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(App) Alfred"
+  - description: "(Apps) Alfred"
     manipulators:
       # Alfred Preferences: cmd+0 as cmd+9
       - type: basic
@@ -379,7 +370,7 @@ rules:
           - { key_code: up_arrow }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(App) Lire: sidebar + vim controls"
+  - description: "(Apps) Lire: sidebar + vim controls"
     manipulators:
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
@@ -414,7 +405,7 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.lireapp\.macOS$] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(App) Discord"
+  - description: "(Apps) Discord"
     manipulators:
       # HACK ctrl-h & ctrl-l to go back / forward a channel cannot be mapped
       # directly in Discord, since they seem to capture things.
@@ -507,6 +498,7 @@ rules:
           - key_code: escape
           - key_code: escape
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Script Editor"
     manipulators:
       # Quick Closing skipping save prompt
@@ -569,6 +561,7 @@ rules:
         to:
           - { key_code: g, modifiers: [command, control] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Neovide: Fix <S-Space> and cmd+q → ZZ"
     manipulators:
       - type: basic
@@ -587,7 +580,7 @@ rules:
         conditions:
           - type: frontmost_application_if
             file_paths: ["[Nn]eovide"]
-  #─────────────────────────────────────────────────────────────────
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Cleanshot"
     manipulators:
       # INFO https://cleanshot.com/docs/api
@@ -607,7 +600,7 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 200
           basic.to_if_held_down_threshold_milliseconds: 200
-  #─────────────────────────────────────────────────────────────────
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Sidenotes"
     manipulators:
       # INFO https://www.apptorium.com/sidenotes/articles/keyboard-shortcuts

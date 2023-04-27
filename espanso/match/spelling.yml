@@ -18,8 +18,6 @@ matches:
     propagate_case: true
   - trigger: fiels
     replace: files
-  - regex: "\bfo "  # extra space necessary to avoid accental triggering when using "fo" as search term
-    replace: "of "
   - trigger: forshcung
     replace: forschung
     propagate_case: true
@@ -243,4 +241,7 @@ matches:
   - triggers: [aht, hta]
     replace: hat
     propagate_casing: true
+    word: true
+  - trigger: fo
+    replace: of
     word: true

@@ -8,13 +8,13 @@ local g = vim.g
 -- - if only one theme, it's used for both light and dark
 local themes = {
 	"EdenEast/nightfox.nvim",
-	"tanvirtin/monokai.nvim",
-	-- "rebelot/kanagawa.nvim",,
+	-- "tanvirtin/monokai.nvim",
+	-- "rebelot/kanagawa.nvim",
 	-- "kvrohit/mellow.nvim",
 	-- { "rose-pine/neovim", name = "rose-pine" },
 	-- "glepnir/zephyr-nvim",
 	-- "sainnhe/everforest",
-	-- "folke/tokyonight.nvim",
+	"folke/tokyonight.nvim",
 	-- "NTBBloodbath/sweetie.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",

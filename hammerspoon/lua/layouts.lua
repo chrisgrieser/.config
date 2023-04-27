@@ -143,9 +143,10 @@ u.hotkey(u.hyper, "home", M.selectLayout)
 local unlockInProgress = false
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if unlockInProgress or not (event == c.screensDidWake) then return end
-	unlockInProgress = true -- block multiple concurrent runs
+	if unlockInProgress then return end
+	if not (event == c.screensDidWake or event == c.systemDidWake) then return end
 	print("🔓 System/Screen did wake.")
+	unlockInProgress = true -- block multiple concurrent runs
 
 	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
 		u.runWithDelays(0.5, function() -- delay for recognizing screens
