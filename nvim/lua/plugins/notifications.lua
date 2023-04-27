@@ -12,11 +12,9 @@ end
 
 -- filter out annoying buggy messages from plugins:
 local function banned(msg)
-	-- satellite https://github.com/lewis6991/satellite.nvim/issues/36
-	-- guess-indent https://github.com/NMAC427/guess-indent.nvim/issues/13
-	return msg:find("^error%(satellite.nvim%):")
+	return msg:find("^error%(satellite.nvim%):") -- satellite https://github.com/lewis6991/satellite.nvim/issues/36
 		or msg:find("code = %-32801,")
-		or vim.startswith(msg, "Did set indentation to ")
+		or vim.startswith(msg, "Did set indentation to ") -- guess-indent https://github.com/NMAC427/guess-indent.nvim/issues/13
 		or vim.startswith(msg, "Failed to detect indentation style")
 end
 
@@ -53,7 +51,6 @@ local function notifyConfig()
 		for _, line in pairs(msgLines) do
 			local new_lines = split_length(line, notifyWidth)
 			for _, nl in ipairs(new_lines) do
-				-- nl = nl:gsub("^%s*", ""):gsub("%s*$", "")
 				if nl and nl ~= "" then table.insert(wrappesLines, " " .. nl .. " ") end
 			end
 		end
