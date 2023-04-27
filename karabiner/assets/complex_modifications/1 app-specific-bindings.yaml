@@ -270,21 +270,6 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.vivaldi\.Vivaldi] # no $ to also work in PWAs
-      #─────────────────────────────────────────────────────────────────────────
-      # shift+space → daw (for sketchyvim)
-      - type: basic
-        from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
-        to:
-          - key_code: d
-          - key_code: a
-          - key_code: w
-        conditions:
-          - type: frontmost_application_unless
-            file_paths:
-              - "[Nn]eovide"
-              - "Obsidian.app"
-              - "Highlights.app"
-              - "Finder.app"
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
