@@ -17,6 +17,7 @@ local function banned(msg)
 	return msg:find("^error%(satellite.nvim%):")
 		or msg:find("code = %-32801,")
 		or vim.startswith(msg, "Did set indentation to ")
+		or msg == "Failed to detect indentation style."
 end
 
 local function notifyConfig()

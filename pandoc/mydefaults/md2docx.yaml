@@ -1,4 +1,3 @@
-# yaml-language-server: $schema=false cannot turn off entirely: https://github.com/redhat-developer/yaml-language-server/issues/446
 # https://pandoc.org/MANUAL.html#defaults-files
 # INFO $USERDATA set via pandoc option `--data-dir` to this directory
 #───────────────────────────────────────────────────────────────────────────────
@@ -6,6 +5,7 @@
 # General
 verbosity: WARNING
 fail-if-warnings: true # turn on to abort if citekeys are missing
+
 table-of-contents: true
 toc-depth: 3
 resource-path:
@@ -19,9 +19,14 @@ reference-doc: ${USERDATA}/reference-docs/academic-paper.docx
 
 # Markdown-Reader
 reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
-strip-comments: true
 number-sections: true
 shift-heading-level-by: -1
+
+# Filter
+filters:
+  - set-date-metadata.lua
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # Academic
 citeproc: true
@@ -30,7 +35,3 @@ bibliography: ${USERDATA}/main-bibliography.bib
 # needs to be set in metadata-file so it is overwritten by metadata in the
 # document yaml. (setting them here makes them override the document yaml.)
 metadata-file: academic.yaml
-
-# Filter
-filters: 
-  - set-date-metadata.lua

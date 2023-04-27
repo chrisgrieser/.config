@@ -1,11 +1,11 @@
 local M = {}
 
 local darkmode = require("lua.dark-mode")
+local env = require("lua.environment-vars")
 local sidenotes = require("lua.sidenotes")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
-local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 -- HELPERS
@@ -137,13 +137,13 @@ DisplayCountWatcher = hs.screen.watcher.new(M.selectLayout):start()
 u.hotkey(u.hyper, "home", M.selectLayout)
 
 -- 3. Systemstart
--- done
+-- done in reload-systemstart
 
 -- 4. Waking
 local unlockInProgress = false
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if unlockInProgress or not (event == c.systemDidWake or event == c.screensDidWake) then return end
+	if unlockInProgress or not (event == c.screensDidWake) then return end
 	unlockInProgress = true -- block multiple concurrent runs
 	print("🔓 System/Screen did wake.")
 
@@ -153,7 +153,7 @@ UnlockWatcher = c.new(function(event)
 			M.selectLayout()
 			sidenotes.reminderToSidenotes()
 		end)
-		u.runWithDelays(7, function() unlockInProgress = false end)
+		u.runWithDelays(10, function() unlockInProgress = false end)
 	end, 0.2)
 	-- deactivate the timer in the screen is woken but not unlocked
 	u.runWithDelays(20, function()

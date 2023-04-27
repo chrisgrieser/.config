@@ -5,7 +5,7 @@ local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local repoSyncFreqMin = 20
+local repoSyncFreqMin = 30
 local dotfileIcon = "🔵"
 local vaultIcon = "🟪"
 local passIcon = "🔑"

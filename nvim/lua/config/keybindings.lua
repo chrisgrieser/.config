@@ -211,7 +211,7 @@ local function valeWord(mode)
 		word = fn.getreg("z")
 	end
 
-	local filepath = u.linterConfigFolder .. "/" .. mode .. ".txt"
+	local filepath = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
 	local success = u.appendToFile(filepath, word)
 	if not success then return end -- error message already by AppendToFile
 	cmd.mkview(2)
@@ -225,12 +225,6 @@ keymap(
 	"zg",
 	function() valeWord("accept") end,
 	{ desc = "󰓆 Add to accepted words (vale)" }
-)
-keymap(
-	{ "n", "x" },
-	"zw",
-	function() valeWord("reject") end,
-	{ desc = "󰓆 Add to rejected words (vale)" }
 )
 
 --------------------------------------------------------------------------------
