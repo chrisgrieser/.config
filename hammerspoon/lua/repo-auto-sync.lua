@@ -57,7 +57,7 @@ local function gitVaultSync()
 	GitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				print(vaultIcon, "Vault Sync successful.")
+				print(vaultIcon, "Vault Sync successful")
 				return
 			end
 			u.notify(vaultIcon .. "⚠️️ vault " .. stdErr)
@@ -77,7 +77,7 @@ local function gitPassSync()
 	GitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				print(passIcon, "Password-Store Sync successful.")
+				print(passIcon, "Password-Store Sync successful")
 				return
 			end
 			u.notify(passIcon .. "⚠️️ password-store " .. stdErr)
@@ -99,7 +99,7 @@ function M.syncAllGitRepos(extras)
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
 	if not (success1 and success2 and success3) then
-		u.notify("⚠️️ Sync Error.")
+		u.notify("⚠️️ Sync Error")
 		return
 	end
 
@@ -111,7 +111,7 @@ function M.syncAllGitRepos(extras)
 	end
 	local function updateSketchybar()
 		hs.execute("sketchybar --trigger repo-files-update")
-		if extras == "notify" then u.notify("Sync finished.") end
+		if extras == "notify" then u.notify("Sync finished") end
 	end
 
 	hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
