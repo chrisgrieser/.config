@@ -282,7 +282,7 @@ rules:
         from: { key_code: r }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'Stellar' || open 'https://www.reddit.com/r/neovim/'
+          - shell_command: open 'https://www.reddit.com/r/neovim/'
           - *deactivate-leader
           - *remove-notice
       # [space]: Emoji Picker
@@ -290,6 +290,6 @@ rules:
         from: { key_code: spacebar }
         conditions: [*leader-active]
         to:
-          - {key_code: spacebar, modifiers: [command, control]}
+          - { key_code: f17 } # triggers textpal
           - *deactivate-leader
           - *remove-notice

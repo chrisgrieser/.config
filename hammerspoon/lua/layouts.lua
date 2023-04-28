@@ -122,7 +122,10 @@ end
 -- WHEN TO SET LAYOUT
 
 ---select layout depending on number of screens
+local layoutingInProgress = false
 function M.selectLayout()
+	if layoutingInProgress then return end
+	u.runWithDelays(5, function() layoutingInProgress = false end)
 	if env.isProjector() then
 		movieLayout()
 	else
@@ -140,13 +143,10 @@ u.hotkey(u.hyper, "home", M.selectLayout)
 -- done in reload-systemstart
 
 -- 4. Waking
-local unlockInProgress = false
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if unlockInProgress then return end
 	if not (event == c.screensDidWake or event == c.systemDidWake) then return end
 	print("🔓 System/Screen did wake.")
-	unlockInProgress = true -- block multiple concurrent runs
 
 	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
 		u.runWithDelays(0.5, function() -- delay for recognizing screens
@@ -154,7 +154,6 @@ UnlockWatcher = c.new(function(event)
 			M.selectLayout()
 			sidenotes.reminderToSidenotes()
 		end)
-		u.runWithDelays(10, function() unlockInProgress = false end)
 	end, 0.2)
 	-- deactivate the timer in the screen is woken but not unlocked
 	u.runWithDelays(20, function()
