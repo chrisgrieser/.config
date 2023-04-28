@@ -6,37 +6,11 @@
 	<string>de.chris-grieser.plain-text-utilities</string>
 	<key>connections</key>
 	<dict>
-		<key>0769F5D3-9CFB-441D-9839-67F6638A6005</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FC446DFD-7C61-4B21-A8B4-507671FA6CB8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>1F032CD4-31A5-47D1-ACE7-4BA1694F8570</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>96DE06E0-96D8-4908-AEC8-135A1EE82021</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>234D617E-B383-46DE-B240-AE9B8617D709</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FC446DFD-7C61-4B21-A8B4-507671FA6CB8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -415,21 +389,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>search-selection</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>0769F5D3-9CFB-441D-9839-67F6638A6005</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -513,60 +472,6 @@
 			<string>64CBE3CE-C747-46CB-8D59-78A5B788E7D5</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>search-selection.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>FC446DFD-7C61-4B21-A8B4-507671FA6CB8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>5</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>G</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>234D617E-B383-46DE-B240-AE9B8617D709</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1109,15 +1014,6 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>0769F5D3-9CFB-441D-9839-67F6638A6005</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>605</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>1F032CD4-31A5-47D1-ACE7-4BA1694F8570</key>
 		<dict>
 			<key>colorindex</key>
@@ -1126,17 +1022,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>45</real>
-		</dict>
-		<key>234D617E-B383-46DE-B240-AE9B8617D709</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>Google Selection</string>
-			<key>xpos</key>
-			<real>605</real>
-			<key>ypos</key>
-			<real>135</real>
 		</dict>
 		<key>23BC13BE-D621-429D-A93E-15FECE927923</key>
 		<dict>
@@ -1387,15 +1272,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>605</real>
 			<key>ypos</key>
 			<real>550</real>
-		</dict>
-		<key>FC446DFD-7C61-4B21-A8B4-507671FA6CB8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>830</real>
-			<key>ypos</key>
-			<real>135</real>
 		</dict>
 		<key>FDF6DA7A-36B0-47DE-8396-66D12C630E60</key>
 		<dict>
