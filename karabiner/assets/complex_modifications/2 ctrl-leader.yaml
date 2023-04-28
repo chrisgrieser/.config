@@ -1,4 +1,4 @@
-title: "\U0001F53A CTRL Leader"
+title: "🔺 CTRL Leader"
 anchors:
   - conditions:
       - &leader-active
@@ -25,22 +25,22 @@ anchors:
       - &set-notice
         set_notification_message:
           id: leader-notice
-          text: "\U0001F53A Leader"
+          text: "🔺 Leader"
 #───────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: "\U0001F53A L-Ctrl"
+  - description: "🔺 L-Ctrl"
     manipulators:
       - type: basic
         from: { key_code: left_control }
         to:
           - key_code: left_control
-        parameters: { basic.to_if_alone_timeout_milliseconds: 300 }
         conditions:
           - *leader-inactive
         to_if_alone:
           - key_code: left_control
           - *activate-leader
           - *set-notice
+        parameters: { basic.to_if_alone_timeout_milliseconds: 200 }
       - description: "2x Leader: F19"
         type: basic
         from: { key_code: left_control }
@@ -52,7 +52,7 @@ rules:
           - key_code: f19
           - *deactivate-leader
           - *remove-notice
-      # Cancel (Hyper (Esc))
+      # Cancel (Hyper/Esc)
       - type: basic
         description: "Hyper (Esc): Leader Cancel"
         from: { key_code: caps_lock }
