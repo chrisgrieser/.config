@@ -396,7 +396,7 @@
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>320</real>
 		</dict>
 		<key>393BA661-A566-4A4C-872F-3385CC07DDB9</key>
 		<dict>
@@ -405,7 +405,7 @@
 			<key>xpos</key>
 			<real>255</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>590</real>
 		</dict>
 		<key>41A62747-D9A2-486F-960E-917B8191976F</key>
 		<dict>
@@ -414,7 +414,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>635</real>
+			<real>470</real>
 		</dict>
 		<key>5A2AE042-71CD-47D6-9A72-3373D8EDE642</key>
 		<dict>
@@ -443,7 +443,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>185</real>
 		</dict>
 		<key>BAD2BCE8-96CD-4FF0-9445-860265918045</key>
 		<dict>
@@ -454,29 +454,58 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>590</real>
 		</dict>
 		<key>CD07C041-94C2-4BD6-A732-DDF99E139981</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>415</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>185</real>
 		</dict>
 		<key>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>415</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>320</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>https://www.google.com/search</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Google</string>
+						<string>https://www.google.com/search</string>
+					</array>
+					<array>
+						<string>Brave</string>
+						<string>https://search.brave.com/search</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Search Site</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>search_site</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
