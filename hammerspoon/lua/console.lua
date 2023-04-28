@@ -49,9 +49,6 @@ function CleanupConsole()
 	end
 
 	for _, line in pairs(cleanLines) do
-		-- FIX double-timestamp displayed sometimes
-		-- line = line:gsub("(%d%d:%d%d:%d%d: )%d%d:%d%d:%d%d ?", "%1")
-
 		-- colorize certain messages
 		local color
 		if line:find("^> ") then -- user input
@@ -62,7 +59,7 @@ function CleanupConsole()
 			line:lower():find("warning")
 			or line:find("⚠️️")
 			or line:find("stack traceback")
-			or line:find(".*%.%.%.")
+			or line:find("^ *%.%.%.")
 			or line:find("^<")
 		then
 			color = isDark and lightYellow or darkYellow
