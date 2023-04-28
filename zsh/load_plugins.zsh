@@ -25,6 +25,9 @@ source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substrin
 # Magic enter
 source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
 
+# auto-notify
+source "$DOTFILE_FOLDER/zsh/plugins/auto-notify.plugin.zsh"
+
 # Starship
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
