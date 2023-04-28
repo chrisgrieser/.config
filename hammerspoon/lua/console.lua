@@ -42,7 +42,8 @@ function CleanupConsole()
 			or line:find("Done.$")
 			or line:find("Lazy extension loading enabled$")
 			or line:find("Loading .*/init.lua")
-			or line:find("wfilter .* is STILL not registered") -- FIX https://github.com/Hammerspoon/hammerspoon/issues/3462
+			or line:find("hs.canvas:delete")
+			or line:find("wfilter: .* is STILL not registered") -- FIX https://github.com/Hammerspoon/hammerspoon/issues/3462
 
 		if not ignore then table.insert(cleanLines, line) end
 	end
@@ -61,6 +62,7 @@ function CleanupConsole()
 			line:lower():find("warning")
 			or line:find("⚠️️")
 			or line:find("stack traceback")
+			or line:find(".*%.%.%.")
 			or line:find("^<")
 		then
 			color = isDark and lightYellow or darkYellow
@@ -81,13 +83,12 @@ Wf_hsConsole = u.wf
 	:subscribe(u.wf.windowCreated, function(newWin)
 		if newWin:title() == "Hammerspoon Console" then CleanupConsole() end
 	end)
-	:subscribe(u.wf.windowUnfocused, function(newWin)
-		if newWin:title() == "Hammerspoon Console" then u.app("Hammerspoon"):hide() end
+	:subscribe(u.wf.windowUnfocused, function(win)
+		if win:title() == "Hammerspoon Console" then u.app("Hammerspoon"):hide() end
 	end)
 
 --------------------------------------------------------------------------------
 
--- copy last command to clipboard
 -- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)
 u.urischeme("copy-last-command", function()
 	local consoleHistory = cons.getHistory()
