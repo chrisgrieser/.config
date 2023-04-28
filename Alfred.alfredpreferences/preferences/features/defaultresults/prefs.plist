@@ -4,7 +4,7 @@
 <dict>
 	<key>fallbacks</key>
 	<array>
-		<string>google-utilities.987F8BB9-8E64-4E46-8ED2-14E1A4412805</string>
+		<string>search-utilities.987F8BB9-8E64-4E46-8ED2-14E1A4412805</string>
 	</array>
 	<key>showFolders</key>
 	<true/>

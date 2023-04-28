@@ -36,7 +36,8 @@ elif [[ "$SEL" =~ "@" ]]; then
 elif [[ -n "$SEL" ]]; then
 	URL_ENCODED_SEL=$(osascript -l JavaScript -e "encodeURIComponent('$SEL')")
 	open "https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky"
-	open "https://www.google.com/search?q=$URL_ENCODED_SEL"
+	# shellcheck disable=2154
+	open "$search_site?q=$URL_ENCODED_SEL"
 	sleep 0.05
 	# requires browser to cycle "in tab order", so the DDG lucky window is active
 	osascript -e 'tell application "System Events" to keystroke tab using {control down, shift down}'
