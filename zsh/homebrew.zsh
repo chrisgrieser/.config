@@ -16,12 +16,10 @@ export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 
 # misc
 export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_BAT=1 # for `brew cat`
 export HOMEBREW_NO_ENV_HINTS=1
 
 BREWDUMP_PATH="$DOTFILE_FOLDER/_installed-apps-and-packages/"
 
-# aliases already get tab-completion
 alias bh='brew home'
 alias bl='brew list'
 alias bi='brew install'
@@ -70,8 +68,6 @@ function update() {
 	dump
 
 	print-section "\033[1;33mREMINDER"
-	echo "If sketchybar or espanso updated, they need to be re-given permissions."
-	echo
 	echo "Check if node now works without disabling SSL"
 
 	sketchybar --trigger homebrew-update # update counter now that updates have been done
