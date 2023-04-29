@@ -15,13 +15,13 @@ keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " keymaps"
 -- Highlights
 keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
--- Theme Picker
-keymap("n", "<leader>pt", function() cmd.Telescope("colorscheme") end, { desc = "  Colorschemes" })
-
 -- [P]lugins
 keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Sync" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
 keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason" })
+
+-- Theme Picker
+keymap("n", "<leader>pt", function() cmd.Telescope("colorscheme") end, { desc = "  Colorschemes" })
 
 --------------------------------------------------------------------------------
 
