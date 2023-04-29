@@ -125,7 +125,9 @@ end
 local layoutingInProgress = false
 function M.selectLayout()
 	if layoutingInProgress then return end
+	layoutingInProgress = true
 	u.runWithDelays(5, function() layoutingInProgress = false end)
+
 	if env.isProjector() then
 		movieLayout()
 	else
