@@ -139,9 +139,7 @@ return {
 			require("which-key").setup {
 				plugins = {
 					presets = {
-						operators = false,
 						motions = false,
-						text_objects = false,
 						g = false,
 						z = false,
 					},
@@ -149,11 +147,6 @@ return {
 				triggers_blacklist = { n = { "y" } }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
 				-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
 				hidden = { "<Plug>", "^:lua ", "<cmd>" },
-				operator = { -- seems these are not working?
-					w = "Duplicate",
-					q = "Comment",
-					s = "Substitute",
-				},
 				key_labels = { -- seems these are not working?
 					["<CR>"] = "↵ ",
 					["<BS>"] = "⌫",
