@@ -40,8 +40,9 @@ eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 # ZSH PLUGIN SETTINGS
 
 # auto-notify
-export AUTO_NOTIFY_THRESHOLD=10 # seconds
+export AUTO_NOTIFY_THRESHOLD=1 # seconds
 export AUTO_NOTIFY_IGNORE=("man" "bat" "less" "delta" "nano" "nvim" "git commit")
+export AUTO_NOTIFY_SOUND="Blow"
 
 # zsh syntax highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
