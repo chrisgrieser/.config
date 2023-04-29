@@ -11,8 +11,8 @@ return {
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
 
 			require("nvim-autopairs").add_rules {
-				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- useful for keymaps
-				rule("<", ">", "vim"):with_pair(), -- useful for keymaps
+				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
+				rule("<", ">", "vim"):with_pair(), -- keymaps
 				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
