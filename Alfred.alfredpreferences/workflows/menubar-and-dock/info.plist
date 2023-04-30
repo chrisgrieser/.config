@@ -331,7 +331,7 @@ sketchybar --update</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>bar</string>
+				<string>bar||restart</string>
 				<key>subtext</key>
 				<string>↵: Restart     ⌘↵: Reload</string>
 				<key>text</key>
@@ -369,7 +369,7 @@ sketchybar --update</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>svim</string>
+				<string>svim||restart</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -430,7 +430,7 @@ sketchybar --update</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>alttab</string>
+				<string>alttab||restart</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -468,7 +468,7 @@ sketchybar --update</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>rocket</string>
+				<string>rocket||restart</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>

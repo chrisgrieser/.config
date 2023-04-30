@@ -46,9 +46,9 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>keyword</key>
-				<string>ud</string>
+				<string>{var:urban_dictionary_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -60,17 +60,17 @@
 				<key>runningsubtext</key>
 				<string>Fetching results...</string>
 				<key>script</key>
-				<string>python3 urban_dictionary.py "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
 				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>urban_dictionary.py</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string>Search Urban Dictionary</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -104,7 +104,11 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Call `ud` to search through Urban Dictionary definitions and ratings.</string>
+	<string>## Usage
+
+Search Urban Dictionary definitions via the `ud` keyword.
+
+![demo](images/about/demo.png)</string>
 	<key>uidata</key>
 	<dict>
 		<key>A86052C6-254B-48B5-BA86-3B44B7883695</key>
@@ -123,11 +127,33 @@
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>ud</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Search Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>urban_dictionary_keyword</string>
+		</dict>
+	</array>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2.3.0</string>
+	<string>2.4.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/xilopaint</string>
 </dict>

@@ -2,7 +2,10 @@
 #───────────────────────────────────────────────────────────────────────────────
 extends: [eslint:recommended]
 root: true # stop annoying deprecation warning
-ignorePatterns: ["!.*", "node_modules"] # Lint files in dotfolder https://github.com/eslint/eslint/issues/10341#issuecomment-468548031
+ignorePatterns:
+  - "!.*" # Lint files in dotfolder https://github.com/eslint/eslint/issues/10341#issuecomment-468548031
+  - "node_modules"
+  - "globals.d.ts" # custom globals for JXA
 parserOptions:
   ecmaVersion: 2022 # requires at least 2022 so eslint can parse `await` at top level
   sourceType: module
