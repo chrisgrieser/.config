@@ -76,7 +76,7 @@ lspSettings.cssls = {
 
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
-	format = {}, -- not used, since taken care of by prettier
+	diagnostics = { ignoredCodes = { 2304 } },
 	inlayHints = {
 		includeInlayEnumMemberValueHints = true,
 		includeInlayFunctionLikeReturnTypeHints = true,
@@ -93,8 +93,10 @@ lspSettings.tsserver = {
 	completions = { completeFunctionCalls = true },
 	typescript = jsAndTsSettings,
 	javascript = jsAndTsSettings,
-	-- https://github.com/microsoft/TypeScript/blob/master/src/compiler/diagnosticMessages.json
-	diagnostics = { ignoredCode = {} },
+	-- diagnostics = { ignoredCodes = { 2304 } },
+
+	-- enable jsdocs and typescript checking in js files without a `jsconfig.json` file
+	implicitProjectConfiguration = { checkJs = true },
 }
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
