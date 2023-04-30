@@ -1168,7 +1168,7 @@ JSON.stringify({ 'items': volume_array });
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>blue restart</string>
+				<string>bluetooth||restart</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -1253,7 +1253,7 @@ echo -n "WiFi"</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>wifi restart</string>
+				<string>wifi||wlan||restart</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -1784,7 +1784,7 @@ echo -n "iCloud Sync"</string>
 			<key>note</key>
 			<string>dismiss notifications</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>1085</real>
 		</dict>

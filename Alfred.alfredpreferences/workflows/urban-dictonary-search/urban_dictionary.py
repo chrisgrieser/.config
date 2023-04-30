@@ -15,14 +15,6 @@ HELP_URL = "https://github.com/xilopaint/alfred-urban-dictionary"
 
 def main(wf):  # pylint: disable=redefined-outer-name
     """Run workflow."""
-    if wf.update_available:
-        wf.add_item(
-            title="A newer version of Urban Dictionary is available.",
-            subtitle="Action this item to install the update.",
-            autocomplete="workflow:update",
-            icon="update.png",
-        )
-
     query = wf.args[0]
     param = {"term": query}
     url = "http://api.urbandictionary.com/v0/define"
