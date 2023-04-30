@@ -245,3 +245,7 @@ matches:
   - trigger: fo
     replace: of
     word: true
+  - trigger: seperate
+    replace: separate
+    propagate_casing: true
+    word: true
