@@ -159,7 +159,7 @@
     "BTTNotchBarNotchMenubarModeHideRightScrollable" : true,
     "BSTSnapAreaDefaultPictoDistanceFromLeft" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "7E0D69CD-2C5F-418F-8D2C-B010B7478BA7",
+  "BTTPresetUUID" : "9C4B06B6-18DD-4875-992C-F8B7F138EA43",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.apple.finder",
@@ -363,8 +363,8 @@
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTPredefinedActionType" : 195,
           "BTTPredefinedActionName" : "Run Apple Script (async in background)",
-          "BTTGenericActionConfig" : "tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.google-utils\"",
-          "BTTInlineAppleScript" : "tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.google-utils\"",
+          "BTTGenericActionConfig" : "tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.search-utils\"",
+          "BTTInlineAppleScript" : "tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"search-selection\" in workflow \"de.chris-grieser.search-utils\"",
           "BTTEnabled2" : 1,
           "BTTAlternateModifierKeys" : 0,
           "BTTRepeatDelay" : 0,
