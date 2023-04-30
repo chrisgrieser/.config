@@ -16,6 +16,10 @@
 		"body": "// prettier-ignore",
 		"description": "Ignores the next block of code."
 	},
+	"ignore (tsignore)": {
+		"prefix": "ignore (tsignore)",
+		"body": "// @ts-ignore"
+	},
 	"globals (eslint)": {
 		"prefix": "globals (eslint)",
 		"body": "/* global ${1:var} */"

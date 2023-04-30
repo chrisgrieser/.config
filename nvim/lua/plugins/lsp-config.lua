@@ -76,7 +76,6 @@ lspSettings.cssls = {
 
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
-	diagnostics = { ignoredCodes = { 2304 } },
 	inlayHints = {
 		includeInlayEnumMemberValueHints = true,
 		includeInlayFunctionLikeReturnTypeHints = true,
@@ -93,7 +92,6 @@ lspSettings.tsserver = {
 	completions = { completeFunctionCalls = true },
 	typescript = jsAndTsSettings,
 	javascript = jsAndTsSettings,
-	-- diagnostics = { ignoredCodes = { 2304 } },
 
 	-- enable jsdocs and typescript checking in js files without a `jsconfig.json` file
 	implicitProjectConfiguration = { checkJs = true },
@@ -209,14 +207,6 @@ local function setupAllLsps()
 			settings = lspSettings[lsp], -- if no settings, will assign nil and therefore do nothing
 			on_attach = lspOnAttach[lsp], -- mostly disables some settings
 		}
-		if lsp == "bashls" then
-			config.root_dir = require("lspconfig.util").root_pattern(".shellcheckrc")
-			-- config.root_dir = function(fname)
-			-- 	local primary = require("lspconfig.util").root_pattern(".shellcheckrc")(fname)
-			-- 	local fallback = require("lspconfig.util").find_git_ancestor()
-			-- 	return primary or fallback
-			-- end
-		end
 
 		require("lspconfig")[lsp].setup(config)
 	end
