@@ -1,7 +1,0 @@
-dotfiles
-nvim
-Infos
-Grieser
-citekey
-Zotero
-Wikilink
