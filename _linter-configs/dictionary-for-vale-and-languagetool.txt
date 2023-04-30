@@ -23,3 +23,9 @@ LinkedIn
 ResearchGate
 alias
 longform
+code
+Code
+accessible
+using
+outdention
+minimalistic
