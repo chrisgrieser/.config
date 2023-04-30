@@ -7,6 +7,10 @@
 		"prefix": "replace",
 		"body": "replace(/${1:regexp}/, \"$2\");"
 	},
+	"JSdoc type": {
+		"prefix": "JSdoc type",
+		"body": "/** @type{${1|Array.<number>,Array.<string>|}} */"
+	},
 	"ignore (prettier)": {
 		"prefix": "ignore (prettier)",
 		"body": "// prettier-ignore",
