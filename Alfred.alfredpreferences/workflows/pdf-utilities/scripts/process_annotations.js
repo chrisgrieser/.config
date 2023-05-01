@@ -28,17 +28,10 @@ function toTitleCase(str) {
 	return sentenceFirstCharUpper;
 }
 
-/** REQUIRED JSON signature of annotations expected by this file
- * @typedef {Object} Annotation
- * @property {"Free Text"|"Highlight"|"Underline"|"Free Comment"|"Image"|"Strikethrough"|"Heading"|"Question Callout"} type – of the annotation
- * @property {string=} comment - user-written comment for the annotation
- * @property {string=} quote - text marked in the pdf
- * @property {string=} imagePath - path of image file
- * @property {string} page - page number where the annotation is located
- */
+//──────────────────────────────────────────────────────────────────────────────
 
 /** to make pdfannots and pdfannots2json compatible
- * @param {any[]} nonStandardizedAnnos
+ * @param {object[]} nonStandardizedAnnos
  * @param {boolean} usePdfAnnots
  */
 function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
@@ -52,7 +45,7 @@ function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
 			if (a.type === "text") a.type = "Free Comment";
 
 			// in case the page numbers have names like "image 1" instead of integers
-			if (typeof(a.page) === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
+			if (typeof a.page === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
 			return a;
 		});
 	} else {
@@ -61,7 +54,7 @@ function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
 			a.quote = a.annotatedText;
 
 			// in case the page numbers have names like "image 1" instead of integers
-			if (typeof(a.page) === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
+			if (typeof a.page === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
 
 			switch (a.type) {
 				case "text":
@@ -87,12 +80,23 @@ function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
 	return out;
 }
 
+/** REQUIRED JSON signature of annotations expected by this file
+ * @typedef {Object} Annotation
+ * @property {"Free Text"|"Highlight"|"Underline"|"Free Comment"|"Image"|"Strikethrough"|"Heading"|"Question Callout"|"remove"} type – of the annotation
+ * @property {number} page - page number where the annotation is located
+ * @property {string=} pageStr - as string for page ranges
+ * @property {string=} comment - user-written comment for the annotation
+ * @property {string=} quote - text marked in the pdf
+ * @property {string=} imagePath - path of image file
+ * @property {string=} image - filename of image file
+ */
+
 /** @param {Annotation[]} annotations */
 function cleanQuoteKey(annotations) {
 	return annotations.map((a) => {
 		if (!a.quote) return a; // free comments have no text
 		a.quote = a.quote
-			.replace(/["„“”«»’]/g, "'") // quotation marks
+			.replace(/’’|‘‘|["„“”«»’]/g, "'") // quotation marks
 			.replace(/\. ?\. ?\./g, "…") // ellipsis
 			.replaceAll("\\u00AD", "") // remove invisible character
 			.replace(/(\D)[.,]\d/g, "$1") // remove footnotes from quote
@@ -108,15 +112,15 @@ function cleanQuoteKey(annotations) {
  * @param {number} pageNo
  */
 function insertPageNumber(annotations, pageNo) {
-	return annotations
-		.map((a) => {
-			// add first page number to pdf page number
-			a.page = a.page + pageNo - 1;
-			return a;
-		});
+	return annotations.map((a) => {
+		// add first page number to pdf page number
+		a.page = a.page + pageNo - 1;
+		a.pageStr = a.page.toString();
+		return a;
+	});
 }
 
-/**
+/** code: "\_" or type "Underline" -> split off and send to SideNotes.app
  * @param {Annotation[]} annotations
  * @param {string} citekey
  */
@@ -198,7 +202,7 @@ function jsonToMd(annotations, citekey) {
 				output = `> [!QUESTION]\n> ${comment}`;
 				break;
 			case "Image":
-				output = `\n![[${a.imagePath}]]\n`;
+				output = `\n![[${a.image}]]\n`;
 				break;
 			default:
 		}
@@ -218,12 +222,13 @@ function mergeQuotes(annos) {
 		if (annos[i].comment !== "+") continue;
 		let connector = "";
 
-		// across pages
+		// merge page numbers, if across pages
 		if (annos[i - 1].page !== annos[i].page) {
-			annos[i - 1].page += "–" + annos[i].page; // merge page numbers
+			annos[i - 1].pageStr += "–" + annos[i].page.toString();
 			connector = " (…) ";
 		}
-		annos[i - 1].quote += connector + annos[i].quote; // merge quotes
+		// merge quotes
+		annos[i - 1].quote += connector + annos[i].quote;
 
 		annos.splice(i, 1); // remove current element
 		i--; // move index back, so merging in case of consecutive "+" works
@@ -232,27 +237,28 @@ function mergeQuotes(annos) {
 }
 
 /** code: "##"
- * @param {any[]} annotations
+ * @param {Annotation[]} annotations
  */
 function transformHeadings(annotations) {
 	return annotations.map((a) => {
 		if (!a.comment) return a;
 		const hLevel = a.comment.match(/^#+(?!\w)/);
-		if (hLevel) {
-			if (a.type === "Highlight" || a.type === "Underline") {
-				let headingText = a.quote;
-				if (headingText === headingText.toUpperCase()) headingText = toTitleCase(headingText);
-				a.comment = hLevel[0] + " " + headingText;
-				a.quote = undefined;
-			}
-			a.type = "Heading";
+		if (!hLevel) return a;
+
+		if (a.type === "Highlight" || a.type === "Underline") {
+			if (!a.quote) return a;
+			let headingText = a.quote;
+			if (headingText === headingText.toUpperCase()) headingText = toTitleCase(headingText);
+			a.comment = hLevel[0] + " " + headingText;
+			a.quote = undefined;
 		}
+		a.type = "Heading";
 		return a;
 	});
 }
 
 /** code: "?"
- * @param {any[]} annotations
+ * @param {Annotation[]} annotations
  */
 function questionCallout(annotations) {
 	let annoArr = annotations.map((a) => {
@@ -269,7 +275,7 @@ function questionCallout(annotations) {
 }
 
 /** images / rectangle annotations (pdfannots2json only)
- * @param {any[]} annotations
+ * @param {Annotation[]} annotations
  * @param {string} filename
  */
 function insertImage4pdfannots2json(annotations, filename) {
@@ -284,7 +290,7 @@ function insertImage4pdfannots2json(annotations, filename) {
 }
 
 /** code: "="
- * @param {any[]} annotations
+ * @param {Annotation[]} annotations
  * @param {string} keywords
  */
 function transformTag4yaml(annotations, keywords) {
@@ -361,7 +367,7 @@ function extractMetadata(citekey, rawEntry) {
 	bibtexEntry.split("\n").forEach((property) => {
 		if (/\stitle =/i.test(property)) {
 			data.title = extract(property)
-				.replaceAll('"', "'") // to avoid invalid yaml, since title is wrapped in ""
+				.replaceAll('"', "'") // to avoid invalid yaml, since title is wrapped in "'"
 				.replaceAll(":", "."); // to avoid invalid yaml
 		} else if (property.includes("@")) {
 			data.ptype = property.replace(/@(.*)\{.*/, "$1");
@@ -401,7 +407,7 @@ function extractMetadata(citekey, rawEntry) {
 }
 
 /**
- * @param {any[]} annos
+ * @param {Annotation[]} annos
  * @param {{title: string;ptype: string;firstPage: number;author: string;year: number;keywords?: string;url: string;doi: string;citekey: string;}} metad
  * @param {string} outputPath
  * @param {string} tagsForYaml
@@ -471,13 +477,13 @@ function run(argv) {
 	annos = mergeQuotes(annos);
 	annos = transformHeadings(annos);
 	annos = questionCallout(annos);
-
-	// finish up
 	const extract = transformTag4yaml(annos, metadata.keywords);
 	annos = extract.filteredArray;
+
+	// finish up
 	annos = insertImage4pdfannots2json(annos, citekey);
 	annos = splitOffUnderlines(annos, citekey);
 	annos = jsonToMd(annos, citekey);
 
-	writeNote(annos, metadata, outPath, "");
+	writeNote(annos, metadata, outPath, extract.tagsForYaml);
 }
