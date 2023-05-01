@@ -4,7 +4,6 @@
 local linterConfig = require("config.utils").linterConfigFolder
 local lintersAndFormatters = {
 	"yamllint", -- only for diagnostics, not for formatting
-	"prettier", -- js/ts/yaml
 	"shellcheck", -- needed for bash-lsp
 	"shfmt", -- shell
 	"markdownlint",
@@ -15,7 +14,6 @@ local lintersAndFormatters = {
 	"selene", -- lua
 	"stylua", -- lua
 	-- "stylelint", -- included, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
-	-- eslint not available: https://github.com/williamboman/mason.nvim/issues/697
 }
 
 --------------------------------------------------------------------------------
@@ -52,15 +50,6 @@ local function nullSources()
 		builtins.code_actions.shellcheck.with {
 			extra_filetypes = { "zsh" },
 			extra_args = { "--shell=bash", "--external-sources", "--check-sourced" },
-		},
-
-		-- JS/TS
-		-- INFO when no prettierrc can be found, will use prettier's default
-		-- config, which includes setting everything to spaces. Therefore only
-		-- activating when config file is found
-		builtins.formatting.prettier.with {
-			-- using different linters for them
-			disabled_filetypes = { "css", "markdown" },
 		},
 
 		-- CSS

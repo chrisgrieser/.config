@@ -13,11 +13,11 @@ local lsp_servers = {
 	"pyright", -- python
 	"marksman", -- markdown
 	"tsserver", -- ts/js
-	"eslint", -- ts/js
 	"bashls", -- also used for zsh
 	"taplo", -- toml
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
+	"rome", -- js/ts/json
 }
 
 --------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ lspSettings.lua_ls = {
 			callSnippet = "Replace",
 			keywordSnippet = "Replace",
 			displayContext = 5,
-			postfix = ".",
+			postfix = ".", -- useful for `table.insert` and the like
 		},
 		diagnostics = {
 			disable = { "trailing-space" }, -- formatter already does that
@@ -72,7 +72,7 @@ lspSettings.cssls = {
 }
 
 --------------------------------------------------------------------------------
--- TSSERVER & ESLINT
+-- TSSERVER
 
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local jsAndTsSettings = {
@@ -103,16 +103,6 @@ lspOnAttach.tsserver = function(client, _)
 	client.server_capabilities.documentFormattingProvider = false
 	client.server_capabilities.documentRangeFormattingProvider = false
 end
-
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
--- INFO when no eslintrc can be found in a parent dir, `.root_dir` will return
--- nil and the eslint-LSP will not be started
-lspSettings.eslint = {
-	quiet = false, -- = include warnings
-	codeAction = {
-		disableRuleComment = { location = "sameLine" }, -- add ignore-comments on the same line
-	},
-}
 
 --------------------------------------------------------------------------------
 -- JSON
@@ -197,8 +187,7 @@ lspCapabilities.textDocument.foldingRange = {
 local function setupAllLsps()
 	-- INFO must be before the lsp-config setup of lua-ls
 	require("neodev").setup {
-		-- helpful for stuff like plenary, but also slows down lsp loading
-		library = { plugins = false },
+		library = { plugins = false }, -- plugins are helpful e.g. for plenary, but slow down lsp loading
 	}
 
 	for _, lsp in pairs(lsp_servers) do

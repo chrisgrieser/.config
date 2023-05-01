@@ -18,6 +18,7 @@ function M.holeCover(arg)
 	if CoverParts then
 		---@diagnostic disable-next-line: unused-local
 		for _, cover in pairs(CoverParts) do
+			cover:delete()
 			cover = nil ---@diagnostic disable-line: unused-local
 		end
 		CoverParts = nil
