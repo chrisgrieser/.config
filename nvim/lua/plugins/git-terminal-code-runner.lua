@@ -21,8 +21,10 @@ return {
 				show_http_info = true,
 				show_headers = false,
 				formatters = {
-					-- use yq
+					-- yq install ensured via mason-null-ls
 					json = function(body) return vim.fn.system("yq -o=json", body) end,
+					-- pretty already needed since it's the only proper yaml formatter
+					html = function(body) return vim.fn.system("prettier --parser=html", body) end,
 				},
 			},
 		},

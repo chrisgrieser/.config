@@ -198,7 +198,6 @@ keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = 
 keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 suggest" })
 
 ---add word under cursor to vale dictionary
----@param mode "accept"|"reject"
 keymap({ "n", "x" }, "zg", function()
 	local word
 	if fn.mode() == "n" then
