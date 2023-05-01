@@ -8,16 +8,16 @@ extends: default
 
 rules:
   line-length: disable
-  document-start: disable
-  trailing-spaces: disable
+  document-start: { present: false }
+  trailing-spaces: disable # automatically taken care of by formatter
+  empty-lines: disable # automatically taken care of by formatter
   braces: disable
   new-line-at-end-of-file: disable
+  comments-indentation: disable
 
   comments:
     min-spaces-from-content: 1
     require-starting-space: false
-  comments-indentation: disable
 
-  empty-lines: { level: warning }
   brackets: { level: warning }
   hyphens: { level: warning }
