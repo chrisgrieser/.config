@@ -78,7 +78,7 @@ TwitterWatcher = u.aw
 			u.runWithDelays({ 0.1, 0.3 }, twitterFallThrough)
 
 		-- raise twitter when switching window to other app
-		elseif event == u.aw.activated and appName ~= "Twitter" then
+		elseif (event == u.aw.activated or event == u.aw.launched) and appName ~= "Twitter" then
 			local frontWin = hs.window.focusedWindow()
 			if not frontWin or not twitter then return end
 
