@@ -1,0 +1,6 @@
+{
+	"schema (modeline)": {
+		"prefix": "schema (modeline)",
+		"body": "# yaml-language-server: $schema=${1:url}"
+	}
+}

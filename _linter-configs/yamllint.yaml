@@ -1,9 +1,10 @@
+# yaml-language-server: $schema=https://json.schemastore.org/yamllint.json
+# explicitly setting schema required, since using non-standard filename
+#───────────────────────────────────────────────────────────────────────────────
 # https://yamllint.readthedocs.io/en/stable/configuration.html#extending-the-default-configuration
-extends: default
+#───────────────────────────────────────────────────────────────────────────────
 
-yaml-files:
-  - "*.yaml"
-  - "*.yml"
+extends: default
 
 rules:
   line-length: disable

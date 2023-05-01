@@ -157,35 +157,16 @@ FinderAppWatcher = u.aw
 
 --------------------------------------------------------------------------------
 
--- QuickLook: bigger window
-Wf_quicklook = u
-	.wf
-	.new(true) -- BUG for some reason, restricting this to "Finder" does not work
-	:setOverrideFilter({ allowTitles = { "^Quick Look$", "^qlmanage$" } })
-	:subscribe(u.wf.windowCreated, function(newWin)
-		local _, sel =
-			u.applescript([[tell application "Finder" to return POSIX path of (selection as alias)]])
-		-- do not enlage window for images (which are enlarged already with
-		-- landscape proportions)
-		if
-			sel and (sel:find("%.png$") or sel:find("%.jpe?g$") or sel:find("%.gif") or sel:find("%.mp4"))
-		then
-			return
-		end
-		u.runWithDelays(0.4, function() wu.moveResize(newWin, wu.centered) end)
-	end)
-
---------------------------------------------------------------------------------
-
 -- ZOOM
 -- close first window, when second is open
 -- don't leave browser tab behind when opening zoom
 Wf_zoom = u.wf.new("zoom.us"):subscribe(u.wf.windowCreated, function()
-	u.quitApp("BusyCal") -- mostly only used to open a Zoom link
+	u.quitApp("BusyCal") -- only used to open a Zoom link
 	u.closeTabsContaining("zoom.us")
 	u.runWithDelays(0.5, function()
 		local zoom = u.app("zoom.us")
 		if not (zoom and zoom:findWindow("^Zoom$")) then return end
+		if Wf_zoom:getWindows() < 2 then return end
 		zoom:findWindow("^Zoom$"):close()
 	end)
 end)
