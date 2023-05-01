@@ -1,6 +1,7 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+-- shorthands
 M.hotkey = hs.hotkey.bind
 M.keystroke = hs.eventtap.keyStroke
 M.aw = hs.application.watcher
@@ -9,8 +10,11 @@ M.applescript = hs.osascript.applescript
 M.urischeme = hs.urlevent.bind
 M.tbl_contains = hs.fnutils.contains
 
-M.hyper = { "cmd", "alt", "ctrl", "shift" } -- bound to capslock via Karabiner elements
-I = hs.inspect -- to inspect tables in the console more quickly
+-- bound to capslock via Karabiner elements
+M.hyper = { "cmd", "alt", "ctrl", "shift" } 
+
+-- global to inspect tables in the console more quickly
+I = hs.inspect 
 
 --------------------------------------------------------------------------------
 

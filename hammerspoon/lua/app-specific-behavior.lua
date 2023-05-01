@@ -166,7 +166,7 @@ Wf_zoom = u.wf.new("zoom.us"):subscribe(u.wf.windowCreated, function()
 	u.runWithDelays(0.5, function()
 		local zoom = u.app("zoom.us")
 		if not (zoom and zoom:findWindow("^Zoom$")) then return end
-		if Wf_zoom:getWindows() < 2 then return end
+		if #Wf_zoom:getWindows() < 2 then return end
 		zoom:findWindow("^Zoom$"):close()
 	end)
 end)
