@@ -6,6 +6,7 @@
 	"matcher (CamelCase)": {
 		"prefix": "matcher (CamelCase)",
 		"body": [
+			"/** @param {string} str */",
 			"function alfredMatcher(str) {",
 			"\tconst clean = str.replace(/[-()_.:#/\\\\\\;,[\\]]/g, \" \");",
 			"\tconst camelCaseSeperated = str.replace(/([A-Z])/g, \" \\$1\");",
