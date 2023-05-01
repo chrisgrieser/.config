@@ -21,12 +21,6 @@ return {
 			},
 		},
 	},
-	{ -- annotation comment
-		"danymat/neogen",
-		lazy = true,
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		config = true,
-	},
 	{ -- substitute
 		"gbprod/substitute.nvim",
 		lazy = true,

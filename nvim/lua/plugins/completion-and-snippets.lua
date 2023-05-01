@@ -134,9 +134,7 @@ local function cmpconfig()
 			end, { "i", "s" }),
 			-- Force jumping
 			["<D-j>"] = cmp.mapping(function(_)
-				if require("neogen").jumpable() then
-					require("neogen").jump_next()
-				elseif require("luasnip").locally_jumpable(1) then
+				if require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
 				else
 					vim.notify("No more jumps.")
@@ -296,7 +294,6 @@ local function cmdlineCompletionConfig()
 			-- https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-cmdline-completion-for-certain-commands-such-as-increname
 			local disabled = {
 				IncRename = true,
-				S = true, -- :AltSubstitute
 				s = true, -- :substitute
 				sm = true, -- :substitute (magic)
 			}

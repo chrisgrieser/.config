@@ -454,29 +454,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E32A63AA-FDDD-4BF2-ABC8-822F1ED34FF1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy URL to Clipboard</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<array>
 			<dict>
@@ -1823,55 +1800,6 @@ osascript -l JavaScript -e '
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>yq</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/yq-docs-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>yq doc search...</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>E32A63AA-FDDD-4BF2-ABC8-822F1ED34FF1</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
 				<string>wt</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -2052,7 +1980,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>2380</real>
+			<real>2255</real>
 		</dict>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<dict>
@@ -2061,7 +1989,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>395</real>
 			<key>ypos</key>
-			<real>2395</real>
+			<real>2260</real>
 		</dict>
 		<key>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</key>
 		<dict>
@@ -2079,9 +2007,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>390</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>2260</real>
+			<real>2145</real>
 		</dict>
 		<key>7099D02E-6857-4A1B-ABE6-8653C16F6A49</key>
 		<dict>
@@ -2217,15 +2145,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>1990</real>
 		</dict>
-		<key>E32A63AA-FDDD-4BF2-ABC8-822F1ED34FF1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>4</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>2265</real>
-		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>
 			<key>colorindex</key>
@@ -2249,9 +2168,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>2120</real>
+			<real>2030</real>
 		</dict>
 		<key>FE8C5299-418B-45DE-A554-50495EF4EE22</key>
 		<dict>
