@@ -2,7 +2,17 @@
 	"formatter": {
 		"enabled": true,
 		"lineWidth": 120,
-		"indentStyle": "tab"
+		"indentStyle": "tab",
+		"indentSize": 3,
+		"formatWithErrors": true
+	},
+	"javascript": {
+		"globals": [
+			"ObjC",
+			"Application",
+			"delay",
+			"$"
+		]
 	},
 	"organizeImports": {
 		"enabled": true
@@ -15,7 +25,8 @@
 	},
 	"files": {
 		"ignore": [
-			"globals.d.ts"
+			"globals.d.ts",
+			"node_modules/**"
 		]
 	}
 }

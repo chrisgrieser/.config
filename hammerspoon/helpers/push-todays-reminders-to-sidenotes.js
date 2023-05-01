@@ -14,7 +14,7 @@ function run() {
 	const todaysTasks = reminders.defaultList().reminders.whose({ dueDate: { _lessThan: today } });
 
 	if (todaysTasks.length === 0) {
-		reminders.quit();;;
+		reminders.quit();
 		return;
 	}
 
@@ -22,14 +22,14 @@ function run() {
 	// - backwards, to not change the indices at loop runtime
 	for (let i = todaysTasks.length - 1; i >= 0; i--) {
 		const task = todaysTasks[i];
-		let newNoteContent
-		const body = task.body()
-		const title = task.name()
+		let newNoteContent;
+		const body = task.body();
+		const title = task.name();
 
 		if (body) {
-			newNoteContent = `#${title}\n${body}`
+			newNoteContent = `#${title}\n${body}`;
 		} else {
-			newNoteContent = title
+			newNoteContent = title;
 		}
 
 		sidenotes.createNote({

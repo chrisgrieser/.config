@@ -14,6 +14,7 @@ local lintersAndFormatters = {
 	"selene", -- lua
 	"stylua", -- lua
 	"yq", -- json/yaml
+	"rome", -- also an LSP; the lsp does diagnostics, the CLI via null-ls does formatting
 	-- "stylelint", -- included, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 }
 
@@ -52,6 +53,9 @@ local function nullSources()
 			extra_filetypes = { "zsh" },
 			extra_args = { "--shell=bash", "--external-sources", "--check-sourced" },
 		},
+
+		-- JS/TS/JSON
+		builtins.formatting.rome,
 
 		-- CSS
 		builtins.formatting.stylelint.with {

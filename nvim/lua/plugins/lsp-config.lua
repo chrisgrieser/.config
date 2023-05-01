@@ -17,7 +17,7 @@ local lsp_servers = {
 	"taplo", -- toml
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
-	"rome", -- js/ts/json
+	"rome", -- js/ts/json – formatting capability needs to be provided via null-ls
 }
 
 --------------------------------------------------------------------------------
@@ -96,6 +96,16 @@ lspSettings.tsserver = {
 	-- enable jsdocs and typescript checking in js files without a `jsconfig.json` file
 	implicitProjectConfiguration = { checkJs = true },
 }
+
+-- load JXA globals for typescript
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "javascript",
+	callback = function()
+		vim.defer_fn(function ()
+			vim.cmd.edit("/Users/chrisgrieser/.config/globals.d.ts")
+		end, 1)
+	end,
+})
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
 lspOnAttach.tsserver = function(client, _)
@@ -247,7 +257,7 @@ return {
 					severity = { min = vim.diagnostic.severity.WARN },
 					source = false, -- already handled by format function
 					format = function(diag) return fmt(diag) end,
-					spacing = 1,
+					spacing = 0,
 				},
 				float = {
 					format = function(diag) return fmt(diag) end,

@@ -13,7 +13,7 @@ declare const Application: {
 };
 
 
-declare const delay: (seconds: int) => void;
+declare const delay: (seconds: number) => void;
 
 declare const $: {
 	getenv: (env_var: string) => string;
