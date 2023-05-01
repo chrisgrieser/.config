@@ -6,7 +6,8 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	return [clean, str].join(" ");
+	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeperated, str].join(" ") + " ";
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -18,12 +19,17 @@ const docPathRegex = /^website\/src\/pages\/(.*)\.mdx?$/i;
 const workArray = JSON.parse(app.doShellScript(`curl -sL "${docsURL}"`))
 	.tree.filter((/** @type {{ path: string; }} */ file) => docPathRegex.test(file.path))
 	.map((/** @type {{ path: string; }} */ entry) => {
-		let subsite = entry.path.replace(docPathRegex, "$1");
-		if (subsite.endsWith("index")) subsite = subsite.slice(0, -5);
+		const subsite = entry.path.replace(docPathRegex, "$1");
 		const parts = subsite.split("/");
-		const displayTitle = parts.pop();
-		const category = parts.join("/");
+		let displayTitle = parts.pop();
+		let category = parts.join("/");
 		let url = `${baseURL}/${subsite}`;
+
+		if (subsite.endsWith("index")) {
+			displayTitle = category;
+			category = "";
+			url = `${baseURL}/${subsite.slice(0, -5)}`;
+		}
 
 		return {
 			title: displayTitle,
