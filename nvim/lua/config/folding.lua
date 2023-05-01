@@ -31,10 +31,10 @@ end, vim.api.nvim_create_namespace("auto_pause_folds"))
 --------------------------------------------------------------------------------
 -- MACRO FOLD COMMANDS
 
--- toggle all toplevel folds, but not the
+-- toggle all toplevel folds
 keymap("n", "zz", function()
 	cmd("%foldclose") -- close toplevel folds
-	pcall(u.normal, "zo") -- open fold under cursor
+	-- pcall(u.normal, "zo") -- open fold under cursor
 end, { desc = "󰘖 Close toplevel folds" })
 
 -- UFO REPLACEMENTS OF FOLD COMMANDS

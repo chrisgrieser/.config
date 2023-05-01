@@ -26,11 +26,10 @@ local function indentation()
 	-- mixed indentation
 	local hasTabs = fn.search("^\t", "nw") > 0
 	local hasSpaces = fn.search("^ ", "nw") > 0
-	local mixed = fn.search([[^\(\t\+ \{2}| \+\t\)]], "nw") ~= 0
+	-- jsdocs: space not followed by "*"
+	if bo.filetype == "javascript" then hasSpaces = fn.search([[^ \(\*\)\@!]], "nw") > 0 end
 
-	if (hasSpaces and hasTabs) or mixed then
-		out = out .. " mixed"
-	elseif usesTabs and hasSpaces then
+	if usesTabs and hasSpaces then
 		out = out .. " 󱁐"
 	elseif usesSpaces and hasTabs then
 		out = out .. " ↹ "
