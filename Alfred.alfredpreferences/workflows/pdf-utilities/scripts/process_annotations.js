@@ -1,10 +1,10 @@
 #!/usr/bin/env osascript -l JavaScript
 
 ObjC.import("stdlib");
+ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-ObjC.import("Foundation");
 /** @param {string} text @param {string} file */
 function writeToFile(text, file) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
@@ -28,7 +28,12 @@ function toTitleCase(str) {
 //───────────────────────────────────────────────────────────────────────────
 // Core Methods
 
-/* INFO signature expected by this workflow
+/** to make pdfannots and pdfannots2json compatible
+ * @param {any[]} annotations
+ * @param {boolean} usePdfAnnots
+ */
+function adapterForInput(annotations, usePdfAnnots) {
+	/* INFO signature expected by this workflow
 	[{
 		"type": enum, ("Free Text" | "Highlight" | "Underline" | "Free Comment" | "Image" | "Strikethrough")
 		"comment"?: string, (user-written comment for the annotation)
@@ -37,11 +42,6 @@ function toTitleCase(str) {
 	}],
 	*/
 
-/**
- * @param {any[]} annotations
- * @param {boolean} usePdfAnnots
- */
-function adapterForInput(annotations, usePdfAnnots) {
 	// pdfannots
 	if (usePdfAnnots)
 		return annotations.map((a) => {
@@ -130,7 +130,7 @@ function splitOffUnderlines(annotations, citekey) {
 		const text = jsonToMd(annosToSplitOff, citekey);
 		Application("SideNotes").createNote({ text: text });
 	}
-	return this.filter((a) => a.type !== "Underline");
+	return annotations.filter((/** @type {{ type: string; }} */ anno) => anno.type !== "Underline");
 }
 
 /**
@@ -225,10 +225,10 @@ function mergeQuotes(annos) {
 		annos.splice(i, 1); // remove current element
 		i--; // to move index back, since element isn't there anymore
 	}
-	return this;
+	return annos;
 }
 
-/** code: "+"
+/** code: "##"
  * @param {any[]} annotations
  */
 function transformHeadings(annotations) {
@@ -459,21 +459,22 @@ function run(argv) {
 	const metadata = extractMetadata(citekey, entry);
 
 	// process input
-	let parsedAnnos = JSON.parse(rawAnnotations);
-	parsedAnnos = adapterForInput(parsedAnnos, usePdfannots);
-	parsedAnnos = useCorrectPageNum(parsedAnnos, metadata.firstPage);
-	parsedAnnos = cleanQuoteKey(parsedAnnos)
+	let annos = JSON.parse(rawAnnotations);
+	annos = adapterForInput(annos, usePdfannots);
+	annos = useCorrectPageNum(annos, metadata.firstPage);
+	annos = cleanQuoteKey(annos);
 
 	// process annotation codes & images
-	let processedAnnos = mergeQuotes(parsedAnnos);
-	processedAnnos = transformHeadings(processedAnnos);
-	processedAnnos = questionCallout(processedAnnos);
+	annos = mergeQuotes(annos);
+	annos = transformHeadings(annos);
+	annos = questionCallout(annos);
 
-	const extract = transformTag4yaml(parsedAnnos, metadata.keywords);
-	processedAnnos = extract.filteredArray
-	processedAnnos = insertImage4pdfannots2json(processedAnnos, citekey)
-	processedAnnos = splitOffUnderlines(processedAnnos, citekey)
-	processedAnnos = jsonToMd(processedAnnos, citekey);
+	// finish up
+	const extract = transformTag4yaml(annos, metadata.keywords);
+	annos = extract.filteredArray;
+	annos = insertImage4pdfannots2json(annos, citekey);
+	annos = splitOffUnderlines(annos, citekey);
+	annos = jsonToMd(annos, citekey);
 
-	writeNote(processedAnnos, metadata, outPath, extract.tagsForYaml);
+	writeNote(annos, metadata, outPath, "");
 }
