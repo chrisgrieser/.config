@@ -97,15 +97,21 @@ lspSettings.tsserver = {
 	implicitProjectConfiguration = { checkJs = true },
 }
 
--- load JXA globals for typescript
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "javascript",
-	callback = function()
-		vim.defer_fn(function ()
-			vim.cmd.edit("/Users/chrisgrieser/.config/globals.d.ts")
+-- HACK load JXA globals for typescript
+vim.api.nvim_create_autocmd("LspAttach", {
+	pattern = "*.js",
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client.name ~= "tsserver" then return end
+
+		local bufnr = vim.fn.bufnr()
+		vim.defer_fn(function()
+			vim.cmd("keepalt edit " .. u.linterConfigFolder .. "jxa-globals.d.ts")
+			vim.cmd("keepalt buffer " .. tostring(bufnr))
 		end, 1)
 	end,
 })
+-- teh 
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
 lspOnAttach.tsserver = function(client, _)
