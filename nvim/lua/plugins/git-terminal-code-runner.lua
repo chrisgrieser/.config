@@ -21,9 +21,8 @@ return {
 				show_http_info = true,
 				show_headers = false,
 				formatters = {
-					-- use prettier, since installation ensured via mason
-					json = function(body) return vim.fn.system("prettier --parser=json", body) end,
-					html = function(body) return vim.fn.system("prettier --parser=html", body) end,
+					-- use yq
+					json = function(body) return vim.fn.system("yq -o=json", body) end,
 				},
 			},
 		},

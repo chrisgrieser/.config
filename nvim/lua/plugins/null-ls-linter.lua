@@ -13,6 +13,7 @@ local lintersAndFormatters = {
 	"codespell", -- superset of `misspell`, therefore only using codespell
 	"selene", -- lua
 	"stylua", -- lua
+	"yq", -- json/yaml
 	-- "stylelint", -- included, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 }
 
@@ -76,6 +77,7 @@ local function nullSources()
 		},
 
 		-- YAML
+		builtins.formatting.yq,
 		builtins.diagnostics.yamllint.with {
 			extra_args = { "--config-file", linterConfig .. "/yamllint.yaml" },
 		},

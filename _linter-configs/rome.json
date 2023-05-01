@@ -1,13 +1,27 @@
 {
 	"formatter": {
 		"enabled": true,
+		"lineWidth": 120,
 		"indentStyle": "tab",
-		"lineWidth": 120
+		"indentSize": 3,
+		"formatWithErrors": true
+	},
+	"javascript": {
+		"globals": []
+	},
+	"organizeImports": {
+		"enabled": true
 	},
 	"linter": {
-		"enabled": false
+		"enabled": false,
+		"rules": {
+			"all": true
+		}
 	},
 	"files": {
-    "ignore": ["scripts/*.js"]
-  }
+		"ignore": [
+			"globals.d.ts",
+			"node_modules/**"
+		]
+	}
 }
