@@ -5,14 +5,10 @@
 # Naming config files necessary: https://github.com/lukas-reineke/cbfmt/issues/35
 
 [languages]
-lua = ["stylua --search-parent-directories -"]
-# lua = ["stylua --config-path=/Users/chrisgrieser/.config/linter-configs/stylua.toml -"]
+lua = ["stylua --config-path=/Users/chrisgrieser/.config/linter-configs/stylua.toml -"]
 python = ["black --fast -"]
-yaml = ["prettier --parser=yaml --config=/Users/chrisgrieser/.config/linter-configs/prettierrc.yml"]
-json = ["prettier --parser=json --config=/Users/chrisgrieser/.config/linter-configs/prettierrc.yml"]
-javascript = ["prettier --parser=babel --config=/Users/chrisgrieser/.config/linter-configs/prettierrc.yml"]
-typescript = ["prettier --parser=typescript --config=/Users/chrisgrieser/.config/linter-configs/prettierrc.yml"]
-html = ["prettier --parser=html --config=/Users/chrisgrieser/.config/linter-configs/prettierrc.yml"]
+json = ["yq -o=json"]
+yaml = ["yq --prettyPrint"]
 bash = ["shfmt -"]
 zsh = ["shfmt -"]
 sh = ["shfmt -"]
