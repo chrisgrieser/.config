@@ -218,6 +218,7 @@ end
 
 ---@param prefillMsg? string
 function M.addCommitPush(prefillMsg)
+	output = {}
 	vim.cmd.update()
 	if not isInGitRepo() then return end
 	if not prefillMsg then prefillMsg = "" end
