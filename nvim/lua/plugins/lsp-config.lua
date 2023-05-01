@@ -107,6 +107,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		if client.name ~= "tsserver" then return end
 
+		-- do not open globals file if one is already open
+		local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
+		for _, buf in pairs(openBuffers) do
+			if vim.endswith(buf.name, "globals.d.ts") then return end
+		end
+
 		local bufnr = vim.fn.bufnr()
 		vim.defer_fn(function()
 			vim.cmd("keepalt edit " .. u.linterConfigFolder .. "jxa-globals.d.ts")

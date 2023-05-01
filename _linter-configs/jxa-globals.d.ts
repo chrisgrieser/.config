@@ -1,4 +1,5 @@
 // https://code.visualstudio.com/docs/nodejs/working-with-javascript#_global-variables-and-type-checking
+// https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html
 //──────────────────────────────────────────────────────────────────────────────
 
 declare const ObjC: {
@@ -7,13 +8,13 @@ declare const ObjC: {
 };
 
 declare const Application: {
-	currentApplication: () => object;
-	(appname: string): object;
+	currentApplication: () => any;
+	(appname: string): any;
 };
 
-declare const Path: (filepath: string) => string;
+declare function Path(filepath: string): string;
 
-declare function delay (seconds: number) => void;
+declare function delay(seconds: number): void;
 
 declare const $: {
 	getenv: (envVar: string) => string;

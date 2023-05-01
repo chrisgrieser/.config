@@ -24,7 +24,9 @@
 		"enabled": true
 	},
 	"linter": {
-		"ignore": ["*globals.d.ts"],
+		"ignore": [
+			"*globals.d.ts"
+		],
 		"rules": {
 			"all": true,
 			"style": {
