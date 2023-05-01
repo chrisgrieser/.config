@@ -32,6 +32,9 @@
 				"useConst": "warn",
 				"useTemplate": "off",
 				"useSingleVarDeclarator": "off"
+			},
+			"nursery": {
+				"noExtraSemicolons": "off"
 			}
 		}
 	}
