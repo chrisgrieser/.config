@@ -5,28 +5,28 @@ ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-/** @param {string} text @param {string} file */
-function writeToFile(text, file) {
+/** write to file via c-bridge
+ * @param {string} text
+ * @param {string} filePath
+ */
+function writeToFile(text, filePath) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
-	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
+	str.writeToFileAtomicallyEncodingError(filePath, true, $.NSUTF8StringEncoding, null);
 }
 
 /** @param {string} str */
 function toTitleCase(str) {
 	const smallWords =
-		/\b(?:a[stn]?|and|because|but|by|en|for|i[fn]|neither|nor|o[fnr]|only|over|per|so|some|that|than|the|to|up(on)?|vs?\.?|versus|via|when|with(out)?|yet)\b/i;
-	let capitalized = str.replace(/\w\S*/g, function (word) {
+		/\b(and|because|but|for|neither|nor|only|over|per|some|that|than|the|upon|vs?\.?|versus|via|when|with(out)?|yet)\b/i;
+	const word = str.replace(/\w\S*/g, function (word) {
 		if (smallWords.test(word)) return word.toLowerCase();
 		if (word.toLowerCase() === "i") return "I";
 		if (word.length < 3) return word.toLowerCase();
 		return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 	});
-	capitalized = capitalized.charAt(0).toUpperCase() + capitalized.slice(1).toLowerCase();
-	return capitalized;
+	const sentenceFirstCharUpper = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+	return sentenceFirstCharUpper;
 }
-
-//───────────────────────────────────────────────────────────────────────────
-// Core Methods
 
 /** to make pdfannots and pdfannots2json compatible
  * @param {any[]} annotations
@@ -35,10 +35,10 @@ function toTitleCase(str) {
 function adapterForInput(annotations, usePdfAnnots) {
 	/* INFO signature expected by this workflow
 	[{
-		"type": enum, ("Free Text" | "Highlight" | "Underline" | "Free Comment" | "Image" | "Strikethrough")
-		"comment"?: string, (user-written comment for the annotation)
-		"quote"?: string, (text marked in the pdf)
-		"imagePath"?: string,
+		type: "Free Text"|"Highlight"|"Underline"|"Free Comment"|"Image"|"Strikethrough",
+		comment?: string, (user-written comment for the annotation)
+		quote?: string, (text marked in the pdf)
+		imagePath?: string,
 	}],
 	*/
 
@@ -202,9 +202,6 @@ function jsonToMd(annotations, citekey) {
 	return formattedAnnos.join("\n") + "\n";
 }
 
-//───────────────────────────────────────────────────────────────────────────
-// Annotation Code Methods
-
 /** code: "+"
  * @param {any[]} annos
  */
@@ -260,9 +257,9 @@ function questionCallout(annotations) {
 		}
 		return a;
 	});
-	const pseudoAdmos = annoArr.filter((a) => a.type === "Question Callout");
+	const callouts = annoArr.filter((a) => a.type === "Question Callout");
 	annoArr = annoArr.filter((a) => a.type !== "Question Callout");
-	return [...pseudoAdmos, ...annoArr];
+	return [...callouts, ...annoArr];
 }
 
 /** images / rectangle annotations (pdfannots2json only)
@@ -281,8 +278,8 @@ function insertImage4pdfannots2json(annotations, filename) {
 }
 
 /** code: "="
- * @param {string} keywords
  * @param {any[]} annotations
+ * @param {string} keywords
  */
 function transformTag4yaml(annotations, keywords) {
 	let newKeywords = [];
@@ -316,7 +313,6 @@ function transformTag4yaml(annotations, keywords) {
 		tagsForYaml: tagsForYaml,
 	};
 }
-//──────────────────────────────────────────────────────────────────────────────
 
 /**
  * @param {string} citekey
@@ -361,8 +357,9 @@ function extractMetadata(citekey, rawEntry) {
 			data.title = extract(property)
 				.replaceAll('"', "'") // to avoid invalid yaml, since title is wrapped in ""
 				.replaceAll(":", "."); // to avoid invalid yaml
-		} else if (property.includes("@")) data.ptype = property.replace(/@(.*)\{.*/, "$1");
-		else if (property.includes("pages =")) {
+		} else if (property.includes("@")) {
+			data.ptype = property.replace(/@(.*)\{.*/, "$1");
+		} else if (property.includes("pages =")) {
 			const pages = property.match(/\d+/g);
 			if (pages) data.firstPage = parseInt(pages[0]);
 		} else if (/\syear =/i.test(property)) {
