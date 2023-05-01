@@ -222,10 +222,18 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.filetype("yaml", {
 		sources = cmp.config.sources {
+			s.lsp, -- prioritize schemas
 			s.snippets,
-			s.treesitter, -- treesitter works good on yaml
+			s.treesitter, -- useful when no schemas
+			s.emojis,
+			s.buffer,
+		},
+	})
+	cmp.setup.filetype("json", {
+		sources = cmp.config.sources {
 			s.lsp,
-			s.codeium,
+			s.snippets,
+			s.treesitter, -- useful when no schema
 			s.emojis,
 			s.buffer,
 		},

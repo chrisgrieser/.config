@@ -73,6 +73,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9C8E2CFD-649D-4005-8762-41497D453FEF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>496D4848-5FF5-4521-AD62-DA66D955EF60</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
 		<array>
 			<dict>
@@ -726,6 +739,27 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Add Feed to Innoreader</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>9C8E2CFD-649D-4005-8762-41497D453FEF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -877,6 +911,15 @@ end tell</string>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
+		<key>9C8E2CFD-649D-4005-8762-41497D453FEF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>565</real>
+		</dict>
 		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
 		<dict>
 			<key>colorindex</key>
@@ -895,7 +938,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>685</real>
 		</dict>
 		<key>A356EB3A-B0D3-4C21-8B54-82327BD92BB3</key>
 		<dict>
@@ -926,7 +969,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>685</real>
 		</dict>
 		<key>C98CBF71-E7E2-41B1-9C53-9A50774B67D4</key>
 		<dict>

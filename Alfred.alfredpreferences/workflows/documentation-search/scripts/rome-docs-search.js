@@ -11,18 +11,19 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const docsURL = "https://api.github.com/repos/eslint/eslint/git/trees/main?recursive=1";
-const baseURL = "https://eslint.org/docs/latest";
-const docPathRegex = /^docs\/src\/(?:rules|use)\/(.*)\.md$/i;
+const docsURL = "https://api.github.com/repos/rome/tools/git/trees/main?recursive=1";
+const baseURL = "https://docs.rome.tools/";
+const docPathRegex = /^website\/src\/pages\/(.*)\.mdx?$/i;
 
-const workArray = JSON.parse(app.doShellScript(`curl -s "${docsURL}"`))
+const workArray = JSON.parse(app.doShellScript(`curl -sL "${docsURL}"`))
 	.tree.filter((/** @type {{ path: string; }} */ file) => docPathRegex.test(file.path))
 	.map((/** @type {{ path: string; }} */ entry) => {
-		const subsite = entry.path.slice(9, -3);
+		let subsite = entry.path.replace(docPathRegex, "$1");
+		if (subsite.endsWith("index")) subsite = subsite.slice(0, -5);
 		const parts = subsite.split("/");
 		const displayTitle = parts.pop();
 		const category = parts.join("/");
-		const url = `${baseURL}/${subsite}`;
+		let url = `${baseURL}/${subsite}`;
 
 		return {
 			title: displayTitle,
