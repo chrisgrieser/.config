@@ -26,7 +26,7 @@ local function indentation()
 	-- mixed indentation
 	local hasTabs = fn.search("^\t", "nw") > 0
 	local hasSpaces = fn.search("^ ", "nw") > 0
-	local mixed = fn.search([[^\(\t\+ \| \+\t\)]], "nw") ~= 0
+	local mixed = fn.search([[^\(\t\+ \{2}| \+\t\)]], "nw") ~= 0
 
 	if (hasSpaces and hasTabs) or mixed then
 		out = out .. " mixed"

@@ -25,7 +25,12 @@
 	},
 	"argv": {
 		"prefix": "argv",
-		"body": ["function run(argv){", "\tconst ${1:query} = argv[0];", "}"]
+		"body": [
+			"/** @param {string[]} argv */",
+			"function run(argv){",
+			"\tconst ${1:query} = argv[0];",
+			"}"
+		]
 	},
 	"Modifiers (Script Filter)": {
 		"prefix": "Modifiers (Alfred)",

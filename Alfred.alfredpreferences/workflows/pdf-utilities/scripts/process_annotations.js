@@ -1,34 +1,30 @@
 #!/usr/bin/env osascript -l JavaScript
-// @ts-nocheck
 
-/** @param {string[]} argv */
-// rome-ignore lint/correctness/noUnusedVariables:
-function run(argv) {
-	ObjC.import("stdlib");
-	const app = Application.currentApplication();
-	app.includeStandardAdditions = true;
+ObjC.import("stdlib");
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
 
-	ObjC.import("Foundation");
-	/** @param {string} text @param {string} file */
-	function writeToFile(text, file) {
-		const str = $.NSString.alloc.initWithUTF8String(text);
-		str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
-	}
+ObjC.import("Foundation");
+/** @param {string} text @param {string} file */
+function writeToFile(text, file) {
+	const str = $.NSString.alloc.initWithUTF8String(text);
+	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
+}
 
-	String.prototype.toTitleCase = function () {
-		const smallWords =
-			/\b(?:a[stn]?|and|because|but|by|en|for|i[fn]|neither|nor|o[fnr]|only|over|per|so|some|that|than|the|to|up(on)?|vs?\.?|versus|via|when|with(out)?|yet)\b/i;
-		let capitalized = this.replace(/\w\S*/g, function (word) {
-			if (smallWords.test(word)) return word.toLowerCase();
-			if (word.toLowerCase() === "i") return "I";
-			if (word.length < 3) return word.toLowerCase();
-			return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-		});
-		capitalized = capitalized.charAt(0).toUpperCase() + capitalized.slice(1).toLowerCase();
-		return capitalized;
-	};
+/** @param {string} str */
+function toTitleCase (str) {
+	const smallWords =
+		/\b(?:a[stn]?|and|because|but|by|en|for|i[fn]|neither|nor|o[fnr]|only|over|per|so|some|that|than|the|to|up(on)?|vs?\.?|versus|via|when|with(out)?|yet)\b/i;
+	let capitalized = str.replace(/\w\S*/g, function (word) {
+		if (smallWords.test(word)) return word.toLowerCase();
+		if (word.toLowerCase() === "i") return "I";
+		if (word.length < 3) return word.toLowerCase();
+		return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+	});
+	capitalized = capitalized.charAt(0).toUpperCase() + capitalized.slice(1).toLowerCase();
+	return capitalized;
+}
 
-	let tagsForYaml = ""; // needed as global variable for methods
 
 	//───────────────────────────────────────────────────────────────────────────
 	// Core Methods
@@ -92,10 +88,7 @@ function run(argv) {
 		});
 	};
 
-	Array.prototype.useCorrectPageNum = function (/** @type {string | number} */ pageNo) {
-		// rome-ignore lint/nursery/noParameterAssign: makes sense here
-		if (typeof pageNo !== "number") pageNo = parseInt(pageNo);
-
+	Array.prototype.useCorrectPageNum = function (/** @type {number} */ pageNo) {
 		return this.map((a) => {
 			// in case the page numbers have names like "image 1" instead of integers
 			if (typeof a.page === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
@@ -224,7 +217,7 @@ function run(argv) {
 			if (hLevel) {
 				if (a.type === "Highlight" || a.type === "Underline") {
 					let headingText = a.quote;
-					if (headingText === headingText.toUpperCase()) headingText = headingText.toTitleCase();
+					if (headingText === headingText.toUpperCase()) headingText = toTitleCase(headingText);
 					a.comment = hLevel[0] + " " + headingText;
 					a.quote = undefined;
 				}
@@ -250,7 +243,7 @@ function run(argv) {
 	};
 
 	// images / rectangle annotations (pdfannots2json only)
-	Array.prototype.insertImage4pdfannots2json = function (filename) {
+	Array.prototype.insertImage4pdfannots2json = function (/** @type {string} */ filename) {
 		let i = 1;
 		return this.map((a) => {
 			if (a.type !== "Image") return a;
@@ -291,6 +284,15 @@ function run(argv) {
 		return arr.filter((a) => a.type !== "remove");
 	};
 
+//──────────────────────────────────────────────────────────────────────────────
+
+
+/** @param {string[]} argv */
+// rome-ignore lint/correctness/noUnusedVariables:
+function run(argv) {
+	let tagsForYaml = ""; // needed as global variable for methods
+
+
 	//───────────────────────────────────────────────────────────────────────────
 	//───────────────────────────────────────────────────────────────────────────
 	//───────────────────────────────────────────────────────────────────────────
@@ -304,21 +306,9 @@ function run(argv) {
 
 		// Decode Bibtex
 		// rome-ignore format: more compact
-		const germanChars = [ '{\\"u};ü', '{\\"a};ä', '{\\"o};ö', '{\\"U};Ü', '{\\"A};Ä', '{\\"O};Ö', '\\"u;ü', '\\"a;ä', '\\"o;ö', '\\"U;Ü', '\\"A;Ä', '\\"O;Ö', "\\ss;ß", "{\\ss};ß" ];
-		// prettier-ignore
-		const otherChars = [
-			"{\\~n};ñ",
-			"{\\'a};á",
-			"{\\'e};é",
-			"{\\v c};č",
-			"\\c{c};ç",
-			"\\o{};ø",
-			"\\^{i};î",
-			'\\"{i};î',
-			'\\"{i};ï',
-			"{\\'c};ć",
-			'\\"e;ë',
-		];
+		const germanChars = ['{\\"u};ü', '{\\"a};ä', '{\\"o};ö', '{\\"U};Ü', '{\\"A};Ä', '{\\"O};Ö', '\\"u;ü', '\\"a;ä', '\\"o;ö', '\\"U;Ü', '\\"A;Ä', '\\"O;Ö', "\\ss;ß", "{\\ss};ß"];
+		// rome-ignore format: more compact
+		const otherChars = ["{\\~n};ñ", "{\\'a};á", "{\\'e};é", "{\\v c};č", "\\c{c};ç", "\\o{};ø", "\\^{i};î", '\\"{i};î', '\\"{i};ï', "{\\'c};ć", '\\"e;ë'];
 		const specialChars = ["\\&;&", '``;"', "`;'", "\\textendash{};—", "---;—", "--;—"];
 		[...germanChars, ...otherChars, ...specialChars].forEach((pair) => {
 			const half = pair.split(";");
@@ -336,9 +326,9 @@ function run(argv) {
 		const data = {
 			title: "",
 			ptype: "",
-			firstPage: "",
+			firstPage: -999,
 			author: "",
-			year: "",
+			year: 0,
 			keywords: "",
 			url: "",
 			doi: "",
@@ -351,10 +341,16 @@ function run(argv) {
 					.replaceAll('"', "'") // to avoid invalid yaml, since title is wrapped in ""
 					.replaceAll(":", "."); // to avoid invalid yaml
 			} else if (property.includes("@")) data.ptype = property.replace(/@(.*)\{.*/, "$1");
-			else if (property.includes("pages =")) data.firstPage = property.match(/\d+/)[0];
-			else if (property.includes("author =")) data.author = extract(property);
-			else if (/\syear =/i.test(property)) data.year = property.match(/\d{4}/)[0];
-			else if (property.includes("date =")) data.year = property.match(/\d{4}/)[0];
+			else if (property.includes("pages =")) {
+				const pages = property.match(/\d+/g);
+				data.firstPage = pages ? parseInt(pages[0]) : -999;
+			} else if (/\syear =/i.test(property)) {
+				const year = property.match(/\d{4}/g);
+				data.year = year ? parseInt(year[0]) : 0;
+			} else if (property.includes("date =")) {
+				const year = property.match(/\d{4}/g);
+				data.year = year ? parseInt(year[0]) : 0;
+			} else if (property.includes("author =")) data.author = extract(property);
 			else if (property.includes("keywords =")) {
 				data.keywords = extract(property).replaceAll(", ", ",").replaceAll(" ", "-"); // no spaces allowed in tags
 			} else if (property.includes("doi =")) {
@@ -364,18 +360,16 @@ function run(argv) {
 		});
 
 		// prompt for page number if needed
-		if (!data.firstPage) {
-			let response;
-			let validInput = false;
-			while (!validInput) {
+		if (data.firstPage === -999) {
+			let response, validInput;
+			do {
 				response = app.displayDialog(
 					"BibTeX Entry does not include page numbers.\n\nPlease enter the page number of the first PDF page.",
 					{ defaultAnswer: "", buttons: ["OK"], defaultButton: "OK" },
 				);
-				validInput = response.textReturned.match(/^\d+$/);
-				if (!validInput) app.displayNotification("", { withTitle: "⚠️ Input not a number." });
-			}
-			data.firstPage = response.textReturned;
+				validInput = response.textReturned.match(/^-?\d+$/);
+			} while (!validInput);
+			data.firstPage = parseInt(response.textReturned);
 		}
 
 		return data;
@@ -385,7 +379,7 @@ function run(argv) {
 
 	/**
 	 * @param {any} annos
-	 * @param {{ title: any; ptype: any; firstPage?: string; author: any; year: any; keywords?: string; url: any; doi: any; citekey: any; }} metad
+	 * @param {{ title: string; ptype: string; firstPage: number; author: string; year: number; keywords?: string; url: string; doi: string; citekey: string; }} metad
 	 * @param {string} outputPath
 	 */
 	function writeNote(annos, metad, outputPath) {
@@ -397,7 +391,7 @@ tags: literature-note, ${tagsForYaml}
 cssclass: pdf-annotations
 obsidianUIMode: preview
 citekey: ${metad.citekey}
-year: ${metad.year}
+year: ${metad.year.toString()}
 author: "${metad.author}"
 publicationType: ${metad.ptype}
 url: ${metad.url}

@@ -13,7 +13,7 @@
 	},
 	"ignore (rome formatter)": {
 		"prefix": "ignore (rome formatter)",
-		"body": "// rome-ignore format",
+		"body": "// rome-ignore format: ${1:explanation}",
 		"description": "Ignores the next block of code."
 	},
 	"ignore (tsignore)": {
