@@ -25,7 +25,7 @@ return {
 	},
 	{ -- Cycle Buffers
 		"ghillb/cybu.nvim",
-		event = "BufEnter", -- cannot load on <Plug> key for whatever reason
+		event = "BufEnter", -- cannot load on key when using <Plug> for whatever reason
 		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
 		opts = {
 			display_time = 1000,
@@ -61,6 +61,7 @@ return {
 		opts = {
 			retirementAgeMins = 20,
 			ignoreUnsavedChangesBufs = false,
+			ignoreFilenamePattern = ".*%.d.ts$", -- reference file for JXA
 		},
 	},
 	{ -- change cwd per project

@@ -29,3 +29,7 @@ accessible
 using
 outdention
 minimalistic
+Nano
+vim
+Vim
+bufferline

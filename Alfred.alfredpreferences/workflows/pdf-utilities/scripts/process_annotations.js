@@ -320,10 +320,10 @@ function transformTag4yaml(annotations, keywords) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /**
- * @param {any} _citekey
+ * @param {any} citekey
  * @param {string} rawEntry
  */
-function extractMetadata(_citekey, rawEntry) {
+function extractMetadata(citekey, rawEntry) {
 	let bibtexEntry = "@" + rawEntry.split("@")[1]; // cut following citekeys
 
 	// Decode Bibtex
@@ -354,7 +354,7 @@ function extractMetadata(_citekey, rawEntry) {
 		keywords: "",
 		url: "",
 		doi: "",
-		citekey: _citekey,
+		citekey: citekey,
 	};
 
 	bibtexEntry.split("\n").forEach((property) => {
