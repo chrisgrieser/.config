@@ -1,15 +1,20 @@
 // https://code.visualstudio.com/docs/nodejs/working-with-javascript#_global-variables-and-type-checking
+
+//──────────────────────────────────────────────────────────────────────────────
+// rome-disable lint/suspicious/noExplicitAny: <explanation>
 //──────────────────────────────────────────────────────────────────────────────
 
-declare var ObjC: {
+declare const ObjC: {
 	import: Function;
+	unwrap: Function;
 };
 
-declare var Application: {
+declare const Application: {
 	currentApplication: Function;
 };
 
-declare var $: {
+declare const $: {
+	NSFileManager: any;
 	NSUTF8StringEncoding: any;
 	NSProcessInfo: any;
 	NSURL: any;

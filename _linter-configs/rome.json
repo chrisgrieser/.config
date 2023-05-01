@@ -1,0 +1,13 @@
+{
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"lineWidth": 120
+	},
+	"linter": {
+		"enabled": false
+	},
+	"files": {
+    "ignore": ["scripts/*.js"]
+  }
+}
