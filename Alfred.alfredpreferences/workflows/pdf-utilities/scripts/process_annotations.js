@@ -28,55 +28,66 @@ function toTitleCase(str) {
 	return sentenceFirstCharUpper;
 }
 
+/** REQUIRED JSON signature of annotations expected by this file
+ * @typedef {Object} Annotation
+ * @property {"Free Text"|"Highlight"|"Underline"|"Free Comment"|"Image"|"Strikethrough"|"Heading"|"Question Callout"} type – of the annotation
+ * @property {string=} comment - user-written comment for the annotation
+ * @property {string=} quote - text marked in the pdf
+ * @property {string=} imagePath - path of image file
+ * @property {string} page - page number where the annotation is located
+ */
+
 /** to make pdfannots and pdfannots2json compatible
- * @param {any[]} annotations
+ * @param {any[]} nonStandardizedAnnos
  * @param {boolean} usePdfAnnots
  */
-function adapterForInput(annotations, usePdfAnnots) {
-	/* INFO signature expected by this workflow
-	[{
-		type: "Free Text"|"Highlight"|"Underline"|"Free Comment"|"Image"|"Strikethrough",
-		comment?: string, (user-written comment for the annotation)
-		quote?: string, (text marked in the pdf)
-		imagePath?: string,
-	}],
-	*/
+function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
+	/** @type {Annotation[]} */
+	let out;
 
-	// pdfannots
-	if (usePdfAnnots)
-		return annotations.map((a) => {
+	if (usePdfAnnots) {
+		out = nonStandardizedAnnos.map((a) => {
 			a.quote = a.text;
 			a.comment = a.contents;
 			if (a.type === "text") a.type = "Free Comment";
+
+			// in case the page numbers have names like "image 1" instead of integers
+			if (typeof(a.page) === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
 			return a;
 		});
+	} else {
+		// https://github.com/mgmeyers/pdfannots2json#sample-output
+		out = nonStandardizedAnnos.map((a) => {
+			a.quote = a.annotatedText;
 
-	// pdfannots2json https://github.com/mgmeyers/pdfannots2json#sample-output
-	return annotations.map((a) => {
-		a.quote = a.annotatedText;
-		switch (a.type) {
-			case "text":
-				a.type = "Free Comment";
-				break;
-			case "strike":
-				a.type = "Strikethrough";
-				break;
-			case "highlight":
-				a.type = "Highlight";
-				break;
-			case "underline":
-				a.type = "Underline";
-				break;
-			case "image":
-				a.type = "Image";
-				break;
-			default:
-		}
-		return a;
-	});
+			// in case the page numbers have names like "image 1" instead of integers
+			if (typeof(a.page) === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
+
+			switch (a.type) {
+				case "text":
+					a.type = "Free Comment";
+					break;
+				case "strike":
+					a.type = "Strikethrough";
+					break;
+				case "highlight":
+					a.type = "Highlight";
+					break;
+				case "underline":
+					a.type = "Underline";
+					break;
+				case "image":
+					a.type = "Image";
+					break;
+				default:
+			}
+			return a;
+		});
+	}
+	return out;
 }
 
-/** @param {any[]} annotations */
+/** @param {Annotation[]} annotations */
 function cleanQuoteKey(annotations) {
 	return annotations.map((a) => {
 		if (!a.quote) return a; // free comments have no text
@@ -93,25 +104,20 @@ function cleanQuoteKey(annotations) {
 }
 
 /**
- * @param {any[]} annotations
+ * @param {Annotation[]} annotations
  * @param {number} pageNo
  */
-function useCorrectPageNum(annotations, pageNo) {
+function insertPageNumber(annotations, pageNo) {
 	return annotations
 		.map((a) => {
-			// in case the page numbers have names like "image 1" instead of integers
-			if (typeof a.page === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
-			return a;
-		})
-		.map((a) => {
 			// add first page number to pdf page number
-			a.page = (a.page + pageNo - 1).toString();
+			a.page = a.page + pageNo - 1;
 			return a;
 		});
 }
 
 /**
- * @param {any[]} annotations
+ * @param {Annotation[]} annotations
  * @param {string} citekey
  */
 function splitOffUnderlines(annotations, citekey) {
@@ -134,7 +140,7 @@ function splitOffUnderlines(annotations, citekey) {
 }
 
 /**
- * @param {any[]} annotations
+ * @param {Annotation[]} annotations
  * @param {string} citekey
  */
 function jsonToMd(annotations, citekey) {
@@ -192,7 +198,7 @@ function jsonToMd(annotations, citekey) {
 				output = `> [!QUESTION]\n> ${comment}`;
 				break;
 			case "Image":
-				output = `\n![[${a.image}]]\n`;
+				output = `\n![[${a.imagePath}]]\n`;
 				break;
 			default:
 		}
@@ -203,7 +209,7 @@ function jsonToMd(annotations, citekey) {
 }
 
 /** code: "+"
- * @param {any[]} annos
+ * @param {Annotation[]} annos
  */
 function mergeQuotes(annos) {
 	// start at one, since the first element can't be merged to a predecessor
@@ -458,7 +464,7 @@ function run(argv) {
 	// process input
 	let annos = JSON.parse(rawAnnotations);
 	annos = adapterForInput(annos, usePdfannots);
-	annos = useCorrectPageNum(annos, metadata.firstPage);
+	annos = insertPageNumber(annos, metadata.firstPage);
 	annos = cleanQuoteKey(annos);
 
 	// process annotation codes & images
