@@ -47,7 +47,7 @@ if (frontApp is "Highlights") then
 	set AppleScript's text item delimiters to " – "
 	set filename to text item 1 of frontWindow
 
-	set current_file to do shell script ("find '" & pdfFolder & "' -type f -name '" & filename & "'")
+	set current_file to do shell script ("find " & (quoted form of pdfFolder) & " -type f -name " & (quoted form of filename))
 end if
 
 current_file # direct return

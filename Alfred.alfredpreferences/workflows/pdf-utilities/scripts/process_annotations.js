@@ -1,12 +1,15 @@
 #!/usr/bin/env osascript -l JavaScript
-/* eslint-disable func-names */
+// @ts-nocheck
 
+/** @param {string[]} argv */
+// rome-ignore lint/correctness/noUnusedVariables:
 function run(argv) {
 	ObjC.import("stdlib");
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
 
 	ObjC.import("Foundation");
+	/** @param {string} text @param {string} file */
 	function writeToFile(text, file) {
 		const str = $.NSString.alloc.initWithUTF8String(text);
 		str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
@@ -39,10 +42,10 @@ function run(argv) {
 	}],
 	*/
 
-	Array.prototype.adapterForInput = function (usePdfAnnots) {
+	Array.prototype.adapterForInput = function (/** @type {any} */ usePdfAnnots) {
 		// pdfannots
 		if (usePdfAnnots)
-			return this.map(a => {
+			return this.map((a) => {
 				a.quote = a.text;
 				a.comment = a.contents;
 				if (a.type === "text") a.type = "Free Comment";
@@ -50,7 +53,7 @@ function run(argv) {
 			});
 
 		// pdfannots2json https://github.com/mgmeyers/pdfannots2json#sample-output
-		return this.map(a => {
+		return this.map((a) => {
 			a.quote = a.annotatedText;
 			switch (a.type) {
 				case "text":
@@ -75,10 +78,10 @@ function run(argv) {
 	};
 
 	Array.prototype.cleanQuoteKey = function () {
-		return this.map(a => {
+		return this.map((a) => {
 			if (!a.quote) return a; // free comments have no text
 			a.quote = a.quote
-				.replace(/["„“”«»]/g, "'") // quotation marks
+				.replace(/["„“”«»’]/g, "'") // quotation marks
 				.replace(/\. ?\. ?\./g, "…") // ellipsis
 				.replaceAll("\\u00AD", "") // remove invisible character
 				.replace(/(\D)[.,]\d/g, "$1") // remove footnotes from quote
@@ -89,14 +92,15 @@ function run(argv) {
 		});
 	};
 
-	Array.prototype.useCorrectPageNum = function (pageNo) {
+	Array.prototype.useCorrectPageNum = function (/** @type {string | number} */ pageNo) {
+		// rome-ignore lint/nursery/noParameterAssign: makes sense here
 		if (typeof pageNo !== "number") pageNo = parseInt(pageNo);
 
-		return this.map(a => {
+		return this.map((a) => {
 			// in case the page numbers have names like "image 1" instead of integers
 			if (typeof a.page === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
 			return a;
-		}).map(a => {
+		}).map((a) => {
 			// add first page number to pdf page number
 			a.page = (a.page + pageNo - 1).toString();
 			return a;
@@ -104,11 +108,11 @@ function run(argv) {
 	};
 
 	// underlines
-	Array.prototype.splitOffUnderlines = function (_citekey) {
-		const underlineAnnos = this.filter(a => a.type === "Underline");
+	Array.prototype.splitOffUnderlines = function (/** @type {string} */ _citekey) {
+		const underlineAnnos = this.filter((a) => a.type === "Underline");
 
 		const underScoreHls = [];
-		this.forEach(anno => {
+		this.forEach((anno) => {
 			if (anno.type !== "Highlight") return;
 			if (!anno.comment?.startsWith("_")) return;
 			anno.comment = anno.comment.slice(1).trim(); // remove "_" prefix
@@ -120,11 +124,11 @@ function run(argv) {
 			const text = annosToSplitOff.JSONtoMD(_citekey);
 			Application("SideNotes").createNote({ text: text });
 		}
-		return this.filter(a => a.type !== "Underline");
+		return this.filter((a) => a.type !== "Underline");
 	};
 
-	Array.prototype.JSONtoMD = function (_citekey) {
-		const formattedAnnos = this.map(a => {
+	Array.prototype.JSONtoMD = function (/** @type {string} */ _citekey) {
+		const formattedAnnos = this.map((a) => {
 			let comment, output;
 			let annotationTag = "";
 
@@ -214,7 +218,7 @@ function run(argv) {
 
 	// "##"
 	Array.prototype.transformHeadings = function () {
-		return this.map(a => {
+		return this.map((a) => {
 			if (!a.comment) return a;
 			const hLevel = a.comment.match(/^#+(?!\w)/);
 			if (hLevel) {
@@ -222,7 +226,7 @@ function run(argv) {
 					let headingText = a.quote;
 					if (headingText === headingText.toUpperCase()) headingText = headingText.toTitleCase();
 					a.comment = hLevel[0] + " " + headingText;
-					delete a.quote;
+					a.quote = undefined;
 				}
 				a.type = "Heading";
 			}
@@ -232,7 +236,7 @@ function run(argv) {
 
 	// "?"
 	Array.prototype.questionCallout = function () {
-		let annoArr = this.map(a => {
+		let annoArr = this.map((a) => {
 			if (!a.comment) return a;
 			if (a.type === "Free Comment" && a.comment.startsWith("?")) {
 				a.type = "Question Callout";
@@ -240,15 +244,15 @@ function run(argv) {
 			}
 			return a;
 		});
-		const pseudoAdmos = annoArr.filter(a => a.type === "Question Callout");
-		annoArr = annoArr.filter(a => a.type !== "Question Callout");
+		const pseudoAdmos = annoArr.filter((a) => a.type === "Question Callout");
+		annoArr = annoArr.filter((a) => a.type !== "Question Callout");
 		return [...pseudoAdmos, ...annoArr];
 	};
 
 	// images / rectangle annotations (pdfannots2json only)
 	Array.prototype.insertImage4pdfannots2json = function (filename) {
 		let i = 1;
-		return this.map(a => {
+		return this.map((a) => {
 			if (a.type !== "Image") return a;
 			a.image = `${filename}_image${i}.png`;
 			if (a.comment) a.image += "|" + a.comment; // add alias
@@ -258,20 +262,20 @@ function run(argv) {
 	};
 
 	// "="
-	Array.prototype.transformTag4yaml = function (keywords) {
+	Array.prototype.transformTag4yaml = function (/** @type {string} */ keywords) {
 		let newKeywords = [];
 
 		// existing tags (from BibTeX library)
 		if (keywords) {
-			keywords.split(",").forEach(tag => newKeywords.push(tag));
+			keywords.split(",").forEach((tag) => newKeywords.push(tag));
 		}
 
 		// additional tags (from annotations)
-		const arr = this.map(a => {
+		const arr = this.map((a) => {
 			if (a.comment?.startsWith("=")) {
 				let tags = a.comment.slice(1); // remove the "="
 				if (a.type === "Highlight" || a.type === "Underline") tags += " " + a.quote;
-				tags.split(",").forEach(tag => newKeywords.push(tag));
+				tags.split(",").forEach((/** @type {string} */ tag) => newKeywords.push(tag));
 				a.type = "remove";
 			}
 			return a;
@@ -279,36 +283,53 @@ function run(argv) {
 
 		// Merge & Save both
 		if (newKeywords.length) {
-			newKeywords = [...new Set(newKeywords)].map(keyword => keyword.trim().replaceAll(" ", "-"));
+			newKeywords = [...new Set(newKeywords)].map((keyword) => keyword.trim().replaceAll(" ", "-"));
 			tagsForYaml = newKeywords.join(", ") + ", ";
 		}
 
 		// return annotation array without tags
-		return arr.filter(a => a.type !== "remove");
+		return arr.filter((a) => a.type !== "remove");
 	};
 
 	//───────────────────────────────────────────────────────────────────────────
 	//───────────────────────────────────────────────────────────────────────────
 	//───────────────────────────────────────────────────────────────────────────
 
-	function extractMetadata(_citekey, bibtexEntry) {
-		bibtexEntry = "@" + bibtexEntry.split("@")[1]; // cut following citekeys
+	/**
+	 * @param {any} _citekey
+	 * @param {string} rawEntry
+	 */
+	function extractMetadata(_citekey, rawEntry) {
+		let bibtexEntry = "@" + rawEntry.split("@")[1]; // cut following citekeys
 
 		// Decode Bibtex
+		// rome-ignore format: more compact
+		const germanChars = [ '{\\"u};ü', '{\\"a};ä', '{\\"o};ö', '{\\"U};Ü', '{\\"A};Ä', '{\\"O};Ö', '\\"u;ü', '\\"a;ä', '\\"o;ö', '\\"U;Ü', '\\"A;Ä', '\\"O;Ö', "\\ss;ß", "{\\ss};ß" ];
 		// prettier-ignore
-		const germanChars = ['{\\"u};ü', '{\\"a};ä', '{\\"o};ö', '{\\"U};Ü', '{\\"A};Ä', '{\\"O};Ö', '\\"u;ü', '\\"a;ä', '\\"o;ö', '\\"U;Ü', '\\"A;Ä', '\\"O;Ö', "\\ss;ß", "{\\ss};ß"];
-		// prettier-ignore
-		const otherChars = ["{\\~n};ñ", "{\\'a};á", "{\\'e};é", "{\\v c};č", "\\c{c};ç", "\\o{};ø", "\\^{i};î", '\\"{i};î', '\\"{i};ï', "{\\'c};ć", '\\"e;ë'];
+		const otherChars = [
+			"{\\~n};ñ",
+			"{\\'a};á",
+			"{\\'e};é",
+			"{\\v c};č",
+			"\\c{c};ç",
+			"\\o{};ø",
+			"\\^{i};î",
+			'\\"{i};î',
+			'\\"{i};ï',
+			"{\\'c};ć",
+			'\\"e;ë',
+		];
 		const specialChars = ["\\&;&", '``;"', "`;'", "\\textendash{};—", "---;—", "--;—"];
-		[...germanChars, ...otherChars, ...specialChars].forEach(pair => {
+		[...germanChars, ...otherChars, ...specialChars].forEach((pair) => {
 			const half = pair.split(";");
 			bibtexEntry = bibtexEntry.replaceAll(half[0], half[1]);
 		});
 
 		// extracts content of a BibTeX-field
+		/** @param {string} str */
 		function extract(str) {
-			str = str.split(" = ")[1];
-			return str.replace(/[{}]|,$/g, ""); // remove TeX-syntax & trailing comma
+			const prop = str.split(" = ")[1];
+			return prop.replace(/[{}]|,$/g, ""); // remove TeX-syntax & trailing comma
 		}
 
 		// parse BibTeX entry
@@ -324,7 +345,7 @@ function run(argv) {
 			citekey: _citekey,
 		};
 
-		bibtexEntry.split("\n").forEach(property => {
+		bibtexEntry.split("\n").forEach((property) => {
 			if (/\stitle =/i.test(property)) {
 				data.title = extract(property)
 					.replaceAll('"', "'") // to avoid invalid yaml, since title is wrapped in ""
@@ -362,6 +383,11 @@ function run(argv) {
 
 	//──────────────────────────────────────────────────────────────────────────────
 
+	/**
+	 * @param {any} annos
+	 * @param {{ title: any; ptype: any; firstPage?: string; author: any; year: any; keywords?: string; url: any; doi: any; citekey: any; }} metad
+	 * @param {string} outputPath
+	 */
 	function writeNote(annos, metad, outputPath) {
 		const isoToday = new Date().toISOString().slice(0, 10);
 
@@ -392,7 +418,7 @@ ${annos}`;
 		const fileExists = Application("Finder").exists(Path(obsidianJson));
 		if (fileExists) {
 			const vaults = JSON.parse(app.read(obsidianJson)).vaults;
-			isInObsidianVault = Object.values(vaults).some(vault => path.startsWith(vault.path));
+			isInObsidianVault = Object.values(vaults).some((vault) => path.startsWith(vault.path));
 		}
 
 		// open in Obsidian or reveal in Finder
