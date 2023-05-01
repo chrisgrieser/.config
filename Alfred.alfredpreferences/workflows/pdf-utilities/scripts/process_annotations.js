@@ -30,7 +30,7 @@ function toTitleCase(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** to make pdfannots and pdfannots2json compatible
+/** to make pdfannots and pdfannots2json compatible with the format required by this script
  * @param {object[]} nonStandardizedAnnos
  * @param {boolean} usePdfAnnots
  */
@@ -82,11 +82,11 @@ function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
 
 /** REQUIRED JSON signature of annotations expected by this file
  * @typedef {Object} Annotation
- * @property {"Free Text"|"Highlight"|"Underline"|"Free Comment"|"Image"|"Strikethrough"|"Heading"|"Question Callout"|"remove"} type – of the annotation
+ * @property {"Highlight"|"Underline"|"Free Comment"|"Image"|"Heading"|"Question Callout"|"remove"} type – of the annotation
  * @property {number} page - page number where the annotation is located
- * @property {string=} pageStr - as string for page ranges
+ * @property {string=} pageStr - page number as string, so it can represent page ranges
  * @property {string=} comment - user-written comment for the annotation
- * @property {string=} quote - text marked in the pdf
+ * @property {string=} quote - text marked in the pdf by Highlight or Underline
  * @property {string=} imagePath - path of image file
  * @property {string=} image - filename of image file
  */
@@ -94,7 +94,7 @@ function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
 /** @param {Annotation[]} annotations */
 function cleanQuoteKey(annotations) {
 	return annotations.map((a) => {
-		if (!a.quote) return a; // free comments have no text
+		if (!a.quote) return a;
 		a.quote = a.quote
 			.replace(/’’|‘‘|["„“”«»’]/g, "'") // quotation marks
 			.replace(/\. ?\. ?\./g, "…") // ellipsis
@@ -367,8 +367,8 @@ function extractMetadata(citekey, rawEntry) {
 	bibtexEntry.split("\n").forEach((property) => {
 		if (/\stitle =/i.test(property)) {
 			data.title = extract(property)
-				.replaceAll('"', "'") // to avoid invalid yaml, since title is wrapped in "'"
-				.replaceAll(":", "."); // to avoid invalid yaml
+				.replaceAll('"', "'") // avoid invalid yaml, since title is wrapped in "'"
+				.replaceAll(":", "."); // avoid invalid yaml
 		} else if (property.includes("@")) {
 			data.ptype = property.replace(/@(.*)\{.*/, "$1");
 		} else if (property.includes("pages =")) {
@@ -481,7 +481,7 @@ function run(argv) {
 	annos = extract.filteredArray;
 
 	// finish up
-	annos = insertImage4pdfannots2json(annos, citekey);
+	if (!usePdfannots) annos = insertImage4pdfannots2json(annos, citekey);
 	annos = splitOffUnderlines(annos, citekey);
 	annos = jsonToMd(annos, citekey);
 

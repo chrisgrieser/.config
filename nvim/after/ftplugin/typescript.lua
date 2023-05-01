@@ -5,7 +5,7 @@ local keymap = vim.keymap.set
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- typescript uses same config as javascript ftplugin
+-- make typescript inherit javascript config
 local javascriptConfig = fn.stdpath("config") .. "/after/ftplugin/javascript.lua"
 cmd.source(javascriptConfig)
 

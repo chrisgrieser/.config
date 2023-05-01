@@ -16,13 +16,6 @@ return {
 				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
-
-				-- before: () =>|		after: () => { | }
-				rule("%(.*%)%s*%=>$", " {  }", { "typescript", "javascript" })
-					:use_regex(true)
-					:set_end_pair_length(2),
-				-- WARN adding a rule with <space> as *ending* trigger will disable space
-				-- triggering `:abbrev` abbreviations
 			}
 
 			-- add brackets to cmp completions, e.g. "function" -> "function()"

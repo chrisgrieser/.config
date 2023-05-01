@@ -93,10 +93,10 @@ lspSettings.tsserver = {
 	typescript = jsAndTsSettings,
 	javascript = jsAndTsSettings,
 
-	-- enable jsdocs and typescript checking in js files without a `jsconfig.json` file
+	-- defaults when not using an explicit `[jt]sconfig.json`
 	implicitProjectConfiguration = {
-		checkJs = true,
-		target = "ES2021", -- makes `.replaceAll()` valid
+		checkJs = true, -- enables typechecking for javascript files, e.g. JXA
+		target = "ES2021", -- makes `.replaceAll()` and `new Set` valid
 	},
 }
 
