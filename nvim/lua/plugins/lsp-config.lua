@@ -97,7 +97,7 @@ lspSettings.tsserver = {
 	implicitProjectConfiguration = { checkJs = true },
 }
 
--- HACK load JXA globals for typescript
+-- HACK load JXA globals for tsserver
 vim.api.nvim_create_autocmd("LspAttach", {
 	pattern = "*.js",
 	callback = function(args)
