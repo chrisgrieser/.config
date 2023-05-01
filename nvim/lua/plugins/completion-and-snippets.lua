@@ -8,13 +8,7 @@ local s = {
 	zsh = { name = "zsh" },
 	codeium = { name = "codeium" },
 	snippets = { name = "luasnip" },
-	lsp = {
-		name = "nvim_lsp",
-		-- filter all "Text" types from the LSP
-		entry_filter = function(entry, _)
-			return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
-		end,
-	},
+	lsp = { name = "nvim_lsp" },
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },

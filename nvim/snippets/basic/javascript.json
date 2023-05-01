@@ -11,11 +11,6 @@
 		"prefix": "JSdoc type",
 		"body": "/** @type{${1|Array.<number>,Array.<string>|}} */"
 	},
-	"ignore (prettier)": {
-		"prefix": "ignore (prettier)",
-		"body": "// prettier-ignore",
-		"description": "Ignores the next block of code."
-	},
 	"ignore (rome formatter)": {
 		"prefix": "ignore (rome formatter)",
 		"body": "// rome-ignore format",
@@ -24,10 +19,6 @@
 	"ignore (tsignore)": {
 		"prefix": "ignore (tsignore)",
 		"body": "// @ts-ignore"
-	},
-	"globals (eslint)": {
-		"prefix": "globals (eslint)",
-		"body": "/* global ${1:var} */"
 	},
 	"fall-through (switch, eslint)": {
 		"prefix": "fall through (switch, eslint)",

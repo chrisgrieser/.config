@@ -1,7 +1,11 @@
+# yaml-language-server: $schema=https://json.schemastore.org/prettierrc.json
+# explicitly setting schema required, since using non-standard filename
+#───────────────────────────────────────────────────────────────────────────────
 # https://prettier.io/docs/en/options.html
-# INFO only used for yaml files: https://github.com/mikefarah/yq/issues/515
-
+# INFO only used for yaml and html files: https://github.com/mikefarah/yq/issues/515
 #───────────────────────────────────────────────────────────────────────────────
 
 printWidth: 120
 quoteProps: consistent
+tabWidth: 2
+useTabs: true # automatically ignored in yaml since yaml requires spaces

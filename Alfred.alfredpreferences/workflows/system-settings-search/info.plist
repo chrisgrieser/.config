@@ -736,19 +736,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>EA53A7BA-07DA-4429-8B26-5002562C3AF9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0A2D670C-A6E8-4D7F-B338-0174299142F9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>EC2F7B52-566A-4DD8-BC3A-3D15153C540D</key>
 		<array>
 			<dict>
@@ -1089,7 +1076,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>date and time</string>
+				<string>date||time</string>
 				<key>subtext</key>
 				<string>System Settings → General → Date &amp; Time</string>
 				<key>text</key>
@@ -1127,7 +1114,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>dock</string>
+				<string>dock||desktop</string>
 				<key>subtext</key>
 				<string>System Settings → Desktop &amp; Dock</string>
 				<key>text</key>
@@ -1156,27 +1143,6 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>0A2D670C-A6E8-4D7F-B338-0174299142F9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>desktop</string>
-				<key>subtext</key>
-				<string>System Settings → Desktop &amp; Dock</string>
-				<key>text</key>
-				<string>Desktop &amp; Dock</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>EA53A7BA-07DA-4429-8B26-5002562C3AF9</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1642,7 +1608,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>printers and scanners</string>
+				<string>printers||scanners</string>
 				<key>subtext</key>
 				<string>System Settings → Printers &amp; Scanners</string>
 				<key>text</key>
@@ -2022,7 +1988,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>wi-fi</string>
+				<string>wi-fi||wifi||wlan</string>
 				<key>subtext</key>
 				<string>System Settings → Wi-Fi</string>
 				<key>text</key>
@@ -2117,7 +2083,7 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>2445</real>
+			<real>2325</real>
 		</dict>
 		<key>0A2D670C-A6E8-4D7F-B338-0174299142F9</key>
 		<dict>
@@ -2131,7 +2097,7 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>2085</real>
+			<real>1965</real>
 		</dict>
 		<key>10BB0E7F-7A7B-47CA-B6BF-A2E88447DBDA</key>
 		<dict>
@@ -2147,7 +2113,7 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3040</real>
+			<real>2920</real>
 		</dict>
 		<key>13F012E9-4D28-4459-9E50-AF9A0A3C5C54</key>
 		<dict>
@@ -2161,14 +2127,14 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>3070</real>
+			<real>2950</real>
 		</dict>
 		<key>1C4A3BBD-4972-4628-B315-5018BA3533E6</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1755</real>
+			<real>1635</real>
 		</dict>
 		<key>1F30947A-6478-415C-8496-35E5FF7E3183</key>
 		<dict>
@@ -2177,21 +2143,21 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3275</real>
+			<real>3155</real>
 		</dict>
 		<key>24B029BA-B491-4A7C-9CE0-B686D911DB69</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2475</real>
+			<real>2355</real>
 		</dict>
 		<key>2CB67EEF-BC29-4898-AE0C-34104B40FE99</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1150</real>
+			<real>1030</real>
 		</dict>
 		<key>35325F14-3A02-48C2-8193-76B67651119B</key>
 		<dict>
@@ -2225,14 +2191,14 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1725</real>
+			<real>1605</real>
 		</dict>
 		<key>3E2E649B-2FAC-47AF-9A1A-6E37AAD127BE</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>3190</real>
+			<real>3070</real>
 		</dict>
 		<key>3E5DFC7D-070E-4320-8410-E9670DFF38E8</key>
 		<dict>
@@ -2241,21 +2207,21 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>2685</real>
+			<real>2565</real>
 		</dict>
 		<key>4103FEE5-FE83-4AE9-AB7E-ECF6B857E94D</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2115</real>
+			<real>1995</real>
 		</dict>
 		<key>418001B9-F077-4607-AEF8-0CFD7291C229</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3390</real>
+			<real>3270</real>
 		</dict>
 		<key>4184F0E9-B4CF-4A6F-AD11-864009D6A8B5</key>
 		<dict>
@@ -2264,14 +2230,14 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1965</real>
+			<real>1845</real>
 		</dict>
 		<key>47194840-EFFD-41C6-A534-A8C1E72054B6</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1875</real>
+			<real>1755</real>
 		</dict>
 		<key>48EAE7F8-F0CA-4421-8671-05CEA6773F6D</key>
 		<dict>
@@ -2285,77 +2251,77 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3895</real>
+			<real>3775</real>
 		</dict>
 		<key>5C30707B-B5FD-4FB9-BFE1-70B378C691F6</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1845</real>
+			<real>1725</real>
 		</dict>
 		<key>65BD6A90-B01C-4699-ACA2-9A58F7949E26</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2715</real>
+			<real>2595</real>
 		</dict>
 		<key>753E9EF2-1E25-4B02-BD3C-E3BD78988871</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>2205</real>
+			<real>2085</real>
 		</dict>
 		<key>75E7AEB3-32A3-4654-812F-AA40D6A56427</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1120</real>
+			<real>1000</real>
 		</dict>
 		<key>760F70B4-1DAF-4342-93FC-13273C4A9207</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3160</real>
+			<real>3040</real>
 		</dict>
 		<key>791156A0-115E-4EC5-891C-494DCCF5A7A9</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3625</real>
+			<real>3505</real>
 		</dict>
 		<key>7C5D0F9E-0580-4CF5-8346-B333F6F1BB53</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3505</real>
+			<real>3385</real>
 		</dict>
 		<key>7CF54EAA-86FE-48E7-A445-A29FBF0CB443</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2235</real>
+			<real>2115</real>
 		</dict>
 		<key>8B7B3372-147B-42C1-9FCC-63D3C98B2227</key>
 		<dict>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3775</real>
+			<real>3655</real>
 		</dict>
 		<key>8D037CC0-0F11-4AA9-89F5-CB529CF3FED1</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>2565</real>
+			<real>2445</real>
 		</dict>
 		<key>8DF0DD15-2F02-4FAA-A0EF-B435B4E86A6C</key>
 		<dict>
@@ -2369,14 +2335,14 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3420</real>
+			<real>3300</real>
 		</dict>
 		<key>954C1736-08E0-4113-A5A2-4914FF0C15C8</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>2920</real>
+			<real>2800</real>
 		</dict>
 		<key>98B79881-C483-4E18-B1F2-21BDAFB920AA</key>
 		<dict>
@@ -2404,28 +2370,28 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>2325</real>
+			<real>2205</real>
 		</dict>
 		<key>A1E8573B-020C-4E80-AF45-1E9F1F06C34A</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1635</real>
+			<real>1515</real>
 		</dict>
 		<key>A2ECA8CC-8F6A-41E9-A1D5-B95E557E266E</key>
 		<dict>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3535</real>
+			<real>3415</real>
 		</dict>
 		<key>A425F3D3-7282-40EE-88B7-DBBE4113E2EE</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2595</real>
+			<real>2475</real>
 		</dict>
 		<key>A86C58CA-97B6-4C26-B2D0-4F9DAC129FE4</key>
 		<dict>
@@ -2434,7 +2400,7 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1240</real>
+			<real>1120</real>
 		</dict>
 		<key>B7B9D159-E1DE-4C44-B7A9-8C7577CD5DBE</key>
 		<dict>
@@ -2448,84 +2414,77 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2835</real>
+			<real>2715</real>
 		</dict>
 		<key>BF58136F-A1F6-40D4-B6E7-74BFA588DAD4</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3745</real>
+			<real>3625</real>
 		</dict>
 		<key>C3A62EE5-CC39-4509-8D4B-77BDC6C34961</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1605</real>
+			<real>1485</real>
 		</dict>
 		<key>C6E30C4C-ADB4-4F06-8B93-847664C709C2</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1995</real>
+			<real>1875</real>
 		</dict>
 		<key>C9EA832B-7612-48A7-87AF-E8AA452D13D1</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>2805</real>
+			<real>2685</real>
 		</dict>
 		<key>CE6F2E60-0B14-4A59-9089-2EED137CDDC9</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1355</real>
+			<real>1235</real>
 		</dict>
 		<key>D6E98923-3178-4A19-BCD5-35F5C3E5814D</key>
 		<dict>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3655</real>
+			<real>3535</real>
 		</dict>
 		<key>D866752D-24AC-496F-85DE-EB0DE026C284</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1270</real>
+			<real>1150</real>
 		</dict>
 		<key>DD1926A0-F642-425A-ADD7-8ED32692EE46</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1505</real>
+			<real>1385</real>
 		</dict>
 		<key>E1063F88-2288-4DD3-AA7A-D014CFA78D28</key>
 		<dict>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3305</real>
+			<real>3185</real>
 		</dict>
 		<key>E27A6F53-4CD3-4FBB-8A7C-27AE4BEBE358</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1385</real>
-		</dict>
-		<key>EA53A7BA-07DA-4429-8B26-5002562C3AF9</key>
-		<dict>
-			<key>xpos</key>
-			<real>60</real>
-			<key>ypos</key>
-			<real>1000</real>
+			<real>1265</real>
 		</dict>
 		<key>EC2F7B52-566A-4DD8-BC3A-3D15153C540D</key>
 		<dict>
@@ -2534,14 +2493,14 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1475</real>
+			<real>1355</real>
 		</dict>
 		<key>ECE5D09E-5A1E-4A62-B176-BCD01629B971</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2950</real>
+			<real>2830</real>
 		</dict>
 		<key>EEE44FA0-2C27-4B2A-B1AD-EF2CC79BCBF9</key>
 		<dict>
@@ -2562,14 +2521,14 @@ Open System Settings panes via the workflow’s keywords: `about`, `accessibilit
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2355</real>
+			<real>2235</real>
 		</dict>
 		<key>F81A69FD-8225-4A7D-8196-3143F85F9300</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3865</real>
+			<real>3745</real>
 		</dict>
 		<key>F90E8A37-DC7E-4213-974D-30FDDC830142</key>
 		<dict>

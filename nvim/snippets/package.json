@@ -81,15 +81,21 @@
 			},
 			{
 				"language": [
-					"json"
+					"yaml"
 				],
-				"path": "./project-specific/vscode-snippets.json"
+				"path": "./basic/yaml.json"
 			},
 			{
 				"language": [
 					"yaml"
 				],
 				"path": "./project-specific/karabiner-modifications.json"
+			},
+			{
+				"language": [
+					"json"
+				],
+				"path": "./project-specific/vscode-snippets.json"
 			},
 			{
 				"language": [

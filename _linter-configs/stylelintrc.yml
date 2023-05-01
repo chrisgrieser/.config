@@ -1,3 +1,6 @@
+# yaml-language-server: $schema=https://json.schemastore.org/stylelintrc.json
+# explicitly setting schema required, since using non-standard filename
+#───────────────────────────────────────────────────────────────────────────────
 extends: [stylelint-config-recommended]
 plugins:
   - stylelint-order
