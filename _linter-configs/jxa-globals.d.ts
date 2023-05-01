@@ -11,10 +11,12 @@ declare const Application: {
 	(appname: string): any;
 };
 
+declare const Path: (filepath: string) => string;
+
 declare const delay: (seconds: number) => void;
 
 declare const $: {
-	getenv: (env_var: string) => string;
+	getenv: (envVar: string) => string;
 	NSFileManager: any;
 	NSUTF8StringEncoding: any;
 	NSProcessInfo: any;

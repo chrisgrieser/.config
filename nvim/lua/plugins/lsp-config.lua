@@ -94,7 +94,10 @@ lspSettings.tsserver = {
 	javascript = jsAndTsSettings,
 
 	-- enable jsdocs and typescript checking in js files without a `jsconfig.json` file
-	implicitProjectConfiguration = { checkJs = true },
+	implicitProjectConfiguration = {
+		checkJs = true,
+		target = "ES2021", -- makes `.replaceAll()` valid
+	},
 }
 
 -- HACK load JXA globals for tsserver

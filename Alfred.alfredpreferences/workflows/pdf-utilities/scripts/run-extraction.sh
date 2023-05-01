@@ -13,7 +13,7 @@ if [[ ! -f "$bibtex_library_path" ]]; then
 	exit 1
 fi
 
-if [[ ! "$pdf_path" == *.pdf ]]; then
+if [[ "$pdf_path" != *.pdf ]]; then
 	echo "⚠️ Not a .pdf file."
 	exit 1
 fi

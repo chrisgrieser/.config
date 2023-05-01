@@ -74,6 +74,7 @@
 	"read file": {
 		"prefix": "read file",
 		"body": [
+			"/** @param {string} path */",
 			"function readFile(path) {",
 			"\tconst data = $.NSFileManager.defaultManager.contentsAtPath(path);",
 			"\tconst str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);",
@@ -84,6 +85,7 @@
 	"write file": {
 		"prefix": "write file",
 		"body": [
+			"/** @param {string} text @param {string} file */",
 			"function writeToFile(filepath, text) {",
 			"\tconst str = $.NSString.alloc.initWithUTF8String(text);",
 			"\tstr.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);",

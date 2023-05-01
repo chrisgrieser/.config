@@ -16,6 +16,7 @@
 			"ObjC",
 			"Application",
 			"delay",
+			"Path",
 			"$"
 		]
 	},
@@ -23,12 +24,14 @@
 		"enabled": true
 	},
 	"linter": {
+		"ignore": ["*globals.d.ts"],
 		"rules": {
 			"all": true,
 			"style": {
 				"useBlockStatements": "off",
 				"useConst": "warn",
-				"useTemplate": "off"
+				"useTemplate": "off",
+				"useSingleVarDeclarator": "off"
 			}
 		}
 	}
