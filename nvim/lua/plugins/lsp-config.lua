@@ -111,7 +111,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end, 1)
 	end,
 })
--- teh 
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
 lspOnAttach.tsserver = function(client, _)
