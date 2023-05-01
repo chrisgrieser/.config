@@ -247,6 +247,7 @@ return {
 					severity = { min = vim.diagnostic.severity.WARN },
 					source = false, -- already handled by format function
 					format = function(diag) return fmt(diag) end,
+					spacing = 1,
 				},
 				float = {
 					format = function(diag) return fmt(diag) end,

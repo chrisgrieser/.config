@@ -128,12 +128,13 @@ exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nmap M :mergeLines
 
 " Make o and O respect context
-exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
 exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
 nmap &a& :blankAbove
+nmap O &a&i
+
+exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
 nmap &b& :blankBelow
 nmap o &b&i
-nmap O &a&i
 
 " Add Blank Line above/below
 " HACK not using mz...`z since m remapped

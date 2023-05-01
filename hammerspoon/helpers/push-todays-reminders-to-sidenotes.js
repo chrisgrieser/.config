@@ -4,18 +4,17 @@ function run() {
 	ObjC.import("stdlib");
 	const sidenotes = Application("Sidenotes");
 	const reminders = Application("Reminders");
-	reminders.includeStandardAdditions = true;
 
 	const today = new Date();
 	const folder = sidenotes.folders.byName("Base");
-	const delayMs = 0.05;
+	const delaySecs = 0.05;
 
 	// https://leancrew.com/all-this/2017/08/my-jxa-problem/
 	// https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
 	const todaysTasks = reminders.defaultList().reminders.whose({ dueDate: { _lessThan: today } });
 
 	if (todaysTasks.length === 0) {
-		reminders.quit();
+		reminders.quit();;;
 		return;
 	}
 
@@ -23,8 +22,15 @@ function run() {
 	// - backwards, to not change the indices at loop runtime
 	for (let i = todaysTasks.length - 1; i >= 0; i--) {
 		const task = todaysTasks[i];
-		let newNoteContent = task.name();
-		if (task.body()) newNoteContent += "\n" + task.body();
+		let newNoteContent
+		const body = task.body()
+		const title = task.name()
+
+		if (body) {
+			newNoteContent = `#${title}\n${body}`
+		} else {
+			newNoteContent = title
+		}
 
 		sidenotes.createNote({
 			folder: folder,
@@ -34,10 +40,10 @@ function run() {
 		task.delete();
 	}
 
-	delay(delayMs);
+	delay(delaySecs);
 	reminders.quit();
 
 	// close sidenotes again
-	delay(delayMs);
+	delay(delaySecs);
 	Application("System Events").keystroke("w", { using: ["command down"] });
 }
