@@ -215,15 +215,15 @@ function mergeQuotes(annos) {
 		if (annos[i].comment !== "+") continue;
 		let connector = "";
 
+		// across pages
 		if (annos[i - 1].page !== annos[i].page) {
-			// if across pages
 			annos[i - 1].page += "–" + annos[i].page; // merge page numbers
 			connector = " (…) ";
 		}
 		annos[i - 1].quote += connector + annos[i].quote; // merge quotes
 
 		annos.splice(i, 1); // remove current element
-		i--; // to move index back, since element isn't there anymore
+		i--; // move index back, so merging in case of consecutive "+" works
 	}
 	return annos;
 }
@@ -265,8 +265,7 @@ function questionCallout(annotations) {
 	return [...pseudoAdmos, ...annoArr];
 }
 
-/**
- * images / rectangle annotations (pdfannots2json only)
+/** images / rectangle annotations (pdfannots2json only)
  * @param {any[]} annotations
  * @param {string} filename
  */
@@ -320,7 +319,7 @@ function transformTag4yaml(annotations, keywords) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /**
- * @param {any} citekey
+ * @param {string} citekey
  * @param {string} rawEntry
  */
 function extractMetadata(citekey, rawEntry) {
@@ -365,13 +364,13 @@ function extractMetadata(citekey, rawEntry) {
 		} else if (property.includes("@")) data.ptype = property.replace(/@(.*)\{.*/, "$1");
 		else if (property.includes("pages =")) {
 			const pages = property.match(/\d+/g);
-			data.firstPage = pages ? parseInt(pages[0]) : -999;
+			if (pages) data.firstPage = parseInt(pages[0]);
 		} else if (/\syear =/i.test(property)) {
 			const year = property.match(/\d{4}/g);
-			data.year = year ? parseInt(year[0]) : 0;
+			if (year) data.year = parseInt(year[0]);
 		} else if (property.includes("date =")) {
 			const year = property.match(/\d{4}/g);
-			data.year = year ? parseInt(year[0]) : 0;
+			if (year) data.year = parseInt(year[0]);
 		} else if (property.includes("author =")) data.author = extract(property);
 		else if (property.includes("keywords =")) {
 			data.keywords = extract(property).replaceAll(", ", ",").replaceAll(" ", "-"); // no spaces allowed in tags
@@ -385,10 +384,11 @@ function extractMetadata(citekey, rawEntry) {
 	if (data.firstPage === -999) {
 		let response, validInput;
 		do {
-			response = app.displayDialog(
-				"BibTeX Entry does not include page numbers.\n\nPlease enter the page number of the first PDF page.",
-				{ defaultAnswer: "", buttons: ["OK"], defaultButton: "OK" },
-			);
+			response = app.displayDialog("BibTeX Entry has no page numbers.\n\nEnter true page number of *first* PDF page:", {
+				defaultAnswer: "",
+				buttons: ["OK"],
+				defaultButton: "OK",
+			});
 			validInput = response.textReturned.match(/^-?\d+$/);
 		} while (!validInput);
 		data.firstPage = parseInt(response.textReturned);
