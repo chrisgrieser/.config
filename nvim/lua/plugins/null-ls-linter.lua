@@ -14,6 +14,7 @@ local lintersAndFormatters = {
 	"selene", -- lua
 	"stylua", -- lua
 	"yq", -- ensure installation via mason, but not actually used for formatting
+	"prettier", -- only used for yaml and html https://github.com/mikefarah/yq/issues/515
 	"rome", -- also an LSP; the lsp does diagnostics, the CLI via null-ls does formatting
 	-- "stylelint", -- included, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 }
@@ -78,6 +79,12 @@ local function nullSources()
 			-- INFO not dynamically determining config file, since that breaks
 			-- selene when switching workspaces
 			extra_args = { "--config", linterConfig .. "/selene.toml" },
+		},
+
+		-- PRETTIER: YAML/HTML
+		-- INFO use only for yaml/html, since rome can handle the rest
+		builtins.formatting.prettier.with {
+			filetypes = { "yaml", "html" },
 		},
 
 		-- YAML

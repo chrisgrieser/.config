@@ -1,5 +1,4 @@
 // https://code.visualstudio.com/docs/nodejs/working-with-javascript#_global-variables-and-type-checking
-
 //──────────────────────────────────────────────────────────────────────────────
 
 declare const ObjC: {
@@ -11,7 +10,6 @@ declare const Application: {
 	currentApplication: Function;
 	(appname: string): any;
 };
-
 
 declare const delay: (seconds: number) => void;
 
