@@ -8,6 +8,10 @@ browserID="com.vivaldi.Vivaldi"
 videoplayerID="com.colliderli.iina"
 editorID="com.apple.automator.Neovim"
 obsiOpenerID="com.apple.automator.Obsidian-Opener"
+unarchiveID="com.apple.archiveutility"
+
+# Archives
+duti -s "$unarchiveID" zip all
 
 # Obsidian
 duti -s "$obsiOpenerID" md all

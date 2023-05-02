@@ -18,7 +18,7 @@ INFO_WINDOW=0
 
 case $APP in
 "BetterZip")
-	cp -f "$CUSTOM_ICON_FOLDER/BetterZip.icns" "$APP.app/Contents/Resources/$APP.icns"
+	cp -f "$CUSTOM_ICON_FOLDER/BetterZip 2.icns" "$APP.app/Contents/Resources/$APP.icns"
 	;;
 "Neovide" | "neovide")
 	cp -f "$CUSTOM_ICON_FOLDER/Neovide 1.icns" "$APP.app/Contents/Resources/$APP.icns"
