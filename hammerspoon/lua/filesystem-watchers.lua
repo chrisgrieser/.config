@@ -1,6 +1,6 @@
 local pw = hs.pathwatcher.new
-local u = require("lua.utils")
 local env = require("lua.environment-vars")
+local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
 ---is in sub-directory instead of directly in the folder
