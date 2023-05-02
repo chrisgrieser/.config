@@ -16,11 +16,12 @@ return {
 			vim.g.undotree_SetFocusWhenToggle = 1
 			vim.g.undotree_DiffCommand = "delta"
 			vim.g.undotree_HelpLine = 1
+
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "undotree",
 				callback = function()
 					vim.keymap.set("n", "<D-w>", ":UndotreeToggle<CR>", { buffer = true })
-					vim.opt_local.listchars:append("space: ")
+					vim.opt_local.list = false
 				end,
 			})
 		end,

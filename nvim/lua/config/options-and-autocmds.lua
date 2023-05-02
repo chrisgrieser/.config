@@ -159,8 +159,6 @@ opt.listchars = {
 
 autocmd("BufReadPost", {
 	callback = function()
-		if bo.filetype == "undotree" then return end
-
 		-- run delayed, to ensure it runs after `:GuessIndent`
 		vim.defer_fn(function()
 			opt_local.listchars = vim.opt_global.listchars:get() -- copy the global
