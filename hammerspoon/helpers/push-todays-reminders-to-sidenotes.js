@@ -1,5 +1,6 @@
 #!/usr/bin/env osascript -l JavaScript
 
+// rome-ignore lint/correctness/noUnusedVariables: run
 function run() {
 	ObjC.import("stdlib");
 	const sidenotes = Application("Sidenotes");
@@ -22,15 +23,9 @@ function run() {
 	// - backwards, to not change the indices at loop runtime
 	for (let i = todaysTasks.length - 1; i >= 0; i--) {
 		const task = todaysTasks[i];
-		let newNoteContent;
 		const body = task.body();
 		const title = task.name();
-
-		if (body) {
-			newNoteContent = `#${title}\n${body}`;
-		} else {
-			newNoteContent = title;
-		}
+		const newNoteContent = body ? `# ${title}\n${body}` : title;
 
 		sidenotes.createNote({
 			folder: folder,
