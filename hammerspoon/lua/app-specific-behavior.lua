@@ -87,7 +87,7 @@ Wf_browser_all = u.wf
 --------------------------------------------------------------------------------
 -- NEOVIM / NEOVIDE
 
--- Add dots when copypasting to from dev tools
+-- Add dots when copypasting from dev tools
 local function addCssSelectorLeadingDot()
 	if
 		not u.appRunning("neovide")
@@ -165,9 +165,10 @@ Wf_zoom = u.wf.new("zoom.us"):subscribe(u.wf.windowCreated, function()
 	u.closeTabsContaining("zoom.us")
 	u.runWithDelays(0.5, function()
 		local zoom = u.app("zoom.us")
-		if not (zoom and zoom:findWindow("^Zoom$")) then return end
-		if #Wf_zoom:getWindows() < 2 then return end
-		zoom:findWindow("^Zoom$"):close()
+		if not zoom then return end
+		local secondWin = zoom:findWindow("^Zoom$") or zoom:findWindow("^Login$")
+		if not (secondWin) or #Wf_zoom:getWindows() < 2 then return end
+		secondWin:close()
 	end)
 end)
 

@@ -210,12 +210,15 @@ matches:
   - trigger: yb
     replace: by
     word: true
+    propagate_casing: true
   - trigger: ahrd
     replace: hard
     word: true
+    propagate_casing: true
   - trigger: nru
     replace: nur
     word: true
+    propagate_casing: true
   - trigger: sjon
     replace: json
     propagate_casing: true
@@ -249,3 +252,6 @@ matches:
     replace: separate
     propagate_casing: true
     word: true
+  # https://espanso.org/docs/matches/regex-triggers#arguments
+  - regex: "\\Bsich"
+    replace: "isch"
