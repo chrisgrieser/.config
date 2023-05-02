@@ -34,21 +34,22 @@ SidenotesWatcher = u.aw
 		-- i.e., run on any event related to sidenotes
 		if appName == "SideNotes" then updateCounter() end
 
-		-- HIDE WHEN SWITCHING TO ANY OTHER APP
-		-- (HACK since SideNotes can only be hidden on mouse click, but not on alt-tab)
-		if appName ~= "SideNotes" and event == u.aw.activated then return end
-		u.runWithDelays(0.05, function()
-			-- INFO if sidenotes glitches, it is the "Hot Side" setting causing
-			-- glitches when mouse is close, not Hammerspoon
-			if u.isFront { "SideNotes", "Alfred", "CleanShot X", "Espanso" } then return end
-			local app = u.app("SideNotes")
-			if app then app:hide() end
-		end)
-
 		-- enlarge on startup
-		if appName == "SideNotes" and event == u.aw.launched then
+		if appName == "SideNotes" and (event == u.aw.launched or event == u.aw.launching) then
 			local win = appObj:mainWindow()
 			wu.moveResize(win, wu.sideNotesWide)
+		end
+
+		-- HIDE WHEN SWITCHING TO ANY OTHER APP
+		-- (HACK since SideNotes can only be hidden on mouse click, but not on alt-tab)
+		if appName ~= "SideNotes" and event == u.aw.activated then
+			u.runWithDelays(0.05, function()
+				-- INFO if sidenotes glitches, it is the "Hot Side" setting causing
+				-- glitches when mouse is close, not Hammerspoon
+				if u.isFront { "SideNotes", "Alfred", "CleanShot X", "Espanso" } then return end
+				local app = u.app("SideNotes")
+				if app then app:hide() end
+			end)
 		end
 	end)
 	:start()

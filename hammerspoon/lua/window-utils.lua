@@ -375,9 +375,9 @@ local function homeAction()
 		moveCurWinToOtherDisplay()
 	elseif u.appRunning("zoom.us") then
 		hs.alert("🔈/🔇") -- toggle mute
+		u.keystroke({ "shift", "command" }, "A", 1, u.app("zoom.us"))
 	elseif u.appRunning("Twitter") then
 		M.twitterScrollUp()
-		u.keystroke({ "shift", "command" }, "A", 1, u.app("zoom.us"))
 	else
 		hs.alert("<Nop>")
 	end

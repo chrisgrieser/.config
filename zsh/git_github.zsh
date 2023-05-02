@@ -282,10 +282,10 @@ function nuke {
 	cd ..
 
 	rm -rvf "$local_repo_path"
-	print "\033[1;34m--------------"
+	printf "\033[1;34m--------------------------------\n"
 	echo "Local repo removed."
 	echo "Cloning repo again from remote… (with depth 10)"
-	print "--------------\033[0m"
+	printf "--------------------------------\n\033[0m"
 
 	git clone --depth=10 "$SSH_REMOTE" "$local_repo_path" && cd "$local_repo_path" || return 1
 	separator
