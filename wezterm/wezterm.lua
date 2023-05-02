@@ -196,7 +196,7 @@ local config = {
 	max_fps = isAtMother and 40 or 60,
 	native_macos_fullscreen_mode = false,
 	-- if scrollbar enabled, "rights" controls scrollbar width
-	window_padding = { left = "0.5cell", right = "1.2cell", top = "0.2cell", bottom = "0.4cell" },
+	window_padding = { left = "0.5cell", right = "1cell", top = "0.3cell", bottom = "0.3cell" },
 
 	-- Scroll
 	enable_scroll_bar = true,
