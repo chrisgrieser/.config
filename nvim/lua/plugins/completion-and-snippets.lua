@@ -12,7 +12,8 @@ local s = {
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },
-	diag_codes = { name = "diag_codes" },
+
+	diag_codes = { name = "diag-codes", option = { in_comment = true } },
 }
 local source_icons = {
 	treesitter = "",
@@ -27,16 +28,16 @@ local source_icons = {
 	path = "",
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
-	diag_codes = "",
+	["diag-codes"] = "",
 }
 local defaultSources = {
 	s.snippets,
 	s.codeium,
 	s.lsp,
+	s.diag_codes,
 	s.emojis,
 	s.treesitter,
 	s.buffer,
-	s.diag_codes,
 }
 local kind_icons = {
 	Text = "",
@@ -175,12 +176,12 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.snippets,
 			s.lsp,
+			s.diag_codes,
 			s.codeium,
 			s.nerdfont, -- add nerdfont for config
 			s.emojis,
 			s.treesitter,
 			s.buffer,
-			s.diag_codes,
 		},
 	})
 
@@ -188,12 +189,12 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.snippets,
 			s.lsp,
+			s.diag_codes,
 			s.codeium,
 			s.nerdfont, -- add nerdfont for config
 			s.emojis,
 			s.treesitter,
 			s.buffer,
-			s.diag_codes,
 		},
 	})
 
@@ -201,9 +202,9 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.snippets,
 			s.lsp,
+			s.diag_codes,
 			s.codeium,
 			s.emojis,
-			s.diag_codes,
 			-- buffer and treesitter too slow on big files
 		},
 	})
@@ -211,10 +212,11 @@ local function filetypeCompletionConfig()
 	cmp.setup.filetype("markdown", {
 		sources = cmp.config.sources {
 			s.snippets,
+			s.diag_codes,
+			s.treesitter,
 			s.path, -- e.g. image paths
 			s.lsp,
 			s.emojis,
-			s.diag_codes,
 		},
 	})
 
@@ -222,20 +224,20 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.lsp, -- prioritize schemas
 			s.snippets,
+			s.diag_codes,
 			s.treesitter, -- useful when no schemas
 			s.emojis,
 			s.buffer,
-			s.diag_codes,
 		},
 	})
 	cmp.setup.filetype("json", {
 		sources = cmp.config.sources {
-			s.lsp,
+			s.lsp, -- prioritize schemas
 			s.snippets,
+			s.diag_codes,
 			s.treesitter, -- useful when no schema
 			s.emojis,
 			s.buffer,
-			s.diag_codes,
 		},
 	})
 
@@ -250,13 +252,13 @@ local function filetypeCompletionConfig()
 			s.snippets,
 			s.zsh, -- completion from zsh itself
 			s.lsp,
+			s.diag_codes,
 			s.path,
 			s.codeium,
 			s.treesitter,
 			s.buffer,
 			s.emojis,
 			s.nerdfont, -- used for some configs
-			s.diag_codes,
 		},
 	})
 
