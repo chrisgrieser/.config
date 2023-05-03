@@ -13,7 +13,7 @@ local s = {
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },
 
-	diag_codes = { name = "diag-codes", option = { in_comment = true } },
+	diag_codes = { name = "diag-codes", option = { in_comment = false } },
 }
 local source_icons = {
 	treesitter = "",
