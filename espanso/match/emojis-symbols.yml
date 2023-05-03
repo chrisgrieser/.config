@@ -32,8 +32,6 @@ matches:
     replace: ℹ️
   - trigger: "!new"
     replace: 🆕
-  - trigger: "!square"
-    replace: ▪︎
   - trigger: "!warn"
     replace: ⚠️
   - trigger: "->"
@@ -43,8 +41,9 @@ matches:
     replace: ➡️
   - trigger: "!ampel"
     replace: 🔴🟡🟢
-  - trigger: " mm"
-    replace: " 🙈"
+  - trigger: "mm"
+    replace: "🙈"
+    word: true
   - trigger: "!eyes"
     replace: 👁️👄👁️
 
