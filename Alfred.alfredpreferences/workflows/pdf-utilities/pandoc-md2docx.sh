@@ -9,4 +9,4 @@ INPUT="$*"
 OUTPUT="${INPUT%.*}_CG.docx"
 
 pandoc "$INPUT" --output="$OUTPUT" --defaults="md2docx" 2>&1 &&
-	open "$OUTPUT" ; open -R "$OUTPUT"
+	open -R "$OUTPUT"

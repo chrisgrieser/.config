@@ -11,4 +11,4 @@ INPUT="$*"
 OUTPUT="${INPUT%.*}_CG.pdf"
 
 pandoc "$INPUT" --output="$OUTPUT" --defaults="md2pdf" 2>&1 &&
-	open "$OUTPUT" ; open -R "$OUTPUT"
+	open -R "$OUTPUT"
