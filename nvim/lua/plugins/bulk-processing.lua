@@ -5,17 +5,6 @@ return {
 		-- already set via lualine component
 		init = function() vim.g.VM_set_statusline = 0 end,
 	},
-	{ -- multiple search & replace
-		"AckslD/muren.nvim",
-		lazy = true, -- loaded by keymap
-		opts = {
-			create_commands = false,
-			patterns_width = 30,
-			patterns_height = 10,
-			options_width = 15,
-			preview_height = 12,
-		},
-	},
 	{ -- structural search & replace
 		"cshuaimin/ssr.nvim",
 		lazy = true,
@@ -36,7 +25,7 @@ return {
 	},
 	{ -- editable quickfix list
 		-- my fork, pending on PR: https://github.com/gabrielpoca/replacer.nvim/pull/12
-		"chrisgrieser/replacer.nvim",
+		"gabrielpoca/replacer.nvim",
 		lazy = true,
 		-- add keymaps for quicker closing + confirmation
 		init = function()

@@ -12,6 +12,7 @@ local s = {
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },
+	diag_codes = { name = "diag_codes" },
 }
 local source_icons = {
 	treesitter = "",
@@ -23,9 +24,10 @@ local source_icons = {
 	luasnip = "󰞘",
 	emoji = "󰇵",
 	nerdfont = "󰇳",
+	path = "",
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
-	path = "",
+	diag_codes = "",
 }
 local defaultSources = {
 	s.snippets,
@@ -34,6 +36,7 @@ local defaultSources = {
 	s.emojis,
 	s.treesitter,
 	s.buffer,
+	s.diag_codes,
 }
 local kind_icons = {
 	Text = "",
@@ -100,7 +103,6 @@ local function cmpconfig()
 		},
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
-			["<Right>"] = cmp.mapping.complete_common_string(),
 			["<D-Esc>"] = cmp.mapping.complete(), -- like with macOS autocomplete
 			["<C-e>"] = cmp.mapping.abort(),
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
@@ -178,6 +180,7 @@ local function filetypeCompletionConfig()
 			s.emojis,
 			s.treesitter,
 			s.buffer,
+			s.diag_codes,
 		},
 	})
 
@@ -190,6 +193,7 @@ local function filetypeCompletionConfig()
 			s.emojis,
 			s.treesitter,
 			s.buffer,
+			s.diag_codes,
 		},
 	})
 
@@ -199,6 +203,7 @@ local function filetypeCompletionConfig()
 			s.lsp,
 			s.codeium,
 			s.emojis,
+			s.diag_codes,
 			-- buffer and treesitter too slow on big files
 		},
 	})
@@ -209,6 +214,7 @@ local function filetypeCompletionConfig()
 			s.path, -- e.g. image paths
 			s.lsp,
 			s.emojis,
+			s.diag_codes,
 		},
 	})
 
@@ -219,6 +225,7 @@ local function filetypeCompletionConfig()
 			s.treesitter, -- useful when no schemas
 			s.emojis,
 			s.buffer,
+			s.diag_codes,
 		},
 	})
 	cmp.setup.filetype("json", {
@@ -228,6 +235,7 @@ local function filetypeCompletionConfig()
 			s.treesitter, -- useful when no schema
 			s.emojis,
 			s.buffer,
+			s.diag_codes,
 		},
 	})
 
@@ -248,6 +256,7 @@ local function filetypeCompletionConfig()
 			s.buffer,
 			s.emojis,
 			s.nerdfont, -- used for some configs
+			s.diag_codes,
 		},
 	})
 
@@ -328,6 +337,7 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"dmitmel/cmp-cmdline-history",
 			"hrsh7th/cmp-emoji",
+			"JMarkin/cmp-diag-codes",
 			{ "chrisgrieser/cmp-nerdfont", dev = true },
 			"tamago324/cmp-zsh", -- some shell completions
 			"jcdickinson/codeium.nvim", -- AI completions
