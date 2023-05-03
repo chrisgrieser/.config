@@ -1,7 +1,7 @@
 local M = {}
 
-local u = require("lua.utils")
 local env = require("lua.environment-vars")
+local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
 M.iMacDisplay = hs.screen("Built%-in")
@@ -36,12 +36,13 @@ M.sideNotesWide = { x = 0, y = 0, w = 0.4, h = 1 }
 -- OBSIDIAN SIDEBAR
 
 ---@param obsiWin hs.window
-local function toggleObsidianSidebar(obsiWin)
+---@param size hs.geometry
+local function toggleObsidianSidebar(obsiWin, size)
 	u.runWithDelays({ 0.05, 0.2 }, function()
 		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
 		if numberOfObsiWindows > 1 then return end -- prevent popout window resizing to affect sidebars
 
-		local obsi_width = obsiWin:frame().w
+		local obsi_width = size.w
 		local screen_width = obsiWin:screen():frame().w
 
 		-- half -> hide right sidebar
@@ -66,15 +67,21 @@ local function obsidianThemeDevHelper(win, pos)
 		not win
 		or not win:application()
 		or not (win:application():name():lower() == "neovide")
-		or not (pos == M.pseudoMax or pos == M.maximized)
 		or not u.appRunning("Obsidian")
 	then
 		return
 	end
-	u.runWithDelays(0.15, function()
-		u.app("Obsidian"):unhide()
-		u.app("Obsidian"):mainWindow():raise()
-	end)
+
+	local obsi = u.app("Obsidian")
+	if pos == M.pseudoMax or pos == M.maximized then
+		obsi:hide()
+	else
+		-- delay to avoid conflict with app-hider.lua
+		u.runWithDelays(0.1, function()
+			obsi:unhide()
+			obsi:mainWindow():raise()
+		end)
+	end
 end
 
 -- toggle sizes of the sidenotes window
@@ -186,16 +193,16 @@ function M.moveResize(win, pos)
 		if u.app("Twitter") then u.app("Twitter"):hide() end
 	end
 
+	-- Obsidian Extras
+	obsidianThemeDevHelper(win, pos)
+	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win, pos) end
+
 	-- resize with safety redundancy
 	u.runWithDelays({ 0, 0.2, 0.4, 0.6, 0.8 }, function()
 		-- check for false, since non-resizable wins return nil
 		if M.CheckSize(win, pos) ~= false then return end
 		win:moveToUnit(pos)
 	end)
-
-	-- Obsidian extras (has to come after resizing)
-	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win) end
-	obsidianThemeDevHelper(win, pos)
 end
 
 --------------------------------------------------------------------------------
