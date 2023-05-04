@@ -36,9 +36,14 @@
 			"uid": "8"
 		},
 		{
+			"title": "Re-Open last image",
+			"arg": "cleanshot://restore-recently-closed",
+			"uid": "9"
+		},
+		{
 			"title": "Pin an Image",
 			"arg": "cleanshot://pin",
-			"uid": "9"
+			"uid": "10"
 		}
 	]
 }
