@@ -74,30 +74,6 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
-	{ -- better goto-symbol
-		"SmiteshP/nvim-navbuddy",
-		event = "LspAttach",
-		dependencies = { "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
-		opts = {
-			lsp = { auto_attach = true },
-			source_buffer = { scrolloff = 2 },
-			window = {
-				scrolloff = 1,
-				-- navbuddy at the bottom
-				position = { row = "100%", col = "50%" },
-				size = { height = "50%", width = "100%" },
-				sections = {
-					left = { size = "30%" },
-					mid = { size = "40%" },
-					right = { preview = "never" },
-				},
-			},
-			icons = { Object = "󰆧 " },
-			node_markers = {
-				icons = { leaf = " 󰧞 ", leaf_selected = " 󰧞 ", branch = "  " },
-			},
-		},
-	},
 	{ -- better virtualtext diagnostics
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		config = true,

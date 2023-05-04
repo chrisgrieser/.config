@@ -34,10 +34,6 @@ local function telescopeConfig()
 				"diff",
 				entry.value .. "^!",
 			}
-			-- this is for status
-			-- You can get the AM things in entry.status. So we are displaying file if entry.status == '??' or 'A '
-			-- just do an if and return a different command
-			-- return { 'git', '-c', 'core.pager=delta', '-c', 'delta.side-by-side=false', 'diff', entry.value }
 		end,
 	}
 
@@ -60,6 +56,7 @@ local function telescopeConfig()
 				"%.plist$", -- Alfred
 				"%.harpoon$", -- harpoon/projects
 				"/INFO ", -- custom info files
+				"_INFO ", -- custom info files
 				"%.png$",
 				"%.gif$",
 				"%.jpe?g$",
@@ -122,12 +119,12 @@ local function telescopeConfig()
 			treesitter = { prompt_prefix = " ", show_line = false },
 			oldfiles = { prompt_prefix = "󰋚 " },
 			highlights = {
+				prompt_prefix = " ",
 				layout_config = {
 					horizontal = {
 						preview_width = { 0.7, min = 30 },
 					},
 				},
-				prompt_prefix = " ",
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
 			grep_string = { prompt_prefix = " ", disable_coordinates = true },
@@ -139,6 +136,12 @@ local function telescopeConfig()
 			command_history = {
 				prompt_prefix = "󰘳 ",
 				mappings = { i = { ["<D-CR>"] = "edit_command_line" } },
+			},
+			lsp_document_symbols = {
+				prompt_prefix = "󰒕 ",
+				-- markdown headings are symbol-type "string", therefore shouldn't be ignored
+				ignore_symbols = { "boolean", "number" },
+				fname_width = 17,
 			},
 			lsp_workspace_symbols = {
 				prompt_prefix = "󰒕 ",
