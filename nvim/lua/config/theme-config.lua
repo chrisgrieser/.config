@@ -4,7 +4,7 @@ local fn = vim.fn
 local g = vim.g
 
 --------------------------------------------------------------------------------
-local maxIndent = 12
+local maxIndent = 8
 --------------------------------------------------------------------------------
 
 ---@param hlgroupfrom string
@@ -137,6 +137,7 @@ local function themeModifications()
 		updateHighlight("IncSearch", "guifg=#FFFFFF")
 		linkHighlight("TabLineSel", "lualine_a_normal")
 		linkHighlight("TabLineFill", "lualine_c_normal")
+		fixSemanticHighlighting()
 	elseif theme == "dawnfox" then
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ScrollView", "guibg=#303050")

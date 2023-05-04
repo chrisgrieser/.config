@@ -202,7 +202,7 @@ keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = 
 -- [z]pelling [l]ist
 keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 suggest" })
 
----add word under cursor to vale dictionary
+---add word under cursor to vale/languagetool dictionary
 keymap({ "n", "x" }, "zg", function()
 	local word
 	if fn.mode() == "n" then
@@ -217,10 +217,6 @@ keymap({ "n", "x" }, "zg", function()
 	local filepath = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
 	local success = u.appendToFile(filepath, word)
 	if not success then return end -- error message already by AppendToFile
-	cmd.mkview(2)
-	cmd.update()
-	cmd.edit() -- reload file for diagnostics to take effect
-	cmd.loadview(2)
 	vim.notify(string.format('󰓆 Now accepting:\n"%s"', word))
 end, { desc = "󰓆 Add to accepted words (vale)" })
 
