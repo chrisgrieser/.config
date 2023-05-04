@@ -179,7 +179,10 @@ lspSettings.ltex = {
 			["de-DE"] = words,
 		},
 		disabledRules = {
-			["en-US"] = { "EN_QUOTES" }, -- don't expect smart quotes
+			["en-US"] = {
+				"EN_QUOTES", -- don't expect smart quotes
+				"WHITESPACE_RULE", -- often false positives
+			},
 		},
 		diagnosticSeverity = {
 			default = "hint",
