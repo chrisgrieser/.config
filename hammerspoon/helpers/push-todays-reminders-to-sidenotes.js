@@ -37,6 +37,8 @@ function run() {
 
 	delay(delaySecs);
 	reminders.quit();
+	delay(delaySecs);
+	reminders.quit();
 
 	// close sidenotes again
 	delay(delaySecs);
