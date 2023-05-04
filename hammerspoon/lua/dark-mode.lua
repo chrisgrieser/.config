@@ -106,7 +106,7 @@ function M.AutoSwitch()
 	if hasBrightnessSensor then
 		targetMode = brightness > brightnessThreshhold and "light" or "dark"
 	else
-		targetMode = u.betweenTime(7, 18) and "light" or "dark"
+		targetMode = u.betweenTime(7, 20) and "light" or "dark"
 	end
 
 	if targetMode == "light" and u.isDarkMode() then
