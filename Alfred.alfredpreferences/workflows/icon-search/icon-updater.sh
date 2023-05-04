@@ -21,8 +21,8 @@ case $APP in
 	cp -f "$CUSTOM_ICON_FOLDER/BetterZip 2.icns" "$APP.app/Contents/Resources/$APP.icns"
 	;;
 "Neovide" | "neovide")
-	# cp -f "$CUSTOM_ICON_FOLDER/Neovim ascii.icns" "$APP.app/Contents/Resources/$APP.icns"
-	cp -f "$CUSTOM_ICON_FOLDER/Neovide 1.icns" "$APP.app/Contents/Resources/$APP.icns"
+	cp -f "$CUSTOM_ICON_FOLDER/Neovim ascii hicontrast.icns" "$APP.app/Contents/Resources/$APP.icns"
+	# cp -f "$CUSTOM_ICON_FOLDER/Neovide 1.icns" "$APP.app/Contents/Resources/$APP.icns"
 	;;
 "Steam")
 	iconsur set "$APP.app"

@@ -36,8 +36,8 @@ function run(input) {
 	// symlink outside canvas
 	if (canvasOutside) {
 		const firstFileBasename = firstFile.replace(/.*\//, "");
-		app.doShellScript(`mkdir -p "${vaultDummyFolder}"`); // remove existing symlinks if it exists
-		app.doShellScript(`rm "${vaultDummyFolder}"* || true`); // remove existing symlinks if it exists
+		app.doShellScript(`mkdir -p "${vaultDummyFolder}"`);
+		app.doShellScript(`rm "${vaultDummyFolder}"* || true`); // remove any existing symlinks
 		app.doShellScript(`ln -sf '${firstFile}' '${vaultDummyFolder}'`);
 		delay(0.1); // buffer so the new symlink is registered by Obsidian
 		firstFile = vaultDummyFolder + firstFileBasename;

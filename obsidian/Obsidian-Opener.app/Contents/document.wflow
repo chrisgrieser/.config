@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>520</string>
+	<string>521.1</string>
 	<key>AMApplicationVersion</key>
 	<string>2.10</string>
 	<key>AMDocumentVersion</key>
@@ -54,6 +54,8 @@
 					<string>#!/usr/bin/env osascript -l JavaScript
 // INFO https://forum.obsidian.md/t/make-obsidian-a-default-app-for-markdown-files-on-macos/22260
 
+/** @param {any} input */
+// rome-ignore lint/correctness/noUnusedVariables: &lt;explanation&gt;
 function run(input) {
 	// 👉 CONFIG
 	const markdownApp = "Neovim"; // default markdown app
@@ -87,7 +89,8 @@ function run(input) {
 	// symlink outside canvas
 	if (canvasOutside) {
 		const firstFileBasename = firstFile.replace(/.*\//, "");
-		app.doShellScript(`rm "${vaultDummyFolder}"* || true`); // remove existing symlinks
+		app.doShellScript(`mkdir -p "${vaultDummyFolder}"`);
+		app.doShellScript(`rm "${vaultDummyFolder}"* || true`); // remove any existing symlinks
 		app.doShellScript(`ln -sf '${firstFile}' '${vaultDummyFolder}'`);
 		delay(0.1); // buffer so the new symlink is registered by Obsidian
 		firstFile = vaultDummyFolder + firstFileBasename;
@@ -159,7 +162,7 @@ function run(input) {
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>591.000000:315.000000</string>
+				<string>309.000000:315.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run JavaScript.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>

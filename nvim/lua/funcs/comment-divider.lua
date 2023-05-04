@@ -1,8 +1,8 @@
 local M = {}
+local linechar = "─"
 
 function M.commentHr()
 	---@diagnostic disable: param-type-mismatch
-	local linechar = "─"
 	local wasOnBlank = vim.fn.getline(".") == ""
 	local indent = vim.fn.indent(".")
 	local textwidth = vim.bo.textwidth
@@ -31,7 +31,6 @@ function M.commentHr()
 	if wasOnBlank then
 		vim.cmd.normal { "j==", bang = true }
 		local hrIndent = vim.fn.indent(".")
-		if vim.bo.filetype == "yaml" then hrIndent = 0 end
 
 		-- cannot use simply :sub, since it assumes one-byte-size chars
 		local hrLine = vim.fn.getline(".") ---@diagnostic disable-next-line: assign-type-mismatch, undefined-field

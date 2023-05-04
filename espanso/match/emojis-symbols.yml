@@ -1,27 +1,4 @@
 matches:
-  - triggers: ["!ctrl", "!control"]
-    replace: ⌃
-  - trigger: "!space"
-    replace: ␣
-  - trigger: "!shift"
-    replace: ⇧
-  - trigger: "!cmd"
-    replace: ⌘
-  - triggers: ["!alt", "!opt"]
-    replace: ⌥
-  - triggers: ["!caps", "!hyper"]
-    replace: ⇪
-  - trigger: "!esc"
-    replace: ⎋
-  - trigger: "!tab"
-    replace: ↹
-  - triggers: ["!return", "!enter"]
-    replace: ↵
-  - trigger: "!backspace"
-    replace: ⌫
-
-  #─────────────────────────────────────────────────────────────────────────────
-
   - trigger: "!no"
     replace: ❌
   - trigger: "!yes"
@@ -43,6 +20,8 @@ matches:
     replace: 🔴🟡🟢
   - trigger: " mm"
     replace: " 🙈"
+  - triggers: ["(tm)", "!tm"]
+    replace: "™"
   - trigger: "!eyes"
     replace: 👁️👄👁️
 
@@ -62,3 +41,26 @@ matches:
     replace: (ノಠ_ಠ)ノ彡︵ ┻━┻︵ ┻━┻
   - triggers: ["!tableflip", "!ascii"]
     replace: ┬─┬ノ(ಠ_ಠノ)
+
+  #─────────────────────────────────────────────────────────────────────────────
+
+  - triggers: ["!ctrl", "!control"]
+    replace: ⌃
+  - trigger: "!space"
+    replace: ␣
+  - trigger: "!shift"
+    replace: ⇧
+  - trigger: "!cmd"
+    replace: ⌘
+  - triggers: ["!alt", "!opt"]
+    replace: ⌥
+  - triggers: ["!caps", "!hyper"]
+    replace: ⇪
+  - trigger: "!esc"
+    replace: ⎋
+  - trigger: "!tab"
+    replace: ↹
+  - triggers: ["!return", "!enter"]
+    replace: ↵
+  - trigger: "!backspace"
+    replace: ⌫
