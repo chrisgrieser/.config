@@ -57,22 +57,30 @@ local function toggleDarkMode()
 
 	-- sketchybar
 	-- stylua: ignore
-	hs.execute( 'BG_COLOR="'..sketchybg..'" ; FONT_COLOR="'..sketchyfont..'" ; '..
-	[[sketchybar --bar color="$BG_COLOR" \
+	hs.execute(([[
+		export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+		BG_COLOR='%s'
+		FONT_COLOR='%s'
+		sketchybar --bar color="$BG_COLOR" \
 		--set sync-indicator icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--set sidenotes-count icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--set clock icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--set weather icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--set covid-stats icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--update
-	]])
+	]]):format(sketchybg, sketchyfont))
 
 	-- SideNotes
 	-- stylua: ignore
 	local themePath = os.getenv("HOME") .. "/Library/Application Support/com.apptorium.SideNotes-paddle/themes"
-	local builtInThemes = {"Classic", "Retro", "Dark Blue", "Graphite Gray", "Default"}
-	if u.tbl_contains(builtInThemes, sidenotesTheme) then themePath = "/Applications/SideNotes.app/Contents/Resources" end
-	local jxaCmd = ([[Application("SideNotes").setTheme("%s/%s.sntheme")]]):format(themePath, sidenotesTheme)
+	local builtInThemes = { "Classic", "Retro", "Dark Blue", "Graphite Gray", "Default" }
+	if u.tbl_contains(builtInThemes, sidenotesTheme) then
+		themePath = "/Applications/SideNotes.app/Contents/Resources"
+	end
+	local jxaCmd = ([[Application("SideNotes").setTheme("%s/%s.sntheme")]]):format(
+		themePath,
+		sidenotesTheme
+	)
 	local shellCmd = ([[osascript -l JavaScript -e '%s']]):format(jxaCmd)
 	hs.execute(shellCmd)
 end
