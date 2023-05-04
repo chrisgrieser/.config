@@ -1,6 +1,8 @@
 #!/usr/bin/env osascript -l JavaScript
 // INFO https://forum.obsidian.md/t/make-obsidian-a-default-app-for-markdown-files-on-macos/22260
 
+/** @param {any} input */
+// rome-ignore lint/correctness/noUnusedVariables: <explanation>
 function run(input) {
 	// 👉 CONFIG
 	const markdownApp = "Neovim"; // default markdown app
@@ -34,7 +36,8 @@ function run(input) {
 	// symlink outside canvas
 	if (canvasOutside) {
 		const firstFileBasename = firstFile.replace(/.*\//, "");
-		app.doShellScript(`rm "${vaultDummyFolder}"* || true`); // remove existing symlinks
+		app.doShellScript(`mkdir -p "${vaultDummyFolder}"`); // remove existing symlinks if it exists
+		app.doShellScript(`rm "${vaultDummyFolder}"* || true`); // remove existing symlinks if it exists
 		app.doShellScript(`ln -sf '${firstFile}' '${vaultDummyFolder}'`);
 		delay(0.1); // buffer so the new symlink is registered by Obsidian
 		firstFile = vaultDummyFolder + firstFileBasename;

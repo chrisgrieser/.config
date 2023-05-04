@@ -36,3 +36,6 @@ bufferline
 blazingly
 Cycler
 allows
+As
+cycler
+neovim
