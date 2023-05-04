@@ -33,3 +33,6 @@ Nano
 vim
 Vim
 bufferline
+blazingly
+Cycler
+allows
