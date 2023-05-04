@@ -41,8 +41,8 @@ matches:
     replace: ➡️
   - trigger: "!ampel"
     replace: 🔴🟡🟢
-  - regex: "\\bmm"
-    replace: "🙈"
+  - trigger: " mm"
+    replace: " 🙈"
   - trigger: "!eyes"
     replace: 👁️👄👁️
 
