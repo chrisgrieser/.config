@@ -255,3 +255,10 @@ matches:
   # https://espanso.org/docs/matches/regex-triggers#arguments
   - regex: "\\Bsich"
     replace: "isch"
+  # only fix when capitalized, so stuff like urls is unaffected
+  - trigger: Youtube
+    replace: YouTube
+    word: true
+  - trigger: Github
+    replace: GitHub
+    word: true

@@ -663,7 +663,7 @@ autocmd("LspAttach", {
 			keymap("c", "gS", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
 
 			-- overwrites treesitter goto-symbol
-			keymap("n", "gs", function() require("nvim-navbuddy").open() end, { desc = "󰒕 Symbols (navbuddy)", buffer = true }) -- overrides treesitter symbols browsing
+			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true })
 			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 		-- stylua: ignore end
@@ -832,7 +832,7 @@ autocmd("FileType", {
 -- just "q" to close special window
 -- remove the waiting time from the q, due to conflict with `qq` for comments
 autocmd("FileType", {
-	pattern = { "ssr", "TelescopePrompt", "harpoon", "NavBuddy" },
+	pattern = { "ssr", "TelescopePrompt", "harpoon" },
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 		if bo.filetype == "ssr" then
@@ -843,10 +843,6 @@ autocmd("FileType", {
 		end
 	end,
 })
-
---------------------------------------------------------------------------------
--- parenthese_conditions
-if (true) then return end
 
 --------------------------------------------------------------------------------
 

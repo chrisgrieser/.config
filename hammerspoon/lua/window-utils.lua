@@ -88,7 +88,7 @@ end
 local function toggleSideNotesSize()
 	local snWin = u.app("SideNotes"):mainWindow()
 	local narrow = { x = 0, y = 0, w = 0.2, h = 1 }
-	local changeTo = M.CheckSize(snWin, narrow) and M.sideNotesWide or narrow
+	local changeTo = M.CheckSize(snWin, M.sideNotesWide) and narrow or M.sideNotesWide
 	M.moveResize(snWin, changeTo)
 end
 
