@@ -88,7 +88,6 @@ local function cmpconfig()
 		},
 		sorting = {
 			comparators = {
-				require("cmp_fuzzy_buffer.compare"),
 				-- Original order: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
 				-- Definitions of compare function https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
 				compare.offset,
