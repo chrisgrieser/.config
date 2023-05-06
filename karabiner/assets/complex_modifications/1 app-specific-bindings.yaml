@@ -75,7 +75,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Highlights"
     manipulators:
-      # cmd+l = show in Explorer
+      # cmd+l = Show in Finder
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [command] } }
         to:
@@ -162,71 +162,6 @@ rules:
           - key_code: "3"
             modifiers: [command, control]
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
-      # hyper+j/k: up/down
-      - type: basic
-        from: { key_code: j, modifiers: { mandatory: [option, shift, command, control] } }
-        to:
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
-      - type: basic
-        from: { key_code: k, modifiers: { mandatory: [option, shift, command, control] } }
-        to:
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
   #───────────────────────────────────────────────────────────────────────
   - description: "(Apps) Browser"
