@@ -689,11 +689,11 @@ keymap("n", "<leader>gB", function() cmd.Telescope("git_branches") end, { desc =
 
 -- My utils
 keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
-keymap("n", "<leader>gg", function () require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
-keymap("n", "<leader>gi", function () require("funcs.git-utils").issueSearch("open") end, { desc = "󰊢 Open Issues" })
-keymap("n", "<leader>gI", function () require("funcs.git-utils").issueSearch("closed") end, { desc = "󰊢 Closed Issues" })
-keymap("n", "<leader>gm", function () require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
-keymap("n", "<leader>gM", function () require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
+keymap("n", "<leader>gg", function() require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
+keymap("n", "<leader>gi", function() require("funcs.git-utils").issueSearch("open") end, { desc = "󰊢 Open Issues" })
+keymap("n", "<leader>gI", function() require("funcs.git-utils").issueSearch("closed") end, { desc = "󰊢 Closed Issues" })
+keymap("n", "<leader>gm", function() require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
+keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
 -- stylua: ignore end
 
 -- Diffview
