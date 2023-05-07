@@ -18,10 +18,10 @@ opt.shadafile = u.vimDataDir .. "main.shada"
 --------------------------------------------------------------------------------
 -- Undo
 opt.undofile = true -- enable persistent undo history
-opt.undolevels = 500 -- less undos saved for quicker loading of undo history
+opt.undolevels = 400 -- less undos saved for quicker loading of undo history
 
 -- extra undopoints (= more fine-grained undos)
--- WARN requires remap, otherwise prevents vim abbrev. w/ those chars from working
+-- WARN requires remap, since it otherwise prevents vim abbrev. w/ those chars from working
 local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
 for _, char in pairs(undopointChars) do
 	keymap("i", char, function()

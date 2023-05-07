@@ -285,8 +285,8 @@ nmap <F1> :togglefold
 " nmap ö :lightspeed
 
 " Link Jump (similar to Vimium's f)
-exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
-nmap ,l :linkjump
+" exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
+" nmap ,l :linkjump
 
 """"""""""""""""""""""
 " Substitute
