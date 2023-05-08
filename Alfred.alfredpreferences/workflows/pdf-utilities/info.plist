@@ -523,6 +523,48 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>name</key>
+				<string>Print</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>A02897FE-BC2A-479A-A777-3CAF8A394943</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>print-pdf.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>871ABB10-2B9C-44B3-951C-3EA52181ECC2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alignment</key>
 				<integer>0</integer>
 				<key>backgroundcolor</key>
@@ -591,6 +633,37 @@
 			<string>4D63817E-E093-44ED-99F7-2762E817BB90</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>35</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>P</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>8D0217F4-B267-406C-B35B-B41C7663BA0D</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -790,6 +863,20 @@
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
+		<key>871ABB10-2B9C-44B3-951C-3EA52181ECC2</key>
+		<dict>
+			<key>xpos</key>
+			<real>775</real>
+			<key>ypos</key>
+			<real>470</real>
+		</dict>
+		<key>8D0217F4-B267-406C-B35B-B41C7663BA0D</key>
+		<dict>
+			<key>xpos</key>
+			<real>590</real>
+			<key>ypos</key>
+			<real>495</real>
+		</dict>
 		<key>8DDB7CE3-56BA-4890-A2A7-FC6E967C73AF</key>
 		<dict>
 			<key>colorindex</key>
@@ -807,6 +894,13 @@
 			<real>650</real>
 			<key>ypos</key>
 			<real>35</real>
+		</dict>
+		<key>A02897FE-BC2A-479A-A777-3CAF8A394943</key>
+		<dict>
+			<key>xpos</key>
+			<real>590</real>
+			<key>ypos</key>
+			<real>370</real>
 		</dict>
 		<key>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</key>
 		<dict>
