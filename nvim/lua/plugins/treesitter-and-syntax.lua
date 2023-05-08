@@ -1,4 +1,5 @@
 local tsConfig = {
+	-- easier than having to keep track of new parsers all the time
 	ensure_installed = "all",
 
 	highlight = {
