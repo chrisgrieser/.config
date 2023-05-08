@@ -1,14 +1,23 @@
 #!/bin/zsh
 
 # determine volume
-VOLUME_NAME="$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)"
-if [[ $(echo "$VOLUME_NAME" | wc -l) -gt 1 ]] ; then 
-	print "\033[1;33mMore than one volume connected.\033[0m"
-	return 1
-elif [[ $(echo "$VOLUME_NAME" | wc -l) -lt 1 ]] ; then 
-	print "\033[1;33mNo volume connected.\033[0m"
-	return 1
-fi
+i=0
+while true; do
+	VOLUME_NAME="$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)"
+	if [[ $(echo "$VOLUME_NAME" | wc -l) -gt 1 ]]; then
+		print "\033[1;33mMore than one volume connected.\033[0m"
+		return 1
+	elif [[ -n "$VOLUME_NAME" ]]; then
+		break
+	fi
+
+	sleep 0.2
+	i=$((i + 1))
+	if [[ $i -gt 20 ]]; then
+		print "\033[1;33mNo Volume found.\033[0m"
+		return 1
+	fi
+done
 print "\033[1;34mBacking up to $VOLUME_NAME…\033[0m"
 
 # determine backup destination
@@ -56,7 +65,7 @@ print "\033[1;34m----------------------------------------------------\033[0m"
 echo
 
 if [[ -n "$errors" ]]; then
-	print "\033[1;31m$errors\033[0m"	
+	print "\033[1;31m$errors\033[0m"
 fi
 
 # Log (on Mac)

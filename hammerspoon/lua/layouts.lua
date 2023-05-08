@@ -82,7 +82,9 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
-	MyTimers.layouts = hs.timer.waitUntil(function() return u.appRunning(appsToOpen) end, function()
+
+	wu.moveResize(u.app("SideNotes"):mainWindow(), wu.sideNotesWide)
+	MyTimers["layouts"] = hs.timer.waitUntil(function() return u.appRunning(appsToOpen) end, function()
 		u.app("Mimestream"):activate()
 		u.restartApp("AltTab")
 	end, 0.1)

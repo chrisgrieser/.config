@@ -2,8 +2,8 @@
 
 local darkTheme = "Paraiso Dark"
 local lightTheme = "Silk Light (base16)"
-local lightOpacity = 0.94
-local darkOpacity = 0.92
+local lightOpacity = 0.93
+local darkOpacity = 0.91
 
 --------------------------------------------------------------------------------
 -- UTILS
@@ -35,6 +35,7 @@ end)
 
 --------------------------------------------------------------------------------
 -- BETTER PASTE
+
 local function autoQuotePastedUrls(window, pane)
 	local pasteCmd = "pbpaste" -- change this if not on macOS
 	local success, clipb, stderr = wt.run_child_process { pasteCmd }
@@ -55,6 +56,7 @@ local keybindings = {
 	-- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
 	-- Key-Names: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
 	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
+	{ key = "n", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "q", mods = "CMD", action = act.QuitApplication },
 	{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
 	{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
@@ -201,7 +203,7 @@ local config = {
 	-- Scroll
 	enable_scroll_bar = true,
 	min_scroll_bar_height = "3cell",
-	scrollback_lines = 4000,
+	scrollback_lines = 5000,
 
 	-- Hyperlinks
 	hyperlink_rules = myHyperlinkRules,

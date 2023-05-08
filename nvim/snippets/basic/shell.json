@@ -8,6 +8,10 @@
 		"body": "\\${${1:global_var}:?}",
 		"description": "shellcheck recommends failing if global variable is undefined (SC2054). Useful for example for Alfred Environment Variables."
 	},
+	"i++": {
+		"prefix": "i++",
+		"body": "i=$((i + 1))"
+	},
 	"ls → find": {
 		"prefix": "ls → find",
 		"body": "find . -maxdepth 1",
