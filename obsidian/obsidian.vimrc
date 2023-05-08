@@ -162,7 +162,7 @@ nmap ,y 3ggA
 
 " [g]oto [f]ootnotes
 " requires Footnotes Shortcut Plugin
-exmap gotoFootnoteDefinition obcommand obsidian-footnotes:insert-footnote
+exmap gotoFootnoteDefinition obcommand obsidian-footnotes:insert-autonumbered-footnote
 nmap gf :gotoFootnoteDefinition
 nmap gd :gotoFootnoteDefinition
 
