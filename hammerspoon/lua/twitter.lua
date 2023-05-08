@@ -60,10 +60,12 @@ TwitterWatcher = u.aw
 				wu.bringAllWinsToFront()
 				wu.twitterScrollUp()
 
-				-- focus new tweet window if there is one
+				-- focus new tweet / media window if there is one
 				if not twitter then return end
 				local newTweetWindow = twitter:findWindow("Tweet")
 				if newTweetWindow then newTweetWindow:focus() end
+				local mediaWindow = twitter:findWindow("Media")
+				if mediaWindow then mediaWindow:focus() end
 			end)
 
 		-- auto-close media windows and scroll up when deactivating

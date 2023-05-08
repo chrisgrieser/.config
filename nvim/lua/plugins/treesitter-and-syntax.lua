@@ -1,34 +1,5 @@
 local tsConfig = {
-	ensure_installed = {
-		"javascript",
-		"typescript",
-		"regex", -- js patterns
-		"jsdoc", -- js annotations
-		"bash",
-		"css",
-		"scss",
-		"markdown",
-		"markdown_inline", -- fenced code blocks
-		"python",
-		"lua",
-		"luap", -- lua patterns
-		"luadoc", -- lua annotations
-		"gitignore",
-		"gitcommit",
-		"diff",
-		"bibtex",
-		"vim",
-		"vimdoc", -- help files
-		"toml",
-		"ini",
-		"yaml",
-		"json",
-		"jsonc",
-		"html",
-		"query", -- treesitter query language
-		"http", -- http requests as format, used for rest.nvim
-	},
-	auto_install = false, -- install missing parsers when entering a buffer
+	ensure_installed = "all",
 
 	highlight = {
 		enable = true,
@@ -36,10 +7,10 @@ local tsConfig = {
 		disable = { "css" }, -- pending https://github.com/tree-sitter/tree-sitter-css/issues/34
 	},
 	-- use treesitter for autoindent with `=`
-	indentation = {
-		enable = true,
-		disable = {},
-	},
+	indentation = { enable = true },
+	--------------------------------------------------------------------------
+	-- TREESITTER PLUGINS
+
 	textobjects = { -- textobj plugin
 		move = { -- move to next comment / function
 			enable = true,
@@ -76,9 +47,6 @@ local tsConfig = {
 			},
 		},
 	},
-
-	--------------------------------------------------------------------------
-	-- TREESITTER PLUGINS
 	endwise = { enable = true },
 	rainbow = { enable = true },
 	refactor = {
@@ -101,12 +69,11 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
-		-- auto-update parsers on start: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
 		build = function() require("nvim-treesitter.install").update { with_sync = true } end,
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 		init = function()
-			-- avoid conflict with visual mode comment from Comments.nvim
+			-- HACK avoid conflict with visual mode comment from Comments.nvim
 			vim.keymap.set("o", "q", "&&&", { desc = "comment", remap = true })
 		end,
 	},
@@ -123,5 +90,4 @@ return {
 	-- Syntax Highlighting Plugins
 	{ "mityu/vim-applescript", ft = "applescript" },
 	{ "hail2u/vim-css3-syntax", ft = "css" }, -- https://github.com/tree-sitter/tree-sitter-css/issues/34
-	{ "MTDL9/vim-log-highlighting", ft = "log" },
 }
