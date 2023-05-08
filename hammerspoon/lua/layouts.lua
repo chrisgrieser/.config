@@ -16,6 +16,7 @@ local function dockSwitcher(targetMode)
 end
 
 ---@return boolean
+---@nodiscard
 local function isWeekend()
 	local weekday = os.date("%a")
 	return weekday == "Sun" or weekday == "Sat"
