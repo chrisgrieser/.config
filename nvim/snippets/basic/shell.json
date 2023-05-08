@@ -79,6 +79,14 @@
 		"prefix": "xargs (for each line)",
 		"body": "xargs -I {} ${1:some_cmd} '{}'"
 	},
+	"find -exec": {
+		"prefix": "find -exec",
+		"body": "find . $0 -exec open '{}' \\;"
+	},
+	"find & xargs": {
+		"prefix": "find & xargs",
+		"body": "find . -print0 | xargs -0 -I '{}'"
+	},
 	"notify (var)": {
 		"prefix": "notify (var)",
 		"body": "osascript -e \"display notification \\\"\\\" with title \\\"$${1:var}\\\"\""

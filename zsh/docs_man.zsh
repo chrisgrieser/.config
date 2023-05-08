@@ -1,16 +1,20 @@
 # search cht.sh for information
 # aggregates stackoverflow, tl;dr and many other help pages
+# https://cht.sh/:help
 function h() {
-	QUERY=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
-	CHEAT_INFO=$(curl -s "https://cht.sh/$QUERY")   # https://cht.sh/:help
-	CHEAT_CODE_ONLY=$(curl -s "https://cht.sh/$QUERY?QT")
-	echo "$CHEAT_INFO" | less
-	echo "$CHEAT_CODE_ONLY" | pbcopy
+	local style query cheat_info
+	[[ "$cond" ]] && var="$one" || var="$two"
+	style="trac" # curl cht.sh/:styles-demo
+	query=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
+	cheat_info=$(curl -s "https://cht.sh/$query?style=$style")
+	cheat_code_only=$(curl -s "https://cht.sh/$query?QT")
+	echo "$cheat_info" | less
+	echo "$cheat_code_only" | pbcopy
 }
 
 # GET A BETTER MAN
 # if in wezterm, opens man in a new tab
-# first arg: command, second arg: search term
+# $1: command, $2: search term
 function man() {
 	if [[ "$TERM_PROGRAM" != "WezTerm" && -n "$2" ]]; then
 		command man -P "/usr/bin/less -is --pattern=$2" "$1"
