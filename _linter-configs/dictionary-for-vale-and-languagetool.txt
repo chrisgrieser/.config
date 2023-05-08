@@ -39,3 +39,13 @@ allows
 As
 cycler
 neovim
+config
+LoC
+Karabiner
+pandoc
+Neovim
+starship
+hammerspoon
+zshrc
+vimrc
+pseudometa's
