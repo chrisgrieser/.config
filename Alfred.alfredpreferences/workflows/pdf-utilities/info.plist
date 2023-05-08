@@ -112,6 +112,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>871ABB10-2B9C-44B3-951C-3EA52181ECC2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>693B7C6E-1B5D-4196-BBAC-56926CB5449A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>8D0217F4-B267-406C-B35B-B41C7663BA0D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>871ABB10-2B9C-44B3-951C-3EA52181ECC2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</key>
 		<array>
 			<dict>
@@ -127,6 +153,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A02897FE-BC2A-479A-A777-3CAF8A394943</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>871ABB10-2B9C-44B3-951C-3EA52181ECC2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -587,6 +626,35 @@
 			<key>type</key>
 			<string>alfred.workflow.output.largetype</string>
 			<key>uid</key>
+			<string>693B7C6E-1B5D-4196-BBAC-56926CB5449A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
 			<string>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</string>
 			<key>version</key>
 			<integer>3</integer>
@@ -640,7 +708,7 @@
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -655,8 +723,12 @@
 				<false/>
 				<key>modsmode</key>
 				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
 				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -832,6 +904,15 @@
 			<key>ypos</key>
 			<real>615</real>
 		</dict>
+		<key>693B7C6E-1B5D-4196-BBAC-56926CB5449A</key>
+		<dict>
+			<key>note</key>
+			<string>to show errors</string>
+			<key>xpos</key>
+			<real>950</real>
+			<key>ypos</key>
+			<real>470</real>
+		</dict>
 		<key>698B1D06-326B-43D2-8ABB-DE676CE3661A</key>
 		<dict>
 			<key>colorindex</key>
@@ -873,9 +954,9 @@
 		<key>8D0217F4-B267-406C-B35B-B41C7663BA0D</key>
 		<dict>
 			<key>xpos</key>
-			<real>590</real>
+			<real>595</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>535</real>
 		</dict>
 		<key>8DDB7CE3-56BA-4890-A2A7-FC6E967C73AF</key>
 		<dict>
@@ -898,9 +979,9 @@
 		<key>A02897FE-BC2A-479A-A777-3CAF8A394943</key>
 		<dict>
 			<key>xpos</key>
-			<real>590</real>
+			<real>595</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>410</real>
 		</dict>
 		<key>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</key>
 		<dict>

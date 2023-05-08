@@ -3,8 +3,12 @@
 # https://cht.sh/:help
 function h() {
 	local style query cheat_info
-	[[ "$cond" ]] && var="$one" || var="$two"
-	style="trac" # curl cht.sh/:styles-demo
+
+	# curl cht.sh/:styles-demo
+	local lightstyle="trac"
+	local darkstyle="monokai"
+	defaults read -g AppleInterfaceStyle &>/dev/null && style="$darkstyle" || style="$lightstyle"
+
 	query=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
 	cheat_info=$(curl -s "https://cht.sh/$query?style=$style")
 	cheat_code_only=$(curl -s "https://cht.sh/$query?QT")
