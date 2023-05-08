@@ -339,7 +339,6 @@ return {
 			"hrsh7th/cmp-emoji",
 			"JMarkin/cmp-diag-codes",
 			{ "chrisgrieser/cmp-nerdfont", dev = true },
-			{ "tzachar/cmp-ai", dependencies = "nvim-lua/plenary.nvim" },
 			"tamago324/cmp-zsh", -- some shell completions
 			"jcdickinson/codeium.nvim", -- AI completions
 			"ray-x/cmp-treesitter",
