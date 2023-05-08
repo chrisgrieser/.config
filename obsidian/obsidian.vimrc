@@ -49,8 +49,12 @@ noremap L g$
 nmap J 6gj
 nmap K 6gk
 
-omap J 3j
-omap K 3k
+omap J 3gj
+omap K 3gk
+
+" sentence navigation
+nmap [ (
+nmap ] )
 
 " [z]pelling [l]ist (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
