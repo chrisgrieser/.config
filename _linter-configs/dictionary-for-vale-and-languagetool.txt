@@ -49,3 +49,4 @@ hammerspoon
 zshrc
 vimrc
 pseudometa's
+Config

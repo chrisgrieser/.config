@@ -13,7 +13,7 @@ Also, you can check out [the nvim plugins I authored myself](https://github.com/
 
 ## Config structure
 
-```bash
+```text
 ├── lua
 │  ├── config # keybindings, options, …
 │  ├── funcs # utility functions

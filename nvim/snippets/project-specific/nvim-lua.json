@@ -22,9 +22,9 @@
 	"plugin spec (lazy.nvim)": {
 		"prefix": "plugin spec (lazy.nvim)",
 		"body": [
-			"{ -- ${2:description}",
-			"\t\"$CLIPBOARD\",",
-			"\t${3|event = \"VeryLazy\",event = \"LspAttach\",lazy = true,cmd = \"\"|},",
+			"{",
+			"\t\"$1\",",
+			"\t${2|event = \"VeryLazy\",event = \"LspAttach\",lazy = true,cmd = \"\"|},",
 			"\topts = {",
 			"\t\t$0",
 			"\t},",
