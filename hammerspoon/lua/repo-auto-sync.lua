@@ -1,6 +1,6 @@
 local M = {}
-local u = require("lua.utils")
 local env = require("lua.environment-vars")
+local u = require("lua.utils")
 
 --------------------------------------------------------------------------------
 
@@ -98,6 +98,7 @@ function M.syncAllGitRepos(extras)
 
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
+
 	if not (success1 and success2 and success3) then
 		u.notify("⚠️️ Sync Error")
 		return
@@ -121,7 +122,7 @@ end
 -- WHEN TO SYNC
 
 -- 1. on systemstart
--- (see meta.lua)
+-- (see reload-systemstart.lua)
 
 -- 2. every x minutes
 RepoSyncTimer = hs.timer
@@ -138,7 +139,11 @@ end)
 SleepWatcher = hs.caffeinate.watcher
 	.new(function(event)
 		local c = hs.caffeinate.watcher
-		if (event == c.screensDidWake and event == c.systemDidWake) and u.idleMins(30) then
+		if
+			event == c.screensDidLock
+			or event == c.screensDidSleep
+			or ((event == c.screensDidWake or event == c.systemDidWake) and u.idleMins(30))
+		then
 			M.syncAllGitRepos()
 		end
 	end)
