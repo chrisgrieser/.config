@@ -67,8 +67,9 @@ nmap ge :nextSuggestion
 " done via Obsidian Hotkeys, so they also work in Preview Mode
 " nmap <C-h> :back
 " nmap <C-l> :forward
-" nmap <C-j> :nextHeading
-" nmap <C-k> :prevHeading
+
+nmap <C-j> :nextHeading
+nmap <C-k> :prevHeading
 
 " line movement
 " (don't work as expected in visual mode)
