@@ -236,14 +236,11 @@ keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc 
 
 keymap(
 	"n",
-	"<leader>fc",
-	function() return ":%sm /" .. expand("<cword>") .. "//g<Left><Left>" end,
-	{ desc = "󱗘 :substitute (magic & cword)", expr = true }
+	"<leader>ff",
+	function() return ":%sm/" .. expand("<cword>") .. "//g<Left><Left>" end,
+	{ desc = "󱗘 :substitute cword (magic)", expr = true }
 )
-keymap("n", "<leader>ff", [[:%sm ///g<Left><Left><Left>]], { desc = "󱗘 :substitute (magic)" })
-keymap("x", "<leader>ff", [[:sm ///g<Left><Left><Left>]], { desc = "󱗘 :substitute (magic)" })
-
-keymap("n", "<leader>fm", function() require("muren.api").toggle_ui() end, { desc = "󱗘 muren" })
+keymap("x", "<leader>ff", [["zy:sm/<C-r>z//g<Left><Left>]], { desc = "󱗘 :substitute selection (magic)" })
 
 keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
 keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
