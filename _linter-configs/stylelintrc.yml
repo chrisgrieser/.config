@@ -182,6 +182,7 @@ rules:
     - always-multi-line
     - ignore: [after-comment, inside-block]
       severity: warning
+  comment-no-empty: [true, {severity: warning}]
   comment-empty-line-before:
     - always
     - except: [first-nested]
