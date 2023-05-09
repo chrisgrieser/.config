@@ -14,7 +14,7 @@ function run() {
 	// https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
 	const todaysTasks = reminders.defaultList().reminders.whose({ dueDate: { _lessThan: today } });
 
-	if (todaysTasks.length === 0) {
+	if (!todaysTasks || todaysTasks.length === 0) {
 		reminders.quit();
 		return;
 	}
