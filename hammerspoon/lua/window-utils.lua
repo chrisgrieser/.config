@@ -256,7 +256,7 @@ function M.autoTile(winSrc)
 			if #(u.app("Finder"):allWindows()) == 0 then u.app("Finder"):hide() end
 		end)
 	elseif #wins == 1 then
-		local pos
+		local pos 
 		if env.isProjector() then
 			pos = M.maximized
 		elseif u.isFront("Finder") then

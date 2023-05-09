@@ -69,8 +69,8 @@ exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-sugge
 nmap ge :nextSuggestion
 
 " INFO don't work in reading mode: https://github.com/timhor/obsidian-editor-shortcuts/issues/67
-exmap :nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
-exmap :prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
+exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
+exmap prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
 nmap <C-j> :nextHeading
 nmap <C-k> :prevHeading
 
