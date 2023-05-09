@@ -52,6 +52,10 @@ nmap K 6gk
 omap J 3gj
 omap K 3gk
 
+" pending PR in codemirror-vim
+" omap j 2gj
+" omap k 2gk
+
 " sentence navigation
 nmap [ (
 nmap ] )
@@ -64,14 +68,17 @@ nmap zl :contextMenu
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
 nmap ge :nextSuggestion
 
+" INFO don't work in reading mode: https://github.com/timhor/obsidian-editor-shortcuts/issues/67
+exmap :nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
+exmap :prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
+nmap <C-j> :nextHeading
+nmap <C-k> :prevHeading
+
 " done via Obsidian Hotkeys, so they also work in Preview Mode
 " nmap <C-h> :back
 " nmap <C-l> :forward
 
-nmap <C-j> :nextHeading
-nmap <C-k> :prevHeading
-
-" line movement
+" line/character movement
 " (don't work as expected in visual mode)
 exmap lineUp obcommand editor:swap-line-up
 exmap lineDown obcommand editor:swap-line-down
