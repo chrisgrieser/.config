@@ -40,10 +40,3 @@ rm -r "./Searchlink Services" searchlink.zip
 
 # sketchybar
 brew services start felixkratz/formulae/sketchybar
-
-# Steam UI zoomed https://tp69.blog/2020/02/11/how-to-zoom-the-steam-client/
-steamDataPath="$HOME/Library/Application Support/Steam/Steam.AppBundle/Steam/Contents/MacOS"
-newSkinPath="$steamDataPath/skins/Bigger UI"
-mkdir -p "$newSkinPath/resource/styles/"
-cp "$steamDataPath/resource/styles/steam.styles" "$newSkinPath/resource/styles/"
-echo ':root { zoom: "1.5"; }' >"$newSkinPath/resource/webkit.css"
