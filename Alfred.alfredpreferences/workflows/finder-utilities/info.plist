@@ -220,6 +220,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<array>
 			<dict>
@@ -822,6 +835,40 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.zip-archive</string>
+				</array>
+				<key>name</key>
+				<string>Open in Better Zip</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/BetterZip.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -1045,6 +1092,20 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>225</real>
 			<key>ypos</key>
 			<real>260</real>
+		</dict>
+		<key>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>815</real>
+		</dict>
+		<key>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</key>
+		<dict>
+			<key>xpos</key>
+			<real>225</real>
+			<key>ypos</key>
+			<real>815</real>
 		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>

@@ -200,6 +200,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>BC55B53D-B9D5-47AC-B2F4-45C6250702DD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</key>
 		<array>
 			<dict>
@@ -783,6 +796,40 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string>/System/Applications/Preview.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>name</key>
+				<string>Open in Preview</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>BC55B53D-B9D5-47AC-B2F4-45C6250702DD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -907,7 +954,7 @@
 		<key>693B7C6E-1B5D-4196-BBAC-56926CB5449A</key>
 		<dict>
 			<key>note</key>
-			<string>to show errors</string>
+			<string>show errors</string>
 			<key>xpos</key>
 			<real>950</real>
 			<key>ypos</key>
@@ -921,6 +968,13 @@
 			<real>435</real>
 			<key>ypos</key>
 			<real>35</real>
+		</dict>
+		<key>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</key>
+		<dict>
+			<key>xpos</key>
+			<real>770</real>
+			<key>ypos</key>
+			<real>740</real>
 		</dict>
 		<key>83E378DD-0BAE-4A5F-B0D5-20FE53C32A85</key>
 		<dict>
@@ -1002,6 +1056,13 @@
 			<real>35</real>
 			<key>ypos</key>
 			<real>175</real>
+		</dict>
+		<key>BC55B53D-B9D5-47AC-B2F4-45C6250702DD</key>
+		<dict>
+			<key>xpos</key>
+			<real>600</real>
+			<key>ypos</key>
+			<real>740</real>
 		</dict>
 		<key>CA20D1DD-9AE8-4C18-B8CC-A7B0F669B4AC</key>
 		<dict>
