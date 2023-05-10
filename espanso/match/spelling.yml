@@ -262,3 +262,7 @@ matches:
   - trigger: Github
     replace: GitHub
     word: true
+  - trigger: hte
+    replace: the
+    propagate_casing: true
+    word: true
