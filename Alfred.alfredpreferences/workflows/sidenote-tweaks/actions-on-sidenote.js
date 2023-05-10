@@ -4,6 +4,10 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/**
+ * @param {string} file
+ * @param {string} text
+ */
 function writeToFile(file, text) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
 	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
@@ -22,6 +26,8 @@ const maxNameLen = 50;
 // note objects have more properties like textFormatting, the `.text()` method
 // includes information on whether the note has an image, and methods like
 // `.delete()` are available
+
+/** @param {string} noteId */
 function getNoteObj(noteId) {
 	const sidenotes = Application("SideNotes");
 	const folders = sidenotes.folders;
@@ -37,7 +43,8 @@ function getNoteObj(noteId) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/* eslint-disable-next-line complexity */
+/** @param {string[]} argv */
+// rome-ignore lint/correctness/noUnusedVariables: argv
 function run(argv) {
 	const sidenotes = Application("SideNotes");
 
@@ -81,8 +88,12 @@ function run(argv) {
 	if (doCopy) app.setTheClipboardTo(content);
 
 	if (doExport) {
+		// ensure line breaks before headings
+		// (sometimes skipped since SideNotes UI makes it not apparent)
+		const exportContent = content.replace(/\n+(?=#+ )/g, "\n\n");
+
 		const exportPath = `${exportFolder}/${safeTitle}.md`;
-		writeToFile(exportPath, content);
+		writeToFile(exportPath, exportContent);
 		app.doShellScript(`open -R "${exportPath}"`);
 	}
 
