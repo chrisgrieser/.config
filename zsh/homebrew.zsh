@@ -71,6 +71,8 @@ function update() {
 	echo "Check if node now works without disabling SSL"
 
 	sketchybar --trigger homebrew-update # update counter now that updates have been done
+
+	osascript -e 'display notification "" with title "🍺 Homebrew finished." sound name "Blow"'
 }
 
 function report() {

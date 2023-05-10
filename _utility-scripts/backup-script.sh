@@ -85,3 +85,6 @@ osascript -e'
 		end if
 		quit
 	end tell' &>/dev/null
+
+# Notify on Completion
+osascript -e 'display notification "" with title "Backup finished." sound name ""'
