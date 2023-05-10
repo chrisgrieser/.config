@@ -667,7 +667,7 @@ autocmd("LspAttach", {
 -- GIT
 
 -- Neogit
-keymap("n", "<leader>gn", cmd.Neogit, { desc = "󰊢 Neogit" })
+keymap("n", "<leader>gn", cmd.Neogit, { desc = "󰊢 Neogit Menu" })
 keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = "󰊢 Commit (Neogit)" })
 
 -- Gitsigns
@@ -682,7 +682,7 @@ keymap("n", "<leader>g?", ":Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line"
 keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = "󰊢  Status" })
 keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = "󰊢  Log / Commits" })
 keymap("n", "<leader>gb", function() cmd.Telescope("git_bcommits") end, { desc = "󰊢  Buffer Commits" })
-keymap("n", "<leader>gB", function() cmd.Telescope("git_branches") end, { desc = "󰊢  Buffer Commits" })
+keymap("n", "<leader>gB", function() cmd.Telescope("git_branches") end, { desc = "󰊢  Branches Commits" })
 
 -- My utils
 keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
@@ -713,8 +713,8 @@ keymap(
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
-keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = " Toggle Relative Line Numbers" })
-keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers" })
+keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = "  Toggle Relative Line Numbers" })
+keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers" })
 keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 󰒕 LSP Restart" })
 
 keymap("n", "<leader>od", function()
@@ -723,7 +723,7 @@ keymap("n", "<leader>od", function()
 	else
 		vim.diagnostic.disable(0)
 	end
-end, { desc = " 󰒕 Toggle Diagnostics" })
+end, { desc = "  Toggle Diagnostics" })
 
 keymap("n", "<leader>ow", function()
 	local wrapOn = vim.opt_local.wrap:get()
@@ -746,7 +746,7 @@ keymap("n", "<leader>ow", function()
 		keymap({ "n", "x" }, "j", "gj", { buffer = true })
 		keymap({ "n", "x" }, "k", "gk", { buffer = true })
 	end
-end, { desc = " Toggle Wrap" })
+end, { desc = " 󰖶 Toggle Wrap" })
 
 --------------------------------------------------------------------------------
 
@@ -774,27 +774,25 @@ keymap("n", "<leader>tl", function()
 	cmd("Lab code run")
 	keymap("n", "<leader>r", "<cmd>Lab code run<CR>", { desc = "󰙨 Run Code", buffer = true })
 	keymap("n", "<leader>tl", "<cmd>Lab code stop<CR>", { desc = "󰙨 Stop Lab", buffer = true })
-end, { desc = "󰙨 Lab" })
+end, { desc = "󰙨 Lab (REPL)" })
 
 -- edit embedded filetype
-keymap("n", "<leader>ti", function()
+keymap("n", "<leader>te", function()
 	if bo.filetype ~= "markdown" then
 		vim.notify("Only markdown codeblocks can be edited without a selection.")
 		return
 	end
-	cmd.InlineEdit()
-	keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
-end, { desc = " InlineEdit" })
+	cmd.EditCodeBlock()
+end, { desc = " Edit Embedded Code (Code Block)" })
 
-keymap("x", "<leader>ti", function()
+keymap("x", "<leader>te", function()
 	local fts = { "sh", "applescript", "vim" }
 	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 		if not ft then return end
 		u.leaveVisualMode()
-		cmd("'<,'>InlineEdit " .. ft)
-		keymap("n", "<D-w>", ":write|:close<CR>", { buffer = true })
+		cmd("'<,'>EditCodeBlockSelection " .. ft)
 	end)
-end, { desc = " InlineEdit" })
+end, { desc = " Edit Embedded Code (Selection)" })
 
 --------------------------------------------------------------------------------
 

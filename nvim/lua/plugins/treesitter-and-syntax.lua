@@ -78,14 +78,13 @@ return {
 			vim.keymap.set("o", "q", "&&&", { desc = "comment", remap = true })
 		end,
 	},
-	{ -- Embedded filetypes
-		"AndrewRadev/inline_edit.vim",
-		cmd = "InlineEdit",
-		init = function()
-			vim.g.inline_edit_autowrite = 1
-			vim.g.inline_edit_new_buffer_command = "new"
-			vim.g.inline_edit_proxy_type = "scratch" -- scratch|tempfile
-		end,
+	{
+		"dawsers/edit-code-block.nvim",
+		cmd = { "EditCodeBlock", "EditCodeBlockSelection" },
+		main = "ecb",
+		opts = {
+			wincmd = "split",
+		},
 	},
 
 	-- Syntax Highlighting Plugins
