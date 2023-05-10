@@ -240,7 +240,12 @@ keymap(
 	function() return ":%sm/" .. expand("<cword>") .. "//g<Left><Left>" end,
 	{ desc = "󱗘 :substitute cword (magic)", expr = true }
 )
-keymap("x", "<leader>ff", [["zy:sm/<C-r>z//g<Left><Left>]], { desc = "󱗘 :substitute selection (magic)" })
+keymap(
+	"x",
+	"<leader>ff",
+	[["zy:sm/<C-r>z//g<Left><Left>]],
+	{ desc = "󱗘 :substitute selection (magic)" }
+)
 
 keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
 keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
@@ -836,4 +841,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-
