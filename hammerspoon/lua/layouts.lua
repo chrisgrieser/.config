@@ -59,6 +59,7 @@ local function workLayout()
 	darkmode.AutoSwitch()
 	visuals.holeCover()
 	dockSwitcher("work")
+	setHigherBrightnessDuringDay()
 	hs.execute("sketchybar --set clock popup.drawing=true")
 
 	-- close
@@ -155,7 +156,6 @@ UnlockWatcher = c.new(function(event)
 
 	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
 		u.runWithDelays(0.5, function() -- delay for recognizing screens
-			setHigherBrightnessDuringDay()
 			M.selectLayout()
 			sidenotes.reminderToSidenotes()
 		end)
