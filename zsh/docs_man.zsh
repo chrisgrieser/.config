@@ -12,8 +12,8 @@ function h() {
 	query=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
 	cheat_info=$(curl -s "https://cht.sh/$query?style=$style")
 	cheat_code_only=$(curl -s "https://cht.sh/$query?QT")
-	echo "$cheat_info" | less
 	echo "$cheat_code_only" | pbcopy
+	echo "$cheat_info" | less
 }
 
 # GET A BETTER MAN
@@ -39,10 +39,11 @@ function ai() {
 	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
 
-	query="$*"
+	local query="$*"
 	# WARN do not use "$prompt" as a variable in zsh, it's a reserved keyword
-	the_prompt="The following request is concerned with zsh. If your response includes codeblocks, do add language labels to it. Here is the request: $query"
-	curl "https://api.openai.com/v1/chat/completions" \
+	local the_prompt="The following request is concerned with zsh. If your response includes codeblocks, do add language labels to it. Here is the request: $query"
+	local answer
+	answer=$(curl "https://api.openai.com/v1/chat/completions" \
 		-H "Content-Type: application/json" \
 		-H "Authorization: Bearer $OPENAI_API_KEY" \
 		-d "{
@@ -50,8 +51,8 @@ function ai() {
 			\"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}],
 			\"temperature\": 0
 		}" |
-		yq -r '.choices[].message.content' |
-		bat --language=markdown --style=grid
+		yq -r '.choices[].message.content')
+	echo "$answer" | bat --language=markdown --style=grid
 }
 
 #───────────────────────────────────────────────────────────────────────────────
