@@ -10,12 +10,11 @@
 # saves spaces
 --wrap=never
 --tabs=2
-
 --terminal-width="-1"
 
 # Possible values: *default*, full, auto, plain, changes, header,
 # header-filename, header-filesize, grid, rule, numbers, snip.
---style="header-filesize,header-filename,grid,snip"
+--style="grid"
 
-# shows percentage indicator by going fully down (G) and then up again (g)
---pager="less -RF --long-prompt +Gg"
+# auto-quit when only short
+--pager="less -RF"

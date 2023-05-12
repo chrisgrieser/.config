@@ -8,19 +8,20 @@ export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 # CONFIG
 VIDEO_DIR="$HOME/Downloaded"
 SUB_LANG='en'
+
 #───────────────────────────────────────────────────────────────────────────────
+
+cd "$VIDEO_DIR" || exit 1
 
 # Check requirements
 if ! command -v subliminal &>/dev/null; then
-	touch "$VIDEO_DIR/subliminal_not_installed"
+	touch "./subliminal_not_installed"
 	return 1
 fi
-if command -v transmission-remote &>/dev/null; then
-	touch "$VIDEO_DIR/transmission-remote_not_installed"
+if ! command -v transmission-remote &>/dev/null; then
+	touch "./transmission-remote_not_installed"
 	return 1
 fi
-
-cd "$VIDEO_DIR" || exit 1
 
 # delete clutter
 find . \
@@ -33,16 +34,19 @@ find . \
 	-or -name '*.png' -delete
 find . -name "Sample" -print0 | xargs -0 rm -r # `-delete` does not work for directories, therefore using xargs
 
-# wait for files being fully moved
+# identify new folder & wait for files being fully moved
 i=0
 while [[ -z "$NEW_FOLDER" ]]; do
-	NEW_FOLDER="$(ls -tc "$VIDEO_DIR" | head -n1)"
+	NEW_FOLDER="$(find . -type d -mtime -2m | head -n1)"
 	sleep 1
 	i=$((i + 1))
-	[[ $i -gt 30 ]] && exit 1
+	if [[ $i -gt 10 ]]; then
+		touch "./no_new_folder_found"
+		return 1
+	fi
 done
 
-# download subtitles in newest folder
+# download subtitles for all files in that folder
 subliminal download --language "$SUB_LANG" "$NEW_FOLDER"
 
 # if no subtitle, move up
