@@ -13,8 +13,6 @@ if roundedCorners then roundedCorners:start() end
 ---to stop wallpaper shining through
 ---@param arg? string
 function M.holeCover(arg)
-	if env.isProjector() then return end
-
 	if CoverParts then
 		---@diagnostic disable-next-line: unused-local
 		for _, cover in pairs(CoverParts) do
@@ -23,7 +21,7 @@ function M.holeCover(arg)
 		end
 		CoverParts = nil
 	end
-	if arg == "remove" then return end
+	if arg == "remove" or env.isProjector() then return end
 
 	local bgColor
 	local screen = hs.screen.mainScreen():frame()
