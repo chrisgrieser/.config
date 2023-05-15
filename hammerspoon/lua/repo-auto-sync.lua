@@ -113,7 +113,7 @@ function M.syncAllGitRepos(extras)
 		if extras == "notify" then u.notify("Sync finished") end
 	end
 
-	SyncTimer = hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
+	AllSyncTimer = hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
 end
 
 --------------------------------------------------------------------------------

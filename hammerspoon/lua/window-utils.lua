@@ -8,13 +8,15 @@ M.iMacDisplay = hs.screen("Built%-in")
 M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
+M.sideNotesWide = { x = 0, y = 0, w = 0.4, h = 1 }
 
+-- negative x to hide useless sidebar
 if env.isAtMother then
 	M.toTheSide = hs.geometry.rect(-70, 54, 380, 890)
 elseif env.isAtOffice then
 	M.toTheSide = hs.geometry.rect(-75, 54, 450, 1100)
 else
-	M.toTheSide = hs.geometry.rect(-70, 54, 425, 1026) -- negative x to hide useless sidebar
+	M.toTheSide = hs.geometry.rect(-70, 54, 425, 1026)
 end
 
 M.rejectedFinderWins = {
@@ -30,39 +32,27 @@ M.rejectedFinderWins = {
 	"^Alfred$", -- Alfred Compatibility Mode
 }
 
-M.sideNotesWide = { x = 0, y = 0, w = 0.4, h = 1 }
-
 --------------------------------------------------------------------------------
 -- OBSIDIAN SIDEBAR
 
+---half -> hide right sidebar
+---pseudo-maximized -> show right sidebar
+---max -> show both sidebars
 ---@param obsiWin hs.window
----@param size hs.geometry
 local function toggleObsidianSidebar(obsiWin, size)
-	u.runWithDelays({ 0.05, 0.2 }, function()
-		local numberOfObsiWindows = #(hs.application("Obsidian"):allWindows())
-		if numberOfObsiWindows > 1 then return end -- prevent popout window resizing to affect sidebars
+	local obsi = u.app("Obsidian")
+	if not obsiWin or not obsi or #obsi:allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
 
-		local obsi_width = size.w
-		local screen_width = obsiWin:screen():frame().w
-
-		-- half -> hide right sidebar
-		-- pseudo-maximized -> show right sidebar
-		-- max -> show both sidebars
-		local modeRight = (obsi_width / screen_width > 0.6) and "expand" or "collapse"
-		u.openLinkInBg(
-			"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29"
-		)
-		local modeLeft = (obsi_width / screen_width > 0.99) and "expand" or "collapse"
-		u.openLinkInBg(
-			"obsidian://advanced-uri?eval=this.app.workspace.leftSplit." .. modeLeft .. "%28%29"
-		)
-	end)
+	local modeRight = (size.w > 0.6) and "expand" or "collapse"
+	u.openLinkInBg("obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29")
+	local modeLeft = (size.w > 0.99) and "expand" or "collapse"
+	u.openLinkInBg("obsidian://advanced-uri?eval=this.app.workspace.leftSplit." .. modeLeft .. "%28%29")
 end
 
 ---ensures Obsidian windows are always shown when developing, mostly for developing CSS
 ---@param win hs.window
----@param pos hs.geometry
-local function obsidianThemeDevHelper(win, pos)
+---@param size hs.geometry
+local function obsidianThemeDevHelper(win, size)
 	if
 		not win
 		or not win:application()
@@ -73,7 +63,7 @@ local function obsidianThemeDevHelper(win, pos)
 	end
 
 	local obsi = u.app("Obsidian")
-	if pos == M.pseudoMax or pos == M.maximized then
+	if size == M.pseudoMax or size == M.maximized then
 		obsi:hide()
 	else
 		-- delay to avoid conflict with app-hider.lua
@@ -186,23 +176,24 @@ function M.moveResize(win, pos)
 		return
 	end
 
-	-- Twitter Extras
-	if pos == M.pseudoMax or pos == M.centered then
-		M.twitterToTheSide()
-	elseif pos == M.maximized and u.appRunning("Twitter") then
-		if u.app("Twitter") then u.app("Twitter"):hide() end
-	end
-
-	-- Obsidian Extras
-	obsidianThemeDevHelper(win, pos)
-	if win:application():name() == "Obsidian" then toggleObsidianSidebar(win, pos) end
-
 	-- resize with safety redundancy
 	u.runWithDelays({ 0, 0.2, 0.4, 0.6, 0.8 }, function()
 		-- check for false, since non-resizable wins return nil
 		if M.CheckSize(win, pos) ~= false then return end
 		win:moveToUnit(pos)
 	end)
+
+	-- Twitter Extras
+	local twitter = u.app("Twitter")
+	if pos == M.pseudoMax or pos == M.centered then
+		M.twitterToTheSide()
+	elseif pos == M.maximized and twitter then
+		twitter:hide()
+	end
+
+	-- Obsidian Extras
+	obsidianThemeDevHelper(win, pos)
+	toggleObsidianSidebar(win, pos)
 end
 
 --------------------------------------------------------------------------------
@@ -256,7 +247,7 @@ function M.autoTile(winSrc)
 			if #(u.app("Finder"):allWindows()) == 0 then u.app("Finder"):hide() end
 		end)
 	elseif #wins == 1 then
-		local pos 
+		local pos
 		if env.isProjector() then
 			pos = M.maximized
 		elseif u.isFront("Finder") then
