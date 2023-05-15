@@ -23,7 +23,7 @@ function run(input) {
 
 	// conditions for deciding where to open
 	let firstFile = pathArray[0];
-	const isFileInObsidianVault = Object.values(vaults).some(vault => firstFile.startsWith(vault.path));
+	const isFileInObsidianVault = Object.values(vaults).some((vault) => firstFile.startsWith(vault.path));
 	const obsidianIsFrontmost = Application("Obsidian").frontmost();
 	const isInHiddenFolder = firstFile.includes("/.");
 
@@ -31,7 +31,7 @@ function run(input) {
 	// When Obsidian is frontmost, it means the "Open in default app" command was
 	// used, for which we also do not open right in Obsidian again
 	const openInObsidian = isFileInObsidianVault && !isInHiddenFolder && !obsidianIsFrontmost;
-	const canvasOutside = firstFile.endsWith(".canvas") && (!isFileInObsidianVault || isInHiddenFolder)
+	const canvasOutside = firstFile.endsWith(".canvas") && (!isFileInObsidianVault || isInHiddenFolder);
 
 	// symlink outside canvas
 	if (canvasOutside) {

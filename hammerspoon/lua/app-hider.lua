@@ -24,8 +24,7 @@ local function hideOthers(appObj)
 	if
 		not appObj
 		or not appObj:mainWindow()
-		---@diagnostic disable-next-line: param-type-mismatch
-		or not u.isFront(appObj:name()) -- win not switched in meantime
+		or not appObj:isFrontmost()-- win not switched in meantime
 	then
 		return
 	end
