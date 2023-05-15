@@ -42,9 +42,9 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- PIXELMATOR: open maximized
-PixelmatorWatcher = aw.new(function(appName, eventType, appObj)
+PixelmatorWatcher = aw.new(function(appName, eventType, pixelmator)
 	if appName == "Pixelmator" and eventType == aw.launched then
-		u.asSoonAsAppRuns(appName, function() wu.moveResize(appObj, wu.maximized) end)
+		u.asSoonAsAppRuns(appName, function() wu.moveResize(pixelmator, wu.maximized) end)
 	end
 end):start()
 
@@ -81,7 +81,48 @@ Wf_browser_all = wf.new({ "Vivaldi" })
 	end)
 
 --------------------------------------------------------------------------------
+-- Obsidian
+
+---half -> hide right sidebar
+---pseudo-maximized -> show right sidebar
+---max -> show both sidebars
+Wf_ObsidanMoved = u.wf.new("Obsidian"):subscribe(u.wf.windowMoved, function(obsiWin)
+	if #u.app("Obsidian"):allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
+
+	local relObsiWinWidth = obsiWin:size().w / obsiWin:screen():frame().w
+	local modeRight = (relObsiWinWidth > 0.6) and "expand" or "collapse"
+	local modeLeft = (relObsiWinWidth > 0.99) and "expand" or "collapse"
+
+	u.openLinkInBg("obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29")
+	u.openLinkInBg("obsidian://advanced-uri?eval=this.app.workspace.leftSplit." .. modeLeft .. "%28%29")
+end)
+
+--------------------------------------------------------------------------------
 -- NEOVIM / NEOVIDE
+
+---ensures Obsidian windows are always shown when developing, mostly for developing CSS
+---@param win hs.window
+local function obsidianThemeDevHelper(win)
+	local obsi = u.app("Obsidian")
+	if
+		not win
+		or not win:application()
+		or not (win:application():name():lower() == "neovide")
+		or not obsi
+	then
+		return
+	end
+
+	-- delay to avoid conflict with app-hider.lua and that resizing took place
+	u.runWithDelays(0.1, function()
+		if wu.CheckSize(win, wu.pseudoMax) or wu.CheckSize(win, wu.maximized) then
+			obsi:hide()
+		else
+			obsi:unhide()
+			obsi:mainWindow():raise()
+		end
+	end)
+end
 
 -- Add dots when copypasting from dev tools
 local function addCssSelectorLeadingDot()
@@ -105,17 +146,22 @@ local function addCssSelectorLeadingDot()
 	hs.pasteboard.setContents(clipb)
 end
 
-NeovideWatcher = aw.new(function(appName, eventType)
+NeovideWatcher = aw.new(function(appName, eventType, neovide)
 	if not appName or appName:lower() ~= "neovide" then return end
 
 	if eventType == aw.activated then
 		addCssSelectorLeadingDot()
+		obsidianThemeDevHelper(neovide:mainWindow())
 
 		-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
 	elseif eventType == aw.terminated then
 		u.runWithDelays({ 5, 10 }, function() hs.execute("pgrep neovide || killall -KILL nvim") end)
 	end
 end):start()
+
+Wf_neovideMoved = u.wf
+	.new({ "Neovide", "neovide" })
+	:subscribe(u.wf.windowMoved, function(movedWin) obsidianThemeDevHelper(movedWin) end)
 
 -- HACK since neovide does not send a launch signal, triggering window resizing
 -- via its URI scheme called on VimEnter
@@ -139,10 +185,10 @@ Wf_finder = wf.new("Finder")
 	:subscribe(wf.windowCreated, function() wu.autoTile(Wf_finder) end)
 	:subscribe(wf.windowDestroyed, function() wu.autoTile(Wf_finder) end)
 
-FinderAppWatcher = aw.new(function(appName, eventType, finderAppObj)
+FinderAppWatcher = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
 		wu.autoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
-		finderAppObj:selectMenuItem { "View", "Hide Sidebar" }
+		finder:selectMenuItem { "View", "Hide Sidebar" }
 	end
 end):start()
 
@@ -168,25 +214,25 @@ end)
 -- HIGHLIGHTS
 -- - Sync Dark & Light Mode
 -- - Start with Highlight Tool enabled
-HighlightsAppWatcher = aw.new(function(appName, eventType, appObject)
+HighlightsAppWatcher = aw.new(function(appName, eventType, highlights)
 	if not (eventType == aw.launched and appName == "Highlights") then return end
 
 	local targetView = "Default"
 	if u.isDarkMode() then targetView = "Night" end
-	appObject:selectMenuItem { "View", "PDF Appearance", targetView }
+	highlights:selectMenuItem { "View", "PDF Appearance", targetView }
 
 	-- pre-select yellow highlight tool & hide toolbar
-	appObject:selectMenuItem { "Tools", "Highlight" }
-	appObject:selectMenuItem { "Tools", "Color", "Yellow" }
-	appObject:selectMenuItem { "View", "Hide Toolbar" }
+	highlights:selectMenuItem { "Tools", "Highlight" }
+	highlights:selectMenuItem { "Tools", "Color", "Yellow" }
+	highlights:selectMenuItem { "View", "Hide Toolbar" }
 
-	wu.moveResize(appObject:mainWindow(), wu.pseudoMax)
+	wu.moveResize(highlights:mainWindow(), wu.pseudoMax)
 end):start()
 
 -- PREVIEW: pseudomaximize
-PreviewAppWatcher = aw.new(function(appName, eventType, appObject)
+PreviewAppWatcher = aw.new(function(appName, eventType, preview)
 	if not (eventType == aw.launched and appName == "Preview") then return end
-	wu.moveResize(appObject:mainWindow(), wu.pseudoMax)
+	wu.moveResize(preview:mainWindow(), wu.pseudoMax)
 end):start()
 
 --------------------------------------------------------------------------------

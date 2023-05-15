@@ -4,9 +4,11 @@
 -- 2) apps should not cover up the sketchybar that I only have in the top right
 -- corner
 
+local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local env = require("lua.environment-vars")
+
+local transBgApps = { "neovide", "Neovide", "Obsidian", "wezterm-gui", "WezTerm" }
 --------------------------------------------------------------------------------
 
 -- unhide all apps
@@ -24,7 +26,7 @@ local function hideOthers(appObj)
 	if
 		not appObj
 		or not appObj:mainWindow()
-		or not appObj:isFrontmost()-- win not switched in meantime
+		or not appObj:isFrontmost() -- win not switched in meantime
 	then
 		return
 	end
@@ -52,17 +54,24 @@ end
 
 -- if an app with bg-transparency is activated, hide all other apps
 -- if such an app is terminated, unhide them again
-TransBgAppWatcher = u.aw.new(function(appName, event, appObj)
-	local transBgApp = { "neovide", "Neovide", "Obsidian", "wezterm-gui", "WezTerm" }
-	if env.isProjector() or not (u.tbl_contains(transBgApp, appName)) then return end
+TransBgAppWatcher = u.aw
+	.new(function(appName, event, appObj)
+		if env.isProjector() or not (u.tbl_contains(transBgApps, appName)) then return end
 
-	if event == u.aw.terminated then
-		unHideAll()
-	elseif event == u.aw.activated then
-		hideOthers(appObj)
-		u.asSoonAsAppRuns(appName, function() hideOthers(appObj) end)
-	end
-end):start()
+		if event == u.aw.terminated then
+			unHideAll()
+		elseif event == u.aw.activated then
+			hideOthers(appObj)
+			u.asSoonAsAppRuns(appName, function() hideOthers(appObj) end)
+		end
+	end)
+	:start()
+
+-- also trigger on window resizing events
+Wf_transBgAppWindowFilter = u.wf.new(transBgApps):subscribe(
+	u.wf.windowMoved,
+	function(movedWin) hideOthers(movedWin:application()) end
+)
 
 -- extra run for neovide startup necessary, since they do not send a
 -- launch signal and also the `AsSoonAsAppRuns` condition does not work well.
@@ -74,19 +83,21 @@ u.urischeme("hide-other-than-neovide", function()
 end)
 
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
-AutoTileAppWatcher = u.aw.new(function(appName, eventType, appObj)
-	local autoTileApps = { "Finder", "Vivaldi" }
-	if
-		eventType == u.aw.deactivated
-		and u.tbl_contains(autoTileApps, appName)
-		and #appObj:allWindows() > 1
-		and not (appObj:findWindow("Picture in Picture"))
-		and not (env.isProjector())
-		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X", "IINA" })
-	then
-		appObj:hide()
-	end
-end):start()
+AutoTileAppWatcher = u.aw
+	.new(function(appName, eventType, appObj)
+		local autoTileApps = { "Finder", "Vivaldi" }
+		if
+			eventType == u.aw.deactivated
+			and u.tbl_contains(autoTileApps, appName)
+			and #appObj:allWindows() > 1
+			and not (appObj:findWindow("Picture in Picture"))
+			and not (env.isProjector())
+			and not (u.isFront { "Alfred", "SideNotes", "CleanShot X", "IINA" })
+		then
+			appObj:hide()
+		end
+	end)
+	:start()
 
 -- prevent maximized window from covering sketchybar if they are unfocused
 -- pseudomaximized windows always get twitter to the side

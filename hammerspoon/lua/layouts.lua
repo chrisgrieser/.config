@@ -69,10 +69,10 @@ local function workLayout()
 
 	-- Twitter
 	u.openApps("Twitter")
-	u.asSoonAsAppRuns("Twitter", function()
-		wu.twitterToTheSide()
-		wu.twitterScrollUp()
-	end)
+	-- u.asSoonAsAppRuns("Twitter", function()
+	-- 	wu.twitterToTheSide()
+	-- 	wu.twitterScrollUp()
+	-- end)
 
 	-- open
 	local appsToOpen = { "Discord", "Vivaldi", "Mimestream" }
