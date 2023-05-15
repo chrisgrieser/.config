@@ -18,18 +18,12 @@ opt.shadafile = u.vimDataDir .. "main.shada"
 --------------------------------------------------------------------------------
 -- Undo
 opt.undofile = true -- enable persistent undo history
-opt.undolevels = 400 -- less undos saved for quicker loading of undo history
 
 -- extra undopoints (= more fine-grained undos)
 -- WARN requires remap, since it otherwise prevents vim abbrev. w/ those chars from working
 local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
 for _, char in pairs(undopointChars) do
-	keymap("i", char, function()
-		local expr = char .. "<C-g>u"
-		-- FIX interference with telescope-file-browser keymapping
-		if bo.filetype == "TelescopePrompt" then expr = char end
-		return expr
-	end, { desc = "extra undopoint for " .. char, remap = true, expr = true })
+	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char, remap = true })
 end
 
 --------------------------------------------------------------------------------
@@ -75,7 +69,7 @@ opt.signcolumn = "yes:1" -- = gutter
 
 -- Wrapping
 opt.textwidth = 80
-opt.wrapmargin = 2 -- especially useful when using a scrollbar
+opt.wrapmargin = 2 -- extra space since using a scrollbar plugin
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
@@ -231,7 +225,7 @@ autocmd("BufWinEnter", {
 
 -- Add missing buffer names, e.g. for status bar
 autocmd("FileType", {
-	pattern = { "Glance", "lazy", "mason", "Navbuddy" },
+	pattern = { "Glance", "lazy", "mason" },
 	callback = function()
 		local name = vim.fn.expand("<amatch>")
 		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize

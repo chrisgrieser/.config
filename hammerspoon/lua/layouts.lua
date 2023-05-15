@@ -67,15 +67,8 @@ local function workLayout()
 	require("lua.private").closer()
 	closeAllFinderWins()
 
-	-- Twitter
-	u.openApps("Twitter")
-	-- u.asSoonAsAppRuns("Twitter", function()
-	-- 	wu.twitterToTheSide()
-	-- 	wu.twitterScrollUp()
-	-- end)
-
 	-- open
-	local appsToOpen = { "Discord", "Vivaldi", "Mimestream" }
+	local appsToOpen = { "Discord", "Vivaldi", "Mimestream", "Twitter" }
 	if not isWeekend() then table.insert(appsToOpen, 1, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
@@ -89,7 +82,7 @@ local function workLayout()
 	LayoutTimer = hs.timer.waitUntil(function() return u.appRunning(appsToOpen) end, function()
 		u.app("Mimestream"):activate()
 		u.restartApp("AltTab")
-	end, 0.1)
+	end, 0.1):start()
 
 	print("🔲 WorkLayout: done")
 end

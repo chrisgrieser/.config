@@ -19,7 +19,6 @@ local keymappings = {
 }
 
 local function telescopeConfig()
-
 	-- https://github.com/nvim-telescope/telescope.nvim/issues/605
 	local deltaPreviewer = require("telescope.previewers").new_termopen_previewer {
 		get_command = function(entry)
@@ -42,7 +41,10 @@ local function telescopeConfig()
 			selection_caret = "󰜋 ",
 			prompt_prefix = "❱ ",
 			multi_icon = "󰒆 ",
-			preview = { filesize_limit = 0.5 }, -- in MB, do not preview big files for performance
+			preview = {
+				timeout = 100, -- ms
+				filesize_limit = 0.3, -- in MB, do not preview big files for performance
+			},
 			path_display = { "tail" },
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
@@ -99,7 +101,7 @@ local function telescopeConfig()
 				prompt_prefix = "󰊢 ",
 				initial_mode = "normal",
 				-- adding "--all" to see future commits
-				git_command = {"git","log", "--all", "--pretty=%h %s (%cr)"},
+				git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)" },
 				results_title = "git log",
 				previewer = deltaPreviewer,
 			},
@@ -198,11 +200,14 @@ local function telescopeConfig()
 						-- mappings should be consistent with nvim-ghengis mappings
 						["<D-n>"] = require("telescope._extensions.file_browser.actions").create,
 						["<C-r>"] = require("telescope._extensions.file_browser.actions").rename,
-						["<D-Up>"] = require("telescope._extensions.file_browser.actions").goto_parent_dir,
 						["<D-BS>"] = require("telescope._extensions.file_browser.actions").remove,
 						-- Toggle Files/Folders
 						["<D-b>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
-						["<bs>"] = false, -- unmap <BS> on empty prompt going up; requires lowercase key
+
+						-- unmap <BS> on empty prompt going up; requires lowercase key
+						["<bs>"] = false,
+						-- disable to prevent interference with setting undopoints via `<C-g>u`
+						["<C-g>"] = false, 
 					},
 				},
 			},
@@ -228,9 +233,10 @@ return {
 			require("telescope").load_extension("file_browser")
 			require("telescope").load_extension("projects")
 
-			-- INFO since used for cmp-fuzzy-buffer anyway, might as well plug it in
-			-- here, even though performance-wise vanilla telescope is fine for me
-			-- does add the minor benefit of having nicer query syntax though
+			-- INFO since used for cmp-fuzzy-buffer already, might as well add it
+			-- here as well. Even though performance-wise vanilla telescope is fine
+			-- for me, it does add the minor benefit of having better query syntax
+			-- https://github.com/nvim-telescope/telescope-fzf-native.nvim#telescope-fzf-nativenvim
 			require("telescope").load_extension("fzf")
 		end,
 	},
