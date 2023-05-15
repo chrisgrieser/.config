@@ -95,10 +95,8 @@ end
 function M.syncAllGitRepos(extras)
 	local pullSubmodules = extras ~= "no-submodule-pull"
 	local success1 = gitDotfileSync(pullSubmodules)
-
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
-
 	if not (success1 and success2 and success3) then
 		u.notify("⚠️️ Sync Error")
 		return
@@ -115,7 +113,7 @@ function M.syncAllGitRepos(extras)
 		if extras == "notify" then u.notify("Sync finished") end
 	end
 
-	hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
+	SyncTimer = hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
 end
 
 --------------------------------------------------------------------------------
@@ -131,7 +129,7 @@ RepoSyncTimer = hs.timer
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
 u.urischeme("sync-repos", function()
-	hs.application("Hammerspoon"):hide() -- so the previous app does not loose focus
+	u.app("Hammerspoon"):hide() -- so the previous app does not loose focus
 	M.syncAllGitRepos("notify")
 end)
 
