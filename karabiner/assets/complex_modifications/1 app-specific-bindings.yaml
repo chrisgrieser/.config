@@ -1,5 +1,4 @@
 title: "App-specific-Bindings"
-homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
   - description: "(Apps) Zoom"
     manipulators:
@@ -289,41 +288,6 @@ rules:
         to:
           - { key_code: up_arrow }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Lire: sidebar + vim controls"
-    manipulators:
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: s, modifiers: [command, control] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.lireapp\.macOS$] }
-      - type: basic
-        from: { key_code: j }
-        to:
-          - key_code: "right_arrow"
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.lireapp\.macOS$] }
-      - type: basic
-        from: { key_code: k }
-        to:
-          - key_code: "left_arrow"
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.lireapp\.macOS$] }
-      - type: basic # open in browser in background
-        from: { key_code: l }
-        to:
-          - key_code: "v"
-          - { key_code: vk_none, hold_down_milliseconds: 120 }
-          - { key_code: "tab", modifiers: [command] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.lireapp\.macOS$] }
-      - type: basic # full text
-        from: { key_code: o }
-        to:
-          - key_code: "g"
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.lireapp\.macOS$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Discord"
     manipulators:

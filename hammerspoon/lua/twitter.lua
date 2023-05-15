@@ -78,11 +78,21 @@ local function twitterToTheSide()
 	local win = twitter:findWindow("Twitter")
 	if not win then return end
 
-	win:setFrame(M.toTheSide)
+	win:setFrame(wu.toTheSide)
 	win:raise()
 end
 
 --------------------------------------------------------------------------------
+
+local function showHideTwitter(referenceWin)
+	local twitter = u.app("Twitter")
+	if not twitter or not referenceWin then return end
+	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centered) then
+		twitterToTheSide()
+	elseif wu.CheckSize(referenceWin, wu.maximized) then
+		twitter:hide()
+	end
+end
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
 TwitterWatcher = u.aw
@@ -108,7 +118,7 @@ TwitterWatcher = u.aw
 		-- auto-close media windows and scroll up when deactivating
 		elseif appName == "Twitter" and event == u.aw.deactivated then
 			if u.isFront("CleanShot X") then return end
-			wu.twitterScrollUp()
+			twitterScrollUp()
 			twitterCleanupLink()
 			twitterCloseMediaWindow()
 
@@ -118,28 +128,17 @@ TwitterWatcher = u.aw
 
 		-- raise twitter when switching window to other app
 		elseif (event == u.aw.activated or event == u.aw.launched) and appName ~= "Twitter" then
-			local frontWin = hs.window.focusedWindow()
-			if not frontWin or not twitter then return end
-
-			if wu.CheckSize(frontWin, wu.pseudoMax) or wu.CheckSize(frontWin, wu.centered) then
-				wu.twitterToTheSide()
-			elseif wu.CheckSize(frontWin, wu.maximized) then
-				twitter:hide()
-			end
+			showHideTwitter(hs.window.focusedWindow())
 		end
 	end)
 	:start()
 
 -- show/hide twitter when other wins move
-Wf_SomeWindowMoved = u.wf.new("Obsidian"):subscribe(u.wf.windowMoved, function(movedWin)
-	local twitter = u.app("Twitter")
-	
-	if wu.CheckSize(movedWin, wu.pseudoMax) or wu.CheckSize(movedWin, wu.centered) then
-		twitterToTheSide()
-	elseif wu.CheckSize(movedWin, wu.maximized) and twitter then
-		twitter:hide()
-	end
-end)
+Wf_SomeWindowMoved = u.wf
+	.new(true)
+	:subscribe(u.wf.windowMoved, function(movedWin) showHideTwitter(movedWin) end)
+
+--------------------------------------------------------------------------------
 
 local function homeAction()
 	if u.appRunning("zoom.us") then

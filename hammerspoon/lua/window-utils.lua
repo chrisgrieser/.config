@@ -76,14 +76,10 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- guard clauses
-	if not win or not win:application() or win:title() == "Quick Look" or win:title() == "qlmanage" then
-		return
-	end
 	local appsToIgnore =
 		{ "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon", "CleanShot X" }
 	local appName = win:application():name()
-	if u.tbl_contains(appsToIgnore, appName) then
-		u.notify("⚠️ " .. appName .. " cannot be resized properly.")
+	if not win or not win:application() or u.tbl_contains(appsToIgnore, appName) or win:title() == "Quick Look" or win:title() == "qlmanage" then
 		return
 	end
 
@@ -268,18 +264,18 @@ local function moveAllWinsToProjectorScreen()
 end
 
 local function endAction()
-	if #(hs.screen.allScreens()) > 1 then
-		moveCurWinToOtherDisplay()
-	elseif u.appRunning("zoom.us") then
+	if u.appRunning("zoom.us") then
 		hs.alert("📹") -- toggle video
 		u.keystroke({ "shift", "command" }, "V", 1, u.app("zoom.us"))
+	elseif #(hs.screen.allScreens()) > 1 then
+		moveCurWinToOtherDisplay()
 	else
 		hs.alert("<Nop>")
 	end
 end
 
 --------------------------------------------------------------------------------
--- HOTKEYS
+-- Triggers: Hotkeys & URI Scheme
 u.hotkey({}, "end", endAction)
 u.hotkey(u.hyper, "right", function() M.moveResize(hs.window.focusedWindow(), hs.layout.right50) end)
 u.hotkey(u.hyper, "left", function() M.moveResize(hs.window.focusedWindow(), hs.layout.left50) end)
