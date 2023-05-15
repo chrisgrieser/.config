@@ -41,7 +41,8 @@ M.rejectedFinderWins = {
 ---@param obsiWin hs.window
 local function toggleObsidianSidebar(obsiWin, size)
 	local obsi = u.app("Obsidian")
-	if not obsiWin or not obsi or #obsi:allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
+	if not obsi:isFrontmost() or not obsiWin or not obsi or #obsi:allWindows() > 1
+		then return end -- prevent popout window resizing to affect sidebars
 
 	local modeRight = (size.w > 0.6) and "expand" or "collapse"
 	u.openLinkInBg("obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29")
