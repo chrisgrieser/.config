@@ -64,20 +64,16 @@ local function twitterCloseMediaWindow()
 end
 
 local function twitterToTheSide()
+	local twitter = u.app("Twitter")
+	if not twitter or u.isFront("Alfred") then return end
+
 	-- in case of active split, prevent left window of covering the sketchybar
 	if LEFT_SPLIT and LEFT_SPLIT:application() then LEFT_SPLIT:application():hide() end
-
-	if u.isFront("Alfred") then return end
-
-	local twitter = u.app("Twitter")
-	if not twitter then return end
-
 	if twitter:isHidden() then twitter:unhide() end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
 	local win = twitter:findWindow("Twitter")
 	if not win then return end
-
 	win:setFrame(wu.toTheSide)
 	win:raise()
 end
@@ -103,9 +99,9 @@ TwitterWatcher = u.aw
 		-- move twitter and scroll it up
 		if appName == "Twitter" and (event == u.aw.launched or event == u.aw.activated) then
 			u.asSoonAsAppRuns("Twitter", function()
-				wu.twitterToTheSide()
+				twitterToTheSide()
+				twitterScrollUp()
 				wu.bringAllWinsToFront()
-				wu.twitterScrollUp()
 
 				-- focus new tweet / media window if there is one
 				if not twitter then return end
