@@ -210,7 +210,7 @@ rules:
         from: { key_code: "n" }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'lire' || open 'https://www.inoreader.com/'
+          - shell_command: open -a 'Inoreader' || open 'https://www.inoreader.com/'
           - *deactivate-leader
           - *remove-notice
       # [P]DF Reader: Highlights
