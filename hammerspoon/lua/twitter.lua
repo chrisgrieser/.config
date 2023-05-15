@@ -1,5 +1,3 @@
-local M = {}
-
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
@@ -19,6 +17,25 @@ local function twitterFallThrough()
 	if not nextWin or nextWin:id() == hs.window.frontmostWindow():id() then return end
 
 	nextWin:focus()
+end
+
+local function twitterScrollUp()
+	-- after quitting, it takes a few seconds until Twitter is fully quit,
+	-- therefore also checking for the main window existence
+	-- when browsing twitter itself, to not change tabs
+	local twitter = u.app("Twitter")
+	if not twitter or not twitter:mainWindow() then return end
+
+	u.keystroke({ "cmd" }, "left", 1, twitter) -- go back
+	u.keystroke({ "cmd" }, "1", 1, twitter) -- go to home tab
+	u.keystroke({ "shift", "cmd" }, "R", 1, twitter) -- reload
+
+	-- needs delays to wait for tweets loading
+	u.runWithDelays({ 0.5, 1.5 }, function()
+		if twitter:isFrontmost() then return end
+		u.keystroke({ "cmd" }, "1", 1, twitter) -- scroll up
+		u.keystroke({ "cmd" }, "up", 1, twitter) -- goto top
+	end)
 end
 
 ---Checks clipboard for URL and cleans tracking stuff
@@ -45,6 +62,26 @@ local function twitterCloseMediaWindow()
 
 	if mediaWin then mediaWin:close() end
 end
+
+local function twitterToTheSide()
+	-- in case of active split, prevent left window of covering the sketchybar
+	if LEFT_SPLIT and LEFT_SPLIT:application() then LEFT_SPLIT:application():hide() end
+
+	if u.isFront("Alfred") then return end
+
+	local twitter = u.app("Twitter")
+	if not twitter then return end
+
+	if twitter:isHidden() then twitter:unhide() end
+
+	-- not using mainWindow to not unintentionally move Media or new-tweet window
+	local win = twitter:findWindow("Twitter")
+	if not win then return end
+
+	win:setFrame(M.toTheSide)
+	win:raise()
+end
+
 --------------------------------------------------------------------------------
 
 -- TWITTER: fixed size to the side, with the sidebar hidden
@@ -93,5 +130,26 @@ TwitterWatcher = u.aw
 	end)
 	:start()
 
---------------------------------------------------------------------------------
-return M
+-- show/hide twitter when other wins move
+Wf_SomeWindowMoved = u.wf.new("Obsidian"):subscribe(u.wf.windowMoved, function(movedWin)
+	local twitter = u.app("Twitter")
+	
+	if wu.CheckSize(movedWin, wu.pseudoMax) or wu.CheckSize(movedWin, wu.centered) then
+		twitterToTheSide()
+	elseif wu.CheckSize(movedWin, wu.maximized) and twitter then
+		twitter:hide()
+	end
+end)
+
+local function homeAction()
+	if u.appRunning("zoom.us") then
+		hs.alert("🔈/🔇") -- toggle mute
+		u.keystroke({ "shift", "command" }, "A", 1, u.app("zoom.us"))
+	elseif u.appRunning("Twitter") then
+		twitterScrollUp()
+	else
+		hs.alert("<Nop>")
+	end
+end
+
+u.hotkey({}, "home", homeAction)

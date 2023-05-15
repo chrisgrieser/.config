@@ -9,6 +9,7 @@ M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 M.sideNotesWide = { x = 0, y = 0, w = 0.4, h = 1 }
+local sideNotesNarrow = { x = 0, y = 0, w = 0.2, h = 1 }
 
 -- negative x to hide useless sidebar
 if env.isAtMother then
@@ -33,103 +34,13 @@ M.rejectedFinderWins = {
 }
 
 --------------------------------------------------------------------------------
--- OBSIDIAN SIDEBAR
-
----half -> hide right sidebar
----pseudo-maximized -> show right sidebar
----max -> show both sidebars
----@param obsiWin hs.window
-local function toggleObsidianSidebar(obsiWin, size)
-	local obsi = u.app("Obsidian")
-	if not obsi:isFrontmost() or not obsiWin or not obsi or #obsi:allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
-
-	local modeRight = (size.w > 0.6) and "expand" or "collapse"
-	u.openLinkInBg("obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29")
-	local modeLeft = (size.w > 0.99) and "expand" or "collapse"
-	u.openLinkInBg("obsidian://advanced-uri?eval=this.app.workspace.leftSplit." .. modeLeft .. "%28%29")
-end
-
----ensures Obsidian windows are always shown when developing, mostly for developing CSS
----@param win hs.window
----@param size hs.geometry
-local function obsidianThemeDevHelper(win, size)
-	if
-		not win
-		or not win:application()
-		or not (win:application():name():lower() == "neovide")
-		or not u.appRunning("Obsidian")
-	then
-		return
-	end
-
-	local obsi = u.app("Obsidian")
-	if size == M.pseudoMax or size == M.maximized then
-		obsi:hide()
-	else
-		-- delay to avoid conflict with app-hider.lua
-		u.runWithDelays(0.1, function()
-			obsi:unhide()
-			obsi:mainWindow():raise()
-		end)
-	end
-end
-
--- toggle sizes of the sidenotes window
-local function toggleSideNotesSize()
-	local snWin = u.app("SideNotes"):mainWindow()
-	local narrow = { x = 0, y = 0, w = 0.2, h = 1 }
-	local changeTo = M.CheckSize(snWin, M.sideNotesWide) and narrow or M.sideNotesWide
-	M.moveResize(snWin, changeTo)
-end
-
---------------------------------------------------------------------------------
--- TWITTER
-function M.twitterScrollUp()
-	-- after quitting, it takes a few seconds until Twitter is fully quit,
-	-- therefore also checking for the main window existence
-	-- when browsing twitter itself, to not change tabs
-	local twitter = u.app("Twitter")
-	if not twitter or not twitter:mainWindow() then return end
-
-	u.keystroke({ "cmd" }, "left", 1, twitter) -- go back
-	u.keystroke({ "cmd" }, "1", 1, twitter) -- go to home tab
-	u.keystroke({ "shift", "cmd" }, "R", 1, twitter) -- reload
-
-	-- needs delays to wait for tweets loading
-	u.runWithDelays({ 0.5, 1.5 }, function()
-		if twitter:isFrontmost() then return end
-		u.keystroke({ "cmd" }, "1", 1, twitter) -- scroll up
-		u.keystroke({ "cmd" }, "up", 1, twitter) -- goto top
-	end)
-end
-
-function M.twitterToTheSide()
-	-- in case of active split, prevent left window of covering the sketchybar
-	if LEFT_SPLIT and LEFT_SPLIT:application() then LEFT_SPLIT:application():hide() end
-
-	if u.isFront("Alfred") then return end
-
-	local twitter = u.app("Twitter")
-	if not twitter then return end
-
-	if twitter:isHidden() then twitter:unhide() end
-
-	-- not using mainWindow to not unintentionally move Media or new-tweet window
-	local win = twitter:findWindow("Twitter")
-	if not win then return end
-
-	win:setFrame(M.toTheSide)
-	win:raise()
-end
-
---------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
 ---@param win hs.window
----@param size hs.geometry
+---@param relSize hs.geometry
 ---@nodiscard
----@return boolean|nil whether win has the given size. returns nil for invalid win
-function M.CheckSize(win, size)
+---@return boolean|nil result whether win has the given size. returns nil for invalid win
+function M.CheckSize(win, relSize)
 	local invalidWinsByTitle = { -- windows which can/should not be resized
 		"Copy", -- Finder
 		"Move", -- Finder
@@ -147,12 +58,12 @@ function M.CheckSize(win, size)
 
 	local maxf = win:screen():frame()
 	local winf = win:frame()
-	local diffw = winf.w - size.w * maxf.w
-	local diffh = winf.h - size.h * maxf.h
-	local diffx = size.x * maxf.w + maxf.x - winf.x -- calculated this way for two screens
-	local diffy = size.y * maxf.h + maxf.y - winf.y
+	local diffw = winf.w - relSize.w * maxf.w
+	local diffh = winf.h - relSize.h * maxf.h
+	local diffx = relSize.x * maxf.w + maxf.x - winf.x -- calculated this way for two screens
+	local diffy = relSize.y * maxf.h + maxf.y - winf.y
 
-	local leeway = 5 -- terminal cell widths creating some minor imprecision
+	local leeway = 5 -- terminal cell widths creating some minor inprecision
 	local widthOkay = (diffw > -leeway and diffw < leeway)
 	local heightOkay = (diffh > -leeway and diffh < leeway)
 	local posyOkay = (diffy > -leeway and diffy < leeway)
@@ -182,18 +93,6 @@ function M.moveResize(win, pos)
 		if M.CheckSize(win, pos) ~= false then return end
 		win:moveToUnit(pos)
 	end)
-
-	-- Twitter Extras
-	local twitter = u.app("Twitter")
-	if pos == M.pseudoMax or pos == M.centered then
-		M.twitterToTheSide()
-	elseif pos == M.maximized and twitter then
-		twitter:hide()
-	end
-
-	-- Obsidian Extras
-	obsidianThemeDevHelper(win, pos)
-	toggleObsidianSidebar(win, pos)
 end
 
 --------------------------------------------------------------------------------
@@ -327,18 +226,18 @@ Wf_appsOnMouseScreen = u.wf
 -- HOTKEY ACTIONS
 
 local function controlSpaceAction()
-	if u.isFront("SideNotes") then
-		toggleSideNotesSize()
-		return
-	end
-
 	local curWin = hs.window.focusedWindow()
 	local pos
-	if u.isFront { "Finder", "Script Editor" } then
+
+	if u.isFront("SideNotes") then
+		local changeTo = M.CheckSize(curWin, M.sideNotesWide) and sideNotesNarrow or M.sideNotesWide
+		M.moveResize(curWin, changeTo)
+	elseif u.isFront { "Finder", "Script Editor" } then
 		pos = M.CheckSize(curWin, M.centered) and M.maximized or M.centered
 	else
 		pos = M.CheckSize(curWin, M.pseudoMax) and M.maximized or M.pseudoMax
 	end
+
 	M.moveResize(curWin, pos)
 end
 
@@ -368,19 +267,6 @@ local function moveAllWinsToProjectorScreen()
 	end
 end
 
-local function homeAction()
-	if #(hs.screen.allScreens()) > 1 then
-		moveCurWinToOtherDisplay()
-	elseif u.appRunning("zoom.us") then
-		hs.alert("🔈/🔇") -- toggle mute
-		u.keystroke({ "shift", "command" }, "A", 1, u.app("zoom.us"))
-	elseif u.appRunning("Twitter") then
-		M.twitterScrollUp()
-	else
-		hs.alert("<Nop>")
-	end
-end
-
 local function endAction()
 	if #(hs.screen.allScreens()) > 1 then
 		moveCurWinToOtherDisplay()
@@ -394,7 +280,6 @@ end
 
 --------------------------------------------------------------------------------
 -- HOTKEYS
-u.hotkey({}, "home", homeAction)
 u.hotkey({}, "end", endAction)
 u.hotkey(u.hyper, "right", function() M.moveResize(hs.window.focusedWindow(), hs.layout.right50) end)
 u.hotkey(u.hyper, "left", function() M.moveResize(hs.window.focusedWindow(), hs.layout.left50) end)
