@@ -32,19 +32,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>30311AAD-EB1D-430B-894D-13034A05FDB0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CA20D1DD-9AE8-4C18-B8CC-A7B0F669B4AC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</key>
 		<array/>
 		<key>4D63817E-E093-44ED-99F7-2762E817BB90</key>
@@ -266,6 +253,83 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string>/System/Applications/Preview.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>pandoc-md2docx.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>53419BE9-8E0D-4F3E-9460-5F3E4DE84406</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>name</key>
+				<string>Open in Preview</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>BC55B53D-B9D5-47AC-B2F4-45C6250702DD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>dyn.ah62d4rv4ge8043a</string>
+					<string>net.daringfireball.markdown</string>
+				</array>
+				<key>name</key>
+				<string>Pandoc: md → docx</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>4D63817E-E093-44ED-99F7-2762E817BB90</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -315,49 +379,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>pandoc-md2docx.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>53419BE9-8E0D-4F3E-9460-5F3E4DE84406</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>dyn.ah62d4rv4ge8043a</string>
-					<string>net.daringfireball.markdown</string>
-				</array>
-				<key>name</key>
-				<string>Pandoc: md → docx</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>4D63817E-E093-44ED-99F7-2762E817BB90</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -389,56 +410,6 @@
 			<string>54CDB333-A1B6-4990-AF4C-4A48BA06D092</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>fixedorder</key>
-				<false/>
-				<key>items</key>
-				<string>[{"title":"question","arg":"#question","subtitle":"❓"},{"title":"gap","arg":"#gap","subtitle":"🕳️"},{"title":"critique","arg":"#critique","subtitle":"🟣"},{"title":"agree","arg":"#agree","subtitle":"🟩"},{"title":"disagree","arg":"#disagree","subtitle":"🟥"},{"title":"summary","arg":"#summary","subtitle":"✴️"},{"title":"important","arg":"#important","subtitle":"❗"},{"title":"epistemic break","arg":"#epistemic-break","subtitle":"⚡"},{"title":"idea","arg":"#idea","subtitle":"🤔"},{"title":"definition","arg":"#definition","subtitle":"💡"},{"title":"example","arg":"#example","subtitle":"⚛️"},{"title":"main","arg":"#main","subtitle":"Ⓜ️"},{"title":"method","arg":"#method","subtitle":"🔬"},{"title":"data","arg":"#data","subtitle":"🔢"},{"title":"sidenote","arg":"#sidenote","subtitle":"📔"},{"title":"quote","arg":"#quote","subtitle":"💬"},{"title":"lit review","arg":"#lit-review","subtitle":"📚"}]</string>
-				<key>keyword</key>
-				<string>at</string>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Annotation Tags</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.listfilter</string>
-			<key>uid</key>
-			<string>30311AAD-EB1D-430B-894D-13034A05FDB0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>CA20D1DD-9AE8-4C18-B8CC-A7B0F669B4AC</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -491,6 +462,41 @@
 			<string>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>14</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>E</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>20603C68-58B3-433A-AEE0-62CAF6C85E0A</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -569,41 +575,6 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>B42ED178-4437-4D4D-BEF0-63B085EF7730</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>14</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>E</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>20603C68-58B3-433A-AEE0-62CAF6C85E0A</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -727,40 +698,6 @@
 			<string>8D0217F4-B267-406C-B35B-B41C7663BA0D</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Applications/Preview.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.adobe.pdf</string>
-				</array>
-				<key>name</key>
-				<string>Open in Preview</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>BC55B53D-B9D5-47AC-B2F4-45C6250702DD</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -908,9 +845,9 @@
 			<key>note</key>
 			<string>run ocrmypdf</string>
 			<key>xpos</key>
-			<real>880</real>
+			<real>405</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>815</real>
 		</dict>
 		<key>20603C68-58B3-433A-AEE0-62CAF6C85E0A</key>
 		<dict>
@@ -919,36 +856,25 @@
 			<key>xpos</key>
 			<real>510</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>275</real>
 		</dict>
 		<key>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>15</real>
-		</dict>
-		<key>30311AAD-EB1D-430B-894D-13034A05FDB0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>annotation tags</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>145</real>
+			<real>135</real>
 		</dict>
 		<key>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>1030</real>
+			<real>555</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>815</real>
 		</dict>
 		<key>4D63817E-E093-44ED-99F7-2762E817BB90</key>
 		<dict>
@@ -986,18 +912,18 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>510</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>815</real>
 		</dict>
 		<key>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>695</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>15</real>
 		</dict>
 		<key>83E378DD-0BAE-4A5F-B0D5-20FE53C32A85</key>
 		<dict>
@@ -1017,18 +943,18 @@
 			<key>note</key>
 			<string>search PDFs</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>135</real>
 		</dict>
 		<key>871ABB10-2B9C-44B3-951C-3EA52181ECC2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>675</real>
+			<real>670</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>445</real>
 		</dict>
 		<key>8D0217F4-B267-406C-B35B-B41C7663BA0D</key>
 		<dict>
@@ -1037,7 +963,7 @@
 			<key>xpos</key>
 			<real>510</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>510</real>
 		</dict>
 		<key>8DDB7CE3-56BA-4890-A2A7-FC6E967C73AF</key>
 		<dict>
@@ -1053,9 +979,9 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>815</real>
 		</dict>
 		<key>A02897FE-BC2A-479A-A777-3CAF8A394943</key>
 		<dict>
@@ -1064,7 +990,7 @@
 			<key>xpos</key>
 			<real>510</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>395</real>
 		</dict>
 		<key>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</key>
 		<dict>
@@ -1091,29 +1017,18 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>510</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>670</real>
-		</dict>
-		<key>CA20D1DD-9AE8-4C18-B8CC-A7B0F669B4AC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>paste</string>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>145</real>
+			<real>15</real>
 		</dict>
 		<key>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>885</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>695</real>
 		</dict>
 		<key>CFFC8BC6-A518-49C8-9B3E-9D9E67ABDFA7</key>
 		<dict>
@@ -1131,9 +1046,9 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>660</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>830</real>
+			<real>845</real>
 		</dict>
 		<key>E37A9BDD-290E-4BCD-9832-06488718A4BD</key>
 		<dict>

@@ -24,7 +24,7 @@ elif [[ $unfinishedTasks -eq 0 ]]; then
 	label="$count"
 else
 	icon="󰛽"
-	label="$count($unfinishedTasks)"
+	label="$count ($unfinishedTasks 󰝣 )"
 fi
 
 sketchybar --set "$NAME" icon="$icon" label="$label"
