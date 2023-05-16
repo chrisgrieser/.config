@@ -363,7 +363,7 @@ return {
 		lazy = true, -- loaded by cmp
 		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
 		opts = {
-			config_path = vim.env.ICLOUD .. "/Dotfolder/private dotfiles/codium-api-key.json",
+			config_path = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json",
 			bin_path = vim.fn.stdpath("data") .. "/codeium",
 		},
 	},

@@ -97,10 +97,10 @@ keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 -- Marks
 
 -- stylua: ignore start
-keymap("n", "Ä", function() require("bookmarks").bookmark_toggle() end, { desc = " Toggle Bookmark" })
-keymap("n", "ä", function() require("bookmarks").bookmark_next() end, { desc = " Next Bookmark" })
-keymap("n", "dä", function() require("bookmarks").bookmark_clean() end, { desc = " Clear All Bookmark" })
-keymap("n", "gä", function() require("bookmarks").bookmark_list() end, { desc = "  Bookmarks to Quickfix" })
+keymap("n", "Ä", function() require("bookmarks").bookmark_toggle() end, { desc = "󰃀 Toggle Bookmark" })
+keymap("n", "ä", function() require("bookmarks").bookmark_next() end, { desc = "󰃀 Next Bookmark" })
+keymap("n", "dä", function() require("bookmarks").bookmark_clean() end, { desc = "󰃀 Clear All Bookmark" })
+keymap("n", "gä", function() require("bookmarks").bookmark_list() end, { desc = "󰃀  Bookmarks to Quickfix" })
 -- stylua: ignore end
 
 -- Hunks and Changes

@@ -23,6 +23,7 @@ function readPlist(key, path) {
 		.doShellScript(`plutil -extract ${key} xml1 -o - '${path}' | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1`)
 		.replaceAll("&amp;", "&");
 }
+const f
 
 /** @param {string} path */
 function readFile(path) {
