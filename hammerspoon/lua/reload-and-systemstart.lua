@@ -1,12 +1,12 @@
 local M = {}
 
+local env = require("lua.environment-vars")
 local layouts = require("lua.layouts")
 local periphery = require("lua.hardware-periphery")
 local repos = require("lua.repo-auto-sync")
 local sidenotes = require("lua.sidenotes")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
-local env = require("lua.environment-vars")
 
 --------------------------------------------------------------------------------
 
