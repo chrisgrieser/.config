@@ -20,16 +20,13 @@ opt.shadafile = u.vimDataDir .. "main.shada"
 opt.undofile = true -- enable persistent undo history
 
 -- extra undopoints (= more fine-grained undos)
--- WARN requires remap, since it otherwise prevents vim abbrev. w/ those chars from working
+-- WARN requires remap, since it otherwise prevents vim abbrev. with those chars from working
 local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
 for _, char in pairs(undopointChars) do
 	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char, remap = true })
 end
 
 --------------------------------------------------------------------------------
-
--- Disable Mouse completely
-opt.mouse = ""
 
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
