@@ -69,7 +69,7 @@ return {
 				dapSharedKeymaps = true,
 			}
 
-			local topSeparators = { left = " ", right = " " }
+			local topSeparators = { left = "", right = "" }
 
 			-- INFO inserting needed, to not disrupt existing lualine-segment
 			local lualineZ = require("lualine").get_config().tabline.lualine_z or {}

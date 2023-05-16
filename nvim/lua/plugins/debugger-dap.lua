@@ -18,7 +18,7 @@ local function dapConfig()
 end
 
 local function dapLualine()
-	local topSeparators = { left = " ", right = " " }
+	local topSeparators = { left = "", right = "" }
 
 	-- INFO inserting needed, to not disrupt existing lualine-segment set by nvim-recorder
 	local lualineY = require("lualine").get_config().tabline.lualine_y or {}

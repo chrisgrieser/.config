@@ -8,13 +8,13 @@ matches:
     replace: "getting start3d (carl, no!)"
 
   # Carl
-  - trigger: '!carl'
+  - trigger: "!carl"
     replace: all features of obsidian
-    label: 'Meme: All Features of Obsidian'
-  - triggers: ['!carl', '!xkcd']
+    label: "Meme: All Features of Obsidian"
+  - triggers: ["!carl", "!xkcd"]
     replace: sudo xkcd automation
-    label: 'xkcd: automation'
-  - triggers: ['!carl', '!roles']
+    label: "xkcd: automation"
+  - triggers: ["!carl", "!roles"]
     replace: get roles
     label: Get Discord Roles
 

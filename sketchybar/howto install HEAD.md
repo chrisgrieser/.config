@@ -7,7 +7,7 @@ brew install sketchybar --head
 brew services start sketchybar
 ```
 
-after testing you can go back to the stable channel by running:
+after testing, you can go back to the stable repository by running:
 
 ```bash
 brew services stop sketchybar
