@@ -77,9 +77,8 @@ end
 function M.moveResize(win, pos)
 	-- guard clauses
 	if not win or not win:application() then return end
-
-	-- stylua: ignore
-	local appsToIgnore = { "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon", "CleanShot X" }
+	local appsToIgnore =
+		{ "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon", "CleanShot X" }
 	local appName = win:application():name()
 	if
 		u.tbl_contains(appsToIgnore, appName)
