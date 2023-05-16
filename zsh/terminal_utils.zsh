@@ -201,9 +201,9 @@ function appid() {
 # using `explode` to expand anchors & aliases: https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
 function yaml2json() {
 	file_name=${1%.*} # remove extension
-	yq -o=json 'explode(.)' "$1" >"${file_name}.json"
+	yq --output-format=json 'explode(.)' "$1" >"${file_name}.json"
 }
 
 function json2yaml() {
-	yq -P '.' "$1" >"$(basename "$1" .json).yml"
+	yq --output-format=yaml '.' "$1" >"$(basename "$1" .json).yaml"
 }

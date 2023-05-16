@@ -134,16 +134,10 @@ rules:
         from: { key_code: j, modifiers: { mandatory: [option, shift, command, control] } }
         to:
           - key_code: down_arrow
-        conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers: [^net.highlightsapp.universal$]
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [option, shift, command, control] } }
         to:
           - key_code: up_arrow
-        conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers: [^net.highlightsapp.universal$]
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [option, shift, command, control] } }
         to:

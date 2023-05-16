@@ -1,0 +1,87 @@
+[
+    {
+        "title": "question",
+        "arg": "#question",
+        "subtitle": "❓"
+    },
+    {
+        "title": "gap",
+        "arg": "#gap",
+        "subtitle": "🕳️"
+    },
+    {
+        "title": "critique",
+        "arg": "#critique",
+        "subtitle": "🟣"
+    },
+    {
+        "title": "agree",
+        "arg": "#agree",
+        "subtitle": "🟩"
+    },
+    {
+        "title": "disagree",
+        "arg": "#disagree",
+        "subtitle": "🟥"
+    },
+    {
+        "title": "summary",
+        "arg": "#summary",
+        "subtitle": "✴️"
+    },
+    {
+        "title": "important",
+        "arg": "#important",
+        "subtitle": "❗"
+    },
+    {
+        "title": "epistemic break",
+        "arg": "#epistemic-break",
+        "subtitle": "⚡"
+    },
+    {
+        "title": "idea",
+        "arg": "#idea",
+        "subtitle": "🤔"
+    },
+    {
+        "title": "definition",
+        "arg": "#definition",
+        "subtitle": "💡"
+    },
+    {
+        "title": "example",
+        "arg": "#example",
+        "subtitle": "⚛️"
+    },
+    {
+        "title": "main",
+        "arg": "#main",
+        "subtitle": "Ⓜ️"
+    },
+    {
+        "title": "method",
+        "arg": "#method",
+        "subtitle": "🔬"
+    },
+    {
+        "title": "data",
+        "arg": "#data",
+        "subtitle": "🔢"
+    },
+    {
+        "title": "sidenote",
+        "arg": "#sidenote",
+        "subtitle": "📔"
+    },
+    {
+        "title": "quote",
+        "arg": "#quote",
+        "subtitle": "💬"
+    },
+    {
+        "title": "lit review",
+        "arg": "#lit-review",
+        "subtitle": "📚"
+    }
+]
