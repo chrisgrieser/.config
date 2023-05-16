@@ -60,7 +60,7 @@ JSON.stringify({ items: app
 			const repoIsDirty	= app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
 			dirtyIcon = repoIsDirty ? ` ${$.getenv("dirty_icon")}` : "";
 		} catch (_error) {
-			// error occurs when there have been iCloud sync issues with the repio
+			// error occurs when there have been iCloud sync issues with the repo
 			dirtyIcon = " (⚠️ repo invalid)";
 		}
 

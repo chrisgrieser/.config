@@ -19,8 +19,9 @@ matches:
     label: Get Discord Roles
 
   # sed for fixing messages
-  - trigger: "sed "
+  - trigger: "sed"
     replace: "s/$|$/"
+    word: true
   # send silent (no ping) messages
   - triggers: ["sss ", "@Silent "]
     replace: "@silent "
