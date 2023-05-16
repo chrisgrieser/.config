@@ -12,10 +12,10 @@ local themes = {
 	-- "tanvirtin/monokai.nvim",
 	-- "rebelot/kanagawa.nvim",
 	-- "kvrohit/mellow.nvim",
-	"AlexvZyl/nordic.nvim",
+	-- "AlexvZyl/nordic.nvim",
 	-- "glepnir/zephyr-nvim",
 	-- "sainnhe/everforest",
-	-- "folke/tokyonight.nvim",
+	"folke/tokyonight.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",
 }
