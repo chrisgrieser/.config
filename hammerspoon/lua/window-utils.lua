@@ -76,10 +76,16 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- guard clauses
-	local appsToIgnore =
-		{ "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon", "CleanShot X" }
+	if not win or not win:application() then return end
+
+	-- stylua: ignore
+	local appsToIgnore = { "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon", "CleanShot X" }
 	local appName = win:application():name()
-	if not win or not win:application() or u.tbl_contains(appsToIgnore, appName) or win:title() == "Quick Look" or win:title() == "qlmanage" then
+	if
+		u.tbl_contains(appsToIgnore, appName)
+		or win:title() == "Quick Look"
+		or win:title() == "qlmanage"
+	then
 		return
 	end
 
