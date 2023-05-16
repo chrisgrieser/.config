@@ -1,6 +1,6 @@
 # Apps
 export EDITOR=nvim
-export PAGER=less
+export PAGER="less -RF"
 
 # Directories
 export DOTFILE_FOLDER="$HOME/.config/"
@@ -8,8 +8,7 @@ export VAULT_PATH="$HOME/main-vault/"
 export PASSWORD_STORE_DIR="$HOME/.password-store/" # default value, but still needed for bkp script
 export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 
-export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-export DATA_DIR="$ICLOUD/Dotfolder" # to prevent commit spam on dotfile repo, store data in iCloud instead
+export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder" 
 
 # defines location of the rest of the zsh config
 export ZDOTDIR="$DOTFILE_FOLDER/zsh"
@@ -22,11 +21,11 @@ function pandoc () {
 #───────────────────────────────────────────────────────────────────────────────
 
 # OpenAI API Key stored outside of public git repo (symlinked file)
-OPENAI_API_KEY=$(tr -d "\n" <"$ICLOUD/Dotfolder/private dotfiles/openai-api-key.txt")
+OPENAI_API_KEY=$(tr -d "\n" <"$DATA_DIR/private dotfiles/openai-api-key.txt")
 export OPENAI_API_KEY
 
 # gh-cli
-GITHUB_TOKEN=$(tr -d "\n" <"$ICLOUD/Dotfolder/private dotfiles/github_token.txt")
+GITHUB_TOKEN=$(tr -d "\n" <"$DATA_DIR/private dotfiles/github_token.txt")
 export GITHUB_TOKEN
 
 #───────────────────────────────────────────────────────────────────────────────

@@ -33,7 +33,7 @@ function M.systemStart()
 		u.notify("Finished loading.")
 		visuals.holeCover()
 		periphery.batteryCheck("SideNotes")
-		repos.syncAllGitRepos("notify")
+		repos.syncAllGitRepos(true, true)
 		layouts.selectLayout()
 		if env.isAtOffice then
 			sidenotes.moveOfficeNotesToBase()

@@ -13,13 +13,12 @@ local passIcon = "🔑"
 --------------------------------------------------------------------------------
 -- Repo Sync Setup
 
----@param submodulePull? boolean also update submodules, defaults to **true**
----@return boolean
+---@param submodulePull boolean whether to also sync submodules
+---@return boolean success
 local function gitDotfileSync(submodulePull)
 	local gitDotfileScript = env.dotfilesFolder .. "git-dotfile-sync.sh"
 
 	local scriptArgs = {}
-	if submodulePull == nil then submodulePull = true end
 	if submodulePull then scriptArgs = { "--submodule-pull" } end
 
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
@@ -91,10 +90,10 @@ end
 --------------------------------------------------------------------------------
 
 ---sync all three git repos
----@param extras? string extra modes
-function M.syncAllGitRepos(extras)
-	local pullSubmodules = extras ~= "no-submodule-pull"
-	local success1 = gitDotfileSync(pullSubmodules)
+---@param submodulePull boolean for dotfile sync
+---@param notify boolean
+function M.syncAllGitRepos(submodulePull, notify)
+	local success1 = gitDotfileSync(submodulePull)
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
 	if not (success1 and success2 and success3) then
@@ -110,7 +109,7 @@ function M.syncAllGitRepos(extras)
 	end
 	local function updateSketchybar()
 		hs.execute("sketchybar --trigger repo-files-update")
-		if extras == "notify" then u.notify("Sync finished") end
+		if notify then u.notify("Sync finished") end
 	end
 
 	AllSyncTimer = hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
@@ -124,13 +123,13 @@ end
 
 -- 2. every x minutes
 RepoSyncTimer = hs.timer
-	.doEvery(repoSyncFreqMin * 60, function() M.syncAllGitRepos("no-submodule-pull") end)
+	.doEvery(repoSyncFreqMin * 60, function() M.syncAllGitRepos(false, false) end)
 	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
 u.urischeme("sync-repos", function()
 	u.app("Hammerspoon"):hide() -- so the previous app does not loose focus
-	M.syncAllGitRepos("notify")
+	M.syncAllGitRepos(true, true)
 end)
 
 -- 4. when going to sleep or when unlocking with idleTime
@@ -142,7 +141,7 @@ SleepWatcher = hs.caffeinate.watcher
 			or event == c.screensDidSleep
 			or ((event == c.screensDidWake or event == c.systemDidWake) and u.idleMins(30))
 		then
-			M.syncAllGitRepos()
+			M.syncAllGitRepos(true, true)
 		end
 	end)
 	:start()
