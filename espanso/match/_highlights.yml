@@ -16,10 +16,7 @@ matches:
     label: 🟥 disagree
   - trigger: ttt
     replace: "#important"
-    label: ✴️  important
-  - trigger: ttt
-    replace: "#important"
-    label: ❗ important
+    label: ✴️ important
   - trigger: ttt
     replace: "#epistemic-break"
     label: ⚡ epistemic-break
@@ -31,10 +28,10 @@ matches:
     label: 💡 definition
   - trigger: ttt
     replace: "#example"
-    label: ⚛️  example
+    label: ⚛️ example
   - trigger: ttt
     replace: "#main"
-    label: Ⓜ️  main
+    label: Ⓜ️ main
   - trigger: ttt
     replace: "#method"
     label: 🔬 method
