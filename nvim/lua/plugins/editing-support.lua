@@ -49,7 +49,7 @@ return {
 		opts = {
 			save_file = u.vimDataDir .. "/bookmarks",
 			signs = {
-				add = { text = "" },
+				add = { text = "󰃀" },
 			},
 		},
 	},

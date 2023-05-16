@@ -37,11 +37,11 @@ function man() {
 # uses OPENAI_API_KEY saved in .zshenv
 function ai() {
 	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
-	if ! command -v glow &>/dev/null; then echo "glow not installed." && return 1; fi
+	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
 
 	local query="$*"
-	# WARN do not use "$prompt" as a variable in zsh, it's a reserved keyword
-	local the_prompt="The following request is concerned with zsh. If your response includes codeblocks, do add language labels to it. Here is the request: $query"
+	# WARN do not use "$prompt" as a variable in zsh, since it's a reserved keyword
+	local the_prompt="The following request is concerned with shell scripting. If your response includes codeblocks, do add 'bash' as language label to it. Here is the request: $query"
 	local answer
 	answer=$(curl "https://api.openai.com/v1/chat/completions" \
 		-H "Content-Type: application/json" \
@@ -52,8 +52,7 @@ function ai() {
 			\"temperature\": 0
 		}" |
 		yq -r '.choices[].message.content')
-	# echo "$answer" | bat --language=markdown --style=grid --wrap=auto
-	echo "$answer" | glow
+	echo "$answer" | bat --language=markdown --style=grid --wrap=auto
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -64,7 +63,7 @@ export LESS_TERMCAP_md=$'\E[1;33m' # begin blink = YELLOW
 export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
 export LESS_TERMCAP_us=$'\E[1;35m' # begin underline = MAGENTA
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
-export LESSHISTFILE=-              # don't clutter the home directory with usless `.lesshst` file
+export LESSHISTFILE=-              # don't clutter home directory with useless `.lesshst` file
 
 # Pager-specific settings
 # INFO less' --ignore-case is actually smart-case

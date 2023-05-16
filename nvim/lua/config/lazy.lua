@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 -- config https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
 	dev = {
-		path = vim.env.ICLOUD .. "/Repos",
+		path = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos",
 		fallback = true, -- use remote repo when local repo doesn't exist
 	},
 	ui = {
