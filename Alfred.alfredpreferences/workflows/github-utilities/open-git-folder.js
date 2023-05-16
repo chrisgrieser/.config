@@ -7,26 +7,32 @@ ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeperated, str].join(" ");
 }
 
+/**
+ * @param {string} key
+ * @param {string} path
+ */
 function readPlist(key, path) {
 	return app
 		.doShellScript(`plutil -extract ${key} xml1 -o - '${path}' | sed -n 4p | cut -d">" -f2 | cut -d"<" -f1`)
 		.replaceAll("&amp;", "&");
 }
 
+/** @param {string} path */
 function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
 
-const getFullPath = path => $.getenv(path).replace(/^~/, app.pathTo("home folder"));
-const fileExists = filePath => Application("Finder").exists(Path(filePath));
+const getFullPath = (/** @type {string} */ path) => $.getenv(path).replace(/^~/, app.pathTo("home folder"));
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -36,21 +42,27 @@ if ($.getenv("extra_folder_1")) pathsToSearch.push(getFullPath("extra_folder_1")
 if ($.getenv("extra_folder_2")) pathsToSearch.push(getFullPath("extra_folder_2"));
 
 let pathString = "";
-pathsToSearch.forEach(path => (pathString += `"${path}" `));
+pathsToSearch.forEach(path => {pathString += `"${path}" `});
 
-const jsonArray = app
+JSON.stringify({ items: app
 	.doShellScript(
 		`export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 		fd '\\.git$' --no-ignore --hidden --max-depth=2 ${pathString}`,
 	)
 	.split("\r")
-	.map(gitFolder => {
+	.map((/** @type {string} */ gitFolder) => {
 		const localRepoFilePath = gitFolder.replace(/\.git\/?$/, "");
 		const repoID = localRepoFilePath.replace(/.*\/(.*)\//, "$1");
 
 		// Dirty Repo
-		const repoIsDirty = app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
-		const dirtyIcon = repoIsDirty ? ` ${$.getenv("dirty_icon")}` : "";
+		let dirtyIcon;
+		try {
+			const repoIsDirty	= app.doShellScript(`cd "${localRepoFilePath}" && git status --porcelain`) !== "";
+			dirtyIcon = repoIsDirty ? ` ${$.getenv("dirty_icon")}` : "";
+		} catch (_error) {
+			// error occurs when there have been iCloud sync issues with the repio
+			dirtyIcon = " (⚠️ repo invalid)";
+		}
 
 		let repoName;
 		let iconpath = "repotype-icons/";
@@ -83,6 +95,4 @@ const jsonArray = app
 			arg: localRepoFilePath,
 			uid: repoID,
 		};
-	});
-
-JSON.stringify({ items: jsonArray });
+	}) });
