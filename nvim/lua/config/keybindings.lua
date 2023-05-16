@@ -81,10 +81,11 @@ keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { d
 keymap({ "o", "x" }, "H", "^")
 keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long indented lines
 keymap({ "n", "x" }, "L", "$") -- not using "o", since used for link textobj
-
 keymap({ "n", "x" }, "J", "6j")
 keymap({ "n", "x" }, "K", "6k")
-keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
+
+-- dj = delete 2 lines, dJ = delete 3 lines
+keymap("o", "J", "2j")
 keymap("o", "K", "2k")
 
 -- Jump history
