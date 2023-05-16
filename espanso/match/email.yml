@@ -2,7 +2,7 @@ matches:
   # Greetings
   - trigger: "!mail"
     replace: "Dear sir or madam,\n\n"
-  - trigger: "!mail"
+  - triggers: ["!mail", "!dh"]
     replace: |
       Sehr geehrte Damen und Herren,
 
@@ -10,9 +10,6 @@ matches:
 
       Mit freundlichen Grüßen
       Christopher Grieser
-  - trigger: "!mail"
-    replace: "Sehr geehrte $|$,\n\n"
-
   # Signatures
   - regex: "\\bvvv"
     replace: |-
