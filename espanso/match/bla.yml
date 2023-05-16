@@ -1,0 +1,52 @@
+matches:
+  - title: question
+    replace: '#question'
+    label: ❓
+  - title: gap
+    replace: '#gap'
+    label: "\U0001F573️"
+  - title: critique
+    replace: '#critique'
+    label: "\U0001F7E3"
+  - title: agree
+    replace: '#agree'
+    label: "\U0001F7E9"
+  - title: disagree
+    replace: '#disagree'
+    label: "\U0001F7E5"
+  - title: summary
+    replace: '#summary'
+    label: ✴️
+  - title: important
+    replace: '#important'
+    label: ❗
+  - title: epistemic break
+    replace: '#epistemic-break'
+    label: ⚡
+  - title: idea
+    replace: '#idea'
+    label: "\U0001F914"
+  - title: definition
+    replace: '#definition'
+    label: "\U0001F4A1"
+  - title: example
+    replace: '#example'
+    label: ⚛️
+  - title: main
+    replace: '#main'
+    label: Ⓜ️
+  - title: method
+    replace: '#method'
+    label: "\U0001F52C"
+  - title: data
+    replace: '#data'
+    label: "\U0001F522"
+  - title: sidenote
+    replace: '#sidenote'
+    label: "\U0001F4D4"
+  - title: quote
+    replace: '#quote'
+    label: "\U0001F4AC"
+  - title: lit review
+    replace: '#lit-review'
+    label: "\U0001F4DA"

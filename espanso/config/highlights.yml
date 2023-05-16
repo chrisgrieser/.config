@@ -1,0 +1,5 @@
+# https://espanso.org/docs/configuration/app-specific-configurations/
+filter_class: "net.highlightsapp.universal"
+
+extra_includes:
+  - "../match/_highlights.yml"

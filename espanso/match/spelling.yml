@@ -253,7 +253,7 @@ matches:
     propagate_casing: true
     word: true
   # https://espanso.org/docs/matches/regex-triggers#arguments
-  - regex: "\\Bsich"
+  - regex: "\\Bsich\\b"
     replace: "isch"
   # only fix when capitalized, so stuff like urls is unaffected
   - trigger: Youtube
