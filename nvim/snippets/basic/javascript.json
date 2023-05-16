@@ -117,7 +117,8 @@
 	},
 	"try .. catch": {
 		"prefix": "try .. catch",
-		"body": ["try {", "\t$0", "} catch (${1:error}) {", "\t", "}"]
+		"body": ["try {", "\t$0", "} catch (_error) {", "\t", "}"],
+		"description": "leading underscore so the variable is ignored by rome when not used."
 	},
 	"if (autosnippet)": {
 		"prefix": "if ",

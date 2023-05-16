@@ -14,7 +14,7 @@ matches:
   - triggers: ['!carl', '!xkcd']
     replace: sudo xkcd automation
     label: 'xkcd: automation'
-  - trigger: '!carl'
+  - triggers: ['!carl', '!roles']
     replace: get roles
     label: Get Discord Roles
 
@@ -22,7 +22,7 @@ matches:
   - trigger: "sed "
     replace: "s/$|$/"
   # send silent (no ping) messages
-  - trigger: "sss"
+  - triggers: ["sss ", "@Silent "]
     replace: "@silent "
 
   # announcements
