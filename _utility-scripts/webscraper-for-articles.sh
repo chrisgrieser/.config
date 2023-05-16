@@ -4,23 +4,23 @@
 #-------------------------------------------------------------------------------
 
 # check presence of dependencies
-if ! command postlight-parser &>/dev/null; then
+if ! command -v postlight-parser &>/dev/null; then
 	echo "postlight-parser not installed."
-	echo "install: npm -g install @postlight/parser"
+	echo "install: npm install @postlight/parser"
 fi
-if ! command turndown-cli &>/dev/null; then
+if ! command -v turndown-cli &>/dev/null; then
 	echo "turndown-cli not installed."
-	echo "install: npm -g install turndown-cli"
+	echo "install: npm install turndown-cli"
 fi
-if ! command yq &>/dev/null; then
+if ! command -v yq &>/dev/null; then
 	echo "yq not installed."
 	echo "install: brew install yq"
 fi
-if ! command readable &>/dev/null; then
+if ! command -v readable &>/dev/null; then
 	echo "readability-cli not installed."
-	echo "install: npm install -g readability-cli"
+	echo "install: npm install readability-cli"
 fi
-if ! command readable &>/dev/null || ! command postlight-parser &>/dev/null || ! command turndown-cli &>/dev/null || ! command yq &>/dev/null; then
+if ! command -v readable &>/dev/null || ! command -v postlight-parser &>/dev/null || ! command -v turndown-cli &>/dev/null || ! command -v yq &>/dev/null; then
 	exit 1
 fi
 
@@ -38,7 +38,7 @@ if [[ ! -f "$INPUT_FILE" ]]; then
 	exit 1
 fi
 [[ -z "$OUTPUT_FOLDER" ]] && OUTPUT_FOLDER="."
-TOLERANCE=15 # number of words treshhold
+TOLERANCE=15 # number of words threshold
 MAX_TITLE_LENGTH=45
 REPORT_FILE="$OUTPUT_FOLDER/report.csv"
 DESTINATION="$OUTPUT_FOLDER/files/"

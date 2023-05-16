@@ -180,8 +180,8 @@ end
 --------------------------------------------------------------------------------
 
 -- nerdfont: powerline icons have the prefix 'ple-'
-local bottomSeparators = { left = " ", right = " " }
-local topSeparators = { left = " ", right = " " }
+local bottomSeparators = { left = "", right = "" }
+local topSeparators = { left = "", right = "" }
 local emptySeparators = { left = "", right = "" }
 
 local lualineConfig = {
