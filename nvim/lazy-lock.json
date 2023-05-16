@@ -93,6 +93,7 @@
   "undotree": { "branch": "master", "commit": "485f01efde4e22cb1ce547b9e8c9238f36566f21" },
   "vim-applescript": { "branch": "master", "commit": "a39af8fc7e4caf581366e2917d558f6232e4db36" },
   "vim-css3-syntax": { "branch": "main", "commit": "61bc815f2b33f38a132e2e3aa3846d9b092ad931" },
+  "vim-log-highlighting": { "branch": "master", "commit": "1037e26f3120e6a6a2c0c33b14a84336dee2a78f" },
   "vim-visual-multi": { "branch": "master", "commit": "724bd53adfbaf32e129b001658b45d4c5c29ca1a" },
   "which-key.nvim": { "branch": "main", "commit": "5a6c954a5a46023c19acc03a8b6d7c3e57964fc5" },
   "yanky.nvim": { "branch": "main", "commit": "5a403165a93cf5cbb3980bd2350ef8b6e3ebe81a" }
