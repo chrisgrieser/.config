@@ -1,10 +1,7 @@
 # https://docs.brew.sh/Manpage#environment
 
-# install
+# install/update
 export HOMEBREW_CASK_OPTS="--no-quarantine"
-export HOMEBREW_NO_INSTALL_UPGRADE=1 # brew install won't upgrade at the same time
-
-# update
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 
@@ -17,7 +14,6 @@ export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 # misc
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
-
 BREWDUMP_PATH="$DOTFILE_FOLDER/_installed-apps-and-packages/"
 
 alias bh='brew home'
@@ -66,9 +62,6 @@ function update() {
 
 	print-section "DUMP INSTALLS"
 	dump
-
-	print-section "\033[1;33mREMINDER"
-	echo "Check if node now works without disabling SSL"
 
 	sketchybar --trigger homebrew-update # update counter now that updates have been done
 

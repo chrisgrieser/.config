@@ -37,7 +37,7 @@ function man() {
 # uses OPENAI_API_KEY saved in .zshenv
 function ai() {
 	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
-	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
+	if ! command -v glow &>/dev/null; then echo "glow not installed." && return 1; fi
 
 	local query="$*"
 	# WARN do not use "$prompt" as a variable in zsh, it's a reserved keyword
@@ -52,7 +52,8 @@ function ai() {
 			\"temperature\": 0
 		}" |
 		yq -r '.choices[].message.content')
-	echo "$answer" | bat --language=markdown --style=grid
+	# echo "$answer" | bat --language=markdown --style=grid --wrap=auto
+	echo "$answer" | glow
 }
 
 #───────────────────────────────────────────────────────────────────────────────

@@ -7,14 +7,12 @@
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# saves spaces
---wrap=never
---tabs=2
 --terminal-width="-1"
+--wrap=never
+
+# saves spaces
+--tabs=2
 
 # Possible values: *default*, full, auto, plain, changes, header,
 # header-filename, header-filesize, grid, rule, numbers, snip.
 --style="grid"
-
-# auto-quit when only short
---pager="less -RF"

@@ -153,7 +153,7 @@ UnlockWatcher = c.new(function(event)
 			sidenotes.reminderToSidenotes()
 		end)
 	end, 0.2)
-	-- deactivate the timer in the screen is woken but not unlocked
+	-- deactivate the timer if the screen is woken but not unlocked
 	u.runWithDelays(20, function()
 		if UnlockTimer and UnlockTimer:running() then UnlockTimer:stop() end
 	end)
