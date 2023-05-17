@@ -251,7 +251,6 @@ matches:
   - trigger: seperate
     replace: separate
     propagate_casing: true
-    word: true
   # https://espanso.org/docs/matches/regex-triggers#arguments
   - regex: "\\Bsich\\b"
     replace: "isch"
