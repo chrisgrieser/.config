@@ -35,11 +35,14 @@ function M.systemStart()
 		periphery.batteryCheck("SideNotes")
 		repos.syncAllGitRepos(true, true)
 		layouts.selectLayout()
+
+		-- with delay, to avoid importing duplicate reminders due to reminders
+		-- not being synced yet
 		if env.isAtOffice then
-			sidenotes.moveOfficeNotesToBase()
-			-- with delay, to avoid importing duplicate reminders due to reminders
-			-- not being synced yet
-			u.runWithDelays(20, sidenotes.reminderToSidenotes)
+			u.runWithDelays(15, function()
+				sidenotes.moveOfficeNotesToBase()
+				sidenotes.reminderToSidenotes()
+			end)
 		end
 	end
 end
