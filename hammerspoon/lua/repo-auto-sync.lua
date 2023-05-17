@@ -146,5 +146,14 @@ SleepWatcher = hs.caffeinate.watcher
 	end)
 	:start()
 
+-- 5. Every morning at 8:00, when at home
+-- (safety redundancy to ensure syncs when leaving for the office)
+MorningSyncTimer = hs.timer
+	.doAt("08:00", "01d", function()
+		if not env.isAtHome then return end
+		M.syncAllGitRepos(true, false)
+	end)
+	:start()
+
 --------------------------------------------------------------------------------
 return M

@@ -3,7 +3,7 @@
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # Input
-pdf_path=$(osascript "./scripts/get-pdf-path.applescript")
+pdf_path=$(osascript "./pdf-annotation-extraction/get-pdf-path.applescript")
 
 #───────────────────────────────────────────────────────────────────────────────
 # GUARD CLAUSES & CITEKEY RETRIEVAL
@@ -72,5 +72,5 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # PROCESS ANNOTATIONS
-JS_script_path="./scripts/process_annotations.js"
+JS_script_path="./pdf-annotation-extraction/process_annotations.js"
 osascript -l JavaScript "$JS_script_path" "$citekey" "$annotations" "$entry" "$output_path" "$extraction_engine"
