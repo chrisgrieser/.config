@@ -10,8 +10,8 @@ local s = {
 	snippets = { name = "luasnip" },
 	lsp = { name = "nvim_lsp" },
 	treesitter = { name = "treesitter" },
-	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
-	cmdline = { name = "cmdline" },
+	cmdline_history = { name = "cmdline_history", keyword_length = 2, max_item_count = 8 },
+	cmdline = { name = "cmdline", max_item_count = 8 },
 	diag_codes = { name = "diag-codes" },
 }
 local source_icons = {
@@ -295,15 +295,13 @@ local function cmdlineCompletionConfig()
 		mapping = cmp.mapping.preset.cmdline(),
 		enabled = function()
 			-- https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-cmdline-completion-for-certain-commands-such-as-increname
-			local disabled = {
-				IncRename = true,
-				s = true, -- :substitute
-				sm = true, -- :substitute (magic)
-			}
-			local cmd = vim.fn.getcmdline():match("%S+") -- Get first word of cmdline
-			-- Return true if cmd isn't disabled
-			-- else call/return cmp.close(), which returns false
-			return not disabled[cmd] or cmp.close()
+			local cmd = vim.fn.getcmdline():match("%S+") or "" -- Get first word of cmdline
+			-- ignore for :IncRename and for numb.nvim
+			if cmd == "IncRename" or cmd:find("^%d+$") then
+				cmp.close()
+				return false
+			end
+			return true
 		end,
 		sources = cmp.config.sources({
 			s.path,
