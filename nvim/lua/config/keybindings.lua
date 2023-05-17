@@ -162,18 +162,17 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
 -- delete surrounding indentation
 keymap("n", "dsi", function()
-	require("various-textobjs").indentation(true, true)
-
+	require("various-textobjs").indentation(true, true) -- select inner indentation
 	-- when textobj is found, will switch to visual line mode
 	local notOnIndentedLine = vim.fn.mode():find("V") == nil
 	if notOnIndentedLine then return end
 
 	u.normal("<") -- dedent indentation
 
-	local startBorder = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
-	local endBorder = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
-	local deletionCommand = ("%s"):format(startBorder, endBorder)
-	vim.cmd("delete")
+	local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
+	local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
+	vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
+	vim.cmd(tostring(startBorderLn) .. " delete")
 end, { desc = "Delete surrounding indentation" })
 
 -- Append to / delete from EoL
