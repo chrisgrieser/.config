@@ -132,14 +132,15 @@ u.urischeme("sync-repos", function()
 	M.syncAllGitRepos(true, true)
 end)
 
--- 4. when going to sleep or when unlocking with idleTime
+-- 4. when going to sleep or when unlocking
 SleepWatcher = hs.caffeinate.watcher
 	.new(function(event)
 		local c = hs.caffeinate.watcher
 		if
 			event == c.screensDidLock
 			or event == c.screensDidSleep
-			or ((event == c.screensDidWake or event == c.systemDidWake) and u.idleMins(30))
+			or event == c.screensDidWake
+			or event == c.systemDidWake
 		then
 			M.syncAllGitRepos(true, true)
 		end
@@ -150,8 +151,7 @@ SleepWatcher = hs.caffeinate.watcher
 -- (safety redundancy to ensure syncs when leaving for the office)
 MorningSyncTimer = hs.timer
 	.doAt("08:00", "01d", function()
-		if not env.isAtHome then return end
-		M.syncAllGitRepos(true, false)
+		if env.isAtHome then M.syncAllGitRepos(true, false) end
 	end)
 	:start()
 
