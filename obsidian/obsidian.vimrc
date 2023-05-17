@@ -230,6 +230,7 @@ omap ir i[
 omap ar a[
 omap ac a{
 omap ic i{
+omap ag G
 
 """"""""""""""""""""""
 " Tabs, Splits & Alt-file
