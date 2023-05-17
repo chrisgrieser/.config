@@ -1,49 +1,49 @@
 matches:
   - trigger: ttt
-    replace: "#question"
+    replace: "#question "
     label: ❓ question
   - trigger: ttt
-    replace: "#gap"
+    replace: "#gap "
     label: 🕳️ gap
   - trigger: ttt
-    replace: "#critique"
+    replace: "#critique "
     label: 🟣 critique
   - trigger: ttt
-    replace: "#agree"
+    replace: "#agree "
     label: 🟩 agree
   - trigger: ttt
-    replace: "#disagree"
+    replace: "#disagree "
     label: 🟥 disagree
   - trigger: ttt
-    replace: "#important"
+    replace: "#important "
     label: ✴️ important
   - trigger: ttt
-    replace: "#epistemic-break"
+    replace: "#epistemic-break "
     label: ⚡ epistemic-break
   - trigger: ttt
-    replace: "#idea"
+    replace: "#idea "
     label: 🤔 idea
   - trigger: ttt
-    replace: "#definition"
+    replace: "#definition "
     label: 💡 definition
   - trigger: ttt
-    replace: "#example"
+    replace: "#example "
     label: ⚛️ example
   - trigger: ttt
-    replace: "#main"
+    replace: "#main "
     label: Ⓜ️ main
   - trigger: ttt
-    replace: "#method"
+    replace: "#method "
     label: 🔬 method
   - trigger: ttt
-    replace: "#data"
+    replace: "#data "
     label: 🔢 data
   - trigger: ttt
-    replace: "#sidenote"
+    replace: "#sidenote "
     label: 📔 sidenote
   - trigger: ttt
-    replace: "#quote"
+    replace: "#quote "
     label: 💬 quote
   - trigger: ttt
-    replace: "#lit-review"
-    label: 📚 lit-review
+    replace: "#litreview "
+    label: 📚 litreview
