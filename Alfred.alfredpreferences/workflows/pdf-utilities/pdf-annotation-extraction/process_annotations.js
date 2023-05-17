@@ -304,7 +304,8 @@ function transformTag4yaml(annotations, keywords) {
 
 	// additional tags (from annotations)
 	const arr = annotations.map((a) => {
-		if (a.comment?.startsWith("=")) {
+		// check for "=" as starting symbol, do not trigger on `==` for highlight syntax
+		if (a.comment?.startsWith("=") && !a.comment?.startsWith("==")) {
 			let tags = a.comment.slice(1); // remove the "="
 			if (a.type === "Highlight" || a.type === "Underline") tags += " " + a.quote;
 			tags.split(",").forEach((/** @type {string} */ tag) => newKeywords.push(tag));
