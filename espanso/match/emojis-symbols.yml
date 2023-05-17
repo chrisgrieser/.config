@@ -11,6 +11,8 @@ matches:
     replace: 🆕
   - trigger: "!warn"
     replace: ⚠️
+  - trigger: "!star"
+    replace: ★ 
   - trigger: "->"
     replace: →
     word: true
