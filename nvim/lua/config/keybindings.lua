@@ -148,7 +148,7 @@ keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quic
 
 -- COMMENTS & ANNOTATIONS
 keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = " Horizontal Divider" })
-keymap("n", "qd", "yypkqqj", { desc = " Duplicate Line as Comment", remap = true })
+keymap("n", "wq", "yypkqqj", { desc = " Duplicate Line as Comment", remap = true })
 -- stylua: ignore
 keymap("n", "qf", function() require("neogen").generate({}) end, { desc = " Comment Function" })
 
@@ -159,6 +159,22 @@ keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
+
+-- delete surrounding indentation
+keymap("n", "dsi", function()
+	require("various-textobjs").indentation(true, true)
+
+	-- when textobj is found, will switch to visual line mode
+	local notOnIndentedLine = vim.fn.mode():find("V") == nil
+	if notOnIndentedLine then return end
+
+	u.normal("<") -- dedent indentation
+
+	local startBorder = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
+	local endBorder = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
+	local deletionCommand = ("%s"):format(startBorder, endBorder)
+	vim.cmd("delete")
+end, { desc = "Delete surrounding indentation" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
