@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>net.deanishe.alfred.word-to-pdf</string>
+	<key>connections</key>
+	<dict>
+		<key>32DBBB78-7731-4D6F-B6F2-A348495F1F6C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>81D78F5B-ADA8-4423-95A3-9115129A9898</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6FD43724-7C31-4150-8A9A-5F0F4B2FC6FF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>81D78F5B-ADA8-4423-95A3-9115129A9898</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>81D78F5B-ADA8-4423-95A3-9115129A9898</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3A8D3C5E-A939-4992-AF5E-EAB815D613E2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Dean Jackson &lt;deanishe@deanishe.net&gt;</string>
+	<key>description</key>
+	<string>Export Word docs to PDF</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Word to PDF</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>anchorfields</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>daterange</key>
+				<integer>0</integer>
+				<key>fields</key>
+				<array>
+					<dict>
+						<key>field</key>
+						<string>kMDItemDisplayName</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemAlternateNames</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemFinderComment</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+				</array>
+				<key>includesystem</key>
+				<false/>
+				<key>keyword</key>
+				<string>word2pdf</string>
+				<key>limit</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>scopes</key>
+				<array>
+					<string>~/Documents</string>
+				</array>
+				<key>sortmode</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>Search for Word document…</string>
+				<key>title</key>
+				<string>Word Document to PDF</string>
+				<key>types</key>
+				<array>
+					<string>com.microsoft.word.doc</string>
+					<string>org.openxmlformats.wordprocessingml.document</string>
+				</array>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.filefilter</string>
+			<key>uid</key>
+			<string>32DBBB78-7731-4D6F-B6F2-A348495F1F6C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Word to PDF</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>3A8D3C5E-A939-4992-AF5E-EAB815D613E2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>Word to PDF.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>81D78F5B-ADA8-4423-95A3-9115129A9898</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.microsoft.word.doc</string>
+					<string>org.openxmlformats.wordprocessingml.document</string>
+				</array>
+				<key>name</key>
+				<string>Export as PDF</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>6FD43724-7C31-4150-8A9A-5F0F4B2FC6FF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Word to PDF
+===========
+
+Convert Word documents to PDF using Word.
+
+By default, the workflow uses Word and macOS's built-in "Save as PDF" functionality. This is relatively clunky and slow, but doesn't require any additional software or services.
+
+Alternatively, it can use Word's native PDF export, which is based on a Microsoft-provided online service. This, of course, has serious privacy implications.
+
+To use the online service, set variable "USE_ONLINE_SERVICE" to "true".
+
+Set variable "OPEN_WITH" to the name of the application you'd like the exported PDFs to be opened in.</string>
+	<key>uidata</key>
+	<dict>
+		<key>32DBBB78-7731-4D6F-B6F2-A348495F1F6C</key>
+		<dict>
+			<key>xpos</key>
+			<real>70</real>
+			<key>ypos</key>
+			<real>45</real>
+		</dict>
+		<key>3A8D3C5E-A939-4992-AF5E-EAB815D613E2</key>
+		<dict>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>120</real>
+		</dict>
+		<key>6FD43724-7C31-4150-8A9A-5F0F4B2FC6FF</key>
+		<dict>
+			<key>xpos</key>
+			<real>70</real>
+			<key>ypos</key>
+			<real>205</real>
+		</dict>
+		<key>81D78F5B-ADA8-4423-95A3-9115129A9898</key>
+		<dict>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>120</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>variables</key>
+	<dict>
+		<key>OPEN_WITH</key>
+		<string>Highlights</string>
+		<key>USE_ONLINE_SERVICE</key>
+		<string>true</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>0.1.0</string>
+	<key>webaddress</key>
+	<string>https://www.deanishe.net/post/2021/05/workflow-word-to-pdf/</string>
+</dict>
+</plist>
