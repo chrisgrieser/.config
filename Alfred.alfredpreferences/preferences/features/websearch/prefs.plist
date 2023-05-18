@@ -101,7 +101,7 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>ce</string>
+			<string>ch</string>
 			<key>text</key>
 			<string>Chrome Extensions: '{query}'</string>
 			<key>url</key>
@@ -187,19 +187,6 @@
 			<string>User Scripts: '{query}'</string>
 			<key>url</key>
 			<string>https://www.userscript.zone/search?q={query}</string>
-		</dict>
-		<key>D6907991-DE8D-4739-B770-96C9744BD863</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>wer</string>
-			<key>text</key>
-			<string>Wer streamt es?</string>
-			<key>url</key>
-			<string>https://www.werstreamt.es/filme-serien/?q={query}</string>
-			<key>utf8</key>
-			<true/>
 		</dict>
 		<key>D9B8CA93-B344-4C87-818C-ADC9BE350C9E</key>
 		<dict>

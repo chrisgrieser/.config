@@ -5,12 +5,6 @@ local u = require("lua.utils")
 local visuals = require("lua.visuals")
 --------------------------------------------------------------------------------
 
-local function brightnessNotify()
-	local brightness = math.floor(hs.brightness.ambient())
-	local hasBrightnessSensor = brightness > -1
-	if hasBrightnessSensor then u.notify("☀️ Brightness:", tostring(brightness)) end
-end
-
 -- done manually to include app-specific toggling for:
 -- - Neovim
 -- - Highlights PDF appearance
@@ -21,7 +15,6 @@ local function toggleDarkMode()
 	local sidenotesDark = "City Lights"
 	local sidenotesLight = "Monterey"
 
-	brightnessNotify()
 	local sketchyfont, sketchybg, toMode, pdfbg, sidenotesTheme
 
 	if u.isDarkMode() then
