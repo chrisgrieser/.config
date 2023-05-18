@@ -170,7 +170,7 @@ end
 
 ---@param commitMsg string
 local function shimmeringFocusBuild(commitMsg)
-	local buildscriptLocation = vim.env.ICLOUD .. "/Repos/shimmering-focus/build.sh"
+	local buildscriptLocation = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/Repos/shimmering-focus/build.sh"
 
 	vim.notify('󰊢 Building theme…\n"' .. commitMsg .. '"')
 	output = {}
