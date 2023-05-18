@@ -25,6 +25,7 @@ return {
 		"gbprod/substitute.nvim",
 		lazy = true,
 		opts = {
+			-- integrate with yanky.nvim
 			on_substitute = require("yanky.integration").substitute(),
 		},
 	},

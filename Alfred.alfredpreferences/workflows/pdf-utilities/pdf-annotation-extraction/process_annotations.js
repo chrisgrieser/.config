@@ -209,7 +209,7 @@ function jsonToMd(annotations, citekey) {
 		return output;
 	});
 
-	return formattedAnnos.join("\n") + "\n";
+	return formattedAnnos.join("\n");
 }
 
 /** code: "+"
@@ -414,25 +414,27 @@ function extractMetadata(citekey, rawEntry) {
  * @param {string} tagsForYaml
  */
 function writeNote(annos, metad, outputPath, tagsForYaml) {
+	// yaml frontmatter
+	const yamlKeys = [
+		`aliases: "${metad.title}"`,
+		`tags: literature-note, ${tagsForYaml}`,
+		"cssclass: pdf-annotations",
+		"obsidianUIMode: preview",
+		"citekey: ${metad.citekey}",
+		`year: ${metad.year.toString()}`,
+		`author: "${metad.author}"`,
+		`publicationType: ${metad.ptype}`,
+	];
+	// url & doi do not exist for every entry, so only inserting them if they
+	// exist to prevent empty yaml keys
+	if (metad.url) yamlKeys.push(`url: ${metad.url}`);
+	if (metad.doi) yamlKeys.push(`doi: ${metad.doi}`);
+
 	const isoToday = new Date().toISOString().slice(0, 10);
+	yamlKeys.push(`extraction-date: ${isoToday}`);
 
-	const noteContent = `---
-aliases: "${metad.title}"
-tags: literature-note, ${tagsForYaml}
-cssclass: pdf-annotations
-obsidianUIMode: preview
-citekey: ${metad.citekey}
-year: ${metad.year.toString()}
-author: "${metad.author}"
-publicationType: ${metad.ptype}
-url: ${metad.url}
-doi: ${metad.doi}
-creation-date: ${isoToday}
----
-
-# ${metad.title}
-${annos}`;
-
+	// write note
+	const noteContent = `---\n${yamlKeys.join("\n")}\n---\n\n# ${metad.title}\n${annos}\n`;
 	const path = outputPath + `/${metad.citekey}.md`;
 	writeToFile(noteContent, path);
 

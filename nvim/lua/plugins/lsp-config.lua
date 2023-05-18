@@ -224,10 +224,6 @@ local function setupAllLsps()
 			on_attach = lspOnAttach[lsp], -- mostly disables some settings
 		}
 
-		-- FIX for rome 12.1.0. Must be removed upon next rome update
-		-- https://github.com/rome/tools/issues/4489
-		if lsp == "rome" then config.cmd = { "rome", "lsp_proxy" } end
-
 		require("lspconfig")[lsp].setup(config)
 	end
 end

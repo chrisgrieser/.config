@@ -51,7 +51,7 @@ keymap("n", "zr", function() require("ufo").openFoldsExceptKinds { "comments" } 
 keymap("n", "zm", function() require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
 
 -- set foldlevel via z{n}
-for _, lvl in pairs { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } do
+for _, lvl in pairs { 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
 	local desc = lvl < 4 and "󰘖 Set Fold Level" or "which_key_ignore"
 	keymap(
 		"n",
