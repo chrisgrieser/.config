@@ -101,6 +101,7 @@ nmap gs :gotoHeading
 exmap followNextLink obcommand shukuchi:open-link
 nmap gx :followNextLink
 nmap ga :followNextLink
+nmap gd :followNextLink
 
 exmap liveGrep obcommand obsidian-another-quick-switcher:grep
 nmap gl :liveGrep
@@ -176,7 +177,6 @@ nmap ,y 3ggA
 " requires Footnotes Shortcut Plugin
 exmap gotoFootnoteDefinition obcommand obsidian-footnotes:insert-autonumbered-footnote
 nmap gf :gotoFootnoteDefinition
-nmap gd :gotoFootnoteDefinition
 
 " Blockquote
 exmap toggleBlockquote obcommand editor:toggle-blockquote
