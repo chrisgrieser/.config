@@ -48,11 +48,11 @@ local function nullSources()
 		-- force shellcheck to work with zsh
 		builtins.diagnostics.shellcheck.with {
 			extra_filetypes = { "zsh" },
-			extra_args = { "--shell=bash", "--external-sources", "--check-sourced" },
+			extra_args = { "--shell=bash" },
 		},
 		builtins.code_actions.shellcheck.with {
 			extra_filetypes = { "zsh" },
-			extra_args = { "--shell=bash", "--external-sources", "--check-sourced" },
+			extra_args = { "--shell=bash" },
 		},
 
 		-- JS/TS/JSON
@@ -66,7 +66,6 @@ local function nullSources()
 			timeout = 10000, -- longer timeout for large css files
 		},
 		builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
-			filetypes = { "css" }, -- not using in scss
 			extra_args = {
 				"--quiet", -- only errors, no warnings
 				"--config",
@@ -128,7 +127,6 @@ return {
 		end,
 	},
 	{
-
 		"jayp0521/mason-null-ls.nvim",
 		lazy = true,
 		opts = { ensure_installed = lintersAndFormatters },
