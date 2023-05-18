@@ -145,7 +145,7 @@ u.hotkey(u.hyper, "home", M.selectLayout)
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
 	if not (event == c.screensDidWake or event == c.systemDidWake) then return end
-	print("🔓 System/Screen did wake.")
+	print("🔓 Unlock/Wake")
 
 	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
 		u.runWithDelays(0.5, function() -- delay for recognizing screens

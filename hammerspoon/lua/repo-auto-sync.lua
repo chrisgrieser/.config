@@ -26,7 +26,7 @@ local function gitDotfileSync(submodulePull)
 
 	local function dotfileSyncCallback(exitCode, _, stdErr)
 		if exitCode == 0 then
-			local msg = dotfileIcon .. " Dotfile Sync successful"
+			local msg = dotfileIcon .. " Dotfile Sync"
 			if submodulePull then msg = msg .. " (with submodules)" end
 			print(msg)
 			return
@@ -56,7 +56,7 @@ local function gitVaultSync()
 	GitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				print(vaultIcon, "Vault Sync successful")
+				print(vaultIcon, "Vault Sync")
 				return
 			end
 			u.notify(vaultIcon .. "⚠️️ vault " .. stdErr)
@@ -76,7 +76,7 @@ local function gitPassSync()
 	GitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				print(passIcon, "Password-Store Sync successful")
+				print(passIcon, "Password-Store Sync")
 				return
 			end
 			u.notify(passIcon .. "⚠️️ password-store " .. stdErr)
@@ -139,8 +139,8 @@ SleepWatcher = hs.caffeinate.watcher
 		if
 			event == c.screensDidLock
 			or event == c.screensDidSleep
-			or event == c.screensDidWake
 			or event == c.systemDidWake
+			or (event == c.screensDidWake and u.idleMins(30))
 		then
 			M.syncAllGitRepos(true, true)
 		end

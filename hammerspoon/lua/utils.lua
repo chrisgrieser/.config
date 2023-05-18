@@ -95,7 +95,7 @@ function M.runWithDelays(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	local rng = tostring(math.random())
 	for _, delay in pairs(delaySecs) do
-		MyTimers[rng] = hs.timer.doAfter(delay, callbackFn)
+		MyTimers[rng] = hs.timer.doAfter(delay, callbackFn):start()
 	end
 end
 
