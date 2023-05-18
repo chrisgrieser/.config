@@ -1,7 +1,7 @@
 local pw = hs.pathwatcher.new
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
---------------------------------------------------------------------------------
+local home = os.getenv("HOME")
 
 ---is in sub-directory instead of directly in the folder
 ---@param fPath string? filepath
@@ -18,26 +18,25 @@ end
 
 -- BOOKMARKS SYNCED TO CHROME BOOKMARKS
 -- (needed for Alfred)
-local appSupport = os.getenv("HOME") .. "/Library/Application Support/"
-local sourceBookmarkPath = appSupport .. "/Vivaldi/Default/Bookmarks"
-local sourceStatePath = appSupport .. "/Vivaldi/Local State"
-local chromeBookmarksPath = appSupport .. "/Google/Chrome/Default/Bookmarks"
-local chromeStatePath = appSupport .. "/Google/Chrome/Local State"
+local sourceProfileLocation = home .. "/Library/Application Support/Vivaldi/"
+local sourceBookmarkPath = sourceProfileLocation .. "/Default/Bookmarks"
+local chromeProfileLocation = home .. "/Library/Application Support/Google/Chrome/"
 BookmarkWatcher = pw(sourceBookmarkPath, function()
 	-- Bookmarks
 	local bookmarks = hs.json.read(sourceBookmarkPath)
 	if not bookmarks then return end
 	bookmarks.roots.trash = nil -- remove Vivaldi's trash folder for Alfred
-	local success = hs.json.write(bookmarks, chromeBookmarksPath, false, true)
+	hs.execute(("mkdir -p '%s'"):format(chromeProfileLocation))
+	local success = hs.json.write(bookmarks, chromeProfileLocation .. "/Default/Bookmarks", false, true)
 	if not success then
 		u.notify("🔖⚠️ Bookmarks not correctly synced.")
 		return
 	end
 
 	-- Local State (also required for Alfred to pick up the Bookmarks)
-	local content = u.readFile(sourceStatePath)
+	local content = u.readFile(sourceProfileLocation .. "/Local State")
 	if not content then return end
-	u.writeToFile(chromeStatePath, content)
+	u.writeToFile(chromeProfileLocation .. "/Local State", content)
 
 	print("🔖 Bookmarks synced to Chrome Bookmarks")
 end):start()
@@ -45,7 +44,7 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- DOWNLOAD FOLDER BADGE
-local downloadFolder = os.getenv("HOME") .. "/Downloaded"
+local downloadFolder = home .. "/Downloaded"
 DownloadFolderWatcher = pw(
 	downloadFolder,
 	function()
@@ -57,7 +56,7 @@ DownloadFolderWatcher = pw(
 -- TO FILE HUB
 
 -- GenuisScan
-local scanFolder = os.getenv("HOME")
+local scanFolder = home
 	.. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 ScanFolderWatcher = pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. env.fileHub .. "'")
@@ -65,12 +64,12 @@ ScanFolderWatcher = pw(scanFolder, function()
 end):start()
 
 -- Downloads Folder
-local systemDownloadFolder = os.getenv("HOME") .. "/Downloads/"
+local systemDownloadFolder = home .. "/Downloads/"
 SystemDlFolderWatcher = pw(systemDownloadFolder, function(files)
 	-- Stats Update file can directly be trashed
 	for _, filePath in pairs(files) do
 		if not filePath:find("Stats%.dmg$") then break end
-		u.runWithDelays(1, function() os.rename(filePath, os.getenv("HOME") .. "/.Trash/Stats.dmg") end)
+		u.runWithDelays(1, function() os.rename(filePath, home .. "/.Trash/Stats.dmg") end)
 	end
 
 	-- otherwise move to filehub
@@ -96,7 +95,7 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 			-- cannot be opened via browser though and also does not create recursion,
 			-- so it is opened here
 			if ext == "dmg" and not (fileName == "Stats.dmg") then hs.open(filep) end
-			u.runWithDelays(3, function() os.rename(filep, os.getenv("HOME") .. "/.Trash/" .. fileName) end)
+			u.runWithDelays(3, function() os.rename(filep, home .. "/.Trash/" .. fileName) end)
 
 		-- zip: unzip
 		elseif ext == "zip" and fileName ~= "violentmonkey.zip" then
