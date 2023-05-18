@@ -199,7 +199,7 @@ function jsonToMd(annotations, citekey) {
 				break;
 			case "Question Callout": // blockquoted comment
 				comment = comment.replaceAll("\n", "\n> ");
-				output = `> [!QUESTION]\n> ${comment}`;
+				output = `> [!QUESTION]\n> ${comment}\n`;
 				break;
 			case "Image":
 				output = `\n![[${a.image}]]\n`;
@@ -431,7 +431,6 @@ creation-date: ${isoToday}
 ---
 
 # ${metad.title}
-
 ${annos}`;
 
 	const path = outputPath + `/${metad.citekey}.md`;
