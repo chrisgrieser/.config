@@ -47,11 +47,8 @@ function dump() {
 
 function update() {
 	print-section "HOMEBREW"
-	print-section "update"
 	brew update
-	print-section "upgrade"
 	brew upgrade
-	print-section "cleanup"
 	brew cleanup
 
 	print-section "MAC APP STORE"
