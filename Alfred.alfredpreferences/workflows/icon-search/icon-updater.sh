@@ -87,6 +87,15 @@ case $APP in
 "YouTube")
 	cp -f "$CUSTOM_ICON_FOLDER/$APP.icns" "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
 	;;
+"Netflix")
+	iconsur set Netflix.app &>/dev/null
+	;;
+"Twitch")
+	iconsur set Twitch.app &>/dev/null
+	;;
+"CrunchyRoll")
+	iconsur set CrunchyRoll.app &>/dev/null
+	;;
 "PWAs")
 	cd "$PWA_FOLDER" || exit 1
 	iconsur set --local reddxxx.app &>/dev/null
