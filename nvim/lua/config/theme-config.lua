@@ -3,8 +3,7 @@ local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
 
---------------------------------------------------------------------------------
-local maxIndent = 8
+local overnestingIndent = 8
 --------------------------------------------------------------------------------
 
 ---@param hlgroupfrom string
@@ -77,7 +76,7 @@ local function customHighlights()
 	fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
 
 	updateHighlight("Overnesting", "guibg=#E06C75")
-	fn.matchadd("Overnesting", ("\t"):rep(maxIndent) .. "\t*")
+	fn.matchadd("Overnesting", ("\t"):rep(overnestingIndent) .. "\t*")
 
 	updateHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
 	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens

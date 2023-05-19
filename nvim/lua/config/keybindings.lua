@@ -149,8 +149,6 @@ keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quic
 -- COMMENTS & ANNOTATIONS
 keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = " Horizontal Divider" })
 keymap("n", "wq", "yypkqqj", { desc = " Duplicate Line as Comment", remap = true })
--- stylua: ignore
-keymap("n", "qf", function() require("neogen").generate({}) end, { desc = " Comment Function" })
 
 -- WHITESPACE CONTROL
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
