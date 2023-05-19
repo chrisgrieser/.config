@@ -1,27 +1,27 @@
 local g = vim.g
 --------------------------------------------------------------------------------
 
--- INFO order defines themes
--- - first theme used for light mode
--- - second for dark mode
--- - rest ignored
--- - if only one theme, it's used for both light and dark
-local themes = {
+-- INFO only the first theme will be used
+local lightThemes = {
+	"projekt0n/github-nvim-theme",
 	"EdenEast/nightfox.nvim",
 	-- { "rose-pine/neovim", name = "rose-pine" },
-	-- "tanvirtin/monokai.nvim",
+}
+
+local darkThemes = {
+	"folke/tokyonight.nvim",
 	-- "rebelot/kanagawa.nvim",
+	-- "glepnir/zephyr-nvim",
+	-- "tanvirtin/monokai.nvim",
 	-- "kvrohit/mellow.nvim",
 	-- "AlexvZyl/nordic.nvim",
-	-- "glepnir/zephyr-nvim",
 	-- "sainnhe/everforest",
-	"folke/tokyonight.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",
 }
 
 g.darkTransparency = 0.91
-g.lightTransparency = 0.93
+g.lightTransparency = 0.92
 
 --------------------------------------------------------------------------------
 
@@ -38,16 +38,22 @@ g.lightTransparency = 0.93
 local function getName(repo)
 	-- either first item, or name-key
 	if type(repo) == "table" then repo = repo.name or repo[1] end
-	local name = repo:gsub(".*/", ""):gsub("[.%-]?nvim", ""):gsub("neovim%-?", "")
+	local name = repo:gsub(".*/", ""):gsub("[.%-]?nvim$", ""):gsub("neovim%-?", "")
 	return name
 end
 
-g.lightTheme = getName(themes[1])
-g.darkTheme = #themes == 1 and g.lightTheme or getName(themes[2])
+g.lightTheme = getName(lightThemes[1])
+g.darkTheme = getName(darkThemes[1])
 
 -- account for special names
 if g.lightTheme == "nightfox" then g.lightTheme = "dawnfox" end
 if g.darkTheme == "monokai" then g.darkTheme = "monokai_pro" end
+if g.lightTheme == "github-nvim-theme" then g. lightTheme = "github_light_colorblind" end
 --------------------------------------------------------------------------------
 
-return themes
+-- merge tables
+for _, theme in pairs(darkThemes) do
+	table.insert(lightThemes, theme)
+end
+
+return lightThemes
