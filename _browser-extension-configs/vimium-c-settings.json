@@ -1,9 +1,9 @@
 {
 	"name": "Vimium C",
-	"@time": "28/04/2023, 23:09:06",
-	"time": 1682716146003,
+	"@time": "19/05/2023, 13:58:18",
+	"time": 1684497498311,
 	"environment": {
-		"extension": "1.99.99",
+		"extension": "1.99.991",
 		"platform": "mac",
 		"chromium": 112
 	},
@@ -29,6 +29,10 @@
 		{
 			"passKeys": "j k o ",
 			"pattern": ":https://search.brave.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://www.youtube.com/"
 		}
 	],
 	"extAllowList": [
@@ -84,7 +88,6 @@
 		"\" Tabs",
 		"map q closeTabsOnLeft",
 		"map e closeTabsOnRight",
-		"map W closeOtherTabs",
 		"map w removeTab mayClose",
 		"map m removeTab mayClose",
 		"\" -- using  then/else, since runKey does not work with the `mayClose` parameter",
