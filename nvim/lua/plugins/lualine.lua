@@ -88,7 +88,9 @@ local function visualMultiCursorCount()
 end
 
 local function clock()
-	if vim.opt.columns:get() < 110 then return "" end -- only show the clock when it covers the menubar clock
+	-- only show the clock when fullscreen (= it covers the menubar clock)
+	if vim.opt.columns:get() < 110 or vim.opt.lines:get() < 25 then return "" end 
+
 	local time = tostring(os.date()):sub(12, 16)
 	if os.time() % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
 	return time
