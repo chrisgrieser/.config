@@ -49,6 +49,7 @@ g.darkTheme = getName(darkThemes[1])
 if g.lightTheme == "nightfox" then g.lightTheme = "dawnfox" end
 if g.darkTheme == "monokai" then g.darkTheme = "monokai_pro" end
 if g.lightTheme == "github-nvim-theme" then g. lightTheme = "github_light_colorblind" end
+
 --------------------------------------------------------------------------------
 
 -- merge tables
