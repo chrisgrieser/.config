@@ -127,15 +127,14 @@ function insertPageNumber(annotations, pageNo) {
 function splitOffUnderlines(annotations, citekey) {
 	const underlineAnnos = annotations.filter((a) => a.type === "Underline");
 
-	const underScoreHls = [];
+	const underscoreAnnos = [];
 	annotations.forEach((anno) => {
-		if (anno.type !== "Highlight") return;
 		if (!anno.comment?.startsWith("_")) return;
 		anno.comment = anno.comment.slice(1).trim(); // remove "_" prefix
-		underScoreHls.push(anno);
+		underscoreAnnos.push(anno);
 	});
 
-	const annosToSplitOff = [...underlineAnnos, ...underScoreHls];
+	const annosToSplitOff = [...underlineAnnos, ...underscoreAnnos];
 	if (annosToSplitOff.length > 0) {
 		const text = jsonToMd(annosToSplitOff, citekey);
 		Application("SideNotes").createNote({ text: text });
@@ -231,7 +230,7 @@ function mergeQuotes(annos) {
 		annos[i - 1].quote += connector + annos[i].quote;
 
 		annos.splice(i, 1); // remove current element
-		i--; // move index back, so merging in case of consecutive "+" works
+		i--; // move index back, so merging of consecutive "+" works
 	}
 	return annos;
 }
