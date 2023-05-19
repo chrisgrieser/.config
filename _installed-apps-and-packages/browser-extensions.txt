@@ -1,4 +1,3 @@
-https://chrome.google.com/webstore/detail/Temp
 https://chrome.google.com/webstore/detail/amaaokahonnfjjemodnpmeenfpnnbkco
 https://chrome.google.com/webstore/detail/bbojmeobdaicehcopocnfhaagefleiae
 https://chrome.google.com/webstore/detail/bggfcpfjbdkhfhfmkjpbhnkhnpjjeomc
@@ -6,6 +5,7 @@ https://chrome.google.com/webstore/detail/bgnkhhnnamicmpeenaelnjfhikgbkllg
 https://chrome.google.com/webstore/detail/bijpdibkloghppkbmhcklkogpjaenfkg
 https://chrome.google.com/webstore/detail/cohamjploocgoejdfanacfgkhjkhdkek
 https://chrome.google.com/webstore/detail/eimadpbcbfnmbkopoojfekhnkhdbieeh
+https://chrome.google.com/webstore/detail/epmaefhielclhlnmjofcdapbeepkmggh
 https://chrome.google.com/webstore/detail/gnmdbogfankgjepgglmmfmbnimcmcjle
 https://chrome.google.com/webstore/detail/hfjbmagddngcpeloejdejnfgbamkjaeg
 https://chrome.google.com/webstore/detail/homifejhmckachdikhkgomachelakohh

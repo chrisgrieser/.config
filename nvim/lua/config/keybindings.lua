@@ -74,6 +74,8 @@ end, { desc = "Clear Notifications" })
 
 --------------------------------------------------------------------------------
 -- MOTIONS
+keymap({ "n", "o", "x" }, "e", '<cmd>lua require("spider").motion("e")<CR>', { desc = "󱇪 e" })
+keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { desc = "󱇪 b" })
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap({ "o", "x" }, "H", "^")
@@ -160,13 +162,16 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
 -- delete surrounding indentation
 keymap("n", "dsi", function()
-	require("various-textobjs").indentation(true, true) -- select inner indentation
+	-- select inner indentation
+	require("various-textobjs").indentation(true, true)
 	-- when textobj is found, will switch to visual line mode
 	local notOnIndentedLine = vim.fn.mode():find("V") == nil
 	if notOnIndentedLine then return end
 
-	u.normal("<") -- dedent indentation
+	-- dedent indentation
+	u.normal("<")
 
+	-- delete start- and end-border
 	local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
 	local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
 	vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
