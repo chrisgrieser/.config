@@ -24,6 +24,7 @@
   "edit-code-block.nvim": { "branch": "main", "commit": "5e4e31012eafa113216cb5894f696682833f8e7f" },
   "fold-cycle.nvim": { "branch": "main", "commit": "18c6fbb9882a1baf16a81cf1f96bcd02d2688df5" },
   "fuzzy.nvim": { "branch": "master", "commit": "67a42ad2fa6d5ff41f0ef3cf69bb247410da5d7a" },
+  "github-nvim-theme": { "branch": "main", "commit": "e6b14d5e80c1a4bb006055851662133ba8cb8f8a" },
   "gitsigns.nvim": { "branch": "main", "commit": "814158f6c4b1724c039fcefe79b0be72c9131c2d" },
   "glance.nvim": { "branch": "master", "commit": "77ebd260c360ce11ddc6aa08efdcea993f40614a" },
   "guess-indent.nvim": { "branch": "main", "commit": "b8ae749fce17aa4c267eec80a6984130b94f80b2" },
