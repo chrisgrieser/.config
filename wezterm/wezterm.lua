@@ -25,7 +25,7 @@ wt.on("gui-startup", function(cmd)
 	if isAtOffice then
 		pos = { x = 375, y = -100, w = 1675 }
 	elseif isAtMother then
-		pos = { x = 500, y = 0, w = 2800 }
+		pos = { x = 620, y = 0, w = 2745 }
 	end
 	local height = 3000 -- automatically truncated to maximum
 	local _, _, window = wt.mux.spawn_window(cmd or {})
