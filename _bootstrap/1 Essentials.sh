@@ -36,6 +36,7 @@ git submodule foreach git checkout main
 
 # SSH
 ln -sf "$DATA_DIR/ssh/" ~/.ssh
+sudo chmod -R 700 ~/.ssh/id_ed25519
 
 # SSH required
 cd ~
