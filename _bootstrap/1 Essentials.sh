@@ -37,7 +37,7 @@ git submodule foreach git checkout main
 # SSH
 ln -sf "$DATA_DIR/ssh/" ~/.ssh
 
-# SSH required for these
+# SSH required
 cd ~
 git clone git@github.com:chrisgrieser/main-vault.git
 
@@ -49,7 +49,7 @@ cd ~
 git clone git@github.com:chrisgrieser/.password-store.git
 
 # Keys
-ln -sf "$DATA_DIR/gpg/" ~/.gpg
+ln -sf "$DATA_DIR/gnupg/" ~/.gnupg
 chmod 700 ~/.gnupg
 
 # gpg config
