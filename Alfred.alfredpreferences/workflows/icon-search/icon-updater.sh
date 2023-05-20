@@ -88,13 +88,20 @@ case $APP in
 	cp -f "$CUSTOM_ICON_FOLDER/$APP.icns" "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
 	;;
 "Netflix")
+	cd "$PWA_FOLDER" || exit 1
 	iconsur set Netflix.app &>/dev/null
 	;;
 "Twitch")
+	cd "$PWA_FOLDER" || exit 1
 	iconsur set Twitch.app &>/dev/null
 	;;
 "CrunchyRoll")
+	cd "$PWA_FOLDER" || exit 1
 	iconsur set CrunchyRoll.app &>/dev/null
+	;;
+"reddxxx")
+	cd "$PWA_FOLDER" || exit 1
+	iconsur set --local reddxxx.app &>/dev/null
 	;;
 "PWAs")
 	cd "$PWA_FOLDER" || exit 1
