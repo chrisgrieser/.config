@@ -3,14 +3,13 @@ local g = vim.g
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	"projekt0n/github-nvim-theme",
 	"EdenEast/nightfox.nvim",
 	-- { "rose-pine/neovim", name = "rose-pine" },
 }
 
 local darkThemes = {
-	"folke/tokyonight.nvim",
-	-- "rebelot/kanagawa.nvim",
+	"rebelot/kanagawa.nvim",
+	-- "folke/tokyonight.nvim",
 	-- "glepnir/zephyr-nvim",
 	-- "tanvirtin/monokai.nvim",
 	-- "kvrohit/mellow.nvim",

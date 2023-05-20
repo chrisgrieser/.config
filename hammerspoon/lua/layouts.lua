@@ -79,10 +79,12 @@ local function workLayout()
 	end
 
 	wu.moveResize(u.app("SideNotes"):mainWindow(), wu.sideNotesWide)
-	LayoutTimer = hs.timer.waitUntil(function() return u.appRunning(appsToOpen) end, function()
-		u.app("Mimestream"):activate()
-		u.restartApp("AltTab")
-	end, 0.1):start()
+	LayoutTimer = hs.timer
+		.waitUntil(function() return u.appRunning(appsToOpen) end, function()
+			u.app("Mimestream"):activate()
+			u.restartApp("AltTab")
+		end, 0.1)
+		:start()
 
 	print("🔲 WorkLayout: done")
 end
@@ -133,7 +135,13 @@ function M.selectLayout()
 end
 
 -- 1. Change of screen numbers
-DisplayCountWatcher = hs.screen.watcher.new(M.selectLayout):start()
+DisplayCountWatcher = hs.screen.watcher
+	.new(function()
+		-- TV at mother needs small delay
+		local delay = env.isAtMother and 1 or 0
+		u.runWithDelays(delay, M.selectLayout)
+	end)
+	:start()
 
 -- 2. Hotkey
 u.hotkey(u.hyper, "home", M.selectLayout)
