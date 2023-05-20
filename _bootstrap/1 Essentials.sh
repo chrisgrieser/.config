@@ -45,7 +45,8 @@ git clone git@github.com:chrisgrieser/main-vault.git
 #───────────────────────────────────────────────────────────────────────────────
 # PASSWORDS & GPG
 
-# Passwords
+# SSH required
+
 cd ~
 git clone git@github.com:chrisgrieser/.password-store.git
 
