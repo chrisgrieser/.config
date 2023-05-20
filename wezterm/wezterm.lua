@@ -175,7 +175,7 @@ local config = {
 	force_reverse_video_cursor = false, -- true = color is reverse, false = color by color scheme
 
 	-- Font
-	font_size = 26,
+	font_size = isAtMother and 24 or 26,
 	command_palette_font_size = 29,
 	-- INFO even though symbols and nerd font are bundled with wezterm, some
 	-- icons have a sizing issues, therefore explicitly using the Nerd Font here
