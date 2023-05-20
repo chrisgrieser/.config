@@ -52,9 +52,9 @@ git clone git@github.com:chrisgrieser/.password-store.git
 
 # Keys
 gpg --import "$DATA_DIR/key-for-pass.key"
+ln -sf "$DOTFILE_FOLDER/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
 find ~/.gnupg -type f -exec chmod 600 {} \;
 find ~/.gnupg -type d -exec chmod 700 {} \;
-ln -sf gpg-agent.conf ~/.gnupg/gpg-agent.conf
 
 # FIX for gpg config on Intel Macs with different homebrew path
 if [[ $(uname -p) == "i386" ]]; then
