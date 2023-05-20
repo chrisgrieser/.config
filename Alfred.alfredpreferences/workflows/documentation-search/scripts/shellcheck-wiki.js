@@ -3,6 +3,7 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
@@ -19,7 +20,7 @@ const jsonArr = [];
 app.doShellScript(`curl -sL '${baseURL}'`)
 	.split("\r")
 	.slice(3, -1)
-	.forEach(line => {
+	.forEach((/** @type {string} */ line) => {
 		const subsite = line.replace(ahrefRegex, "$1");
 		if (subsite === "</li>") return;
 		const desc = line.replace(ahrefRegex, "$2").replaceAll("&ndash;", "").trim();

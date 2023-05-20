@@ -46,6 +46,10 @@ fi
 first_row="left"
 second_row="popup.clock"
 
+stats_width=245
+# consider lower resolution at mother device
+scutil --get ComputerName | grep -q "Mother" && stats_width=225
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
@@ -85,7 +89,7 @@ sketchybar \
 	--subscribe package-updates homebrew-update \
 	\
 	--add alias "$stats" $second_row \
-	--set "$stats" width=245 \
+	--set "$stats" width="$stats_width" \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 \
