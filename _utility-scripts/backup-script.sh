@@ -1,6 +1,11 @@
 #!/bin/zsh
 
-# determine volume
+# CONFIG
+LOG_LOCATION="$DATA_DIR/Backups/backups-to-external-drives.log"
+
+#───────────────────────────────────────────────────────────────────────────────
+# DETERMINE VOLUME
+
 i=0
 while true; do
 	VOLUME_NAME="$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)"
@@ -27,7 +32,6 @@ mkdir -p "$BACKUP_DEST"
 cd "$BACKUP_DEST" || return 1
 
 # Log (on the Mac)
-LOG_LOCATION="$DATA_DIR/backups-to-external-drives.log"
 echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >>"$LOG_LOCATION"
 
 #───────────────────────────────────────────────────────────────────────────────
