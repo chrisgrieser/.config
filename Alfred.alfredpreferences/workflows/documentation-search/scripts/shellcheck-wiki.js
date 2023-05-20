@@ -3,13 +3,6 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-/** @param {string} str */
-function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ") + " ";
-}
-
 const baseURL = "https://www.shellcheck.net/wiki/";
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -17,7 +10,8 @@ const baseURL = "https://www.shellcheck.net/wiki/";
 const ahrefRegex = /.*?href='(.*?)'>.*?<\/a>(.*?)(<\/li>|$)/i;
 const jsonArr = [];
 
-app.doShellScript(`curl -sL '${baseURL}'`)
+app
+	.doShellScript(`curl -sL '${baseURL}'`)
 	.split("\r")
 	.slice(3, -1)
 	.forEach((/** @type {string} */ line) => {
@@ -25,11 +19,16 @@ app.doShellScript(`curl -sL '${baseURL}'`)
 		if (subsite === "</li>") return;
 		const desc = line.replace(ahrefRegex, "$2").replaceAll("&ndash;", "").trim();
 		const url = baseURL + subsite;
+		let matcher = subsite;
+
+		// if rule with number, add the number alone to the matcher as well
+		const hasNumber = subsite.match(/\d{4}$/);
+		if (hasNumber) matcher += " " + hasNumber[0].toString();
 
 		jsonArr.push({
 			title: subsite,
 			subtitle: desc,
-			match: alfredMatcher(subsite) + desc,
+			match: matcher,
 			arg: url,
 			uid: url,
 		});
