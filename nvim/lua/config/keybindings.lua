@@ -855,9 +855,6 @@ autocmd("FileType", {
 			vim.defer_fn(function() keymap("n", "q", "<Esc>", opts) end, 1)
 		end
 	end,
-}) 
+})
 
 --------------------------------------------------------------------------------
--- Lorem ipsum dolor sit amet, qui minim labore 
--- adipisicing minim sint cillum sint 
--- consectetur cupidatat.
