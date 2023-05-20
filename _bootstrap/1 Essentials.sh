@@ -45,17 +45,19 @@ git clone git@github.com:chrisgrieser/main-vault.git
 #───────────────────────────────────────────────────────────────────────────────
 # PASSWORDS & GPG
 
+# Passwords
 # SSH required
-
 cd ~
 git clone git@github.com:chrisgrieser/.password-store.git
 
 # Keys
-ln -sf "$DATA_DIR/gnupg/" ~/.gnupg
-chmod 700 ~/.gnupg
+gpg --import "$DATA_DIR/key-for-pass.key"
+find ~/.gnupg -type f -exec chmod 600 {} \;
+find ~/.gnupg -type d -exec chmod 700 {} \;
+ln -sf gpg-agent.conf ~/.gnupg/gpg-agent.conf
 
-# gpg config
-if [[ $(uname -p) == "i386" ]]; then # FIX for Intel Macs with different homebrew path
+# FIX for gpg config on Intel Macs with different homebrew path
+if [[ $(uname -p) == "i386" ]]; then
 	mkdir -p /opt/homebrew/bin/
 	ln -sf /usr/local/bin/pinentry-mac /opt/homebrew/bin/pinentry-mac
 fi
