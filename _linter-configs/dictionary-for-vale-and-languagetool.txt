@@ -50,3 +50,10 @@ zshrc
 vimrc
 pseudometa's
 Config
+Textobject
+textobject
+keymaps
+keymap
+Using
+dedenting
+keymappings
