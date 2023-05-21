@@ -39,7 +39,7 @@ git clone git@github.com:chrisgrieser/main-vault.git
 git clone git@github.com:chrisgrieser/.password-store.git
 
 # GPG Keys
-gpg --import "$DATA_DIR/Authentication/gpg-pass.key"
+gpg --import "$DATA_DIR/Authentication/passwords and gpg/gpg-pass.key"
 ln -sf "$DOTFILE_FOLDER/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
 gpgconf --kill gpg-agent # restart so the new gpg agent is recognized
 find ~/.gnupg -type f -exec chmod 600 {} \;
