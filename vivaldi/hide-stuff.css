@@ -5,7 +5,10 @@
 .button-toolbar:has([name="Reload"]),
 .button-toolbar:has([name="Home"]),
 .button-toolbar:has([name="AccountButton"]),
-.UrlBar-PrivateWindowIndicator,
+.button-toolbar:has([name="PanelToggle"]), /* sidebar button */
+.button-toolbar:has([name="SearchField"]), /* search button */
+.UrlBar-PrivateWindowIndicator, /* incognito window icon */
+.button-toolbar.toolbar-spacer-flexible, /* spacer */
 .window-buttongroup, /* macOS traffic lights */
 .toolbar-extensions, /* extension button */
 .button-toolbar.newtab, /* new tab button */
