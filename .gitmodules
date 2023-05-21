@@ -1,4 +1,0 @@
-[submodule "Alfred.alfredpreferences/workflows/shimmering-obsidian"]
-	path = Alfred.alfredpreferences/workflows/shimmering-obsidian
-	url = git@github.com:chrisgrieser/shimmering-obsidian.git
-	update = rebase
