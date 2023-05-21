@@ -26,33 +26,22 @@ defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from savi
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "$DOTFILE_FOLDER/hammerspoon/init.lua"
 
 #───────────────────────────────────────────────────────────────────────────────
-# DOTFILES / VAULT
+# REPOS: Dotfiles, Vault, Passwords
+
+# SSH
+ln -sf "$DATA_DIR/Authentication/ssh/" ~/.ssh
+sudo chmod -R 700 ~/.ssh/id_ed25519
 
 cd ~
 [[ -e ~/.config ]] && rm -rfv ~/.config
-git clone --recurse-submodules git@github.com:chrisgrieser/.config.git
-cd ~/.config
-git submodule foreach git checkout main
-
-# SSH
-ln -sf "$DATA_DIR/ssh/" ~/.ssh
-sudo chmod -R 700 ~/.ssh/id_ed25519
-
-# SSH required
-cd ~
+git clone git@github.com:chrisgrieser/.config.git
 git clone git@github.com:chrisgrieser/main-vault.git
-
-#───────────────────────────────────────────────────────────────────────────────
-# PASSWORDS & GPG
-
-# Passwords
-# SSH required
-cd ~
 git clone git@github.com:chrisgrieser/.password-store.git
 
-# Keys
-gpg --import "$DATA_DIR/key-for-pass.key"
-ln -sf "$DOTFILE_FOLDER/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
+# GPG Keys
+gpg --import "$DATA_DIR/Authentication/key-for-pass.key"
+ln -sf "$DOTFILE_FOLDER/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
+gpgconf --kill gpg-agent # restart so the new gpg agent is recognized
 find ~/.gnupg -type f -exec chmod 600 {} \;
 find ~/.gnupg -type d -exec chmod 700 {} \;
 
@@ -82,10 +71,6 @@ done
 
 # zsh (ZDOTDIR set in .zshenv for the remaining config)
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
-
-# pandoc
-[[ -e ~/.pandoc ]] && rm -rf ~/.pandoc
-ln -sf "$DOTFILE_FOLDER/pandoc/" ~/.pandoc
 
 # searchlink
 ln -sf "$DOTFILE_FOLDER/searchlink/.searchlink" ~
