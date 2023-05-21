@@ -37,17 +37,20 @@ input#urlFieldInput::placeholder {
 
 /* ────────────────────────────────────────────────────────────────────────── */
 
-/* DOWNLOAD BUTTON only when download is active (`.progress`) */
-.button-toolbar:has(button[name="DownloadButton"]):not(:has(.progress)) {
+/* DOWNLOAD BUTTON only when download is active (gets `.progress` sibling) */
+.button-toolbar:has(button[name="DownloadButton"]:only-child) {
 	display: none;
 }
 
-#header:has(+ #main .button-toolbar .progress) #tabs-container {
+#header:has(+ #main .button-toolbar button[name="DownloadButton"] + .progress) #tabs-container {
 	padding-left: 30px;
 }
 
-#browser .button-toolbar:has(button[name="DownloadButton"]) button:hover {
+#browser button[name="DownloadButton"] {
 	background: none;
+}
+
+#browser button[name="DownloadButton"]:hover {
 	color: var(--colorHighlightBg);
 }
 
