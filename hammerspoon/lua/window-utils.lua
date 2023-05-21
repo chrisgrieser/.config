@@ -9,7 +9,6 @@ M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 M.sideNotesWide = { x = 0, y = 0, w = 0.4, h = 1 }
-local sideNotesNarrow = { x = 0, y = 0, w = 0.2, h = 1 }
 
 -- negative x to hide useless sidebar
 if env.isAtMother then
@@ -231,8 +230,7 @@ local function controlSpaceAction()
 	local pos
 
 	if u.isFront("SideNotes") then
-		local changeTo = M.CheckSize(curWin, M.sideNotesWide) and sideNotesNarrow or M.sideNotesWide
-		M.moveResize(curWin, changeTo)
+		M.moveResize(curWin, M.sideNotesWide)
 	elseif u.isFront { "Finder", "Script Editor" } then
 		pos = M.CheckSize(curWin, M.centered) and M.maximized or M.centered
 	else

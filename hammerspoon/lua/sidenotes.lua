@@ -13,8 +13,8 @@ SidenotesWatcher = u.aw
 		-- i.e., run on any event related to sidenotes
 		if appName == "SideNotes" then updateCounter() end
 
-		-- enlarge on startup
-		if appName == "SideNotes" and (event == u.aw.launched or event == u.aw.launching) then
+		-- enlarge on startup/activatrion
+		if appName == "SideNotes" and (event == u.aw.launched or event == u.aw.activated) then
 			local win = appObj:mainWindow()
 			wu.moveResize(win, wu.sideNotesWide)
 		end
