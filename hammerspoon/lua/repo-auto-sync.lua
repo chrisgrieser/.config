@@ -13,36 +13,23 @@ local passIcon = "🔑"
 --------------------------------------------------------------------------------
 -- Repo Sync Setup
 
----@param submodulePull boolean whether to also sync submodules
 ---@return boolean success
-local function gitDotfileSync(submodulePull)
+local function gitDotfileSync()
 	local gitDotfileScript = env.dotfilesFolder .. "git-dotfile-sync.sh"
-
-	local scriptArgs = {}
-	if submodulePull then scriptArgs = { "--submodule-pull" } end
 
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
 	if not (u.screenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
 
-	local function dotfileSyncCallback(exitCode, _, stdErr)
-		if exitCode == 0 then
-			local msg = dotfileIcon .. " Dotfile Sync"
-			if submodulePull then msg = msg .. " (with submodules)" end
-			print(msg)
-			return
-		end
-		local stdout = hs.execute("git status --short")
-		if not stdout then return end
-		local submodulesStillDirty = stdout:match(" m ")
-		if submodulesStillDirty then
-			local modules = stdout:gsub(".*/", "")
-			u.notify(dotfileIcon .. "⚠️️ dotfiles submodules still dirty\n\n" .. modules)
-		else
-			u.notify(dotfileIcon .. "⚠️️ dotfiles " .. stdErr)
-		end
-	end
+	GitDotfileSyncTask = hs.task
+		.new(gitDotfileScript, function(exitCode, _, stdErr)
+			if exitCode == 0 then
+				print(dotfileIcon .. " Dotfile Sync")
+				return
+			end
+			u.notify(vaultIcon .. "⚠️️ dotfiles " .. stdErr)
+		end)
+		:start()
 
-	GitDotfileSyncTask = hs.task.new(gitDotfileScript, dotfileSyncCallback, scriptArgs):start()
 	if not GitDotfileSyncTask then return false end
 	return true
 end
@@ -90,10 +77,9 @@ end
 --------------------------------------------------------------------------------
 
 ---sync all three git repos
----@param submodulePull boolean for dotfile sync
 ---@param notify boolean
-function M.syncAllGitRepos(submodulePull, notify)
-	local success1 = gitDotfileSync(submodulePull)
+function M.syncAllGitRepos(notify)
+	local success1 = gitDotfileSync()
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
 	if not (success1 and success2 and success3) then
@@ -123,13 +109,13 @@ end
 
 -- 2. every x minutes
 RepoSyncTimer = hs.timer
-	.doEvery(repoSyncFreqMin * 60, function() M.syncAllGitRepos(false, false) end)
+	.doEvery(repoSyncFreqMin * 60, function() M.syncAllGitRepos(false) end)
 	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
 u.urischeme("sync-repos", function()
 	u.app("Hammerspoon"):hide() -- so the previous app does not loose focus
-	M.syncAllGitRepos(true, true)
+	M.syncAllGitRepos(true)
 end)
 
 -- 4. when going to sleep or when unlocking
@@ -142,7 +128,7 @@ SleepWatcher = hs.caffeinate.watcher
 			or event == c.systemDidWake
 			or (event == c.screensDidWake and u.idleMins(30))
 		then
-			M.syncAllGitRepos(true, true)
+			M.syncAllGitRepos(true)
 		end
 	end)
 	:start()
@@ -151,7 +137,7 @@ SleepWatcher = hs.caffeinate.watcher
 -- (safety redundancy to ensure syncs when leaving for the office)
 MorningSyncTimer = hs.timer
 	.doAt("08:00", "01d", function()
-		if env.isAtHome then M.syncAllGitRepos(true, false) end
+		if env.isAtHome then M.syncAllGitRepos(false) end
 	end)
 	:start()
 
