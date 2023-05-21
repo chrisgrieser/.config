@@ -33,7 +33,7 @@ function M.systemStart()
 		u.notify("Finished loading.")
 		visuals.holeCover()
 		periphery.batteryCheck("SideNotes")
-		repos.syncAllGitRepos(true, true)
+		repos.syncAllGitRepos(true)
 		layouts.selectLayout()
 
 		-- with delay, to avoid importing duplicate reminders due to reminders
