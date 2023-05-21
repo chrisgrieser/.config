@@ -10,7 +10,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>21ACD77C-F177-4D29-9560-8D7461EC6453</string>
+				<string>0B28D7B8-4E25-48F3-8533-0C6E3FA1A138</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -30,6 +30,27 @@
 	<string>Amazon Suggest</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.amazon.{var:top_level_domain}/s?k={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>0B28D7B8-4E25-48F3-8533-0C6E3FA1A138</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -58,7 +79,54 @@
 				<key>runningsubtext</key>
 				<string>Querying suggestions…</string>
 				<key>script</key>
-				<string>// Items follow the same pattern
+				<string>// Constants
+marketplaceIDs = {
+  "com.au": "A39IBJ37TRP1C6",
+  "com.be": "AMEN7PMS3EDWL",
+  "com.br": "A2Q3Y263D00KWC",
+  "ca": "A2EUQ1WTGCTBG2",
+  "cn": "AAHKV2X7AFYLW",
+  "fr": "A13V1IB3VIYZZH",
+  "de": "A1PA6795UKMFR9",
+  "in": "A21TJRUUN4KGV",
+  "it": "APJ6JRA9NG5V4",
+  "co.jp": "A1VC38T7YXB528",
+  "com.mx": "A1AM78C64UM0Y8",
+  "nl": "A1805IZSGTT6HS",
+  "pl": "A1C3SOZRARQ6R3",
+  "sg": "A19VAU5U5O7RUS",
+  "es": "A1RKKUPIHCS9HS",
+  "se": "A2NODRKZP88ZB9",
+  "com.tr": "A33AVAJ2PDY3EV",
+  "co.uk": "A1F83G8C2ARO7P",
+  "com": "ATVPDKIKX0DER"
+}
+
+// Helpers
+function envVar(varName) {
+  return $.NSProcessInfo
+    .processInfo
+    .environment
+    .objectForKey(varName).js
+}
+
+function autoComplete(searchQuery, tld, marketplaceID) {
+  // Construct URL
+  const encodedQuery = encodeURIComponent(searchQuery)
+  const rawURL = `https://completion.amazon.${tld}/api/2017/suggestions?limit=11&amp;suggestion-type=KEYWORD&amp;alias=aps&amp;mid=${marketplaceID}&amp;prefix=${encodedQuery}`
+  const queryURL = $.NSURL.URLWithString(rawURL)
+console.log(rawURL)
+  // Send request
+  const requestData = $.NSData.dataWithContentsOfURL(queryURL);
+  const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js
+console.log(requestString)
+  // Results
+  return JSON.parse(requestString)["suggestions"]
+    .map(suggestion =&gt; suggestion["value"])
+    .filter(value =&gt; value !== searchQuery)
+}
+
+// Items follow the same pattern
 function makeItems(itemNames) {
   return itemNames.map(name =&gt; {
     return {
@@ -88,11 +156,9 @@ function run(argv) {
   }
 
   // Make the API request
-  const encodedQuery = encodeURIComponent(argv[0])
-  const queryURL = $.NSURL.URLWithString("https://completion.amazon.com/search/complete?search-alias=aps&amp;mkt=1&amp;q=" + encodedQuery)
-  const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-  const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js
-  const newResults = JSON.parse(requestString)[1].filter(result =&gt; result !== argv[0])
+  const tld = envVar("top_level_domain")
+  const mid = marketplaceIDs[tld]
+  const newResults = autoComplete(argv[0].normalize(), tld, mid)
 
   // Return final JSON
   return JSON.stringify({
@@ -121,21 +187,6 @@ function run(argv) {
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>searcher</key>
-				<integer>1635213677</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.systemwebsearch</string>
-			<key>uid</key>
-			<string>21ACD77C-F177-4D29-9560-8D7461EC6453</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -144,13 +195,13 @@ Get in-line suggestions from Amazon’s website via the `amazon` keyword. Press 
 
 ![Amazon search for Streamdeck](images/about/amazon-suggest-streamdeck.png)
 
-To search a specific Amazon store, set your location in Alfred’s General preferences.</string>
+Set a specific Amazon store to search in the [Workflow’s Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>21ACD77C-F177-4D29-9560-8D7461EC6453</key>
+		<key>0B28D7B8-4E25-48F3-8533-0C6E3FA1A138</key>
 		<dict>
 			<key>note</key>
-			<string>To change Amazon store, set your location in Alfred's General preferences.</string>
+			<string>To change Amazon store, edit the Workflow’s Configuration.</string>
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
@@ -189,9 +240,103 @@ To search a specific Amazon store, set your location in Alfred’s General prefe
 			<key>variable</key>
 			<string>search_keyword</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>com.au</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Australia</string>
+						<string>com.au</string>
+					</array>
+					<array>
+						<string>Belgium</string>
+						<string>com.be</string>
+					</array>
+					<array>
+						<string>Brazil</string>
+						<string>com.br</string>
+					</array>
+					<array>
+						<string>Canada</string>
+						<string>ca</string>
+					</array>
+					<array>
+						<string>China</string>
+						<string>cn</string>
+					</array>
+					<array>
+						<string>France</string>
+						<string>fr</string>
+					</array>
+					<array>
+						<string>Germany</string>
+						<string>de</string>
+					</array>
+					<array>
+						<string>India</string>
+						<string>in</string>
+					</array>
+					<array>
+						<string>Italy</string>
+						<string>it</string>
+					</array>
+					<array>
+						<string>Japan</string>
+						<string>co.jp</string>
+					</array>
+					<array>
+						<string>Mexico</string>
+						<string>com.mx</string>
+					</array>
+					<array>
+						<string>Netherlands</string>
+						<string>nl</string>
+					</array>
+					<array>
+						<string>Poland</string>
+						<string>pl</string>
+					</array>
+					<array>
+						<string>Singapore</string>
+						<string>sg</string>
+					</array>
+					<array>
+						<string>Spain</string>
+						<string>es</string>
+					</array>
+					<array>
+						<string>Sweden</string>
+						<string>se</string>
+					</array>
+					<array>
+						<string>Turkey</string>
+						<string>com.tr</string>
+					</array>
+					<array>
+						<string>United Kingdom</string>
+						<string>uk</string>
+					</array>
+					<array>
+						<string>United States of America</string>
+						<string>com</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Marketplace</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>top_level_domain</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string>2023.1</string>
+	<string>2023.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/amazon-suggest-workflow/</string>
 </dict>
