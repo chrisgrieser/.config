@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "19/05/2023, 13:58:18",
-	"time": 1684497498311,
+	"@time": "22/05/2023, 16:13:46",
+	"time": 1684764826091,
 	"environment": {
 		"extension": "1.99.991",
 		"platform": "mac",
@@ -31,7 +31,7 @@
 			"pattern": ":https://search.brave.com/"
 		},
 		{
-			"passKeys": "",
+			"passKeys": "<space> j k l ",
 			"pattern": ":https://www.youtube.com/"
 		}
 	],
