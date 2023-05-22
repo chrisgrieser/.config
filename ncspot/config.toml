@@ -4,6 +4,7 @@
 use_nerdfont=true
 shuffle=true
 notify=true
+hide_display_names=true
 
 # https://github.com/hrkfdn/ncspot/blob/main/doc/users.md#notification-formatting
 [notification_format]
