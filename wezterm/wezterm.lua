@@ -21,7 +21,7 @@ local isAtMother = wt.hostname():find("Mother") ~= nil
 
 -- on start, move window to the side ("pseudomaximized")
 wt.on("gui-startup", function(cmd)
-	local pos = { x = 705, y = 0, w = 3140 }
+	local pos = { x = 710, y = 0, w = 3135 }
 	if isAtOffice then
 		pos = { x = 375, y = -100, w = 1675 }
 	elseif isAtMother then

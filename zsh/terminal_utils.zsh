@@ -83,7 +83,7 @@ function separator() {
 function fzf-folder() {
 	if ! command -v fzf &>/dev/null; then printf "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 	if ! command -v fg &>/dev/null; then printf "\033[1;33mfg not installed.\033[0m" && return 1; fi
-		
+
 	# shellcheck disable=2016
 	selected=$(fd --hidden --type=directory --color=always |
 		fzf -0 \
@@ -137,6 +137,7 @@ function ld() {
 }
 
 # select an external volume to eject
+alias eject='e'
 function eject() {
 	volumes=$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)
 	if [[ -z "$volumes" ]]; then
@@ -148,7 +149,8 @@ function eject() {
 	selected=$(echo "$volumes" |
 		fzf -0 -1 \
 			--no-info \
-			--height=30%)
+			--height=30%
+		)
 	[[ -z "$selected" ]] && return 0 # fzf aborted
 	diskutil eject "$selected"
 }
