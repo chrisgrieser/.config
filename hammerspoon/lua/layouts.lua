@@ -109,8 +109,6 @@ local function movieLayout()
 		"Alfred Preferences",
 		"Finder",
 		"Highlights",
-		"Alacritty",
-		"alacritty",
 		"Twitter",
 		"Obsidian",
 	}
