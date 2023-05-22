@@ -19,13 +19,19 @@ cons.toolbar(nil)
 cons.consoleFont(baseFont)
 hs.consoleOnTop(false)
 
+-- HACK reduce hotkey enable/disable-logging
+-- https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
+-- https://github.com/Hammerspoon/hammerspoon/issues/3491
+---@diagnostic disable-next-line: undefined-field
+hs.hotkey.setLogLevel(0)
+
 --------------------------------------------------------------------------------
 
 ---filter console entries, removing logging for enabling/disabling hotkeys,
 ---useless layout info or warnings, or info on extension loading.
 -- HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
 -- selene: allow(high_cyclomatic_complexity)
-function CleanupConsole()
+local function cleanupConsole()
 	local isDark = u.isDarkMode()
 
 	local consoleOutput = tostring(cons.getConsole())
@@ -35,9 +41,8 @@ function CleanupConsole()
 
 	local cleanLines = {}
 	for _, line in ipairs(consoleLines) do
-		local ignore = line:find("hotkey: Enabled hotkey")
-			or line:find("hotkey: Disabled hotkey")
-			or line:find("Loading extensions?: ")
+		local ignore = 
+			line:find("Loading extensions?: ")
 			or line:find("Loading Spoon: RoundedCorners")
 			or line:find("Done.$")
 			or line:find("Lazy extension loading enabled$")
@@ -74,11 +79,11 @@ end
 --------------------------------------------------------------------------------
 
 -- clean up console as soon as it is opened
--- close console as soon as unfocused
+-- hide console as soon as unfocused
 Wf_hsConsole = u.wf
 	.new("Hammerspoon")
 	:subscribe(u.wf.windowCreated, function(newWin)
-		if newWin:title() == "Hammerspoon Console" then CleanupConsole() end
+		if newWin:title() == "Hammerspoon Console" then cleanupConsole() end
 	end)
 	:subscribe(u.wf.windowUnfocused, function(win)
 		if win:title() == "Hammerspoon Console" then u.app("Hammerspoon"):hide() end

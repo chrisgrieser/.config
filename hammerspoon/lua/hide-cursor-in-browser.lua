@@ -1,6 +1,6 @@
 local u = require("lua.utils")
--- Companion for Vimium like browser extensions which are unfortunately not able
--- to hide the cursor properly
+-- Companion for Vimium-like browser extensions which are not able to hide the 
+-- cursor properly
 --------------------------------------------------------------------------------
 
 ---when Browser activates and j or k is pressed for the first time, hide cursor
@@ -34,5 +34,4 @@ Jk_watcher = u.aw.new(function(appName, eventType)
 		JHidesCursor:disable()
 		KHidesCursor:disable()
 	end
-	CleanupConsole()
 end):start()
