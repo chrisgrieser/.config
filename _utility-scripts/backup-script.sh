@@ -56,8 +56,8 @@ function bkp() {
 # WARN each command has to sync to individual folders, since otherwise the `--delete` option will override the previous contents
 # INFO All source paths needs to end with a slash
 # INFO locations defined in zshenv
-bkp "$ICLOUD/" ./iCloud-Folder
-bkp "$HOME/Applications/" ./Homefolder/Applications
+bkp "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
+bkp "$HOME/Applications/" ./Homefolder/Applications # user cplications
 bkp "$DOTFILE_FOLDER/" ./Homefolder/config
 bkp "$VAULT_PATH/" ./Homefolder/main-vault
 bkp "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
