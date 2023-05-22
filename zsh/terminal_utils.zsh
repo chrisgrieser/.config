@@ -137,7 +137,7 @@ function ld() {
 }
 
 # select an external volume to eject
-alias eject='e'
+alias e="eject"
 function eject() {
 	volumes=$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)
 	if [[ -z "$volumes" ]]; then
