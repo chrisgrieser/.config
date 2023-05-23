@@ -10,7 +10,19 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>769DBB7A-060F-4CCA-A806-0AAA1149D60B</string>
+				<string>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>47477B9D-5F2A-4D51-A037-76601A68D460</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>EE034F43-91EC-4D67-9B0A-F46FECC5B24B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -23,6 +35,32 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>389C4CDC-EC49-4AE7-BF23-142CD07AADDB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CA3BC6FB-EB1A-4A52-8B2B-1840541E1057</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EE034F43-91EC-4D67-9B0A-F46FECC5B24B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>769DBB7A-060F-4CCA-A806-0AAA1149D60B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -58,6 +96,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>sff</string>
+				<key>subtext</key>
+				<string>Fallback - Local Repo</string>
+				<key>text</key>
+				<string>Switch Shimmering Focus</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CA3BC6FB-EB1A-4A52-8B2B-1840541E1057</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -67,14 +126,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-at-line.sh</string>
+				<string>switch-to-fallback.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>769DBB7A-060F-4CCA-A806-0AAA1149D60B</string>
+			<string>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -130,8 +189,45 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>../github-utilities/clone-my-repo.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>769DBB7A-060F-4CCA-A806-0AAA1149D60B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>fallback</string>
+						<key>outputlabel</key>
+						<string>fallback</string>
+						<key>uid</key>
+						<string>47477B9D-5F2A-4D51-A037-76601A68D460</string>
+					</dict>
 					<dict>
 						<key>inputstring</key>
 						<string></string>
@@ -156,6 +252,23 @@
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>7F5B9DEA-0CE4-4402-804D-7E24157C08B1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{var:remote_url}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>EE034F43-91EC-4D67-9B0A-F46FECC5B24B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -187,6 +300,17 @@
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>clone repo</string>
+			<key>xpos</key>
+			<real>430</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
 		<key>389C4CDC-EC49-4AE7-BF23-142CD07AADDB</key>
 		<dict>
 			<key>colorindex</key>
@@ -194,9 +318,9 @@
 			<key>note</key>
 			<string>open at line</string>
 			<key>xpos</key>
-			<real>380</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>460</real>
 		</dict>
 		<key>769DBB7A-060F-4CCA-A806-0AAA1149D60B</key>
 		<dict>
@@ -205,18 +329,36 @@
 			<key>note</key>
 			<string>clone repo</string>
 			<key>xpos</key>
-			<real>380</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>325</real>
 		</dict>
 		<key>7F5B9DEA-0CE4-4402-804D-7E24157C08B1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>225</real>
+			<real>235</real>
 			<key>ypos</key>
-			<real>225</real>
+			<real>330</real>
+		</dict>
+		<key>CA3BC6FB-EB1A-4A52-8B2B-1840541E1057</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>70</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>EE034F43-91EC-4D67-9B0A-F46FECC5B24B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>355</real>
+			<key>ypos</key>
+			<real>355</real>
 		</dict>
 		<key>F9CA8CAA-C6EB-499B-9049-AA32687CAAFC</key>
 		<dict>
@@ -225,9 +367,9 @@
 			<key>note</key>
 			<string>Open Shimmering Focus at line</string>
 			<key>xpos</key>
-			<real>60</real>
+			<real>70</real>
 			<key>ypos</key>
-			<real>205</real>
+			<real>325</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -251,7 +393,28 @@
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
-			<string>css_path</string>
+			<string>local_repo_css_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>https://github.com/chrisgrieser/shimmering-focus</string>
+				<key>placeholder</key>
+				<string>https://github.com/chrisgrieser/shimmering-focus</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Remote URL of Repo</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>remote_url</string>
 		</dict>
 	</array>
 	<key>version</key>

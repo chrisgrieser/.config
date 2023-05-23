@@ -45,7 +45,7 @@
 	},
 	"exists (file)": {
 		"prefix": "exists (file)",
-		"body": "const fileExists = (filePath) => Application(\"Finder\").exists(Path(filePath));"
+		"body": "const fileExists = (/** @type {string} */ filePath) => Application(\"Finder\").exists(Path(filePath));"
 	},
 	"Create new Draft": {
 		"prefix": "Create new Draft",

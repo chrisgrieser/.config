@@ -1,52 +1,62 @@
 #!/usr/bin/env osascript -l JavaScript
 
-function run(_argv) {
+// rome-ignore lint/correctness/noUnusedVariables: <explanation>
+function run() {
 	ObjC.import("stdlib");
 	ObjC.import("Foundation");
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
 
-	function readFile(path, encoding) {
-		if (!encoding) encoding = $.NSUTF8StringEncoding;
+	/** @param {string} path */
+	function readFile(path) {
 		const fm = $.NSFileManager.defaultManager;
 		const data = fm.contentsAtPath(path);
-		const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+		const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 		return ObjC.unwrap(str);
 	}
 
-	const alfredMatcher = str => str.replace(/[-()_:.]/g, " ") + " " + str + " ";
-
-	//───────────────────────────────────────────────────────────────────────────
-
+	const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_:.]/g, " ") + " " + str + " ";
+	const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 	const jsonArray = [];
-	let i = 0;
-
-	const sfPath = $.getenv("css_path");
 
 	//───────────────────────────────────────────────────────────────────────────
 
+	const sfPath = $.getenv("local_repo_css_path");
+	if (!fileExists(sfPath)) {
+		jsonArray.push({
+			title: "Clone the Repo",
+			arg: "clone",
+		});
+		jsonArray.push({
+			title: "Switch to Fallback",
+			arg: "fallback",
+		});
+		return JSON.stringify({ items: jsonArray });
+	}
+
+	//───────────────────────────────────────────────────────────────────────────
+
+	let i = 0;
 	const navigationMarkers = readFile(sfPath)
 		.split("\n")
-		.map(nm => {
+		.map((line) => {
 			i++;
-			return [nm, i];
+			return { content: line, ln: i };
 		})
-		.filter(nm => nm[0].startsWith("/* <") || nm[0].startsWith("# <<"));
+		.filter((line) => line.content.startsWith("/* <") || line.content.startsWith("# <<"));
 
-	navigationMarkers.forEach(item => {
-		const name = item[0]
+	navigationMarkers.forEach((marker) => {
+		const name = marker.content
 			.replace(/ \*\/$/, "") // comment-ending syntax
 			.replace(/^\/\* *<+ ?/, "") // comment-beginning syntax
 			.replace(/^# ?<+ ?/, ""); // YAML-comment syntax
 
-		const line = item[1];
-
 		jsonArray.push({
 			title: name,
-			subtitle: line,
+			subtitle: marker.ln,
 			match: alfredMatcher(name),
 			uid: name,
-			arg: line,
+			arg: marker.ln,
 		});
 	});
 
