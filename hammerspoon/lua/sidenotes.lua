@@ -74,7 +74,7 @@ function M.reminderToSidenotes()
 
 	updateCounter()
 	-- FIX Reminders not properly quitting here
-	u.runWithDelays({ 1, 2 }, function() u.quitApp("Reminders") end)
+	u.runWithDelays({ 1, 2, 3 }, function() u.quitApp("Reminders") end)
 end
 
 --------------------------------------------------------------------------------
