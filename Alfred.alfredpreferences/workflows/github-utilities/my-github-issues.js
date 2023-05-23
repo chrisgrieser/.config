@@ -1,10 +1,11 @@
 #!/usr/bin/env osascript -l JavaScript
-/* eslint-disable complexity */
+// rome-ignore lint/correctness/noUnusedVariables: alfred_run
 function run() {
 	ObjC.import("stdlib");
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
 
+	/** @param {string} str */
 	function alfredMatcher(str) {
 		const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 		const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");

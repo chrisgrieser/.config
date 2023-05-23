@@ -12,7 +12,6 @@ local s = {
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 2, max_item_count = 8 },
 	cmdline = { name = "cmdline", max_item_count = 8 },
-	diag_codes = { name = "diag-codes" },
 }
 local source_icons = {
 	treesitter = "",
@@ -27,13 +26,11 @@ local source_icons = {
 	path = "",
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
-	["diag-codes"] = "",
 }
 local defaultSources = {
 	s.snippets,
 	s.codeium,
 	s.lsp,
-	s.diag_codes,
 	s.emojis,
 	s.treesitter,
 	s.buffer,
@@ -174,7 +171,6 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.snippets,
 			s.lsp,
-			s.diag_codes,
 			s.codeium,
 			s.nerdfont, -- add nerdfont for config
 			s.emojis,
@@ -187,7 +183,6 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.snippets,
 			s.lsp,
-			s.diag_codes,
 			s.codeium,
 			s.nerdfont, -- add nerdfont for config
 			s.emojis,
@@ -200,7 +195,6 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.snippets,
 			s.lsp,
-			s.diag_codes,
 			s.codeium,
 			s.emojis,
 			-- buffer and treesitter too slow on big files
@@ -210,7 +204,6 @@ local function filetypeCompletionConfig()
 	cmp.setup.filetype("markdown", {
 		sources = cmp.config.sources {
 			s.snippets,
-			s.diag_codes,
 			s.treesitter,
 			s.path, -- e.g. image paths
 			s.lsp,
@@ -222,7 +215,6 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.lsp, -- prioritize schemas
 			s.snippets,
-			s.diag_codes,
 			s.treesitter, -- useful when no schemas
 			s.emojis,
 			s.buffer,
@@ -232,7 +224,6 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.lsp, -- prioritize schemas
 			s.snippets,
-			s.diag_codes,
 			s.treesitter, -- useful when no schema
 			s.emojis,
 			s.buffer,
@@ -250,7 +241,6 @@ local function filetypeCompletionConfig()
 			s.snippets,
 			s.zsh, -- completion from zsh itself
 			s.lsp,
-			s.diag_codes,
 			s.path,
 			s.codeium,
 			s.treesitter,
@@ -335,7 +325,6 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"dmitmel/cmp-cmdline-history",
 			"hrsh7th/cmp-emoji",
-			"JMarkin/cmp-diag-codes",
 			{ "chrisgrieser/cmp-nerdfont", dev = true },
 			"tamago324/cmp-zsh", -- some shell completions
 			"jcdickinson/codeium.nvim", -- AI completions
