@@ -21,7 +21,7 @@ function run() {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	const sfPath = $.getenv("local_repo_css_path");
+	const sfPath = $.getenv("local_repo_folder") + "/shimmering-focus/source.css";
 	if (!fileExists(sfPath)) {
 		jsonArray.push({
 			title: "Clone the Repo",

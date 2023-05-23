@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-#───────────────────────────────────────────────────────────────────────────────
-# INFO: After app update, needs to be re-granted screen recording permissions
-#───────────────────────────────────────────────────────────────────────────────
 
 # ensure Stats.app is running
 i=0
@@ -46,9 +43,9 @@ fi
 first_row="left"
 second_row="popup.clock"
 
-stats_width=245
-# consider lower resolution at mother device
+stats_width=225
 scutil --get ComputerName | grep -q "Mother" && stats_width=225
+scutil --get ComputerName | grep -q "Office" && stats_width=235
 
 #───────────────────────────────────────────────────────────────────────────────
 

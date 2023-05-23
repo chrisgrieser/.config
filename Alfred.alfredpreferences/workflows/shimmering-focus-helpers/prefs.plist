@@ -4,5 +4,7 @@
 <dict>
 	<key>local_repo_css_path</key>
 	<string>~/Repos/shimmering-focus/source.css</string>
+	<key>local_repo_folder</key>
+	<string>~/Repos</string>
 </dict>
 </plist>

@@ -19,7 +19,7 @@ Thresholds = {
 	Lire = 3,
 	["Alfred Preferences"] = 10,
 	["System Settings"] = 2,
-	Finder = 25, -- only closes windows
+	Finder = 20, -- only closes windows
 }
 
 --------------------------------------------------------------------------------

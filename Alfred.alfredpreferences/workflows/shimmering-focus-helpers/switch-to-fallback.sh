@@ -1,8 +1,9 @@
 #!/usr/bin/env zsh
-# shellcheck disable=2154
 
+# switch to the FALLBACK
 theme_folder="$VAULT_PATH/.obsidian/themes/Shimmering Focus/fallback.css"
-ln -sf "$theme_folder/" ""
+ln -sf "$theme_folder/fallback.css" "$theme_folder/theme.css"
 
-
-local_repo_css_path"
+# delete local folder
+# shellcheck disable=2154
+rm -r "$local_repo_folder/shimmering-focus"
