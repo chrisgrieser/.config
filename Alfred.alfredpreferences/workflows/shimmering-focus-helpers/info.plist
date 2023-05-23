@@ -6,6 +6,32 @@
 	<string>de.chris-grieser.shimmering-focus</string>
 	<key>connections</key>
 	<dict>
+		<key>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9785CD12-8BE6-426A-B3E5-E88E0A90D807</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>769DBB7A-060F-4CCA-A806-0AAA1149D60B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3CEA1240-A391-4A89-9957-763BC54627AA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7F5B9DEA-0CE4-4402-804D-7E24157C08B1</key>
 		<array>
 			<dict>
@@ -22,7 +48,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>EE034F43-91EC-4D67-9B0A-F46FECC5B24B</string>
+				<string>769DBB7A-060F-4CCA-A806-0AAA1149D60B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -43,24 +69,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>CA3BC6FB-EB1A-4A52-8B2B-1840541E1057</key>
+		<key>93E4EBAF-798C-40AF-BBCD-4BF2B98B6F18</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EE034F43-91EC-4D67-9B0A-F46FECC5B24B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>769DBB7A-060F-4CCA-A806-0AAA1149D60B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -96,27 +109,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>sff</string>
-				<key>subtext</key>
-				<string>Fallback - Local Repo</string>
-				<key>text</key>
-				<string>Switch Shimmering Focus</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>CA3BC6FB-EB1A-4A52-8B2B-1840541E1057</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -136,6 +128,48 @@
 			<string>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Switched to Fallback</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9785CD12-8BE6-426A-B3E5-E88E0A90D807</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>fb</string>
+				<key>subtext</key>
+				<string>Switch to Fallback &amp; Delete local repo</string>
+				<key>text</key>
+				<string>Shimmering Focus</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>93E4EBAF-798C-40AF-BBCD-4BF2B98B6F18</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -189,6 +223,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Clone ready</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>3CEA1240-A391-4A89-9957-763BC54627AA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -198,7 +253,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>../github-utilities/clone-my-repo.sh</string>
+				<string>./switch-to-local-repo.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -258,23 +313,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>{var:remote_url}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>EE034F43-91EC-4D67-9B0A-F46FECC5B24B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -305,7 +343,7 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>clone repo</string>
+			<string>switch to fallback &amp; delete local repo</string>
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
@@ -320,18 +358,27 @@
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>475</real>
+		</dict>
+		<key>3CEA1240-A391-4A89-9957-763BC54627AA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>580</real>
+			<key>ypos</key>
+			<real>330</real>
 		</dict>
 		<key>769DBB7A-060F-4CCA-A806-0AAA1149D60B</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>2</integer>
 			<key>note</key>
-			<string>clone repo</string>
+			<string>clone &amp; switch to local repo</string>
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>330</real>
 		</dict>
 		<key>7F5B9DEA-0CE4-4402-804D-7E24157C08B1</key>
 		<dict>
@@ -340,25 +387,25 @@
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>335</real>
 		</dict>
-		<key>CA3BC6FB-EB1A-4A52-8B2B-1840541E1057</key>
+		<key>93E4EBAF-798C-40AF-BBCD-4BF2B98B6F18</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>70</real>
+			<real>65</real>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>
-		<key>EE034F43-91EC-4D67-9B0A-F46FECC5B24B</key>
+		<key>9785CD12-8BE6-426A-B3E5-E88E0A90D807</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>355</real>
+			<real>580</real>
 			<key>ypos</key>
-			<real>355</real>
+			<real>185</real>
 		</dict>
 		<key>F9CA8CAA-C6EB-499B-9049-AA32687CAAFC</key>
 		<dict>
@@ -367,9 +414,9 @@
 			<key>note</key>
 			<string>Open Shimmering Focus at line</string>
 			<key>xpos</key>
-			<real>70</real>
+			<real>65</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>330</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -380,41 +427,20 @@
 				<key>default</key>
 				<string></string>
 				<key>filtermode</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>where the repo will be cloned to</string>
 			<key>label</key>
-			<string>Path to Shimmering Focus' source.css</string>
+			<string>Local Repo Folder</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
-			<string>local_repo_css_path</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>https://github.com/chrisgrieser/shimmering-focus</string>
-				<key>placeholder</key>
-				<string>https://github.com/chrisgrieser/shimmering-focus</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Remote URL of Repo</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>remote_url</string>
+			<string>local_repo_folder</string>
 		</dict>
 	</array>
 	<key>version</key>

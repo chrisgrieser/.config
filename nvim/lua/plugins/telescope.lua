@@ -201,8 +201,12 @@ local function telescopeConfig()
 						["<D-n>"] = require("telescope._extensions.file_browser.actions").create,
 						["<C-r>"] = require("telescope._extensions.file_browser.actions").rename,
 						["<D-BS>"] = require("telescope._extensions.file_browser.actions").remove,
+
 						-- Toggle Files/Folders
 						["<D-b>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
+
+						-- go up
+						["<D-Up>"] = require("telescope._extensions.file_browser.actions").goto_parent_dir,
 
 						-- unmap <BS> on empty prompt going up; requires lowercase key
 						["<bs>"] = false,
