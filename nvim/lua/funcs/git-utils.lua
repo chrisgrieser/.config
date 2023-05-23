@@ -170,7 +170,7 @@ end
 
 ---@param commitMsg string
 local function shimmeringFocusBuild(commitMsg)
-	local buildscriptLocation = os.getenv("HOME") .. "/Repos/shimmering-focus/build.sh"
+	local buildscriptLocation = vim.env.LOCAL_REPOS .. "/shimmering-focus/build.sh"
 
 	vim.notify('󰊢 Building theme…\n"' .. commitMsg .. '"')
 	output = {}

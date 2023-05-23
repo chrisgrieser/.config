@@ -235,17 +235,18 @@
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string></string>
+				<string># since this is a shell-script, "$LOCAL_REPOS" from zshenv can be passed to JavaScript
+osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./open-shimmering-focus.js</string>
+				<string></string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string>🔍 Open Shimmering Focus</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -452,9 +453,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>55</real>
+			<real>60</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>515</real>
 		</dict>
 		<key>68B4C56F-DA10-42C4-955D-D4A5FA7AEB53</key>
 		<dict>
@@ -525,29 +526,7 @@
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
-				<integer>1</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>where the repo will be cloned to</string>
-			<key>label</key>
-			<string>Local Repo Folder</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>local_repo_folder</string>
-		</dict>
-	</array>
+	<array/>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>

@@ -8,6 +8,7 @@ export VAULT_PATH="$HOME/main-vault/"
 export PASSWORD_STORE_DIR="$HOME/.password-store/" # default value, but still needed for bkp script
 export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder" 
+export LOCAL_REPOS="$HOME/Repos"
 
 # defines location of the rest of the zsh config
 export ZDOTDIR="$DOTFILE_FOLDER/zsh"

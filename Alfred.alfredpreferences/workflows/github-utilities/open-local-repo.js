@@ -31,26 +31,22 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
-const getFullPath = (/** @type {string} */ path) => $.getenv(path).replace(/^~/, app.pathTo("home folder"));
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const pathsToSearch = [getFullPath("dotfile_folder")];
-if ($.getenv("local_repo_folder")) pathsToSearch.push(getFullPath("local_repo_folder"));
-if ($.getenv("extra_folder_1")) pathsToSearch.push(getFullPath("extra_folder_1"));
-if ($.getenv("extra_folder_2")) pathsToSearch.push(getFullPath("extra_folder_2"));
+/** @param {string[]} argv */
+// rome-ignore lint/correctness/noUnusedVariables: <explanation>
+function run(argv) {
+	const dotfilePath = argv[0];
+	const localRepoFilePath = argv[1];
+	const extraFolder = $.getenv("extra_folder_1") ? $.getenv("extra_folder_1").replace(/^~/, app.pathTo("home folder")) : "";
+	const pathsToSearch = `"${dotfilePath}" "${localRepoFilePath}" "${extraFolder}"`;
 
-let pathString = "";
-pathsToSearch.forEach((path) => {
-	pathString += `"${path}" `;
-});
-
-JSON.stringify({
-	items: app
+	const jsonArray = app
 		.doShellScript(
 			`export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-		fd '\\.git$' --no-ignore --hidden --max-depth=2 ${pathString}`,
+			fd '\\.git$' --no-ignore --hidden --max-depth=2 ${pathsToSearch}`,
 		)
 		.split("\r")
 		.map((/** @type {string} */ gitFolder) => {
@@ -98,5 +94,6 @@ JSON.stringify({
 				arg: localRepoFilePath,
 				uid: repoID,
 			};
-		}),
-});
+		});
+	return JSON.stringify({ items: jsonArray });
+}

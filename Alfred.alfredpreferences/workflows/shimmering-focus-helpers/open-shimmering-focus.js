@@ -1,7 +1,8 @@
 #!/usr/bin/env osascript -l JavaScript
 
-// rome-ignore lint/correctness/noUnusedVariables: <explanation>
-function run() {
+/** @param {string[]} argv */
+	// rome-ignore lint/correctness/noUnusedVariables: <explanation>
+function run(argv) {
 	ObjC.import("stdlib");
 	ObjC.import("Foundation");
 	const app = Application.currentApplication();
@@ -21,7 +22,8 @@ function run() {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	const sfPath = $.getenv("local_repo_folder") + "/shimmering-focus/source.css";
+	const LOCAL_REPOS = argv[0];
+	const sfPath = LOCAL_REPOS + "/shimmering-focus/source.css";
 	if (!fileExists(sfPath)) {
 		jsonArray.push({
 			title: "Clone the Repo",

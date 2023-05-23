@@ -1,14 +1,14 @@
 #!/usr/bin/env zsh
 
+# INFO LOCAL_REPOS defined in .zshenv
+
 # use SSH instead of https
 url="$(echo "$*" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 reponame=$(echo "$*" | sed -E 's/.*\///')
 
-# shellcheck disable=2154
-target="${local_repo_folder/#\~/$HOME}"
-[[ ! -e "$target" ]] && mkdir -p "$target"
+[[ ! -e "$LOCAL_REPOS" ]] && mkdir -p "$LOCAL_REPOS"
+cd "$LOCAL_REPOS" || exit 1
 
-cd "$target" || exit 1
 if [[ -e "$reponame" ]]; then
 	osascript -e 'display notification "" with title "⚠️ Repo already exists."'
 else
@@ -16,4 +16,4 @@ else
 fi
 
 # open in terminal via Alfred
-echo -n "$target/$reponame"
+echo -n "$LOCAL_REPOS/$reponame"
