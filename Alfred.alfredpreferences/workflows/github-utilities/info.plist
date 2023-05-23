@@ -1033,7 +1033,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<string>loading...</string>
 				<key>script</key>
 				<string># pass variables from .zshenv
-osascript -l JavaScript open-local-repo.js "$DOTFILE_FOLDER" "$LOCAL_REPOS"</string>
+osascript -l JavaScript open-local-repo.js "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

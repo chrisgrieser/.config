@@ -38,12 +38,11 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 /** @param {string[]} argv */
 // rome-ignore lint/correctness/noUnusedVariables: called by Alfred
 function run(argv) {
-	const dotfilePath = argv[0];
-	const localRepos = argv[1];
+	const localRepos = argv[0];
 	const obsiPlugins = $.getenv("extra_folder_1")
 		? $.getenv("extra_folder_1").replace(/^~/, app.pathTo("home folder"))
 		: "";
-	const pathsToSearch = `"${dotfilePath}" "${localRepos}" "${obsiPlugins}"`;
+	const pathsToSearch = `"${localRepos}" "${obsiPlugins}"`;
 
 	const jsonArray = app
 		.doShellScript(
