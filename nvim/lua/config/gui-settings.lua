@@ -25,11 +25,11 @@ if fn.hostname():find("Mother") then
 	g.neovide_scale_factor = 0.94
 	g.neovide_refresh_rate = 40
 elseif fn.hostname():find("mini") or fn.hostname():find("eduroam") then
-	g.neovide_scale_factor = 1.055
+	g.neovide_scale_factor = 1.06
 	g.neovide_refresh_rate = 60
 elseif fn.hostname():find("iMac") then
 	g.neovide_scale_factor = 1
-	g.neovide_refresh_rate = 80
+	g.neovide_refresh_rate = 70
 end
 
 local delta = 1.05
