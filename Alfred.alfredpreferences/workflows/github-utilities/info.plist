@@ -173,19 +173,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A53EE89F-BD99-411E-BE00-D62CF8DD2AE8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C5EA77C5-8A78-4563-A304-97626E832D20</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A9C9D34F-A692-412A-9152-2BC3E99B51BE</key>
 		<array>
 			<dict>
@@ -518,78 +505,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>sf</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./open-shimmering-focus.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>🔍 Open Shimmering Focus</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>A53EE89F-BD99-411E-BE00-D62CF8DD2AE8</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-at-line.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C5EA77C5-8A78-4563-A304-97626E832D20</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1509,17 +1424,6 @@ echo "$url"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>A53EE89F-BD99-411E-BE00-D62CF8DD2AE8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>note</key>
-			<string>Open Shimmering Focus at line</string>
-			<key>xpos</key>
-			<real>755</real>
-			<key>ypos</key>
-			<real>140</real>
-		</dict>
 		<key>A9C9D34F-A692-412A-9152-2BC3E99B51BE</key>
 		<dict>
 			<key>colorindex</key>
@@ -1561,17 +1465,6 @@ echo "$url"</string>
 			<real>445</real>
 			<key>ypos</key>
 			<real>530</real>
-		</dict>
-		<key>C5EA77C5-8A78-4563-A304-97626E832D20</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>note</key>
-			<string>open at line</string>
-			<key>xpos</key>
-			<real>920</real>
-			<key>ypos</key>
-			<real>140</real>
 		</dict>
 		<key>C742BD02-85C0-47F8-9A2A-7DF4DC657EE1</key>
 		<dict>
@@ -1758,27 +1651,6 @@ echo "$url"</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>dirty_icon</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
-				<integer>2</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Path to Shimmering Focus' source.css</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>css_path</string>
 		</dict>
 		<dict>
 			<key>config</key>
