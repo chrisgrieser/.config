@@ -71,11 +71,13 @@ file="$1"
 [[ -n "$LINE" ]] &amp;&amp; LINE="+$LINE" # $LINE is set via `open --env=LINE=num`
 
 if pgrep -xq "neovide"; then
-	nvim --server "/tmp/nvim_server.pipe" --remote $LINE $file
+	# https://neovim.io/doc/user/remote.html
+	nvim --server "/tmp/nvim_server.pipe" --remote "$LINE" "$file"
 	osascript -e 'tell application "Neovide" to activate'
 else
-	neovide --geometry=104x33 --frame="buttonless" $LINE "$file"
-fi</string>
+	neovide --geometry=104x33 --frame="buttonless" "$LINE" "$file"
+fi
+</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>

@@ -2,11 +2,10 @@
 vim.g.mapleader = ","
 vim.g.maplocalleader = "!"
 
--- TODO remove this condition later on
-if vim.version().minor >= 9 then vim.loader.enable() end
+vim.loader.enable() -- TODO will be nvim default in later versions
 
 ---try to require the module, and do not error when one of them cannot be
----loaded. But do notify if there was an error.
+---loaded, but do notify if there was an error.
 ---@param module string module to load
 local function safeRequire(module)
 	local success, _ = pcall(require, module)
@@ -26,14 +25,16 @@ safeRequire("config.lazy")
 
 if vim.fn.has("gui_running") then safeRequire("config.gui-settings") end
 safeRequire("config.theme-config")
-safeRequire("config.keybindings")
 safeRequire("config.options-and-autocmds")
 
+safeRequire("config.keybindings")
 safeRequire("config.textobject-keymaps")
+
 safeRequire("config.folding")
 safeRequire("config.clipboard")
 
-if vim.fn.has("gui_running") then safeRequire("config.rpc") end
--- safeRequire("config.automating-nvim")
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
+
+-- enable remote control of neovide's nvim instance https://neovim.io/doc/user/remote.html
+if vim.fn.has("gui_running") then vim.fn.serverstart("/tmp/nvim_server.pipe") end
