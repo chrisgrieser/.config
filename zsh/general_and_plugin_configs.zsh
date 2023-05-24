@@ -28,6 +28,9 @@ export LS_COLORS=''
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='--pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --cycle --layout=reverse --bind="tab:down,shift-tab:up" --preview-window=border-left --height="90%"'
 
+# rg
+export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
+
 # magic enter
 export MAGIC_ENTER_GIT_COMMAND="inspect"
 export MAGIC_ENTER_OTHER_COMMAND="inspect"
