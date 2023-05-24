@@ -91,7 +91,7 @@ rules:
           - shell_command: |
               FRONT_APP=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
               if [[ "$FRONT_APP" == "neovide" ]]; then
-                echo "vim.cmd.wq()" >"/tmp/nvim-automation"
+                nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wq<CR>"
               else
                 killall "$FRONT_APP"
               fi
@@ -103,9 +103,8 @@ rules:
                 # bwipeout necessary due to empty buffer created before jumping to '0
                 neovide --frame=buttonless --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #"
                 exit 0
-              elif [[ "$FRONT_APP" == "wezterm-gui" ]] ; then
-                FRONT_APP="WezTerm"
               fi
+              [[ "$FRONT_APP" == "wezterm-gui" ]] && FRONT_APP="WezTerm"
               open -a "$FRONT_APP"
       # Restart Alfred
       - type: basic

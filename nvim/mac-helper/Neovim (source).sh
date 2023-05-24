@@ -10,10 +10,9 @@ file="$1"
 [[ -n "$LINE" ]] && LINE="+$LINE" # $LINE is set via `open --env=LINE=num`
 
 if pgrep -xq "neovide"; then
-	# this part requires the setup in /lua/file-watcher.lua
-	echo "vim.cmd[[edit $LINE $file]]" >"/tmp/nvim-automation"
+	# https://neovim.io/doc/user/remote.html
+	nvim --server "/tmp/nvim_server.pipe" --remote "$LINE" "$file"
 	osascript -e 'tell application "Neovide" to activate'
 else
-	# shellcheck disable=2086
-	neovide --geometry=104x33 --frame="buttonless" $LINE "$file"
+	neovide --geometry=104x33 --frame="buttonless" "$LINE" "$file"
 fi
