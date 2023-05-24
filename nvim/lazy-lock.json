@@ -42,6 +42,7 @@
   "mason-null-ls.nvim": { "branch": "main", "commit": "54d702020bf94e4eefd357f0b738317af30217eb" },
   "mason-nvim-dap.nvim": { "branch": "main", "commit": "c836e511e796d2b6a25ad9f164f5b25d8b9ff705" },
   "mason.nvim": { "branch": "main", "commit": "08b2fd308e0107eab9f0b59d570b69089fd0b522" },
+  "monokai-pro.nvim": { "branch": "master", "commit": "e7b38bdb95fc144456703bb0ff5692c68093cc8e" },
   "neoai": { "branch": "main", "commit": "b90180e30d143afb71490b92b08c1e9121d4416a" },
   "neodev.nvim": { "branch": "main", "commit": "2daabebac1b0b2ab7abba298c1a8f07a542866a6" },
   "neogit": { "branch": "master", "commit": "2a7f71a917d206f93306710a451dde1c0f15701d" },

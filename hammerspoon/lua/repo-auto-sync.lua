@@ -3,14 +3,6 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
 --------------------------------------------------------------------------------
-
--- CONFIG
-local repoSyncFreqMin = 30
-local dotfileIcon = "🔵"
-local vaultIcon = "🟪"
-local passIcon = "🔑"
-
---------------------------------------------------------------------------------
 -- Repo Sync Setup
 
 ---@return boolean success
@@ -23,10 +15,10 @@ local function gitDotfileSync()
 	GitDotfileSyncTask = hs.task
 		.new(gitDotfileScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				print(dotfileIcon .. " Dotfile Sync")
+				print("🔵 Dotfiles Sync")
 				return
 			end
-			u.notify(vaultIcon .. "⚠️️ dotfiles " .. stdErr)
+			u.notify("🔵⚠️️ Dotfiles Sync: " .. stdErr)
 		end)
 		:start()
 
@@ -43,10 +35,10 @@ local function gitVaultSync()
 	GitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				print(vaultIcon, "Vault Sync")
+				print("🟪 Vault Sync")
 				return
 			end
-			u.notify(vaultIcon .. "⚠️️ vault " .. stdErr)
+			u.notify("🟪⚠️️ Vault Sync: " .. stdErr)
 		end)
 		:start()
 
@@ -63,10 +55,10 @@ local function gitPassSync()
 	GitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				print(passIcon, "Password-Store Sync")
+				print("🔑 Password-Store Sync")
 				return
 			end
-			u.notify(passIcon .. "⚠️️ password-store " .. stdErr)
+			u.notify("🔑⚠️️ Password-Store Sync: " .. stdErr)
 		end)
 		:start()
 
@@ -95,7 +87,7 @@ function M.syncAllGitRepos(notify)
 	end
 	local function updateSketchybar()
 		hs.execute("sketchybar --trigger repo-files-update")
-		if notify then u.notify("Sync finished") end
+		if notify then u.notify("🔁 Sync finished") end
 	end
 
 	AllSyncTimer = hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
@@ -109,7 +101,7 @@ end
 
 -- 2. every x minutes
 RepoSyncTimer = hs.timer
-	.doEvery(repoSyncFreqMin * 60, function() M.syncAllGitRepos(false) end)
+	.doEvery(30 * 60, function() M.syncAllGitRepos(false) end)
 	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
@@ -126,7 +118,7 @@ SleepWatcher = hs.caffeinate.watcher
 			event == c.screensDidLock
 			or event == c.screensDidSleep
 			or event == c.systemDidWake
-			or (event == c.screensDidWake and u.idleMins(30))
+			or event == c.screensDidWake
 		then
 			M.syncAllGitRepos(true)
 		end
