@@ -2,3 +2,4 @@
 # INFO for telescope.nvim, cannot be named `.fdignore` and must be named `.ignore`
 
 automatic_backups
+karabiner.json

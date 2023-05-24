@@ -4,9 +4,9 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 app="$*"
 
 case "$app" in
-"AltTab" | "Rocket")
+"AltTab")
 	killall "$app"
-	while pgrep -q "$app"; do sleep 0.1; done
+	while pgrep -xq "$app"; do sleep 0.1; done
 	open -a "$app"
 	;;
 "svim" | "sketchybar")

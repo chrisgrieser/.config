@@ -9,7 +9,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 file="$1"
 [[ -n "$LINE" ]] && LINE="+$LINE" # $LINE is set via `open --env=LINE=num`
 
-if pgrep "neovide"; then
+if pgrep -xq "neovide"; then
 	# this part requires the setup in /lua/file-watcher.lua
 	echo "vim.cmd[[edit $LINE $file]]" >"/tmp/nvim-automation"
 	osascript -e 'tell application "Neovide" to activate'

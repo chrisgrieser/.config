@@ -8,7 +8,7 @@ open -a "Vivaldi" "vivaldi://experiments"
 #───────────────────────────────────────────────────────────────────────────────
 
 killall "Vivaldi"
-while pgrep -q "Vivaldi" ; do sleep 0.1; done
+while pgrep -xq "Vivaldi" ; do sleep 0.1; done
 
 sed -i '' \
 	's/"directory_upgrade":true,"last/"directory_upgrade":true,"extensions_to_open":"torrent:zip:alfredworkflow:ics","last/' \
