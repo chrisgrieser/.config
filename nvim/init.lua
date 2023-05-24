@@ -33,6 +33,7 @@ safeRequire("config.textobject-keymaps")
 safeRequire("config.folding")
 safeRequire("config.clipboard")
 
-safeRequire("config.automating-nvim")
+if vim.fn.has("gui_running") then safeRequire("config.rpc") end
+-- safeRequire("config.automating-nvim")
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")

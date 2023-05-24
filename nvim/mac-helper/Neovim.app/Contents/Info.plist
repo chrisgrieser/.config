@@ -7,7 +7,7 @@
 	<key>AMStayOpen</key>
 	<false/>
 	<key>BuildMachineOSBuild</key>
-	<string>20A241133</string>
+	<string>22A380007</string>
 	<key>CFBundleAllowMixedLocalizations</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -52,23 +52,23 @@
 	<key>CFBundleURLTypes</key>
 	<array/>
 	<key>CFBundleVersion</key>
-	<string>520</string>
+	<string>521.1</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>14A6270d</string>
+	<string>22E241</string>
 	<key>DTPlatformName</key>
 	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>13.2</string>
+	<string>13.3</string>
 	<key>DTSDKBuild</key>
-	<string>22D36</string>
+	<string>22E241</string>
 	<key>DTSDKName</key>
-	<string>macosx13.2.internal</string>
+	<string>macosx13.3.internal</string>
 	<key>DTXcode</key>
-	<string>1400</string>
+	<string>1430</string>
 	<key>DTXcodeBuild</key>
-	<string>14A6270d</string>
+	<string>14E6097d</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.9</string>
 	<key>LSUIElement</key>

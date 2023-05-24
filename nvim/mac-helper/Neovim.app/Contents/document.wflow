@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>520</string>
+	<string>521.1</string>
 	<key>AMApplicationVersion</key>
 	<string>2.10</string>
 	<key>AMDocumentVersion</key>
@@ -70,12 +70,10 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 file="$1"
 [[ -n "$LINE" ]] &amp;&amp; LINE="+$LINE" # $LINE is set via `open --env=LINE=num`
 
-if pgrep "neovide"; then
-	# this part requires the setup in /lua/file-watcher.lua
-	echo "vim.cmd[[edit $LINE $file]]" &gt;"/tmp/nvim-automation"
+if pgrep -xq "neovide"; then
+	nvim --server "/tmp/nvim_server.pipe" --remote $LINE $file
 	osascript -e 'tell application "Neovide" to activate'
 else
-	# shellcheck disable=2086
 	neovide --geometry=104x33 --frame="buttonless" $LINE "$file"
 fi</string>
 					<key>CheckedForUserDefaultShell</key>
