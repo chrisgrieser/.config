@@ -129,7 +129,7 @@ return {
 			},
 		},
 	},
-	{ -- better LSP rename
+	{ -- better LSP variable-rename
 		"smjonas/inc-rename.nvim",
 		event = "CmdlineEnter", -- loading with `cmd =` does not work with incremental preview
 		opts = {
@@ -139,5 +139,11 @@ return {
 				if filesChanged > 1 then vim.cmd.wall() end
 			end,
 		},
+	},
+	{
+		"antosha417/nvim-lsp-file-operations",
+		enabled = false, -- wait till properly working: https://github.com/antosha417/nvim-lsp-file-operations/issues/13
+		lazy = true,
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 }

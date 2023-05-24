@@ -8,7 +8,7 @@ local visuals = require("lua.visuals")
 
 --------------------------------------------------------------------------------
 
--- `hammerspoon://hs-reload` for reloading via Build System
+-- trigger `hammerspoon://hs-reload` for reloading via nvim (filetype-config: lua.lua)
 local reloadIndicator = "/tmp/hs-is-reloading"
 u.urischeme("hs-reload", function()
 	hs.execute("touch " .. reloadIndicator)
@@ -17,14 +17,14 @@ end)
 
 local _, isReloading = hs.execute("[[ -e " .. reloadIndicator .. " ]]")
 
--- stuff to do only on reload
+-- DO ON RELOAD
 if isReloading then
 	print("\n--------------------------- 🔨 HAMMERSPOON RELOAD -------------------------------\n")
 	os.remove(reloadIndicator)
 	return
 end
 
--- stuff to do on system startup
+-- DO ON SYSTEM STARTUP
 visuals.holeCover()
 periphery.batteryCheck("SideNotes")
 layouts.selectLayout()
@@ -38,5 +38,5 @@ if env.isAtOffice then
 	end)
 end
 
-u.notify("Finished loading.")
+u.notify("🔨 Finished loading")
 repos.syncAllGitRepos(true)

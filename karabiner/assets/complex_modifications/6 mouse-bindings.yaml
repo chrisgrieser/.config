@@ -79,7 +79,7 @@ rules:
         from: { pointing_button: button3 }
         to:
           # so cursor position and changes are saved properly
-          - shell_command: echo "vim.cmd.wq()" >"/tmp/nvim-automation"
+          - shell_command: nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wq<CR>"
         conditions:
           - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────
