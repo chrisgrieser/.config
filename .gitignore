@@ -1,11 +1,9 @@
 # don't add "node_modules" here since some Alfred workflows actually rely on it
 
-# ZSH Completion Data 
-# (shouldn't be synced since some machines have different CLIs installed)
+# ZSH Completion Data & temporary zsh data
+# (shouldn't be synced since my machines have different CLIs installed)
 .zcompcache
 .zcompdump
-
-# temporary zsh data
 .zsh_sessions
 
 # potentially sensitive data
@@ -17,7 +15,7 @@ dlFolderLastChange
 .last_pwd
 
 # redundant
-karabiner/automatic_backups
+karabiner/automatic_backups/*
 
 # in case of accidental saving of such files in the repo
 *.mp4

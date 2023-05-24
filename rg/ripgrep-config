@@ -1,0 +1,10 @@
+# https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
+#───────────────────────────────────────────────────────────────────────────────
+
+--smart-case
+--trim
+--glob=!git/*
+
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+--max-columns=120
+--max-columns-preview
