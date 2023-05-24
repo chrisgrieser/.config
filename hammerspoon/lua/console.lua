@@ -2,7 +2,7 @@ local u = require("lua.utils")
 local cons = hs.console
 --------------------------------------------------------------------------------
 
--- Font & Color
+-- CONSOLE APPEARANCE
 local baseFont = { name = "JetBrainsMonoNL Nerd Font", size = 22 }
 local darkRed = { red = 0.7, green = 0, blue = 0, alpha = 1 }
 local lightRed = { red = 1, green = 0, blue = 0, alpha = 1 }
@@ -13,17 +13,16 @@ local black = { white = 0.1 }
 local darkGrey = { white = 0.45 }
 local lightGrey = { white = 0.55 }
 
--- console settings
+-- CONSOLE SETTINGS
 cons.titleVisibility("hidden")
 cons.toolbar(nil)
 cons.consoleFont(baseFont)
 hs.consoleOnTop(false)
 
--- HACK reduce hotkey enable/disable-logging
--- https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
--- https://github.com/Hammerspoon/hammerspoon/issues/3491
----@diagnostic disable-next-line: undefined-field
-hs.hotkey.setLogLevel(0)
+-- suppress useless console msgs
+-- reduce hotkey enable/disable-logging https://github.com/Hammerspoon/hammerspoon/issues/3491
+hs.hotkey.setLogLevel(0) ---@diagnostic disable-line: undefined-field
+hs.application.enableSpotlightForNameSearches(false)
 
 --------------------------------------------------------------------------------
 

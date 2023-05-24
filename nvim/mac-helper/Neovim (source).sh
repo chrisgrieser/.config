@@ -14,5 +14,6 @@ if pgrep -xq "neovide"; then
 	nvim --server "/tmp/nvim_server.pipe" --remote "$LINE" "$file"
 	osascript -e 'tell application "Neovide" to activate'
 else
-	neovide --geometry=104x33 --frame="buttonless" "$LINE" "$file"
+	# shellcheck disable=2086
+	neovide --geometry=104x33 --frame="buttonless" $LINE "$file"
 fi

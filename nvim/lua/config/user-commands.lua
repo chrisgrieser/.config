@@ -35,6 +35,7 @@ newCommand("LspCapabilities", function()
 					table.insert(capAsList, "- " .. capability)
 				end
 			end
+			table.sort(capAsList) -- sorts alphabetically
 			local msg = "# " .. client.name .. "\n" .. table.concat(capAsList, "\n")
 			vim.notify(msg, "trace", {
 				on_open = function(win)

@@ -780,7 +780,7 @@ keymap("n", "<leader>tf", "<Plug>PlenaryTestFile", { desc = " Test File" })
 keymap("n", "<leader>td", "<cmd>PlenaryBustedDirectory .<CR>", { desc = " Tests in Directory" })
 
 keymap("n", "<leader>th", function()
-	cmd.edit("test-request.http")
+	cmd.edit("request.http")
 	fn.system("open https://github.com/rest-nvim/rest.nvim/tree/main/tests")
 end, { desc = "󰴚 Test HTTP request" })
 

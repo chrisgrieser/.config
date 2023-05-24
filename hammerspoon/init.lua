@@ -1,12 +1,10 @@
 -- HAMMERPOON SETTINGS
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
-hs.application.enableSpotlightForNameSearches(false) -- suppress useless console msgs
 hs.window.animationDuration = 0 -- quicker animations
 hs.allowAppleScript(true) -- allow external control
 
 --------------------------------------------------------------------------------
-require("lua.console")
 
 -- appearance
 require("lua.visuals")
@@ -31,6 +29,6 @@ require("lua.app-specific-behavior")
 require("lua.twitter")
 require("lua.sidenotes")
 
---------------------------------------------------------------------------------
-
+-- meta
+require("lua.console")
 require("lua.reload-and-systemstart")
