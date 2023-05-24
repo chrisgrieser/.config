@@ -6,7 +6,6 @@ local sidenotes = require("lua.sidenotes")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
-local reposync = require("lua.repo-auto-sync")
 --------------------------------------------------------------------------------
 
 -- HELPERS
@@ -158,7 +157,6 @@ UnlockWatcher = c.new(function(event)
 		u.runWithDelays(0.5, function() -- delay for recognizing screens
 			M.selectLayout()
 			sidenotes.reminderToSidenotes()
-			reposync.syncAllGitRepos(true)	
 		end)
 	end, 0.2)
 	-- deactivate the timer if the screen is woken but not unlocked

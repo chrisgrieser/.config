@@ -8,12 +8,11 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	"rebelot/kanagawa.nvim",
+	"loctvl842/monokai-pro.nvim",
+	-- "rebelot/kanagawa.nvim",
 	-- "folke/tokyonight.nvim",
 	-- "glepnir/zephyr-nvim",
-	-- "tanvirtin/monokai.nvim",
 	-- "kvrohit/mellow.nvim",
-	-- "AlexvZyl/nordic.nvim",
 	-- "sainnhe/everforest",
 	-- "nyoom-engineering/oxocarbon.nvim",
 	-- "savq/melange",
@@ -46,8 +45,6 @@ g.darkTheme = getName(darkThemes[1])
 
 -- account for special names
 if g.lightTheme == "nightfox" then g.lightTheme = "dawnfox" end
-if g.darkTheme == "monokai" then g.darkTheme = "monokai_pro" end
-if g.lightTheme == "github-nvim-theme" then g. lightTheme = "github_light_colorblind" end
 
 --------------------------------------------------------------------------------
 
