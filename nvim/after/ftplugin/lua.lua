@@ -25,8 +25,9 @@ keymap("n", "<leader>r", function()
 		vim.notify(expand("%:r") .. " re-sourced")
 	elseif pwd:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
+		vim.notify("✅ Hammerspoon reloaded.")
 	else
-		vim.notify("Neither in nvim nor in hammerspoon directory.", u.error)
+		vim.notify("Neither in nvim nor in hammerspoon directory.", u.warn)
 	end
 end, { buffer = true, desc = " Reload" })
 

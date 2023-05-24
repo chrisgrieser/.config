@@ -33,4 +33,4 @@ require("lua.sidenotes")
 
 --------------------------------------------------------------------------------
 
-require("lua.reload-and-systemstart").systemStart()
+require("lua.reload-and-systemstart")

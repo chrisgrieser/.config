@@ -31,8 +31,9 @@ local function toggleDarkMode()
 		sidenotesTheme = sidenotesDark
 	end
 
-	-- neovim (requires setup in ~/.config/nvim/lua/file-watcher.lua)
-	hs.execute(string.format([[echo "SetThemeMode('%s')" > /tmp/nvim-automation]], toMode))
+	-- neovim
+	local nvimLuaCmd = ([[require('config.theme-config').setThemeMode('%s')]]):format(toMode)
+	hs.execute(([[nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>lua %s<CR>"]]):format(nvimLuaCmd))
 
 	-- Highlights PDF background
 	if u.appRunning("Highlights") then

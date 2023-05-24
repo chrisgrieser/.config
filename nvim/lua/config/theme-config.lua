@@ -4,6 +4,7 @@ local fn = vim.fn
 local g = vim.g
 
 local overnestingIndent = 8
+local M = {}
 --------------------------------------------------------------------------------
 
 ---@param hlgroupfrom string
@@ -192,8 +193,9 @@ autocmd("ColorScheme", {
 
 --------------------------------------------------------------------------------
 
+---exported for remote control via hammerspoon
 ---@param mode "dark"|"light"
-function SetThemeMode(mode)
+function M.setThemeMode(mode)
 	vim.opt.background = mode
 	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
 	cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
@@ -204,4 +206,8 @@ end
 -- initialize theme on startup
 local isDarkMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
 local targetMode = isDarkMode and "dark" or "light"
-SetThemeMode(targetMode)
+M.setThemeMode(targetMode)
+
+--------------------------------------------------------------------------------
+
+return M

@@ -1,5 +1,3 @@
-local M = {}
-
 local env = require("lua.environment-vars")
 local layouts = require("lua.layouts")
 local periphery = require("lua.hardware-periphery")
@@ -17,35 +15,28 @@ u.urischeme("hs-reload", function()
 	hs.reload()
 end)
 
--- systemStart will also run on reload, therefore extra conditional to
--- differentiate between reload and start
-function M.systemStart()
-	-- do not git sync on reload to prevent commit spam when updating hammerspoon
-	-- config regularly
-	local _, isReloading = hs.execute("[[ -e " .. reloadIndicator .. " ]]")
-	if isReloading then
-		print("\n--------------------------- 🔨 HAMMERSPOON RELOAD -------------------------------\n")
+local _, isReloading = hs.execute("[[ -e " .. reloadIndicator .. " ]]")
 
-		os.remove(reloadIndicator)
-		-- use neovim automation to display the notification in neovim
-		hs.execute([[echo 'vim.notify("✅ Hammerspoon reloaded. ")' > /tmp/nvim-automation]])
-	else
-		u.notify("Finished loading.")
-		visuals.holeCover()
-		periphery.batteryCheck("SideNotes")
-		repos.syncAllGitRepos(true)
-		layouts.selectLayout()
-
-		-- with delay, to avoid importing duplicate reminders due to reminders
-		-- not being synced yet
-		if env.isAtOffice then
-			u.runWithDelays(15, function()
-				sidenotes.moveOfficeNotesToBase()
-				sidenotes.reminderToSidenotes()
-			end)
-		end
-	end
+-- stuff to do only on reload
+if isReloading then
+	print("\n--------------------------- 🔨 HAMMERSPOON RELOAD -------------------------------\n")
+	os.remove(reloadIndicator)
+	return
 end
 
---------------------------------------------------------------------------------
-return M
+-- stuff to do on system startup
+visuals.holeCover()
+periphery.batteryCheck("SideNotes")
+layouts.selectLayout()
+
+-- with delay, to avoid importing duplicate reminders due to reminders
+-- not being synced yet
+if env.isAtOffice then
+	u.runWithDelays(15, function()
+		sidenotes.moveOfficeNotesToBase()
+		sidenotes.reminderToSidenotes()
+	end)
+end
+
+u.notify("Finished loading.")
+repos.syncAllGitRepos(true)
