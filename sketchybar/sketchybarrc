@@ -2,7 +2,7 @@
 
 # ensure Stats.app is running
 i=0
-while ! pgrep "Stats"; do
+while ! pgrep -xq "Stats"; do
 	open -a "Stats"
 	sleep 2
 	i=$((i + 1))

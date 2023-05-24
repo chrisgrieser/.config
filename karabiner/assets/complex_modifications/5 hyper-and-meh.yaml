@@ -87,7 +87,7 @@ rules:
         from: { key_code: r, modifiers: { mandatory: [command, control, shift, option] } }
         to:
           # INFO not done via Alfred because of https://github.com/neovide/neovide/issues/1604
-          # INFO Quitting via wqall instead of cmd+Q so bufferleaving autocmds are triggered
+          # INFO Quitting via :wqall instead of cmd+Q so bufferleaving autocmds are triggered
           - shell_command: |
               FRONT_APP=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
               if [[ "$FRONT_APP" == "neovide" ]]; then
@@ -96,17 +96,17 @@ rules:
                 killall "$FRONT_APP"
               fi
 
-              while pgrep -q "$FRONT_APP"; do sleep 0.03; done
+              while pgrep -xq "$FRONT_APP"; do sleep 0.03; done
 
               if [[ "$FRONT_APP" == "neovide" ]]; then
-                sleep 0.03
                 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
                 # bwipeout necessary due to empty buffer created before jumping to '0
                 neovide --frame=buttonless --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #"
-              else
-                [[ "$FRONT_APP" == "wezterm-gui" ]] && FRONT_APP="WezTerm"
-                open -a "$FRONT_APP"
+                exit 0
+              elif [[ "$FRONT_APP" == "wezterm-gui" ]] ; then
+                FRONT_APP="WezTerm"
               fi
+              open -a "$FRONT_APP"
       # Restart Alfred
       - type: basic
         from: { key_code: "5", modifiers: { mandatory: [command, control, shift, option] } }
@@ -115,7 +115,7 @@ rules:
               osascript -e 'display notification "" with title "Restarting Alfred…"'
               killall -KILL "Alfred"
               killall "Alfred Preferences"
-              while pgrep -q "Alfred"; do sleep 0.1; done
+              while pgrep -xq "Alfred"; do sleep 0.1; done
               sleep 0.1
               open -a Alfred\ 5
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'

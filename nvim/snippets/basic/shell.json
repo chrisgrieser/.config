@@ -158,7 +158,7 @@
 	},
 	"check if process is running": {
 		"prefix": "check if process is running",
-		"body": "pgrep -x \"${1:process}\" > /dev/null && $0"
+		"body": "pgrep -xq \"${1:process}\" && $0"
 	},
 	"quicklook": {
 		"prefix": "quicklook",
@@ -187,17 +187,17 @@
 	},
 	"wait until app running": {
 		"prefix": "wait until app running",
-		"body": "while ! pgrep -q \"${1:app_name}\"; do sleep 0.1; done"
+		"body": "while ! pgrep -xq \"${1:app_name}\"; do sleep 0.1; done"
 	},
 	"wait until app terminated": {
 		"prefix": "wait until app terminated",
-		"body": "while pgrep -q \"${1:app_name}\"; do sleep 0.1; done"
+		"body": "while pgrep -xq \"${1:app_name}\"; do sleep 0.1; done"
 	},
 	"restart app": {
 		"prefix": "restart app",
 		"body": [
 			"killall \"${1:app_name}\"",
-			"while pgrep -q \"${1:app_name}\"; do sleep 0.1; done",
+			"while pgrep -xq \"${1:app_name}\"; do sleep 0.1; done",
 			"open -a \"${1:app_name}\""
 		],
 		"description": "safely restart app, avoiding race condition"

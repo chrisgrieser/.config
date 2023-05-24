@@ -808,7 +808,7 @@ keymap("n", "<leader>te", function()
 end, { desc = " Edit Embedded Code (Code Block)" })
 
 keymap("x", "<leader>te", function()
-	local fts = { "sh", "applescript", "vim" }
+	local fts = { "bash", "applescript", "vim" }
 	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 		if not ft then return end
 		u.leaveVisualMode()

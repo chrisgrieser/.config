@@ -39,7 +39,6 @@ rg "$FROM_BROWSER" --files-with-matches |
 sed -i '' "s/$FROM_BROWSER/$TO_BROWSER/g" "/karabiner/assets/complex_modifications/2 ctrl-leader.yaml"
 
 rg "$FROM_BROWSER_PATH" --files-with-matches |
-	grep -v "/user.workflow.3BF713ED-02D0-4127-8126-26E36BF15CFC/" |
 	grep -v "$0" |
 	xargs -I {} sed -i '' "s|$FROM_BROWSER_PATH|$TO_BROWSER_PATH|g" '{}'
 
@@ -51,5 +50,5 @@ echo "$karabinerMsg"
 
 # restart hammerspoon
 killall "Hammerspoon"
-while pgrep -q "Hammerspoon"; do sleep 0.1; done
+while pgrep -xq "Hammerspoon"; do sleep 0.1; done
 open -a "Hammerspoon"

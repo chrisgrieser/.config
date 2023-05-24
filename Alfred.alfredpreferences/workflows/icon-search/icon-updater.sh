@@ -145,7 +145,7 @@ else
 	touch "$APP.app"
 	killall "Dock"
 	killall "$APP"
-	while pgrep -q "$APP"; do sleep 0.1; done
+	while pgrep -xq "$APP"; do sleep 0.1; done
 	sleep 0.1
 	open -a "$APP"
 	echo -n "$APP" # pass for notification

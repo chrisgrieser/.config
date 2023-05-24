@@ -31,7 +31,7 @@ rules:
         to:
           - shell_command: |
               i=0
-              while ! pgrep "Spotify"; do
+              while ! pgrep -xq "Spotify"; do
                 open -a "Spotify"
                 sleep 0.2
                 i=$((i + 1))
@@ -44,7 +44,7 @@ rules:
         to:
           - shell_command: |
               i=0
-              while ! pgrep "Spotify"; do
+              while ! pgrep -xq "Spotify"; do
                 open -a "Spotify"
                 sleep 0.2
                 i=$((i + 1))
@@ -57,7 +57,7 @@ rules:
         to:
           - shell_command: |
               i=0
-              while ! pgrep "Spotify"; do
+              while ! pgrep -xq "Spotify"; do
                 open -a "Spotify"
                 sleep 0.2
                 i=$((i + 1))
