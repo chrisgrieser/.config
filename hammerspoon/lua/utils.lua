@@ -21,6 +21,9 @@ I = hs.inspect
 -- need to catch timers in global vars to ensure they don't get garbage collected
 MyTimers = {}
 
+-- add path for `hs.execute()`
+M.exportPath = [[export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; ]]
+
 ---Whether the current time is between startHour & endHour. Also works for
 ---ranges that go beyond midnight, e.g. 23 to 6.
 ---@param startHour number, time between 0 and 24. also accepts floats e.g. 13.5 for 13:30

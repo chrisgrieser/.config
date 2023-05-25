@@ -28,6 +28,7 @@ end
 visuals.holeCover()
 periphery.batteryCheck("SideNotes")
 layouts.selectLayout()
+u.app("TextPal"):mainWindow():close()
 
 -- with delay, to avoid importing duplicate reminders due to reminders
 -- not being synced yet

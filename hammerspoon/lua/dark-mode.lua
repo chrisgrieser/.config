@@ -33,7 +33,8 @@ local function toggleDarkMode()
 
 	-- neovim
 	local nvimLuaCmd = ([[require('config.theme-config').setThemeMode('%s')]]):format(toMode)
-	hs.execute(([[nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>lua %s<CR>"]]):format(nvimLuaCmd))
+	local shellCmd1 = ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>lua %s<CR>"]]):format(nvimLuaCmd)
+	hs.execute(u.exportPath .. shellCmd1)
 
 	-- Highlights PDF background
 	if u.appRunning("Highlights") then
@@ -51,8 +52,7 @@ local function toggleDarkMode()
 
 	-- sketchybar
 	-- stylua: ignore
-	hs.execute(([[
-		export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+	hs.execute((u.exportPath .. [[
 		BG_COLOR='%s'
 		FONT_COLOR='%s'
 		sketchybar --bar color="$BG_COLOR" \
@@ -75,8 +75,8 @@ local function toggleDarkMode()
 		themePath,
 		sidenotesTheme
 	)
-	local shellCmd = ([[osascript -l JavaScript -e '%s']]):format(jxaCmd)
-	hs.execute(shellCmd)
+	local shellCmd2 = ([[osascript -l JavaScript -e '%s']]):format(jxaCmd)
+	hs.execute(shellCmd2)
 end
 
 u.hotkey({}, "f13", toggleDarkMode) -- `del` key on Keychron Keyboard

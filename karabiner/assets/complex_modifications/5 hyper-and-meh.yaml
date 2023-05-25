@@ -89,6 +89,8 @@ rules:
           # INFO not done via Alfred because of https://github.com/neovide/neovide/issues/1604
           # INFO Quitting via :wqall instead of cmd+Q so bufferleaving autocmds are triggered
           - shell_command: |
+              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
               FRONT_APP=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
               if [[ "$FRONT_APP" == "neovide" ]]; then
                 nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wq<CR>"
@@ -99,7 +101,6 @@ rules:
               while pgrep -xq "$FRONT_APP"; do sleep 0.03; done
 
               if [[ "$FRONT_APP" == "neovide" ]]; then
-                export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
                 # bwipeout necessary due to empty buffer created before jumping to '0
                 neovide --frame=buttonless --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #"
                 exit 0
