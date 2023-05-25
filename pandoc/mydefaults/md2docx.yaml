@@ -6,8 +6,9 @@
 verbosity: WARNING
 fail-if-warnings: true # turn on to abort if citekeys are missing
 
-table-of-contents: true
+table-of-contents: false
 toc-depth: 3
+
 resource-path:
   - .
   - ./attachments
