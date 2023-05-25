@@ -39,6 +39,7 @@
 			"style": {
 				"useBlockStatements": "off",
 				"useConst": "warn",
+				"noParameterAssign": "warn",
 				"useTemplate": "off",
 				"useSingleVarDeclarator": "off"
 			}
