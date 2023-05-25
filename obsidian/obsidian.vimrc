@@ -307,8 +307,8 @@ nmap <F1> :togglefold
 """"""""""""""""""""""
 " poor man's substitute.nvim 🥲
 " unmap s
-nmap s Vp
-nmap S vg$p
+nmap s VP
+nmap S vg$P
 
 """"""""""""""""""""""
 " Option Toggling
