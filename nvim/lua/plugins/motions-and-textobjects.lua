@@ -12,7 +12,7 @@ return {
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
 		dev = true,
-		lazy = true,
+		lazy = true, -- loaded by keymaps
 		init = function()
 			-- stylua: ignore start
 			vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "󱇫 e" })
