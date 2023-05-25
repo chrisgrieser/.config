@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# shellcheck disable=2086
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -12,10 +13,9 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 if pgrep -xq "neovide"; then
 	# https://neovim.io/doc/user/remote.html
-	nvim --server "/tmp/nvim_server.pipe" --remote "$LINE" "$@"
+	nvim --server "/tmp/nvim_server.pipe" --remote $LINE "$@"
 	osascript -e 'tell application "Neovide" to activate'
 else
-	# shellcheck disable=2086
 	# LINE must be unquoted to prevent opening empty file
 	neovide --geometry=104x33 --notabs --frame="buttonless" $LINE "$@"
 fi

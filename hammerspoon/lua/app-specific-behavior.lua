@@ -9,12 +9,12 @@ local aw = require("lua.utils").aw
 ---@param toStatus string pause|play
 local function spotifyDo(toStatus)
 	-- stylua: ignore start
-	local currentStatus = hs.execute( "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --status --format=%s"):gsub("\n$", "")
+	local currentStatus = hs.execute(u.exportPath .. "spt playback --status --format=%s"):gsub("\n$", "")
 	if
 		(currentStatus == "▶️" and toStatus == "pause")
 		or (currentStatus == "⏸" and toStatus == "play")
 	then
-		local stdout = hs.execute( "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; spt playback --toggle")
+		local stdout = hs.execute(u.exportPath .. "spt playback --toggle")
 		if toStatus == "play" then u.notify(stdout) end ---@diagnostic disable-line: param-type-mismatch
 	end
 	-- stylua: ignore end

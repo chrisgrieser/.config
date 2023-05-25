@@ -79,7 +79,9 @@ rules:
         from: { pointing_button: button3 }
         to:
           # so cursor position and changes are saved properly
-          - shell_command: nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wq<CR>"
+          - shell_command: |
+              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+              nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wq<CR>"
         conditions:
           - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────
