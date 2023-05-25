@@ -81,9 +81,9 @@ function gitlog() {
 		sed -e 's/HEAD/󱍀/g' |
 		sed -e 's/->//g' |
 		sed -e 's/grafted,/ /' |
-		delta 
+		delta
 	# INFO piping though delta as pager makes commit hashes clickable https://github.com/wez/wezterm/discussions/3618
-	# also, delta pipes then to less, which is configured not to start the pager 
+	# also, delta pipes then to less, which is configured not to start the pager
 	# if the output short enough to fit on one screen
 }
 
@@ -346,9 +346,10 @@ function gdf() {
 	# decision on how to act on file
 	echo "$deleted_path @$last_commit"
 	echo
-	printf "\033[1;34m[r]estore file (checkout)"
-	printf "[s]how file (bat)"
-	printf "[c]opy content\033[0m"
+	printf "\033[1;34m[r]estore file (checkout)  "
+	printf "[s]how file (bat)  "
+	printf "[c]opy content\033[0m  "
+	echo
 	echo -n "> "
 	read -r -k 1 DECISION
 	echo
