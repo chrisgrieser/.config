@@ -110,10 +110,11 @@ SleepWatcher = hs.caffeinate.watcher
 		if
 			event == c.screensDidLock
 			or event == c.screensDidSleep
+			or event == c.screensDidUnlock
 			or event == c.systemDidWake
 			or event == c.screensDidWake
 		then
-			u.runWithDelays(1, function() syncAllGitRepos(true) end)
+			syncAllGitRepos(true)
 		end
 	end)
 	:start()
