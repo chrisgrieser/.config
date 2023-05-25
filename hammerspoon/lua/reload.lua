@@ -9,7 +9,7 @@ u.urischeme("hs-reload", function()
 	hs.reload()
 end)
 
-if u.isReloading then
+if u.isReloading() then
 	print("\n--------------------------- 🔨 HAMMERSPOON RELOAD -------------------------------\n")
 	os.remove(reloadIndicator)
 else

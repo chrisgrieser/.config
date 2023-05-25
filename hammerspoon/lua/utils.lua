@@ -23,6 +23,7 @@ I = hs.inspect
 
 --------------------------------------------------------------------------------
 
+---@nodiscard
 ---differentiate code to be run on reload and code to be run on startup.
 ---dependent on the setup in `reload.lua`
 ---@return boolean isReloading
