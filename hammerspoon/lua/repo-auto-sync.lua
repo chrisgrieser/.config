@@ -7,7 +7,7 @@ local u = require("lua.utils")
 ---@return boolean success
 local function gitDotfileSync()
 	local gitDotfileScript = env.dotfilesFolder .. "git-dotfile-sync.sh"
-	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
+	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return true end
 	if not (u.screenIsUnlocked()) then return false end -- prevent standby home device background sync when in office
 
 	GitDotfileSyncTask = hs.task
@@ -26,7 +26,7 @@ end
 ---@return boolean
 local function gitVaultSync()
 	local gitVaultScript = env.vaultLocation .. "Meta/git-vault-sync.sh"
-	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return false end
+	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return true end
 	if not (u.screenIsUnlocked()) then return false end -- prevent of standby home device background sync when in office
 
 	GitVaultSyncTask = hs.task
@@ -45,7 +45,7 @@ end
 ---@return boolean
 local function gitPassSync()
 	local gitPassScript = env.passwordStore .. "pass-sync.sh"
-	if GitPassSyncTask and GitPassSyncTask:isRunning() then return false end
+	if GitPassSyncTask and GitPassSyncTask:isRunning() then return true end
 	if not u.screenIsUnlocked() then return false end -- prevent of standby home device background sync when in office
 
 	GitPassSyncTask = hs.task
