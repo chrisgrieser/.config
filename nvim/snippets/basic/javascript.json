@@ -16,14 +16,14 @@
 		"body": "// rome-ignore format: ${1:explanation}",
 		"description": "Ignores the next block of code."
 	},
-	"ignore (tsignore)": {
-		"prefix": "ignore (tsignore)",
+	"ignore (TypeScript)": {
+		"prefix": ["ignore (TypeScript)", "ts-ignore"],
 		"body": "// @ts-ignore"
 	},
-	"fall-through (switch, eslint)": {
-		"prefix": "fall through (switch, eslint)",
-		"body": "// falls through",
-		"description": "This comment indicates that a fallthrough in a switch statement is intentional and disables the respective eslint warning. See: https://eslint.org/docs/latest/rules/no-fallthrough"
+	"don't check file (TypeScript)": {
+		"prefix": ["nocheck (TypeScript)", "ts-nocheck", "exclude (TypeScript)"],
+		"body": "// @ts-nocheck",
+		"description": "instructs TypeScript to ignore the whole file"
 	},
 	"for (i++)": {
 		"prefix": "for (i++)",

@@ -169,7 +169,12 @@ keymap("n", "dsi", function()
 	-- delete start- and end-border
 	local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
 	local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
-	vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
+
+	-- don't delete endborder when language does not have them
+	if not (bo.filetype == "python" or bo.filetype == "yaml" or bo.filetype == "markdown") then
+		-- delete end first so line index is not shifted
+		vim.cmd(tostring(endBorderLn) .. " delete")
+	end
 	vim.cmd(tostring(startBorderLn) .. " delete")
 end, { desc = "Delete surrounding indentation" })
 
