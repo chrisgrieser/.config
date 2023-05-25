@@ -6,6 +6,10 @@ hs.allowAppleScript(true) -- allow external control
 
 --------------------------------------------------------------------------------
 
+-- meta
+require("lua.console")
+require("lua.reload")
+
 -- appearance
 require("lua.visuals")
 require("lua.dark-mode")
@@ -28,7 +32,3 @@ require("lua.hide-cursor-in-browser")
 require("lua.app-specific-behavior")
 require("lua.twitter")
 require("lua.sidenotes")
-
--- meta
-require("lua.console")
-require("lua.reload-and-systemstart")

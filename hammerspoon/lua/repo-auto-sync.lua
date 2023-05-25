@@ -1,4 +1,3 @@
-local M = {}
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
@@ -70,7 +69,7 @@ end
 
 ---sync all three git repos
 ---@param notify boolean
-function M.syncAllGitRepos(notify)
+local function syncAllGitRepos(notify)
 	local success1 = gitDotfileSync()
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
@@ -97,17 +96,17 @@ end
 -- WHEN TO SYNC
 
 -- 1. on systemstart
--- (see reload-systemstart.lua)
+if not u.isReloading() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
 RepoSyncTimer = hs.timer
-	.doEvery(30 * 60, function() M.syncAllGitRepos(false) end)
+	.doEvery(30 * 60, function() syncAllGitRepos(false) end)
 	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
 u.urischeme("sync-repos", function()
 	u.app("Hammerspoon"):hide() -- so the previous app does not loose focus
-	M.syncAllGitRepos(true)
+	syncAllGitRepos(true)
 end)
 
 -- 4. when going to sleep or when unlocking
@@ -120,7 +119,7 @@ SleepWatcher = hs.caffeinate.watcher
 			or event == c.systemDidWake
 			or event == c.screensDidWake
 		then
-			M.syncAllGitRepos(true)
+			syncAllGitRepos(true)
 		end
 	end)
 	:start()
@@ -129,9 +128,7 @@ SleepWatcher = hs.caffeinate.watcher
 -- (safety redundancy to ensure syncs when leaving for the office)
 MorningSyncTimer = hs.timer
 	.doAt("08:00", "01d", function()
-		if env.isAtHome then M.syncAllGitRepos(false) end
+		if env.isAtHome then syncAllGitRepos(false) end
 	end)
 	:start()
 
---------------------------------------------------------------------------------
-return M

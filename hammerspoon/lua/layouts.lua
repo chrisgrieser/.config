@@ -1,5 +1,3 @@
-local M = {}
-
 local darkmode = require("lua.dark-mode")
 local env = require("lua.environment-vars")
 local sidenotes = require("lua.sidenotes")
@@ -60,7 +58,7 @@ local function workLayout()
 	visuals.holeCover()
 	dockSwitcher("work")
 	setHigherBrightnessDuringDay()
-	hs.execute("sketchybar --set clock popup.drawing=true")
+	hs.execute(u.exportPath .. "sketchybar --set clock popup.drawing=true")
 
 	-- close
 	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "lo-rain" }
@@ -115,16 +113,12 @@ local function movieLayout()
 	print("🔲 MovieModeLayout: done")
 end
 
---------------------------------------------------------------------------------
--- WHEN TO SET LAYOUT
-
 ---select layout depending on number of screens
 local layoutingInProgress = false
-function M.selectLayout()
+local function selectLayout()
 	if layoutingInProgress then return end
 	layoutingInProgress = true
 	u.runWithDelays(5, function() layoutingInProgress = false end)
-
 	if env.isProjector() then
 		movieLayout()
 	else
@@ -132,20 +126,23 @@ function M.selectLayout()
 	end
 end
 
+--------------------------------------------------------------------------------
+-- WHEN TO SET LAYOUT
+
 -- 1. Change of screen numbers
 DisplayCountWatcher = hs.screen.watcher
 	.new(function()
 		-- TV at mother needs small delay
 		local delay = env.isAtMother and 1.5 or 0
-		u.runWithDelays(delay, M.selectLayout)
+		u.runWithDelays(delay, selectLayout)
 	end)
 	:start()
 
 -- 2. Hotkey
-u.hotkey(u.hyper, "home", M.selectLayout)
+u.hotkey(u.hyper, "home", selectLayout)
 
 -- 3. Systemstart
--- done in reload-systemstart
+if not u.isReloading() then selectLayout() end
 
 -- 4. Waking
 local c = hs.caffeinate.watcher
@@ -155,7 +152,7 @@ UnlockWatcher = c.new(function(event)
 
 	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
 		u.runWithDelays(0.5, function() -- delay for recognizing screens
-			M.selectLayout()
+			selectLayout()
 			sidenotes.reminderToSidenotes()
 		end)
 	end, 0.2)
@@ -168,5 +165,3 @@ UnlockWatcher = c.new(function(event)
 	end)
 end):start()
 
---------------------------------------------------------------------------------
-return M

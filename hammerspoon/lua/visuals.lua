@@ -49,4 +49,8 @@ function M.holeCover(arg)
 end
 
 --------------------------------------------------------------------------------
+-- initialize on system start
+if not u.isReloading() then M.holeCover() end
+
+--------------------------------------------------------------------------------
 return M
