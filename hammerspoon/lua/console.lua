@@ -19,11 +19,6 @@ cons.toolbar(nil)
 cons.consoleFont(baseFont)
 hs.consoleOnTop(false)
 
--- suppress useless console msgs
--- reduce hotkey enable/disable-logging https://github.com/Hammerspoon/hammerspoon/issues/3491
-hs.hotkey.setLogLevel(0) ---@diagnostic disable-line: undefined-field
-hs.application.enableSpotlightForNameSearches(false)
-
 --------------------------------------------------------------------------------
 
 ---filter console entries, removing logging for enabling/disabling hotkeys,
