@@ -3,15 +3,15 @@ local s = {
 	emojis = { name = "emoji", keyword_length = 2 },
 	nerdfont = { name = "nerdfont", keyword_length = 2 },
 	buffer = { name = "buffer", keyword_length = 3 },
-	fuzzybuffer = { name = "fuzzy_buffer", max_item_count = 5 },
+	fuzzybuffer = { name = "fuzzy_buffer" },
 	path = { name = "path" },
 	zsh = { name = "zsh" },
 	codeium = { name = "codeium" },
 	snippets = { name = "luasnip" },
 	lsp = { name = "nvim_lsp" },
 	treesitter = { name = "treesitter" },
-	cmdline_history = { name = "cmdline_history", keyword_length = 2, max_item_count = 8 },
-	cmdline = { name = "cmdline", max_item_count = 8 },
+	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
+	cmdline = { name = "cmdline" },
 }
 local source_icons = {
 	treesitter = "",
