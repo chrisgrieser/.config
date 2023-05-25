@@ -29,7 +29,7 @@ I = hs.inspect
 ---@return boolean isReloading
 function M.isReloading()
 	local _, isReloading = hs.execute("test -f /tmp/hs-is-reloading")
-	return isReloading ~= true
+	return isReloading ~= nil
 end
 
 ---Whether the current time is between startHour & endHour. Also works for
