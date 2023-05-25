@@ -10,7 +10,6 @@ Pandoc
 Longform
 disabled
 Frontmatter
-as
 callout
 Dataview
 callouts
@@ -36,7 +35,6 @@ bufferline
 blazingly
 Cycler
 allows
-As
 cycler
 neovim
 config
@@ -55,5 +53,8 @@ textobject
 keymaps
 keymap
 Using
+netrw
 dedenting
 keymappings
+copypaste
+treesitter
