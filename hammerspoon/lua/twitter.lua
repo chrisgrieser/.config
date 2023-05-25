@@ -78,8 +78,6 @@ local function twitterToTheSide()
 	win:raise()
 end
 
---------------------------------------------------------------------------------
-
 local function showHideTwitter(referenceWin)
 	local twitter = u.app("Twitter")
 	if not twitter or not referenceWin then return end
@@ -90,7 +88,13 @@ local function showHideTwitter(referenceWin)
 	end
 end
 
--- TWITTER: fixed size to the side, with the sidebar hidden
+--------------------------------------------------------------------------------
+-- TRIGGERS
+
+-- once on system startup or reload
+twitterScrollUp()
+
+-- fixed size to the side, with the sidebar hidden
 TwitterWatcher = u.aw
 	.new(function(appName, event)
 		if appName == "CleanShot X" or appName == "Alfred" then return end

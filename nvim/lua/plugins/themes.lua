@@ -19,7 +19,7 @@ local darkThemes = {
 }
 
 g.darkTransparency = 0.91
-g.lightTransparency = 0.92
+g.lightTransparency = 0.9
 
 --------------------------------------------------------------------------------
 

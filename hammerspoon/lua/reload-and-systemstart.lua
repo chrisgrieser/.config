@@ -8,14 +8,13 @@ local visuals = require("lua.visuals")
 
 --------------------------------------------------------------------------------
 
--- trigger `hammerspoon://hs-reload` for reloading via nvim (filetype-config: lua.lua)
 local reloadIndicator = "/tmp/hs-is-reloading"
+
+-- trigger `hammerspoon://hs-reload` for reloading via nvim (filetype-config: lua.lua)
 u.urischeme("hs-reload", function()
 	hs.execute("touch " .. reloadIndicator)
 	hs.reload()
 end)
-
-local _, isReloading = hs.execute("[[ -e " .. reloadIndicator .. " ]]")
 
 -- DO ON RELOAD
 if isReloading then
@@ -28,7 +27,6 @@ end
 visuals.holeCover()
 periphery.batteryCheck("SideNotes")
 layouts.selectLayout()
-u.app("TextPal"):mainWindow():close()
 
 -- with delay, to avoid importing duplicate reminders due to reminders
 -- not being synced yet
