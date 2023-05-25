@@ -30,10 +30,8 @@ keymap("n", "g/", function()
 	local replacement = fn.getline("."):match('replace ?%(/.*/.*, ?"(.-)"')
 
 	-- https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
-	local url1 = "https://regex101.com/?regex=" .. pattern .. "&flags=" .. flags
-	if replacement then url1 = url1 .. "&subst=" .. replacement end
-	local url2 = "https://regexper.com/#" .. pattern
+	local url = "https://regex101.com/?regex=" .. pattern .. "&flags=" .. flags
+	if replacement then url = url .. "&subst=" .. replacement end
 
-	os.execute("open '" .. url1 .. "'") -- opening method on macOS
-	os.execute("open '" .. url2 .. "'")
+	os.execute("open '" .. url .. "'") -- opening method on macOS
 end, { desc = "Open next js regex in regex101", buffer = true })
