@@ -183,6 +183,7 @@ lspSettings.ltex = {
 			["en-US"] = {
 				"EN_QUOTES", -- don't expect smart quotes
 				"WHITESPACE_RULE", -- often false positives
+				"PUNCTUATION_PARAGRAPH_END" -- often false positives
 			},
 		},
 		diagnosticSeverity = {
