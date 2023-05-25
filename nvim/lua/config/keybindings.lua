@@ -73,9 +73,6 @@ keymap("n", "<Esc>", function()
 end, { desc = "Clear Notifications" })
 
 --------------------------------------------------------------------------------
--- MOTIONS
-keymap({ "n", "o", "x" }, "e", '<cmd>lua require("spider").motion("e")<CR>', { desc = "󱇪 e" })
-keymap({ "n", "o", "x" }, "b", '<cmd>lua require("spider").motion("b")<CR>', { desc = "󱇪 b" })
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap({ "o", "x" }, "H", "^")
