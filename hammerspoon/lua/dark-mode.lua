@@ -12,9 +12,6 @@ local visuals = require("lua.visuals")
 -- - Hammerspoon Console
 -- - SideNotes
 local function toggleDarkMode()
-	local sidenotesDark = "City Lights"
-	local sidenotesLight = "Monterey"
-
 	local sketchyfont, sketchybg, toMode, pdfbg, sidenotesTheme
 
 	if u.isDarkMode() then
@@ -22,13 +19,13 @@ local function toggleDarkMode()
 		pdfbg = "Default"
 		sketchybg = "0xffcdcdcd"
 		sketchyfont = "0xff000000"
-		sidenotesTheme = sidenotesLight
+		sidenotesTheme = "City Lights"
 	else
 		toMode = "dark"
 		pdfbg = "Night"
 		sketchybg = "0xff333333"
 		sketchyfont = "0xffffffff"
-		sidenotesTheme = sidenotesDark
+		sidenotesTheme = "Monterey"
 	end
 
 	-- neovim

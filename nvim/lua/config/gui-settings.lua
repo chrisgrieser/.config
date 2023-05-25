@@ -7,7 +7,8 @@ local autocmd = vim.api.nvim_create_autocmd
 -- See hammerspoons `app-hider.lua`
 autocmd("VimEnter", {
 	callback = function()
-		-- hide other apps so the GUI transparency is visible.
+		-- HACK hide other apps for the GUI transparency, done this way since
+		-- hammerspoons app triggers do not correctly pick up neovide
 		fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
 
 		-- HACK to fix neovide sometimes not enlarging the window

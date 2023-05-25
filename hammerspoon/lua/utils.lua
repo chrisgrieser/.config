@@ -16,10 +16,19 @@ M.hyper = { "cmd", "alt", "ctrl", "shift" }
 -- global to inspect tables in the console more quickly
 I = hs.inspect 
 
---------------------------------------------------------------------------------
-
 -- need to catch timers in global vars to ensure they don't get garbage collected
 MyTimers = {}
+
+--------------------------------------------------------------------------------
+
+---differentiate code to be run on reload and code to be run on startup
+---@return nil
+function M.isReloading()
+	local _, isReloading = hs.execute("test -e /tmp/hs-is-reloading")
+	return isReloading
+end
+
+
 
 -- add path for `hs.execute()`
 M.exportPath = [[export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; ]]

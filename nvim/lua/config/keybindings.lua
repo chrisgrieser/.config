@@ -439,7 +439,8 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 -- stylua: ignore start
 keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "Alt Buffer" })
 keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "Next Buffer" })
-keymap("n", "<S-CR>", "<C-w>w", { desc = "Next Window" })
+keymap("n", "<S-CR>", "gt", { desc = "Next Tab" })
+keymap("n", "<C-CR>", "<C-w>w", { desc = "Next Window" })
 
 keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window" })
 keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "reopen last buffer" })
@@ -462,9 +463,6 @@ keymap("n", "<D-d>", function()
 end, { desc = "󰛢 Add File" })
 keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "󰛢 Menu" })
 -- stylua: ignore end
-
--- P[a]th gf needs remapping, since `gf` is used for LSP references
-keymap("n", "ga", "gf", { desc = "Goto Path" })
 
 ------------------------------------------------------------------------------
 
@@ -523,6 +521,9 @@ keymap("x", "<leader>a", cmd.NeoAIContext, { desc = "󰚩 NeoAI Context" })
 
 --------------------------------------------------------------------------------
 -- FILES
+
+-- P[a]th gf needs remapping, since `gf` is used for LSP references
+keymap("n", "ga", "gf", { desc = "Goto Path" })
 
 -- number of harpoon files in the current project
 ---@nodiscard
