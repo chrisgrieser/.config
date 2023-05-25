@@ -7,9 +7,23 @@ local autocmd = vim.api.nvim_create_autocmd
 local keymap = vim.keymap.set
 local expand = vim.fn.expand
 local u = require("config.utils")
+
+--------------------------------------------------------------------------------
+-- REMOTE CONTROL
+
+-- RPC https://neovim.io/doc/user/remote.html
+pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
+vim.fn.serverstart("/tmp/nvim_server.pipe")
+
+-- Set title so external apps like window managers can read the current file path
+opt.title = true
+opt.titlelen = 0 -- do not shorten title
+opt.titlestring = '%{expand("%:p")}'
+
 --------------------------------------------------------------------------------
 
 -- DIRECTORIES
+-- move to custom location where they are synced independently from the dotfiles repo
 opt.directory:prepend(u.vimDataDir .. "swap//")
 opt.undodir:prepend(u.vimDataDir .. "undo//")
 opt.viewdir = u.vimDataDir .. "view"
@@ -54,11 +68,6 @@ opt.spelllang = "en_us" -- still used for `z=` and `1z=`
 -- Split
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
-
--- Set title so external apps can read the current file path
-opt.title = true
-opt.titlelen = 0 -- do not shorten title
-opt.titlestring = '%{expand("%:p")}'
 
 -- Workspace
 opt.cursorline = true
@@ -259,5 +268,3 @@ for _, ft in pairs(ftWithSkeletons) do
 		end,
 	})
 end
-
---------------------------------------------------------------------------------

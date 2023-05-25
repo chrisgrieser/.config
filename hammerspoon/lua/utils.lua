@@ -1,4 +1,6 @@
 local M = {}
+
+MyTimers = {} -- need to catch timers in global vars to ensure they don't get garbage collected
 --------------------------------------------------------------------------------
 
 -- shorthands
@@ -13,23 +15,21 @@ M.tbl_contains = hs.fnutils.contains
 -- bound to capslock via Karabiner elements
 M.hyper = { "cmd", "alt", "ctrl", "shift" }
 
+-- add path for `hs.execute()`
+M.exportPath = [[export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; ]]
+
 -- global to inspect tables in the console more quickly
 I = hs.inspect
 
--- need to catch timers in global vars to ensure they don't get garbage collected
-MyTimers = {}
-
 --------------------------------------------------------------------------------
 
----differentiate code to be run on reload and code to be run on startup
+---differentiate code to be run on reload and code to be run on startup.
+---dependent on the setup in `reload.lua`
 ---@return boolean isReloading
 function M.isReloading()
-	local _, isReloading = hs.execute("test -e /tmp/hs-is-reloading")
-	return isReloading ~= nil
+	local _, isReloading = hs.execute("test -f /tmp/hs-is-reloading")
+	return isReloading ~= true
 end
-
--- add path for `hs.execute()`
-M.exportPath = [[export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; ]]
 
 ---Whether the current time is between startHour & endHour. Also works for
 ---ranges that go beyond midnight, e.g. 23 to 6.
@@ -64,18 +64,6 @@ function M.writeToFile(filePath, str)
 	local file, err = io.open(filePath, "w")
 	if file then
 		file:write(str)
-		file:close()
-	else
-		print("Error:", err)
-	end
-end
-
----@param filePath string line(s) to add
----@param str string
-function M.appendToFile(filePath, str)
-	local file, err = io.open(filePath, "a")
-	if file then
-		file:write(str .. "\n")
 		file:close()
 	else
 		print("Error:", err)
@@ -135,15 +123,6 @@ function M.screenIsUnlocked()
 		'[[ "$(/usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)")" != "true" ]] && exit 0 || exit 1'
 	)
 	return success == true -- convert to Boolean
-end
-
----@nodiscard
----whether device has been idle
----@param mins number Time idle
----@return boolean
-function M.idleMins(mins)
-	local minutesIdle = hs.host.idleTime() / 60
-	return minutesIdle > mins
 end
 
 ---Send Notification, accepting any number of arguments of any type. Converts

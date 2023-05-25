@@ -19,13 +19,13 @@ local function toggleDarkMode()
 		pdfbg = "Default"
 		sketchybg = "0xffcdcdcd"
 		sketchyfont = "0xff000000"
-		sidenotesTheme = "City Lights"
+		sidenotesTheme = "Monterey"
 	else
 		toMode = "dark"
 		pdfbg = "Night"
 		sketchybg = "0xff333333"
 		sketchyfont = "0xffffffff"
-		sidenotesTheme = "Monterey"
+		sidenotesTheme = "City Lights"
 	end
 
 	-- neovim

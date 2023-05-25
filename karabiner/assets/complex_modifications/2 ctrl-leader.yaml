@@ -290,6 +290,6 @@ rules:
         from: { key_code: spacebar }
         conditions: [*leader-active]
         to:
-          - { key_code: f17 } # triggers textpal
+          - { key_code: spacebar, modifiers: [control, command] }
           - *deactivate-leader
           - *remove-notice

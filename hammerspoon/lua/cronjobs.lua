@@ -75,11 +75,20 @@ local function closeFullscreenSpaces()
 	end
 end
 
+---@nodiscard
+---whether device has been idle
+---@param mins number Time idle
+---@return boolean
+local function idleMins(mins)
+	local minutesIdle = hs.host.idleTime() / 60
+	return minutesIdle > mins
+end
+
 -- between 1:30 and 6:00, check every half hour if device has been idle for 30
 -- minutes. if so, quit video apps and related things.
 SleepTimer = hs.timer
 	.doEvery(1800, function()
-		if not (u.betweenTime(1.5, 6) and u.idleMins(30) and u.screenIsUnlocked()) then return end
+		if not (u.betweenTime(1.5, 6) and idleMins(30) and u.screenIsUnlocked()) then return end
 		u.notify("💤 SleepTimer triggered.")
 
 		-- no need to quit IINA since it autoquits

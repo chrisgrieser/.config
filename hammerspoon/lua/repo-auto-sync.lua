@@ -7,21 +7,19 @@ local u = require("lua.utils")
 ---@return boolean success
 local function gitDotfileSync()
 	local gitDotfileScript = env.dotfilesFolder .. "git-dotfile-sync.sh"
-
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
-	if not (u.screenIsUnlocked()) then return true end -- prevent standby home device background sync when in office
+	if not (u.screenIsUnlocked()) then return false end -- prevent standby home device background sync when in office
 
 	GitDotfileSyncTask = hs.task
 		.new(gitDotfileScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
 				print("🔵 Dotfiles Sync")
-				return
+			else
+				u.notify("🔵⚠️️ Dotfiles Sync: " .. stdErr)
 			end
-			u.notify("🔵⚠️️ Dotfiles Sync: " .. stdErr)
 		end)
 		:start()
 
-	if not GitDotfileSyncTask then return false end
 	return true
 end
 
@@ -29,39 +27,37 @@ end
 local function gitVaultSync()
 	local gitVaultScript = env.vaultLocation .. "Meta/git-vault-sync.sh"
 	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return false end
-	if not (u.screenIsUnlocked()) then return true end -- prevent of standby home device background sync when in office
+	if not (u.screenIsUnlocked()) then return false end -- prevent of standby home device background sync when in office
 
 	GitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
 				print("🟪 Vault Sync")
-				return
+			else
+				u.notify("🟪⚠️️ Vault Sync: " .. stdErr)
 			end
-			u.notify("🟪⚠️️ Vault Sync: " .. stdErr)
 		end)
 		:start()
 
-	if not GitVaultSyncTask then return false end
 	return true
 end
 
 ---@return boolean
 local function gitPassSync()
 	local gitPassScript = env.passwordStore .. "pass-sync.sh"
-	if GitPassSyncTask and GitPassSyncTask:isRunning() then return true end
-	if not u.screenIsUnlocked() then return true end -- prevent of standby home device background sync when in office
+	if GitPassSyncTask and GitPassSyncTask:isRunning() then return false end
+	if not u.screenIsUnlocked() then return false end -- prevent of standby home device background sync when in office
 
 	GitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
 			if exitCode == 0 then
 				print("🔑 Password-Store Sync")
-				return
+			else
+				u.notify("🔑⚠️️ Password-Store Sync: " .. stdErr)
 			end
-			u.notify("🔑⚠️️ Password-Store Sync: " .. stdErr)
 		end)
 		:start()
 
-	if not GitPassSyncTask then return false end
 	return true
 end
 
@@ -74,7 +70,7 @@ local function syncAllGitRepos(notify)
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
 	if not (success1 and success2 and success3) then
-		u.notify("⚠️️ Sync Error")
+		print("Sync not triggered.")
 		return
 	end
 
@@ -99,9 +95,7 @@ end
 if not u.isReloading() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
-RepoSyncTimer = hs.timer
-	.doEvery(30 * 60, function() syncAllGitRepos(false) end)
-	:start()
+RepoSyncTimer = hs.timer.doEvery(30 * 60, function() syncAllGitRepos(false) end):start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
 u.urischeme("sync-repos", function()
@@ -119,7 +113,7 @@ SleepWatcher = hs.caffeinate.watcher
 			or event == c.systemDidWake
 			or event == c.screensDidWake
 		then
-			syncAllGitRepos(true)
+			u.runWithDelays(1, function() syncAllGitRepos(true) end)
 		end
 	end)
 	:start()
@@ -131,4 +125,3 @@ MorningSyncTimer = hs.timer
 		if env.isAtHome then syncAllGitRepos(false) end
 	end)
 	:start()
-
