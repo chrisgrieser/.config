@@ -84,7 +84,7 @@ end
 -- INITIALIZE
 -- with delay, to avoid importing duplicate reminders due to reminders
 -- not being synced yet
-if env.isAtOffice then
+if env.isAtOffice and not u.isReloading() then
 	u.runWithDelays(15, function()
 		moveOfficeNotesToBase()
 		M.reminderToSidenotes()

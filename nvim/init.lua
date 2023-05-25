@@ -35,6 +35,3 @@ safeRequire("config.clipboard")
 
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
-
--- enable remote control of neovide's nvim instance https://neovim.io/doc/user/remote.html
-vim.fn.serverstart("/tmp/nvim_server.pipe")
