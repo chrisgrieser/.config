@@ -11,10 +11,10 @@ M.urischeme = hs.urlevent.bind
 M.tbl_contains = hs.fnutils.contains
 
 -- bound to capslock via Karabiner elements
-M.hyper = { "cmd", "alt", "ctrl", "shift" } 
+M.hyper = { "cmd", "alt", "ctrl", "shift" }
 
 -- global to inspect tables in the console more quickly
-I = hs.inspect 
+I = hs.inspect
 
 -- need to catch timers in global vars to ensure they don't get garbage collected
 MyTimers = {}
@@ -22,13 +22,11 @@ MyTimers = {}
 --------------------------------------------------------------------------------
 
 ---differentiate code to be run on reload and code to be run on startup
----@return nil
+---@return boolean isReloading
 function M.isReloading()
 	local _, isReloading = hs.execute("test -e /tmp/hs-is-reloading")
-	return isReloading
+	return isReloading ~= nil
 end
-
-
 
 -- add path for `hs.execute()`
 M.exportPath = [[export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; ]]
