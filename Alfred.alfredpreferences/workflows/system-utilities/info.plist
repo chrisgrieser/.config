@@ -1937,7 +1937,7 @@ echo -n "iCloud Sync"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>875</real>
+			<real>895</real>
 			<key>ypos</key>
 			<real>905</real>
 		</dict>
