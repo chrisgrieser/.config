@@ -794,11 +794,13 @@ keymap("x", "<leader>tt", cmd.ToggleTermSendVisualSelection, { desc = "  R
 keymap("n", "<leader>tl", function()
 	-- supported languages: https://github.com/0x100101/lab.nvim#languages
 	local ftmaps = { lua = "lua", javascript = "js", typescript = "ts", python = "py" }
-	cmd.edit("󰙨 Lab." .. ftmaps[bo.filetype])
+
+	cmd.edit("/tmp/󰙨 Lab." .. ftmaps[bo.filetype])
 	cmd.write()
 	cmd("Lab code run")
+
 	keymap("n", "<leader>r", "<cmd>Lab code run<CR>", { desc = "󰙨 Run Code", buffer = true })
-	keymap("n", "<leader>tl", "<cmd>Lab code stop<CR>", { desc = "󰙨 Stop Lab", buffer = true })
+	keymap("n", "<leader>tl", "<cmd>Lab code run<CR>", { desc = "󰙨 Run Code", buffer = true })
 end, { desc = "󰙨 Lab (REPL)" })
 
 -- edit embedded filetype

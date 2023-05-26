@@ -257,11 +257,15 @@ local ftWithSkeletons = vim.split(filetypeList, "\n", {})
 
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
-	local readCmd = "keepalt 0r " .. skeletonDir .. "/skeleton." .. ft .. " | normal! G"
+	local readCmd = "keepalt 0r " .. skeletonDir .. "/skeleton." .. ft
 
 	autocmd("BufNewFile", {
 		pattern = "*." .. ft,
-		command = readCmd,
+		callback = function()
+			if expand("%:t") == "󰙨 Lab.js" then return end
+			cmd(readCmd)
+			u.normal("G")
+		end,
 	})
 
 	-- BufReadPost + empty file as additional condition to also auto-insert
@@ -269,9 +273,11 @@ for _, ft in pairs(ftWithSkeletons) do
 	autocmd("BufReadPost", {
 		pattern = "*." .. ft,
 		callback = function()
-			local curFile = expand("%")
-			local fileIsEmpty = fn.getfsize(curFile) < 4 -- to account for linebreak weirdness
-			if fileIsEmpty then cmd(readCmd) end
+			local fileIsEmpty = fn.getfsize(expand("%")) < 4 -- to account for linebreak weirdness
+			if not fileIsEmpty then return end
+
+			cmd(readCmd)
+			u.normal("G")
 		end,
 	})
 end

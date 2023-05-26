@@ -29,7 +29,8 @@
 	},
 	"linter": {
 		"ignore": [
-			"*globals.d.ts"
+			"*globals.d.ts",
+			"󰙨 Lab.js"
 		],
 		"rules": {
 			"all": true,

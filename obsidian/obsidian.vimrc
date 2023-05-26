@@ -303,6 +303,12 @@ nmap <F1> :togglefold
 " nmap ,l :linkjump
 
 """"""""""""""""""""""
+" Move selection to new file (nvim-genghis)
+""""""""""""""""""""""
+exmap selectionToNewFile obcomamnd templater-obsidian:Meta/Templater/>_Create_Related_Note.md
+vmap X :selectionToNewFile
+
+""""""""""""""""""""""
 " Substitute
 """"""""""""""""""""""
 " poor man's substitute.nvim 🥲
