@@ -1,5 +1,4 @@
 #!/bin/zsh
-# shellcheck disable=SC2012
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 # INFO https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
@@ -49,14 +48,18 @@ done
 # download subtitles for all files in that folder
 subliminal download --language "$SUB_LANG" "$NEW_FOLDER"
 
+sleep 0.5
+
 # if no subtitle, move up
+# shellcheck disable=2012
 FILES_IN_FOLDER=$(ls "$NEW_FOLDER" | wc -l | tr -d " ")
 if [[ $FILES_IN_FOLDER -eq 1 ]]; then
 	mv "$NEW_FOLDER"/* "$VIDEO_DIR"
 	rmdir "$NEW_FOLDER"
 fi
 
-# quit Transmission, if there are no other torrents active
 sleep 0.5
+
+# quit Transmission, if there are no other torrents active
 torrent_active=$(transmission-remote --list | grep -v "ID" | grep -v "Sum:")
 [[ -z "$torrent_active" ]] && killall "Transmission"

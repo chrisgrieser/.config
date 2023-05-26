@@ -1,14 +1,15 @@
--- https://pandoc.org/lua-filters.html#setting-the-date-in-the-metadata
+-- based on: https://pandoc.org/lua-filters.html#setting-the-date-in-the-metadata
 
-function Meta(m)
+function Meta(metadata)
 	-- do not set the date if it already has been set in the metadata
-	if m.date then return end
+	if metadata.date then return end
 
-	-- select date format based on document language
+	-- select date format based on document language, defaulting to English
 	local germanFormat = "%d. %B %Y" 
 	local englishFormat = "%B %e, %Y"
-	local format = m.lang:find("de") and germanFormat or englishFormat 
+	local lang = metadata.lang
+	local format = (lang and lang:find("^de")) and germanFormat or englishFormat 
 
-	m.date = os.date(format)
-	return m
+	metadata.date = os.date(format)
+	return metadata
 end
