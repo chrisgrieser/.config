@@ -2,30 +2,26 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-const alfredMatcher = (str) => str.replace (/[-()_/.]/g, " ") + " " + str + " ";
-
-String.prototype.capitalizeWords = function () {
-	return this.replace(/\w+/g, word => word.charAt(0).toUpperCase() + word.slice(1));
-};
+const alfredMatcher = (/** @type {string} */ str) => str.replace (/[-()_/.]/g, " ") + " " + str + " ";
 
 //------------------------------------------------------------------------------
 
-const workArray = JSON.parse(app.doShellScript('curl -s "https://api.github.com/repos/marcusolsson/obsidian-plugin-docs/git/trees/main?recursive=1"'))
+const sourceURL = "https://api.github.com/repos/obsidianmd/obsidian-developer-docs/git/trees/main?recursive=1";
+const baseURL = "https://docs.obsidian.md/"
+
+const workArray = JSON.parse(app.doShellScript(`curl -sL ${sourceURL}`))
 	.tree
-	.filter(file => file.path.startsWith("docs/"))
-	.filter(file => file.path.endsWith(".md"))
+	.filter((/** @type {{ path: string; }} */ file) => file.path.startsWith("en/") && file.path.endsWith(".md"))
 	.map(file => {
 		const subsitePath = file.path.slice(5, -3);
 
 		const displayTitle = subsitePath
 			.replace(/.*\//, "") // show only file name
-			.capitalizeWords()
 			.replaceAll("-", " ");
 
 		const category = subsitePath
 			.replace(/(.*)\/.*/, "$1") // only parent
 			.replaceAll ("/", " → ") // nicer tree
-			.capitalizeWords()
 			.replaceAll("-", " ");
 
 		return {

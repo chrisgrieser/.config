@@ -5916,7 +5916,7 @@ echo "$backup"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/obsi-marcus-doc-search.js</string>
+				<string>scripts/obsi-developer-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
