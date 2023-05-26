@@ -267,6 +267,16 @@ local function filetypeCompletionConfig()
 		},
 	})
 
+	-- vimscript (e.g., obsidian.vimrc)
+	cmp.setup.filetype("vim", {
+		sources = cmp.config.sources {
+			s.snippets,
+			s.treesitter,
+			s.codeium,
+			s.buffer,
+		},
+	})
+
 	-- plaintext
 	cmp.setup.filetype("text", {
 		sources = cmp.config.sources {
