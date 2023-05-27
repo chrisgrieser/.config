@@ -737,8 +737,6 @@ spt play --device="$*"</string>
 	<key>readme</key>
 	<string>Requires the [Spotify-TUI](https://github.com/Rigellute/spotify-tui).
 
-Alternative: https://github.com/hrkfdn/ncspot
-
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
