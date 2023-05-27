@@ -1,16 +1,15 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 #───────────────────────────────────────────────────────────────────────────────
 # GENERAL CONFIGS
 CONFIG_FILES=(
 	load_plugins
+	zsh-autocomplete-settings
+	# fzf_tab_settings
 	general_and_plugin_configs
 	terminal_utils
 	terminal_keybindings
 	vi_mode
 	aliases
 	history_config
-	# fzf_tab_settings
 	docs_man
 	git_github
 	homebrew
@@ -34,6 +33,3 @@ else
 	# https://stackoverflow.com/a/69915614
 	printf '\33c\e[3J'
 fi
-
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
