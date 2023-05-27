@@ -9,6 +9,7 @@ export SAVEHIST=$HISTSIZE
 
 # so it isn't saved in the dotfile repo (privacy), but still synced
 export HISTFILE="$DATA_DIR/zsh_history"
+export HIST_DATE_FORMAT='%a %d.%m %H:%M   ' # custom, defined by me
 
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
@@ -20,24 +21,6 @@ setopt HIST_VERIFY
 setopt EXTENDED_HISTORY
 
 #───────────────────────────────────────────────────────────────────────────────
-
-export HIST_DATE_FORMAT='%a %d.%m %H:%M   ' # custom, defined by me
-
-# SEARCH HISTORY FOR A COMMAND
-# enter ➞ write to buffer (without sending)
-# alt+enter ➞ copy to clipboard
-
-DATE_CHAR_COUNT=$(date "+$HIST_DATE_FORMAT" | wc -m | tr -d " ")
-TO_CUT=$((DATE_CHAR_COUNT + 2))
-function hs {
-	SELECTED=$(
-		history -t "$HIST_DATE_FORMAT" 1 | cut -c8- | fzf \
-			--tac --no-sort \
-			--no-info \
-			--query "$*" \
-			--height=60%
-	)
-	[[ -z "$SELECTED" ]] && return 0
-	COMMAND=$(echo "$SELECTED" | cut -c"$TO_CUT"-)
-	print -z "$COMMAND" # print to buffer
-}
+# LOAD ATUIN
+eval "$(atuin init zsh)"
+# to use custom atuin keybindings: https://atuin.sh/docs/config/key-binding
