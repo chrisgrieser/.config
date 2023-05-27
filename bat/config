@@ -15,4 +15,4 @@
 
 # Possible values: *default*, full, auto, plain, changes, header,
 # header-filename, header-filesize, grid, rule, numbers, snip.
---style="snip"
+--style="numbers,changes"

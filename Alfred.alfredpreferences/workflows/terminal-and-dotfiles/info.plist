@@ -258,8 +258,10 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 		</dict>
 		<key>513485E1-D0BB-4CA4-8442-69C6609CB548</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
 			<key>note</key>
-			<string>bound via Karabiner</string>
+			<string>leader-t via Karabiner</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
