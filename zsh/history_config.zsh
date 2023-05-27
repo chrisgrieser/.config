@@ -17,10 +17,3 @@ setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_VERIFY
 setopt EXTENDED_HISTORY
-
-#───────────────────────────────────────────────────────────────────────────────
-# LOAD ATUIN
-# `--disable-up-arrow` https://atuin.sh/docs/config/key-binding
-
-# eval "$(atuin init zsh)"
-eval "$(atuin init zsh --disable-up-arrow)"
