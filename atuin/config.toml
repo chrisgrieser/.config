@@ -12,14 +12,8 @@ filter_mode = "session"
 
 ## possible values: auto, full, compact
 # style = "auto"
-
-## the maximum number of lines the interface should take up
-## set it to 0 to always go full screen
-inline_height = 15
-
-## enable or disable showing a preview of the selected command
-## useful when the command is longer than the terminal width and is cut off
 # show_preview = true
+inline_height = 15
 
 ## what to do when the escape key is pressed when searching
 ## possible values: return-original, return-query
@@ -33,7 +27,6 @@ scroll_context_lines = 3
 ## with ^ or end with $, they'll match anywhere in the command.
 ## For details on the supported regular expression syntax, see
 ## https://docs.rs/regex/latest/regex/#syntax
-# history_filter = [
-#   "^secret-cmd",
-#   "^innocuous-cmd .*--secret=.+"
-# ]
+history_filter = [
+	"^inspect$",
+]

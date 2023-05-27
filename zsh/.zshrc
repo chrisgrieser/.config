@@ -2,8 +2,7 @@
 # GENERAL CONFIGS
 CONFIG_FILES=(
 	load_plugins
-	zsh-autocomplete-settings
-	# fzf_tab_settings
+	completion_settings
 	general_and_plugin_configs
 	terminal_utils
 	terminal_keybindings
