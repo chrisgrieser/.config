@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 #───────────────────────────────────────────────────────────────────────────────
 # GENERAL CONFIGS
 CONFIG_FILES=(
@@ -8,7 +10,7 @@ CONFIG_FILES=(
 	vi_mode
 	aliases
 	history_config
-	fzf_tab_settings
+	# fzf_tab_settings
 	docs_man
 	git_github
 	homebrew
@@ -31,5 +33,7 @@ else
 	# remove last login message that some terminals leave 
 	# https://stackoverflow.com/a/69915614
 	printf '\33c\e[3J'
-fi 
+fi
 
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
