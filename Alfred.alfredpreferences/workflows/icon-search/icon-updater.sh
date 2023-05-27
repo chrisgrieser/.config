@@ -24,7 +24,7 @@ case $APP in
 	cp -f "$CUSTOM_ICON_FOLDER/Neovim ascii.icns" "$APP.app/Contents/Resources/$APP.icns"
 	;;
 "WezTerm")
-	cp -f "$CUSTOM_ICON_FOLDER/wezterm alt.icns" "$APP.app/Contents/Resources/terminal.icns"
+	cp -f "$CUSTOM_ICON_FOLDER/iTerm.icns" "$APP.app/Contents/Resources/terminal.icns"
 	;;
 "Steam")
 	iconsur set "$APP.app"

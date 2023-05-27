@@ -11,7 +11,7 @@ autoload compinit -Uz +X && compinit
 
 # "fzf-tab needs to be loaded after compinit, but before plugins which will wrap
 # widgets, such as zsh-autosuggestions or fast-syntax-highlighting"
-source "$DOTFILE_FOLDER/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+# source "$DOTFILE_FOLDER/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 # INFO `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 source "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
