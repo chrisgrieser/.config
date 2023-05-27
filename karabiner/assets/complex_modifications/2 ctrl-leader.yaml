@@ -25,12 +25,7 @@ anchors:
       - &set-notice
         set_notification_message:
           id: leader-notice
-          text: |
-            🔺 Leader
-            ssssssssss
-            ssssssssssss
-            ssssssssssss
-
+          text: 🔺 Leader
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "🔺 L-Ctrl"
@@ -46,7 +41,7 @@ rules:
           - *activate-leader
           - *set-notice
         parameters: { basic.to_if_alone_timeout_milliseconds: 200 }
-      - description: "2x Leader: F19"
+      - description: "2x Leader: Filehub in Alfred"
         type: basic
         from: { key_code: left_control }
         to:
@@ -54,7 +49,7 @@ rules:
         conditions:
           - *leader-active
         to_if_alone:
-          - key_code: f19
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "filehub" in workflow "de.chris-grieser.finder"'
           - *deactivate-leader
           - *remove-notice
       # Cancel (Hyper/Esc)
@@ -135,7 +130,7 @@ rules:
         from: { key_code: t }
         conditions: [*leader-active]
         to:
-          - shell_command: osascript -e 'tell application "Neovide" to activate'
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "terminal" in workflow "de.chris-grieser.terminal-dotfiles"'
           - *deactivate-leader
           - *remove-notice
       # [S]lack
@@ -146,7 +141,7 @@ rules:
           - shell_command: open -a 'Slack'
           - *deactivate-leader
           - *remove-notice
-      # [q]: Script Editor 
+      # [q]: Script Editor
       - type: basic
         from: { key_code: q }
         conditions: [*leader-active]
@@ -176,7 +171,8 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Vivaldi'
-          - {key_code: t, modifiers: [command, shift]}
+          - {key_code: vk_none, hold_down_milliseconds: 200}
+          - { key_code: t, modifiers: [command, shift] }
           - *deactivate-leader
           - *remove-notice
       # [f]: Finder: Open $WD / $DOTFILE_FOLDER
