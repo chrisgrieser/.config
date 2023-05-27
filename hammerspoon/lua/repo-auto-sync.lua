@@ -104,18 +104,16 @@ u.urischeme("sync-repos", function()
 end)
 
 -- 4. when going to sleep or when unlocking
-SleepWatcher = hs.caffeinate.watcher
+SleepWatcherForRepoSync = hs.caffeinate.watcher
 	.new(function(event)
+		if true then return end
 		local c = hs.caffeinate.watcher
-		if
-			event == c.screensDidLock
+		local lockOrSleep = event == c.screensDidLock
 			or event == c.screensDidSleep
 			or event == c.screensDidUnlock
 			or event == c.systemDidWake
 			or event == c.screensDidWake
-		then
-			syncAllGitRepos(true)
-		end
+		if lockOrSleep then syncAllGitRepos(true) end
 	end)
 	:start()
 

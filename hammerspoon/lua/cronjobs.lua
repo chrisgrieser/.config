@@ -64,6 +64,7 @@ BiweeklyTimer = hs.timer
 	:start()
 
 --------------------------------------------------------------------------------
+-- SLEEP TIMER
 
 local function closeFullscreenSpaces()
 	local allSpaces = hs.spaces.allSpaces()
