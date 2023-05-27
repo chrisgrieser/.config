@@ -6,22 +6,19 @@
 bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
 bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 
-# ignore input on first few chars
-zstyle ':autocomplete:*' ignored-input '*##'
-
 #───────────────────────────────────────────────────────────────────────────────
 
-# case insensitive path-completion 
+# case insensitive path-completion
 # https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# colorful completions 
+# colorful completions
 # https://thevaluable.dev/zsh-completion-guide-examples/
 zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
-zstyle ':completion:*:messages' format ' %F{blue} -- %d --%f'
-# zstyle ':completion:*:warnings' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{blue}-- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{yellow}-- %d --%f'
 
 # FIX for whatever reason, LS_COLORS is not being set, so setting it here with
 # default colors from: https://askubuntu.com/a/1278597
@@ -29,4 +26,3 @@ export LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 
 # shellcheck disable=SC2086,SC2296
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-

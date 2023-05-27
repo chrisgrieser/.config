@@ -1,4 +1,4 @@
-title: "🔺 CTRL Leader"
+title: "🔺 App Leader"
 anchors:
   - conditions:
       - &leader-active
@@ -28,16 +28,26 @@ anchors:
           text: 🔺 Leader
 #───────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: "🔺 L-Ctrl"
-    manipulators:
+  - manipulators:
       - type: basic
-        from: { key_code: left_control }
+        from: { key_code: right_command }
         to:
-          - key_code: left_control
+          - key_code: right_command
         conditions:
           - *leader-inactive
         to_if_alone:
-          - key_code: left_control
+          # - key_code: right_command
+          - *activate-leader
+          - *set-notice
+        parameters: { basic.to_if_alone_timeout_milliseconds: 200 }
+      - type: basic
+        from: { key_code: left_command }
+        to:
+          - key_code: left_command
+        conditions:
+          - *leader-inactive
+        to_if_alone:
+          # - key_code: left_command
           - *activate-leader
           - *set-notice
         parameters: { basic.to_if_alone_timeout_milliseconds: 200 }

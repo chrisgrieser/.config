@@ -1,7 +1,9 @@
 /* https://forum.vivaldi.net/topic/16684/inspecting-the-vivaldi-ui-with-devtools */
 /* based on https://forum.vivaldi.net/topic/34187/merge-tabs-and-address-bar/61?lang=en-US&page=4 */
-/* stylelint-disable selector-max-id, custom-property-pattern  */
+/* stylelint-disable selector-max-id, custom-property-pattern */
 /* ────────────────────────────────────────────────────────────────────────── */
+
+/* changing tab width depending on number of tabs */
 :root {
 	--adressbar-focussed-width: 99.5vw; /* only applied from 4+ tabs on */
 	--adressbar-width-1-tab: 80vw;
