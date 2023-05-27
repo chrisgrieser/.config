@@ -106,7 +106,7 @@ end)
 -- 4. when going to sleep or when unlocking
 SleepWatcherForRepoSync = hs.caffeinate.watcher
 	.new(function(event)
-		if true then return end
+		if env.isProjector() then return end
 		local c = hs.caffeinate.watcher
 		local lockOrSleep = event == c.screensDidLock
 			or event == c.screensDidSleep
