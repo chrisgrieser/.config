@@ -8,7 +8,7 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	"loctvl842/monokai-pro.nvim",
+	{ "loctvl842/monokai-pro.nvim", config = { filter = "ristretto" } },
 	-- "rebelot/kanagawa.nvim",
 	-- "folke/tokyonight.nvim",
 	-- "glepnir/zephyr-nvim",
