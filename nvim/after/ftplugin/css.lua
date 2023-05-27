@@ -52,7 +52,7 @@ if expand("%:t") == "source.css" then
 			cmd([[silent! lgrep "^\s*--" %]]) -- riggrep-search for css variables
 			require("telescope.builtin").loclist {
 				prompt_title = "CSS Variables",
-				prompt_prefix = " ",
+				prompt_prefix = "󰀫 ",
 			}
 		end, { desc = "Search CSS Variables", buffer = true })
 	end, 300)

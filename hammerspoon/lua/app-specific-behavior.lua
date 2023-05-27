@@ -59,14 +59,14 @@ Wf_browser = wf.new("Vivaldi")
 			"^Task Manager$",
 			"^Developer Tools", -- when inspecting websites
 			"^DevTools",
-			"^$", -- when inspecting Vivaldi UI, are titled "^$" on creation
+			"^$", -- when inspecting Vivaldi UI, devtools are titled "^$" on creation
 		},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
 	:subscribe(wf.windowCreated, function()
 		wu.autoTile(Wf_browser)
-		-- u.runWithDelays({ 0.2, 0.5 }, function() u.closeTabsContaining("chrome://vivaldi-webui") end)
+		u.runWithDelays({ 0.2, 0.5 }, function() u.closeTabsContaining("chrome://vivaldi-webui") end)
 	end)
 	:subscribe(wf.windowDestroyed, function() wu.autoTile(Wf_browser) end)
 	:subscribe(wf.windowFocused, wu.bringAllWinsToFront)
@@ -85,16 +85,13 @@ Wf_browser_all = wf.new({ "Vivaldi" })
 
 ---half -> hide right sidebar
 ---pseudo-maximized -> show right sidebar
----max -> show both sidebars
+---max -> hide right sidebars (assuming split)
 Wf_ObsidanMoved = u.wf.new("Obsidian"):subscribe(u.wf.windowMoved, function(obsiWin)
 	if #u.app("Obsidian"):allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
 
 	local relObsiWinWidth = obsiWin:size().w / obsiWin:screen():frame().w
-	local modeRight = (relObsiWinWidth > 0.6) and "expand" or "collapse"
-	local modeLeft = (relObsiWinWidth > 0.99) and "expand" or "collapse"
-
+	local modeRight = (relObsiWinWidth > 0.6 and relObsiWinWidth < 0.99) and "expand" or "collapse"
 	u.openLinkInBg("obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29")
-	u.openLinkInBg("obsidian://advanced-uri?eval=this.app.workspace.leftSplit." .. modeLeft .. "%28%29")
 end)
 
 --------------------------------------------------------------------------------

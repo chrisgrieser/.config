@@ -1,8 +1,6 @@
 # Homebrew Setup
 if [[ $(uname -p) == "arm" ]]; then
-	# M1 Mac
-	eval "$(/opt/homebrew/bin/brew shellenv)"
+	eval "$(/opt/homebrew/bin/brew shellenv)" # M1 Mac
 else
-	# Intel mac
-	eval "$(/usr/local/bin/brew shellenv)"
+	eval "$(/usr/local/bin/brew shellenv)" # Intel mac
 fi

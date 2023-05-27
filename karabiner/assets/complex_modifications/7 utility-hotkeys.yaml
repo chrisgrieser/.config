@@ -140,28 +140,6 @@ rules:
               - ^com\.vivaldi\.Vivaldi$
               - ^com\.apptorium\.SideNotes-paddle$
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "⚒️ f+j (simultaneously): ↵"
-    manipulators:
-      - type: basic
-        from:
-          simultaneous:
-            - key_code: f
-            - key_code: j
-        parameters: { basic.simultaneous_threshold_milliseconds: 100 }
-        to:
-          - key_code: return_or_enter
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "⚒️ R-⌘ (tap): go to end of line"
-    manipulators:
-      - type: basic
-        from: { key_code: right_command }
-        to:
-          - key_code: right_command
-        parameters: { basic.to_if_alone_timeout_milliseconds: 200 }
-        to_if_alone:
-          - { key_code: e, modifiers: [control] }
-
-  #─────────────────────────────────────────────────────────────────────────────
   - description: "⚒️ {}@^~|: German to US layout"
     manipulators:
       # Curly Brace {
