@@ -21,7 +21,7 @@ source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # has to be loaded *after* zsh syntax highlighting
-source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+# source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 # Magic enter
 source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"

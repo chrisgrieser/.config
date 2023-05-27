@@ -81,18 +81,8 @@ function separator() {
 }
 
 function fzf-folder() {
-	if ! command -v fzf &>/dev/null; then printf "\033[1;33mfzf not installed.\033[0m" && return 1; fi
-	if ! command -v fg &>/dev/null; then printf "\033[1;33mfg not installed.\033[0m" && return 1; fi
 
 	# shellcheck disable=2016
-	selected=$(fd --hidden --type=directory --color=always |
-		fzf -0 \
-			--ansi \
-			--query="$1" \
-			--height=70% \
-			--preview 'exa -1 --icons --git {}')
-	[[ -z "$selected" ]] && return 0 # fzf aborted
-	__zoxide_z "$selected"
 	inspect
 }
 
@@ -103,19 +93,21 @@ function fzf-folder() {
 function z() {
 	local query="$1"
 	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
-	if [[ -z "$query" ]]; then
-		fzf-folder
-		return
-	fi
-	[[ -f "$query" ]] && query="$(dirname "$1")"
-	__zoxide_z "$query" &>/dev/null
 
-	# shellcheck disable=2181
-	if [[ $? -eq 0 ]]; then
-		inspect
-	else
-		fzf-folder "$query"
+	if [[ -z "$query" ]]; then
+		if ! command -v fzf &>/dev/null; then printf "\033[1;33mfzf not installed.\033[0m" && return 1; fi
+		if ! command -v fd &>/dev/null; then printf "\033[1;33mfd not installed.\033[0m" && return 1; fi
+		selected=$(fd --hidden --type=directory --color=always |
+			fzf -0 \
+				--ansi \
+				--query="$1" \
+				--height=70% \
+				--preview 'exa -1 --icons --git {}')
+		[[ -z "$selected" ]] && return 0 # fzf aborted
+	elif [[ -f "$query" ]]; then
+		query="$(dirname "$1")"
 	fi
+	__zoxide_z "$query" && inspect
 
 }
 
@@ -146,11 +138,12 @@ function eject() {
 	fi
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	# if one volume, will auto-eject due to `-1`
-	selected=$(echo "$volumes" |
-		fzf -0 -1 \
-			--no-info \
-			--height=30%
-		)
+	selected=$(
+		echo "$volumes" |
+			fzf -0 -1 \
+				--no-info \
+				--height=30%
+	)
 	[[ -z "$selected" ]] && return 0 # fzf aborted
 	diskutil eject "$selected"
 }
