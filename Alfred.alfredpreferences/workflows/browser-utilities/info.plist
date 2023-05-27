@@ -19,6 +19,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>63F03F46-45FD-48E5-8042-85546E6830B0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CB8861B8-A675-40C2-BA6B-943C7F8E0867</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>64E7E716-0427-41F0-844C-90D39ACC9152</key>
 		<array>
 			<dict>
@@ -129,6 +142,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CC1C31B7-31D7-489D-BDF4-B68BE14336D4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>63F03F46-45FD-48E5-8042-85546E6830B0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -175,29 +201,6 @@
 			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>skip-paywall.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>97E52210-B26B-49B3-AC6D-65A1235A88C9</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -251,6 +254,48 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>skip-paywall.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>97E52210-B26B-49B3-AC6D-65A1235A88C9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>B7B82F1A-97F8-490C-B4A4-5589FA869579</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -289,25 +334,6 @@
 			<string>D909DE7E-1D08-42B3-B048-039BDE823F44</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>B7B82F1A-97F8-490C-B4A4-5589FA869579</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -439,6 +465,68 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>re-open-last-tab</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>CC1C31B7-31D7-489D-BDF4-B68BE14336D4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># get first URL from JSON
+# has to be done in Alfred, since Alfred environment variables are needed
+
+./py3.sh chrom_history.py "" | sed -n 14p | cut -d'"' -f4</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>63F03F46-45FD-48E5-8042-85546E6830B0</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{var:url}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>CB8861B8-A675-40C2-BA6B-943C7F8E0867</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -504,6 +592,13 @@
 			<real>305</real>
 			<key>ypos</key>
 			<real>270</real>
+		</dict>
+		<key>63F03F46-45FD-48E5-8042-85546E6830B0</key>
+		<dict>
+			<key>xpos</key>
+			<real>745</real>
+			<key>ypos</key>
+			<real>555</real>
 		</dict>
 		<key>64E7E716-0427-41F0-844C-90D39ACC9152</key>
 		<dict>
@@ -602,6 +697,22 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>240</real>
+		</dict>
+		<key>CB8861B8-A675-40C2-BA6B-943C7F8E0867</key>
+		<dict>
+			<key>xpos</key>
+			<real>895</real>
+			<key>ypos</key>
+			<real>555</real>
+		</dict>
+		<key>CC1C31B7-31D7-489D-BDF4-B68BE14336D4</key>
+		<dict>
+			<key>note</key>
+			<string>backup for when browser history search workflow updates</string>
+			<key>xpos</key>
+			<real>590</real>
+			<key>ypos</key>
+			<real>555</real>
 		</dict>
 		<key>D909DE7E-1D08-42B3-B048-039BDE823F44</key>
 		<dict>

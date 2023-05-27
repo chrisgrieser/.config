@@ -170,9 +170,7 @@ rules:
         from: { key_code: b, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'Vivaldi'
-          - {key_code: vk_none, hold_down_milliseconds: 200}
-          - { key_code: t, modifiers: [command, shift] }
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "re-open-last-tab" in workflow "com.apple.alfred.workflow.chromium-hist"'
           - *deactivate-leader
           - *remove-notice
       # [f]: Finder: Open $WD / $DOTFILE_FOLDER
