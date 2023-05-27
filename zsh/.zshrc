@@ -2,8 +2,8 @@
 # GENERAL CONFIGS
 CONFIG_FILES=(
 	load_plugins
-	completion_settings
 	general_and_plugin_configs
+	fzf_tab_settings
 	terminal_utils
 	terminal_keybindings
 	vi_mode
