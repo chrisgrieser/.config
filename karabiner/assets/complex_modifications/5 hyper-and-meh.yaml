@@ -38,49 +38,6 @@ rules:
               - "[Nn]eovide" # allow repeats for quicker completion selection
               - "wezterm-gui" # ^
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "*️⃣ ⇪ Open Locations"
-    manipulators:
-      # Hyper + ⌫ = Open Trash
-      - type: basic
-        from: { key_code: delete_or_backspace, modifiers: { mandatory: [command, control, shift, option] } }
-        to:
-          - shell_command: | # opens the unified trash (iCloud trash + user trash)
-              osascript -e'
-                tell application "Finder"
-                  activate
-                  open the trash
-                end tell
-                tell application "System Events" to tell process "Finder"
-                  set frontmost to true
-                  click menu item "as List" of menu "View" of menu bar 1
-                end tell
-                '
-      # Hyper + F: Open $WD / $DOTFILE_FOLDER
-      - type: basic
-        from: { key_code: f, modifiers: { mandatory: [command, control, shift, option] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                set home to POSIX path of (path to home folder as string)
-                set wd to (home & "Library/Mobile Documents/com~apple~CloudDocs/File Hub/")
-                set dotfile_folder to (home & ".config/")
-                tell application "Finder"
-                  launch
-                  set toOpen to (wd as POSIX file)
-                  if (front window exists) then
-                    if frontmost then
-                      set current_path to POSIX path of (target of front window as alias)
-                      if (current_path is wd) then set toOpen to (dotfile_folder as POSIX file)
-                    else
-                      activate
-                    end if
-                    set target of front Finder window to toOpen
-                  else
-                    activate
-                    open toOpen
-                  end if
-                end tell'
-  #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪R: Restart App"
     manipulators:
       - type: basic
@@ -165,7 +122,7 @@ rules:
       #─────────────────────────────────────────────────────────────────────
 
       # SYSDIAGNOSIS 
-      # disable accidental triggering of via `Hyper+.` and `Hyper+,`. 
+      # HACK disable accidental triggering of via `Hyper+.` and `Hyper+,`. 
       # Needs different versions to disable it for variants from quick typing
       - type: basic
         from: { key_code: period, modifiers: { mandatory: [command, control, shift, option] } }
