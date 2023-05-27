@@ -6,6 +6,3 @@ else
 	# Intel mac
 	eval "$(/usr/local/bin/brew shellenv)"
 fi
-
-# Completions for Homebrew, https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"

@@ -1,9 +1,8 @@
-#───────────────────────────────────────────────────────────────────────────────
-# GENERAL CONFIGS
 CONFIG_FILES=(
 	load_plugins
 	general_and_plugin_configs
-	fzf_tab_settings
+	# fzf_tab_settings
+	completion_settings
 	terminal_utils
 	terminal_keybindings
 	vi_mode
@@ -21,7 +20,6 @@ for config_file in "${CONFIG_FILES[@]}"; do
 done
 
 #───────────────────────────────────────────────────────────────────────────────
-# TERMINAL SPECIFIC
 
 if [[ "$TERM_PROGRAM" == "WezTerm" ]] ; then
 	# shell integration for wezterm 
