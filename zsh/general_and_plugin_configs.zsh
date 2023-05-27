@@ -21,8 +21,6 @@ export YSU_MESSAGE_POSITION="after"
 
 # fd
 # HACK fixes for `fd` colors when using a light terminal bg https://github.com/sharkdp/fd/issues/1031#issuecomment-1325716744
-export EXA_COLORS="$LS_COLORS" # so exa does not loose it's colors (`man exa_colors`)
-# export LS_COLORS=''
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --hidden'
