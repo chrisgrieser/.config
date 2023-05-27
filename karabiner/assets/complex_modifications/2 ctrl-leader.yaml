@@ -25,7 +25,12 @@ anchors:
       - &set-notice
         set_notification_message:
           id: leader-notice
-          text: "🔺 Leader"
+          text: |
+            🔺 Leader
+            ssssssssss
+            ssssssssssss
+            ssssssssssss
+
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "🔺 L-Ctrl"
@@ -63,7 +68,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "App Switcher Actions"
     manipulators:
-      # [C]alendar: BusyCal
+      # [c]alendar: BusyCal
       - type: basic
         from: { key_code: c }
         conditions: [*leader-active]
@@ -117,9 +122,17 @@ rules:
           - shell_command: open -a 'zoom.us'
           - *deactivate-leader
           - *remove-notice
-      # [E]ditor: Neovide
+      # [n]eovide
       - type: basic
-        from: { key_code: e }
+        from: { key_code: "n" }
+        conditions: [*leader-active]
+        to:
+          - shell_command: osascript -e 'tell application "Neovide" to activate'
+          - *deactivate-leader
+          - *remove-notice
+      # [t]erminal
+      - type: basic
+        from: { key_code: t }
         conditions: [*leader-active]
         to:
           - shell_command: osascript -e 'tell application "Neovide" to activate'
@@ -133,7 +146,7 @@ rules:
           - shell_command: open -a 'Slack'
           - *deactivate-leader
           - *remove-notice
-      # Script Editor [Q]
+      # [q]: Script Editor 
       - type: basic
         from: { key_code: q }
         conditions: [*leader-active]
@@ -141,7 +154,7 @@ rules:
           - shell_command: open -a 'Script Editor'
           - *deactivate-leader
           - *remove-notice
-      # [M]imestream
+      # [m]imestream
       - type: basic
         from: { key_code: m }
         conditions: [*leader-active]
@@ -149,7 +162,7 @@ rules:
           - shell_command: open -a 'Mimestream'
           - *deactivate-leader
           - *remove-notice
-      # [B]rowser
+      # [b]rowser
       - type: basic
         from: { key_code: b }
         conditions: [*leader-active]
@@ -157,15 +170,62 @@ rules:
           - shell_command: open -a 'Vivaldi'
           - *deactivate-leader
           - *remove-notice
-      # [L]: Finder (mnemonic: File [L]ocation)
+      # [B]rowser & re-open last tab (shift)
       - type: basic
-        from: { key_code: l }
+        from: { key_code: b, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a "Finder"
+          - shell_command: open -a 'Vivaldi'
+          - {key_code: t, modifiers: [command, shift]}
           - *deactivate-leader
           - *remove-notice
-      # [H]ammerspoon
+      # [f]: Finder: Open $WD / $DOTFILE_FOLDER
+      - type: basic
+        from: { key_code: f }
+        conditions: [*leader-active]
+        to:
+          - *deactivate-leader
+          - *remove-notice
+          - shell_command: |
+              osascript -e '
+                set home to POSIX path of (path to home folder as string)
+                set wd to (home & "Library/Mobile Documents/com~apple~CloudDocs/File Hub/")
+                set dotfile_folder to (home & ".config/")
+                tell application "Finder"
+                  launch
+                  set toOpen to (wd as POSIX file)
+                  if (front window exists) then
+                    if frontmost then
+                      set current_path to POSIX path of (target of front window as alias)
+                      if (current_path is wd) then set toOpen to (dotfile_folder as POSIX file)
+                    else
+                      activate
+                    end if
+                    set target of front Finder window to toOpen
+                  else
+                    activate
+                    open toOpen
+                  end if
+                end tell'
+      # ⌫ = Open Trash
+      - type: basic
+        from: { key_code: delete_or_backspace }
+        conditions: [*leader-active]
+        to:
+          - *deactivate-leader
+          - *remove-notice
+          - shell_command: | # opens the unified trash (iCloud trash + user trash)
+              osascript -e'
+                tell application "Finder"
+                  activate
+                  open the trash
+                end tell
+                tell application "System Events" to tell process "Finder"
+                  set frontmost to true
+                  click menu item "as List" of menu "View" of menu bar 1
+                end tell
+                '
+      # [h]ammerspoon console
       - type: basic
         from: { key_code: h }
         conditions: [*leader-active]
@@ -181,7 +241,7 @@ rules:
           - shell_command: open -a 'Karabiner-EventViewer'
           - *deactivate-leader
           - *remove-notice
-      # [K]arabiner-Elements
+      # [K]arabiner-Elements (shift)
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
@@ -189,7 +249,7 @@ rules:
           - shell_command: open -a 'Karabiner-Elements'
           - *deactivate-leader
           - *remove-notice
-      # [Y]ouTube
+      # [y]ouTube
       - type: basic
         from: { key_code: z } # switched y and z due to German Keyboard
         conditions: [*leader-active]
@@ -197,7 +257,7 @@ rules:
           - shell_command: open -a 'YouTube' || open 'https://www.youtube.com/'
           - *deactivate-leader
           - *remove-notice
-      # [A]lfred Preferences
+      # [a]lfred Preferences
       - type: basic
         from: { key_code: a }
         conditions: [*leader-active]
@@ -205,7 +265,7 @@ rules:
           - shell_command: open -a 'Alfred Preferences'
           - *deactivate-leader
           - *remove-notice
-      # [N]ews Reader (RSS)
+      # [i]noreader
       - type: basic
         from: { key_code: "n" }
         conditions: [*leader-active]
@@ -245,33 +305,33 @@ rules:
           - shell_command: open -a 'Activity Monitor'
           - *deactivate-leader
           - *remove-notice
-      # [W]hatsApp
+      # [W]hatsApp (shift)
       - type: basic
-        from: { key_code: w }
+        from: { key_code: w, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
           - shell_command: open 'https://web.whatsapp.com/'
           - *deactivate-leader
           - *remove-notice
-      # [I]nstagram
+      # [I]nstagram (shift)
       - type: basic
-        from: { key_code: i }
+        from: { key_code: i, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
           - shell_command: open 'https://www.instagram.com/direct/t/340282366841710301281160592483616662553'
           - *deactivate-leader
           - *remove-notice
-      # [T]elegram
+      # [T]elegram (shift)
       - type: basic
-        from: { key_code: t }
+        from: { key_code: t, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
           - shell_command: open 'https://web.telegram.org/z/'
           - *deactivate-leader
           - *remove-notice
-      # [F]acebook
+      # [F]acebook (shift)
       - type: basic
-        from: { key_code: f }
+        from: { key_code: f, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
           - shell_command: open 'https://www.messenger.com/'
