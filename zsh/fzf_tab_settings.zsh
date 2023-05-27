@@ -1,16 +1,7 @@
 # shellcheck disable=2016
-
 #───────────────────────────────────────────────────────────────────────────────
-
 # https://github.com/Aloxaf/fzf-tab#configure
 # https://github.com/Aloxaf/fzf-tab/wiki/Configuration
-#───────────────────────────────────────────────────────────────────────────────
-# SORT
-# enable/disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-
-# enable/disable sort when completing options of any command
-zstyle ':completion:complete:*:options' sort true
 
 #───────────────────────────────────────────────────────────────────────────────
 # GROUPS
