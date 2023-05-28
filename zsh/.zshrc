@@ -1,8 +1,7 @@
 CONFIG_FILES=(
 	load_plugins
 	general_and_plugin_configs
-	# fzf_tab_settings
-	completion_settings
+	fzf_tab_settings
 	terminal_utils
 	terminal_keybindings
 	vi_mode
@@ -15,18 +14,15 @@ CONFIG_FILES=(
 )
 
 for config_file in "${CONFIG_FILES[@]}"; do
-	# shellcheck disable=1090
 	source "$DOTFILE_FOLDER/zsh/$config_file.zsh"
 done
 
 #───────────────────────────────────────────────────────────────────────────────
 
 if [[ "$TERM_PROGRAM" == "WezTerm" ]] ; then
-	# shell integration for wezterm 
-	# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
+	# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh shell integration for wezterm 
 	source "$DOTFILE_FOLDER/zsh/semantic_prompts.sh"
 else
-	# remove last login message that some terminals leave 
-	# https://stackoverflow.com/a/69915614
+	# https://stackoverflow.com/a/69915614 remove last login message that some terminals leave 
 	printf '\33c\e[3J'
 fi
