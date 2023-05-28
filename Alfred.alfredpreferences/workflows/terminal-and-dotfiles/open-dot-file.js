@@ -11,6 +11,8 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 // using `fd` over `find` for speed and gitignoring
+/** @param {any[]} argv */
+// rome-ignore lint/correctness/noUnusedVariables: <explanation>
 function run(argv) {
 	const dotfileFolder = argv[0];
 
@@ -22,20 +24,17 @@ function run(argv) {
 
 	const fileArray = app
 		.doShellScript(
-			`cd "${dotfileFolder}"
-		fd --type=file --hidden --absolute-path \\
-			-E "*.icns" \\
-			-E "*.plist" \\
-			-E "*.png" \\
-			-E ".git"`,
+			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
+			fd --type=file --hidden --absolute-path \\
+			-E "*.icns" -E "*.plist" -E "*.png" -E ".git"`,
 		)
 		.split("\r")
-		/* eslint-disable-next-line complexity */
 		.map(absPath => {
 			const name = absPath.split("/").pop();
 			const relPath = absPath.slice(dotfileFolder.length);
-			const relativeParentFolder = relPath.slice(0, -(name.length + 1));
+			const relativeParentFolder = relPath.slice(0, -name.length);
 
+			// dirty?
 			const fileIsDirty = dirtyFiles.includes(relPath);
 			const dirtyIcon = fileIsDirty ? " ✴️" : "";
 			let matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
@@ -102,27 +101,23 @@ function run(argv) {
 
 	const folderArray = app
 		.doShellScript(
-			` PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-		cd "${dotfileFolder}" ;
-		fd --type=directory --hidden \\
-		-E ".git"`,
+			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
+			fd "gpg" --absolute-path --type=directory --hidden -E ".git"`,
 		)
 		.split("\r")
-		.map(file => {
-			const fPath = dotfileFolder + file;
-			const parts = file.slice(0, -1).split("/");
-			const name = parts.pop();
-			let parentPart = fPath.replace(/\/Users\/.*?\.config\/(.*\/).*$/, "$1");
-			if (parentPart === ".") parentPart = "";
+		.map(absPath => {
+			const name = absPath.slice(0, -1).split("/").pop();
+			const relPath = absPath.slice(dotfileFolder.length);
+			const relativeParentFolder = relPath.slice(0, -(name.length + 1));
 
 			return {
 				title: name,
-				subtitle: "▸ " + parentPart,
+				subtitle: "▸ " + relativeParentFolder,
 				match: alfredMatcher(name) + " folder",
-				icon: { type: "fileicon", path: fPath },
+				icon: { type: "fileicon", path: absPath },
 				type: "file:skipcheck",
-				uid: fPath,
-				arg: fPath,
+				uid: absPath,
+				arg: absPath,
 			};
 		});
 
@@ -142,6 +137,5 @@ function run(argv) {
 	//──────────────────────────────────────────────────────────────────────────────
 
 	const jsonArray = [...fileArray, ...folderArray, pwFolder];
-	if (jsonArray.length === 0) jsonArray.push({ title: "No file in the current Folder found." });
 	return JSON.stringify({ items: jsonArray });
 }

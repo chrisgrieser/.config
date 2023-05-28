@@ -233,6 +233,21 @@ omap ic i{
 omap rg G
 omap rp {
 
+vmap am aW
+vmap im iW
+vmap aq a"
+vmap iq i"
+vmap az a'
+vmap iz i'
+vmap ae a`
+vmap ie i`
+vmap ir i[
+vmap ar a[
+vmap ac a{
+vmap ic i{
+vmap rg G
+vmap rp {
+
 """"""""""""""""""""""
 " Surround
 """"""""""""""""""""""
@@ -248,18 +263,27 @@ exmap surround_curly_brackets surround { }
 exmap surround_underscore surround __ __
 exmap surround_asterisk surround * *
 
-" NOTE: must use 'map' and not 'nmap'
 nunmap s
+nmap sR :surround_wiki
+nmap sq :surround_double_quotes
+nmap sy :surround_single_quotes
+nmap se :surround_backticks
+nmap sb :surround_brackets
+nmap sr :surround_square_brackets
+nmap sc :surround_curly_brackets
+nmap sa :surround_asterisk
+nmap su :surround_underscore
+
 vunmap s
-map sR :surround_wiki
-map sq :surround_double_quotes
-map sy :surround_single_quotes
-map se :surround_backticks
-map sb :surround_brackets
-map sr :surround_square_brackets
-map sc :surround_curly_brackets
-map sa :surround_asterisk
-map su :surround_underscore
+vmap sR :surround_wiki
+vmap sq :surround_double_quotes
+vmap sy :surround_single_quotes
+vmap se :surround_backticks
+vmap sb :surround_brackets
+vmap sr :surround_square_brackets
+vmap sc :surround_curly_brackets
+vmap sa :surround_asterisk
+vmap su :surround_underscore
 
 """"""""""""""""""""""
 " Substitute
