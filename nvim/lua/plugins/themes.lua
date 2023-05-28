@@ -4,6 +4,9 @@ local g = vim.g
 -- INFO only the first theme will be used
 local lightThemes = {
 	"EdenEast/nightfox.nvim",
+	"savq/melange",
+	{ "catppuccin/nvim", name = "catppuccin" },
+	"sainnhe/edge",
 	-- { "rose-pine/neovim", name = "rose-pine" },
 }
 
