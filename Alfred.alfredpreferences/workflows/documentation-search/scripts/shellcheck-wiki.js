@@ -3,18 +3,17 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-const baseURL = "https://www.shellcheck.net/wiki/";
+const baseURL = "http://www.shellcheck.net/wiki/";
 
 //──────────────────────────────────────────────────────────────────────────────
 
 const ahrefRegex = /.*?href='(.*?)'>.*?<\/a>(.*?)(<\/li>|$)/i;
-const jsonArr = [];
 
-app
+const jsonArr = app
 	.doShellScript(`curl -sL '${baseURL}'`)
 	.split("\r")
 	.slice(3, -1)
-	.forEach((/** @type {string} */ line) => {
+	.map((/** @type {string} */ line) => {
 		const subsite = line.replace(ahrefRegex, "$1");
 		if (subsite === "</li>") return;
 		const desc = line.replace(ahrefRegex, "$2").replaceAll("&ndash;", "").trim();
@@ -25,13 +24,13 @@ app
 		const hasNumber = subsite.match(/\d{4}$/);
 		if (hasNumber) matcher += " " + hasNumber[0].toString();
 
-		jsonArr.push({
+		return {
 			title: subsite,
 			subtitle: desc,
 			match: matcher,
 			arg: url,
 			uid: url,
-		});
+		};
 	});
 
 JSON.stringify({ items: jsonArr });

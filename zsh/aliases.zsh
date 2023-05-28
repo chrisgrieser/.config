@@ -48,6 +48,12 @@ alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
 
+# SUFFIX Alias
+# shellcheck disable=2139
+alias -s {yml,yaml}=jq
+alias -s {gif,png,jpg,jpeg,webp}='qlmanage -p'
+
+
 # GLOBAL ALIAS (to be used at the end, mostly)
 alias -g H="--help"
 alias -g G="| grep --ignore-case --color"
