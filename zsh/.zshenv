@@ -3,10 +3,10 @@ export EDITOR=nvim
 export PAGER="less -RF"
 
 # Directories
-export DOTFILE_FOLDER="$HOME/.config/"
-export VAULT_PATH="$HOME/main-vault/"
-export PASSWORD_STORE_DIR="$HOME/.password-store/" # default value, but still needed for bkp script
-export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+export DOTFILE_FOLDER="$HOME/.config"
+export VAULT_PATH="$HOME/main-vault"
+export PASSWORD_STORE_DIR="$HOME/.password-store" # default value, but still needed for bkp script
+export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder" 
 export LOCAL_REPOS="$HOME/Repos"
 

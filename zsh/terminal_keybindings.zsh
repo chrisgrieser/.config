@@ -13,16 +13,12 @@ bindEverywhere "^B" copy-buffer # wezterm: cmd+b
 bindEverywhere "^Z" undo # wezterm: cmd+z
 bindEverywhere "…" insert-last-word # …=alt+.
 
-# [f]orward to $EDITOR
-autoload edit-command-line
-zle -N edit-command-line
-bindEverywhere "^F" edit-command-line
-
-# accept ghost text from zsh-autosugget
-bindEverywhere "^[[Z" autosuggest-accept
+bindEverywhere '^[[A' history-substring-search-up # up/down: history substring search
+bindEverywhere '^[[B' history-substring-search-down 
+bindEverywhere "^[[Z" autosuggest-accept # shift-tab: accept ghost text from zsh-autosugget
 
 # ctrl+O (bound to cmd+enter via wezterm): base directories (Mini-Harpoon)
-bindEverywhere "^O" dir-cycler
+bindEverywhere "^O" harpoon
 
 #-------------------------------------------------------------------------------
 # INFO: use ctrl-v and then a key combination to get the shell binding
@@ -43,14 +39,14 @@ copy-buffer () {
 }
 zle -N copy-buffer
 
-function dir-cycler () {
-	if [[ "$PWD/" == "$WD" ]]; then
+function harpoon () {
+	if [[ "$PWD" == "$WD" ]]; then
 		cd "$DOTFILE_FOLDER"
-	elif [[ "$PWD/" == "$DOTFILE_FOLDER" ]]; then
+	elif [[ "$PWD" == "$DOTFILE_FOLDER" ]]; then
 		cd "$VAULT_PATH"
 	else
 		cd "$WD"
 	fi
 	zle reset-prompt
 }
-zle -N dir-cycler
+zle -N harpoon
