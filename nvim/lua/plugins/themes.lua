@@ -3,6 +3,7 @@ local g = vim.g
 
 -- INFO only the first theme will be used
 local lightThemes = {
+	{ "marko-cerovac/material.nvim", init = function() vim.g.material_style = "lighter" end, config = { lualine_style = "stealth" } },
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- { "rose-pine/neovim", name = "rose-pine" },
 }
