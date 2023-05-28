@@ -33,7 +33,7 @@ function getNoteObjAndFolder(noteId) {
 				};
 		}
 	}
-	return {};
+	return null;
 }
 
 const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
@@ -42,17 +42,18 @@ const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]
 
 /** @param {string[]} argv */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred
-function  run(argv) {
+function run(argv) {
 	const query = argv[0] || "";
 	const sidenotes = Application("SideNotes");
 
 	const ignoredFolder = $.getenv("ignored_folder");
-	const currentFolder = sidenotes.currentFolder() ? sidenotes.currentFolder().name() : "";
+	const baseFolder = $.getenv("base_folder");
 
 	const results = sidenotes
 		.searchNotes(query)
 		.map((/** @type {{ identifier: string; title: string; details: string; }} */ item) => {
 			const temp = getNoteObjAndFolder(item.identifier);
+			if (!temp) return;
 			const foldername = temp.folder;
 			const noteObj = temp.noteObj;
 			const content = noteObj.text();
@@ -79,7 +80,7 @@ function  run(argv) {
 			}
 			if (icon !== "") icon += " "; // padding
 
-			const folderSub = foldername === currentFolder ? "" : `[📂 ${foldername}] `;
+			const folderSub = foldername === baseFolder ? "" : `[📂 ${foldername}] `;
 			const subtitle = folderSub + icon + secondLine;
 
 			return {

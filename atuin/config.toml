@@ -1,17 +1,17 @@
 # https://atuin.sh/docs/config/
 #───────────────────────────────────────────────────────────────────────────────
 
-# sync stuff via icloud
+# sync stuff via iCloud
 db_path = "$DATA_DIR/atuin/history.db"
 key_path = "$DATA_DIR/atuin/key"
 session_path = "$DATA_DIR/atuin/session"
 
 ## possible values: prefix, fulltext, fuzzy, skim
-# search_mode = "fuzzy"
+search_mode = "fuzzy"
 
 ## which filter mode to use
 ## possible values: global, host, session, directory
-filter_mode = "directory"
+filter_mode = "session"
 
 ## possible values: auto, full, compact
 style = "auto"
@@ -24,4 +24,5 @@ inline_height = 15
 ## https://docs.rs/regex/latest/regex/#syntax
 history_filter = [
 	"^inspect$",
+	"^\\.\\.$",
 ]

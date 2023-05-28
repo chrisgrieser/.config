@@ -1428,6 +1428,27 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>Base</string>
+				<key>placeholder</key>
+				<string>Default</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>for new notes</string>
+			<key>label</key>
+			<string>base folder</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>base_folder</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>Shopping</string>
 				<key>placeholder</key>
 				<string>shopping list</string>
@@ -1439,7 +1460,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>description</key>
 			<string>folder to ignore in search, e.g. a shopping lists</string>
 			<key>label</key>
-			<string>ignore folder in search</string>
+			<string>ignore folder</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
