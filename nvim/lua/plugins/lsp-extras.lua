@@ -140,10 +140,4 @@ return {
 			end,
 		},
 	},
-	{
-		"antosha417/nvim-lsp-file-operations",
-		enabled = false, -- wait till properly working: https://github.com/antosha417/nvim-lsp-file-operations/issues/13
-		lazy = true,
-		dependencies = { "nvim-lua/plenary.nvim" },
-	},
 }
