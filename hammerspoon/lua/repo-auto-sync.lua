@@ -2,7 +2,7 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
 --------------------------------------------------------------------------------
--- Repo Sync Setup
+-- REPO SYNC JOBS
 
 ---@return boolean success
 local function gitDotfileSync()
@@ -61,8 +61,6 @@ local function gitPassSync()
 	return true
 end
 
---------------------------------------------------------------------------------
-
 ---sync all three git repos
 ---@param notify boolean
 local function syncAllGitRepos(notify)
@@ -95,7 +93,8 @@ end
 if not u.isReloading() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
-RepoSyncTimer = hs.timer.doEvery(30 * 60, function() syncAllGitRepos(false) end):start()
+RepoSyncMins = 30
+RepoSyncTimer = hs.timer.doEvery(RepoSyncMins * 60, function() syncAllGitRepos(false) end):start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
 u.urischeme("sync-repos", function()
@@ -118,7 +117,7 @@ SleepWatcherForRepoSync = hs.caffeinate.watcher
 	:start()
 
 -- 5. Every morning at 8:00, when at home
--- (safety redundancy to ensure syncs when leaving for the office)
+-- (safety redundancy to ensure sync when leaving for the office)
 MorningSyncTimer = hs.timer
 	.doAt("08:00", "01d", function()
 		if env.isAtHome then syncAllGitRepos(false) end
