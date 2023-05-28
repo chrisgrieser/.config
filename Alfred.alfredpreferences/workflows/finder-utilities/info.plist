@@ -59,19 +59,6 @@
 				<true/>
 			</dict>
 		</array>
-		<key>1F5A3F63-034C-497A-9536-3AB8F7B38F71</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</key>
 		<array>
 			<dict>
@@ -195,6 +182,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CE871C45-C427-4169-83CE-9DBB2F13349A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D32D490E-F78B-4733-A0EC-0672CD8A6E30</key>
 		<array>
 			<dict>
@@ -288,21 +288,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>filehub</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>1F5A3F63-034C-497A-9536-3AB8F7B38F71</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -341,6 +326,37 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>-1</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>double tap</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>CE871C45-C427-4169-83CE-9DBB2F13349A</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -698,6 +714,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>externaltriggerid</key>
+				<string>file-hub-cycle</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -719,25 +754,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>file-hub-cycle</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -924,17 +940,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>540</real>
 		</dict>
-		<key>1F5A3F63-034C-497A-9536-3AB8F7B38F71</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>Karabiner: Double-Leader</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>30</real>
-		</dict>
 		<key>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</key>
 		<dict>
 			<key>colorindex</key>
@@ -1095,6 +1100,13 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>410</real>
 			<key>ypos</key>
 			<real>660</real>
+		</dict>
+		<key>CE871C45-C427-4169-83CE-9DBB2F13349A</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>30</real>
 		</dict>
 		<key>D04D747E-97EE-434F-A844-51FF56BF67F2</key>
 		<dict>
