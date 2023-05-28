@@ -1,0 +1,27 @@
+# https://atuin.sh/docs/config/
+#───────────────────────────────────────────────────────────────────────────────
+
+# sync stuff via icloud
+db_path = "$DATA_DIR/atuin/history.db"
+key_path = "$DATA_DIR/atuin/key"
+session_path = "$DATA_DIR/atuin/session"
+
+## possible values: prefix, fulltext, fuzzy, skim
+# search_mode = "fuzzy"
+
+## which filter mode to use
+## possible values: global, host, session, directory
+filter_mode = "directory"
+
+## possible values: auto, full, compact
+style = "auto"
+inline_height = 15
+
+## prevent commands matching any of these regexes from being written to history.
+## Note that these regular expressions are unanchored, i.e. if they don't start
+## with ^ or end with $, they'll match anywhere in the command.
+## For details on the supported regular expression syntax, see
+## https://docs.rs/regex/latest/regex/#syntax
+history_filter = [
+	"^inspect$",
+]
