@@ -1,31 +1,27 @@
 local M = {}
 --------------------------------------------------------------------------------
--- RETRIEVE CONFIGS FROM ZSHENV
+
+-- RETRIEVE ENVIRONMENT VARS FROM ZSHENV
 -- HACK cannot be done via os.getenv(), since it does not load properly on system
--- startup, so the values are read manually
---------------------------------------------------------------------------------
-
--- ZSHENV
-
----manually read exported environment variables from .zshenv
+-- startup, so the values are read manually .zshenv
 ---@param varname string
 ---@return string varvalue
 local function readZshEnv(varname)
 	local zshenv = os.getenv("HOME") .. "/.zshenv"
-	local varvalue
+	local value
 	for line in io.open(zshenv, "r"):lines() do
 		if line:find(varname) then
-			varvalue = line:match(".*= ?(.*)")
+			value = line:match(".*= ?(.*)")
 			break
 		end
 	end
-	varvalue = varvalue
-		:gsub("$HOME", os.getenv("HOME")) -- resole $HOME
-		:gsub(" ?#.*$", "") -- bash comments
-		:gsub('"', "") -- quotes
-		:gsub(" *$", "") -- trim
-		:gsub("^ *", "")
-	return varvalue
+	value = value
+		:gsub("$HOME", os.getenv("HOME")) -- resolve $HOME
+		:gsub(" ?#.*$", "") -- remove bash comments
+		:gsub('"', "") -- remove quotes
+		:gsub(" *$", "") -- trim 
+		:gsub("^ *", "") -- trim
+	return value
 end
 
 -- stored as global files, so the values are not garbage collected
