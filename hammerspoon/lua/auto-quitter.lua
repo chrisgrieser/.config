@@ -47,6 +47,9 @@ end):start()
 
 ---@param app string name of the app
 local function quit(app)
+	-- don't leave voice call
+	if app == "Discord" and u.appRunning("Steam") then return end
+
 	local suffix = ""
 	if app == "Finder" then
 		for _, win in pairs(u.app("Finder"):allWindows()) do

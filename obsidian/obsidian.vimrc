@@ -234,6 +234,41 @@ omap rg G
 omap rp {
 
 """"""""""""""""""""""
+" Surround
+""""""""""""""""""""""
+" https://github.com/esm7/obsidian-vimrc-support#surround-text-with-surround
+
+exmap surround_wiki surround [[ ]]
+exmap surround_double_quotes surround " "
+exmap surround_single_quotes surround ' '
+exmap surround_backticks surround ` `
+exmap surround_brackets surround ( )
+exmap surround_square_brackets surround [ ]
+exmap surround_curly_brackets surround { }
+exmap surround_underscore surround __ __
+exmap surround_asterisk surround * *
+
+" NOTE: must use 'map' and not 'nmap'
+nunmap s
+vunmap s
+map sR :surround_wiki
+map sq :surround_double_quotes
+map sy :surround_single_quotes
+map se :surround_backticks
+map sb :surround_brackets
+map sr :surround_square_brackets
+map sc :surround_curly_brackets
+map sa :surround_asterisk
+map su :surround_underscore
+
+""""""""""""""""""""""
+" Substitute
+""""""""""""""""""""""
+" poor man's substitute.nvim 🥲
+nmap ss Vp
+nmap S vg$p
+
+""""""""""""""""""""""
 " Tabs, Splits & Alt-file
 """"""""""""""""""""""
 
@@ -307,14 +342,6 @@ nmap <F1> :togglefold
 """"""""""""""""""""""
 exmap selectionToNewFile obcomamnd templater-obsidian:Meta/Templater/>_Create_Related_Note.md
 vmap X :selectionToNewFile
-
-""""""""""""""""""""""
-" Substitute
-""""""""""""""""""""""
-" poor man's substitute.nvim 🥲
-" unmap s
-nmap s VP
-nmap S vg$P
 
 """"""""""""""""""""""
 " Option Toggling
