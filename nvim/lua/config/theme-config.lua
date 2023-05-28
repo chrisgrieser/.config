@@ -110,10 +110,10 @@ local function themeModifications()
 	elseif theme == "oxocarbon" then
 		linkHighlight("FloatTitle", "TelescopePromptTitle")
 		linkHighlight("@function", "@function.builtin")
-	elseif theme:find("monokai") then
-		linkHighlight("GitSignsChange", "@character")
-		linkHighlight("@lsp.type.parameter", "@parameter")
-		linkHighlight("@lsp.type.property", "@constructor")
+	elseif theme == "material" then
+		updateHighlight("@field", "guifg=#666666")
+		updateHighlight("@property", "guifg=#666666")
+		vim.opt.test = "f"
 	elseif theme == "sweetie" and mode == "light" then
 		linkHighlight("ScrollView", "Visual")
 		linkHighlight("NotifyINFOIcon", "@string")
@@ -146,24 +146,11 @@ local function themeModifications()
 		for _, v in pairs(vimModes) do
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
 		end
-	elseif theme == "melange" and mode == "light" then
-		linkHighlight("Todo", "IncSearch")
-		linkHighlight("NonText", "Conceal")
-		linkHighlight("NotifyINFOIcon", "@define")
-		linkHighlight("NotifyINFOTitle", "@define")
-		linkHighlight("NotifyINFOBody", "@define")
 	elseif theme == "rose-pine" and mode == "light" then
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ScrollView", "guibg=#505030")
 		updateHighlight("ColorColumn", "guibg=#eee6dc")
 		updateHighlight("Headline", "gui=bold guibg=#ebe1d5")
-	elseif theme == "oh-lucy" then
-		updateHighlight("Todo", "guifg=#111111")
-		updateHighlight("Error", "gui=NONE") -- no bold
-		updateHighlight("@error", "gui=NONE")
-		updateHighlight("NonText", "gui=NONE")
-		updateHighlight("Visual", "gui=NONE")
-		linkHighlight("@lsp.type.parameter", "@macro") -- fix for semantic hls
 	end
 end
 

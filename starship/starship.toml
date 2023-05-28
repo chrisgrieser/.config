@@ -6,6 +6,7 @@ add_newline = false
 continuation_prompt = "↪️ "
 format = """[$directory\
 ${custom.folder_number}\
+${custom.main_branch}\
 $git_branch\
 $git_status\
 $git_metrics\
@@ -13,13 +14,12 @@ $git_commit\
 $git_state\
 $sudo\
 ](bg:black)\
-[](black)\
 $cmd_duration\
 $status\
 $character\
 """
 
-right_format="""$package\
+right_format = """$package\
 ${custom.alfred}\
 $nodejs\
 $python\
@@ -30,7 +30,7 @@ $memory_usage\
 [character]
 success_symbol = " [󰀘](bold green)"
 error_symbol = " [󰇷](bold red)"
-vimcmd_symbol = " [](bold blue)" # only active when the vi mode cursor shape snippet is off
+vimcmd_symbol = " [](bold blue)"   # only active when the vi mode cursor shape snippet is off
 
 [sudo]
 style = 'fg:green bg:black'
@@ -52,8 +52,8 @@ style = "fg:bright-blue bg:black bold"
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
-".config" = "󱧼 "
-"main-vault" = "󱉼 "
+".config" = " "
+"main-vault" = "󰇈 "
 "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub" = "/󰀶 "
 "~/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
 
@@ -63,7 +63,7 @@ when = "true"
 symbol = " "
 description = "Number of files (and folders) in the current working directory"
 format = '[$symbol$output]($style) '
-style = "fg:yellow bg:black bold"
+style = "fg:208 bg:black bold"
 
 [status]
 format = " [$symbol$status]($style)"
@@ -85,37 +85,32 @@ format = "[$hash]($style) "
 
 # branch
 [git_branch]
-only_attached = false
+only_attached = true
 symbol = ""
 style = "fg:purple bg:black bold"
 format = "[$symbol$branch]($style) "
-ignore_branches=["main"]
+ignore_branches = ["main"]
 
 # since "ignore_branches" fully hides the git_branch component, still showing
-# the symbol when with this
-[custom.branch]
-when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
-# multi-line version somehow does not work
-command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
-os = "macos"
-description = "Version number of Alfred Workflow"
-format = '[󰮤](purple) [ $output](dimmed 208)'
-
+# the symbol 
+[custom.main_branch]
+when = "[[ $(git branch --show-current) == 'main' ]]"
+format = '[](fg:purple bg:black bold) '
 
 # files
 [git_status]
 untracked = '[+$count ](fg:green bg:black)'
 deleted = '[-$count ](fg:red bg:black)'
-modified = '[~$count ](fg:blue bg:black)'
+modified = '[~$count ](fg:yellow bg:black)'
 renamed = '[󰑕 $count ](fg:blue bg:black)'
 staged = '[ $count ](fg:green bg:black)'
 conflicted = '[ $count ](fg:red bg:black)'
 diverged = '[󰓁$count ](fg:red bg:black)'
 ahead = '[⇡$count ](fg:cyan bg:black)'
 behind = '[⇣$count ](fg:yellow bg:black)'
-ignore_submodules=false
 style = 'fg:purple bg:black bold'
 format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
+ignore_submodules = false
 
 # lines
 [git_metrics]
@@ -153,17 +148,18 @@ when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
 command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 os = "macos"
 description = "Version number of Alfred Workflow"
-format = '[󰮤](purple) [ $output](dimmed 208)'
+format = '[󰮤](purple) [ $output]($style)'
+style = "dimmed cyn"
 
 [nodejs]
 format = " [$symbol$version]($style)"
 version_format = "$major"
 style = "dimmed cyan"
-detect_extensions = ["ts"] # dont trigger for JXA
+detect_extensions = ["ts"]            # dont trigger for JXA
 
 [python]
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 version_format = "$major.$minor"
-style = "dimmed yellow"
+style = "dimmed cyan"
 python_binary = ["python3"]
 symbol = " "
