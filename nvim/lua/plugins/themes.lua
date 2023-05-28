@@ -3,10 +3,7 @@ local g = vim.g
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	"EdenEast/nightfox.nvim",
-	"savq/melange",
-	{ "catppuccin/nvim", name = "catppuccin" },
-	"sainnhe/edge",
+	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- { "rose-pine/neovim", name = "rose-pine" },
 }
 
@@ -45,9 +42,6 @@ end
 
 g.lightTheme = getName(lightThemes[1])
 g.darkTheme = getName(darkThemes[1])
-
--- account for special names
-if g.lightTheme == "nightfox" then g.lightTheme = "dawnfox" end
 
 --------------------------------------------------------------------------------
 

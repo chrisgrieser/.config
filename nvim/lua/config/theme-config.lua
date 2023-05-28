@@ -169,18 +169,6 @@ end
 
 --------------------------------------------------------------------------------
 
-autocmd("ColorSchemePre", {
-	callback = function()
-		-- everforest requires change before setting colorscheme
-		local mode = vim.opt.background:get()
-		local theme = g.colors_name
-		if theme == "everforest" and mode == "light" then
-			g.everforest_background = "soft"
-		elseif theme == "everforest" and mode == "dark" then
-			g.everforest_background = "hard"
-		end
-	end,
-})
 autocmd("ColorScheme", {
 	callback = function()
 		-- defer needed for some modifications to properly take effect

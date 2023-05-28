@@ -90,14 +90,13 @@ function gitlog() {
 # brief git log (only last 15)
 function gl() {
 	local cutoff=15
-	gitlog $cutoff
+	gitlog 15
 	# add `(…)` if commits were shortened
 	[[ $(git log --oneline | wc -l) -gt $cutoff ]] && echo "(…)"
 }
 
 # full git log
 function gll() {
-	# append `true` to avoid exit code 141: https://www.ingeniousmalarkey.com/2016/07/git-log-exit-code-141.html
 	gitlog
 }
 
@@ -193,6 +192,7 @@ function pr() {
 
 function gb() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
+	local selected
 
 	selected=$(
 		git branch --all --color | grep -v "HEAD" | fzf \
@@ -219,6 +219,7 @@ function gb() {
 
 function acp() {
 	# safeguard against accidental pushing of large files
+	local NUMBER_LARGE_FILES
 	NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M | wc -l | xargs)
 	if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
 		echo "$NUMBER_LARGE_FILES large file(s) detected, aborting."
@@ -266,7 +267,7 @@ function clone() {
 	inspect
 }
 
-# delete and re-clone git repo (with depth 10)
+# delete and re-clone git repo 
 function nuke {
 	is_submodule=$(git rev-parse --show-superproject-working-tree)
 	if [[ -n "$is_submodule" ]]; then
@@ -284,10 +285,10 @@ function nuke {
 	rm -rvf "$local_repo_path"
 	printf "\033[1;34m-----------------------------------------------\n"
 	echo "Local repo removed."
-	echo "Cloning repo again from remote… (with depth 10)"
+	echo "Cloning repo again from remote… (with depth 5)"
 	printf "-----------------------------------------------\n\033[0m"
 
-	git clone --depth=10 "$SSH_REMOTE" "$local_repo_path" && cd "$local_repo_path" || return 1
+	git clone --depth=5 "$SSH_REMOTE" "$local_repo_path" && cd "$local_repo_path" || return 1
 	separator
 }
 
