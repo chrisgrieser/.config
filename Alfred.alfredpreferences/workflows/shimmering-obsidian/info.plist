@@ -6191,7 +6191,7 @@ fi</string>
 				<key>title</key>
 				<string>Search Obsidian Documentation...</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>0</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>

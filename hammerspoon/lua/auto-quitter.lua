@@ -47,7 +47,8 @@ end):start()
 
 ---@param app string name of the app
 local function quit(app)
-	-- don't leave voice call
+
+	-- don't leave voice call when gaming
 	if app == "Discord" and u.appRunning("Steam") then return end
 
 	local suffix = ""
@@ -58,7 +59,6 @@ local function quit(app)
 		suffix = " (windows closed)"	
 	elseif app == "Hammerspoon" then
 		hs.closeConsole()
-		app = "Hammerspoon"
 		suffix = " (Console)"	
 	elseif app == "wezterm-gui" then
 		u.app(app):kill9() -- needs kill9 to avoid confirmation
