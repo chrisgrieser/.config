@@ -1,3 +1,5 @@
+# shellcheck disable=2139
+
 # z & cd
 alias zz='z -' # back to last dir
 alias .="open ."
@@ -38,7 +40,6 @@ function pip3() {
 
 alias bkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-script.sh"'
 
-
 alias l='exa --all --long --git --icons --group-directories-first --sort=modified'
 alias t='exa --tree --level=4 --icons --git-ignore'
 alias td='exa --only-dirs --tree --level=4 --icons --git-ignore'
@@ -49,10 +50,10 @@ alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
 
 # SUFFIX Alias
-# shellcheck disable=2139
-alias -s {yml,yaml}=jq
+alias -s {yml,yaml}=yq
+alias -s json='yq --prettyPrint --output-format=json --colors '
 alias -s {gif,png,jpg,jpeg,webp}='qlmanage -p'
-
+alias -s {md,lua,js,ts,css,sh,zsh,applescript}=bat
 
 # GLOBAL ALIAS (to be used at the end, mostly)
 alias -g H="--help"
