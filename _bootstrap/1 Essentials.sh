@@ -15,15 +15,31 @@ DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 xcode-select --install # install core CLIs like git for homebrew
 
 # Install Essential Apps
-brew install pinentry-mac pass gnupg # passwords
-brew install --no-quarantine alfred hammerspoon neovim alacritty karabiner-elements vivaldi
+brew install --no-quarantine alfred hammerspoon neovim wezterm karabiner-elements vivaldi
 brew install --no-quarantine --cask neovide
 
 # important settings
 defaults write com.apple.finder CreateDesktop false          # disable desktop icons & make desktop unfocussable
 defaults write com.apple.finder QuitMenuItem -bool true      # Finder quitable
-defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "$DOTFILE_FOLDER/hammerspoon/init.lua"
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# GPG Keys & Passwords
+brew install pinentry-mac pass gnupg 
+defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
+
+gpg --import "$DATA_DIR/Authentication/passwords and gpg/gpg-pass.key"
+ln -sf "$DOTFILE_FOLDER/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
+gpgconf --kill gpg-agent # restart so the new gpg agent is recognized
+find ~/.gnupg -type f -exec chmod 600 {} \;
+find ~/.gnupg -type d -exec chmod 700 {} \;
+
+# FIX for gpg config on Intel Macs with different homebrew path
+if [[ $(uname -p) == "i386" ]]; then
+	mkdir -p /opt/homebrew/bin/
+	ln -sf /usr/local/bin/pinentry-mac /opt/homebrew/bin/pinentry-mac
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # REPOS: Dotfiles, Vault, Passwords
@@ -38,19 +54,6 @@ git clone git@github.com:chrisgrieser/.config.git
 git clone git@github.com:chrisgrieser/main-vault.git
 git clone git@github.com:chrisgrieser/.password-store.git
 
-# GPG Keys
-gpg --import "$DATA_DIR/Authentication/passwords and gpg/gpg-pass.key"
-ln -sf "$DOTFILE_FOLDER/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
-gpgconf --kill gpg-agent # restart so the new gpg agent is recognized
-find ~/.gnupg -type f -exec chmod 600 {} \;
-find ~/.gnupg -type d -exec chmod 700 {} \;
-
-# FIX for gpg config on Intel Macs with different homebrew path
-if [[ $(uname -p) == "i386" ]]; then
-	mkdir -p /opt/homebrew/bin/
-	ln -sf /usr/local/bin/pinentry-mac /opt/homebrew/bin/pinentry-mac
-fi
-
 #───────────────────────────────────────────────────────────────────────────────
 # LOAD CONFIGS (MACKUP)
 
@@ -58,7 +61,8 @@ zsh "$DOTFILE_FOLDER/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 ln -sf "$DOTFILE_FOLDER/mackup/mackup.cfg" ~/.mackup.cfg
 ln -sf "$DOTFILE_FOLDER/mackup/custom-app-configs" ~/.mackup
-brew install mackup && mackup restore
+brew install mackup 
+mackup restore
 
 # prevent apps from overwriting symlink files https://github.com/lra/mackup/issues/1854
 for file in "$DOTFILE_FOLDER"/mackup/backups/Library/Preferences/*; do
