@@ -46,7 +46,7 @@ function inspect() {
 			separator
 		fi
 	fi
-	if [[ $(find . -maxdepth 1 | wc -l) -lt 60 ]]; then
+	if [[ $(find . -maxdepth 1 | wc -l) -lt 50 ]]; then
 		exa --all --icons --sort=name --group-directories-first \
 			--git-ignore --ignore-glob=.DS_Store
 	fi
@@ -87,28 +87,15 @@ function fzf-folder() {
 }
 
 # smarter z/cd
-# - no arg/match: fzf to a subfolder
 # - file: goto directory of file
 # - after entering new folder, inspect it (exa, git log, git status, etc.)
 function z() {
-	local query="$1"
 	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
 
-	if [[ -z "$query" ]]; then
-		if ! command -v fzf &>/dev/null; then printf "\033[1;33mfzf not installed.\033[0m" && return 1; fi
-		if ! command -v fd &>/dev/null; then printf "\033[1;33mfd not installed.\033[0m" && return 1; fi
-		selected=$(fd --hidden --type=directory --color=always |
-			fzf -0 \
-				--ansi \
-				--query="$1" \
-				--height=70% \
-				--preview 'exa -1 --icons --git {}')
-		[[ -z "$selected" ]] && return 0 # fzf aborted
-	elif [[ -f "$query" ]]; then
-		query="$(dirname "$1")"
-	fi
-	__zoxide_z "$query" && inspect
-
+	local query="$1"
+	[[ -f "$query" ]] && query="$(dirname "$1")"
+	__zoxide_z "$query"
+	inspect
 }
 
 function zi() {
@@ -122,10 +109,11 @@ function ld() {
 	last_pwd_location="$DOTFILE_FOLDER/zsh/.last_pwd"
 	if [[ ! -f "$last_pwd_location" ]]; then
 		print "\033[1;33mNo Last PWD available."
-	else
-		last_pwd=$(cat "$DOTFILE_FOLDER/zsh/.last_pwd")
-		z "$last_pwd"
+		return 1
 	fi
+	last_pwd=$(cat "$DOTFILE_FOLDER/zsh/.last_pwd")
+	__zoxide_z "$last_pwd"
+	inspect
 }
 
 # select an external volume to eject
