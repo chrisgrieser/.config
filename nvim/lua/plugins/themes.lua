@@ -3,15 +3,16 @@ local g = vim.g
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	{ "marko-cerovac/material.nvim", init = function() vim.g.material_style = "lighter" end, config = { lualine_style = "stealth" } },
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- { "catppuccin/nvim", name = "catppuccin" },
+	-- { "marko-cerovac/material.nvim", init = function() vim.g.material_style = "lighter" end, config = { lualine_style = "stealth" } },
 	-- { "rose-pine/neovim", name = "rose-pine" },
 }
 
 local darkThemes = {
-	{ "loctvl842/monokai-pro.nvim", config = { filter = "ristretto" } },
+	"folke/tokyonight.nvim",
+	-- { "loctvl842/monokai-pro.nvim", config = { filter = "ristretto" } },
 	-- "rebelot/kanagawa.nvim",
-	-- "folke/tokyonight.nvim",
 	-- "glepnir/zephyr-nvim",
 	-- "kvrohit/mellow.nvim",
 	-- "sainnhe/everforest",
@@ -47,8 +48,12 @@ g.darkTheme = getName(darkThemes[1])
 --------------------------------------------------------------------------------
 
 -- merge tables
+local allThemes = {}
 for _, theme in pairs(darkThemes) do
-	table.insert(lightThemes, theme)
+	table.insert(allThemes, theme)
+end
+for _, theme in pairs(lightThemes) do
+	table.insert(allThemes, theme)
 end
 
-return lightThemes
+return allThemes

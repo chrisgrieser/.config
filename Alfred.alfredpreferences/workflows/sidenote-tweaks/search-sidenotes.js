@@ -1,6 +1,8 @@
 #!/usr/bin/env osascript -l JavaScript
 
 ObjC.import("stdlib");
+
+/** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	return [clean, str].join(" ");
@@ -15,6 +17,8 @@ function alfredMatcher(str) {
 // note objects have more properties like textFormatting, the `.text()` method
 // includes information on whether the note has an image, and methods like
 // `.delete()` are available
+
+/** @param {string} noteId */
 function getNoteObjAndFolder(noteId) {
 	const sidenotes = Application("SideNotes");
 	const folders = sidenotes.folders;
@@ -29,14 +33,16 @@ function getNoteObjAndFolder(noteId) {
 				};
 		}
 	}
-	return false;
+	return {};
 }
 
 const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-function run(argv) {
+/** @param {string[]} argv */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred
+function  run(argv) {
 	const query = argv[0] || "";
 	const sidenotes = Application("SideNotes");
 
@@ -45,7 +51,7 @@ function run(argv) {
 
 	const results = sidenotes
 		.searchNotes(query)
-		.map(item => {
+		.map((/** @type {{ identifier: string; title: string; details: string; }} */ item) => {
 			const temp = getNoteObjAndFolder(item.identifier);
 			const foldername = temp.folder;
 			const noteObj = temp.noteObj;
@@ -92,21 +98,18 @@ function run(argv) {
 				folder: foldername, // only set to filter afterwards
 			};
 		})
-		.filter(item => item.folder !== ignoredFolder);
+		.filter((/** @type {{ folder: string; }} */ item) => item.folder !== ignoredFolder);
 
-	// new note when no match found
-	if (results.length === 0) {
-		results.push({
-			title: " 🆕 New Sidenote: " + query,
-			subtitle: "SideNotes Default Folder",
-			arg: query,
-			mods: {
-				ctrl: { valid: false },
-				alt: { valid: false },
-				cmd: { valid: false },
-			},
-		});
-	}
+	// new note
+	results.push({
+		title: " 🆕 New Sidenote: " + query,
+		arg: query,
+		mods: {
+			ctrl: { valid: false },
+			alt: { valid: false },
+			cmd: { valid: false },
+		},
+	});
 
 	return JSON.stringify({ items: results });
 }

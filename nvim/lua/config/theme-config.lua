@@ -111,9 +111,11 @@ local function themeModifications()
 		linkHighlight("FloatTitle", "TelescopePromptTitle")
 		linkHighlight("@function", "@function.builtin")
 	elseif theme == "material" then
-		updateHighlight("@field", "guifg=#666666")
-		updateHighlight("@property", "guifg=#666666")
-		vim.opt.test = "f"
+		updateHighlight("@property", "guifg=#6c9798")
+		updateHighlight("@field", "guifg=#6c9798")
+		updateHighlight("Comment", "guifg=#9cb4b5")
+		updateHighlight("NonText", "guifg=#9cb4b5")
+		linkHighlight("ScrollView", "Substitute")
 	elseif theme == "sweetie" and mode == "light" then
 		linkHighlight("ScrollView", "Visual")
 		linkHighlight("NotifyINFOIcon", "@string")

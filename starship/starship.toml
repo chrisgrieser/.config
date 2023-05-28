@@ -63,7 +63,7 @@ when = "true"
 symbol = " "
 description = "Number of files (and folders) in the current working directory"
 format = '[$symbol$output]($style) '
-style = "fg:208 bg:black bold"
+style = "fg:209 bg:black bold"
 
 [status]
 format = " [$symbol$status]($style)"
