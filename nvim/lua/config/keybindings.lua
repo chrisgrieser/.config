@@ -28,6 +28,10 @@ keymap("n", "<leader>pt", function() cmd.Telescope("colorscheme") end, { desc = 
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":"):gsub("^I ", "")
+	if #lastCommand == 0 then 
+		vim.notify("No last command available", u.warn)
+		return 
+	end
 	fn.setreg("+", lastCommand)
 	vim.notify("COPIED\n" .. lastCommand)
 end, { desc = "󰘳 Copy last command" })
