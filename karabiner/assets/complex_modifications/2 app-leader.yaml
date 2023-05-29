@@ -258,13 +258,13 @@ rules:
           - *remove-notice
       # [i]noreader
       - type: basic
-        from: { key_code: "n" }
+        from: { key_code: "i" }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Inoreader' || open 'https://www.inoreader.com/'
           - *deactivate-leader
           - *remove-notice
-      # [P]DF Reader: Highlights
+      # [p]df Reader: Highlights
       - type: basic
         from: { key_code: p }
         conditions: [*leader-active]
@@ -272,7 +272,7 @@ rules:
           - shell_command: open -a 'Highlights'
           - *deactivate-leader
           - *remove-notice
-      # [G]oogle Docs
+      # [g]oogle Docs
       - type: basic
         from: { key_code: g }
         conditions: [*leader-active]
@@ -280,7 +280,7 @@ rules:
           - shell_command: open -a 'Docs' || open 'https://docs.google.com/'
           - *deactivate-leader
           - *remove-notice
-      # [V]ideo: IINA
+      # [v]ideo: IINA
       - type: basic
         from: { key_code: v }
         conditions: [*leader-active]
