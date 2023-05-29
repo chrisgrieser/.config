@@ -47,8 +47,8 @@ local function cleanupConsole()
 		if not ignore then table.insert(cleanLines, line) end
 	end
 
+	-- colorize certain messages
 	for _, line in pairs(cleanLines) do
-		-- colorize certain messages
 		local color
 		if line:find("^> ") then -- user input
 			color = isDark and lightGrey or darkGrey
@@ -76,7 +76,7 @@ end
 -- hide console as soon as unfocused
 Wf_hsConsole = u.wf
 	.new("Hammerspoon")
-	:subscribe(u.wf.windowCreated, function(newWin)
+	:subscribe(u.wf.windowFocused, function(newWin)
 		if newWin:title() == "Hammerspoon Console" then cleanupConsole() end
 	end)
 	:subscribe(u.wf.windowUnfocused, function(win)
