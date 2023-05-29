@@ -97,6 +97,10 @@ noremap m %
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
 nmap gs :gotoHeading
 
+" [g]oto longform [S]cene
+exmap gotoScene obcommand longform:longform-jump-to-scene
+nmap gS :gotoScene
+
 " [g]oto definition / link (shukuchi makes it forward-seeking)
 exmap followNextLink obcommand shukuchi:open-link
 nmap gx :followNextLink
