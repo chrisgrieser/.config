@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # shellcheck disable=2154
 # https://www.alfredforum.com/topic/14534-sequential-paste-—-paste-previous-clipboard-entries-in-order%2f
 
@@ -7,16 +7,15 @@ mkdir -p "${alfred_workflow_cache}"
 
 reset_mins="2"
 
-if [[ "${1}" == 'reset' ]]; then
+if [[ "$1" == 'reset' ]]; then
 	rm "${count_file}"
-	echo -n 'reset'
 	exit 0
 fi
 
-if [[ ! -f "${count_file}" || "$(find "${count_file}" -mmin +"${reset_mins}")" ]]; then
-	count='0'
+if [[ ! -f "$count_file" || "$(find "${count_file}" -mmin +"${reset_mins}")" ]]; then
+	count=0
 else
-	count=$(cat "${count_file}")
+	count=$(cat "$count_file")
 	count=$((count + 1))
 fi
 
