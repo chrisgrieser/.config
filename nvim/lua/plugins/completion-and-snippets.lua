@@ -74,6 +74,15 @@ local function cmpconfig()
 			-- REQUIRED a snippet engine must be specified and installed
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
 		},
+		performance = {
+			-- lower values for lag-free performance
+			-- default values: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18
+			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L403
+			debounce = 30,
+			throttle = 15,
+			max_view_entries = 100,
+			fetching_timeout = 250,
+		},
 		window = {
 			completion = {
 				side_padding = 0,

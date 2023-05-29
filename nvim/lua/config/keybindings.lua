@@ -266,10 +266,8 @@ vim.keymap.set(
 
 keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
 keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
-
-keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "󱗘 :g normal" })
-keymap("x", "<leader>fn", ":normal ", { desc = "󱗘 :normal" })
-keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g delete lines matching" })
+keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines matching" })
+keymap("n", "<leader>fd", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines matching" })
 
 -- stylua: ignore
 keymap("n", "<leader>fq", function() require("replacer").run { rename_files = true } end, { desc = "󱗘  replacer.nvim" })
@@ -446,8 +444,9 @@ keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClo
 keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "reopen last buffer" })
 
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " Buffers" })
--- stylua: ignore end
 
+-- stylua: ignore end
+keymap("", "<C-w>h", ":split<CR>", { desc = "horizontal split" })
 keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
 keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize (-)" })
 keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize (+)" })
