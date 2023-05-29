@@ -259,7 +259,7 @@ keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc 
 
 vim.keymap.set(
 	{ "n", "x" },
-	"<leader>s",
+	"<leader>ff",
 	function() return ":S /" .. vim.fn.expand("<cword>") .. "//g<Left><Left>" end,
 	{ desc = "󱗘 :AltSubstitute (word under cursor)", expr = true }
 )
