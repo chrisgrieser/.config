@@ -105,15 +105,13 @@ lspSettings.tsserver = {
 vim.api.nvim_create_autocmd("LspAttach", {
 	pattern = "*.js",
 	callback = function(args)
+		-- only for JXA files for for tsserver
+		local firstLine = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
+		local isJxaShebang = firstLine:find("osascript %-l JavaScript")
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client.name ~= "tsserver" then return end
+		if client.name ~= "tsserver" or not isJxaShebang then return end
 
-		-- do not open globals file if one is already open
-		local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
-		for _, buf in pairs(openBuffers) do
-			if vim.endswith(buf.name, "globals.d.ts") then return end
-		end
-
+		-- open jxa-globals without polluting alt file
 		local bufnr = vim.fn.bufnr()
 		vim.defer_fn(function()
 			vim.cmd("keepalt edit " .. u.linterConfigFolder .. "jxa-globals.d.ts")
