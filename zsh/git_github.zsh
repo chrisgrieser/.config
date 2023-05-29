@@ -80,7 +80,7 @@ function gitlog() {
 		sed -e 's/origin\//󰅡 /g' |
 		sed -e 's/HEAD/󱍀/g' |
 		sed -e 's/->//g' |
-		sed -e 's/grafted,/ /' |
+		sed -e 's/grafted/ /' |
 		delta
 	# INFO piping though delta as pager makes commit hashes clickable https://github.com/wez/wezterm/discussions/3618
 	# also, delta pipes then to less, which is configured not to start the pager

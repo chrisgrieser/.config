@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154
 mkdir -p "${alfred_workflow_cache}"
-readonly count_file="${alfred_workflow_cache}/counts_file"
+readonly count_file="${alfred_workflow_cache}/killring_counts_file.txt"
 readonly reset_mins='1'
 
 #───────────────────────────────────────────────────────────────────────────────
