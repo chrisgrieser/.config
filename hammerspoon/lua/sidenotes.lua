@@ -1,9 +1,9 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local env = require("lua.environment-vars")
 
 --------------------------------------------------------------------------------
 
@@ -16,21 +16,9 @@ SidenotesWatcher = u.aw
 		if appName == "SideNotes" then updateCounter() end
 
 		-- enlarge on startup/activatrion
-		if appName == "SideNotes" and (event == u.aw.launched or event == u.aw.activated) then
+		if appName == "SideNotes" and event == u.aw.launched then
 			local win = appObj:mainWindow()
 			wu.moveResize(win, wu.sideNotesWide)
-		end
-
-		-- HIDE WHEN SWITCHING TO ANY OTHER APP
-		-- (HACK since SideNotes can only be hidden on mouse click, but not on alt-tab)
-		if appName ~= "SideNotes" and event == u.aw.activated then
-			u.runWithDelays(0.05, function()
-				-- INFO if sidenotes glitches, it is the "Hot Side" setting causing
-				-- glitches when mouse is close, not Hammerspoon
-				if u.isFront { "SideNotes", "Alfred", "CleanShot X", "Espanso" } then return end
-				local app = u.app("SideNotes")
-				if app then app:hide() end
-			end)
 		end
 	end)
 	:start()

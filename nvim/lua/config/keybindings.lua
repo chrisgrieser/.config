@@ -269,7 +269,7 @@ keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
 
 keymap("n", "<leader>fn", ":g//normal " .. ("<Left>"):rep(8), { desc = "󱗘 :g normal" })
 keymap("x", "<leader>fn", ":normal ", { desc = "󱗘 :normal" })
-keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g delete" })
+keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :g delete lines matching" })
 
 -- stylua: ignore
 keymap("n", "<leader>fq", function() require("replacer").run { rename_files = true } end, { desc = "󱗘  replacer.nvim" })
