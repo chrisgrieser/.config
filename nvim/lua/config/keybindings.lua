@@ -374,8 +374,8 @@ autocmd("FileType", {
 	end,
 })
 
-keymap("n", "<Down>", [[:. move +1<CR>==]], { desc = "Move Line Down" })
-keymap("n", "<Up>", [[:. move -2<CR>==]], { desc = "Move Line Up" })
+keymap("n", "<Down>", [[:. move +1<CR>==]], { desc = "󰜮 Move Line Down" })
+keymap("n", "<Up>", [[:. move -2<CR>==]], { desc = "󰜷 Move Line Up" })
 keymap("n", "<Right>", function()
 	if vim.fn.col(".") >= vim.fn.col("$") - 1 then return end
 	return [["zx"zp]]
@@ -386,19 +386,19 @@ keymap("n", "<Left>", function()
 end, { desc = "Move Char Left", expr = true })
 
 -- stylua: ignore start
-keymap("x", "<Down>", [[:move '>+1<CR>:normal! gv=gv<CR>]], { desc = "Move selection down" })
-keymap("x", "<Up>", [[:move '<-2<CR>:normal! gv=gv<CR>]], { desc = "Move selection up" })
+keymap("x", "<Down>", [[:move '>+1<CR>:normal! gv=gv<CR>]], { desc = "󰜮 Move selection down" })
+keymap("x", "<Up>", [[:move '<-2<CR>:normal! gv=gv<CR>]], { desc = "󰜷 Move selection up" })
 -- stylua: ignore end
-keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "Move selection right" })
-keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "Move selection left" })
+keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
+keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" })
 
 -- Merging / Splitting Lines
-keymap("n", "<leader>s", cmd.TSJToggle, { desc = "split/join lines" })
-keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "split around selection" })
-keymap("n", "<leader>S", "gww", { desc = "split line" })
-keymap("x", "<leader>S", "gw", { desc = "split selection" })
-keymap({ "n", "x" }, "M", "J", { desc = "merge line up" })
-keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "merge line down" })
+keymap("n", "<leader>s", cmd.TSJToggle, { desc = "󰗈 split/join lines" })
+keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split around selection" })
+keymap("n", "<leader>S", "gww", { desc = "󰗈 split line" })
+keymap("x", "<leader>S", "gw", { desc = "󰗈 split selection" })
+keymap({ "n", "x" }, "M", "J", { desc = "󰗈 merge line up" })
+keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 merge line down" })
 
 -- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()
@@ -435,22 +435,22 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 -- BUFFERS & WINDOWS & SPLITS
 
 -- stylua: ignore start
-keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "Alt Buffer" })
-keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "Next Buffer" })
-keymap("n", "<S-CR>", "gt", { desc = "Next Tab" })
-keymap("n", "<C-CR>", "<C-w>w", { desc = "Next Window" })
+keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "󰽙 Alt Buffer" })
+keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "󰽙 Next Buffer" })
+keymap("n", "<S-CR>", "gt", { desc = "󰓩 Next Tab" })
+keymap("n", "<C-CR>", "<C-w>w", { desc = " Next Window" })
 
-keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "close buffer/window" })
-keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "reopen last buffer" })
+keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "󰽙 close buffer/window" })
+keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "󰽙 reopen last buffer" })
 
-keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " Buffers" })
+keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " 󰽙 Buffers" })
 
 -- stylua: ignore end
-keymap("", "<C-w>h", ":split<CR>", { desc = "horizontal split" })
-keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = "vertical resize (+)" }) -- resizing on one key for sanity
-keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = "vertical resize (-)" })
-keymap("", "<C-Down>", ":resize +3<CR>", { desc = "horizontal resize (+)" })
-keymap("", "<C-Up>", ":resize -3<CR>", { desc = "horizontal resize (-)" })
+keymap("", "<C-w>h", ":split<CR>", { desc = " horizontal split" })
+keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = " vertical resize (+)" }) 
+keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = " vertical resize (-)" })
+keymap("", "<C-Down>", ":resize +3<CR>", { desc = " horizontal resize (+)" })
+keymap("", "<C-Up>", ":resize -3<CR>", { desc = " horizontal resize (-)" })
 
 -- Harpoon
 keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "󰛢 Next" })
@@ -459,14 +459,14 @@ keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = 
 keymap("n", "<D-d>", function()
 	require("harpoon.mark").add_file()
 	vim.b.harpoonMark = "󰛢"
-end, { desc = "󰛢 Add File" })
+end, { desc = "󰛢 Add" })
 keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "󰛢 Menu" })
 -- stylua: ignore end
 
 ------------------------------------------------------------------------------
 
 -- CMD-KEYBINDINGS
-keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = "save" }) -- cmd+s, will be overridden on lsp attach
+keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = " Save" }) -- cmd+s, will be overridden on lsp attach
 
 -- stylua: ignore
 keymap("", "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
@@ -480,7 +480,7 @@ keymap("", "<D-S-l>", function()
 	-- stylua: ignore
 	local command = ([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(workflowId)
 	fn.system(command)
-end, { desc = "󰾺 Reveal Workflow in Alfred" })
+end, { desc = "󰮤 Reveal Workflow in Alfred" })
 keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
 keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
 

@@ -40,9 +40,9 @@ rules:
           - *set-notice
         parameters: { basic.to_if_alone_timeout_milliseconds: 200 }
       - type: basic
-        from: { key_code: left_command }
+        from: { key_code: left_control }
         to:
-          - key_code: left_command
+          - key_code: left_control
         conditions:
           - *leader-inactive
         to_if_alone:

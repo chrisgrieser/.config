@@ -4,10 +4,10 @@ local u = require("lua.utils")
 --------------------------------------------------------------------------------
 -- REPO SYNC JOBS
 
----@return boolean success
+---@return boolean whether the job has been run
 local function gitDotfileSync()
 	local gitDotfileScript = env.dotfilesFolder .. "/git-dotfile-sync.sh"
-	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return true end
+	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
 	if not (u.screenIsUnlocked()) then return false end -- prevent standby home device background sync when in office
 
 	GitDotfileSyncTask = hs.task
@@ -23,10 +23,10 @@ local function gitDotfileSync()
 	return true
 end
 
----@return boolean
+---@return boolean whether the job has been run
 local function gitVaultSync()
 	local gitVaultScript = env.vaultLocation .. "/Meta/git-vault-sync.sh"
-	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return true end
+	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return false end
 	if not (u.screenIsUnlocked()) then return false end -- prevent of standby home device background sync when in office
 
 	GitVaultSyncTask = hs.task
@@ -42,10 +42,10 @@ local function gitVaultSync()
 	return true
 end
 
----@return boolean
+---@return boolean whether the job has been run
 local function gitPassSync()
 	local gitPassScript = env.passwordStore .. "/pass-sync.sh"
-	if GitPassSyncTask and GitPassSyncTask:isRunning() then return true end
+	if GitPassSyncTask and GitPassSyncTask:isRunning() then return false end
 	if not u.screenIsUnlocked() then return false end -- prevent of standby home device background sync when in office
 
 	GitPassSyncTask = hs.task

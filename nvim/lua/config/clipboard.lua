@@ -21,11 +21,14 @@ end, { expr = true })
 
 --------------------------------------------------------------------------------
 -- Yanky
-keymap("n", "p", "<Plug>(YankyPutAfter)", { desc = "Paste (Yanky)" })
-keymap("n", "P", "<Plug>(YankyCycleForward)", { desc = "Cycle Yankring" })
-keymap("n", "<leader>y", function()
-	require("telescope").extensions.yank_history.yank_history()
-end, { desc = "Yank History" })
+keymap("n", "p", "<Plug>(YankyPutAfter)", { desc = " Paste (Yanky)" })
+keymap("n", "P", "<Plug>(YankyCycleForward)", { desc = " Cycle Yankring" })
+keymap(
+	"n",
+	"<leader>y",
+	function() require("telescope").extensions.yank_history.yank_history() end,
+	{ desc = " Yank History" }
+)
 --------------------------------------------------------------------------------
 
 -- paste charwise reg as linewise & vice versa
@@ -44,18 +47,14 @@ keymap("n", "zp", function()
 
 	fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
 	u.normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
-	if targetRegType == "V" then
-		u.normal("==")
-	end
-end, { desc = "paste differently" })
+	if targetRegType == "V" then u.normal("==") end
+end, { desc = " paste differently" })
 
 --------------------------------------------------------------------------------
 
 -- yanking without moving the cursor
 autocmd({ "CursorMoved", "VimEnter" }, {
-	callback = function()
-		vim.g.cursorPreYank = u.getCursor(0)
-	end,
+	callback = function() vim.g.cursorPreYank = u.getCursor(0) end,
 })
 
 -- - sticky yanking (without moving the cursor)
@@ -63,15 +62,11 @@ autocmd({ "CursorMoved", "VimEnter" }, {
 autocmd("TextYankPost", {
 	callback = function()
 		-- highlighted yank
-		vim.highlight.on_yank({ timeout = 1500 })
+		vim.highlight.on_yank { timeout = 1500 }
 
-		if fn.reg_recording() ~= "" or fn.reg_executing() ~= "" then
-			return
-		end
+		if fn.reg_recording() ~= "" or fn.reg_executing() ~= "" then return end
 
 		-- sticky cursor
-		if vim.v.event.operator == "y" then
-			u.setCursor(0, g.cursorPreYank)
-		end
+		if vim.v.event.operator == "y" then u.setCursor(0, g.cursorPreYank) end
 	end,
 })

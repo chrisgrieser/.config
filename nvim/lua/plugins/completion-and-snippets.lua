@@ -80,8 +80,8 @@ local function cmpconfig()
 			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L403
 			debounce = 30,
 			throttle = 15,
-			max_view_entries = 100,
-			fetching_timeout = 250,
+			max_view_entries = 50,
+			fetching_timeout = 150,
 		},
 		window = {
 			completion = {
