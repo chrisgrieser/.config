@@ -88,18 +88,6 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
-      # INFO Browsers already have mouse 4 mapped to "Back"
-      # YouTube: Home
-      - type: basic
-        from: { pointing_button: button4 }
-        to:
-          - key_code: escape # to leave full screen
-          - shell_command: osascript -e 'tell application "Brave Browser" to set URL of active tab of front window to "https://www.youtube.com"'
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser.+ # PWAs
-              - ^com\.vivaldi\.Vivaldi.+ # PWAs
       # Obsidian: Back
       - type: basic
         from: { pointing_button: button4 }
@@ -180,6 +168,7 @@ rules:
               - ^net\.highlightsapp\.universal$
               - ^org\.hammerspoon\.Hammerspoon$
               - ^maccatalyst\.com\.atebits\.Tweetie # twitter
+              - ^mindustry.mac$
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.search-utils"'
         parameters:
