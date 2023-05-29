@@ -60,7 +60,7 @@ opt.clipboard = "unnamedplus"
 -- Popups / Floating Windows
 opt.pumwidth = 15 -- min width popup menu
 
--- show 15 items in editor but only 7 in cmdline to prevent obscurating view
+-- show 15 items in editor but only 7 in cmdline to prevent obfuscating view
 autocmd({ "CmdlineLeave", "VimEnter" }, {
 	callback = function() opt.pumheight = 15 end,
 })
@@ -69,7 +69,7 @@ autocmd("CmdlineEnter", {
 })
 
 -- Spelling
-opt.spell = false -- off, since using vale+null-ls for the lsp-integration
+opt.spell = false -- off, since using vale & ltex for the lsp-integration
 opt.spelllang = "en_us" -- still used for `z=` and `1z=`
 
 -- Split
@@ -78,7 +78,7 @@ opt.splitbelow = true -- split down instead of up
 
 -- Workspace
 opt.cursorline = true
-opt.signcolumn = "yes:1" -- = gutter
+opt.signcolumn = "yes:1" 
 
 -- Wrapping
 opt.textwidth = 80
