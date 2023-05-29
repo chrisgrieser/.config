@@ -434,7 +434,13 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 	yamlKeys.push(`extraction-date: ${isoToday}`);
 
 	// write note
-	const noteContent = `---\n${yamlKeys.join("\n")}\n---\n\n# ${metad.title}\n${annos}\n`;
+	const noteContent = `---
+${yamlKeys.join("\n")}
+---
+
+${annos}
+`;
+
 	const path = outputPath + `/${metad.citekey}.md`;
 	writeToFile(noteContent, path);
 
