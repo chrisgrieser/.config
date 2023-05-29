@@ -44,13 +44,13 @@ return {
 		"ThePrimeagen/refactoring.nvim",
 		lazy = true,
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
-		config = true,
+		opts = true,
 	},
 	{ -- :substitute but with lua regex
 		"chrisgrieser/nvim-alt-substitute",
+		event = "CmdlineEnter", -- lazy-loading with `cmd =` does not work well with incremental preview
 		opts = true,
-		-- lazy-loading with `cmd =` does not work well with incremental preview
-		event = "CmdlineEnter",
+		dev = true,
 	},
 	{ -- better macros
 		"chrisgrieser/nvim-recorder",
