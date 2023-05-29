@@ -4,6 +4,7 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
@@ -14,19 +15,14 @@ function alfredMatcher(str) {
 
 const cheatfolder = $.getenv("cheatfile_folder").replace(/^~/, app.pathTo("home folder"));
 
-const jsonArray = app.doShellScript(`find "${cheatfolder}"`)
+const jsonArray = app.doShellScript(`find "${cheatfolder}" -type f`)
 	.split("\r")
-	.map(item => {
+	.map((/** @type {string} */ item) => {
 		const name = item.replace(/.*\//, "");
 		return {
 			"title": name,
-			"subtitle": "cheatsheet",
 			"match": alfredMatcher(item),
 			"type": "file:skipcheck",
-			"icon": {
-				"type": "fileicon",
-				"path": item
-			},
 			"arg": item,
 			"uid": item,
 		};
