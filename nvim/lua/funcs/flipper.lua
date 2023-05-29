@@ -150,6 +150,7 @@ local filetypeSpecificWords = {
 		{ "else", "if", false },
 		{ "echo", "printf" },
 		{ "exit", "return" },
+		{ "bash", "zsh" }, -- e.g. for shebangs
 	},
 }
 

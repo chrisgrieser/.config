@@ -1,6 +1,7 @@
 local u = require("config.utils")
 local lspSettings = {}
 local lspOnAttach = {}
+local lspFiletypes = {}
 
 --------------------------------------------------------------------------------
 
@@ -157,6 +158,9 @@ vim.api.nvim_create_autocmd("FileType", {
 -- LTEX
 -- https://valentjn.github.io/ltex/settings.html
 
+-- deactivate bibtex files
+lspFiletypes.ltex = { "gitcommit", "markdown", "text"}
+
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work
 local dictfile = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
@@ -183,7 +187,7 @@ lspSettings.ltex = {
 			["en-US"] = {
 				"EN_QUOTES", -- don't expect smart quotes
 				"WHITESPACE_RULE", -- often false positives
-				"PUNCTUATION_PARAGRAPH_END" -- often false positives
+				"PUNCTUATION_PARAGRAPH_END", -- often false positives
 			},
 		},
 		diagnosticSeverity = {
@@ -222,8 +226,10 @@ local function setupAllLsps()
 	for _, lsp in pairs(lsp_servers) do
 		local config = {
 			capabilities = lspCapabilities,
-			settings = lspSettings[lsp], -- if no settings, will assign nil and therefore do nothing
-			on_attach = lspOnAttach[lsp], -- mostly disables some settings
+			-- INFO if no settings, will assign nil and therefore do nothing
+			settings = lspSettings[lsp],
+			on_attach = lspOnAttach[lsp],
+			filetypes = lspFiletypes[lsp],
 		}
 
 		require("lspconfig")[lsp].setup(config)
