@@ -24,7 +24,7 @@
 		"prefix": "type definition",
 		"body": [
 			"/** @typedef {Object} ${typeName}",
-			"* @property {${2|number,string,Object,boolean|}} ${3:prop1}",
+			"* @property {${2|number,string,Object,boolean,() => void|}} ${3:prop1}",
 			"* @property {${4|number,string,Object,boolean|}} ${5:prop2}",
 			"*/"
 		],
