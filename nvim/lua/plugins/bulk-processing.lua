@@ -46,6 +46,12 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
 		config = true,
 	},
+	{ -- :substitute but with lua regex
+		"chrisgrieser/nvim-alt-substitute",
+		opts = true,
+		-- lazy-loading with `cmd =` does not work well with incremental preview
+		event = "CmdlineEnter",
+	},
 	{ -- better macros
 		"chrisgrieser/nvim-recorder",
 		dev = true,

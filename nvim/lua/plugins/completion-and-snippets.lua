@@ -295,9 +295,9 @@ local function cmdlineCompletionConfig()
 		mapping = cmp.mapping.preset.cmdline(),
 		enabled = function()
 			-- https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-cmdline-completion-for-certain-commands-such-as-increname
-			local cmd = vim.fn.getcmdline():match("%S+") or "" -- Get first word of cmdline
-			-- ignore for :IncRename and for numb.nvim
-			if cmd == "IncRename" or cmd:find("^%d+$") then
+			local cmd = vim.fn.getcmdline()
+			-- ignore for :IncRename, numb.nvim, and :AltSubstitute
+			if cmd:find("^IncRename ") or cmd:find("^%d+$") or cmd:find("^S ") then
 				cmp.close()
 				return false
 			end

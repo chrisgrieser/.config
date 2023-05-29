@@ -28,9 +28,9 @@ keymap("n", "<leader>pt", function() cmd.Telescope("colorscheme") end, { desc = 
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":"):gsub("^I ", "")
-	if #lastCommand == 0 then 
+	if #lastCommand == 0 then
 		vim.notify("No last command available", u.warn)
-		return 
+		return
 	end
 	fn.setreg("+", lastCommand)
 	vim.notify("COPIED\n" .. lastCommand)
@@ -257,17 +257,11 @@ keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc 
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap(
-	"n",
-	"<leader>ff",
-	function() return ":%sm/" .. expand("<cword>") .. "//g<Left><Left>" end,
-	{ desc = "󱗘 :substitute cword (magic)", expr = true }
-)
-keymap(
-	"x",
-	"<leader>ff",
-	[["zy:sm/<C-r>z//g<Left><Left>]],
-	{ desc = "󱗘 :substitute selection (magic)" }
+vim.keymap.set(
+	{ "n", "x" },
+	"<leader>s",
+	function() return ":S /" .. vim.fn.expand("<cword>") .. "//g<Left><Left>" end,
+	{ desc = "󱗘 :AltSubstitute (word under cursor)", expr = true }
 )
 
 keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
