@@ -20,6 +20,16 @@
 		"prefix": ["ignore (TypeScript)", "ts-ignore"],
 		"body": "// @ts-ignore"
 	},
+	"type definition": {
+		"prefix": "type definition",
+		"body": [
+			"/** @typedef {Object} ${typeName}",
+			"* @property {${2|number,string,Object,boolean|}} ${3:prop1}",
+			"* @property {${4|number,string,Object,boolean|}} ${5:prop2}",
+			"*/"
+		],
+		"description": "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param"
+	},
 	"don't check file (TypeScript)": {
 		"prefix": ["nocheck (TypeScript)", "ts-nocheck", "exclude (TypeScript)"],
 		"body": "// @ts-nocheck",
