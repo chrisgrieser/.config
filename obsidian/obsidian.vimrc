@@ -183,6 +183,9 @@ exmap toggleBlockquote obcommand editor:toggle-blockquote
 nmap ,< :toggleBlockquote
 nmap ,> :toggleBlockquote
 
+exmap cycleChecklist obcommand editor:cycle-list-checklist
+nmap ,x :cycleChecklist
+
 """"""""""""""""""""""
 " Indentation
 """"""""""""""""""""""
