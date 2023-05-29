@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>cheatfile_folder</key>
-	<string>~/.config/Cheatsheets</string>
+	<string>~/.config/_cheatsheets</string>
 </dict>
 </plist>
