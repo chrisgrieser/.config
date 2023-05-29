@@ -185,6 +185,7 @@ nmap ,> :toggleBlockquote
 
 exmap cycleChecklist obcommand editor:cycle-list-checklist
 nmap ,x :cycleChecklist
+vmap ,x :cycleChecklist
 
 """"""""""""""""""""""
 " Indentation
@@ -211,7 +212,7 @@ nmap ww :duplicate
 """"""""""""""""""""""
 
 " so VV... in normal mode selects more lines
-vmap V gj
+vmap V j
 
 " so vv goes to visual block mode
 vmap v <C-v>
