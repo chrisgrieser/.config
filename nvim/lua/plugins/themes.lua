@@ -11,6 +11,7 @@ local lightThemes = {
 
 local darkThemes = {
 	"folke/tokyonight.nvim",
+	-- { "hardhackerlabs/theme-vim", name = "hardhacker", init = function() vim.g.hardhacker_darker = 1 end },
 	-- { "loctvl842/monokai-pro.nvim", config = { filter = "ristretto" } },
 	-- "rebelot/kanagawa.nvim",
 	-- "glepnir/zephyr-nvim",

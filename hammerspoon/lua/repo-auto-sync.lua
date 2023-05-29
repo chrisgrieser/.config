@@ -67,10 +67,7 @@ local function syncAllGitRepos(notify)
 	local success1 = gitDotfileSync()
 	local success2 = gitPassSync()
 	local success3 = gitVaultSync()
-	if not (success1 and success2 and success3) then
-		print("Sync not triggered.")
-		return
-	end
+	if not (success1 and success2 and success3) then return end
 
 	local function noSyncInProgress()
 		local dotfilesSyncing = GitDotfileSyncTask and GitDotfileSyncTask:isRunning()

@@ -117,7 +117,7 @@
 	},
 	"if .. then": {
 		"prefix": "if .. then",
-		"body": "if [[ $2 \"$${1:var}\" ]]; then\n\t$0\nfi"
+		"body": "if [[ \"$${1:var}\" ]]; then\n\t$0\nfi"
 	},
 	"check if installed": {
 		"prefix": "check if installed",
