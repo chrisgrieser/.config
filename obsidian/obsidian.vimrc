@@ -49,13 +49,6 @@ noremap L g$
 nmap J 6gj
 nmap K 6gk
 
-omap J 3gj
-omap K 3gk
-
-" pending PR in codemirror-vim
-" omap j 2gj
-" omap k 2gk
-
 " sentence navigation
 nmap [ (
 nmap ] )
@@ -107,9 +100,6 @@ nmap gx :followNextLink
 nmap ga :followNextLink
 nmap gd :followNextLink
 
-exmap liveGrep obcommand obsidian-another-quick-switcher:grep
-nmap gl :liveGrep
-
 " [g]oto [o]pen file (= Quick Switcher)
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search
 nmap go :quickSwitcher
@@ -117,6 +107,17 @@ nmap gr :quickSwitcher
 
 " go to last change (HACK, only works to jump to the last location)
 nmap gc u<C-r>
+
+""""""""""""""""""""""
+" Search & replace
+""""""""""""""""""""""
+
+" exmap liveGrep obcommand obsidian-another-quick-switcher:grep
+exmap liveGrep obcommand omnisearch:show-modal
+nmap gl :liveGrep
+
+exmap searchReplace obcommand editor:open-search-replace
+nmap ,ff :searchReplace
 
 """"""""""""""""""""""
 " Editing

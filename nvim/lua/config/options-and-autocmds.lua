@@ -9,7 +9,7 @@ local expand = vim.fn.expand
 local u = require("config.utils")
 
 --------------------------------------------------------------------------------
--- REMOTE CONTROL
+-- REMOTE CONTROL / AUTOMATION
 
 -- RPC https://neovim.io/doc/user/remote.html
 pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down

@@ -3,15 +3,17 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#;,/\\[\]]/g, " ");
+	const merged = str.replace(/[-_.]/g, "");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ");
+	return [merged, clean, camelCaseSeperated, str].join(" ");
 }
 
 //──────────────────────────────────────────────────────────────────────────────
 // using `fd` over `find` for speed and gitignoring
-/** @param {any[]} argv */
+/** @param {string[]} argv */
 // rome-ignore lint/correctness/noUnusedVariables: <explanation>
 function run(argv) {
 	const dotfileFolder = argv[0];
@@ -20,7 +22,7 @@ function run(argv) {
 	const dirtyFiles = app
 		.doShellScript(`cd "${dotfileFolder}" && git status --porcelain`)
 		.split("\r")
-		.map(file => file.replace(/^[ MD?]* /i, ""));
+		.map((/** @type {string} */ file) => file.replace(/^[ MD?]* /i, ""));
 
 	const fileArray = app
 		.doShellScript(
@@ -29,8 +31,9 @@ function run(argv) {
 			-E "*.icns" -E "*.plist" -E "*.png" -E ".git"`,
 		)
 		.split("\r")
-		.map(absPath => {
+		.map((/** @type {string} */ absPath) => {
 			const name = absPath.split("/").pop();
+			if (!name) return;
 			const relPath = absPath.slice(dotfileFolder.length);
 			const relativeParentFolder = relPath.slice(0, -name.length);
 
@@ -41,12 +44,12 @@ function run(argv) {
 			if (fileIsDirty) matcher += " dirty";
 
 			// type determiniation
-			let type;
+			let type = "";
 			if (name.startsWith(".z")) type = "sh";
 			else if (name.startsWith(".")) type = "config";
 			else if (!name.includes(".")) type = "blank";
 			else if (name === "obsidian.vimrc") type = "obsidian";
-			else type = name.split(".").pop();
+			else type = name.split(".").pop() || "";
 
 			if (type === "yml") type = "yaml";
 			else if (type === "mjs") type = "js";
@@ -105,8 +108,9 @@ function run(argv) {
 			fd "gpg" --absolute-path --type=directory --hidden -E ".git"`,
 		)
 		.split("\r")
-		.map(absPath => {
+		.map((/** @type {string} */ absPath) => {
 			const name = absPath.slice(0, -1).split("/").pop();
+			if (!name) return;
 			const relPath = absPath.slice(dotfileFolder.length);
 			const relativeParentFolder = relPath.slice(0, -(name.length + 1));
 
