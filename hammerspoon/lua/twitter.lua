@@ -78,6 +78,7 @@ local function twitterToTheSide()
 	win:raise()
 end
 
+---@param referenceWin hs.window
 local function showHideTwitter(referenceWin)
 	local twitter = u.app("Twitter")
 	if not twitter or not referenceWin then return end
@@ -136,6 +137,7 @@ TwitterWatcher = u.aw
 -- show/hide twitter when other wins move
 Wf_SomeWindowActivity = u.wf
 	.new(true)
+	:setOverrideFilter({ allowRoles = "AXStandardWindow", hasTitlebar = true })
 	:subscribe(u.wf.windowMoved, function(movedWin) showHideTwitter(movedWin) end)
 	:subscribe(u.wf.windowCreated, function(createdWin) showHideTwitter(createdWin) end)
 

@@ -194,7 +194,7 @@ function M.asSoonAsAppRuns(appName, callbackFn)
 		local appRuns = app ~= nil
 		local windowAvailable = app and app:mainWindow()
 		return appRuns and windowAvailable
-	end, callbackFn, 0.1)
+	end, callbackFn, 0.05)
 end
 
 ---@param appNames string|string[]
