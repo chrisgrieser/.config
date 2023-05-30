@@ -21,8 +21,8 @@ keymap({ "o", "x" }, "im", "iW")
 
 --------------------------------------------------------------------------------
 -- QUICK TEXTOBJ OPERATIONS
-keymap("n", "<Space>", '"_ciw', { desc = "change word" })
-keymap("n", "<F2>", '"_daw', { desc = "delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
+keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
+keymap("n", "<F2>", '"_daw', { desc = "󱡔 delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
 keymap("i", "<F2>", "<Space>") -- FIX accidental triggering in insert mode when typing quickly
 
 --------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ keymap("n", "dq", function()
 	local prevCursor = u.getCursor(0)
 	cmd.normal { "d&&&" } -- without bang for remapping of COM
 	u.setCursor(0, prevCursor)
-end, { remap = true, desc = "delete comment" })
+end, { remap = true, desc = " delete comment" })
 
 -- manually changed cq to preserve the commentstring
 keymap("n", "cq", function()
@@ -43,7 +43,7 @@ keymap("n", "cq", function()
 	cmd.normal { "x" }
 	cmd.normal { "Q" }
 	cmd.startinsert { bang = true }
-end, { desc = "change comment" })
+end, { desc = " change comment" })
 
 -- INFO omap q &&& is done is treesitter config, takes care of other operators
 -- like `y`
@@ -76,7 +76,7 @@ local function commented_lines_textobject()
 	vim.fn.execute("normal! " .. rs .. "GV" .. re .. "G")
 end
 
-keymap("o", "u", commented_lines_textobject, { desc = "󱡔 Big Comment textobj" })
+keymap("o", "u", commented_lines_textobject, { desc = "󱡔  Big Comment textobj" })
 
 -- Git Hunks
 keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "󱡔 󰊢 hunk textobj" })

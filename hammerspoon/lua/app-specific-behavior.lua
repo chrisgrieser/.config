@@ -1,7 +1,7 @@
 local env = require("lua.environment-vars")
 local wu = require("lua.window-utils")
-local wf = require("lua.utils").wf
 local u = require("lua.utils")
+local wf = require("lua.utils").wf
 local aw = require("lua.utils").aw
 --------------------------------------------------------------------------------
 
