@@ -21,18 +21,18 @@ if ! command -v yq &>/dev/null; then
 	icon=""
 else
 	weather=$(curl -sL "https://api.brightsky.dev/current_weather?lat=$latitude&lon=$longitude" | yq ".weather")
-	temperature=$(echo "$weather" | yq ".temperature" | cut -d. -f1)
+	temperature="$(echo "$weather" | yq ".temperature" | cut -d. -f1)°"
 	# replace icon-string with nerdfont icon
 	icon=$(
 		echo "$weather" | yq ".icon" |
+			sed 's/partly-cloudy-day//' |
+			sed 's/partly-cloudy-night//' |
 			sed 's/rain//' |
 			sed 's/cloudy//' |
 			sed 's/wind//' |
 			sed 's/fog/󰖑/' |
 			sed 's/hail/󰖒/' |
 			sed 's/snow//' |
-			sed 's/partly-cloudy-day//' |
-			sed 's/partly-cloudy-night//' |
 			sed 's/clear-day//' |
 			sed 's/clear-night//' |
 			sed 's/thunderstorm//'
