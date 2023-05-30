@@ -1,6 +1,5 @@
 local tsConfig = {
-	-- easier than having to keep track of new parsers all the time
-	ensure_installed = "all",
+	ensure_installed = "all", -- easier than having to keep track of new parsers all the time
 
 	highlight = {
 		enable = true,
@@ -62,8 +61,7 @@ local tsConfig = {
 		highlight_current_scope = { enable = false },
 		smart_rename = {
 			enable = true,
-			-- in LSP filetypes overwritten by LSP rename
-			keymaps = { smart_rename = "<leader>v" },
+			keymaps = { smart_rename = "<leader>v" }, -- in LSP filetypes overwritten by LSP rename
 		},
 	},
 }
@@ -75,6 +73,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
 		build = function() require("nvim-treesitter.install").update { with_sync = true } end,
+		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 		init = function()
 			-- HACK avoid conflict with visual mode comment from Comments.nvim
