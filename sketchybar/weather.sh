@@ -17,7 +17,7 @@ readonly longitude=13
 export PATH="$HOME/.local/share/nvim/mason/bin":/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 if ! command -v yq &>/dev/null; then
-	weather="yq"
+	weather="yq not found"
 	icon=""
 else
 	weather=$(curl -sL "https://api.brightsky.dev/current_weather?lat=$latitude&lon=$longitude" | yq ".weather")
