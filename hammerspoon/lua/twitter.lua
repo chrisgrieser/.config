@@ -100,7 +100,7 @@ TwitterWatcher = u.aw
 		if appName == "CleanShot X" or appName == "Alfred" then return end
 		local twitter = u.app("Twitter")
 
-		-- move twitter and scroll it up
+		-- move twitter and scroll up
 		if appName == "Twitter" and (event == u.aw.launched or event == u.aw.activated) then
 			u.asSoonAsAppRuns("Twitter", function()
 				twitterToTheSide()
@@ -134,9 +134,10 @@ TwitterWatcher = u.aw
 	:start()
 
 -- show/hide twitter when other wins move
-Wf_SomeWindowMoved = u.wf
+Wf_SomeWindowActivity = u.wf
 	.new(true)
 	:subscribe(u.wf.windowMoved, function(movedWin) showHideTwitter(movedWin) end)
+	:subscribe(u.wf.windowCreated, function(createdWin) showHideTwitter(createdWin) end)
 
 --------------------------------------------------------------------------------
 
