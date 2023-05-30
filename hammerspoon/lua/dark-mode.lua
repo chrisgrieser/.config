@@ -29,7 +29,7 @@ local function toggleDarkMode()
 	end
 
 	-- neovim
-	local nvimLuaCmd = ([[require('config.theme-config').setThemeMode('%s')]]):format(toMode)
+	local nvimLuaCmd = ([[require('config.theme-customization').setThemeMode('%s')]]):format(toMode)
 	local shellCmd1 = ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>lua %s<CR>"]]):format(nvimLuaCmd)
 	hs.execute(u.exportPath .. shellCmd1)
 

@@ -111,7 +111,7 @@ keymap("n", "gc", "g;", { desc = "goto next change" })
 keymap("n", "gC", "g,", { desc = "goto previous change" })
 
 -- [M]atching Bracket
--- remap needed, if using the builtin matchit plugin
+-- remap needed, if using the builtin matchit plugin / vim-matchup
 keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 
 --------------------------------------------------------------------------------

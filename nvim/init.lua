@@ -24,7 +24,7 @@ end
 safeRequire("config.lazy")
 
 if vim.fn.has("gui_running") then safeRequire("config.gui-settings") end
-safeRequire("config.theme-config")
+safeRequire("config.theme-customization")
 safeRequire("config.options-and-autocmds")
 
 safeRequire("config.keybindings")
