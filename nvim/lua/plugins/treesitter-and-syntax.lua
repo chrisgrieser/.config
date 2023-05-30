@@ -4,11 +4,11 @@ local tsConfig = {
 
 	highlight = {
 		enable = true,
-		-- names of the parsers and not filetypes
 		disable = { "css" }, -- pending https://github.com/tree-sitter/tree-sitter-css/issues/34
 	},
 	-- use treesitter for autoindent with `=`
 	indentation = { enable = true },
+
 	--------------------------------------------------------------------------
 	-- TREESITTER PLUGINS
 
@@ -71,7 +71,6 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
 		build = function() require("nvim-treesitter.install").update { with_sync = true } end,
-		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 		init = function()
 			-- HACK avoid conflict with visual mode comment from Comments.nvim
@@ -82,9 +81,7 @@ return {
 		"dawsers/edit-code-block.nvim",
 		cmd = { "EditCodeBlock", "EditCodeBlockSelection" },
 		main = "ecb",
-		opts = {
-			wincmd = "split",
-		},
+		opts = { wincmd = "split" },
 	},
 
 	-- Syntax Highlighting Plugins

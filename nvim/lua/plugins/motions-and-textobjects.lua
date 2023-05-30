@@ -9,6 +9,11 @@ return {
 		keys = ":",
 		config = true,
 	},
+	{
+		"andymass/vim-matchup",
+		lazy = false, -- cannot be lazyloaded
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
 		dev = true,

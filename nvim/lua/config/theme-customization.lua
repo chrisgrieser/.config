@@ -10,11 +10,7 @@ local M = {}
 ---@param hlgroupfrom string
 ---@param hlgroupto string
 local function linkHighlight(hlgroupfrom, hlgroupto)
-	if vim.version().minor >= 9 then
-		vim.api.nvim_set_hl(0, hlgroupfrom, { link = hlgroupto, default = true })
-	else
-		cmd.highlight { "def link " .. hlgroupto .. " " .. hlgroupfrom, bang = true }
-	end
+	vim.api.nvim_set_hl(0, hlgroupfrom, { link = hlgroupto, default = true })
 end
 
 ---INFO not using `api.nvim_set_hl` yet as it overwrites a group instead of updating it
@@ -24,32 +20,6 @@ local function updateHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " ..
 
 ---@param hlgroup string
 local function clearHighlight(hlgroup) cmd.highlight("clear " .. hlgroup) end
-
--- add SEMANTIC HIGHLIGHTS to themes that do not have it yet https://www.reddit.com/r/neovim/comments/12gvms4/this_is_why_your_higlights_look_different_in_90/
----@diagnostic disable-next-line: unused-function, unused-local
-local function fixSemanticHighlighting()
-	if vim.version().minor < 9 then return end
-	local semanticToTreesitterHl = {
-		["@lsp.type.namespace"] = "@namespace",
-		["@lsp.type.type"] = "@type",
-		["@lsp.type.class"] = "@type",
-		["@lsp.type.enum"] = "@type",
-		["@lsp.type.interface"] = "@type",
-		["@lsp.type.struct"] = "@structure",
-		["@lsp.type.parameter"] = "@parameter",
-		["@lsp.type.variable"] = "@variable",
-		["@lsp.type.property"] = "@property",
-		["@lsp.type.enumMember"] = "@constant",
-		["@lsp.type.function"] = "@function",
-		["@lsp.type.method"] = "@method",
-		["@lsp.type.macro"] = "@macro",
-		["@lsp.type.decorator"] = "@function",
-	}
-
-	for semanticHl, treesitterHl in pairs(semanticToTreesitterHl) do
-		linkHighlight(semanticHl, treesitterHl)
-	end
-end
 
 --------------------------------------------------------------------------------
 
@@ -122,8 +92,13 @@ local function themeModifications()
 		linkHighlight("NotifyINFOTitle", "@string")
 		linkHighlight("NotifyINFOBody", "@string")
 	elseif theme == "bluloco" then
-		updateHighlight("ScrollView", "guibg=#303d50")
-		updateHighlight("ColorColumn", "guibg=#2e3742")
+		vim.cmd.highlight("clear MatchParen")
+		vim.opt.guicursor:append("i-ci-c:ver25")
+		vim.opt.guicursor:append("o-v:hor10")
+		if mode == "dark" then
+			updateHighlight("ScrollView", "guibg=#303d50")
+			updateHighlight("ColorColumn", "guibg=#2e3742")
+		end
 	elseif theme == "kanagawa" then
 		updateHighlight("ScrollView", "guibg=#303050")
 		updateHighlight("VirtColumn", "guifg=#323036")
@@ -139,7 +114,6 @@ local function themeModifications()
 		updateHighlight("IncSearch", "guifg=#FFFFFF")
 		linkHighlight("TabLineSel", "lualine_a_normal")
 		linkHighlight("TabLineFill", "lualine_c_normal")
-		fixSemanticHighlighting()
 	elseif theme == "dawnfox" then
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ScrollView", "guibg=#303050")
@@ -162,8 +136,8 @@ autocmd("ColorScheme", {
 	callback = function()
 		-- defer needed for some modifications to properly take effect
 		for _, delayMs in pairs { 50, 200 } do
-			vim.defer_fn(customHighlights, delayMs)
 			vim.defer_fn(themeModifications, delayMs)
+			vim.defer_fn(customHighlights, delayMs)
 		end
 	end,
 })
