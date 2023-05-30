@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+# USING WTTR.IN
+#───────────────────────────────────────────────────────────────────────────────
+
+weather=$(curl -sL "https://wttr.in/Berlin?format=1")
+temperature=$(echo "$weather" | cut -c2- | tr -d "+C ")
+
+# replace emoji with nerdfont icons
+icon=$(
+	echo "$weather" | cut -d" " -f1 |
+		sed 's/🌧//' |
+		sed 's/☁️//' |
+		sed 's/🌫//' |
+		sed 's/❄️//' |
+		sed 's/🌦//' |
+		sed 's/🌨//' |
+		sed 's/⛅️//' |
+		sed 's/☀️//' |
+		sed 's/🌩/󰖓/' |
+		sed 's/⛈//'
+)
+
+if [[ "$weather" =~ Unknown ]] || [[ "$weather" =~ Sorry ]] || [[ -z "$weather" ]]; then
+	icon=""
+	temperature="–"
+fi
+
+sketchybar --set "$NAME" icon="$icon" label="$temperature"
