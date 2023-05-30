@@ -16,7 +16,7 @@ function run(argv) {
 
 	// without the folder field, uses the setting from SideNotes to determine new
 	// note location
-	Application("SideNotes").createNote({
+	sidenotes.createNote({
 		text: input,
 		folder: baseFolder,
 		ispath: fileExists(input),
