@@ -627,6 +627,8 @@ Pressing `CMD` to enter `Other Actions...`:
 		</dict>
 		<key>BC2531DC-7C58-4EA9-89A6-316FB5757EEB</key>
 		<dict>
+			<key>note</key>
+			<string>leader → shift+b via Karabiner</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>

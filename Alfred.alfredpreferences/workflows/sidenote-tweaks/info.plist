@@ -32,6 +32,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<array>
 			<dict>
@@ -169,16 +182,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>95F95EF4-4164-4FC1-B288-14C9051B21C8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -193,6 +196,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>E1952981-5610-42C6-967C-9728E176B587</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>95F95EF4-4164-4FC1-B288-14C9051B21C8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -345,16 +361,6 @@
 		</array>
 		<key>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</string>
@@ -554,6 +560,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>95F95EF4-4164-4FC1-B288-14C9051B21C8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -638,27 +665,6 @@ sketchybar --trigger update-sidenotes-count</string>
 			<string>8490AB75-2159-4B22-BD85-E5DCFF9E1E91</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>95F95EF4-4164-4FC1-B288-14C9051B21C8</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1142,7 +1148,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>280</real>
 			<key>ypos</key>
-			<real>775</real>
+			<real>745</real>
 		</dict>
 		<key>0D892222-53BF-48BA-BE59-AFBF81353E3B</key>
 		<dict>
@@ -1153,16 +1159,16 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>600</real>
 		</dict>
 		<key>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>790</real>
+			<real>705</real>
 			<key>ypos</key>
-			<real>1115</real>
+			<real>1150</real>
 		</dict>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<dict>
@@ -1173,16 +1179,16 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>775</real>
+			<real>745</real>
 		</dict>
 		<key>1EA57E38-BF7C-4655-8934-79F1FE5152B0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>1100</real>
+			<real>1065</real>
 		</dict>
 		<key>26E98B85-F67B-478C-AB5E-20DAB43553A7</key>
 		<dict>
@@ -1191,9 +1197,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>create new note from selection</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1080</real>
+			<real>1045</real>
 		</dict>
 		<key>2A299055-454F-491C-9538-B40EEB9C1ED4</key>
 		<dict>
@@ -1204,7 +1210,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>315</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>560</real>
 		</dict>
 		<key>2FE4C0FD-B052-4444-9957-22B0EBCAED50</key>
 		<dict>
@@ -1213,7 +1219,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>450</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>860</real>
 		</dict>
 		<key>660ACE51-61E1-4231-AB1E-78745ADC2616</key>
 		<dict>
@@ -1229,9 +1235,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>280</real>
+			<real>285</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>995</real>
 		</dict>
 		<key>771DD115-1E19-4CFC-AB74-649F9A758391</key>
 		<dict>
@@ -1242,7 +1248,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>365</real>
 		</dict>
 		<key>77E50339-2F7F-49F6-8E05-99B0118186A7</key>
 		<dict>
@@ -1262,16 +1268,16 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>705</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>365</real>
 		</dict>
 		<key>8499FF4E-79F4-45EB-B3B6-7B25914C723B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1225</real>
+			<real>1190</real>
 		</dict>
 		<key>8A20019D-C824-4ACB-8917-F7347E7CEFD9</key>
 		<dict>
@@ -1280,9 +1286,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>update sketchybar counter</string>
 			<key>xpos</key>
-			<real>1085</real>
+			<real>1125</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>335</real>
 		</dict>
 		<key>95F95EF4-4164-4FC1-B288-14C9051B21C8</key>
 		<dict>
@@ -1291,9 +1297,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>only shown on failure or copy</string>
 			<key>xpos</key>
-			<real>825</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>335</real>
 		</dict>
 		<key>A0D4A0E0-54A3-4239-B00B-59020FEE6F23</key>
 		<dict>
@@ -1304,7 +1310,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>165</real>
 		</dict>
 		<key>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</key>
 		<dict>
@@ -1315,7 +1321,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>560</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>335</real>
 		</dict>
 		<key>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</key>
 		<dict>
@@ -1337,7 +1343,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>335</real>
 		</dict>
 		<key>CEBC5466-4576-4DA5-98A4-EF772D8A7198</key>
 		<dict>
@@ -1348,7 +1354,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>315</real>
 			<key>ypos</key>
-			<real>690</real>
+			<real>645</real>
 		</dict>
 		<key>D3F89D51-C7EA-4A95-8477-B40256917808</key>
 		<dict>
@@ -1357,25 +1363,25 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>450</real>
 			<key>ypos</key>
-			<real>775</real>
+			<real>745</real>
 		</dict>
 		<key>DB7EDFF2-EF29-4EDB-9ED7-368149133A05</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>275</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>890</real>
 		</dict>
 		<key>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1355</real>
+			<real>1320</real>
 		</dict>
 		<key>E1952981-5610-42C6-967C-9728E176B587</key>
 		<dict>
@@ -1384,9 +1390,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>get Browser URL</string>
 			<key>xpos</key>
-			<real>185</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>1225</real>
+			<real>1190</real>
 		</dict>
 		<key>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</key>
 		<dict>
@@ -1408,7 +1414,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>465</real>
 		</dict>
 		<key>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</key>
 		<dict>
@@ -1417,9 +1423,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>create new sidenote (and close)</string>
 			<key>xpos</key>
-			<real>555</real>
+			<real>530</real>
 			<key>ypos</key>
-			<real>1115</real>
+			<real>1150</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

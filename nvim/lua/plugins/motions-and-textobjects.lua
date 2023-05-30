@@ -9,10 +9,14 @@ return {
 		keys = ":",
 		config = true,
 	},
-	{
+	{ -- better % (highlighting & matches across lines)
 		"andymass/vim-matchup",
-		lazy = false, -- cannot be lazyloaded
+		lazy = false, -- cannot be properly lazy-loaded
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		init = function ()
+			vim.g.matchup_matchparen_offscreen = { method = "popup" }
+			vim.g.matchup_text_obj_enabled = 0
+		end,
 	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",

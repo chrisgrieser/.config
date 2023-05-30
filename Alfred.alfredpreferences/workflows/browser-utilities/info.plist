@@ -708,7 +708,9 @@
 		<key>CC1C31B7-31D7-489D-BDF4-B68BE14336D4</key>
 		<dict>
 			<key>note</key>
-			<string>backup for when browser history search workflow updates</string>
+			<string>leader → shift+b via Karabiner
+
+backup for when browser history search workflow updates</string>
 			<key>xpos</key>
 			<real>590</real>
 			<key>ypos</key>
