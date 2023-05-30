@@ -22,7 +22,7 @@ require("lazy").setup("plugins", {
 	ui = {
 		wrap = true,
 		border = require("config.utils").borderStyle,
-		size = { width = 1, height = 0.9 }, -- full sized
+		size = { width = 1, height = 0.92 }, -- full sized, except statusline
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates, required for statusline
@@ -36,6 +36,8 @@ require("lazy").setup("plugins", {
 		rtp = {
 			-- disable unused builtin plugins from neovim
 			disabled_plugins = {
+				"matchit", -- can be disabled with vim-matchup
+				"matchparen", -- can be disabled with vim-matchup
 				"netrw",
 				"netrwPlugin",
 				"gzip",

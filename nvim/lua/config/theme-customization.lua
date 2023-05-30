@@ -92,7 +92,7 @@ local function themeModifications()
 		linkHighlight("NotifyINFOTitle", "@string")
 		linkHighlight("NotifyINFOBody", "@string")
 	elseif theme == "bluloco" then
-		vim.cmd.highlight("clear MatchParen")
+		clearHighlight("MatchParen")
 		vim.opt.guicursor:append("i-ci-c:ver25")
 		vim.opt.guicursor:append("o-v:hor10")
 		if mode == "dark" then

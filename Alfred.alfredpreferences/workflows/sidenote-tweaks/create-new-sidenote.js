@@ -1,6 +1,10 @@
 #!/usr/bin/env osascript -l JavaScript
 
+const app = Application.currentApplication()
+app.includeStandardAdditions = true;
+ObjC.import("stdlib")
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+const sidenotes = Application("Sidenotes");
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -8,7 +12,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 // rome-ignore lint/correctness/noUnusedVariables: Alfred
 function run(argv) {
 	const input = argv[0];
-	const baseFolder = $.getenv("base_folder");
+	const baseFolder = sidenotes.folders.whose({"name": $.getenv("base_folder")})[0]() 
 
 	// without the folder field, uses the setting from SideNotes to determine new
 	// note location
