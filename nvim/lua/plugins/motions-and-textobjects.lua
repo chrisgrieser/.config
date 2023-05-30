@@ -35,7 +35,7 @@ return {
 
 	{ -- tons of text objects
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		event = "VimEnter",
+		lazy = false, -- to ensure it properly loads
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- tons of text objects

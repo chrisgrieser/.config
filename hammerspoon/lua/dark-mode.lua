@@ -30,7 +30,9 @@ local function toggleDarkMode()
 
 	-- neovim
 	local nvimLuaCmd = ([[require('config.theme-customization').setThemeMode('%s')]]):format(toMode)
-	local shellCmd1 = ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>lua %s<CR>"]]):format(nvimLuaCmd)
+	local shellCmd1 = ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>lua %s<CR>"]]):format(
+		nvimLuaCmd
+	)
 	hs.execute(u.exportPath .. shellCmd1)
 
 	-- Highlights PDF background
@@ -76,7 +78,14 @@ local function toggleDarkMode()
 	hs.execute(shellCmd2)
 end
 
-u.hotkey({}, "f13", toggleDarkMode) -- `del` key on Keychron Keyboard
+-- MANUAL TOGGLING OF DARK MODE
+-- `del` key on Keychron Keyboard
+u.hotkey({}, "f13", function()
+	toggleDarkMode()
+	local brightness = math.floor(hs.brightness.ambient())
+	local hasBrightnessSensor = brightness > -1
+	if hasBrightnessSensor then u.notify("☀️ Brightness:", tostring(brightness)) end
+end)
 
 --------------------------------------------------------------------------------
 
