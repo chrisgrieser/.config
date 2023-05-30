@@ -50,6 +50,10 @@ local tsConfig = {
 	},
 	endwise = { enable = true },
 	rainbow = { enable = true },
+	matchup = {
+		enable = true,
+		enable_quotes = true,
+	},
 	refactor = {
 		highlight_definitions = {
 			enable = true,

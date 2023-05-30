@@ -61,13 +61,14 @@ end, { desc = "󰽘 Inspect FileType & BufType" })
 keymap("n", "<leader>ln", function()
 	local history = require("notify").history {}
 	local lastNotify = history[#history]
+	print("lastNotify:", lastNotify)
 	if not lastNotify then
 		vim.notify("No Notification in this session.", u.warn)
 		return
 	end
-	local msg = table.concat(lastNotify.message, "\n")
+	local msg = lastNotify.message[1]
 	fn.setreg("+", msg)
-	vim.notify("Last Notification copied.", u.trace)
+	vim.notify("Last Notification copied.\n" .. msg, u.trace)
 end, { desc = "󰘳 Copy Last Notification" })
 
 -- Dismiss notifications & re-enable fold after search
@@ -447,7 +448,7 @@ keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " 󰽙 Bu
 
 -- stylua: ignore end
 keymap("", "<C-w>h", ":split<CR>", { desc = " horizontal split" })
-keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = " vertical resize (+)" }) 
+keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = " vertical resize (+)" })
 keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = " vertical resize (-)" })
 keymap("", "<C-Down>", ":resize +3<CR>", { desc = " horizontal resize (+)" })
 keymap("", "<C-Up>", ":resize -3<CR>", { desc = " horizontal resize (-)" })
