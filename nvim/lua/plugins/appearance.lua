@@ -41,8 +41,7 @@ return {
 			},
 		},
 	},
-	-- more capable than satellite, but not used yet pending:
-	-- - https://github.com/dstein64/nvim-scrollview/issues/88
+	-- INFO more capable than satellite, but not used yet pending gitsigns support:
 	-- - https://github.com/dstein64/nvim-scrollview/issues/87
 	-- { -- Scrollbar, also shows search matches and git signs
 	-- 	"dstein64/nvim-scrollview",

@@ -12,6 +12,7 @@ keymap("n", "-", "zn/", { desc = "/ & Pause Folds" })
 
 -- while searching: pause folds
 vim.on_key(function(char)
+	if vim.g.scrollview_refreshing then return end -- FIX: https://github.com/dstein64/nvim-scrollview/issues/88#issuecomment-1570400161
 	local key = fn.keytrans(char)
 	local searchKeys = { "n", "N", "*", "#", "/", "?" }
 	local searchConfirmed = (key == "<CR>" and fn.getcmdtype():find("[/?]") ~= nil)
