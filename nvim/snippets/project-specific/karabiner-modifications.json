@@ -1,14 +1,14 @@
 {
 	"to": {
 		"prefix": "to",
-		"body": "- {key_code: ${1:key}, modifiers: [${2:command}]}"
+		"body": "- { key_code: ${1:key}, modifiers: [${2:command}] }"
 	},
 	"from": {
 		"prefix": "from",
-		"body": "from: {key_code: ${1:key}, modifiers: {mandatory: [${2:command}]}}"
+		"body": "from: { key_code: ${1:key}, modifiers: { mandatory: [${2:command}] } }"
 	},
 	"delay": {
 		"prefix": "delay",
-		"body": "- {key_code: vk_none, hold_down_milliseconds: ${1:50}}"
+		"body": "- { key_code: vk_none, hold_down_milliseconds: ${1:50} }"
 	}
 }

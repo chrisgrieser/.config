@@ -49,6 +49,22 @@ rules:
           - *activate-leader
           - *set-notice
         parameters: { basic.to_if_alone_timeout_milliseconds: 200 }
+      - type: basic
+        description: "2x L-Ctrl: Finder"
+        from: { key_code: left_control }
+        conditions: [*leader-active]
+        to_if_alone:
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "file-hub-cycle" in workflow "de.chris-grieser.finder"'
+          - *deactivate-leader
+          - *remove-notice
+      - type: basic
+        description: "2x R-Cmd: Ctrl+E"
+        from: { key_code: right_command }
+        conditions: [*leader-active]
+        to_if_alone:
+          - { key_code: e, modifiers: [control] }
+          - *deactivate-leader
+          - *remove-notice
       # Cancel (Hyper/Esc)
       - type: basic
         description: "Hyper (Esc): Leader Cancel"
