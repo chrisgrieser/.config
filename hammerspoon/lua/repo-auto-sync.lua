@@ -90,8 +90,8 @@ end
 if not u.isReloading() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
-RepoSyncMins = 30
-RepoSyncTimer = hs.timer.doEvery(RepoSyncMins * 60, function() syncAllGitRepos(false) end):start()
+local repoSyncMins = 20
+RepoSyncTimer = hs.timer.doEvery(repoSyncMins * 60, function() syncAllGitRepos(false) end):start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
 u.urischeme("sync-repos", function()

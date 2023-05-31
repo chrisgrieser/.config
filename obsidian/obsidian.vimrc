@@ -112,8 +112,8 @@ nmap gc u<C-r>
 " Search & replace
 """"""""""""""""""""""
 
-" exmap liveGrep obcommand obsidian-another-quick-switcher:grep
-exmap liveGrep obcommand omnisearch:show-modal
+" exmap liveGrep obcommand omnisearch:show-modal
+exmap liveGrep obcommand obsidian-another-quick-switcher:grep
 nmap gl :liveGrep
 
 exmap searchReplace obcommand editor:open-search-replace
