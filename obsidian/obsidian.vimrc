@@ -119,6 +119,11 @@ nmap gl :liveGrep
 exmap searchReplace obcommand editor:open-search-replace
 nmap ,ff :searchReplace
 
+" exmap diffview obcommand obsidian-version-history-diff:open-git-diff-view
+exmap diffview obcommand obsidian-version-history-diff:open-recovery-diff-view
+nmap ,gd :diffview
+
+
 """"""""""""""""""""""
 " Editing
 """"""""""""""""""""""
