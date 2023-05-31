@@ -44,20 +44,19 @@ return {
 	-- more capable than satellite, but not used yet pending:
 	-- - https://github.com/dstein64/nvim-scrollview/issues/88
 	-- - https://github.com/dstein64/nvim-scrollview/issues/87
-	{ -- Scrollbar, also shows search matches and git signs
-		"dstein64/nvim-scrollview",
-		event = "VeryLazy",
-		opts = {
-			base = "right",
-			column = 1,
-			winblend = 60, -- winblend = transparency
-			excluded_filetypes = {},
-			signs_on_startup = { "conflicts", "search", "diagnostics", "quickfix" },
-		},
-	},
+	-- { -- Scrollbar, also shows search matches and git signs
+	-- 	"dstein64/nvim-scrollview",
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		base = "right",
+	-- 		column = 1,
+	-- 		winblend = 60, -- winblend = transparency
+	-- 		excluded_filetypes = {},
+	-- 		signs_on_startup = { "conflicts", "search", "diagnostics", "quickfix" },
+	-- 	},
+	-- },
 	{ -- Scrollbar, also shows search matches and git signs
 		"lewis6991/satellite.nvim",
-		enabled = false,
 		event = "VeryLazy",
 		opts = {
 			winblend = 60, -- winblend = transparency
