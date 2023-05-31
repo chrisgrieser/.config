@@ -1,5 +1,6 @@
 local cmd = vim.cmd
 local keymap = vim.keymap.set
+local fn = vim.fn
 --------------------------------------------------------------------------------
 
 -- Enable wrapping lines
@@ -13,6 +14,16 @@ vim.opt_local.signcolumn = "yes:9"
 vim.opt_local.formatoptions:remove("t")
 
 --------------------------------------------------------------------------------
+
+-- Open in Obsidian
+keymap("n", "<D-S-l>", function ()
+	local isInMainVault = vim.startswith(fn.expand("%"), vim.env.VAULT_PATH)
+	if not isInMainVault then
+		vim.notify("Not in Obsidian vault", vim.log.levels.WARN)	
+		return
+	end
+	
+end, { desc = " Open in Obsidian", buffer = true })
 
 -- Build / Preview
 keymap("n", "<D-r>", "<Plug>MarkdownPreview", { desc = "  Preview", buffer = true })

@@ -9,17 +9,14 @@ local wu = require("lua.window-utils")
 
 local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger update-sidenotes-count") end
 
+-- update counter in sketchybar
+-- enlarge on startup
 SidenotesWatcher = u.aw
-	.new(function(appName, event, appObj)
-		-- UPDATE COUNTER IN SKETCHYBAR
-		-- i.e., run on any event related to sidenotes
-		if appName == "SideNotes" then updateCounter() end
+	.new(function(appName, event, sidenotes)
+		if appName ~= "SideNotes" then return end
 
-		-- enlarge on startup/activatrion
-		if appName == "SideNotes" and event == u.aw.launched then
-			local win = appObj:mainWindow()
-			wu.moveResize(win, wu.sideNotesWide)
-		end
+		updateCounter() -- i.e., run on any event related to sidenotes
+		if event == u.aw.launched then wu.moveResize(sidenotes:mainWindow(), wu.sideNotesWide) end
 	end)
 	:start()
 
@@ -28,6 +25,7 @@ SidenotesWatcher = u.aw
 -- MOVE OFFICE NOTES TO BASE (when loading hammerspoon in office)
 -- run as task so it's non-blocking
 local function moveOfficeNotesToBase()
+	if not u.appRunning("SideNotes") then u.openApps("SideNotes") end
 	local script = "./helpers/move-office-sidenotes-to-base.js"
 	if PushOfficeNotesTask and PushOfficeNotesTask:isRunning() then return end
 
@@ -49,6 +47,8 @@ end
 -- REMINDERS -> SIDENOTES
 -- run as task so it's non-blocking
 function M.reminderToSidenotes()
+	if not u.appRunning("SideNotes") then u.openApps("SideNotes") end
+
 	local script = "./helpers/push-todays-reminders-to-sidenotes.js"
 	if PushRemindersTask and PushRemindersTask:isRunning() then return end
 
@@ -69,13 +69,13 @@ end
 
 --------------------------------------------------------------------------------
 
--- INITIALIZE
+-- SYSTEMSTART
 -- with delay, to avoid importing duplicate reminders due to reminders
 -- not being synced yet
-if env.isAtOffice and not u.isReloading() then
+if not u.isReloading() then
 	u.runWithDelays(15, function()
-		moveOfficeNotesToBase()
 		M.reminderToSidenotes()
+		if env.isAtOffice then moveOfficeNotesToBase() end
 	end)
 end
 
