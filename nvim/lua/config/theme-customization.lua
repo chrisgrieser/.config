@@ -57,7 +57,6 @@ local function customHighlights()
 	updateHighlight("QuickScopeSecondary", "gui=underdouble cterm=underline")
 end
 
--- selene: allow(high_cyclomatic_complexity)
 local function themeModifications()
 	local mode = vim.opt.background:get()
 	local theme = g.colors_name

@@ -34,7 +34,7 @@ return {
 				-- filetypes
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
 				bib = { icon = "", name = "BibTeX" },
-				http = { icon = "󰴚", name = "http request" },
+				http = { icon = "󰴚", name = "HTTP request" },
 				-- plugins
 				lazy = { icon = "", name = "Lazy" },
 				mason = { icon = "", name = "Mason" },
