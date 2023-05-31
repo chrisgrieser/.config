@@ -102,15 +102,13 @@ function run(argv) {
 		.filter((/** @type {{ folder: string; }} */ item) => item.folder !== ignoredFolder);
 
 	// new note
-	results.push({
-		title: " 🆕 New Sidenote: " + query,
-		arg: query,
-		mods: {
-			ctrl: { valid: false },
-			alt: { valid: false },
-			cmd: { valid: false },
-		},
-	});
+	if (query.length > 3 || results.length === 0) {
+		results.push({
+			title: " 🆕 New Sidenote: " + query,
+			arg: query,
+			mods: { ctrl: { valid: false }, alt: { valid: false }, cmd: { valid: false } },
+		});
+	}
 
 	return JSON.stringify({ items: results });
 }
