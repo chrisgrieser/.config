@@ -17,12 +17,14 @@ vim.opt_local.formatoptions:remove("t")
 
 -- Open in Obsidian
 keymap("n", "<D-S-l>", function ()
-	local isInMainVault = vim.startswith(fn.expand("%"), vim.env.VAULT_PATH)
+	local filepath = fn.expand("%:p")
+	local isInMainVault = vim.startswith(filepath, vim.env.VAULT_PATH)
 	if not isInMainVault then
 		vim.notify("Not in Obsidian vault", vim.log.levels.WARN)	
 		return
 	end
-	
+	-- assumes being on mac and the Obsidian-opener.app set as default app for markdown files
+	fn.system("open -a Obsidian", filepath) 
 end, { desc = " Open in Obsidian", buffer = true })
 
 -- Build / Preview
