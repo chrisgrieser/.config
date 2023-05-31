@@ -59,7 +59,7 @@ return {
 		dev = true,
 		event = "VeryLazy",
 		opts = {
-			retirementAgeMins = 20,
+			retirementAgeMins = 30,
 			ignoreUnsavedChangesBufs = false,
 			ignoreFilenamePattern = ".*%.d.ts$", -- reference file for JXA
 		},
