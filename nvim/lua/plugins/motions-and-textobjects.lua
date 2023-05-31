@@ -9,7 +9,7 @@ return {
 		keys = ":",
 		config = true,
 	},
-	{ -- better % (highlighting & matches across lines)
+	{ -- better % (highlighting, matches across lines, match quotes)
 		"andymass/vim-matchup",
 		lazy = false, -- cannot be properly lazy-loaded
 		dependencies = "nvim-treesitter/nvim-treesitter",
