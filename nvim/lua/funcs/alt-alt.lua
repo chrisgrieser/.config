@@ -101,7 +101,6 @@ function M.altBufferWindow()
 	else
 		vim.notify("Nothing to switch to.", vim.log.levels.WARN)
 	end
-	if require("satellite") then cmd.SatelliteRefresh() end
 end
 
 ---Close window/buffer, preserving alt-file
