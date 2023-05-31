@@ -344,7 +344,7 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"dmitmel/cmp-cmdline-history",
 			"hrsh7th/cmp-emoji",
-			-- { "chrisgrieser/cmp-nerdfont", dev = true },
+			{ "chrisgrieser/cmp-nerdfont", dev = true },
 			"tamago324/cmp-zsh", -- some shell completions
 			"jcdickinson/codeium.nvim", -- AI completions
 			"ray-x/cmp-treesitter",
