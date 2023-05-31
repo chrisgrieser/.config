@@ -154,7 +154,6 @@ UnlockWatcher = c.new(function(event)
 		u.runWithDelays(0.5, function() -- delay for recognizing screens
 			selectLayout()
 			sidenotes.reminderToSidenotes()
-			print("🤖 beep")
 		end)
 	end, 0.2)
 	-- deactivate the timer if the screen is woken but not unlocked

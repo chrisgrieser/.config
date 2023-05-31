@@ -41,6 +41,24 @@ function getNoteObj(noteId) {
 	return false;
 }
 
+function closeSideNotes() {
+	// apparently there is no JXA API for it, therefore done via keystrokes
+	// since it is ensured that SideNotes is the most frontmost app
+	delay(0.05);
+	Application("System Events").keystroke("w", { using: ["command down"] });
+}
+
+/**
+ * Delete Note, but keep copy in trash instead of irreversibly removing it
+ * @param {{safeTitle: any;text: () => string;delete: () => void;}} noteObj
+ * @param {string} safeTitle
+ */
+function deleteSideNote(noteObj, safeTitle) {
+	const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.md`;
+	writeToFile(trashNotePath, noteObj.text());
+	noteObj.delete();
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string[]} argv */
@@ -49,7 +67,7 @@ function run(argv) {
 	const sidenotes = Application("SideNotes");
 
 	// determine actions
-	let doDelete = argv[0].includes("delete");
+	const doDelete = argv[0].includes("delete");
 	const doOpenUrl = argv[0].includes("openurl");
 	const doCopy = argv[0].includes("copy");
 	const doExport = argv[0].includes("export");
@@ -58,14 +76,15 @@ function run(argv) {
 	const id = $.getenv("note_id");
 	const noteObj = id === "current" ? sidenotes.currentNote() : getNoteObj(id);
 
-	// get content
+	// get note properties
 	const content = noteObj.text(); // full content
 	const details = noteObj.content(); // content without title
 	const title = noteObj.title().trim();
 	let safeTitle = title.replace(/[/\\:;,"'#()[\]=<>{}?!|§]|\.$/gm, "-");
 	if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
 
-	// open URL (& close sidenotes)
+	//───────────────────────────────────────────────────────────────────────────
+
 	if (doOpenUrl) {
 		const urls = content.match(urlRegex);
 		if (!urls) return "⚠️ No URL found."; // notification
@@ -74,17 +93,12 @@ function run(argv) {
 
 		// dynamically decide whether to delete
 		const isLinkOnlyNote = [title, secondLine].includes(urls[0]);
-		doDelete = isLinkOnlyNote;
+		if (isLinkOnlyNote) deleteSideNote(noteObj, safeTitle);
+		closeSideNotes();
 	}
 
-	// Delete Note, but keep copy in trash instead of irreversibly removing it
-	if (doDelete) {
-		const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.md`;
-		writeToFile(trashNotePath, content);
-		noteObj.delete();
-	}
+	if (doDelete) deleteSideNote(noteObj, safeTitle);
 
-	// copy to clipboard
 	if (doCopy) app.setTheClipboardTo(content);
 
 	if (doExport) {
@@ -97,12 +111,7 @@ function run(argv) {
 		app.doShellScript(`open -R "${exportPath}"`);
 	}
 
-	if (doCopy && id === "current") {
-		// apparently there is no JXA API for it, therefore done via keystrokes
-		// since it is ensured that SideNotes is the most frontmost app
-		delay(0.05); /* eslint-disable-line no-magic-numbers */
-		Application("System Events").keystroke("w", { using: ["command down"] });
-	}
+	if (doCopy && id === "current") closeSideNotes();
 
 	// returns are used for the notification
 	if (doDelete && doOpenUrl) return "🔗 Opened & Deleted";
