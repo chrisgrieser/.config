@@ -127,6 +127,7 @@ keymap("c", "<C-S-n>", "<C-t>", { desc = "Next Match (when inc. search)" })
 
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
+	if vim.g.scrollview_refreshing then return end -- FIX: https://github.com/dstein64/nvim-scrollview/issues/88#issuecomment-1570400161
 	local searchKeys = { "n", "N", "*", "#" }
 	local searchConfirmed = (fn.keytrans(char) == "<CR>" and fn.getcmdtype():find("[/?]") ~= nil)
 	if not (searchConfirmed or fn.mode() == "n") then return end
