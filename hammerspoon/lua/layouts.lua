@@ -147,13 +147,14 @@ if not u.isReloading() then selectLayout() end
 -- 4. Waking
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if not (event == c.screensDidWake or event == c.systemDidWake) then return end
-	print("🔓 Unlock/Wake")
+	if not (event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock) then return end
+	print("🔓 Wake")
 
 	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
 		u.runWithDelays(0.5, function() -- delay for recognizing screens
 			selectLayout()
 			sidenotes.reminderToSidenotes()
+			print("🤖 beep")
 		end)
 	end, 0.2)
 	-- deactivate the timer if the screen is woken but not unlocked
