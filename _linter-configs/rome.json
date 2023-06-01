@@ -42,6 +42,7 @@
 				"useConst": "warn",
 				"noParameterAssign": "warn",
 				"useTemplate": "off",
+				"noUnusedTemplateLiteral": "warn",
 				"useSingleVarDeclarator": "off"
 			}
 		}

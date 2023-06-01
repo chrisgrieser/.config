@@ -36,9 +36,9 @@
 		"prefix": "Modifiers (Alfred)",
 		"body": [
 			"mods: {",
-			"\t${1:cmd}: {",
-			"\t\targ: \"${2:arg}\",",
-			"\t\tsubtitle: \"${1:cmd}: ${3:text}\",",
+			"\tcmd: {",
+			"\t\targ: $1,",
+			"\t\tsubtitle: \"⌘: $2\",",
 			"\t},",
 			"},"
 		]
