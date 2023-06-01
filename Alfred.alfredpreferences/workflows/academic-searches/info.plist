@@ -106,7 +106,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>rs|sci</string>
+				<string>rs||sci</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -190,7 +190,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>rs|lib</string>
+				<string>rs||lib</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
