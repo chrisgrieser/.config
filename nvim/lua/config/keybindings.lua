@@ -61,12 +61,14 @@ end, { desc = "󰽘 Inspect FileType & BufType" })
 keymap("n", "<leader>ln", function()
 	local history = require("notify").history {}
 	local lastNotify = history[#history]
-	print("lastNotify:", lastNotify)
 	if not lastNotify then
 		vim.notify("No Notification in this session.", u.warn)
 		return
 	end
-	local msg = lastNotify.message[1]
+	local msg = ""
+	for _, line in pairs(lastNotify.message) do
+		msg = msg .. line .. "\n"	
+	end
 	fn.setreg("+", msg)
 	vim.notify("Last Notification copied.\n" .. msg, u.trace)
 end, { desc = "󰘳 Copy Last Notification" })

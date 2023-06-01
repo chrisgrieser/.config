@@ -24,48 +24,45 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// INFO https://formulae.brew.sh/docs/api/
-const jsonArray = [];
+// INFO Not using API, since it's too slow and only has the benefit of providing
+// descriptions which I can live without
+// https://formulae.brew.sh/docs/api/
+const caskTxt = home + "/Library/Caches/Homebrew/api/cask_names.txt";
+const formulaTxt = home + "/Library/Caches/Homebrew/api/formula_names.txt";
+if (!(fileExists(formulaTxt) && fileExists(caskTxt))) app.doShellScript("brew update");
 
-// OFFLINE USAGE
-// const caskTxt = home + "/Library/Caches/Homebrew/api/cask_names.txt";
-// const formulaTxt = home + "/Library/Caches/Homebrew/api/formula_names.txt";
-// if (!(fileExists(formulaTxt) && fileExists(caskTxt))) app.doShellScript("brew update");
-// const casks = readFile(caskTxt).split("\n");
-// const formula = readFile(formulaTxt).split("\n");
-
-const caskApi = "https://formulae.brew.sh/api/cask.json"
-const formulaApi = "https://formulae.brew.sh/api/formula.json"
-const casks = JSON.parse(app.shellScript(`curl -s ${caskApi}`));
-const formulae = JSON.parse(app.shellScript(`curl -s ${formulaApi}`));
+const casks = readFile(caskTxt).split("\n");
+const formula = readFile(formulaTxt).split("\n");
 
 let mackups;
 try {
-	const mackupsStr = app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; mackup list")
-	mackups = mackupsStr ? mackupsStr.split("\r").map((/** @type {string | any[]} */ item) => item.slice(3)) : [];
+	const mackupsStr = app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; mackup list");
+	mackups = mackupsStr ? mackupsStr.split("\r").map((/** @type {string} */ item) => item.slice(3)) : [];
 } catch (error) {
 	console.log(error);
 }
 
+const jsonArray = [];
 //──────────────────────────────────────────────────────────────────────────────
 
-casks.forEach((cask) => {
-	const mackupIcon = mackups.includes(cask.name) ? " " + $.getenv("mackup_icon") : "";
-	const url = cask.homepage || "";
-	
+casks.forEach((name) => {
+	const mackupIcon = mackups.includes(name) ? " " + $.getenv("mackup_icon") : "";
 	jsonArray.push({
-		title: cask.name + mackupIcon,
-		match: alfredMatcher(cask.name),
-		subtitle: `cask – ${cask.desc}`,
-		arg: `${cask.token} --cask`,
-		uid: cask.token,
-		mods: {
-			cmd: {
-				arg: url,
-				subtitle: `⌘: ${url}`,
-				valid: Boolean(url)
-			},
-		},
+		title: name + mackupIcon,
+		match: alfredMatcher(name),
+		subtitle: "cask",
+		arg: `${name} --cask`,
+		uid: name,
+	});
+});
+formula.forEach((name) => {
+	const mackupIcon = mackups.includes(name) ? " " + $.getenv("mackup_icon") : "";
+	jsonArray.push({
+		title: name + mackupIcon,
+		match: alfredMatcher(name),
+		subtitle: "formula",
+		arg: `${name} --formula`,
+		uid: name,
 	});
 });
 
