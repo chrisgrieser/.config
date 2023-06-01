@@ -6,24 +6,6 @@
 bindkey -v
 export KEYTIMEOUT=1
 
-#-------------------------------------------------------------------------------
-# quote textobjs (i" i' i` i") https://github.com/zsh-users/zsh/blob/master/Functions/Zle/select-quoted
-autoload -U select-quoted
-zle -N select-quoted
-for m in visual viopp; do
-	for c in {a,i}{\',\",\`}; do
-		bindkey -M $m $c select-quoted
-	done
-done
-
-# bracket textobjs (i{ i( i[ https://github.com/zsh-users/zsh/blob/master/Functions/Zle/select-bracketed
-autoload -U select-bracketed
-zle -N select-bracketed
-for m in visual viopp; do
-	for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
-		bindkey -M $m $c select-bracketed
-	done
-done
 
 #-------------------------------------------------------------------------------
 # INFO: Display all commands for Normal/Insert Mode
@@ -62,12 +44,27 @@ zle -N vi-yank-pbcopy
 bindkey -M vicmd 'y' vi-yank-pbcopy
 
 # q in normal mode exists the Terminal
-function normal-mode-exit {
-	exit
-}
-zle -N normal-mode-exit
+zle -N exit
 bindkey -M vicmd 'q' normal-mode-exit
 
+#-------------------------------------------------------------------------------
+# quote textobjs (i" i' i` i") https://github.com/zsh-users/zsh/blob/master/Functions/Zle/select-quoted
+autoload -U select-quoted
+zle -N select-quoted
+for m in visual viopp; do
+	for c in {a,i}{\',\",\`}; do
+		bindkey -M $m $c select-quoted
+	done
+done
+
+# bracket textobjs (i{ i( i[ https://github.com/zsh-users/zsh/blob/master/Functions/Zle/select-bracketed
+autoload -U select-bracketed
+zle -N select-bracketed
+for m in visual viopp; do
+	for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+		bindkey -M $m $c select-bracketed
+	done
+done
 
 #-------------------------------------------------------------------------------
 
@@ -102,3 +99,5 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt. Use beam shape cursor on startup.
+
+

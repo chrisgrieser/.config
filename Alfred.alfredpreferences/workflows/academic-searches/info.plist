@@ -104,9 +104,9 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>keyword</key>
-				<string>rs</string>
+				<string>rs|sci</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -146,7 +146,7 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>keyword</key>
 				<string>rs</string>
 				<key>subtext</key>
@@ -188,9 +188,9 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>keyword</key>
-				<string>rs</string>
+				<string>rs|lib</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -251,7 +251,7 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>keyword</key>
 				<string>rs</string>
 				<key>subtext</key>
@@ -287,7 +287,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>615</real>
+			<real>610</real>
 			<key>ypos</key>
 			<real>215</real>
 		</dict>
@@ -307,9 +307,9 @@
 			<key>note</key>
 			<string>google scholar &amp; scite_</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>100</real>
+			<real>95</real>
 		</dict>
 		<key>46C7A417-8882-4A2C-97DF-DAE419A24391</key>
 		<dict>
