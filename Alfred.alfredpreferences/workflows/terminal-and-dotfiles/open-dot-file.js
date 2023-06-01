@@ -105,7 +105,7 @@ function run(argv) {
 	const folderArray = app
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
-			fd "gpg" --absolute-path --type=directory --hidden -E ".git"`,
+			fd --absolute-path --type=directory --hidden -E ".git"`,
 		)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {
