@@ -250,7 +250,7 @@ local lualineConfig = {
 			{ require("funcs.quickfix").counter },
 			{ searchCounter },
 			{
-				require("funcs.lsp-count").statusline,
+				require("dr-lsp").statusline,
 				cond = function() return vim.v.hlsearch == 0 end,
 				-- needs the highlight value, since setting the hlgroup directly
 				-- results in bg color being inherited from main editor
