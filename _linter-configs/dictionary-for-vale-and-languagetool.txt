@@ -58,3 +58,7 @@ dedenting
 keymappings
 copypaste
 treesitter
+LSP
+component
+reddit
+as
