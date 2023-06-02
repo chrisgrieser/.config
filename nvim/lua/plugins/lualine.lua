@@ -89,7 +89,7 @@ end
 
 local function clock()
 	-- only show the clock when fullscreen (= it covers the menubar clock)
-	if vim.opt.columns:get() < 110 or vim.opt.lines:get() < 25 then return "" end 
+	if vim.opt.columns:get() < 110 or vim.opt.lines:get() < 25 then return "" end
 
 	local time = tostring(os.date()):sub(12, 16)
 	if os.time() % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
@@ -255,6 +255,7 @@ local lualineConfig = {
 				-- needs the highlight value, since setting the hlgroup directly
 				-- results in bg color being inherited from main editor
 				color = function() return { fg = u.getHighlightValue("Comment", "fg") } end,
+				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP: ", " 󰈿") end,
 			},
 		},
 		lualine_x = {
