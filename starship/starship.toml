@@ -149,7 +149,7 @@ command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xm
 os = "macos"
 description = "Version number of Alfred Workflow"
 format = '[󰮤](purple) [󰏗 $output]($style)'
-style = "dimmed cyn"
+style = "dimmed cyan"
 
 [nodejs]
 format = " [$symbol$version]($style)"

@@ -22,7 +22,7 @@ const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	// local repos
-	let localRepoLocation = argv[0];
+	let localRepoLocation = argv[0]; // local repo path passed from .zshenv
 	const obsiPlugins = $.getenv("extra_folder_1").replace(/^~/, app.pathTo("home folder"));
 	localRepoLocation = `"${localRepoLocation}" "${obsiPlugins}"`;
 	const localRepos = {};
@@ -65,16 +65,18 @@ function run(argv) {
 			let matcher = alfredMatcher(repo.name);
 			let type = "";
 
+			// additions when repo is local
 			repo.local = localRepos[repo.name];
-			const localPath = repo.local?.path || "";
+			const mainArg = repo.local?.path || repo.html_url;
 			const terminalActionDesc = repo.local ? "Shallow Clone to Local Repo Folder" : "Open in Terminal";
-			const terminalArg = repo.local?.path || repo.html_url; // url
+			const terminalArg = repo.local?.path || repo.html_url; // open in terminal when local, clone when not
 			if (repo.local) {
 				if (localRepos[repo.name].dirty) type += "🔄";
 				type += "📂 ";
 				matcher += "local ";
 			}
 
+			// extra info
 			if (repo.archived) {
 				type += "🗄️ ";
 				matcher += "archived ";
@@ -83,7 +85,6 @@ function run(argv) {
 				type += "🍴 ";
 				matcher += "fork ";
 			}
-
 			let subtitle = "";
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
 			if (repo.open_issues_count > 0) subtitle += `🟢 ${repo.open_issues_count}  `;
@@ -94,12 +95,11 @@ function run(argv) {
 				title: `${type}${repo.name}`,
 				subtitle: subtitle,
 				match: matcher,
-				arg: localPath,
-				valid: Boolean(repo.local),
+				arg: mainArg,
 				mods: {
 					ctrl: {
-						subtitle: "⌘: Open at GitHUb",
-						arg: repo.html_url,
+						subtitle: `⌃: ${terminalActionDesc}`,
+						arg: terminalArg,
 					},
 					cmd: {
 						subtitle: "⌘: Open at GitHub",

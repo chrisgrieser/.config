@@ -17,6 +17,7 @@ keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = "�
 
 -- [P]lugins
 keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Sync" })
+keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Home" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
 keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason" })
 
