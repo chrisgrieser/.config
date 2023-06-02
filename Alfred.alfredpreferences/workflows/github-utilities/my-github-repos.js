@@ -105,6 +105,10 @@ function run(argv) {
 						subtitle: `⌃: ${terminalActionDesc}`,
 						arg: terminalArg,
 					},
+					alt: {
+						subtitle: "⌥: Copy GitHub URL",
+						arg: repo.html_url,
+					},
 					cmd: {
 						subtitle: "⌘: Open at GitHub",
 						arg: repo.html_url,
