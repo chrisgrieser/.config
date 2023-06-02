@@ -19,6 +19,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>17D804EC-6AFE-403E-A6CC-8F536D379033</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C27D01B3-A3B9-4661-9D70-8808DC522FD1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
 		<array>
 			<dict>
@@ -89,6 +102,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>17D804EC-6AFE-403E-A6CC-8F536D379033</string>
+				<key>modifiers</key>
+				<integer>8388608</integer>
+				<key>modifiersubtext</key>
+				<string>fn: Delete Local Repo</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
@@ -147,18 +170,7 @@
 			</dict>
 		</array>
 		<key>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FEBD9DE3-FB03-45CB-8EE1-296F4D8A360D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>80310399-4092-49D2-B048-D91D9184B37F</key>
 		<array>
 			<dict>
@@ -189,7 +201,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</string>
+				<string>FEBD9DE3-FB03-45CB-8EE1-296F4D8A360D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -333,6 +345,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FEBD9DE3-FB03-45CB-8EE1-296F4D8A360D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -743,6 +768,50 @@ osascript -l JavaScript "./my-github-repos.js" "$LOCAL_REPOS"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>delete-local-repo.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>17D804EC-6AFE-403E-A6CC-8F536D379033</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>C27D01B3-A3B9-4661-9D70-8808DC522FD1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -758,50 +827,6 @@ osascript -l JavaScript "./my-github-repos.js" "$LOCAL_REPOS"</string>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>97723BFB-AF21-4899-8AC3-8B0C784F5C4D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>clone-my-repo.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>⏳Cloning…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -879,6 +904,71 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>clone-my-repo.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⏳Cloning…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://github.com/search?type=code&amp;q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>DD31C61F-819C-45A5-B96D-FAA66AB179E9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>path</key>
 				<string></string>
 			</dict>
@@ -918,27 +1008,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://github.com/search?type=code&amp;q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>DD31C61F-819C-45A5-B96D-FAA66AB179E9</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1040,7 +1109,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>425</real>
+			<real>435</real>
 			<key>ypos</key>
 			<real>295</real>
 		</dict>
@@ -1052,6 +1121,17 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<real>665</real>
 			<key>ypos</key>
 			<real>265</real>
+		</dict>
+		<key>17D804EC-6AFE-403E-A6CC-8F536D379033</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>delete local repo</string>
+			<key>xpos</key>
+			<real>415</real>
+			<key>ypos</key>
+			<real>405</real>
 		</dict>
 		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
 		<dict>
@@ -1091,9 +1171,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>note</key>
 			<string>shallow clone to local repo folder</string>
 			<key>xpos</key>
-			<real>555</real>
+			<real>565</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>545</real>
 		</dict>
 		<key>4C690E73-DC85-438E-B8AA-52CD91D40CDA</key>
 		<dict>
@@ -1109,16 +1189,16 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>300</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>655</real>
 		</dict>
 		<key>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>435</real>
+			<real>495</real>
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
@@ -1136,9 +1216,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>720</real>
+			<real>730</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>645</real>
 		</dict>
 		<key>7EA483DA-F1D8-434E-B7BB-44B00E237DB6</key>
 		<dict>
@@ -1154,7 +1234,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>590</real>
+			<real>640</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1163,7 +1243,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>search in repo</string>
+			<string>search in local repo</string>
 			<key>xpos</key>
 			<real>495</real>
 			<key>ypos</key>
@@ -1192,9 +1272,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>225</real>
+			<real>275</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>225</real>
 		</dict>
 		<key>BC540696-9F8F-4C3E-A49D-75AB31EF690F</key>
 		<dict>
@@ -1215,6 +1295,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<real>405</real>
 			<key>ypos</key>
 			<real>740</real>
+		</dict>
+		<key>C27D01B3-A3B9-4661-9D70-8808DC522FD1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>570</real>
+			<key>ypos</key>
+			<real>405</real>
 		</dict>
 		<key>CC245103-888B-4440-A348-64F8A74D87F3</key>
 		<dict>
@@ -1243,7 +1332,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>440</real>
+			<real>490</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1270,18 +1359,18 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>415</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>545</real>
 		</dict>
 		<key>FEBD9DE3-FB03-45CB-8EE1-296F4D8A360D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>220</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
