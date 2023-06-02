@@ -242,9 +242,9 @@
 				<key>destinationuid</key>
 				<string>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘: Search in Repo</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
