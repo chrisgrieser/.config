@@ -43,18 +43,11 @@
 		"prefix": "ignore (vale)",
 		"body": "<!-- vale ${1|Vale.Spelling,Google.FirstPerson,Google.Will|} = NO -->"
 	},
-	"ignore start/end (ltex)": {
-		"prefix": "ignore (ltex)",
+	"ignore start/end (ltex/vale)": {
+		"prefix": "ignore (ltex/vale)",
 		"body": [
-			"<!-- LTeX: enabled=false -->",
-			"<!-- LTeX: enabled=true -->"
-		]
-	},
-	"ignore start/end (vale)": {
-		"prefix": "ignore start/end (vale)",
-		"body": [
-			"<!-- vale off -->",
-			"<!-- vale on -->"
+			"<!-- LTeX: enabled=false --><!-- vale off -->",
+			"<!-- LTeX: enabled=true --><!-- vale on -->"
 		]
 	},
 	"Markdown Codeblock": {
