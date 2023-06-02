@@ -118,6 +118,17 @@
 			<key>url</key>
 			<string>https://twitter.com/intent/tweet?text={query}</string>
 		</dict>
+		<key>70677B6B-6579-498F-A8CA-04FD895C37F4</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ud</string>
+			<key>text</key>
+			<string>Urban Dictionary: {query}</string>
+			<key>url</key>
+			<string>https://www.urbandictionary.com/define.php?term={query}</string>
+		</dict>
 		<key>84F64B41-9C2A-49F0-AAB4-E6FFB0BCB143</key>
 		<dict>
 			<key>enabled</key>
