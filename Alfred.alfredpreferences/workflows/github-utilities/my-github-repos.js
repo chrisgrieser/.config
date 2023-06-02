@@ -6,7 +6,7 @@ app.includeStandardAdditions = true;
 
 /** @param {string} str */
 function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
+	const clean = str.replace(/[-_.]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeperated, str].join(" ") + " ";
 }
@@ -35,9 +35,7 @@ function run(argv) {
 		.forEach((/** @type {string} */ gitFolderPath) => {
 			const localRepo = {};
 			localRepo.path = gitFolderPath.replace(/\.git\/?$/, "");
-			console.log("localRepo:", localRepo.path);
 			const name = localRepo.path.replace(/.*\/(.*)\/$/, "$1");
-			console.log("name:", name);
 			try {
 				localRepo.dirty = app.doShellScript(`cd "${localRepo.path}" && git status --porcelain`) !== "";
 			} catch (_error) {
@@ -50,7 +48,7 @@ function run(argv) {
 	//───────────────────────────────────────────────────────────────────────────
 	// fetch remote repos
 
-	const jsonArray = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`))
+	const scriptFilterArr = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`))
 		// sort local to the top, archived and forks to the bottom, then by stars
 		.sort((a, b) => {
 			a.isLocal = localRepos[a.name];
@@ -64,14 +62,19 @@ function run(argv) {
 			return b.stargazers_count - a.stargazers_count;
 		})
 		.map((repo) => {
-			if (repo.name === username) repo.name = "My GitHub Profile";
-
 			let matcher = alfredMatcher(repo.name);
 			let type = "";
-			if (localRepos[repo.name]) {
+
+			repo.local = localRepos[repo.name];
+			const localPath = repo.local?.path || "";
+			const terminalActionDesc = repo.local ? "Shallow Clone to Local Repo Folder" : "Open in Terminal";
+			const terminalArg = repo.local?.path || repo.html_url; // url
+			if (repo.local) {
+				if (localRepos[repo.name].dirty) type += "🔄";
 				type += "📂 ";
 				matcher += "local ";
 			}
+
 			if (repo.archived) {
 				type += "🗄️ ";
 				matcher += "archived ";
@@ -80,23 +83,35 @@ function run(argv) {
 				type += "🍴 ";
 				matcher += "fork ";
 			}
-			let subtitle = ""
+
+			let subtitle = "";
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
 			if (repo.open_issues_count > 0) subtitle += `🟢 ${repo.open_issues_count}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
+			if (repo.name === username) repo.name = "My GitHub Profile";
 
 			return {
 				title: `${type}${repo.name}`,
 				subtitle: subtitle,
 				match: matcher,
-				arg: repo.html_url,
+				arg: localPath,
+				valid: Boolean(repo.local),
 				mods: {
+					ctrl: {
+						subtitle: "⌘: Open at GitHUb",
+						arg: repo.html_url,
+					},
+					cmd: {
+						subtitle: "⌘: Open at GitHub",
+						arg: repo.html_url,
+					},
 					shift: {
 						subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
 						arg: repo.full_name,
+						valid: repo.open_issues > 0,
 					},
 				},
 			};
 		});
-	return JSON.stringify({ items: jsonArray });
+	return JSON.stringify({ items: scriptFilterArr });
 }
