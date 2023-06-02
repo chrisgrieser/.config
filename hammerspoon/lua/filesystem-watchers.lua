@@ -95,7 +95,7 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 			-- cannot be opened via browser though and also does not create recursion,
 			-- so it is opened here
 			if ext == "dmg" and not (fileName == "Stats.dmg") then hs.open(filep) end
-			u.runWithDelays(3, function() os.rename(filep, home .. "/.Trash/" .. fileName) end)
+			u.runWithDelays(3, function() os.remove(filep) end)
 
 		-- zip: unzip
 		elseif ext == "zip" and fileName ~= "violentmonkey.zip" then
