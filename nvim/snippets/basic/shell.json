@@ -72,8 +72,8 @@
 		"body": "${1:file_name}=${${1:file_name}%.*}"
 	},
 	"directory of script": {
-		"prefix": "directory of script",
-		"body": "cd \"$(dirname \"\\$0\")"
+		"prefix": "directory of this script",
+		"body": "cd \"$(dirname \"\\$0\")\" || return 1"
 	},
 	"osascript jxa (run script)": {
 		"prefix": ["jxa (run script)", "osascript -l JavaScript"],
