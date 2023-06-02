@@ -71,7 +71,7 @@ function run(argv) {
 			const terminalActionDesc = repo.local ? "Open in Terminal" : "Shallow Clone to Local Repo Folder";
 			const terminalArg = repo.local?.path || repo.html_url; // open in terminal when local, clone when not
 			if (repo.local) {
-				if (localRepos[repo.name].dirty) type += "🔄";
+				if (localRepos[repo.name].dirty) type += "🔄 ";
 				type += "📂 ";
 				matcher += "local ";
 			}
