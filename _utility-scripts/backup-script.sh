@@ -95,6 +95,13 @@ osascript -e 'display notification "" with title "Backup finished." sound name "
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# backup all my git repos
+if ! command -v yq &>/dev/null; then printf "\033[1;33myq not installed.\033[0m" && return 1; fi
 username="chrisgrieser"
 apiURL="https://api.github.com/users/${username}/repos?per_page=100"
+curl -s "$apiURL" | 
+	yq "filter(.fork == false) | map(.full_name)" --prettyPrint |
+	cut -c3- |
+	xargs -I {} git clone --depth=1 'git@github.com:{}.git'
+
 
