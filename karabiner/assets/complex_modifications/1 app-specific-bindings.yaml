@@ -232,13 +232,6 @@ rules:
           - key_code: down_arrow
             modifiers: [option, shift]
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
-      # toggle sidebar
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - key_code: d
-            modifiers: [command, shift]
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
       # back in history
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [control] } }

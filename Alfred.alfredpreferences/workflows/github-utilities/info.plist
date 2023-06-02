@@ -248,6 +248,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C27D01B3-A3B9-4661-9D70-8808DC522FD1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>299C54C6-4EFA-4B30-9121-759DD851803A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CC245103-888B-4440-A348-64F8A74D87F3</key>
 		<array>
 			<dict>
@@ -810,6 +823,14 @@ osascript -l JavaScript "./my-github-repos.js" "$LOCAL_REPOS"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>299C54C6-4EFA-4B30-9121-759DD851803A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>browser</key>
@@ -1141,6 +1162,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<real>335</real>
 			<key>ypos</key>
 			<real>770</real>
+		</dict>
+		<key>299C54C6-4EFA-4B30-9121-759DD851803A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>720</real>
+			<key>ypos</key>
+			<real>435</real>
 		</dict>
 		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
 		<dict>
