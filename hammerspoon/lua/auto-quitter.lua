@@ -7,8 +7,8 @@ local u = require("lua.utils")
 ---times after which apps should quit, in minutes
 ---(Apps not in this list will be ignored and never quit automatically).
 Thresholds = {
-	Slack = 15,
-	Obsidian = 60,
+	Slack = 20,
+	Obsidian = 100,
 	Mimestream = 5,
 	Highlights = 90,
 	Discord = 180,
