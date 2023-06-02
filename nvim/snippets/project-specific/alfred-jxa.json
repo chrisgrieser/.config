@@ -27,6 +27,7 @@
 		"prefix": "argv",
 		"body": [
 			"/** @param {string[]} argv */",
+			"// rome-ignore lint/correctness/noUnusedVariables: Alfred run",
 			"function run(argv){",
 			"\tconst ${1:query} = argv[0];",
 			"}"
