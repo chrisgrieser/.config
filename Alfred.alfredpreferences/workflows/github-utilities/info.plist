@@ -482,18 +482,18 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string># this way token is read from.zshenv
-osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
+				<string># this way path is read from .zshenv
+osascript -l JavaScript "./my-github-repos.js" "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>my-github-repos.js</string>
+				<string></string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string>Search my GitHub repos</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
