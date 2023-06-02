@@ -202,8 +202,8 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.filetype("css", {
 		sources = cmp.config.sources {
-			s.snippets,
 			s.lsp,
+			s.snippets,
 			s.codeium,
 			s.emojis,
 			-- buffer and treesitter too slow on big files

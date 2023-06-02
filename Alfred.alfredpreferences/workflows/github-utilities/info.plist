@@ -85,7 +85,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -1144,7 +1144,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>440</real>
+			<real>435</real>
 			<key>ypos</key>
 			<real>545</real>
 		</dict>
@@ -1192,27 +1192,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>results_number</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>✴️</string>
-				<key>placeholder</key>
-				<string>*</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Indicating dirty repo or file</string>
-			<key>label</key>
-			<string>Dirty Icon</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>dirty_icon</string>
 		</dict>
 		<dict>
 			<key>config</key>
