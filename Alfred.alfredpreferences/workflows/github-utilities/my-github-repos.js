@@ -29,7 +29,7 @@ function run(argv) {
 	app
 		.doShellScript(
 			`export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-			fd '\\.git$' --no-ignore --hidden --max-depth=2 ${localRepoLocation}`,
+			find ${localRepoLocation} -type d -maxdepth 2 -name ".git"`
 		)
 		.split("\r")
 		.forEach((/** @type {string} */ gitFolderPath) => {
@@ -68,7 +68,7 @@ function run(argv) {
 			// additions when repo is local
 			repo.local = localRepos[repo.name];
 			const mainArg = repo.local?.path || repo.html_url;
-			const terminalActionDesc = repo.local ? "Shallow Clone to Local Repo Folder" : "Open in Terminal";
+			const terminalActionDesc = repo.local ? "Open in Terminal" : "Shallow Clone to Local Repo Folder";
 			const terminalArg = repo.local?.path || repo.html_url; // open in terminal when local, clone when not
 			if (repo.local) {
 				if (localRepos[repo.name].dirty) type += "🔄";
@@ -97,6 +97,10 @@ function run(argv) {
 				match: matcher,
 				arg: mainArg,
 				mods: {
+					fn: {
+						subtitle: "fn: Delete Local Repo",
+						valid: Boolean(repo.local),
+					},
 					ctrl: {
 						subtitle: `⌃: ${terminalActionDesc}`,
 						arg: terminalArg,
