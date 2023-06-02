@@ -5,12 +5,12 @@
 # Naming config files necessary: https://github.com/lukas-reineke/cbfmt/issues/35
 
 [languages]
-lua = ["stylua --config-path=/Users/chrisgrieser/.config/linter-configs/stylua.toml -"]
+lua = ["stylua --config-path=/Users/chrisgrieser/.config/_linter-configs/stylua.toml -"]
 python = ["black --fast -"]
 json = ["yq -o=json"]
 yaml = ["yq --prettyPrint"]
 bash = ["shfmt -"]
 zsh = ["shfmt -"]
 sh = ["shfmt -"]
-css = ["stylelint --fix --config=/Users/chrisgrieser/.config/linter-configs/stylelintrc-formatting.yml"]
-markdown = ["markdownlint --stdin --fix --config=/Users/chrisgrieser/.config/linter-configs/markdownlintrc"]
+css = ["stylelint --fix --config=/Users/chrisgrieser/.config/_linter-configs/stylelintrc-formatting.yml"]
+markdown = ["markdownlint --stdin --fix --config=/Users/chrisgrieser/.config/_linter-configs/markdownlintrc"]

@@ -62,6 +62,11 @@ end
 --------------------------------------------------------------------------------
 
 return {
+	{ -- lsp definitions and references count in the status line
+		"chrisgrieser/nvim-dr-lsp",
+		dev = true,
+		lazy = true, -- loaded by lualine
+	},
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
