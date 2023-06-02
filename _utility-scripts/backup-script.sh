@@ -38,7 +38,7 @@ echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >>"$LOG_LOCATION"
 
 # Helper function
 errors=""
-function bkp() {
+function backup() {
 	[[ ! -d "$1" ]] && errors="$errors\n$1 does not exist."
 	print -n "\033[1;34m"
 	echo
@@ -56,12 +56,12 @@ function bkp() {
 # WARN each command has to sync to individual folders, since otherwise the `--delete` option will override the previous contents
 # INFO All source paths needs to end with a slash
 # INFO locations defined in zshenv
-bkp "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
-bkp "$HOME/Applications/" ./Homefolder/Applications # user cplications
-bkp "$DOTFILE_FOLDER/" ./Homefolder/config
-bkp "$VAULT_PATH/" ./Homefolder/main-vault
-bkp "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
-bkp "$HOME/RomComs/" ./Homefolder/RomComs
+backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
+backup "$HOME/Applications/" ./Homefolder/Applications # user cplications
+backup "$DOTFILE_FOLDER/" ./Homefolder/config
+backup "$VAULT_PATH/" ./Homefolder/main-vault
+backup "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
+backup "$HOME/RomComs/" ./Homefolder/RomComs
 
 #───────────────────────────────────────────────────────────────────────────────
 echo
@@ -92,3 +92,9 @@ osascript -e'
 
 # Notify on Completion
 osascript -e 'display notification "" with title "Backup finished." sound name ""'
+
+#───────────────────────────────────────────────────────────────────────────────
+
+username="chrisgrieser"
+apiURL="https://api.github.com/users/${username}/repos?per_page=100"
+
