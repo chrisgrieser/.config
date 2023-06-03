@@ -127,7 +127,10 @@ fi
 # Info Window Icon
 if [[ $INFO_WINDOW == 1 ]]; then
 	sleep 0.15
-	osascript -e 'tell application "System Events" to keystroke "v" using {command down}'
+	osascript -e 'tell application "System Events"
+		keystroke tab
+		keystroke "v" using {command down}
+	end tell'
 	sleep 0.15
 	return 0 # need to manually paste and then restart
 fi
@@ -138,7 +141,7 @@ if [[ "$APP" == "PWAs" ]]; then
 	killall "Dock" # INFO pgrep-ing for the Dock does not work, since there is always a process called that?
 	echo -n "All PWAs"
 	open "$PWA_FOLDER"
-	exit 0
+	return 0
 fi
 
 touch "$APP.app"
