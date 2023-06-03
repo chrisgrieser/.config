@@ -8,8 +8,8 @@ PWA_FOLDER="$HOME/Applications/Chrome Apps.localized" # INFO "Vivaldi Apps" is i
 
 #───────────────────────────────────────────────────────────────────────────────
 
-if ! command -v iconsur &>/dev/null; then echo -n "iconsur not installed." && exit 1; fi
-cd "/Applications/" || exit 1
+if ! command -v iconsur &>/dev/null; then echo "iconsur not installed." && return 1; fi
+cd "/Applications/" || return 1
 APP=$(basename "$*" .app)
 NONE_FOUND=0
 INFO_WINDOW=0
@@ -105,8 +105,6 @@ case $APP in
 	;;
 "PWAs")
 	cd "$PWA_FOLDER" || exit 1
-	iconsur set --local reddxxx.app &>/dev/null
-	iconsur set --input="$CUSTOM_ICON_FOLDER" --scale=1.1 BunnyFap.app &>/dev/null
 	iconsur set Tagesschau.app &>/dev/null
 	iconsur set Netflix.app &>/dev/null
 	iconsur set Twitch.app &>/dev/null
@@ -141,12 +139,12 @@ if [[ "$APP" == "PWAs" ]]; then
 	echo -n "All PWAs"
 	open "$PWA_FOLDER"
 	exit 0
-else
-	touch "$APP.app"
-	killall "Dock"
-	killall "$APP"
-	while pgrep -xq "$APP"; do sleep 0.1; done
-	sleep 0.1
-	open -a "$APP"
-	echo -n "$APP" # pass for notification
 fi
+
+touch "$APP.app"
+killall "Dock"
+killall "$APP"
+while pgrep -xq "$APP"; do sleep 0.1; done
+sleep 0.1
+open -a "$APP"
+echo -n "$APP" # pass for notification
