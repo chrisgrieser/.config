@@ -26,7 +26,7 @@ end
 ---checks whether the finder window is a small window (copy progress etc.)
 ---@param win hs.window
 ---@return boolean
-function M.isInvalidFinderWin(win) return win:size() ~= hs.geometry.size(404, 82) end
+function M.isInvalidFinderWin(win) return win:size() == hs.geometry.size(404, 82) end
 
 ---@param win hs.window
 ---@param relSize hs.geometry
@@ -107,24 +107,21 @@ local autoTilingInProgress = false
 ---appname. If this function is not triggered by a windowfilter event, the window
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
--- selene: allow(high_cyclomatic_complexity)
 function M.autoTile(winSrc)
-	-- prevent concurrent runs
-	if autoTilingInProgress then return end
+	if autoTilingInProgress then return end -- prevent concurrent runs
 
 	local wins = {}
 	if type(winSrc) == "string" then
 		-- cannot use windowfilter, since it's empty when not called from a
 		-- window filter subscription
-		local finder = u.app("Finder")
-		if not finder then return end
-		for _, finderWin in pairs(finder:allWindows()) do
-			-- ignore "small" finder windows
-			if finderWin:size() ~= hs.geometry.size(404.0, 82.0) then table.insert(wins, finderWin) end
-		end
+		local app = u.app(winSrc)
+		if not app then return end
+		wins = app:allWindows()
 	else
 		wins = winSrc:getWindows()
 	end
+	wins = hs.fnutils.filter(wins, function(win) return not M.isInvalidFinderWin(win) end)
+	if not wins then return end
 
 	autoTilingInProgress = true
 
