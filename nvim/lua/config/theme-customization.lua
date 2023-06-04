@@ -23,15 +23,6 @@ local function clearHighlight(hlgroup) cmd.highlight("clear " .. hlgroup) end
 
 --------------------------------------------------------------------------------
 
--- SIGN-COLUMN ICONS
-local signIcons = { Error = "", Warn = "▲", Info = "", Hint = "" }
-for type, icon in pairs(signIcons) do
-	local hl = "DiagnosticSign" .. type
-	fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
---------------------------------------------------------------------------------
-
 local function customHighlights()
 	-- stylua: ignore
 	local highlights = { "DiagnosticUnderlineError", "DiagnosticUnderlineWarn", "DiagnosticUnderlineHint", "DiagnosticUnderlineInfo", "SpellLocal", "SpellRare", "SpellCap", "SpellBad" }
@@ -39,15 +30,12 @@ local function customHighlights()
 		updateHighlight(v, "gui=underdouble cterm=underline")
 	end
 
-	-- NOTE: foo
-	-- TODO: bar
-	-- BUG(me): this
-	-- FIX(ffs)
-	-- HACK: 
-
-	-- linkHighlight("myAnnotations", "Todo")
-	-- stylua: ignore
-	-- fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
+	-- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
+	linkHighlight("myAnnotations", "Todo")
+	fn.matchadd(
+		"myAnnotations",
+		[[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|HACK\|INFO\|FIX\|CAVEAT\)\>]]
+	)
 
 	updateHighlight("Overnesting", "guibg=#E06C75")
 	fn.matchadd("Overnesting", ("\t"):rep(overnestingIndent) .. "\t*")
@@ -96,6 +84,7 @@ local function themeModifications()
 		linkHighlight("NotifyINFOBody", "@string")
 	elseif theme == "bluloco" then
 		clearHighlight("MatchParen")
+		updateHighlight("@text.uri", "guisp=NONE")
 		vim.opt.guicursor:append("i-ci-c:ver25")
 		vim.opt.guicursor:append("o-v:hor10")
 		if mode == "dark" then
@@ -139,8 +128,8 @@ autocmd("ColorScheme", {
 	callback = function()
 		-- defer needed for some modifications to properly take effect
 		for _, delayMs in pairs { 50, 200 } do
-			-- vim.defer_fn(themeModifications, delayMs)
-			-- vim.defer_fn(customHighlights, delayMs)
+			vim.defer_fn(themeModifications, delayMs)
+			vim.defer_fn(customHighlights, delayMs)
 		end
 	end,
 })
