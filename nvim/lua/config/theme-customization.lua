@@ -39,12 +39,15 @@ local function customHighlights()
 		updateHighlight(v, "gui=underdouble cterm=underline")
 	end
 
-	updateHighlight("urls", "cterm=underline gui=underline")
-	fn.matchadd("urls", [[http[s]\?:\/\/[[:alnum:]%\/_#.\-?:=&@+~]*]])
+	-- NOTE: foo
+	-- TODO: bar
+	-- BUG(me): this
+	-- FIX(ffs)
+	-- HACK: 
 
-	linkHighlight("myAnnotations", "Todo")
+	-- linkHighlight("myAnnotations", "Todo")
 	-- stylua: ignore
-	fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
+	-- fn.matchadd("myAnnotations", [[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|SIC\|TODO\|HACK\|INFO\|FIX\|CAVEAT\|DEPRECATED\)\>]])
 
 	updateHighlight("Overnesting", "guibg=#E06C75")
 	fn.matchadd("Overnesting", ("\t"):rep(overnestingIndent) .. "\t*")
@@ -136,8 +139,8 @@ autocmd("ColorScheme", {
 	callback = function()
 		-- defer needed for some modifications to properly take effect
 		for _, delayMs in pairs { 50, 200 } do
-			vim.defer_fn(themeModifications, delayMs)
-			vim.defer_fn(customHighlights, delayMs)
+			-- vim.defer_fn(themeModifications, delayMs)
+			-- vim.defer_fn(customHighlights, delayMs)
 		end
 	end,
 })
@@ -149,7 +152,7 @@ autocmd("ColorScheme", {
 function M.setThemeMode(mode)
 	vim.opt.background = mode
 	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
-	cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
+	-- cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	local targetTheme = mode == "dark" and g.darkTheme or g.lightTheme
 	cmd.colorscheme(targetTheme)
 end

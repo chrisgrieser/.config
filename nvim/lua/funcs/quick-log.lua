@@ -11,13 +11,12 @@ local logWarn = vim.log.levels.WARN
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 ---in normal mode, returns word under cursor, in visual mode, returns selection
----@return string?|nil
+---@return string?
 local function getVar()
 	local varname
 	if fn.mode() == "n" then
 		local node = vim.treesitter.get_node()
-		if not node then return end
-		varname = vim.treesitter.get_node_text(node, 0)
+		varname = node and vim.treesitter.get_node_text(node, 0) or expand("<cword>")
 	elseif fn.mode():find("[Vv]") then
 		local prevReg = fn.getreg("z")
 		normal('"zy')
@@ -45,7 +44,6 @@ end
 ---VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.log()
 	local varname = getVar() 
-	if not varname then return end
 	local templateStr
 	local ft = bo.filetype
 

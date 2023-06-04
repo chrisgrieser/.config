@@ -42,8 +42,9 @@ ExternalHarddriveWatcher = hs.usb.watcher
 
 		if u.tbl_contains(harddriveNames, name) then
 			hs.application.open("WezTerm")
-		else -- open volume
-			u.runWithDelays(1, function()
+		else 
+			-- open volume
+			u.runWithDelays({1, 2}, function()
 				local stdout, success =
 					hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
 				if not success or not stdout then return end
