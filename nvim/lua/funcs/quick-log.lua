@@ -16,7 +16,11 @@ local function getVar()
 	local varname
 	if fn.mode() == "n" then
 		local node = vim.treesitter.get_node()
-		varname = node and vim.treesitter.get_node_text(node, 0) or expand("<cword>")
+		if node then
+			varname = vim.treesitter.get_node_text(node, 0):gsub("[\n\r].*", "")
+		else
+			varname = expand("<cword>")
+		end
 	elseif fn.mode():find("[Vv]") then
 		local prevReg = fn.getreg("z")
 		normal('"zy')
@@ -43,7 +47,7 @@ end
 ---log statement for variable under cursor, similar to the 'turbo console log'
 ---VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.log()
-	local varname = getVar() 
+	local varname = getVar()
 	local templateStr
 	local ft = bo.filetype
 

@@ -53,7 +53,6 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- guard clauses
-	if not win or not win:application() then return end
 	local appsToIgnore = {
 		"System Settings",
 		"Twitter",
@@ -75,11 +74,12 @@ function M.moveResize(win, pos)
 	}
 	if
 		not win
+		or not (win:application())
 		or u.tbl_contains(winsToIgnore, win:title())
 		or u.tbl_contains(appsToIgnore, win:application():name())
 		or M.isInvalidFinderWin(win)
 	then
-		return nil
+		return
 	end
 
 	-- resize with safety redundancy
@@ -128,9 +128,8 @@ function M.autoTile(winSrc)
 	if #wins > 1 then M.bringAllWinsToFront() end
 
 	if #wins == 0 and u.isFront("Finder") and not (env.isProjector()) then
-		-- hide finder when no windows
-		-- delay needed for quitting fullscreen apps, which are sometimes counted
-		-- as finder windows (SIC)
+		-- hide finder when no windows (delay needed for quitting fullscreen apps,
+		-- which are sometimes counted as finder windows
 		u.runWithDelays(0.2, function()
 			if #(u.app("Finder"):allWindows()) == 0 then u.app("Finder"):hide() end
 		end)
@@ -199,7 +198,8 @@ Wf_appsOnMouseScreen = u.wf
 		if not (mouseScreen and env.isProjector() and app) then return end
 
 		u.runWithDelays({ 0, 0.2, 0.5, 0.8 }, function()
-			if mouseScreen:name() ~= screenOfWindow:name() then newWin:moveToScreen(mouseScreen) end
+			if mouseScreen:name() == screenOfWindow:name() then return end
+			newWin:moveToScreen(mouseScreen)
 			if app:name() == "Finder" or app:name() == "Script Editor" then
 				M.moveResize(newWin, M.centered)
 			else
