@@ -1,6 +1,6 @@
 local env = require("lua.environment-vars")
-local wu = require("lua.window-utils")
 local u = require("lua.utils")
+local wu = require("lua.window-utils")
 local wf = require("lua.utils").wf
 local aw = require("lua.utils").aw
 --------------------------------------------------------------------------------
@@ -261,21 +261,11 @@ Wf_script_editor = wf
 --------------------------------------------------------------------------------
 
 -- DISCORD
+-- when focused, enclose URL in clipboard with <>
+-- when unfocused, removes <> from URL in clipboard
 DiscordAppWatcher = aw.new(function(appName, eventType)
 	if not (appName == "Discord") then return end
 
-	-- on launch, open OMG Server instead of friends (who needs friends if you have Obsidian?)
-	if eventType == aw.launched then
-		u.asSoonAsAppRuns(
-			appName,
-			function()
-				u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
-			end
-		)
-	end
-
-	-- when focused, enclose URL in clipboard with <>
-	-- when unfocused, removes <> from URL in clipboard
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
 

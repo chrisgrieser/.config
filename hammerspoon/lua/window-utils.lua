@@ -9,7 +9,7 @@ M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
 M.sideNotesWide = { x = 0, y = 0, w = 0.4, h = 1 }
-local sidenotesNarrow =  { x = 0, y = 0, w = 0.19, h = 1 }
+local sidenotesNarrow = { x = 0, y = 0, w = 0.19, h = 1 }
 
 -- negative x to hide useless sidebar
 if env.isAtMother then
@@ -20,42 +20,14 @@ else
 	M.toTheSide = hs.geometry.rect(-70, 54, 425, 1026)
 end
 
-M.rejectedFinderWins = {
-	"^Quick Look$",
-	"^qlmanage$",
-	"^Move$",
-	"^Copy$",
-	"^Bin$",
-	"^Delete$",
-	"^Finder Settings$",
-	" Info$", -- Info window *end* with "Info"
-	"^$", -- Desktop, which has no window title
-	"^Alfred$", -- Alfred Compatibility Mode
-}
-
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
 ---@param win hs.window
 ---@param relSize hs.geometry
 ---@nodiscard
----@return boolean|nil result whether win has the given size. returns nil for invalid win
+---@return boolean
 function M.CheckSize(win, relSize)
-	local invalidWinsByTitle = { -- windows which can/should not be resized
-		"Copy", -- Finder
-		"Move", -- Finder
-		"Delete", -- Finder
-		"Bin", -- Finder
-		"System Settings",
-		"Espanso",
-		"Transmission",
-		"CleanShot X",
-		"Twitter",
-		"Alfred",
-		"Hammerspoon",
-	}
-	if not win or u.tbl_contains(invalidWinsByTitle, win:title()) then return nil end
-
 	local maxf = win:screen():frame()
 	local winf = win:frame()
 	local diffw = winf.w - relSize.w * maxf.w
@@ -77,19 +49,36 @@ end
 function M.moveResize(win, pos)
 	-- guard clauses
 	if not win or not win:application() then return end
-	local appsToIgnore =
-		{ "System Settings", "Twitter", "Transmission", "Alfred", "Hammerspoon", "CleanShot X" }
-	local appName = win:application():name()
+	local appsToIgnore = {
+		"System Settings",
+		"Twitter",
+		"Transmission",
+		"Alfred",
+		"Hammerspoon",
+		"CleanShot X",
+	}
+	local winsToIgnore = {
+		"System Settings",
+		"Espanso",
+		"Transmission",
+		"CleanShot X",
+		"Twitter",
+		"Alfred",
+		"Hammerspoon",
+		"Quicklook",
+		"qlmanage",
+	}
 	if
-		u.tbl_contains(appsToIgnore, appName)
-		or win:title() == "Quick Look"
-		or win:title() == "qlmanage"
+		not win
+		or u.tbl_contains(winsToIgnore, win:title())
+		or u.tbl_contains(appsToIgnore, win:application():name())
+		or win:size() == hs.geometry.size(404.0, 82.0) -- is a small Finder window
 	then
-		return
+		return nil
 	end
 
 	-- resize with safety redundancy
-	u.runWithDelays({ 0, 0.2, 0.4, 0.6, 0.8 }, function()
+	u.runWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
 		-- check for false, since non-resizable wins return nil
 		if M.CheckSize(win, pos) ~= false then return end
 		win:moveToUnit(pos)
@@ -125,11 +114,10 @@ function M.autoTile(winSrc)
 		local finder = u.app("Finder")
 		if not finder then return end
 		for _, finderWin in pairs(finder:allWindows()) do
-			local rejected = false
-			for _, bannedTitle in pairs(M.rejectedFinderWins) do
-				if finderWin:title():find(bannedTitle) then rejected = true end
+			-- ignore "small" finder windows
+			if finderWin:size() ~= hs.geometry.size(404.0,82.0) then
+				table.insert(wins, finderWin)
 			end
-			if not rejected then table.insert(wins, finderWin) end
 		end
 	else
 		wins = winSrc:getWindows()

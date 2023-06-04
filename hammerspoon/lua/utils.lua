@@ -202,7 +202,14 @@ function M.openApps(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
 		local runs = M.app(name) ~= nil
-		if not runs then hs.application.open(name) end
+		if not runs then
+			if name == "Discord" then
+				-- using the `launched` app watcher trigger is too slow	
+				M.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
+			else
+				hs.application.open(name)
+			end
+		end
 	end
 end
 

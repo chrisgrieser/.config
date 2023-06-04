@@ -13,13 +13,6 @@ local function dockSwitcher(targetMode)
 	hs.execute("zsh ./helpers/dock-switching/dock-switcher.sh --load " .. targetMode)
 end
 
----@return boolean
----@nodiscard
-local function isWeekend()
-	local weekday = os.date("%a")
-	return weekday == "Sun" or weekday == "Sat"
-end
-
 local function setHigherBrightnessDuringDay()
 	local hasBrightnessSensor = hs.brightness.ambient() > -1
 	if not hasBrightnessSensor then return end
@@ -66,8 +59,7 @@ local function workLayout()
 	closeAllFinderWins()
 
 	-- open
-	local appsToOpen = { "Discord", "Vivaldi", "Mimestream", "Twitter" }
-	if not isWeekend() then table.insert(appsToOpen, 1, "Slack") end
+	local appsToOpen = { "Discord", "Vivaldi", "Mimestream", "Twitter", "Slack" }
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
 		u.asSoonAsAppRuns(appName, function()
@@ -76,11 +68,9 @@ local function workLayout()
 		end)
 	end
 
-	-- sidenotes
 	sidenotes.reminderToSidenotes()
-	wu.moveResize(u.app("SideNotes"):mainWindow(), wu.sideNotesWide)
+	u.asSoonAsAppRuns("Discord", function() u.app("Mimestream"):activate() end)
 
-	u.runWithDelays(1, function () u.app("Mimestream"):activate() end)
 	print("🔲 WorkLayout: done")
 end
 
@@ -144,7 +134,9 @@ if not u.isReloading() then selectLayout() end
 -- 4. Waking
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if not (event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock) then return end
+	if not (event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock) then
+		return
+	end
 	print("🔓 Wake")
 
 	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
@@ -160,4 +152,3 @@ UnlockWatcher = c.new(function(event)
 		end
 	end)
 end):start()
-
