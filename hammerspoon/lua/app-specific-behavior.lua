@@ -175,12 +175,17 @@ end)
 
 Wf_finder = wf.new("Finder")
 	:setOverrideFilter({
-		rejectTitles = wu.rejectedFinderWins,
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(wf.windowCreated, function() wu.autoTile(Wf_finder) end)
-	:subscribe(wf.windowDestroyed, function() wu.autoTile(Wf_finder) end)
+	:subscribe(wf.windowCreated, function(win)
+		if wu.isInvalidFinderWin(win) then return end
+		wu.autoTile(Wf_finder)
+	end)
+	:subscribe(wf.windowDestroyed, function(win)
+		if wu.isInvalidFinderWin(win) then return end
+		wu.autoTile(Wf_finder)
+	end)
 
 FinderAppWatcher = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then

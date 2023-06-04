@@ -23,6 +23,11 @@ end
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
+---checks whether the finder window is a small window (copy progress etc.)
+---@param win hs.window
+---@return boolean
+function M.isInvalidFinderWin(win) return win:size() ~= hs.geometry.size(404, 82) end
+
 ---@param win hs.window
 ---@param relSize hs.geometry
 ---@nodiscard
@@ -72,7 +77,7 @@ function M.moveResize(win, pos)
 		not win
 		or u.tbl_contains(winsToIgnore, win:title())
 		or u.tbl_contains(appsToIgnore, win:application():name())
-		or win:size() == hs.geometry.size(404.0, 82.0) -- is a small Finder window
+		or M.isInvalidFinderWin(win)
 	then
 		return nil
 	end
@@ -115,9 +120,7 @@ function M.autoTile(winSrc)
 		if not finder then return end
 		for _, finderWin in pairs(finder:allWindows()) do
 			-- ignore "small" finder windows
-			if finderWin:size() ~= hs.geometry.size(404.0,82.0) then
-				table.insert(wins, finderWin)
-			end
+			if finderWin:size() ~= hs.geometry.size(404.0, 82.0) then table.insert(wins, finderWin) end
 		end
 	else
 		wins = winSrc:getWindows()
@@ -194,15 +197,12 @@ Wf_appsOnMouseScreen = u.wf
 	})
 	:subscribe(u.wf.windowCreated, function(newWin)
 		local mouseScreen = hs.mouse.getCurrentScreen()
-		if not mouseScreen then return end
-		local screenOfWindow = newWin:screen()
-		if not (env.isProjector()) or mouseScreen:name() == screenOfWindow:name() then return end
 		local app = newWin:application()
-		if not app then return end
+		local screenOfWindow = newWin:screen()
+		if not (mouseScreen and env.isProjector() and app) then return end
 
-		u.runWithDelays({ 0, 0.2, 0.5, 0.8, 1.1 }, function()
+		u.runWithDelays({ 0, 0.2, 0.5, 0.8 }, function()
 			if mouseScreen:name() ~= screenOfWindow:name() then newWin:moveToScreen(mouseScreen) end
-
 			if app:name() == "Finder" or app:name() == "Script Editor" then
 				M.moveResize(newWin, M.centered)
 			else
