@@ -610,6 +610,7 @@
 				<integer>102</integer>
 				<key>script</key>
 				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+sleep 0.5
 sketchybar --trigger update-sidenotes-count</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>

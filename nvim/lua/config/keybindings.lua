@@ -400,8 +400,6 @@ keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" }
 -- Merging / Splitting Lines
 keymap("n", "<leader>s", cmd.TSJToggle, { desc = "󰗈 split/join lines" })
 keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split around selection" })
-keymap("n", "<leader>S", "gww", { desc = "󰗈 split line" })
-keymap("x", "<leader>S", "gw", { desc = "󰗈 split selection" })
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 merge line up" })
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 merge line down" })
 
@@ -680,11 +678,9 @@ autocmd("LspAttach", {
 			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
 		end
 		if capabilities.documentSymbolProvider then
-			keymap("c", "gS", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Document Symbols", buffer = true }) -- overrides treesitter symbols browsing
-
 			-- overwrites treesitter goto-symbol
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true })
-			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
+			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 		-- stylua: ignore end
 	end,
@@ -793,17 +789,15 @@ keymap("n", "<leader>tt", cmd.ToggleTerm, { desc = " ToggleTerm" })
 -- stylua: ignore
 keymap("x", "<leader>tt", cmd.ToggleTermSendVisualSelection, { desc = "  Run Selection in ToggleTerm" })
 
-keymap("n", "<leader>tl", function()
-	-- supported languages: https://github.com/0x100101/lab.nvim#languages
-	local ftmaps = { lua = "lua", javascript = "js", typescript = "ts", python = "py" }
-
-	cmd.edit("/tmp/󰙨 Lab." .. ftmaps[bo.filetype])
-	cmd.write()
-	cmd("Lab code run")
-
-	keymap("n", "<leader>r", "<cmd>Lab code run<CR>", { desc = "󰙨 Run Code", buffer = true })
-	keymap("n", "<leader>tl", "<cmd>Lab code run<CR>", { desc = "󰙨 Run Code", buffer = true })
-end, { desc = "󰙨 Lab (REPL)" })
+keymap("n", "<leader>tc", function()
+	local isCodiBuffer = bo.buftype == "nofile"
+	if isCodiBuffer then
+		cmd.CodiExpand() -- multiline output for the current line
+	else
+		cmd.CodiNew()
+		vim.api.nvim_buf_set_name(0, "Codi: " .. bo.filetype)
+	end
+end, { desc = " Codi" })
 
 -- edit embedded filetype
 keymap("n", "<leader>te", function()

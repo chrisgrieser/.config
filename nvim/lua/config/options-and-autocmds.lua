@@ -34,7 +34,8 @@ opt.shadafile = u.vimDataDir .. "main.shada"
 opt.undofile = true -- enable persistent undo history
 
 -- extra undopoints (= more fine-grained undos)
--- WARN requires remap, since it otherwise prevents vim abbrev. with those chars from working
+-- WARN requires `remap = true`, since it otherwise prevents vim abbreviations
+-- with those chars from working
 local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
 for _, char in pairs(undopointChars) do
 	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char, remap = true })
@@ -47,8 +48,8 @@ opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select more
 
 -- Search
-opt.smartcase = true
 opt.ignorecase = true
+opt.smartcase = true
 
 -- when closing a bracket, briefly flash the matching one
 opt.showmatch = true
@@ -262,7 +263,6 @@ for _, ft in pairs(ftWithSkeletons) do
 	autocmd("BufNewFile", {
 		pattern = "*." .. ft,
 		callback = function()
-			if expand("%:t") == "󰙨 Lab.js" then return end
 			cmd(readCmd)
 			u.normal("G")
 		end,

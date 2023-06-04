@@ -1,13 +1,7 @@
 return {
 	{ -- Code Runner / Scratchpad
-		-- currently only supports js/ts, python, and lua: https://github.com/0x100101/lab.nvim#languages
-		"0x100101/lab.nvim",
-		cmd = "Lab",
-		dependencies = "nvim-lua/plenary.nvim",
-		build = "cd js && npm ci",
-		opts = {
-			quick_data = { enabled = false },
-		},
+		"metakirby5/codi.vim",
+		cmd = { "CodiNew", "Codi", "CodiExpand" },
 	},
 	{ -- HTTP requester (e.g., test APIs)
 		"rest-nvim/rest.nvim",
