@@ -44,7 +44,6 @@ function getNoteObj(noteId) {
 function closeSideNotes() {
 	// apparently there is no JXA API for it, therefore done via keystrokes
 	// since it is ensured that SideNotes is the most frontmost app
-	delay(0.05);
 	Application("System Events").keystroke("w", { using: ["command down"] });
 }
 
@@ -88,13 +87,13 @@ function run(argv) {
 	if (doOpenUrl) {
 		const urls = content.match(urlRegex);
 		if (!urls) return "⚠️ No URL found."; // notification
+		closeSideNotes(); // needs to close before opening URL due to focus loss
 		app.openLocation(urls[0]);
-		const secondLine = details.split("\n")[0].trim();
 
-		// dynamically decide whether to delete
+		// dynamically decide whether to delete note
+		const secondLine = details.split("\n")[0].trim();
 		const isLinkOnlyNote = [title, secondLine].includes(urls[0]);
 		if (isLinkOnlyNote) deleteSideNote(noteObj, safeTitle);
-		closeSideNotes();
 	}
 
 	if (doDelete) deleteSideNote(noteObj, safeTitle);
