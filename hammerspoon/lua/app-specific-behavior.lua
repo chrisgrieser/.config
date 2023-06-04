@@ -187,9 +187,11 @@ Wf_finder = wf.new("Finder")
 		wu.autoTile(Wf_finder)
 	end)
 
+-- also triggered via app-watcher, since windows created in the bg do not always
+-- trigger window filters
 FinderAppWatcher = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
-		wu.autoTile("Finder") -- also triggered via app-watcher, since windows created in the bg do not always trigger window filters
+		wu.autoTile("Finder") 
 		finder:selectMenuItem { "View", "Hide Sidebar" }
 	end
 end):start()
