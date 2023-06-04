@@ -157,7 +157,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- https://valentjn.github.io/ltex/settings.html
 
 -- deactivate bibtex files
-lspFiletypes.ltex = { "gitcommit", "markdown", "text"}
+lspFiletypes.ltex = { "gitcommit", "markdown", "text" }
 
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work
@@ -268,6 +268,13 @@ return {
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
+			-- Sign Column Icons
+			local signIcons = { Error = "", Warn = "▲", Info = "", Hint = "" }
+			for type, icon in pairs(signIcons) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+			end
+
 			-- Diagnostics
 			local function fmt(diag)
 				local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
@@ -280,7 +287,7 @@ return {
 					severity = { min = vim.diagnostic.severity.WARN },
 					source = false, -- already handled by format function
 					format = function(diag) return fmt(diag) end,
-					spacing = 0,
+					spacing = 1,
 				},
 				float = {
 					format = function(diag) return fmt(diag) end,

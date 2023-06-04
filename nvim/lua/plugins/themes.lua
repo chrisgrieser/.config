@@ -49,7 +49,7 @@ g.darkTheme = getName(darkThemes[1])
 
 --------------------------------------------------------------------------------
 
--- merge tables
+-- merge tables & insert priority
 local allThemes = {}
 for _, theme in pairs(darkThemes) do
 	table.insert(allThemes, theme)
