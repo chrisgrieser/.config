@@ -76,16 +76,11 @@ local function workLayout()
 		end)
 	end
 
+	-- sidenotes
 	sidenotes.reminderToSidenotes()
 	wu.moveResize(u.app("SideNotes"):mainWindow(), wu.sideNotesWide)
 
-	LayoutTimer = hs.timer
-		.waitUntil(function() return u.appRunning(appsToOpen) end, function()
-			u.app("Mimestream"):activate()
-			-- u.restartApp("AltTab")
-		end, 0.1)
-		:start()
-
+	u.runWithDelays(1, function () u.app("Mimestream"):activate() end)
 	print("🔲 WorkLayout: done")
 end
 
