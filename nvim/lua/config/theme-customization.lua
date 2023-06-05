@@ -31,12 +31,13 @@ local function customHighlights()
 	end
 
 	clearHighlight("@lsp.type.comment")
-	linkHighlight("@text.note.comment", "@text.todo.comment")
-	linkHighlight("@text.warning.comment", "@text.todo.comment")
-	linkHighlight("@text.danger.comment", "@text.todo.comment")
 
 	-- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
-	fn.matchadd("Todo", [[\<\(WARN\|WIP\|INFO\|FIX\)\>]])
+	fn.matchadd("@text.todo.comment", [[\<\(WIP\|INFO)\>]])
+	fn.matchadd("@text.warning.comment", [[\<\(WARN\|FIX\)\>]])
+
+	local commentColor = u.getHighlightValue("Comment", "fg")
+	updateHighlight("@text.uri", ("guisp=%s guifg=%s"):format(commentColor, commentColor))
 
 	local overnestingIndent = 8
 	updateHighlight("Overnesting", "guibg=#E06C75")
@@ -85,9 +86,9 @@ local function themeModifications()
 		linkHighlight("NotifyINFOTitle", "@string")
 		linkHighlight("NotifyINFOBody", "@string")
 	elseif theme == "bluloco" then
-		local commentColor = u.getHighlightValue("Comment", "fg")
-		updateHighlight("@text.uri", ("guisp=%s guifg=%s"):format(commentColor, commentColor))
-
+		linkHighlight("@text.note.comment", "@text.todo.comment")
+		linkHighlight("@text.warning.comment", "@text.todo.comment")
+		linkHighlight("@text.danger.comment", "@text.todo.comment")
 		clearHighlight("MatchParen")
 		vim.opt.guicursor:append("i-ci-c:ver25")
 		vim.opt.guicursor:append("o-v:hor10")
