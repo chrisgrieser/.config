@@ -65,13 +65,6 @@ end
 
 --------------------------------------------------------------------------------
 
-M.diagnosticIcons = {
-	Error = "",
-	Warn = "▲",
-	Info = "",
-	Hint = "",
-}
-
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.
 ---See also https://neovim.io/doc/user/api.html#nvim_open_win()
 ---(BorderChars is needed for Harpoon and Telescope, both of which do not accept

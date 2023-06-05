@@ -258,6 +258,8 @@ return {
 	},
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
+		lazy = false,
+		priority = 1000,
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = setupAllLsps,
 		config = function()
@@ -269,7 +271,8 @@ return {
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
 			-- Sign Column Diagnostic Icons
-			for type, icon in pairs(u.diagnosticIcons) do
+			local diagnosticIcons = { Error = "", Warn = "▲", Info = "", Hint = "" }
+			for type, icon in pairs(diagnosticIcons) do
 				local hl = "DiagnosticSign" .. type
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 			end
