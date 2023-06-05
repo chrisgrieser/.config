@@ -1,5 +1,6 @@
 local tsConfig = {
-	auto_install = true, -- easier than having to keep track of new parsers all the time
+	-- easier than keeping track of new parsers, especially the special ones (luap, luadocs)
+	ensure_installed = "all", 
 
 	highlight = {
 		enable = true,
@@ -52,7 +53,7 @@ local tsConfig = {
 	matchup = {
 		enable = true,
 		enable_quotes = true,
-		disable_virtual_text = { "javascript", "typescript" },
+		disable_virtual_text = true,
 	},
 	refactor = {
 		highlight_definitions = {
