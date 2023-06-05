@@ -45,6 +45,8 @@ rules:
           - key_code: left_control
         conditions:
           - *leader-inactive
+          - type: frontmost_application_unless
+            bundle_identifiers: [^mindustry\.mac$]
         to_if_alone:
           - *activate-leader
           - *set-notice
