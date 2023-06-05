@@ -30,14 +30,13 @@ local function customHighlights()
 		updateHighlight(v, "gui=underdouble cterm=underline")
 	end
 
-	clearHighlight("@lsp.type.comment")
-
 	-- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
+	clearHighlight("@lsp.type.comment")
 	fn.matchadd("@text.todo.comment", [[\<\(WIP\|INFO\)\>]])
 	fn.matchadd("@text.warning.comment", [[\<\(WARN\|FIX\)\>]])
 
 	local commentColor = u.getHighlightValue("Comment", "fg")
-	updateHighlight("@text.uri", ("guisp=%s guifg=%s"):format(commentColor, commentColor))
+	updateHighlight("@text.uri", ("guisp=%s guifg=%s gui=underline term=underline"):format(commentColor, commentColor))
 
 	local overnestingIndent = 8
 	updateHighlight("Overnesting", "guibg=#E06C75")
