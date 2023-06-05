@@ -2,7 +2,7 @@ local M = {}
 --------------------------------------------------------------------------------
 
 -- vim.env reads from .zshenv
-M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/" 
+M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/"
 M.linterConfigFolder = vim.env.DOTFILE_FOLDER .. "/_linter-configs/"
 
 M.error = vim.log.levels.ERROR
@@ -65,18 +65,23 @@ end
 
 --------------------------------------------------------------------------------
 
+M.diagnosticIcons = {
+	Error = "",
+	Warn = "▲",
+	Info = "",
+	Hint = "",
+}
+
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.
 ---See also https://neovim.io/doc/user/api.html#nvim_open_win()
 ---(BorderChars is needed for Harpoon and Telescope, both of which do not accept
 ---a Borderstyle string.)
 local borderstyle = "rounded"
 
---------------------------------------------------------------------------------
-
 M.borderStyle = borderstyle
 -- default: single/rounded
-M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" } 
-M.borderHorizontal = "─" 
+M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+M.borderHorizontal = "─"
 
 if borderstyle == "single" then
 	M.borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
