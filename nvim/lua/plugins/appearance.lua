@@ -58,16 +58,6 @@ return {
 			}
 			-- add gitsigns to the scrollbar https://github.com/dstein64/nvim-scrollview/blob/main/lua/scrollview/contrib/gitsigns.lua
 			require("scrollview.contrib.gitsigns").setup()
-
-			-- FIX: https://github.com/dstein64/nvim-scrollview/issues/93
-			vim.defer_fn(function()
-				-- stylua: ignore
-				local letters = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" }
-				for _, letter in pairs(letters) do
-					vim.keymap.del({ "n", "x" }, "m" .. letter)
-					vim.keymap.del({ "n", "x" }, "m" .. letter:upper())
-				end
-			end, 1)
 		end,
 	},
 	{ -- color previews & color picker

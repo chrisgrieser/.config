@@ -37,8 +37,8 @@ local function cleanupConsole()
 	for _, line in ipairs(consoleLines) do
 		local ignore = 
 			line:find("Loading extensions?: ")
-			or line:find("Done.$")
-			or line:find("hs.canvas:delete")
+			or line:find("Done%.$")
+			or line:find("hs%.canvas:delete")
 			or line:find("wfilter: .* is STILL not registered") -- FIX https://github.com/Hammerspoon/hammerspoon/issues/3462
 
 		if not ignore then table.insert(cleanLines, line) end

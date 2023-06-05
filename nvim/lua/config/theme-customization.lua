@@ -6,9 +6,6 @@ local u = require("config.utils")
 
 local M = {}
 --------------------------------------------------------------------------------
--- CONFIG
-local overnestingIndent = 8
---------------------------------------------------------------------------------
 
 ---@param hlgroupfrom string
 ---@param hlgroupto string
@@ -22,7 +19,7 @@ end
 local function updateHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " .. changes) end
 
 ---@param hlgroup string
-local function clearHighlight(hlgroup) cmd.highlight("clear " .. hlgroup) end
+local function clearHighlight(hlgroup) vim.api.nvim_set_hl(0, hlgroup, {}) end
 
 --------------------------------------------------------------------------------
 
@@ -33,13 +30,23 @@ local function customHighlights()
 		updateHighlight(v, "gui=underdouble cterm=underline")
 	end
 
+	-- TODO
+	-- NOTE
+	-- HACK
+	-- FIX
+	-- WARN
+	-- INFO
+	-- NOTE-BUG
+	-- BUG #2323
 	-- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
-	linkHighlight("myAnnotations", "Todo")
-	fn.matchadd(
-		"myAnnotations",
-		[[\<\(NOTE\|REQUIRED\|BUG\|WARN\|WIP\|HACK\|INFO\|FIX\|CAVEAT\)\>]]
-	)
+	clearHighlight("@lsp.type.comment")
+	linkHighlight("@text.note.comment", "@text.todo.comment")
+	linkHighlight("@text.warning.comment", "@text.todo.comment")
+	linkHighlight("@text.danger.comment", "@text.todo.comment")
 
+	fn.matchadd("Todo", [[\<\(WARN\|WIP\|INFO\|FIX\)\>]])
+
+	local overnestingIndent = 8
 	updateHighlight("Overnesting", "guibg=#E06C75")
 	fn.matchadd("Overnesting", ("\t"):rep(overnestingIndent) .. "\t*")
 
