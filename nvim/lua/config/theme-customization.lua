@@ -33,7 +33,7 @@ local function customHighlights()
 	clearHighlight("@lsp.type.comment")
 
 	-- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
-	fn.matchadd("@text.todo.comment", [[\<\(WIP\|INFO)\>]])
+	fn.matchadd("@text.todo.comment", [[\<\(WIP\|INFO\)\>]])
 	fn.matchadd("@text.warning.comment", [[\<\(WARN\|FIX\)\>]])
 
 	local commentColor = u.getHighlightValue("Comment", "fg")
