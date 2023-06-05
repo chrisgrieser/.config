@@ -43,17 +43,19 @@ return {
 	},
 	{ -- Scrollbar, also shows search matches and gitsigns
 		"dstein64/nvim-scrollview",
+		dependencies = "neovim/nvim-lspconfig",
 		event = "VeryLazy",
-		opts = {
-			winblend = 90, -- winblend = transparency
-			excluded_filetypes = {},
-			signs_on_startup = { "conflicts", "search", "diagnostics", "quickfix" },
-			diagnostics_error_symbol = u.diagnosticIcons.Error,
-			diagnostics_warn_symbol = u.diagnosticIcons.Warn,
-			diagnostics_info_symbol = u.diagnosticIcons.Info,
-			diagnostics_hint_symbol = u.diagnosticIcons.Hint,
-		},
 		config = function()
+			require("scrollview").setup {
+				winblend = 90,
+				excluded_filetypes = {},
+				signs_on_startup = { "conflicts", "search", "diagnostics", "quickfix" },
+				-- FIX: https://github.com/dstein64/nvim-scrollview/issues/94
+				diagnostics_error_symbol = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
+				diagnostics_warn_symbol = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
+				diagnostics_info_symbol = vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text,
+				diagnostics_hint_symbol = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text,
+			}
 			-- add gitsigns to the scrollbar https://github.com/dstein64/nvim-scrollview/blob/main/lua/scrollview/contrib/gitsigns.lua
 			require("scrollview.contrib.gitsigns").setup()
 
