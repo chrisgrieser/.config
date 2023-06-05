@@ -30,20 +30,12 @@ local function customHighlights()
 		updateHighlight(v, "gui=underdouble cterm=underline")
 	end
 
-	-- TODO
-	-- NOTE
-	-- HACK
-	-- FIX
-	-- WARN
-	-- INFO
-	-- NOTE-BUG
-	-- BUG #2323
-	-- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
 	clearHighlight("@lsp.type.comment")
 	linkHighlight("@text.note.comment", "@text.todo.comment")
 	linkHighlight("@text.warning.comment", "@text.todo.comment")
 	linkHighlight("@text.danger.comment", "@text.todo.comment")
 
+	-- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
 	fn.matchadd("Todo", [[\<\(WARN\|WIP\|INFO\|FIX\)\>]])
 
 	local overnestingIndent = 8
