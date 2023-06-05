@@ -94,6 +94,10 @@ nmap gs :gotoHeading
 exmap gotoScene obcommand longform:longform-jump-to-scene
 nmap gS :gotoScene
 
+" [g]oto longform [p]roject
+exmap gotoProject obcommand longform:longform-jump-to-project
+nmap gp :gotoProject
+
 " [g]oto definition / link (shukuchi makes it forward-seeking)
 exmap followNextLink obcommand shukuchi:open-link
 nmap gx :followNextLink
