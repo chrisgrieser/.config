@@ -47,7 +47,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("scrollview").setup {
-				winblend = 90,
+				winblend = 30,
 				excluded_filetypes = {},
 				signs_on_startup = { "conflicts", "search", "diagnostics", "quickfix" },
 				-- FIX: https://github.com/dstein64/nvim-scrollview/issues/94

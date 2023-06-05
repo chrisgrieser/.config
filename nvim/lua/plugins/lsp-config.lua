@@ -263,21 +263,20 @@ return {
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = setupAllLsps,
 		config = function()
-			-- Border Styling
+			-- Borders
 			require("lspconfig.ui.windows").default_options.border = u.borderStyle
 			vim.lsp.handlers["textDocument/hover"] =
 				vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
-			-- Sign Column Diagnostic Icons
+			-- Diagnostics
 			local diagnosticIcons = { Error = "", Warn = "▲", Info = "", Hint = "" }
 			for type, icon in pairs(diagnosticIcons) do
 				local hl = "DiagnosticSign" .. type
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 			end
 
-			-- Diagnostics
 			local function fmt(diag)
 				local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
 				local msg = diag.message
