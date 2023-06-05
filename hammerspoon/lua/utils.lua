@@ -181,7 +181,7 @@ function M.restartApp(appName)
 	MyTimers[appName] = hs.timer.waitUntil(
 		function() return M.app(appName) == nil end,
 		function() hs.application.open(appName) end,
-		0.1
+		0.05
 	)
 end
 
@@ -204,7 +204,8 @@ function M.openApps(appNames)
 		local runs = M.app(name) ~= nil
 		if not runs then
 			if name == "Discord" then
-				-- using the `launched` app watcher trigger is too slow	
+				-- Open in `#off-topic`
+				-- (using the `launched` app watcher trigger is too slow)	
 				M.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
 			else
 				hs.application.open(name)

@@ -2,9 +2,12 @@ local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
+local u = require("config.utils")
 
-local overnestingIndent = 8
 local M = {}
+--------------------------------------------------------------------------------
+-- CONFIG
+local overnestingIndent = 8
 --------------------------------------------------------------------------------
 
 ---@param hlgroupfrom string
@@ -83,8 +86,10 @@ local function themeModifications()
 		linkHighlight("NotifyINFOTitle", "@string")
 		linkHighlight("NotifyINFOBody", "@string")
 	elseif theme == "bluloco" then
+		local commentColor = u.getHighlightValue("Comment", "fg")
+		updateHighlight("@text.uri", ("guisp=%s guifg=%s"):format(commentColor, commentColor))
+
 		clearHighlight("MatchParen")
-		updateHighlight("@text.uri", "guisp=NONE")
 		vim.opt.guicursor:append("i-ci-c:ver25")
 		vim.opt.guicursor:append("o-v:hor10")
 		if mode == "dark" then
@@ -141,7 +146,6 @@ autocmd("ColorScheme", {
 function M.setThemeMode(mode)
 	vim.opt.background = mode
 	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
-	-- cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	local targetTheme = mode == "dark" and g.darkTheme or g.lightTheme
 	cmd.colorscheme(targetTheme)
 end
