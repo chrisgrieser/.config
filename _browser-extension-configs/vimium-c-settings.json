@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "22/05/2023, 16:13:46",
-	"time": 1684764826091,
+	"@time": "05/06/2023, 17:08:24",
+	"time": 1685977704627,
 	"environment": {
 		"extension": "1.99.991",
 		"platform": "mac",
@@ -23,7 +23,7 @@
 			"pattern": ":https://mail.google.com/"
 		},
 		{
-			"passKeys": "",
+			"passKeys": "1 ? a g j k v ",
 			"pattern": ":https://www.inoreader.com/"
 		},
 		{
@@ -31,7 +31,7 @@
 			"pattern": ":https://search.brave.com/"
 		},
 		{
-			"passKeys": "<space> j k l ",
+			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? j k l ",
 			"pattern": ":https://www.youtube.com/"
 		}
 	],
@@ -86,6 +86,12 @@
 		"map yh LinkHints.activateHover showURL",
 		"",
 		"\" Tabs",
+		"unmap 0",
+		"map 0 lastTab",
+		"",
+		"unmap 1",
+		"map 1 firstTab",
+		"",
 		"map q closeTabsOnLeft",
 		"map e closeTabsOnRight",
 		"map w removeTab mayClose",

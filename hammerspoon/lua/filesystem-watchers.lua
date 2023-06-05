@@ -3,17 +3,6 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local home = os.getenv("HOME")
 
----is in sub-directory instead of directly in the folder
----@param fPath string? filepath
----@param folder string? folderpath
----@return boolean|nil returns nil if getting invalid input
-local function isInSubdirectory(fPath, folder)
-	if not fPath or not folder then return nil end
-	local _, fileSlashes = fPath:gsub("/", "")
-	local _, folderSlashes = folder:gsub("/", "")
-	return fileSlashes > folderSlashes
-end
-
 --------------------------------------------------------------------------------
 
 -- BOOKMARKS SYNCED TO CHROME BOOKMARKS
@@ -84,7 +73,6 @@ local browserSettings = env.dotfilesFolder .. "/_browser-extension-configs/"
 FileHubWatcher = pw(env.fileHub, function(paths, _)
 	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
-		if isInSubdirectory(filep, env.fileHub) then return end
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 
@@ -103,33 +91,33 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 			-- zips to archive (like violentmonkey)
 			hs.open(filep)
 
+		-- violentmonkey
+		elseif fileName:find("violentmonkey%.zip") then
+			os.rename(filep, browserSettings .. "violentmonkey.zip")
+			print("➡️ Violentmonkey backup")
+
 		-- ublacklist
 		elseif fileName == "ublacklist-settings.json" then
 			os.rename(filep, browserSettings .. fileName)
 			print("➡️ ublacklist backup")
 
 		-- vimium-c
-		elseif fileName:match("vimium_c") then
+		elseif fileName:find("vimium_c.*%.json") then
 			os.rename(filep, browserSettings .. "vimium-c-settings.json")
 			print("➡️ Vimium-C backup")
 
 		-- adguard
-		elseif fileName:match(".*_adg_ext_settings_.*%.json") then
+		elseif fileName:find("adg_ext_settings_.*%.json") then
 			os.rename(filep, browserSettings .. "adguard-settings.json")
 			print("➡️ AdGuard backup")
 
 		-- sponsor block
-		elseif fileName:match("SponsorBlockConfig_.*%.json") then
+		elseif fileName:find("SponsorBlockConfig_.*%.json") then
 			os.rename(filep, browserSettings .. "SponsorBlock-settings.json")
 			print("➡️ SponsorBlockConfig backup")
 
-		-- violentmonkey
-		elseif fileName:match("violentmonkey.zip") then
-			os.rename(filep, browserSettings .. "violentmonkey.zip")
-			print("➡️ Violentmonkey backup")
-
 		-- Inoreader
-		elseif fileName:match("Inoreader Feeds .*%.xml") then
+		elseif fileName:find("Inoreader Feeds .*%.xml") then
 			os.rename(filep, browserSettings .. "Inoreader Feeds.opml")
 			print("➡️ Inoreader backup")
 		end

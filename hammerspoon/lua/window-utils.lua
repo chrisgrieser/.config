@@ -31,8 +31,9 @@ function M.isInvalidFinderWin(win) return win:size() == hs.geometry.size(404, 82
 ---@param win hs.window
 ---@param relSize hs.geometry
 ---@nodiscard
----@return boolean
+---@return boolean?
 function M.CheckSize(win, relSize)
+	if not win then return end
 	local maxf = win:screen():frame()
 	local winf = win:frame()
 	local diffw = winf.w - relSize.w * maxf.w
@@ -84,8 +85,7 @@ function M.moveResize(win, pos)
 
 	-- resize with safety redundancy
 	u.runWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
-		-- check for false, since non-resizable wins return nil
-		if M.CheckSize(win, pos) ~= false then return end
+		if M.CheckSize(win, pos) then return end
 		win:moveToUnit(pos)
 	end)
 end
