@@ -12,9 +12,7 @@ end
 
 -- filter out annoying buggy messages from plugins:
 local function banned(msg)
-	return msg:find("^error%(satellite.nvim%):") -- satellite https://github.com/lewis6991/satellite.nvim/issues/36
-		or msg:find("code = %-32801,")
-		or vim.startswith(msg, "Did set indentation to ") -- guess-indent https://github.com/NMAC427/guess-indent.nvim/issues/13
+	return vim.startswith(msg, "Did set indentation to ") -- guess-indent https://github.com/NMAC427/guess-indent.nvim/issues/13
 		or vim.startswith(msg, "Failed to detect indentation style")
 end
 

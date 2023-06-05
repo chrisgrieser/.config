@@ -41,30 +41,20 @@ return {
 			},
 		},
 	},
-	-- INFO more capable than satellite, but not used yet pending gitsigns support:
-	-- - https://github.com/dstein64/nvim-scrollview/issues/87
-	-- { -- Scrollbar, also shows search matches and git signs
-	-- 	"dstein64/nvim-scrollview",
-	-- 	event = "VeryLazy",
-	-- 	opts = {
-	-- 		base = "right",
-	-- 		column = 1,
-	-- 		winblend = 60, -- winblend = transparency
-	-- 		excluded_filetypes = {},
-	-- 		signs_on_startup = { "conflicts", "search", "diagnostics", "quickfix" },
-	-- 	},
-	-- },
-	{ -- Scrollbar, also shows search matches and git signs
-		"lewis6991/satellite.nvim",
+	{ -- Scrollbar, also shows search matches and gitsigns
+		"dstein64/nvim-scrollview",
 		event = "VeryLazy",
 		opts = {
-			winblend = 60, -- winblend = transparency
-			handlers = {
-				-- FIX displaying marks creates autocmd-mapping of things with m,
-				-- making m-bindings infeasable
-				marks = { enable = false },
-			},
+			base = "right",
+			column = 1,
+			winblend = 80, -- winblend = transparency
+			excluded_filetypes = {},
+			signs_on_startup = { "conflicts", "search", "diagnostics", "quickfix" },
 		},
+		config = function()
+			-- https://github.com/dstein64/nvim-scrollview/blob/main/lua/scrollview/contrib/gitsigns.lua
+			require('scrollview.contrib.gitsigns').setup()
+		end,
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
