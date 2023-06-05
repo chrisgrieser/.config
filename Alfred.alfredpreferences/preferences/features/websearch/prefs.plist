@@ -147,7 +147,7 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>gi</string>
+			<string>i</string>
 			<key>text</key>
 			<string>Google Image Search for '{query}'</string>
 			<key>url</key>
