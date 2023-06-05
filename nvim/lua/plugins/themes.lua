@@ -3,15 +3,15 @@ local g = vim.g
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	{ "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	{ "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
 	-- { "catppuccin/nvim", name = "catppuccin" },
 	-- { "marko-cerovac/material.nvim", init = function() vim.g.material_style = "lighter" end, config = { lualine_style = "stealth" } },
 	-- { "rose-pine/neovim", name = "rose-pine" },
 }
 
 local darkThemes = {
-	{"folke/tokyonight.nvim", priority = 1000},
+	"folke/tokyonight.nvim",
 	-- { "hardhackerlabs/theme-vim", name = "hardhacker", init = function() vim.g.hardhacker_darker = 1 end },
 	-- { "loctvl842/monokai-pro.nvim", config = { filter = "ristretto" } },
 	-- "rebelot/kanagawa.nvim",
