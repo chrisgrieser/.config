@@ -268,9 +268,8 @@ return {
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
-			-- Sign Column Icons
-			local signIcons = { Error = "", Warn = "▲", Info = "", Hint = "" }
-			for type, icon in pairs(signIcons) do
+			-- Sign Column Diagnostic Icons
+			for type, icon in pairs(u.diagnosticIcons) do
 				local hl = "DiagnosticSign" .. type
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 			end
