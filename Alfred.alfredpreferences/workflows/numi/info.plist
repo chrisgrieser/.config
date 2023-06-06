@@ -106,16 +106,16 @@
 		<key>2A830C26-3537-47A3-B5A9-3DE93ACF7E5E</key>
 		<dict>
 			<key>xpos</key>
-			<real>290</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>75</real>
 		</dict>
 		<key>D9D321B0-C22B-4D49-92C1-D24AD28D4AD6</key>
 		<dict>
 			<key>xpos</key>
-			<real>130</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>75</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -13,7 +13,7 @@ fi
 cat <<EOF
 {
 	"items": [
-        {
+		{
 			"title": "$result",
 			"subtitle": "$subtitle",
 			"arg": "$arg",
