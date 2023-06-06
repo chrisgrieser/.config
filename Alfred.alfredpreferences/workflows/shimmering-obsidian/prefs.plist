@@ -32,8 +32,6 @@
 	<string>Default</string>
 	<key>workspace_2</key>
 	<string>Longform</string>
-	<key>workspace_3</key>
-	<string>Temp</string>
 	<key>workspace_to_spellcheck</key>
 	<string>Longform</string>
 </dict>
