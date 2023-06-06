@@ -55,7 +55,7 @@ if expand("%:t") == "source.css" then
 				prompt_prefix = "󰀫 ",
 			}
 		end, { desc = "Search CSS Variables", buffer = true })
-	end, 300)
+	end, 500)
 
 	-- next/prev comment marks
 	keymap(
