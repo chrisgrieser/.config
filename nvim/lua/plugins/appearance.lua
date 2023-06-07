@@ -45,6 +45,7 @@ return {
 		"dstein64/nvim-scrollview",
 		dependencies = "neovim/nvim-lspconfig",
 		event = "VeryLazy",
+		version = "9a4e752",
 		config = function()
 			require("scrollview").setup {
 				winblend = 40,
