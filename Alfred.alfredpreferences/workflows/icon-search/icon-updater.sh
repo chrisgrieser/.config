@@ -35,14 +35,17 @@ case $APP in
 "Slack")
 	cp -f "$CUSTOM_ICON_FOLDER/Slack 3.icns" "$APP.app/Contents/Resources/electron.icns"
 	;;
-# "Obsidian")
-# 	cp -f "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" "$APP.app/Contents/Resources/icon.icns"
-# 	;;
+"Obsidian")
+	cp -f "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" "$APP.app/Contents/Resources/icon.icns"
+	;;
 "Discord")
 	cp -f "$CUSTOM_ICON_FOLDER/Discord Alt.icns" "$APP.app/Contents/Resources/electron.icns"
 	;;
 "Vivaldi")
 	cp -f "$CUSTOM_ICON_FOLDER/Vivaldi.icns" "$APP.app/Contents/Resources/app.icns"
+	;;
+"MailMate")
+	cp -f "$CUSTOM_ICON_FOLDER/Mailmate.icns" "$APP.app/Contents/Resources/$APP.icns"
 	;;
 "Alfred Preferences")
 	osascript -e "tell application \"Finder\"
