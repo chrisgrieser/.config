@@ -35,13 +35,16 @@ function writeToFile(text, file) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/**
+ * @param {string[]} arr
+ * @param {string} property
+ */
 function parseBibtexProperty(arr, property) {
-	arr = arr.map((/** @type {string} */ line) => line.trim()).filter((/** @type {string} */ prop) => prop.startsWith(property + " "));
+	const allProperties = arr
+		.map((/** @type {string} */ line) => line.trim())
+		.filter((/** @type {string} */ prop) => prop.startsWith(property + " "));
 	if (!arr.length) return "";
-	const value = arr[0]
-		.split("=")[1]
-		.replace(/{|}|,$/g, "")
-		.trim();
+	const value = allProperties[0].split("=")[1].replace(/{|}|,$/g, "").trim();
 	return value;
 }
 
@@ -53,8 +56,8 @@ function ensureUniqueCitekey(citekey, libraryPath) {
 	// check if citekey already exists
 	const citekeyArray = readFile(libraryPath)
 		.split("\n")
-		.filter(line => line.startsWith("@"))
-		.map(line => line.split("{")[1].replaceAll(",", ""));
+		.filter((line) => line.startsWith("@"))
+		.map((line) => line.split("{")[1].replaceAll(",", ""));
 
 	const alphabet = "abcdefghijklmnopqrstuvwxyz";
 	let i = -1;
@@ -69,6 +72,9 @@ function ensureUniqueCitekey(citekey, libraryPath) {
 	return nextCitekey;
 }
 
+/**
+ * @param {string[]} bibtexPropertyArr
+ */
 function generateCitekey(bibtexPropertyArr) {
 	let year = parseBibtexProperty(bibtexPropertyArr, "year");
 	if (!year) year = "ND";
@@ -89,7 +95,7 @@ function generateCitekey(bibtexPropertyArr) {
 	else {
 		authEds
 			.split(" and ") // "and" used as delimiter in bibtex for names
-			.forEach(name => {
+			.forEach((name) => {
 				// doi.org returns "first last", isbn mostly "last, first"
 				const isLastFirst = name.includes(",");
 				const lastName = isLastFirst ? name.split(",")[0].trim() : name.split(" ").pop();
@@ -127,6 +133,8 @@ function generateCitekey(bibtexPropertyArr) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/** @param {any[]} argv */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const doiRegex = /\b10.\d{4,9}\/[-._;()/:A-Z0-9]+(?=$|[?/ ])/i; // https://www.crossref.org/blog/dois-and-matching-regular-expressions/
 	const isbnRegex = /^[\d-]{9,}$/;
@@ -141,22 +149,23 @@ function run(argv) {
 	const isDOI = doiRegex.test(input);
 	const isISBN = isbnRegex.test(input);
 	const mode = $.getenv("mode");
-	if (!isDOI && !isISBN && mode !== "parse") return "input invalid";
+	if (!(isDOI || isISBN || mode === "parse")) return "input invalid";
 
 	// DOI
 	if (isDOI) {
-		const doiURL = "https://doi.org/" + input.match(doiRegex)[0];
+		const doi = input.match(doiRegex);
+		if (!doi) return "DOI invalid";
+		const doiURL = "https://doi.org/" + doi[0];
 		bibtexEntry = app.doShellScript(`curl -sLH "Accept: application/x-bibtex" "${doiURL}"`); // https://citation.crosscite.org/docs.html
-		if (!bibtexEntry.includes("@")) return "DOI invalid";
+		if (!bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("doi not found")) return "DOI not found";
 
 		// ISBN
 	} else if (isISBN) {
 		const isbn = input;
 		bibtexEntry = app.doShellScript(`curl -sHL "https://www.ebook.de/de/tools/isbn2bibtex?isbn=${isbn}"`);
-		if (bibtexEntry.includes("Not found")) return "ISBN not registered.";
-		if (!bibtexEntry.includes("@")) return "ISBN invalid";
+		if (!bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("Not found")) return "ISBN not found";
 
-		// parse via anystlye
+		// parse via anystyle
 	} else if (mode === "parse") {
 		// INFO anystyle can't read STDIN, so this has to be written to a file
 		// https://github.com/inukshuk/anystyle-cli#anystyle-help-parse
@@ -194,7 +203,7 @@ function run(argv) {
 	// Create keywords field
 	// (only if there is no keyword property already – some doi providers do add
 	// keyword fields of their own)
-	if (!newEntryProperties.some(prop => prop.includes("keywords =")))
+	if (!newEntryProperties.some((/** @type {string} */ prop) => prop.includes("keywords =")))
 		newEntryProperties.splice(1, 0, "\tkeywords = {},");
 
 	// Write result
