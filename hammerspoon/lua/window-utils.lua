@@ -171,8 +171,8 @@ end
 -- Open Apps always at Mouse Screen
 Wf_appsOnMouseScreen = u.wf
 	.new({
-		"Vivaldi",
-		"Mimestream",
+		env.browserApp,
+		env.mailApp,
 		"BetterTouchTool",
 		"Obsidian",
 		"Slack",

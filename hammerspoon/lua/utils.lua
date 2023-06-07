@@ -1,5 +1,7 @@
 local M = {}
 
+local env = require("lua.environment-vars")
+
 MyTimers = {} -- need to catch timers in global vars to ensure they don't get garbage collected
 --------------------------------------------------------------------------------
 
@@ -101,7 +103,6 @@ end
 ---close all tabs which contain urlPart
 ---@param urlPart string
 function M.closeTabsContaining(urlPart)
-	local browser = "Vivaldi"
 	local applescript = ([[
 		tell application "%s"
 			set window_list to every window
@@ -113,7 +114,7 @@ function M.closeTabsContaining(urlPart)
 				end repeat
 			end repeat
 		end tell
-	]]):format(browser, urlPart)
+	]]):format(env.browserApp, urlPart)
 	hs.osascript.applescript(applescript)
 end
 

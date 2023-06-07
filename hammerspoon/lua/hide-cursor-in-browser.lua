@@ -1,5 +1,6 @@
+local env = require("lua.environment-vars")
 local u = require("lua.utils")
--- Companion for Vimium-like browser extensions which are not able to hide the 
+-- Companion for Vimium-like browser extensions which are not able to hide the
 -- cursor properly
 --------------------------------------------------------------------------------
 
@@ -24,14 +25,16 @@ JHidesCursor = u.hotkey({}, "j", function() hideCurAndPassThrough("j") end):disa
 KHidesCursor = u.hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
 
 -- watches browser, enables when hotkeys when browser is activated
-Jk_watcher = u.aw.new(function(appName, eventType)
-	if not eventType == u.aw.activated then return end
+Jk_watcher = u.aw
+	.new(function(appName, eventType)
+		if not eventType == u.aw.activated then return end
 
-	if appName == "Vivaldi" then
-		JHidesCursor:enable()
-		KHidesCursor:enable()
-	else
-		JHidesCursor:disable()
-		KHidesCursor:disable()
-	end
-end):start()
+		if appName == env.browserApp then
+			JHidesCursor:enable()
+			KHidesCursor:enable()
+		else
+			JHidesCursor:disable()
+			KHidesCursor:disable()
+		end
+	end)
+	:start()

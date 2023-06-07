@@ -51,7 +51,7 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- BROWSER (Vivaldi)
-Wf_browser = wf.new("Vivaldi")
+Wf_browser = wf.new(env.browserApp)
 	:setOverrideFilter({
 		rejectTitles = {
 			" %(Private%)$",
@@ -73,10 +73,10 @@ Wf_browser = wf.new("Vivaldi")
 
 -- Automatically hide Browser has when no window
 -- requires wider window-filter to not hide PiP windows etc
-Wf_browser_all = wf.new({ "Vivaldi" })
+Wf_browser_all = wf.new({ env.browserApp })
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(wf.windowDestroyed, function()
-		local app = u.app("Vivaldi")
+		local app = u.app(env.browserApp)
 		if app and #(app:allWindows()) == 0 then app:hide() end
 	end)
 

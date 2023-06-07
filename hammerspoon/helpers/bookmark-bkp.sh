@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 max_number_of_bkps=5
+browser="Vivaldi"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -9,7 +10,7 @@ timestamp=$(date '+%Y-%m-%d_%H-%M')
 backup_file="$bkp_destination/Browser-Bookmarks_$timestamp"
 mkdir -p "$bkp_destination"
 
-cp -f "$HOME/Library/Application Support/Vivaldi/Default/Bookmarks" "$backup_file"
+cp -f "$HOME/Library/Application Support/$browser/Default/Bookmarks" "$backup_file"
 
 #───────────────────────────────────────────────────────────────────────────────
 # restrict number of backups

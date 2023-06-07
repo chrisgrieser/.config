@@ -82,7 +82,7 @@ end)
 
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
 AutoTileAppWatcher = aw.new(function(appName, eventType, appObj)
-	local autoTileApps = { "Finder", "Vivaldi" }
+	local autoTileApps = { "Finder", env.browserApp }
 	if
 		eventType == aw.deactivated
 		and u.tbl_contains(autoTileApps, appName)

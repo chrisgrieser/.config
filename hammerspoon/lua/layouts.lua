@@ -59,7 +59,7 @@ local function workLayout()
 	closeAllFinderWins()
 
 	-- open
-	local appsToOpen = { "Discord", "Vivaldi", "Mimestream", "Twitter", "Slack" }
+	local appsToOpen = { "Discord", env.browserApp, env.mailApp, "Twitter", "Slack" }
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
 		u.asSoonAsAppRuns(appName, function()
@@ -69,7 +69,7 @@ local function workLayout()
 	end
 
 	sidenotes.reminderToSidenotes()
-	u.asSoonAsAppRuns("Discord", function() u.app("Mimestream"):activate() end)
+	u.asSoonAsAppRuns("Discord", function() u.app(env.mailApp):activate() end)
 
 	print("🔲 WorkLayout: done")
 end
@@ -90,7 +90,7 @@ local function movieLayout()
 		"Slack",
 		"Discord",
 		"BusyCal",
-		"Mimestream",
+		env.mailApp,
 		"Alfred Preferences",
 		"Finder",
 		"Highlights",
