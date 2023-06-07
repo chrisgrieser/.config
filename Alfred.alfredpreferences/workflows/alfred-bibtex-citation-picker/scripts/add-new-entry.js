@@ -8,18 +8,26 @@ ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/**
+ * @param {string} text
+ * @param {string} absPath
+ */
 function appendToFile(text, absPath) {
-	text = text.replaceAll("'", "`"); // ' in text string breaks echo writing method
-	app.doShellScript(`echo '${text}' >> '${absPath}'`); // use single quotes to prevent running of input such as "$(rm -rf /)"
+	const clean = text.replaceAll("'", "`"); // ' in text string breaks echo writing method
+	app.doShellScript(`echo '${clean}' >> '${absPath}'`); // use single quotes to prevent running of input such as "$(rm -rf /)"
 }
 
-function readFile(path, encoding) {
-	if (!encoding) encoding = $.NSUTF8StringEncoding;
+/** @param {string} path */
+function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
-	const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
 
+/**
+ * @param {string} text
+ * @param {string} file
+ */
 function writeToFile(text, file) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
 	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
@@ -28,7 +36,7 @@ function writeToFile(text, file) {
 //──────────────────────────────────────────────────────────────────────────────
 
 function parseBibtexProperty(arr, property) {
-	arr = arr.map(line => line.trim()).filter(prop => prop.startsWith(property + " "));
+	arr = arr.map((/** @type {string} */ line) => line.trim()).filter((/** @type {string} */ prop) => prop.startsWith(property + " "));
 	if (!arr.length) return "";
 	const value = arr[0]
 		.split("=")[1]
@@ -37,6 +45,10 @@ function parseBibtexProperty(arr, property) {
 	return value;
 }
 
+/**
+ * @param {string} citekey
+ * @param {string} libraryPath
+ */
 function ensureUniqueCitekey(citekey, libraryPath) {
 	// check if citekey already exists
 	const citekeyArray = readFile(libraryPath)
@@ -162,7 +174,7 @@ function run(argv) {
 
 	bibtexEntry = bibtexEntry
 		.replace(/^ {2}/gm, "\t") // indentation
-		.replace(/^\s*\w+ =/gm, field => field.toLowerCase()) // lowercase all keys
+		.replace(/^\s*\w+ =/gm, (/** @type {string} */ field) => field.toLowerCase()) // lowercase all keys
 		.replace(keysToDeleteRegex, "")
 		.replace(/^(\tpublisher.*?)\{?(?: ?\{?gmbh|ltd|publications|llc ?)\}?(.*)$/im, "$1$2") // publisher garbage
 		.replace("\tdate =", "\tyear =") // consistently "year"
