@@ -2710,7 +2710,7 @@ to set a hotkey for the citaiton picker.</string>
 			<key>note</key>
 			<string>quicklook cheatsheets</string>
 			<key>xpos</key>
-			<real>300</real>
+			<real>295</real>
 			<key>ypos</key>
 			<real>1210</real>
 		</dict>
