@@ -6,18 +6,12 @@
 	<array>
 		<string>search-utilities.987F8BB9-8E64-4E46-8ED2-14E1A4412805</string>
 	</array>
-	<key>showArchives</key>
-	<true/>
 	<key>showContacts</key>
 	<false/>
-	<key>showDocuments</key>
-	<true/>
 	<key>showFolders</key>
 	<true/>
 	<key>showPreferences</key>
 	<false/>
-	<key>showTextFiles</key>
-	<true/>
 	<key>showUserDefined</key>
 	<array>
 		<string>com.apple.alias-file</string>
