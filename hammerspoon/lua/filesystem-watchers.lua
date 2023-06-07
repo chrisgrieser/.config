@@ -7,7 +7,7 @@ local home = os.getenv("HOME")
 
 -- BOOKMARKS SYNCED TO CHROME BOOKMARKS
 -- (needed for Alfred)
-local sourceProfileLocation = home .. "/Library/Application Support/Vivaldi/"
+local sourceProfileLocation = home .. "/Library/Application Support/" .. env.browserApp .. "/"
 local sourceBookmarkPath = sourceProfileLocation .. "/Default/Bookmarks"
 local chromeProfileLocation = home .. "/Library/Application Support/Google/Chrome/"
 BookmarkWatcher = pw(sourceBookmarkPath, function()
