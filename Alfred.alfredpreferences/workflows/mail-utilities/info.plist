@@ -6,6 +6,19 @@
 	<string></string>
 	<key>connections</key>
 	<dict>
+		<key>1BB35D9E-1617-4583-A1F1-B56934BBE185</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>58BF1302-1F61-4F2C-87FD-911095EC6ED9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5BD7290A-4D3C-4A41-A4D4-668385E514AB</key>
 		<array>
 			<dict>
@@ -85,6 +98,50 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>919C67AD-F9F2-4691-A835-0E3807CABF9F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Brave Browser"	set tabUrl to URL of active tab of front window	set tabTitle to title of active tab of front windowend tellset tabSelection to "{query}"set mailto_command to "?subject=FYI: " &amp; tabTitle &amp; "&amp;body="if (tabSelection is not "") then set mailto_command to mailto_command &amp; "\"" &amp; tabSelection &amp; "\"" &amp; "\n\n"return mailto_command &amp; tabUrl</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>send-mail.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F48BFF3F-8FB4-4AB7-898D-6636EC60112C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -121,50 +178,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "Brave Browser"	set tabUrl to URL of active tab of front window	set tabTitle to title of active tab of front windowend tellset tabSelection to "{query}"set mailto_command to "?subject=FYI: " &amp; tabTitle &amp; "&amp;body="if (tabSelection is not "") then set mailto_command to mailto_command &amp; "\"" &amp; tabSelection &amp; "\"" &amp; "\n\n"return mailto_command &amp; tabUrl</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>send-mail.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F48BFF3F-8FB4-4AB7-898D-6636EC60112C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>919C67AD-F9F2-4691-A835-0E3807CABF9F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -182,6 +195,30 @@
 			<string>F1646853-4BE7-44BE-985F-9282246BAFCA</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>mailto:?body=
+
+Viele Grüße
+Chris</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>95028977-E511-4F96-8A31-8A1EA3939515</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -218,30 +255,6 @@
 			<string>5F4417F9-1E15-4514-8C37-FEBEE68D292A</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>mailto:?body=
-
-Viele Grüße
-Chris</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>95028977-E511-4F96-8A31-8A1EA3939515</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -303,11 +316,62 @@ end tell</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://mail.google.com/mail/u/0/#snoozed</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>58BF1302-1F61-4F2C-87FD-911095EC6ED9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>snoozed||ma</string>
+				<key>subtext</key>
+				<string>GMail</string>
+				<key>text</key>
+				<string>💤 Snoozed Mails</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>1BB35D9E-1617-4583-A1F1-B56934BBE185</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>1BB35D9E-1617-4583-A1F1-B56934BBE185</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>485</real>
+		</dict>
 		<key>50B66C20-4163-4A8A-A8C9-AFC175AEA52D</key>
 		<dict>
 			<key>colorindex</key>
@@ -318,6 +382,15 @@ end tell</string>
 			<real>185</real>
 			<key>ypos</key>
 			<real>325</real>
+		</dict>
+		<key>58BF1302-1F61-4F2C-87FD-911095EC6ED9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>485</real>
 		</dict>
 		<key>5BD7290A-4D3C-4A41-A4D4-668385E514AB</key>
 		<dict>
