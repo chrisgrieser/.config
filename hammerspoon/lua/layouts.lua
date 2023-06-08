@@ -137,12 +137,11 @@ UnlockWatcher = c.new(function(event)
 	if not (event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock) then
 		return
 	end
+	if UnlockTimer then return end -- prevent concurrent runs
 	print("🔓 Wake")
 
 	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
-		u.runWithDelays(0.5, function() -- delay for recognizing screens
-			selectLayout()
-		end)
+		u.runWithDelays(0.5, selectLayout) -- delay for recognizing screens
 	end, 0.2)
 	-- deactivate the timer if the screen is woken but not unlocked
 	u.runWithDelays(20, function()

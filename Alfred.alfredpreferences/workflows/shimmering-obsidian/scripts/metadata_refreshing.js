@@ -1,4 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
+
+ObjC.import("stdlib")
+
 function getVaultNameEncoded() {
 	const theApp = Application.currentApplication();
 	theApp.includeStandardAdditions = true;
