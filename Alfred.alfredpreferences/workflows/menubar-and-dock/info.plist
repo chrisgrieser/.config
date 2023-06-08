@@ -10,16 +10,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>986C033D-6BCE-4098-9098-F4A46BF1703B</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Reload Sketchybar</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>A2EAECE1-704A-4ED1-AA7B-540C6CF7180B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -303,37 +293,12 @@ zsh "$dock_switcher_path" --save "$1"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-sketchybar --update</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>986C033D-6BCE-4098-9098-F4A46BF1703B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
 				<string>bar||restart</string>
 				<key>subtext</key>
-				<string>↵: Restart     ⌘↵: Reload</string>
+				<string></string>
 				<key>text</key>
 				<string>❗️ Restart SketchyBar</string>
 				<key>withspace</key>
@@ -512,7 +477,7 @@ sketchybar --update</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>280</real>
 		</dict>
 		<key>15B1A722-85AB-4042-B9F7-B755D027674F</key>
 		<dict>
@@ -541,7 +506,7 @@ sketchybar --update</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>750</real>
+			<real>640</real>
 		</dict>
 		<key>65E1B004-A584-4533-8D40-D1980841CCEF</key>
 		<dict>
@@ -550,7 +515,7 @@ sketchybar --update</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>390</real>
 		</dict>
 		<key>71149DFC-88DE-4E74-9FDA-F9336F759485</key>
 		<dict>
@@ -568,18 +533,7 @@ sketchybar --update</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>640</real>
-		</dict>
-		<key>986C033D-6BCE-4098-9098-F4A46BF1703B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>reload</string>
-			<key>xpos</key>
-			<real>230</real>
-			<key>ypos</key>
-			<real>275</real>
+			<real>530</real>
 		</dict>
 		<key>9F779266-3F18-4010-AAE4-F87E6752D956</key>
 		<dict>
@@ -588,7 +542,7 @@ sketchybar --update</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>500</real>
 		</dict>
 		<key>A2EAECE1-704A-4ED1-AA7B-540C6CF7180B</key>
 		<dict>
@@ -597,7 +551,7 @@ sketchybar --update</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>310</real>
 		</dict>
 		<key>CBE953E6-1671-4004-B196-F2811F5075A9</key>
 		<dict>
@@ -606,7 +560,7 @@ sketchybar --update</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>420</real>
 		</dict>
 		<key>E7A73C98-CE10-4B15-A021-493A3947456A</key>
 		<dict>
@@ -615,7 +569,7 @@ sketchybar --update</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>610</real>
 		</dict>
 		<key>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</key>
 		<dict>
@@ -626,7 +580,7 @@ sketchybar --update</string>
 			<key>xpos</key>
 			<real>350</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>425</real>
 		</dict>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<dict>

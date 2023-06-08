@@ -62,3 +62,5 @@ LSP
 component
 reddit
 as
+lua
+above
