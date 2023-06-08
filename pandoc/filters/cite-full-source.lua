@@ -10,10 +10,13 @@ end
 
 local function replace_cite(cite)
 	if #cite.citations ~= 1 then return end
+
 	local citekey = cite.citations[1].id
 	if citekey and refs[citekey] then
 		local full_reference = pandoc.utils.blocks_to_inlines(refs[citekey])
-		local prefix = { citekey .. " – "} -- prefix citekey in front of the citation
+
+		-- prefix citekey in front of the citation
+		local prefix = { "__" .. citekey .. "__" .. " – " }
 		return prefix .. full_reference
 	end
 end
