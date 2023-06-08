@@ -17,12 +17,18 @@ keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = "�
 
 -- [P]lugins
 keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Sync" })
-keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Home" })
+keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
-keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason" })
+
+keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason Overview" })
+keymap("n", "<leader>pt", function () cmd.TSModuleInfo("highlight") end, { desc = " Treesitter Parser Overview" })
+keymap("n", "<leader>pu", function ()
+	cmd.MasonUpdateAll()	
+	cmd.TSUpdate()
+end, { desc = " Update Mason & Treesitter Packages" })
 
 -- Theme Picker
-keymap("n", "<leader>pt", function() cmd.Telescope("colorscheme") end, { desc = "  Colorschemes" })
+keymap("n", "<leader>pc", function() cmd.Telescope("colorscheme") end, { desc = "  Change Colorschemes" })
 
 --------------------------------------------------------------------------------
 
@@ -673,7 +679,7 @@ autocmd("LspAttach", {
 			-- command line; needs defer to not be overwritten by treesitter-
 			-- refactor's smart-rename
 			-- stylua: ignore
-			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename Variable", buffer = true }) end, 1)
+			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true }) end, 1)
 			-- stylua: ignore
 			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
 		end
