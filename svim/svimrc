@@ -4,7 +4,6 @@ nnoremap Y y$
 nnoremap U <C-r>
 vnoremap U <C-r>
 
-nnoremap x "_x
 vnoremap x "_x
 nnoremap c "_c
 vnoremap c "_c
