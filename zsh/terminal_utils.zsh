@@ -80,12 +80,6 @@ function separator() {
 	echo "$SEP"
 }
 
-function fzf-folder() {
-
-	# shellcheck disable=2016
-	inspect
-}
-
 # smarter z/cd
 # - file: goto directory of file
 # - after entering new folder, inspect it (exa, git log, git status, etc.)
