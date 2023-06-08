@@ -1,13 +1,12 @@
 ---
 aliases: 
-tags: pandoc, citation, css, Coding
-obsidianUIMode: preview
+tags: pandoc, citation, coding
 similar:
 - [[Citation Styles]]
 - [[Bibliography Creation]]
 ---
 
-> [!INFO]
+> [!INFO]  
 > This note is a symlink to `pandoc/README.md` in [my dotfile directory](https://github.com/chrisgrieser/dotfiles)
 
 <!--toc:start-->
@@ -30,9 +29,7 @@ __Lingo__
 > extensions = filetype-specific settings  
 > reference-docs = templates  
 
-
 ## Extensions
-
 ```bash
 # list default extensions for a file format
 # (+: enabled, -: disabled)
@@ -50,6 +47,34 @@ pandoc --list-extensions=markdown
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; {{folder_path:absolute}}/{{file_name}} -o {{folder_path:absolute}}/{{title}}.docx --citeproc --bibliography=/Users/matt/Documents/zotero.bib --csl=/Users/matt/Documents/apa.csl --reference-doc=/Users/matt/Documents/essay-template2.docx
 ```
 
+## Handling Bibliography
+```yaml
+# list in bibliography without citing them in text
+---
+nocite: @one, @two
+---
+```
+
+```yaml
+# generate only bibliography without content
+---
+nocite: '@*'
+---
+```
+
+```yaml
+# Generate text without bibliography
+---
+suppress-bibliography: true
+---
+```
+
+```sh
+# Convert Bibliography files
+# https://tex.stackexchange.com/a/268305
+pandoc "My Library.bib" -t csljson -o "bibtexjson.json"
+```
+
 ## Priority of Options
 __Higher overwrites lower__
 1. Direct CLI arguments
@@ -60,17 +85,17 @@ __Higher overwrites lower__
 6. `--metadata-file` (default location: `~/.pandoc/metadata`)
 
 > Options specified in a defaults file itself always have priority over those in another file included with a `defaults: entry`.  
-> – [Pandoc Docs](https://pandoc.org/MANUAL.html#defaults-files)
+> –[Pandoc Docs](https://pandoc.org/MANUAL.html#defaults-files)
 
 > `--metadata=KEY[:VAL]`: (…) A value specified on the command line overrides a value specified in the document using YAML metadata blocks. (…)  
 > `--metadata-file=FILE`: (…) Generally, the input will be handled the same as in YAML metadata blocks. This option can be used repeatedly to include multiple metadata files; values in files specified later on the command line will be preferred over those specified in earlier files. Metadata values specified inside the document, or by using -M, overwrite values specified with this option.  
-> – [Pandoc Docs](https://pandoc.org/MANUAL.html#option--metadata)
+> –[Pandoc Docs](https://pandoc.org/MANUAL.html#option--metadata)
 
 ## How Templating works
 > yeah, the pandoc docs aren't really good in explaining templates. For odt, pptx, and docs, pandoc calls templates "reference documents" (`--reference-doc`), where you style a docx (etc) document and when selected as reference for a docx output, the output gets styled the same way as that document.
->
+> 
 > for *all* other output formats you need actual templates (`--template`), which depend on the output format (html template + css for html output, etc.). Most notoriously, for a PDF output, the type of template you need depends on the pdf-engine (`--pdf-engine`) you use are using, since pandoc does not directly convert to pdf, but converts to PDF via something like an "intermediate format". In most cases, it's either a html-based pdf-engine (e.g. `wkhtmltopdf`) in which case you need a html and css template (and need to know html and css for that), or a latex-based pdf-engine (e.g. `pdflatex`), in which case the template needs to be written in latex. And to make it even more complicated, in both cases, there are some variables for the templates (e.g., margins) __which__ can be set in the yaml-metadata of the markdown document.
->
+> 
 > So if you want PDF output, you either have to learn html/css, latex, or simply export to docx (and convert the docx to a pdf), with the latter being probably the easiest approach.
 
 __Summary__
@@ -91,12 +116,6 @@ or via LUA filter https://github.com/pandoc/lua-filters/tree/master/pagebreak --
 ```sh
 # Insert today's date
 --metadata=date:"$(date "+%e. %B %Y")"
-```
-
-```sh
-# Convert Bibliography files
-# https://tex.stackexchange.com/a/268305
-pandoc "My Library.bib" -t csljson -o "bibtexjson.json"
 ```
 
 ```sh
@@ -129,21 +148,13 @@ geometry: "margin=2cm"
 	- [manubot](https://github.com/manubot)
 - filters can be written in [[Lua]]
 
-> [!INFO] Priority of Filters
-> Filters, Lua-filters, and citeproc processing are applied in the order specified on the command line.
-> – [Pandoc Docs](https://pandoc.org/MANUAL.html#option--filter)
+> [!INFO] Priority of Filters  
+> Filters, Lua-filters, and citeproc processing are applied in the order specified on the command line.  
+> –[Pandoc Docs](https://pandoc.org/MANUAL.html#option--filter)
 
-### Why Lua Filters?
-> Although traditional filters are very flexible, they have a couple of disadvantages. First, there is some overhead in writing JSON to stdout and reading it from stdin (twice, once on each side of the filter). Second, whether a filter will work will depend on details of the user’s environment. A filter may require an interpreter for a certain programming language to be available, as well as a library for manipulating the pandoc AST in JSON form. One cannot simply provide a filter that can be used by anyone who has a certain version of the pandoc executable.
->
+__Why Lua Filters?__
+> Although traditional filters are very flexible, they have a couple of disadvantages. First, there is some overhead in writing JSON to stdout and reading it from stdin (twice, once on each side of the filter). Second, whether a filter will work will depend on details of the user's environment. A filter may require an interpreter for a certain programming language to be available, as well as a library for manipulating the pandoc AST in JSON form. One cannot simply provide a filter that can be used by anyone who has a certain version of the pandoc executable.
+> 
 > Starting with version 2.0, pandoc makes it possible to write filters in Lua without any external dependencies at all. A Lua interpreter (version 5.3) and a Lua library for creating pandoc filters is built into the pandoc executable. Pandoc data types are marshaled to Lua directly, avoiding the overhead of writing JSON to stdout and reading it from stdin.
 - [Pandoc - Pandoc Lua Filters](https://pandoc.org/lua-filters.html)
 
-## References without Citations
-Add this to the yaml to add references without citing them in text.
-
-```yaml
----
-nocite: @one, @two
----
-```
