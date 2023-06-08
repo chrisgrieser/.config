@@ -13,7 +13,7 @@ bo.commentstring = "% %s"
 local function checkCitekeysForDuplicates()
 	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
 	local linesWithAt = vim.tbl_filter(function(line) return line:match("^@") end, lines)
-	local citekeys = vim.tbl_map(function(line) return line:match("^.-{(.*)") end, linesWithAt)
+	local citekeys = vim.tbl_map(function(line) return line:match("^.-{(.*),") end, linesWithAt)
 	local citekeyCount = {}
 	for _, citekey in pairs(citekeys) do
 		if not citekeyCount[citekey] then
@@ -22,8 +22,20 @@ local function checkCitekeysForDuplicates()
 			citekeyCount[citekey] = citekeyCount[citekey] + 1
 		end
 	end
-	local duplicateCitekeys = vim.tbl_filter(function(citekey) return citekeyCount[citekey] > 1 end, citekeys)
+	local duplicateCitekeys = {}
+	for citekey, count in pairs(citekeyCount) do
+		if count > 1 then table.insert(duplicateCitekeys, citekey) end
+	end
+	if vim.tbl_isempty(duplicateCitekeys) then return end
+
+	local msg = "DUPLICATE CITEKEYS"
+	for _, dup in pairs(duplicateCitekeys) do
+		msg = msg .. "\n- " .. dup
+	end
+
+	vim.notify(msg, vim.log.levels.WARN)
 end
 
 -- run on entering a bibtex buffer
-checkCitekeysForDuplicates()
+-- deferred, to ensure nvim-notify is loaded
+vim.defer_fn(checkCitekeysForDuplicates, 1000)
