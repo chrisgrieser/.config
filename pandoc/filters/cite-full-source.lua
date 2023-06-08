@@ -9,9 +9,12 @@ local function store_refs(div)
 end
 
 local function replace_cite(cite)
-	local citation = cite.citations[1]
-	if citation and refs[citation.id] and #cite.citations == 1 then
-		return pandoc.utils.blocks_to_inlines(refs[citation.id])
+
+	local citekey = cite.citations[1]
+	if citekey and refs[citekey] and #cite.citations == 1 then
+		local full_reference = pandoc.utils.blocks_to_inlines(refs[citekey])
+		local prefix = { citekey .. " – "} -- prefix citekey in front of the citation
+		return prefix .. full_reference
 	end
 end
 
