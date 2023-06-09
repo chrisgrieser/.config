@@ -149,7 +149,9 @@ lspSettings.yamlls = {
 -- force bashls (and treesitter) to highlight zsh as if it was bash
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "zsh",
-	callback = function() vim.bo.filetype = "sh" end,
+	callback = function()
+		-- vim.bo.filetype = "sh"
+	end,
 })
 
 --------------------------------------------------------------------------------
