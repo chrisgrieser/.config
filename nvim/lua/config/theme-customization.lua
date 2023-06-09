@@ -30,10 +30,7 @@ local function customHighlights()
 		updateHighlight(v, "gui=underdouble cterm=underline")
 	end
 
-	-- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
-	clearHighlight("@lsp.type.comment")
-	fn.matchadd("@text.todo.comment", [[\<\(WIP\|INFO\)\>]])
-	fn.matchadd("@text.warning.comment", [[\<\(WARN\|FIX\)\>]])
+	clearHighlight("@lsp.type.comment") -- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
 
 	local commentColor = u.getHighlightValue("Comment", "fg")
 	updateHighlight("@text.uri", ("guisp=%s guifg=%s gui=underline term=underline"):format(commentColor, commentColor))
@@ -52,12 +49,13 @@ end
 
 local function themeModifications()
 	local mode = vim.opt.background:get()
-	local theme = g.colors_name
+
 	-- some themes do not set g.colors_name
+	local theme = g.colors_name
 	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
 
+	-- FIX lualine_a not getting bold in many themes
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
-	-- FIX lualine_a not getting bold in some themes
 	for _, v in pairs(vimModes) do
 		updateHighlight("lualine_a_" .. v, "gui=bold")
 	end

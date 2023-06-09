@@ -39,7 +39,8 @@ case $APP in
 	cp -f "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" "$APP.app/Contents/Resources/icon.icns"
 	;;
 "Discord")
-	cp -f "$CUSTOM_ICON_FOLDER/Discord Alt.icns" "$APP.app/Contents/Resources/electron.icns"
+	# cp -f "$CUSTOM_ICON_FOLDER/Discord Alt.icns" "$APP.app/Contents/Resources/electron.icns"
+	cp -f "$CUSTOM_ICON_FOLDER/Discord Black.icns" "$APP.app/Contents/Resources/electron.icns"
 	;;
 "Vivaldi")
 	cp -f "$CUSTOM_ICON_FOLDER/Vivaldi.icns" "$APP.app/Contents/Resources/app.icns"
