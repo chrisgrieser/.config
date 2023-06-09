@@ -11,35 +11,27 @@ bo.commentstring = "% %s"
 --------------------------------------------------------------------------------
 
 ---checks a .bib file for duplicate citekeys and reports them via `vim.notify`
----when any are found. Does nothing, if there are no duplicate citekeys. 
+---when any are found. Does nothing, if there are no duplicate citekeys.
 ---@param bufnr? number when not provided, uses the current buffer
 local function checkForDuplicateCitekeys(bufnr)
 	if not bufnr then bufnr = 0 end
-	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
 
-	local linesWithAt = vim.tbl_filter(function(line) return line:match("^@") end, lines)
-	local citekeys = vim.tbl_map(function(line) return line:match("^.-{(.*),") end, linesWithAt)
+	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
+	local linesWithAt = vim.tbl_filter(function(line) return line:find("^@") end, lines)
+
+	local duplicateCitekeys = ""
 	local citekeyCount = {}
-	for _, citekey in pairs(citekeys) do
+	for _, line in pairs(linesWithAt) do
+		local citekey = line:match("^.-{(.*),")
 		if not citekeyCount[citekey] then
 			citekeyCount[citekey] = 1
 		else
-			citekeyCount[citekey] = citekeyCount[citekey] + 1
+			duplicateCitekeys = duplicateCitekeys .. "\n" .. "- " .. citekey
 		end
 	end
+	if duplicateCitekeys == "" then return end
 
-	local duplicateCitekeys = {}
-	for citekey, count in pairs(citekeyCount) do
-		if count > 1 then table.insert(duplicateCitekeys, citekey) end
-	end
-	if vim.tbl_isempty(duplicateCitekeys) then return end
-
-	local msg = "# DUPLICATE CITEKEYS"
-	for _, dup in pairs(duplicateCitekeys) do
-		msg = msg .. "\n- " .. dup
-	end
-
-	vim.notify(msg, vim.log.levels.WARN, {
+	vim.notify("# DUPLICATE CITEKEYS" .. duplicateCitekeys, vim.log.levels.WARN, {
 		on_open = function(win)
 			local buf = vim.api.nvim_win_get_buf(win)
 			vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
