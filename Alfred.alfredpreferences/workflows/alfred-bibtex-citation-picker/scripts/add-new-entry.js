@@ -43,7 +43,7 @@ function parseBibtexProperty(arr, property) {
 	const allProperties = arr
 		.map((/** @type {string} */ line) => line.trim())
 		.filter((/** @type {string} */ prop) => prop.startsWith(property + " "));
-	if (!arr.length) return "";
+	if (!allProperties.length) return "";
 	const value = allProperties[0].split("=")[1].replace(/{|}|,$/g, "").trim();
 	return value;
 }
