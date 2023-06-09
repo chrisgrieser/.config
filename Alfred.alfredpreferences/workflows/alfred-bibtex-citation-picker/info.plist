@@ -453,7 +453,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E1D3B211-1CE6-4A09-B45E-7C55A61CDC06</string>
+				<string>B35474AD-DDAA-4056-AE14-9BE2D3CFCCA0</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
@@ -577,6 +577,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>072BB21D-BDB3-4064-9BBF-FC7F5AD39723</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B35474AD-DDAA-4056-AE14-9BE2D3CFCCA0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E1D3B211-1CE6-4A09-B45E-7C55A61CDC06</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -955,6 +968,14 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>DD59F90F-8FD2-486D-A8A8-2FFA47DE45F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>B35474AD-DDAA-4056-AE14-9BE2D3CFCCA0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2989,6 +3010,13 @@ to set a hotkey for the citaiton picker.</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>815</real>
+		</dict>
+		<key>B35474AD-DDAA-4056-AE14-9BE2D3CFCCA0</key>
+		<dict>
+			<key>xpos</key>
+			<real>925</real>
+			<key>ypos</key>
+			<real>75</real>
 		</dict>
 		<key>B8AEF220-7CBC-4D07-BA5F-D28094B3D4B4</key>
 		<dict>
