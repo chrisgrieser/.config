@@ -763,6 +763,8 @@ keymap("n", "<leader>ow", function()
 		vim.keymap.del({ "n", "x" }, "K", { buffer = true })
 		vim.keymap.del({ "n", "x" }, "k", { buffer = true })
 		vim.keymap.del({ "n", "x" }, "j", { buffer = true })
+		vim.keymap.del({ "n", "x" }, "A", { buffer = true })
+		vim.keymap.del({ "n", "x" }, "I", { buffer = true })
 	else
 		vim.opt_local.wrap = true
 		vim.opt_local.colorcolumn = ""
@@ -772,6 +774,8 @@ keymap("n", "<leader>ow", function()
 		keymap({ "n", "x" }, "K", "6gk", { buffer = true })
 		keymap({ "n", "x" }, "j", "gj", { buffer = true })
 		keymap({ "n", "x" }, "k", "gk", { buffer = true })
+		keymap({ "n", "x" }, "A", "g$a", { buffer = true })
+		keymap({ "n", "x" }, "I", "g^i", { buffer = true })
 	end
 end, { desc = " 󰖶 Toggle Wrap" })
 
