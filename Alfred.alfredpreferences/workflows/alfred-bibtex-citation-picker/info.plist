@@ -3285,20 +3285,31 @@ to set a hotkey for the citaiton picker.</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>Match only short years</string>
+				<string>full</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Full Years</string>
+						<string>full</string>
+					</array>
+					<array>
+						<string>Short Years</string>
+						<string>short</string>
+					</array>
+					<array>
+						<string>Short &amp; Full Years</string>
+						<string>short+full</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
-			<string>Whether to match only the last two digits of the year. Example: When enabled, "19" will only match years like "2019" and "1919", but not "1901", "1920", or "1990".</string>
+			<string>Given the year "1990", short years will only match "90".</string>
 			<key>label</key>
 			<string>Match Behavior</string>
 			<key>type</key>
-			<string>checkbox</string>
+			<string>popupbutton</string>
 			<key>variable</key>
-			<string>match_only_short_years</string>
+			<string>match_year_type</string>
 		</dict>
 		<dict>
 			<key>config</key>

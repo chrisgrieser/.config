@@ -1,7 +1,10 @@
+#!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const homePath = app.pathTo("home folder");
+
+//──────────────────────────────────────────────────────────────────────────────
 
 const urlIcon = "🌐";
 const litNoteIcon = "📓";
@@ -10,11 +13,11 @@ const abstractIcon = "📄";
 const pdfIcon = "📕";
 const litNoteFilterStr = "*";
 const pdfFilterStr = "pdf";
-
 const alfredBarLength = parseInt($.getenv("alfred_bar_length"));
 
 const matchAuthorsInEtAl = $.getenv("match_authors_in_etal") === "1";
-const matchOnlyShortYears = $.getenv("match_only_short_years") === "1";
+const matchShortYears = $.getenv("match_year_type").includes("short");
+const matchFullYears = $.getenv("match_year_type").includes("full");
 
 const libraryPath = $.getenv("bibtex_library_path").replace(/^~/, homePath);
 const litNoteFolder = $.getenv("literature_note_folder").replace(/^~/, homePath);
@@ -40,7 +43,7 @@ if (litNoteFolderCorrect) {
 	litNoteArray = app
 		.doShellScript(`find "${litNoteFolder}" -type f -name "*.md"`)
 		.split("\r")
-		.map(filepath => {
+		.map((/** @type {string} */ filepath) => {
 			return filepath
 				.replace(/.*\/(.*)\.md/, "$1") // only basename w/o ext
 				.replace(/(_[^_]*$)/, ""); // INFO part before underscore, this method does not work for citkeys which contain an underscore though...
@@ -52,7 +55,7 @@ if (pdfFolderCorrect) {
 	pdfArray = app
 		.doShellScript(`find "${pdfFolder}" -type f -name "*.pdf"`)
 		.split("\r")
-		.map(filepath => {
+		.map((/** @type {string} */ filepath) => {
 			return filepath
 				.replace(/.*\/(.*)\.pdf/, "$1") // only basename w/o ext
 				.replace(/(_[^_]*$)/, ""); // INFO part before underscore, this method does not work for citkeys which contain an underscore though...
@@ -65,9 +68,10 @@ if (pdfFolderCorrect) {
 const rawBibtex = app.doShellScript(`cat "${libraryPath}"`);
 console.log("Bibtex Library Reading successful.");
 
-const entryArray = bibtexParse(rawBibtex) // eslint-disable-line no-undef
-	/* eslint-disable-next-line complexity */
-	.map(entry => {
+// @ts-ignore
+// rome-ignore lint/correctness/noUndeclaredVariables: <explanation>
+const  entryArray = bibtexParse(rawBibtex) // eslint-disable-line no-undef
+	.map((/** @type {{ title: any; url: any; citekey: any; keywords: any; type: any; journal: any; volume: any; issue: any; booktitle: any; authors: any; editors: any; year: any; abstract: any; primaryNamesEtAlString: any; primaryNames: any; }} */ entry) => {
 		const emojis = [];
 		const {
 			title,
@@ -142,8 +146,6 @@ const entryArray = bibtexParse(rawBibtex) // eslint-disable-line no-undef
 			case "webpage":
 				typeIcon += "website.png";
 				break;
-			case "misc":
-			case "unpublished":
 			default:
 				typeIcon += "manuscript.png";
 		}
@@ -166,12 +168,12 @@ const entryArray = bibtexParse(rawBibtex) // eslint-disable-line no-undef
 
 		// Matching for Smart Query
 		let keywordMatches = [];
-		if (keywords.length) keywordMatches = keywords.map(tag => "#" + tag);
+		if (keywords.length) keywordMatches = keywords.map((/** @type {string} */ tag) => "#" + tag);
 		let authorMatches = [...authors, ...editors];
 		if (!matchAuthorsInEtAl) authorMatches = [...authors.slice(0, 1), ...editors.slice(0, 1)]; // only match first two names
 		const yearMatches = [];
-		if (matchOnlyShortYears) yearMatches.push(year.slice(-2));
-		else yearMatches.push(year);
+		if (matchShortYears) yearMatches.push(year.slice(-2));
+		if (matchFullYears) yearMatches.push(year);
 
 		const alfredMatcher = [
 			"@" + citekey,
@@ -223,6 +225,7 @@ const entryArray = bibtexParse(rawBibtex) // eslint-disable-line no-undef
 //──────────────────────────────────────────────────────────────────────────────
 
 const logEndTime = new Date();
+// @ts-ignore
 console.log("Buffer Writing Duration: " + (logEndTime - logStartTime).toString() + "ms");
 
 JSON.stringify({ items: entryArray }); // JXA direct return
