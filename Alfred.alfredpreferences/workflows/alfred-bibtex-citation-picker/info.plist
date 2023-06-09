@@ -463,6 +463,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>E1D3B211-1CE6-4A09-B45E-7C55A61CDC06</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Add another citation</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>1C0964D1-AA81-478A-B406-28E96DDD9E82</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -864,6 +874,14 @@
 	<key>objects</key>
 	<array>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>B35474AD-DDAA-4056-AE14-9BE2D3CFCCA0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>availableviaurlhandler</key>
@@ -968,14 +986,6 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>DD59F90F-8FD2-486D-A8A8-2FFA47DE45F6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>B35474AD-DDAA-4056-AE14-9BE2D3CFCCA0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -3013,10 +3023,12 @@ to set a hotkey for the citaiton picker.</string>
 		</dict>
 		<key>B35474AD-DDAA-4056-AE14-9BE2D3CFCCA0</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>925</real>
+			<real>915</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>15</real>
 		</dict>
 		<key>B8AEF220-7CBC-4D07-BA5F-D28094B3D4B4</key>
 		<dict>
