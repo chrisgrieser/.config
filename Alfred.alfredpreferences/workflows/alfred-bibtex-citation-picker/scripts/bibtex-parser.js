@@ -23,9 +23,10 @@ class BibtexEntry {
 		if (this.authors.length) return this.authors;
 		return this.editors; // if both are empty, will also return empty array
 	}
-	/** @param {any[]} nameType */
-	etAlStringify(nameType) {
-		const names = nameType;
+	/** turn Array of names into into one string to display
+	 * @param {string[]} names
+	 */
+	etAlStringify(names) {
 		switch (names.length) {
 			case 0:
 				return "";
@@ -84,7 +85,6 @@ const germanChars = [
 	'\\"{u};ü',
 	'\\"{U};Ü',
 ];
-
 const frenchChars = ["{\\'a};á", "{\\'o};ó", "{\\'e};é", "{\\`{e}};é", "{\\`e};é", "\\'E;É", "\\c{c};ç", '\\"{i};ï'];
 const otherChars = [
 	"{\\~n};ñ",
@@ -98,16 +98,7 @@ const otherChars = [
 	"{\\'c};ć",
 	'\\"e;ë',
 ];
-const specialChars = [
-	"\\&;&",
-	'``;"',
-	',,;"',
-	"`;'",
-	"\\textendash{};—",
-	"---;—",
-	"--;—",
-	"{	extquotesingle};'",
-];
+const specialChars = ["\\&;&", '``;"', ',,;"', "`;'", "\\textendash{};—", "---;—", "--;—", "{	extquotesingle};'"];
 const decodePair = [...germanChars, ...frenchChars, ...otherChars, ...specialChars];
 
 /** @param {string} encodedStr */
@@ -120,16 +111,12 @@ function bibtexDecode(encodedStr) {
 	return decodedStr;
 }
 
-// input: string
-// output: BibtexEntry object
 /**
  * @param {string} str
  * @return {BibtexEntry[]}
  */
-	// rome-ignore lint/correctness/noUnusedVariables: used externally
-function  bibtexParse(str) {
-	// eslint-disable-line no-unused-vars
-
+// rome-ignore lint/correctness/noUnusedVariables: used externally
+function bibtexParse(str) {
 	const bibtexEntryDelimiter = /^@/m; // regex to avoid an "@" in a property value to break parsing
 	const bibtexPropertyDelimiter = /,(?=\s*[\w-]+\s*=)/; // last comma of a field, see: https://regex101.com/r/1dvpfC/1
 	const bibtexNameValueDelimiter = " and ";
@@ -169,7 +156,7 @@ function  bibtexParse(str) {
 				const value = line
 					.split("=")[1]
 					.replace(/{|}|,$/g, "") // remove TeX escaping
-					.trim(); 
+					.trim();
 
 				switch (field) {
 					case "author":
@@ -188,9 +175,8 @@ function  bibtexParse(str) {
 						entry.keywords = value.split(bibtexKeywordValueDelimiter).map((t) => t.trim());
 						break;
 					default:
-						entry[field] = value
+						entry[field] = value;
 				}
-
 			});
 
 			if (!entry.url && entry.doi) entry.url = "https://doi.org/" + entry.doi;
