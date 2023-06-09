@@ -49,7 +49,7 @@ return {
 			require("scrollview").setup {
 				winblend = 40,
 				column = 1,
-				signs_on_startup = { "conflicts", "search", "diagnostics", "quickfix" },
+				signs_on_startup = { "conflicts", "search", "diagnostics", "quickfix", "folds" },
 			}
 			-- add gitsigns https://github.com/dstein64/nvim-scrollview/blob/main/lua/scrollview/contrib/gitsigns.lua
 			require("scrollview.contrib.gitsigns").setup()
