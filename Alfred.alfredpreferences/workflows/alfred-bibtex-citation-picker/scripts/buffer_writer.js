@@ -166,7 +166,7 @@ const  entryArray = bibtexParse(rawBibtex) // eslint-disable-line no-undef
 			else namesToDisplay += "(Ed.) ";
 		}
 
-		// Matching for Smart Query
+		// Matching behavior
 		let keywordMatches = [];
 		if (keywords.length) keywordMatches = keywords.map((/** @type {string} */ tag) => "#" + tag);
 		let authorMatches = [...authors, ...editors];
