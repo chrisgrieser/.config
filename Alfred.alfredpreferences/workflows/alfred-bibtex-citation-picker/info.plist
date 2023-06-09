@@ -3299,7 +3299,7 @@ to set a hotkey for the citaiton picker.</string>
 		<key>_format_page_suffix</key>
 		<string></string>
 		<key>alfred_bar_length</key>
-		<string>60</string>
+		<string>57</string>
 		<key>max_title_length</key>
 		<string>50</string>
 	</dict>
