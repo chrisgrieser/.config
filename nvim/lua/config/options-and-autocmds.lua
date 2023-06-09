@@ -61,13 +61,16 @@ opt.clipboard = "unnamedplus"
 -- Popups / Floating Windows
 opt.pumwidth = 15 -- min width popup menu
 
--- show 15 items in editor but only 7 in cmdline to prevent obfuscating view
-opt.pumheight = 15
+-- height of complemtion suggestion window depending on type of search
+-- editor 15	/ 5	: 8
 autocmd({ "CmdlineLeave", "VimEnter" }, {
 	callback = function() opt.pumheight = 15 end,
 })
 autocmd("CmdlineEnter", {
-	callback = function() opt.pumheight = 7 end,
+	callback = function()
+		local isSearch = fn.getcmdtype():find("[/?]")
+		opt.pumheight = isSearch and 5 or 8
+	end,
 })
 
 -- Spelling

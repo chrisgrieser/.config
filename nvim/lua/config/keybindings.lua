@@ -235,6 +235,7 @@ keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = 
 
 -- [z]pelling [l]ist
 keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 suggest" })
+keymap("n", "z.", "1z=", { desc = "󰓆 correct" })
 
 ---add word under cursor to vale/languagetool dictionary
 keymap({ "n", "x" }, "zg", function()
@@ -602,8 +603,6 @@ keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { d
 -- INFO some LSP bindings done globally, so they can be used by null-ls as well
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
--- stylua: ignore
-keymap("n", "<leader>e", function() cmd.Telescope("diagnostics") end, { desc = " 󰒕 Search Diagnostics" })
 
 keymap("n", "<leader>d", function()
 	require("lsp_lines").toggle()
@@ -614,21 +613,6 @@ end, { desc = "󰒕 Toggle LSP Lines" })
 keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
 
 keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
-
-vim.keymap.set("n", "gk", function()
-	if not require("nvim-navic").is_available() then
-		vim.notify("Navic is not available.")
-		return
-	end
-	local symbolPath = require("nvim-navic").get_data()
-	local parent = symbolPath[#symbolPath - 1]
-	if not parent then
-		vim.notify("Already at the highest parent.")
-		return
-	end
-	local parentPos = parent.scope.start
-	vim.api.nvim_win_set_cursor(0, { parentPos.line, parentPos.character })
-end, { desc = "Up one parent to Parent" })
 
 -- copy breadcrumbs (nvim navic)
 keymap("n", "<D-b>", function()
