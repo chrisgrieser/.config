@@ -150,18 +150,6 @@ local function telescopeConfig()
 				ignore_symbols = { "string", "boolean", "number" },
 				fname_width = 17,
 			},
-			buffers = {
-				prompt_prefix = "󰽙 ",
-				ignore_current_buffer = false,
-				initial_mode = "normal",
-				mappings = { n = { ["<D-w>"] = "delete_buffer" } },
-				sort_mru = true,
-				prompt_title = false,
-				results_title = false,
-				theme = "cursor",
-				previewer = false,
-				layout_config = { cursor = { width = 0.5, height = 0.4 } },
-			},
 			spell_suggest = {
 				initial_mode = "normal",
 				prompt_prefix = "󰓆",

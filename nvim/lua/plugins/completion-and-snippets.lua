@@ -301,6 +301,7 @@ local function cmdlineCompletionConfig()
 	local cmp = require("cmp")
 
 	cmp.setup.cmdline(":", {
+		performance = { max_view_entries = 7 }, -- prevent list from obfuscating view too much
 		mapping = cmp.mapping.preset.cmdline(),
 		enabled = function()
 			-- https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-cmdline-completion-for-certain-commands-such-as-increname
@@ -321,6 +322,7 @@ local function cmdlineCompletionConfig()
 	})
 
 	cmp.setup.cmdline({ "/", "?" }, {
+		performance = { max_view_entries = 5 },
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = { s.fuzzybuffer },
 	})

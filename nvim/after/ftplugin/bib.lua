@@ -22,13 +22,13 @@ local function checkForDuplicateCitekeys(bufnr)
 
 	for _, line in pairs(lines) do
 		local citekey = line:match("^@.-{(.*),")
-		if not citekey then goto continue end
-		if not citekeyCount[citekey] then
-			citekeyCount[citekey] = 1
-		else
-			duplCitekeys = duplCitekeys .. "\n" .. "- " .. citekey
+		if citekey then
+			if not citekeyCount[citekey] then
+				citekeyCount[citekey] = 1
+			else
+				duplCitekeys = duplCitekeys .. "\n" .. "- " .. citekey
+			end
 		end
-		::continue::
 	end
 	if duplCitekeys == "" then return end
 

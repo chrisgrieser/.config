@@ -19,8 +19,9 @@ zstyle ':fzf-tab:*' single-group color prefix
 #───────────────────────────────────────────────────────────────────────────────
 # MATCHING
 # case insensitive path-completion - https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
-# not needed with fzf-tab
-# zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+# INFO even though `fzf` does to smart-case-matching, this does not affect the matching
+# for the initial `tab` to open `fzf-tab`, which this snippet does
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -48,6 +49,9 @@ zstyle ':fzf-tab:*cd*' continuous-trigger 'space'
 
 #───────────────────────────────────────────────────────────────────────────────
 # COLORS / APPEARANCE
+
+# make the matched string readable in light mode terminals as well as dark mode ones
+zstyle ':fzf-tab:complete:*' fzf-flags '--color=hl:206'
 
 # Disable prefix
 zstyle ':fzf-tab:*' prefix ''
