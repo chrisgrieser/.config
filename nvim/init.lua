@@ -40,5 +40,7 @@ safeRequire("config.abbreviations")
 
 -- Load tip of the day after launching nvim
 local tip = vim.fn.system('curl -s "https://vtip.43z.one"')
-tip = "TIP\n" .. tip
-vim.defer_fn(function() vim.notify(tip, vim.log.levels.INFO, { timeout = 10000 }) end, 2000)
+vim.defer_fn(
+	function() vim.notify("  TIP\n" .. tip, vim.log.levels.INFO, { timeout = 10000 }) end,
+	2000
+)
