@@ -16,22 +16,23 @@ bo.commentstring = "% %s"
 local function checkForDuplicateCitekeys(bufnr)
 	if not bufnr then bufnr = 0 end
 
-	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
-	local linesWithAt = vim.tbl_filter(function(line) return line:find("^@") end, lines)
-
-	local duplicateCitekeys = ""
+	local duplCitekeys = ""
 	local citekeyCount = {}
-	for _, line in pairs(linesWithAt) do
-		local citekey = line:match("^.-{(.*),")
-		if not citekeyCount[citekey] then
-			citekeyCount[citekey] = 1
-		else
-			duplicateCitekeys = duplicateCitekeys .. "\n" .. "- " .. citekey
+	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
+
+	for _, line in pairs(lines) do
+		local citekey = line:match("^@.-{(.*),")
+		if citekey then
+			if not citekeyCount[citekey] then
+				citekeyCount[citekey] = 1
+			else
+				duplCitekeys = duplCitekeys .. "\n" .. "- " .. citekey
+			end
 		end
 	end
-	if duplicateCitekeys == "" then return end
+	if duplCitekeys == "" then return end
 
-	vim.notify("# DUPLICATE CITEKEYS" .. duplicateCitekeys, vim.log.levels.WARN, {
+	vim.notify("# Duplicate Citkeys" .. duplCitekeys, vim.log.levels.WARN, {
 		on_open = function(win)
 			local buf = vim.api.nvim_win_get_buf(win)
 			vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
