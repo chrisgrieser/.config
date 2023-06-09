@@ -693,6 +693,27 @@ Search neovim plugins and online :help via Alfred</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>:nvim</string>
+				<key>subtext</key>
+				<string>~/.local/state/nvim</string>
+				<key>text</key>
+				<string>📂 nvim – temp data</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0F9B66EF-DAFF-49D7-A17A-D4DA04AC87A5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1034,6 +1055,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>715</real>
+		</dict>
+		<key>0F9B66EF-DAFF-49D7-A17A-D4DA04AC87A5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>645</real>
+			<key>ypos</key>
+			<real>535</real>
 		</dict>
 		<key>14ECFC26-C670-4D39-9A5C-C24B452554F2</key>
 		<dict>
