@@ -1,3 +1,4 @@
+#!/usr/bin/env osascript -l JavaScript
 // Due to use with the JXA import hack, no "export" keyword is necessary.
 // https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/Importing-Scripts
 
