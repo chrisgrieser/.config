@@ -1,4 +1,4 @@
-std="plenary-testing"
+std = "lua51" # LuaJit (used by nvim) is based on Lua 5.1
 
 [lints]
 # disabled since duplication with LSP
