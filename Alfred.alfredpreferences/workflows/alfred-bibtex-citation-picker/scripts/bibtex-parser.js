@@ -9,7 +9,7 @@ class BibtexEntry {
 		this.type = "";
 		this.citekey = ""; // without "@"
 		this.title = "";
-		this.year = ""; // no need for integer, since no calculations made
+		this.year = ""; // as string since no calculations are made
 		this.url = "";
 		this.booktitle = "";
 		this.journal = "";
@@ -161,10 +161,8 @@ function bibtexParse(str) {
 
 				switch (field) {
 					case "author":
-						entry.authors = toLastNameArray(value);
-						break;
 					case "editor":
-						entry.editors = toLastNameArray(value);
+						entry[field] = toLastNameArray(value);
 						break;
 					case "date":
 					case "year": {
@@ -173,7 +171,7 @@ function bibtexParse(str) {
 						break;
 					}
 					case "keywords":
-						entry.keywords = value.split(bibtexKeywordValueDelimiter).map((t) => t.trim());
+						entry[field] = value.split(bibtexKeywordValueDelimiter).map((t) => t.trim());
 						break;
 					default:
 						entry[field] = value;
