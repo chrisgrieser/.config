@@ -19,39 +19,52 @@ class BibtexEntry {
 		this.keywords = [];
 	}
 
-	primaryNamesArr () {
+	primaryNamesArr() {
 		if (this.authors.length) return this.authors;
 		return this.editors; // if both are empty, will also return empty array
 	}
-	etAlStringify (nameType) {
+	/** @param {any[]} nameType */
+	etAlStringify(nameType) {
 		const names = nameType;
 		switch (names.length) {
-			case 0: return "";
-			case 1: return names[0];
-			case 2: return names.join(" & ");
-			default: return names[0] + " et al.";
+			case 0:
+				return "";
+			case 1:
+				return names[0];
+			case 2:
+				return names.join(" & ");
+			default:
+				return names[0] + " et al.";
 		}
 	}
 
-	get primaryNames () { return this.primaryNamesArr() }
-	get primaryNamesEtAlString () { return this.etAlStringify (this.primaryNamesArr()) }
-	get authorsEtAlString() { return this.etAlStringify (this.authors) }
-	get editorsEtAlString() { return this.etAlStringify (this.editors) }
+	get primaryNames() {
+		return this.primaryNamesArr();
+	}
+	get primaryNamesEtAlString() {
+		return this.etAlStringify(this.primaryNamesArr());
+	}
+	get authorsEtAlString() {
+		return this.etAlStringify(this.authors);
+	}
+	get editorsEtAlString() {
+		return this.etAlStringify(this.editors);
+	}
 }
 
 const germanChars = [
-	"{\\\"u};ü",
-	"{\\\"a};ä",
-	"{\\\"o};ö",
-	"{\\\"U};Ü",
-	"{\\\"A};Ä",
-	"{\\\"O};Ö",
-	"\\\"u;ü",
-	"\\\"a;ä",
-	"\\\"o;ö",
-	"\\\"U;Ü",
-	"\\\"A;Ä",
-	"\\\"O;Ö",
+	'{\\"u};ü',
+	'{\\"a};ä',
+	'{\\"o};ö',
+	'{\\"U};Ü',
+	'{\\"A};Ä',
+	'{\\"O};Ö',
+	'\\"u;ü',
+	'\\"a;ä',
+	'\\"o;ö',
+	'\\"U;Ü',
+	'\\"A;Ä',
+	'\\"O;Ö',
 	"\\ss;ß",
 	"{\\ss};ß",
 
@@ -64,24 +77,15 @@ const germanChars = [
 	"\\''u;ü",
 
 	// bibtex-tidy
-	"\\\"{O};Ö",
-	"\\\"{o};ö",
-	"\\\"{A};Ä",
-	"\\\"{a};ä",
-	"\\\"{u};ü",
-	"\\\"{U};Ü"
+	'\\"{O};Ö',
+	'\\"{o};ö',
+	'\\"{A};Ä',
+	'\\"{a};ä',
+	'\\"{u};ü',
+	'\\"{U};Ü',
 ];
 
-const frenchChars = [
-	"{\\'a};á",
-	"{\\'o};ó",
-	"{\\'e};é",
-	"{\\`{e}};é",
-	"{\\`e};é",
-	"\\'E;É",
-	"\\c{c};ç",
-	"\\\"{i};ï"
-];
+const frenchChars = ["{\\'a};á", "{\\'o};ó", "{\\'e};é", "{\\`{e}};é", "{\\`e};é", "\\'E;É", "\\c{c};ç", '\\"{i};ï'];
 const otherChars = [
 	"{\\~n};ñ",
 	"\\~a;ã",
@@ -92,31 +96,39 @@ const otherChars = [
 	"\\^{i};î",
 	"\\'\\i;í",
 	"{\\'c};ć",
-	"\\\"e;ë"
+	'\\"e;ë',
 ];
 const specialChars = [
 	"\\&;&",
-	"``;\"",
-	",,;\"",
+	'``;"',
+	',,;"',
 	"`;'",
 	"\\textendash{};—",
 	"---;—",
-	"--;—"
+	"--;—",
+	"{	extquotesingle};'",
 ];
 const decodePair = [...germanChars, ...frenchChars, ...otherChars, ...specialChars];
 
-function bibtexDecode (encodedStr) {
+/** @param {string} encodedStr */
+function bibtexDecode(encodedStr) {
 	let decodedStr = encodedStr;
-	decodePair.forEach(pair => {
+	decodePair.forEach((pair) => {
 		const half = pair.split(";");
-		decodedStr = decodedStr.replaceAll (half[0], half[1]);
+		decodedStr = decodedStr.replaceAll(half[0], half[1]);
 	});
 	return decodedStr;
 }
 
 // input: string
 // output: BibtexEntry object
-function bibtexParse (str) { // eslint-disable-line no-unused-vars
+/**
+ * @param {string} str
+ * @return {BibtexEntry[]}
+ */
+	// rome-ignore lint/correctness/noUnusedVariables: used externally
+function  bibtexParse(str) {
+	// eslint-disable-line no-unused-vars
 
 	const bibtexEntryDelimiter = /^@/m; // regex to avoid an "@" in a property value to break parsing
 	const bibtexPropertyDelimiter = /,(?=\s*[\w-]+\s*=)/; // last comma of a field, see: https://regex101.com/r/1dvpfC/1
@@ -124,10 +136,12 @@ function bibtexParse (str) { // eslint-disable-line no-unused-vars
 	const bibtexKeywordValueDelimiter = ",";
 	const bibtexCommentRegex = /^%.*$/gm;
 
+	/** @param {string} nameString */
 	function toLastNameArray(nameString) {
 		return nameString
 			.split(bibtexNameValueDelimiter) // array-fy
-			.map(name => { // only last name
+			.map((name) => {
+				// only last name
 				if (name.includes(",")) return name.split(",")[0]; // when last name — first name
 				return name.split(" ").pop(); // when first name — last name
 			});
@@ -139,7 +153,7 @@ function bibtexParse (str) { // eslint-disable-line no-unused-vars
 		.replace(bibtexCommentRegex, "") // remove comments
 		.split(bibtexEntryDelimiter)
 		.slice(1) // first element is BibTeX metadata
-		.map(bibEntry => {
+		.map((bibEntry) => {
 			let lines = bibEntry.split(bibtexPropertyDelimiter);
 			const entry = new BibtexEntry();
 
@@ -149,16 +163,13 @@ function bibtexParse (str) { // eslint-disable-line no-unused-vars
 			lines.shift();
 
 			// parse remaining lines
-			lines = lines.filter(line => line.includes("=")); // catch erroneous BibTeX formatting
-			lines.forEach (line => {
-				const field = line
-					.split("=")[0]
-					.trim()
-					.toLowerCase();
-				const value = line.split("=")[1]
-					.trim()
+			lines = lines.filter((line) => line.includes("=")); // catch erroneous BibTeX formatting
+			lines.forEach((line) => {
+				const field = line.split("=")[0].trim().toLowerCase();
+				const value = line
+					.split("=")[1]
 					.replace(/{|}|,$/g, "") // remove TeX escaping
-					.trim(); // needs second trim to account for removed TeX
+					.trim(); 
 
 				switch (field) {
 					case "author":
@@ -167,42 +178,19 @@ function bibtexParse (str) { // eslint-disable-line no-unused-vars
 					case "editor":
 						entry.editors = toLastNameArray(value);
 						break;
-					case "title":
-						entry.title = value;
-						break;
-					case "date": // some BibTeX formats use 'date' instead of 'year'
+					case "date":
 					case "year": {
 						const yearDigits = value.match(/\d{4}/);
 						if (yearDigits) entry.year = yearDigits[0]; // edge case of BibTeX files with wrong years
 						break;
 					}
-					case "doi":
-						entry.doi = value;
-						break;
-					case "abstract":
-						entry.abstract = value;
-						break;
-					case "url":
-						entry.url = value;
-						break;
-					case "number":
-						entry.issue = value;
-						break;
-					case "volume":
-						entry.volume = value;
-						break;
-					case "journal":
-						entry.journal = value;
-						break;
-					case "booktitle":
-						entry.booktitle = value;
-						break;
 					case "keywords":
-						entry.keywords = value
-							.split(bibtexKeywordValueDelimiter)
-							.map (t => t.trim());
+						entry.keywords = value.split(bibtexKeywordValueDelimiter).map((t) => t.trim());
 						break;
+					default:
+						entry[field] = value
 				}
+
 			});
 
 			if (!entry.url && entry.doi) entry.url = "https://doi.org/" + entry.doi;
