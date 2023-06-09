@@ -149,9 +149,7 @@ lspSettings.yamlls = {
 -- force bashls (and treesitter) to highlight zsh as if it was bash
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "zsh",
-	callback = function()
-		-- vim.bo.filetype = "sh"
-	end,
+	callback = function() vim.bo.filetype = "sh" end,
 })
 
 --------------------------------------------------------------------------------
@@ -169,7 +167,7 @@ for word in io.open(dictfile, "r"):lines() do
 	table.insert(words, word)
 end
 
--- REQUIRED path to java runtime engine (the builtin from ltex does not seem to work)
+-- INFO path to java runtime engine (the builtin from ltex does not seem to work)
 -- here: using `openjdk`, w/ default M1 mac installation path (`brew install openjdk`)
 -- HACK set need to set $JAVA_HOME, since `ltex.java.path` does not seem to work
 local brewPrefix = vim.fn.system("brew --prefix"):gsub("\n", "")
