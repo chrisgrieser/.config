@@ -23,8 +23,8 @@ keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" }
 keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason Overview" })
 keymap("n", "<leader>pt", function () cmd.TSModuleInfo("highlight") end, { desc = " Treesitter Parser Overview" })
 keymap("n", "<leader>pu", function ()
-	cmd.MasonUpdateAll()	
 	cmd.TSUpdate()
+	cmd.MasonUpdateAll()	
 end, { desc = " Update Mason & Treesitter Packages" })
 
 -- Theme Picker

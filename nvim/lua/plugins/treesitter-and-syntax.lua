@@ -42,6 +42,7 @@ local tsConfig = {
 				["al"] = "@call.outer",
 				["iu"] = "@loop.inner", -- loop (mnemonic: luup)
 				["au"] = "@loop.outer",
+
 				-- INFO later remapped to q only in operator pending mode to avoid conflict
 				-- @comment.inner not supported yet for most languages
 				["&&&"] = "@comment.outer",
