@@ -1319,7 +1319,7 @@ osascript -l JavaScript -e '
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>cani</string>
+				<string>cani||can</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
