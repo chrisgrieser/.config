@@ -21,6 +21,7 @@ declare const $: {
 	getenv: (envVar: string) => string;
 	NSFileManager: any;
 	NSUTF8StringEncoding: any;
+	NSFileModificationDate: any;
 	NSProcessInfo: any;
 	NSURL: any;
 	NSString: any;

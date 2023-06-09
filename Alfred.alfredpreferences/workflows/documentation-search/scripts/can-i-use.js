@@ -4,6 +4,7 @@ ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
@@ -16,15 +17,16 @@ const dataURL = "https://raw.githubusercontent.com/Fyrd/caniuse/main/fulldata-js
 
 function findMatches(query, data) {
 	const lcQuery = query.toLowerCase();
-	return data.filter(d => {
-		console.log("${lcQuery}: ${d.title}/${d.name)/[${d.keywords}]");
-		return d.title.toLowerCase().includes(lcQuery) ||
+	return data.filter((d) => {
+		return (
+			d.title.toLowerCase().includes(lcQuery) ||
 			d.name.toLowerCase().includes(lcQuery) ||
-			d.keywords.toLowerCase().includes(lcQuery);
+			d.keywords.toLowerCase().includes(lcQuery)
+		);
 	});
-} /* findMatches() */
+}
 
-function getBrowserVersion(stats, title, browser) {
+function getBrowserVersion(stats, _title, _browser) {
 	let version = 0;
 	let retval = "";
 
@@ -51,19 +53,22 @@ function getBrowserVersion(stats, title, browser) {
 	}
 	//  if (title.indexOf('WOFF 2')> -1) console.log(`Version ${browser} found: ${retval}`);
 	return retval;
-} /* getBrowserVersion */
+}
 
+/** @param {string[]} argv */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const browserMap = {
-		"ie": "IE",
-		"edge": "E",
-		"firefox": "FF",
-		"chrome": "GC",
-		"safari": "S",
+		ie: "IE",
+		edge: "E",
+		firefox: "FF",
+		chrome: "GC",
+		safari: "S",
 	};
 
 	const query = argv[0];
-	if (!query) return;
+	if (!query) return JSON.stringify({ items: [{ title: "Can I use: '…'" }] });
+
 	const localCache = "data.json";
 	const filemanager = $.NSFileManager.defaultManager;
 	const modificationDate = (() => {
@@ -73,35 +78,36 @@ function run(argv) {
 			return dict.objectForKey($.NSFileModificationDate).js;
 		}
 		return null;
-
 	})();
 
 	const milliSecsPerDay = 8.64e7;
 	const cachedValues = (() => {
 		if (!modificationDate || Date.now() - modificationDate >= milliSecsPerDay * 7) {
-			//  const dataURL = 'https://raw.githubusercontent.com/Fyrd/caniuse/master/data.json'; 
+			//  const dataURL = 'https://raw.githubusercontent.com/Fyrd/caniuse/master/data.json';
 			const dataJSON = app.doShellScript(`curl ${dataURL}`);
-			//    console.log(dataJSON.length);
 			const data = JSON.parse(dataJSON).data;
-			const cacheArray = Object.keys(data).map(k => {
+			const cacheArray = Object.keys(data).map((k) => {
 				const caniuseData = data[k];
 				const stats = {};
-				Object.keys(caniuseData.stats).filter(browser => browserMap[browser]).forEach(browser => {
-					const support = getBrowserVersion(caniuseData.stats[browser], caniuseData.title, browser);
-					if (support.trim().length) stats[browserMap[browser]] = support;
-				});
+				Object.keys(caniuseData.stats)
+					.filter((browser) => browserMap[browser])
+					.forEach((browser) => {
+						const support = getBrowserVersion(caniuseData.stats[browser], caniuseData.title, browser);
+						if (support.trim().length) stats[browserMap[browser]] = support;
+					});
 				return {
 					name: k,
 					title: caniuseData.title,
 					url: `https://caniuse.com/#feat=${k}`,
 					description: caniuseData.description,
 					keywords: caniuseData.keywords,
-					stats: Object.keys(stats).map(key => `${key}: ${stats[key]}`).join(", "),
+					stats: Object.keys(stats)
+						.map((key) => `${key}: ${stats[key]}`)
+						.join(", "),
 				};
 			});
 			if (cacheArray.length) {
 				/* write cache data */
-				//      console.log(`updating cache data @ ${Path(localCache)}`);
 				const file = app.openForAccess(Path(localCache), { writePermission: true });
 				app.write(JSON.stringify(cacheArray), { to: file });
 				app.closeAccess(file);
@@ -112,21 +118,19 @@ function run(argv) {
 		const cacheArray = JSON.parse(app.read(file));
 		app.closeAccess(file);
 		return cacheArray;
-
 	})();
 	/* Now 'cachedValues' contains the relevant JSON data */
 	const result = findMatches(query, cachedValues);
-	const items = result.map(r => {
+	const items = result.map((r) => {
 		return {
 			uid: r.title,
 			arg: r.url,
+			match: alfredMatcher(r.title),
 			title: `${r.title} [${r.stats}]`,
 			subtitle: r.description,
 		};
-	}); /* items */
+	});
 	return JSON.stringify({
-		items: items.length ?
-			items :
-			[{ title: `No matches found for ${query}` }],
+		items: items.length ? items : [{ title: `No matches found for ${query}` }],
 	});
 }
