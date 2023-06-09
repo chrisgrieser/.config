@@ -676,7 +676,7 @@
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>fn: Auto-File PDF selected in Finder</string>
+				<string>fn: Auto-File PDF (selected in Finder)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -2830,7 +2830,7 @@ to set a hotkey for the citaiton picker.</string>
 			<key>note</key>
 			<string>remove comma</string>
 			<key>xpos</key>
-			<real>1100</real>
+			<real>1075</real>
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
@@ -3110,7 +3110,7 @@ to set a hotkey for the citaiton picker.</string>
 			<key>note</key>
 			<string>add prefix &amp; suffix</string>
 			<key>xpos</key>
-			<real>1100</real>
+			<real>1075</real>
 			<key>ypos</key>
 			<real>340</real>
 		</dict>

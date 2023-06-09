@@ -6,29 +6,6 @@
 	<string>giovanni-alfred-powerthesaurus</string>
 	<key>connections</key>
 	<dict>
-		<key>3BDFA2EA-F8AA-4E1D-BACD-9578AA20FCF0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EA0FCBB9-3119-4821-A1D9-58B6780D5C37</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>76D80E62-E346-4FE5-87F5-0F588660706B</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open antonyms in browser</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>819E593B-43C3-4EBF-9000-3D3C0F5AB6D2</key>
 		<array>
 			<dict>
@@ -156,80 +133,6 @@ python3 powerthesaurus.py "synonym $1"</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>open "$myURLanto"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>76D80E62-E346-4FE5-87F5-0F588660706B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>a</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>Searching antonyms for '{query}'</string>
-				<key>script</key>
-				<string>export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
-export PYTHONPATH="$PWD/lib"
-python3 powerthesaurus.py "antonym $1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search Powerthesaurus for Antonyms</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>3BDFA2EA-F8AA-4E1D-BACD-9578AA20FCF0</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Search Powerthesaurus synonyms and antonyms from Alfred
@@ -244,22 +147,6 @@ CTRL+enter (^↩️) opens antonyms in browser
 https://github.com/giovannicoppola/alfred-powerthesaurus</string>
 	<key>uidata</key>
 	<dict>
-		<key>3BDFA2EA-F8AA-4E1D-BACD-9578AA20FCF0</key>
-		<dict>
-			<key>xpos</key>
-			<real>170</real>
-			<key>ypos</key>
-			<real>500</real>
-		</dict>
-		<key>76D80E62-E346-4FE5-87F5-0F588660706B</key>
-		<dict>
-			<key>note</key>
-			<string>Open Antonyms in browser</string>
-			<key>xpos</key>
-			<real>380</real>
-			<key>ypos</key>
-			<real>500</real>
-		</dict>
 		<key>819E593B-43C3-4EBF-9000-3D3C0F5AB6D2</key>
 		<dict>
 			<key>xpos</key>
@@ -279,7 +166,7 @@ https://github.com/giovannicoppola/alfred-powerthesaurus</string>
 		<key>EA0FCBB9-3119-4821-A1D9-58B6780D5C37</key>
 		<dict>
 			<key>xpos</key>
-			<real>385</real>
+			<real>380</real>
 			<key>ypos</key>
 			<real>370</real>
 		</dict>
