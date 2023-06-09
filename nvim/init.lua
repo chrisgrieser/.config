@@ -35,3 +35,9 @@ safeRequire("config.clipboard")
 
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
+
+--------------------------------------------------------------------------------
+
+-- Load tip of the day after launching nvim
+local tip = vim.fn.system('curl -s  "https://vtip.43z.one"')
+vim.defer_fn(function() vim.notify(tip) end, 2000)

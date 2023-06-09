@@ -39,9 +39,11 @@ nmap <Esc> &c&&n&
 " Navigation
 """"""""""""""""""""""
 
-" Have j and k navigate visual lines rather than logical ones
+" navigate visual lines rather than logical ones
 noremap j gj
 noremap k gk
+nmap I g0i
+nmap A g$a
 
 " HJKL behaves like hjkl, but bigger distance
 noremap H g0
