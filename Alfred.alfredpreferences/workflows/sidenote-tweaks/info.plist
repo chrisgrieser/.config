@@ -139,6 +139,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3E1859F5-1C06-4E8A-9414-80AC822B0D22</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>97F81C60-323D-4EA2-9E3C-E737806D428E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>660ACE51-61E1-4231-AB1E-78745ADC2616</key>
 		<array>
 			<dict>
@@ -209,6 +222,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8A20019D-C824-4ACB-8917-F7347E7CEFD9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>97F81C60-323D-4EA2-9E3C-E737806D428E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1128,12 +1154,47 @@ sketchybar --trigger update-sidenotes-count</string>
 				<key>acceptsurls</key>
 				<true/>
 				<key>name</key>
-				<string>Save in SideNotes</string>
+				<string>Save Text in SideNotes</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
 			<string>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>97F81C60-323D-4EA2-9E3C-E737806D428E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>dyn.ah62d4rv4ge8043a</string>
+					<string>public.plain-text</string>
+				</array>
+				<key>name</key>
+				<string>Save Content in SideNotes</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>3E1859F5-1C06-4E8A-9414-80AC822B0D22</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1222,6 +1283,15 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>ypos</key>
 			<real>860</real>
 		</dict>
+		<key>3E1859F5-1C06-4E8A-9414-80AC822B0D22</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>1445</real>
+		</dict>
 		<key>660ACE51-61E1-4231-AB1E-78745ADC2616</key>
 		<dict>
 			<key>colorindex</key>
@@ -1302,6 +1372,15 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>ypos</key>
 			<real>335</real>
 		</dict>
+		<key>97F81C60-323D-4EA2-9E3C-E737806D428E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>1445</real>
+		</dict>
 		<key>A0D4A0E0-54A3-4239-B00B-59020FEE6F23</key>
 		<dict>
 			<key>colorindex</key>
@@ -1378,7 +1457,7 @@ sketchybar --trigger update-sidenotes-count</string>
 		<key>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
