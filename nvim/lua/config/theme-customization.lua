@@ -47,6 +47,7 @@ local function customHighlights()
 	updateHighlight("QuickScopeSecondary", "gui=underdouble cterm=underline")
 end
 
+-- selene: allow(high_cyclomatic_complexity)
 local function themeModifications()
 	local mode = vim.opt.background:get()
 
@@ -70,7 +71,8 @@ local function themeModifications()
 		updateHighlight("ScrollView", "guibg=#5a71b3")
 	elseif theme == "oxocarbon" then
 		linkHighlight("FloatTitle", "TelescopePromptTitle")
-		linkHighlight("@function", "@function.builtin")
+	elseif theme == "hardhacker" then
+		linkHighlight("@lsp.type.property", "HardhackerPurplePurple")
 	elseif theme == "material" then
 		updateHighlight("@property", "guifg=#6c9798")
 		updateHighlight("@field", "guifg=#6c9798")

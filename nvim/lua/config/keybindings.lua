@@ -474,6 +474,9 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = " horizontal resize (-)" })
 
 ---of all the marked files, gets the next one in order of last change time
 ---(ctime), similar to the grapling hook plugin for Obsidian
+---this is essentially an alternative to `require("harpoon.ui").nav_next()`,
+---only that the order of cycling is not determined by the list, but by the
+---mtime order
 local function harpoonNextCtimeFile()
 	-- get project
 	local pwd = vim.loop.cwd() or ""
@@ -521,7 +524,7 @@ keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end,
 ------------------------------------------------------------------------------
 
 -- CMD-KEYBINDINGS
-keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = " Save" }) -- cmd+s, will be overridden on lsp attach
+keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = " Save & " })
 
 -- stylua: ignore
 keymap("", "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
@@ -591,8 +594,7 @@ local function harpoonFileNumber()
 	if not data then return end
 	local project = data.projects[pwd]
 	if not project then return end
-	local fileNumber = #project.mark.marks
-	return fileNumber
+	return #project.mark.marks
 end
 
 ---@nodiscard
@@ -681,7 +683,7 @@ end, { desc = "󰒕 Copy Breadcrumbs" })
 keymap({ "n", "i", "x" }, "<D-s>", function()
 	cmd.update()
 	vim.lsp.buf.format()
-end, { desc = "󰒕 Save & Format" })
+end, { desc = "󰒕  Save & Format" })
 
 -- stylua: ignore end
 keymap("n", "<leader>h", function()

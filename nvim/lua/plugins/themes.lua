@@ -4,22 +4,23 @@ local g = vim.g
 -- INFO only the first theme will be used
 local lightThemes = {
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
-	{ "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
+	-- { "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
 	-- { "catppuccin/nvim", name = "catppuccin" },
 	-- { "marko-cerovac/material.nvim", init = function() vim.g.material_style = "lighter" end, config = { lualine_style = "stealth" } },
 	-- { "rose-pine/neovim", name = "rose-pine" },
 }
 
 local darkThemes = {
+	{ "hardhackerlabs/theme-vim", name = "hardhacker", init = function() vim.g.hardhacker_darker = 1 end },
 	"folke/tokyonight.nvim",
-	-- { "hardhackerlabs/theme-vim", name = "hardhacker", init = function() vim.g.hardhacker_darker = 1 end },
+	-- "Mofiqul/dracula.nvim",
 	-- { "loctvl842/monokai-pro.nvim", config = { filter = "ristretto" } },
 	-- "rebelot/kanagawa.nvim",
 	-- "glepnir/zephyr-nvim",
 	-- "kvrohit/mellow.nvim",
 	-- "sainnhe/everforest",
 	-- "nyoom-engineering/oxocarbon.nvim",
-	-- "savq/melange",
+	-- "savq/melange-nvim",
 }
 
 g.darkTransparency = 0.90
