@@ -22,16 +22,12 @@ local output = {}
 local gitShellOpts = {
 	stdout_buffered = true,
 	stderr_buffered = true,
-	detach = true,
+	detach = true, -- run even when quitting nvim
 	on_stdout = function(_, data)
-		for _, d in pairs(data) do
-			if not (d[1] == "" and #d == 1) then table.insert(output, d) end
-		end
+		if not (data[1] == "") then table.insert(output, data[1]) end
 	end,
 	on_stderr = function(_, data)
-		for _, d in pairs(data) do
-			if not (d[1] == "" and #d == 1) then table.insert(output, d) end
-		end
+		if not (data[1] == "") then table.insert(output, data[1]) end
 	end,
 	on_exit = function()
 		-- reload buffer if changed, e.g., due to linters or pandocvim
