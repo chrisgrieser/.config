@@ -12,17 +12,5 @@ workflowextras
 workflows/shimmering-obsidian
 workflows/alfred-bibtex-citation-picker
 
-# workflows developed by others
-workflows/powerthesaurus-search
-workflows/browser-history-search
-workflows/ignore-in-alfred
-workflows/app-store-search
-workflows/github-search
-workflows/web-screenshot
-workflows/dict-cc
-workflows/kill-processes
-workflows/urban-dictonary-search
-workflows/duden-search
-workflows/utf-search
-workflows/youtube-search
-
+# workflows developed by others, marked with `[ext]` at the end of the folder name
+workflows/*\[ext\]

@@ -38,9 +38,8 @@ safeRequire("config.abbreviations")
 
 --------------------------------------------------------------------------------
 
--- Load tip of the day after launching nvim
 -- runs in the background and with timeout, in case the site does not respond
-vim.defer_fn(function()
+local function tipOfTheDay()
 	local command = 'curl -s --max-time 5 "https://vtip.43z.one"' -- --max-time = timeout for curl
 	vim.fn.jobstart(command, {
 		stdout_buffered = true,
@@ -48,4 +47,6 @@ vim.defer_fn(function()
 			vim.notify(" TIP\n" .. data[1], vim.log.levels.INFO, { timeout = 10000 })
 		end,
 	})
-end, 2000)
+end
+
+vim.defer_fn(tipOfTheDay, 2000)

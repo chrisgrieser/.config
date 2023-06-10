@@ -58,17 +58,21 @@ function M.altFileStatusline()
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
 	local altOld = altOldfile()
-	local name, icon
+	local name, icon, success
 	local hasAltFile = altFile ~= "" and fn.filereadable(altFile)
 
 	-- no oldfile and after start
 	if hasAltFile and (altPath ~= curPath) then
-		icon = "#"
-		name = altFile
+		local altBufFt = vim.api.nvim_buf_get_option(fn.bufnr("#"), "filetype") ---@diagnostic disable-line: param-type-mismatch
+		deviconsInstalled, devicons = pcall(require("vim-web-devicons").get_icon, altFile, altBufFt)
+		if not deviconsInstalled then icon = "#" end
+
 		-- same name, different file: append parent of altfile
 		if curFile == altFile then
 			local altParent = fn.expand("#:p:h:t")
 			name = altParent .. "/" .. altFile
+		else
+			name = altFile
 		end
 	elseif altOld then
 		icon = "󰋚"

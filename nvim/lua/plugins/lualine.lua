@@ -255,7 +255,7 @@ local lualineConfig = {
 				-- needs the highlight value, since setting the hlgroup directly
 				-- results in bg color being inherited from main editor
 				color = function() return { fg = u.getHighlightValue("Comment", "fg") } end,
-				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿 ") end,
+				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,
 			},
 		},
 		lualine_x = {
