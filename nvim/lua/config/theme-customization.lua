@@ -32,15 +32,15 @@ local function customHighlights()
 
 	clearHighlight("@lsp.type.comment") -- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
 
+	local overnestingIndent = 8
+	updateHighlight("Overnesting", "guibg=#E06C75")
+	fn.matchadd("Overnesting", ("\t"):rep(overnestingIndent) .. "\t*")
+
 	local commentColor = u.getHighlightValue("Comment", "fg")
 	updateHighlight(
 		"@text.uri",
 		("guisp=%s guifg=%s gui=underline term=underline"):format(commentColor, commentColor)
 	)
-
-	local overnestingIndent = 8
-	updateHighlight("Overnesting", "guibg=#E06C75")
-	fn.matchadd("Overnesting", ("\t"):rep(overnestingIndent) .. "\t*")
 
 	local searchColor = u.getHighlightValue("IncSearch", "bg")
 	if searchColor then updateHighlight("ScrollViewSearch", "guifg=" .. searchColor) end
@@ -102,7 +102,7 @@ local function themeModifications()
 		updateHighlight("ScrollView", "guibg=#303050")
 		updateHighlight("VirtColumn", "guifg=#323036")
 		clearHighlight("SignColumn")
-		-- linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
+		linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
 
 		-- stylua: ignore
 		local noBackground = { "GitSignsAdd", "GitSignsDelete", "GitSignsChange", "DiagnosticSignHint", "DiagnosticSignInfo", "DiagnosticSignWarn", "DiagnosticSignError" }
