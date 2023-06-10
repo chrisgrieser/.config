@@ -40,8 +40,7 @@ local gitShellOpts = {
 		os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
 
 		if #output == 0 then return end
-		local out = table.concat(output, " \n "):gsub("%s*$", "")
-		out = out:gsub("\r", "\n")
+		local out = table.concat(output, " \n "):gsub("%s*$", ""):gsub("\r", "\n")
 
 		local logLevel
 		if out:lower():find("error") then
