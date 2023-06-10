@@ -39,8 +39,17 @@ safeRequire("config.abbreviations")
 --------------------------------------------------------------------------------
 
 -- Load tip of the day after launching nvim
-local tip = vim.fn.system('curl -s "https://vtip.43z.one"')
-vim.defer_fn(
-	function() vim.notify("  TIP\n" .. tip, vim.log.levels.INFO, { timeout = 10000 }) end,
-	2000
-)
+vim.defer_fn(function()
+	vim.fn.jobstart('curl -s "https://vtip.43z.one"', {
+		stdout_buffered = true,
+		stderr_buffered = true,
+		detach = true,
+		on_stdout = function(_, data)
+			for _, d in pairs(data) do
+				if not (d[1] == "" and #d == 1) then table.insert(output, d) end
+			end
+		end,
+	})
+	if not tip then return end
+	vim.notify("  TIP\n" .. tip, vim.log.levels.INFO, { timeout = 10000 })
+end, 2000)
