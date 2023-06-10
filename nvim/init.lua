@@ -21,15 +21,12 @@ end
 --------------------------------------------------------------------------------
 
 safeRequire("config.lazy")
-
 if vim.fn.has("gui_running") then safeRequire("config.gui-settings") end
 safeRequire("config.theme-customization")
-
 safeRequire("config.options-and-autocmds")
 
 safeRequire("config.keybindings")
 safeRequire("config.textobject-keymaps")
-
 safeRequire("config.folding")
 safeRequire("config.clipboard")
 
@@ -43,8 +40,8 @@ local function tipOfTheDay()
 	local command = 'curl -s --max-time 5 "https://vtip.43z.one"' -- --max-time = timeout for curl
 	vim.fn.jobstart(command, {
 		stdout_buffered = true,
-		on_stdout = function(_, data)
-			vim.notify(" TIP\n" .. data[1], vim.log.levels.INFO, { timeout = 10000 })
+		on_stdout = function(_, stdout)
+			vim.notify(" TIP\n" .. stdout[1], vim.log.levels.INFO, { timeout = 10000 })
 		end,
 	})
 end

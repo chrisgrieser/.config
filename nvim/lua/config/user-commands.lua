@@ -1,7 +1,5 @@
 local expand = vim.fn.expand
 local fn = vim.fn
-local u = require("config.utils")
-
 local newCommand = vim.api.nvim_create_user_command
 --------------------------------------------------------------------------------
 
@@ -10,7 +8,13 @@ local newCommand = vim.api.nvim_create_user_command
 -- syntax highlighting
 newCommand("I", function(ctx)
 	local str = ctx.args
-	if vim.startswith(str, "fn") or vim.startswith(str, "bo") then str = "vim." .. str end
+	if 
+		vim.startswith(str, "fn")
+		or vim.startswith(str, "bo")
+		or vim.startswith(str, "g")
+	then
+		str = "vim." .. str
+	end
 	local output = vim.inspect(fn.luaeval(str))
 	vim.notify(output, "trace", {
 		timeout = 6000, -- ms
@@ -36,14 +40,8 @@ newCommand("LspCapabilities", function()
 				end
 			end
 			table.sort(capAsList) -- sorts alphabetically
-			local msg = "# " .. client.name .. "\n" .. table.concat(capAsList, "\n")
-			vim.notify(msg, vim.log.levels.TRACE, {
-				on_open = function(win)
-					local buf = vim.api.nvim_win_get_buf(win)
-					vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
-				end,
-				timeout = 14000,
-			})
+			local msg = client.name .. "\n" .. table.concat(capAsList, "\n")
+			vim.notify(msg, vim.log.levels.TRACE, { timeout = 14000 })
 			fn.setreg("+", "Capabilities = " .. vim.inspect(client.server_capabilities))
 		end
 	end

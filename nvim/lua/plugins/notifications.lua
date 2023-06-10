@@ -18,7 +18,7 @@ end
 
 local function notifyConfig()
 	-- Base config
-	local notifyWidth = 55
+	local notifyWidth = 50
 
 	require("notify").setup {
 		render = "minimal",
@@ -45,14 +45,14 @@ local function notifyConfig()
 		end
 
 		local msgLines = vim.split(msg, "\n", { trimepty = true })
-		local wrappesLines = {}
+		local wrappedLines = {}
 		for _, line in pairs(msgLines) do
 			local new_lines = split_length(line, notifyWidth)
 			for _, nl in ipairs(new_lines) do
-				if nl and nl ~= "" then table.insert(wrappesLines, " " .. nl .. " ") end
+				if nl and nl ~= "" then table.insert(wrappedLines, " " .. vim.trim(nl) .. " ") end
 			end
 		end
-		local out = table.concat(wrappesLines, "\n")
+		local out = table.concat(wrappedLines, "\n")
 		return require("notify")(out, level, opts)
 	end
 end

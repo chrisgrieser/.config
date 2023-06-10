@@ -175,7 +175,7 @@ vim.env.JAVA_HOME = brewPrefix .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Hom
 
 lspSettings.ltex = {
 	ltex = {
-		completionEnabled = true,
+		completionEnabled = false,
 		language = "en-US", -- default language, can be set per-file via markdown yaml header
 		dictionary = {
 			["en-US"] = words,

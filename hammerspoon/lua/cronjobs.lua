@@ -1,4 +1,3 @@
-local periphery = require("lua.hardware-periphery")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 local caff = hs.caffeinate.watcher
@@ -38,14 +37,15 @@ JourfixeTimer = hs.timer
 	end)
 	:start()
 
--- Backup Vault, Dotfiles, Bookmarks, and browser extension list
--- Reload Hammerspoon Annotations (Emmylua Spoon)
--- Check for low battery of connected bluetooth devices
+-- some maintenance tasks
+-- - Backup Vault, Dotfiles, Bookmarks, and browser extension list
+-- - Reload Hammerspoon Annotations (Emmylua Spoon)
+-- - Check for low battery of connected bluetooth devices
 BiweeklyTimer = hs.timer
 	.doAt("02:00", "01d", function()
 		if env.isAtOffice or (getWeekday() ~= "Wed" and getWeekday() ~= "Sat") then return end
 
-		periphery.batteryCheck("SideNotes")
+		require("lua.hardware-periphery").batteryCheck("SideNotes")
 		hs.loadSpoon("EmmyLua")
 
 		-- backups

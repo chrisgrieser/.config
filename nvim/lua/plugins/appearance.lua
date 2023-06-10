@@ -50,6 +50,10 @@ return {
 				winblend = 40,
 				column = 1,
 				signs_on_startup = { "conflicts", "search", "diagnostics", "quickfix", "folds" },
+				refresh_mapping_desc = "which_key_ignore",
+				quickfix_symbol = "󰉀 ",
+				folds_symbol = " ",
+				search_symbol = {'⠂', '⠅', '⠇', '⠗', '⠟', '⠿'}
 			}
 			-- add gitsigns https://github.com/dstein64/nvim-scrollview/blob/main/lua/scrollview/contrib/gitsigns.lua
 			require("scrollview.contrib.gitsigns").setup()
@@ -140,7 +144,7 @@ return {
 							backend = "telescope",
 							telescope = {
 								layout_config = {
-									horizontal = { width = 0.99, height = 0.6},
+									horizontal = { width = 0.99, height = 0.6 },
 								},
 							},
 						}

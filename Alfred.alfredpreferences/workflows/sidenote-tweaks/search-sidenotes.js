@@ -43,7 +43,7 @@ const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]
 /** @param {string[]} argv */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred
 function run(argv) {
-	const query = argv[0] || "";
+	const query = argv[0].match(/^\s*$/) ? "" : argv[0];
 	const sidenotes = Application("SideNotes");
 
 	const ignoredFolder = $.getenv("ignored_folder");

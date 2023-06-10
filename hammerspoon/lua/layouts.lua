@@ -14,22 +14,23 @@ local function dockSwitcher(targetMode)
 end
 
 local function setHigherBrightnessDuringDay()
-	local hasBrightnessSensor = hs.brightness.ambient() > -1
-	if not hasBrightnessSensor then return end
+	local ambient = hs.brightness.ambient()
+	local noBrightnessSensor = ambient == -1
+	if noBrightnessSensor then return end
 
-	local brightness
-	if u.betweenTime(1, 7) or env.isProjector() then -- when turning off projector at night
-		brightness = 0
-	elseif hs.brightness.ambient() > 120 then
-		brightness = 1
-	elseif hs.brightness.ambient() > 90 then
-		brightness = 0.9
-	elseif hs.brightness.ambient() > 50 then
-		brightness = 0.8
+	local target
+	if u.betweenTime(0, 7) or env.isProjector() then -- when turning off projector at night
+		target = 0
+	elseif ambient > 120 then
+		target = 1
+	elseif ambient > 90 then
+		target = 0.9
+	elseif ambient > 50 then
+		target = 0.8
 	else
-		brightness = 0.6
+		target = 0.6
 	end
-	wu.iMacDisplay:setBrightness(brightness)
+	wu.iMacDisplay:setBrightness(target)
 end
 
 local function closeAllFinderWins()
