@@ -43,8 +43,8 @@ return {
 	},
 	{ -- Scrollbar, also shows search matches and gitsigns
 		"dstein64/nvim-scrollview",
-		dependencies = "neovim/nvim-lspconfig",
 		event = "VeryLazy",
+		dependencies = "neovim/nvim-lspconfig",
 		config = function()
 			require("scrollview").setup {
 				winblend = 40,
