@@ -39,15 +39,12 @@ rules:
           - set_variable:
               name: FINDER_ALFRED_ACTIVE
               value: false
-              # HACK no idea why, but setting a conditions here breaks this rule.
+              # INFO no idea why, but setting a conditions here breaks this rule.
               # Maybe due to recursion. But by placing this rule last, it only
               # gets triggered if the other one does not get triggered before,
               # which also works
         to_if_held_down:
           - shell_command: open "cleanshot://open-history"
-        conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers: [^pl\.maketheweb\.cleanshotx$]
         parameters:
           basic.to_if_alone_timeout_milliseconds: 200
           basic.to_if_held_down_threshold_milliseconds: 200

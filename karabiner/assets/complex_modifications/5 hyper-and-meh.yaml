@@ -26,15 +26,6 @@ rules:
           - type: frontmost_application_unless
             bundle_identifiers:
               - ^com\.apple\.finder$
-              - ^pl\.maketheweb\.cleanshotx$
-      # or close clipboard/screenshot history
-      - type: basic
-        from: { key_code: escape }
-        to_if_alone:
-          # FIX switching back to previous app
-          - shell_command: open "cleanshot://open-history"
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ↹ Tab → Meh/Tab"
     manipulators:
