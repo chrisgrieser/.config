@@ -5,7 +5,7 @@ rules:
     manipulators:
       # Alfred Custom Clipboard Search & screenshot history (cleanshot)
       - type: basic
-        from: {key_code: escape}
+        from: { key_code: escape }
         to_if_alone:
           - key_code: f18
           - set_variable:
@@ -30,7 +30,7 @@ rules:
             value: true
       # abort Alfred Clipboard
       - type: basic
-        from: {key_code: escape}
+        from: { key_code: escape }
         to_if_alone:
           - key_code: f18
           - set_variable:
@@ -43,11 +43,19 @@ rules:
               # Maybe due to recursion. But by placing this rule last, it only
               # gets triggered if the other one does not get triggered before,
               # which also works
+        to_if_held_down:
+          - shell_command: open "cleanshot://open-history"
+        conditions:
+          - type: frontmost_application_unless
+            bundle_identifiers: [^pl\.maketheweb\.cleanshotx$]
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 200
+          basic.to_if_held_down_threshold_milliseconds: 200
 
       #─────────────────────────────────────────────────────────────────────────
       # B: Signature ( append "_CG")
       - type: basic
-        from: {key_code: b, modifiers: {mandatory: [shift]}}
+        from: { key_code: b, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: |
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)' | sed 's|/$||' )

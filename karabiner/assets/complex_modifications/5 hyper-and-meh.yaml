@@ -10,18 +10,31 @@ rules:
           - key_code: escape
         to:
           - { key_code: right_shift, modifiers: [control, option, command] }
-      # Map Esc to F18
+      # Map Esc to F18 (clipboard / screenshot history)
       - type: basic
         from: { key_code: escape }
         to_if_alone:
           - key_code: f18
+        to_if_held_down:
+          - shell_command: open "cleanshot://open-history"
+        parameters:
+          basic.to_if_alone_timeout_milliseconds: 200
+          basic.to_if_held_down_threshold_milliseconds: 200
         # INFO condition to avoid conflict with finder-vim-mode; mapping to f18
         # is done in finder-vim-alfred-addon.yaml
         conditions:
           - type: frontmost_application_unless
             bundle_identifiers:
               - ^com\.apple\.finder$
-              - ^mindustry\.mac$
+              - ^pl\.maketheweb\.cleanshotx$
+      # or close clipboard/screenshot history
+      - type: basic
+        from: { key_code: escape }
+        to_if_alone:
+          # FIX switching back to previous app
+          - shell_command: open "cleanshot://open-history"
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ↹ Tab → Meh/Tab"
     manipulators:
@@ -121,8 +134,8 @@ rules:
 
       #─────────────────────────────────────────────────────────────────────
 
-      # SYSDIAGNOSIS 
-      # HACK disable accidental triggering of via `Hyper+.` and `Hyper+,`. 
+      # SYSDIAGNOSIS
+      # HACK disable accidental triggering of via `Hyper+.` and `Hyper+,`.
       # Needs different versions to disable it for variants from quick typing
       - type: basic
         from: { key_code: period, modifiers: { mandatory: [command, control, shift, option] } }
