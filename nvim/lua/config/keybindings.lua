@@ -21,14 +21,24 @@ keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
 
 keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason Overview" })
-keymap("n", "<leader>pt", function () cmd.TSModuleInfo("highlight") end, { desc = " Treesitter Parser Overview" })
-keymap("n", "<leader>pu", function ()
+keymap(
+	"n",
+	"<leader>pt",
+	function() cmd.TSModuleInfo("highlight") end,
+	{ desc = " Treesitter Parser Overview" }
+)
+keymap("n", "<leader>pu", function()
 	cmd.TSUpdate()
-	cmd.MasonUpdateAll()	
+	cmd.MasonUpdateAll()
 end, { desc = " Update Mason & Treesitter Packages" })
 
 -- Theme Picker
-keymap("n", "<leader>pc", function() cmd.Telescope("colorscheme") end, { desc = "  Change Colorschemes" })
+keymap(
+	"n",
+	"<leader>pc",
+	function() cmd.Telescope("colorscheme") end,
+	{ desc = "  Change Colorschemes" }
+)
 
 --------------------------------------------------------------------------------
 
@@ -74,7 +84,7 @@ keymap("n", "<leader>ln", function()
 	end
 	local msg = ""
 	for _, line in pairs(lastNotify.message) do
-		msg = msg .. line .. "\n"	
+		msg = msg .. line .. "\n"
 	end
 	fn.setreg("+", msg)
 	vim.notify("Last Notification copied.\n" .. msg, u.trace)
@@ -460,8 +470,45 @@ keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = " vertical resize 
 keymap("", "<C-Down>", ":resize +3<CR>", { desc = " horizontal resize (+)" })
 keymap("", "<C-Up>", ":resize -3<CR>", { desc = " horizontal resize (-)" })
 
--- Harpoon
-keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "󰛢 Next" })
+-- HARPOON
+
+---of all the marked files, gets the next one in order of last change time
+---(ctime), similar to the grapling hook plugin for Obsidian
+local function harpoonNextCtimeFile()
+	-- get project
+	local pwd = vim.loop.cwd() or ""
+	local jsonPath = fn.stdpath("data") .. "/harpoon.json"
+	local json = u.readFile(jsonPath)
+	if not json then return end
+	local data = vim.json.decode(json)
+	if not data then return end
+	local project = data.projects[pwd]
+	if not project or #project.mark.marks == 0 then return end
+
+	-- sort by atime
+	local marksCtime = {}
+	for _, file in pairs(project.mark.marks) do
+		local absPath = pwd .. "/" .. file.filename
+		local atime = vim.loop.fs_stat(absPath).atime.sec
+		table.insert(marksCtime, { atime = atime, path = absPath })
+	end
+	table.sort(marksCtime, function(a, b) return a.atime > b.atime end)
+
+	-- return next file
+	local currentFile = expand("%:p")
+	local fileFound = false
+	for _, file in pairs(marksCtime) do
+		if fileFound then return file.path end
+		fileFound = currentFile == file.path	
+	end
+	-- if at last marked file or if current file is not marked in harpoon, return
+	-- the last accessed file instead
+	return marksCtime[1].path
+end
+
+-- keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "󰛢 Next" })
+keymap("n", "<D-CR>", function() vim.cmd.edit(harpoonNextCtimeFile()) end, { desc = "󰛢 Next" })
+
 -- stylua: ignore start
 -- consistent with adding/removing bookmarks in the Browser/Obsidian
 keymap("n", "<D-d>", function()

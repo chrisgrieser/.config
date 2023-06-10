@@ -64,3 +64,4 @@ reddit
 as
 lua
 above
+lualine

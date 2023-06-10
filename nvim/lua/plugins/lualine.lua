@@ -114,10 +114,11 @@ local function updateHarpoonIndicator()
 	local currentProject = harpoonData.projects[pwd]
 	if not currentProject then return end
 	local markedFiles = currentProject.mark.marks
-	local currentFile = fn.expand("%")
+	local currentFile = fn.expand("%:p")
 
 	for _, file in pairs(markedFiles) do
-		if file.filename == currentFile then vim.b.harpoonMark = "󰛢" end
+		local absPath = pwd .. "/" .. file.filename
+		if absPath == currentFile then vim.b.harpoonMark = "󰛢" end
 	end
 end
 

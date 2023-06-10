@@ -26,16 +26,16 @@ require("lazy").setup("plugins", {
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates, required for statusline
-		notify = false, -- don't a notification when new updates are found
+		notify = false, -- no notice when updates are found, since done via statusline
 		frequency = 86400, -- only check for updates every 24 hours
 	},
+	git = { timeout = 60 }, -- 1min timeout for tasks
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
 	change_detection = { notify = false },
 	readme = { enabled = false },
 	performance = {
 		rtp = {
-			-- disable unused builtin plugins from neovim
-			disabled_plugins = {
+			disabled_plugins = { -- disable unused builtin plugins from neovim
 				"netrw",
 				"netrwPlugin",
 				"gzip",
