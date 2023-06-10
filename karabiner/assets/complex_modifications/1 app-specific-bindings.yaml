@@ -462,7 +462,13 @@ rules:
   - description: "(Apps) Cleanshot"
     manipulators:
       # INFO https://cleanshot.com/docs/api
-      # ⌘⇧4 (screen capture key): tap to screenshot, hold to capture previous area
+      # copy to clipboard and quit
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: c, modifiers: [command, shift] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
+      # ⌘⇧4 (screenshot button): tap to screenshot, hold to capture previous area
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
