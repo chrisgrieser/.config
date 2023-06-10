@@ -6,16 +6,6 @@
 			"uid": "0"
 		},
 		{
-			"title": "Annotate Image in Clipboard",
-			"arg": "cleanshot://open-from-clipboard",
-			"uid": "1"
-		},
-		{
-			"title": "Screenshot History",
-			"arg": "cleanshot://open-history",
-			"uid": "2"
-		},
-		{
 			"title": "Timed Screenshot",
 			"arg": "cleanshot://self-timer",
 			"uid": "3"
