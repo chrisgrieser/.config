@@ -33,12 +33,17 @@ local function customHighlights()
 	clearHighlight("@lsp.type.comment") -- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
 
 	local commentColor = u.getHighlightValue("Comment", "fg")
-	updateHighlight("@text.uri", ("guisp=%s guifg=%s gui=underline term=underline"):format(commentColor, commentColor))
+	updateHighlight(
+		"@text.uri",
+		("guisp=%s guifg=%s gui=underline term=underline"):format(commentColor, commentColor)
+	)
 
 	local overnestingIndent = 8
 	updateHighlight("Overnesting", "guibg=#E06C75")
 	fn.matchadd("Overnesting", ("\t"):rep(overnestingIndent) .. "\t*")
 
+	local searchColor = u.getHighlightValue("IncSearch", "bg")
+	if searchColor then updateHighlight("ScrollViewSearch", "guifg=" .. searchColor) end
 	updateHighlight("TSRainbowred", "guifg=#7e8a95") -- rainbow brackets without aggressive red
 	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
 	updateHighlight("TSDefinition", " term=underline gui=underdotted") -- treesittter refactor focus
