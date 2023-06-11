@@ -211,6 +211,14 @@ end
 keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Case Conversion
+
+local casings = {
+	{ letter = "u", arg = "upper", desc = "UPPER CASE" },
+	{ letter = "l", arg = "lower", desc = "lower case" },
+	{ letter = "t", arg = "title", desc = "Title case" },
+	{ letter = "c", arg = "camel", desc = "Title case" },
+}
+
 -- stylua: ignore start
 keymap("n", "cru", ":lua require('textcase').current_word('to_upper_case')<CR>", { desc = "UPPER CASE" })
 keymap("n", "crl", ":lua require('textcase').current_word('to_lower_case')<CR>", { desc = "lower case" })
@@ -244,8 +252,8 @@ keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = 
 -- SPELLING
 
 -- [z]pelling [l]ist
-keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 suggest" })
-keymap("n", "z.", "1z=", { desc = "󰓆 correct" })
+keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 Suggest" })
+keymap("n", "z.", "1z=", { desc = "󰓆 Correct" })
 
 ---add word under cursor to vale/languagetool dictionary
 keymap({ "n", "x" }, "zg", function()
@@ -263,7 +271,7 @@ keymap({ "n", "x" }, "zg", function()
 	local success = u.appendToFile(filepath, word)
 	if not success then return end -- error message already by AppendToFile
 	vim.notify(string.format('󰓆 Now accepting:\n"%s"', word))
-end, { desc = "󰓆 Add to accepted words (vale)" })
+end, { desc = "󰓆 Accept Word" })
 
 --------------------------------------------------------------------------------
 
@@ -288,17 +296,17 @@ vim.keymap.set(
 
 keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
 keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
-keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines matching" })
-keymap("n", "<leader>fd", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines matching" })
+keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
+keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines" })
 
 -- stylua: ignore
 keymap("n", "<leader>fq", function() require("replacer").run { rename_files = true } end, { desc = "󱗘  replacer.nvim" })
 -- stylua: ignore
-keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "󱗘 Structural S & R" })
+keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "󱗘 Structural S&R" })
 
 -- Refactoring.nvim
 -- stylua: ignore start
-keymap({ "n", "x" }, "<leader>i", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
+keymap({ "n", "x" }, "<leader>fi", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
 keymap({ "n", "x" }, "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
 keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("Extract Function") end, { desc = "󱗘 Extract Func" })
 -- stylua: ignore end
