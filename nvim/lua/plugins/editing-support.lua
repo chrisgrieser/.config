@@ -107,6 +107,14 @@ return {
 			override_editorconfig = false,
 		},
 	},
+	{
+		"tzachar/highlight-undo.nvim",
+		key = "u",
+		event = "VeryLazy",
+		opts = {
+			
+		},
+	},
 	{ -- key chord hints
 		"folke/which-key.nvim",
 		config = function()
