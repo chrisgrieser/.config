@@ -11,7 +11,6 @@ rules:
         to_if_alone:
           - { pointing_button: button1, modifiers: [command] }
         to_if_held_down: [pointing_button: button2]
-        parameters: { basic.to_if_held_down_threshold_milliseconds: 200 }
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -24,7 +23,6 @@ rules:
       - type: basic
         from: { pointing_button: button2 }
         to_if_held_down: [pointing_button: button2]
-        parameters: { basic.to_if_held_down_threshold_milliseconds: 200 }
         to_if_alone:
           - { pointing_button: button1, modifiers: [command] }
           - key_code: vk_none
@@ -36,13 +34,10 @@ rules:
               - ^org\.chromium\.Chromium.+ # PWAs
               - ^com\.brave\.Browser.+
               - ^com\.vivaldi\.Vivaldi.+
-              - ^com.reederapp.5.macOS$
-              - ^maccatalyst\.com\.lireapp\.macOS$
       # Mimestream: Open link and delete mail (mostly github links)
       - type: basic
         from: { pointing_button: button2 }
         to_if_held_down: [pointing_button: button2]
-        parameters: { basic.to_if_held_down_threshold_milliseconds: 200 }
         to_if_alone:
           - pointing_button: button1
           - { key_code: vk_none, hold_down_milliseconds: 200 }
@@ -99,7 +94,7 @@ rules:
       - type: basic
         from: { pointing_button: button4 }
         to:
-          - key_code: non_us_pound # "#"
+          - key_code: non_us_pound # the "#" key
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
       # Highlights: Free Comment (held down: red underline)
@@ -113,9 +108,6 @@ rules:
           - { key_code: "u", modifiers: [control, command] }
           - { key_code: "1", modifiers: [control, command] }
           - shell_command: 'osascript -e ''display notification "Tool" with title "Underline 🖍️"'''
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^net\.highlightsapp\.universal$]
@@ -168,32 +160,21 @@ rules:
               - ^net\.highlightsapp\.universal$
               - ^org\.hammerspoon\.Hammerspoon$
               - ^maccatalyst\.com\.atebits\.Tweetie # twitter
-              - ^mindustry.mac$
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.search-utils"'
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
       # Twitter: Close Media Window and tab away
       - type: basic
-        from:
-          pointing_button: button5
+        from: { pointing_button: button5 }
         to:
           - { key_code: w, modifiers: [command] }
           - { key_code: tab, modifiers: [command] }
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^maccatalyst\.com\.atebits\.Tweetie #Twitter
+        conditions: # Twitter
+          - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.atebits\.Tweetie] } 
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
       # Browser & Finder & Obsidian & Hammerspoon: Close Window
       - type: basic
-        from:
-          pointing_button: button5
+        from: { pointing_button: button5 }
         to_if_alone:
           - { key_code: w, modifiers: [command] }
         conditions:
@@ -206,13 +187,9 @@ rules:
               - ^org\.hammerspoon\.Hammerspoon$
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.search-utils"'
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
       # Highlights: Yellow Highlight
       - type: basic
-        from:
-          pointing_button: button5
+        from: { pointing_button: button5 }
         to_if_alone:
           - { key_code: h, modifiers: [command, control] }
           - { key_code: "3", modifiers: [command, control] }
@@ -221,9 +198,6 @@ rules:
           - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
       # Archive in Mimestream
       - type: basic
         from: { pointing_button: button5 }
@@ -233,9 +207,6 @@ rules:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.plain-text-utilities"'
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 250
-          basic.to_if_held_down_threshold_milliseconds: 250
   #─────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 1+2 (simultaneously): Dictionary Lookup"
     manipulators:
@@ -247,8 +218,6 @@ rules:
         to:
           - pointing_button: button1 # in case it's not the front window
           - { key_code: d, modifiers: [control, command] }
-        parameters:
-          basic.simultaneous_threshold_milliseconds: 100
         conditions:
           # conflicts for some reason with space+dragging in the Canvas plugin
           - { type: frontmost_application_unless, bundle_identifiers: [^md\.obsidian$] }

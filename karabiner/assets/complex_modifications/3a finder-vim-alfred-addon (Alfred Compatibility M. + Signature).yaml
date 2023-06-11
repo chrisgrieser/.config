@@ -16,9 +16,6 @@ rules:
               value: true
         to_if_held_down:
           - shell_command: open "cleanshot://open-history"
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 200
-          basic.to_if_held_down_threshold_milliseconds: 200
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.apple\.finder$]
@@ -45,9 +42,6 @@ rules:
               # which also works
         to_if_held_down:
           - shell_command: open "cleanshot://open-history"
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 200
-          basic.to_if_held_down_threshold_milliseconds: 200
 
       #─────────────────────────────────────────────────────────────────────────
       # B: Signature ( append "_CG")

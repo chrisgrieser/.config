@@ -478,9 +478,6 @@ rules:
           # capture area & annotate, has to be bound manually since it does not
           # have a URI yet https://cleanshot.com/docs/api
           - { key_code: "3", modifiers: [shift, command] } 
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 200
-          basic.to_if_held_down_threshold_milliseconds: 200
       # screenshot button + bulb-button
       - type: basic
         from: { key_code: "f13", modifiers: { mandatory: [shift, command] } }
