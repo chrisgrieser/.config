@@ -66,8 +66,8 @@ matches:
   - trigger: "!nversion"
     replace: |
       ```
-      macOS {{OSversion}} (M1)
       neovim {{neovimVersion}} (homebrew)
+      macOS {{OSversion}} (M1)
       Neovide {{neovideVersion}} (homebrew)
       ```
     vars:
@@ -86,8 +86,8 @@ matches:
   - trigger: "!oversion"
     replace: |
       ```
-      macOS {{OSversion}} (M1)
       Obsidian {{obsiVersion}}
+      macOS {{OSversion}} (M1)
       ```
     vars:
       - name: OSversion
