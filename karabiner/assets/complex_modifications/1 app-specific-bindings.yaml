@@ -468,7 +468,8 @@ rules:
         to:
           - { key_code: c, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
-      # ⌘⇧4 (screenshot button): tap to screenshot, hold to capture previous area
+      # ⌘⇧4 (screenshot button): tap to screenshot, hold to screenshot &
+      # annotate
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
@@ -480,6 +481,11 @@ rules:
         parameters:
           basic.to_if_alone_timeout_milliseconds: 200
           basic.to_if_held_down_threshold_milliseconds: 200
+      # screenshot button + bulb-button
+      - type: basic
+        from: { key_code: "f13", modifiers: { mandatory: [shift, command] } }
+        to:
+          - shell_command: open "cleanshot://record-screen"
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Sidenotes"
     manipulators:

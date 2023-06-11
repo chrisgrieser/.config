@@ -1,8 +1,12 @@
 title: 🔘 Utility Shortcuts
-homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
-  - description: "alt j/k -> page up/down"
-    manipulators:
+  - manipulators:
+      # r-cmd (tap) -> ctrl-e
+      - type: basic
+        from: { key_code: right_command }
+        to_if_alone:
+          - { key_code: e, modifiers: [control] }
+      # alt j/k -> page up/down
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [option] } }
         to:
@@ -11,14 +15,12 @@ rules:
         from: { key_code: k, modifiers: { mandatory: [option] } }
         to:
           - key_code: page_up
-  - description: "fn+space → ctrl+space (for Apple Keyboards)"
-    manipulators:
+      # fn+space → ctrl+space (for Apple Keyboards)
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [fn] } }
         to:
           - { key_code: spacebar, modifiers: [control] }
-  - description: "🔘 ⌘+J → Expand Word"
-    manipulators:
+      # 🔘 ⌘+J → Expand Word
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [command] } }
         to:
@@ -51,8 +53,8 @@ rules:
             bundle_identifiers:
               - ^com\.hnc\.Discord$
               - ^com\.tinyspeck\.slackmacgap$
-              - ^com\.brave\.Browser$ # useful for reddit
-              - ^com\.vivaldi\.Vivaldi$
+              - ^com\.brave\.Browser$ 
+              - ^com\.vivaldi\.Vivaldi$ # useful for reddit
               - ^com\.apptorium\.SideNotes-paddle$
   #─────────────────────────────────────────────────────────────────────────────
   - description: "🔘 § → |"
