@@ -103,17 +103,12 @@ return {
 	{ -- automatically set right indent for file
 		"nmac427/guess-indent.nvim",
 		event = "BufReadPre",
-		opts = {
-			override_editorconfig = false,
-		},
+		opts = { override_editorconfig = false },
 	},
 	{
 		"tzachar/highlight-undo.nvim",
-		key = "u",
-		event = "VeryLazy",
-		opts = {
-			
-		},
+		keys = { "u", "U", "<C-r>" },
+		config = true, -- Pending https://github.com/tzachar/highlight-undo.nvim/issues/1
 	},
 	{ -- key chord hints
 		"folke/which-key.nvim",
