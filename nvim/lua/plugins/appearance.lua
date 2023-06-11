@@ -53,11 +53,22 @@ return {
 				refresh_mapping_desc = "which_key_ignore",
 				quickfix_symbol = "󰉀 ",
 				folds_symbol = " ",
-				search_symbol = {'⠂', '⠅', '⠇', '⠗', '⠟', '⠿'}
+				search_symbol = { "⠂", "⠅", "⠇", "⠗", "⠟", "⠿" },
 			}
 			-- add gitsigns https://github.com/dstein64/nvim-scrollview/blob/main/lua/scrollview/contrib/gitsigns.lua
 			require("scrollview.contrib.gitsigns").setup()
 		end,
+	},
+	{ -- emphasized undo/redos
+		"tzachar/highlight-undo.nvim",
+		keys = { "u", "U" },
+		opts = {
+			duration = 500,
+			keymaps = {
+				{ "n", "u", "undo", { desc = "󰕌 Undo" } },
+				{ "n", "U", "redo", { desc = "󰑎 Redo" } },
+			},
+		},
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",

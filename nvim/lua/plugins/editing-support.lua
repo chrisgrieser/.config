@@ -84,14 +84,11 @@ return {
 		"gbprod/yanky.nvim",
 		event = "BufReadPost",
 		opts = {
-			ring = {
-				history_length = 30,
-				cancel_event = "update", -- move|update
-			},
+			ring = { history_length = 50 },
 			highlight = {
-				on_yank = false, -- using for nicer highlights via vim.highlight.on_yank()
+				on_yank = false, -- using nicer highlights from vim.highlight.on_yank() instead
 				on_put = true,
-				timer = 400,
+				timer = 500,
 			},
 		},
 	},
@@ -104,11 +101,6 @@ return {
 		"nmac427/guess-indent.nvim",
 		event = "BufReadPre",
 		opts = { override_editorconfig = false },
-	},
-	{ -- ,,,,,,,,,,,,
-		"tzachar/highlight-undo.nvim",
-		keys = { "u", "U" },
-		config = true,
 	},
 	{ -- key chord hints
 		"folke/which-key.nvim",
