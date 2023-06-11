@@ -5,7 +5,7 @@ rules:
       - type: basic
         from: { key_code: right_command }
         to:
-          -  key_code: right_command
+          - key_code: right_command
         to_if_alone:
           - { key_code: e, modifiers: [control] }
       # alt j/k -> page up/down
