@@ -5,14 +5,6 @@ local expand = vim.fn.expand
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- lua regex opener
-keymap("n", "g/", function()
-	u.normal('"zya"vi"') -- yank and keep selection for quick replacement when done
-	local pattern = fn.getreg("z"):match('"(.-)"')
-	local url = "https://gitspartv.github.io/lua-patterns/?pattern=" .. pattern
-	fn.system("open '" .. url .. "'") -- opening method on macOS
-end, { desc = " lua pattern in regex viewer", buffer = true })
-
 -- Build / Reload Config
 keymap("n", "<leader>r", function()
 	cmd.update()
@@ -20,9 +12,9 @@ keymap("n", "<leader>r", function()
 	if pwd:find("nvim") then
 		-- unload from lua cache (assuming that the pwd is parent of the lua folder)
 		local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
-		package.loaded[packageName] = nil 
+		package.loaded[packageName] = nil
 		cmd.source()
-		vim.notify("re-sourced:\n"..expand("%:r"))
+		vim.notify("re-sourced:\n" .. expand("%:r"))
 	elseif pwd:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
 		vim.notify("✅ Hammerspoon reloaded.")
