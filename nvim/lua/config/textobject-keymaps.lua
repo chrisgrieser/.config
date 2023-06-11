@@ -114,20 +114,16 @@ keymap("o", "o", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "
 -- ag: entire buffer textobj
 keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "󱡔 entire buffer textobj" })
 
--- v: visible in window
+-- v: viewport
 keymap("o" , "v", "<cmd>lua require('various-textobjs').visibleInWindow()<CR>", { desc = "󱡔 visible in window textobj" })
 
 -- az/iz: fold textobj
 keymap( { "x", "o" }, "az", "<cmd>lua require('various-textobjs').closedFold(false)<CR>", { desc = "󱡔 outer fold textobj" })
 keymap( { "x", "o" }, "iz", "<cmd>lua require('various-textobjs').closedFold(true)<CR>", { desc = "󱡔 inner fold textobj" })
 
--- a./i.: chainMember textobj
-keymap( { "x", "o" }, "a.", "<cmd>lua require('various-textobjs').chainMember(false)<CR>", { desc = "󱡔 outer chainMember textobj" })
-keymap( { "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember(true)<CR>", { desc = "󱡔 inner chainMember textobj" })
-
--- r: [r]est of ... (linewise)
+-- r: [r]est of …
 -- INFO not setting in visual mode, to keep visual block mode replace
-keymap("o", "rv", "<cmd>lua require('various-textobjs').restOfWindow()<CR>", { desc = "󱡔 rest of viewpower textobj" })
+keymap("o", "rv", "<cmd>lua require('various-textobjs').restOfWindow()<CR>", { desc = "󱡔 rest of viewport textobj" })
 keymap("o", "rp", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", { desc = "󱡔 rest of paragraph textobj" })
 keymap("o", "ri", "<cmd>lua require('various-textobjs').restOfIndentation()<CR>", { desc = "󱡔 rest of indentation textobj" })
 keymap("o", "rg", "G", { desc = "󱡔 rest of buffer textobj" })
@@ -149,16 +145,6 @@ autocmd("FileType", {
 		local indentedFts = { "python", "yaml", "markdown", "gitconfig" }
 		if vim.tbl_contains(indentedFts, bo.filetype) then
 			keymap( { "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { buffer = true, desc = "󱡔 indent textobj w/ start border" })
-		end
-	end,
-})
-
-autocmd("FileType", {
-	callback = function()
-		local pipeFiletypes = { "sh", "zsh", "bash" }
-		if vim.tbl_contains(pipeFiletypes, bo.filetype) then
-			keymap( { "x", "o" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { buffer = true, desc = "󱡔 inner pipe textobj" })
-			keymap( { "x", "o" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { buffer = true, desc = "󱡔 outer pipe textobj" })
 		end
 	end,
 })

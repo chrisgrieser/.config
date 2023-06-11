@@ -22,7 +22,7 @@ keymap("n", "<leader>r", function()
 		local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
 		package.loaded[packageName] = nil 
 		cmd.source()
-		vim.notify(expand("%:r") .. " re-sourced")
+		vim.notify("re-sourced:\n"..expand("%:r"))
 	elseif pwd:find("hammerspoon") then
 		os.execute([[open -g "hammerspoon://hs-reload"]])
 		vim.notify("✅ Hammerspoon reloaded.")

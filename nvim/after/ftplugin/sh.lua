@@ -13,13 +13,13 @@ end, { desc = "Man page in new tab", buffer = true, expr = true })
 
 -- pipe textobj
 --stylua: ignore
-keymap({ "o", "x" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { desc = "inner shellPipe textobj", buffer = true })
+keymap({ "o", "x" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { desc = "󱡔 inner shellPipe textobj", buffer = true })
 --stylua: ignore
-keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { desc = "outer shellPipe textobj", buffer = true })
+keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { desc = "󱡔 outer shellPipe textobj", buffer = true })
 
 --------------------------------------------------------------------------------
--- Reload Sketchybar
 
+-- Reload Sketchybar
 keymap("n", "<leader>r", function()
 	cmd.update()
 	local parentFolder = expand("%:p:h")

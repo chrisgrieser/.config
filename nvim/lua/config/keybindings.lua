@@ -205,43 +205,39 @@ end, { desc = "Delete surrounding indentation" })
 
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
-for _, v in pairs(trailingKeys) do
-	keymap("n", "<leader>" .. v, "mzA" .. v .. "<Esc>`z", { desc = "which_key_ignore" })
+for _, key in pairs(trailingKeys) do
+	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = "which_key_ignore" })
 end
-keymap("n", "X", "mz$x`z", { desc = "delete last character" })
 
 -- Case Conversion
 
 local casings = {
-	{ letter = "u", arg = "upper", desc = "UPPER CASE" },
-	{ letter = "l", arg = "lower", desc = "lower case" },
-	{ letter = "t", arg = "title", desc = "Title case" },
-	{ letter = "c", arg = "camel", desc = "Title case" },
+	{ char = "u", arg = "upper", desc = "UPPER CASE" },
+	{ char = "l", arg = "lower", desc = "lower case" },
+	{ char = "t", arg = "title", desc = "Title case" },
+	{ char = "c", arg = "camel", desc = "camelCase" },
+	{ char = "p", arg = "pascal", desc = "PascalCase" },
+	{ char = "s", arg = "snake", desc = "snake_case" },
+	{ char = "k", arg = "dash", desc = "kebab-case" },
+	{ char = "/", arg = "path", desc = "path/case" },
+	{ char = ".", arg = "dot", desc = "dot.case" },
+	{ char = "_", arg = "constant", desc = "SCREAMING_SNAKE_CASE" },
 }
 
--- stylua: ignore start
-keymap("n", "cru", ":lua require('textcase').current_word('to_upper_case')<CR>", { desc = "UPPER CASE" })
-keymap("n", "crl", ":lua require('textcase').current_word('to_lower_case')<CR>", { desc = "lower case" })
-keymap("n", "crt", ":lua require('textcase').current_word('to_title_case')<CR>", { desc = "Title Case" })
-keymap("n", "crc", ":lua require('textcase').current_word('to_camel_case')<CR>", { desc = "camelCase" })
-keymap("n", "crp", ":lua require('textcase').current_word('to_pascal_case')<CR>", { desc = "PascalCase" })
-keymap("n", "cr-", ":lua require('textcase').current_word('to_dash_case')<CR>", { desc = "dash-case" })
-keymap("n", "cr/", ":lua require('textcase').current_word('to_path_case')<CR>", { desc = "path/case" })
-keymap("n", "cr.", ":lua require('textcase').current_word('to_dot_case')<CR>", { desc = "dot.case" })
-keymap("n", "cr_", ":lua require('textcase').current_word('to_constant_case')<CR>", { desc = "SCREAMING_SNAKE_CASE" })
-keymap("n", "crs", ":lua require('textcase').current_word('to_snake_case')<CR>", { desc = "snake_case" })
-
-keymap("n", "cRu", ":lua require('textcase').lsp_rename('to_upper_case')<CR>", { desc = "󰒕 UPPER CASE" })
-keymap("n", "cRl", ":lua require('textcase').lsp_rename('to_lower_case')<CR>", { desc = "󰒕 lower case" })
-keymap("n", "cRt", ":lua require('textcase').lsp_rename('to_title_case')<CR>", { desc = "󰒕 Title Case" })
-keymap("n", "cRc", ":lua require('textcase').lsp_rename('to_camel_case')<CR>", { desc = "󰒕 camelCase" })
-keymap("n", "cRp", ":lua require('textcase').lsp_rename('to_pascal_case')<CR>", { desc = "󰒕 PascalCase" })
-keymap("n", "cR-", ":lua require('textcase').lsp_rename('to_dash_case')<CR>", { desc = "󰒕 dash-case" })
-keymap("n", "cR/", ":lua require('textcase').lsp_rename('to_path_case')<CR>", { desc = "󰒕 path/case" })
-keymap("n", "cR.", ":lua require('textcase').lsp_rename('to_dot_case')<CR>", { desc = "󰒕 dot.case" })
-keymap("n", "cR_", ":lua require('textcase').lsp_rename('to_constant_case')<CR>", { desc = "󰒕 SCREAMING_SNAKE_CASE" })
-keymap("n", "cRs", ":lua require('textcase').lsp_rename('to_snake_case')<CR>", { desc = "󰒕 snake_case" })
--- stylua: ignore end
+for _, case in pairs(casings) do
+	keymap(
+		"n",
+		"cr" .. case.char,
+		("<cmd>lua require('textcase').current_word('to_%s_case')<CR>"):format(case.arg),
+		{ desc = case.desc }
+	)
+	keymap(
+		"n",
+		"cR" .. case.char,
+		("<cmd>lua require('textcase').lsp_rename('to_%s_case')<CR>"):format(case.arg),
+		{ desc = "󰒕 " .. case.desc }
+	)
+end
 
 -- Word Switcher (fallback: switch casing)
 -- stylua: ignore
@@ -294,7 +290,7 @@ vim.keymap.set(
 	{ desc = "󱗘 :AltSubstitute (word under cursor)", expr = true }
 )
 
-keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort" })
+keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort selection" })
 keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
 keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines" })
@@ -332,7 +328,7 @@ keymap({ "n", "x" }, "<leader>ul", "U", { desc = "󰕌 Undo Line" })
 keymap("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "󰕌  Undotree" })
 -- stylua: ignore
 keymap("n", "<leader>ur", function() cmd.later(tostring(vim.opt.undolevels:get())) end, { desc = "󰛒 Redo All" })
-keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Reset Hunk" })
+keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Undo (Reset) Hunk" })
 
 -- save open time for each buffer
 autocmd("BufReadPost", {
@@ -510,7 +506,7 @@ local function harpoonNextCtimeFile()
 	local fileFound = false
 	for _, file in pairs(marksCtime) do
 		if fileFound then return file.path end
-		fileFound = currentFile == file.path	
+		fileFound = currentFile == file.path
 	end
 	-- if at last marked file or if current file is not marked in harpoon, return
 	-- the last accessed file instead
