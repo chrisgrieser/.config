@@ -17,9 +17,6 @@ rules:
           - key_code: f18
         to_if_held_down:
           - shell_command: open "cleanshot://open-history"
-        parameters:
-          basic.to_if_alone_timeout_milliseconds: 200
-          basic.to_if_held_down_threshold_milliseconds: 200
         # INFO condition to avoid conflict with finder-vim-mode; mapping to f18
         # is done in finder-vim-alfred-addon.yaml
         conditions:

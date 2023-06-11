@@ -35,7 +35,6 @@ rules:
             - key_code: f
             - key_code: j
         to:
-          - shell_command: open "cleanshot://capture-area"
           - *activate-leader
           - *set-notice
       - type: basic
@@ -47,7 +46,6 @@ rules:
         to_if_alone:
           - *activate-leader
           - *set-notice
-        parameters: { basic.to_if_alone_timeout_milliseconds: 200 }
       # 2x L-Ctrl: Finder
       - type: basic
         from: { key_code: left_control }
