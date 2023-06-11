@@ -85,20 +85,26 @@ local function idleMins(mins)
 	return minutesIdle > mins
 end
 
--- between 1:30 and 6:00, check every half hour if device has been idle for 30
--- minutes. if so, quit video apps and related things.
+-- between 1:00 and 6:00, check every half hour if device has been idle for 30
+-- minutes. if so, alert and wait for another minute. If still idle then, quit 
+-- video apps
 SleepTimer = hs.timer
 	.doEvery(1800, function()
-		if not (u.betweenTime(1.5, 6) and idleMins(30) and u.screenIsUnlocked()) then return end
-		u.notify("💤 SleepTimer triggered.")
+		if not (u.betweenTime(1, 6) and idleMins(30) and env.isProjector()) then return end
+		hs.alert.show("💤 SleepTimer in 1 min if idle.")
 
-		-- no need to quit IINA since it autoquits
-		u.quitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
+		u.runWithDelays(61, function()
+			if not idleMins(1) then return end
+			u.notify("💤 SleepTimer triggered.")
 
-		-- close leftover fullscreen spaces
-		closeFullscreenSpaces()
+			-- no need to quit IINA since it autoquits
+			u.quitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
 
-		-- close browser tabs running YouTube (not full name for youtube shorturls)
-		u.closeTabsContaining("youtu")
+			-- close browser tabs running YouTube (not full name for youtube shorturls)
+			u.closeTabsContaining("youtu")
+
+			-- close leftover fullscreen spaces
+			closeFullscreenSpaces()
+		end)
 	end)
 	:start()

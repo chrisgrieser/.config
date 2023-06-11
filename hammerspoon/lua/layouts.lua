@@ -120,8 +120,7 @@ end
 -- 1. Change of screen numbers
 DisplayCountWatcher = hs.screen.watcher
 	.new(function()
-		-- TV at mother needs small delay
-		local delay = env.isAtMother and 1.5 or 0
+		local delay = env.isAtMother and 1.5 or 0 -- TV at mother needs small delay
 		u.runWithDelays(delay, selectLayout)
 	end)
 	:start()

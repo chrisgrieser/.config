@@ -80,6 +80,8 @@ end
 
 ---@param referenceWin hs.window
 local function showHideTwitter(referenceWin)
+	if u.isFront("CleanShot X") then return end
+
 	local twitter = u.app("Twitter")
 	if not twitter or not referenceWin then return end
 	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centered) then
