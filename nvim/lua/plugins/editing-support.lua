@@ -1,7 +1,7 @@
 local u = require("config.utils")
 
 return {
-	{ -- autopair
+	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		dependencies = { "hrsh7th/nvim-cmp", "nvim-treesitter/nvim-treesitter" },
@@ -23,9 +23,9 @@ return {
 			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
-	{ -- autopair, but for keywords
+	{ -- basically autopair, but for keywords
 		"RRethy/nvim-treesitter-endwise",
-		event = "BufEnter",
+		ft = { "lua", "bash", "sh", "vim", "ruby", "elixir" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- AI support
