@@ -100,15 +100,15 @@ return {
 		ft = { "markdown", "text" },
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
 	},
-	{ -- automatically set right indent for file
+	{ -- automatically set correct indent for file
 		"nmac427/guess-indent.nvim",
 		event = "BufReadPre",
 		opts = { override_editorconfig = false },
 	},
-	{
+	{ -- ,,,,,,,,,,,,
 		"tzachar/highlight-undo.nvim",
-		keys = { "u", "U", "<C-r>" },
-		config = true, -- Pending https://github.com/tzachar/highlight-undo.nvim/issues/1
+		keys = { "u", "U" },
+		config = true,
 	},
 	{ -- key chord hints
 		"folke/which-key.nvim",

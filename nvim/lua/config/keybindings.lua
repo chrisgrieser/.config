@@ -319,7 +319,7 @@ end, { desc = "󱁐 Use Spaces" })
 --------------------------------------------------------------------------------
 
 -- Undo
-keymap({ "n", "x" }, "U", "<C-r>", { desc = "󰑎 Redo" })
+keymap({ "n", "x" }, "U", "<C-r>", { desc = "󰑎 Redo" }) -- remap for highlight-undo.nvim
 keymap({ "n", "x" }, "<leader>ul", "U", { desc = "󰕌 Undo Line" })
 keymap("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "󰕌  Undotree" })
 -- stylua: ignore
