@@ -2,4 +2,4 @@
 filter_class: "net.highlightsapp.universal"
 
 extra_includes:
-  - "../match/_highlights.yml"
+  - "../match/_annotation-tags.yml"
