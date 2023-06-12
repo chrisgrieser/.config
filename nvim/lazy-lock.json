@@ -44,6 +44,7 @@
   "mason-nvim-dap.nvim": { "branch": "main", "commit": "e4d56b400e9757b1dc77d620fd3069396e92d5fc" },
   "mason-update-all": { "branch": "main", "commit": "d94cf0ff32a5469ca887dd99914bf4b095ebc24f" },
   "mason.nvim": { "branch": "main", "commit": "7d7efc738e08fc5bee822857db45cb6103f0b0c1" },
+  "material.nvim": { "branch": "main", "commit": "5180510258ca4645da3c22a2d968138131ff5de8" },
   "neoai": { "branch": "main", "commit": "b90180e30d143afb71490b92b08c1e9121d4416a" },
   "neodev.nvim": { "branch": "main", "commit": "d69254e1fbdc4a04c56719dde19e5eafb7b04b58" },
   "neogit": { "branch": "master", "commit": "68a3e90e9d1ed9e362317817851d0f34b19e426b" },
