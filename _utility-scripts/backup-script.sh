@@ -54,10 +54,10 @@ function backup() {
 # CONTENT TO BACKUP
 
 # WARN each command has to sync to individual folders, since otherwise the `--delete` option will override the previous contents
-# INFO All source paths needs to end with a slash
+# INFO All source paths needs to end with a slash to sync folder contents
 # INFO locations defined in zshenv
 backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
-backup "$HOME/Applications/" ./Homefolder/Applications # user cplications
+backup "$HOME/Applications/" ./Homefolder/Applications # user applications
 backup "$DOTFILE_FOLDER/" ./Homefolder/config
 backup "$VAULT_PATH/" ./Homefolder/main-vault
 backup "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
@@ -67,10 +67,7 @@ backup "$HOME/RomComs/" ./Homefolder/RomComs
 echo
 print "\033[1;34m----------------------------------------------------\033[0m"
 echo
-
-if [[ -n "$errors" ]]; then
-	print "\033[1;31m$errors\033[0m"
-fi
+[[ -n "$errors" ]] && print "\033[1;31m$errors\033[0m"
 
 # Log (on Mac)
 echo "completed: $(date '+%H:%M')" >>"$LOG_LOCATION"
@@ -94,4 +91,3 @@ osascript -e'
 osascript -e 'display notification "" with title "Backup finished." sound name ""'
 
 #───────────────────────────────────────────────────────────────────────────────
-
