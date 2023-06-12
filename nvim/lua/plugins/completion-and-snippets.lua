@@ -371,6 +371,7 @@ return {
 			config_path = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json",
 			bin_path = vim.fn.stdpath("data") .. "/codeium",
 		},
+		-- FIX https://github.com/jcdickinson/codeium.nvim/issues/58
 		build = function()
 			local bin_path = vim.fn.stdpath("data") .. "/codeium"
 			local oldBinaries = vim.fs.find(
