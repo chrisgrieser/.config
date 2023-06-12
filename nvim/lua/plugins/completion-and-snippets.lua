@@ -371,6 +371,17 @@ return {
 			config_path = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json",
 			bin_path = vim.fn.stdpath("data") .. "/codeium",
 		},
+		build = function()
+			local bin_path = vim.fn.stdpath("data") .. "/codeium"
+			vim.fs.find(
+				function() return true end,
+				{
+					type = "directory",
+					limit = math.huge,
+					path = "/Users/chrisgrieser/.local/share/nvim/codeium",
+				}
+			)
+		end,
 	},
 	{ -- Snippet Engine
 		"L3MON4D3/LuaSnip",

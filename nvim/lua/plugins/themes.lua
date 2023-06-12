@@ -5,9 +5,9 @@ local g = vim.g
 local lightThemes = {
 	{ "rose-pine/neovim", name = "rose-pine" },
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- { "marko-cerovac/material.nvim", init = function() vim.g.material_style = "lighter" end, config = { lualine_style = "stealth" } },
 	-- { "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
 	-- { "catppuccin/nvim", name = "catppuccin" },
-	-- { "marko-cerovac/material.nvim", init = function() vim.g.material_style = "lighter" end, config = { lualine_style = "stealth" } },
 }
 
 local darkThemes = {
