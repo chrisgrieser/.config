@@ -55,7 +55,7 @@ local function workLayout()
 	hs.execute(u.exportPath .. "sketchybar --set clock popup.drawing=true")
 
 	-- close
-	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "lo-rain" }
+	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "lo-rain", "BetterTouchTool" }
 	require("lua.private").closer()
 	closeAllFinderWins()
 
@@ -69,9 +69,9 @@ local function workLayout()
 		end)
 	end
 
+	-- finish
 	sidenotes.reminderToSidenotes()
 	u.asSoonAsAppRuns("Discord", function() u.app(env.mailApp):activate() end)
-
 	print("🔲 WorkLayout: done")
 end
 
@@ -83,7 +83,7 @@ local function movieLayout()
 	darkmode.set(true)
 	visuals.holeCover("remove")
 
-	u.openApps("YouTube")
+	u.openApps { "YouTube", "BetterTouchTool" }
 	u.quitApp {
 		"Neovide",
 		"lo-rain",
