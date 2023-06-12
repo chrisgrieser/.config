@@ -373,14 +373,15 @@ return {
 		},
 		build = function()
 			local bin_path = vim.fn.stdpath("data") .. "/codeium"
-			vim.fs.find(
+			local oldBinaries = vim.fs.find(
 				function() return true end,
-				{
-					type = "directory",
-					limit = math.huge,
-					path = "/Users/chrisgrieser/.local/share/nvim/codeium",
-				}
+				{ type = "file", limit = math.huge, path = bin_path }
 			)
+			table.remove(oldBinaries) -- remove last item (= most up to date binary) from list
+			for _, binaryPath in pairs(oldBinaries) do
+				os.remove(binaryPath)
+				os.remove(vim.fs.dirname(binaryPath))
+			end
 		end,
 	},
 	{ -- Snippet Engine
