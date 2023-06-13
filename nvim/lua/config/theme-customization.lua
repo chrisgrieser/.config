@@ -32,7 +32,7 @@ local function customHighlights()
 
 	clearHighlight("@lsp.type.comment") -- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
 
-	local overnestingIndent = 8
+	local overnestingIndent = 10
 	updateHighlight("Overnesting", "guibg=#E06C75")
 	fn.matchadd("Overnesting", ("\t"):rep(overnestingIndent) .. "\t*")
 

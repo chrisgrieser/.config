@@ -167,7 +167,7 @@ return {
 							local ft = vim.bo.filetype
 							if ft == "lua" then
 								-- function as one line
-								return { { "function () " }, { " end" } }
+								return { { "function() " }, { " end" } }
 							elseif
 								ft == "typescript"
 								or ft == "javascript"
