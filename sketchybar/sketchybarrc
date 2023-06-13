@@ -44,7 +44,6 @@ second_row="popup.clock"
 
 stats_width=250
 scutil --get ComputerName | grep -q "Mother" && stats_width=225
-scutil --get ComputerName | grep -q "Office" && stats_width=235
 
 #───────────────────────────────────────────────────────────────────────────────
 

@@ -7,4 +7,11 @@ entry_name=${entry_name:l}
 
 folder=${folder:1} # cut "*" which marked entry as folder
 
-pass generate --clip --no-symbols "$folder/$entry_name" "${password_length:?}" | tail -n1
+msg=$(pass generate --clip --no-symbols "$folder/$entry_name" "${password_length:?}" 2>&1)
+
+# shellcheck disable=2181
+if [[ "$?" -eq 0 ]]; then
+	echo "$msg"	| tail -n1
+else
+	echo "$msg"
+fi
