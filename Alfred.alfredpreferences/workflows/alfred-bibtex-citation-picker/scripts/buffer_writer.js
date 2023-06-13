@@ -70,8 +70,8 @@ console.log("Bibtex Library Reading successful.");
 
 // @ts-ignore
 // rome-ignore lint/correctness/noUndeclaredVariables: <explanation>
-const  entryArray = bibtexParse(rawBibtex) // eslint-disable-line no-undef
-	.map((/** @type {{ title: any; url: any; citekey: any; keywords: any; type: any; journal: any; volume: any; issue: any; booktitle: any; authors: any; editors: any; year: any; abstract: any; primaryNamesEtAlString: any; primaryNames: any; }} */ entry) => {
+const  entryArray = bibtexParse(rawBibtex) 
+	.map((entry) => {
 		const emojis = [];
 		const {
 			title,
@@ -83,8 +83,8 @@ const  entryArray = bibtexParse(rawBibtex) // eslint-disable-line no-undef
 			volume,
 			issue,
 			booktitle,
-			authors,
-			editors,
+			author,
+			editor,
 			year,
 			abstract,
 			primaryNamesEtAlString,
@@ -161,16 +161,16 @@ const  entryArray = bibtexParse(rawBibtex) // eslint-disable-line no-undef
 
 		// display editor and add "Ed." when no authors
 		let namesToDisplay = primaryNamesEtAlString + " ";
-		if (!authors.length && editors.length) {
-			if (editors.length > 1) namesToDisplay += "(Eds.) ";
+		if (!author.length && editor.length) {
+			if (editor.length > 1) namesToDisplay += "(Eds.) ";
 			else namesToDisplay += "(Ed.) ";
 		}
 
 		// Matching behavior
 		let keywordMatches = [];
 		if (keywords.length) keywordMatches = keywords.map((/** @type {string} */ tag) => "#" + tag);
-		let authorMatches = [...authors, ...editors];
-		if (!matchAuthorsInEtAl) authorMatches = [...authors.slice(0, 1), ...editors.slice(0, 1)]; // only match first two names
+		let authorMatches = [...author, ...editor];
+		if (!matchAuthorsInEtAl) authorMatches = [...author.slice(0, 1), ...editor.slice(0, 1)]; // only match first two names
 		const yearMatches = [];
 		if (matchShortYears) yearMatches.push(year.slice(-2));
 		if (matchFullYears) yearMatches.push(year);
