@@ -25,8 +25,10 @@ local function setHigherBrightnessDuringDay()
 		target = 1
 	elseif ambient > 90 then
 		target = 0.9
-	elseif ambient > 50 then
+	elseif ambient > 30 then
 		target = 0.8
+	elseif ambient > 15 then
+		target = 0.7
 	else
 		target = 0.6
 	end
@@ -101,13 +103,16 @@ local function movieLayout()
 	print("🔲 MovieModeLayout: done")
 end
 
----select layout depending on number of screens
+---select layout depending on number of screens, and prevent concurrent runs
 local function selectLayout()
+	if LayoutingInProgress then return end
+	LayoutingInProgress = true
 	if env.isProjector() then
 		movieLayout()
 	else
 		workLayout()
 	end
+	u.runWithDelays(5, function() LayoutingInProgress = false end)
 end
 
 --------------------------------------------------------------------------------
@@ -130,14 +135,8 @@ if not u.isReloading() then selectLayout() end
 -- 4. Waking
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if not (event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock) then
-		return
-	end
+	local hasWoken = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
 
-	if WakingInProgress then return end -- prevent concurrent runs
-	WakingInProgress = true
 	print("🔓 Wake")
-
-	u.runWithDelays(0.5, selectLayout) -- delay for recognizing screens
-	u.runWithDelays(20, function() WakingInProgress = false end)
+	if hasWoken then u.runWithDelays(0.5, selectLayout) end -- delay for recognizing screens
 end):start()
