@@ -102,11 +102,7 @@ local function movieLayout()
 end
 
 ---select layout depending on number of screens
-local layoutingInProgress = false
 local function selectLayout()
-	if layoutingInProgress then return end
-	layoutingInProgress = true
-	u.runWithDelays(5, function() layoutingInProgress = false end)
 	if env.isProjector() then
 		movieLayout()
 	else
@@ -137,17 +133,11 @@ UnlockWatcher = c.new(function(event)
 	if not (event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock) then
 		return
 	end
-	if UnlockTimer then return end -- prevent concurrent runs
+
+	if WakingInProgress then return end -- prevent concurrent runs
+	WakingInProgress = true
 	print("🔓 Wake")
 
-	UnlockTimer = hs.timer.waitUntil(u.screenIsUnlocked, function()
-		u.runWithDelays(0.5, selectLayout) -- delay for recognizing screens
-	end, 0.2)
-	-- deactivate the timer if the screen is woken but not unlocked
-	u.runWithDelays(20, function()
-		if UnlockTimer and UnlockTimer:running() then
-			UnlockTimer:stop()
-			UnlockTimer = nil
-		end
-	end)
+	u.runWithDelays(0.5, selectLayout) -- delay for recognizing screens
+	u.runWithDelays(20, function() WakingInProgress = false end)
 end):start()
