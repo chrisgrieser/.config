@@ -1,11 +1,11 @@
 #!/usr/bin/env osascript -l JavaScript
-// Due to use with the JXA import hack, no "export" keyword is necessary.
+// INFO Due to use with the JXA import hack, no "export" keyword is necessary.
 // https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/Importing-Scripts
 
 class BibtexEntry {
 	constructor() {
-		this.authors = []; // last names only
-		this.editors = [];
+		this.author = []; // last names only
+		this.editor = [];
 		this.type = "";
 		this.citekey = ""; // without "@"
 		this.title = "";
@@ -21,8 +21,8 @@ class BibtexEntry {
 	}
 
 	primaryNamesArr() {
-		if (this.authors.length) return this.authors;
-		return this.editors; // if both are empty, will also return empty array
+		if (this.author.length) return this.author;
+		return this.editor; // if both are empty, will also return empty array
 	}
 	/** turn Array of names into into one string to display
 	 * @param {string[]} names
@@ -47,10 +47,10 @@ class BibtexEntry {
 		return this.etAlStringify(this.primaryNamesArr());
 	}
 	get authorsEtAlString() {
-		return this.etAlStringify(this.authors);
+		return this.etAlStringify(this.author);
 	}
 	get editorsEtAlString() {
-		return this.etAlStringify(this.editors);
+		return this.etAlStringify(this.editor);
 	}
 }
 
@@ -102,7 +102,10 @@ const otherChars = [
 const specialChars = ["\\&;&", '``;"', ',,;"', "`;'", "\\textendash{};—", "---;—", "--;—", "{	extquotesingle};'"];
 const decodePair = [...germanChars, ...frenchChars, ...otherChars, ...specialChars];
 
-/** @param {string} encodedStr */
+/**
+ * @param {string} encodedStr
+ * @return {string} decodedStr
+ */
 function bibtexDecode(encodedStr) {
 	let decodedStr = encodedStr;
 	decodePair.forEach((pair) => {
@@ -112,12 +115,12 @@ function bibtexDecode(encodedStr) {
 	return decodedStr;
 }
 
-/**
- * @param {string} str
+/** 
+ * @param {string} rawBibtexStr
  * @return {BibtexEntry[]}
  */
 // rome-ignore lint/correctness/noUnusedVariables: used externally
-function bibtexParse(str) {
+function bibtexParse(rawBibtexStr) {
 	const bibtexEntryDelimiter = /^@/m; // regex to avoid an "@" in a property value to break parsing
 	const bibtexPropertyDelimiter = /,(?=\s*[\w-]+\s*=)/; // last comma of a field, see: https://regex101.com/r/1dvpfC/1
 	const bibtexNameValueDelimiter = " and ";
@@ -137,12 +140,12 @@ function bibtexParse(str) {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	const bibtexEntryArray = bibtexDecode(str)
+	const bibtexEntryArray = bibtexDecode(rawBibtexStr)
 		.replace(bibtexCommentRegex, "") // remove comments
 		.split(bibtexEntryDelimiter)
 		.slice(1) // first element is BibTeX metadata
 		.map((bibEntry) => {
-			let lines = bibEntry.split(bibtexPropertyDelimiter);
+			const lines = bibEntry.split(bibtexPropertyDelimiter);
 			const entry = new BibtexEntry();
 
 			// parse first line (separate since different formatting)
@@ -151,8 +154,8 @@ function bibtexParse(str) {
 			lines.shift();
 
 			// parse remaining lines
-			lines = lines.filter((line) => line.includes("=")); // catch erroneous BibTeX formatting
 			lines.forEach((line) => {
+				if (!line.includes("=")) return; // catch erroneous BibTeX formatting
 				const field = line.split("=")[0].trim().toLowerCase();
 				const value = line
 					.split("=")[1]

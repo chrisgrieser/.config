@@ -7,14 +7,13 @@ while ! pgrep -xq "Stats"; do
 	sleep 2
 	i=$((i + 1))
 	if [[ $i -gt 20 ]]; then
-		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats not running"'
+		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats does not start"'
 		return 1
 	fi
 done
 
 i=0
 while true; do
-	# REQUIRED Stats being set as one combined module
 	stats=$(sketchybar --query default_menu_items | grep --max-count=1 "Combined" | cut -d\" -f2)
 	[[ -n "$stats" ]] && break
 	sleep 2
@@ -96,6 +95,9 @@ sketchybar \
 	--subscribe package-updates homebrew-update \
 	\
 	--update
+
+# FIX reload to ensure weather is reloaded properly
+sleep 5 && sketchybar --update
 
 #───────────────────────────────────────────────────────────────────────────────
 

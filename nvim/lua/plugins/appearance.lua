@@ -63,7 +63,7 @@ return {
 		"tzachar/highlight-undo.nvim",
 		keys = { "u", "U" },
 		opts = {
-			duration = 500,
+			duration = 250,
 			keymaps = {
 				{ "n", "u", "undo", { desc = "󰕌 Undo" } },
 				{ "n", "U", "redo", { desc = "󰑎 Redo" } },
