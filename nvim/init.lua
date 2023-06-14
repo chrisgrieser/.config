@@ -33,17 +33,3 @@ safeRequire("config.clipboard")
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
 
---------------------------------------------------------------------------------
-
--- runs in the background and with timeout, in case the site does not respond
-local function tipOfTheDay()
-	local command = 'curl -s --max-time 5 "https://vtip.43z.one"' -- --max-time = timeout for curl
-	vim.fn.jobstart(command, {
-		stdout_buffered = true,
-		on_stdout = function(_, stdout)
-			vim.notify(" TIP\n" .. stdout[1], vim.log.levels.INFO, { timeout = 10000 })
-		end,
-	})
-end
-
-vim.defer_fn(tipOfTheDay, 2000)
