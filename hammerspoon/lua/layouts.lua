@@ -105,14 +105,11 @@ end
 
 ---select layout depending on number of screens, and prevent concurrent runs
 local function selectLayout()
-	if LayoutingInProgress then return end
-	LayoutingInProgress = true
 	if env.isProjector() then
 		movieLayout()
 	else
 		workLayout()
 	end
-	u.runWithDelays(5, function() LayoutingInProgress = false end)
 end
 
 --------------------------------------------------------------------------------
@@ -135,8 +132,11 @@ if not u.isReloading() then selectLayout() end
 -- 4. Waking
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
+	if RecentlyWoke then return end
+	RecentlyWoke = true
 	local hasWoken = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
 
 	print("🔓 Wake")
 	if hasWoken then u.runWithDelays(0.5, selectLayout) end -- delay for recognizing screens
+	u.runWithDelays(5, function() RecentlyWoke = false end)
 end):start()
