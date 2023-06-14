@@ -461,7 +461,6 @@ keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode
 -- stylua: ignore start
 keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "󰽙 Alt Buffer" })
 keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "󰽙 Next Buffer" })
-keymap("n", "<S-CR>", "gt", { desc = "󰓩 Next Tab" })
 keymap("n", "<C-CR>", "<C-w>w", { desc = " Next Window" })
 
 keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "󰽙 close buffer/window" })
