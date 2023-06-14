@@ -720,7 +720,7 @@ autocmd("LspAttach", {
 		if capabilities.documentSymbolProvider then
 			-- overwrites treesitter goto-symbol
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true })
-			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
+			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 		-- stylua: ignore end
 	end,
