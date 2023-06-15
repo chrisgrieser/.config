@@ -28,6 +28,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: killall with same name</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
@@ -60,6 +70,29 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>A09D544F-ECA6-4D74-B8B0-AC69E572977B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>kill -9 "$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F1539426-E456-4953-8215-D809DF4B120B</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -120,7 +153,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>kill -9 "$*"</string>
+				<string>killall "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -131,7 +164,7 @@
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>F1539426-E456-4953-8215-D809DF4B120B</string>
+			<string>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -140,30 +173,39 @@
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</key>
+		<dict>
+			<key>note</key>
+			<string>killall with name</string>
+			<key>xpos</key>
+			<real>370</real>
+			<key>ypos</key>
+			<real>320</real>
+		</dict>
 		<key>A09D544F-ECA6-4D74-B8B0-AC69E572977B</key>
 		<dict>
 			<key>note</key>
-			<string>kill process</string>
+			<string>kill</string>
 			<key>xpos</key>
-			<real>335</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>45</real>
 		</dict>
 		<key>CBFBCA76-39CE-4D22-A556-EDF1A996849C</key>
 		<dict>
 			<key>xpos</key>
-			<real>140</real>
+			<real>130</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>185</real>
 		</dict>
 		<key>F1539426-E456-4953-8215-D809DF4B120B</key>
 		<dict>
 			<key>note</key>
-			<string>force kill process</string>
+			<string>force kill</string>
 			<key>xpos</key>
-			<real>335</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>185</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

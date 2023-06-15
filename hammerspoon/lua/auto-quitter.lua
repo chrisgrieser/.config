@@ -16,7 +16,7 @@ Thresholds = {
 	neovide = 120, -- needs lowercase
 	["wezterm-gui"] = 45, -- does not work with "WezTerm"
 	Hammerspoon = 3, -- affects the console, not hammerspoon itself
-	["Alfred Preferences"] = 10,
+	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
 	Finder = 20, -- only closes windows
 }
