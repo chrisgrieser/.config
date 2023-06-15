@@ -474,6 +474,8 @@ keymap("n", "<C-CR>", "<C-w>w", { desc = " Next Window" })
 keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "󰽙 close buffer/window" })
 keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "󰽙 reopen last buffer" })
 
+keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " 󰽙 Buffers" })
+
 -- stylua: ignore end
 keymap("", "<C-w>h", ":split<CR>", { desc = " horizontal split" })
 keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = " vertical resize (+)" })
@@ -546,6 +548,7 @@ keymap("", "<D-S-l>", function()
 		return
 	end
 	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
+	fn.system("open -a 'Alfred Preferences'")
 	-- stylua: ignore
 	local command = ([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(workflowId)
 	fn.system(command)

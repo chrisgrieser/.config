@@ -5,7 +5,7 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const jsonArray = [];
+const passwordFolders = [];
 
 // INFO password store location retrieved via .zshenv
 let passwordStore = app.doShellScript('echo "$PASSWORD_STORE_DIR"');
@@ -14,19 +14,23 @@ if (passwordStore === "") passwordStore = app.pathTo("home folder") + "/.passwor
 app
 	.doShellScript(`cd "${passwordStore}" ; find . -type d -not -path "*/.git*"`)
 	.split("\r")
-	.slice(1) // first entry removed (root)
 	.forEach((/** @type {string} */ folder) => {
-		jsonArray.push({
-			title: folder.slice(2), // remove leading "./"
+		folder = folder.slice(2); // remove leading "./"
+		if (!folder) folder = "[root]";
+		passwordFolders.push({
+			title: folder,
 			arg: folder,
 			uid: folder,
 			mods: {
-				cmd: { variables: { generatePassword: true } },
+				cmd: {
+					subtitle: "⌘↵: Insert password from clipboard",
+					variables: { generatePassword: false },
+				},
 			},
 		});
 	});
 
 JSON.stringify({
-	variables: { generatePassword: false },
-	items: jsonArray,
+	variables: { generatePassword: true },
+	items: passwordFolders,
 });
