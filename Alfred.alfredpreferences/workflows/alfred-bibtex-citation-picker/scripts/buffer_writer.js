@@ -126,8 +126,8 @@ const  entryArray = bibtexParse(rawBibtex)
 		// Icon selection
 		let typeIcon = "icons/";
 		switch (type) {
+
 			case "article":
-				typeIcon += "article.png";
 				break;
 			case "incollection":
 			case "inbook":
@@ -157,7 +157,7 @@ const  entryArray = bibtexParse(rawBibtex)
 			if (volume) collectionSubtitle += " " + volume;
 			if (issue) collectionSubtitle += "(" + issue + ")";
 		}
-		if (type === "incollection" && booktitle) collectionSubtitle += "    In: " + booktitle;
+		if ((type === "incollection" || type === "inbook") && booktitle) collectionSubtitle += "    In: " + booktitle;
 
 		// display editor and add "Ed." when no authors
 		let namesToDisplay = primaryNamesEtAlString + " ";
