@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 return {
 	{ -- highlights for ftFT
 		"unblevable/quick-scope",
@@ -29,6 +32,17 @@ return {
 			vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "󱇫 b" })
 		end,
 		-- stylua: ignore end
+	},
+	{ -- better marks
+		"tomasky/bookmarks.nvim",
+		event = "VimEnter", -- cannot be loaded on keymaps due to the bookmark signs
+		opts = {
+			sign_priority = 8,
+			save_file = u.vimDataDir .. "/bookmarks",
+			signs = {
+				add = { text = "󰃀" },
+			},
+		},
 	},
 
 	-----------------------------------------------------------------------------
