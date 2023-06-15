@@ -16,8 +16,13 @@ local function banned(msg)
 		or vim.startswith(msg, "Failed to detect indentation style")
 end
 
+local function beautify(msg)
+	return msg:gsub("^%[nvim%-treesitter]", "")
+end
+
+--------------------------------------------------------------------------------
+
 local function notifyConfig()
-	-- Base config
 	local notifyWidth = 50
 
 	require("notify").setup {
