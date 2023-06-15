@@ -304,7 +304,7 @@ fi</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>kill</string>
+				<string>pc</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -729,7 +729,7 @@ On each process:
 		<key>default_renice</key>
 		<string>1</string>
 		<key>rerun_timer</key>
-		<string>3</string>
+		<string>2</string>
 	</dict>
 	<key>version</key>
 	<string>2022.3</string>

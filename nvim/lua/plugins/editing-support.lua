@@ -1,5 +1,3 @@
-local u = require("config.utils")
-
 return {
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
@@ -41,16 +39,6 @@ return {
 				cutoff_width = vim.opt.textwidth:get() + 5,
 			},
 			shortcuts = {}, -- disable built-in shortcuts
-		},
-	},
-	{ -- better marks
-		"tomasky/bookmarks.nvim",
-		event = "VimEnter", -- cannot be loaded on keymaps due to the bookmark signs
-		opts = {
-			save_file = u.vimDataDir .. "/bookmarks",
-			signs = {
-				add = { text = "󰃀" },
-			},
 		},
 	},
 	{ -- case conversion
