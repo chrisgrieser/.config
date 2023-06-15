@@ -26,7 +26,7 @@ function run(argv) {
 		return JSON.stringify({ items: passwords });
 	}
 
-	const query = argv[0];
+	const query = argv[0].trim();
 	const passwordlist = app.doShellScript(`cd "${passwordStore}" ; find . -name "*${query}*.gpg"`);
 	let createNewPassword;
 	if (passwordlist) {

@@ -29,7 +29,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -86,7 +86,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D07CE8CB-D920-4F98-A583-6E0D2D8336BF</string>
+				<string>FEBD93EE-FAF9-4E4E-8627-84BEC380B964</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -169,29 +169,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D07CE8CB-D920-4F98-A583-6E0D2D8336BF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>EAA031C0-0941-40BC-A061-30783EABD6C1</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘↵: Insert password from clipboard</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>DD83841D-8A6C-41C6-96C4-440F0D766047</key>
 		<array/>
 		<key>EAA031C0-0941-40BC-A061-30783EABD6C1</key>
@@ -233,6 +210,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>FEBD93EE-FAF9-4E4E-8627-84BEC380B964</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>EAA031C0-0941-40BC-A061-30783EABD6C1</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘↵: Insert password from clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -270,21 +270,49 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/select-folder-for-new-pw.js</string>
 				<key>subtext</key>
 				<string>↵: Auto-Generate password       ⌘↵: Insert password from clipboard</string>
-				<key>text</key>
-				<string>Name of new Entry: '{query}'</string>
+				<key>title</key>
+				<string>Select folder for new entry…</string>
+				<key>type</key>
+				<integer>8</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>D07CE8CB-D920-4F98-A583-6E0D2D8336BF</string>
+			<string>FEBD93EE-FAF9-4E4E-8627-84BEC380B964</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -295,7 +323,7 @@
 				<false/>
 				<key>variables</key>
 				<dict>
-					<key>new_entry</key>
+					<key>entry_name</key>
 					<string>{query}</string>
 				</dict>
 			</dict>
@@ -346,7 +374,7 @@
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -680,11 +708,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>save new_entry</string>
+			<string>save entry_name</string>
 			<key>xpos</key>
-			<real>445</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>45</real>
 		</dict>
 		<key>4CD4709B-D7A9-4FFD-8FDE-D62EC9053E14</key>
 		<dict>
@@ -722,7 +750,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>50</real>
 		</dict>
 		<key>7C6B7643-4B16-4307-ADA8-14D6837FEE59</key>
 		<dict>
@@ -765,15 +793,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>1080</real>
 			<key>ypos</key>
 			<real>525</real>
-		</dict>
-		<key>D07CE8CB-D920-4F98-A583-6E0D2D8336BF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>520</real>
-			<key>ypos</key>
-			<real>15</real>
 		</dict>
 		<key>DD83841D-8A6C-41C6-96C4-440F0D766047</key>
 		<dict>
@@ -818,6 +837,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>280</real>
 			<key>ypos</key>
 			<real>705</real>
+		</dict>
+		<key>FEBD93EE-FAF9-4E4E-8627-84BEC380B964</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>530</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -17,7 +17,7 @@ local function banned(msg)
 end
 
 local function beautify(msg)
-	return msg:gsub("^%[nvim%-treesitter]", "")
+	return msg:gsub("^%[nvim%-treesitter]", ""):gsub("^%[mason%-update%-all]", "")
 end
 
 --------------------------------------------------------------------------------
@@ -41,13 +41,15 @@ local function notifyConfig()
 	}
 
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
-		if msg == nil then
-			msg = "NIL"
-		elseif banned(msg) then
+		if banned(msg) then
 			return
+		elseif msg == nil then
+			msg = "NIL"
 		elseif msg == "" then
 			msg = '""' -- make empty string more apparent
 		end
+
+		msg = beautify(msg)
 
 		local msgLines = vim.split(msg, "\n", { trimepty = true })
 		local wrappedLines = {}
