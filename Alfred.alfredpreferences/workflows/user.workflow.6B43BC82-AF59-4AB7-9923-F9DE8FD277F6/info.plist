@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.process-manager</string>
+	<string>de.chris-grieser.atop</string>
 	<key>connections</key>
 	<dict>
 		<key>CBFBCA76-39CE-4D22-A556-EDF1A996849C</key>
@@ -18,16 +18,26 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F1539426-E456-4953-8215-D809DF4B120B</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Force Kill</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Minimalistic process manger for Alfred</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Process Manager</string>
+	<string>atop</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -38,7 +48,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>killall "$*"</string>
+				<string>kill "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -69,7 +79,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>pm</string>
+				<string>atop</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -102,6 +112,29 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>kill -9 "$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F1539426-E456-4953-8215-D809DF4B120B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -123,9 +156,20 @@
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
+		<key>F1539426-E456-4953-8215-D809DF4B120B</key>
+		<dict>
+			<key>note</key>
+			<string>force kill process</string>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>295</real>
+		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
+	<key>version</key>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
