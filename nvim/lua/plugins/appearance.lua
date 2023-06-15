@@ -16,6 +16,10 @@ return {
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
+	{ -- block highlights
+		"HampusHauffman/block.nvim",
+		opts = { automatic = false },
+	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",

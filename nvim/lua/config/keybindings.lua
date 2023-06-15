@@ -90,6 +90,14 @@ keymap("n", "<leader>ln", function()
 	vim.notify("Last Notification copied.\n" .. msg, u.trace)
 end, { desc = "󰘳 Copy Last Notification" })
 
+-- copy [l]ast [m]essage
+keymap("n", "<leader>lm", function()
+	vim.cmd.redir("@+")
+	vim.cmd("silent! 1messages")
+	vim.cmd.redir("END")
+	vim.notify("Last Message copied.\n" .. fn.getreg("+"), u.trace)
+end, { desc = "󰘳 Copy Last Message" })
+
 -- Dismiss notifications & re-enable fold after search
 keymap("n", "<Esc>", function()
 	local clearPending = require("notify").pending() > 10
@@ -208,9 +216,9 @@ local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
 for _, key in pairs(trailingKeys) do
 	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = "which_key_ignore" })
 end
+keymap("n", "X", "mz$x`z", { desc = "Delete last character" })
 
 -- Case Conversion
-
 local casings = {
 	{ char = "u", arg = "upper", desc = "UPPER CASE" },
 	{ char = "l", arg = "lower", desc = "lower case" },
@@ -248,7 +256,7 @@ keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = 
 -- SPELLING
 
 -- [z]pelling [l]ist
-keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 Suggest" })
+keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
 keymap("n", "z.", "1z=", { desc = "󰓆 Correct" })
 
 ---add word under cursor to vale/languagetool dictionary
