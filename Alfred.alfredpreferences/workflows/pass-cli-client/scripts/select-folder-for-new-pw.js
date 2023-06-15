@@ -16,7 +16,7 @@ app
 	.split("\r")
 	.forEach((/** @type {string} */ folder) => {
 		folder = folder.slice(2); // remove leading "./"
-		if (!folder) folder = "[root]";
+		if (!folder) folder = "* root";
 		passwordFolders.push({
 			title: folder,
 			arg: folder,
@@ -29,6 +29,9 @@ app
 			},
 		});
 	});
+
+// move root to the back of the list
+passwordFolders.push(passwordFolders.shift())
 
 JSON.stringify({
 	variables: { generatePassword: true },
