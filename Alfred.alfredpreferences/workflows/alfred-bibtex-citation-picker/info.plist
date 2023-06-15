@@ -1297,7 +1297,7 @@ JSON.stringify({ 'items': entry_array });
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>focusedappvariable</key>
 				<true/>
 				<key>focusedappvariablename</key>
@@ -2763,7 +2763,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>note</key>
 			<string>DOUBLE CLICK THIS
 
-to set a hotkey for the citaiton picker.</string>
+to set a hotkey for the citation picker.</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
