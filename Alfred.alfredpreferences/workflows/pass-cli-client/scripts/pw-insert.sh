@@ -2,12 +2,9 @@
 # shellcheck disable=2154
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
-# lowercase & kebab-case
-entry_name=${*/ /-}
-entry_name=${entry_name:l}
-
-folder=${folder:1} # cut "*" which marked entry as folder
-
+if [[ "$generate_pw" ]]; then
+	
+fi
 # new password from clipboard
 pbpaste | pass insert --echo "$folder/$entry_name" &>/dev/null
 
