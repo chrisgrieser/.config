@@ -18,7 +18,11 @@ return {
 	},
 	{ -- block highlights
 		"HampusHauffman/block.nvim",
-		opts = { automatic = false },
+		opts = {
+			percent = 0.96,
+			depth = 6,
+			automatic = true,
+		},
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",

@@ -150,6 +150,9 @@ function M.setThemeMode(mode)
 	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
 	local targetTheme = mode == "dark" and g.darkTheme or g.lightTheme
 	cmd.colorscheme(targetTheme)
+
+	-- don't use transparency when using block.nvim
+	if pcall(require, "block") then g.neovide_transparency = 1 end
 end
 
 -- initialize theme on startup
