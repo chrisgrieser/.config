@@ -8,14 +8,13 @@ app.includeStandardAdditions = true;
 const apps = app.doShellScript("ls /Applications/");
 
 const processes = app
-	.doShellScript("ps rcAo 'pid=,%cpu=,%mem=,command='")
+	.doShellScript("ps rcAo 'pid=,%cpu=,command='")
 	.split("\r")
 	.map((/** @type {string} */ processInfo) => {
 		const info = processInfo.trim().split(/\s+/);
 		const pid = info[0];
 		const cpu = info[1];
-		const memory = info[2];
-		let name = info[3];
+		let name = info[2];
 
 		// app icons
 		switch (name) {
@@ -23,6 +22,9 @@ const processes = app
 				return {};
 			case "Alfred":
 				name += " 5";
+				break;
+			case "CleanShot":
+				name += " X";
 				break;
 			case "neovide":
 			case "espanso":
@@ -34,12 +36,16 @@ const processes = app
 		}
 		const isApp = apps.includes(name);
 		const icon = isApp ? { type: "fileicon", path: `/Applications/${name}.app` } : {};
+		const subtitle = parseFloat(cpu) > 0.2 ? cpu : "";
 
 		return {
 			title: name,
-			subtitle: `📈 ${cpu}    📊 ${memory}`,
+			subtitle: subtitle,
 			icon: icon,
 			arg: pid,
+			mods: {
+				ctrl: { arg: name },
+			},
 		};
 	});
 
