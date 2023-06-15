@@ -29,7 +29,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -295,7 +295,7 @@
 				<false/>
 				<key>variables</key>
 				<dict>
-					<key>folder</key>
+					<key>new_entry</key>
 					<string>{query}</string>
 				</dict>
 			</dict>
@@ -313,15 +313,15 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string></string>
+						<string>{var:createNewPassword}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>4</integer>
+						<integer>0</integer>
 						<key>matchstring</key>
-						<string>^\*</string>
+						<string>1</string>
 						<key>outputlabel</key>
-						<string>new in folder</string>
+						<string>new pw</string>
 						<key>uid</key>
 						<string>F6DC865A-6D15-4B5F-8551-561238717CA0</string>
 					</dict>
@@ -342,7 +342,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -371,13 +371,13 @@ osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR"</stri
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>./scripts/pass-cli-search.js</string>
 				<key>subtext</key>
 				<string>Loading...</string>
 				<key>title</key>
 				<string>Search Passwords in Pass</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -680,7 +680,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>save folder</string>
+			<string>save new_entry</string>
 			<key>xpos</key>
 			<real>445</real>
 			<key>ypos</key>
@@ -720,7 +720,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>295</real>
+			<real>235</real>
 			<key>ypos</key>
 			<real>45</real>
 		</dict>
