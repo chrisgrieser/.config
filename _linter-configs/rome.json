@@ -40,7 +40,7 @@
 			"style": {
 				"useBlockStatements": "off",
 				"useConst": "warn",
-				"noParameterAssign": "warn",
+				"noParameterAssign": "off",
 				"useTemplate": "off",
 				"noUnusedTemplateLiteral": "warn",
 				"useSingleVarDeclarator": "off"

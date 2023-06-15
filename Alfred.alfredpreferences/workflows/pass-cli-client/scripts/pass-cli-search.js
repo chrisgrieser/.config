@@ -36,20 +36,35 @@ function run(argv) {
 			const parts = id.split("/");
 			const name = parts.pop();
 			const group = parts.join("/");
+			const path = `${passwordStore}/${group}/${name}.gpg`;
 
 			passwords.push({
 				title: name,
 				subtitle: group,
 				arg: id,
 				uid: id,
+				mods: {
+					alt: {
+						arg: path,
+					},
+				},
 			});
 		});
 	} else {
 		createNewPassword = true;
+		const cleanQuery = query.replace(/[/\\:]/, "-");
+		const disallowed = { subtitle: "🚫", valid: false }
 		passwords.push({
 			title: "🆕 " + query,
 			subtitle: "Create new password",
-			arg: query,
+			arg: cleanQuery,
+			mods: { 
+				cmd: disallowed,
+				shift: disallowed,
+				alt: disallowed,
+				fn: disallowed,
+				ctrl: disallowed,
+			},
 		});
 	}
 
