@@ -213,6 +213,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3E40FE4A-DAEF-4583-AE6B-8638CCD6BEE0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>09C552E1-E9BA-418A-931E-D134C3FA1A7F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3FA32575-5519-475C-AFED-6182B53063A6</key>
 		<array>
 			<dict>
@@ -1275,6 +1288,37 @@ JSON.stringify({ 'items': entry_array });
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>1C0964D1-AA81-478A-B406-28E96DDD9E82</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>11</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>B</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>3E40FE4A-DAEF-4583-AE6B-8638CCD6BEE0</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -2724,6 +2768,19 @@ to set a hotkey for the citaiton picker.</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>20</real>
+		</dict>
+		<key>3E40FE4A-DAEF-4583-AE6B-8638CCD6BEE0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>DOUBLE CLICK THIS
+
+to set a hotkey for adding DOI/ISBN</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>270</real>
 		</dict>
 		<key>3FA32575-5519-475C-AFED-6182B53063A6</key>
 		<dict>

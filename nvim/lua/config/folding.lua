@@ -73,7 +73,7 @@ keymap("n", "<f1>", function() require("fold-cycle").close() end, { desc = "󰘖
 --------------------------------------------------------------------------------
 -- MICRO FOLD COMMANDS
 
--- goto next closed fold & open
+-- goto next closed fold
 keymap("n", "gz", function()
 	local lnum = fn.line(".")
 	local lastLine = fn.line("$")
@@ -87,16 +87,15 @@ keymap("n", "gz", function()
 		lnum = lnum + 1
 		local isClosedFold = fn.foldclosed(lnum) > 0
 	until isClosedFold
-	u.normal(tostring(lnum) .. "Gzv")
-end, { desc = "󰘖 Goto next fold & open" })
-
+	u.normal(tostring(lnum) .. "G")
+end, { desc = "󰘖 Goto next fold" })
 
 -- h closes (similar to how l opens due to opt.foldopen="hor")
 -- works well with vim's startofline option
 ---@diagnostic disable: param-type-mismatch
 keymap("n", "h", function()
 	-- `virtcol` accounts for tab indentation
-	local onIndentOrFirstNonBlank = fn.virtcol(".") <= fn.indent(".") + 1
+	local onIndentOrFirstNonBlank = fn.virtcol(".") < fn.indent(".")
 	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
 
 	if onIndentOrFirstNonBlank and shouldCloseFold then
