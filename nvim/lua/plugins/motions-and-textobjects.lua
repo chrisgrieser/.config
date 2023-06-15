@@ -16,7 +16,7 @@ return {
 		"andymass/vim-matchup",
 		lazy = false, -- cannot be properly lazy-loaded
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function ()
+		init = function()
 			vim.g.matchup_matchparen_offscreen = { method = "popup" }
 			vim.g.matchup_text_obj_enabled = 0
 		end,
@@ -26,27 +26,25 @@ return {
 		dev = true,
 		lazy = true, -- loaded by keymaps
 		opts = { skipInsignificantPunctuation = true },
-		-- stylua: ignore start
 		init = function()
+			-- stylua: ignore
 			vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "󱇫 e" })
+			-- stylua: ignore
 			vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "󱇫 b" })
 		end,
-		-- stylua: ignore end
 	},
 	{ -- better marks
 		"tomasky/bookmarks.nvim",
 		event = "VimEnter", -- cannot be loaded on keymaps due to the bookmark signs
 		opts = {
-			sign_priority = 8,
+			sign_priority = 8, --set bookmark sign priority to cover other sign
 			save_file = u.vimDataDir .. "/bookmarks",
 			signs = {
 				add = { text = "󰃀" },
 			},
 		},
 	},
-
 	-----------------------------------------------------------------------------
-
 	{ -- tons of text objects
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = "BufReadPre", -- to ensure it properly loads
