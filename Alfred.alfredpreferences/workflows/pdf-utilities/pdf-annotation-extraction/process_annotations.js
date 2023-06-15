@@ -416,11 +416,10 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 	// yaml frontmatter
 	const yamlKeys = [
 		`aliases: "${metad.title}"`,
-		`tags: literature-note, ${tagsForYaml}`,
+		`tags: [literature-note, ${tagsForYaml}]`,
 		"cssclass: pdf-annotations",
-		"obsidianUIMode: source",
-		"obsidianEditingMode: live",
-		"citekey: ${metad.citekey}",
+		"obsidianUIMode: preview",
+		`citekey: ${metad.citekey}`,
 		`year: ${metad.year.toString()}`,
 		`author: "${metad.author}"`,
 		`publicationType: ${metad.ptype}`,
