@@ -1,7 +1,7 @@
 local u = require("config.utils")
 
 return {
-	{ -- quick file siwtcher
+	{ -- quick file switcher
 		"ThePrimeagen/harpoon",
 		lazy = true, -- loaded by keybinds
 		dependencies = "nvim-lua/plenary.nvim",
@@ -59,9 +59,8 @@ return {
 		dev = true,
 		event = "VeryLazy",
 		opts = {
-			retirementAgeMins = 30,
+			retirementAgeMins = 25,
 			ignoreUnsavedChangesBufs = false,
-			ignoreFilenamePattern = ".*%.d.ts$", -- reference file for JXA
 		},
 	},
 	{ -- change cwd per project

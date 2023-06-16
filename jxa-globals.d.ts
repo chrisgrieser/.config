@@ -16,6 +16,7 @@ declare function Path(filepath: string): string;
 
 declare function delay(seconds: number): void;
 
+// requires `ObjC.import("stdlib")`
 declare const $: {
 	getenv: (envVar: string) => string;
 	NSFileManager: any;

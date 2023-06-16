@@ -1,13 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
 
-/** @file
-	*/
-
-/**
- * @typedef
-	* {import('/Users/chrisgrieser/.config/_linter-configs/jxa-globals.d.ts').Application} Application
- */
-
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 

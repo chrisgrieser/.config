@@ -81,7 +81,7 @@ local jsAndTsSettings = {
 		includeInlayEnumMemberValueHints = true,
 		includeInlayFunctionLikeReturnTypeHints = true,
 		includeInlayFunctionParameterTypeHints = true,
-		includeInlayParameterNameHints = "all", -- none | literals | all
+		includeInlayParameterNameHints = "all", 
 		includeInlayParameterNameHintsWhenArgumentMatchesName = true,
 		includeInlayPropertyDeclarationTypeHints = true,
 		includeInlayVariableTypeHints = true,
@@ -93,36 +93,11 @@ lspSettings.tsserver = {
 	completions = { completeFunctionCalls = true },
 	typescript = jsAndTsSettings,
 	javascript = jsAndTsSettings,
-
-	-- defaults when not using an explicit `[jt]sconfig.json`
-	implicitProjectConfiguration = {
-		checkJs = true, -- enables typechecking for javascript files, e.g. JXA
-		target = "ES2021", -- makes `.replaceAll()` and `new Set` valid
-	},
 }
-
--- HACK load JXA globals for tsserver
-vim.api.nvim_create_autocmd("LspAttach", {
-	pattern = "*.js",
-	callback = function(args)
-		-- only for JXA files for for tsserver
-		local firstLine = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
-		local isJxaShebang = firstLine:find("osascript %-l JavaScript")
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client.name ~= "tsserver" or not isJxaShebang then return end
-
-		-- open jxa-globals without polluting alt file
-		local bufnr = vim.fn.bufnr()
-		vim.defer_fn(function()
-			vim.cmd("keepalt edit " .. u.linterConfigFolder .. "jxa-globals.d.ts")
-			vim.cmd("keepalt buffer " .. tostring(bufnr))
-		end, 1)
-	end,
-})
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
 lspOnAttach.tsserver = function(client, _)
-	-- disable formatting, since taken care of by prettier
+	-- disable formatting, since taken care of by rome
 	client.server_capabilities.documentFormattingProvider = false
 	client.server_capabilities.documentRangeFormattingProvider = false
 end
