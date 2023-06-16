@@ -390,9 +390,8 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-brew home "$*"</string>
+				<string>package=$(echo $1 | cut -d" " -f1) # remove "--cask"
+brew home "$package"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
