@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.vitorgalvao.alfred.shriekingchimes</string>
+	<key>connections</key>
+	<dict>
+		<key>03840BBD-A292-4863-BC54-E59DEF75CE4E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>18988132-48CE-4F83-825B-D9B9AE941645</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>18988132-48CE-4F83-825B-D9B9AE941645</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6C391DF-D1CC-4092-8493-18E80C380775</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>2F7A850C-4470-443D-81DC-C32716427451</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6C391DF-D1CC-4092-8493-18E80C380775</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3C3FE00D-08AA-4680-931A-36966B68F7D7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F0A1F9EB-A0F6-4D38-93EF-39E92CF55846</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5C5D11C6-E020-46BE-A2FE-D6967C5736CB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DA97A675-D10B-4EB3-801B-47DD9631A33A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>615D0C67-43A8-454A-9426-815172FAA411</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>03840BBD-A292-4863-BC54-E59DEF75CE4E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6ACBD5B4-6BFD-4A40-8999-F5178CF35606</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>560EE8A0-2428-43BF-A27E-C22A6B4D25C7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>10800F7B-3F08-4143-BE36-26AA026B629D</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>714B1AD8-80C5-43BD-A9AE-8AA4A3EB6A2C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>615D0C67-43A8-454A-9426-815172FAA411</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Alarm Label: {query}</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>2F7A850C-4470-443D-81DC-C32716427451</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A6C391DF-D1CC-4092-8493-18E80C380775</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C0DF95E8-9A8E-45B8-B67D-55482CE653BD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A9E7E9A1-C490-4E29-9952-C9C32CF1FCE1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6C391DF-D1CC-4092-8493-18E80C380775</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C0DF95E8-9A8E-45B8-B67D-55482CE653BD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6ACBD5B4-6BFD-4A40-8999-F5178CF35606</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DA97A675-D10B-4EB3-801B-47DD9631A33A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6C391DF-D1CC-4092-8493-18E80C380775</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F0A1F9EB-A0F6-4D38-93EF-39E92CF55846</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6C391DF-D1CC-4092-8493-18E80C380775</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Vítor Galvão</string>
+	<key>description</key>
+	<string>Set Timers and Alarms</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Shrieking Chimes</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Alarm Name: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>03840BBD-A292-4863-BC54-E59DEF75CE4E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>timeout</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>615D0C67-43A8-454A-9426-815172FAA411</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>alarm
+{var:timeout}
+{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>18988132-48CE-4F83-825B-D9B9AE941645</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:alarm_keyword}</string>
+				<key>subtext</key>
+				<string>⌘↩ for adding a label</string>
+				<key>text</key>
+				<string>Set Alarm for {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>714B1AD8-80C5-43BD-A9AE-8AA4A3EB6A2C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>alarm
+{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>2F7A850C-4470-443D-81DC-C32716427451</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>alarm</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>5C5D11C6-E020-46BE-A2FE-D6967C5736CB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>function run() {
+  try {
+    const currentFocus = Application("Shortcuts Events")
+      .shortcuts
+      .byName("Shrieking Chimes")
+      .id()
+  } catch {
+    return JSON.stringify({ alfredworkflow: { arg: "install" } })
+  }
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C0DF95E8-9A8E-45B8-B67D-55482CE653BD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>Shrieking Chimes.shortcut</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>560EE8A0-2428-43BF-A27E-C22A6B4D25C7</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputmode</key>
+				<integer>0</integer>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>shortcut</key>
+				<string>Shrieking Chimes</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.runshortcut</string>
+			<key>uid</key>
+			<string>A6C391DF-D1CC-4092-8493-18E80C380775</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>install</string>
+						<key>outputlabel</key>
+						<string>Install Shortcut</string>
+						<key>uid</key>
+						<string>10800F7B-3F08-4143-BE36-26AA026B629D</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string></string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>6ACBD5B4-6BFD-4A40-8999-F5178CF35606</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>alarm
+{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>DA97A675-D10B-4EB3-801B-47DD9631A33A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:timer_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>function sfItem(description, seconds) {
+  // Check if valid time
+  if (seconds &gt;= 86400) {
+    return JSON.stringify({ items: [{
+      title: "Timer Must Be Under 24 Hours",
+      valid: false
+    }]})
+  }
+
+  // Calculate clock
+  const date = new Date()
+  date.setSeconds(date.getSeconds() + seconds)
+  const clock = date.toTimeString().slice(0, 5)
+
+  // Output
+  return JSON.stringify({
+    rerun: 0.2,
+    items: [{
+      title: `Timer for ${description}`,
+      subtitle: `Ring at ${clock}`,
+      arg: `timer\n${seconds}`
+    }]
+  })
+}
+
+function run(argv) {
+  // Arguments
+  const givenTimeout = argv[0]
+
+  // Any given value must start with a digit
+  if (!givenTimeout.match(/^\d/)) {
+    return sfItem({
+      title: "Timer Must Start With a Number",
+      valid: false
+    })
+  }
+
+  // Calculate timeout
+  // From Seconds
+  if (givenTimeout.match(/\d\s*s/)) {
+    const timeoutSeconds = parseInt(givenTimeout)
+    const plurality = timeoutSeconds === 1 ? "second" : "seconds"
+    return sfItem(`${timeoutSeconds} ${plurality}`, timeoutSeconds)
+  }
+
+  // From clock HH:MM:SS
+  if (givenTimeout.match(/\d:\d:\d/)) {
+    const [hours, minutes, seconds] = givenTimeout.split(":").map(t =&gt; parseInt(t))
+    const timeoutSeconds = hours * 3600 + minutes * 60 + seconds
+    const timeoutMinutes = parseInt(timeoutSeconds / 60)
+    return sfItem(`${timeoutMinutes} minutes`, timeoutSeconds)
+  }
+
+  // From clock MM:SS
+  if (givenTimeout.match(/\d:\d/)) {
+    const [minutes, seconds] = givenTimeout.split(":").map(t =&gt; parseInt(t))
+    const timeoutSeconds = minutes * 60 + seconds
+
+    return sfItem(`${timeoutSeconds} seconds`, timeoutSeconds)
+  }
+
+  // From hours or minutes
+  const timeoutMinutes = givenTimeout.match(/\d\s*h/) ?
+    parseInt(parseFloat(givenTimeout) * 60) :
+    parseInt(givenTimeout)
+
+  const timeoutSeconds = timeoutMinutes * 60
+  const plurality = timeoutMinutes === 1 ? "minute" : "minutes"
+  return sfItem(`${timeoutMinutes} ${plurality}`, timeoutSeconds)
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Set Timer</string>
+				<key>type</key>
+				<integer>7</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A9E7E9A1-C490-4E29-9952-C9C32CF1FCE1</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>timer</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>3C3FE00D-08AA-4680-931A-36966B68F7D7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>timer
+{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>F0A1F9EB-A0F6-4D38-93EF-39E92CF55846</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Usage
+
+Set a timer via the `timer` keyword followed by a number. Minutes are the default but you can specify hours or seconds.
+
+![Setting a timer for 10 minutes](images/about/timerminutes.png)
+
+![Setting a timer for 1.5 hours](images/about/timerhours.png)
+
+![Setting a timer for 34 seconds](images/about/timerseconds.png)
+
+Set an alarm via the `alarm` keyword followed by a time.
+
+![Setting an alarm with 24 hour clock](images/about/alarm24.png)
+
+![Setting an alarm with 12 hour clock](images/about/alarm12.png)
+
+Pressing &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; allows setting a name for the alarm.
+
+![Adding an alarm label](images/about/alarmlabel.png)
+
+Edit alarms and timers in the macOS Clock app.</string>
+	<key>uidata</key>
+	<dict>
+		<key>03840BBD-A292-4863-BC54-E59DEF75CE4E</key>
+		<dict>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>35</real>
+		</dict>
+		<key>18988132-48CE-4F83-825B-D9B9AE941645</key>
+		<dict>
+			<key>xpos</key>
+			<real>515</real>
+			<key>ypos</key>
+			<real>65</real>
+		</dict>
+		<key>2F7A850C-4470-443D-81DC-C32716427451</key>
+		<dict>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>3C3FE00D-08AA-4680-931A-36966B68F7D7</key>
+		<dict>
+			<key>xpos</key>
+			<real>50</real>
+			<key>ypos</key>
+			<real>515</real>
+		</dict>
+		<key>560EE8A0-2428-43BF-A27E-C22A6B4D25C7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>1015</real>
+			<key>ypos</key>
+			<real>275</real>
+		</dict>
+		<key>5C5D11C6-E020-46BE-A2FE-D6967C5736CB</key>
+		<dict>
+			<key>xpos</key>
+			<real>50</real>
+			<key>ypos</key>
+			<real>275</real>
+		</dict>
+		<key>615D0C67-43A8-454A-9426-815172FAA411</key>
+		<dict>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>65</real>
+		</dict>
+		<key>6ACBD5B4-6BFD-4A40-8999-F5178CF35606</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>935</real>
+			<key>ypos</key>
+			<real>305</real>
+		</dict>
+		<key>714B1AD8-80C5-43BD-A9AE-8AA4A3EB6A2C</key>
+		<dict>
+			<key>xpos</key>
+			<real>50</real>
+			<key>ypos</key>
+			<real>155</real>
+		</dict>
+		<key>A6C391DF-D1CC-4092-8493-18E80C380775</key>
+		<dict>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>275</real>
+		</dict>
+		<key>A9E7E9A1-C490-4E29-9952-C9C32CF1FCE1</key>
+		<dict>
+			<key>xpos</key>
+			<real>50</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
+		<key>C0DF95E8-9A8E-45B8-B67D-55482CE653BD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>770</real>
+			<key>ypos</key>
+			<real>275</real>
+		</dict>
+		<key>DA97A675-D10B-4EB3-801B-47DD9631A33A</key>
+		<dict>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>305</real>
+		</dict>
+		<key>F0A1F9EB-A0F6-4D38-93EF-39E92CF55846</key>
+		<dict>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>545</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>alarm</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Alarm Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>alarm_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>timer</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Timer Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>timer_keyword</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>2023.4</string>
+	<key>webaddress</key>
+	<string>https://github.com/vitorgalvao/shrieking-chimes-workflow/</string>
+</dict>
+</plist>
