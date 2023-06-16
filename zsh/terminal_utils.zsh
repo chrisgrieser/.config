@@ -120,12 +120,7 @@ function eject() {
 	fi
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	# if one volume, will auto-eject due to `-1`
-	selected=$(
-		echo "$volumes" |
-			fzf -0 -1 \
-				--no-info \
-				--height=30%
-	)
+	selected=$( echo "$volumes" | fzf -0 -1 --no-info --height=30%)
 	[[ -z "$selected" ]] && return 0 # fzf aborted
 	diskutil eject "$selected"
 }
@@ -142,6 +137,12 @@ function lr() {
 	num=${1-"1"} # default= 1 -> just last command
 	last_command=$(history | tail -n"$num" | cut -c 8-)
 	echo -n "$(eval "$last_command")" | pbcopy
+	echo "Copied."
+}
+
+# copies [v]iewport
+function lv() {
+	wezterm cli get-text | pbcopy
 	echo "Copied."
 }
 

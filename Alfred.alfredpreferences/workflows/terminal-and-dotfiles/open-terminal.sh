@@ -14,13 +14,18 @@ elif [[ "$FRONT_APP" =~ "neovide" ]]; then
 	win_title=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
 	dir_to_open=$(dirname "$win_title")
 else
-	dir_to_open="$WD" # defined in .zshenv
+	# shellcheck disable=2016
+	dir_to_open='$WD' # defined in .zshenv
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# INFO Appname is `WezTerm`, processname is `wezterm-gui`
+# INFO 
+# - Appname is `WezTerm`, processname is `wezterm-gui`
+# - not spawning via `wezterm start --cwd`, since that makes wezterm a
+#   child-process of this Alfred script, blocking the next run of this script
+
 open -a "WezTerm" # launch/activate
 while ! pgrep -xq "wezterm-gui"; do sleep 0.1; done
 sleep 0.1
-echo "cd '$dir_to_open'" | wezterm cli send-text --no-paste
+echo "cd \"$dir_to_open\"" | wezterm cli send-text --no-paste
