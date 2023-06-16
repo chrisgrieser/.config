@@ -68,7 +68,6 @@ local keybindings = {
 	{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
 	{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
 	{ key = "Enter", mods = "CTRL", action = act.ActivateTabRelative(1) },
-	{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
 	{ key = "v", mods = "CMD", action = actFun(autoQuotePastedUrls) },
 
 	-- using the mapping from the terminal_keybindings.zsh
@@ -210,7 +209,7 @@ local config = {
 
 	-- Tabs
 	enable_tab_bar = true,
-	tab_max_width = 40,
+	show_tab_index_in_tab_bar = true,
 	use_fancy_tab_bar = false, -- `false` makes the tabs bigger
 	show_tabs_in_tab_bar = true, -- can show a status line in the tab bar
 	show_new_tab_button_in_tab_bar = false,
