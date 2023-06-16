@@ -19,7 +19,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>513485E1-D0BB-4CA4-8442-69C6609CB548</key>
+		<key>98AFD269-7214-48D9-8142-76672E7A044E</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -46,17 +46,33 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>availableviaurlhandler</key>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
 				<false/>
-				<key>triggerid</key>
-				<string>terminal</string>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>17</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>T</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>513485E1-D0BB-4CA4-8442-69C6609CB548</string>
+			<string>98AFD269-7214-48D9-8142-76672E7A044E</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -160,12 +176,10 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>180</real>
 		</dict>
-		<key>513485E1-D0BB-4CA4-8442-69C6609CB548</key>
+		<key>98AFD269-7214-48D9-8142-76672E7A044E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>leader-t via Karabiner</string>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>

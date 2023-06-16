@@ -30,14 +30,6 @@ anchors:
 rules:
   - manipulators:
       - type: basic
-        from:
-          simultaneous: 
-            - key_code: f
-            - key_code: j
-        to:
-          - *activate-leader
-          - *set-notice
-      - type: basic
         from: { key_code: left_control }
         to:
           - key_code: left_control
@@ -124,14 +116,6 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: osascript -e 'tell application "Neovide" to activate'
-          - *deactivate-leader
-          - *remove-notice
-      # [t]erminal
-      - type: basic
-        from: { key_code: t }
-        conditions: [*leader-active]
-        to:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "terminal" in workflow "de.chris-grieser.terminal-dotfiles"'
           - *deactivate-leader
           - *remove-notice
       # [S]lack
