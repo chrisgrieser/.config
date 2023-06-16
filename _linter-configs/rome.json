@@ -28,10 +28,6 @@
 		"enabled": true
 	},
 	"linter": {
-		"ignore": [
-			"*globals.d.ts",
-			"󰙨 Lab.js"
-		],
 		"rules": {
 			"all": true,
 			"nursery": {

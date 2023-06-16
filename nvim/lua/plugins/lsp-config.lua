@@ -59,8 +59,8 @@ lspSettings.lua_ls = {
 lspSettings.cssls = {
 	css = {
 		lint = {
-			vendorPrefix = "ignore",
 			propertyIgnoredDueToDisplay = "error",
+			vendorPrefix = "ignore",
 			universalSelector = "ignore",
 			float = "ignore",
 			boxModel = "ignore",
@@ -114,7 +114,7 @@ lspSettings.jsonls = {
 -- https://github.com/redhat-developer/yaml-language-server#language-server-settings
 lspSettings.yamlls = {
 	yaml = {
-		keyOrdering = false, -- FIX mapKeyOrder warning
+		keyOrdering = true, -- FIX mapKeyOrder warning
 	},
 }
 
@@ -131,8 +131,8 @@ vim.api.nvim_create_autocmd("FileType", {
 -- LTEX
 -- https://valentjn.github.io/ltex/settings.html
 
--- deactivate bibtex files
-lspFiletypes.ltex = { "gitcommit", "markdown", "text" }
+-- deactivate for bibtex and text files
+lspFiletypes.ltex = { "gitcommit", "markdown" }
 
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work
