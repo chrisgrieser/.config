@@ -1,7 +1,6 @@
 // https://code.visualstudio.com/docs/nodejs/working-with-javascript#_global-variables-and-type-checking
 // https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html
 //──────────────────────────────────────────────────────────────────────────────
-//──────────────────────────────────────────────────────────────────────────────
 
 declare const ObjC: {
 	import: (package: "stdlib" | "Foundation") => void;

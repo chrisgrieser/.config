@@ -95,7 +95,7 @@ end, { desc = "󰘖 Goto next fold" })
 ---@diagnostic disable: param-type-mismatch
 keymap("n", "h", function()
 	-- `virtcol` accounts for tab indentation
-	local onIndentOrFirstNonBlank = fn.virtcol(".") < fn.indent(".")
+	local onIndentOrFirstNonBlank = fn.virtcol(".") <= fn.indent(".") + 1
 	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
 
 	if onIndentOrFirstNonBlank and shouldCloseFold then

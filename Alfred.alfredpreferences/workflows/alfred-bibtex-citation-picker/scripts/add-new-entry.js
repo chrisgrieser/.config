@@ -77,7 +77,7 @@ function ensureUniqueCitekey(citekey, libraryPath) {
  */
 function generateCitekey(bibtexPropertyArr) {
 	let year = parseBibtexProperty(bibtexPropertyArr, "year");
-	if (!year) year = "ND";
+	if (!year) year = "N.D.";
 
 	let authEds;
 	const authors = parseBibtexProperty(bibtexPropertyArr, "author");
@@ -105,27 +105,8 @@ function generateCitekey(bibtexPropertyArr) {
 	if (lastNameArr.length < 3) authorStr = lastNameArr.join("");
 	else authorStr = lastNameArr[0] + "EtAl";
 
-	// strip diacritics from authorStr
-	authorStr = authorStr
-		.replaceAll("ü", "ue")
-		.replaceAll("Ü", "Ue")
-		.replaceAll("ä", "ae")
-		.replaceAll("Ä", "Ae")
-		.replaceAll("ö", "oe")
-		.replaceAll("Ö", "Oe")
-		.replace(/á|â|à|ã/g, "a")
-		.replace(/Á|Â|À|Ã/g, "A")
-		.replace(/ó|ô|õ|ò|ø/g, "o")
-		.replace(/Ó|Ô|Õ|Ò|Ø/g, "O")
-		.replace(/ú|û|ù/g, "u")
-		.replace(/Ú|Û|Ù/g, "U")
-		.replace(/é|ê|è|ë/g, "e")
-		.replace(/É|Ê|È|Ë/g, "E")
-		.replace(/í|î|ì|ï/g, "i")
-		.replace(/Í|Î|Ì|Ï/g, "I")
-		.replace(/ç|ć|č/g, "c")
-		.replace(/Ç|Ć|Č/g, "C")
-		.replace(/ñ/g, "n");
+	// strip diacritics from authorStr https://stackoverflow.com/a/37511463
+	authorStr = authorStr.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 
 	const citekey = authorStr + year;
 	return citekey;
