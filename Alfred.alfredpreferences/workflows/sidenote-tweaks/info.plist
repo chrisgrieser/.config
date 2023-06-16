@@ -637,6 +637,8 @@
 				<key>script</key>
 				<string>export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 sleep 0.5
+sketchybar --trigger update-sidenotes-count
+sleep 2
 sketchybar --trigger update-sidenotes-count</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -1166,6 +1168,21 @@ sketchybar --trigger update-sidenotes-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>97F81C60-323D-4EA2-9E3C-E737806D428E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -1180,21 +1197,6 @@ sketchybar --trigger update-sidenotes-count</string>
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>3E1859F5-1C06-4E8A-9414-80AC822B0D22</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>97F81C60-323D-4EA2-9E3C-E737806D428E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
