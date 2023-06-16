@@ -1,38 +1,48 @@
 #!/usr/bin/env osascript -l JavaScript
 
+/** @file
+	*/
+
+/**
+ * @typedef
+	* {import('/Users/chrisgrieser/.config/_linter-configs/jxa-globals.d.ts').Application} Application
+ */
+
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
+let rerunSecs = 5;
 const volumes = app
 	.doShellScript("df -h")
-// .doShellScript(`df -h | grep "${vol}" | tr -s " " | cut -d " " -f 2-5 | tr "i." "b," `)
 	.split("\r")
-	.filter((/** @type {string} */ line) => line.startsWith("/Volumes/"))
+	.filter((/** @type {string} */ line) => line.includes(" /Volumes/"))
 	.map((/** @type {string} */ vol) => {
-		const info = vol.split(/\s+/)
+		const info = vol.split(/\s+/).map((value) => {
+			return value.replaceAll("unavailable", "…").replaceAll("Gi", "Gb");
+		});
+
 		const total = info[1];
 		const used = info[2];
 		const available = info[3];
 		const share = info[4];
+		const path = info.slice(8).join(" ");
+		const name = path.replace("/Volumes/", "");
 
-
-			// .replaceAll("unavailable", "…") // large volume still loading
-		const spaceInfo = `Total: ${space[0]}   Available: ${space[2]}   Used: ${space[1]} (${space[3]})`;
+		const spaceInfo = `Total: ${total}   Available: ${available}   Used: ${used} (${share})`;
 		return {
-			title: "📂 " + vol,
+			title: name,
 			subtitle: spaceInfo,
-			arg: "/Volumes/" + vol,
+			arg: path,
 		};
 	});
-let rerunSecs = 5;
 
 if (volumes.length === 0) {
 	volumes.push({
 		title: "No mounted volume recognized.",
-		subtitle: "Press [Esc] to abort.",
-		arg: "no volume",
+		subtitle: "⎋ to abort",
+		valid: false,
 	});
 	rerunSecs = 1; // quicker reruns when no volume found
 }

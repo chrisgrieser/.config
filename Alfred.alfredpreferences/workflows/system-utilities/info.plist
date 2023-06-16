@@ -150,7 +150,7 @@
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: Eject</string>
+				<string>⌃: Eject ⏏️</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
