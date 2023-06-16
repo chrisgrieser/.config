@@ -6,6 +6,32 @@
 	<string>de.chris-grieser.atop</string>
 	<key>connections</key>
 	<dict>
+		<key>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A09D544F-ECA6-4D74-B8B0-AC69E572977B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CBFBCA76-39CE-4D22-A556-EDF1A996849C</key>
 		<array>
 			<dict>
@@ -35,6 +61,19 @@
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⌃: killall with same name</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F1539426-E456-4953-8215-D809DF4B120B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -148,6 +187,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -173,6 +233,15 @@
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>2759BEDD-4BDD-45E5-8864-D2705A801FC5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>600</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
 		<key>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</key>
 		<dict>
 			<key>note</key>
