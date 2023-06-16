@@ -10,28 +10,28 @@ const notToDisplay = [
 	"Recovery"
 ];
 
-const singleVolumes = app.doShellScript("ls /Volumes")
-	.split("\r")
-	.filter(v => !notToDisplay.includes(v));
+//──────────────────────────────────────────────────────────────────────────────
 
-const volumeArray = [];
-if (singleVolumes.length) {
-	singleVolumes.forEach(element => {
-		const diskSpace = app.doShellScript('df -h | grep "' + element + '" | tr -s " " | cut -d " " -f 2-5 | tr "i." "b," ').split(" ");
+const volumes = app.doShellScript("ls /Volumes/")
+	.split("\r")
+	.map((/** @type {string} */ vol) => {
+		if (!notToDisplay.includes(vol)) return {};
+		const diskSpace = app.doShellScript(`df -h | grep "${vol}" | tr -s " " | cut -d " " -f 2-5 | tr "i." "b," `).split(" ");
 		const spaceInfo =
 		"Total: " + diskSpace[0]
 		+ "   Available: " + diskSpace[2]
 		+ "   Used: " + diskSpace[1]
 		+ " (" + diskSpace[3] + ")";
 
-		volumeArray.push ({
-			"title": "📂 " + element,
+		return{
+			"title": "📂 " + vol,
 			"subtitle": spaceInfo,
-			"arg": "/Volumes/"+ element
-		});
+			"arg": "/Volumes/"+ vol
+		};
 	});
-} else {
-	volumeArray.push ({
+
+if (volumes.length === 0) {
+	volumes.push ({
 		"title": "No mounted volume recognized.",
 		"subtitle": "Press [Esc] to abort.",
 		"arg": "no volume"
@@ -39,4 +39,7 @@ if (singleVolumes.length) {
 }
 
 
-JSON.stringify({ "items": volumeArray });
+JSON.stringify({
+	"rerun":
+	"items": volumeArray,
+});

@@ -97,7 +97,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>kill "$*"</string>
+				<string>kill "$*" || echo "Could not kill $*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -120,7 +120,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>kill -9 "$*"</string>
+				<string>kill -9 "$*" || echo "Could not kill -9 $*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -213,7 +213,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>killall "$*"</string>
+				<string>killall "$*" || echo "Could not killall $*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

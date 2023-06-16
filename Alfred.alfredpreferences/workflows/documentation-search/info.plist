@@ -272,60 +272,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>98AAE9F9-5186-4AFC-9B57-4FAE561C05AE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F4EA4D6A-5EC4-4ECE-9BF6-39E6A49C321E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>9B4ED8D4-DA04-4180-8724-EF719E477AF5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C16F4190-0845-4708-BFE1-9EA431FA968C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C0B9F750-4C81-4503-AC88-8A916C8138E6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0354600E-3522-4210-A260-3E335E8242FF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C16F4190-0845-4708-BFE1-9EA431FA968C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0354600E-3522-4210-A260-3E335E8242FF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>0914C46E-4A35-4C65-8501-F63F3947A40E</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<array>
 			<dict>
@@ -477,19 +423,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>F4EA4D6A-5EC4-4ECE-9BF6-39E6A49C321E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9B4ED8D4-DA04-4180-8724-EF719E477AF5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>FC4A9CCB-0458-42DE-9CFE-4110B7E0CADF</key>
 		<array>
 			<dict>
@@ -622,146 +555,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>open -a 'Script Editor' "${1}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F4EA4D6A-5EC4-4ECE-9BF6-39E6A49C321E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>readonly cache="${alfred_workflow_cache}/cache.json"
-
-[[ -n "$(find "${cache}" -mtime +15)" ]] &amp;&amp; echo -n 'REBUILD_CACHE'</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>9B4ED8D4-DA04-4180-8724-EF719E477AF5</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>as</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Searching for AppleScript dictionaries…</string>
-				<key>script</key>
-				<string>readonly cache="${alfred_workflow_cache}/cache.json"
-
-# If cache does not exist, build it now
-if [[ ! -f "${cache}" ]]; then
-  osascript -e "tell application id \"com.runningwithcrayons.Alfred\" to run trigger \"rebuild_cache\" in workflow \"${alfred_workflow_bundleid}\""
-
-  until [[ -f "${cache}" ]]; do
-    sleep 0.2
-  done
-fi
-
-cat "${cache}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>AppleScript Dictionaries</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>98AAE9F9-5186-4AFC-9B57-4FAE561C05AE</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>REBUILD_CACHE</string>
-						<key>outputlabel</key>
-						<string>Rebuild cache</string>
-						<key>uid</key>
-						<string>0914C46E-4A35-4C65-8501-F63F3947A40E</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>Keep current cache</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>C16F4190-0845-4708-BFE1-9EA431FA968C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -807,65 +600,6 @@ cat "${cache}"</string>
 			<string>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>rebuild_cache</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>C0B9F750-4C81-4503-AC88-8A916C8138E6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>readonly cache="${alfred_workflow_cache}/cache.json"
-mkdir -p "$(dirname "${cache}")"
-
-IFS=$'\n' read -d '' -rA dict_array &lt; &lt;(find '/Applications' "${HOME}/Applications" '/System/Applications' '/System/Cryptexes/App/System/Applications' '/System/Library/CoreServices/' '/System/Library/ScriptingAdditions' '/System/Library/ScriptingDefinitions' '/System/Library/PrivateFrameworks' -name '*.sdef' 2&gt; /dev/null | grep 'Contents/Resources')
-
-osascript -l JavaScript -e '
-  function run(argv) {
-    return JSON.stringify({
-      "items": argv.map(dict =&gt; {
-        const app_path = $(dict).stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.js
-
-        return {
-          "uid": dict,
-          "type": "file",
-          "title": $(app_path).lastPathComponent.stringByDeletingPathExtension.js,
-          "subtitle": dict,
-          "icon": { "path": app_path, "type": "fileicon" },
-          "arg": dict
-        }})
-      })
-    }
-' "${dict_array[@]}" &gt; "${cache}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0354600E-3522-4210-A260-3E335E8242FF</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1895,15 +1629,6 @@ AppleScript Dictionary by the Alfred Team
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>0354600E-3522-4210-A260-3E335E8242FF</key>
-		<dict>
-			<key>note</key>
-			<string>Rebuild cache</string>
-			<key>xpos</key>
-			<real>1050</real>
-			<key>ypos</key>
-			<real>150</real>
-		</dict>
 		<key>03C8A38F-8577-483D-8E18-B31886F2113F</key>
 		<dict>
 			<key>colorindex</key>
@@ -2040,24 +1765,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>825</real>
 		</dict>
-		<key>98AAE9F9-5186-4AFC-9B57-4FAE561C05AE</key>
-		<dict>
-			<key>note</key>
-			<string>List AppleScript dictionaries</string>
-			<key>xpos</key>
-			<real>420</real>
-			<key>ypos</key>
-			<real>20</real>
-		</dict>
-		<key>9B4ED8D4-DA04-4180-8724-EF719E477AF5</key>
-		<dict>
-			<key>note</key>
-			<string>Check if cache is old</string>
-			<key>xpos</key>
-			<real>795</real>
-			<key>ypos</key>
-			<real>20</real>
-		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
 			<key>colorindex</key>
@@ -2066,20 +1773,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>620</real>
 			<key>ypos</key>
 			<real>585</real>
-		</dict>
-		<key>C0B9F750-4C81-4503-AC88-8A916C8138E6</key>
-		<dict>
-			<key>xpos</key>
-			<real>795</real>
-			<key>ypos</key>
-			<real>150</real>
-		</dict>
-		<key>C16F4190-0845-4708-BFE1-9EA431FA968C</key>
-		<dict>
-			<key>xpos</key>
-			<real>940</real>
-			<key>ypos</key>
-			<real>40</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
@@ -2153,15 +1846,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>F4EA4D6A-5EC4-4ECE-9BF6-39E6A49C321E</key>
-		<dict>
-			<key>note</key>
-			<string>Open dictionary</string>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>20</real>
 		</dict>
 		<key>FC4A9CCB-0458-42DE-9CFE-4110B7E0CADF</key>
 		<dict>
