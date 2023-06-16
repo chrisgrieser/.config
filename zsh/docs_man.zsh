@@ -12,7 +12,7 @@ function h() {
 	query=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
 	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
 		curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
-		wezterm cli spawn -- less "/tmp/$query" | xargs -I {} wezterm cli set-tab-title --pane-id={} "cheat – $command"
+		wezterm cli spawn -- less "/tmp/$query" | xargs -I {} wezterm cli set-tab-title --pane-id={} "cheat – $command "
 	else
 		curl -s "https://cht.sh/$query?style=$style" | less
 	fi
@@ -25,9 +25,9 @@ function man() {
 	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
 		# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
 		if [[ -n "$search_term" ]]; then
-			wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$search_term" "$command" | xargs -I {} wezterm cli set-tab-title --pane-id={} "man: $command"
+			wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$search_term" "$command" | xargs -I {} wezterm cli set-tab-title --pane-id={} "man: $command "
 		else
-			wezterm cli spawn -- man "$command" | xargs -I {} wezterm cli set-tab-title --pane-id={} "man – $command"
+			wezterm cli spawn -- man "$command" | xargs -I {} wezterm cli set-tab-title --pane-id={} "man – $command "
 		fi
 	else
 		if [[ -n "$search_term" ]]; then
