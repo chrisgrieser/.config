@@ -2,7 +2,7 @@
 # aggregates stackoverflow, tl;dr and many other help pages
 # https://cht.sh/:help
 function h() {
-	local style query cheat_info
+	local style query
 
 	# curl cht.sh/:styles-demo
 	local lightstyle="trac"
@@ -10,24 +10,31 @@ function h() {
 	defaults read -g AppleInterfaceStyle &>/dev/null && style="$darkstyle" || style="$lightstyle"
 
 	query=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
-	cheat_info=$(curl -s "https://cht.sh/$query?style=$style")
-	cheat_code_only=$(curl -s "https://cht.sh/$query?QT")
-	echo "$cheat_code_only" | pbcopy
-	echo "$cheat_info" | less
+	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+		curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
+		wezterm cli spawn -- less "/tmp/$query" | xargs -I {} wezterm cli set-tab-title --pane-id={} "cheat – $command"
+	else
+		curl -s "https://cht.sh/$query?style=$style" | less
+	fi
 }
 
 # GET A BETTER MAN
-# if in wezterm, opens man in a new tab
-# $1: command, $2: search term
 function man() {
-	if [[ "$TERM_PROGRAM" != "WezTerm" && -n "$2" ]]; then
-		command man -P "/usr/bin/less -is --pattern=$2" "$1"
-	elif [[ "$TERM_PROGRAM" != "WezTerm" ]]; then
-		command man "$1"
-	elif [[ -n "$2" ]]; then
-		wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$2" "$1" &>/dev/null
+	local command="$1"
+	local search_term="$2"
+	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+		# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
+		if [[ -n "$search_term" ]]; then
+			wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$search_term" "$command" | xargs -I {} wezterm cli set-tab-title --pane-id={} "man: $command"
+		else
+			wezterm cli spawn -- man "$command" | xargs -I {} wezterm cli set-tab-title --pane-id={} "man – $command"
+		fi
 	else
-		wezterm cli spawn -- man "$1" &>/dev/null
+		if [[ -n "$search_term" ]]; then
+			command man -P "/usr/bin/less -is --pattern=$search_term" "$command"
+		else
+			command man "$command"
+		fi
 	fi
 }
 
