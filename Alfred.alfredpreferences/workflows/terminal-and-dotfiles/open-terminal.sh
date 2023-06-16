@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
-# shellcheck disable=SC2154,SC2009
-export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-#───────────────────────────────────────────────────────────────────────────────
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 FRONT_APP=$(osascript -e 'tell application "System Events" to set frontApp to (name of first process where it is frontmost)')
 if [[ "$FRONT_APP" =~ "Finder" ]]; then
@@ -19,4 +17,10 @@ else
 	dir_to_open="$WD" # defined in .zshenv
 fi
 
-nohup wezterm start --cwd="$dir_to_open" &
+#───────────────────────────────────────────────────────────────────────────────
+
+# INFO Appname is `WezTerm`, processname is `wezterm-gui`
+open -a "WezTerm" # launch/activate
+while ! pgrep -xq "wezterm-gui"; do sleep 0.1; done
+sleep 0.1
+echo "cd '$dir_to_open'" | wezterm cli send-text --no-paste

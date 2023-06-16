@@ -6,19 +6,6 @@
 	<string>de.chris-grieser.terminal-dotfiles</string>
 	<key>connections</key>
 	<dict>
-		<key>222B531F-8CC2-406A-BEFD-1DB401A7880C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5D832920-C82B-4DD3-8853-68ABE3D3552A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<array>
 			<dict>
@@ -36,7 +23,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>222B531F-8CC2-406A-BEFD-1DB401A7880C</string>
+				<string>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -45,23 +32,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>5D832920-C82B-4DD3-8853-68ABE3D3552A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>952D345F-E49C-467E-8AA3-A39FDCEF2C8A</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
-		<array/>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -73,52 +43,6 @@
 	<string>Terminal &amp; Dotfiles</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>check-if-terminal-runs.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>222B531F-8CC2-406A-BEFD-1DB401A7880C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>launch-terminal.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -137,34 +61,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>not-running</string>
-						<key>outputlabel</key>
-						<string>start</string>
-						<key>uid</key>
-						<string>952D345F-E49C-467E-8AA3-A39FDCEF2C8A</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<true/>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-terminal.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>5D832920-C82B-4DD3-8853-68ABE3D3552A</string>
+			<string>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -236,17 +151,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>222B531F-8CC2-406A-BEFD-1DB401A7880C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>check if terminal is already running</string>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>20</real>
-		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
 			<key>note</key>
@@ -254,7 +158,7 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>180</real>
 		</dict>
 		<key>513485E1-D0BB-4CA4-8442-69C6609CB548</key>
 		<dict>
@@ -267,30 +171,21 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>5D832920-C82B-4DD3-8853-68ABE3D3552A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>340</real>
-			<key>ypos</key>
-			<real>50</real>
-		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
 			<key>xpos</key>
-			<real>185</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>180</real>
 		</dict>
-		<key>A8D9189D-9E8C-45D2-987F-D685FFE2CD44</key>
+		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>open terminal with config</string>
+			<string>open terminal at neovide / Finder location</string>
 			<key>xpos</key>
-			<real>415</real>
+			<real>190</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
