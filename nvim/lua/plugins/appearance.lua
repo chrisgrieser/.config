@@ -16,22 +16,13 @@ return {
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-	-- disabled, pending https://github.com/HampusHauffman/block.nvim/issues/5
-	-- { -- block highlights
-	-- 	"HampusHauffman/block.nvim",
-	-- 	opts = {
-	-- 		percent = 0.97,
-	-- 		depth = 6,
-	-- 		automatic = true,
-	-- 	},
-	-- },
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",
 		opts = {
 			use_treesitter = true,
-			show_current_context = true, -- = active indent
-			context_highlight_list = { "Comment" }, -- give active indent different color
+			show_current_context = true, -- color active indent differently
+			context_highlight_list = { "Comment" }, -- highlight group
 			filetype_exclude = { "undotree", "help", "man", "lspinfo", "" },
 		},
 	},
