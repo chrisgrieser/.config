@@ -17,5 +17,10 @@ PATH_IN_REPO=${file:$ROOT_LEN}
 PATH_IN_REPO=$(osascript -l JavaScript -e "encodeURIComponent('$PATH_IN_REPO')")
 
 URL="$REMOTE_URL/blob/$BRANCH/$PATH_IN_REPO"
-echo "$URL" | pbcopy
-open "$URL"
+
+# shellcheck disable=2154
+if [[ "$mode" == "open" ]]; then
+	open "$URL"
+else
+	echo "$URL" | pbcopy
+fi

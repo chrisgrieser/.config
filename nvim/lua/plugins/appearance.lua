@@ -33,7 +33,7 @@ return {
 			override = {
 				-- filetypes
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
-				bib = { icon = "", color = "#85bb33", name = "BibTeX" },
+				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
 				http = { icon = "󰴚", name = "HTTP request" },
 				-- plugins
 				lazy = { icon = "", name = "Lazy" },

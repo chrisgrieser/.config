@@ -1,13 +1,6 @@
 // https://www.alfredapp.com/help/workflows/inputs/script-filter/json/
 //──────────────────────────────────────────────────────────────────────────────
 
-declare class AlfredModifier {
-	title: string;
-	subtitle: string;
-	arg: string|string[];
-	valid: boolean;
-}
-
 declare class AlfredItem {
 	title: string;
 	action?: string|string[]|Object;
@@ -35,6 +28,14 @@ declare class AlfredItem {
 		copy?: string;
 		largetype?: string;
 	};
+}
+
+declare class AlfredModifier {
+	title?: string;
+	subtitle?: string;
+	arg?: string|string[];
+	valid?: boolean;
+	variables?: Object;
 }
 
 declare class AlfredScriptFilter {

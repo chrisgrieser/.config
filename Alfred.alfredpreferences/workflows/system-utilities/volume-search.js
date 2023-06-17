@@ -32,7 +32,6 @@ const volumes = app
 			title: name,
 			subtitle: spaceInfo,
 			arg: path,
-			valid: true,
 		};
 	});
 

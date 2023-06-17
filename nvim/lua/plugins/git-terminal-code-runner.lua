@@ -3,6 +3,13 @@ return {
 		"metakirby5/codi.vim",
 		cmd = { "CodiNew", "Codi", "CodiExpand" },
 	},
+	{
+		"akinsho/git-conflict.nvim",
+		version = "*", -- recommended by dev
+		opts = {
+			p
+		},
+	},
 	{ -- HTTP requester (e.g., test APIs)
 		"rest-nvim/rest.nvim",
 		ft = "http",
