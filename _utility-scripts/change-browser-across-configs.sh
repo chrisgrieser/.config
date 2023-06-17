@@ -19,9 +19,12 @@ open "chrome-extension://epmaefhielclhlnmjofcdapbeepkmggh/options.html"
 open "chrome-extension://bijpdibkloghppkbmhcklkogpjaenfkg/html/options.html"
 open "chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html"
 
-# - Dark Reader
-# - Dock
-# - PWAs
+# PWAs
+open "https://www.netflix.com/browse"
+open "https://www.crunchyroll.com/de"
+open "https://www.tagesschau.de/multimedia/sendung/tagesschau_20_uhr"
+open "https://www.youtube.com/"
+open "https://www.twitch.tv/"
 
 #───────────────────────────────────────────────────────────────────────────────
 

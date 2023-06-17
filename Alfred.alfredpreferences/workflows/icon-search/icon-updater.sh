@@ -6,7 +6,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 CUSTOM_ICON_FOLDER="$DOTFILE_FOLDER/_custom-app-icons"
 
 # INFO "Vivaldi Apps" is internally still named "Chrome Apps"
-[[ "$BROWSER_APP" == "Vivaldi" ]] && app="Chrome" || app="Brave"
+[[ "$BROWSER_APP" == "Vivaldi" ]] && app="Chrome" || app="Brave Browser"
 PWA_FOLDER="$HOME/Applications/$app Apps.localized"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -99,13 +99,13 @@ case $APP in
 	cd "$PWA_FOLDER" || exit 1
 	iconsur set Twitch.app &>/dev/null
 	;;
+"Tagesschau")
+	cd "$PWA_FOLDER" || exit 1
+	iconsur set Tagesschau.app &>/dev/null
+	;;
 "CrunchyRoll")
 	cd "$PWA_FOLDER" || exit 1
 	iconsur set CrunchyRoll.app &>/dev/null
-	;;
-"reddxxx")
-	cd "$PWA_FOLDER" || exit 1
-	iconsur set --local reddxxx.app &>/dev/null
 	;;
 "PWAs")
 	cd "$PWA_FOLDER" || exit 1
@@ -114,6 +114,7 @@ case $APP in
 	iconsur set Twitch.app &>/dev/null
 	iconsur set CrunchyRoll.app &>/dev/null
 	cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
+	touch "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
 	;;
 *)
 	NONE_FOUND=1
