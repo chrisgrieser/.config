@@ -49,18 +49,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5856215F-FB97-4611-BF48-0175300E6AB2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>92FBBE16-B8F4-44FF-BF20-3C5A24032D81</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>E1952981-5610-42C6-967C-9728E176B587</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -73,7 +61,19 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>1EA57E38-BF7C-4655-8934-79F1FE5152B0</string>
+				<string>71C0B192-0A89-41AF-BC76-029269AB4DCB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>68CDCF97-F1F0-447D-9B01-8DDDF01FE0C3</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -86,21 +86,21 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2A299055-454F-491C-9538-B40EEB9C1ED4</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open first URL (+ delete if note only has URL)</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>CEBC5466-4576-4DA5-98A4-EF772D8A7198</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⌃: Delete Note</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>2A299055-454F-491C-9538-B40EEB9C1ED4</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open first URL (+ delete if note only has URL)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -125,23 +125,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1EA57E38-BF7C-4655-8934-79F1FE5152B0</key>
+		<key>18552FF2-4A94-4CFA-9B07-8BE1450328F6</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>71C0B192-0A89-41AF-BC76-029269AB4DCB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>92FBBE16-B8F4-44FF-BF20-3C5A24032D81</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>F19C4506-3DAA-49C0-BC94-8BF2DB1718E5</string>
+				<string>2A299055-454F-491C-9538-B40EEB9C1ED4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -168,19 +156,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>97F81C60-323D-4EA2-9E3C-E737806D428E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>49119D20-B54E-4316-AA15-2C31C6C35169</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2A299055-454F-491C-9538-B40EEB9C1ED4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -722,6 +697,26 @@ sketchybar --trigger update-sidenotes-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>delete</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>note_id</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>CEBC5466-4576-4DA5-98A4-EF772D8A7198</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -773,41 +768,6 @@ sketchybar --trigger update-sidenotes-count</string>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>2A299055-454F-491C-9538-B40EEB9C1ED4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>delete</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>note_id</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>CEBC5466-4576-4DA5-98A4-EF772D8A7198</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>openurl+close</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>49119D20-B54E-4316-AA15-2C31C6C35169</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -956,31 +916,12 @@ sketchybar --trigger update-sidenotes-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>openurl+close</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>5856215F-FB97-4611-BF48-0175300E6AB2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>1</integer>
+				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>openurl close</string>
+				<string>current</string>
 				<key>focusedappvariable</key>
 				<true/>
 				<key>focusedappvariablename</key>
@@ -1005,55 +946,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>A0D4A0E0-54A3-4239-B00B-59020FEE6F23</string>
+			<string>18552FF2-4A94-4CFA-9B07-8BE1450328F6</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:focusedapp}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>com.apptorium.SideNotes-paddle</string>
-						<key>outputlabel</key>
-						<string>Sidenotes</string>
-						<key>uid</key>
-						<string>92FBBE16-B8F4-44FF-BF20-3C5A24032D81</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:focusedapp}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>com.vivaldi.Vivaldi</string>
-						<key>outputlabel</key>
-						<string>Vivaldi</string>
-						<key>uid</key>
-						<string>02A8138C-B11B-4A71-BBC5-422F5C43A8D0</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>167E1EEB-D60A-4551-94EB-F53DC9BE9725</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1077,6 +972,41 @@ sketchybar --trigger update-sidenotes-count</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>E1952981-5610-42C6-967C-9728E176B587</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>1</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>S</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apptorium.SideNotes-paddle</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>A0D4A0E0-54A3-4239-B00B-59020FEE6F23</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1108,49 +1038,63 @@ sketchybar --trigger update-sidenotes-count</string>
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string></string>
+						<string>{var:focusedapp}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string></string>
+						<string>com.vivaldi.Vivaldi</string>
 						<key>outputlabel</key>
-						<string>no</string>
+						<string>Vivaldi</string>
 						<key>uid</key>
-						<string>92FBBE16-B8F4-44FF-BF20-3C5A24032D81</string>
+						<string>02A8138C-B11B-4A71-BBC5-422F5C43A8D0</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>.</string>
+						<key>outputlabel</key>
+						<string>other: sel</string>
+						<key>uid</key>
+						<string>68CDCF97-F1F0-447D-9B01-8DDDF01FE0C3</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>yes</string>
+				<string>other: no sel</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>1EA57E38-BF7C-4655-8934-79F1FE5152B0</string>
+			<string>167E1EEB-D60A-4551-94EB-F53DC9BE9725</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
+				<key>acceptsfiles</key>
 				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Sidenote created</string>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Save Text in SideNotes</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</string>
+			<string>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1180,21 +1124,21 @@ sketchybar --trigger update-sidenotes-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
 				<true/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Save Text in SideNotes</string>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Sidenote created</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</string>
+			<string>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1243,9 +1187,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>375</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>665</real>
 		</dict>
 		<key>0D892222-53BF-48BA-BE59-AFBF81353E3B</key>
 		<dict>
@@ -1263,18 +1207,18 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>705</real>
+			<real>700</real>
 			<key>ypos</key>
-			<real>1325</real>
+			<real>1275</real>
 		</dict>
 		<key>167E1EEB-D60A-4551-94EB-F53DC9BE9725</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>1065</real>
+			<real>1080</real>
 		</dict>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<dict>
@@ -1287,16 +1231,16 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>ypos</key>
 			<real>730</real>
 		</dict>
-		<key>1EA57E38-BF7C-4655-8934-79F1FE5152B0</key>
+		<key>18552FF2-4A94-4CFA-9B07-8BE1450328F6</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>10</integer>
 			<key>note</key>
-			<string>selection</string>
+			<string>separate hotkey, since retrieving selection triggers unnecessary error sound</string>
 			<key>xpos</key>
-			<real>341</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1300</real>
+			<real>900</real>
 		</dict>
 		<key>2A299055-454F-491C-9538-B40EEB9C1ED4</key>
 		<dict>
@@ -1305,9 +1249,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>pass "openurl close"</string>
 			<key>xpos</key>
-			<real>400</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>530</real>
 		</dict>
 		<key>2FE4C0FD-B052-4444-9957-22B0EBCAED50</key>
 		<dict>
@@ -1316,9 +1260,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>open sidenote</string>
 			<key>xpos</key>
-			<real>520</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>780</real>
 		</dict>
 		<key>3E1859F5-1C06-4E8A-9414-80AC822B0D22</key>
 		<dict>
@@ -1327,25 +1271,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>1620</real>
-		</dict>
-		<key>49119D20-B54E-4316-AA15-2C31C6C35169</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>105</real>
-			<key>ypos</key>
-			<real>570</real>
-		</dict>
-		<key>5856215F-FB97-4611-BF48-0175300E6AB2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>295</real>
-			<key>ypos</key>
-			<real>985</real>
+			<real>1385</real>
 		</dict>
 		<key>660ACE51-61E1-4231-AB1E-78745ADC2616</key>
 		<dict>
@@ -1361,9 +1287,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>585</real>
+			<real>365</real>
 			<key>ypos</key>
-			<real>1110</real>
+			<real>1075</real>
 		</dict>
 		<key>771DD115-1E19-4CFC-AB74-649F9A758391</key>
 		<dict>
@@ -1372,7 +1298,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>set current note, pass actions</string>
 			<key>xpos</key>
-			<real>305</real>
+			<real>330</real>
 			<key>ypos</key>
 			<real>340</real>
 		</dict>
@@ -1425,7 +1351,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>1620</real>
+			<real>1385</real>
 		</dict>
 		<key>A0D4A0E0-54A3-4239-B00B-59020FEE6F23</key>
 		<dict>
@@ -1436,7 +1362,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>1075</real>
 		</dict>
 		<key>ABB91EC7-FCFC-4AB8-B78D-F025720B37C3</key>
 		<dict>
@@ -1478,27 +1404,27 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>pass "delete"</string>
 			<key>xpos</key>
-			<real>400</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>435</real>
 		</dict>
 		<key>D3F89D51-C7EA-4A95-8477-B40256917808</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>520</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>665</real>
 		</dict>
 		<key>DB7EDFF2-EF29-4EDB-9ED7-368149133A05</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>385</real>
+			<real>555</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>805</real>
 		</dict>
 		<key>E04F33A9-4B0C-4DBA-B0E6-9949D0009CD7</key>
 		<dict>
@@ -1507,7 +1433,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>1495</real>
+			<real>1260</real>
 		</dict>
 		<key>E1952981-5610-42C6-967C-9728E176B587</key>
 		<dict>
@@ -1516,9 +1442,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>get Browser URL</string>
 			<key>xpos</key>
-			<real>325</real>
+			<real>365</real>
 			<key>ypos</key>
-			<real>1100</real>
+			<real>935</real>
 		</dict>
 		<key>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</key>
 		<dict>
@@ -1549,9 +1475,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>create new sidenote (and close)</string>
 			<key>xpos</key>
-			<real>560</real>
+			<real>550</real>
 			<key>ypos</key>
-			<real>1450</real>
+			<real>1275</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
