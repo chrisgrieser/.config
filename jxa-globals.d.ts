@@ -8,8 +8,12 @@ declare const ObjC: {
 };
 
 declare const Application: {
-	currentApplication: () => any;
-	(appname: string): any;
+	currentApplication: () => {
+		doShellScript(script: string): string;
+		includeStandardAdditions: boolean;
+		openLocation(url: string): void;
+	};
+	(appname: string): Object;
 };
 
 declare function Path(filepath: string): string;
@@ -19,11 +23,11 @@ declare function delay(seconds: number): void;
 // requires `ObjC.import("stdlib")`
 declare const $: {
 	getenv: (envVar: string) => string;
-	NSFileManager: any;
-	NSUTF8StringEncoding: any;
-	NSFileModificationDate: any;
-	NSProcessInfo: any;
-	NSURL: any;
-	NSString: any;
-	NSData: any;
+	NSFileManager: Object;
+	NSUTF8StringEncoding: Object;
+	NSFileModificationDate: Object;
+	NSProcessInfo: Object;
+	NSURL: string;
+	NSString: string;
+	NSData: string;
 };

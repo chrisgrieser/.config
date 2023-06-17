@@ -5,7 +5,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- Abbreviations / spelling
-vim.cmd.inoreabbrev ("<buffer> cosnt const")
+vim.cmd.inoreabbrev("<buffer> cosnt const")
 
 --------------------------------------------------------------------------------
 
@@ -20,8 +20,8 @@ end, { buffer = true, desc = " JXA run" })
 -- Open regex in regex101 and regexper (railroad diagram)
 keymap("n", "g/", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
-	u.normal('"zyya/') -- yank outer regex
-	u.normal("vi/") -- select inner regex for easy replacement
+	vim.cmd.normal { '"zya/', bang = false } -- yank outer regex
+	vim.cmd.normal { "vi/", bang = false } -- select inner regex for easy replacement
 
 	local regex = fn.getreg("z")
 	local pattern = regex:match("/(.*)/")
@@ -34,4 +34,4 @@ keymap("n", "g/", function()
 	if replacement then url = url .. "&subst=" .. replacement end
 
 	os.execute("open '" .. url .. "'") -- opening method on macOS
-end, { desc = "Open next js regex in regex101", buffer = true })
+end, { desc = " Open next regex in regex101", buffer = true })
