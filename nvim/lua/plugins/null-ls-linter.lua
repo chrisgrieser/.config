@@ -45,6 +45,7 @@ local function nullSources()
 		-- SHELL
 		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.formatting.shfmt,
+
 		-- force shellcheck to work with zsh
 		builtins.diagnostics.shellcheck.with {
 			extra_filetypes = { "zsh" },
@@ -56,7 +57,7 @@ local function nullSources()
 		},
 
 		-- JS/TS/JSON
-		builtins.formatting.rome,
+		builtins.formatting.rome, -- not available via LSP yet
 
 		-- CSS
 		builtins.formatting.stylelint.with {
