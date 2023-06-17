@@ -18,6 +18,7 @@ function appendToFile(text, absPath) {
 }
 
 /** @param {string} path */
+// @ts-ignore
 function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
@@ -72,9 +73,7 @@ function ensureUniqueCitekey(citekey, libraryPath) {
 	return nextCitekey;
 }
 
-/**
- * @param {string[]} bibtexPropertyArr
- */
+/** @param {string[]} bibtexPropertyArr */
 function generateCitekey(bibtexPropertyArr) {
 	let year = parseBibtexProperty(bibtexPropertyArr, "year");
 	if (!year) year = "N.D.";
@@ -105,8 +104,11 @@ function generateCitekey(bibtexPropertyArr) {
 	if (lastNameArr.length < 3) authorStr = lastNameArr.join("");
 	else authorStr = lastNameArr[0] + "EtAl";
 
-	// strip diacritics from authorStr https://stackoverflow.com/a/37511463
-	authorStr = authorStr.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+	// clean up name
+	authorStr = authorStr
+		.normalize("NFD") // strip diacritics from authorStr https://stackoverflow.com/a/37511463
+		.replace(/[\u0300-\u036f]/g, "")
+		.replaceAll("-", "");
 
 	const citekey = authorStr + year;
 	return citekey;
@@ -114,7 +116,7 @@ function generateCitekey(bibtexPropertyArr) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {any[]} argv */
+/** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const doiRegex = /\b10.\d{4,9}\/[-._;()/:A-Z0-9]+(?=$|[?/ ])/i; // https://www.crossref.org/blog/dois-and-matching-regular-expressions/

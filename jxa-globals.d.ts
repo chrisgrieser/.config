@@ -1,5 +1,6 @@
 // https://code.visualstudio.com/docs/nodejs/working-with-javascript#_global-variables-and-type-checking
 // https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html
+// https://github.com/JXA-userland/JXA
 //──────────────────────────────────────────────────────────────────────────────
 
 declare const ObjC: {
@@ -17,16 +18,31 @@ declare const Application: {
 		setTheClipboardTo(str: string): void;
 		displayDialog(
 			textToShow: string,
-			options: {
-				defaultAnswer: string;
-				buttons: string[];
-				defaultButton: string;
-			},
+			options: { defaultAnswer: string; buttons: string[]; defaultButton: string },
 		): { textReturned: string };
 	};
 	(appname: string): {
+		id(): number;
+		name(): string;
+		running(): boolean;
+		frontmost(): boolean;
+		activate(): void;
+		quit(): void;
+		launch(): void;
+
+		// command names https://qiita.com/zakuroishikuro/items/a7def965f49a2ab55be4
+		commandsOfClass(): string[];
+		elementsOfClass(className: string): string[];
+		propertiesOfClass(className: string): string[];
+		parentOfClass(className: string): string;
+
+		// https://developer.apple.com/library/content/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW1
+		// rome-ignore lint/suspicious/noExplicitAny: too long
+		windows: any;
+
+		// app-specific
 		exists(path: string): boolean; // Finder
-		createNote({ text: string }): void; // SideNotes
+		createNote({ text: string, path: string }): void; // SideNotes
 	};
 };
 
@@ -37,12 +53,16 @@ declare function delay(seconds: number): void;
 // requires `ObjC.import("stdlib")`
 declare const $: {
 	getenv: (envVar: string) => string;
-	NSFileManager: Object;
-	NSUTF8StringEncoding: Object;
-	NSFileModificationDate: Object;
-	NSProcessInfo: Object;
+	// rome-ignore lint/suspicious/noExplicitAny: too long
+	NSFileManager: any;
+	// rome-ignore lint/suspicious/noExplicitAny: too long
+	NSUTF8StringEncoding: any;
+	// rome-ignore lint/suspicious/noExplicitAny: too long
+	NSFileModificationDate: any;
+	// rome-ignore lint/suspicious/noExplicitAny: too long
+	NSProcessInfo: any;
 	NSURL: string;
-	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
+	// rome-ignore lint/suspicious/noExplicitAny: too long
 	NSString: any;
 	NSData: string;
 };
