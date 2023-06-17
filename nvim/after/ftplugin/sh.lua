@@ -1,5 +1,3 @@
-local fn = vim.fn
-local cmd = vim.cmd
 local keymap = vim.keymap.set
 local expand = vim.fn.expand
 local u = require("config.utils")
@@ -21,14 +19,10 @@ keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false
 
 -- Reload Sketchybar
 keymap("n", "<leader>r", function()
-	cmd.update()
-	local parentFolder = expand("%:p:h")
-
-	if parentFolder:find("sketchybar") then
-		fn.system([[brew services restart sketchybar]])
+	vim.cmd.update()
+	if expand("%:p:h"):find("sketchybar") then
+		vim.fn.system([[brew services restart sketchybar]])
 	else
-		local output = fn.system(('zsh "%s"'):format(expand("%:p")))
-		local logLevel = vim.v.shell_error > 0 and u.error or u.trace
-		vim.notify(output, logLevel)
+		vim.notify("Not in a sketchybar directory.", u.warn)
 	end
 end, { buffer = true, desc = " Run Shell Script" })
