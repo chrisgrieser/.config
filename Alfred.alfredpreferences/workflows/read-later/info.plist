@@ -151,7 +151,7 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-browser-markdown-link.applescript</string>
+				<string>get-browser-markdown-link.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>

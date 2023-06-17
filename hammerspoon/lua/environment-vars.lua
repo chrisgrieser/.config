@@ -31,6 +31,12 @@ M.vaultLocation = readZshEnv("VAULT_PATH")
 M.fileHub = readZshEnv("WD")
 
 --------------------------------------------------------------------------------
+-- Apps
+M.mailApp = readZshEnv("MAIL_APP")
+M.browserApp = readZshEnv("BROWSER_APP")
+M.browserDefaultsPath = readZshEnv("BROWSER_DEFAULTS_PATH")
+
+--------------------------------------------------------------------------------
 -- DEVICE
 
 local deviceName = hs.host.localizedName():gsub(".- ", "", 1)
@@ -48,12 +54,6 @@ function M.isProjector()
 	local tvLeuthinger = mainDisplayName == "TV_MONITOR"
 	return projectorHelmholtz or tvLeuthinger
 end
-
---------------------------------------------------------------------------------
-
-M.mailApp = "Mimestream"
-M.browserApp = "Brave Browser"
-M.browserDefaultsPath = "Brave Browser"
 
 --------------------------------------------------------------------------------
 return M

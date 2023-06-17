@@ -6,6 +6,107 @@
 	<string>de.chris-grieser.atop</string>
 	<key>connections</key>
 	<dict>
+		<key>19F63061-B18E-4FCD-BB48-E06D1D826040</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>16554443-197B-49E4-B12F-C94911AAC8B4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1CB25ABC-54C9-4C5E-BDCE-C3FA93019265</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9B3D46A5-C6D7-472E-99BA-9268E3BFAEC6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>225DB4AF-5666-4F2F-8860-F36CA969A948</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>16554443-197B-49E4-B12F-C94911AAC8B4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>36844FF5-DD3F-4F61-8B06-A2AAE896DD68</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>225DB4AF-5666-4F2F-8860-F36CA969A948</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>41B4C19E-F17F-4762-A8E4-2AD597D21C22</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B6749459-30C8-484B-BE73-E64557107E37</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E01978CB-6F00-4781-8079-075BE323C5FB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7D56EA1B-BF57-40A0-8107-94D3F4D49905</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A226B122-42B9-448F-89AB-32C3D85A8FB9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>80995D89-9285-4E5C-8728-25576BF43113</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4F6FB435-0A87-45E8-A851-F458286E7A6F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</key>
 		<array>
 			<dict>
@@ -19,11 +120,63 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9B3D46A5-C6D7-472E-99BA-9268E3BFAEC6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>16554443-197B-49E4-B12F-C94911AAC8B4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A09D544F-ECA6-4D74-B8B0-AC69E572977B</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A226B122-42B9-448F-89AB-32C3D85A8FB9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A3879C3A-50C5-4ECB-B700-E5D682BFF82C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B6749459-30C8-484B-BE73-E64557107E37</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C56280F8-3CDF-451D-BE1A-BE483AE10B45</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>19F63061-B18E-4FCD-BB48-E06D1D826040</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -78,6 +231,39 @@
 				<false/>
 			</dict>
 		</array>
+		<key>FA333A60-CF01-4178-857C-9EE58B2C2E42</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>681490F8-D3BB-4024-AFE0-DCEE69201856</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>80995D89-9285-4E5C-8728-25576BF43113</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Eject ⏏️</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>54580785-C343-4A69-8525-5BF78553961A</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Browse in Terminal</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -111,6 +297,120 @@
 			<string>A09D544F-ECA6-4D74-B8B0-AC69E572977B</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>bluetooth||restart</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔁 Restart Bluetooth</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>1CB25ABC-54C9-4C5E-BDCE-C3FA93019265</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>sudo pkill bluetoothd
+echo -n "Bluetooth"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9B3D46A5-C6D7-472E-99BA-9268E3BFAEC6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># depending on device, may need to change `en1` to `en0` or `end2`
+networksetup -setairportpower en1 off
+sleep 0.5
+networksetup -setairportpower en1 on
+echo -n "WiFi"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>19F63061-B18E-4FCD-BB48-E06D1D826040</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>wifi||wlan||restart</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔁 Restart WiFi</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C56280F8-3CDF-451D-BE1A-BE483AE10B45</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳Restarting {query}…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>16554443-197B-49E4-B12F-C94911AAC8B4</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -213,6 +513,51 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
+				<string>killall bird
+echo -n "iCloud Sync"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>225DB4AF-5666-4F2F-8860-F36CA969A948</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>icloud||restart</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗ Restart iCloud Sync</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>36844FF5-DD3F-4F61-8B06-A2AAE896DD68</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
 				<string>killall "$*" || echo "Could not killall $*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -228,53 +573,540 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>681490F8-D3BB-4024-AFE0-DCEE69201856</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>vv</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading...</string>
+				<key>script</key>
+				<string>app = Application.currentApplication();
+app.includeStandardAdditions = true;
+volumeList = app.doShellScript("ls /Volumes");
+var single_volumes = volumeList.split("\r");
+
+//function to remove elements from Array
+function arrayRemove(arr, value) {
+    return arr.filter(function(elem){
+        return !elem.includes(value);
+    });
+}
+var single_volumes = arrayRemove(single_volumes, "TimeMachine");
+var single_volumes = arrayRemove(single_volumes, "Macintosh");
+var single_volumes = arrayRemove(single_volumes, "HDD");
+var single_volumes = arrayRemove(single_volumes, "SSD");
+
+let volume_array = [];
+if (single_volumes.length == 0) {
+    volume_array.push ({
+        'title': "No mounted volume recognized.",
+        'subtitle': "Press [Esc] to abort.",
+        'arg': "no volume"
+    });
+} else {
+    single_volumes.forEach(element =&gt; {
+        let disk_space = app.doShellScript('df -h | grep "' + element + '" | cut -c 16-42');
+        disk_space = disk_space.replace(/^(.{6}) (.{6}) (.{6}) *(.*)/gm,"Total:$1   Available:$3   Used:$2 ($4)");
+        volume_array.push ({
+            'title': element,
+            'subtitle': disk_space,
+            'arg': "/Volumes/"+ element
+        })
+    });
+}
+
+JSON.stringify({ 'items': volume_array });
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>volume-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Select a Volume</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>FA333A60-CF01-4178-857C-9EE58B2C2E42</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>4F6FB435-0A87-45E8-A851-F458286E7A6F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>eject-volume.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>80995D89-9285-4E5C-8728-25576BF43113</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>54580785-C343-4A69-8525-5BF78553961A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo -n | ioreg -r -d 1 -k BatteryPercent | egrep '("BatteryPercent"|"Product") ' | cut -d "=" -f 2 | sed -E 's/^ //g' | sed -E 's/\"//g' | sed -E 's/(^[0-9]{1,3})/(\1%)/g' | tr "\n" ";" | sed -E 's/);/)\n/g' | tr ";" "  "</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A226B122-42B9-448F-89AB-32C3D85A8FB9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🔋 Battery</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A3879C3A-50C5-4ECB-B700-E5D682BFF82C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>battery</string>
+				<key>subtext</key>
+				<string>Periphery Devices</string>
+				<key>text</key>
+				<string>📊 Show Battery</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7D56EA1B-BF57-40A0-8107-94D3F4D49905</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>networkQuality</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B6749459-30C8-484B-BE73-E64557107E37</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>network quality</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>📊 Network Quality</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>41B4C19E-F17F-4762-A8E4-2AD597D21C22</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>This may take a minute</string>
+				<key>title</key>
+				<string>⏳Running Network Quality Test…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E01978CB-6F00-4781-8079-075BE323C5FB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>2759BEDD-4BDD-45E5-8864-D2705A801FC5</key>
+		<key>16554443-197B-49E4-B12F-C94911AAC8B4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>1065</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>155</real>
+		</dict>
+		<key>19F63061-B18E-4FCD-BB48-E06D1D826040</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>880</real>
+			<key>ypos</key>
+			<real>135</real>
+		</dict>
+		<key>1CB25ABC-54C9-4C5E-BDCE-C3FA93019265</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>725</real>
+			<key>ypos</key>
+			<real>25</real>
+		</dict>
+		<key>225DB4AF-5666-4F2F-8860-F36CA969A948</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>880</real>
+			<key>ypos</key>
+			<real>245</real>
+		</dict>
+		<key>2759BEDD-4BDD-45E5-8864-D2705A801FC5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>500</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
+		<key>36844FF5-DD3F-4F61-8B06-A2AAE896DD68</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>725</real>
+			<key>ypos</key>
+			<real>245</real>
+		</dict>
+		<key>41B4C19E-F17F-4762-A8E4-2AD597D21C22</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>40</real>
+			<key>ypos</key>
+			<real>970</real>
+		</dict>
+		<key>4F6FB435-0A87-45E8-A851-F458286E7A6F</key>
+		<dict>
+			<key>xpos</key>
+			<real>420</real>
+			<key>ypos</key>
+			<real>565</real>
+		</dict>
+		<key>54580785-C343-4A69-8525-5BF78553961A</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>700</real>
+		</dict>
+		<key>681490F8-D3BB-4024-AFE0-DCEE69201856</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>455</real>
+		</dict>
+		<key>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>970</real>
+		</dict>
+		<key>7D56EA1B-BF57-40A0-8107-94D3F4D49905</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>40</real>
+			<key>ypos</key>
+			<real>840</real>
+		</dict>
+		<key>80995D89-9285-4E5C-8728-25576BF43113</key>
+		<dict>
+			<key>note</key>
+			<string>eject</string>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>565</real>
 		</dict>
 		<key>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>killall with name</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>270</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>295</real>
+		</dict>
+		<key>9B3D46A5-C6D7-472E-99BA-9268E3BFAEC6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>880</real>
+			<key>ypos</key>
+			<real>25</real>
 		</dict>
 		<key>A09D544F-ECA6-4D74-B8B0-AC69E572977B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>kill</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>270</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>20</real>
+		</dict>
+		<key>A226B122-42B9-448F-89AB-32C3D85A8FB9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>840</real>
+		</dict>
+		<key>A3879C3A-50C5-4ECB-B700-E5D682BFF82C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>840</real>
+		</dict>
+		<key>B6749459-30C8-484B-BE73-E64557107E37</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>970</real>
+		</dict>
+		<key>C56280F8-3CDF-451D-BE1A-BE483AE10B45</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>725</real>
+			<key>ypos</key>
+			<real>135</real>
 		</dict>
 		<key>CBFBCA76-39CE-4D22-A556-EDF1A996849C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>130</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>160</real>
+		</dict>
+		<key>E01978CB-6F00-4781-8079-075BE323C5FB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>1080</real>
 		</dict>
 		<key>F1539426-E456-4953-8215-D809DF4B120B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>force kill</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>270</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>160</real>
+		</dict>
+		<key>FA333A60-CF01-4178-857C-9EE58B2C2E42</key>
+		<dict>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>565</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
