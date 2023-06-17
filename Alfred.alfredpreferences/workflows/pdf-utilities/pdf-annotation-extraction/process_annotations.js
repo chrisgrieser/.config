@@ -418,7 +418,7 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 		`aliases: "${metad.title}"`,
 		`tags: [literature-note, ${tagsForYaml}]`,
 		"cssclass: pdf-annotations",
-		"obsidianUIMode: preview",
+		// "obsidianUIMode: preview",
 		`citekey: ${metad.citekey}`,
 		`year: ${metad.year.toString()}`,
 		`author: "${metad.author}"`,
@@ -430,7 +430,7 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 	if (metad.doi) yamlKeys.push(`doi: ${metad.doi}`);
 
 	const isoToday = new Date().toISOString().slice(0, 10);
-	yamlKeys.push(`extraction-date: ${isoToday}`);
+	yamlKeys.push(`extractionDate: ${isoToday}`);
 
 	// write note
 	const noteContent = `---

@@ -12,8 +12,22 @@ declare const Application: {
 		doShellScript(script: string): string;
 		includeStandardAdditions: boolean;
 		openLocation(url: string): void;
+		pathTo(what: "home folder"): string;
+		read(path: string): string;
+		setTheClipboardTo(str: string): void;
+		displayDialog(
+			textToShow: string,
+			options: {
+				defaultAnswer: string;
+				buttons: string[];
+				defaultButton: string;
+			},
+		): { textReturned: string };
 	};
-	(appname: string): Object;
+	(appname: string): {
+		exists(path: string): boolean; // Finder
+		createNote({ text: string }): void; // SideNotes
+	};
 };
 
 declare function Path(filepath: string): string;
@@ -28,6 +42,7 @@ declare const $: {
 	NSFileModificationDate: Object;
 	NSProcessInfo: Object;
 	NSURL: string;
-	NSString: string;
+	// rome-ignore lint/suspicious/noExplicitAny: <explanation>
+	NSString: any;
 	NSData: string;
 };
