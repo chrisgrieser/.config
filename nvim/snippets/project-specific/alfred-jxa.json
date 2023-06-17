@@ -47,10 +47,11 @@
 	"Script Filter": {
 		"prefix": "Script Filter (Alfred)",
 		"body": [
-			"const scriptFilterArr = app.doShellScript(`$1`)",
+			"/** @type AlfredItem[] */",
+			"const ${1:scriptFilterArr} = app.doShellScript(`$2`)",
 			"\t.split(\"\\r\")",
 			"\t.map(item => {",
-			"\t\t$2",
+			"\t\t$0",
 			"\t\treturn {",
 			"\t\t\ttitle: item,",
 			"\t\t\tmatch: alfredMatcher(item),",
@@ -61,7 +62,7 @@
 			"\t\t\tuid: item,",
 			"\t\t};",
 			"\t});",
-			"JSON.stringify({ items: scriptFilterArr });"
+			"JSON.stringify({ items: ${1:scriptFilterArr} });"
 		]
 	},
 	"read Alfred data": {

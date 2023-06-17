@@ -65,7 +65,7 @@ function M.altFileStatusline()
 	if hasAltFile and (altPath ~= curPath) then
 		local altBufFt = vim.api.nvim_buf_get_option(fn.bufnr("#"), "filetype") ---@diagnostic disable-line: param-type-mismatch
 		local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
-		icon = deviconsInstalled and devicons.get_icon(altFile, altBufFt) or "#"
+		icon = deviconsInstalled and devicons.get_icon(altFile, altBufFt) or ""
 
 		-- same name, different file: append parent of altfile
 		if curFile == altFile then
