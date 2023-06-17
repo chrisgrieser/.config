@@ -110,15 +110,6 @@ lspSettings.jsonls = {
 }
 
 --------------------------------------------------------------------------------
--- YAML
--- https://github.com/redhat-developer/yaml-language-server#language-server-settings
-lspSettings.yamlls = {
-	yaml = {
-		keyOrdering = true, -- FIX mapKeyOrder warning
-	},
-}
-
---------------------------------------------------------------------------------
 -- BASH / ZSH
 
 -- force bashls (and treesitter) to highlight zsh as if it was bash
