@@ -66,10 +66,7 @@ Wf_browser = wf.new(env.browserApp)
 	})
 	:subscribe(wf.windowCreated, function()
 		wu.autoTile(Wf_browser)
-		u.runWithDelays({ 0.3, 0.5 }, function()
-			if #Wf_browser:getWindows() > 1 then return end
-			u.closeTabsContaining("chrome://vivaldi-webui")
-		end)
+		u.runWithDelays({ 0.3, 0.5 }, function() u.closeTabsContaining("chrome://vivaldi-webui") end)
 	end)
 	:subscribe(wf.windowDestroyed, function() wu.autoTile(Wf_browser) end)
 	:subscribe(wf.windowFocused, wu.bringAllWinsToFront)
@@ -77,10 +74,7 @@ Wf_browser = wf.new(env.browserApp)
 -- Automatically hide Browser has when no window
 -- requires wider window-filter to not hide PiP windows etc
 Wf_browser_all = wf.new({ env.browserApp })
-	:setOverrideFilter({
-		allowRoles = "AXStandardWindow",
-		rejectTitles = { "^$" }, -- when inspecting Vivaldi UI, devtools are titled "^$" on creation
-	})
+	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(wf.windowDestroyed, function()
 		local app = u.app(env.browserApp)
 		if app and #(app:allWindows()) == 0 then app:hide() end
@@ -197,7 +191,7 @@ Wf_finder = wf.new("Finder")
 -- trigger window filters
 FinderAppWatcher = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
-		wu.autoTile("Finder") 
+		wu.autoTile("Finder")
 		finder:selectMenuItem { "View", "Hide Sidebar" }
 	end
 end):start()
