@@ -688,25 +688,6 @@ if not any(feed.get('name') == feed_name for feed in feeds):
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>Describe the feed</string>
-				<key>text</key>
-				<string>Feed Description</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>EFF409E3-4742-47AB-8838-0CF21AB9559A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -730,6 +711,25 @@ if not any(feed.get('name') == feed_name for feed in feeds):
 			<string>alfred.workflow.input.listfilter</string>
 			<key>uid</key>
 			<string>DD963266-D82A-4572-BDF4-4383058ACCCB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>Describe the feed</string>
+				<key>text</key>
+				<string>Feed Description</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>EFF409E3-4742-47AB-8838-0CF21AB9559A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -762,15 +762,12 @@ if not any(feed.get('name') == feed_name for feed in feeds):
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict>
-					<key>feed_description</key>
-					<string>{query}</string>
-				</dict>
+				<dict/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>92112159-787A-46AC-AA49-FEB2233D8BDB</string>
+			<string>DD56E87A-1A08-437D-8646-E4D9BED5BA20</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -791,63 +788,6 @@ if not any(feed.get('name') == feed_name for feed in feeds):
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>CD9A68D4-3450-4088-A430-8B2FD7E75B8C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>feed_type</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>A4E04C33-2B7B-4F17-BA63-C24CD89FA418</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>feed_url</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>72CC5244-4B2A-4CC8-B581-5922116E526A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>DD56E87A-1A08-437D-8646-E4D9BED5BA20</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -880,6 +820,66 @@ if not any(feed.get('name') == feed_name for feed in feeds):
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>7E8DA5CA-26C3-4AE1-8693-E62B7C4FBFBD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>feed_url</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>72CC5244-4B2A-4CC8-B581-5922116E526A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>feed_description</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>92112159-787A-46AC-AA49-FEB2233D8BDB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>feed_type</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>A4E04C33-2B7B-4F17-BA63-C24CD89FA418</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>

@@ -109,6 +109,7 @@ local function cmpconfig()
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
 			["<D-Esc>"] = cmp.mapping.complete(), -- like with macOS autocomplete
 			["<C-e>"] = cmp.mapping.abort(),
+			["<S-CR>"] = cmp.mapping.abort(), -- accept current text, consistent with Obsidian https://medium.com/obsidian-observer/obsidian-quick-tip-use-shift-enter-to-skip-autocomplete-on-links-8495ea189c4c
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
 			["<PageDown>"] = cmp.mapping.scroll_docs(4),
 
