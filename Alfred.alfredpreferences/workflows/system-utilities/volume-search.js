@@ -11,6 +11,9 @@ const volumes = app
 	.split("\r")
 	.filter((/** @type {string} */ line) => line.includes(" /Volumes/"))
 	.map((/** @type {string} */ vol) => {
+		// quicker reruns when volume stats unavailable
+		if (vol.includes("unavailable")) rerunSecs = 0.5;
+
 		const info = vol.split(/\s+/).map((value) => {
 			return value.replaceAll("unavailable", "…").replaceAll("Gi", "Gb");
 		});
@@ -30,13 +33,14 @@ const volumes = app
 		};
 	});
 
+// No Volume found
 if (volumes.length === 0) {
 	volumes.push({
 		title: "No mounted volume recognized.",
 		subtitle: "⎋ to abort",
 		valid: false,
 	});
-	rerunSecs = 1; // quicker reruns when no volume found
+	rerunSecs = 0.5; // quicker reruns when no volume found
 }
 
 JSON.stringify({
