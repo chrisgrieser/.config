@@ -27,7 +27,7 @@ KHidesCursor = u.hotkey({}, "k", function() hideCurAndPassThrough("k") end):disa
 -- watches browser, enables when hotkeys when browser is activated
 Jk_watcher = u.aw
 	.new(function(appName, eventType)
-		if not eventType == u.aw.activated then return end
+		if eventType ~= u.aw.activated then return end
 
 		if appName == env.browserApp then
 			JHidesCursor:enable()

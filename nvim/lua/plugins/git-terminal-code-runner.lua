@@ -5,9 +5,21 @@ return {
 	},
 	{
 		"akinsho/git-conflict.nvim",
+		event = "VeryLazy",
 		version = "*", -- recommended by dev
+		init = function()
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "GitConflictDetected",
+				callback = function()
+					vim.notify("Conflict detected in " .. vim.fn.expand("<a" .. "file>"))
+					vim.keymap.set("n", "gc", "<Plug>(git-conflict-next-conflict)")
+					vim.keymap.set("n", "gC", "<Plug>(git-conflict-prev-conflict)")
+				end,
+			})
+		end,
 		opts = {
-			p
+			default_commands = false,
+			default_mappings = false,
 		},
 	},
 	{ -- HTTP requester (e.g., test APIs)
