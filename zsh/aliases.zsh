@@ -61,16 +61,13 @@ alias -g C="| pbcopy ; echo 'Copied.'"                               # copy
 alias -g J="| yq --prettyPrint --output-format=json --colors | less" # beautify in JSON
 alias -g N="| wc -l | tr -d ' '"                                     # count lines
 
-
-function field() {
-	awk "{ print \$$1 }"
-}
+# example: choose 1st field with `ls -la F 1`
+function field() { awk "{ print \$$1 }"; }
 alias -g F="| field "
-
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' F\d' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(" F " 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
