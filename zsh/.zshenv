@@ -19,6 +19,12 @@ function pandoc () {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
+# APPS
+export BROWSER_DEFAULTS_PATH="BraveSoftware/Brave-Browser"
+export BROWSER_APP="Brave Browser"
+export MAIL_APP="Mimestream"
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # OpenAI API Key stored outside of public git repo (symlinked file)
 OPENAI_API_KEY=$(tr -d "\n" <"$DATA_DIR/private dotfiles/openai-api-key.txt")

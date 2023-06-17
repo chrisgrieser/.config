@@ -2,12 +2,24 @@
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 
+# TODO Change Config here
+open "$HOME/.zshenv"
+BROWSER_APP="Brave Browser"
+
+osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("browser-history-search [ext]")'
+
+# add browser ID here
+osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("sidenote-tweaks")'
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # Duti
-browserID="com.brave.Browser"
-duti -s "$browserID" chrome-extension
-duti -s "$browserID" chrome
-duti -s "$browserID" webloc all # link files
-duti -s "$browserID" url all    # link files
+
+browserAppId=$(osascript -e "id of app \"$BROWSER_APP\"") 
+duti -s "$browserAppId" chrome-extension
+duti -s "$browserAppId" chrome
+duti -s "$browserAppId" webloc all # link files
+duti -s "$browserAppId" url all    # link files
 
 # reload karabiner
 karabinerMsg=$(osascript -l JavaScript "$DOTFILE_FOLDER/karabiner/build-karabiner-config.js")

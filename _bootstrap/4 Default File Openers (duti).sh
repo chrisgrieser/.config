@@ -3,11 +3,12 @@
 #-------------------------------------------------------------------------------
 if ! command -v duti &>/dev/null; then echo "duti not installed." && return 1; fi
 
-# Config
-browserID="com.brave.Browser"
+# App Choice
 videoplayerID="com.colliderli.iina"
 editorID="com.apple.automator.Neovim"
 obsiOpenerID="com.apple.automator.Obsidian-Opener"
+browserID=$(osascript -e "id of app \"$BROWSER_APP\"") # set in zshenv
+mailID=$(osascript -e "id of app \"$MAIL_APP\"") # set in zshenv
 
 # Obsidian
 duti -s "$obsiOpenerID" md all
@@ -58,17 +59,16 @@ duti -s "$editorID" public.data all # dotfiles without extension
 duti -s "$editorID" vimrc all
 duti -s "$editorID" sketchybarrc all
 
-# Browser
-browserID="com.brave.Browser"
+# Browser & Mail
 duti -s "$browserID" chrome-extension
 duti -s "$browserID" chrome
 duti -s "$browserID" webloc all # link files
 duti -s "$browserID" url all    # link files
+duti -s "$mailID" mailto # = default mail client
 
 # Misc
 duti -s "net.highlightsapp.universal" pdf all
 duti -s "org.m0k.transmission" torrent all
 duti -s "com.busymac.busycal3" ics all
 duti -s "com.apple.archiveutility" zip all
-duti -s org.m0k.transmission magnet
-duti -s com.mimestream.Mimestream mailto # = default mail client
+duti -s "org.m0k.transmission" magnet
