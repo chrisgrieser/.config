@@ -5,6 +5,13 @@
 // when used as Script Filter, the returned value must be a stringified JSON object
 declare type AlfredRun = (argv: string[]) => string; 
 
+declare class AlfredScriptFilter {
+	rerun?: number; // only accepts values between 0.1 and 5
+	variables?: Object;
+	skipknowledge?: boolean;
+	items: AlfredItem[];
+}
+
 declare class AlfredItem {
 	title: string;
 	action?: string|string[]|Object;
@@ -22,11 +29,11 @@ declare class AlfredItem {
 		path: string;
 	};
 	mods?: {
-		cmd?: AlfredModifier;
-		alt?: AlfredModifier;
-		ctrl?: AlfredModifier;
-		fn?: AlfredModifier;
-		shift?: AlfredModifier;
+		cmd?: AlfredModifierKey;
+		alt?: AlfredModifierKey;
+		ctrl?: AlfredModifierKey;
+		fn?: AlfredModifierKey;
+		shift?: AlfredModifierKey;
 	};
 	text?: {
 		copy?: string;
@@ -34,17 +41,10 @@ declare class AlfredItem {
 	};
 }
 
-declare class AlfredModifier {
+declare class AlfredModifierKey {
 	title?: string;
 	subtitle?: string;
 	arg?: string|string[];
 	valid?: boolean;
 	variables?: Object;
-}
-
-declare class AlfredScriptFilter {
-	rerun?: number; // only accepts values between 0.1 and 5
-	variables?: Object;
-	skipknowledge?: boolean;
-	items: AlfredItem[];
 }
