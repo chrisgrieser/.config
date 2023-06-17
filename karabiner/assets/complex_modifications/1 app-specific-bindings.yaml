@@ -468,16 +468,13 @@ rules:
         to:
           - { key_code: c, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
-      # ⌘⇧4 (screenshot button): tap to screenshot, hold to screenshot &
-      # annotate
+      # ⌘⇧4 (screenshot button): tap to screenshot, hold for timed screenshot
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
           - shell_command: open "cleanshot://capture-area"
         to_if_held_down:
-          # capture area & annotate, has to be bound manually since it does not
-          # have a URI yet https://cleanshot.com/docs/api
-          - { key_code: "3", modifiers: [shift, command] } 
+          - shell_command: open "cleanshot://self-timer"
       # screenshot button + bulb-button
       - type: basic
         from: { key_code: "f13", modifiers: { mandatory: [shift, command] } }

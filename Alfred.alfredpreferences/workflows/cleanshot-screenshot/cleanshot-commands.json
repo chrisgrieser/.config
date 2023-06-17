@@ -6,11 +6,6 @@
 			"uid": "0"
 		},
 		{
-			"title": "Timed Screenshot",
-			"arg": "cleanshot://self-timer",
-			"uid": "3"
-		},
-		{
 			"title": "Scrolling Capture",
 			"arg": "cleanshot://scrolling-capture",
 			"uid": "4"
@@ -19,11 +14,6 @@
 			"title": "OCR Screenshot to clipboard",
 			"arg": "cleanshot://capture-text?linebreaks=true",
 			"uid": "5"
-		},
-		{
-			"title": "Screen Recording",
-			"arg": "cleanshot://record-screen",
-			"uid": "8"
 		},
 		{
 			"title": "Re-Open last image",
