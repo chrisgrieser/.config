@@ -67,9 +67,12 @@ input#urlFieldInput::placeholder {
 	padding-left: 4px;
 }
 
-/* Bookmark Popup: Remove useless description and nickname fields */
-.BookmarkLocationSelector-Header,
-.BookmarkPopup .BookmarkInputField:is(:nth-child(3), :nth-child(4)) {
+/* Bookmark Popup: Remove useless buttons */
+.BookmarkLocationSelector-AddFolderButton,
+.BookmarkLocationSelector-SearchInput,
+.BookmarkLocationSelector-SpeedDialCheckbox,
+.BookmarkPopup .BookmarkInputField:is(:nth-child(3), :nth-child(4)), /* nickname & description input */
+.BookmarkLocationSelector-Header {
 	display: none;
 }
 
@@ -78,7 +81,11 @@ input#urlFieldInput::placeholder {
 	padding-bottom: 0;
 	height: 0;
 }
+.BookmarkLocationSelector-FolderList {
+	grid-area: unset;
+}
 
+.BookmarkLocationSelector-FolderList,
 #browser .BookmarkPopup-LocationSelector {
 	height: 315px;
 }
