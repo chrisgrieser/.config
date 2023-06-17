@@ -63,7 +63,7 @@ alias -g N="| wc -l | tr -d ' '"                                     # count lin
 
 # example: choose 1st field with `ls -la F 1`
 function field() { awk "{ print \$$1 }"; }
-alias -g F="| field "
+alias -g F1='| awk "{ print $1 }" '
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')

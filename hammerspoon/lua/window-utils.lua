@@ -122,7 +122,6 @@ function M.autoTile(winSrc)
 	end
 	wins = hs.fnutils.filter(wins, function(win) return not M.isInvalidFinderWin(win) end)
 	if not wins then return end
-
 	autoTilingInProgress = true
 
 	if #wins > 1 then M.bringAllWinsToFront() end
