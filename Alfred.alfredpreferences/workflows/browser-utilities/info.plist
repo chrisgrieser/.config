@@ -116,19 +116,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>BBEEBC69-AA12-4A6E-B4CD-4ED4C02E0B32</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C65CD77E-C2B3-4063-B045-C1954E7FE033</key>
 		<array>
 			<dict>
@@ -416,55 +403,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>vi</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string>cat ./vivaldi-settings.json</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>installed-browser-extensions.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Vivaldi Settings</string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>BBEEBC69-AA12-4A6E-B4CD-4ED4C02E0B32</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>availableviaurlhandler</key>
 				<false/>
 				<key>triggerid</key>
@@ -582,7 +520,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>445</real>
 		</dict>
 		<key>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</key>
 		<dict>
@@ -598,7 +536,7 @@
 			<key>xpos</key>
 			<real>745</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>445</real>
 		</dict>
 		<key>64E7E716-0427-41F0-844C-90D39ACC9152</key>
 		<dict>
@@ -627,7 +565,7 @@
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>445</real>
 		</dict>
 		<key>73794C72-64EA-441F-BE9A-67FB5F1A885C</key>
 		<dict>
@@ -676,17 +614,6 @@
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
-		<key>BBEEBC69-AA12-4A6E-B4CD-4ED4C02E0B32</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>chrome internal page search</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>390</real>
-		</dict>
 		<key>C65CD77E-C2B3-4063-B045-C1954E7FE033</key>
 		<dict>
 			<key>colorindex</key>
@@ -703,7 +630,7 @@
 			<key>xpos</key>
 			<real>895</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>445</real>
 		</dict>
 		<key>CC1C31B7-31D7-489D-BDF4-B68BE14336D4</key>
 		<dict>
@@ -714,7 +641,7 @@ backup for when browser history search workflow updates</string>
 			<key>xpos</key>
 			<real>590</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>445</real>
 		</dict>
 		<key>D909DE7E-1D08-42B3-B048-039BDE823F44</key>
 		<dict>

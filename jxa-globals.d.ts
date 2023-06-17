@@ -36,13 +36,11 @@ declare const Application: {
 		propertiesOfClass(className: string): string[];
 		parentOfClass(className: string): string;
 
-		// https://developer.apple.com/library/content/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW1
-		// rome-ignore lint/suspicious/noExplicitAny: too long
-		windows: any;
-
 		// app-specific
 		exists(path: string): boolean; // Finder
 		createNote(options: { text: string, path?: string }): void; // SideNotes
+		documents: { url(): string, name(): string}[]; // webkit browsers
+		windows: { activeTab():string}[]; // chromium browsers
 	};
 };
 
