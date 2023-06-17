@@ -12,7 +12,7 @@ function h() {
 	query=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
 	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
 		curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
-		wezterm cli spawn -- less "/tmp/$query" | xargs -I {} wezterm cli set-tab-title --pane-id={} "cheat – $command "
+		wezterm cli spawn -- less "/tmp/$query" | xargs -I {} wezterm cli set-tab-title --pane-id={} "cheat – $query "
 	else
 		curl -s "https://cht.sh/$query?style=$style" | less
 	fi
@@ -74,4 +74,4 @@ export LESSHISTFILE=-              # don't clutter home directory with useless `
 
 # Pager-specific settings
 # INFO less' --ignore-case is actually smart-case
-export LESS='-R --incsearch --ignore-case --window=-3 --quit-if-one-screen --no-init --tilde'
+export LESS='-R --incsearch --ignore-case --window=-3 --no-init --tilde'
