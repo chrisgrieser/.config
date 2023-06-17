@@ -57,7 +57,7 @@ local function workLayout()
 	hs.execute(u.exportPath .. "sketchybar --set clock popup.drawing=true")
 
 	-- close
-	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "lo-rain", "BetterTouchTool" }
+	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "lo-rain" }
 	require("lua.private").closer()
 	closeAllFinderWins()
 
@@ -85,7 +85,7 @@ local function movieLayout()
 	darkmode.set(true)
 	visuals.holeCover("remove")
 
-	u.openApps { "YouTube", "BetterTouchTool" }
+	u.openApps("YouTube")
 	u.quitApp {
 		"Neovide",
 		"lo-rain",
@@ -105,11 +105,14 @@ end
 
 ---select layout depending on number of screens, and prevent concurrent runs
 local function selectLayout()
+	if IsLayouting then return end
+	IsLayouting = true
 	if env.isProjector() then
 		movieLayout()
 	else
 		workLayout()
 	end
+	u.runWithDelays(2, function() IsLayouting = false end)
 end
 
 --------------------------------------------------------------------------------
