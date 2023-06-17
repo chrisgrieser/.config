@@ -1,0 +1,1118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.terminal.alfred-rss</string>
+	<key>connections</key>
+	<dict>
+		<key>12233739-8265-4228-B095-24CF82B9E651</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7E8DA5CA-26C3-4AE1-8693-E62B7C4FBFBD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>13252789-424B-4391-8846-32BBE4E2368C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2EAB3C65-2113-4830-A8A5-E8968239BCED</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>149F28A4-5FC9-4819-BECB-1B1020084EF9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1B6DFFF1-3074-4476-93CF-0A67B420D6A3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1B6DFFF1-3074-4476-93CF-0A67B420D6A3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>59AE16A3-2914-4807-8251-5C788C8994B7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3E0D8152-D48A-4F6E-9839-1884DCB6F6C7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DD56E87A-1A08-437D-8646-E4D9BED5BA20</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>59AE16A3-2914-4807-8251-5C788C8994B7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9E77C400-B6AA-40F7-9179-407C5D56740D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>72CC5244-4B2A-4CC8-B581-5922116E526A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DD963266-D82A-4572-BDF4-4383058ACCCB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7E8DA5CA-26C3-4AE1-8693-E62B7C4FBFBD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B5E83FD1-9F7D-46F5-934B-ED8B02E3A0C5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F581F044-6236-404F-BD48-4EAF8608D338</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>92112159-787A-46AC-AA49-FEB2233D8BDB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F64A53D4-1A88-4387-B2CC-D7DEB2CFF9C2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9E77C400-B6AA-40F7-9179-407C5D56740D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>13252789-424B-4391-8846-32BBE4E2368C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A4E04C33-2B7B-4F17-BA63-C24CD89FA418</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>12233739-8265-4228-B095-24CF82B9E651</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CD9A68D4-3450-4088-A430-8B2FD7E75B8C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EFF409E3-4742-47AB-8838-0CF21AB9559A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DD56E87A-1A08-437D-8646-E4D9BED5BA20</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F830F577-6B1A-4481-B090-1251CB46A71D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DD963266-D82A-4572-BDF4-4383058ACCCB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A4E04C33-2B7B-4F17-BA63-C24CD89FA418</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EFF409E3-4742-47AB-8838-0CF21AB9559A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>92112159-787A-46AC-AA49-FEB2233D8BDB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F64A53D4-1A88-4387-B2CC-D7DEB2CFF9C2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>72CC5244-4B2A-4CC8-B581-5922116E526A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F830F577-6B1A-4481-B090-1251CB46A71D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CD9A68D4-3450-4088-A430-8B2FD7E75B8C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Terminal</string>
+	<key>description</key>
+	<string>Add and Read RSS Feeds</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>RSS Feed Reader</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<true/>
+				<key>triggerid</key>
+				<string>rss-feeds</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>149F28A4-5FC9-4819-BECB-1B1020084EF9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>{var:keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading feeds...</string>
+				<key>script</key>
+				<string>import os
+import json
+
+WORKFLOW_DATA = os.environ['alfred_workflow_data']
+WORKFLOW_RSS_FEED = os.path.join(WORKFLOW_DATA, "feed.json")
+
+# Default file contents
+default_content = []
+
+alfred_items = {"items": []}
+
+# If the Workflow Data Directory is non-existent, create it
+if not os.path.exists(WORKFLOW_DATA):
+    os.makedirs(WORKFLOW_DATA)
+
+# Check if the file exists, create it if it doesn't
+if not os.path.exists(WORKFLOW_RSS_FEED):
+    with open(WORKFLOW_RSS_FEED, "w") as file:
+        json.dump(default_content, file, indent=4)
+
+# Load the file contents
+with open(WORKFLOW_RSS_FEED, "r") as file:
+    feeds = json.load(file)
+
+for feed in feeds:
+    name = feed.get("name", None)
+    if not name:
+        continue
+    alfred_items["items"].append(
+        {
+            "title": name,
+            "subtitle": f"{feed.get('description', '')}",
+            "arg": f"{feed.get('type', 'xml')}||{feed.get('url')}"
+        }
+    )
+
+print(json.dumps(alfred_items))
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Select your favorite RSS feed!</string>
+				<key>title</key>
+				<string>Browse RSS Feeds</string>
+				<key>type</key>
+				<integer>9</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>1B6DFFF1-3074-4476-93CF-0A67B420D6A3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching for content</string>
+				<key>script</key>
+				<string>import urllib.request
+import json
+import xml.etree.ElementTree as ET
+import os
+from io import StringIO
+from html.parser import HTMLParser
+
+
+# Django https://github.com/django/django/blob/1.7.7/django/utils/html.py#L170
+class MLStripper(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.reset()
+        self.strict = False
+        self.convert_charrefs= True
+        self.text = StringIO()
+    def handle_data(self, d):
+        self.text.write(d)
+    def get_data(self):
+        return self.text.getvalue()
+
+
+def _strip_once(value):
+    """
+    Internal tag stripping utility used by strip_tags.
+    """
+    s = MLStripper()
+    try:
+        s.feed(value)
+    except Exception:
+        return value
+
+    try:
+        s.close()
+    except (Exception, UnboundLocalError):
+        return s.get_data() + s.rawdata
+    else:
+        return s.get_data()
+
+
+def strip_tags(value):
+    """Returns the given HTML with all tags stripped."""
+    while '&lt;' in value and '&gt;' in value:
+        new_value = _strip_once(value)
+        if len(new_value) &gt;= len(value):
+            break
+        value = new_value
+    return value
+
+
+alfred_response = {"items": []}
+
+
+def parse_xml(feed_content):
+    tree = ET.ElementTree(ET.fromstring(feed_content))
+    root = tree.getroot()
+    items = []
+    for item in root.findall(".//item"):
+        title = item.find("title").text if item.find("title") is not None else ""
+        description = (
+            strip_tags(item.find("description").text)
+            if item.find("description") is not None
+            else ""
+        )
+        link = item.find("link").text if item.find("link") is not None else ""
+
+        items.append(
+            {
+                "title": title,
+                "subtitle": description,
+                "arg": link,
+            }
+        )
+    return items
+
+
+def parse_json(feed_content):
+    data = json.loads(feed_content)
+    items = []
+    for item in data.get("items", []):
+        title = item.get("title", "")
+        description = strip_tags(item.get("description", ""))
+        link = item.get("url", "")
+
+        items.append(
+            {
+                "title": title,
+                "subtitle": description,
+                "arg": link,
+            }
+        )
+    return items
+
+
+def get_feed_data(feed_url, kind):
+    try:
+        response = urllib.request.urlopen(feed_url)
+        content = response.read()
+    except Exception as e:
+        return alfred_response["items"].append(
+            {
+                "title": "An error occured",
+                "subtitle": f"{e}",
+                "arg": "",
+            }
+        )
+    if kind == "json":
+        alfred_response['items'].extend(parse_json(content))
+        return alfred_response
+    elif kind == "xml":
+        alfred_response['items'].extend(parse_xml(content))
+        return alfred_response
+
+
+def main():
+    url, kind = os.environ["RSS_2"], os.environ["RSS_1"]
+    feed_data = get_feed_data(url, kind)
+
+    print(json.dumps(feed_data))
+
+
+if __name__ == "__main__":
+    main()
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Load and search through specified RSS feeds</string>
+				<key>title</key>
+				<string>Loading RSS Feed Content</string>
+				<key>type</key>
+				<integer>9</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>13252789-424B-4391-8846-32BBE4E2368C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>2EAB3C65-2113-4830-A8A5-E8968239BCED</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>||</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>RSS_</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>59AE16A3-2914-4807-8251-5C788C8994B7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>9E77C400-B6AA-40F7-9179-407C5D56740D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>alfred://runtrigger/com.terminal.alfred-rss/rss-feeds/?argument={var:feed_name}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>B5E83FD1-9F7D-46F5-934B-ED8B02E3A0C5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>Give the feed a title to be displayed</string>
+				<key>text</key>
+				<string>Feed Title</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F830F577-6B1A-4481-B090-1251CB46A71D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>Feed URL to parse for updates</string>
+				<key>text</key>
+				<string>Feed URL</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F64A53D4-1A88-4387-B2CC-D7DEB2CFF9C2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>import os
+import json
+
+WORKFLOW_DATA = os.environ['alfred_workflow_data']
+WORKFLOW_RSS_FEED = os.path.join(WORKFLOW_DATA, "feed.json")
+
+# Default file contents
+default_content = []
+
+alfred_items = {"items": []}
+
+# If the Workflow Data Directory is non-existent, create it
+if not os.path.exists(WORKFLOW_DATA):
+    os.makedirs(WORKFLOW_DATA)
+
+# Check if the file exists, create it if it doesn't
+if not os.path.exists(WORKFLOW_RSS_FEED):
+    with open(WORKFLOW_RSS_FEED, "w") as file:
+        json.dump(default_content, file, indent=4)
+
+# Load the file contents
+with open(file_path, "r") as file:
+    feeds = json.load(file)
+
+if not any(feed.get('name') == feed_name for feed in feeds):
+    feeds.append({
+        'name': feed_name,
+        'description': feed_description,
+        'url': feed_url,
+        'type': feed_type
+        })
+
+    with open(file_path, 'w') as fp:
+        json.dump(feeds, fp, indent=4)</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>9</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>12233739-8265-4228-B095-24CF82B9E651</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>Describe the feed</string>
+				<key>text</key>
+				<string>Feed Description</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>EFF409E3-4742-47AB-8838-0CF21AB9559A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"JSON","arg":"json","subtitle":"JSON Format"},{"title":"XML","arg":"xml","subtitle":"XML Format"}]</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Type of Feed that should be parsed</string>
+				<key>title</key>
+				<string>Feed Type</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>DD963266-D82A-4572-BDF4-4383058ACCCB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>{var:keyword_add}</string>
+				<key>subtext</key>
+				<string>Configure your favorite RSS Feed for future reading</string>
+				<key>text</key>
+				<string>Add and RSS Feed</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>3E0D8152-D48A-4F6E-9839-1884DCB6F6C7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>feed_description</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>92112159-787A-46AC-AA49-FEB2233D8BDB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>feed_name</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>CD9A68D4-3450-4088-A430-8B2FD7E75B8C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>feed_type</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>A4E04C33-2B7B-4F17-BA63-C24CD89FA418</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>feed_url</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>72CC5244-4B2A-4CC8-B581-5922116E526A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>DD56E87A-1A08-437D-8646-E4D9BED5BA20</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:open_after_add}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>5</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Trigger Workflow</string>
+						<key>uid</key>
+						<string>F581F044-6236-404F-BD48-4EAF8608D338</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>7E8DA5CA-26C3-4AE1-8693-E62B7C4FBFBD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># RSS Feed
+
+RSS Feed is an Alfred workflow that supports fetching various RSS Feeds. Feeds are supplied by the user via adding them to the respective configuration file.
+
+This workflow will do the following:
+
+1. Check if `~/.alfred_feeds` exists
+2. Create it if it does not exists
+3. Load `~/.alfred_feeds/.feeds.json` and create it if it does not exists
+
+
+
+## RSS Feeds
+
+![RSS Main](./assets/rss_main.png)
+
+## RSS Loading
+
+![RSS Loading](./assets/rss_loading.png)
+
+## RSS Posts
+
+![RSS Posts](./assets/rss_posts.png)</string>
+	<key>uidata</key>
+	<dict>
+		<key>12233739-8265-4228-B095-24CF82B9E651</key>
+		<dict>
+			<key>xpos</key>
+			<real>1095</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
+		<key>13252789-424B-4391-8846-32BBE4E2368C</key>
+		<dict>
+			<key>xpos</key>
+			<real>675</real>
+			<key>ypos</key>
+			<real>60</real>
+		</dict>
+		<key>149F28A4-5FC9-4819-BECB-1B1020084EF9</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>60</real>
+		</dict>
+		<key>1B6DFFF1-3074-4476-93CF-0A67B420D6A3</key>
+		<dict>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>60</real>
+		</dict>
+		<key>2EAB3C65-2113-4830-A8A5-E8968239BCED</key>
+		<dict>
+			<key>xpos</key>
+			<real>885</real>
+			<key>ypos</key>
+			<real>60</real>
+		</dict>
+		<key>3E0D8152-D48A-4F6E-9839-1884DCB6F6C7</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>59AE16A3-2914-4807-8251-5C788C8994B7</key>
+		<dict>
+			<key>xpos</key>
+			<real>445</real>
+			<key>ypos</key>
+			<real>90</real>
+		</dict>
+		<key>72CC5244-4B2A-4CC8-B581-5922116E526A</key>
+		<dict>
+			<key>xpos</key>
+			<real>830</real>
+			<key>ypos</key>
+			<real>210</real>
+		</dict>
+		<key>7E8DA5CA-26C3-4AE1-8693-E62B7C4FBFBD</key>
+		<dict>
+			<key>xpos</key>
+			<real>1255</real>
+			<key>ypos</key>
+			<real>210</real>
+		</dict>
+		<key>92112159-787A-46AC-AA49-FEB2233D8BDB</key>
+		<dict>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>210</real>
+		</dict>
+		<key>9E77C400-B6AA-40F7-9179-407C5D56740D</key>
+		<dict>
+			<key>xpos</key>
+			<real>505</real>
+			<key>ypos</key>
+			<real>90</real>
+		</dict>
+		<key>A4E04C33-2B7B-4F17-BA63-C24CD89FA418</key>
+		<dict>
+			<key>xpos</key>
+			<real>1035</real>
+			<key>ypos</key>
+			<real>210</real>
+		</dict>
+		<key>B5E83FD1-9F7D-46F5-934B-ED8B02E3A0C5</key>
+		<dict>
+			<key>xpos</key>
+			<real>1340</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
+		<key>CD9A68D4-3450-4088-A430-8B2FD7E75B8C</key>
+		<dict>
+			<key>xpos</key>
+			<real>420</real>
+			<key>ypos</key>
+			<real>210</real>
+		</dict>
+		<key>DD56E87A-1A08-437D-8646-E4D9BED5BA20</key>
+		<dict>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>210</real>
+		</dict>
+		<key>DD963266-D82A-4572-BDF4-4383058ACCCB</key>
+		<dict>
+			<key>xpos</key>
+			<real>885</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
+		<key>EFF409E3-4742-47AB-8838-0CF21AB9559A</key>
+		<dict>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
+		<key>F64A53D4-1A88-4387-B2CC-D7DEB2CFF9C2</key>
+		<dict>
+			<key>xpos</key>
+			<real>680</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
+		<key>F830F577-6B1A-4481-B090-1251CB46A71D</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>rss</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Keyword used to trigger the workflow</string>
+			<key>label</key>
+			<string>Keyword Trigger</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>rssa</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Keyword used to trigger adding a feed</string>
+			<key>label</key>
+			<string>Keyword Trigger for Adding a Feed</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword_add</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Open feed after adding</string>
+			</dict>
+			<key>description</key>
+			<string>Retrigger the Workflow after adding a new feed. Inserting the new feed as the query</string>
+			<key>label</key>
+			<string>New Feeds</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>open_after_add</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>0.0.2</string>
+	<key>webaddress</key>
+	<string>https://github.com/TerminalFi</string>
+</dict>
+</plist>
