@@ -5,7 +5,9 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-let rerunSecs = 5; // slow reruns as default
+let rerunSecs = 4; // slow reruns as default
+
+/** @type AlfredItem[] */
 const volumes = app
 	.doShellScript("df -h")
 	.split("\r")
@@ -30,6 +32,7 @@ const volumes = app
 			title: name,
 			subtitle: spaceInfo,
 			arg: path,
+			valid: true,
 		};
 	});
 
