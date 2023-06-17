@@ -16,11 +16,4 @@ sed -i '' \
 
 open -a "Vivaldi" "vivaldi://settings/appearance/"
 echo -n "$HOME/.config/vivaldi" | pbcopy
-
 # TODO paste folder & restart Vivaldi again
-
-#───────────────────────────────────────────────────────────────────────────────
-# TODO import settings from these
-open -a "Vivaldi" "chrome-extension://pncfbmialoiaghdehhbnbhkkgmjanfhe/pages/options.html"
-open -a "Vivaldi" "chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html"
-

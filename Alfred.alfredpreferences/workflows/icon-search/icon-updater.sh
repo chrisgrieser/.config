@@ -4,7 +4,10 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # CONFIG
 CUSTOM_ICON_FOLDER="$DOTFILE_FOLDER/_custom-app-icons"
-PWA_FOLDER="$HOME/Applications/Chrome Apps.localized" # INFO "Vivaldi Apps" is internally still named "Chrome Apps"
+
+# INFO "Vivaldi Apps" is internally still named "Chrome Apps"
+[[ "$BROWSER_APP" == "Vivaldi" ]] && app="Chrome" || app="Brave"
+PWA_FOLDER="$HOME/Applications/$app Apps.localized"
 
 #───────────────────────────────────────────────────────────────────────────────
 

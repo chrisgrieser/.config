@@ -154,8 +154,12 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 100 }
           - key_code: spacebar
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com\.vivaldi\.Vivaldi]
+          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+      # shift+cmd+,: extension settings
+      - type: basic
+        from: { key_code: comma, modifiers: { mandatory: [command, shift] } }
+        to:
+          - shell_command: open 'brave://extensions/'
   #───────────────────────────────────────────────────────────────────────
   - description: "(Apps) Vivaldi"
     manipulators:

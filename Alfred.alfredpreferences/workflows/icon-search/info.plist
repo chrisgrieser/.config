@@ -19,19 +19,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>195F72A9-03B1-4420-AF37-1CD417086F24</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2ADCC129-C42B-49AD-85F7-4D77D753B97E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>1B052359-9E54-4CBB-BABF-C6925CB1015A</key>
 		<array>
 			<dict>
@@ -554,42 +541,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>:icon</string>
-				<key>subtext</key>
-				<string>icon-updater.sh</string>
-				<key>text</key>
-				<string>Edit Icon Customization Script</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>195F72A9-03B1-4420-AF37-1CD417086F24</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>icon-updater.sh</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>2ADCC129-C42B-49AD-85F7-4D77D753B97E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -741,17 +692,6 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>780</real>
 		</dict>
-		<key>195F72A9-03B1-4420-AF37-1CD417086F24</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>note</key>
-			<string>edit custom icon file</string>
-			<key>xpos</key>
-			<real>625</real>
-			<key>ypos</key>
-			<real>450</real>
-		</dict>
 		<key>1B052359-9E54-4CBB-BABF-C6925CB1015A</key>
 		<dict>
 			<key>colorindex</key>
@@ -760,15 +700,6 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<real>765</real>
 			<key>ypos</key>
 			<real>330</real>
-		</dict>
-		<key>2ADCC129-C42B-49AD-85F7-4D77D753B97E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>795</real>
-			<key>ypos</key>
-			<real>450</real>
 		</dict>
 		<key>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</key>
 		<dict>
