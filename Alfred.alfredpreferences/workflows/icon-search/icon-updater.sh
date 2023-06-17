@@ -45,9 +45,6 @@ case $APP in
 "Vivaldi")
 	cp -f "$CUSTOM_ICON_FOLDER/Vivaldi.icns" "$APP.app/Contents/Resources/app.icns"
 	;;
-"MailMate")
-	cp -f "$CUSTOM_ICON_FOLDER/Mailmate.icns" "$APP.app/Contents/Resources/$APP.icns"
-	;;
 "Alfred Preferences")
 	osascript -e "tell application \"Finder\"
 			open information window of (\"Alfred 5.app/Contents/Preferences/$APP.app\" as POSIX file as alias)

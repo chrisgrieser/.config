@@ -20,6 +20,7 @@ declare const Application: {
 			textToShow: string,
 			options: { defaultAnswer: string; buttons: string[]; defaultButton: string },
 		): { textReturned: string };
+		displayNotification(textToShow: string, options: { withTitle: string; subtitle: string }): void;
 	};
 	(appname: string): {
 		id(): number;
@@ -38,9 +39,12 @@ declare const Application: {
 
 		// app-specific
 		exists(path: string): boolean; // Finder
-		createNote(options: { text: string, path?: string }): void; // SideNotes
-		documents: { url(): string, name(): string}[]; // webkit browsers
-		windows: { activeTab():string}[]; // chromium browsers
+		createNote(options: { text: string; path?: string }): void; // SideNotes
+		documents: { url(): string; name(): string }[]; // webkit browsers
+		windows: { activeTab: { url(): string; name(): string } }[]; // chromium browsers
+
+		// rome-ignore lint/suspicious/noExplicitAny: TODO
+		applicationProcesses: any; // System Events
 	};
 };
 

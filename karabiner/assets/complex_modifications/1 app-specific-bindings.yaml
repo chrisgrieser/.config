@@ -10,7 +10,7 @@ rules:
             modifiers: [command, shift]
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^us\.zoom\.xos$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Microsoft & Google Office"
+  - description: "(Apps) Microsoft Office"
     manipulators:
       # export
       - type: basic
@@ -48,29 +48,6 @@ rules:
                   click menu item "Thumbnail" of menu of menu item "Sidebar" of menu "View" of menu bar 1
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
-      # Comment in Google Docs
-      - type: basic
-        from: { key_code: k, modifiers: { mandatory: [command] } }
-        to:
-          - key_code: m
-            modifiers: [command, option]
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com.brave.Browser.app.mpnpojknpmmopombnjdcgaaiekajbnjb
-      # Footnote in Google Docs
-      - type: basic
-        from: { key_code: non_us_backslash, modifiers: { mandatory: [command] } }
-        to:
-          - key_code: f
-            modifiers: [command, option]
-        conditions:
-          [
-            {
-              type: frontmost_application_if,
-              bundle_identifiers: [^com.brave.Browser.app.mpnpojknpmmopombnjdcgaaiekajbnjb],
-            },
-          ]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Highlights"
     manipulators:
@@ -163,7 +140,24 @@ rules:
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
   #───────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Browser"
+  - description: "(Apps) Brave"
+    manipulators:
+      # Remove bookmark
+      - type: basic
+        from: { key_code: d, modifiers: { mandatory: [command, shift] } }
+        to:
+          - { key_code: d, modifiers: [command] }
+          - { key_code: vk_none, hold_down_milliseconds: 100 }
+          - key_code: tab
+          - key_code: tab
+          - key_code: tab
+          - { key_code: vk_none, hold_down_milliseconds: 100 }
+          - key_code: spacebar
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.vivaldi\.Vivaldi]
+  #───────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Vivaldi"
     manipulators:
       # Remove bookmark
       - type: basic

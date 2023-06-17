@@ -31,13 +31,8 @@
 			"uid": "5"
 		},
 		{
-			"title": "❓ About",
-			"arg": "vivaldi://about/",
-			"uid": "6"
-		},
-		{
 			"title": "🕟 History",
-			"arg": "vivaldi://history/",
+			"arg": "chrome://history/",
 			"uid": "7"
 		}
 	]

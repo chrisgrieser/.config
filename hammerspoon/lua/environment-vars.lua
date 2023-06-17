@@ -53,6 +53,7 @@ end
 
 M.mailApp = "Mimestream"
 M.browserApp = "Brave Browser"
+M.browserDefaultsPath = "Brave Browser"
 
 --------------------------------------------------------------------------------
 return M
