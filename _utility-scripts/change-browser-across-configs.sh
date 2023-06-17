@@ -18,6 +18,7 @@ open "chrome-extension://jinjaccalgkegednnccohejagnlnfdag/options/index.html"
 open "chrome-extension://epmaefhielclhlnmjofcdapbeepkmggh/options.html"
 open "chrome-extension://bijpdibkloghppkbmhcklkogpjaenfkg/html/options.html"
 open "chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html"
+open "chrome-extension://gnmdbogfankgjepgglmmfmbnimcmcjle/optionPage/optionPage.html"
 
 # PWAs
 open "https://www.netflix.com/browse"
@@ -61,11 +62,9 @@ open "chrome-extension://epmaefhielclhlnmjofcdapbeepkmggh/options.html"
 open "chrome-extension://bijpdibkloghppkbmhcklkogpjaenfkg/html/options.html"
 open "chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html"
 
-# reload karabiner
+# reload karabiner & hammerspoon
 karabinerMsg=$(osascript -l JavaScript "$DOTFILE_FOLDER/karabiner/build-karabiner-config.js")
 echo "$karabinerMsg"
-
-# restart hammerspoon
 killall "Hammerspoon"
 while pgrep -xq "Hammerspoon"; do sleep 0.1; done
 open -a "Hammerspoon"
