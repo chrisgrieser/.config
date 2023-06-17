@@ -5,7 +5,7 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-let rerunSecs = 5;
+let rerunSecs = 5; // slow reruns as default
 const volumes = app
 	.doShellScript("df -h")
 	.split("\r")
@@ -40,7 +40,7 @@ if (volumes.length === 0) {
 		subtitle: "⎋ to abort",
 		valid: false,
 	});
-	rerunSecs = 0.5; // quicker reruns when no volume found
+	rerunSecs = 1; // quicker reruns when no volume found
 }
 
 JSON.stringify({
