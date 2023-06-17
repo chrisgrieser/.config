@@ -20,4 +20,5 @@ rules:
     require-starting-space: false
 
   brackets: { level: warning }
+  commas: { level: warning }
   hyphens: { level: warning }
