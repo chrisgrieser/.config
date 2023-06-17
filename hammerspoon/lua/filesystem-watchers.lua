@@ -7,14 +7,18 @@ local home = os.getenv("HOME")
 
 -- BOOKMARKS SYNCED TO CHROME BOOKMARKS
 -- (needed for Alfred)
-local sourceProfileLocation = home .. "/Library/Application Support/" .. env.browserApp .. "/"
+
+local sourceProfileLocation = home .. "/Library/Application Support/" .. env.browserDefaultsPath
 local sourceBookmarkPath = sourceProfileLocation .. "/Default/Bookmarks"
 local chromeProfileLocation = home .. "/Library/Application Support/Google/Chrome/"
 BookmarkWatcher = pw(sourceBookmarkPath, function()
 	-- Bookmarks
 	local bookmarks = hs.json.read(sourceBookmarkPath)
 	if not bookmarks then return end
-	bookmarks.roots.trash = nil -- remove Vivaldi's trash folder for Alfred
+
+	-- remove Vivaldi's trash folder for Alfred
+	if env.browserApp == "Vivaldi" then bookmarks.roots.trash = nil end 
+
 	hs.execute(("mkdir -p '%s'"):format(chromeProfileLocation))
 	local success = hs.json.write(bookmarks, chromeProfileLocation .. "/Default/Bookmarks", false, true)
 	if not success then

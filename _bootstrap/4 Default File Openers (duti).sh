@@ -4,14 +4,10 @@
 if ! command -v duti &>/dev/null; then echo "duti not installed." && return 1; fi
 
 # Config
-browserID="com.vivaldi.Vivaldi"
+browserID="com.brave.Browser"
 videoplayerID="com.colliderli.iina"
 editorID="com.apple.automator.Neovim"
 obsiOpenerID="com.apple.automator.Obsidian-Opener"
-unarchiveID="com.apple.archiveutility"
-
-# Archives
-duti -s "$unarchiveID" zip all
 
 # Obsidian
 duti -s "$obsiOpenerID" md all
@@ -28,7 +24,6 @@ duti -s "$videoplayerID" mkv all
 duti -s "$videoplayerID" m4a all
 
 # code
-editorID="com.apple.automator.Neovim"
 duti -s "$editorID" hjson all
 duti -s "$editorID" http all
 duti -s "$editorID" conf all
@@ -63,19 +58,17 @@ duti -s "$editorID" public.data all # dotfiles without extension
 duti -s "$editorID" vimrc all
 duti -s "$editorID" sketchybarrc all
 
-# URI Schemes
-duti -s org.m0k.transmission magnet
-duti -s com.mimestream.Mimestream mailto # = default mail client
-
 # Browser
-browserID="com.vivaldi.Vivaldi"
+browserID="com.brave.Browser"
 duti -s "$browserID" chrome-extension
 duti -s "$browserID" chrome
-duti -s "$browserID" webloc all     # link files
-duti -s "$browserID" url all     # link files
+duti -s "$browserID" webloc all # link files
+duti -s "$browserID" url all    # link files
 
 # Misc
-duti -s net.highlightsapp.universal pdf all
-duti -s org.m0k.transmission torrent all
-duti -s com.busymac.busycal3 ics all
-
+duti -s "net.highlightsapp.universal" pdf all
+duti -s "org.m0k.transmission" torrent all
+duti -s "com.busymac.busycal3" ics all
+duti -s "com.apple.archiveutility" zip all
+duti -s org.m0k.transmission magnet
+duti -s com.mimestream.Mimestream mailto # = default mail client

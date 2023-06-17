@@ -99,33 +99,26 @@
 			"if (process) { process.visible = false; }"
 		]
 	},
-	"browser URL": {
-		"prefix": "browser URL",
-		"body": "const url = Application(\"Vivaldi\").windows[0].activeTab.url();"
-	},
-	"browser title": {
-		"prefix": "browser title",
-		"body": "const title = Application(\"Vivaldi\").windows[0].activeTab.title();"
-	},
 	"browser URL & title (all-browser function)": {
 		"prefix": "browser URL & title (function)",
 		"body": [
 			"function browserTab() {",
 			"\tconst frontmostAppName = Application(\"System Events\").applicationProcesses.where({ frontmost: true }).name()[0];",
 			"\tconst frontmostApp = Application(frontmostAppName);",
-			"\tconst chromiumVariants = [\"Google Chrome\", \"Chromium\", \"Opera\", \"Vivaldi\", \"Brave Browser\", \"Microsoft Edge\"];",
+			"\tconst chromiumVariants = [\"Google Chrome\", \"Chromium\", \"Opera\", \"Vivaldi\", \"Brave Browser\", \"Microsoft Edge\", \"Arc\"];",
 			"\tconst webkitVariants = [\"Safari\", \"Webkit\"];",
 			"\tlet title, url;",
-			"\tif (chromiumVariants.some(appName => frontmostAppName.startsWith(appName))) {",
+			"\tif (chromiumVariants.some((appName) => frontmostAppName.startsWith(appName))) {",
 			"\t\turl = frontmostApp.windows[0].activeTab.url();",
 			"\t\ttitle = frontmostApp.windows[0].activeTab.name();",
-			"\t} else if (webkitVariants.some(appName => frontmostAppName.startsWith(appName))) {",
+			"\t} else if (webkitVariants.some((appName) => frontmostAppName.startsWith(appName))) {",
 			"\t\turl = frontmostApp.documents[0].url();",
 			"\t\ttitle = frontmostApp.documents[0].name();",
 			"\t} else {",
-			"\t\treturn \"You need a supported browser as your frontmost app\";",
+			"\t\tapp.displayNotification(\"\", { withTitle: \"You need a supported browser as your frontmost app\", subtitle: \"\" });",
+			"\t\treturn;",
 			"\t}",
-			"\t\treturn { \"url\": url, \"title\": title };",
+			"\treturn { url: url, title: title };",
 			"}"
 		]
 	}

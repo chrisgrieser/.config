@@ -1,12 +1,11 @@
 #!/usr/bin/env osascript -l JavaScript
 
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
+
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	ObjC.import("stdlib");
-	const app = Application.currentApplication();
-	app.includeStandardAdditions = true;
-
-	//───────────────────────────────────────────────────────────────────────────
-
 	let url;
 
 	if (argv[0]) {
@@ -17,9 +16,9 @@ function run(argv) {
 		const frontmostApp = Application(frontmostAppName);
 		const chromiumVariants = ["Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge"];
 		const webkitVariants = ["Safari", "Webkit"];
-		if (chromiumVariants.some(appName => frontmostAppName.startsWith(appName))) {
+		if (chromiumVariants.some((appName) => frontmostAppName.startsWith(appName))) {
 			url = frontmostApp.windows[0].activeTab.url();
-		} else if (webkitVariants.some(appName => frontmostAppName.startsWith(appName))) {
+		} else if (webkitVariants.some((appName) => frontmostAppName.startsWith(appName))) {
 			url = frontmostApp.documents[0].url();
 		} else {
 			app.displayNotification("", { withTitle: "You need a supported browser as your frontmost app", subtitle: "" });
