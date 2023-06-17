@@ -64,10 +64,7 @@ Wf_browser = wf.new(env.browserApp)
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(wf.windowCreated, function()
-		wu.autoTile(Wf_browser)
-		u.runWithDelays({ 0.3, 0.5 }, function() u.closeTabsContaining("chrome://vivaldi-webui") end)
-	end)
+	:subscribe(wf.windowCreated, function() wu.autoTile(Wf_browser) end)
 	:subscribe(wf.windowDestroyed, function() wu.autoTile(Wf_browser) end)
 	:subscribe(wf.windowFocused, wu.bringAllWinsToFront)
 

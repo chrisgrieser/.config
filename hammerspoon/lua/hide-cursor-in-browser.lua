@@ -11,9 +11,13 @@ local function hideCurAndPassThrough(key)
 	JHidesCursor:disable()
 	KHidesCursor:disable()
 
+	-- FIX vivaldi not being responsive until initially clicked into
+	hs.eventtap.leftClick{ x = 0.5, y = 0.5 }
+
 	-- hide the cursor
-	local screen = hs.mouse.getCurrentScreen()
+	local screen = hs.mouse.getCurrentScreen() 
 	if not screen then return end
+
 	local bottomLeftPos = { x = 0, y = screen:frame().h * 0.9 }
 	hs.mouse.setRelativePosition(bottomLeftPos, screen)
 
