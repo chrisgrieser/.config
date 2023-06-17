@@ -40,28 +40,6 @@ duti -s "$browserAppId" chrome
 duti -s "$browserAppId" webloc all # link files
 duti -s "$browserAppId" url all    # link files
 
-open "chrome-extension://pncfbmialoiaghdehhbnbhkkgmjanfhe/pages/options.html"
-open "chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html"
-open "chrome-extension://jinjaccalgkegednnccohejagnlnfdag/options/index.html"
-open "chrome-extension://epmaefhielclhlnmjofcdapbeepkmggh/options.html"
-open "chrome-extension://bijpdibkloghppkbmhcklkogpjaenfkg/html/options.html"
-open "chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html"
-
-# reload karabiner
-karabinerMsg=$(osascript -l JavaScript "$DOTFILE_FOLDER/karabiner/build-karabiner-config.js")
-echo "$karabinerMsg"
-
-# restart hammerspoon
-killall "Hammerspoon"
-while pgrep -xq "Hammerspoon"; do sleep 0.1; done
-open -a "Hammerspoon"
-open "chrome-extension://pncfbmialoiaghdehhbnbhkkgmjanfhe/pages/options.html"
-open "chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html"
-open "chrome-extension://jinjaccalgkegednnccohejagnlnfdag/options/index.html"
-open "chrome-extension://epmaefhielclhlnmjofcdapbeepkmggh/options.html"
-open "chrome-extension://bijpdibkloghppkbmhcklkogpjaenfkg/html/options.html"
-open "chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html"
-
 # reload karabiner & hammerspoon
 karabinerMsg=$(osascript -l JavaScript "$DOTFILE_FOLDER/karabiner/build-karabiner-config.js")
 echo "$karabinerMsg"
