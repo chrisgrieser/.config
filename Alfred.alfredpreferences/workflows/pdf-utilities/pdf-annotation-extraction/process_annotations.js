@@ -413,15 +413,24 @@ function extractMetadata(citekey, rawEntry) {
  * @param {string} tagsForYaml
  */
 function writeNote(annos, metad, outputPath, tagsForYaml) {
+	// format authors for yaml
+	const authorArr = metad.author
+		.split(" and ")
+		.map((name) => {
+			const isLastCommaFirst = name.includes(",");
+			if (isLastCommaFirst) name = name.split(/, ?/)[1] + " " + name.split(/, ?/)[0];
+			return `"${name}"`;
+		})
+		.join(", ");
+
 	// yaml frontmatter
 	const yamlKeys = [
 		`aliases: "${metad.title}"`,
 		`tags: [literature-note, ${tagsForYaml}]`,
 		"cssclass: pdf-annotations",
-		// "obsidianUIMode: preview",
 		`citekey: ${metad.citekey}`,
 		`year: ${metad.year.toString()}`,
-		`author: "${metad.author}"`,
+		`author: [${authorArr}]`,
 		`publicationType: ${metad.ptype}`,
 	];
 	// url & doi do not exist for every entry, so only inserting them if they
@@ -464,8 +473,8 @@ ${annos}
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string[]} argv */
-// rome-ignore lint/correctness/noUnusedVariables:
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: AlfredRun
 function run(argv) {
 	const citekey = argv[0];
 	const rawAnnotations = argv[1];

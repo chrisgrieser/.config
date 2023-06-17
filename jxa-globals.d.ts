@@ -42,7 +42,7 @@ declare const Application: {
 
 		// app-specific
 		exists(path: string): boolean; // Finder
-		createNote({ text: string, path: string }): void; // SideNotes
+		createNote(options: { text: string, path?: string }): void; // SideNotes
 	};
 };
 

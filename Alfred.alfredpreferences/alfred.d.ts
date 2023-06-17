@@ -3,7 +3,7 @@
 
 // "run" function used by Alfred
 // when used as Script Filter, the returned value must be a stringified JSON object
-declare type AlfredRun = (argv: string[]) => string; 
+declare type AlfredRun = (argv: string[]) => string | void;
 
 declare class AlfredScriptFilter {
 	rerun?: number; // only accepts values between 0.1 and 5
@@ -14,18 +14,18 @@ declare class AlfredScriptFilter {
 
 declare class AlfredItem {
 	title: string;
-	action?: string|string[]|Object;
+	action?: string | string[] | Object;
 	subtitle?: string;
-	arg?: string|string[];
+	arg?: string | string[];
 	valid?: boolean;
-	type?: "default"|"file"|"file:skipcheck";
+	type?: "default" | "file" | "file:skipcheck";
 	match?: string;
 	uuid?: string;
 	autocomplete?: string;
 	quicklookurl?: string;
 	variables?: Object;
 	icon?: {
-		type?: "fileicon"|"filetype";
+		type?: "fileicon" | "filetype";
 		path: string;
 	};
 	mods?: {
@@ -44,7 +44,7 @@ declare class AlfredItem {
 declare class AlfredModifierKey {
 	title?: string;
 	subtitle?: string;
-	arg?: string|string[];
+	arg?: string | string[];
 	valid?: boolean;
 	variables?: Object;
 }
