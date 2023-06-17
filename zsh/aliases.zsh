@@ -24,7 +24,6 @@ alias ls='ls -G'       # colorize by default
 alias which='which -a' # show all
 alias mkdir='mkdir -p' # create intermediate directories
 alias pip="pip3"
-alias curl="curl -sL" # silent & redirect
 
 # misc
 alias prose='ssh nanotipsforvim@prose.sh'
@@ -41,10 +40,9 @@ function pip3() {
 alias bkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-script.sh"'
 
 alias l='exa --all --long --git --icons --group-directories-first --sort=modified'
-alias t='exa --tree --level=4 --icons --git-ignore'
-alias td='exa --only-dirs --tree --level=4 --icons --git-ignore'
+alias tree='exa --tree --level=4 --icons --git-ignore'
+alias tree-dir='exa --only-dirs --tree --level=4 --icons --git-ignore'
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
-alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases

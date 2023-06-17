@@ -40,6 +40,8 @@ function unshallow() {
 #───────────────────────────────────────────────────────────────────────────────
 # GIT DIFF
 
+alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
+
 # use delta for small diffs and diff2html for big diffs
 function gd() {
 	local threshold_lines=50
