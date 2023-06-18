@@ -32,21 +32,19 @@ const progitBookPages = app
 const referenceDocs = app
 	.doShellScript(`curl -s "${referenceDocsURL}"`)
 	.split("\r")
-	.slice(250, 276) // cut header/footer from html
+	.slice(126, 276) // cut header/footer from html
 	.filter((line) => line.includes("a href")) // only links
 	.map((line) => {
 		const url = line.replace(ahrefRegex, "$1");
 		const title = line.replace(ahrefRegex, "$2");
 		if (!url) return {};
-		const subsite = url.slice(6);
 
 		return {
 			title: title,
-			subtitle: "➡️ " + subsite,
-			arg: `https://git-scm.com/${url}`,
+			subtitle: "➡️ ",
+			arg: `https://git-scm.com${url}`,
 			uid: url,
 		};
 	});
 
-// JSON.stringify({ items: [...referenceDocs, ...progitBookPages] });
-JSON.stringify({ items: referenceDocs });
+JSON.stringify({ items: [...referenceDocs, ...progitBookPages] });
