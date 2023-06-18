@@ -23,17 +23,12 @@ end
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
----checks whether the finder window is a small window (copy progress etc.)
----@param win hs.window
----@return boolean
-function M.isInvalidFinderWin(win) return win:size() == hs.geometry.size(404, 82) end
-
 ---@param win hs.window
 ---@param relSize hs.geometry
 ---@nodiscard
 ---@return boolean?
 function M.CheckSize(win, relSize)
-	if not win then return end
+	if not (win and win:isStandard() and win:isMaximizable()) then return end
 	local maxf = win:screen():frame()
 	local winf = win:frame()
 	local diffw = winf.w - relSize.w * maxf.w
@@ -54,31 +49,13 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- guard clauses
-	local appsToIgnore = {
-		"System Settings",
-		"Twitter",
-		"Transmission",
-		"Alfred",
-		"Hammerspoon",
-		"CleanShot X",
-	}
-	local winsToIgnore = {
-		"System Settings",
-		"Espanso",
-		"Transmission",
-		"CleanShot X",
-		"Twitter",
-		"Alfred",
-		"Hammerspoon",
-		"Quicklook",
-		"qlmanage",
-	}
+	local appsToIgnore = { "Twitter", "Transmission", "Hammerspoon" }
 	if
 		not win
 		or not (win:application())
-		or u.tbl_contains(winsToIgnore, win:title())
 		or u.tbl_contains(appsToIgnore, win:application():name())
-		or M.isInvalidFinderWin(win)
+		or not (win:isMaximizable())
+		or not (win:isStandard())
 	then
 		return
 	end
@@ -100,15 +77,13 @@ function M.bringAllWinsToFront()
 	app:selectMenuItem { "Window", "Bring All to Front" }
 end
 
-local autoTilingInProgress = false
-
 ---automatically apply per-app auto-tiling of the windows of the app
 ---@param winSrc hs.window.filter|"Finder" source for the windows; windowfilter or
 ---appname. If this function is not triggered by a windowfilter event, the window
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
 function M.autoTile(winSrc)
-	if autoTilingInProgress then return end -- prevent concurrent runs
+	if AutoTilingInProgress then return end -- prevent concurrent runs
 
 	local wins = {}
 	if type(winSrc) == "string" then
@@ -120,9 +95,11 @@ function M.autoTile(winSrc)
 	else
 		wins = winSrc:getWindows()
 	end
-	wins = hs.fnutils.filter(wins, function(win) return not M.isInvalidFinderWin(win) end)
+
+	-- prevent autotiling of windows that are not maximizable, e.g. copy progress
+	wins = hs.fnutils.filter(wins, function(win) return win:isMaximizable() and win:isStandard() end)
 	if not wins then return end
-	autoTilingInProgress = true
+	AutoTilingInProgress = true
 
 	if #wins > 1 then M.bringAllWinsToFront() end
 
@@ -162,7 +139,7 @@ function M.autoTile(winSrc)
 		M.moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.66, y = 0 })
 		if #wins == 6 then M.moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 }) end
 	end
-	u.runWithDelays(0.1, function() autoTilingInProgress = false end)
+	u.runWithDelays(0.2, function() AutoTilingInProgress = false end)
 end
 
 --------------------------------------------------------------------------------
@@ -251,20 +228,30 @@ local function moveAllWinsToProjectorScreen()
 	end
 end
 
-local function endAction()
-	if u.appRunning("zoom.us") then
-		hs.alert("📹") -- toggle video
-		u.keystroke({ "shift", "command" }, "V", 1, u.app("zoom.us"))
-	elseif #(hs.screen.allScreens()) > 1 then
-		moveCurWinToOtherDisplay()
+local function verticalSplit()
+	-- since not using spaces for anything else
+	local noSplit = #hs.spaces.spacesForScreen(hs.mouse.getCurrentScreen()) == 1
+
+	if noSplit then
+		-- unhide all windows, so they are displayed as selection for the second window
+		for _, win in pairs(hs.window.allWindows()) do
+			local app = win:application()
+			if app and app:isHidden() then app:unhide() end
+		end
+
+		hs.application.frontmostApplication():selectMenuItem { "Window", "Tile Window to Right of Screen" }
 	else
-		hs.alert("<Nop>")
+		-- un-fullscreen both windows
+		for _, win in pairs(hs.window.allWindows()) do
+			if win:isFullScreen() then win:setFullScreen(false) end
+		end
 	end
 end
 
 --------------------------------------------------------------------------------
 -- Triggers: Hotkeys & URI Scheme
-u.hotkey({}, "end", endAction)
+u.hotkey(u.hyper, "V", verticalSplit)
+u.hotkey(u.hyper, "M", moveCurWinToOtherDisplay)
 u.hotkey(u.hyper, "right", function() M.moveResize(hs.window.focusedWindow(), hs.layout.right50) end)
 u.hotkey(u.hyper, "left", function() M.moveResize(hs.window.focusedWindow(), hs.layout.left50) end)
 -- stylua: ignore start

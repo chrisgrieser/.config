@@ -176,11 +176,11 @@ Wf_finder = wf.new("Finder")
 		hasTitlebar = true,
 	})
 	:subscribe(wf.windowCreated, function(win)
-		if wu.isInvalidFinderWin(win) then return end
+		if not (win:isMaximizable() and win:isStandard()) then return end
 		wu.autoTile(Wf_finder)
 	end)
 	:subscribe(wf.windowDestroyed, function(win)
-		if wu.isInvalidFinderWin(win) then return end
+		if not (win:isMaximizable() and win:isStandard()) then return end
 		wu.autoTile(Wf_finder)
 	end)
 
