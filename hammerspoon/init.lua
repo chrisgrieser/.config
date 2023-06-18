@@ -17,7 +17,6 @@ require("lua.dark-mode")
 require("lua.window-utils")
 require("lua.layouts")
 require("lua.app-hider")
-require("lua.vertical-split")
 
 -- system
 require("lua.console") 

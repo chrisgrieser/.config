@@ -67,13 +67,12 @@ local function twitterToTheSide()
 	local twitter = u.app("Twitter")
 	if not twitter or u.isFront("Alfred") then return end
 
-	-- in case of active split, prevent left window of covering the sketchybar
-	if LEFT_SPLIT and LEFT_SPLIT:application() then LEFT_SPLIT:application():hide() end
 	if twitter:isHidden() then twitter:unhide() end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
 	local win = twitter:findWindow("Twitter")
 	if not win then return end
+
 	win:setFrame(wu.toTheSide)
 	win:raise()
 end
