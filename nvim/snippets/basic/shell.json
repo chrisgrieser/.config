@@ -109,7 +109,7 @@
 	},
 	"if (short)": {
 		"prefix": "if (short)",
-		"body": "[[ ${2:-z} \"$${1:var}\" ]] && $0"
+		"body": "[[ \"$${1:var}\" ]] && $0"
 	},
 	"then": {
 		"prefix": "then .. fi",
@@ -122,6 +122,16 @@
 	"if .. then": {
 		"prefix": "if .. then",
 		"body": "if [[ \"$${1:var}\" ]]; then\n\t$0\nfi"
+	},
+	"if .. then .. else": {
+		"prefix": "if .. then .. else",
+		"body": [
+			"if [[ \"$${1:cond}\" ]]; then",
+			"\t$0",
+			"else",
+			"\t",
+			"fi"
+		]
 	},
 	"check if installed": {
 		"prefix": "check if installed",

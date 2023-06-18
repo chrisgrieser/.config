@@ -81,6 +81,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>63C34A52-70A0-4CA0-AC29-0B8B16E654C8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A09D544F-ECA6-4D74-B8B0-AC69E572977B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7D56EA1B-BF57-40A0-8107-94D3F4D49905</key>
 		<array>
 			<dict>
@@ -111,7 +124,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
+				<string>A09D544F-ECA6-4D74-B8B0-AC69E572977B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -189,7 +202,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A09D544F-ECA6-4D74-B8B0-AC69E572977B</string>
+				<string>63C34A52-70A0-4CA0-AC29-0B8B16E654C8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -213,7 +226,7 @@
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: killall with same name</string>
+				<string>⌃: kill all with same name</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -222,7 +235,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
+				<string>A09D544F-ECA6-4D74-B8B0-AC69E572977B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -278,29 +291,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>kill "$*" || echo "Could not kill $*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A09D544F-ECA6-4D74-B8B0-AC69E572977B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -342,6 +332,115 @@ echo -n "Bluetooth"</string>
 			<string>9B3D46A5-C6D7-472E-99BA-9268E3BFAEC6</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>63C34A52-70A0-4CA0-AC29-0B8B16E654C8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>atop</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>list-processes.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>List of Processes…</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>CBFBCA76-39CE-4D22-A556-EDF1A996849C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>kill-action.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A09D544F-ECA6-4D74-B8B0-AC69E572977B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>F1539426-E456-4953-8215-D809DF4B120B</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -413,95 +512,10 @@ echo -n "WiFi"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>kill -9 "$*" || echo "Could not kill -9 $*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>F1539426-E456-4953-8215-D809DF4B120B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>atop</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>list-processes.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>List of Processes…</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>CBFBCA76-39CE-4D22-A556-EDF1A996849C</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
+			<string>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -549,29 +563,6 @@ echo -n "iCloud Sync"</string>
 			<string>36844FF5-DD3F-4F61-8B06-A2AAE896DD68</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>killall "$*" || echo "Could not killall $*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -935,9 +926,9 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>500</real>
+			<real>490</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>80</real>
 		</dict>
 		<key>36844FF5-DD3F-4F61-8B06-A2AAE896DD68</key>
 		<dict>
@@ -953,68 +944,79 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>40</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>970</real>
+			<real>780</real>
 		</dict>
 		<key>4F6FB435-0A87-45E8-A851-F458286E7A6F</key>
 		<dict>
 			<key>xpos</key>
-			<real>420</real>
+			<real>415</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>375</real>
 		</dict>
 		<key>54580785-C343-4A69-8525-5BF78553961A</key>
 		<dict>
 			<key>xpos</key>
-			<real>270</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>510</real>
+		</dict>
+		<key>63C34A52-70A0-4CA0-AC29-0B8B16E654C8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>kill</string>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>35</real>
 		</dict>
 		<key>681490F8-D3BB-4024-AFE0-DCEE69201856</key>
 		<dict>
 			<key>xpos</key>
-			<real>270</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>265</real>
 		</dict>
 		<key>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>340</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>970</real>
+			<real>780</real>
 		</dict>
 		<key>7D56EA1B-BF57-40A0-8107-94D3F4D49905</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>40</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>650</real>
 		</dict>
 		<key>80995D89-9285-4E5C-8728-25576BF43113</key>
 		<dict>
 			<key>note</key>
 			<string>eject</string>
 			<key>xpos</key>
-			<real>270</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>375</real>
 		</dict>
 		<key>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>killall with name</string>
+			<string>kill all with name</string>
 			<key>xpos</key>
-			<real>270</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>185</real>
 		</dict>
 		<key>9B3D46A5-C6D7-472E-99BA-9268E3BFAEC6</key>
 		<dict>
@@ -1029,39 +1031,37 @@ JSON.stringify({ 'items': volume_array });
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
-			<key>note</key>
-			<string>kill</string>
 			<key>xpos</key>
-			<real>270</real>
+			<real>345</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>80</real>
 		</dict>
 		<key>A226B122-42B9-448F-89AB-32C3D85A8FB9</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>650</real>
 		</dict>
 		<key>A3879C3A-50C5-4ECB-B700-E5D682BFF82C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>340</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>650</real>
 		</dict>
 		<key>B6749459-30C8-484B-BE73-E64557107E37</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>970</real>
+			<real>780</real>
 		</dict>
 		<key>C56280F8-3CDF-451D-BE1A-BE483AE10B45</key>
 		<dict>
@@ -1079,7 +1079,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>80</real>
 		</dict>
 		<key>E01978CB-6F00-4781-8079-075BE323C5FB</key>
 		<dict>
@@ -1088,7 +1088,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>1080</real>
+			<real>895</real>
 		</dict>
 		<key>F1539426-E456-4953-8215-D809DF4B120B</key>
 		<dict>
@@ -1097,16 +1097,16 @@ JSON.stringify({ 'items': volume_array });
 			<key>note</key>
 			<string>force kill</string>
 			<key>xpos</key>
-			<real>270</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>110</real>
 		</dict>
 		<key>FA333A60-CF01-4178-857C-9EE58B2C2E42</key>
 		<dict>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>375</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

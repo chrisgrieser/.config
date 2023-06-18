@@ -44,12 +44,14 @@ const processes = app
 			icon: icon,
 			arg: pid,
 			mods: {
-				ctrl: { arg: name },
+				ctrl: { variables: { mode: "killall" } },
+				cmd: { variables: { mode: "force kill" } },
 			},
 		};
 	});
 
 JSON.stringify({
+	variables: { mode: "kill" },
 	rerun: 2.5, // seconds (only 0.1 - 5)
 	items: processes,
 });
