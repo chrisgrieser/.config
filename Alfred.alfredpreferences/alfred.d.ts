@@ -13,7 +13,7 @@ declare class AlfredScriptFilter {
 }
 
 declare class AlfredItem {
-	title: string;
+	title?: string;
 	action?: string | string[] | Object;
 	subtitle?: string;
 	arg?: string | string[];
