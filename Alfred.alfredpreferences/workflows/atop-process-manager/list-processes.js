@@ -14,7 +14,7 @@ const processAppName = {
 	alacritty: "Alacritty",
 	"wezterm-gui": "WezTerm",
 };
-
+// common apps not located in /Applications/
 const appFilePaths = {
 	Finder: "/System/Library/CoreServices/Finder.app",
 	"Alfred Preferences": "/Applications/Alfred 5.app/Contents/Preferences/Alfred Preferences.app",
@@ -30,19 +30,23 @@ const cpuThresholdPercent = parseFloat($.getenv("cpu_threshold_percent")) || 0.5
 const memoryThresholdMb = parseFloat($.getenv("memory_threshold_mb")) || 10;
 const sort = $.getenv("sort_key") === "Memory" ? "m" : "r";
 
-const apps = app.doShellScript("ls /Applications/");
+const apps = app
+	.doShellScript("ls /Applications/")
+	.split("\r")
+	.filter((line) => line.endsWith(".app"));
 
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	/** @type AlfredItem[] */
 	const processes = app
 		.doShellScript(`ps ${sort}cAo 'pid=,%cpu=,rss=,ruser=,command='`)
 		.split("\r")
 		.map((/** @type {string} */ processInfo) => {
 			const info = processInfo.trim().split(/\s+/);
-			const processName = info.slice(4).join(" "); // command name can contain spaces
+			const processName = info.slice(4).join(" "); // command name can contain spaces, therefore last
 			if (processName === "<defunct>") return {};
 
 			const pid = info[0];
@@ -50,14 +54,19 @@ function run() {
 			let memory = (parseInt(info[2]) / 1024).toFixed(0).toString(); // real memory
 			const rootUser = info[3] === "root" ? " ⭕" : "";
 			const appName = processAppName[processName] || processName;
-			const isApp = apps.includes(appName);
 			const displayTitle = appName !== processName ? `${processName} (${appName})` : processName;
-			const icon = isApp ? { type: "fileicon", path: `/Applications/${appName}.app` } : {};
 			cpu = parseFloat(cpu) > cpuThresholdPercent ? cpu + "%    " : "";
 			memory = parseInt(memory) > memoryThresholdMb ? memory + "Mb" : "";
 
-			/** @type AlfredItem */
-			const alfredItem = {
+			// icon
+			const isApp = apps.includes(`${appName}.app`) || appFilePaths[appName];
+			let icon = {};
+			if (isApp) {
+				const path = appFilePaths[appName] || `/Applications/${appName}.app`;
+				icon = { type: "fileicon", path: path };
+			}
+
+			return {
 				title: displayTitle + rootUser,
 				subtitle: cpu + memory + " ", // trailing space to ensure same height of all items
 				icon: icon,
@@ -72,7 +81,6 @@ function run() {
 					},
 				},
 			};
-			return alfredItem;
 		});
 
 	return JSON.stringify({
