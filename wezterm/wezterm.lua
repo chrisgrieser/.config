@@ -86,7 +86,7 @@ local keybindings = {
 		key = "o",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
-			patterns = { "https?://\\S+",  },
+			patterns = { "https?://\\S+" },
 			label = "Open URL",
 			action = actFun(function(window, pane)
 				local url = window:get_selection_text_for_pane(pane)
@@ -129,12 +129,21 @@ local keybindings = {
 }
 
 --------------------------------------------------------------------------------
+-- TAB FORMATTING
+-- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
+wt.on("format-tab-title", function(tab, _, _, _, _, _)
+	local title = " " .. tab.tab_title .. " " -- add spacing
+
+	return { { Text = title } }
+end)
+
+--------------------------------------------------------------------------------
 -- HYPERLINK RULES
 local myHyperlinkRules = wt.default_hyperlink_rules()
 
 -- make github links of the form `owner/repo` clickable
 table.insert(myHyperlinkRules, {
-	regex = [["?(\b[-\w]+)/([-\w.]+)"?]], 
+	regex = [["?(\b[-\w]+)/([-\w.]+)"?]],
 	highlight = 0,
 	format = "https://github.com/$1/$2",
 })
@@ -209,9 +218,8 @@ local config = {
 
 	-- Tabs
 	enable_tab_bar = true,
-	show_tab_index_in_tab_bar = true,
 	use_fancy_tab_bar = false, -- `false` makes the tabs bigger
-	show_tabs_in_tab_bar = true, -- can show a status line in the tab bar
+	show_tabs_in_tab_bar = true, -- can show a status line in the tab bar, too
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
 
