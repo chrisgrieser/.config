@@ -125,6 +125,7 @@ local filetypeSpecificWords = {
 		{ "else", "else if", false },
 		{ "var", "const", false }, -- don't switch back to var, since const/let are preferred
 		{ "const", "let" },
+		{ "parseInt", "parseFloat" },
 		{ "map", "forEach" },
 		{ "replace", "replaceAll" },
 		{ "includes", "match" },
