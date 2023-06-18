@@ -755,8 +755,8 @@ keymap("n", "<leader>g?", ":Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line"
 -- stylua: ignore start
 keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = "󰊢  Status" })
 keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = "󰊢  Log / Commits" })
-keymap("n", "<leader>gb", function() cmd.Telescope("git_bcommits") end, { desc = "󰊢  Buffer Commits" })
-keymap("n", "<leader>gB", function() cmd.Telescope("git_branches") end, { desc = "󰊢  Branches Commits" })
+keymap("n", "<leader>gL", function() cmd.Telescope("git_bcommits") end, { desc = "󰊢  Buffer Commits" })
+keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc = "󰊢  Branches Commits" })
 
 -- My utils
 keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })

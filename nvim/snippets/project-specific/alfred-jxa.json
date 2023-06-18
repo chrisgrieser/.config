@@ -23,8 +23,8 @@
 		"prefix": "Get Alfred Env (+ resolve home)",
 		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\").replace(/^~/, app.pathTo(\"home folder\"));"
 	},
-	"argv": {
-		"prefix": "argv",
+	"AlfredRun": {
+		"prefix": ["run (Alfred)", "AlfredRun", "argv (Alfred)"],
 		"body": [
 			"/** @type {AlfredRun} */",
 			"// rome-ignore lint/correctness/noUnusedVariables: Alfred run",
