@@ -695,7 +695,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>generate</string>
 			<key>xpos</key>
-			<real>730</real>
+			<real>690</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -726,7 +726,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>save entry_name</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>330</real>
 			<key>ypos</key>
 			<real>45</real>
 		</dict>
@@ -735,9 +735,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1120</real>
+			<real>990</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>425</real>
 		</dict>
 		<key>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</key>
 		<dict>
@@ -764,7 +764,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>235</real>
+			<real>200</real>
 			<key>ypos</key>
 			<real>50</real>
 		</dict>
@@ -788,23 +788,23 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>280</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>160</real>
 		</dict>
 		<key>A5733344-CBEB-486B-87D4-DE52472EB5A5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>920</real>
+			<real>790</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>450</real>
 		</dict>
 		<key>A5A50E6D-235D-44F3-ACFA-B80578EA0558</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>640</real>
+			<real>600</real>
 			<key>ypos</key>
 			<real>90</real>
 		</dict>
@@ -815,9 +815,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>auto-push</string>
 			<key>xpos</key>
-			<real>1080</real>
+			<real>950</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>515</real>
 		</dict>
 		<key>E28BAD26-7C03-414A-A567-4F44432F9FD7</key>
 		<dict>
@@ -855,7 +855,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>470</real>
+			<real>430</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>

@@ -13,7 +13,9 @@ const processAppName = {
 	espanso: "Espanso",
 	alacritty: "Alacritty",
 	"wezterm-gui": "WezTerm",
+	bird: "iCloud Sync",
 };
+
 // common apps not located in /Applications/
 const appFilePaths = {
 	Finder: "/System/Library/CoreServices/Finder.app",
@@ -40,22 +42,21 @@ const apps = app
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	/** @type AlfredItem[] */
 	const processes = app
 		.doShellScript(`ps ${sort}cAo 'pid=,%cpu=,rss=,ruser=,command='`)
 		.split("\r")
 		.map((/** @type {string} */ processInfo) => {
-			const info = processInfo.trim().split(/\s+/);
+			const info = processInfo.trim().split(/ +/);
 			const processName = info.slice(4).join(" "); // command name can contain spaces, therefore last
 			if (processName === "<defunct>") return {};
 
 			const pid = info[0];
-			let cpu = info[1];
-			let memory = (parseInt(info[2]) / 1024).toFixed(0).toString(); // real memory
-			const rootUser = info[3] === "root" ? " ⭕" : "";
+			const isRootUser = info[3] === "root" ? " ⭕" : "";
 			const appName = processAppName[processName] || processName;
-			const displayTitle = appName !== processName ? `${processName} (${appName})` : processName;
+			const displayTitle = appName !== processName ? `${processName} [${appName}]` : processName;
+			let cpu = info[1];
 			cpu = parseFloat(cpu) > cpuThresholdPercent ? cpu + "%    " : "";
+			let memory = (parseInt(info[2]) / 1024).toFixed(0).toString(); // real memory
 			memory = parseInt(memory) > memoryThresholdMb ? memory + "Mb" : "";
 
 			// icon
@@ -67,16 +68,16 @@ function run() {
 			}
 
 			return {
-				title: displayTitle + rootUser,
+				title: displayTitle + isRootUser,
 				subtitle: cpu + memory + " ", // trailing space to ensure same height of all items
 				icon: icon,
 				arg: pid,
 				mods: {
 					ctrl: { variables: { mode: "killall" } },
 					cmd: { variables: { mode: "force kill" } },
-					alt: {
+					shift: {
 						valid: isApp,
-						subtitle: isApp ? "⌥: Restart App" : "⌥: ⛔ Not an app",
+						subtitle: isApp ? "⇧: Restart App" : "⇧: ⛔ Not an app",
 						variables: { mode: "restart app" },
 					},
 				},
