@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "18/06/2023, 00:05:37",
-	"time": 1687039537530,
+	"@time": "18/06/2023, 09:34:35",
+	"time": 1687073675163,
 	"environment": {
 		"extension": "1.99.992",
 		"platform": "mac",
@@ -132,6 +132,10 @@
 		"map H goPrevious",
 		"map L goNext",
 		"",
+		"\" Marks",
+		"map ä Marks.activate swap",
+		"map Ä Marks.activateCreate swap",
+		"",
 		"\" Interaction",
 		"map c Vomnibar.activateEditUrl",
 		"map gu goUp",
@@ -141,6 +145,7 @@
 		"map M toggleMuteTab",
 		"map r reload",
 		"map R reload hard",
+		"map gs toggleViewSource",
 		"",
 		"\" Copy URLs",
 		"map yy copyCurrentUrl",
