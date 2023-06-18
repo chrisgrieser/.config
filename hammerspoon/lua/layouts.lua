@@ -57,12 +57,12 @@ local function workLayout()
 	hs.execute(u.exportPath .. "sketchybar --set clock popup.drawing=true")
 
 	-- close
-	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "lo-rain" }
+	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "lo-rain", "Tagesschau" }
 	require("lua.private").closer()
 	closeAllFinderWins()
 
 	-- open
-	local appsToOpen = { "Discord", env.browserApp, env.mailApp, "Twitter", "Slack" }
+	local appsToOpen = { "Discord", env.browserApp, env.mailApp, "Twitter", "Slack", "SideNotes" }
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
 		u.asSoonAsAppRuns(appName, function()
@@ -88,8 +88,9 @@ local function movieLayout()
 	u.openApps("YouTube")
 	u.quitApp {
 		"Neovide",
-		"lo-rain",
 		"neovide",
+		"lo-rain",
+		"SideNotes",
 		"Slack",
 		"Discord",
 		"BusyCal",
