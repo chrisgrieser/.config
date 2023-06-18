@@ -19,7 +19,7 @@ local function setHigherBrightnessDuringDay()
 	if noBrightnessSensor then return end
 
 	local target
-	if u.betweenTime(0, 7) or env.isProjector() then -- when turning off projector at night
+	if env.isProjector() then
 		target = 0
 	elseif ambient > 120 then
 		target = 1
@@ -123,6 +123,10 @@ DisplayCountWatcher = hs.screen.watcher
 	.new(function()
 		local delay = env.isAtMother and 1.5 or 0 -- TV at mother needs small delay
 		u.runWithDelays(delay, selectLayout)
+
+		-- put iMac display to sleep at night. Essentially triggers when display
+		-- projector is turned off
+		if u.betweenTime(0, 7) and not env.isProjector() then hs.execute("pmset displaysleepnow") end
 	end)
 	:start()
 
