@@ -247,9 +247,9 @@
 				<key>destinationuid</key>
 				<string>B758EFA5-2C8C-4C45-8A3E-B44E09A18464</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Restart (if app)</string>
+				<string>⇧: Restart (if app)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -613,6 +613,71 @@ echo -n "iCloud Sync"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>battery-display.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A226B122-42B9-448F-89AB-32C3D85A8FB9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🔋 Battery</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A3879C3A-50C5-4ECB-B700-E5D682BFF82C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>battery</string>
+				<key>subtext</key>
+				<string>Only Apple Periphery Devices</string>
+				<key>text</key>
+				<string>📊 Show Battery</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7D56EA1B-BF57-40A0-8107-94D3F4D49905</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -742,84 +807,6 @@ JSON.stringify({ 'items': volume_array });
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.browseinterminal</string>
-			<key>uid</key>
-			<string>54580785-C343-4A69-8525-5BF78553961A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>battery-display.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A226B122-42B9-448F-89AB-32C3D85A8FB9</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🔋 Battery</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>A3879C3A-50C5-4ECB-B700-E5D682BFF82C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>battery</string>
-				<key>subtext</key>
-				<string>Periphery Devices</string>
-				<key>text</key>
-				<string>📊 Show Battery</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7D56EA1B-BF57-40A0-8107-94D3F4D49905</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alignment</key>
 				<integer>0</integer>
 				<key>backgroundcolor</key>
@@ -887,6 +874,19 @@ JSON.stringify({ 'items': volume_array });
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>41B4C19E-F17F-4762-A8E4-2AD597D21C22</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>54580785-C343-4A69-8525-5BF78553961A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -975,9 +975,9 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>645</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>565</real>
 		</dict>
 		<key>4F6FB435-0A87-45E8-A851-F458286E7A6F</key>
 		<dict>
@@ -986,7 +986,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>xpos</key>
 			<real>415</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>465</real>
 		</dict>
 		<key>54580785-C343-4A69-8525-5BF78553961A</key>
 		<dict>
@@ -995,7 +995,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>600</real>
 		</dict>
 		<key>63C34A52-70A0-4CA0-AC29-0B8B16E654C8</key>
 		<dict>
@@ -1015,25 +1015,25 @@ JSON.stringify({ 'items': volume_array });
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>355</real>
 		</dict>
 		<key>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>335</real>
+			<real>945</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>565</real>
 		</dict>
 		<key>7D56EA1B-BF57-40A0-8107-94D3F4D49905</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>645</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>435</real>
 		</dict>
 		<key>80995D89-9285-4E5C-8728-25576BF43113</key>
 		<dict>
@@ -1044,7 +1044,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>465</real>
 		</dict>
 		<key>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</key>
 		<dict>
@@ -1080,27 +1080,27 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>435</real>
 		</dict>
 		<key>A3879C3A-50C5-4ECB-B700-E5D682BFF82C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>335</real>
+			<real>945</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>435</real>
 		</dict>
 		<key>B6749459-30C8-484B-BE73-E64557107E37</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>565</real>
 		</dict>
 		<key>B758EFA5-2C8C-4C45-8A3E-B44E09A18464</key>
 		<dict>
@@ -1126,6 +1126,8 @@ JSON.stringify({ 'items': volume_array });
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>processes</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1136,9 +1138,9 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>975</real>
+			<real>680</real>
 		</dict>
 		<key>F1539426-E456-4953-8215-D809DF4B120B</key>
 		<dict>
@@ -1155,10 +1157,12 @@ JSON.stringify({ 'items': volume_array });
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
+			<key>note</key>
+			<string>Removable Volumes</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>465</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
