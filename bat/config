@@ -15,6 +15,6 @@
 
 # Possible values: *default*, full, auto, plain, changes, header,
 # header-filename, header-filesize, grid, rule, numbers, snip.
---style="numbers,changes"
+--style="plain"
 
---pager="less --RAW-CONTROL-CHARS --quit-if-one-screen"
+--pager="less --RAW-CONTROL-CHARS --quit-if-one-screen --chop-long-lines"
