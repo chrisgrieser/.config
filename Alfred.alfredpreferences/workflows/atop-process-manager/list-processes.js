@@ -3,6 +3,20 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+const cpuThreshhold = 0.2;
+const memoryThreshhold = 0.2;
+const availableMemory = parseInt(app.doShellScript("system_profiler SPHardwareDataType | grep 'Memory:' | awk '{print $2}'")) * 1024;
+
+const processAppName = {
+	Alfred: "Alfred 5",
+	CleanShot: "CleanShot X",
+	Brave: "Brave Browser",
+	neovide: "Neovide",
+	espanso: "Espanso",
+	alacritty: "Alacritty",
+	"wezterm-gui": "WezTerm",
+};
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -17,39 +31,27 @@ function run() {
 
 	const apps = app.doShellScript("ls /Applications/");
 	const processes = app
-		.doShellScript("ps rcAo 'pid=,%cpu=,command='")
+		.doShellScript("ps rcAo 'pid=,%cpu=,%mem=,command='")
 		.split("\r")
 		.map((/** @type {string} */ processInfo) => {
 			const info = processInfo.trim().split(/\s+/);
 			const pid = info[0];
-			const cpu = info[1];
-			let name = info[2];
+			let cpu = info[1];
+			let memory = (parseInt(info[2]) / 100 * availableMemory).toFixed(1).toString();
+			const processName = info[3];
 
-			// app icons
-			switch (name) {
-				case "<defunct>":
-					return {};
-				case "Alfred":
-					name += " 5";
-					break;
-				case "CleanShot":
-					name += " X";
-					break;
-				case "neovide":
-				case "espanso":
-					name = name.charAt(0).toUpperCase() + name.slice(1); // capitalize
-					break;
-				case "wezterm-gui":
-					name = "WezTerm";
-					break;
-			}
-			const isApp = apps.includes(name);
-			const icon = isApp ? { type: "fileicon", path: `/Applications/${name}.app` } : {};
-			const subtitle = parseFloat(cpu) > 0.2 ? cpu : "";
+			if (processName === "<defunct>") return {};
+
+			const appName = processAppName[processName];
+			const displayTitle = appName ? `${appName} (${processName})` : processName;
+			cpu = parseFloat(cpu) > cpuThreshhold ? cpu + "%" : "";
+			memory = parseFloat(memory) > memoryThreshhold ? memory : "";
+			const isApp = apps.includes(processName);
+			const icon = isApp ? { type: "fileicon", path: `/Applications/${appName}.app` } : {};
 
 			return {
-				title: name,
-				subtitle: subtitle,
+				title: displayTitle,
+				subtitle: [cpu, memory].join("    "),
 				icon: icon,
 				arg: pid,
 				mods: {
