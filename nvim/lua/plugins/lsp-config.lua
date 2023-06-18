@@ -81,7 +81,7 @@ local jsAndTsSettings = {
 		includeInlayEnumMemberValueHints = true,
 		includeInlayFunctionLikeReturnTypeHints = true,
 		includeInlayFunctionParameterTypeHints = true,
-		includeInlayParameterNameHints = "all", 
+		includeInlayParameterNameHints = "all",
 		includeInlayParameterNameHintsWhenArgumentMatchesName = true,
 		includeInlayPropertyDeclarationTypeHints = true,
 		includeInlayVariableTypeHints = true,
@@ -91,13 +91,15 @@ local jsAndTsSettings = {
 
 lspSettings.tsserver = {
 	completions = { completeFunctionCalls = true },
+	diagnostics = { ignoredCodes = {
+		2451, -- "cannot redeclare block-scoped variable" -> useless when applied to JXA
+	} },
 	typescript = jsAndTsSettings,
 	javascript = jsAndTsSettings,
 }
 
--- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
 lspOnAttach.tsserver = function(client, _)
-	-- disable formatting, since taken care of by rome
+	-- disable formatting, since taken care of by rome https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
 	client.server_capabilities.documentFormattingProvider = false
 	client.server_capabilities.documentRangeFormattingProvider = false
 end
