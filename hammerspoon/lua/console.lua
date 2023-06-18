@@ -90,7 +90,6 @@ u.urischeme("copy-last-command", function()
 	local consoleHistory = cons.getHistory()
 	if not consoleHistory then return end
 	local lastcommand = consoleHistory[#consoleHistory]
-	lastcommand = u.trim(lastcommand)
 	hs.pasteboard.setContents(lastcommand)
 	u.notify("Copied: '" .. lastcommand .. "'")
 end)

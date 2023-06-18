@@ -77,13 +77,6 @@ rules:
               open -a Alfred\ 5
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Window Management: ⇪ Hyper + vcx"
-    manipulators:
-      - type: basic
-        from: { key_code: "v", modifiers: { mandatory: [option, shift, command, control] } }
-        to:
-          - shell_command: osascript -e ''
-  #─────────────────────────────────────────────────────────────────────────────
   - description: "Insert Mode Vim: ⇪ Hyper + hjklion<space> → ⌫←↓↑→"
     manipulators:
       - type: basic
