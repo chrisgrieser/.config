@@ -3,21 +3,30 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_.]/g, " ") + " " + str + " ";
+const progitBookURL = "https://git-scm.com/book/en/v2"; // cannot use book's git repo since files do not match URLs
+const referenceDocsURL = "https://api.github.com/repos/git/git/git/trees/master?recursive=1";
+const ahrefRegex = /.*?href="(.*?)">(.*?)<.*/i;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const gitBookURL = "https://git-scm.com/book/en/v2";
-const referenceDocsURL = gitBookURL + "https://api.github.com/repos/git/git/git/trees/master?recursive=1";
-const ahrefRegex = /.*?href="(.*?)">(.*?)<.*/i;
-
-const gitBookPages = app
-	.doShellScript(`curl -s "${gitBookURL}"`)
+const progitBookPages = app
+	.doShellScript(`curl -s "${progitBookURL}"`)
 	.split("\r")
-	.map(item => {
-		
-		return item;
-	})
+	.slice(190, 600) // cut header/footer from html
+	.filter((line) => line.includes("a href")) // only links
+	.map((link) => {
+		const url = link.replace(ahrefRegex, "$1").replaceAll("%3F", "?");
+		const title = link.replace(ahrefRegex, "$2");
+		if (!url) return {};
+		const subsite = url.slice(12, -title.length).replaceAll("-", " ");
+
+		return {
+			title: title,
+			subtitle: "📖 " + subsite,
+			arg: `https://git-scm.com/${url}`,
+			uid: url,
+		};
+	});
 
 const referenceDocs = JSON.parse(app.doShellScript(`curl -sL "${referenceDocsURL}"`))
 	.tree.filter(
@@ -33,10 +42,10 @@ const referenceDocs = JSON.parse(app.doShellScript(`curl -sL "${referenceDocsURL
 
 		return {
 			title: displayTitle,
-			match: alfredMatcher(subsite),
+			subtitle: "➡️",
 			arg: `https://git-scm.com/docs/${subsite}`,
 			uid: subsite,
 		};
 	});
 
-JSON.stringify({ items: [...referenceDocs, ...gitBookPages] });
+JSON.stringify({ items: [...referenceDocs, ...progitBookPages] });
