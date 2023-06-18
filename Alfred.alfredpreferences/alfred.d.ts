@@ -25,9 +25,9 @@ declare class AlfredItem {
 	quicklookurl?: string;
 	variables?: Object;
 	icon?: {
-		type?: "fileicon" | "filetype";
-		path: string;
-	};
+		type?: "fileicon" | "filetype" | "";
+		path?: string;
+	} | {};
 	mods?: {
 		cmd?: AlfredModifierKey;
 		alt?: AlfredModifierKey;
