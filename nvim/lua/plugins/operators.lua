@@ -48,7 +48,7 @@ return {
 				local ft = vim.bo.filetype
 
 				-- smart switching of conditionals
-				if ft == "lua" and line:find("^%s*if.+then$") then
+				if ft == "lua" and line:find("^%s*if.+then%s*$") then
 					line = line:gsub("^(%s*)if", "%1elseif")
 				elseif (ft == "bash" or ft == "zsh" or ft == "sh") and line:find("^%s*if.+then$") then
 					line = line:gsub("^(%s*)if", "%1elif")
