@@ -17,7 +17,7 @@ BookmarkWatcher = pw(sourceBookmarkPath, function()
 	if not bookmarks then return end
 
 	-- remove Vivaldi's trash folder for Alfred
-	if env.browserApp == "Vivaldi" then bookmarks.roots.trash = nil end 
+	if env.browserApp == "Vivaldi" then bookmarks.roots.trash = nil end
 
 	hs.execute(("mkdir -p '%s'"):format(chromeProfileLocation))
 	local success = hs.json.write(bookmarks, chromeProfileLocation .. "/Default/Bookmarks", false, true)
@@ -49,8 +49,7 @@ DownloadFolderWatcher = pw(
 -- TO FILE HUB
 
 -- GenuisScan
-local scanFolder = home
-	.. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
+local scanFolder = home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 ScanFolderWatcher = pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. env.fileHub .. "'")
 	print("➡️ Scan moved to File Hub.")

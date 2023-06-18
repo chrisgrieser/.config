@@ -2,7 +2,7 @@
 # aggregates stackoverflow, tl;dr and many other help pages
 # https://cht.sh/:help
 function h() {
-	local style query
+	local style query pane_id
 
 	# curl cht.sh/:styles-demo
 	local lightstyle="trac"
@@ -12,7 +12,8 @@ function h() {
 	query=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
 	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
 		curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
-		wezterm cli spawn -- less "/tmp/$query" | xargs -I {} wezterm cli set-tab-title --pane-id={} "cheat – $query "
+		pane_id=$(wezterm cli spawn -- less "/tmp/$query")
+		wezterm cli set-tab-title --pane-id="$pane_id" "cheat: $query"
 	else
 		curl -s "https://cht.sh/$query?style=$style" | less
 	fi
@@ -22,13 +23,15 @@ function h() {
 function man() {
 	local command="$1"
 	local search_term="$2"
+	local pane_id
 	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
 		# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
 		if [[ -n "$search_term" ]]; then
-			wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$search_term" "$command" | xargs -I {} wezterm cli set-tab-title --pane-id={} "man: $command "
+			pane_id=$(wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$search_term" "$command")
 		else
-			wezterm cli spawn -- man "$command" | xargs -I {} wezterm cli set-tab-title --pane-id={} "man – $command "
+			pane_id=$(wezterm cli spawn -- man "$command")
 		fi
+		wezterm cli set-tab-title --pane-id="$pane_id" "man: $command"
 	else
 		if [[ -n "$search_term" ]]; then
 			command man -P "/usr/bin/less -is --pattern=$search_term" "$command"
