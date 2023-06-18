@@ -1226,6 +1226,32 @@ JSON.stringify({ 'items': volume_array });
 			<key>variable</key>
 			<string>memory_threshold_mb</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Memory</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Memory</string>
+						<string>Memory</string>
+					</array>
+					<array>
+						<string>CPU</string>
+						<string>CPU</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Sort processes by</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>sort_key</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string>0.9</string>

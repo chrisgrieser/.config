@@ -9,11 +9,15 @@ app.includeStandardAdditions = true;
 const processAppName = {
 	Alfred: "Alfred 5",
 	CleanShot: "CleanShot X",
-	Brave: "Brave Browser",
 	neovide: "Neovide",
 	espanso: "Espanso",
 	alacritty: "Alacritty",
 	"wezterm-gui": "WezTerm",
+};
+
+const appFilePaths = {
+	Finder: "/System/Library/CoreServices/Finder.app",
+	"Alfred Preferences": "/Applications/Alfred 5.app/Contents/Preferences/Alfred Preferences.app",
 };
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -23,7 +27,8 @@ if (rerunSecs < 0.1) rerunSecs = 0.1;
 else if (rerunSecs > 5) rerunSecs = 5;
 
 const cpuThresholdPercent = parseFloat($.getenv("cpu_threshold_percent")) || 0.5;
-const memoryThresholdMb = parseFloat($.getenv("memory_threshold_mb")) || 50;
+const memoryThresholdMb = parseFloat($.getenv("memory_threshold_mb")) || 10;
+const sort = $.getenv("sort_key") === "Memory" ? "m" : "r";
 
 const apps = app.doShellScript("ls /Applications/");
 
@@ -33,30 +38,27 @@ const apps = app.doShellScript("ls /Applications/");
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const processes = app
-		.doShellScript("ps rcAo 'pid=,%cpu=,%mem=,command='")
+		.doShellScript(`ps ${sort}cAo 'pid=,%cpu=,rss=,ruser=,command='`)
 		.split("\r")
 		.map((/** @type {string} */ processInfo) => {
 			const info = processInfo.trim().split(/\s+/);
-			const processName = info[3];
+			const processName = info.slice(4).join(" "); // command name can contain spaces
 			if (processName === "<defunct>") return {};
 
 			const pid = info[0];
 			let cpu = info[1];
-			let memory = parseInt(info[2]) / 1024;
-
-			let memory = ((parseFloat(info[2]) / 100) * availableMemoryMb).toFixed(0).toString();
-
+			let memory = (parseInt(info[2]) / 1024).toFixed(0).toString(); // real memory
+			const rootUser = info[3] === "root" ? " ⭕" : "";
 			const appName = processAppName[processName] || processName;
 			const isApp = apps.includes(appName);
 			const displayTitle = appName !== processName ? `${processName} (${appName})` : processName;
 			const icon = isApp ? { type: "fileicon", path: `/Applications/${appName}.app` } : {};
-			const separator = "    ";
-			cpu = parseFloat(cpu) > cpuThresholdPercent ? cpu + "%" + separator : "";
+			cpu = parseFloat(cpu) > cpuThresholdPercent ? cpu + "%    " : "";
 			memory = parseInt(memory) > memoryThresholdMb ? memory + "Mb" : "";
 
 			/** @type AlfredItem */
 			const alfredItem = {
-				title: displayTitle,
+				title: displayTitle + rootUser,
 				subtitle: cpu + memory + " ", // trailing space to ensure same height of all items
 				icon: icon,
 				arg: pid,
