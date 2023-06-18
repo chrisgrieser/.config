@@ -144,15 +144,4 @@ Wf_SomeWindowActivity = u.wf
 
 --------------------------------------------------------------------------------
 
-local function homeAction()
-	if u.appRunning("zoom.us") then
-		hs.alert("🔈/🔇") -- toggle mute
-		u.keystroke({ "shift", "command" }, "A", 1, u.app("zoom.us"))
-	elseif u.appRunning("Twitter") then
-		twitterScrollUp()
-	else
-		hs.alert("<Nop>")
-	end
-end
-
-u.hotkey({}, "home", homeAction)
+u.hotkey({}, "home", twitterScrollUp)
