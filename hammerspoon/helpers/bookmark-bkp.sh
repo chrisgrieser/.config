@@ -1,12 +1,12 @@
 #!/bin/zsh
 
-max_number_of_bkps=5
+max_number_of_bkps=20
 
 #───────────────────────────────────────────────────────────────────────────────
 
 bkp_destination="$DATA_DIR/Backups/Browser Bookmarks" # DATA_DIR defined in zshenv
 timestamp=$(date '+%Y-%m-%d_%H-%M')
-backup_file="$bkp_destination/Browser-Bookmarks_$timestamp"
+backup_file="$bkp_destination/$BROWSER_APP Bookmarks_$timestamp"
 mkdir -p "$bkp_destination"
 cp -f "$HOME/Library/Application Support/$BROWSER_DEFAULTS_PATH/Default/Bookmarks" "$backup_file"
 

@@ -1,6 +1,7 @@
 -- THEME SETTINGS
 
-local darkTheme = "Paraiso Dark"
+-- local darkTheme = "Paraiso Dark"
+local darkTheme = "Afterglow (Gogh)"
 local lightTheme = "Silk Light (base16)"
 local lightOpacity = 0.93
 local darkOpacity = 0.91
@@ -132,8 +133,12 @@ local keybindings = {
 -- TAB FORMATTING
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab, _, _, _, _, _)
-	local title = " " .. tab.tab_title .. " " -- add spacing
+	-- prefers the title that was set via `tab:set_title()` or `wezterm cli
+	-- set-tab-title`, but falls back to the title of the active pane in that tab
+	local title = tab.tab_title
+	if not title or title == "" then title = tab.active_pane.title end
 
+	title = "  " .. title .. "  "
 	return { { Text = title } }
 end)
 
