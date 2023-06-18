@@ -20,6 +20,9 @@ open "chrome-extension://bijpdibkloghppkbmhcklkogpjaenfkg/html/options.html"
 open "chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html"
 open "chrome-extension://gnmdbogfankgjepgglmmfmbnimcmcjle/optionPage/optionPage.html"
 
+# toggle local file URLs here
+open "brave://extensions/?id=hfjbmagddngcpeloejdejnfgbamkjaeg"
+
 # PWAs
 open "https://www.netflix.com/browse"
 open "https://www.crunchyroll.com/de"

@@ -94,7 +94,7 @@ nmap gs :gotoHeading
 
 " [g]oto longform scene
 exmap gotoScene obcommand longform:longform-jump-to-scene
-nmap gw :gotoScene
+nmap gS :gotoScene
 
 " [g]oto longform [p]roject
 exmap gotoProject obcommand longform:longform-jump-to-project

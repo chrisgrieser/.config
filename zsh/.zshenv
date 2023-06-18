@@ -21,7 +21,7 @@ function pandoc () {
 #───────────────────────────────────────────────────────────────────────────────
 # APPS
 export BROWSER_DEFAULTS_PATH="BraveSoftware/Brave-Browser"
-export BROWSER_APP="Brave Browser"
+export BROWSER_APP="Brave Browser" # not using "$BROWSER" since that influences some CLIs
 export MAIL_APP="Mimestream"
 
 #───────────────────────────────────────────────────────────────────────────────

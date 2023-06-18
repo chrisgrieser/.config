@@ -37,7 +37,6 @@ rules:
             file_paths:
               - "[Mm]industry"
               - "[Nn]eovide" # allow repeats for quicker completion selection
-              - "wezterm-gui" # ^
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪R: Restart App"
     manipulators:
