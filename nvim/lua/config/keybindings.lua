@@ -699,14 +699,9 @@ keymap({ "n", "i", "x" }, "<D-s>", function()
 	vim.lsp.buf.format()
 end, { desc = "󰒕  Save & Format" })
 
--- stylua: ignore end
-keymap("n", "<leader>h", function()
-	local isOnFold = require("ufo").peekFoldedLinesUnderCursor()
-	if not isOnFold then vim.lsp.buf.hover() end
-end, { desc = "󰒕 󱃄 Hover" })
+keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
 -- uses "v" instead of "x", so signature can be shown during snippet completion
--- stylua: ignore start
 keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature" })
 
 keymap("n", "gd", function() cmd.Glance("definitions") end, { desc = "󰒕 Definitions" })
@@ -730,10 +725,11 @@ autocmd("LspAttach", {
 		end
 		if capabilities.documentSymbolProvider then
 			-- overwrites treesitter goto-symbol
+			-- stylua: ignore start
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true })
 			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
+			-- stylua: ignore end
 		end
-		-- stylua: ignore end
 	end,
 })
 
@@ -747,7 +743,6 @@ keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = "󰊢 Commit (Neogit)" 
 -- Gitsigns
 keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
 keymap("n", "<leader>gA", ":Gitsigns stage_buffer<CR>", { desc = "󰊢 Add Buffer" })
-keymap("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "󰊢 Preview Hunk" })
 keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
 keymap("n", "<leader>g?", ":Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
 
@@ -787,8 +782,8 @@ keymap(
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
-keymap("n", "<leader>or", ":set relativenumber!<CR>", { desc = "  Toggle Relative Line Numbers" })
-keymap("n", "<leader>on", ":set number!<CR>", { desc = " Toggle Line Numbers" })
+keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = "  Toggle Relative Line Numbers" })
+keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Toggle Line Numbers" })
 keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 󰒕 LSP Restart" })
 
 keymap("n", "<leader>od", function()
