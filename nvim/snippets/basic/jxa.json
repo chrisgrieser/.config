@@ -119,7 +119,8 @@
 			"\t\treturn;",
 			"\t}",
 			"\treturn { url: url, title: title };",
-			"}"
+			"}",
+			"$0"
 		]
 	}
 }
