@@ -69,7 +69,18 @@
 			</dict>
 		</array>
 		<key>24F3B28F-0642-43F2-AEA3-202F2E62F3B4</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9C677454-9EBA-42D1-9B49-ABB15200167A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>36844FF5-DD3F-4F61-8B06-A2AAE896DD68</key>
 		<array>
 			<dict>
@@ -87,7 +98,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B6749459-30C8-484B-BE73-E64557107E37</string>
+				<string>E01978CB-6F00-4781-8079-075BE323C5FB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -97,7 +108,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E01978CB-6F00-4781-8079-075BE323C5FB</string>
+				<string>B6749459-30C8-484B-BE73-E64557107E37</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -188,7 +199,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</string>
+				<string>DCFEB668-9CAC-49FD-BDEB-EC9EC3CCE754</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -289,6 +300,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>DCFEB668-9CAC-49FD-BDEB-EC9EC3CCE754</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D880698E-4C96-44BF-BC72-5911F787089F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F1539426-E456-4953-8215-D809DF4B120B</key>
 		<array>
 			<dict>
@@ -306,7 +340,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>52717CBB-2F7F-4403-ACF3-941D4A48DCDB</string>
+				<string>DCFEB668-9CAC-49FD-BDEB-EC9EC3CCE754</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -529,6 +563,27 @@ echo -n "Bluetooth"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>wifi||restart</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔁 Restart WiFi</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C56280F8-3CDF-451D-BE1A-BE483AE10B45</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -552,27 +607,6 @@ echo -n "WiFi"</string>
 			<string>19F63061-B18E-4FCD-BB48-E06D1D826040</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>wifi||restart</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔁 Restart WiFi</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>C56280F8-3CDF-451D-BE1A-BE483AE10B45</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -667,29 +701,36 @@ echo -n "iCloud Sync"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>This may take a minute</string>
+				<key>title</key>
+				<string>⏳Running Network Quality Test…</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</string>
+			<string>E01978CB-6F00-4781-8079-075BE323C5FB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>681490F8-D3BB-4024-AFE0-DCEE69201856</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -722,7 +763,7 @@ echo -n "iCloud Sync"</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>network quality</string>
+				<string>network quality||speedtest</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -740,38 +781,54 @@ echo -n "iCloud Sync"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
 				<string></string>
-				<key>sourcefile</key>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
 				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.output.largetype</string>
 			<key>uid</key>
-			<string>681490F8-D3BB-4024-AFE0-DCEE69201856</string>
+			<string>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>This may take a minute</string>
-				<key>title</key>
-				<string>⏳Running Network Quality Test…</string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>eject-volume.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>E01978CB-6F00-4781-8079-075BE323C5FB</string>
+			<string>80995D89-9285-4E5C-8728-25576BF43113</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -880,27 +937,52 @@ JSON.stringify({ 'items': volume_array });
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>DCFEB668-9CAC-49FD-BDEB-EC9EC3CCE754</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>uptime</string>
+				<key>subtext</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>eject-volume.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>text</key>
+				<string>📊 Uptime &amp; Last Reboots</string>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>80995D89-9285-4E5C-8728-25576BF43113</string>
+			<string>949E22FB-5A63-45D6-8D35-EA7D3AD04BE5</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>D880698E-4C96-44BF-BC72-5911F787089F</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -924,56 +1006,6 @@ JSON.stringify({ 'items': volume_array });
 			<string>F8738E79-4D44-4376-8262-11D1D8CC462A</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>52717CBB-2F7F-4403-ACF3-941D4A48DCDB</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>uptime</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📊 Uptime &amp; Last Reboots</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>949E22FB-5A63-45D6-8D35-EA7D3AD04BE5</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1010,6 +1042,27 @@ JSON.stringify({ 'items': volume_array });
 			<string>24F3B28F-0642-43F2-AEA3-202F2E62F3B4</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9C677454-9EBA-42D1-9B49-ABB15200167A</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1063,25 +1116,6 @@ JSON.stringify({ 'items': volume_array });
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>F91AA471-17A8-42F7-ADC3-FEDAFA645CCF</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1099,6 +1133,25 @@ JSON.stringify({ 'items': volume_array });
 			<string>BC1E0F42-E6F6-4F15-BFB4-AF6BA697A13D</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F91AA471-17A8-42F7-ADC3-FEDAFA645CCF</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1186,7 +1239,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>520</real>
 		</dict>
 		<key>4F6FB435-0A87-45E8-A851-F458286E7A6F</key>
 		<dict>
@@ -1196,15 +1249,6 @@ JSON.stringify({ 'items': volume_array });
 			<real>415</real>
 			<key>ypos</key>
 			<real>530</real>
-		</dict>
-		<key>52717CBB-2F7F-4403-ACF3-941D4A48DCDB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>1020</real>
-			<key>ypos</key>
-			<real>640</real>
 		</dict>
 		<key>54580785-C343-4A69-8525-5BF78553961A</key>
 		<dict>
@@ -1240,9 +1284,9 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1025</real>
+			<real>1095</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>525</real>
 		</dict>
 		<key>80995D89-9285-4E5C-8728-25576BF43113</key>
 		<dict>
@@ -1260,7 +1304,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>kill all with name</string>
+			<string>killall with name</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
@@ -1271,7 +1315,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>720</real>
+			<real>725</real>
 			<key>ypos</key>
 			<real>640</real>
 		</dict>
@@ -1283,6 +1327,15 @@ JSON.stringify({ 'items': volume_array });
 			<real>880</real>
 			<key>ypos</key>
 			<real>25</real>
+		</dict>
+		<key>9C677454-9EBA-42D1-9B49-ABB15200167A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>350</real>
+			<key>ypos</key>
+			<real>810</real>
 		</dict>
 		<key>A09D544F-ECA6-4D74-B8B0-AC69E572977B</key>
 		<dict>
@@ -1298,9 +1351,9 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>880</real>
+			<real>875</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>520</real>
 		</dict>
 		<key>B758EFA5-2C8C-4C45-8A3E-B44E09A18464</key>
 		<dict>
@@ -1353,14 +1406,32 @@ JSON.stringify({ 'items': volume_array });
 			<key>ypos</key>
 			<real>80</real>
 		</dict>
+		<key>D880698E-4C96-44BF-BC72-5911F787089F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1095</real>
+			<key>ypos</key>
+			<real>640</real>
+		</dict>
+		<key>DCFEB668-9CAC-49FD-BDEB-EC9EC3CCE754</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1025</real>
+			<key>ypos</key>
+			<real>610</real>
+		</dict>
 		<key>E01978CB-6F00-4781-8079-075BE323C5FB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>885</real>
+			<real>875</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>405</real>
 		</dict>
 		<key>F1539426-E456-4953-8215-D809DF4B120B</key>
 		<dict>

@@ -377,11 +377,11 @@ Search neovim plugins and online :help via Alfred</string>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>:vim</string>
+				<string>:nvim</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Create/Update Neovim :help Index</string>
+				<string>Re-Create Neovim :help Index</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
