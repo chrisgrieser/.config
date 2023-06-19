@@ -8,23 +8,38 @@ app.includeStandardAdditions = true;
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// const deviceArr = [];
+	let deviceArr = [];
 
-	const appleDevices = JSON.parse(app.doShellScript("ioreg -rak BatteryPercent | sed 's/data/string/' | plutil -convert json - -o -"))
+	const appleDevices = JSON.parse( app.doShellScript("ioreg -rak BatteryPercent | sed 's/data/string/' | plutil -convert json - -o -"))
+		.map((device) => {
+			const serial = device.serialNumber;
+			return {};
+		});
+	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType")).SPBluetoothDataType[0];
 
-	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType"))
+	allDevices.device_connected.forEach((/** @type {{ [x: string]: any; }} */ device) => {
+		const name = Object.keys(device)[0];
+		const properties = device[name];
+		properties.device_name = name;
+		properties.connected = true;
+		deviceArr.push(properties);
+	});
+	allDevices.device_not_connected.forEach((/** @type {{ [x: string]: any; }} */ device) => {
+		const name = Object.keys(device)[0];
+		const properties = device[name];
+		properties.device_name = name;
+		properties.connected = false;
+		deviceArr.push(properties);
+	});
 
-	// /** @type AlfredItem[] */
-	// const devicesArr = app.doShellScript("")
-	// 	.split("\r")
-	// 	.map(item => {
-	//
-	// 		return {
-	// 			title: item,
-	// 			subtitle: item,
-	// 			arg: item,
-	// 			uid: item,
-	// 		};
-	// 	});
-	JSON.stringify({ items: appleDevices });
+	deviceArr = deviceArr.map((device) => {
+		console.log("device_name:", device.device_name);
+
+		return {
+			title: device.device_name,
+			subtitle: device.connected ? "connected" : "not connected",
+		};
+	});
+
+	return JSON.stringify({ items: deviceArr });
 }

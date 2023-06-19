@@ -137,6 +137,7 @@ wt.on("format-tab-title", function(tab, _, _, _, _, _)
 	-- set-tab-title`, but falls back to the title of the active pane in that tab
 	local title = tab.tab_title
 	if not title or title == "" then title = tab.active_pane.title end
+	if title == "zsh" then return end
 
 	title = "  " .. title .. "  "
 	return { { Text = title } }
