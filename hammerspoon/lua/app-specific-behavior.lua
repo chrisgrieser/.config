@@ -180,7 +180,9 @@ Wf_finder = wf.new("Finder")
 		wu.autoTile(Wf_finder)
 	end)
 	:subscribe(wf.windowDestroyed, function(win)
-		if not (win:isMaximizable() and win:isStandard()) then return end
+		-- not using maximizable as condition, since closed windows never
+		-- fulfill that condition
+		if win:isStandard() then return end
 		wu.autoTile(Wf_finder)
 	end)
 

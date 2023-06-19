@@ -6,6 +6,8 @@
 	<string>bbb</string>
 	<key>excluded_devices</key>
 	<string>Mac mini Office, Chris iPad</string>
+	<key>network_keyword</key>
+	<string>nnn</string>
 	<key>process_keyword</key>
 	<string>ppp</string>
 	<key>volume_keyword</key>

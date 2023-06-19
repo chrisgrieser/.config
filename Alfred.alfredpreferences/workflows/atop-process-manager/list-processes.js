@@ -54,10 +54,10 @@ function run() {
 			const isRootUser = info[3] === "root" ? " ⭕" : "";
 			const appName = processAppName[processName] || processName;
 			const displayTitle = appName !== processName ? `${processName} [${appName}]` : processName;
+			let memory = (parseInt(info[2]) / 1024).toFixed(0).toString(); // real memory
+			memory = parseInt(memory) > memoryThresholdMb ? memory + "Mb    " : "";
 			let cpu = info[1];
 			cpu = parseFloat(cpu) > cpuThresholdPercent ? cpu + "%    " : "";
-			let memory = (parseInt(info[2]) / 1024).toFixed(0).toString(); // real memory
-			memory = parseInt(memory) > memoryThresholdMb ? memory + "Mb" : "";
 
 			// icon
 			const isApp = apps.includes(`${appName}.app`) || appFilePaths[appName];
@@ -69,9 +69,10 @@ function run() {
 
 			return {
 				title: displayTitle + isRootUser,
-				subtitle: cpu + memory + " ", // trailing space to ensure same height of all items
+				subtitle: memory + cpu + " ", // trailing space to ensure same height of all items
 				icon: icon,
 				arg: pid,
+				uid: pid, // during rerun remembers selection, but does not affect sorting
 				mods: {
 					ctrl: { variables: { mode: "killall" } },
 					cmd: { variables: { mode: "force kill" } },
@@ -90,6 +91,7 @@ function run() {
 
 	return JSON.stringify({
 		variables: { mode: "kill" },
+		skipknowledge: true, // during rerun remembers selection, but does not affect sorting
 		rerun: rerunSecs,
 		items: processes,
 	});
