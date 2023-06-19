@@ -62,7 +62,7 @@
 			"\t\t\tuid: item,",
 			"\t\t};",
 			"\t});",
-			"JSON.stringify({ items: ${1:scriptFilterArr} });"
+			"return JSON.stringify({ items: ${1:scriptFilterArr} });"
 		]
 	},
 	"read Alfred data": {

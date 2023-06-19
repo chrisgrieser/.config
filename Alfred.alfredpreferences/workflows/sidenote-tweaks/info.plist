@@ -851,7 +851,7 @@ sketchybar --trigger update-sidenotes-count</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>nn</string>
+				<string>sn</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>

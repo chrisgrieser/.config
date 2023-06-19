@@ -32,14 +32,14 @@ function run() {
 		deviceArr.push(properties);
 	});
 
-	// INFO `ioreg` only includes Apple keyboards, mice, and trackpads, but does have
-	// battery data for them which is missing from the `system_profiler` output.
+	// INFO `ioreg` only includes Apple keyboards, mice, and trackpads, but does
+	// have battery data for them which is missing from the `system_profiler` output.
 	const applePeriphery = {};
 	JSON.parse(
 		// data as xml -> remove "data" key -> convert to json
 		app.doShellScript("ioreg -rak BatteryPercent | sed 's/data>/string>/' | plutil -convert json - -o -"),
 	).forEach((/** @type {{ DeviceAddress: string; }} */ device) => {
-		// make address consistent with output from `system_profiler` consistent
+		// make address consistent with output from `system_profiler`
 		const address = device.DeviceAddress.toUpperCase().replaceAll("-", ":");
 		applePeriphery[address] = device;
 	});

@@ -30,6 +30,7 @@ const volumes = app
 		const spaceInfo = `Total: ${total}   Available: ${available}   Used: ${used} (${share})`;
 		return {
 			title: name,
+			uid: path, // during rerun remembers selection, but does not affect sorting
 			subtitle: spaceInfo,
 			arg: path,
 		};
@@ -46,6 +47,7 @@ if (volumes.length === 0) {
 }
 
 JSON.stringify({
+	skipknowledge: true, // during rerun remembers selection, but does not affect sorting
 	rerun: rerunSecs, // seconds (only 0.1 - 5)
 	items: volumes,
 });
