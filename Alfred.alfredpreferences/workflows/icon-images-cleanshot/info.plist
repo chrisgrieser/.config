@@ -32,6 +32,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3014658F-1912-4945-BE42-94D7C52E614B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E4B297D7-3D56-4C37-8D5B-C64BBF44747E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</key>
 		<array>
 			<dict>
@@ -63,6 +76,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>0B2584E5-EDEE-4BE5-9D80-5098C54BD631</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>762A6849-97F7-453B-9037-80139ADE2754</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4C0FB49A-F1F8-4F3C-9A14-7D9D74366618</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -163,6 +189,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D14F1FF2-413F-47D1-B7FE-97A8B7173503</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CBA6CC5E-5820-4D86-9B2C-A188F5809028</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D59AEC30-AFEC-48B3-92DE-0719210E8506</key>
 		<array>
 			<dict>
@@ -207,7 +246,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Icons</string>
+	<string>Icons &amp; Cleanshot</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -562,6 +601,76 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>CBA6CC5E-5820-4D86-9B2C-A188F5809028</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>4</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string>cat ./cleanshot-commands.json</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Clean Shot…</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>D14F1FF2-413F-47D1-B7FE-97A8B7173503</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<true/>
 				<key>onlyshowifquerypopulated</key>
@@ -603,6 +712,47 @@ return "{query}"</string>
 			<string>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>cleanshot://open-annotate?filepath={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>4C0FB49A-F1F8-4F3C-9A14-7D9D74366618</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>Annotate in Cleanshot</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>762A6849-97F7-453B-9037-80139ADE2754</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -669,6 +819,47 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>OCR Text from Image</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>3014658F-1912-4945-BE42-94D7C52E614B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>cleanshot://capture-text?filepath={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>E4B297D7-3D56-4C37-8D5B-C64BBF44747E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -701,6 +892,13 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>330</real>
 		</dict>
+		<key>3014658F-1912-4945-BE42-94D7C52E614B</key>
+		<dict>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>775</real>
+		</dict>
 		<key>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</key>
 		<dict>
 			<key>colorindex</key>
@@ -720,6 +918,13 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>245</real>
+		</dict>
+		<key>4C0FB49A-F1F8-4F3C-9A14-7D9D74366618</key>
+		<dict>
+			<key>xpos</key>
+			<real>795</real>
+			<key>ypos</key>
+			<real>640</real>
 		</dict>
 		<key>4CA334D9-5DCD-4CEF-986C-3ED4283F6C55</key>
 		<dict>
@@ -745,6 +950,13 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<integer>8</integer>
 			<key>xpos</key>
 			<real>450</real>
+			<key>ypos</key>
+			<real>640</real>
+		</dict>
+		<key>762A6849-97F7-453B-9037-80139ADE2754</key>
+		<dict>
+			<key>xpos</key>
+			<real>625</real>
 			<key>ypos</key>
 			<real>640</real>
 		</dict>
@@ -842,6 +1054,26 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>245</real>
 		</dict>
+		<key>CBA6CC5E-5820-4D86-9B2C-A188F5809028</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>790</real>
+			<key>ypos</key>
+			<real>480</real>
+		</dict>
+		<key>D14F1FF2-413F-47D1-B7FE-97A8B7173503</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>4 like the popular cmd+shift+4</string>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>480</real>
+		</dict>
 		<key>D59AEC30-AFEC-48B3-92DE-0719210E8506</key>
 		<dict>
 			<key>colorindex</key>
@@ -870,6 +1102,13 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>410</real>
+		</dict>
+		<key>E4B297D7-3D56-4C37-8D5B-C64BBF44747E</key>
+		<dict>
+			<key>xpos</key>
+			<real>795</real>
+			<key>ypos</key>
+			<real>775</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

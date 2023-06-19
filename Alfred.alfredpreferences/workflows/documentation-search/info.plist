@@ -29,6 +29,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>088EB229-A9D2-4BA2-B06E-821F6E3D8841</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</key>
 		<array>
 			<dict>
@@ -287,6 +300,32 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>CB7395BA-6A3E-4E50-9FFA-130BFCA9053A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B884F61F-1B79-4D70-9CFB-57C3E87E26D9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>088EB229-A9D2-4BA2-B06E-821F6E3D8841</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>88975C56-9B03-4991-A91F-B7F567C18E64</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -856,6 +895,153 @@
 			<string>C4E99850-BA50-4D06-A11F-D09AEC8481A0</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>App ID: '{query}'</string>
+				<key>title</key>
+				<string>✅ Copied to clipboard</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>88975C56-9B03-4991-A91F-B7F567C18E64</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>anchorfields</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>daterange</key>
+				<integer>0</integer>
+				<key>fields</key>
+				<array>
+					<dict>
+						<key>field</key>
+						<string>kMDItemDisplayName</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemAlternateNames</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemFinderComment</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+				</array>
+				<key>includesystem</key>
+				<false/>
+				<key>keyword</key>
+				<string>appid</string>
+				<key>limit</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>scopes</key>
+				<array/>
+				<key>sortmode</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Get the App ID of '{query}'</string>
+				<key>types</key>
+				<array>
+					<string>com.apple.application-bundle</string>
+				</array>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.filefilter</string>
+			<key>uid</key>
+			<string>B884F61F-1B79-4D70-9CFB-57C3E87E26D9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>appid=$(osascript -e "id of application \"$*\"")
+echo -n "$appid" | pbcopy
+echo -n "$appid"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\/.*\/(.*)\.app</string>
+				<key>regexcaseinsensitive</key>
+				<true/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>$1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>088EB229-A9D2-4BA2-B06E-821F6E3D8841</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1724,6 +1910,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>1455</real>
 		</dict>
+		<key>088EB229-A9D2-4BA2-B06E-821F6E3D8841</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>only app name</string>
+			<key>xpos</key>
+			<real>660</real>
+			<key>ypos</key>
+			<real>425</real>
+		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
 			<key>colorindex</key>
@@ -1829,7 +2026,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Quicklook</string>
 			<key>xpos</key>
-			<real>595</real>
+			<real>645</real>
 			<key>ypos</key>
 			<real>250</real>
 		</dict>
@@ -1851,6 +2048,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>825</real>
 		</dict>
+		<key>88975C56-9B03-4991-A91F-B7F567C18E64</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>915</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
 			<key>colorindex</key>
@@ -1865,9 +2071,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>425</real>
+			<real>475</real>
 			<key>ypos</key>
 			<real>75</real>
+		</dict>
+		<key>B884F61F-1B79-4D70-9CFB-57C3E87E26D9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
+		<key>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>765</real>
+			<key>ypos</key>
+			<real>395</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
@@ -1883,7 +2107,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>590</real>
+			<real>640</real>
 			<key>ypos</key>
 			<real>135</real>
 		</dict>
@@ -1905,7 +2129,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>cheatsheet PDFs</string>
 			<key>xpos</key>
-			<real>425</real>
+			<real>475</real>
 			<key>ypos</key>
 			<real>250</real>
 		</dict>
@@ -1956,7 +2180,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>590</real>
+			<real>640</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
