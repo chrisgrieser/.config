@@ -18,6 +18,8 @@ matches:
     word: true
   - trigger: "->>"
     replace: ➡️
+  - trigger: "<->"
+    replace: ↔
   - trigger: "!ampel"
     replace: 🔴🟡🟢
   - trigger: " mm"

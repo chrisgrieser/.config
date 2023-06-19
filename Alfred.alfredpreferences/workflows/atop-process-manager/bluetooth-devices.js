@@ -10,25 +10,9 @@ app.includeStandardAdditions = true;
 function run() {
 	// const deviceArr = [];
 
-	const appleDevices = app
-		.doShellScript("ioreg -rk BatteryPercent")
-		.split("\r\r")
-	// 	.filter((line) => line.includes("BatteryPercent") || line.includes("Product"));
-	// let appleDevice;
-	// appleDevices.forEach((line) => {
-	// 	const value = line.split(" = ")[1].replaceAll('"', "");
-	// 	if (line.includes("Product")) appleDevice.name = value;
-	// 	if (line.includes("BatteryPercent")) {
-	// 		appleDevice.battery = value;
-	// 		deviceArr.push(appleDevice);
-	// 		appleDevice = {};
-	// 	}
-	// });
+	const appleDevices = JSON.parse(app.doShellScript("ioreg -rak BatteryPercent | sed 's/data/string/' | plutil -convert json - -o -"))
 
-	// const allDevices = app
-	// 	.doShellScript("system_profiler -json SPBluetoothDataType")
-	// 	.split("\r")
-	// 	.filter((line) => line.includes("BatteryPercent") || line.includes("Product"));
+	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType"))
 
 	// /** @type AlfredItem[] */
 	// const devicesArr = app.doShellScript("")
