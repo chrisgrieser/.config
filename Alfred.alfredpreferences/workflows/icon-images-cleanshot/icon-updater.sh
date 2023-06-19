@@ -92,6 +92,7 @@ case $APP in
 	INFO_WINDOW=1
 	;;
 "YouTube")
+	cd "$PWA_FOLDER" || exit 1
 	cp -f "$CUSTOM_ICON_FOLDER/$APP.icns" "$PWA_FOLDER/$APP.app/Contents/Resources/app.icns"
 	;;
 "Netflix")
