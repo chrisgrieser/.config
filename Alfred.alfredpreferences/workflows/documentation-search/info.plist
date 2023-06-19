@@ -272,6 +272,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>AC5C19D5-CCA0-42C5-8A17-70BF48C23681</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FA8E1CB5-0E3F-4061-9CD5-C019F13E82C5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>CB7395BA-6A3E-4E50-9FFA-130BFCA9053A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<array>
 			<dict>
@@ -506,6 +529,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://sourcegraph.com/search?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>FA8E1CB5-0E3F-4061-9CD5-C019F13E82C5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -555,6 +599,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>code</string>
+				<key>subtext</key>
+				<string>GitHub &amp; SourceGraph</string>
+				<key>text</key>
+				<string>Code Search: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>AC5C19D5-CCA0-42C5-8A17-70BF48C23681</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -600,6 +665,27 @@
 			<string>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://github.com/search?type=code&amp;q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>CB7395BA-6A3E-4E50-9FFA-130BFCA9053A</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1743,7 +1829,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Quicklook</string>
 			<key>xpos</key>
-			<real>620</real>
+			<real>595</real>
 			<key>ypos</key>
 			<real>250</real>
 		</dict>
@@ -1774,6 +1860,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>585</real>
 		</dict>
+		<key>AC5C19D5-CCA0-42C5-8A17-70BF48C23681</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>75</real>
+		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
 			<key>colorindex</key>
@@ -1782,6 +1877,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>365</real>
+		</dict>
+		<key>CB7395BA-6A3E-4E50-9FFA-130BFCA9053A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>590</real>
+			<key>ypos</key>
+			<real>135</real>
 		</dict>
 		<key>CD59A071-70BC-40FB-87C9-D8467973F461</key>
 		<dict>
@@ -1844,6 +1948,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<integer>8</integer>
 			<key>xpos</key>
 			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+		<key>FA8E1CB5-0E3F-4061-9CD5-C019F13E82C5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>590</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>

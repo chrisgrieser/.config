@@ -7,8 +7,8 @@
 	<key>excluded_devices</key>
 	<string>Mac mini Office</string>
 	<key>process_keyword</key>
-	<string>pp</string>
+	<string>ppp</string>
 	<key>volume_keyword</key>
-	<string>vv</string>
+	<string>vvv</string>
 </dict>
 </plist>
