@@ -380,7 +380,7 @@ echo -n "Bluetooth"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>atop</string>
+				<string>atop||top</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -691,7 +691,7 @@ echo -n "iCloud Sync"</string>
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>keyword</key>
-				<string>avol</string>
+				<string>vol</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -911,6 +911,55 @@ JSON.stringify({ 'items': volume_array });
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>blue</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>bluetooth-devices.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Bluetooth Devices</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>1765993C-E2F9-4224-A487-1B3FF0F4B90B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -924,6 +973,13 @@ JSON.stringify({ 'items': volume_array });
 			<real>1065</real>
 			<key>ypos</key>
 			<real>155</real>
+		</dict>
+		<key>1765993C-E2F9-4224-A487-1B3FF0F4B90B</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>775</real>
 		</dict>
 		<key>19F63061-B18E-4FCD-BB48-E06D1D826040</key>
 		<dict>
