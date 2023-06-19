@@ -927,7 +927,7 @@ JSON.stringify({ 'items': volume_array });
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>blue</string>
+				<string>bbb</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -951,7 +951,7 @@ JSON.stringify({ 'items': volume_array });
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
