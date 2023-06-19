@@ -14,6 +14,15 @@ const processAppName = {
 	alacritty: "Alacritty",
 	"wezterm-gui": "WezTerm",
 	bird: "iCloud Sync",
+	"Brave Browser Helper": "Brave Browser",
+	"Brave Browser Helper (Renderer)": "Brave Browser",
+	"Brave Browser Helper (GPU)": "Brave Browser",
+	"Discord Helper": "Discord",
+	"Discord Helper (Renderer)": "Discord",
+	"Slack Helper": "Slack",
+	"Slack Helper (Renderer)": "Slack",
+	"Obsidian Helper": "Obsidian",
+	"Obsidian Helper (Renderer)": "Obsidian",
 };
 
 // common apps not located in /Applications/
@@ -53,7 +62,8 @@ function run() {
 			const pid = info[0];
 			const isRootUser = info[3] === "root" ? " ⭕" : "";
 			const appName = processAppName[processName] || processName;
-			const displayTitle = appName !== processName ? `${processName} [${appName}]` : processName;
+			const displayTitle =
+				appName !== processName && !processName.includes("Helper") ? `${processName} [${appName}]` : processName;
 			let memory = (parseInt(info[2]) / 1024).toFixed(0).toString(); // real memory
 			memory = parseInt(memory) > memoryThresholdMb ? memory + "Mb    " : "";
 			let cpu = info[1];
