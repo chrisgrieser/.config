@@ -19,10 +19,13 @@ const processAppName = {
 	"Brave Browser Helper (GPU)": "Brave Browser",
 	"Discord Helper": "Discord",
 	"Discord Helper (Renderer)": "Discord",
+	"Discord Helper (GPU)": "Discord",
 	"Slack Helper": "Slack",
 	"Slack Helper (Renderer)": "Slack",
+	"Slack Helper (GPU)": "Slack",
 	"Obsidian Helper": "Obsidian",
 	"Obsidian Helper (Renderer)": "Obsidian",
+	"Obsidian Helper (GPU)": "Obsidian",
 };
 
 // common apps not located in /Applications/
