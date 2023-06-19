@@ -888,7 +888,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>775</real>
+			<real>765</real>
 		</dict>
 		<key>19F63061-B18E-4FCD-BB48-E06D1D826040</key>
 		<dict>
@@ -1109,64 +1109,22 @@ JSON.stringify({ 'items': volume_array });
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>2.5</string>
+				<string>top</string>
 				<key>placeholder</key>
-				<string>2.5</string>
+				<string>top</string>
 				<key>required</key>
-				<false/>
+				<true/>
 				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Must be between 0.1s and 5s.</string>
+			<string>keyword</string>
 			<key>label</key>
-			<string>Refresh Rate</string>
+			<string>Processes</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>rerun_s</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>0.5</string>
-				<key>placeholder</key>
-				<string>0.5</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Percentage below which CPU is not displayed.</string>
-			<key>label</key>
-			<string>CPU Threshold</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>cpu_threshold_percent</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>50</string>
-				<key>placeholder</key>
-				<string>50</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Mb below which memory usage is not displayed.</string>
-			<key>label</key>
-			<string>Memory Threshold</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>memory_threshold_mb</string>
+			<string>process_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1186,13 +1144,118 @@ JSON.stringify({ 'items': volume_array });
 				</array>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>sort by</string>
 			<key>label</key>
-			<string>Sort processes by</string>
+			<string></string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
 			<string>sort_key</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>2.5</string>
+				<key>placeholder</key>
+				<string>2.5</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>refresh rate (must be between 0.1s and 5s)</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>rerun_s</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>0.5</string>
+				<key>placeholder</key>
+				<string>0.5</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>CPU threshold, percentage below which CPU is not displayed</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>cpu_threshold_percent</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>50</string>
+				<key>placeholder</key>
+				<string>50</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>memory threshold, Mb below which memory usage is not displayed.</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>memory_threshold_mb</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>vol</string>
+				<key>placeholder</key>
+				<string>vol</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword</string>
+			<key>label</key>
+			<string>removable volumes</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>volume_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>blue</string>
+				<key>placeholder</key>
+				<string>blue</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword</string>
+			<key>label</key>
+			<string>bluetooth devices</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>bluetooth_keyword</string>
 		</dict>
 	</array>
 	<key>version</key>
