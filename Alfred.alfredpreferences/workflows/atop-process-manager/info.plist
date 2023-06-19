@@ -6,6 +6,19 @@
 	<string>de.chris-grieser.atop</string>
 	<key>connections</key>
 	<dict>
+		<key>1765993C-E2F9-4224-A487-1B3FF0F4B90B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F91AA471-17A8-42F7-ADC3-FEDAFA645CCF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>19F63061-B18E-4FCD-BB48-E06D1D826040</key>
 		<array>
 			<dict>
@@ -233,6 +246,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A09D544F-ECA6-4D74-B8B0-AC69E572977B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F91AA471-17A8-42F7-ADC3-FEDAFA645CCF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BC1E0F42-E6F6-4F15-BFB4-AF6BA697A13D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -823,6 +849,25 @@ JSON.stringify({ 'items': volume_array });
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F91AA471-17A8-42F7-ADC3-FEDAFA645CCF</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -869,6 +914,27 @@ JSON.stringify({ 'items': volume_array });
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Device address copid</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BC1E0F42-E6F6-4F15-BFB4-AF6BA697A13D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -885,6 +951,8 @@ JSON.stringify({ 'items': volume_array });
 		</dict>
 		<key>1765993C-E2F9-4224-A487-1B3FF0F4B90B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1051,6 +1119,15 @@ JSON.stringify({ 'items': volume_array });
 			<key>ypos</key>
 			<real>250</real>
 		</dict>
+		<key>BC1E0F42-E6F6-4F15-BFB4-AF6BA697A13D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>765</real>
+		</dict>
 		<key>C56280F8-3CDF-451D-BE1A-BE483AE10B45</key>
 		<dict>
 			<key>colorindex</key>
@@ -1090,6 +1167,15 @@ JSON.stringify({ 'items': volume_array });
 			<real>245</real>
 			<key>ypos</key>
 			<real>110</real>
+		</dict>
+		<key>F91AA471-17A8-42F7-ADC3-FEDAFA645CCF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>765</real>
 		</dict>
 		<key>FA333A60-CF01-4178-857C-9EE58B2C2E42</key>
 		<dict>
@@ -1171,7 +1257,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>rerun_s</string>
+			<string>rerun_s_processes</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1230,7 +1316,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>description</key>
 			<string>keyword</string>
 			<key>label</key>
-			<string>removable volumes</string>
+			<string>Removable Volumes</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1251,11 +1337,53 @@ JSON.stringify({ 'items': volume_array });
 			<key>description</key>
 			<string>keyword</string>
 			<key>label</key>
-			<string>bluetooth devices</string>
+			<string>Bluetooth</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>bluetooth_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>4</string>
+				<key>placeholder</key>
+				<string>4</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>refresh rate (must be between 0.1s and 5s)</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>rerun_s_bluetooth</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>iPhone, iMac</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>comma-separated list of devices excluded from list of bluetooth devices</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>excluded_devices</string>
 		</dict>
 	</array>
 	<key>version</key>

@@ -3,9 +3,11 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-let rerunSecs = parseFloat($.getenv("rerun_s")) || 2.5;
+let rerunSecs = parseFloat($.getenv("rerun_s_bluetooth")) || 2.5;
 if (rerunSecs < 0.1) rerunSecs = 0.1;
 else if (rerunSecs > 5) rerunSecs = 5;
+
+const excludedDevices = ($.getenv("excluded_devices") || "").split(",").map((t) => t.trim());
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -31,7 +33,7 @@ function run() {
 	});
 
 	// `ioreg` only includes Apple keyboards, mice, and trackpads, but does have
-	// battery data for them
+	// battery data for them which is missing from the `system_profiler` output.
 	const applePeriphery = {};
 	JSON.parse(
 		// data as xml -> remove "data" key -> convert to json
@@ -47,17 +49,18 @@ function run() {
 	deviceArr = deviceArr.map((device) => {
 		const batteryLevel =
 			applePeriphery[device.device_address]?.BatteryPercent || parseInt(device.device_batteryLevelMain) || -1;
-		const battery = batteryLevel > -1 ? `🔋 ${batteryLevel}%` : "";
+		const battery = batteryLevel > -1 ? `${batteryLevel}%` : "";
 		const connected = device.connected ? "🟢 " : "🔴 ";
-		const distance = device.device_rssi ? `   rssi: ${device.device_rssi}` : "";
+		const distance = device.device_rssi ? ` rssi: ${device.device_rssi}` : "";
 		const name = device.device_name;
+		if (excludedDevices.includes(name)) return {};
 		const type = device.device_minorType;
 
 		// icon
-		let category = ""
-		const typeIcons = { "Keyboard": "⌨️", "Mouse": "🖱️", "AppleTrackpad": "🖲️", "Gamepad": "🎮", "Headphones": "🎧" }
+		let category = "";
+		const typeIcons = { Keyboard: "⌨️", Mouse: "🖱️", AppleTrackpad: "🖲️", Gamepad: "🎮", Headphones: "🎧" };
 		if (type) category = typeIcons[type];
-		if (name.toLowerCase().includes("phone")) category = "📱";
+		else if (name.toLowerCase().includes("phone")) category = "📱";
 
 		return {
 			title: `${name} ${category}`,
@@ -66,10 +69,5 @@ function run() {
 		};
 	});
 
-	//───────────────────────────────────────────────────────────────────────────
-
-	return JSON.stringify({
-		rerun: rerunSecs,
-		items: deviceArr,
-	});
+	return JSON.stringify({ items: deviceArr });
 }

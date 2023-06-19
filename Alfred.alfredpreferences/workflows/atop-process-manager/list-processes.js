@@ -24,7 +24,7 @@ const appFilePaths = {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-let rerunSecs = parseFloat($.getenv("rerun_s")) || 2.5;
+let rerunSecs = parseFloat($.getenv("rerun_s_processes")) || 2.5;
 if (rerunSecs < 0.1) rerunSecs = 0.1;
 else if (rerunSecs > 5) rerunSecs = 5;
 
