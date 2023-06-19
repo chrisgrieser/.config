@@ -32,7 +32,7 @@ function run() {
 		deviceArr.push(properties);
 	});
 
-	// `ioreg` only includes Apple keyboards, mice, and trackpads, but does have
+	// INFO `ioreg` only includes Apple keyboards, mice, and trackpads, but does have
 	// battery data for them which is missing from the `system_profiler` output.
 	const applePeriphery = {};
 	JSON.parse(
@@ -49,7 +49,8 @@ function run() {
 	deviceArr = deviceArr.map((device) => {
 		const batteryLevel =
 			applePeriphery[device.device_address]?.BatteryPercent || parseInt(device.device_batteryLevelMain) || -1;
-		const battery = batteryLevel > -1 ? `${batteryLevel}%` : "";
+		const batteryLow = batteryLevel < 20 ? "⚠️" : "";
+		const battery = batteryLevel > -1 ? `${batteryLow}${batteryLevel}%` : "";
 		const connected = device.connected ? "🟢 " : "🔴 ";
 		const distance = device.device_rssi ? ` rssi: ${device.device_rssi}` : "";
 		const name = device.device_name;
