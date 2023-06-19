@@ -223,6 +223,7 @@ local config = {
 
 	-- Tabs
 	enable_tab_bar = true,
+	tab_max_width = 30,
 	use_fancy_tab_bar = false, -- `false` makes the tabs bigger
 	show_tabs_in_tab_bar = true, -- can show a status line in the tab bar, too
 	show_new_tab_button_in_tab_bar = false,

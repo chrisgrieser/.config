@@ -6,4 +6,5 @@ ioreg -r -d 1 -k BatteryPercent | grep -E 'BatteryPercent|Product"' |
 	sed 'N;s/\n/ /' |             # merge every second line https://stackoverflow.com/a/9605559
 	sed -E 's/([0-9]{1,3})/ \1%/' # append percent sign
 
-# TODO parse non-Apple bluetooth devices `system_profiler SPBluetoothDataType`
+# TODO parse non-Apple bluetooth devices 
+# system_profiler SPBluetoothDataType
