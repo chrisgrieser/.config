@@ -27,7 +27,7 @@ function run() {
 		.filter(connection => !(connection.endsWith("0,0,") || connection.startsWith(".")))
 		.map((connection) => {
 			const info = connection.split(","); // `nettop` output comma-separated due to `-L`
-			const name = info[0].split(".")[0];
+			const name = info[0].replace(/\.\d+?$/, "").replace(/ H(elper)?$/, "");
 
 			const downKb = parseInt(info[1]) / 1024;
 			const upKb = parseInt(info[2]) / 1024;
@@ -41,12 +41,15 @@ function run() {
 				title: name,
 				subtitle: `🔽 ${down}   🔺${up}`,
 				icon: icon,
-				down: parseInt(info[1]), // for sorting, not Alfred
+				uid: name,
+				valid: false, // no action available
+				down: downKb, // for sorting, not Alfred
 			};
 		})
 		.sort((a, b) => b.down - a.down); // sort by downloads
 
 	return JSON.stringify({
+		skipknowledge: true, // during rerun remembers selection, but does not affect sorting
 		rerun: rerunSecs,
 		items: connections,
 	});
