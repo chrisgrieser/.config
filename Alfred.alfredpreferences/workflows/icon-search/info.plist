@@ -688,9 +688,9 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>305</real>
+			<real>300</real>
 			<key>ypos</key>
-			<real>780</real>
+			<real>765</real>
 		</dict>
 		<key>1B052359-9E54-4CBB-BABF-C6925CB1015A</key>
 		<dict>
@@ -708,9 +708,9 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>note</key>
 			<string>copy image to clipboard</string>
 			<key>xpos</key>
-			<real>305</real>
+			<real>300</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>640</real>
 		</dict>
 		<key>3F8BF243-EE01-4E69-8573-2960822A3915</key>
 		<dict>
@@ -744,9 +744,9 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>455</real>
+			<real>450</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>640</real>
 		</dict>
 		<key>787AA6A6-CD07-447C-8D73-F4FCD1FEC10D</key>
 		<dict>
@@ -800,11 +800,11 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>local icons</string>
+			<string>search local icons</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>705</real>
 		</dict>
 		<key>BAA2ADF7-2FEB-4F9A-AE98-17378171B5CA</key>
 		<dict>

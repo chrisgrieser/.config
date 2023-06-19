@@ -27,6 +27,9 @@ elif [[ "$mode" == "force kill" ]]; then
 	kill -9 "$pid" && msg="Force Killed" || msg="Could not force kill"
 elif [[ "$mode" == "killall" ]]; then
 	killall "$name" && msg="Killed all processes with name" || msg="Could not kill"
+elif [[ "$mode" == "copy pid" ]]; then
+	echo -n "$pid" | pbcopy 
+	msg="✅ Copied PID for "
 fi
 
 echo -n "$msg $name"

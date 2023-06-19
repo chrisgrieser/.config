@@ -75,6 +75,10 @@ function run() {
 				mods: {
 					ctrl: { variables: { mode: "killall" } },
 					cmd: { variables: { mode: "force kill" } },
+					alt: {
+						subtitle: `⌥: Copy PID   ${pid}`,
+						variables: { mode: "copy pid" },
+					},
 					shift: {
 						valid: isApp,
 						subtitle: isApp ? "⇧: Restart App" : "⇧: ⛔ Not an app",

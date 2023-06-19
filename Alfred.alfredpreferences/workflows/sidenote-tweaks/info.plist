@@ -73,6 +73,18 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>E1952981-5610-42C6-967C-9728E176B587</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F0D7A81E-E2BF-4692-AE88-05F7D6110593</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>71C0B192-0A89-41AF-BC76-029269AB4DCB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -1000,6 +1012,20 @@ sketchybar --trigger update-sidenotes-count</string>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
+						<string>com.apple.Safari</string>
+						<key>outputlabel</key>
+						<string>Safari</string>
+						<key>uid</key>
+						<string>F0D7A81E-E2BF-4692-AE88-05F7D6110593</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:focusedapp}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
 						<string>com.vivaldi.Vivaldi</string>
 						<key>outputlabel</key>
 						<string>Vivaldi</string>
@@ -1244,7 +1270,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>1065</real>
+			<real>1045</real>
 		</dict>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<dict>
@@ -1253,7 +1279,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>search side notes</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>730</real>
 		</dict>
