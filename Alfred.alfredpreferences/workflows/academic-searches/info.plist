@@ -41,9 +41,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-		</array>
-		<key>697132AD-4043-4FD4-9553-0725ADF14E65</key>
-		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3020DCCA-3C79-4963-8FA6-39F112BD5EC2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>885E52AE-9E54-4319-A19C-E6201F89E6D0</string>
@@ -68,6 +75,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C2B4BC58-FF09-45A4-A135-256038B0C60C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6999194B-966C-4985-B7AE-E2A8FCF219CE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>96381D25-BEFF-4E9A-AE91-DD3A5F22DF42</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -76,7 +106,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Re-Search</string>
+	<string>Research Searches</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -97,27 +127,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>54391CE0-C9F4-4619-B285-BD85CD4D64ED</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>rs||sci</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Sci-Hub: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>6AE5D6B0-7B2C-4AC7-9EE9-368186387D35</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -148,11 +157,32 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
+				<string>rs||sci</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Sci-Hub: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>6AE5D6B0-7B2C-4AC7-9EE9-368186387D35</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
 				<string>rs</string>
 				<key>subtext</key>
-				<string>Google Scholar &amp; Scite_</string>
+				<string>Google Scholar, Scite_, Semantic Scholar, Elicit</string>
 				<key>text</key>
-				<string>Citation Searches: {query}</string>
+				<string>Academic Searches: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -238,6 +268,27 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
+				<string>https://www.semanticscholar.org/search?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3020DCCA-3C79-4963-8FA6-39F112BD5EC2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
 				<string>https://elicit.org/search?q={query}</string>
 			</dict>
 			<key>type</key>
@@ -250,21 +301,63 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://scisummary.com/summarize</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>6999194B-966C-4985-B7AE-E2A8FCF219CE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>rs</string>
+				<string>ai</string>
 				<key>subtext</key>
-				<string></string>
+				<string>SchlarCry &amp; Sci-Summary</string>
 				<key>text</key>
-				<string>Elicit: {query}</string>
+				<string>Summarize Papers</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>697132AD-4043-4FD4-9553-0725ADF14E65</string>
+			<string>C2B4BC58-FF09-45A4-A135-256038B0C60C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://article-summarizer.scholarcy.com/summarizer</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>96381D25-BEFF-4E9A-AE91-DD3A5F22DF42</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -291,6 +384,15 @@
 			<key>ypos</key>
 			<real>215</real>
 		</dict>
+		<key>3020DCCA-3C79-4963-8FA6-39F112BD5EC2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>215</real>
+			<key>ypos</key>
+			<real>285</real>
+		</dict>
 		<key>32FE0E4D-09C0-4DB0-81EA-F77B71C65466</key>
 		<dict>
 			<key>colorindex</key>
@@ -309,7 +411,7 @@
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>95</real>
+			<real>165</real>
 		</dict>
 		<key>46C7A417-8882-4A2C-97DF-DAE419A24391</key>
 		<dict>
@@ -329,16 +431,14 @@
 			<key>ypos</key>
 			<real>40</real>
 		</dict>
-		<key>697132AD-4043-4FD4-9553-0725ADF14E65</key>
+		<key>6999194B-966C-4985-B7AE-E2A8FCF219CE</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>elicit</string>
+			<integer>5</integer>
 			<key>xpos</key>
-			<real>40</real>
+			<real>220</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>535</real>
 		</dict>
 		<key>6AE5D6B0-7B2C-4AC7-9EE9-368186387D35</key>
 		<dict>
@@ -354,9 +454,29 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>215</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>405</real>
+		</dict>
+		<key>96381D25-BEFF-4E9A-AE91-DD3A5F22DF42</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>660</real>
+		</dict>
+		<key>C2B4BC58-FF09-45A4-A135-256038B0C60C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>summarize</string>
+			<key>xpos</key>
+			<real>40</real>
+			<key>ypos</key>
+			<real>585</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
