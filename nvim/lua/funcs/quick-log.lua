@@ -70,6 +70,22 @@ function M.log()
 	append(logStatement)
 end
 
+function M.objectlog()
+	local varname = getVar()
+	local templateStr
+	local ft = bo.filetype
+
+	if ft == "javascript" then
+		templateStr = 'console.log("%s:", JSON.stringify(%s))'
+	else
+		vim.notify("Objectlog does not support " .. ft .. " yet.", logWarn)
+		return
+	end
+
+	local logStatement = string.format(templateStr, varname, varname)
+	append(logStatement)
+end
+
 ---adds simple "beep" log statement to check whether conditionals have been
 ---triggered. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.beeplog()
