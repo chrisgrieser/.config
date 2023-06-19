@@ -94,19 +94,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7D56EA1B-BF57-40A0-8107-94D3F4D49905</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A226B122-42B9-448F-89AB-32C3D85A8FB9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>80995D89-9285-4E5C-8728-25576BF43113</key>
 		<array>
 			<dict>
@@ -151,19 +138,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A226B122-42B9-448F-89AB-32C3D85A8FB9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A3879C3A-50C5-4ECB-B700-E5D682BFF82C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -380,7 +354,7 @@ echo -n "Bluetooth"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>atop||top</string>
+				<string>{var:process_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -498,7 +472,7 @@ echo -n "WiFi"</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>wifi||wlan||restart</string>
+				<string>wifi||restart</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -613,46 +587,54 @@ echo -n "iCloud Sync"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
+				<key>alignment</key>
 				<integer>0</integer>
-				<key>script</key>
+				<key>backgroundcolor</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>battery-display.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.largetype</string>
 			<key>uid</key>
-			<string>A226B122-42B9-448F-89AB-32C3D85A8FB9</string>
+			<string>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🔋 Battery</string>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>networkQuality</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A3879C3A-50C5-4ECB-B700-E5D682BFF82C</string>
+			<string>B6749459-30C8-484B-BE73-E64557107E37</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -660,18 +642,18 @@ echo -n "iCloud Sync"</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>battery</string>
+				<string>network quality</string>
 				<key>subtext</key>
-				<string>Only Apple Periphery Devices</string>
+				<string></string>
 				<key>text</key>
-				<string>📊 Show Battery</string>
+				<string>📊 Network Quality</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>7D56EA1B-BF57-40A0-8107-94D3F4D49905</string>
+			<string>41B4C19E-F17F-4762-A8E4-2AD597D21C22</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -691,7 +673,7 @@ echo -n "iCloud Sync"</string>
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>keyword</key>
-				<string>vol</string>
+				<string>{var:volume_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -807,92 +789,6 @@ JSON.stringify({ 'items': volume_array });
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>networkQuality</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B6749459-30C8-484B-BE73-E64557107E37</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>network quality</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📊 Network Quality</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>41B4C19E-F17F-4762-A8E4-2AD597D21C22</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.browseinterminal</string>
-			<key>uid</key>
-			<string>54580785-C343-4A69-8525-5BF78553961A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -914,6 +810,19 @@ JSON.stringify({ 'items': volume_array });
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>54580785-C343-4A69-8525-5BF78553961A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -927,7 +836,7 @@ JSON.stringify({ 'items': volume_array });
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>bbb</string>
+				<string>{var:bluetooth_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1031,9 +940,9 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>645</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>395</real>
 		</dict>
 		<key>4F6FB435-0A87-45E8-A851-F458286E7A6F</key>
 		<dict>
@@ -1078,18 +987,9 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>945</real>
+			<real>1025</real>
 			<key>ypos</key>
-			<real>565</real>
-		</dict>
-		<key>7D56EA1B-BF57-40A0-8107-94D3F4D49905</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>645</real>
-			<key>ypos</key>
-			<real>435</real>
+			<real>395</real>
 		</dict>
 		<key>80995D89-9285-4E5C-8728-25576BF43113</key>
 		<dict>
@@ -1131,32 +1031,14 @@ JSON.stringify({ 'items': volume_array });
 			<key>ypos</key>
 			<real>80</real>
 		</dict>
-		<key>A226B122-42B9-448F-89AB-32C3D85A8FB9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>800</real>
-			<key>ypos</key>
-			<real>435</real>
-		</dict>
-		<key>A3879C3A-50C5-4ECB-B700-E5D682BFF82C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>945</real>
-			<key>ypos</key>
-			<real>435</real>
-		</dict>
 		<key>B6749459-30C8-484B-BE73-E64557107E37</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>880</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>395</real>
 		</dict>
 		<key>B758EFA5-2C8C-4C45-8A3E-B44E09A18464</key>
 		<dict>
@@ -1194,9 +1076,9 @@ JSON.stringify({ 'items': volume_array });
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>805</real>
+			<real>885</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>510</real>
 		</dict>
 		<key>F1539426-E456-4953-8215-D809DF4B120B</key>
 		<dict>

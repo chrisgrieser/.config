@@ -354,6 +354,7 @@ end, { desc = "󰜊 Undo since last open" })
 -- LOGGING & DEBUGGING
 -- stylua: ignore start
 keymap({ "n", "x" }, "<leader>ll", function() require("funcs.quick-log").log() end, { desc = " log variable" })
+keymap({ "n", "x" }, "<leader>lo", function() require("funcs.quick-log").objectlog() end, { desc = " object log variable" })
 keymap("n", "<leader>lb", function() require("funcs.quick-log").beeplog() end, { desc = " beep log" })
 keymap("n", "<leader>l1", function() require("funcs.quick-log").timelog() end, { desc = " time log" })
 keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end, { desc = "  remove log" })
