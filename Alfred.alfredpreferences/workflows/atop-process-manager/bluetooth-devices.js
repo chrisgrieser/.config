@@ -3,6 +3,10 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+let rerunSecs = parseFloat($.getenv("rerun_s")) || 2.5;
+if (rerunSecs < 0.1) rerunSecs = 0.1;
+else if (rerunSecs > 5) rerunSecs = 5;
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -40,18 +44,32 @@ function run() {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	console.log("deviceArr:", JSON.stringify(deviceArr));
 	deviceArr = deviceArr.map((device) => {
 		const batteryLevel =
 			applePeriphery[device.device_address]?.BatteryPercent || parseInt(device.device_batteryLevelMain) || -1;
 		const battery = batteryLevel > -1 ? `🔋 ${batteryLevel}%` : "";
-		const connected = device.connected ? "🔌 " : "";
+		const connected = device.connected ? "🟢 " : "🔴 ";
+		const distance = device.device_rssi ? `   rssi: ${device.device_rssi}` : "";
+		const name = device.device_name;
+		const type = device.device_minorType;
+
+		// icon
+		let category = ""
+		const typeIcons = { "Keyboard": "⌨️", "Mouse": "🖱️", "AppleTrackpad": "🖲️", "Gamepad": "🎮", "Headphones": "🎧" }
+		if (type) category = typeIcons[type];
+		if (name.toLowerCase().includes("phone")) category = "📱";
 
 		return {
-			title: device.device_name,
-			subtitle: connected + battery,
+			title: `${name} ${category}`,
+			subtitle: connected + battery + distance,
+			arg: device.device_address,
 		};
 	});
 
-	return JSON.stringify({ items: deviceArr });
+	//───────────────────────────────────────────────────────────────────────────
+
+	return JSON.stringify({
+		rerun: rerunSecs,
+		items: deviceArr,
+	});
 }
