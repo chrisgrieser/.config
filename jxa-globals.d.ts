@@ -23,6 +23,8 @@ declare const Application: {
 		displayNotification(textToShow: string, options: { withTitle: string; subtitle: string }): void;
 	};
 	(appname: string): {
+		includeStandardAdditions: boolean;
+		openLocation(url: string): void;
 		id(): number;
 		name(): string;
 		running(): boolean;

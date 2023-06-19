@@ -96,18 +96,7 @@
 			</dict>
 		</array>
 		<key>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>187D48FE-4DD7-446F-9447-5829E35CA633</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>6B581416-D12E-4AC2-B604-895443940F98</key>
 		<array>
 			<dict>
@@ -637,14 +626,6 @@ osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR"</stri
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>187D48FE-4DD7-446F-9447-5829E35CA633</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>path</key>
@@ -654,6 +635,14 @@ osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR"</stri
 			<string>alfred.workflow.action.revealfile</string>
 			<key>uid</key>
 			<string>E28BAD26-7C03-414A-A567-4F44432F9FD7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>187D48FE-4DD7-446F-9447-5829E35CA633</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -704,9 +693,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>705</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>785</real>
+			<real>865</real>
 		</dict>
 		<key>24B77922-B082-4744-B4A1-6EAD37FFD88C</key>
 		<dict>

@@ -250,7 +250,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>skip-paywall.applescript</string>
+				<string>skip-paywall.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -333,6 +333,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -378,27 +399,6 @@
 			<string>C65CD77E-C2B3-4063-B045-C1954E7FE033</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -470,7 +470,7 @@
 				<key>keyword</key>
 				<string>sw</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Current Browser Tab</string>
 				<key>text</key>
 				<string>Switch to Safari</string>
 				<key>withspace</key>
@@ -495,7 +495,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>switch-to-safari.applescript</string>
+				<string>switch-to-safari.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -623,7 +623,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>270</real>
 		</dict>
 		<key>CB8861B8-A675-40C2-BA6B-943C7F8E0867</key>
 		<dict>
