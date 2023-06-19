@@ -218,12 +218,6 @@ return {
 			},
 		},
 	},
-	{
-		"RubixDev/mason-update-all",
-		cmd = "MasonUpdateAll",
-		dependencies = "williamboman/mason.nvim",
-		config = true,
-	},
 	{ -- auto-install lsp servers
 		"williamboman/mason-lspconfig.nvim",
 		event = "VeryLazy",

@@ -10,35 +10,24 @@ local u = require("config.utils")
 -- META
 
 -- search keymaps
-keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " keymaps" })
+keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " Search Keymaps" })
 
 -- Highlights
 keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- [P]lugins
-keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Sync" })
+keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Update/Sync" })
 keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
 
 keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason Overview" })
-keymap(
-	"n",
-	"<leader>pt",
-	function() cmd.TSModuleInfo("highlight") end,
-	{ desc = " Treesitter Parser Overview" }
-)
-keymap("n", "<leader>pu", function()
-	cmd.TSUpdate()
-	cmd.MasonUpdateAll()
-end, { desc = " Update Mason & Treesitter Packages" })
+-- stylua: ignore
+keymap("n", "<leader>pa", function() cmd.TSModuleInfo("highlight") end, { desc = " Treesitter Parser Overview" })
+keymap("n", "<leader>pt", cmd.TSUpdate, { desc = " Treesitter Parser Update" })
 
 -- Theme Picker
-keymap(
-	"n",
-	"<leader>pc",
-	function() cmd.Telescope("colorscheme") end,
-	{ desc = "  Change Colorschemes" }
-)
+-- stylua: ignore
+keymap("n", "<leader>pc", function() cmd.Telescope("colorscheme") end, { desc = "  Change Colorschemes" })
 
 --------------------------------------------------------------------------------
 

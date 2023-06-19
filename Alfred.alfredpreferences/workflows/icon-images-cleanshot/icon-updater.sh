@@ -49,7 +49,7 @@ case $APP in
 	cp -f "$CUSTOM_ICON_FOLDER/Vivaldi.icns" "$APP.app/Contents/Resources/app.icns"
 	;;
 "Brave Browser")
-	cp -f "$CUSTOM_ICON_FOLDER/Brave.icns" "$APP.app/Contents/Resources/app.icns"
+	cp -f "$CUSTOM_ICON_FOLDER/Brave Safari.icns" "$APP.app/Contents/Resources/app.icns"
 	;;
 "Alfred Preferences")
 	osascript -e "tell application \"Finder\"
