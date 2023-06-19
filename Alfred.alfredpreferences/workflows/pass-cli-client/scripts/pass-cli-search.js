@@ -27,11 +27,12 @@ function run(argv) {
 	}
 
 	const query = argv[0].trim();
-	const passwordlist = app.doShellScript(`cd "${passwordStore}" ; find . -name "*${query}*.gpg"`);
+	// `-iname` makes the search case-insensitive
+	const passwordlist = app.doShellScript(`cd "${passwordStore}" ; find . -iname "*${query}*.gpg"`);
 	let createNewPassword;
 	if (passwordlist) {
 		createNewPassword = false;
-		passwordlist.split("\r").forEach((/** @type {string} */ gpgFile) => {
+		passwordlist.split("\r").forEach((gpgFile) => {
 			const id = gpgFile.slice(2, -4);
 			const parts = id.split("/");
 			const name = parts.pop();
@@ -44,16 +45,14 @@ function run(argv) {
 				arg: id,
 				uid: id,
 				mods: {
-					alt: {
-						arg: path,
-					},
+					alt: { arg: path },
 				},
 			});
 		});
 	} else {
 		createNewPassword = true;
 		const cleanQuery = query.replace(/[/\\:]/, "-");
-		const disallowed = { subtitle: "🚫", valid: false }
+		const disallowed = { subtitle: "🚫 Not possible for new password.", valid: false }
 		passwords.push({
 			title: "🆕 " + query,
 			subtitle: "Create new password",
