@@ -133,22 +133,6 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "UiEnter" }, {
 
 --------------------------------------------------------------------------------
 
--- simple alternative to fidget.nvim -> https://www.reddit.com/r/neovim/comments/o4bguk/comment/h2kcjxa/
-local function lsp_progress()
-	local messages = vim.lsp.util.get_progress_messages()
-	if #messages == 0 then return "" end
-	local client = messages[1].name and messages[1].name .. ": " or ""
-	if client:find("null%-ls") then return "" end
-	local progress = messages[1].percentage or 0
-	local task = messages[1].title or ""
-	task = task:gsub("^(%w+).*", "%1") -- only first word
-
-	local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-	local ms = vim.loop.hrtime() / 1000000
-	local frame = math.floor(ms / 120) % #spinners
-	return spinners[frame + 1] .. " " .. client .. progress .. "%% " .. task
-end
-
 -- return available plugin updates when above a certain threshold
 local function pluginUpdates()
 	local threshold = 20

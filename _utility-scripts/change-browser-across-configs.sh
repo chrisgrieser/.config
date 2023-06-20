@@ -21,6 +21,7 @@ open "chrome-extension://epmaefhielclhlnmjofcdapbeepkmggh/options.html"
 open "chrome-extension://bijpdibkloghppkbmhcklkogpjaenfkg/html/options.html"
 open "chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html"
 open "chrome-extension://gnmdbogfankgjepgglmmfmbnimcmcjle/optionPage/optionPage.html"
+open "chrome-extension://mnjggcdmjocbbbhaepdhchncahnbgone/options/options.html#import"
 
 # toggle local file URLs here
 open "brave://extensions/?id=hfjbmagddngcpeloejdejnfgbamkjaeg"
