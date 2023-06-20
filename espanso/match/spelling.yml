@@ -254,11 +254,10 @@ matches:
   # https://espanso.org/docs/matches/regex-triggers#arguments
   - regex: "\\Bsich "
     replace: "isch "
-  # only fix when capitalized, so stuff like urls is unaffected
-  - trigger: Youtube
+  - trigger: Youtube # only fix when capitalized, so stuff like urls is unaffected
     replace: YouTube
     word: true
-  - trigger: Github
+  - trigger: Github # only fix when capitalized, so stuff like urls is unaffected
     replace: GitHub
     word: true
   - trigger: hte
@@ -272,3 +271,7 @@ matches:
   - trigger: Cafe
     replace: Café
     propagate_casing: true
+  - trigger: acheive
+    replace: achieve
+    propagate_casing: true
+    word: true

@@ -136,14 +136,6 @@ if [[ $INFO_WINDOW == 1 ]]; then
 fi
 
 # Restart
-if [[ "$APP" == "PWAs" ]]; then
-	# All PWA update
-	killall "Dock" # INFO pgrep-ing for the Dock does not work, since there is always a process called that?
-	echo -n "All PWAs"
-	open "$PWA_FOLDER"
-	return 0
-fi
-
 touch "$APP.app"
 killall "Dock"
 killall "$APP"
