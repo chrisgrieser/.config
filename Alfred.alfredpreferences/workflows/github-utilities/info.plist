@@ -373,6 +373,19 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>FE44448E-7653-4A3C-B7F9-C3A787EE0556</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FE44448E-7653-4A3C-B7F9-C3A787EE0556</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -815,6 +828,14 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>FE44448E-7653-4A3C-B7F9-C3A787EE0556</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>path</key>
@@ -1137,7 +1158,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>note</key>
 			<string>shallow clone to local repo folder</string>
 			<key>xpos</key>
-			<real>565</real>
+			<real>600</real>
 			<key>ypos</key>
 			<real>545</real>
 		</dict>
@@ -1305,7 +1326,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>415</real>
+			<real>380</real>
 			<key>ypos</key>
 			<real>545</real>
 		</dict>
@@ -1317,6 +1338,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<real>780</real>
 			<key>ypos</key>
 			<real>175</real>
+		</dict>
+		<key>FE44448E-7653-4A3C-B7F9-C3A787EE0556</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>530</real>
+			<key>ypos</key>
+			<real>575</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
