@@ -12,10 +12,9 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const passwords = [];
-
-	// INFO password store location retrieved via .zshenv
-	let passwordStore = app.doShellScript('echo "$PASSWORD_STORE_DIR"');
+	let passwordStore = argv[0].trim();
 	if (passwordStore === "") passwordStore = app.pathTo("home folder") + "/.password-store";
+	const query = argv[1].trim();
 
 	if (!fileExists(passwordStore)) {
 		passwords.push({
@@ -26,7 +25,6 @@ function run(argv) {
 		return JSON.stringify({ items: passwords });
 	}
 
-	const query = argv[0].trim();
 	// `-iname` makes the search case-insensitive
 	const passwordlist = app.doShellScript(`cd "${passwordStore}" ; find . -iname "*${query}*.gpg"`);
 	let createNewPassword;
