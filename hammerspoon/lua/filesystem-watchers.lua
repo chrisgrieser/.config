@@ -29,7 +29,7 @@ BookmarkWatcher = pw(sourceBookmarkPath, function()
 	-- Local State (also required for Alfred to pick up the Bookmarks)
 	local content = u.readFile(sourceProfileLocation .. "/Local State")
 	if not content then return end
-	u.writeToFile(chromeProfileLocation .. "/Local State", content)
+	u.writeToFile(chromeProfileLocation .. "/Local State", content, false)
 
 	print("🔖 Bookmarks synced to Chrome Bookmarks")
 end):start()
@@ -93,6 +93,16 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 			-- done via hammerspoon to differentiate between zips to auto-open and
 			-- zips to archive (like violentmonkey)
 			hs.open(filep)
+
+		-- bib: save to library
+		elseif ext == "bib" then
+			local libraryPath = env.dotfilesFolder .. "/pandoc/main-bibliography.bib"
+			local bibEntry = u.readFile(filep)
+			if not bibEntry then return end
+			if not bibEntry:find("\n$") then bibEntry = bibEntry .. "\n" end
+			u.writeToFile(libraryPath, bibEntry, true)
+			hs.open(libraryPath)
+			os.remove(filep)
 
 		-- violentmonkey
 		elseif fileName:find("violentmonkey%.zip") then

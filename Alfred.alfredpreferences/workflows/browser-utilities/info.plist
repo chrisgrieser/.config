@@ -90,6 +90,19 @@
 		</array>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<array/>
+		<key>9377EF23-556F-4273-A2A5-3714CA46B546</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1B7FE114-DCC5-4243-8C64-D1D8DC1C0193</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>AADFC524-047E-4638-ABAA-646CEC90599D</key>
 		<array>
 			<dict>
@@ -507,11 +520,80 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>bibitnow-trigger.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1B7FE114-DCC5-4243-8C64-D1D8DC1C0193</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>6</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>Y</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.brave.Browser</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>9377EF23-556F-4273-A2A5-3714CA46B546</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>1B7FE114-DCC5-4243-8C64-D1D8DC1C0193</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>trigger bibItNow download</string>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>620</real>
+		</dict>
 		<key>1F170814-90DD-485E-A861-757A4FD92606</key>
 		<dict>
 			<key>colorindex</key>
@@ -576,6 +658,17 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<real>305</real>
 			<key>ypos</key>
 			<real>30</real>
+		</dict>
+		<key>9377EF23-556F-4273-A2A5-3714CA46B546</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>Download bibtex for Website</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>620</real>
 		</dict>
 		<key>97E52210-B26B-49B3-AC6D-65A1235A88C9</key>
 		<dict>
