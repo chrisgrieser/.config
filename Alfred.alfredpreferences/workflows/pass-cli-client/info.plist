@@ -408,17 +408,17 @@
 				<string></string>
 				<key>script</key>
 				<string># since this is a shell-script, "$PASSWORD_STORE_DIR" from zshenv can be passed to JavaScript
-osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR"</string>
+osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR" "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/pass-cli-search.js</string>
+				<string></string>
 				<key>subtext</key>
 				<string>Loading...</string>
 				<key>title</key>
 				<string>Search Passwords in Pass</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
