@@ -41,7 +41,9 @@ nmap <Esc> &c&&n&
 
 " navigate visual lines rather than logical ones
 noremap j gj
+vmap j gj
 noremap k gk
+vmap k gk
 nmap I g0i
 nmap A g$a
 
@@ -230,7 +232,7 @@ nmap ww :duplicate
 """"""""""""""""""""""
 
 " so VV... in normal mode selects more lines
-vmap V j
+vmap V gj
 
 " so vv goes to visual block mode
 vmap v <C-v>

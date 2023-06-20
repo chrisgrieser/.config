@@ -16,7 +16,7 @@ osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealW
 # Import / Change settings
 open "chrome-extension://pncfbmialoiaghdehhbnbhkkgmjanfhe/pages/options.html"
 open "chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html"
-open "chrome-extension://jinjaccalgkegednnccohejagnlnfdag/options/index.html"
+open "chrome-extension://jinjaccalgkegednnccohejagnlnfdag/options/index.html#settings"
 open "chrome-extension://epmaefhielclhlnmjofcdapbeepkmggh/options.html"
 open "chrome-extension://bijpdibkloghppkbmhcklkogpjaenfkg/html/options.html"
 open "chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html"
@@ -28,7 +28,6 @@ open "brave://extensions/?id=hfjbmagddngcpeloejdejnfgbamkjaeg"
 #───────────────────────────────────────────────────────────────────────────────
 
 # PWAs
-
 open "https://www.netflix.com/browse"
 open "https://www.crunchyroll.com/de"
 open "https://www.tagesschau.de/multimedia/sendung/tagesschau_20_uhr"
