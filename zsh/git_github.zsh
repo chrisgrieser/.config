@@ -154,7 +154,7 @@ function pr() {
 
 	# get and validate commit msg
 	if [[ -z "$*" ]]; then
-		echo -n "Commit Message:"
+		echo -n "Commit Message: "
 		read -r msg && echo
 	else
 		msg="$*"
@@ -170,7 +170,7 @@ function pr() {
 	git add . && git commit -m "$msg"
 	current_branch=$(git branch --show-current)
 
-	# create PR *into current branch* (not the default branch)
+	# create PR into current branch (not the default branch)
 	if [[ "$mode" == "w" ]]; then
 		gh pr create --web --fill --base="$current_branch"
 	else
@@ -271,7 +271,7 @@ function clone() {
 	inspect
 }
 
-# delete and re-clone git repo 
+# delete and re-clone git repo
 function nuke {
 	is_submodule=$(git rev-parse --show-superproject-working-tree)
 	if [[ -n "$is_submodule" ]]; then
@@ -307,10 +307,14 @@ function rel() {
 		zsh ../.release.sh "$*"
 	elif [[ -f ../../.release.sh ]]; then
 		zsh ../../.release.sh "$*"
-	elif [[ -f ../../../.release.sh ]]; then
-		zsh ../../../.release.sh "$*"
+	elif [[ -f release.sh ]]; then
+		zsh release.sh "$*"
+	elif [[ -f ../release.sh ]]; then
+		zsh ../release.sh "$*"
+	elif [[ -f ../../release.sh ]]; then
+		zsh ../../release.sh "$*"
 	else
-		print "\033[1;31mNo '.release.sh' found.\033[0m"
+		print "\033[1;31mNo 'release.sh' found.\033[0m"
 	fi
 }
 
