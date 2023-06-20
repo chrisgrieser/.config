@@ -217,7 +217,8 @@
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string></string>
+				<string># defined in .zshenv
+osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PATH"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -227,7 +228,7 @@
 				<key>title</key>
 				<string>Installed Chrome Extensions</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<false/>
 			</dict>
