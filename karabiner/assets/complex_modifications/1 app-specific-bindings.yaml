@@ -307,14 +307,12 @@ rules:
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [control] } }
         to:
-          - key_code: left_arrow
-            modifiers: [control]
+          - { key_code: left_arrow, modifiers: [control] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [control] } }
         to:
-          - key_code: right_arrow
-            modifiers: [control]
+          - { key_code: right_arrow, modifiers: [control] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
       # go to next [u]nread
       - type: basic
