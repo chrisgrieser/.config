@@ -1,5 +1,4 @@
 vim.g.mapleader = ","
-vim.g.maplocalleader = "!"
 
 vim.loader.enable() -- TODO will be nvim default in later versions
 
