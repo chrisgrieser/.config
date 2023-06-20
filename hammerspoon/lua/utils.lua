@@ -63,8 +63,10 @@ function M.openLinkInBg(url) hs.execute('open -g "' .. url .. '"') end
 ---write to file (overwriting)
 ---@param filePath string
 ---@param str string
-function M.writeToFile(filePath, str)
-	local file, err = io.open(filePath, "w")
+---@param append boolean
+function M.writeToFile(filePath, str, append)
+	local mode = append and "a" or "w"
+	local file, err = io.open(filePath, mode)
 	if file then
 		file:write(str)
 		file:close()

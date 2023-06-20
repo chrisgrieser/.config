@@ -23,7 +23,7 @@ matches:
     replace: "s/$|$/"
     word: true
   # send silent (no ping) messages
-  - trigger: "sss"
+  - triggers: ["zzz", "sss"]
     replace: "@silent "
 
   # announcements
