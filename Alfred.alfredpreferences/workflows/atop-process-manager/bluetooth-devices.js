@@ -35,17 +35,18 @@ function run() {
 	// INFO `ioreg` only includes Apple keyboards, mice, and trackpads, but does
 	// have battery data for them which is missing from the `system_profiler` output.
 	const applePeriphery = {};
-	const applePeriData =
-		app.doShellScript("ioreg -rak BatteryPercent | sed 's/data>/string>/' | plutil -convert json - -o - || true");
-	console.log("applePeriData:", applePeriData);
-	if (!applePeriData.startsWith("<stdin>: Property List error")) {
-		// data as xml -> remove "data" key -> convert to json
-		JSON.parse(applePeriData).forEach((/** @type {{ DeviceAddress: string; }} */ device) => {
-			// make address consistent with output from `system_profiler`
-			const address = device.DeviceAddress.toUpperCase().replaceAll("-", ":");
-			applePeriphery[address] = device;
-		});
-	}
+	let applePeriData = app.doShellScript(
+		"ioreg -rak BatteryPercent | sed 's/data>/string>/' | plutil -convert json - -o - || true",
+	);
+	// no apple periphery -> defaulting to "[]" so JSON.parse() doesn't fail
+	if (applePeriData.startsWith("<stdin>: Property List error")) applePeriData = "[]";
+
+	// data as xml -> remove "data" key -> convert to json
+	JSON.parse(applePeriData).forEach((/** @type {{ DeviceAddress: string; }} */ device) => {
+		// make address consistent with output from `system_profiler`
+		const address = device.DeviceAddress.toUpperCase().replaceAll("-", ":");
+		applePeriphery[address] = device;
+	});
 
 	//───────────────────────────────────────────────────────────────────────────
 

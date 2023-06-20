@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>bluetooth_keyword</key>
-	<string>bbb</string>
+	<string>bb</string>
 	<key>excluded_devices</key>
 	<string>Mac mini Office, Chris iPad, Chris iMac Home</string>
 	<key>network_keyword</key>
-	<string>nnn</string>
+	<string>nn</string>
 	<key>process_keyword</key>
-	<string>ppp</string>
+	<string>pp</string>
 	<key>volume_keyword</key>
-	<string>vvv</string>
+	<string>vv</string>
 </dict>
 </plist>
