@@ -275,3 +275,7 @@ matches:
     replace: achieve
     propagate_casing: true
     word: true
+  - trigger: defualt
+    replace: default
+    propagate_casing: true
+    word: true

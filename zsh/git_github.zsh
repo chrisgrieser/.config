@@ -180,6 +180,7 @@ function pr() {
 	if [[ "$delete_after" == "y" ]]; then
 		repopath=$(pwd)
 		cd ..
+		sleep 1
 		rm -rf "$repopath"
 	fi
 	# if created in terminal, open the webview afterwards
