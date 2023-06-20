@@ -19,6 +19,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C120F733-C46F-44AC-ADAA-504E11D52028</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<array/>
 		<key>656E6A0F-FAB7-428D-AB7D-811A3D19C2A1</key>
@@ -82,6 +95,16 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0DF397E6-7179-4A9B-A07A-B32165613998</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Do not open file afterwards</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -615,6 +638,26 @@ end tell</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>open</key>
+					<string>false</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>0DF397E6-7179-4A9B-A07A-B32165613998</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -630,6 +673,15 @@ end tell</string>
 			<real>545</real>
 			<key>ypos</key>
 			<real>465</real>
+		</dict>
+		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>640</real>
 		</dict>
 		<key>16D2C4F3-A099-4D2C-A0C8-03E587C8968A</key>
 		<dict>
@@ -743,7 +795,7 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>270</real>
 			<key>ypos</key>
 			<real>565</real>
 		</dict>

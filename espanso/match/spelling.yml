@@ -279,3 +279,11 @@ matches:
     replace: default
     propagate_casing: true
     word: true
+  - trigger: ahbe
+    replace: habe
+    propagate_casing: true
+    word: true
+  - trigger: ahst
+    replace: hast
+    propagate_casing: true
+    word: true
