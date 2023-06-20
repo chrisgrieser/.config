@@ -77,6 +77,12 @@ Wf_browser_all = wf.new({ env.browserApp })
 		if app and #(app:allWindows()) == 0 then app:hide() end
 	end)
 
+-- SAFARI: pseudomaximize
+SafariAppWatcher = aw.new(function(appName, eventType, safari)
+	if not (eventType == aw.launched and appName == "Safari") then return end
+	wu.moveResize(safari:mainWindow(), wu.pseudoMax)
+end):start()
+
 --------------------------------------------------------------------------------
 -- OBSIDIAN
 
@@ -149,7 +155,7 @@ NeovideWatcher = aw.new(function(appName, eventType, neovide)
 
 		-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
 	elseif eventType == aw.terminated then
-		u.runWithDelays({ 5, 10 }, function() hs.execute("pgrep -xq 'neovide' || killall -KILL nvim") end)
+		u.runWithDelays(4, function() hs.execute("pgrep -xq 'neovide' || killall -KILL nvim") end)
 	end
 end):start()
 
