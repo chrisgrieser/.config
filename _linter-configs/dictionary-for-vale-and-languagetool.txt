@@ -68,3 +68,9 @@ lualine
 PDFs
 As
 Component
+DOI
+citekeys
+multiple
+citekeys
+Citekey
+BibDesk

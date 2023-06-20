@@ -39,11 +39,12 @@ declare const Application: {
 		propertiesOfClass(className: string): string[];
 		parentOfClass(className: string): string;
 
-		// app-specific
+		// APP-SPECIFIC
 		exists(path: string): boolean; // Finder
 		createNote(options: { text: string; path?: string }): void; // SideNotes
 		documents: { url(): string; name(): string }[]; // webkit browsers
 		windows: { activeTab: { url(): string; name(): string } }[]; // chromium browsers
+		setConfiguration(envVar: string, options: Object); // Alfred
 
 		// rome-ignore lint/suspicious/noExplicitAny: TODO
 		applicationProcesses: any; // System Events
