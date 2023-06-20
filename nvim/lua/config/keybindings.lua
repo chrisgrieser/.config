@@ -124,8 +124,6 @@ keymap("n", "gä", function() require("bookmarks").bookmark_list() end, { desc =
 -- Hunks and Changes
 keymap("n", "gh", ":Gitsigns next_hunk<CR>zv", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>zv", { desc = "goto previous hunk" })
-keymap("n", "gc", "g;", { desc = "goto next change" })
-keymap("n", "gC", "g,", { desc = "goto previous change" })
 
 -- [M]atching Bracket
 -- remap needed, if using the builtin matchit plugin / vim-matchup
@@ -239,6 +237,20 @@ end
 -- Word Switcher (fallback: switch casing)
 -- stylua: ignore
 keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
+
+-- open new brace
+keymap("n", "!", function ()
+	local line = vim.api.nvim_get_current_line()
+	line = line:gsub(" $","") .. " {" -- only appends space if there is none already
+	vim.api.nvim_set_current_line(line)
+	local ln = vim.api.nvim_win_get_cursor(0)[1]
+	vim.api.nvim_buf_set_lines(0, ln, ln, false, { "}" })
+	u.normal("o")
+end, { nowait = true, desc = "Open new brace" })
+
+local bla  {
+
+}
 
 --------------------------------------------------------------------------------
 
@@ -635,6 +647,7 @@ end, { desc = " Live Grep in Project" })
 -- stylua: ignore
 keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
+keymap("n", "gc", function() cmd.Telescope("resume") end, { desc = "  Continue" })
 
 -- File Operations
 -- stylua: ignore start
