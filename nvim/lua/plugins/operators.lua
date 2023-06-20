@@ -113,6 +113,7 @@ return {
 			-- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L483
 			local config = require("nvim-surround.config")
 			require("nvim-surround").setup {
+				move_cursor = false,
 				aliases = { -- aliases should match the bindings for text objects
 					["b"] = ")",
 					["c"] = "}",
@@ -129,7 +130,6 @@ return {
 					insert_line = false,
 					insert = false,
 				},
-				move_cursor = false,
 				surrounds = {
 					[doubleSquareBracketObjChar] = {
 						find = "%[%[.-%]%]",
