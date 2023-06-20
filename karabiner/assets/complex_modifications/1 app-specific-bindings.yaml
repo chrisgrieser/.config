@@ -492,7 +492,9 @@ rules:
         to_if_alone:
           - shell_command: open "cleanshot://capture-area"
         to_if_held_down:
-          - shell_command: open "cleanshot://self-timer"
+          - shell_command: |
+              osascript -e 'display notification "" with title "Timed Screenshot"'
+              open "cleanshot://self-timer"
       # screenshot button + bulb-button
       - type: basic
         from: { key_code: "f13", modifiers: { mandatory: [shift, command] } }
