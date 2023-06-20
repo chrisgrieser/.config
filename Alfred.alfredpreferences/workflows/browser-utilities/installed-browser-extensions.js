@@ -3,12 +3,14 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeperated, str].join(" ");
 }
 
+/** @param {string} path */
 function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
@@ -17,7 +19,7 @@ function readFile(path) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const browserConfig = "/Vivaldi/"; // surrounding "//" for automation purposes (extra slashes do not affect path reading)
+const browserConfig = app.doShellScript("echo $BROWSER_CONFIG").trim(); // defined in .zshenv
 const extensionFolder = app.pathTo("home folder") + `/Library/Application Support/${browserConfig}/Default/Extensions`;
 
 const jsonArray = app
