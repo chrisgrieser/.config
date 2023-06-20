@@ -287,3 +287,7 @@ matches:
     replace: hast
     propagate_casing: true
     word: true
+  - trigger: ym
+    replace: my
+    propagate_casing: true
+    word: true

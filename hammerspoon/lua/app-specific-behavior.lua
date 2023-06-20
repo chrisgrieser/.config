@@ -50,11 +50,11 @@ end):start()
 
 --------------------------------------------------------------------------------
 
--- BROWSER (Vivaldi)
+-- BROWSER
 Wf_browser = wf.new(env.browserApp)
 	:setOverrideFilter({
 		rejectTitles = {
-			" %(Private%)$",
+			" %(Private%)$", -- incognito windows
 			"^Picture in Picture$",
 			"^Task Manager$",
 			"^Developer Tools", -- when inspecting websites
@@ -78,7 +78,7 @@ Wf_browser_all = wf.new({ env.browserApp })
 	end)
 
 --------------------------------------------------------------------------------
--- Obsidian
+-- OBSIDIAN
 
 ---half -> hide right sidebar
 ---pseudo-maximized -> show right sidebar
