@@ -67,3 +67,4 @@ above
 lualine
 PDFs
 As
+Component

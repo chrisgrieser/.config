@@ -3,6 +3,11 @@ return {
 		"iamcco/markdown-preview.nvim",
 		ft = "markdown",
 		build = "cd app && npm install",
+		init = function()
+			vim.g.mkdp_preview_options = {
+				disable_sync_scroll = 1,
+			}
+		end,
 	},
 	{ -- undo history
 		"mbbill/undotree",
