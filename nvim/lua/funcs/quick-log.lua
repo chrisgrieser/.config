@@ -36,7 +36,8 @@ end
 local function append(text)
 	if type(text) == "string" then text = { text } end
 
-	vim.fn.append(".", text) ---@diagnostic disable-line: param-type-mismatch
+	local ln = vim.api.nvim_win_get_cursor(0)[1]
+	vim.api.nvim_buf_set_lines(0, ln, ln, false, text)
 	for _ = 1, #text, 1 do
 		normal("j==")
 	end

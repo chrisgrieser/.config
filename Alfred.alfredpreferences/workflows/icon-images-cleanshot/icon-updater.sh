@@ -5,10 +5,6 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 # CONFIG
 CUSTOM_ICON_FOLDER="$DOTFILE_FOLDER/_custom-app-icons"
 
-# INFO "Vivaldi Apps" is internally still named "Chrome Apps"
-[[ "$BROWSER_APP" == "Vivaldi" ]] && browser="Chrome" || browser="$BROWSER_APP"
-PWA_FOLDER="$HOME/Applications/$browser Apps.localized"
-
 #───────────────────────────────────────────────────────────────────────────────
 
 if ! command -v iconsur &>/dev/null; then echo "iconsur not installed." && return 1; fi
@@ -16,6 +12,11 @@ cd "/Applications/" || return 1
 APP=$(basename "$*" .app)
 NONE_FOUND=0
 INFO_WINDOW=0
+
+# INFO "Vivaldi Apps" is internally still named "Chrome Apps"
+[[ "$BROWSER_APP" == "Vivaldi" ]] && browser="Chrome" || browser="$BROWSER_APP"
+PWA_FOLDER="$HOME/Applications/$browser Apps.localized"
+
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -42,15 +43,14 @@ case $APP in
 	cp -f "$CUSTOM_ICON_FOLDER/Obsidian Square.icns" "$APP.app/Contents/Resources/icon.icns"
 	;;
 "Discord")
-	# cp -f "$CUSTOM_ICON_FOLDER/Discord Alt.icns" "$APP.app/Contents/Resources/electron.icns"
 	cp -f "$CUSTOM_ICON_FOLDER/Discord Black.icns" "$APP.app/Contents/Resources/electron.icns"
 	;;
 "Vivaldi")
 	cp -f "$CUSTOM_ICON_FOLDER/Vivaldi.icns" "$APP.app/Contents/Resources/app.icns"
 	;;
-"Brave Browser")
-	cp -f "$CUSTOM_ICON_FOLDER/Brave Safari.icns" "$APP.app/Contents/Resources/app.icns"
-	;;
+# "Brave Browser")
+# 	cp -f "$CUSTOM_ICON_FOLDER/Brave Safari.icns" "$APP.app/Contents/Resources/app.icns"
+# 	;;
 "Alfred Preferences")
 	osascript -e "tell application \"Finder\"
 			open information window of (\"Alfred 5.app/Contents/Preferences/$APP.app\" as POSIX file as alias)

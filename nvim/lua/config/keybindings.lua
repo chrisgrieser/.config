@@ -239,18 +239,16 @@ end
 keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
 
 -- open new brace
-keymap("n", "!", function ()
+keymap({ "n", "i" }, "<D-o>", function()
 	local line = vim.api.nvim_get_current_line()
-	line = line:gsub(" $","") .. " {" -- only appends space if there is none already
+	line = line:gsub(" $", "") .. " {" -- only appends space if there is none already
 	vim.api.nvim_set_current_line(line)
-	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, { "}" })
-	u.normal("o")
-end, { nowait = true, desc = "Open new brace" })
-
-local bla  {
-
-}
+	local ln = u.getCursor(0)[1]
+	local indent = line:match("^%s*")
+	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. "\t", indent .. "}" })
+	u.setCursor(0, { ln + 1, 1 }) -- go line down
+	cmd.startinsert { bang = true }
+end, { desc = " Open new brace" })
 
 --------------------------------------------------------------------------------
 
@@ -784,7 +782,12 @@ keymap(
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
-keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = "  Toggle Relative Line Numbers" })
+keymap(
+	"n",
+	"<leader>or",
+	"<cmd>set relativenumber!<CR>",
+	{ desc = "  Toggle Relative Line Numbers" }
+)
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Toggle Line Numbers" })
 keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 󰒕 LSP Restart" })
 
