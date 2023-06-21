@@ -41,9 +41,7 @@ nmap <Esc> &c&&n&
 
 " navigate visual lines rather than logical ones
 noremap j gj
-vmap j gj
 noremap k gk
-vmap k gk
 nmap I g0i
 nmap A g$a
 
@@ -94,13 +92,9 @@ noremap m %
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
 nmap gs :gotoHeading
 
-" [g]oto longform scene
+" [g]oto [w]riting chapters
 exmap gotoScene obcommand longform:longform-jump-to-scene
-nmap gS :gotoScene
-
-" [g]oto longform [p]roject
-exmap gotoProject obcommand longform:longform-jump-to-project
-nmap gp :gotoProject
+nmap gw :gotoScene
 
 " [g]oto definition / link (shukuchi makes it forward-seeking)
 exmap followNextLink obcommand shukuchi:open-link
