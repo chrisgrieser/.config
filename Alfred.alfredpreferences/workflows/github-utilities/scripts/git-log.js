@@ -39,7 +39,8 @@ function run() {
 				.replaceAll("HEAD", "👤")
 				.replaceAll("origin", "☁️")
 				.replaceAll("->", "⇢")
-				.replaceAll("grafted", "✂️");
+				.replaceAll("grafted", "✂️")
+				.replace(/\b(master|main)/, "✂️");
 			const date = parts[2];
 			const msg = parts.slice(3).join(" ");
 			return {
