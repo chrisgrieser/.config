@@ -54,22 +54,35 @@ const apps = app
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	const parentProcs = {}
+
 	const processes = app
-		.doShellScript(`ps ${sort}cAo 'pid=,%cpu=,rss=,ruser=,command='`)
+		.doShellScript(`ps ${sort}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`)
 		.split("\r")
 		.map((/** @type {string} */ processInfo) => {
 			const info = processInfo.trim().split(/ +/);
-			const processName = info.slice(4).join(" "); // command name can contain spaces, therefore last
+			const processName = info.slice(5).join(" "); // command name can contain spaces, therefore last
 			if (processName === "<defunct>") return {};
 
 			const pid = info[0];
-			const isRootUser = info[3] === "root" ? " ⭕" : "";
+			const ppid = info[1];
+			let parentName = "";
+			const parentNotLaunchD = parseInt(ppid) > 2
+			if (parseInt(ppid) > 2) {
+				try {
+					parentName = ;
+					parentProcs[ppid] = parentName
+				} catch (_error) {}
+			}
+			if (parentName) parentName += " ";
+
+			const isRootUser = info[4] === "root" ? " ⭕" : "";
 			const appName = processAppName[processName] || processName;
 			const displayTitle =
 				appName !== processName && !processName.includes("Helper") ? `${processName} [${appName}]` : processName;
-			let memory = (parseInt(info[2]) / 1024).toFixed(0).toString(); // real memory
+			let memory = (parseInt(info[3]) / 1024).toFixed(0).toString(); // real memory
 			memory = parseInt(memory) > memoryThresholdMb ? memory + "Mb    " : "";
-			let cpu = info[1];
+			let cpu = info[2];
 			cpu = parseFloat(cpu) > cpuThresholdPercent ? cpu + "%    " : "";
 
 			// icon
@@ -82,7 +95,7 @@ function run() {
 
 			return {
 				title: displayTitle + isRootUser,
-				subtitle: memory + cpu + " ", // trailing space to ensure same height of all items
+				subtitle: parentName + memory + cpu + " ", // trailing space to ensure same height of all items
 				icon: icon,
 				arg: pid,
 				uid: pid, // during rerun remembers selection, but does not affect sorting

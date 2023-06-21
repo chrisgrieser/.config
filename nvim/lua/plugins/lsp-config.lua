@@ -222,7 +222,7 @@ local function diagnosticConfig()
 	vim.api.nvim_create_autocmd("ColorScheme", {
 		callback = function()
 			for type, _ in pairs(diagnosticTypes) do
-				vim.cmd.highlight("DiagnosticUnderline" .. type .. " gui=underline cterm=underline")
+				vim.cmd.highlight("DiagnosticUnderline" .. type .. " gui=underdouble cterm=underline")
 			end
 		end,
 	})
