@@ -294,3 +294,7 @@ matches:
   - trigger: theorei
     replace: theorie
     propagate_casing: true
+  - trigger: seperator
+    replace: separator
+    propagate_casing: true
+    word: true
