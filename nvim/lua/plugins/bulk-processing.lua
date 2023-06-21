@@ -22,6 +22,16 @@ return {
 		"nvim-treesitter/nvim-treesitter-refactor",
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		init = function()
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = function()
+					-- Terminal does not support underdotted
+					local stroke = vim.fn.has("gui_running") and "underdotted" or "underline"
+					vim.api.nvim_set_hl(0, "TSDefinition", { [stroke] = true})
+					vim.api.nvim_set_hl(0, "TSDefinitionUsage", { [stroke] = true})
+				end,
+			})
+		end,
 	},
 	{ -- editable quickfix list
 		-- my fork, pending on PR: https://github.com/gabrielpoca/replacer.nvim/pull/12

@@ -12,21 +12,25 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run() {
+	/** @type AlfredItem[] */
+	const commitArr = app
+		.doShellScript(`cd "${filepath}" && git log --oneline`)
+		.split("\r")
+		.map((item) => {
+			return {
+				title: item,
+				match: alfredMatcher(item),
+				subtitle: item,
+				arg: item,
+			};
+		});
 
-
-/** @type AlfredItem[] */
-const commitArr = app.doShellScript(`cd "${filepath}" && git log --oneline`)
-	.split("\r")
-	.map(item => {
-		
-		return {
-			title: item,
-			match: alfredMatcher(item),
-			subtitle: item,
-			type: "file:skipcheck",
-			icon: { type: "fileicon", path: item },
-			arg: item,
-			uid: item,
-		};
+	// direct return
+	return JSON.stringify({
+		skipknowledge: true, // do not let Alfred sort the commits, since they ordered by date already
+		items: commitArr,
 	});
-JSON.stringify({ items: commitArr });
+}
