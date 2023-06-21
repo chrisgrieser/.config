@@ -919,7 +919,7 @@ fi</string>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
-				<string>~/Library/Caches/com.runningwithcrayons.Alfred</string>
+				<string>~/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openfile</string>
