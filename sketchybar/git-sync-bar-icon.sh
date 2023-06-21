@@ -8,24 +8,33 @@ GIT_OPTIONAL_LOCKS=0
 # watcher. Therefore, not using any path watcher but regularly running this
 # script plus trigger it after sync events via Hammerspoon
 
+#───────────────────────────────────────────────────────────────────────────────
+
 cd "$DOTFILE_FOLDER" || configError="repo-path wrong"
 dotChanges=$(git status --short | wc -l | tr -d " ")
-git status --short | grep -q " m " && submodulesChanges=1
+git fetch # required to check for commits behind
+dotBehind=$(git status --porcelain --branch | grep -Eo "\d") 
 
 cd "$VAULT_PATH" || configError="repo-path wrong"
 vaultChanges=$(git status --porcelain | wc -l | tr -d " ")
+git fetch
+vaultBehind=$(git status --porcelain --branch | grep -Eo "\d") 
 
-passPath="$PASSWORD_STORE_DIR"
-[[ -z "$passPath" ]] && passPath="$HOME/.password-store"
-cd "$passPath" || configError="repo-path wrong"
-passChanges1=$(git status --porcelain | wc -l | tr -d " ")
-passChanges2=$(git status --porcelain --branch | grep -Eo "\d") # to check for ahead/behind instead of untracked, since pass auto add-commits, but does not auto-push
+cd "$VAULT_PATH" || configError="repo-path wrong"
+git fetch
+passChanges=$(git status --porcelain | wc -l | tr -d " ")
+passBehind=$(git status --porcelain --branch | grep -Eo "\d") 
 
-[[ "$dotChanges" != "0" ]] && label="${dotChanges}d " # INFO string comparison, so it also works with submodules
+#───────────────────────────────────────────────────────────────────────────────
+
+[[ $dotChanges -ne 0 ]] && label="${dotChanges}d " 
 [[ $vaultChanges -ne 0 ]] && label="$label${vaultChanges}v "
-[[ "$passChanges1" -ne 0 ]] && label="$label${passChanges1}p"
-[[ -n "$passChanges2" ]] && label="$label${passChanges2}p"
+[[ "$passChanges" -ne 0 ]] && label="$label${passChanges}p"
+
+[[ -n "$dotBehind" ]] && label="$label${dotBehind}p"
+[[ -n "$vaultBehind" ]] && label="$label${vaultBehind}p"
+[[ -n "$passBehind" ]] && label="$label${passBehind}p"
+
 [[ -n "$label" ]] && icon=" "
-[[ $submodulesChanges -eq 1 ]] && icon=" "
 
 sketchybar --set "$NAME" icon="$icon" label="$label$configError"

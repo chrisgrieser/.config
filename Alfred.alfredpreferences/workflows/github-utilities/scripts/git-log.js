@@ -10,21 +10,32 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeperated, str].join(" ") + " ";
 }
 
+function finderFrontWindow(){
+	const posixPath = (/** @type {Object} */ finderWin) => $.NSURL.alloc.initWithString(finderWin.target.url()).fileSystemRepresentation;
+	return posixPath(Application("Finder").finderWindows[0]);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+
+	const filepath = finderFrontWindow();
+	console.log("filepath:", filepath);
+
 	/** @type AlfredItem[] */
 	const commitArr = app
 		.doShellScript(`cd "${filepath}" && git log --oneline`)
 		.split("\r")
-		.map((item) => {
+		.map((commit) => {
+			const hash = commit.split(" ")[0];
+			const msg = commit.split(" ").slice(1).join(" ");
 			return {
-				title: item,
-				match: alfredMatcher(item),
-				subtitle: item,
-				arg: item,
+				title: msg,
+				subtitle: hash,
+				match: alfredMatcher(hash) + " " + alfredMatcher(msg),
+				arg: hash,
 			};
 		});
 
