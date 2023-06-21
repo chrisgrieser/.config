@@ -291,3 +291,6 @@ matches:
     replace: my
     propagate_casing: true
     word: true
+  - trigger: theorei
+    replace: theorie
+    propagate_casing: true
