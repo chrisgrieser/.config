@@ -83,15 +83,15 @@ Press the hotkey in any text field to start the citation picker.
 You can use the `scp` and select __Change Citation Format__ to change the format of the citations:
 
 - pandoc (default)
-- org
+- Org Mode
 - Multi-Markdown (MMD)
 - LaTeX
-- Eta
+- eta
 - iA Writer
-- Wikilink
+- wikilink
 - Tag
-- Bare citekey
-- Bracketed citekey
+- bare citekey
+- bracketed citekey
 
 > __Note__
 > Not all formats support all citation-related features. For example, adding Page numbers as well as inline-citations are not supported for Latex, Wikilinks, and Tags, and iA Writer does not support multiple citations.
@@ -161,7 +161,6 @@ In my day job, I am a sociologist studying the social mechanisms underlying the 
 
 ### Credits
 <a href="https://www.flaticon.com/authors/freepik">Icons created by Freepik (Flaticon)</a>
-
 <!-- vale Google.FirstPerson = YES -->
 
 [^1]: [QLmarkdown](https://github.com/sbarex/QLMarkdown) and [Peek](https://apps.apple.com/app/peek-quick-look-extension/id1554235898) both enable previewing of Markdown documents. Peek works with a wide range of other file types than Markdown, but costs around 5€. `QLMarkdown` is free, but only works for Markdown and requires some minor setup. To enable the proper display of YAML headers, you need to enable the respective setting in the Advanced Options of `QLMarkdown` or Peek.

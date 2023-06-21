@@ -29,18 +29,29 @@ const noDisplayAuthors = $.getenv("no_display_authors")
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// determine repo
+	// determine repo & validate it's in a git repo
 	const defaultRepo = $.getenv("default_repo").replace(/^~/, app.pathTo("home folder"));
 	const filepath = finderFrontWindow() || defaultRepo;
+	try {
+		app.doShellScript(`cd "${filepath}" && git rev-parse --is-inside-work-tree`);
+	} catch (_error) {
+		return JSON.stringify({
+			items: {
+				title: "🚫 Not in Git Repository",
+				valid: false,
+			},
+		});
+	}
 
 	// determine branches
-	const branchCommitPairs = {}
-	app.doShellScript(`cd "${filepath}" && git branch --verbose`)
+	const branchCommitPairs = {};
+	app
+		.doShellScript(`cd "${filepath}" && git branch --verbose`)
 		.split("\r")
-		.forEach((line) =>{
-			const branch = line.split(" ")[1]
-			const hash = line.split(" ")[2]
-			branchCommitPairs[hash] = branch
+		.forEach((line) => {
+			const branch = line.split(" ")[1];
+			const hash = line.split(" ")[2];
+			branchCommitPairs[hash] = branch;
 		});
 
 	/** @type AlfredItem[] */
@@ -70,9 +81,7 @@ function run() {
 					cmd: {
 						arg: branch,
 						valid: branch !== undefined,
-						subtitle: branch
-							? "⌘: Checkout Branch pointing to this commit"
-							: "🚫 No Branch pointing to this commit.",
+						subtitle: branch ? "⌘: Checkout Branch pointing to this commit" : "🚫 No Branch pointing to this commit.",
 					},
 					alt: {
 						arg: hash,
