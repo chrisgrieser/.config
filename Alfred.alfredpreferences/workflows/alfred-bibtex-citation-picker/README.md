@@ -96,7 +96,7 @@ You can use the `scp` and select __Change Citation Format__ to change the format
 > __Note__
 > Not all formats support all citation-related features. For example, adding Page numbers as well as inline-citations are not supported for Latex, Wikilinks, and Tags, and iA Writer does not support multiple citations.
 
-### Further Format Customization
+### Further Format Customizations
 If you want to use a format that is not available, you can customize the format yourself by changing the workflow environment variables starting with `_format`. (Tutorial: [how to set environment variables in Alfred](https://www.alfredapp.com/help/workflows/advanced/variables/#environment))
 
 If there is a citation syntax that is commonly used, or if you want to improve support for an existing format, feel free to make a PR to [this file which generates the formats](https://github.com/chrisgrieser/alfred-bibtex-citation-picker/blob/main/scripts/toggle-citation-format.js) or open a [Feature Request](https://github.com/chrisgrieser/alfred-bibtex-citation-picker/issues/new?assignees=&labels=enhancement&template=feature_request.yml&title=Feature+Request%3A+).

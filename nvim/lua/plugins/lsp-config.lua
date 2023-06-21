@@ -43,7 +43,6 @@ lspSettings.lua_ls = {
 			enable = true,
 			setType = true,
 			arrayIndex = "Disable",
-			semicolon = "Disable",
 		},
 		workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		format = { enable = false }, -- using stylua instead. Also, sumneko-lsp-formatting has this weird bug where all folds are opened
@@ -154,10 +153,7 @@ lspSettings.ltex = {
 	ltex = {
 		completionEnabled = false,
 		language = "en-US", -- default language, can be set per-file via markdown yaml header
-		dictionary = {
-			["en-US"] = words,
-			["de-DE"] = words,
-		},
+		dictionary = { ["en-US"] = words, ["de-DE"] = words },
 		disabledRules = {
 			["en-US"] = {
 				"EN_QUOTES", -- don't expect smart quotes
@@ -170,8 +166,9 @@ lspSettings.ltex = {
 			MORFOLOGIK_RULE_EN_US = "warning", -- spelling
 		},
 		additionalRules = { enablePickyRules = true },
-		markdown = { -- https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
-			nodes = {},
+		markdown = {
+			-- ignore links https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
+			nodes = { Link = "dummy" },
 		},
 	},
 }
@@ -193,7 +190,8 @@ lspCapabilities.textDocument.foldingRange = {
 local function setupAllLsps()
 	-- INFO must be before the lsp-config setup of lua-ls
 	require("neodev").setup {
-		library = { plugins = false }, -- plugins are helpful e.g. for plenary, but slow down lsp loading
+		-- plugins are helpful e.g. for plenary, but slow down lsp loading
+		library = { plugins = false }, 
 	}
 
 	for _, lsp in pairs(lsp_servers) do
@@ -243,7 +241,7 @@ local function diagnosticConfig()
 
 	vim.diagnostic.config {
 		virtual_text = {
-			severity = { min = vim.diagnostic.severity.WARN },
+			severity = { min = vim.diagnostic.severity.WARN }, -- not text for hints
 			source = false, -- already handled by format function
 			format = function(diag) return fmt(diag) end,
 			spacing = 1,
