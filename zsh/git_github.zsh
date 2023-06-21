@@ -79,7 +79,7 @@ function gitlog() {
 		sed -E 's/ months ago\)/m)/' |
 		sed -e 's/origin\//󰅡 /g' |
 		sed -e 's/HEAD/󱍀/g' |
-		sed -e 's/->//g' |
+		sed -e 's/->/⇢/g' |
 		sed -e 's/grafted/ /' |
 		delta
 	# INFO piping though delta as pager makes commit hashes clickable https://github.com/wez/wezterm/discussions/3618
