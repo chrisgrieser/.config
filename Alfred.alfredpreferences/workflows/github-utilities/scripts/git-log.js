@@ -33,16 +33,15 @@ function run() {
 	const defaultRepo = $.getenv("default_repo").replace(/^~/, app.pathTo("home folder"));
 	const filepath = finderFrontWindow() || defaultRepo;
 	try {
-		app.doShellScript(`cd "${filepath}" && git rev-parse --is-inside-work-tree`);
+		app.doShellScript(`cd "${filepath}" && git rev-parse --is-inside-work-tree`).startsWith("fatal:");
 	} catch (_error) {
 		return JSON.stringify({
-			items: {
+			items: [{
 				title: "🚫 Not in Git Repository",
 				valid: false,
-			},
+			}],
 		});
 	}
-
 	// determine branches
 	const branchCommitPairs = {};
 	app

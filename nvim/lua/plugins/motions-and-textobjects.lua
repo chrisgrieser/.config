@@ -19,10 +19,8 @@ return {
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		opts = {
-			modes = {
-				char = { enabled = false }, -- don't modify FfTt motions
-				search = { search = { multi_window = false }}
-			},
+			search = { multi_window = false },
+			modes = { char = { enabled = false } }, -- don't modify FfTt motions
 		},
 	},
 	{ -- display line numbers when using `:` to go to a line with
