@@ -1015,7 +1015,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>git-log.js</string>
+				<string>scripts/git-log.js</string>
 				<key>subtext</key>
 				<string>Current Finder Window or {var:default_repo}</string>
 				<key>title</key>
@@ -1044,7 +1044,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>checkout.sh</string>
+				<string>scripts/checkout.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
