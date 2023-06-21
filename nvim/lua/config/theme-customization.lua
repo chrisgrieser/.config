@@ -24,16 +24,6 @@ local function clearHighlight(hlgroup) vim.api.nvim_set_hl(0, hlgroup, {}) end
 --------------------------------------------------------------------------------
 
 local function customHighlights()
-	-- stylua: ignore
-	local highlights = { "DiagnosticUnderlineError", "DiagnosticUnderlineWarn", "DiagnosticUnderlineHint", "DiagnosticUnderlineInfo", "SpellLocal", "SpellRare", "SpellCap", "SpellBad" }
-	for _, v in pairs(highlights) do
-		updateHighlight(v, "gui=underdouble cterm=underline")
-	end
-
-	-- Overnesting
-	local overnestingIndent = 10
-	updateHighlight("Overnesting", "guibg=#E06C75")
-	fn.matchadd("Overnesting", ("\t"):rep(overnestingIndent) .. "\t*")
 
 	-- Comments
 	clearHighlight("@lsp.type.comment") -- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
@@ -43,9 +33,7 @@ local function customHighlights()
 		("guisp=%s guifg=%s gui=underline term=underline"):format(commentColor, commentColor)
 	)
 
-	-- Misc
-	local searchColor = u.getHighlightValue("IncSearch", "bg")
-	if searchColor then updateHighlight("ScrollViewSearch", "guifg=" .. searchColor) end
+	-- MatchParen
 	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
 end
 
