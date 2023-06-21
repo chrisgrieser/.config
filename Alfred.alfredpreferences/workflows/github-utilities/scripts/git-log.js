@@ -20,6 +20,10 @@ function finderFrontWindow() {
 	}
 }
 
+const noDisplayAuthors = $.getenv("no_display_authors")
+	.split(",")
+	.map((t) => t.trim());
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -28,9 +32,11 @@ function run() {
 	const defaultRepo = $.getenv("default_repo").replace(/^~/, app.pathTo("home folder"));
 	const filepath = finderFrontWindow() || defaultRepo;
 
+	const branchCommitPairs = app.doShellScript(`cd "${filepath}" && git log --all --format="%h;;%D;;%cr;;%s"`);
+
 	/** @type AlfredItem[] */
 	const commitArr = app
-		.doShellScript(`cd "${filepath}" && git log --all --format="%h;;%D;;%cr;;%s"`)
+		.doShellScript(`cd "${filepath}" && git log --all --format="%h;;%D;;%cr;;%an;;%s"`)
 		.split("\r")
 		.map((commit) => {
 			const parts = commit.split(";;");
@@ -42,10 +48,12 @@ function run() {
 				.replaceAll("grafted", "✂️")
 				.replace(/\b(master|main)\b/g, "Ⓜ️");
 			const date = parts[2];
-			const msg = parts.slice(3).join(" ");
+			const author = noDisplayAuthors.includes(parts[3]) ? "" : `<${parts[3]}>`;
+			const msg = parts[4];
+
 			return {
 				title: `${msg}   ${pointer}`,
-				subtitle: date,
+				subtitle: `${date}   ${author}`,
 				match: alfredMatcher(pointer) + alfredMatcher(msg),
 				arg: hash,
 				mods: {

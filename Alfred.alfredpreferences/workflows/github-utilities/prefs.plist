@@ -8,6 +8,8 @@
 	<string>~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Development/.obsidian/plugins</string>
 	<key>github_username</key>
 	<string>chrisgrieser</string>
+	<key>no_display_authors</key>
+	<string>🤖 automated</string>
 	<key>results_number</key>
 	<string>40</string>
 </dict>
