@@ -16,7 +16,7 @@ function finderFrontWindow() {
 		const win = Application("Finder").finderWindows[0];
 		return $.NSURL.alloc.initWithString(win.target.url()).fileSystemRepresentation;
 	} catch (_error) {
-		return null;		
+		return null;
 	}
 }
 
@@ -35,7 +35,11 @@ function run() {
 		.map((commit) => {
 			const parts = commit.split(";;");
 			const hash = parts[0];
-			const pointer = parts[1].replaceAll("HEAD", "👤")
+			const pointer = parts[1]
+				.replaceAll("HEAD", "👤")
+				.replaceAll("origin", "☁️")
+				.replaceAll("->", "⇢")
+				.replaceAll("grafted", "✂️");
 			const date = parts[2];
 			const msg = parts.slice(3).join(" ");
 			return {
