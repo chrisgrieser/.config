@@ -20,6 +20,10 @@
 		"prefix": ["ignore (TypeScript)", "ts-ignore"],
 		"body": "// @ts-ignore"
 	},
+	"split by line": {
+		"prefix": "split by line",
+		"body": ".split(\"\\r\")"
+	},
 	"type definition": {
 		"prefix": "type definition",
 		"body": [

@@ -181,6 +181,18 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>FE44448E-7653-4A3C-B7F9-C3A787EE0556</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>50A5BB29-16B1-4D34-9AFF-87D64D2B2F30</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>52C4FB7A-4D96-4FE8-884C-BC35E541C31D</key>
 		<array>
@@ -213,6 +225,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>52C4FB7A-4D96-4FE8-884C-BC35E541C31D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6521A994-DC54-4010-B2E0-758D3B4DA2CD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -409,6 +434,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>6521A994-DC54-4010-B2E0-758D3B4DA2CD</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Check out branch pointing to this commit</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>22289963-0B31-4B5E-BDB1-B4F922276713</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
@@ -422,19 +457,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FE44448E-7653-4A3C-B7F9-C3A787EE0556</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>FE44448E-7653-4A3C-B7F9-C3A787EE0556</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
 				<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -444,6 +466,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>FE44448E-7653-4A3C-B7F9-C3A787EE0556</key>
+		<array/>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -771,7 +795,7 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>delete-local-repo.sh</string>
+				<string>scripts/delete-local-repo.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -865,7 +889,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>clone-my-repo.sh</string>
+				<string>scripts/clone-my-repo.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1043,6 +1067,35 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Checkout</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D0CBD0A3-DDAB-4712-A246-8796E4A58D3B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>6521A994-DC54-4010-B2E0-758D3B4DA2CD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1088,27 +1141,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>D4F0274E-F79C-43A1-9C38-65C92510EEF2</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Checkout</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D0CBD0A3-DDAB-4712-A246-8796E4A58D3B</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1220,7 +1252,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-at-github.sh</string>
+				<string>scripts/open-at-github.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1307,7 +1339,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>225</real>
+			<real>340</real>
 			<key>ypos</key>
 			<real>1040</real>
 		</dict>
@@ -1325,7 +1357,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>385</real>
+			<real>500</real>
 			<key>ypos</key>
 			<real>1040</real>
 		</dict>
@@ -1358,9 +1390,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>note</key>
 			<string>shallow clone to local repo folder</string>
 			<key>xpos</key>
-			<real>600</real>
+			<real>565</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>540</real>
 		</dict>
 		<key>4C690E73-DC85-438E-B8AA-52CD91D40CDA</key>
 		<dict>
@@ -1407,6 +1439,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>ypos</key>
 			<real>1285</real>
 		</dict>
+		<key>6521A994-DC54-4010-B2E0-758D3B4DA2CD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>930</real>
+		</dict>
 		<key>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</key>
 		<dict>
 			<key>colorindex</key>
@@ -1441,7 +1482,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>note</key>
 			<string>checkout</string>
 			<key>xpos</key>
-			<real>225</real>
+			<real>340</real>
 			<key>ypos</key>
 			<real>900</real>
 		</dict>
@@ -1537,7 +1578,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>385</real>
+			<real>500</real>
 			<key>ypos</key>
 			<real>900</real>
 		</dict>
@@ -1548,18 +1589,18 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>note</key>
 			<string>git log</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>955</real>
 		</dict>
 		<key>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>540</real>
 		</dict>
 		<key>EC5EF5AB-920D-45E1-9F3E-CEF737C5D2F5</key>
 		<dict>
@@ -1575,9 +1616,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>460</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>650</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
