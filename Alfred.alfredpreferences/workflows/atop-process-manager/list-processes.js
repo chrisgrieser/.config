@@ -54,38 +54,41 @@ const apps = app
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const parentProcs = {}
+	// cache parent processes names, to reduce parentname searches
+	const parentProcs = {};
 
 	const processes = app
 		.doShellScript(`ps ${sort}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`)
 		.split("\r")
 		.map((/** @type {string} */ processInfo) => {
+			// PID & name
 			const info = processInfo.trim().split(/ +/);
 			const processName = info.slice(5).join(" "); // command name can contain spaces, therefore last
 			if (processName === "<defunct>") return {};
-
 			const pid = info[0];
-			const ppid = info[1];
-			let parentName = "";
-			const parentNotLaunchD = parseInt(ppid) > 2
-			if (parseInt(ppid) > 2) {
-				try {
-					parentName = ;
-					parentProcs[ppid] = parentName
-				} catch (_error) {}
-			}
-			if (parentName) parentName += " ";
 
+			// parent process
+			const ppid = info[1];
+			let parentName = parentProcs[ppid];
+			if (!parentName) {
+				parentProcs[ppid] = app.doShellScript(`ps -p ${ppid} -co 'command=' || true`);
+				parentName = parentProcs[ppid];
+			}
+			const parentObvious = processName.startsWith(parentName) && processName !== parentName;
+			if (parentName === "launchd" || parentObvious) parentName = "";
+
+			// Memory, CPU & root
+			let memory = (parseInt(info[3]) / 1024).toFixed(0).toString(); // real memory
+			memory = parseInt(memory) > memoryThresholdMb ? memory + "Mb" : "";
+			let cpu = info[2];
+			cpu = parseFloat(cpu) > cpuThresholdPercent ? cpu + "%" : "";
 			const isRootUser = info[4] === "root" ? " ⭕" : "";
+
+			// display & icon
 			const appName = processAppName[processName] || processName;
 			const displayTitle =
 				appName !== processName && !processName.includes("Helper") ? `${processName} [${appName}]` : processName;
-			let memory = (parseInt(info[3]) / 1024).toFixed(0).toString(); // real memory
-			memory = parseInt(memory) > memoryThresholdMb ? memory + "Mb    " : "";
-			let cpu = info[2];
-			cpu = parseFloat(cpu) > cpuThresholdPercent ? cpu + "%    " : "";
-
-			// icon
+			const subtitle = [memory, cpu, parentName].filter((t) => t !== "").join("   ");
 			const isApp = apps.includes(`${appName}.app`) || appFilePaths[appName];
 			let icon = {};
 			if (isApp) {
@@ -95,10 +98,11 @@ function run() {
 
 			return {
 				title: displayTitle + isRootUser,
-				subtitle: parentName + memory + cpu + " ", // trailing space to ensure same height of all items
+				subtitle: subtitle,
 				icon: icon,
 				arg: pid,
 				uid: pid, // during rerun remembers selection, but does not affect sorting
+				match: [processName, parentName, appName].join(" "),
 				mods: {
 					ctrl: { variables: { mode: "killall" } },
 					cmd: { variables: { mode: "force kill" } },
