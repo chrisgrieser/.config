@@ -64,9 +64,11 @@
 	"window path (Finder)": {
 		"prefix": "window path (Finder)",
 		"body": [
+			"/** @return {string|null} */",
 			"function finderFrontWindow(){",
-			"\tconst posixPath = (/** @type {Object} */ finderWin) => $.NSURL.alloc.initWithString(finderWin.target.url()).fileSystemRepresentation;",
-			"\treturn posixPath(Application(\"Finder\").finderWindows[0]);",
+			"\tconst win = Application(\"Finder\").finderWindows[0]",
+			"\tif (!win) return null;",
+			"\treturn $.NSURL.alloc.initWithString(win.target.url()).fileSystemRepresentation;",
 			"}"
 		]
 	},

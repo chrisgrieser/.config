@@ -1,14 +1,13 @@
 # shellcheck disable=SC2164
 
 # ALIASES AND SMALLER UTILS
-alias co="git checkout"
+alias gc="git checkout"
 alias gs='git status'
-alias gc="git commit -m"
+alias commit="git commit -m"
 alias ga="git add"
-alias gA="git add -A"
 alias grh="git reset --hard"
 alias push="git push"
-alias pull="git pull --recurse-submodules"
+alias pull="git pull"
 alias gm="git add -A && git commit --amend --no-edit && git push --force" # a[m]end
 alias gM="git commit --amend"
 alias restore="git restore --source" # 1: hash, 2: file -> restore (existing) file
@@ -26,7 +25,7 @@ function gu() {
 
 # remove the lock file
 function unlock() {
-	rm "$(git rev-parse --git-dir)/index.lock" &>/dev/null
+	rm "$(git rev-parse --git-dir)/index.lock"
 	echo "Lock file removed."
 }
 
@@ -39,8 +38,6 @@ function unshallow() {
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT DIFF
-
-alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 
 # use delta for small diffs and diff2html for big diffs
 function gd() {
@@ -73,7 +70,7 @@ function gitlog() {
 	[[ -n "$1" ]] && length="-n $1"
 	# shellcheck disable=2086
 	git log $length --all --color --graph \
-		--pretty=format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
+		--format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
 		sed -E 's/ seconds ago\)/s)/' |
 		sed -E 's/ minutes ago\)/min)/' |
 		sed -E 's/ hours ago\)/h)/' |
