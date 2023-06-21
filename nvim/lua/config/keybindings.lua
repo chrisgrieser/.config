@@ -136,9 +136,6 @@ keymap("x", "-", "zn<Esc>/\\%V", { desc = "Search within selection" })
 keymap("n", "+", "*", { desc = "Search word under cursor" })
 keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
 
-keymap("c", "<C-n>", "<C-g>", { desc = "Next Match (when inc. search)" })
-keymap("c", "<C-S-n>", "<C-t>", { desc = "Next Match (when inc. search)" })
-
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
 	if vim.g.scrollview_refreshing then return end -- FIX: https://github.com/dstein64/nvim-scrollview/issues/88#issuecomment-1570400161

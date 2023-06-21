@@ -137,14 +137,6 @@ keymap( { "x", "o" }, "aR", "<cmd>lua require('various-textobjs').doubleSquareBr
 
 -- ii/ai: indentation textobj
 keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(true, true)<CR>", { desc = "󱡔 inner-inner indent textobj" })
-keymap({ "x", "o" }, "aI", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 outer-inner indent textobj" })
 keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "󱡔 outer-outer indent textobj" })
-
-autocmd("FileType", {
-	callback = function()
-		local indentedFts = { "python", "yaml", "markdown", "gitconfig" }
-		if vim.tbl_contains(indentedFts, bo.filetype) then
-			keymap( { "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { buffer = true, desc = "󱡔 indent textobj w/ start border" })
-		end
-	end,
-})
+keymap({ "x", "o" }, "ij", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 outer-inner indent textobj" })
+keymap({ "x", "o" }, "aj", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 outer-inner indent textobj" })

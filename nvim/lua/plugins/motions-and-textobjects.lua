@@ -19,44 +19,9 @@ return {
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		opts = {
-			search = {
-				forward = true,
-				wrap = true, -- when `false`, find only matches in the given direction
-				-- Each mode will take ignorecase and smartcase into account.
-				-- * exact: exact match
-				-- * search: regular search
-				-- * fuzzy: fuzzy search
-				-- * fun(str): custom function that returns a pattern
-				--   For example, to only match at the beginning of a word:
-				--   mode = function(str)
-				--     return "\\<" .. str
-				--   end,
-				mode = "fuzzy",
-				incremental = false, -- behave like `incsearch`
-			},
-			jump = {
-				history = false, -- add pattern to search history
-				register = false, -- add pattern to search register
-				nohlsearch = false, -- clear highlight after jump
-			},
-			highlight = {
-				backdrop = false, -- show a backdrop with hl FlashBackdrop
-				matches = true, -- Highlight the search matches
-				priority = 5000, -- extmark priority
-				groups = {
-					match = "FlashMatch",
-					current = "FlashCurrent",
-					backdrop = "FlashBackdrop",
-					label = "FlashLabel",
-				},
-			},
 			modes = {
-				search = { -- a regular search with `/` or `?`
-					enabled = true, -- enable flash for search
-					highlight = { backdrop = false },
-					jump = { history = true, register = true, nohlsearch = true },
-				},
 				char = { enabled = false }, -- don't modify FfTt motions
+				search = { search = { multi_window = false }}
 			},
 		},
 	},
