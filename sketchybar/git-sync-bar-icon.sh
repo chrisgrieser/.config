@@ -13,17 +13,17 @@ GIT_OPTIONAL_LOCKS=0
 cd "$DOTFILE_FOLDER" || configError="repo-path wrong"
 dotChanges=$(git status --short | wc -l | tr -d " ")
 git fetch # required to check for commits behind
-dotBehind=$(git status --porcelain --branch | grep -Eo "\d") 
+dotBehind=$(git status --porcelain --branch | head -n1 | grep -Eo "\d") 
 
 cd "$VAULT_PATH" || configError="repo-path wrong"
 vaultChanges=$(git status --porcelain | wc -l | tr -d " ")
 git fetch
-vaultBehind=$(git status --porcelain --branch | grep -Eo "\d") 
+vaultBehind=$(git status --porcelain --branch | head -n1 | grep -Eo "\d") 
 
 cd "$PASSWORD_STORE_DIR" || configError="repo-path wrong"
 passChanges=$(git status --porcelain | wc -l | tr -d " ")
 git fetch
-passBehind=$(git status --porcelain --branch | grep -Eo "\d") 
+passBehind=$(git status --porcelain --branch | head -n1 | grep -Eo "\d") 
 
 #───────────────────────────────────────────────────────────────────────────────
 
