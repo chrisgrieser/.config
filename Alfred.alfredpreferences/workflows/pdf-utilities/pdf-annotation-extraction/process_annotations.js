@@ -445,7 +445,6 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 	const noteContent = `---
 ${yamlKeys.join("\n")}
 ---
-
 ${annos}
 `;
 

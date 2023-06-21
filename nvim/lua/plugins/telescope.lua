@@ -56,16 +56,13 @@ local function telescopeConfig()
 				"%.app/", -- internals of mac apps
 				"%.pxd", -- Pixelmator
 				"%.plist$", -- Alfred
-				"%.harpoon$", -- harpoon/projects
+				"%.project-root$", -- harpoon/projects
 				"/INFO ", -- custom info files
 				"_INFO ", -- custom info files
 				"%.png$",
 				"%.gif$",
-				"%.jpe?g$",
 				"%.icns",
 				"%.zip$",
-				"%.mkv$",
-				"%.mp4$",
 			},
 			mappings = {
 				i = keymappings,
@@ -235,7 +232,6 @@ return {
 		config = function()
 			telescopeConfig()
 			require("telescope").load_extension("file_browser")
-			require("telescope").load_extension("projects")
 
 			-- INFO since used for cmp-fuzzy-buffer already, might as well add it
 			-- here as well. Even though performance-wise vanilla telescope is fine

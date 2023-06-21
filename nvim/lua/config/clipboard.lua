@@ -32,23 +32,21 @@ keymap(
 --------------------------------------------------------------------------------
 
 -- paste charwise reg as linewise & vice versa
-keymap("n", "zp", function()
+keymap("n", "gp", function()
 	local reg = "+"
 	local regContent = fn.getreg(reg)
 	local isLinewise = fn.getregtype(reg) == "V"
 
-	local targetRegType
+	local targetRegType = "V"
 	if isLinewise then
 		targetRegType = "v"
 		regContent = regContent:gsub("^%s*", ""):gsub("%s*$", "")
-	else
-		targetRegType = "V"
 	end
 
 	fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
 	u.normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
 	if targetRegType == "V" then u.normal("==") end
-end, { desc = " paste differently" })
+end, { desc = " Paste differently" })
 
 --------------------------------------------------------------------------------
 
