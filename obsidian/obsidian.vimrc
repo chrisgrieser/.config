@@ -121,6 +121,13 @@ nmap gl :liveGrep
 exmap searchReplace obcommand editor:open-search-replace
 nmap ,ff :searchReplace
 
+exmap globalSearchReplace obcommand global-search-and-replace:search-and-replace
+nmap ,v :globalSearchReplace
+
+""""""""""""""""""""""
+" Editing
+""""""""""""""""""""""
+
 exmap diffview obcommand obsidian-version-history-diff:open-git-diff-view
 nmap ,gd :diffview
 

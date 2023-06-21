@@ -76,6 +76,7 @@ function run() {
 			}
 			const parentObvious = processName.startsWith(parentName) && processName !== parentName;
 			if (parentName === "launchd" || parentObvious) parentName = "";
+			if (parentName) parentName = "⇞ " + parentName;
 
 			// Memory, CPU & root
 			let memory = (parseInt(info[3]) / 1024).toFixed(0).toString(); // real memory
