@@ -221,6 +221,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</key>
+		<array/>
 		<key>80310399-4092-49D2-B048-D91D9184B37F</key>
 		<array>
 			<dict>
@@ -369,6 +371,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D4F0274E-F79C-43A1-9C38-65C92510EEF2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</key>
 		<array>
 			<dict>
@@ -439,7 +454,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>my-github-issues.js</string>
+				<string>scripts/my-github-issues.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -546,7 +561,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<string>loading…</string>
 				<key>script</key>
 				<string># this way path is read from .zshenv
-osascript -l JavaScript "./my-github-repos.js" "$LOCAL_REPOS"</string>
+osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -637,7 +652,7 @@ osascript -l JavaScript "./my-github-repos.js" "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>search-in-git-repo.js</string>
+				<string>scripts/search-in-git-repo.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -766,7 +781,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>public-github-repo-search.js</string>
+				<string>scripts/public-github-repo-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -910,7 +925,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>public-issue-search.js</string>
+				<string>scripts/public-issue-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -967,6 +982,78 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>gl</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>git-log.js</string>
+				<key>subtext</key>
+				<string>Current Finder Window or {var:default_repo}</string>
+				<key>title</key>
+				<string>Git Log</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>D4F0274E-F79C-43A1-9C38-65C92510EEF2</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>checkout.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1167,9 +1254,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>875</real>
+			<real>1140</real>
 		</dict>
 		<key>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</key>
 		<dict>
@@ -1185,9 +1272,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>960</real>
+			<real>1225</real>
 		</dict>
 		<key>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</key>
 		<dict>
@@ -1203,9 +1290,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>1200</real>
 		</dict>
 		<key>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</key>
 		<dict>
@@ -1234,6 +1321,17 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>checkout</string>
+			<key>xpos</key>
+			<real>225</real>
+			<key>ypos</key>
+			<real>900</real>
+		</dict>
 		<key>80310399-4092-49D2-B048-D91D9184B37F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1250,9 +1348,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>845</real>
+			<real>1110</real>
 		</dict>
 		<key>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</key>
 		<dict>
@@ -1268,9 +1366,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>265</real>
+			<real>260</real>
 			<key>ypos</key>
-			<real>875</real>
+			<real>1140</real>
 		</dict>
 		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>
 		<dict>
@@ -1297,9 +1395,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>1080</real>
 		</dict>
 		<key>CC25EB33-36DC-49B4-B46D-C70DC2FA45FD</key>
 		<dict>
@@ -1321,12 +1419,23 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>D4F0274E-F79C-43A1-9C38-65C92510EEF2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>git log</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>900</real>
+		</dict>
 		<key>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>405</real>
 			<key>ypos</key>
 			<real>545</real>
 		</dict>
@@ -1344,7 +1453,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>530</real>
+			<real>545</real>
 			<key>ypos</key>
 			<real>575</real>
 		</dict>
@@ -1408,11 +1517,32 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>description</key>
 			<string>Another folder containing local git repositories to search for `gg`</string>
 			<key>label</key>
-			<string>Extra Folder 1</string>
+			<string>Extra Folder</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>extra_folder_1</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Users/chrisgrieser/.config</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string>~/Users/chrisgrieser/.config</string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>`gl` (git log) will search the repo of the current Finder or fall back to this repo if Finder is not the frontmost window.</string>
+			<key>label</key>
+			<string>Default Repo</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>default_repo</string>
 		</dict>
 	</array>
 	<key>version</key>
