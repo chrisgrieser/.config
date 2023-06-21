@@ -254,8 +254,8 @@ local function filetypeCompletionConfig()
 			s.codeium,
 			s.treesitter,
 			s.buffer,
-			s.emojis,
 			s.nerdfont, -- used for some configs
+			s.emojis,
 		},
 	})
 

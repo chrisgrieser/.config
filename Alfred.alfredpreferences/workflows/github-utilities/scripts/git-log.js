@@ -30,7 +30,7 @@ function run() {
 
 	/** @type AlfredItem[] */
 	const commitArr = app
-		.doShellScript(`cd "${filepath}" && git log --all --format="%h;;%d;;%cr;;%s"`)
+		.doShellScript(`cd "${filepath}" && git log --all --format="%h;;%D;;%cr;;%s"`)
 		.split("\r")
 		.map((commit) => {
 			const parts = commit.split(";;");
@@ -40,13 +40,13 @@ function run() {
 				.replaceAll("origin", "☁️")
 				.replaceAll("->", "⇢")
 				.replaceAll("grafted", "✂️")
-				.replace(/\b(master|main)/, "✂️");
+				.replace(/\b(master|main)\b/g, "Ⓜ️");
 			const date = parts[2];
 			const msg = parts.slice(3).join(" ");
 			return {
-				title: msg + pointer,
+				title: `${msg}   ${pointer}`,
 				subtitle: date,
-				match: alfredMatcher(pointer) + " " + alfredMatcher(msg),
+				match: alfredMatcher(pointer) + alfredMatcher(msg),
 				arg: hash,
 				mods: {
 					alt: {

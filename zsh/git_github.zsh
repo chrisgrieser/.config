@@ -70,7 +70,7 @@ function gitlog() {
 	[[ -n "$1" ]] && length="-n $1"
 	# shellcheck disable=2086
 	git log $length --all --color --graph \
-		--format:'%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
+		--format='%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
 		sed -E 's/ seconds ago\)/s)/' |
 		sed -E 's/ minutes ago\)/min)/' |
 		sed -E 's/ hours ago\)/h)/' |
@@ -81,6 +81,8 @@ function gitlog() {
 		sed -e 's/HEAD/󱍀/g' |
 		sed -e 's/->/⇢/g' |
 		sed -e 's/grafted/ /' |
+		sed -e 's/main,/M,/g' |
+		sed -e 's/master,/M,/g' |
 		delta
 	# INFO piping though delta as pager makes commit hashes clickable https://github.com/wez/wezterm/discussions/3618
 	# also, delta pipes then to less, which is configured not to start the pager
