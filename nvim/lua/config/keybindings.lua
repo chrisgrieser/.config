@@ -295,11 +295,13 @@ vim.keymap.set(
 )
 
 keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort selection" })
+keymap("x", "<leader>fO", ":sort i<CR>", { desc = "󱗘 :sort selection (case insensitive)" })
 keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
+keymap("n", "<leader>fO", "vip:sort i<CR>", { desc = "󱗘 :sort paragraph (case insensitive)" })
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
 keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines" })
 
--- stylua: ignore
+
 keymap("n", "<leader>fq", function() require("replacer").run { rename_files = true } end, { desc = "󱗘  replacer.nvim" })
 -- stylua: ignore
 keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "󱗘 Structural S&R" })
