@@ -41,6 +41,7 @@ declare const Application: {
 
 		// APP-SPECIFIC
 		exists(path: string): boolean; // Finder
+		finderWindows: Object[]; // Finder
 		createNote(options: { text: string; path?: string }): void; // SideNotes
 		documents: { url(): string; name(): string }[]; // webkit browsers
 		windows: { activeTab: { url(): string; name(): string } }[]; // chromium browsers
@@ -66,7 +67,8 @@ declare const $: {
 	NSFileModificationDate: any;
 	// rome-ignore lint/suspicious/noExplicitAny: too long
 	NSProcessInfo: any;
-	NSURL: string;
+	// rome-ignore lint/suspicious/noExplicitAny: too long
+	NSURL: any;
 	// rome-ignore lint/suspicious/noExplicitAny: too long
 	NSString: any;
 	NSData: string;
