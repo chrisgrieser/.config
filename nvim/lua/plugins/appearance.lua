@@ -15,6 +15,12 @@ return {
 		"HiPhish/nvim-ts-rainbow2",
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		init = function()
+			-- rainbow brackets without aggressive red
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = function() vim.api.nvim_set_hl(0, "TSRainbowred", { fg = "#7e8a95" }) end,
+			})
+		end,
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",

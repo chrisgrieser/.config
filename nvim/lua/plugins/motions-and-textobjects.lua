@@ -3,9 +3,17 @@ local u = require("config.utils")
 
 return {
 	{ -- highlights for ftFT
-		"unblevable/quick-scope",
+		"jinh0/eyeliner.nvim",
 		keys = { "f", "F", "t", "T" },
-		init = function() vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" } end,
+		opts = { highlight_on_key = true, dim = false },
+		init = function()
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = function()
+					vim.api.nvim_set_hl(0, "EyelinerPrimary", { reverse = true})
+					vim.api.nvim_set_hl(0, "EyelinerSecondary", { underline = true})
+				end,
+			})
+		end,
 	},
 	{ -- display line numbers when using `:` to go to a line with
 		"nacro90/numb.nvim",
