@@ -4,7 +4,6 @@ local u = require("config.utils")
 return {
 	{ -- highlights for ftFT
 		"jinh0/eyeliner.nvim",
-		enabled = false,
 		keys = { "f", "F", "t", "T" },
 		opts = { highlight_on_key = true, dim = false },
 		init = function()
@@ -16,7 +15,7 @@ return {
 			})
 		end,
 	},
-	{ -- better search
+	{ -- only used for the improved search
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		opts = {
@@ -41,18 +40,7 @@ return {
 				nohlsearch = false, -- clear highlight after jump
 			},
 			highlight = {
-				label = {
-					-- add a label for the first match in the current window.
-					-- you can always jump to the first match with `<CR>`
-					current = false,
-					-- show the label after the match
-					after = true, ---@type boolean|number[]
-					-- show the label before the match
-					before = false, ---@type boolean|number[]
-					-- position of the label extmark
-					style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
-				},
-				backdrop = true, -- show a backdrop with hl FlashBackdrop
+				backdrop = false, -- show a backdrop with hl FlashBackdrop
 				matches = true, -- Highlight the search matches
 				priority = 5000, -- extmark priority
 				groups = {
@@ -63,25 +51,13 @@ return {
 				},
 			},
 			modes = {
-				-- a regular search with `/` or `?`
-				search = {
+				search = { -- a regular search with `/` or `?`
 					enabled = true, -- enable flash for search
 					highlight = { backdrop = false },
 					jump = { history = true, register = true, nohlsearch = true },
 				},
 				char = { enabled = false }, -- don't modify FfTt motions
-				-- options used for treesitter selections
-				treesitter = {
-					highlight = {
-						label = { before = true, after = true, style = "inline" },
-						backdrop = false,
-						matches = false,
-					},
-				},
 			},
-		},
-		keys = {
-			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end },
 		},
 	},
 	{ -- display line numbers when using `:` to go to a line with

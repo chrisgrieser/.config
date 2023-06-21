@@ -23,7 +23,6 @@ return {
 	},
 	{ -- substitute
 		"gbprod/substitute.nvim",
-		enabled = false,
 		lazy = true,
 		opts = {
 			-- integrate with yanky.nvim
