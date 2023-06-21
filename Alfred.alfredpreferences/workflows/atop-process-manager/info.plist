@@ -424,7 +424,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>System Monitoring with live refreshing</string>
+	<string>System Monitoring and Process Management</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -1280,7 +1280,9 @@ end tell</string>
 
 ---
 
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+`atop` has been created by [Chris Grieser](https://chris-grieser.de/).
+
+The `About This Mac` component has been created by [Alan He](https://github.com/alanhg/alfred-workflows/tree/master/about-mac/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>00B3FDB4-C94D-435D-A255-F5D1B2A6F0AD</key>
@@ -1510,7 +1512,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>About my mac</string>
 			<key>xpos</key>
-			<real>385</real>
+			<real>390</real>
 			<key>ypos</key>
 			<real>1375</real>
 		</dict>
