@@ -31,7 +31,6 @@ lspSettings.lua_ls = {
 		completion = {
 			callSnippet = "Replace",
 			keywordSnippet = "Replace",
-			displayContext = 5,
 			postfix = ".", -- useful for `table.insert` and the like
 		},
 		diagnostics = {
@@ -76,26 +75,36 @@ lspSettings.cssls = {
 -- TSSERVER
 
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
-local jsAndTsSettings = {
-	inlayHints = {
-		includeInlayEnumMemberValueHints = true,
-		includeInlayFunctionLikeReturnTypeHints = true,
-		includeInlayFunctionParameterTypeHints = true,
-		includeInlayParameterNameHints = "all",
-		includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-		includeInlayPropertyDeclarationTypeHints = true,
-		includeInlayVariableTypeHints = true,
-		includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-	},
-}
-
 lspSettings.tsserver = {
 	completions = { completeFunctionCalls = true },
-	diagnostics = { ignoredCodes = {
-		2451, -- "cannot redeclare block-scoped variable" -> useless when applied to JXA
-	} },
-	typescript = jsAndTsSettings,
-	javascript = jsAndTsSettings,
+	diagnostics = {
+		-- "cannot redeclare block-scoped variable" -> useless when applied to JXA
+		ignoredCodes = { 2451 },
+	},
+	typescript = {
+		inlayHints = {
+			includeInlayEnumMemberValueHints = true,
+			includeInlayFunctionLikeReturnTypeHints = true,
+			includeInlayFunctionParameterTypeHints = true,
+			includeInlayParameterNameHints = "all",
+			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+			includeInlayPropertyDeclarationTypeHints = true,
+			includeInlayVariableTypeHints = true,
+			includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+		},
+	},
+	javascript = {
+		inlayHints = {
+			includeInlayEnumMemberValueHints = true,
+			includeInlayFunctionLikeReturnTypeHints = true,
+			includeInlayFunctionParameterTypeHints = true,
+			includeInlayParameterNameHints = "all",
+			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+			includeInlayPropertyDeclarationTypeHints = true,
+			includeInlayVariableTypeHints = true,
+			includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+		},
+	},
 }
 
 lspOnAttach.tsserver = function(client, _)
@@ -108,13 +117,13 @@ end
 -- JSON
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
 lspSettings.jsonls = {
-	json = { format = { enable = false } }, -- taken care of by prettier
+	json = { format = { enable = false } }, -- taken care of by rome
 }
 
 --------------------------------------------------------------------------------
 -- BASH / ZSH
 
--- force bashls (and treesitter) to highlight zsh as if it was bash
+-- force bashls (and treesitter) to work in zsh files as well
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "zsh",
 	callback = function() vim.bo.filetype = "sh" end,
@@ -168,8 +177,8 @@ lspSettings.ltex = {
 }
 
 --------------------------------------------------------------------------------
--- ENABLE CAPABILITIES FOR PLUGINS
-
+-- SETUP ALL LSP
+-- enable capabilities for plugins
 local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Enable snippets-completion (for nvim_cmp)
@@ -180,8 +189,6 @@ lspCapabilities.textDocument.foldingRange = {
 	dynamicRegistration = false,
 	lineFoldingOnly = true,
 }
-
---------------------------------------------------------------------------------
 
 local function setupAllLsps()
 	-- INFO must be before the lsp-config setup of lua-ls
@@ -201,6 +208,55 @@ local function setupAllLsps()
 		require("lspconfig")[lsp].setup(config)
 	end
 end
+
+--------------------------------------------------------------------------------
+-- DIAGNOSTICS
+local function diagnosticConfig()
+	-- Sign Icons
+	local diagnosticTypes = { Error = "", Warn = "▲", Info = "", Hint = "" }
+	for type, icon in pairs(diagnosticTypes) do
+		local hl = "DiagnosticSign" .. type
+		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	end
+
+	-- Underlines
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		callback = function()
+			for type, _ in pairs(diagnosticTypes) do
+				vim.cmd.highlight("DiagnosticUnderline" .. type .. " gui=underline cterm=underline")
+			end
+		end,
+	})
+
+	-- Floats & Virtual Text
+	require("lspconfig.ui.windows").default_options.border = u.borderStyle
+	vim.lsp.handlers["textDocument/hover"] =
+		vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
+	vim.lsp.handlers["textDocument/signatureHelp"] =
+		vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
+
+	local function fmt(diag)
+		local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
+		local msg = diag.message
+		return msg .. source
+	end
+
+	vim.diagnostic.config {
+		virtual_text = {
+			severity = { min = vim.diagnostic.severity.WARN },
+			source = false, -- already handled by format function
+			format = function(diag) return fmt(diag) end,
+			spacing = 1,
+		},
+		float = {
+			format = function(diag) return fmt(diag) end,
+			focusable = true,
+			border = u.borderStyle,
+			max_width = 70,
+			header = "", -- remove "Diagnostics:" heading
+		},
+	}
+end
 --------------------------------------------------------------------------------
 
 return {
@@ -210,11 +266,7 @@ return {
 		opts = {
 			ui = {
 				border = u.borderStyle,
-				icons = {
-					package_installed = "✓",
-					package_pending = "󰔟",
-					package_uninstalled = "✗",
-				},
+				icons = { package_installed = "✓", package_pending = "󰔟", package_uninstalled = "✗" },
 			},
 		},
 	},
@@ -230,42 +282,6 @@ return {
 		priority = 1000,
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = setupAllLsps,
-		config = function()
-			-- Borders
-			require("lspconfig.ui.windows").default_options.border = u.borderStyle
-			vim.lsp.handlers["textDocument/hover"] =
-				vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
-			vim.lsp.handlers["textDocument/signatureHelp"] =
-				vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
-
-			-- Diagnostics
-			local diagnosticIcons = { Error = "", Warn = "▲", Info = "", Hint = "" }
-			for type, icon in pairs(diagnosticIcons) do
-				local hl = "DiagnosticSign" .. type
-				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-			end
-
-			local function fmt(diag)
-				local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
-				local msg = diag.message
-				return msg .. source
-			end
-
-			vim.diagnostic.config {
-				virtual_text = {
-					severity = { min = vim.diagnostic.severity.WARN },
-					source = false, -- already handled by format function
-					format = function(diag) return fmt(diag) end,
-					spacing = 1,
-				},
-				float = {
-					format = function(diag) return fmt(diag) end,
-					focusable = true,
-					border = u.borderStyle,
-					max_width = 70,
-					header = "", -- remove "Diagnostics:" heading
-				},
-			}
-		end,
+		config = diagnosticConfig,
 	},
 }
