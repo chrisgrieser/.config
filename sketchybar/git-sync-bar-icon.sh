@@ -20,20 +20,20 @@ vaultChanges=$(git status --porcelain | wc -l | tr -d " ")
 git fetch
 vaultBehind=$(git status --porcelain --branch | grep -Eo "\d") 
 
-cd "$VAULT_PATH" || configError="repo-path wrong"
-git fetch
+cd "$PASSWORD_STORE_DIR" || configError="repo-path wrong"
 passChanges=$(git status --porcelain | wc -l | tr -d " ")
+git fetch
 passBehind=$(git status --porcelain --branch | grep -Eo "\d") 
 
 #───────────────────────────────────────────────────────────────────────────────
 
 [[ $dotChanges -ne 0 ]] && label="${dotChanges}d " 
 [[ $vaultChanges -ne 0 ]] && label="$label${vaultChanges}v "
-[[ "$passChanges" -ne 0 ]] && label="$label${passChanges}p"
+[[ $passChanges -ne 0 ]] && label="$label${passChanges}p"
 
-[[ -n "$dotBehind" ]] && label="$label${dotBehind}p"
-[[ -n "$vaultBehind" ]] && label="$label${vaultBehind}p"
-[[ -n "$passBehind" ]] && label="$label${passBehind}p"
+[[ -n "$dotBehind" ]] && label="$label${dotBehind}!d "
+[[ -n "$vaultBehind" ]] && label="$label${vaultBehind}!v "
+[[ -n "$passBehind" ]] && label="$label${passBehind}!p"
 
 [[ -n "$label" ]] && icon=" "
 
