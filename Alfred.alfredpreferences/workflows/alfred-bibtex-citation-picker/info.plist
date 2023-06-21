@@ -773,6 +773,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>B9438E50-CC87-44AC-9F19-A9A6ADCF7F09</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>9C01A8C9-CBF3-4261-A0F2-CD6DC0E55515</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -780,16 +790,6 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>14FB4C6A-E89A-4DBE-8F36-87C64E7B4314</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>B9438E50-CC87-44AC-9F19-A9A6ADCF7F09</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1567,7 +1567,7 @@ JSON.stringify({ 'items': entry_array });
 				<key>acceptstext</key>
 				<true/>
 				<key>acceptsurls</key>
-				<true/>
+				<false/>
 				<key>name</key>
 				<string>Parse Bibliography Entry</string>
 			</dict>
@@ -1627,27 +1627,6 @@ echo -n $dummyBib | pandoc --citeproc --read=markdown --write=plain --csl $csl -
 			<string>96FCE9BC-5201-4357-9B63-588F73AEF5F3</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>9C01A8C9-CBF3-4261-A0F2-CD6DC0E55515</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1738,21 +1717,6 @@ echo -n $dummyBib | pandoc --citeproc --read=markdown --write=plain --csl $csl -
 			<string>F46030BA-A511-425D-99AB-40C220A6F0F3</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Basso</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>254C2241-0AE4-4F52-A073-16E3DEFC9384</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1870,6 +1834,42 @@ echo -n $dummyBib | pandoc --citeproc --read=markdown --write=plain --csl $csl -
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>4DA0A4D6-F21E-433C-9EB1-C781B01CA932</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Basso</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>254C2241-0AE4-4F52-A073-16E3DEFC9384</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9C01A8C9-CBF3-4261-A0F2-CD6DC0E55515</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2731,9 +2731,9 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>590</real>
+			<real>680</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>945</real>
 		</dict>
 		<key>2A483E3B-2BAB-408A-9759-4C0F65D760CF</key>
 		<dict>
@@ -2802,7 +2802,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>note</key>
 			<string>DOUBLE CLICK THIS
 
-to set a hotkey for the citation picker.</string>
+to set a hotkey for the citation picker</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2837,7 +2837,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>quicklook cheatsheets</string>
 			<key>xpos</key>
-			<real>295</real>
+			<real>290</real>
 			<key>ypos</key>
 			<real>1210</real>
 		</dict>
@@ -2870,7 +2870,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>xpos</key>
 			<real>960</real>
 			<key>ypos</key>
-			<real>850</real>
+			<real>890</real>
 		</dict>
 		<key>52B9C3DF-F265-4201-9508-55BA584F851F</key>
 		<dict>
@@ -3004,7 +3004,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>paste without brackets</string>
 			<key>xpos</key>
-			<real>1275</real>
+			<real>1280</real>
 			<key>ypos</key>
 			<real>485</real>
 		</dict>
@@ -3071,9 +3071,9 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>535</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>945</real>
 		</dict>
 		<key>A1A6DEC2-1AF1-4110-9DA9-01400A1902FF</key>
 		<dict>
@@ -3164,7 +3164,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>enclose in start/end formatting &amp; paste</string>
 			<key>xpos</key>
-			<real>1275</real>
+			<real>1280</real>
 			<key>ypos</key>
 			<real>310</real>
 		</dict>
