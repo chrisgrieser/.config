@@ -75,3 +75,7 @@ citekeys
 Citekey
 BibDesk
 QLMarkdown
+Blazingly
+Prepend
+QuickLook
+grieser
