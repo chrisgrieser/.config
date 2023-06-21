@@ -155,7 +155,7 @@ NeovideWatcher = aw.new(function(appName, eventType, neovide)
 
 		-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
 	elseif eventType == aw.terminated then
-		u.runWithDelays(4, function() hs.execute("pgrep -xq 'neovide' || killall -KILL nvim") end)
+		u.runWithDelays(3, function() hs.execute("pgrep -xq 'neovide' || killall -9 nvim") end)
 	end
 end):start()
 
