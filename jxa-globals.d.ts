@@ -41,7 +41,9 @@ declare const Application: {
 
 		// APP-SPECIFIC
 		exists(path: string): boolean; // Finder
-		finderWindows: Object[]; // Finder
+		finderWindows: {
+			target: { url: () => string; }
+		};
 		createNote(options: { text: string; path?: string }): void; // SideNotes
 		documents: { url(): string; name(): string }[]; // webkit browsers
 		windows: { activeTab: { url(): string; name(): string } }[]; // chromium browsers

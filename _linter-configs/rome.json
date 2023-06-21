@@ -33,6 +33,9 @@
 			"nursery": {
 				"all": false
 			},
+			"complexity": {
+				"noExtraSemicolon": "warn"
+			},
 			"style": {
 				"useBlockStatements": "off",
 				"useConst": "warn",
