@@ -25,7 +25,7 @@ return {
 		lazy = false, -- cannot be properly lazy-loaded
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
-			vim.g.matchup_matchparen_offscreen = { method = "popup" }
+			vim.g.matchup_matchparen_offscreen = {} -- empty = disables
 			vim.g.matchup_text_obj_enabled = 0
 		end,
 	},
