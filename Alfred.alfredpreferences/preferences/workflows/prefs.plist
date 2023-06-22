@@ -4,9 +4,9 @@
 <dict>
 	<key>categories</key>
 	<array>
-		<string>Personal</string>
-		<string>Production</string>
-		<string>3rd-Party</string>
+		<string>🖥️</string>
+		<string>⭐️</string>
+		<string>⬇️</string>
 	</array>
 	<key>defaultBundleId</key>
 	<string>de.chris-grieser.</string>

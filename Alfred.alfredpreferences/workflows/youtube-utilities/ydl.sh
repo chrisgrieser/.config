@@ -19,6 +19,7 @@ fi
 osascript -e 'display notification "" with title "⏳ Starting Download…"'
 
 if yt-dlp --quiet "$CURRENT_TAB" ; then
+	open "$download_location"
 	echo -n "✅ Download finished."
 else
 	echo -n "❌ Download not possible."
