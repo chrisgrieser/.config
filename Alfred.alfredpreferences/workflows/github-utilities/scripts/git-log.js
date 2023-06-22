@@ -28,24 +28,25 @@ const noDisplayAuthors = $.getenv("no_display_authors")
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run() {
-	// determine repo & validate it's in a git repo
+function run(argv) {
+	// determine repo
 	const defaultRepo = $.getenv("default_repo").replace(/^~/, app.pathTo("home folder"));
-	const filepath = finderFrontWindow() || defaultRepo;
+	const fileActionUsed = argv.length > 0;
+	const folderPath = fileActionUsed ? argv[0].replace(/(.*\/).*/, "$1") : finderFrontWindow() || defaultRepo;
+
+	// validate it's in a git repo
 	try {
-		app.doShellScript(`cd "${filepath}" && git rev-parse --is-inside-work-tree`).startsWith("fatal:");
+		app.doShellScript(`cd "${folderPath}" && git rev-parse --is-inside-work-tree`).startsWith("fatal:");
 	} catch (_error) {
 		return JSON.stringify({
-			items: [{
-				title: "🚫 Not in Git Repository",
-				valid: false,
-			}],
+			items: [{ title: "🚫 Not in Git Repository", valid: false }],
 		});
 	}
+
 	// determine branches
 	const branchCommitPairs = {};
 	app
-		.doShellScript(`cd "${filepath}" && git branch --verbose`)
+		.doShellScript(`cd "${folderPath}" && git branch --verbose`)
 		.split("\r")
 		.forEach((line) => {
 			const branch = line.split(" ")[1];
@@ -55,7 +56,7 @@ function run() {
 
 	/** @type AlfredItem[] */
 	const commitArr = app
-		.doShellScript(`cd "${filepath}" && git log --all --format="%h;;%D;;%cr;;%an;;%s"`)
+		.doShellScript(`cd "${folderPath}" && git log --all --format="%h;;%D;;%cr;;%an;;%s"`)
 		.split("\r")
 		.map((commit) => {
 			const parts = commit.split(";;");

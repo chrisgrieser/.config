@@ -1,14 +1,14 @@
 {
 	"replace /gm": {
 		"prefix": "replace /gm",
-		"body": "replace(/${1:regexp}/gm, \"$2\");"
+		"body": "replace(/${1:regexp}/gm, \"$2\")"
 	},
 	"replace": {
 		"prefix": "replace",
-		"body": "replace(/${1:regexp}/, \"$2\");"
+		"body": "replace(/${1:regexp}/, \"$2\")"
 	},
 	"JSdoc type": {
-		"prefix": "JSdoc type",
+		"prefix": "type (JSDoc)",
 		"body": "/** @type{${1|Array.<number>,Array.<string>|}} */"
 	},
 	"ignore (rome formatter)": {
@@ -24,8 +24,8 @@
 		"prefix": "split by line",
 		"body": ".split(\"\\r\")"
 	},
-	"type definition": {
-		"prefix": "type definition",
+	"JSDoc: type definition": {
+		"prefix": "type definition (JSDoc)",
 		"body": [
 			"/** @typedef {Object} ${typeName}",
 			"* @property {${2|number,string,Object,boolean,() => void|}} ${3:prop1}",
