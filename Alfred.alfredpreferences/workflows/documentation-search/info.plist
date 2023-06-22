@@ -1929,7 +1929,7 @@ echo -n "$appid"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>pandoc</string>
+				<string>pandoc||pd</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
