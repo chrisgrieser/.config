@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string></string>
+	<key>category</key>
+	<string>Personal</string>
 	<key>connections</key>
 	<dict>
 		<key>0B2584E5-EDEE-4BE5-9D80-5098C54BD631</key>

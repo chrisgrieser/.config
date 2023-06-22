@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.browser-tweaks</string>
+	<key>category</key>
+	<string>Personal</string>
 	<key>connections</key>
 	<dict>
 		<key>1F170814-90DD-485E-A861-757A4FD92606</key>

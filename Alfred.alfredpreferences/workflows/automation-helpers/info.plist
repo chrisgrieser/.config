@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.karabiner-espanso</string>
+	<key>category</key>
+	<string>Personal</string>
 	<key>connections</key>
 	<dict>
 		<key>0CB1384E-FC0D-46E5-8142-2590BB7CE8BD</key>

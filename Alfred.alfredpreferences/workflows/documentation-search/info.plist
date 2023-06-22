@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.doc-searches</string>
+	<key>category</key>
+	<string>Production</string>
 	<key>connections</key>
 	<dict>
 		<key>03C8A38F-8577-483D-8E18-B31886F2113F</key>
@@ -920,6 +922,31 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>appid=$(osascript -e "id of application \"$*\"")
+echo -n "$appid" | pbcopy
+echo -n "$appid"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>anchorfields</key>
 				<true/>
 				<key>argumenttrimmode</key>
@@ -994,31 +1021,6 @@
 			<string>alfred.workflow.input.filefilter</string>
 			<key>uid</key>
 			<string>B884F61F-1B79-4D70-9CFB-57C3E87E26D9</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>appid=$(osascript -e "id of application \"$*\"")
-echo -n "$appid" | pbcopy
-echo -n "$appid"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>

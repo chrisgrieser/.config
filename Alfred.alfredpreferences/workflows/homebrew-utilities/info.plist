@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.homebrew</string>
+	<key>category</key>
+	<string>Production</string>
 	<key>connections</key>
 	<dict>
 		<key>0BAF56E8-B65A-478A-B848-F09FFE73A12B</key>

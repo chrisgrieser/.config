@@ -13,4 +13,4 @@ workflows/shimmering-obsidian
 # workflows/alfred-bibtex-citation-picker
 
 # workflows developed by others, marked with `[ext]` at the end of the folder name
-workflows/*\[ext\]
+workflows/*\[3rd-party\]
