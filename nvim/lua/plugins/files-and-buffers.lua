@@ -73,10 +73,10 @@ return {
 			datapath = u.vimDataDir,
 			patterns = {
 				".git",
+				"Makefile",
 				"manifest.json", -- node
 				"info.plist", -- Alfred
 				".luarc.json", -- lua
-				"rome.json", -- js/ts
 				".project-root", -- manually marked
 				"=File Hub",
 			},

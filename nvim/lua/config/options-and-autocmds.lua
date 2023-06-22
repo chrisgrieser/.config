@@ -257,15 +257,16 @@ autocmd("FileType", {
 -- apply templates for any filetype named `./templates/skeleton.{ft}`
 local skeletonDir = fn.stdpath("config") .. "/templates"
 local filetypeList =
-	fn.system([[ls "]] .. skeletonDir .. [[/skeleton."* | xargs basename | cut -d. -f2]])
+	fn.system(([[ls "%s/skeleton."* | xargs basename | cut -d. -f2]]):format(skeletonDir))
 local ftWithSkeletons = vim.split(filetypeList, "\n", {})
 
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
 	local readCmd = "keepalt 0r " .. skeletonDir .. "/skeleton." .. ft
+	local pattern = ft == "make" and "?akefile" or "*." .. ft
 
 	autocmd("BufNewFile", {
-		pattern = "*." .. ft,
+		pattern = pattern,
 		callback = function()
 			cmd(readCmd)
 			u.normal("G")

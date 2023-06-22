@@ -6,14 +6,14 @@
 declare type AlfredRun = (argv: string[]) => string | void;
 
 declare class AlfredScriptFilter {
+	items: AlfredItem[];
 	rerun?: number; // only accepts values between 0.1 and 5
 	variables?: Object;
 	skipknowledge?: boolean;
-	items: AlfredItem[];
 }
 
 declare class AlfredItem {
-	title?: string;
+	title: string;
 	action?: string | string[] | Object;
 	subtitle?: string;
 	arg?: string | string[];
