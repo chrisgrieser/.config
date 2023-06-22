@@ -235,7 +235,7 @@ local lualineConfig = {
 			{ require("funcs.quickfix").counter },
 			{ searchCounter },
 			{
-				require("dr-lsp").statusline,
+				require("dr-lsp").lspCount,
 				cond = function() return vim.v.hlsearch == 0 end,
 				-- needs the highlight value, since setting the hlgroup directly
 				-- results in bg color being inherited from main editor
@@ -249,7 +249,7 @@ local lualineConfig = {
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
 			{ indentation },
-			{ lsp_progress },
+			{ require("dr-lsp").lspProgress },
 		},
 		lualine_y = {
 			"diff",

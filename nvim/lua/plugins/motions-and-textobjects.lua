@@ -19,8 +19,11 @@ return {
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		opts = {
-			search = { multi_window = false },
-			modes = { char = { enabled = false } }, -- don't modify FfTt motions
+			search = { multi_window = false }, -- FIX completion popup also getting hints
+			modes = {
+				char = { enabled = false }, -- don't modify FfTt motions
+				search = { highlight = { label = { current = false } } },
+			},
 		},
 	},
 	{ -- display line numbers when using `:` to go to a line with
