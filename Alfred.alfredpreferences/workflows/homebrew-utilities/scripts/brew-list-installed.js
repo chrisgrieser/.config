@@ -41,16 +41,14 @@ app
 
 // formulae (installed on request)
 app
-	.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH; brew leaves --installed-on-request --version")
+	.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH; brew leaves --installed-on-request")
 	.split("\r")
-	.forEach((/** @type {string} */ item) => {
-		let [name, version] = item.split(" ");
-		version = version.split(",")[0];
+	.forEach((/** @type {string} */ name) => {
 		const mackupIcon = mackups?.includes(name) ? " " + $.getenv("mackup_icon") : "";
 		jsonArray.push({
 			title: name + mackupIcon,
 			match: alfredMatcher(name),
-			subtitle: `formula – ${version}`,
+			subtitle: "formula",
 			mods: { cmd: { arg: name } },
 			arg: name,
 		});

@@ -42,28 +42,40 @@ try {
 	console.log(error);
 }
 
-const jsonArray = [];
+const installedBrews = app
+	.doShellScript("brew list | cat") // piping to cat eliminates decorative lines
+	.split("\r")
+
 //──────────────────────────────────────────────────────────────────────────────
 
-casks.forEach((name) => {
-	const mackupIcon = mackups.includes(name) ? " " + $.getenv("mackup_icon") : "";
-	jsonArray.push({
-		title: name + mackupIcon,
-		match: alfredMatcher(name),
-		subtitle: "cask",
-		arg: `${name} --cask`,
-		uid: name,
-	});
-});
-formula.forEach((name) => {
-	const mackupIcon = mackups.includes(name) ? " " + $.getenv("mackup_icon") : "";
-	jsonArray.push({
-		title: name + mackupIcon,
-		match: alfredMatcher(name),
-		subtitle: "formula",
-		arg: `${name} --formula`,
-		uid: name,
-	});
-});
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run() {
+	/** @type{AlfredItem[]} */
+	const jsonArray = [];
 
-JSON.stringify({ items: jsonArray });
+	casks.forEach((name) => {
+		const mackupIcon = mackups.includes(name) ? " " + $.getenv("mackup_icon") : "";
+		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+		jsonArray.push({
+			title: name + installedIcon + mackupIcon,
+			match: alfredMatcher(name),
+			subtitle: "cask",
+			arg: `${name} --cask`,
+			uid: name,
+		});
+	});
+	formula.forEach((name) => {
+		const mackupIcon = mackups.includes(name) ? " " + $.getenv("mackup_icon") : "";
+		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+		jsonArray.push({
+			title: name + installedIcon + mackupIcon,
+			match: alfredMatcher(name),
+			subtitle: "formula",
+			arg: `${name} --formula`,
+			uid: name,
+		});
+	});
+
+	return JSON.stringify({ items: jsonArray });
+}
