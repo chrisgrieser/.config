@@ -536,7 +536,7 @@ keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end,
 ------------------------------------------------------------------------------
 
 -- CMD-KEYBINDINGS
-keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = " Save & " })
+keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = " Save" })
 
 -- stylua: ignore
 keymap("", "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
@@ -548,14 +548,14 @@ keymap("", "<D-S-l>", function()
 	end
 	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
 	-- stylua: ignore
-	local command = ([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(workflowId)
-	fn.system("open -a 'Alfred Preferences' && " .. command)
+	fn.system("pgrep -xq 'Alfred Preferences' || open -a 'Alfred Preferences'")
+	fn.system(([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(workflowId))
 end, { desc = "󰮤 Reveal Workflow in Alfred" })
-keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these wouldn't require confirmation
+keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these don't require confirmation
 keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
 
 -- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
--- are overridden inside snippet for snippetjumping
+-- overridden inside snippet for snippetjumping
 vim.g.VM_maps = {
 	["Find Under"] = "<D-j>", -- select word under cursor & enter visual-multi (normal) / add next occurrence (visual-multi)
 	["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
