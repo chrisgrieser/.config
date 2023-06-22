@@ -22,7 +22,11 @@ return {
 			search = { multi_window = false }, -- FIX completion popup also getting hints
 			modes = {
 				char = { enabled = false }, -- don't modify FfTt motions
-				search = { highlight = { label = { current = false } } },
+				search = {
+					highlight = { label = { current = false } },
+					-- require <Space> before hints are active to prevent unintended jumps
+					search = { trigger = " " },  
+				},
 			},
 		},
 	},

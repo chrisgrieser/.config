@@ -25,8 +25,8 @@ fi
 #   child-process of this Alfred script, blocking the next run of this script
 
 open -a "WezTerm" # launch/activate
-while ! pgrep -xq "wezterm-gui"; do sleep 0.2; done
-sleep 0.1 # ensure wezterm-gui is up
+while ! pgrep -xq "wezterm-gui"; do sleep 0.1; done
+sleep 0.2 # ensure wezterm-gui is up
 
 current_cwd=$(
 	wezterm cli list --format json |
