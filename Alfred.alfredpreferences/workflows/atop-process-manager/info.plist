@@ -479,7 +479,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>list-processes.js</string>
+				<string>scripts/list-processes.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -597,7 +597,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>bluetooth-connect.sh</string>
+				<string>scripts/bluetooth-connect.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -640,7 +640,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>bluetooth-devices.js</string>
+				<string>scripts/bluetooth-devices.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -876,7 +876,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>uptime-and-reboots.sh</string>
+				<string>scripts/uptime-and-reboots.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1034,7 +1034,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>network-connections.js</string>
+				<string>scripts/network-connections.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1063,7 +1063,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>eject-volume.sh</string>
+				<string>scripts/eject-volume.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1163,7 +1163,7 @@ JSON.stringify({ 'items': volume_array });
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>volume-search.js</string>
+				<string>scripts/volume-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
