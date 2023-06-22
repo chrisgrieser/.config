@@ -4,6 +4,7 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#;,/\\[\]]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
@@ -20,10 +21,11 @@ const dirtyFiles = app
 	.split("\r")
 	.map(file => file.replace(/^[ MD?]* /i, ""));
 
+/** @type{AlfredItem[]} */
 const fileArray = app
 	.doShellScript(
 		`cd "${folderToSearch}"
-		fd --type=file --hidden --absolute-path --exclude ".git/" --exclude ".git"`,
+		fd --type=file --hidden --absolute-path --exclude ".git/"`,
 	)
 	.split("\r")
 	/* eslint-disable-next-line complexity */
@@ -33,7 +35,7 @@ const fileArray = app
 		const relativeParentFolder = relPath.slice(0, -(name.length + 1));
 
 		const fileIsDirty = dirtyFiles.includes(relPath);
-		const dirtyIcon = fileIsDirty ? ` ${$.getenv("dirty_icon")}` : "";
+		const dirtyIcon = fileIsDirty ? " ✴️" : "";
 		let matcher = alfredMatcher(name);
 		if (fileIsDirty) matcher += " dirty";
 
@@ -84,6 +86,7 @@ const fileArray = app
 	});
 
 // FOLDERS
+/** @type{AlfredItem[]} */
 const folderArray = app
 	.doShellScript(`find "${folderToSearch}" -type d -not -path "**/.git**" -not -path "**/node_modules**"`)
 	.split("\r")
@@ -106,6 +109,7 @@ const folderArray = app
 // (even though Alfred does sorting since due to the `uid` key, the sorting does
 // only happens for recently visited repos, so for the other cases, this sorting
 // here is useful)
+/** @type{AlfredItem[]} */
 const jsonArray = [...fileArray, ...folderArray].sort((a, b) => {
 	const aExt = a.title.split(".").pop();
 	const bExt = b.title.split(".").pop();
@@ -117,5 +121,4 @@ const jsonArray = [...fileArray, ...folderArray].sort((a, b) => {
 	return 0;
 });
 
-if (jsonArray.length === 0) jsonArray.push({ title: "No file in the current Folder found." });
 JSON.stringify({ items: jsonArray }); // direct return

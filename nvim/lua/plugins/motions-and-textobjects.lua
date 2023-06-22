@@ -19,14 +19,13 @@ return {
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		opts = {
-			search = { multi_window = false }, -- FIX completion popup also getting hints
 			modes = {
 				char = { enabled = false }, -- don't modify FfTt motions
 				search = {
 					highlight = { label = { current = false } },
 					-- require "." before hints are active to prevent unintended jumps
 					-- using "." ensures the match isn't moved which also changes hints
-					search = { trigger = "." },
+					-- search = { trigger = "." },
 				},
 			},
 		},

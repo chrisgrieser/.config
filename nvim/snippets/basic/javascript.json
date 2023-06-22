@@ -7,9 +7,9 @@
 		"prefix": "replace",
 		"body": "replace(/${1:regexp}/, \"$2\")"
 	},
-	"JSdoc type": {
+	"JSDoc type": {
 		"prefix": "type (JSDoc)",
-		"body": "/** @type{${1|Array.<number>,Array.<string>|}} */"
+		"body": "/** @type{$0} */"
 	},
 	"ignore (rome formatter)": {
 		"prefix": "ignore (rome formatter)",
