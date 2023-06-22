@@ -4,7 +4,7 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_.]/g, " ") + " " + str + " ";
-const jsonArray = [];
+
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -19,31 +19,40 @@ try {
 //──────────────────────────────────────────────────────────────────────────────
 
 // casks
+
+/** @type{AlfredItem[]} */
+const jsonArray = [];
+
 app
-	.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH; brew list --casks -1")
+	.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH; brew list --casks --version")
 	.split("\r")
-	.forEach((/** @type {string} */ item) => {
-		const mackupIcon = mackups?.includes(item) ? " " + $.getenv("mackup_icon") : "";
+	.forEach((item) => {
+		let [name, version] = item.split(" ");
+		version = version.split(",")[0];
+		const mackupIcon = mackups?.includes(name) ? " " + $.getenv("mackup_icon") : "";
 		jsonArray.push({
-			title: item + mackupIcon,
-			match: alfredMatcher(item),
-			subtitle: "cask",
-			arg: item,
+			title: name + mackupIcon,
+			match: alfredMatcher(name),
+			subtitle: `cask – ${version}`,
+			mods: { cmd: { arg: name } },
+			arg: name,
 		});
 	});
 
 // formulae (installed on request)
 app
-	.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH; brew leaves --installed-on-request")
+	.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH; brew leaves --installed-on-request --version")
 	.split("\r")
 	.forEach((/** @type {string} */ item) => {
-		const mackupIcon = mackups?.includes(item) ? " " + $.getenv("mackup_icon") : "";
+		let [name, version] = item.split(" ");
+		version = version.split(",")[0];
+		const mackupIcon = mackups?.includes(name) ? " " + $.getenv("mackup_icon") : "";
 		jsonArray.push({
-			title: item + mackupIcon,
-			match: alfredMatcher(item),
-			subtitle: "formula",
-			mods: { cmd: { arg: item } },
-			arg: item,
+			title: name + mackupIcon,
+			match: alfredMatcher(name),
+			subtitle: `formula – ${version}`,
+			mods: { cmd: { arg: name } },
+			arg: name,
 		});
 	});
 
@@ -55,6 +64,7 @@ app
 	.forEach((/** @type {string} */ item) => {
 		const cleanItem = item.replace(/\d+ +([\w ]+?) +\(.*/, "$1").trim();
 		const mackupIcon = mackups?.includes(cleanItem) ? " " + $.getenv("mackup_icon") : "";
+
 		jsonArray.push({
 			title: cleanItem + mackupIcon,
 			match: cleanItem,

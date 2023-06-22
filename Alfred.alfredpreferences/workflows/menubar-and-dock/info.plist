@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>de.chris-grieser.</string>
 	<key>category</key>
-	<string>🖥️</string>
+	<string>❇️</string>
 	<key>connections</key>
 	<dict>
 		<key>0EB9ED7D-4AE6-43BF-A788-F34C046B3732</key>
@@ -49,19 +49,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>22B968D5-63B6-4B37-A640-00613A9D4D1C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -127,19 +114,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E7A73C98-CE10-4B15-A021-493A3947456A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>22B968D5-63B6-4B37-A640-00613A9D4D1C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -429,44 +403,6 @@ zsh "$dock_switcher_path" --save "$1"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>rocket||restart</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>❗Restart Rocket</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E7A73C98-CE10-4B15-A021-493A3947456A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>Rocket</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>22B968D5-63B6-4B37-A640-00613A9D4D1C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -500,15 +436,6 @@ zsh "$dock_switcher_path" --save "$1"</string>
 			<real>220</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>22B968D5-63B6-4B37-A640-00613A9D4D1C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>640</real>
 		</dict>
 		<key>65E1B004-A584-4533-8D40-D1980841CCEF</key>
 		<dict>
@@ -563,15 +490,6 @@ zsh "$dock_switcher_path" --save "$1"</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>420</real>
-		</dict>
-		<key>E7A73C98-CE10-4B15-A021-493A3947456A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>610</real>
 		</dict>
 		<key>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</key>
 		<dict>
