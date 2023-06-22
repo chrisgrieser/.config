@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.atop</string>
+	<key>category</key>
+	<string>Production</string>
 	<key>connections</key>
 	<dict>
 		<key>00B3FDB4-C94D-435D-A255-F5D1B2A6F0AD</key>

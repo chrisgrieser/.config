@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.finder</string>
+	<key>category</key>
+	<string>Personal</string>
 	<key>connections</key>
 	<dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>

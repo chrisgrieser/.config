@@ -3,7 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>categories</key>
-	<array/>
+	<array>
+		<string>Personal</string>
+		<string>Production</string>
+		<string>3rd-Party</string>
+	</array>
 	<key>defaultBundleId</key>
 	<string>de.chris-grieser.</string>
 	<key>defaultCreatedBy</key>

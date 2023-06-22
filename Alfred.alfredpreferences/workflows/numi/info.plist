@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>app.numi.alfred</string>
+	<key>category</key>
+	<string>Personal</string>
 	<key>connections</key>
 	<dict>
 		<key>D9D321B0-C22B-4D49-92C1-D24AD28D4AD6</key>

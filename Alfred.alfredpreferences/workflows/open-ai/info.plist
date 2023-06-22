@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.open-ai</string>
+	<key>category</key>
+	<string>Production</string>
 	<key>connections</key>
 	<dict>
 		<key>0FD32B7B-CE8C-4871-A07E-564BB91F0477</key>
