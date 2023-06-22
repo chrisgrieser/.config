@@ -20,19 +20,7 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>5043B89E-B8D1-4515-ACDA-70F5B4D009FA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
-		<key>5043B89E-B8D1-4515-ACDA-70F5B4D009FA</key>
-		<array/>
 		<key>548C7E00-D279-4BFE-B4CB-4F94C970637F</key>
 		<array>
 			<dict>
@@ -324,27 +312,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{var:url}</string>
-				<key>title</key>
-				<string>⏳ Starting download...</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>5043B89E-B8D1-4515-ACDA-70F5B4D009FA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>availableviaurlhandler</key>
 				<false/>
 				<key>triggerid</key>
@@ -556,18 +523,9 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>780</real>
+			<real>675</real>
 			<key>ypos</key>
-			<real>410</real>
-		</dict>
-		<key>5043B89E-B8D1-4515-ACDA-70F5B4D009FA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>410</real>
-			<key>ypos</key>
-			<real>165</real>
+			<real>435</real>
 		</dict>
 		<key>548C7E00-D279-4BFE-B4CB-4F94C970637F</key>
 		<dict>
@@ -594,9 +552,9 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>720</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>60</real>
+			<real>55</real>
 		</dict>
 		<key>77FF34ED-C1A2-4866-B205-06B792B3975B</key>
 		<dict>
@@ -605,9 +563,9 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>note</key>
 			<string>save bookmark with image</string>
 			<key>xpos</key>
-			<real>635</real>
+			<real>530</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>435</real>
 		</dict>
 		<key>7EC8C18F-E353-4A93-9F40-FDB4C9531D57</key>
 		<dict>
@@ -623,7 +581,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>850</real>
+			<real>790</real>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>
@@ -650,7 +608,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>480</real>
+			<real>355</real>
 			<key>ypos</key>
 			<real>365</real>
 		</dict>
@@ -659,7 +617,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>555</real>
+			<real>540</real>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
@@ -668,16 +626,16 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>635</real>
+			<real>530</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>290</real>
 		</dict>
 		<key>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>385</real>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
