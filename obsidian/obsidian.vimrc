@@ -262,8 +262,8 @@ vmap am aW
 vmap im iW
 vmap aq a"
 vmap iq i"
-vmap az a'
-vmap iz i'
+vmap ay a'
+vmap iy i'
 vmap ae a`
 vmap ie i`
 vmap ir i[
