@@ -165,8 +165,9 @@ end
 
 ---@param commitMsg string
 local function shimmeringFocusBuild(commitMsg)
+	-- accessing build file directly, since passing arguments (the commit msg)
+	-- via makefile is unnecessarily cumbersome
 	local buildscriptLocation = vim.env.LOCAL_REPOS .. "/shimmering-focus/build.sh"
-
 	vim.notify('󰊢 Building theme…\n"' .. commitMsg .. '"')
 	output = {}
 	local command = string.format("zsh '%s' '%s'", buildscriptLocation, commitMsg)

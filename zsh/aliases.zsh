@@ -8,6 +8,13 @@ alias ...="z ../.."
 alias ....="z ../../.."
 alias .....="z ../../../.."
 
+# MAKE 
+# runs makefile located in git root, not of the subdirectory
+function make() {
+	# shellcheck disable=2086
+	(cd "$(git rev-parse --show-toplevel)" && command make $1)
+}
+
 # utils
 alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias q='exit'

@@ -1,6 +1,6 @@
 matches:
-  - trigger: "..."
-    replace: "…"
+  - trigger: "... " # space needed to avoid conflict with moving up a directory
+    replace: "… "
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!web"
     replace: https://chris-grieser.de/
