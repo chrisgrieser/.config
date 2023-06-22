@@ -222,6 +222,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5C6380EF-E35A-4951-ADF5-C995040DBE27</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D4F0274E-F79C-43A1-9C38-65C92510EEF2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>64E22B39-2269-4B91-832E-9ACC83DF0D4A</key>
 		<array>
 			<dict>
@@ -317,6 +330,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B9B78B61-7C88-4603-A426-26DD49000D41</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5C6380EF-E35A-4951-ADF5-C995040DBE27</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1192,12 +1218,32 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>filetypes</key>
 				<array/>
 				<key>name</key>
-				<string>Show Commits with File</string>
+				<string>Commits with File</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>B9B78B61-7C88-4603-A426-26DD49000D41</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>filepath</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>5C6380EF-E35A-4951-ADF5-C995040DBE27</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1449,6 +1495,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
+		<key>5C6380EF-E35A-4951-ADF5-C995040DBE27</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>1075</real>
+		</dict>
 		<key>64E22B39-2269-4B91-832E-9ACC83DF0D4A</key>
 		<dict>
 			<key>colorindex</key>
@@ -1537,7 +1592,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<key>B9B78B61-7C88-4603-A426-26DD49000D41</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
