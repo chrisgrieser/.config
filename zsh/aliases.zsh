@@ -10,8 +10,13 @@ alias .....="z ../../../.."
 
 # MAKE 
 # if there is no makefile in current dir, runs makefile located in git root
+# also, add a pseudo-flag `--list|-l` which lists all recipes
 function make() {
-	if [[ -f "Makefile" || -f "makefile" ]]; then
+	if [[ "$1" == "--list" || "$1" == "-l" ]] && [[ -f "Makefile" || -f "makefile" ]]; then
+		grep '^[^#[:space:]].*' ./?akefile | tr -d ":" | grep -v ".PHONY"
+	elif [[ "$1" == "--list" || "$1" == "-l" ]]; then
+		(cd "$(git rev-parse --show-toplevel)" && grep '^[^#[:space:]].*' ./?akefile | tr -d ":" | grep -v ".PHONY")
+	elif [[ -f "Makefile" || -f "makefile" ]]; then
 		command make --silent "$@"
 	else
 		(cd "$(git rev-parse --show-toplevel)" && command make --silent "$@")
