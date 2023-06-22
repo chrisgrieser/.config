@@ -28,9 +28,10 @@ require("lua.auto-quitter")
 require("lua.hardware-periphery")
 
 -- app-specific
-require("lua.hide-cursor-in-browser")
 require("lua.app-specific-behavior")
+require("lua.browser")
 require("lua.twitter")
+require("lua.neovim")
 require("lua.sidenotes")
 
 -- reload function (should come last)
