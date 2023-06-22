@@ -24,8 +24,9 @@ return {
 				char = { enabled = false }, -- don't modify FfTt motions
 				search = {
 					highlight = { label = { current = false } },
-					-- require <Space> before hints are active to prevent unintended jumps
-					search = { trigger = " " },  
+					-- require "." before hints are active to prevent unintended jumps
+					-- using "." ensures the match isn't moved which also changes hints
+					search = { trigger = "." },
 				},
 			},
 		},
