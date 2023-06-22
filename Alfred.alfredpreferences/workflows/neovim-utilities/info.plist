@@ -747,7 +747,7 @@ Search neovim plugins and online :help via Alfred</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>killall neovide nvim</string>
+				<string>killall neovide nvim osascript</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
