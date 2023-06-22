@@ -17,7 +17,6 @@ return {
 	},
 	{ -- only used for the improved search
 		"folke/flash.nvim",
-		enabled = false,
 		event = "VeryLazy",
 		opts = {
 			search = { multi_window = false }, -- FIX completion popup also getting hints
