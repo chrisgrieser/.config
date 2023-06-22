@@ -297,28 +297,6 @@ function nuke {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# runs a release scripts placed at the git root
-function rel() {
-	# shellcheck disable=SC2164
-	if [[ -f .release.sh ]]; then
-		zsh .release.sh "$*"
-	elif [[ -f ../.release.sh ]]; then
-		zsh ../.release.sh "$*"
-	elif [[ -f ../../.release.sh ]]; then
-		zsh ../../.release.sh "$*"
-	elif [[ -f release.sh ]]; then
-		zsh release.sh "$*"
-	elif [[ -f ../release.sh ]]; then
-		zsh ../release.sh "$*"
-	elif [[ -f ../../release.sh ]]; then
-		zsh ../../release.sh "$*"
-	else
-		print "\033[1;31mNo 'release.sh' found.\033[0m"
-	fi
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # search for [g]it [d]eleted [f]ile
 function gdf() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi

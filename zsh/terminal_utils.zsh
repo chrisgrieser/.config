@@ -83,10 +83,7 @@ function separator() {
 # - after entering new folder, inspect it (exa, git log, git status, etc.)
 function z() {
 	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
-
-	local query="$1"
-	[[ -f "$query" ]] && query="$(dirname "$1")"
-	__zoxide_z "$query"
+	__zoxide_z "$1"
 	inspect
 }
 
