@@ -263,20 +263,12 @@ local ftWithSkeletons = vim.split(filetypeList, "\n", {})
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
 	local readCmd = "keepalt 0r " .. skeletonDir .. "/skeleton." .. ft
-	local pattern = ft == "make" and "?akefile" or "*." .. ft
-
-	autocmd("BufNewFile", {
-		pattern = pattern,
-		callback = function()
-			cmd(readCmd)
-			u.normal("G")
-		end,
-	})
+	local pattern = ft == "make" and "Makefile" or "*." .. ft
 
 	-- BufReadPost + empty file as additional condition to also auto-insert
 	-- skeletons when empty files were created by other apps
-	autocmd("BufReadPost", {
-		pattern = "*." .. ft,
+	autocmd({"BufNewFile", "BufReadPost"}, {
+		pattern = pattern,
 		callback = function()
 			local fileIsEmpty = fn.getfsize(expand("%")) < 4 -- to account for linebreak weirdness
 			if not fileIsEmpty then return end

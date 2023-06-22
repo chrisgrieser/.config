@@ -9,10 +9,13 @@ alias ....="z ../../.."
 alias .....="z ../../../.."
 
 # MAKE 
-# runs makefile located in git root, not of the subdirectory
+# if there is no makefile in current dir, runs makefile located in git root
 function make() {
-	# shellcheck disable=2086
-	(cd "$(git rev-parse --show-toplevel)" && command make $1)
+	if [[ -f "Makefile" || -f "makefile" ]]; then
+		command make --silent "$@"
+	else
+		(cd "$(git rev-parse --show-toplevel)" && command make --silent "$@")
+	fi
 }
 
 # utils
@@ -58,7 +61,7 @@ alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 
 # SUFFIX Alias
 alias -s {yml,yaml}=yq
-alias -s json='yq --prettyPrint --output-format=json --colors '
+alias -s json='yq --prettyPrint --output-format=json'
 alias -s {gif,png,jpg,jpeg,webp}='qlmanage -p'
 alias -s {md,lua,js,ts,css,sh,zsh,applescript}=bat
 
