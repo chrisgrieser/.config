@@ -20,7 +20,7 @@ declare class AlfredItem {
 	valid?: boolean;
 	type?: "default" | "file" | "file:skipcheck";
 	match?: string;
-	uuid?: string;
+	uid?: string;
 	autocomplete?: string;
 	quicklookurl?: string;
 	variables?: Object;
