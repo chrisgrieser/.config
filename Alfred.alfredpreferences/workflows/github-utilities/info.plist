@@ -1502,7 +1502,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>1075</real>
+			<real>1095</real>
 		</dict>
 		<key>64E22B39-2269-4B91-832E-9ACC83DF0D4A</key>
 		<dict>

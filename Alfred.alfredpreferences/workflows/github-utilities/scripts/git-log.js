@@ -28,11 +28,17 @@ const noDisplayAuthors = $.getenv("no_display_authors")
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
+function run() {
 	// determine repo
 	const defaultRepo = $.getenv("default_repo").replace(/^~/, app.pathTo("home folder"));
-	const fileActionUsed = argv.length > 0;
-	const folderPath = fileActionUsed ? argv[0].replace(/(.*\/).*/, "$1") : finderFrontWindow() || defaultRepo;
+	let fileActionUsed, folderPath;
+	try {
+		folderPath = $.getenv("filepath").replace(/(.*\/).*/, "$1");
+		fileActionUsed = true;
+	} catch (_error) {
+		fileActionUsed = false;
+		folderPath = finderFrontWindow() || defaultRepo;
+	}
 
 	// validate it's in a git repo
 	try {
@@ -54,9 +60,13 @@ function run(argv) {
 			branchCommitPairs[hash] = branch;
 		});
 
+	// https://stackoverflow.com/questions/3701404/how-to-list-all-commits-that-changed-a-specific-file
+	const fileCommits = fileActionUsed ? ` --follow -- '${$.getenv("filepath")}'` : "";
+	const gitLogCommand = `git log --all --format="%h;;%D;;%cr;;%an;;%s" ${fileCommits}`;
+
 	/** @type AlfredItem[] */
 	const commitArr = app
-		.doShellScript(`cd "${folderPath}" && git log --all --format="%h;;%D;;%cr;;%an;;%s"`)
+		.doShellScript(`cd "${folderPath}" && ${gitLogCommand}`)
 		.split("\r")
 		.map((commit) => {
 			const parts = commit.split(";;");
@@ -85,7 +95,7 @@ function run(argv) {
 					},
 					alt: {
 						arg: hash,
-						subtitle: `⌥: Copy Hash – ${hash}`,
+						subtitle: `⌥: Copy Hash    ${hash}`,
 					},
 				},
 			};
