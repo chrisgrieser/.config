@@ -26,6 +26,7 @@ require("lua.filesystem-watchers")
 require("lua.repo-auto-sync")
 require("lua.auto-quitter")
 require("lua.hardware-periphery")
+require("lua.pageup-pagedown")
 
 -- app-specific
 require("lua.app-specific-behavior")

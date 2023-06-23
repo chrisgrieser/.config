@@ -68,14 +68,22 @@ local function selectionCount()
 end
 
 local function searchCounter()
-	if fn.mode() ~= "n" or vim.v.hlsearch == 0 then return "" end
-	local total = fn.searchcount().total
-	local current = fn.searchcount().current
-	local searchTerm = fn.getreg("/")
-	local isStarSearch = searchTerm:find([[^\<.*\>$]])
-	if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
-	if total == 0 then return " 0 " .. searchTerm end
-	return (" %s/%s %s"):format(current, total, searchTerm)
+	if vim.v.hlsearch == 0 then return "" end
+	if fn.mode() == "n" then
+		local total = fn.searchcount().total
+		local current = fn.searchcount().current
+		local searchTerm = fn.getreg("/")
+		local isStarSearch = searchTerm:find([[^\<.*\>$]])
+		if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
+		if total == 0 then return " 0 " .. searchTerm end
+		return (" %s/%s %s"):format(current, total, searchTerm)
+	elseif fn.mode() == "c" and fn.getcmdtype():find("[/?]") then
+		local searchTerm = vim.fn.getcmdline()
+		if searchTerm == "" then return "" end
+		local buffer = vim.api.nvim_buf_get_lines(0, 0, -1, true)
+		local count = fn.search(searchTerm, "nw")
+		return (" %s"):format(tostring(count))
+	end
 end
 
 local function visualMultiCursorCount()
@@ -184,6 +192,7 @@ local lualineConfig = {
 				section_separators = emptySeparators,
 				cond = function() return fn.tabpagenr("$") > 1 end,
 			},
+			{ searchCounter },
 		},
 		lualine_b = {
 			{
