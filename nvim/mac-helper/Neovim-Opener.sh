@@ -21,5 +21,5 @@ else
 	[[ -n "$LINE" ]] && LINE="+$LINE"
 
 	# LINE must be unquoted to prevent opening empty file
-	neovide --geometry=104x33 --notabs --frame="buttonless" $LINE "$@"
+	neovide --geometry=104x33 $LINE "$@"
 fi

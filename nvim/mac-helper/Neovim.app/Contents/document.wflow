@@ -82,7 +82,7 @@ else
 	[[ -n "$LINE" ]] &amp;&amp; LINE="+$LINE"
 
 	# LINE must be unquoted to prevent opening empty file
-	neovide --geometry=104x33 --notabs --frame="buttonless" $LINE "$@"
+	neovide --geometry=104x33 $LINE "$@"
 fi
 </string>
 					<key>CheckedForUserDefaultShell</key>
@@ -197,7 +197,7 @@ fi
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>309.000000:252.000000</string>
+				<string>251.500000:252.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>

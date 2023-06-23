@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-# ensure Stats.app is running
+#───────────────────────────────────────────────────────────────────────────────
+# ENSURE STATS.APP IS RUNNING
+
 i=0
 while ! pgrep -xq "Stats"; do
 	open -a "Stats"
@@ -25,6 +27,7 @@ while true; do
 done
 
 #───────────────────────────────────────────────────────────────────────────────
+# CONFIG VALUES
 
 PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
@@ -46,6 +49,7 @@ stats_width=250
 scutil --get ComputerName | grep -q "Mother" && stats_width=225
 
 #───────────────────────────────────────────────────────────────────────────────
+# SKETCHYBAR CALL
 
 # one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
 sketchybar \
@@ -95,10 +99,8 @@ sketchybar \
 	\
 	--update
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # INFO
 # - `--update` needs to run at the end of config and should not be run in an item script
 # - `repo-files-update` gets triggered via Hammerspoon after sync events
-# - clock and alias items needs the fixed-width to fix whitespace of the item next (stats)
+# - clock and alias items needs the fixed-width to fix whitespace of the item next (Stats)
 # - not using builtin clock, to be able to customize font etc.

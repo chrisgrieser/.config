@@ -56,15 +56,15 @@
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>22E241</string>
+	<string>14E6097d</string>
 	<key>DTPlatformName</key>
 	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>13.3</string>
+	<string>13.4</string>
 	<key>DTSDKBuild</key>
-	<string>22E241</string>
+	<string>22F47</string>
 	<key>DTSDKName</key>
-	<string>macosx13.3.internal</string>
+	<string>macosx13.4.internal</string>
 	<key>DTXcode</key>
 	<string>1430</string>
 	<key>DTXcodeBuild</key>
