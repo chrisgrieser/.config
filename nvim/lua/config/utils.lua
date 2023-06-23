@@ -63,6 +63,18 @@ function M.getHighlightValue(name, key)
 	return string.format("#%06x", value)
 end
 
+
+---reads a template to apply if the file is empty
+---@param ft string filetype of the entry
+function M.applyTemplateIfEmptyFile(ft)
+	local fileIsEmpty = vim.fn.getfsize(vim.fn.expand("%")) < 4 -- account for linebreaks
+	if not fileIsEmpty then return end
+
+	local skeletonDir = vim.fn.stdpath("config") .. "/templates"
+	vim.cmd("keepalt 0read " .. skeletonDir .. "/skeleton." .. ft)
+	M.normal("G")
+end
+
 --------------------------------------------------------------------------------
 
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.

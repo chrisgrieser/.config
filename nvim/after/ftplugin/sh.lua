@@ -3,6 +3,8 @@ local expand = vim.fn.expand
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+u.applyTemplateIfEmptyFile("zsh")
+
 -- hover -> man page
 keymap("n", "<leader>h", function()
 	return "<cmd>tab Man " .. expand("<cword>") .. "<CR>"
@@ -26,3 +28,4 @@ keymap("n", "<leader>r", function()
 		vim.notify("Not in a sketchybar directory.", u.warn)
 	end
 end, { buffer = true, desc = " Run Shell Script" })
+
