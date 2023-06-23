@@ -88,7 +88,7 @@ local function searchCounter()
 
 		-- using `fn.count()` instead of `string.find` since `/` uses vimscript
 		local count = fn.count(buffer, searchTerm, ignoreCase)
-		return (" %s %s"):format(count, searchTerm)
+		return (" %s"):format(count)
 	end
 end
 
@@ -205,10 +205,6 @@ local lualineConfig = {
 				max_length = vim.o.columns * 0.7,
 				section_separators = emptySeparators,
 				cond = function() return fn.tabpagenr("$") > 1 end,
-			},
-			{
-				searchCounter,
-				cond = function() return fn.mode() == "c" and vim.opt.cmdheight:get() == 0 end,
 			},
 		},
 		lualine_b = {

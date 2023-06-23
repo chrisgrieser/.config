@@ -67,10 +67,7 @@ autocmd({ "CmdlineLeave", "VimEnter" }, {
 	callback = function() opt.pumheight = 15 end,
 })
 autocmd("CmdlineEnter", {
-	callback = function()
-		local isSearch = fn.getcmdtype():find("[/?]")
-		opt.pumheight = isSearch and 5 or 8
-	end,
+	callback = function() opt.pumheight = 8 end,
 })
 
 -- Spelling
@@ -103,11 +100,21 @@ autocmd({ "VimEnter", "VimResized" }, { -- the "WinResized" autocmd event does n
 
 -- status bar & cmdline
 opt.history = 300 -- reduce noise for command history search
-opt.cmdheight = 0
 opt.shortmess:append("s") -- reduce info in :messages
 opt.shortmess:append("S")
 opt.shortmess:append("A") -- no swap file alerts
 opt.report = 9999 -- disable "x more/fewer lines" messages
+
+-- cmdheight=0 only when not searching (so search count is stays visible)
+autocmd("CmdlineEnter", {
+	callback = function()
+		if not fn.getcmdtype():find("[/?]") then return end
+		opt.cmdheight = 1
+	end,
+})
+autocmd({ "VimEnter", "CmdlineLeave" }, {
+	callback = function() opt.cmdheight = 0 end,
+})
 
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
@@ -254,7 +261,7 @@ autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 -- Skeletons (Templates)
--- apply templates for any filetype named `./templates/skeleton.{ft}`
+-- auto-apply templates for any filetype named `./templates/skeleton.{ft}`
 local skeletonDir = fn.stdpath("config") .. "/templates"
 local filetypeList =
 	fn.system(([[ls "%s/skeleton."* | xargs basename | cut -d. -f2]]):format(skeletonDir))
@@ -267,7 +274,7 @@ for _, ft in pairs(ftWithSkeletons) do
 
 	-- BufReadPost + empty file as additional condition to also auto-insert
 	-- skeletons when empty files were created by other apps
-	autocmd({"BufNewFile", "BufReadPost"}, {
+	autocmd({ "BufNewFile", "BufReadPost" }, {
 		pattern = pattern,
 		callback = function()
 			local fileIsEmpty = fn.getfsize(expand("%")) < 4 -- to account for linebreak weirdness
