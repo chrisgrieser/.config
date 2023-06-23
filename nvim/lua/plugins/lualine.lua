@@ -80,11 +80,25 @@ local function searchCounter()
 	elseif fn.mode() == "c" and fn.getcmdtype():find("[/?]") then
 		local searchTerm = vim.fn.getcmdline()
 		if searchTerm == "" then return "" end
-		local buffer = vim.api.nvim_buf_get_lines(0, 0, -1, true)
-		local count = fn.search(searchTerm, "nw")
-		return (" %s"):format(tostring(count))
+		local buffer = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, true), "\n")
+
+		-- determine case-sensitive from user's vim settings
+		local ignoreCase = vim.opt.smartcase:get() and (searchTerm:find("%u") == nil)
+			or vim.opt.ignorecase:get()
+
+		-- using `fn.count()` instead of `string.find` since `/` uses vimscript
+		local count = fn.count(buffer, searchTerm, ignoreCase)
+		return (" %s %s"):format(count, searchTerm)
 	end
 end
+
+-- force refreshing for search count, since lualine otherwise lags behind
+vim.api.nvim_create_autocmd("CmdlineChanged", {
+	callback = function()
+		if not fn.getcmdtype():find("[/?]") then return end
+		require("lualine").refresh()
+	end,
+})
 
 local function visualMultiCursorCount()
 	---@diagnostic disable: undefined-field -- defined by visual multi plugin
@@ -192,7 +206,10 @@ local lualineConfig = {
 				section_separators = emptySeparators,
 				cond = function() return fn.tabpagenr("$") > 1 end,
 			},
-			{ searchCounter },
+			{
+				searchCounter,
+				cond = function() return fn.mode() == "c" and vim.opt.cmdheight:get() == 0 end,
+			},
 		},
 		lualine_b = {
 			{
