@@ -62,7 +62,6 @@ Wf_ObsidanMoved = u.wf.new("Obsidian"):subscribe(u.wf.windowMoved, function(obsi
 	u.openLinkInBg("obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29")
 end)
 
-
 --------------------------------------------------------------------------------
 -- FINDER
 
@@ -86,7 +85,9 @@ Wf_finder = wf.new("Finder")
 -- trigger window filters
 FinderAppWatcher = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
-		wu.autoTile("Finder")
+		-- delay to prioritize window creation triggered auto-tiling since it's
+		-- more reliably picking up the correct number of windows
+		u.runWithDelays(0.1, function() wu.autoTile("Finder") end)
 		finder:selectMenuItem { "View", "Hide Sidebar" }
 	end
 end):start()
