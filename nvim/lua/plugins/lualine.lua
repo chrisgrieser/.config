@@ -234,9 +234,9 @@ local lualineConfig = {
 				section_separators = topSeparators,
 			},
 		},
-		lualine_y = {},
 		-- INFO dap and recording status defined in the respective plugin configs
 		-- for lualine_y and lualine_z for their lazy loading
+		lualine_y = {},
 	},
 	sections = {
 		lualine_a = {
@@ -305,10 +305,6 @@ local lualineConfig = {
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,
-	},
-	extensions = {
-		"man",
-		"nvim-dap-ui",
 	},
 }
 
