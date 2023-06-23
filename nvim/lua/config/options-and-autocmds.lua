@@ -58,18 +58,6 @@ opt.matchtime = 1 -- deci-seconds (higher amount feels laggy)
 -- Clipboard
 opt.clipboard = "unnamedplus"
 
--- Popups / Floating Windows
-opt.pumwidth = 15 -- min width popup menu
-
--- height of complemtion suggestion window depending on type of search
--- editor 15	/ 5	: 8
-autocmd({ "CmdlineLeave", "VimEnter" }, {
-	callback = function() opt.pumheight = 15 end,
-})
-autocmd("CmdlineEnter", {
-	callback = function() opt.pumheight = 8 end,
-})
-
 -- Spelling
 opt.spell = false -- off, since using vale & ltex for the lsp-integration
 opt.spelllang = "en_us" -- still used for `z=` and `1z=`
@@ -105,17 +93,6 @@ opt.shortmess:append("S")
 opt.shortmess:append("A") -- no swap file alerts
 opt.report = 9999 -- disable "x more/fewer lines" messages
 
--- cmdheight=0 only when not searching (so search count is stays visible)
-autocmd("CmdlineEnter", {
-	callback = function()
-		if not fn.getcmdtype():find("[/?]") then return end
-		opt.cmdheight = 1
-	end,
-})
-autocmd({ "VimEnter", "CmdlineLeave" }, {
-	callback = function() opt.cmdheight = 0 end,
-})
-
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
 opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
@@ -124,6 +101,26 @@ opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use the
 -- Timeouts
 opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
+
+--------------------------------------------------------------------------------
+
+-- Popups & Cmdline
+autocmd({ "CmdlineLeave", "VimEnter" }, {
+	callback = function()
+		opt.pumheight = 15
+		opt.pumwidth = 15 -- min width popup menu
+		opt.cmdheight = 0
+	end,
+})
+
+-- do not obfuscate the buffer and the search count in the lualine when searching
+autocmd("CmdlineEnter", {
+	callback = function()
+		opt.pumheight = 8
+		opt.pumwidth = 9
+		if fn.getcmdtype():find("[/?]") then opt.cmdheight = 1 end
+	end,
+})
 
 --------------------------------------------------------------------------------
 
@@ -258,30 +255,3 @@ autocmd("FileType", {
 	end,
 })
 
---------------------------------------------------------------------------------
-
--- Skeletons (Templates)
--- auto-apply templates for any filetype named `./templates/skeleton.{ft}`
-local skeletonDir = fn.stdpath("config") .. "/templates"
-local filetypeList =
-	fn.system(([[ls "%s/skeleton."* | xargs basename | cut -d. -f2]]):format(skeletonDir))
-local ftWithSkeletons = vim.split(filetypeList, "\n", {})
-
-for _, ft in pairs(ftWithSkeletons) do
-	if ft == "" then break end
-	local readCmd = "keepalt 0read " .. skeletonDir .. "/skeleton." .. ft
-	local pattern = ft == "make" and "Makefile" or "*." .. ft
-
-	-- BufReadPost + empty file as additional condition to also auto-insert
-	-- skeletons when empty files were created by other apps
-	autocmd({ "BufNewFile", "BufReadPost" }, {
-		pattern = pattern,
-		callback = function()
-			local fileIsEmpty = fn.getfsize(expand("%")) < 4 -- to account for linebreak weirdness
-			if not fileIsEmpty then return end
-
-			cmd(readCmd)
-			u.normal("G")
-		end,
-	})
-end

@@ -84,7 +84,7 @@ local function searchCounter()
 	-- during the search in the cmdline
 	elseif fn.mode() == "c" and fn.getcmdtype():find("[/?]") then
 		-- for correct count, requires autocmd below refreshing lualine on CmdlineChanged
-		local searchTerm = vim.fn.getcmdline()
+		local searchTerm = vim.fn.getcmdline() 
 		if searchTerm == "" then return "" end
 
 		local buffer = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, true), "\n")
@@ -124,8 +124,7 @@ local function clock()
 
 	local time = tostring(os.date()):sub(12, 16)
 	if os.time() % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
-	local trafficLightSpacing = vim.fn.has("gui_running") == 1 and "    " or ""
-	return trafficLightSpacing .. time
+	return time
 end
 
 --------------------------------------------------------------------------------
@@ -203,12 +202,6 @@ local bottomSeparators = { left = "", right = "" }
 local topSeparators = { left = "", right = "" }
 local emptySeparators = { left = "", right = "" }
 
--- dummy to create spacing for the macOS traffic lights
-local function trafficLightSpacing()
-	local spacing = vim.fn.has("gui_running") == 1 and "   " or ""
-	return spacing
-end
-
 local lualineConfig = {
 	-- INFO using the tabline will override vim's default tabline, so the tabline
 	-- should always include the tab element
@@ -224,7 +217,6 @@ local lualineConfig = {
 			},
 		},
 		lualine_b = {
-			{ trafficLightSpacing },
 			{
 				pathToProjectRoot,
 				section_separators = { left = " ", right = " " },
