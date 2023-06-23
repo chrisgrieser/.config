@@ -80,7 +80,7 @@ function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
 	return out;
 }
 
-/** REQUIRED JSON signature of annotations expected by this file
+/** JSON signature of annotations expected by this script
  * @typedef {Object} Annotation
  * @property {"Highlight"|"Underline"|"Free Comment"|"Image"|"Heading"|"Question Callout"|"remove"} type – of the annotation
  * @property {number} page - page number where the annotation is located
@@ -120,7 +120,7 @@ function insertPageNumber(annotations, pageNo) {
 	});
 }
 
-/** code: "\_" or type "Underline" -> split off and send to SideNotes.app
+/** code: "_" or type "Underline" -> split off and send to SideNotes.app
  * @param {Annotation[]} annotations
  * @param {string} citekey
  */
@@ -297,9 +297,7 @@ function transformTag4yaml(annotations, keywords) {
 	let tagsForYaml = "";
 
 	// existing tags (from BibTeX library)
-	if (keywords) {
-		keywords.split(",").forEach((tag) => newKeywords.push(tag));
-	}
+	if (keywords) keywords.split(",").forEach((tag) => newKeywords.push(tag));
 
 	// additional tags (from annotations)
 	const arr = annotations.map((a) => {
@@ -395,12 +393,13 @@ function extractMetadata(citekey, rawEntry) {
 		do {
 			response = app.displayDialog("BibTeX Entry has no page numbers.\n\nEnter true page number of FIRST pdf page:", {
 				defaultAnswer: "",
-				buttons: ["OK"],
+				buttons: ["OK", "Cancel"],
 				defaultButton: "OK",
 			});
+			if (response.buttonReturned === "Cancel") return;
 			validInput = response.textReturned.match(/^-?\d+$/);
 		} while (!validInput);
-		data.firstPage = parseInt(response.textReturned);
+		data.firstPage = parseInt(response.textReturned) + 1;
 	}
 
 	return data;
@@ -423,7 +422,7 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 		})
 		.join(", ");
 	// multi-item brackets only when there is more than one author
-	if (authorStr.includes(",")) authorStr = `[${authorStr}]` 
+	if (authorStr.includes(",")) authorStr = `[${authorStr}]`;
 
 	// yaml frontmatter
 	const yamlKeys = [
@@ -447,6 +446,7 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 	const noteContent = `---
 ${yamlKeys.join("\n")}
 ---
+
 ${annos}
 `;
 
@@ -477,12 +477,10 @@ ${annos}
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: AlfredRun
 function run(argv) {
-	const citekey = argv[0];
-	const rawAnnotations = argv[1];
-	const entry = argv[2];
-	const outPath = argv[3];
+	const [citekey, rawAnnotations, entry, outPath, _] = argv;
 	const usePdfannots = argv[4] === "pdfannots";
 	const metadata = extractMetadata(citekey, entry);
+	if (!metadata) return; // cancellation of the page-number-dialog by the user
 
 	// process input
 	let annos = JSON.parse(rawAnnotations);
@@ -494,13 +492,13 @@ function run(argv) {
 	annos = mergeQuotes(annos);
 	annos = transformHeadings(annos);
 	annos = questionCallout(annos);
-	const extract = transformTag4yaml(annos, metadata.keywords);
-	annos = extract.filteredArray;
+	const { filteredArray, tagsForYaml } = transformTag4yaml(annos, metadata.keywords);
+	annos = filteredArray;
 
 	// finish up
 	if (!usePdfannots) annos = insertImage4pdfannots2json(annos, citekey);
 	annos = splitOffUnderlines(annos, citekey);
 	annos = jsonToMd(annos, citekey);
 
-	writeNote(annos, metadata, outPath, extract.tagsForYaml);
+	writeNote(annos, metadata, outPath, tagsForYaml);
 }
