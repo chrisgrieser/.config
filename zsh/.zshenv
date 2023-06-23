@@ -40,4 +40,5 @@ export GITHUB_TOKEN
 # so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 
-export NEOVIDE_FRAME="none"
+export NEOVIDE_FRAME="transparent"
+export NEOVIDE_IDLE=1
