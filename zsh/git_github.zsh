@@ -77,7 +77,7 @@ function gitlog() {
 		sed -E 's/ days ago\)/d)/' |
 		sed -E 's/ weeks ago\)/w)/' |
 		sed -E 's/ months ago\)/m)/' |
-		sed -e 's/origin\//󰅡 /g' |
+		sed -e 's/origin\//󰞶 /g' |
 		sed -e 's/HEAD/󱍀/g' |
 		sed -e 's/->/⇢/g' |
 		sed -e 's/grafted/ /' |
