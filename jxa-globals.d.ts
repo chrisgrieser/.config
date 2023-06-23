@@ -16,11 +16,23 @@ declare const Application: {
 		pathTo(what: "home folder"): string;
 		read(path: string): string;
 		setTheClipboardTo(str: string): void;
+		displayNotification(
+			textToShow: string,
+			options: { withTitle: string; subtitle: string; }
+		): void;
 		displayDialog(
 			textToShow: string,
-			options: { defaultAnswer: string; buttons: string[]; defaultButton: string },
-		): { textReturned: string };
-		displayNotification(textToShow: string, options: { withTitle: string; subtitle: string }): void;
+			options: {
+				defaultAnswer: string;
+				buttons: string[];
+				defaultButton: string;
+				withIcon?: string;
+				gaveUp?: boolean;
+			},
+		): {
+			textReturned: string;
+			buttonReturned: string;
+		};
 	};
 	(appname: string): {
 		includeStandardAdditions: boolean;
@@ -42,7 +54,7 @@ declare const Application: {
 		// APP-SPECIFIC
 		exists(path: string): boolean; // Finder
 		finderWindows: {
-			target: { url: () => string; }
+			target: { url: () => string };
 		};
 		createNote(options: { text: string; path?: string }): void; // SideNotes
 		documents: { url(): string; name(): string }[]; // webkit browsers

@@ -18,8 +18,6 @@ const baseURL = "https://github.com";
 
 const ahrefRegex = /.*?href="(.*?)">(.*?)<.*/i;
 
-const bla = category ? 2 : 4;
-
 const workArray = app
 	.doShellScript(`curl -sL "${wikiURL}"`)
 	.split("\r")
