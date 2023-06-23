@@ -117,8 +117,7 @@ end)
 HighlightsAppWatcher = aw.new(function(appName, eventType, highlights)
 	if not (eventType == aw.launched and appName == "Highlights") then return end
 
-	local targetView = "Default"
-	if u.isDarkMode() then targetView = "Night" end
+	local targetView = u.isDarkMode() and "Night" or "Default"
 	highlights:selectMenuItem { "View", "PDF Appearance", targetView }
 
 	-- pre-select yellow highlight tool & hide toolbar
