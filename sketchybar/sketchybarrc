@@ -95,9 +95,6 @@ sketchybar \
 	\
 	--update
 
-# FIX reload to ensure weather is reloaded properly
-sleep 5 && sketchybar --update
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # INFO
