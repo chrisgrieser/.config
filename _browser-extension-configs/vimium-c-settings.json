@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "18/06/2023, 09:34:35",
-	"time": 1687073675163,
+	"@time": "23/06/2023, 12:08:33",
+	"time": 1687514913973,
 	"environment": {
 		"extension": "1.99.992",
 		"platform": "mac",
@@ -83,6 +83,7 @@
 		"map b LinkHints.activateOpenInNewTab",
 		"map yf LinkHints.activateCopyLinkUrl",
 		"map yi LinkHints.activateCopyImage",
+		"map yd LinkHints.activateDownloadImage",
 		"map yh LinkHints.activateHover showURL",
 		"",
 		"\" Tabs",
@@ -106,8 +107,6 @@
 		"map s copyCurrentUrl $then=\"w\" $else=\"w\"",
 		"",
 		"map t Vomnibar.activateTabSelection",
-		"\" duplicate and immediately goes back to prevent auto-closing through \"Unique Tabs\" extension",
-		"map yt duplicateTab  $then=\"h\" $else=\"h\"",
 		"",
 		"\" windows",
 		"map <c-w>v moveTabToNewWindow",

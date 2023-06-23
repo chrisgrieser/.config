@@ -13,7 +13,7 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 // using `fd` over `find` for speed and gitignoring
-/** @param {string[]} argv */
+/** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: <explanation>
 function run(argv) {
 	const dotfileFolder = argv[0];
@@ -24,6 +24,7 @@ function run(argv) {
 		.split("\r")
 		.map((/** @type {string} */ file) => file.replace(/^[ MD?]* /i, ""));
 
+	/** @type{AlfredItem[]} */
 	const fileArray = app
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
@@ -46,10 +47,11 @@ function run(argv) {
 			// type determiniation
 			let type = "";
 			if (name.startsWith(".z")) type = "sh";
+			else if (name === "Makefile" || name === "makefile") type = "make";
 			else if (name.startsWith(".")) type = "config";
 			else if (!name.includes(".")) type = "blank";
 			else if (name === "obsidian.vimrc") type = "obsidian";
-			else type = name.split(".").pop() || "";
+			else type = name.split(".").pop() || ""; // default: extension
 
 			if (type === "yml") type = "yaml";
 			else if (type === "mjs") type = "js";
@@ -77,7 +79,7 @@ function run(argv) {
 				case "folder":
 					iconObj = { type: "fileicon", path: absPath };
 					break;
-				default:
+				default: // use {extension}.png located in icon folder
 					iconObj.path += type + ".png";
 			}
 
