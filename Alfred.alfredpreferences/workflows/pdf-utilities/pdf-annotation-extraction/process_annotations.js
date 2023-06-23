@@ -414,7 +414,7 @@ function extractMetadata(citekey, rawEntry) {
  */
 function writeNote(annos, metad, outputPath, tagsForYaml) {
 	// format authors for yaml
-	const authorArr = metad.author
+	let authorArr = metad.author
 		.split(" and ")
 		.map((name) => {
 			const isLastCommaFirst = name.includes(",");
@@ -422,6 +422,8 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 			return `"${name}"`;
 		})
 		.join(", ");
+	// multi-item brackets only when there is more than one author
+	if (authorArr.length > 1) authorArr = `[${authorArr}]` 
 
 	// yaml frontmatter
 	const yamlKeys = [
@@ -430,7 +432,7 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 		"cssclass: pdf-annotations",
 		`citekey: ${metad.citekey}`,
 		`year: ${metad.year.toString()}`,
-		`author: [${authorArr}]`,
+		`author: ${authorArr}`,
 		`publicationType: ${metad.ptype}`,
 	];
 	// url & doi do not exist for every entry, so only inserting them if they
