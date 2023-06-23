@@ -170,7 +170,7 @@ local function pluginUpdates()
 	if not require("lazy.status").has_updates() then return "" end
 	local numberOfUpdates = require("lazy.status").updates()
 	if numberOfUpdates < threshold then return "" end
-	return numberOfUpdates
+	return " " .. numberOfUpdates
 end
 
 --------------------------------------------------------------------------------
@@ -192,7 +192,7 @@ local function pathToProjectRoot()
 	if #nicerDisplay > maxLen then
 		nicerDisplay = "…" .. nicerDisplay:sub(#nicerDisplay - maxLen, #nicerDisplay)
 	end
-	return "󰝰 " .. nicerDisplay
+	return " " .. nicerDisplay
 end
 
 --------------------------------------------------------------------------------
