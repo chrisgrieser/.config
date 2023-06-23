@@ -13,7 +13,7 @@ readonly longitude=13
 # add potential yq locations to path (homebrew or mason)
 export PATH="$HOME/.local/share/nvim/mason/bin":/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 if ! command -v yq &>/dev/null; then
-	weather="yq not found"
+	temperature="yq not found"
 	icon=""
 	sketchybar --set "$NAME" icon="$icon" label="$temperature"
 fi
@@ -41,9 +41,16 @@ while true; do
 			sed 's/clear-night//' |
 			sed 's/thunderstorm//'
 	)
-	[[ -z "$icon" || "$icon" == "null" || $i -gt 20 ]] && break
+	[[ -n "$icon" && "$icon" != "null" || $i -gt 20 ]] && break
 	i=$((i + 1))
 	sleep 5
 done
+
+#───────────────────────────────────────────────────────────────────────────────
+
+if [[ "$temperature" == "null" ]] ; then
+	icon=""
+	temperature="–"
+fi
 
 sketchybar --set "$NAME" icon="$icon" label="$temperature"

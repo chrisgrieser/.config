@@ -207,15 +207,18 @@ local config = {
 	audible_bell = "Disabled",
 	color_scheme = theme.autoScheme(darkTheme, lightTheme),
 	window_background_opacity = theme.autoOpacity(darkOpacity, lightOpacity),
-	window_decorations = "RESIZE",
 	bold_brightens_ansi_colors = "BrightAndBold",
 	max_fps = isAtMother and 40 or 60,
+
+	-- remove titlebar, but keep macOS traffic lights, enabling menu bar stuff,
+	-- especially the "Window" Menu containing split commands (used by Hammerspoon)
+	window_decorations = "INTEGRATED_BUTTONS|RESIZE",
 	native_macos_fullscreen_mode = false,
+
+	-- Scroll & Scrollbar
+	enable_scroll_bar = true,
 	-- if scrollbar enabled, "rights" controls scrollbar width
 	window_padding = { left = "0.5cell", right = "1cell", top = "0.3cell", bottom = "0.3cell" },
-
-	-- Scroll
-	enable_scroll_bar = true,
 	min_scroll_bar_height = "3cell",
 	scrollback_lines = 5000,
 
