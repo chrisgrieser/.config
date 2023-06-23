@@ -7,7 +7,7 @@ local u = require("lua.utils")
 -- - not implemented via Karabiner, since Karabiner does not allow for scrolling
 
 -- CONFIG
-local scrollamount = 30
+local scrollamount = 35
 
 --------------------------------------------------------------------------------
 
