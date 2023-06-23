@@ -1,5 +1,6 @@
 local expand = vim.fn.expand
 local fn = vim.fn
+local cmd = vim.cmd
 local newCommand = vim.api.nvim_create_user_command
 --------------------------------------------------------------------------------
 
@@ -7,11 +8,7 @@ local newCommand = vim.api.nvim_create_user_command
 -- as opposed to `:lua = `, this shows the result in a notification and with
 -- syntax highlighting
 newCommand("I", function(ctx)
-	local str = ctx.args
-	if vim.startswith(str, "fn") or vim.startswith(str, "bo") or vim.startswith(str, "g") then
-		str = "vim." .. str
-	end
-	local output = vim.inspect(fn.luaeval(str))
+	local output = vim.inspect(fn.luaeval(ctx.args))
 	vim.notify(output, "trace", {
 		timeout = 6000, -- ms
 		on_open = function(win) -- enable treesitter highlighting in the notification
@@ -38,7 +35,6 @@ newCommand("LspCapabilities", function()
 			table.sort(capAsList) -- sorts alphabetically
 			local msg = client.name .. "\n" .. table.concat(capAsList, "\n")
 			vim.notify(msg, vim.log.levels.TRACE, { timeout = 14000 })
-			fn.setreg("+", "Capabilities = " .. vim.inspect(client.server_capabilities))
 		end
 	end
 end, {})
@@ -53,7 +49,12 @@ end, {})
 newCommand("PluginDir", function(_) fn.system('open "' .. fn.stdpath("data") .. '"') end, {})
 
 -- shorthand for `.!curl -s`
+-- which also creates a new html for file syntax highlight and saving as well
 newCommand("Curl", function(ctx)
-	local response = fn.system("curl -s '" .. ctx.args .. "'")
-	vim.cmd("enew")
+	local timeoutSecs = 5
+	local response = fn.system(("curl --silent --max-time %s '%s'"):format(timeoutSecs, ctx.args))
+	cmd.edit("response.html")
+	local lines = vim.split(response, "\n")
+	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+	cmd.write()
 end, { nargs = 1 })
