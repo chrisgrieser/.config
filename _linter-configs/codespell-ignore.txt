@@ -1,11 +1,9 @@
 # INFO terms here need to be lowercase
+# German
 als
 ist
 interaktion
-iterm
 technik
-fo
-te
-bu
-noice
-termine
+
+# `:enew` in vim
+enew

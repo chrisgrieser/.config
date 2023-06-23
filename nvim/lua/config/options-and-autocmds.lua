@@ -269,7 +269,7 @@ local ftWithSkeletons = vim.split(filetypeList, "\n", {})
 
 for _, ft in pairs(ftWithSkeletons) do
 	if ft == "" then break end
-	local readCmd = "keepalt 0r " .. skeletonDir .. "/skeleton." .. ft
+	local readCmd = "keepalt 0read " .. skeletonDir .. "/skeleton." .. ft
 	local pattern = ft == "make" and "Makefile" or "*." .. ft
 
 	-- BufReadPost + empty file as additional condition to also auto-insert
