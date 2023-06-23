@@ -1,5 +1,5 @@
-.PHONY: length
+.PHONY: lines
 #───────────────────────────────────────────────────────────────────────────────
 # total length of config in LoC
-length:
+lines:
 	find . -name "*.lua" | xargs wc -l | tail -n1

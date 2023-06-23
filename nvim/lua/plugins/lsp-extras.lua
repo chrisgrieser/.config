@@ -1,64 +1,5 @@
 local u = require("config.utils")
 
-local function glanceConfig()
-	local actions = require("glance").actions
-
-	require("glance").setup {
-		height = 25,
-		list = {
-			width = 0.35,
-			position = "left",
-		},
-		border = {
-			enable = true,
-			top_char = u.borderHorizontal,
-			bottom_char = u.borderHorizontal,
-		},
-		preview_win_opts = {
-			number = false,
-			wrap = false,
-		},
-		folds = { folded = false },
-		mappings = {
-			list = {
-				["<D-s>"] = actions.quickfix, -- consistent with the respective keymap for telescope
-				["<S-CR>"] = actions.enter_win("preview"),
-				["j"] = actions.next_location, -- `.next` goes to next item, `.next_location` skips groups
-				["k"] = actions.previous_location,
-			},
-			preview = {
-				["<S-CR>"] = actions.enter_win("list"),
-			},
-		},
-		hooks = {
-			-- jump directly if there is only one references
-			-- filter out current line, if references
-			before_open = function(results, open, jump, method)
-				if method == "references" then
-					local filtered = {}
-					local curLn = vim.fn.line(".")
-					local curUri = vim.uri_from_bufnr(0)
-					for _, result in pairs(results) do
-						local targetLine = result.range.start.line + 1 -- LSP counts off-by-one
-						local targetUri = result.uri or result.targetUri
-						local isCurrentLine = targetLine == curLn and (targetUri == curUri)
-						if not isCurrentLine then table.insert(filtered, result) end
-					end
-					results = filtered
-				end
-
-				if #results == 0 then
-					vim.notify("No " .. method .. "found")
-				elseif #results == 1 then
-					jump(results[1])
-				else
-					open(results)
-				end
-			end,
-		},
-	}
-end
-
 --------------------------------------------------------------------------------
 
 return {
@@ -89,7 +30,63 @@ return {
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",
 		cmd = "Glance",
-		config = glanceConfig,
+		config = function()
+			local actions = require("glance").actions
+			require("glance").setup {
+				height = 25,
+				list = {
+					width = 0.35,
+					position = "left",
+				},
+				border = {
+					enable = true,
+					top_char = u.borderHorizontal,
+					bottom_char = u.borderHorizontal,
+				},
+				preview_win_opts = {
+					number = false,
+					wrap = false,
+				},
+				folds = { folded = false },
+				mappings = {
+					list = {
+						["<D-s>"] = actions.quickfix, -- consistent with the respective keymap for telescope
+						["<C-CR>"] = actions.enter_win("preview"),
+						["j"] = actions.next_location, -- `.next` goes to next item, `.next_location` skips groups
+						["k"] = actions.previous_location,
+					},
+					preview = {
+						["<C-CR>"] = actions.enter_win("list"),
+					},
+				},
+				hooks = {
+					-- jump directly if there is only one references
+					-- filter out current line, if references
+					before_open = function(results, open, jump, method)
+						if method == "references" then
+							local filtered = {}
+							local curLn = vim.fn.line(".")
+							local curUri = vim.uri_from_bufnr(0)
+							for _, result in pairs(results) do
+								local targetLine = result.range.start.line + 1 -- LSP counts off-by-one
+								local targetUri = result.uri or result.targetUri
+								local isCurrentLine = targetLine == curLn and (targetUri == curUri)
+								if not isCurrentLine then table.insert(filtered, result) end
+							end
+							results = filtered
+						end
+
+						if #results == 0 then
+							vim.notify("No " .. method .. "found")
+						elseif #results == 1 then
+							jump(results[1])
+						else
+							open(results)
+						end
+					end,
+				},
+			}
+		end,
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",

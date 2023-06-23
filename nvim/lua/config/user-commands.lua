@@ -49,12 +49,13 @@ end, {})
 newCommand("PluginDir", function(_) fn.system('open "' .. fn.stdpath("data") .. '"') end, {})
 
 -- shorthand for `.!curl -s`
--- which also creates a new html for file syntax highlight and saving as well
+-- which also creates a new html buffer for syntax highlighting
 newCommand("Curl", function(ctx)
 	local timeoutSecs = 5
 	local response = fn.system(("curl --silent --max-time %s '%s'"):format(timeoutSecs, ctx.args))
-	cmd.edit("response.html")
 	local lines = vim.split(response, "\n")
+	cmd.enew()
+	vim.api.nvim_buf_set_option(0, "filetype", "html")
+	vim.api.nvim_buf_set_name(0, "curl")
 	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-	cmd.write()
 end, { nargs = 1 })

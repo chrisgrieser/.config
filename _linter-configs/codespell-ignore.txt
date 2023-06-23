@@ -4,6 +4,3 @@ als
 ist
 interaktion
 technik
-
-# `:enew` in vim
-enew

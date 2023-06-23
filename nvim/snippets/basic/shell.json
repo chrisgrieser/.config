@@ -109,7 +109,7 @@
 	},
 	"if (short)": {
 		"prefix": "if (short)",
-		"body": "[[ \"$${1:var}\" ]] && $0"
+		"body": "[[ $1 ]] && $0"
 	},
 	"then": {
 		"prefix": "then .. fi",
