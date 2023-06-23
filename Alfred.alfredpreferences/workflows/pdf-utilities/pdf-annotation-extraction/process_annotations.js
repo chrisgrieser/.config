@@ -393,7 +393,7 @@ function extractMetadata(citekey, rawEntry) {
 	if (data.firstPage === -999) {
 		let response, validInput;
 		do {
-			response = app.displayDialog("BibTeX Entry has no page numbers.\n\nEnter true page number of *first* PDF page:", {
+			response = app.displayDialog("BibTeX Entry has no page numbers.\n\nEnter true page number of FIRST pdf page:", {
 				defaultAnswer: "",
 				buttons: ["OK"],
 				defaultButton: "OK",
@@ -414,7 +414,7 @@ function extractMetadata(citekey, rawEntry) {
  */
 function writeNote(annos, metad, outputPath, tagsForYaml) {
 	// format authors for yaml
-	let authorArr = metad.author
+	let authorStr = metad.author
 		.split(" and ")
 		.map((name) => {
 			const isLastCommaFirst = name.includes(",");
@@ -423,7 +423,7 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 		})
 		.join(", ");
 	// multi-item brackets only when there is more than one author
-	if (authorArr.length > 1) authorArr = `[${authorArr}]` 
+	if (authorStr.includes(",")) authorStr = `[${authorStr}]` 
 
 	// yaml frontmatter
 	const yamlKeys = [
@@ -432,7 +432,7 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 		"cssclass: pdf-annotations",
 		`citekey: ${metad.citekey}`,
 		`year: ${metad.year.toString()}`,
-		`author: ${authorArr}`,
+		`author: ${authorStr}`,
 		`publicationType: ${metad.ptype}`,
 	];
 	// url & doi do not exist for every entry, so only inserting them if they

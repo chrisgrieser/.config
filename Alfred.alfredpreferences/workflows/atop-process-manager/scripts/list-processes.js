@@ -34,6 +34,8 @@ const appFilePaths = {
 	"Alfred Preferences": "/Applications/Alfred 5.app/Contents/Preferences/Alfred Preferences.app",
 };
 
+const parentIcon = "↖"
+
 //──────────────────────────────────────────────────────────────────────────────
 
 let rerunSecs = parseFloat($.getenv("rerun_s_processes")) || 2.5;
@@ -76,7 +78,7 @@ function run() {
 			}
 			const parentObvious = processName.startsWith(parentName) && processName !== parentName;
 			if (parentName === "launchd" || parentObvious) parentName = "";
-			if (parentName) parentName = "⇞ " + parentName;
+			if (parentName) parentName = `${parentIcon} ${parentName}`;
 
 			// Memory, CPU & root
 			let memory = (parseInt(info[3]) / 1024).toFixed(0).toString(); // real memory
