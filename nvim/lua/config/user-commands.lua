@@ -8,11 +8,7 @@ local newCommand = vim.api.nvim_create_user_command
 -- syntax highlighting
 newCommand("I", function(ctx)
 	local str = ctx.args
-	if 
-		vim.startswith(str, "fn")
-		or vim.startswith(str, "bo")
-		or vim.startswith(str, "g")
-	then
+	if vim.startswith(str, "fn") or vim.startswith(str, "bo") or vim.startswith(str, "g") then
 		str = "vim." .. str
 	end
 	local output = vim.inspect(fn.luaeval(str))
@@ -55,3 +51,9 @@ end, {})
 
 -- `:PluginDir` opens the nvim data path, where mason and lazy install their stuff
 newCommand("PluginDir", function(_) fn.system('open "' .. fn.stdpath("data") .. '"') end, {})
+
+-- shorthand for `.!curl -s`
+newCommand("Curl", function(ctx)
+	local response = fn.system("curl -s '" .. ctx.args .. "'")
+	vim.cmd("enew")
+end, { nargs = 1 })
