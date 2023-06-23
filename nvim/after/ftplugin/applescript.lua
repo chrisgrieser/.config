@@ -5,6 +5,10 @@ local keymap = vim.keymap.set
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+u.applyTemplateIfEmptyFile("applescript")
+
+--------------------------------------------------------------------------------
+
 -- poor man's formatting
 keymap({ "n", "i", "x" }, "<D-s>", function()
 	cmd.mkview(2)

@@ -3,7 +3,7 @@
 		"prefix": "keymap",
 		"body": "keymap(\"n\", \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
 	},
-	"utils (require)": {
+	"nvim-utils (require)": {
 		"prefix": "utils (require)",
 		"body": "local u = require(\"config.utils\")"
 	},

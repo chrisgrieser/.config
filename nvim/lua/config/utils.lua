@@ -63,16 +63,23 @@ function M.getHighlightValue(name, key)
 	return string.format("#%06x", value)
 end
 
-
 ---reads a template to apply if the file is empty
----@param ft string filetype of the entry
-function M.applyTemplateIfEmptyFile(ft)
-	local fileIsEmpty = vim.fn.getfsize(vim.fn.expand("%")) < 4 -- account for linebreaks
-	if not fileIsEmpty then return end
+---@param ext string extension of the skeleton
+function M.applyTemplateIfEmptyFile(ext)
+	vim.defer_fn(function()
+		local fileIsEmpty = vim.loop.fs_stat(vim.fn.expand("%")).size < 4 -- account for linebreaks
+		if not fileIsEmpty then return end
 
-	local skeletonDir = vim.fn.stdpath("config") .. "/templates"
-	vim.cmd("keepalt 0read " .. skeletonDir .. "/skeleton." .. ft)
-	M.normal("G")
+		local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
+		local fileExists = vim.fn.filereadable(skeletonFile) ~= 0
+		if not fileExists then
+			vim.notify("Skeleton file not found.", vim.log.levels.ERROR)
+			return
+		end
+
+		vim.cmd("keepalt 0read " .. skeletonFile)
+		M.normal("G")
+	end, 1)
 end
 
 --------------------------------------------------------------------------------
@@ -81,18 +88,18 @@ end
 ---See also https://neovim.io/doc/user/api.html#nvim_open_win()
 ---(BorderChars is needed for Harpoon and Telescope, both of which do not accept
 ---a Borderstyle string.)
-local borderstyle = "rounded"
 
-M.borderStyle = borderstyle
--- default: single/rounded
-M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-M.borderHorizontal = "─"
+M.borderStyle = "rounded"
 
-if borderstyle == "single" then
+if M.borderstyle == "single" then
 	M.borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
-elseif borderstyle == "double" then
+	M.borderHorizontal = "─"
+elseif M.borderstyle == "double" then
 	M.borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
 	M.borderHorizontal = "═"
+elseif M.borderstyle == "rounded" then
+	M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+	M.borderHorizontal = "─"
 end
 
 return M

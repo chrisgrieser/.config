@@ -5,15 +5,12 @@ local keymap = vim.keymap.set
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- make typescript inherit javascript config
-local javascriptConfig = fn.stdpath("config") .. "/after/ftplugin/javascript.lua"
-cmd.source(javascriptConfig)
-
---------------------------------------------------------------------------------
-
 -- setup quickfix list for npm, see also: https://vonheikemen.github.io/devlog/tools/vim-and-the-quickfix-list/
 bo.makeprg = "npm run build"
 bo.errorformat = " > %f:%l:%c: %trror: %m" .. ",%-G%.%#" -- = ignore remaining lines
+vim.cmd.inoreabbrev("<buffer> cosnt const")
+
+--------------------------------------------------------------------------------
 
 -- Build
 -- requires makeprg defined above
@@ -26,3 +23,23 @@ keymap("n", "<leader>r", function()
 	vim.notify(output, logLevel)
 	cmd.redir("END")
 end, { buffer = true, desc = " npm run build" })
+
+
+-- Open regex in regex101
+keymap("n", "g/", function()
+	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
+	vim.cmd.normal { '"zya/', bang = false } -- yank outer regex
+	vim.cmd.normal { "vi/", bang = false } -- select inner regex for easy replacement
+
+	local regex = fn.getreg("z")
+	local pattern = regex:match("/(.*)/")
+	local flags = regex:match("/.*/(%l*)")
+	---@diagnostic disable-next-line: param-type-mismatch, undefined-field
+	local replacement = fn.getline("."):match('replace ?%(/.*/.*, ?"(.-)"')
+
+	-- https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
+	local url = "https://regex101.com/?regex=" .. pattern .. "&flags=" .. flags
+	if replacement then url = url .. "&subst=" .. replacement end
+
+	os.execute("open '" .. url .. "'") -- opening method on macOS
+end, { desc = " Open next regex in regex101", buffer = true })

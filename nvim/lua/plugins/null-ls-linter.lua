@@ -109,7 +109,7 @@ local function nullSources()
 			extra_args = { "--disable", "trailing-spaces", "no-multiple-blanks", "--config", linterConfig .. "/markdownlintrc" },
 		},
 		builtins.completion.spell.with { -- vim's built-in spell-suggestions
-			filetypes = { "markdown", "text", "gitcommit" },
+			filetypes = { "markdown", "gitcommit" },
 		},
 	}
 end
