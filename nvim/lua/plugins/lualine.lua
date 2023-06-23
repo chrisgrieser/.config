@@ -67,6 +67,8 @@ local function selectionCount()
 	return " " .. tostring(lines) .. "L " .. tostring(fn.wordcount().visual_chars) .. "C"
 end
 
+--------------------------------------------------------------------------------
+
 local function searchCounter()
 	if vim.v.hlsearch == 0 then return "" end
 	if fn.mode() == "n" then
@@ -77,9 +79,14 @@ local function searchCounter()
 		if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
 		if total == 0 then return " 0 " .. searchTerm end
 		return (" %s/%s %s"):format(current, total, searchTerm)
+
+	-- manual method of counting necessary since `fn.searchcount()` does not work
+	-- during the search in the cmdline
 	elseif fn.mode() == "c" and fn.getcmdtype():find("[/?]") then
-		local searchTerm = vim.fn.getcmdline()
+		-- for correct count, requires autocmd below refreshing lualine on CmdlineChanged
+		local searchTerm = vim.fn.getcmdline() 
 		if searchTerm == "" then return "" end
+
 		local buffer = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, true), "\n")
 
 		-- determine case-sensitive from user's vim settings
@@ -99,6 +106,8 @@ vim.api.nvim_create_autocmd("CmdlineChanged", {
 		require("lualine").refresh()
 	end,
 })
+
+--------------------------------------------------------------------------------
 
 local function visualMultiCursorCount()
 	---@diagnostic disable: undefined-field -- defined by visual multi plugin

@@ -127,13 +127,18 @@ function M.betterClose()
 	end
 
 	local bufToDel = fn.expand("%:p")
-	vim.g.last_deleted_buffer = bufToDel
+	local couldDelete
+	vim.g.last_deleted_buffer = bufToDel -- save for undoing
 	if #openBuffers == 2 then
-		cmd.bwipeout() -- cannot clear altfile otherwise :/
+		couldDelete = pcall(cmd.bwipeout) -- cannot clear altfile otherwise :/
 		return
 	end
 
-	cmd.bdelete()
+	couldDelete = pcall(cmd.bdelete)
+	if not couldDelete then
+		vim.notify("Could not delete buffer.", vim.log.levels.WARN)
+		return
+	end
 
 	-- ensure new alt file points towards open, non-active buffer, or altoldfile
 	local curFile = fn.expand("%:p")

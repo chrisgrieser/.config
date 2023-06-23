@@ -22,7 +22,6 @@ keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" }
 
 keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason Overview" })
 -- stylua: ignore
-keymap("n", "<leader>pa", function() cmd.TSModuleInfo("highlight") end, { desc = " Treesitter Parser Overview" })
 keymap("n", "<leader>pt", cmd.TSUpdate, { desc = " Treesitter Parser Update" })
 
 -- Theme Picker
@@ -52,7 +51,7 @@ keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { des
 
 -- show current filetype & buftype
 keymap("n", "<leader>lf", function()
-	local icon = require("nvim-web-devicons").get_icon(vim.fn.bufname(), vim.bo.filetype)
+	local icon = require("nvim-web-devicons").get_icon(fn.bufname(), bo.filetype)
 	if not icon then
 		icon = ""
 	else
@@ -81,9 +80,9 @@ end, { desc = "󰘳 Copy Last Notification" })
 
 -- copy [l]ast [m]essage
 keymap("n", "<leader>lm", function()
-	vim.cmd.redir("@+")
-	vim.cmd("silent! 1messages")
-	vim.cmd.redir("END")
+	cmd.redir("@+")
+	cmd("silent! 1messages")
+	cmd.redir("END")
 	vim.notify("Last Message copied.\n" .. fn.getreg("+"), u.trace)
 end, { desc = "󰘳 Copy Last Message" })
 
@@ -113,7 +112,6 @@ keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 --------------------------------------------------------------------------------
 
 -- Marks
-
 -- stylua: ignore start
 keymap("n", "Ä", function() require("bookmarks").bookmark_toggle() end, { desc = "󰃀 Toggle Bookmark" })
 keymap("n", "ä", function() require("bookmarks").bookmark_next() end, { desc = "󰃀 Next Bookmark" })
@@ -152,9 +150,6 @@ autocmd("CmdlineEnter", {
 	end,
 })
 
-keymap("c", "<C-n>", "<C-g>", { desc = "Next Match (when inc. search)" })
-keymap("c", "<C-S-n>", "<C-t>", { desc = "Next Match (when inc. search)" })
-
 --------------------------------------------------------------------------------
 -- EDITING
 
@@ -180,7 +175,7 @@ keymap("n", "dsi", function()
 	-- select inner indentation
 	require("various-textobjs").indentation(true, true)
 	-- when textobj is found, will switch to visual line mode
-	local notOnIndentedLine = vim.fn.mode():find("V") == nil
+	local notOnIndentedLine = fn.mode():find("V") == nil
 	if notOnIndentedLine then return end
 
 	-- dedent indentation
@@ -193,9 +188,9 @@ keymap("n", "dsi", function()
 	-- don't delete endborder when language does not have them
 	if not (bo.filetype == "python" or bo.filetype == "yaml" or bo.filetype == "markdown") then
 		-- delete end first so line index is not shifted
-		vim.cmd(tostring(endBorderLn) .. " delete")
+		cmd(tostring(endBorderLn) .. " delete")
 	end
-	vim.cmd(tostring(startBorderLn) .. " delete")
+	cmd(tostring(startBorderLn) .. " delete")
 end, { desc = "Delete surrounding indentation" })
 
 -- Append to / delete from EoL
@@ -297,10 +292,10 @@ vim.keymap.set(
 	{ desc = "󱗘 :AltSubstitute (word under cursor)", expr = true }
 )
 
-keymap("x", "<leader>fo", ":sort<CR>", { desc = "󱗘 :sort selection" })
-keymap("x", "<leader>fO", ":sort i<CR>", { desc = "󱗘 :sort selection (case insensitive)" })
-keymap("n", "<leader>fo", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
-keymap("n", "<leader>fO", "vip:sort i<CR>", { desc = "󱗘 :sort paragraph (case insensitive)" })
+keymap("x", "<leader>f".."o", ":sort<CR>", { desc = "󱗘 :sort selection" })
+keymap("x", "<leader>f".."O", ":sort i<CR>", { desc = "󱗘 :sort selection (case insensitive)" })
+keymap("n", "<leader>f".."o", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
+keymap("n", "<leader>f".."O", "vip:sort i<CR>", { desc = "󱗘 :sort paragraph (case insensitive)" })
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
 keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines" })
 
@@ -363,7 +358,7 @@ keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, 
 keymap("n", "<leader>lt", cmd.Inspect, { desc = " Treesitter Inspect" })
 -- stylua: ignore end
 
-keymap("n", "<leader>bu", function() require("dapui").toggle() end, { desc = " Toggle DAP-UI" })
+keymap("n", "<leader>b".."u", function() require("dapui").toggle() end, { desc = " Toggle DAP-UI" })
 keymap("n", "<leader>bv", function() require("dap").step_over() end, { desc = " Step Over" })
 keymap("n", "<leader>bo", function() require("dap").step_out() end, { desc = " Step Out" })
 keymap("n", "<leader>bi", function() require("dap").step_into() end, { desc = " Step Into" })
@@ -853,15 +848,15 @@ keymap("n", "<leader>tc", function()
 end, { desc = " Codi" })
 
 -- edit embedded filetype
-keymap("n", "<leader>te", function()
+keymap("n", "<leader>t".."e", function()
 	if bo.filetype ~= "markdown" then
-		vim.notify("Only markdown codeblocks can be edited without a selection.")
+		vim.notify("Only markdown codeblocks can be edited without a selection.", u.warn)
 		return
 	end
 	cmd.EditCodeBlock()
 end, { desc = " Edit Embedded Code (Code Block)" })
 
-keymap("x", "<leader>te", function()
+keymap("x", "<leader>t".."e", function()
 	local fts = { "bash", "applescript", "vim" }
 	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 		if not ft then return end
@@ -905,7 +900,8 @@ autocmd("FileType", {
 		if bo.filetype == "ssr" then
 			keymap("n", "q", "Q", opts)
 		else
-			-- HACK 1ms delay ensures it comes later in the autocmd stack and takes effect
+			-- HACK 1ms delay ensures it comes later in the autocmd stack and
+			-- overwrites the plugins's autocmds
 			vim.defer_fn(function() keymap("n", "q", "<Esc>", opts) end, 1)
 		end
 	end,
