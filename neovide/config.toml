@@ -1,0 +1,16 @@
+# https://neovide.dev/config-file.html?highlight=frame#available-settings
+# INFO this config file only in effect with next release (> 0.10.4)
+#───────────────────────────────────────────────────────────────────────────────
+# TODO upon next release, remove neovide config from .zshenv
+#───────────────────────────────────────────────────────────────────────────────
+
+multigrid = false
+maximized = false
+idle = true
+
+# remove titlebar, but keep traffic lights
+# WARN using "none" prevents window managers from controlling the neovide window
+frame = "transparent" 
+
+# NOTE also needs to be set in neovide restart function located in
+# karabiner-hyper-config, since that file does not read from zshenv

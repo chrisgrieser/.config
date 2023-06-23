@@ -6,7 +6,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 # INFO
 # - workaround for: https://github.com/neovide/neovide/issues/1586
 # - this script, bundled as .app via Automator, ensures you can open a file from
-# anywhere in macOS and it will open in the currently existing Neovide instance
+#   anywhere in macOS and it will open in the currently existing Neovide instance
 #───────────────────────────────────────────────────────────────────────────────
 
 if pgrep -xq "neovide"; then
@@ -21,5 +21,5 @@ else
 	[[ -n "$LINE" ]] && LINE="+$LINE"
 
 	# LINE must be unquoted to prevent opening empty file
-	neovide --geometry=104x33 $LINE "$@"
+	neovide --geometry=104x33 --notabs $LINE "$@"
 fi

@@ -59,10 +59,11 @@ rules:
 
               if [[ "$FRONT_APP" == "neovide" ]]; then
                 # bwipeout necessary due to empty buffer created before jumping to '0
-                neovide --frame=buttonless --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #"
+                neovide --frame=transparent --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #"
                 exit 0
+              elif [[ "$FRONT_APP" == "wezterm-gui" ]]; then
+                FRONT_APP="WezTerm"
               fi
-              [[ "$FRONT_APP" == "wezterm-gui" ]] && FRONT_APP="WezTerm"
               open -a "$FRONT_APP"
       # Restart Alfred
       - type: basic
