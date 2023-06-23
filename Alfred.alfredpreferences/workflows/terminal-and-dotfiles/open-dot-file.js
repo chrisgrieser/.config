@@ -47,7 +47,7 @@ function run(argv) {
 			// type determiniation
 			let type = "";
 			if (name.startsWith(".z")) type = "sh";
-			else if (name === "Makefile" || name === "makefile") type = "make";
+			else if (name.endsWith("akefile")) type = "make";
 			else if (name.startsWith(".")) type = "config";
 			else if (!name.includes(".")) type = "blank";
 			else if (name === "obsidian.vimrc") type = "obsidian";
@@ -62,13 +62,13 @@ function run(argv) {
 			// icon determination
 			let iconObj = { path: "./../../../_custom-filetype-icons/" };
 			switch (type) {
+				// use image preview
 				case "icns":
 				case "png":
 				case "gif":
-				case "jpg":
-				case "jpeg":
-					iconObj.path = absPath; // use image itself
+					iconObj.path = absPath;
 					break;
+				// use filetype image
 				case "bttpreset":
 				case "opml":
 				case "other":
@@ -79,17 +79,15 @@ function run(argv) {
 				case "folder":
 					iconObj = { type: "fileicon", path: absPath };
 					break;
-				default: // use {extension}.png located in icon folder
+				// use {extension}.png located in icon folder
+				default:
 					iconObj.path += type + ".png";
 			}
 
 			// icons to distinguish all these lua files 🙈
 			let icon = "";
-			if (relPath.includes("hammerspoon")) {
-				icon += " 🟡";
-			} else if (relPath.includes("nvim")) {
-				icon += " 🔳";
-			}
+			if (relPath.includes("hammerspoon")) icon += " 🟡";
+			else if (relPath.includes("nvim")) icon += " 🔳";
 
 			return {
 				title: name + dirtyIcon + icon,
@@ -104,6 +102,7 @@ function run(argv) {
 
 	//──────────────────────────────────────────────────────────────────────────────
 
+	/** @type{AlfredItem[]} */
 	const folderArray = app
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
@@ -131,6 +130,7 @@ function run(argv) {
 
 	// password-store (pass-cli)
 	const pwPath = app.pathTo("home folder") + "/.password-store";
+	/** @type{AlfredItem} */
 	const pwFolder = {
 		title: ".password-store",
 		match: alfredMatcher(pwPath) + " folder",
