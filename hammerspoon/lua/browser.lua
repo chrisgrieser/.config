@@ -52,9 +52,7 @@ local function hideCurAndPassThrough(key)
 	KHidesCursor:disable()
 
 	-- hide the cursor
-	local screen = hs.mouse.getCurrentScreen() 
-	if not screen then return end
-
+	local screen = hs.mouse.getCurrentScreen() or hs.screen.mainScreen()
 	local bottomLeftPos = { x = 0, y = screen:frame().h * 0.9 }
 	hs.mouse.setRelativePosition(bottomLeftPos, screen)
 

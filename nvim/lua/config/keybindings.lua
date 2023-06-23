@@ -152,6 +152,9 @@ autocmd("CmdlineEnter", {
 	end,
 })
 
+keymap("c", "<C-n>", "<C-g>", { desc = "Next Match (when inc. search)" })
+keymap("c", "<C-S-n>", "<C-t>", { desc = "Next Match (when inc. search)" })
+
 --------------------------------------------------------------------------------
 -- EDITING
 
@@ -162,7 +165,7 @@ keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quic
 
 -- COMMENTS & ANNOTATIONS
 keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = " Horizontal Divider" })
-keymap("n", "wq", "yypkqqj", { desc = " Duplicate Line as Comment", remap = true })
+keymap("n", "wq", '"zyy"zpkqqj', { desc = " Duplicate Line as Comment", remap = true })
 
 -- WHITESPACE CONTROL
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })

@@ -8,15 +8,6 @@ rules:
           - key_code: right_command
         to_if_alone:
           - { key_code: e, modifiers: [control] }
-      # alt j/k -> page up/down
-      - type: basic
-        from: { key_code: j, modifiers: { mandatory: [option] } }
-        to:
-          - key_code: page_down
-      - type: basic
-        from: { key_code: k, modifiers: { mandatory: [option] } }
-        to:
-          - key_code: page_up
       # fn+space → ctrl+space (for Apple Keyboards)
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [fn] } }
