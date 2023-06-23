@@ -70,6 +70,9 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
+	LayoutTimer = hs.timer
+		.waitUntil(function() return u.appRunning(appsToOpen) end, function() u.restartApp("AltTab") end, 0.1)
+		:start()
 
 	-- finish
 	sidenotes.reminderToSidenotes()
