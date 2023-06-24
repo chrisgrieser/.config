@@ -91,13 +91,13 @@ end
 
 M.borderStyle = "rounded"
 
-if M.borderstyle == "single" then
+if M.borderStyle == "single" then
 	M.borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
 	M.borderHorizontal = "─"
-elseif M.borderstyle == "double" then
+elseif M.borderStyle == "double" then
 	M.borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
 	M.borderHorizontal = "═"
-elseif M.borderstyle == "rounded" then
+elseif M.borderStyle == "rounded" then
 	M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 	M.borderHorizontal = "─"
 end
