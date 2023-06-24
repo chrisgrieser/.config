@@ -28,7 +28,7 @@ end
 ---@nodiscard
 ---@return boolean?
 function M.CheckSize(win, relSize)
-	if not (win and win:isStandard() and win:isMaximizable()) then return end
+	if not win then return end
 	local maxf = win:screen():frame()
 	local winf = win:frame()
 	local diffw = winf.w - relSize.w * maxf.w
@@ -54,9 +54,10 @@ function M.moveResize(win, pos)
 		not win
 		or not (win:application())
 		or u.tbl_contains(appsToIgnore, win:application():name())
-		or not (win:isMaximizable())
+		or not (win:isMaximizable() or win:application():name() == "SideNotes")
 		or not (win:isStandard())
 	then
+		print("moveResize: window not resizeable")
 		return
 	end
 

@@ -102,7 +102,7 @@ Wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
 	u.closeTabsContaining("zoom.us")
 	u.runWithDelays(0.5, function()
 		local zoom = u.app("zoom.us")
-		if not zoom then return end
+		if not zoom or zoom:findWindow("Update") then return end
 		local secondWin = zoom:findWindow("^Zoom$") or zoom:findWindow("^Login$")
 		if not secondWin or #Wf_zoom:getWindows() < 2 then return end
 		secondWin:close()
@@ -152,7 +152,7 @@ Wf_script_editor = wf
 			wu.moveResize(newWin, wu.centered)
 		end
 	end)
-	-- fix line breaks for copypasting into other apps
+	-- fix copypasting line breaks into other apps
 	:subscribe(wf.windowUnfocused, function()
 		local clipb = hs.pasteboard.getContents()
 		if not clipb then return end

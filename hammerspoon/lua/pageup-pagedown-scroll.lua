@@ -13,7 +13,12 @@ local scrollamount = 35
 
 ---@param amount number steps to be scroll down (or up if negative)
 local function scroll(amount)
-	local frame = hs.application.frontmostApplication():mainWindow():frame()
+	local frontApp = hs.application.frontmostApplication()
+	if frontApp:name() == "WezTerm" then
+		u.keystroke({}, "pagedown")
+		return
+	end
+	local frame = frontApp:mainWindow():frame()
 	local screen = hs.mouse.getCurrentScreen() or hs.screen.mainScreen()
 
 	-- cursor needs to be inside main window to scroll the right frame
