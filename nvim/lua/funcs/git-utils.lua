@@ -252,27 +252,28 @@ function M.githubUrl()
 	if not isInGitRepo() then return end
 
 	local filepath = fn.expand("%:p")
-	local gitroot = fn.system([[git --no-optional-locks rev-parse --show-toplevel]])
+	local gitroot = fn.system("git --no-optional-locks rev-parse --show-toplevel")
 	local pathInRepo = filepath:sub(#gitroot + 1)
-	local remote = fn.system([[git --no-optional-locks remote -v]]):gsub(".*:(.-)%.git.*", "%1")
-	local branch = fn.system([[git --no-optional-locks branch --show-current]]):gsub("\n$", "")
+	local remote = fn.system("git --no-optional-locks remote -v"):gsub(".*:(.-)%.git.*", "%1")
+	local hash = fn.system("git --no-optional-locks rev-parse HEAD"):gsub("\n$", "")
 
-	local location
 	local selStart = fn.line("v")
 	local selEnd = fn.line(".")
-	local notVisualMode = not (fn.mode():find("[Vv]"))
-	if notVisualMode then
+	local isVisualMode = fn.mode():find("[Vv]")
+
+	local location
+	if not isVisualMode then
 		location = "" -- link just the file itself
 	elseif selStart == selEnd then -- one-line-selection
-		location = "L" .. tostring(selStart)
+		location = "#L" .. tostring(selStart)
 	elseif selStart < selEnd then
-		location = "L" .. tostring(selStart) .. "-L" .. tostring(selEnd)
+		location = "#L" .. tostring(selStart) .. "-L" .. tostring(selEnd)
 	else
-		location = "L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
+		location = "#L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
 	end
 
-	local url = string.format("https://github.com/%s/blob/%s/%s", remote, branch, pathInRepo)
-	if location ~= "" then url = url .. "#" .. location end
+	-- example: https://github.com/chrisgrieser/.config/blob/4cc310490c4492be3fe144d572635012813c7822/nvim/lua/config/textobject-keymaps.lua#L8-L20
+	local url = ("https://github.com/%s/blob/%s/%s%s"):format(remote, hash, pathInRepo, location)
 
 	os.execute("open '" .. url .. "'") -- open in browser (macOS cli)
 	fn.setreg("+", url) -- copy to clipboard
