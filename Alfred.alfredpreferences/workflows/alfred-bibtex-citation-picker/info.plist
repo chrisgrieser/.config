@@ -25,7 +25,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2DC90122-FC40-44CA-8F59-E3C16AC99651</string>
+				<string>07EF5E86-4F5B-40B4-9A81-9C28FA40AC82</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -45,6 +45,19 @@
 				<string></string>
 				<key>vitoclose</key>
 				<true/>
+			</dict>
+		</array>
+		<key>07EF5E86-4F5B-40B4-9A81-9C28FA40AC82</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>48C3261E-BA0C-46A8-8A96-611C033D89F6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>09C552E1-E9BA-418A-931E-D134C3FA1A7F</key>
@@ -272,6 +285,31 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>B8AEF220-7CBC-4D07-BA5F-D28094B3D4B4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>48C3261E-BA0C-46A8-8A96-611C033D89F6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2DC90122-FC40-44CA-8F59-E3C16AC99651</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>14FB4C6A-E89A-4DBE-8F36-87C64E7B4314</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9C01A8C9-CBF3-4261-A0F2-CD6DC0E55515</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -775,16 +813,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B9438E50-CC87-44AC-9F19-A9A6ADCF7F09</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>9C01A8C9-CBF3-4261-A0F2-CD6DC0E55515</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -792,6 +820,16 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>14FB4C6A-E89A-4DBE-8F36-87C64E7B4314</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>B9438E50-CC87-44AC-9F19-A9A6ADCF7F09</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1451,26 +1489,6 @@ JSON.stringify({ 'items': entry_array });
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>mode</key>
-					<string>id</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>09C552E1-E9BA-418A-931E-D134C3FA1A7F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1490,25 +1508,6 @@ JSON.stringify({ 'items': entry_array });
 			<string>2DC90122-FC40-44CA-8F59-E3C16AC99651</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>83A9C045-9885-4C76-B88D-DAC01E9528C0</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1541,6 +1540,45 @@ JSON.stringify({ 'items': entry_array });
 			<string>BC0E1F77-0045-40D3-845C-946E6BCFC90D</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>mode</key>
+					<string>id</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>09C552E1-E9BA-418A-931E-D134C3FA1A7F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>83A9C045-9885-4C76-B88D-DAC01E9528C0</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1583,14 +1621,71 @@ JSON.stringify({ 'items': entry_array });
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>validate-anystyle.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>07EF5E86-4F5B-40B4-9A81-9C28FA40AC82</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>yes</string>
+						<key>uid</key>
+						<string>14FB4C6A-E89A-4DBE-8F36-87C64E7B4314</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>no</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>48C3261E-BA0C-46A8-8A96-611C033D89F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
-				<string>{query}</string>
+				<string></string>
 				<key>passthroughargument</key>
-				<true/>
+				<false/>
 				<key>variables</key>
 				<dict>
 					<key>mode</key>
 					<string>parse</string>
+					<key>raw_entry</key>
+					<string>{query}</string>
 				</dict>
 			</dict>
 			<key>type</key>
@@ -1629,6 +1724,42 @@ echo -n $dummyBib | pandoc --citeproc --read=markdown --write=plain --csl $csl -
 			<string>96FCE9BC-5201-4357-9B63-588F73AEF5F3</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Basso</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>254C2241-0AE4-4F52-A073-16E3DEFC9384</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9C01A8C9-CBF3-4261-A0F2-CD6DC0E55515</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1836,42 +1967,6 @@ echo -n $dummyBib | pandoc --citeproc --read=markdown --write=plain --csl $csl -
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>4DA0A4D6-F21E-433C-9EB1-C781B01CA932</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Basso</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>254C2241-0AE4-4F52-A073-16E3DEFC9384</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>9C01A8C9-CBF3-4261-A0F2-CD6DC0E55515</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2613,7 +2708,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>235</real>
+			<real>175</real>
 			<key>ypos</key>
 			<real>585</real>
 		</dict>
@@ -2637,6 +2732,17 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>ypos</key>
 			<real>950</real>
 		</dict>
+		<key>07EF5E86-4F5B-40B4-9A81-9C28FA40AC82</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>valide anystyle</string>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>555</real>
+		</dict>
 		<key>09C552E1-E9BA-418A-931E-D134C3FA1A7F</key>
 		<dict>
 			<key>colorindex</key>
@@ -2653,7 +2759,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>note</key>
 			<string>enclose page numbers in brackets &amp; add citation</string>
 			<key>xpos</key>
-			<real>920</real>
+			<real>1095</real>
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
@@ -2673,7 +2779,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>note</key>
 			<string>Delete Entry</string>
 			<key>xpos</key>
-			<real>1235</real>
+			<real>1410</real>
 			<key>ypos</key>
 			<real>1380</real>
 		</dict>
@@ -2684,7 +2790,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>note</key>
 			<string>open PDF</string>
 			<key>xpos</key>
-			<real>1030</real>
+			<real>1205</real>
 			<key>ypos</key>
 			<real>1515</real>
 		</dict>
@@ -2702,7 +2808,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1445</real>
+			<real>1620</real>
 			<key>ypos</key>
 			<real>1335</real>
 		</dict>
@@ -2713,7 +2819,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>note</key>
 			<string>add page number</string>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>1180</real>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>
@@ -2724,7 +2830,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>note</key>
 			<string>add prefix &amp; suffix</string>
 			<key>xpos</key>
-			<real>790</real>
+			<real>965</real>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
@@ -2733,16 +2839,16 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>680</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>650</real>
 		</dict>
 		<key>2A483E3B-2BAB-408A-9759-4C0F65D760CF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>790</real>
+			<real>965</real>
 			<key>ypos</key>
 			<real>1240</real>
 		</dict>
@@ -2762,9 +2868,9 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>note</key>
 			<string>create new entry</string>
 			<key>xpos</key>
-			<real>425</real>
+			<real>495</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>440</real>
 		</dict>
 		<key>30006A6B-EAF9-4531-8694-5E878A0FB80E</key>
 		<dict>
@@ -2773,7 +2879,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>note</key>
 			<string>open URL/DOI</string>
 			<key>xpos</key>
-			<real>1030</real>
+			<real>1205</real>
 			<key>ypos</key>
 			<real>1100</real>
 		</dict>
@@ -2784,7 +2890,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>note</key>
 			<string>error</string>
 			<key>xpos</key>
-			<real>1190</real>
+			<real>1365</real>
 			<key>ypos</key>
 			<real>760</real>
 		</dict>
@@ -2828,7 +2934,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1015</real>
+			<real>1190</real>
 			<key>ypos</key>
 			<real>1410</real>
 		</dict>
@@ -2852,6 +2958,17 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>48C3261E-BA0C-46A8-8A96-611C033D89F6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>installed</string>
+			<key>xpos</key>
+			<real>381</real>
+			<key>ypos</key>
+			<real>575</real>
+		</dict>
 		<key>4D0EDD75-8E26-4099-956B-50637A6F0C93</key>
 		<dict>
 			<key>colorindex</key>
@@ -2870,7 +2987,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>id+autofile</string>
 			<key>xpos</key>
-			<real>960</real>
+			<real>1135</real>
 			<key>ypos</key>
 			<real>890</real>
 		</dict>
@@ -2908,7 +3025,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>open/create Literature Note</string>
 			<key>xpos</key>
-			<real>1030</real>
+			<real>1205</real>
 			<key>ypos</key>
 			<real>1235</real>
 		</dict>
@@ -2917,7 +3034,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1440</real>
+			<real>1615</real>
 			<key>ypos</key>
 			<real>1450</real>
 		</dict>
@@ -2928,7 +3045,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>remove comma</string>
 			<key>xpos</key>
-			<real>1075</real>
+			<real>1250</real>
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
@@ -2948,7 +3065,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>1280</real>
+			<real>1455</real>
 			<key>ypos</key>
 			<real>120</real>
 		</dict>
@@ -2977,7 +3094,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>autofile</string>
 			<key>xpos</key>
-			<real>1030</real>
+			<real>1205</real>
 			<key>ypos</key>
 			<real>965</real>
 		</dict>
@@ -2986,7 +3103,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>1195</real>
+			<real>1370</real>
 			<key>ypos</key>
 			<real>1515</real>
 		</dict>
@@ -3006,7 +3123,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>paste without brackets</string>
 			<key>xpos</key>
-			<real>1280</real>
+			<real>1455</real>
 			<key>ypos</key>
 			<real>485</real>
 		</dict>
@@ -3015,7 +3132,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>915</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
@@ -3024,7 +3141,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>1190</real>
+			<real>1365</real>
 			<key>ypos</key>
 			<real>965</real>
 		</dict>
@@ -3033,7 +3150,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1375</real>
+			<real>1550</real>
 			<key>ypos</key>
 			<real>1480</real>
 		</dict>
@@ -3044,7 +3161,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>paste single bibliography</string>
 			<key>xpos</key>
-			<real>1030</real>
+			<real>1205</real>
 			<key>ypos</key>
 			<real>610</real>
 		</dict>
@@ -3055,7 +3172,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>finish</string>
 			<key>xpos</key>
-			<real>1190</real>
+			<real>1365</real>
 			<key>ypos</key>
 			<real>340</real>
 		</dict>
@@ -3073,9 +3190,9 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>535</real>
+			<real>560</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>650</real>
 		</dict>
 		<key>A1A6DEC2-1AF1-4110-9DA9-01400A1902FF</key>
 		<dict>
@@ -3084,7 +3201,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>add prefix &amp; suffix</string>
 			<key>xpos</key>
-			<real>920</real>
+			<real>1095</real>
 			<key>ypos</key>
 			<real>515</real>
 		</dict>
@@ -3095,7 +3212,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>Open Entry</string>
 			<key>xpos</key>
-			<real>1030</real>
+			<real>1205</real>
 			<key>ypos</key>
 			<real>760</real>
 		</dict>
@@ -3115,7 +3232,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>915</real>
+			<real>1090</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -3135,7 +3252,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>915</real>
+			<real>1090</real>
 			<key>ypos</key>
 			<real>790</real>
 		</dict>
@@ -3144,9 +3261,9 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>565</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>460</real>
 		</dict>
 		<key>C64ACAF0-66C8-48A8-A3C4-B55C7E282697</key>
 		<dict>
@@ -3155,7 +3272,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>add another citation</string>
 			<key>xpos</key>
-			<real>1195</real>
+			<real>1370</real>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
@@ -3166,7 +3283,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>enclose in start/end formatting &amp; paste</string>
 			<key>xpos</key>
-			<real>1280</real>
+			<real>1455</real>
 			<key>ypos</key>
 			<real>310</real>
 		</dict>
@@ -3177,7 +3294,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>add prefix &amp; suffix, then save</string>
 			<key>xpos</key>
-			<real>675</real>
+			<real>850</real>
 			<key>ypos</key>
 			<real>55</real>
 		</dict>
@@ -3188,7 +3305,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>add page number</string>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>1180</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
@@ -3199,7 +3316,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>add prefix &amp; suffix</string>
 			<key>xpos</key>
-			<real>1075</real>
+			<real>1250</real>
 			<key>ypos</key>
 			<real>340</real>
 		</dict>
@@ -3219,7 +3336,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1090</real>
+			<real>1265</real>
 			<key>ypos</key>
 			<real>1380</real>
 		</dict>
@@ -3237,7 +3354,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>1335</real>
+			<real>1510</real>
 			<key>ypos</key>
 			<real>760</real>
 		</dict>

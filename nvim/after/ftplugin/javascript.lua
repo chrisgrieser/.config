@@ -4,8 +4,8 @@ local keymap = vim.keymap.set
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- Abbreviations / spelling
 vim.cmd.inoreabbrev("<buffer> cosnt const")
+vim.cmd.inoreabbrev("<buffer> -- //") -- habit from writing too much lua
 
 u.applyTemplateIfEmptyFile("js")
 

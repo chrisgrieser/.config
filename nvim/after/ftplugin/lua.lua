@@ -5,6 +5,10 @@ local expand = vim.fn.expand
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+vim.cmd.inoreabbrev("<buffer> // --")-- habit from writing too much js
+
+--------------------------------------------------------------------------------
+
 -- Build / Reload Config
 keymap("n", "<leader>r", function()
 	cmd.update()

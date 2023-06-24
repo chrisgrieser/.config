@@ -154,7 +154,7 @@ function run(argv) {
 		// INFO anystyle can't read STDIN, so this has to be written to a file
 		// https://github.com/inukshuk/anystyle-cli#anystyle-help-parse
 		const tempPath = $.getenv("alfred_workflow_cache") + "/temp.txt";
-		writeToFile(input, tempPath);
+		writeToFile($.getenv("raw_entry"), tempPath);
 		bibtexEntry = app.doShellScript(`anystyle --stdout --format=bib parse "${tempPath}"`);
 	}
 
