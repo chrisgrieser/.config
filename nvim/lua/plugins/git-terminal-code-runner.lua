@@ -16,7 +16,9 @@ return {
 				show_headers = false,
 				formatters = {
 					-- rome cannot format stdin yet
-					json = function(body) return vim.fn.system("rome format --stdin-file-path='foo.json'", body) end,
+					json = function(body)
+						return vim.fn.system("rome format --stdin-file-path='foo.json'", body)
+					end,
 					-- prettier already needed since it's the only proper yaml formatter
 					html = function(body) return vim.fn.system("prettier --parser=html", body) end,
 				},
@@ -39,6 +41,16 @@ return {
 			max_file_length = 7500,
 			preview_config = { border = require("config.utils").border_style },
 		},
+	},
+	{
+		"pwntester/octo.nvim",
+		cmd = "Octo",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {},
 	},
 	{ -- git client
 		"TimUntersberger/neogit",

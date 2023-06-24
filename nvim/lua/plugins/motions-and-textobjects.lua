@@ -1,4 +1,5 @@
 local u = require("config.utils")
+local spooky = "x" -- key triggering remote textobj
 --------------------------------------------------------------------------------
 
 return {
@@ -65,15 +66,12 @@ return {
 	},
 	{ -- distant textobjects
 		"ggandor/leap-spooky.nvim",
-		keys = { { "x", mode = { "o" }, desc = "󱡔 Distant Textobjects" } },
+		keys = { { spooky, mode = { "o" }, desc = "󱡔 Distant Textobjects" } },
 		dependencies = { "ggandor/leap.nvim" },
 		init = function()
 			-- switch order: https://github.com/ggandor/leap-spooky.nvim/issues/6#issuecomment-1605265252
-			local spooky = "x"
-			local textobjRemaps = { unpack(u.textobjectRemaps) }
-			-- needed for switching of order
-			textobjRemaps.insert("b", "(")
-			textobjRemaps.insert("w", "w")
+			local textobjRemaps = vim.deepcopy(require("config.utils").textobjectRemaps)
+			textobjRemaps.w = "w" -- needed for switching of order
 
 			-- needed for changing of keymap order
 			for remap, original in pairs(textobjRemaps) do
@@ -95,7 +93,7 @@ return {
 			affixes = {
 				-- magnetic = move to object after operation
 				magnetic = { window = nil, cross_window = nil },
-				remote = { window = "x", cross_window = nil },
+				remote = { window = spooky, cross_window = nil },
 			},
 			-- If this option is set to true, the yanked text will automatically be pasted
 			-- at the cursor position if the unnamed register is in use.

@@ -1,23 +1,13 @@
 local keymap = vim.keymap.set
 local cmd = vim.cmd
-local bo = vim.bo
-local autocmd = vim.api.nvim_create_autocmd
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- REMAPPING OF BUILTIN TEXT OBJECTS
-keymap({ "o", "x" }, "iq", 'i"') -- [q]uote
-keymap({ "o", "x" }, "aq", 'a"')
-keymap({ "o", "x" }, "iy", "i'") -- s[y]ngle quote
-keymap({ "o", "x" }, "ay", "a'")
-keymap({ "o", "x" }, "ae", "a`") -- t[e]mplate-string / inline cod[e]
-keymap({ "o", "x" }, "ie", "i`")
-keymap({ "o", "x" }, "ir", "i]") -- [r]ectangular brackets
-keymap({ "o", "x" }, "ar", "a]")
-keymap({ "o", "x" }, "ic", "i}") -- [c]urly brackets
-keymap({ "o", "x" }, "ac", "a}")
-keymap({ "o", "x" }, "am", "aW") -- [m]assive word
-keymap({ "o", "x" }, "im", "iW")
+for remap, original in pairs(u.textobjectRemaps) do
+	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. original })
+	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
+end
 
 --------------------------------------------------------------------------------
 -- QUICK TEXTOBJ OPERATIONS

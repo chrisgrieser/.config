@@ -100,12 +100,17 @@ return {
 		"kylechui/nvim-surround",
 		event = "BufRead",
 		config = function()
-			-- need to be consistent with the text obj mappings
+			local u = require("config.utils")
+
+			-- should to be consistent with the treesitter-textobj mappings
 			local functionObjChar = "f"
 			local conditionObjChar = "o"
 			local callObjChar = "l"
 			local doubleSquareBracketObjChar = "R"
-			local u = require("config.utils")
+
+			local textobjRemaps = vim.deepcopy(require("config.utils").textobjectRemaps)
+			textobjRemaps.a = "*" -- markdown italics
+			textobjRemaps.u = "__" -- markdown bold
 
 			-- requires unmapping yS in the keymaps below
 			vim.keymap.set("n", "yS", "ys$", { desc = "surround to EoL", remap = true })
@@ -114,16 +119,7 @@ return {
 			local config = require("nvim-surround.config")
 			require("nvim-surround").setup {
 				move_cursor = false,
-				aliases = { -- aliases should match the bindings for text objects
-					["b"] = ")",
-					["c"] = "}",
-					["r"] = "]",
-					["q"] = '"',
-					["y"] = "'",
-					["e"] = "`",
-					["a"] = "*",
-					["U"] = "__",
-				},
+				aliases = textobjRemaps,
 				keymaps = {
 					visual = "s",
 					normal_line = false,
