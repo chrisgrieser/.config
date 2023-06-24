@@ -6,6 +6,8 @@
 	<string>bbb</string>
 	<key>excluded_devices</key>
 	<string>Mac mini Office, Chris iPad, Chris iMac Home</string>
+	<key>memory_threshold_mb</key>
+	<string>10</string>
 	<key>network_keyword</key>
 	<string>nnn</string>
 	<key>process_keyword</key>
