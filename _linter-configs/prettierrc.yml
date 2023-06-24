@@ -7,5 +7,14 @@
 
 printWidth: 120
 quoteProps: consistent
-tabWidth: 2
-useTabs: true # automatically ignored in yaml since yaml requires spaces
+
+# filetype-spefic overrides
+overrides:
+  - files: ["*.yaml", "*.yml"]
+    options:
+      tabWidth: 2
+      useTabs: false
+  - files: ["*.html"]
+    options:
+      tabWidth: 3
+      useTabs: true

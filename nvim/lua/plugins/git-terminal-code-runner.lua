@@ -3,25 +3,6 @@ return {
 		"metakirby5/codi.vim",
 		cmd = { "CodiNew", "Codi", "CodiExpand" },
 	},
-	{
-		"akinsho/git-conflict.nvim",
-		event = "VeryLazy",
-		version = "*", -- recommended by dev
-		init = function()
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "GitConflictDetected",
-				callback = function()
-					vim.notify("Conflict detected in " .. vim.fn.expand("<a" .. "file>"))
-					vim.keymap.set("n", "gc", "<Plug>(git-conflict-next-conflict)")
-					vim.keymap.set("n", "gC", "<Plug>(git-conflict-prev-conflict)")
-				end,
-			})
-		end,
-		opts = {
-			default_commands = false,
-			default_mappings = false,
-		},
-	},
 	{ -- HTTP requester (e.g., test APIs)
 		"rest-nvim/rest.nvim",
 		ft = "http",
@@ -34,9 +15,9 @@ return {
 				show_http_info = true,
 				show_headers = false,
 				formatters = {
-					-- yq install ensured via mason-null-ls
-					json = function(body) return vim.fn.system("yq -o=json", body) end,
-					-- pretty already needed since it's the only proper yaml formatter
+					-- rome cannot format stdin yet
+					json = function(body) return vim.fn.system("rome format --stdin-file-path='foo.json'", body) end,
+					-- prettier already needed since it's the only proper yaml formatter
 					html = function(body) return vim.fn.system("prettier --parser=html", body) end,
 				},
 			},
