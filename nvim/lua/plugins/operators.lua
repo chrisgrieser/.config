@@ -102,12 +102,6 @@ return {
 		config = function()
 			local u = require("config.utils")
 
-			-- should to be consistent with the treesitter-textobj mappings
-			local functionObjChar = "f"
-			local conditionObjChar = "o"
-			local callObjChar = "l"
-			local doubleSquareBracketObjChar = "R"
-
 			local textobjRemaps = vim.deepcopy(require("config.utils").textobjectRemaps)
 			textobjRemaps.a = "*" -- markdown italics
 			textobjRemaps.u = "__" -- markdown bold
@@ -129,7 +123,7 @@ return {
 					insert = false,
 				},
 				surrounds = {
-					[doubleSquareBracketObjChar] = {
+					[u.textobjectMaps.doubleSquareBracket] = {
 						find = "%[%[.-%]%]",
 						add = { "[[", "]]" },
 						delete = "(%[%[)().-(%]%])()",
@@ -153,8 +147,8 @@ return {
 							target = "(%*)().-(%*)()",
 						},
 					},
-					[functionObjChar] = {
-						find = function() return config.get_selection { motion = "a" .. functionObjChar } end,
+					[u.textobjectMaps["function"]] = {
+						find = function() return config.get_selection { motion = "a" .. u.textobjectMaps["function"] } end,
 						delete = function()
 							local ft = vim.bo.filetype
 							local patt
@@ -173,7 +167,7 @@ return {
 								patt = "()()()()"
 							end
 							return config.get_selections {
-								char = functionObjChar,
+								char = u.textobjectMaps["function"],
 								pattern = patt,
 							}
 						end,
@@ -199,12 +193,12 @@ return {
 							return { { "" }, { "" } }
 						end,
 					},
-					[callObjChar] = {
-						find = function() return config.get_selection { motion = "a" .. callObjChar } end,
+					[u.textobjectMaps["call"]] = {
+						find = function() return config.get_selection { motion = "a" .. u.textobjectMaps["call"] } end,
 						delete = "^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
 					},
-					[conditionObjChar] = {
-						find = function() return config.get_selection { motion = "a" .. conditionObjChar } end,
+					[u.textobjectMaps["conditional"]] = {
+						find = function() return config.get_selection { motion = "a" .. u.textobjectMaps["conditional"] } end,
 						delete = function()
 							local ft = vim.bo.filetype
 							local patt
@@ -217,7 +211,7 @@ return {
 								patt = "()()()()"
 							end
 							return config.get_selections {
-								char = conditionObjChar,
+								char = u.textobjectMaps["conditional"],
 								pattern = patt,
 							}
 						end,

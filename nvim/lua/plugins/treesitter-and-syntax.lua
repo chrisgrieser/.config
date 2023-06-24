@@ -1,6 +1,8 @@
+local u = require("config.utils")
+
 local tsConfig = {
 	-- easier than keeping track of new parsers, especially the special ones (luap, luadocs)
-	ensure_installed = "all", 
+	ensure_installed = "all",
 
 	highlight = {
 		enable = true,
@@ -32,16 +34,17 @@ local tsConfig = {
 				["i<CR>"] = "@return.inner",
 				["a/"] = "@regex.outer", -- /regex/
 				["i/"] = "@regex.inner",
-				["af"] = "@function.outer", -- [f]unction
-				["if"] = "@function.inner",
 				["aa"] = "@parameter.outer", -- [a]rgument
 				["ia"] = "@parameter.inner",
-				["ao"] = "@conditional.outer", -- c[o]nditional (`ac` already = a curly)
-				["io"] = "@conditional.inner",
-				["il"] = "@call.inner", -- cal[l]
-				["al"] = "@call.outer",
 				["iu"] = "@loop.inner", -- loop (mnemonic: luup)
 				["au"] = "@loop.outer",
+
+				["a" .. u.textobjectMaps["function"]] = "@function.outer", -- [f]unction
+				["i" .. u.textobjectMaps["function"]] = "@function.inner",
+				["a" .. u.textobjectMaps["conditional"]] = "@conditional.outer", -- c[o]nditional (`ac` already = a curly)
+				["i" .. u.textobjectMaps["conditional"]] = "@conditional.inner",
+				["a" .. u.textobjectMaps["call"]] = "@call.outer", -- cal[l]
+				["i" .. u.textobjectMaps["call"]] = "@call.inner",
 
 				-- INFO later remapped to q only in operator pending mode to avoid conflict
 				-- @comment.inner not supported yet for most languages

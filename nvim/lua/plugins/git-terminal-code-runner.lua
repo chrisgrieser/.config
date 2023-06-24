@@ -42,16 +42,6 @@ return {
 			preview_config = { border = require("config.utils").border_style },
 		},
 	},
-	{
-		"pwntester/octo.nvim",
-		cmd = "Octo",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-			"nvim-tree/nvim-web-devicons",
-		},
-		opts = {},
-	},
 	{ -- git client
 		"TimUntersberger/neogit",
 		dependencies = "nvim-lua/plenary.nvim",
