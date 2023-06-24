@@ -887,7 +887,6 @@ autocmd("FileType", {
 		"qf", -- quickfix
 		"lazy",
 		"httpResult", -- rest.nvim
-		"AppleScriptRunOutput",
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
 		"man",
@@ -910,7 +909,7 @@ autocmd("FileType", {
 		if bo.filetype == "ssr" then
 			keymap("n", "q", "Q", opts)
 		else
-			-- HACK 1ms delay ensures it comes later in the autocmd stack and
+			-- HACK delay ensures it comes later in the autocmd stack and
 			-- overwrites the plugins's autocmds
 			vim.defer_fn(function() keymap("n", "q", "<Esc>", opts) end, 1)
 		end
