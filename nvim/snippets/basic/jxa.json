@@ -33,13 +33,6 @@
 			"app.includeStandardAdditions = true;"
 		]
 	},
-	"doShellScript": {
-		"prefix": [
-			"shell script",
-			"doShellScript"
-		],
-		"body": "app.doShellScript(`${1:shellscript}`);"
-	},
 	"open location": {
 		"prefix": "open location",
 		"body": "app.openLocation(\"${1:url}\");"
