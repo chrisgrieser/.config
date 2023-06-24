@@ -25,7 +25,7 @@ keymap("n", "dq", function()
 	local prevCursor = u.getCursor(0)
 	cmd.normal { "d&&&" } -- without bang for remapping of COM
 	u.setCursor(0, prevCursor)
-end, { remap = true, desc = " delete comment" })
+end, { remap = true, desc = " Delete Comment" })
 
 -- manually changed cq to preserve the commentstring
 keymap("n", "cq", function()
@@ -33,7 +33,7 @@ keymap("n", "cq", function()
 	cmd.normal { "x" }
 	cmd.normal { "Q" }
 	cmd.startinsert { bang = true }
-end, { desc = " change comment" })
+end, { desc = " Change Comment" })
 
 -- INFO omap q &&& is done is treesitter config, takes care of other operators
 -- like `y`
@@ -78,6 +78,7 @@ keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "󱡔 󰊢 hunk
 -- stylua: ignore start
 -- space: subword
 keymap({"o", "x"}, "<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "󱡔 inner subword textobj" })
+keymap({"o", "x"}, "<Space>", "<cmd>lua require('various-textobjs').subword(false)<CR>", { desc = "󱡔 outer subword textobj" })
 
 -- L: link
 keymap("o", "L", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "󱡔 link textobj" })
@@ -122,11 +123,11 @@ keymap("o", "rg", "G", { desc = "󱡔 rest of buffer textobj" })
 keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", { desc = "󱡔 diagnostic textobj" })
 
 -- iR/aR: double square brackets
-keymap( { "x", "o" }, "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(true)<CR>", { desc = "󱡔 inner double square bracket" })
-keymap( { "x", "o" }, "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets(false)<CR>", { desc = "󱡔 outer double square bracket" })
+keymap( { "x", "o" }, "i"..u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets(true)<CR>", { desc = "󱡔 inner double square bracket" })
+keymap( { "x", "o" }, "a"..u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets(false)<CR>", { desc = "󱡔 outer double square bracket" })
 
 -- ii/ai: indentation textobj
-keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(true, true)<CR>", { desc = "󱡔 inner-inner indent textobj" })
-keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "󱡔 outer-outer indent textobj" })
-keymap({ "x", "o" }, "ij", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 outer-inner indent textobj" })
-keymap({ "x", "o" }, "aj", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 outer-inner indent textobj" })
+keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(true, true)<CR>", { desc = "󱡔 inner indent textobj" })
+keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "󱡔 outer indent textobj" })
+keymap({ "x", "o" }, "ij", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })
+keymap({ "x", "o" }, "aj", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })

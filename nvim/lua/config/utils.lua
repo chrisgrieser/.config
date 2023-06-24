@@ -112,4 +112,11 @@ M.textobjectRemaps = {
 	e = "`", -- t[e]mplate string / inline cod[e]
 }
 
+M.textobjectMaps = {
+	["function"] = "f",
+	["conditional"] = "o",
+	["call"] = "l",
+	["doubleSquareBracket"] = "R",
+}
+
 return M

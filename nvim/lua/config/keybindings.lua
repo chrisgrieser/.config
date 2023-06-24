@@ -292,15 +292,19 @@ vim.keymap.set(
 	{ desc = "󱗘 :AltSubstitute (word under cursor)", expr = true }
 )
 
-keymap("x", "<leader>f".."o", ":sort<CR>", { desc = "󱗘 :sort selection" })
-keymap("x", "<leader>f".."O", ":sort i<CR>", { desc = "󱗘 :sort selection (case insensitive)" })
-keymap("n", "<leader>f".."o", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
-keymap("n", "<leader>f".."O", "vip:sort i<CR>", { desc = "󱗘 :sort paragraph (case insensitive)" })
+keymap("x", "<leader>f" .. "o", ":sort<CR>", { desc = "󱗘 :sort selection" })
+keymap("x", "<leader>f" .. "O", ":sort i<CR>", { desc = "󱗘 :sort selection (case insensitive)" })
+keymap("n", "<leader>f" .. "o", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
+keymap("n", "<leader>f" .. "O", "vip:sort i<CR>", { desc = "󱗘 :sort paragraph (case insensitive)" })
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
 keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines" })
 
-
-keymap("n", "<leader>fq", function() require("replacer").run { rename_files = true } end, { desc = "󱗘  replacer.nvim" })
+keymap(
+	"n",
+	"<leader>fq",
+	function() require("replacer").run { rename_files = true } end,
+	{ desc = "󱗘  replacer.nvim" }
+)
 -- stylua: ignore
 keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "󱗘 Structural S&R" })
 
@@ -359,7 +363,7 @@ keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, 
 keymap("n", "<leader>lt", cmd.Inspect, { desc = " Treesitter Inspect" })
 -- stylua: ignore end
 
-keymap("n", "<leader>b".."u", function() require("dapui").toggle() end, { desc = " Toggle DAP-UI" })
+keymap("n", "<leader>b" .. "u", function() require("dapui").toggle() end, { desc = " Toggle DAP-UI" })
 keymap("n", "<leader>bv", function() require("dap").step_over() end, { desc = " Step Over" })
 keymap("n", "<leader>bo", function() require("dap").step_out() end, { desc = " Step Out" })
 keymap("n", "<leader>bi", function() require("dap").step_into() end, { desc = " Step Into" })
@@ -548,7 +552,11 @@ keymap("", "<D-S-l>", function()
 	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
 	-- stylua: ignore
 	fn.system("if ! pgrep -xq 'Alfred Preferences'; then open -a 'Alfred Preferences' && sleep 0.2 ; fi")
-	fn.system(([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(workflowId))
+	fn.system(
+		([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(
+			workflowId
+		)
+	)
 end, { desc = "󰮤 Reveal Workflow in Alfred" })
 keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these don't require confirmation
 keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
@@ -850,7 +858,7 @@ keymap("n", "<leader>tc", function()
 end, { desc = " Codi" })
 
 -- edit embedded filetype
-keymap("n", "<leader>t".."e", function()
+keymap("n", "<leader>t" .. "e", function()
 	if bo.filetype ~= "markdown" then
 		vim.notify("Only markdown codeblocks can be edited without a selection.", u.warn)
 		return
@@ -858,7 +866,7 @@ keymap("n", "<leader>t".."e", function()
 	cmd.EditCodeBlock()
 end, { desc = " Edit Embedded Code (Code Block)" })
 
-keymap("x", "<leader>t".."e", function()
+keymap("x", "<leader>t" .. "e", function()
 	local fts = { "bash", "applescript", "vim" }
 	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 		if not ft then return end
@@ -910,3 +918,20 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+
+-- clever-f
+vim.on_key(function(char)
+	if vim.g.scrollview_refreshing then return end -- FIX https://github.com/dstein64/nvim-scrollview/issues/88#issuecomment-1570400161
+
+	local keyUsed = fn.keytrans(char)
+	vim.g.last_two_keys[2] = vim.g.last_two_keys[1]
+	vim.g.last_two_keys[1] = keyUsed
+
+	local ftKeysUsed = vim.tbl_contains({ "f", "F", "t", "T" }, keyUsed)
+	local usedSameFtBefore = vim.g.last_two_keys[2] == keyUsed
+
+	if ftKeysUsed and usedSameFtBefore then 
+		vim.cmd.normal {""}
+	end
+
+end, vim.api.nvim_create_namespace("clever-f"))
