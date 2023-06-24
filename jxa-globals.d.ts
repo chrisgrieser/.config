@@ -56,10 +56,10 @@ declare const Application: {
 		finderWindows: {
 			target: { url: () => string };
 		};
-		createNote(options: { text: string; path?: string }): void; // SideNotes
 		documents: { url(): string; name(): string }[]; // webkit browsers
 		windows: { activeTab: { url(): string; name(): string } }[]; // chromium browsers
 		setConfiguration(envVar: string, options: Object); // Alfred
+		createNote(options: { text: string; path?: string }): void; // Sidenotes
 
 		// rome-ignore lint/suspicious/noExplicitAny: TODO
 		applicationProcesses: any; // System Events
