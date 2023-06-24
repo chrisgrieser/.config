@@ -66,8 +66,6 @@ local keybindings = {
 	{ key = "0", mods = "CMD", action = act.ResetFontSize },
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
 	{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
-	{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
-	{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
 	{ key = "Enter", mods = "CTRL", action = act.ActivateTabRelative(1) },
 	{ key = "v", mods = "CMD", action = actFun(autoQuotePastedUrls) },
 
