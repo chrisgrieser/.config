@@ -15,21 +15,6 @@ return {
 			})
 		end,
 	},
-	{ -- only used for the improved search
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		opts = {
-			modes = {
-				char = { enabled = false }, -- don't modify FfTt motions
-				search = {
-					highlight = { label = { current = false } },
-					-- require "." before hints are active to prevent unintended jumps
-					-- using "." ensures the match isn't moved which also changes hints
-					-- search = { trigger = "." },
-				},
-			},
-		},
-	},
 	{ -- display line numbers when using `:` to go to a line with
 		"nacro90/numb.nvim",
 		keys = ":",

@@ -21,6 +21,7 @@ function alfredMatcher(str) {
 /** @param {string} noteId */
 function getNoteObjAndFolder(noteId) {
 	const sidenotes = Application("SideNotes");
+	// @ts-ignore
 	const folders = sidenotes.folders;
 	for (let i = 0; i < folders.length; i++) {
 		const notesInFolder = folders[i].notes;
@@ -50,6 +51,7 @@ function run(argv) {
 	const baseFolder = $.getenv("base_folder");
 
 	const results = sidenotes
+		// @ts-ignore
 		.searchNotes(query)
 		.map((/** @type {{ identifier: string; title: string; details: string; }} */ item) => {
 			const temp = getNoteObjAndFolder(item.identifier);

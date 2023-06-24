@@ -488,16 +488,16 @@ rules:
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
-          - shell_command: open "cleanshot://capture-area"
+          - shell_command: open -g "cleanshot://capture-area"
         to_if_held_down:
           - shell_command: |
               osascript -e 'display notification "" with title "Timed Screenshot"'
-              open "cleanshot://self-timer"
+              open -g "cleanshot://self-timer"
       # screenshot button + bulb-button
       - type: basic
         from: { key_code: "f13", modifiers: { mandatory: [shift, command] } }
         to:
-          - shell_command: open "cleanshot://record-screen"
+          - shell_command: open -g "cleanshot://record-screen"
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Sidenotes"
     manipulators:
