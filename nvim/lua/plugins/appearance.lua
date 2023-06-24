@@ -125,7 +125,10 @@ return {
 		ft = "markdown", -- can work in other fts, but I only use it in markdown
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
-			markdown = { fat_headlines = false },
+			markdown = {
+				fat_headlines = false,
+				dash_highlight = false, -- underscore-bold without content in between looks weird otherwise
+			},
 		},
 	},
 	{ -- Better input/selection fields
