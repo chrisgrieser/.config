@@ -695,6 +695,21 @@ keymap("n", "<D-b>", function()
 	vim.notify("COPIED\n" .. breadcrumbs)
 end, { desc = "󰒕 Copy Breadcrumbs" })
 
+-- go up to patent
+vim.keymap.set("n", "gk", function()
+	if not require("nvim-navic").is_available() then
+		vim.notify("Navic is not available.")
+		return
+	end
+	local symbolPath = require("nvim-navic").get_data()
+	local parent = symbolPath[#symbolPath - 1]
+	if not parent then
+		vim.notify("Already at the highest parent.")
+		return
+	end
+	local parentPos = parent.scope.start
+	vim.api.nvim_win_set_cursor(0, { parentPos.line, parentPos.character })
+end, { desc = "Up one parent to Parent" })
 -- Save & Format
 keymap({ "n", "i", "x" }, "<D-s>", function()
 	cmd.update()
