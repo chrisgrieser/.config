@@ -924,14 +924,12 @@ vim.on_key(function(char)
 	if vim.g.scrollview_refreshing then return end -- FIX https://github.com/dstein64/nvim-scrollview/issues/88#issuecomment-1570400161
 
 	local keyUsed = fn.keytrans(char)
-	vim.g.last_two_keys[2] = vim.g.last_two_keys[1]
-	vim.g.last_two_keys[1] = keyUsed
+	vim.g.prevPrevKey = vim.g.prevKey  
+	vim.g.prevKey = keyUsed
 
 	local ftKeysUsed = vim.tbl_contains({ "f", "F", "t", "T" }, keyUsed)
-	local usedSameFtBefore = vim.g.last_two_keys[2] == keyUsed
+	local usedSameFtBefore = vim.g.prevPrevKey == keyUsed
+	if not (ftKeysUsed and usedSameFtBefore) then return end
 
-	if ftKeysUsed and usedSameFtBefore then 
-		vim.cmd.normal {""}
-	end
-
+	vim.cmd.normal { keyUsed .. vim.g.prevKey, bang = true }
 end, vim.api.nvim_create_namespace("clever-f"))
