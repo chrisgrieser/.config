@@ -1135,7 +1135,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>config</key>
 			<dict>
 				<key>acceptsfiles</key>
-				<true/>
+				<false/>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>acceptstext</key>
@@ -1143,7 +1143,7 @@ sketchybar --trigger update-sidenotes-count</string>
 				<key>acceptsurls</key>
 				<true/>
 				<key>name</key>
-				<string>Save Text in SideNotes</string>
+				<string>Save in SideNotes</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -1207,7 +1207,7 @@ sketchybar --trigger update-sidenotes-count</string>
 					<string>public.plain-text</string>
 				</array>
 				<key>name</key>
-				<string>Save Content in SideNotes</string>
+				<string>Save File Content in SideNotes</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.action</string>
