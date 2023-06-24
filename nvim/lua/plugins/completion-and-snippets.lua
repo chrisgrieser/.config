@@ -4,7 +4,7 @@ local s = {
 	nerdfont = { name = "nerdfont", keyword_length = 2 },
 	buffer = { name = "buffer", keyword_length = 3 },
 	-- max count for performance and to ensure the popup isn't too high
-	fuzzybuffer = { name = "fuzzy_buffer", max_item_count = 3 }, 
+	fuzzybuffer = { name = "fuzzy_buffer", max_item_count = 3 },
 	path = { name = "path" },
 	zsh = { name = "zsh" },
 	codeium = { name = "codeium" },
