@@ -61,19 +61,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>0F9B66EF-DAFF-49D7-A17A-D4DA04AC87A5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>538AE9E5-8B3F-4871-A7CE-611D032143E3</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>14ECFC26-C670-4D39-9A5C-C24B452554F2</key>
 		<array>
 			<dict>
@@ -142,7 +129,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>91A2670C-55E4-4BEC-ACBB-ED93CD9CDFD8</string>
+				<string>B493D78F-4636-4FFB-95A5-231482DEF4F8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -270,6 +257,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8D7A806A-C89F-4527-87FB-F6D2B578A43A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>90FFACB2-0DBE-43F6-BA13-6D3B89E820ED</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>538AE9E5-8B3F-4871-A7CE-611D032143E3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -721,27 +721,6 @@ Search neovim plugins and online :help via Alfred</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>:nvim</string>
-				<key>subtext</key>
-				<string>&gt; killall neovide nvim osascript</string>
-				<key>text</key>
-				<string>❗️Force Quit nvim-related processes</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>0F9B66EF-DAFF-49D7-A17A-D4DA04AC87A5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -765,31 +744,54 @@ Search neovim plugins and online :help via Alfred</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
+				<key>action</key>
 				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
+				<key>argument</key>
 				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
+				<key>focusedappvariable</key>
 				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
+				<key>focusedappvariablename</key>
 				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
+				<key>hotkey</key>
+				<integer>18</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>1</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>91A2670C-55E4-4BEC-ACBB-ED93CD9CDFD8</string>
+			<string>90FFACB2-0DBE-43F6-BA13-6D3B89E820ED</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⚔️ Force Quit</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>B493D78F-4636-4FFB-95A5-231482DEF4F8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1136,15 +1138,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>715</real>
 		</dict>
-		<key>0F9B66EF-DAFF-49D7-A17A-D4DA04AC87A5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>645</real>
-			<key>ypos</key>
-			<real>535</real>
-		</dict>
 		<key>14ECFC26-C670-4D39-9A5C-C24B452554F2</key>
 		<dict>
 			<key>colorindex</key>
@@ -1283,12 +1276,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>91A2670C-55E4-4BEC-ACBB-ED93CD9CDFD8</key>
+		<key>90FFACB2-0DBE-43F6-BA13-6D3B89E820ED</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
+			<key>note</key>
+			<string>kill all neovide and nvim processes</string>
 			<key>xpos</key>
-			<real>965</real>
+			<real>645</real>
 			<key>ypos</key>
 			<real>535</real>
 		</dict>
@@ -1311,6 +1306,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>805</real>
 			<key>ypos</key>
 			<real>410</real>
+		</dict>
+		<key>B493D78F-4636-4FFB-95A5-231482DEF4F8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>970</real>
+			<key>ypos</key>
+			<real>535</real>
 		</dict>
 		<key>BBE73F3C-0C42-47E7-932B-EAADB2A3FD0E</key>
 		<dict>
