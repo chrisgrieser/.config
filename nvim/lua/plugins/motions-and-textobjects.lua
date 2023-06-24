@@ -63,4 +63,40 @@ return {
 		lazy = true, -- loaded by keymaps
 		dev = true,
 	},
+	{ -- distant textobjects
+		"ggandor/leap-spooky.nvim",
+		keys = { { "x", mode = { "o" }, desc = "󰆿 Distant TextObject" } },
+		dependencies = { "ggandor/leap.nvim" },
+		init = function()
+			local spooky = "x"
+			local textobjRemaps = {
+				c = "{",
+				m = "W",
+				q = '"',
+				y = "'",
+				e = "`",
+				r = "[",
+			}
+			for remap, original in pairs(textobjRemaps) do
+				vim.keymap.set("o", "a" .. spooky .. remap, spooky .. "a{", {desc = "󱡔 Distant Textobj"})
+				vim.keymap.set("o", "i" .. spooky .. remap, spooky .. "i{", {desc = "󱡔 Distant Textobj"})
+			end
+			vim.keymap.set("o", "a" .. spooky .. "c", spooky .. "a{", {desc = "󱡔 Distant Textobj"})
+			vim.keymap.set("o", "i" .. spooky .. "c", spooky .. "i{", {desc = "󱡔 Distant Textobj"})
+			vim.keymap.set("o", "a" .. spooky .. "m", spooky .. "aW", {desc = "󱡔 Distant Textobj"})
+			vim.keymap.set("o", "i" .. spooky .. "m", spooky .. "iW", {desc = "󱡔 Distant Textobj"})
+			vim.keymap.set("o", "i" .. spooky .. "q", spooky .. 'i"', {desc = "󱡔 Distant Textobj"})
+			vim.keymap.set("o", "i" .. spooky .. "q", spooky .. 'i"', {desc = "󱡔 Distant Textobj"})
+		end,
+		opts = {
+			affixes = {
+				-- magnetic = move to object after operation
+				magnetic = { window = nil, cross_window = nil },
+				remote = { window = "x", cross_window = nil },
+			},
+			-- If this option is set to true, the yanked text will automatically be pasted
+			-- at the cursor position if the unnamed register is in use.
+			paste_on_remote_yank = false,
+		},
+	},
 }
