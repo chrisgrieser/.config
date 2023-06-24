@@ -10,6 +10,7 @@ idle = true
 
 # REMOVE TITLEBAR AND TRAFFIC LIGHTS
 frame = "buttonless" # WARN using "none" prevents window managers from controlling the neovide window
+# "transparent" does not work due to overlaps with lualine: https://github.com/nvim-lualine/lualine.nvim/issues/1067
 
 # NOTE also needs to be set in neovide restart function located in
 # karabiner-hyper-config, since that file does not read from zshenv

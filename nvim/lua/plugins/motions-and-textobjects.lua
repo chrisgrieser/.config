@@ -65,28 +65,31 @@ return {
 	},
 	{ -- distant textobjects
 		"ggandor/leap-spooky.nvim",
-		keys = { { "x", mode = { "o" }, desc = "󰆿 Distant TextObject" } },
+		keys = { { "x", mode = { "o" }, desc = "󱡔 Distant Textobjects" } },
 		dependencies = { "ggandor/leap.nvim" },
 		init = function()
+			-- switch order: https://github.com/ggandor/leap-spooky.nvim/issues/6#issuecomment-1605265252
 			local spooky = "x"
-			local textobjRemaps = {
-				c = "{",
-				m = "W",
-				q = '"',
-				y = "'",
-				e = "`",
-				r = "[",
-			}
+			local textobjRemaps = { unpack(u.textobjectRemaps) }
+			-- needed for switching of order
+			textobjRemaps.insert("b", "(")
+			textobjRemaps.insert("w", "w")
+
+			-- needed for changing of keymap order
 			for remap, original in pairs(textobjRemaps) do
-				vim.keymap.set("o", "a" .. spooky .. remap, spooky .. "a{", {desc = "󱡔 Distant Textobj"})
-				vim.keymap.set("o", "i" .. spooky .. remap, spooky .. "i{", {desc = "󱡔 Distant Textobj"})
+				vim.keymap.set(
+					"o",
+					spooky .. "a" .. remap,
+					"a" .. spooky .. original,
+					{ desc = "󱡔 Distant outer " .. original, remap = true }
+				)
+				vim.keymap.set(
+					"o",
+					spooky .. "i" .. remap,
+					"i" .. spooky .. original,
+					{ desc = "󱡔 Distant inner " .. original, remap = true }
+				)
 			end
-			vim.keymap.set("o", "a" .. spooky .. "c", spooky .. "a{", {desc = "󱡔 Distant Textobj"})
-			vim.keymap.set("o", "i" .. spooky .. "c", spooky .. "i{", {desc = "󱡔 Distant Textobj"})
-			vim.keymap.set("o", "a" .. spooky .. "m", spooky .. "aW", {desc = "󱡔 Distant Textobj"})
-			vim.keymap.set("o", "i" .. spooky .. "m", spooky .. "iW", {desc = "󱡔 Distant Textobj"})
-			vim.keymap.set("o", "i" .. spooky .. "q", spooky .. 'i"', {desc = "󱡔 Distant Textobj"})
-			vim.keymap.set("o", "i" .. spooky .. "q", spooky .. 'i"', {desc = "󱡔 Distant Textobj"})
 		end,
 		opts = {
 			affixes = {
