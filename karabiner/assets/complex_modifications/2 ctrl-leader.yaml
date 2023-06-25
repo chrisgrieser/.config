@@ -313,7 +313,7 @@ rules:
         from: { key_code: r }
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://www.reddit.com/r/neovim/'
+          - shell_command: open 'https://www.reddit.com/user/pseudometapseudo/m/tech/'
           - *deactivate-leader
           - *remove-notice
       # [space]: Emoji Picker

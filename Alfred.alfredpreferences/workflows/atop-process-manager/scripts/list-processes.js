@@ -14,6 +14,8 @@ const processAppName = {
 	alacritty: "Alacritty",
 	"wezterm-gui": "WezTerm",
 	bird: "iCloud Sync",
+	"Steam Helper": "Steam",
+	"steam_osx": "Steam",
 	"Brave Browser Helper": "Brave Browser",
 	"Brave Browser Helper (Renderer)": "Brave Browser",
 	"Brave Browser Helper (GPU)": "Brave Browser",
