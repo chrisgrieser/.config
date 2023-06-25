@@ -1,7 +1,14 @@
 #!/usr/bin/env osascript -l JavaScript
-// Items follow the same pattern
+
+// CONFIG
+const maxResults = 3;
+const minQueryLength = 4;
+
+//──────────────────────────────────────────────────────────────────────────────
+
+/** @param {string[]} itemNames */
 function makeItems(itemNames) {
-	return itemNames.map((name) => {
+	return itemNames.map((/** @type {string} */ name) => {
 		return {
 			uid: name,
 			title: name,
@@ -10,36 +17,57 @@ function makeItems(itemNames) {
 	});
 }
 
+/** @param {string} url */
+function httpRequest(url) {
+	const queryURL = $.NSURL.URLWithString(url);
+	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+	return requestString;
+}
+
 // Check values from previous runs this session
 const oldArg = $.NSProcessInfo.processInfo.environment.objectForKey("oldArg").js;
 const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js;
 
+//──────────────────────────────────────────────────────────────────────────────
+
 // Build items
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	// If the user is typing, return early to guarantee the top entry is the currently typed query
-	// If we waited for the API, a fast typer would search for an incomplete query
-	if (argv[0] !== oldArg) {
+	const query = argv[0];
+	if (query.length < minQueryLength) {
 		return JSON.stringify({
 			rerun: 0.1,
 			skipknowledge: true,
-			variables: { oldResults: oldResults, oldArg: argv[0] },
-			items: makeItems(argv.concat(oldResults?.split("\n").filter((line) => line))),
+			items: makeItems([query]),
+		});
+	}
+
+	// If the user is typing, return early to guarantee the top entry is the currently typed query
+	// If we waited for the API, a fast typer would search for an incomplete query
+	if (query !== oldArg) {
+		return JSON.stringify({
+			rerun: 0.1,
+			skipknowledge: true,
+			variables: { oldResults: oldResults, oldArg: query },
+			items: makeItems(argv.concat(oldResults?.split("\n").filter((/** @type {string} */ line) => line))),
 		});
 	}
 
 	// Make the API request
-	const encodedQuery = encodeURIComponent(argv[0]);
-	const queryURL = $.NSURL.URLWithString(
-		"https://suggestqueries.google.com/complete/search?output=chrome&ie=utf8&oe=utf8&q=" + encodedQuery,
-	);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
-	const newResults = JSON.parse(requestString)[1].filter((result) => result !== argv[0]);
+	const queryURL =
+		"https://suggestqueries.google.com/complete/search?output=chrome&ie=utf8&oe=utf8&q=" +
+		encodeURIComponent(query);
+	const requestString = httpRequest(queryURL);
+	const newResults = JSON.parse(requestString)[1]
+		.filter((/** @type {string} */ result) => result !== query)
+		.slice(0, maxResults - 1); // fewer results so it does not clog up
 
 	// Return final JSON
 	return JSON.stringify({
 		skipknowledge: true,
-		variables: { oldResults: newResults.join("\n"), oldArg: argv[0] },
+		variables: { oldResults: newResults.join("\n"), oldArg: query },
 		items: makeItems(argv.concat(newResults)),
 	});
 }

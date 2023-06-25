@@ -103,9 +103,9 @@ elseif M.borderStyle == "rounded" then
 end
 
 M.textobjectRemaps = {
-	c = "{", -- [c]urly
-	r = "[", -- [r]ectangular bracket
-	b = "(", -- [b]racket
+	c = "}", -- [c]urly
+	r = "]", -- [r]ectangular bracket
+	b = ")", -- [b]racket
 	m = "W", -- [m]assive word
 	q = '"', -- [q]uote
 	y = "'", -- s[y]ngle quote
