@@ -215,8 +215,12 @@ local config = {
 
 	-- Scroll & Scrollbar
 	enable_scroll_bar = true,
-	-- if scrollbar enabled, "rights" controls scrollbar width
-	window_padding = { left = "0.5cell", right = "1cell", top = "0.3cell", bottom = "0.3cell" },
+	window_padding = {
+		left = "0.5cell",
+		right = "1.1cell", -- if scrollbar enabled, "rights" controls scrollbar width
+		top = "45px", -- account for macOS traffic lights
+		bottom = "0.3cell",
+	},
 	min_scroll_bar_height = "3cell",
 	scrollback_lines = 5000,
 
