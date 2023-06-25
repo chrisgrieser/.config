@@ -66,11 +66,10 @@ return {
 	},
 	{ -- distant textobjects
 		"ggandor/leap-spooky.nvim",
-		keys = { { spooky, mode = { "o" }, desc = "󱡔 Distant Textobjects" } },
+		keys = { { spooky, mode = { "o" }, desc = "󱡔 Load Leap Spooky" } },
 		dependencies = { "ggandor/leap.nvim" },
 		init = function()
 			local textobjRemaps = vim.deepcopy(u.textobjectRemaps)
-			print("👽 beep")
 			for remap, original in pairs(textobjRemaps) do
 				vim.keymap.set(
 					"o",

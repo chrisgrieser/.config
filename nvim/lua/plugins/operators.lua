@@ -24,10 +24,17 @@ return {
 	{ -- substitute
 		"gbprod/substitute.nvim",
 		lazy = true,
-		opts = {
-			-- integrate with yanky.nvim
-			on_substitute = require("yanky.integration").substitute(),
-		},
+		init = function()
+			-- stylua: ignore start
+			vim.keymap.set("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
+			vim.keymap.set("n", "ss", function() require("substitute").line() end, { desc = "substitute line" })
+			vim.keymap.set("n", "S", function() require("substitute").eol() end, { desc = "substitute to EoL" })
+			vim.keymap.set("n", "sw", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
+			vim.keymap.set("n", "sW", "sw$", { remap = true, desc = "exchange to EoL" })
+			vim.keymap.set("n", "sww", function() require("substitute.exchange").line() end, { desc = "exchange line" })
+			-- stylua: ignore end
+		end,
+		opts = { on_substitute = require("yanky.integration").substitute() },
 	},
 	{ -- duplicate
 		"smjonas/duplicate.nvim",
@@ -148,7 +155,9 @@ return {
 						},
 					},
 					[u.textobjectMaps["function"]] = {
-						find = function() return config.get_selection { motion = "a" .. u.textobjectMaps["function"] } end,
+						find = function()
+							return config.get_selection { motion = "a" .. u.textobjectMaps["function"] }
+						end,
 						delete = function()
 							local ft = vim.bo.filetype
 							local patt
@@ -194,11 +203,15 @@ return {
 						end,
 					},
 					[u.textobjectMaps["call"]] = {
-						find = function() return config.get_selection { motion = "a" .. u.textobjectMaps["call"] } end,
+						find = function()
+							return config.get_selection { motion = "a" .. u.textobjectMaps["call"] }
+						end,
 						delete = "^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
 					},
 					[u.textobjectMaps["conditional"]] = {
-						find = function() return config.get_selection { motion = "a" .. u.textobjectMaps["conditional"] } end,
+						find = function()
+							return config.get_selection { motion = "a" .. u.textobjectMaps["conditional"] }
+						end,
 						delete = function()
 							local ft = vim.bo.filetype
 							local patt
