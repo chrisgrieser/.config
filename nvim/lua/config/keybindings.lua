@@ -272,17 +272,6 @@ keymap({ "n", "x" }, "zg", function()
 end, { desc = "󰓆 Accept Word" })
 
 --------------------------------------------------------------------------------
-
--- [S]ubstitute Operator (substitute.nvim)
-keymap("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
-keymap("n", "ss", function() require("substitute").line() end, { desc = "substitute line" })
-keymap("n", "S", function() require("substitute").eol() end, { desc = "substitute to end of line" })
--- stylua: ignore
-keymap("n", "sx", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
-keymap("n", "sX", "sx$", { remap = true, desc = "exchange to EoL" })
-keymap("n", "sxx", function() require("substitute.exchange").line() end, { desc = "exchange line" })
-
---------------------------------------------------------------------------------
 -- REFACTORING
 
 vim.keymap.set(
