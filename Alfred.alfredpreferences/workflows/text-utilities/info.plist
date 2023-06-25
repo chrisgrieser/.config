@@ -73,19 +73,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>2C3096AF-8F24-4867-8D53-45B346013DBD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>96DE06E0-96D8-4908-AEC8-135A1EE82021</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>2CA5D5B9-442F-45BC-A7D1-E4BF6FEDBA31</key>
 		<array>
 			<dict>
@@ -432,6 +419,11 @@
 				<key>withspace</key>
 				<true/>
 			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>fzf-loop</string>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
@@ -563,21 +555,6 @@
 			<string>DA29F8C2-B81A-4569-A119-43832B08EFD7</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>fzf-loop</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>2C3096AF-8F24-4867-8D53-45B346013DBD</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1224,15 +1201,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<integer>9</integer>
 			<key>xpos</key>
 			<real>615</real>
-			<key>ypos</key>
-			<real>135</real>
-		</dict>
-		<key>2C3096AF-8F24-4867-8D53-45B346013DBD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>30</real>
 			<key>ypos</key>
 			<real>135</real>
 		</dict>
