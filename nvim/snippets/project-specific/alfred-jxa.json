@@ -23,12 +23,18 @@
 		"prefix": "Get Alfred Env (+ resolve home)",
 		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\").replace(/^~/, app.pathTo(\"home folder\"));"
 	},
-	"name": {
-		"prefix": "name",
+	"http request": {
+		"prefix": "http request",
+		"description": "http request via c-bridge",
 		"body": [
-			""
-		],
-		"description": "desc"
+			"/** @param {string} url */",
+			"function httpRequest(url) {",
+			"\tconst queryURL = $.NSURL.URLWithString(url);",
+			"\tconst requestData = $.NSData.dataWithContentsOfURL(queryURL);",
+			"\tconst requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;",
+			"\treturn requestString;",
+			"}"
+		]
 	},
 	"AlfredRun": {
 		"prefix": ["run (Alfred)", "AlfredRun", "argv (Alfred)"],
