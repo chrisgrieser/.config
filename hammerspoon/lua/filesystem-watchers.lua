@@ -77,7 +77,6 @@ local browserSettings = env.dotfilesFolder .. "/_browser-extension-configs/"
 FileHubWatcher = pw(env.fileHub, function(paths, _)
 	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
-		print("filep:", filep)
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 

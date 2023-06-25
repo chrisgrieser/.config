@@ -1,3 +1,7 @@
+local u = require("config.utils")
+local spooky = "x" -- key triggering remote textobj
+--------------------------------------------------------------------------------
+
 return {
 	{ -- highlights for ftFT
 		"jinh0/eyeliner.nvim",
@@ -15,14 +19,14 @@ return {
 	{ -- display line numbers when using `:` to go to a line with
 		"nacro90/numb.nvim",
 		keys = ":",
-		opts = true,
+		config = true,
 	},
 	{ -- better % (highlighting, matches across lines, match quotes)
 		"andymass/vim-matchup",
 		lazy = false, -- cannot be properly lazy-loaded
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
-			vim.g.matchup_matchparen_offscreen = {} 
+			vim.g.matchup_matchparen_offscreen = {} -- empty = disables
 			vim.g.matchup_text_obj_enabled = 0
 		end,
 	},
@@ -33,9 +37,9 @@ return {
 		opts = { skipInsignificantPunctuation = true },
 		init = function()
 			-- stylua: ignore
-			vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "󱇫 e" })
+			vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "󱇫 Spider-e" })
 			-- stylua: ignore
-			vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "󱇫 b" })
+			vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "󱇫 Spider-b" })
 		end,
 	},
 	{ -- better marks
@@ -43,7 +47,7 @@ return {
 		event = "VimEnter", -- cannot be loaded on keymaps due to the bookmark signs
 		opts = {
 			sign_priority = 8, --set bookmark sign priority to cover other sign
-			save_file = require("config.utils").vimDataDir .. "/bookmarks",
+			save_file = u.vimDataDir .. "/bookmarks",
 			signs = {
 				add = { text = "󰃀" },
 			},
@@ -62,14 +66,32 @@ return {
 	},
 	{ -- distant textobjects
 		"ggandor/leap-spooky.nvim",
-		keys = { { "x", mode = { "o" }, desc = "󱡔 Distant Textobjects" } },
+		keys = { { spooky, mode = { "o" }, desc = "󱡔 Distant Textobjects" } },
 		dependencies = { "ggandor/leap.nvim" },
+		init = function()
+			local textobjRemaps = vim.deepcopy(u.textobjectRemaps)
+			print("👽 beep")
+			for remap, original in pairs(textobjRemaps) do
+				vim.keymap.set(
+					"o",
+					spooky .. "a" .. remap,
+					spooky .. "a" .. original,
+					{ desc = "󱡔 Distant outer " .. original, remap = true }
+				)
+				vim.keymap.set(
+					"o",
+					spooky .. "i" .. remap,
+					spooky .. "i" .. original,
+					{ desc = "󱡔 Distant inner " .. original, remap = true }
+				)
+			end
+		end,
 		opts = {
 			affixes = {
 				magnetic = { window = nil, cross_window = nil }, -- magnetic = move to object after operation
-				remote = { window = "x", cross_window = nil },
+				remote = { window = spooky, cross_window = nil },
 			},
-			infix = false, -- true: `riw`, false: `irw`
+			infix = false, -- true: `irw`, false: `riw` [ffffrf]
 			paste_on_remote_yank = false,
 		},
 	},
