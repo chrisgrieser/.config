@@ -1,7 +1,3 @@
-local u = require("config.utils")
-local spooky = "x" -- key triggering remote textobj
---------------------------------------------------------------------------------
-
 return {
 	{ -- highlights for ftFT
 		"jinh0/eyeliner.nvim",
@@ -19,14 +15,14 @@ return {
 	{ -- display line numbers when using `:` to go to a line with
 		"nacro90/numb.nvim",
 		keys = ":",
-		config = true,
+		opts = true,
 	},
 	{ -- better % (highlighting, matches across lines, match quotes)
 		"andymass/vim-matchup",
 		lazy = false, -- cannot be properly lazy-loaded
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
-			vim.g.matchup_matchparen_offscreen = {} -- empty = disables
+			vim.g.matchup_matchparen_offscreen = {} 
 			vim.g.matchup_text_obj_enabled = 0
 		end,
 	},
@@ -47,7 +43,7 @@ return {
 		event = "VimEnter", -- cannot be loaded on keymaps due to the bookmark signs
 		opts = {
 			sign_priority = 8, --set bookmark sign priority to cover other sign
-			save_file = u.vimDataDir .. "/bookmarks",
+			save_file = require("config.utils").vimDataDir .. "/bookmarks",
 			signs = {
 				add = { text = "󰃀" },
 			},
@@ -66,37 +62,14 @@ return {
 	},
 	{ -- distant textobjects
 		"ggandor/leap-spooky.nvim",
-		keys = { { spooky, mode = { "o" }, desc = "󱡔 Distant Textobjects" } },
+		keys = { { "x", mode = { "o" }, desc = "󱡔 Distant Textobjects" } },
 		dependencies = { "ggandor/leap.nvim" },
-		init = function()
-			-- switch order: https://github.com/ggandor/leap-spooky.nvim/issues/6#issuecomment-1605265252
-			local textobjRemaps = vim.deepcopy(require("config.utils").textobjectRemaps)
-			textobjRemaps.w = "w" -- needed for switching of order
-
-			-- needed for changing of keymap order
-			for remap, original in pairs(textobjRemaps) do
-				vim.keymap.set(
-					"o",
-					spooky .. "a" .. remap,
-					"a" .. spooky .. original,
-					{ desc = "󱡔 Distant outer " .. original, remap = true }
-				)
-				vim.keymap.set(
-					"o",
-					spooky .. "i" .. remap,
-					"i" .. spooky .. original,
-					{ desc = "󱡔 Distant inner " .. original, remap = true }
-				)
-			end
-		end,
 		opts = {
 			affixes = {
-				-- magnetic = move to object after operation
-				magnetic = { window = nil, cross_window = nil },
-				remote = { window = spooky, cross_window = nil },
+				magnetic = { window = nil, cross_window = nil }, -- magnetic = move to object after operation
+				remote = { window = "x", cross_window = nil },
 			},
-			-- If this option is set to true, the yanked text will automatically be pasted
-			-- at the cursor position if the unnamed register is in use.
+			infix = false, -- true: `riw`, false: `irw`
 			paste_on_remote_yank = false,
 		},
 	},

@@ -17,26 +17,7 @@ function run (argv) {
 
 	const baseURL = "https://developer.mozilla.org";
 	const searchAPI = "https://developer.mozilla.org/api/v1/search?q=";
-	const baseURL2 = "https://cssreference.io/";
 	const output = [];
-
-	if (lang === "CSS") {
-		app.doShellScript(`curl -sL "${baseURL2}" | grep "<article"`)
-			.match(/data-property-name=".+?"/g)
-			.map(item => item.slice(20, -1)) // eslint-disable-line no-magic-numbers
-			.filter(item => item.includes(query)) // since filtered not filtered by Alfred
-			.forEach(item => {
-				const url = `${baseURL2}/property/${item}`;
-				output.push ({
-					"title": item,
-					"match": alfredMatcher(item),
-					"subtitle": "visual reference",
-					"arg": url,
-					"uid": url,
-					"icon": { "path": "./css.png" },
-				});
-			});
-	}
 
 	const resultsArr = onlineJSON(searchAPI + query)
 		.documents
