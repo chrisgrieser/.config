@@ -21,7 +21,7 @@ if [[ -z "$SEL" ]]; then
 fi
 
 # clean up
-SEL=$(echo -n "$SEL" | xargs echo -n) # trims whitespace
+SEL=$(echo -n "$SEL" | xargs) # trims whitespace
 SEL="${SEL/#\~/$HOME}"                # resolve ~
 
 # openers

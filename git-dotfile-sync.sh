@@ -36,11 +36,3 @@ while true; do
 	i=$((i + 1))
 	[[ $i -gt 20 ]] && break
 done
-
-# check that everything worked (e.g. submodules are still dirty)
-DIRTY=$(git status --porcelain)
-if [[ -n "$DIRTY" ]]; then
-	printf "\033[1;33mVault Repo still dirty.033[0m"
-	echo "$DIRTY"
-	return 1
-fi

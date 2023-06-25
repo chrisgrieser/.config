@@ -1,8 +1,9 @@
 #!/usr/bin/env osascript -l JavaScript
 
 // CONFIG
-const maxResults = 3;
-const minQueryLength = 4;
+ObjC.import("stdlib")
+const maxResults = $.getenv("max_results") || 4;
+const minQueryLength = $.getenv("min_query_length") || 4;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -35,6 +36,9 @@ const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResu
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
+
+	// make no request below the minimum length, but show the typed query as
+	// fallback search
 	const query = argv[0];
 	if (query.length < minQueryLength) {
 		return JSON.stringify({
@@ -63,6 +67,7 @@ function run(argv) {
 	const newResults = JSON.parse(requestString)[1]
 		.filter((/** @type {string} */ result) => result !== query)
 		.slice(0, maxResults - 1); // fewer results so it does not clog up
+
 
 	// Return final JSON
 	return JSON.stringify({
