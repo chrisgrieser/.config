@@ -73,20 +73,26 @@ end):start()
 -- FROM FILE HUB
 
 local browserSettings = env.dotfilesFolder .. "/_browser-extension-configs/"
+-- selene: allow(high_cyclomatic_complexity)
 FileHubWatcher = pw(env.fileHub, function(paths, _)
 	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
+		print("filep:", filep)
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 
-		-- alfredworkflows, ics, and dmg (iCal)
+		-- alfredworkflows, ics (iCal), and dmg
 		if ext == "alfredworkflow" or ext == "ics" or ext == "dmg" then
-			-- opening ics and Alfred leads to recursions when opened via this file
-			-- watcher and are therefore opened via browser auto-open instead. dmg
-			-- cannot be opened via browser though and also does not create recursion,
-			-- so it is opened here
-			if ext == "dmg" and not (fileName == "Stats.dmg") then hs.open(filep) end
-			u.runWithDelays(3, function() os.remove(filep) end)
+			local fileExists, msg = pcall(hs.fs.xattr.get, filep, "com.apple.quarantine")
+			local isDownloaded = fileExists and msg ~= nil
+			if isDownloaded then
+				-- opening ics and Alfred leads to recursions when opened via this file
+				-- watcher and are therefore opened via browser auto-open instead. dmg
+				-- cannot be opened via browser though and also does not create recursion,
+				-- so it is opened here
+				if not (fileName == "Stats.dmg") then hs.open(filep) end
+				u.runWithDelays(3, function() os.remove(filep) end)
+			end
 
 		-- zip: unzip
 		elseif ext == "zip" and fileName ~= "violentmonkey.zip" then
