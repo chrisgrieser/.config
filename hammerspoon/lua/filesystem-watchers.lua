@@ -75,6 +75,7 @@ end):start()
 local browserSettings = env.dotfilesFolder .. "/_browser-extension-configs/"
 -- selene: allow(high_cyclomatic_complexity)
 FileHubWatcher = pw(env.fileHub, function(paths, _)
+	FileHubWatcher:stop() -- prevent concurrent runs
 	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
 		print("filep:", filep)
@@ -141,6 +142,7 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 			print("➡️ Inoreader backup")
 		end
 	end
+	FileHubWatcher:start()
 end):start()
 
 --------------------------------------------------------------------------------
