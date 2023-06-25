@@ -25,9 +25,17 @@ fi
 
 # git add-commit-pull-push
 msg="$device_name ($filesChanged)"
-git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
-git pull
-git push
+
+# loop git add-commit-pull-push, since when between add and push files have been
+# changed, the push will fail
+i=0
+while true; do
+	git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
+	git pull && git push && break
+	sleep 5
+	i=$((i + 1))
+	[[ $i -gt 20 ]] && break
+done
 
 # check that everything worked (e.g. submodules are still dirty)
 DIRTY=$(git status --porcelain)
