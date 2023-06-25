@@ -205,6 +205,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>10865C97-3E89-46DF-AB64-9ED0BDB8A76B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>642DC21D-E907-412F-8F6F-7E24FE991B23</key>
 		<array>
 			<dict>
@@ -1097,21 +1110,50 @@ echo -n "$appid"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
 				<false/>
-				<key>skipvarencode</key>
+				<key>transient</key>
 				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+			<string>10865C97-3E89-46DF-AB64-9ED0BDB8A76B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<true/>
+				<key>items</key>
+				<string>[{"title":"⎋ \/ Escape","subtitle":"53"},{"title":"⌘ \/ Command","subtitle":"55"},{"title":"⌥ \/ Option \/ Alt","subtitle":"58 (left) \/ 61 (right)"},{"title":"⌃ \/ Control","subtitle":"59 (left) \/ 62 (right)"},{"title":"⇧ \/ Shift","subtitle":"56 (left) \/ 60 (right)"},{"title":"⇪ \/ Caps Lock","subtitle":"57"},{"title":"⏎ \/ Return","subtitle":"36"},{"title":"⌤ \/ Enter","subtitle":"76"},{"title":"⇥ \/ Tab","subtitle":"48"},{"title":"␣ \/ Space","subtitle":"49"},{"title":"⌫ \/ Delete \/ Backspace","subtitle":"51"},{"title":"⌦ \/ Forward Delete","subtitle":"117"},{"title":"← \/ Left Arrow","subtitle":"123"},{"title":"→ \/ Right Arrow","subtitle":"124"},{"title":"↓ \/ Down Arrow","subtitle":"125"},{"title":"↑ \/ Up Arrow","subtitle":"126"},{"title":"⇞ \/ Page Up","subtitle":"116"},{"title":"⇟ \/ Page Down","subtitle":"121"},{"title":"⇱ \/ Home","subtitle":"115"},{"title":"⇲ \/ End","subtitle":"119"},{"title":"fn","subtitle":"63"},{"title":"F1","subtitle":"122"},{"title":"F2","subtitle":"120"},{"title":"F3","subtitle":"99"},{"title":"F4","subtitle":"118"},{"title":"F5","subtitle":"96"},{"title":"F6","subtitle":"97"},{"title":"F7","subtitle":"98"},{"title":"F8","subtitle":"100"},{"title":"F9","subtitle":"101"},{"title":"F10","subtitle":"109"},{"title":"F11","subtitle":"103"},{"title":"F12","subtitle":"111"},{"title":"F13","subtitle":"105"},{"title":"F14","subtitle":"107"},{"title":"F15","subtitle":"113"},{"title":"F16","subtitle":"106"},{"title":"F17","subtitle":"64"},{"title":"F18","subtitle":"79"},{"title":"F19","subtitle":"80"},{"title":"F20","subtitle":"90"}]</string>
+				<key>keyword</key>
+				<string>kc</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Translate keyboard keys to AppleScript key codes</string>
+				<key>title</key>
+				<string>KeyCodes</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1261,6 +1303,27 @@ echo -n "$appid"</string>
 			<string>1D45A48A-4AD6-46C9-8532-E384C79B551C</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1923,6 +1986,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>425</real>
 		</dict>
+		<key>10865C97-3E89-46DF-AB64-9ED0BDB8A76B</key>
+		<dict>
+			<key>xpos</key>
+			<real>695</real>
+			<key>ypos</key>
+			<real>535</real>
+		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
 			<key>colorindex</key>
@@ -2001,6 +2071,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>1655</real>
 		</dict>
+		<key>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</key>
+		<dict>
+			<key>xpos</key>
+			<real>540</real>
+			<key>ypos</key>
+			<real>535</real>
+		</dict>
 		<key>642DC21D-E907-412F-8F6F-7E24FE991B23</key>
 		<dict>
 			<key>colorindex</key>
@@ -2053,9 +2130,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>620</real>
+			<real>590</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>905</real>
 		</dict>
 		<key>AC5C19D5-CCA0-42C5-8A17-70BF48C23681</key>
 		<dict>

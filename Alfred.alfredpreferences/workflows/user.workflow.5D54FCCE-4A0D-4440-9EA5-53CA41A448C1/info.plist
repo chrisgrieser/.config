@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.vitorgalvao.alfred.temporaryemail</string>
+	<key>category</key>
+	<string>⬇️</string>
 	<key>connections</key>
 	<dict>
 		<key>1BFF14FC-DF72-4BC9-807B-3D38432CF08D</key>
