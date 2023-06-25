@@ -75,12 +75,15 @@ end):start()
 local browserSettings = env.dotfilesFolder .. "/_browser-extension-configs/"
 -- selene: allow(high_cyclomatic_complexity)
 FileHubWatcher = pw(env.fileHub, function(paths, _)
-	FileHubWatcher:stop() -- prevent concurrent runs
 	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
 		print("filep:", filep)
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
+
+		-- prevent concurrent runs
+		if filep == FileHubWatcherLastFile then return end
+		FileHubWatcherLastFile = filep
 
 		-- alfredworkflows, ics (iCal), and dmg
 		if ext == "alfredworkflow" or ext == "ics" or ext == "dmg" then
@@ -142,7 +145,6 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 			print("➡️ Inoreader backup")
 		end
 	end
-	FileHubWatcher:start()
 end):start()
 
 --------------------------------------------------------------------------------
