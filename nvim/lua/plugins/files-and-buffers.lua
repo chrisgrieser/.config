@@ -78,7 +78,7 @@ return {
 				"info.plist", -- Alfred
 				".luarc.json", -- lua
 				".project-root", -- manually marked
-				"=File Hub",
+				"=com~apple~CloudDocs", -- iCloud documents
 			},
 		},
 	},
