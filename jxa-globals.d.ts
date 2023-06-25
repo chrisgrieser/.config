@@ -85,5 +85,6 @@ declare const $: {
 	NSURL: any;
 	// rome-ignore lint/suspicious/noExplicitAny: too long
 	NSString: any;
-	NSData: string;
+	// rome-ignore lint/suspicious/noExplicitAny: too long
+	NSData: any;
 };
