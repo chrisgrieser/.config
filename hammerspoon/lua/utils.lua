@@ -89,7 +89,7 @@ end
 
 ---@nodiscard
 ---@return boolean
-function M.isDarkMode() return hs.execute([[defaults read -g AppleInterfaceStyle]]) == "Dark\n" end
+function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle") == "Dark\n" end
 
 ---Repeat a function multiple times
 ---@param delaySecs number|number[]
