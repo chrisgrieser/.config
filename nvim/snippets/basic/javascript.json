@@ -28,7 +28,7 @@
 			"split by line",
 			".split (by line)"
 		],
-		"body": ".split(\"\\r\")"
+		"body": ".split(/[\\r\\n]/)"
 	},
 	"JSDoc: type definition": {
 		"prefix": "type definition (JSDoc)",
