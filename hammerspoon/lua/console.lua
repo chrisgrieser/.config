@@ -1,5 +1,7 @@
 local u = require("lua.utils")
 local cons = hs.console
+local wf = require("lua.utils").wf
+local aw = require("lua.utils").aw
 --------------------------------------------------------------------------------
 
 -- CONSOLE APPEARANCE
@@ -35,8 +37,7 @@ local function cleanupConsole()
 
 	local cleanLines = {}
 	for _, line in ipairs(consoleLines) do
-		local ignore = 
-			line:find("Loading extensions?: ")
+		local ignore = line:find("Loading extensions?: ")
 			or line:find("Lazy extension loading enabled$")
 			or line:find("Loading Spoon: RoundedCorners$")
 			or line:find("Loading /Users/chrisgrieser/.config/hammerspoon/init.lua$")
@@ -74,14 +75,14 @@ end
 
 -- clean up console as soon as it is opened
 -- hide console as soon as unfocused
-Wf_hsConsole = u.wf
-	.new("Hammerspoon")
-	:subscribe(u.wf.windowFocused, function(newWin)
-		if newWin:title() == "Hammerspoon Console" then cleanupConsole() end
-	end)
-	:subscribe(u.wf.windowUnfocused, function(win)
-		if win:title() == "Hammerspoon Console" then u.app("Hammerspoon"):hide() end
-	end)
+Wf_hsConsole = wf.new("Hammerspoon"):subscribe(wf.windowUnfocused, function(win)
+	if win:title() == "Hammerspoon Console" then u.app("Hammerspoon"):hide() end
+end)
+
+Aw_hsConsole = aw.new(function(appName, eventType)
+	if not (appName == "Hammerspoon" and eventType == aw.activated) then return end
+	cleanupConsole()
+end):start()
 
 --------------------------------------------------------------------------------
 
