@@ -32,6 +32,8 @@ matches:
     replace: "<https://dontasktoask.com/>"
   - trigger: "!bug"
     replace: Could you open a bug report at the GitHub repo? Reason being that the bug report forms asks for various information I need to investigate the issue. (also, I don't have the time to look into it right now, so an issue will make sure that I can keep track of it.)
+  - trigger: "!here"
+    replace: "<https://heyoka.medium.com/dont-use-click-here-f32f445d1021>"
     #───────────────────────────────────────────────────────────────────────────
   - trigger: "!iso"
     replace: "{{todayISO}}"

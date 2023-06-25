@@ -1,6 +1,8 @@
 matches:
-  # INFO not considering "s" as third letter to not trigger for cases like "FRs"
-  - regex: "\\b(?P<one>[A-Z])(?P<two>[A-Z])(?P<three>[a-rt-z])"
+  # INFO 
+  # not considering "s" as third letter to not trigger, e.g. "FRs"
+  # not considering "Z" as second letter to avoid trigger from using "ZZ" in vim
+  - regex: "\\b(?P<one>[A-Z])(?P<two>[A-Y])(?P<three>[a-prt-z])"
     replace: "{{CapitalCased}}"
     vars:
       - name: CapitalCased

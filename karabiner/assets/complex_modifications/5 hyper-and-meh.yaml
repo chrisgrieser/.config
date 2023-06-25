@@ -78,10 +78,20 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Insert Mode Vim: ⇪ Hyper + hjklion<space> → ⌫←↓↑→"
     manipulators:
+      # deletion
       - type: basic
         from: { key_code: "n", modifiers: { mandatory: [option, shift, command, control] } }
         to:
           - key_code: delete_or_backspace
+      - type: basic
+        from: { key_code: "x", modifiers: { mandatory: [option, shift, command, control] } }
+        to:
+          - { key_code: delete_or_backspace, modifiers: [command] }
+      - type: basic
+        from: { key_code: "c", modifiers: { mandatory: [option, shift, command, control] } }
+        to:
+          - { key_code: "k", modifiers: [control] }
+        #───────────────────────────────────────────────────────────────────────
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [option, shift, command, control] } }
         to:
