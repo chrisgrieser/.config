@@ -31,19 +31,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>41A62747-D9A2-486F-960E-917B8191976F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>393BA661-A566-4A4C-872F-3385CC07DDB9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5A2AE042-71CD-47D6-9A72-3373D8EDE642</key>
 		<array>
 			<dict>
@@ -309,21 +296,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>search-selection</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>41A62747-D9A2-486F-960E-917B8191976F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -336,6 +308,11 @@
 				<string>search-selection.sh</string>
 				<key>type</key>
 				<integer>8</integer>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>search-selection</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -405,18 +382,9 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>255</real>
+			<real>205</real>
 			<key>ypos</key>
 			<real>590</real>
-		</dict>
-		<key>41A62747-D9A2-486F-960E-917B8191976F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>470</real>
 		</dict>
 		<key>5A2AE042-71CD-47D6-9A72-3373D8EDE642</key>
 		<dict>
