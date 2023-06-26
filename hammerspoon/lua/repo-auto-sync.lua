@@ -8,7 +8,6 @@ local u = require("lua.utils")
 local function gitDotfileSync()
 	local gitDotfileScript = env.dotfilesFolder .. "/git-dotfile-sync.sh"
 	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return false end
-	if not (u.screenIsUnlocked()) then return false end -- prevent standby home device background sync when in office
 
 	GitDotfileSyncTask = hs.task
 		.new(gitDotfileScript, function(exitCode, _, stdErr)
@@ -27,7 +26,6 @@ end
 local function gitVaultSync()
 	local gitVaultScript = env.vaultLocation .. "/Meta/git-vault-sync.sh"
 	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return false end
-	if not (u.screenIsUnlocked()) then return false end -- prevent of standby home device background sync when in office
 
 	GitVaultSyncTask = hs.task
 		.new(gitVaultScript, function(exitCode, _, stdErr)
@@ -46,7 +44,6 @@ end
 local function gitPassSync()
 	local gitPassScript = env.passwordStore .. "/pass-sync.sh"
 	if GitPassSyncTask and GitPassSyncTask:isRunning() then return false end
-	if not u.screenIsUnlocked() then return false end -- prevent of standby home device background sync when in office
 
 	GitPassSyncTask = hs.task
 		.new(gitPassScript, function(exitCode, _, stdErr)
@@ -91,7 +88,11 @@ if not u.isReloading() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
 local repoSyncMins = 30
-RepoSyncTimer = hs.timer.doEvery(repoSyncMins * 60, function() syncAllGitRepos(false) end):start()
+RepoSyncTimer = hs.timer
+	.doEvery(repoSyncMins * 60, function()
+		if u.screenIsUnlocked() then syncAllGitRepos(false) end
+	end)
+	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
 u.urischeme("sync-repos", function()
