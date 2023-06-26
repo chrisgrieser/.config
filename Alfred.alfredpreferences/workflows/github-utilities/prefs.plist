@@ -12,5 +12,7 @@
 	<string>🤖 automated</string>
 	<key>results_number</key>
 	<string>40</string>
+	<key>vault_repo</key>
+	<string>~/main-vault</string>
 </dict>
 </plist>

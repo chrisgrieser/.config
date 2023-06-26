@@ -1880,18 +1880,18 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>~/Users/chrisgrieser/.config</string>
+				<string></string>
 				<key>filtermode</key>
 				<integer>1</integer>
 				<key>placeholder</key>
-				<string>~/Users/chrisgrieser/.config</string>
+				<string>~/.config</string>
 				<key>required</key>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>Log command will search the repo of the current Finder or fall back to this repo if Finder is not the frontmost window.</string>
+			<string>git log and git status command will search the repo of the current Finder or fall back to this repo if Finder is not the frontmost window.</string>
 			<key>label</key>
-			<string>Log: Default Repo</string>
+			<string>Default Repo</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
@@ -1912,7 +1912,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>description</key>
 			<string>Comma-separated list of authors whose names should not be displayed in the log command. The commits themselves are still listed, only the author field is not shown. This is intended to reduce clutter by hiding certain author names, e.g. from bots or yourself.</string>
 			<key>label</key>
-			<string>Log: Do not display authors</string>
+			<string>Log: No authors</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
