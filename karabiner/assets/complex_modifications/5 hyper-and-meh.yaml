@@ -84,14 +84,17 @@ rules:
         to:
           - key_code: delete_or_backspace
       - type: basic
-        from: { key_code: "x", modifiers: { mandatory: [option, shift, command, control] } }
-        to:
-          - { key_code: delete_or_backspace, modifiers: [command] }
-      - type: basic
         from: { key_code: "c", modifiers: { mandatory: [option, shift, command, control] } }
         to:
-          - { key_code: "k", modifiers: [control] }
-        #───────────────────────────────────────────────────────────────────────
+          - { key_code: right_arrow, modifiers: [command, shift] }
+          - key_code: delete_or_backspace
+      - type: basic
+        from: { key_code: "x", modifiers: { mandatory: [option, shift, command, control] } }
+        to:
+          - { key_code: left_arrow, modifiers: [command, shift] }
+          - key_code: delete_or_backspace
+      #─────────────────────────────────────────────────────────────────────────
+      # Movement
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [option, shift, command, control] } }
         to:
@@ -123,8 +126,7 @@ rules:
         from: { key_code: spacebar, modifiers: { mandatory: [option, shift, command, control] } }
         to:
           - { key_code: right_arrow, modifiers: [option] } # to the right end of the word
-          - { key_code: left_arrow, modifiers: [option, shift] } # select to the left end
-          - key_code: delete_or_backspace # delete the selection
+          - { key_code: delete_or_backspace, modifiers: [option] } # delete word
           - key_code: delete_or_backspace # delete the space
           - key_code: right_arrow # go to next word
 

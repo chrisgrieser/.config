@@ -37,7 +37,7 @@ JourfixeTimer = hs.timer
 	end)
 	:start()
 
--- some maintenance tasks
+-- SOME MAINTENANCE TASKS
 -- - Backup Vault, Dotfiles, Bookmarks, and browser extension list
 -- - Reload Hammerspoon Annotations (Emmylua Spoon)
 -- - Check for low battery of connected bluetooth devices
@@ -86,11 +86,11 @@ local function idleMins(mins)
 end
 
 -- between 1:00 and 6:00, check every half hour if device has been idle for 30
--- minutes. if so, alert and wait for another minute. If still idle then, quit 
+-- minutes. if so, alert and wait for another minute. If still idle then, quit
 -- video apps
 SleepTimer = hs.timer
-	.doEvery(1800, function()
-		if not (u.betweenTime(1, 6) and idleMins(30) and env.isProjector()) then return end
+	.doEvery(10 * 60, function()
+		if not (u.betweenTime(1, 6) and idleMins(40) and env.isProjector()) then return end
 		hs.alert.show("💤 SleepTimer in 1 min if idle.")
 
 		u.runWithDelays(61, function()
