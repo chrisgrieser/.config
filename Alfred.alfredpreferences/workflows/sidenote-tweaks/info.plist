@@ -203,6 +203,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>71C0B192-0A89-41AF-BC76-029269AB4DCB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0F4E0E09-3CE4-47C5-8B25-768B18A5E1BE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>771DD115-1E19-4CFC-AB74-649F9A758391</key>
 		<array>
 			<dict>
@@ -1054,17 +1067,17 @@ sketchybar --trigger update-sidenotes-count</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>4</integer>
+						<integer>0</integer>
 						<key>matchstring</key>
-						<string>.</string>
+						<string></string>
 						<key>outputlabel</key>
-						<string>other: sel</string>
+						<string>other: no sel</string>
 						<key>uid</key>
 						<string>68CDCF97-F1F0-447D-9B01-8DDDF01FE0C3</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>other: no sel</string>
+				<string>other: sel</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
@@ -1072,27 +1085,6 @@ sketchybar --trigger update-sidenotes-count</string>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>167E1EEB-D60A-4551-94EB-F53DC9BE9725</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️ No selection</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>71C0B192-0A89-41AF-BC76-029269AB4DCB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1130,6 +1122,42 @@ sketchybar --trigger update-sidenotes-count</string>
 			<string>A0D4A0E0-54A3-4239-B00B-59020FEE6F23</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ No selection</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>71C0B192-0A89-41AF-BC76-029269AB4DCB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Basso</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>0F4E0E09-3CE4-47C5-8B25-768B18A5E1BE</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1256,6 +1284,15 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
+		<key>0F4E0E09-3CE4-47C5-8B25-768B18A5E1BE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>740</real>
+			<key>ypos</key>
+			<real>1100</real>
+		</dict>
 		<key>1043E7E2-CA81-4CDA-980D-0F40366BE6D7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1339,11 +1376,11 @@ sketchybar --trigger update-sidenotes-count</string>
 		<key>71C0B192-0A89-41AF-BC76-029269AB4DCB</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>365</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>1075</real>
+			<real>1100</real>
 		</dict>
 		<key>771DD115-1E19-4CFC-AB74-649F9A758391</key>
 		<dict>

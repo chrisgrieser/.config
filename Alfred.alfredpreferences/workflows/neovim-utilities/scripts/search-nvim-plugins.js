@@ -3,7 +3,12 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-/()_.:]/g, " ") + " " + str + " " + str.replace(/([A-Z])/g, " $1"); // match parts of CamelCase
+/** @param {string} str */
+function alfredMatcher(str) {
+	const clean = str.replace(/[-_/]/g, " ");
+	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeperated, str].join(" ") + " ";
+}
 
 /** @param {string} url */
 function httpRequest(url) {
