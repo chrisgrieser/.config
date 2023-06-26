@@ -35,8 +35,9 @@ const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResu
 function run(argv) {
 	const query = argv[0];
 
-	if (query.startsWith("http")) return; // don't suggest stuff when opening url
-	else if (query.length < minLengthForFallback) return; // or when only 3 letters
+	// don't suggest stuff when opening url or when too short
+	if (query.startsWith("http")) return; 
+	else if (query.length < minLengthForFallback) return; 
 
 	// make no request below the minimum length, but show the typed query as
 	// fallback search
@@ -61,9 +62,13 @@ function run(argv) {
 
 	// Make the API request
 	const queryURL = $.getenv("suggestion_source") + encodeURIComponent(query);
-	const newResults = JSON.parse(httpRequest(queryURL))[1]
+	const response = JSON.parse(httpRequest(queryURL));
+	const usingGoogle = $.getenv("suggestion_source").includes("google");
+	const newResults = (
+		usingGoogle ? response[1] : response.map((/** @type {{ phrase: string; }} */ t) => t.phrase)
+	)
 		.filter((/** @type {string} */ result) => result !== query)
-		.slice(0, maxResults - 1); // fewer results so it does not clog up
+		.slice(0, maxResults - 1);
 
 	// Return final JSON
 	return JSON.stringify({
