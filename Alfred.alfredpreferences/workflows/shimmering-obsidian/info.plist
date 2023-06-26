@@ -1955,19 +1955,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C60C1880-E166-4304-A913-7E307B365032</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5FECA0A1-6B1F-419D-8159-77F3A96C540F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>CA4E2034-4495-477F-B3EC-CCCFE06FF886</key>
 		<array>
 			<dict>
@@ -4802,6 +4789,11 @@ Application('com.runningwithcrayons.Alfred').removeConfiguration('ObRunning', {
 				<key>withspace</key>
 				<true/>
 			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>browser-folder-loop</string>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
@@ -4844,21 +4836,6 @@ Application('com.runningwithcrayons.Alfred').removeConfiguration('ObRunning', {
 			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
 			<string>F117FF8C-E6E5-4B0E-9FCE-DDB0A6476CAB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>browser-folder-loop</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>C60C1880-E166-4304-A913-7E307B365032</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -8280,9 +8257,9 @@ takes RELATIVE path (with or without heading) and opens it correctly</string>
 			<key>note</key>
 			<string>quicksearch note</string>
 			<key>xpos</key>
-			<real>80</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>3150</real>
+			<real>3160</real>
 		</dict>
 		<key>60A87101-8D59-46BF-BCAE-A9195D6A034E</key>
 		<dict>
@@ -9034,15 +9011,6 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>4950</real>
-		</dict>
-		<key>C60C1880-E166-4304-A913-7E307B365032</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>3370</real>
 		</dict>
 		<key>C9A73A09-3030-4283-9C89-2EE7C36BE059</key>
 		<dict>

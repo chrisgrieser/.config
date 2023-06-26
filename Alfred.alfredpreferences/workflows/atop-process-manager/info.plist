@@ -1181,7 +1181,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>xpos</key>
 			<real>175</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>545</real>
 		</dict>
 		<key>1765993C-E2F9-4224-A487-1B3FF0F4B90B</key>
 		<dict>
@@ -1324,7 +1324,7 @@ JSON.stringify({ 'items': volume_array });
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>515</real>
 		</dict>
 		<key>B6749459-30C8-484B-BE73-E64557107E37</key>
 		<dict>

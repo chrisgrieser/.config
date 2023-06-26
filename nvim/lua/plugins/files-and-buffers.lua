@@ -78,7 +78,7 @@ return {
 				"info.plist", -- Alfred
 				".luarc.json", -- lua
 				".project-root", -- manually marked
-				"=com~apple~CloudDocs", -- iCloud documents
+				">com~apple~CloudDocs", -- = all subfolders of the iCloud folders
 			},
 		},
 	},
