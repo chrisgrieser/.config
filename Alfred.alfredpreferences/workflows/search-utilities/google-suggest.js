@@ -34,6 +34,9 @@ const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResu
 function run(argv) {
 	const query = argv[0];
 
+	// don't suggest stuff when opening url
+	if (query.startsWith("http")) return;
+
 	// make no request below the minimum length, but show the typed query as
 	// fallback search
 	if (query.length < minQueryLength) {

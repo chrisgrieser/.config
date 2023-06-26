@@ -1,5 +1,4 @@
 #!/usr/bin/env osascript -l JavaScript
-ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
@@ -18,9 +17,4 @@ function browserTab() {
 	}
 	return { url: url, title: title };
 }
-const url = browserTab().url;
-
-// open in Safari
-const safari = Application("Safari");
-safari.includeStandardAdditions = true;
-safari.openLocation(url);
+browserTab().url;
