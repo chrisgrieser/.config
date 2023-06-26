@@ -5,6 +5,7 @@ ObjC.import("stdlib");
 const maxResults = parseInt($.getenv("max_results")) || 3;
 const minQueryLength = parseInt($.getenv("min_query_length")) || 5;
 const minLengthForFallback = parseInt($.getenv("min_length_for_fallback")) || 3;
+const noSuggestionRegex = new RegExp($.getenv("no_suggestion_regex"));
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -36,8 +37,8 @@ function run(argv) {
 	const query = argv[0];
 
 	// don't suggest stuff when opening url or when too short
-	if (query.startsWith("http")) return; 
-	else if (query.length < minLengthForFallback) return; 
+	if (query.startsWith("http") || query.length < minLengthForFallback || noSuggestionRegex.test(query))
+		return;
 
 	// make no request below the minimum length, but show the typed query as
 	// fallback search
