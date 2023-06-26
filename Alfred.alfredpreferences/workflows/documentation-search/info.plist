@@ -44,6 +44,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>10865C97-3E89-46DF-AB64-9ED0BDB8A76B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>88975C56-9B03-4991-A91F-B7F567C18E64</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</key>
 		<array>
 			<dict>
@@ -780,27 +793,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>App ID: '{query}'</string>
-				<key>title</key>
-				<string>✅ Copied to clipboard</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>88975C56-9B03-4991-A91F-B7F567C18E64</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -923,6 +915,27 @@ echo -n "$appid"</string>
 			<string>088EB229-A9D2-4BA2-B06E-821F6E3D8841</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>App ID: '{query}'</string>
+				<key>title</key>
+				<string>✅ Copied to clipboard</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>88975C56-9B03-4991-A91F-B7F567C18E64</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1903,8 +1916,10 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>10865C97-3E89-46DF-AB64-9ED0BDB8A76B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>695</real>
+			<real>835</real>
 			<key>ypos</key>
 			<real>400</real>
 		</dict>
@@ -1988,6 +2003,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
@@ -2025,9 +2042,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>980</real>
+			<real>1020</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>345</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
