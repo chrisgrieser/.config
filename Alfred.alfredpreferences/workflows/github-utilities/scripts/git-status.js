@@ -45,21 +45,30 @@ function run() {
 	const unstagesArr = app
 		.doShellScript(`cd "${repoPath}" && ${gitStatusCommand}`)
 		.split("\r")
-		.filter(line => line.startsWith("??") || line.startsWith(" ")) // unstaged files/changes
 		.map((file) => {
 			const pathInRepo = file.slice(3);
 			const parentFolder = pathInRepo.slice(0, pathInRepo.lastIndexOf("/"));
 			const filename = pathInRepo.slice(pathInRepo.lastIndexOf("/") + 1);
 			const trackingInfo = file.slice(0, 2)
-				.replaceAll(" M", "🟡 M")
-				.replaceAll("D", "❌ D")
-				.replaceAll("??", "❇️ ??")
+				.replaceAll("M ", "🔼🟡 M") // staged modified
+				.replaceAll("D ", "🔼❌ D") // staged deleted
+				.replaceAll("A ", "🔼❇️ A") // staged new file
+				.replaceAll("R ", "🔼✏️ R") // staged renamed
+				.replaceAll("RM", "🔼✏️ 🟡RM") // staged renamed & modified
+				.replaceAll(" M", "🟡 M") // modified
+				.replaceAll(" D", "❌ D") // deleted
+				.replaceAll("??", "❇️ ??") // untracked (new file)
+			const isAlreadyStaged = trackingInfo.includes("🔼");
 
 			return {
 				title: `${trackingInfo}   ${filename}`,
 				subtitle: parentFolder,
 				match: alfredMatcher(filename) + alfredMatcher(parentFolder),
 				arg: pathInRepo,
+				variables: {
+					mode: isAlreadyStaged ? "staged" : "new",
+					change: !trackingInfo.includes("M") ? "wholeFile" : "modified",
+				},
 			};
 		});
 
