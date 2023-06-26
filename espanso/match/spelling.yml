@@ -54,6 +54,12 @@ matches:
     replace: noch
   - regex: 'n[#Ä]t '
     replace: "n't "
+  - regex: "isnt"
+    replace: "isn't"
+    word: true
+  - regex: "arent"
+    replace: "aren't"
+    word: true
   - trigger: onyl
     replace: only
   - trigger: '#s '
