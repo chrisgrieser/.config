@@ -33,8 +33,8 @@ ProjectorScreensaverWatcher = caff
 JourfixeTimer = hs.timer
 	.doAt("09:59", "01d", function()
 		if not (getWeekday() == "Mon" and u.screenIsUnlocked()) then return end
-		hs.alert.show("Jour Fix" .. "e")
 		hs.execute("open 'slack://channel?team=T010A5PEMBQ&id=CV95T641Y'")
+		hs.alert.show("Jour Fix" .. "e")
 	end)
 	:start()
 
