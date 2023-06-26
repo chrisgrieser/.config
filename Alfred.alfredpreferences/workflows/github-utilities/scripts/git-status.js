@@ -30,7 +30,6 @@ function run() {
 	// determine repo & validate it's in a git repo
 	const defaultRepo = $.getenv("default_repo").replace(/^~/, app.pathTo("home folder"));
 	const repoPath = finderFrontWindow() || defaultRepo;
-
 	try {
 		app.doShellScript(`cd "${repoPath}" && git rev-parse --is-inside-work-tree`).startsWith("fatal:");
 	} catch (_error) {
@@ -40,7 +39,6 @@ function run() {
 	}
 
 	const gitStatusCommand = "git status --porcelain";
-
 	/** @type AlfredItem[] */
 	const unstagesArr = app
 		.doShellScript(`cd "${repoPath}" && ${gitStatusCommand}`)
@@ -52,31 +50,30 @@ function run() {
 
 			const trackingInfo = file.slice(0, 3);
 			const trackingDisplay = trackingInfo
-				.replaceAll(" M ", "🟡 M") // modified
-				.replaceAll(" D ", "❌ D") // deleted
-				.replaceAll("?? ", "❇️ ??") // untracked (new file)
-				.replaceAll("RM ", "🔼✏️ 🟡 RM") // staged renamed & unstaged modified
-				.replaceAll("MM ", "🔼🟡🟡 MM") // staged modified & unstaged modified
-				.replaceAll("M  ", "🔼🟡 M") // staged modified
-				.replaceAll("D  ", "🔼❌ D") // staged deleted
-				.replaceAll("A  ", "🔼❇️ A") // staged new file
-				.replaceAll("R  ", "🔼✏️ R"); // staged renamed
+				.replaceAll(" M ", "🟡") // modified
+				.replaceAll(" D ", "❌") // deleted
+				.replaceAll("?? ", "❇️ ") // untracked (new file)
+				.replaceAll("RM ", "🔼✏️  🟡") // staged renamed & unstaged modified
+				.replaceAll("MM ", "🔼🟡 🟡") // staged modified & unstaged modified
+				.replaceAll("M  ", "🔼🟡") // staged modified
+				.replaceAll("D  ", "🔼❌") // staged deleted
+				.replaceAll("A  ", "🔼❇️ ") // staged new file
+				.replaceAll("R  ", "🔼✏️ "); // staged renamed
 
 			return {
-				title: `${trackingDisplay}   ${filename}`,
+				title: `${trackingDisplay}  ${filename}`,
 				subtitle: parentFolder,
-				match: alfredMatcher(filename) + alfredMatcher(parentFolder),
+				match: alfredMatcher(pathInRepo),
 				arg: pathInRepo,
 				variables: {
-					staged: trackingInfo.startsWith(" ") || trackingInfo.startsWith("??"),
-					wholeFile: !trackingInfo.includes("M"),
+					doStage: trackingInfo.charAt(1) !== " ",
+					actOnWholeFile: !trackingInfo.includes("M"),
 				},
 				uid: pathInRepo, // remember order
 			};
 		});
 
 	return JSON.stringify({
-		rerun: 0.25,
 		skipknowledge: true, // remember order
 		variables: { repo: repoPath },
 		items: unstagesArr,

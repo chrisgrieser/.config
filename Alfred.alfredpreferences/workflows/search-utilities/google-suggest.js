@@ -4,6 +4,7 @@
 ObjC.import("stdlib");
 const maxResults = parseInt($.getenv("max_results")) || 3;
 const minQueryLength = parseInt($.getenv("min_query_length")) || 5;
+const minLengthForFallback = parseInt($.getenv("min_length_for_fallback")) || 3;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -35,7 +36,7 @@ function run(argv) {
 	const query = argv[0];
 
 	if (query.startsWith("http")) return; // don't suggest stuff when opening url
-	else if (query.length < 3) return; // or when only 2 letters
+	else if (query.length < minLengthForFallback) return; // or when only 3 letters
 
 	// make no request below the minimum length, but show the typed query as
 	// fallback search
@@ -59,11 +60,8 @@ function run(argv) {
 	}
 
 	// Make the API request
-	const queryURL =
-		"https://suggestqueries.google.com/complete/search?output=chrome&ie=utf8&oe=utf8&q=" +
-		encodeURIComponent(query);
-	const requestString = httpRequest(queryURL);
-	const newResults = JSON.parse(requestString)[1]
+	const queryURL = $.getenv("suggestion_source")+ encodeURIComponent(query);
+	const newResults = JSON.parse(httpRequest(queryURL))[1]
 		.filter((/** @type {string} */ result) => result !== query)
 		.slice(0, maxResults - 1); // fewer results so it does not clog up
 
