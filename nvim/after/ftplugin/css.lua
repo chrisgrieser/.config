@@ -37,7 +37,9 @@ autocmd("TextChanged", {
 --------------------------------------------------------------------------------
 -- SHIMMERING FOCUS SPECIFIC
 
-if expand("%:t") == "source.css" then
+if expand("%:t") == "fallback.css" then
+	vim.notify(" Fallback.css", u.warn)
+elseif expand("%:t") == "source.css" then
 	-- goto comment marks (deferred, to override lsp-gotosymbol)
 	vim.defer_fn(function()
 		bo.grepprg = "rg --vimgrep --no-column" -- remove columns for readability

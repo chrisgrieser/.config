@@ -69,11 +69,11 @@ rules:
         to:
           - shell_command: |
               osascript -e 'display notification "" with title "Restarting Alfred…"'
-              killall -KILL "Alfred"
+              killall -9 "Alfred"
               killall "Alfred Preferences"
               while pgrep -xq "Alfred"; do sleep 0.1; done
               sleep 0.1
-              open -a Alfred\ 5
+              open -a "Alfred 5"
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Insert Mode Vim: ⇪ Hyper + hjklion<space> → ⌫←↓↑→"

@@ -627,7 +627,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Google Auto-Suggest</string>
+	<string>Google Suggest</string>
 	<key>objects</key>
 	<array>
 		<dict>
