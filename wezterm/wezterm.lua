@@ -218,7 +218,7 @@ local config = {
 	window_padding = {
 		left = "0.5cell",
 		right = "1.1cell", -- if scrollbar enabled, "rights" controls scrollbar width
-		top = "45px", -- account for macOS traffic lights
+		top = "0.8cell", -- account for macOS traffic lights
 		bottom = "0.3cell",
 	},
 	min_scroll_bar_height = "3cell",
