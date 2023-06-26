@@ -80,10 +80,6 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 
-		-- prevent concurrent runs
-		if filep == FileHubWatcherLastFile then return end
-		FileHubWatcherLastFile = filep
-
 		-- alfredworkflows, ics (iCal), and dmg
 		if ext == "alfredworkflow" or ext == "ics" or ext == "dmg" then
 			local fileExists, msg = pcall(hs.fs.xattr.get, filep, "com.apple.quarantine")
@@ -105,6 +101,7 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 
 		-- bib: save to library
 		elseif ext == "bib" then
+			print("👽 beep")
 			local libraryPath = env.dotfilesFolder .. "/pandoc/main-bibliography.bib"
 			local bibEntry = u.readFile(filep)
 			if not bibEntry then return end
