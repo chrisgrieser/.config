@@ -1,7 +1,15 @@
 #!/usr/bin/env zsh
 
 # shellcheck disable=2154
-staged_file="$1"
+file="$1"
 cd "$repo" || return 1
-git add "$staged_file"
-echo "$staged_file"
+
+if [[ "$mode" == "new" ]]; then
+	git add "$file"
+elif [[ "$change" == "modified" ]]; then
+	git restore --staged "$file"
+elif [[ "$change" == "wholeFile" ]]; then
+	git restore "$file"
+fi
+
+echo "$file"
