@@ -32,14 +32,14 @@ ProjectorScreensaverWatcher = caff
 -- on Mondays shortly before 10:00, open #fg-organisation Slack Channel
 JourfixeTimer = hs.timer
 	.doAt("09:59", "01d", function()
-		if getWeekday() ~= "Mon" then return end
+		if not (getWeekday() == "Mon" and u.screenIsUnlocked()) then return end
 		hs.execute("open 'slack://channel?team=T010A5PEMBQ&id=CV95T641Y'")
 	end)
 	:start()
 
 -- SOME MAINTENANCE TASKS
--- - Backup Vault, Dotfiles, Bookmarks, and browser extension list
--- - Reload Hammerspoon Annotations (Emmylua Spoon)
+-- - Backup Vault, Dotfiles, Bookmarks, & browser extension list
+-- - Reload Hammerspoon Annotations (EmmyLua Spoon)
 -- - Check for low battery of connected bluetooth devices
 BiweeklyTimer = hs.timer
 	.doAt("02:00", "01d", function()
@@ -85,9 +85,9 @@ local function idleMins(mins)
 	return minutesIdle > mins
 end
 
--- between 1:00 and 6:00, check every half hour if device has been idle for 30
--- minutes. if so, alert and wait for another minute. If still idle then, quit
--- video apps
+-- Between 1:00 and 6:00, check every 10 min if device has been idle for 40
+-- minutes. If so, alert and wait for another minute. If still idle then, quit
+-- video apps.
 SleepTimer = hs.timer
 	.doEvery(10 * 60, function()
 		if not (u.betweenTime(1, 6) and idleMins(40) and env.isProjector()) then return end
@@ -97,13 +97,11 @@ SleepTimer = hs.timer
 			if not idleMins(1) then return end
 			u.notify("💤 SleepTimer triggered.")
 
-			-- no need to quit IINA since it autoquits
+			-- 1. no need to quit IINA since it autoquits
+			-- 2. close browser tabs running YouTube (not using full name for youtube short-urls)
+			-- 3. close leftover fullscreen spaces created by apps running in fullscreen
 			u.quitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
-
-			-- close browser tabs running YouTube (not full name for youtube shorturls)
 			u.closeTabsContaining("youtu")
-
-			-- close leftover fullscreen spaces
 			closeFullscreenSpaces()
 		end)
 	end)
