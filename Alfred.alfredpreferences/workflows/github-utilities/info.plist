@@ -147,7 +147,18 @@
 			</dict>
 		</array>
 		<key>3A5F393C-06D9-42AF-9EB4-DA50E6CCE0AE</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F3ED8FA9-38E7-4055-829F-5A1084882C1E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</key>
 		<array>
 			<dict>
@@ -501,6 +512,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F3ED8FA9-38E7-4055-829F-5A1084882C1E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EEB354AC-5D74-4C6D-8253-23001FB63C72</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1233,7 +1257,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>filetypes</key>
 				<array/>
 				<key>name</key>
-				<string>Commits with File</string>
+				<string>Commits with this File</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.action</string>
@@ -1259,6 +1283,40 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>5C6380EF-E35A-4951-ADF5-C995040DBE27</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>stage-loop</string>
+				<key>passinputasargument</key>
+				<false/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>EEB354AC-5D74-4C6D-8253-23001FB63C72</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Tink</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>F3ED8FA9-38E7-4055-829F-5A1084882C1E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1326,6 +1384,11 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<integer>8</integer>
 				<key>withspace</key>
 				<false/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>stage-loop</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -1540,7 +1603,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>265</real>
+			<real>220</real>
 			<key>ypos</key>
 			<real>1185</real>
 		</dict>
@@ -1616,7 +1679,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
-			<real>885</real>
+			<real>890</real>
 		</dict>
 		<key>6B63D08C-0E2C-443F-9B43-3CAAD1687E91</key>
 		<dict>
@@ -1625,7 +1688,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>note</key>
 			<string>git status (stage/unstage)</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>40</real>
 			<key>ypos</key>
 			<real>1185</real>
 		</dict>
@@ -1800,6 +1863,24 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<real>780</real>
 			<key>ypos</key>
 			<real>175</real>
+		</dict>
+		<key>EEB354AC-5D74-4C6D-8253-23001FB63C72</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>515</real>
+			<key>ypos</key>
+			<real>1185</real>
+		</dict>
+		<key>F3ED8FA9-38E7-4055-829F-5A1084882C1E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>375</real>
+			<key>ypos</key>
+			<real>1185</real>
 		</dict>
 		<key>FE44448E-7653-4A3C-B7F9-C3A787EE0556</key>
 		<dict>

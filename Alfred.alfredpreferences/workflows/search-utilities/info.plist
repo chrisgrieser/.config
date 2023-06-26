@@ -1526,7 +1526,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>{var:search_site}?q={query}</string>
+				<string>{var:search_site}{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -2624,21 +2624,25 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>https://www.google.com/search</string>
+				<string>https://www.google.com/search?q=</string>
 				<key>pairs</key>
 				<array>
 					<array>
 						<string>Google</string>
-						<string>https://www.google.com/search</string>
+						<string>https://www.google.com/search?q=</string>
 					</array>
 					<array>
 						<string>Brave</string>
-						<string>https://search.brave.com/search</string>
+						<string>https://search.brave.com/search?q=</string>
+					</array>
+					<array>
+						<string>DuckDuckGo</string>
+						<string>https://duckduckgo.com/?q=</string>
 					</array>
 				</array>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>where the search should be performed</string>
 			<key>label</key>
 			<string>Search Site</string>
 			<key>type</key>
@@ -2650,22 +2654,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>5</string>
-				<key>placeholder</key>
-				<string>5</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
+				<string>https://suggestqueries.google.com/complete/search?&amp;q=</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Google</string>
+						<string>https://suggestqueries.google.com/complete/search?&amp;q=</string>
+					</array>
+					<array>
+						<string>DuckDuckGo</string>
+						<string>https://duckduckgo.com/ac/?q=</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
-			<string>Number of characters before requesting suggestios from Google</string>
+			<string>from there suggestions should be retrieved</string>
 			<key>label</key>
-			<string>Min Query Length</string>
+			<string>Suggestion Source</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>popupbutton</string>
 			<key>variable</key>
-			<string>min_query_length</string>
+			<string>suggestion_source</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2687,6 +2696,48 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>max_results</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>5</string>
+				<key>placeholder</key>
+				<string>5</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Minimum number of characters before requesting suggestions</string>
+			<key>label</key>
+			<string>Min Query Length</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>min_query_length</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>2</string>
+				<key>placeholder</key>
+				<string>2</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Minimum number of characters before displaying a fallback option</string>
+			<key>label</key>
+			<string>Min Fallback Length</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>min_length_for_fallback</string>
 		</dict>
 	</array>
 	<key>version</key>
