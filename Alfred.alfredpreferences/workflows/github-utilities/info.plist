@@ -1274,7 +1274,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>git-stage-area-action.sh</string>
+				<string>./scripts/git-stage-area-action.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1482,7 +1482,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>note</key>
 			<string>delete local repo</string>
 			<key>xpos</key>
-			<real>415</real>
+			<real>420</real>
 			<key>ypos</key>
 			<real>405</real>
 		</dict>
@@ -1730,7 +1730,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>570</real>
+			<real>575</real>
 			<key>ypos</key>
 			<real>405</real>
 		</dict>

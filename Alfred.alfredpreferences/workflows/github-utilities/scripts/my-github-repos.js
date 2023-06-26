@@ -11,6 +11,14 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeperated, str].join(" ") + " ";
 }
 
+/** @param {string} url */
+function httpRequest(url) {
+	const queryURL = $.NSURL.URLWithString(url);
+	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+	return requestString;
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 const username = $.getenv("github_username");
@@ -22,14 +30,15 @@ const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	// local repos
-	let localRepoLocation = argv[0]; // local repo path passed from .zshenv
+	const repoFolder = argv[0]; // local repo path passed from .zshenv
 	const obsiPlugins = $.getenv("extra_folder_1").replace(/^~/, app.pathTo("home folder"));
-	localRepoLocation = `"${localRepoLocation}" "${obsiPlugins}"`;
+	const locations = `"${repoFolder}" "${obsiPlugins}"`;
+
 	const localRepos = {};
 	app
 		.doShellScript(
 			`export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-			find ${localRepoLocation} -type d -maxdepth 2 -name ".git"`
+			find ${locations} -type d -maxdepth 2 -name ".git"`
 		)
 		.split("\r")
 		.forEach((/** @type {string} */ gitFolderPath) => {
@@ -48,9 +57,9 @@ function run(argv) {
 	//───────────────────────────────────────────────────────────────────────────
 	// fetch remote repos
 
-	const scriptFilterArr = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`))
+	const scriptFilterArr = JSON.parse(httpRequest(apiURL))
 		// sort local to the top, archived and forks to the bottom, then by stars
-		.sort((a, b) => {
+		.sort((/** @type {{ isLocal: any; name: string | number; fork: any; archived: any; stargazers_count: number; }} */ a, /** @type {{ isLocal: any; name: string | number; fork: any; archived: any; stargazers_count: number; }} */ b) => {
 			a.isLocal = localRepos[a.name];
 			b.isLocal = localRepos[b.name];
 			if (a.isLocal && !b.isLocal) return -1;
@@ -61,7 +70,7 @@ function run(argv) {
 			else if (!a.archived && b.archived) return -1;
 			return b.stargazers_count - a.stargazers_count;
 		})
-		.map((repo) => {
+		.map((/** @type {{ name: string; local: { path: any; }; html_url: any; archived: any; fork: any; stargazers_count: number; open_issues_count: number; forks_count: number; open_issues: number; full_name: any; }} */ repo) => {
 			let matcher = alfredMatcher(repo.name);
 			let type = "";
 

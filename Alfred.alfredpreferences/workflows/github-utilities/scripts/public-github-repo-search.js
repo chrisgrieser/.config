@@ -1,13 +1,17 @@
 #!/usr/bin/env osascript -l JavaScript
 
-ObjC.import("stdlib");
-const app = Application.currentApplication();
-app.includeStandardAdditions = true;
-
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	return [clean, str].join(" ") + " ";
+}
+
+/** @param {string} url */
+function httpRequest(url) {
+	const queryURL = $.NSURL.URLWithString(url);
+	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+	return requestString;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -19,7 +23,7 @@ function run(argv) {
 	if (query.match(/^\s*$/)) return; // don't run for empty query
 	const apiURL = `https://api.github.com/search/repositories?q=${query}`;
 
-	const jsonArray = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`))
+	const jsonArray = JSON.parse(httpRequest(apiURL))
 		.items.filter((/** @type {{ fork: boolean; archived: boolean; }} */ repo) => !(repo.fork || repo.archived))
 		.map((/** @type {{ full_name: string; updated_at: string | number | Date; stargazers_count: any; description: string; html_url: any; open_issues: any; }} */ repo) => {
 			const name = repo.full_name.split("/")[1];
