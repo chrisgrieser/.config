@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>email_keyword</key>
-	<string>mail</string>
+	<string>mail||temp</string>
 </dict>
 </plist>

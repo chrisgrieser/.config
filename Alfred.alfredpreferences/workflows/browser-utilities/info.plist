@@ -91,7 +91,18 @@
 			</dict>
 		</array>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9377EF23-556F-4273-A2A5-3714CA46B546</key>
 		<array>
 			<dict>
@@ -502,6 +513,27 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string>com.apple.Safari</string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -511,7 +543,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>switch-to-safari.js</string>
+				<string>open-tab-in-safari.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -709,6 +741,15 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<real>305</real>
 			<key>ypos</key>
 			<real>155</real>
+		</dict>
+		<key>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>400</real>
+			<key>ypos</key>
+			<real>445</real>
 		</dict>
 		<key>C65CD77E-C2B3-4063-B045-C1954E7FE033</key>
 		<dict>
