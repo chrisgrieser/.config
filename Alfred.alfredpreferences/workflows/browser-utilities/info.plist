@@ -624,7 +624,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>note</key>
 			<string>trigger bibItNow download</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>620</real>
 		</dict>
@@ -680,7 +680,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>445</real>
 		</dict>
@@ -700,7 +700,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>note</key>
 			<string>Download bibtex for Website</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>620</real>
 		</dict>

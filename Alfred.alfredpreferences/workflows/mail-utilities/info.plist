@@ -436,7 +436,7 @@ end tell</string>
 				<key>keyword</key>
 				<string>temp||mail</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Copies random mail &amp; password</string>
 				<key>text</key>
 				<string>Temporary Email</string>
 				<key>withspace</key>
@@ -496,6 +496,8 @@ end tell</string>
 		</dict>
 		<key>5C8886D1-2795-4EFC-8DE6-360FD2F1AF29</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
@@ -514,6 +516,8 @@ end tell</string>
 		</dict>
 		<key>8E378CEC-2381-4945-B509-8F91DBB1D22C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -552,6 +556,8 @@ end tell</string>
 		</dict>
 		<key>C6262D27-A5C6-4B95-9BD9-194058DD4AC2</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>340</real>
 			<key>ypos</key>
