@@ -2,7 +2,16 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+
 const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-/()_.:]/g, " ") + " " + str + " " + str.replace(/([A-Z])/g, " $1"); // match parts of CamelCase
+
+/** @param {string} url */
+function httpRequest(url) {
+	const queryURL = $.NSURL.URLWithString(url);
+	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+	return requestString;
+}
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -25,9 +34,8 @@ const installedPlugins = app
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const jsonArray = app
-	.doShellScript(`curl -sL '${neovimcraftURL}'`)
-	.split("\r")
+const jsonArray = httpRequest(neovimcraftURL)
+	.split("\n")
 	.slice(2)
 	.map((/** @type {string} */ line) => {
 		const parts = line.split(/ {2,}/);
