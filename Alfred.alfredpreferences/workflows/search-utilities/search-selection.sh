@@ -8,8 +8,11 @@
 # some other text: google it & open first duckduckgo hit
 # empty: do nothing
 
-# if no input, copy selection
+#───────────────────────────────────────────────────────────────────────────────
+
 SEL="$*"
+# when called via external trigger, will have no input, therefore copying
+# selection then
 if [[ -z "$SEL" ]]; then
 	PREV_CLIPBOARD=$(pbpaste)
 	osascript -e 'tell application "System Events" to keystroke "c" using {command down}'

@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>de.chris-grieser.snippet-search</string>
 	<key>category</key>
-	<string>⭐️</string>
+	<string>❇️</string>
 	<key>connections</key>
 	<dict>
 		<key>0C81ADD1-1180-403C-BAA1-3B6FCB2D0826</key>
@@ -188,23 +188,23 @@
 			<key>note</key>
 			<string>open at line</string>
 			<key>xpos</key>
-			<real>280</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>170</real>
 		</dict>
 		<key>81E13F5F-2CB4-4393-93E9-85601627DF28</key>
 		<dict>
 			<key>xpos</key>
-			<real>280</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>320</real>
 		</dict>
 		<key>9DF10EDE-C71E-46AC-B726-8DB96773729B</key>
 		<dict>
 			<key>xpos</key>
-			<real>425</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>320</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

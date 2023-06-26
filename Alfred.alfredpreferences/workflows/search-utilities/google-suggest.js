@@ -60,7 +60,7 @@ function run(argv) {
 	}
 
 	// Make the API request
-	const queryURL = $.getenv("suggestion_source")+ encodeURIComponent(query);
+	const queryURL = $.getenv("suggestion_source") + encodeURIComponent(query);
 	const newResults = JSON.parse(httpRequest(queryURL))[1]
 		.filter((/** @type {string} */ result) => result !== query)
 		.slice(0, maxResults - 1); // fewer results so it does not clog up
