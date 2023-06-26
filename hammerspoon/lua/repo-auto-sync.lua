@@ -72,12 +72,16 @@ local function syncAllGitRepos(notify)
 		local vaultSyncing = GitVaultSyncTask and GitVaultSyncTask:isRunning()
 		return not (dotfilesSyncing or vaultSyncing or passSyncing)
 	end
-	local function updateSketchybar()
-		hs.execute("sketchybar --trigger repo-files-update")
-		if notify then u.notify("🔁 Sync finished") end
-	end
 
-	AllSyncTimer = hs.timer.waitUntil(noSyncInProgress, updateSketchybar):start()
+	AllSyncTimer = hs.timer
+		.waitUntil(noSyncInProgress, function()
+			if notify then u.notify("🔁 Sync finished") end
+			u.runWithDelays(
+				{ 0, 5 },
+				function() hs.execute(u.exportPath .. "sketchybar --trigger repo-files-update") end
+			)
+		end)
+		:start()
 end
 
 --------------------------------------------------------------------------------
