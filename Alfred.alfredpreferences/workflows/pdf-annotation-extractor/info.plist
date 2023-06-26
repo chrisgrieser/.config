@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>de.chris-grieser.pdf-annotation-extraction</string>
+	<key>category</key>
+	<string>⭐️</string>
+	<key>connections</key>
+	<dict>
+		<key>65783839-9CCB-48D0-A740-1F7BF96926D1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0C315F47-D751-4D59-8DFA-2CFC7BF581A2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>77F6FCC3-FA68-477B-BBB0-40F8C4911955</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>65783839-9CCB-48D0-A740-1F7BF96926D1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CD293D43-2356-49DB-AD4F-DBA5FDE026C5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3069BB02-5E48-40CF-9DD8-337C5FA9F054</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Chris Grieser</string>
+	<key>description</key>
+	<string>Extract Annotations as Markdown, insert Pandoc Citations with correct page numbers and more</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>PDF Annotation Extractor</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>A</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>net.highlightsapp.universal</string>
+					<string>com.readdle.PDFExpert-Mac</string>
+					<string>com.apple.Preview</string>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>77F6FCC3-FA68-477B-BBB0-40F8C4911955</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/run-extraction.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>65783839-9CCB-48D0-A740-1F7BF96926D1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>0C315F47-D751-4D59-8DFA-2CFC7BF581A2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>qlmanage -p "./cheatsheet-pdf-annotation-extractor.md"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3069BB02-5E48-40CF-9DD8-337C5FA9F054</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>acodes</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Cheatsheet for PDF Annotation Extractor</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CD293D43-2356-49DB-AD4F-DBA5FDE026C5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Alfred Gallery[This workflow is now included in the Alfred gallery](http://alfred.app/workflows/chrisgrieser/pdf-annotation-extractor-alfred/) and auto-updates will there be managed by Alfred and not by this workflow anymore.---
+
+# PDF Annotation Extractor
+Extract Annotations as Markdown, insert Pandoc Citations with correct page numbers and more.
+
+## Workflow Setup
+- Install [Homebrew](https://brew.sh/).
+- Install `pdfannots2json` by pasting the following into your terminal: `brew install mgmeyers/pdfannots2json/pdfannots2json`
+- Set the hotkey by double-clicking the sky-blue field at the top left.
+
+## Info
+- [README](https://github.com/chrisgrieser/pdf-annotation-extractor-alfred/blob/main/README.md)
+- [Changelog](https://github.com/chrisgrieser/pdf-annotation-extractor-alfred/blob/main/Changelog.md)
+- [Bug Reports](https://github.com/chrisgrieser/pdf-annotation-extractor-alfred/issues)
+
+## Created by
+[Chris Grieser](https://chris-grieser.de/)
+
+#### Profiles
+- [ResearchGate](https://www.researchgate.net/profile/Christopher-Grieser)
+- [Discord](https://discordapp.com/users/462774483044794368/)
+- [GitHub](https://github.com/chrisgrieser/)
+- [Twitter](https://twitter.com/pseudo_meta)
+- [LinkedIn](https://www.linkedin.com/in/christopher-grieser-ba693b17a/)
+
+#### Buy me a Coffee
+[Ko-Fi](https://ko-fi.com/pseudometa)</string>
+	<key>uidata</key>
+	<dict>
+		<key>0C315F47-D751-4D59-8DFA-2CFC7BF581A2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>reports error messages</string>
+			<key>xpos</key>
+			<real>350</real>
+			<key>ypos</key>
+			<real>75</real>
+		</dict>
+		<key>3069BB02-5E48-40CF-9DD8-337C5FA9F054</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>220</real>
+		</dict>
+		<key>65783839-9CCB-48D0-A740-1F7BF96926D1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>run extraction</string>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>75</real>
+		</dict>
+		<key>77F6FCC3-FA68-477B-BBB0-40F8C4911955</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>run PDF annotation extractor</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>75</real>
+		</dict>
+		<key>CD293D43-2356-49DB-AD4F-DBA5FDE026C5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>cheatsheet for PDF Annotation Extractor</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>220</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The .bib file containing your library.</string>
+			<key>label</key>
+			<string>BibTeX Library Path</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>bibtex_library_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Documents</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>If folder is inside an Obsidian vault, will open the file in Obsidian after extraction.</string>
+			<key>label</key>
+			<string>Output Path</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>output_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>pdfannots2json</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>pdfannots2json</string>
+						<string>pdfannots2json</string>
+					</array>
+					<array>
+						<string>pdfannots</string>
+						<string>pdfannots</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Advanced users only. Normally, this should stay "pdfannots2json". (`pdfannots` requries the respective pip package.)</string>
+			<key>label</key>
+			<string>Extraction Engine</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>extraction_engine</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string>~/PDFs</string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>The folder containing all PDFs. Required to be able to extract the current PDF from Highlights.</string>
+			<key>label</key>
+			<string>Highlights.app</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>pdf_folder_highlights_app</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>8.6.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/chrisgrieser/pdf-annotation-extractor-alfred</string>
+</dict>
+</plist>
