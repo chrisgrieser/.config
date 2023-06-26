@@ -49,30 +49,35 @@ function run() {
 			const pathInRepo = file.slice(3);
 			const parentFolder = pathInRepo.slice(0, pathInRepo.lastIndexOf("/"));
 			const filename = pathInRepo.slice(pathInRepo.lastIndexOf("/") + 1);
-			const trackingInfo = file.slice(0, 2)
-				.replaceAll("M ", "🔼🟡 M") // staged modified
-				.replaceAll("D ", "🔼❌ D") // staged deleted
-				.replaceAll("A ", "🔼❇️ A") // staged new file
-				.replaceAll("R ", "🔼✏️ R") // staged renamed
-				.replaceAll("RM", "🔼✏️ 🟡RM") // staged renamed & modified
-				.replaceAll(" M", "🟡 M") // modified
-				.replaceAll(" D", "❌ D") // deleted
-				.replaceAll("??", "❇️ ??") // untracked (new file)
-			const isAlreadyStaged = trackingInfo.includes("🔼");
+
+			const trackingInfo = file.slice(0, 3);
+			const trackingDisplay = trackingInfo
+				.replaceAll(" M ", "🟡 M") // modified
+				.replaceAll(" D ", "❌ D") // deleted
+				.replaceAll("?? ", "❇️ ??") // untracked (new file)
+				.replaceAll("RM ", "🔼✏️ 🟡 RM") // staged renamed & unstaged modified
+				.replaceAll("MM ", "🔼🟡🟡 MM") // staged modified & unstaged modified
+				.replaceAll("M  ", "🔼🟡 M") // staged modified
+				.replaceAll("D  ", "🔼❌ D") // staged deleted
+				.replaceAll("A  ", "🔼❇️ A") // staged new file
+				.replaceAll("R  ", "🔼✏️ R"); // staged renamed
 
 			return {
-				title: `${trackingInfo}   ${filename}`,
+				title: `${trackingDisplay}   ${filename}`,
 				subtitle: parentFolder,
 				match: alfredMatcher(filename) + alfredMatcher(parentFolder),
 				arg: pathInRepo,
 				variables: {
-					mode: isAlreadyStaged ? "staged" : "new",
-					change: !trackingInfo.includes("M") ? "wholeFile" : "modified",
+					staged: trackingInfo.startsWith(" ") || trackingInfo.startsWith("??"),
+					wholeFile: !trackingInfo.includes("M"),
 				},
+				uid: pathInRepo, // remember order
 			};
 		});
 
 	return JSON.stringify({
+		rerun: 0.25,
+		skipknowledge: true, // remember order
 		variables: { repo: repoPath },
 		items: unstagesArr,
 	});

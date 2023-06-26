@@ -273,7 +273,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</key>
@@ -1274,14 +1274,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>git-add.sh</string>
+				<string>git-stage-area-action.sh</string>
 				<key>type</key>
 				<integer>8</integer>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>stage-loop</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -1306,7 +1301,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ga</string>
+				<string>gs</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1326,7 +1321,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>subtext</key>
 				<string>Current Finder Window or {var:default_repo}</string>
 				<key>title</key>
-				<string>Git Add (Unstaged Files)</string>
+				<string>Git Status (Stage/Unstage Files)</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1543,7 +1538,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<key>3A5F393C-06D9-42AF-9EB4-DA50E6CCE0AE</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
@@ -1626,7 +1621,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<key>6B63D08C-0E2C-443F-9B43-3CAAD1687E91</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>8</integer>
 			<key>note</key>
 			<string>git status (stage/unstage)</string>
 			<key>xpos</key>
