@@ -4,11 +4,11 @@
 file="$1"
 cd "$repo" || return 1
 
-if [[ "$mode" == "new" ]]; then
+if [[ "$staged" == "1" ]]; then
 	git add "$file"
-elif [[ "$change" == "modified" ]]; then
+elif [[ "$wholeFile" == "0" ]]; then
 	git restore --staged "$file"
-elif [[ "$change" == "wholeFile" ]]; then
+elif [[ "$wholeFile" == "1" ]]; then
 	git restore "$file"
 fi
 
