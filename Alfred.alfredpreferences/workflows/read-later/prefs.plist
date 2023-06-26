@@ -2,11 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>min_length_for_fallback</key>
-	<string>4</string>
-	<key>min_query_length</key>
-	<string>7</string>
-	<key>suggestion_source</key>
-	<string>https://duckduckgo.com/ac/?q=</string>
+	<key>read_later_file</key>
+	<string>~/main-vault/Meta/📚 Read Later.md</string>
 </dict>
 </plist>

@@ -67,12 +67,16 @@ end
 ---@param ext string extension of the skeleton
 function M.applyTemplateIfEmptyFile(ext)
 	vim.defer_fn(function()
-		local fileIsEmpty = vim.loop.fs_stat(vim.fn.expand("%")).size < 4 -- account for linebreaks
+		local filename = vim.fn.expand("%")
+		local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
+		local fileExists = vim.fn.filereadable(filename) ~= 0
+
+		local skeletionExists = vim.fn.filereadable(skeletonFile) ~= 0
+		local fileIsEmpty = vim.loop.fs_stat(filename).size < 4 -- account for linebreaks
+
 		if not fileIsEmpty then return end
 
-		local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
-		local fileExists = vim.fn.filereadable(skeletonFile) ~= 0
-		if not fileExists then
+		if not skeletionExists then
 			vim.notify("Skeleton file not found.", vim.log.levels.ERROR)
 			return
 		end

@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>de.chris-grieser.open-ai</string>
 	<key>category</key>
-	<string>⭐️</string>
+	<string>❇️</string>
 	<key>connections</key>
 	<dict>
 		<key>0FD32B7B-CE8C-4871-A07E-564BB91F0477</key>
@@ -38,7 +38,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>537C9592-CA70-4E39-A6FB-77555752AEB6</string>
+				<string>0FD32B7B-CE8C-4871-A07E-564BB91F0477</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -48,7 +48,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>0FD32B7B-CE8C-4871-A07E-564BB91F0477</string>
+				<string>537C9592-CA70-4E39-A6FB-77555752AEB6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -68,27 +68,6 @@
 	<string>OpenAI</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>🤖Thinking…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>537C9592-CA70-4E39-A6FB-77555752AEB6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -189,6 +168,27 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>🤖Thinking…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>537C9592-CA70-4E39-A6FB-77555752AEB6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string># Requirements
@@ -207,14 +207,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>35</real>
 		</dict>
 		<key>537C9592-CA70-4E39-A6FB-77555752AEB6</key>
 		<dict>
 			<key>xpos</key>
-			<real>335</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>190</real>
 		</dict>
 		<key>7F59CB22-957B-4E74-8A9E-3329447A0232</key>
 		<dict>
@@ -223,7 +223,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>485</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>35</real>
 		</dict>
 		<key>92ED8532-D717-4F99-987C-4A3810BC7B5E</key>
 		<dict>
@@ -232,7 +232,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>35</real>
 		</dict>
 		<key>FB4D8632-309B-4BB0-BC22-4F8E12E09362</key>
 		<dict>
@@ -241,7 +241,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>35</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

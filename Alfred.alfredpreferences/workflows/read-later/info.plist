@@ -346,6 +346,8 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>get browser link as Markdown</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
@@ -358,7 +360,7 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 			<key>xpos</key>
 			<real>565</real>
 			<key>ypos</key>
-			<real>210</real>
+			<real>170</real>
 		</dict>
 		<key>A1B93FF7-3569-48A8-8CC8-E1A71AC85EDA</key>
 		<dict>
@@ -382,18 +384,28 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variables</key>
-	<dict>
-		<key>feedreaderURL</key>
-		<string>https://www.inoreader.com/</string>
-		<key>read_later_file</key>
-		<string>~/main-vault/Meta/📚 Read Later.md</string>
-	</dict>
-	<key>variablesdontexport</key>
 	<array>
-		<string>read_later_file</string>
-		<string>feedreaderURL</string>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string>~/main-vault/Meta/📚 Read Later.md</string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Markdown file where the items should be saved.</string>
+			<key>label</key>
+			<string>Read Later File</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>read_later_file</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string>0.9</string>
