@@ -31,18 +31,18 @@ const noDisplayAuthors = $.getenv("no_display_authors")
 function run() {
 	// determine repo
 	const defaultRepo = $.getenv("default_repo").replace(/^~/, app.pathTo("home folder"));
-	let fileActionUsed, folderPath;
+	let fileActionUsed, repoPath;
 	try {
-		folderPath = $.getenv("filepath").replace(/(.*\/).*/, "$1");
 		fileActionUsed = true;
+		repoPath = $.getenv("filepath").replace(/(.*\/).*/, "$1");
 	} catch (_error) {
 		fileActionUsed = false;
-		folderPath = finderFrontWindow() || defaultRepo;
+		repoPath = finderFrontWindow() || defaultRepo;
 	}
 
 	// validate it's in a git repo
 	try {
-		app.doShellScript(`cd "${folderPath}" && git rev-parse --is-inside-work-tree`).startsWith("fatal:");
+		app.doShellScript(`cd "${repoPath}" && git rev-parse --is-inside-work-tree`).startsWith("fatal:");
 	} catch (_error) {
 		return JSON.stringify({
 			items: [{ title: "🚫 Not in Git Repository", valid: false }],
@@ -52,7 +52,7 @@ function run() {
 	// determine branches
 	const branchCommitPairs = {};
 	app
-		.doShellScript(`cd "${folderPath}" && git branch --verbose`)
+		.doShellScript(`cd "${repoPath}" && git branch --verbose`)
 		.split("\r")
 		.forEach((line) => {
 			const branch = line.split(" ")[1];
@@ -66,7 +66,7 @@ function run() {
 
 	/** @type AlfredItem[] */
 	const commitArr = app
-		.doShellScript(`cd "${folderPath}" && ${gitLogCommand}`)
+		.doShellScript(`cd "${repoPath}" && ${gitLogCommand}`)
 		.split("\r")
 		.map((commit) => {
 			const parts = commit.split(";;");
