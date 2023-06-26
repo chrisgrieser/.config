@@ -91,7 +91,9 @@ function run() {
 					cmd: {
 						arg: branch,
 						valid: branch !== undefined,
-						subtitle: branch ? "⌘: Checkout Branch pointing to this commit" : "🚫 No Branch pointing to this commit.",
+						subtitle: branch
+							? "⌘: Checkout Branch pointing to this commit"
+							: "🚫 No Branch pointing to this commit.",
 					},
 					alt: {
 						arg: hash,
