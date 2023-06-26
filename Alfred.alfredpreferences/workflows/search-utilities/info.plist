@@ -2671,12 +2671,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>https://suggestqueries.google.com/complete/search?&amp;q=</string>
+				<string>https://suggestqueries.google.com/complete/search?output=chrome&amp;ie=utf8&amp;oe=utf8&amp;q=</string>
 				<key>pairs</key>
 				<array>
 					<array>
 						<string>Google</string>
-						<string>https://suggestqueries.google.com/complete/search?&amp;q=</string>
+						<string>https://suggestqueries.google.com/complete/search?output=chrome&amp;ie=utf8&amp;oe=utf8&amp;q=</string>
 					</array>
 					<array>
 						<string>DuckDuckGo</string>
