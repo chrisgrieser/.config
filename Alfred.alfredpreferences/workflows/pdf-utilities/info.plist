@@ -71,6 +71,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>21F4FB87-86D9-4B33-B649-8F3338B7154B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5649963E-445E-4637-BAC2-8A93C6117BB2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>244B4BA9-BAD5-40DF-9F8D-44060468B0CB</key>
 		<array>
 			<dict>
@@ -278,6 +291,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B959FF0C-60CD-4ED2-855D-66F63FE3E7F7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6728A18F-2FFB-4C11-8C19-673C8D657DE1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>BC55B53D-B9D5-47AC-B2F4-45C6250702DD</key>
 		<array>
 			<dict>
@@ -296,6 +322,32 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FA43383A-8BDF-4F83-BFD0-624DE8F43343</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B959FF0C-60CD-4ED2-855D-66F63FE3E7F7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FE84434E-074B-4498-9260-1DDF341A43B9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>21F4FB87-86D9-4B33-B649-8F3338B7154B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -548,6 +600,111 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/pdfgrep.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search pdf</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>5649963E-445E-4637-BAC2-8A93C6117BB2</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open-highlights-page.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>73E6C367-5696-402A-936C-96472BFB71BE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>3</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>F</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>net.highlightsapp.universal</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>9A78A787-53EF-4B69-A756-340AB5E47756</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -629,107 +786,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
+				<key>acceptsmulti</key>
 				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/pdfgrep.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search pdf</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>5649963E-445E-4637-BAC2-8A93C6117BB2</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-highlights-page.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>73E6C367-5696-402A-936C-96472BFB71BE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>3</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>F</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
+				<key>filetypes</key>
 				<array>
-					<string>net.highlightsapp.universal</string>
+					<string>com.adobe.pdf</string>
 				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
+				<key>name</key>
+				<string>Search in PDF</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
-			<string>9A78A787-53EF-4B69-A756-340AB5E47756</string>
+			<string>FE84434E-074B-4498-9260-1DDF341A43B9</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -775,6 +846,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>input_path</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>21F4FB87-86D9-4B33-B649-8F3338B7154B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -792,6 +883,111 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>244B4BA9-BAD5-40DF-9F8D-44060468B0CB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>name</key>
+				<string>Copy PDF Text</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>FA43383A-8BDF-4F83-BFD0-624DE8F43343</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/copy-text-from-pdf.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B959FF0C-60CD-4ED2-855D-66F63FE3E7F7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>content of {query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>6728A18F-2FFB-4C11-8C19-673C8D657DE1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>name</key>
+				<string>Print</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>A02897FE-BC2A-479A-A777-3CAF8A394943</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/print-pdf.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>871ABB10-2B9C-44B3-951C-3EA52181ECC2</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -867,68 +1063,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.adobe.pdf</string>
-				</array>
-				<key>name</key>
-				<string>Print</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>A02897FE-BC2A-479A-A777-3CAF8A394943</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>input_path</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/print-pdf.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>871ABB10-2B9C-44B3-951C-3EA52181ECC2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -960,6 +1094,26 @@
 			<string>8D0217F4-B267-406C-B35B-B41C7663BA0D</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>input_path</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1029,9 +1183,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>run ocrmypdf</string>
 			<key>xpos</key>
-			<real>235</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>815</real>
 		</dict>
 		<key>20603C68-58B3-433A-AEE0-62CAF6C85E0A</key>
 		<dict>
@@ -1048,6 +1202,15 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<real>695</real>
 			<key>ypos</key>
 			<real>300</real>
+		</dict>
+		<key>21F4FB87-86D9-4B33-B649-8F3338B7154B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>175</real>
+			<key>ypos</key>
+			<real>435</real>
 		</dict>
 		<key>244B4BA9-BAD5-40DF-9F8D-44060468B0CB</key>
 		<dict>
@@ -1081,9 +1244,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>815</real>
 		</dict>
 		<key>4D63817E-E093-44ED-99F7-2762E817BB90</key>
 		<dict>
@@ -1121,9 +1284,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>280</real>
 		</dict>
 		<key>5C7C540D-E608-402E-8778-C49FBACEB5DD</key>
 		<dict>
@@ -1136,14 +1299,21 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>ypos</key>
 			<real>435</real>
 		</dict>
+		<key>6728A18F-2FFB-4C11-8C19-673C8D657DE1</key>
+		<dict>
+			<key>xpos</key>
+			<real>410</real>
+			<key>ypos</key>
+			<real>535</real>
+		</dict>
 		<key>698B1D06-326B-43D2-8ABB-DE676CE3661A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>680</real>
 		</dict>
 		<key>73E6C367-5696-402A-936C-96472BFB71BE</key>
 		<dict>
@@ -1152,9 +1322,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>open at PDF page</string>
 			<key>xpos</key>
-			<real>385</real>
+			<real>390</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>280</real>
 		</dict>
 		<key>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</key>
 		<dict>
@@ -1208,20 +1378,18 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>235</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>680</real>
 		</dict>
 		<key>9A78A787-53EF-4B69-A756-340AB5E47756</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
-			<key>note</key>
-			<string>run PDF annotation extractor</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>280</real>
 		</dict>
 		<key>A02897FE-BC2A-479A-A777-3CAF8A394943</key>
 		<dict>
@@ -1241,6 +1409,15 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
+		<key>B959FF0C-60CD-4ED2-855D-66F63FE3E7F7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>535</real>
+		</dict>
 		<key>BC55B53D-B9D5-47AC-B2F4-45C6250702DD</key>
 		<dict>
 			<key>colorindex</key>
@@ -1255,18 +1432,36 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>680</real>
 		</dict>
 		<key>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>175</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>710</real>
+		</dict>
+		<key>FA43383A-8BDF-4F83-BFD0-624DE8F43343</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>4</integer>
+			<key>xpos</key>
+			<real>40</real>
+			<key>ypos</key>
+			<real>535</real>
+		</dict>
+		<key>FE84434E-074B-4498-9260-1DDF341A43B9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>410</real>
 		</dict>
 		<key>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</key>
 		<dict>
