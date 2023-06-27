@@ -65,6 +65,8 @@ declare const Application: {
 
 		// rome-ignore lint/suspicious/noExplicitAny: TODO
 		applicationProcesses: any; // System Events
+		// rome-ignore lint/suspicious/noExplicitAny: TODO
+		processes: any; // System Events
 	};
 };
 
