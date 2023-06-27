@@ -103,6 +103,14 @@
 			"if (process) { process.visible = false; }"
 		]
 	},
+	"front window title": {
+		"prefix": "front window title",
+		"body": [
+			"const pdfName = Application(\"System Events\")",
+			"\t.processes.whose({ name: \"${1:appName}\" })",
+			"\t.windows[0].name()[0];"
+		]
+	},
 	"browser URL & title (all-browser function)": {
 		"prefix": "browser URL & title (function)",
 		"body": [
