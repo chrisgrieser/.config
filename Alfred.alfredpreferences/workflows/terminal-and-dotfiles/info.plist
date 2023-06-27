@@ -53,7 +53,7 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>focusedappvariable</key>
-				<false/>
+				<true/>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
@@ -176,7 +176,7 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>270</real>
 		</dict>
 		<key>98AFD269-7214-48D9-8142-76672E7A044E</key>
 		<dict>
@@ -185,14 +185,14 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>80</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>270</real>
 		</dict>
 		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
 		<dict>
@@ -203,7 +203,7 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>80</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
