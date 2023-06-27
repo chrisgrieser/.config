@@ -6,5 +6,7 @@
 	<true/>
 	<key>showOnMouseScreen</key>
 	<true/>
+	<key>style</key>
+	<integer>0</integer>
 </dict>
 </plist>

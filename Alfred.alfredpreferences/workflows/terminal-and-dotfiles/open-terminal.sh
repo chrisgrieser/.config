@@ -16,8 +16,8 @@ elif [[ "$FRONT_APP" == "neovide" ]]; then
 	win_title=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
 	dir_to_open=$(dirname "$win_title")
 elif [[ "$FRONT_APP" == "wezterm-gui" ]]; then
-	# hide terminal
-	osascript -e "tell application \"System Events\" to tell process \"wezterm-gui\" to set visible to false"
+	osascript -e 'tell application "Neovide" to activate'
+	return 0
 fi
 
 #───────────────────────────────────────────────────────────────────────────────

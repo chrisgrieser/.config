@@ -9,13 +9,6 @@ app.includeStandardAdditions = true;
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const pattern = argv[0] || "";
-	console.log("pattern:", pattern);
-
-	if (pattern.length < 2) {
-		return JSON.stringify({
-			items: [{ title: "Waiting for longer query…", valid: false }],
-		});
-	}
 
 	// determine path of currently open PDF
 	const pdfFolder = $.getenv("pdf_folder").replace(/^~/, app.pathTo("home folder"));
@@ -26,9 +19,20 @@ function run(argv) {
 	const pdfPath = app.doShellScript(`find "${pdfFolder}" -type f -name "${pdfName}" | head -n1`);
 	const pdfNameEncoded = encodeURIComponent(pdfName.slice(0, -4)); // required by highlights URI
 
+	const searchHits = app.doShellScript(
+		`pdfgrep --cache --perl-regexp --ignore-case --page-number "${pattern}" "${pdfPath}"`,
+	);
+
+	// don't show useless results when searching for no query, but do still let
+	// pdfgrep run, so that it build up the cache for the first run
+	if (pattern.length < 1) {
+		return JSON.stringify({
+			items: [{ title: "Waiting for query…", valid: false }],
+		});
+	}
+
 	/** @type AlfredItem[] */
-	const searchHits = app
-		.doShellScript(`pdfgrep --ignore-case --page-number "${pattern}" "${pdfPath}"`)
+	const hitsArr = searchHits
 		.split("\r")
 		// array of hits reduced to pages with number of hits
 		.reduce((acc, hit) => {
@@ -39,19 +43,21 @@ function run(argv) {
 			if (!isSamePageAsPrevious) {
 				acc.push({
 					hitsOnPage: 1, // not used by Alfred, only to keep track of page
-					title: "P. " + pageNo.toString(),
+					title: "Page " + pageNo.toString(),
 					subtitle: previewText,
 					arg: pageNo,
+					text: { largetype: `PAGE ${pageNo}\n- ${previewText}` },
 				});
 			} else {
 				lastPage.hitsOnPage += 1;
 				lastPage.title = `Page ${pageNo}     ${lastPage.hitsOnPage} hits`;
+				lastPage.text.largetype += "\n- " + previewText;
 			}
 			return acc;
 		}, []);
 
 	return JSON.stringify({
 		variables: { filename: pdfNameEncoded },
-		items: searchHits,
+		items: hitsArr,
 	});
 }
