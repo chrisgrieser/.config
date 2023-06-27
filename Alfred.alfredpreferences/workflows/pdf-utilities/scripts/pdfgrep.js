@@ -11,14 +11,9 @@ function run(argv) {
 	const pattern = argv[0] || "";
 	console.log("pattern:", pattern);
 
-	if (pattern.length < 4) {
+	if (pattern.length < 2) {
 		return JSON.stringify({
-			items: [
-				{
-					title: "Waiting for longer query…",
-					valid: false,
-				},
-			],
+			items: [{ title: "Waiting for longer query…", valid: false }],
 		});
 	}
 
@@ -35,19 +30,35 @@ function run(argv) {
 	const searchHits = app
 		.doShellScript(`pdfgrep --ignore-case --page-number "${pattern}" "${pdfPath}"`)
 		.split("\r")
-		.map((hit) => {
-			const pageNo = hit.slice(0, hit.indexOf(":"));
-			const previewText = hit
-				.slice(hit.indexOf(":") + 1)
-				.trim()
-				.replaceAll(pattern, pattern.toUpperCase());
+		.reduce((acc, hit) => {
+			const pageNo = parseInt(hit.slice(0, hit.indexOf(":")));
+			const previewText = hit.slice(hit.indexOf(":") + 1).trim();
+			if (acc.length === 0) {
+				acc.push({
+					title: previewText,
+					hitsOnPage: 1, // not used by Alfred, only to keep track of page
+					subtitle: "Page " + pageNo.toString(),
+					arg: pageNo,
+				});
+				return acc;
+			}
 
-			return {
-				title: previewText,
-				subtitle: pageNo,
-				arg: pageNo,
-			};
-		});
+			const lastPage = acc.at(-1)
+			const isSamePageAsPrevious = lastPage.arg === pageNo;
+			if (!isSamePageAsPrevious) {
+
+				acc.push({
+					title: previewText,
+					hitsOnPage: hitsOnPage, // not used by Alfred, only to keep track of page
+					subtitle: "Page " + pageNo.toString(),
+					arg: pageNo,
+				});
+			} else {
+				lastPage.hitsOnPage += 1;
+				lastPage.subtitle += " +1";
+			}
+			return acc;
+		}, []);
 
 	return JSON.stringify({
 		variables: { filename: pdfNameEncoded },
