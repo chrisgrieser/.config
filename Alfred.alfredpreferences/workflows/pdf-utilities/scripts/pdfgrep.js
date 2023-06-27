@@ -43,10 +43,9 @@ function run(argv) {
 				return acc;
 			}
 
-			const lastPage = acc.at(-1)
+			const lastPage = acc.at(-1);
 			const isSamePageAsPrevious = lastPage.arg === pageNo;
 			if (!isSamePageAsPrevious) {
-
 				acc.push({
 					title: previewText,
 					hitsOnPage: hitsOnPage, // not used by Alfred, only to keep track of page
