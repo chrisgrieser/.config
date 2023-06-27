@@ -7,18 +7,24 @@ app.includeStandardAdditions = true;
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv){
-	let [pattern, pdfPath] = argv;
+function run(argv) {
+	const [pattern, pdfPath] = argv;
 	console.log("pdfPath:", pdfPath);
 	console.log("pattern:", pattern);
-	if (pattern.length < 3) pattern = "qua"
-
+	if (pattern.length < 4) {
+		return JSON.stringify({
+			items: [{
+				title: "Waiting for longer query…",
+				valid: false,
+			}],
+		});
+	}
 
 	/** @type AlfredItem[] */
-	const searchHits = app.doShellScript(`pdfgrep --ignore-case --page-number "${pattern}" "${pdfPath}"`)
+	const searchHits = app
+		.doShellScript(`pdfgrep --ignore-case --page-number "${pattern}" "${pdfPath}"`)
 		.split("\r")
-		.map(item => {
-			
+		.map((item) => {
 			return {
 				title: item,
 				subtitle: item,

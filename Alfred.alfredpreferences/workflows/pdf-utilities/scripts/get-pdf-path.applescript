@@ -41,8 +41,6 @@ if (frontApp is "Highlights") then
 	# get File Name
 	tell application "System Events"
 		tell process "Highlights"
-			set frontmost to true
-			click menu item "Save" of menu "File" of menu bar 1
 			if (count of windows) > 0 then set frontWindow to name of front window
 		end tell
 	end tell
