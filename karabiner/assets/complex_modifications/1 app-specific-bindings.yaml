@@ -484,14 +484,14 @@ rules:
         to:
           - { key_code: c, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
-      # ⌘⇧4 (screenshot button): tap to screenshot, hold for timed screenshot
+      # ⌘⇧4 (screenshot button): tap to screenshot, hold for OCR
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
-          - shell_command: open -g "cleanshot://capture-area"
+          - shell_command: open -g "cleanshot://capture-text"
         to_if_held_down:
           - shell_command: |
-              osascript -e 'display notification "" with title "Timed Screenshot"'
+              osascript -e 'display notification "" with title "OCR Screenshot"'
               open -g "cleanshot://self-timer"
       # screenshot button + bulb-button
       - type: basic
