@@ -4,10 +4,8 @@
 <dict>
 	<key>fallbacks</key>
 	<array>
-		<string>search-utilities.7CF3F1C2-DEBB-4A6E-A92F-9DB277F708AA</string>
+		<string>features.websearch.google.fallback</string>
 	</array>
-	<key>fallbacksMode</key>
-	<integer>1</integer>
 	<key>showContacts</key>
 	<false/>
 	<key>showFolders</key>

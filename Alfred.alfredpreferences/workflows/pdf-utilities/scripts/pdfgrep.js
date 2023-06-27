@@ -37,7 +37,7 @@ function run(argv) {
 		// array of hits reduced to pages with number of hits
 		.reduce((acc, hit) => {
 			const pageNo = parseInt(hit.slice(0, hit.indexOf(":")));
-			const previewText = hit.slice(hit.indexOf(":") + 1).trim();
+			const previewText = '"' + hit.slice(hit.indexOf(":") + 1).trim() + '"';
 			const lastPage = acc.at(-1); // undefined on first hit where there is no last page
 			const isSamePageAsPrevious = lastPage ? lastPage.arg === pageNo : false;
 			if (!isSamePageAsPrevious) {
