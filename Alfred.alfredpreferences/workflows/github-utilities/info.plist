@@ -117,7 +117,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>17D804EC-6AFE-403E-A6CC-8F536D379033</string>
+				<string>CF5614B3-814C-4F8C-958A-8757509B70EB</string>
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
@@ -466,6 +466,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CF5614B3-814C-4F8C-958A-8757509B70EB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>17D804EC-6AFE-403E-A6CC-8F536D379033</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -872,6 +885,14 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<string>17D804EC-6AFE-403E-A6CC-8F536D379033</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>CF5614B3-814C-4F8C-958A-8757509B70EB</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1825,6 +1846,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<real>495</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>CF5614B3-814C-4F8C-958A-8757509B70EB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>345</real>
+			<key>ypos</key>
+			<real>435</real>
 		</dict>
 		<key>D0CBD0A3-DDAB-4712-A246-8796E4A58D3B</key>
 		<dict>
