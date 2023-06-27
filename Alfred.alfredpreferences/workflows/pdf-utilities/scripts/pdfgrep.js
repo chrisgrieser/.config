@@ -11,14 +11,23 @@ function run(argv) {
 	const pattern = argv[0] || "";
 
 	// determine path of currently open PDF
-	const pdfFolder = $.getenv("pdf_folder").replace(/^~/, app.pathTo("home folder"));
-	const pdfName = Application("System Events")
-		.processes.whose({ name: "Highlights" })
-		.windows[0].name()[0]
-		.split(" – ")[0];
-	const pdfPath = app.doShellScript(`find "${pdfFolder}" -type f -name "${pdfName}" | head -n1`);
+	let pdfPath, pdfName;
+	try {
+		// file action
+		pdfPath = $.getenv("input_path"); // set via ALfred only on file action
+		pdfName = pdfPath.slice(pdfPath.lastIndexOf("/") + 1);
+	} catch (_error) {
+		// hotkey via highlights
+		const pdfFolder = $.getenv("pdf_folder").replace(/^~/, app.pathTo("home folder"));
+		pdfName = Application("System Events")
+			.processes.whose({ name: "Highlights" })
+			.windows[0].name()[0]
+			.split(" – ")[0];
+		pdfPath = app.doShellScript(`find "${pdfFolder}" -type f -name "${pdfName}" | head -n1`);
+	}
 	const pdfNameEncoded = encodeURIComponent(pdfName.slice(0, -4)); // required by highlights URI
 
+	// SEARCH
 	const searchHits = app.doShellScript(
 		`pdfgrep --cache --perl-regexp --ignore-case --page-number "${pattern}" "${pdfPath}"`,
 	);
@@ -49,8 +58,9 @@ function run(argv) {
 					text: { largetype: `PAGE ${pageNo}\n- ${previewText}` },
 				});
 			} else {
+				const pageStr = pageNo.toString().padEnd(4, " ")
 				lastPage.hitsOnPage += 1;
-				lastPage.title = `Page ${pageNo}     ${lastPage.hitsOnPage} hits`;
+				lastPage.title = `Page ${pageStr}     ${lastPage.hitsOnPage} hits`;
 				lastPage.text.largetype += "\n- " + previewText;
 			}
 			return acc;
