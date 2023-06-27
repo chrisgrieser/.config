@@ -58,9 +58,9 @@ function run(argv) {
 					text: { largetype: `PAGE ${pageNo}\n- ${previewText}` },
 				});
 			} else {
-				const pageStr = pageNo.toString().padEnd(4, " ")
+				const pageStr = pageNo.toString().padEnd(4)
 				lastPage.hitsOnPage += 1;
-				lastPage.title = `Page ${pageStr}  ${lastPage.hitsOnPage} hits`;
+				lastPage.title = `Page ${pageStr} ‣  ${lastPage.hitsOnPage}`;
 				lastPage.text.largetype += "\n- " + previewText;
 			}
 			return acc;
