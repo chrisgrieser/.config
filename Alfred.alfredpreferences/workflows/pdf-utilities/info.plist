@@ -226,11 +226,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9A78A787-53EF-4B69-A756-340AB5E47756</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5649963E-445E-4637-BAC2-8A93C6117BB2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A02897FE-BC2A-479A-A777-3CAF8A394943</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>871ABB10-2B9C-44B3-951C-3EA52181ECC2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>ACC567CB-4DA6-4A62-BD9D-5850EEFB9FB2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>406D2501-8589-431C-9EA5-90EB1FBB238C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -257,6 +283,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D7369C11-C9F2-497E-8290-2E382B2F00B4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ACC567CB-4DA6-4A62-BD9D-5850EEFB9FB2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -505,6 +544,35 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>406D2501-8589-431C-9EA5-90EB1FBB238C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string>Selected file is neither a Word document nor a markdown file.</string>
 				<key>passthroughargument</key>
@@ -518,6 +586,61 @@
 			<string>25787E6B-1A3C-4C80-B0AD-C11D016A4330</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>pdfpath=$(osascript "./scripts/get-pdf-path.applescript")
+osascript -l JavaScript "./scripts/pdfgrep.js" "$*" "$pdfpath"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>ACC567CB-4DA6-4A62-BD9D-5850EEFB9FB2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>3</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>F</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>D7369C11-C9F2-497E-8290-2E382B2F00B4</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -604,25 +727,23 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
+				<false/>
 				<key>argumenttrimmode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>ff</string>
 				<key>queuedelaycustom</key>
-				<integer>3</integer>
+				<integer>5</integer>
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
@@ -640,7 +761,7 @@
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -648,6 +769,44 @@
 			<string>5649963E-445E-4637-BAC2-8A93C6117BB2</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>3</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>F</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>net.highlightsapp.universal</string>
+					<string>com.readdle.PDFExpert-Mac</string>
+					<string>com.apple.Preview</string>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>9A78A787-53EF-4B69-A756-340AB5E47756</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -995,6 +1154,13 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>ypos</key>
 			<real>135</real>
 		</dict>
+		<key>406D2501-8589-431C-9EA5-90EB1FBB238C</key>
+		<dict>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>255</real>
+		</dict>
 		<key>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</key>
 		<dict>
 			<key>colorindex</key>
@@ -1038,7 +1204,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 		<key>5649963E-445E-4637-BAC2-8A93C6117BB2</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>195</real>
 			<key>ypos</key>
 			<real>395</real>
 		</dict>
@@ -1118,6 +1284,17 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>ypos</key>
 			<real>580</real>
 		</dict>
+		<key>9A78A787-53EF-4B69-A756-340AB5E47756</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>run PDF annotation extractor</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
 		<key>A02897FE-BC2A-479A-A777-3CAF8A394943</key>
 		<dict>
 			<key>colorindex</key>
@@ -1126,6 +1303,13 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<real>560</real>
 			<key>ypos</key>
 			<real>580</real>
+		</dict>
+		<key>ACC567CB-4DA6-4A62-BD9D-5850EEFB9FB2</key>
+		<dict>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>270</real>
 		</dict>
 		<key>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</key>
 		<dict>
@@ -1153,6 +1337,13 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<real>400</real>
 			<key>ypos</key>
 			<real>580</real>
+		</dict>
+		<key>D7369C11-C9F2-497E-8290-2E382B2F00B4</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>280</real>
 		</dict>
 		<key>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</key>
 		<dict>

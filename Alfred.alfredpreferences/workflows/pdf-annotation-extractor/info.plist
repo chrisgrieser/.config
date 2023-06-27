@@ -354,15 +354,15 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 			<key>description</key>
 			<string>The folder containing all PDFs. Required to be able to extract the current PDF from Highlights.</string>
 			<key>label</key>
-			<string>Highlights.app</string>
+			<string>Highlights.app: PDF Folder</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
-			<string>pdf_folder_highlights_app</string>
+			<string>pdf_folder</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>8.6.0</string>
+	<string>8.6.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/pdf-annotation-extractor-alfred</string>
 </dict>
