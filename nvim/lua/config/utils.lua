@@ -63,7 +63,8 @@ function M.getHighlightValue(name, key)
 	return string.format("#%06x", value)
 end
 
----reads a template to apply if the file is empty
+---reads a template to apply if the file is empty. Add to a filetype config to
+---activate templates for it
 ---@param ext string extension of the skeleton
 function M.applyTemplateIfEmptyFile(ext)
 	vim.defer_fn(function()
