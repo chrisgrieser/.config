@@ -10,7 +10,7 @@ pdfpath=$(osascript -e '
 		end tell
 	end tell
 	return text item 1 of frontWindow
-'
+	')
 
 
 osascript -l JavaScript "./scripts/pdfgrep.js" "$*" "$pdfpath" 
