@@ -139,18 +139,7 @@
 			</dict>
 		</array>
 		<key>5649963E-445E-4637-BAC2-8A93C6117BB2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1C9ACF58-D1D7-46F2-BD91-BF02AB3FC161</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>5C7C540D-E608-402E-8778-C49FBACEB5DD</key>
 		<array>
 			<dict>
@@ -656,7 +645,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/pdfgrep.sh</string>
+				<string>./scripts/pdfgrep.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -672,30 +661,6 @@
 			<string>5649963E-445E-4637-BAC2-8A93C6117BB2</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>cache="$alfred_workflow_cache/pdfpath"
-rm -f "$cache"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>1C9ACF58-D1D7-46F2-BD91-BF02AB3FC161</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1035,15 +1000,6 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>ypos</key>
 			<real>725</real>
 		</dict>
-		<key>1C9ACF58-D1D7-46F2-BD91-BF02AB3FC161</key>
-		<dict>
-			<key>note</key>
-			<string>remove cache</string>
-			<key>xpos</key>
-			<real>385</real>
-			<key>ypos</key>
-			<real>395</real>
-		</dict>
 		<key>20603C68-58B3-433A-AEE0-62CAF6C85E0A</key>
 		<dict>
 			<key>note</key>
@@ -1129,10 +1085,12 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 		</dict>
 		<key>5649963E-445E-4637-BAC2-8A93C6117BB2</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>340</real>
 		</dict>
 		<key>5C7C540D-E608-402E-8778-C49FBACEB5DD</key>
 		<dict>
@@ -1219,7 +1177,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>340</real>
 		</dict>
 		<key>A02897FE-BC2A-479A-A777-3CAF8A394943</key>
 		<dict>
