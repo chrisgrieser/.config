@@ -1016,9 +1016,8 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 
 **Requirements**
 - pandoc
-- mgmeyers/pdfannots2json
+- pdfgrep
 - wkhtmltopdf
-- pandoc configs
 - MS Word
 - ocrmypdf</string>
 	<key>uidata</key>
@@ -1153,7 +1152,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>open at PDF page</string>
 			<key>xpos</key>
-			<real>410</real>
+			<real>385</real>
 			<key>ypos</key>
 			<real>340</real>
 		</dict>
