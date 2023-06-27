@@ -120,13 +120,23 @@ function insertPageNumber(annotations, pageNo) {
 	});
 }
 
-/** code: "_" or type "Underline" -> split off and send to SideNotes.app
+/** code: "_" or annotation type "Underline" -> split off and send to SideNotes.app
+ * when SideNotes is not installed, Underlines are ignored and annotations with
+ * leading "_" are still extracted (though the "_" is removed)
  * @param {Annotation[]} annotations
  * @param {string} citekey
  */
-function splitOffUnderlines(annotations, citekey) {
-	const underlineAnnos = annotations.filter((a) => a.type === "Underline");
+function underlinesToSidenotes(annotations, citekey) {
+	// sidenotes is installed?
+	let sidenotesIsInstalled = false;
+	try {
+		Application("SideNotes");
+		sidenotesIsInstalled = true;
+	} catch (_error) {
+		sidenotesIsInstalled = false;
+	}
 
+	// Annotations with leading "_"
 	const underscoreAnnos = [];
 	annotations.forEach((anno) => {
 		if (!anno.comment?.startsWith("_")) return;
@@ -134,10 +144,14 @@ function splitOffUnderlines(annotations, citekey) {
 		underscoreAnnos.push(anno);
 	});
 
-	const annosToSplitOff = [...underlineAnnos, ...underscoreAnnos];
-	if (annosToSplitOff.length > 0) {
-		const text = jsonToMd(annosToSplitOff, citekey);
-		Application("SideNotes").createNote({ text: text });
+	if (sidenotesIsInstalled) {
+		const underlineAnnos = annotations.filter((a) => a.type === "Underline");
+
+		const annosToSplitOff = [...underlineAnnos, ...underscoreAnnos];
+		if (annosToSplitOff.length > 0) {
+			const text = jsonToMd(annosToSplitOff, citekey);
+			Application("SideNotes").createNote({ text: text });
+		}
 	}
 	return annotations.filter((/** @type {{ type: string; }} */ anno) => anno.type !== "Underline");
 }
@@ -196,7 +210,7 @@ function jsonToMd(annotations, citekey) {
 				break;
 			case "Heading":
 				// ensure no leading line break when heading is first item
-				if (firstItem) output = "## ";
+				if (firstItem) output = comment;
 				else output = "\n" + comment;
 				break;
 			case "Question Callout": // blockquoted comment
@@ -395,11 +409,14 @@ function extractMetadata(citekey, rawEntry) {
 	if (data.firstPage === -999) {
 		let response, validInput;
 		do {
-			response = app.displayDialog("BibTeX Entry has no page numbers.\n\nEnter true page number of FIRST pdf page:", {
-				defaultAnswer: "",
-				buttons: ["OK", "Cancel"],
-				defaultButton: "OK",
-			});
+			response = app.displayDialog(
+				"BibTeX Entry has no page numbers.\n\nEnter true page number of FIRST pdf page:",
+				{
+					defaultAnswer: "",
+					buttons: ["OK", "Cancel"],
+					defaultButton: "OK",
+				},
+			);
 			if (response.buttonReturned === "Cancel") return;
 			validInput = response.textReturned.match(/^-?\d+$/);
 		} while (!validInput);
@@ -501,7 +518,7 @@ function run(argv) {
 
 	// finish up
 	if (!usePdfannots) annos = insertImage4pdfannots2json(annos, citekey);
-	annos = splitOffUnderlines(annos, citekey);
+	annos = underlinesToSidenotes(annos, citekey);
 	annos = jsonToMd(annos, citekey);
 
 	writeNote(annos, metadata, outPath, tagsForYaml);

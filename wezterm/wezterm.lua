@@ -173,7 +173,7 @@ local config = {
 	detect_password_input = false,
 
 	-- Start/Close
-	default_cwd = wt.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/",
+	default_cwd = os.getenv("WD"), -- defined in .zshenv
 	quit_when_all_windows_are_closed = true,
 	window_close_confirmation = "NeverPrompt",
 
