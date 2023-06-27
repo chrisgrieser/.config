@@ -30,31 +30,22 @@ function run(argv) {
 	const searchHits = app
 		.doShellScript(`pdfgrep --ignore-case --page-number "${pattern}" "${pdfPath}"`)
 		.split("\r")
+		// array of hits reduced to pages with number of hits
 		.reduce((acc, hit) => {
 			const pageNo = parseInt(hit.slice(0, hit.indexOf(":")));
 			const previewText = hit.slice(hit.indexOf(":") + 1).trim();
-			if (acc.length === 0) {
-				acc.push({
-					title: previewText,
-					hitsOnPage: 1, // not used by Alfred, only to keep track of page
-					subtitle: "Page " + pageNo.toString(),
-					arg: pageNo,
-				});
-				return acc;
-			}
-
-			const lastPage = acc.at(-1);
-			const isSamePageAsPrevious = lastPage.arg === pageNo;
+			const lastPage = acc.at(-1); // undefined on first hit where there is no last page
+			const isSamePageAsPrevious = lastPage ? lastPage.arg === pageNo : false;
 			if (!isSamePageAsPrevious) {
 				acc.push({
-					title: previewText,
-					hitsOnPage: hitsOnPage, // not used by Alfred, only to keep track of page
-					subtitle: "Page " + pageNo.toString(),
+					hitsOnPage: 1, // not used by Alfred, only to keep track of page
+					title: "P. " + pageNo.toString(),
+					subtitle: previewText,
 					arg: pageNo,
 				});
 			} else {
 				lastPage.hitsOnPage += 1;
-				lastPage.subtitle += " +1";
+				lastPage.title = `Page ${pageNo}     ${lastPage.hitsOnPage} hits`;
 			}
 			return acc;
 		}, []);

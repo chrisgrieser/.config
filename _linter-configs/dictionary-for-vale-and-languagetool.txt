@@ -84,3 +84,5 @@ on the same page
 type
 allow
 As
+Textobject
+Using
