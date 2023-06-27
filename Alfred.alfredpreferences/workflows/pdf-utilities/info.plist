@@ -139,7 +139,18 @@
 			</dict>
 		</array>
 		<key>5649963E-445E-4637-BAC2-8A93C6117BB2</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>73E6C367-5696-402A-936C-96472BFB71BE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5C7C540D-E608-402E-8778-C49FBACEB5DD</key>
 		<array>
 			<dict>
@@ -665,6 +676,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-highlights-page.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>73E6C367-5696-402A-936C-96472BFB71BE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1111,6 +1145,17 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<real>30</real>
 			<key>ypos</key>
 			<real>580</real>
+		</dict>
+		<key>73E6C367-5696-402A-936C-96472BFB71BE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>open at PDF page</string>
+			<key>xpos</key>
+			<real>410</real>
+			<key>ypos</key>
+			<real>340</real>
 		</dict>
 		<key>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</key>
 		<dict>
