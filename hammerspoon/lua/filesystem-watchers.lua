@@ -80,18 +80,21 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 
-		-- alfredworkflows, ics (iCal), and dmg
-		if ext == "alfredworkflow" or ext == "ics" or ext == "dmg" then
+		-- alfredworkflows
+		if ext == "alfredworkflow" then
+			-- download condition ensures my own workflows aren't deleted
 			local fileExists, msg = pcall(hs.fs.xattr.get, filep, "com.apple.quarantine")
 			local isDownloaded = fileExists and msg ~= nil
-			if isDownloaded then
-				-- opening ics and Alfred leads to recursions when opened via this file
-				-- watcher and are therefore opened via browser auto-open instead. dmg
-				-- cannot be opened via browser though and also does not create recursion,
-				-- so it is opened here
-				if not (fileName == "Stats.dmg") then hs.open(filep) end
-				u.runWithDelays(3, function() os.remove(filep) end)
-			end
+			if isDownloaded then u.runWithDelays(3, function() os.remove(filep) end) end
+
+		-- ics (iCal)
+		elseif ext == "ics" then
+			u.runWithDelays(3, function() os.remove(filep) end)
+
+		-- dmg (cannot be auto-opened via Browser)
+		elseif ext == "dmg" then
+			if not (fileName == "Stats.dmg") then hs.open(filep) end
+			u.runWithDelays(3, function() os.remove(filep) end)
 
 		-- zip: unzip
 		elseif ext == "zip" and fileName ~= "violentmonkey.zip" then

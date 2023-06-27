@@ -46,6 +46,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>187E13C3-653C-4262-824A-E35980C72EB0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2E5C7739-FB9C-46E5-A243-07276231C025</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>AB2F5986-5780-4ECC-8C49-D8419A5725C2</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Copy path of sound file</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1C142833-437A-43E8-82C9-88D1217CBDB9</key>
 		<array>
 			<dict>
@@ -111,6 +134,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>AB2F5986-5780-4ECC-8C49-D8419A5725C2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>498C4B4D-70F1-475C-9A07-0FF4539E1971</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E0D44BD2-FD8D-4010-ACEF-CA1859174163</key>
 		<array>
 			<dict>
@@ -129,19 +165,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>93A30DCD-3F5B-4D29-9677-EB0B153B7759</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F2F6FDBE-D7AC-4BDF-9183-9ABBC4A29308</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FB94CA85-1A72-4A36-8AA0-E1301CFCC28D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -174,103 +197,6 @@
 	<string>System Utilities</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>anchorfields</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>daterange</key>
-				<integer>0</integer>
-				<key>fields</key>
-				<array>
-					<dict>
-						<key>field</key>
-						<string>kMDItemDisplayName</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemAlternateNames</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemFinderComment</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-				</array>
-				<key>includesystem</key>
-				<true/>
-				<key>keyword</key>
-				<string>sound files</string>
-				<key>limit</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>scopes</key>
-				<array>
-					<string>/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds</string>
-					<string>/System/Library/Sounds</string>
-				</array>
-				<key>sortmode</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>📁 Sound Files</string>
-				<key>types</key>
-				<array>
-					<string>com.apple.coreaudio-format</string>
-					<string>public.aiff-audio</string>
-				</array>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.filefilter</string>
-			<key>uid</key>
-			<string>F2F6FDBE-D7AC-4BDF-9183-9ABBC4A29308</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.revealfile</string>
-			<key>uid</key>
-			<string>FB94CA85-1A72-4A36-8AA0-E1301CFCC28D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -933,6 +859,78 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>sound</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>sounds preview.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Preview macOS System Sounds</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>187E13C3-653C-4262-824A-E35980C72EB0</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>/usr/bin/afplay "${1}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2E5C7739-FB9C-46E5-A243-07276231C025</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -963,6 +961,46 @@ fi</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>0B68B413-2CC1-45E8-8686-2C0AE399E78F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>AB2F5986-5780-4ECC-8C49-D8419A5725C2</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>498C4B4D-70F1-475C-9A07-0FF4539E1971</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -998,6 +1036,15 @@ fi</string>
 			<key>ypos</key>
 			<real>195</real>
 		</dict>
+		<key>187E13C3-653C-4262-824A-E35980C72EB0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>555</real>
+		</dict>
 		<key>1C142833-437A-43E8-82C9-88D1217CBDB9</key>
 		<dict>
 			<key>colorindex</key>
@@ -1007,6 +1054,17 @@ fi</string>
 			<key>ypos</key>
 			<real>510</real>
 		</dict>
+		<key>2E5C7739-FB9C-46E5-A243-07276231C025</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>afplay</string>
+			<key>xpos</key>
+			<real>225</real>
+			<key>ypos</key>
+			<real>555</real>
+		</dict>
 		<key>43E5DA64-2A89-4571-A4EB-54CAF43E0792</key>
 		<dict>
 			<key>colorindex</key>
@@ -1015,6 +1073,15 @@ fi</string>
 			<real>685</real>
 			<key>ypos</key>
 			<real>255</real>
+		</dict>
+		<key>498C4B4D-70F1-475C-9A07-0FF4539E1971</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>375</real>
+			<key>ypos</key>
+			<real>690</real>
 		</dict>
 		<key>4C96F5EA-C030-4D6F-8EE5-4343140AE71A</key>
 		<dict>
@@ -1085,6 +1152,15 @@ fi</string>
 			<key>ypos</key>
 			<real>40</real>
 		</dict>
+		<key>AB2F5986-5780-4ECC-8C49-D8419A5725C2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>225</real>
+			<key>ypos</key>
+			<real>690</real>
+		</dict>
 		<key>B5DEE33A-20D7-44FD-8483-3CDE56816C5D</key>
 		<dict>
 			<key>colorindex</key>
@@ -1139,15 +1215,6 @@ fi</string>
 			<key>ypos</key>
 			<real>380</real>
 		</dict>
-		<key>F2F6FDBE-D7AC-4BDF-9183-9ABBC4A29308</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>685</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>FB6A9A4A-D8A5-428C-8C71-223732BDCFAD</key>
 		<dict>
 			<key>colorindex</key>
@@ -1158,15 +1225,6 @@ fi</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>195</real>
-		</dict>
-		<key>FB94CA85-1A72-4A36-8AA0-E1301CFCC28D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>890</real>
-			<key>ypos</key>
-			<real>15</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
