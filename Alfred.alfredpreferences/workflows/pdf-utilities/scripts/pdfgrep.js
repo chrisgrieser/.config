@@ -60,7 +60,7 @@ function run(argv) {
 			} else {
 				const pageStr = pageNo.toString().padEnd(4, " ")
 				lastPage.hitsOnPage += 1;
-				lastPage.title = `Page ${pageStr}     ${lastPage.hitsOnPage} hits`;
+				lastPage.title = `Page ${pageStr}  ${lastPage.hitsOnPage} hits`;
 				lastPage.text.largetype += "\n- " + previewText;
 			}
 			return acc;
