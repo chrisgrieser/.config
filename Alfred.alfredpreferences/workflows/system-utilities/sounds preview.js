@@ -10,8 +10,8 @@ function run() {
 	/** @type AlfredItem[] */
 	const soundsArr = app
 		.doShellScript(
-			// WARN codespell fixes "caf" to "calf"
-			'find "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds" "/System/Library/Sounds" -name "*.aif" -or -name "*.aiff" -or -name "*.caf"',
+			// WARN codespell fixes ".caf" to ".calf"
+			'find "/System/Library/Sounds" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds" -name "*.aif" -or -name "*.aiff" -or -name "*.caf" -not -path "*telephony*"',
 		)
 		.split("\r")
 		.map((path) => {
