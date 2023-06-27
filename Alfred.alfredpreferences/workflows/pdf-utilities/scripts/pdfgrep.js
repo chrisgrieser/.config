@@ -54,7 +54,8 @@ function run(argv) {
 				lastPage.text.largetype += "\n- " + previewText;
 			}
 			return acc;
-		}, []);
+		}, [])
+		.sort((a, b) => b.hitsOnPage - a.hitsOnPage);
 
 	return JSON.stringify({
 		variables: { filename: pdfNameEncoded },

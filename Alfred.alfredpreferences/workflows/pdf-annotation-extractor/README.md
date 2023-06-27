@@ -53,7 +53,7 @@ __Annotation Types extracted__
 - Strikethrough ➡️ Markdown strikethrough
 - Rectangle ➡️ image
 - Underlines ➡️ sent to [SideNotes](https://www.apptorium.com/sidenotes) (if not
-  installed, underlines are ignored)
+  installed, they are ignored)
 
 ### Automatic Page Number Identification
 Instead of the PDF page numbers, this workflow retrieves information about the *real* page numbers from the BibTeX library and inserts them. If there is no page data in the BibTeX entry (for example, monographies), you are prompted to enter the page number manually.
@@ -67,7 +67,7 @@ Insert these special codes at the __beginning__ of an annotation to invoke speci
 - `? foo` __(free comments)__: Turns "foo" into a [Question Callout](https://help.obsidian.md/How+to/Use+callouts)  (`> ![QUESTION]`) and move up. (Callouts are Obsidian-specific Syntax.)
 - `##`: Turns highlighted text into a __heading__ that is added at that location. The number of `#` determines the heading level. If the annotation is a free comment, the text following the `#` is used as heading instead. (The space after the is `#` required).
 - `=`: Adds highlighted text as __tags__ to the YAML frontmatter (mostly used for Obsidian as output). If the annotation is a free comment, uses the text after the `=`. In both cases, the annotation is removed afterward.
-- `_`
+- `_`: A copy of the annotation is sent to [SideNotes](https://www.apptorium.com/sidenotes). If SideNotes is not installed, these annotations are extracted as normal.
 
 ### Extracting Images
 - The respective images is saved in the `attachments` sub-folder of the output folder, and named `{citekey}_image{n}.png`.
