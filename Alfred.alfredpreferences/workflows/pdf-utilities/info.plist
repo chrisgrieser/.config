@@ -522,75 +522,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⏳ running OCR...</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>fixedorder</key>
-				<false/>
-				<key>items</key>
-				<string>[{"title":"German","arg":"deu","subtitle":""},{"title":"English","arg":"eng","subtitle":""},{"title":"Bilingual: German &amp; English","arg":"eng+deu","subtitle":""}]</string>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Select Language of the PDF</string>
-				<key>title</key>
-				<string>OCRmyPDF</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.listfilter</string>
-			<key>uid</key>
-			<string>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.adobe.pdf</string>
-				</array>
-				<key>name</key>
-				<string>Run OCR on the PDF</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>698B1D06-326B-43D2-8ABB-DE676CE3661A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -672,67 +603,51 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>input_path</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ OCR complete</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ff</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
 				<key>script</key>
-				<string>export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-{query}</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/run-ocrmypdf.sh</string>
+				<string>./scripts/pdfgrep.sh</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search pdf</string>
 				<key>type</key>
 				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>0E4A0733-E898-4FB7-BC62-446FBD10A76E</string>
+			<string>5649963E-445E-4637-BAC2-8A93C6117BB2</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -801,6 +716,75 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳ running OCR...</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"German","arg":"deu","subtitle":""},{"title":"English","arg":"eng","subtitle":""},{"title":"Bilingual: German &amp; English","arg":"eng+deu","subtitle":""}]</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Select Language of the PDF</string>
+				<key>title</key>
+				<string>OCRmyPDF</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>name</key>
+				<string>Run OCR on the PDF</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>698B1D06-326B-43D2-8ABB-DE676CE3661A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -814,6 +798,26 @@
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>A02897FE-BC2A-479A-A777-3CAF8A394943</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>input_path</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -875,6 +879,51 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ OCR complete</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+{query}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/run-ocrmypdf.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0E4A0733-E898-4FB7-BC62-446FBD10A76E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).
@@ -899,9 +948,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>run ocrmypdf</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>235</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>725</real>
 		</dict>
 		<key>20603C68-58B3-433A-AEE0-62CAF6C85E0A</key>
 		<dict>
@@ -951,9 +1000,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>410</real>
+			<real>400</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>725</real>
 		</dict>
 		<key>4D63817E-E093-44ED-99F7-2762E817BB90</key>
 		<dict>
@@ -986,6 +1035,13 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
+		<key>5649963E-445E-4637-BAC2-8A93C6117BB2</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
 		<key>5C7C540D-E608-402E-8778-C49FBACEB5DD</key>
 		<dict>
 			<key>colorindex</key>
@@ -1002,9 +1058,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>40</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>580</real>
 		</dict>
 		<key>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</key>
 		<dict>
@@ -1058,9 +1114,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>235</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>580</real>
 		</dict>
 		<key>A02897FE-BC2A-479A-A777-3CAF8A394943</key>
 		<dict>
@@ -1094,18 +1150,18 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>410</real>
+			<real>400</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>580</real>
 		</dict>
 		<key>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>185</real>
+			<real>175</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>610</real>
 		</dict>
 		<key>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</key>
 		<dict>
@@ -1127,27 +1183,6 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 				<key>default</key>
 				<string></string>
 				<key>filtermode</key>
-				<integer>2</integer>
-				<key>placeholder</key>
-				<string>~/.config/pandoc/main-bibliography.bib</string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>BibTeX Library Path</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>bibtex_library_path</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
 				<integer>1</integer>
 				<key>placeholder</key>
 				<string></string>
@@ -1155,54 +1190,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>If path is in Obsidian vault, will open the note in Obsidian afterwards</string>
-			<key>label</key>
-			<string>Output Path</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>output_path</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>pdfannots2json</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>pdfannots2json</string>
-						<string>pdfannots2json</string>
-					</array>
-					<array>
-						<string>pdfannots</string>
-						<string>pdfannots</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string>pdfannots2json or pdfannots. Should normally stay "pdfannots2json"</string>
-			<key>label</key>
-			<string>Extraction Engine</string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>extraction_engine</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
-				<integer>1</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>only used for PDF search</string>
+			<string>only used for PDF search &amp; in-pdf-search in Highlights</string>
 			<key>label</key>
 			<string>PDF Folder</string>
 			<key>type</key>

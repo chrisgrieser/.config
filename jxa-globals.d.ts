@@ -37,6 +37,8 @@ declare const Application: {
 	(appname: string): {
 		includeStandardAdditions: boolean;
 		openLocation(url: string): void;
+		open(path: string): void;
+		reveal(path: string): void;
 		id(): number;
 		name(): string;
 		running(): boolean;

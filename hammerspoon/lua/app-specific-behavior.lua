@@ -171,7 +171,9 @@ DiscordAppWatcher = aw.new(function(appName, eventType)
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
 
-	if eventType == aw.activated then
+	if eventType == aw.launched or eventType == aw.launching then
+		u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
+	elseif eventType == aw.activated then
 		local hasURL = clipb:match("^https?:%S+$")
 		local hasObsidianURL = clipb:match("^obsidian:%S+$")
 		local isTweet = clipb:match("^https?://twitter%.com") -- for tweets, the previews are actually useful since they show the full content
