@@ -42,7 +42,7 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Libr
 defaults write com.apple.finder FXEnableExtensionChangeWarning -int 0
 defaults write com.apple.finder WarnOnEmptyTrash -int 0
 defaults write com.apple.finder QuitMenuItem -bool true # make finder quittable
-defaults write com.apple.finder CreateDesktop false # disable desktop icons & make desktop unfocussable
+defaults write com.apple.finder CreateDesktop false     # disable desktop icons & make desktop unfocussable
 
 # Automatically open a new Finder window when a volume is mounted
 defaults read com.apple.frameworks.diskimages auto-open-ro-root -bool true
@@ -76,7 +76,7 @@ defaults write com.apple.finder ShowStatusBar -bool false
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv" # List view as default
-chflags nohidden ~/Library # Show the ~/Library folder
+chflags nohidden ~/Library                                          # Show the ~/Library folder
 
 # search always current directory
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
@@ -91,18 +91,23 @@ killall Finder
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# Reduce Transparency (native mac apps & menubar)
+defaults write com.apple.universalaccess reduceTransparency -bool false
+killall Finder
+
 # these three need restart
 # mouse speed: 3 = max speed from System Preferences
 # https://mac-os-key-repeat.vercel.app/
 defaults write -g com.apple.mouse.scaling 4.0
 defaults write -g InitialKeyRepeat -int 13 # normal minimum: 15 (225ms)
 defaults write -g KeyRepeat -int 2         # normal minimum: 2 (30ms)
+# Disable press-and-hold for keys in favor of key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
-# when to show scrollbars
-defaults write NSGlobalDomain AppleShowScrollBars -string "Automatic"
-# sidebar icon size (1-3)
+defaults write NSGlobalDomain AppleShowScrollBars -string "Automatic" # when to show scrollbars
 defaults write -g AppleShowAllExtensions -bool true
+
 # save menu settings
 defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
 defaults write -g NSNavPanelExpandedStateForSaveMode2 -bool true
@@ -116,14 +121,15 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write NSGlobalDomain NSWindowResizeTime 0.1
 # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-# Disable press-and-hold for keys in favor of key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+
 # expand print menu by default
 defaults write -g PMPrintingExpandedStateForPrint -bool true
 defaults write -g PMPrintingExpandedStateForPrint2 -bool true
 
 # set highlight color
 defaults write NSGlobalDomain AppleHighlightColor -string "0.968627 0.831373 1.000000 Purple"
+
 # Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
@@ -179,6 +185,9 @@ defaults write org.gpgtools.common DisableKeychain -bool yes
 
 # Top right → Notification Center
 defaults write com.apple.dock wvous-tr-corner -int 12
+defaults write com.apple.dock wvous-br-corner -int 0
+defaults write com.apple.dock wvous-tl-corner -int 0
+defaults write com.apple.dock wvous-bl-corner -int 0
 
 killall Dock
 
@@ -190,7 +199,7 @@ sudo tmutil disable # disable automatic backups
 
 # Safari
 #--------------------------------------
-defaults write com.apple.Safari IncludeDevelopMenu -bool true # Enable Develop menu and Web Inspector
+defaults write com.apple.Safari IncludeDevelopMenu -bool true            # Enable Develop menu and Web Inspector
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true # full URL in address bar
-defaults write com.apple.Safari HomePage -string "about:blank" # faster loading
-defaults write com.apple.Safari DownloadsPath -string "$WD" # Download path
+defaults write com.apple.Safari HomePage -string "about:blank"           # faster loading
+defaults write com.apple.Safari DownloadsPath -string "$WD"              # Download path

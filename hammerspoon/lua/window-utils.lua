@@ -97,8 +97,12 @@ function M.autoTile(winSrc)
 		wins = winSrc:getWindows()
 	end
 
-	-- prevent autotiling of windows that are not maximizable, e.g. copy progress
-	wins = hs.fnutils.filter(wins, function(win) return win:isMaximizable() and win:isStandard() end)
+	-- prevent autotiling of windows that are not maximizable, e.g. copy
+	-- progress, and of the Info windows
+	wins = hs.fnutils.filter(
+		wins,
+		function(win) return win:isMaximizable() and win:isStandard() and not (win:title():find("Info$")) end
+	)
 	if not wins then return end
 	AutoTilingInProgress = true
 
