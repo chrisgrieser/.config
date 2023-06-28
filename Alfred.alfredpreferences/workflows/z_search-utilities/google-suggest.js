@@ -12,7 +12,18 @@ const noSuggestionRegex = new RegExp($.getenv("no_suggestion_regex"));
 /** @param {string[]} itemNames */
 function makeItems(itemNames) {
 	return itemNames.map((/** @type {string} */ name) => {
-		return { uid: name, title: name, arg: name };
+		return {
+			uid: name,
+			title: name,
+			arg: name,
+			// no argument for script filter
+			mods: {
+				shift: {
+					arg: "",
+					variables: { query: name }
+				},
+			},
+		};
 	});
 }
 

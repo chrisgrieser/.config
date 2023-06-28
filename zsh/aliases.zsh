@@ -76,9 +76,8 @@ alias -s {md,lua,js,ts,css,sh,zsh,applescript}=bat
 alias -g H="--help"
 alias -g G="| grep --ignore-case --color"
 alias -g B="| bat"
-alias -g C="| pbcopy ; echo 'Copied.'"                               # copy
-alias -g J="| yq --prettyPrint --output-format=json --colors | less" # beautify in JSON
-alias -g N="| wc -l | tr -d ' '"                                     # count lines
+alias -g C="| pbcopy ; echo 'Copied.'" # copy
+alias -g N="| wc -l | tr -d ' '"       # count lines
 
 # get field
 for i in {1..9}; do
@@ -90,7 +89,6 @@ ZSH_HIGHLIGHT_REGEXP+=(" F[[:digit:]]" 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
