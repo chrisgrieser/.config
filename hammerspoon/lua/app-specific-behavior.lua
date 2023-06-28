@@ -67,6 +67,18 @@ end)
 
 Wf_finder = wf.new("Finder")
 	:setOverrideFilter({
+		rejectTitles = {
+			"^Quick Look$",
+			"^qlmanage$",
+			"^Move$",
+			"^Copy$",
+			"^Bin$",
+			"^Delete$",
+			"^Finder Settings$",
+			" Info$", -- Info window *end* with "Info"
+			"^$", -- Desktop, which has no window title
+			"^Alfred$", -- Alfred Compatibility Mode
+		},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
