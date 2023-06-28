@@ -488,11 +488,11 @@ rules:
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
-          - shell_command: open -g "cleanshot://capture-text"
+          - shell_command: open -g "cleanshot://capture-area"
         to_if_held_down:
           - shell_command: |
               osascript -e 'display notification "" with title "OCR Screenshot"'
-              open -g "cleanshot://self-timer"
+              open -g "cleanshot://capture-text"
       # screenshot button + bulb-button
       - type: basic
         from: { key_code: "f13", modifiers: { mandatory: [shift, command] } }
