@@ -13,7 +13,9 @@ rules:
         from: { key_code: spacebar, modifiers: { mandatory: [fn] } }
         to:
           - { key_code: spacebar, modifiers: [control] }
-      # 🔘 ⌘+J → Expand Word
+
+      #─────────────────────────────────────────────────────────────────────────
+      # 🔘 ⌘ J → Expand Word
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [command] } }
         to:
@@ -24,10 +26,26 @@ rules:
             file_paths:
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
-      #──────────────────────────────────────────────────────────────────────────
+      # 🔘 ⌘ ⇧ F → Find word under cursor (similar to `*` in vim visual mode)
+      - type: basic
+        from: { key_code: j, modifiers: { mandatory: [command, shift] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell (first process where it is frontmost)
+                  click menu item "Use Selection For Find" of menu of menu item "Find" of menu "Edit" of menu bar 1
+                  click menu item "Find Next" of menu of menu item "Find" of menu "Edit" of menu bar 1
+                end tell'
+        conditions:
+          - type: frontmost_application_unless
+            file_paths:
+              - ^/Applications/Obsidian\.app
+              - "[Nn]eovide"
+
+      #─────────────────────────────────────────────────────────────────────────
       # inline cod[e]
       - type: basic
-        from: { key_code: f, modifiers: { mandatory: [command, control] } }
+        from: { key_code: e, modifiers: { mandatory: [command] } }
         to:
           - shell_command: pbpaste | pbcopy -pboard ruler # move current clipboard to alt clipboard
           - { key_code: vk_none, hold_down_milliseconds: 100 }
@@ -110,30 +128,6 @@ rules:
             file_paths:
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
-      # inline cod[e]
-      - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command] } }
-        to:
-          - shell_command: pbpaste | pbcopy -pboard ruler # move current clipboard to alt clipboard
-          - { key_code: vk_none, hold_down_milliseconds: 100 }
-          - shell_command: pbcopy < /dev/null # empty the standard clipboard
-          - { key_code: vk_none, hold_down_milliseconds: 100 }
-          - { key_code: x, modifiers: [command] }
-          - { key_code: vk_none, hold_down_milliseconds: 150 }
-          - { key_code: equal_sign, modifiers: [shift] }
-          - { key_code: equal_sign, modifiers: [shift] }
-          - key_code: left_arrow
-          - { key_code: v, modifiers: [command] }
-          - { key_code: vk_none, hold_down_milliseconds: 100 }
-          - shell_command: pbpaste -pboard ruler | pbcopy # restore previous cb
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.hnc\.Discord$
-              - ^com\.tinyspeck\.slackmacgap$
-              - ^com\.brave\.Browser$ # useful for reddit
-              - ^com\.vivaldi\.Vivaldi$
-              - ^com\.apptorium\.SideNotes-paddle$
   #─────────────────────────────────────────────────────────────────────────────
   - description: "⚒️ {}@^~|: German to US layout"
     manipulators:

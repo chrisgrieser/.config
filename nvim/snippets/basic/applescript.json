@@ -50,8 +50,8 @@
 		"prefix": "submenu item",
 		"body": [
 			"tell application \"System Events\" to tell process \"${1:process}\"",
-			"set frontmost to true",
-			"click menu item \"${2:item}\" of menu of menu item \"${3:submenu}\" of menu \"${4:menu}\" of menu bar 1",
+			"\tset frontmost to true",
+			"\tclick menu item \"${2:item}\" of menu of menu item \"${3:submenu}\" of menu \"${4:menu}\" of menu bar 1",
 			"end tell"
 		]
 	},
