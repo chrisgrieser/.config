@@ -1,0 +1,825 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if IE 6]><html class="ie6" xmlns="http://www.w3.org/1999/xhtml"><![endif]-->
+<!--[if IE 7]><html class="lt-ie8 lt-ie9" xmlns="http://www.w3.org/1999/xhtml"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9" xmlns="http://www.w3.org/1999/xhtml"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml"><!--<![endif]-->
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=1" />
+	<meta name="referrer" content="origin" />
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="robots" content="noindex, nofollow" />
+	<title>ddddddddd at DuckDuckGo</title>
+	<link title="DuckDuckGo (HTML)" type="application/opensearchdescription+xml" rel="search"
+		href="//duckduckgo.com/opensearch_html_v2.xml" />
+	<link href="//duckduckgo.com/favicon.ico" rel="shortcut icon" />
+	<link rel="icon" href="//duckduckgo.com/favicon.ico" type="image/x-icon" />
+	<link rel="apple-touch-icon" href="//duckduckgo.com/assets/logo_icon128.v101.png" />
+	<link rel="image_src" href="//duckduckgo.com/assets/logo_homepage.normal.v101.png" />
+	<link type="text/css" media="handheld, all" href="//duckduckgo.com/h2170.css" rel="stylesheet" />
+</head>
+<body class="body--html">
+	<a name="top" id="top"></a>
+	<form action="/html/" method="post">
+		<input type="text" name="state_hidden" id="state_hidden" />
+	</form>
+	<div>
+		<div class="site-wrapper-border"></div>
+		<div id="header" class="header cw header--html">
+			<a title="DuckDuckGo" href="/html/" class="header__logo-wrap"></a>
+			<form name="x" class="header__form" action="/html/" method="post">
+				<div class="search search--header">
+					<input name="q" autocomplete="off" class="search__input" id="search_form_input_homepage" type="text"
+						value="ddddddddd" />
+					<input name="b" id="search_button_homepage" class="search__button search__button--html" value=""
+						title="Search" alt="Search" type="submit" />
+				</div>
+				<div class="frm__select">
+					<select name="kl">
+						<option value="">All Regions</option>
+						<option value="ar-es">Argentina</option>
+						<option value="au-en">Australia</option>
+						<option value="at-de">Austria</option>
+						<option value="be-fr">Belgium (fr)</option>
+						<option value="be-nl">Belgium (nl)</option>
+						<option value="br-pt">Brazil</option>
+						<option value="bg-bg">Bulgaria</option>
+						<option value="ca-en">Canada (en)</option>
+						<option value="ca-fr">Canada (fr)</option>
+						<option value="ct-ca">Catalonia</option>
+						<option value="cl-es">Chile</option>
+						<option value="cn-zh">China</option>
+						<option value="co-es">Colombia</option>
+						<option value="hr-hr">Croatia</option>
+						<option value="cz-cs">Czech Republic</option>
+						<option value="dk-da">Denmark</option>
+						<option value="ee-et">Estonia</option>
+						<option value="fi-fi">Finland</option>
+						<option value="fr-fr">France</option>
+						<option value="de-de">Germany</option>
+						<option value="gr-el">Greece</option>
+						<option value="hk-tzh">Hong Kong</option>
+						<option value="hu-hu">Hungary</option>
+						<option value="is-is">Iceland</option>
+						<option value="in-en">India (en)</option>
+						<option value="id-en">Indonesia (en)</option>
+						<option value="ie-en">Ireland</option>
+						<option value="il-en">Israel (en)</option>
+						<option value="it-it">Italy</option>
+						<option value="jp-jp">Japan</option>
+						<option value="kr-kr">Korea</option>
+						<option value="lv-lv">Latvia</option>
+						<option value="lt-lt">Lithuania</option>
+						<option value="my-en">Malaysia (en)</option>
+						<option value="mx-es">Mexico</option>
+						<option value="nl-nl">Netherlands</option>
+						<option value="nz-en">New Zealand</option>
+						<option value="no-no">Norway</option>
+						<option value="pk-en">Pakistan (en)</option>
+						<option value="pe-es">Peru</option>
+						<option value="ph-en">Philippines (en)</option>
+						<option value="pl-pl">Poland</option>
+						<option value="pt-pt">Portugal</option>
+						<option value="ro-ro">Romania</option>
+						<option value="ru-ru">Russia</option>
+						<option value="xa-ar">Saudi Arabia</option>
+						<option value="sg-en">Singapore</option>
+						<option value="sk-sk">Slovakia</option>
+						<option value="sl-sl">Slovenia</option>
+						<option value="za-en">South Africa</option>
+						<option value="es-ca">Spain (ca)</option>
+						<option value="es-es">Spain (es)</option>
+						<option value="se-sv">Sweden</option>
+						<option value="ch-de">Switzerland (de)</option>
+						<option value="ch-fr">Switzerland (fr)</option>
+						<option value="tw-tzh">Taiwan</option>
+						<option value="th-en">Thailand (en)</option>
+						<option value="tr-tr">Turkey</option>
+						<option value="us-en">US (English)</option>
+						<option value="us-es">US (Spanish)</option>
+						<option value="ua-uk">Ukraine</option>
+						<option value="uk-en">United Kingdom</option>
+						<option value="vn-en">Vietnam (en)</option>
+					</select>
+				</div>
+				<div class="frm__select frm__select--last">
+					<select class="" name="df">
+						<option value="" selected>Any Time</option>
+						<option value="d">Past Day</option>
+						<option value="w">Past Week</option>
+						<option value="m">Past Month</option>
+						<option value="y">Past Year</option>
+					</select>
+				</div>
+			</form>
+		</div>
+		<!-- Web results are present -->
+		<div>
+			<div class="serp__results">
+				<div id="links" class="results">
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DnS2j9De4Bnw&amp;rut=b62e0678f2d3aa20376f1052836508d485b162f7e6c74ebfb92f903a16aa91ec">dddddddd
+									- YouTube</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DnS2j9De4Bnw&amp;rut=b62e0678f2d3aa20376f1052836508d485b162f7e6c74ebfb92f903a16aa91ec">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.youtube.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DnS2j9De4Bnw&amp;rut=b62e0678f2d3aa20376f1052836508d485b162f7e6c74ebfb92f903a16aa91ec">
+										www.youtube.com/watch?v=nS2j9De4Bnw
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DnS2j9De4Bnw&amp;rut=b62e0678f2d3aa20376f1052836508d485b162f7e6c74ebfb92f903a16aa91ec">MEMESSpongeBob
+								SquarePants S5 Ep2b - Night LightDamn Daniel: https://www.youtube.com/watch?v=tvk89PQHDIMPlease
+								like, share &amp; subscribe! It&#x27;d be great if you ...</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DwdM7CJ5Uk3Q&amp;rut=408e7468fd88b872dff49008f9913dd62b90576ee8f2c0d72c9a8d156b57cefa">ddddddddd
+									- YouTube</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DwdM7CJ5Uk3Q&amp;rut=408e7468fd88b872dff49008f9913dd62b90576ee8f2c0d72c9a8d156b57cefa">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.youtube.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DwdM7CJ5Uk3Q&amp;rut=408e7468fd88b872dff49008f9913dd62b90576ee8f2c0d72c9a8d156b57cefa">
+										www.youtube.com/watch?v=wdM7CJ5Uk3Q
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DwdM7CJ5Uk3Q&amp;rut=408e7468fd88b872dff49008f9913dd62b90576ee8f2c0d72c9a8d156b57cefa">Barney
+								Unnecessary Censorship ^__^ enjoy!</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7D295igrxSA&amp;rut=fc95e4c75290319dafa9312791dc4d751a560e3dac2520ea2c03ff91aeb40c52">DDDDDD
+									Tuning?! The Ultimate D Tuning - YouTube</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7D295igrxSA&amp;rut=fc95e4c75290319dafa9312791dc4d751a560e3dac2520ea2c03ff91aeb40c52">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.youtube.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7D295igrxSA&amp;rut=fc95e4c75290319dafa9312791dc4d751a560e3dac2520ea2c03ff91aeb40c52">
+										www.youtube.com/watch?v=7D295igrxSA
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7D295igrxSA&amp;rut=fc95e4c75290319dafa9312791dc4d751a560e3dac2520ea2c03ff91aeb40c52">BADBAD
+								might have been bad, but DDDDDD is something else. This was actually quite the compositional
+								challenge since It&#x27;s quite tough to get a wide variety of...</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.definitions.net%2Fdefinition%2Fddddddddddd&amp;rut=14a92980a6e9f70cbd947be2953defb0bdb80b2140d4f733c2d55c62c24df350">What
+									does ddddddddddd mean? - Definitions.net</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.definitions.net%2Fdefinition%2Fddddddddddd&amp;rut=14a92980a6e9f70cbd947be2953defb0bdb80b2140d4f733c2d55c62c24df350">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.definitions.net.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.definitions.net%2Fdefinition%2Fddddddddddd&amp;rut=14a92980a6e9f70cbd947be2953defb0bdb80b2140d4f733c2d55c62c24df350">
+										www.definitions.net/definition/ddddddddddd
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.definitions.net%2Fdefinition%2Fddddddddddd&amp;rut=14a92980a6e9f70cbd947be2953defb0bdb80b2140d4f733c2d55c62c24df350">Definition
+								of ddddddddddd in the Definitions.net dictionary. Meaning of ddddddddddd. What does ddddddddddd
+								mean? Information and translations of ddddddddddd in the most comprehensive dictionary
+								definitions resource on the web.</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=http%3A%2F%2Fwww.jigzone.com%2Fpuzzles%2Fdaily%2Djigsaw&amp;rut=8f0c6095becf0ba8e0bd45134876f668363ffd2e6c81c26900647e16703afe55">Daily
+									Jigsaw Puzzle - Puzzle of the Day - JigZone.com</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=http%3A%2F%2Fwww.jigzone.com%2Fpuzzles%2Fdaily%2Djigsaw&amp;rut=8f0c6095becf0ba8e0bd45134876f668363ffd2e6c81c26900647e16703afe55">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.jigzone.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=http%3A%2F%2Fwww.jigzone.com%2Fpuzzles%2Fdaily%2Djigsaw&amp;rut=8f0c6095becf0ba8e0bd45134876f668363ffd2e6c81c26900647e16703afe55">
+										www.jigzone.com/puzzles/daily-jigsaw
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=http%3A%2F%2Fwww.jigzone.com%2Fpuzzles%2Fdaily%2Djigsaw&amp;rut=8f0c6095becf0ba8e0bd45134876f668363ffd2e6c81c26900647e16703afe55">Free
+								daily jigsaw puzzles, choose your puzzle cut, new picture daily. Fabric Check Hanging woven
+								fabric in different colors with check</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DSWwOlXBNebA&amp;rut=d3d3cbbdc02d1c6b7f437b37c0b73f0d2dd7874f8053d42c56c2a17652a3caab">ddddddddddddddddd
+									- YouTube</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DSWwOlXBNebA&amp;rut=d3d3cbbdc02d1c6b7f437b37c0b73f0d2dd7874f8053d42c56c2a17652a3caab">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.youtube.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DSWwOlXBNebA&amp;rut=d3d3cbbdc02d1c6b7f437b37c0b73f0d2dd7874f8053d42c56c2a17652a3caab">
+										www.youtube.com/watch?v=SWwOlXBNebA
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DSWwOlXBNebA&amp;rut=d3d3cbbdc02d1c6b7f437b37c0b73f0d2dd7874f8053d42c56c2a17652a3caab">ddddddddddddddddd</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.parallelrealities.ddddd&amp;rut=eabb14c0bae7606f8f0fe0d099edc912f4e4e7ec50b473452cdc50ccb014f723">DDDDD
+									- The rogue dungeon game - Apps on Google Play</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.parallelrealities.ddddd&amp;rut=eabb14c0bae7606f8f0fe0d099edc912f4e4e7ec50b473452cdc50ccb014f723">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/play.google.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.parallelrealities.ddddd&amp;rut=eabb14c0bae7606f8f0fe0d099edc912f4e4e7ec50b473452cdc50ccb014f723">
+										play.google.com/store/apps/details?id=com.parallelrealities.ddddd
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.parallelrealities.ddddd&amp;rut=eabb14c0bae7606f8f0fe0d099edc912f4e4e7ec50b473452cdc50ccb014f723">Defeat
+								the Demon Dwelling in the Darkest Depths, or DDDDD for short, is a rogue-lite dungeon crawler.
+								Choose one of eight characters, a warrior, adventurer, magic user, necromancer, hunter,
+								barbarian, scavenger, or purifier, and venture into the dungeon to slay the ferocious beasts
+								that dwell within. Collect better weapons, armour, spells and ...</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DsD3gfKZjexc&amp;rut=eca0b7a28e30f39a3c19865f9e1c2ac34114aaf4f61526ffea2d1ca9e34d45a7">d
+									d d d dddd d d ddd dddd d ddd dddd d - YouTube</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DsD3gfKZjexc&amp;rut=eca0b7a28e30f39a3c19865f9e1c2ac34114aaf4f61526ffea2d1ca9e34d45a7">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.youtube.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DsD3gfKZjexc&amp;rut=eca0b7a28e30f39a3c19865f9e1c2ac34114aaf4f61526ffea2d1ca9e34d45a7">
+										www.youtube.com/watch?v=sD3gfKZjexc
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DsD3gfKZjexc&amp;rut=eca0b7a28e30f39a3c19865f9e1c2ac34114aaf4f61526ffea2d1ca9e34d45a7">A
+								song I made up whilst playing apoc</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhafL59bcUxM&amp;rut=8e3959dec45073c7b30e410739cd0e19291f03fec75f12e78319772b41fba80e">DDDDDDDDDDDDD
+									- YouTube</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhafL59bcUxM&amp;rut=8e3959dec45073c7b30e410739cd0e19291f03fec75f12e78319772b41fba80e">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.youtube.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhafL59bcUxM&amp;rut=8e3959dec45073c7b30e410739cd0e19291f03fec75f12e78319772b41fba80e">
+										www.youtube.com/watch?v=hafL59bcUxM
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhafL59bcUxM&amp;rut=8e3959dec45073c7b30e410739cd0e19291f03fec75f12e78319772b41fba80e">-
+								created at http://animoto.com</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Facronyms.thefreedictionary.com%2FDDDD&amp;rut=ed9b2ad86b3ad69067e1c63bc7e5a196a01397b0fdc40c2392522442df556d67">DDDD
+									- What does DDDD stand for? The Free Dictionary</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Facronyms.thefreedictionary.com%2FDDDD&amp;rut=ed9b2ad86b3ad69067e1c63bc7e5a196a01397b0fdc40c2392522442df556d67">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/acronyms.thefreedictionary.com.ico"
+												name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Facronyms.thefreedictionary.com%2FDDDD&amp;rut=ed9b2ad86b3ad69067e1c63bc7e5a196a01397b0fdc40c2392522442df556d67">
+										acronyms.thefreedictionary.com/DDDD
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Facronyms.thefreedictionary.com%2FDDDD&amp;rut=ed9b2ad86b3ad69067e1c63bc7e5a196a01397b0fdc40c2392522442df556d67">Dynamic
+								Diplomats of Double Dutch (rope skipping group) DDDD. Drive Dive Drink Diary (blog) DDDD.
+								Digital Digest Data Design (Australia) DDDD. Digital Dharma - Delivered Daily (podcast)
+								DDDD.</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.abbreviations.com%2FDDDDD&amp;rut=91ad3e377b75b44f0da61838a244051efbb626c35dfee6243d59b99f75bbe9f2">What
+									does DDDDD stand for? - Abbreviations.com</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.abbreviations.com%2FDDDDD&amp;rut=91ad3e377b75b44f0da61838a244051efbb626c35dfee6243d59b99f75bbe9f2">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.abbreviations.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.abbreviations.com%2FDDDDD&amp;rut=91ad3e377b75b44f0da61838a244051efbb626c35dfee6243d59b99f75bbe9f2">
+										www.abbreviations.com/DDDDD
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.abbreviations.com%2FDDDDD&amp;rut=91ad3e377b75b44f0da61838a244051efbb626c35dfee6243d59b99f75bbe9f2">Looking
+								for the definition of DDDDD? Find out what is the full meaning of DDDDD on Abbreviations.com!
+								&#x27;Demand Drive Direct Digital Dissemination&#x27; is one option -- get in to view more @ The
+								Web&#x27;s largest and most authoritative acronyms and abbreviations resource.</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fheadwatersanimalshelter.org%2Fviewdogs.html&amp;rut=3fab5318420391cbfa71619ac2023922c72a930d9db05f321ce16e15fa8889a8">View
+									Dogs - Headwaters Animal Shelter</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fheadwatersanimalshelter.org%2Fviewdogs.html&amp;rut=3fab5318420391cbfa71619ac2023922c72a930d9db05f321ce16e15fa8889a8">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/headwatersanimalshelter.org.ico"
+												name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fheadwatersanimalshelter.org%2Fviewdogs.html&amp;rut=3fab5318420391cbfa71619ac2023922c72a930d9db05f321ce16e15fa8889a8">
+										headwatersanimalshelter.org/viewdogs.html
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fheadwatersanimalshelter.org%2Fviewdogs.html&amp;rut=3fab5318420391cbfa71619ac2023922c72a930d9db05f321ce16e15fa8889a8">8
+								year old female Standard Poodle. Weight: 64 lbs. For more information please call 218-237-7100
+								or email Dogs@HeadwatersAnimalShelter.org. Posted 3.30.23.</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.howtogeek.com%2F789266%2Fwhat%2Ddoes%2Dxd%2Dmean%2F&amp;rut=b86247f55a9dab48b58dd125e849592ee40f276ef0a2d8f590df2fdca83e3850">What
+									Does XD Mean, and How Do You Use It? - How-To Geek</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.howtogeek.com%2F789266%2Fwhat%2Ddoes%2Dxd%2Dmean%2F&amp;rut=b86247f55a9dab48b58dd125e849592ee40f276ef0a2d8f590df2fdca83e3850">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.howtogeek.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.howtogeek.com%2F789266%2Fwhat%2Ddoes%2Dxd%2Dmean%2F&amp;rut=b86247f55a9dab48b58dd125e849592ee40f276ef0a2d8f590df2fdca83e3850">
+										www.howtogeek.com/789266/what-does-xd-mean/
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.howtogeek.com%2F789266%2Fwhat%2Ddoes%2Dxd%2Dmean%2F&amp;rut=b86247f55a9dab48b58dd125e849592ee40f276ef0a2d8f590df2fdca83e3850">People
+								usually interpret this emoticon as someone laughing with their eyes squinted. Alternatively, you
+								can imagine it as an animated face with an X for eyes, like a visual metaphor for &quot;dying of
+								laughter.&quot;. XD is one of the most enduring text-based emoticons in the history of the
+								internet. Despite emojis largely replacing text-based ...</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DXDDDDDDDDD&amp;rut=d3a75e5f46f9fb329a936a1410f58da8e6bb127525f89e6f6eac876d21f0dc35">Urban
+									Dictionary: XDDDDDDDDD</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DXDDDDDDDDD&amp;rut=d3a75e5f46f9fb329a936a1410f58da8e6bb127525f89e6f6eac876d21f0dc35">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.urbandictionary.com.ico"
+												name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DXDDDDDDDDD&amp;rut=d3a75e5f46f9fb329a936a1410f58da8e6bb127525f89e6f6eac876d21f0dc35">
+										www.urbandictionary.com/define.php?term=XDDDDDDDDD
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DXDDDDDDDDD&amp;rut=d3a75e5f46f9fb329a936a1410f58da8e6bb127525f89e6f6eac876d21f0dc35">1.&quot;XD&quot;
+								with a lot of double chins. 2.A type of computer chat phrase commonly used by people who spam
+								the keyboard for no reason. 3.An enthusiastic &quot;XD&quot;. (Can also be ...</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3D%253ADDDDDDD&amp;rut=c3bcb7bb430273cfe888bc8b7f396cff1db8e4fb1022512b59bd265583786310">Urban
+									Dictionary: :DDDDDDD</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3D%253ADDDDDDD&amp;rut=c3bcb7bb430273cfe888bc8b7f396cff1db8e4fb1022512b59bd265583786310">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.urbandictionary.com.ico"
+												name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3D%253ADDDDDDD&amp;rut=c3bcb7bb430273cfe888bc8b7f396cff1db8e4fb1022512b59bd265583786310">
+										www.urbandictionary.com/define.php?term=:DDDDDDD
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3D%253ADDDDDDD&amp;rut=c3bcb7bb430273cfe888bc8b7f396cff1db8e4fb1022512b59bd265583786310">Oh
+								yes, just about the most smiles a smile can have. #smile #happy #happyface #:D</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fsoundcloud.com%2Fuser%2D869481975&amp;rut=80e604738beecaaeb9ae1e9f3ab9fac174e92b814d95b67c92ef453291f9e0c8">Stream
+									ddddddddd music | Listen to songs, albums ... - SoundCloud</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fsoundcloud.com%2Fuser%2D869481975&amp;rut=80e604738beecaaeb9ae1e9f3ab9fac174e92b814d95b67c92ef453291f9e0c8">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/soundcloud.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fsoundcloud.com%2Fuser%2D869481975&amp;rut=80e604738beecaaeb9ae1e9f3ab9fac174e92b814d95b67c92ef453291f9e0c8">
+										soundcloud.com/user-869481975
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fsoundcloud.com%2Fuser%2D869481975&amp;rut=80e604738beecaaeb9ae1e9f3ab9fac174e92b814d95b67c92ef453291f9e0c8"><b>ddddddddd</b>
+								giá xưởng, giaxuong.com, may phun suong, phun suong, do choi to, phu kien oto. Posted 1 year ago
+								1 year ago. Comment must not exceed 1000 characters Like Repost Share Copy Link More. 5 plays 5;
+								Play. <b>ddddddddd</b> Buonhang. Posted 5 years ago 5 years ago. ...</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.roblox.com%2Fgame%2Dpass%2F112042680%2Fdddddddddd&amp;rut=450c0e0d139958f79b6082939461255833e76b8483f4056e0df63b794d6f14f6">dddddddddd
+									- Roblox</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.roblox.com%2Fgame%2Dpass%2F112042680%2Fdddddddddd&amp;rut=450c0e0d139958f79b6082939461255833e76b8483f4056e0df63b794d6f14f6">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.roblox.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.roblox.com%2Fgame%2Dpass%2F112042680%2Fdddddddddd&amp;rut=450c0e0d139958f79b6082939461255833e76b8483f4056e0df63b794d6f14f6">
+										www.roblox.com/game-pass/112042680/dddddddddd
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.roblox.com%2Fgame%2Dpass%2F112042680%2Fdddddddddd&amp;rut=450c0e0d139958f79b6082939461255833e76b8483f4056e0df63b794d6f14f6">Roblox
+								is a global platform that brings people together through play.</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fsoundcloud.com%2Fddddddddds&amp;rut=4ad93832713be5380cbc2213c31fbdd839a55bf723e23911e5f9dec369ad6697">Stream
+									DDDDDDDDD&#x27;s music - SoundCloud</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fsoundcloud.com%2Fddddddddds&amp;rut=4ad93832713be5380cbc2213c31fbdd839a55bf723e23911e5f9dec369ad6697">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/soundcloud.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fsoundcloud.com%2Fddddddddds&amp;rut=4ad93832713be5380cbc2213c31fbdd839a55bf723e23911e5f9dec369ad6697">
+										soundcloud.com/ddddddddds
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fsoundcloud.com%2Fddddddddds&amp;rut=4ad93832713be5380cbc2213c31fbdd839a55bf723e23911e5f9dec369ad6697">Play
+								<b>DDDDDDDDD&#x27;s</b> and discover followers on SoundCloud | Stream tracks, albums, playlists
+								on desktop and mobile. SoundCloud <b>DDDDDDDDD&#x27;s</b>. new york. Funeral Scores.
+								DDDDDDDDD&#x27;s&#x27;s tracks talk them out of thier ideas by <b>DDDDDDDDD&#x27;s</b> published
+								on 2019-10-24T05:35:17Z. savfac by ...</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F18715624%2Fi%2Dwant%2Dthe%2Dregular%2Dexpression%2Dfor%2Dthe%2Ddata%2Dof%2Dtype%2Ddd%2Dd%2Ddd%2Dddddd%2Dor%2Ddd%2Dd%2Dd%2Dddddd&amp;rut=ccc7e94c085d0bc670a50a7eb2e4f03e87dfa09e20163ddd417ec494832c8f00">javascript
+									- I want the regular expression for the data of type dd.d.dd ...</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F18715624%2Fi%2Dwant%2Dthe%2Dregular%2Dexpression%2Dfor%2Dthe%2Ddata%2Dof%2Dtype%2Ddd%2Dd%2Ddd%2Dddddd%2Dor%2Ddd%2Dd%2Dd%2Dddddd&amp;rut=ccc7e94c085d0bc670a50a7eb2e4f03e87dfa09e20163ddd417ec494832c8f00">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/stackoverflow.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F18715624%2Fi%2Dwant%2Dthe%2Dregular%2Dexpression%2Dfor%2Dthe%2Ddata%2Dof%2Dtype%2Ddd%2Dd%2Ddd%2Dddddd%2Dor%2Ddd%2Dd%2Dd%2Dddddd&amp;rut=ccc7e94c085d0bc670a50a7eb2e4f03e87dfa09e20163ddd417ec494832c8f00">
+										stackoverflow.com/questions/18715624/i-want-the-regular-expression-for-the-data-of-type-dd-d-dd-ddddd-or-dd-d-d-ddddd
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F18715624%2Fi%2Dwant%2Dthe%2Dregular%2Dexpression%2Dfor%2Dthe%2Ddata%2Dof%2Dtype%2Ddd%2Dd%2Ddd%2Dddddd%2Dor%2Ddd%2Dd%2Dd%2Dddddd&amp;rut=ccc7e94c085d0bc670a50a7eb2e4f03e87dfa09e20163ddd417ec494832c8f00">I
+								want the regular expression for the data of type dd.d.dd.ddddd or dd.d.d.ddddd,each d is for a
+								digit between 0-9 and the regular expression should represent both the formats. I am working in
+								java</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.reddit.com%2Fr%2Fdddddddd%2Fcomments%2Fbjzmms%2Fdddddddddd_dddddddddddd%2F&amp;rut=a996f67ee70099fb6be3c708304106f8246ac8ccf72b22a1f3d60271c78efe0c">dddddddddd
+									dddddddddddd ... - Reddit</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.reddit.com%2Fr%2Fdddddddd%2Fcomments%2Fbjzmms%2Fdddddddddd_dddddddddddd%2F&amp;rut=a996f67ee70099fb6be3c708304106f8246ac8ccf72b22a1f3d60271c78efe0c">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.reddit.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.reddit.com%2Fr%2Fdddddddd%2Fcomments%2Fbjzmms%2Fdddddddddd_dddddddddddd%2F&amp;rut=a996f67ee70099fb6be3c708304106f8246ac8ccf72b22a1f3d60271c78efe0c">
+										www.reddit.com/r/dddddddd/comments/bjzmms/dddddddddd_dddddddddddd/
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.reddit.com%2Fr%2Fdddddddd%2Fcomments%2Fbjzmms%2Fdddddddddd_dddddddddddd%2F&amp;rut=a996f67ee70099fb6be3c708304106f8246ac8ccf72b22a1f3d60271c78efe0c"><b>ddddddddd</b>!
+								dd d ddddd? <b>dddddddd</b>, <b>d</b> <b>ddddd&#x27;d</b> <b>ddd</b> d <b>dddddd</b> <b>ddd</b>
+								ddddddd <b>ddddddd</b> <b>dd</b> dd. Reply AComicTheorist •</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DDDDD&amp;rut=cb52c5b2f48cbd4778f6ffa76a33d4d0b1c1054a361c83fe3d94c55ff7cec20d">Urban
+									Dictionary: DDDD</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DDDDD&amp;rut=cb52c5b2f48cbd4778f6ffa76a33d4d0b1c1054a361c83fe3d94c55ff7cec20d">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.urbandictionary.com.ico"
+												name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DDDDD&amp;rut=cb52c5b2f48cbd4778f6ffa76a33d4d0b1c1054a361c83fe3d94c55ff7cec20d">
+										www.urbandictionary.com/define.php?term=DDDD
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DDDDD&amp;rut=cb52c5b2f48cbd4778f6ffa76a33d4d0b1c1054a361c83fe3d94c55ff7cec20d">DDDD:-
+								Double Dealing Deadly Dad, usually a fast thinking Dad who can create and activate a new,
+								different, cheerfully cheaper deal which nearly always works faster better and longer than
+								conventional operations.</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2B%2FDdddddddd%2F&amp;rut=b1e6cc80b92f7a522170411554e846cdc108de8c649dd86887eda3054b76cad7">20+
+									&quot;Ddddddddd&quot; profiles | LinkedIn</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2B%2FDdddddddd%2F&amp;rut=b1e6cc80b92f7a522170411554e846cdc108de8c649dd86887eda3054b76cad7">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.linkedin.com.ico" name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2B%2FDdddddddd%2F&amp;rut=b1e6cc80b92f7a522170411554e846cdc108de8c649dd86887eda3054b76cad7">
+										www.linkedin.com/pub/dir/+/Ddddddddd/
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2B%2FDdddddddd%2F&amp;rut=b1e6cc80b92f7a522170411554e846cdc108de8c649dd86887eda3054b76cad7">View
+								the profiles of professionals named &quot;<b>Ddddddddd</b>&quot; on LinkedIn. There are 20+
+								professionals named &quot;<b>Ddddddddd</b>&quot;, who use LinkedIn to exchange information,
+								ideas, and opportunities.</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="result results_links results_links_deep web-result ">
+						<div class="links_main links_deep result__body"> <!-- This is the visible part -->
+							<h2 class="result__title">
+								<a rel="nofollow" class="result__a"
+									href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DDDDDD&amp;rut=7cd6782ab3af62d65eb0ca4804502f3d1332328588db16f43682cd4d24704eb0">Urban
+									Dictionary: DDDDD</a>
+							</h2>
+							<div class="result__extras">
+								<div class="result__extras__url">
+									<span class="result__icon">
+										<a rel="nofollow"
+											href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DDDDDD&amp;rut=7cd6782ab3af62d65eb0ca4804502f3d1332328588db16f43682cd4d24704eb0">
+											<img class="result__icon__img" width="16" height="16" alt=""
+												src="//external-content.duckduckgo.com/ip3/www.urbandictionary.com.ico"
+												name="i15" />
+										</a>
+									</span>
+									<a class="result__url"
+										href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DDDDDD&amp;rut=7cd6782ab3af62d65eb0ca4804502f3d1332328588db16f43682cd4d24704eb0">
+										www.urbandictionary.com/define.php?term=DDDDD
+									</a>
+								</div>
+							</div>
+							<a class="result__snippet"
+								href="//duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.urbandictionary.com%2Fdefine.php%3Fterm%3DDDDDD&amp;rut=7cd6782ab3af62d65eb0ca4804502f3d1332328588db16f43682cd4d24704eb0">Dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+								...</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="nav-link">
+						<form action="/html/" method="post">
+							<input type="submit" class='btn btn--alt' value="Next" />
+							<input type="hidden" name="q" value="ddddddddd" />
+							<input type="hidden" name="s" value="23" />
+							<input type="hidden" name="nextParams" value="" />
+							<input type="hidden" name="v" value="l" />
+							<input type="hidden" name="o" value="json" />
+							<input type="hidden" name="dc" value="24" />
+							<input type="hidden" name="api" value="d.js" />
+							<input type="hidden" name="vqd" value="4-188155680959539870292624340483631774998" />
+							<input name="kl" value="wt-wt" type="hidden" />
+						</form>
+					</div>
+					<div class=" feedback-btn">
+						<a rel="nofollow" href="//duckduckgo.com/feedback.html" target="_new">Feedback</a>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div> <!-- links wrapper //-->
+		</div>
+	</div>
+	<div id="bottom_spacing2"></div>
+	<img src="//duckduckgo.com/t/sl_h" />
+</body>
+</html>

@@ -1,7 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
 
-ObjC.import("stdlib")
-const app = Application.currentApplication()
+ObjC.import("stdlib");
+const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -19,14 +19,25 @@ app.includeStandardAdditions = true;
 function run() {
 	const query = $.getenv("query"); // passed from previous script filter
 	const maxLength = 100; // length of the Alfred bar
-	const resultsToFetch = 9; // only 9 can be displayed in Alfred
+	let resultsToFetch = parseInt($.getenv("inline_results_to_fetch"));
+	if (resultsToFetch < 1) resultsToFetch = 1;
+	else if (resultsToFetch > 25) resultsToFetch = 25;
 
 	/** @type DdgrJson[] */
-	const resultJson = JSON.parse(app.doShellScript(`ddgr --num=${resultsToFetch} --json "${query}"`));
+	let responseJson;
+	try {
+		// TODO parse directly to leave out ddgr dependency?
+		// https://html.duckduckgo.com/html/?q=foobar
+		responseJson = JSON.parse(app.doShellScript(`ddgr --num=${resultsToFetch} --json "${query}"`));
+	} catch (_error) {
+		return JSON.stringify({
+			items: [{ title: "🚫 ddgr not found or could not fetch downloads.", valid: false }],
+		});
+	}
 
 	/** @type AlfredItem[] */
-	const searchResults = resultJson.map((item) => {
-		const previewText = item.abstract.slice(0, maxLength)
+	const searchResults = responseJson.map((item) => {
+		const previewText = item.abstract.slice(0, maxLength);
 		return {
 			title: item.title,
 			subtitle: item.url,
