@@ -142,7 +142,7 @@
 				<key>runningsubtext</key>
 				<string>loading...</string>
 				<key>script</key>
-				<string># running here to pass variables from zshenv
+				<string>source ~/.zshenv
 osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
