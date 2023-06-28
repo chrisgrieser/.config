@@ -1159,7 +1159,6 @@ JSON.stringify({ 'items': volume_array });
 	</array>
 	<key>readme</key>
 	<string># atop
-#### System Monitoring with live refreshing for Alfred
 
 - Refresh rates must be values between 0.1 and 5 seconds.
 - To connect &amp; disconnect to Bluetooth Devices, `blueutil` must be installed. If it is not, the Bluetooth Preferences will be opened instead.

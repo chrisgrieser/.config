@@ -86,3 +86,4 @@ allow
 As
 Textobject
 Using
+Speedtest

@@ -2,5 +2,9 @@
 	"schema (modeline)": {
 		"prefix": "schema (modeline)",
 		"body": "# yaml-language-server: $schema=${1:url}"
+	},
+	"ignore (yamllint)": {
+		"prefix": "ignore (yamllint)",
+		"body": "# yamllint disable-line rule:${1:truthy}"
 	}
 }
