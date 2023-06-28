@@ -297,7 +297,7 @@ rules:
         from: { key_code: t }
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://web.telegram.org/z/'
+          - shell_command: open 'https://web.telegram.org/a/'
           - *deactivate-leader
           - *remove-notice
       # m[e]ssenger
@@ -313,7 +313,7 @@ rules:
         from: { key_code: r }
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://www.reddit.com/user/pseudometapseudo/m/tech/'
+          - shell_command: open 'https://www.reddit.com/'
           - *deactivate-leader
           - *remove-notice
       # [space]: Emoji Picker
