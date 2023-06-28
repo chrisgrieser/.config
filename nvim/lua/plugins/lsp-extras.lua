@@ -1,7 +1,5 @@
 local u = require("config.utils")
 
---------------------------------------------------------------------------------
-
 return {
 	{ -- lsp definitions and references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
@@ -97,13 +95,16 @@ return {
 			hint_scheme = "NonText", -- highlight group
 		},
 	},
-	{
-		"",
-		event = "VeryLazy",
-		opts = {
-			
-		},
-	},
+	-- {
+	-- 	"ldelossa/litee-calltree.nvim",
+	-- 	main = "litee.calltree",
+	-- 	dependencies = {
+	-- 		"ldelossa/litee.nvim",
+	-- 		main = "litee.lib",
+	-- 		config = true,
+	-- 	},
+	-- 	config = true,
+	-- },
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim", -- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		lazy = true, -- required in attach function

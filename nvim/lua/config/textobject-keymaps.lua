@@ -76,9 +76,10 @@ keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "󱡔 󰊢 hunk
 -- VARIOUS TEXTOBJS KEYMAPS
 
 -- stylua: ignore start
--- space: subword
+-- space: subword-fff
 keymap({"o", "x"}, "<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "󱡔 inner subword textobj" })
-keymap({"o", "x"}, "<Space>", "<cmd>lua require('various-textobjs').subword(false)<CR>", { desc = "󱡔 outer subword textobj" })
+keymap({"o", "x"}, "i<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "󱡔 inner subword textobj" })
+keymap({"o", "x"}, "a<Space>", "<cmd>lua require('various-textobjs').subword(false)<CR>", { desc = "󱡔 outer subword textobj" })
 
 -- L: link
 keymap("o", "L", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "󱡔 link textobj" })
