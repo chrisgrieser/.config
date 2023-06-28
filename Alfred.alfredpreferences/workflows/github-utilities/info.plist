@@ -677,7 +677,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string># this way path is read from .zshenv
+				<string>source ~/.zshenv
 osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>

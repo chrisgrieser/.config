@@ -410,6 +410,7 @@
 				<string></string>
 				<key>script</key>
 				<string># since this is a shell-script, "$PASSWORD_STORE_DIR" from zshenv can be passed to JavaScript
+source ~/.zshenv
 osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR" "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>

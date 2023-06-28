@@ -243,7 +243,7 @@
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string># defined in .zshenv
+				<string>source ~/.zshenv
 osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PATH"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>

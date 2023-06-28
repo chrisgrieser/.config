@@ -33,6 +33,7 @@ function run(argv) {
 	const repoFolder = argv[0]; // local repo path passed from .zshenv
 	const obsiPlugins = $.getenv("extra_folder_1").replace(/^~/, app.pathTo("home folder"));
 	const locations = `"${repoFolder}" "${obsiPlugins}"`;
+	console.log("locations:", locations);
 
 	const localRepos = {};
 	app
