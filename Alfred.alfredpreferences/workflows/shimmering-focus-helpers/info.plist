@@ -44,19 +44,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4F5F95A3-FE59-4F8E-A035-99727A3C3BB0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F9CA8CAA-C6EB-499B-9049-AA32687CAAFC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>769DBB7A-060F-4CCA-A806-0AAA1149D60B</key>
 		<array>
 			<dict>
@@ -93,6 +80,16 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>161AD1C7-D6DC-4C1D-92FA-EBBEF016AD4C</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>389C4CDC-EC49-4AE7-BF23-142CD07AADDB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -227,7 +224,7 @@
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string># since this is a shell-script, "$LOCAL_REPOS" from zshenv can be passed to JavaScript
+				<string># $LOCAL_REPOS" from zshenv passed to JavaScript
 source ~/.zshenv
 osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
@@ -242,6 +239,11 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 				<integer>5</integer>
 				<key>withspace</key>
 				<true/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>loop</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -370,17 +372,25 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>availableviaurlhandler</key>
+				<key>concurrently</key>
 				<false/>
-				<key>triggerid</key>
-				<string>loop</string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>open-at-line.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>4F5F95A3-FE59-4F8E-A035-99727A3C3BB0</string>
+			<string>389C4CDC-EC49-4AE7-BF23-142CD07AADDB</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -407,14 +417,16 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>
-		<key>4F5F95A3-FE59-4F8E-A035-99727A3C3BB0</key>
+		<key>389C4CDC-EC49-4AE7-BF23-142CD07AADDB</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>6</integer>
+			<key>note</key>
+			<string>open at line</string>
 			<key>xpos</key>
-			<real>60</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>585</real>
 		</dict>
 		<key>68B4C56F-DA10-42C4-955D-D4A5FA7AEB53</key>
 		<dict>
