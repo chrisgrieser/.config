@@ -1607,7 +1607,7 @@ JSON.stringify({ 'items': entry_array });
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>validate-anystyle.sh</string>
+				<string>./scripts/validate-anystyle.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>

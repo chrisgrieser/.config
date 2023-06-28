@@ -176,7 +176,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
+				<string>FE44448E-7653-4A3C-B7F9-C3A787EE0556</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -193,18 +193,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>FE44448E-7653-4A3C-B7F9-C3A787EE0556</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>50A5BB29-16B1-4D34-9AFF-87D64D2B2F30</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -442,7 +430,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</string>
+				<string>FE44448E-7653-4A3C-B7F9-C3A787EE0556</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
@@ -547,7 +535,18 @@
 			</dict>
 		</array>
 		<key>FE44448E-7653-4A3C-B7F9-C3A787EE0556</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -1836,7 +1835,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>540</real>
 		</dict>
 		<key>CE6F0B40-E42E-4D8B-833A-537723F42C63</key>
 		<dict>
@@ -1917,9 +1916,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>460</real>
+			<real>350</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>570</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
