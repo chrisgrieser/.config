@@ -71,20 +71,21 @@ function gitlog() {
 	# shellcheck disable=2086
 	git log $length --all --color --graph \
 		--format='%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
-		sed -E 's/ seconds ago\)/s)/' |
-		sed -E 's/ minutes ago\)/min)/' |
-		sed -E 's/ hours ago\)/h)/' |
-		sed -E 's/ days ago\)/d)/' |
-		sed -E 's/ weeks ago\)/w)/' |
-		sed -E 's/ months ago\)/m)/' |
-		sed -e 's/origin\//󰞶 /g' |
-		sed -e 's/HEAD/󱍀/g' |
-		sed -e 's/->/⇢/g' |
-		sed -e 's/grafted/ /' |
-		sed -e 's/main,/󰦤,/g' |
-		sed -e 's/master,/󰦤,/g' |
-		sed -e 's/main)/󰦤 )/g' |
-		sed -e 's/master)/󰦤 )/g' |
+		sed 's/ seconds ago)/s)/' |
+		sed 's/ minutes ago)/min)/' |
+		sed 's/ hours ago)/h)/' |
+		sed 's/ days ago)/d)/' |
+		sed 's/ weeks ago)/w)/' |
+		sed 's/ months ago)/m)/' |
+		sed 's/origin\//󰞶 /g' |
+		sed 's/HEAD/󱍀/g' |
+		sed 's/->/⇢/g' |
+		sed 's/grafted/ /' |
+		sed 's/main,/󰦤,/g' |
+		sed 's/master,/󰦤,/g' |
+		sed 's/main)/󰦤 )/g' |
+		sed 's/master)/󰦤 )/g' |
+		sed 's/tags: / )/g' |
 		delta
 	# INFO piping though delta as pager makes commit hashes clickable https://github.com/wez/wezterm/discussions/3618
 	# also, delta pipes then to less, which is configured not to start the pager

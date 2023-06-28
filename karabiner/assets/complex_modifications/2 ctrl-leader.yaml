@@ -316,9 +316,9 @@ rules:
           - shell_command: open 'https://www.reddit.com/'
           - *deactivate-leader
           - *remove-notice
-      # [space]: Emoji Picker
+      # [.]: Emoji Picker
       - type: basic
-        from: { key_code: spacebar }
+        from: { key_code: period }
         conditions: [*leader-active]
         to:
           - { key_code: spacebar, modifiers: [control, command] }
