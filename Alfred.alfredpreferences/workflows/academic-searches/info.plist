@@ -8,6 +8,19 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>05C9EB07-A13B-4FD6-99B2-4ABDC6DB35CB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4AF8F997-AF32-4FB5-B396-C7CF35341186</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0DEE71DF-8531-4E7F-BE3B-9D2898DBAF72</key>
 		<array>
 			<dict>
@@ -56,19 +69,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>885E52AE-9E54-4319-A19C-E6201F89E6D0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>6AE5D6B0-7B2C-4AC7-9EE9-368186387D35</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>46C7A417-8882-4A2C-97DF-DAE419A24391</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -129,48 +129,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>54391CE0-C9F4-4619-B285-BD85CD4D64ED</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://sci-hub.ru/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>46C7A417-8882-4A2C-97DF-DAE419A24391</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>rs||sci</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Sci-Hub: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>6AE5D6B0-7B2C-4AC7-9EE9-368186387D35</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -282,6 +240,50 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>sci-hub||rs</string>
+				<key>subtext</key>
+				<string>Current Browser Tab</string>
+				<key>text</key>
+				<string>Sci-Hub Paper</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>05C9EB07-A13B-4FD6-99B2-4ABDC6DB35CB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>sci-hub.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4AF8F997-AF32-4FB5-B396-C7CF35341186</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -368,6 +370,15 @@
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>05C9EB07-A13B-4FD6-99B2-4ABDC6DB35CB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>435</real>
+			<key>ypos</key>
+			<real>375</real>
+		</dict>
 		<key>0DEE71DF-8531-4E7F-BE3B-9D2898DBAF72</key>
 		<dict>
 			<key>colorindex</key>
@@ -415,14 +426,14 @@
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
-		<key>46C7A417-8882-4A2C-97DF-DAE419A24391</key>
+		<key>4AF8F997-AF32-4FB5-B396-C7CF35341186</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>1</integer>
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>60</real>
+			<real>375</real>
 		</dict>
 		<key>54391CE0-C9F4-4619-B285-BD85CD4D64ED</key>
 		<dict>
@@ -441,15 +452,6 @@
 			<real>220</real>
 			<key>ypos</key>
 			<real>535</real>
-		</dict>
-		<key>6AE5D6B0-7B2C-4AC7-9EE9-368186387D35</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>435</real>
-			<key>ypos</key>
-			<real>60</real>
 		</dict>
 		<key>885E52AE-9E54-4319-A19C-E6201F89E6D0</key>
 		<dict>
@@ -482,7 +484,31 @@
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>st</string>
+				<key>placeholder</key>
+				<string>st</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>e.g. "ru" for "sci-hub.ru"</string>
+			<key>label</key>
+			<string>Schi-Hub Domain</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>sci_hub_domain</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
