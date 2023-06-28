@@ -573,11 +573,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Search more than two dozen developer documentation ssites.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Docs Searches</string>
+	<string>Search ALL the docs!</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -1883,15 +1883,7 @@ echo -n "$appid"</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Search various Docs.
-
-Can-I-use-Search by @chrillek, https://github.com/chrillek/caniuse-workflow/
-
-AppleScript Dictionary by the Alfred Team
-
----
-
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>03C8A38F-8577-483D-8E18-B31886F2113F</key>
@@ -2059,6 +2051,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
+			<key>note</key>
+			<string>code search</string>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
@@ -2209,27 +2203,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
-				<integer>1</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-			</dict>
-			<key>description</key>
-			<string>images, PDFs, etc.</string>
-			<key>label</key>
-			<string>Folder containing cheatsheets</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>cheatfile_folder</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string>3.11</string>
 				<key>placeholder</key>
 				<string>3.10</string>
@@ -2239,7 +2212,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Version of the Python docs to search</string>
+			<string></string>
 			<key>label</key>
 			<string>Python Version</string>
 			<key>type</key>
@@ -2260,7 +2233,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Version of the Lua docs to search</string>
+			<string></string>
 			<key>label</key>
 			<string>Lua Version</string>
 			<key>type</key>
@@ -2269,8 +2242,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>lua_version</string>
 		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
 	<string>0.9</string>
 	<key>webaddress</key>

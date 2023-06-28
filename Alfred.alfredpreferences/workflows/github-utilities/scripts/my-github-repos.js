@@ -71,7 +71,7 @@ function run(argv) {
 			else if (!a.archived && b.archived) return -1;
 			return b.stargazers_count - a.stargazers_count;
 		})
-		.map((/** @type {{ name: string; local: { path: any; }; html_url: any; archived: any; fork: any; stargazers_count: number; open_issues_count: number; forks_count: number; open_issues: number; full_name: any; }} */ repo) => {
+		.map(( /** @type {{ name: string; local: { path: any; }; html_url: any; archived: any; fork: any; is_template: any; stargazers_count: number; open_issues_count: number; forks_count: number; open_issues: number; full_name: any; }} */ repo) => {
 			let matcher = alfredMatcher(repo.name);
 			let type = "";
 
@@ -94,6 +94,10 @@ function run(argv) {
 			if (repo.fork) {
 				type += "🍴 ";
 				matcher += "fork ";
+			}
+			if (repo.is_template) {
+				type += "📄 ";
+				matcher += "template ";
 			}
 			let subtitle = "";
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;

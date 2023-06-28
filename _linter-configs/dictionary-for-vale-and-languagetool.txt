@@ -88,3 +88,4 @@ Textobject
 Using
 Speedtest
 GPG
+shellcheck
