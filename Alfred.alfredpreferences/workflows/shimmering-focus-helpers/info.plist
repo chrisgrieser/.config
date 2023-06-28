@@ -96,16 +96,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>389C4CDC-EC49-4AE7-BF23-142CD07AADDB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>93E4EBAF-798C-40AF-BBCD-4BF2B98B6F18</key>
 		<array>
@@ -238,6 +228,7 @@
 				<string>loading…</string>
 				<key>script</key>
 				<string># since this is a shell-script, "$LOCAL_REPOS" from zshenv can be passed to JavaScript
+source ~/.zshenv
 osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -391,29 +382,6 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-at-line.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>389C4CDC-EC49-4AE7-BF23-142CD07AADDB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -438,17 +406,6 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<real>430</real>
 			<key>ypos</key>
 			<real>185</real>
-		</dict>
-		<key>389C4CDC-EC49-4AE7-BF23-142CD07AADDB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>note</key>
-			<string>open at line</string>
-			<key>xpos</key>
-			<real>430</real>
-			<key>ypos</key>
-			<real>585</real>
 		</dict>
 		<key>4F5F95A3-FE59-4F8E-A035-99727A3C3BB0</key>
 		<dict>

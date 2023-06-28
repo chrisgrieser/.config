@@ -76,7 +76,7 @@ local function processCommitMsg(commitMsg)
 
 	-- ensure conventional commits
 	-- stylua: ignore
-	local conventionalCommits = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs" }
+	local conventionalCommits = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs", "improv" }
 	local firstWord = commitMsg:match("^%w+")
 	if not vim.tbl_contains(conventionalCommits, firstWord) then
 		vim.notify("Not using a Conventional Commits keyword.", vim.log.levels.WARN)

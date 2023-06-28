@@ -202,9 +202,9 @@
 				<key>keyword</key>
 				<string>paywall</string>
 				<key>subtext</key>
-				<string>via 12ft.io</string>
+				<string>Current Browser Tab</string>
 				<key>text</key>
-				<string>Skip Paywall</string>
+				<string>Skip Paywall (12ft.io)</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -308,48 +308,6 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<integer>3</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>user rules</string>
-				<key>subtext</key>
-				<string>Adguard</string>
-				<key>text</key>
-				<string>User Rules</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>AADFC524-047E-4638-ABAA-646CEC90599D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html#user-filter</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>D909DE7E-1D08-42B3-B048-039BDE823F44</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -426,6 +384,48 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<string>C65CD77E-C2B3-4063-B045-C1954E7FE033</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>user rules</string>
+				<key>subtext</key>
+				<string>Adguard</string>
+				<key>text</key>
+				<string>User Rules</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>AADFC524-047E-4638-ABAA-646CEC90599D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html#user-filter</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>D909DE7E-1D08-42B3-B048-039BDE823F44</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -722,7 +722,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>xpos</key>
 			<real>460</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>290</real>
 		</dict>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
@@ -787,7 +787,7 @@ backup for when browser history search workflow updates</string>
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>290</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
