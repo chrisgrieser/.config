@@ -6,13 +6,6 @@ app.includeStandardAdditions = true;
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
-/** @param {string} str */
-function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ") + " ";
-}
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string[]} argv */
