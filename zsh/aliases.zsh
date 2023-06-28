@@ -73,13 +73,13 @@ alias -s {gif,png,jpg,jpeg,webp}='qlmanage -p'
 alias -s {md,lua,js,ts,css,sh,zsh,applescript}=bat
 
 # GLOBAL ALIAS (to be used at the end, mostly)
-alias -g H="--help"
-alias -g G="| grep --ignore-case --color"
-alias -g B="| bat"
-alias -g C="| pbcopy ; echo 'Copied.'" # copy
-alias -g N="| wc -l | tr -d ' '"       # count lines
+alias -g H='--help'
+alias -g G='| grep --ignore-case --color'
+alias -g B='| bat'
+alias -g C='| pbcopy ; echo "Copied."' # copy
+alias -g N='| wc -l | tr -d " "'       # count lines
 
-# get field
+# get field #n
 for i in {1..9}; do
 	alias -g F"$i"="| awk '{ print \$$i }'"
 done
