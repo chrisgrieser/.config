@@ -8,6 +8,19 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>31B881AB-5CA0-469C-B9F8-E33171B4E403</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5BA79A32-FAE5-4C6E-BE52-007074A12873</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<array>
 			<dict>
@@ -164,11 +177,56 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>curl "{query}" | fx .</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>5BA79A32-FAE5-4C6E-BE52-007074A12873</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>json||fx</string>
+				<key>subtext</key>
+				<string>&gt; curl "{query}" | fx .</string>
+				<key>text</key>
+				<string>View JSON in fx</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>31B881AB-5CA0-469C-B9F8-E33171B4E403</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>31B881AB-5CA0-469C-B9F8-E33171B4E403</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>330</real>
+		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
 			<key>note</key>
@@ -176,7 +234,16 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>190</real>
+		</dict>
+		<key>5BA79A32-FAE5-4C6E-BE52-007074A12873</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>330</real>
 		</dict>
 		<key>98AFD269-7214-48D9-8142-76672E7A044E</key>
 		<dict>
@@ -185,14 +252,14 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>25</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>190</real>
 		</dict>
 		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
 		<dict>
@@ -203,7 +270,7 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>25</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

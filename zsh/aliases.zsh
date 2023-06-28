@@ -8,7 +8,7 @@ alias ...="z ../.."
 alias ....="z ../../.."
 alias .....="z ../../../.."
 
-# MAKE 
+# MAKE
 # if there is no makefile in current dir, runs makefile located in git root
 # also, add a pseudo-flag `--list|-l` which lists all recipes
 function make() {
@@ -36,14 +36,17 @@ alias cp='cp -v'
 
 # defaults
 alias grep='grep --ignore-case --color'
-alias ls='ls -G'       # colorize by default
+alias ls='ls --color'  # colorize by default
 alias which='which -a' # show all
 alias mkdir='mkdir -p' # create intermediate directories
-alias pip="pip3"
+alias curl='curl --silent'
 
 # misc
 alias prose='ssh nanotipsforvim@prose.sh'
+alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
+#───────────────────────────────────────────────────────────────────────────────
 
+alias pip="pip3"
 # effectively alias `pip3 update` to `pip3 install --upgrade`
 function pip3() {
 	if [[ "$1" == "update" ]]; then
@@ -58,7 +61,6 @@ alias bkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-script.sh"'
 alias l='exa --all --long --git --icons --group-directories-first --sort=modified'
 alias tree='exa --tree --level=4 --icons --git-ignore'
 alias tree-dir='exa --only-dirs --tree --level=4 --icons --git-ignore'
-alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 
 #───────────────────────────────────────────────────────────────────────────────
