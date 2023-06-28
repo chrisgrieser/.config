@@ -27,7 +27,7 @@ rules:
       #──────────────────────────────────────────────────────────────────────────
       # inline cod[e]
       - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command] } }
+        from: { key_code: f, modifiers: { mandatory: [command, control] } }
         to:
           - shell_command: pbpaste | pbcopy -pboard ruler # move current clipboard to alt clipboard
           - { key_code: vk_none, hold_down_milliseconds: 100 }
@@ -214,20 +214,10 @@ rules:
         from: { key_code: hyphen, modifiers: { mandatory: [option] } }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: false
           - type: frontmost_application_if
-            file_paths:
-              - wezterm-gui$
-              - ^/System/Applications/Utilities/Terminal.app
-              - ^/System/Applications/Utilities/Script Editor.app
-              - ^/Applications/Obsidian\.app
-              - "[Nn]eovide"
-              - ^/Applications/Discord\.app
-              - ^/Applications/Brave Browser\.app
-              - ^/Applications/Vivaldi\.app
-              - ^/Applications/Hammerspoon\.app
+            bundle_identifiers:
+              - ^com\.tinyspeck\.slackmacgap$
+              - ^com\.microsoft\.Word$
         to:
           - key_code: hyphen
       # ß to [
@@ -236,16 +226,9 @@ rules:
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
           - type: frontmost_application_if
-            file_paths:
-              - wezterm-gui$
-              - ^/System/Applications/Utilities/Terminal.app
-              - ^/System/Applications/Utilities/Script Editor.app
-              - ^/Applications/Obsidian\.app
-              - "[Nn]eovide"
-              - ^/Applications/Discord\.app
-              - ^/Applications/Brave Browser\.app
-              - ^/Applications/Vivaldi\.app
-              - ^/Applications/Hammerspoon\.app
+            bundle_identifiers:
+              - ^com\.tinyspeck\.slackmacgap$
+              - ^com\.microsoft\.Word$
         to:
           - { select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ } }
           - { key_code: vk_none, hold_down_milliseconds: 20 }

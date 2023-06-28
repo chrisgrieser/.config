@@ -105,9 +105,10 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 --------------------------------------------------------------------------------
 
 -- Popups & Cmdline
+opt.pumheight = 15
+
 autocmd({ "CmdlineLeave", "VimEnter" }, {
 	callback = function()
-		opt.pumheight = 15
 		opt.pumwidth = 15 -- min width popup menu
 		opt.cmdheight = 0
 	end,
@@ -116,9 +117,9 @@ autocmd({ "CmdlineLeave", "VimEnter" }, {
 -- do not obfuscate the buffer and the search count in the lualine when searching
 autocmd("CmdlineEnter", {
 	callback = function()
-		opt.pumheight = 8
-		opt.pumwidth = 9
-		if fn.getcmdtype():find("[/?]") then opt.cmdheight = 1 end
+		if not fn.getcmdtype():find("[/?]") then return end
+		opt.pumwidth = 8
+		opt.cmdheight = 1
 	end,
 })
 
@@ -254,4 +255,3 @@ autocmd("FileType", {
 		vim.api.nvim_buf_set_name(0, name)
 	end,
 })
-
