@@ -5,35 +5,39 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const passwordFolders = [];
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run(argv) {
+	let passwordStore = argv[0];
+	if (passwordStore === "") passwordStore = app.pathTo("home folder") + "/.password-store";
 
-// INFO password store location retrieved via .zshenv
-let passwordStore = app.doShellScript('echo "$PASSWORD_STORE_DIR"');
-if (passwordStore === "") passwordStore = app.pathTo("home folder") + "/.password-store";
-
-app
-	.doShellScript(`cd "${passwordStore}" ; find . -type d -not -path "*/.git*"`)
-	.split("\r")
-	.forEach((/** @type {string} */ folder) => {
-		folder = folder.slice(2); // remove leading "./"
-		if (!folder) folder = "* root";
-		passwordFolders.push({
-			title: folder,
-			arg: folder,
-			uid: folder,
-			mods: {
-				cmd: {
-					subtitle: "⌘↵: Insert password from clipboard",
-					variables: { generatePassword: false },
+	/** @type{AlfredItem[]} */
+	const passwordFolders = app
+		.doShellScript(`cd "${passwordStore}" ; find . -type d -not -path "*/.git*"`)
+		.split("\r")
+		.map((/** @type {string} */ folder) => {
+			folder = folder.slice(2); // remove leading "./"
+			if (!folder) folder = "* root";
+			return {
+				title: `📂 ${folder}`,
+				arg: folder,
+				mods: {
+					cmd: {
+						subtitle: "⌘↵: Insert password from clipboard",
+						variables: { generatePassword: false },
+					},
 				},
-			},
+			};
 		});
+
+	// move root to the bottom of the list
+	passwordFolders.push(passwordFolders.shift());
+
+	// discoverability: show alternate option on first
+	passwordFolders[0].subtitle = "↵: Autogenerate password     ⌘↵: Password from clipboard";
+
+	return JSON.stringify({
+		variables: { generatePassword: true },
+		items: passwordFolders,
 	});
-
-// move root to the back of the list
-passwordFolders.push(passwordFolders.shift())
-
-JSON.stringify({
-	variables: { generatePassword: true },
-	items: passwordFolders,
-});
+}

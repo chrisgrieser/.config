@@ -208,7 +208,7 @@ rules:
         from: { key_code: hyphen, modifiers: { mandatory: [option] } }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
-          - type: frontmost_application_if
+          - type: frontmost_application_unless
             bundle_identifiers:
               - ^com\.tinyspeck\.slackmacgap$
               - ^com\.microsoft\.Word$
@@ -219,7 +219,7 @@ rules:
         from: { key_code: hyphen }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
-          - type: frontmost_application_if
+          - type: frontmost_application_unless
             bundle_identifiers:
               - ^com\.tinyspeck\.slackmacgap$
               - ^com\.microsoft\.Word$

@@ -8,13 +8,24 @@ app.includeStandardAdditions = true;
 /** @param {string[]} argv */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	let passwordStore = argv[0].trim();
+	let passwordStore = argv[0];
 	if (passwordStore === "") passwordStore = app.pathTo("home folder") + "/.password-store";
-	const entry = $.getenv("entry");
+	const entryId = $.getenv("entry");
 
-	// `-iname` makes the search case-insensitive
-	const properties = app.doShellScript(`pass show "${entry}"`)
+	/** @type{AlfredItem[]} */
+	const properties = app.doShellScript(`pass show "${entryId}"`)
 		.split("\r")
+		.slice(1) // first entry is password which can can already be direct accessed
+		.map(property => {
+			const valid = property.includes(":");
+			const key = property.split(":")[0];
+			const value = property.split(":")[1].trim();
+			return {
+				title: valid ? value : property,
+				subtitle: valid ? key : "[no key]",
+				arg: value,
+			};
+		})
 	
 
 	return JSON.stringify({
