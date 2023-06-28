@@ -2,6 +2,11 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
 --------------------------------------------------------------------------------
+
+-- CONFIG
+local repoSyncMins = 30
+
+--------------------------------------------------------------------------------
 -- REPO SYNC JOBS
 
 ---@return boolean whether the job has been run
@@ -91,7 +96,6 @@ end
 if not u.isReloading() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
-local repoSyncMins = 30
 RepoSyncTimer = hs.timer
 	.doEvery(repoSyncMins * 60, function()
 		if u.screenIsUnlocked() then syncAllGitRepos(false) end
