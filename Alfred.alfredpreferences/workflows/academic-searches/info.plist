@@ -430,6 +430,8 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
+			<key>note</key>
+			<string>open current browser tab</string>
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>

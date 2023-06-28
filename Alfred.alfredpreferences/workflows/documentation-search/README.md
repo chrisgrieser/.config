@@ -28,6 +28,7 @@ Search two dozen official documentation sites via Alfred.
 - `ke`: Karabiner Elements docs
 - `star`: starship prompt docs
 - `ep`: espanso docs
+- `wt`: WezTerm docs
 
 ## Also included
 - `cc`: conventional commit keywords
