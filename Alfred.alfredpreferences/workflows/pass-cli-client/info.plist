@@ -241,7 +241,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘↵: Insert password from clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -306,7 +306,9 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string></string>
+				<string># "$PASSWORD_STORE_DIR" from zshenv can be passed to JavaScript
+source ~/.zshenv
+osascript -l JavaScript ./scripts/select-folder-for-new-pw.js "$PASSWORD_STORE_DIR"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -316,7 +318,7 @@
 				<key>title</key>
 				<string>Select folder for new entry…</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -450,14 +452,14 @@ osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR" "$*"<
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/copy-pw.sh</string>
+				<string>scripts/auto-push.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</string>
+			<string>A6CFA085-84C6-412D-9381-4CCA67DBF464</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -473,14 +475,14 @@ osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR" "$*"<
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/auto-push.sh</string>
+				<string>scripts/copy-pw.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A6CFA085-84C6-412D-9381-4CCA67DBF464</string>
+			<string>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -727,7 +729,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1040</real>
+			<real>880</real>
 			<key>ypos</key>
 			<real>460</real>
 		</dict>
@@ -756,7 +758,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>edit</string>
+			<string>edit &amp; push</string>
 			<key>xpos</key>
 			<real>270</real>
 			<key>ypos</key>
@@ -778,7 +780,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>890</real>
+			<real>730</real>
 			<key>ypos</key>
 			<real>430</real>
 		</dict>
@@ -798,9 +800,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>auto-push</string>
 			<key>xpos</key>
-			<real>890</real>
+			<real>910</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>135</real>
 		</dict>
 		<key>B23E7DD4-F41F-4969-83C0-A44AD034C37F</key>
 		<dict>

@@ -12,7 +12,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const passwords = [];
-	let passwordStore = argv[0].trim();
+	let passwordStore = argv[0];
 	if (passwordStore === "") passwordStore = app.pathTo("home folder") + "/.password-store";
 	const query = argv[1].trim();
 
@@ -45,7 +45,7 @@ function run(argv) {
 				mods: {
 					alt: { arg: path },
 					// move id to variable for Alfred Script Filter
-					ctrl: {
+					shift: {
 						variables: { entry: id }, 
 						arg: "",
 					},

@@ -543,7 +543,6 @@ keymap("", "<D-S-l>", function()
 	-- fn.system("if ! pgrep -xq 'Alfred Preferences'; then open -a 'Alfred Preferences' && sleep 0.2 ; fi")
 	local shellCmd =
 		([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(workflowId)
-	vim.notify(shellCmd)
 	fn.system(shellCmd)
 end, { desc = "󰮤 Reveal Workflow in Alfred" })
 keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these don't require confirmation

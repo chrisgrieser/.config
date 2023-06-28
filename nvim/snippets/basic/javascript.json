@@ -23,12 +23,13 @@
 		],
 		"body": "// @ts-ignore"
 	},
-	"split by line": {
-		"prefix": [
-			"split by line",
-			".split (by line)"
-		],
-		"body": ".split(/[\\r\\n]/)"
+	"split by \\n": {
+		"prefix": ".split by \\n",
+		"body": ".split(\"\\n\")"
+	},
+	"split by \\r": {
+		"prefix": ".split by \\r",
+		"body": ".split(\"\\r\")"
 	},
 	"JSDoc: type definition": {
 		"prefix": "type definition (JSDoc)",
@@ -68,32 +69,32 @@
 		]
 	},
 	".forEach": {
-		"prefix": "forEach =>",
+		"prefix": ".forEach =>",
 		"body": [
-			"forEach(${1:item} => {",
+			".forEach(${1:item} => {",
 			"\t$0",
 			"});"
 		]
 	},
-	".map (array, complex)": {
-		"prefix": "map (array, complex)",
+	".map ( => {} )": {
+		"prefix": ".map ( => {} )",
 		"body": [
-			"map(${1:item} => {",
+			".map(${1:item} => {",
 			"\t$0",
 			"\treturn ${1:item};",
 			"})"
 		]
 	},
-	"map (array)": {
-		"prefix": "map (array)",
-		"body": "map(${1:item} => ${1:item}$0)"
+	".map ( => )": {
+		"prefix": ".map ( => )",
+		"body": ".map(${1:item} => ${1:item}$0)"
 	},
 	"filter (array)": {
 		"prefix": "filter (array)",
 		"body": "filter(${1:item} => ${1:item})"
 	},
-	"sort (array)": {
-		"prefix": "sort (array)",
+	".sort (array)": {
+		"prefix": ".sort (array)",
 		"body": [
 			"sort((a, b) => {",
 			"\treturn ${1:b - a};",
