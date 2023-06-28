@@ -38,10 +38,15 @@ elif [[ "$SEL" =~ "@" ]]; then
 	open "mailto:$SEL"
 elif [[ -n "$SEL" ]]; then
 	URL_ENCODED_SEL=$(osascript -l JavaScript -e "encodeURIComponent('$SEL')")
-	open "https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky"
+	URL_1="https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky"
 	# shellcheck disable=2154
-	URL_2="$search_site?q=$URL_ENCODED_SEL"
+	URL_2="$search_site$URL_ENCODED_SEL"
 
+
+#───────────────────────────────────────────────────────────────────────────────
+	open "$URL_1" # open in foreground
+
+	# OPEN SECOND URL IN BACKGROUND
 	# Use AppleScript instead of JXA because the latter cannot create tabs at specific indexes
 	# Call it via the shell because otherwise the code is complicated by "using terms from"
 	# which requires a specific browser to be installed

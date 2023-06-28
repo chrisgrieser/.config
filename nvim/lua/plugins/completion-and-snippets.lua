@@ -173,23 +173,12 @@ local function filetypeCompletionConfig()
 	-- disable in special filetypes
 	cmp.setup.filetype("", { enabled = false })
 
-	cmp.setup.filetype("lua", {
-		enabled = function() -- disable leading "-"
+	cmp.setup.filetype({"lua", "toml"}, {
+		enabled = function() -- disable leading "-" in lua
+			if vim.bo.filetype ~= "lua" then return true end
 			local lineContent = vim.fn.getline(".")
 			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$"))
 		end,
-		sources = cmp.config.sources {
-			s.snippets,
-			s.lsp,
-			s.codeium,
-			s.nerdfont, -- add nerdfont for config
-			s.emojis,
-			s.treesitter,
-			s.buffer,
-		},
-	})
-
-	cmp.setup.filetype("toml", {
 		sources = cmp.config.sources {
 			s.snippets,
 			s.lsp,
@@ -221,20 +210,11 @@ local function filetypeCompletionConfig()
 		},
 	})
 
-	cmp.setup.filetype("yaml", {
+	cmp.setup.filetype({"yaml", "json"}, {
 		sources = cmp.config.sources {
 			s.lsp, -- prioritize schemas
 			s.snippets,
 			s.treesitter, -- useful when no schemas
-			s.emojis,
-			s.buffer,
-		},
-	})
-	cmp.setup.filetype("json", {
-		sources = cmp.config.sources {
-			s.lsp, -- prioritize schemas
-			s.snippets,
-			s.treesitter, -- useful when no schema
 			s.emojis,
 			s.buffer,
 		},
