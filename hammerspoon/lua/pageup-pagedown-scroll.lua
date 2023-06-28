@@ -5,31 +5,39 @@ local u = require("lua.utils")
 -- - overwrite pagedown & pageup to scroll a certain amount instead. This ensures
 --   that they do not move a full viewport, effectively creating a scroll offset
 -- - not implemented via Karabiner, since Karabiner does not allow for scrolling
+-- - This spoon is somewhat equivalent to https://github.com/dexterleng/KeyboardScroller.docs
 
 -- CONFIG
-local scrollamount = 35
+local distancePerApp = {
+	Discord = 20,
+	default = 35,
+}
 
 --------------------------------------------------------------------------------
 
----@param amount number steps to be scroll down (or up if negative)
-local function scroll(amount)
+---@param direction "up" | "down
+local function scroll(direction)
 	local frontApp = hs.application.frontmostApplication()
-	local frame = frontApp:mainWindow():frame()
-	local screen = hs.mouse.getCurrentScreen() or hs.screen.mainScreen()
-	print("👽 beep")
 
-	-- cursor needs to be inside main window to scroll the right frame
+	-- cursor needs to be inside main window to scroll the right frame, since on
+	-- macOS the frame below the cursor is scrolled not the focussed one
+	local frame = frontApp:mainWindow():frame()
 	local centerPos = { x = frame.x + frame.w * 0.5, y = frame.y + frame.h * 0.5 }
 	hs.mouse.setRelativePosition(centerPos)
-	hs.eventtap.scrollWheel({ 0, amount }, {})
+
+	-- determine distance and scroll
+	local distance = distancePerApp[frontApp:name()] or distancePerApp.default
+	if direction == "down" then distance = distance * -1 end
+	hs.eventtap.scrollWheel({ 0, distance }, {})
 
 	-- now moving cursor away so it is not in the way
+	local screen = hs.mouse.getCurrentScreen() or hs.screen.mainScreen()
 	local bottomLeftPos = { x = 0, y = screen:frame().h * 0.9 }
 	hs.mouse.setRelativePosition(bottomLeftPos, screen)
 end
 
-local function scrollDown() scroll(-scrollamount) end
-local function scrollUp() scroll(scrollamount) end
+local function scrollDown() scroll("down") end
+local function scrollUp() scroll("up") end
 
 --------------------------------------------------------------------------------
 -- HOTKEYS

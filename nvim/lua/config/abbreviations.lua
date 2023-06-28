@@ -20,6 +20,7 @@ local spellfixes = {
 	dwon = "down",
 	ntoe = "note",
 	verison = "version",
+	ot = "to",
 }
 
 for wrong, correct in pairs(spellfixes) do
