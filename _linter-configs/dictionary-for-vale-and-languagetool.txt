@@ -87,3 +87,4 @@ As
 Textobject
 Using
 Speedtest
+GPG
