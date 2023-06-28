@@ -12,6 +12,29 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>A6CFA085-84C6-412D-9381-4CCA67DBF464</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1E6D758F-172E-4E35-AD9C-3226C9D252C3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -39,7 +62,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Edit Entry</string>
+				<string>⌘: Edit Entry (and then push)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -47,29 +70,19 @@
 				<key>destinationuid</key>
 				<string>6B581416-D12E-4AC2-B604-895443940F98</string>
 				<key>modifiers</key>
-				<integer>8388608</integer>
-				<key>modifiersubtext</key>
-				<string>fn: Delete Password</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>EE233DEA-A743-49D4-B7EC-A77927CCD9C1</string>
-				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: Copy user</string>
+				<string>⌃: Delete Password</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>EF422DD3-F6E3-4548-958A-6272B0762C37</string>
+				<string>B23E7DD4-F41F-4969-83C0-A44AD034C37F</string>
 				<key>modifiers</key>
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Show &amp; Copy Entry (w/o password)</string>
+				<string>⇧: Copy other property</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -97,10 +110,18 @@
 				<false/>
 			</dict>
 		</array>
-		<key>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</key>
-		<array/>
 		<key>6B581416-D12E-4AC2-B604-895443940F98</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6CFA085-84C6-412D-9381-4CCA67DBF464</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
@@ -162,16 +183,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>A6CFA085-84C6-412D-9381-4CCA67DBF464</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>A5A50E6D-235D-44F3-ACFA-B80578EA0558</key>
 		<array>
@@ -186,37 +197,24 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B23E7DD4-F41F-4969-83C0-A44AD034C37F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1E6D758F-172E-4E35-AD9C-3226C9D252C3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E28BAD26-7C03-414A-A567-4F44432F9FD7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>187D48FE-4DD7-446F-9447-5829E35CA633</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EE233DEA-A743-49D4-B7EC-A77927CCD9C1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EF422DD3-F6E3-4548-958A-6272B0762C37</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -409,7 +407,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string># since this is a shell-script, "$PASSWORD_STORE_DIR" from zshenv can be passed to JavaScript
+				<string># "$PASSWORD_STORE_DIR" from zshenv can be passed to JavaScript
 source ~/.zshenv
 osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR" "$*"</string>
 				<key>scriptargtype</key>
@@ -466,6 +464,29 @@ osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR" "$*"<
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/auto-push.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A6CFA085-84C6-412D-9381-4CCA67DBF464</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -477,37 +498,6 @@ osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR" "$*"<
 			<string>7C6B7643-4B16-4307-ADA8-14D6837FEE59</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>4CD4709B-D7A9-4FFD-8FDE-D62EC9053E14</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/delete-pw.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6B581416-D12E-4AC2-B604-895443940F98</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -542,91 +532,92 @@ osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR" "$*"<
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/auto-push.sh</string>
+				<string>scripts/delete-pw.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A6CFA085-84C6-412D-9381-4CCA67DBF464</string>
+			<string>6B581416-D12E-4AC2-B604-895443940F98</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>4CD4709B-D7A9-4FFD-8FDE-D62EC9053E14</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>script</key>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
 				<string></string>
+				<key>script</key>
+				<string># "$PASSWORD_STORE_DIR" from zshenv can be passed to JavaScript
+source ~/.zshenv
+osascript -l JavaScript ./scripts/show-properties.js "$PASSWORD_STORE_DIR"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/copy-user.sh</string>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Show other entry fields…</string>
 				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>EE233DEA-A743-49D4-B7EC-A77927CCD9C1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
+				<integer>5</integer>
+				<key>withspace</key>
 				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</string>
+			<string>B23E7DD4-F41F-4969-83C0-A44AD034C37F</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>autopaste</key>
 				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/show-data.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>EF422DD3-F6E3-4548-958A-6272B0762C37</string>
+			<string>1E6D758F-172E-4E35-AD9C-3226C9D252C3</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -696,9 +687,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>420</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>745</real>
+		</dict>
+		<key>1E6D758F-172E-4E35-AD9C-3226C9D252C3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>445</real>
+			<key>ypos</key>
+			<real>570</real>
 		</dict>
 		<key>24B77922-B082-4744-B4A1-6EAD37FFD88C</key>
 		<dict>
@@ -727,18 +727,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>990</real>
+			<real>1040</real>
 			<key>ypos</key>
-			<real>425</real>
-		</dict>
-		<key>51B7FF48-2EAA-4C2B-99B5-93E61113DAB1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>475</real>
-			<key>ypos</key>
-			<real>705</real>
+			<real>460</real>
 		</dict>
 		<key>6B581416-D12E-4AC2-B604-895443940F98</key>
 		<dict>
@@ -747,7 +738,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>delete pw</string>
 			<key>xpos</key>
-			<real>280</real>
+			<real>270</real>
 			<key>ypos</key>
 			<real>435</real>
 		</dict>
@@ -767,7 +758,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit</string>
 			<key>xpos</key>
-			<real>280</real>
+			<real>270</real>
 			<key>ypos</key>
 			<real>300</real>
 		</dict>
@@ -778,7 +769,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy pw</string>
 			<key>xpos</key>
-			<real>280</real>
+			<real>270</real>
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
@@ -787,9 +778,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>790</real>
+			<real>890</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>430</real>
 		</dict>
 		<key>A5A50E6D-235D-44F3-ACFA-B80578EA0558</key>
 		<dict>
@@ -807,40 +798,29 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>auto-push</string>
 			<key>xpos</key>
-			<real>950</real>
+			<real>890</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>250</real>
+		</dict>
+		<key>B23E7DD4-F41F-4969-83C0-A44AD034C37F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>select property</string>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>570</real>
 		</dict>
 		<key>E28BAD26-7C03-414A-A567-4F44432F9FD7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>280</real>
+			<real>270</real>
 			<key>ypos</key>
-			<real>835</real>
-		</dict>
-		<key>EE233DEA-A743-49D4-B7EC-A77927CCD9C1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>copy user</string>
-			<key>xpos</key>
-			<real>280</real>
-			<key>ypos</key>
-			<real>570</real>
-		</dict>
-		<key>EF422DD3-F6E3-4548-958A-6272B0762C37</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>show</string>
-			<key>xpos</key>
-			<real>280</real>
-			<key>ypos</key>
-			<real>705</real>
+			<real>715</real>
 		</dict>
 		<key>FEBD93EE-FAF9-4E4E-8627-84BEC380B964</key>
 		<dict>

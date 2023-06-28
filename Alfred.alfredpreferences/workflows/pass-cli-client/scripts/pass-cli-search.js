@@ -44,6 +44,11 @@ function run(argv) {
 				uid: id,
 				mods: {
 					alt: { arg: path },
+					// move id to variable for Alfred Script Filter
+					ctrl: {
+						variables: { entry: id }, 
+						arg: "",
+					},
 				},
 			});
 		});
@@ -59,7 +64,6 @@ function run(argv) {
 				cmd: disallowed,
 				shift: disallowed,
 				alt: disallowed,
-				fn: disallowed,
 				ctrl: disallowed,
 			},
 		});
