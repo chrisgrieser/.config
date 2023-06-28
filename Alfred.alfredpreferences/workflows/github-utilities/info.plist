@@ -249,19 +249,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>6521A994-DC54-4010-B2E0-758D3B4DA2CD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6B63D08C-0E2C-443F-9B43-3CAAD1687E91</key>
 		<array>
 			<dict>
@@ -477,16 +464,6 @@
 		</array>
 		<key>D4F0274E-F79C-43A1-9C38-65C92510EEF2</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6521A994-DC54-4010-B2E0-758D3B4DA2CD</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Check out branch pointing to this commit</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</string>
@@ -1129,14 +1106,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>6521A994-DC54-4010-B2E0-758D3B4DA2CD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
@@ -1220,7 +1189,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Checkout</string>
+				<string>🛒 Checkout</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1574,7 +1543,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>340</real>
+			<real>355</real>
 			<key>ypos</key>
 			<real>1035</real>
 		</dict>
@@ -1692,15 +1661,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>ypos</key>
 			<real>1510</real>
 		</dict>
-		<key>6521A994-DC54-4010-B2E0-758D3B4DA2CD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>230</real>
-			<key>ypos</key>
-			<real>890</real>
-		</dict>
 		<key>6B63D08C-0E2C-443F-9B43-3CAAD1687E91</key>
 		<dict>
 			<key>colorindex</key>
@@ -1746,7 +1706,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>note</key>
 			<string>checkout</string>
 			<key>xpos</key>
-			<real>340</real>
+			<real>355</real>
 			<key>ypos</key>
 			<real>900</real>
 		</dict>

@@ -72,6 +72,7 @@ function run() {
 			const parts = commit.split(";;");
 			const hash = parts[0];
 			const pointer = parts[1]
+			const pointerDisplay = pointer
 				.replaceAll("HEAD", "👤")
 				.replaceAll("origin", "☁️")
 				.replaceAll("->", "⇢")
@@ -82,19 +83,15 @@ function run() {
 			const msg = parts[4];
 			const branch = branchCommitPairs[hash];
 
+			// when branch is on commit, checkout branch, otherwise use hash
+			const hashOrBranch = branch || hash;
+
 			return {
-				title: `${msg}   ${pointer}`,
+				title: `${msg}   ${pointerDisplay}`,
 				subtitle: `${date}   ${author}`,
 				match: alfredMatcher(msg) + author + " " + pointer,
-				arg: hash,
+				arg: hashOrBranch,
 				mods: {
-					cmd: {
-						arg: branch,
-						valid: branch !== undefined,
-						subtitle: branch
-							? "⌘: Checkout Branch pointing to this commit"
-							: "🚫 No Branch pointing to this commit.",
-					},
 					alt: {
 						arg: hash,
 						subtitle: `⌥: Copy Hash    ${hash}`,

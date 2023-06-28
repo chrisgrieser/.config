@@ -81,10 +81,6 @@ function gitlog() {
 		sed 's/HEAD/󱍀/g' |
 		sed 's/->/⇢/g' |
 		sed 's/grafted/ /' |
-		sed 's/main,/󰦤,/g' |
-		sed 's/master,/󰦤,/g' |
-		sed 's/main)/󰦤 )/g' |
-		sed 's/master)/󰦤 )/g' |
 		sed 's/tags: / )/g' |
 		delta
 	# INFO piping though delta as pager makes commit hashes clickable https://github.com/wez/wezterm/discussions/3618
