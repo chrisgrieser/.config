@@ -649,17 +649,16 @@ osascript -l JavaScript ./scripts/show-properties.js "$PASSWORD_STORE_DIR"</stri
 ## Requirements
 - `pass`
 - `pinentry-mac`
+- Alfred 5 with Powerpack
 
 Install them via `brew install pass pinentry-mac`. 
 
 1. Setup `pass` with an GPG key. See the [Pass-Website](https://www.passwordstore.org/) for more information.
 2. Setup `pinentry-mac` as your `pinentry-program`:
 
-
-`[[ -d "$HOME/.gnupg" ]] || mkdir "$HOME/.gnupg"`
-`echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" &gt; $HOME/.gnupg/gpg-agent.conf`
-`gpgconf --kill gpg-agent # restart the agent`
-
+`[[ -d "$HOME/.gnupg" ]] || mkdir ~/.gnupg`
+`echo "pinentry-program $HOMEBREW_PREFIX/bin/pinentry-mac" &gt; ~/.gnupg/gpg-agent.conf`
+`gpgconf --kill gpg-agent`
 
 ## Configuration
 
@@ -879,7 +878,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9.0</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

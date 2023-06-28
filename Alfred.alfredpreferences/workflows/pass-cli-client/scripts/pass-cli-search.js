@@ -6,6 +6,13 @@ app.includeStandardAdditions = true;
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
+/** @param {string} str */
+function alfredMatcher(str) {
+	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
+	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeperated, str].join(" ") + " ";
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string[]} argv */
@@ -18,7 +25,7 @@ function run(argv) {
 
 	if (!fileExists(passwordStore)) {
 		passwords.push({
-			title: "⚠️ Password Store does not exist",
+			title: "⚠️ Password Store not found.",
 			subtitle: passwordStore,
 			valid: false,
 		});
@@ -26,7 +33,10 @@ function run(argv) {
 	}
 
 	// `-iname` makes the search case-insensitive
-	const passwordlist = app.doShellScript(`cd "${passwordStore}" ; find . -iname "*${query}*.gpg"`);
+	const passwordlist = app.doShellScript(
+		`cd "${passwordStore}" ; ` +
+			`find . -iname "*${query}*.gpg" -or -ipath "*${query}*" -type f -and -not -name ".DS_Store"`,
+	);
 	let createNewPassword;
 	if (passwordlist) {
 		createNewPassword = false;
@@ -46,7 +56,7 @@ function run(argv) {
 					alt: { arg: path },
 					// move id to variable for Alfred Script Filter
 					shift: {
-						variables: { entry: id }, 
+						variables: { entry: id },
 						arg: "",
 					},
 				},
@@ -55,12 +65,12 @@ function run(argv) {
 	} else {
 		createNewPassword = true;
 		const cleanQuery = query.replace(/[/\\:]/, "-");
-		const disallowed = { subtitle: "🚫 Not possible for new password.", valid: false }
+		const disallowed = { subtitle: "🚫 Not possible for new password.", valid: false };
 		passwords.push({
 			title: "🆕 " + query,
 			subtitle: "Create new password",
 			arg: cleanQuery,
-			mods: { 
+			mods: {
 				cmd: disallowed,
 				shift: disallowed,
 				alt: disallowed,
