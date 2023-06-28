@@ -37,6 +37,10 @@ export MAGIC_ENTER_OTHER_COMMAND="inspect"
 export _ZO_DATA_DIR="$DATA_DIR/zoxide/"
 eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 
+# fx
+export FX_THEME=4 # only theme working in light & dark mode https://github.com/antonmedv/fx#themes
+export FX_SHOW_SIZE=true # show sizes of folded arrays
+
 #───────────────────────────────────────────────────────────────────────────────
 # ZSH PLUGIN SETTINGS
 
