@@ -264,6 +264,7 @@ local function filetypeCompletionConfig()
 	cmp.setup.filetype("bib", {
 		sources = cmp.config.sources {
 			s.snippets,
+			s.buffer, -- for consistent keyword usage
 		},
 	})
 

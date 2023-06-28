@@ -26,9 +26,12 @@ source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # has to be loaded *after* zsh syntax highlighting
 source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
-# Magic enter
+# Magic Enter
 source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
 
 # Starship
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+# Fuck
+eval "$(thefuck --alias)"
