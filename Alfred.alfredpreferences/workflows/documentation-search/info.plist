@@ -2243,7 +2243,7 @@ echo -n "$appid"</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -499,7 +499,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-alfredworkflow.js</string>
+				<string>open-alfred-workflow.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -766,21 +766,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>9CAC2CDA-1512-48F6-9273-1A82F9ECB969</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -795,6 +780,21 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>691683CB-5914-40E0-AD1F-DD352551F338</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>9CAC2CDA-1512-48F6-9273-1A82F9ECB969</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
