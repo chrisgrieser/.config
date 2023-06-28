@@ -162,6 +162,7 @@ exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nmap M :mergeLines
 
 " Make o and O respect context
+" requires Code Editor Shortcuts Plugin
 exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
 nmap &a& :blankAbove
 nmap O &a&i
