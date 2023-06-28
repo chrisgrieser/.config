@@ -89,3 +89,11 @@ Using
 Speedtest
 GPG
 shellcheck
+git
+MDN
+sketchybar
+Hammerspoon
+Sourcegraph
+keycodes
+Hammerspoon
+espanso

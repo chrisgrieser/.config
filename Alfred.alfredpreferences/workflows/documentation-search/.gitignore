@@ -1,0 +1,5 @@
+# Mac
+.DS_Store
+
+# Alfred Preferences
+prefs.plist
