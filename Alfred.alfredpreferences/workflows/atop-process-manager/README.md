@@ -5,7 +5,9 @@
 
 System Monitoring and Process Management via Alfred. 
 
-<img src="./assets/showcase.gif" alt="alt text" width="50%">
+<img src="./assets/showcase overview.png" alt="atop overview showcase" width="50%">
+
+<img src="./assets/showcase processes.png" alt="showcase processes" width="50%">
 
 ## Features
 - Process Management: CPU & Memory, kill processes, restart apps
