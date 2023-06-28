@@ -595,6 +595,39 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B50A8885-7A47-47E3-A71D-B1D80C5CD132</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>38153358-2F5C-47E1-B294-3A352C2716DA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy First Link</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B682BF1F-2199-4A30-8720-E0AA78A620BA</key>
 		<array>
 			<dict>
@@ -2356,6 +2389,19 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>text</key>
+				<string>Google: {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>B50A8885-7A47-47E3-A71D-B1D80C5CD132</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Suggest without keyword
@@ -2535,6 +2581,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>170</real>
 			<key>ypos</key>
 			<real>770</real>
+		</dict>
+		<key>B50A8885-7A47-47E3-A71D-B1D80C5CD132</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>465</real>
+			<key>ypos</key>
+			<real>1125</real>
 		</dict>
 		<key>B682BF1F-2199-4A30-8720-E0AA78A620BA</key>
 		<dict>
