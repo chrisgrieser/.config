@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>0790AF04-5513-44B5-94E2-FC7E6F552C71</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EEB354AC-5D74-4C6D-8253-23001FB63C72</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
 		<array>
 			<dict>
@@ -163,7 +176,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>EEB354AC-5D74-4C6D-8253-23001FB63C72</string>
+				<string>0790AF04-5513-44B5-94E2-FC7E6F552C71</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1405,6 +1418,21 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Tink</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>0790AF04-5513-44B5-94E2-FC7E6F552C71</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -1543,6 +1571,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0790AF04-5513-44B5-94E2-FC7E6F552C71</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>435</real>
+			<key>ypos</key>
+			<real>1185</real>
+		</dict>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1910,7 +1947,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>435</real>
+			<real>580</real>
 			<key>ypos</key>
 			<real>1185</real>
 		</dict>

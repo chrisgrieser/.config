@@ -61,10 +61,9 @@ function run() {
 				.replaceAll("A  ", "🔼❇️ ") // staged new file
 				.replaceAll("R  ", "🔼✏️ "); // staged renamed
 
-			let mode;
-			if ([" M ", " D ", "?? ", "RM ", "MM "].includes(trackingInfo)) mode = "stage";
-			else if (["M  "].includes(trackingInfo)) mode = "unstage change";
-			else if (["A  ", "R  ", "D  "].includes(trackingInfo)) mode = "unstage file";
+			const mode = [" M ", " D ", "?? ", "RM ", "MM "].includes(trackingInfo)
+				? "stage"
+				: "unstage";
 
 			return {
 				title: `${trackingDisplay}  ${filename}`,
