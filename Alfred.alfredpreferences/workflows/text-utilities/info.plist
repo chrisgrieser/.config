@@ -826,7 +826,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>run-searchlink.sh</string>
+				<string>search-for-link.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -858,8 +858,12 @@
 				<false/>
 				<key>modsmode</key>
 				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.neovide.neovide</string>
+				</array>
 				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
