@@ -56,9 +56,11 @@ newCommand("Curl", function(ctx)
 	local timeoutSecs = 5
 	local response = fn.system(("curl --silent --max-time %s '%s'"):format(timeoutSecs, url))
 	local lines = vim.split(response, "\n")
+	local ft = url:match("%.(%a)$") or "html"
+
 	cmd("en" .. "ew") -- separated due to unignorable codespell error…
-	a.nvim_create_buf(true, true)
-	a.nvim_buf_set_option(0, "filetype", "html")
+	a.nvim_buf_set_option(0, "filetype", ft)
+	a.nvim_buf_set_option(0, "buftype", "nowrite")
 	a.nvim_buf_set_name(0, "curl")
 	a.nvim_buf_set_lines(0, 0, -1, false, lines)
 end, { nargs = 1 })
