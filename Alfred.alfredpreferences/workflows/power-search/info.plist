@@ -12,11 +12,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -32,11 +32,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -55,11 +55,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -75,11 +75,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -98,11 +98,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -118,11 +118,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -141,11 +141,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -161,11 +161,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -193,15 +193,28 @@
 				<false/>
 			</dict>
 		</array>
+		<key>25810527-3725-4BAA-91DA-7B4E6FCCCBB7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>47FB3A9E-27F5-43FE-9F8D-DA7D444CEAA1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>27CF3C80-D10F-4E60-ABAA-C0C6707E8B88</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -217,11 +230,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -253,11 +266,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -273,11 +286,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -296,11 +309,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -316,11 +329,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -339,11 +352,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -359,11 +372,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -382,11 +395,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -402,11 +415,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -425,11 +438,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -445,11 +458,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -460,6 +473,19 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy First Link</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3F875B8F-22A9-4711-914D-C906CAC4F290</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FB5D42B1-CF89-4DD7-B57A-1995FE9A1BF9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -468,11 +494,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -488,11 +514,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -507,15 +533,28 @@
 				<false/>
 			</dict>
 		</array>
+		<key>47FB3A9E-27F5-43FE-9F8D-DA7D444CEAA1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3F875B8F-22A9-4711-914D-C906CAC4F290</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5E615CE0-93A5-48A2-A27A-A77F75B8D7FB</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -531,11 +570,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -554,11 +593,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -574,11 +613,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -597,11 +636,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -617,11 +656,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -640,11 +679,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -660,11 +699,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -683,11 +722,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -703,11 +742,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -726,11 +765,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -746,11 +785,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -769,11 +808,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -789,11 +828,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -812,11 +851,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -832,11 +871,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -868,11 +907,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -888,11 +927,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -911,11 +950,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -931,11 +970,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -954,11 +993,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -974,11 +1013,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1010,11 +1049,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1030,11 +1069,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1053,7 +1092,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>720951B0-1B30-4FCB-A14F-721C0D975D6E</string>
+				<string>F6591673-575D-4105-B38F-59AD1457EF23</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1066,11 +1105,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1086,11 +1125,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1109,11 +1148,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1129,11 +1168,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1152,11 +1191,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1172,11 +1211,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1193,26 +1232,6 @@
 		</array>
 		<key>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D3033E82-B345-4E25-A3DB-AB9FF6BE5472</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: Search for term</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E4C21B43-82B9-4CDA-A2A2-73B4DA88B14A</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>38153358-2F5C-47E1-B294-3A352C2716DA</string>
@@ -1233,16 +1252,26 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E4C21B43-82B9-4CDA-A2A2-73B4DA88B14A</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>F5BF085E-4215-453C-88B5-95FC531F05D7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Inline Search</string>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1258,11 +1287,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
+				<string>⇧: Inline Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1331,7 +1360,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>search-selection.sh</string>
+				<string>./scripts/search-selection.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1346,6 +1375,121 @@
 			<string>393BA661-A566-4A4C-872F-3385CC07DDB9</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>40</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>K</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>25810527-3725-4BAA-91DA-7B4E6FCCCBB7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>FB5D42B1-CF89-4DD7-B57A-1995FE9A1BF9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>"{query}"</string>
+				<key>title</key>
+				<string>⏳ Searching…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>47FB3A9E-27F5-43FE-9F8D-DA7D444CEAA1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/search-for-link.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3F875B8F-22A9-4711-914D-C906CAC4F290</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://duckduckgo.com/?q={query}+!ducky</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1375,7 +1519,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "c$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "c$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1424,7 +1568,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "a$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "a$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1473,7 +1617,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "b$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "b$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1497,19 +1641,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>inline-search-loop</string>
-				<key>passinputasargument</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>passvariables</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>workflowbundleid</key>
-				<string>self</string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{var:search_site}{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>D3033E82-B345-4E25-A3DB-AB9FF6BE5472</string>
+			<string>38153358-2F5C-47E1-B294-3A352C2716DA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1541,7 +1687,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "e$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "e$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1590,7 +1736,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "f$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "f$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1639,7 +1785,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "d$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "d$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1661,96 +1807,12 @@
 			<integer>3</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>E4C21B43-82B9-4CDA-A2A2-73B4DA88B14A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>720951B0-1B30-4FCB-A14F-721C0D975D6E</string>
+			<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>inline-search-ddgr.js</string>
-				<key>subtext</key>
-				<string>via `ddgr`</string>
-				<key>title</key>
-				<string>Inline Search</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>inline-search-loop</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1780,7 +1842,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "h$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "h$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1829,7 +1891,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "i$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "i$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1878,7 +1940,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "g$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "g$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1902,21 +1964,87 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>autopaste</key>
 				<false/>
-				<key>skipvarencode</key>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
 				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{var:search_site}{query}</string>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>38153358-2F5C-47E1-B294-3A352C2716DA</string>
+			<string>E4C21B43-82B9-4CDA-A2A2-73B4DA88B14A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/inline-search-ddgr.js</string>
+				<key>subtext</key>
+				<string>via `ddgr`</string>
+				<key>title</key>
+				<string>Inline Search</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F6591673-575D-4105-B38F-59AD1457EF23</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1948,7 +2076,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "k$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "k$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1997,7 +2125,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "l$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "l$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2046,7 +2174,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "j$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "j$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2068,12 +2196,48 @@
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>"{query}"</string>
+				<key>title</key>
+				<string>⏳ Searching…</string>
+			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
+			<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/copy-first-link.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2AB60160-9818-4A2B-AC75-2414F41ECFDC</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2103,7 +2267,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "o$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "o$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2152,7 +2316,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "n$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "n$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2201,7 +2365,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "m$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "m$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2221,27 +2385,6 @@
 			<string>396BCF5D-1A52-4FAC-AB1B-3ECF0E5ED2CC</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://duckduckgo.com/?q={query}+!ducky</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2271,7 +2414,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "q$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "q$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2320,7 +2463,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "r$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "r$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2369,7 +2512,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "p$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "p$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2389,71 +2532,6 @@
 			<string>AA0CE692-AA84-4D63-8F20-7DAB91C14FA6</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>F6591673-575D-4105-B38F-59AD1457EF23</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>"{query}"</string>
-				<key>title</key>
-				<string>⏳ Searching for URL…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>copy-first-link.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2AB60160-9818-4A2B-AC75-2414F41ECFDC</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2483,7 +2561,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "u$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "u$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2532,7 +2610,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "s$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "s$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2581,7 +2659,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "t$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "t$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2630,7 +2708,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "v$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "v$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2679,7 +2757,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "w$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "w$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2728,7 +2806,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "x$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "x$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2777,7 +2855,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "z$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "z$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2826,7 +2904,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./google-suggest.js "y$*"</string>
+				<string>osascript -l JavaScript ./scripts/suggest-terms.js "y$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2889,44 +2967,55 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>510</real>
 		</dict>
 		<key>0C0BD5B6-7B63-415F-982A-0DF1C33F091C</key>
 		<dict>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>855</real>
 		</dict>
 		<key>1CB74B29-BB4E-486B-99D5-073652674E8A</key>
 		<dict>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>395</real>
 		</dict>
 		<key>2016F51A-B193-41E1-B959-BD316E2086FB</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>625</real>
 		</dict>
 		<key>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>735</real>
+			<real>730</real>
 			<key>ypos</key>
-			<real>805</real>
+			<real>800</real>
+		</dict>
+		<key>25810527-3725-4BAA-91DA-7B4E6FCCCBB7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>Search url from selection → markdown link</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>205</real>
 		</dict>
 		<key>27CF3C80-D10F-4E60-ABAA-C0C6707E8B88</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>855</real>
 		</dict>
 		<key>2AB60160-9818-4A2B-AC75-2414F41ECFDC</key>
 		<dict>
@@ -2935,46 +3024,46 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>searches for first link &amp; copies it</string>
 			<key>xpos</key>
-			<real>890</real>
+			<real>885</real>
 			<key>ypos</key>
-			<real>805</real>
+			<real>800</real>
 		</dict>
 		<key>2DFB0296-2869-409D-B8A9-C746D5234521</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>740</real>
 		</dict>
 		<key>2E96C95F-633A-4146-9D9E-604D5251F43B</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>1090</real>
 		</dict>
 		<key>318F6F96-8B4C-45EF-A20D-8CB2DC06772F</key>
 		<dict>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>970</real>
 		</dict>
 		<key>38153358-2F5C-47E1-B294-3A352C2716DA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>920</real>
+			<real>885</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>500</real>
 		</dict>
 		<key>393BA661-A566-4A4C-872F-3385CC07DDB9</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>730</real>
+			<real>480</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -2983,72 +3072,81 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>855</real>
 		</dict>
 		<key>3E8FA9F5-8BB7-4CCE-9B8D-4CCFD7B47A95</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1320</real>
+		</dict>
+		<key>3F875B8F-22A9-4711-914D-C906CAC4F290</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>205</real>
 		</dict>
 		<key>42DF62FE-1AE2-47B2-A1B4-7B65AAE140E1</key>
 		<dict>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>740</real>
+		</dict>
+		<key>47FB3A9E-27F5-43FE-9F8D-DA7D444CEAA1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>205</real>
 		</dict>
 		<key>5E615CE0-93A5-48A2-A27A-A77F75B8D7FB</key>
 		<dict>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>395</real>
 		</dict>
 		<key>635E8D6D-4AD8-4A8E-952A-0BBF5F302056</key>
 		<dict>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>1090</real>
 		</dict>
 		<key>6EDDEC35-4391-49A3-A93F-99B48265C880</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>165</real>
-		</dict>
-		<key>720951B0-1B30-4FCB-A14F-721C0D975D6E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>1080</real>
-			<key>ypos</key>
-			<real>305</real>
+			<real>395</real>
 		</dict>
 		<key>7E7EF28F-85AB-49A2-BE26-8F12E3EDED0F</key>
 		<dict>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1320</real>
 		</dict>
 		<key>9E3C1F70-A0C6-4B35-8E2F-8855F7415690</key>
 		<dict>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>1090</real>
 		</dict>
 		<key>AA0CE692-AA84-4D63-8F20-7DAB91C14FA6</key>
 		<dict>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>970</real>
 		</dict>
 		<key>B50A8885-7A47-47E3-A71D-B1D80C5CD132</key>
 		<dict>
@@ -3057,14 +3155,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1320</real>
 		</dict>
 		<key>B682BF1F-2199-4A30-8720-E0AA78A620BA</key>
 		<dict>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>975</real>
+			<real>1205</real>
 		</dict>
 		<key>BAD2BCE8-96CD-4FF0-9445-860265918045</key>
 		<dict>
@@ -3082,39 +3180,30 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>625</real>
 		</dict>
 		<key>C13894E0-DDFE-45A2-880D-130822FBD3AB</key>
 		<dict>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>975</real>
+			<real>1205</real>
 		</dict>
 		<key>C7FBCF0E-8C6B-4F3D-8678-BE05857CB7A9</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>510</real>
 		</dict>
 		<key>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>735</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>535</real>
-		</dict>
-		<key>D3033E82-B345-4E25-A3DB-AB9FF6BE5472</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>925</real>
-			<key>ypos</key>
-			<real>170</real>
+			<real>530</real>
 		</dict>
 		<key>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</key>
 		<dict>
@@ -3123,46 +3212,46 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>I'm feeling lucky</string>
 			<key>xpos</key>
-			<real>735</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>395</real>
 		</dict>
 		<key>E2663B7F-3850-4F0C-A841-4B610205EB3A</key>
 		<dict>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>740</real>
 		</dict>
 		<key>E4C21B43-82B9-4CDA-A2A2-73B4DA88B14A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>925</real>
+			<real>890</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>650</real>
 		</dict>
 		<key>E8D6AA3D-D58E-49D4-930D-4A993511807D</key>
 		<dict>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>510</real>
 		</dict>
 		<key>E8DDBFAF-8BB1-488D-A82A-D18AAE9879F6</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>975</real>
+			<real>1205</real>
 		</dict>
 		<key>EB617632-AE41-4601-8A06-5AEB256FFCE9</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>970</real>
 		</dict>
 		<key>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</key>
 		<dict>
@@ -3171,25 +3260,36 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>inline search results</string>
 			<key>xpos</key>
-			<real>730</real>
+			<real>720</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>650</real>
 		</dict>
 		<key>F5BF085E-4215-453C-88B5-95FC531F05D7</key>
 		<dict>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>625</real>
 		</dict>
 		<key>F6591673-575D-4105-B38F-59AD1457EF23</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>1050</real>
+			<real>1065</real>
 			<key>ypos</key>
-			<real>805</real>
+			<real>725</real>
+		</dict>
+		<key>FB5D42B1-CF89-4DD7-B57A-1995FE9A1BF9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>paste</string>
+			<key>xpos</key>
+			<real>485</real>
+			<key>ypos</key>
+			<real>205</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
