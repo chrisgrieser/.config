@@ -137,11 +137,11 @@ nmap ,ut :diffview
 
 " Stage & Commit
 exmap gitAdd obcommand obsidian-git:stage-current-file
-nmap ,ga
-nmap ,gA
+nmap ,ga :gitAdd
+nmap ,gA :gitAdd
 
-exmap gitcommit obcommand obsidian-git:commit-staged-specified-message
-nmap ,gc
+exmap gitCommit obcommand obsidian-git:commit-staged-specified-message
+nmap ,gc :gitCommit
 
 """"""""""""""""""""""
 " Editing
