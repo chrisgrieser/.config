@@ -84,7 +84,6 @@ end
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
 function M.autoTile(winSrc)
-	if AutoTilingInProgress then return end -- prevent concurrent runs
 
 	local wins = {}
 	if type(winSrc) == "string" then
@@ -104,7 +103,6 @@ function M.autoTile(winSrc)
 		function(win) return win:isMaximizable() and win:isStandard() and not (win:title():find("Info$")) end
 	)
 	if not wins then return end
-	AutoTilingInProgress = true
 
 	if #wins > 1 then M.bringAllWinsToFront() end
 
@@ -144,7 +142,6 @@ function M.autoTile(winSrc)
 		M.moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.66, y = 0 })
 		if #wins == 6 then M.moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 }) end
 	end
-	u.runWithDelays(0.1, function() AutoTilingInProgress = false end)
 end
 
 --------------------------------------------------------------------------------

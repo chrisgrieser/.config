@@ -49,6 +49,7 @@ function run() {
 			const filename = pathInRepo.slice(pathInRepo.lastIndexOf("/") + 1);
 
 			const trackingInfo = file.slice(0, 3);
+			const isDeleted = trackingInfo.includes("D");
 			const trackingDisplay = trackingInfo
 				.replaceAll(" M ", "🟡") // modified
 				.replaceAll(" D ", "❌") // deleted
@@ -65,6 +66,13 @@ function run() {
 				subtitle: parentFolder,
 				match: alfredMatcher(pathInRepo),
 				arg: pathInRepo,
+				mods: {
+					alt: {
+						arg: `${repoPath}/${pathInRepo}`,
+						subtitle: isDeleted ? "🚫 Cannot reveal in Finder as file is deleted." : "⌥: Reveal in Finder",
+						valid: isDeleted,
+					},
+				},
 				variables: {
 					doStage: trackingInfo.charAt(1) !== " ",
 					actOnWholeFile: !trackingInfo.includes("M"),

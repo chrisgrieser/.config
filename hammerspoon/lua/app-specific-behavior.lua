@@ -68,30 +68,26 @@ end)
 Wf_finder = wf.new("Finder")
 	:setOverrideFilter({
 		rejectTitles = {
-			"^Quick Look$",
-			"^qlmanage$",
 			"^Move$",
 			"^Copy$",
 			"^Bin$",
 			"^Delete$",
 			"^Finder Settings$",
 			" Info$", -- Info window *end* with "Info"
-			"^$", -- Desktop, which has no window title
 			"^Alfred$", -- Alfred Compatibility Mode
 		},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
 	:subscribe(wf.windowCreated, function(win)
-		AutoTilingInProgress = true
 		if not (win:isMaximizable() and win:isStandard()) then return end
+
+		-- prioritizing autotiling from activation since more reliable
+		if AutoTilingInProgress then return end
 		wu.autoTile(Wf_finder)
-		u.runWithDelays(0.1, function() AutoTilingInProgress = false end)
 	end)
 	:subscribe(wf.windowDestroyed, function(win)
-		-- not using maximizable as condition, since closed windows never
-		-- fulfill that condition
-		if win:isStandard() then return end
+		-- no conditions, since destroyed windows do not have those properties
 		wu.autoTile(Wf_finder)
 	end)
 
@@ -101,9 +97,9 @@ FinderAppWatcher = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
 		finder:selectMenuItem { "View", "Hide Sidebar" }
 
-		-- prioritizing autotiling from window creation since it's bit quicker
-		if AutoTilingInProgress then return end
+		AutoTilingInProgress = true
 		wu.autoTile("Finder")
+		u.runWithDelays(0.1, function() AutoTilingInProgress = false end)
 	end
 end):start()
 

@@ -261,6 +261,16 @@
 				<key>vitoclose</key>
 				<true/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>86406A0C-41BB-4C77-AC5E-354C95BD7BB2</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Reveal in Finder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</key>
 		<array>
@@ -1389,6 +1399,19 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.revealfile</string>
+			<key>uid</key>
+			<string>86406A0C-41BB-4C77-AC5E-354C95BD7BB2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -1668,7 +1691,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>note</key>
 			<string>git status (stage/unstage)</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>1185</real>
 		</dict>
@@ -1720,6 +1743,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<real>495</real>
 			<key>ypos</key>
 			<real>265</real>
+		</dict>
+		<key>86406A0C-41BB-4C77-AC5E-354C95BD7BB2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>1300</real>
 		</dict>
 		<key>90792685-336C-4947-8358-1DB95CD61C0E</key>
 		<dict>

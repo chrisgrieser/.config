@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>me.svenko.alfred.spell</string>
+	<key>category</key>
+	<string>⬇️</string>
+	<key>connections</key>
+	<dict>
+		<key>359DB859-2077-405B-912F-328494F9699A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>66580DCC-2E1A-4FD5-8351-A91F45EC8FDE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>66580DCC-2E1A-4FD5-8351-A91F45EC8FDE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>18E4C15F-8244-477A-B3A0-F8CB77F2E4B2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BC3DF666-72D3-443C-A0AC-57DA6DF5403C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>66580DCC-2E1A-4FD5-8351-A91F45EC8FDE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Svenko</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Spell Checker</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Spell checker</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>BC3DF666-72D3-443C-A0AC-57DA6DF5403C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>18E4C15F-8244-477A-B3A0-F8CB77F2E4B2</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>/usr/bin/python3 spell_checker.py "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>66580DCC-2E1A-4FD5-8351-A91F45EC8FDE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>33</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>Ü</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>359DB859-2077-405B-912F-328494F9699A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># ☑️ Spell Checker Alfred Workflow
+
+## Introduction
+
+The Spell Checker Alfred Workflow allows you to quickly check the spelling of selected text (US English). By selecting the desired text and pressing the hotkey, the workflow sends a request to the Ginger Software API to retrieve spelling corrections. The corrected text is then replaced with the original selected text.
+
+## Features
+
+- Fast spell checking for selected text (US English).
+- Customizable hotkey for triggering the spell checking process.
+
+## Usage
+
+1. Select the text you want to check the spelling for.
+2. Press the configured hotkey.
+3. The corrected text is then replaced with the original selected text.</string>
+	<key>uidata</key>
+	<dict>
+		<key>18E4C15F-8244-477A-B3A0-F8CB77F2E4B2</key>
+		<dict>
+			<key>xpos</key>
+			<real>495</real>
+			<key>ypos</key>
+			<real>255</real>
+		</dict>
+		<key>359DB859-2077-405B-912F-328494F9699A</key>
+		<dict>
+			<key>xpos</key>
+			<real>95</real>
+			<key>ypos</key>
+			<real>335</real>
+		</dict>
+		<key>66580DCC-2E1A-4FD5-8351-A91F45EC8FDE</key>
+		<dict>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>255</real>
+		</dict>
+		<key>BC3DF666-72D3-443C-A0AC-57DA6DF5403C</key>
+		<dict>
+			<key>xpos</key>
+			<real>95</real>
+			<key>ypos</key>
+			<real>200</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/svenko99/alfred-spell-checker</string>
+</dict>
+</plist>
