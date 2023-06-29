@@ -9,7 +9,7 @@ local u = require("lua.utils")
 
 -- CONFIG
 local distancePerApp = {
-	Discord = 20,
+	Discord = 15,
 	default = 35,
 }
 

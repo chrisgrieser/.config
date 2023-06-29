@@ -60,6 +60,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2C3038DA-F043-4F3E-8C18-97A96070D05F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3A5F393C-06D9-42AF-9EB4-DA50E6CCE0AE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
 		<array>
 			<dict>
@@ -150,7 +163,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F3ED8FA9-38E7-4055-829F-5A1084882C1E</string>
+				<string>EEB354AC-5D74-4C6D-8253-23001FB63C72</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -263,11 +276,34 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>86406A0C-41BB-4C77-AC5E-354C95BD7BB2</string>
+				<string>2C3038DA-F043-4F3E-8C18-97A96070D05F</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Reset</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>7808AF69-5EBD-49E1-87ED-58F14D54BBD3</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Reveal in Finder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7808AF69-5EBD-49E1-87ED-58F14D54BBD3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3A5F393C-06D9-42AF-9EB4-DA50E6CCE0AE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -500,19 +536,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F3ED8FA9-38E7-4055-829F-5A1084882C1E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EEB354AC-5D74-4C6D-8253-23001FB63C72</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1307,21 +1330,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>soundname</key>
-				<string>Tink</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>F3ED8FA9-38E7-4055-829F-5A1084882C1E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1397,15 +1405,18 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<integer>3</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.revealfile</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>86406A0C-41BB-4C77-AC5E-354C95BD7BB2</string>
+			<string>2C3038DA-F043-4F3E-8C18-97A96070D05F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>7808AF69-5EBD-49E1-87ED-58F14D54BBD3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1579,6 +1590,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>ypos</key>
 			<real>770</real>
 		</dict>
+		<key>2C3038DA-F043-4F3E-8C18-97A96070D05F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>1255</real>
+		</dict>
 		<key>36672B00-B219-4DF4-87C4-AD99B8A0F231</key>
 		<dict>
 			<key>colorindex</key>
@@ -1615,7 +1635,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>290</real>
 			<key>ypos</key>
 			<real>1185</real>
 		</dict>
@@ -1695,6 +1715,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>ypos</key>
 			<real>1185</real>
 		</dict>
+		<key>7808AF69-5EBD-49E1-87ED-58F14D54BBD3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>1310</real>
+		</dict>
 		<key>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</key>
 		<dict>
 			<key>colorindex</key>
@@ -1743,15 +1772,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<real>495</real>
 			<key>ypos</key>
 			<real>265</real>
-		</dict>
-		<key>86406A0C-41BB-4C77-AC5E-354C95BD7BB2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>220</real>
-			<key>ypos</key>
-			<real>1300</real>
 		</dict>
 		<key>90792685-336C-4947-8358-1DB95CD61C0E</key>
 		<dict>
@@ -1890,16 +1910,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>515</real>
-			<key>ypos</key>
-			<real>1185</real>
-		</dict>
-		<key>F3ED8FA9-38E7-4055-829F-5A1084882C1E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>375</real>
+			<real>435</real>
 			<key>ypos</key>
 			<real>1185</real>
 		</dict>
