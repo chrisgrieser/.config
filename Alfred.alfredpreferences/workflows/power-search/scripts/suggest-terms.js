@@ -45,7 +45,8 @@ function run(argv) {
 	const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js;
 	const query = argv[0];
 
-	if (noSuggestionRegex.test(query) || query.length < 2) return;
+	// regex ignore & ignore queries shorter than 3 characters
+	if (noSuggestionRegex.test(query) || query.length < 3) return;
 
 	// make no request below the minimum length, but show the typed query as
 	// fallback search
