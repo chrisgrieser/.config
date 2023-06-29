@@ -1,6 +1,7 @@
 local cmd = vim.cmd
 local keymap = vim.keymap.set
 local fn = vim.fn
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- Enable wrapping lines
@@ -15,16 +16,32 @@ vim.opt_local.formatoptions:remove("t")
 
 --------------------------------------------------------------------------------
 
+-- searchlink
+keymap({"n", "x"}, "<leader>k", function()
+	local query
+	if fn.mode() == "n" then
+		u.normal([["zciw]])
+	else
+		u.normal([["zc]])
+	end
+	query = fn.getreg("z")
+	local jsonResponse = fn.system(([[ddgr --num=1 --json "%s"]]):format(query))
+	local link = vim.json.decode(jsonResponse)[1].url
+	local mdlink = ("[%s](%s)"):format(query, link)
+	fn.setreg("z", mdlink)
+	u.normal([["zp]])
+end, { desc = " SearchLink (ddgr)", buffer = true })
+
 -- Open in Obsidian
-keymap("n", "<D-S-l>", function ()
+keymap("n", "<D-S-l>", function()
 	local filepath = fn.expand("%:p")
 	local isInMainVault = vim.startswith(filepath, vim.env.VAULT_PATH)
 	if not isInMainVault then
-		vim.notify("Not in Obsidian vault", vim.log.levels.WARN)	
+		vim.notify("Not in Obsidian vault", vim.log.levels.WARN)
 		return
 	end
 	-- assumes being on mac and the Obsidian-opener.app set as default app for markdown files
-	fn.system("open -a Obsidian", filepath) 
+	fn.system("open -a Obsidian", filepath)
 end, { desc = " Open in Obsidian", buffer = true })
 
 -- Build / Preview

@@ -15,10 +15,6 @@
 		"prefix": "keymap (buffer)",
 		"body": "keymap(\"n\", \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\", buffer = true })"
 	},
-	"buffer arg for keymap": {
-		"prefix": "buffer = true",
-		"body": "buffer = true"
-	},
 	"plugin spec (lazy.nvim)": {
 		"prefix": "plugin spec (lazy.nvim)",
 		"body": [
