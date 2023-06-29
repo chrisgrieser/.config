@@ -2,9 +2,8 @@
 
 // CONFIG
 ObjC.import("stdlib");
-const maxResults = parseInt($.getenv("max_results")) || 3;
+const maxResults = parseInt($.getenv("max_suggestions")) || 2;
 const minQueryLength = parseInt($.getenv("min_query_length")) || 5;
-const minLengthForFallback = parseInt($.getenv("min_length_for_fallback")) || 3;
 const noSuggestionRegex = new RegExp($.getenv("no_suggestion_regex"));
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -16,11 +15,11 @@ function makeItems(itemNames) {
 			uid: name,
 			title: name,
 			arg: name,
-			// no argument for script filter
+			// no argument for next script filter
 			mods: {
 				shift: {
 					arg: "",
-					variables: { query: name }
+					variables: { query: name },
 				},
 			},
 		};
@@ -35,21 +34,18 @@ function httpRequest(url) {
 	return requestString;
 }
 
-// Check values from previous runs this session
-const oldArg = $.NSProcessInfo.processInfo.environment.objectForKey("oldArg").js;
-const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 // Build items
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
+	// Check values from previous runs this session
+	const oldArg = $.NSProcessInfo.processInfo.environment.objectForKey("oldArg").js;
+	const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js;
 	const query = argv[0];
 
-	// don't suggest stuff when opening url or when too short
-	if (query.startsWith("http") || query.length < minLengthForFallback || noSuggestionRegex.test(query))
-		return;
+	if (noSuggestionRegex.test(query) || query.length < 2) return;
 
 	// make no request below the minimum length, but show the typed query as
 	// fallback search
@@ -80,7 +76,7 @@ function run(argv) {
 		usingGoogle ? response[1] : response.map((/** @type {{ phrase: string; }} */ t) => t.phrase)
 	)
 		.filter((/** @type {string} */ result) => result !== query)
-		.slice(0, maxResults - 1);
+		.slice(0, maxResults);
 
 	// Return final JSON
 	return JSON.stringify({
