@@ -16,10 +16,7 @@ declare const Application: {
 		pathTo(what: "home folder"): string;
 		read(path: string): string;
 		setTheClipboardTo(str: string): void;
-		displayNotification(
-			textToShow: string,
-			options: { withTitle: string; subtitle: string; }
-		): void;
+		displayNotification(textToShow: string, options: { withTitle: string; subtitle: string }): void;
 		displayDialog(
 			textToShow: string,
 			options: {
@@ -63,10 +60,12 @@ declare const Application: {
 		setConfiguration(envVar: string, options: Object); // Alfred
 		createNote(options: { text: string; path?: string }): void; // Sidenotes
 
+		// System Events
+		keystroke: (key: string, { using: any }?) => void;
 		// rome-ignore lint/suspicious/noExplicitAny: TODO
-		applicationProcesses: any; // System Events
+		applicationProcesses: any;
 		// rome-ignore lint/suspicious/noExplicitAny: TODO
-		processes: any; // System Events
+		processes: any;
 	};
 };
 
