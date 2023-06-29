@@ -78,7 +78,7 @@ function run() {
 					},
 					cmd: {
 						subtitle: "⌘: Discard Change to File",
-						variables: { mode: "reset" },
+						variables: { mode: "discard" },
 					},
 				},
 				variables: { mode: mode },
