@@ -17,7 +17,6 @@ INFO_WINDOW=0
 [[ "$BROWSER_APP" == "Vivaldi" ]] && browser="Chrome" || browser="$BROWSER_APP"
 PWA_FOLDER="$HOME/Applications/$browser Apps.localized"
 
-
 #───────────────────────────────────────────────────────────────────────────────
 
 case $APP in

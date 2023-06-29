@@ -15,7 +15,7 @@ DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 xcode-select --install # install core CLIs like git for homebrew
 
 # Install Essential Apps
-brew install --no-quarantine alfred hammerspoon neovim wezterm karabiner-elements vivaldi
+brew install --no-quarantine alfred hammerspoon neovim wezterm karabiner-elements
 brew install --no-quarantine --cask neovide
 
 # important settings
@@ -76,17 +76,15 @@ done
 # zsh (ZDOTDIR set in .zshenv for the remaining config)
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
-# searchlink
-ln -sf "$DOTFILE_FOLDER/searchlink/.searchlink" ~
-
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
 [[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"
 ln -sf "$DOTFILE_FOLDER/espanso/" "$ESPANSO_DIR"
 
 # Browser PWAs
-BROWSER="Chrome" # Chrome = Vivaldi, since Vivaldi does not rename the dir
-[[ -e ~"/Applications/$BROWSER Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER Apps.localized"
-ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER Apps.localized/" ~"/Applications/$BROWSER Apps.localized"
+# INFO "Vivaldi Apps" is internally still named "Chrome Apps"
+[[ "$BROWSER_APP" == "Vivaldi" ]] && browser="Chrome" || browser="$BROWSER_APP"
+[[ -e ~"/Applications/$browser Apps.localized" ]] && rm -rf ~"/Applications/$browser Apps.localized"
+ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$browser Apps.localized/" ~"/Applications/$browser Apps.localized"
 
 #───────────────────────────────────────────────────────────────────────────────
