@@ -212,6 +212,7 @@ rules:
             bundle_identifiers:
               - ^com\.tinyspeck\.slackmacgap$
               - ^com\.microsoft\.Word$
+              - ^com\.apptorium\.SideNotes-paddle$
         to:
           - key_code: hyphen
       # ß to [
@@ -223,6 +224,7 @@ rules:
             bundle_identifiers:
               - ^com\.tinyspeck\.slackmacgap$
               - ^com\.microsoft\.Word$
+              - ^com\.apptorium\.SideNotes-paddle$
         to:
           - { select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ } }
           - { key_code: vk_none, hold_down_milliseconds: 20 }
