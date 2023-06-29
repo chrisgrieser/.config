@@ -3433,7 +3433,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>Advanced Users: Do not display any falback or suggestions, when this regex matches the query. (The default value excludes sugestions when inserting a link or a short keyword.)</string>
+			<string>Advanced Users: Do not display any fallback or suggestions, when this regex matches the query. (The default value excludes sugestions when inserting a link or a short keyword.)</string>
 			<key>label</key>
 			<string>No Suggestion Regex</string>
 			<key>type</key>
