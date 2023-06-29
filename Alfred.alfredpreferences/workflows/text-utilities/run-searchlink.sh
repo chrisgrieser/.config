@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
-# https://www.thoughtasylum.com/alfred/alfred_slink_for_searchlink/
+if ! command -v ddgr &>/dev/null; then echo -n "ddgr not installed." && return 1; fi
+
 query="$*"
-link="$(automator -r -i "$query" ~/Library/Services/SearchLink.workflow | sed -n 2p | cut -d\" -f2)"
-echo -n "$link"
+link=$(ddgr --num=1 --noprompt --expand --nocolor "$query" | sed -n '2p' | xargs)
+mdlink="[$query]($link)"
+echo -n "$mdlink"

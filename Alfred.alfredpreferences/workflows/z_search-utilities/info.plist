@@ -1195,6 +1195,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>D3033E82-B345-4E25-A3DB-AB9FF6BE5472</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Search for term</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>E4C21B43-82B9-4CDA-A2A2-73B4DA88B14A</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
@@ -1487,6 +1497,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>externaltriggerid</key>
+				<string>inline-search-loop</string>
+				<key>passinputasargument</key>
+				<false/>
+				<key>passvariables</key>
+				<false/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>D3033E82-B345-4E25-A3DB-AB9FF6BE5472</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1710,6 +1739,11 @@
 				<integer>8</integer>
 				<key>withspace</key>
 				<false/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>inline-search-loop</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -3072,6 +3106,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>735</real>
 			<key>ypos</key>
 			<real>535</real>
+		</dict>
+		<key>D3033E82-B345-4E25-A3DB-AB9FF6BE5472</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>925</real>
+			<key>ypos</key>
+			<real>170</real>
 		</dict>
 		<key>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</key>
 		<dict>

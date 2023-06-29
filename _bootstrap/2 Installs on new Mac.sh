@@ -12,7 +12,7 @@ open '/System/Applications/App Store.app'
 # shellcheck disable=SC2034
 brew bundle install --no-quarantine --verbose --no-lock --file "$HOME/Desktop/Brewfile"
 
-# Uninstall unneeded Mac Default apps
+# Uninstall unneeded macOS default apps
 open -a "Appcleaner" \
 	"/Applications/Numbers.app" \
 	"/Applications/Pages.app/" \
@@ -24,16 +24,6 @@ open -a "Appcleaner" \
 # shellcheck disable=SC2002
 cat ~'/Desktop/NPMfile' | xargs npm install --location=global --force
 npm list --location=global
-
-# Gems & Pip
-sudo gem install anystyle-cli
-pip3 install pdfannots
-
-# Searchlink
-curl -sL "https://github.com/ttscoff/searchlink/releases/latest/download/searchlink.zip" >searchlink.zip
-unzip searchlink.zip
-mv "./SearchLink Services/SearchLink.workflow" "$HOME/Library/Services/SearchLink.workflow"
-rm -r "./Searchlink Services" searchlink.zip
 
 #───────────────────────────────────────────────────────────────────────────────
 # SETTINGS
