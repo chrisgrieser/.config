@@ -83,8 +83,10 @@ Wf_finder = wf.new("Finder")
 		hasTitlebar = true,
 	})
 	:subscribe(wf.windowCreated, function(win)
+		AutoTilingInProgress = true
 		if not (win:isMaximizable() and win:isStandard()) then return end
 		wu.autoTile(Wf_finder)
+		u.runWithDelays(0.1, function() AutoTilingInProgress = false end)
 	end)
 	:subscribe(wf.windowDestroyed, function(win)
 		-- not using maximizable as condition, since closed windows never
@@ -93,14 +95,15 @@ Wf_finder = wf.new("Finder")
 		wu.autoTile(Wf_finder)
 	end)
 
--- also triggered via app-watcher, since windows created in the bg do not always
--- trigger window filters
+-- also triggered via app-watcher, since windows created in the background do
+-- not always trigger window filters
 FinderAppWatcher = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
-		-- delay to prioritize window creation triggered auto-tiling since it's
-		-- more reliably picking up the correct number of windows
-		u.runWithDelays(0.1, function() wu.autoTile("Finder") end)
 		finder:selectMenuItem { "View", "Hide Sidebar" }
+
+		-- prioritizing autotiling from window creation since it's bit quicker
+		if AutoTilingInProgress then return end
+		wu.autoTile("Finder")
 	end
 end):start()
 
