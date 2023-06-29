@@ -141,13 +141,15 @@ function run(argv) {
 		if (!doi) return "DOI invalid";
 		const doiURL = "https://doi.org/" + doi[0];
 		bibtexEntry = app.doShellScript(`curl -sLH "Accept: application/x-bibtex" "${doiURL}"`); // https://citation.crosscite.org/docs.html
-		if (!bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("doi not found")) return "DOI not found";
+		if (!bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("doi not found"))
+			return "DOI not found";
 
 		// ISBN
 	} else if (isISBN) {
 		const isbn = input;
 		bibtexEntry = app.doShellScript(`curl -sHL "https://www.ebook.de/de/tools/isbn2bibtex?isbn=${isbn}"`);
-		if (!bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("Not found")) return "ISBN not found";
+		if (!bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("Not found"))
+			return "ISBN not found";
 
 		// parse via anystyle
 	} else if (mode === "parse") {
@@ -161,28 +163,41 @@ function run(argv) {
 	//───────────────────────────────────────────────────────────────────────────
 
 	// INSERT CONTENT TO APPEND
-	// cleaning
-	const keysToDelete = ["ean", "month", "issn", "language", "copyright", "pagetotal", "address", "abstract", "series"];
-	const keysToDeleteRegex = new RegExp("\t(" + keysToDelete.join("|") + ").*[\n\r]", "g");
 
+	// cleaning
 	bibtexEntry = bibtexEntry
-		.replace(/^ {2}/gm, "\t") // indentation
+		.replace(/^ {2}/gm, "\t") // tab indentation
 		.replace(/^\s*\w+ =/gm, (/** @type {string} */ field) => field.toLowerCase()) // lowercase all keys
-		.replace(keysToDeleteRegex, "")
 		.replace(/(\tpublisher.*?) ?(?:gmbh|ltd|publications|llc)(}*,)/im, "$1$2") // publisher garbage
 		.replace("\tdate =", "\tyear =") // consistently "year"
-		.replace("%2F", "/") // fix for URL key in some DOIs
+		.replaceAll("%2F", "/") // fix for URL key in some DOIs
 		.replace(/\tyear = \{?(\d{4}).*\}?/g, "\tyear = $1,") // clean year key
-		.replace(/^\turl.*(ebook|doi).*[\n\r]/m, "") // doi url redundant, ebook url are basically ads
-		.replace(/amp\$\\mathsemicolon\$/, ""); // invalid bibtex
+		.replace(/amp\$\\mathsemicolon\$/g, "") // invalid bibtex
+		.replace(/(!?^)\}$/, "},") // add trailing comma to all property
 
+	// convert to array + remove first/last line (for correct key sorting)
 	let newEntryProperties = bibtexEntry.split(/[\n\r]/);
-	newEntryProperties = [...new Set(newEntryProperties)]; // remove duplicate keys (e.g., occurring through date and year keys)
+	const firstLine = newEntryProperties.shift();
+	newEntryProperties.pop();
+
+	// remove trash keys & sort keys alphabethically
+	// rome-ignore format: more compact
+	const keysToDelete = [ "ean", "month", "issn", "language", "copyright", "pagetotal", "address", "abstract", "series" ];
+	newEntryProperties = [...new Set(newEntryProperties)]
+		.filter((prop) => {
+			const key = prop.split("=")[0].trim();
+			if (key === "url" && (prop.includes("doi") || prop.includes("ebook"))) return false;
+			return !keysToDelete.includes(key);
+		})
+		.sort();
+	// remove comma for last element
+	newEntryProperties[newEntryProperties.length - 1] += newEntryProperties.at(-1).slice(0, -2)
 
 	// Generate citekey
 	newCitekey = generateCitekey(newEntryProperties);
 	newCitekey = ensureUniqueCitekey(newCitekey, libraryPath);
-	newEntryProperties[0] = newEntryProperties[0].split("{")[0] + "{" + newCitekey + ",";
+	newEntryProperties.unshift(firstLine.split("{")[0] + "{" + newCitekey + ",");
+	newEntryProperties.push("}");
 
 	// Create keywords field
 	// (only if there is no keyword property already – some DOI providers do add

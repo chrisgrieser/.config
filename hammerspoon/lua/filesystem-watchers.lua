@@ -52,7 +52,7 @@ DownloadFolderWatcher = pw(
 local scanFolder = home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
 ScanFolderWatcher = pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. env.fileHub .. "'")
-	print("➡️ Scan moved to File Hub.")
+	u.notify("📸 Scan synced to File Hub")
 end):start()
 
 -- Downloads Folder
@@ -104,7 +104,6 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 
 		-- bib: save to library
 		elseif ext == "bib" then
-			print("👽 beep")
 			local libraryPath = env.dotfilesFolder .. "/pandoc/main-bibliography.bib"
 			local bibEntry = u.readFile(filep)
 			if not bibEntry then return end
