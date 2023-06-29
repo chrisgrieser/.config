@@ -86,7 +86,7 @@ Wf_finder = wf.new("Finder")
 		if AutoTilingInProgress then return end
 		wu.autoTile(Wf_finder)
 	end)
-	:subscribe(wf.windowDestroyed, function(win)
+	:subscribe(wf.windowDestroyed, function()
 		-- no conditions, since destroyed windows do not have those properties
 		wu.autoTile(Wf_finder)
 	end)
@@ -135,15 +135,14 @@ HighlightsAppWatcher = aw.new(function(appName, eventType, highlights)
 	highlights:selectMenuItem { "Tools", "Highlight" }
 	highlights:selectMenuItem { "Tools", "Color", "Yellow" }
 	highlights:selectMenuItem { "View", "Hide Toolbar" }
-
-	wu.moveResize(highlights:mainWindow(), wu.pseudoMax)
 end):start()
 
--- PREVIEW: pseudomaximize
-PreviewAppWatcher = aw.new(function(appName, eventType, preview)
-	if not (eventType == aw.launched and appName == "Preview") then return end
-	wu.moveResize(preview:mainWindow(), wu.pseudoMax)
-end):start()
+-- window filter, so any new window created and not only on app on launch
+-- becomes pseudo-maximized
+Wf_pdfReader = wf.new({"Preview", "Highlights", "PDF Expert"})
+	:subscribe(wf.windowCreated, function(newWin)
+		wu.moveResize(newWin, wu.pseudoMax)
+	end)
 
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
