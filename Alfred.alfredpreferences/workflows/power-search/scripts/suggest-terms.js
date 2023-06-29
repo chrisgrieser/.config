@@ -53,6 +53,7 @@ function run(argv) {
 		return JSON.stringify({
 			rerun: 0.1,
 			skipknowledge: true,
+			variables: { oldResults: oldResults, oldArg: query },
 			items: makeItems([query]),
 		});
 	}
