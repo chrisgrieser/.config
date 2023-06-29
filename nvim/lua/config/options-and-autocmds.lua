@@ -205,6 +205,7 @@ autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
 			and expand("%") ~= ""
 			and (bo.buftype == "" or bo.buftype == "acwrite")
 			and bo.filetype ~= "gitcommit"
+			and opt_local.write
 		then
 			cmd.update(filepath)
 		end
