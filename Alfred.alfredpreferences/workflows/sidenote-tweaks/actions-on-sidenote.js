@@ -30,6 +30,7 @@ const maxNameLen = 50;
 /** @param {string} noteId */
 function getNoteObj(noteId) {
 	const sidenotes = Application("SideNotes");
+	// @ts-ignore
 	const folders = sidenotes.folders;
 	for (let i = 0; i < folders.length; i++) {
 		const notesInFolder = folders[i].notes;
@@ -73,6 +74,7 @@ function run(argv) {
 
 	// determine note
 	const id = $.getenv("note_id");
+	// @ts-ignore
 	const noteObj = id === "current" ? sidenotes.currentNote() : getNoteObj(id);
 
 	// get note properties

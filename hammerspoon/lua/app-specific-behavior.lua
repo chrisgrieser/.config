@@ -70,7 +70,6 @@ Wf_finder = wf.new("Finder")
 		rejectTitles = {
 			"^Move$",
 			"^Copy$",
-			"^Bin$",
 			"^Delete$",
 			"^Finder Settings$",
 			" Info$", -- Info window *end* with "Info"
