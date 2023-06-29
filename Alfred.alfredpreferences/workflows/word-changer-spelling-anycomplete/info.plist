@@ -135,7 +135,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Spelling &amp; Word Change &amp; Anycomplete</string>
+	<string>Spelling &amp; Synonyms</string>
 	<key>objects</key>
 	<array>
 		<dict>
