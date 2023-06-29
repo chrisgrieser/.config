@@ -80,10 +80,9 @@ Wf_finder = wf.new("Finder")
 	})
 	:subscribe(wf.windowCreated, function(win)
 		if not (win:isMaximizable() and win:isStandard()) then return end
-
-		-- prioritizing autotiling from activation since more reliable
-		if AutoTilingInProgress then return end
+		AutoTilingInProgress = true
 		wu.autoTile(Wf_finder)
+		u.runWithDelays(0.1, function() AutoTilingInProgress = false end)
 	end)
 	:subscribe(wf.windowDestroyed, function()
 		-- no conditions, since destroyed windows do not have those properties
@@ -96,9 +95,9 @@ FinderAppWatcher = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
 		finder:selectMenuItem { "View", "Hide Sidebar" }
 
-		AutoTilingInProgress = true
+		-- prioritizing autotiling from windowfilter since more reliable
+		if AutoTilingInProgress then return end
 		wu.autoTile("Finder")
-		u.runWithDelays(0.1, function() AutoTilingInProgress = false end)
 	end
 end):start()
 

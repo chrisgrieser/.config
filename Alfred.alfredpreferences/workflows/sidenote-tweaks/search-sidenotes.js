@@ -74,7 +74,7 @@ function run(argv) {
 			if (urls) {
 				icon += "🔗";
 				const isLinkOnlyNote = (item.title + secondLine).includes(urls[0]);
-				if (isLinkOnlyNote) urlSubtitle += "🗑🔗 Delete & Open ";
+				if (isLinkOnlyNote) urlSubtitle += "🗑🔗 Archive & Open ";
 				else urlSubtitle += "🔗 Open ";
 				urlSubtitle += urls[0];
 			} else {

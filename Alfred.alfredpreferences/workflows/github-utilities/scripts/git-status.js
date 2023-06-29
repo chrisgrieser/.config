@@ -61,6 +61,11 @@ function run() {
 				.replaceAll("A  ", "🔼❇️ ") // staged new file
 				.replaceAll("R  ", "🔼✏️ "); // staged renamed
 
+			let mode;
+			if ([" M ", " D ", "?? ", "RM ", "MM "].includes(trackingInfo)) mode = "stage";
+			else if (["M  "].includes(trackingInfo)) mode = "unstage change";
+			else if (["A  ", "R  ", "D  "].includes(trackingInfo)) mode = "unstage file";
+
 			return {
 				title: `${trackingDisplay}  ${filename}`,
 				subtitle: parentFolder,
@@ -68,15 +73,16 @@ function run() {
 				arg: pathInRepo,
 				mods: {
 					alt: {
-						arg: `${repoPath}/${pathInRepo}`,
 						subtitle: isDeleted ? "🚫 Cannot reveal in Finder as file is deleted." : "⌥: Reveal in Finder",
 						valid: isDeleted,
+						variables: { mode: "reveal" },
+					},
+					cmd: {
+						subtitle: "⌘: Discard Change to File",
+						variables: { mode: "reset" },
 					},
 				},
-				variables: {
-					doStage: trackingInfo.charAt(1) !== " ",
-					actOnWholeFile: !trackingInfo.includes("M"),
-				},
+				variables: { mode: mode },
 				uid: pathInRepo, // remember order
 			};
 		});

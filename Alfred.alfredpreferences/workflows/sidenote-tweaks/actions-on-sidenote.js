@@ -49,14 +49,19 @@ function closeSideNotes() {
 }
 
 /**
- * Delete Note, but keep copy in trash instead of irreversibly removing it
+ * Delete Note, but keep copy in archive folder instead of irreversibly removing it
  * @param {{safeTitle: any;text: () => string;delete: () => void;}} noteObj
  * @param {string} safeTitle
  */
-function deleteSideNote(noteObj, safeTitle) {
-	const trashNotePath = `${app.pathTo("home folder")}/.Trash/${safeTitle}.md`;
-	writeToFile(trashNotePath, noteObj.text());
+function archiveNote(noteObj, safeTitle) {
+	const content = noteObj.text();
 	noteObj.delete();
+
+	// empty notes do not need to be archived
+	if (!content) return; 
+	const archiveLocation = $.getenv("archive_location").replace(/^~/, app.pathTo("home folder"));
+	const archivePath = `${archiveLocation}/${safeTitle}.md`;
+	writeToFile(archivePath, content);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -67,7 +72,7 @@ function run(argv) {
 	const sidenotes = Application("SideNotes");
 
 	// determine actions
-	const doDelete = argv[0].includes("delete");
+	const doArchive = argv[0].includes("archive");
 	const doOpenUrl = argv[0].includes("openurl");
 	const doCopy = argv[0].includes("copy");
 	const doExport = argv[0].includes("export");
@@ -95,10 +100,10 @@ function run(argv) {
 		// dynamically decide whether to delete note
 		const secondLine = details.split("\n")[0].trim();
 		const isLinkOnlyNote = [title, secondLine].includes(urls[0]);
-		if (isLinkOnlyNote) deleteSideNote(noteObj, safeTitle);
+		if (isLinkOnlyNote) archiveNote(noteObj, safeTitle);
 	}
 
-	if (doDelete) deleteSideNote(noteObj, safeTitle);
+	if (doArchive) archiveNote(noteObj, safeTitle);
 
 	if (doCopy) app.setTheClipboardTo(content);
 
@@ -115,10 +120,10 @@ function run(argv) {
 	if (doCopy && id === "current") closeSideNotes();
 
 	// returns are used for the notification
-	if (doDelete && doOpenUrl) return "🔗 Opened & Deleted";
-	else if (doCopy && doDelete) return "✅ Copied & Deleted";
+	if (doArchive && doOpenUrl) return "🔗 Opened & Archived";
+	else if (doCopy && doArchive) return "✅ Copied & Archived";
 	else if (doCopy) return "✅ Copied";
 	else if (doExport) return "✅ Exported";
-	else if (doDelete) return "🗑 Note Deleted";
+	else if (doArchive) return "🗑 Note archived";
 	return "";
 }

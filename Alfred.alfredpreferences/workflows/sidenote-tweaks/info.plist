@@ -116,7 +116,7 @@
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: Delete Note</string>
+				<string>⌃: Archive Note</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -555,7 +555,7 @@
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>export delete</string>
+				<string>export archive</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -592,7 +592,7 @@
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>delete</string>
+				<string>archive</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -737,7 +737,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>delete</string>
+				<string>archive</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -761,7 +761,7 @@ sketchybar --trigger update-sidenotes-count</string>
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>copy delete</string>
+				<string>copy archive</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -1278,7 +1278,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>export + delete current</string>
+			<string>export + archive current</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1309,7 +1309,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>1045</real>
+			<real>1050</real>
 		</dict>
 		<key>16C5F45A-DCED-4A89-B5C9-B04DE9261021</key>
 		<dict>
@@ -1389,7 +1389,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>set current note, pass actions</string>
 			<key>xpos</key>
-			<real>330</real>
+			<real>325</real>
 			<key>ypos</key>
 			<real>340</real>
 		</dict>
@@ -1482,7 +1482,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>delete current</string>
+			<string>archive current</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1493,7 +1493,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>pass "delete"</string>
+			<string>pass "archive"</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
@@ -1533,9 +1533,9 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>note</key>
 			<string>get Browser URL</string>
 			<key>xpos</key>
-			<real>365</real>
+			<real>360</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>1000</real>
 		</dict>
 		<key>E57A7B6A-5A92-4CC4-8500-F2C258FCAB66</key>
 		<dict>
@@ -1553,7 +1553,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>copy + delete current</string>
+			<string>copy + archive current</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1619,22 +1619,43 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/</string>
+				<string>~/Desktop</string>
+				<key>filtermode</key>
+				<integer>1</integer>
 				<key>placeholder</key>
 				<string>~/Desktop</string>
 				<key>required</key>
-				<true/>
-				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>destination for exports</string>
+			<string>Export Destination</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>filepicker</string>
 			<key>variable</key>
 			<string>export_folder</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string>~/Documents/SideNotes</string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Archive Location</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>archive_location</string>
 		</dict>
 	</array>
 	<key>version</key>
