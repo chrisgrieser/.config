@@ -68,6 +68,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C70F2449-39C3-4A33-B932-76701C98D588</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy path of sound file</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>1C142833-437A-43E8-82C9-88D1217CBDB9</key>
 		<array>
@@ -139,6 +149,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>498C4B4D-70F1-475C-9A07-0FF4539E1971</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C70F2449-39C3-4A33-B932-76701C98D588</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AB2F5986-5780-4ECC-8C49-D8419A5725C2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1004,6 +1027,14 @@ fi</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>C70F2449-39C3-4A33-B932-76701C98D588</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -1178,6 +1209,15 @@ fi</string>
 			<real>185</real>
 			<key>ypos</key>
 			<real>345</real>
+		</dict>
+		<key>C70F2449-39C3-4A33-B932-76701C98D588</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>130</real>
+			<key>ypos</key>
+			<real>655</real>
 		</dict>
 		<key>C74E8D1D-FCE2-4350-A77D-526F9FBEFA4D</key>
 		<dict>

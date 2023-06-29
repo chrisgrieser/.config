@@ -2,11 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>min_length_for_fallback</key>
-	<string>4</string>
 	<key>min_query_length</key>
-	<string>7</string>
+	<string>6</string>
 	<key>no_suggestion_regex</key>
-	<string>^\w{1,2} .*$|\w{3} .{0,5}$</string>
+	<string>^\w{1,2} .*$|^\w{3} .{0,5}$|^http</string>
 </dict>
 </plist>
