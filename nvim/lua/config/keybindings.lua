@@ -539,8 +539,6 @@ keymap("", "<D-S-l>", function()
 		return
 	end
 	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
-	-- stylua: ignore
-	-- fn.system("if ! pgrep -xq 'Alfred Preferences'; then open -a 'Alfred Preferences' && sleep 0.2 ; fi")
 	local shellCmd =
 		([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(workflowId)
 	fn.system(shellCmd)
