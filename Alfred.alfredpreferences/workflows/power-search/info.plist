@@ -12,21 +12,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -42,11 +32,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -55,21 +55,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -85,11 +75,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -98,21 +98,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -128,11 +118,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -141,21 +141,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -171,11 +161,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -210,21 +210,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -240,11 +230,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -266,21 +266,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -296,11 +286,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -309,21 +309,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -339,11 +329,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -352,21 +352,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -382,11 +372,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -395,21 +395,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -425,11 +415,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -438,21 +438,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -468,11 +458,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -519,21 +519,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -549,11 +539,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -575,21 +575,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -605,11 +595,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -618,21 +618,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -648,11 +638,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -661,21 +661,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -691,11 +681,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -704,21 +704,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -734,11 +724,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -747,21 +747,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -777,11 +767,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -790,21 +790,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -820,11 +810,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -833,21 +833,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -863,11 +853,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -876,21 +876,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -906,11 +896,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -932,21 +932,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -962,11 +952,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -975,21 +975,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1005,11 +995,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1018,21 +1018,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1048,11 +1038,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1074,21 +1074,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1104,11 +1094,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1130,21 +1130,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1160,11 +1150,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1173,21 +1173,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1203,11 +1193,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1216,21 +1216,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1246,19 +1236,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
 				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -1267,6 +1244,19 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>E4C21B43-82B9-4CDA-A2A2-73B4DA88B14A</string>
@@ -1277,26 +1267,26 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>F5BF085E-4215-453C-88B5-95FC531F05D7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Ducky Search</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy First Link</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1312,11 +1302,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1488,27 +1488,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://duckduckgo.com/?q={query}+!ducky</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1656,27 +1635,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1722,6 +1680,27 @@
 			<string>0444355F-1F8A-4EE4-BC8D-550FA956FEBC</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>"{query}"</string>
+				<key>title</key>
+				<string>⏳ Searching…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1775,6 +1754,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/copy-first-link.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2AB60160-9818-4A2B-AC75-2414F41ECFDC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1824,61 +1826,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>^http</string>
-						<key>outputlabel</key>
-						<string>is URL</string>
-						<key>uid</key>
-						<string>7D3AA951-85FC-4910-9148-06BA2755DFCD</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>is query</string>
-				<key>hideelse</key>
+				<key>lastpathcomponent</key>
 				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>410EED22-6805-4FDD-A6C3-436A00FE2CFB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{var:search_site}{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>1F2EBCDF-8FB8-447C-98D1-CDFF4628F397</string>
+			<string>F6591673-575D-4105-B38F-59AD1457EF23</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2245,21 +2207,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>text</key>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
 				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>F6591673-575D-4105-B38F-59AD1457EF23</string>
+			<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2413,46 +2375,63 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>^http</string>
+						<key>outputlabel</key>
+						<string>is URL</string>
+						<key>uid</key>
+						<string>7D3AA951-85FC-4910-9148-06BA2755DFCD</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>is query</string>
+				<key>hideelse</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>"{query}"</string>
-				<key>title</key>
-				<string>⏳ Searching…</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+			<string>410EED22-6805-4FDD-A6C3-436A00FE2CFB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>browser</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/copy-first-link.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{var:search_site}{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>2AB60160-9818-4A2B-AC75-2414F41ECFDC</string>
+			<string>1F2EBCDF-8FB8-447C-98D1-CDFF4628F397</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2600,6 +2579,27 @@
 			<string>AA0CE692-AA84-4D63-8F20-7DAB91C14FA6</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://duckduckgo.com/?q={query}+!ducky</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3060,10 +3060,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>search for term</string>
 			<key>xpos</key>
-			<real>890</real>
+			<real>860</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>840</real>
 		</dict>
 		<key>2016F51A-B193-41E1-B959-BD316E2086FB</key>
 		<dict>
@@ -3077,14 +3079,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>720</real>
+			<real>655</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>440</real>
 		</dict>
 		<key>25810527-3725-4BAA-91DA-7B4E6FCCCBB7</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>8</integer>
 			<key>note</key>
 			<string>Add link to selection</string>
 			<key>xpos</key>
@@ -3106,9 +3108,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>searches for first link &amp; copies it</string>
 			<key>xpos</key>
-			<real>885</real>
+			<real>860</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>440</real>
 		</dict>
 		<key>2DFB0296-2869-409D-B8A9-C746D5234521</key>
 		<dict>
@@ -3157,7 +3159,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>3F875B8F-22A9-4711-914D-C906CAC4F290</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>340</real>
 			<key>ypos</key>
@@ -3168,9 +3170,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>795</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>800</real>
 		</dict>
 		<key>42DF62FE-1AE2-47B2-A1B4-7B65AAE140E1</key>
 		<dict>
@@ -3182,7 +3184,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>47FB3A9E-27F5-43FE-9F8D-DA7D444CEAA1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
@@ -3221,9 +3223,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>890</real>
+			<real>860</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>710</real>
 		</dict>
 		<key>9E3C1F70-A0C6-4B35-8E2F-8855F7415690</key>
 		<dict>
@@ -3242,7 +3244,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>B50A8885-7A47-47E3-A71D-B1D80C5CD132</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>11</integer>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
@@ -3292,9 +3294,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>665</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>810</real>
 		</dict>
 		<key>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</key>
 		<dict>
@@ -3303,9 +3305,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>I'm feeling lucky</string>
 			<key>xpos</key>
-			<real>720</real>
+			<real>665</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>965</real>
 		</dict>
 		<key>E2663B7F-3850-4F0C-A841-4B610205EB3A</key>
 		<dict>
@@ -3319,9 +3321,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>890</real>
+			<real>860</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>580</real>
 		</dict>
 		<key>E8D6AA3D-D58E-49D4-930D-4A993511807D</key>
 		<dict>
@@ -3351,9 +3353,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>inline search results</string>
 			<key>xpos</key>
-			<real>720</real>
+			<real>655</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>580</real>
 		</dict>
 		<key>F5BF085E-4215-453C-88B5-95FC531F05D7</key>
 		<dict>
@@ -3364,17 +3366,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>F6591673-575D-4105-B38F-59AD1457EF23</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
 			<key>xpos</key>
-			<real>1065</real>
+			<real>1040</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>520</real>
 		</dict>
 		<key>FB5D42B1-CF89-4DD7-B57A-1995FE9A1BF9</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>8</integer>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>

@@ -5,6 +5,6 @@
 	<key>min_query_length</key>
 	<string>6</string>
 	<key>no_suggestion_regex</key>
-	<string>^\w{1,2} .*$|^\w{3} .{0,5}$|^http</string>
+	<string>^\w{1,2} .{0,8}$|^\w{3} .{0,5}$|^\w+://</string>
 </dict>
 </plist>
