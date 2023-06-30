@@ -26,3 +26,4 @@ function browserTab() {
 const url = browserTab().url;
 frontmostApp.includeStandardAdditions = true;
 frontmostApp.openLocation("https://12ft.io/" + url);
+frontmostApp.openLocation("https://www.spaywall.com/search/" + url);

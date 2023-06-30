@@ -202,9 +202,9 @@
 				<key>keyword</key>
 				<string>paywall</string>
 				<key>subtext</key>
-				<string>Current Browser Tab</string>
+				<string>12ft.io &amp; Spaywall</string>
 				<key>text</key>
-				<string>Skip Paywall (12ft.io)</string>
+				<string>Skip Paywall of current Tab</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
