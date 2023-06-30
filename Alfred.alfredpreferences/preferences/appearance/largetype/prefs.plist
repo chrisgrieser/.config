@@ -4,6 +4,8 @@
 <dict>
 	<key>autohide</key>
 	<true/>
+	<key>font</key>
+	<string>JetBrainsMono NFM Medium</string>
 	<key>showOnMouseScreen</key>
 	<true/>
 	<key>style</key>
