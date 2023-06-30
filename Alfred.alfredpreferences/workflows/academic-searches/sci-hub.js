@@ -25,7 +25,10 @@ function browserTab() {
 	return { url: url, title: title };
 }
 
+//──────────────────────────────────────────────────────────────────────────────
+
 const url = browserTab().url;
 frontmostApp.includeStandardAdditions = true;
 const domain = $.getenv("sci_hub_domain")
 frontmostApp.openLocation(`https://sci-hub.${domain}/${url}`);
+frontmostApp.openLocation(`https://annas-archive.org/search?q=${encodeURI(url)}`);

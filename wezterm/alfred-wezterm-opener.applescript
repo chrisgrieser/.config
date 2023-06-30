@@ -11,5 +11,6 @@ on alfred_script(q)
 		end repeat
 	end tell
 
-	do shell script ("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; echo '" & q & "' | wezterm cli send-text --no-paste")
+	do shell script ("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; " &
+	"echo '" & q & "' | wezterm cli send-text --no-paste")
 end alfred_script

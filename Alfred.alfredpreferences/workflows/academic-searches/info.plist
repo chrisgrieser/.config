@@ -33,6 +33,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>237437F9-BE71-4AAD-AA03-BCD37D82DE1B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>33687FCF-858F-4613-A6B6-24920E167D9B</key>
 		<array>
@@ -135,21 +145,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>rs</string>
-				<key>subtext</key>
-				<string>Google Scholar, Scite_, Semantic Scholar, Elicit</string>
-				<key>text</key>
-				<string>Academic Searches: {query}</string>
-				<key>withspace</key>
-				<true/>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://libgen.rs/search.php?req={query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>33687FCF-858F-4613-A6B6-24920E167D9B</string>
+			<string>169FF168-1AE9-4A13-8CFC-58686EC8B546</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -180,11 +190,32 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
+				<string>rs</string>
+				<key>subtext</key>
+				<string>Google Scholar, Scite_, Semantic Scholar, Elicit</string>
+				<key>text</key>
+				<string>Academic Searches: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>33687FCF-858F-4613-A6B6-24920E167D9B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
 				<string>rs||lib</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Anna's Archive &amp; Libgen</string>
 				<key>text</key>
-				<string>Libgen: {query}</string>
+				<string>Book Search {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -207,12 +238,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://libgen.rs/search.php?req={query}</string>
+				<string>https://annas-archive.org/search?q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>169FF168-1AE9-4A13-8CFC-58686EC8B546</string>
+			<string>237437F9-BE71-4AAD-AA03-BCD37D82DE1B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -329,7 +360,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>ai</string>
+				<string>rs</string>
 				<key>subtext</key>
 				<string>ScholarCry &amp; Sci-Summary</string>
 				<key>text</key>
@@ -386,7 +417,7 @@
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>215</real>
+			<real>210</real>
 		</dict>
 		<key>169FF168-1AE9-4A13-8CFC-58686EC8B546</key>
 		<dict>
@@ -395,7 +426,16 @@
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>215</real>
+			<real>135</real>
+		</dict>
+		<key>237437F9-BE71-4AAD-AA03-BCD37D82DE1B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>610</real>
+			<key>ypos</key>
+			<real>250</real>
 		</dict>
 		<key>3020DCCA-3C79-4963-8FA6-39F112BD5EC2</key>
 		<dict>
@@ -424,7 +464,7 @@
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>195</real>
 		</dict>
 		<key>4AF8F997-AF32-4FB5-B396-C7CF35341186</key>
 		<dict>
