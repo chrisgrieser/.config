@@ -26,8 +26,8 @@ function make() {
 # utils
 alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias q='exit'
+alias f='fuck'
 alias notify="osascript -e 'display notification \"\" with title \"Terminal Process finished.\" subtitle \"\" sound name \"\"'"
-alias jq="yq --output-format=json" # no need to install `jq`
 
 # added verbosity
 alias mv='mv -v'
