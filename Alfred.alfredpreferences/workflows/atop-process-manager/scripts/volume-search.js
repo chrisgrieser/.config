@@ -17,7 +17,7 @@ const volumes = app
 		if (vol.includes("unavailable")) rerunSecs = 0.5;
 
 		const info = vol.split(/\s+/).map((value) => {
-			return value.replaceAll("unavailable", "…").replaceAll("Gi", "Gb");
+			return value.replaceAll("unavailable", "…").replaceAll("Gi", "Gb").replaceAll("Ti", "Tb");
 		});
 
 		const total = info[1];
