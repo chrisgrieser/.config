@@ -6,10 +6,10 @@ local u = require("config.utils")
 u.applyTemplateIfEmptyFile("zsh")
 
 -- hover -> man page
+-- stylua: ignore
 keymap("n", "<leader>h", function()
 	return "<cmd>tab Man " .. expand("<cword>") .. "<CR>"
 end, { desc = "Man page in new tab", buffer = true, expr = true })
-
 
 -- pipe textobj
 --stylua: ignore
@@ -28,4 +28,3 @@ keymap("n", "<leader>r", function()
 		vim.notify("Not in a sketchybar directory.", u.warn)
 	end
 end, { buffer = true, desc = " Run Shell Script" })
-
