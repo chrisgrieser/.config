@@ -1,7 +1,9 @@
 return {
 	{ -- REPL
 		"Vigemus/iron.nvim",
-		cmd = { "IronRepl" },
+		keys = {
+			{ "<leader>ti", vim.cmd.IronRepl },
+		},
 		config = function()
 			require("iron.core").setup {
 				config = {
@@ -44,6 +46,15 @@ return {
 		"rest-nvim/rest.nvim",
 		ft = "http",
 		dependencies = "nvim-lua/plenary.nvim",
+		init = function()
+			vim.keymap.set("n", "<leader>th", function()
+				vim.cmd("en" .. "ew") -- separated due to unignorable codespell error…
+				vim.api.nvim_buf_set_option(0, "filetype", "http")
+				vim.api.nvim_buf_set_option(0, "buftype", "nowrite")
+				vim.api.nvim_buf_set_name(0, "request")
+				vim.fn.system("open https://github.com/rest-nvim/rest.nvim/tree/main/tests")
+			end, { desc = "󰴚 Test HTTP request" })
+		end,
 		opts = {
 			result_split_horizontal = true,
 			encode_url = true, -- Encode URL before making request
@@ -64,17 +75,20 @@ return {
 	},
 	{ -- better embedded terminal
 		"akinsho/toggleterm.nvim",
-		cmd = { "ToggleTerm", "ToggleTermSendVisualSelection" },
 		opts = {
-			size = 12,
+			size = 10,
 			direction = "horizontal",
 			autochdir = true, -- when nvim changes pwd, will also change its pwd
 		},
-		init = function()
-			vim.keymap.set("n", "<leader>tt", vim.cmd.ToggleTerm, { desc = " ToggleTerm" })
-			-- stylua: ignore
-			vim.keymap.set("x", "<leader>tt", vim.cmd.ToggleTermSendVisualSelection, { desc = "  Run Selection in ToggleTerm" })
-		end,
+		keys = {
+			{ "<leader>tt", vim.cmd.ToggleTerm, desc = " ToggleTerm" },
+			{
+				"<leader>tt",
+				vim.cmd.ToggleTermSendVisualSelection,
+				mode = "x",
+				desc = "  Run Selection in ToggleTerm",
+			},
+		},
 	},
 	{ -- git sign gutter & hunk textobj
 		"lewis6991/gitsigns.nvim",

@@ -29,7 +29,10 @@ return {
 	{ -- AI support
 		"Bryley/neoai",
 		dependencies = "MunifTanjim/nui.nvim",
-		cmd = { "NeoAI", "NeoAIContext", "NeoAIInject", "NeoAIInjectCode", "NeoAIInjectContextCode" },
+		keys = {
+			{ "<leader>a", vim.cmd.NeoAI, desc = "󰚩 NeoAI" },
+			{ "x", "<leader>a", vim.cmd.NeoAIContext, desc = "󰚩 NeoAI Context" },
+		},
 		opts = {
 			ui = { -- percentages
 				width = 40,
@@ -44,10 +47,38 @@ return {
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
 		lazy = true, -- loaded by keymaps
+		init = function()
+			local casings = {
+				{ char = "u", arg = "upper", desc = "UPPER CASE" },
+				{ char = "l", arg = "lower", desc = "lower case" },
+				{ char = "t", arg = "title", desc = "Title case" },
+				{ char = "c", arg = "camel", desc = "camelCase" },
+				{ char = "p", arg = "pascal", desc = "PascalCase" },
+				{ char = "s", arg = "snake", desc = "snake_case" },
+				{ char = "k", arg = "dash", desc = "kebab-case" },
+				{ char = "/", arg = "path", desc = "path/case" },
+				{ char = ".", arg = "dot", desc = "dot.case" },
+				{ char = "_", arg = "constant", desc = "SCREAMING_SNAKE_CASE" },
+			}
+
+			for _, case in pairs(casings) do
+				vim.keymap.set(
+					"n",
+					"cr" .. case.char,
+					("<cmd>lua require('textcase').current_word('to_%s_case')<CR>"):format(case.arg),
+					{ desc = case.desc }
+				)
+				vim.keymap.set(
+					"n",
+					"cR" .. case.char,
+					("<cmd>lua require('textcase').lsp_rename('to_%s_case')<CR>"):format(case.arg),
+					{ desc = "󰒕 " .. case.desc }
+				)
+			end
+		end,
 	},
 	{ -- swapping of sibling nodes
 		"Wansmer/sibling-swap.nvim",
-		lazy = true, -- loaded by keymaps
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
 			use_default_keymaps = false,
@@ -57,15 +88,34 @@ return {
 			allow_interline_swaps = true,
 			interline_swaps_witout_separator = false,
 		},
+		keys = {
+			-- stylua: ignore
+			{ "ü", function() require("sibling-swap").swap_with_right() end, desc = "󰑃 Move Node Right" },
+			-- stylua: ignore
+			{ "Ü", function() require("sibling-swap").swap_with_left() end, desc = "󰑃 Move Node Left" },
+		},
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "markdown", "text", "gitcommit" },
+				callback = function()
+					-- stylua: ignore
+					vim.keymap.set("n", "ü", '"zdawel"zph', { desc = "➡️ Move Word Right", buffer = true })
+					-- stylua: ignore
+					vim.keymap.set("n", "Ü", '"zdawbh"zph', { desc = "⬅️ Move Word Left", buffer = true })
+				end,
+			})
+		end,
 	},
 	{ -- split-join lines
 		"Wansmer/treesj",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		cmd = "TSJToggle",
 		opts = {
 			use_default_keymaps = false,
 			cursor_behavior = "start", -- start|end|hold
 			max_join_length = 180,
+		},
+		keys = {
+			{ "<leader>s", vim.cmd.TSJToggle, desc = "󰗈 split/join lines" },
 		},
 	},
 	{ -- clipboard history / killring

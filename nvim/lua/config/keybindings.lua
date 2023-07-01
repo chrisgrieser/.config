@@ -111,14 +111,6 @@ keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 --------------------------------------------------------------------------------
 
--- Marks
--- stylua: ignore start
-keymap("n", "Ä", function() require("bookmarks").bookmark_toggle() end, { desc = "󰃀 Toggle Bookmark" })
-keymap("n", "ä", function() require("bookmarks").bookmark_next() end, { desc = "󰃀 Next Bookmark" })
-keymap("n", "dä", function() require("bookmarks").bookmark_clean() end, { desc = "󰃀 Clear All Bookmark" })
-keymap("n", "gä", function() require("bookmarks").bookmark_list() end, { desc = "󰃀  Bookmarks to Quickfix" })
--- stylua: ignore end
-
 -- Hunks and Changes
 keymap("n", "gh", ":Gitsigns next_hunk<CR>zv", { desc = "goto next hunk" })
 keymap("n", "gH", ":Gitsigns prev_hunk<CR>zv", { desc = "goto previous hunk" })
@@ -170,29 +162,6 @@ keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
--- delete surrounding indentation
-keymap("n", "dsi", function()
-	-- select inner indentation
-	require("various-textobjs").indentation(true, true)
-	-- when textobj is found, will switch to visual line mode
-	local notOnIndentedLine = fn.mode():find("V") == nil
-	if notOnIndentedLine then return end
-
-	-- dedent indentation
-	u.normal("<")
-
-	-- delete start- and end-border
-	local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
-	local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
-
-	-- don't delete endborder when language does not have them
-	if not (bo.filetype == "python" or bo.filetype == "yaml" or bo.filetype == "markdown") then
-		-- delete end first so line index is not shifted
-		cmd(tostring(endBorderLn) .. " delete")
-	end
-	cmd(tostring(startBorderLn) .. " delete")
-end, { desc = "Delete surrounding indentation" })
-
 -- Append to / delete from EoL
 local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
 for _, key in pairs(trailingKeys) do
@@ -200,34 +169,6 @@ for _, key in pairs(trailingKeys) do
 end
 keymap("n", "X", "mz$x`z", { desc = "Delete last character" })
 
--- Case Conversion
-local casings = {
-	{ char = "u", arg = "upper", desc = "UPPER CASE" },
-	{ char = "l", arg = "lower", desc = "lower case" },
-	{ char = "t", arg = "title", desc = "Title case" },
-	{ char = "c", arg = "camel", desc = "camelCase" },
-	{ char = "p", arg = "pascal", desc = "PascalCase" },
-	{ char = "s", arg = "snake", desc = "snake_case" },
-	{ char = "k", arg = "dash", desc = "kebab-case" },
-	{ char = "/", arg = "path", desc = "path/case" },
-	{ char = ".", arg = "dot", desc = "dot.case" },
-	{ char = "_", arg = "constant", desc = "SCREAMING_SNAKE_CASE" },
-}
-
-for _, case in pairs(casings) do
-	keymap(
-		"n",
-		"cr" .. case.char,
-		("<cmd>lua require('textcase').current_word('to_%s_case')<CR>"):format(case.arg),
-		{ desc = case.desc }
-	)
-	keymap(
-		"n",
-		"cR" .. case.char,
-		("<cmd>lua require('textcase').lsp_rename('to_%s_case')<CR>"):format(case.arg),
-		{ desc = "󰒕 " .. case.desc }
-	)
-end
 
 -- Word Switcher (fallback: switch casing)
 -- stylua: ignore
@@ -274,35 +215,12 @@ end, { desc = "󰓆 Accept Word" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-vim.keymap.set(
-	{ "n", "x" },
-	"<leader>ff",
-	function() return ":S /" .. vim.fn.expand("<cword>") .. "//g<Left><Left>" end,
-	{ desc = "󱗘 :AltSubstitute (word under cursor)", expr = true }
-)
-
 keymap("x", "<leader>f" .. "o", ":sort<CR>", { desc = "󱗘 :sort selection" })
 keymap("x", "<leader>f" .. "O", ":sort i<CR>", { desc = "󱗘 :sort selection (case insensitive)" })
 keymap("n", "<leader>f" .. "o", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
 keymap("n", "<leader>f" .. "O", "vip:sort i<CR>", { desc = "󱗘 :sort paragraph (case insensitive)" })
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
 keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines" })
-
-keymap(
-	"n",
-	"<leader>fq",
-	function() require("replacer").run { rename_files = true } end,
-	{ desc = "󱗘  replacer.nvim" }
-)
--- stylua: ignore
-keymap({ "n", "x" }, "<leader>fs", function() require("ssr").open() end, { desc = "󱗘 Structural S&R" })
-
--- Refactoring.nvim
--- stylua: ignore start
-keymap({ "n", "x" }, "<leader>fi", function() require("refactoring").refactor("Inline Variable") end, { desc = "󱗘 Inline Var" })
-keymap({ "n", "x" }, "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, { desc = "󱗘 Extract Var" })
-keymap({ "n", "x" }, "<leader>fu", function() require("refactoring").refactor("Extract Function") end, { desc = "󱗘 Extract Func" })
--- stylua: ignore end
 
 keymap("n", "<leader>f<Tab>", function()
 	bo.expandtab = false
@@ -321,8 +239,6 @@ end, { desc = "󱁐 Use Spaces" })
 
 -- Undo
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "󰑎 Redo" }) -- remap for highlight-undo.nvim
-keymap({ "n", "x" }, "<leader>ul", "U", { desc = "󰕌 Undo Line" })
-keymap("n", "<leader>ut", ":UndotreeToggle<CR>", { desc = "󰕌  Undotree" })
 -- stylua: ignore
 keymap("n", "<leader>ur", function() cmd.later(tostring(vim.opt.undolevels:get())) end, { desc = "󰛒 Redo All" })
 keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Undo (Reset) Hunk" })
@@ -352,17 +268,6 @@ keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, 
 keymap("n", "<leader>lt", cmd.Inspect, { desc = " Treesitter Inspect" })
 -- stylua: ignore end
 
-keymap("n", "<leader>b" .. "u", function() require("dapui").toggle() end, { desc = " Toggle DAP-UI" })
-keymap("n", "<leader>bv", function() require("dap").step_over() end, { desc = " Step Over" })
-keymap("n", "<leader>bo", function() require("dap").step_out() end, { desc = " Step Out" })
-keymap("n", "<leader>bi", function() require("dap").step_into() end, { desc = " Step Into" })
--- INFO toggling breakpoints done via nvim-recorder
--- stylua: ignore start
-keymap("n", "<leader>bc", function() require("dap").run_to_cursor() end, { desc = " Run to Cursor" })
-keymap("n", "<leader>br", function() require("dap").clear_breakpoints() end, { desc = "  Remove Breakpoints" })
-keymap("n", "<leader>bq", function() require("dap").list_breakpoints() end, { desc = "  Breakpoints to QuickFix" })
--- stylua: ignore end
-
 keymap("n", "<leader>bt", function()
 	vim.opt_local.number = false
 	require("dapui").close()
@@ -386,19 +291,6 @@ end, { desc = "  Start nvim-lua debugger" })
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
--- Node Swapping
--- stylua: ignore start
-keymap("n", "ü", function () require("sibling-swap").swap_with_right() end, { desc = "󰑃 Move Node Right" })
-keymap("n", "Ü", function () require("sibling-swap").swap_with_left() end, { desc = "󰑁 Move Node Left" })
--- stylua: ignore end
-autocmd("FileType", {
-	pattern = { "markdown", "text", "gitcommit" },
-	callback = function()
-		keymap("n", "ü", '"zdawel"zph', { desc = "➡️ Move Word Right", buffer = true })
-		keymap("n", "Ü", '"zdawbh"zph', { desc = "⬅️ Move Word Left", buffer = true })
-	end,
-})
-
 keymap("n", "<Down>", [[:. move +1<CR>==]], { desc = "󰜮 Move Line Down" })
 keymap("n", "<Up>", [[:. move -2<CR>==]], { desc = "󰜷 Move Line Up" })
 keymap("n", "<Right>", function()
@@ -418,7 +310,6 @@ keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" 
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" })
 
 -- Merging / Splitting Lines
-keymap("n", "<leader>s", cmd.TSJToggle, { desc = "󰗈 split/join lines" })
 keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split around selection" })
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 merge line up" })
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 merge line down" })
@@ -513,7 +404,6 @@ local function harpoonNextCtimeFile()
 	return marksCtime[1].path
 end
 
--- keymap("n", "<D-CR>", function() require("harpoon.ui").nav_next() end, { desc = "󰛢 Next" })
 keymap("n", "<D-CR>", function() vim.cmd.edit(harpoonNextCtimeFile()) end, { desc = "󰛢 Next" })
 
 -- stylua: ignore start
@@ -546,20 +436,6 @@ end, { desc = "󰮤 Reveal Workflow in Alfred" })
 keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these don't require confirmation
 keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
 
--- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
--- overridden inside snippet for snippetjumping
-vim.g.VM_maps = {
-	["Find Under"] = "<D-j>", -- select word under cursor & enter visual-multi (normal) / add next occurrence (visual-multi)
-	["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
-	["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
-}
-
---- copy & paste
-keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
-keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
-keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = "paste" }) -- "<C-g>u" adds undopoint before the paste
-keymap("x", "<D-c>", "y", { desc = "copy" }) -- needed for compatibility with automation apps
-
 -- cmd+e: inline code
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "  Inline Code" }) -- no selection = word under cursor
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "  Inline Code" })
@@ -571,20 +447,7 @@ keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b", { desc = "Template String" }
 keymap("i", "<D-t>", "${}<Left>", { desc = "Template String" })
 
 --------------------------------------------------------------------------------
-
--- COLOR PICKER
-keymap("n", "#", ":CccPick<CR>", { desc = " Color Picker" })
-keymap("n", "'", ":CccConvert<CR>", { desc = " Convert Color" }) -- shift-# on German keyboard
-
--- AI
-keymap("n", "<leader>a", cmd.NeoAI, { desc = "󰚩 NeoAI" })
-keymap("x", "<leader>a", cmd.NeoAIContext, { desc = "󰚩 NeoAI Context" })
-
---------------------------------------------------------------------------------
 -- FILES
-
--- P[a]th gf needs remapping, since `gf` is used for LSP references
-keymap("n", "ga", "gf", { desc = "Goto Path" })
 
 -- number of harpoon files in the current project
 ---@nodiscard
@@ -773,12 +636,8 @@ keymap(
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
-keymap(
-	"n",
-	"<leader>or",
-	"<cmd>set relativenumber!<CR>",
-	{ desc = "  Toggle Relative Line Numbers" }
-)
+-- stylua: ignore
+keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = "  Toggle Relative Line Numbers" })
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Toggle Line Numbers" })
 keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 󰒕 LSP Restart" })
 
@@ -825,14 +684,6 @@ keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 
 keymap("n", "<leader>tf", "<Plug>PlenaryTestFile", { desc = " Test File" })
 keymap("n", "<leader>td", "<cmd>PlenaryBustedDirectory .<CR>", { desc = " Tests in Directory" })
-
-keymap("n", "<leader>th", function()
-	cmd("en" .. "ew") -- separated due to unignorable codespell error…
-	vim.api.nvim_buf_set_option(0, "filetype", "http")
-	vim.api.nvim_buf_set_option(0, "buftype", "nowrite")
-	vim.api.nvim_buf_set_name(0, "request")
-	fn.system("open https://github.com/rest-nvim/rest.nvim/tree/main/tests")
-end, { desc = "󰴚 Test HTTP request" })
 
 --------------------------------------------------------------------------------
 

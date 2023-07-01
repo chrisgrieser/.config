@@ -11,7 +11,9 @@ return {
 	},
 	{ -- undo history
 		"mbbill/undotree",
-		cmd = "UndotreeToggle",
+		keys = {
+			{ "<leader>ut", vim.cmd.UndotreeToggle, desc = "󰕌  Undotree" },
+		},
 		init = function()
 			vim.g.undotree_WindowLayout = 3
 			vim.g.undotree_DiffpanelHeight = 8
@@ -25,8 +27,8 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "undotree",
 				callback = function()
-					vim.keymap.set("n", "<D-w>", ":UndotreeToggle<CR>", { buffer = true })
 					vim.opt_local.list = false
+					vim.keymap.set("n", "<D-w>", vim.cmd.UndotreeToggle, { buffer = true })
 				end,
 			})
 		end,

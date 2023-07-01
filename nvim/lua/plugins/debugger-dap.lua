@@ -55,6 +55,9 @@ end
 
 return {
 	"mfussenegger/nvim-dap",
+	keys = {
+
+	},
 	dependencies = {
 		{ "jayp0521/mason-nvim-dap.nvim", config = true },
 		{ "theHamsta/nvim-dap-virtual-text", config = true },
