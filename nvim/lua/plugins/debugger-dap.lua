@@ -56,7 +56,16 @@ end
 return {
 	"mfussenegger/nvim-dap",
 	keys = {
-
+		-- INFO toggling breakpoints done via nvim-recorder
+		{ "<leader>b" .. "u", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
+		{ "<leader>bv", function() require("dap").step_over() end, desc = " Step Over" },
+		{ "<leader>bo", function() require("dap").step_out() end, desc = " Step Out" },
+		{ "<leader>bi", function() require("dap").step_into() end, desc = " Step Into" },
+		{ "<leader>bc", function() require("dap").run_to_cursor() end, desc = " Run to Cursor" },
+		-- stylua: ignore
+		{ "<leader>br", function() require("dap").clear_breakpoints() end, desc = "  Remove Breakpoints" },
+		-- stylua: ignore
+		{ "<leader>bq", function() require("dap").list_breakpoints() end, desc = "  Breakpoints to QuickFix" },
 	},
 	dependencies = {
 		{ "jayp0521/mason-nvim-dap.nvim", config = true },
@@ -64,7 +73,27 @@ return {
 		{ "rcarriga/nvim-dap-ui", config = true },
 		"jbyuki/one-small-step-for-vimkind", -- lua debugger specifically for neovim config
 	},
-	lazy = true, -- loaded via keymaps
+	init = function()
+		vim.keymap.set("n", "<leader>bt", function()
+			vim.opt_local.number = false
+			require("dapui").close()
+			require("dap").terminate()
+		end, { desc = "  Terminate" })
+		vim.keymap.set("n", "<leader>bn", function()
+			vim.opt_local.number = true
+			-- INFO is the only one that needs manual starting, other debuggers
+			-- start with `continue` by themselves
+			if require("dap").status() ~= "" then
+				vim.notify("Debugger already running.", vim.log.levels.WARN)
+				return
+			end
+			if not vim.bo.filetype == "lua" then
+				vim.notify("Not a lua file.", vim.log.levels.WARN)
+				return
+			end
+			require("osv").run_this()
+		end, { desc = "  Start nvim-lua debugger" })
+	end,
 	config = function()
 		dapConfig()
 		dapLualine()
