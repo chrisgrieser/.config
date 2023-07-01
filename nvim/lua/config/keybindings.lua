@@ -488,38 +488,6 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" 
 keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
 
--- copy breadcrumbs (nvim navic)
-keymap("n", "<D-b>", function()
-	local rawdata = require("nvim-navic").get_data()
-	if not rawdata then
-		vim.notify("No Breadcrumbs available", u.warn)
-		return
-	end
-	local breadcrumbs = ""
-	for _, v in pairs(rawdata) do
-		breadcrumbs = breadcrumbs .. v.name .. "."
-	end
-	breadcrumbs = breadcrumbs:sub(1, -2)
-	fn.setreg("+", breadcrumbs)
-	vim.notify("COPIED\n" .. breadcrumbs)
-end, { desc = "󰒕 Copy Breadcrumbs" })
-
--- go up to parent
-vim.keymap.set("n", "gk", function()
-	if not require("nvim-navic").is_available() then
-		vim.notify("Navic is not available.")
-		return
-	end
-	local symbolPath = require("nvim-navic").get_data()
-	local parent = symbolPath[#symbolPath - 1]
-	if not parent then
-		vim.notify("Already at the highest parent.")
-		return
-	end
-	local parentPos = parent.scope.start
-	u.setCursor(0, { parentPos.line, parentPos.character })
-end, { desc = "󰒕 Go Up to Parent" })
-
 -- Save & Format
 keymap({ "n", "i", "x" }, "<D-s>", function()
 	cmd.update()
@@ -594,10 +562,14 @@ keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForc
 keymap("n", "<leader>gd", function()
 	vim.ui.input({ prompt = "󰢷 Git Pickaxe (empty = full history)" }, function(pickaxe)
 		if not pickaxe then return end
+
 		local query = pickaxe ~= "" and (" -G'%s'"):format(pickaxe) or ""
 		cmd("DiffviewFileHistory %" .. query)
+
 		cmd.wincmd("w") -- go directly to file window
 		cmd.wincmd("|") -- maximize it
+
+		-- directly search for the term
 		if pickaxe ~= "" then fn.execute("/" .. pickaxe, "silent!") end
 	end)
 end, { desc = "󰊢 Pickaxe File History (Diffview)" })
@@ -702,3 +674,5 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+
+print "hi"
