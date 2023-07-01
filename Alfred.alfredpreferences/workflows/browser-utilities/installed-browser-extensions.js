@@ -43,9 +43,7 @@ function run(argv) {
 			}
 
 			// determine options path
-			let optionsPath = "";
-			if (manifest.options_ui?.page) optionsPath = manifest.options_ui.page;
-			else if (manifest.options_page) optionsPath = manifest.options_page;
+			const optionsPath = manifest.options_ui?.page || manifest.options_page || "";
 			const optionsUrl = `chrome-extension://${id}/${optionsPath}`;
 			const webstoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
 			const localFolder = extensionFolder + "/" + id;
