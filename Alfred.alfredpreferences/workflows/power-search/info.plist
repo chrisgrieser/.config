@@ -2996,8 +2996,10 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>subtext</key>
+				<string>Fallback</string>
 				<key>text</key>
-				<string>{query}</string>
+				<string>Power Search: {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.fallback</string>
