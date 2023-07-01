@@ -1,31 +1,36 @@
 return {
 	{ -- REPL
 		"Vigemus/iron.nvim",
-		lazy = true,
-		main = "icon.core",
-		opts = {
-			config = {
-				highlight_last = "IronLastSent",
-				repl_definition = {
-					sh = { command = { "zsh" } },
-					lua = { command = { "lua" } },
-					typescript = { command = { "node" } },
-					javascript = { command = { "node" } },
-					python = { command = { "python3" } },
+		cmd = { "IronRepl" },
+		config = function()
+			require("iron.core").setup {
+				config = {
+					repl_open_cmd = require("iron.view").bottom(10),
+					highlight_last = "IronLastSent",
+					repl_definition = {
+						sh = { command = { "zsh" } },
+						lua = { command = { "lua" } },
+						typescript = { command = { "node" } },
+						javascript = { command = { "node" } },
+						python = { command = { "python3" } },
+					},
 				},
-			},
-		},
+				keymaps = {
+					send_line = "<leader>i",
+				},
+			}
+		end,
 	},
 	{ -- Emulate Jupyter Notebook Functionality
 		"GCBallesteros/NotebookNavigator.nvim",
 		keys = {
 			{ "gc", function() require("notebook-navigator").move_cell("d") end },
 			{ "gC", function() require("notebook-navigator").move_cell("u") end },
-			{ "<D-R>", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
-			{ "<D-R-s>", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
+			{ "<D-r>", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
+			{ "<D-S-r>", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
 		},
 		dependencies = { "numToStr/Comment.nvim", "Vigemus/iron.nvim" },
-		event = "VeryLazy",
+		main = "notebook-navigator",
 		opts = {
 			cell_markers = {
 				python = "# %%",
@@ -65,6 +70,11 @@ return {
 			direction = "horizontal",
 			autochdir = true, -- when nvim changes pwd, will also change its pwd
 		},
+		init = function()
+			vim.keymap.set("n", "<leader>tt", vim.cmd.ToggleTerm, { desc = " ToggleTerm" })
+			-- stylua: ignore
+			vim.keymap.set("x", "<leader>tt", vim.cmd.ToggleTermSendVisualSelection, { desc = "  Run Selection in ToggleTerm" })
+		end,
 	},
 	{ -- git sign gutter & hunk textobj
 		"lewis6991/gitsigns.nvim",

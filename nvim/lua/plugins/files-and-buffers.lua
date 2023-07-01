@@ -84,9 +84,21 @@ return {
 	},
 	{ -- convenience file operations
 		"chrisgrieser/nvim-genghis",
-		lazy = true, -- loaded by keybindings
 		dev = true,
 		dependencies = "stevearc/dressing.nvim",
 		init = function() vim.g.genghis_disable_commands = true end,
+		keys = {
+			-- stylua: ignore start
+			{"<C-p>", function() require("genghis").copyFilepath() end, { desc = " Copy filepath" }},
+			{"<C-n>", function() require("genghis").copyFilename() end, { desc = " Copy filename" }},
+			{"<leader>x", function() require("genghis").chmodx() end, { desc = " chmod +x" }},
+			{"<C-r>", function() require("genghis").renameFile() end, { desc = " Rename file" }},
+			{"<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = " Move-rename file" }},
+			{"<C-d>", function() require("genghis").duplicateFile() end, { desc = " Duplicate file" }},
+			{"<D-BS>", function() require("genghis").trashFile() end, { desc = " Move file to trash" }},
+			{"<D-n>", function() require("genghis").createNewFile() end, { desc = " Create new file" }},
+			{"X", function() require("genghis").moveSelectionToNewFile() end, "x", { desc = " Selection to new file" }},
+			-- stylua: ignore end
+		},
 	},
 }

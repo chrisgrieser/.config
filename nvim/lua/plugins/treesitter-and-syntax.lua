@@ -86,15 +86,33 @@ return {
 			vim.keymap.set("o", "q", "&&&", { desc = "comment", remap = true })
 		end,
 	},
-	{
-		"dawsers/edit-code-block.nvim",
-		cmd = { "EditCodeBlock", "EditCodeBlockSelection" },
-		main = "ecb",
-		opts = { wincmd = "split" },
-	},
 
 	-- Syntax Highlighting Plugins
 	{ "mityu/vim-applescript", ft = "applescript" },
 	{ "hail2u/vim-css3-syntax", ft = "css" }, -- https://github.com/tree-sitter/tree-sitter-css/issues/34
 	{ "MTDL9/vim-log-highlighting", ft = "log" },
+	{
+		"dawsers/edit-code-block.nvim",
+		cmd = { "EditCodeBlock", "EditCodeBlockSelection" },
+		main = "ecb",
+		opts = { wincmd = "split" },
+		init = function()
+			vim.keymap.set("n", "<leader>t" .. "e", function()
+				if vim.bo.filetype ~= "markdown" then
+					vim.notify("Only markdown codeblocks can be edited without a selection.", u.warn)
+					return
+				end
+				vim.cmd.EditCodeBlock()
+			end, { desc = " Edit Embedded Code (Code Block)" })
+
+			vim.keymap.set("x", "<leader>t" .. "e", function()
+				local fts = { "bash", "applescript", "vim" }
+				vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
+					if not ft then return end
+					u.leaveVisualMode()
+					vim.cmd("'<,'>EditCodeBlockSelection " .. ft)
+				end)
+			end, { desc = " Edit Embedded Code (Selection)" })
+		end,
+	},
 }
