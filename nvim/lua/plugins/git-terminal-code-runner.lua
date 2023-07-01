@@ -83,8 +83,9 @@ return {
 			direction = "horizontal",
 			autochdir = true, -- when nvim changes pwd, will also change its pwd
 		},
+		cmd = { "ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection" },
 		keys = {
-			{ "<leader>tt", vim.cmd.ToggleTerm, desc = " ToggleTerm" },
+			{ "<leader>tt", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
 		},
 	},
 	{ -- git sign gutter & hunk textobj

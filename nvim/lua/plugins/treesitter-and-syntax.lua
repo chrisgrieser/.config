@@ -103,7 +103,7 @@ return {
 					return
 				end
 				vim.cmd.EditCodeBlock()
-			end, { desc = " Edit Embedded Code (Code Block)" })
+			end, { desc = " Edit Embedded Code Block" })
 
 			vim.keymap.set("x", "<leader>t" .. "e", function()
 				local fts = { "bash", "applescript", "vim" }
@@ -112,7 +112,7 @@ return {
 					u.leaveVisualMode()
 					vim.cmd("'<,'>EditCodeBlockSelection " .. ft)
 				end)
-			end, { desc = " Edit Embedded Code (Selection)" })
+			end, { desc = " Edit Embedded Selection" })
 		end,
 	},
 }
