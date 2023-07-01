@@ -9,13 +9,16 @@ u.applyTemplateIfEmptyFile("zsh")
 -- stylua: ignore
 keymap("n", "<leader>h", function()
 	return "<cmd>tab Man " .. expand("<cword>") .. "<CR>"
-end, { desc = "Man page in new tab", buffer = true, expr = true })
+end, { desc = "  Man page in new tab", buffer = true, expr = true })
 
 -- pipe textobj
 --stylua: ignore
 keymap({ "o", "x" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { desc = "󱡔 inner shellPipe textobj", buffer = true })
 --stylua: ignore
 keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { desc = "󱡔 outer shellPipe textobj", buffer = true })
+
+keymap("n", "<leader>i", vim.cmd.ToggleTermSendCurrentLine, { desc = "  REPL: Send Line", buffer = true })
+keymap("x", "<leader>i", vim.cmd.ToggleTermSendVisualSelection, { desc = "  REPL: Send Selection", buffer = true })
 
 --------------------------------------------------------------------------------
 
@@ -27,4 +30,4 @@ keymap("n", "<leader>r", function()
 	else
 		vim.notify("Not in a sketchybar directory.", u.warn)
 	end
-end, { buffer = true, desc = " Run Shell Script" })
+end, { buffer = true, desc = "  Run File" })
