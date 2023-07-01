@@ -85,12 +85,6 @@ return {
 		},
 		keys = {
 			{ "<leader>tt", vim.cmd.ToggleTerm, desc = " ToggleTerm" },
-			{
-				"<leader>tt",
-				vim.cmd.ToggleTermSendVisualSelection,
-				mode = "x",
-				desc = "  Run Selection in ToggleTerm",
-			},
 		},
 	},
 	{ -- git sign gutter & hunk textobj
