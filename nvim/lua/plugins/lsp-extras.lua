@@ -3,8 +3,8 @@ local u = require("config.utils")
 return {
 	{ -- lsp definitions and references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
-		dev = true,
 		lazy = true, -- loaded by lualine
+		dev = true,
 	},
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
@@ -21,9 +21,15 @@ return {
 	{ -- better virtualtext diagnostics
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		config = true,
-		lazy = true, -- loaded by keymap
-		-- disabled at start
-		init = function() vim.diagnostic.config { virtual_lines = false } end,
+		init = function()
+			vim.diagnostic.config { virtual_lines = false } -- disabled at start
+			vim.keymap.set("n", "<leader>d", function()
+				require("lsp_lines").toggle()
+				local nextState = vim.g.prevVirtText or false
+				vim.g.prevVirtText = vim.diagnostic.config().virtual_text
+				vim.diagnostic.config { virtual_text = nextState }
+			end, { desc = "󰒕 Toggle LSP Lines" })
+		end,
 	},
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",
@@ -95,16 +101,6 @@ return {
 			hint_scheme = "NonText", -- highlight group
 		},
 	},
-	-- {
-	-- 	"ldelossa/litee-calltree.nvim",
-	-- 	main = "litee.calltree",
-	-- 	dependencies = {
-	-- 		"ldelossa/litee.nvim",
-	-- 		main = "litee.lib",
-	-- 		config = true,
-	-- 	},
-	-- 	config = true,
-	-- },
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim", -- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		lazy = true, -- required in attach function

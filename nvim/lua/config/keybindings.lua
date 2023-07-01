@@ -268,26 +268,6 @@ keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, 
 keymap("n", "<leader>lt", cmd.Inspect, { desc = " Treesitter Inspect" })
 -- stylua: ignore end
 
-keymap("n", "<leader>bt", function()
-	vim.opt_local.number = false
-	require("dapui").close()
-	require("dap").terminate()
-end, { desc = "  Terminate" })
-keymap("n", "<leader>bn", function()
-	vim.opt_local.number = true
-	-- INFO is the only one that needs manual starting, other debuggers
-	-- start with `continue` by themselves
-	if require("dap").status() ~= "" then
-		vim.notify("Debugger already running.", u.warn)
-		return
-	end
-	if not bo.filetype == "lua" then
-		vim.notify("Not a lua file.", u.warn)
-		return
-	end
-	require("osv").run_this()
-end, { desc = "  Start nvim-lua debugger" })
-
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
@@ -429,8 +409,9 @@ keymap("", "<D-S-l>", function()
 		return
 	end
 	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
-	local shellCmd =
-		([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(workflowId)
+	local shellCmd = ([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(
+		workflowId
+	)
 	fn.system(shellCmd)
 end, { desc = "󰮤 Reveal Workflow in Alfred" })
 keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these don't require confirmation
@@ -504,15 +485,8 @@ keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = "  Cont
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
-keymap("n", "<leader>d", function()
-	require("lsp_lines").toggle()
-	local nextState = vim.g.prevVirtText or false
-	vim.g.prevVirtText = vim.diagnostic.config().virtual_text
-	vim.diagnostic.config { virtual_text = nextState }
-end, { desc = "󰒕 Toggle LSP Lines" })
-keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
-
 keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
+keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
 
 -- copy breadcrumbs (nvim navic)
 keymap("n", "<D-b>", function()
@@ -618,14 +592,15 @@ keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForc
 
 -- Diffview
 keymap("n", "<leader>gd", function()
-	vim.ui.input({ prompt = "󰢷 Git Pickaxe (empty = full history)" }, function(query)
-		if not query then return end
-		if query ~= "" then query = (" -G'%s'"):format(query) end
+	vim.ui.input({ prompt = "󰢷 Git Pickaxe (empty = full history)" }, function(pickaxe)
+		if not pickaxe then return end
+		local query = pickaxe ~= "" and (" -G'%s'"):format(pickaxe) or ""
 		cmd("DiffviewFileHistory %" .. query)
 		cmd.wincmd("w") -- go directly to file window
 		cmd.wincmd("|") -- maximize it
+		if pickaxe ~= "" then fn.execute("/" .. pickaxe, "silent!") end
 	end)
-end, { desc = "󰊢 File History (Diffview)" })
+end, { desc = "󰊢 Pickaxe File History (Diffview)" })
 keymap(
 	"x",
 	"<leader>gd",
