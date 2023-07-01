@@ -84,6 +84,8 @@ end
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
 function M.autoTile(winSrc)
+	if AutoTileInProgress then return end
+	AutoTileInProgress = true
 
 	local wins = {}
 	if type(winSrc) == "string" then
@@ -142,6 +144,7 @@ function M.autoTile(winSrc)
 		M.moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.66, y = 0 })
 		if #wins == 6 then M.moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 }) end
 	end
+	u.runWithDelays(0.1, function () AutoTileInProgress = false end)
 end
 
 --------------------------------------------------------------------------------

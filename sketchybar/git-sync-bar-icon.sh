@@ -20,11 +20,11 @@ vaultChanges=$(git status --porcelain | wc -l | tr -d " ")
 cd "$PASSWORD_STORE_DIR" || configError="repo-path wrong"
 passChanges=$(git status --porcelain | wc -l | tr -d " ")
 
-[[ $dotChanges -ne 0 ]] && label="${dotChanges}d " 
+[[ $dotChanges -ne 0 ]] && label="${dotChanges}d "
 [[ $vaultChanges -ne 0 ]] && label="$label${vaultChanges}v "
 [[ $passChanges -ne 0 ]] && label="$label${passChanges}p"
 
-# set early, since `git fetch` requires time and the icons should update quicker.
+# INFO set early, since `git fetch` requires time and the icons should update quicker
 # If there are behinds, icons will appear a few seconds later which isn't a
 # problem. But if there are no behinds, the outdated label will disappear quicker.
 [[ -n "$label" ]] && icon=" "
@@ -35,15 +35,15 @@ sketchybar --set "$NAME" icon="$icon" label="$label$configError"
 
 cd "$DOTFILE_FOLDER" || configError="repo-path wrong"
 git fetch # required to check for commits behind
-dotBehind=$(git status --porcelain --branch | head -n1 | grep -Eo "\d") 
+dotBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -Eo "\d")
 
 cd "$VAULT_PATH" || configError="repo-path wrong"
 git fetch
-vaultBehind=$(git status --porcelain --branch | head -n1 | grep -Eo "\d") 
+vaultBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -Eo "\d")
 
 cd "$PASSWORD_STORE_DIR" || configError="repo-path wrong"
 git fetch
-passBehind=$(git status --porcelain --branch | head -n1 | grep -Eo "\d") 
+passBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -Eo "\d")
 
 [[ -n "$dotBehind" ]] && label="$label${dotBehind}!d "
 [[ -n "$vaultBehind" ]] && label="$label${vaultBehind}!v "
