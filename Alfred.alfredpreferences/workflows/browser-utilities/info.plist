@@ -40,9 +40,9 @@
 				<key>destinationuid</key>
 				<string>73794C72-64EA-441F-BE9A-67FB5F1A885C</string>
 				<key>modifiers</key>
-				<integer>262144</integer>
+				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: Open local folder</string>
+				<string>fn: Open local folder</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>

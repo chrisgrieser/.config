@@ -144,7 +144,7 @@ function M.autoTile(winSrc)
 		M.moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.66, y = 0 })
 		if #wins == 6 then M.moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 }) end
 	end
-	u.runWithDelays(0.1, function () AutoTileInProgress = false end)
+	u.runWithDelays(0.2, function () AutoTileInProgress = false end)
 end
 
 --------------------------------------------------------------------------------

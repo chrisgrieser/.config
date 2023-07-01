@@ -38,11 +38,8 @@ function run(argv) {
 			let name = manifest.name;
 			if (name.startsWith("__MSG_") && manifest.short_name) name = manifest.short_name;
 			if (name.startsWith("__MSG_")) {
-				const messagesJson = JSON.parse(readFile(root + "_locales/en/messages.json"));
-				if (messagesJson.extensionName?.message) name = messagesJson.extensionName.message;
-				else if (messagesJson.name?.message) name = messagesJson.name.message;
-				else if (messagesJson.extName?.message) name = messagesJson.extName.message;
-				else "[name not found]";
+				const msg = JSON.parse(readFile(root + "_locales/en/messages.json"));
+				name = msg.extensionName?.message || msg.name?.message || msg.extName?.message || msg.appName?.message || "[name not found]";
 			}
 
 			// determine options path
@@ -68,7 +65,7 @@ function run(argv) {
 				mods: {
 					alt: { arg: webstoreUrl },
 					cmd: { arg: webstoreUrl },
-					ctrl: { arg: localFolder },
+					fn: { arg: localFolder },
 				},
 			};
 		});

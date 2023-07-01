@@ -80,7 +80,7 @@ Wf_finder = wf.new("Finder")
 	})
 	:subscribe(wf.windowCreated, function(win)
 		if not (win:isMaximizable() and win:isStandard() and u.app("Finder"):isFrontmost()) then return end
-		wu.autoTile(Wf_finder)
+		u.runWithDelays(0.05, function() wu.autoTile(Wf_finder) end)
 	end)
 	:subscribe(wf.windowDestroyed, function()
 		-- no conditions, since destroyed windows do not have those properties
