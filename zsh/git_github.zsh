@@ -1,18 +1,16 @@
 # shellcheck disable=SC2164
 
 # ALIASES AND SMALLER UTILS
-alias gc="git checkout"
+alias co="git checkout"
+alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
-alias commit="git commit -m"
 alias ga="git add"
-alias grh="git reset --hard"
-alias push="git push"
-alias pull="git pull"
 alias gm="git add -A && git commit --amend --no-edit" # a[m]end
 alias gM="git commit --amend"
+alias gc="git commit"
+alias push="git push"
+alias pull="git pull"
 alias restore="git restore --source" # 1: hash, 2: file -> restore (existing) file
-alias rem="git remote -v"
-alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gi='gh issue list'
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 
