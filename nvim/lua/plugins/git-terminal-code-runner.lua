@@ -1,7 +1,39 @@
 return {
-	{ -- Code Runner / Scratchpad
-		"metakirby5/codi.vim",
-		cmd = { "CodiNew", "Codi", "CodiExpand" },
+	{ -- REPL
+		"Vigemus/iron.nvim",
+		lazy = true,
+		main = "icon.core",
+		opts = {
+			config = {
+				highlight_last = "IronLastSent",
+				repl_definition = {
+					sh = { command = { "zsh" } },
+					lua = { command = { "lua" } },
+					typescript = { command = { "node" } },
+					javascript = { command = { "node" } },
+					python = { command = { "python3" } },
+				},
+			},
+		},
+	},
+	{ -- Emulate Jupyter Notebook Functionality
+		"GCBallesteros/NotebookNavigator.nvim",
+		keys = {
+			{ "gc", function() require("notebook-navigator").move_cell("d") end },
+			{ "gC", function() require("notebook-navigator").move_cell("u") end },
+			{ "<D-R>", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
+			{ "<D-R-s>", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
+		},
+		dependencies = { "numToStr/Comment.nvim", "Vigemus/iron.nvim" },
+		event = "VeryLazy",
+		opts = {
+			cell_markers = {
+				python = "# %%",
+				sh = "# %%",
+				lua = "-- %%",
+				javascript = "// %%",
+			},
+		},
 	},
 	{ -- HTTP requester (e.g., test APIs)
 		"rest-nvim/rest.nvim",

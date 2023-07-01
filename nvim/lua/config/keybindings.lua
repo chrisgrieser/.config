@@ -632,7 +632,7 @@ end, { desc = " Live Grep in Project" })
 -- stylua: ignore
 keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
-keymap("n", "gc", function() cmd.Telescope("resume") end, { desc = "  Continue" })
+keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = "  Continue" })
 
 -- File Operations
 -- stylua: ignore start
@@ -833,30 +833,23 @@ end, { desc = " 󰖶 Toggle Wrap" })
 --------------------------------------------------------------------------------
 
 -- TERMINAL & CODE RUNNER
-keymap("t", "<S-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
+keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 
 keymap("n", "<leader>tf", "<Plug>PlenaryTestFile", { desc = " Test File" })
 keymap("n", "<leader>td", "<cmd>PlenaryBustedDirectory .<CR>", { desc = " Tests in Directory" })
 
 keymap("n", "<leader>th", function()
-	cmd.edit("request.http")
+	cmd("en" .. "ew") -- separated due to unignorable codespell error…
+	vim.api.nvim_buf_set_option(0, "filetype", "http")
+	vim.api.nvim_buf_set_option(0, "buftype", "nowrite")
+	vim.api.nvim_buf_set_name(0, "request")
 	fn.system("open https://github.com/rest-nvim/rest.nvim/tree/main/tests")
 end, { desc = "󰴚 Test HTTP request" })
 
 keymap("n", "<leader>tt", cmd.ToggleTerm, { desc = " ToggleTerm" })
 -- stylua: ignore
 keymap("x", "<leader>tt", cmd.ToggleTermSendVisualSelection, { desc = "  Run Selection in ToggleTerm" })
-
-keymap("n", "<leader>tc", function()
-	local isCodiBuffer = bo.buftype == "nofile"
-	if isCodiBuffer then
-		cmd.CodiExpand() -- multiline output for the current line
-	else
-		cmd.CodiNew()
-		vim.api.nvim_buf_set_name(0, "Codi: " .. bo.filetype)
-	end
-end, { desc = " Codi" })
 
 -- edit embedded filetype
 keymap("n", "<leader>t" .. "e", function()

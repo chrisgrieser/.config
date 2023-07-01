@@ -53,7 +53,7 @@ newCommand("PluginDir", function(_) fn.system('open "' .. fn.stdpath("data") .. 
 newCommand("Curl", function(ctx)
 	local url = ctx.args
 	local a = vim.api
-	local timeoutSecs = 5
+	local timeoutSecs = 8
 	local response = fn.system(("curl --silent --max-time %s '%s'"):format(timeoutSecs, url))
 	local lines = vim.split(response, "\n")
 	local ft = url:match("%.(%a)$") or "html"
