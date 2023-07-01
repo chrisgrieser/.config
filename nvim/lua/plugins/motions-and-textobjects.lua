@@ -33,24 +33,29 @@ return {
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
 		dev = true,
-		lazy = true, -- loaded by keymaps
 		opts = { skipInsignificantPunctuation = true },
-		init = function()
+		keys = {
 			-- stylua: ignore
-			vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "󱇫 Spider-e" })
+			{"e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider-e" },
 			-- stylua: ignore
-			vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "󱇫 Spider-b" })
-		end,
+			{"b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider-b" },
+		},
 	},
 	{ -- better marks
 		"tomasky/bookmarks.nvim",
 		event = "VimEnter", -- cannot be loaded on keymaps due to the bookmark signs
+		keys = {
+			{ "Ä", function() require("bookmarks").bookmark_toggle() end, desc = "󰃀 Toggle Bookmark" },
+			{ "ä", function() require("bookmarks").bookmark_next() end, desc = "󰃀 Next Bookmark" },
+			-- stylua: ignore
+			{ "dä", function() require("bookmarks").bookmark_clean() end, desc = "󰃀 Clear All Bookmark" },
+			-- stylua: ignore
+			{ "gä", function() require("bookmarks").bookmark_list() end, desc = "󰃀  Bookmarks to Quickfix" },
+		},
 		opts = {
 			sign_priority = 8, --set bookmark sign priority to cover other sign
 			save_file = u.vimDataDir .. "/bookmarks",
-			signs = {
-				add = { text = "󰃀" },
-			},
+			signs = { add = { text = "󰃀" } },
 		},
 	},
 	-----------------------------------------------------------------------------

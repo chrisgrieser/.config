@@ -132,3 +132,30 @@ keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(tru
 keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "󱡔 outer indent textobj" })
 keymap({ "x", "o" }, "ij", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })
 keymap({ "x", "o" }, "aj", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })
+
+--------------------------------------------------------------------------------
+
+-- delete surrounding indentation
+keymap("n", "dsi", function()
+	-- select inner indentation
+	require("various-textobjs").indentation(true, true)
+	-- when textobj is found, will switch to visual line mode
+	local notOnIndentedLine = vim.fn.mode():find("V") == nil
+	if notOnIndentedLine then return end
+
+	-- dedent indentation
+	u.normal("<")
+
+	-- delete start- and end-border
+	local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
+	local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
+
+	-- don't delete endborder when language does not have them
+	local ft = vim.bo.filetype
+	if not (ft == "python" or ft == "yaml" or ft == "markdown") then
+		-- delete end first so line index is not shifted
+		cmd(tostring(endBorderLn) .. " delete")
+	end
+	cmd(tostring(startBorderLn) .. " delete")
+end, { desc = "Delete surrounding indentation" })
+

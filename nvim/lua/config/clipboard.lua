@@ -6,6 +6,14 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
+--- macOS bindings
+keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
+keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
+keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = "paste" }) -- "<C-g>u" adds undopoint before the paste
+keymap("x", "<D-c>", "y", { desc = "copy" }) -- needed for compatibility with automation apps
+
+--------------------------------------------------------------------------------
+
 -- keep the register clean
 keymap("n", "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
