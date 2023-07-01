@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2002
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+#───────────────────────────────────────────────────────────────────────────────
 
 # INFO
 # based on https://alfred.app/workflows/vitor/temporary-email/
@@ -10,6 +11,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 password=$(cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c 32)
 echo -n "${password}"
 echo -n "$password" | pbcopy
+
 
 #───────────────────────────────────────────────────────────────────────────────
 # MAIL
@@ -24,7 +26,7 @@ else
 	readonly url="https://${email_service}/inbox/${email_name}"
 fi
 
-echo -n "${email}"
+echo -n "$email"
 echo -n "$email" | pbcopy
 osascript -e "display notification \"$email\" with title \"Temp Mail & Password copied\""
 
@@ -59,3 +61,4 @@ elif [[ "${front_browser}" == 'Orion' || "${front_browser}" == 'Arc' ]]; then
 else
 	open "${url}"
 fi
+
