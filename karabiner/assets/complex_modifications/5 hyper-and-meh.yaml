@@ -144,31 +144,21 @@ rules:
       - type: basic
         from:
           simultaneous:
+            - key_code: period
+            - key_code: command
+            - key_code: shift
+            - key_code: control
+            - key_code: option
+        to: [key_code: vk_none]
+        parameters: { basic.simultaneous_threshold_milliseconds: 400 }
+      - type: basic
+        from:
+          simultaneous:
+            - key_code: comma
             - key_code: command
             - key_code: shift
             - key_code: control
             - key_code: option
             - key_code: period
         to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 250 }
-      - type: basic
-        from:
-          simultaneous:
-            - key_code: command
-            - key_code: shift
-            - key_code: control
-            - key_code: option
-            - key_code: comma
-        to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 250 }
-      - type: basic
-        from:
-          simultaneous:
-            - key_code: command
-            - key_code: shift
-            - key_code: control
-            - key_code: option
-            - key_code: comma
-            - key_code: period
-        to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 250 }
+        parameters: { basic.simultaneous_threshold_milliseconds: 400 }

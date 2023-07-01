@@ -2,12 +2,13 @@ return {
 	{ -- REPL
 		"Vigemus/iron.nvim",
 		keys = {
-			{ "<leader>ti", vim.cmd.IronRepl },
+			{ "<leader>ti", vim.cmd.IronRepl, desc = "󱠥 Toggle REPL" },
+			{ "<leader>i", desc = "󱠥 Send Line" },
 		},
 		config = function()
 			require("iron.core").setup {
 				config = {
-					repl_open_cmd = require("iron.view").bottom(10),
+					repl_open_cmd = require("iron.view").split.horizontal.belowright(8),
 					highlight_last = "IronLastSent",
 					repl_definition = {
 						sh = { command = { "zsh" } },
@@ -19,6 +20,7 @@ return {
 				},
 				keymaps = {
 					send_line = "<leader>i",
+					visual_send = "<leader>i",
 				},
 			}
 		end,
@@ -26,8 +28,9 @@ return {
 	{ -- Emulate Jupyter Notebook Functionality
 		"GCBallesteros/NotebookNavigator.nvim",
 		keys = {
-			{ "gc", function() require("notebook-navigator").move_cell("d") end },
-			{ "gC", function() require("notebook-navigator").move_cell("u") end },
+			{ "gn", function() require("notebook-navigator").move_cell("d") end },
+			{ "gN", function() require("notebook-navigator").move_cell("u") end },
+			{ "qn", function() require("notebook-navigator").add_cell_after("u") end },
 			{ "<D-r>", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
 			{ "<D-S-r>", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
 		},
@@ -93,10 +96,7 @@ return {
 	{ -- git sign gutter & hunk textobj
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
-		opts = {
-			max_file_length = 7500,
-			preview_config = { border = require("config.utils").border_style },
-		},
+		opts = { max_file_length = 7500 },
 	},
 	{ -- git client
 		"TimUntersberger/neogit",

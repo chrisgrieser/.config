@@ -9,7 +9,39 @@ return {
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
-		init = function() vim.g.navic_silence = true end, -- suppress notifications on errors
+		init = function()
+			vim.g.navic_silence = true -- suppress notifications on errors
+			vim.keymap.set("n", "gk", function()
+				if not require("nvim-navic").is_available() then
+					vim.notify("Navic is not available.")
+					return
+				end
+				local symbolPath = require("nvim-navic").get_data()
+				local parent = symbolPath[#symbolPath - 1]
+				if not parent then
+					vim.notify("Already at the highest parent.")
+					return
+				end
+				local parentPos = parent.scope.start
+				u.setCursor(0, { parentPos.line, parentPos.character })
+			end, { desc = "󰒕 Go Up to Parent" })
+
+			-- copy breadcrumbs (nvim navic)
+			vim.keymap.set("n", "<D-b>", function()
+				local rawdata = require("nvim-navic").get_data()
+				if not rawdata then
+					vim.notify("No Breadcrumbs available", u.warn)
+					return
+				end
+				local breadcrumbs = ""
+				for _, v in pairs(rawdata) do
+					breadcrumbs = breadcrumbs .. v.name .. "."
+				end
+				breadcrumbs = breadcrumbs:sub(1, -2)
+				vim.fn.setreg("+", breadcrumbs)
+				vim.notify("COPIED\n" .. breadcrumbs)
+			end, { desc = "󰒕 Copy Breadcrumbs" })
+		end,
 		opts = {
 			lsp = { auto_attach = true },
 			icons = { Object = "󰆧 " },
