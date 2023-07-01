@@ -53,6 +53,7 @@ local scanFolder = home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~
 ScanFolderWatcher = pw(scanFolder, function()
 	hs.execute("mv '" .. scanFolder .. "'/* '" .. env.fileHub .. "'")
 	u.notify("📸 Scan synced to File Hub")
+	u.sound("Funk")
 end):start()
 
 -- Downloads Folder

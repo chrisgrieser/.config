@@ -141,6 +141,15 @@ function M.notify(...)
 	print("💬 " .. out)
 end
 
+---play macOS sound
+---@param soundName string
+function M.sound(soundName)
+	if Sound:isPlaying() then return end
+	Sound = hs.sound.getByName({ sound = soundName })
+	Sound:play()
+	Sound = nil
+end
+
 --------------------------------------------------------------------------------
 -- APP UTILS
 
