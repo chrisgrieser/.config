@@ -634,19 +634,6 @@ keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc =
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = "  Continue" })
 
--- File Operations
--- stylua: ignore start
-keymap("n", "<C-p>", function() require("genghis").copyFilepath() end, { desc = " Copy filepath" })
-keymap("n", "<C-n>", function() require("genghis").copyFilename() end, { desc = " Copy filename" })
-keymap("n", "<leader>x", function() require("genghis").chmodx() end, { desc = " chmod +x" })
-keymap("n", "<C-r>", function() require("genghis").renameFile() end, { desc = " Rename file" })
-keymap("n", "<D-S-m>", function() require("genghis").moveAndRenameFile() end, { desc = " Move-rename file" })
-keymap("n", "<C-d>", function() require("genghis").duplicateFile() end, { desc = " Duplicate file" })
-keymap("n", "<D-BS>", function() require("genghis").trashFile() end, { desc = " Move file to trash" })
-keymap("n", "<D-n>", function() require("genghis").createNewFile() end, { desc = " Create new file" })
-keymap("x", "X", function() require("genghis").moveSelectionToNewFile() end, { desc = " Selection to new file" })
--- stylua: ignore end
-
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
 
@@ -846,28 +833,6 @@ keymap("n", "<leader>th", function()
 	vim.api.nvim_buf_set_name(0, "request")
 	fn.system("open https://github.com/rest-nvim/rest.nvim/tree/main/tests")
 end, { desc = "󰴚 Test HTTP request" })
-
-keymap("n", "<leader>tt", cmd.ToggleTerm, { desc = " ToggleTerm" })
--- stylua: ignore
-keymap("x", "<leader>tt", cmd.ToggleTermSendVisualSelection, { desc = "  Run Selection in ToggleTerm" })
-
--- edit embedded filetype
-keymap("n", "<leader>t" .. "e", function()
-	if bo.filetype ~= "markdown" then
-		vim.notify("Only markdown codeblocks can be edited without a selection.", u.warn)
-		return
-	end
-	cmd.EditCodeBlock()
-end, { desc = " Edit Embedded Code (Code Block)" })
-
-keymap("x", "<leader>t" .. "e", function()
-	local fts = { "bash", "applescript", "vim" }
-	vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
-		if not ft then return end
-		u.leaveVisualMode()
-		cmd("'<,'>EditCodeBlockSelection " .. ft)
-	end)
-end, { desc = " Edit Embedded Code (Selection)" })
 
 --------------------------------------------------------------------------------
 
