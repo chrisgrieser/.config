@@ -91,10 +91,17 @@ function run() {
 				subtitle: `${date}   ${author}`,
 				match: alfredMatcher(msg) + author + " " + pointer,
 				arg: hashOrBranch,
+				variables: { mode: "checkout" },
 				mods: {
+					cmd: {
+						arg: hash,
+						subtitle: "⌘: Reset (hard) to this commit",
+						variables: { mode: "Reset Hard" },
+					},
 					alt: {
 						arg: hash,
 						subtitle: `⌥: Copy Hash    ${hash}`,
+						variables: { mode: "Copy Hash" },
 					},
 				},
 			};
