@@ -4,7 +4,7 @@
 <dict>
 	<key>fallbacks</key>
 	<array>
-		<string>z_search-utilities.B50A8885-7A47-47E3-A71D-B1D80C5CD132</string>
+		<string>power-search.B50A8885-7A47-47E3-A71D-B1D80C5CD132</string>
 	</array>
 	<key>showContacts</key>
 	<false/>
