@@ -20,32 +20,32 @@ function h() {
 }
 
 # GET A BETTER MAN
-if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
 function man() {
 	local command="$1"
 	local search_term="$2"
+	if ! command -v "$command" &>/dev/null; then echo "$command not installed." && return 1; fi
+	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 	local pane_id
 		# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
 		if [[ -n "$search_term" ]]; then
-			pane_id=$(wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$search_term" "$command")
+			pane_id=$(wezterm cli spawn -- man -P "less --pattern=$search_term" "$command")
 		else
 			pane_id=$(wezterm cli spawn -- man "$command")
 		fi
 		wezterm cli set-tab-title --pane-id="$pane_id" "man: $command"
 }
-fi
 
-function fman() {
+# greps $2 in the man page of $1
+function gman() {
 	local command="$1"
 	local query="$2"
-	if ! command -v fzf &>/dev/null; then printf "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 	if ! command -v "$command" &>/dev/null; then echo "$command not installed." && return 1; fi
+	if [[ -z "$query" ]]; then printf "\033[1;33mSecond Argument required\033[0m" && return 1; fi
 
-	local usedQuery
-	usedQuery=$(command man "$command" | fzf -1 --query="$query" --exact --ansi --no-info --print-query | head -n1)
-
-	pane_id=$(wezterm cli spawn -- man -P "/usr/bin/less -is --pattern=$usedQuery" "$command")
-	wezterm cli set-tab-title --pane-id="$pane_id" "man: $command"
+	command man fd |
+		grep ignore --after=2 --color=always |
+		grep -Ev "^$" |
+		less 
 }
 
 #───────────────────────────────────────────────────────────────────────────────
