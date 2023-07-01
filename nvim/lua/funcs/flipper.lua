@@ -155,14 +155,6 @@ local filetypeSpecificWords = {
 	},
 }
 
----runs when no word to switch can be found under the cursor
-local function fallbackFn()
-	-- toggle capital/lowercase of word
-	vim.cmd.normal { "mzlb~`z", bang = true }
-end
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 -- HELPERS
@@ -250,13 +242,10 @@ function M.flipWord()
 		vim.fn.setreg("z", newWord)
 		vim.cmd.normal { 'viw"zP', bang = true }
 	else
-		fallbackFn()
+		vim.notify("No word to flip found.")
 	end
 
-
-	-- restore
-	vim.opt.iskeyword = iskeywBefore
-
+	vim.opt.iskeyword = iskeywBefore -- restore
 end
 
 --------------------------------------------------------------------------------

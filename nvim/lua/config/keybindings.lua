@@ -170,7 +170,7 @@ end
 keymap("n", "X", "mz$x`z", { desc = "Delete last character" })
 
 
--- Word Switcher (fallback: switch casing)
+-- Word Switcher
 -- stylua: ignore
 keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
 
@@ -345,56 +345,6 @@ keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = " vertical resize 
 keymap("", "<C-Down>", ":resize +3<CR>", { desc = " horizontal resize (+)" })
 keymap("", "<C-Up>", ":resize -3<CR>", { desc = " horizontal resize (-)" })
 
--- HARPOON
-
----of all the marked files, gets the next one in order of last change time
----(ctime), similar to the grapling hook plugin for Obsidian
----this is essentially an alternative to `require("harpoon.ui").nav_next()`,
----only that the order of cycling is not determined by the list, but by the
----mtime order
-local function harpoonNextCtimeFile()
-	-- get project
-	local pwd = vim.loop.cwd() or ""
-	local jsonPath = fn.stdpath("data") .. "/harpoon.json"
-	local json = u.readFile(jsonPath)
-	if not json then return end
-	local data = vim.json.decode(json)
-	if not data then return end
-	local project = data.projects[pwd]
-	if not project or #project.mark.marks == 0 then return end
-
-	-- sort by atime
-	local marksCtime = {}
-	for _, file in pairs(project.mark.marks) do
-		local absPath = pwd .. "/" .. file.filename
-		local atime = vim.loop.fs_stat(absPath).atime.sec
-		table.insert(marksCtime, { atime = atime, path = absPath })
-	end
-	table.sort(marksCtime, function(a, b) return a.atime > b.atime end)
-
-	-- return next file
-	local currentFile = expand("%:p")
-	local fileFound = false
-	for _, file in pairs(marksCtime) do
-		if fileFound then return file.path end
-		fileFound = currentFile == file.path
-	end
-	-- if at last marked file or if current file is not marked in harpoon, return
-	-- the last accessed file instead
-	return marksCtime[1].path
-end
-
-keymap("n", "<D-CR>", function() vim.cmd.edit(harpoonNextCtimeFile()) end, { desc = "󰛢 Next" })
-
--- stylua: ignore start
--- consistent with adding/removing bookmarks in the Browser/Obsidian
-keymap("n", "<D-d>", function()
-	require("harpoon.mark").add_file()
-	vim.b.harpoonMark = "󰛢"
-end, { desc = "󰛢 Add" })
-keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "󰛢 Menu" })
--- stylua: ignore end
-
 ------------------------------------------------------------------------------
 
 -- CMD-KEYBINDINGS
@@ -430,21 +380,6 @@ keymap("i", "<D-t>", "${}<Left>", { desc = "Template String" })
 --------------------------------------------------------------------------------
 -- FILES
 
--- number of harpoon files in the current project
----@nodiscard
----@return number|nil
-local function harpoonFileNumber()
-	local pwd = vim.loop.cwd() or ""
-	local jsonPath = fn.stdpath("data") .. "/harpoon.json"
-	local json = u.readFile(jsonPath)
-	if not json then return end
-	local data = vim.json.decode(json)
-	if not data then return end
-	local project = data.projects[pwd]
-	if not project then return end
-	return #project.mark.marks
-end
-
 ---@nodiscard
 ---@return string name of the current project
 local function projectName()
@@ -452,14 +387,6 @@ local function projectName()
 	local name = pwd:gsub(".*/", "")
 	return name
 end
-
--- find files
--- add project name + number of harpoon files to prompt title
-keymap("n", "go", function()
-	local harpoonNumber = harpoonFileNumber() or 0
-	local title = tostring(harpoonNumber) .. "󰛢 " .. projectName()
-	require("telescope").extensions.file_browser.file_browser { prompt_title = title }
-end, { desc = " Browse in Project" })
 
 -- stylua: ignore
 keymap( "n", "gO", function()
@@ -470,6 +397,11 @@ keymap( "n", "gO", function()
 end, { desc = " Browse in Current Folder" })
 
 -- stylua: ignore
+keymap("n", "go", function()
+	require("telescope").extensions.file_browser.file_browser { prompt_title = "󰝰 " .. projectName() }
+end, { desc = " Browse in Project" })
+
+-- stylua: ignore
 keymap("n", "gl", function() require("telescope.builtin").live_grep {
 	prompt_title = "Live Grep: " .. projectName() }
 end, { desc = " Live Grep in Project" })
@@ -477,6 +409,24 @@ end, { desc = " Live Grep in Project" })
 keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = "  Continue" })
+
+
+--------------------------------------------------------------------------------
+-- HARPOON
+
+-- stylua: ignore start
+-- consistent with adding/removing bookmarks in the Browser/Obsidian
+keymap("n", "<D-d>", function()
+	require("harpoon.mark").add_file()
+	vim.b.harpoonMark = "󰛢"
+end, { desc = "󰛢 Add" })
+keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "󰛢 Menu" })
+-- stylua: ignore end
+
+keymap("n", "<D-CR>", function()
+	local nextFile = require("funcs.harpoon-addons").harpoonNextCtimeFile()
+	vim.cmd.edit(nextFile)
+end, { desc = "󰛢 Next" })
 
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
@@ -674,5 +624,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-
-print "hi"

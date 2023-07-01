@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+# CONFIG
 MAX_FILE_SIZE_MB=10
 
 # shellcheck disable=2034

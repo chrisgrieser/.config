@@ -129,41 +129,6 @@ end
 
 --------------------------------------------------------------------------------
 
----returns a harpoon icon if the current file is marked in Harpoon. Does not
----`require` Harpoon itself (allowing harpoon to still be lazy-loaded)
-local function updateHarpoonIndicator()
-	vim.b.harpoonMark = "" -- empty by default
-	local harpoonJsonPath = fn.stdpath("data") .. "/harpoon.json"
-	local fileExists = fn.filereadable(harpoonJsonPath) ~= 0
-	if not fileExists then return end
-	local harpoonJson = u.readFile(harpoonJsonPath)
-	if not harpoonJson then return end
-
-	local harpoonData = vim.json.decode(harpoonJson)
-	local pwd = vim.loop.cwd()
-	if not pwd or not harpoonData then return end
-	local currentProject = harpoonData.projects[pwd]
-	if not currentProject then return end
-	local markedFiles = currentProject.mark.marks
-	local currentFile = fn.expand("%:p")
-
-	for _, file in pairs(markedFiles) do
-		local absPath = pwd .. "/" .. file.filename
-		if absPath == currentFile then vim.b.harpoonMark = "󰛢" end
-	end
-end
-
-local function harpoonStatusline() return vim.b.harpoonMark or "" end
-
--- so the harpoon state is only checked once on buffer enter and not every second
--- also, the command is called on marking a new file
-vim.api.nvim_create_autocmd({ "BufReadPost", "UiEnter" }, {
-	pattern = "*",
-	callback = updateHarpoonIndicator,
-})
-
---------------------------------------------------------------------------------
-
 -- return available plugin updates when above a certain threshold
 local function pluginUpdates()
 	local threshold = 20
@@ -241,7 +206,7 @@ local lualineConfig = {
 	sections = {
 		lualine_a = {
 			{
-				harpoonStatusline,
+				require("funcs.harpoon-addons").harpoonStatusline,
 				padding = { left = 1, right = 0 },
 			},
 			{
