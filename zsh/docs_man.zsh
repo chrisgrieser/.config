@@ -34,11 +34,18 @@ function man() {
 		wezterm cli set-tab-title --pane-id="$pane_id" "man: $command"
 	else
 		if [[ -n "$search_term" ]]; then
-			command man -P "/usr/bin/less -is --pattern=$search_term" "$command"
+			command man -P "/usr/bin/less -is --pattern=^W$search_term" "$command"
 		else
 			command man "$command"
 		fi
 	fi
+}
+
+function fman() {
+	local command="$1"
+	local query="$2"
+	lineNum=$(command man "$command" | nl -b a | fzf --query="$query" --exact --ansi --with-nth=2.. --nth=2.. --info=inline | grep -Eo "\d+")
+	command man -P "/usr/bin/less -is +$lineNum" "$command" 
 }
 
 #───────────────────────────────────────────────────────────────────────────────
