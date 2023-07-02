@@ -49,6 +49,8 @@ declare const Application: {
 		elementsOfClass(className: string): string[];
 		propertiesOfClass(className: string): string[];
 		parentOfClass(className: string): string;
+		// rome-ignore lint/suspicious/noExplicitAny: TODO
+		menuBars: any;
 
 		// APP-SPECIFIC
 		exists(path: string): boolean; // Finder
