@@ -1,17 +1,16 @@
 # Good primer on how to bind hotkeys in the ZSH
 # https://thevaluable.dev/zsh-line-editor-configuration-mouseless/
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
-# Enable vi mode
+# ENABLE VI MODE
 bindkey -v
 export KEYTIMEOUT=1
 
-
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 # INFO: Display all commands for Normal/Insert Mode
 # bindkey -M [vicmd|viins|visual]
 # use ctrl-v and then a key combination to get the shell binding for the
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
 bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
@@ -44,11 +43,7 @@ zle -N vi-yank-pbcopy
 bindkey -M vicmd 'y' vi-yank-pbcopy
 
 # q in normal mode exists the Terminal
-
-# q in normal mode exists the Terminal
-function normal-mode-exit {
-	exit
-}
+function normal-mode-exit { exit ; }
 zle -N normal-mode-exit
 bindkey -M vicmd 'q' normal-mode-exit
 
@@ -71,7 +66,7 @@ for m in visual viopp; do
 	done
 done
 
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
 # INFO: prompt styling based on vi mode in starship config
 # possible, but not compatible when using the snippet to style the cursor

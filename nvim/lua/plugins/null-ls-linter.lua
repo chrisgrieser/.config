@@ -16,9 +16,6 @@ local lintersAndFormatters = {
 	"prettier", -- only used for yaml and html https://github.com/mikefarah/yq/issues/515
 	"rome", -- also an LSP; the lsp does diagnostics, the CLI via null-ls does formatting
 	-- "stylelint", -- included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
-
-	"yq", -- ensure installation via mason, but only used by rest.nvim
-	"gh", -- gh cli
 }
 
 --------------------------------------------------------------------------------
