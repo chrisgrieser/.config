@@ -106,7 +106,7 @@ function M.autoTile(winSrc)
 	)
 	if not wins then return end
 
-	if #wins > 1 then M.bringAllWinsToFront() end
+	M.bringAllWinsToFront()
 
 	if #wins == 0 and u.isFront("Finder") and not (env.isProjector()) then
 		-- hide finder when no windows (delay needed for quitting fullscreen apps,
