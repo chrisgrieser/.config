@@ -26,19 +26,43 @@ alias -g -- -h='-h | bat --language=help --style=plain'
 alias -g -- --help='--help | bat --language=help --style=plain'
 
 # GET A BETTER MAN
+# - searches directly for $2 in the manpage of $1
+# - works for builtin commands as well
+# - opens in a new wezterm tab
 function man() {
 	local command="$1"
 	local search_term="$2"
-	if ! command -v "$command" &>/dev/null; then echo "$command not installed." && return 1; fi
-	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
+	local is_built_in=false
+	[[ "$(type "$command")" =~ "builtin" ]] && is_built_in=true
+	if ! command -v "$command" &>/dev/null; then
+		echo "$command not installed."
+		return 1
+	elif ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+		echo "Not using WezTerm."
+		return 1
+	elif ! command -v bat &>/dev/null; then
+		printf "\033[1;33mbat not installed.\033[0m"
+		return 1
+	fi
+
+	#────────────────────────────────────────────────────────────────────────────
+
 	local pane_id
-		# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
+	if [[ $is_built_in == true ]]; then
+		if [[ -n "$search_term" ]]; then
+			pane_id=$(wezterm cli spawn -- bat --style=plain --language=man --pattern="$search_term" /usr/share/zsh/*/help/"$command")
+		else
+			pane_id=$(wezterm cli spawn -- bat --style=plain --language=man /usr/share/zsh/*/help/"$command")
+		fi
+	else
 		if [[ -n "$search_term" ]]; then
 			pane_id=$(wezterm cli spawn -- man -P "less --pattern=$search_term" "$command")
 		else
 			pane_id=$(wezterm cli spawn -- man "$command")
 		fi
-		wezterm cli set-tab-title --pane-id="$pane_id" "man: $command"
+	fi
+	# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
+	wezterm cli set-tab-title --pane-id="$pane_id" "man: $command"
 }
 
 # greps $2 in the man page of $1
@@ -48,10 +72,10 @@ function gman() {
 	if ! command -v "$command" &>/dev/null; then echo "$command not installed." && return 1; fi
 	if [[ -z "$query" ]]; then printf "\033[1;33mSecond Argument required\033[0m" && return 1; fi
 
-	command man fd |
+	command man "$command" |
 		grep ignore --after=2 --color=always |
 		grep -Ev "^$" |
-		less 
+		less
 }
 
 #───────────────────────────────────────────────────────────────────────────────
