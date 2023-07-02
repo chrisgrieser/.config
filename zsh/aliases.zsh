@@ -2,11 +2,9 @@
 
 # z & cd
 alias zz='z -' # back to last dir
-alias .="open ."
 alias ..="z .."
 alias ...="z ../.."
 alias ....="z ../../.."
-alias .....="z ../../../.."
 
 # MAKE
 # if there is no makefile in current dir, runs makefile located in git root
@@ -78,6 +76,8 @@ alias -g G='| grep --ignore-case --color'
 alias -g B='| bat'
 alias -g C='| pbcopy ; echo "Copied."' # copy
 alias -g N='| wc -l | tr -d " "'       # count lines
+
+# "OK Json" seems to be a good GUI alternative, if needed
 alias -g J='| fx'                      # json preview
 
 # get field #n
