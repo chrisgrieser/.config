@@ -36,7 +36,7 @@ function run(argv) {
 			const name = absPath.split("/").pop();
 			if (!name) return;
 			const relPath = absPath.slice(dotfileFolder.length);
-			const relativeParentFolder = relPath.slice(0, -name.length);
+			const relativeParentFolder = relPath.slice(1, -name.length - 1) || "/";
 
 			// dirty?
 			const fileIsDirty = dirtyFiles.includes(relPath);
@@ -114,7 +114,7 @@ function run(argv) {
 			const name = absPath.slice(0, -1).split("/").pop();
 			if (!name) return;
 			const relPath = absPath.slice(dotfileFolder.length);
-			const relativeParentFolder = relPath.slice(0, -(name.length + 1));
+			const relativeParentFolder = relPath.slice(1, -name.length - 2) || "/";
 
 			return {
 				title: name,

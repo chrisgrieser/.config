@@ -197,7 +197,7 @@ end, { desc = " Open new brace" })
 
 -- [z]pelling [l]ist
 keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
-keymap("n", "z.", "1z=", { desc = "󰓆 Correct" })
+keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 
 ---add word under cursor to vale/languagetool dictionary
 keymap({ "n", "x" }, "zg", function()
@@ -214,7 +214,7 @@ keymap({ "n", "x" }, "zg", function()
 	local filepath = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
 	local success = u.appendToFile(filepath, word)
 	if not success then return end -- error message already by AppendToFile
-	vim.notify(string.format('󰓆 Now accepting:\n"%s"', word))
+	vim.notify(('󰓆 Now accepting:\n"%s"'):format(word))
 end, { desc = "󰓆 Accept Word" })
 
 --------------------------------------------------------------------------------
@@ -230,13 +230,13 @@ keymap("n", "<leader>f<Tab>", function()
 	bo.expandtab = false
 	cmd.retab { bang = true }
 	bo.tabstop = vim.opt_global.tabstop:get()
-	vim.notify("Now using: Tabs ↹ ")
+	vim.notify("Now using tabs ↹")
 end, { desc = "↹ Use Tabs" })
 
 keymap("n", "<leader>f<Space>", function()
 	bo.expandtab = true
 	cmd.retab { bang = true }
-	vim.notify("Now using: Spaces 󱁐")
+	vim.notify("Now using spaces 󱁐")
 end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------

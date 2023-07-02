@@ -66,7 +66,7 @@ function run() {
 				: "unstage";
 
 			return {
-				title: `${trackingDisplay}  ${filename}`,
+				title: `${trackingDisplay} ${filename}`,
 				subtitle: parentFolder,
 				match: alfredMatcher(pathInRepo),
 				arg: pathInRepo,
@@ -77,7 +77,7 @@ function run() {
 						variables: { mode: "reveal" },
 					},
 					cmd: {
-						subtitle: "⌘: Discard Change to File",
+						subtitle: "⌘: Discard (Reset) Changes to File",
 						variables: { mode: "discard" },
 					},
 				},
