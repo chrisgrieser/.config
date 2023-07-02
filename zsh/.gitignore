@@ -1,13 +1,7 @@
-# ignore file for `fd`
-# INFO for telescope.nvim, cannot be named `.fdignore` and must be named `.ignore`
-
 # from having ZDOTDIR set here
 .zcompcache
 .zcompdump
 .zsh_sessions
-
-# to sync plugins
-plugins/*
 
 # to have the last directory command
 .last_pwd

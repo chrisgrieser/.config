@@ -84,7 +84,7 @@ local function searchCounter()
 	-- during the search in the cmdline
 	elseif fn.mode() == "c" and fn.getcmdtype():find("[/?]") then
 		-- for correct count, requires autocmd below refreshing lualine on CmdlineChanged
-		local searchTerm = vim.fn.getcmdline() 
+		local searchTerm = vim.fn.getcmdline()
 		if searchTerm == "" then return "" end
 
 		local buffer = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, true), "\n")
@@ -277,6 +277,7 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
+	dependencies = "nvim-tree/nvim-web-devicons",
 	lazy = false, -- so there is less flickering of the UI on startup
 	opts = lualineConfig,
 }
