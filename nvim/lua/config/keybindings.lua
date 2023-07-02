@@ -86,17 +86,17 @@ keymap("n", "<leader>lm", function()
 	vim.notify("Last Message copied.\n" .. fn.getreg("+"), u.trace)
 end, { desc = "󰘳 Copy Last Message" })
 
--- Dismiss notifications & re-enable fold after search
+-- Dismiss notifications
 keymap("n", "<Esc>", function()
 	local clearPending = require("notify").pending() > 10
 	require("notify").dismiss { pending = clearPending }
-end, { desc = "Clear Notifications" })
+end, { desc = "󰎟 Clear Notifications" })
 
 --------------------------------------------------------------------------------
 
 -- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
-keymap({ "o", "x" }, "H", "^")
 keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long indented lines
+keymap({ "o", "x" }, "H", "^")
 keymap({ "n", "x" }, "L", "$") -- not using "o", since used for link textobj
 keymap({ "n", "x" }, "J", "6j")
 keymap({ "n", "x" }, "K", "6k")
@@ -109,11 +109,16 @@ keymap("o", "K", "2k")
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
---------------------------------------------------------------------------------
+-- Simplified Marks
+keymap("n", "Ä", function ()
+	vim.notify(" Mark set.", u.trace)	
+	u.normal("mM")
+end, { desc = " Set Mark" })
+keymap("n", "ä", "'M", { desc = " Goto Mark" })
 
 -- Hunks and Changes
-keymap("n", "gh", ":Gitsigns next_hunk<CR>zv", { desc = "goto next hunk" })
-keymap("n", "gH", ":Gitsigns prev_hunk<CR>zv", { desc = "goto previous hunk" })
+keymap("n", "gh", ":Gitsigns next_hunk<CR>zv", { desc = "󰊢 Next Hunk" })
+keymap("n", "gH", ":Gitsigns prev_hunk<CR>zv", { desc = "󰊢 Previous Hunk" })
 
 -- [M]atching Bracket
 -- remap needed, if using the builtin matchit plugin / vim-matchup
@@ -124,7 +129,7 @@ keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 -- SEARCH
 keymap("x", "-", "zn<Esc>/\\%V", { desc = "Search within selection" })
 keymap("n", "+", "*", { desc = "Search word under cursor" })
-keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "Visual star" })
+keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" })
 
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
