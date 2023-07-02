@@ -87,16 +87,16 @@
 	},
 	".map ( => )": {
 		"prefix": ".map ( => )",
-		"body": ".map(${1:item} => ${1:item}$0)"
+		"body": ".map(${1:item} => ${1:item})"
 	},
 	"filter (array)": {
-		"prefix": "filter (array)",
-		"body": "filter(${1:item} => ${1:item})"
+		"prefix": ".filter (array)",
+		"body": ".filter(${1:item} => ${1:item})"
 	},
 	".sort (array)": {
 		"prefix": ".sort (array)",
 		"body": [
-			"sort((a, b) => {",
+			".sort((a, b) => {",
 			"\treturn ${1:b - a};",
 			"})"
 		],
