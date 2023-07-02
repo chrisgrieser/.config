@@ -7,7 +7,10 @@ entry_name=$(echo "$entry_name" | tr -d ":/\\") # remove illegal characters
 # shellcheck disable=2154
 if [[ "$generatePassword" -eq 1 ]]; then
 	pass generate --no-symbols "$folder$entry_name" &>/dev/null
-	echo -n "$(pass show "$folder$entry_name" | head -n1)" # pass to Alfred for copying
+
+	# pass to Alfred for copying
+	echo -n "$(pass show "$folder$entry_name" | head -n1)"
 else
-	pbpaste | pass insert "$folder$entry_name" &>/dev/null
+	# echo needed to skip confirmation, not to pass password again
+	pbpaste | pass insert --echo "$folder$entry_name" &>/dev/null
 fi
