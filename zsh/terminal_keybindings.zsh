@@ -5,7 +5,7 @@ function bindEverywhere () {
 	bindkey -M viins "$1" $2
 	bindkey -M vicmd "$1" $2
 }
-# bindEverywhere "^A" beginning-of-line
+bindEverywhere "^A" beginning-of-line
 bindEverywhere "^E" end-of-line
 bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
@@ -16,7 +16,7 @@ bindEverywhere '^[[A' history-substring-search-up # up/down: history substring s
 bindEverywhere '^[[B' history-substring-search-down 
 bindEverywhere "^[[Z" autosuggest-accept # shift-tab: accept ghost text from zsh-autosugget
 
-# ctrl+O (bound to cmd+enter via wezterm): base directories (Mini-Harpoon)
+# ctrl+O (bound to cmd+enter via wezterm): base directories 
 bindEverywhere "^O" harpoon
 
 #-------------------------------------------------------------------------------

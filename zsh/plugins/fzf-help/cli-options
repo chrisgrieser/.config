@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 usage="Usage: $(basename "$0") [-h | --help] <cmd>
 
