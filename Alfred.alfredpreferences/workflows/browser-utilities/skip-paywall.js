@@ -24,6 +24,9 @@ function browserTab() {
 }
 
 const url = browserTab().url;
+const title = browserTab().title;
 frontmostApp.includeStandardAdditions = true;
 frontmostApp.openLocation("https://12ft.io/" + url);
 frontmostApp.openLocation("https://www.spaywall.com/search/" + url);
+frontmostApp.openLocation("https://www.google.com/search?q=" + encodeURIComponent(title));
+
