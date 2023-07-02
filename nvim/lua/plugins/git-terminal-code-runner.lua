@@ -83,10 +83,22 @@ return {
 			direction = "horizontal",
 			autochdir = true, -- when nvim changes pwd, will also change its pwd
 		},
-		cmd = { "ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection" },
 		keys = {
 			{ "<leader>tt", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
 		},
+		-- loaded by commands in sh ftplugin
+		cmd = { "ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection" },
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "sh",
+				callback = function()
+					-- stylua: ignore
+					vim.keymap.set("n", "<leader>i", vim.cmd.ToggleTermSendCurrentLine, { desc = "  REPL: Send Line", buffer = true })
+					-- stylua: ignore
+					vim.keymap.set("x", "<leader>i", vim.cmd.ToggleTermSendVisualSelection, { desc = "  REPL: Send Selection", buffer = true })
+				end,
+			})
+		end,
 	},
 	{ -- git sign gutter & hunk textobj
 		"lewis6991/gitsigns.nvim",
@@ -94,7 +106,7 @@ return {
 		opts = { max_file_length = 7500 },
 	},
 	{ -- git client
-		"TimUntersberger/neogit",
+		"NeogitOrg/neogit",
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = "Neogit",
 		init = function()

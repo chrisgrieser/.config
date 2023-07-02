@@ -2,16 +2,14 @@ return {
 	{ -- Multi Cursor
 		"mg979/vim-visual-multi",
 		keys = { { "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" } },
-		-- already set via lualine component
 		init = function()
 			-- Multi-Cursor https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
-			-- overridden inside snippet for snippetjumping
 			vim.g.VM_maps = {
 				["Find Under"] = "<D-j>", -- select word under cursor & enter visual-multi (normal) / add next occurrence (visual-multi)
 				["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
 				["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
 			}
-			vim.g.VM_set_statusline = 0
+			vim.g.VM_set_statusline = 0 -- already set via lualine component
 		end,
 	},
 	{ -- structural search & replace
@@ -21,7 +19,7 @@ return {
 			{ "<leader>fs", function() require("ssr").open() end, mode = { "n", "x" }, desc = "󱗘 Structural S&R" },
 		},
 		opts = {
-			keymaps = { close = "Q" }, -- needs remap due conflict with commenting otherwise
+			keymaps = { close = "Q" }, -- needs remap due conflict with commenting keymap
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
@@ -38,9 +36,9 @@ return {
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				callback = function()
 					-- Terminal does not support underdotted
-					local stroke = vim.fn.has("gui_running") and "underdotted" or "underline"
-					vim.api.nvim_set_hl(0, "TSDefinition", { [stroke] = true })
-					vim.api.nvim_set_hl(0, "TSDefinitionUsage", { [stroke] = true })
+					local strokeType = vim.fn.has("gui_running") and "underdotted" or "underline"
+					vim.api.nvim_set_hl(0, "TSDefinition", { [strokeType] = true })
+					vim.api.nvim_set_hl(0, "TSDefinitionUsage", { [strokeType] = true })
 				end,
 			})
 		end,
@@ -113,9 +111,9 @@ return {
 				dapSharedKeymaps = true,
 			}
 
+			-- INFO inserting needed, to not disrupt existing lualine-segment
 			local topSeparators = { left = "", right = "" }
 
-			-- INFO inserting needed, to not disrupt existing lualine-segment
 			local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
 			local lualineY = require("lualine").get_config().tabline.lualine_y or {}
 			table.insert(

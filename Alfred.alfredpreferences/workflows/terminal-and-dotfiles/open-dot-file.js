@@ -66,6 +66,7 @@ function run(argv) {
 				case "icns":
 				case "png":
 				case "gif":
+				case "jpg":
 					iconObj.path = absPath;
 					break;
 				// use filetype image
