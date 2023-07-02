@@ -6,7 +6,8 @@ entry_name=$(echo "$entry_name" | tr -d ":/\\") # remove illegal characters
 
 # shellcheck disable=2154
 if [[ "$generatePassword" -eq 1 ]]; then
-	pass generate --clip --no-symbols "$folder$entry_name" "${password_length:?}" 2>&1
+	pass generate --no-symbols "$folder$entry_name" &>/dev/null
+	echo -n "$(pass show "$folder$entry_name" | head -n1)" # pass to Alfred for copying
 else
-	pbpaste | pass insert --echo "$folder$entry_name" 2>&1
+	pbpaste | pass insert "$folder$entry_name" &>/dev/null
 fi

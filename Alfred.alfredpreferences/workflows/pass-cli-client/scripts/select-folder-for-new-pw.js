@@ -21,6 +21,7 @@ function run(argv) {
 			return {
 				title: `📂 ${folder}`,
 				arg: folder,
+				variables: { generatePassword: true },
 				mods: {
 					cmd: {
 						subtitle: "⌘↵: Insert password from clipboard",
@@ -36,8 +37,5 @@ function run(argv) {
 	// discoverability: show alternate option on first
 	passwordFolders[0].subtitle = "↵: Autogenerate password     ⌘↵: Password from clipboard";
 
-	return JSON.stringify({
-		variables: { generatePassword: true },
-		items: passwordFolders,
-	});
+	return JSON.stringify({ items: passwordFolders });
 }
