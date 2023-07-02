@@ -35,12 +35,12 @@ function dump() {
 	local device_name
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 	brew bundle dump --force --file "$dump_path/Brewfile_$device_name"
-	# INFO command to skip my npm alias
+	# INFO `command` to skip my npm alias
 	command npm list --location=global --parseable | sed "1d" | sed -E "s/.*\///" >"$dump_path/NPMfile_$device_name"
 	# pip3 list --not-required | tail -n+3 | cut -d" " -f1 >"$dump_path/Pip3file_$device_name"
 
 	# shellcheck disable=2012
-	ls -1 "$HOME/Library/Application Support/$BROWSER_DEFAULTS_PATH/Default/Extensions/" |
+	ls --color=never "$HOME/Library/Application Support/$BROWSER_DEFAULTS_PATH/Default/Extensions/" |
 		sed "s|^|https://chrome.google.com/webstore/detail/|" >"$dump_path/browser-extensions.txt"
 
 	echo "Brewfile, NPM-File, and list of browser extensions dumped at \"$dump_path\""

@@ -55,8 +55,8 @@ function pip3() {
 
 alias bkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-script.sh"'
 
-alias l='exa --all --long --git --icons --group-directories-first --sort=modified'
-alias exa='exa --all --icons --sort=name --group-directories-first'
+alias l='exa --all --long --icons --git --group-directories-first --sort=name'
+alias exa='exa --all --no-user --icons --git --group-directories-first --sort=name'
 alias tree='exa --tree --level=4 --icons --git-ignore'
 alias tree-dir='exa --only-dirs --tree --level=4 --icons --git-ignore'
 alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'

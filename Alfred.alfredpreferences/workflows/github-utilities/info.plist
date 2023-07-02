@@ -293,7 +293,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Reset</string>
+				<string>⌘: Discard (Reset) Changes to File</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
