@@ -5,11 +5,10 @@ function bindEverywhere () {
 	bindkey -M viins "$1" $2
 	bindkey -M vicmd "$1" $2
 }
-bindEverywhere "^A" beginning-of-line
+# bindEverywhere "^A" beginning-of-line
 bindEverywhere "^E" end-of-line
 bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
-bindEverywhere "^B" copy-buffer # wezterm: cmd+b
 bindEverywhere "^Z" undo # wezterm: cmd+z
 bindEverywhere "…" insert-last-word # …=alt+.
 

@@ -15,7 +15,7 @@ autoload compinit -Uz +X && compinit
 
 # "fzf-tab needs to be loaded after compinit, but before plugins which will wrap
 # widgets, such as zsh-autosuggestions or fast-syntax-highlighting"
-source "$DOTFILE_FOLDER/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+# source "$DOTFILE_FOLDER/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 # INFO `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 source "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
@@ -31,7 +31,12 @@ source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
 
 # Starship
 eval "$(starship init zsh)"
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
+export STARSHIP_CONFIG="$DOTFILE_FOLDER/starship/starship.toml"
 
-# Fuck
-eval "$(thefuck --alias)"
+#───────────────────────────────────────────────────────────────────────────────
+
+source "$DOTFILE_FOLDER/zsh/plugins/fzf-help/fzf-help.zsh"
+
+zle -N fzf-help-widget
+bindkey -M vicmd "^A" fzf-help-widget
+bindkey -M viins "^A" fzf-help-widget

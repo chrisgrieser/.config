@@ -72,8 +72,6 @@ local keybindings = {
 	-- using the mapping from the terminal_keybindings.zsh
 	-- undo
 	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
-	-- copy buffer
-	{ key = "b", mods = "CMD", action = act.SendKey { key = "b", mods = "CTRL" } },
 	-- Harpoon (directory cycler)
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
 
