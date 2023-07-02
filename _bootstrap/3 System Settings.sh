@@ -12,13 +12,6 @@ sudo -v
 # System Prefs
 #-------------------------------------------------------------------------------
 
-# Network
-# pw.md generated via keychain reading before
-WIFI=$(grep -i -A1 "WiFi" pw.md | tail -n1)
-WIFI_NAME=$(echo "$WIFI" | cut -d" " -f1)
-WIFI_PW=$(echo "$WIFI" | cut -d" " -f2)
-networksetup -setairportnetwork en1 "$WIFI_NAME" "$WIFI_PW"
-
 # Cloudflare DNS
 # networksetup -setdnsservers Wi-Fi 1.1.1.1 1.0.0.1
 # networksetup -setdnsservers Ethernet 1.1.1.1 1.0.0.1
@@ -30,9 +23,6 @@ networksetup -setdnsservers Ethernet 8.8.8.8 8.8.4.4
 # -------------------------------
 # Finder
 # -------------------------------
-
-# set base directory
-WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
 
 # Set the default location for new Finder windows
 defaults write com.apple.finder NewWindowTarget 'PfHm'
