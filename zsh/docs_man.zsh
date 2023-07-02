@@ -32,8 +32,6 @@ alias -g -- --help='--help | bat --language=help --style=plain'
 function man() {
 	local command="$1"
 	local search_term="$2"
-	local is_built_in=false
-	[[ "$(type "$command")" =~ "builtin" ]] && is_built_in=true
 	if ! command -v "$command" &>/dev/null; then
 		echo "$command not installed."
 		return 1
@@ -48,7 +46,9 @@ function man() {
 	#────────────────────────────────────────────────────────────────────────────
 
 	local pane_id
-	if [[ $is_built_in == true ]]; then
+	if [[ "$(type "$command")" =~ "builtin" ]]; then
+		# using bat, since it adds some syntax highlighting to the builtin pages,
+		# which man/less does not
 		if [[ -n "$search_term" ]]; then
 			pane_id=$(wezterm cli spawn -- bat --style=plain --language=man --pattern="$search_term" /usr/share/zsh/*/help/"$command")
 		else

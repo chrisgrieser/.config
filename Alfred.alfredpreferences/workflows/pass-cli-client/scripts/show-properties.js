@@ -16,13 +16,15 @@ function run(argv) {
 	const properties = app.doShellScript(`pass show "${entryId}"`)
 		.split("\r")
 		.slice(1) // first entry is password which can can already be direct accessed
+		.filter(line => line !== "")
 		.map(property => {
 			const valid = property.includes(":");
-			const key = property.split(":")[0];
-			const value = property.split(":")[1].trim();
+			const key = valid ? property.split(":")[0].trim() : "[no key]";
+			const value = valid ? property.slice(property.indexOf(":") + 1).trim() : property;
 			return {
-				title: valid ? value : property,
-				subtitle: valid ? key : "[no key]",
+				title: value,
+				match: property,
+				subtitle: key,
 				arg: value,
 			};
 		})
