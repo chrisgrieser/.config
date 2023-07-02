@@ -19,6 +19,12 @@ function h() {
 	fi
 }
 
+# COLORFUL HELP
+# `--` ensures dash can be used in the alias name
+# `--help` and `-h` offer help pages of different length for some commands, e.g. fd
+alias -g -- -h='-h | bat --language=help --style=plain'
+alias -g -- --help='--help | bat --language=help --style=plain'
+
 # GET A BETTER MAN
 function man() {
 	local command="$1"
@@ -74,6 +80,10 @@ function ai() {
 
 #───────────────────────────────────────────────────────────────────────────────
 # LESS config
+
+# use `bat` as manpager
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# man 2 select
 
 export LESS_TERMCAP_mb=$'\E[1;31m' # begin bold
 export LESS_TERMCAP_md=$'\E[1;33m' # begin blink = YELLOW

@@ -70,7 +70,6 @@ alias -s {gif,png,jpg,jpeg,webp}='qlmanage -p'
 alias -s {md,lua,js,ts,css,sh,zsh,applescript}=bat
 
 # GLOBAL ALIAS (to be used at the end, mostly)
-alias -g H='--help'
 alias -g G='| grep --ignore-case --color'
 alias -g B='| bat'
 alias -g C='| pbcopy ; echo "Copied."' # copy
@@ -88,7 +87,6 @@ done
 ZSH_HIGHLIGHT_REGEXP+=(" F[[:digit:]]" 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
