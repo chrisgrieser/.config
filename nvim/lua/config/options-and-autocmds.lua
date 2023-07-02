@@ -149,6 +149,10 @@ autocmd("CursorMoved", {
 		end
 	end,
 })
+-- FIX scrolloff sometimes being set to zero? 🤔
+autocmd("BufReadPost", {
+	callback = function() opt.scrolloff = 13 end,
+})
 
 --------------------------------------------------------------------------------
 
@@ -195,7 +199,7 @@ autocmd("BufReadPost", {
 opt.autowrite = true
 opt.autowriteall = true
 
-autocmd({ "BufWinLeave", "BufLeave", "QuitPre", "FocusLost", "InsertLeave" }, {
+autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
 	callback = function()
 		local filepath = expand("%:p")

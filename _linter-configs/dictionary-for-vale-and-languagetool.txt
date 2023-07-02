@@ -98,3 +98,8 @@ keycodes
 Hammerspoon
 espanso
 WezTerm
+In addition
+Dataview
+Code
+Vim
+Frontmatter

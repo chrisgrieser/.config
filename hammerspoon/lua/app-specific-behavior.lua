@@ -92,6 +92,7 @@ Wf_finder = wf.new("Finder")
 FinderAppWatcher = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
 		finder:selectMenuItem { "View", "Hide Sidebar" }
+		wu.bringAllWinsToFront() -- redundancy
 		wu.autoTile("Finder")
 	end
 end):start()
