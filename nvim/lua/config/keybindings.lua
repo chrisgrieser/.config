@@ -127,7 +127,7 @@ keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 --------------------------------------------------------------------------------
 
 -- SEARCH
-keymap("x", "-", "zn<Esc>/\\%V", { desc = "Search within selection" })
+keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 keymap("n", "+", "*", { desc = "Search word under cursor" })
 keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" })
 
@@ -220,10 +220,9 @@ end, { desc = "󰓆 Accept Word" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("x", "<leader>f" .. "o", ":sort<CR>", { desc = "󱗘 :sort selection" })
-keymap("x", "<leader>f" .. "O", ":sort i<CR>", { desc = "󱗘 :sort selection (case insensitive)" })
-keymap("n", "<leader>f" .. "o", "vip:sort<CR>", { desc = "󱗘 :sort paragraph" })
-keymap("n", "<leader>f" .. "O", "vip:sort i<CR>", { desc = "󱗘 :sort paragraph (case insensitive)" })
+keymap("n", "<leader>ff", ":% s///g<Left><Left><Left>", { desc = "󱗘 :substitute" })
+keymap("x", "<leader>ff", ": s///g<Left><Left><Left>", { desc = "󱗘 :substitute" })
+
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
 keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines" })
 

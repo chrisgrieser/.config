@@ -74,20 +74,6 @@ return {
 			{"<leader>fe", function() require("refactoring").refactor("Extract Variable") end, mode = {"n", "x"}, desc = "󱗘 Extract Var" },
 		},
 	},
-	{ -- :substitute but with lua regex
-		"chrisgrieser/nvim-alt-substitute",
-		keys = {
-			{
-				"<leader>ff",
-				function() return ":S /" .. vim.fn.expand("<cword>") .. "//g<Left><Left>" end,
-				mode = { "n", "x" },
-				desc = "󱗘 :AltSubstitute (word under cursor)",
-				expr = true,
-			},
-		},
-		opts = true,
-		dev = true,
-	},
 	{ -- better macros
 		"chrisgrieser/nvim-recorder",
 		dev = true,
