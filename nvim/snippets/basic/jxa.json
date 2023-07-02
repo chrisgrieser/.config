@@ -111,9 +111,12 @@
 			"\t.windows[0].name()[0];"
 		]
 	},
-	"click menu item": {
-		"prefix": "click menu item",
-		"body": "Application(\"System Events\").processes.byName(\"${1:appName}\").menuBars[0].menuBarItems.byName(\"${2:1menu}\").menus[0].menuItems.byName(\"${3:menuItem}\").click()",
+	"menu item": {
+		"prefix": "menu item",
+		"body": [
+			"Application(\"${1:appName}\").activate();",
+			"Application(\"System Events\").processes.byName(\"${1:appName}\").menuBars[0].menuBarItems.byName(\"${2:1menu}\").menus[0].menuItems.byName(\"${3:menuItem}\").click()"
+		],
 		"description": "https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/System-Events#clicking-menu-items"
 	},
 	"browser URL & title (all-browser function)": {

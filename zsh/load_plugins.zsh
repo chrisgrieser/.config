@@ -33,10 +33,3 @@ source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$DOTFILE_FOLDER/starship/starship.toml"
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# source "$DOTFILE_FOLDER/zsh/plugins/fzf-help/fzf-help.zsh"
-#
-# zle -N fzf-help-widget
-# bindkey -M vicmd "^H" fzf-help-widget
-# bindkey -M viins "^H" fzf-help-widget
