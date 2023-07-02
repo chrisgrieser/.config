@@ -2,20 +2,22 @@ return {
 	{ -- REPL
 		"Vigemus/iron.nvim",
 		keys = {
-			{ "<leader>ti", vim.cmd.IronRepl, desc = "󱠥 Toggle REPL" },
-			{ "<leader>i", desc = "󱠥 Send Line" },
+			{ "<leader>tr", vim.cmd.IronRepl, desc = "󱠤 󰐊 Toggle REPL" },
+			{ "<leader>tR", vim.cmd.IronRestart, desc = "󱠤 󰐊 Restart REPL" },
+			{ "<leader>i", desc = "󱠤 󰐊 REPL: Send Line" },
 		},
 		config = function()
 			require("iron.core").setup {
 				config = {
 					repl_open_cmd = require("iron.view").split.horizontal.belowright(8),
-					highlight_last = "IronLastSent",
 					repl_definition = {
 						sh = { command = { "zsh" } },
 						lua = { command = { "lua" } },
 						typescript = { command = { "node" } },
-						javascript = { command = { "node" } },
 						python = { command = { "python3" } },
+						-- Applescript & JXA – using `-i` for the REPL
+						javascript = { command = { "osascript", "-il", "JavaScript" } },
+						applescript = { command = { "osascript", "-i" } },
 					},
 				},
 				keymaps = {
