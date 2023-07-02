@@ -42,3 +42,10 @@ export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 
 export NEOVIDE_FRAME="buttonless"
 export NEOVIDE_IDLE=1
+
+
+#───────────────────────────────────────────────────────────────────────────────
+# PASS
+export PASSWORD_STORE_CLIP_TIME=60
+export PASSWORD_STORE_GENERATED_LENGTH=32
+
