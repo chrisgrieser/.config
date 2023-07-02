@@ -17,7 +17,7 @@
     brew install pass pinentry-mac
     ```
 
-3. Setup `pass` with a GPG key. See the [Pass-Website](https://www.passwordstore.org/) for further information.
+3. Setup `pass` with a GPG key. See the [Pass Website](https://www.passwordstore.org/) for further information.
 4. Setup `pinentry-mac` as your `pinentry-program`:
 
     ```bash
@@ -36,20 +36,19 @@ If you are using a custom password-store directory, you __must__ export your `PA
 
 ## Usage
 - Alfred keyword: `pw`
-- `↵`: Copy password to the clipboard
+- `↵`: Copy password to the clipboard. 
+    - If your search query does not find an entry, you can directly create a new entry by pressing `↵`. You are then be prompted for a folder to place the new entry in. The password of the new entry is auto-generated based on your `pass` settings, or can be inserted from your clipboard.
 - `⌘↵`: Edit entry in your Terminal, using [the Terminal configured in your
-  Alfred settings.](https://www.alfredapp.com/help/features/terminal/)
+  Alfred settings](https://www.alfredapp.com/help/features/terminal/) and your `$EDITOR`.
 - `⌥↵`: Reveal `.gpg` file of the entry in Finder.
-- `⌃↵`: Delete entry.
+- `⌃↵`: Delete the entry.
 - `⇧↵`: Show non-password entries. Select any one of them to copy the value to
   your clipboard.
-- If your search query does not find an entry, you can directly create a new
-  entry by pressing `↵`. You are then be prompted for a folder to place the new entry in. The password of the new entry is auto-generated based on your `pass` settings, or can be read from your clipboard.
 
-## Note on security
-- Please note that your system clipboard is cleared according to your `gpg` settings, any password may still be saved in your Alfred clipboard history. [You can clear your Alfred clipboard history via `clear`](https://www.alfredapp.com/help/features/clipboard/).
-- This workflow is just a more convenient interface for `pass`. As such, no
-  passwords are saved by the workflow in any way. The workflow is open source, so feel free to check yourself.
+## Notes on security
+- All contents copied by this clipboard are marked as "transient," meaning most
+  clipboard history apps, including Alfred itself, should ignore them. 
+- This workflow is just convenient UI for `pass`. As such, no passwords are saved by the workflow in any way. The workflow is open source, so feel free to check yourself.
 
 ## Credits
 <!-- vale Google.FirstPerson = NO -->
