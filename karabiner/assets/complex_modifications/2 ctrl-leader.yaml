@@ -64,7 +64,7 @@ rules:
           - shell_command: open -a 'BusyCal'
           - *deactivate-leader
           - *remove-notice
-      # [ö] (looks like tweetbot): twitter
+      # [ö] (looks like tweetbot): twitter/Mastodon
       - type: basic
         from: { key_code: semicolon } # ö on German keyboard
         conditions:
@@ -74,7 +74,7 @@ rules:
           - type: input_source_if
             input_sources: [{ language: ^de$ }]
         to:
-          - shell_command: open -a 'Twitter'
+          - shell_command: open -a 'Twitter' || open -a 'Ivory'
           - *deactivate-leader
           - *remove-notice
       # [,]: System Preferences
