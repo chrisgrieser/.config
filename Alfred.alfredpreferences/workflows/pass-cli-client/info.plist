@@ -210,7 +210,18 @@
 			</dict>
 		</array>
 		<key>8DFAB981-4135-40F5-BA81-DEDA35D0F632</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D1151344-66AB-453F-8468-097748113645</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</key>
 		<array>
 			<dict>
@@ -618,7 +629,7 @@ osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR" "$*"<
 				<key>text</key>
 				<string>******************</string>
 				<key>title</key>
-				<string>✅ Copied</string>
+				<string>📋 Copied</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -725,6 +736,27 @@ osascript -l JavaScript ./scripts/show-properties.js "$PASSWORD_STORE_DIR"</stri
 			<string>8DFAB981-4135-40F5-BA81-DEDA35D0F632</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>📋 Clipboard Cleared</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D1151344-66AB-453F-8468-097748113645</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1020,7 +1052,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit</string>
 			<key>xpos</key>
-			<real>425</real>
+			<real>445</real>
 			<key>ypos</key>
 			<real>660</real>
 		</dict>
@@ -1086,6 +1118,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
+		<key>D1151344-66AB-453F-8468-097748113645</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>975</real>
+			<key>ypos</key>
+			<real>380</real>
+		</dict>
 		<key>E28BAD26-7C03-414A-A567-4F44432F9FD7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1113,7 +1154,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit</string>
 			<key>xpos</key>
-			<real>425</real>
+			<real>445</real>
 			<key>ypos</key>
 			<real>525</real>
 		</dict>
