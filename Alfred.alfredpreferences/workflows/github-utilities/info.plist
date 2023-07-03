@@ -1622,9 +1622,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>330</real>
+			<real>345</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>775</real>
 		</dict>
 		<key>2C3038DA-F043-4F3E-8C18-97A96070D05F</key>
 		<dict>
@@ -1720,7 +1720,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>1130</real>
+			<real>1115</real>
 		</dict>
 		<key>64E22B39-2269-4B91-832E-9ACC83DF0D4A</key>
 		<dict>
@@ -1765,9 +1765,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>555</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>745</real>
 		</dict>
 		<key>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</key>
 		<dict>
@@ -1785,7 +1785,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>930</real>
 		</dict>
 		<key>80310399-4092-49D2-B048-D91D9184B37F</key>
 		<dict>
@@ -1823,7 +1823,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>1095</real>
+			<real>1085</real>
 		</dict>
 		<key>BC540696-9F8F-4C3E-A49D-75AB31EF690F</key>
 		<dict>
@@ -1841,7 +1841,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>1000</real>
 		</dict>
 		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>
 		<dict>
@@ -1850,9 +1850,9 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>note</key>
 			<string>issues search</string>
 			<key>xpos</key>
-			<real>405</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>745</real>
 		</dict>
 		<key>C27D01B3-A3B9-4661-9D70-8808DC522FD1</key>
 		<dict>
@@ -1908,7 +1908,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>930</real>
 		</dict>
 		<key>D4F0274E-F79C-43A1-9C38-65C92510EEF2</key>
 		<dict>
@@ -1919,7 +1919,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>935</real>
+			<real>930</real>
 		</dict>
 		<key>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</key>
 		<dict>
