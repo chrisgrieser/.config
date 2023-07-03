@@ -202,6 +202,7 @@ opt.autowriteall = true
 autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost", "InsertLeave" }, {
 	pattern = "?*", -- pattern required for some events
 	callback = function()
+		if true then return end
 		local filepath = expand("%:p")
 		if
 			fn.filereadable(filepath) == 1

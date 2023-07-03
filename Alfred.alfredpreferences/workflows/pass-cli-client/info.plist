@@ -56,6 +56,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>8DFAB981-4135-40F5-BA81-DEDA35D0F632</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>24B77922-B082-4744-B4A1-6EAD37FFD88C</key>
 		<array>
@@ -199,6 +209,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>8DFAB981-4135-40F5-BA81-DEDA35D0F632</key>
+		<array/>
 		<key>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</key>
 		<array>
 			<dict>
@@ -481,7 +493,7 @@ osascript -l JavaScript ./scripts/select-folder-for-new-pw.js "$PASSWORD_STORE_D
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>queuemode</key>
 				<integer>2</integer>
 				<key>runningsubtext</key>
@@ -690,6 +702,29 @@ osascript -l JavaScript ./scripts/show-properties.js "$PASSWORD_STORE_DIR"</stri
 			<string>4CD4709B-D7A9-4FFD-8FDE-D62EC9053E14</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/clear-clipboard.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>8DFAB981-4135-40F5-BA81-DEDA35D0F632</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -912,7 +947,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>810</real>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
@@ -988,6 +1023,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>425</real>
 			<key>ypos</key>
 			<real>660</real>
+		</dict>
+		<key>8DFAB981-4135-40F5-BA81-DEDA35D0F632</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>delayed clearing of the clipboard</string>
+			<key>xpos</key>
+			<real>810</real>
+			<key>ypos</key>
+			<real>380</real>
 		</dict>
 		<key>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</key>
 		<dict>
