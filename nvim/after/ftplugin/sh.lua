@@ -17,7 +17,6 @@ keymap({ "o", "x" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)
 --stylua: ignore
 keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { desc = "󱡔 outer shellPipe textobj", buffer = true })
 
-
 --------------------------------------------------------------------------------
 
 -- Reload Sketchybar

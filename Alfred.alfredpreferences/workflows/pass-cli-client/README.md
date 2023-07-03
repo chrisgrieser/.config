@@ -30,12 +30,12 @@
 > When admitted to the Alfred Gallery, the workflow auto-updates via Alfred's workflow-update mechanism.
 
 ## Configuration
-This workflow is reads all your `PASSWORD_STORE_*` environment variables that have been added to your `~/.zshenv`. This means that most configuration is done by exporting respective variables in `~/.zshenv`, this workflow therefore has only few configuration options that concern Alfred in particular. The only exception to this is `PASSWORD_STORE_CLIP_TIME`, which is ignored since Alfred does the copying and not `pass`.
+This workflow is reads all your `PASSWORD_STORE_*` environment variables that have been added to your `~/.zshenv`. This means that most configuration is done by exporting respective variables in `~/.zshenv`, this workflow therefore has only few configuration options that concern Alfred in particular. 
 
 For information about the available environment variables, see the [pass man page](https://git.zx2c4.com/password-store/about/).
 
 > __Note__  
-> If you are using a custom password-store directory, you __must__ export your `PASSWORD_STORE_DIR` in your `~/.zshenv` for this workflow to work. 
+> If you are using a custom password-store directory, you must export your `PASSWORD_STORE_DIR` in your `~/.zshenv` for this workflow to work. 
 
 ## Usage
 - Alfred keyword: `pw`
@@ -50,7 +50,7 @@ For information about the available environment variables, see the [pass man pag
 
 ## Notes on security
 - All contents copied by this clipboard are marked as "transient," meaning most
-  clipboard history apps, including Alfred itself, should ignore them. 
+  clipboard history apps, including Alfred itself, ignore them. 
 - This workflow is just convenient UI for `pass`. As such, no passwords are saved by the workflow in any way. The workflow is open source, so feel free to check yourself.
 
 ## Credits

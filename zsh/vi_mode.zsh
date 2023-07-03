@@ -15,9 +15,7 @@ export KEYTIMEOUT=1
 bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
 bindkey -M vicmd 'U' redo
-bindkey -M vicmd 'ü' vi-swap-case
 bindkey -M vicmd 'M' vi-join
-bindkey -M vicmd -s 'ü' 'mzlblgueh~`z' # switch between capitalized and lowercased
 
 # to prevent accidentally going to the beginning of the history (which is never
 # a desired behavior…) Not implemented for 'G', since going down the history

@@ -15,7 +15,7 @@ local lintersAndFormatters = {
 	"stylua", -- lua
 	"prettier", -- only used for yaml and html https://github.com/mikefarah/yq/issues/515
 	"rome", -- also an LSP; the lsp does diagnostics, the CLI via null-ls does formatting
-	-- "stylelint", -- included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
+	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 }
 
 --------------------------------------------------------------------------------
@@ -42,7 +42,6 @@ local function nullSources()
 		builtins.formatting.black,
 
 		-- SHELL
-		builtins.diagnostics.zsh, -- basic diagnostics via shell -x
 		builtins.formatting.shfmt,
 
 		-- force shellcheck to work with zsh
@@ -63,7 +62,7 @@ local function nullSources()
 			-- using config without ordering, since automatic re-ordering can be
 			-- confusing. Config with stylelint-order is only run on build.
 			extra_args = { "--config", linterConfig .. "/stylelintrc-formatting.yml" },
-			timeout = 10000, -- longer timeout for large css files
+			timeout = 12000, -- longer timeout for large css files
 		},
 		builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 			extra_args = {
