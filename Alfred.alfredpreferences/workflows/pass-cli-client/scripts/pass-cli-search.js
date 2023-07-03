@@ -25,8 +25,12 @@ function run(argv) {
 		return JSON.stringify({ items: passwords });
 	}
 
-	// `-iname` makes the search case-insensitive
+
+	// INFO using `fd` does not lead to significant enough speed improvements to
+	// justify the extra dependency
+	// const passwordlist = app.doShellScript(`cd "${passwordStore}" ; fd --ignore-case --full-path ".*${query}.*.gpg$"`);
 	const passwordlist = app.doShellScript(`cd "${passwordStore}" ; find . -ipath "*${query}*.gpg"`);
+
 	let createNewPassword;
 	if (passwordlist) {
 		createNewPassword = false;

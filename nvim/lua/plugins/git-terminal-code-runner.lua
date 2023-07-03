@@ -27,6 +27,10 @@ return {
 			}
 		end,
 	},
+	{
+		'michaelb/sniprun',
+		build = 'sh ./install.sh',
+	},
 	{ -- Emulate Jupyter Notebook Functionality
 		"GCBallesteros/NotebookNavigator.nvim",
 		keys = {
