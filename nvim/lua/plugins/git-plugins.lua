@@ -18,8 +18,8 @@ return {
 		opts = {
 			disable_insert_on_commit = false, -- false = start commit msgs in insert mode
 			disable_commit_confirmation = true,
-			disable_builtin_notifications = true, -- BUG does not seem to be working
-			integrations = { diffview = true }, -- diffview plugin
+			disable_builtin_notifications = true,
+			integrations = { diffview = true },
 			signs = {
 				section = { "", "" },
 				item = { "", "" },

@@ -49,7 +49,7 @@ local function inspect(str)
 			end,
 		})
 	else
-		vim.notify("Neither in nvim nor in hammerspoon directory.", u.error)
+		vim.notify("Neither in nvim nor in hammerspoon directory.", u.warn)
 	end
 end
 

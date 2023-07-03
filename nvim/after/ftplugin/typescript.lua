@@ -5,15 +5,16 @@ local keymap = vim.keymap.set
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- setup quickfix list for npm, see also: https://vonheikemen.github.io/devlog/tools/vim-and-the-quickfix-list/
-bo.makeprg = "npm run build"
-bo.errorformat = " > %f:%l:%c: %trror: %m" .. ",%-G%.%#" -- = ignore remaining lines
 vim.cmd.inoreabbrev("<buffer> cosnt const")
 
 --------------------------------------------------------------------------------
 
 -- Build
--- requires makeprg defined above
+
+-- setup quickfix list for npm, see also: https://vonheikemen.github.io/devlog/tools/vim-and-the-quickfix-list/
+bo.makeprg = "npm run build"
+bo.errorformat = " > %f:%l:%c: %trror: %m" .. ",%-G%.%#" -- = ignore remaining lines
+
 keymap("n", "<leader>r", function()
 	cmd.update()
 	cmd.redir("@z")
@@ -23,6 +24,8 @@ keymap("n", "<leader>r", function()
 	vim.notify(output, logLevel)
 	cmd.redir("END")
 end, { buffer = true, desc = " npm run build" })
+
+--------------------------------------------------------------------------------
 
 
 -- Open regex in regex101
