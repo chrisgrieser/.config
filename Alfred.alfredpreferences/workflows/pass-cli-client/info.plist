@@ -504,7 +504,7 @@ osascript -l JavaScript ./scripts/select-folder-for-new-pw.js "$PASSWORD_STORE_D
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>queuemode</key>
 				<integer>2</integer>
 				<key>runningsubtext</key>
