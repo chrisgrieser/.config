@@ -38,7 +38,7 @@ local function hideOthers(appObj)
 	if not (wu.CheckSize(thisWin, wu.pseudoMax) or wu.CheckSize(thisWin, wu.maximized)) then return end
 
 	local appsNotToHide =
-		{ "IINA", "zoom.us", "CleanShot X", "SideNotes", "Twitter", "Alfred", appObj:name() }
+		{ "IINA", "zoom.us", "CleanShot X", "SideNotes", env.tickerApp, "Alfred", appObj:name() }
 	for _, w in pairs(thisWin:otherWindowsSameScreen()) do
 		local app = w:application()
 		if

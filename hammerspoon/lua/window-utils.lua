@@ -20,6 +20,11 @@ else
 	M.toTheSide = hs.geometry.rect(-70, 54, 425, 1026)
 end
 
+if env.tickerApp == "Ivory" then
+	M.toTheSide.x = M.toTheSide.x - 15
+	M.toTheSide.w = M.toTheSide.w + 15
+end
+
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
@@ -49,7 +54,7 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- guard clauses
-	local appsToIgnore = { "Twitter", "Transmission", "Hammerspoon" }
+	local appsToIgnore = { "Transmission", "Hammerspoon" }
 	if
 		not win
 		or not (win:application())
