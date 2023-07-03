@@ -499,6 +499,22 @@ rules:
         to:
           - shell_command: open -g "cleanshot://record-screen"
   #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Pixelmator"
+    manipulators:
+      # Export
+      - type: basic
+        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events"
+                  tell process "Pixelmator Pro"
+                    set frontmost to true
+                    click menu item "Export…" of menu "File" of menu bar 1
+                  end tell
+                end tell'
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.pixelmatorteam\.pixelmator\.x$] }]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Sidenotes"
     manipulators:
       # INFO https://www.apptorium.com/sidenotes/articles/keyboard-shortcuts
