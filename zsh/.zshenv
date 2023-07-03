@@ -1,6 +1,3 @@
-# defines location of the rest of the zsh config
-export ZDOTDIR="$DOTFILE_FOLDER/zsh"
-
 # Directories
 export DOTFILE_FOLDER="$HOME/.config"
 export VAULT_PATH="$HOME/main-vault"
@@ -13,6 +10,11 @@ export LOCAL_REPOS="$HOME/Repos"
 function pandoc() {
 	command pandoc --data-dir="$DOTFILE_FOLDER/pandoc" "$@"
 }
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# defines location of the rest of the zsh config
+export ZDOTDIR="$DOTFILE_FOLDER/zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 # APPS
