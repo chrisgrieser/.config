@@ -151,27 +151,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<true/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🎞 Youtube Link saved</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>4B06046A-148C-4F17-B241-C48299B1D2F1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -197,6 +176,55 @@ echo -n "$title"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<true/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🎞 Youtube Link saved</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>4B06046A-148C-4F17-B241-C48299B1D2F1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-url-from-browser.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>youtube-video-save</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5B268CB5-D72B-4280-8EC7-820859701FDE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -214,36 +242,6 @@ echo -n "$title"</string>
 			<string>548C7E00-D279-4BFE-B4CB-4F94C970637F</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
-
--- funktioniert auch mit der Youtube Webapp</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-url-from-browser.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>youtube-video-save</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>5B268CB5-D72B-4280-8EC7-820859701FDE</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -316,6 +314,27 @@ echo -n "$title"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>ydl</string>
+				<key>subtext</key>
+				<string>Browser tab</string>
+				<key>text</key>
+				<string>⬇️ Download with youtube-dl</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7EC8C18F-E353-4A93-9F40-FDB4C9531D57</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -359,27 +378,6 @@ echo -n "$title"</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>C7716DBE-2C15-46FC-A1E7-1A722EA60267</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>ydl</string>
-				<key>subtext</key>
-				<string>Browser tab</string>
-				<key>text</key>
-				<string>⬇️ Download with youtube-dl</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7EC8C18F-E353-4A93-9F40-FDB4C9531D57</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -448,7 +446,7 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 			<key>note</key>
 			<string>get Browser URL</string>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
 			<real>80</real>
 		</dict>
