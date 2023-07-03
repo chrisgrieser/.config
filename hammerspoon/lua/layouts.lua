@@ -62,7 +62,7 @@ local function workLayout()
 	closeAllFinderWins()
 
 	-- open
-	local appsToOpen = { "Discord", env.browserApp, env.mailApp, "Twitter", "Slack" }
+	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp, "Slack" }
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
 		u.asSoonAsAppRuns(appName, function()
@@ -100,7 +100,7 @@ local function movieLayout()
 		"Alfred Preferences",
 		"Finder",
 		"Highlights",
-		"Twitter",
+		env.tickerApp,
 		"Obsidian",
 	}
 	print("🔲 MovieModeLayout: done")

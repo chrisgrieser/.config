@@ -35,6 +35,7 @@ M.fileHub = readZshEnv("WD")
 M.mailApp = readZshEnv("MAIL_APP")
 M.browserApp = readZshEnv("BROWSER_APP")
 M.browserDefaultsPath = readZshEnv("BROWSER_DEFAULTS_PATH")
+M.tickerApp = "Ivory"
 
 --------------------------------------------------------------------------------
 -- DEVICE

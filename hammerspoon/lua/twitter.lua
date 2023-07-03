@@ -1,15 +1,16 @@
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
+local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 -- ensure that twitter does not get focus, "falling through" to the next window
 local function twitterFallThrough()
-	if not u.isFront("Twitter") then return end
+	if not u.isFront(env.tickerApp) then return end
 
 	local visibleWins = hs.window:orderedWindows()
 	local nextWin
 	for _, win in pairs(visibleWins) do
-		if win:application():name() ~= "Twitter" then
+		if win:application():name() ~= env.tickerApp then
 			nextWin = win
 			break
 		end
@@ -23,7 +24,7 @@ local function twitterScrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
-	local twitter = u.app("Twitter")
+	local twitter = u.app(env.tickerApp)
 	if not twitter or not twitter:mainWindow() then return end
 
 	u.keystroke({ "cmd" }, "left", 1, twitter) -- go back
@@ -50,7 +51,7 @@ local function twitterCleanupLink()
 end
 
 local function twitterCloseMediaWindow()
-	local twitter = u.app("Twitter")
+	local twitter = u.app(env.tickerApp)
 	if not twitter then return end
 	local mediaWin = twitter:findWindow("Media")
 	if not mediaWin then return end
@@ -64,13 +65,14 @@ local function twitterCloseMediaWindow()
 end
 
 local function twitterToTheSide()
-	local twitter = u.app("Twitter")
+	local twitter = u.app(env.tickerApp)
 	if not twitter or u.isFront("Alfred") then return end
 
 	if twitter:isHidden() then twitter:unhide() end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
-	local win = twitter:findWindow("Twitter")
+	-- Twitter's window is called "Twitter", Ivory's "Home"
+	local win = twitter:findWindow(env.tickerApp) or twitter:findWindow("Home")
 	if not win then return end
 
 	win:setFrame(wu.toTheSide)
@@ -81,7 +83,7 @@ end
 local function showHideTwitter(referenceWin)
 	if u.isFront("CleanShot X") then return end
 
-	local twitter = u.app("Twitter")
+	local twitter = u.app(env.tickerApp)
 	if not twitter or not referenceWin then return end
 	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centered) then
 		twitterToTheSide()
@@ -100,11 +102,11 @@ twitterScrollUp()
 TwitterWatcher = u.aw
 	.new(function(appName, event)
 		if appName == "CleanShot X" or appName == "Alfred" then return end
-		local twitter = u.app("Twitter")
+		local twitter = u.app(env.tickerApp)
 
 		-- move twitter and scroll up
-		if appName == "Twitter" and (event == u.aw.launched or event == u.aw.activated) then
-			u.asSoonAsAppRuns("Twitter", function()
+		if appName == env.tickerApp and (event == u.aw.launched or event == u.aw.activated) then
+			u.asSoonAsAppRuns(env.tickerApp, function()
 				twitterToTheSide()
 				twitterScrollUp()
 				wu.bringAllWinsToFront()
@@ -118,18 +120,18 @@ TwitterWatcher = u.aw
 			end)
 
 		-- auto-close media windows and scroll up when deactivating
-		elseif appName == "Twitter" and event == u.aw.deactivated then
+		elseif appName == env.tickerApp and event == u.aw.deactivated then
 			if u.isFront("CleanShot X") then return end
 			twitterScrollUp()
 			twitterCleanupLink()
 			twitterCloseMediaWindow()
 
 		-- do not focus Twitter after an app is terminated
-		elseif event == u.aw.terminated and appName ~= "Twitter" then
+		elseif event == u.aw.terminated and appName ~= env.tickerApp then
 			u.runWithDelays({ 0.1, 0.3 }, twitterFallThrough)
 
 		-- raise twitter when switching window to other app
-		elseif (event == u.aw.activated or event == u.aw.launched) and appName ~= "Twitter" then
+		elseif (event == u.aw.activated or event == u.aw.launched) and appName ~= env.tickerApp then
 			showHideTwitter(hs.window.focusedWindow())
 		end
 	end)
