@@ -1,11 +1,13 @@
 matches:
-  - trigger: "... " # space needed to avoid conflict with moving up a directory
+  - trigger: "... " # space needed to avoid conflict with `...` in the shell
     replace: "… "
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!web"
     replace: https://chris-grieser.de/
   - trigger: "!twitter"
     replace: https://twitter.com/pseudo_meta
+  - trigger: "!masto"
+    replace: https://pkm.social/@pseudometa 
   - trigger: "!github"
     replace: https://github.com/chrisgrieser
   - triggers: ["!blog", "!vim"]
@@ -19,12 +21,6 @@ matches:
     replace: "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
   - trigger: "!path"
     replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
-  - triggers: ["!debugger", "!dev"]
-    replace: "setTimeout(() => { debugger }, 4000);"
-    label: for pasting in the dev tools
-  - triggers: ["!selector", "!dev"]
-    replace: document.querySelector("$|$")
-    label: for pasting in the dev tools
   - trigger: "!null"
     replace: "&>/dev/null;"
     #───────────────────────────────────────────────────────────────────────────
