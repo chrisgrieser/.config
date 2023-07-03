@@ -144,4 +144,12 @@ Wf_SomeWindowActivity = u.wf
 
 --------------------------------------------------------------------------------
 
-u.hotkey({}, "home", twitterScrollUp)
+-- toggle mute when Zoom is running, otherwise scroll up in Twitter
+u.hotkey({}, "home", function()
+	if u.app("zoom.us") then
+		hs.alert.show("🔉/🔇")
+		u.keystroke({ "cmd", "shift" }, "a")
+	else
+		twitterScrollUp()
+	end
+end)
