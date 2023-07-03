@@ -213,9 +213,9 @@ exmap toggleBlockquote obcommand editor:toggle-blockquote
 nmap ,< :toggleBlockquote
 nmap ,> :toggleBlockquote
 
-exmap cycleChecklist obcommand editor:cycle-list-checklist
-nmap ,x :cycleChecklist
-vmap ,x :cycleChecklist
+exmap checkList obcommand editor:toggle-checklist-status
+nmap ,x :checkList
+vmap ,x :checkList
 
 """"""""""""""""""""""
 " Indentation
