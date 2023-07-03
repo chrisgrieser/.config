@@ -11,12 +11,11 @@ return {
 				config = {
 					repl_open_cmd = require("iron.view").split.horizontal.belowright(8),
 					repl_definition = {
-						sh = { command = { "zsh" } },
+						-- using ToggleTerm as REPL for zsh
 						lua = { command = { "lua" } },
 						typescript = { command = { "node" } },
 						python = { command = { "python3" } },
-						-- Applescript & JXA – using `-i` for the REPL
-						javascript = { command = { "osascript", "-il", "JavaScript" } },
+						javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
 						applescript = { command = { "osascript", "-i" } },
 					},
 				},
@@ -26,10 +25,6 @@ return {
 				},
 			}
 		end,
-	},
-	{
-		'michaelb/sniprun',
-		build = 'sh ./install.sh',
 	},
 	{ -- Emulate Jupyter Notebook Functionality
 		"GCBallesteros/NotebookNavigator.nvim",
@@ -92,7 +87,6 @@ return {
 		keys = {
 			{ "<leader>tt", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
 		},
-		-- loaded by commands in sh ftplugin
 		cmd = { "ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection" },
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
@@ -104,70 +98,6 @@ return {
 					vim.keymap.set("x", "<leader>i", vim.cmd.ToggleTermSendVisualSelection, { desc = "  REPL: Send Selection", buffer = true })
 				end,
 			})
-		end,
-	},
-	{ -- git sign gutter & hunk textobj
-		"lewis6991/gitsigns.nvim",
-		event = "VeryLazy",
-		opts = { max_file_length = 7500 },
-	},
-	{ -- git client
-		"NeogitOrg/neogit",
-		dependencies = "nvim-lua/plenary.nvim",
-		cmd = "Neogit",
-		init = function()
-			-- HACK https://github.com/TimUntersberger/neogit/issues/405
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "NeogitCommitMessage",
-				command = "silent! set filetype=gitcommit",
-			})
-		end,
-		opts = {
-			disable_insert_on_commit = false, -- false = start commit msgs in insert mode
-			disable_commit_confirmation = true,
-			disable_builtin_notifications = true, -- BUG does not seem to be working
-			integrations = { diffview = true }, -- diffview plugin
-			signs = {
-				section = { "", "" },
-				item = { "", "" },
-			},
-			mappings = {
-				status = {
-					["<D-w>"] = "close",
-				},
-			},
-		},
-	},
-	{ -- diff / merge
-		"sindrets/diffview.nvim",
-		dependencies = "nvim-lua/plenary.nvim",
-		cmd = { "DiffviewFileHistory", "DiffviewOpen" },
-		config = function() -- needs config, for access to diffview.actions in mappings
-			require("diffview").setup {
-				-- https://github.com/sindrets/diffview.nvim#configuration
-				enhanced_diff_hl = false, -- true = no red for deletes
-				show_help_hints = false,
-				file_history_panel = {
-					win_config = { height = 5 },
-				},
-				hooks = {
-					diff_buf_read = function()
-						-- set buffername, mostly for tabline (lualine)
-						pcall(function() vim.api.nvim_buf_set_name(0, "Diffview") end)
-					end,
-				},
-				keymaps = {
-					view = {
-						{ "n", "<D-w>", vim.cmd.tabclose, {} }, -- close tab instead of window
-						{ "n", "<S-CR>", function() vim.cmd.wincmd("w") end, {} }, -- consistent with general buffer switcher
-					},
-					file_history_panel = {
-						{ "n", "<D-w>", vim.cmd.tabclose, {} },
-						{ "n", "?", require("diffview.actions").help("file_history_panel"), {} },
-						{ "n", "<S-CR>", function() vim.cmd.wincmd("w") end, {} },
-					},
-				},
-			}
 		end,
 	},
 }
