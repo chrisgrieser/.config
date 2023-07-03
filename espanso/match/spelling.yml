@@ -52,10 +52,10 @@ matches:
     replace: noch
   - regex: 'n[#Ä]t '
     replace: "n't "
-  - regex: "isnt"
+  - trigger: "isnt"
     replace: "isn't"
     word: true
-  - regex: "arent"
+  - trigger: "arent"
     replace: "aren't"
     word: true
   - trigger: onyl
