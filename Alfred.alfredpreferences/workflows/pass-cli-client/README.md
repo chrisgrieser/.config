@@ -8,6 +8,8 @@
 - Create a new entry.
 - [Inherits settings from your `.zshenv`.](#configuration)
 - Option to trigger `pass git push` automatically after any change.
+- As opposed to regular usage of `pass`, the copied password is treated as
+  transient, meaning it does not appear in Alfred's clipboard history.
 
 ## Requirements & Installation
 1. [➡️ Download the latest release.](https://github.com/chrisgrieser/alfred-pass/releases/latest)
