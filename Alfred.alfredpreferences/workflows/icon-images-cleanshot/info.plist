@@ -86,6 +86,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9B781278-00BF-4A9E-BF99-D6E0F72074F4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B63198BC-AC4C-4C91-9010-DE88095682EF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B2FE0349-860A-44F0-B49D-20C8F895F9C0</key>
 		<array>
 			<dict>
@@ -170,29 +183,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>6BE47B31-5477-4429-90B6-3AE77A0233EA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>DF4BD673-F9B0-471E-9562-239EA93A628A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4CA334D9-5DCD-4CEF-986C-3ED4283F6C55</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>787AA6A6-CD07-447C-8D73-F4FCD1FEC10D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -463,151 +453,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://thenounproject.com/search/?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>4CA334D9-5DCD-4CEF-986C-3ED4283F6C55</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>icon</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Blackwhite Icon: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>DF4BD673-F9B0-471E-9562-239EA93A628A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://icon-sets.iconify.design/?query={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>787AA6A6-CD07-447C-8D73-F4FCD1FEC10D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>cleanshot://open-annotate?filepath={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>4C0FB49A-F1F8-4F3C-9A14-7D9D74366618</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>Annotate in Cleanshot</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>762A6849-97F7-453B-9037-80139ADE2754</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>OCR Text from Image</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>3014658F-1912-4945-BE42-94D7C52E614B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>cleanshot://capture-text?filepath={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>E4B297D7-3D56-4C37-8D5B-C64BBF44747E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<true/>
 				<key>onlyshowifquerypopulated</key>
@@ -649,6 +494,47 @@ return "{query}"</string>
 			<string>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>cleanshot://open-annotate?filepath={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>4C0FB49A-F1F8-4F3C-9A14-7D9D74366618</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>Annotate in Cleanshot</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>762A6849-97F7-453B-9037-80139ADE2754</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -715,6 +601,83 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>OCR Text from Image</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>3014658F-1912-4945-BE42-94D7C52E614B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>cleanshot://capture-text?filepath={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>E4B297D7-3D56-4C37-8D5B-C64BBF44747E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/Pixelmator Pro.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>B63198BC-AC4C-4C91-9010-DE88095682EF</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.apple.icns</string>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>Open with Pixelmator</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>9B781278-00BF-4A9E-BF99-D6E0F72074F4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -732,29 +695,31 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 		<key>15FF9B9D-0AF2-48F4-84C0-9781E0F3766B</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>9</integer>
 			<key>xpos</key>
 			<real>300</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>490</real>
 		</dict>
 		<key>3014658F-1912-4945-BE42-94D7C52E614B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>625</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>520</real>
 		</dict>
 		<key>3911AEA8-B4EE-4AE9-840F-B3044B36E1AC</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>9</integer>
 			<key>note</key>
 			<string>copy image to clipboard</string>
 			<key>xpos</key>
 			<real>300</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>365</real>
 		</dict>
 		<key>3F8BF243-EE01-4E69-8573-2960822A3915</key>
 		<dict>
@@ -767,19 +732,12 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 		</dict>
 		<key>4C0FB49A-F1F8-4F3C-9A14-7D9D74366618</key>
 		<dict>
-			<key>xpos</key>
-			<real>795</real>
-			<key>ypos</key>
-			<real>490</real>
-		</dict>
-		<key>4CA334D9-5DCD-4CEF-986C-3ED4283F6C55</key>
-		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>405</real>
 		</dict>
 		<key>6BE47B31-5477-4429-90B6-3AE77A0233EA</key>
 		<dict>
@@ -793,27 +751,20 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 		<key>7067A0A4-D9DA-4775-BECD-24C3249B29E2</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>9</integer>
 			<key>xpos</key>
 			<real>450</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>365</real>
 		</dict>
 		<key>762A6849-97F7-453B-9037-80139ADE2754</key>
 		<dict>
-			<key>xpos</key>
-			<real>625</real>
-			<key>ypos</key>
-			<real>490</real>
-		</dict>
-		<key>787AA6A6-CD07-447C-8D73-F4FCD1FEC10D</key>
-		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>405</real>
 		</dict>
 		<key>795116F8-1CC3-4379-A1AB-2A4A51D41240</key>
 		<dict>
@@ -833,6 +784,15 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>9B781278-00BF-4A9E-BF99-D6E0F72074F4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>635</real>
+			<key>ypos</key>
+			<real>645</real>
+		</dict>
 		<key>A069BE51-DA62-4835-8048-AF3A608C97D0</key>
 		<dict>
 			<key>colorindex</key>
@@ -845,13 +805,22 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 		<key>B2FE0349-860A-44F0-B49D-20C8F895F9C0</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>9</integer>
 			<key>note</key>
 			<string>search local icons</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>430</real>
+		</dict>
+		<key>B63198BC-AC4C-4C91-9010-DE88095682EF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>810</real>
+			<key>ypos</key>
+			<real>640</real>
 		</dict>
 		<key>BAA2ADF7-2FEB-4F9A-AE98-17378171B5CA</key>
 		<dict>
@@ -909,21 +878,14 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
-		<key>DF4BD673-F9B0-471E-9562-239EA93A628A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>410</real>
-		</dict>
 		<key>E4B297D7-3D56-4C37-8D5B-C64BBF44747E</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>795</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>520</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
