@@ -6,7 +6,7 @@ app.includeStandardAdditions = true;
 function browserTab() {
 	const frontmostAppName = Application("System Events").applicationProcesses.where({ frontmost: true }).name()[0];
 	const frontmostApp = Application(frontmostAppName);
-	const chromiumVariants = ["Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge", "Arc"];
+	const chromiumVariants = ["YouTube", "Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge", "Arc"];
 	const webkitVariants = ["Safari", "Webkit"];
 	let title, url;
 	if (chromiumVariants.some((appName) => frontmostAppName.startsWith(appName))) {
