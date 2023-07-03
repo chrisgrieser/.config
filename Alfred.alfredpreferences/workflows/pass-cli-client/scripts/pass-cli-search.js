@@ -25,40 +25,37 @@ function run(argv) {
 		return JSON.stringify({ items: passwords });
 	}
 
+
 	// INFO using `fd` does not lead to significant enough speed improvements to
 	// justify the extra dependency
 	// const passwordlist = app.doShellScript(`cd "${passwordStore}" ; fd --ignore-case --full-path ".*${query}.*.gpg$"`);
-	// const passwordlist = app.doShellScript(`cd "${passwordStore}" ; find . -ipath "*${query}*.gpg"`);
-	const passwordlist = app.doShellScript(`find "${passwordStore}"`);
+	const passwordlist = app.doShellScript(`cd "${passwordStore}" ; find . -ipath "*${query}*.gpg"`);
 
 	let createNewPassword;
 	if (passwordlist) {
 		createNewPassword = false;
-		passwordlist
-			.split("\r")
-			.filter((line) => line.includes(query))
-			.forEach((gpgFile) => {
-				const id = gpgFile.slice(2, -4);
-				const parts = id.split("/");
-				const name = parts.pop();
-				const group = parts.join("/");
-				const path = `${passwordStore}/${group}/${name}.gpg`;
+		passwordlist.split("\r").forEach((gpgFile) => {
+			const id = gpgFile.slice(2, -4);
+			const parts = id.split("/");
+			const name = parts.pop();
+			const group = parts.join("/");
+			const path = `${passwordStore}/${group}/${name}.gpg`;
 
-				passwords.push({
-					title: name,
-					subtitle: group,
-					arg: id,
-					uid: id,
-					mods: {
-						alt: { arg: path },
-						// move id to variable for Alfred Script Filter
-						shift: {
-							variables: { entry: id },
-							arg: "",
-						},
+			passwords.push({
+				title: name,
+				subtitle: group,
+				arg: id,
+				uid: id,
+				mods: {
+					alt: { arg: path },
+					// move id to variable for Alfred Script Filter
+					shift: {
+						variables: { entry: id },
+						arg: "",
 					},
-				});
+				},
 			});
+		});
 	} else {
 		createNewPassword = true;
 		const cleanQuery = query.replace(/[/\\:]/, "-");
