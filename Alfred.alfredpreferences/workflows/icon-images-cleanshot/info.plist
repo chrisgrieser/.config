@@ -86,6 +86,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F0335C72-7DC6-4793-ADCD-3909E4CDE001</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9B781278-00BF-4A9E-BF99-D6E0F72074F4</key>
 		<array>
 			<dict>
@@ -678,6 +691,48 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>Convert png to icns</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>png2icns.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F0335C72-7DC6-4793-ADCD-3909E4CDE001</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -784,6 +839,15 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>655</real>
+		</dict>
 		<key>9B781278-00BF-4A9E-BF99-D6E0F72074F4</key>
 		<dict>
 			<key>colorindex</key>
@@ -886,6 +950,15 @@ osascript -l JavaScript "./" "$DOTFILE_FOLDER"</string>
 			<real>805</real>
 			<key>ypos</key>
 			<real>520</real>
+		</dict>
+		<key>F0335C72-7DC6-4793-ADCD-3909E4CDE001</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>655</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
