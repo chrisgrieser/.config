@@ -96,11 +96,13 @@ function cleanQuoteKey(annotations) {
 	return annotations.map((a) => {
 		if (!a.quote) return a;
 		a.quote = a.quote
-			.replace(/’’|‘‘|["„“”«»’]/g, "'") // quotation marks
-			.replace(/\. ?\. ?\./g, "…") // ellipsis
+			.replaceAll(" - ", " – ") // proper em-dash
+			.replaceAll("...", "…") // ellipsis
+			.replaceAll(". . . ", "…") // ellipsis
 			.replaceAll("\\u00AD", "") // remove invisible character
+			.replaceAll("\\u0026", "&") // resolve &-symbol
+			.replace(/’’|‘‘|["„“”«»’]/g, "'") // quotation marks
 			.replace(/(\D[.,])\d/g, "$1") // remove footnotes from quote
-			.replaceAll("\\u0026", "&") // resolve "&"-symbol
 			.replace(/(\w)-\s(\w)/gm, "$1$2") // remove leftover hyphens
 			.trim();
 		return a;
