@@ -147,7 +147,7 @@ function run(argv) {
 		// ISBN
 	} else if (isISBN) {
 		const isbn = input;
-		bibtexEntry = app.doShellScript(`curl -sHL "https://www.ebook.de/de/tools/isbn2bibtex?isbn=${isbn}"`);
+		bibtexEntry = app.doShellScript(`curl -sL "https://www.ebook.de/de/tools/isbn2bibtex?isbn=${isbn}"`);
 		if (!bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("Not found"))
 			return "ISBN not found";
 
@@ -161,7 +161,6 @@ function run(argv) {
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
-
 	// INSERT CONTENT TO APPEND
 
 	// cleaning
@@ -169,6 +168,7 @@ function run(argv) {
 		.replace(/^ {2}/gm, "\t") // tab indentation
 		.replace(/^\s*\w+ =/gm, (/** @type {string} */ field) => field.toLowerCase()) // lowercase all keys
 		.replace(/(\tpublisher.*?) ?(?:gmbh|ltd|publications|llc)(}*,)/im, "$1$2") // publisher garbage
+		.replace(/{}/g, "") // leftover from publisher cleanup
 		.replace("\tdate =", "\tyear =") // consistently "year"
 		.replace(/\tyear = \{?(\d{4}).*\}?/g, "\tyear = $1,") // clean year key
 		.replaceAll("%2F", "/") // fix for URL key in some DOIs
