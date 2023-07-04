@@ -110,8 +110,8 @@ keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Simplified Marks
-keymap("n", "Ä", function ()
-	vim.notify(" Mark set.", u.trace)	
+keymap("n", "Ä", function()
+	vim.notify(" Mark set.", u.trace)
 	u.normal("mM")
 end, { desc = " Set Mark" })
 keymap("n", "ä", "'M", { desc = " Goto Mark" })
@@ -362,10 +362,9 @@ keymap("", "<D-S-l>", function()
 		vim.notify("Not in an Alfred directory.", u.warn)
 		return
 	end
+	-- URI seems more reliable than JXA when called via nvim https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
-	local shellCmd = ([[osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("%s")']]):format(
-		workflowId
-	)
+	local shellCmd = ("open 'alfredpreferences://navigateto/workflows>workflow>%s'"):format(workflowId)
 	fn.system(shellCmd)
 end, { desc = "󰮤 Reveal Workflow in Alfred" })
 keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these don't require confirmation
@@ -627,4 +626,3 @@ autocmd("FileType", {
 		end
 	end,
 })
-

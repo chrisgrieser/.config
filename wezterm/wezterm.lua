@@ -182,7 +182,7 @@ local config = {
 	cursor_blink_rate = 700,
 	cursor_blink_ease_in = "Constant", -- Constant = no fading
 	cursor_blink_ease_out = "Constant",
-	force_reverse_video_cursor = false, -- true = color is reverse, false = color by color scheme
+	force_reverse_video_cursor = true, -- true = color is reverse, false = color by color scheme
 
 	-- Font
 	font_size = isAtMother and 24 or 26,
