@@ -162,5 +162,11 @@ end)
 -- FIX pin to top not working yet in Ivory https://tapbots.social/@ivory/110651107834916828
 if env.tickerApp == "Ivory" then
 	local reloadSecs = 120
-	IvoryReloadTimer = hs.timer.doEvery(reloadSecs, scrollUp):start()
+	-- only reload when not idle, so this does not prevent screensaver/sleep
+	IvoryReloadTimer = hs.timer
+		.doEvery(reloadSecs, function()
+			local idleSecs = hs.host.idleTime()
+			if idleSecs < (reloadSecs / 2) then scrollUp() end
+		end)
+		:start()
 end
