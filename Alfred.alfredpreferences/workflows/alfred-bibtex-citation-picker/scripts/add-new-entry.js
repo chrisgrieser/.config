@@ -168,7 +168,7 @@ function run(argv) {
 		.replace(/^ {2}/gm, "\t") // tab indentation
 		.replace(/^\s*\w+ =/gm, (/** @type {string} */ field) => field.toLowerCase()) // lowercase all keys
 		.replace(/(\tpublisher.*?) ?(?:gmbh|ltd|publications|llc)(}*,)/im, "$1$2") // publisher garbage
-		.replace(/{}/g, "") // leftover from publisher cleanup
+		.replace(/ ?{}/g, "") // leftover from publisher cleanup
 		.replace("\tdate =", "\tyear =") // consistently "year"
 		.replace(/\tyear = \{?(\d{4}).*\}?/g, "\tyear = $1,") // clean year key
 		.replaceAll("%2F", "/") // fix for URL key in some DOIs

@@ -31,7 +31,6 @@ ExternalHarddriveWatcher = hs.usb.watcher
 		if name == "Integrated RGB Camera" or name == "USB 10/100/1000 LAN" or name == "T27hv-20" then
 			return
 		end
-
 		u.notify("Mounted: " .. name)
 
 		local harddriveNames = {
@@ -42,9 +41,9 @@ ExternalHarddriveWatcher = hs.usb.watcher
 
 		if u.tbl_contains(harddriveNames, name) then
 			hs.application.open("WezTerm")
-		else 
+		else
 			-- open volume
-			u.runWithDelays({1, 2}, function()
+			u.runWithDelays({ 1, 2 }, function()
 				local stdout, success =
 					hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
 				if not success or not stdout then return end
@@ -58,11 +57,10 @@ ExternalHarddriveWatcher = hs.usb.watcher
 --------------------------------------------------------------------------------
 -- BLUETOOTH
 
-
 ---notifies & writes reminder
 ---is low. Caveat: `hs.battery` seems to work only with Apple devices.
 local function batteryCheck()
-	local warningLevel = 20
+	local warningLevel = 10
 	local devices = hs.battery.privateBluetoothBatteryInfo()
 	if not devices then return end
 
