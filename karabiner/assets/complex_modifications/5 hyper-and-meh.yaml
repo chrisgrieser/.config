@@ -80,10 +80,6 @@ rules:
     manipulators:
       # deletion
       - type: basic
-        from: { key_code: "n", modifiers: { mandatory: [option, shift, command, control] } }
-        to:
-          - key_code: delete_or_backspace
-      - type: basic
         from: { key_code: "c", modifiers: { mandatory: [option, shift, command, control] } }
         to:
           - { key_code: right_arrow, modifiers: [command, shift] }
