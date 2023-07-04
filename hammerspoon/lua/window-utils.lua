@@ -21,8 +21,8 @@ else
 end
 
 if env.tickerApp == "Ivory" then
-	M.toTheSide.x = M.toTheSide.x - 15
-	M.toTheSide.w = M.toTheSide.w + 15
+	M.toTheSide.x = M.toTheSide.x - 12
+	M.toTheSide.w = M.toTheSide.w + 12
 end
 
 --------------------------------------------------------------------------------
@@ -212,7 +212,7 @@ local function controlSpaceAction()
 	M.moveResize(curWin, pos)
 end
 
-local function moveCurWinToOtherDisplay()
+local function moveWinToNextDisplay()
 	if #hs.screen.allScreens() < 2 then return end
 	local win = hs.window.focusedWindow()
 	if not win then return end
@@ -267,7 +267,7 @@ end
 --------------------------------------------------------------------------------
 -- Triggers: Hotkeys & URI Scheme
 u.hotkey(u.hyper, "V", verticalSplit)
-u.hotkey(u.hyper, "M", moveCurWinToOtherDisplay)
+u.hotkey(u.hyper, "N", moveWinToNextDisplay)
 u.hotkey(u.hyper, "right", function() M.moveResize(hs.window.focusedWindow(), hs.layout.right50) end)
 u.hotkey(u.hyper, "left", function() M.moveResize(hs.window.focusedWindow(), hs.layout.left50) end)
 -- stylua: ignore start

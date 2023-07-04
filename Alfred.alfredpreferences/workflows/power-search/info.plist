@@ -500,6 +500,18 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>sourceoutputuid</key>
+				<string>559C0B91-7158-44BC-BAE8-6765E8946EAA</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F46505B0-A5B2-4F6C-9AA0-6F10587641DC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
 				<string>7D3AA951-85FC-4910-9148-06BA2755DFCD</string>
 				<key>vitoclose</key>
 				<false/>
@@ -2387,7 +2399,21 @@
 						<key>matchstring</key>
 						<string>^http</string>
 						<key>outputlabel</key>
-						<string>is URL</string>
+						<string>http</string>
+						<key>uid</key>
+						<string>559C0B91-7158-44BC-BAE8-6765E8946EAA</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>.\w\.\w+</string>
+						<key>outputlabel</key>
+						<string>other url</string>
 						<key>uid</key>
 						<string>7D3AA951-85FC-4910-9148-06BA2755DFCD</string>
 					</dict>
@@ -2405,14 +2431,6 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>browser</key>
@@ -2424,12 +2442,20 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>{var:search_site}{query}</string>
+				<string>https://{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>1F2EBCDF-8FB8-447C-98D1-CDFF4628F397</string>
+			<string>F46505B0-A5B2-4F6C-9AA0-6F10587641DC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2579,6 +2605,27 @@
 			<string>AA0CE692-AA84-4D63-8F20-7DAB91C14FA6</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{var:search_site}{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>1F2EBCDF-8FB8-447C-98D1-CDFF4628F397</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3067,7 +3114,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>860</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>940</real>
 		</dict>
 		<key>2016F51A-B193-41E1-B959-BD316E2086FB</key>
 		<dict>
@@ -3298,7 +3345,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>665</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>825</real>
 		</dict>
 		<key>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</key>
 		<dict>
@@ -3358,6 +3405,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>655</real>
 			<key>ypos</key>
 			<real>580</real>
+		</dict>
+		<key>F46505B0-A5B2-4F6C-9AA0-6F10587641DC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>860</real>
+			<key>ypos</key>
+			<real>825</real>
 		</dict>
 		<key>F5BF085E-4215-453C-88B5-95FC531F05D7</key>
 		<dict>

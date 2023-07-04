@@ -8,6 +8,19 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>4B5FCBC2-68D8-4C65-933B-7ECC08D5D7B1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8E4D43FB-476E-44E3-A660-C25C7AA16809</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>8E4D43FB-476E-44E3-A660-C25C7AA16809</key>
 		<array>
 			<dict>
@@ -49,7 +62,7 @@
 			<key>config</key>
 			<dict>
 				<key>browser</key>
-				<string></string>
+				<string>com.brave.Browser</string>
 				<key>skipqueryencode</key>
 				<false/>
 				<key>skipvarencode</key>
@@ -78,7 +91,7 @@
 				<key>text</key>
 				<string>Open Mastodon Profile</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
@@ -91,16 +104,51 @@
 			<key>config</key>
 			<dict>
 				<key>matchmode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>matchstring</key>
-				<string></string>
+				<string>@?(\w+?)@(.*)$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
 				<key>replacestring</key>
-				<string></string>
+				<string>https://$2/@$1</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.replace</string>
 			<key>uid</key>
 			<string>8E4D43FB-476E-44E3-A660-C25C7AA16809</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>46</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>M</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>4B5FCBC2-68D8-4C65-933B-7ECC08D5D7B1</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -116,10 +164,17 @@
 			<key>ypos</key>
 			<real>180</real>
 		</dict>
+		<key>4B5FCBC2-68D8-4C65-933B-7ECC08D5D7B1</key>
+		<dict>
+			<key>xpos</key>
+			<real>55</real>
+			<key>ypos</key>
+			<real>305</real>
+		</dict>
 		<key>8E4D43FB-476E-44E3-A660-C25C7AA16809</key>
 		<dict>
 			<key>xpos</key>
-			<real>230</real>
+			<real>285</real>
 			<key>ypos</key>
 			<real>210</real>
 		</dict>
