@@ -160,18 +160,22 @@ rules:
               - ^net\.highlightsapp\.universal$
               - ^org\.hammerspoon\.Hammerspoon$
               - ^maccatalyst\.com\.atebits\.Tweetie # twitter
+              - ^com\.tapbots\.Ivory$
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.search-utils"'
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.power-search"'
       # Twitter: Close Media Window and tab away
       - type: basic
         from: { pointing_button: button5 }
         to:
           - { key_code: w, modifiers: [command] }
           - { key_code: tab, modifiers: [command] }
-        conditions: # Twitter
-          - { type: frontmost_application_if, bundle_identifiers: [^maccatalyst\.com\.atebits\.Tweetie] } 
+        conditions: 
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^maccatalyst\.com\.atebits\.Tweetie # Twitter
+              - ^com\.tapbots\.Ivory$
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.search-utils"'
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.power-search"'
       # Browser & Finder & Obsidian & Hammerspoon: Close Window
       - type: basic
         from: { pointing_button: button5 }
@@ -186,7 +190,7 @@ rules:
               - ^md\.obsidian$
               - ^org\.hammerspoon\.Hammerspoon$
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.search-utils"'
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.power-search"'
       # Highlights: Yellow Highlight
       - type: basic
         from: { pointing_button: button5 }
@@ -197,7 +201,7 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.search-utils"'
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.power-search"'
       # Archive in Mimestream
       - type: basic
         from: { pointing_button: button5 }
@@ -206,7 +210,7 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.search-utils"'
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.power-search"'
   #─────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 1+2 (simultaneously): Dictionary Lookup"
     manipulators:

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.search-utils</string>
+	<string>de.chris-grieser.power-search</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
@@ -3065,6 +3065,7 @@
 
 **Recommendations**
 - Deactivate Google as Fallback Search, since this workflow gives you more fine-grained fallbacks.
+- Deactivate entering URLs, since this workflow does that already.
 - In the Advanced Alfred Settings, assign the "Action all visible Results" to a modifier. This allows you to trigger multiple searches at the same time, or when using the inline search, to open multiple pages at once. (Best assign it to the ctrl-key, since it does not have any conflicts with this workflow.)
 
 ## Global Search Hotkey

@@ -14,12 +14,14 @@ fi
 
 osascript -e 'display notification "" with title "⏳ Starting Download…"'
 
-if yt-dlp --quiet "$CURRENT_TAB" ; then
-	open "$download_location"
+msg=$(yt-dlp "$CURRENT_TAB" 2>&1)
+
+# shellcheck disable=2181
+if [[ $? -eq 0 ]] ; then
 	echo -n "✅ Download finished."
 elif ! [[ "$(yt-dlp -U)" =~ "up to date" ]]; then
 	echo -n "ℹ️ yt-dlp not up to date."
 	echo -n "brew update && brew upgrade yt-dlp" | pbcopy
 else
-	echo -n "❌ Download not possible."
+	echo -n "❌ $msg"
 fi
