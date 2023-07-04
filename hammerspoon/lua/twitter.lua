@@ -161,6 +161,6 @@ end)
 --------------------------------------------------------------------------------
 -- FIX pin to top not working yet in Ivory https://tapbots.social/@ivory/110651107834916828
 if env.tickerApp == "Ivory" then
-	local reloadSecs = 10
+	local reloadSecs = 120
 	IvoryReloadTimer = hs.timer.doEvery(reloadSecs, scrollUp):start()
 end
