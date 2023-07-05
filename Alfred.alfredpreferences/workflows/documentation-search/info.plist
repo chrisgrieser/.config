@@ -31,11 +31,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>088EB229-A9D2-4BA2-B06E-821F6E3D8841</key>
+		<key>090678C4-E32D-408A-A3F2-88B39DCCE851</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</string>
+				<string>49523985-C400-4D02-BB43-7505602D1A31</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -304,7 +304,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<string>6F2F3DFC-73BE-447A-9163-8ABC23D08E7A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -353,7 +353,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>088EB229-A9D2-4BA2-B06E-821F6E3D8841</string>
+				<string>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -700,6 +700,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://github.com/search?type=code&amp;q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>CB7395BA-6A3E-4E50-9FFA-130BFCA9053A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -749,90 +770,18 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://github.com/search?type=code&amp;q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>CB7395BA-6A3E-4E50-9FFA-130BFCA9053A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>html</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>./scripts/mdn-search.js "HTML $*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>MDN Search (HTML)</string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>1CA4905C-0482-4517-93A3-656ACFA985CD</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>appid=$(osascript -e "id of application \"$*\"")
-echo -n "$appid" | pbcopy
-echo -n "$appid"</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>./scripts/appid.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -912,7 +861,7 @@ echo -n "$appid"</string>
 					<string>com.apple.application-bundle</string>
 				</array>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.filefilter</string>
@@ -945,23 +894,115 @@ echo -n "$appid"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\/.*\/(.*)\.app</string>
-				<key>regexcaseinsensitive</key>
-				<true/>
-				<key>regexmultiline</key>
+				<key>alfredfiltersresults</key>
 				<false/>
-				<key>replacestring</key>
-				<string>$1</string>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>html</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>./scripts/mdn-search.js "HTML $*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>MDN Search (HTML)</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>088EB229-A9D2-4BA2-B06E-821F6E3D8841</string>
+			<string>1CA4905C-0482-4517-93A3-656ACFA985CD</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>49523985-C400-4D02-BB43-7505602D1A31</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>as</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/applescript-dictionaries.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>AppleScript Dictionaries</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>090678C4-E32D-408A-A3F2-88B39DCCE851</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1042,46 +1083,6 @@ echo -n "$appid"</string>
 			<string>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>CC9590A8-EE80-4E4B-8E90-658D0D2C5A0F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1178,6 +1179,46 @@ echo -n "$appid"</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>A89D07AD-BB4E-4D63-B7B7-DDB763334AEC</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CC9590A8-EE80-4E4B-8E90-658D0D2C5A0F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1331,6 +1372,27 @@ echo -n "$appid"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>6F2F3DFC-73BE-447A-9163-8ABC23D08E7A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1423,55 +1485,6 @@ echo -n "$appid"</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>1D45A48A-4AD6-46C9-8532-E384C79B551C</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>as</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/applescript-dictionaries.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>AppleScript Dictionaries</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>090678C4-E32D-408A-A3F2-88B39DCCE851</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1576,27 +1589,6 @@ echo -n "$appid"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1642,6 +1634,27 @@ echo -n "$appid"</string>
 			<string>FE8C5299-418B-45DE-A554-50495EF4EE22</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2089,37 +2102,30 @@ echo -n "$appid"</string>
 			<key>ypos</key>
 			<real>980</real>
 		</dict>
-		<key>088EB229-A9D2-4BA2-B06E-821F6E3D8841</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>only app name</string>
-			<key>xpos</key>
-			<real>725</real>
-			<key>ypos</key>
-			<real>290</real>
-		</dict>
 		<key>090678C4-E32D-408A-A3F2-88B39DCCE851</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>AppleScript Dictionary</string>
 			<key>xpos</key>
-			<real>890</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>350</real>
 		</dict>
 		<key>093993C7-7C1F-4DEF-AD8F-D6BE78860096</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>825</real>
+			<real>715</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>585</real>
 		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>780</real>
 			<key>ypos</key>
@@ -2168,16 +2174,27 @@ echo -n "$appid"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>sketchybar docs</string>
+			<string>wezterm</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
 			<real>1780</real>
 		</dict>
+		<key>49523985-C400-4D02-BB43-7505602D1A31</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>705</real>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>shellcheck wiki</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2188,7 +2205,7 @@ echo -n "$appid"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>hammerspoon docs</string>
+			<string>hammerspoon</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2201,7 +2218,7 @@ echo -n "$appid"</string>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>475</real>
 		</dict>
 		<key>642DC21D-E907-412F-8F6F-7E24FE991B23</key>
 		<dict>
@@ -2212,10 +2229,19 @@ echo -n "$appid"</string>
 			<key>ypos</key>
 			<real>2030</real>
 		</dict>
-		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
+		<key>6F2F3DFC-73BE-447A-9163-8ABC23D08E7A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>xpos</key>
+			<real>715</real>
+			<key>ypos</key>
+			<real>830</real>
+		</dict>
+		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>630</real>
 			<key>ypos</key>
@@ -2235,9 +2261,9 @@ echo -n "$appid"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>980</real>
+			<real>855</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>240</real>
 		</dict>
 		<key>A3408036-87B4-4BA4-8D1F-10A05C30BA35</key>
 		<dict>
@@ -2246,16 +2272,16 @@ echo -n "$appid"</string>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>830</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>635</real>
+			<real>630</real>
 			<key>ypos</key>
-			<real>1150</real>
+			<real>1295</real>
 		</dict>
 		<key>A89D07AD-BB4E-4D63-B7B7-DDB763334AEC</key>
 		<dict>
@@ -2264,7 +2290,7 @@ echo -n "$appid"</string>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>585</real>
 		</dict>
 		<key>AC5C19D5-CCA0-42C5-8A17-70BF48C23681</key>
 		<dict>
@@ -2275,7 +2301,7 @@ echo -n "$appid"</string>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>65</real>
 		</dict>
 		<key>B884F61F-1B79-4D70-9CFB-57C3E87E26D9</key>
 		<dict>
@@ -2284,16 +2310,16 @@ echo -n "$appid"</string>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>240</real>
 		</dict>
 		<key>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>830</real>
+			<real>705</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>240</real>
 		</dict>
 		<key>BE9F5DBB-FD56-4FB5-8D27-682A7E1D3BFA</key>
 		<dict>
@@ -2318,18 +2344,18 @@ echo -n "$appid"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>705</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>125</real>
 		</dict>
 		<key>CC9590A8-EE80-4E4B-8E90-658D0D2C5A0F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>975</real>
+			<real>865</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>585</real>
 		</dict>
 		<key>CD59A071-70BC-40FB-87C9-D8467973F461</key>
 		<dict>
@@ -2362,14 +2388,14 @@ echo -n "$appid"</string>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>700</real>
 		</dict>
 		<key>DB0FF08A-04FB-4663-9EF5-E89C6C4CD8F1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>sketchybar docs</string>
+			<string>sketchybar</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2389,7 +2415,7 @@ echo -n "$appid"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>705</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -2407,7 +2433,7 @@ echo -n "$appid"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>karabiner docs</string>
+			<string>karabiner</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2418,7 +2444,7 @@ echo -n "$appid"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>espanso docs</string>
+			<string>espanso</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2471,7 +2497,7 @@ echo -n "$appid"</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

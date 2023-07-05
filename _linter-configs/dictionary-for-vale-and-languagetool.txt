@@ -103,3 +103,5 @@ Dataview
 Code
 Vim
 Frontmatter
+AppleScript
+SourceGraph

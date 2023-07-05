@@ -34,10 +34,6 @@ zip --quiet --recurse-paths "$workflowId.alfredworkflow" . \
 # restore original
 rm -fv info.plist && mv -fv info-original.plist info.plist
 
-# update changelog
-echo "- $(date +"%Y-%m-%d")	release $nextVersion" >./Changelog.md
-git log --pretty=format:"- %ad%x09%s" --date=short | grep -v "chore" | sed -E "s/\t\+ /\t/g" >>./Changelog.md
-
 # GIT OPERATIONS
 git add -A
 git commit -m "release $nextVersion"

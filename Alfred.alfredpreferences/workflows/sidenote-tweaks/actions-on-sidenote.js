@@ -54,11 +54,11 @@ function closeSideNotes() {
  * @param {string} safeTitle
  */
 function archiveNote(noteObj, safeTitle) {
-	const content = noteObj.text();
 	noteObj.delete();
 
-	// empty notes do not need to be archived
-	if (!content) return; 
+	const content = noteObj.text().trim();
+	if (!content) return; // empty notes do not need to be archived
+
 	const archiveLocation = $.getenv("archive_location").replace(/^~/, app.pathTo("home folder"));
 	const archivePath = `${archiveLocation}/${safeTitle}.md`;
 	writeToFile(archivePath, content);

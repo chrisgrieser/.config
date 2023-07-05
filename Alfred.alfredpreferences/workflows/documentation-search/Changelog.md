@@ -1,2 +1,0 @@
-- 2023-06-28	release 1.0.0
-- 2023-06-28	Initial commit
