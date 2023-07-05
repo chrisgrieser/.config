@@ -1,9 +1,9 @@
 <!-- LTeX: enabled=false --><!-- vale off -->
 # Search ALL the docs
 <!-- LTeX: enabled=true --><!-- vale on -->
-![](https://img.shields.io/github/downloads/chrisgrieser/alfred-docs-searches/total?label=Total%20Downloads&style=plastic) ![](https://img.shields.io/github/v/release/chrisgrieser/alfred-docs-searches?label=Latest%20Release&style=plastic) [![](https://img.shields.io/badge/changelog-click%20here-FFE800?style=plastic)](./Changelog.md)
+![](https://img.shields.io/github/downloads/chrisgrieser/alfred-docs-searches/total?label=Total%20Downloads&style=plastic) ![](https://img.shields.io/github/v/release/chrisgrieser/alfred-docs-searches?label=Latest%20Release&style=plastic)
 
-Search two dozen official documentation sites via Alfred.
+Search more than two dozen official documentation sites and other macOS developer references via Alfred.
 
 <img src="./assets/showcase git.png" alt="showcase git" width="50%">
 
@@ -18,7 +18,7 @@ Search two dozen official documentation sites via Alfred.
 - `eslint`
 - `rome`
 - `sc`: shellcheck Wiki
-- `pandoc`
+- `pandoc`: Pandoc User Manual
 - `git`: official docs & the "pro-git" book
 - `py`: python official docs
 - `sh`: cheat.sh
@@ -34,9 +34,10 @@ Search two dozen official documentation sites via Alfred.
 - `cc`: conventional commit keywords
 - `keycode`: macOS keycodes
 - `appid`: app-id of installed macOS apps
-- `code`: simple code search on GitHub and Sourcegraph
+- `code`: Code search on GitHub and SourceGraph
 - `http`: HTTP status codes
 - `uri`: URI schemes available on the device
+- `as`: AppleScript Dictionaries of installed apps
 
 ## Installation
 [➡️ Download the latest release.](https://github.com/chrisgrieser/alfred-docs-searches/releases/latest)
