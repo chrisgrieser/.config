@@ -1551,16 +1551,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>F1C409BD-CCD5-4012-B568-330DE3A0121C</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Save current Workspace before loading</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>B0AB019E-6AC5-494E-9F31-F818F9BFEE21</key>
 		<array>
@@ -2258,19 +2248,6 @@
 		</array>
 		<key>F07DA284-FCE4-4784-B4B5-6CD6817AEE98</key>
 		<array/>
-		<key>F1C409BD-CCD5-4012-B568-330DE3A0121C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>643CDD16-1447-426E-B6BF-9E4375F3D684</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>F43AAA85-F638-4A4C-AE36-FB26D01EDFAA</key>
 		<array>
 			<dict>
@@ -2395,9 +2372,11 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>0</integer>
+				<integer>31</integer>
 				<key>hotmod</key>
-				<integer>0</integer>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>O</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -3723,14 +3702,6 @@ return "{query}"</string>
 			<string>AA9D1406-C025-496B-B7BD-DE68ABA1954E</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>F1C409BD-CCD5-4012-B568-330DE3A0121C</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -8106,9 +8077,9 @@ DOUBLE CLICK THIS to set Hotkey.</string>
 			<key>note</key>
 			<string>Workspace Switcher</string>
 			<key>xpos</key>
-			<real>160</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>1480</real>
+			<real>1490</real>
 		</dict>
 		<key>AC3931E7-5D73-42C4-8975-1E4B4DB66B69</key>
 		<dict>
@@ -8666,15 +8637,6 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 			<real>755</real>
 			<key>ypos</key>
 			<real>2495</real>
-		</dict>
-		<key>F1C409BD-CCD5-4012-B568-330DE3A0121C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>365</real>
-			<key>ypos</key>
-			<real>1510</real>
 		</dict>
 		<key>F273E746-ABEB-4F5A-A7A1-2CFA02A663FA</key>
 		<dict>
@@ -9248,7 +9210,7 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 		<string>create_in_new_tab</string>
 	</array>
 	<key>version</key>
-	<string>3.10.0</string>
+	<string>3.10.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

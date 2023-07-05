@@ -96,10 +96,10 @@
 ---
 
 ### Documentation Search
-- Search the [Official Obsidian Documentation](https://help.obsidian.md/Obsidian/Index)
+- Search the [Official Obsidian Documentation](https://help.obsidian.md/Home)
 - Simultaneously search the [Obsidian Hub](https://publish.obsidian.md/hub/00+-+Start+here)
 
-➡️ [Documentation of the Documentation](docs/Documentation%20Search.md)
+➡️ [Documentation of the Documentation Search](docs/Documentation%20Search.md)
 
 ---
 
@@ -124,7 +124,7 @@
 - Quick Copy of a plugin's ID
 - Open the Vault's root in the default Terminal or in Finder
 - Add & Update Beta Plugins via [BRAT](https://github.com/TfTHacker/obsidian42-brat)
-- Search the [unofficial plugin docs](https://marcus.se.net/obsidian-plugin-docs/)
+- Search the [official developer docs](https://docs.obsidian.md/Home)
 
 ➡️ [Documentation of Features for Developers](docs/Features%20for%20Developers.md)
 
