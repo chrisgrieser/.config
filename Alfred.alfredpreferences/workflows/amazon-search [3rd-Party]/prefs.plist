@@ -4,5 +4,7 @@
 <dict>
 	<key>search_keyword</key>
 	<string>am</string>
+	<key>top_level_domain</key>
+	<string>de</string>
 </dict>
 </plist>
