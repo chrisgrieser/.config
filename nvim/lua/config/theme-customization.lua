@@ -134,10 +134,8 @@ function M.setThemeMode(mode)
 	vim.opt.background = mode
 	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
 	local targetTheme = mode == "dark" and g.darkTheme or g.lightTheme
+	cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	cmd.colorscheme(targetTheme)
-
-	-- don't use transparency when using block.nvim
-	if pcall(require, "block") then g.neovide_transparency = 1 end
 end
 
 -- initialize theme on startup
