@@ -64,7 +64,7 @@ rules:
           - shell_command: open -a 'BusyCal'
           - *deactivate-leader
           - *remove-notice
-      # [ö] (looks like tweetbot): twitter/Mastodon
+      # [ö] (looks like tweetbot): Twitter/Mastodon
       - type: basic
         from: { key_code: semicolon } # ö on German keyboard
         conditions:
@@ -74,7 +74,13 @@ rules:
           - type: input_source_if
             input_sources: [{ language: ^de$ }]
         to:
-          - shell_command: open 'https://pkm.social/notifications'
+          - shell_command: |
+              source $HOME/.zshenv
+              if [[ "$TICKER_APP" == "Twitter" ]]; then
+                open -a "Twitter" 
+              else
+                open 'https://pkm.social/notifications'
+              fi
           - *deactivate-leader
           - *remove-notice
       # [,]: System Preferences
@@ -139,7 +145,7 @@ rules:
         from: { key_code: m }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'Mimestream'
+          - shell_command: source $HOME/.zshenv && open -a "$MAIL_APP"
           - *deactivate-leader
           - *remove-notice
       # [b]rowser
@@ -147,7 +153,7 @@ rules:
         from: { key_code: b }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'Brave Browser'
+          - shell_command: source $HOME/.zshenv && open -a "$BROWSER_APP"
           - *deactivate-leader
           - *remove-notice
       # [B]rowser & re-open last tab (shift)
@@ -265,7 +271,7 @@ rules:
         from: { key_code: g }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'Docs' || open 'https://docs.google.com/'
+          - shell_command: open -a 'Docs' || open -a "Google Docs" || open 'https://docs.google.com/'
           - *deactivate-leader
           - *remove-notice
       # [v]ideo: IINA

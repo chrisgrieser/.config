@@ -5,22 +5,12 @@ local M = {}
 -- HACK cannot be done via os.getenv(), since it does not load properly on system
 -- startup, so the values are read manually .zshenv
 ---@param varname string
----@return string varvalue
+---@return string
 local function readZshEnv(varname)
-	local zshenv = os.getenv("HOME") .. "/.zshenv"
-	local value
-	for line in io.open(zshenv, "r"):lines() do
-		if line:find(varname) then
-			value = line:match(".*= ?(.*)")
-			break
-		end
-	end
-	value = value
-		:gsub("$HOME", os.getenv("HOME")) -- resolve $HOME
-		:gsub(" ?#.*$", "") -- remove bash comments
-		:gsub('"', "") -- remove quotes
-		:gsub(" *$", "") -- trim 
-		:gsub("^ *", "") -- trim
+	local value, success = hs.execute("source $HOME/.zshenv && echo $" .. varname)
+	if not success then hs.notify.show("Hammerspoon", "", "⚠️ Could not source .zshenv") end
+	if not value then value = "" end
+	value = value:gsub("\n$", "")
 	return value
 end
 
@@ -35,7 +25,7 @@ M.fileHub = readZshEnv("WD")
 M.mailApp = readZshEnv("MAIL_APP")
 M.browserApp = readZshEnv("BROWSER_APP")
 M.browserDefaultsPath = readZshEnv("BROWSER_DEFAULTS_PATH")
-M.tickerApp = "Ivory"
+M.tickerApp = readZshEnv("TICKER_APP")
 
 --------------------------------------------------------------------------------
 -- DEVICE
@@ -46,7 +36,8 @@ M.isAtOffice = (deviceName:find("[Mm]ini") or deviceName:find("eduroam")) ~= nil
 M.isAtHome = (deviceName:find("iMac") and deviceName:find("Home")) ~= nil
 M.isAtMother = deviceName:find("Mother") ~= nil
 
----not using static variable, since projector connection can vary
+---not using static variable, since projector connection can change during
+---runtime
 ---@nodiscard
 ---@return boolean
 function M.isProjector()
