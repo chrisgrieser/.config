@@ -18,11 +18,11 @@ function run(){
 			-path '*/Contents/Resources/*.sdef' 
 		`)
 		.split("\r")
-		.map(item => {
+		.map(sdefPath => {
+			const app = sdefPath.split("/").pop().split(".sdef")[0];
 			return {
-				title: item,
-				subtitle: item,
-				arg: item,
+				title: app,
+				arg: sdefPath,
 			};
 		});
 	return JSON.stringify({ items: scriptFilterArr });
