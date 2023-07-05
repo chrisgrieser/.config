@@ -45,7 +45,7 @@ local generalWords = {
 	{ "fewer", "more", false },
 
 	-- commonly switched between
-	{ "red", "blue" }, -- e.g. when designs testing 
+	{ "red", "blue" }, -- e.g. when designs testing
 	{ "read", "write" },
 	{ "warn", "error" },
 	{ "and", "or" },
@@ -155,8 +155,13 @@ local filetypeSpecificWords = {
 	},
 }
 
---------------------------------------------------------------------------------
+---runs when no word to switch can be found under the cursor
+local function fallbackFn()
+	-- toggle capital/lowercase of word
+	vim.cmd.normal { "mzlb~`z", bang = true }
+end
 
+--------------------------------------------------------------------------------
 -- HELPERS
 
 ---check if input is equal to ifWord in lowercase, Capitalcase, or UPPERCASE. If
@@ -242,7 +247,7 @@ function M.flipWord()
 		vim.fn.setreg("z", newWord)
 		vim.cmd.normal { 'viw"zP', bang = true }
 	else
-		vim.notify("No word to flip found.")
+		fallbackFn()
 	end
 
 	vim.opt.iskeyword = iskeywBefore -- restore

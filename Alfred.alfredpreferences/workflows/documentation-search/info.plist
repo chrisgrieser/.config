@@ -44,11 +44,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>10865C97-3E89-46DF-AB64-9ED0BDB8A76B</key>
+		<key>093993C7-7C1F-4DEF-AD8F-D6BE78860096</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>88975C56-9B03-4991-A91F-B7F567C18E64</string>
+				<string>CC9590A8-EE80-4E4B-8E90-658D0D2C5A0F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -222,7 +222,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>10865C97-3E89-46DF-AB64-9ED0BDB8A76B</string>
+				<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -294,7 +294,17 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>80E54E5A-8096-44BA-A8FE-1CB7DE002F7F</string>
+				<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -307,7 +317,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>10865C97-3E89-46DF-AB64-9ED0BDB8A76B</string>
+				<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -461,21 +471,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -601,7 +601,7 @@
 	<key>description</key>
 	<string>Search more than two dozen developer documentation ssites.</string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>Search ALL the docs!</string>
 	<key>objects</key>
@@ -924,27 +924,6 @@ echo -n "$appid"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\/.*\/(.*)\.app</string>
-				<key>regexcaseinsensitive</key>
-				<true/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string>$1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>088EB229-A9D2-4BA2-B06E-821F6E3D8841</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -962,6 +941,27 @@ echo -n "$appid"</string>
 			<string>88975C56-9B03-4991-A91F-B7F567C18E64</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\/.*\/(.*)\.app</string>
+				<key>regexcaseinsensitive</key>
+				<true/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>$1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>088EB229-A9D2-4BA2-B06E-821F6E3D8841</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1015,25 +1015,6 @@ echo -n "$appid"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>10865C97-3E89-46DF-AB64-9ED0BDB8A76B</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -1061,6 +1042,46 @@ echo -n "$appid"</string>
 			<string>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CC9590A8-EE80-4E4B-8E90-658D0D2C5A0F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1223,61 +1244,40 @@ echo -n "$appid"</string>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>keyword</key>
-				<string>urls</string>
+				<string>cc</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
 				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
 				<key>runningsubtext</key>
-				<string>Loading URL schemes...</string>
+				<string>Searching...</string>
 				<key>script</key>
-				<string>osascript ./script.js "$1"</string>
+				<string>cat ./scripts/conventional-commits.json</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/uri-schemes.js</string>
+				<string>jxa-cookbook-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Show All URL Schemes</string>
+				<string>Cnventional Commits</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>A3408036-87B4-4BA4-8D1F-10A05C30BA35</string>
+			<string>D9352E3E-3278-4AE4-AC3C-1BF34C3FF494</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>80E54E5A-8096-44BA-A8FE-1CB7DE002F7F</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1342,6 +1342,55 @@ echo -n "$appid"</string>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>uri</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string>osascript ./script.js "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/uri-schemes.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>URI Schemes registered on this device…</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A3408036-87B4-4BA4-8D1F-10A05C30BA35</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
 				<string>jxa</string>
@@ -1374,76 +1423,6 @@ echo -n "$appid"</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>1D45A48A-4AD6-46C9-8532-E384C79B551C</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>cc</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>cat ./scripts/conventional-commits.json</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>jxa-cookbook-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Cnventional Commits</string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>D9352E3E-3278-4AE4-AC3C-1BF34C3FF494</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1544,6 +1523,27 @@ echo -n "$appid"</string>
 			<string>FE9038EA-F174-44C3-96CF-EED8F400E783</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2034,16 +2034,16 @@ echo -n "$appid"</string>
 		<key>03C8A38F-8577-483D-8E18-B31886F2113F</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1115</real>
+			<real>980</real>
 		</dict>
 		<key>088EB229-A9D2-4BA2-B06E-821F6E3D8841</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>only app name</string>
 			<key>xpos</key>
@@ -2051,17 +2051,19 @@ echo -n "$appid"</string>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
-		<key>10865C97-3E89-46DF-AB64-9ED0BDB8A76B</key>
+		<key>093993C7-7C1F-4DEF-AD8F-D6BE78860096</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>835</real>
+			<real>825</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>470</real>
 		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>780</real>
 			<key>ypos</key>
@@ -2070,7 +2072,7 @@ echo -n "$appid"</string>
 		<key>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>cheats.sh</string>
 			<key>xpos</key>
@@ -2081,7 +2083,7 @@ echo -n "$appid"</string>
 		<key>1CA4905C-0482-4517-93A3-656ACFA985CD</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2090,7 +2092,7 @@ echo -n "$appid"</string>
 		<key>1D45A48A-4AD6-46C9-8532-E384C79B551C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2099,7 +2101,7 @@ echo -n "$appid"</string>
 		<key>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2108,38 +2110,38 @@ echo -n "$appid"</string>
 		<key>3CA7F398-9E2A-467B-B1B1-CC0DBBCB20A5</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>sketchybar docs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1915</real>
+			<real>1780</real>
 		</dict>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>2280</real>
+			<real>2145</real>
 		</dict>
 		<key>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>hammerspoon docs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1505</real>
+			<real>1370</real>
 		</dict>
 		<key>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
@@ -2148,32 +2150,25 @@ echo -n "$appid"</string>
 		<key>642DC21D-E907-412F-8F6F-7E24FE991B23</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>2165</real>
+			<real>2030</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>630</real>
 			<key>ypos</key>
 			<real>1510</real>
 		</dict>
-		<key>80E54E5A-8096-44BA-A8FE-1CB7DE002F7F</key>
-		<dict>
-			<key>xpos</key>
-			<real>705</real>
-			<key>ypos</key>
-			<real>665</real>
-		</dict>
 		<key>829DB972-BB96-484B-AE7B-490666BB5832</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2181,29 +2176,35 @@ echo -n "$appid"</string>
 		</dict>
 		<key>88975C56-9B03-4991-A91F-B7F567C18E64</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>1020</real>
+			<real>980</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>260</real>
 		</dict>
 		<key>A3408036-87B4-4BA4-8D1F-10A05C30BA35</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>790</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>590</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>905</real>
+			<real>1150</real>
 		</dict>
 		<key>A89D07AD-BB4E-4D63-B7B7-DDB763334AEC</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
@@ -2212,7 +2213,7 @@ echo -n "$appid"</string>
 		<key>AC5C19D5-CCA0-42C5-8A17-70BF48C23681</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>6</integer>
 			<key>note</key>
 			<string>code search</string>
 			<key>xpos</key>
@@ -2223,7 +2224,7 @@ echo -n "$appid"</string>
 		<key>B884F61F-1B79-4D70-9CFB-57C3E87E26D9</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
@@ -2232,7 +2233,7 @@ echo -n "$appid"</string>
 		<key>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>830</real>
 			<key>ypos</key>
@@ -2241,16 +2242,16 @@ echo -n "$appid"</string>
 		<key>BE9F5DBB-FD56-4FB5-8D27-682A7E1D3BFA</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>2400</real>
+			<real>2265</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2259,27 +2260,36 @@ echo -n "$appid"</string>
 		<key>CB7395BA-6A3E-4E50-9FFA-130BFCA9053A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>710</real>
 			<key>ypos</key>
 			<real>135</real>
 		</dict>
+		<key>CC9590A8-EE80-4E4B-8E90-658D0D2C5A0F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>975</real>
+			<key>ypos</key>
+			<real>470</real>
+		</dict>
 		<key>CD59A071-70BC-40FB-87C9-D8467973F461</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>starship</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1790</real>
+			<real>1655</real>
 		</dict>
 		<key>D10E485C-BB78-4681-A267-D6B57E3E6EA3</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>man.cx</string>
 			<key>xpos</key>
@@ -2290,29 +2300,29 @@ echo -n "$appid"</string>
 		<key>D9352E3E-3278-4AE4-AC3C-1BF34C3FF494</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>4</integer>
+			<integer>6</integer>
 			<key>note</key>
 			<string>conventional commits</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>985</real>
+			<real>655</real>
 		</dict>
 		<key>DB0FF08A-04FB-4663-9EF5-E89C6C4CD8F1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>sketchybar docs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1650</real>
+			<real>1515</real>
 		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2321,7 +2331,7 @@ echo -n "$appid"</string>
 		<key>FA8E1CB5-0E3F-4061-9CD5-C019F13E82C5</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>710</real>
 			<key>ypos</key>
@@ -2330,33 +2340,33 @@ echo -n "$appid"</string>
 		<key>FC4A9CCB-0458-42DE-9CFE-4110B7E0CADF</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>2050</real>
+			<real>1915</real>
 		</dict>
 		<key>FE8C5299-418B-45DE-A554-50495EF4EE22</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>karabiner docs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1370</real>
+			<real>1235</real>
 		</dict>
 		<key>FE9038EA-F174-44C3-96CF-EED8F400E783</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>espanso docs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1230</real>
+			<real>1095</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
