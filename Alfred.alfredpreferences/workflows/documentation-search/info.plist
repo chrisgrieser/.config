@@ -1432,6 +1432,55 @@ echo -n "$appid"</string>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>as</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/applescript-dictionaries.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>AppleScript Dictionaries</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>090678C4-E32D-408A-A3F2-88B39DCCE851</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
@@ -2050,6 +2099,13 @@ echo -n "$appid"</string>
 			<real>725</real>
 			<key>ypos</key>
 			<real>290</real>
+		</dict>
+		<key>090678C4-E32D-408A-A3F2-88B39DCCE851</key>
+		<dict>
+			<key>xpos</key>
+			<real>890</real>
+			<key>ypos</key>
+			<real>900</real>
 		</dict>
 		<key>093993C7-7C1F-4DEF-AD8F-D6BE78860096</key>
 		<dict>

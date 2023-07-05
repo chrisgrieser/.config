@@ -159,21 +159,30 @@ rules:
               - ^com\.mimestream\.Mimestream$
               - ^net\.highlightsapp\.universal$
               - ^org\.hammerspoon\.Hammerspoon$
-              - ^maccatalyst\.com\.atebits\.Tweetie # twitter
               - ^com\.tapbots\.Ivory$
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.power-search"'
-      # Twitter: Close Media Window and tab away
+      # Ivory: Close Media Window and tab away
       - type: basic
         from: { pointing_button: button5 }
         to:
-          - { key_code: w, modifiers: [command] }
-          - { key_code: tab, modifiers: [command] }
-        conditions: 
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^maccatalyst\.com\.atebits\.Tweetie # Twitter
-              - ^com\.tapbots\.Ivory$
+          # HACK since checking for "is enabled" [1] does not work, we are instead
+          # checking whether Ivory is still frontmost. If it is, no link has been
+          # opened, meaning the menu item was not available
+          # [1]: e.g., https://www.reddit.com/r/applehelp/comments/9du87c/applescript_to_detect_if_menu_bar_item_is/
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Ivory"
+                  set frontmost to true
+                  click menu item "Open Link to Post" of menu "Post" of menu bar 1
+                  delay 0.15
+                  if frontmost is true then
+                    click menu item "Open Link to Profile" of menu "User" of menu bar 1
+                  end if
+                end tell
+              '
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.tapbots\.Ivory$] }
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.power-search"'
       # Browser & Finder & Obsidian & Hammerspoon: Close Window
