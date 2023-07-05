@@ -1264,7 +1264,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>paste nth clipboard</string>
 			<key>xpos</key>
-			<real>485</real>
+			<real>530</real>
 			<key>ypos</key>
 			<real>630</real>
 		</dict>
@@ -1306,7 +1306,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>undo previous paste</string>
 			<key>xpos</key>
-			<real>340</real>
+			<real>360</real>
 			<key>ypos</key>
 			<real>630</real>
 		</dict>
