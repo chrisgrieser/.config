@@ -90,7 +90,6 @@ local function movieLayout()
 
 	u.openApps("YouTube")
 	u.quitApp {
-		"Neovide",
 		"neovide",
 		"lo-rain",
 		"Slack",
