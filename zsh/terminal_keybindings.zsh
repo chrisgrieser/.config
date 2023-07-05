@@ -6,6 +6,7 @@ function bindEverywhere () {
 	bindkey -M vicmd "$1" $2
 }
 bindEverywhere "^A" beginning-of-line
+bindEverywhere "^B" copy-buffer
 bindEverywhere "^E" end-of-line
 bindEverywhere "^U" kill-whole-line
 bindEverywhere "^P" copy-location
