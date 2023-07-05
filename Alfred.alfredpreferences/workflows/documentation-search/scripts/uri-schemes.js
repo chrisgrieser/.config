@@ -2,6 +2,12 @@
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} str */
+function alfredMatcher(str) {
+	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
+	return [clean, str].join(" ") + " ";
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -14,18 +20,15 @@ function run() {
 		.split("\r")
 		.slice(1) // remove header
 		.map((scheme) => {
-			const info = scheme.split("(")[0].split(":");
-			if (!info[0]) return {};
-			const url = `${info[0].trim()}://`;
+			let [uri, info] = scheme.split("(")[0].split(":");
+			uri = `${uri.trim()}://`;
+			info = info ? info.trim() : "";
 
 			return {
-				title: info[1].trim(),
-				subtitle: url,
-				arg: url,
-				text: {
-					copy: url,
-					largetype: url,
-				},
+				title: info,
+				subtitle: uri,
+				match: alfredMatcher(uri) + alfredMatcher(info),
+				arg: uri,
 			};
 		});
 

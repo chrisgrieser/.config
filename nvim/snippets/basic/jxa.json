@@ -115,7 +115,7 @@
 		"prefix": "menu item",
 		"body": [
 			"Application(\"${1:appName}\").activate();",
-			"Application(\"System Events\").processes.byName(\"${1:appName}\").menuBars[0].menuBarItems.byName(\"${2:1menu}\").menus[0].menuItems.byName(\"${3:menuItem}\").click()"
+			"Application(\"System Events\").processes.byName(\"${1:appName}\").menuBars[0].menuBarItems.byName(\"${2:menu}\").menus[0].menuItems.byName(\"${3:menuItem}\").click()"
 		],
 		"description": "https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/System-Events#clicking-menu-items"
 	},

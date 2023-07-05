@@ -36,6 +36,7 @@ Search two dozen official documentation sites via Alfred.
 - `appid`: app-id of installed macOS apps
 - `code`: simple code search on GitHub and Sourcegraph
 - `http`: HTTP status codes
+- `uri`: URI schemes available on the device
 
 ## Installation
 [➡️ Download the latest release.](https://github.com/chrisgrieser/alfred-docs-searches/releases/latest)
