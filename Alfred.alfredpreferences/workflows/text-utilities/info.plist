@@ -256,7 +256,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
+				<string>123D8353-CC59-43C0-B6CC-EFD0B7FD8791</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -271,7 +271,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
+				<string>AECDE466-21D6-419C-95B1-821DD90A50E9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -672,6 +672,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -762,25 +781,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -860,6 +860,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{clipboard:{query}}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>AECDE466-21D6-419C-95B1-821DD90A50E9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -887,6 +906,26 @@
 			<string>1BF2ECBD-0379-420B-A1EC-DE3E498F5A9E</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{clipboard:{query}}
+</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>123D8353-CC59-43C0-B6CC-EFD0B7FD8791</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1028,6 +1067,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>860</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>123D8353-CC59-43C0-B6CC-EFD0B7FD8791</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>paste nth clipboard &amp; new line</string>
+			<key>xpos</key>
+			<real>500</real>
+			<key>ypos</key>
+			<real>780</real>
 		</dict>
 		<key>1BF2ECBD-0379-420B-A1EC-DE3E498F5A9E</key>
 		<dict>
@@ -1183,6 +1233,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>385</real>
 		</dict>
+		<key>AECDE466-21D6-419C-95B1-821DD90A50E9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>paste nth clipboard</string>
+			<key>xpos</key>
+			<real>500</real>
+			<key>ypos</key>
+			<real>630</real>
+		</dict>
 		<key>B64C69B3-7302-462C-881C-17EAA8A63214</key>
 		<dict>
 			<key>colorindex</key>
@@ -1270,9 +1331,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>670</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>360</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
