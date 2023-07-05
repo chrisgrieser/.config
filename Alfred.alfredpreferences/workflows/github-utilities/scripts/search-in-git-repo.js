@@ -22,7 +22,7 @@ const dirtyFiles = app
 	.map(file => file.replace(/^[ MD?]* /i, ""));
 
 /** @type{AlfredItem[]} */
-const fileArray = app
+const filesArray = app
 	.doShellScript(
 		`cd "${folderToSearch}"
 		fd --type=file --hidden --absolute-path --exclude ".git/"`,
@@ -110,7 +110,7 @@ const folderArray = app
 // only happens for recently visited repos, so for the other cases, this sorting
 // here is useful)
 /** @type{AlfredItem[]} */
-const jsonArray = [...fileArray, ...folderArray].sort((a, b) => {
+const jsonArray = [...filesArray, ...folderArray].sort((a, b) => {
 	const aExt = a.title.split(".").pop();
 	const bExt = b.title.split(".").pop();
 	const priorityExt = ["lua", "ts", "md", "js", "py"];
