@@ -174,8 +174,9 @@ if env.tickerApp == "Ivory" then
 	IvoryReloadTimer = hs.timer
 		.doEvery(reloadSecs, function()
 			local brieflyIdle = hs.host.idleTime() > (reloadSecs / 2)
-			local frontMost = u.app(env.tickerApp):isFrontmost()
-			if not brieflyIdle and not frontMost then scrollUp() end
+			local app = u.app(env.tickerApp)
+			if not app then return end
+			if not brieflyIdle and not app:isFrontmost() then scrollUp() end
 		end)
 		:start()
 end

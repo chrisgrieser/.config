@@ -41,7 +41,7 @@ function M.CheckSize(win, relSize)
 	local diffx = relSize.x * maxf.w + maxf.x - winf.x -- calculated this way for two screens
 	local diffy = relSize.y * maxf.h + maxf.y - winf.y
 
-	local leeway = 5 -- terminal cell widths creating some minor inprecision
+	local leeway = 5 -- e.g. terminal cell widths creating some minor inprecision
 	local widthOkay = (diffw > -leeway and diffw < leeway)
 	local heightOkay = (diffh > -leeway and diffh < leeway)
 	local posyOkay = (diffy > -leeway and diffy < leeway)
@@ -88,9 +88,9 @@ end
 ---appname. If this function is not triggered by a windowfilter event, the window
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
+-- selene: allow(high_cyclomatic_complexity)
 function M.autoTile(winSrc)
 	if AutoTileInProgress then return end
-	AutoTileInProgress = true
 
 	local wins = {}
 	if type(winSrc) == "string" then
@@ -102,7 +102,6 @@ function M.autoTile(winSrc)
 	else
 		wins = winSrc:getWindows()
 	end
-
 	-- prevent autotiling of windows that are not maximizable, e.g. copy
 	-- progress, and of the Info windows
 	wins = hs.fnutils.filter(
@@ -111,45 +110,71 @@ function M.autoTile(winSrc)
 	)
 	if not wins then return end
 
+	-----------------------------------------------------------------------------
+
 	M.bringAllWinsToFront()
+
+	AutoTileInProgress = true
+	u.runWithDelays(0.15, function() AutoTileInProgress = false end)
+	local pos = {}
 
 	if #wins == 0 and u.isFront("Finder") and not (env.isProjector()) then
 		-- hide finder when no windows (delay needed for quitting fullscreen apps,
-		-- which are sometimes counted as finder windows
+		-- which are sometimes counted as finder windows)
 		u.runWithDelays(0.2, function()
 			if #(u.app("Finder"):allWindows()) == 0 then u.app("Finder"):hide() end
 		end)
 	elseif #wins == 1 then
-		local pos
 		if env.isProjector() then
-			pos = M.maximized
+			pos[1] = M.maximized
 		elseif u.isFront("Finder") then
-			pos = M.centered
+			pos[1] = M.centered
 		else
-			pos = M.pseudoMax
+			pos[1] = M.pseudoMax
 		end
-		M.moveResize(wins[1], pos)
 	elseif #wins == 2 then
-		M.moveResize(wins[1], hs.layout.left50)
-		M.moveResize(wins[2], hs.layout.right50)
+		-- do not switch two windows around that are correctly tiled but in the
+		-- other order
+		pos = { hs.layout.left50, hs.layout.right50 }
+		if M.CheckSize(wins[1], pos[2]) and M.CheckSize(wins[2], pos[1]) then return end
 	elseif #wins == 3 then
-		M.moveResize(wins[1], { h = 1, w = 0.33, x = 0, y = 0 })
-		M.moveResize(wins[2], { h = 1, w = 0.34, x = 0.33, y = 0 })
-		M.moveResize(wins[3], { h = 1, w = 0.33, x = 0.67, y = 0 })
+		pos = {
+			{ h = 1, w = 0.33, x = 0, y = 0 },
+			{ h = 1, w = 0.34, x = 0.33, y = 0 },
+			{ h = 1, w = 0.33, x = 0.67, y = 0 },
+		}
+		-- stylua: ignore start
+		if
+			(M.CheckSize(wins[1], pos[1]) and M.CheckSize(wins[2], pos[2]) and M.CheckSize(wins[3], pos[3]))
+			or (M.CheckSize(wins[1], pos[1]) and M.CheckSize(wins[2], pos[3]) and M.CheckSize(wins[3], pos[2]))
+			or (M.CheckSize(wins[1], pos[2]) and M.CheckSize(wins[2], pos[1]) and M.CheckSize(wins[3], pos[3]))
+			or (M.CheckSize(wins[1], pos[2]) and M.CheckSize(wins[2], pos[3]) and M.CheckSize(wins[3], pos[1]))
+			or (M.CheckSize(wins[1], pos[3]) and M.CheckSize(wins[2], pos[2]) and M.CheckSize(wins[3], pos[1]))
+			or (M.CheckSize(wins[1], pos[3]) and M.CheckSize(wins[2], pos[1]) and M.CheckSize(wins[3], pos[2]))
+		then return end
+		-- stylua: ignore end
+		-- TODO Prevent autotile switching for 4+ windows as well
 	elseif #wins == 4 then
-		M.moveResize(wins[1], { h = 0.5, w = 0.5, x = 0, y = 0 })
-		M.moveResize(wins[2], { h = 0.5, w = 0.5, x = 0, y = 0.5 })
-		M.moveResize(wins[3], { h = 0.5, w = 0.5, x = 0.5, y = 0 })
-		M.moveResize(wins[4], { h = 0.5, w = 0.5, x = 0.5, y = 0.5 })
+		pos = {
+			{ h = 0.5, w = 0.5, x = 0, y = 0 },
+			{ h = 0.5, w = 0.5, x = 0, y = 0.5 },
+			{ h = 0.5, w = 0.5, x = 0.5, y = 0 },
+			{ h = 0.5, w = 0.5, x = 0.5, y = 0.5 },
+		}
 	elseif #wins == 5 or #wins == 6 then
-		M.moveResize(wins[1], { h = 0.5, w = 0.33, x = 0, y = 0 })
-		M.moveResize(wins[2], { h = 0.5, w = 0.33, x = 0, y = 0.5 })
-		M.moveResize(wins[3], { h = 0.5, w = 0.33, x = 0.33, y = 0 })
-		M.moveResize(wins[4], { h = 0.5, w = 0.33, x = 0.33, y = 0.5 })
-		M.moveResize(wins[5], { h = 0.5, w = 0.33, x = 0.66, y = 0 })
-		if #wins == 6 then M.moveResize(wins[6], { h = 0.5, w = 0.33, x = 0.66, y = 0.5 }) end
+		pos = {
+			{ h = 0.5, w = 0.33, x = 0, y = 0 },
+			{ h = 0.5, w = 0.33, x = 0, y = 0.5 },
+			{ h = 0.5, w = 0.33, x = 0.33, y = 0 },
+			{ h = 0.5, w = 0.33, x = 0.33, y = 0.5 },
+			{ h = 0.5, w = 0.33, x = 0.66, y = 0 },
+			{ h = 0.5, w = 0.33, x = 0.66, y = 0.5 }, -- not used when 5 wins
+		}
 	end
-	u.runWithDelays(0.2, function () AutoTileInProgress = false end)
+	-----------------------------------------------------------------------------
+	for i = 1, #wins, 1 do
+		M.moveResize(wins[i], pos[i])
+	end
 end
 
 --------------------------------------------------------------------------------
