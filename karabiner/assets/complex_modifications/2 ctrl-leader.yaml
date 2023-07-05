@@ -68,16 +68,14 @@ rules:
       - type: basic
         from: { key_code: semicolon } # ö on German keyboard
         conditions:
-          - type: variable_if
-            name: LEADER_ACTIVE
-            value: true
+          - *leader-active
           - type: input_source_if
             input_sources: [{ language: ^de$ }]
         to:
           - shell_command: |
               source $HOME/.zshenv
               if [[ "$TICKER_APP" == "Twitter" ]]; then
-                open -a "Twitter" 
+                open -a "Twitter"
               else
                 open 'https://pkm.social/notifications'
               fi
