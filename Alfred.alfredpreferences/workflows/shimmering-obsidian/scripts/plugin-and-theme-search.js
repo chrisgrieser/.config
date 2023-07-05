@@ -4,7 +4,6 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-/** @param {string} str */
 function alfredMatcher(str) {
 	if (!str) return "";
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
@@ -12,15 +11,10 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeperated, str].join(" ") + " ";
 }
 
-/** @param {string} url */
 function onlineJSON(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
-	return JSON.parse(requestString);
+	return JSON.parse(app.doShellScript('curl -s "' + url + '"'));
 }
 
-/** @param {number} num */
 function insert1000sep(num) {
 	let numText = String(num);
 	if (num >= 10000) {
@@ -29,31 +23,27 @@ function insert1000sep(num) {
 	return numText;
 }
 
-/** @param {string} path */
 function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
 
-/** @param {string} appId */
 function SafeApplication(appId) {
 	try {
 		return Application(appId);
-	} catch (_error) {
+	} catch (error) {
 		return null;
 	}
 }
-const discordReadyLinks = ["Discord", "Discord PTB", "Discord Canary"].some((discordApp) =>
+const discordReadyLinks = ["Discord", "Discord PTB", "Discord Canary"].some(discordApp =>
 	SafeApplication(discordApp)?.frontmost(),
 );
 
 function getVaultPath() {
 	const theApp = Application.currentApplication();
 	theApp.includeStandardAdditions = true;
-	const dataFile = $.NSFileManager.defaultManager.contentsAtPath(
-		$.getenv("alfred_workflow_data") + "/vaultPath",
-	);
+	const dataFile = $.NSFileManager.defaultManager.contentsAtPath($.getenv("alfred_workflow_data") + "/vaultPath");
 	const vault = $.NSString.alloc.initWithDataEncoding(dataFile, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(vault).replace(/^~/, theApp.pathTo("home folder"));
 }
@@ -62,20 +52,16 @@ const vaultPath = getVaultPath();
 function getVaultNameEncoded() {
 	const theApp = Application.currentApplication();
 	theApp.includeStandardAdditions = true;
-	const dataFile = $.NSFileManager.defaultManager.contentsAtPath(
-		$.getenv("alfred_workflow_data") + "/vaultPath",
-	);
+	const dataFile = $.NSFileManager.defaultManager.contentsAtPath($.getenv("alfred_workflow_data") + "/vaultPath");
 	const vault = $.NSString.alloc.initWithDataEncoding(dataFile, $.NSUTF8StringEncoding);
-	const theVaultPath = ObjC.unwrap(vault);
-	const vaultName = theVaultPath.replace(/.*\//, "");
+	const theVaultPath = ObjC.unwrap(vault)
+	const vaultName = theVaultPath.replace(/.*\//, "")
 	return encodeURIComponent(vaultName);
 }
 const vaultNameEnc = getVaultNameEncoded();
-
-/** @type{AlfredItem[]} */
 const jsonArray = [];
 
-//──────────────────────────────────────────────────────────────────────────────
+//------------------------------------------------------------------------------
 
 const pluginJSON = onlineJSON(
 	"https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugins.json",
@@ -94,15 +80,12 @@ const currentTheme = app.doShellScript(
 );
 
 const deprecatedJSON = JSON.parse(readFile("./data/deprecated-plugins.json"));
-const deprecatedPlugins = [
-	...deprecatedJSON.sherlocked,
-	...deprecatedJSON.dysfunct,
-	...deprecatedJSON.deprecated,
-];
+const deprecatedPlugins = [...deprecatedJSON.sherlocked, ...deprecatedJSON.dysfunct, ...deprecatedJSON.deprecated];
 
 //------------------------------------------------------------------------------
 
-pluginJSON.forEach((plugin) => {
+// add PLUGINS to the JSON
+pluginJSON.forEach(plugin => {
 	const id = plugin.id;
 	const name = plugin.name;
 	const description = plugin.description
@@ -148,17 +131,18 @@ pluginJSON.forEach((plugin) => {
 		subtitle: downloadsStr + subtitleIcons + description + " — by " + author,
 		arg: openURI,
 		uid: id,
-		// rome-ignore format: wrongly formatted
-		match: `plugin ${URImatcher} ${alfredMatcher(name)} ${alfredMatcher(author)} ${alfredMatcher(id)} ${alfredMatcher(description)}`,
+		match: `plugin ${URImatcher} ${alfredMatcher(name)} ${alfredMatcher(author)} ${alfredMatcher(id)} ${alfredMatcher(
+			description,
+		)}`,
 		mods: {
-			cmd: { arg: githubURL },
-			ctrl: { arg: id },
+			"cmd": { arg: githubURL },
+			"ctrl": { arg: id },
 			"cmd+alt": {
 				arg: discordUrl,
 				subtitle: "⌘⌥: Copy Link (discord ready)",
 			},
-			shift: { arg: repo },
-			alt: {
+			"shift": { arg: repo },
+			"alt": {
 				arg: shareURL,
 				subtitle: "⌥: Copy Link" + isDiscordReady,
 			},
@@ -167,7 +151,7 @@ pluginJSON.forEach((plugin) => {
 });
 
 // add THEMES to the JSON
-themeJSON.forEach((theme) => {
+themeJSON.forEach(theme => {
 	const name = theme.name;
 	const author = theme.author;
 	const repo = theme.repo;
@@ -206,14 +190,14 @@ themeJSON.forEach((theme) => {
 		quicklookurl: screenshotURL,
 		icon: { path: "icons/css.png" },
 		mods: {
-			ctrl: { valid: false },
-			cmd: { arg: githubURL },
-			shift: { arg: repo },
+			"ctrl": { valid: false },
+			"cmd": { arg: githubURL },
+			"shift": { arg: repo },
 			"cmd+alt": {
 				arg: discordUrl,
 				subtitle: "⌘⌥: Copy Link (discord ready)",
 			},
-			alt: {
+			"alt": {
 				arg: shareURL,
 				subtitle: "⌥: Copy Obsidian URI for Theme" + isDiscordReady,
 			},

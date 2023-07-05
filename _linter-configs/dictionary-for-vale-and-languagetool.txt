@@ -105,3 +105,8 @@ Vim
 Frontmatter
 AppleScript
 SourceGraph
+frontmost
+QuickLook
+Beta
+backlinks
+frontmost

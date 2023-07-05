@@ -12,7 +12,7 @@ function alfredMatcher(str) {
 function SafeApplication(appId) {
 	try {
 		return Application(appId);
-	} catch (_error) {
+	} catch (error) {
 		return null;
 	}
 }
