@@ -312,7 +312,6 @@ end, { desc = "󰌹 Smart URL Opener" })
 --------------------------------------------------------------------------------
 -- INSERT MODE & COMMAND MODE
 keymap("i", "<C-e>", "<Esc>A") -- EoL
-keymap("i", "<C-k>", "<Esc>lDi") -- kill line
 keymap("i", "<C-a>", "<Esc>I") -- BoL
 keymap("c", "<C-a>", "<Home>")
 keymap("c", "<C-e>", "<End>")
@@ -320,7 +319,7 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear
 
 -- indent properly when entering insert mode on empty lines
 keymap("n", "i", function()
-	if #vim.fn.getline(".") == 0 then return [["_cc]] end
+	if vim.fn.getline("."):find("^%s*$") then return [["_cc]] end
 	return "i"
 end, { expr = true, desc = "better i" })
 
