@@ -13,7 +13,8 @@ function writeToFile(file, text) {
 	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
 }
 
-const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+const urlRegex =
+	/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 const exportFolder = $.getenv("export_folder").replace(/^~/, app.pathTo("home folder"));
 const maxNameLen = 50;
 
@@ -54,9 +55,8 @@ function closeSideNotes() {
  * @param {string} safeTitle
  */
 function archiveNote(noteObj, safeTitle) {
-	noteObj.delete();
-
 	const content = noteObj.text().trim();
+	noteObj.delete();
 	if (!content) return; // empty notes do not need to be archived
 
 	const archiveLocation = $.getenv("archive_location").replace(/^~/, app.pathTo("home folder"));
@@ -95,12 +95,11 @@ function run(argv) {
 		const urls = content.match(urlRegex);
 		if (!urls) return "⚠️ No URL found."; // notification
 		closeSideNotes(); // needs to close before opening URL due to focus loss
-		app.openLocation(urls[0]);
+		urls.forEach((/** @type {string} */ url) => app.openLocation(url));
 
 		// dynamically decide whether to delete note
-		const secondLine = details.split("\n")[0].trim();
-		const isLinkOnlyNote = [title, secondLine].includes(urls[0]);
-		if (isLinkOnlyNote) archiveNote(noteObj, safeTitle);
+		const numberOfLines = details.split("\n").length
+		if (numberOfLines <= 2) archiveNote(noteObj, safeTitle);
 	}
 
 	if (doArchive) archiveNote(noteObj, safeTitle);

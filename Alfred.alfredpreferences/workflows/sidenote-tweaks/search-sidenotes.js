@@ -59,6 +59,7 @@ function run(argv) {
 			const foldername = temp.folder;
 			const noteObj = temp.noteObj;
 			const content = noteObj.text();
+			const numberOfLines = content.split("\n").length
 			const secondLine = content.split("\n")[1] || "";
 			let icon = "";
 
@@ -73,8 +74,8 @@ function run(argv) {
 			let urlSubtitle = "⌘: ";
 			if (urls) {
 				icon += "🔗";
-				const isLinkOnlyNote = (item.title + secondLine).includes(urls[0]);
-				if (isLinkOnlyNote) urlSubtitle += "🗑🔗 Archive & Open ";
+				// set url subtitle the same way `actions-on-sidenote` will act 
+				if (numberOfLines <= 2) urlSubtitle += "🗑🔗 Archive & Open ";
 				else urlSubtitle += "🔗 Open ";
 				urlSubtitle += urls[0];
 			} else {
