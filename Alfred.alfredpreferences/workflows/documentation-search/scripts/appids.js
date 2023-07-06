@@ -14,18 +14,16 @@ function run() {
 			'/Applications' \
 			"$HOME/Applications" \
 			'/System/Applications' \
-			'/System/Library/CoreServices' \
-			'/System/Library/ScriptingAdditions' \
-			-path '*/Contents/Resources/*.sdef' -mindepth 4 -maxdepth 4
+			-name '*.app' -maxdepth 1 -type d
 		`)
 		.split("\r")
-		.map((sdefPath) => {
-			const appPath = sdefPath.replace(/(.*\/.*?\.(?:app|osax))\/.*\.sdef/, "$1");
-			const appName = appPath.split("/").pop().split(".")[0];
+		.map((path) => {
+			const appName = path.split("/").pop().slice(0, -4);
 			return {
 				title: appName,
-				icon: { path: appPath, type: "fileicon"},
-				arg: sdefPath,
+				type: "file:skipcheck",
+				icon: { path: path, type: "fileicon"},
+				arg: appName,
 			};
 		});
 	return JSON.stringify({ items: scriptFilterArr });
