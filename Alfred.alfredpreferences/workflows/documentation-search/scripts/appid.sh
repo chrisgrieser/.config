@@ -2,7 +2,7 @@
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 appPath="$*"
-appName=$(basename -s ".app" "$appPath")
+appName=$(basename "$appPath")
 appid=$(osascript -e "id of application \"$appName\"")
 
 echo -n "$appid" | pbcopy
