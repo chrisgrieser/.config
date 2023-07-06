@@ -128,8 +128,7 @@ DisplayCountWatcher = hs.screen.watcher
 
 		-- put iMac display to sleep at night. Essentially triggers when display
 		-- projector is turned off
-		if not u.betweenTime(0, 7) or env.isProjector() then return end
-		u.runWithDelays(5, function() hs.execute("pmset displaysleepnow") end)
+		if u.betweenTime(0, 7) and not env.isProjector() then hs.execute("pmset displaysleepnow") end
 	end)
 	:start()
 

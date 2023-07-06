@@ -21,8 +21,8 @@ local darkThemes = {
 	-- "nyoom-engineering/oxocarbon.nvim",
 }
 
-g.darkTransparency = 0.90
-g.lightTransparency = 0.93
+g.darkTransparency = 0.92
+g.lightTransparency = 0.94
 
 --------------------------------------------------------------------------------
 
