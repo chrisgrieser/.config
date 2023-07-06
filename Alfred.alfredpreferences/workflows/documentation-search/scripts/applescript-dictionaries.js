@@ -14,6 +14,7 @@ function run() {
 			'/Applications' \
 			"$HOME/Applications" \
 			'/System/Applications' \
+			'/System/Library/CoreServices' \
 			'/System/Library/ScriptingAdditions' \
 			-path '*/Contents/Resources/*.sdef' -mindepth 4 -maxdepth 4
 		`)
@@ -27,13 +28,5 @@ function run() {
 				arg: sdefPath,
 			};
 		});
-
-	// only relevant app in an otherwise big folder
-	appsWithDict.push({
-		title: "Finder",
-		icon: { path: "/System/Library/CoreServices/Finder.app", type: "fileicon" },
-		arg: Contents/Resources/Finder.sdef,
-	});
-
 	return JSON.stringify({ items: appsWithDict });
 }
