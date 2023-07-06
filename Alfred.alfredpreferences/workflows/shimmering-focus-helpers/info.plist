@@ -484,7 +484,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>340</real>
 		</dict>
 		<key>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</key>
 		<dict>
@@ -495,7 +495,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>165</real>
 		</dict>
 		<key>389C4CDC-EC49-4AE7-BF23-142CD07AADDB</key>
 		<dict>
@@ -506,7 +506,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>565</real>
 		</dict>
 		<key>68B4C56F-DA10-42C4-955D-D4A5FA7AEB53</key>
 		<dict>
@@ -515,7 +515,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>580</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>310</real>
 		</dict>
 		<key>769DBB7A-060F-4CCA-A806-0AAA1149D60B</key>
 		<dict>
@@ -526,7 +526,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>310</real>
 		</dict>
 		<key>7F5B9DEA-0CE4-4402-804D-7E24157C08B1</key>
 		<dict>
@@ -535,7 +535,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>315</real>
 		</dict>
 		<key>93E4EBAF-798C-40AF-BBCD-4BF2B98B6F18</key>
 		<dict>
@@ -544,7 +544,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>165</real>
 		</dict>
 		<key>9785CD12-8BE6-426A-B3E5-E88E0A90D807</key>
 		<dict>
@@ -553,7 +553,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>580</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>165</real>
 		</dict>
 		<key>D430A6F9-293F-49FE-9E66-A091FB56677B</key>
 		<dict>
@@ -562,7 +562,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>450</real>
 		</dict>
 		<key>F3D17235-D133-4A90-8926-03C08F8F2316</key>
 		<dict>
@@ -584,7 +584,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>310</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
