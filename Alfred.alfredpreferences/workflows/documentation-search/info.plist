@@ -172,6 +172,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3F695A74-EC6B-4436-9063-9A618A8CC0B8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<array>
 			<dict>
@@ -341,19 +354,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>CB7395BA-6A3E-4E50-9FFA-130BFCA9053A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B884F61F-1B79-4D70-9CFB-57C3E87E26D9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -793,82 +793,51 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>anchorfields</key>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
 				<integer>0</integer>
-				<key>daterange</key>
-				<integer>0</integer>
-				<key>fields</key>
-				<array>
-					<dict>
-						<key>field</key>
-						<string>kMDItemDisplayName</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemAlternateNames</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemFinderComment</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-				</array>
-				<key>includesystem</key>
-				<false/>
 				<key>keyword</key>
 				<string>appid</string>
-				<key>limit</key>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
 				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
 				<string></string>
-				<key>scopes</key>
-				<array/>
-				<key>sortmode</key>
-				<integer>0</integer>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/appids.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Get the App ID of '{query}'</string>
-				<key>types</key>
-				<array>
-					<string>com.apple.application-bundle</string>
-				</array>
+				<string>App IDs…</string>
+				<key>type</key>
+				<integer>8</integer>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.filefilter</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>B884F61F-1B79-4D70-9CFB-57C3E87E26D9</string>
+			<string>3F695A74-EC6B-4436-9063-9A618A8CC0B8</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -880,7 +849,7 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>App ID: '{query}'</string>
+				<string>App ID: {query}</string>
 				<key>title</key>
 				<string>✅ Copied to clipboard</string>
 			</dict>
@@ -937,6 +906,55 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>1CA4905C-0482-4517-93A3-656ACFA985CD</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>lua</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/lua-manual-search.js</string>
+				<key>subtext</key>
+				<string>Manual + Wiki</string>
+				<key>title</key>
+				<string>Lua Search</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C4E99850-BA50-4D06-A11F-D09AEC8481A0</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1018,86 +1036,6 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>lua</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/lua-manual-search.js</string>
-				<key>subtext</key>
-				<string>Manual + Wiki</string>
-				<key>title</key>
-				<string>Lua Search</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>C4E99850-BA50-4D06-A11F-D09AEC8481A0</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>fixedorder</key>
-				<true/>
-				<key>items</key>
-				<string>[{"title":"⎋ \/ Escape","subtitle":"53"},{"title":"⌘ \/ Command","subtitle":"55"},{"title":"⌥ \/ Option \/ Alt","subtitle":"58 (left) \/ 61 (right)"},{"title":"⌃ \/ Control","subtitle":"59 (left) \/ 62 (right)"},{"title":"⇧ \/ Shift","subtitle":"56 (left) \/ 60 (right)"},{"title":"⇪ \/ Caps Lock","subtitle":"57"},{"title":"⏎ \/ Return","subtitle":"36"},{"title":"⌤ \/ Enter","subtitle":"76"},{"title":"⇥ \/ Tab","subtitle":"48"},{"title":"␣ \/ Space","subtitle":"49"},{"title":"⌫ \/ Delete \/ Backspace","subtitle":"51"},{"title":"⌦ \/ Forward Delete","subtitle":"117"},{"title":"← \/ Left Arrow","subtitle":"123"},{"title":"→ \/ Right Arrow","subtitle":"124"},{"title":"↓ \/ Down Arrow","subtitle":"125"},{"title":"↑ \/ Up Arrow","subtitle":"126"},{"title":"⇞ \/ Page Up","subtitle":"116"},{"title":"⇟ \/ Page Down","subtitle":"121"},{"title":"⇱ \/ Home","subtitle":"115"},{"title":"⇲ \/ End","subtitle":"119"},{"title":"fn","subtitle":"63"},{"title":"F1","subtitle":"122"},{"title":"F2","subtitle":"120"},{"title":"F3","subtitle":"99"},{"title":"F4","subtitle":"118"},{"title":"F5","subtitle":"96"},{"title":"F6","subtitle":"97"},{"title":"F7","subtitle":"98"},{"title":"F8","subtitle":"100"},{"title":"F9","subtitle":"101"},{"title":"F10","subtitle":"109"},{"title":"F11","subtitle":"103"},{"title":"F12","subtitle":"111"},{"title":"F13","subtitle":"105"},{"title":"F14","subtitle":"107"},{"title":"F15","subtitle":"113"},{"title":"F16","subtitle":"106"},{"title":"F17","subtitle":"64"},{"title":"F18","subtitle":"79"},{"title":"F19","subtitle":"80"},{"title":"F20","subtitle":"90"}]</string>
-				<key>keyword</key>
-				<string>keycode</string>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Translate keyboard keys to AppleScript key codes</string>
-				<key>title</key>
-				<string>KeyCodes</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.listfilter</string>
-			<key>uid</key>
-			<string>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
 				<string>sh</string>
@@ -1132,6 +1070,37 @@
 			<string>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<true/>
+				<key>items</key>
+				<string>[{"title":"⎋ \/ Escape","subtitle":"53"},{"title":"⌘ \/ Command","subtitle":"55"},{"title":"⌥ \/ Option \/ Alt","subtitle":"58 (left) \/ 61 (right)"},{"title":"⌃ \/ Control","subtitle":"59 (left) \/ 62 (right)"},{"title":"⇧ \/ Shift","subtitle":"56 (left) \/ 60 (right)"},{"title":"⇪ \/ Caps Lock","subtitle":"57"},{"title":"⏎ \/ Return","subtitle":"36"},{"title":"⌤ \/ Enter","subtitle":"76"},{"title":"⇥ \/ Tab","subtitle":"48"},{"title":"␣ \/ Space","subtitle":"49"},{"title":"⌫ \/ Delete \/ Backspace","subtitle":"51"},{"title":"⌦ \/ Forward Delete","subtitle":"117"},{"title":"← \/ Left Arrow","subtitle":"123"},{"title":"→ \/ Right Arrow","subtitle":"124"},{"title":"↓ \/ Down Arrow","subtitle":"125"},{"title":"↑ \/ Up Arrow","subtitle":"126"},{"title":"⇞ \/ Page Up","subtitle":"116"},{"title":"⇟ \/ Page Down","subtitle":"121"},{"title":"⇱ \/ Home","subtitle":"115"},{"title":"⇲ \/ End","subtitle":"119"},{"title":"fn","subtitle":"63"},{"title":"F1","subtitle":"122"},{"title":"F2","subtitle":"120"},{"title":"F3","subtitle":"99"},{"title":"F4","subtitle":"118"},{"title":"F5","subtitle":"96"},{"title":"F6","subtitle":"97"},{"title":"F7","subtitle":"98"},{"title":"F8","subtitle":"100"},{"title":"F9","subtitle":"101"},{"title":"F10","subtitle":"109"},{"title":"F11","subtitle":"103"},{"title":"F12","subtitle":"111"},{"title":"F13","subtitle":"105"},{"title":"F14","subtitle":"107"},{"title":"F15","subtitle":"113"},{"title":"F16","subtitle":"106"},{"title":"F17","subtitle":"64"},{"title":"F18","subtitle":"79"},{"title":"F19","subtitle":"80"},{"title":"F20","subtitle":"90"}]</string>
+				<key>keyword</key>
+				<string>keycode</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Translate keyboard keys to AppleScript key codes</string>
+				<key>title</key>
+				<string>KeyCodes</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2109,18 +2078,18 @@
 			<key>note</key>
 			<string>AppleScript Dictionary</string>
 			<key>xpos</key>
-			<real>540</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>370</real>
 		</dict>
 		<key>093993C7-7C1F-4DEF-AD8F-D6BE78860096</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>715</real>
+			<real>720</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>605</real>
 		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
@@ -2180,14 +2149,25 @@
 			<key>ypos</key>
 			<real>1780</real>
 		</dict>
+		<key>3F695A74-EC6B-4436-9063-9A618A8CC0B8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>AppleScript Dictionary</string>
+			<key>xpos</key>
+			<real>545</real>
+			<key>ypos</key>
+			<real>240</real>
+		</dict>
 		<key>49523985-C400-4D02-BB43-7505602D1A31</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>705</real>
+			<real>710</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>370</real>
 		</dict>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<dict>
@@ -2216,9 +2196,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>495</real>
 		</dict>
 		<key>642DC21D-E907-412F-8F6F-7E24FE991B23</key>
 		<dict>
@@ -2234,9 +2214,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>715</real>
+			<real>720</real>
 			<key>ypos</key>
-			<real>830</real>
+			<real>850</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
@@ -2270,9 +2250,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>830</real>
+			<real>850</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
@@ -2288,9 +2268,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>605</real>
 		</dict>
 		<key>AC5C19D5-CCA0-42C5-8A17-70BF48C23681</key>
 		<dict>
@@ -2302,15 +2282,6 @@
 			<real>540</real>
 			<key>ypos</key>
 			<real>65</real>
-		</dict>
-		<key>B884F61F-1B79-4D70-9CFB-57C3E87E26D9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>540</real>
-			<key>ypos</key>
-			<real>240</real>
 		</dict>
 		<key>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</key>
 		<dict>
@@ -2353,9 +2324,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>865</real>
+			<real>870</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>605</real>
 		</dict>
 		<key>CD59A071-70BC-40FB-87C9-D8467973F461</key>
 		<dict>
@@ -2386,9 +2357,9 @@
 			<key>note</key>
 			<string>conventional commits</string>
 			<key>xpos</key>
-			<real>540</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>720</real>
 		</dict>
 		<key>DB0FF08A-04FB-4663-9EF5-E89C6C4CD8F1</key>
 		<dict>
