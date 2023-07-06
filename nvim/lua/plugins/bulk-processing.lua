@@ -21,7 +21,7 @@ return {
 	-- 		{ "<D-j>", "<cmd>MCstart<CR>", desc = "󰆿 Multi-Select word under the cursor" },
 	-- 	},
 	-- },
-	{ -- structural search & replace
+	{ -- structural search & replace, alternative: https://ast-grep.github.io/guide/editor-integration.html
 		"cshuaimin/ssr.nvim",
 		keys = {
 			-- stylua: ignore
