@@ -660,7 +660,8 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string># Recommendation
+Disable Alfred's bultin Calculator Feature, since this workflow basically replaces it.</string>
 	<key>uidata</key>
 	<dict>
 		<key>12E892E3-920B-45FB-AE7F-C4F7CC492A7B</key>
@@ -742,8 +743,6 @@
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
 	<string>1.0</string>
