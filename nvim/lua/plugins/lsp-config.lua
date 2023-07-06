@@ -19,6 +19,7 @@ local lsp_servers = {
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
 	"rome", -- js/ts/json – formatting capability needs to be provided via null-ls
+	-- TODO ast-grep https://ast-grep.github.io/guide/editor-integration.html
 }
 
 --------------------------------------------------------------------------------
