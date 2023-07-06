@@ -9,7 +9,7 @@ app.includeStandardAdditions = true;
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	/** @type AlfredItem[] */
-	const scriptFilterArr = app
+	const apps = app
 		.doShellScript(`find \
 			'/Applications' \
 			"$HOME/Applications" \
@@ -22,9 +22,18 @@ function run() {
 			return {
 				title: appName,
 				type: "file:skipcheck",
-				icon: { path: path, type: "fileicon"},
+				icon: { path: path, type: "fileicon" },
 				arg: appName,
 			};
 		});
-	return JSON.stringify({ items: scriptFilterArr });
+
+	// only relevant app in an otherwise big folder
+	apps.push({
+		title: "Finder",
+		type: "file:skipcheck",
+		icon: { path: "/System/Library/CoreServices/Finder.app", type: "fileicon" },
+		arg: "Finder",
+	});
+
+	return JSON.stringify({ items: apps });
 }
