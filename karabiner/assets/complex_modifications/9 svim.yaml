@@ -1,0 +1,16 @@
+title: svim HACK
+rules:
+  - description: "shift-Space to ctrl-w. Set for shift+space to daw via svimrc"
+    manipulators:
+      - type: basic
+        from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
+        to:
+          - { key_code: w, modifiers: [control] }
+        conditions:
+          type: frontmost_application_if
+          bundle_identifiers:
+            - ^com\.brave\.Browser$
+            - ^com\.hnc\.Discord$
+            - ^com\.tinyspeck\.slackmacgap$
+            - ^com\.vivaldi\.Vivaldi$
+            - ^com\.apptorium\.SideNotes-paddle$

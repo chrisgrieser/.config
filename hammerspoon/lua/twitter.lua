@@ -74,7 +74,7 @@ local function winToTheSide()
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
 	-- Twitter's window is called "Twitter", Ivory's "Home"
-	local win = app:findWindow(env.tickerApp) or app:findWindow("Home")
+	local win = env.tickerApp == "Twitter" and app:findWindow("Twitter") or app:findWindow("Home")
 	if not win then return end
 
 	win:setFrame(wu.toTheSide)
@@ -179,10 +179,4 @@ if env.tickerApp == "Ivory" then
 			if not brieflyIdle and not app:isFrontmost() then scrollUp() end
 		end)
 		:start()
-
-
-		Wf_SomeWindowActivity = u.wf
-			.new("Ivory")
-			:setOverrideFilter({ allowRoles = "AXStandardWindow", hasTitlebar = true })
-
 end

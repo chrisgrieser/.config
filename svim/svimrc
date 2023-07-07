@@ -20,6 +20,7 @@ vnoremap m %
 nnoremap M J
 
 nnoremap <Space> ciw
+nnoremap <C-w> daw
 
 nnoremap <C-e> A
 
