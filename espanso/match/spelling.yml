@@ -306,3 +306,7 @@ matches:
     replace: power
     propagate_casing: true
     word: true
+  - trigger: Diesntag
+    replace: Dienstag
+    propagate_casing: true
+    word: true
