@@ -179,4 +179,10 @@ if env.tickerApp == "Ivory" then
 			if not brieflyIdle and not app:isFrontmost() then scrollUp() end
 		end)
 		:start()
+
+
+		Wf_SomeWindowActivity = u.wf
+			.new("Ivory")
+			:setOverrideFilter({ allowRoles = "AXStandardWindow", hasTitlebar = true })
+
 end
