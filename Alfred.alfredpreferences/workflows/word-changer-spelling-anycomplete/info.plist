@@ -536,6 +536,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>38487342-D9B5-4E96-B520-AA9C3EC175FC</key>
 		<dict>
+			<key>note</key>
+			<string>paste</string>
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
