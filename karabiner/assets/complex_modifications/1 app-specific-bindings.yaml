@@ -171,15 +171,6 @@ rules:
           - { key_code: c, modifiers: [shift, command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
-      # cmd+1: toggle sidebar (vertical tab collapse/expand)
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          # click the expansion button
-          - software_function: { set_mouse_cursor_position: { x: "19%", y: "6%" } }
-          - pointing_button: button1
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
