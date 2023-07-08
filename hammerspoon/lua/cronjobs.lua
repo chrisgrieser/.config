@@ -1,23 +1,23 @@
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local caff = hs.caffeinate.watcher
+local c = hs.caffeinate.watcher
 local env = require("lua.environment-vars")
 
----@return string string consisting of three-chars representing the day of the week (English)
+---@return string three chars representing the day of the week (English)
 local function getWeekday() return tostring(os.date()):sub(1, 3) end
 
 --------------------------------------------------------------------------------
 
 -- keep the iMac display brightness low when projector is connected
-ProjectorScreensaverWatcher = caff
+ProjectorScreensaverWatcher = c
 	.new(function(event)
 		if env.isAtOffice then return end
 		if
-			event == caff.screensaverDidStop
-			or event == caff.screensaverDidStart
-			or event == caff.screensDidWake
-			or event == caff.systemDidWake
-			or event == caff.screensDidSleep
+			event == c.screensaverDidStop
+			or event == c.screensaverDidStart
+			or event == c.screensDidWake
+			or event == c.systemDidWake
+			or event == c.screensDidSleep
 		then
 			u.runWithDelays({ 0, 1, 3 }, function()
 				if env.isProjector() then wu.iMacDisplay:setBrightness(0) end
@@ -48,7 +48,7 @@ BiweeklyTimer = hs.timer
 
 		hs.loadSpoon("EmmyLua")
 
-		-- backups
+		-- BACKUPS
 		-- stylua: ignore start
 		hs.task.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
 			local msg = exitCode == 0 and "✅ Bookmark Backup successful." or "⚠️ Bookmark Backup failed: " .. stdErr
