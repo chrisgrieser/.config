@@ -347,6 +347,8 @@ function gdf() {
 	elif [[ "$DECISION:l" == "s" ]]; then
 		ext=${deleted_path##*.}
 		git show "$last_commit:$deleted_path" | bat --language="$ext"
+	else
+		echo "Aborted."
 	fi
 }
 
