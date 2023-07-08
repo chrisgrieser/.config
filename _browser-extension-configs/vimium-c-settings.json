@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "23/06/2023, 12:08:33",
-	"time": 1687514913973,
+	"@time": "08/07/2023, 13:32:37",
+	"time": 1688815957445,
 	"environment": {
 		"extension": "1.99.992",
 		"platform": "mac",
@@ -68,7 +68,8 @@
 		"\" Modes",
 		"map <esc> reset",
 		"map v enterVisualMode",
-		"map i enterInsertMode",
+		"map i passNextKey",
+		"map I enterInsertMode",
 		"map V enterVisualLineMode",
 		"map gi focusInput",
 		"",
