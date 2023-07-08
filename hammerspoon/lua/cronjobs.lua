@@ -46,7 +46,6 @@ BiweeklyTimer = hs.timer
 	.doAt("02:00", "01d", function()
 		if env.isAtOffice or (getWeekday() ~= "Wed" and getWeekday() ~= "Sat") then return end
 
-		require("lua.hardware-periphery").batteryCheck("SideNotes")
 		hs.loadSpoon("EmmyLua")
 
 		-- backups

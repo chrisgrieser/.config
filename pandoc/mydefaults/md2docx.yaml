@@ -2,30 +2,32 @@
 # INFO $USERDATA set via pandoc option `--data-dir` to this directory
 #───────────────────────────────────────────────────────────────────────────────
 
-# General
+# turn on to abort if citekeys are missing
 verbosity: WARNING
-fail-if-warnings: true # turn on to abort if citekeys are missing
+fail-if-warnings: true
 
+# headings
 table-of-contents: false
 toc-depth: 3
 
+number-sections: true
+shift-heading-level-by: -1 # h2 -> h1
+
+# Images
 resource-path:
   - .
   - ./attachments
-  - ${VAULT_PATH} # Vault path for images
+  - ${VAULT_PATH}
+
+# Markdown-Reader
+reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
 
 # Word-Writer
 writer: docx+native_numbering
 reference-doc: ${USERDATA}/reference-docs/academic-paper.docx
 
-# Markdown-Reader
-reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
-number-sections: true
-shift-heading-level-by: -1
-
 # Filter
-filters:
-  - set-date-metadata.lua
+filters: [set-date-metadata.lua]
 
 #───────────────────────────────────────────────────────────────────────────────
 
