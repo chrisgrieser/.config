@@ -122,6 +122,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>616B2F83-4D1C-4DA1-A01C-30C535883083</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
 		<array>
 			<dict>
@@ -345,6 +358,27 @@ zsh "$dock_switcher_path" --save "$1"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>616B2F83-4D1C-4DA1-A01C-30C535883083</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -436,6 +470,15 @@ zsh "$dock_switcher_path" --save "$1"</string>
 			<real>220</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>616B2F83-4D1C-4DA1-A01C-30C535883083</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>510</real>
+			<key>ypos</key>
+			<real>425</real>
 		</dict>
 		<key>65E1B004-A584-4533-8D40-D1980841CCEF</key>
 		<dict>
