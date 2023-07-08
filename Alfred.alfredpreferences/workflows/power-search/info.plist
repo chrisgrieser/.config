@@ -348,19 +348,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>310418E1-6C51-4FCE-BA5F-151D83F120A4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>318F6F96-8B4C-45EF-A20D-8CB2DC06772F</key>
 		<array>
 			<dict>
@@ -400,6 +387,43 @@
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Ducky Search</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3344C177-11A1-468B-9887-0A2E16FC0A93</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>46EF087E-3EB6-4E2D-B409-9F98E3BDE88C</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>FC6EECC7-532D-42B1-86A6-508E11B0D11A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F44361DE-CFAF-4F56-A257-CD2B6CE9D404</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>560533C0-AFA2-4D1E-99E6-A906BCA74E8D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -551,6 +575,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>3F875B8F-22A9-4711-914D-C906CAC4F290</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>560533C0-AFA2-4D1E-99E6-A906BCA74E8D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1016,6 +1053,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
@@ -1024,22 +1071,12 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>310418E1-6C51-4FCE-BA5F-151D83F120A4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
+				<string>3344C177-11A1-468B-9887-0A2E16FC0A93</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1295,6 +1332,19 @@
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Ducky Search</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FC6EECC7-532D-42B1-86A6-508E11B0D11A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -2351,6 +2401,69 @@
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>^http</string>
+						<key>outputlabel</key>
+						<string>http</string>
+						<key>uid</key>
+						<string>46EF087E-3EB6-4E2D-B409-9F98E3BDE88C</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>\.</string>
+						<key>outputlabel</key>
+						<string>has .</string>
+						<key>uid</key>
+						<string>F44361DE-CFAF-4F56-A257-CD2B6CE9D404</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>normal</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>3344C177-11A1-468B-9887-0A2E16FC0A93</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>http://{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>FC6EECC7-532D-42B1-86A6-508E11B0D11A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -2455,6 +2568,23 @@
 			<string>318F6F96-8B4C-45EF-A20D-8CB2DC06772F</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{var:search_site}{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>560533C0-AFA2-4D1E-99E6-A906BCA74E8D</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2933,23 +3063,6 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{var:search_site}{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>310418E1-6C51-4FCE-BA5F-151D83F120A4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Suggest without keyword
@@ -2959,7 +3072,7 @@
 - `⇧↵` inline search (requires [ddgr](https://github.com/jarun/ddgr))
 
 **Recommendations**
-- Deactivate Google as Fallback Search, since this workflow gives you more fine-grained fallbacks.
+- Set "Show fallback only when there are no other results", since this workflow also handles some fallbacks.
 - Deactivate entering URLs, since this workflow does that already.
 - In the Advanced Alfred Settings, assign the "Action all visible Results" to a modifier. This allows you to trigger multiple searches at the same time, or when using the inline search, to open multiple pages at once. (Best assign it to the ctrl-key, since it does not have any conflicts with this workflow.)
 
@@ -3042,7 +3155,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>searches for first link &amp; copies it</string>
 			<key>xpos</key>
-			<real>860</real>
+			<real>895</real>
 			<key>ypos</key>
 			<real>440</real>
 		</dict>
@@ -3060,21 +3173,21 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>1020</real>
 		</dict>
-		<key>310418E1-6C51-4FCE-BA5F-151D83F120A4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>525</real>
-			<key>ypos</key>
-			<real>1280</real>
-		</dict>
 		<key>318F6F96-8B4C-45EF-A20D-8CB2DC06772F</key>
 		<dict>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
 			<real>900</real>
+		</dict>
+		<key>3344C177-11A1-468B-9887-0A2E16FC0A93</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>685</real>
+			<key>ypos</key>
+			<real>800</real>
 		</dict>
 		<key>393BA661-A566-4A4C-872F-3385CC07DDB9</key>
 		<dict>
@@ -3124,6 +3237,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
+		<key>560533C0-AFA2-4D1E-99E6-A906BCA74E8D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>prepend search site</string>
+			<key>xpos</key>
+			<real>780</real>
+			<key>ypos</key>
+			<real>900</real>
+		</dict>
 		<key>5E615CE0-93A5-48A2-A27A-A77F75B8D7FB</key>
 		<dict>
 			<key>xpos</key>
@@ -3157,7 +3281,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>860</real>
+			<real>895</real>
 			<key>ypos</key>
 			<real>710</real>
 		</dict>
@@ -3228,7 +3352,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>665</real>
+			<real>620</real>
 			<key>ypos</key>
 			<real>825</real>
 		</dict>
@@ -3255,7 +3379,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>860</real>
+			<real>895</real>
 			<key>ypos</key>
 			<real>580</real>
 		</dict>
@@ -3301,7 +3425,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>F6591673-575D-4105-B38F-59AD1457EF23</key>
 		<dict>
 			<key>xpos</key>
-			<real>1040</real>
+			<real>1075</real>
 			<key>ypos</key>
 			<real>520</real>
 		</dict>
@@ -3315,6 +3439,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>485</real>
 			<key>ypos</key>
 			<real>170</real>
+		</dict>
+		<key>FC6EECC7-532D-42B1-86A6-508E11B0D11A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>prepend http://</string>
+			<key>xpos</key>
+			<real>780</real>
+			<key>ypos</key>
+			<real>825</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

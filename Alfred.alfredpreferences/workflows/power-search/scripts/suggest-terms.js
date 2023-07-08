@@ -8,24 +8,18 @@ const noSuggestionRegex = new RegExp($.getenv("no_suggestion_regex"));
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string[]} itemNames */
-function makeItems(itemNames) {
-	return itemNames.map((/** @type {string} */ name) => {
-		// turn word into url
-		let url;
-		if (name?.startsWith("http")) url = name;
-		else if (name?.includes(".")) url = "https://" + name;
-		else url = $.getenv("search_site") + name;
-
+/** @param {string[]} suggestions */
+function makeItems(suggestions) {
+	return suggestions.map((/** @type {string} */ suggestion) => {
 		return {
-			uid: name,
-			title: name,
-			arg: url,
+			uid: suggestion,
+			title: suggestion,
+			arg: suggestion,
 			// no argument for next script filter
 			mods: {
 				shift: {
 					arg: "",
-					variables: { query: name },
+					variables: { query: suggestion },
 				},
 			},
 		};
@@ -85,7 +79,7 @@ function run(argv) {
 	const newResults = (
 		usingGoogle ? response[1] : response.map((/** @type {{ phrase: string; }} */ t) => t.phrase)
 	)
-		.filter((/** @type {string} */ result) => result !== query)
+		.filter((/** @type {string} */ suggestion) => suggestion !== query)
 		.slice(0, maxResults);
 
 	// Return final JSON
