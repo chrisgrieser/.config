@@ -13,3 +13,5 @@ case "$app" in
 	brew services restart "$app"
 	;;
 esac
+
+echo -n "Restarted $app" # Alfred notification

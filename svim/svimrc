@@ -1,26 +1,26 @@
 set clipboard=unnamed
 
 nnoremap Y y$
-nnoremap U <C-r>
-vnoremap U <C-r>
+noremap U <C-r>
 
-vnoremap x "_x
-nnoremap c "_c
-vnoremap c "_c
-nnoremap C "_C
+noremap x "_x
+noremap c "_c
+noremap C "_C
 
 noremap H ^
 noremap L $
 noremap J 5j
 noremap K 5k
 
-nnoremap m %
-vnoremap m %
+noremap m %
 
 nnoremap M J
 
 nnoremap <Space> "_ciw
 nnoremap <C-w> "_daw
+
+nnoremap [ (
+nnoremap ] )
 
 nnoremap <C-e> A
 
