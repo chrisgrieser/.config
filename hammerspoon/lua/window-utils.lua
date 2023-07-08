@@ -161,11 +161,18 @@ function M.autoTile(winSrc)
 	end
 	-----------------------------------------------------------------------------
 
-	local positionExists = false
+	-- Do not autotile when windows are already tiled but not in the order of the
+	-- wins[], to prevent windows switching around. (wins[] is ordered by degree
+	-- of the window being front.)
+	local existingPositions = 0
 	for _, position in pairs(pos) do
-		position
+		local thisPositionExists = false
+		for _, win in pairs(wins) do
+			if not thisPositionExists and M.CheckSize(win, position) then thisPositionExists = true end
+		end
+		if thisPositionExists then existingPositions = existingPositions + 1 end
 	end
-	if positionExists then return end
+	if existingPositions == #pos and #wins == #pos then return end
 
 	for i = 1, #wins, 1 do
 		M.moveResize(wins[i], pos[i])
