@@ -1,7 +1,7 @@
 <!-- LTeX: enabled=false -->
 # atop
 <!-- LTeX: enabled=true -->
-![](https://img.shields.io/github/downloads/chrisgrieser/alfred-atop/total?label=Total%20Downloads&style=plastic) ![](https://img.shields.io/github/v/release/chrisgrieser/alfred-atop?label=Latest%20Release&style=plastic) [![](https://img.shields.io/badge/changelog-click%20here-FFE800?style=plastic)](./Changelog.md)
+![](https://img.shields.io/github/downloads/chrisgrieser/alfred-atop/total?label=Total%20Downloads&style=plastic) ![](https://img.shields.io/github/v/release/chrisgrieser/alfred-atop?label=Latest%20Release&style=plastic)
 
 System Monitoring and Process Management via Alfred. 
 
