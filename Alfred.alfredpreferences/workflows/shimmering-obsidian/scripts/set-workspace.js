@@ -55,6 +55,6 @@ function run(argv) {
 
 	// TOGGLE SPELLCHECK
 	const workspacesToSpellcheck = $.getenv("workspace_to_spellcheck").split(/, ?/);
-	if() workspacesToSpellcheck.includes(workspaceName);
+	if(workspacesToSpellcheck.includes(workspaceName))
 
 }
