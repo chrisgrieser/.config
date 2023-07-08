@@ -1,6 +1,7 @@
 title: 🔘 Utility Shortcuts
 rules:
-  - manipulators:
+  - description: r-cmd, cmd-j, cmd-shift-j, cmd-e
+    manipulators:
       # r-cmd (tap) -> ctrl-e
       - type: basic
         from: { key_code: right_command }
@@ -26,7 +27,7 @@ rules:
             file_paths:
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
-      # 🔘 ⌘ ⇧ F → Find word under cursor (similar to `*` in vim visual mode)
+      # 🔘 ⌘ ⇧ J → Find word under cursor (similar to `*` in vim visual mode)
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [command, shift] } }
         to:

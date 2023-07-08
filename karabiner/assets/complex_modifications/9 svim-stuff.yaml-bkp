@@ -10,7 +10,8 @@ rules:
           type: frontmost_application_if
           bundle_identifiers:
             - ^com\.brave\.Browser$
+            - ^com\.vivaldi\.Vivaldi$
             - ^com\.hnc\.Discord$
             - ^com\.tinyspeck\.slackmacgap$
-            - ^com\.vivaldi\.Vivaldi$
             - ^com\.apptorium\.SideNotes-paddle$
+
