@@ -73,4 +73,16 @@ local function batteryCheck()
 	end
 end
 
+--------------------------------------------------------------------------------
+-- TRIGGERS
+
+-- 1. System Start
 if not u.isReloading() then batteryCheck() end
+
+-- 2. daily
+BiweeklyTimer = hs.timer
+	.doAt("01:30", "01d", function()
+
+
+	end, true)
+	:start()
