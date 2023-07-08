@@ -1,22 +1,32 @@
 #!/usr/bin/env osascript -l JavaScript
+
+//──────────────────────────────────────────────────────────────────────────────
+// CONFIG
 let karabinerJSON = "~/.config/karabiner/karabiner.json";
 let customRulesJSONlocation = "~/.config/karabiner/assets/complex_modifications/";
-//------------------------------------------------------------------------------
+
+//──────────────────────────────────────────────────────────────────────────────
+
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 ObjC.import("Foundation");
-function readFile(path, encoding) {
-	if (!encoding) encoding = $.NSUTF8StringEncoding;
-	const fm = $.NSFileManager.defaultManager;
-	const data = fm.contentsAtPath(path);
-	const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
+
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
+/**
+ * @param {string} text
+ * @param {string} file
+ */
 function writeToFile(text, file) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
 	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
 }
-//------------------------------------------------------------------------------
+
+//──────────────────────────────────────────────────────────────────────────────
 
 function main() {
 	karabinerJSON = karabinerJSON.replace(/^~/, app.pathTo("home folder"));
@@ -42,8 +52,9 @@ function main() {
 		.split("\r")
 		.forEach(fileName => {
 			const filePath = customRulesJSONlocation + fileName;
-			const ruleSet = JSON.parse(readFile(filePath)).rules;
-			ruleSet.forEach(rule => customRules.push(rule));
+			const ruleSet = JSON.parse(readFile(filePath))?.rules;
+			if (!ruleSet) return;
+			ruleSet.forEach((/** @type {any} */ rule) => customRules.push(rule));
 			app.doShellScript(`rm "${filePath}"`); // delete leftover JSON
 		});
 	const complexRules = JSON.parse(readFile(karabinerJSON));

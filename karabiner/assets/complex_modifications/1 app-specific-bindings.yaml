@@ -412,27 +412,6 @@ rules:
           - { key_code: g, modifiers: [command, control] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Neovide: Fix <S-Space> and cmd+q → ZZ"
-    manipulators:
-      - type: basic
-        from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
-        to:
-          - key_code: f2
-        conditions:
-          - type: frontmost_application_if
-            file_paths: ["[Nn]eovide"]
-      # cmd+q -> <Esc>ZZ (does not skip pre-quit triggers)
-      - type: basic
-        from: { key_code: q, modifiers: { mandatory: [command] } }
-        to:
-          # so cursor position and changes are saved
-          - shell_command: |
-              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wq|catch|q|endtry<CR>"
-        conditions:
-          - type: frontmost_application_if
-            file_paths: ["[Nn]eovide"]
-  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Cleanshot"
     manipulators:
       # INFO https://cleanshot.com/docs/api

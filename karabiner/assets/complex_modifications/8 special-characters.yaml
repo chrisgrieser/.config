@@ -1,0 +1,116 @@
+title: Special Characters
+rules:
+  - description: "Special Characters: |^\\~[]"
+    manipulators:
+      - type: basic
+        from: { key_code: "3", modifiers: { mandatory: [shift] } }
+        conditions:
+          - { type: input_source_if, input_sources: [{ language: ^de$ }] }
+        to:
+          - { key_code: "7", modifiers: [option] }
+        # "🔘 ° → \\ (+ US Layout); ⌥^ for ° Symbol"
+      - type: basic
+        from: { key_code: non_us_backslash, modifiers: { mandatory: [shift] } }
+        conditions:
+          - type: input_source_if
+            input_sources: [{ language: ^de$ }]
+        to:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
+          - { key_code: vk_none, hold_down_milliseconds: 20 }
+          - key_code: non_us_pound
+        to_after_key_up:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+      - type: basic
+        from: { key_code: non_us_backslash, modifiers: { mandatory: [option] } }
+        conditions:
+          - type: input_source_if
+            input_sources: [{ language: ^de$ }]
+        to:
+          - { key_code: non_us_backslash, modifiers: [shift] }
+      - type: basic
+        from: { key_code: non_us_backslash, modifiers: { mandatory: [command] } }
+        conditions:
+          - type: input_source_if
+            input_sources: [{ language: ^de$ }]
+        to:
+          - { key_code: "6", modifiers: [command] }
+      # "🔘1️⃣ One Stroke ^` (German Layout)"
+      # backtick
+      - type: basic
+        from: { key_code: equal_sign, modifiers: { mandatory: [shift] } }
+        to:
+          - { key_code: equal_sign, modifiers: [shift] }
+          - key_code: spacebar
+        conditions:
+          - type: input_source_if
+            input_sources: [{ language: ^de$ }]
+      # the ^
+      - type: basic
+        from:
+          key_code: non_us_backslash
+        to:
+          - key_code: non_us_backslash
+          - key_code: spacebar
+        conditions:
+          - type: input_source_if
+            input_sources: [{ language: ^de$ }]
+          - type: frontmost_application_unless
+            file_paths:
+              - ^/Applications/Obsidian\.app
+              - "[Nn]eovide"
+      # Tilde ~
+      - type: basic
+        from: { key_code: "n", modifiers: { mandatory: [option] } }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+          - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
+        to:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
+          - { key_code: vk_none, hold_down_milliseconds: 20 }
+          - { key_code: grave_accent_and_tilde, modifiers: [shift] }
+        to_after_key_up:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+
+      #─────────────────────────────────────────────────────────────────────────────
+      # ⚒️ ß´ → [] (+ German to US Layout), ⌥+ß → ß
+      # ⌥ß → ß
+      - type: basic
+        from: { key_code: hyphen, modifiers: { mandatory: [option] } }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^com\.tinyspeck\.slackmacgap$
+              - ^com\.microsoft\.Word$
+              - ^com\.apptorium\.SideNotes-paddle$
+        to:
+          - key_code: hyphen
+      # ß to [
+      - type: basic
+        from: { key_code: hyphen }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^com\.tinyspeck\.slackmacgap$
+              - ^com\.microsoft\.Word$
+              - ^com\.apptorium\.SideNotes-paddle$
+        to:
+          - { select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ } }
+          - { key_code: vk_none, hold_down_milliseconds: 20 }
+          - key_code: open_bracket
+        to_after_key_up:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+
+      # forward tick to ]
+      - type: basic
+        from: { key_code: equal_sign }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+        to:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
+          - { key_code: vk_none, hold_down_milliseconds: 20 }
+          - key_code: close_bracket
+        to_after_key_up:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+#───────────────────────────────────────────────────────────────────────────────
