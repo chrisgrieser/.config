@@ -4,6 +4,8 @@
 <dict>
 	<key>inline_results_to_fetch</key>
 	<string>6</string>
+	<key>max_suggestions</key>
+	<string>3</string>
 	<key>min_query_length</key>
 	<string>6</string>
 	<key>no_suggestion_regex</key>

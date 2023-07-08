@@ -11,18 +11,16 @@ const noSuggestionRegex = new RegExp($.getenv("no_suggestion_regex"));
 /** @param {string[]} itemNames */
 function makeItems(itemNames) {
 	return itemNames.map((/** @type {string} */ name) => {
-		// if (!name) return;
 		// turn word into url
-		// let url;
-		// if (name.startsWith("http")) url = name;
-		// else if (name.includes(".")) url = "https://" + name;
-		// else $.getenv("search_site") + name;
-		// const url = name
+		let url;
+		if (name?.startsWith("http")) url = name;
+		else if (name?.includes(".")) url = "https://" + name;
+		else $.getenv("search_site") + name;
 
 		return {
 			uid: name,
 			title: name,
-			arg: name,
+			arg: url,
 			// no argument for next script filter
 			mods: {
 				shift: {
@@ -56,49 +54,39 @@ function run(argv) {
 	console.log("query:", query);
 
 	// regex ignore & ignore queries shorter than 3 characters
-	// if (noSuggestionRegex.test(query) || query.length < 3) return;
+	if (noSuggestionRegex.test(query) || query.length < 3) return;
 
 	// make no request below the minimum length, but show the typed query as
 	// fallback search
-	// if (query.length < minQueryLength) {
-	// 	return JSON.stringify({
-	// 		rerun: 0.1,
-	// 		skipknowledge: true,
-	// 		variables: { oldResults: oldResults, oldArg: query },
-	// 		items: makeItems([query]),
-	// 	});
-	// }
-
-	// If the user is typing, return early to guarantee the top entry is the currently typed query
-	// If we waited for the API, a fast typer would search for an incomplete query
-
-	if (argv[0] !== oldArg) {
+	if (query.length < minQueryLength) {
 		return JSON.stringify({
 			rerun: 0.1,
 			skipknowledge: true,
-			variables: { oldResults: oldResults, oldArg: argv[0] },
-			items: makeItems(argv.concat(oldResults?.split("\n").filter((line) => line))),
+			variables: { oldResults: oldResults, oldArg: query },
+			items: makeItems([query]),
 		});
 	}
-	// if (query !== oldArg) {
-	// 	return JSON.stringify({
-	// 		rerun: 0.1,
-	// 		skipknowledge: true,
-	// 		variables: { oldResults: oldResults, oldArg: query },
-	// 		items: makeItems(argv.concat(oldResults?.split("\n").filter((/** @type {string} */ line) => line))),
-	// 	});
-	// }
+
+	// If the user is typing, return early to guarantee the top entry is the currently typed query
+	// If we waited for the API, a fast typer would search for an incomplete query
+	if (query !== oldArg) {
+		return JSON.stringify({
+			rerun: 0.1,
+			skipknowledge: true,
+			variables: { oldResults: oldResults, oldArg: query },
+			items: makeItems(argv.concat(oldResults?.split("\n").filter((/** @type {string} */ line) => line))),
+		});
+	}
 
 	// Make the API request
 	const queryURL = $.getenv("suggestion_source") + encodeURIComponent(query);
 	const response = JSON.parse(httpRequest(queryURL));
-	const newResults = response[1];
-	// const usingGoogle = $.getenv("suggestion_source").includes("google");
-	// const newResults = (
-	// 	usingGoogle ? response[1] : response.map((/** @type {{ phrase: string; }} */ t) => t.phrase)
-	// )
-	// 	.filter((/** @type {string} */ result) => result !== query)
-	// 	.slice(0, maxResults);
+	const usingGoogle = $.getenv("suggestion_source").includes("google");
+	const newResults = (
+		usingGoogle ? response[1] : response.map((/** @type {{ phrase: string; }} */ t) => t.phrase)
+	)
+		.filter((/** @type {string} */ result) => result !== query)
+		.slice(0, maxResults);
 
 	// Return final JSON
 	return JSON.stringify({

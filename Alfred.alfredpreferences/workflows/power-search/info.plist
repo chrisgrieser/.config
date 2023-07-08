@@ -989,6 +989,39 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CAD4819F-819C-4D59-900C-9B6853A422F6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F39E3ABE-6E51-4653-A4A4-4EE463FF1CD8</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Inline Search</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</key>
 		<array>
 			<dict>
@@ -2777,6 +2810,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>subtext</key>
+				<string>Fallback</string>
+				<key>text</key>
+				<string>Powersearch: {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>CAD4819F-819C-4D59-900C-9B6853A422F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -3126,6 +3174,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>440</real>
+		</dict>
+		<key>CAD4819F-819C-4D59-900C-9B6853A422F6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>1250</real>
 		</dict>
 		<key>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</key>
 		<dict>
