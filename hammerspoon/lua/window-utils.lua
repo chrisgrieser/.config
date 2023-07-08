@@ -136,24 +136,12 @@ function M.autoTile(winSrc)
 		-- do not switch two windows around that are correctly tiled but in the
 		-- other order
 		pos = { hs.layout.left50, hs.layout.right50 }
-		if M.CheckSize(wins[1], pos[2]) and M.CheckSize(wins[2], pos[1]) then return end
 	elseif #wins == 3 then
 		pos = {
 			{ h = 1, w = 0.33, x = 0, y = 0 },
 			{ h = 1, w = 0.34, x = 0.33, y = 0 },
 			{ h = 1, w = 0.33, x = 0.67, y = 0 },
 		}
-		-- stylua: ignore start
-		if
-			(M.CheckSize(wins[1], pos[1]) and M.CheckSize(wins[2], pos[2]) and M.CheckSize(wins[3], pos[3]))
-			or (M.CheckSize(wins[1], pos[1]) and M.CheckSize(wins[2], pos[3]) and M.CheckSize(wins[3], pos[2]))
-			or (M.CheckSize(wins[1], pos[2]) and M.CheckSize(wins[2], pos[1]) and M.CheckSize(wins[3], pos[3]))
-			or (M.CheckSize(wins[1], pos[2]) and M.CheckSize(wins[2], pos[3]) and M.CheckSize(wins[3], pos[1]))
-			or (M.CheckSize(wins[1], pos[3]) and M.CheckSize(wins[2], pos[2]) and M.CheckSize(wins[3], pos[1]))
-			or (M.CheckSize(wins[1], pos[3]) and M.CheckSize(wins[2], pos[1]) and M.CheckSize(wins[3], pos[2]))
-		then return end
-		-- stylua: ignore end
-		-- TODO Prevent autotile switching for 4+ windows as well
 	elseif #wins == 4 then
 		pos = {
 			{ h = 0.5, w = 0.5, x = 0, y = 0 },
@@ -168,10 +156,17 @@ function M.autoTile(winSrc)
 			{ h = 0.5, w = 0.33, x = 0.33, y = 0 },
 			{ h = 0.5, w = 0.33, x = 0.33, y = 0.5 },
 			{ h = 0.5, w = 0.33, x = 0.66, y = 0 },
-			{ h = 0.5, w = 0.33, x = 0.66, y = 0.5 }, -- not used when 5 wins
 		}
+		if #wins == 6 then table.insert(pos, { h = 0.5, w = 0.33, x = 0.66, y = 0.5 }) end
 	end
 	-----------------------------------------------------------------------------
+
+	local positionExists = false
+	for _, position in pairs(pos) do
+		position
+	end
+	if positionExists then return end
+
 	for i = 1, #wins, 1 do
 		M.moveResize(wins[i], pos[i])
 	end
