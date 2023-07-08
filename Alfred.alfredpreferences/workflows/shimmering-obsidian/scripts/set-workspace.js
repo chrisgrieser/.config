@@ -55,6 +55,10 @@ function run(argv) {
 
 	// TOGGLE SPELLCHECK
 	const workspacesToSpellcheck = $.getenv("workspace_to_spellcheck").split(/, ?/);
-	if(workspacesToSpellcheck.includes(workspaceName))
-
+	const turnSpellCheckOn = workspacesToSpellcheck.includes(workspaceName);
+	const currentSpellCheck = JSON.parse(readFile(vaultPath + "/.obsidian/app.json")).spellcheck;
+	if (turnSpellCheckOn !== currentSpellCheck)
+		app.openLocation(
+			"obsidian://advanced-uri?vault=" + getVaultNameEncoded() + "&commandid=editor%253Atoggle-spellcheck",
+		);
 }
