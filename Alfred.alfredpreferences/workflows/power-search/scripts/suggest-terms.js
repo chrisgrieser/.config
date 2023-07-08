@@ -15,7 +15,7 @@ function makeItems(itemNames) {
 		let url;
 		if (name?.startsWith("http")) url = name;
 		else if (name?.includes(".")) url = "https://" + name;
-		else $.getenv("search_site") + name;
+		else url = $.getenv("search_site") + name;
 
 		return {
 			uid: name,

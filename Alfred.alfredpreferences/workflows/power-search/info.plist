@@ -348,6 +348,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>310418E1-6C51-4FCE-BA5F-151D83F120A4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>318F6F96-8B4C-45EF-A20D-8CB2DC06772F</key>
 		<array>
 			<dict>
@@ -1003,21 +1016,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>E091E39E-56B1-48FC-A97B-7D0D9ADF5645</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Ducky Search</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>310418E1-6C51-4FCE-BA5F-151D83F120A4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -2920,6 +2933,23 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{var:search_site}{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>310418E1-6C51-4FCE-BA5F-151D83F120A4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Suggest without keyword
@@ -3029,6 +3059,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>1020</real>
+		</dict>
+		<key>310418E1-6C51-4FCE-BA5F-151D83F120A4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>525</real>
+			<key>ypos</key>
+			<real>1280</real>
 		</dict>
 		<key>318F6F96-8B4C-45EF-A20D-8CB2DC06772F</key>
 		<dict>
@@ -3200,9 +3239,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>I'm feeling lucky</string>
 			<key>xpos</key>
-			<real>665</real>
+			<real>655</real>
 			<key>ypos</key>
-			<real>965</real>
+			<real>1005</real>
 		</dict>
 		<key>E2663B7F-3850-4F0C-A841-4B610205EB3A</key>
 		<dict>

@@ -55,7 +55,7 @@ ExternalHarddriveWatcher = hs.usb.watcher
 	:start()
 
 --------------------------------------------------------------------------------
--- BLUETOOTH
+-- BLUETOOTH/BATTERY
 
 ---notifies & writes reminder
 ---is low. Caveat: `hs.battery` seems to work only with Apple devices.
@@ -80,9 +80,4 @@ end
 if not u.isReloading() then batteryCheck() end
 
 -- 2. daily
-BiweeklyTimer = hs.timer
-	.doAt("01:30", "01d", function()
-
-
-	end, true)
-	:start()
+BiweeklyTimer = hs.timer.doAt("01:30", "01d", batteryCheck, true):start()
