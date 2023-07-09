@@ -133,7 +133,7 @@ function gli() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# Pull Request
+# PULL REQUEST
 # - add all & commit with $1 (or prompted)
 # - creates fork (if no writing access)
 # - create PR and autofills is with commit msg (merges into *current branch*, not the default branch)
@@ -146,7 +146,8 @@ function pr() {
 	# settings
 	echo "Web interface or Terminal?"
 	mode=$(printf "Web Interface\nTerminal" |
-		fzf --bind="j:down,k:up" --no-sort --height=5% --no-info)
+		fzf --bind="j:down,k:up" --no-sort --height=5% --no-info \
+			--header="j:↓  k:↑" --header-first)
 	echo
 
 	# get and validate commit msg
@@ -292,7 +293,7 @@ function nuke {
 function gdf() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
-	if [[ $# -eq 0 ]]; then echo "No search term provided." && return 1; fi
+	if [[ $# -eq 0 ]]; then echo "No search query provided." && return 1; fi
 
 	local deleted_path deletion_commit
 	cd "$(git rev-parse --show-toplevel)"
@@ -324,9 +325,11 @@ function gdf() {
 	echo
 
 	choices="restore file
-	copy to clipboard
+copy to clipboard
 show file (bat)"
-	decision=$(echo "$choices" | fzf --bind="j:down,k:up" --no-sort --height=10% --no-info)
+	decision=$(echo "$choices" |
+		fzf --bind="j:down,k:up" --no-sort --height=5% --no-info \
+			--header="j:↓  k:↑" --header-first)
 
 	if [[ -z "$decision" ]]; then
 		echo "Aborted."
