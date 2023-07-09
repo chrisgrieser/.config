@@ -36,12 +36,12 @@ rules:
         to:
           - { key_code: f1 }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "svim: shift-space to ctrl-w"
+  - description: "svim: shift-space to ctrl-s"
     manipulators:
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
         to:
-          - { key_code: w, modifiers: [control] }
+          - { key_code: s, modifiers: [control] }
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:

@@ -17,7 +17,7 @@ noremap m %
 nnoremap M J
 
 nnoremap <Space> "_ciw
-nnoremap <C-w> "_daw
+nnoremap <C-s> "_daw
 
 nnoremap [ (
 nnoremap ] )
