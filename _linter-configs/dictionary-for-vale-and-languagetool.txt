@@ -110,3 +110,5 @@ QuickLook
 Beta
 backlinks
 frontmost
+repo
+filetype
