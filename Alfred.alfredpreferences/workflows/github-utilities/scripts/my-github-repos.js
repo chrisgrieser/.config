@@ -103,7 +103,10 @@ function run(argv) {
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
 			if (repo.open_issues_count > 0) subtitle += `🟢 ${repo.open_issues_count}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
-			if (repo.name === username) repo.name = "My GitHub Profile";
+			if (repo.name === username) {
+				repo.name = "My GitHub Profile";
+				matcher += "my github profile ";
+			}
 
 			return {
 				title: `${type}${repo.name}`,
