@@ -19,7 +19,8 @@ rules:
               nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wq|catch|q|endtry<CR>"
         conditions:
           - type: frontmost_application_if
-            file_paths: ["[Nn]eovide"]
+            file_paths:
+              - "[Nn]eovide"
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Grave ^ -> f1, and that in turn remapped in the app"
     # switching via keyboard layout laggy
@@ -50,6 +51,7 @@ rules:
               - ^com\.hnc\.Discord$
               - ^com\.apptorium\.SideNotes-paddle$
               - ^com\.mimestream\.Mimestream$
+              - ^com\.github\.wez\.wezterm$
   #─────────────────────────────────────────────────────────────────────────────
   - description: "vim motions: special characters in US layout"
     manipulators:

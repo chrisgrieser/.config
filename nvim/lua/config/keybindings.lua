@@ -276,8 +276,8 @@ keymap("n", "<leader>lt", cmd.Inspect, { desc = " Treesitter Inspect" })
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
-keymap("n", "<Down>", [[:. move +1<CR>==]], { desc = "󰜮 Move Line Down" })
-keymap("n", "<Up>", [[:. move -2<CR>==]], { desc = "󰜷 Move Line Up" })
+keymap("n", "<Down>", [[:silent! . move +1<CR>==]], { desc = "󰜮 Move Line Down" })
+keymap("n", "<Up>", [[:silent! . move -2<CR>==]], { desc = "󰜷 Move Line Up" })
 keymap("n", "<Right>", function()
 	if vim.fn.col(".") >= vim.fn.col("$") - 1 then return end
 	return [["zx"zp]]
