@@ -17,4 +17,4 @@ fi
 
 # Browse
 echo -n "$LOCAL_REPOS/$reponame" # open in terminal via Alfred
-open -R "$LOCAL_REPOS/$reponame"
+open "$LOCAL_REPOS/$reponame"

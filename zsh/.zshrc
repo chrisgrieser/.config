@@ -1,10 +1,10 @@
 CONFIG_FILES=(
 	load_plugins
 	general_and_plugin_configs
+	vim_mode_config
 	fzf-tab_and_completion_settings
 	terminal_utils
 	terminal_keybindings
-	vim_mode
 	aliases
 	history_config
 	docs_man
