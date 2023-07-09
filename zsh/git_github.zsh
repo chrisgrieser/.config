@@ -334,14 +334,14 @@ show file (bat)"
 	if [[ -z "$decision" ]]; then
 		echo "Aborted."
 		return 0
-	elif [[ "$decision" == "restore file (checkout)" ]]; then
+	elif [[ "$decision" =~ restore ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
 		echo "File restored."
 		open -R "$deleted_path" # reveal in macOS Finder
-	elif [[ "$decision" == "copy to clipboard" ]]; then
+	elif [[ "$decision" =~ copy ]]; then
 		git show "$last_commit:$deleted_path" | pbcopy
 		echo "Content copied."
-	elif [[ "$decision" == "show file (bat)" ]]; then
+	elif [[ "$decision" =~ show ]]; then
 		ext=${deleted_path##*.}
 		git show "$last_commit:$deleted_path" | bat --language="$ext"
 	fi
