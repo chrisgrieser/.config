@@ -22,6 +22,7 @@ source "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
 source "$(brew --prefix)/share/zsh-autopair/autopair.zsh"
 source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 
 # has to be loaded *after* zsh syntax highlighting
 source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
