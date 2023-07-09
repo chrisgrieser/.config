@@ -140,13 +140,14 @@ function gli() {
 # - opens PR in the web
 # - offers to delete local repo
 function pr() {
-	if ! command -v gh &>/dev/null; then echo "gh not installed." && return 1; fi
+	if ! command -v gh &>/dev/null; then printf "\033[1;33mgh not installed.\033[0m" && return 1; fi
+	if ! command -v fzf &>/dev/null; then printf "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 
 	# settings
-	echo -n "Delete the local repo afterwards? (y/n) "
-	read -r -k 1 delete_after && echo
-	echo -n "web interface or terminal? (w/t) "
-	read -r -k 1 mode && echo
+	echo "Web interface or Terminal?"
+	mode=$(printf "Web Interface\nTerminal" |
+		fzf --bind="j:down,k:up" --no-sort --height=5% --no-info)
+	echo
 
 	# get and validate commit msg
 	if [[ -z "$*" ]]; then
@@ -167,23 +168,13 @@ function pr() {
 	current_branch=$(git branch --show-current)
 
 	# create PR into current branch (not the default branch)
-	if [[ "$mode" == "w" ]]; then
+	if [[ "$mode" == "Web Interface" ]]; then
 		gh pr create --web --fill --base="$current_branch"
-	else
+	else # Terminal
 		gh pr create --fill --base="$current_branch"
-	fi
-
-	if [[ "$delete_after" == "y" ]]; then
-		repopath=$(pwd)
-		cd ..
-		sleep 1
-		rm -rf "$repopath"
-	fi
-	# if created in terminal, open the webview afterwards
-	if [[ "$mode" == "t" ]]; then
 		origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
 		gh repo set-default "$origin"
-		gh pr view --web
+		gh pr view --web # viw in the web after
 	fi
 }
 
@@ -231,7 +222,7 @@ function acp() {
 	local COMMIT_MSG="$*"
 	[[ -z "$COMMIT_MSG" ]] && COMMIT_MSG="chore"
 
-	# ensure no overlength
+	# ensure no overlength of commit msg
 	local MSG_LENGTH=${#COMMIT_MSG}
 	if [[ $MSG_LENGTH -gt 50 ]]; then
 		echo "Commit Message too long ($MSG_LENGTH chars)."
@@ -244,8 +235,11 @@ function acp() {
 	git pull
 	git push
 
+	# update sketchybar if one of respective repos
 	# check if variable starts with variable: https://unix.stackexchange.com/a/465907
-	if [[ "$PWD" == "${PWD#"$DOTFILE_FOLDER"}" ]] || [[ "$PWD" == "${PWD#"$VAULT_PATH"}" ]]; then
+	if [[ "$PWD" == "${PWD#"$DOTFILE_FOLDER"}" ]] ||
+		[[ "$PWD" == "${PWD#"$VAULT_PATH"}" ]] ||
+		[[ "$PWD" == "${PWD#"$PASSWORD_STORE"}" ]]; then
 		sketchybar --trigger repo-files-update
 	fi
 }
@@ -329,13 +323,10 @@ function gdf() {
 	echo "$deleted_path -- $last_commit"
 	echo
 
-	options=$(cat <<EOF
-restore file
-show file (bat)
-copy to clipboard
-EOF
-)
-	decision=$(echo "$options" | fzf --bind="j:down,k:up" --no-sort)
+	choices="restore file
+	copy to clipboard
+show file (bat)"
+	decision=$(echo "$choices" | fzf --bind="j:down,k:up" --no-sort --height=10% --no-info)
 
 	if [[ -z "$decision" ]]; then
 		echo "Aborted."
