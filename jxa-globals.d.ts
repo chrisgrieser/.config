@@ -31,6 +31,17 @@ declare const Application: {
 			buttonReturned: string;
 		};
 	};
+	(appname: "Finder"): {
+
+		exists(path: string): boolean; // Finder
+		finderWindows: {
+			target: { url: () => string };
+		};
+		documents: { url(): string; name(): string }[]; // webkit browsers
+		windows: { activeTab: { url(): string; name(): string } }[]; // chromium browsers
+		setConfiguration(envVar: string, options: Object); // Alfred
+		createNote(options: { text: string; path?: string }): void; // Sidenotes
+	};
 	(appname: string): {
 		includeStandardAdditions: boolean;
 		openLocation(url: string): void;

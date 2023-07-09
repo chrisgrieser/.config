@@ -76,16 +76,18 @@
 		"body": "cd \"$(dirname \"\\$0\")\" || return 1"
 	},
 	"osascript jxa (run script)": {
-		"prefix": ["jxa (run script)", "osascript -l JavaScript"],
+		"prefix": [
+			"jxa (run script)",
+			"osascript -l JavaScript"
+		],
 		"body": "osascript -l JavaScript \"${1:file}\""
 	},
 	"osascript applescript (execute)": {
-		"prefix": ["applescript (execute)", "osascript -e"],
+		"prefix": [
+			"applescript (execute)",
+			"osascript -e"
+		],
 		"body": "osascript -e '${1:command}'"
-	},
-	"multiline string": {
-		"prefix": "multiline string",
-		"body": ["${1:var}=$(cat <<EOF", "$0", "EOF", ")"]
 	},
 	"xargs (for each line)": {
 		"prefix": "xargs (for each line)",
@@ -190,7 +192,11 @@
 		"description": "for loop in list"
 	},
 	"play sound": {
-		"prefix": ["play sound", "audio", "afplay"],
+		"prefix": [
+			"play sound",
+			"audio",
+			"afplay"
+		],
 		"body": "afplay \"/System/Library/Sounds/${1|Basso,Blow,Bottle,Frog,Funk,Glass,Hero,Morse,Ping,Pop,Purr,Sosumi,Submarine,Tink|}.aiff\" &",
 		"description": "Running in the background to not block during sound playing"
 	},
