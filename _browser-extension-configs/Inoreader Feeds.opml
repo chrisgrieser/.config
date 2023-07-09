@@ -11,7 +11,7 @@
       <outline text="DGS - Neue Bücher" title="DGS - Neue Bücher" type="rss" xmlUrl="https://soziologie.de/neue-buecher.rss" htmlUrl="https://soziologie.de/"/>
       <outline text="DGS - Stipendien / Fellows" title="DGS - Stipendien / Fellows" type="rss" xmlUrl="https://soziologie.de/stellenmarkt/stipendien-/-fellows.rss" htmlUrl="https://soziologie.de"/>
       <outline text="Gedankenstrich.org (Jan-Felix Schrape)" title="Gedankenstrich.org (Jan-Felix Schrape)" type="rss" xmlUrl="http://gedankenstrich.org/feed/" htmlUrl="http://gedankenstrich.org"/>
-      <outline text="Sammel-Feed für Newsletter" title="Sammel-Feed für Newsletter" type="rss" xmlUrl="https://kill-the-newsletter.com/feeds/vy02tizmoi6hrb0c16u7.xml" htmlUrl="https://kill-the-newsletter.com/"/>
+      <outline text="Sammelfeed vieler Newsletter" title="Sammelfeed vieler Newsletter" type="rss" xmlUrl="https://kill-the-newsletter.com/feeds/vs6vqgalumq3ltzp.xml" htmlUrl="https://kill-the-newsletter.com/"/>
     </outline>
     <outline text="Journals" title="Journals">
       <outline text="Administrative Science Quarterly" title="Administrative Science Quarterly" type="rss" xmlUrl="http://journals.sagepub.com/action/showFeed?ui=0&amp;mi=ehikzz&amp;ai=2b4&amp;jc=asqa&amp;type=etoc&amp;feed=rss" htmlUrl="http://journals.sagepub.com/loi/asqa?ai=2b4&amp;mi=ehikzz&amp;af=R"/>
@@ -26,43 +26,54 @@
       <outline text="Research Policy" title="Research Policy" type="rss" xmlUrl="http://rss.sciencedirect.com/publication/science/00487333" htmlUrl="http://www.sciencedirect.com/"/>
       <outline text="Science, Technology, &amp; Human Values" title="Science, Technology, &amp; Human Values" type="rss" xmlUrl="http://journals.sagepub.com/action/showFeed?ui=0&amp;mi=ehikzz&amp;ai=2b4&amp;jc=sthd&amp;type=etoc&amp;feed=rss" htmlUrl="http://journals.sagepub.com/loi/sthd?ai=2b4&amp;mi=ehikzz&amp;af=R"/>
       <outline text="Social Studies of Science" title="Social Studies of Science" type="rss" xmlUrl="https://journals.sagepub.com/action/showFeed?ui=0&amp;mi=ehikzz&amp;ai=2b4&amp;jc=sssb&amp;type=etoc&amp;feed=rss" htmlUrl="https://journals.sagepub.com/loi/sssb?ai=2b4&amp;mi=ehikzz&amp;af=R"/>
-      <outline text="Zeitschrift für Soziologie" title="Zeitschrift für Soziologie" type="rss" xmlUrl="https://kill-the-newsletter.com/feeds/inhihfg3zqtn3kh5.xml" htmlUrl="https://kill-the-newsletter.com/"/>
-      <outline text="Zeitschrift für Soziologie" title="Zeitschrift für Soziologie" type="rss" xmlUrl="https://kill-the-newsletter.com/feeds/v28pzoiu5yc29njs.xml" htmlUrl="https://kill-the-newsletter.com/"/>
+      <outline text="Theory, Culture &amp; Society" title="Theory, Culture &amp; Society" type="rss" xmlUrl="http://journals.sagepub.com/action/showFeed?ui=0&amp;mi=ehikzz&amp;ai=2b4&amp;jc=tcsa&amp;type=etoc&amp;feed=rss" htmlUrl="http://journals.sagepub.com/loi/tcsa?ai=2b4&amp;mi=ehikzz&amp;af=R"/>
+      <outline text="Zeitschrift für Soziologie" title="Zeitschrift für Soziologie" type="rss" xmlUrl="https://kill-the-newsletter.com/feeds/lqfwt4dt601ngujh.xml" htmlUrl="https://kill-the-newsletter.com/"/>
     </outline>
     <outline text="Tech &amp; PKM" title="Tech &amp; PKM">
+      <outline text=".dotfiles" title=".dotfiles" type="rss" xmlUrl="https://dotfiles.substack.com/feed" htmlUrl="https://dotfiles.substack.com/"/>
       <outline text="Alfred Blog" title="Alfred Blog" type="rss" xmlUrl="http://blog.alfredapp.com/feed/" htmlUrl="http://blog.alfredapp.com/"/>
+      <outline text="Alfred Workflows" title="Alfred Workflows" type="rss" xmlUrl="https://www.alfredforum.com/forum/3-share-your-workflows.xml/" htmlUrl="https://www.alfredforum.com/forum/3-share-your-workflows/"/>
       <outline text="Andy Matuschak" title="Andy Matuschak" type="rss" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCqee1D1ICeF1hhfy4YKyJhg" htmlUrl="https://www.youtube.com/channel/UCqee1D1ICeF1hhfy4YKyJhg"/>
-      <outline text="Axle" title="Axle" type="rss" xmlUrl="https://axle.design/feed.rss" htmlUrl="https://axle.design/"/>
+      <outline text="Apptorium Blog" title="Apptorium Blog" type="rss" xmlUrl="https://www.apptorium.com/blog/feed" htmlUrl="https://www.apptorium.com/"/>
       <outline text="Basic Apple Guy" title="Basic Apple Guy" type="rss" xmlUrl="https://basicappleguy.com/basicappleblog?format=rss" htmlUrl="https://basicappleguy.com/"/>
+      <outline text="BetterZip Atom Feed" title="BetterZip Atom Feed" type="rss" xmlUrl="https://macitbetter.com/feed.xml" htmlUrl="//macitbetter.com//"/>
       <outline text="Big Technology (Alex Kantrowitz)" title="Big Technology (Alex Kantrowitz)" type="rss" xmlUrl="https://bigtechnology.substack.com/feed/" htmlUrl="https://bigtechnology.substack.com/"/>
+      <outline text="Brave’s Latest News on Brave Browser" title="Brave’s Latest News on Brave Browser" type="rss" xmlUrl="https://brave.com/blog/index.xml" htmlUrl="https://brave.com/blog/"/>
       <outline text="BrettTerpstra.com" title="BrettTerpstra.com" type="rss" xmlUrl="http://brett.trpstra.net/brettterpstra" htmlUrl="http://brettterpstra.com/"/>
       <outline text="Bryan Jenks" title="Bryan Jenks" type="rss" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCfhSB16X9MXhzSFe_H7XbHg" htmlUrl=""/>
+      <outline text="Café Lob-On" title="Café Lob-On" type="rss" xmlUrl="https://blog.bloonface.com/feed/" htmlUrl="https://blog.bloonface.com/"/>
       <outline text="Chaos Computer Club (Chaosknoten)" title="Chaos Computer Club (Chaosknoten)" type="rss" xmlUrl="https://www.ccc.de/de/rss/updates.rdf" htmlUrl="http://www.ccc.de/"/>
-      <outline text="Craftidore's Blog" title="Craftidore's Blog" type="rss" xmlUrl="https://blog.craftidore.com/v1/feed.rss" htmlUrl="https://blog.craftidore.com/"/>
+      <outline text="Curtis McHale" title="Curtis McHale" type="rss" xmlUrl="https://curtismchale.ca/feed/" htmlUrl="https://curtismchale.ca/"/>
       <outline text="Daring Fireball (John Gruber)" title="Daring Fireball (John Gruber)" type="rss" xmlUrl="http://daringfireball.net/feeds/articles" htmlUrl="http://daringfireball.net/"/>
-      <outline text="deanishe.net" title="deanishe.net" type="rss" xmlUrl="https://www.deanishe.net/index.xml" htmlUrl="https://www.deanishe.net/"/>
       <outline text="Dr. Drang" title="Dr. Drang" type="rss" xmlUrl="https://leancrew.com/all-this/feed/" htmlUrl="https://leancrew.com/all-this/"/>
       <outline text="Hacker News: Front Page" title="Hacker News: Front Page" type="rss" xmlUrl="https://hnrss.org/frontpage.atom?link=comments&amp;points=500&amp;comments=250" htmlUrl="https://hnrss.org/frontpage.atom?link=comments&amp;points=500&amp;comments=250"/>
-      <outline text="Hendrik Erz" title="Hendrik Erz" type="rss" xmlUrl="https://www.hendrik-erz.de/feed.xml" htmlUrl="https://www.hendrik-erz.de/blog"/>
       <outline text="Homebrew" title="Homebrew" type="rss" xmlUrl="https://brew.sh/atom.xml" htmlUrl="http://brew.sh/"/>
       <outline text="Margins by Ranjan Roy and Can Duruk" title="Margins by Ranjan Roy and Can Duruk" type="rss" xmlUrl="https://www.readmargins.com/feed" htmlUrl="https://www.readmargins.com/"/>
-      <outline text="Marta Blog" title="Marta Blog" type="rss" xmlUrl="https://marta.sh/blog/index.xml" htmlUrl="https://marta.sh/blog/"/>
+      <outline text="Nadia Eghbal" title="Nadia Eghbal" type="rss" xmlUrl="https://nadia.xyz/feed.xml" htmlUrl="http://nadia.xyz/"/>
       <outline text="neunetz.com (Marcel Weiss)" title="neunetz.com (Marcel Weiss)" type="rss" xmlUrl="http://feeds.feedburner.com/Neunetzcom" htmlUrl="http://www.neunetz.com/"/>
+      <outline text="Normal Mode" title="Normal Mode" type="rss" xmlUrl="https://normalmo.de/index.xml" htmlUrl="https://normalmo.de/"/>
+      <outline text="nvim-cmp: Recent Wiki Updates" title="nvim-cmp: Recent Wiki Updates" type="rss" xmlUrl="https://github.com/hrsh7th/nvim-cmp/wiki.atom" htmlUrl="https://github.com/hrsh7th/nvim-cmp/wiki"/>
+      <outline text="nvim-treesitter: Recent Wiki Updates" title="nvim-treesitter: Recent Wiki Updates" type="rss" xmlUrl="https://github.com/nvim-treesitter/nvim-treesitter/wiki.atom" htmlUrl="https://github.com/nvim-treesitter/nvim-treesitter/wiki"/>
+      <outline text="Obsidian Blog" title="Obsidian Blog" type="rss" xmlUrl="https://obsidian.md/feed.xml" htmlUrl="https://obsidian.md/"/>
+      <outline text="Obsidian Changelog" title="Obsidian Changelog" type="rss" xmlUrl="https://obsidian.md/changelog.xml" htmlUrl="https://obsidian.md/"/>
+      <outline text="Obsidian Observer - Medium" title="Obsidian Observer - Medium" type="rss" xmlUrl="https://medium.com/feed/obsidian-observer" htmlUrl="https://medium.com/obsidian-observer?source=rss----dc0a52745260---4"/>
       <outline text="One Thing Well" title="One Thing Well" type="rss" xmlUrl="https://onethingwell.org/rss" htmlUrl="https://onethingwell.org/"/>
-      <outline text="Stories by Gareth Stretton on Medium" title="Stories by Gareth Stretton on Medium" type="rss" xmlUrl="https://medium.com/feed/@gareth.stretton" htmlUrl="https://medium.com/@gareth.stretton?source=rss-2f544745b286------2"/>
+      <outline text="Release notes from neovim" title="Release notes from neovim" type="rss" xmlUrl="https://github.com/neovim/neovim/releases.atom" htmlUrl="https://github.com/neovim/neovim/releases"/>
+      <outline text="Rome's blog posts" title="Rome's blog posts" type="rss" xmlUrl="https://rome.tools/feed.xml" htmlUrl="https://rome.tools/"/>
+      <outline text="Stephan Ango" title="Stephan Ango" type="rss" xmlUrl="https://stephanango.com/feed.xml" htmlUrl="https://stephanango.com/"/>
       <outline text="Stratechery (Ben Thompson)" title="Stratechery (Ben Thompson)" type="rss" xmlUrl="https://stratechery.com/feed/" htmlUrl="https://stratechery.com/"/>
       <outline text="The Overflow – Stack Overflow Blog" title="The Overflow – Stack Overflow Blog" type="rss" xmlUrl="https://stackoverflow.blog/newsletter/feed/" htmlUrl="https://stackoverflow.blog/"/>
       <outline text="The Pragmatic Engineer" title="The Pragmatic Engineer" type="rss" xmlUrl="https://feeds.feedburner.com/ThePragmaticEngineer" htmlUrl="https://blog.pragmaticengineer.com/"/>
-      <outline text="The Sweet Setup" title="The Sweet Setup" type="rss" xmlUrl="https://thesweetsetup.com/feed/" htmlUrl="https://thesweetsetup.com/"/>
-      <outline text="The Tao of Mac" title="The Tao of Mac" type="rss" xmlUrl="https://taoofmac.com/atom.xml" htmlUrl="https://taoofmac.com/"/>
+      <outline text="The Setup" title="The Setup" type="rss" xmlUrl="https://usesthis.com/feed.atom" htmlUrl="http://usesthis.com/"/>
+      <outline text="The Valuable Dev" title="The Valuable Dev" type="rss" xmlUrl="https://thevaluable.dev/index.xml" htmlUrl="https://web-techno.net/"/>
       <outline text="The Verge -  Apps Posts" title="The Verge -  Apps Posts" type="rss" xmlUrl="https://www.theverge.com/apps/rss/index.xml" htmlUrl="https://www.theverge.com/apps"/>
       <outline text="The Verge -  Culture Posts" title="The Verge -  Culture Posts" type="rss" xmlUrl="https://www.theverge.com/culture/rss/index.xml" htmlUrl="https://www.theverge.com/culture"/>
       <outline text="The Verge -  Editorials" title="The Verge -  Editorials" type="rss" xmlUrl="http://www.theverge.com/rss/group/editorial/index.xml" htmlUrl="http://www.theverge.com/label/editorial"/>
-      <outline text="This Week In Neovim" title="This Week In Neovim" type="rss" xmlUrl="https://this-week-in-neovim.org/rss" htmlUrl="https://this-week-in-neovim.org/"/>
       <outline text="ThoughtAsylum" title="ThoughtAsylum" type="rss" xmlUrl="https://www.thoughtasylum.com/atom.xml" htmlUrl="https://www.thoughtasylum.com/"/>
       <outline text="tldr tech" title="tldr tech" type="rss" xmlUrl="https://kill-the-newsletter.com/feeds/dtt1ux9f50tehi8m.xml" htmlUrl="https://kill-the-newsletter.com/"/>
-      <outline text="Vivaldi Browser" title="Vivaldi Browser" type="rss" xmlUrl="https://vivaldi.com/feed/" htmlUrl="https://vivaldi.com/"/>
-      <outline text="Warp.dev" title="Warp.dev" type="rss" xmlUrl="https://www.warp.dev/blog/rss.xml" htmlUrl="https://www.warp.dev/"/>
+      <outline text="toolfinder.co" title="toolfinder.co" type="rss" xmlUrl="https://kill-the-newsletter.com/feeds/7ke33lirux3hizfj.xml" htmlUrl="https://kill-the-newsletter.com/"/>
+      <outline text="Track Awesome Neovim Updates Daily" title="Track Awesome Neovim Updates Daily" type="rss" xmlUrl="https://www.trackawesomelist.com/rockerBOO/awesome-neovim/rss.xml" htmlUrl="https://www.trackawesomelist.com/rockerBOO/awesome-neovim/feed.json"/>
+      <outline text="Workspaces" title="Workspaces" type="rss" xmlUrl="https://www.workspaces.xyz/p/rss.xml" htmlUrl="https://www.workspaces.xyz/"/>
       <outline text="xkcd.com" title="xkcd.com" type="rss" xmlUrl="http://xkcd.com/atom.xml" htmlUrl="http://xkcd.com/"/>
       <outline text="Zettelkasten.de" title="Zettelkasten.de" type="rss" xmlUrl="https://zettelkasten.de/feed.atom" htmlUrl="http://www.zettelkasten.de/"/>
     </outline>
