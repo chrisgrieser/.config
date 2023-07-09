@@ -53,6 +53,6 @@ function zvm_after_lazy_keybindings() {
 	# -s flag sends direct keystrokes, to allow for remappings
 	bindkey -M vicmd -s 'Y' 'y$'
 	bindkey -M vicmd -s 'X' 'mz$"_x`z' # Remove last character from line
-	bindkey -M vicmd -s '^B' 'daw'     # HACK set via Karabiner to <S-Space>
+	bindkey -M vicmd -s '^S' 'daw'     # HACK set via Karabiner to <S-Space>
 	bindkey -M vicmd -s ' ' 'ciw'
 }
