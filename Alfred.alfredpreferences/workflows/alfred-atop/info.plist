@@ -1600,7 +1600,7 @@ JSON.stringify({ 'items': volume_array });
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>comma-separated list of full devices names to excluded</string>
+			<string>comma-separated list of full device names to excluded</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>

@@ -13,17 +13,16 @@ CONFIG_FILES=(
 	intro_messages
 )
 
+# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh shell integration for wezterm
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && CONFIG_FILES+=(semantic_prompts)
+
+#───────────────────────────────────────────────────────────────────────────────
+
 for config_file in "${CONFIG_FILES[@]}"; do
 	# shellcheck disable=1090
 	source "$DOTFILE_FOLDER/zsh/$config_file.zsh"
 done
 
-#───────────────────────────────────────────────────────────────────────────────
 
-if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
-	# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh shell integration for wezterm
-	source "$DOTFILE_FOLDER/zsh/semantic_prompts.sh"
-else
-	# https://stackoverflow.com/a/69915614 remove last login message that some terminals leave
-	printf '\33c\e[3J'
-fi
+# https://stackoverflow.com/a/69915614 remove last login message that some terminals leave
+[[ "$TERM_PROGRAM" != "WezTerm" ]] && printf '\33c\e[3J'
