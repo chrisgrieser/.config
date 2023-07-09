@@ -31,17 +31,6 @@ declare const Application: {
 			buttonReturned: string;
 		};
 	};
-	(appname: "Finder"): {
-
-		exists(path: string): boolean; // Finder
-		finderWindows: {
-			target: { url: () => string };
-		};
-		documents: { url(): string; name(): string }[]; // webkit browsers
-		windows: { activeTab: { url(): string; name(): string } }[]; // chromium browsers
-		setConfiguration(envVar: string, options: Object); // Alfred
-		createNote(options: { text: string; path?: string }): void; // Sidenotes
-	};
 	(appname: string): {
 		includeStandardAdditions: boolean;
 		openLocation(url: string): void;
@@ -60,8 +49,6 @@ declare const Application: {
 		elementsOfClass(className: string): string[];
 		propertiesOfClass(className: string): string[];
 		parentOfClass(className: string): string;
-		// rome-ignore lint/suspicious/noExplicitAny: TODO
-		menuBars: any;
 
 		// APP-SPECIFIC
 		exists(path: string): boolean; // Finder

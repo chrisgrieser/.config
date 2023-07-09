@@ -50,6 +50,19 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
+	{
+		"dgagn/diagflow.nvim",
+		event = "LspAttach",
+		opts = {
+			max_width = 40,
+			severity_colors = { 
+				error = "DiagnosticVirtualTextError",
+				warning = "DiagnosticVirtualTextWarning",
+				info = "DiagnosticVirtualTextInfo",
+				hint = "DiagnosticVirtualTextHint",
+			},
+		},
+	},
 	{ -- better virtualtext diagnostics
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		config = true,
