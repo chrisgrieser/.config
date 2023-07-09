@@ -1161,7 +1161,7 @@ JSON.stringify({ 'items': volume_array });
 	<string># atop
 
 - Refresh rates must be values between 0.1 and 5 seconds.
-- To connect &amp; disconnect to Bluetooth Devices, `blueutil` must be installed. If it is not, the Bluetooth Preferences will be opened instead.
+- To connect &amp; disconnect to Bluetooth Devices, [blueutil](https://github.com/toy/blueutil) must be installed. If it is not, the Bluetooth Preferences will be opened instead.
 
 ---
 
@@ -1678,7 +1678,7 @@ JSON.stringify({ 'items': volume_array });
 		<string> ⟡ </string>
 	</dict>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>1.0.6</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
