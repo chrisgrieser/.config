@@ -24,7 +24,7 @@ export YSU_MESSAGE_POSITION="after"
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --hidden'
-export FZF_DEFAULT_OPTS='--color="hl:206" --pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --cycle --layout=reverse --bind="tab:down,shift-tab:up" --preview-window=border-left --height="90%"'
+export FZF_DEFAULT_OPTS='--color="hl:206" --keep-right --pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --cycle --layout=reverse --bind="tab:down,shift-tab:up" --preview-window=border-left --height="90%"'
 
 # rg
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
