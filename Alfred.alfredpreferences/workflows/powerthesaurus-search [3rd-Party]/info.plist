@@ -8,21 +8,90 @@
 	<string>⬇️</string>
 	<key>connections</key>
 	<dict>
-		<key>819E593B-43C3-4EBF-9000-3D3C0F5AB6D2</key>
+		<key>3BDFA2EA-F8AA-4E1D-BACD-9578AA20FCF0</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B08999FE-6061-49C9-997E-42C21568C633</string>
+				<string>C8E90027-C7BF-4358-A235-F56E58D80D55</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open synonyms in browser</string>
+				<string>Open synonyms for this word in your browser</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>EA0FCBB9-3119-4821-A1D9-58B6780D5C37</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>AF3183AB-C171-409C-9900-649D4136A7D1</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Open Antonyms for this word in your browser</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>819E593B-43C3-4EBF-9000-3D3C0F5AB6D2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C8E90027-C7BF-4358-A235-F56E58D80D55</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Open synonyms for this word in your browser</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>EA0FCBB9-3119-4821-A1D9-58B6780D5C37</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>AF3183AB-C171-409C-9900-649D4136A7D1</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Open Antonyms for this word in your browser</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AF3183AB-C171-409C-9900-649D4136A7D1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>76D80E62-E346-4FE5-87F5-0F588660706B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C8E90027-C7BF-4358-A235-F56E58D80D55</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B08999FE-6061-49C9-997E-42C21568C633</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -45,6 +114,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>open "$myURLsyn"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B08999FE-6061-49C9-997E-42C21568C633</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -58,7 +150,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>e</string>
+				<string>{var:synkeyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -95,26 +187,13 @@ python3 powerthesaurus.py "synonym $1"</string>
 		</dict>
 		<dict>
 			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>open "$myURLsyn"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
+			<dict/>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>B08999FE-6061-49C9-997E-42C21568C633</string>
+			<string>C8E90027-C7BF-4358-A235-F56E58D80D55</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -135,53 +214,230 @@ python3 powerthesaurus.py "synonym $1"</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict/>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>AF3183AB-C171-409C-9900-649D4136A7D1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:antkeyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching antonyms for '{query}'</string>
+				<key>script</key>
+				<string>export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
+export PYTHONPATH="$PWD/lib"
+python3 powerthesaurus.py "antonym $1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search Powerthesaurus for Antonyms</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>3BDFA2EA-F8AA-4E1D-BACD-9578AA20FCF0</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>open "$myURLanto"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>76D80E62-E346-4FE5-87F5-0F588660706B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Search Powerthesaurus synonyms and antonyms from Alfred
 Original by Clarence Castillo
-https://github.com/clarencecastillo/alfred-powerthesaurus
-Updated to Python 3
+
+
+Ported to Python3 and Alfred 5
+https://github.com/giovannicoppola/alfred-powerthesaurus
+
+
 
 enter (↩️) copies word to clipboard
 CMD+enter (⌘↩️) opens synonyms in browser
-CTRL+enter (^↩️) opens antonyms in browser
-
-https://github.com/giovannicoppola/alfred-powerthesaurus</string>
+CTRL+enter (^↩️) opens antonyms in browser</string>
 	<key>uidata</key>
 	<dict>
+		<key>3BDFA2EA-F8AA-4E1D-BACD-9578AA20FCF0</key>
+		<dict>
+			<key>xpos</key>
+			<real>110</real>
+			<key>ypos</key>
+			<real>440</real>
+		</dict>
+		<key>76D80E62-E346-4FE5-87F5-0F588660706B</key>
+		<dict>
+			<key>note</key>
+			<string>Open Antonyms in browser</string>
+			<key>xpos</key>
+			<real>650</real>
+			<key>ypos</key>
+			<real>460</real>
+		</dict>
 		<key>819E593B-43C3-4EBF-9000-3D3C0F5AB6D2</key>
 		<dict>
 			<key>xpos</key>
-			<real>170</real>
+			<real>110</real>
 			<key>ypos</key>
-			<real>225</real>
+			<real>115</real>
+		</dict>
+		<key>AF3183AB-C171-409C-9900-649D4136A7D1</key>
+		<dict>
+			<key>xpos</key>
+			<real>440</real>
+			<key>ypos</key>
+			<real>440</real>
 		</dict>
 		<key>B08999FE-6061-49C9-997E-42C21568C633</key>
 		<dict>
 			<key>note</key>
-			<string>Open Synonyms in browser</string>
+			<string>Open synonyms in browser</string>
 			<key>xpos</key>
-			<real>380</real>
+			<real>650</real>
 			<key>ypos</key>
-			<real>225</real>
+			<real>40</real>
+		</dict>
+		<key>C8E90027-C7BF-4358-A235-F56E58D80D55</key>
+		<dict>
+			<key>xpos</key>
+			<real>440</real>
+			<key>ypos</key>
+			<real>160</real>
 		</dict>
 		<key>EA0FCBB9-3119-4821-A1D9-58B6780D5C37</key>
 		<dict>
 			<key>xpos</key>
-			<real>380</real>
+			<real>650</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>260</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>pows</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword for Synonyms</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>synkeyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>powa</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword for Antonyms</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>antkeyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>True</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>If you're having SSL issues, try temporarily disabling it by setting this workflow environment variable  to `False`. This will bypass SSL verification as a workaround while waiting for the SSL certificate to be rectified.</string>
+			<key>label</key>
+			<string>SSL verification</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>ALFRED_PT_SSL_VERIFICATION</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
 	<array/>
-	<key>variables</key>
-	<dict>
-		<key>ALFRED_PT_SSL_VERIFICATION</key>
-		<string>True</string>
-	</dict>
 	<key>version</key>
-	<string>3.0</string>
+	<string>3.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/giovannicoppola/alfred-powerthesaurus</string>
 </dict>
