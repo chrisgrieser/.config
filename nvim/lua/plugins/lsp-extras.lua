@@ -50,22 +50,6 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
-	{
-		"kosayoda/nvim-lightbulb",
-		event = "LspAttach",
-		opts = {
-			autocmd = {
-				enabled = true,
-				updatetime = -1, -- set by myself in the options
-			},
-			sign = {
-				text = "",
-			},
-			ignore = {
-				clients = { "null-ls", "lua_ls", "marksman" },
-			},
-		},
-	},
 	-- { -- checkout when more stable
 	-- 	"dgagn/diagflow.nvim",
 	-- 	event = "VeryLazy",
@@ -142,7 +126,7 @@ return {
 						end
 
 						if #results == 0 then
-							vim.notify("No " .. method .. "found")
+							vim.notify("No " .. method .. " found")
 						elseif #results == 1 then
 							jump(results[1])
 						else
