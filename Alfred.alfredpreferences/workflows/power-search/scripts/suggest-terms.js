@@ -44,8 +44,6 @@ function run(argv) {
 	const oldArg = $.NSProcessInfo.processInfo.environment.objectForKey("oldArg").js;
 	const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js;
 	const query = argv[0];
-	console.log("oldArg:", oldArg);
-	console.log("query:", query);
 
 	// regex ignore & ignore queries shorter than 3 characters
 	if (noSuggestionRegex.test(query) || query.length < 3) return;

@@ -51,18 +51,34 @@ return {
 		},
 	},
 	{
-		"dgagn/diagflow.nvim",
+		"kosayoda/nvim-lightbulb",
 		event = "LspAttach",
 		opts = {
-			max_width = 40,
-			severity_colors = { 
-				error = "DiagnosticVirtualTextError",
-				warning = "DiagnosticVirtualTextWarning",
-				info = "DiagnosticVirtualTextInfo",
-				hint = "DiagnosticVirtualTextHint",
+			autocmd = {
+				enabled = true,
+				updatetime = -1, -- set by myself in the options
+			},
+			sign = {
+				text = "",
+			},
+			ignore = {
+				clients = { "null-ls", "lua_ls" },
 			},
 		},
 	},
+	-- { -- checkout when more stable
+	-- 	"dgagn/diagflow.nvim",
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		max_width = 40,
+	-- 		severity_colors = {
+	-- 			error = "DiagnosticVirtualTextError",
+	-- 			warning = "DiagnosticVirtualTextWarning",
+	-- 			info = "DiagnosticVirtualTextInfo",
+	-- 			hint = "DiagnosticVirtualTextHint",
+	-- 		},
+	-- 	},
+	-- },
 	{ -- better virtualtext diagnostics
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		config = true,
