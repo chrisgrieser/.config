@@ -4,7 +4,7 @@ CONFIG_FILES=(
 	fzf-tab_and_completion_settings
 	terminal_utils
 	terminal_keybindings
-	# vi_mode
+	vim_mode
 	aliases
 	history_config
 	docs_man
