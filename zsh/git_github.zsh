@@ -324,7 +324,7 @@ function gdf() {
 	echo "$deleted_path -- $last_commit"
 	echo
 
-	choices="restore file
+	choices="restore file (checkout)
 copy to clipboard
 show file (bat)"
 	decision=$(echo "$choices" |
