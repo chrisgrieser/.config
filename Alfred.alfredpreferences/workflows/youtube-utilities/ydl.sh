@@ -2,7 +2,7 @@
 export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
 download_location="${download_location/#\~/$HOME}"
-CURRENT_TAB=$(osascript -l JavaScript "./get-url-from-browser.js")
+CURRENT_TAB=$(osascript -l JavaScript "./get-url-from-browser.js" &)
 
 if [[ -z "$CURRENT_TAB" ]] ; then
 	echo -n "❌ Tab could not be retrieved."
