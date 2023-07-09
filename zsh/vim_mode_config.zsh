@@ -1,3 +1,4 @@
+# shellcheck disable=2034
 #───────────────────────────────────────────────────────────────────────────────
 # INFO
 # available vi-mode widgets: `bindkey -M vicmd`
@@ -5,8 +6,10 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 function zvm_config() {
-	# shellcheck disable=2034
 	ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT # Always starting with insert mode for each command line
+	ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BEAM
+	ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BLOCK
+	ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_BLINKING_UNDERLINE
 }
 
 function zvm_after_lazy_keybindings() {
@@ -21,4 +24,5 @@ function zvm_after_lazy_keybindings() {
 	bindkey -M vicmd -s 'Y' 'y$'               # -s flag sends direct keystrokes, to allow for remappings
 	bindkey -M vicmd -s 'X' 'mz$"_x`z'         # Remove last character from line
 	bindkey -M vicmd -s ' ' 'ciw'
+	bindkey -M vicmd -s '^W' 'daw' # set via Karabiner to <S-Space>
 }
