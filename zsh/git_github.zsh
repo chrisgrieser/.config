@@ -301,7 +301,6 @@ function gdf() {
 	if [[ $# -eq 0 ]]; then echo "No search term provided." && return 1; fi
 
 	local deleted_path deletion_commit
-	# goto git root
 	cd "$(git rev-parse --show-toplevel)"
 
 	# alternative method: `git rev-list -n 1 HEAD -- "**/*$1*"` to get the commit of a deleted file
@@ -329,26 +328,28 @@ function gdf() {
 	# decision on how to act on file
 	echo "$deleted_path -- $last_commit"
 	echo
-	print "\033[1;34m[r]estore file (checkout)"
-	print "[s]how file (bat)"
-	print "[c]opy content\033[0m"
-	echo -n "> "
-	read -r -k 1 DECISION
-	echo
 
-	# shellcheck disable=SC2193
-	if [[ "$DECISION:l" == "c" ]]; then
-		git show "$last_commit:$deleted_path" | pbcopy
-		echo "Content copied."
-	elif [[ "$DECISION:l" == "r" ]]; then
+	options=$(cat <<EOF
+restore file
+show file (bat)
+copy to clipboard
+EOF
+)
+	decision=$(echo "$options" | fzf --bind="j:down,k:up" --no-sort)
+
+	if [[ -z "$decision" ]]; then
+		echo "Aborted."
+		return 0
+	elif [[ "$decision" == "restore file (checkout)" ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
 		echo "File restored."
 		open -R "$deleted_path" # reveal in macOS Finder
-	elif [[ "$DECISION:l" == "s" ]]; then
+	elif [[ "$decision" == "copy to clipboard" ]]; then
+		git show "$last_commit:$deleted_path" | pbcopy
+		echo "Content copied."
+	elif [[ "$decision" == "show file (bat)" ]]; then
 		ext=${deleted_path##*.}
 		git show "$last_commit:$deleted_path" | bat --language="$ext"
-	else
-		echo "Aborted."
 	fi
 }
 
