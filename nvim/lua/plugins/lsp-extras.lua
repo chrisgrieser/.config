@@ -62,7 +62,7 @@ return {
 				text = "",
 			},
 			ignore = {
-				clients = { "null-ls", "lua_ls" },
+				clients = { "null-ls", "lua_ls", "marksman" },
 			},
 		},
 	},

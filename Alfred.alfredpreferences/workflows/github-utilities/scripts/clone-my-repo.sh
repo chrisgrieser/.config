@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
-
 # INFO LOCAL_REPOS defined in .zshenv
+#───────────────────────────────────────────────────────────────────────────────
 
 # use SSH instead of https
 url="$(echo "$*" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
@@ -15,5 +15,6 @@ else
 	git clone --depth=1 "$url" || return 1
 fi
 
-# open in terminal via Alfred
-echo -n "$LOCAL_REPOS/$reponame"
+# Browse
+echo -n "$LOCAL_REPOS/$reponame" # open in terminal via Alfred
+open -R "$LOCAL_REPOS/$reponame"
