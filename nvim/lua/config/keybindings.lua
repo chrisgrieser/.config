@@ -174,10 +174,11 @@ for _, key in pairs(trailingKeys) do
 end
 keymap("n", "X", "mz$x`z", { desc = "Delete last character" })
 
+keymap("n", "~", "~h", { desc = "Toggle Case (w/o moving right)" })
 
 -- Word Switcher
 -- stylua: ignore
-keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words" })
+keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words / toggle casing" })
 
 -- open new brace
 keymap({ "n", "i" }, "<D-o>", function()
@@ -625,3 +626,6 @@ autocmd("FileType", {
 		end
 	end,
 })
+
+--------------------------------------------------------------------------------
+
