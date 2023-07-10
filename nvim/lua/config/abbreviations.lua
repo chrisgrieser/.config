@@ -18,6 +18,7 @@ local spellfixes = {
 	ture = "true",
 	terue = "true",
 	fo = "of",
+	oepn = "open",
 	dwon = "down",
 	ntoe = "note",
 	verison = "version",

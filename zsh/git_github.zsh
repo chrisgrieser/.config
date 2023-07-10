@@ -76,14 +76,10 @@ function gitlog() {
 		sed 's/ weeks ago)/w)/' |
 		sed 's/ months ago)/m)/' |
 		sed 's/origin\//󰞶 /g' |
-		sed 's/HEAD/󱍀/g' |
+		sed -E 's/HEAD/󱍀/g' |
 		sed 's/->/⇢/g' |
 		sed 's/grafted/ /' |
-		sed 's/tags: / )/g' |
-		delta
-	# INFO piping though delta as pager makes commit hashes clickable https://github.com/wez/wezterm/discussions/3618
-	# also, delta pipes then to less, which is configured not to start the pager
-	# if the output short enough to fit on one screen
+		sed 's/tags: / )/g'
 }
 
 # brief git log (only last 15)

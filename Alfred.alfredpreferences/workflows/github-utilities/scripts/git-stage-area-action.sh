@@ -13,6 +13,8 @@ elif [[ "$mode" == "discard" ]]; then
 	git restore "$file"
 elif [[ "$mode" == "reveal" ]]; then
 	open -R "$file"
+elif [[ "$mode" == "open" ]]; then
+	open "$file"
 fi
 
 echo "$file"

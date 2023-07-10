@@ -76,9 +76,13 @@ function run() {
 						valid: isDeleted,
 						variables: { mode: "reveal" },
 					},
-					cmd: {
-						subtitle: "⌘: Discard (Reset) Changes to File",
+					shift: {
+						subtitle: "⇧: Discard (Reset) Changes to File",
 						variables: { mode: "discard" },
+					},
+					cmd: {
+						subtitle: "⌘: Open File",
+						variables: { mode: "open" },
 					},
 				},
 				variables: { mode: mode },
