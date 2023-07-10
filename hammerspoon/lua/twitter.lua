@@ -87,7 +87,6 @@ local function showHideTickerApp(referenceWin)
 	if
 		not app
 		or not referenceWin
-		or referenceWin:title() == "Login" -- login window max sized and triggers this as well
 		or u.isFront("CleanShot X")
 	then
 		return
@@ -96,7 +95,8 @@ local function showHideTickerApp(referenceWin)
 	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centered) then
 		winToTheSide()
 	elseif wu.CheckSize(referenceWin, wu.maximized) then
-		u.notify("Hiding Ivory due to:", referenceWin:title())
+		-- login window max sized and triggers this as well
+		if referenceWin:title() == "Login" then return end
 		app:hide()
 	end
 end
