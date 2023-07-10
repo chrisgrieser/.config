@@ -4,7 +4,8 @@ local wu = require("lua.window-utils")
 
 --------------------------------------------------------------------------------
 
--- ensure that twitter does not get focus, "falling through" to the next window
+-- ensure that twitter does not get focus when alt-tabbing and instead "falling 
+-- through" to the next window
 local function fallThrough()
 	if not u.isFront(env.tickerApp) then return end
 
@@ -21,6 +22,7 @@ local function fallThrough()
 	nextWin:focus()
 end
 
+-- simply scroll up without the mouse and without focussing the app
 local function scrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence

@@ -1,6 +1,7 @@
 # https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 #───────────────────────────────────────────────────────────────────────────────
 
+--no-line-number
 --smart-case
 --trim
 --glob=!git/*
