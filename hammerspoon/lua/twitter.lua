@@ -84,12 +84,19 @@ end
 ---@param referenceWin hs.window
 local function showHideTickerApp(referenceWin)
 	local app = u.app(env.tickerApp)
-	if not app or not referenceWin or u.isFront("CleanShot X") then return end
+	if
+		not app
+		or not referenceWin
+		or referenceWin:title() == "Login" -- login window max sized and triggers this as well
+		or u.isFront("CleanShot X")
+	then
+		return
+	end
 
 	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centered) then
 		winToTheSide()
 	elseif wu.CheckSize(referenceWin, wu.maximized) then
-		u.notify("Hiding Ivory due to: ", referenceWin:title())
+		u.notify("Hiding Ivory due to:", referenceWin:title())
 		app:hide()
 	end
 end
