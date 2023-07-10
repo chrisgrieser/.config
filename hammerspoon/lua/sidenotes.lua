@@ -74,7 +74,7 @@ end
 -- not being synced yet
 if not u.isReloading() then
 	u.runWithDelays(15, M.reminderToSidenotes)
-	if env.isAtOffice then u.runWithDelays({15, 25}, moveOfficeNotesToBase) end
+	if env.isAtOffice then u.runWithDelays({ 10, 20, 30, 40 }, moveOfficeNotesToBase) end
 end
 
 --------------------------------------------------------------------------------

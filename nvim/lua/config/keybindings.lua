@@ -412,7 +412,7 @@ end, { desc = " Live Grep in Project" })
 keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
 keymap("n", "gr", function() cmd.Telescope("oldfiles") end, { desc = " Recent Files" })
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = "  Continue" })
-
+keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since `gf` remapped
 
 --------------------------------------------------------------------------------
 -- HARPOON
@@ -628,4 +628,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-

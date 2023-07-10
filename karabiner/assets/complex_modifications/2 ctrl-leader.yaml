@@ -28,7 +28,7 @@ anchors:
           text: 🔺 Leader
 #───────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: App Switcher Leader
+  - description: "🔺App Switcher Leader"
     manipulators:
       - type: basic
         from: { key_code: left_control }
@@ -55,7 +55,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "App Switcher Actions"
+  - description: "🔺 App Switcher Actions"
     manipulators:
       # [c]alendar: BusyCal
       - type: basic
