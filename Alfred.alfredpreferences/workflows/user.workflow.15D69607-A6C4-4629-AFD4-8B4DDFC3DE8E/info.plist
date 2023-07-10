@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.alfredapp.vitor.alfredgallery</string>
+	<key>category</key>
+	<string>⬇️</string>
+	<key>connections</key>
+	<dict>
+		<key>1944B7E1-9267-43A6-BEC7-761A44CF1A9D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CE0326DC-6B4D-4366-867C-CC3A09F9B44D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7094BDA6-222F-4626-AC67-26A7B201F91C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C1132036-7887-4A07-931C-9B346E04D969</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7094BDA6-222F-4626-AC67-26A7B201F91C</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Install workflow</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>1944B7E1-9267-43A6-BEC7-761A44CF1A9D</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Narrow search to creator’s name</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Vítor Galvão</string>
+	<key>description</key>
+	<string>Search Workflows on the Alfred Gallery</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Alfred Gallery</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>https:\/\/alfred\.app\/workflows\/(.+?)\/(.+?)/</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>alfred://gallery/workflow/$1/$2/</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>7094BDA6-222F-4626-AC67-26A7B201F91C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:gallery_search_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Getting Gallery data…</string>
+				<key>script</key>
+				<string>readonly cache_file="${alfred_workflow_cache}/gallery.json"
+readonly release_id_file="${alfred_workflow_cache}/release_id.txt"
+
+# Helper to show results and exit
+function show_data {
+  &lt; "${cache_file}"
+  exit 0
+}
+
+# Exit early if cache is recent
+[[ "$(date -r "${cache_file}" +%s)" -gt "$(date -v -4d +%s)" ]] &amp;&amp; show_data
+
+# Get latest release info
+mkdir -p "${alfred_workflow_cache}"
+
+readonly latest_release="$(curl --silent 'https://api.github.com/repos/alfredapp/gallery-cache/releases/latest')"
+readonly release_id="$(osascript -l JavaScript -e 'function run(argv) { return JSON.parse(argv[0])["id"] }' "${latest_release}")"
+readonly download_url="$(osascript -l JavaScript -e 'function run(argv) { return JSON.parse(argv[0])["assets"][0]["browser_download_url"] }' "${latest_release}")"
+
+# Exit early if release has not changed
+[[ "${release_id}" == "$(&lt; "${release_id_file}")" ]] &amp;&amp; show_data
+
+# Download and update cache
+curl --silent --location "${download_url}" | tar --directory "${alfred_workflow_cache}" --extract
+echo "${release_id}" &gt; "${release_id_file}"
+show_data</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search Workflows on the Alfred Gallery</string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>show_list</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C1132036-7887-4A07-931C-9B346E04D969</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>show_list</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<false/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>CE0326DC-6B4D-4366-867C-CC3A09F9B44D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>https:\/\/alfred\.app\/workflows\/(.+?)\/.*</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>$1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>1944B7E1-9267-43A6-BEC7-761A44CF1A9D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Usage
+
+Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` keyword.
+
+![Searching for alfredapp workflows](images/about/gallery.png)
+
+* &lt;kbd&gt;↩&lt;/kbd&gt;: Open Gallery page in default browser.
+* &lt;kbd&gt;⌃&lt;/kbd&gt;: Show tags.
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt;: Install workflow.
+* &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt;: Narrow search to creator’s name.
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt; (or tap &lt;kbd&gt;⇧&lt;/kbd&gt;): Quick Look workflow’s Gallery page.</string>
+	<key>uidata</key>
+	<dict>
+		<key>1944B7E1-9267-43A6-BEC7-761A44CF1A9D</key>
+		<dict>
+			<key>xpos</key>
+			<real>260</real>
+			<key>ypos</key>
+			<real>270</real>
+		</dict>
+		<key>7094BDA6-222F-4626-AC67-26A7B201F91C</key>
+		<dict>
+			<key>xpos</key>
+			<real>260</real>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
+		<key>A05B9991-1BE1-4677-B68E-BFDB1DBB6055</key>
+		<dict>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>105</real>
+		</dict>
+		<key>C1132036-7887-4A07-931C-9B346E04D969</key>
+		<dict>
+			<key>xpos</key>
+			<real>55</real>
+			<key>ypos</key>
+			<real>105</real>
+		</dict>
+		<key>CE0326DC-6B4D-4366-867C-CC3A09F9B44D</key>
+		<dict>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>240</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>gallery</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Search Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>gallery_search_keyword</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>2023.1</string>
+	<key>webaddress</key>
+	<string>https://github.com/alfredapp/alfred-gallery-workflow/</string>
+</dict>
+</plist>
