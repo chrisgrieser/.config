@@ -1,25 +1,25 @@
 title: Vim Mode for Highlights.app
 anchors:
   - conditions:
-      - &highlights-vim-active
+      - &highlights-insert-mode
         type: variable_if
-        name: HIGHLIGHTS_VIM_ACTIVE
+        name: HIGHLIGHTS_INSERT_MODE
         value: true
-      - &highlights-vim-inactive
+      - &highlights-normal-mode
         type: variable_unless
-        name: HIGHLIGHTS_VIM_ACTIVE
+        name: HIGHLIGHTS_INSERT_MODE
         value: true
       - &highlights-app
         type: frontmost_application_if
         bundle_identifiers: [^net\.highlightsapp\.universal$]
   - to:
-      - &deactivate-highlights-vim
+      - &enter-normal-mode
         set_variable:
-          name: HIGHLIGHTS_VIM_ACTIVE
+          name: HIGHLIGHTS_INSERT_MODE
           value: false
-      - &activate-highlights-vim
+      - &enter-insert-mode
         set_variable:
-          name: HIGHLIGHTS_VIM_ACTIVE
+          name: HIGHLIGHTS_INSERT_MODE
           value: true
       - &remove-notice
         set_notification_message:
@@ -28,44 +28,128 @@ anchors:
       - &set-notice
         set_notification_message:
           id: highlights-vim-notice
-          text: ✏️ Normal Mode
+          text: ✏️ Highlights Insert Mode
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "✏️ Highlights Vim Mode: Triggers"
     manipulators:
       # Enter Insert Mode
+      # INFO can't be done on left click, since that initially block dragging
       - type: basic
         from: { key_code: caps_lock }
-        to:
-          - *deactivate-highlights-vim
-          - *remove-notice
-        conditions:
-          - *highlights-app
-          - *highlights-vim-active
-      # Enter Normal Mode
-      - type: basic
-        from: { key_code: caps_lock }
-        to:
-          - key_code: escape
-          - *activate-highlights-vim
+        to_if_alone:
+          - *enter-insert-mode
           - *set-notice
+        to:
+          - { key_code: right_shift, modifiers: [control, option, command] }
         conditions:
           - *highlights-app
-          - *highlights-vim-inactive
+          - *highlights-normal-mode
+      # Enter Normal Mode
+      # INFO done on capslock/escape, since that also exists writing an annotation
+      - type: basic
+        from: { key_code: caps_lock }
+        to_if_alone:
+          - key_code: escape
+          - *enter-normal-mode
+          - *remove-notice
+        to:
+          - { key_code: right_shift, modifiers: [control, option, command] }
+        conditions:
+          - *highlights-app
+          - *highlights-insert-mode
   #─────────────────────────────────────────────────────────────────────────────
   - description: "✏️ Highlights Vim Mode: Actions"
     manipulators:
+      # up/down
       - type: basic
         from: { key_code: j }
+        to: # 10x down
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+        conditions:
+          - *highlights-app
+          - *highlights-normal-mode
+      - type: basic
+        from: { key_code: k }
+        to: # 10x up
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+        conditions:
+          - *highlights-app
+          - *highlights-normal-mode
+      # J/K: page up/down
+      - type: basic
+        from: { key_code: j, modifiers: { mandatory: [shift] } }
         to:
           - key_code: page_down
         conditions:
           - *highlights-app
-          - *highlights-vim-active
+          - *highlights-normal-mode
       - type: basic
-        from: { key_code: k }
+        from: { key_code: k, modifiers: { mandatory: [shift] } }
         to:
           - key_code: page_up
         conditions:
           - *highlights-app
-          - *highlights-vim-active
+          - *highlights-normal-mode
+      # g/G fully down/up
+      - type: basic
+        from: { key_code: g }
+        to:
+          - { key_code: up_arrow, modifiers: [command] }
+        conditions:
+          - *highlights-app
+          - *highlights-normal-mode
+      - type: basic
+        from: { key_code: g, modifiers: { mandatory: [shift] } }
+        to:
+          - { key_code: up_down, modifiers: [command] }
+        conditions:
+          - *highlights-app
+          - *highlights-normal-mode
+      # h/l: back/forth in jump history
+      - type: basic
+        from: { key_code: h }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events"
+                  tell process "Highlights"
+                    set frontmost to true
+                    click menu item "Back" of menu "Go" of menu bar 1
+                  end tell
+                end tell'
+        conditions:
+          - *highlights-app
+          - *highlights-normal-mode
+      - type: basic
+        from: { key_code: l }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events"
+                  tell process "Highlights"
+                    set frontmost to true
+                    click menu item "Forward" of menu "Go" of menu bar 1
+                  end tell
+                end tell'
+        conditions:
+          - *highlights-app
+          - *highlights-normal-mode

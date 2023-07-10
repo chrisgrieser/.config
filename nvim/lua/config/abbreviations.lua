@@ -16,11 +16,13 @@ local spellfixes = {
 	esle = "else",
 	treu = "true",
 	ture = "true",
+	terue = "true",
 	fo = "of",
 	dwon = "down",
 	ntoe = "note",
 	verison = "version",
 	ot = "to",
+	cant = "can't",
 }
 
 for wrong, correct in pairs(spellfixes) do

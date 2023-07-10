@@ -96,7 +96,7 @@ local keybindings = {
 		mods = "CMD",
 		action = act.QuickSelectArgs {
 			patterns = {
-				"--[\\w-=]+", -- long option
+				"--[\\w=-]+", -- long option
 				"-\\w", -- short option
 			},
 			label = "Copy Shell Option",

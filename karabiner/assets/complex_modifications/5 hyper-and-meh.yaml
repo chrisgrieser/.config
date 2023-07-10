@@ -21,8 +21,7 @@ rules:
         # is done in finder-vim-alfred-addon.yaml
         conditions:
           - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^com\.apple\.finder$
+            bundle_identifiers: [^com\.apple\.finder$]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ↹ Tab → Meh/Tab"
     manipulators:

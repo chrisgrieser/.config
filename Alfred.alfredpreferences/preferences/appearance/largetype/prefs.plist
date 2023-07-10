@@ -5,10 +5,8 @@
 	<key>autohide</key>
 	<true/>
 	<key>font</key>
-	<string>JetBrainsMono NFM Medium</string>
+	<string>System</string>
 	<key>showOnMouseScreen</key>
 	<true/>
-	<key>style</key>
-	<integer>0</integer>
 </dict>
 </plist>
