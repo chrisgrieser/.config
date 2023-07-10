@@ -310,3 +310,7 @@ matches:
     replace: Dienstag
     propagate_casing: true
     word: true
+  - trigger: oepn
+    replace: open
+    propagate_casing: true
+    word: true
