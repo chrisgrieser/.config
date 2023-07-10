@@ -97,6 +97,7 @@ local function showHideTickerApp(referenceWin)
 	elseif wu.CheckSize(referenceWin, wu.maximized) then
 		-- login window max sized and triggers this as well
 		if referenceWin:title() == "Login" then return end
+		print("referenceWin:title():", referenceWin:title())
 		app:hide()
 	end
 end
