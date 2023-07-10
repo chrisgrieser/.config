@@ -10,8 +10,7 @@
 readonly latitude=52
 readonly longitude=13
 
-# add potential yq locations to path (homebrew or mason)
-export PATH="$HOME/.local/share/nvim/mason/bin":/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 if ! command -v yq &>/dev/null; then
 	temperature="yq not found"
 	icon=""
