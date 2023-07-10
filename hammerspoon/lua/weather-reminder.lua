@@ -29,7 +29,8 @@ local function getOutsideTemp()
 		PreviousOutsideTemp = outsideTemp -- save for next run
 
 		if outsideNowCoolerThanInside then
-			u.notify("🌡️ Outside now cooler than inside.")
+			hs.alert.show("🌡️ Outside now cooler than inside.")
+			u.sound("Funk")
 		else
 			print("🌡️ No Temperature Change.")
 		end
