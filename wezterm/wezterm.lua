@@ -116,7 +116,7 @@ local keybindings = {
 		end),
 	},
 	-- Theme Cycler
-	{ key = "t", mods = "SHIFT|CTRL|ALT", action = actFun(theme.cycle) },
+	{ key = "t", mods = "CMD|ALT", action = actFun(theme.cycle) },
 
 	-- MODES
 	-- Search
