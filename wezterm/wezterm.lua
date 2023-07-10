@@ -162,7 +162,7 @@ table.insert(myHyperlinkRules, {
 
 local config = {
 	-- Meta
-	check_for_updates = false, -- done via homebrew, does not need to be so regularly
+	check_for_updates = false, -- done via homebrew already
 	automatically_reload_config = true,
 
 	-- Passwords
@@ -207,7 +207,8 @@ local config = {
 	max_fps = isAtMother and 40 or 60,
 
 	-- remove titlebar, but keep macOS traffic lights, enabling menu bar stuff,
-	-- especially the "Window" Menu containing split commands (used by Hammerspoon)
+	-- especially the "Window" Menu containing window split commands 
+	-- (used by Hammerspoon)
 	window_decorations = "INTEGRATED_BUTTONS|RESIZE",
 	native_macos_fullscreen_mode = false,
 

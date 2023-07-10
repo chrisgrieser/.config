@@ -23,13 +23,16 @@ local function getOutsideTemp()
 			return
 		end
 		local outsideTemp = hs.json.decode(body).weather.temperature
-		local outsideNowCoolerThanInside = outsideTemp < insideTemp and not (PreviousOutsideTemp < insideTemp)
+		local outsideNowCoolerThanInside = outsideTemp < insideTemp
+			and not (PreviousOutsideTemp < insideTemp)
 		PreviousOutsideTemp = outsideTemp -- save for next run
 
-		if outsideNowCoolerThanInside then 
+		if outsideNowCoolerThanInside then
 			u.notify("🌡️ Outside now cooler than inside.")
+		else
+			print("🌡️ No Temperature Change.")
 		end
 	end)
 end
 
-hs.timer.doEvery(60 * checkIntervalMins, getOutsideTemp)
+hs.timer.doEvery(60 * checkIntervalMins, getOutsideTemp):start()
