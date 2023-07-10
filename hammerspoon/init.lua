@@ -35,5 +35,8 @@ require("lua.twitter")
 require("lua.neovim")
 require("lua.sidenotes")
 
+-- other
+require("lua.weather-reminder")
+
 -- reload function (should come last)
 require("lua.reload")

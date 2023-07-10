@@ -119,3 +119,10 @@ export LESSHISTFILE=-              # don't clutter home directory with useless `
 # Pager-specific settings
 # INFO less' --ignore-case is actually smart-case
 export LESS='-R --incsearch --ignore-case --window=-3 --no-init --tilde'
+
+# Keybindings
+# https://linux.die.net/man/1/lesskey
+# INFO macOS currently ships less v.581, which lacks the ability to read lesskey
+# source files. Therefore for this to work, the version of less provided by
+# homebrew is needed (v.633)
+export LESSKEYIN="$DOTFILE_FOLDER/zsh/.lesskey"
