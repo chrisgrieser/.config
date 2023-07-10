@@ -4,8 +4,8 @@ local sidenotes = require("lua.sidenotes")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
---------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------
 -- HELPERS
 
 ---@param targetMode string
@@ -57,7 +57,7 @@ local function workLayout()
 	hs.execute(u.exportPath .. "sketchybar --set clock popup.drawing=true")
 
 	-- close
-	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "lo-rain", "Tagesschau" }
+	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "lo-rain", "Tagesschau", "Steam" }
 	require("lua.private").closer()
 	closeAllFinderWins()
 

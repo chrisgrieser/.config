@@ -1,3 +1,5 @@
+# https://linux.die.net/man/1/lesskey
+
 #command
 
 # search wraps around: https://unix.stackexchange.com/a/621514
@@ -5,3 +7,4 @@
 
 J	forw-scroll
 K	back-scroll
+
