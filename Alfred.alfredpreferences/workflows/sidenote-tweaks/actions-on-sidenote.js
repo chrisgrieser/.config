@@ -96,7 +96,6 @@ function run(argv) {
 		if (!urls) return "⚠️ No URL found."; // notification
 		closeSideNotes(); // needs to close before opening URL due to focus loss
 		urls.forEach((/** @type {string} */ url) => app.openLocation(url));
-		console.log("👾 beep");
 
 		// dynamically decide whether to delete note
 		const numberOfLines = details.split("\n").length
