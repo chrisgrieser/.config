@@ -108,9 +108,10 @@ function generateCitekey(bibtexPropertyArr) {
 	// clean up name
 	authorStr = authorStr
 		// strip diacritics https://stackoverflow.com/a/37511463
-		.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+		.normalize("NFD")
+		.replace(/[\u0300-\u036f]/g, "")
 		// no hyphens
-		.replaceAll("-", ""); 
+		.replaceAll("-", "");
 
 	const citekey = authorStr + year;
 	return citekey;
@@ -174,7 +175,7 @@ function run(argv) {
 		.replace(/\tyear = \{?(\d{4}).*\}?/g, "\tyear = $1,") // clean year key
 		.replaceAll("%2F", "/") // fix for URL key in some DOIs
 		.replace(/amp\$\\mathsemicolon\$/g, "") // invalid bibtex
-		.replace(/(?!^)\}$/gm, "},") // add trailing comma to all properties
+		.replace(/(?!^)\}$/gm, "},"); // add trailing comma to all properties
 
 	// convert to array + remove first/last line (for correct key sorting)
 	let newProps = bibtexEntry.split(/[\n\r]/);
@@ -192,7 +193,7 @@ function run(argv) {
 		})
 		.sort();
 	// remove comma for last element
-	newProps[newProps.length - 1] = newProps.at(-1).slice(0, -1)
+	newProps[newProps.length - 1] = newProps.at(-1).slice(0, -1);
 
 	// Generate citekey, enclose entry with first/last line
 	newCitekey = generateCitekey(newProps);
