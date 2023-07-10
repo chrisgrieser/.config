@@ -107,9 +107,10 @@ function generateCitekey(bibtexPropertyArr) {
 
 	// clean up name
 	authorStr = authorStr
-		.normalize("NFD") // strip diacritics from authorStr https://stackoverflow.com/a/37511463
-		.replace(/[\u0300-\u036f]/g, "")
-		.replaceAll("-", "");
+		// strip diacritics https://stackoverflow.com/a/37511463
+		.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+		// no hyphens
+		.replaceAll("-", ""); 
 
 	const citekey = authorStr + year;
 	return citekey;
