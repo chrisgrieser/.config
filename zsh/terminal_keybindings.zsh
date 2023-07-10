@@ -5,7 +5,7 @@ function bindEverywhere () {
 	bindkey -M viins "$1" $2
 	bindkey -M vicmd "$1" $2
 }
-bindEverywhere "^A" beginning-of-line
+bindkey -M viins "^A" beginning-of-line # not in normal mode for count increment
 bindEverywhere "^B" copy-buffer
 bindEverywhere "^E" end-of-line
 bindEverywhere "^U" kill-whole-line
