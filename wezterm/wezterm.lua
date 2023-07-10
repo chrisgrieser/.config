@@ -1,11 +1,42 @@
 -- THEME SETTINGS
 
--- local darkTheme = "Paraiso Dark"
-local darkTheme = "Afterglow (Gogh)"
-local lightTheme = "Silk Light (base16)"
 local lightOpacity = 0.93
 local darkOpacity = 0.91
 
+local darkTheme = "cyberpunk"
+local lightTheme = "Atelier Cave Light (base16)"
+
+-- okay-ish themes
+---@diagnostic disable: unused-local
+local darkThemes = {
+	"Paraiso Dark",
+	"Afterglow (Gogh)",
+	"Tinacious Design (Dark)",
+	"SynthWave (Gogh)",
+	"duckbones",
+	"MaterialDesignColors",
+	"Kanagawa (Gogh)",
+	"TokyoNight (Gogh)",
+	"ChallengerDeep",
+	"cyberpunk",
+}
+local lightThemes = {
+	"OneHalfLight",
+	"Google Light (Gogh)",
+	"Paraiso (light) (terminal.sexy)",
+	"seoulbones_light",
+	"BlulocoLight (Gogh)",
+	"Edge Light (base16)",
+	"Atelierdune (light) (terminal.sexy)",
+	"Atelier Lakeside Light (base16)",
+	"Cupcake (base16)",
+	"Ivory Light (terminal.sexy)",
+	"Sakura (base16)",
+	"Solar Flare Light (base16)",
+	"Atelier Cave Light (base16)",
+	"Silk Light (base16)",
+}
+---@diagnostic enable: unused-local
 --------------------------------------------------------------------------------
 -- UTILS
 
@@ -219,7 +250,7 @@ local config = {
 	max_fps = isAtMother and 40 or 60,
 
 	-- remove titlebar, but keep macOS traffic lights, enabling menu bar stuff,
-	-- especially the "Window" Menu containing window split commands 
+	-- especially the "Window" Menu containing window split commands
 	-- (used by Hammerspoon)
 	window_decorations = "INTEGRATED_BUTTONS|RESIZE",
 	native_macos_fullscreen_mode = false,
