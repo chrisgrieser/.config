@@ -19,11 +19,15 @@ function h() {
 	fi
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # COLORFUL HELP
 # `--` ensures dash can be used in the alias name
 # `--help` and `-h` offer help pages of different length for some commands, e.g. fd
 alias -g -- -h='-h | bat --language=help --style=plain'
 alias -g -- --help='--help | bat --language=help --style=plain'
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # GET A BETTER MAN
 # - searches directly for $2 in the manpage of $1
@@ -112,16 +116,15 @@ function ai() {
 export LESS_TERMCAP_mb=$'\E[1;31m' # begin bold
 export LESS_TERMCAP_md=$'\E[1;33m' # begin blink = YELLOW
 export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
-export LESS_TERMCAP_us=$'\E[1;35m' # begin underline = MAGENTA
+export LESS_TERMCAP_us=$'\E[1;36m' # begin underline = MAGENTA
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
-export LESSHISTFILE=-              # don't clutter home directory with useless `.lesshst` file
 
-# Pager-specific settings
-# INFO less' --ignore-case is actually smart-case
+# INFO less' --ignore-case is actually smart case
 export LESS='-R --incsearch --ignore-case --window=-3 --no-init --tilde'
 
+export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
+
 # Keybindings
-# https://linux.die.net/man/1/lesskey
 # INFO macOS currently ships less v.581, which lacks the ability to read lesskey
 # source files. Therefore for this to work, the version of less provided by
 # homebrew is needed (v.633)
