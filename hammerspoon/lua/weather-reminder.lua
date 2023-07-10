@@ -1,20 +1,35 @@
 -- Checks when the outside temperature passes the inside temperature or vice
 -- versa.
 local u = require("lua.utils")
-
 --------------------------------------------------------------------------------
-local insideTemp = 24
-local outsideTemp = 20
 
--- LOCATION
+-- CONFIG
 -- INFO right-click on a location in Google Maps to get the latitude/longitude
 -- roughly Berlin-Tegel (no precise location due to pricacy)
 local latitude = 52
 local longitude = 13
-local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):format(latitude, longitude)
+local insideTemp = 24
+local checkIntervalMins = 30
 
-hs.http.asyncGet(callUrl, nil, function(
-	status,
-	body,
-	_
-) end)
+--------------------------------------------------------------------------------
+
+local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):format(latitude, longitude)
+PreviousOutsideTemp = nil
+
+local function getOutsideTemp()
+	hs.http.asyncGet(callUrl, nil, function(status, body, _)
+		if status ~= 200 then
+			print("Could not get weather data: " .. status)
+			return
+		end
+		local outsideTemp = hs.json.decode(body).weather.temperature
+		local outsideNowCoolerThanInside = outsideTemp < insideTemp and not (PreviousOutsideTemp < insideTemp)
+		PreviousOutsideTemp = outsideTemp -- save for next run
+
+		if outsideNowCoolerThanInside then 
+			u.notify("🌡️ Outside now cooler than inside.")
+		end
+	end)
+end
+
+hs.timer.doEvery(60 * checkIntervalMins, getOutsideTemp)
