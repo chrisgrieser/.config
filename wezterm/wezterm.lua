@@ -79,8 +79,8 @@ local keybindings = {
 	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
 	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
 
-	{ -- cmd+o -> open link (like f in vimium)
-		key = "o",
+	{ -- cmd+u -> open URL (like f in vimium)
+		key = "u",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
 			patterns = { "https?://\\S+" },
@@ -89,6 +89,17 @@ local keybindings = {
 				local url = window:get_selection_text_for_pane(pane)
 				wt.open_with(url)
 			end),
+		},
+	},
+	{ -- cmd+o -> copy shell option (e.g. to copy stuff from a man page)
+		key = "o",
+		mods = "CMD",
+		action = act.QuickSelectArgs {
+			patterns = {
+				"--[\\w-=]+", -- long option
+				"-\\w", -- short option
+			},
+			label = "Copy Shell Option",
 		},
 	},
 	{ -- cmd+, -> open this config file
@@ -118,9 +129,10 @@ local keybindings = {
 	{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
 
 	-- hint mode https://wezfurlong.org/wezterm/quickselect.html
-	{ key = "f", mods = "CMD|SHIFT", action = act.QuickSelect },
+	-- can use cmd+c, since wezterm auto-copies mouse selection, freeing up cmd+c
+	{ key = "c", mods = "CMD", action = act.QuickSelect },
 
-	-- works with `send_composed_key_when_right_alt_is_pressed = true`
+	-- FIX works with `send_composed_key_when_right_alt_is_pressed = true`
 	-- but expects another character, so this mapping fixes it
 	{ key = "n", mods = "META", action = act.SendString("~") },
 }
