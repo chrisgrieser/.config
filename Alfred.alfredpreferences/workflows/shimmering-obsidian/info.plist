@@ -8095,7 +8095,7 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 			<key>note</key>
 			<string>new note</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>1770</real>
 		</dict>
