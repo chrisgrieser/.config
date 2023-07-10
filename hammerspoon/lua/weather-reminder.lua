@@ -35,4 +35,4 @@ local function getOutsideTemp()
 	end)
 end
 
-hs.timer.doEvery(60 * checkIntervalMins, getOutsideTemp):start()
+WeatherReminder = hs.timer.doEvery(60 * checkIntervalMins, getOutsideTemp):start()

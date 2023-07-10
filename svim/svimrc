@@ -12,6 +12,8 @@ noremap L $
 noremap J 5j
 noremap K 5k
 
+noremap - /
+
 noremap m %
 
 nnoremap M J

@@ -52,7 +52,9 @@ local function quit(app)
 
 	local suffix = ""
 	if app == "Finder" then
-		for _, win in pairs(u.app("Finder"):allWindows()) do
+		local finderWins = u.app("Finder"):allWindows()
+		if #finderWins == 0 then return end
+		for _, win in pairs(finderWins) do
 			win:close()	
 		end
 		suffix = " (windows closed)"	
