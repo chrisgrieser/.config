@@ -14,7 +14,7 @@ function writeToFile(file, text) {
 }
 
 const urlRegex =
-	/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+	/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g;
 const exportFolder = $.getenv("export_folder").replace(/^~/, app.pathTo("home folder"));
 const maxNameLen = 50;
 
@@ -96,6 +96,7 @@ function run(argv) {
 		if (!urls) return "⚠️ No URL found."; // notification
 		closeSideNotes(); // needs to close before opening URL due to focus loss
 		urls.forEach((/** @type {string} */ url) => app.openLocation(url));
+		console.log("👾 beep");
 
 		// dynamically decide whether to delete note
 		const numberOfLines = details.split("\n").length
