@@ -1,0 +1,71 @@
+title: Vim Mode for Highlights.app
+anchors:
+  - conditions:
+      - &highlights-vim-active
+        type: variable_if
+        name: HIGHLIGHTS_VIM_ACTIVE
+        value: true
+      - &highlights-vim-inactive
+        type: variable_unless
+        name: HIGHLIGHTS_VIM_ACTIVE
+        value: true
+      - &highlights-app
+        type: frontmost_application_if
+        bundle_identifiers: [^net\.highlightsapp\.universal$]
+  - to:
+      - &deactivate-highlights-vim
+        set_variable:
+          name: HIGHLIGHTS_VIM_ACTIVE
+          value: false
+      - &activate-highlights-vim
+        set_variable:
+          name: HIGHLIGHTS_VIM_ACTIVE
+          value: true
+      - &remove-notice
+        set_notification_message:
+          id: highlights-vim-notice
+          text: ""
+      - &set-notice
+        set_notification_message:
+          id: highlights-vim-notice
+          text: ✏️ Normal Mode
+#───────────────────────────────────────────────────────────────────────────────
+rules:
+  - description: "✏️ Highlights Vim Mode: Triggers"
+    manipulators:
+      # Enter Insert Mode
+      - type: basic
+        from: { key_code: caps_lock }
+        to:
+          - *deactivate-highlights-vim
+          - *remove-notice
+        conditions:
+          - *highlights-app
+          - *highlights-vim-active
+      # Enter Normal Mode
+      - type: basic
+        from: { key_code: caps_lock }
+        to:
+          - key_code: escape
+          - *activate-highlights-vim
+          - *set-notice
+        conditions:
+          - *highlights-app
+          - *highlights-vim-inactive
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "✏️ Highlights Vim Mode: Actions"
+    manipulators:
+      - type: basic
+        from: { key_code: j }
+        to:
+          - key_code: page_down
+        conditions:
+          - *highlights-app
+          - *highlights-vim-active
+      - type: basic
+        from: { key_code: k }
+        to:
+          - key_code: page_up
+        conditions:
+          - *highlights-app
+          - *highlights-vim-active

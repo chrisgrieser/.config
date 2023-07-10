@@ -7,7 +7,7 @@ function zvm_config() {
 	ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
 	# cause I'm slow
-	ZVM_KEYTIMEOUT=0.666
+	ZVM_KEYTIMEOUT=0.666 # default: 0.4
 
 	# cursor styling with blinking
 	ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BEAM

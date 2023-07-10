@@ -63,6 +63,7 @@ local function telescopeConfig()
 				"%.gif$",
 				"%.icns",
 				"%.zip$",
+				"%-bkp$", -- backup files
 			},
 			mappings = {
 				i = keymappings,
