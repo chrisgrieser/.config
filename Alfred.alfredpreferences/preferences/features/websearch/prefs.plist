@@ -4,17 +4,6 @@
 <dict>
 	<key>customSites</key>
 	<dict>
-		<key>1055AB66-AEEC-48E2-ABEC-22EC774306C0</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ag</string>
-			<key>text</key>
-			<string>Alfred Gallery: '{query}'</string>
-			<key>url</key>
-			<string>https://alfred.app/search/?q={query}</string>
-		</dict>
 		<key>12683550-A2EA-40B6-B861-FB40A6E7603B</key>
 		<dict>
 			<key>enabled</key>
@@ -38,17 +27,6 @@
 			<string>https://www.wikiwand.com/en/{query}?fullSearch=true</string>
 			<key>utf8</key>
 			<true/>
-		</dict>
-		<key>1F94E577-E533-432C-BF98-48EBD1EAA5E5</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>font</string>
-			<key>text</key>
-			<string>Google Fonts: {query}</string>
-			<key>url</key>
-			<string>https://fonts.google.com/?query={query}</string>
 		</dict>
 		<key>247D826F-9C0B-4405-A61B-AA64E1C4F8A6</key>
 		<dict>
@@ -106,17 +84,6 @@
 			<string>Chrome Extensions: '{query}'</string>
 			<key>url</key>
 			<string>https://chrome.google.com/webstore/search/{query}</string>
-		</dict>
-		<key>699E64AD-81CD-4CA4-8D89-E0462B5742B4</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>tw</string>
-			<key>text</key>
-			<string>New Tweet: {query}</string>
-			<key>url</key>
-			<string>https://twitter.com/intent/tweet?text={query}</string>
 		</dict>
 		<key>84F64B41-9C2A-49F0-AAB4-E6FFB0BCB143</key>
 		<dict>
