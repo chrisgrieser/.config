@@ -1,5 +1,6 @@
 -- Checks when the outside temperature passes the inside temperature or vice
 -- versa.
+local env = require("lua.environment-vars")
 local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
@@ -35,4 +36,12 @@ local function getOutsideTemp()
 	end)
 end
 
-WeatherReminder = hs.timer.doEvery(60 * checkIntervalMins, getOutsideTemp):start()
+--------------------------------------------------------------------------------
+
+if not u.isReloading() then getOutsideTemp() end
+if env.isAtHome then
+	-- run once on startup
+
+	-- run on timer
+	WeatherReminder = hs.timer.doEvery(60 * checkIntervalMins, getOutsideTemp):start()
+end
