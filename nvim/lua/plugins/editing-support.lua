@@ -77,6 +77,12 @@ return {
 			end
 		end,
 	},
+	{
+		"KaitlynEthylia/TreePin",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		keys = { "<leader>j", "<cmd>TPToggle<CR>", desc = "TreePin Toggle" },
+		opts = true,
+	},
 	{ -- swapping of sibling nodes
 		"Wansmer/sibling-swap.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
