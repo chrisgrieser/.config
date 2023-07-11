@@ -2785,7 +2785,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1620</real>
+			<real>1615</real>
 			<key>ypos</key>
 			<real>1335</real>
 		</dict>
@@ -2825,7 +2825,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>965</real>
+			<real>800</real>
 			<key>ypos</key>
 			<real>1240</real>
 		</dict>
@@ -3102,7 +3102,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>xpos</key>
 			<real>915</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>20</real>
 		</dict>
 		<key>9503EA26-7397-4C25-9DB0-EA2ED9821861</key>
 		<dict>
@@ -3262,9 +3262,9 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>add prefix &amp; suffix, then save</string>
 			<key>xpos</key>
-			<real>850</real>
+			<real>855</real>
 			<key>ypos</key>
-			<real>55</real>
+			<real>50</real>
 		</dict>
 		<key>E1D3B211-1CE6-4A09-B45E-7C55A61CDC06</key>
 		<dict>
@@ -3275,7 +3275,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>xpos</key>
 			<real>1180</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>20</real>
 		</dict>
 		<key>E451F6F1-8CE4-44B5-90E2-8B457B48C81C</key>
 		<dict>
