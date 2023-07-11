@@ -2119,7 +2119,7 @@ echo -n $dummyBib | pandoc --citeproc --read=markdown --write=plain --csl $csl -
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>qlmanage -p "assets/Actions Cheatsheet.webloc"</string>
+				<string>qlmanage -p "Actions Cheatsheet.webloc"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -3529,7 +3529,7 @@ to set a hotkey for adding DOI/ISBN</string>
 		<string>50</string>
 	</dict>
 	<key>version</key>
-	<string>11.5.0</string>
+	<string>11.5.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/alfred-bibtex-citation-picker</string>
 </dict>
