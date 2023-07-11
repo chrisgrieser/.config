@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "08/07/2023, 13:32:37",
-	"time": 1688815957445,
+	"@time": "7/11/2023, 8:47:30 PM",
+	"time": 1689101250364,
 	"environment": {
 		"extension": "1.99.992",
 		"platform": "mac",
@@ -33,6 +33,10 @@
 		{
 			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? j k l ",
 			"pattern": ":https://www.youtube.com/"
+		},
+		{
+			"passKeys": "? ",
+			"pattern": ":https://www.reddit.com/"
 		}
 	],
 	"extAllowList": [

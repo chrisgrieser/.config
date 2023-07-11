@@ -62,7 +62,6 @@ function M.moveResize(win, pos)
 		or not (win:isMaximizable() or win:application():name() == "SideNotes")
 		or not (win:isStandard())
 	then
-		print("moveResize: window not resizeable")
 		return
 	end
 
