@@ -91,13 +91,18 @@ return {
 		main = "treepin",
 		init = function()
 			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function() vim.api.nvim_set_hl(0, "TreepinPin", { fg = "Blue" }) end,
+				callback = function()
+					vim.api.nvim_set_hl(0, "TreepinPin", { link = "DiagnosticInfo", default = true })
+				end,
 			})
 			require("which-key").register { mode = { "n" }, ["<leader>j"] = { name = " 󰐃 TreePin" } }
 		end,
 		opts = {
 			max_height = 10,
 			icon = "󰐃",
+			["sepe".."rator"]
+			seperator = "─",
+			separator = "─",
 		},
 	},
 	{ -- swapping of sibling nodes

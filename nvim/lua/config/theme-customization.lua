@@ -24,7 +24,6 @@ local function clearHighlight(hlgroup) vim.api.nvim_set_hl(0, hlgroup, {}) end
 --------------------------------------------------------------------------------
 
 local function customHighlights()
-
 	-- Comments
 	clearHighlight("@lsp.type.comment") -- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
 	local commentColor = u.getHighlightValue("Comment", "fg")
