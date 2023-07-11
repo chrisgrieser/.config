@@ -6,5 +6,7 @@
 	<string>/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/SideNotes Archive</string>
 	<key>export_folder</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub</string>
+	<key>ignored_folder</key>
+	<string>Lists</string>
 </dict>
 </plist>
