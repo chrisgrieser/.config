@@ -72,7 +72,10 @@ function d() {
 function ..d() {
 	local current_dir="$PWD"
 	cd ..
-	d "$current_dir"
+	local trash_location
+	trash_location="$HOME/.Trash/$(basename "$current_dir")"
+	[[ -e "$trash_location" ]] && rm -rf "$trash_location" 
+	mv -f "$current_dir" "$trash_location"
 }
 
 # draws a separator line with terminal width

@@ -21,7 +21,7 @@ function h() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# COLORFUL HELP
+# COLORIZED HELP
 # `--` ensures dash can be used in the alias name
 # `--help` and `-h` offer help pages of different length for some commands, e.g. fd
 alias -g -- -h='-h | bat --language=help --style=plain'
@@ -29,23 +29,17 @@ alias -g -- --help='--help | bat --language=help --style=plain'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# GET A BETTER MAN
+# BETTER MAN
 # - searches directly for $2 in the manpage of $1
 # - works for builtin commands as well
 # - opens in a new wezterm tab
 function man() {
 	local command="$1"
 	local search_term="$2"
-	if ! command -v "$command" &>/dev/null; then
-		echo "$command not installed."
-		return 1
-	elif ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
-		echo "Not using WezTerm."
-		return 1
-	elif ! command -v bat &>/dev/null; then
-		printf "\033[1;33mbat not installed.\033[0m"
-		return 1
-	fi
+
+	if ! command -v "$command" &>/dev/null; then echo "$command not installed." && return 1; fi
+	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
+	if ! command -v bat &>/dev/null; then printf "\033[1;33mbat not installed.\033[0m" && return 1; fi
 
 	local pane_id
 	if [[ "$(type "$command")" =~ "builtin" ]]; then
@@ -69,10 +63,11 @@ function man() {
 
 #───────────────────────────────────────────────────────────────────────────────
 # CHATGPT
-# uses OPENAI_API_KEY saved in .zshenv
+
 function ai() {
 	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
+	if [[ -z "$OPENAI_API_KEY" ]]; then echo "$OPENAI_API_KEY not found." && return 1; fi
 
 	local query="$*"
 	# WARN do not use "$prompt" as a variable in zsh, since it's a reserved keyword
@@ -93,7 +88,7 @@ function ai() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-# LESS config
+# LESS
 
 export LESS_TERMCAP_mb=$'\E[1;31m' # begin bold
 export LESS_TERMCAP_md=$'\E[1;33m' # begin blink
