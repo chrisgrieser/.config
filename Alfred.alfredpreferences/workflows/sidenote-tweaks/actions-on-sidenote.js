@@ -99,7 +99,7 @@ function run(argv) {
 
 		// dynamically decide whether to delete note
 		const numberOfLines = details.split("\n").length
-		if (numberOfLines <= 2) archiveNote(noteObj, safeTitle);
+		if (numberOfLines <= 2 && urls.length === 1) archiveNote(noteObj, safeTitle);
 	}
 
 	if (doArchive) archiveNote(noteObj, safeTitle);

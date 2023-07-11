@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "7/11/2023, 8:47:30 PM",
-	"time": 1689101250364,
+	"@time": "11/07/2023, 22:11:02",
+	"time": 1689106262256,
 	"environment": {
 		"extension": "1.99.992",
 		"platform": "mac",
@@ -35,7 +35,7 @@
 			"pattern": ":https://www.youtube.com/"
 		},
 		{
-			"passKeys": "? ",
+			"passKeys": "? q ",
 			"pattern": ":https://www.reddit.com/"
 		}
 	],
