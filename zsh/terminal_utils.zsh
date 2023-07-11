@@ -32,11 +32,9 @@ function o() {
 
 # show files + git status + brief git log
 function inspect() {
-	# do not use on embedded terminals, since too small there
-	[[ $(tput lines) -gt 20 ]] || return 0
-
-	if ! command -v exa &>/dev/null; then echo "exa not installed." && return 1; fi
-	if ! command -v git &>/dev/null; then echo "git not installed." && return 1; fi
+	[[ $(tput lines) -gt 20 ]] || return 0 # don't use in embedded terminals, since too small
+	if ! command -v exa &>/dev/null; then printf "\033[1;33mexa not installed.\033[0m" && return 1; fi
+	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		gitlog 5 # custom function defined in git_github.zsh
@@ -46,7 +44,7 @@ function inspect() {
 			separator
 		fi
 	fi
-	if [[ $(find . -maxdepth 1 | wc -l) -lt 50 ]]; then
+	if [[ $(find . -maxdepth 1 | wc -l) -lt 40 ]]; then
 		exa --all --icons --sort=name --group-directories-first \
 			--git-ignore --ignore-glob=.DS_Store
 	fi
@@ -59,9 +57,9 @@ function timezsh() { time $SHELL -i -c exit; }
 # no arg = all files in folder will be deleted
 function d() {
 	if [[ $# == 0 ]]; then
-		mv -f ./* ~/.Trash/
+		command mv -iv ./* ~/.Trash/
 	else
-		mv -f "$@" ~/.Trash/
+		command mv -iv "$@" ~/.Trash/
 	fi
 	# shellcheck disable=2181
 	# run in background to avoid delay; run in subshell to suppress output
@@ -75,7 +73,9 @@ function ..d() {
 	local trash_location
 	trash_location="$HOME/.Trash/$(basename "$current_dir")"
 	[[ -e "$trash_location" ]] && rm -rf "$trash_location" 
-	mv -f "$current_dir" "$trash_location"
+	command mv -v "$current_dir" "$trash_location"
+	# shellcheck disable=2181
+	[[ $? -eq 0 ]] && (afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
 }
 
 # draws a separator line with terminal width
@@ -89,16 +89,15 @@ function separator() {
 }
 
 # smarter z/cd
-# - file: goto directory of file
-# - after entering new folder, inspect it (exa, git log, git status, etc.)
+# after entering new folder, inspect it (exa, git log, git status, etc.)
 function z() {
-	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
+	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
 	__zoxide_z "$1"
 	inspect
 }
 
 function zi() {
-	if ! command -v __zoxide_z &>/dev/null; then echo "zoxide not installed." && return 1; fi
+	if ! command -v __zoxide_zi &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
 	__zoxide_zi
 	inspect
 }
@@ -177,16 +176,17 @@ function appid() {
 	local id
 	id=$(osascript -e "id of app \"$1\"")
 	echo "Copied appid: $id"
-	echo "$id" | pbcopy
+	echo -n "$id" | pbcopy
 }
 
 # Conversions
-# using `explode` to expand anchors & aliases: https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
 function yaml2json() {
-	file_name=${1%.*} # remove extension
+	file_name=${1%.*} # remove ext. (not using `basename` since it could be yml or yaml)
+	# using `explode` to expand anchors & aliases: https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
 	yq --output-format=json 'explode(.)' "$1" >"${file_name}.json"
 }
 
 function json2yaml() {
-	yq --output-format=yaml '.' "$1" >"$(basename "$1" .json).yaml"
+	file_name=$(basename "$1" .json)
+	yq --output-format=yaml '.' "$1" >"$file_name.yaml"
 }
