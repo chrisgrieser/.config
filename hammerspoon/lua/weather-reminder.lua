@@ -26,11 +26,14 @@ local function getOutsideTemp()
 		local outsideTemp = hs.json.decode(body).weather.temperature
 		local outsideNowCoolerThanInside = outsideTemp < insideTemp
 			and not (PreviousOutsideTemp < insideTemp)
+		local outsideNowHotterThanInside = outsideTemp > insideTemp
+			and not (PreviousOutsideTemp > insideTemp)
 		PreviousOutsideTemp = outsideTemp -- save for next run
 
 		if outsideNowCoolerThanInside then
-			hs.alert.show("🌡️ Outside now cooler than inside.")
-			u.sound("Funk")
+			hs.alert.show("🌡️🔵 Outside now cooler than inside.")
+		elseif outsideNowHotterThanInside then
+			hs.alert.show("🌡️🔴 Outside now hotter than inside.")
 		else
 			print("🌡️ No Temperature Change.")
 		end

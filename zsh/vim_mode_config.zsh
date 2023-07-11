@@ -31,7 +31,7 @@ source "$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zs
 # yank to system clipboard – https://stackoverflow.com/a/37411340
 # equivalent to `set clipboard=unnamed` (but only for y)
 function vi-yank-pbcopy {
-	zle vi-yank
+	zle vi-yank # still perform vim-yank for pasting via `p`
 	echo "$CUTBUFFER" | pbcopy
 }
 zle -N vi-yank-pbcopy
