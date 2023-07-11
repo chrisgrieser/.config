@@ -16,6 +16,7 @@ declare const Application: {
 		pathTo(what: "home folder"): string;
 		read(path: string): string;
 		setTheClipboardTo(str: string): void;
+		theClipboard(): string;
 		displayNotification(textToShow: string, options: { withTitle: string; subtitle: string }): void;
 		displayDialog(
 			textToShow: string,

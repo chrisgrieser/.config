@@ -100,8 +100,8 @@ return {
 		opts = {
 			max_height = 10,
 			icon = "󰐃",
-			["sepe".."rator"]
-			seperator = "─",
+			position = "top",
+			["sepe" .. "rator"] = "─", -- FIX misspelling, avoiding codespell https://github.com/KaitlynEthylia/TreePin/issues/1
 			separator = "─",
 		},
 	},

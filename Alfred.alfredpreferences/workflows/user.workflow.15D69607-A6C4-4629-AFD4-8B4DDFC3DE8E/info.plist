@@ -158,7 +158,7 @@ function show_data {
 }
 
 # Exit early if cache is recent
-[[ "$(date -r "${cache_file}" +%s)" -gt "$(date -v -4d +%s)" ]] &amp;&amp; show_data
+[[ "$(date -r "${cache_file}" +%s)" -gt "$(date -v -2d +%s)" ]] &amp;&amp; show_data
 
 # Get latest release info
 mkdir -p "${alfred_workflow_cache}"
@@ -183,7 +183,7 @@ show_data</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>11</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -317,7 +317,7 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2023.1</string>
+	<string>2023.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/alfred-gallery-workflow/</string>
 </dict>
