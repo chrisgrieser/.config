@@ -28,7 +28,7 @@ local function scrollUp()
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
 	local app = u.app(env.tickerApp)
-	if not app or not app:mainWindow() then return end
+	if not app or not app:mainWindow() or not u.screenIsUnlocked() then return end
 
 	u.keystroke({ "cmd" }, "left", 1, app) -- go back
 	u.keystroke({ "cmd" }, "1", 1, app) -- go to home tab
@@ -182,9 +182,10 @@ if env.tickerApp == "Ivory" then
 	-- only reload when not idle, so this does not prevent screensaver/sleep
 	IvoryReloadTimer = hs.timer
 		.doEvery(reloadSecs, function()
-			local brieflyIdle = hs.host.idleTime() > (reloadSecs / 2)
 			local app = u.app(env.tickerApp)
 			if not app then return end
+
+			local brieflyIdle = hs.host.idleTime() > (reloadSecs / 2)
 			if not brieflyIdle and not app:isFrontmost() then scrollUp() end
 		end)
 		:start()
