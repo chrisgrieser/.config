@@ -68,6 +68,13 @@ function d() {
 	[[ $? -eq 0 ]] && (afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
 }
 
+# go up and delete current dir
+function ..d() {
+	local current_dir="$PWD"
+	cd ..
+	d "$current_dir"
+}
+
 # draws a separator line with terminal width
 function separator() {
 	local SEP=""
