@@ -154,6 +154,9 @@ nmap U <C-r>
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
 nmap ö :caseSwitch
 
+" do not move to the right on toggling case of a character
+nmap ~ ~h
+
 " Move words (equivalent to sibling-swap.nvim)
 nmap ü "zdawel"zph
 nmap Ü "zdawbh"zph
@@ -197,7 +200,7 @@ nmap ,a :aiComplete
 nmap ,l :obcommand
 
 " [c]lean alias part of next Wikilink
-" (or Link Homepage when using Auto Title Plugin)
+" (or link homepage when using Auto Title Plugin)
 nmap ,c F[t|"_dt]
 
 " append to [y]aml (line 3 = tags)

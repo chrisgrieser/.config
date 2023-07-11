@@ -46,7 +46,7 @@ matches:
         params:
           format: "%d.%m.%Y"
   - trigger: "!la"
-    replace: " (last accessed: {{today}})"
+    replace: "(last accessed: {{today}})"
     label: Last Accessed
     vars:
       - name: today
