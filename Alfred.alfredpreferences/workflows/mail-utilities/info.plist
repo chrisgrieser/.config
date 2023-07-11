@@ -118,7 +118,7 @@
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -160,7 +160,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>send-mail.applescript</string>
+				<string>send-mail.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -360,7 +360,7 @@ end tell</string>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>snoozed||ma</string>
+				<string>snoozed</string>
 				<key>subtext</key>
 				<string>GMail</string>
 				<key>text</key>
