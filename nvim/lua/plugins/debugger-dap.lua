@@ -79,6 +79,7 @@ return {
 			require("dapui").close()
 			require("dap").terminate()
 		end, { desc = "  Terminate" })
+
 		vim.keymap.set("n", "<leader>bn", function()
 			vim.opt_local.number = true
 			-- INFO is the only one that needs manual starting, other debuggers
@@ -93,6 +94,7 @@ return {
 			end
 			require("osv").run_this()
 		end, { desc = "  Start nvim-lua debugger" })
+		require("which-key").register { mode = { "n" }, ["<leader>b"] = { name = "  Debugger" } }
 	end,
 	config = function()
 		dapConfig()
