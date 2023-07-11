@@ -80,8 +80,25 @@ return {
 	{
 		"KaitlynEthylia/TreePin",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		keys = { "<leader>j", "<cmd>TPToggle<CR>", desc = "TreePin Toggle" },
-		opts = true,
+		keys = {
+			{ "<leader>jj", "<cmd>TPToggle<CR>", desc = "󰐃 TreePin Toggle" },
+			{ "<leader>j+", "<cmd>TPGrow<CR>", desc = "󰐃 TreePin Grow" },
+			{ "<leader>j-", "<cmd>TPShrink<CR>", desc = "󰐃 TreePin Shrink" },
+			{ "<leader>jn", "<cmd>TPPin<CR>", desc = "󰐃 TreePin Node" },
+			{ "<leader>jd", "<cmd>TPClear<CR>", desc = "󰐃 TreePin Clear" },
+			{ "<leader>jg", "<cmd>TPGo<CR>", desc = "󰐃 TreePin Go" },
+		},
+		main = "treepin",
+		init = function()
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = function() vim.api.nvim_set_hl(0, "TreepinPin", { fg = "Blue" }) end,
+			})
+			require("which-key").register { mode = { "n" }, ["<leader>j"] = { name = " 󰐃 TreePin" } }
+		end,
+		opts = {
+			max_height = 10,
+			icon = "󰐃",
+		},
 	},
 	{ -- swapping of sibling nodes
 		"Wansmer/sibling-swap.nvim",
@@ -187,14 +204,13 @@ return {
 				},
 			}
 			require("which-key").register({
-				f = { name = "refactor" },
-				t = { name = "terminal / test" },
-				b = { name = "debugger" },
-				u = { name = "undo" },
-				l = { name = "log / cmdline" },
-				g = { name = "git" },
-				o = { name = "option" },
-				p = { name = "package" },
+				f = { name = " 󱗘 Refactor" },
+				t = { name = "  Terminal / Test" },
+				u = { name = " 󰕌 Undo" },
+				l = { name = "  Log / Cmdline" },
+				g = { name = " 󰊢 Git" },
+				o = { name = "  Option" },
+				p = { name = " 󰏗 Package" },
 			}, { prefix = "<leader>" })
 		end,
 	},
