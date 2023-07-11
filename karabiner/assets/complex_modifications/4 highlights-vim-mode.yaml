@@ -64,7 +64,9 @@ rules:
       # up/down
       - type: basic
         from: { key_code: j }
-        to: # 10x down
+        to: # 12x down
+          - key_code: down_arrow
+          - key_code: down_arrow
           - key_code: down_arrow
           - key_code: down_arrow
           - key_code: down_arrow
@@ -80,7 +82,9 @@ rules:
           - *highlights-normal-mode
       - type: basic
         from: { key_code: k }
-        to: # 10x up
+        to: # 12x up
+          - key_code: up_arrow
+          - key_code: up_arrow
           - key_code: up_arrow
           - key_code: up_arrow
           - key_code: up_arrow
