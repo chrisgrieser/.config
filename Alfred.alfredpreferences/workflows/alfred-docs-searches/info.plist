@@ -1256,7 +1256,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>cc</string>
+				<string>coco</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1276,7 +1276,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Cnventional Commits</string>
+				<string>Conventional Commits</string>
 				<key>type</key>
 				<integer>5</integer>
 				<key>withspace</key>

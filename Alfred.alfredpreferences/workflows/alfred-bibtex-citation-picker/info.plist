@@ -980,7 +980,7 @@
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>keyword</key>
-				<string>ct</string>
+				<string>{var:citation_picker_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -3349,6 +3349,27 @@ to set a hotkey for adding DOI/ISBN</string>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>bibtex_library_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>ct</string>
+				<key>placeholder</key>
+				<string>ct</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Keyword for the Citation Picker. Alternatively, the Citation Picker can also be triggered via hotkey.</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>citation_picker_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>
