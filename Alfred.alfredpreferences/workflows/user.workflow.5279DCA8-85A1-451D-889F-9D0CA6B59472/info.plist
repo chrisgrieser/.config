@@ -67,7 +67,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -78,6 +78,8 @@
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>w</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -85,7 +87,7 @@
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
@@ -93,7 +95,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>search.js</string>
+				<string>wikipdia-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -159,7 +161,50 @@
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>en</string>
+				<key>placeholder</key>
+				<string>en</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The Language you want to search wikipedia in. Use the token from the wikipedia URL, e.g. "en" for the English Wikipedia or "de" for the German one.</string>
+			<key>label</key>
+			<string>Language Code</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>language_code</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Yes</string>
+			</dict>
+			<key>description</key>
+			<string>Redirect directly to Wikiwand (an alternative Wikipedia Skin).</string>
+			<key>label</key>
+			<string>Use Wikiwand</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>use_wikiwand</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
