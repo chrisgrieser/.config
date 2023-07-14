@@ -3,14 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>com.rshkv.wikipedia</string>
+	<string>de.chris-grieser.wikipedia</string>
+	<key>category</key>
+	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>DF9810A7-98C6-4368-A812-15B76C762E18</key>
+		<key>BCC9ED2C-0A1A-47F0-83A2-492285CD9D56</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D5BADA25-1D2C-4CF1-97B3-E7ACF27151FC</string>
+				<string>320A285D-5E2A-4D80-9B99-CFDED47BA207</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -18,16 +20,26 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
-	<string>Willi Raschkowski</string>
+	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Search Wikipedia</string>
+	<string>Search Wikipedia from inside Alfred</string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
-	<string>Wikipedia</string>
+	<string>Wikipedia Search</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -42,12 +54,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>{query}</string>
+				<string></string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>D5BADA25-1D2C-4CF1-97B3-E7ACF27151FC</string>
+			<string>320A285D-5E2A-4D80-9B99-CFDED47BA207</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -55,39 +67,37 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
+				<true/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>w</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
-				<false/>
+				<true/>
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Searching...</string>
+				<string>loading…</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>wikipedia.py</string>
+				<string>search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Search Wikipedia for '{query}'</string>
+				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -96,42 +106,61 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>DF9810A7-98C6-4368-A812-15B76C762E18</string>
+			<string>BCC9ED2C-0A1A-47F0-83A2-492285CD9D56</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>This workflow lets you search the Wikipedia. It is build using the MediaWiki API (https://mediawiki.org/wiki/API:Main_page) and Kenneth Reitz's requests library (http://python-requests.org).</string>
+	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>D5BADA25-1D2C-4CF1-97B3-E7ACF27151FC</key>
+		<key>320A285D-5E2A-4D80-9B99-CFDED47BA207</key>
 		<dict>
 			<key>xpos</key>
-			<real>670</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>160</real>
 		</dict>
-		<key>DF9810A7-98C6-4368-A812-15B76C762E18</key>
+		<key>87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA</key>
+		<dict>
+			<key>note</key>
+			<string>paste</string>
+			<key>xpos</key>
+			<real>325</real>
+			<key>ypos</key>
+			<real>275</real>
+		</dict>
+		<key>BCC9ED2C-0A1A-47F0-83A2-492285CD9D56</key>
 		<dict>
 			<key>xpos</key>
-			<real>440</real>
+			<real>80</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>220</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
-	<key>variables</key>
-	<dict>
-		<key>defaultLang</key>
-		<string>en</string>
-		<key>maxHits</key>
-		<string>9</string>
-	</dict>
-	<key>version</key>
-	<string>1.4</string>
 	<key>webaddress</key>
-	<string>https://github.com/rshkv/alfred-wikipedia</string>
+	<string>https://chris-grieser.de/</string>
 </dict>
 </plist>
