@@ -1,0 +1,85 @@
+{
+  "name" : "Script Filter → URL",
+  "data" : {
+    "items" : [
+      {
+        "workflowobjecttype" : "alfred.workflow.output.clipboard",
+        "uid" : "87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA",
+        "note" : "paste",
+        "workflowobjectconfig" : {
+          "ignoredynamicplaceholders" : false,
+          "transient" : false,
+          "clipboardtext" : "{query}",
+          "autopaste" : true
+        },
+        "colorindex" : 0,
+        "ypos" : 120,
+        "xpos" : 265
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.action.openurl",
+        "uid" : "320A285D-5E2A-4D80-9B99-CFDED47BA207",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "skipqueryencode" : false,
+          "browser" : "",
+          "spaces" : "",
+          "url" : "",
+          "skipvarencode" : false
+        },
+        "colorindex" : 0,
+        "ypos" : 5,
+        "xpos" : 265
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.input.scriptfilter",
+        "uid" : "BCC9ED2C-0A1A-47F0-83A2-492285CD9D56",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "argumenttrimmode" : 0,
+          "scriptargtype" : 1,
+          "escaping" : 0,
+          "queuedelayimmediatelyinitially" : true,
+          "argumenttype" : 1,
+          "queuedelaymode" : 0,
+          "type" : 8,
+          "script" : "",
+          "title" : "{const:alfred_workflow_name}",
+          "runningsubtext" : "loading…",
+          "queuemode" : 1,
+          "argumenttreatemptyqueryasnil" : true,
+          "subtext" : "",
+          "alfredfiltersresultsmatchmode" : 2,
+          "scriptfile" : "search.js",
+          "alfredfiltersresults" : true,
+          "queuedelaycustom" : 3,
+          "withspace" : true
+        },
+        "colorindex" : 0,
+        "ypos" : 65,
+        "xpos" : 20
+      }
+    ],
+    "connections" : [
+      {
+        "sourceuid" : "BCC9ED2C-0A1A-47F0-83A2-492285CD9D56",
+        "config" : {
+          "destinationuid" : "87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA",
+          "modifiers" : 524288,
+          "modifiersubtext" : "⌥: Copy URL",
+          "vitoclose" : false
+        }
+      },
+      {
+        "sourceuid" : "BCC9ED2C-0A1A-47F0-83A2-492285CD9D56",
+        "config" : {
+          "destinationuid" : "320A285D-5E2A-4D80-9B99-CFDED47BA207",
+          "modifiers" : 0,
+          "modifiersubtext" : "",
+          "vitoclose" : false
+        }
+      }
+    ]
+  },
+  "description" : "Script Filter, Open URL, ⌥: Copy URL"
+}

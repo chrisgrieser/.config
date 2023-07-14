@@ -15,19 +15,6 @@
 			<key>url</key>
 			<string>https://thepiratebay.org/search.php?q={query}</string>
 		</dict>
-		<key>18866585-C31B-4991-AE5A-6FBFF4A1D4CB</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>w</string>
-			<key>text</key>
-			<string>Wikipedia (eng): '{query}'</string>
-			<key>url</key>
-			<string>https://www.wikiwand.com/en/{query}?fullSearch=true</string>
-			<key>utf8</key>
-			<true/>
-		</dict>
 		<key>247D826F-9C0B-4405-A61B-AA64E1C4F8A6</key>
 		<dict>
 			<key>enabled</key>
