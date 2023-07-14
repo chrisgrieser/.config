@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2A830C26-3537-47A3-B5A9-3DE93ACF7E5E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F54EB2AF-5BE3-405C-8D2D-AC175D9817E1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4C131AAD-DFDB-420C-8995-319D2B6610A9</key>
 		<array>
 			<dict>
@@ -87,6 +100,32 @@
 			</dict>
 		</array>
 		<key>AA36434E-071C-4F1E-9B6A-4E47272FF10E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2A830C26-3537-47A3-B5A9-3DE93ACF7E5E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CBDBAEED-8E9A-4803-AB35-14E7DC6BE6A9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2A830C26-3537-47A3-B5A9-3DE93ACF7E5E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D27B9988-315C-4520-8A5B-548C78CB4386</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -263,55 +302,6 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>6</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>zsh ./numi-cli.sh "6$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>FD3AB4AA-C88A-4C0C-A7D0-584988D2BB0C</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
 				<string>1</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -342,6 +332,55 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>12E892E3-920B-45FB-AE7F-C4F7CC492A7B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>6</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>zsh ./numi-cli.sh "6$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>FD3AB4AA-C88A-4C0C-A7D0-584988D2BB0C</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -465,6 +504,76 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F54EB2AF-5BE3-405C-8D2D-AC175D9817E1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>3</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>zsh ./numi-cli.sh "3$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>6F5C9C4D-6511-49F2-B616-FB8FBCA608B3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -527,7 +636,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>3</string>
+				<string>9</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -539,7 +648,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>zsh ./numi-cli.sh "3$*"</string>
+				<string>zsh ./numi-cli.sh "9$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -556,7 +665,7 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>6F5C9C4D-6511-49F2-B616-FB8FBCA608B3</string>
+			<string>ED392178-56AA-491C-BBE1-66CFFA23AB0B</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -625,7 +734,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>9</string>
+				<string>-</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -637,7 +746,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>zsh ./numi-cli.sh "9$*"</string>
+				<string>zsh ./numi-cli.sh "-$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -654,14 +763,63 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>ED392178-56AA-491C-BBE1-66CFFA23AB0B</string>
+			<string>CBDBAEED-8E9A-4803-AB35-14E7DC6BE6A9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>(</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>zsh ./numi-cli.sh "($*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>D27B9988-315C-4520-8A5B-548C78CB4386</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
 	<string># Recommendation
-Disable Alfred's bultin Calculator Feature, since this workflow basically replaces it.</string>
+Disable Alfred's bultin Calculator Feature, since this workflow works as a drop-in replacement for.</string>
 	<key>uidata</key>
 	<dict>
 		<key>12E892E3-920B-45FB-AE7F-C4F7CC492A7B</key>
@@ -673,6 +831,8 @@ Disable Alfred's bultin Calculator Feature, since this workflow basically replac
 		</dict>
 		<key>2A830C26-3537-47A3-B5A9-3DE93ACF7E5E</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
@@ -720,12 +880,34 @@ Disable Alfred's bultin Calculator Feature, since this workflow basically replac
 			<key>ypos</key>
 			<real>235</real>
 		</dict>
+		<key>CBDBAEED-8E9A-4803-AB35-14E7DC6BE6A9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>negative numbers</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>570</real>
+		</dict>
+		<key>D27B9988-315C-4520-8A5B-548C78CB4386</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>bracket calculations</string>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>570</real>
+		</dict>
 		<key>ED392178-56AA-491C-BBE1-66CFFA23AB0B</key>
 		<dict>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>455</real>
 		</dict>
 		<key>ED4143BD-CFF8-4E1F-8207-178B368B419C</key>
 		<dict>
@@ -733,6 +915,15 @@ Disable Alfred's bultin Calculator Feature, since this workflow basically replac
 			<real>210</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>F54EB2AF-5BE3-405C-8D2D-AC175D9817E1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>645</real>
+			<key>ypos</key>
+			<real>240</real>
 		</dict>
 		<key>FD3AB4AA-C88A-4C0C-A7D0-584988D2BB0C</key>
 		<dict>
@@ -743,7 +934,62 @@ Disable Alfred's bultin Calculator Feature, since this workflow basically replac
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>2</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>0</string>
+						<string>0</string>
+					</array>
+					<array>
+						<string>1</string>
+						<string>1</string>
+					</array>
+					<array>
+						<string>2</string>
+						<string>2</string>
+					</array>
+					<array>
+						<string>3</string>
+						<string>3</string>
+					</array>
+					<array>
+						<string>4</string>
+						<string>4</string>
+					</array>
+					<array>
+						<string>5</string>
+						<string>5</string>
+					</array>
+					<array>
+						<string>6</string>
+						<string>6</string>
+					</array>
+					<array>
+						<string>7</string>
+						<string>7</string>
+					</array>
+					<array>
+						<string>8</string>
+						<string>8</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>number of decimal digits</string>
+			<key>label</key>
+			<string>precision</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>precision</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string>1.0</string>
 	<key>webaddress</key>

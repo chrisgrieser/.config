@@ -164,12 +164,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://libgen.rs/search.php?req={query}</string>
+				<string>https://scite.ai/search?q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>169FF168-1AE9-4A13-8CFC-58686EC8B546</string>
+			<string>32FE0E4D-09C0-4DB0-81EA-F77B71C65466</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -185,12 +185,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://scite.ai/search?q={query}</string>
+				<string>https://libgen.rs/search.php?req={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>32FE0E4D-09C0-4DB0-81EA-F77B71C65466</string>
+			<string>169FF168-1AE9-4A13-8CFC-58686EC8B546</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -248,6 +248,27 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
+				<string>https://www.semanticscholar.org/search?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3020DCCA-3C79-4963-8FA6-39F112BD5EC2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
 				<string>https://annas-archive.org/search?q={query}</string>
 			</dict>
 			<key>type</key>
@@ -269,12 +290,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.semanticscholar.org/search?q={query}</string>
+				<string>https://elicit.org/search?q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>3020DCCA-3C79-4963-8FA6-39F112BD5EC2</string>
+			<string>885E52AE-9E54-4319-A19C-E6201F89E6D0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -321,27 +342,6 @@
 			<string>4AF8F997-AF32-4FB5-B396-C7CF35341186</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://elicit.org/search?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>885E52AE-9E54-4319-A19C-E6201F89E6D0</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -473,18 +473,18 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>260</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>245</real>
 		</dict>
 		<key>32FE0E4D-09C0-4DB0-81EA-F77B71C65466</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>260</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>130</real>
 		</dict>
 		<key>33687FCF-858F-4613-A6B6-24920E167D9B</key>
 		<dict>
@@ -513,45 +513,45 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>260</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>30</real>
+			<real>15</real>
 		</dict>
 		<key>6442AC22-6F2F-49B6-ACBA-D5FD8F7F78E7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>260</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>475</real>
 		</dict>
 		<key>6999194B-966C-4985-B7AE-E2A8FCF219CE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>595</real>
 		</dict>
 		<key>885E52AE-9E54-4319-A19C-E6201F89E6D0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>260</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>360</real>
 		</dict>
 		<key>96381D25-BEFF-4E9A-AE91-DD3A5F22DF42</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>780</real>
+			<real>710</real>
 		</dict>
 		<key>C2B4BC58-FF09-45A4-A135-256038B0C60C</key>
 		<dict>
@@ -562,7 +562,7 @@
 			<key>xpos</key>
 			<real>40</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>640</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

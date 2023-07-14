@@ -581,7 +581,6 @@ end, { desc = " 󰖶 Toggle Wrap" })
 -- TERMINAL
 keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
-keymap("t", "i", "a", { desc = " Fix i in Terminal Mode" })
 
 keymap("n", "<leader>tf", "<Plug>PlenaryTestFile", { desc = " Test File" })
 keymap("n", "<leader>td", "<cmd>PlenaryBustedDirectory .<CR>", { desc = " Tests in Directory" })
