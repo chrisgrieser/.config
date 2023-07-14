@@ -507,11 +507,11 @@
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<false/>
+				<true/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>{query}</string>
 				<key>title</key>
 				<string>📋 Copied</string>
 			</dict>
@@ -921,7 +921,7 @@ Disable Alfred's bultin Calculator, since this workflow works is a drop-in repla
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>645</real>
+			<real>630</real>
 			<key>ypos</key>
 			<real>240</real>
 		</dict>
