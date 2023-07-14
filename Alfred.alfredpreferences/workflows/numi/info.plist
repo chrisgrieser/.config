@@ -818,8 +818,8 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string># Recommendation
-Disable Alfred's bultin Calculator Feature, since this workflow works as a drop-in replacement for.</string>
+	<string>#### Recommendation
+Disable Alfred's bultin Calculator, since this workflow works is a drop-in replacement for it.</string>
 	<key>uidata</key>
 	<dict>
 		<key>12E892E3-920B-45FB-AE7F-C4F7CC492A7B</key>
