@@ -1702,7 +1702,7 @@ echo -n $dummyBib | pandoc --citeproc --read=markdown --write=plain --csl $csl -
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/generate_temporary_bib.sh</string>
+				<string>scripts/paste-full-bibliography.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
