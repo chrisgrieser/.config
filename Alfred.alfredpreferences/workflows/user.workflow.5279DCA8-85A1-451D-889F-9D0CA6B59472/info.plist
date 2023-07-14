@@ -79,7 +79,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>w</string>
+				<string>{var:wikipedia_search_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -139,29 +139,50 @@
 		<key>320A285D-5E2A-4D80-9B99-CFDED47BA207</key>
 		<dict>
 			<key>xpos</key>
-			<real>325</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>85</real>
 		</dict>
 		<key>87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA</key>
 		<dict>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>325</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>200</real>
 		</dict>
 		<key>BCC9ED2C-0A1A-47F0-83A2-492285CD9D56</key>
 		<dict>
 			<key>xpos</key>
-			<real>80</real>
+			<real>75</real>
 			<key>ypos</key>
-			<real>220</real>
+			<real>145</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>w</string>
+				<key>placeholder</key>
+				<string>wiki</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The Alfred keyword to trigger searching wikipedia.</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>wikipedia_search_keyword</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
