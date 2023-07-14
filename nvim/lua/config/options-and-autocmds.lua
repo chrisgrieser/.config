@@ -12,13 +12,24 @@ local u = require("config.utils")
 -- REMOTE CONTROL / AUTOMATION
 
 -- RPC https://neovim.io/doc/user/remote.html
-pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
-vim.fn.serverstart("/tmp/nvim_server.pipe")
+local removed = pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
+local delay = removed and 0 or 500
+vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, delay)
 
 -- Set title so external apps like window managers can read the current file path
 opt.title = true
 opt.titlelen = 0 -- do not shorten title
 opt.titlestring = '%{expand("%:p")}'
+
+--------------------------------------------------------------------------------
+
+-- FIX these settings sometimes getting changed on buffer level
+autocmd("BufReadPost", {
+	callback = function()
+		vim.opt_local.foldlevel = 99
+		vim.opt_local.scrolloff = opt.scrolloff:get()
+	end,
+})
 
 --------------------------------------------------------------------------------
 
