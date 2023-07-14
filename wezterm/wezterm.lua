@@ -1,6 +1,6 @@
 -- THEME SETTINGS
 
-local lightOpacity = 0.93
+local lightOpacity = 0.94
 local darkOpacity = 0.91
 
 local darkTheme = "cyberpunk"
