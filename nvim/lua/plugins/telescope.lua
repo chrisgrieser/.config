@@ -110,10 +110,8 @@ local function telescopeConfig()
 			keymaps = {
 				prompt_prefix = " ",
 				modes = { "n", "i", "c", "x", "o", "t" },
-				-- do not show mappings with "<Plug>"
-				show_plug = false,
-				-- remove which-key mappings
-				lhs_filter = function(lhs) return not lhs:find("Þ") end,
+				show_plug = false, -- do not show mappings with "<Plug>"
+				lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
 			},
 			diagnostics = { prompt_prefix = "󰒕 ", no_sign = true },
 			treesitter = { prompt_prefix = " ", show_line = false },
@@ -224,16 +222,18 @@ return {
 		commit = "9a82b5b", -- FIX https://github.com/nvim-telescope/telescope.nvim/issues/2593
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-tree/nvim-web-devicons", -- add icons
+			"nvim-telescope/telescope-file-browser.nvim", -- search folders
+			"smartpde/telescope-recent-files", -- better oldfiles
 
 			-- also listed here as dependency, so it can be used by telescope
 			-- before cmp is loaded
-			"nvim-telescope/telescope-fzf-native.nvim",
+			"nvim-telescope/telescope-fzf-native.nvim", -- better fuzzy finder
 		},
 		config = function()
 			telescopeConfig()
 			require("telescope").load_extension("file_browser")
+			require("telescope").load_extension("recent_files")
 
 			-- INFO since used for cmp-fuzzy-buffer already, might as well add it
 			-- here as well. Even though performance-wise vanilla telescope is fine

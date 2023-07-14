@@ -12,13 +12,13 @@ local colorPickerFts = {
 
 return {
 	{ -- rainbow brackets
-		"HiPhish/nvim-ts-rainbow2",
+		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
 		event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			-- rainbow brackets without aggressive red
 			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function() vim.api.nvim_set_hl(0, "TSRainbowred", { fg = "#7e8a95" }) end,
+				callback = function() vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 			})
 		end,
 	},

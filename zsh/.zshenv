@@ -24,9 +24,9 @@ export EDITOR=nvim
 
 # for my configs
 export BROWSER_DEFAULTS_PATH="BraveSoftware/Brave-Browser"
-export BROWSER_APP="Brave Browser" # not using "$BROWSER" since that influences some CLIs
+export BROWSER_APP="Brave Browser" # not using "$BROWSER" since it's a reserved variable
 export MAIL_APP="Mimestream"
-export TICKER_APP="Ivory" # or Ivory
+export TICKER_APP="Ivory" # or Twitter/Mastodon
 
 #───────────────────────────────────────────────────────────────────────────────
 
