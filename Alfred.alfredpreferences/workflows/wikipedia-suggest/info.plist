@@ -35,11 +35,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Search Wikipedia from inside Alfred</string>
+	<string>Suggest &amp; Search Wikipedia articles</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Wikipedia Search</string>
+	<string>Wikipedia Suggest</string>
 	<key>objects</key>
 	<array>
 		<dict>

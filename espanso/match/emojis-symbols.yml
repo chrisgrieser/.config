@@ -9,6 +9,8 @@ matches:
     replace: ℹ️
   - trigger: "!new"
     replace: 🆕
+  - trigger: "!clip"
+    replace: 📋
   - trigger: "!warn"
     replace: ⚠️
   - trigger: "!star"
