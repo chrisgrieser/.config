@@ -75,6 +75,15 @@ suppress-bibliography: true
 pandoc "My Library.bib" -t csljson -o "bibtexjson.json"
 ```
 
+## Resolving Citations
+Use Pandoc solely as citation resolver, without changing the format (i.e. markdown as input and output file):
+
+```bash
+# https://superuser.com/a/1161832
+# https://stackoverflow.com/a/68933915/22114136
+pandoc --citeproc --bibliography="$HOME/.pandoc/bibliography.bib" input.md -o output.md --to=markdown-citations --metadata="suppress-bibliography:true"
+```
+
 ## Priority of Options
 __Higher overwrites lower__
 1. Direct CLI arguments
