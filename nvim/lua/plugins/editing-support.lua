@@ -12,6 +12,7 @@ return {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
 				rule("<", ">", "vim"):with_pair(), -- keymaps
 				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes
+				rule('\\"', '\\"', "sh"):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
 			}

@@ -4,24 +4,6 @@ local wu = require("lua.window-utils")
 
 --------------------------------------------------------------------------------
 
--- ensure that twitter does not get focus when alt-tabbing and instead "falling
--- through" to the next window
-local function fallThrough()
-	if not u.isFront(env.tickerApp) then return end
-
-	local visibleWins = hs.window:orderedWindows()
-	local nextWin
-	for _, win in pairs(visibleWins) do
-		if win:application():name() ~= env.tickerApp then
-			nextWin = win
-			break
-		end
-	end
-	if not nextWin or nextWin:id() == hs.window.frontmostWindow():id() then return end
-
-	nextWin:focus()
-end
-
 -- simply scroll up without the mouse and without focussing the app
 local function scrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
@@ -130,10 +112,6 @@ TickerAppWatcher = u.aw
 			scrollUp()
 			cleanUpLink()
 			closeMediaWindow()
-
-		-- do not focus Twitter after an app is terminated
-		elseif event == u.aw.terminated and appName ~= env.tickerApp then
-			u.runWithDelays({ 0.1, 0.3 }, fallThrough)
 
 		-- raise twitter when switching window to other app
 		elseif (event == u.aw.activated or event == u.aw.launched) and appName ~= env.tickerApp then

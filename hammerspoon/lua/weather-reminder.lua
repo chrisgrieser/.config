@@ -18,12 +18,14 @@ local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):form
 PreviousOutsideTemp = nil
 
 local function getOutsideTemp()
+	if not (u.betweenTime(18, 1) or u.betweenTime(8, 13)) then return end
 	hs.http.asyncGet(callUrl, nil, function(status, body, _)
 		if status ~= 200 then
 			print("Could not get weather data: " .. status)
 			return
 		end
 		local outsideTemp = hs.json.decode(body).weather.temperature
+		if not outsideTemp then return end
 		local outsideNowCoolerThanInside = outsideTemp < insideTemp
 			and not (PreviousOutsideTemp < insideTemp)
 		local outsideNowHotterThanInside = outsideTemp > insideTemp
@@ -32,8 +34,10 @@ local function getOutsideTemp()
 
 		if outsideNowCoolerThanInside then
 			hs.alert.show("🌡️🔵 Outside now cooler than inside.")
+			u.sound("Funk")
 		elseif outsideNowHotterThanInside then
 			hs.alert.show("🌡️🔴 Outside now hotter than inside.")
+			u.sound("Funk")
 		else
 			print("🌡️ No Temperature Change.")
 		end
