@@ -53,3 +53,11 @@ export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=32
 export PASSWORD_STORE_ENABLE_EXTENSIONS=false
 export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
+
+
+#───────────────────────────────────────────────────────────────────────────────
+# GH-CLI
+# https://cli.github.com/manual/gh_help_environment
+export GH_NO_UPDATE_NOTIFIER=1
+export GLAMOUR_STYLE="Dracula"
+

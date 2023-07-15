@@ -4,7 +4,7 @@ local wu = require("lua.window-utils")
 
 --------------------------------------------------------------------------------
 
--- ensure that twitter does not get focus when alt-tabbing and instead "falling 
+-- ensure that twitter does not get focus when alt-tabbing and instead "falling
 -- through" to the next window
 local function fallThrough()
 	if not u.isFront(env.tickerApp) then return end
@@ -86,13 +86,7 @@ end
 ---@param referenceWin hs.window
 local function showHideTickerApp(referenceWin)
 	local app = u.app(env.tickerApp)
-	if
-		not app
-		or not referenceWin
-		or u.isFront("CleanShot X")
-	then
-		return
-	end
+	if not app or not referenceWin or u.isFront("CleanShot X") then return end
 
 	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centered) then
 		winToTheSide()

@@ -137,6 +137,30 @@ Wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" })
 	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
 
 --------------------------------------------------------------------------------
+
+-- TRANSMISSION
+-- Fallthrough (prevent unintended focussing after qutting another app)
+TransmissionWatcher = u.aw.new(function(appName, event)
+	if event == u.aw.terminated and appName ~= "Transmission" then
+		u.runWithDelays({ 0.1, 0.3 }, function()
+			if not u.isFront("Transmission") then return end
+			local visibleWins = hs.window:orderedWindows()
+			local nextWin
+			for _, win in pairs(visibleWins) do
+				if win:application():name() ~= "Transmission" then
+					nextWin = win
+					break
+				end
+			end
+			if not nextWin or nextWin:id() == hs.window.frontmostWindow():id() then return end
+			nextWin:focus()
+		end)
+	end
+end)
+
+
+
+--------------------------------------------------------------------------------
 -- SCRIPT EDITOR
 Wf_script_editor = wf
 	.new("Script Editor")
