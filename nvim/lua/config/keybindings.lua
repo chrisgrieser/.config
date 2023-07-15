@@ -93,13 +93,19 @@ keymap("n", "<Esc>", function()
 end, { desc = "󰎟 Clear Notifications" })
 
 --------------------------------------------------------------------------------
+-- NAVIGATION
 
--- HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
-keymap("n", "H", "0^") -- 0^ ensures fully scrolling to the left on long indented lines
-keymap({ "o", "x" }, "H", "^")
-keymap({ "n", "x" }, "L", "$") -- not using "o", since used for link textobj
-keymap({ "n", "x" }, "J", "6j")
-keymap({ "n", "x" }, "K", "6k")
+-- - work on visual lines instead of logical ones for when wrapping is one
+-- - HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
+keymap({ "o", "x" }, "H", "g^")
+keymap("n", "H", "0g^") -- `0` ensures fully scrolling to the left on long indented lines
+keymap({ "n", "x" }, "L", "g$") -- not using "o", since used for link textobj
+keymap({ "n", "x" }, "J", "6gj")
+keymap({ "n", "x" }, "K", "6gk")
+keymap({ "n", "x" }, "j", "gj")
+keymap({ "n", "x" }, "k", "gk")
+keymap("n", "A", "g$a")
+keymap("n", "I", "g^i")
 
 -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "J", "2j")
@@ -296,6 +302,7 @@ keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" }
 
 -- Merging / Splitting Lines
 keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split around selection" })
+keymap("n", "<leader>S", "gww", { desc = "󰗈 Reflow Line (gww)" })
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 merge line up" })
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 merge line down" })
 
@@ -410,7 +417,12 @@ keymap("n", "gl", function() require("telescope.builtin").live_grep {
 end, { desc = " Live Grep in Project" })
 -- stylua: ignore
 keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
-keymap("n", "gr", [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { desc = " Recent Files" })
+keymap(
+	"n",
+	"gr",
+	[[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]],
+	{ desc = " Recent Files" }
+)
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = "  Continue" })
 keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since `gf` remapped
 
@@ -475,7 +487,7 @@ autocmd("LspAttach", {
 			-- overwrites treesitter goto-symbol
 			-- stylua: ignore start
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true })
-			keymap("n", "gS", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
+			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 			-- stylua: ignore end
 		end
 	end,
@@ -554,27 +566,11 @@ keymap("n", "<leader>ow", function()
 	if wrapOn then
 		vim.opt_local.wrap = false
 		vim.opt_local.colorcolumn = vim.opt.colorcolumn:get()
-		vim.keymap.del({ "n", "x" }, "H", { buffer = true })
-		vim.keymap.del({ "n", "x" }, "L", { buffer = true })
-		vim.keymap.del({ "n", "x" }, "J", { buffer = true })
-		vim.keymap.del({ "n", "x" }, "K", { buffer = true })
-		vim.keymap.del({ "n", "x" }, "k", { buffer = true })
-		vim.keymap.del({ "n", "x" }, "j", { buffer = true })
-		vim.keymap.del({ "n", "x" }, "A", { buffer = true })
-		vim.keymap.del({ "n", "x" }, "I", { buffer = true })
 	else
 		vim.opt_local.wrap = true
 		vim.opt_local.colorcolumn = ""
-		keymap({ "n", "x" }, "H", "g^", { buffer = true })
-		keymap({ "n", "x" }, "L", "g$", { buffer = true })
-		keymap({ "n", "x" }, "J", "6gj", { buffer = true })
-		keymap({ "n", "x" }, "K", "6gk", { buffer = true })
-		keymap({ "n", "x" }, "j", "gj", { buffer = true })
-		keymap({ "n", "x" }, "k", "gk", { buffer = true })
-		keymap({ "n", "x" }, "A", "g$a", { buffer = true })
-		keymap({ "n", "x" }, "I", "g^i", { buffer = true })
 	end
-end, { desc = " 󰖶 Toggle Wrap" })
+end, { desc = " 󰖶 Toggle Wrap & Colorcolumn" })
 
 --------------------------------------------------------------------------------
 

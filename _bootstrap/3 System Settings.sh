@@ -1,28 +1,24 @@
-#-------------------------------------------------------------------------------
-# sources for mac default settings
+# SOURCES FOR MAC DEFAULT SETTINGS
 # https://github.com/herrbischoff/awesome-macos-command-line
 # https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 # https://macos-defaults.com/
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
-# ask for permissions upfront
-sudo -v
+sudo -v # ask for permissions upfront
 
-#-------------------------------------------------------------------------------
-# System Prefs
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
+# SYSTEM PREFS
 
 # Cloudflare DNS
-# networksetup -setdnsservers Wi-Fi 1.1.1.1 1.0.0.1
-# networksetup -setdnsservers Ethernet 1.1.1.1 1.0.0.1
+networksetup -setdnsservers Wi-Fi 1.1.1.1 1.0.0.1
+networksetup -setdnsservers Ethernet 1.1.1.1 1.0.0.1
 
 # Google DNS
-networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
-networksetup -setdnsservers Ethernet 8.8.8.8 8.8.4.4
+# networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
+# networksetup -setdnsservers Ethernet 8.8.8.8 8.8.4.4
 
-# -------------------------------
-# Finder
-# -------------------------------
+#───────────────────────────────────────────────────────────────────────────────
+# FINDER
 
 # Set the default location for new Finder windows
 defaults write com.apple.finder NewWindowTarget 'PfHm'
@@ -161,8 +157,7 @@ sudo pmset womp 1          # Wake for network access
 # do not save GPG key in the keychains
 defaults write org.gpgtools.common DisableKeychain -bool yes
 
-# Hot corners
-#-------------------------------------------
+# HOT CORNERS
 # Possible values:
 #  0: no-op
 #  2: Mission Control
@@ -181,14 +176,15 @@ defaults write com.apple.dock wvous-bl-corner -int 0
 
 killall Dock
 
-# Time Machine
-#----------------
+#───────────────────────────────────────────────────────────────────────────────
+# TIME MACHINE
+
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 sudo tmutil disable # disable automatic backups
 
-# Safari
-#--------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
+# SAFARI
 defaults write com.apple.Safari IncludeDevelopMenu -bool true            # Enable Develop menu and Web Inspector
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true # full URL in address bar
 defaults write com.apple.Safari HomePage -string "about:blank"           # faster loading
