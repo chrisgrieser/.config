@@ -90,7 +90,7 @@ end
 -- video apps.
 SleepTimer = hs.timer
 	.doEvery(10 * 60, function()
-		if not (u.betweenTime(1, 6) and idleMins(40) and env.isProjector()) then return end
+		if not (u.betweenTime(1, 6) and idleMins(40) and env.isProjector() and u.screenIsUnlocked()) then return end
 		hs.alert.show("💤 SleepTimer in 1 min if idle.")
 
 		u.runWithDelays(61, function()

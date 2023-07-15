@@ -138,27 +138,28 @@ Wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" })
 
 --------------------------------------------------------------------------------
 
--- TRANSMISSION
--- Fallthrough (prevent unintended focussing after qutting another app)
-TransmissionWatcher = u.aw.new(function(appName, event)
-	if event == u.aw.terminated and appName ~= "Transmission" then
-		u.runWithDelays({ 0.1, 0.3 }, function()
-			if not u.isFront("Transmission") then return end
-			local visibleWins = hs.window:orderedWindows()
-			local nextWin
-			for _, win in pairs(visibleWins) do
-				if win:application():name() ~= "Transmission" then
-					nextWin = win
-					break
-				end
+-- TRANSMISSION / TWITTER
+-- Fallthrough: prevent unintended focussing after qutting another app
+-- unintended focussing via alt+tab is prevented via alt+tab settings
+TransmissionWatcher = aw.new(function(appName, event)
+	local fallThroughApps = { "Transmission", env.tickerApp }
+	if event ~= aw.terminated or u.tbl_contains(fallThroughApps, appName) then return end
+
+	u.runWithDelays({ 0.1, 0.3 }, function()
+		if not u.isFront(fallThroughApps) then return end
+		local visibleWins = hs.window:orderedWindows()
+		local nextWin
+		for _, win in pairs(visibleWins) do
+			local name = win:application():name()
+			if not (u.tbl_contains(fallThroughApps, name)) then
+				nextWin = win
+				break
 			end
-			if not nextWin or nextWin:id() == hs.window.frontmostWindow():id() then return end
-			nextWin:focus()
-		end)
-	end
-end)
-
-
+		end
+		if not nextWin or nextWin:id() == hs.window.frontmostWindow():id() then return end
+		nextWin:focus()
+	end)
+end):start()
 
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
@@ -173,7 +174,7 @@ Wf_script_editor = wf
 			u.keystroke({ "cmd" }, "v")
 			wu.moveResize(newWin, wu.centered)
 			u.runWithDelays(0.2, function() u.keystroke({ "cmd" }, "k") end)
-		-- resize window
+		-- resize window if it's an AppleScript Dictionaryx
 		elseif newWin:title():find("%.sdef$") then
 			wu.moveResize(newWin, wu.centered)
 		end
