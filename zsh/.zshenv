@@ -38,6 +38,10 @@ export OPENAI_API_KEY
 GITHUB_TOKEN=$(tr -d "\n" <"$DATA_DIR/private dotfiles/github_token.txt")
 export GITHUB_TOKEN
 
+# Chat PDF
+CHATPDF_API_KEY=$(tr -d "\n" <"$DATA_DIR/private dotfiles/chatpdf-api-key.txt")
+export CHATPDF_API_KEY
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # NEOVIM

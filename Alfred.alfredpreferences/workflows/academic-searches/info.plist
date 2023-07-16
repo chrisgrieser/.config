@@ -97,29 +97,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C2B4BC58-FF09-45A4-A135-256038B0C60C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6999194B-966C-4985-B7AE-E2A8FCF219CE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>96381D25-BEFF-4E9A-AE91-DD3A5F22DF42</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -364,69 +341,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://scisummary.com/summarize</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>6999194B-966C-4985-B7AE-E2A8FCF219CE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>rs</string>
-				<key>subtext</key>
-				<string>ScholarCry &amp; Sci-Summary</string>
-				<key>text</key>
-				<string>Summarize Papers</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>C2B4BC58-FF09-45A4-A135-256038B0C60C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://article-summarizer.scholarcy.com/summarizer</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>96381D25-BEFF-4E9A-AE91-DD3A5F22DF42</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -526,15 +440,6 @@
 			<key>ypos</key>
 			<real>475</real>
 		</dict>
-		<key>6999194B-966C-4985-B7AE-E2A8FCF219CE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>255</real>
-			<key>ypos</key>
-			<real>595</real>
-		</dict>
 		<key>885E52AE-9E54-4319-A19C-E6201F89E6D0</key>
 		<dict>
 			<key>colorindex</key>
@@ -543,26 +448,6 @@
 			<real>255</real>
 			<key>ypos</key>
 			<real>360</real>
-		</dict>
-		<key>96381D25-BEFF-4E9A-AE91-DD3A5F22DF42</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>255</real>
-			<key>ypos</key>
-			<real>710</real>
-		</dict>
-		<key>C2B4BC58-FF09-45A4-A135-256038B0C60C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>summarize</string>
-			<key>xpos</key>
-			<real>40</real>
-			<key>ypos</key>
-			<real>640</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
