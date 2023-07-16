@@ -1,38 +1,18 @@
 #!/usr/bin/env osascript -l JavaScript
 
-// CONFIG
 ObjC.import("stdlib");
-const maxResults = parseInt($.getenv("max_suggestions")) || 2;
-const minQueryLength = parseInt($.getenv("min_query_length")) || 5;
-const noSuggestionRegex = new RegExp($.getenv("no_suggestion_regex"));
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string[]} suggestions */
-function makeItems(suggestions) {
-	return suggestions.map((/** @type {string} */ suggestion) => {
-		return {
-			uid: suggestion,
-			title: suggestion,
-			arg: suggestion,
-			// no argument for next script filter
-			mods: {
-				shift: {
-					arg: "",
-					variables: { query: suggestion },
-				},
-			},
-		};
-	});
-}
+// CONFIG
+const minQueryLength = parseInt($.getenv("min_query_length")) || 5;
+const noSuggestionRegex = new RegExp($.getenv("no_suggestion_regex"));
 
-/** @param {string} url */
-function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
-	return requestString;
-}
+let resultsToFetch = parseInt($.getenv("inline_results_to_fetch"));
+if (resultsToFetch < 1) resultsToFetch = 1;
+else if (resultsToFetch > 25) resultsToFetch = 25;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -48,6 +28,12 @@ function run(argv) {
 	// regex ignore & ignore queries shorter than 3 characters
 	if (noSuggestionRegex.test(query) || query.length < 3) return;
 
+	const searchForQuery = {
+		title: query,
+		uid: query,
+		arg: query,
+	};
+
 	// make no request below the minimum length, but show the typed query as
 	// fallback search
 	if (query.length < minQueryLength) {
@@ -55,7 +41,7 @@ function run(argv) {
 			rerun: 0.1,
 			skipknowledge: true,
 			variables: { oldResults: oldResults, oldArg: query },
-			items: makeItems([query]),
+			items: [searchForQuery],
 		});
 	}
 
@@ -66,24 +52,27 @@ function run(argv) {
 			rerun: 0.1,
 			skipknowledge: true,
 			variables: { oldResults: oldResults, oldArg: query },
-			items: makeItems(argv.concat(oldResults?.split("\n").filter((/** @type {string} */ line) => line))),
+			items: [searchForQuery].concat(oldResults),
 		});
 	}
 
-	// Make the API request
-	const queryURL = $.getenv("suggestion_source") + encodeURIComponent(query);
-	const response = JSON.parse(httpRequest(queryURL));
-	const usingGoogle = $.getenv("suggestion_source").includes("google");
-	const newResults = (
-		usingGoogle ? response[1] : response.map((/** @type {{ phrase: string; }} */ t) => t.phrase)
-	)
-		.filter((/** @type {string} */ suggestion) => suggestion !== query)
-		.slice(0, maxResults);
+	//───────────────────────────────────────────────────────────────────────────
 
-	// Return final JSON
+	const responseJson = JSON.parse(app.doShellScript(`ddgr --num=${resultsToFetch} --json "${query}"`));
+
+	/** @type AlfredItem[] */
+	const inlineResults = responseJson.map((item) => {
+		return {
+			title: item.title,
+			subtitle: item.url,
+			arg: item.url,
+		};
+	});
+
 	return JSON.stringify({
+		rerun: 0.1,
 		skipknowledge: true,
-		variables: { oldResults: newResults.join("\n"), oldArg: query },
-		items: makeItems(argv.concat(newResults)),
+		variables: { oldResults: inlineResults, oldArg: query },
+		items: inlineResults,
 	});
 }
