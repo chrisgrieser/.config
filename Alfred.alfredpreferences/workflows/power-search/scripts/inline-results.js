@@ -27,8 +27,8 @@ else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	// Check values from previous runs this session
-	const query = argv[0] || "";
-	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js || "";
+	const query = argv[0];
+	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js;
 	const oldResults = JSON.parse(
 		$.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]",
 	);
@@ -38,15 +38,15 @@ function run(argv) {
 	// FALLBACK RESULTS
 	const arg = query.includes(".") ? "https://" + query : $.getenv("search_site") + query;
 	const searchForQuery = { title: query, uid: query, arg: arg };
-	const showFallbackOnly = query.length < minQueryLength
-	const showNothing = noSuggestionRegex.test(query) || query.length < 3
+	const showFallbackOnly = query.length < minQueryLength;
+	const showNothing = noSuggestionRegex.test(query) || query.length < 3;
 
 	if (showNothing) return;
 	if (showFallbackOnly) {
 		return JSON.stringify({
 			rerun: 0.1,
 			skipknowledge: true,
-			variables: { oldResults: JSON.stringify(oldResults), oldArg: query },
+			variables: { oldResults: JSON.stringify(oldResults), oldQuery: query },
 			items: [searchForQuery],
 		});
 	}
@@ -60,7 +60,7 @@ function run(argv) {
 		return JSON.stringify({
 			rerun: 0.1,
 			skipknowledge: true,
-			variables: { oldResults: JSON.stringify(oldResults), oldArg: query },
+			variables: { oldResults: JSON.stringify(oldResults), oldQuery: query },
 			items: [searchForQuery].concat(oldResults),
 		});
 	}
@@ -69,15 +69,15 @@ function run(argv) {
 	const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
 	const responseJson = JSON.parse(app.doShellScript(ddgrCommand));
 	const newResults = responseJson.map((/** @type {DdgrSearchResult} */ item) => {
-		const previewText = item.abstract.slice(0, 100) || "";
 		return {
 			title: item.title,
 			subtitle: item.url,
 			uid: item.url,
 			arg: item.url,
+			icon: { path: "duckduckgo.png" },
 			mods: {
 				cmd: {
-					subtitle: "⌘: " + previewText,
+					subtitle: "⌘: " + item.abstract.slice(0, 100),
 				},
 			},
 		};
@@ -85,7 +85,7 @@ function run(argv) {
 
 	return JSON.stringify({
 		skipknowledge: true,
-		variables: { oldResults: JSON.stringify(newResults), oldArg: query },
+		variables: { oldResults: JSON.stringify(newResults), oldQuery: query },
 		items: [searchForQuery].concat(newResults),
 	});
 }
