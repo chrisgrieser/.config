@@ -9,10 +9,11 @@ app.includeStandardAdditions = true;
 // CONFIG
 const minQueryLength = parseInt($.getenv("min_query_length")) || 5;
 const noSuggestionRegex = new RegExp($.getenv("no_suggestion_regex"));
+const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
 
 let resultsToFetch = parseInt($.getenv("inline_results_to_fetch"));
 if (resultsToFetch < 1) resultsToFetch = 1;
-else if (resultsToFetch > 25) resultsToFetch = 25;
+else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -26,24 +27,22 @@ else if (resultsToFetch > 25) resultsToFetch = 25;
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	// Check values from previous runs this session
-	const oldArg = $.NSProcessInfo.processInfo.environment.objectForKey("oldArg").js;
+	const query = argv[0] || "";
+	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js || "";
 	const oldResults = JSON.parse(
 		$.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]",
 	);
-	const query = argv[0];
 
-	// regex ignore & ignore queries shorter than 3 characters
-	if (noSuggestionRegex.test(query) || query.length < 3) return;
+	//───────────────────────────────────────────────────────────────────────────
 
-	const searchForQuery = {
-		title: query,
-		uid: query,
-		arg: query,
-	};
+	// FALLBACK RESULTS
+	const arg = query.includes(".") ? "https://" + query : $.getenv("search_site") + query;
+	const searchForQuery = { title: query, uid: query, arg: arg };
+	const showFallbackOnly = query.length < minQueryLength
+	const showNothing = noSuggestionRegex.test(query) || query.length < 3
 
-	// make no request below the minimum length, but show the typed query as
-	// fallback search
-	if (query.length < minQueryLength) {
+	if (showNothing) return;
+	if (showFallbackOnly) {
 		return JSON.stringify({
 			rerun: 0.1,
 			skipknowledge: true,
@@ -52,9 +51,12 @@ function run(argv) {
 		});
 	}
 
+	//───────────────────────────────────────────────────────────────────────────
+
+	// USE OLD RESULTS
 	// If the user is typing, return early to guarantee the top entry is the currently typed query
 	// If we waited for the API, a fast typer would search for an incomplete query
-	if (query !== oldArg) {
+	if (query !== oldQuery) {
 		return JSON.stringify({
 			rerun: 0.1,
 			skipknowledge: true,
@@ -63,21 +65,25 @@ function run(argv) {
 		});
 	}
 
-	//───────────────────────────────────────────────────────────────────────────
-
-	const ddgrCommand = `ddgr --noua --unsafe --num=${resultsToFetch} --json "${query}"`
+	// REQUEST NEW RESULTS
+	const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
 	const responseJson = JSON.parse(app.doShellScript(ddgrCommand));
 	const newResults = responseJson.map((/** @type {DdgrSearchResult} */ item) => {
+		const previewText = item.abstract.slice(0, 100) || "";
 		return {
 			title: item.title,
 			subtitle: item.url,
 			uid: item.url,
 			arg: item.url,
+			mods: {
+				cmd: {
+					subtitle: "⌘: " + previewText,
+				},
+			},
 		};
 	});
 
 	return JSON.stringify({
-		rerun: 0.1,
 		skipknowledge: true,
 		variables: { oldResults: JSON.stringify(newResults), oldArg: query },
 		items: [searchForQuery].concat(newResults),

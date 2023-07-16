@@ -218,43 +218,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3344C177-11A1-468B-9887-0A2E16FC0A93</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>46EF087E-3EB6-4E2D-B409-9F98E3BDE88C</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>FC6EECC7-532D-42B1-86A6-508E11B0D11A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>F44361DE-CFAF-4F56-A257-CD2B6CE9D404</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>560533C0-AFA2-4D1E-99E6-A906BCA74E8D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>396BCF5D-1A52-4FAC-AB1B-3ECF0E5ED2CC</key>
 		<array>
 			<dict>
@@ -342,19 +305,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>3F875B8F-22A9-4711-914D-C906CAC4F290</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>560533C0-AFA2-4D1E-99E6-A906BCA74E8D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -623,7 +573,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3344C177-11A1-468B-9887-0A2E16FC0A93</string>
+				<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -739,19 +689,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>FC6EECC7-532D-42B1-86A6-508E11B0D11A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -952,7 +889,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "c$*"</string>
+				<string>osascript l JavaScript ./scripts/suggestterms.js "c$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1001,7 +938,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "a$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "a$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1050,7 +987,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "b$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "b$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1099,7 +1036,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "e$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "e$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1188,7 +1125,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "f$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "f$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1237,7 +1174,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "d$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "d$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1286,7 +1223,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "h$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "h$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1335,7 +1272,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "i$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "i$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1384,7 +1321,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "g$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "g$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1421,55 +1358,6 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>k</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "k$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>2DFB0296-2869-409D-B8A9-C746D5234521</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
 				<string>l</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -1482,7 +1370,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "l$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "l$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1531,7 +1419,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "j$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "j$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1555,23 +1443,51 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>alfredfiltersresults</key>
 				<false/>
-				<key>skipvarencode</key>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
 				<false/>
-				<key>spaces</key>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>k</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
 				<string></string>
-				<key>url</key>
-				<string>{query}</string>
+				<key>script</key>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "k$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
+			<string>2DFB0296-2869-409D-B8A9-C746D5234521</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1601,7 +1517,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "o$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "o$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1650,7 +1566,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "n$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "n$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1699,7 +1615,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "m$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "m$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1723,63 +1639,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>^http</string>
-						<key>outputlabel</key>
-						<string>is URL</string>
-						<key>uid</key>
-						<string>46EF087E-3EB6-4E2D-B409-9F98E3BDE88C</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>\.</string>
-						<key>outputlabel</key>
-						<string>has .</string>
-						<key>uid</key>
-						<string>F44361DE-CFAF-4F56-A257-CD2B6CE9D404</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>normal</string>
-				<key>hideelse</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>3344C177-11A1-468B-9887-0A2E16FC0A93</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>http://{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>FC6EECC7-532D-42B1-86A6-508E11B0D11A</string>
+			<string>9411F78B-9CF0-40C6-91B3-64DA40870ECC</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1819,7 +1693,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "q$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "q$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1868,7 +1742,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "r$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "r$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1888,23 +1762,6 @@
 			<string>318F6F96-8B4C-45EF-A20D-8CB2DC06772F</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{var:search_site}{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>560533C0-AFA2-4D1E-99E6-A906BCA74E8D</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1934,7 +1791,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "p$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "p$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1983,7 +1840,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "u$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "u$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2032,7 +1889,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "s$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "s$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2081,7 +1938,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "t$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "t$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2130,7 +1987,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "v$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "v$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2179,7 +2036,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "w$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "w$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2228,7 +2085,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "x$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "x$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2292,7 +2149,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "z$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "z$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2341,7 +2198,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/suggest-terms.js "y$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "y$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2364,7 +2221,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Suggest without keyword
+	<string>## Show Inline Results without keyword
 - `↵` Search for Term / open URL
 - `⌥↵` Copy URL
 
@@ -2466,15 +2323,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>900</real>
 		</dict>
-		<key>3344C177-11A1-468B-9887-0A2E16FC0A93</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>685</real>
-			<key>ypos</key>
-			<real>800</real>
-		</dict>
 		<key>393BA661-A566-4A4C-872F-3385CC07DDB9</key>
 		<dict>
 			<key>colorindex</key>
@@ -2523,17 +2371,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
-		<key>560533C0-AFA2-4D1E-99E6-A906BCA74E8D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>prepend search site</string>
-			<key>xpos</key>
-			<real>780</real>
-			<key>ypos</key>
-			<real>900</real>
-		</dict>
 		<key>5E615CE0-93A5-48A2-A27A-A77F75B8D7FB</key>
 		<dict>
 			<key>xpos</key>
@@ -2567,9 +2404,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>905</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>795</real>
 		</dict>
 		<key>9E3C1F70-A0C6-4B35-8E2F-8855F7415690</key>
 		<dict>
@@ -2697,17 +2534,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
-		<key>FC6EECC7-532D-42B1-86A6-508E11B0D11A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>prepend http://</string>
-			<key>xpos</key>
-			<real>780</real>
-			<key>ypos</key>
-			<real>825</real>
-		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
@@ -2779,13 +2605,32 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Number of results to display in inline search. (Must be a number between 1 and 25.)</string>
+			<string>Number of inline results to display</string>
 			<key>label</key>
 			<string>Num Inline Results</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>inline_results_to_fetch</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Include Unsafe Results</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>include_unsafe</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2800,7 +2645,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>Advanced Users: Do not display any fallback or suggestions, when this regex matches the query. (The default value excludes sugestions when inserting a link or a short keyword.)</string>
+			<string>Advanced Users: Do not display any fallback or suggestions, when this regex matches the query. (The default value excludes suggestions when inserting a link or a short keyword.)</string>
 			<key>label</key>
 			<string>No Suggestion Regex</string>
 			<key>type</key>
@@ -2810,7 +2655,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>0.10</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
