@@ -1355,7 +1355,7 @@
 	<key>description</key>
 	<string></string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>Power Search</string>
 	<key>objects</key>
