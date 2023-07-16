@@ -212,11 +212,7 @@ Wf_appsOnMouseScreen = u.wf
 		u.runWithDelays({ 0, 0.2, 0.5, 0.8 }, function()
 			if mouseScreen:name() == screenOfWindow:name() then return end
 			newWin:moveToScreen(mouseScreen)
-			if app:name() == "Finder" or app:name() == "Script Editor" then
-				M.moveResize(newWin, M.centered)
-			else
-				M.moveResize(newWin, M.maximized)
-			end
+			M.moveResize(newWin, M.maximized)
 		end)
 	end)
 
