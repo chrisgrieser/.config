@@ -59,3 +59,10 @@ export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # do not accept autosuggestion when using vim `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
+
+#───────────────────────────────────────────────────────────────────────────────
+# GH-CLI
+# https://cli.github.com/manual/gh_help_environment
+export GH_NO_UPDATE_NOTIFIER=1
+export GLAMOUR_STYLE="Dracula"
+

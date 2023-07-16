@@ -25,16 +25,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A6CFA085-84C6-412D-9381-4CCA67DBF464</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>462A9DED-FC24-4D19-8ED2-C2D7162239B2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -236,18 +226,7 @@
 			</dict>
 		</array>
 		<key>A5733344-CBEB-486B-87D4-DE52472EB5A5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6358F4F7-A676-437F-9473-6724856F168E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>A5A50E6D-235D-44F3-ACFA-B80578EA0558</key>
 		<array>
 			<dict>
@@ -347,29 +326,6 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/auto-push.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A6CFA085-84C6-412D-9381-4CCA67DBF464</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
 				<string>scripts/pw-generate.sh</string>
 				<key>type</key>
 				<integer>8</integer>
@@ -429,6 +385,38 @@ osascript -l JavaScript ./scripts/select-folder-for-new-pw.js "$PASSWORD_STORE_D
 			<string>FEBD93EE-FAF9-4E4E-8627-84BEC380B964</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>inserted</string>
+						<key>uid</key>
+						<string>09E3118E-E1F0-4A89-81D4-60E2B1A3F0B5</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>generated</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>462A9DED-FC24-4D19-8ED2-C2D7162239B2</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -532,38 +520,6 @@ osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR" "$*"<
 			<string>24B77922-B082-4744-B4A1-6EAD37FFD88C</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string></string>
-						<key>outputlabel</key>
-						<string>inserted</string>
-						<key>uid</key>
-						<string>09E3118E-E1F0-4A89-81D4-60E2B1A3F0B5</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>generated</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>462A9DED-FC24-4D19-8ED2-C2D7162239B2</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -877,29 +833,6 @@ osascript -l JavaScript ./scripts/show-properties.js "$PASSWORD_STORE_DIR"</stri
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/auto-push.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6358F4F7-A676-437F-9473-6724856F168E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string># Alfred Client for the Pass-CLI
@@ -990,9 +923,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>pw</string>
 			<key>xpos</key>
-			<real>860</real>
+			<real>840</real>
 			<key>ypos</key>
-			<real>85</real>
+			<real>35</real>
 		</dict>
 		<key>4B749645-5CE0-489A-8EDD-18F24386AE98</key>
 		<dict>
@@ -1013,17 +946,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>1145</real>
 			<key>ypos</key>
 			<real>295</real>
-		</dict>
-		<key>6358F4F7-A676-437F-9473-6724856F168E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>auto-push</string>
-			<key>xpos</key>
-			<real>590</real>
-			<key>ypos</key>
-			<real>800</real>
 		</dict>
 		<key>6B581416-D12E-4AC2-B604-895443940F98</key>
 		<dict>
@@ -1095,17 +1017,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>600</real>
 			<key>ypos</key>
 			<real>90</real>
-		</dict>
-		<key>A6CFA085-84C6-412D-9381-4CCA67DBF464</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>auto-push</string>
-			<key>xpos</key>
-			<real>1005</real>
-			<key>ypos</key>
-			<real>15</real>
 		</dict>
 		<key>B23E7DD4-F41F-4969-83C0-A44AD034C37F</key>
 		<dict>
