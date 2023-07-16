@@ -15,7 +15,7 @@ function alfredMatcher(str) {
 const defaultFolder = $.getenv("default_folder").replace(/^~/, app.pathTo("home folder"));
 
 const workArray = app
-	.doShellScript(`cd "${defaultFolder}" && find . -not -name ".DS_Store" -mindepth 1`)
+	.doShellScript(`cd "${defaultFolder}" && find . -not -name ".DS_Store" -mindepth 1 -maxdepth 1`)
 	.split("\r")
 	.map(item => {
 		const itemPath = defaultFolder + item.slice(1);
