@@ -95,17 +95,14 @@ end, { desc = "󰎟 Clear Notifications" })
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
--- - work on visual lines instead of logical ones for when wrapping is one
 -- - HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
-keymap({ "o", "x" }, "H", "g^")
-keymap("n", "H", "0g^") -- `0` ensures fully scrolling to the left on long indented lines
-keymap({ "n", "x" }, "L", "g$") -- not using "o", since used for link textobj
-keymap({ "n", "x" }, "J", "6gj")
+keymap({ "o", "x" }, "H", "^")
+keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long indented lines
+keymap({ "n", "x" }, "L", "$") -- not using "o", since used for link textobj
+keymap({ "n", "x" }, "J", "6gj") -- - work on visual lines instead of logical ones for when wrapping is one
 keymap({ "n", "x" }, "K", "6gk")
 keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
-keymap("n", "A", "g$a")
-keymap("n", "I", "g^i")
 
 -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "J", "2j")
@@ -566,9 +563,17 @@ keymap("n", "<leader>ow", function()
 	if wrapOn then
 		vim.opt_local.wrap = false
 		vim.opt_local.colorcolumn = vim.opt.colorcolumn:get()
+		keymap("n", "A", "g$a", { buffer = true })
+		keymap("n", "I", "g^i", { buffer = true })
+		keymap("n", "H", "g0g^", { buffer = true })
+		keymap("n", "L", "g$", { buffer = true })
 	else
 		vim.opt_local.wrap = true
 		vim.opt_local.colorcolumn = ""
+		vim.keymap.del("n", "A", { buffer = true })
+		vim.keymap.del("n", "I", { buffer = true })
+		vim.keymap.del("n", "H", { buffer = true })
+		vim.keymap.del("n", "L", { buffer = true })
 	end
 end, { desc = " 󰖶 Toggle Wrap & Colorcolumn" })
 

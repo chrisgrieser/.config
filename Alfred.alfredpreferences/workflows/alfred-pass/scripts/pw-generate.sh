@@ -14,3 +14,6 @@ else
 	# echo needed to skip confirmation, not to pass password again
 	pbpaste | pass insert --echo "$folder$entry_name" &>/dev/null
 fi
+
+# shellcheck disable=2154
+[[ "$auto_push" == "1" ]] && pass git push &>/dev/null

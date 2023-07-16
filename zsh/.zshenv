@@ -29,18 +29,8 @@ export MAIL_APP="Mimestream"
 export TICKER_APP="Ivory" # or Twitter/Mastodon
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# OpenAI API Key stored outside of public git repo (symlinked file)
-OPENAI_API_KEY=$(tr -d "\n" <"$DATA_DIR/private dotfiles/openai-api-key.txt")
-export OPENAI_API_KEY
-
-# gh-cli
-GITHUB_TOKEN=$(tr -d "\n" <"$DATA_DIR/private dotfiles/github_token.txt")
-export GITHUB_TOKEN
-
-# Chat PDF
-CHATPDF_API_KEY=$(tr -d "\n" <"$DATA_DIR/private dotfiles/chatpdf-api-key.txt")
-export CHATPDF_API_KEY
+# Safe API keys ouotside the dotfile repo
+source "$DATA_DIR/private dotfiles/api-keys.sh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -57,11 +47,4 @@ export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=32
 export PASSWORD_STORE_ENABLE_EXTENSIONS=false
 export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
-
-
-#───────────────────────────────────────────────────────────────────────────────
-# GH-CLI
-# https://cli.github.com/manual/gh_help_environment
-export GH_NO_UPDATE_NOTIFIER=1
-export GLAMOUR_STYLE="Dracula"
 

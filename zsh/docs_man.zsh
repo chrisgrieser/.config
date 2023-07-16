@@ -71,9 +71,7 @@ function ai() {
 
 	local query="$*"
 	# WARN do not use "$prompt" as a variable in zsh, since it's a reserved keyword
-	local the_prompt="The following request is concerned with shell scripting.
-		If your response includes codeblocks, do add 'bash' as language label to it.
-		Here is the request: $query"
+	local the_prompt="The following request is concerned with shell scripting. If your response includes codeblocks, do add 'bash' as language label to it. Here is the request: $query"
 	# https://platform.openai.com/docs/api-reference/making-requests
 	curl "https://api.openai.com/v1/chat/completions" \
 		-H "Content-Type: application/json" \
@@ -84,7 +82,7 @@ function ai() {
 			\"temperature\": 0
 		}" |
 		yq -r '.choices[].message.content' |
-		bat --language=markdown --style=grid --wrap=auto
+		bat --language=markdown --style=plain --wrap=auto
 }
 
 #───────────────────────────────────────────────────────────────────────────────
