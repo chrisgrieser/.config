@@ -66,9 +66,11 @@ function run(argv) {
 	}
 
 	// REQUEST NEW RESULTS
+	// --noua: disables user agent and fetches results faster
 	const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
 	const responseJson = JSON.parse(app.doShellScript(ddgrCommand));
 	const newResults = responseJson.map((/** @type {DdgrSearchResult} */ item) => {
+		const previewText = item.abstract.slice(0, 80); // smaller amount of data passed between queries
 		return {
 			title: item.title,
 			subtitle: item.url,
@@ -76,9 +78,7 @@ function run(argv) {
 			arg: item.url,
 			icon: { path: "duckduckgo.png" },
 			mods: {
-				cmd: {
-					subtitle: "⌘: " + item.abstract.slice(0, 100),
-				},
+				cmd: { subtitle: previewText },
 			},
 		};
 	});

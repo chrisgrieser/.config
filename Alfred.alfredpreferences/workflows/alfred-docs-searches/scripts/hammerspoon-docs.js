@@ -54,4 +54,6 @@ workArray.push({
 	uid: "getting-started",
 });
 
+workArray.reverse(); // so main categories are ranked further above
+
 JSON.stringify({ items: workArray });
