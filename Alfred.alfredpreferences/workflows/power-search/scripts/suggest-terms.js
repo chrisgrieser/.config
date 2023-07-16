@@ -16,13 +16,20 @@ else if (resultsToFetch > 25) resultsToFetch = 25;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// Build items
+/** @typedef {Object} DdgrSearchResult
+ * @property {string} title
+ * @property {string} abstract
+ * @property {string} url
+ */
+
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	// Check values from previous runs this session
 	const oldArg = $.NSProcessInfo.processInfo.environment.objectForKey("oldArg").js;
-	const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js;
+	const oldResults = JSON.parse(
+		$.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]",
+	);
 	const query = argv[0];
 
 	// regex ignore & ignore queries shorter than 3 characters
@@ -40,7 +47,7 @@ function run(argv) {
 		return JSON.stringify({
 			rerun: 0.1,
 			skipknowledge: true,
-			variables: { oldResults: oldResults, oldArg: query },
+			variables: { oldResults: JSON.stringify(oldResults), oldArg: query },
 			items: [searchForQuery],
 		});
 	}
@@ -51,20 +58,20 @@ function run(argv) {
 		return JSON.stringify({
 			rerun: 0.1,
 			skipknowledge: true,
-			variables: { oldResults: oldResults, oldArg: query },
+			variables: { oldResults: JSON.stringify(oldResults), oldArg: query },
 			items: [searchForQuery].concat(oldResults),
 		});
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	const responseJson = JSON.parse(app.doShellScript(`ddgr --num=${resultsToFetch} --json "${query}"`));
-
-	/** @type AlfredItem[] */
-	const inlineResults = responseJson.map((item) => {
+	const ddgrCommand = `ddgr --noua --unsafe --num=${resultsToFetch} --json "${query}"`
+	const responseJson = JSON.parse(app.doShellScript(ddgrCommand));
+	const newResults = responseJson.map((/** @type {DdgrSearchResult} */ item) => {
 		return {
 			title: item.title,
 			subtitle: item.url,
+			uid: item.url,
 			arg: item.url,
 		};
 	});
@@ -72,7 +79,7 @@ function run(argv) {
 	return JSON.stringify({
 		rerun: 0.1,
 		skipknowledge: true,
-		variables: { oldResults: inlineResults, oldArg: query },
-		items: inlineResults,
+		variables: { oldResults: JSON.stringify(newResults), oldArg: query },
+		items: [searchForQuery].concat(newResults),
 	});
 }

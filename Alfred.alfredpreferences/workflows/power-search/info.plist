@@ -1132,7 +1132,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Copied</string>
+				<string>📋 Copied</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1735,7 +1735,7 @@
 						<key>matchstring</key>
 						<string>^http</string>
 						<key>outputlabel</key>
-						<string>http</string>
+						<string>is URL</string>
 						<key>uid</key>
 						<string>46EF087E-3EB6-4E2D-B409-9F98E3BDE88C</string>
 					</dict>
@@ -2365,10 +2365,8 @@
 	</array>
 	<key>readme</key>
 	<string>## Suggest without keyword
-- `↵` search
-- `⌘↵` open first link ("Feeling Lucky")
-- `⌥↵` copy first link (requires [ddgr](https://github.com/jarun/ddgr))
-- `⇧↵` inline search (requires [ddgr](https://github.com/jarun/ddgr))
+- `↵` Search for Term / open URL
+- `⌥↵` Copy URL
 
 **Recommendations**
 - Set "Show fallback only when there are no other results", since this workflow also handles some fallbacks.
@@ -2681,6 +2679,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>F6591673-575D-4105-B38F-59AD1457EF23</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
 			<key>xpos</key>
 			<real>815</real>
 			<key>ypos</key>
@@ -2749,53 +2749,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>https://suggestqueries.google.com/complete/search?output=chrome&amp;ie=utf8&amp;oe=utf8&amp;q=</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>Google</string>
-						<string>https://suggestqueries.google.com/complete/search?output=chrome&amp;ie=utf8&amp;oe=utf8&amp;q=</string>
-					</array>
-					<array>
-						<string>DuckDuckGo</string>
-						<string>https://duckduckgo.com/ac/?q=</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string>from there suggestions should be retrieved</string>
-			<key>label</key>
-			<string>Suggestion Source</string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>suggestion_source</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>2</string>
-				<key>placeholder</key>
-				<string>2</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Maximum number of suggestions to show. (The fallback does not count as suggestion.)</string>
-			<key>label</key>
-			<string>Max Suggestions</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>max_suggestions</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string>5</string>
 				<key>placeholder</key>
 				<string>5</string>
@@ -2805,7 +2758,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Minimum number of characters before requesting suggestions. (A fallback is still shown below that number.)</string>
+			<string>Minimum number of characters before requesting inline results. (A fallback is still shown below that number.)</string>
 			<key>label</key>
 			<string>Min Query Length</string>
 			<key>type</key>
@@ -2817,9 +2770,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>9</string>
+				<string>4</string>
 				<key>placeholder</key>
-				<string>9</string>
+				<string>4</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>
