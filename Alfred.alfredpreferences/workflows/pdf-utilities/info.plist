@@ -1179,7 +1179,9 @@
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
-				<array/>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
 				<key>name</key>
 				<string>Upload to ChatPDF</string>
 			</dict>
@@ -1202,7 +1204,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>chatpdf.py</string>
+				<string>./scripts/chatpdf.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1232,9 +1234,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 		<key>085B81A5-959F-44F8-A3D1-8EC71E50E49E</key>
 		<dict>
 			<key>xpos</key>
-			<real>240</real>
+			<real>765</real>
 			<key>ypos</key>
-			<real>980</real>
+			<real>820</real>
 		</dict>
 		<key>0E4A0733-E898-4FB7-BC62-446FBD10A76E</key>
 		<dict>
@@ -1429,9 +1431,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 		<key>8C136177-41E3-44F3-8915-732F65DCE071</key>
 		<dict>
 			<key>xpos</key>
-			<real>35</real>
+			<real>560</real>
 			<key>ypos</key>
-			<real>980</real>
+			<real>820</real>
 		</dict>
 		<key>8D0217F4-B267-406C-B35B-B41C7663BA0D</key>
 		<dict>
