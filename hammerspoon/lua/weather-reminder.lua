@@ -9,13 +9,13 @@ local u = require("lua.utils")
 -- roughly Berlin-Tegel (no precise location due to pricacy)
 local latitude = 52
 local longitude = 13
-local insideTemp = 24
+local inTemp = 24
 local checkIntervalMins = 30
 
 --------------------------------------------------------------------------------
 
 local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):format(latitude, longitude)
-PreviousOutsideTemp = nil
+PrevOutTemp = nil -- no value on first run
 
 local function getOutsideTemp()
 	if not (u.betweenTime(18, 1) or u.betweenTime(8, 13)) then return end
@@ -24,13 +24,17 @@ local function getOutsideTemp()
 			print("Could not get weather data: " .. status)
 			return
 		end
-		local outsideTemp = hs.json.decode(body).weather.temperature
-		if not outsideTemp then return end
-		local outsideNowCoolerThanInside = outsideTemp < insideTemp
-			and not (PreviousOutsideTemp < insideTemp)
-		local outsideNowHotterThanInside = outsideTemp > insideTemp
-			and not (PreviousOutsideTemp > insideTemp)
-		PreviousOutsideTemp = outsideTemp -- save for next run
+		local outTemp = hs.json.decode(body).weather.temperature
+		if not outTemp then return end
+
+		-- first run has no value yet
+		if not PrevOutTemp then
+			PrevOutTemp = outTemp
+			return
+		end
+		local outsideNowCoolerThanInside = outTemp < inTemp and not (PrevOutTemp < inTemp)
+		local outsideNowHotterThanInside = outTemp > inTemp and not (PrevOutTemp > inTemp)
+		PrevOutTemp = outTemp
 
 		if outsideNowCoolerThanInside then
 			hs.alert.show("🌡️🔵 Outside now cooler than inside.")

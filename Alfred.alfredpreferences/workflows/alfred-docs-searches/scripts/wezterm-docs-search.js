@@ -17,6 +17,7 @@ const docPathRegex = /^docs\/.*\.md$/i;
 
 const workArray = JSON.parse(app.doShellScript(`curl -s "${docsURL}"`))
 	.tree.filter(file => docPathRegex.test(file.path))
+	.reverse()
 	.map(entry => {
 		const subsite = entry.path.slice(5, -3);
 		const parts = subsite.split("/");
