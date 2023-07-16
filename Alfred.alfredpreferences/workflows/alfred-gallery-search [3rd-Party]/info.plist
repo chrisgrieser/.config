@@ -168,7 +168,11 @@ readonly release_id="$(osascript -l JavaScript -e 'function run(argv) { return J
 readonly download_url="$(osascript -l JavaScript -e 'function run(argv) { return JSON.parse(argv[0])["assets"][0]["browser_download_url"] }' "${latest_release}")"
 
 # Exit early if release has not changed
-[[ "${release_id}" == "$(&lt; "${release_id_file}")" ]] &amp;&amp; show_data
+if [[ "${release_id}" == "$(&lt; "${release_id_file}")" ]]
+then
+  touch "${cache_file}" # Reset cache age
+  show_data
+fi
 
 # Download and update cache
 curl --silent --location "${download_url}" | tar --directory "${alfred_workflow_cache}" --extract
@@ -317,7 +321,7 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2023.2</string>
+	<string>2023.3</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/alfred-gallery-workflow/</string>
 </dict>
