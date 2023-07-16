@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.numi</string>
+	<string>de.chris-grieser.power-calc</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
@@ -181,11 +181,11 @@
 	<key>createdby</key>
 	<string>Chrsi Grieser</string>
 	<key>description</key>
-	<string>Calculator</string>
+	<string>Better Calculator using Numi</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Numi</string>
+	<string>Power Calc</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -818,7 +818,10 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>#### Recommendation
+	<string>## Usage
+Just enter any calculation into Alfred. No specific keyword is needed.
+
+**Recommendation**  
 Disable Alfred's bultin Calculator, since this workflow works is a drop-in replacement for it.</string>
 	<key>uidata</key>
 	<dict>
@@ -896,7 +899,7 @@ Disable Alfred's bultin Calculator, since this workflow works is a drop-in repla
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>bracket calculations</string>
+			<string>brackets in calculations</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
