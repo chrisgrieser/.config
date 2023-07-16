@@ -66,7 +66,7 @@ function M.moveResize(win, pos)
 	end
 
 	-- resize with safety redundancy
-	u.runWithDelays({ 0, 0.2, 0.4, 0.6 }, function()
+	u.runWithDelays({ 0, 0.3, 0.6, 0.9, 1.2 }, function()
 		if M.CheckSize(win, pos) then return end
 		win:moveToUnit(pos)
 	end)
