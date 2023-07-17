@@ -560,7 +560,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
+				<string>8A00993D-B14A-48A7-85D6-94E4C599DB11</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -2154,6 +2154,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{var:search_site}{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>8A00993D-B14A-48A7-85D6-94E4C599DB11</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -2377,6 +2398,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>xpos</key>
 			<real>165</real>
+			<key>ypos</key>
+			<real>1250</real>
+		</dict>
+		<key>8A00993D-B14A-48A7-85D6-94E4C599DB11</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>455</real>
 			<key>ypos</key>
 			<real>1250</real>
 		</dict>
