@@ -66,7 +66,9 @@ matches:
     replace: ⎋
   - trigger: "!tab"
     replace: ↹
-  - triggers: ["!return", "!enter"]
-    replace: ↵
   - trigger: "!backspace"
     replace: ⌫
+ # The other return-like symbols either have an accessibility problem (VoiceOver
+ # reads them as arrow shape) or are displayed as emoji on GitHub.
+  - triggers: ["!return", "!enter"]
+    replace: ⏎
