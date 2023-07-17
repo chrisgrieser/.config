@@ -167,13 +167,17 @@ function run(argv) {
 
 	// anystyle
 	else if (mode === "parse") {
+		// validate installation
+		const anystyleInstalled = app.doShellScript("command -v anystyle || true") !== ""
+		if (!anystyleInstalled) return "anystyle not found";
+
 		// INFO anystyle can't read STDIN, so this has to be written to a file
 		// https://github.com/inukshuk/anystyle-cli#anystyle-help-parse
 		const tempPath = $.getenv("alfred_workflow_cache") + "/temp.txt";
 		writeToFile($.getenv("raw_entry"), tempPath);
 		const response = app.doShellScript(`anystyle --stdout --format=csl parse "${tempPath}"`);
-		const data = JSON.parse(response)[0];
 
+		const data = JSON.parse(response)[0];
 		entry.title = data.title;
 		entry.type = data.type.replace(/-?journal-?/, ""); // "journal-article" -> "article"
 		entry.author = (data.authors || data.author || [])
@@ -198,14 +202,14 @@ function run(argv) {
 	if (entry.publisher) entry.publisher = entry.publisher.replace(/gmbh|ltd|publications?|llc/i, "").trim();
 	if (entry.pages) entry.pages = entry.pages.replace(/(\d+)[^\d]+?(\d+)/, "$1--$2"); // double-dash
 
-	// Generate citekey & enclosing lines
+	// Generate citekey
 	let citekey = generateCitekey(entry.author, entry.year);
 	citekey = ensureUniqueCitekey(citekey, libraryPath);
+
+	// JSON -> bibtex
 	const firstLine = `@${entry.type}{${citekey},`;
 	const keywordsLine = "\tkeywords = {},";
 	const lastLine = "}";
-
-	// create bibtex text from entry object
 	const propertyLines = [];
 	for (const key in entry) {
 		if (key === "type") continue; // already inserted in first line
