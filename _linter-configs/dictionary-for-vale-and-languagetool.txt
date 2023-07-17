@@ -118,3 +118,5 @@ performant
 fn
 ⌘fn
 ⌘Y
+Alternatively
+frequently
