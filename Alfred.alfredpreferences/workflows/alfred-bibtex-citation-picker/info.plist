@@ -219,7 +219,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>09C552E1-E9BA-418A-931E-D134C3FA1A7F</string>
+				<string>EC03EB6D-B60A-498B-A452-0666589A27EE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -245,7 +245,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>09C552E1-E9BA-418A-931E-D134C3FA1A7F</string>
+				<string>EC03EB6D-B60A-498B-A452-0666589A27EE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -878,6 +878,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>986EF1F7-54A1-4C67-A490-4DFCC60FA328</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EC03EB6D-B60A-498B-A452-0666589A27EE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>09C552E1-E9BA-418A-931E-D134C3FA1A7F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1546,6 +1559,23 @@ JSON.stringify({ 'items': entry_array });
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>09C552E1-E9BA-418A-931E-D134C3FA1A7F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>cleardebuggertext</key>
+				<true/>
+				<key>processoutputs</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.debug</string>
+			<key>uid</key>
+			<string>EC03EB6D-B60A-498B-A452-0666589A27EE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2755,7 +2785,7 @@ In some cases, you may need to restart Alfred for this change to take effect.
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>235</real>
+			<real>275</real>
 			<key>ypos</key>
 			<real>470</real>
 		</dict>
@@ -3328,6 +3358,15 @@ to set a hotkey for adding DOI/ISBN</string>
 			<real>1250</real>
 			<key>ypos</key>
 			<real>340</real>
+		</dict>
+		<key>EC03EB6D-B60A-498B-A452-0666589A27EE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>470</real>
 		</dict>
 		<key>F46030BA-A511-425D-99AB-40C220A6F0F3</key>
 		<dict>

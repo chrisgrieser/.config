@@ -38,19 +38,6 @@ function writeToFile(text, filepath) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /**
- * @param {string[]} arr
- * @param {string} property
- */
-function parseBibtexProperty(arr, property) {
-	const allProperties = arr
-		.map((/** @type {string} */ line) => line.trim())
-		.filter((/** @type {string} */ prop) => prop.startsWith(property + " "));
-	if (!allProperties.length) return "";
-	const value = allProperties[0].split("=")[1].replace(/{|}|,$/g, "").trim();
-	return value;
-}
-
-/**
  * @param {string} citekey
  * @param {string} libraryPath
  */
@@ -59,14 +46,14 @@ function ensureUniqueCitekey(citekey, libraryPath) {
 	const citekeyArray = readFile(libraryPath)
 		.split("\n")
 		.filter((line) => line.startsWith("@"))
-		.map((line) => line.split("{")[1].replaceAll(",", ""));
+		.map((line) => line.split("{")[1].slice(0, -1));
 
 	const alphabet = "abcdefghijklmnopqrstuvwxyz";
 	let i = -1;
 	let nextCitekey = citekey;
 	while (citekeyArray.includes(nextCitekey)) {
-		let nextLetter = alphabet[i];
-		if (i === -1) nextLetter = ""; // first loop
+		const firstLoop = i === -1
+		const nextLetter = firstLoop ? "" : alphabet[i];
 		nextCitekey = citekey + nextLetter;
 		i++;
 		if (i > alphabet.length - 1) break; // in case the citekey is already used 27 times (lol)
@@ -75,19 +62,14 @@ function ensureUniqueCitekey(citekey, libraryPath) {
 }
 
 /**
- * @param {string} authors
+ * @param {string} authors all authors in one string joined with " and "
  * @param {number} year
  */
 function generateCitekey(authors, year) {
-	const yearStr = year ? year.toString() : "N.D.";
-	if (!authors) authors = "NoAuthor";
+	const yearStr = year ? year.toString() : "NY";
 
-	let authorStr;
 	const lastNameArr = [];
-	const invalidLastName = authors.match(/,.*,/) && !authors.includes("and"); // not complying naming standard with and as delimiter
-
-	if (authors === "NoAuthor") lastNameArr[0] = "NoAuthor";
-	else if (invalidLastName) lastNameArr[0] = "Invalid";
+	if (!authors) lastNameArr.push("NoAuthor");
 	else {
 		authors
 			.split(" and ") // "and" used as delimiter in bibtex for names
@@ -98,11 +80,7 @@ function generateCitekey(authors, year) {
 				lastNameArr.push(lastName);
 			});
 	}
-	if (lastNameArr.length < 3) authorStr = lastNameArr.join("");
-	else authorStr = lastNameArr[0] + "EtAl";
-
-	// clean up name
-	authorStr = authorStr
+	const authorStr = (lastNameArr.length < 3 ? lastNameArr.join("") : lastNameArr[0] + "EtAl")
 		// strip diacritics https://stackoverflow.com/a/37511463
 		.normalize("NFD")
 		.replace(/[\u0300-\u036f]/g, "")
@@ -145,18 +123,18 @@ function run(argv) {
 		const data = JSON.parse(response);
 
 		entry.publisher = data.publisher;
-		entry.author = data.authors
+		entry.author = (data.authors || data.author || [])
 			.map((/** @type {{ given: any; family: any; }} */ author) => `${author.given} ${author.family}`)
 			.join(" and ");
 		const published = data["published-print"] || data["published-online"] || data.published || null;
-		if (published) entry.year = parseInt(published["data-parts"][0]);
+		entry.year = published ? published["date-parts"][0][0] : "NY";
 		entry.doi = doi[0];
 		entry.url = data.URL || doiURL;
-		entry.type = data.type;
+		entry.type = data.type.replace(/-?journal-?/, ""); // "journal-article" -> "article"
 		entry.title = data.title;
 		if (entry.type.includes("article")) {
 			entry.journal = data["container-title"];
-			entry.issue = data.issue;
+			entry.number = data.issue;
 			entry.volume = data.volume;
 			entry.pages = data.page;
 		}
@@ -177,7 +155,7 @@ function run(argv) {
 
 		entry.type = "book";
 		entry.year = parseInt(data.publishedDate.split("-")[0]);
-		entry.author = data.authors.join(" and ");
+		entry.author = (data.authors || data.author || []).join(" and ");
 		entry.isbn = parseInt(isbn);
 		entry.publisher = data.publisher;
 		entry.title = data.title;
@@ -199,26 +177,27 @@ function run(argv) {
 
 	// cleanup
 	entry.publisher = entry.publisher.replace(/gmbh|ltd|publications|llc/, "").trim();
-	entry.pages = entry.pages.replace(/(\d+).+(\d+)/gm, "$1--$2"); // double-dash
+	entry.pages = entry.pages.replace(/(\d+)[^\d]+?(\d+)/, "$1--$2"); // double-dash
 	entry.title = entry.title.replace(/([A-Z]{2,})/g, "{$1}"); // escape uppercase words
 
-	// Generate citekey
-	let newCitekey = generateCitekey(entry.author, entry.year);
-	newCitekey = ensureUniqueCitekey(newCitekey, libraryPath);
+	// Generate citekey & enclosing lines
+	let citekey = generateCitekey(entry.author, entry.year);
+	citekey = ensureUniqueCitekey(citekey, libraryPath);
 
 	// create lines
-	const firstLine = `@${entry.type}{${entry.newCitekey},`;
+	const firstLine = `@${entry.type}{${citekey},`;
 	const keywordsLine = "\tkeywords = {},";
 	const lastLine = "}";
 	const propertyLines = [];
 	for (const key in entry) {
+		if (key === "type") continue; // already inserted in first line
 		let value = entry[key];
 		if (typeof value === "string") value = "{" + value + "}";
 		propertyLines.push(`\t${key} = ${value},`);
 	}
-	propertyLines.sort()
+	propertyLines.sort();
 	// remove comma from last entry
-	propertyLines[propertyLines.length - 1] = propertyLines[propertyLines.length - 1].slice(0, -1)
+	propertyLines[propertyLines.length - 1] = propertyLines[propertyLines.length - 1].slice(0, -1);
 
 	// Write result
 	const newEntryAsBibTex = [firstLine, keywordsLine, ...propertyLines, lastLine].join("\n");
@@ -227,10 +206,10 @@ function run(argv) {
 	// Copy Citation
 	const copyCitation = $.getenv("copy_citation_on_adding_entry") === "1";
 	if (copyCitation) {
-		const pandocCitation = `[@${newCitekey}]`;
+		const pandocCitation = `[@${citekey}]`;
 		app.setTheClipboardTo(pandocCitation);
 	}
 
 	delay(0.1); // delay to ensure the file is written
-	return newCitekey; // pass for opening function
+	return citekey; // pass for opening function
 }
