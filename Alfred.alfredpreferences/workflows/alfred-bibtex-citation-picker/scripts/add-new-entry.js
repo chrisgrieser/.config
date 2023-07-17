@@ -196,13 +196,13 @@ function run(argv) {
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
-	// INSERT CONTENT TO APPEND
+	// CONSTRUCT BIBTEX ENTRY
 
 	// cleanup
 	if (entry.publisher) entry.publisher = entry.publisher.replace(/gmbh|ltd|publications?|llc/i, "").trim();
 	if (entry.pages) entry.pages = entry.pages.replace(/(\d+)[^\d]+?(\d+)/, "$1--$2"); // double-dash
 
-	// Generate citekey
+	// citekey
 	let citekey = generateCitekey(entry.author, entry.year);
 	citekey = ensureUniqueCitekey(citekey, libraryPath);
 
@@ -215,7 +215,10 @@ function run(argv) {
 		if (key === "type") continue; // already inserted in first line
 		let value = entry[key];
 		// escape bibtex values
-		if (typeof value === "string") value = "{" + value.replace(/([A-Z]{2,})/g, "{$1}") + "}";
+		if (typeof value === "string") {
+			value = value.replace(/([A-Z]\S*)/g, "{$1}"); // uppercase in string
+			value = "{" + value + "}"; // full string
+		}
 		propertyLines.push(`\t${key} = ${value},`);
 	}
 	propertyLines.sort();
