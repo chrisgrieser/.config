@@ -130,11 +130,8 @@
 	"for .. in (object-key)": {
 		"prefix": "for .. in (object-key)",
 		"body": [
-			"for (const ${1:key} in ${2:object}) {",
-			"\tif (${2:object}.hasOwnProperty(${1:key})) {",
-			"\t\tconst ${3:element} = ${2:object}[${1:key}];",
-			"\t\t$0",
-			"\t}",
+			"for (const {1:key} in ${2:object}) {",
+			"\tconst value = ${2:object}[${1:key}];",
 			"}"
 		]
 	},
