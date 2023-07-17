@@ -129,43 +129,43 @@ function run(argv) {
 	const libraryPath = $.getenv("bibtex_library_path").replace(/^~/, app.pathTo("home folder"));
 	//───────────────────────────────────────────────────────────────────────────
 
-	let bibtexEntry;
-	let newCitekey;
-
+	const entry = {};
 	const isDOI = doiRegex.test(input);
 	const isISBN = isbnRegex.test(input);
 	const mode = $.getenv("mode");
 	if (!(isDOI || isISBN || mode === "parse")) return "input invalid";
 
 	// DOI
+	// https://citation.crosscite.org/docs.html
 	if (isDOI) {
 		const doi = input.match(doiRegex);
 		if (!doi) return "DOI invalid";
 		const doiURL = "https://doi.org/" + doi[0];
-		bibtexEntry = app.doShellScript(`curl -sLH "Accept: application/x-bibtex" "${doiURL}"`); // https://citation.crosscite.org/docs.html
-		if (!bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("doi not found"))
+		const response = app.doShellScript(`curl -sL -H "Accept: application/vnd.citationstyles.csl+json" "${doiURL}"`);
+		if (!response.includes("@") || response.toLowerCase().includes("doi not found"))
 			return "DOI not found";
+		const entryAllData = JSON.parse(response);
+		entry.
 
-		// ISBN: ebooks.de & Google Books API
+		// ISBN: Google Books
+		// https://developers.google.com/books/docs/v1/using
 	} else if (isISBN) {
 		const isbn = input;
-		bibtexEntry = app.doShellScript(`curl -sL "https://www.ebook.de/de/tools/isbn2bibtex?isbn=${isbn}"`);
 
-		const notFound = !bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("not found");
-		// Alternatively, try Google Books https://developers.google.com/books/docs/v1/using
-		if (notFound) {
-			const response = app.doShellScript(`curl -sL "https://www.googleapis.com/books/v1/volumes?q=isbn${isbn}"`);
-			if (!response) return "ISBN not found";
-			const bibtexData = JSON.parse(response)
-			if (bibtexData.totalItems === 0) return "ISBN not found";
-			const bibtexMetadata = bibtexData.items[0].volumeInfo
-			const bibtexEntry = `
-
-`
-
-
-			return "ISBN not found";
-		}
+		// INFO ebooks.de API not working anymore :( https://www.ebook.de/de/tools/isbn2bibtex?isbn=9781471181979
+		const response = app.doShellScript(
+			`curl -sL "https://www.googleapis.com/books/v1/volumes?q=isbn${isbn}"`,
+		);
+		if (!response) return "ISBN not found";
+		const entryData = JSON.parse(response);
+		if (entryData.totalItems === 0) return "ISBN not found";
+		const entryAllData = entryData.items[0].volumeInfo;
+		entry.type = "book"
+		entry.year = parseInt(entryAllData.publishedDate.split("-")[0]);
+		entry.author = entryAllData.authors.join(" and ");
+		entry.isbn = parseInt(isbn);
+		entry.publisher = entryAllData.publisher;
+		entry.title = entryAllData.title;
 
 		// parse via anystyle
 	} else if (mode === "parse") {
@@ -210,7 +210,7 @@ function run(argv) {
 	newProps[newProps.length - 1] = newProps.at(-1).slice(0, -1);
 
 	// Generate citekey, enclose entry with first/last line
-	newCitekey = generateCitekey(newProps);
+	let newCitekey = generateCitekey(newProps);
 	newCitekey = ensureUniqueCitekey(newCitekey, libraryPath);
 	newProps.unshift(firstLine.split("{")[0] + "{" + newCitekey + ",");
 	newProps.push("}");
@@ -226,9 +226,9 @@ function run(argv) {
 	appendToFile(newEntry, libraryPath);
 
 	// Copy Citation
-	const copyCitation = $.getenv("copy_citation_on_adding_entry") === "1"
+	const copyCitation = $.getenv("copy_citation_on_adding_entry") === "1";
 	if (copyCitation) {
-		const pandocCitation = `[@${newCitekey}]`
+		const pandocCitation = `[@${newCitekey}]`;
 		app.setTheClipboardTo(pandocCitation);
 	}
 
