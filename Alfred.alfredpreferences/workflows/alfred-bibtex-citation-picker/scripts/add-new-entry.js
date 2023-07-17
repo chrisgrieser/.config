@@ -146,12 +146,26 @@ function run(argv) {
 		if (!bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("doi not found"))
 			return "DOI not found";
 
-		// ISBN
+		// ISBN: ebooks.de & Google Books API
 	} else if (isISBN) {
 		const isbn = input;
 		bibtexEntry = app.doShellScript(`curl -sL "https://www.ebook.de/de/tools/isbn2bibtex?isbn=${isbn}"`);
-		if (!bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("Not found"))
+
+		const notFound = !bibtexEntry.includes("@") || bibtexEntry.toLowerCase().includes("not found");
+		// Alternatively, try Google Books https://developers.google.com/books/docs/v1/using
+		if (notFound) {
+			const response = app.doShellScript(`curl -sL "https://www.googleapis.com/books/v1/volumes?q=isbn${isbn}"`);
+			if (!response) return "ISBN not found";
+			const bibtexData = JSON.parse(response)
+			if (bibtexData.totalItems === 0) return "ISBN not found";
+			const bibtexMetadata = bibtexData.items[0].volumeInfo
+			const bibtexEntry = `
+
+`
+
+
 			return "ISBN not found";
+		}
 
 		// parse via anystyle
 	} else if (mode === "parse") {
