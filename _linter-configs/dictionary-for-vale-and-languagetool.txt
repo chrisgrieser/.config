@@ -120,3 +120,7 @@ fn
 ⌘Y
 Alternatively
 frequently
+Ejectable
+address
+ejectable
+⌘fn⏎

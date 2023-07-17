@@ -1697,7 +1697,7 @@ Display volumes directly via `vol`.
 		<string> ⟡ </string>
 	</dict>
 	<key>version</key>
-	<string>1.0.6</string>
+	<string>1.0.7</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
