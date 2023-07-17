@@ -52,7 +52,7 @@ function ensureUniqueCitekey(citekey, libraryPath) {
 	let i = -1;
 	let nextCitekey = citekey;
 	while (citekeyArray.includes(nextCitekey)) {
-		const firstLoop = i === -1
+		const firstLoop = i === -1;
 		const nextLetter = firstLoop ? "" : alphabet[i];
 		nextCitekey = citekey + nextLetter;
 		i++;
@@ -99,8 +99,9 @@ function run(argv) {
 	const doiRegex = /\b10.\d{4,9}\/[-._;()/:A-Z0-9]+(?=$|[?/ ])/i; // https://www.crossref.org/blog/dois-and-matching-regular-expressions/
 	const isbnRegex = /^[\d-]{9,}$/;
 
-	const input = argv.join("").trim();
+	const input = argv[0].trim();
 	const libraryPath = $.getenv("bibtex_library_path").replace(/^~/, app.pathTo("home folder"));
+
 	//───────────────────────────────────────────────────────────────────────────
 
 	const entry = {};
@@ -169,30 +170,41 @@ function run(argv) {
 		// https://github.com/inukshuk/anystyle-cli#anystyle-help-parse
 		const tempPath = $.getenv("alfred_workflow_cache") + "/temp.txt";
 		writeToFile($.getenv("raw_entry"), tempPath);
-		const response = app.doShellScript(`anystyle --stdout --format=json parse "${tempPath}"`);
+		const response = app.doShellScript(`anystyle --stdout --format=csl parse "${tempPath}"`);
+		const data = JSON.parse(response);
+
+		entry.type = data.type.replace(/-?journal-?/, ""); // "journal-article" -> "article"
+		entry.title = data.title;
+		if (entry.type === "article")) {
+			entry.journal = data["container-title"];
+			entry.number = data.issue;
+			entry.volume = data.volume;
+			entry.pages = data.page;
+		}
+		
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
 	// INSERT CONTENT TO APPEND
 
 	// cleanup
-	entry.publisher = entry.publisher.replace(/gmbh|ltd|publications|llc/, "").trim();
+	entry.publisher = entry.publisher.replace(/gmbh|ltd|publications?|llc/i, "").trim();
 	entry.pages = entry.pages.replace(/(\d+)[^\d]+?(\d+)/, "$1--$2"); // double-dash
-	entry.title = entry.title.replace(/([A-Z]{2,})/g, "{$1}"); // escape uppercase words
 
 	// Generate citekey & enclosing lines
 	let citekey = generateCitekey(entry.author, entry.year);
 	citekey = ensureUniqueCitekey(citekey, libraryPath);
-
-	// create lines
 	const firstLine = `@${entry.type}{${citekey},`;
 	const keywordsLine = "\tkeywords = {},";
 	const lastLine = "}";
+
+	// create bibtex text from entry object
 	const propertyLines = [];
 	for (const key in entry) {
 		if (key === "type") continue; // already inserted in first line
 		let value = entry[key];
-		if (typeof value === "string") value = "{" + value + "}";
+		// escape bibtex values
+		if (typeof value === "string") value = "{" + value.replace(/([A-Z]{2,})/g, "{$1}") + "}";
 		propertyLines.push(`\t${key} = ${value},`);
 	}
 	propertyLines.sort();
