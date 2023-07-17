@@ -187,9 +187,9 @@ local function telescopeConfig()
 				auto_depth = true, -- unlimited depth as soon as prompt is non-empty
 				hidden = true,
 				display_stat = false,
-				git_status = true, -- seems to sometimes be buggy
+				git_status = true, -- seems to be buggy sometimes
 				group = true,
-				hide_parent_dir = true,
+				hide_parent_dir = false, -- "../"
 				select_buffer = true,
 				mappings = {
 					i = {
