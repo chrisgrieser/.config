@@ -1164,22 +1164,22 @@ List all available tools via `atop` and select one. Alternatively, you can also 
 
 ### Process Management
 Display processes directly via `top`.  
-&lt;kbd&gt;↩︎&lt;/kbd&gt;: Kill the process.  
-&lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩︎&lt;/kbd&gt;: Force kill the process.  
-&lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;↩︎&lt;/kbd&gt;: Kill all processes with the same name.  
-&lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;↩︎&lt;/kbd&gt;: If the process belongs to a regular app, restart the app.  
-&lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩︎&lt;/kbd&gt;: Copy the PID.  
+&lt;kbd&gt;⏎&lt;/kbd&gt;: Kill the process.  
+&lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Force kill the process.  
+&lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Kill all processes with the same name.  
+&lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: If the process belongs to a regular app, restart the app.  
+&lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the PID.  
 
 ### Bluetooth Devices
-Display processes directly via `blue`.  
-&lt;kbd&gt;↩︎&lt;/kbd&gt;: If `blueutil` is installed, toggle the connection state. Otherwise, open the bluetooth preferences.  
-&lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩︎&lt;/kbd&gt;: Copy the device address.  
+Display bluetooth devices directly via `blue`.  
+&lt;kbd&gt;⏎&lt;/kbd&gt;: If `blueutil` is installed, toggle the connection state. Otherwise, open the bluetooth preferences.  
+&lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the device address.  
 
 ### Ejectable Volumes
-Display processes directly via `vol`.  
-&lt;kbd&gt;↩︎&lt;/kbd&gt;: Open the Volume in Finder.  
-&lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩︎&lt;/kbd&gt;: Browse the Volume in the Terminal, [using the Terminal app you have configured in your Alfred preferences](https://www.alfredapp.com/help/features/terminal/).  
-&lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;↩︎&lt;/kbd&gt;: Eject the Volume.
+Display volumes directly via `vol`.  
+&lt;kbd&gt;⏎&lt;/kbd&gt;: Open the Volume in Finder.  
+&lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Browse the Volume in the Terminal, [using the Terminal app you have configured in your Alfred preferences](https://www.alfredapp.com/help/features/terminal/).  
+&lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Eject the Volume.
 
 
 ---
