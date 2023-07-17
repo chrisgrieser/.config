@@ -29,7 +29,8 @@
 	},
 	"enter": {
 		"prefix": "enter",
-		"body": "↵"
+		"body": "⏎",
+		"description": "The other return-like symbols either have an accessibility problem (VoiceOver reads them as arrow shape) or are displayed as emoji on GitHub."
 	},
 	"modeline (vim)": {
 		"prefix": "modeline",
