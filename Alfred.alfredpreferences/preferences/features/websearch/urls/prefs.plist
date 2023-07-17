@@ -2,13 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>enabled</key>
-	<false/>
 	<key>historyEnabled</key>
 	<false/>
 	<key>historyExpiry</key>
 	<integer>0</integer>
-	<key>schemesEnabled</key>
-	<true/>
 </dict>
 </plist>
