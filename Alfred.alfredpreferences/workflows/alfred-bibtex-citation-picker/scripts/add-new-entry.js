@@ -141,55 +141,60 @@ function run(argv) {
 		const doi = input.match(doiRegex);
 		if (!doi) return "DOI invalid";
 		const doiURL = "https://doi.org/" + doi[0];
-		const response = app.doShellScript(`curl -sL -H "Accept: application/vnd.citationstyles.csl+json" "${doiURL}"`);
-		if (!response.includes("@") || response.toLowerCase().includes("doi not found"))
-			return "DOI not found";
-		const entryAllData = JSON.parse(response);
-		entry.
+		const response = app.doShellScript(
+			`curl -sL -H "Accept: application/vnd.citationstyles.csl+json" "${doiURL}"`,
+		);
+		if (!response.includes("@") || response.toLowerCase().includes("doi not found")) return "DOI not found";
+		const data = JSON.parse(response);
 
-		// ISBN: Google Books
-		// https://developers.google.com/books/docs/v1/using
-	} else if (isISBN) {
-		const isbn = input;
+		entry.publisher = data.publisher;
+		entry.issue = data.issue
+		entry.volume = data.volume
+		entry.pages = data.page
+		entry.author = data.authors.map((/** @type {{ given: any; family: any; }} */ author) => `${author.given} ${author.family}`).join(" and ");
+		const published = data["published-print"] || data["published-online"] || data.published || null;
+		if (published) entry.year = parseInt(published["data-parts"][0]);
+		entry.doi = doi[0];
+		entry.url = data.URL || doiURL;
+		entry.type = data.type
+		entry.title = data.title
+		if (entry.type === "journal-article") entry.journal = data["container-title"]
+	}
 
+	// ISBN: Google Books
+	// https://developers.google.com/books/docs/v1/using
+	else if (isISBN) {
 		// INFO ebooks.de API not working anymore :( https://www.ebook.de/de/tools/isbn2bibtex?isbn=9781471181979
+		const isbn = input;
 		const response = app.doShellScript(
 			`curl -sL "https://www.googleapis.com/books/v1/volumes?q=isbn${isbn}"`,
 		);
 		if (!response) return "ISBN not found";
-		const entryData = JSON.parse(response);
-		if (entryData.totalItems === 0) return "ISBN not found";
-		const entryAllData = entryData.items[0].volumeInfo;
-		entry.type = "book"
-		entry.year = parseInt(entryAllData.publishedDate.split("-")[0]);
-		entry.author = entryAllData.authors.join(" and ");
-		entry.isbn = parseInt(isbn);
-		entry.publisher = entryAllData.publisher;
-		entry.title = entryAllData.title;
+		const fullData = JSON.parse(response);
+		if (fullData.totalItems === 0) return "ISBN not found";
+		const data = fullData.items[0].volumeInfo;
 
-		// parse via anystyle
-	} else if (mode === "parse") {
+		entry.type = "book";
+		entry.year = parseInt(data.publishedDate.split("-")[0]);
+		entry.author = data.authors.join(" and ");
+		entry.isbn = parseInt(isbn);
+		entry.publisher = data.publisher;
+		entry.title = data.title;
+		if (data.subtitle) entry.title += ". " + data.subtitle;
+		if (data.items[0].accessInfo.viewability !== "NO_PAGES") entry.url = data.previewLink;
+	}
+
+	// anystyle
+	else if (mode === "parse") {
 		// INFO anystyle can't read STDIN, so this has to be written to a file
 		// https://github.com/inukshuk/anystyle-cli#anystyle-help-parse
 		const tempPath = $.getenv("alfred_workflow_cache") + "/temp.txt";
 		writeToFile($.getenv("raw_entry"), tempPath);
-		bibtexEntry = app.doShellScript(`anystyle --stdout --format=bib parse "${tempPath}"`);
+		const response = app.doShellScript(`anystyle --stdout --format=bib parse "${tempPath}"`);
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
 	// INSERT CONTENT TO APPEND
-
-	// cleaning
-	bibtexEntry = bibtexEntry
-		.replace(/^ {2}/gm, "\t") // tab indentation
-		.replace(/^\s*\w+ =/gm, (/** @type {string} */ field) => field.toLowerCase()) // lowercase all keys
-		.replace(/(\tpublisher.*?) ?(?:gmbh|ltd|publications|llc)(}*,)/im, "$1$2") // publisher garbage
-		.replace(/ ?{}/g, "") // leftover from publisher cleanup
-		.replace("\tdate =", "\tyear =") // consistently "year"
-		.replace(/\tyear = \{?(\d{4}).*\}?/g, "\tyear = $1,") // clean year key
-		.replaceAll("%2F", "/") // fix for URL key in some DOIs
-		.replace(/amp\$\\mathsemicolon\$/g, "") // invalid bibtex
-		.replace(/(?!^)\}$/gm, "},"); // add trailing comma to all properties
 
 	// convert to array + remove first/last line (for correct key sorting)
 	let newProps = bibtexEntry.split(/[\n\r]/);
