@@ -16,7 +16,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -39,7 +39,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -62,7 +62,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -85,7 +85,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -134,7 +134,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -157,7 +157,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -180,7 +180,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -203,7 +203,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -226,7 +226,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -249,7 +249,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -285,7 +285,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -321,7 +321,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -344,7 +344,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -367,7 +367,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -390,7 +390,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -413,7 +413,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -436,7 +436,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -459,7 +459,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -495,7 +495,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -518,7 +518,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -541,26 +541,13 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>CAD4819F-819C-4D59-900C-9B6853A422F6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8A00993D-B14A-48A7-85D6-94E4C599DB11</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -579,7 +566,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -602,7 +589,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -625,7 +612,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -648,7 +635,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -671,7 +658,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy First Link</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -866,55 +853,6 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>b</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/inline-results.js "b$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>6EDDEC35-4391-49A3-A93F-99B48265C880</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
 				<string>c</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -994,6 +932,55 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>1CB74B29-BB4E-486B-99D5-073652674E8A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>b</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "b$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>6EDDEC35-4391-49A3-A93F-99B48265C880</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1347,55 +1334,6 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>k</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/inline-results.js "k$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>2DFB0296-2869-409D-B8A9-C746D5234521</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
 				<string>l</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -1475,6 +1413,55 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>42DF62FE-1AE2-47B2-A1B4-7B65AAE140E1</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>k</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "k$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2DFB0296-2869-409D-B8A9-C746D5234521</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1858,6 +1845,55 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
+				<string>s</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "s$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2E96C95F-633A-4146-9D9E-604D5251F43B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
 				<string>t</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -1907,7 +1943,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>s</string>
+				<string>v</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1919,7 +1955,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/inline-results.js "s$*"</string>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "v$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1936,7 +1972,7 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>2E96C95F-633A-4146-9D9E-604D5251F43B</string>
+			<string>B682BF1F-2199-4A30-8720-E0AA78A620BA</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -2054,70 +2090,6 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>v</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/inline-results.js "v$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>B682BF1F-2199-4A30-8720-E0AA78A620BA</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>subtext</key>
-				<string>Fallback</string>
-				<key>text</key>
-				<string>Powersearch: {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.fallback</string>
-			<key>uid</key>
-			<string>CAD4819F-819C-4D59-900C-9B6853A422F6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
 				<string>z</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -2150,27 +2122,6 @@
 			<string>7E7EF28F-85AB-49A2-BE26-8F12E3EDED0F</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{var:search_site}{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>8A00993D-B14A-48A7-85D6-94E4C599DB11</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2227,11 +2178,6 @@
 - &lt;kbd&gt;⏎&lt;/kbd&gt; Search for Term / open URL
 - &lt;kbd&gt;⌘&lt;/kbd&gt; Show Preview Text for Search Result
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Copy URL
-
-**Recommended Alfred Settings**  
-- Default Results: Set `Show fallback only when there are no other results`, since this workflow mostly covers that already.
-- Web Search: Disable entering URLs, since this workflow mostly covers that already.
-- Advanced Settings: Assign the `Action all visible results` to a modifier. This allows you to trigger to open multiple pages at the same time. (Best assign it to the &lt;kdb&gt;⌃&lt;kdb&gt;, since it does not have any conflicts with this workflow.)
 
 ## Global Search Hotkey
 Selection is…
@@ -2401,15 +2347,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>1250</real>
 		</dict>
-		<key>8A00993D-B14A-48A7-85D6-94E4C599DB11</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>455</real>
-			<key>ypos</key>
-			<real>1250</real>
-		</dict>
 		<key>9E3C1F70-A0C6-4B35-8E2F-8855F7415690</key>
 		<dict>
 			<key>xpos</key>
@@ -2462,15 +2399,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>440</real>
-		</dict>
-		<key>CAD4819F-819C-4D59-900C-9B6853A422F6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>305</real>
-			<key>ypos</key>
-			<real>1250</real>
 		</dict>
 		<key>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</key>
 		<dict>

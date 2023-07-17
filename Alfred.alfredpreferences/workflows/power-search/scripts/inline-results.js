@@ -36,10 +36,13 @@ function run(argv) {
 	//───────────────────────────────────────────────────────────────────────────
 
 	// FALLBACK RESULTS
-	const arg = query.includes(".") ? "https://" + query : $.getenv("search_site") + query;
-	const searchForQuery = { title: query, uid: query, arg: arg };
 	const showFallbackOnly = query.length < minQueryLength;
 	const showNothing = noSuggestionRegex.test(query) || query.length < 3;
+	const searchForQuery = {
+		title: query,
+		uid: query,
+		arg: $.getenv("search_site") + query,
+	};
 
 	if (showNothing) return;
 	if (showFallbackOnly) {
@@ -66,11 +69,13 @@ function run(argv) {
 	}
 
 	// REQUEST NEW RESULTS
-	// --noua: disables user agent and fetches results faster
+	// `--noua` disables user agent & fetches faster (~10% faster according to hyperfine)
+	// INFO the number of results fetched does basically no effect on the speed
+	// (less than 50ms difference between 1 and 25 results), so there is no use
+	// in restricting the number of results for performance (25 is ddgr's maximum)
 	const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
 	const responseJson = JSON.parse(app.doShellScript(ddgrCommand));
 	const newResults = responseJson.map((/** @type {DdgrSearchResult} */ item) => {
-		const previewText = item.abstract.slice(0, 80); // smaller amount of data passed between queries
 		return {
 			title: item.title,
 			subtitle: item.url,
@@ -78,7 +83,7 @@ function run(argv) {
 			arg: item.url,
 			icon: { path: "duckduckgo.png" },
 			mods: {
-				cmd: { subtitle: previewText },
+				cmd: { subtitle: item.abstract },
 			},
 		};
 	});

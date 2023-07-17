@@ -4,7 +4,7 @@
 <dict>
 	<key>fallbacks</key>
 	<array>
-		<string>power-search.CAD4819F-819C-4D59-900C-9B6853A422F6</string>
+		<string>features.websearch.google.fallback</string>
 	</array>
 	<key>showContacts</key>
 	<false/>
