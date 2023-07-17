@@ -1171,12 +1171,12 @@ Display processes directly via `top`.
 &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the PID.  
 
 ### Bluetooth Devices
-Display bluetooth devices directly via `blue`.  
+Display paired Bluetooth devices directly via `blue`.  
 &lt;kbd&gt;⏎&lt;/kbd&gt;: If `blueutil` is installed, toggle the connection state. Otherwise, open the bluetooth preferences.  
 &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the device address.  
 
-### Ejectable Volumes
-Display volumes directly via `vol`.  
+### Removable Volumes
+Display mounted volumes directly via `vol`.  
 &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the Volume in Finder.  
 &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Browse the Volume in the Terminal, [using the Terminal app you have configured in your Alfred preferences](https://www.alfredapp.com/help/features/terminal/).  
 &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Eject the Volume.
