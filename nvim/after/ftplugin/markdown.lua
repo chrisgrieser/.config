@@ -6,7 +6,12 @@ local u = require("config.utils")
 
 -- Enable wrapping lines
 -- needs to be wrapped in a condition, probably due to some recursion thing
-if not vim.opt_local.wrap:get() then cmd.normal(",ow") end
+vim.opt_local.wrap = true
+vim.opt_local.colorcolumn = ""
+keymap("n", "A", "g$a", { buffer = true })
+keymap("n", "I", "g^i", { buffer = true })
+keymap("n", "H", "g0g^", { buffer = true })
+keymap("n", "L", "g$", { buffer = true })
 
 -- decrease line length without zen mode plugins
 vim.opt_local.signcolumn = "yes:9"
@@ -17,7 +22,7 @@ vim.opt_local.formatoptions:remove("t")
 --------------------------------------------------------------------------------
 
 -- searchlink
-keymap({"n", "x"}, "<leader>k", function()
+keymap({ "n", "x" }, "<leader>k", function()
 	local query
 	if fn.mode() == "n" then
 		u.normal([["zciw]])

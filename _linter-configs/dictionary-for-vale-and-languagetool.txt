@@ -113,3 +113,8 @@ frontmost
 repo
 filetype
 performant
+⌘C
+⌘L
+fn
+⌘fn
+⌘Y
