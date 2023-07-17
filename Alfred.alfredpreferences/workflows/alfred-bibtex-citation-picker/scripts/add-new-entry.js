@@ -133,7 +133,7 @@ function run(argv) {
 		entry.url = data.URL || doiURL;
 		entry.type = data.type.replace(/-?journal-?/, ""); // "journal-article" -> "article"
 		entry.title = data.title;
-		if (entry.type.includes("article")) {
+		if (entry.type === "article") {
 			entry.journal = data["container-title"];
 			entry.number = data.issue;
 			entry.volume = data.volume;
@@ -147,21 +147,22 @@ function run(argv) {
 		// INFO ebooks.de API not working anymore :( https://www.ebook.de/de/tools/isbn2bibtex?isbn=9781471181979
 		const isbn = input;
 		const response = app.doShellScript(
-			`curl -sL "https://www.googleapis.com/books/v1/volumes?q=isbn${isbn}"`,
+			`curl -sL "https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}"`,
 		);
 		if (!response) return "ISBN not found";
 		const fullData = JSON.parse(response);
 		if (fullData.totalItems === 0) return "ISBN not found";
 		const data = fullData.items[0].volumeInfo;
+		const bookAccessible = fullData.items[0].accessInfo.viewability !== "NO_PAGES"
 
 		entry.type = "book";
 		entry.year = parseInt(data.publishedDate.split("-")[0]);
 		entry.author = (data.authors || data.author || []).join(" and ");
-		entry.isbn = parseInt(isbn);
+		entry.isbn = isbn;
 		entry.publisher = data.publisher;
 		entry.title = data.title;
 		if (data.subtitle) entry.title += ". " + data.subtitle;
-		if (data.items[0].accessInfo.viewability !== "NO_PAGES") entry.url = data.previewLink;
+		if (bookAccessible) entry.url = data.previewLink;
 	}
 
 	// anystyle
@@ -171,15 +172,21 @@ function run(argv) {
 		const tempPath = $.getenv("alfred_workflow_cache") + "/temp.txt";
 		writeToFile($.getenv("raw_entry"), tempPath);
 		const response = app.doShellScript(`anystyle --stdout --format=csl parse "${tempPath}"`);
-		const data = JSON.parse(response);
+		const data = JSON.parse(response)[0];
 
-		entry.type = data.type.replace(/-?journal-?/, ""); // "journal-article" -> "article"
 		entry.title = data.title;
-		if (entry.type === "article")) {
+		entry.type = data.type.replace(/-?journal-?/, ""); // "journal-article" -> "article"
+		entry.author = (data.authors || data.author || [])
+			.map((/** @type {{ given: any; family: any; }} */ author) => `${author.given} ${author.family}`)
+			.join(" and ");
+		entry.year = parseInt(data.issued);
+		if (entry.type === "article") {
 			entry.journal = data["container-title"];
 			entry.number = data.issue;
 			entry.volume = data.volume;
 			entry.pages = data.page;
+		} else if (entry.type === "incollection") {
+			entry.booktitle = data["container-title"];
 		}
 		
 	}
@@ -188,8 +195,8 @@ function run(argv) {
 	// INSERT CONTENT TO APPEND
 
 	// cleanup
-	entry.publisher = entry.publisher.replace(/gmbh|ltd|publications?|llc/i, "").trim();
-	entry.pages = entry.pages.replace(/(\d+)[^\d]+?(\d+)/, "$1--$2"); // double-dash
+	if (entry.publisher) entry.publisher = entry.publisher.replace(/gmbh|ltd|publications?|llc/i, "").trim();
+	if (entry.pages) entry.pages = entry.pages.replace(/(\d+)[^\d]+?(\d+)/, "$1--$2"); // double-dash
 
 	// Generate citekey & enclosing lines
 	let citekey = generateCitekey(entry.author, entry.year);
