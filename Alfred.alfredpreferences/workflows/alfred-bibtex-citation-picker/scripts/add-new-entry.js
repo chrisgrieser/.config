@@ -144,21 +144,26 @@ function run(argv) {
 		const response = app.doShellScript(
 			`curl -sL -H "Accept: application/vnd.citationstyles.csl+json" "${doiURL}"`,
 		);
-		if (!response.includes("@") || response.toLowerCase().includes("doi not found")) return "DOI not found";
+		if (response.startsWith("<!DOCTYPE html>") || response.toLowerCase().includes("doi not found"))
+			return "DOI not found";
 		const data = JSON.parse(response);
 
 		entry.publisher = data.publisher;
-		entry.issue = data.issue
-		entry.volume = data.volume
-		entry.pages = data.page
-		entry.author = data.authors.map((/** @type {{ given: any; family: any; }} */ author) => `${author.given} ${author.family}`).join(" and ");
+		entry.author = data.authors
+			.map((/** @type {{ given: any; family: any; }} */ author) => `${author.given} ${author.family}`)
+			.join(" and ");
 		const published = data["published-print"] || data["published-online"] || data.published || null;
 		if (published) entry.year = parseInt(published["data-parts"][0]);
 		entry.doi = doi[0];
 		entry.url = data.URL || doiURL;
-		entry.type = data.type
-		entry.title = data.title
-		if (entry.type === "journal-article") entry.journal = data["container-title"]
+		entry.type = data.type;
+		entry.title = data.title;
+		if (entry.type.includes("article")) {
+			entry.journal = data["container-title"];
+			entry.issue = data.issue;
+			entry.volume = data.volume;
+			entry.pages = data.page;
+		}
 	}
 
 	// ISBN: Google Books
@@ -190,29 +195,20 @@ function run(argv) {
 		// https://github.com/inukshuk/anystyle-cli#anystyle-help-parse
 		const tempPath = $.getenv("alfred_workflow_cache") + "/temp.txt";
 		writeToFile($.getenv("raw_entry"), tempPath);
-		const response = app.doShellScript(`anystyle --stdout --format=bib parse "${tempPath}"`);
+		const response = app.doShellScript(`anystyle --stdout --format=json parse "${tempPath}"`);
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
 	// INSERT CONTENT TO APPEND
 
+	// cleanup
+	entry.publisher = entry.publisher.replace(/gmbh|ltd|publications|llc/, "").trim()
+	entry.pages = entry.pages.replace(/()\d+/gm, "")
+
 	// convert to array + remove first/last line (for correct key sorting)
 	let newProps = bibtexEntry.split(/[\n\r]/);
 	const firstLine = newProps.shift();
 	newProps.pop();
-
-	// remove trash keys & sort keys alphabethically
-	// rome-ignore format: more compact
-	const keysToDelete = [ "ean", "month", "issn", "language", "copyright", "pagetotal", "address", "abstract", "series" ];
-	newProps = [...new Set(newProps)]
-		.filter((prop) => {
-			const key = prop.split("=")[0].trim();
-			if (key === "url" && (prop.includes("doi") || prop.includes("ebook"))) return false;
-			return !keysToDelete.includes(key);
-		})
-		.sort();
-	// remove comma for last element
-	newProps[newProps.length - 1] = newProps.at(-1).slice(0, -1);
 
 	// Generate citekey, enclose entry with first/last line
 	let newCitekey = generateCitekey(newProps);
