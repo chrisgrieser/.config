@@ -216,19 +216,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8C136177-41E3-44F3-8915-732F65DCE071</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>085B81A5-959F-44F8-A3D1-8EC71E50E49E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>8D0217F4-B267-406C-B35B-B41C7663BA0D</key>
 		<array>
 			<dict>
@@ -1173,48 +1160,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.adobe.pdf</string>
-				</array>
-				<key>name</key>
-				<string>Upload to ChatPDF</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>8C136177-41E3-44F3-8915-732F65DCE071</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/chatpdf.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>085B81A5-959F-44F8-A3D1-8EC71E50E49E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).
@@ -1231,13 +1176,6 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 - ocrmypdf</string>
 	<key>uidata</key>
 	<dict>
-		<key>085B81A5-959F-44F8-A3D1-8EC71E50E49E</key>
-		<dict>
-			<key>xpos</key>
-			<real>765</real>
-			<key>ypos</key>
-			<real>820</real>
-		</dict>
 		<key>0E4A0733-E898-4FB7-BC62-446FBD10A76E</key>
 		<dict>
 			<key>colorindex</key>
@@ -1427,13 +1365,6 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<real>1000</real>
 			<key>ypos</key>
 			<real>435</real>
-		</dict>
-		<key>8C136177-41E3-44F3-8915-732F65DCE071</key>
-		<dict>
-			<key>xpos</key>
-			<real>560</real>
-			<key>ypos</key>
-			<real>820</real>
 		</dict>
 		<key>8D0217F4-B267-406C-B35B-B41C7663BA0D</key>
 		<dict>
