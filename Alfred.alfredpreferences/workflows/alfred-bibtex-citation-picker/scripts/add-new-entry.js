@@ -74,26 +74,22 @@ function ensureUniqueCitekey(citekey, libraryPath) {
 	return nextCitekey;
 }
 
-/** @param {string[]} bibtexPropertyArr */
-function generateCitekey(bibtexPropertyArr) {
-	let year = parseBibtexProperty(bibtexPropertyArr, "year");
-	if (!year) year = "N.D.";
-
-	let authEds;
-	const authors = parseBibtexProperty(bibtexPropertyArr, "author");
-	const editors = parseBibtexProperty(bibtexPropertyArr, "editor");
-	if (authors) authEds = authors;
-	else if (editors) authEds = editors;
-	else authEds = "NoAuthor";
+/**
+ * @param {string} authors
+ * @param {number} year
+ */
+function generateCitekey(authors, year) {
+	const yearStr = year ? year.toString() : "N.D.";
+	if (!authors) authors = "NoAuthor";
 
 	let authorStr;
 	const lastNameArr = [];
-	const invalidLastName = authEds.match(/,.*,/) && !authEds.includes("and"); // not complying naming standard with and as delimiter
+	const invalidLastName = authors.match(/,.*,/) && !authors.includes("and"); // not complying naming standard with and as delimiter
 
-	if (authEds === "NoAuthor") lastNameArr[0] = "NoAuthor";
+	if (authors === "NoAuthor") lastNameArr[0] = "NoAuthor";
 	else if (invalidLastName) lastNameArr[0] = "Invalid";
 	else {
-		authEds
+		authors
 			.split(" and ") // "and" used as delimiter in bibtex for names
 			.forEach((name) => {
 				// doi.org returns "first last", isbn mostly "last, first"
@@ -113,7 +109,7 @@ function generateCitekey(bibtexPropertyArr) {
 		// no hyphens
 		.replaceAll("-", "");
 
-	const citekey = authorStr + year;
+	const citekey = authorStr + yearStr;
 	return citekey;
 }
 
@@ -202,29 +198,31 @@ function run(argv) {
 	// INSERT CONTENT TO APPEND
 
 	// cleanup
-	entry.publisher = entry.publisher.replace(/gmbh|ltd|publications|llc/, "").trim()
-	entry.pages = entry.pages.replace(/()\d+/gm, "")
+	entry.publisher = entry.publisher.replace(/gmbh|ltd|publications|llc/, "").trim();
+	entry.pages = entry.pages.replace(/(\d+).+(\d+)/gm, "$1--$2"); // double-dash
+	entry.title = entry.title.replace(/([A-Z]{2,})/g, "{$1}"); // escape uppercase words
 
-	// convert to array + remove first/last line (for correct key sorting)
-	let newProps = bibtexEntry.split(/[\n\r]/);
-	const firstLine = newProps.shift();
-	newProps.pop();
-
-	// Generate citekey, enclose entry with first/last line
-	let newCitekey = generateCitekey(newProps);
+	// Generate citekey
+	let newCitekey = generateCitekey(entry.author, entry.year);
 	newCitekey = ensureUniqueCitekey(newCitekey, libraryPath);
-	newProps.unshift(firstLine.split("{")[0] + "{" + newCitekey + ",");
-	newProps.push("}");
 
-	// Insert keywords field
-	// (only if there is no keyword property already – some DOI providers do add
-	// keyword fields of their own)
-	if (!newProps.some((/** @type {string} */ prop) => prop.includes("keywords =")))
-		newProps.splice(1, 0, "\tkeywords = {},");
+	// create lines
+	const firstLine = `@${entry.type}{${entry.newCitekey},`;
+	const keywordsLine = "\tkeywords = {},";
+	const lastLine = "}";
+	const propertyLines = [];
+	for (const key in entry) {
+		let value = entry[key];
+		if (typeof value === "string") value = "{" + value + "}";
+		propertyLines.push(`\t${key} = ${value},`);
+	}
+	propertyLines.sort()
+	// remove comma from last entry
+	propertyLines[propertyLines.length - 1] = propertyLines[propertyLines.length - 1].slice(0, -1)
 
 	// Write result
-	const newEntry = newProps.join("\n");
-	appendToFile(newEntry, libraryPath);
+	const newEntryAsBibTex = [firstLine, keywordsLine, ...propertyLines, lastLine].join("\n");
+	appendToFile(newEntryAsBibTex, libraryPath);
 
 	// Copy Citation
 	const copyCitation = $.getenv("copy_citation_on_adding_entry") === "1";
