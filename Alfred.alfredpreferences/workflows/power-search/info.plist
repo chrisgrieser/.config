@@ -2224,9 +2224,9 @@
 	</array>
 	<key>readme</key>
 	<string>## Show Inline Results – without keyword
-- `↵` Search for Term / open URL
-- `⌘` Show Preview Text for Search Result
-- `⌥↵` Copy URL
+- &lt;kbd&gt;⏎&lt;/kbd&gt; Search for Term / open URL
+- &lt;kbd&gt;⌘&lt;/kbd&gt; Show Preview Text for Search Result
+- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Copy URL
 
 **Recommended Alfred Settings**  
 - Default Results: Set `Show fallback only when there are no other results`, since this workflow mostly covers that already.
@@ -2330,7 +2330,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>480</real>
+			<real>485</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>

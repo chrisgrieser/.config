@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>inline_results_to_fetch</key>
-	<string>9</string>
+	<string>8</string>
 	<key>min_query_length</key>
 	<string>6</string>
 	<key>no_suggestion_regex</key>
