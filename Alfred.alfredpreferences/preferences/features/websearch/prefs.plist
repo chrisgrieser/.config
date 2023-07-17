@@ -85,17 +85,6 @@
 			<key>utf8</key>
 			<true/>
 		</dict>
-		<key>88CF6583-5443-48B4-ABB2-B6CD7AC01957</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>i</string>
-			<key>text</key>
-			<string>Google Image Search for '{query}'</string>
-			<key>url</key>
-			<string>https://www.google.de/search?q={query}&amp;tbm=isch</string>
-		</dict>
 		<key>9672465E-E164-4221-9824-0E164A40E39B</key>
 		<dict>
 			<key>enabled</key>
@@ -165,7 +154,5 @@
 			<string>https://store.steampowered.com/search/?term={query}</string>
 		</dict>
 	</dict>
-	<key>onlyShowEnabledInPrefs</key>
-	<true/>
 </dict>
 </plist>
