@@ -10,7 +10,6 @@ vim.opt.foldopen:remove { "search" } -- no auto-open when searching
 
 keymap("n", "-", "zn/", { desc = "/ & Pause Folds" })
 
--- while searching: pause folds
 vim.on_key(function(char)
 	if vim.g.scrollview_refreshing then return end -- FIX: https://github.com/dstein64/nvim-scrollview/issues/88#issuecomment-1570400161
 	local key = fn.keytrans(char)
@@ -90,22 +89,18 @@ keymap("n", "gz", function()
 	u.normal(tostring(lnum) .. "G")
 end, { desc = "󰘖 Goto next fold" })
 
+---@diagnostic disable: param-type-mismatch
+
 -- h closes (similar to how l opens due to opt.foldopen="hor")
 -- works well with vim's startofline option
----@diagnostic disable: param-type-mismatch
 keymap("n", "h", function()
-	-- `virtcol` accounts for tab indentation
-	local onIndentOrFirstNonBlank = fn.virtcol(".") <= fn.indent(".") + 1
+	local onIndentOrFirstNonBlank = fn.virtcol(".") <= fn.indent(".") + 1 -- `virtcol` accounts for tab indentation
 	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-
 	if onIndentOrFirstNonBlank and shouldCloseFold then
 		local wasFolded = pcall(u.normal, "zc")
-		-- fallback: the line didn't have a closable fold, then use h to go into
-		-- into the indentation
-		if not wasFolded then u.normal("h") end
-	else
-		u.normal("h")
+		if wasFolded then return end
 	end
+	vim.cmd.normal{"h", bang = true}
 end, { desc = "h (+ close fold at BoL)" })
 
 -- ensure that `l` does not move to the right when opening a fold, otherwise
