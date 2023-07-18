@@ -13,13 +13,13 @@ local function obsidianThemeDevHelper(win)
 		not win
 		or not win:application()
 		or not (win:application():name():lower() == "neovide")
-		or not obsi
 	then
 		return
 	end
 
 	-- delay to avoid conflict with app-hider.lua and that resizing took place
 	u.runWithDelays(0.1, function()
+		if not obsi then return end
 		if wu.CheckSize(win, wu.pseudoMax) or wu.CheckSize(win, wu.maximized) then
 			obsi:hide()
 		else

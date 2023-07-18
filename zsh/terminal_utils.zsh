@@ -51,8 +51,14 @@ function inspect() {
 	echo
 }
 
-# measure zsh loading time, https://blog.jonlu.ca/posts/speeding-up-zsh
-function timezsh() { time $SHELL -i -c exit; }
+# measure rc loading time, https://blog.jonlu.ca/posts/speeding-up-zsh
+function timerc() {
+	if command -v hyperfine &>/dev/null; then
+		hyperfine "$SHELL -i -c exit"
+	else
+		time $SHELL -i -c exit
+	fi
+}
 
 # no arg = all files in folder will be deleted
 function d() {
@@ -182,7 +188,8 @@ function appid() {
 # Conversions
 function yaml2json() {
 	file_name=${1%.*} # remove ext. (not using `basename` since it could be yml or yaml)
-	# using `explode` to expand anchors & aliases: https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
+	# using `explode` to expand anchors & aliases
+	# https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
 	yq --output-format=json 'explode(.)' "$1" >"${file_name}.json"
 }
 
