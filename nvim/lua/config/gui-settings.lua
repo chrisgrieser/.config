@@ -21,21 +21,24 @@ autocmd("VimEnter", {
 -- https://www.programmingfonts.org/#oxygen
 vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2" 
 
+local host = fn.hostname()
+local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
+
 -- INFO: Transparency set in theme-config.lua
-if fn.hostname():find("Mother") then
+if host:find("Mother") then
 	g.neovide_scale_factor = 0.94
 	g.neovide_refresh_rate = 40
-elseif fn.hostname():find("mini") or fn.hostname():find("eduroam") then
+elseif isAtOffice then
 	g.neovide_scale_factor = 1.06
-	g.neovide_refresh_rate = 60
-elseif fn.hostname():find("iMac") then
+	g.neovide_refresh_rate = 50
+elseif host:find("iMac") then
 	g.neovide_scale_factor = 1
-	g.neovide_refresh_rate = 70
+	g.neovide_refresh_rate = 50
 end
 
-local delta = 1.05
-keymap({ "n", "x", "i" }, "<D-+>", function() g.neovide_scale_factor = g.neovide_scale_factor * delta end)
-keymap({ "n", "x", "i" }, "<D-->", function() g.neovide_scale_factor = g.neovide_scale_factor / delta end)
+local delta = 0.01
+keymap({ "n", "x", "i" }, "<D-+>", function() g.neovide_scale_factor = g.neovide_scale_factor + delta end)
+keymap({ "n", "x", "i" }, "<D-->", function() g.neovide_scale_factor = g.neovide_scale_factor - delta end)
 
 --------------------------------------------------------------------------------
 

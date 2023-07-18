@@ -1,3 +1,4 @@
+--------------------------------------------------------------------------------
 -- THEME SETTINGS
 
 local lightOpacity = 0.94
@@ -45,8 +46,9 @@ local wt = require("wezterm")
 local act = wt.action
 local actFun = wt.action_callback
 
-local isAtOffice = (wt.hostname():find("mini") or wt.hostname():find("eduroam")) ~= nil
-local isAtMother = wt.hostname():find("Mother") ~= nil
+local host = wt.hostname()
+local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
+local isAtMother = host:find("Mother") ~= nil
 
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
@@ -161,7 +163,7 @@ local keybindings = {
 
 	-- hint mode https://wezfurlong.org/wezterm/quickselect.html
 	-- can use cmd+c, since wezterm auto-copies mouse selection, freeing up cmd+c
-	{ key = "c", mods = "CMD", action = act.QuickSelect },
+	{ key = "c", mods = "CMD|ALT", action = act.QuickSelect },
 
 	-- FIX works with `send_composed_key_when_right_alt_is_pressed = true`
 	-- but expects another character, so this mapping fixes it
