@@ -4,11 +4,15 @@ local keymap = vim.keymap.set
 local u = require("config.utils")
 
 --------------------------------------------------------------------------------
--- PAUSE FOLDS WHEN SEARCHING
+-- PAUSE FOLDS WHILE SEARCHING
+-- Disabling search in foldopen has the disadvantage of making search nearly
+-- unusable. Enabling search in foldopen has the disadvantage of constantly
+-- opening all your folds as soon as you search. This snippet fixes this by
+-- pausing folds while searching, but restoring them when you are done
+-- searching.
 
-vim.opt.foldopen:remove { "search" } -- no auto-open when searching
-
-keymap("n", "-", "zn/", { desc = "/ & Pause Folds" })
+vim.opt.foldopen:remove { "search" } -- no auto-open when searching, since the following snippet does that better
+keymap("n", "-", "zn/", { desc = "Search & Pause Folds" })
 
 vim.on_key(function(char)
 	if vim.g.scrollview_refreshing then return end -- FIX: https://github.com/dstein64/nvim-scrollview/issues/88#issuecomment-1570400161
@@ -30,6 +34,7 @@ end, vim.api.nvim_create_namespace("auto_pause_folds"))
 
 --------------------------------------------------------------------------------
 -- MACRO FOLD COMMANDS
+-- affect all folds in the buffer
 
 -- toggle all toplevel folds
 keymap("n", "zz", function()
@@ -62,15 +67,16 @@ for _, lvl in pairs { 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
 end
 
 --------------------------------------------------------------------------------
--- MESO FOLD COMMANDS
--- (cycles multiple folds, but not all)
+-- MESO-LEVEL FOLD COMMANDS
+-- affect multiple folds, but not all
 
 -- Cycle Folds (f1 = ^ Karabiner Remap)
 keymap({ "c", "i" }, "<f1>", "^", { desc = "HACK for karabiner rebinding" })
 keymap("n", "<f1>", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
 
 --------------------------------------------------------------------------------
--- MICRO FOLD COMMANDS
+-- MICRO-LEVEL FOLD COMMANDS
+-- affect only a single fold
 
 -- goto next closed fold
 keymap("n", "gz", function()
@@ -89,12 +95,11 @@ keymap("n", "gz", function()
 	u.normal(tostring(lnum) .. "G")
 end, { desc = "󰘖 Goto next fold" })
 
----@diagnostic disable: param-type-mismatch
-
--- h closes (similar to how l opens due to opt.foldopen="hor")
--- works well with vim's startofline option
+-- `h` closes folds when at the beginning of a line (similar to how `l` opens
+-- with `vim.opt.foldopen="hor"`). Works well with `vim.opt.startofline = true`
 keymap("n", "h", function()
-	local onIndentOrFirstNonBlank = fn.virtcol(".") <= fn.indent(".") + 1 -- `virtcol` accounts for tab indentation
+	-- `virtcol` accounts for tab indentation
+	local onIndentOrFirstNonBlank = fn.virtcol(".") <= fn.indent(".") + 1 ---@diagnostic disable-line: param-type-mismatch
 	local shouldCloseFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
 	if onIndentOrFirstNonBlank and shouldCloseFold then
 		local wasFolded = pcall(u.normal, "zc")
@@ -107,11 +112,10 @@ end, { desc = "h (+ close fold at BoL)" })
 -- this is the same behavior as with foldopen="hor" already
 keymap("n", "l", function()
 	local shouldOpenFold = vim.tbl_contains(vim.opt_local.foldopen:get(), "hor")
-	local isOnFold = fn.foldclosed(".") > -1
+	local isOnFold = fn.foldclosed(".") > -1 ---@diagnostic disable-line: param-type-mismatch
 	if shouldOpenFold and isOnFold then
 		pcall(u.normal, "zo")
 	else
 		u.normal("l")
 	end
 end, { desc = "l / open fold" })
----@diagnostic enable: param-type-mismatch
