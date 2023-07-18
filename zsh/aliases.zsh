@@ -1,6 +1,7 @@
 # shellcheck disable=2139
 
 # z & cd
+alias cd='z'
 alias zz='z -' # back to last dir
 alias ..="z .."
 alias ...="z ../.."
@@ -57,8 +58,10 @@ alias bkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-script.sh"'
 
 alias l='command exa --all --long --no-user --header --icons --git --group-directories-first --sort=name'
 alias exa='command exa --all --icons --git --group-directories-first --sort=name'
-alias tree='command exa --tree --level=4 --icons --git-ignore'
-alias tree-dir='command exa --only-dirs --tree --level=4 --icons --git-ignore'
+alias tree='command exa --tree --level=2 --icons --git-ignore'
+alias treee='command exa --tree --level=3 --icons --git-ignore'
+alias treeee='command exa --tree --level=4 --icons --git-ignore'
+alias treeeee='command exa --tree --level=5 --icons --git-ignore'
 alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 
 #───────────────────────────────────────────────────────────────────────────────
