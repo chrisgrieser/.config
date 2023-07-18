@@ -384,17 +384,23 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
+      # Toggle Sidebar
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: s, modifiers: [command, control] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
+      # Toggle toolbar
+      - type: basic
+        from: { key_code: "9", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: t, modifiers: [command, option] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
       # snoozing consistent with snoozing hotkey in SideNotes
       - type: basic
         from: { key_code: s, modifiers: { mandatory: [command, shift] } }
         to:
           - key_code: b
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
-      # toggle toolbar
-      - type: basic
-        from: { key_code: "9", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: t, modifiers: [command, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
       # Open in Gmail
       - type: basic
