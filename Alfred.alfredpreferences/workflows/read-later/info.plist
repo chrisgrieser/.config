@@ -12,16 +12,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A1B93FF7-3569-48A8-8CC8-E1A71AC85EDA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>877F0442-FBA7-4EDC-8027-D3EF6BA936E5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -57,11 +47,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A1B93FF7-3569-48A8-8CC8-E1A71AC85EDA</key>
+		<key>877F0442-FBA7-4EDC-8027-D3EF6BA936E5</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>651E12CB-A815-41F4-AB78-58F5F8D6B131</string>
+				<string>8B6D06E5-B6FD-4574-9292-C897E6AB49A2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>8B6D06E5-B6FD-4574-9292-C897E6AB49A2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9332AA79-714A-4D56-BD35-570C92624327</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -97,48 +100,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>'{query}'</string>
-				<key>title</key>
-				<string>✅ URL saved</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>651E12CB-A815-41F4-AB78-58F5F8D6B131</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>- \[ \] \[(.*)\].*</string>
-				<key>regexcaseinsensitive</key>
-				<true/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string>$1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>A1B93FF7-3569-48A8-8CC8-E1A71AC85EDA</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -163,6 +124,54 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 			<string>81C89C2D-C4E6-48F4-8DDB-1F05B9FC732B</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<true/>
+				<key>createintermediatefolders</key>
+				<false/>
+				<key>filename</key>
+				<string>{var:read_later_file}</string>
+				<key>filetext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>877F0442-FBA7-4EDC-8027-D3EF6BA936E5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ URL saved</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9332AA79-714A-4D56-BD35-570C92624327</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -201,29 +210,23 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>adduuid</key>
-				<false/>
-				<key>allowemptyfiles</key>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>- \[ ] \[(.*)].*</string>
+				<key>regexcaseinsensitive</key>
 				<true/>
-				<key>createintermediatefolders</key>
+				<key>regexmultiline</key>
 				<false/>
-				<key>filename</key>
-				<string>{var:read_later_file}</string>
-				<key>filetext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>relativepathmode</key>
-				<integer>0</integer>
-				<key>type</key>
-				<integer>2</integer>
+				<key>replacestring</key>
+				<string>$1</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.writefile</string>
+			<string>alfred.workflow.utility.replace</string>
 			<key>uid</key>
-			<string>877F0442-FBA7-4EDC-8027-D3EF6BA936E5</string>
+			<string>8B6D06E5-B6FD-4574-9292-C897E6AB49A2</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -260,7 +263,7 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
@@ -284,7 +287,7 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Read Later</string>
+				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -313,21 +316,12 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
-		<key>651E12CB-A815-41F4-AB78-58F5F8D6B131</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>565</real>
-			<key>ypos</key>
-			<real>55</real>
-		</dict>
 		<key>76D8EFBB-E5E6-4AB7-B87A-D8F4B640CAF8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>395</real>
+			<real>385</real>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
@@ -358,20 +352,29 @@ set output to "- [ ] [" &amp; currentTitle &amp; "](" &amp; currentTabUrl &amp; 
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>565</real>
+			<real>450</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>120</real>
 		</dict>
-		<key>A1B93FF7-3569-48A8-8CC8-E1A71AC85EDA</key>
+		<key>8B6D06E5-B6FD-4574-9292-C897E6AB49A2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
 			<string>Strip Markdown</string>
 			<key>xpos</key>
-			<real>485</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>85</real>
+			<real>150</real>
+		</dict>
+		<key>9332AA79-714A-4D56-BD35-570C92624327</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>695</real>
+			<key>ypos</key>
+			<real>120</real>
 		</dict>
 		<key>D223A211-45A1-481D-A981-9632A2E18CC5</key>
 		<dict>
