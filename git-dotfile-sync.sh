@@ -1,18 +1,18 @@
 #!/usr/bin/env zsh
 
+MAX_FILE_SIZE_MB=5
+#───────────────────────────────────────────────────────────────────────────────
+
 # ensure non-zero exit of script if anything fails, relevant for hammerspoon to
 # be able to detect sync failure
 set -e
-
-# CONFIG
-MAX_FILE_SIZE_MB=10
 
 # shellcheck disable=2034
 GIT_OPTIONAL_LOCKS=0
 
 #───────────────────────────────────────────────────────────────────────────────
 
-cd "$(dirname "$0")" || exit 1 # go to location of this script, i.e. cd'ing into the git repo
+cd "$(dirname "$0")" || return 1 # go to location of this script, i.e. going into the git repo
 
 # safeguard against accidental pushing of large files
 NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -size +${MAX_FILE_SIZE_MB}M | wc -l | xargs)
