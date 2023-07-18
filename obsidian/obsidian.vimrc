@@ -137,7 +137,7 @@ nmap ,gd :diffview
 
 " closest thing we get to the undohistory :(
 exmap undohistory obcommand obsidian-version-history-diff:open-recovery-diff-view
-nmap ,ut :diffview
+nmap ,ut :undohistory
 
 " Stage & Commit
 exmap gitAdd obcommand obsidian-git:stage-current-file
