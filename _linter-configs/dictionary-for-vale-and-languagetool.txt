@@ -124,3 +124,11 @@ Ejectable
 address
 ejectable
 ⌘fn⏎
+zip
+BRAT
+OCR
+cssclass
+QLMarkdown
+prepend
+backlink
+Regex
