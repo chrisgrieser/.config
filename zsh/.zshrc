@@ -19,8 +19,9 @@ CONFIG_FILES=(
 #───────────────────────────────────────────────────────────────────────────────
 
 for config_file in "${CONFIG_FILES[@]}"; do
+	file="$DOTFILE_FOLDER/zsh/$config_file.zsh"
 	# shellcheck disable=1090
-	source "$DOTFILE_FOLDER/zsh/$config_file.zsh"
+	[[ -f "$file" ]] && source "$file"
 done
 
 
