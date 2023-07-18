@@ -32,7 +32,8 @@ msg="$device_name ($filesChanged)"
 # changed, the push will fail
 i=0
 while true; do
-	git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>"
+	# "|| true" ensures that if the git add fails, the script will not abort due to set -e
+	(git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>") || true
 	git pull && git push && break
 	sleep 3
 	i=$((i + 1))
