@@ -102,10 +102,6 @@ nmap gx :followNextLink
 nmap ga :followNextLink
 nmap gd :followNextLink
 
-" HACK temporary workaround, since shukuchi does not work in 1.4.0 on URLs
-exmap followLink obcommand editor:follow-link
-nmap gX :followLink
-
 " [g]oto [o]pen file (= Quick Switcher)
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search
 nmap go :quickSwitcher
