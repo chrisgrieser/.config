@@ -128,7 +128,6 @@ zip
 BRAT
 OCR
 cssclass
-QLMarkdown
 prepend
 backlink
 Regex
