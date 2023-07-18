@@ -30,7 +30,7 @@ export TICKER_APP="Ivory" # or Twitter/Mastodon
 
 #───────────────────────────────────────────────────────────────────────────────
 # Safe API keys ouotside the dotfile repo
-source "$DATA_DIR/private dotfiles/api-keys.sh"
+[[ -f "$DATA_DIR/private dotfiles/api-keys.sh" ]] && source "$DATA_DIR/private dotfiles/api-keys.sh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
