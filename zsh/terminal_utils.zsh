@@ -80,12 +80,12 @@ function ..d() {
 
 # draws a separator line with terminal width
 function separator() {
-	local SEP=""
+	local sep=""
 	terminal_width=$(tput cols)
 	for ((i = 0; i < terminal_width; i++)); do
-		SEP="$SEP─"
+		sep="$sep─"
 	done
-	echo "$SEP"
+	echo "$sep"
 }
 
 # smarter z/cd
