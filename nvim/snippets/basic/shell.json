@@ -97,6 +97,11 @@
 		"prefix": "find -exec",
 		"body": "find . $0 -exec open '{}' \\;"
 	},
+	"safe sourcing": {
+		"prefix": "source (safe)",
+		"body": "[[ -f \"${1:filepath}\" ]] && source \"${1:filepath}\"",
+		"description": "Ensures script does not fail when sourced file does not exist."
+	},
 	"find & xargs": {
 		"prefix": "find & xargs",
 		"body": "find . -print0 | xargs -0 -I '{}'"

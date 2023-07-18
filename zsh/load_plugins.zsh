@@ -13,23 +13,30 @@ autoload compinit -Uz +X && compinit
 
 #───────────────────────────────────────────────────────────────────────────────
 
+function safe_source() {
+	if [[ -f "$1" ]]; then
+		source "$1"
+	else
+		echo "$1 cannot be found, skipping."
+	fi
+}
+
 # "fzf-tab needs to be loaded after compinit, but before plugins which will wrap
 # widgets, such as zsh-autosuggestions or fast-syntax-highlighting"
-source "$DOTFILE_FOLDER/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+safe_source "$DOTFILE_FOLDER/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 # INFO `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
-source "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
-source "$(brew --prefix)/share/zsh-autopair/autopair.zsh"
-source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+safe_source "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
+safe_source "$(brew --prefix)/share/zsh-autopair/autopair.zsh"
+safe_source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+safe_source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # has to be loaded *after* zsh syntax highlighting
-source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+safe_source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 # Magic Enter
-source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
+safe_source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
 
 # Starship
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$DOTFILE_FOLDER/starship/starship.toml"
-
