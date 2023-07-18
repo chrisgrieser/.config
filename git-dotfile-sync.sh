@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-MAX_FILE_SIZE_MB=5
+MAX_FILE_SIZE_MB=10
 #───────────────────────────────────────────────────────────────────────────────
 
 # ensure non-zero exit of script if anything fails, relevant for hammerspoon to
