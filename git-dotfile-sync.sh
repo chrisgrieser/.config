@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+set -e
+
 # CONFIG
 MAX_FILE_SIZE_MB=10
 
