@@ -30,15 +30,18 @@ source "$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zs
 
 # yank to system clipboard – https://stackoverflow.com/a/37411340
 # equivalent to `set clipboard=unnamed` (but only for y)
-function vi-yank-pbcopy {
+function vi-yank-pbcopy() {
 	zle vi-yank # still perform vim-yank for pasting via `p`
 	echo "$CUTBUFFER" | pbcopy
 }
-zle -N vi-yank-pbcopy
 
 # q in normal mode exists the Terminal
-function normal-mode-exit { exit; }
+function normal-mode-exit() { exit; }
+
+zle -N vi-yank-pbcopy
 zle -N normal-mode-exit
+
+#───────────────────────────────────────────────────────────────────────────────
 
 function zvm_after_lazy_keybindings() {
 	bindkey -M vicmd 'L' vi-end-of-line

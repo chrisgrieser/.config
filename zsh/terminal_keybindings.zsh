@@ -1,52 +1,49 @@
-# shellcheck disable=SC2086,SC2164
-
-function bindEverywhere () {
-	bindkey -M emacs "$1" $2
-	bindkey -M viins "$1" $2
-	bindkey -M vicmd "$1" $2
-}
-bindkey -M viins "^A" beginning-of-line # not in normal mode for count increment
-bindEverywhere "^B" copy-buffer
-bindEverywhere "^E" end-of-line
-bindEverywhere "^U" kill-whole-line
-bindEverywhere "^P" copy-location
-bindEverywhere "^Z" undo # wezterm: cmd+z
-bindEverywhere "…" insert-last-word # …=alt+.
-
-bindEverywhere '^[[A' history-substring-search-up # up/down: history substring search
-bindEverywhere '^[[B' history-substring-search-down 
-bindEverywhere "^[[Z" autosuggest-accept # shift-tab: accept ghost text from zsh-autosugget
-
-# ctrl+O (bound to cmd+enter via wezterm): base directories 
-bindEverywhere "^O" harpoon
-
-#-------------------------------------------------------------------------------
-# INFO: use ctrl-v and then a key combination to get the shell binding
-# `bindkey -M main` to show existing keybinds
-# some bindings with '^' are reserved (^M=enter, ^I=tab, ^[[Z = shift+tab)
-#-------------------------------------------------------------------------------
-
-copy-location () {
-	pwd | pbcopy
-	zle -M "'$PWD' copied."
-}
-zle -N copy-location
-
+#───────────────────────────────────────────────────────────────────────────────
+# CUSTOM WIDGETS
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/copybuffer/copybuffer.plugin.zsh
-copy-buffer () {
+function copy-buffer() {
 	printf "%s" "$BUFFER" | pbcopy
 	zle -M "Buffer copied."
 }
 zle -N copy-buffer
 
+function copy-location() {
+	pwd | pbcopy
+	zle -M "'$PWD' copied."
+}
+zle -N copy-location
+
 function harpoon () {
 	if [[ "$PWD" == "$WD" ]]; then
-		cd "$DOTFILE_FOLDER"
+		cd "$DOTFILE_FOLDER" || return 1
 	elif [[ "$PWD" == "$DOTFILE_FOLDER" ]]; then
-		cd "$VAULT_PATH"
+		cd "$VAULT_PATH" || return 1
 	else
-		cd "$WD"
+		cd "$WD" || return 1
 	fi
 	zle reset-prompt
 }
 zle -N harpoon
+
+
+#───────────────────────────────────────────────────────────────────────────────
+# BINDINGS FOR WIDGETS
+#───────────────────────────────────────────────────────────────────────────────
+# INFO: use ctrl-v and then a key combination to get the shell binding
+# `bindkey -M main` to show existing keybinds
+# some bindings with '^' are reserved (^M=enter, ^I=tab, ^[[Z = shift+tab)
+#───────────────────────────────────────────────────────────────────────────────
+
+# needs to be wrapped so not overwritten by zsh-vi-mode
+function zvm_after_init() {
+	bindkey -M viins '^P' copy-location
+	bindkey -M viins '^B' copy-buffer
+	bindkey -M viins "^O" harpoon # bound to cmd+enter via wezterm
+}
+bindkey -M viins "…" insert-last-word # …=alt+.
+
+# Plugin Bindings
+bindkey -M viins '^[[A' history-substring-search-up # up/down: history substring search
+bindkey -M viins '^[[B' history-substring-search-down 
+bindkey -M viins "^[[Z" autosuggest-accept # shift-tab: accept ghost text from zsh-autosugget
+
