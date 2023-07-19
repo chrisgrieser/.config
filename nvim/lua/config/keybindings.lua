@@ -548,7 +548,6 @@ keymap(
 -- stylua: ignore
 keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = "  Toggle Relative Line Numbers" })
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = "  Toggle Line Numbers" })
-keymap("n", "<leader>ol", cmd.LspRestart, { desc = " 󰒕 LSP Restart" })
 
 keymap("n", "<leader>od", function()
 	if vim.diagnostic.is_disabled(0) then
@@ -575,13 +574,13 @@ keymap("n", "<leader>ow", function()
 		keymap("n", "H", "g0g^", { buffer = true })
 		keymap("n", "L", "g$", { buffer = true })
 	end
-end, { desc = " 󰖶 Toggle Wrap & Colorcolumn" })
+end, { desc = " 󰖶 Toggle Wrap" })
 
 -- FIX scrolloff and folding sometimes broken
 keymap("n", "<leader>of", function ()
 	vim.opt_local.scrolloff = vim.opt.scrolloff:get()
 	vim.opt_local.foldlevel = 99
-end, { desc = "  Fix Folding & Scroll Offset" })
+end, { desc = " 󰘖 Fix Folding/Scrolloff" })
 
 --------------------------------------------------------------------------------
 

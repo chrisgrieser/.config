@@ -9,7 +9,7 @@ return {
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = "Neogit",
 		init = function()
-			-- HACK https://github.com/TimUntersberger/neogit/issues/405
+			-- HACK https://github.com/NeogitOrg/neogit/issues/405
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "NeogitCommitMessage",
 				command = "silent! set filetype=gitcommit",

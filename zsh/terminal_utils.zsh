@@ -68,8 +68,11 @@ function d() {
 		command mv -iv "$@" ~/.Trash/
 	fi
 	# shellcheck disable=2181
-	# run in background to avoid delay; run in subshell to suppress output
-	[[ $? -eq 0 ]] && (afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
+	if [[ $? -eq 0 ]] ; then
+		current_vol=$(osascript -e 'output volume of (get volume settings)')
+		vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
+		(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
+	fi
 }
 
 # go up and delete current dir
@@ -81,7 +84,11 @@ function ..d() {
 	[[ -e "$trash_location" ]] && rm -rf "$trash_location" 
 	command mv -v "$current_dir" "$trash_location"
 	# shellcheck disable=2181
-	[[ $? -eq 0 ]] && (afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
+	if [[ $? -eq 0 ]] ; then
+		current_vol=$(osascript -e 'output volume of (get volume settings)')
+		vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
+		(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
+	fi
 }
 
 # draws a separator line with terminal width
