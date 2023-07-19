@@ -114,7 +114,7 @@ local function selectLayout()
 	else
 		workLayout()
 	end
-	u.runWithDelays(2, function() IsLayouting = false end)
+	u.runWithDelays(1, function() IsLayouting = false end)
 end
 
 --------------------------------------------------------------------------------
@@ -147,5 +147,5 @@ UnlockWatcher = c.new(function(event)
 
 	print("🔓 Wake")
 	if hasWoken then u.runWithDelays(0.5, selectLayout) end -- delay for recognizing screens
-	u.runWithDelays(5, function() RecentlyWoke = false end)
+	u.runWithDelays(3, function() RecentlyWoke = false end)
 end):start()
