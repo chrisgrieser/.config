@@ -1,7 +1,6 @@
 # shellcheck disable=2139
 
 # z & cd
-alias cd='z'
 alias zz='z -' # back to last dir
 alias ..="z .."
 alias ...="z ../.."
