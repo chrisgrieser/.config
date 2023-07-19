@@ -69,17 +69,17 @@ function gitlog() {
 	# shellcheck disable=2086
 	git log $length --all --color --graph \
 		--format='%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
-		sed 's/ seconds ago)/s)/' |
-		sed 's/ minutes ago)/min)/' |
-		sed 's/ hours ago)/h)/' |
-		sed 's/ days ago)/d)/' |
-		sed 's/ weeks ago)/w)/' |
-		sed 's/ months ago)/m)/' |
-		sed 's/origin\//󰞶 /g' |
-		sed -E 's/HEAD/󱍀/g' |
-		sed 's/->/⇢/g' |
-		sed 's/grafted/ /' |
-		sed 's/tags: / )/g'
+		sed -e 's/ seconds ago)/s)/' \
+		-e 's/ minutes ago)/m)/' \
+		-e 's/ hours ago)/h)/' \
+		-e 's/ days ago)/d)/' \
+		-e 's/ weeks ago)/w)/' \
+		-e 's/ months ago)/mo)/' \
+		-e 's/grafted/ /' \
+		-e 's/origin\//󰞶 /g' \
+		-e 's/HEAD/󱍀/g' \
+		-e 's/->/⇢/g' \
+		-e 's/tags: / )/g'
 }
 
 # brief git log (only last 15)

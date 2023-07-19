@@ -44,7 +44,9 @@ function inspect() {
 			separator
 		fi
 	fi
-	if [[ $(find . -maxdepth 1 | wc -l) -lt 40 ]]; then
+	local filecount
+	filecount=$(find . -maxdepth 1 -mindepth 1 -not -name '.git' -not -name '.DS_Store' | wc -l)
+	if [[ $filecount -lt 40 ]]; then
 		exa --all --icons --sort=name --group-directories-first \
 			--git-ignore --ignore-glob=.DS_Store
 	fi
