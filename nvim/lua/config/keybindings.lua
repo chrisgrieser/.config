@@ -423,23 +423,6 @@ keymap(
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = "  Continue" })
 keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since `gf` remapped
 
---------------------------------------------------------------------------------
--- HARPOON
-
--- stylua: ignore start
--- consistent with adding/removing bookmarks in the Browser/Obsidian
-keymap("n", "<D-d>", function()
-	require("harpoon.mark").add_file()
-	vim.b.harpoonMark = "󰛢"
-end, { desc = "󰛢 Add" })
-keymap("n", "<D-S-d>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "󰛢 Menu" })
--- stylua: ignore end
-
-keymap("n", "<D-CR>", function()
-	local nextFile = require("funcs.harpoon-addons").harpoonNextCtimeFile()
-	vim.cmd.edit(nextFile)
-end, { desc = "󰛢 Next" })
-
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
 
@@ -616,7 +599,7 @@ autocmd("FileType", {
 -- just "q" to close special window
 -- remove the waiting time from the q, due to conflict with `qq` for comments
 autocmd("FileType", {
-	pattern = { "ssr", "TelescopePrompt", "harpoon" },
+	pattern = { "ssr", "TelescopePrompt" },
 	callback = function()
 		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
 		if bo.filetype == "ssr" then

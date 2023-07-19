@@ -1,10 +1,13 @@
 # shellcheck disable=2139
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # z & cd
-alias zz='z -' # back to last dir
-alias ..="z .."
-alias ...="z ../.."
-alias ....="z ../../.."
+# INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
+alias zz=' z -' # back to last dir
+alias ..=" z .."
+alias ...=" z ../.."
+alias ....=" z ../../.."
 
 # MAKE
 # if there is no makefile in current dir, runs makefile located in git root
@@ -22,9 +25,9 @@ function make() {
 }
 
 # utils
-alias r='exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
-alias q='exit'
-alias notify="osascript -e 'display notification \"\" with title \"Terminal Process finished.\" subtitle \"\" sound name \"\"'"
+# INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
+alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
+alias q=' exit'
 
 # added verbosity
 alias mv='mv -v'
@@ -61,8 +64,8 @@ alias tree='command exa --tree --level=2 --icons --git-ignore'
 alias treee='command exa --tree --level=3 --icons --git-ignore'
 alias treeee='command exa --tree --level=4 --icons --git-ignore'
 alias treeeee='command exa --tree --level=5 --icons --git-ignore'
-alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 
+alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
 
@@ -87,10 +90,10 @@ for i in {1..9}; do
 done
 
 # highlights for them
-ZSH_HIGHLIGHT_REGEXP+=(" F[[:digit:]]" 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
+export ZSH_HIGHLIGHT_REGEXP+=(" F[[:digit:]]" 'fg=magenta,bold')
+export ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
+export ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
+export ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
+export ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
+export ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
+export ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
