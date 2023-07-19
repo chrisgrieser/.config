@@ -6,7 +6,7 @@ return {
 			{ "<leader>ir", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
 			{ "<leader>ii", desc = "󱠤 REPL: Send Line" },
 		},
-		init = function ()
+		init = function()
 			require("which-key").register { mode = { "n" }, ["<leader>i"] = { name = " 󱠤 REPL (Iron)" } }
 		end,
 		config = function()
@@ -54,13 +54,29 @@ return {
 		ft = "http",
 		dependencies = "nvim-lua/plenary.nvim",
 		init = function()
-			vim.keymap.set("n", "<leader>th", function()
-				vim.cmd("en" .. "ew") -- separated due to unignorable codespell error…
-				vim.api.nvim_buf_set_option(0, "filetype", "http")
-				vim.api.nvim_buf_set_option(0, "buftype", "nowrite")
-				vim.api.nvim_buf_set_name(0, "request")
-				vim.fn.system("open https://github.com/rest-nvim/rest.nvim/tree/main/tests")
-			end, { desc = "󰴚 Test HTTP request" })
+			local a = vim.api
+			local keymap = vim.keymap.set
+
+			-- stylua: ignore start
+			keymap("n", "<leader>r", "<Plug>RestNvim", { desc = "󰴚 Run Request under cursor", buffer = true })
+			keymap("n", "<leader>la", "<Plug>RestNvimLast", { desc = "󰴚 Re-run the last request", buffer = true })
+			keymap("n", "<leader>e", function() vim.fn.system("open 'https://github.com/rest-nvim/rest.nvim/tree/main/tests'") end, { desc = "󰴚 Show example requests", buffer = true })
+			-- stylua: ignore end
+
+			a.nvim_create_user_command("Rest", function()
+				vim.cmd.tabnew()
+				a.nvim_buf_set_option(0, "filetype", "http")
+				a.nvim_buf_set_option(0, "buftype", "nofile")
+				a.nvim_buf_set_name(0, "HTTP Request")
+				vim.notify(
+					[[ BINDINGS
+,r   run request under cursor
+,la  run last request again
+,e   show examples for syntax]],
+					vim.log.levels.INFO,
+					{ timeout = 10000 }
+				)
+			end, {})
 		end,
 		opts = {
 			result_split_horizontal = true,

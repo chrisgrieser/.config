@@ -183,7 +183,6 @@ return {
 			}
 			require("which-key").register({
 				f = { name = " 󱗘 Refactor" },
-				t = { name = "  Terminal" },
 				u = { name = " 󰕌 Undo" },
 				l = { name = "  Log / Cmdline" },
 				g = { name = " 󰊢 Git" },

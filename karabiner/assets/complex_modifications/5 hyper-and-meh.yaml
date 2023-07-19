@@ -47,7 +47,7 @@ rules:
 
               FRONT_APP=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
               if [[ "$FRONT_APP" == "neovide" ]]; then
-                nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wq<CR>"
+                nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
               else
                 killall "$FRONT_APP"
               fi

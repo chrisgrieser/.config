@@ -7,8 +7,7 @@ rules:
         to:
           - key_code: f2
         conditions:
-          - type: frontmost_application_if
-            file_paths: ["[Nn]eovide"]
+          - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
       # cmd+q -> <Esc>ZZ (does not skip pre-quit triggers)
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
@@ -16,11 +15,9 @@ rules:
           # so cursor position and changes are saved
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wq|catch|q|endtry<CR>"
+              nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
         conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - "[Nn]eovide"
+          - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Grave ^ -> f1, and that in turn remapped in the app"
     # switching via keyboard layout laggy

@@ -31,12 +31,7 @@ end, { expr = true })
 -- Yanky
 keymap("n", "p", "<Plug>(YankyPutAfter)", { desc = " Paste (Yanky)" })
 keymap("n", "P", "<Plug>(YankyCycleForward)", { desc = " Cycle Yankring" })
-keymap(
-	"n",
-	"<leader>y",
-	function() require("telescope").extensions.yank_history.yank_history() end,
-	{ desc = " Yank History" }
-)
+
 --------------------------------------------------------------------------------
 
 -- paste charwise reg as linewise & vice versa
