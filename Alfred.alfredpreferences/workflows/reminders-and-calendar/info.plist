@@ -754,7 +754,7 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>185</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
@@ -799,7 +799,7 @@
 			<key>note</key>
 			<string>weekly date generator</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
@@ -808,7 +808,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>175</real>
 			<key>ypos</key>
 			<real>620</real>
 		</dict>
@@ -862,7 +862,7 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>865</real>
 		</dict>
@@ -923,7 +923,7 @@
 			<key>note</key>
 			<string>add reminder</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>450</real>
 		</dict>
@@ -934,7 +934,7 @@
 			<key>note</key>
 			<string>add event to BusyCal</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>725</real>
 		</dict>
@@ -943,7 +943,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>40</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>590</real>
 		</dict>
@@ -954,7 +954,7 @@
 			<key>note</key>
 			<string>add week</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>300</real>
 		</dict>
