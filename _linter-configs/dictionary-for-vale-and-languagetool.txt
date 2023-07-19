@@ -58,7 +58,6 @@ using
 vim
 Wikilink
 Zotero
-zotero
 zshrc
 kikilink
 citekey
@@ -90,7 +89,6 @@ Speedtest
 GPG
 shellcheck
 git
-MDN
 sketchybar
 Hammerspoon
 Sourcegraph
@@ -113,19 +111,11 @@ frontmost
 repo
 filetype
 performant
-⌘C
-⌘L
 fn
-⌘fn
-⌘Y
 Alternatively
 frequently
-Ejectable
 address
-ejectable
-⌘fn⏎
 zip
-BRAT
 OCR
 cssclass
 prepend
