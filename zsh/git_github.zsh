@@ -244,16 +244,14 @@ function acp() {
 #───────────────────────────────────────────────────────────────────────────────
 
 function clone() {
-	# turn http into SSH remotes
-	if [[ "$1" =~ http ]]; then
-		giturl="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
-	else
-		giturl="$1"
-	fi
+	url="$1"
 
-	git clone --depth=1 --filter=blob:none "$giturl"
+	# turn http into SSH remotes
+	[[ "$url" =~ http ]] && url="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
+
+	git clone --depth=1 --filter=blob:none "$url"
 	# shellcheck disable=SC2012
-	cd "$(ls -1 -t | head -n1)" || return 1
+	cd "$(command ls -1 -t | head -n1)" || return 1
 	separator
 	inspect
 }
