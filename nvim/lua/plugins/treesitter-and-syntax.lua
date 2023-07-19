@@ -96,7 +96,7 @@ return {
 		main = "ecb",
 		opts = { wincmd = "split" },
 		init = function()
-			vim.keymap.set("n", "<leader>t" .. "e", function()
+			vim.keymap.set("n", "<leader>e", function()
 				if vim.bo.filetype ~= "markdown" then
 					vim.notify("Only markdown codeblocks can be edited without a selection.", u.warn)
 					return
@@ -104,7 +104,7 @@ return {
 				vim.cmd.EditCodeBlock()
 			end, { desc = " Edit Embedded Code Block" })
 
-			vim.keymap.set("x", "<leader>t" .. "e", function()
+			vim.keymap.set("x", "<leader>e", function()
 				local fts = { "bash", "applescript", "vim" }
 				vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 					if not ft then return end

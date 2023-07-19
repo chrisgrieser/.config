@@ -2,10 +2,13 @@ return {
 	{ -- REPL
 		"Vigemus/iron.nvim",
 		keys = {
-			{ "<leader>tr", vim.cmd.IronRepl, desc = "󱠤 󰐊 Toggle REPL" },
-			{ "<leader>tR", vim.cmd.IronRestart, desc = "󱠤 󰐊 Restart REPL" },
-			{ "<leader>i", desc = "󱠤 󰐊 REPL: Send Line" },
+			{ "<leader>it", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
+			{ "<leader>ir", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
+			{ "<leader>ii", desc = "󱠤 REPL: Send Line" },
 		},
+		init = function ()
+			require("which-key").register { mode = { "n" }, ["<leader>i"] = { name = " 󱠤 REPL (Iron)" } }
+		end,
 		config = function()
 			require("iron.core").setup {
 				config = {
@@ -20,8 +23,8 @@ return {
 					},
 				},
 				keymaps = {
-					send_line = "<leader>i",
-					visual_send = "<leader>i",
+					send_line = "<leader>ii",
+					visual_send = "<leader>ii",
 				},
 			}
 		end,
@@ -84,7 +87,7 @@ return {
 			autochdir = true, -- when nvim changes pwd, will also change its pwd
 		},
 		keys = {
-			{ "<leader>tt", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
+			{ "<leader>t", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
 		},
 		cmd = { "ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection" },
 		init = function()
@@ -92,9 +95,9 @@ return {
 				pattern = "sh",
 				callback = function()
 					-- stylua: ignore
-					vim.keymap.set("n", "<leader>i", vim.cmd.ToggleTermSendCurrentLine, { desc = "  REPL: Send Line", buffer = true })
+					vim.keymap.set("n", "<leader>ii", vim.cmd.ToggleTermSendCurrentLine, { desc = " REPL: Send Line", buffer = true })
 					-- stylua: ignore
-					vim.keymap.set("x", "<leader>i", vim.cmd.ToggleTermSendVisualSelection, { desc = "  REPL: Send Selection", buffer = true })
+					vim.keymap.set("x", "<leader>ii", vim.cmd.ToggleTermSendVisualSelection, { desc = " REPL: Send Selection", buffer = true })
 				end,
 			})
 		end,

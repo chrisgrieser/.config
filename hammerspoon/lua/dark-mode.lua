@@ -12,20 +12,20 @@ local visuals = require("lua.visuals")
 -- - Hammerspoon Console
 -- - SideNotes
 local function toggleDarkMode()
-	local sketchyfont, sketchybg, toMode, pdfbg, sidenotesTheme
+	local sketchyFg, sketchyBg, toMode, pdfBg, sidenotesTheme
 
 	if u.isDarkMode() then
 		toMode = "light"
-		pdfbg = "Default"
-		sketchybg = "0xffcdcdcd"
-		sketchyfont = "0xff000000"
-		sidenotesTheme = "Monterey"
+		pdfBg = "Default"
+		sketchyBg = "0xffcdcdcd"
+		sketchyFg = "0xff000000"
+		sidenotesTheme = "Marshmallow"
 	else
 		toMode = "dark"
-		pdfbg = "Night"
-		sketchybg = "0xff333333"
-		sketchyfont = "0xffffffff"
-		sidenotesTheme = "City Lights"
+		pdfBg = "Night"
+		sketchyBg = "0xff333333"
+		sketchyFg = "0xffffffff"
+		sidenotesTheme = "Grapes and Berries"
 	end
 
 	-- neovim
@@ -37,7 +37,7 @@ local function toggleDarkMode()
 
 	-- Highlights PDF background
 	if u.appRunning("Highlights") then
-		u.app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfbg }
+		u.app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfBg }
 	end
 
 	-- System
@@ -61,7 +61,7 @@ local function toggleDarkMode()
 		--set weather icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--set covid-stats icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--update
-	]]):format(sketchybg, sketchyfont))
+	]]):format(sketchyBg, sketchyFg))
 
 	-- SideNotes
 	-- stylua: ignore
