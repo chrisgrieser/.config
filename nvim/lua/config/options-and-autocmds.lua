@@ -160,10 +160,6 @@ autocmd("CursorMoved", {
 		end
 	end,
 })
--- FIX scrolloff sometimes being set to zero? 🤔
-autocmd("BufReadPost", {
-	callback = function() opt.scrolloff = 13 end,
-})
 
 --------------------------------------------------------------------------------
 

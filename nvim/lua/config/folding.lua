@@ -6,7 +6,7 @@ local bo = vim.bo
 
 --------------------------------------------------------------------------------
 
--- REMEMBER FOLDS AND CURSOR
+-- REMEMBER FOLDS (AND CURSOR LOCATION)
 local function remember(mode)
 	-- stylua: ignore
 	local ignoredFts = { "TelescopePrompt", "DressingSelect", "DressingInput", "toggleterm", "gitcommit", "replacer", "harpoon", "help", "qf" }
