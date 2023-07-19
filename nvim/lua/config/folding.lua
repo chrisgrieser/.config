@@ -2,6 +2,30 @@ local cmd = vim.cmd
 local fn = vim.fn
 local keymap = vim.keymap.set
 local u = require("config.utils")
+local bo = vim.bo
+
+--------------------------------------------------------------------------------
+
+-- REMEMBER FOLDS AND CURSOR
+local function remember(mode)
+	-- stylua: ignore
+	local ignoredFts = { "TelescopePrompt", "DressingSelect", "DressingInput", "toggleterm", "gitcommit", "replacer", "harpoon", "help", "qf" }
+	if vim.tbl_contains(ignoredFts, bo.filetype) or bo.buftype ~= "" or not bo.modifiable then return end
+
+	if mode == "save" then
+		cmd.mkview(1)
+	else
+		pcall(function() cmd.loadview(1) end) -- pcall, since new files have no view yet
+	end
+end
+vim.api.nvim_create_autocmd("BufWinLeave", {
+	pattern = "?*", -- pattern required, otherwise does not trigger
+	callback = function() remember("save") end,
+})
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	pattern = "?*",
+	callback = function() remember("load") end,
+})
 
 --------------------------------------------------------------------------------
 -- PAUSE FOLDS WHILE SEARCHING
@@ -105,7 +129,7 @@ keymap("n", "h", function()
 		local wasFolded = pcall(u.normal, "zc")
 		if wasFolded then return end
 	end
-	vim.cmd.normal{"h", bang = true}
+	vim.cmd.normal { "h", bang = true }
 end, { desc = "h (+ close fold at BoL)" })
 
 -- ensure that `l` does not move to the right when opening a fold, otherwise
