@@ -30,8 +30,9 @@ export FZF_DEFAULT_OPTS='--color="hl:206" --keep-right --pointer=‚üê --prompt="‚
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 
 # magic enter
-export MAGIC_ENTER_GIT_COMMAND="inspect"
-export MAGIC_ENTER_OTHER_COMMAND="inspect"
+# leading space to ignore it in history due to HIST_IGNORE_SPACE
+export MAGIC_ENTER_GIT_COMMAND=" inspect"
+export MAGIC_ENTER_OTHER_COMMAND=" inspect"
 
 # zoxide
 export _ZO_DATA_DIR="$DATA_DIR/zoxide/"

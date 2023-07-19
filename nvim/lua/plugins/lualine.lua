@@ -206,10 +206,6 @@ local lualineConfig = {
 	sections = {
 		lualine_a = {
 			{
-				require("funcs.harpoon-addons").harpoonStatusline,
-				padding = { left = 1, right = 0 },
-			},
-			{
 				"filetype",
 				colored = false,
 				padding = { left = 1, right = 0 },
@@ -264,7 +260,6 @@ local lualineConfig = {
 			"DressingInput",
 			"DressingSelect",
 			"Mason",
-			"harpoon",
 			"ccc-ui",
 		},
 		globalstatus = true,

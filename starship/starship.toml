@@ -15,6 +15,7 @@ $git_commit\
 $git_state\
 $sudo\
 ](bg:black)\
+[ ](fg:black)\
 $cmd_duration\
 $status\
 $character\
