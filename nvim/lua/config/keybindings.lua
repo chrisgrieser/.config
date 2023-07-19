@@ -225,7 +225,7 @@ end, { desc = "󰓆 Accept Word" })
 -- REFACTORING
 
 keymap("n", "<leader>ff", ":% s///g<Left><Left><Left>", { desc = "󱗘 :substitute" })
-keymap("x", "<leader>ff", ": s///g<Left><Left><Left>", { desc = "󱗘 :substitute" })
+keymap("x", "<leader>ff", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = "󱗘 :substitute selection" })
 
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
 keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines" })
@@ -234,7 +234,7 @@ keymap("n", "<leader>f<Tab>", function()
 	bo.expandtab = false
 	cmd.retab { bang = true }
 	bo.tabstop = vim.opt_global.tabstop:get()
-	vim.notify("Now using tabs ↹")
+	vim.notify("Now using tabs ↹ ")
 end, { desc = "↹ Use Tabs" })
 
 keymap("n", "<leader>f<Space>", function()

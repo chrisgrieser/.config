@@ -1,11 +1,6 @@
 #!/usr/bin/env zsh
 
 MAX_FILE_SIZE_MB=10
-#───────────────────────────────────────────────────────────────────────────────
-
-# ensure non-zero exit of script if anything fails, relevant for hammerspoon to
-# be able to detect sync failure
-set -e
 
 # shellcheck disable=2034
 GIT_OPTIONAL_LOCKS=0
@@ -30,12 +25,16 @@ msg="$device_name ($filesChanged)"
 
 # loop git add-commit-pull-push, since when between add and push files have been
 # changed, the push will fail
+# exit 0 once push/pull is successful
+# exit 1 after multiple failed attempts to push/pull
 i=0
 while true; do
 	# "|| true" ensures that if the git add fails, the script will not abort due to set -e
 	(git add -A && git commit -m "$msg" --author="🤖 automated<cron@job>") || true
-	git pull && git push && break
+	git pull && git push && return 0 
 	sleep 3
 	i=$((i + 1))
-	[[ $i -gt 10 ]] && break
+	[[ $i -gt 10 ]] && return 1
 done
+
+
