@@ -14,7 +14,7 @@ return {
 				config = {
 					repl_open_cmd = require("iron.view").split.horizontal.belowright(8),
 					repl_definition = {
-						-- using ToggleTerm as REPL for zsh
+						-- using ToggleTerm as REPL for zsh, therefore `sh` not listed here
 						lua = { command = { "lua" } },
 						typescript = { command = { "node" } },
 						python = { command = { "python3" } },

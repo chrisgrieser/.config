@@ -2,24 +2,12 @@
 aliases: 
 tags: pandoc, citation, coding
 similar:
-- [[Citation Styles]]
-- [[Bibliography Creation]]
+- "[[Citation Styles]]"
+- "[[Bibliography Creation]]"
 ---
 
 > [!INFO]  
 > This note is a symlink to `pandoc/README.md` in [my dotfile directory](https://github.com/chrisgrieser/dotfiles)
-
-<!--toc:start-->
-- [Tutorials](#tutorials)
-- [Tools](#tools)
-- [Priority of Options](#priority-of-options)
-- [How Templating works](#how-templating-works)
-- [Useful Snippets](#useful-snippets)
-- [Templates](#templates)
-- [Filters](#filters)
-- [Why Lua Filters?](#why-lua-filters)
-- [References without Citations](#references-without-citations)
-<!--toc:end-->
 
 ## Tutorials
 - [Pandoc and Obsidian - Create slideshows, PDFs and Word documents - Obsidian Publish](https://publish.obsidian.md/hub/04+-+Guides%2C+Workflows%2C+%26+Courses/Community+Talks/YT+-+Pandoc+and+Obsidian+-+Create+slideshows%2C+PDFs+and+Word+documents)

@@ -190,7 +190,7 @@ local function telescopeConfig()
 				git_status = true, -- seems to be buggy sometimes
 				group = true,
 				hide_parent_dir = true, -- "../"
-				select_buffer = true,
+				select_buffer = false,
 				mappings = {
 					i = {
 						-- mappings should be consistent with nvim-ghengis mappings

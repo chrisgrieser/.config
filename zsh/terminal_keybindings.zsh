@@ -41,6 +41,7 @@ function zvm_after_init() {
 	bindkey -M viins "^O" harpoon # bound to cmd+enter via wezterm
 }
 bindkey -M viins "…" insert-last-word # …=alt+.
+bindkey -M viins "^Z" undo # cmd+z via wezterm
 
 # Plugin Bindings
 bindkey -M viins '^[[A' history-substring-search-up # up/down: history substring search
