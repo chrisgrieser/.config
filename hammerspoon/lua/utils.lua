@@ -144,10 +144,9 @@ end
 ---play macOS sound
 ---@param soundName string
 function M.sound(soundName)
-	if Sound:isPlaying() then return end
-	Sound = hs.sound.getByName({ sound = soundName })
-	Sound:play()
-	Sound = nil
+	if Soundfile and Soundfile:isPlaying() then return end
+	Soundfile = hs.sound.getByName(soundName):play()
+	Soundfile = nil
 end
 
 --------------------------------------------------------------------------------
