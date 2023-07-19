@@ -314,3 +314,7 @@ matches:
     replace: open
     propagate_casing: true
     word: true
+  - triggers: [isntead, instread]
+    replace: instead
+    propagate_casing: true
+    word: true
