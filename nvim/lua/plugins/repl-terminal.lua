@@ -67,7 +67,6 @@ return {
 				show_http_info = true,
 				show_headers = false,
 				formatters = {
-					-- rome cannot format stdin yet
 					json = function(body)
 						return vim.fn.system("rome format --stdin-file-path='foo.json'", body)
 					end,

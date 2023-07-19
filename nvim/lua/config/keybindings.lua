@@ -577,14 +577,17 @@ keymap("n", "<leader>ow", function()
 	end
 end, { desc = " 󰖶 Toggle Wrap & Colorcolumn" })
 
+-- FIX scrolloff and folding sometimes broken
+keymap("n", "<leader>of", function ()
+	vim.opt_local.scrolloff = vim.opt.scrolloff:get()
+	vim.opt_local.foldlevel = 99
+end, { desc = "  Fix Folding & Scroll Offset" })
+
 --------------------------------------------------------------------------------
 
 -- TERMINAL
 keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
-
-keymap("n", "<leader>tf", "<Plug>PlenaryTestFile", { desc = " Test File" })
-keymap("n", "<leader>td", "<cmd>PlenaryBustedDirectory .<CR>", { desc = " Tests in Directory" })
 
 --------------------------------------------------------------------------------
 
