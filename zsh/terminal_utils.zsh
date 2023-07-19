@@ -63,9 +63,9 @@ function timerc() {
 # no arg = all files in folder will be deleted
 function d() {
 	if [[ $# == 0 ]]; then
-		command mv -iv ./* ~/.Trash/
+		command mv -i ./* ~/.Trash/
 	else
-		command mv -iv "$@" ~/.Trash/
+		command mv -i "$@" ~/.Trash/
 	fi
 	# shellcheck disable=2181
 	if [[ $? -eq 0 ]] ; then
