@@ -205,6 +205,13 @@ function gb() {
 #───────────────────────────────────────────────────────────────────────────────
 # GIT ADD, COMMIT, (PULL) & PUSH
 
+# all but last args: files to add
+# last arg: commit msg
+function ac() {
+	local files=${@:1:$((#-1))}
+	local commit_msg="${*:$#}" # last arg https://stackoverflow.com/a/33271194/22114136
+}
+
 function acp() {
 	# safeguard against accidental pushing of large files
 	local NUMBER_LARGE_FILES
