@@ -58,12 +58,11 @@ function pip3() {
 
 alias bkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-script.sh"'
 
-alias l='command exa --all --long --no-user --header --icons --git --group-directories-first --sort=name'
-alias exa='command exa --all --icons --git --group-directories-first --sort=name'
-alias tree='command exa --tree --level=2 --icons --git-ignore'
-alias treee='command exa --tree --level=3 --icons --git-ignore'
-alias treeee='command exa --tree --level=4 --icons --git-ignore'
-alias treeeee='command exa --tree --level=5 --icons --git-ignore'
+alias l='exa --all --long --no-user --header --icons --git --group-directories-first --sort=name'
+alias tree='exa --tree --level=2 --icons --git-ignore'
+alias treee='exa --tree --level=3 --icons --git-ignore'
+alias treeee='exa --tree --level=4 --icons --git-ignore'
+alias treeeee='exa --tree --level=5 --icons --git-ignore'
 
 alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 #───────────────────────────────────────────────────────────────────────────────
@@ -82,7 +81,7 @@ alias -g C='| pbcopy ; echo "Copied."' # copy
 alias -g N='| wc -l | tr -d " "'       # count lines
 
 # "OK Json" seems to be a good GUI alternative, if needed
-alias -g J='| fx'                      # json preview
+alias -g J='| fx' # json preview
 
 # get field #n
 for i in {1..9}; do
@@ -90,10 +89,10 @@ for i in {1..9}; do
 done
 
 # highlights for them
-export ZSH_HIGHLIGHT_REGEXP+=(" F[[:digit:]]" 'fg=magenta,bold')
-export ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
-export ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
-export ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
-export ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
-export ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
-export ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(" F[1-9]" 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')

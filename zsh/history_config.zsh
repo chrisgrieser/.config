@@ -17,9 +17,6 @@ setopt INC_APPEND_HISTORY
 setopt HIST_VERIFY
 setopt EXTENDED_HISTORY
 
-
-# https://zsh.sourceforge.io/Doc/Release/Parameters.html#Parameters-Used-By-The-Shell
-export HISTORY_IGNORE="(..|inspect|q)"
 setopt HIST_NO_STORE # ignore history command itself
 setopt HIST_IGNORE_SPACE # leading space is not added to the history
 
