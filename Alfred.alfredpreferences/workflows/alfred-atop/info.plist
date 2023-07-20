@@ -48,7 +48,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>6B2B2B3D-3ECD-4FA0-A391-F2E0DE603281</string>
+				<string>6756C8FD-2532-4371-A135-956571ACD798</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -145,7 +145,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>6B2B2B3D-3ECD-4FA0-A391-F2E0DE603281</key>
+		<key>6756C8FD-2532-4371-A135-956571ACD798</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -923,9 +923,9 @@
 		</dict>
 		<dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
+			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
-			<string>6B2B2B3D-3ECD-4FA0-A391-F2E0DE603281</string>
+			<string>6756C8FD-2532-4371-A135-956571ACD798</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1270,6 +1270,15 @@ Display mounted volumes directly via `vol`.
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
+		<key>6756C8FD-2532-4371-A135-956571ACD798</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>495</real>
+			<key>ypos</key>
+			<real>815</real>
+		</dict>
 		<key>681490F8-D3BB-4024-AFE0-DCEE69201856</key>
 		<dict>
 			<key>colorindex</key>
@@ -1278,15 +1287,6 @@ Display mounted volumes directly via `vol`.
 			<real>595</real>
 			<key>ypos</key>
 			<real>970</real>
-		</dict>
-		<key>6B2B2B3D-3ECD-4FA0-A391-F2E0DE603281</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>515</real>
-			<key>ypos</key>
-			<real>835</real>
 		</dict>
 		<key>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</key>
 		<dict>
