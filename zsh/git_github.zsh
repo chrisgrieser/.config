@@ -208,34 +208,45 @@ function gb() {
 # all but last args: files to add
 # last arg: commit msg
 function ac() {
-	local files=${@:1:$((#-1))}
+	local files="${*:1:$((#-1))}" # all but last arg https://stackoverflow.com/a/1215592/22114136
 	local commit_msg="${*:$#}" # last arg https://stackoverflow.com/a/33271194/22114136
+	git add "$files"
+	git commit -m "$commit_msg"
+
+	# ensure no overlength of commit msg
+	local msg_length=${#commit_msg}
+	if [[ $msg_length -gt 50 ]]; then
+		echo "Commit Message too long ($msg_length chars)."
+		commit_msg=${commit_msg::50}
+		print -z "acp \"$commit_msg\"" # put back into buffer
+		return 1
+	fi
 }
 
 function acp() {
 	# safeguard against accidental pushing of large files
-	local NUMBER_LARGE_FILES
-	NUMBER_LARGE_FILES=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M | wc -l | xargs)
-	if [[ $NUMBER_LARGE_FILES -gt 0 ]]; then
-		echo "$NUMBER_LARGE_FILES large file(s) detected, aborting."
+	local number_large_files
+	number_large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M | wc -l | xargs)
+	if [[ $number_large_files -gt 0 ]]; then
+		echo "$number_large_files large file(s) detected, aborting."
 		find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M
 		echo
 		return 1
 	fi
 
-	local COMMIT_MSG="$*"
-	[[ -z "$COMMIT_MSG" ]] && COMMIT_MSG="chore"
+	local commit_msg="$*"
+	[[ -z "$commit_msg" ]] && commit_msg="chore"
 
 	# ensure no overlength of commit msg
-	local MSG_LENGTH=${#COMMIT_MSG}
-	if [[ $MSG_LENGTH -gt 50 ]]; then
-		echo "Commit Message too long ($MSG_LENGTH chars)."
-		COMMIT_MSG=${COMMIT_MSG::50}
-		print -z "acp \"$COMMIT_MSG\"" # put back into buffer
+	local msg_length=${#commit_msg}
+	if [[ $msg_length -gt 50 ]]; then
+		echo "Commit Message too long ($msg_length chars)."
+		commit_msg=${commit_msg::50}
+		print -z "acp \"$commit_msg\"" # put back into buffer
 		return 1
 	fi
 
-	git add -A && git commit -m "$COMMIT_MSG"
+	git add -A && git commit -m "$commit_msg"
 	git pull
 	git push
 
