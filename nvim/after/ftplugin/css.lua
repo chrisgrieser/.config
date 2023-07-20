@@ -24,7 +24,7 @@ keymap("n", "<leader>i", function()
 		lineContent = lineContent:gsub(";", " !important;")
 	end
 	fn.setline(".", lineContent) ---@diagnostic disable-line: param-type-mismatch
-end, { buffer = true, desc = "toggle !important" })
+end, { buffer = true, desc = " Toggle !important", nowait = true })
 
 --------------------------------------------------------------------------------
 

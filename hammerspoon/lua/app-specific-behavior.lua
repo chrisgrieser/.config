@@ -188,6 +188,25 @@ Wf_script_editor = wf
 	end)
 
 --------------------------------------------------------------------------------
+-- MIMESTREAM
+
+Wf_mimestream = wf.new("Mimestream"):subscribe(wf.windowCreated, function(newWin)
+	-- can't check for "New Message", since not able to go back to "TO" field
+	-- via keyboard shortcut
+	local isComposeWin = newWin:title():find("^Re") or newWin:title():find("^Fwd")
+	if not isComposeWin then return end
+
+	wu.moveResize(newWin, wu.pseudoMax)
+	u.runWithDelays(0.2, function()
+		u.keystroke({ "cmd" }, "a")
+		u.keystroke({ "cmd" }, "+")
+		u.keystroke({ "cmd" }, "+")
+		u.keystroke({ "cmd" }, "+")
+		u.keystroke({ "cmd" }, "left") -- deselect
+	end)
+end)
+
+--------------------------------------------------------------------------------
 
 -- DISCORD
 -- when focused, enclose URL in clipboard with <>
