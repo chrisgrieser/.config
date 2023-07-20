@@ -12,6 +12,7 @@ function run() {
 
 	/** @type AlfredItem[] */
 	const taggedFiles = app
+		// https://www.alfredforum.com/topic/18041-advanced-search-using-tags-%C3%A0-la-finder/
 		.doShellScript(`mdfind "kMDItemUserTags == ${tagName}"`)
 		.split("\r")
 		.map((path) => {
