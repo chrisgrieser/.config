@@ -8,14 +8,11 @@
 	</array>
 	<key>showContacts</key>
 	<false/>
-	<key>showFolders</key>
-	<true/>
 	<key>showPreferences</key>
 	<false/>
 	<key>showUserDefined</key>
 	<array>
 		<string>com.apple.alias-file</string>
-		<string>com.apple.web-internet-location</string>
 	</array>
 </dict>
 </plist>
