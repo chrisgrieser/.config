@@ -1,8 +1,9 @@
 matches:
-  - trigger: "!no"
-    replace: ❌
+  # Emojis
   - trigger: "!yes"
     replace: ✅
+  - trigger: "!no"
+    replace: ❌
   - trigger: "!wait"
     replace: ⏳
   - trigger: "!info"
@@ -12,27 +13,29 @@ matches:
   - trigger: "!clip"
     replace: 📋
   - trigger: "!warn"
-    replace: ⚠️
+    replace: ⚠️ # is actually an emoji outside of nvim
   - trigger: "!star"
-    replace: ★ 
-  - trigger: "->"
-    replace: →
-    word: true
+    replace: ⭐
   - trigger: "->>"
-    replace: ➡️
-  - trigger: "<->"
-    replace: ↔
+    replace: ➡️ # is actually an emoji outside of nvim
   - trigger: "!ampel"
     replace: 🔴🟡🟢
   - trigger: " mm"
     replace: " 🙈"
-  - triggers: ["(tm)", "!tm"]
-    replace: "™"
   - trigger: "!eyes"
     replace: 👁️👄👁️
+  #─────────────────────────────────────────────────────────────────────────
+  # unicode
+  - trigger: "->"
+    replace: → # unicode arrow
+    word: true
+  - trigger: "<->"
+    replace: ↔ # unicode arrow
+  - triggers: ["(tm)", "!tm"]
+    replace: "™"
 
   #─────────────────────────────────────────────────────────────────────────────
-
+  # Ascii Art
   - triggers: ["!shrug", "!ascii"]
     replace: ¯\_(ツ)_/¯
   - triggers: ["!gimme", "!ascii"]
@@ -49,7 +52,7 @@ matches:
     replace: ┬─┬ノ(ಠ_ಠノ)
 
   #─────────────────────────────────────────────────────────────────────────────
-
+  # macOS symbols
   - triggers: ["!ctrl", "!control"]
     replace: ⌃
   - trigger: "!space"
