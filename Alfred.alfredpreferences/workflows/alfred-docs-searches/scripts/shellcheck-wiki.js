@@ -15,7 +15,7 @@ const jsonArr = app
 	.slice(3, -1)
 	.map((/** @type {string} */ line) => {
 		const subsite = line.replace(ahrefRegex, "$1");
-		if (subsite === "</li>") return;
+		if (subsite === "</li>") return {};
 		const desc = line.replace(ahrefRegex, "$2").replaceAll("&ndash;", "").trim();
 		const url = baseURL + subsite;
 		let matcher = subsite;

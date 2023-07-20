@@ -207,11 +207,14 @@ function gb() {
 
 # all but last args: files to add
 # last arg: commit msg
+# only one arg: `git add -A` & the one arg as commit msg
 function ac() {
-	local files="${*:1:$((#-1))}" # all but last arg https://stackoverflow.com/a/1215592/22114136
 	local commit_msg="${*:$#}" # last arg https://stackoverflow.com/a/33271194/22114136
-	git add "$files"
-	git commit -m "$commit_msg"
+	local files="${*:1:$((#-1))}" # all but last arg https://stackoverflow.com/a/1215592/22114136
+	if [[ -f "$commit_msg" ]] ; then
+		echo "Commit Message should be the last argument."
+		return 1
+	fi
 
 	# ensure no overlength of commit msg
 	local msg_length=${#commit_msg}
@@ -221,6 +224,13 @@ function ac() {
 		print -z "acp \"$commit_msg\"" # put back into buffer
 		return 1
 	fi
+
+	if [[ -n "$files" ]] ; then
+		git add "$files"
+	else
+		git add -A
+	fi
+	git commit -m "$commit_msg"
 }
 
 function acp() {
