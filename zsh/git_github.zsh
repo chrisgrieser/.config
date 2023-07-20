@@ -10,7 +10,6 @@ alias gM="git commit --amend"
 alias gc="git commit -m"
 alias push="git push"
 alias pull="git pull"
-alias restore="git restore --source" # 1: hash, 2: file -> restore (existing) file
 alias gi='gh issue list'
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 

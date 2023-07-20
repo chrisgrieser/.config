@@ -7,26 +7,33 @@ app.includeStandardAdditions = true;
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(){
-	const tagName = $.getenv("tag_to_search")
+function run() {
+	const tagName = $.getenv("tag_to_search");
 
 	/** @type AlfredItem[] */
-	const taggedFile = app.doShellScript(`mdfind "kMDItemUserTags == ${tagName}"`)
+	const taggedFiles = app
+		.doShellScript(`mdfind "kMDItemUserTags == ${tagName}"`)
 		.split("\r")
-		.map(path => {
-			const fileName = path.split("/").pop()
-			const parentFolder = path.split("/").slice(0, -1).join("/")
-			const uti = app.doShellScript(`mdls -name kMDItemContentType "${path}"`).split('"')[1]
-			
+		.map((path) => {
+			const fileName = path.split("/").pop();
+			const extension = fileName.split(".").pop();
+			let parentFolder = path.split("/").slice(0, -1).join("/")
+			parentFolder = parentFolder
+				.replace(/\/Users\/\w+\/Library\/Mobile Documents\/com~apple~CloudDocs/, "☁️")
+				.replace(/\/Users\/\w+/, "~");
+
+			const iconToDisplay = { path: path };
+			const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "pdf"];
+			if (!imageExtensions.includes(extension)) iconToDisplay.type = "fileicon";
+
 			return {
 				title: fileName,
 				subtitle: parentFolder,
-				icon: {
-					type: "filetype",
-					path: uti,
-				},
+				icon: iconToDisplay,
+				type: "file:skipcheck",
+				uid: path,
 				arg: path,
 			};
 		});
-	return JSON.stringify({ items: taggedFile });
+	return JSON.stringify({ items: taggedFiles });
 }
