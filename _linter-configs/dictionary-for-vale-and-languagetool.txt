@@ -121,3 +121,12 @@ cssclass
 prepend
 backlink
 Regex
+Normal
+US
+TUI
+etc
+iCloud
+Cloud
+encounter
+Capslock
+Raycast

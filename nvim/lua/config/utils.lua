@@ -84,7 +84,7 @@ function M.applyTemplateIfEmptyFile(ext)
 
 		vim.cmd("keepalt 0read " .. skeletonFile)
 		M.normal("G")
-	end, 1)
+	end, 100)
 end
 
 --------------------------------------------------------------------------------
