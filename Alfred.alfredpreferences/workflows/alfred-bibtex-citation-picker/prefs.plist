@@ -4,8 +4,6 @@
 <dict>
 	<key>bibtex_library_path</key>
 	<string>~/.config/pandoc/main-bibliography.bib</string>
-	<key>citation_picker_keyword</key>
-	<string>cc</string>
 	<key>copy_citation_on_adding_entry</key>
 	<true/>
 	<key>csl_folder</key>
