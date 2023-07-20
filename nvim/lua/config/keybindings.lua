@@ -557,7 +557,7 @@ end, { desc = " 󰖶 Toggle Wrap" })
 
 -- FIX scrolloff and folding sometimes broken
 keymap("n", "<leader>of", function ()
-	vim.opt_local.scrolloff = vim.opt.scrolloff:get()
+	vim.opt.scrolloff = 13
 	vim.opt_local.foldlevel = 99
 end, { desc = " 󰘖 Fix Folding/Scrolloff" })
 

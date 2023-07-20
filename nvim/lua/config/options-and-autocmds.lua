@@ -23,16 +23,6 @@ opt.titlestring = '%{expand("%:p")}'
 
 --------------------------------------------------------------------------------
 
--- FIX these settings sometimes getting changed on buffer level
-autocmd("BufReadPost", {
-	callback = function()
-		vim.opt_local.foldlevel = 99
-		vim.opt_local.scrolloff = opt.scrolloff:get()
-	end,
-})
-
---------------------------------------------------------------------------------
-
 -- DIRECTORIES
 -- move to custom location where they are synced independently from the dotfiles repo
 opt.directory:prepend(u.vimDataDir .. "swap//")
@@ -148,7 +138,7 @@ autocmd("CursorMoved", {
 
 		local win_height = vim.api.nvim_win_get_height(0)
 		local win_view = fn.winsaveview()
-		local scrolloff = math.min(opt.scrolloff:get(), math.floor(win_height / 2))
+		local scrolloff = math.min(opt_local.scrolloff:get(), math.floor(win_height / 2))
 		local scrolloff_line_count = win_height - (fn.line("w$") - win_view.topline + 1)
 		local distance_to_last_line = fn.line("$") - win_view.lnum
 		if
