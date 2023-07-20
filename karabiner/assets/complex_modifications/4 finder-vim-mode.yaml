@@ -1,7 +1,6 @@
 title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 maintainers: [pseudometa (chrisgrieser)]
-version: [1.3.0]
 anchors:
   - conditions:
       - &finder-app
@@ -985,28 +984,6 @@ rules:
           - *remove-move-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
       #─────────────────────────────────────────────────────────────────────────
-      #─────────────────────────────────────────────────────────────────────────
-      # SORT
-      - type: basic # by name
-        from: { key_code: "3" }
-        to:
-          - { key_code: "1", modifiers: [control, option, command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      - type: basic # by modification date
-        from: { key_code: "4" }
-        to:
-          - { key_code: "5", modifiers: [control, option, command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      - type: basic # by size
-        from: { key_code: "5" }
-        to:
-          - { key_code: "6", modifiers: [control, option, command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      - type: basic # by kind
-        from: { key_code: "6" }
-        to:
-          - { key_code: "2", modifiers: [control, option, command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Number keys: Toggle Tags
       # https://support.apple.com/guide/mac-help/tag-files-and-folders-mchlp15236/mac
