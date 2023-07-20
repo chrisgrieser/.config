@@ -72,7 +72,7 @@ alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 alias -s {yml,yaml}='yq'
 alias -s json='fx'
 alias -s {gif,png,jpg,jpeg,webp}='qlmanage -p'
-alias -s {md,lua,js,ts,css,sh,zsh,applescript}='bat'
+alias -s {md,lua,js,ts,css,sh,zsh,applescript,txt,py}='bat'
 
 # GLOBAL ALIAS (to be used at the end, mostly)
 alias -g G='| rg'
