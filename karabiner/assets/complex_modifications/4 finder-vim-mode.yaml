@@ -1008,27 +1008,58 @@ rules:
           - { key_code: "2", modifiers: [control, option, command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
-      # Sidebar/Preview/Pathbar Toggle
+      # Number keys: Toggle Tags
+      # https://support.apple.com/guide/mac-help/tag-files-and-folders-mchlp15236/mac
       - type: basic
-        from:
-          key_code: "1"
-          modifiers: { optional: [command] }
+        from: { key_code: "1" }
         to:
-          - { key_code: "s", modifiers: [option, command] }
+          - { key_code: "1", modifiers: [control] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
-        from:
-          key_code: "0"
-          modifiers: { optional: [command] }
+        from: { key_code: "2" }
         to:
-          - { key_code: "p", modifiers: [shift, command] }
+          - { key_code: "2", modifiers: [control] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
-        from:
-          key_code: "9"
-          modifiers: { optional: [command] }
+        from: { key_code: "3" }
         to:
-          - { key_code: "p", modifiers: [option, command] }
+          - { key_code: "3", modifiers: [control] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic
+        from: { key_code: "4" }
+        to:
+          - { key_code: "4", modifiers: [control] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic
+        from: { key_code: "5" }
+        to:
+          - { key_code: "5", modifiers: [control] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic
+        from: { key_code: "6" }
+        to:
+          - { key_code: "6", modifiers: [control] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic
+        from: { key_code: "7" }
+        to:
+          - { key_code: "7", modifiers: [control] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic
+        from: { key_code: "8" }
+        to:
+          - { key_code: "8", modifiers: [control] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic
+        from: { key_code: "9" }
+        to:
+          - { key_code: "9", modifiers: [control] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # remove all tags
+      - type: basic
+        from: { key_code: "0" }
+        to:
+          - { key_code: "0", modifiers: [control] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # ctrl-p: copy path
