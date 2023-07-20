@@ -72,6 +72,13 @@ Use Pandoc solely as citation resolver, without changing the format (i.e. markdo
 pandoc --citeproc --bibliography="$HOME/.pandoc/bibliography.bib" input.md -o output.md --to=markdown-citations --metadata="suppress-bibliography:true"
 ```
 
+```bash
+# https://github.com/chrisgrieser/alfred-bibtex-citation-picker/pull/38#issuecomment-1644641042
+# alternative: I try different output formats, but it can only use the gfm. Other formats will ignore the YAML front matter. You also need to use ------------------------ as the pagebreak.
+pandoc --citeproc input.md -o intermediate.json -s
+pandoc intermediate.json -t gfm -o output.md -s
+```
+
 ## Priority of Options
 __Higher overwrites lower__
 1. Direct CLI arguments
