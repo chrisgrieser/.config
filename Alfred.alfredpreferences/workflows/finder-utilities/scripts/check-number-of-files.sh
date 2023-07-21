@@ -1,4 +1,7 @@
 #!/usr/bin/env zsh
-# shellcheck disable=2154
-cd "${default_folder/#\~/$HOME}" || exit 1
+
+# shellcheck disable=1091
+source "$HOME/.zshenv"
+cd "$WD" || return 1
+
 [[ -z "$(ls)" ]] && echo -n "empty"

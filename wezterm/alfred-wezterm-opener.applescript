@@ -1,7 +1,9 @@
-# INFO to be entered in the Alfred Terminal settings. Kept here for reference.
+# INFO to be entered in the Alfred Terminal settings 
+# alfredpreferences://navigateto/features>terminal
+# (Kept here just for reference.)
 --------------------------------------------------------------------------------
 
-on alfred_script(shellCommand) 
+on alfred_script(shellCmd)
 	# Launch Wezterm if needed (Appname is `WezTerm`, processname is `wezterm-gui`)
 	tell application "WezTerm" to activate
 	tell application "System Events"
@@ -10,5 +12,5 @@ on alfred_script(shellCommand)
 		end repeat
 	end tell
 
-	do shell script ("echo '" & shellCommand & "' | wezterm cli send-text --no-paste")
+	do shell script ("echo '" & shellCmd & "' | wezterm cli send-text --no-paste")
 end alfred_script
