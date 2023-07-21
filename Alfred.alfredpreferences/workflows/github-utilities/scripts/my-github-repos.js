@@ -33,7 +33,7 @@ function run(argv) {
 	const repoFolder = argv[0]; // local repo path passed from .zshenv
 	const obsiPlugins = $.getenv("extra_folder_1").replace(/^~/, app.pathTo("home folder"));
 	const locations = `"${repoFolder}" "${obsiPlugins}"`;
-	console.log("locations:", locations);
+	app.doShellScript(`mkdir -p ${locations}`);
 
 	const localRepos = {};
 	app
@@ -41,8 +41,8 @@ function run(argv) {
 		.split("\r")
 		.forEach((/** @type {string} */ gitFolderPath) => {
 			const localRepo = {};
-			// localRepo.path = gitFolderPath.replace(/\.git\/?$/, "");
-			// const name = localRepo.path.replace(/.*\/(.*)\/$/, "$1");
+			localRepo.path = gitFolderPath.replace(/\.git\/?$/, "");
+			const name = localRepo.path.replace(/.*\/(.*)\/$/, "$1");
 			try {
 				localRepo.dirty = app.doShellScript(`cd "${localRepo.path}" && git status --porcelain`) !== "";
 			} catch (_error) {
