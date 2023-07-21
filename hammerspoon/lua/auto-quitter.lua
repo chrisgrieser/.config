@@ -14,7 +14,6 @@ Thresholds = {
 	Discord = 180,
 	BusyCal = 2,
 	neovide = 120, -- needs lowercase
-	["wezterm-gui"] = 45, -- does not work with "WezTerm"
 	Hammerspoon = 3, -- affects the console, not hammerspoon itself
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
@@ -61,9 +60,6 @@ local function quit(app)
 	elseif app == "Hammerspoon" then
 		hs.closeConsole()
 		suffix = " (Console)"	
-	elseif app == "wezterm-gui" then
-		u.app(app):kill9() -- needs kill9 to avoid confirmation
-		suffix = " (kill9)"	
 	else
 		u.app(app):kill()
 	end
