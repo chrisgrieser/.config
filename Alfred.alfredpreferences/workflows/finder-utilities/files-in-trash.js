@@ -24,15 +24,15 @@ const trashedFile = app
 		const filename = path.split("/").pop();
 
 		const iconToDisplay = { path: path };
-		const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "pdf"];
+		const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];
 		if (!imageExtensions.includes(ext)) iconToDisplay.type = "fileicon";
 
 		return {
 			title: filename,
 			match: alfredMatcher(path),
+			icon: iconToDisplay,
 			type: "file:skipcheck",
 			arg: path,
-			icon: iconToDisplay,
 		};
 	});
 

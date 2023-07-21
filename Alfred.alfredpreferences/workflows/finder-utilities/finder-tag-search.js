@@ -24,7 +24,7 @@ function run() {
 				.replace(/\/Users\/\w+/, "~");
 
 			const iconToDisplay = { path: path };
-			const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "pdf"];
+			const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];
 			if (!imageExtensions.includes(extension)) iconToDisplay.type = "fileicon";
 
 			return {
