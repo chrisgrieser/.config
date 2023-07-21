@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-# https://blog.christovic.com/2021/02/programatically-adding-spotlight.html
 # https://github.com/mattprice/dotfiles/blob/master/scripts/spotlight-ignore.rb
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -9,19 +8,19 @@ function addExclusion() {
 	sudo plutil -insert Exclusions.0 -string "$1" "$SPOTLIGHT_CONFIG"
 }
 
-addExclusion '/Applications/Utilities/'
-addExclusion '/Applications/Cisco'
+addExclusion "/Applications/Utilities"
+addExclusion "/Applications/Cisco"
 addExclusion "/Volumes/Externe A"
 addExclusion "/Volumes/Externe B"
 addExclusion "/Volumes/Externe C"
-addExclusion "$DATA_DIR/Backups/vim-data"
+addExclusion "$DATA_DIR/Backups"
+addExclusion "$DATA_DIR/vim-data"
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # restart spotlight indexing (this also requires writing exclusions again)
 # sudo mdutil -E -i on /
 # sudo rm -R "$SPOTLIGHT_CONFIG"
-
 
 # show current exclusions
 # SPOTLIGHT_CONFIG="/System/Volumes/Data/.Spotlight-V100/VolumeConfiguration.plist"

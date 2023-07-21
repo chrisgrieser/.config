@@ -9,25 +9,20 @@ local function getWeekday() return tostring(os.date()):sub(1, 3) end
 --------------------------------------------------------------------------------
 
 -- keep the iMac display brightness low when projector is connected
-ProjectorScreensaverWatcher = c
-	.new(function(event)
-		if env.isAtOffice then return end
-		if
-			event == c.screensaverDidStop
-			or event == c.screensaverDidStart
-			or event == c.screensDidWake
-			or event == c.systemDidWake
-			or event == c.screensDidSleep
-		then
-			u.runWithDelays({ 0, 1, 3 }, function()
-				if env.isProjector() then wu.iMacDisplay:setBrightness(0) end
-			end)
-		end
-	end)
-	:start()
-
---------------------------------------------------------------------------------
--- BACKUP / MAINTENANCE
+ProjectorScreensaverWatcher = c.new(function(event)
+	if env.isAtOffice then return end
+	if
+		event == c.screensaverDidStop
+		or event == c.screensaverDidStart
+		or event == c.screensDidWake
+		or event == c.systemDidWake
+		or event == c.screensDidSleep
+	then
+		u.runWithDelays({ 0, 1, 3 }, function()
+			if env.isProjector() then wu.iMacDisplay:setBrightness(0) end
+		end)
+	end
+end):start()
 
 -- on Mondays shortly before 10:00, open #fg-organisation Slack Channel
 JourfixeTimer = hs.timer
@@ -38,28 +33,32 @@ JourfixeTimer = hs.timer
 	end)
 	:start()
 
--- SOME MAINTENANCE TASKS
--- - Backup Vault, Dotfiles, Bookmarks, & browser extension list
--- - Reload Hammerspoon Annotations (EmmyLua Spoon)
--- - Check for low battery of connected bluetooth devices
+--------------------------------------------------------------------------------
+-- BACKUP / MAINTENANCE
+
+-- - Backup Vault, Dotfiles, Bookmarks
+local function backup()
+	-- stylua: ignore start
+	hs.task.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
+		local msg = exitCode == 0 and "✅ Bookmark Backup successful." or "⚠️ Bookmark Backup failed: " .. stdErr
+		u.notify(msg)
+	end):start()
+	hs.task.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
+		local msg = exitCode == 0 and "✅ Dotfile Backup successful." or "⚠️ Dotfile Backup failed: " .. stdErr
+		u.notify(msg)
+	end):start()
+	u.applescript([[tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"]])
+	-- stylua: ignore end
+end
+
+u.urischeme("backup", backup)
+
 BiweeklyTimer = hs.timer
 	.doAt("02:00", "01d", function()
-		if env.isAtOffice or (getWeekday() ~= "Wed" and getWeekday() ~= "Sat") then return end
-
-		hs.loadSpoon("EmmyLua")
-
-		-- BACKUPS
-		-- stylua: ignore start
-		hs.task.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
-			local msg = exitCode == 0 and "✅ Bookmark Backup successful." or "⚠️ Bookmark Backup failed: " .. stdErr
-			u.notify(msg)
-		end):start()
-		hs.task.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
-			local msg = exitCode == 0 and "✅ Dotfile Backup successful." or "⚠️ Dotfile Backup failed: " .. stdErr
-			u.notify(msg)
-		end):start()
-		u.applescript([[tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"]])
-		-- stylua: ignore end
+		if getWeekday() == "Wed" or getWeekday() == "Sat" then
+			backup()
+			hs.loadSpoon("EmmyLua")
+		end
 	end, true)
 	:start()
 
@@ -90,7 +89,9 @@ end
 -- video apps.
 SleepTimer = hs.timer
 	.doEvery(10 * 60, function()
-		if not (u.betweenTime(1, 6) and idleMins(40) and env.isProjector() and u.screenIsUnlocked()) then return end
+		if not (u.betweenTime(1, 6) and idleMins(40) and env.isProjector() and u.screenIsUnlocked()) then
+			return
+		end
 		hs.alert.show("💤 SleepTimer in 1 min if idle.")
 
 		u.runWithDelays(61, function()

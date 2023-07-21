@@ -41,8 +41,8 @@ function run(argv) {
 		.split("\r")
 		.forEach((/** @type {string} */ gitFolderPath) => {
 			const localRepo = {};
-			localRepo.path = gitFolderPath.replace(/\.git\/?$/, "");
-			const name = localRepo.path.replace(/.*\/(.*)\/$/, "$1");
+			// localRepo.path = gitFolderPath.replace(/\.git\/?$/, "");
+			// const name = localRepo.path.replace(/.*\/(.*)\/$/, "$1");
 			try {
 				localRepo.dirty = app.doShellScript(`cd "${localRepo.path}" && git status --porcelain`) !== "";
 			} catch (_error) {
