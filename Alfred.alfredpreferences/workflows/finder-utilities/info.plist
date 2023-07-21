@@ -1360,9 +1360,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>855</real>
+			<real>850</real>
 			<key>ypos</key>
-			<real>1140</real>
+			<real>1130</real>
 		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
@@ -1418,9 +1418,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>645</real>
 			<key>ypos</key>
-			<real>1020</real>
+			<real>1010</real>
 		</dict>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<dict>
@@ -1512,18 +1512,18 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>855</real>
+			<real>850</real>
 			<key>ypos</key>
-			<real>1020</real>
+			<real>1010</real>
 		</dict>
 		<key>874056B3-7017-49B3-94F5-296C9E05D2E4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>645</real>
 			<key>ypos</key>
-			<real>1140</real>
+			<real>1130</real>
 		</dict>
 		<key>8D046756-BF24-4658-BD57-CAB48FF61B9D</key>
 		<dict>
@@ -1577,18 +1577,18 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>645</real>
 			<key>ypos</key>
-			<real>1265</real>
+			<real>1255</real>
 		</dict>
 		<key>ABCE70B9-59E3-4811-BC8D-36016B61B69C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>855</real>
+			<real>850</real>
 			<key>ypos</key>
-			<real>1265</real>
+			<real>1255</real>
 		</dict>
 		<key>B849B8D9-8183-4330-8D44-88ED125FF38F</key>
 		<dict>
