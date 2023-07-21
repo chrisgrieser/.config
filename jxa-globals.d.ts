@@ -52,6 +52,8 @@ declare const Application: {
 	};
 	(name: "Finder"): macAppObj & {
 		exists(path: string): boolean;
+		open (path: string): void;
+		reveal (path: string): void;
 		finderWindows: {
 			target: { url: () => string };
 		};

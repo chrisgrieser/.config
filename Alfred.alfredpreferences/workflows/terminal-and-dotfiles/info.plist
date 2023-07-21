@@ -8,6 +8,19 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>022D7D2B-3AAA-4479-88EA-37950B786C70</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0D8928D6-5087-4D58-B121-45D4C8D4D57A</key>
 		<array>
 			<dict>
@@ -60,19 +73,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>98AFD269-7214-48D9-8142-76672E7A044E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -92,7 +92,7 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>focusedappvariable</key>
-				<true/>
+				<false/>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
@@ -105,13 +105,17 @@
 				<false/>
 				<key>modsmode</key>
 				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.runningwithcrayons.Alfred-Preferences</string>
+				</array>
 				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>98AFD269-7214-48D9-8142-76672E7A044E</string>
+			<string>022D7D2B-3AAA-4479-88EA-37950B786C70</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -316,6 +320,15 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>325</real>
 		</dict>
+		<key>022D7D2B-3AAA-4479-88EA-37950B786C70</key>
+		<dict>
+			<key>note</key>
+			<string>Open Terminal from everywhere</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>25</real>
+		</dict>
 		<key>0D8928D6-5087-4D58-B121-45D4C8D4D57A</key>
 		<dict>
 			<key>note</key>
@@ -360,15 +373,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>475</real>
-		</dict>
-		<key>98AFD269-7214-48D9-8142-76672E7A044E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>25</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>

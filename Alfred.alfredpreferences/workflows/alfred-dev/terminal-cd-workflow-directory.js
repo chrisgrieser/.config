@@ -20,6 +20,4 @@ const prefsFile = app.pathTo("home folder") + "/Library/Application Support/Alfr
 const prefLocation = JSON.parse(readFile(prefsFile)).current;
 const workflowFolderPath = `${prefLocation}/workflows/${currentWorkflowId}`;
 
-const finder = Application("Finder");
-finder.open(Path(workflowFolderPath));
-finder.activate()
+workflowFolderPath // direct return
