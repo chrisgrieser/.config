@@ -1,20 +1,14 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2002
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-#───────────────────────────────────────────────────────────────────────────────
 
-# INFO
-# based on https://alfred.app/workflows/vitor/temporary-email/
-
-#───────────────────────────────────────────────────────────────────────────────
 # PASSWORD
 password=$(cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c 32)
 echo -n "${password}"
 echo -n "$password" | pbcopy
 
-
 #───────────────────────────────────────────────────────────────────────────────
 # MAIL
+# based on https://alfred.app/workflows/vitor/temporary-email/
 
 email_name=$(cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c 25)
 # shellcheck disable=2154

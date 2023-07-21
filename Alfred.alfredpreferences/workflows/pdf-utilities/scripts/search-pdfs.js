@@ -4,6 +4,7 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
@@ -13,11 +14,7 @@ function alfredMatcher(str) {
 const folderToSearch = $.getenv("pdf_folder").replace(/^~/, app.pathTo("home folder"));
 
 // prettier-ignore
-const jsonArray = app.doShellScript(`
-	export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;
-	cd '${folderToSearch}' ;
-	fd --type=file --absolute-path
-	`)
+const jsonArray = app.doShellScript(`cd '${folderToSearch}'; fd --type=file --absolute-path`)
 	.split("\r")
 	.map(fPath => {
 		const parts = fPath.split("/");

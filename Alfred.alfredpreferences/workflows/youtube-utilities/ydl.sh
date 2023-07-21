@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
-export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+# shellcheck disable=2154
 
-download_location="${download_location/#\~/$HOME}"
 CURRENT_TAB=$(osascript -l JavaScript "./get-url-from-browser.js" &)
 
 if [[ -z "$CURRENT_TAB" ]] ; then

@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 # shellcheck disable=SC2086,SC2154
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 [[ $1 == "play" ]] && shuffle="--shuffle"
 notification=$(spt playback --$1 $shuffle --format="$format" 2>&1)

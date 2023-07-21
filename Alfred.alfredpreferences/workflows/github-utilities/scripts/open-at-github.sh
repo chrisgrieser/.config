@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # shellcheck disable=2034
 GIT_OPTIONAL_LOCKS=0

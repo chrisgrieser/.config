@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 if ! command -v wezterm-gui &>/dev/null; then
 	osascript -e 'display notification "" with title "❌ wezterm-gui not found." sound name "Basso"'

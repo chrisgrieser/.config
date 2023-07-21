@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # open bluetooth settings if blueutil is not installed
 if ! command -v blueutil &>/dev/null; then
