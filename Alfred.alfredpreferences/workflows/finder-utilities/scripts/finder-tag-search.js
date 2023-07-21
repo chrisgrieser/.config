@@ -28,7 +28,7 @@ function run() {
 			if (!imageExtensions.includes(extension)) iconToDisplay.type = "fileicon";
 
 			return {
-				title: fileName,
+				title: fileName + " 🟡",
 				subtitle: parentFolder,
 				icon: iconToDisplay,
 				type: "file:skipcheck",
