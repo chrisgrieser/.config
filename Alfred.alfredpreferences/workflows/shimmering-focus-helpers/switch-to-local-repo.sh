@@ -6,9 +6,11 @@ remote_ssh="git@github.com:chrisgrieser/shimmering-focus.git"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-[[ ! -d "$target_path" ]] && mkdir -p "$target_path"
+[[ ! -d "$LOCAL_REPOS" ]] && mkdir -p "$LOCAL_REPOS"
 cd "$LOCAL_REPOS"
-git clone --depth=1 "$remote_ssh"
-cd "shimmering-focus" && npm i &>/dev/null # install dependencies (clean-css-cli)
-
+git clone --depth=1 --filter="blob:none" "$remote_ssh"
+cd "shimmering-focus" || return 1
 ln -sf "$LOCAL_REPOS/shimmering-focus/source.css" "$theme_folder/theme.css"
+
+#───────────────────────────────────────────────────────────────────────────────
+
