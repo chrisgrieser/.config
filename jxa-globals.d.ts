@@ -1,11 +1,25 @@
 // https://code.visualstudio.com/docs/nodejs/working-with-javascript#_global-variables-and-type-checking
 // https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html
-// https://github.com/JXA-userland/JXA
+// https://github.com/JXA-userland/JXA/tree/master/packages/%40jxa/types/src
 //──────────────────────────────────────────────────────────────────────────────
 
 declare const ObjC: {
 	import: (package: "stdlib" | "Foundation") => void;
 	unwrap: (string: string) => string;
+};
+
+declare const macAppObj: {
+	includeStandardAdditions: boolean;
+	openLocation(url: string): void;
+	open(path: string): void;
+	reveal(path: string): void;
+	id(): number;
+	name(): string;
+	running(): boolean;
+	frontmost(): boolean;
+	activate(): void;
+	quit(): void;
+	launch(): void;
 };
 
 declare const Application: {
@@ -32,42 +46,52 @@ declare const Application: {
 			buttonReturned: string;
 		};
 	};
-	(appname: string): {
-		includeStandardAdditions: boolean;
-		openLocation(url: string): void;
-		open(path: string): void;
-		reveal(path: string): void;
-		id(): number;
-		name(): string;
-		running(): boolean;
-		frontmost(): boolean;
-		activate(): void;
-		quit(): void;
-		launch(): void;
-
-		// command names https://qiita.com/zakuroishikuro/items/a7def965f49a2ab55be4
-		commandsOfClass(): string[];
-		elementsOfClass(className: string): string[];
-		propertiesOfClass(className: string): string[];
-		parentOfClass(className: string): string;
-
-		// APP-SPECIFIC
-		exists(path: string): boolean; // Finder
-		finderWindows: {
-			target: { url: () => string };
-		};
-		documents: { url(): string; name(): string }[]; // webkit browsers
-		windows: { activeTab: { url(): string; name(): string } }[]; // chromium browsers
-		setConfiguration(envVar: string, options: Object); // Alfred
-		createNote(options: { text: string; path?: string }): void; // Sidenotes
-
-		// System Events
-		keystroke: (key: string, { using: any }?) => void;
+	(appname: "System Events"): macAppObj & {
+		keystroke(key: string, modifiers?: { using: string[] });
 		// rome-ignore lint/suspicious/noExplicitAny: TODO
 		applicationProcesses: any;
 		// rome-ignore lint/suspicious/noExplicitAny: TODO
 		processes: any;
 	};
+	(appname: "Reminders"): macAppObj & {
+		defaultList(): { make(any) };
+	};
+	(appname: "Finder"): macAppObj & {
+		exists(path: string): boolean;
+		finderWindows: {
+			target: { url: () => string };
+		};
+	};
+	(appname: "SideNotes"): macAppObj & {
+		currentNote(): {
+			content(): string;
+			title(): string;
+			delete(): void;
+		};
+		createNote(options: macAppObj & {
+			text: string;
+			path?: string;
+			// rome-ignore lint/suspicious/noExplicitAny: todo
+			folder?: any;
+			ispath?: boolean;
+		}): void;
+		folders: {
+			byName(folderName: string): Object;
+			length: number;
+		};
+	};
+	(appname: "Alfred"): macAppObj & {
+		setConfiguration(envVar: string, options: Object);
+	};
+	(appname: "Safari" | "Webkit"): macAppObj & {
+		documents: { url(): string; name(): string }[];
+	};
+	(
+		appname: "Google Chrome" | "Chromium" | "Opera" | "Vivaldi" | "Brave Browser" | "Microsoft Edge" | "Arc",
+	): macAppObj & {
+		documents: { url(): string; name(): string }[];
+	};
+	(appname: string): macAppObj;
 };
 
 declare function Path(filepath: string): string;

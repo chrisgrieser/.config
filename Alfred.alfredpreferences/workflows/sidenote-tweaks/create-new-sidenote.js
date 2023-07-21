@@ -4,7 +4,7 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 ObjC.import("stdlib");
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
-const sidenotes = Application("Sidenotes");
+const sidenotes = Application("SideNotes");
 
 //──────────────────────────────────────────────────────────────────────────────
 
