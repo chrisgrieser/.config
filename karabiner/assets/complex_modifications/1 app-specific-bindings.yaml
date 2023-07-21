@@ -49,6 +49,21 @@ rules:
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
   #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Finder"
+    manipulators:
+      # Finder: Sidebars
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: s, modifiers: [control, command] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+      - type: basic
+        from: { key_code: "0", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: p, modifiers: [shift, command] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Highlights"
     manipulators:
       # cmd+l = Show in Finder
@@ -58,6 +73,7 @@ rules:
           # 1% assuming hidden menubar, otherwise 3-4%
           - software_function: { set_mouse_cursor_position: { x: 60%, y: 1%, screen: 0 } }
           - pointing_button: button2
+          - software_function: { set_mouse_cursor_position: { x: 30%, y: 1%, screen: 0 } } # prevent hover selection
           - key_code: down_arrow
           - key_code: down_arrow # assuming hidden menubar, otherwise only 1x arrow down
           - key_code: return_or_enter
@@ -159,18 +175,24 @@ rules:
       - type: basic
         from: { key_code: comma, modifiers: { mandatory: [command, shift] } }
         to:
-          - shell_command: open 'brave://extensions/'
+          - shell_command: open 'chrome://extensions/'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
-      # dev tools -> element picker
+  #─────────────────────────────────────────────────────────────────────────────
+  # DEV TOOLS -> ELEMENT PICKER
+  - description: "(Apps) Dev Tools"
+    manipulators:
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
           - { key_code: i, modifiers: [option, command] }
-          - { key_code: vk_none, hold_down_milliseconds: 100 }
+          - { key_code: vk_none, hold_down_milliseconds: 200 }
           - { key_code: c, modifiers: [shift, command] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.brave\.Browser$
+              - ^md\.obsidian$
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
@@ -237,7 +259,8 @@ rules:
           - { key_code: "9", modifiers: [command] }
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^com.runningwithcrayons.Alfred-Preferences$] }]
-      # select with tab (REQUIRED compatibility mode to recognize Alfred as frontmost app)
+      # select with tab 
+      # REQUIRES compatibility mode to recognize Alfred as frontmost app
       - type: basic
         from: { key_code: tab }
         to:

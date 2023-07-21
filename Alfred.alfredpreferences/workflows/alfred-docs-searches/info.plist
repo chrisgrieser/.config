@@ -1091,7 +1091,7 @@
 				<key>subtext</key>
 				<string>Translate keyboard keys to AppleScript key codes</string>
 				<key>title</key>
-				<string>KeyCodes</string>
+				<string>Apple Keycodes</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
