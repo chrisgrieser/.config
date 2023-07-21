@@ -37,7 +37,7 @@ end
 ---goto next quickfix and wrap around
 function M.next()
 	if quickFixIsEmpty() then return end
-	if not g.qfCount then g.qfCount = 0 end -- initialize counter
+	if not g.qfCount then g.qfCount = -1 end -- initialize counter
 
 	local wentToNext = pcall(function() cmd([[silent cnext]]) end)
 	if wentToNext then

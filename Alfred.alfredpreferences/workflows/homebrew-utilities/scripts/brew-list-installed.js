@@ -10,7 +10,7 @@ const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_.]/g, " "
 
 let mackups;
 try {
-	mackups = app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; mackup list");
+	mackups = app.doShellScript("mackup list");
 	if (mackups) mackups = mackups.split("\r").map((/** @type {string} */ item) => item.slice(3));
 } catch (error) {
 	console.log(error);

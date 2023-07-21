@@ -36,7 +36,7 @@ const formula = readFile(formulaTxt).split("\n");
 
 let mackups;
 try {
-	const mackupsStr = app.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; mackup list");
+	const mackupsStr = app.doShellScript("mackup list");
 	mackups = mackupsStr ? mackupsStr.split("\r").map((/** @type {string} */ item) => item.slice(3)) : [];
 } catch (error) {
 	console.log(error);

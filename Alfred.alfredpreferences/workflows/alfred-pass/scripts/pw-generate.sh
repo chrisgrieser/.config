@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 [[ "$*" == "* root" ]] && folder="" || folder="$*/"
 entry_name=$(echo "$entry_name" | tr -d ":/\\") # remove illegal characters

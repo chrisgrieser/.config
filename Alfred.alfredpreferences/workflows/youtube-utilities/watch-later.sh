@@ -1,6 +1,5 @@
 #!/bin/zsh
 # shellcheck disable=SC2154
-export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
 URL="$*"
 YOUTUBE_ID=$(echo "$URL" | cut -d "=" -f2)
