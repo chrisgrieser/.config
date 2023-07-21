@@ -7,7 +7,6 @@ declare class macAppObj {
 	includeStandardAdditions: boolean;
 	openLocation(url: string): void;
 	open(path: string): void;
-	reveal(path: string): void;
 	id(): number;
 	name(): string;
 	running(): boolean;
@@ -75,8 +74,9 @@ declare const Application: {
 			length: number;
 		};
 	};
-	(name: "Alfred"): macAppObj & {
-		setConfiguration(envVar: string, options: Object);
+	(name: "Alfred"|"com.runningwithcrayons.Alfred"): macAppObj & {
+		setConfiguration(envVar: string, options: Object): void;
+		revealWorkflow(workflowId: string): void; // workflow id = name of workflow folder
 	};
 	(name: "Safari" | "Webkit"): macAppObj & {
 		documents: { url(): string; name(): string }[];
