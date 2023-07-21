@@ -21,6 +21,31 @@
 				<false/>
 			</dict>
 		</array>
+		<key>04D132BD-9B0E-4566-AA46-B176F22688E5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F146B53A-B75E-4B95-8AC5-9AB4944913F4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F9DE5490-95C5-401F-A240-3D40BEA75F11</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>902D4662-2953-4B92-BAE1-BE34CE7A174D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0D8928D6-5087-4D58-B121-45D4C8D4D57A</key>
 		<array>
 			<dict>
@@ -73,11 +98,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
+		<key>707FB3E6-329A-4494-A074-D4CD436A44AD</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E1D79568-E2FC-4CC7-B736-71D4B741541A</string>
+				<string>04D132BD-9B0E-4566-AA46-B176F22688E5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -86,23 +111,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E1D79568-E2FC-4CC7-B736-71D4B741541A</key>
+		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F146B53A-B75E-4B95-8AC5-9AB4944913F4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>F9DE5490-95C5-401F-A240-3D40BEA75F11</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>902D4662-2953-4B92-BAE1-BE34CE7A174D</string>
+				<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -200,6 +213,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>path-different-from-wezterm-pwd.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -210,22 +246,22 @@
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string></string>
+						<string>just activate terminal</string>
 						<key>outputlabel</key>
-						<string>empty</string>
+						<string>activate</string>
 						<key>uid</key>
 						<string>F9DE5490-95C5-401F-A240-3D40BEA75F11</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>path given</string>
+				<string>cd to path</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>E1D79568-E2FC-4CC7-B736-71D4B741541A</string>
+			<string>04D132BD-9B0E-4566-AA46-B176F22688E5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -354,61 +390,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string></string>
-						<key>outputlabel</key>
-						<string></string>
-						<key>uid</key>
-						<string>63EC440F-116D-41B1-BB9E-25A3A337896D</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>50DAF414-DE1B-44BC-892A-02518D4F812D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>get-wezterm-pwd.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -488,6 +469,15 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>80</real>
 		</dict>
+		<key>04D132BD-9B0E-4566-AA46-B176F22688E5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>530</real>
+			<key>ypos</key>
+			<real>100</real>
+		</dict>
 		<key>0D8928D6-5087-4D58-B121-45D4C8D4D57A</key>
 		<dict>
 			<key>colorindex</key>
@@ -526,13 +516,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>230</real>
 		</dict>
-		<key>50DAF414-DE1B-44BC-892A-02518D4F812D</key>
-		<dict>
-			<key>xpos</key>
-			<real>665</real>
-			<key>ypos</key>
-			<real>435</real>
-		</dict>
 		<key>5BA79A32-FAE5-4C6E-BE52-007074A12873</key>
 		<dict>
 			<key>colorindex</key>
@@ -544,21 +527,25 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 		</dict>
 		<key>707FB3E6-329A-4494-A074-D4CD436A44AD</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
-			<string>get wezterm pwd</string>
+			<string>TERMINAL_SPECIFIC
+
+check if path different from PWD</string>
 			<key>xpos</key>
-			<real>430</real>
+			<real>380</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>80</real>
 		</dict>
 		<key>902D4662-2953-4B92-BAE1-BE34CE7A174D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>560</real>
+			<real>650</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>150</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
@@ -578,23 +565,14 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>80</real>
 		</dict>
-		<key>E1D79568-E2FC-4CC7-B736-71D4B741541A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>345</real>
-			<key>ypos</key>
-			<real>100</real>
-		</dict>
 		<key>F146B53A-B75E-4B95-8AC5-9AB4944913F4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>480</real>
+			<real>650</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>30</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
