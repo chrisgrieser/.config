@@ -3,6 +3,8 @@
 #-------------------------------------------------------------------------------
 if ! command -v duti &>/dev/null; then echo "duti not installed." && return 1; fi
 
+open "$DOTFILE_FOLDER/nvim/mac-helper/Neovim.app" # open once to initialize
+
 # App Choice
 videoplayerID="com.colliderli.iina"
 editorID="com.apple.automator.Neovim"
