@@ -12,7 +12,7 @@ cd "$LOCAL_REPOS" || exit 1
 if [[ -e "$reponame" ]]; then
 	osascript -e 'display notification "" with title "⚠️ Repo already exists."'
 else
-	git clone --depth=1 "$url" || return 1
+	git clone --depth=1 --filter="blob:none" "$url" || return 1
 fi
 
 # Browse
