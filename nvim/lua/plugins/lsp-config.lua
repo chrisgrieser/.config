@@ -52,6 +52,11 @@ lspSettings.lua_ls = {
 }
 
 --------------------------------------------------------------------------------
+-- Emmet
+-- don't use for js/ts
+lspFiletypes.emmet_ls = { "css", "html" }
+
+--------------------------------------------------------------------------------
 -- CSS
 
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
@@ -193,7 +198,7 @@ local function setupAllLsps()
 	-- INFO must be before the lsp-config setup of lua-ls
 	require("neodev").setup {
 		-- plugins are helpful e.g. for plenary, but slow down lsp loading
-		library = { plugins = false }, 
+		library = { plugins = false },
 	}
 
 	for _, lsp in pairs(lsp_servers) do

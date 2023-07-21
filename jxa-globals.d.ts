@@ -3,12 +3,7 @@
 // https://github.com/JXA-userland/JXA/tree/master/packages/%40jxa/types/src
 //──────────────────────────────────────────────────────────────────────────────
 
-declare const ObjC: {
-	import: (package: "stdlib" | "Foundation") => void;
-	unwrap: (string: string) => string;
-};
-
-declare const macAppObj: {
+declare class macAppObj {
 	includeStandardAdditions: boolean;
 	openLocation(url: string): void;
 	open(path: string): void;
@@ -20,7 +15,7 @@ declare const macAppObj: {
 	activate(): void;
 	quit(): void;
 	launch(): void;
-};
+}
 
 declare const Application: {
 	currentApplication: () => {
@@ -46,23 +41,23 @@ declare const Application: {
 			buttonReturned: string;
 		};
 	};
-	(appname: "System Events"): macAppObj & {
+	(name: "System Events"): macAppObj & {
 		keystroke(key: string, modifiers?: { using: string[] });
 		// rome-ignore lint/suspicious/noExplicitAny: TODO
 		applicationProcesses: any;
 		// rome-ignore lint/suspicious/noExplicitAny: TODO
 		processes: any;
 	};
-	(appname: "Reminders"): macAppObj & {
+	(name: "Reminders"): macAppObj & {
 		defaultList(): { make(any) };
 	};
-	(appname: "Finder"): macAppObj & {
+	(name: "Finder"): macAppObj & {
 		exists(path: string): boolean;
 		finderWindows: {
 			target: { url: () => string };
 		};
 	};
-	(appname: "SideNotes"): macAppObj & {
+	(name: "SideNotes"): macAppObj & {
 		currentNote(): {
 			content(): string;
 			title(): string;
@@ -80,18 +75,25 @@ declare const Application: {
 			length: number;
 		};
 	};
-	(appname: "Alfred"): macAppObj & {
+	(name: "Alfred"): macAppObj & {
 		setConfiguration(envVar: string, options: Object);
 	};
-	(appname: "Safari" | "Webkit"): macAppObj & {
+	(name: "Safari" | "Webkit"): macAppObj & {
 		documents: { url(): string; name(): string }[];
 	};
 	(
-		appname: "Google Chrome" | "Chromium" | "Opera" | "Vivaldi" | "Brave Browser" | "Microsoft Edge" | "Arc",
+		name: "Google Chrome" | "Chromium" | "Opera" | "Vivaldi" | "Brave Browser" | "Microsoft Edge" | "Arc",
 	): macAppObj & {
 		documents: { url(): string; name(): string }[];
 	};
-	(appname: string): macAppObj;
+	(name: string): macAppObj;
+};
+
+//──────────────────────────────────────────────────────────────────────────────
+
+declare const ObjC: {
+	import: (package: "stdlib" | "Foundation") => void;
+	unwrap: (string: string) => string;
 };
 
 declare function Path(filepath: string): string;
