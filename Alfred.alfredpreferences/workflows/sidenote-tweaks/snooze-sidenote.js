@@ -4,6 +4,10 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/**
+ * @param {string} file
+ * @param {string} text
+ */
 function writeToFile(file, text) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
 	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
@@ -11,7 +15,7 @@ function writeToFile(file, text) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const sidenotes = Application("Sidenotes");
+const sidenotes = Application("SideNotes");
 const content = sidenotes.currentNote().content();
 const title = sidenotes.currentNote().title();
 

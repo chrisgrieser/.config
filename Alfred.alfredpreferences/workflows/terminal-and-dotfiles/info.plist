@@ -232,7 +232,7 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>.</string>
+				<string>scratch</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
