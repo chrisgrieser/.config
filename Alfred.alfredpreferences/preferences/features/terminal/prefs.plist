@@ -5,8 +5,7 @@
 	<key>application</key>
 	<integer>1</integer>
 	<key>custom</key>
-	<string># q = command to be run via "Run in Terminal" command in Alfred
-on alfred_script(q)
+	<string>on alfred_script(cmd)
 	# Launch Wezterm if needed (Appname is `WezTerm`, processname is `wezterm-gui`)
 	tell application "WezTerm" to activate
 	tell application "System Events"
@@ -15,7 +14,7 @@ on alfred_script(q)
 		end repeat
 	end tell
 
-	do shell script ("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; echo '" &amp; q &amp; "' | wezterm cli send-text --no-paste")
+	do shell script ("echo '" &amp; cmd &amp; "' | wezterm cli send-text --no-paste")
 end alfred_script</string>
 </dict>
 </plist>

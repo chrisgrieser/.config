@@ -73,6 +73,44 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E1D79568-E2FC-4CC7-B736-71D4B741541A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E1D79568-E2FC-4CC7-B736-71D4B741541A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0078910D-6991-4038-AA87-A9004DF82EAA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F9DE5490-95C5-401F-A240-3D40BEA75F11</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>902D4662-2953-4B92-BAE1-BE34CE7A174D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -87,12 +125,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>0078910D-6991-4038-AA87-A9004DF82EAA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
 				<integer>0</integer>
 				<key>focusedappvariable</key>
-				<false/>
+				<true/>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
@@ -141,6 +194,51 @@
 			<string>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>empty</string>
+						<key>uid</key>
+						<string>F9DE5490-95C5-401F-A240-3D40BEA75F11</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>path given</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>E1D79568-E2FC-4CC7-B736-71D4B741541A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>902D4662-2953-4B92-BAE1-BE34CE7A174D</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -210,6 +308,27 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>scratch</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Scratch File</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0D8928D6-5087-4D58-B121-45D4C8D4D57A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -229,27 +348,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<string>020D9F57-BA78-4524-B525-C298807E62F4</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>scratch</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Scratch File</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>0D8928D6-5087-4D58-B121-45D4C8D4D57A</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -313,14 +411,21 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>0078910D-6991-4038-AA87-A9004DF82EAA</key>
+		<dict>
+			<key>xpos</key>
+			<real>515</real>
+			<key>ypos</key>
+			<real>35</real>
+		</dict>
 		<key>020D9F57-BA78-4524-B525-C298807E62F4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>365</real>
 		</dict>
 		<key>022D7D2B-3AAA-4479-88EA-37950B786C70</key>
 		<dict>
@@ -329,9 +434,9 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>note</key>
 			<string>Open Terminal from everywhere</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>80</real>
 		</dict>
 		<key>0D8928D6-5087-4D58-B121-45D4C8D4D57A</key>
 		<dict>
@@ -340,63 +445,79 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>note</key>
 			<string>open scratch file</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>365</real>
 		</dict>
 		<key>31B881AB-5CA0-469C-B9F8-E33171B4E403</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>515</real>
 		</dict>
 		<key>3D3D6FCC-566C-4ECC-8D1C-AE3FE9BA3DB8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>630</real>
 		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
 			<key>note</key>
 			<string>open dotfile</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>230</real>
 		</dict>
 		<key>5BA79A32-FAE5-4C6E-BE52-007074A12873</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>515</real>
+		</dict>
+		<key>902D4662-2953-4B92-BAE1-BE34CE7A174D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>515</real>
+			<key>ypos</key>
+			<real>160</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
 			<key>xpos</key>
-			<real>190</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>230</real>
 		</dict>
 		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>open terminal at neovide / Finder location</string>
+			<string>get Finder / neovide Path</string>
 			<key>xpos</key>
-			<real>190</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>80</real>
+		</dict>
+		<key>E1D79568-E2FC-4CC7-B736-71D4B741541A</key>
+		<dict>
+			<key>xpos</key>
+			<real>345</real>
+			<key>ypos</key>
+			<real>100</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
