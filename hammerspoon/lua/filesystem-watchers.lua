@@ -102,6 +102,7 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 			-- done via hammerspoon to differentiate between zips to auto-open and
 			-- zips to archive (like violentmonkey)
 			hs.open(filep)
+			os.remove(filep)
 
 		-- bib: save to library
 		elseif ext == "bib" then
