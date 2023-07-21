@@ -2493,7 +2493,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>where the search should be performed</string>
+			<string>Where searching a query should be performed. (Inline results come from DuckDuckGo, regardless of this setting.)</string>
 			<key>label</key>
 			<string>Search Site</string>
 			<key>type</key>
