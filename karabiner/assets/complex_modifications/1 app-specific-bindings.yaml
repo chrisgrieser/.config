@@ -251,13 +251,6 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Alfred"
     manipulators:
-      # Alfred Preferences: cmd+0 as cmd+9
-      - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: "9", modifiers: [command] }
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com.runningwithcrayons.Alfred-Preferences$] }]
       # select with tab 
       # REQUIRES compatibility mode to recognize Alfred as frontmost app
       - type: basic
