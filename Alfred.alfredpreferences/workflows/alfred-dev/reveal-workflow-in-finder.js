@@ -1,4 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
+ObjC.import("stdlib")
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
@@ -16,10 +17,9 @@ const historyFile = app.pathTo("home folder") + "/Library/Application Support/Al
 const navHistory = JSON.parse(readFile(historyFile)).preferences.workflows;
 const currentWorkflowId = navHistory[0];
 
-const prefsFile = app.pathTo("home folder") + "/Library/Application Support/Alfred/prefs.json";
-const prefLocation = JSON.parse(readFile(prefsFile)).current;
+const prefLocation = $.getenv("alfred_preferences")
 const workflowFolderPath = `${prefLocation}/workflows/${currentWorkflowId}`;
 
 const finder = Application("Finder");
 finder.open(Path(workflowFolderPath));
-finder.activate()
+finder.activate();
