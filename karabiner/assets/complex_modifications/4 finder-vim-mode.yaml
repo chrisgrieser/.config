@@ -985,58 +985,68 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
-      # Number keys: Toggle Tags
+      # NUMBER KEYS: TOGGLE TAGS
       # https://support.apple.com/guide/mac-help/tag-files-and-folders-mchlp15236/mac
       - type: basic
         from: { key_code: "1" }
         to:
           - { key_code: "1", modifiers: [control] }
+          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "2" }
         to:
           - { key_code: "2", modifiers: [control] }
+          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "3" }
         to:
           - { key_code: "3", modifiers: [control] }
+          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "4" }
         to:
           - { key_code: "4", modifiers: [control] }
+          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "5" }
         to:
           - { key_code: "5", modifiers: [control] }
+          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "6" }
         to:
           - { key_code: "6", modifiers: [control] }
+          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "7" }
         to:
           - { key_code: "7", modifiers: [control] }
+          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "8" }
         to:
           - { key_code: "8", modifiers: [control] }
+          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "9" }
         to:
           - { key_code: "9", modifiers: [control] }
+          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # remove all tags
       - type: basic
         from: { key_code: "0" }
         to:
           - { key_code: "0", modifiers: [control] }
+          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────

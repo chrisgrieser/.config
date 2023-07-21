@@ -185,6 +185,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<array>
 			<dict>
@@ -276,6 +289,29 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>71F9A459-55CC-41D5-A1FA-4424B696D4E3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2A6112DC-2A8A-447E-AE39-41898C4C5F8F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy path of sound file</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1469,6 +1505,78 @@
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>sound</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/sounds preview.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Preview macOS System Sounds</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>71F9A459-55CC-41D5-A1FA-4424B696D4E3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>afplay "$1" &amp;</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2A6112DC-2A8A-447E-AE39-41898C4C5F8F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
 				<integer>0</integer>
@@ -1554,6 +1662,46 @@
 			<string>FE9038EA-F174-44C3-96CF-EED8F400E783</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2129,6 +2277,17 @@
 			<key>ypos</key>
 			<real>865</real>
 		</dict>
+		<key>2A6112DC-2A8A-447E-AE39-41898C4C5F8F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>afplay</string>
+			<key>xpos</key>
+			<real>720</real>
+			<key>ypos</key>
+			<real>970</real>
+		</dict>
 		<key>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</key>
 		<dict>
 			<key>colorindex</key>
@@ -2168,6 +2327,24 @@
 			<real>710</real>
 			<key>ypos</key>
 			<real>370</real>
+		</dict>
+		<key>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>720</real>
+			<key>ypos</key>
+			<real>1105</real>
+		</dict>
+		<key>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>870</real>
+			<key>ypos</key>
+			<real>1105</real>
 		</dict>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<dict>
@@ -2226,6 +2403,15 @@
 			<real>630</real>
 			<key>ypos</key>
 			<real>1510</real>
+		</dict>
+		<key>71F9A459-55CC-41D5-A1FA-4424B696D4E3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>545</real>
+			<key>ypos</key>
+			<real>970</real>
 		</dict>
 		<key>829DB972-BB96-484B-AE7B-490666BB5832</key>
 		<dict>
@@ -2468,7 +2654,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.2</string>
+	<string>1.2.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -34,6 +34,44 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3FBF0208-3AC5-48A4-A7AF-86BE9C0B1915</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FDD33DE5-9EF6-4054-97BE-CD907ADEC73E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>0AFB82C2-9EEE-4164-A0EF-F87F65EE719F</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>CD7F4A8F-7638-4D94-96DD-C7B2405D837C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>433B5526-5138-4622-BD58-0DE98F3C79F5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AB25652B-F29C-467C-A234-8DD5F700B047</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<array/>
 		<key>656E6A0F-FAB7-428D-AB7D-811A3D19C2A1</key>
@@ -111,11 +149,50 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AF2E709C-56BA-4D78-AD00-074FC6326079</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AB25652B-F29C-467C-A234-8DD5F700B047</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3FBF0208-3AC5-48A4-A7AF-86BE9C0B1915</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BA7E00FB-F43B-4DDF-869D-A9DB23200405</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F34FCF8E-937F-468A-8727-48A458BF4FA9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -249,7 +326,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>restart-hammerspoon.sh</string>
+				<string>./scripts/restart-hammerspoon.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -298,7 +375,7 @@ window_name</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-window-title.applescript</string>
+				<string>./scripts/get-window-title.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -589,7 +666,7 @@ end tell</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>zoom-login-automation.applescript</string>
+				<string>./scripts/zoom-login-automation.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -612,7 +689,7 @@ end tell</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>add-to-espanso-spellings.sh</string>
+				<string>./scripts/add-to-espanso-spellings.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -647,6 +724,103 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>command</key>
+				<integer>8</integer>
+				<key>confirm</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemcommand</string>
+			<key>uid</key>
+			<string>FDD33DE5-9EF6-4054-97BE-CD907ADEC73E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>cd ~/dotfiles/
+
+filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
+if [[ -n "$filesChanged" ]] ; then
+	echo "📴 pre-shutdown-sync" &gt;&gt; ~"/dotfiles/Cron Jobs/sync.log"
+	zsh ~/dotfiles/git-dotfile-sync.sh
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/pre-shutdown.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>AB25652B-F29C-467C-A234-8DD5F700B047</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>shutdown</string>
+				<key>subtext</key>
+				<string>run dotfiles &amp; vault sync before</string>
+				<key>text</key>
+				<string>Shutdown</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>433B5526-5138-4622-BD58-0DE98F3C79F5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>success</string>
+						<key>outputlabel</key>
+						<string>success</string>
+						<key>uid</key>
+						<string>0AFB82C2-9EEE-4164-A0EF-F87F65EE719F</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>error</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>3FBF0208-3AC5-48A4-A7AF-86BE9C0B1915</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -661,6 +835,424 @@ end tell</string>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>0DF397E6-7179-4A9B-A07A-B32165613998</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>25</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>9</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>BA7E00FB-F43B-4DDF-869D-A9DB23200405</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>function run(input, parameters) {
+
+  const appNames = [];
+  const skipAppNames = [];
+  const verbose = true;
+
+  const scriptName = "close_notifications_applescript";
+
+  const CLEAR_ALL_ACTION = "Clear All";
+  const CLEAR_ALL_ACTION_TOP = "Clear";
+  const CLOSE_ACTION = "Close";
+
+  const notNull = (val) =&gt; {
+    return val !== null &amp;&amp; val !== undefined;
+  };
+
+  const isNull = (val) =&gt; {
+    return !notNull(val);
+  };
+
+  const notNullOrEmpty = (val) =&gt; {
+    return notNull(val) &amp;&amp; val.length &gt; 0;
+  };
+
+  const isNullOrEmpty = (val) =&gt; {
+    return !notNullOrEmpty(val);
+  };
+
+  const isError = (maybeErr) =&gt; {
+    return notNull(maybeErr) &amp;&amp; (maybeErr instanceof Error || maybeErr.message);
+  };
+
+  const systemVersion = () =&gt; {
+    return Application("Finder").version().split(".").map(val =&gt; parseInt(val));
+  };
+
+  const systemVersionGreaterThanOrEqualTo = (vers) =&gt; {
+    return systemVersion()[0] &gt;= vers;
+  };
+
+  const isBigSurOrGreater = () =&gt; {
+    return systemVersionGreaterThanOrEqualTo(11);
+  };
+
+  const V11_OR_GREATER = isBigSurOrGreater();
+  const V12 = systemVersion()[0] === 12;
+  const APP_NAME_MATCHER_ROLE = V11_OR_GREATER ? "AXStaticText" : "AXImage";
+  const hasAppNames = notNullOrEmpty(appNames);
+  const hasSkipAppNames = notNullOrEmpty(skipAppNames);
+  const hasAppNameFilters = hasAppNames || hasSkipAppNames;
+  const appNameForLog = hasAppNames ? ` [${appNames.join(",")}]` : "";
+
+  const logs = [];
+  const log = (message, ...optionalParams) =&gt; {
+    let message_with_prefix = `${new Date().toISOString().replace("Z", "").replace("T", " ")} [${scriptName}]${appNameForLog} ${message}`;
+    console.log(message_with_prefix, optionalParams);
+    logs.push(message_with_prefix);
+  };
+
+  const logError = (message, ...optionalParams) =&gt; {
+    if (isError(message)) {
+      let err = message;
+      message = `${err}${err.stack ? (" " + err.stack) : ""}`;
+    }
+    log(`ERROR ${message}`, optionalParams);
+  };
+
+  const logErrorVerbose = (message, ...optionalParams) =&gt; {
+    if (verbose) {
+      logError(message, optionalParams);
+    }
+  };
+
+  const logVerbose = (message) =&gt; {
+    if (verbose) {
+      log(message);
+    }
+  };
+
+  const getLogLines = () =&gt; {
+    return logs.join("\n");
+  };
+
+  const getSystemEvents = () =&gt; {
+    let systemEvents = Application("System Events");
+    systemEvents.includeStandardAdditions = true;
+    return systemEvents;
+  };
+
+  const getNotificationCenter = () =&gt; {
+    try {
+      return getSystemEvents().processes.byName("NotificationCenter");
+    } catch (err) {
+      logError("Could not get NotificationCenter");
+      throw err;
+    }
+  };
+
+  const getNotificationCenterGroups = (retryOnError = false) =&gt; {
+    try {
+      let notificationCenter = getNotificationCenter();
+      if (notificationCenter.windows.length &lt;= 0) {
+        return [];
+      }
+      if (!V11_OR_GREATER) {
+        return notificationCenter.windows();
+      }
+      if (V12) {
+        return notificationCenter.windows[0].uiElements[0].uiElements[0].uiElements();
+      }
+      return notificationCenter.windows[0].uiElements[0].uiElements[0].uiElements[0].uiElements();
+    } catch (err) {
+      logError("Could not get NotificationCenter groups");
+      if (retryOnError) {
+        logError(err);
+        log("Retrying getNotificationCenterGroups...");
+        return getNotificationCenterGroups(false);
+      } else {
+        throw err;
+      }
+    }
+  };
+
+  const isClearButton = (description, name) =&gt; {
+    return description === "button" &amp;&amp; name === CLEAR_ALL_ACTION_TOP;
+  };
+
+  const matchesAnyAppNames = (value, checkValues) =&gt; {
+    if (isNullOrEmpty(checkValues)) {
+      return false;
+    }
+    let lowerAppName = value.toLowerCase();
+    for (let checkValue of checkValues) {
+      if (lowerAppName === checkValue.toLowerCase()) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const matchesAppName = (role, value) =&gt; {
+    if (role !== APP_NAME_MATCHER_ROLE) {
+      return false;
+    }
+    if (hasAppNames) {
+      return matchesAnyAppNames(value, appNames);
+    }
+    return !matchesAnyAppNames(value, skipAppNames);
+  };
+
+  const notificationGroupMatches = (group) =&gt; {
+    try {
+      let description = group.description();
+      if (V11_OR_GREATER &amp;&amp; isClearButton(description, group.name())) {
+        return true;
+      }
+      if (V11_OR_GREATER &amp;&amp; description !== "group") {
+        return false;
+      }
+      if (!V11_OR_GREATER) {
+        let matchedAppName = !hasAppNameFilters;
+        if (!matchedAppName) {
+          for (let elem of group.uiElements()) {
+            if (matchesAppName(elem.role(), elem.description())) {
+              matchedAppName = true;
+              break;
+            }
+          }
+        }
+        if (matchedAppName) {
+          return notNull(findCloseActionV10(group, -1));
+        }
+        return false;
+      }
+      if (!hasAppNameFilters) {
+        return true;
+      }
+      let firstElem = group.uiElements[0];
+      return matchesAppName(firstElem.role(), firstElem.value());
+    } catch (err) {
+      logErrorVerbose(`Caught error while checking window, window is probably closed: ${err}`);
+      logErrorVerbose(err);
+    }
+    return false;
+  };
+
+  const findCloseActionV10 = (group, closedCount) =&gt; {
+    try {
+      for (let elem of group.uiElements()) {
+        if (elem.role() === "AXButton" &amp;&amp; elem.title() === CLOSE_ACTION) {
+          return elem.actions["AXPress"];
+        }
+      }
+    } catch (err) {
+      logErrorVerbose(`(group_${closedCount}) Caught error while searching for close action, window is probably closed: ${err}`);
+      logErrorVerbose(err);
+      return null;
+    }
+    log("No close action found for notification");
+    return null;
+  };
+
+  const findCloseAction = (group, closedCount) =&gt; {
+    try {
+      if (!V11_OR_GREATER) {
+        return findCloseActionV10(group, closedCount);
+      }
+      let checkForPress = isClearButton(group.description(), group.name());
+      let clearAllAction;
+      let closeAction;
+      for (let action of group.actions()) {
+        let description = action.description();
+        if (description === CLEAR_ALL_ACTION) {
+          clearAllAction = action;
+          break;
+        } else if (description === CLOSE_ACTION) {
+          closeAction = action;
+        } else if (checkForPress &amp;&amp; description === "press") {
+          clearAllAction = action;
+          break;
+        }
+      }
+      if (notNull(clearAllAction)) {
+        return clearAllAction;
+      } else if (notNull(closeAction)) {
+        return closeAction;
+      }
+    } catch (err) {
+      logErrorVerbose(`(group_${closedCount}) Caught error while searching for close action, window is probably closed: ${err}`);
+      logErrorVerbose(err);
+      return null;
+    }
+    log("No close action found for notification");
+    return null;
+  };
+
+  const closeNextGroup = (groups, closedCount) =&gt; {
+    try {
+      for (let group of groups) {
+        if (notificationGroupMatches(group)) {
+          let closeAction = findCloseAction(group, closedCount);
+
+          if (notNull(closeAction)) {
+            try {
+              closeAction.perform();
+              return [true, 1];
+            } catch (err) {
+              logErrorVerbose(`(group_${closedCount}) Caught error while performing close action, window is probably closed: ${err}`);
+              logErrorVerbose(err);
+            }
+          }
+          return [true, 0];
+        }
+      }
+      return false;
+    } catch (err) {
+      logError("Could not run closeNextGroup");
+      throw err;
+    }
+  };
+
+  try {
+    let groupsCount = getNotificationCenterGroups(true).filter(group =&gt; notificationGroupMatches(group)).length;
+
+    if (groupsCount &gt; 0) {
+      logVerbose(`Closing ${groupsCount}${appNameForLog} notification group${(groupsCount &gt; 1 ? "s" : "")}`);
+
+      let startTime = new Date().getTime();
+      let closedCount = 0;
+      let maybeMore = true;
+      let maxAttempts = 2;
+      let attempts = 1;
+      while (maybeMore &amp;&amp; ((new Date().getTime() - startTime) &lt;= (1000 * 30))) {
+        try {
+          let closeResult = closeNextGroup(getNotificationCenterGroups(), closedCount);
+          maybeMore = closeResult[0];
+          if (maybeMore) {
+            closedCount = closedCount + closeResult[1];
+          }
+        } catch (innerErr) {
+          if (maybeMore &amp;&amp; closedCount === 0 &amp;&amp; attempts &lt; maxAttempts) {
+            log(`Caught an error before anything closed, trying ${maxAttempts - attempts} more time(s).`)
+            attempts++;
+          } else {
+            throw innerErr;
+          }
+        }
+      }
+    } else {
+      throw Error(`No${appNameForLog} notifications found...`);
+    }
+  } catch (err) {
+    logError(err);
+    logError(err.message);
+    getLogLines();
+    throw err;
+  }
+
+  return getLogLines();
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/dismiss-notification.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F34FCF8E-937F-468A-8727-48A458BF4FA9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⚠️ Sync Issue</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CD7F4A8F-7638-4D94-96DD-C7B2405D837C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/toggle-rain.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>AF2E709C-56BA-4D78-AD00-074FC6326079</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>rain</string>
+				<key>subtext</key>
+				<string>lo-rain</string>
+				<key>text</key>
+				<string>Toggle Rain</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -706,6 +1298,26 @@ end tell</string>
 			<real>700</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>3FBF0208-3AC5-48A4-A7AF-86BE9C0B1915</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>885</real>
+			<key>ypos</key>
+			<real>630</real>
+		</dict>
+		<key>433B5526-5138-4622-BD58-0DE98F3C79F5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>ensuring git repos synced before</string>
+			<key>xpos</key>
+			<real>550</real>
+			<key>ypos</key>
+			<real>610</real>
 		</dict>
 		<key>496D4848-5FF5-4521-AD62-DA66D955EF60</key>
 		<dict>
@@ -785,6 +1397,17 @@ end tell</string>
 			<key>ypos</key>
 			<real>565</real>
 		</dict>
+		<key>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>toggle lo-rain</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>865</real>
+		</dict>
 		<key>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</key>
 		<dict>
 			<key>colorindex</key>
@@ -795,6 +1418,35 @@ end tell</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>20</real>
+		</dict>
+		<key>AB25652B-F29C-467C-A234-8DD5F700B047</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>705</real>
+			<key>ypos</key>
+			<real>610</real>
+		</dict>
+		<key>AF2E709C-56BA-4D78-AD00-074FC6326079</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>865</real>
+		</dict>
+		<key>BA7E00FB-F43B-4DDF-869D-A9DB23200405</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>dismiss notifications</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>715</real>
 		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
@@ -824,6 +1476,15 @@ end tell</string>
 			<real>545</real>
 			<key>ypos</key>
 			<real>325</real>
+		</dict>
+		<key>CD7F4A8F-7638-4D94-96DD-C7B2405D837C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>1005</real>
+			<key>ypos</key>
+			<real>735</real>
 		</dict>
 		<key>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</key>
 		<dict>
@@ -857,6 +1518,26 @@ end tell</string>
 			<real>545</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>F34FCF8E-937F-468A-8727-48A458BF4FA9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>715</real>
+		</dict>
+		<key>FDD33DE5-9EF6-4054-97BE-CD907ADEC73E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>will ask for confirmation</string>
+			<key>xpos</key>
+			<real>1000</real>
+			<key>ypos</key>
+			<real>595</real>
 		</dict>
 		<key>FFE40428-4486-4B45-AD59-024B6311D2D8</key>
 		<dict>
