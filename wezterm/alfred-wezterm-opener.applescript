@@ -11,6 +11,7 @@ on alfred_script(shellCmd)
 			delay 0.05
 		end repeat
 	end tell
-
-	do shell script ("echo '" & shellCmd & "' | wezterm cli send-text --no-paste")
+	
+	# PATH modification needed for intel macs
+	do shell script ("export PATH=:/usr/local/bin:$PATH ; echo '" & shellCmd & "' | wezterm cli send-text --no-paste")
 end alfred_script
