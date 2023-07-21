@@ -5,7 +5,7 @@
 	<key>application</key>
 	<integer>1</integer>
 	<key>custom</key>
-	<string>on alfred_script(cmd)
+	<string>on alfred_script(shellCmd)
 	# Launch Wezterm if needed (Appname is `WezTerm`, processname is `wezterm-gui`)
 	tell application "WezTerm" to activate
 	tell application "System Events"
@@ -14,7 +14,12 @@
 		end repeat
 	end tell
 
-	do shell script ("echo '" &amp; cmd &amp; "' | wezterm cli send-text --no-paste")
+	# Alfred's "Browse path" essentially sends a `cd`
+	set pathToOpen to ""
+	set command to text 1 thru 2 of shellCmd
+	if command is "cd" then set pathToOpen to text 4 thru -1 of shellCmd
+
+	do shell script ("[[ \"$PWD\" != '" &amp; pathToOpen &amp; "' ]] &amp;&amp; echo '" &amp; shellCmd &amp; "' | wezterm cli send-text --no-paste")
 end alfred_script</string>
 </dict>
 </plist>
