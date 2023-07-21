@@ -1124,7 +1124,6 @@ rules:
         from: { key_code: n, modifiers: { mandatory: [control] } }
         to:
           - key_code: return_or_enter
-          - { key_code: "a", modifiers: [command] }
           - { key_code: "c", modifiers: [command] }
           - key_code: return_or_enter
           - shell_command: osascript -e 'display notification "✅ Filename copied" with title "Finder Vim Mode"'
