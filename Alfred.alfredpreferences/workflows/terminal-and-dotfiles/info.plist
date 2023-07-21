@@ -315,6 +315,8 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 	<dict>
 		<key>020D9F57-BA78-4524-B525-C298807E62F4</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
@@ -322,6 +324,8 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 		</dict>
 		<key>022D7D2B-3AAA-4479-88EA-37950B786C70</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>Open Terminal from everywhere</string>
 			<key>xpos</key>
@@ -331,6 +335,8 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 		</dict>
 		<key>0D8928D6-5087-4D58-B121-45D4C8D4D57A</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>note</key>
 			<string>open scratch file</string>
 			<key>xpos</key>

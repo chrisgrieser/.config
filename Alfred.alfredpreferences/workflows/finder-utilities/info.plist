@@ -693,7 +693,7 @@ osascript -l JavaScript ./scripts/wd-search.js "$WD"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>mm</string>
+				<string>wip</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>

@@ -1404,7 +1404,7 @@ fi</string>
 			<key>note</key>
 			<string>toggle lo-rain</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>865</real>
 		</dict>
@@ -1433,7 +1433,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>865</real>
 		</dict>
@@ -1444,7 +1444,7 @@ fi</string>
 			<key>note</key>
 			<string>dismiss notifications</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>715</real>
 		</dict>
@@ -1482,9 +1482,9 @@ fi</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>1000</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>730</real>
 		</dict>
 		<key>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</key>
 		<dict>
@@ -1524,7 +1524,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>715</real>
 		</dict>

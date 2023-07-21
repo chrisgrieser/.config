@@ -53,15 +53,6 @@ function inspect() {
 	echo
 }
 
-# measure rc loading time, https://blog.jonlu.ca/posts/speeding-up-zsh
-function timerc() {
-	if command -v hyperfine &>/dev/null; then
-		hyperfine "$SHELL -i -c exit"
-	else
-		time $SHELL -i -c exit
-	fi
-}
-
 # no arg = all files in folder will be deleted
 function d() {
 	if [[ $# == 0 ]]; then
