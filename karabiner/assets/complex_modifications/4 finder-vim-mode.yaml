@@ -985,8 +985,27 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
-      # Sort
-      
+      # SORT
+      - type: basic # by name
+        from: { key_code: "down_arrow" }
+        to:
+          - { key_code: "1", modifiers: [control, option, command] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic # by modification date
+        from: { key_code: "left_arrow" }
+        to:
+          - { key_code: "5", modifiers: [control, option, command] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic # by size
+        from: { key_code: "up_arrow" }
+        to:
+          - { key_code: "6", modifiers: [control, option, command] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic # by kind
+        from: { key_code: "right_arrow" }
+        to:
+          - { key_code: "2", modifiers: [control, option, command] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
       # NUMBER KEYS: TOGGLE TAGS

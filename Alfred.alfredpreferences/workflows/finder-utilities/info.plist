@@ -1111,10 +1111,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
-				<array>
-					<string>dyn.ah62d4rv4ge8043a</string>
-					<string>public.plain-text</string>
-				</array>
+				<array/>
 				<key>name</key>
 				<string>Copy file content to clipboard</string>
 			</dict>
