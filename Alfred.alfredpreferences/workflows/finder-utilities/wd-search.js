@@ -18,7 +18,7 @@ function run(argv) {
 			const fileName = item.slice(2)
 
 			const iconToDisplay = { path: itemPath };
-			const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "pdf"];
+			const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];
 			if (!imageExtensions.includes(extension)) iconToDisplay.type = "fileicon";
 
 			return {
