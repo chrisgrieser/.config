@@ -671,9 +671,9 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>160</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>245</real>
 		</dict>
 		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
 		<dict>
@@ -722,7 +722,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>xpos</key>
 			<real>460</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>270</real>
 		</dict>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
@@ -787,7 +787,7 @@ backup for when browser history search workflow updates</string>
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>270</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

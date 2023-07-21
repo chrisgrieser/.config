@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>de.chris-grieser.alfred-tweaks</string>
 	<key>category</key>
-	<string>❇️</string>
+	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
 		<key>2E405C4A-C768-4D8D-A9BB-A94379AB7484</key>
@@ -34,11 +34,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>701E5A21-FF9C-4A95-A2CF-5FDF14BF4522</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C324E172-125B-402B-930D-F7D52CD82CD6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>71716052-FA50-41EB-8F4A-FAD8889FE116</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>44FFE9B4-3CB4-46D3-8742-B7656E370346</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7883C8E0-1C85-4882-95A8-90ED858F92AE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>701E5A21-FF9C-4A95-A2CF-5FDF14BF4522</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -86,6 +112,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C324E172-125B-402B-930D-F7D52CD82CD6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>078DA54D-95D6-4C48-A1B2-5A16F2F70987</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D08B3C11-6C2B-492A-ABE0-9ECC93D911C1</key>
 		<array>
 			<dict>
@@ -110,6 +149,64 @@
 	<string>Alfred Dev</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>reveal-workflow-in-finder.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1C54A9EF-33FF-4391-A2AA-B1A21ABA6BE7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>37</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>L</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.runningwithcrayons.Alfred-Preferences</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -185,6 +282,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>078DA54D-95D6-4C48-A1B2-5A16F2F70987</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -194,14 +304,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>back-in-workflow-history.js</string>
+				<string>terminal-cd-workflow-directory.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>968D3928-EB4E-4372-86B9-8F517A163004</string>
+			<string>701E5A21-FF9C-4A95-A2CF-5FDF14BF4522</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -217,11 +327,11 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>4</integer>
+				<integer>17</integer>
 				<key>hotmod</key>
-				<integer>262144</integer>
+				<integer>1966080</integer>
 				<key>hotstring</key>
-				<string>H</string>
+				<string>T</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -236,65 +346,28 @@
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>40C74BD5-BA55-43D5-8F4A-1FD1B0390018</string>
+			<string>7883C8E0-1C85-4882-95A8-90ED858F92AE</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
+				<key>matchmode</key>
 				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>reveal-workflow-in-finder.js</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.utility.replace</string>
 			<key>uid</key>
-			<string>1C54A9EF-33FF-4391-A2AA-B1A21ABA6BE7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>37</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>L</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.runningwithcrayons.Alfred-Preferences</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</string>
+			<string>C324E172-125B-402B-930D-F7D52CD82CD6</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -433,123 +506,235 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>back-in-workflow-history.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>968D3928-EB4E-4372-86B9-8F517A163004</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>4</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>H</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.runningwithcrayons.Alfred-Preferences</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>40C74BD5-BA55-43D5-8F4A-1FD1B0390018</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>078DA54D-95D6-4C48-A1B2-5A16F2F70987</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>165</real>
+		</dict>
 		<key>0F11F4E3-4690-42C3-840B-41965D3591E8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>790</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>145</real>
 		</dict>
 		<key>1C54A9EF-33FF-4391-A2AA-B1A21ABA6BE7</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>15</real>
 		</dict>
 		<key>2E405C4A-C768-4D8D-A9BB-A94379AB7484</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>40</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>20</real>
 		</dict>
 		<key>40C74BD5-BA55-43D5-8F4A-1FD1B0390018</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>back in workflow history</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>620</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>420</real>
 		</dict>
 		<key>44FFE9B4-3CB4-46D3-8742-B7656E370346</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>790</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>275</real>
 		</dict>
 		<key>6025A575-E53E-4DBF-9D31-D9C8CBB72DCC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>790</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>20</real>
+		</dict>
+		<key>701E5A21-FF9C-4A95-A2CF-5FDF14BF4522</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>165</real>
 		</dict>
 		<key>71716052-FA50-41EB-8F4A-FAD8889FE116</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>note</key>
-			<string>consistent sidebar toggling</string>
+			<string>toggle sidebar w/ different hotkey</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>620</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>275</real>
+		</dict>
+		<key>7883C8E0-1C85-4882-95A8-90ED858F92AE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>Workflow: Alfred Prefs → Terminal</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>165</real>
 		</dict>
 		<key>7F55AD62-8636-4D88-8A53-E61A24FC96E4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>320</real>
 		</dict>
 		<key>968D3928-EB4E-4372-86B9-8F517A163004</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>790</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>420</real>
 		</dict>
 		<key>A1E33BB2-038D-4375-B0D8-FD9D71095631</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>1</integer>
+			<key>note</key>
+			<string>msg when not in Alfred directory</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>360</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>320</real>
 		</dict>
 		<key>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>note</key>
-			<string>show in Finder</string>
+			<string>Workflow: Alfred Prefs → Finder</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>15</real>
 		</dict>
 		<key>A783D4B7-9D4B-44E0-A748-49FDAE0A01AA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>40</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>145</real>
+		</dict>
+		<key>C324E172-125B-402B-930D-F7D52CD82CD6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<real>345</real>
+			<key>ypos</key>
+			<real>195</real>
 		</dict>
 		<key>D08B3C11-6C2B-492A-ABE0-9ECC93D911C1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>reveal Workflow in Alfred</string>
+			<string>Workflow: Finder → Alfred Prefs</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>320</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
