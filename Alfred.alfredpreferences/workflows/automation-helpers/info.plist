@@ -498,7 +498,7 @@ window_name</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>add-feed-to-inoreader.js</string>
+				<string>./scripts/add-feed-to-inoreader.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
