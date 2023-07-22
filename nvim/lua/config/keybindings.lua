@@ -356,7 +356,7 @@ keymap("", "<C-Up>", ":resize -3<CR>", { desc = " horizontal resize (-)" })
 ------------------------------------------------------------------------------
 
 -- CMD-KEYBINDINGS
-keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = " Save" })
+keymap({ "n", "x" }, "<D-s>", cmd.update, { desc = " Save" })
 
 -- stylua: ignore
 keymap("", "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
@@ -430,7 +430,7 @@ keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code A
 keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
 
 -- Save & Format
-keymap({ "n", "i", "x" }, "<D-s>", function()
+keymap({ "n", "x" }, "<D-s>", function()
 	cmd.update()
 	vim.lsp.buf.format()
 end, { desc = "󰒕  Save & Format" })
@@ -608,4 +608,3 @@ autocmd("FileType", {
 	end,
 })
 
---------------------------------------------------------------------------------

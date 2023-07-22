@@ -91,14 +91,18 @@ return {
 	},
 	{
 		"Exafunction/codeium.vim",
+		event = "InsertEnter",
+		build = function()
+			-- HACK enable	syncing of API key
+			local symlinkCmd = ("ln -sf '%s' '%s'"):format(
+				vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json",
+				vim.env.HOME .. "/.codeium/config.json"
+			)
+			vim.fn.system(symlinkCmd)
+		end,
 		init = function()
 			vim.g.codeium_disable_bindings = 1
-			-- stylua: ignore start
-			vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true })
-			vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true })
-			vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true })
-			vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true })
-			-- stylua: ignore end
+			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
 		end,
 	},
 	{ -- split-join lines
@@ -139,13 +143,7 @@ return {
 		"folke/which-key.nvim",
 		config = function()
 			require("which-key").setup {
-				plugins = {
-					presets = {
-						motions = false,
-						g = false,
-						z = false,
-					},
-				},
+				plugins = { presets = { motions = false, g = false, z = false } },
 				triggers_blacklist = { n = { "y" } }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
 				-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
 				hidden = { "<Plug>", "^:lua ", "<cmd>" },
