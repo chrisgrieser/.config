@@ -593,8 +593,8 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       - type: basic
         from: { key_code: u }
-        to: # y = z in German keyboard
-          - { key_code: "y", modifiers: [command] }
+        to:
+          - { key_code: "y", modifiers: [command] } # y = z in German keyboard
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       # U = redo
       - type: basic
@@ -620,6 +620,7 @@ rules:
           - { key_code: n, modifiers: [shift, command] }
           - *enter-insert-mode # enters insert mode since folder renaming is also triggered
           - *insert-notice
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_join.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # M = Move selection to new folder
       - type: basic
@@ -640,6 +641,7 @@ rules:
                   set newFile to (make new file at thisFolder)
                   select newFile
                 end tell'
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_join.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # b = Toggle `.bkp` (Backup).
       - type: basic
@@ -1044,62 +1046,62 @@ rules:
         from: { key_code: "1" }
         to:
           - { key_code: "1", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "2" }
         to:
           - { key_code: "2", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "3" }
         to:
           - { key_code: "3", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "4" }
         to:
           - { key_code: "4", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "5" }
         to:
           - { key_code: "5", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "6" }
         to:
           - { key_code: "6", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "7" }
         to:
           - { key_code: "7", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "8" }
         to:
           - { key_code: "8", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "9" }
         to:
           - { key_code: "9", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # remove all tags
       - type: basic
         from: { key_code: "0" }
         to:
           - { key_code: "0", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Sounds/Tink.aiff' &
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
