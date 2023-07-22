@@ -24,5 +24,6 @@ curl -s "$apiURL" |
 	cut -c3- |
 	xargs -I {} git clone --depth=1 'git@github.com:{}.git'
 
-zip -r --quiet my_repos.zip ./*(D) # "(D)" makes the glob match hidden files in zsh
-find . -depth 1 -type d -exec rm -rf {} \;
+date_stamp=$(date +%Y-%m-%d_%H-%M-%S)
+zip -r --quiet "my-repos_${date_stamp}.zip" .
+find . -maxdepth 1 -type d -exec rm -rf {} \;
