@@ -1,37 +1,37 @@
 matches:
   # Emojis
   - triggers: ["::", "!yes"]
-    replace: ✅
+    replace: "✅ "
     label: "✅ yes"
   - triggers: ["::", "!no"]
-    replace: ❌
+    replace: "❌ "
     label: ❌ no
   - triggers: ["::", "!wait"]
-    replace: ⏳
+    replace: "⏳ "
     label: ⏳ wait
   - triggers: ["::", "!info"]
-    replace: ℹ️
+    replace: "ℹ️ "
     label: ℹ️ info
   - triggers: ["::", "!new"]
-    replace: 🆕
+    replace: "🆕 "
     label: 🆕 new
   - triggers: ["::", "!clip"]
-    replace: 📋
+    replace: "📋 "
     label: 📋 clip
   - triggers: ["::", "!warn"]
-    replace: ⚠️ # is actually an emoji outside of nvim
+    replace: "⚠️ " # is actually an emoji outside of nvim
     label: ⚠️ warn
   - triggers: ["::", "!star"]
-    replace: ⭐
+    replace: "⭐ "
     label: ⭐ star
   - triggers: ["::", "!blush"]
-    replace: 😊
+    replace: "😊 "
     label: 😊 blush
   - triggers: ["::", "!sweat"]
-    replace: 😅
+    replace: "😅 "
     label: 😅 sweat
   - triggers: ["::", "!think"]
-    replace: 🤔
+    replace: "🤔 "
     label: 🤔 think
 
   # compound emojis
