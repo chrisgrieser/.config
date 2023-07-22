@@ -315,6 +315,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E489F965-C095-477B-8922-AC21993EA238</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Copy `afplay` for sound file</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>829DB972-BB96-484B-AE7B-490666BB5832</key>
 		<array>
@@ -535,6 +545,19 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E489F965-C095-477B-8922-AC21993EA238</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1706,6 +1729,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>afplay "{query}" &amp;</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>E489F965-C095-477B-8922-AC21993EA238</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -2235,7 +2275,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>720</real>
+			<real>755</real>
 			<key>ypos</key>
 			<real>605</real>
 		</dict>
@@ -2284,7 +2324,7 @@
 			<key>note</key>
 			<string>afplay</string>
 			<key>xpos</key>
-			<real>720</real>
+			<real>755</real>
 			<key>ypos</key>
 			<real>970</real>
 		</dict>
@@ -2324,7 +2364,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>755</real>
 			<key>ypos</key>
 			<real>370</real>
 		</dict>
@@ -2333,7 +2373,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>720</real>
+			<real>755</real>
 			<key>ypos</key>
 			<real>1105</real>
 		</dict>
@@ -2342,7 +2382,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>870</real>
+			<real>905</real>
 			<key>ypos</key>
 			<real>1105</real>
 		</dict>
@@ -2391,7 +2431,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>720</real>
+			<real>755</real>
 			<key>ypos</key>
 			<real>850</real>
 		</dict>
@@ -2427,7 +2467,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>855</real>
+			<real>905</real>
 			<key>ypos</key>
 			<real>240</real>
 		</dict>
@@ -2474,7 +2514,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>705</real>
+			<real>755</real>
 			<key>ypos</key>
 			<real>240</real>
 		</dict>
@@ -2501,7 +2541,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>705</real>
+			<real>755</real>
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
@@ -2510,7 +2550,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>870</real>
+			<real>905</real>
 			<key>ypos</key>
 			<real>605</real>
 		</dict>
@@ -2558,6 +2598,17 @@
 			<key>ypos</key>
 			<real>1515</real>
 		</dict>
+		<key>E489F965-C095-477B-8922-AC21993EA238</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>add `afplay`</string>
+			<key>xpos</key>
+			<real>670</real>
+			<key>ypos</key>
+			<real>1135</real>
+		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>
 			<key>colorindex</key>
@@ -2572,7 +2623,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>705</real>
+			<real>755</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>

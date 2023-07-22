@@ -1,55 +1,56 @@
 matches:
   # Emojis
-  - trigger: "!yes"
+  - triggers: ["::", "!yes"]
     replace: ✅
-  - trigger: "!no"
+    label: "✅ yes"
+  - triggers: ["::", "!no"]
     replace: ❌
-  - trigger: "!wait"
+    label: ❌ no
+  - triggers: ["::", "!wait"]
     replace: ⏳
-  - trigger: "!info"
+    label: ⏳ wait
+  - triggers: ["::", "!info"]
     replace: ℹ️
-  - trigger: "!new"
+    label: ℹ️ info
+  - triggers: ["::", "!new"]
     replace: 🆕
-  - trigger: "!clip"
+    label: 🆕 new
+  - triggers: ["::", "!clip"]
     replace: 📋
-  - trigger: "!warn"
+    label: 📋 clip
+  - triggers: ["::", "!warn"]
     replace: ⚠️ # is actually an emoji outside of nvim
-  - trigger: "!star"
+    label: ⚠️ warn
+  - triggers: ["::", "!star"]
     replace: ⭐
-  - trigger: "->>"
+    label: ⭐ star
+  - triggers: ["::", "->>", "!arrow"]
     replace: ➡️ # is actually an emoji outside of nvim
-  - trigger: "!ampel"
+    label: ➡️ arrow
+  - triggers: ["::", "!ampel"]
     replace: 🔴🟡🟢
-  - trigger: " mm"
-    replace: " 🙈"
-  - trigger: "!eyes"
+    label: 🔴🟡🟢 ampel
+  - triggers: ["::", "!eyes"]
     replace: 👁️👄👁️
+    label: 👁️👄👁️ eyes
+  - triggers: ["::", "!shrug"]
+    replace: ¯\_(ツ)_/¯
+    label: ¯\_(ツ)_/¯ shrug
+  - triggers: ["::", "!gimme"]
+    replace: ༼つ ◕_◕ ༽つ
+    label: ༼つ ◕_◕ ༽つ gimme
+  - triggers: ["::", "!tableflip"]
+    replace: (╯°□°）╯︵ ┻━┻
+    label: (╯°□°）╯︵ ┻━┻ tableflip
   #─────────────────────────────────────────────────────────────────────────
-  # unicode
+  # unicode / simple
   - trigger: "->"
     replace: → # unicode arrow
     word: true
   - trigger: "<->"
     replace: ↔ # unicode arrow
-  - triggers: ["(tm)", "!tm"]
-    replace: "™"
-
-  #─────────────────────────────────────────────────────────────────────────────
-  # Ascii Art
-  - triggers: ["!shrug", "!ascii"]
-    replace: ¯\_(ツ)_/¯
-  - triggers: ["!gimme", "!ascii"]
-    replace: ༼つ ◕_◕ ༽つ
-  - triggers: ["!tableflip", "!ascii"]
-    replace: (╯°□°)--︻╦╤─ - - -
-  - triggers: ["!tableflip", "!ascii"]
-    replace: (╯°□°）╯︵ ┻━┻
-  - triggers: ["!tableflip", "!ascii"]
-    replace: ┻━┻︵ \\(°□°)\/ ︵ ┻━┻
-  - triggers: ["!tableflip", "!ascii"]
-    replace: (ノಠ_ಠ)ノ彡︵ ┻━┻︵ ┻━┻
-  - triggers: ["!tableflip", "!ascii"]
-    replace: ┬─┬ノ(ಠ_ಠノ)
+  - triggers: ["::", " mm"]
+    replace: " 🙈"
 
   #─────────────────────────────────────────────────────────────────────────────
   # macOS symbols
@@ -71,7 +72,7 @@ matches:
     replace: ↹
   - trigger: "!backspace"
     replace: ⌫
- # The other return-like symbols either have an accessibility problem (VoiceOver
- # reads them as arrow shape) or are displayed as emoji on GitHub.
+  # INFO The other return-like symbols either have an accessibility problem 
+  # (VoiceOver reads them as arrow shape) or are displayed as emoji on GitHub.
   - triggers: ["!return", "!enter"]
     replace: ⏎

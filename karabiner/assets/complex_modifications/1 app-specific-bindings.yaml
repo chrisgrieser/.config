@@ -57,11 +57,6 @@ rules:
         to:
           - { key_code: s, modifiers: [control, command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
-      - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: p, modifiers: [shift, command] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
 
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Highlights"
