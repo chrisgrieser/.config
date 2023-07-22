@@ -8,6 +8,7 @@
 	status = auto
 	branch = auto
 	interactive = auto
+	pager = true
 	ui = always
 [core]
 	editor = nvim
@@ -36,10 +37,12 @@
 [diff]
 	colorMoved = default
 [delta]
-	navigate = true # use n and N to move between diff sections
-	tabs = 3
+	tabs = 2
 
-	# side-by-side-view: deactivate line numbers in but keep vertical separator
+	# use n and N to move between diff sections
+	navigate = true
+
+	# side-by-side-view: deactivate line numbers but keep vertical separator
 	line-numbers-left-format = ""
 	line-numbers-right-format = "│ "
 
