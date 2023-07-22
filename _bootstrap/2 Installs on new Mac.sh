@@ -9,8 +9,8 @@ sudo -v
 open -a "Appcleaner" \
 	"/Applications/Numbers.app" \
 	"/Applications/Pages.app/" \
-	"/Applications/GarageBand.app" \
 	"/Applications/Keynote.app" \
+	"/Applications/GarageBand.app" \
 	"/Applications/iMovie.app"
 
 # Change Settings manually
