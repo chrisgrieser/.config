@@ -440,17 +440,24 @@ rules:
       - type: basic
         from: { key_code: a, modifiers: { mandatory: [shift] } }
         to_if_alone:
-          # needs to close all folds before, since otherwise would open new
-          # windows for files
-          - { key_code: a, modifiers: [command] }
-          - key_code: left_arrow 
+          # https://apple.stackexchange.com/a/218751
           - shell_command: |
-              osascript -e '
-                tell application "Finder"
+              osascript -e "
+                script o
+                  property sel : {}
+                end script
+                tell application \"Finder\"
                   set thisFolder to the target of the front window
-                  set theFiles to get every item of (entire contents of thisFolder) whose kind ≠ "Folder"
-                  reveal theFiles
-                end tell'
+                  set selection to (entire contents of thisFolder)
+                  set o's sel to selection as alias list
+                  set tc to count o's sel
+                  repeat with i from 1 to tc
+                    if class of item (item i of o's sel) is folder then set item i of o's sel to missing value
+                  end repeat
+                  set selection to aliases of o's sel
+                end tell
+                return \"\" # required so there is no return value
+              "
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <S-Space> = add down to selection
       - type: basic
