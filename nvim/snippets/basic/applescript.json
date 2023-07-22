@@ -7,7 +7,7 @@
 		"prefix": "get current window (Finder)",
 		"body": [
 			"tell application \"Finder\"",
-			"\tif ((count windows) is 0) then return \"no window\"",
+			"\tif ((count Finder windows) is 0) then return \"no window\"",
 			"\treturn POSIX path of (insertion location as alias)",
 			"end tell"
 		],
@@ -16,10 +16,6 @@
 	"function": {
 		"prefix": "function",
 		"body": ["on ${1:func} (${2:argv})", "\t$0", "end ${1:func}"]
-	},
-	"browser URL": {
-		"prefix": "browser URL",
-		"body": "tell application \"Vivaldi\" to set currentTabUrl to URL of active tab of front window"
 	},
 	"notify": {
 		"prefix": "notify",
@@ -32,10 +28,6 @@
 	"key code": {
 		"prefix": "key code",
 		"body": "tell application \"System Events\" to key code ${1:num} using {${2:command} down}"
-	},
-	"browser tab title": {
-		"prefix": "browser tab title",
-		"body": "tell application \"Vivaldi\" to set currentTabName to title of active tab of front window"
 	},
 	"menu item": {
 		"prefix": "menu item",
@@ -81,15 +73,5 @@
 	"home": {
 		"prefix": "home",
 		"body": "POSIX path of (path to home folder as string)"
-	},
-	"wait until browser tab is loaded": {
-		"prefix": "wait until browser tab is loaded",
-		"body": [
-			"tell application \"Vivaldi\"",
-			"\trepeat until (loading of active tab of front window is false)",
-			"\t\tdelay 0.1",
-			"\tend repeat",
-			"end tell"
-		]
 	}
 }
