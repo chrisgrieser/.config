@@ -411,8 +411,8 @@ rules:
           - shell_command: |
               osascript -e '
                 tell application "Finder"
-                  repeat while window 2 exists
-                    close window 2
+                  repeat while Finder window 2 exists
+                    close Finder window 2
                   end repeat
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
@@ -440,24 +440,13 @@ rules:
       - type: basic
         from: { key_code: a, modifiers: { mandatory: [shift] } }
         to_if_alone:
-          # https://apple.stackexchange.com/a/218751
+          # INFO use "Finder window" instead of "window" to target only regular
+          # windows https://www.reddit.com/r/applescript/comments/uz9axo/comment/iayjrn4/?context=3
           - shell_command: |
-              osascript -e "
-                script o
-                  property sel : {}
-                end script
-                tell application \"Finder\"
-                  set thisFolder to the target of the front window
-                  set selection to (entire contents of thisFolder)
-                  set o's sel to selection as alias list
-                  set tc to count o's sel
-                  repeat with i from 1 to tc
-                    if class of item (item i of o's sel) is folder then set item i of o's sel to missing value
-                  end repeat
-                  set selection to aliases of o's sel
-                end tell
-                return \"\" # required so there is no return value
-              "
+              osascript -e '
+                tell application "Finder"
+                  set the selection to files of Finder window 1
+                end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <S-Space> = add down to selection
       - type: basic
@@ -485,9 +474,19 @@ rules:
                 end tell'
           - *start-context-menu
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
-      # close context menu with another q
       - type: basic
-        from: { key_code: q }
+        from: { key_code: q, modifiers: { mandatory: [shift] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Finder"
+                  click menu item "Share…" of menu "File" of menu bar 1
+                end tell'
+          - *start-context-menu
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
+      # close context menu with another q/Q
+      - type: basic
+        from: { key_code: q, modifiers: { optional: [shift] } }
         to_if_alone:
           - key_code: escape
           - *end-context-menu
@@ -553,14 +552,14 @@ rules:
           - shell_command: |
               osascript -e'
                 tell application "Finder"
-                  if (number of windows is not 2) then
+                  if (number of Finder windows is not 2) then
                     display notification "" with title "⚠️ Not exactly two windows" subtitle "Finder Vim Mode"
                     beep
                   else if (the selection is {}) then
                     display notification "" with title "⚠️ No selection" subtitle "Finder Vim Mode"
                     beep
                   else
-                    set otherWin to (target of window 2 as alias)
+                    set otherWin to (target of Finder window 2 as alias)
                     repeat with f in (selection as list)
                       move f to otherWin
                     end repeat
@@ -574,14 +573,14 @@ rules:
           - shell_command: |
               osascript -e'
                 tell application "Finder"
-                  if (number of windows is not 2) then
+                  if (number of Finder windows is not 2) then
                     display notification "" with title "Finder Vim Mode" subtitle "⚠️ Not exactly two windows"
                     beep
                   else if (the selection is {}) then
                     display notification "" with title "Finder Vim Mode" subtitle "⚠️ No selection"
                     beep
                   else
-                    set otherWin to (target of window 2 as alias)
+                    set otherWin to (target of Finder window 2 as alias)
                     repeat with f in (selection as list)
                       duplicate f to otherWin
                     end repeat
@@ -660,7 +659,7 @@ rules:
           - shell_command: |
               osascript -e '
                 tell application "Finder"
-                  set thisFolder to the target of the front window as alias
+                  set thisFolder to the target of the Finder window 1 as alias
                   set newFile to (make new file at thisFolder)
                   select newFile
                 end tell'
