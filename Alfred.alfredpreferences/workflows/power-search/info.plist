@@ -41,6 +41,8 @@
 				<true/>
 			</dict>
 		</array>
+		<key>0819784B-B883-4BEC-9F79-120B2D6B6648</key>
+		<array/>
 		<key>0C0BD5B6-7B63-415F-982A-0DF1C33F091C</key>
 		<array>
 			<dict>
@@ -74,6 +76,45 @@
 				<true/>
 			</dict>
 		</array>
+		<key>0F6DD660-7DBA-4369-9F0D-C6A0C1DB45D2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>0F85F824-594E-48C2-8329-168724983CFF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0F6DD660-7DBA-4369-9F0D-C6A0C1DB45D2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>188D5D21-4498-4B44-BA65-40F4A5D72A50</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4F0D24BA-9956-4B49-9C81-3B63CC70F362</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1CB74B29-BB4E-486B-99D5-073652674E8A</key>
 		<array>
 			<dict>
@@ -93,6 +134,16 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0F85F824-594E-48C2-8329-168724983CFF</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Open Marked URLs</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -586,6 +637,19 @@
 				<string>⌘: Open &amp; stay in Alfred</string>
 				<key>vitoclose</key>
 				<true/>
+			</dict>
+		</array>
+		<key>A501750F-7813-4761-A1F0-950F1BAAF1A9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>188D5D21-4498-4B44-BA65-40F4A5D72A50</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>AA0CE692-AA84-4D63-8F20-7DAB91C14FA6</key>
@@ -1602,6 +1666,35 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>4F0D24BA-9956-4B49-9C81-3B63CC70F362</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1700,27 +1793,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>0819784B-B883-4BEC-9F79-120B2D6B6648</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1766,6 +1838,84 @@
 			<string>42DF62FE-1AE2-47B2-A1B4-7B65AAE140E1</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>
+</string>
+				<key>discardemptyarguments</key>
+				<true/>
+				<key>outputas</key>
+				<integer>1</integer>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>split</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>0F6DD660-7DBA-4369-9F0D-C6A0C1DB45D2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{const:alfred_workflow_cache}/urlsToOpen.txt</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>0F85F824-594E-48C2-8329-168724983CFF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{const:alfred_workflow_cache}/urlsToOpen.txt</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>188D5D21-4498-4B44-BA65-40F4A5D72A50</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>test</string>
+				<key>subtext</key>
+				<string>test</string>
+				<key>text</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A501750F-7813-4761-A1F0-950F1BAAF1A9</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1913,6 +2063,34 @@
 			<string>396BCF5D-1A52-4FAC-AB1B-3ECF0E5ED2CC</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<true/>
+				<key>createintermediatefolders</key>
+				<true/>
+				<key>filename</key>
+				<string>urlsToOpen.txt</string>
+				<key>filetext</key>
+				<string>{query}
+</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>-1</integer>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>0819784B-B883-4BEC-9F79-120B2D6B6648</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2457,8 +2635,9 @@
 	<key>readme</key>
 	<string>## Show Inline Results – without keyword
 - &lt;kbd&gt;⏎&lt;/kbd&gt; Search for Term / open URL
-- &lt;kbd&gt;⌘&lt;/kbd&gt; Show Preview Text for Search Result
+- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Open URL and stay in Alfred
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Copy URL
+- &lt;kbd&gt;⇧&lt;/kbd&gt; Show Preview Text
 
 ## Global Search Hotkey
 Selection is…
@@ -2488,9 +2667,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>785</real>
+			<real>720</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>895</real>
 		</dict>
 		<key>0C0BD5B6-7B63-415F-982A-0DF1C33F091C</key>
 		<dict>
@@ -2498,6 +2677,31 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>165</real>
 			<key>ypos</key>
 			<real>785</real>
+		</dict>
+		<key>0F6DD660-7DBA-4369-9F0D-C6A0C1DB45D2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>815</real>
+			<key>ypos</key>
+			<real>680</real>
+		</dict>
+		<key>0F85F824-594E-48C2-8329-168724983CFF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>680</real>
+			<key>ypos</key>
+			<real>680</real>
+		</dict>
+		<key>188D5D21-4498-4B44-BA65-40F4A5D72A50</key>
+		<dict>
+			<key>xpos</key>
+			<real>855</real>
+			<key>ypos</key>
+			<real>740</real>
 		</dict>
 		<key>1CB74B29-BB4E-486B-99D5-073652674E8A</key>
 		<dict>
@@ -2609,6 +2813,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
+		<key>4F0D24BA-9956-4B49-9C81-3B63CC70F362</key>
+		<dict>
+			<key>xpos</key>
+			<real>950</real>
+			<key>ypos</key>
+			<real>580</real>
+		</dict>
 		<key>5E615CE0-93A5-48A2-A27A-A77F75B8D7FB</key>
 		<dict>
 			<key>xpos</key>
@@ -2643,6 +2854,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>305</real>
 			<key>ypos</key>
 			<real>1020</real>
+		</dict>
+		<key>A501750F-7813-4761-A1F0-950F1BAAF1A9</key>
+		<dict>
+			<key>xpos</key>
+			<real>685</real>
+			<key>ypos</key>
+			<real>770</real>
 		</dict>
 		<key>AA0CE692-AA84-4D63-8F20-7DAB91C14FA6</key>
 		<dict>
