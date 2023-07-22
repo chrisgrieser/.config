@@ -22,7 +22,7 @@ function run(argv) {
 	// API Sandbox: https://en.wikipedia.org/wiki/Special:ApiSandbox#action=opensearch&format=json&search=Hampi&namespace=0&limit=10&formatversion=2
 	const lang = $.getenv("language_code");
 	const maxResults = 9; // Alfred only shows 9 items at once
-	const wikipediaApiCall = `https://${lang}.wikipedia.org/w/api.php?action=opensearch&format=json&search=${query}&namespace=0&limit=${maxResults}&profile=fuzzy`;
+	const wikipediaApiCall = `https://${lang}.wikipedia.org/w/api.php?action=opensearch&format=json&search=${encodedQuery}&namespace=0&limit=${maxResults}&profile=fuzzy`;
 	const wikipediaItems = JSON.parse(httpRequest(wikipediaApiCall));
 
 	const useWikiwand = $.getenv("use_wikiwand") === "1";
