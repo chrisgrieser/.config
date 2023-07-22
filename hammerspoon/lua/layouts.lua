@@ -138,7 +138,6 @@ DisplayCountWatcher = hs.screen.watcher
 
 -- 2. Hotkey
 u.hotkey(u.hyper, "home", selectLayout)
-u.hotkey({}, "f6", selectLayout)
 
 -- 3. Systemstart
 if not u.isReloading() then selectLayout() end
