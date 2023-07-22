@@ -92,12 +92,16 @@
     },
     "↹",
     {
-      "c": "#c7a6ff"
+      "c": "#c7a6ff",
+      "f": 1
     },
-    "q\ncontext menu",
+    "q (Q)\ncontext menu (share)",
+    {
+      "f": 2
+    },
     "w (W)\n:close (:only)",
-    "e\neject (if volume)",
-    "r\nduplicate",
+    "e\neject",
+    "r\nreplicate",
     "t\n:tabnext",
     "z\nzip",
     "u (U)\nundo (redo)",
@@ -155,10 +159,7 @@
       "n": true
     },
     "f\nfind mode",
-    {
-      "f": 1
-    },
-    "gg (G)\n(bottom)\n\n\n^g gith.\n\nto top",
+    "gg (G)\nto top (bottom)\n\n\n^g gith.",
     {
       "sm": "cherry"
     },
@@ -166,12 +167,11 @@
     {
       "n": true
     },
-    "j (J)\n(6 down)\n\n\n\n\ndown",
-    "k (K)\n(6 up)\n\n\n\n\nup",
+    "j (J)\ndown (6x)",
+    "k (K)\n&nbsp;&nbsp;up &nbsp; (6x)",
     "l\nopen file / dir\n\n\n⌃l forw",
     {
-      "c": "#CCCCCC",
-      "f": 2
+      "c": "#CCCCCC"
     },
     "ö",
     "ä",
@@ -209,8 +209,14 @@
       "f": 2
     },
     "v\nview settings",
-    "b\ntoggle  bkp",
-    "n N\nnew file (folder)\n\n\n⌃n name",
+    {
+      "f": 1
+    },
+    "b\ntoggle  \"bkp\" suffix",
+    {
+      "f": 2
+    },
+    "n N\nnew file (dir)\n\n\n⌃n name",
     {
       "f": 1
     },
