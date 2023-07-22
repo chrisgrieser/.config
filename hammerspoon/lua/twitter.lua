@@ -85,7 +85,6 @@ end
 -- once on system startup or reload
 scrollUp()
 
--- fixed size to the side, with the sidebar hidden
 TickerAppWatcher = u.aw
 	.new(function(appName, event)
 		if appName == "CleanShot X" or appName == "Alfred" then return end
