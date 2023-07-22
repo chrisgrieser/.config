@@ -142,7 +142,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Small Utilities for Alfred Workflow Devs</string>
+	<string>Small Utilities for Alfred Workflow Development</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -171,6 +171,27 @@
 			<string>1C54A9EF-33FF-4391-A2AA-B1A21ABA6BE7</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alfred cache</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>📂 Alfred Workflow Cache</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>2E405C4A-C768-4D8D-A9BB-A94379AB7484</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -206,27 +227,6 @@
 			<string>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alfred cache</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>📂 Alfred Workflow Cache</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>2E405C4A-C768-4D8D-A9BB-A94379AB7484</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -541,11 +541,11 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>4</integer>
+				<integer>36</integer>
 				<key>hotmod</key>
-				<integer>262144</integer>
+				<integer>1048576</integer>
 				<key>hotstring</key>
-				<string>H</string>
+				<string>↩</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -587,7 +587,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>790</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>140</real>
 		</dict>
 		<key>1C54A9EF-33FF-4391-A2AA-B1A21ABA6BE7</key>
 		<dict>
@@ -605,18 +605,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>615</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>15</real>
 		</dict>
 		<key>40C74BD5-BA55-43D5-8F4A-1FD1B0390018</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>go to last open workflow</string>
+			<string>go to alternate workflow</string>
 			<key>xpos</key>
 			<real>620</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>415</real>
 		</dict>
 		<key>44FFE9B4-3CB4-46D3-8742-B7656E370346</key>
 		<dict>
@@ -625,7 +625,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>790</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>270</real>
 		</dict>
 		<key>6025A575-E53E-4DBF-9D31-D9C8CBB72DCC</key>
 		<dict>
@@ -634,7 +634,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>790</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>15</real>
 		</dict>
 		<key>701E5A21-FF9C-4A95-A2CF-5FDF14BF4522</key>
 		<dict>
@@ -654,7 +654,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>620</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>270</real>
 		</dict>
 		<key>7883C8E0-1C85-4882-95A8-90ED858F92AE</key>
 		<dict>
@@ -683,7 +683,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>790</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>415</real>
 		</dict>
 		<key>A1E33BB2-038D-4375-B0D8-FD9D71095631</key>
 		<dict>
@@ -714,7 +714,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>615</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>140</real>
 		</dict>
 		<key>C324E172-125B-402B-930D-F7D52CD82CD6</key>
 		<dict>
