@@ -349,6 +349,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>90992717-5795-4AC4-87C0-32EFADFFCA3B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A0058A30-98F7-4CE4-9FD9-4E353480E4DA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A0058A30-98F7-4CE4-9FD9-4E353480E4DA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A3408036-87B4-4BA4-8D1F-10A05C30BA35</key>
 		<array>
 			<dict>
@@ -1133,6 +1159,95 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Get UTI of file</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>90992717-5795-4AC4-87C0-32EFADFFCA3B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>mdls -name kMDItemContentType "$*" | cut -d'"' -f2</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A0058A30-98F7-4CE4-9FD9-4E353480E4DA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>man</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/search-man-pages.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Man Pages</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>D10E485C-BB78-4681-A267-D6B57E3E6EA3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -1256,7 +1371,7 @@
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
 				<key>argumenttrimmode</key>
@@ -1266,7 +1381,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>man</string>
+				<string>py</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1276,26 +1391,26 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>loading...</string>
+				<string>Loading…</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/search-man-pages.js</string>
+				<string>./scripts/python-docs.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Man Pages</string>
+				<string>Python</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>D10E485C-BB78-4681-A267-D6B57E3E6EA3</string>
+			<string>829DB972-BB96-484B-AE7B-490666BB5832</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1354,7 +1469,7 @@
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
 				<key>argumenttrimmode</key>
@@ -1364,36 +1479,36 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>py</string>
+				<string>jxa</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
 				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
 				<key>runningsubtext</key>
-				<string>Loading…</string>
+				<string>Searching...</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/python-docs.js</string>
+				<string>scripts/jxa-cookbook-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Python</string>
+				<string>JXA Cookbook</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>829DB972-BB96-484B-AE7B-490666BB5832</string>
+			<string>1D45A48A-4AD6-46C9-8532-E384C79B551C</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1417,6 +1532,55 @@
 			<string>6F2F3DFC-73BE-447A-9163-8ABC23D08E7A</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>git</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/git-doc-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Git Docs</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>03C8A38F-8577-483D-8E18-B31886F2113F</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1479,40 +1643,40 @@
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>jxa</string>
+				<string>ep</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Searching...</string>
+				<string>loading...</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/jxa-cookbook-search.js</string>
+				<string>./scripts/espanso-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>JXA Cookbook</string>
+				<string>Espanso Docs Search...</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>1D45A48A-4AD6-46C9-8532-E384C79B551C</string>
+			<string>FE9038EA-F174-44C3-96CF-EED8F400E783</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1604,7 +1768,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>git</string>
+				<string>ke</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1620,60 +1784,11 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/git-doc-search.js</string>
+				<string>./scripts/karabiner-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Git Docs</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>03C8A38F-8577-483D-8E18-B31886F2113F</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ep</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/espanso-docs-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Espanso Docs Search...</string>
+				<string>Karabiner Docs Search...</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1682,7 +1797,7 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>FE9038EA-F174-44C3-96CF-EED8F400E783</string>
+			<string>FE8C5299-418B-45DE-A554-50495EF4EE22</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1749,76 +1864,6 @@
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ke</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/karabiner-docs-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Karabiner Docs Search...</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>FE8C5299-418B-45DE-A554-50495EF4EE22</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
@@ -1861,6 +1906,27 @@
 			<string>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2266,7 +2332,7 @@
 			<key>note</key>
 			<string>AppleScript Dictionary</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>540</real>
 			<key>ypos</key>
 			<real>370</real>
 		</dict>
@@ -2275,9 +2341,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>755</real>
+			<real>750</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>735</real>
 		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
@@ -2324,9 +2390,9 @@
 			<key>note</key>
 			<string>afplay</string>
 			<key>xpos</key>
-			<real>755</real>
+			<real>750</real>
 			<key>ypos</key>
-			<real>970</real>
+			<real>1100</real>
 		</dict>
 		<key>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</key>
 		<dict>
@@ -2355,7 +2421,7 @@
 			<key>note</key>
 			<string>AppleScript Dictionary</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>540</real>
 			<key>ypos</key>
 			<real>240</real>
 		</dict>
@@ -2373,18 +2439,18 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>755</real>
+			<real>750</real>
 			<key>ypos</key>
-			<real>1105</real>
+			<real>1235</real>
 		</dict>
 		<key>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>905</real>
+			<real>900</real>
 			<key>ypos</key>
-			<real>1105</real>
+			<real>1235</real>
 		</dict>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<dict>
@@ -2413,9 +2479,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>625</real>
 		</dict>
 		<key>642DC21D-E907-412F-8F6F-7E24FE991B23</key>
 		<dict>
@@ -2431,9 +2497,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>755</real>
+			<real>750</real>
 			<key>ypos</key>
-			<real>850</real>
+			<real>980</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
@@ -2449,9 +2515,9 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>970</real>
+			<real>1100</real>
 		</dict>
 		<key>829DB972-BB96-484B-AE7B-490666BB5832</key>
 		<dict>
@@ -2471,14 +2537,32 @@
 			<key>ypos</key>
 			<real>240</real>
 		</dict>
+		<key>90992717-5795-4AC4-87C0-32EFADFFCA3B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>540</real>
+			<key>ypos</key>
+			<real>510</real>
+		</dict>
+		<key>A0058A30-98F7-4CE4-9FD9-4E353480E4DA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>755</real>
+			<key>ypos</key>
+			<real>510</real>
+		</dict>
 		<key>A3408036-87B4-4BA4-8D1F-10A05C30BA35</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>850</real>
+			<real>980</real>
 		</dict>
 		<key>A6A588B4-6474-4862-B661-C38931F307FA</key>
 		<dict>
@@ -2487,16 +2571,16 @@
 			<key>xpos</key>
 			<real>630</real>
 			<key>ypos</key>
-			<real>1295</real>
+			<real>1400</real>
 		</dict>
 		<key>A89D07AD-BB4E-4D63-B7B7-DDB763334AEC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>735</real>
 		</dict>
 		<key>AC5C19D5-CCA0-42C5-8A17-70BF48C23681</key>
 		<dict>
@@ -2505,7 +2589,7 @@
 			<key>note</key>
 			<string>code search</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>540</real>
 			<key>ypos</key>
 			<real>65</real>
 		</dict>
@@ -2550,9 +2634,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>905</real>
+			<real>900</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>735</real>
 		</dict>
 		<key>CD59A071-70BC-40FB-87C9-D8467973F461</key>
 		<dict>
@@ -2583,9 +2667,9 @@
 			<key>note</key>
 			<string>conventional commits</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>850</real>
 		</dict>
 		<key>DB0FF08A-04FB-4663-9EF5-E89C6C4CD8F1</key>
 		<dict>
@@ -2605,9 +2689,9 @@
 			<key>note</key>
 			<string>add `afplay`</string>
 			<key>xpos</key>
-			<real>670</real>
+			<real>665</real>
 			<key>ypos</key>
-			<real>1135</real>
+			<real>1265</real>
 		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>
