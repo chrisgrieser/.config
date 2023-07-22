@@ -8,6 +8,9 @@ local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 -- HELPERS
 
+---@return string three chars representing the day of the week (English)
+local function getWeekday() return tostring(os.date()):sub(1, 3) end
+
 ---@param targetMode string
 local function dockSwitcher(targetMode)
 	hs.execute("zsh ./helpers/dock-switching/dock-switcher.sh --load " .. targetMode)
@@ -62,7 +65,8 @@ local function workLayout()
 	closeAllFinderWins()
 
 	-- open
-	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp, "Slack" }
+	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp }
+	if getWeekday() ~= "Sat" and getWeekday() ~= "Sun" then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
 		u.asSoonAsAppRuns(appName, function()
@@ -134,6 +138,7 @@ DisplayCountWatcher = hs.screen.watcher
 
 -- 2. Hotkey
 u.hotkey(u.hyper, "home", selectLayout)
+u.hotkey({}, "f6", selectLayout)
 
 -- 3. Systemstart
 if not u.isReloading() then selectLayout() end

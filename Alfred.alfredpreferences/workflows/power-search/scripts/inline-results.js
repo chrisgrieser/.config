@@ -42,6 +42,12 @@ function run(argv) {
 		title: query,
 		uid: query,
 		arg: $.getenv("search_site") + query,
+		mods: {
+			cmd: {
+				arg: "open_URLs",
+				subtitle: "⌘: Open all saved results",
+			},
+		},
 	};
 
 	if (showNothing) return;
