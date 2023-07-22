@@ -436,11 +436,21 @@ rules:
         to_if_alone:
           - { key_code: a, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # A = DEselect all
+      # A = select only files
       - type: basic
         from: { key_code: a, modifiers: { mandatory: [shift] } }
         to_if_alone:
-          - { key_code: a, modifiers: [command, option] }
+          # needs to close all folds before, since otherwise would open new
+          # windows for files
+          - { key_code: a, modifiers: [command] }
+          - key_code: left_arrow 
+          - shell_command: |
+              osascript -e '
+                tell application "Finder"
+                  set thisFolder to the target of the front window
+                  set theFiles to get every item of (entire contents of thisFolder) whose kind ≠ "Folder"
+                  reveal theFiles
+                end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <S-Space> = add down to selection
       - type: basic
