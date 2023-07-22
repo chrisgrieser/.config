@@ -101,10 +101,10 @@
     "t\n:tabnext",
     "z\nzip",
     "u (U)\nundo (redo)",
-    "i\ninfo",
     {
       "f": 1
     },
+    "i (I)\ninfo panel (window)",
     "o (O)\nopen (all) folds",
     {
       "f": 2
@@ -203,7 +203,7 @@
     {
       "f": 1
     },
-    "x (X)\ncross-move (-copy)",
+    "x (X)\ncross-move (copy)",
     "c (C)\nclose (all) folds",
     {
       "f": 2
