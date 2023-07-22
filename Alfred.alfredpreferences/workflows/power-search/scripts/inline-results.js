@@ -83,7 +83,7 @@ function run(argv) {
 			arg: item.url,
 			icon: { path: "duckduckgo.png" },
 			mods: {
-				cmd: { subtitle: item.abstract },
+				shift: { subtitle: item.abstract },
 			},
 		};
 	});

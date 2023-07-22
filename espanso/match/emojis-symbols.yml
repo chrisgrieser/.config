@@ -24,9 +24,17 @@ matches:
   - triggers: ["::", "!star"]
     replace: ⭐
     label: ⭐ star
-  - triggers: ["::", "->>", "!arrow"]
-    replace: ➡️ # is actually an emoji outside of nvim
-    label: ➡️ arrow
+  - triggers: ["::", "!blush"]
+    replace: 😊
+    label: 😊 blush
+  - triggers: ["::", "!sweat"]
+    replace: 😅
+    label: 😅 sweat
+  - triggers: ["::", "!think"]
+    replace: 🤔
+    label: 🤔 think
+
+  # compound emojis
   - triggers: ["::", "!ampel"]
     replace: 🔴🟡🟢
     label: 🔴🟡🟢 ampel
@@ -43,7 +51,9 @@ matches:
     replace: (╯°□°）╯︵ ┻━┻
     label: (╯°□°）╯︵ ┻━┻ tableflip
   #─────────────────────────────────────────────────────────────────────────
-  # unicode / simple
+  # others
+  - trigger: "->>"
+    replace: ➡️ # is actually an emoji outside of nvim
   - trigger: "->"
     replace: → # unicode arrow
     word: true
