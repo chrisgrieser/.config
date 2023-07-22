@@ -1045,24 +1045,28 @@ rules:
         from: { key_code: "down_arrow" }
         to:
           - { key_code: "1", modifiers: [control, option, command] }
+          - { key_code: "up_arrow", modifiers: [option] } # select first
           - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by modification date
         from: { key_code: "left_arrow" }
         to:
           - { key_code: "5", modifiers: [control, option, command] }
+          - { key_code: "up_arrow", modifiers: [option] } # select first
           - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by size
         from: { key_code: "up_arrow" }
         to:
           - { key_code: "6", modifiers: [control, option, command] }
+          - { key_code: "up_arrow", modifiers: [option] } # select first
           - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by kind
         from: { key_code: "right_arrow" }
         to:
           - { key_code: "2", modifiers: [control, option, command] }
+          - { key_code: "up_arrow", modifiers: [option] } # select first
           - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────

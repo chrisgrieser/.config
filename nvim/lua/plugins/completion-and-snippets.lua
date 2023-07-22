@@ -116,6 +116,7 @@ local function cmpconfig()
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
+				vim.fn['codeium#Clear']() -- remove virtual text when not used anyway
 				if require("luasnip").choice_active() then
 					cmp.abort()
 					require("luasnip").change_choice(1)
@@ -173,7 +174,7 @@ local function filetypeCompletionConfig()
 	-- disable in special filetypes
 	cmp.setup.filetype("", { enabled = false })
 
-	cmp.setup.filetype({"lua", "toml"}, {
+	cmp.setup.filetype({ "lua", "toml" }, {
 		enabled = function() -- disable leading "-" in lua
 			if vim.bo.filetype ~= "lua" then return true end
 			local lineContent = vim.fn.getline(".")
@@ -210,7 +211,7 @@ local function filetypeCompletionConfig()
 		},
 	})
 
-	cmp.setup.filetype({"yaml", "json"}, {
+	cmp.setup.filetype({ "yaml", "json" }, {
 		sources = cmp.config.sources {
 			s.lsp, -- prioritize schemas
 			s.snippets,
@@ -346,7 +347,7 @@ return {
 			},
 		},
 	},
-	{-- AI completion (virtual text)
+	{ -- AI completion (virtual text)
 		"Exafunction/codeium.vim",
 		event = "InsertEnter",
 		build = function()
@@ -359,7 +360,15 @@ return {
 		end,
 		init = function()
 			vim.g.codeium_disable_bindings = 1
-			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
+			vim.g.codeium_filetypes = {
+				["DressingInput"] = false,
+			}
+			vim.keymap.set(
+				"i",
+				"<D-s>",
+				function() return vim.fn["codeium#Accept"]() end,
+				{ expr = true, desc = "󰚩 Accept Suggestion" }
+			)
 		end,
 	},
 	{ -- AI completion (suggestion)

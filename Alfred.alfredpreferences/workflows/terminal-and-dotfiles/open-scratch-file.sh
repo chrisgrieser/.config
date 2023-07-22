@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
+# WD defined in .zshenv
 # shellcheck disable=1091
-source "$HOME/.zshenv" 
 touch "$WD/scratch.txt"
 open "$WD/scratch.txt"
