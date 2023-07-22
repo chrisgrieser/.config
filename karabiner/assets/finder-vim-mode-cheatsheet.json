@@ -85,15 +85,14 @@
   ],
   [
     {
-      "c": "#CCCCCC",
+      "c": "#fff4a6",
       "a": 5,
-      "f": 2,
+      "f": 1,
       "w": 1.5
     },
-    "↹",
+    "↹ next file, alphabetically\n↹⇧ previous",
     {
-      "c": "#c7a6ff",
-      "f": 1
+      "c": "#c7a6ff"
     },
     "q (Q)\ncontext menu (share)",
     {
@@ -129,7 +128,7 @@
       "h2": 1,
       "x2": -0.25
     },
-    "↵: rename\ninsert: confirm & normal\n\n\n\n\n⇧↵: batch rename",
+    "↵ rename\ninsert mode: confirm & normal mode\n\n\n\n\n⇧↵ batch rename",
     {
       "c": "#999999",
       "a": 7,
@@ -222,14 +221,17 @@
     },
     "m (M)\nmove (to new dir)",
     {
-      "c": "#fff4a6"
+      "f": 2
     },
-    ",\nRestart iCloud process",
+    ",\nrestart iCloud",
     {
-      "c": "#c7a6ff"
+      "f": 1
     },
     ".\ntoggle hidden files",
-    "de: - us: /\nSearch (insert m.)",
+    {
+      "f": 2
+    },
+    "de: - us: /\nSearch",
     {
       "c": "#999999",
       "a": 7,
@@ -271,7 +273,7 @@
       "f": 2,
       "w": 6.25
     },
-    "quick look\nwith ⇧: add to selection\n\n\n\n\n──────",
+    "␣ quick look\n⇧␣: add to selection\n\n\n\n\n──────",
     {
       "c": "#999999",
       "a": 7,
