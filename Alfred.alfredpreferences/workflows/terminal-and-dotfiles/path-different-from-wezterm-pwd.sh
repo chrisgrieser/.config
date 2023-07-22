@@ -1,8 +1,11 @@
 #!/usr/bin/env zsh
 
 path_to_open="$*"
-if [[ -z "$path_to_open" ]] || ! pgrep -xq "wezterm-gui"; then
+if [[ -z "$path_to_open" ]] ; then
 	echo -n "just activate terminal"
+	return 0
+elif ! pgrep -xq "wezterm-gui" ; then
+	echo -n "$path_to_open"
 	return 0
 fi
 
@@ -16,7 +19,7 @@ current_cwd=$(wezterm cli list --format json | grep 'cwd' | cut -d'"' -f4 | sed 
 
 if [[ "$path_to_open" == "$current_cwd" ]] ; then
 	echo -n "just activate terminal"
-	return 0
+else
+	echo -n "$path_to_open"
 fi
 
-echo -n "$path_to_open"
