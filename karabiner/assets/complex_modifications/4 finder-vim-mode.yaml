@@ -576,7 +576,7 @@ rules:
         from: { key_code: i }
         to:
           - { key_code: p, modifiers: [shift, command] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # I = info window
       # INFO uses floating inspector window which follows the current selection.
       # Pressing the hotkey again toggles it
