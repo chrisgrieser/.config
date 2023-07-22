@@ -571,11 +571,17 @@ rules:
                   end if
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # i = info window
+      # i = Preview (information window)
+      - type: basic
+        from: { key_code: i }
+        to:
+          - { key_code: p, modifiers: [shift, command] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+      # I = info window
       # INFO uses floating inspector window which follows the current selection.
       # Pressing the hotkey again toggles it
       - type: basic
-        from: { key_code: i }
+        from: { key_code: i, modifiers: { mandatory: [shift] } }
         to:
           - { key_code: i, modifiers: [command, option] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
@@ -1022,21 +1028,25 @@ rules:
         from: { key_code: "down_arrow" }
         to:
           - { key_code: "1", modifiers: [control, option, command] }
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by modification date
         from: { key_code: "left_arrow" }
         to:
           - { key_code: "5", modifiers: [control, option, command] }
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by size
         from: { key_code: "up_arrow" }
         to:
           - { key_code: "6", modifiers: [control, option, command] }
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by kind
         from: { key_code: "right_arrow" }
         to:
           - { key_code: "2", modifiers: [control, option, command] }
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
