@@ -27,24 +27,6 @@ return {
 		ft = { "lua", "bash", "sh", "vim", "ruby", "elixir" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-	{ -- AI support
-		"Bryley/neoai",
-		dependencies = "MunifTanjim/nui.nvim",
-		keys = {
-			{ "<leader>a", vim.cmd.NeoAI, desc = "󰚩 NeoAI" },
-			{ "x", "<leader>a", vim.cmd.NeoAIContext, desc = "󰚩 NeoAI Context" },
-		},
-		opts = {
-			ui = { -- percentages
-				width = 40,
-				output_popup_height = 75,
-			},
-			inject = {
-				cutoff_width = vim.opt.textwidth:get() + 5,
-			},
-			shortcuts = {}, -- disable built-in shortcuts
-		},
-	},
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
 		lazy = true, -- loaded by keymaps
@@ -105,6 +87,18 @@ return {
 					vim.keymap.set("n", "Ü", '"zdawbh"zph', { desc = "⬅️ Move Word Left", buffer = true })
 				end,
 			})
+		end,
+	},
+	{
+		"Exafunction/codeium.vim",
+		init = function()
+			vim.g.codeium_disable_bindings = 1
+			-- stylua: ignore start
+			vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true })
+			vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true })
+			vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true })
+			vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true })
+			-- stylua: ignore end
 		end,
 	},
 	{ -- split-join lines
