@@ -89,22 +89,6 @@ return {
 			})
 		end,
 	},
-	{
-		"Exafunction/codeium.vim",
-		event = "InsertEnter",
-		build = function()
-			-- HACK enable	syncing of API key
-			local symlinkCmd = ("ln -sf '%s' '%s'"):format(
-				vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json",
-				vim.env.HOME .. "/.codeium/config.json"
-			)
-			vim.fn.system(symlinkCmd)
-		end,
-		init = function()
-			vim.g.codeium_disable_bindings = 1
-			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
-		end,
-	},
 	{ -- split-join lines
 		"Wansmer/treesj",
 		dependencies = "nvim-treesitter/nvim-treesitter",

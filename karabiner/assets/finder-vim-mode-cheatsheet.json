@@ -1,0 +1,286 @@
+[
+  {
+    "name": "Finder Vim Mode Cheatsheet",
+    "author": "pseudometa"
+  },
+  [
+    {
+      "c": "#fff4a6",
+      "a": 5,
+      "f": 2
+    },
+    "⎋\nnormal mode",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 4
+    },
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8",
+    "F9",
+    "F10",
+    "F11",
+    "F12",
+    {
+      "f": 7
+    },
+    "⌱",
+    {
+      "f": 4
+    },
+    "del",
+    {
+      "f": 7
+    },
+    "◎"
+  ],
+  [
+    {
+      "c": "#CCCCCC",
+      "a": 5,
+      "f": 4
+    },
+    "^",
+    {
+      "c": "#a6d1ff",
+      "f": 2
+    },
+    "1\ntoggle tag #1",
+    "2\ntoggle tag #2",
+    "3\ntoggle tag #3",
+    "4\ntoggle tag #4",
+    "5\ntoggle tag #5",
+    "6\ntoggle tag #6",
+    "7\ntoggle tag #7",
+    "8\ntoggle tag #8",
+    "9\ntoggle tag #9",
+    "0\nremove all tags",
+    {
+      "c": "#c7a6ff"
+    },
+    "?\n:help",
+    {
+      "c": "#CCCCCC",
+      "f": 4
+    },
+    "`",
+    {
+      "c": "#fff4a6",
+      "f": 2,
+      "w": 2
+    },
+    "⌫\n:bnext",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 4
+    },
+    "PdUp"
+  ],
+  [
+    {
+      "c": "#CCCCCC",
+      "a": 5,
+      "f": 2,
+      "w": 1.5
+    },
+    "↹",
+    {
+      "c": "#c7a6ff"
+    },
+    "q\ncontext menu",
+    "w (W)\n:close (:only)",
+    "e\neject (if volume)",
+    "r\nduplicate",
+    "t\n:tabnext",
+    "z\nzip",
+    "u (U)\nundo (redo)",
+    "i\ninfo",
+    {
+      "f": 1
+    },
+    "o (O)\nopen (all) folds",
+    {
+      "f": 2
+    },
+    "p\npaste\n\n\n⌃p path",
+    {
+      "c": "#CCCCCC"
+    },
+    "ü",
+    "+",
+    {
+      "x": 0.25,
+      "c": "#fff4a6",
+      "f": 1,
+      "w": 1.25,
+      "h": 2,
+      "w2": 1.5,
+      "h2": 1,
+      "x2": -0.25
+    },
+    "↵: rename\ninsert: confirm & normal\n\n\n\n\n⇧↵: batch rename",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 4
+    },
+    "PgDn"
+  ],
+  [
+    {
+      "c": "#fff4a6",
+      "a": 5,
+      "f": 2,
+      "w": 1.75
+    },
+    "⇪\nnormal mode",
+    {
+      "c": "#c7a6ff",
+      "f": 1
+    },
+    "a (A)\n(de)sel all files",
+    "s (S)\nfollow (create) symlink",
+    {
+      "f": 2
+    },
+    "d\ntrash file",
+    {
+      "n": true
+    },
+    "f\nfind mode",
+    {
+      "f": 1
+    },
+    "gg (G)\n(bottom)\n\n\n^g gith.\n\nto top",
+    {
+      "sm": "cherry"
+    },
+    "h\nparent dir\n\n\n⌃h back",
+    {
+      "n": true
+    },
+    "j (J)\n(6 down)\n\n\n\n\ndown",
+    "k (K)\n(6 up)\n\n\n\n\nup",
+    "l\nopen file / dir\n\n\n⌃l forw",
+    {
+      "c": "#CCCCCC",
+      "f": 2
+    },
+    "ö",
+    "ä",
+    "#",
+    {
+      "x": 1.25,
+      "c": "#999999",
+      "a": 7,
+      "f": 4
+    },
+    "home"
+  ],
+  [
+    {
+      "f": 7,
+      "w": 1.25
+    },
+    "⇧",
+    {
+      "c": "#CCCCCC",
+      "a": 5,
+      "f": 2
+    },
+    ">",
+    {
+      "c": "#c7a6ff"
+    },
+    "y\nyank / copy",
+    {
+      "f": 1
+    },
+    "x (X)\ncross-move (-copy)",
+    "c (C)\nclose (all) folds",
+    {
+      "f": 2
+    },
+    "v\nview settings",
+    "b\ntoggle  bkp",
+    "n N\nnew file (folder)\n\n\n⌃n name",
+    {
+      "f": 1
+    },
+    "m (M)\nmove (to new dir)",
+    {
+      "c": "#fff4a6"
+    },
+    ",\nRestart iCloud process",
+    {
+      "c": "#c7a6ff"
+    },
+    ".\ntoggle hidden files",
+    "de: - us: /\nSearch (insert m.)",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 7,
+      "w": 1.75
+    },
+    "⇧",
+    {
+      "c": "#90d98b",
+      "a": 5,
+      "f": 2,
+      "n": true
+    },
+    "↑\nsort by size",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 4
+    },
+    "end"
+  ],
+  [
+    {
+      "f": 7,
+      "w": 1.25
+    },
+    "⌃",
+    {
+      "w": 1.25
+    },
+    "⌥",
+    {
+      "w": 1.25
+    },
+    "⌘",
+    {
+      "c": "#fff4a6",
+      "a": 5,
+      "f": 2,
+      "w": 6.25
+    },
+    "quick look\nwith ⇧: add to selection\n\n\n\n\n──────",
+    {
+      "c": "#999999",
+      "a": 7,
+      "f": 7
+    },
+    "⌘",
+    "fn",
+    "⌃",
+    {
+      "c": "#90d98b",
+      "a": 5,
+      "f": 2
+    },
+    "←\nsort by modified",
+    "↓\nsort by name",
+    "→\nsort by kind"
+  ]
+]
