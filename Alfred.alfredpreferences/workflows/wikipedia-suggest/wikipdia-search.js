@@ -16,6 +16,7 @@ function httpRequest(url) {
 function run(argv) {
 	const query = argv[0];
 	if (!query) return;
+	const enc 
 
 	// Wikiepdia Open Search API: https://www.mediawiki.org/wiki/API:Opensearch#JavaScript
 	// API Sandbox: https://en.wikipedia.org/wiki/Special:ApiSandbox#action=opensearch&format=json&search=Hampi&namespace=0&limit=10&formatversion=2
