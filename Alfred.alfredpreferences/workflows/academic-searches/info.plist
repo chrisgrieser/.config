@@ -25,6 +25,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>82300D05-4616-4CE1-AE7C-29E5E4420AD4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>169FF168-1AE9-4A13-8CFC-58686EC8B546</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -141,12 +151,54 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
+				<string>https://www.google.com/search?q={query}+site%3Aarchive.org</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>82300D05-4616-4CE1-AE7C-29E5E4420AD4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
 				<string>https://scite.ai/search?q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>32FE0E4D-09C0-4DB0-81EA-F77B71C65466</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>rs||lib</string>
+				<key>subtext</key>
+				<string>Anna's Archive &amp; Libgen &amp; archive.org</string>
+				<key>text</key>
+				<string>Book Search {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0DEE71DF-8531-4E7F-BE3B-9D2898DBAF72</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -189,27 +241,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>33687FCF-858F-4613-A6B6-24920E167D9B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>rs||lib</string>
-				<key>subtext</key>
-				<string>Anna's Archive &amp; Libgen</string>
-				<key>text</key>
-				<string>Book Search {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>0DEE71DF-8531-4E7F-BE3B-9D2898DBAF72</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -351,18 +382,18 @@
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>435</real>
+			<real>440</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>470</real>
 		</dict>
 		<key>0DEE71DF-8531-4E7F-BE3B-9D2898DBAF72</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>435</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>210</real>
+			<real>135</real>
 		</dict>
 		<key>169FF168-1AE9-4A13-8CFC-58686EC8B546</key>
 		<dict>
@@ -418,9 +449,9 @@
 			<key>note</key>
 			<string>open current browser tab</string>
 			<key>xpos</key>
-			<real>610</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>470</real>
 		</dict>
 		<key>54391CE0-C9F4-4619-B285-BD85CD4D64ED</key>
 		<dict>
@@ -439,6 +470,15 @@
 			<real>255</real>
 			<key>ypos</key>
 			<real>475</real>
+		</dict>
+		<key>82300D05-4616-4CE1-AE7C-29E5E4420AD4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>610</real>
+			<key>ypos</key>
+			<real>20</real>
 		</dict>
 		<key>885E52AE-9E54-4319-A19C-E6201F89E6D0</key>
 		<dict>
