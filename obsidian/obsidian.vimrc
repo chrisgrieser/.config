@@ -199,10 +199,6 @@ nmap ,a :aiComplete
 " [l]og commands in console
 nmap ,l :obcommand
 
-" [c]lean alias part of next Wikilink
-" (or link homepage when using Auto Title Plugin)
-nmap ,c F[t|"_dt]
-
 " append to [y]aml (line 3 = tags)
 nmap ,y 3ggA
 
