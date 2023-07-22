@@ -735,26 +735,31 @@ rules:
                   end tell'
               fi
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
-      # Z = zip folder
-      - type: basic
-        from: { key_code: "y", modifiers: { mandatory: [shift] } }
-        to_if_alone:
-          - { key_code: down_arrow, modifiers: [command] }
-          - { key_code: a, modifiers: [command] }
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Finder"
-                  click menu item "Compress" of menu "File" of menu bar 1
-                end tell'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       - type: basic
         from: { key_code: z }
         to:
           - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Finder"
-                  click menu item "Compress" of menu "File" of menu bar 1
-                end tell'
+              SEL=$(osascript -e 'tell application "Finder"
+                set sel to (item 1 of (get selection) as text)
+                return POSIX path of sel
+              end tell')
+
+              if [[ -d "$SEL" ]] ; then
+                cd "$SEL"
+                foldername=$(basename "$SEL")
+                zip -r "../$foldername.zip" .
+                open -R "../$foldername.zip"
+
+                current_vol=$(osascript -e 'output volume of (get volume settings)')
+                vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
+                (afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &)
+
+              else
+                osascript -e '
+                  tell application "System Events" to tell process "Finder"
+                    click menu item "Compress" of menu "File" of menu bar 1
+                  end tell'
+              fi
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       # toggle hidden files visibility
       - type: basic
