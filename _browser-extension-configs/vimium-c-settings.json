@@ -1,9 +1,9 @@
 {
 	"name": "Vimium C",
-	"@time": "7/23/2023, 7:37:47 AM",
-	"time": 1690090667058,
+	"@time": "7/23/2023, 9:56:34 AM",
+	"time": 1690098994781,
 	"environment": {
-		"extension": "1.99.992",
+		"extension": "1.99.994",
 		"platform": "mac",
 		"chromium": 115
 	},

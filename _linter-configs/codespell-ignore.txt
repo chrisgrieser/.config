@@ -4,6 +4,7 @@ als
 ist
 interaktion
 technik
+termine
 
 # too many false positives
 bu
