@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "7/23/2023, 3:18:52 PM",
-	"time": 1690118332745,
+	"@time": "7/23/2023, 7:59:46 PM",
+	"time": 1690135186998,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
@@ -20,19 +20,23 @@
 		},
 		{
 			"passKeys": "",
+			"pattern": ":https://docs.google.com/"
+		},
+		{
+			"passKeys": "",
 			"pattern": ":https://mail.google.com/"
 		},
 		{
-			"passKeys": "1 ? a g j k v ",
+			"passKeys": "? j k o v ",
 			"pattern": ":https://www.inoreader.com/"
-		},
-		{
-			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? j k l ",
-			"pattern": ":https://www.youtube.com/"
 		},
 		{
 			"passKeys": "? ",
 			"pattern": ":https://www.reddit.com/"
+		},
+		{
+			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? j k l ",
+			"pattern": ":https://www.youtube.com/"
 		}
 	],
 	"extAllowList": [
@@ -68,6 +72,7 @@
 		"\" Modes",
 		"map <esc> reset",
 		"map i passNextKey",
+		"map I enterInsertMode",
 		"map gi focusInput keep select=\"end\"",
 		"\" this is similar to WezTerm's QuickSelect mode",
 		"map v LinkHints.activateSelect",
@@ -146,6 +151,8 @@
 		"map R reload hard",
 		"map gs toggleViewSource",
 		"map gf nextFrame",
+		"\" does not work with most duplicate-tab-closing-extensions. *Does* works with https://chrome.google.com/webstore/detail/fast-duplicate-tab-closer/dpgkjbmiapibpdjnnoalnlkcmeepocak",
+		"map yt duplicateTab",
 		"",
 		"\" Copy URLs",
 		"map yy copyCurrentUrl",
@@ -156,6 +163,7 @@
 		"",
 		"\" Help",
 		"map ? showHelp",
+		"map ! showTip",
 		"map , focusOrLaunch url=\"chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html\"",
 		""
 	],
