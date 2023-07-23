@@ -109,13 +109,14 @@ function inputToEntryData(input) {
 		const doi = input.match(doiRegex);
 		if (!doi) return { error: "DOI invalid" };
 		const doiURL = "https://doi.org/" + doi[0];
+
 		const response = app.doShellScript(
 			`curl -sL -H "Accept: application/vnd.citationstyles.csl+json" "${doiURL}"`,
 		);
-		if (!response)  return { error: "No response by Google Books API" }; 
-
+		if (!response) return { error: "No response by doi.org" };
 		if (response.startsWith("<!DOCTYPE html>") || response.toLowerCase().includes("doi not found"))
 			return { error: "DOI not found" };
+
 		const data = JSON.parse(response);
 
 		entry.publisher = data.publisher;
@@ -149,7 +150,7 @@ function inputToEntryData(input) {
 		);
 		if (!response) console.log("No response by OpenLibrary API");
 		const fullData = response ? JSON.parse(response)["isbn:" + isbn] : {};
-		const openLibraryHasData = response && Object.keys(fullData).length > 0;
+		const openLibraryHasData = response && fullData && Object.keys(fullData).length > 0;
 
 		if (openLibraryHasData) {
 			console.log("Open Library Data found.");
@@ -158,7 +159,6 @@ function inputToEntryData(input) {
 			entry.type = "book";
 			entry.publisher = data.publishers.join(" and ");
 			entry.title = data.title;
-
 			entry.year = parseInt(data.publish_date.split(",")[1].trim());
 			entry.author = (data.authors || data.author || [])
 				.map((/** @type {{ name: string; }} */ author) => author.name)

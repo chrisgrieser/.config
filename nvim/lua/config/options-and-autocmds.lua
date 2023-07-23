@@ -7,6 +7,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local keymap = vim.keymap.set
 local expand = vim.fn.expand
 local u = require("config.utils")
+local api = vim.api
 
 --------------------------------------------------------------------------------
 -- REMOTE CONTROL / AUTOMATION
@@ -199,18 +200,21 @@ autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost", "InsertLeave", "TextC
 	callback = function()
 		local debounceDelaySec = 3 -- save at most every x seconds
 		if bo.filetype == "css" then debounceDelaySec = 1 end -- for hot-reloading css
+
+		local bufNo = api.nvim_get_current_buf()
 		local filepath = expand("%:p")
 		if
-			not vim.b.savingQueued
+			not vim.b["savingQueued"]
 			and filepath ~= ""
 			and (bo.buftype == "" or bo.buftype == "acwrite")
 			and bo.filetype ~= "gitcommit"
-			and (opt_local.write and not opt_local.readonly)
+			and opt.write:get()
+			and not (bo.readonly)
 		then
-			vim.b.savingQueued = true
+			api.nvim_buf_set_var(bufNo, "savingQueued", true)
 			vim.defer_fn(function()
 				cmd.update(filepath)
-				vim.b.savingQueued = false
+				api.nvim_buf_set_var(bufNo, "savingQueued", false)
 			end, 1000 * debounceDelaySec)
 		end
 	end,
