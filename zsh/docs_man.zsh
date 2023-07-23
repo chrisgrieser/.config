@@ -42,7 +42,7 @@ function man() {
 	if ! command -v "$command" &>/dev/null; then echo "$command not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
 
-	if [[ "$(type "$command")" =~ "builtin" ]]; then
+	if [[ "$(type "$command")" =~ "builtin" ]] && [[ "$command" != "test" ]]; then
 		# using bat, since it adds some syntax highlighting to the builtin pages,
 		# which man/less does not
 		if [[ -n "$search_term" ]]; then
@@ -53,12 +53,12 @@ function man() {
 	else
 		if ! command man -w "$command" &>/dev/null ; then
 			print "\033[1;33mNo manpage found.\033[0m"
-			return 0
+			return 1
 		fi
 		if [[ -n "$search_term" ]]; then
-			pane_id=$(wezterm cli spawn -- man -P "less --pattern=$search_term" "$command")
+			pane_id=$(wezterm cli spawn -- command man -P "less --pattern=$search_term" "$command")
 		else
-			pane_id=$(wezterm cli spawn -- man "$command")
+			pane_id=$(wezterm cli spawn -- command man "$command")
 		fi
 	fi
 	# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html

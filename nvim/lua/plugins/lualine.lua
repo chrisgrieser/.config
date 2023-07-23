@@ -174,6 +174,13 @@ local lualineConfig = {
 		lualine_a = {
 			{ clock, section_separators = emptySeparators },
 			{
+				searchCounter,
+				cond = function()
+					local currentlySearching = vim.fn.getcmdtype():find("[/?]") ~= nil
+					return currentlySearching
+				end,
+			},
+			{
 				"tabs",
 				mode = 1,
 				max_length = vim.o.columns * 0.7,
