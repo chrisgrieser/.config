@@ -125,19 +125,6 @@
 		</array>
 		<key>38E62E4E-8B37-483B-BBE3-257C2DD7EA30</key>
 		<array/>
-		<key>538AE9E5-8B3F-4871-A7CE-611D032143E3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B493D78F-4636-4FFB-95A5-231482DEF4F8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</key>
 		<array/>
 		<key>6EBCF2CC-4936-48C4-BCD8-42A7B39BDEDC</key>
@@ -257,19 +244,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8D7A806A-C89F-4527-87FB-F6D2B578A43A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>90FFACB2-0DBE-43F6-BA13-6D3B89E820ED</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>538AE9E5-8B3F-4871-A7CE-611D032143E3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -617,81 +591,6 @@ Search neovim plugins and online :help via Alfred</string>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>18</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>1</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>90FFACB2-0DBE-43F6-BA13-6D3B89E820ED</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>killall neovide nvim osascript</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>538AE9E5-8B3F-4871-A7CE-611D032143E3</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>⚔️ Force Quit nvim processes</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>B493D78F-4636-4FFB-95A5-231482DEF4F8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1089,15 +988,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
-		<key>538AE9E5-8B3F-4871-A7CE-611D032143E3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>805</real>
-			<key>ypos</key>
-			<real>535</real>
-		</dict>
 		<key>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</key>
 		<dict>
 			<key>colorindex</key>
@@ -1178,17 +1068,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>90FFACB2-0DBE-43F6-BA13-6D3B89E820ED</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>kill all neovide and nvim processes</string>
-			<key>xpos</key>
-			<real>645</real>
-			<key>ypos</key>
-			<real>535</real>
-		</dict>
 		<key>9552C60A-4AD9-4038-BB96-EDB2C60D13C6</key>
 		<dict>
 			<key>colorindex</key>
@@ -1199,15 +1078,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>475</real>
 			<key>ypos</key>
 			<real>830</real>
-		</dict>
-		<key>B493D78F-4636-4FFB-95A5-231482DEF4F8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>970</real>
-			<key>ypos</key>
-			<real>535</real>
 		</dict>
 		<key>D6E5E105-38E3-4BC1-90E3-52BEE556349D</key>
 		<dict>

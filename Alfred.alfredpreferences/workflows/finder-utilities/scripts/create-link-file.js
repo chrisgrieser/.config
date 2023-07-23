@@ -70,7 +70,7 @@ function run(argv) {
 		}
 	}
 	// safe and truncated title
-	title = title.replace(/[/\\:]/g, "-").slice(0, 50).trim();
+	title = title.replace(/[/\\]/g, "-").replace(/["':;.,]/g, "").slice(0, 50).trim();
 
 	const baseFolder = $.getenv("base_folder");
 	const linkFilePath = `${baseFolder}/${title}.url`;
@@ -80,5 +80,6 @@ URL=${url}
 IconIndex=0"`;
 
 	writeToFile(linkFilePath, urlFileContent);
-	Application("Finder").reveal(linkFilePath);
+	Application("Finder").activate();
+	Application("Finder").reveal(Path(linkFilePath));
 }
