@@ -96,15 +96,14 @@ function generateCitekey(authors, year) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const doiRegex = /\b10.\d{4,9}\/[-._;()/:A-Z0-9]+(?=$|[?/ ])/i; // https://www.crossref.org/blog/dois-and-matching-regular-expressions/
-	const isbnRegex = /^[\d-]{9,}$/;
-
 	const input = argv[0].trim();
 	const libraryPath = $.getenv("bibtex_library_path").replace(/^~/, app.pathTo("home folder"));
 
 	//───────────────────────────────────────────────────────────────────────────
 
 	const entry = {};
+	const doiRegex = /\b10.\d{4,9}\/[-._;()/:A-Z0-9]+(?=$|[?/ ])/i; // https://www.crossref.org/blog/dois-and-matching-regular-expressions/
+	const isbnRegex = /^[\d-]{9,}$/;
 	const isDOI = doiRegex.test(input);
 	const isISBN = isbnRegex.test(input);
 	const mode = $.getenv("mode");
@@ -141,34 +140,57 @@ function run(argv) {
 		}
 	}
 
-	// ISBN: Google Books
-	// https://developers.google.com/books/docs/v1/using
+	// ISBN: Google Books & OpenLibrary
+	// https://www.vinzius.com/post/free-and-paid-api-isbn/
 	else if (isISBN) {
-		// INFO ebooks.de API not working anymore :( https://www.ebook.de/de/tools/isbn2bibtex?isbn=9781471181979
+		// OpenLibrary
+		// https://openlibrary.org/developers/api
 		const isbn = input;
 		const response = app.doShellScript(
-			`curl -sL "https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}"`,
+			`curl -sL "https://openlibrary.org/api/books?bibkeys=isbn:${isbn}&jscmd=details&format=json"`,
 		);
-		if (!response) return "ISBN not found";
-		const fullData = JSON.parse(response);
-		if (fullData.totalItems === 0) return "ISBN not found";
-		const data = fullData.items[0].volumeInfo;
-		const bookAccessible = fullData.items[0].accessInfo.viewability !== "NO_PAGES"
+		if (!response || Object.keys(response).length === 0) return "ISBN not found";
+		const fullData = JSON.parse(response)["isbn:" + isbn];
+		const data = fullData.details;
 
 		entry.type = "book";
-		entry.year = parseInt(data.publishedDate.split("-")[0]);
-		entry.author = (data.authors || data.author || []).join(" and ");
-		entry.isbn = isbn;
-		entry.publisher = data.publisher;
+		entry.publisher = data.publishers.join(" and ");
 		entry.title = data.title;
+
+		entry.year = parseInt(data.published_date.split(",")[1].trim());
+		entry.author = (data.authors || data.author || [])
+			.map((/** @type {{ name: string; }} */ author) => author.name)
+			.join(" and ");
+		entry.isbn = isbn;
 		if (data.subtitle) entry.title += ". " + data.subtitle;
-		if (bookAccessible) entry.url = data.previewLink;
+		const bookAccessible = fullData.preview !== "noview";
+		if (bookAccessible) entry.url = data.preview_url;
+
+		// GOOGLE BOOKS
+		// https://developers.google.com/books/docs/v1/using
+		// const response = app.doShellScript(
+		// 	`curl -sL "https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}"`,
+		// );
+		// if (!response) return "ISBN not found";
+		// const fullData = JSON.parse(response);
+		// if (fullData.totalItems === 0) return "ISBN not found";
+		// const data = fullData.items[0].volumeInfo;
+
+		// entry.type = "book";
+		// entry.year = parseInt(data.publishedDate.split("-")[0]);
+		// entry.author = (data.authors || data.author || []).join(" and ");
+		// entry.isbn = isbn;
+		// entry.publisher = data.publisher;
+		// entry.title = data.title;
+		// if (data.subtitle) entry.title += ". " + data.subtitle;
+		// const bookAccessible = fullData.items[0].accessInfo.viewability !== "NO_PAGES"
+		// if (bookAccessible) entry.url = data.previewLink;
 	}
 
 	// anystyle
 	else if (mode === "parse") {
 		// validate installation
-		const anystyleInstalled = app.doShellScript("command -v anystyle || true") !== ""
+		const anystyleInstalled = app.doShellScript("command -v anystyle || true") !== "";
 		if (!anystyleInstalled) return "anystyle not found";
 
 		// INFO anystyle can't read STDIN, so this has to be written to a file
@@ -192,7 +214,6 @@ function run(argv) {
 		} else if (entry.type === "incollection") {
 			entry.booktitle = data["container-title"];
 		}
-		
 	}
 
 	//───────────────────────────────────────────────────────────────────────────

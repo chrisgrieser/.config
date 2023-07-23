@@ -77,10 +77,11 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
 		opts = true,
 		keys = {
-			-- stylua: ignore
+			-- stylua: ignore start
 			{"<leader>fi", function() require("refactoring").refactor("Inline Variable") end, mode = {"n", "x"}, desc = "󱗘 Inline Var" },
-			-- stylua: ignore
-			{"<leader>fe", function() require("refactoring").refactor("Extract Variable") end, mode = {"n", "x"}, desc = "󱗘 Extract Var" },
+			{"<leader>fe", function() require("refactoring").refactor("Extract Variable") end, mode = {"x"}, desc = "󱗘 Extract Var" },
+			{"<leader>fu", function() require("refactoring").refactor("Extract Function") end, mode = {"x"}, desc = "󱗘 Extract Func" },
+			-- stylua: ignore end
 		},
 	},
 	{ -- better macros
