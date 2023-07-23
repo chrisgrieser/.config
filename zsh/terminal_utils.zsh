@@ -53,35 +53,41 @@ function inspect() {
 	echo
 }
 
-# no arg = all files in folder will be deleted
+# safer removal
+# - moves to macOS trash instead of irreversibly deleting with `rm`
+# - no arg = all files in folder will be deleted
+# - adds sound on success
 function d() {
+	if ! command -v trash &>/dev/null; then print "\033[1;33mmacos-trash not installed.\033[0m" && return 1; fi
+
 	if [[ $# == 0 ]]; then
-		command mv -i ./* ~/.Trash/
+		trash ./*
 	else
-		command mv -i "$@" ~/.Trash/
+		trash "$@"
 	fi
+
+	## add nicer trash sound
 	# shellcheck disable=2181
-	if [[ $? -eq 0 ]] ; then
-		current_vol=$(osascript -e 'output volume of (get volume settings)')
-		vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
-		(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
-	fi
+	[[ $? -ne 0 ]] && return 0
+	current_vol=$(osascript -e 'output volume of (get volume settings)')
+	vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
+	(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
 }
 
 # go up and delete current dir
 function ..d() {
+	if ! command -v trash &>/dev/null; then print "\033[1;33mmacos-trash not installed.\033[0m" && return 1; fi
+
 	local current_dir="$PWD"
 	cd ..
-	local trash_location
-	trash_location="$HOME/.Trash/$(basename "$current_dir")"
-	[[ -e "$trash_location" ]] && rm -rf "$trash_location" 
-	command mv -v "$current_dir" "$trash_location"
+	trash "$current_dir"
+
+	## add nicer trash sound
 	# shellcheck disable=2181
-	if [[ $? -eq 0 ]] ; then
-		current_vol=$(osascript -e 'output volume of (get volume settings)')
-		vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
-		(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
-	fi
+	[[ $? -ne 0 ]] && return 0
+	current_vol=$(osascript -e 'output volume of (get volume settings)')
+	vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
+	(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
 }
 
 # draws a separator line with terminal width
@@ -152,6 +158,7 @@ function lr() {
 
 # copies [v]iewport
 function lv() {
+	if ! command -v wezterm &>/dev/null; then print "\033[1;33mwezterm not installed.\033[0m" && return 1; fi
 	wezterm cli get-text | pbcopy
 	echo "Copied."
 }
