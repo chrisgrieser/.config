@@ -112,7 +112,16 @@
     },
     "e\neject",
     "r\nreplicate",
-    "t\nnext tab",
+    {
+      "f": 1,
+      "fa": [
+        2
+      ]
+    },
+    "t\nto recent folder",
+    {
+      "f": 2
+    },
     "z\nzip",
     "u (U)\nundo (redo)",
     {
@@ -261,8 +270,7 @@
     },
     ".\ntoggle hidden files",
     {
-      "c": "#ffb896",
-      "f2": 0
+      "c": "#ffb896"
     },
     "? [en]<br>:help\n-&nbsp;[de]&nbsp;/&nbsp;[en] Search",
     {

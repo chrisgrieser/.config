@@ -194,13 +194,13 @@ rules:
       # :help
       - type: basic
         # "?" on German keyboard
-        from: { key_code: hyphen, modifiers: {mandatory: [shift]} }
+        from: { key_code: hyphen, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode-cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       - type: basic
         # "?" on American keyboard
-        from: { key_code: slash, modifiers: {mandatory: [shift]} }
+        from: { key_code: slash, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode-cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
@@ -420,11 +420,18 @@ rules:
         to_if_alone:
           - { key_code: grave_accent_and_tilde, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
-      # t = cycle tabs (:tabnext)
+      # t = cycle tabs to folder
       - type: basic
         from: { key_code: t }
         to_if_alone:
-          - { key_code: tab, modifiers: [control] }
+          # INFO requires "Focus Menubar item" in macOS Keyboard Shortcuts
+          - { key_code: f2, modifiers: [control] }
+          - key_code: g
+          - { key_code: down_arrow, modifiers: [command] }
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: right_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       #─────────────────────────────────────────────────────────────────────────
       # Selections
