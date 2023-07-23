@@ -1,4 +1,3 @@
-local autocmd = vim.api.nvim_create_autocmd
 local bo = vim.bo
 local cmd = vim.cmd
 local expand = vim.fn.expand
@@ -27,18 +26,10 @@ keymap("n", "<leader>i", function()
 end, { buffer = true, desc = " Toggle !important", nowait = true })
 
 --------------------------------------------------------------------------------
-
--- extra trigger for auto-saving to work with hot reloads
-autocmd("TextChanged", {
-	buffer = 0, -- buffer-local autocmd
-	callback = function() cmd.update(expand("%:p")) end,
-})
-
---------------------------------------------------------------------------------
 -- SHIMMERING FOCUS SPECIFIC
 
 if expand("%:t") == "fallback.css" then
-	vim.notify(" Fallback.css", u.warn)
+	vim.notify(" Editing Fallback.css", u.warn)
 elseif expand("%:t") == "source.css" then
 	-- goto comment marks (deferred, to override lsp-gotosymbol)
 	vim.defer_fn(function()

@@ -194,10 +194,11 @@ autocmd("BufReadPost", {
 opt.autowrite = true
 opt.autowriteall = true
 
-autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost", "InsertLeave" }, {
+autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost", "InsertLeave", "TextChanged" }, {
 	pattern = "?*",
 	callback = function()
-		local debounceDelaySec = 2 -- save at most every x seconds
+		local debounceDelaySec = 3 -- save at most every x seconds
+		if bo.filetype == "css" then debounceDelaySec = 1 end -- for hot-reloading css
 		local filepath = expand("%:p")
 		if
 			not vim.b.savingQueued
