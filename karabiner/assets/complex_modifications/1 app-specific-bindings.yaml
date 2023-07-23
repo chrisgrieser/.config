@@ -353,11 +353,13 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Script Editor"
     manipulators:
-      # Quick Closing skipping save prompt
-      # for movement with tab required: `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3`
+      # Quit without saving
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
-        shell_command: killall "Script Editor"
+        to:
+          - { key_code: q, modifiers: [command] }
+          - { key_code: vk_none, hold_down_milliseconds: 400 }
+          - { key_code: delete_or_backspace, modifiers: [command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) BusyCal"
