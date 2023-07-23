@@ -51,13 +51,13 @@ anchors:
         type: variable_unless
         name: FINDER_MOVE_ACTIVE
         value: true
-      - &context-menu-open
+      - &menu-is-open
         type: variable_if
-        name: FINDER_CONTEXT_MENU_ACTIVE
+        name: FINDER_MENU_ACTIVE
         value: true
-      - &no-context-menu
+      - &no-menu-open
         type: variable_unless
-        name: FINDER_CONTEXT_MENU_ACTIVE
+        name: FINDER_MENU_ACTIVE
         value: true
   #─────────────────────────────────────────────────────────────────────────────
   - to:
@@ -120,13 +120,13 @@ anchors:
         set_variable:
           name: FINDER_MOVE_ACTIVE
           value: false
-      - &start-context-menu
+      - &start-menu
         set_variable:
-          name: FINDER_CONTEXT_MENU_ACTIVE
+          name: FINDER_MENU_ACTIVE
           value: true
-      - &end-context-menu
+      - &end-menu
         set_variable:
-          name: FINDER_CONTEXT_MENU_ACTIVE
+          name: FINDER_MENU_ACTIVE
           value: false
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -432,6 +432,7 @@ rules:
           - key_code: up_arrow
           - key_code: up_arrow
           - key_code: right_arrow
+          - *start-context-menu
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-context-menu]
       #─────────────────────────────────────────────────────────────────────────
       # Selections
