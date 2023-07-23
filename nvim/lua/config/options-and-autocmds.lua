@@ -192,10 +192,28 @@ autocmd("BufReadPost", {
 
 --------------------------------------------------------------------------------
 -- AUTO-SAVING
+
+-- save on leaving file
 opt.autowrite = true
 opt.autowriteall = true
+autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost" }, {
+	pattern = "?*",
+	callback = function()
+		local filepath = expand("%:p")
+		if
+			filepath ~= ""
+			and (bo.buftype == "" or bo.buftype == "acwrite")
+			and bo.filetype ~= "gitcommit"
+			and opt.write:get()
+			and not bo.readonly
+		then
+			cmd.update(filepath)
+		end
+	end,
+})
 
-autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost", "InsertLeave", "TextChanged" }, {
+-- save on changes
+autocmd({ "InsertLeave", "TextChanged" }, {
 	pattern = "?*",
 	callback = function()
 		local debounceDelaySec = 3 -- save at most every x seconds
@@ -209,10 +227,11 @@ autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost", "InsertLeave", "TextC
 			and (bo.buftype == "" or bo.buftype == "acwrite")
 			and bo.filetype ~= "gitcommit"
 			and opt.write:get()
-			and not (bo.readonly)
+			and not bo.readonly
 		then
 			api.nvim_buf_set_var(bufNo, "savingQueued", true)
 			vim.defer_fn(function()
+				if not api.nvim_buf_is_valid(bufNo) then return end -- closed in meantime
 				cmd.update(filepath)
 				api.nvim_buf_set_var(bufNo, "savingQueued", false)
 			end, 1000 * debounceDelaySec)
