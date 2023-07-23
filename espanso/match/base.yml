@@ -7,7 +7,7 @@ matches:
   - trigger: "!twitter"
     replace: https://twitter.com/pseudo_meta
   - trigger: "!masto"
-    replace: https://pkm.social/@pseudometa 
+    replace: https://pkm.social/@pseudometa
   - trigger: "!github"
     replace: https://github.com/chrisgrieser
   - triggers: ["!blog", "!vim"]
@@ -61,6 +61,14 @@ matches:
         type: shell
         params:
           cmd: "sw_vers -productVersion"
+  - trigger: "!openai"
+    replace: "{{apikey}}"
+    label: get OpenAI API key
+    vars:
+      - name: apikey
+        type: shell
+        params:
+          cmd: "source $HOME/.zshenv && echo -n $OPENAI_API_KEY"
   - trigger: "!nversion"
     replace: |
       ```

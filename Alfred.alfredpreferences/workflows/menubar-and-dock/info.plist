@@ -57,6 +57,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>6482C229-4C55-484D-9CB9-58E5729A34AD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>65E1B004-A584-4533-8D40-D1980841CCEF</key>
 		<array>
 			<dict>
@@ -101,6 +114,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>EA75797F-8E72-4BAB-A6A1-D14D63C822EE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B2D9C765-9DED-45E2-B443-041E567AC1A9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6482C229-4C55-484D-9CB9-58E5729A34AD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -437,6 +463,44 @@ zsh "$dock_switcher_path" --save "$1"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>espanso||restart</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗Restart Espanso</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>B2D9C765-9DED-45E2-B443-041E567AC1A9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>Espanso</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>6482C229-4C55-484D-9CB9-58E5729A34AD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -479,6 +543,15 @@ zsh "$dock_switcher_path" --save "$1"</string>
 			<real>510</real>
 			<key>ypos</key>
 			<real>425</real>
+		</dict>
+		<key>6482C229-4C55-484D-9CB9-58E5729A34AD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>645</real>
 		</dict>
 		<key>65E1B004-A584-4533-8D40-D1980841CCEF</key>
 		<dict>
@@ -524,6 +597,15 @@ zsh "$dock_switcher_path" --save "$1"</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>310</real>
+		</dict>
+		<key>B2D9C765-9DED-45E2-B443-041E567AC1A9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>615</real>
 		</dict>
 		<key>CBE953E6-1671-4004-B196-F2811F5075A9</key>
 		<dict>

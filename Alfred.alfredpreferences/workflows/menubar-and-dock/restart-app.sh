@@ -11,6 +11,9 @@ case "$app" in
 "svim" | "sketchybar")
 	brew services restart "$app"
 	;;
+"Espanso")
+	espanso restart
+	;;
 esac
 
 echo -n "Restarted $app" # Alfred notification

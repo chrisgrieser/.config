@@ -8,7 +8,8 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 --terminal-width="-1"
---wrap=never
+# --wrap=never
+--italic-text=always
 
 # save space
 --tabs=2

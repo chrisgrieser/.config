@@ -24,8 +24,8 @@ function h() {
 # COLORIZED HELP
 # `--` ensures dash can be used in the alias name
 # `--help` and `-h` offer help pages of different length for some commands, e.g. fd
-alias -g -- -h='-h | bat --language=help --style=plain'
-alias -g -- --help='--help | bat --language=help --style=plain'
+alias -g -- -h='-h | bat --language=help --style=plain --wrap=character'
+alias -g -- --help='--help | bat --language=help --style=plain --wrap=character'
 
 #───────────────────────────────────────────────────────────────────────────────
 
