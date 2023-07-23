@@ -232,7 +232,7 @@ autocmd({ "InsertLeave", "TextChanged" }, {
 			api.nvim_buf_set_var(bufNo, "savingQueued", true)
 			vim.defer_fn(function()
 				if not api.nvim_buf_is_valid(bufNo) then return end -- closed in meantime
-				cmd.update(filepath)
+				cmd("silent update " .. filepath)
 				api.nvim_buf_set_var(bufNo, "savingQueued", false)
 			end, 1000 * debounceDelaySec)
 		end
