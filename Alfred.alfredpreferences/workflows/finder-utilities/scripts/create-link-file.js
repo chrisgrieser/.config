@@ -15,6 +15,6 @@ function writeToFile(filepath, text) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv){
-	const url = argv[0];
+
 }
 
