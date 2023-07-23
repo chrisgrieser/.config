@@ -13,7 +13,6 @@ function writeToFile(filepath, text) {
 const urlRegex =
 	/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g;
 const exportFolder = $.getenv("export_folder").replace(/^~/, app.pathTo("home folder"));
-const maxNameLen = 50;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -81,8 +80,12 @@ function run(argv) {
 	const content = noteObj.text(); // full content
 	const details = noteObj.content(); // content without title
 	const title = noteObj.title().trim();
-	let safeTitle = title.replace(/[/\\:;,"'#()[\]=<>{}?!|§]|\.$/gm, "-");
-	if (safeTitle.length > maxNameLen) safeTitle = safeTitle.slice(0, maxNameLen);
+	const safeTitle = title
+		.replaceAll("/", "-")
+		.replace(/[\\$€§*#?!:;.,`'’‘"„“”«»’{}]/g, "")
+		.replaceAll("&", "and")
+		.replace(/ {2,}/g, " ")
+		.slice(0, 50)
 
 	//───────────────────────────────────────────────────────────────────────────
 

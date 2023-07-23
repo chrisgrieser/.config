@@ -12,6 +12,17 @@
 		"body": "// rome-ignore format: ${1:explanation}",
 		"description": "Ignores the next block of code."
 	},
+	"safe title": {
+		"prefix": "safe title",
+		"body": [
+			"const safeTitle = ${1:title}",
+			"\t.replaceAll(\"/\", \"-\")",
+			"\t.replace(/[\\\\$€§*#?!:;.,`\"'’‘„“”«»’{}]/g, \"\")",
+			"\t.replaceAll(\"&\", \"and\")",
+			"\t.replace(/ {2,}/g, \" \")",
+			"\t.slice(0, 50);"
+		]
+	},
 	"ignore (TypeScript)": {
 		"prefix": [
 			"ignore (TypeScript)",
