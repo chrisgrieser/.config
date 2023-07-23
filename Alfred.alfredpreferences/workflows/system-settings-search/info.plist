@@ -151,6 +151,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2AC897AA-8CA6-4203-967D-C801F237ADBE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8DF0DD15-2F02-4FAA-A0EF-B435B4E86A6C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2CB67EEF-BC29-4898-AE0C-34104B40FE99</key>
 		<array>
 			<dict>
@@ -208,6 +221,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>1C4A3BBD-4972-4628-B315-5018BA3533E6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3CD37D69-4389-4EEB-8825-1F2DC981EFB6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8DF0DD15-2F02-4FAA-A0EF-B435B4E86A6C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -308,6 +334,19 @@
 			</dict>
 		</array>
 		<key>5271B0D3-9DE1-4163-9A3E-CF2C294EF1AE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8DF0DD15-2F02-4FAA-A0EF-B435B4E86A6C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5783D20B-6AD0-4141-B01B-AB73FA89D193</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -569,6 +608,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A53D9CBA-FDD7-47A1-8C20-0CE58429D71B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F5E3FD5C-8D7F-466A-8DFC-74BE007941D6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A86C58CA-97B6-4C26-B2D0-4F9DAC129FE4</key>
 		<array>
 			<dict>
@@ -712,6 +764,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>DD489320-D229-4397-85FA-35EBB0BFA0F6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5783D20B-6AD0-4141-B01B-AB73FA89D193</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E1063F88-2288-4DD3-AA7A-D014CFA78D28</key>
 		<array>
 			<dict>
@@ -730,6 +795,32 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8DF0DD15-2F02-4FAA-A0EF-B435B4E86A6C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E5FE2646-CA2C-4178-B84A-33F05ADE13FD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3CD37D69-4389-4EEB-8825-1F2DC981EFB6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EBBBDBFC-6AB3-48C6-A430-BE41C6A4D47E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2AC897AA-8CA6-4203-967D-C801F237ADBE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -782,6 +873,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>0A2D670C-A6E8-4D7F-B338-0174299142F9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F5E3FD5C-8D7F-466A-8DFC-74BE007941D6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8DF0DD15-2F02-4FAA-A0EF-B435B4E86A6C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -934,6 +1038,44 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>48EAE7F8-F0CA-4421-8671-05CEA6773F6D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>accessibility||display||appearance</string>
+				<key>subtext</key>
+				<string>System Settings → Accessibility → Display</string>
+				<key>text</key>
+				<string>Display</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>DD489320-D229-4397-85FA-35EBB0BFA0F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_Display</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>5783D20B-6AD0-4141-B01B-AB73FA89D193</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1762,7 +1904,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>update</string>
+				<string>update||software update</string>
 				<key>subtext</key>
 				<string>System Settings → General → Software Update</string>
 				<key>text</key>
@@ -2060,6 +2202,120 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>touch id||password</string>
+				<key>subtext</key>
+				<string>System Settings → Touch ID &amp; Password</string>
+				<key>text</key>
+				<string>Touch ID &amp; Password</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A53D9CBA-FDD7-47A1-8C20-0CE58429D71B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>x-apple.systempreferences:com.apple.preferences.password</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>F5E3FD5C-8D7F-466A-8DFC-74BE007941D6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>screen time</string>
+				<key>subtext</key>
+				<string>System Settings → Screen Time</string>
+				<key>text</key>
+				<string>Screen Time</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E5FE2646-CA2C-4178-B84A-33F05ADE13FD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>x-apple.systempreferences:com.apple.preference.screentime</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>3CD37D69-4389-4EEB-8825-1F2DC981EFB6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>sharing</string>
+				<key>subtext</key>
+				<string>System Settings → General → Sharing</string>
+				<key>text</key>
+				<string>Sharing</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>EBBBDBFC-6AB3-48C6-A430-BE41C6A4D47E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>x-apple.systempreferences:com.apple.preferences.sharing</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>2AC897AA-8CA6-4203-967D-C801F237ADBE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -2072,35 +2328,35 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>535</real>
 		</dict>
 		<key>06E6F7FA-B33E-4568-B37C-D470DD8D69EF</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>2325</real>
+			<real>2435</real>
 		</dict>
 		<key>0A2D670C-A6E8-4D7F-B338-0174299142F9</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>1025</real>
 		</dict>
 		<key>0FE978FA-DA25-4DD4-95F6-72F1FF0A81D3</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1965</real>
+			<real>2075</real>
 		</dict>
 		<key>10BB0E7F-7A7B-47CA-B6BF-A2E88447DBDA</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>505</real>
 		</dict>
 		<key>115B40CE-5832-44BB-A48D-124EA294C8A7</key>
 		<dict>
@@ -2109,28 +2365,28 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>2920</real>
+			<real>3030</real>
 		</dict>
 		<key>13F012E9-4D28-4459-9E50-AF9A0A3C5C54</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>620</real>
 		</dict>
 		<key>178BDB4E-CBE0-4282-A0C5-3CD4248FEE35</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2950</real>
+			<real>3060</real>
 		</dict>
 		<key>1C4A3BBD-4972-4628-B315-5018BA3533E6</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1635</real>
+			<real>1745</real>
 		</dict>
 		<key>1F30947A-6478-415C-8496-35E5FF7E3183</key>
 		<dict>
@@ -2139,21 +2395,28 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3155</real>
+			<real>3265</real>
 		</dict>
 		<key>24B029BA-B491-4A7C-9CE0-B686D911DB69</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2355</real>
+			<real>2465</real>
+		</dict>
+		<key>2AC897AA-8CA6-4203-967D-C801F237ADBE</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>4240</real>
 		</dict>
 		<key>2CB67EEF-BC29-4898-AE0C-34104B40FE99</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1140</real>
 		</dict>
 		<key>35325F14-3A02-48C2-8193-76B67651119B</key>
 		<dict>
@@ -2169,7 +2432,7 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>385</real>
 		</dict>
 		<key>35DB0201-99C4-495D-BDFF-165691C694EE</key>
 		<dict>
@@ -2178,7 +2441,7 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>760</real>
+			<real>870</real>
 		</dict>
 		<key>3A9BB8B2-8264-4D58-96D8-CB947F8EB2F1</key>
 		<dict>
@@ -2187,14 +2450,21 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1605</real>
+			<real>1715</real>
+		</dict>
+		<key>3CD37D69-4389-4EEB-8825-1F2DC981EFB6</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>4120</real>
 		</dict>
 		<key>3E2E649B-2FAC-47AF-9A1A-6E37AAD127BE</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>3070</real>
+			<real>3180</real>
 		</dict>
 		<key>3E5DFC7D-070E-4320-8410-E9670DFF38E8</key>
 		<dict>
@@ -2203,21 +2473,21 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>2565</real>
+			<real>2675</real>
 		</dict>
 		<key>4103FEE5-FE83-4AE9-AB7E-ECF6B857E94D</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1995</real>
+			<real>2105</real>
 		</dict>
 		<key>418001B9-F077-4607-AEF8-0CFD7291C229</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3270</real>
+			<real>3380</real>
 		</dict>
 		<key>4184F0E9-B4CF-4A6F-AD11-864009D6A8B5</key>
 		<dict>
@@ -2226,14 +2496,14 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1845</real>
+			<real>1955</real>
 		</dict>
 		<key>47194840-EFFD-41C6-A534-A8C1E72054B6</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1755</real>
+			<real>1865</real>
 		</dict>
 		<key>48EAE7F8-F0CA-4421-8671-05CEA6773F6D</key>
 		<dict>
@@ -2247,77 +2517,84 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3775</real>
+			<real>3885</real>
+		</dict>
+		<key>5783D20B-6AD0-4141-B01B-AB73FA89D193</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>300</real>
 		</dict>
 		<key>5C30707B-B5FD-4FB9-BFE1-70B378C691F6</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1725</real>
+			<real>1835</real>
 		</dict>
 		<key>65BD6A90-B01C-4699-ACA2-9A58F7949E26</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2595</real>
+			<real>2705</real>
 		</dict>
 		<key>753E9EF2-1E25-4B02-BD3C-E3BD78988871</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>2085</real>
+			<real>2195</real>
 		</dict>
 		<key>75E7AEB3-32A3-4654-812F-AA40D6A56427</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1000</real>
+			<real>1110</real>
 		</dict>
 		<key>760F70B4-1DAF-4342-93FC-13273C4A9207</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3040</real>
+			<real>3150</real>
 		</dict>
 		<key>791156A0-115E-4EC5-891C-494DCCF5A7A9</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3505</real>
+			<real>3615</real>
 		</dict>
 		<key>7C5D0F9E-0580-4CF5-8346-B333F6F1BB53</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3385</real>
+			<real>3495</real>
 		</dict>
 		<key>7CF54EAA-86FE-48E7-A445-A29FBF0CB443</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2115</real>
+			<real>2225</real>
 		</dict>
 		<key>8B7B3372-147B-42C1-9FCC-63D3C98B2227</key>
 		<dict>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3655</real>
+			<real>3765</real>
 		</dict>
 		<key>8D037CC0-0F11-4AA9-89F5-CB529CF3FED1</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>2445</real>
+			<real>2555</real>
 		</dict>
 		<key>8DF0DD15-2F02-4FAA-A0EF-B435B4E86A6C</key>
 		<dict>
@@ -2331,28 +2608,28 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3300</real>
+			<real>3410</real>
 		</dict>
 		<key>954C1736-08E0-4113-A5A2-4914FF0C15C8</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>2800</real>
+			<real>2910</real>
 		</dict>
 		<key>98B79881-C483-4E18-B1F2-21BDAFB920AA</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>750</real>
 		</dict>
 		<key>9995134B-DD1E-46A9-B7A9-0A33BBDC1B0A</key>
 		<dict>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>415</real>
 		</dict>
 		<key>9A08AB7D-C3AA-4A06-A516-31995F1CFEA0</key>
 		<dict>
@@ -2366,28 +2643,35 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>2205</real>
+			<real>2315</real>
 		</dict>
 		<key>A1E8573B-020C-4E80-AF45-1E9F1F06C34A</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1515</real>
+			<real>1625</real>
 		</dict>
 		<key>A2ECA8CC-8F6A-41E9-A1D5-B95E557E266E</key>
 		<dict>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3415</real>
+			<real>3525</real>
 		</dict>
 		<key>A425F3D3-7282-40EE-88B7-DBBE4113E2EE</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2475</real>
+			<real>2585</real>
+		</dict>
+		<key>A53D9CBA-FDD7-47A1-8C20-0CE58429D71B</key>
+		<dict>
+			<key>xpos</key>
+			<real>65</real>
+			<key>ypos</key>
+			<real>3975</real>
 		</dict>
 		<key>A86C58CA-97B6-4C26-B2D0-4F9DAC129FE4</key>
 		<dict>
@@ -2396,7 +2680,7 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1120</real>
+			<real>1230</real>
 		</dict>
 		<key>B7B9D159-E1DE-4C44-B7A9-8C7577CD5DBE</key>
 		<dict>
@@ -2410,77 +2694,100 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2715</real>
+			<real>2825</real>
 		</dict>
 		<key>BF58136F-A1F6-40D4-B6E7-74BFA588DAD4</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3625</real>
+			<real>3735</real>
 		</dict>
 		<key>C3A62EE5-CC39-4509-8D4B-77BDC6C34961</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1485</real>
+			<real>1595</real>
 		</dict>
 		<key>C6E30C4C-ADB4-4F06-8B93-847664C709C2</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1875</real>
+			<real>1985</real>
 		</dict>
 		<key>C9EA832B-7612-48A7-87AF-E8AA452D13D1</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>2685</real>
+			<real>2795</real>
 		</dict>
 		<key>CE6F2E60-0B14-4A59-9089-2EED137CDDC9</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1235</real>
+			<real>1345</real>
 		</dict>
 		<key>D6E98923-3178-4A19-BCD5-35F5C3E5814D</key>
 		<dict>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3535</real>
+			<real>3645</real>
 		</dict>
 		<key>D866752D-24AC-496F-85DE-EB0DE026C284</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1150</real>
+			<real>1260</real>
 		</dict>
 		<key>DD1926A0-F642-425A-ADD7-8ED32692EE46</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1385</real>
+			<real>1495</real>
+		</dict>
+		<key>DD489320-D229-4397-85FA-35EBB0BFA0F6</key>
+		<dict>
+			<key>xpos</key>
+			<real>60</real>
+			<key>ypos</key>
+			<real>270</real>
 		</dict>
 		<key>E1063F88-2288-4DD3-AA7A-D014CFA78D28</key>
 		<dict>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>3185</real>
+			<real>3295</real>
 		</dict>
 		<key>E27A6F53-4CD3-4FBB-8A7C-27AE4BEBE358</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>1265</real>
+			<real>1375</real>
+		</dict>
+		<key>E5FE2646-CA2C-4178-B84A-33F05ADE13FD</key>
+		<dict>
+			<key>xpos</key>
+			<real>65</real>
+			<key>ypos</key>
+			<real>4090</real>
+		</dict>
+		<key>EBBBDBFC-6AB3-48C6-A430-BE41C6A4D47E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>65</real>
+			<key>ypos</key>
+			<real>4210</real>
 		</dict>
 		<key>EC2F7B52-566A-4DD8-BC3A-3D15153C540D</key>
 		<dict>
@@ -2489,49 +2796,56 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>1355</real>
+			<real>1465</real>
 		</dict>
 		<key>ECE5D09E-5A1E-4A62-B176-BCD01629B971</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2830</real>
+			<real>2940</real>
 		</dict>
 		<key>EEE44FA0-2C27-4B2A-B1AD-EF2CC79BCBF9</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>900</real>
 		</dict>
 		<key>F13BA41A-18BC-4100-A23A-9F5495E4D597</key>
 		<dict>
 			<key>xpos</key>
 			<real>60</real>
 			<key>ypos</key>
-			<real>885</real>
+			<real>995</real>
+		</dict>
+		<key>F5E3FD5C-8D7F-466A-8DFC-74BE007941D6</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>4005</real>
 		</dict>
 		<key>F60B76ED-5474-4C0E-9004-564FD1B9BEAB</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>2235</real>
+			<real>2345</real>
 		</dict>
 		<key>F81A69FD-8225-4A7D-8196-3143F85F9300</key>
 		<dict>
 			<key>xpos</key>
 			<real>65</real>
 			<key>ypos</key>
-			<real>3745</real>
+			<real>3855</real>
 		</dict>
 		<key>F90E8A37-DC7E-4213-974D-30FDDC830142</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>780</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
