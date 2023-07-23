@@ -13,17 +13,20 @@ function copy-location() {
 }
 zle -N copy-location
 
-function harpoon () {
+# Cycle through Directories
+function grappling-hook () {
+	local to_open="$WD"
 	if [[ "$PWD" == "$WD" ]]; then
-		cd "$DOTFILE_FOLDER" || return 1
+		to_open="$DOTFILE_FOLDER"
 	elif [[ "$PWD" == "$DOTFILE_FOLDER" ]]; then
-		cd "$VAULT_PATH" || return 1
-	else
-		cd "$WD" || return 1
+		to_open="$VAULT_PATH"
+	elif [[ "$PWD" == "$VAULT_PATH" ]]; then
+		to_open="$WD"
 	fi
+	cd "$to_open" || return 1
 	zle reset-prompt
 }
-zle -N harpoon
+zle -N grappling-hook
 
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -38,7 +41,7 @@ zle -N harpoon
 function zvm_after_init() {
 	bindkey -M viins '^P' copy-location
 	bindkey -M viins '^B' copy-buffer
-	bindkey -M viins "^O" harpoon # bound to cmd+enter via wezterm
+	bindkey -M viins "^O" grappling-hook # bound to cmd+enter via wezterm
 }
 bindkey -M viins "…" insert-last-word # …=alt+.
 bindkey -M viins "^Z" undo # cmd+z via wezterm

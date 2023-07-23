@@ -105,7 +105,7 @@ local keybindings = {
 	-- using the mapping from the terminal_keybindings.zsh
 	-- undo
 	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
-	-- Harpoon (directory cycler)
+	-- Grappling-hook (directory cycler, defined in terminal_keybindings.zsh)
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
 
 	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
