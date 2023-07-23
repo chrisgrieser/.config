@@ -116,7 +116,6 @@ local function cmpconfig()
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
-				vim.fn['codeium#Clear']() -- remove virtual text when not used anyway
 				if require("luasnip").choice_active() then
 					cmp.abort()
 					require("luasnip").change_choice(1)
