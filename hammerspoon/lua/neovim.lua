@@ -58,9 +58,11 @@ NeovideWatcher = aw.new(function(appName, eventType, neovide)
 		addCssSelectorLeadingDot()
 		obsidianThemeDevHelper(neovide:mainWindow())
 
-		-- HACK bugfix for: https://github.com/neovide/neovide/issues/1595
+		-- FIX for: https://github.com/neovide/neovide/issues/1595
 	elseif eventType == aw.terminated then
-		u.runWithDelays(3, function() hs.execute("pgrep -xq 'neovide' || killall 'nvim' || killall -9 'nvim'") end)
+		-- language_server_macos_x64 language_server_macos_arm are Codium servers
+		local killCmd = [[pgrep -xq 'neovide' || killall neovide nvim language_server_macos_x64 language_server_macos_arm || killall -9 nvim]]
+		u.runWithDelays(3, function() hs.execute(killCmd) end)
 	end
 end):start()
 

@@ -287,7 +287,7 @@
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: kill all with same name</string>
+				<string>⌃: Kill all with same name</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>

@@ -16,6 +16,8 @@ declare class macAppObj {
 	launch(): void;
 }
 
+declare function Path(filepath: string): object;
+
 declare const Application: {
 	currentApplication: () => {
 		doShellScript(script: string): string;
@@ -51,9 +53,10 @@ declare const Application: {
 		defaultList(): { make(any) };
 	};
 	(name: "Finder"): macAppObj & {
-		exists(path: string): boolean;
-		open (path: string): void;
-		reveal (path: string): void;
+		// paths need to be wrapped for Finder: `Path(str)`
+		exists(wrappedPath: object): boolean;
+		open (wrappedPath: object): void;
+		reveal (wrappedPath: object): void; 
 		finderWindows: {
 			target: { url: () => string };
 		};
@@ -97,8 +100,6 @@ declare const ObjC: {
 	import: (package: "stdlib" | "Foundation") => void;
 	unwrap: (string: string) => string;
 };
-
-declare function Path(filepath: string): string;
 
 declare function delay(seconds: number): void;
 
