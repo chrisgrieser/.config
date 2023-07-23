@@ -187,11 +187,9 @@ rules:
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
-          - { key_code: i, modifiers: [option, command] }
-          - { key_code: vk_none, hold_down_milliseconds: 200 }
-          - { key_code: c, modifiers: [shift, command] }
+          - { key_code: c, modifiers: [option, command] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
+          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
