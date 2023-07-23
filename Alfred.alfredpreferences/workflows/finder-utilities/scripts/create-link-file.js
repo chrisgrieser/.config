@@ -80,5 +80,5 @@ URL=${url}
 IconIndex=0"`;
 
 	writeToFile(linkFilePath, urlFileContent);
-	Application("Finder").reveal(linkFilePath);)
+	Application("Finder").reveal(linkFilePath);
 }
