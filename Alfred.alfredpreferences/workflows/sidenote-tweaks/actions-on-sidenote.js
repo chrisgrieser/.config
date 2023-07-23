@@ -4,13 +4,10 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-/**
- * @param {string} file
- * @param {string} text
- */
-function writeToFile(file, text) {
+/** @param {string} filepath @param {string} text */
+function writeToFile(filepath, text) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
-	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
+	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
 
 const urlRegex =

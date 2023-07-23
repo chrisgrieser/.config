@@ -17,13 +17,11 @@ function readFile(path) {
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
-/**
- * @param {string} text
- * @param {string} file
- */
-function writeToFile(text, file) {
+
+/** @param {string} filepath @param {string} text */
+function writeToFile(filepath, text) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
-	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
+	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -62,7 +60,7 @@ function main() {
 	// INFO: the rules are added to the *first* profile in the profile list from Karabiner.
 	complexRules.profiles[0].complex_modifications.rules = customRules;
 
-	writeToFile(JSON.stringify(complexRules), karabinerJSON);
+	writeToFile(karabinerJSON, JSON.stringify(complexRules));
 
 	// validate
 	const lintStatus = app
