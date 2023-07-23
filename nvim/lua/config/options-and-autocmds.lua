@@ -88,6 +88,7 @@ autocmd({ "VimEnter", "VimResized" }, { -- the "WinResized" autocmd event does n
 })
 
 -- status bar & cmdline
+opt.cmdheight = 0
 opt.history = 300 -- reduce noise for command history search
 opt.shortmess:append("s") -- reduce info in :messages
 opt.shortmess:append("S")
@@ -109,18 +110,15 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 opt.pumheight = 15
 
 autocmd({ "CmdlineLeave", "VimEnter" }, {
-	callback = function()
-		opt.pumwidth = 15 -- min width popup menu
-		opt.cmdheight = 0
-	end,
+	-- min width popup menu
+	callback = function() opt.pumwidth = 15 end,
 })
 
--- do not obfuscate the buffer and the search count in the lualine when searching
+-- do not obfuscate the buffer when searching
 autocmd("CmdlineEnter", {
 	callback = function()
 		if not fn.getcmdtype():find("[/?]") then return end
 		opt.pumwidth = 8
-		opt.cmdheight = 1
 	end,
 })
 

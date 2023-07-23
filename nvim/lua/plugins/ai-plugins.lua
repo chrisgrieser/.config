@@ -4,13 +4,12 @@ return {
 		event = "InsertEnter",
 		build = function()
 			-- HACK enable	syncing of API key
-			local symlinkCmd = ("ln -sf '%s' '%s'"):format(
-				vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json",
-				vim.env.HOME .. "/.codeium/config.json"
-			)
-			vim.fn.system(symlinkCmd)
+			local symLinkFrom = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json"
+			local symLinkTo = vim.env.HOME .. "/.codeium/config.json"
+			os.remove(symLinkTo)
+			vim.loop.fs_symlink(symLinkFrom, symLinkTo)
 		end,
-		init = function()
+		config = function ()
 			-- when cmp completion is loaded, clear the virtual text from codium
 			require("cmp").event:on("menu_opened", function() vim.fn['codeium#Clear']() end)
 
@@ -18,7 +17,7 @@ return {
 			vim.g.codeium_filetypes = { ["DressingInput"] = false }
 			-- stylua: ignore
 			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion" })
-		end,
+		end
 	},
 	{ -- AI completion (suggestion)
 		"jcdickinson/codeium.nvim",
