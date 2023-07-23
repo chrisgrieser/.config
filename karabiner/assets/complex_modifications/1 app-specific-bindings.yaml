@@ -357,19 +357,7 @@ rules:
       # for movement with tab required: `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3`
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: q, modifiers: [command] }
-          - key_code: vk_none
-            hold_down_milliseconds: 500
-          - key_code: tab
-          - key_code: tab
-          - key_code: tab
-          - key_code: tab
-          - key_code: tab
-          - key_code: tab
-          - key_code: vk_none
-            hold_down_milliseconds: 150
-          - key_code: spacebar
+        shell_command: killall "Script Editor"
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) BusyCal"
