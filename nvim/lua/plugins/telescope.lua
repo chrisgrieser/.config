@@ -57,8 +57,6 @@ local function telescopeConfig()
 				"%.pxd", -- Pixelmator
 				"%.plist$", -- Alfred
 				"%.project-root$", -- harpoon/projects
-				"/INFO ", -- custom info files
-				"_INFO ", -- custom info files
 				"%.png$",
 				"%.gif$",
 				"%.icns",

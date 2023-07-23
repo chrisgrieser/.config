@@ -1,13 +1,18 @@
 [
   {
     "name": "Finder Vim Mode Cheatsheet",
-    "author": "pseudometa"
+    "author": "pseudometa",
+    "pcb": false,
+    "plate": false
   },
   [
     {
       "c": "#fff4a6",
       "a": 5,
-      "f": 2
+      "f": 2,
+      "fa": [
+        3
+      ]
     },
     "⎋\nnormal mode",
     {
@@ -62,9 +67,9 @@
     "9\ntoggle tag #9",
     "0\nremove all tags",
     {
-      "c": "#c7a6ff"
+      "c": "#ffb896"
     },
-    "?\n:help",
+    "? [de]\n:help",
     {
       "c": "#CCCCCC",
       "f": 4
@@ -73,9 +78,12 @@
     {
       "c": "#fff4a6",
       "f": 2,
+      "fa": [
+        4
+      ],
       "w": 2
     },
-    "⌫\n:bnext",
+    "⌫\nnext window",
     {
       "c": "#999999",
       "a": 7,
@@ -90,22 +98,28 @@
       "f": 1,
       "w": 1.5
     },
-    "↹ next file, alphabetically\n↹⇧ previous",
+    "↹ next file, alphabetically\n(↹⇧ previous)",
     {
-      "c": "#c7a6ff"
+      "c": "#c7a6ff",
+      "fa": [
+        2
+      ]
     },
     "q (Q)\ncontext menu (share)",
+    "w (W)\nclose win (other wins)",
     {
       "f": 2
     },
-    "w (W)\n:close (:only)",
     "e\neject",
     "r\nreplicate",
-    "t\n:tabnext",
+    "t\nnext tab",
     "z\nzip",
     "u (U)\nundo (redo)",
     {
-      "f": 1
+      "f": 1,
+      "fa": [
+        2
+      ]
     },
     "i (I)\ninfo panel (window)",
     "o (O)\nopen folds (recursive)",
@@ -128,7 +142,7 @@
       "h2": 1,
       "x2": -0.25
     },
-    "↵ rename\ninsert mode: confirm & normal mode\n\n\n\n\n⇧↵ batch rename",
+    "↵ rename<br><br><br>(⇧↵ batch rename)\ninsert mode: confirm & goto normal mode",
     {
       "c": "#999999",
       "a": 7,
@@ -141,12 +155,18 @@
       "c": "#fff4a6",
       "a": 5,
       "f": 2,
+      "fa": [
+        4
+      ],
       "w": 1.75
     },
     "⇪\nnormal mode",
     {
       "c": "#c7a6ff",
-      "f": 1
+      "f": 1,
+      "fa": [
+        2
+      ]
     },
     "a (A)\nselect all (only files)",
     "s (S)\nfollow (create) symlink",
@@ -167,7 +187,7 @@
       "n": true
     },
     "j (J)\ndown (6x)",
-    "k (K)\n&nbsp;&nbsp;up &nbsp; (6x)",
+    "k (K)\nup <br>(6x)",
     "l\nopen file / dir\n\n\n⌃l forw",
     {
       "c": "#CCCCCC"
@@ -200,7 +220,10 @@
     },
     "y\nyank / copy",
     {
-      "f": 1
+      "f": 1,
+      "fa": [
+        2
+      ]
     },
     "x (X)\ncross-move (copy)",
     "c (C)\nclose folds  (recursive)",
@@ -209,15 +232,21 @@
     },
     "v\nview settings",
     {
-      "f": 1
+      "f": 1,
+      "fa": [
+        2
+      ]
     },
     "b\ntoggle  \"bkp\" suffix",
     {
       "f": 2
     },
-    "n N\nnew file (dir)\n\n\n⌃n name",
+    "n (N)\nnew file (dir)\n\n\n⌃n name",
     {
-      "f": 1
+      "f": 1,
+      "fa": [
+        2
+      ]
     },
     "m (M)\nmove (to new dir)",
     {
@@ -225,13 +254,17 @@
     },
     ",\nrestart iCloud",
     {
-      "f": 1
+      "f": 1,
+      "fa": [
+        2
+      ]
     },
     ".\ntoggle hidden files",
     {
-      "f": 2
+      "c": "#ffb896",
+      "f2": 0
     },
-    "de: - us: /\nSearch",
+    "? [en]<br>:help\n-&nbsp;[de]&nbsp;/&nbsp;[en] Search",
     {
       "c": "#999999",
       "a": 7,
@@ -243,6 +276,9 @@
       "c": "#90d98b",
       "a": 5,
       "f": 2,
+      "fa": [
+        3
+      ],
       "n": true
     },
     "↑\nsort by size",
@@ -273,7 +309,7 @@
       "f": 2,
       "w": 6.25
     },
-    "␣ quick look\n⇧␣: add to selection\n\n\n\n\n──────",
+    "␣ quick look\n(⇧␣: add to selection)\n\n\n\n\n──────",
     {
       "c": "#999999",
       "a": 7,
@@ -285,7 +321,10 @@
     {
       "c": "#90d98b",
       "a": 5,
-      "f": 2
+      "f": 2,
+      "fa": [
+        3
+      ]
     },
     "←\nsort by modified",
     "↓\nsort by name",
