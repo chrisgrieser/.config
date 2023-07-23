@@ -321,6 +321,14 @@ rules:
           - shell_command: open 'https://www.reddit.com/'
           - *deactivate-leader
           - *remove-notice
+      # [r]eddit
+      - type: basic
+        from: { key_code: r }
+        conditions: [*leader-active]
+        to:
+          - shell_command: open 'https://www.reddit.com/'
+          - *deactivate-leader
+          - *remove-notice
       # [.]: Emoji Picker
       - type: basic
         from: { key_code: period }
