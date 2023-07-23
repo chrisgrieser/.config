@@ -168,7 +168,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6CAF9FC0-767C-4ABD-86C3-046FA4E9A67D</string>
+				<string>47245CFC-B3E9-4FD6-A021-06D0B87D637C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1008,29 +1008,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/create-link-file.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>47245CFC-B3E9-4FD6-A021-06D0B87D637C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -1086,6 +1063,29 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/create-link-file.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>47245CFC-B3E9-4FD6-A021-06D0B87D637C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1126,9 +1126,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>keyword</key>
 				<string>link</string>
 				<key>subtext</key>
-				<string></string>
+				<string>from current Browser Tab</string>
 				<key>text</key>
-				<string>Create Link file</string>
+				<string>Create Link File</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -1142,25 +1142,38 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
+				<key>argumenttype</key>
 				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/create-link-file.js</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>keyword</key>
+				<string>application support</string>
+				<key>subtext</key>
+				<string>~/Library/Application Support</string>
+				<key>text</key>
+				<string>Application Support</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>6CAF9FC0-767C-4ABD-86C3-046FA4E9A67D</string>
+			<string>3092B2CD-8AF2-4CB4-85FB-744CF5AA4BA8</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Application Support</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>767836E5-C6CE-4E69-883B-8D98AEEE8CC7</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1240,18 +1253,18 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>application support</string>
+				<string>library</string>
 				<key>subtext</key>
-				<string>~/Library/Application Support</string>
+				<string>~/Library/</string>
 				<key>text</key>
-				<string>Application Support</string>
+				<string>Library</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>3092B2CD-8AF2-4CB4-85FB-744CF5AA4BA8</string>
+			<string>874056B3-7017-49B3-94F5-296C9E05D2E4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1261,12 +1274,12 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
-				<string>~/Library/Application Support</string>
+				<string>~/Library</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>767836E5-C6CE-4E69-883B-8D98AEEE8CC7</string>
+			<string>08389D62-E55B-43D3-80A1-D99149535F3C</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1304,42 +1317,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>71AB5645-B299-4577-A54F-8E1A0857CC58</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>library</string>
-				<key>subtext</key>
-				<string>~/Library/</string>
-				<key>text</key>
-				<string>Library</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>874056B3-7017-49B3-94F5-296C9E05D2E4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>08389D62-E55B-43D3-80A1-D99149535F3C</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1396,9 +1373,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>345</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>1050</real>
 		</dict>
 		<key>06732C2D-88EF-48DF-81E5-A21235C6E96A</key>
 		<dict>
@@ -1492,9 +1469,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>490</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>1050</real>
 		</dict>
 		<key>47245CFC-B3E9-4FD6-A021-06D0B87D637C</key>
 		<dict>
@@ -1503,16 +1480,18 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>835</real>
 		</dict>
 		<key>51903BB3-AE69-45A7-8492-CC712BB612A4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>get URL from browser</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>890</real>
+			<real>900</real>
 		</dict>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<dict>
@@ -1546,18 +1525,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>40</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>1005</real>
-		</dict>
-		<key>6CAF9FC0-767C-4ABD-86C3-046FA4E9A67D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>890</real>
+			<real>1050</real>
 		</dict>
 		<key>71AB5645-B299-4577-A54F-8E1A0857CC58</key>
 		<dict>
@@ -1566,9 +1536,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>Copy File Content</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>1120</real>
+			<real>1165</real>
 		</dict>
 		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
 		<dict>
@@ -1622,9 +1592,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>URL action</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>765</real>
 		</dict>
 		<key>993B0563-52D6-4547-B1D7-97E70FF55DB2</key>
 		<dict>
@@ -1640,9 +1610,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>1050</real>
 		</dict>
 		<key>A754B95E-15C1-4D22-98EB-5E91329789FF</key>
 		<dict>

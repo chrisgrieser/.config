@@ -12,7 +12,7 @@ return {
 		end,
 		init = function()
 			-- when cmp completion is loaded, clear the virtual text from codium
-			require("cmp").event:on("menu_opened", vim.fn['codeium#Clear'])
+			require("cmp").event:on("menu_opened", function() vim.fn['codeium#Clear']() end)
 
 			vim.g.codeium_disable_bindings = 1
 			vim.g.codeium_filetypes = { ["DressingInput"] = false }
