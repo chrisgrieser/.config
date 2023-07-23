@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # shellcheck disable=2154
-destination="$WD"
+destination="$base_folder"
 file_in_trash="$*"
 
 mv "$file_in_trash" "$destination"

@@ -4,9 +4,8 @@ url="$*"
 title=$(curl -sL "$url" | grep -o "<title>[^<]*" | cut -d'>' -f2- | tr -d ":/\\,")
 [[ -z "$title" ]] && title="Untitled"
 
-# shellcheck disable=1091
-source "$HOME/.zshenv" # sources $WD
-link_file_path="$WD/$title.url"
+# shellcheck disable=2154
+link_file_path="$base_folder/$title.url"
 
 #───────────────────────────────────────────────────────────────────────────────
 

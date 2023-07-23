@@ -138,23 +138,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>paths</key>
-				<array>
-					<string>/System/Volumes/Data/Applications/WezTerm.app</string>
-				</array>
-				<key>toggle</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.launchfiles</string>
-			<key>uid</key>
-			<string>F146B53A-B75E-4B95-8AC5-9AB4944913F4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -232,6 +215,23 @@
 			<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/System/Volumes/Data/Applications/WezTerm.app</string>
+				</array>
+				<key>toggle</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>F146B53A-B75E-4B95-8AC5-9AB4944913F4</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -454,9 +454,9 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>310</real>
 		</dict>
 		<key>022D7D2B-3AAA-4479-88EA-37950B786C70</key>
 		<dict>
@@ -465,18 +465,18 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>note</key>
 			<string>Open Terminal from everywhere</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>20</real>
 		</dict>
 		<key>04D132BD-9B0E-4566-AA46-B176F22688E5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>530</real>
+			<real>520</real>
 			<key>ypos</key>
-			<real>100</real>
+			<real>40</real>
 		</dict>
 		<key>0D8928D6-5087-4D58-B121-45D4C8D4D57A</key>
 		<dict>
@@ -485,45 +485,45 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>note</key>
 			<string>open scratch file</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>310</real>
 		</dict>
 		<key>31B881AB-5CA0-469C-B9F8-E33171B4E403</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>460</real>
 		</dict>
 		<key>3D3D6FCC-566C-4ECC-8D1C-AE3FE9BA3DB8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>575</real>
 		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
 			<key>note</key>
 			<string>open dotfile</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>175</real>
 		</dict>
 		<key>5BA79A32-FAE5-4C6E-BE52-007074A12873</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>460</real>
 		</dict>
 		<key>707FB3E6-329A-4494-A074-D4CD436A44AD</key>
 		<dict>
@@ -534,9 +534,9 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 
 check if path different from PWD</string>
 			<key>xpos</key>
-			<real>380</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>20</real>
 		</dict>
 		<key>902D4662-2953-4B92-BAE1-BE34CE7A174D</key>
 		<dict>
@@ -550,9 +550,9 @@ check if path different from PWD</string>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>175</real>
 		</dict>
 		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
 		<dict>
@@ -561,9 +561,9 @@ check if path different from PWD</string>
 			<key>note</key>
 			<string>get Finder / neovide Path</string>
 			<key>xpos</key>
-			<real>195</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>20</real>
 		</dict>
 		<key>F146B53A-B75E-4B95-8AC5-9AB4944913F4</key>
 		<dict>

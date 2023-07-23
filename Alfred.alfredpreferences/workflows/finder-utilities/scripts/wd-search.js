@@ -6,8 +6,8 @@ app.includeStandardAdditions = true;
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
-	const defaultFolder = argv[0];
+function run() {
+	const defaultFolder = $.getenv("base_folder");
 
 	const workArray = app
 		.doShellScript(`cd "${defaultFolder}" && find . -not -name ".DS_Store" -mindepth 1 -maxdepth 1`)
