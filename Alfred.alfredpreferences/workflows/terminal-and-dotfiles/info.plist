@@ -408,7 +408,7 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>json||fx</string>
+				<string>fx</string>
 				<key>subtext</key>
 				<string>&gt; curl "{query}" | fx .</string>
 				<key>text</key>
@@ -502,6 +502,8 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>URL action</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>

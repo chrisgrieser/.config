@@ -740,7 +740,7 @@
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>./scripts/mdn-search.js "CSS $*"</string>
+				<string>./scripts/mdn-search.js "CSS" "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -831,7 +831,7 @@
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>./scripts/mdn-search.js "JavaScript $*"</string>
+				<string>./scripts/mdn-search.js "JavaScript" "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -973,7 +973,7 @@
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>./scripts/mdn-search.js "HTML $*"</string>
+				<string>./scripts/mdn-search.js "HTML" "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1159,23 +1159,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Get UTI of file</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>90992717-5795-4AC4-87C0-32EFADFFCA3B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1195,6 +1178,23 @@
 			<string>A0058A30-98F7-4CE4-9FD9-4E353480E4DA</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Get UTI of file</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>90992717-5795-4AC4-87C0-32EFADFFCA3B</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>

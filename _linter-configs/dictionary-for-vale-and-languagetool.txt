@@ -133,3 +133,4 @@ Raycast
 not possible
 MDN
 Config
+Type
