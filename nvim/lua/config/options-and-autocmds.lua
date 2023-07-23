@@ -197,18 +197,20 @@ opt.autowrite = true
 opt.autowriteall = true
 
 autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost", "InsertLeave" }, {
-	pattern = "?*", -- pattern required for some events
+	pattern = "?*",
 	callback = function()
+		local debounceDelaySec = 2 -- save at most every x seconds
 		local filepath = expand("%:p")
 		if
-			fn.filereadable(filepath) == 1
-			and not bo.readonly
-			and expand("%") ~= ""
+			not vim.b.savingQueued
+			and filepath ~= ""
 			and (bo.buftype == "" or bo.buftype == "acwrite")
 			and bo.filetype ~= "gitcommit"
-			and opt_local.write
+			and (opt_local.write and not opt_local.readonly)
 		then
+			vim.b.savingQueued = true
 			cmd.update(filepath)
+			vim.defer_fn(function() vim.b.savingQueued = false end, 1000 * debounceDelaySec)
 		end
 	end,
 })
