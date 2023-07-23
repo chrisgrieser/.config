@@ -47,6 +47,7 @@ rules:
 
               FRONT_APP=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
               if [[ "$FRONT_APP" == "neovide" ]]; then
+                FRONT_APP="nvim"
                 nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
               else
                 killall "$FRONT_APP"
@@ -54,7 +55,7 @@ rules:
 
               while pgrep -xq "$FRONT_APP"; do sleep 0.03; done
 
-              if [[ "$FRONT_APP" == "neovide" ]]; then
+              if [[ "$FRONT_APP" == "nvim" ]]; then
                 # bwipeout necessary due to empty buffer created before jumping to '0
                 neovide --notabs --frame=buttonless --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #"
                 exit 0

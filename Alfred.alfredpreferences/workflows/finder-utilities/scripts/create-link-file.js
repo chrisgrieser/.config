@@ -69,15 +69,20 @@ function run(argv) {
 			title = "Untitled";
 		}
 	}
-	// safe and truncated title
-	title = title.replace(/[/\\]/g, "-").replace(/["':;.,]/g, "").slice(0, 50).trim();
+	const safeTitle = title
+		.replaceAll("/", "-")
+		.replace(/[\\$€§*#?!:;.,`'’‘"„“”«»’{}]/g, "")
+		.replaceAll("&", "and")
+		.replace(/ {2,}/g, " ")
+		.slice(0, 50)
+		.trim();
 
 	const baseFolder = $.getenv("base_folder");
-	const linkFilePath = `${baseFolder}/${title}.url`;
+	const linkFilePath = `${baseFolder}/${safeTitle}.url`;
 
-	const urlFileContent = `echo "[InternetShortcut]
+	const urlFileContent = `[InternetShortcut]
 URL=${url}
-IconIndex=0"`;
+IconIndex=0`;
 
 	writeToFile(linkFilePath, urlFileContent);
 	Application("Finder").activate();
