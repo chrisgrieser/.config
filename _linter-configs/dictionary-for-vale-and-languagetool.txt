@@ -132,3 +132,4 @@ Capslock
 Raycast
 not possible
 MDN
+Config

@@ -86,10 +86,10 @@
 			"}"
 		]
 	},
-	"write file": {
-		"prefix": "write file",
+	"write to file": {
+		"prefix": "write to file",
 		"body": [
-			"/** @param {string} text @param {string} file */",
+			"/** @param {string} text @param {string} filepath */",
 			"function writeToFile(filepath, text) {",
 			"\tconst str = $.NSString.alloc.initWithUTF8String(text);",
 			"\tstr.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);",

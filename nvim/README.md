@@ -20,7 +20,7 @@ Also, you can check out [the nvim plugins I authored myself](https://github.com/
 │  └── plugins # plugins & their configs
 ├── after
 │  └── ftplugin # filetype-specific configs
-├── mac-helper
+├── mac-helper # for neovide users on macOS
 ├── snippets
 │  ├── basic
 │  └── project-specific
