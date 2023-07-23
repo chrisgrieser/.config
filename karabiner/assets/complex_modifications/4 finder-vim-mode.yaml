@@ -772,6 +772,7 @@ rules:
         from: { key_code: period }
         to:
           - { key_code: period, modifiers: [command, shift] }
+          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_leave.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Navigation
@@ -780,22 +781,26 @@ rules:
         from: { key_code: o }
         to_if_alone:
           - key_code: right_arrow
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: o, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: right_arrow, modifiers: [option] }
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # c = close/collapse fold (C: do it recursively)
       - type: basic
         from: { key_code: c }
         to_if_alone:
           - key_code: left_arrow
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: c, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: left_arrow, modifiers: [option] }
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <C-h> = History Back
       - type: basic
