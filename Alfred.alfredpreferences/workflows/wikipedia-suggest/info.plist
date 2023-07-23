@@ -116,7 +116,7 @@
 			<key>config</key>
 			<dict>
 				<key>autopaste</key>
-				<true/>
+				<false/>
 				<key>clipboardtext</key>
 				<string>{query}</string>
 				<key>ignoredynamicplaceholders</key>
@@ -145,8 +145,6 @@
 		</dict>
 		<key>87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA</key>
 		<dict>
-			<key>note</key>
-			<string>paste</string>
 			<key>xpos</key>
 			<real>320</real>
 			<key>ypos</key>
