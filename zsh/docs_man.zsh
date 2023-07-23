@@ -36,11 +36,11 @@ alias -g -- --help='--help | bat --language=help --style=plain --wrap=character'
 function man() {
 	local command="$1"
 	local search_term="$2"
-	local pane_id, manpage_location
+	local pane_id
 
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 	if ! command -v "$command" &>/dev/null; then echo "$command not installed." && return 1; fi
-	if ! command -v bat &>/dev/null; then printf "\033[1;33mbat not installed.\033[0m" && return 1; fi
+	if ! command -v bat &>/dev/null; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
 
 	if [[ "$(type "$command")" =~ "builtin" ]]; then
 		# using bat, since it adds some syntax highlighting to the builtin pages,
@@ -51,10 +51,9 @@ function man() {
 			pane_id=$(wezterm cli spawn -- bat --style=plain --language=man /usr/share/zsh/*/help/"$command")
 		fi
 	else
-		manpage_location=$(man -w "$command")
-		if [[ "$manpage_location" =~ No manual entry found. ]]; then
-			printf "\033[1;33mNo manpage found.\033[0m"
-			return 9
+		if ! command man -w "$command" &>/dev/null ; then
+			print "\033[1;33mNo manpage found.\033[0m"
+			return 0
 		fi
 		if [[ -n "$search_term" ]]; then
 			pane_id=$(wezterm cli spawn -- man -P "less --pattern=$search_term" "$command")
