@@ -1,1 +1,6 @@
-/Users/chrisgrieser/.config/mackup/backups/Library/Application Support/com.apptorium.SideNotes-paddle/backups
+# in case the folder designated in the SideNotes settings does not exist,
+# SideNotes will save the data in the default location, which is in turn
+# symlinked into into the dotfile repository. Since that is a potential security
+# risk (e.g. saving passwords in a Sidenote), the folder that would be created
+# in that case is gitignored here, just to be safe.
+backups/Library/Application Support/com.apptorium.SideNotes-paddle/backups
