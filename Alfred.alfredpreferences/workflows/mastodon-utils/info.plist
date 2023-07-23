@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>59D0BD34-D07B-4FA7-9797-2CD766FEBB7C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5C7972BE-8484-406E-A85C-34DC73BEA414</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>8E4D43FB-476E-44E3-A660-C25C7AA16809</key>
 		<array>
 			<dict>
@@ -61,27 +74,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string>com.brave.Browser</string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>05AB0272-4BA7-4F8A-ABC8-D2FD91D546EA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -97,6 +89,27 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>DC94E8C4-D940-4F35-B82E-070CB7C24DD5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string>com.brave.Browser</string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>05AB0272-4BA7-4F8A-ABC8-D2FD91D546EA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -152,6 +165,50 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>tw</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>New Tweet &amp; Mastodon</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>59D0BD34-D07B-4FA7-9797-2CD766FEBB7C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>create-new-tweet-mastodon.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5C7972BE-8484-406E-A85C-34DC73BEA414</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -176,6 +233,22 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>150</real>
+		</dict>
+		<key>59D0BD34-D07B-4FA7-9797-2CD766FEBB7C</key>
+		<dict>
+			<key>note</key>
+			<string>new Tweet / Mastodon</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>275</real>
+		</dict>
+		<key>5C7972BE-8484-406E-A85C-34DC73BEA414</key>
+		<dict>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>275</real>
 		</dict>
 		<key>8E4D43FB-476E-44E3-A660-C25C7AA16809</key>
 		<dict>

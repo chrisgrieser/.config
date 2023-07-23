@@ -322,3 +322,7 @@ matches:
     replace: icon
     propagate_casing: true
     word: true
+  - trigger: tiem
+    replace: item
+    propagate_casing: true
+    word: true
