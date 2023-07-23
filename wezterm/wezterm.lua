@@ -113,14 +113,7 @@ local keybindings = {
 	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
 
 	-- emoji picker
-	{
-    key = 'e',
-    mods = 'CMD',
-    action = wt.action.CharSelect {
-      copy_on_select = true,
-      copy_to = 'ClipboardAndPrimarySelection',
-    },
-  },
+	-- { key = "e", mods = "CMD", action = act.CharSelect },
 
 	{ -- cmd+u -> open URL (like f in vimium)
 		key = "u",
