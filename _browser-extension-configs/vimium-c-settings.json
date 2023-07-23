@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "7/22/2023, 10:50:50 PM",
-	"time": 1690059050052,
+	"@time": "7/23/2023, 7:37:47 AM",
+	"time": 1690090667058,
 	"environment": {
 		"extension": "1.99.992",
 		"platform": "mac",
@@ -11,7 +11,7 @@
 	"exclusionListenHash": false,
 	"exclusionRules": [
 		{
-			"passKeys": "c j k o ",
+			"passKeys": "j k ",
 			"pattern": "^https:\\/\\/www\\.google(?:.(?!&tbm=isch))*$"
 		},
 		{
@@ -27,15 +27,11 @@
 			"pattern": ":https://www.inoreader.com/"
 		},
 		{
-			"passKeys": "j k o ",
-			"pattern": ":https://search.brave.com/"
-		},
-		{
 			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? j k l ",
 			"pattern": ":https://www.youtube.com/"
 		},
 		{
-			"passKeys": "? q ",
+			"passKeys": "? ",
 			"pattern": ":https://www.reddit.com/"
 		}
 	],
@@ -71,8 +67,8 @@
 		"",
 		"\" Modes",
 		"map <esc> reset",
-		"map I passNextKey",
-		"map i focusInput keep select=\"end\"",
+		"map i passNextKey",
+		"map gi focusInput keep select=\"end\"",
 		"\" this is similar to WezTerm's QuickSelect mode",
 		"map v LinkHints.activateSelect",
 		"",
