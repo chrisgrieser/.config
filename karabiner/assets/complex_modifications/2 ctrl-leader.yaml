@@ -321,12 +321,12 @@ rules:
           - shell_command: open 'https://www.reddit.com/'
           - *deactivate-leader
           - *remove-notice
-      # [r]eddit
+      # [u]: hackernews
       - type: basic
-        from: { key_code: r }
+        from: { key_code: u }
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://www.reddit.com/'
+          - shell_command: open 'https://news.ycombinator.com/'
           - *deactivate-leader
           - *remove-notice
       # [.]: Emoji Picker
