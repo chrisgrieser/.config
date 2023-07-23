@@ -64,6 +64,8 @@ alias treee='exa --tree --level=3 --icons --git-ignore'
 alias treeee='exa --tree --level=4 --icons --git-ignore'
 alias treeeee='exa --tree --level=5 --icons --git-ignore'
 
+alias i='wezterm imgcat'
+
 alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
@@ -71,6 +73,7 @@ alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 # SUFFIX Alias
 alias -s {yml,yaml}='yq'
 alias -s json='fx'
+alias -s pdf='qlmanage -p'
 alias -s {gif,png,jpg,jpeg,webp}='qlmanage -p'
 alias -s {md,lua,js,ts,css,sh,zsh,applescript,txt,py}='bat'
 
