@@ -208,8 +208,10 @@ autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost", "InsertLeave", "TextC
 			and (opt_local.write and not opt_local.readonly)
 		then
 			vim.b.savingQueued = true
-			cmd.update(filepath)
-			vim.defer_fn(function() vim.b.savingQueued = false end, 1000 * debounceDelaySec)
+			vim.defer_fn(function()
+				cmd.update(filepath)
+				vim.b.savingQueued = false
+			end, 1000 * debounceDelaySec)
 		end
 	end,
 })
