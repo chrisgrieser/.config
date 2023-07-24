@@ -1,7 +1,9 @@
+# INFO
 # - https://starship.rs/config/ 
 # - https://github.com/toml-lang/toml
 # - Ansi colors: https://i.stack.imgur.com/KTSQa.png
-# ------------------------------------------------------------------------------
+# - some nerd font requires a space after them to be properly sized
+#───────────────────────────────────────────────────────────────────────────────
 
 add_newline = false
 continuation_prompt = "↪️ "
@@ -29,7 +31,6 @@ $memory_usage\
 """
 
 [character]
-# INFO some nerd font requires a space after them to be properly sized
 success_symbol = " [󰀘 ](bold green)"
 error_symbol = " [󰇷 ](bold red)"
 vimcmd_symbol = " [ ](bold 206)" # 206: magenta
@@ -125,7 +126,7 @@ format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\) )'
 #───────────────────────────────────────────────────────────────────────────────
 
 [jobs]
-symbol = "󰰆"
+symbol = "󰰆 "
 format = "[ +$number $symbol ]($style)"
 style = "fg:white"
 symbol_threshold = 1
@@ -149,7 +150,7 @@ when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
 command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 os = "macos"
 description = "Version number of Alfred Workflow"
-format = '[󰮤](purple) [󰏗 $output]($style)'
+format = '[󰮤 ](purple) [󰏗  $output]($style)'
 style = "dimmed cyan"
 
 [nodejs]

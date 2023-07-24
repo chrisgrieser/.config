@@ -13,6 +13,12 @@ function getVaultPath() {
 	return ObjC.unwrap(vault).replace(/^~/, theApp.pathTo("home folder"));
 }
 
+/** @param {string} str */
+function alfredMatcher(str) {
+	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
+	return [clean, str].join(" ") + " ";
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
@@ -21,6 +27,9 @@ function run() {
 
 	/** @type AlfredItem[] */
 	const externalLinks = app
+		// yes, I considered `rg`, but `grep` alone is actually surprisingly fast
+		// already, making `grep` potentially a better choice since it does not
+		// add a dependency
 		.doShellScript(`cd "${vaultPath}" && grep -Eoh "\\[[^[]*?\\]\\(http[^)]*\\)" **/*.md`)
 		.split("\r")
 		.map((mdlink) => {
@@ -29,6 +38,7 @@ function run() {
 				title: title,
 				subtitle: url,
 				arg: url,
+				match: alfredMatcher(title) + alfredMatcher(url),
 				uid: mdlink,
 			};
 		});
