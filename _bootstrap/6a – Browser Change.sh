@@ -1,30 +1,17 @@
-#!/usr/bin/env zsh
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+# INFO 
+# Stuff only to needed to run when a new browser is installed
 #───────────────────────────────────────────────────────────────────────────────
 
-# TODO MANUAL CHANGES
+# MANUAL
+
+# TODO change "$BROWSER_APP" in .zshenv
 open "$HOME/.zshenv"
-BROWSER_APP="Brave Browser"
 
-#───────────────────────────────────────────────────────────────────────────────
+# TODO change BetterTouchTool for PWAs
 
-osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("browser-history-search [ext]")'
-
-# add browser ID here
+osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("browser-history-search [3rd-Party]")'
+# add browser app-ID here
 osascript -l JavaScript -e 'Application("com.runningwithcrayons.Alfred").revealWorkflow("sidenote-tweaks")'
-
-# Import / Change settings
-open "chrome-extension://pncfbmialoiaghdehhbnbhkkgmjanfhe/pages/options.html"
-open "chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html"
-open "chrome-extension://jinjaccalgkegednnccohejagnlnfdag/options/index.html#settings"
-open "chrome-extension://epmaefhielclhlnmjofcdapbeepkmggh/options.html"
-open "chrome-extension://bijpdibkloghppkbmhcklkogpjaenfkg/html/options.html"
-open "chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html"
-open "chrome-extension://gnmdbogfankgjepgglmmfmbnimcmcjle/optionPage/optionPage.html"
-open "chrome-extension://mnjggcdmjocbbbhaepdhchncahnbgone/options/options.html#import"
-
-# toggle local file URLs here
-open "brave://extensions/?id=hfjbmagddngcpeloejdejnfgbamkjaeg"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -47,12 +34,6 @@ iconsur set CrunchyRoll.app &>/dev/null
 
 cp -f "$CUSTOM_ICON_FOLDER/YouTube.icns" "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
 touch "$PWA_FOLDER/YouTube.app/Contents/Resources/app.icns"
-
-# TODO change BetterTouchTool for PWAs
-
-#───────────────────────────────────────────────────────────────────────────────
-
-# AUTOMATED CHANGES
 
 # Duti
 browserAppId=$(osascript -e "id of app \"$BROWSER_APP\"")

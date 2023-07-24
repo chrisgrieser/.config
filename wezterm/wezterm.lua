@@ -233,11 +233,11 @@ local config = {
 	force_reverse_video_cursor = true, -- true = color is reverse, false = color by color scheme
 
 	-- Font
-	font_size = isAtMother and 24 or 26,
+	font_size = isAtMother and 26 or 28,
 	command_palette_font_size = 29,
 	-- INFO even though symbols and nerd font are bundled with wezterm, some
 	-- icons have a sizing issues, therefore explicitly using the Nerd Font here
-	font = wt.font("JetBrainsMono Nerd Font", {
+	font = wt.font("Iosevka Fixed", {
 		weight = "Medium", -- tad thicker
 	}),
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures

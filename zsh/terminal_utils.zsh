@@ -61,7 +61,7 @@ function d() {
 	if ! command -v trash &>/dev/null; then print "\033[1;33mmacos-trash not installed.\033[0m" && return 1; fi
 
 	if [[ $# == 0 ]]; then
-		trash ./*
+		trash ./*(D) # (D) makes the glob include dotfiles. is zsh-specific
 	else
 		trash "$@"
 	fi
