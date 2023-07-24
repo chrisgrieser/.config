@@ -17,9 +17,10 @@ function httpRequest(url) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const query = argv[0];
-			items: [{ title: "Waiting for query…", valid: false }],
-		});
-	}
+
+	// INFO if no query, return nothing -> show the hackernews top stories instead
+	if (!query) return "{}";
+
 	const searchApi = "https://hn.algolia.com/api/v1/search?query=";
 
 	/** @type AlfredItem[] */
