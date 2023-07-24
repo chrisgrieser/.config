@@ -2,5 +2,5 @@
 
 # shellcheck disable=2154
 cd "$base_folder" || return 1
-
-[[ -z "$(ls)" ]] && echo -n "empty"
+files=$(find . -mindepth 1 -not -name ".DS_Store")
+[[ -z "$files" ]] && echo -n "empty"

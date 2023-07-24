@@ -81,6 +81,7 @@ function ..d() {
 	local current_dir="$PWD"
 	cd ..
 	trash "$current_dir"
+	inspect
 
 	## add nicer trash sound
 	# shellcheck disable=2181

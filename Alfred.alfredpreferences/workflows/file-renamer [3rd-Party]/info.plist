@@ -478,6 +478,8 @@ Press &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; at any state to reope
 		</dict>
 		<key>4A863367-72EB-4F2F-90CC-509F92F6AEA5</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>note</key>
 			<string>to be copypasted after update of the rename workflow</string>
 			<key>xpos</key>
