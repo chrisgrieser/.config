@@ -245,7 +245,6 @@ local config = {
 
 	-- Size
 	adjust_window_size_when_changing_font_size = false,
-	cell_width = 1.0,
 	line_height = 1.1,
 
 	-- Appearance
