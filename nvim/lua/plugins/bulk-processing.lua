@@ -88,13 +88,14 @@ return {
 		"chrisgrieser/nvim-recorder",
 		dev = true,
 		keys = {
+			{ "0", desc = " Start/Stop Recording" },
 			{ "9", desc = "/ Continue/Play" },
 			{ "8", desc = "/ Breakpoint" },
-			{ "0", desc = " Start/Stop Recording" },
 		},
 		config = function()
 			require("recorder").setup {
 				clear = true,
+				lazyredrawThreshold = 100,
 				logLevel = vim.log.levels.TRACE,
 				mapping = {
 					startStopRecording = "0",
