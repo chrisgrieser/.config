@@ -1746,9 +1746,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>move to default folder</string>
 			<key>xpos</key>
-			<real>200</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>275</real>
 		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
@@ -1766,9 +1766,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>345</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>275</real>
 		</dict>
 		<key>CB6E384B-F2A7-4E6A-B8BD-95128701CC68</key>
 		<dict>
