@@ -1,14 +1,13 @@
 # https://espanso.org/docs/configuration/options/
-# yamllint disable rule:truthy
 #───────────────────────────────────────────────────────────────────────────────
  
-toggle_key: OFF
-search_trigger: OFF
+toggle_key: false
+search_trigger: false
 search_shortcut: META+ALT+CTRL+SHIFT+E # = Hyper+E
-show_icon: true
+
+show_icon: false
 show_notifications: true
 auto_restart: true
 
 undo_backspace: false # backspace undos expansion
-
 backend: auto

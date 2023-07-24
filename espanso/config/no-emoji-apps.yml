@@ -1,0 +1,5 @@
+# deactivate emojis in these apps, since they have their own emoji suggester
+filter_exec: Slack|Alfred|Discord|[nN]eovide|Obsidian
+
+extra_excludes:
+  - "../match/emoji-colon-autosuggestion.yml"

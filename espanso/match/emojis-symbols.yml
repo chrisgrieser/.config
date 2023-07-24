@@ -1,55 +1,21 @@
 matches:
-  # Emojis
-  - triggers: ["::", "!yes"]
+  # Common Emojis
+  - trigger: "!yes"
     replace: "✅ "
-    label: "✅ yes"
-  - triggers: ["::", "!no"]
+  - trigger: "!no"
     replace: "❌ "
-    label: ❌ no
-  - triggers: ["::", "!wait"]
+  - trigger: "!wait"
     replace: "⏳ "
-    label: ⏳ wait
-  - triggers: ["::", "!info"]
-    replace: "ℹ️ "
-    label: ℹ️ info
-  - triggers: ["::", "!new"]
-    replace: "🆕 "
-    label: 🆕 new
-  - triggers: ["::", "!clip"]
-    replace: "📋 "
-    label: 📋 clip
-  - triggers: ["::", "!warn"]
-    replace: "⚠️ " # is actually an emoji outside of nvim
-    label: ⚠️ warn
-  - triggers: ["::", "!star"]
-    replace: "⭐ "
-    label: ⭐ star
-  - triggers: ["::", "!blush"]
-    replace: "😊 "
-    label: 😊 blush
-  - triggers: ["::", "!sweat"]
-    replace: "😅 "
-    label: 😅 sweat
-  - triggers: ["::", "!think"]
-    replace: "🤔 "
-    label: 🤔 think
-
-  # compound emojis
-  - triggers: ["::", "!ampel"]
+  - trigger: "!ampel"
     replace: 🔴🟡🟢
-    label: 🔴🟡🟢 ampel
-  - triggers: ["::", "!eyes"]
+  - trigger: "!eyes"
     replace: 👁️👄👁️
-    label: 👁️👄👁️ eyes
-  - triggers: ["::", "!shrug"]
+  - trigger: "!shrug"
     replace: ¯\_(ツ)_/¯
-    label: ¯\_(ツ)_/¯ shrug
-  - triggers: ["::", "!gimme"]
+  - trigger: "!gimme"
     replace: ༼つ ◕_◕ ༽つ
-    label: ༼つ ◕_◕ ༽つ gimme
-  - triggers: ["::", "!tableflip"]
+  - trigger: "!tableflip"
     replace: (╯°□°）╯︵ ┻━┻
-    label: (╯°□°）╯︵ ┻━┻ tableflip
   #─────────────────────────────────────────────────────────────────────────
   # others
   - trigger: "->>"
@@ -59,7 +25,7 @@ matches:
     word: true
   - trigger: "<->"
     replace: ↔ # unicode arrow
-  - triggers: ["::", " mm"]
+  - trigger: " mm"
     replace: " 🙈"
 
   #─────────────────────────────────────────────────────────────────────────────
