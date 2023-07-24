@@ -1,5 +1,12 @@
+# https://espanso.org/docs/configuration/app-specific-configurations/#advanced-use-cases-for-filter_title
+#───────────────────────────────────────────────────────────────────────────────
 # deactivate emojis in these apps, since they have their own emoji suggester
-filter_exec: Slack|Alfred|Discord|[nN]eovide|Obsidian
+# (filter_class -> appids)
+# - Discord
+# - Slack
+# - Alfred
+# - Obsidian (due to Emoji Shortcode Plugin https://obsidian.md/plugins?id=emoji-shortcodes)
+filter_class: "com.hnc.Discord|com.tinyspeck.slackmacgap|com.runningwithcrayons.Alfred|md.obsidian"
 
 extra_excludes:
   - "../match/emoji-colon-autosuggestion.yml"
