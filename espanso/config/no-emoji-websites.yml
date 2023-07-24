@@ -2,7 +2,8 @@
 # filter works based on window title
 # - GitHub: new issues
 # - GitHub: comment on existing issues
-filter_title: ^New Issue|Issue #
+# - Discord: Website (also for when app is not recognized)
+filter_title: ^New Issue|Issue|Discord$ #
 
 extra_excludes:
   - "../match/emoji-colon-autosuggestion.yml"

@@ -223,6 +223,7 @@ autocmd({ "InsertLeave", "TextChanged" }, {
 		local filepath = expand("%:p")
 		if
 			not vim.b["savingQueued"]
+			and not fn.reg_executing() ~= ""
 			and filepath ~= ""
 			and (bo.buftype == "" or bo.buftype == "acwrite")
 			and bo.filetype ~= "gitcommit"
