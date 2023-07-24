@@ -1165,9 +1165,9 @@
 				<key>keyword</key>
 				<string>today</string>
 				<key>subtext</key>
-				<string>Today</string>
+				<string>for today</string>
 				<key>text</key>
-				<string>📅 Search History</string>
+				<string>📅 Power Search History</string>
 				<key>withspace</key>
 				<true/>
 			</dict>

@@ -32,9 +32,9 @@ return {
 			filetype_exclude = { "undotree", "help", "man", "lspinfo", "" },
 		},
 	},
-	{ -- filetype-icons for Telescope and Lualine
+	{ -- Nerdfont filetype icons
 		"nvim-tree/nvim-web-devicons",
-		lazy = true, -- loaded by other plugins
+		lazy = true, -- loaded by Telescope & Lualine
 		opts = {
 			override = {
 				-- filetypes
@@ -42,8 +42,8 @@ return {
 				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
 				http = { icon = "󰴚", name = "HTTP request" },
 				-- plugins
-				lazy = { icon = "", name = "Lazy" },
-				mason = { icon = "", name = "Mason" },
+				lazy = { icon = "", name = "Lazy" },
+				mason = { icon = "", name = "Mason" },
 			},
 		},
 	},
