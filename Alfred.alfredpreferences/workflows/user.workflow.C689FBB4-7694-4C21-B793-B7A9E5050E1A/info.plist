@@ -176,16 +176,20 @@
 			<key>xpos</key>
 			<real>295</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>165</real>
 		</dict>
 		<key>5A94018F-C617-4D3A-A1DC-EB43459FDA14</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>Hacker News Arcive Search
+
+only active when there is a query</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>85</real>
 		</dict>
 		<key>D2B5D0D6-F45C-49B4-A850-BCC2198A6604</key>
 		<dict>
@@ -194,7 +198,7 @@
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>35</real>
 		</dict>
 		<key>FA18A24C-9B86-4367-8551-6BAEC04B0AA2</key>
 		<dict>
@@ -203,7 +207,7 @@
 			<key>xpos</key>
 			<real>295</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>45</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
