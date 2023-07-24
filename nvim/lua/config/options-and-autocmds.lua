@@ -247,7 +247,7 @@ autocmd({ "InsertLeave", "TextChanged" }, {
 
 --------------------------------------------------------------------------------
 
--- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
+-- Formatting `vim.opt.formatoptions:remove{"o"}` would not work, since it's
 -- overwritten by the ftplugins having the `o` option. therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("FileType", {
