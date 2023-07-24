@@ -503,8 +503,7 @@
 # has to be done in Alfred, since Alfred environment variables are needed
 
 # small leeway getting lines 3-6, since line numbers sometimes shift
-url=$(./py3.sh chrom_history.py "" | sed -n "3,6p" | grep -Eo "http.*" | tr -d '",')
-echo -n "$url"</string>
+./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",'</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -592,9 +591,9 @@ Pressing `CMD` to enter `Other Actions...`:
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>425</real>
 		</dict>
 		<key>27EF6551-081A-4BF3-AE2C-3279905CA7FA</key>
 		<dict>
@@ -638,18 +637,18 @@ Pressing `CMD` to enter `Other Actions...`:
 			<key>note</key>
 			<string>leader → shift+b via Karabiner</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>425</real>
 		</dict>
 		<key>C4693C3A-AD7D-4484-B59D-39578A3FDE90</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>365</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>425</real>
 		</dict>
 		<key>C8B5C9B5-DF95-428D-A2CB-4DFFD4773165</key>
 		<dict>
