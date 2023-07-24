@@ -3,7 +3,8 @@
 # - GitHub: new issues
 # - GitHub: comment on existing issues
 # - GitHub: editing markdown files
-filter_title: ^New Issue|Issue|md at main
+# - Discord: fallback here to ensure Discord is recognized
+filter_title: ^New Issue|Issue|md at main|Discord$
 
 extra_excludes:
   - "../match/emoji-colon-autosuggestion.yml"
