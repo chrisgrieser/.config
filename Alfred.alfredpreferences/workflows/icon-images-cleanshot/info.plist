@@ -116,16 +116,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>795116F8-1CC3-4379-A1AB-2A4A51D41240</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>7CF8B97A-6865-489C-8B65-3C892683D59E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -224,27 +214,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://icons8.com/icons/set/{query}/color</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>795116F8-1CC3-4379-A1AB-2A4A51D41240</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string>Alfred Preferences</string>
 				<key>passthroughargument</key>
@@ -267,9 +236,9 @@
 				<key>keyword</key>
 				<string>icon</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Iconify – Iconfinder – Google Images</string>
 				<key>text</key>
-				<string>Several Icon Sites: '{query}'</string>
+				<string>Search Icon: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -313,7 +282,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.flaticon.com/search?word={query}</string>
+				<string>https://icon-sets.iconify.design/?query={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -646,15 +615,6 @@
 			<key>ypos</key>
 			<real>500</real>
 		</dict>
-		<key>795116F8-1CC3-4379-A1AB-2A4A51D41240</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>7CF8B97A-6865-489C-8B65-3C892683D59E</key>
 		<dict>
 			<key>colorindex</key>
@@ -723,7 +683,7 @@
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>210</real>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
