@@ -16,6 +16,17 @@ local keymappings = {
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_worse(prompt_bufnr)
 	end,
+	["<C-p>"] = function(prompt_bufnr)
+		-- Copy path of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
+		local path = require("telescope.actions.state").get_selected_entry().value
+		require("telescope.actions").close(prompt_bufnr)
+
+		local clipboardOpt = vim.opt.clipboard:get()
+		local useSystemClipb = #clipboardOpt > 0 and clipboardOpt[1]:find("unnamed")
+		local reg = useSystemClipb and "+" or '"'
+		vim.fn.setreg(reg, path)
+		vim.notify("COPIED \n" .. path)
+	end,
 }
 
 local function telescopeConfig()
@@ -205,7 +216,7 @@ local function telescopeConfig()
 						-- unmap <BS> on empty prompt going up; requires lowercase key
 						["<bs>"] = false,
 						-- disable to prevent interference with setting undopoints via `<C-g>u`
-						["<C-g>"] = false, 
+						["<C-g>"] = false,
 					},
 				},
 			},
