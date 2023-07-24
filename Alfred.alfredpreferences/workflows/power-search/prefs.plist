@@ -4,6 +4,8 @@
 <dict>
 	<key>include_unsafe</key>
 	<true/>
+	<key>log_location</key>
+	<string>/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/power-search.log</string>
 	<key>min_query_length</key>
 	<string>6</string>
 	<key>no_suggestion_regex</key>
