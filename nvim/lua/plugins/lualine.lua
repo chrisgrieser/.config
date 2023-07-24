@@ -160,13 +160,10 @@ local function pathToProjectRoot()
 	return " " .. nicerDisplay
 end
 
+-- show newlineChar, when it is *not* unix
 local function newlineChars()
-	local icon = ""
-	if bo.fileformat == "mac" then
-		icon = ""
-	elseif bo.fileformat == "dos" then
-		icon = ""
-	end
+	if bo.fileformat == "unix" then return "" end
+	local icon = bo.fileformat == "mac" and "" or ""
 	return "󰌑 " .. icon
 end
 
