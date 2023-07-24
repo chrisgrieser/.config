@@ -30,14 +30,13 @@ zle -N grappling-hook
 
 
 #───────────────────────────────────────────────────────────────────────────────
-# BINDINGS FOR WIDGETS
-#───────────────────────────────────────────────────────────────────────────────
-# INFO: use ctrl-v and then a key combination to get the shell binding
-# `bindkey -M main` to show existing keybinds
-# some bindings with '^' are reserved (^M=enter, ^I=tab, ^[[Z = shift+tab)
+# INFO BINDINGS FOR WIDGETS
+# - use `ctrl-v` and then a key combination to get the shell binding
+# - `bindkey -M main` to show existing keybinds
+# - some bindings with '^' are reserved (^M=enter, ^I=tab, ^[[Z = shift+tab)
 #───────────────────────────────────────────────────────────────────────────────
 
-# needs to be wrapped so not overwritten by zsh-vi-mode
+# needs to be wrapped to not be overwritten by zsh-vi-mode
 function zvm_after_init() {
 	bindkey -M viins '^P' copy-location
 	bindkey -M viins '^B' copy-buffer
