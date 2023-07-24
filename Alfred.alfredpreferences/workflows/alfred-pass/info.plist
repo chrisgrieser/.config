@@ -75,7 +75,7 @@
 				<key>modifiers</key>
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Copy other property</string>
+				<string>⇧: Copy other property (⚠ requires unlocked gpg)</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
