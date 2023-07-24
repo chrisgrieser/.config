@@ -308,7 +308,7 @@ rules:
         from: { key_code: u }
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://news.ycombinator.com/'
+          - shell_command: open 'https://dstill.ai/hackernews'
           - *deactivate-leader
           - *remove-notice
       # [.]: Emoji Picker
