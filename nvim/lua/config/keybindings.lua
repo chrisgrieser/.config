@@ -395,6 +395,15 @@ local function projectName()
 	return name
 end
 
+keymap("n", "go", function()
+	local project = projectName()
+	if project == "" then
+		vim.notify("No pwd available", u.error)
+		return
+	end
+	require("telescope").extensions.file_browser.file_browser { prompt_title = "󰝰 " .. project }
+end, { desc = " Browse in Project" })
+
 -- stylua: ignore
 keymap( "n", "gO", function()
 	require("telescope").extensions.file_browser.file_browser {
@@ -403,19 +412,20 @@ keymap( "n", "gO", function()
 	}
 end, { desc = " Browse in Current Folder" })
 
--- stylua: ignore
-keymap("n", "go", function()
-	require("telescope").extensions.file_browser.file_browser { prompt_title = "󰝰 " .. projectName() }
-end, { desc = " Browse in Project" })
-
--- stylua: ignore
-keymap("n", "gl", function() require("telescope.builtin").live_grep {
-	prompt_title = "Live Grep: " .. projectName() }
+keymap("n", "gl", function()
+	local project = projectName()
+	if project == "" then
+		vim.notify("No pwd available", u.error)
+		return
+	end
+	require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() }
 end, { desc = " Live Grep in Project" })
+
 -- stylua: ignore
 keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
 -- stylua: ignore
 keymap("n", "gr", [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { desc = " Recent Files" })
+
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = "  Continue" })
 keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since `gf` remapped
 
@@ -556,7 +566,7 @@ keymap("n", "<leader>ow", function()
 end, { desc = " 󰖶 Toggle Wrap" })
 
 -- FIX scrolloff and folding sometimes broken
-keymap("n", "<leader>of", function ()
+keymap("n", "<leader>of", function()
 	vim.opt.scrolloff = 13
 	vim.opt_local.foldlevel = 99
 end, { desc = " 󰘖 Fix Folding/Scrolloff" })
@@ -607,4 +617,3 @@ autocmd("FileType", {
 		end
 	end,
 })
-
