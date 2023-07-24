@@ -114,10 +114,10 @@ keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Simplified Marks
 keymap("n", "Ä", function()
-	vim.notify(" Mark set.", u.trace)
+	vim.notify(" Mark set.", u.trace)
 	u.normal("mM")
-end, { desc = " Set Mark" })
-keymap("n", "ä", "'M", { desc = " Goto Mark" })
+end, { desc = " Set Mark" })
+keymap("n", "ä", "'M", { desc = " Goto Mark" })
 
 -- Hunks and Changes
 keymap("n", "gh", ":Gitsigns next_hunk<CR>zv", { desc = "󰊢 Next Hunk" })
