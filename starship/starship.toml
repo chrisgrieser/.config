@@ -33,7 +33,7 @@ $memory_usage\
 [character]
 success_symbol = " [󰀘 ](bold green)"
 error_symbol = " [󰇷 ](bold red)"
-vimcmd_symbol = " [ ](bold 206)" # 206: magenta
+vimcmd_symbol = " [ ](bold 206)" # 206: magenta
 
 [sudo]
 style = 'fg:green bg:black'
@@ -89,7 +89,7 @@ format = "[$hash]($style) "
 # branch
 [git_branch]
 only_attached = true
-symbol = ""
+symbol = "󰘬 " # 
 style = "fg:purple bg:black bold"
 format = "[$symbol$branch]($style) "
 ignore_branches = ["main"]
@@ -97,7 +97,7 @@ ignore_branches = ["main"]
 # since "ignore_branches" fully hides the git_branch component, still showing the symbol
 [custom.main_branch]
 when = "[[ $(git branch --show-current) == 'main' ]]"
-format = '[](fg:purple bg:black bold) '
+format = '[󰘬 ](fg:purple bg:black bold) '
 
 # files
 [git_status]
@@ -107,9 +107,9 @@ modified = '[~$count ](fg:208 bg:black)'
 renamed = '[󰑕 $count ](fg:blue bg:black)'
 staged = '[ $count ](fg:green bg:black)'
 conflicted = '[ $count ](fg:red bg:black)'
-diverged = '[󰓁$count ](fg:red bg:black)'
-ahead = '[󰶣$count ](fg:cyan bg:black)'
-behind = '[󰶡$count ](fg:yellow bg:black)'
+diverged = '[󰓁 $count ](fg:red bg:black)'
+ahead = '[󰶣 $count ](fg:cyan bg:black)'
+behind = '[󰶡 $count ](fg:yellow bg:black)'
 style = 'fg:purple bg:black bold'
 format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
 ignore_submodules = false

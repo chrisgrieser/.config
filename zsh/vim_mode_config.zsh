@@ -48,6 +48,7 @@ function zvm_after_lazy_keybindings() {
 	bindkey -M vicmd 'H' vi-first-non-blank
 	bindkey -M vicmd 'U' redo
 	bindkey -M vicmd 'M' vi-join
+	bindkey -M vicmd 'm' zvm_move_around_surround
 
 	bindkey -M vicmd 'gg' vi-beginning-of-line # so gg does not go to the top of history, which you never want
 	bindkey -M vicmd 'q' normal-mode-exit      # quicker quitting

@@ -44,6 +44,7 @@ declare const Application: {
 	};
 	(name: "System Events"): macAppObj & {
 		keystroke(key: string, modifiers?: { using: string[] });
+		keyCode(keycode: number, modifiers?: { using: string[] });
 		// rome-ignore lint/suspicious/noExplicitAny: TODO
 		applicationProcesses: any;
 		// rome-ignore lint/suspicious/noExplicitAny: TODO

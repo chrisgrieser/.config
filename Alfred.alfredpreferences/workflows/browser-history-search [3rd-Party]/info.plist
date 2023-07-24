@@ -502,7 +502,9 @@
 				<string># get first URL from JSON
 # has to be done in Alfred, since Alfred environment variables are needed
 
-./py3.sh chrom_history.py "" | sed -n 14p | cut -d'"' -f4</string>
+# small leeway getting lines 3-6, since line numbers sometimes shift
+url=$(./py3.sh chrom_history.py "" | sed -n "3,6p" | grep -Eo "http.*" | tr -d '",')
+echo -n "$url"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -587,6 +589,8 @@ Pressing `CMD` to enter `Other Actions...`:
 		</dict>
 		<key>11402BE0-8329-44C7-A0E3-37CC89355B4E</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
@@ -629,6 +633,8 @@ Pressing `CMD` to enter `Other Actions...`:
 		</dict>
 		<key>BC2531DC-7C58-4EA9-89A6-316FB5757EEB</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>note</key>
 			<string>leader → shift+b via Karabiner</string>
 			<key>xpos</key>
@@ -638,8 +644,10 @@ Pressing `CMD` to enter `Other Actions...`:
 		</dict>
 		<key>C4693C3A-AD7D-4484-B59D-39578A3FDE90</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
-			<real>340</real>
+			<real>365</real>
 			<key>ypos</key>
 			<real>545</real>
 		</dict>
