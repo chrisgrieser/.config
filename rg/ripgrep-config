@@ -6,6 +6,6 @@
 --trim
 --glob=!git/*
 
-# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview
 --max-columns=120
 --max-columns-preview
