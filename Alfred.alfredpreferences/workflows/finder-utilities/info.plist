@@ -298,19 +298,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B849B8D9-8183-4330-8D44-88ED125FF38F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CA334214-C251-41D4-9CE3-B0DF612E80C2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>CB6E384B-F2A7-4E6A-B8BD-95128701CC68</key>
 		<array>
 			<dict>
@@ -379,11 +366,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B849B8D9-8183-4330-8D44-88ED125FF38F</string>
+				<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Move to base folder</string>
+				<string>⌘: Move to Front Finder Window</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -757,84 +744,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/move-to-default-folder.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B849B8D9-8183-4330-8D44-88ED125FF38F</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>CA334214-C251-41D4-9CE3-B0DF612E80C2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/BetterZip.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.zip-archive</string>
-				</array>
-				<key>name</key>
-				<string>Open in Better Zip</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -875,6 +784,40 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/BetterZip.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.zip-archive</string>
+				</array>
+				<key>name</key>
+				<string>Open in Better Zip</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1679,9 +1622,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>copy file to clipboard</string>
 			<key>xpos</key>
-			<real>395</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>400</real>
 		</dict>
 		<key>8D046756-BF24-4658-BD57-CAB48FF61B9D</key>
 		<dict>
@@ -1739,17 +1682,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>905</real>
 		</dict>
-		<key>B849B8D9-8183-4330-8D44-88ED125FF38F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>move to default folder</string>
-			<key>xpos</key>
-			<real>250</real>
-			<key>ypos</key>
-			<real>275</real>
-		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1760,15 +1692,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>555</real>
 			<key>ypos</key>
 			<real>130</real>
-		</dict>
-		<key>CA334214-C251-41D4-9CE3-B0DF612E80C2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>395</real>
-			<key>ypos</key>
-			<real>275</real>
 		</dict>
 		<key>CB6E384B-F2A7-4E6A-B8BD-95128701CC68</key>
 		<dict>
@@ -1843,7 +1766,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>330</real>
 		</dict>
 		<key>F77CBF99-913B-4E23-B45A-1330ABD690FC</key>
 		<dict>
@@ -1859,9 +1782,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>345</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>400</real>
 		</dict>
 		<key>FFC42B20-8DB1-4234-9917-12D9E1656CC1</key>
 		<dict>
