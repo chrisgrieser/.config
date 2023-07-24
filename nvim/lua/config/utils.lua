@@ -68,7 +68,7 @@ end
 ---@param ext string extension of the skeleton
 function M.applyTemplateIfEmptyFile(ext)
 	if vim.b.templateBeingApplied then return end
-	vtemplateBeingApplied = true
+	vim.b.templateBeingApplied = true
 	vim.defer_fn(function()
 		local filename = vim.fn.expand("%")
 		local fileExists = vim.fn.filereadable(filename) ~= 0
