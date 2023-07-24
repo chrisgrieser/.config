@@ -75,10 +75,11 @@ function gitlog() {
 		-e 's/ weeks ago)/w)/' \
 		-e 's/ months ago)/mo)/' \
 		-e 's/grafted/ /' \
-		-e 's/origin\//󰞶 /g' \
-		-e 's/HEAD/󱍀/g' \
-		-e 's/->/⇢/g' \
-		-e 's/tags: / )/g'
+		-e 's/origin\//󰞶  /g' \
+		-e 's/HEAD/󱍀 /g' \
+		-e 's/->/󰔰 /g' \
+		-e 's/tags: / )/' \
+		-e 's/, / · /g' 
 }
 
 # brief git log (only last 15)

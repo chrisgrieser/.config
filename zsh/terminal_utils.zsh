@@ -32,12 +32,13 @@ function o() {
 
 # show files + git status + brief git log
 function inspect() {
+	local gitlog_count=6
 	[[ $(tput lines) -gt 20 ]] || return 0 # don't use in embedded terminals, since too small
 	if ! command -v exa &>/dev/null; then printf "\033[1;33mexa not installed.\033[0m" && return 1; fi
 	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		gitlog 5 # custom function defined in git_github.zsh
+		gitlog $gitlog_count
 		separator
 		if [[ -n "$(git status --short --porcelain)" ]]; then
 			git status --short # run again for color
