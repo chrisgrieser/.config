@@ -368,9 +368,9 @@
 				<key>destinationuid</key>
 				<string>B849B8D9-8183-4330-8D44-88ED125FF38F</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘: Move to base folder</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -644,6 +644,29 @@ osascript -l JavaScript  "$WD"</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>copy-file.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
 				<string>file=$1
@@ -681,29 +704,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/move-to-default-folder.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B849B8D9-8183-4330-8D44-88ED125FF38F</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -757,6 +757,63 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/move-to-default-folder.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B849B8D9-8183-4330-8D44-88ED125FF38F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/BetterZip.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.zip-archive</string>
+				</array>
+				<key>name</key>
+				<string>Open in Better Zip</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -774,6 +831,41 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>CA334214-C251-41D4-9CE3-B0DF612E80C2</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>16</integer>
+				<key>hotmod</key>
+				<integer>917504</integer>
+				<key>hotstring</key>
+				<string>Z</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>CB6E384B-F2A7-4E6A-B8BD-95128701CC68</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -842,71 +934,38 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/BetterZip.app</string>
-				<key>sourcefile</key>
-				<string></string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>library</string>
+				<key>subtext</key>
+				<string>~/Library/</string>
+				<key>text</key>
+				<string>Library</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.zip-archive</string>
-				</array>
-				<key>name</key>
-				<string>Open in Better Zip</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</string>
+			<string>874056B3-7017-49B3-94F5-296C9E05D2E4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
+				<key>openwith</key>
 				<string></string>
-				<key>hotkey</key>
-				<integer>16</integer>
-				<key>hotmod</key>
-				<integer>917504</integer>
-				<key>hotstring</key>
-				<string>Z</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
+				<key>sourcefile</key>
+				<string>~/Library</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>CB6E384B-F2A7-4E6A-B8BD-95128701CC68</string>
+			<string>08389D62-E55B-43D3-80A1-D99149535F3C</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -967,21 +1026,21 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>library</string>
-				<key>subtext</key>
-				<string>~/Library/</string>
-				<key>text</key>
-				<string>Library</string>
-				<key>withspace</key>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
 				<true/>
+				<key>name</key>
+				<string>Create Link File</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>874056B3-7017-49B3-94F5-296C9E05D2E4</string>
+			<string>9536809F-DBBD-4982-90BC-427C6D115A14</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1046,36 +1105,44 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/create-link-file.js</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>08389D62-E55B-43D3-80A1-D99149535F3C</string>
+			<string>47245CFC-B3E9-4FD6-A021-06D0B87D637C</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>link</string>
+				<key>subtext</key>
+				<string>from current Browser Tab</string>
+				<key>text</key>
 				<string>Create Link File</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>9536809F-DBBD-4982-90BC-427C6D115A14</string>
+			<string>51903BB3-AE69-45A7-8492-CC712BB612A4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1154,29 +1221,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/create-link-file.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>47245CFC-B3E9-4FD6-A021-06D0B87D637C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1208,27 +1252,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>71AB5645-B299-4577-A54F-8E1A0857CC58</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>link</string>
-				<key>subtext</key>
-				<string>from current Browser Tab</string>
-				<key>text</key>
-				<string>Create Link File</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>51903BB3-AE69-45A7-8492-CC712BB612A4</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1402,27 +1425,27 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>545</real>
 		</dict>
 		<key>030529FB-C164-474A-8DB9-DD49AEB4893F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>335</real>
+			<real>340</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>905</real>
 		</dict>
 		<key>06732C2D-88EF-48DF-81E5-A21235C6E96A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>545</real>
 		</dict>
 		<key>08389D62-E55B-43D3-80A1-D99149535F3C</key>
 		<dict>
@@ -1458,9 +1481,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>1120</real>
+			<real>1255</real>
 		</dict>
 		<key>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</key>
 		<dict>
@@ -1478,18 +1501,18 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>665</real>
 		</dict>
 		<key>2B2CC8D8-AB33-455A-BDF2-333C1C7C656F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>345</real>
+			<real>350</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>780</real>
 		</dict>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<dict>
@@ -1507,9 +1530,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>480</real>
+			<real>485</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>905</real>
 		</dict>
 		<key>47245CFC-B3E9-4FD6-A021-06D0B87D637C</key>
 		<dict>
@@ -1536,9 +1559,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>1010</real>
+			<real>1145</real>
 		</dict>
 		<key>5CCD4941-B4C3-444A-8318-2DDBF741229A</key>
 		<dict>
@@ -1554,9 +1577,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1120</real>
+			<real>1255</real>
 		</dict>
 		<key>64FEC427-2CB3-4EB1-8543-392E2319CBFC</key>
 		<dict>
@@ -1572,9 +1595,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>905</real>
 		</dict>
 		<key>71AB5645-B299-4577-A54F-8E1A0857CC58</key>
 		<dict>
@@ -1583,9 +1606,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>Copy File Content</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>885</real>
+			<real>1020</real>
 		</dict>
 		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
 		<dict>
@@ -1605,6 +1628,13 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>645</real>
 		</dict>
+		<key>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</key>
+		<dict>
+			<key>xpos</key>
+			<real>230</real>
+			<key>ypos</key>
+			<real>255</real>
+		</dict>
 		<key>8D046756-BF24-4658-BD57-CAB48FF61B9D</key>
 		<dict>
 			<key>colorindex</key>
@@ -1619,18 +1649,18 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<key>91F1901A-DC76-40BB-A629-0A37A7CDABD7</key>
 		<dict>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>1240</real>
+			<real>1375</real>
 		</dict>
 		<key>942D4032-DF12-435D-AF6E-B89AEBF9791E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>780</real>
 		</dict>
 		<key>9536809F-DBBD-4982-90BC-427C6D115A14</key>
 		<dict>
@@ -1648,18 +1678,18 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1010</real>
+			<real>1145</real>
 		</dict>
 		<key>9CAC2CDA-1512-48F6-9273-1A82F9ECB969</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>905</real>
 		</dict>
 		<key>B849B8D9-8183-4330-8D44-88ED125FF38F</key>
 		<dict>
@@ -1670,7 +1700,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>415</real>
 		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
@@ -1690,7 +1720,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>415</real>
 		</dict>
 		<key>CB6E384B-F2A7-4E6A-B8BD-95128701CC68</key>
 		<dict>
@@ -1738,18 +1768,18 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>Grappling Hook</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>1240</real>
+			<real>1375</real>
 		</dict>
 		<key>EF11B1CF-FE50-4578-AE30-F89D6BD8390D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>490</real>
+			<real>495</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>725</real>
 		</dict>
 		<key>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</key>
 		<dict>
@@ -1772,18 +1802,18 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>780</real>
 		</dict>
 		<key>FFC42B20-8DB1-4234-9917-12D9E1656CC1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>345</real>
+			<real>350</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>665</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
