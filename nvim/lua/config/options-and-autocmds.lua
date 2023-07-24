@@ -221,18 +221,24 @@ autocmd({ "InsertLeave", "TextChanged" }, {
 
 		local bufNo = api.nvim_get_current_buf()
 		local filepath = expand("%:p")
+
 		if
 			not vim.b["savingQueued"]
-			and not fn.reg_executing() ~= ""
+			and fn.reg_executing() == ""
 			and filepath ~= ""
 			and (bo.buftype == "" or bo.buftype == "acwrite")
 			and bo.filetype ~= "gitcommit"
+			and fn.getcmdtype():find("[/?]") ~= nil
 			and opt.write:get()
 			and not bo.readonly
 		then
 			api.nvim_buf_set_var(bufNo, "savingQueued", true)
 			vim.defer_fn(function()
-				if not api.nvim_buf_is_valid(bufNo) then return end -- closed in meantime
+				local closedInMeantime = not api.nvim_buf_is_valid(bufNo)
+				local bufferChangedInMeantime = api.nvim_get_current_buf() ~= bufNo
+				local isInCmdline = vim.fn.getcmdtype():find("[/?]") ~= nil
+				if closedInMeantime or bufferChangedInMeantime or isInCmdline then return end
+
 				cmd("silent update " .. filepath)
 				api.nvim_buf_set_var(bufNo, "savingQueued", false)
 			end, 1000 * debounceDelaySec)

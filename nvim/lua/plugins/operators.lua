@@ -1,7 +1,8 @@
 return {
 	{ -- comment
 		"numToStr/Comment.nvim",
-		keys = { -- mnemonic: [q]uiet text
+		keys = { 
+			-- mnemonic: [q]uiet text
 			{ "Q", desc = "Append Comment at EoL" },
 			{ "q", mode = { "n", "x" }, desc = "Comment" },
 		},

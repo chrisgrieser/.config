@@ -14,7 +14,13 @@ return {
 			require("cmp").event:on("menu_opened", function() vim.fn['codeium#Clear']() end)
 
 			vim.g.codeium_disable_bindings = 1
-			vim.g.codeium_filetypes = { ["DressingInput"] = false }
+			vim.g.codeium_filetypes = {
+				"TelescopePrompt",
+				"DressingInput",
+				"DressingSelect",
+				"Mason",
+				"ccc-ui",
+			}
 			-- stylua: ignore
 			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion" })
 		end
