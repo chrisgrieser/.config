@@ -59,6 +59,7 @@ function pip3() {
 alias bkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-script.sh"'
 
 alias l='exa --all --long --no-user --header --icons --git --group-directories-first --sort=name'
+alias x='command exa --all --icons --git --group-directories-first --sort=name'
 alias tree='exa --tree --level=2 --icons --git-ignore'
 alias treee='exa --tree --level=3 --icons --git-ignore'
 alias treeee='exa --tree --level=4 --icons --git-ignore'
