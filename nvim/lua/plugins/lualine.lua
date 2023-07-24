@@ -160,6 +160,16 @@ local function pathToProjectRoot()
 	return " " .. nicerDisplay
 end
 
+local function newlineChars()
+	local icon = ""
+	if bo.fileformat == "mac" then
+		icon = ""
+	elseif bo.fileformat == "dos" then
+		icon = ""
+	end
+	return "󰌑 " .. icon
+end
+
 --------------------------------------------------------------------------------
 
 -- nerdfont: powerline icons have the prefix 'ple-'
@@ -248,6 +258,7 @@ local lualineConfig = {
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
 			{ indentation },
+			{ newlineChars },
 			{ require("dr-lsp").lspProgress },
 		},
 		lualine_y = {
