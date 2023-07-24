@@ -72,9 +72,6 @@ function M.applyTemplateIfEmptyFile(ext)
 		local fileExists = vim.fn.filereadable(filename) ~= 0
 		if not fileExists then return end
 
-		local fileIsEmpty = vim.loop.fs_stat(filename).size < 4 -- account for linebreaks
-		if not fileIsEmpty then return end
-
 		local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
 		local skeletionExists = vim.fn.filereadable(skeletonFile) ~= 0
 		if not skeletionExists then
@@ -82,9 +79,12 @@ function M.applyTemplateIfEmptyFile(ext)
 			return
 		end
 
+		local fileIsEmpty = vim.loop.fs_stat(filename).size < 4 -- account for linebreaks
+		if not fileIsEmpty then return end
+
 		vim.cmd("keepalt 0read " .. skeletonFile)
 		M.normal("G")
-	end, 100)
+	end, 200)
 end
 
 --------------------------------------------------------------------------------
