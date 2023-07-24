@@ -1,0 +1,48 @@
+{
+  "name" : "Copy & Notify",
+  "data" : {
+    "items" : [
+      {
+        "workflowobjecttype" : "alfred.workflow.output.clipboard",
+        "uid" : "E6C3B3BC-E42C-40AC-89D3-4E7905BC4C9C",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "ignoredynamicplaceholders" : false,
+          "transient" : false,
+          "clipboardtext" : "{query}",
+          "autopaste" : false
+        },
+        "colorindex" : 0,
+        "ypos" : 5,
+        "xpos" : 20
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.output.notification",
+        "uid" : "D967483C-9C29-4D50-912B-0D6FA38D25ED",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "onlyshowifquerypopulated" : true,
+          "title" : "📋 Copied",
+          "lastpathcomponent" : false,
+          "removeextension" : false,
+          "text" : "{query}"
+        },
+        "colorindex" : 0,
+        "ypos" : 5,
+        "xpos" : 165
+      }
+    ],
+    "connections" : [
+      {
+        "sourceuid" : "E6C3B3BC-E42C-40AC-89D3-4E7905BC4C9C",
+        "config" : {
+          "destinationuid" : "D967483C-9C29-4D50-912B-0D6FA38D25ED",
+          "modifiers" : 0,
+          "modifiersubtext" : "",
+          "vitoclose" : false
+        }
+      }
+    ]
+  },
+  "description" : ""
+}
