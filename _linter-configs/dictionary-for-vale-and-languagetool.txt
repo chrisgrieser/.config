@@ -134,3 +134,4 @@ not possible
 MDN
 Config
 Type
+Neovim
