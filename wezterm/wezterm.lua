@@ -97,7 +97,6 @@ local keybindings = {
 	{ key = "+", mods = "CMD", action = act.IncreaseFontSize },
 	{ key = "-", mods = "CMD", action = act.DecreaseFontSize },
 	{ key = "0", mods = "CMD", action = act.ResetFontSize },
-	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
 	{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 	{ key = "Enter", mods = "CTRL", action = act.ActivateTabRelative(1) },
 	{ key = "v", mods = "CMD", action = actFun(autoQuotePastedUrls) },
@@ -234,13 +233,14 @@ local config = {
 
 	-- Font
 	font_size = isAtMother and 26 or 28,
-	command_palette_font_size = 29,
+	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	-- INFO even though symbols and nerd font are bundled with wezterm, some
 	-- icons have a sizing issues, therefore explicitly using the Nerd Font here
-	font = wt.font("Iosevka Fixed", {
-		weight = "Medium", -- tad thicker
-	}),
-	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
+	font = wt.font_with_fallback {
+		--FIX  Iosevka Nerdfont buggy with icons too small. Implicitly uses WezTerm's builtin Nerd Font as fallback
+		{ family = "Iosevka Fixed", weight = "Medium" }, 
+		{ family = "JetBrainsNL Mono Nerd Font", weight = "Medium" },
+	},
 
 	-- Size
 	adjust_window_size_when_changing_font_size = false,

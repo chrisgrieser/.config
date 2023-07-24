@@ -199,8 +199,10 @@ Wf_mimestream = wf.new("Mimestream"):subscribe(wf.windowCreated, function(newWin
 	-- via keyboard shortcut)
 	local isComposeWin = newWin:title():find("^Re") or newWin:title():find("^Fwd")
 	if not isComposeWin then return end
-	u.runWithDelays(0.2, function()
+	u.runWithDelays(0.3, function()
 		u.keystroke({ "cmd" }, "a")
+		-- default is size 13, four increases -> size 17
+		u.keystroke({ "cmd" }, "+")
 		u.keystroke({ "cmd" }, "+")
 		u.keystroke({ "cmd" }, "+")
 		u.keystroke({ "cmd" }, "+")
