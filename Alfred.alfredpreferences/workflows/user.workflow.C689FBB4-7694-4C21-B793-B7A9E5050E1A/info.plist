@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.hackernews-search</string>
+	<string>de.chris-grieser.hackernews</string>
 	<key>category</key>
 	<string>❇️</string>
 	<key>connections</key>
@@ -62,7 +62,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Hackernews Search</string>
+	<string>Hackernews</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -110,7 +110,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>hns</string>
+				<string>hn</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -207,7 +207,29 @@
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>use dstill.ai</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>alternative frontend</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>USE_DSTILL_AI</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
