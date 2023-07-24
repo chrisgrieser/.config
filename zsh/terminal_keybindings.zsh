@@ -41,6 +41,7 @@ function zvm_after_init() {
 	bindkey -M viins '^P' copy-location
 	bindkey -M viins '^B' copy-buffer
 	bindkey -M viins "^O" grappling-hook # bound to cmd+enter via wezterm
+	bindkey -M viins "^F" grappling-hook # bound to cmd+enter via wezterm
 }
 bindkey -M viins "…" insert-last-word # …=alt+.
 bindkey -M viins "^Z" undo # cmd+z via wezterm
