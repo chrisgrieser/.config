@@ -95,7 +95,6 @@ return {
 		config = function()
 			require("recorder").setup {
 				clear = true,
-				lazyredrawThreshold = 100,
 				logLevel = vim.log.levels.TRACE,
 				mapping = {
 					startStopRecording = "0",
