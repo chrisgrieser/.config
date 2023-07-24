@@ -321,6 +321,19 @@
 				<true/>
 			</dict>
 		</array>
+		<key>37823B3A-8211-49F5-BC98-118E47141CB4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BE9EF990-1694-424F-93F7-2A310066A5FD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>396BCF5D-1A52-4FAC-AB1B-3ECF0E5ED2CC</key>
 		<array>
 			<dict>
@@ -431,6 +444,19 @@
 				<string>⌘: Mark URL</string>
 				<key>vitoclose</key>
 				<true/>
+			</dict>
+		</array>
+		<key>477EF12D-4892-4FE9-942B-A55E0C21A9BA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>37823B3A-8211-49F5-BC98-118E47141CB4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>47FB3A9E-27F5-43FE-9F8D-DA7D444CEAA1</key>
@@ -1105,6 +1131,79 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>BE9EF990-1694-424F-93F7-2A310066A5FD</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>today</string>
+				<key>subtext</key>
+				<string>Today</string>
+				<key>text</key>
+				<string>📅 Search History</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>477EF12D-4892-4FE9-942B-A55E0C21A9BA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>browsing-history-today.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>37823B3A-8211-49F5-BC98-118E47141CB4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1745,7 +1844,7 @@
 				<key>regexmultiline</key>
 				<true/>
 				<key>replacestring</key>
-				<string>$1</string>
+				<string>"$1"</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.replace</string>
@@ -2804,6 +2903,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>900</real>
 		</dict>
+		<key>37823B3A-8211-49F5-BC98-118E47141CB4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>785</real>
+			<key>ypos</key>
+			<real>80</real>
+		</dict>
 		<key>393BA661-A566-4A4C-872F-3385CC07DDB9</key>
 		<dict>
 			<key>colorindex</key>
@@ -2842,6 +2950,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>305</real>
 			<key>ypos</key>
 			<real>670</real>
+		</dict>
+		<key>477EF12D-4892-4FE9-942B-A55E0C21A9BA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>650</real>
+			<key>ypos</key>
+			<real>80</real>
 		</dict>
 		<key>47FB3A9E-27F5-43FE-9F8D-DA7D444CEAA1</key>
 		<dict>
@@ -2938,6 +3055,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>305</real>
 			<key>ypos</key>
 			<real>555</real>
+		</dict>
+		<key>BE9EF990-1694-424F-93F7-2A310066A5FD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>920</real>
+			<key>ypos</key>
+			<real>80</real>
 		</dict>
 		<key>C13894E0-DDFE-45A2-880D-130822FBD3AB</key>
 		<dict>
