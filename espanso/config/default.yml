@@ -5,11 +5,10 @@
 toggle_key: OFF
 search_trigger: OFF
 search_shortcut: META+ALT+CTRL+SHIFT+E # = Hyper+E
-show_icon: false
+show_icon: true
 show_notifications: true
 auto_restart: true
 
 undo_backspace: false # backspace undos expansion
 
 backend: auto
-# clipboard_threshold: 6
