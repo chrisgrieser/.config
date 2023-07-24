@@ -29,13 +29,14 @@ $memory_usage\
 """
 
 [character]
-success_symbol = " [󰀘](bold green)"
-error_symbol = " [󰇷](bold red)"
-vimcmd_symbol = " [](bold 206)" # 206: magenta
+# INFO some nerd font requires a space after them to be properly sized
+success_symbol = " [󰀘 ](bold green)"
+error_symbol = " [󰇷 ](bold red)"
+vimcmd_symbol = " [ ](bold 206)" # 206: magenta
 
 [sudo]
 style = 'fg:green bg:black'
-symbol = " "
+symbol = "  "
 format = "[$symbol]($style)"
 disabled = false
 

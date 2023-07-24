@@ -1,8 +1,9 @@
 # https://espanso.org/docs/configuration/options/
+# yamllint disable rule:truthy
 #───────────────────────────────────────────────────────────────────────────────
  
-toggle_key: false
-search_trigger: false
+toggle_key: OFF
+search_trigger: OFF
 search_shortcut: META+ALT+CTRL+SHIFT+E # = Hyper+E
 
 show_icon: false
