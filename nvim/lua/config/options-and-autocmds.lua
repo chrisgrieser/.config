@@ -228,7 +228,6 @@ autocmd({ "InsertLeave", "TextChanged" }, {
 			and filepath ~= ""
 			and (bo.buftype == "" or bo.buftype == "acwrite")
 			and bo.filetype ~= "gitcommit"
-			and fn.getcmdtype():find("[/?]") ~= nil
 			and opt.write:get()
 			and not bo.readonly
 		then

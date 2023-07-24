@@ -9,21 +9,22 @@ return {
 			os.remove(symLinkTo)
 			vim.loop.fs_symlink(symLinkFrom, symLinkTo)
 		end,
-		config = function ()
+		config = function()
 			-- when cmp completion is loaded, clear the virtual text from codium
-			require("cmp").event:on("menu_opened", function() vim.fn['codeium#Clear']() end)
+			require("cmp").event:on("menu_opened", function() vim.fn["codeium#Clear"]() end)
 
-			vim.g.codeium_disable_bindings = 1
+			-- ignore filetypes
 			vim.g.codeium_filetypes = {
-				"TelescopePrompt",
-				"DressingInput",
-				"DressingSelect",
-				"Mason",
-				"ccc-ui",
+				TelescopePrompt = false,
+				DressingInput = false,
+				DressingSelect = false,
+				Mason = false,
+				["ccc-ui"] = false,
 			}
 			-- stylua: ignore
+			vim.g.codeium_disable_bindings = 1 -- use my own
 			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion" })
-		end
+		end,
 	},
 	{ -- AI completion (suggestion)
 		"jcdickinson/codeium.nvim",
