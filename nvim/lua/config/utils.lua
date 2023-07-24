@@ -67,8 +67,11 @@ end
 ---activate templates for it
 ---@param ext string extension of the skeleton
 function M.applyTemplateIfEmptyFile(ext)
-	if vim.b.templateBeingApplied then return end
-	vim.b.templateBeingApplied = true
+
+	-- prevent duplicate application of template
+	if vim.b.templateWasApplied then return end
+	vim.b.templateWasApplied = true
+
 	vim.defer_fn(function()
 		local filename = vim.fn.expand("%")
 		local fileExists = vim.fn.filereadable(filename) ~= 0
