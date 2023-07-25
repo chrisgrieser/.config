@@ -329,6 +329,10 @@ nmap S vg$p
 " Tabs, Splits & Alt-file
 """"""""""""""""""""""
 
+" Close
+exmap closeWindow obcommand workspace:close-window
+nmap ZZ :closeWindow
+
 " Splits
 exmap splitVertical obcommand workspace:split-vertical
 exmap splitHorizontal obcommand workspace:split-horizontal

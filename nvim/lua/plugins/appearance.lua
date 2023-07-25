@@ -22,8 +22,11 @@ return {
 				{ filter = { event = "msg_show", find = "^1 line less;" }, skip = true },
 				{ filter = { event = "msg_show", find = "^%d+ changes?;" }, skip = true },
 
-				-- show `:write` messages in a more subtle manner
+				-- redirect stuff to the more subtle "mini"
 				{ filter = { event = "msg_show", find = "[Bb] written$" }, view = "mini" },
+				{ filter = { event = "msg_show", find = "^%[nvim-treesitter%]" }, view = "mini" },
+				{ filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
+				{ filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
 			},
 			cmdline = {
 				view = "cmdline", -- use classic cmdline
