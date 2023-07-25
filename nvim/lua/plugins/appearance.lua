@@ -27,7 +27,13 @@ return {
 			},
 			cmdline = {
 				view = "cmdline", -- use classic cmdline
-				format = { search_down = { icon = "" } },
+				format = {
+					cmdline = {
+						icon = " ",
+						conceal = false,
+					},
+					search_down = { icon = " " },
+				},
 			},
 			-- DISABLE unwanted features
 			popupmenu = { backend = "cmp" }, -- use cmp for cmdline completion, has more sources
