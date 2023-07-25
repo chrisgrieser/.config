@@ -70,6 +70,8 @@ return {
 	"rcarriga/nvim-notify",
 	event = "UIEnter",
 	init = function()
+		vim.keymap.set("n", "<D-9>", ":Notifications<CR>", { desc = "󰎟 Notification History" })
+
 		vim.opt.termguicolors = true
 		local printDurationSecs = 7
 

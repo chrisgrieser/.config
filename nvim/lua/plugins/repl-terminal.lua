@@ -32,11 +32,11 @@ return {
 	{ -- Emulate Jupyter Notebook Functionality
 		"GCBallesteros/NotebookNavigator.nvim",
 		keys = {
-			{ "gn", function() require("notebook-navigator").move_cell("d") end },
-			{ "gN", function() require("notebook-navigator").move_cell("u") end },
-			{ "qn", function() require("notebook-navigator").add_cell_after("u") end },
-			{ "<D-r>", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
-			{ "<D-S-r>", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
+			{ "gn", function() require("notebook-navigator").move_cell("d") end, desc = " Next Cell" },
+			{ "gN", function() require("notebook-navigator").move_cell("u") end, desc = " Prev Cell" },
+			{ "qn", function() require("notebook-navigator").add_cell_after("u") end, desc = " Add Cell" },
+			{ "<D-r>", "<cmd>lua require('notebook-navigator').run_cell()<cr>", desc = " Run Cell" },
+			{ "<D-S-r>", "<cmd>lua require('notebook-navigator').run_and_move()<cr>", desc = " Next Cell & Move" },
 		},
 		dependencies = { "numToStr/Comment.nvim", "Vigemus/iron.nvim" },
 		main = "notebook-navigator",
