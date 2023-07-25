@@ -178,6 +178,8 @@ local keybindings = {
 --------------------------------------------------------------------------------
 -- TAB TITLE
 
+-- TODO tab styling <3 https://wezfurlong.org/wezterm/config/lua/config/tab_bar_style.html
+
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab, _, _, _, _, _)
 	-- prefers the title that was set via `tab:set_title()` or `wezterm cli
