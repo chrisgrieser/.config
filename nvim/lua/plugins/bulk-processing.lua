@@ -116,7 +116,16 @@ return {
 				lualineZ,
 				{ require("recorder").recordingStatus, section_separators = topSeparators }
 			)
-			table.insert(lualineY, { require("recorder").displaySlots, section_separators = topSeparators })
+			table.insert(
+				lualineY,
+				{
+					require("recorder").displaySlots,
+					section_separators = topSeparators,
+					fmt = function (str)
+						return 
+					end
+				}
+			)
 
 			require("lualine").setup {
 				tabline = {
