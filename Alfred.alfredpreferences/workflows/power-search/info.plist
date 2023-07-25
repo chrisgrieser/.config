@@ -3294,27 +3294,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>^\w{1,3} .*$|^http</string>
-				<key>placeholder</key>
-				<string>^\w{1,3} $</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<false/>
-			</dict>
-			<key>description</key>
-			<string>Advanced Users: Do not display any inline results or fallback when this regex matches the query. (The default value excludes suggestions when inserting a link or a short keyword.)</string>
-			<key>label</key>
-			<string>No Suggestion Regex</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>no_suggestion_regex</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string></string>
 				<key>filtermode</key>
 				<integer>2</integer>

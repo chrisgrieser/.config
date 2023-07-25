@@ -272,6 +272,7 @@ function acp() {
 #───────────────────────────────────────────────────────────────────────────────
 
 function clone() {
+
 	url="$1"
 
 	# turn http into SSH remotes

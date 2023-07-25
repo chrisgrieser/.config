@@ -313,7 +313,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>sci-hub||rs</string>
+				<string>sci||rs</string>
 				<key>subtext</key>
 				<string>Current Browser Tab</string>
 				<key>text</key>

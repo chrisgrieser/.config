@@ -33,11 +33,6 @@ function run(argv) {
 		$.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]",
 	);
 
-	//───────────────────────────────────────────────────────────────────────────
-
-	// FALLBACK RESULTS
-	const showFallbackOnly = query.length < minQueryLength;
-	const showNothing = noSuggestionRegex.test(query) || query.length < 3;
 	const searchForQuery = {
 		title: query,
 		uid: query,
@@ -50,17 +45,8 @@ function run(argv) {
 		},
 	};
 
-	if (showNothing) return;
-	if (showFallbackOnly) {
-		return JSON.stringify({
-			rerun: 0.1,
-			skipknowledge: true,
-			variables: { oldResults: JSON.stringify(oldResults), oldQuery: query },
-			items: [searchForQuery],
-		});
-	}
-
-	//───────────────────────────────────────────────────────────────────────────
+	// FALLBACK RESULTS
+	if (query.length < minQueryLength) return;
 
 	// USE OLD RESULTS
 	// If the user is typing, return early to guarantee the top entry is the currently typed query
@@ -73,6 +59,8 @@ function run(argv) {
 			items: [searchForQuery].concat(oldResults),
 		});
 	}
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	// REQUEST NEW RESULTS
 	// `--noua` disables user agent & fetches faster (~10% faster according to hyperfine)

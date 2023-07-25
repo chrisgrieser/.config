@@ -1,3 +1,56 @@
+# HELPER FUNCTION USED BY OTHERS
+# draws a separator line with terminal width
+function separator() {
+	local terminal_width
+	local sep=""
+	terminal_width=$(tput cols)
+	for ((i = 0; i < terminal_width; i++)); do
+		sep="$sep─"
+	done
+	echo "$sep"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# show files + git status + brief git log
+function inspect() {
+	# config
+	local max_gitlog_lines=5
+	local max_files_lines=12
+	local disabled_below_term_height=20
+
+	# guard clauses
+	[[ $(tput lines) -gt $disabled_below_term_height ]] || return 0 # don't use in embedded terminals, since too small
+	if ! command -v exa &>/dev/null; then printf "\033[1;33mexa not installed.\033[0m" && return 1; fi
+	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
+	if ! which separator &>/dev/null; then printf "\033[1;33mseperator helper function not defined.\033[0m" && return 1; fi
+
+	# GIT LOG  & STATUS
+	if git rev-parse --is-inside-work-tree &>/dev/null; then
+		gitlog $max_gitlog_lines
+		separator
+		if [[ -n "$(git status --short --porcelain)" ]]; then
+			git status --short # run again for color
+			separator
+		fi
+	fi
+
+	# FILES
+	# columns needs to be set, since exa print as --oneline if piped https://github.com/ogham/exa/issues/522
+	local exa_output terminal_width
+	terminal_width=$(tput cols)
+	exa_output=$(COLUMNS=$terminal_width && exa --all --grid --color=always --icons \
+		--sort=name --group-directories-first --git-ignore --ignore-glob=.DS_Store)
+	if [[ $(echo "$exa_output" | wc -l) -gt $max_files_lines ]]; then
+		echo "$exa_output" | head -n$max_files_lines
+		print "\033[1;34m(…)\033[0m" # blue = exa's default folder color
+	else
+		echo "$exa_output"
+	fi
+
+	echo
+}
+
 # Quick Open File/Folder
 function o() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
@@ -28,38 +81,6 @@ function o() {
 	else
 		return 1
 	fi
-}
-
-# show files + git status + brief git log
-function inspect() {
-	local max_gitlog_lines=6
-	local max_files_lines=10
-
-	[[ $(tput lines) -gt 20 ]] || return 0 # don't use in embedded terminals, since too small
-	if ! command -v exa &>/dev/null; then printf "\033[1;33mexa not installed.\033[0m" && return 1; fi
-	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
-
-	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		gitlog $max_gitlog_lines
-		separator
-		if [[ -n "$(git status --short --porcelain)" ]]; then
-			git status --short # run again for color
-			separator
-		fi
-	fi
-
-	local exa_output terminal_width
-	terminal_width=$(tput cols) # needs to be set, since exa print as --oneline if piped
-	exa_output=$(COLUMNS=$terminal_width && exa --all --grid --color=always --icons \
-		--sort=name --group-directories-first --git-ignore --ignore-glob=.DS_Store)
-	if [[ $(echo "$exa_output" | wc -l) -gt $max_files_lines ]]; then
-		echo "$exa_output" | head -n$max_files_lines  
-		print "\033[1;34m(…)\033[0m" # blue = exa default folder color
-	else
-		echo "$exa_output"
-	fi
-
-	echo
 }
 
 # safer removal
@@ -98,17 +119,6 @@ function ..d() {
 	current_vol=$(osascript -e 'output volume of (get volume settings)')
 	vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
 	(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
-}
-
-# draws a separator line with terminal width
-function separator() {
-	local terminal_width
-	local sep=""
-	terminal_width=$(tput cols)
-	for ((i = 0; i < terminal_width; i++)); do
-		sep="$sep─"
-	done
-	echo "$sep"
 }
 
 # smarter z/cd
