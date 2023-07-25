@@ -359,7 +359,6 @@ keymap("", "<D-S-l>", function()
 	local shellCmd = ("open 'alfredpreferences://navigateto/workflows>workflow>%s'"):format(workflowId)
 	fn.system(shellCmd)
 end, { desc = "󰮤 Reveal Workflow in Alfred" })
-keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
 
 -- cmd+e: inline code
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "  Inline Code" }) -- no selection = word under cursor

@@ -8,14 +8,26 @@ return {
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		event = "VeryLazy",
+		init = function()
+			vim.keymap.set("n", "<D-0>", "<cmd>Noice Log<CR>", { desc = "󰎟 Notification Log" })
+		end,
 		opts = {
+			-- can be used to filter stuff
+			-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/?utm_source=share&utm_medium=web2x&context=3
+			-- https://github.com/folke/noice.nvim#-routes
 			routes = {
-
-
-
+				-- remove messages from highlight-undo
+				{ filter = { event = "msg_show", find = "^%d more lines?;" }, skip = true },
+				{ filter = { event = "msg_show", find = "^1 more line;" }, skip = true },
+				{ filter = { event = "msg_show", find = "^%d+ fewer lines;" }, skip = true },
+				{ filter = { event = "msg_show", find = "^%d+ change;" }, skip = true },
+				{ filter = { event = "msg_show", find = "[km][Bb written$" }, skip = true },
 			},
 			-- use cmp for cmdline completion since it has more sources
 			popupmenu = { backend = "cmp" },
+			messages = {
+				view_search = "mini",
+			},
 			lsp = {
 				signature = { enabled = false }, -- TODO figure out how to make compatible
 				progress = { enabled = false }, -- too noisy
@@ -27,7 +39,7 @@ return {
 			},
 			presets = {
 				bottom_search = true,
-				command_palette = true, -- position the cmdline and popupmenu together
+				-- command_palette = true,
 				long_message_to_split = true,
 				inc_rename = true,
 				lsp_doc_border = true,
