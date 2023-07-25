@@ -11,20 +11,14 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const pluginLocation = $.getenv("plugin_installation_path").replace(/^~/, app.pathTo("home folder"));
+const pluginLocation = $.getenv("plugin_installation_path")
 const jsonArray = app
-	.doShellScript(`
-		find "${pluginLocation}" -path "*/.git" -type d -maxdepth 3 | while read -r line ; do
-			cd "$line"/..
-			git remote -v | head -n1
-		done`)
+	.doShellScript(`cd "${pluginLocation}" && grep -oh "http.*" */.git/config`)
 	.split("\r")
 	.map((remote) => {
-		const repo = remote
-			.slice(26, -12) /* eslint-disable-line no-magic-numbers */
-			.replaceAll(".git (fetch)", ""); // for lazy.nvim
-		const name = repo.split("/")[1];
-		const owner = repo.split("/")[0];
+		const repo = remote.slice(0, -4); // removes the `.git` suffix
+		const name = repo.split("/")[4];
+		const owner = repo.split("/")[3];
 		return {
 			title: name,
 			subtitle: owner,

@@ -4,7 +4,10 @@ local colorPickerFts = { "css", "scss", "lua", "sh", "zsh", "bash" }
 --------------------------------------------------------------------------------
 
 return {
-	{ -- UI overhaul for messages
+	-- TODO
+	-- 1. fix signature help
+	-- 2. fix gui-cursor being ignored
+	{ -- UI overhaul
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		event = "VeryLazy",
