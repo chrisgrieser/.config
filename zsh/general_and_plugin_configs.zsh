@@ -15,37 +15,37 @@ setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasti
 #───────────────────────────────────────────────────────────────────────────────
 # CLI SETTINGS
 
-# you-should-use
 export YSU_IGNORED_ALIASES=("bi" "bu") # due to homebrew Alfred workflow
 export YSU_MESSAGE_POSITION="after"
 
-# fd
-# HACK fixes for `fd` colors when using a light terminal bg https://github.com/sharkdp/fd/issues/1031#issuecomment-1325716744
-
-# fzf
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='--color="hl:206" --keep-right --pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --cycle --layout=reverse --bind="tab:down,shift-tab:up" --preview-window=border-left --height="90%"'
 
-# rg
+
+export EXA_STRICT=1
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && export EXA_ICON_SPACING=2 
+
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 
-# magic enter
-# leading space to ignore it in history due to HIST_IGNORE_SPACE
-export MAGIC_ENTER_GIT_COMMAND=" inspect"
+export MAGIC_ENTER_GIT_COMMAND=" inspect" # leading space to ignore it in history due to HIST_IGNORE_SPACE
 export MAGIC_ENTER_OTHER_COMMAND=" inspect"
 
 # zoxide
 export _ZO_DATA_DIR="$DATA_DIR/zoxide/"
 eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 
-# fx
 export FX_THEME=1 # only theme working in light & dark mode https://github.com/antonmedv/fx#themes
 export FX_SHOW_SIZE=true # show sizes of folded arrays
+
+# gh
+# https://cli.github.com/manual/gh_help_environment
+export GH_NO_UPDATE_NOTIFIER=1
+export GLAMOUR_STYLE="Dracula"
+
 
 #───────────────────────────────────────────────────────────────────────────────
 # ZSH PLUGIN SETTINGS
 
-# zsh syntax highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
 
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
@@ -60,10 +60,4 @@ export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # do not accept autosuggestion when using vim `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
-
-#───────────────────────────────────────────────────────────────────────────────
-# GH-CLI
-# https://cli.github.com/manual/gh_help_environment
-export GH_NO_UPDATE_NOTIFIER=1
-export GLAMOUR_STYLE="Dracula"
 
