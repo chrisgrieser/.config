@@ -206,7 +206,7 @@ autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost" }, {
 			and opt.write:get()
 			and not bo.readonly
 		then
-			cmd.update(filepath)
+			cmd("silent update " .. filepath)
 		end
 	end,
 })
