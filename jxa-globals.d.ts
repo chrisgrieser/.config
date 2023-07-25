@@ -27,7 +27,7 @@ declare const Application: {
 		read(path: string): string;
 		setTheClipboardTo(str: string): void;
 		theClipboard(): string;
-		displayNotification(textToShow: string, options: { withTitle: string; subtitle: string }): void;
+		displayNotification(textToShow: string, options: { withTitle: string; subtitle?: string }): void;
 		displayDialog(
 			textToShow: string,
 			options: {

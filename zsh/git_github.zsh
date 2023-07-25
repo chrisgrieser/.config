@@ -235,17 +235,22 @@ function ac() {
 }
 
 function acp() {
-	# safeguard against accidental pushing of large files
-	local number_large_files
-	number_large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M | wc -l | xargs)
-	if [[ $number_large_files -gt 0 ]]; then
-		echo "$number_large_files large file(s) detected, aborting."
-		find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M
-		echo
+	# guard: accidental pushing of large files
+	local large_files
+	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M)
+	if [[ -n "$large_files" ]]; then
+		print "\033[1;33m$large_files large file(s) detected, aborting."
+		print "$large_files\033[0m"
+		return 1
+	fi
+	# guard: forgot quotes
+	if [[ $# -gt 2 ]]; then
+		print "\033[1;33mToo many arguments.\033[0m"
 		return 1
 	fi
 
-	local commit_msg="$*"
+	local commit_msg="$1"
+	local desc="$2"
 	[[ -z "$commit_msg" ]] && commit_msg="chore"
 
 	# ensure no overlength of commit msg
@@ -257,7 +262,12 @@ function acp() {
 		return 1
 	fi
 
-	git add -A && git commit -m "$commit_msg"
+	git add -A 
+	if [[ -n "$desc" ]] ; then
+		git commit -m "$commit_msg" -m "$desc"
+	else
+		git commit -m "$commit_msg"
+	fi
 	git pull
 	git push
 
