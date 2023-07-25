@@ -92,7 +92,6 @@ autocmd({ "VimEnter", "VimResized" }, { -- the "WinResized" autocmd event does n
 opt.cmdheight = 0
 opt.history = 300 -- reduce noise for command history search
 opt.shortmess:append("s") -- reduce info in :messages
-opt.shortmess:append("S")
 opt.shortmess:append("A") -- no swap file alerts
 opt.report = 9999 -- disable "x more/fewer lines" messages
 

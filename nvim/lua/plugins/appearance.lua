@@ -10,12 +10,48 @@ local colorPickerFts = {
 
 --------------------------------------------------------------------------------
 
+
 return {
 	{ -- UI overhaul for messages
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-		event = "UIEnter",
-		opts = {},
+		event = "VeryLazy",
+		opts = {
+			lsp = {
+				signature = { enabled = false }, -- TODO figure out which plugins conflicts
+				progress = { enabled = false }, 
+				override = {
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					-- ["cmp.entry.get_documentation"] = true,
+				},
+			},
+			-- you can enable a preset for easier configuration
+			presets = {
+				bottom_search = true,
+				long_message_to_split = true,
+				inc_rename = true,
+				lsp_doc_border = true,
+			},
+		},
+	},
+	{
+		"rcarriga/nvim-notify",
+		event = "VeryLazy",
+		opts = {
+			render = "minimal",
+			stages = "slide",
+			level = 0, -- minimum severity level to display (0 = display all)
+			max_height = 30,
+			max_width = 50,
+			minimum_width = 13,
+			timeout = 4000,
+			top_down = false,
+			on_open = function(win)
+				if not vim.api.nvim_win_is_valid(win) then return end
+				vim.api.nvim_win_set_config(win, { border = u.borderStyle })
+			end,
+		},
 	},
 	{ -- rainbow brackets
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
