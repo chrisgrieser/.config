@@ -126,6 +126,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>AF0E4942-E221-40D4-A68F-897A783A8EE9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -214,6 +224,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.flaticon.com/search?word={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>AF0E4942-E221-40D4-A68F-897A783A8EE9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string>Alfred Preferences</string>
 				<key>passthroughargument</key>
@@ -236,7 +267,7 @@
 				<key>keyword</key>
 				<string>icon</string>
 				<key>subtext</key>
-				<string>Iconify – Iconfinder – Google Images</string>
+				<string>Flaticon – Iconify – Iconfinder – Google Images</string>
 				<key>text</key>
 				<string>Search Icon: {query}</string>
 				<key>withspace</key>
@@ -650,6 +681,15 @@
 			<real>350</real>
 			<key>ypos</key>
 			<real>130</real>
+		</dict>
+		<key>AF0E4942-E221-40D4-A68F-897A783A8EE9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>B63198BC-AC4C-4C91-9010-DE88095682EF</key>
 		<dict>
