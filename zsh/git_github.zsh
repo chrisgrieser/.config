@@ -283,9 +283,7 @@ function acp() {
 #───────────────────────────────────────────────────────────────────────────────
 
 function clone() {
-
 	url="$1"
-
 	# turn http into SSH remotes
 	[[ "$url" =~ http ]] && url="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 
@@ -336,7 +334,7 @@ function gdf() {
 	deleted_path=$(git log --diff-filter=D --summary | grep delete | grep -i "$*" | cut -d" " -f5-)
 
 	if [[ -z "$deleted_path" ]]; then
-		print "🔍\033[1;31m No deleted file found."
+		print "🔍\033[1;33m No deleted file found."
 		return 1
 	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
 		print "🔍\033[1;34m Multiple files found."

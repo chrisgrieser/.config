@@ -206,7 +206,7 @@ autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost" }, {
 			and opt.write:get()
 			and not bo.readonly
 		then
-			cmd("silent update " .. filepath)
+			cmd("update " .. filepath)
 		end
 	end,
 })
@@ -240,7 +240,7 @@ autocmd({ "InsertLeave", "TextChanged" }, {
 				local isInCmdline = vim.fn.getcmdtype():find("[/?]") ~= nil
 				if closedInMeantime or bufferChangedInMeantime or isInCmdline then return end
 
-				cmd("noautocmd update " .. filepath)
+				cmd("silent noautocmd update " .. filepath)
 				api.nvim_buf_set_var(bufNo, "savingQueued", false)
 			end, 1000 * debounceDelaySec)
 		end

@@ -72,16 +72,21 @@ function run() {
 				arg: pathInRepo,
 				mods: {
 					alt: {
-						subtitle: isDeleted ? "🚫 Cannot reveal in Finder as file is deleted." : "⌥: Reveal in Finder",
+						subtitle: isDeleted ? "🚫 Cannot reveal, because the file is deleted." : "⌥: Reveal in Finder",
 						valid: isDeleted,
 						variables: { mode: "reveal" },
 					},
 					shift: {
-						subtitle: "⇧: Discard (Reset) Changes to File",
+						subtitle: "⇧: Discard Changes to File (Reset)",
 						variables: { mode: "discard" },
 					},
+					ctrl: {
+						subtitle: "⌃: Diff Changes in Terminal",
+						arg: `git diff "${pathInRepo}"`,
+					},
 					cmd: {
-						subtitle: "⌘: Open File",
+						subtitle: isDeleted ? "🚫 Cannot open, because the file is deleted." : "⌥: Open File",
+						valid: isDeleted,
 						variables: { mode: "open" },
 					},
 				},
