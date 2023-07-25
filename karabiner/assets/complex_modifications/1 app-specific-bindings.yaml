@@ -435,6 +435,16 @@ rules:
         from: { key_code: "f13", modifiers: { mandatory: [shift, command] } }
         to:
           - shell_command: open -g "cleanshot://record-screen"
+  # INFO used at mother device, since no 3rd license for CleanShot
+  - description: "(Apps) Shottr"
+    manipulators:
+      # INFO https://cleanshot.com/docs/api
+      # copy to clipboard and quit
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: c, modifiers: [command, shift] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Pixelmator"
     manipulators:
