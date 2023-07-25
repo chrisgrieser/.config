@@ -13,7 +13,7 @@ function alfredMatcher(str) {
 
 const pluginLocation = $.getenv("plugin_installation_path")
 const jsonArray = app
-	.doShellScript(`cd "${pluginLocation}" && grep -oh "http.*" */.git/config`)
+	.doShellScript(`cd "${pluginLocation}" && grep -oh "http.*" ./*/.git/config`)
 	.split("\r")
 	.map((remote) => {
 		const repo = remote.slice(0, -4); // removes the `.git` suffix

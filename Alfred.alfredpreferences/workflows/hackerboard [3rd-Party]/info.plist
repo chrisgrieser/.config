@@ -219,7 +219,7 @@ News are fetched if it’s been over an hour since the last run. An immediate ca
 			<key>note</key>
 			<string>replace ycombinator with dstill frontend</string>
 			<key>xpos</key>
-			<real>250</real>
+			<real>245</real>
 			<key>ypos</key>
 			<real>55</real>
 		</dict>
