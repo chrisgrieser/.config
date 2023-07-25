@@ -16,7 +16,7 @@ function separator() {
 function inspect() {
 	# config
 	local max_gitlog_lines=5
-	local max_files_lines=12
+	local max_files_lines=10
 	local disabled_below_term_height=20
 
 	# guard clauses
@@ -25,7 +25,7 @@ function inspect() {
 	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
 	if ! which separator &>/dev/null; then printf "\033[1;33mseperator helper function not defined.\033[0m" && return 1; fi
 
-	# GIT LOG  & STATUS
+	# GIT LOG & STATUS
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		gitlog $max_gitlog_lines
 		separator
@@ -39,16 +39,15 @@ function inspect() {
 	# columns needs to be set, since exa print as --oneline if piped https://github.com/ogham/exa/issues/522
 	local exa_output terminal_width
 	terminal_width=$(tput cols)
-	exa_output=$(export COLUMNS=$terminal_width && exa --all --grid --color=always --icons \
-		--sort=name --group-directories-first --git-ignore --ignore-glob=.DS_Store)
+	exa_output=$(export COLUMNS=$terminal_width && exa --all --grid --color=always \
+		--icons --git-ignore --ignore-glob=.DS_Store --sort=name --group-directories-first)
 	if [[ $(echo "$exa_output" | wc -l) -gt $max_files_lines ]]; then
 		echo "$exa_output" | head -n$max_files_lines
 		print "\033[1;34m(…)\033[0m" # blue = exa's default folder color
 	else
 		echo "$exa_output"
+		echo
 	fi
-
-	echo
 }
 
 # Quick Open File/Folder

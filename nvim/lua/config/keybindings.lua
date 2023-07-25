@@ -190,8 +190,8 @@ end, { desc = "󰓆 Accept Word" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("n", "<leader>ff", ":% s///g<Left><Left><Left>", { desc = "󱗘 :substitute" })
-keymap("x", "<leader>ff", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = "󱗘 :substitute selection" })
+keymap("n", "<leader>ff", ":% s/<C-r><C-w>//g<Left><Left><Left>", { desc = "󱗘 :s (word under cursor)" })
+keymap("x", "<leader>ff", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = "󱗘 :s (selection)" })
 
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
 keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines" })
@@ -287,6 +287,8 @@ keymap("i", "<C-a>", "<Esc>I") -- BoL
 keymap("c", "<C-a>", "<Home>")
 keymap("c", "<C-e>", "<End>")
 keymap("c", "<C-u>", "<C-e><C-u>") -- clear
+keymap("c", "<C-w>", "<C-r><C-w>") -- word under cursor
+
 
 -- indent properly when entering insert mode on empty lines
 keymap("n", "i", function()

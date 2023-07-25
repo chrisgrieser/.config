@@ -50,3 +50,18 @@
 	# this also makes links from git-log clickable (https://github.com/wez/wezterm/discussions/3618)
 	hyperlinks = true
 	hyperlinks-file-link-format = "file-line://{path}:{line}"
+
+;────────────────────────────────────────────────────────────────────────────
+
+# Merge Tool
+# https://www.reddit.com/r/neovim/comments/158zdir/comment/jtdn6tf/&utm_medium=web2x&context=3
+; [merge]
+;     tool = nvim
+; [mergetool "nvim"]
+;     cmd = nvim -f -c \"DiffviewOpen\"
+; [mergetool]
+;     prompt = false
+;
+; [alias]
+;   mergetool = "!nvim -c DiffviewOpen"
+;   dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
