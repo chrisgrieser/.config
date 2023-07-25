@@ -122,8 +122,8 @@ return {
 					require("recorder").displaySlots,
 					section_separators = topSeparators,
 					fmt = function (str)
-						return 
-					end
+						return str:gsub("%[", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿")
+					end,
 				}
 			)
 
