@@ -58,28 +58,6 @@ keymap("n", "<leader>lf", function()
 	vim.notify(out, u.trace)
 end, { desc = "󰽘 Inspect FileType & BufType" })
 
--- copy [l]ast [n] notification
-keymap("n", "<leader>ln", function()
-	local history = require("notify").history {}
-	local lastNotify = history[#history]
-	if not lastNotify then
-		vim.notify("No Notification in this session.", u.warn)
-		return
-	end
-	local msg = ""
-	for _, line in pairs(lastNotify.message) do
-		msg = msg .. line .. "\n"
-	end
-	fn.setreg("+", msg)
-	vim.notify("Last Notification copied.\n" .. msg, u.trace)
-end, { desc = "󰘳 Copy Last Notification" })
-
--- Dismiss notifications
-keymap("n", "<Esc>", function()
-	local clearPending = require("notify").pending() > 10
-	require("notify").dismiss { pending = clearPending }
-end, { desc = "󰎟 Clear Notifications" })
-
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
@@ -279,8 +257,8 @@ keymap("n", "<Left>", function()
 end, { desc = "Move Char Left", expr = true })
 
 -- stylua: ignore start
-keymap("x", "<Down>", [[:move '>+1<CR>:normal! gv=gv<CR>]], { desc = "󰜮 Move selection down" })
-keymap("x", "<Up>", [[:move '<-2<CR>:normal! gv=gv<CR>]], { desc = "󰜷 Move selection up" })
+keymap("x", "<Down>", [[<cmd>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "󰜮 Move selection down" })
+keymap("x", "<Up>", [[<cmd>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "󰜷 Move selection up" })
 -- stylua: ignore end
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" })
@@ -335,11 +313,11 @@ keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenB
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " 󰽙 Buffers" })
 
 -- stylua: ignore end
-keymap("", "<C-w>h", ":split<CR>", { desc = " horizontal split" })
-keymap("", "<C-Right>", ":vertical resize +3<CR>", { desc = " vertical resize (+)" })
-keymap("", "<C-Left>", ":vertical resize -3<CR>", { desc = " vertical resize (-)" })
-keymap("", "<C-Down>", ":resize +3<CR>", { desc = " horizontal resize (+)" })
-keymap("", "<C-Up>", ":resize -3<CR>", { desc = " horizontal resize (-)" })
+keymap("", "<C-w>h", "<cmd>split<CR>", { desc = " horizontal split" })
+keymap("", "<C-Right>", "<cmd>vertical resize +3<CR>", { desc = " vertical resize (+)" })
+keymap("", "<C-Left>", "<cmd>vertical resize -3<CR>", { desc = " vertical resize (-)" })
+keymap("", "<C-Down>", "<cmd>resize +3<CR>", { desc = " horizontal resize (+)" })
+keymap("", "<C-Up>", "<cmd>resize -3<CR>", { desc = " horizontal resize (-)" })
 
 ------------------------------------------------------------------------------
 
@@ -470,14 +448,14 @@ autocmd("LspAttach", {
 
 -- Neogit
 keymap("n", "<leader>gn", cmd.Neogit, { desc = "󰊢 Neogit Menu" })
-keymap("n", "<leader>gc", ":Neogit commit<CR>", { desc = "󰊢 Commit (Neogit)" })
+keymap("n", "<leader>gc", "<cmd>Neogit commit<CR>", { desc = "󰊢 Commit (Neogit)" })
 
 -- Gitsigns
-keymap("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
-keymap("n", "<leader>gA", ":Gitsigns stage_buffer<CR>", { desc = "󰊢 Add Buffer" })
-keymap("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
-keymap("n", "<leader>gR", ":Gitsigns reset_buffer<CR>", { desc = "󰊢 Reset Buffer" })
-keymap("n", "<leader>g?", ":Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
+keymap("n", "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
+keymap("n", "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", { desc = "󰊢 Add Buffer" })
+keymap("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
+keymap("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰊢 Reset Buffer" })
+keymap("n", "<leader>g?", "<cmd>Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
 
 -- Telescope
 -- stylua: ignore start
@@ -513,7 +491,7 @@ end, { desc = "󰊢 Pickaxe File History (Diffview)" })
 keymap(
 	"x",
 	"<leader>gd",
-	":DiffviewFileHistory<CR><C-w>w<C-w>|",
+	"<cmd>DiffviewFileHistory<CR><C-w>w<C-w>|",
 	{ desc = "󰊢 Line History (Diffview)" }
 )
 
@@ -593,7 +571,7 @@ autocmd("FileType", {
 autocmd("FileType", {
 	pattern = { "ssr", "TelescopePrompt" },
 	callback = function()
-		local opts = { buffer = true, nowait = true, remap = true, desc = "close" }
+		local opts = { buffer = true, nowait = true, remap = true, desc = " Close" }
 		if bo.filetype == "ssr" then
 			keymap("n", "q", "Q", opts)
 		else

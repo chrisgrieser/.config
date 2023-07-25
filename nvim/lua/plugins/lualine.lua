@@ -71,23 +71,32 @@ end
 
 local function searchCounter()
 	if vim.v.hlsearch == 0 then return "" end
-	if not (fn.mode() == "c" and fn.getcmdtype():find("[/?]")) then return end
+	if fn.mode() == "n" then
+		local total = fn.searchcount().total
+		local current = fn.searchcount().current
+		local searchTerm = fn.getreg("/")
+		local isStarSearch = searchTerm:find([[^\<.*\>$]])
+		if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
+		if total == 0 then return " 0 " .. searchTerm end
+		return (" %s/%s %s"):format(current, total, searchTerm)
 
 	-- manual method of counting necessary since `fn.searchcount()` does not work
 	-- during the search in the cmdline
-	-- for correct count, requires autocmd below refreshing lualine on CmdlineChanged
-	local searchTerm = vim.fn.getcmdline()
-	if searchTerm == "" then return "" end
+	elseif fn.mode() == "c" and fn.getcmdtype():find("[/?]") then
+		-- for correct count, requires autocmd below refreshing lualine on CmdlineChanged
+		local searchTerm = vim.fn.getcmdline()
+		if searchTerm == "" then return "" end
 
-	local buffer = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, true), "\n")
+		local buffer = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, true), "\n")
 
-	-- determine case-sensitive from user's vim settings
-	local ignoreCase = vim.opt.smartcase:get() and (searchTerm:find("%u") == nil)
-		or vim.opt.ignorecase:get()
+		-- determine case-sensitive from user's vim settings
+		local ignoreCase = vim.opt.smartcase:get() and (searchTerm:find("%u") == nil)
+			or vim.opt.ignorecase:get()
 
-	-- using `fn.count()` instead of `string.find` since `/` uses vimscript
-	local count = fn.count(buffer, searchTerm, ignoreCase)
-	return (" %s"):format(count)
+		-- using `fn.count()` instead of `string.find` since `/` uses vimscript
+		local count = fn.count(buffer, searchTerm, ignoreCase)
+		return (" %s"):format(count)
+	end
 end
 
 -- force refreshing for search count, since lualine otherwise lags behind
@@ -171,6 +180,13 @@ local lualineConfig = {
 	tabline = {
 		lualine_a = {
 			{ clock, section_separators = emptySeparators },
+			{
+				searchCounter,
+				cond = function()
+					local currentlySearching = vim.fn.getcmdtype():find("[/?]") ~= nil
+					return currentlySearching
+				end,
+			},
 			{
 				"tabs",
 				mode = 1,
