@@ -3242,27 +3242,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Minimum number of characters before requesting inline results. (A fallback is still shown below that number.)</string>
-			<key>label</key>
-			<string>Min Query Length</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>min_query_length</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>5</string>
-				<key>placeholder</key>
-				<string>5</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
 			<string>Number of inline results to display</string>
 			<key>label</key>
 			<string>Num Inline Results</string>

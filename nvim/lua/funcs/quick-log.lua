@@ -133,10 +133,10 @@ function M.timelog()
 		-- JXA, for example, does not support console.time()
 		logStatement1 = {
 			'console.log("timelog start")',
-			"const timelogStart = new Date()",
+			"const timelogStart = +new Date()",
 		}
 		logStatement2 = {
-			"const duration = (new Date() - timelogStart) / 1000",
+			"const duration = (+new Date() - timelogStart) / 1000",
 			'console.log("timelog: ", duration, "s")',
 		}
 	elseif ft == "typescript" then
