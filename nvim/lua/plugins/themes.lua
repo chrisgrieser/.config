@@ -24,18 +24,15 @@ g.lightTransparency = 0.94
 
 --------------------------------------------------------------------------------
 
--- The purpose of this is not having to manage two lists, once with themes
+-- DOCS
+-- The purpose of this is not having to manage two lists, one with themes
 -- to install and one for determining light/dark theme
-
--- the light/dark values are used in config/theme-config.lua for properly
--- setting up the themes
 
 ---convert lazy.nvim-plugin-spec or github-repo into theme name
 ---@param repo string|table either github-repo or plugin-spec with github-repo as first item
 ---@nodiscard
 ---@return string name of the color scheme
 local function getName(repo)
-	-- either first item, or name-key
 	if type(repo) == "table" then repo = repo.name or repo[1] end
 	local name = repo:gsub(".*/", ""):gsub("[.%-]?nvim$", ""):gsub("neovim%-?", "")
 	return name
