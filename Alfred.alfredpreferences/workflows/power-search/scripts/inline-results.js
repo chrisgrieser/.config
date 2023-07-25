@@ -7,7 +7,6 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 // CONFIG
-const minQueryLength = parseInt($.getenv("min_query_length")) || 5;
 const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
 
 let resultsToFetch = parseInt($.getenv("inline_results_to_fetch"));
@@ -23,6 +22,7 @@ else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
  */
 
 /** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	// Check values from previous runs this session
 	const query = argv[0];
@@ -31,19 +31,28 @@ function run(argv) {
 		$.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]",
 	);
 
-	// Guard clauses
-	if (query.length < minQueryLength) return;
+	// Guard clause 1: query too short
+	if (query.length < 3) return;
 
+	// Guard clauses 2: firsts word of query is Alfred keyword
+	const queryFirstWord = query.match(/^\S+/)[0];
 	const alfredKeywords = app
 		.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
 		.split("\r")
 		.reduce((acc, line) => {
-			if (line.includes("{var:")) return acc; // TODO implement {var:alfred_var}
-			const keyword = line.split("<")[1].split(">")[0];
-			if (keyword.includes("||")) // DOCS https://www.alfredapp.com/help/workflows/advanced/keywords/
-			acc.push(keyword);
+			const value = line.split(">")[1].split("<")[0];
+
+			// `||` delimites keyword alternatives https://www.alfredapp.com/help/workflows/advanced/keywords/
+			// only letter keywords relevant, and longer than 1 char (which are this workflows keywords anyway)
+			// TODO implement {var:alfred_var}
+			const keywords = (value.includes("||") ? value.split("||") : [value]).filter((kw) =>
+				kw.match(/^[a-z]./),
+			);
+
+			if (keywords.length > 0) acc.push(keywords);
 			return acc;
-		}, [])
+		}, []);
+	if (alfredKeywords.includes(queryFirstWord)) return;
 
 	//───────────────────────────────────────────────────────────────────────────
 
