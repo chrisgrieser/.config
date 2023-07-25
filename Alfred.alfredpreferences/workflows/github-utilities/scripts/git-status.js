@@ -82,7 +82,7 @@ function run() {
 					},
 					ctrl: {
 						subtitle: "⌃: Diff Changes in Terminal",
-						arg: `git diff "${pathInRepo}"`,
+						arg: `cd "${repoPath}" && git diff "${pathInRepo}"`,
 					},
 					cmd: {
 						subtitle: isDeleted ? "🚫 Cannot open, because the file is deleted." : "⌥: Open File",
