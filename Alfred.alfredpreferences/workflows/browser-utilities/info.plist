@@ -168,6 +168,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D08A57FD-FECC-413A-8C0C-9000B0B56F6A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FCE409B4-6AF4-4E92-AAAE-97E55636E8AE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -225,9 +238,9 @@
 				<key>keyword</key>
 				<string>paywall</string>
 				<key>subtext</key>
-				<string>12ft.io &amp; Spaywall</string>
+				<string>Current Tab</string>
 				<key>text</key>
-				<string>Skip Paywall of current Tab</string>
+				<string>Skip Paywall (12ft.io &amp; Spaywall)</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -308,52 +321,56 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
+
+-- funktioniert auch mit der Youtube Webapp</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>check-if-page-is-down.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>692B8788-C546-49E7-B8EC-A569E3DD97B0</string>
+			<string>FCE409B4-6AF4-4E92-AAAE-97E55636E8AE</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>keyword</key>
-				<string>user rules</string>
+				<string>down</string>
 				<key>subtext</key>
-				<string>Adguard</string>
+				<string>Current Tab</string>
 				<key>text</key>
-				<string>User Rules</string>
+				<string>Down for Everyone or just me?</string>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>AADFC524-047E-4638-ABAA-646CEC90599D</string>
+			<string>D08A57FD-FECC-413A-8C0C-9000B0B56F6A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html#user-filter</string>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>D909DE7E-1D08-42B3-B048-039BDE823F44</string>
+			<string>692B8788-C546-49E7-B8EC-A569E3DD97B0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -426,6 +443,111 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<string>C65CD77E-C2B3-4063-B045-C1954E7FE033</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>user rules</string>
+				<key>subtext</key>
+				<string>Adguard</string>
+				<key>text</key>
+				<string>User Rules</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>AADFC524-047E-4638-ABAA-646CEC90599D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html#user-filter</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>D909DE7E-1D08-42B3-B048-039BDE823F44</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># get first URL from JSON
+# has to be done in Alfred, since Alfred environment variables are needed
+
+# small leeway getting lines 3-6, since line numbers sometimes shift
+./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2C5107E7-5DCF-4F55-AEA9-5EC828CEFB91</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{var:url}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>EF862FA4-82AA-45A8-9EE8-565A0225BDEB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>re-open-last-tab</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>A2BFEBF8-7A2E-4CFD-BA3A-81E700DE84ED</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -550,69 +672,6 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># get first URL from JSON
-# has to be done in Alfred, since Alfred environment variables are needed
-
-# small leeway getting lines 3-6, since line numbers sometimes shift
-./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",'</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2C5107E7-5DCF-4F55-AEA9-5EC828CEFB91</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{var:url}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>EF862FA4-82AA-45A8-9EE8-565A0225BDEB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>re-open-last-tab</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>A2BFEBF8-7A2E-4CFD-BA3A-81E700DE84ED</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -627,7 +686,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>720</real>
 		</dict>
 		<key>1F170814-90DD-485E-A861-757A4FD92606</key>
 		<dict>
@@ -638,16 +697,16 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>580</real>
 		</dict>
 		<key>2C5107E7-5DCF-4F55-AEA9-5EC828CEFB91</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>655</real>
+			<real>710</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>425</real>
 		</dict>
 		<key>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</key>
 		<dict>
@@ -685,7 +744,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>580</real>
 		</dict>
 		<key>73794C72-64EA-441F-BE9A-67FB5F1A885C</key>
 		<dict>
@@ -705,14 +764,14 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>720</real>
 		</dict>
 		<key>97E52210-B26B-49B3-AC6D-65A1235A88C9</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>635</real>
+			<real>625</real>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
@@ -726,9 +785,9 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 BACKUP
 for when browser history search workflow updates</string>
 			<key>xpos</key>
-			<real>505</real>
+			<real>560</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>425</real>
 		</dict>
 		<key>AADFC524-047E-4638-ABAA-646CEC90599D</key>
 		<dict>
@@ -737,14 +796,16 @@ for when browser history search workflow updates</string>
 			<key>note</key>
 			<string>adguard user rules</string>
 			<key>xpos</key>
-			<real>460</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>420</real>
 		</dict>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
+			<key>note</key>
+			<string>try to skip paywall</string>
 			<key>xpos</key>
 			<real>460</real>
 			<key>ypos</key>
@@ -766,7 +827,7 @@ for when browser history search workflow updates</string>
 			<key>xpos</key>
 			<real>335</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>580</real>
 		</dict>
 		<key>C65CD77E-C2B3-4063-B045-C1954E7FE033</key>
 		<dict>
@@ -779,23 +840,45 @@ for when browser history search workflow updates</string>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
+		<key>D08A57FD-FECC-413A-8C0C-9000B0B56F6A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>check if page is down</string>
+			<key>xpos</key>
+			<real>460</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
 		<key>D909DE7E-1D08-42B3-B048-039BDE823F44</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>635</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>420</real>
 		</dict>
 		<key>EF862FA4-82AA-45A8-9EE8-565A0225BDEB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>815</real>
+			<real>870</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>425</real>
+		</dict>
+		<key>FCE409B4-6AF4-4E92-AAAE-97E55636E8AE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>get Browser URL</string>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>160</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

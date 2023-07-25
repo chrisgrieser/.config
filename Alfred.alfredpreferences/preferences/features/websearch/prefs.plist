@@ -72,19 +72,6 @@
 			<key>url</key>
 			<string>https://chrome.google.com/webstore/search/{query}</string>
 		</dict>
-		<key>84F64B41-9C2A-49F0-AAB4-E6FFB0BCB143</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>down</string>
-			<key>text</key>
-			<string>Down For Everyone or Just Me?</string>
-			<key>url</key>
-			<string>https://downforeveryoneorjustme.com/{query}</string>
-			<key>utf8</key>
-			<true/>
-		</dict>
 		<key>9672465E-E164-4221-9824-0E164A40E39B</key>
 		<dict>
 			<key>enabled</key>
