@@ -245,7 +245,7 @@ local config = {
 
 	-- Size
 	adjust_window_size_when_changing_font_size = false,
-	line_height = 1.1,
+	line_height = 1,
 
 	-- Appearance
 	audible_bell = "Disabled",

@@ -13,6 +13,13 @@ function copy-location() {
 }
 zle -N copy-location
 
+# kills complete line, instead of just to beginning (^U) or end of a line (^K)
+function kill-full-line () {
+	zle end-of-line
+	zle vi-kill-line
+}
+zle -N kill-full-line
+
 # Cycle through Directories
 function grappling-hook () {
 	local to_open="$WD"
@@ -28,7 +35,6 @@ function grappling-hook () {
 }
 zle -N grappling-hook
 
-
 #───────────────────────────────────────────────────────────────────────────────
 # INFO BINDINGS FOR WIDGETS
 # - use `ctrl-v` and then a key combination to get the shell binding
@@ -41,7 +47,7 @@ function zvm_after_init() {
 	bindkey -M viins '^P' copy-location
 	bindkey -M viins '^B' copy-buffer
 	bindkey -M viins "^O" grappling-hook # bound to cmd+enter via wezterm
-	bindkey -M viins "^F" grappling-hook # bound to cmd+enter via wezterm
+	bindkey -M viins "^U" kill-full-line
 }
 bindkey -M viins "…" insert-last-word # …=alt+.
 bindkey -M viins "^Z" undo # cmd+z via wezterm
