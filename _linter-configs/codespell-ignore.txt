@@ -9,3 +9,6 @@ termine
 # too many false positives
 bu
 caf
+
+# actually a plugin name :S
+noice
