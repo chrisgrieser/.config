@@ -215,8 +215,8 @@ end, { desc = "󱁐 Use Spaces" })
 keymap({ "n", "x" }, "U", "<C-r>", { desc = "󰑎 Redo" }) -- remap for highlight-undo.nvim
 -- stylua: ignore
 keymap("n", "<leader>ur", function() cmd.later(tostring(vim.opt.undolevels:get())) end, { desc = "󰛒 Redo All" })
-keymap("n", "<leader>uh", ":Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Undo (Reset) Hunk" })
-keymap("n", "<leader>ub", ":Gitsigns reset_buffer<CR>", { desc = "󰕌 󰊢 Undo (Reset) Buffer" })
+keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Undo (Reset) Hunk" })
+keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰕌 󰊢 Undo (Reset) Buffer" })
 
 -- save open time for each buffer
 autocmd("BufReadPost", {
@@ -257,8 +257,10 @@ keymap("n", "<Left>", function()
 end, { desc = "Move Char Left", expr = true })
 
 -- stylua: ignore start
-keymap("x", "<Down>", [[<cmd>move '>+1<CR>:normal! gv=gv<CR>]], { desc = "󰜮 Move selection down" })
-keymap("x", "<Up>", [[<cmd>move '<-2<CR>:normal! gv=gv<CR>]], { desc = "󰜷 Move selection up" })
+-- INFO cannot use `<cmd>` for these two, as the '> would not be set when not
+-- leaving visual mode
+keymap("x", "<Down>", [[:move '>+1<CR><cmd>normal! gv=gv<CR>]], { desc = "󰜮 Move selection down" })
+keymap("x", "<Up>", [[:move '<-2<CR><cmd>normal! gv=gv<CR>]], { desc = "󰜷 Move selection up" })
 -- stylua: ignore end
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" })

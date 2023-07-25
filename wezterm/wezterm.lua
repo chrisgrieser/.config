@@ -178,15 +178,18 @@ local keybindings = {
 --------------------------------------------------------------------------------
 -- TAB TITLE
 
--- prefers the title that was set via `tab:set_title()` or `wezterm cli
--- set-tab-title`, but falls back to the title of the active pane in that tab
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab, _, _, _, _, _)
+	-- prefers the title that was set via `tab:set_title()` or `wezterm cli
+	-- set-tab-title`
 	local title = tab.tab_title
 	if not title or title == "" then title = tab.active_pane.title end
-	if title == "zsh" or title == "wezterm" then title = "Terminal" end
 
-	return "  " .. title .. "  "
+	-- falls back to basefolder of pwd
+	local pwdBasefolder = tab.active_pane.current_working_dir:gsub(".*/(.*)/$", "%1"):gsub("%%20", " ")
+	if title == "zsh" or title == "wezterm" then title = pwdBasefolder end
+
+	return " 「" .. title .. " 」"
 end)
 
 -- WINDOW TITLE
