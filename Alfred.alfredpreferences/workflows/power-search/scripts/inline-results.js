@@ -8,17 +8,12 @@ app.includeStandardAdditions = true;
 
 // CONFIG
 const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
+const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
 let resultsToFetch = parseInt($.getenv("inline_results_to_fetch"));
 if (resultsToFetch < 1) resultsToFetch = 1;
 else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
 
 //──────────────────────────────────────────────────────────────────────────────
-
-/** @typedef {Object} DdgrSearchResult
- * @property {string} title
- * @property {string} abstract
- * @property {string} url
- */
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
@@ -51,23 +46,25 @@ function run(argv) {
 	// Guard clause 2: first word of query is alfred keyword
 	// INFO no need for caching, since this only seems to take ~90ms with > 50
 	// workflows installed
-	const queryFirstWord = query.match(/^\S+/)[0];
-	const alfredKeywords = app
-		.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
-		.split("\r")
-		.reduce((acc, line) => {
-			const value = line.split(">")[1].split("<")[0];
+	if (ignoreAlfredKeywords) {
+		const queryFirstWord = query.match(/^\S+/)[0];
+		const alfredKeywords = app
+			.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
+			.split("\r")
+			.reduce((acc, line) => {
+				const value = line.split(">")[1].split("<")[0];
 
-			// `||` delimites keyword alternatives https://www.alfredapp.com/help/workflows/advanced/keywords/
-			// only letter keywords and > 2 chars relevant
-			// TODO implement {var:alfred_var}
-			const keywords = (value.includes("||") ? value.split("||") : [value]).filter((kw) =>
-				kw.match(/^[a-z]../),
-			);
-			acc.push(...keywords);
-			return acc;
-		}, []);
-	if (alfredKeywords.includes(queryFirstWord)) return;
+				// `||` delimites keyword alternatives https://www.alfredapp.com/help/workflows/advanced/keywords/
+				// only letter keywords and > 2 chars relevant
+				// TODO implement {var:alfred_var}
+				const keywords = (value.includes("||") ? value.split("||") : [value]).filter((kw) =>
+					kw.match(/^[a-z]../),
+				);
+				acc.push(...keywords);
+				return acc;
+			}, []);
+		if (alfredKeywords.includes(queryFirstWord)) return;
+	}
 
 	//───────────────────────────────────────────────────────────────────────────
 
@@ -90,7 +87,7 @@ function run(argv) {
 	// in restricting the number of results for performance (25 is ddgr's maximum)
 	const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
 	const responseJson = JSON.parse(app.doShellScript(ddgrCommand));
-	const newResults = responseJson.map((/** @type {DdgrSearchResult} */ item) => {
+	const newResults = responseJson.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
 		return {
 			title: item.title,
 			subtitle: item.url,
@@ -103,6 +100,7 @@ function run(argv) {
 		};
 	});
 
+	// Measuring execution time
 	if ($.getenv("alfred_debug") === "1") {
 		const durationTotal = (+new Date() - timelogStart) / 1000;
 		console.log("total: ", durationTotal, "s");

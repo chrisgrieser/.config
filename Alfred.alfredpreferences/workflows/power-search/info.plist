@@ -3092,6 +3092,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>Logging</string>
 			<key>xpos</key>
 			<real>915</real>
 			<key>ypos</key>
@@ -3228,6 +3230,25 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>popupbutton</string>
 			<key>variable</key>
 			<string>search_site</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Recommended</string>
+			</dict>
+			<key>description</key>
+			<string>When a keyword from another workflow is shown, this workflow will not be triggered.</string>
+			<key>label</key>
+			<string>Ignore Alfred Keywords</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>ignore_alfred_keywords</string>
 		</dict>
 		<dict>
 			<key>config</key>

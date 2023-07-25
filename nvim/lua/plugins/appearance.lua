@@ -13,8 +13,7 @@ local colorPickerFts = {
 return {
 	{ -- UI overhaul for messages
 		"folke/noice.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify",
-		},
+		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		event = "UIEnter",
 		opts = {},
 	},
