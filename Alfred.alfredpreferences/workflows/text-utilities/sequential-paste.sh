@@ -9,11 +9,11 @@ reset_mins="2"
 
 if [[ "$1" == 'reset' ]]; then
 	rm "${count_file}"
-	exit 0
+	return 0
 fi
 
 if [[ ! -f "$count_file" || "$(find "${count_file}" -mmin +"${reset_mins}")" ]]; then
-	count=0
+	count=1
 else
 	count=$(cat "$count_file")
 	count=$((count + 1))

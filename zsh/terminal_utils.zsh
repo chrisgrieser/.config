@@ -32,7 +32,10 @@ function o() {
 
 # show files + git status + brief git log
 function inspect() {
+	# config
 	local gitlog_count=6
+	local max_lines_for_files=40
+
 	[[ $(tput lines) -gt 20 ]] || return 0 # don't use in embedded terminals, since too small
 	if ! command -v exa &>/dev/null; then printf "\033[1;33mexa not installed.\033[0m" && return 1; fi
 	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
@@ -45,12 +48,8 @@ function inspect() {
 			separator
 		fi
 	fi
-	local filecount
-	filecount=$(find . -maxdepth 1 -mindepth 1 -not -name '.git' -not -name '.DS_Store' | wc -l)
-	if [[ $filecount -lt 40 ]]; then
-		exa --all --icons --sort=name --group-directories-first \
-			--git-ignore --ignore-glob=.DS_Store
-	fi
+	exa --all --icons --sort=name --group-directories-first \
+			--git-ignore --ignore-glob=.DS_Store | head -n$max_lines_for_files
 	echo
 }
 
