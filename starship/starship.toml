@@ -61,7 +61,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 "~/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
 
 [custom.folder_number]
-command = "find . -maxdepth 1 -mindepth 1 -not -name '.git' -not -name '.DS_Store' | wc -l"
+command = "find . -depth 1 -not -name '.git' -not -name '.DS_Store' | wc -l"
 when = "true"
 symbol = " "
 description = "Number of files (and folders) in the current working directory"

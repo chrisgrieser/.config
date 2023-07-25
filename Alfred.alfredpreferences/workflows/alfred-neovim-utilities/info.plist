@@ -345,6 +345,76 @@ Search neovim plugins and online :help via Alfred</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:help_search}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/neovim-help-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search neovim :help</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>14ECFC26-C670-4D39-9A5C-C24B452554F2</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>FB617FEA-F94F-4A13-8327-5EC723FD66AB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>soundname</key>
 				<string>Blow</string>
 				<key>systemsound</key>
@@ -375,112 +445,6 @@ Search neovim plugins and online :help via Alfred</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>8A1F6028-B56D-4223-8008-F364B73183A5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:old_search}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/nvim-recent-files.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Vim Old Files</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>6EBCF2CC-4936-48C4-BCD8-42A7B39BDEDC</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>F178F3ED-E855-4DC9-A178-D839E9C2C48D</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>This may take up to a minute.</string>
-				<key>title</key>
-				<string>⏳Re-Creating Index</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>7AA41F32-E0D9-4117-8B57-8F7C942E07D7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>FB617FEA-F94F-4A13-8327-5EC723FD66AB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -527,51 +491,23 @@ Search neovim plugins and online :help via Alfred</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>{var:help_search}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/neovim-help-search.js</string>
-				<key>subtext</key>
-				<string></string>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>This may take up to a minute.</string>
 				<key>title</key>
-				<string>Search neovim :help</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
+				<string>⏳Re-Creating Index</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>14ECFC26-C670-4D39-9A5C-C24B452554F2</string>
+			<string>7AA41F32-E0D9-4117-8B57-8F7C942E07D7</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -637,6 +573,70 @@ Search neovim plugins and online :help via Alfred</string>
 			<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:old_search}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/nvim-recent-files.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Vim Old Files</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>6EBCF2CC-4936-48C4-BCD8-42A7B39BDEDC</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>F178F3ED-E855-4DC9-A178-D839E9C2C48D</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -935,9 +935,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>online plugin search</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>525</real>
 		</dict>
 		<key>14ECFC26-C670-4D39-9A5C-C24B452554F2</key>
 		<dict>
@@ -946,18 +946,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>neovim docs. Requires running `:vim` first</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>20</real>
 		</dict>
 		<key>15317DBA-B342-4CB9-9F08-0CBA70D39C07</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>220</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>135</real>
 		</dict>
 		<key>22C3A292-BE41-47F8-9B47-543D7C9E4AC1</key>
 		<dict>
@@ -975,27 +975,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>open help page</string>
 			<key>xpos</key>
-			<real>325</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>370</real>
 		</dict>
 		<key>38E62E4E-8B37-483B-BBE3-257C2DD7EA30</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>355</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>135</real>
 		</dict>
 		<key>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>325</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>255</real>
 		</dict>
 		<key>6EBCF2CC-4936-48C4-BCD8-42A7B39BDEDC</key>
 		<dict>
@@ -1004,9 +1004,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>recent files</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>665</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>415</real>
 		</dict>
 		<key>711DEF51-292E-4367-94F7-C38BEF4B6FB6</key>
 		<dict>
@@ -1015,9 +1015,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>installed plugin search</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>970</real>
+			<real>780</real>
 		</dict>
 		<key>71D977C5-6C8A-47D2-A625-4E3E79D785D2</key>
 		<dict>
@@ -1037,9 +1037,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>issue search GitHub</string>
 			<key>xpos</key>
-			<real>325</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>505</real>
 		</dict>
 		<key>7AA41F32-E0D9-4117-8B57-8F7C942E07D7</key>
 		<dict>
@@ -1075,9 +1075,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>no default branch</string>
 			<key>xpos</key>
-			<real>475</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>830</real>
+			<real>640</real>
 		</dict>
 		<key>D6E5E105-38E3-4BC1-90E3-52BEE556349D</key>
 		<dict>
@@ -1086,9 +1086,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy url</string>
 			<key>xpos</key>
-			<real>325</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>970</real>
+			<real>780</real>
 		</dict>
 		<key>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</key>
 		<dict>
@@ -1097,18 +1097,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>open local folder</string>
 			<key>xpos</key>
-			<real>320</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>1115</real>
+			<real>925</real>
 		</dict>
 		<key>D9E07FDE-1870-42B0-B6D4-AA209906679E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>265</real>
+			<real>270</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>535</real>
 		</dict>
 		<key>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</key>
 		<dict>
@@ -1117,18 +1117,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy repo name for plugin managers</string>
 			<key>xpos</key>
-			<real>325</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>830</real>
+			<real>640</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>840</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>415</real>
 		</dict>
 		<key>F5BC25CE-C34C-4EF9-B428-71EDB9170948</key>
 		<dict>
@@ -1137,27 +1137,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>no default branch</string>
 			<key>xpos</key>
-			<real>475</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>370</real>
 		</dict>
 		<key>F9A20C61-953A-4498-8DBA-0DDCF26A94A3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>475</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>505</real>
 		</dict>
 		<key>FB617FEA-F94F-4A13-8327-5EC723FD66AB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>220</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>20</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1250,16 +1250,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>~/.local/share/nvim/site/pack/packer</string>
+				<string>~/.local/share/nvim/lazy</string>
 				<key>filtermode</key>
 				<integer>1</integer>
 				<key>placeholder</key>
-				<string></string>
+				<string>~/.local/share/nvim/lazy</string>
 				<key>required</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>description</key>
-			<string>Path where the "start" and "opt" folder are located. Default value is the default packer installation path on macOS. Required for searching installed plugins.</string>
+			<string>Path where the "start" and "opt" folder are located, mostly depending on the plugin manager you use. Default value is the default path for lazy.nvim. Required for searching installed plugins.</string>
 			<key>label</key>
 			<string>Plugin Installation Path</string>
 			<key>type</key>

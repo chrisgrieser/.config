@@ -39,7 +39,7 @@ function inspect() {
 	# columns needs to be set, since exa print as --oneline if piped https://github.com/ogham/exa/issues/522
 	local exa_output terminal_width
 	terminal_width=$(tput cols)
-	exa_output=$(COLUMNS=$terminal_width && exa --all --grid --color=always --icons \
+	exa_output=$(export COLUMNS=$terminal_width && exa --all --grid --color=always --icons \
 		--sort=name --group-directories-first --git-ignore --ignore-glob=.DS_Store)
 	if [[ $(echo "$exa_output" | wc -l) -gt $max_files_lines ]]; then
 		echo "$exa_output" | head -n$max_files_lines
