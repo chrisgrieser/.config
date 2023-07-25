@@ -32,24 +32,33 @@ function o() {
 
 # show files + git status + brief git log
 function inspect() {
-	# config
-	local gitlog_count=6
-	local max_lines_for_files=40
+	local max_gitlog_lines=6
+	local max_files_lines=10
 
 	[[ $(tput lines) -gt 20 ]] || return 0 # don't use in embedded terminals, since too small
 	if ! command -v exa &>/dev/null; then printf "\033[1;33mexa not installed.\033[0m" && return 1; fi
 	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		gitlog $gitlog_count
+		gitlog $max_gitlog_lines
 		separator
 		if [[ -n "$(git status --short --porcelain)" ]]; then
 			git status --short # run again for color
 			separator
 		fi
 	fi
-	exa --all --icons --sort=name --group-directories-first \
-			--git-ignore --ignore-glob=.DS_Store | head -n$max_lines_for_files
+
+	local exa_output terminal_width
+	terminal_width=$(tput cols) # needs to be set, since exa print as --oneline if piped
+	exa_output=$(COLUMNS=$terminal_width && exa --all --grid --color=always --icons \
+		--sort=name --group-directories-first --git-ignore --ignore-glob=.DS_Store)
+	if [[ $(echo "$exa_output" | wc -l) -gt $max_files_lines ]]; then
+		echo "$exa_output" | head -n$max_files_lines  
+		print "\033[1;34m(…)\033[0m" # blue = exa 
+	else
+		echo "$exa_output"
+	fi
+
 	echo
 }
 
@@ -93,6 +102,7 @@ function ..d() {
 
 # draws a separator line with terminal width
 function separator() {
+	local terminal_width
 	local sep=""
 	terminal_width=$(tput cols)
 	for ((i = 0; i < terminal_width; i++)); do

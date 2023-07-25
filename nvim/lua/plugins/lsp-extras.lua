@@ -103,8 +103,8 @@ return {
 						["j"] = actions.next_location, -- `.next` goes to next item, `.next_location` skips groups
 						["k"] = actions.previous_location,
 
-						-- see https://github.com/DNLHC/glance.nvim/pull/60
-						["<D-s>"] = actions.quickfix("no-open"), -- consistent with the respective keymap for telescope
+						-- SEE https://github.com/DNLHC/glance.nvim/pull/60
+						["<D-s>"] = actions.quickfix, -- consistent with the respective keymap for telescope
 					},
 					preview = {
 						["<C-CR>"] = actions.enter_win("list"),
