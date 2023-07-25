@@ -1,5 +1,5 @@
 # https://espanso.org/docs/configuration/app-specific-configurations/
-filter_class: com.mimestream.Mimestream|com.brave.Browser|com.vivaldi.Vivaldi
+filter_class: com.mimestream.Mimestream
 
 extra_includes:
   - "../match/_email.yml"

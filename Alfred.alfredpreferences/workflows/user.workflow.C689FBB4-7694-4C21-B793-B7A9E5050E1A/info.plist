@@ -76,6 +76,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>matchstring</key>
+				<string>https://news.ycombinator.com/item?id=</string>
+				<key>replacestring</key>
+				<string>https://dstill.ai/hackernews/item/</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>782F9857-03E9-4209-9188-84C0E4ADDFD3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -190,6 +207,17 @@ only active when there is a query</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>85</real>
+		</dict>
+		<key>782F9857-03E9-4209-9188-84C0E4ADDFD3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>replace ycombinator with dstill frontend</string>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>40</real>
 		</dict>
 		<key>D2B5D0D6-F45C-49B4-A850-BCC2198A6604</key>
 		<dict>

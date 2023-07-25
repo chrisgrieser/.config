@@ -149,7 +149,7 @@ end)
 --------------------------------------------------------------------------------
 -- FIX pin to top not working yet in Ivory https://tapbots.social/@ivory/110651107834916828
 if env.tickerApp == "Ivory" then
-	local reloadMins = 4
+	local reloadMins = 3
 	IvoryReloadTimer = hs.timer
 		.doEvery(reloadMins * 60, function()
 			local app = u.app(env.tickerApp)

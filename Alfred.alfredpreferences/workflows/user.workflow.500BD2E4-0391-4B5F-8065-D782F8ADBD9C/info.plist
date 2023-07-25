@@ -8,13 +8,26 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>0AF6734A-81B7-4ECE-868F-8429FE5BECED</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>50B4021B-BEB3-47B4-AE36-70254E107434</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>50B4021B-BEB3-47B4-AE36-70254E107434</key>
 		<array/>
 		<key>81D415C5-CA65-4F79-9F94-BC4161B14D81</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>50B4021B-BEB3-47B4-AE36-70254E107434</string>
+				<string>0AF6734A-81B7-4ECE-868F-8429FE5BECED</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -135,6 +148,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>matchstring</key>
+				<string>https://news.ycombinator.com/item?id=</string>
+				<key>replacestring</key>
+				<string>https://dstill.ai/hackernews/item/</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>0AF6734A-81B7-4ECE-868F-8429FE5BECED</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>tasksettings</key>
 				<dict>
 					<key>target_path</key>
@@ -182,6 +212,17 @@ Press &lt;kbd&gt;↩&lt;/kbd&gt; to open the linked website or &lt;kbd&gt;⌥&lt
 News are fetched if it’s been over an hour since the last run. An immediate cache rebuild can be forced with &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt;.</string>
 	<key>uidata</key>
 	<dict>
+		<key>0AF6734A-81B7-4ECE-868F-8429FE5BECED</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>replace ycombinator with dstill frontend</string>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>55</real>
+		</dict>
 		<key>50B4021B-BEB3-47B4-AE36-70254E107434</key>
 		<dict>
 			<key>xpos</key>
