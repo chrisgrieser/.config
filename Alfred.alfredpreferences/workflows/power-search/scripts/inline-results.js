@@ -8,7 +8,6 @@ app.includeStandardAdditions = true;
 
 // CONFIG
 const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
-
 let resultsToFetch = parseInt($.getenv("inline_results_to_fetch"));
 if (resultsToFetch < 1) resultsToFetch = 1;
 else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
@@ -24,38 +23,14 @@ else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	// Check values from previous runs this session
+	const timelogStart = +new Date();
+
+	// Query + values from previous run
 	const query = argv[0];
 	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js;
 	const oldResults = JSON.parse(
 		$.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]",
 	);
-
-	// Guard clause 1: query too short
-	if (query.length < 3) return;
-
-	// Guard clauses 2: firsts word of query is Alfred keyword
-	const queryFirstWord = query.match(/^\S+/)[0];
-	const alfredKeywords = app
-		.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
-		.split("\r")
-		.reduce((acc, line) => {
-			const value = line.split(">")[1].split("<")[0];
-
-			// `||` delimites keyword alternatives https://www.alfredapp.com/help/workflows/advanced/keywords/
-			// only letter keywords relevant, and longer than 1 char (which are this workflows keywords anyway)
-			// TODO implement {var:alfred_var}
-			const keywords = (value.includes("||") ? value.split("||") : [value]).filter((kw) =>
-				kw.match(/^[a-z]./),
-			);
-
-			if (keywords.length > 0) acc.push(keywords);
-			return acc;
-		}, []);
-	if (alfredKeywords.includes(queryFirstWord)) return;
-
-	//───────────────────────────────────────────────────────────────────────────
-
 	const searchForQuery = {
 		title: query,
 		uid: query,
@@ -67,6 +42,34 @@ function run(argv) {
 			},
 		},
 	};
+
+	//───────────────────────────────────────────────────────────────────────────
+
+	// Guard clause 1: query less than 3 chars
+	if (query.length < 3) return;
+
+	// Guard clause 2: first word of query is alfred keyword
+	// INFO no need for caching, since this only seems to take ~90ms with > 50
+	// workflows installed
+	const queryFirstWord = query.match(/^\S+/)[0];
+	const alfredKeywords = app
+		.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
+		.split("\r")
+		.reduce((acc, line) => {
+			const value = line.split(">")[1].split("<")[0];
+
+			// `||` delimites keyword alternatives https://www.alfredapp.com/help/workflows/advanced/keywords/
+			// only letter keywords and > 2 chars relevant
+			// TODO implement {var:alfred_var}
+			const keywords = (value.includes("||") ? value.split("||") : [value]).filter((kw) =>
+				kw.match(/^[a-z]../),
+			);
+			acc.push(...keywords);
+			return acc;
+		}, []);
+	if (alfredKeywords.includes(queryFirstWord)) return;
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	// USE OLD RESULTS
 	// If the user is typing, return early to guarantee the top entry is the currently typed query
@@ -99,6 +102,11 @@ function run(argv) {
 			},
 		};
 	});
+
+	if ($.getenv("alfred_debug") === "1") {
+		const durationTotal = (+new Date() - timelogStart) / 1000;
+		console.log("total: ", durationTotal, "s");
+	}
 
 	return JSON.stringify({
 		skipknowledge: true,

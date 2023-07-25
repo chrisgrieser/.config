@@ -178,7 +178,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>alfred cache</string>
+				<string>alfred</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -264,7 +264,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>alfred data</string>
+				<string>alfred</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
