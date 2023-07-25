@@ -15,6 +15,5 @@ else
 	git clone --depth=1 --filter="blob:none" "$url" || return 1
 fi
 
-# Browse
-echo -n "$LOCAL_REPOS/$reponame" # open in terminal via Alfred
-open "$LOCAL_REPOS/$reponame"
+# Open in terminal via Alfred
+echo -n "$LOCAL_REPOS/$reponame" 

@@ -9,7 +9,7 @@ function h() {
 	local darkstyle="monokai"
 	defaults read -g AppleInterfaceStyle &>/dev/null && style="$darkstyle" || style="$lightstyle"
 
-	query=$(echo "$*" | sed 's/ /\//' | tr " " "+") # first space → /, all other spaces "+" for url
+	query=$(echo "$*" | tr " " "-") # dash as separator for subcommands, e.g. git-rebase
 	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
 		curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
 		pane_id=$(wezterm cli spawn -- less "/tmp/$query")
@@ -54,7 +54,7 @@ function man() {
 			pane_id=$(wezterm cli spawn -- bat --style=plain --language=man /usr/share/zsh/*/help/"$command")
 		fi
 	else
-		if ! command man -w "$command" &>/dev/null ; then
+		if ! command man -w "$command" &>/dev/null; then
 			print "\033[1;33mNo manpage found.\033[0m"
 			return 1
 		fi
@@ -102,10 +102,10 @@ export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
 export LESS='-R --incsearch --ignore-case --window=-3 --no-init --tilde' # --ignore-case is actually smart case
-export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
+export LESSHISTFILE=-                                                    # don't clutter home directory with useless `.lesshst` file
 
 # Keybindings
-# INFO 
+# INFO
 # - macOS currently ships less v.581, which lacks the ability to read lesskey
 #   source files. Therefore for this to work, the version of less provided by
 #   homebrew is needed (v.633)
