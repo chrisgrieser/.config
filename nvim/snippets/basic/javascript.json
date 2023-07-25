@@ -107,11 +107,11 @@
 	},
 	".map ( => )": {
 		"prefix": ".map ( => )",
-		"body": ".map(${1:item} => ${1:item})"
+		"body": ".map(${1:item} => ${1:item}$0)"
 	},
 	"filter (array)": {
 		"prefix": ".filter (array)",
-		"body": ".filter(${1:item} => ${1:item})"
+		"body": ".filter(${1:item} => ${1:item}$0)"
 	},
 	".sort (array)": {
 		"prefix": ".sort (array)",
