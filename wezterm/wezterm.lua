@@ -102,11 +102,13 @@ local keybindings = {
 	{ key = "Enter", mods = "CTRL", action = act.ActivateTabRelative(1) },
 	{ key = "v", mods = "CMD", action = actFun(autoQuotePastedUrls) },
 
-	-- using the mapping from the terminal_keybindings.zsh
+	-- INFO using the mapping from the terminal_keybindings.zsh
 	-- undo
 	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
-	-- Grappling-hook (directory cycler, defined in terminal_keybindings.zsh)
+	-- Grappling-hook
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
+	-- accept autosuggestion
+	{ key = "s", mods = "CMD", action = act.SendKey { key = "x", mods = "CTRL" } },
 
 	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
 	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
@@ -174,17 +176,25 @@ local keybindings = {
 }
 
 --------------------------------------------------------------------------------
--- TAB FORMATTING
+-- TAB TITLE
+
+-- prefers the title that was set via `tab:set_title()` or `wezterm cli
+-- set-tab-title`, but falls back to the title of the active pane in that tab
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab, _, _, _, _, _)
-	-- prefers the title that was set via `tab:set_title()` or `wezterm cli
-	-- set-tab-title`, but falls back to the title of the active pane in that tab
 	local title = tab.tab_title
 	if not title or title == "" then title = tab.active_pane.title end
 	if title == "zsh" or title == "wezterm" then title = "Terminal" end
 
-	title = "  " .. title .. "  "
-	return { { Text = title } }
+	return "  " .. title .. "  "
+end)
+
+-- WINDOW TITLE
+-- sets the window title to PWD
+-- https://wezfurlong.org/wezterm/config/lua/window-events/format-window-title
+wt.on("format-window-title", function(_, pane, _, _, _)
+	local pwd = pane.current_working_dir:gsub("^file://[^/]+", ""):gsub("%%20", " ")
+	return pwd
 end)
 
 --------------------------------------------------------------------------------
@@ -236,7 +246,7 @@ local config = {
 	-- - even though symbols and nerd font are bundled with wezterm, some
 	--   icons have a sizing issues, therefore explicitly using the Nerd Font here
 	-- - some nerd font requires a space after them to be properly sized
-	font = wt.font("Iosevka Fixed", {weight = "Medium"}),
+	font = wt.font("Iosevka Fixed", { weight = "Medium" }),
 	-- font = wt.font("JetBrainsMonoNL Nerd Font", {weight = "Medium"}),
 
 	font_size = isAtMother and 26 or 28,

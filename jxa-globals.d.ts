@@ -14,6 +14,18 @@ declare class macAppObj {
 	activate(): void;
 	quit(): void;
 	launch(): void;
+
+	menuBars: {
+		menuBarItems: {
+			byName(menuName: string): {
+				menuItems: {
+					byName(itemName: string): {
+						click(): void;
+					};
+				};
+			}[];
+		};
+	}[];
 }
 
 declare function Path(filepath: string): object;
@@ -56,8 +68,8 @@ declare const Application: {
 	(name: "Finder"): macAppObj & {
 		// paths need to be wrapped for Finder: `Path(str)`
 		exists(wrappedPath: object): boolean;
-		open (wrappedPath: object): void;
-		reveal (wrappedPath: object): void; 
+		open(wrappedPath: object): void;
+		reveal(wrappedPath: object): void;
 		finderWindows: {
 			target: { url: () => string };
 		};
@@ -68,19 +80,21 @@ declare const Application: {
 			title(): string;
 			delete(): void;
 		};
-		createNote(options: macAppObj & {
-			text: string;
-			path?: string;
-			// rome-ignore lint/suspicious/noExplicitAny: todo
-			folder?: any;
-			ispath?: boolean;
-		}): void;
+		createNote(
+			options: macAppObj & {
+				text: string;
+				path?: string;
+				// rome-ignore lint/suspicious/noExplicitAny: todo
+				folder?: any;
+				ispath?: boolean;
+			},
+		): void;
 		folders: {
 			byName(folderName: string): Object;
 			length: number;
 		};
 	};
-	(name: "Alfred"|"com.runningwithcrayons.Alfred"): macAppObj & {
+	(name: "Alfred" | "com.runningwithcrayons.Alfred"): macAppObj & {
 		setConfiguration(envVar: string, options: Object): void;
 		revealWorkflow(workflowId: string): void; // workflow id = name of workflow folder
 	};
