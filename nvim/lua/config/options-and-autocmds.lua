@@ -215,8 +215,11 @@ autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost" }, {
 autocmd({ "InsertLeave", "TextChanged" }, {
 	pattern = "?*",
 	callback = function()
-		local debounceDelaySec = 3 -- save at most every x seconds
-		if bo.filetype == "css" then debounceDelaySec = 1 end -- for hot-reloading css
+		local debounceDelaySec = 4 -- save at most every x seconds
+
+		-- for hot-reloading css
+		local smallerThanRegularWin = (vim.opt.columns:get() < 65 or vim.opt.lines:get() < 20)
+		if bo.filetype == "css" and smallerThanRegularWin then debounceDelaySec = 1.5 end
 
 		local bufNo = api.nvim_get_current_buf()
 		local filepath = expand("%:p")
@@ -237,7 +240,7 @@ autocmd({ "InsertLeave", "TextChanged" }, {
 				local isInCmdline = vim.fn.getcmdtype():find("[/?]") ~= nil
 				if closedInMeantime or bufferChangedInMeantime or isInCmdline then return end
 
-				cmd("silent update " .. filepath)
+				cmd("noautocmd update " .. filepath)
 				api.nvim_buf_set_var(bufNo, "savingQueued", false)
 			end, 1000 * debounceDelaySec)
 		end
