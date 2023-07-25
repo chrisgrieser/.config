@@ -68,7 +68,7 @@ end
 ---@param ext string extension of the skeleton
 function M.applyTemplateIfEmptyFile(ext)
 
-	-- prevent duplicate application of template
+	-- prevent buggy duplicate application of template
 	if vim.b.templateWasApplied then return end
 	vim.b.templateWasApplied = true
 
@@ -87,7 +87,7 @@ function M.applyTemplateIfEmptyFile(ext)
 		local fileIsEmpty = vim.loop.fs_stat(filename).size < 4 -- account for linebreaks
 		if not fileIsEmpty then return end
 
-		vim.cmd("keepalt 0read " .. skeletonFile)
+		vim.cmd("silent keepalt 0read " .. skeletonFile)
 		M.normal("G")
 	end, 1)
 end
