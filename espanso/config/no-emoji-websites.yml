@@ -1,9 +1,0 @@
-# deactivate emojis on these *websites*, since they have their own emoji suggester
-# filter works based on window title
-# - GitHub: issues & PRs
-# - GitHub: editing markdown files
-# - Discord: fallback here to ensure Discord is recognized
-filter_title: Pull Request|Issue|md at main|md at master|Discord$
-
-extra_excludes:
-  - "../match/emoji-colon-autosuggestion.yml"
