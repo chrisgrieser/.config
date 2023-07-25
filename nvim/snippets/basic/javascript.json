@@ -87,6 +87,15 @@
 			"});"
 		]
 	},
+	".reduce()": {
+		"prefix": ".reduce()",
+		"body": [
+			".reduce((acc, ${1:item}) => {",
+			"\t$0",
+			"\treturn acc",
+			"}, ${2:initial_value})"
+		]
+	},
 	".map ( => {} )": {
 		"prefix": ".map ( => {} )",
 		"body": [
