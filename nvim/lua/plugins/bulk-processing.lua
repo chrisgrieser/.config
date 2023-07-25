@@ -107,25 +107,18 @@ return {
 				dapSharedKeymaps = true,
 			}
 
-			-- INFO inserting needed, to not disrupt existing lualine-segment
+			-- INFO inserting needed to not disrupt existing lualine-segment
 			local topSeparators = { left = "", right = "" }
-
 			local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
 			local lualineY = require("lualine").get_config().tabline.lualine_y or {}
-			table.insert(
-				lualineZ,
-				{ require("recorder").recordingStatus, section_separators = topSeparators }
-			)
-			table.insert(
-				lualineY,
-				{
-					require("recorder").displaySlots,
-					section_separators = topSeparators,
-					fmt = function (str)
-						return str:gsub("%[", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿")
-					end,
-				}
-			)
+			table.insert(lualineZ, {
+				require("recorder").recordingStatus,
+				section_separators = topSeparators,
+			})
+			table.insert(lualineY, {
+				require("recorder").displaySlots,
+				section_separators = topSeparators,
+			})
 
 			require("lualine").setup {
 				tabline = {
