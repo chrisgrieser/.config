@@ -12,10 +12,11 @@ alias push="git push"
 alias pull="git pull"
 alias gi='gh issue list'
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
+alias rel='make release'
 
 # Github Url: open & copy url
 function gu() {
-	url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
+	url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
 	echo "$url" | pbcopy
 	open "$url"
 }
@@ -79,7 +80,7 @@ function gitlog() {
 		-e 's/HEAD/󱍀 /g' \
 		-e 's/->/󰔰 /g' \
 		-e 's/tags: / )/' \
-		-e 's/, / · /g' 
+		-e 's/, / · /g'
 }
 
 # brief git log (only last 15)
