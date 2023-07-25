@@ -1,15 +1,7 @@
 local u = require("config.utils")
-local colorPickerFts = {
-	"css",
-	"scss",
-	"lua",
-	"sh",
-	"zsh",
-	"bash",
-}
+local colorPickerFts = { "css", "scss", "lua", "sh", "zsh", "bash" }
 
 --------------------------------------------------------------------------------
-
 
 return {
 	{ -- UI overhaul for messages
@@ -17,18 +9,25 @@ return {
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		event = "VeryLazy",
 		opts = {
+			routes = {
+
+
+
+			},
+			-- use cmp for cmdline completion since it has more sources
+			popupmenu = { backend = "cmp" },
 			lsp = {
-				signature = { enabled = false }, -- TODO figure out which plugins conflicts
-				progress = { enabled = false }, 
+				signature = { enabled = false }, -- TODO figure out how to make compatible
+				progress = { enabled = false }, -- too noisy
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
-					-- ["cmp.entry.get_documentation"] = true,
+					["cmp.entry.get_documentation"] = true,
 				},
 			},
-			-- you can enable a preset for easier configuration
 			presets = {
 				bottom_search = true,
+				command_palette = true, -- position the cmdline and popupmenu together
 				long_message_to_split = true,
 				inc_rename = true,
 				lsp_doc_border = true,
