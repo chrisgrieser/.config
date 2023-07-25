@@ -52,11 +52,7 @@ keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { des
 -- show current filetype & buftype
 keymap("n", "<leader>lf", function()
 	local icon = require("nvim-web-devicons").get_icon(fn.bufname(), bo.filetype)
-	if not icon then
-		icon = ""
-	else
-		icon = icon .. " "
-	end
+	icon = not icon and "" or icon .. " "
 	local out = ("filetype: %s%s"):format(icon, bo.filetype)
 	if bo.buftype ~= "" then out = out .. "\nbuftype: " .. bo.buftype end
 	vim.notify(out, u.trace)
@@ -77,14 +73,6 @@ keymap("n", "<leader>ln", function()
 	fn.setreg("+", msg)
 	vim.notify("Last Notification copied.\n" .. msg, u.trace)
 end, { desc = "󰘳 Copy Last Notification" })
-
--- copy [l]ast [m]essage
-keymap("n", "<leader>lm", function()
-	cmd.redir("@+")
-	cmd("silent! 1messages")
-	cmd.redir("END")
-	vim.notify("Last Message copied.\n" .. fn.getreg("+"), u.trace)
-end, { desc = "󰘳 Copy Last Message" })
 
 -- Dismiss notifications
 keymap("n", "<Esc>", function()
@@ -371,7 +359,6 @@ keymap("", "<D-S-l>", function()
 	local shellCmd = ("open 'alfredpreferences://navigateto/workflows>workflow>%s'"):format(workflowId)
 	fn.system(shellCmd)
 end, { desc = "󰮤 Reveal Workflow in Alfred" })
-keymap("n", "<D-0>", ":10messages<CR>", { desc = ":messages (last 10)" }) -- as cmd.function these don't require confirmation
 keymap("n", "<D-9>", ":Notifications<CR>", { desc = ":Notifications" })
 
 -- cmd+e: inline code
