@@ -12,25 +12,33 @@ return {
 			vim.keymap.set("n", "<D-0>", "<cmd>Noice Log<CR>", { desc = "󰎟 Notification Log" })
 		end,
 		opts = {
-			-- can be used to filter stuff
+			-- can be used to filter/redirect stuff
 			-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/?utm_source=share&utm_medium=web2x&context=3
 			-- https://github.com/folke/noice.nvim#-routes
 			routes = {
-				-- remove messages from highlight-undo
+				-- remove messages from highlight-undo, pending: https://github.com/tzachar/highlight-undo.nvim/issues/13
 				{ filter = { event = "msg_show", find = "^%d more lines?;" }, skip = true },
-				{ filter = { event = "msg_show", find = "^1 more line;" }, skip = true },
+				{ filter = { event = "msg_show", find = "^1 line less;" }, skip = true },
 				{ filter = { event = "msg_show", find = "^%d+ fewer lines;" }, skip = true },
-				{ filter = { event = "msg_show", find = "^%d+ change;" }, skip = true },
-				{ filter = { event = "msg_show", find = "[km][Bb written$" }, skip = true },
+				{ filter = { event = "msg_show", find = "^%d+ changes?;" }, skip = true },
+
+				-- show `:write` messages in a more subtle manner
+				{ filter = { event = "msg_show", find = "[Bb] written$" }, view = "mini" },
 			},
-			-- use cmp for cmdline completion since it has more sources
-			popupmenu = { backend = "cmp" },
-			messages = {
-				view_search = "mini",
+			cmdline = {
+				view = "cmdline", -- use classic cmdline
+				format = {
+					cmdline = { pattern = "^:", icon = "", lang = "vim" },
+					search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+				},
 			},
+			-- DISABLE unwanted features
+			popupmenu = { backend = "cmp" }, -- use cmp for cmdline completion, has more sources
+			messages = { view_search = false }, -- I use my own counter
 			lsp = {
-				signature = { enabled = false }, -- TODO figure out how to make compatible
 				progress = { enabled = false }, -- too noisy
+				signature = { enabled = false }, -- TODO figure out how to make compatible
+				-- ENABLE good features
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
@@ -39,7 +47,6 @@ return {
 			},
 			presets = {
 				bottom_search = true,
-				-- command_palette = true,
 				long_message_to_split = true,
 				inc_rename = true,
 				lsp_doc_border = true,
@@ -54,7 +61,7 @@ return {
 			stages = "slide",
 			level = 0, -- minimum severity level to display (0 = display all)
 			max_height = 30,
-			max_width = 50,
+			-- max_width = 50,
 			minimum_width = 13,
 			timeout = 4000,
 			top_down = false,
@@ -63,6 +70,28 @@ return {
 				vim.api.nvim_win_set_config(win, { border = u.borderStyle })
 			end,
 		},
+		init = function()
+			vim.keymap.set("n", "<Esc>", function()
+				local clearPending = require("notify").pending() > 10
+				require("notify").dismiss { pending = clearPending }
+			end, { desc = "󰎟 Clear Notifications" })
+
+			-- copy [l]ast [n]otice
+			vim.keymap.set("n", "<leader>ln", function()
+				local history = require("notify").history {}
+				local lastNotify = history[#history]
+				if not lastNotify then
+					vim.notify("No Notification in this session.", u.warn)
+					return
+				end
+				local msg = ""
+				for _, line in pairs(lastNotify.message) do
+					msg = msg .. line .. "\n"
+				end
+				vim.fn.setreg("+", msg)
+				vim.notify("Last Notification copied.\n" .. msg, u.trace)
+			end, { desc = "󰎟 Copy Last Notification" })
+		end,
 	},
 	{ -- rainbow brackets
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
