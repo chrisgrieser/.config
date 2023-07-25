@@ -18,8 +18,8 @@ return {
 			routes = {
 				-- remove messages from highlight-undo, pending: https://github.com/tzachar/highlight-undo.nvim/issues/13
 				{ filter = { event = "msg_show", find = "^%d more lines?;" }, skip = true },
-				{ filter = { event = "msg_show", find = "^1 line less;" }, skip = true },
 				{ filter = { event = "msg_show", find = "^%d+ fewer lines;" }, skip = true },
+				{ filter = { event = "msg_show", find = "^1 line less;" }, skip = true },
 				{ filter = { event = "msg_show", find = "^%d+ changes?;" }, skip = true },
 
 				-- show `:write` messages in a more subtle manner
@@ -27,10 +27,7 @@ return {
 			},
 			cmdline = {
 				view = "cmdline", -- use classic cmdline
-				format = {
-					cmdline = { pattern = "^:", icon = "", lang = "vim" },
-					search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-				},
+				format = { search_down = { icon = "" } },
 			},
 			-- DISABLE unwanted features
 			popupmenu = { backend = "cmp" }, -- use cmp for cmdline completion, has more sources

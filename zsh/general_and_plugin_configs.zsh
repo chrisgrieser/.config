@@ -21,7 +21,6 @@ export YSU_MESSAGE_POSITION="after"
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='--color="hl:206" --keep-right --pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --cycle --layout=reverse --bind="tab:down,shift-tab:up" --preview-window=border-left --height="90%"'
 
-
 export EXA_STRICT=1
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && export EXA_ICON_SPACING=2 
 

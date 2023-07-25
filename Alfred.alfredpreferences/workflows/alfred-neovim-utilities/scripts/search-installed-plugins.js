@@ -12,25 +12,25 @@ function alfredMatcher(str) {
 //──────────────────────────────────────────────────────────────────────────────
 
 const pluginLocation = $.getenv("plugin_installation_path").replace(/^~/, app.pathTo("home folder"));
-// prettier-ignore
-const jsonArray = app.doShellScript(`
-	find "${pluginLocation}" -path "*/.git" -type d -maxdepth 3 | while read -r line ; do
-		cd "$line"/..
-		git remote -v | head -n1
-	done`)
+const jsonArray = app
+	.doShellScript(`
+		find "${pluginLocation}" -path "*/.git" -type d -maxdepth 3 | while read -r line ; do
+			cd "$line"/..
+			git remote -v | head -n1
+		done`)
 	.split("\r")
-	.map(remote => {
+	.map((remote) => {
 		const repo = remote
 			.slice(26, -12) /* eslint-disable-line no-magic-numbers */
 			.replaceAll(".git (fetch)", ""); // for lazy.nvim
 		const name = repo.split("/")[1];
 		const owner = repo.split("/")[0];
 		return {
-			"title": name,
-			"subtitle": owner,
-			"match": alfredMatcher(repo),
-			"arg": repo,
-			"uid": repo,
+			title: name,
+			subtitle: owner,
+			match: alfredMatcher(repo),
+			arg: repo,
+			uid: repo,
 		};
 	});
 
