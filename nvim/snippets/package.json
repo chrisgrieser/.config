@@ -16,6 +16,12 @@
 			},
 			{
 				"language": [
+					"make"
+				],
+				"path": "./basic/makefile.json"
+			},
+			{
+				"language": [
 					"markdown"
 				],
 				"path": "./basic/markdown.json"

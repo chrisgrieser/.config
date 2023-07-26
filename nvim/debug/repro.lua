@@ -1,7 +1,5 @@
 --------------------------------------------------------------------------------
--- INFO
--- Run config via this as: `neovide test.lua -- -u repro.lua`
--- OR as: `make debug`
+-- INFO Run this config via: `neovide test.lua -- -u repro.lua` or `make debug`
 --------------------------------------------------------------------------------
 -- INFO set path to my personal working directory. Change back when debugging
 -- folke plugins.
@@ -43,7 +41,10 @@ require("lazy").setup(plugins, {
 })
 
 vim.cmd.colorscheme("tokyonight")
-vim.g.neovide_scale_factor = 1.6 -- to make neovide readable for me
+
+-- Convenience stuff, not strictly necessary
+vim.g.neovide_scale_factor = 1.6
+vim.fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
 
 --------------------------------------------------------------------------------
 
