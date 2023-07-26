@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 # https://github.com/mattprice/dotfiles/blob/master/scripts/spotlight-ignore.rb
+
+if ! sudo -nv ; then
+	echo "script requires sudo rights."
+	print -z "sudo -v"
+	return 1
+fi
 #───────────────────────────────────────────────────────────────────────────────
 
 SPOTLIGHT_CONFIG="/System/Volumes/Data/.Spotlight-V100/VolumeConfiguration.plist"
@@ -27,4 +33,4 @@ addExclusion "$DATA_DIR/vim-data"
 # sudo plutil -extract Exclusions xml1 -o - "$SPOTLIGHT_CONFIG"
 
 # remove an exclusion
-# sudo plutil -remove Exclusions.{index} "$SPOTLIGHT_CONFIG"
+sudo plutil -remove Exclusions.{index} "$SPOTLIGHT_CONFIG"
