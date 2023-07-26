@@ -2937,13 +2937,18 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Show Inline Results – without keyword
+	<string>## Recommendation
+After installation, add this workflow as [fallback search](https://www.alfredapp.com/help/features/default-results/fallback-searches/).
+
+---
+
+## Actions on inline results
 - &lt;kbd&gt;⏎&lt;/kbd&gt; Search for Term / open URL
 - &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Mark URL. When pressed on the first item, the search query, will open all previously marked items.
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Copy URL
 - &lt;kbd&gt;⇧&lt;/kbd&gt; Show Preview Text
 
-## Global Search Hotkey
+## Global search hotkey
 Selection is…
 - file path → reveal file in Finder
 - directory path → open directory in Finder
