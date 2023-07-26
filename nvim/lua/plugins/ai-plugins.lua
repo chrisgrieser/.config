@@ -6,6 +6,7 @@ return {
 			-- HACK enable	syncing of API key
 			local symLinkFrom = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json"
 			local symLinkTo = vim.env.HOME .. "/.codeium/config.json"
+			vim.fn.mkdir(vim.fs.dirname(symLinkTo))
 			os.remove(symLinkTo)
 			vim.loop.fs_symlink(symLinkFrom, symLinkTo)
 		end,
