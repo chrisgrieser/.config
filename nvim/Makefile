@@ -8,5 +8,6 @@ plugins:
 	location_of_installed_plugins="$$HOME/.local/share/nvim/lazy" ; \
 	cd "$$location_of_installed_plugins" ; \
 	grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config | \
-	sed 's/.git$$//'
+	sed 's/.git$$//' | \
+	sort -i
 
