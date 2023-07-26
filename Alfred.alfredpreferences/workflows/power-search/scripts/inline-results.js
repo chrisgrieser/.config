@@ -118,8 +118,6 @@ function run(argv) {
 	if (query.length < 3) return;
 
 	// Guard clause 2: first word of query is alfred keyword
-	// INFO no need for caching, since this only seems to take ~80ms with more
-	// than 50 workflows installed
 	if (ignoreAlfredKeywords && !isUsingFallbackSearch) {
 		const timelogKeywordIgnore = +new Date();
 		const queryFirstWord = query.split(" ")[0];
@@ -127,9 +125,11 @@ function run(argv) {
 		if (alfredKeywords.includes(queryFirstWord)) return;
 
 		const duration = (+new Date() - timelogKeywordIgnore) / 1000;
+
+		// TODO with more than 50 workflows installed, and 180+ keywords, keyword
+		// identification takes about 250ms on my M1 machine. Consider caching?
 		console.log("time to identify Alfred keywords:", duration, "s");
 		console.log("number of keywords:", alfredKeywords.length);
-		console.log("keywords:", alfredKeywords);
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
