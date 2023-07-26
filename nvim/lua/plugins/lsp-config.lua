@@ -196,10 +196,8 @@ lspCapabilities.textDocument.foldingRange = {
 
 local function setupAllLsps()
 	-- INFO must be before the lsp-config setup of lua-ls
-	require("neodev").setup {
-		-- plugins are helpful e.g. for plenary, but slow down lsp loading
-		library = { plugins = false },
-	}
+	-- plugins are helpful e.g. for plenary, but slow down lsp loading
+	require("neodev").setup { library = { plugins = false } }
 
 	for _, lsp in pairs(lsp_servers) do
 		local config = {
