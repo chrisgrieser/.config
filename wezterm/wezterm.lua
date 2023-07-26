@@ -179,25 +179,31 @@ local keybindings = {
 -- TAB TITLE
 
 -- TODO tab styling <3 https://wezfurlong.org/wezterm/config/lua/config/tab_bar_style.html
-
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
-wt.on("format-tab-title", function(tab, _, _, _, _, _)
+wt.on("format-tab-title", function(tab)
 	-- prefers the title that was set via `tab:set_title()` or `wezterm cli
 	-- set-tab-title`
 	local title = tab.tab_title
 	if not title or title == "" then title = tab.active_pane.title end
 
-	-- falls back to basefolder of pwd
-	local pwdBasefolder = tab.active_pane.current_working_dir:gsub(".*/(.*)/$", "%1"):gsub("%%20", " ")
-	if title == "zsh" or title == "wezterm" then title = pwdBasefolder end
+	local icon
+	if title == "zsh" or title == "wezterm" then
+		local pwdBasefolder = tab.active_pane.current_working_dir:gsub(".*/(.*)/$", "%1"):gsub("%%20", " ")
+		title = pwdBasefolder
+		icon = "  "
+	elseif title:find("^man") then
+		icon = " "
+	else
+		icon = " "
+	end
 
-	return " 「" .. title .. " 」"
+	return " 「" .. icon .. title .. " 」"
 end)
 
--- WINDOW TITLE
--- sets the window title to PWD
+-- WINDOW TITLE 
+-- set to pwd
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-window-title
-wt.on("format-window-title", function(_, pane, _, _, _)
+wt.on("format-window-title", function(_, pane)
 	local pwd = pane.current_working_dir:gsub("^file://[^/]+", ""):gsub("%%20", " ")
 	return pwd
 end)
