@@ -15,9 +15,7 @@
 ```
 
 ## All Installed Plugins
-- [Comment.nvim](https://github.com/numToStr/Comment.nvim)
-- [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
-- [NotebookNavigator.nvim](https://github.com/GCBallesteros/NotebookNavigator.nvim)
+
 - [bullets.vim](https://github.com/dkarter/bullets.vim)
 - [ccc.nvim](https://github.com/uga-rosa/ccc.nvim)
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
@@ -33,8 +31,8 @@
 - [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
 - [codeium.nvim](https://github.com/jcdickinson/codeium.nvim)
 - [codeium.vim](https://github.com/Exafunction/codeium.vim)
+- [Comment.nvim](https://github.com/numToStr/Comment.nvim)
 - [cybu.nvim](https://github.com/ghillb/cybu.nvim)
-- [nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
 - [diffview.nvim](https://github.com/sindrets/diffview.nvim)
 - [dressing.nvim](https://github.com/stevearc/dressing.nvim)
 - [duplicate.nvim](https://github.com/smjonas/duplicate.nvim)
@@ -58,6 +56,7 @@
 - [lsp_lines.nvim](https://git.sr.ht/~whynothugo/lsp_lines.nvim)
 - [lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
+- [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 - [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
 - [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
 - [mason-null-ls.nvim](https://github.com/jayp0521/mason-null-ls.nvim)
@@ -65,7 +64,9 @@
 - [mason.nvim](https://github.com/williamboman/mason.nvim)
 - [neodev.nvim](https://github.com/folke/neodev.nvim)
 - [neogit](https://github.com/NeogitOrg/neogit)
+- [nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
 - [noice.nvim](https://github.com/folke/noice.nvim)
+- [NotebookNavigator.nvim](https://github.com/GCBallesteros/NotebookNavigator.nvim)
 - [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
 - [null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)
 - [numb.nvim](https://github.com/nacro90/numb.nvim)

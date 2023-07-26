@@ -15,7 +15,7 @@ return {
 			-- Open Log & Scroll to most recent message
 			vim.keymap.set("n", "<D-0>", function()
 				vim.cmd.Noice()
-				vim.defer_fn(function() u.normal("G") end, 1) 
+				vim.defer_fn(function() u.normal("G") end, 1)
 			end, { desc = "󰎟 Notification Log" })
 			-- set some keybindings for the Noice log buffer
 			vim.api.nvim_create_autocmd("FileType", {
@@ -32,7 +32,7 @@ return {
 			-- https://github.com/folke/noice.nvim#-routes
 			routes = {
 				-- remove messages from highlight-undo, pending: https://github.com/tzachar/highlight-undo.nvim/issues/13
-				{ filter = { event = "msg_show", find = "^%d more lines?;" }, skip = true },
+				{ filter = { event = "msg_show", find = "^%d+ more lines?;" }, skip = true },
 				{ filter = { event = "msg_show", find = "^%d+ fewer lines;" }, skip = true },
 				{ filter = { event = "msg_show", find = "^1 line less;" }, skip = true },
 				{ filter = { event = "msg_show", find = "^%d+ changes?;" }, skip = true },
@@ -47,13 +47,10 @@ return {
 				{ filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
 			},
 			cmdline = {
-				view = "cmdline", -- use classic cmdline
+				-- view = "cmdline", -- use classic cmdline
 				format = {
-					cmdline = {
-						icon = " ",
-						conceal = false,
-					},
-					search_down = { icon = " " },
+					cmdline = { icon = "" },
+					search_down = { icon = "" },
 				},
 			},
 			-- DISABLE unwanted features
@@ -72,7 +69,7 @@ return {
 			presets = {
 				bottom_search = true,
 				long_message_to_split = true,
-				-- inc_rename = true,
+				inc_rename = true,
 				lsp_doc_border = true,
 			},
 		},
