@@ -1,5 +1,20 @@
-<!-- vale Google.FirstPerson = NO -->
-## All plugin I have installed <!-- vale Google.FirstPerson = YES -->
+## Config structure
+
+```text
+├── lua
+│  ├── config # keybindings, options, …
+│  ├── funcs # utility functions
+│  └── plugins # plugins & their configs
+├── after
+│  └── ftplugin # filetype-specific configs
+├── mac-helper # for neovide users on macOS
+├── snippets
+│  ├── basic
+│  └── project-specific
+└── templates
+```
+
+## All Installed Plugins
 - [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)
 - [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 - [GCBallesteros/NotebookNavigator.nvim](https://github.com/GCBallesteros/NotebookNavigator.nvim)
@@ -107,18 +122,3 @@ The list has been generated [with this small short script.](https://nanotipsforv
 
 Also, you can check out [the nvim plugins I authored myself](https://github.com/chrisgrieser?tab=repositories&q=nvim&type=source&language=&sort=stargazers).
 
-## Config structure
-
-```text
-├── lua
-│  ├── config # keybindings, options, …
-│  ├── funcs # utility functions
-│  └── plugins # plugins & their configs
-├── after
-│  └── ftplugin # filetype-specific configs
-├── mac-helper # for neovide users on macOS
-├── snippets
-│  ├── basic
-│  └── project-specific
-└── templates
-```
