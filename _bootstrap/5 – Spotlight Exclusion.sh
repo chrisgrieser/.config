@@ -24,7 +24,7 @@ addExclusion "$DATA_DIR/vim-data"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# restart spotlight indexing (this also requires writing exclusions again)
+# restart spotlight indexing (WARN this also requires writing exclusions again)
 # sudo mdutil -E -i on /
 # sudo rm -R "$SPOTLIGHT_CONFIG"
 
@@ -33,4 +33,4 @@ addExclusion "$DATA_DIR/vim-data"
 # sudo plutil -extract Exclusions xml1 -o - "$SPOTLIGHT_CONFIG"
 
 # remove an exclusion
-sudo plutil -remove Exclusions.{index} "$SPOTLIGHT_CONFIG"
+# sudo plutil -remove Exclusions.{index} "$SPOTLIGHT_CONFIG"

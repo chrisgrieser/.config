@@ -46,9 +46,9 @@ return {
 				},
 			},
 			views = {
-				cmdline_popup = {
-					border = { style = u.borderStyle },
-				},
+				cmdline_popup = { border = { style = u.borderStyle } },
+				-- avoid overlap with notify
+				mini = { zindex = 10 },
 			},
 
 			-- DISABLED, since conflicts with existing plugins (which I find better)
@@ -77,7 +77,20 @@ return {
 		"rcarriga/nvim-notify",
 		event = "VeryLazy",
 		opts = {
-			render = "minimal",
+			-- HACK fix missing padding: https://github.com/rcarriga/nvim-notify/issues/152
+			render = function(bufnr, notif, highlights)
+				local base = require("notify.render.base")
+				local namespace = base.namespace()
+				local padded_message = vim.tbl_map(function(line) return " " .. line end, notif.message)
+				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, padded_message)
+
+				vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
+					hl_group = highlights.icon,
+					end_line = #notif.message - 1,
+					end_col = #notif.message[#notif.message],
+					priority = 50,
+				})
+			end,
 			stages = "slide",
 			level = 0, -- minimum severity level to display (0 = display all)
 			max_height = 30,

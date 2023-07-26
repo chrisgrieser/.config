@@ -151,9 +151,9 @@ local function newlineChars()
 	if bo.fileformat == "unix" then
 		return ""
 	elseif bo.fileformat == "mac" then
-		return "󰌑 " 
+		return "󰌑 "
 	elseif bo.fileformat == "dos" then
-		return "󰌑 " 
+		return "󰌑 "
 	end
 	return "󰌑 ?"
 end
@@ -170,10 +170,11 @@ local lualineConfig = {
 	-- should always include the tab element
 	tabline = {
 		lualine_a = {
-			{ clock, section_separators = emptySeparators },
+			-- need to be first for the separator, otherwise affected by tab
+			{ searchCounter, section_separators = topSeparators }, 
+			{ clock},
 			-- INFO searchcounter at the top, so it isn't covered by cmp suggestions and
 			-- also still visible with cmdheigt=0
-			{ searchCounter, section_separators = topSeparators},
 			{
 				"tabs",
 				mode = 1,
@@ -183,7 +184,7 @@ local lualineConfig = {
 			},
 		},
 		lualine_b = {
-			{ navicBreadcrumbs, section_separators = topSeparators},
+			{ navicBreadcrumbs, section_separators = topSeparators },
 		},
 		lualine_c = {},
 		lualine_x = {
