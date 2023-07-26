@@ -14,10 +14,13 @@ return {
 		init = function()
 			-- Open Log & Scroll to most recent message
 			vim.keymap.set("n", "<D-0>", function()
-				vim.cmd.Noice()
-				vim.defer_fn(function() u.normal("G") end, 1)
+				vim.cmd.Noice("history")
+				vim.defer_fn(function()
+					if vim.bo.filetype == "noice" then u.normal("G") end
+				end, 1)
 			end, { desc = "󰎟 Notification Log" })
-			-- set some keybindings for the Noice log buffer
+
+			-- set some keybindings for the Noice buffer
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "noice",
 				callback = function()
@@ -44,16 +47,18 @@ return {
 			},
 			views = {
 				cmdline_popup = {
-					border = {style = u.borderStyle },
+					border = { style = u.borderStyle },
 				},
 			},
-			-- DISABLE unwanted features
+
+			-- DISABLE features
 			popupmenu = { backend = "cmp" }, -- use cmp for cmdline completion, has more sources
 			messages = { view_search = false }, -- I use my own counter
 			lsp = {
 				progress = { enabled = false }, -- too noisy
-				signature = { enabled = false }, -- TODO figure out how to make compatible
-				-- ENABLE good features
+				signature = { enabled = true }, -- TODO figure out how to make compatible
+
+				-- ENABLE features
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
