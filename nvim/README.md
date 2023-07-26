@@ -14,8 +14,9 @@
 └── templates
 ```
 
-## All Installed Plugins
+Tree generated using <https://tree.nathanfriend.io/>
 
+## All Installed Plugins
 - [bullets.vim](https://github.com/dkarter/bullets.vim)
 - [ccc.nvim](https://github.com/uga-rosa/ccc.nvim)
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
@@ -119,7 +120,4 @@
 - [which-key.nvim](https://github.com/folke/which-key.nvim)
 - [yanky.nvim](https://github.com/gbprod/yanky.nvim)
 
-The list has been generated [with this small short script.](https://nanotipsforvim.prose.sh/list-all-your-installed-plugins)
-
-Also, you can check out [the nvim plugins I authored myself](https://github.com/chrisgrieser?tab=repositories&q=nvim&type=source&language=&sort=stargazers).
-
+This list has been auto-generated [with this small shell script.](https://nanotipsforvim.prose.sh/list-all-your-installed-plugins). Also, you can check out [the nvim plugins I authored myself](https://github.com/chrisgrieser?tab=repositories&q=nvim&type=source&language=&sort=stargazers).
