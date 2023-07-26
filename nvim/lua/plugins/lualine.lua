@@ -146,32 +146,22 @@ local function navicBreadcrumbs()
 	return require("nvim-navic").get_location()
 end
 
--- simple barbecue.nvim replacement
-local function pathToProjectRoot()
-	local maxLen = 45
-	if not require("nvim-navic").is_available() then return "" end
-	local parentPath = fn.expand("%:p:h")
-	local projectRelPath = parentPath:sub(#vim.loop.cwd() + 2)
-	local nicerDisplay = projectRelPath:gsub("/", "  ")
-	if nicerDisplay:find("^%s*$") then return "" end
-	if #nicerDisplay > maxLen then
-		nicerDisplay = "…" .. nicerDisplay:sub(#nicerDisplay - maxLen, #nicerDisplay)
-	end
-	return " " .. nicerDisplay
-end
-
 -- show newlineChar, when it is *not* unix
 local function newlineChars()
-	if bo.fileformat == "unix" then return "" end
-	local icon = bo.fileformat == "mac" and "" or ""
-	return "󰌑 " .. icon
+	if bo.fileformat == "unix" then
+		return ""
+	elseif bo.fileformat == "mac" then
+		return "󰌑 " 
+	elseif bo.fileformat == "dos" then
+		return "󰌑 " 
+	end
+	return "󰌑 ?"
 end
 
 --------------------------------------------------------------------------------
 
 -- nerdfont: powerline icons have the prefix 'ple-'
 local bottomSeparators = { left = "", right = "" }
-local topSeparators = { left = "", right = "" }
 local emptySeparators = { left = "", right = "" }
 
 local lualineConfig = {
@@ -180,13 +170,7 @@ local lualineConfig = {
 	tabline = {
 		lualine_a = {
 			{ clock, section_separators = emptySeparators },
-			{
-				searchCounter,
-				cond = function()
-					local currentlySearching = vim.fn.getcmdtype():find("[/?]") ~= nil
-					return currentlySearching
-				end,
-			},
+			{ searchCounter },
 			{
 				"tabs",
 				mode = 1,
@@ -196,26 +180,19 @@ local lualineConfig = {
 			},
 		},
 		lualine_b = {
-			{
-				pathToProjectRoot,
-				section_separators = { left = " ", right = " " },
-				cond = function() return fn.tabpagenr("$") == 1 end,
-			},
+			{ navicBreadcrumbs, section_separators = { left = "" }},
 		},
-		lualine_c = {
-			-- "draw_empty" to prevent glitching if its the only one in tabline
-			{ navicBreadcrumbs, section_separators = topSeparators, draw_empty = true },
-		},
+		lualine_c = {},
 		lualine_x = {
 			{
 				pluginUpdates,
 				color = function() return { fg = u.getHighlightValue("NonText", "fg") } end,
-				section_separators = topSeparators,
 			},
 		},
 		-- INFO dap and recording status defined in the respective plugin configs
 		-- for lualine_y and lualine_z for their lazy loading
 		lualine_y = {},
+		lualine_z = {},
 	},
 	sections = {
 		lualine_a = {
@@ -239,7 +216,6 @@ local lualineConfig = {
 		},
 		lualine_c = {
 			{ require("funcs.quickfix").counter },
-			{ searchCounter },
 			{
 				require("dr-lsp").lspCount,
 				cond = function() return vim.v.hlsearch == 0 end,

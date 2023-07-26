@@ -11,7 +11,7 @@ vim.cmd.inoreabbrev("<buffer> // --")-- habit from writing too much js
 
 -- Build / Reload Config
 keymap("n", "<leader>r", function()
-	cmd.update()
+	cmd("silent update")
 	local pwd = vim.loop.cwd() or ""
 	if pwd:find("nvim") then
 		-- unload from lua cache (assuming that the pwd is parent of the lua folder)

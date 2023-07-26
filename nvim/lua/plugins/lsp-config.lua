@@ -237,8 +237,8 @@ local function diagnosticConfig()
 	require("lspconfig.ui.windows").default_options.border = u.borderStyle
 	vim.lsp.handlers["textDocument/hover"] =
 		vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
-	vim.lsp.handlers["textDocument/signatureHelp"] =
-		vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
+	-- vim.lsp.handlers["textDocument/signatureHelp"] =
+	-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
 	local function fmt(diag)
 		local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
