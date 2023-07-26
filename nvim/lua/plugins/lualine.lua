@@ -162,6 +162,7 @@ end
 
 -- nerdfont: powerline icons have the prefix 'ple-'
 local bottomSeparators = { left = "", right = "" }
+local topSeparators = { left = "", right = "" }
 local emptySeparators = { left = "", right = "" }
 
 local lualineConfig = {
@@ -170,7 +171,9 @@ local lualineConfig = {
 	tabline = {
 		lualine_a = {
 			{ clock, section_separators = emptySeparators },
-			{ searchCounter },
+			-- INFO searchcounter at the top, so it isn't covered by cmp suggestions and
+			-- also still visible with cmdheigt=0
+			{ searchCounter, section_separators = topSeparators},
 			{
 				"tabs",
 				mode = 1,
@@ -180,7 +183,7 @@ local lualineConfig = {
 			},
 		},
 		lualine_b = {
-			{ navicBreadcrumbs, section_separators = { left = "" }},
+			{ navicBreadcrumbs, section_separators = topSeparators},
 		},
 		lualine_c = {},
 		lualine_x = {
