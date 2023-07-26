@@ -152,8 +152,8 @@ end, { desc = "󰓆 Accept Word" })
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
-keymap("n", "<Down>", [[<cmd>silent! . move +1<CR>==]], { desc = "󰜮 Move Line Down" })
-keymap("n", "<Up>", [[<cmd>silent! . move -2<CR>==]], { desc = "󰜷 Move Line Up" })
+keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down", silent = true })
+keymap("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move Line Up", silent = true })
 keymap("n", "<Right>", function()
 	if vim.fn.col(".") >= vim.fn.col("$") - 1 then return end
 	return [["zx"zp]]
@@ -164,10 +164,9 @@ keymap("n", "<Left>", function()
 end, { desc = "Move Char Left", expr = true })
 
 -- stylua: ignore start
--- INFO cannot use `<cmd>` for these two, as the '> would not be set when not
--- leaving visual mode
-keymap("x", "<Down>", [[:move '>+1<CR><cmd>normal! gv=gv<CR>]], { desc = "󰜮 Move selection down" })
-keymap("x", "<Up>", [[:move '<-2<CR><cmd>normal! gv=gv<CR>]], { desc = "󰜷 Move selection up" })
+keymap("x", "<Down>", [[:move '>+1<CR><cmd>normal! gv=gv<CR>]], { desc = "󰜮 Move selection down", silent = true })
+keymap("x", "<Up>", [[:move '<-2<CR><cmd>normal! gv=gv<CR>]], { desc = "󰜷 Move selection up", silent = true })
+
 -- stylua: ignore end
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" })
@@ -179,7 +178,8 @@ keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 merge line down" })
 -- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()
 	require("various-textobjs").url()
-	local foundURL = fn.mode():find("v") -- will only switch to visual mode if URL found
+	-- various textobjs only switch to visual if obj found
+	local foundURL = fn.mode():find("v") 
 	if foundURL then
 		u.normal('"zy')
 		local url = fn.getreg("z")
@@ -188,6 +188,7 @@ keymap("n", "gx", function()
 end, { desc = "󰌹 Smart URL Opener" })
 
 --------------------------------------------------------------------------------
+
 -- INSERT MODE
 keymap("i", "<C-e>", "<Esc>A") -- EoL
 keymap("i", "<C-a>", "<Esc>I") -- BoL
@@ -200,8 +201,8 @@ end, { expr = true, desc = "better i" })
 -- COMMAND MODE
 keymap("c", "<C-a>", "<Home>")
 keymap("c", "<C-e>", "<End>")
-keymap("c", "<C-u>", "<C-e><C-u>") -- clear
-keymap("c", "<C-w>", "<C-r><C-w>") -- word under cursor
+keymap("c", "<C-u>", "<C-e><C-u>") -- clear full line
+keymap("c", "<C-w>", "<C-r><C-w>") -- add word under cursor
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
@@ -360,8 +361,8 @@ autocmd("LspAttach", {
 })
 
 --------------------------------------------------------------------------------
-
 -- Q / ESC TO CLOSE SPECIAL WINDOWS
+
 autocmd("FileType", {
 	pattern = {
 		"help",

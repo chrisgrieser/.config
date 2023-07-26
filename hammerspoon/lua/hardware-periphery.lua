@@ -1,3 +1,4 @@
+local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
 --------------------------------------------------------------------------------
@@ -28,9 +29,13 @@ ExternalHarddriveWatcher = hs.usb.watcher
 		local name = device.productName
 
 		-- Docking Station in office does spammy reports
-		if name == "Integrated RGB Camera" or name == "USB 10/100/1000 LAN" or name == "T27hv-20" then
+		if
+			env.isAtOffice
+			and (name == "Integrated RGB Camera" or name == "USB 10/100/1000 LAN" or name == "T27hv-20")
+		then
 			return
 		end
+		if env.isAtMother and name == "CHERRY Wireless Device" then return end
 		u.notify("Mounted: " .. name)
 
 		local harddriveNames = {

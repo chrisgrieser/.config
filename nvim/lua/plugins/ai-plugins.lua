@@ -1,5 +1,5 @@
 return {
-	{ -- AI completion (virtual text)
+	{ -- AI Ghost Text Suggestions
 		"Exafunction/codeium.vim",
 		event = "InsertEnter",
 		build = function()
@@ -21,12 +21,17 @@ return {
 				Mason = false,
 				["ccc-ui"] = false,
 			}
-			-- stylua: ignore
-			vim.g.codeium_disable_bindings = 1 -- use my own
-			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion" })
+			vim.g.codeium_disable_bindings = 1
+			vim.keymap.set(
+				"i",
+				"<D-s>",
+				function() return vim.fn["codeium#Accept"]() end,
+				-- Adding silent, so cmdline does not pop up, particularly annoying with noice.nvim
+				{ expr = true, desc = "󰚩 Accept Suggestion", silent = true }
+			)
 		end,
 	},
-	{ -- AI completion (suggestion)
+	{ -- AI completions via cmp
 		"jcdickinson/codeium.nvim",
 		lazy = true, -- loaded by cmp
 		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
