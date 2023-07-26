@@ -32,7 +32,7 @@ local gitShellOpts = {
 	on_exit = function()
 		-- reload buffer if changed, e.g., due to linters or pandocvim
 		-- (also requires opt.autoread being enabled)
-		vim.cmd.checktime()
+		vim.cmd("silent checktime")
 		os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
 
 		if #output == 0 then return end
