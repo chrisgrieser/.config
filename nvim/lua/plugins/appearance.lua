@@ -51,14 +51,14 @@ return {
 				},
 			},
 
-			-- DISABLE features
-			popupmenu = { backend = "cmp" }, -- use cmp for cmdline completion, has more sources
-			messages = { view_search = false }, -- I use my own counter
+			-- DISABLED, since conflicts with existing plugins (which I find better)
+			popupmenu = { backend = "cmp" }, -- replace with nvim-cmp, since more sources
+			messages = { view_search = false }, -- replaced by custom lualine component
 			lsp = {
-				progress = { enabled = false }, -- too noisy
-				signature = { enabled = false }, -- TODO figure out how to make compatible
+				progress = { enabled = false }, -- replaced with nvim-dr-lsp
+				signature = { enabled = false }, -- replaced with lsp_signature.nvim
 
-				-- ENABLE features
+				-- ENABLED features
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
