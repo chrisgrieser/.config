@@ -23,7 +23,9 @@ local spellfixes = {
 	ntoe = "note",
 	verison = "version",
 	ot = "to",
+	ti = "it",
 	cant = "can't",
+	dont = "don't",
 }
 
 for wrong, correct in pairs(spellfixes) do

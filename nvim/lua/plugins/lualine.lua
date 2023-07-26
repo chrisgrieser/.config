@@ -170,11 +170,11 @@ local lualineConfig = {
 	-- should always include the tab element
 	tabline = {
 		lualine_a = {
-			-- need to be first for the separator, otherwise affected by tab
-			{ searchCounter, section_separators = topSeparators }, 
-			{ clock},
-			-- INFO searchcounter at the top, so it isn't covered by cmp suggestions and
-			-- also still visible with cmdheigt=0
+			-- INFO setting different section separators in the same components has
+			-- yanky results, they should have the same separator
+			-- searchcounter at the top, so it work with cmdheight=0
+			{ searchCounter, section_separators = emptySeparators },
+			{ clock, section_separators = emptySeparators },
 			{
 				"tabs",
 				mode = 1,

@@ -338,3 +338,7 @@ matches:
     replace: task
     propagate_casing: true
     word: true
+  - trigger: breif
+    replace: brief
+    propagate_casing: true
+    word: true
