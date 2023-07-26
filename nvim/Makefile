@@ -1,9 +1,11 @@
-.PHONY: lines
+.PHONY: lines, plugins, debug
 #───────────────────────────────────────────────────────────────────────────────
-# total length of config in LoC
+
+# prints total length of config
 lines:
 	find . -name "*.lua" | xargs wc -l | tail -n1
 
+# prints remote repo of all installed plugins
 plugins:
 	location_of_installed_plugins="$$HOME/.local/share/nvim/lazy" ; \
 	cd "$$location_of_installed_plugins" ; \
@@ -11,6 +13,7 @@ plugins:
 		sed 's/.git$$//' | \
 		sort -i
 
+# runs minimal config for debugging purposes
 debug:
-	export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; \
-	neovide test.lua -- -u repro.lua
+	export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$$PATH ; \
+	neovide test.lua -- -u ./debug/repro.lua

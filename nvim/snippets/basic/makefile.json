@@ -1,0 +1,15 @@
+{
+	"export PATH": {
+		"prefix": "PATH",
+		"body": "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$$PATH ; \\",
+		"description": "in case a CLI needs to be run"
+	},
+	"all tasks": {
+		"prefix": "all tasks",
+		"body": "all: | ${1:task1} ${2:task2}"
+	},
+	"PHONY": {
+		"prefix": [".PHONY", "PHONY"],
+		"body": ".PHONY: ${task1}, ${task2}"
+	}
+}

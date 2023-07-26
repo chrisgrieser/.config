@@ -53,7 +53,7 @@ lspSettings.lua_ls = {
 
 --------------------------------------------------------------------------------
 -- Emmet
--- don't use for js/ts
+-- don't pollute completions for js and ts with stuff I don't need
 lspFiletypes.emmet_ls = { "css", "html" }
 
 --------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- LTEX
 -- https://valentjn.github.io/ltex/settings.html
 
--- deactivate for bibtex and text files
+-- disable for bibtex and text files
 lspFiletypes.ltex = { "gitcommit", "markdown" }
 
 -- HACK since reading external file with the method described in the ltex docs
@@ -247,7 +247,7 @@ local function diagnosticConfig()
 
 	vim.diagnostic.config {
 		virtual_text = {
-			severity = { min = vim.diagnostic.severity.WARN }, -- not text for hints
+			severity = { min = vim.diagnostic.severity.WARN }, -- no text for hints
 			source = false, -- already handled by format function
 			format = function(diag) return fmt(diag) end,
 			spacing = 1,
