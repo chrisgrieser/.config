@@ -19,6 +19,7 @@
   "codeium.vim": { "branch": "main", "commit": "9bf87e33fdb85d9f423f49450079561557ea6f3d" },
   "cybu.nvim": { "branch": "main", "commit": "c0866ef6735a85f85d4cf77ed6d9bc92046b5a99" },
   "dawnfox": { "branch": "main", "commit": "77aa7458d2b725c2d9ff55a18befe1b891ac473e" },
+  "diagflow.nvim": { "branch": "main", "commit": "9839f4bb02304c32cc2195671bc2284a7f2b35e4" },
   "diffview.nvim": { "branch": "main", "commit": "e91110d2a7f8e2f667666aba6ea089ff823f8748" },
   "dressing.nvim": { "branch": "master", "commit": "39611852fd7bbac117e939a26759bb37361f0c90" },
   "duplicate.nvim": { "branch": "main", "commit": "f0129f5560f297bb28fc10192c444a853ddb3d98" },

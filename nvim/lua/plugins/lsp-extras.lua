@@ -50,19 +50,19 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
-	-- { -- checkout when more stable
-	-- 	"dgagn/diagflow.nvim",
-	-- 	event = "VeryLazy",
-	-- 	opts = {
-	-- 		max_width = 40,
-	-- 		severity_colors = {
-	-- 			error = "DiagnosticVirtualTextError",
-	-- 			warning = "DiagnosticVirtualTextWarning",
-	-- 			info = "DiagnosticVirtualTextInfo",
-	-- 			hint = "DiagnosticVirtualTextHint",
-	-- 		},
-	-- 	},
-	-- },
+	{ -- checkout when more stable
+		"dgagn/diagflow.nvim",
+		event = "VeryLazy",
+		opts = {
+			max_width = 40,
+			severity_colors = {
+				error = "DiagnosticVirtualTextError",
+				warning = "DiagnosticVirtualTextWarning",
+				info = "DiagnosticVirtualTextInfo",
+				hint = "DiagnosticVirtualTextHint",
+			},
+		},
+	},
 	{ -- better virtualtext diagnostics
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		config = true,
@@ -146,7 +146,7 @@ return {
 		opts = {
 			floating_window = false,
 			hint_prefix = "󰘎 ",
-			hint_scheme = "NonText", -- highlight group
+			hint_scheme = "NonText", -- = highlight group
 		},
 	},
 	{ -- display inlay hints from LSP
@@ -185,7 +185,8 @@ return {
 	},
 	{ -- better LSP variable-rename
 		"smjonas/inc-rename.nvim",
-		event = "CmdlineEnter", -- loading with `cmd =` does not work with incremental preview
+		-- loading with `cmd = "IncRename` does not work with incremental preview
+		event = "CmdlineEnter", 
 		opts = {
 			-- if more than one file is changed, save all buffers
 			post_hook = function(results)
