@@ -105,7 +105,7 @@ return {
 					addBreakPoint = "8",
 				},
 				dapSharedKeymaps = true,
-				performanceOpts = { countThreshold = 50 },
+				performanceOpts = { countThreshold = 5 },
 			}
 
 			-- INFO inserting needed to not disrupt existing lualine-segment
