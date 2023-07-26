@@ -12,9 +12,9 @@ let resultsToFetch = parseInt($.getenv("inline_results_to_fetch"));
 if (resultsToFetch < 1) resultsToFetch = 1;
 else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
 
-const ignoreAlfredKeywords =
-	$.getenv("ignore_alfred_keywords") === "1" &&
-	!$.NSProcessInfo.processInfo.environment.objectForKey("no_ignore").js;
+const isUsingFallbackSearch = Boolean($.NSProcessInfo.processInfo.environment.objectForKey("no_ignore").js);
+const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
+const isDebugging = $.getenv("alfred_debug") === "1";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -44,6 +44,7 @@ function run(argv) {
 	//───────────────────────────────────────────────────────────────────────────
 
 	console.log("no_ignore: ", $.NSProcessInfo.processInfo.environment.objectForKey("no_ignore").js);
+	console.log("isUsingFallbackSearch:", isUsingFallbackSearch);
 	console.log("ignoreAlfredKeywords:", ignoreAlfredKeywords);
 
 	// Guard clause 1: query less than 3 chars
@@ -61,15 +62,21 @@ function run(argv) {
 				const value = line.split(">")[1].split("<")[0];
 
 				// `||` delimites keyword alternatives https://www.alfredapp.com/help/workflows/advanced/keywords/
-				// only letter keywords and > 2 chars relevant
+				// only letter keywords relevant
 				// TODO implement {var:alfred_var}
 				const keywords = (value.includes("||") ? value.split("||") : [value]).filter((kw) =>
-					kw.match(/^[a-z]../),
+					kw.match(/^[a-z]/),
 				);
 				acc.push(...keywords);
 				return acc;
 			}, []);
-		if (alfredKeywords.includes(queryFirstWord)) return;
+		const pseudoKeywords = "c,a,b,e,f,d,h,i,g,l,j,k,o,n,m,q,r,p,u,s,t,v,w,x,z,y"
+		const keywordsAsStr = alfredKeywords.join(",")
+		const indexPseudoKws = keywordsAsStr.indexOf(pseudoKeywords);
+		const trueKeywords = keywordsAsStr.slice(indexPseudoKws, indexPseudoKws + pseudoKeywords.length);
+		const uniqueKeywords = [...new Set(alfredKeywords)]
+		if (isDebugging) console.log("unique alfredKeywords: ", uniqueKeywords.length);
+		if (uniqueKeywords.includes(queryFirstWord)) return;
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
@@ -109,7 +116,7 @@ function run(argv) {
 	);
 
 	// Measuring execution time
-	if ($.getenv("alfred_debug") === "1") {
+	if (isDebugging) {
 		const durationTotal = (+new Date() - timelogStart) / 1000;
 		console.log("total: ", durationTotal, "s");
 	}
