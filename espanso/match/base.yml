@@ -73,8 +73,8 @@ matches:
     replace: |
       ```
       neovim {{neovimVersion}} (homebrew)
+      neovide {{neovideVersion}} (homebrew)
       macOS {{OSversion}} (M1)
-      Neovide {{neovideVersion}} (homebrew)
       ```
     vars:
       - name: OSversion
