@@ -50,11 +50,20 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
-	{ -- checkout when more stable
+	{ -- Diagnostic Virtual Text at the top right, not at EoL
 		"dgagn/diagflow.nvim",
 		event = "VeryLazy",
 		opts = {
 			max_width = 40,
+			scope = "line", -- cursor|line
+			placement = "top", -- top|inline
+			text_align = "right", -- left|right
+			gap_size = 1,
+			padding_top = 0,
+			padding_right = 2, -- for the scrollbar
+			update_event = { "DiagnosticChanged" }, -- the event that updates the diagnostics cache
+			toggle_event = {}, -- if InsertEnter, can toggle the diagnostics on inserts
+			show_sign = true, -- set to true if you want to render the diagnostic sign before the diagnostic message
 			severity_colors = {
 				error = "DiagnosticVirtualTextError",
 				warning = "DiagnosticVirtualTextWarning",
@@ -63,7 +72,7 @@ return {
 			},
 		},
 	},
-	{ -- better virtualtext diagnostics
+	{ -- Diagnostic Virtual Text below a line, not at EoL
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		config = true,
 		init = function()
@@ -186,7 +195,7 @@ return {
 	{ -- better LSP variable-rename
 		"smjonas/inc-rename.nvim",
 		-- loading with `cmd = "IncRename` does not work with incremental preview
-		event = "CmdlineEnter", 
+		event = "CmdlineEnter",
 		opts = {
 			-- if more than one file is changed, save all buffers
 			post_hook = function(results)

@@ -235,7 +235,8 @@ local function diagnosticConfig()
 	require("lspconfig.ui.windows").default_options.border = u.borderStyle
 	vim.lsp.handlers["textDocument/hover"] =
 		vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
-	-- needs to be disabled due to noice.nvim
+
+	-- WARN this needs to be disabled due to noice.nvim
 	-- vim.lsp.handlers["textDocument/signatureHelp"] =
 	-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
