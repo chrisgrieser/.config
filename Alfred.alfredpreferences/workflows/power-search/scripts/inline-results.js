@@ -20,6 +20,7 @@ const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
+	console.log(""); // newline
 	const timelogStart = +new Date();
 
 	// Query + values from previous run
@@ -80,7 +81,10 @@ function run(argv) {
 
 		const duration = (+new Date() - timelogKeywordIgnore) / 1000;
 		console.log("time to identify Alfred keywords:", duration, "s");
-		console.log("unique Alfred keywords:", uniqueKeywords.length);
+		console.log("number of keywords:", uniqueKeywords.length);
+		console.log("---");
+		console.log("queryFirstWord:", queryFirstWord);
+		console.log("keywords:", uniqueKeywords);
 		if (uniqueKeywords.includes(queryFirstWord)) return;
 	}
 

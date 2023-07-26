@@ -192,9 +192,9 @@ wt.on("format-tab-title", function(tab)
 		title = pwdBasefolder
 		icon = "  "
 	elseif title:find("^man") then
-		icon = " "
+		icon = "  "
 	else
-		icon = " "
+		icon = "  "
 	end
 
 	return " 「" .. icon .. title .. " 」"

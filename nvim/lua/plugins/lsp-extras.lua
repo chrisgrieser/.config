@@ -59,10 +59,8 @@ return {
 			placement = "top", -- top|inline
 			text_align = "right", -- left|right
 			gap_size = 1,
-			padding_top = 0,
-			padding_right = 2, -- for the scrollbar
-			update_event = { "DiagnosticChanged" }, -- the event that updates the diagnostics cache
-			toggle_event = {}, -- if InsertEnter, can toggle the diagnostics on inserts
+			padding_top = 3, -- dont look up too much
+			padding_right = 2, -- for scrollbar
 			show_sign = true, -- set to true if you want to render the diagnostic sign before the diagnostic message
 			severity_colors = {
 				error = "DiagnosticVirtualTextError",
@@ -71,19 +69,6 @@ return {
 				hint = "DiagnosticVirtualTextHint",
 			},
 		},
-	},
-	{ -- Diagnostic Virtual Text below a line, not at EoL
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		config = true,
-		init = function()
-			vim.diagnostic.config { virtual_lines = false } -- disabled at start
-			vim.keymap.set("n", "<leader>d", function()
-				require("lsp_lines").toggle()
-				local nextState = vim.g.prevVirtText or false
-				vim.g.prevVirtText = vim.diagnostic.config().virtual_text
-				vim.diagnostic.config { virtual_text = nextState }
-			end, { desc = "󰒕 Toggle LSP Lines" })
-		end,
 	},
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",

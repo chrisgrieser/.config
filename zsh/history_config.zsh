@@ -4,7 +4,7 @@ export NODE_REPL_HISTORY=""
 
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.soberkoder.com/better-zsh-history/
-export HISTSIZE=1500
+export HISTSIZE=4000
 export SAVEHIST=$HISTSIZE
 export HISTFILE="$DATA_DIR/zsh_history"
 
