@@ -340,6 +340,10 @@ keymap("", "<D-S-l>", function()
 	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
 	local shellCmd = ("open 'alfredpreferences://navigateto/workflows>workflow>%s'"):format(workflowId)
 	fn.system(shellCmd)
+
+	-- in case the right workflow is already open, Alfred is not focussed.
+	-- Therefore manually focussing in addition to that here as well.
+	fn.system("open -a 'Alfred Preferences'") 
 end, { desc = "󰮤 Reveal Workflow in Alfred" })
 
 -- cmd+e: inline code
