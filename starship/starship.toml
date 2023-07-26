@@ -59,6 +59,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 "main-vault" = "󰇈 "
 "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub" = "/󰀶 "
 "~/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
+"/Alfred.alfredpreferences" = "/󰮤 "
 
 [custom.folder_number]
 command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' | wc -l"

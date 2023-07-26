@@ -16,6 +16,7 @@ local lsp_servers = {
 	"tsserver", -- ts/js
 	"bashls", -- also used for zsh
 	"taplo", -- toml
+	"lemminx", -- xml/plist
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
 	"rome", -- js/ts/json – formatting capability needs to be provided via null-ls
