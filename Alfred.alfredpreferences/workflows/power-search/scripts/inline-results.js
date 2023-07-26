@@ -43,17 +43,13 @@ function run(argv) {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	console.log("no_ignore: ", $.NSProcessInfo.processInfo.environment.objectForKey("no_ignore").js);
-	console.log("isUsingFallbackSearch:", isUsingFallbackSearch);
-	console.log("ignoreAlfredKeywords:", ignoreAlfredKeywords);
-
 	// Guard clause 1: query less than 3 chars
 	if (query.length < 3) return;
 
 	// Guard clause 2: first word of query is alfred keyword
 	// INFO no need for caching, since this only seems to take ~80ms with more
 	// than 50 workflows installed
-	if (ignoreAlfredKeywords) {
+	if (ignoreAlfredKeywords && !isUsingFallbackSearch) {
 		const timelogKeywordIgnore = +new Date();
 		const queryFirstWord = query.match(/^\S+/)[0];
 		const alfredKeywords = app
@@ -62,7 +58,7 @@ function run(argv) {
 			.reduce((acc, line) => {
 				const value = line.split(">")[1].split("<")[0];
 
-				// `||` delimites keyword alternatives https://www.alfredapp.com/help/workflows/advanced/keywords/
+				// `||` delimites keyword alternatives –– DOCS https://www.alfredapp.com/help/workflows/advanced/keywords/
 				// only letter keywords relevant
 				// TODO implement {var:alfred_var}
 				const keywords = (value.includes("||") ? value.split("||") : [value]).filter((kw) =>
@@ -85,8 +81,8 @@ function run(argv) {
 
 		if (isDebugging) {
 			const duration = (+new Date() - timelogKeywordIgnore) / 1000;
-			console.log("time to Alfred keywords: ", duration, "s");
-			console.log("unique Alfred keywords: ", uniqueKeywords.length);
+			console.log("time to identify Alfred keywords:", duration, "s");
+			console.log("unique Alfred keywords:", uniqueKeywords.length);
 		}
 		if (uniqueKeywords.includes(queryFirstWord)) return;
 	}
@@ -97,6 +93,7 @@ function run(argv) {
 	// If the user is typing, return early to guarantee the top entry is the currently typed query
 	// If we waited for the API, a fast typer would search for an incomplete query
 	if (query !== oldQuery) {
+		searchForQuery.subtitle = "Loading Inline Results…";
 		return JSON.stringify({
 			rerun: 0.1,
 			skipknowledge: true,
@@ -130,7 +127,7 @@ function run(argv) {
 	// Measuring execution time
 	if (isDebugging) {
 		const durationTotal = (+new Date() - timelogStart) / 1000;
-		console.log("total: ", durationTotal, "s");
+		console.log("total:", durationTotal, "s");
 	}
 
 	return JSON.stringify({

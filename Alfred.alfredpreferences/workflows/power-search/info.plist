@@ -3409,10 +3409,10 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>Recommended</string>
+				<string></string>
 			</dict>
 			<key>description</key>
-			<string>When a keyword from another workflow is shown, this workflow will not be triggered.</string>
+			<string>When a keyword from another workflow is shown, this workflow will not be triggered (recommended).</string>
 			<key>label</key>
 			<string>Ignore Alfred Keywords</string>
 			<key>type</key>

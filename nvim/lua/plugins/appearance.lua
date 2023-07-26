@@ -45,9 +45,6 @@ return {
 			},
 			views = {
 				cmdline_popup = {
-					position = {
-						row = -10,-- negative number = rows from bottom
-					}, 
 					border = {style = u.borderStyle },
 				},
 			},

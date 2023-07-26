@@ -127,7 +127,7 @@ function M.timelog()
 		}
 		logStatement2 = {
 			"local duration = os.difftime(os.time(), timelogStart)",
-			'print("timelog: ", duration, "s")',
+			'print("timelog:", duration, "s")',
 		}
 	elseif ft == "javascript" then
 		-- JXA, for example, does not support console.time()
@@ -137,7 +137,7 @@ function M.timelog()
 		}
 		logStatement2 = {
 			"const duration = (+new Date() - timelogStart) / 1000",
-			'console.log("timelog: ", duration, "s")',
+			'console.log("timelog:", duration, "s")',
 		}
 	elseif ft == "typescript" then
 		logStatement1 = 'console.time("timelog")'
