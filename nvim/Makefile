@@ -5,8 +5,8 @@ lines:
 	find . -name "*.lua" | xargs wc -l | tail -n1
 
 plugins:
-	plugin_dir="$$HOME/.local/share/nvim/lazy" ; \
-	cd "$$plugin_dir" ; \
+	location_of_installed_plugins="$$HOME/.local/share/nvim/lazy" ; \
+	cd "$$location_of_installed_plugins" ; \
 	grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config | \
-	cut 
+	sed 's/.git$$//'
 
