@@ -56,7 +56,7 @@ return {
 			messages = { view_search = false }, -- I use my own counter
 			lsp = {
 				progress = { enabled = false }, -- too noisy
-				signature = { enabled = true }, -- TODO figure out how to make compatible
+				signature = { enabled = false }, -- TODO figure out how to make compatible
 
 				-- ENABLE features
 				override = {
