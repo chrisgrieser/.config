@@ -73,7 +73,7 @@ alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 alias -s {yml,yaml}='yq'
 alias -s json='fx'
 alias -s pdf='qlmanage -p'
-alias -s {md,lua,js,ts,css,sh,zsh,applescript,txt,py}='bat'
+alias -s {md,lua,js,ts,css,sh,zsh,applescript,txt,py,plist}='bat'
 
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && viewer="wezterm imgcat" || viewer="qlmanage -p"
 alias -s {gif,png,jpg,jpeg,webp,tiff}="$viewer"

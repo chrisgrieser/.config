@@ -57,14 +57,20 @@ function run(argv) {
 			.split("\r")
 			.reduce((acc, line) => {
 				const value = line.split(">")[1].split("<")[0];
+				// DOCS Alfred keywords https://www.alfredapp.com/help/workflows/advanced/keywords/
+				// {var:alfred_var} for user-set keywords
+				if (value.startsWith("{var:")) {
+					const varName = value.slice(5, -1);
+					const workflowPath = line.split("/info.plist")[0];
+					const prefPath = `${workflowPath}/prefs.plist`;
+					const userKeyword = app.doShellScript(`cd .. && grep "${varName}" "${prefPath}"`);
 
-				// `||` delimites keyword alternatives –– DOCS https://www.alfredapp.com/help/workflows/advanced/keywords/
-				// only letter keywords relevant
-				// TODO implement {var:alfred_var}
-				const keywords = (value.includes("||") ? value.split("||") : [value]).filter((kw) =>
-					kw.match(/^[a-z]/),
-				);
-				acc.push(...keywords);
+				}
+
+				// `||` delimites keyword alternatives
+				const keywords = (value.includes("||") ? value.split("||") : [value])
+				const letterKeywords = keywords.filter((kw) => kw.match(/^[a-z]/));
+				acc.push(...letterKeywords);
 				return acc;
 			}, []);
 

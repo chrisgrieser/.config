@@ -12,7 +12,7 @@ local u = require("config.utils")
 -- search keymaps
 keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "⌨️  Search Keymaps" })
 
-keymap("n", "<D-,>", function ()
+keymap("n", "<D-,>", function()
 	local thisFilePath = debug.getinfo(1).source:sub(2)
 	vim.cmd.edit(thisFilePath)
 end, { desc = "⌨️ Edit keybindings.lua" })
@@ -148,7 +148,6 @@ keymap({ "n", "x" }, "zg", function()
 	vim.notify(('󰓆 Now accepting:\n"%s"'):format(word))
 end, { desc = "󰓆 Accept Word" })
 
-
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
@@ -179,7 +178,7 @@ keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 merge line down" })
 keymap("n", "gx", function()
 	require("various-textobjs").url()
 	-- various textobjs only switch to visual if obj found
-	local foundURL = fn.mode():find("v") 
+	local foundURL = fn.mode():find("v")
 	if foundURL then
 		u.normal('"zy')
 		local url = fn.getreg("z")
@@ -252,7 +251,7 @@ keymap("", "<D-S-l>", function()
 
 	-- in case the right workflow is already open, Alfred is not focussed.
 	-- Therefore manually focussing in addition to that here as well.
-	fn.system("open -a 'Alfred Preferences'") 
+	fn.system("open -a 'Alfred Preferences'")
 end, { desc = "󰮤 Reveal Workflow in Alfred" })
 
 -- cmd+e: inline code
@@ -314,8 +313,10 @@ keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since `g
 -- LSP KEYBINDINGS
 
 -- INFO some LSP bindings done globally, so they can be used by null-ls as well
-keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
-keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
+-- stylua: ignore start
+keymap("n", "ge", function() vim.diagnostic.goto_next { float = false } end, { desc = "󰒕 Next Diagnostic" })
+keymap("n", "gE", function() vim.diagnostic.goto_prev { float = false } end, { desc = "󰒕 Previous Diagnostic" })
+-- stylua: ignore end
 
 keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
@@ -402,4 +403,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-

@@ -57,10 +57,11 @@ return {
 			max_width = 40,
 			scope = "line", -- cursor|line
 			placement = "top", -- top|inline
-			text_align = "right", -- left|right
+			text_align = "left", -- left|right
 			gap_size = 1,
-			padding_top = 3, -- dont look up too much
+			padding_top = 0,
 			padding_right = 2, -- for scrollbar
+			toggle_event = { "InsertEnter" }, -- if InsertEnter, can toggle the diagnostics on inserts
 			show_sign = true, -- set to true if you want to render the diagnostic sign before the diagnostic message
 			severity_colors = {
 				error = "DiagnosticVirtualTextError",
