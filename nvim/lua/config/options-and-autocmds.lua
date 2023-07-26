@@ -89,7 +89,7 @@ autocmd({ "VimEnter", "VimResized" }, { -- the "WinResized" autocmd event does n
 })
 
 -- status bar & cmdline
-opt.cmdheight = 0
+opt.cmdheight = 1
 opt.history = 300 -- reduce noise for command history search
 opt.shortmess:append("s") -- reduce info in :messages
 opt.shortmess:append("A") -- no swap file alerts

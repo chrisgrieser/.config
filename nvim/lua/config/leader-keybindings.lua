@@ -87,7 +87,7 @@ end, { desc = "󱁐 Use Spaces" })
 
 -- Undo
 -- stylua: ignore
-keymap("n", "<leader>ur", function() cmd.later(tostring(vim.opt.undolevels:get())) end, { desc = "󰛒 Redo All" })
+keymap("n", "<leader>ur", function() cmd.later(tostring(vim.opt.undolevels:get())) end, { desc = "󰛒 Redo All", silent = true })
 keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Undo (Reset) Hunk" })
 keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰕌 󰊢 Undo (Reset) Buffer" })
 

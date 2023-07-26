@@ -4,9 +4,6 @@ local colorPickerFts = { "css", "scss", "lua", "sh", "zsh", "bash" }
 --------------------------------------------------------------------------------
 
 return {
-	-- TODO
-	-- 1. fix signature help
-	-- 2. fix gui-cursor being ignored
 	{ -- UI overhaul
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
@@ -35,6 +32,8 @@ return {
 			-- https://github.com/folke/noice.nvim#-routes
 			routes = {
 				-- redirect stuff to the more subtle "mini"
+				{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
+
 				-- { filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 				-- { filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
 				-- { filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
@@ -53,11 +52,6 @@ return {
 					-- syntax highlighting for `:I`, (see config/user-commands.lua)
 					inspect = { pattern = "^:I", icon = " ", ft = "lua" },
 				},
-			},
-			views = {
-				cmdline_popup = { border = { style = u.borderStyle } },
-				-- avoid overlap with notify
-				-- mini = { zindex = 10 },
 			},
 
 			-- DISABLED, since conflicts with existing plugins (which I find better)
@@ -83,26 +77,27 @@ return {
 	},
 	{
 		"rcarriga/nvim-notify",
-		event = "VeryLazy",
+		enabled = false,
+		lazy = true, -- loaded by noice
 		opts = {
 			-- HACK fix missing padding: https://github.com/rcarriga/nvim-notify/issues/152
-			render = function(bufnr, notif, highlights)
-				local base = require("notify.render.base")
-				local namespace = base.namespace()
-				local padded_message = vim.tbl_map(function(line) return " " .. line end, notif.message)
-				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, padded_message)
-
-				vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
-					hl_group = highlights.icon,
-					end_line = #notif.message - 1,
-					end_col = #notif.message[#notif.message],
-					priority = 50,
-				})
-			end,
+			-- render = function(bufnr, notif, highlights)
+			-- 	local base = require("notify.render.base")
+			-- 	local namespace = base.namespace()
+			-- 	local padded_message = vim.tbl_map(function(line) return " " .. line end, notif.message)
+			-- 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, padded_message)
+			--
+			-- 	vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
+			-- 		hl_group = highlights.icon,
+			-- 		end_line = #notif.message - 1,
+			-- 		end_col = #notif.message[#notif.message],
+			-- 		priority = 50,
+			-- 	})
+			-- end,
 			stages = "slide",
 			level = 0, -- minimum severity level to display (0 = display all)
 			max_height = 30,
-			-- max_width = 50,
+			max_width = 50,
 			minimum_width = 13,
 			timeout = 4000,
 			top_down = false,

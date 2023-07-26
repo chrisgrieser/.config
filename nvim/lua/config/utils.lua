@@ -67,7 +67,6 @@ end
 ---activate templates for it
 ---@param ext string extension of the skeleton
 function M.applyTemplateIfEmptyFile(ext)
-
 	-- prevent buggy duplicate application of template
 	if vim.b.templateWasApplied then return end
 	vim.b.templateWasApplied = true
@@ -128,5 +127,13 @@ M.textobjectMaps = {
 	["call"] = "l",
 	["doubleSquareBracket"] = "R",
 }
+
+function M.diagnosticFmt(diag)
+	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
+	local msg = diag.message
+	return msg .. source
+end
+
+--------------------------------------------------------------------------------
 
 return M

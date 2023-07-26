@@ -55,6 +55,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			max_width = 40,
+			max_height = 15,
 			scope = "line", -- cursor|line
 			placement = "top", -- top|inline
 			text_align = "left", -- left|right
@@ -62,13 +63,14 @@ return {
 			padding_top = 0,
 			padding_right = 2, -- for scrollbar
 			toggle_event = { "InsertEnter" }, -- if InsertEnter, can toggle the diagnostics on inserts
-			show_sign = true, -- set to true if you want to render the diagnostic sign before the diagnostic message
-			severity_colors = {
+			show_sign = true, 
+			severity_colors = { -- virtual text hlgroups have background in most themes
 				error = "DiagnosticVirtualTextError",
 				warning = "DiagnosticVirtualTextWarning",
 				info = "DiagnosticVirtualTextInfo",
 				hint = "DiagnosticVirtualTextHint",
 			},
+			format = function(diag) return u.diagnosticFmt(diag) end,
 		},
 	},
 	{ -- better references/definitions
