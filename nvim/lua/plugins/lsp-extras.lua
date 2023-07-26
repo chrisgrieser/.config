@@ -1,7 +1,7 @@
 local u = require("config.utils")
 
 return {
-	{ -- lsp definitions and references count in the status line
+	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		lazy = true, -- loaded by lualine
 		dev = true,

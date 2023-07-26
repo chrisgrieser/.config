@@ -51,9 +51,10 @@ function run(argv) {
 	if (query.length < 3) return;
 
 	// Guard clause 2: first word of query is alfred keyword
-	// INFO no need for caching, since this only seems to take ~90ms with > 50
-	// workflows installed
+	// INFO no need for caching, since this only seems to take ~80ms with more
+	// than 50 workflows installed
 	if (ignoreAlfredKeywords) {
+		const timelogKeywordIgnore = +new Date();
 		const queryFirstWord = query.match(/^\S+/)[0];
 		const alfredKeywords = app
 			.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
@@ -70,12 +71,23 @@ function run(argv) {
 				acc.push(...keywords);
 				return acc;
 			}, []);
-		const pseudoKeywords = "c,a,b,e,f,d,h,i,g,l,j,k,o,n,m,q,r,p,u,s,t,v,w,x,z,y"
-		const keywordsAsStr = alfredKeywords.join(",")
-		const indexPseudoKws = keywordsAsStr.indexOf(pseudoKeywords);
-		const trueKeywords = keywordsAsStr.slice(indexPseudoKws, indexPseudoKws + pseudoKeywords.length);
-		const uniqueKeywords = [...new Set(alfredKeywords)]
-		if (isDebugging) console.log("unique alfredKeywords: ", uniqueKeywords.length);
+
+		// remove pseudo keywords from string
+		// (HACK to simplify removing sequence of items from an array, converting
+		// it to a string, removing the substring, then back to an array)
+		const pseudoKeywords = "c,a,b,e,f,d,h,i,g,l,j,k,o,n,m,q,r,p,u,s,t,v,w,x,z,y";
+		const trueKeywords = alfredKeywords
+			.join(",") // to string
+			.split(pseudoKeywords) // remove substring
+			.join("")
+			.split(","); // back to array
+		const uniqueKeywords = [...new Set(trueKeywords)];
+
+		if (isDebugging) {
+			const duration = (+new Date() - timelogKeywordIgnore) / 1000;
+			console.log("time to Alfred keywords: ", duration, "s");
+			console.log("unique Alfred keywords: ", uniqueKeywords.length);
+		}
 		if (uniqueKeywords.includes(queryFirstWord)) return;
 	}
 
