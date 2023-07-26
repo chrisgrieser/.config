@@ -330,3 +330,7 @@ matches:
     replace: want
     propagate_casing: true
     word: true
+  - trigger: thsi
+    replace: this
+    propagate_casing: true
+    word: true

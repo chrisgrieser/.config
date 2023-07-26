@@ -39,8 +39,7 @@ return {
 			},
 			cmdline = {
 				format = {
-					cmdline = { icon = "" },
-					search_down = { view = "cmdline", icon = " " },
+					search_down = { icon = " " },
 				},
 			},
 			views = {
@@ -62,6 +61,7 @@ return {
 				},
 			},
 			presets = {
+				bottom_search = true,
 				long_message_to_split = true,
 				inc_rename = true,
 				lsp_doc_border = true,
