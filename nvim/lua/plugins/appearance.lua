@@ -12,11 +12,17 @@ return {
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		event = "VeryLazy",
 		init = function()
-			vim.keymap.set("n", "<D-0>", "<cmd>Noice Log<CR>G", { desc = "󰎟 Notification Log" })
-			autocmd("FileType", {
-				pattern = "ft",
+			-- Open Log & Scroll to most recent message
+			vim.keymap.set("n", "<D-0>", function()
+				vim.cmd.Noice()
+				vim.defer_fn(function() u.normal("G") end, 1) 
+			end, { desc = "󰎟 Notification Log" })
+			-- set some keybindings for the Noice log buffer
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "noice",
 				callback = function()
-					
+					vim.keymap.set("n", "<D-w>", vim.cmd.quit, { buffer = true, desc = " Close" })
+					vim.keymap.set("n", "<D-0>", vim.cmd.quit, { buffer = true, desc = " Close" })
 				end,
 			})
 		end,

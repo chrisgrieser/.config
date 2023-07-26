@@ -12,13 +12,15 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const pluginLocation = $.getenv("plugin_installation_path")
+const pluginLocation = $.getenv("plugin_installation_path");
 const jsonArray = app
-	.doShellScript(`cd "${pluginLocation}" && grep -oh "http.*" ./*/.git/config`)
+	.doShellScript(
+		`cd "${pluginLocation}" && grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config`,
+	)
 	.split("\r")
 	.map((remote) => {
 		const owner = remote.split("/")[3];
-		const name = remote.split("/")[4].split(".")[0];
+		const name = remote.split("/")[4].slice(0, -4); // remove ".git"
 		const repo = `${owner}/${name}`;
 		return {
 			title: name,
