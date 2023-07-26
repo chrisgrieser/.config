@@ -35,20 +35,29 @@ return {
 			-- https://github.com/folke/noice.nvim#-routes
 			routes = {
 				-- redirect stuff to the more subtle "mini"
-				{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
-				{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-				{ filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
-				{ filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
+				-- { filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+				-- { filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
+				-- { filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
+
+				-- unneeded info on search patterns
+				{ filter = { event = "msg_show", find = "^/." }, skip = true },
+				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 			},
 			cmdline = {
+				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
+				-- for :substitute or numb.vnim
+				view = "cmdline",
 				format = {
-					search_down = { icon = " " },
+					search_down = { icon = "  " },
+					cmdline = { icon = " " },
+					-- syntax highlighting for `:I`, (see config/user-commands.lua)
+					inspect = { pattern = "^:I", icon = " ", ft = "lua" },
 				},
 			},
 			views = {
 				cmdline_popup = { border = { style = u.borderStyle } },
 				-- avoid overlap with notify
-				mini = { zindex = 10 },
+				-- mini = { zindex = 10 },
 			},
 
 			-- DISABLED, since conflicts with existing plugins (which I find better)
@@ -66,7 +75,6 @@ return {
 				},
 			},
 			presets = {
-				bottom_search = true,
 				long_message_to_split = true,
 				inc_rename = true,
 				lsp_doc_border = true,
