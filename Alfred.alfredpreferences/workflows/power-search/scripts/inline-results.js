@@ -17,6 +17,77 @@ const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
 
 //──────────────────────────────────────────────────────────────────────────────
 
+// get the keywords that activate something in Alfred
+function getAlfredKeywords() {
+	const keywords = app
+		.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
+		.split("\r")
+		.reduce((acc, line) => {
+			const value = line.split(">")[1].split("<")[0];
+			const keywords = [];
+
+			// DOCS ALFRED KEYWORDS https://www.alfredapp.com/help/workflows/advanced/keywords/
+			// 1) `{var:alfred_var}`: configurable keywords
+			if (value.startsWith("{var:")) {
+				const varName = value.split("{var:")[1].split("}")[0];
+				const workflowPath = line.split("/info.plist")[0];
+				// 1a) user-set keywords
+				// (`plutil` will fail, since the value is not saved in prefs.plist)
+				try {
+					const userKeyword = app.doShellScript(
+						`cd .. && plutil -extract "${varName}" raw -o - "${workflowPath}/prefs.plist"`,
+					);
+					keywords.push(userKeyword);
+				} catch (_error) {
+					// 1b) keywords where user kept the default value
+					const workflowConfig = JSON.parse(
+						app.doShellScript(
+							`cd .. && plutil -extract "userconfigurationconfig" json -o - "${workflowPath}/info.plist"`,
+						),
+					);
+					const defaultValue = workflowConfig.find(
+						(/** @type {{ variable: string; }} */ option) => option.variable === varName,
+					).config.default;
+					keywords.push(defaultValue);
+				}
+			}
+			// 2) `||`: multiple keyword alternatives
+			else if (value.includes("||")) {
+				const multiKeyword = value.split("||");
+				keywords.push(...multiKeyword);
+			}
+			// 3) normal keyword
+			else {
+				keywords.push(value);
+			}
+
+			// only keywords with letter as first char are relevant, also only the
+			// first word of a keyword matters
+			const relevantKeywords = keywords.reduce((acc, keyword) => {
+				const firstWord = keyword.split(" ")[0];
+				if (firstWord.match(/^[a-z]/)) acc.push(firstWord);
+				return acc;
+			}, []);
+
+			acc.push(...relevantKeywords);
+			return acc;
+		}, []);
+
+	// remove pseudo keywords from string
+	// (HACK to simplify removing sequence of items from an array, converting
+	// it to a string, removing the substring, then back to an array)
+	const pseudoKeywords = "c,a,b,e,f,d,h,i,g,l,j,k,o,n,m,q,r,p,u,s,t,v,w,x,z,y";
+	const trueKeywords = keywords
+		.join(",") // to string
+		.split(pseudoKeywords) // remove substring
+		.join("")
+		.split(","); // back to array
+	const uniqueKeywords = [...new Set(trueKeywords)];
+	return uniqueKeywords;
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
@@ -51,47 +122,14 @@ function run(argv) {
 	// than 50 workflows installed
 	if (ignoreAlfredKeywords && !isUsingFallbackSearch) {
 		const timelogKeywordIgnore = +new Date();
-		const queryFirstWord = query.match(/^\S+/)[0];
-		const alfredKeywords = app
-			.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
-			.split("\r")
-			.reduce((acc, line) => {
-				const value = line.split(">")[1].split("<")[0];
-				// DOCS Alfred keywords https://www.alfredapp.com/help/workflows/advanced/keywords/
-				// {var:alfred_var} for user-set keywords
-				if (value.startsWith("{var:")) {
-					const varName = value.slice(5, -1);
-					const workflowPath = line.split("/info.plist")[0];
-					const prefPath = `${workflowPath}/prefs.plist`;
-					const userKeyword = app.doShellScript(`cd .. && grep "${varName}" "${prefPath}"`);
-
-				}
-
-				// `||` delimites keyword alternatives
-				const keywords = (value.includes("||") ? value.split("||") : [value])
-				const letterKeywords = keywords.filter((kw) => kw.match(/^[a-z]/));
-				acc.push(...letterKeywords);
-				return acc;
-			}, []);
-
-		// remove pseudo keywords from string
-		// (HACK to simplify removing sequence of items from an array, converting
-		// it to a string, removing the substring, then back to an array)
-		const pseudoKeywords = "c,a,b,e,f,d,h,i,g,l,j,k,o,n,m,q,r,p,u,s,t,v,w,x,z,y";
-		const trueKeywords = alfredKeywords
-			.join(",") // to string
-			.split(pseudoKeywords) // remove substring
-			.join("")
-			.split(","); // back to array
-		const uniqueKeywords = [...new Set(trueKeywords)];
+		const queryFirstWord = query.split(" ")[0];
+		const alfredKeywords = getAlfredKeywords();
+		if (alfredKeywords.includes(queryFirstWord)) return;
 
 		const duration = (+new Date() - timelogKeywordIgnore) / 1000;
 		console.log("time to identify Alfred keywords:", duration, "s");
-		console.log("number of keywords:", uniqueKeywords.length);
-		console.log("---");
-		console.log("queryFirstWord:", queryFirstWord);
-		console.log("keywords:", uniqueKeywords);
-		if (uniqueKeywords.includes(queryFirstWord)) return;
+		console.log("number of keywords:", alfredKeywords.length);
+		console.log("keywords:", alfredKeywords);
 	}
 
 	//───────────────────────────────────────────────────────────────────────────

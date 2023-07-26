@@ -17,9 +17,9 @@ local function obsidianThemeDevHelper(win)
 		return
 	end
 
-	-- delay to avoid conflict with app-hider.lua and that resizing took place
+	-- delay to avoid conflict with `app-hider.lua`
 	u.runWithDelays(0.1, function()
-		if not obsi then return end
+		if not obsi or not obsi:mainWindow() then return end
 		if wu.CheckSize(win, wu.pseudoMax) or wu.CheckSize(win, wu.maximized) then
 			obsi:hide()
 		else
