@@ -1,13 +1,12 @@
 {
-	"runtime.version": "LuaJIT",
-	"diagnostics.globals": [
-		"vim"
-	],
-    "workspace.library": [
-        "/Users/chrisgrieser/.local/share/nvim/lazy/neodev.nvim/types/stable",
-        "/opt/homebrew/Cellar/neovim/0.9.0/share/nvim/runtime/lua",
-        "/Users/chrisgrieser/.config/nvim/lua",
-        "/Users/chrisgrieser/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/5c38dea0"
-    ],
-    "workspace.checkThirdParty": false
+        "runtime.version": "LuaJIT",
+        "diagnostics.globals": [
+                "vim"
+        ],
+        "workspace.library": [
+                "/Users/chrisgrieser/.local/share/nvim/lazy/neodev.nvim/types/stable",
+                "/opt/homebrew/Cellar/neovim/0.9.0/share/nvim/runtime/lua",
+                "/Users/chrisgrieser/.config/nvim/lua",
+                "/Users/chrisgrieser/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/5c38dea0"
+        ]
 }

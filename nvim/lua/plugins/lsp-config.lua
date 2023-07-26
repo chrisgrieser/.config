@@ -241,21 +241,16 @@ local function diagnosticConfig()
 	-- vim.lsp.handlers["textDocument/signatureHelp"] =
 	-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
-	local function fmt(diag)
-		local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
-		local msg = diag.message
-		return msg .. source
-	end
 
 	vim.diagnostic.config {
 		virtual_text = {
 			severity = { min = vim.diagnostic.severity.WARN }, -- no text for hints
 			source = false, -- already handled by format function
-			format = function(diag) return fmt(diag) end,
+			format = function(diag) return u.diagnosticFmt(diag) end,
 			spacing = 1,
 		},
 		float = {
-			format = function(diag) return fmt(diag) end,
+			format = function(diag) return u.diagnosticFmt(diag) end,
 			focusable = true,
 			border = u.borderStyle,
 			max_width = 70,
