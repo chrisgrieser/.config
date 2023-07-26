@@ -169,9 +169,9 @@ return {
 		},
 		init = function()
 			vim.g.undotree_WindowLayout = 3
-			vim.g.undotree_DiffpanelHeight = 8
+			vim.g.undotree_DiffpanelHeight = 10
 			vim.g.undotree_ShortIndicators = 1
-			vim.g.undotree_SplitWidth = 30
+			vim.g.undotree_SplitWidth = 35
 			vim.g.undotree_DiffAutoOpen = 0
 			vim.g.undotree_SetFocusWhenToggle = 1
 			vim.g.undotree_DiffCommand = "delta"
@@ -182,6 +182,10 @@ return {
 				callback = function()
 					vim.opt_local.list = false
 					vim.keymap.set("n", "<D-w>", vim.cmd.UndotreeToggle, { buffer = true })
+					vim.defer_fn(function()
+						vim.keymap.set("n", "J", "6j", { buffer = true })
+						vim.keymap.set("n", "K", "6k", { buffer = true })
+					end, 1)
 				end,
 			})
 		end,

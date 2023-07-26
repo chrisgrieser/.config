@@ -19,9 +19,9 @@
 		"prefix": "Get Alfred Env",
 		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\");"
 	},
-	"Get Alfred Env (+ resolve home)": {
-		"prefix": "Get Alfred Env (+ resolve home)",
-		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\").replace(/^~/, app.pathTo(\"home folder\"));"
+	"Get Alfred Env (Safe)": {
+		"prefix": "Get Alfred Env",
+		"body": "const ${1:envVar} = $.NSProcessInfo.processInfo.environment.objectForKey(\"${2:envVar}\").js;"
 	},
 	"http request": {
 		"prefix": "http request",

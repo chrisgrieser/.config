@@ -8,6 +8,39 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>03296F2D-389A-45F3-BB31-D4D36C8EC1DA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6E666DB2-B403-4DA6-9468-BE2FA2FEC5F5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>DF9BEDE2-15FD-4D64-9AFA-B759D48B08EF</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Mark URL</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
 		<key>0444355F-1F8A-4EE4-BC8D-550FA956FEBC</key>
 		<array>
 			<dict>
@@ -851,6 +884,19 @@
 				<true/>
 			</dict>
 		</array>
+		<key>C950FDC3-9DD1-427D-82D5-2FC76BE7858E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FF680CD3-F6C1-4A64-B782-6C898AE55BB9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</key>
 		<array/>
 		<key>D19B1695-CD9B-456E-BEEF-F080AA4F7D16</key>
@@ -1058,6 +1104,19 @@
 				<true/>
 			</dict>
 		</array>
+		<key>FF680CD3-F6C1-4A64-B782-6C898AE55BB9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>03296F2D-389A-45F3-BB31-D4D36C8EC1DA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -1190,7 +1249,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>browsing-history-today.sh</string>
+				<string>./scripts/browsing-history-today.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -2794,6 +2853,88 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>subtext</key>
+				<string>{query}</string>
+				<key>text</key>
+				<string>Search for Inline Results</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>C950FDC3-9DD1-427D-82D5-2FC76BE7858E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string>osascript -l JavaScript ./scripts/inline-results.js "$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>03296F2D-389A-45F3-BB31-D4D36C8EC1DA</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>no_ignore</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>FF680CD3-F6C1-4A64-B782-6C898AE55BB9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Show Inline Results – without keyword
@@ -2818,6 +2959,15 @@ Turns selected text into a markdown link, with the URL of the first search resul
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>03296F2D-389A-45F3-BB31-D4D36C8EC1DA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>1370</real>
+		</dict>
 		<key>0444355F-1F8A-4EE4-BC8D-550FA956FEBC</key>
 		<dict>
 			<key>xpos</key>
@@ -3079,6 +3229,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>440</real>
 		</dict>
+		<key>C950FDC3-9DD1-427D-82D5-2FC76BE7858E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1370</real>
+		</dict>
 		<key>CAF6E75C-7EE6-419C-A370-C4C98EE9451D</key>
 		<dict>
 			<key>colorindex</key>
@@ -3193,6 +3352,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>485</real>
 			<key>ypos</key>
 			<real>170</real>
+		</dict>
+		<key>FF680CD3-F6C1-4A64-B782-6C898AE55BB9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>note</key>
+			<string>set "no-ignore"</string>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>1400</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

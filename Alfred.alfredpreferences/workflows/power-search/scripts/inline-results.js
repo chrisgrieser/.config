@@ -8,10 +8,13 @@ app.includeStandardAdditions = true;
 
 // CONFIG
 const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
-const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
 let resultsToFetch = parseInt($.getenv("inline_results_to_fetch"));
 if (resultsToFetch < 1) resultsToFetch = 1;
 else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
+
+const ignoreAlfredKeywords =
+	$.getenv("ignore_alfred_keywords") === "1" &&
+	!$.NSProcessInfo.processInfo.environment.objectForKey("no_ignore").js;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -39,6 +42,9 @@ function run(argv) {
 	};
 
 	//───────────────────────────────────────────────────────────────────────────
+
+	console.log("no_ignore: ", $.NSProcessInfo.processInfo.environment.objectForKey("no_ignore").js);
+	console.log("ignoreAlfredKeywords:", ignoreAlfredKeywords);
 
 	// Guard clause 1: query less than 3 chars
 	if (query.length < 3) return;
@@ -87,18 +93,20 @@ function run(argv) {
 	// in restricting the number of results for performance (25 is ddgr's maximum)
 	const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
 	const responseJson = JSON.parse(app.doShellScript(ddgrCommand));
-	const newResults = responseJson.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
-		return {
-			title: item.title,
-			subtitle: item.url,
-			uid: item.url,
-			arg: item.url,
-			icon: { path: "duckduckgo.png" },
-			mods: {
-				shift: { subtitle: item.abstract },
-			},
-		};
-	});
+	const newResults = responseJson.map(
+		(/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
+			return {
+				title: item.title,
+				subtitle: item.url,
+				uid: item.url,
+				arg: item.url,
+				icon: { path: "duckduckgo.png" },
+				mods: {
+					shift: { subtitle: item.abstract },
+				},
+			};
+		},
+	);
 
 	// Measuring execution time
 	if ($.getenv("alfred_debug") === "1") {
