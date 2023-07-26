@@ -36,6 +36,7 @@ ExternalHarddriveWatcher = hs.usb.watcher
 			return
 		end
 		if env.isAtMother and name == "CHERRY Wireless Device" then return end
+
 		u.notify("Mounted: " .. name)
 
 		local harddriveNames = {
