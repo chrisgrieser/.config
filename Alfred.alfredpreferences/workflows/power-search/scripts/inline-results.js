@@ -14,7 +14,6 @@ else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
 
 const isUsingFallbackSearch = Boolean($.NSProcessInfo.processInfo.environment.objectForKey("no_ignore").js);
 const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
-const isDebugging = $.getenv("alfred_debug") === "1";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -79,11 +78,9 @@ function run(argv) {
 			.split(","); // back to array
 		const uniqueKeywords = [...new Set(trueKeywords)];
 
-		if (isDebugging) {
-			const duration = (+new Date() - timelogKeywordIgnore) / 1000;
-			console.log("time to identify Alfred keywords:", duration, "s");
-			console.log("unique Alfred keywords:", uniqueKeywords.length);
-		}
+		const duration = (+new Date() - timelogKeywordIgnore) / 1000;
+		console.log("time to identify Alfred keywords:", duration, "s");
+		console.log("unique Alfred keywords:", uniqueKeywords.length);
 		if (uniqueKeywords.includes(queryFirstWord)) return;
 	}
 
@@ -125,10 +122,8 @@ function run(argv) {
 	);
 
 	// Measuring execution time
-	if (isDebugging) {
-		const durationTotal = (+new Date() - timelogStart) / 1000;
-		console.log("total:", durationTotal, "s");
-	}
+	const durationTotal = (+new Date() - timelogStart) / 1000;
+	console.log("total:", durationTotal, "s");
 
 	return JSON.stringify({
 		skipknowledge: true,

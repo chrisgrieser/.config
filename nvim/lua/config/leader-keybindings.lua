@@ -46,7 +46,7 @@ end, { desc = "󰘳 Copy last command" })
 
 -- [l]ast command [a]gain
 -- as opposed to `@:`, this works across restarts of neovim
-keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again" })
+keymap("n", "<leader>la", "<cmd><Up><CR>", { desc = "󰘳 Run last command again" })
 
 -- search command history
 -- stylua: ignore
@@ -152,6 +152,13 @@ keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForc
 -- stylua: ignore end
 
 -- Diffview
+keymap(
+	"x",
+	"<leader>gd",
+	"<cmd>DiffviewFileHistory<CR><C-w>w<C-w>|",
+	{ desc = "󰊢 Line History (Diffview)" }
+)
+
 keymap("n", "<leader>gd", function()
 	vim.ui.input({ prompt = "󰢷 Git Pickaxe (empty = full history)" }, function(pickaxe)
 		if not pickaxe then return end
@@ -166,12 +173,6 @@ keymap("n", "<leader>gd", function()
 		if pickaxe ~= "" then fn.execute("/" .. pickaxe, "silent!") end
 	end)
 end, { desc = "󰊢 Pickaxe File History (Diffview)" })
-keymap(
-	"x",
-	"<leader>gd",
-	"<cmd>DiffviewFileHistory<CR><C-w>w<C-w>|",
-	{ desc = "󰊢 Line History (Diffview)" }
-)
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING

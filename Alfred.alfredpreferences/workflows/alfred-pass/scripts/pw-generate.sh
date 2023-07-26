@@ -10,8 +10,9 @@ if [[ "$generatePassword" -eq 1 ]]; then
 	# pass to Alfred for copying
 	echo -n "$(pass show "$folder$entry_name" | head -n1)"
 else
-	# echo needed to skip confirmation, not to pass password again
+	# echo needed to skip confirmation, so not to pass password again
 	pbpaste | pass insert --echo "$folder$entry_name" &>/dev/null
+	open -R "$folder$entry_name" # show folder as form of confirmation
 fi
 
 # shellcheck disable=2154
