@@ -101,7 +101,7 @@ keymap({ "o", "x" }, "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", 
 keymap({ "o", "x" }, "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", { desc = "󱡔 to next closing bracket textobj" })
 
 -- o: c[o]lumn textobj
-keymap("o", "o", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "󱡔 column textobj" })
+keymap({"x", "o"}, "O", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "󱡔 column textobj" })
 
 -- ag: entire buffer textobj
 keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "󱡔 entire buffer textobj" })
@@ -158,4 +158,3 @@ keymap("n", "dsi", function()
 	end
 	cmd(tostring(startBorderLn) .. " delete")
 end, { desc = "Delete surrounding indentation" })
-

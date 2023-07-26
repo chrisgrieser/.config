@@ -77,7 +77,9 @@ local function workLayout()
 	end
 	-- FIX duplicate window issues with AltTab
 	LayoutTimer = hs.timer
-		.waitUntil(function() return u.appRunning("Discord") end, function() u.openApps("AltTab") end, 0.1)
+		.waitUntil(function() return u.appRunning("Discord") end, function()
+			u.runWithDelays(0.3, function() u.openApps("AltTab") end)
+		end, 0.1)
 		:start()
 
 	-- finish

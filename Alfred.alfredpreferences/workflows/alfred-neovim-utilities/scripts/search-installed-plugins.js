@@ -3,6 +3,7 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
@@ -16,9 +17,9 @@ const jsonArray = app
 	.doShellScript(`cd "${pluginLocation}" && grep -oh "http.*" ./*/.git/config`)
 	.split("\r")
 	.map((remote) => {
-		const repo = remote.slice(0, -4); // removes the `.git` suffix
-		const name = repo.split("/")[4];
-		const owner = repo.split("/")[3];
+		const owner = remote.split("/")[3];
+		const name = remote.split("/")[4].split(".")[0];
+		const repo = `${owner}/${name}`;
 		return {
 			title: name,
 			subtitle: owner,

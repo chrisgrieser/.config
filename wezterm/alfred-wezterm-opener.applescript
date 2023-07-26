@@ -1,4 +1,4 @@
-# INFO to be entered in the Alfred Terminal settings 
+# INFO to be entered in the Alfred Terminal settings
 # alfredpreferences://navigateto/features>terminal
 # (Kept here just for reference.)
 --------------------------------------------------------------------------------
@@ -11,7 +11,10 @@ on alfred_script(shellCmd)
 			delay 0.05
 		end repeat
 	end tell
-	
+
+	set command to text 1 thru 2 of shellCmd
+	if command is "cd" then set shellCmd to shellCmd & " ; clear"
+
 	# PATH modification needed for intel macs
 	do shell script ("export PATH=:/usr/local/bin:$PATH ; echo '" & shellCmd & "' | wezterm cli send-text --no-paste")
 end alfred_script
