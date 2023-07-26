@@ -10,53 +10,15 @@ local u = require("config.utils")
 -- META
 
 -- search keymaps
-keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = " Search Keymaps" })
+keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "⌨️  Search Keymaps" })
 
--- Highlights
-keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
-
--- [P]lugins
-keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Update/Sync" })
-keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
-keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
-
-keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason Overview" })
--- stylua: ignore
-keymap("n", "<leader>pt", cmd.TSUpdate, { desc = " Treesitter Parser Update" })
-
--- Theme Picker
--- stylua: ignore
-keymap("n", "<leader>pc", function() cmd.Telescope("colorscheme") end, { desc = "  Change Colorschemes" })
+keymap("n", "<D-,>", function ()
+	local thisFilePath = debug.getinfo(1).source:sub(2)
+	vim.cmd.edit(thisFilePath)
+end, { desc = "⌨️ Edit keybindings.lua" })
 
 --------------------------------------------------------------------------------
 
--- copy [l]ast ex[c]ommand
-keymap("n", "<leader>lc", function()
-	local lastCommand = fn.getreg(":"):gsub("^I ", "")
-	if #lastCommand == 0 then
-		vim.notify("No last command available", u.warn)
-		return
-	end
-	fn.setreg("+", lastCommand)
-	vim.notify("COPIED\n" .. lastCommand)
-end, { desc = "󰘳 Copy last command" })
-
--- [l]ast command [a]gain
--- as opposed to `@:`, this works across restarts of neovim
-keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again" })
-
--- search command history
--- stylua: ignore
-keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { desc = "󰘳  Command History" })
-
--- show current filetype & buftype
-keymap("n", "<leader>lf", function()
-	local icon = require("nvim-web-devicons").get_icon(fn.bufname(), bo.filetype)
-	icon = not icon and "" or icon .. " "
-	local out = ("filetype: %s%s"):format(icon, bo.filetype)
-	if bo.buftype ~= "" then out = out .. "\nbuftype: " .. bo.buftype end
-	vim.notify(out, u.trace)
-end, { desc = "󰽘 Inspect FileType & BufType" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
