@@ -12,7 +12,13 @@ return {
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		event = "VeryLazy",
 		init = function()
-			vim.keymap.set("n", "<D-0>", "<cmd>Noice Log<CR>", { desc = "󰎟 Notification Log" })
+			vim.keymap.set("n", "<D-0>", "<cmd>Noice Log<CR>G", { desc = "󰎟 Notification Log" })
+			autocmd("FileType", {
+				pattern = "ft",
+				callback = function()
+					
+				end,
+			})
 		end,
 		opts = {
 			-- can be used to filter/redirect stuff
@@ -24,11 +30,10 @@ return {
 				{ filter = { event = "msg_show", find = "^%d+ fewer lines;" }, skip = true },
 				{ filter = { event = "msg_show", find = "^1 line less;" }, skip = true },
 				{ filter = { event = "msg_show", find = "^%d+ changes?;" }, skip = true },
-				{ filter = { event = "msg_show", find = "^%d+ changes?;" }, skip = true },
 
 				-- redirect stuff to the more subtle "mini"
 				{ filter = { event = "msg_show", find = "[Bb] written$" }, view = "mini" },
-				{ filter = { event = "msg_show", find = "^%[nvim-treesitter%]" }, view = "mini" },
+				{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 				{ filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
 				{ filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
 			},
@@ -58,7 +63,7 @@ return {
 			presets = {
 				bottom_search = true,
 				long_message_to_split = true,
-				inc_rename = true,
+				-- inc_rename = true,
 				lsp_doc_border = true,
 			},
 		},
