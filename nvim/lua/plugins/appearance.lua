@@ -24,6 +24,7 @@ return {
 				{ filter = { event = "msg_show", find = "^%d+ fewer lines;" }, skip = true },
 				{ filter = { event = "msg_show", find = "^1 line less;" }, skip = true },
 				{ filter = { event = "msg_show", find = "^%d+ changes?;" }, skip = true },
+				{ filter = { event = "msg_show", find = "^%d+ changes?;" }, skip = true },
 
 				-- redirect stuff to the more subtle "mini"
 				{ filter = { event = "msg_show", find = "[Bb] written$" }, view = "mini" },
