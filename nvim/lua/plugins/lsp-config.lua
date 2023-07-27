@@ -241,7 +241,6 @@ local function diagnosticConfig()
 	-- vim.lsp.handlers["textDocument/signatureHelp"] =
 	-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
-
 	vim.diagnostic.config {
 		virtual_text = {
 			severity = { min = vim.diagnostic.severity.WARN }, -- no text for hints
