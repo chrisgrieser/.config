@@ -35,9 +35,11 @@ return {
 		"chrisgrieser/nvim-origami",
 		dev = true,
 		init = function()
-			vim.keymap.set("n", "h", function() require("origiami").h() end, { desc = "Origami h" })
+			vim.keymap.set("n", "h", function() require("origami").h() end, { desc = "Origami h" })
 		end,
-		opts = true, -- required, if you use the default config
+		opts = {
+			pauseFoldsOnSearch = { forwardKey = "-" },
+		}
 	},
 	{
 		"jghauser/fold-cycle.nvim",
