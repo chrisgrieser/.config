@@ -64,11 +64,11 @@ vim.on_key(function(char)
 	if vim.g.scrollview_refreshing then return end -- FIX: https://github.com/dstein64/nvim-scrollview/issues/88#issuecomment-1570400161
 	local searchKeys = { "n", "N", "*", "#" }
 	local searchConfirmed = (fn.keytrans(char) == "<CR>" and fn.getcmdtype():find("[/?]") ~= nil)
-	if not (searchConfirmed or fn.mode() == "n") then return end
-
-	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
-	if searchKeyUsed or searchConfirmed then require("hlslens").start() end
-	if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
+	if searchConfirmed or (fn.mode() == "n") then
+		local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
+		if searchKeyUsed or searchConfirmed then require("hlslens").start() end
+		if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
+	end
 end, vim.api.nvim_create_namespace("auto_nohl"))
 
 autocmd("CmdlineEnter", {
