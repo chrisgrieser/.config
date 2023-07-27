@@ -52,7 +52,7 @@ return {
 					search_down = { icon = "  " },
 					cmdline = { icon = " " },
 					-- syntax highlighting for `:I`, (see config/user-commands.lua)
-					inspect = { pattern = "^:I", icon = " ", ft = "lua" },
+					inspect = { pattern = "^:I ", icon = " ", ft = "lua" },
 				},
 			},
 			view = {
