@@ -50,6 +50,13 @@ local host = wt.hostname()
 local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
 local isAtMother = host:find("Mother") ~= nil
 
+local fontSize = 28
+if isAtMother then
+	fontSize = 26
+elseif isAtOffice then
+	fontSize = 31
+end
+
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
 
@@ -129,6 +136,14 @@ local keybindings = {
 			end),
 		},
 	},
+	{ -- cmd+y -> copy full line
+		key = "y",
+		mods = "CMD",
+		action = act.QuickSelectArgs {
+			patterns = {"^-*$"},
+			label = "Copy Full Line",
+		},
+	},
 	{ -- cmd+o -> copy shell option (e.g. to copy stuff from a man page)
 		key = "o",
 		mods = "CMD",
@@ -163,11 +178,10 @@ local keybindings = {
 	-- Console / REPL
 	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
 
-	-- copy mode https://wezfurlong.org/wezterm/copymode.html
+	-- Copy Mode (~= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
 	{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
 
-	-- hint mode https://wezfurlong.org/wezterm/quickselect.html
-	-- can use cmd+c, since wezterm auto-copies mouse selection, freeing up cmd+c
+	-- Quick Select (~= Hint Mode) -- https://wezfurlong.org/wezterm/quickselect.html
 	{ key = "c", mods = "CMD|ALT", action = act.QuickSelect },
 
 	-- FIX works with `send_composed_key_when_right_alt_is_pressed = true`
@@ -200,7 +214,7 @@ wt.on("format-tab-title", function(tab)
 	return " 「" .. icon .. title .. " 」"
 end)
 
--- WINDOW TITLE 
+-- WINDOW TITLE
 -- set to pwd
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-window-title
 wt.on("format-window-title", function(_, pane)
@@ -258,10 +272,9 @@ local config = {
 	--   icons have a sizing issues, therefore explicitly using the Nerd Font here
 	-- - some nerd font requires a space after them to be properly sized
 	font = wt.font("Iosevka Fixed", { weight = "Medium" }),
-	-- font = wt.font("JetBrainsMonoNL Nerd Font", {weight = "Medium"}),
 
-	font_size = isAtMother and 26 or 28,
-	command_palette_font_size = 29,
+	font_size = fontSize,
+	command_palette_font_size = 30,
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 
 	-- Size
