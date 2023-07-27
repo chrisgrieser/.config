@@ -1158,6 +1158,7 @@ rules:
         to:
           - shell_command: |
               osascript -e 'display notification "☁️ 🔁 Restarting iCloud…" with title "Finder Vim Mode"'
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
               killall bird
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-p: copy path
