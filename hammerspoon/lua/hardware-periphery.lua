@@ -48,8 +48,8 @@ ExternalHarddriveWatcher = hs.usb.watcher
 		if u.tbl_contains(harddriveNames, name) then
 			hs.application.open("WezTerm")
 		else
-			-- open volume
-			u.runWithDelays({ 1, 2 }, function()
+			-- open if volume
+			u.runWithDelays({ 1, 2, 4 }, function()
 				local stdout, success =
 					hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
 				if not success or not stdout then return end
@@ -85,5 +85,5 @@ end
 -- 1. System Start
 if not u.isReloading() then batteryCheck() end
 
--- 2. daily
-BiweeklyTimer = hs.timer.doAt("01:30", "01d", batteryCheck, true):start()
+-- -- 2. daily
+DailyBatteryCheckTimer = hs.timer.doAt("01:30", "01d", batteryCheck, true):start()

@@ -150,12 +150,12 @@ if env.tickerApp == "Ivory" then
 	local reloadMins = 3
 	IvoryReloadTimer = hs.timer
 		.doEvery(reloadMins * 60, function()
-			local app = u.app(env.tickerApp)
-			if not app then return end
+			local ivory = u.app(env.tickerApp)
+			if not ivory then return end
 
 			-- only reload when not idle, so this does not prevent screensaver/sleep
-			local brieflyIdle = hs.host.idleTime() > (reloadMins * 60 / 2)
-			if brieflyIdle or not app:isFrontmost() then return end
+			local idle = hs.host.idleTime() > (reloadMins * 60 / 2)
+			if idle or ivory:isFrontmost() then return end
 
 			scrollUp()
 		end)
