@@ -3,17 +3,18 @@ return {
 		"mg979/vim-visual-multi",
 		keys = { { "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" } },
 		init = function()
+
 			vim.g.VM_set_statusline = 0 -- already using my version via lualine component
 			vim.g.VM_show_warning = 0
 			vim.g.VM_silent_exit = 1
-
 			-- https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 			vim.g.VM_maps = {
 				["Find Under"] = "<D-j>", -- select word under cursor & enter visual-multi (normal) / add next occurrence (visual-multi)
 				["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
 				["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
-				["Find Operator"] = "-", -- find substring of selection (visual-multi)
+				["Find Operator"] = "s", -- operator, selects all regions found in the given textobj (visual-multi)
 			}
+
 		end,
 	},
 	-- TODO switch to multicursor.nvim once it's stable
