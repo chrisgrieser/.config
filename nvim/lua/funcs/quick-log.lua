@@ -209,7 +209,7 @@ function M.removelogs()
 
 	if type(logStatement) == "string" then logStatement = { logStatement } end
 	for _, logCom in pairs(logStatement) do
-		cmd([[g/^\s*]] .. logCom .. [[/d]])
+		cmd([[silent g/^\s*]] .. logCom .. [[/d]])
 	end
 	cmd.nohlsearch()
 
