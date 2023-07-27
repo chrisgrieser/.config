@@ -32,6 +32,16 @@ end
 
 return {
 	{
+		"chrisgrieser/nvim-origami",
+		dev = true,
+		init = function ()
+			vim.keymap.set("n", "h", function () require("origiami").h() end, {desc = "Origami h"})
+		end,
+		opts = {
+			
+		},
+	},
+	{
 		"jghauser/fold-cycle.nvim",
 		lazy = true, -- loaded by keymap
 		opts = true,
