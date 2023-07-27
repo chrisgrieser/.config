@@ -9,11 +9,7 @@ local aw = require("lua.utils").aw
 ---@param win hs.window
 local function obsidianThemeDevHelper(win)
 	local obsi = u.app("Obsidian")
-	if
-		not win
-		or not win:application()
-		or not (win:application():name():lower() == "neovide")
-	then
+	if not win or not win:application() or not (win:application():name():lower() == "neovide") then
 		return
 	end
 
@@ -61,7 +57,8 @@ NeovideWatcher = aw.new(function(appName, eventType, neovide)
 		-- FIX for: https://github.com/neovide/neovide/issues/1595
 	elseif eventType == aw.terminated then
 		-- language_server_macos_x64 language_server_macos_arm are Codium servers
-		local killCmd = [[pgrep -xq 'neovide' || killall neovide nvim language_server_macos_x64 language_server_macos_arm || killall -9 nvim]]
+		local killCmd =
+			[[pgrep -xq 'neovide' || killall neovide nvim language_server_macos_x64 language_server_macos_arm]]
 		u.runWithDelays(3, function() hs.execute(killCmd) end)
 	end
 end):start()
@@ -70,7 +67,7 @@ Wf_neovideMoved = u.wf
 	.new({ "Neovide", "neovide" })
 	:subscribe(u.wf.windowMoved, function(movedWin) obsidianThemeDevHelper(movedWin) end)
 
-	-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 -- HACK since neovide does not send a launch signal, triggering window resizing
 -- via its URI scheme called on VimEnter
@@ -80,7 +77,12 @@ u.urischeme("enlarge-neovide-window", function()
 		local size = env.isProjector() and wu.maximized or wu.pseudoMax
 		wu.moveResize(neovideWin, size)
 	end)
+	-- check for: https://github.com/neovide/neovide/issues/1595
+	u.runWithDelays(2, function()
+		local numOfNvimProcs = hs.execute("pgrep -x 'nvim' | wc -l"):match("%d+")
+		print("numOfNvimProcs: " .. numOfNvimProcs)
+		if numOfNvimProcs ~= "1" then u.notify(numOfNvimProcs .. " nvim processes running") end
+	end)
 end)
 
 --------------------------------------------------------------------------------
-

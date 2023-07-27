@@ -32,3 +32,4 @@ safeRequire("config.clipboard")
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
 
+--------------------------------------------------------------------------------
