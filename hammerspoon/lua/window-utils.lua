@@ -114,7 +114,7 @@ function M.autoTile(winSrc)
 	M.bringAllWinsToFront()
 
 	AutoTileInProgress = true
-	u.runWithDelays(0.15, function() AutoTileInProgress = false end)
+	u.runWithDelays(0.1, function() AutoTileInProgress = false end)
 	local pos = {}
 
 	if #wins == 0 and u.isFront("Finder") and not (env.isProjector()) then
@@ -157,6 +157,17 @@ function M.autoTile(winSrc)
 			{ h = 0.5, w = 0.33, x = 0.66, y = 0 },
 		}
 		if #wins == 6 then table.insert(pos, { h = 0.5, w = 0.33, x = 0.66, y = 0.5 }) end
+	elseif #wins == 7 or #wins == 8 then
+		pos = {
+			{ h = 0.5, w = 0.25, x = 0, y = 0 },
+			{ h = 0.5, w = 0.25, x = 0, y = 0.5 },
+			{ h = 0.5, w = 0.25, x = 0.25, y = 0 },
+			{ h = 0.5, w = 0.25, x = 0.25, y = 0.5 },
+			{ h = 0.5, w = 0.25, x = 0.5, y = 0 },
+			{ h = 0.5, w = 0.25, x = 0.5, y = 0.5 },
+			{ h = 0.5, w = 0.25, x = 0.75, y = 0 },
+		}
+		if #wins == 8 then table.insert(pos, { h = 0.5, w = 0.25, x = 0.75, y = 0.5 }) end
 	end
 	-----------------------------------------------------------------------------
 
