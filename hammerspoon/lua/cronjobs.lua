@@ -25,7 +25,7 @@ ProjectorScreensaverWatcher = c.new(function(event)
 end):start()
 
 -- on Mondays shortly before 10:00, open #fg-organisation Slack Channel
-JourfixeTimer = hs.timer
+JourFixeTimer = hs.timer
 	.doAt("09:59", "01d", function()
 		if not (getWeekday() == "Mon" and u.screenIsUnlocked()) then return end
 		hs.execute("open 'slack://channel?team=T010A5PEMBQ&id=CV95T641Y'")
@@ -53,8 +53,8 @@ end
 
 u.urischeme("backup", backup)
 
-BiweeklyTimer = hs.timer
-	.doAt("23:00", "01d", function()
+NightlyMaintenanceTimer = hs.timer
+	.doAt("02:00", "01d", function()
 		local weekday = getWeekday()
 		if weekday == "Tue" or weekday == "Fri" or weekday == "Sun" then backup() end
 		if weekday == "Sun" then hs.loadSpoon("EmmyLua") end
@@ -86,7 +86,7 @@ end
 -- Between 1:00 and 6:00, check every 10 min if device has been idle for 40
 -- minutes. If so, alert and wait for another minute. If still idle then, quit
 -- video apps.
-SleepTimer = hs.timer
+SleepAutoVideoOffTimer = hs.timer
 	.doEvery(10 * 60, function()
 		if not (u.betweenTime(1, 6) and idleMins(40) and env.isProjector() and u.screenIsUnlocked()) then
 			return
