@@ -65,7 +65,9 @@ vim.on_key(function(char)
 	local searchKeys = { "n", "N", "*", "#" }
 	local searchConfirmed = (fn.keytrans(char) == "<CR>" and fn.getcmdtype():find("[/?]") ~= nil)
 	if not (searchConfirmed or fn.mode() == "n") then return end
+
 	local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
+	if searchKeyUsed or searchConfirmed then require("hlslens").start() end
 	if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
 end, vim.api.nvim_create_namespace("auto_nohl"))
 
@@ -326,7 +328,6 @@ keymap({ "n", "x" }, "<D-s>", function()
 	cmd.update()
 	vim.lsp.buf.format()
 end, { desc = "󰒕  Save & Format" })
-
 
 -- uses "v" instead of "x", so signature can be shown during snippet completion
 keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature" })

@@ -4,6 +4,14 @@ local colorPickerFts = { "css", "scss", "lua", "sh", "zsh", "bash" }
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"kevinhwang91/nvim-hlslens",
+		lazy = true, -- loaded by my "vim.on_key" function
+		opts = {
+			nearest_only = true,
+			-- auto_enable = false,
+		},
+	},
 	{ -- UI overhaul
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
@@ -36,7 +44,7 @@ return {
 				{ filter = { event = "msg_show", find = "^Auto-Closing Buffer:" }, view = "mini" },
 
 				-- unneeded info on search patterns
-				{ filter = { event = "msg_show", find = "^/." }, skip = true },
+				{ filter = { event = "msg_show", find = "^/." }, view = "mini" },
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 			},
 			cmdline = {
@@ -56,7 +64,7 @@ return {
 
 			-- DISABLED, since conflicts with existing plugins I prefer to use
 			popupmenu = { backend = "cmp" }, -- replace with nvim-cmp, since more sources
-			-- messages = { view_search = false }, -- replaced by custom lualine component
+			messages = { view_search = false }, -- replaced by custom lualine component
 			lsp = {
 				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since this one cannot filter null-ls
 				signature = { enabled = false }, -- replaced with lsp_signature.nvim
