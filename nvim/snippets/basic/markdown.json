@@ -35,6 +35,10 @@
 		"prefix": "ignore start/end (ltex/vale)",
 		"body": ["<!-- LTeX: enabled=false --><!-- vale off -->", "<!-- LTeX: enabled=true --><!-- vale on -->"]
 	},
+	"ignore start/end (ltex)": {
+		"prefix": "ignore start/end (ltex)",
+		"body": ["<!-- LTeX: enabled=false -->", "<!-- LTeX: enabled=true -->"]
+	},
 	"Markdown Codeblock": {
 		"prefix": [",,", "Codeblock"],
 		"body": ["```${1:lang}", "$0", "```"]
