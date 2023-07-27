@@ -39,6 +39,7 @@ return {
 		opts = {
 			retirementAgeMins = 25,
 			ignoreUnsavedChangesBufs = false,
+			notificationOnAutoClose = true,
 		},
 	},
 	{ -- change cwd per project

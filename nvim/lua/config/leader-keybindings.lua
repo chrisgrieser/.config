@@ -102,6 +102,12 @@ keymap("n", "<leader>uo", function()
 	cmd.earlier(tostring(secsPassed) .. "s")
 end, { desc = "󰜊 Undo since last open" })
 
+
+--------------------------------------------------------------------------------
+-- LSP
+keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
+keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Show Diagnostic" })
+
 --------------------------------------------------------------------------------
 
 -- LOGGING & DEBUGGING
