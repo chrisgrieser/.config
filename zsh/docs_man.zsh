@@ -112,3 +112,8 @@ export LESSHISTFILE=-                                                    # don't
 #   homebrew is needed (v.633)
 # - keybinding for search includes a setting that makes `n` and `N` wrap
 export LESSKEYIN="$DOTFILE_FOLDER/zsh/.lesskey"
+
+less_version=$(less --version | grep -E --only-matching --max-count=1 "[0-9.]{2,}")
+
+[[ $less_version -lt 582 ]] &&
+	echo "Installed version of less is lower v.582, does not support all features."
