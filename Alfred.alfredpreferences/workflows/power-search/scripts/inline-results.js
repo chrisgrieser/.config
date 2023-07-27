@@ -114,20 +114,20 @@ function run(argv) {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	// Guard clause 1: query less than 3 chars
-	if (query.length < 3) return;
+	// Guard clause 1: query less than 3 chars or a URL
+	if (query.length < 3 || query.match(/^\w+:/)) return;
 
 	// Guard clause 2: first word of query is alfred keyword
 	if (ignoreAlfredKeywords && !isUsingFallbackSearch) {
 		const timelogKeywordIgnore = +new Date();
+
 		const queryFirstWord = query.split(" ")[0];
 		const alfredKeywords = getAlfredKeywords();
 		if (alfredKeywords.includes(queryFirstWord)) return;
 
-		const duration = (+new Date() - timelogKeywordIgnore) / 1000;
-
 		// TODO with more than 50 workflows installed, and 180+ keywords, keyword
 		// identification takes about 250ms on my M1 machine. Consider caching?
+			const duration = (+new Date() - timelogKeywordIgnore) / 1000;
 		console.log("time to identify Alfred keywords:", duration, "s");
 		console.log("number of keywords:", alfredKeywords.length);
 	}

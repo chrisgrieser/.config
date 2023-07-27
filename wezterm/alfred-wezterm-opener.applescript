@@ -15,6 +15,5 @@ on alfred_script(shellCmd)
 	set command to text 1 thru 2 of shellCmd
 	if command is "cd" then set shellCmd to shellCmd & " ; clear"
 
-	# PATH modification needed for intel macs
-	do shell script ("export PATH=:/usr/local/bin:$PATH ; echo '" & shellCmd & "' | wezterm cli send-text --no-paste")
+	do shell script ("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; echo '" & shellCmd & "' | wezterm cli send-text --no-paste")
 end alfred_script
