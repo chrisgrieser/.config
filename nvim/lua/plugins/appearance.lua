@@ -33,8 +33,8 @@ return {
 			routes = {
 				-- redirect stuff to the more subtle "mini"
 				{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
+				{ filter = { event = "msg_show", find = "^Auto-Closing Buffer:" }, view = "mini" },
 
-				-- { filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 				-- { filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
 				-- { filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
 

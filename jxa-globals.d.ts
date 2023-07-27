@@ -28,6 +28,17 @@ declare class macAppObj {
 	}[];
 }
 
+declare class SideNotesFolder {
+	notes: SideNotesNote[];
+}
+declare class SideNotesNote {
+	content(): string;
+	title(): string;
+	delete(): void;
+	text(): string;
+}
+
+
 declare function Path(filepath: string): object;
 
 declare const Application: {
@@ -75,23 +86,18 @@ declare const Application: {
 		};
 	};
 	(name: "SideNotes"): macAppObj & {
-		currentNote(): {
-			content(): string;
-			title(): string;
-			delete(): void;
-		};
+		currentNote(): SideNotesNote;
 		createNote(
-			options: macAppObj & {
+			options: {
 				text: string;
 				path?: string;
-				// rome-ignore lint/suspicious/noExplicitAny: todo
-				folder?: any;
+				folder?: SideNotesFolder;
 				ispath?: boolean;
 			},
 		): void;
+		open(note: SideNotesNote|SideNotesFolder): void;
 		folders: {
-			byName(folderName: string): Object;
-			length: number;
+			byName(folderName: string): SideNotesFolder;
 		};
 	};
 	(name: "Alfred" | "com.runningwithcrayons.Alfred"): macAppObj & {

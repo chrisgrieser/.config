@@ -327,7 +327,6 @@ keymap({ "n", "x" }, "<D-s>", function()
 	vim.lsp.buf.format()
 end, { desc = "󰒕  Save & Format" })
 
-keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
 -- uses "v" instead of "x", so signature can be shown during snippet completion
 keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature" })
