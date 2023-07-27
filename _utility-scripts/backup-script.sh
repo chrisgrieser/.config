@@ -48,7 +48,7 @@ function backup() {
 	print "\033[0m"
 	mkdir -p "$2"
 	# --delete-during the fastest deletion method, --arcive already implies --recursive
-	rsync --archive --delete-during --progress --human-readable --exclude="*.Trash/*" "$1" "$2"
+	rsync --archive --delete-during --progress --exclude="*.Trash/*" "$1" "$2"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

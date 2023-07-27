@@ -284,13 +284,11 @@ function clone() {
 
 # delete and re-clone git repo
 function nuke {
+	if ! git rev-parse --is-inside-work-tree &>/dev/null ; then print "\033[1;33mfile is not ins a git repository.\033[0m" && return 1 ; fi
 	is_submodule=$(git rev-parse --show-superproject-working-tree)
-	if [[ -n "$is_submodule" ]]; then
-		print "\033[1;33mAborting. nuke function has not been implemented for git submodules yet."
-		return 1
-	fi
-	SSH_REMOTE=$(git remote -v | head -n1 | cut -d" " -f1 | cut -d$'	' -f2)
+	if [[ -n "$is_submodule" ]]; then print "\033[1;33mnuke does not support submodules.\033[0m" && return 1; fi
 
+	SSH_REMOTE=$(git remote -v | head -n1 | cut -d" " -f1 | cut -d$'	' -f2)
 	# go to git repo root
 	cd "$(git rev-parse --show-toplevel)"
 	local_repo_path=$(pwd)
