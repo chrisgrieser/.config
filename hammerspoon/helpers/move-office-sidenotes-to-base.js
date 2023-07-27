@@ -8,7 +8,7 @@ const sidenotes = Application("SideNotes");
 const destination = sidenotes.folders.byName(toFolder);
 const notesToMove = sidenotes.folders.byName(fromFolder).notes;
 
-const hasNotesToMove = notesToMove.length;
+const hasNotesToMove = notesToMove.length > 0;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -16,6 +16,7 @@ const hasNotesToMove = notesToMove.length;
 // creating and deleting note since there does not seem to be a moving function
 for (let i = notesToMove.length - 1; i >= 0; i--) {
 	const note = notesToMove[i];
+	if (!note || !note.text()) continue;
 
 	sidenotes.createNote({
 		folder: destination,
@@ -27,7 +28,7 @@ for (let i = notesToMove.length - 1; i >= 0; i--) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// Open the Correct Folder
+// Open the correct Folder
 if (hasNotesToMove) {
 	sidenotes.open(sidenotes.folders.byName(toFolder));
 }

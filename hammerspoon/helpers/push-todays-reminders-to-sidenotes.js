@@ -1,13 +1,18 @@
 #!/usr/bin/env osascript -l JavaScript
+ObjC.import("stdlib");
+//──────────────────────────────────────────────────────────────────────────────
+
+const toFolder = "Base"
+
+//──────────────────────────────────────────────────────────────────────────────
 
 // rome-ignore lint/correctness/noUnusedVariables: run
 function run() {
-	ObjC.import("stdlib");
-	const sidenotes = Application("Sidenotes");
+	const sidenotes = Application("SideNotes");
 	const reminders = Application("Reminders");
 
 	const today = new Date();
-	const folder = sidenotes.folders.byName("Base");
+	const folder = sidenotes.folders.byName(toFolder);
 	const delaySecs = 0.05;
 
 	// https://leancrew.com/all-this/2017/08/my-jxa-problem/
@@ -15,7 +20,7 @@ function run() {
 	const todaysTasks = reminders.defaultList().reminders.whose({ dueDate: { _lessThan: today } });
 
 	if (!todaysTasks || todaysTasks.length === 0) {
-		reminders.quit();
+		if (reminders) reminders.quit();
 		return;
 	}
 
@@ -23,6 +28,8 @@ function run() {
 	// - backwards, to not change the indices at loop runtime
 	for (let i = todaysTasks.length - 1; i >= 0; i--) {
 		const task = todaysTasks[i];
+		if (!task || !task.name()) continue;
+
 		const body = task.body();
 		const title = task.name();
 		const newNoteContent = body ? `# ${title}\n${body}` : title;
@@ -36,7 +43,7 @@ function run() {
 	}
 
 	delay(delaySecs);
-	reminders.quit();
+	if (reminders) reminders.quit();
 
 	// close sidenotes again
 	delay(delaySecs);

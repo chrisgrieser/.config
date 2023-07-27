@@ -38,7 +38,6 @@ declare class SideNotesNote {
 	text(): string;
 }
 
-
 declare function Path(filepath: string): object;
 
 declare const Application: {
@@ -74,7 +73,11 @@ declare const Application: {
 		processes: any;
 	};
 	(name: "Reminders"): macAppObj & {
-		defaultList(): { make(any) };
+		defaultList(): {
+			make(any);
+			// rome-ignore lint/suspicious/noExplicitAny: later
+			reminders: any;
+		};
 	};
 	(name: "Finder"): macAppObj & {
 		// paths need to be wrapped for Finder: `Path(str)`
@@ -87,15 +90,13 @@ declare const Application: {
 	};
 	(name: "SideNotes"): macAppObj & {
 		currentNote(): SideNotesNote;
-		createNote(
-			options: {
-				text: string;
-				path?: string;
-				folder?: SideNotesFolder;
-				ispath?: boolean;
-			},
-		): void;
-		open(note: SideNotesNote|SideNotesFolder): void;
+		createNote(options: {
+			text: string;
+			path?: string;
+			folder?: SideNotesFolder;
+			ispath?: boolean;
+		}): void;
+		open(noteOrFolder: SideNotesNote | SideNotesFolder): void;
 		folders: {
 			byName(folderName: string): SideNotesFolder;
 		};
