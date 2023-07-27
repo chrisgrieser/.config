@@ -45,8 +45,8 @@ keymap("n", "<leader>lc", function()
 end, { desc = "󰘳 Copy last command" })
 
 -- [l]ast command [a]gain
--- as opposed to `@:`, this works across restarts of neovim
-keymap("n", "<leader>la", "<cmd><Up><CR>", { desc = "󰘳 Run last command again" })
+-- as opposed to `@:`, this works across sessions
+keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again", silent = true })
 
 -- search command history
 -- stylua: ignore

@@ -7,10 +7,7 @@ return {
 	{
 		"kevinhwang91/nvim-hlslens",
 		lazy = true, -- loaded by my "vim.on_key" function
-		opts = {
-			nearest_only = true,
-			-- auto_enable = false,
-		},
+		opts = { nearest_only = true },
 	},
 	{ -- UI overhaul
 		"folke/noice.nvim",
@@ -44,7 +41,7 @@ return {
 				{ filter = { event = "msg_show", find = "^Auto-Closing Buffer:" }, view = "mini" },
 
 				-- unneeded info on search patterns
-				{ filter = { event = "msg_show", find = "^/." }, view = "mini" },
+				{ filter = { event = "msg_show", find = "^/." }, view = false },
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 			},
 			cmdline = {
@@ -64,7 +61,7 @@ return {
 
 			-- DISABLED, since conflicts with existing plugins I prefer to use
 			popupmenu = { backend = "cmp" }, -- replace with nvim-cmp, since more sources
-			messages = { view_search = false }, -- replaced by custom lualine component
+			messages = { view_search = false }, -- replaced by nvim-hlslens
 			lsp = {
 				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since this one cannot filter null-ls
 				signature = { enabled = false }, -- replaced with lsp_signature.nvim

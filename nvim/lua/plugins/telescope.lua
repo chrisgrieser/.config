@@ -226,6 +226,11 @@ end
 
 return {
 	{
+		"nvim-telescope/telescope-frecency.nvim",
+		config = function() require("telescope").load_extension("frecency") end,
+		dependencies = { "kkharji/sqlite.lua" },
+	},
+	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		commit = "9a82b5b", -- FIX https://github.com/nvim-telescope/telescope.nvim/issues/2593
@@ -239,6 +244,7 @@ return {
 			-- before cmp is loaded
 			"nvim-telescope/telescope-fzf-native.nvim", -- better fuzzy finder
 		},
+
 		config = function()
 			telescopeConfig()
 			require("telescope").load_extension("file_browser")
