@@ -175,7 +175,7 @@ local function shimmeringFocusBuild(commitMsg)
 end
 
 function M.amendNoEditPushForce()
-	vim.cmd.update()
+	vim.cmd("silent update")
 	if not isInGitRepo() then return end
 
 	local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
