@@ -85,7 +85,7 @@ for _, lvl in pairs { 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
 	keymap(
 		"n",
 		"z" .. tostring(lvl),
-		function() require("ufo").closeFoldsWith(lvl - 1) end,
+		function() require("ufo").closeFoldsWith(lvl) end,
 		{ desc = desc }
 	)
 end
