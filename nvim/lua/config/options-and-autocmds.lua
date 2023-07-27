@@ -48,6 +48,7 @@ end
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select more
+opt.mouse = "" -- disable mouse completely
 
 -- Search
 opt.ignorecase = true

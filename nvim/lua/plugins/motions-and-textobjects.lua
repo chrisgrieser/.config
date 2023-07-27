@@ -78,8 +78,8 @@ return {
 				magnetic = { window = nil, cross_window = nil }, -- magnetic = move to object after operation
 				remote = { window = spooky, cross_window = nil },
 			},
-			prefix = true, -- false: `irw`, true: `riw`
-			paste_on_remote_yank = false,
+			prefix = true, -- false: `ixw`, true: `xiw`
+			paste_on_remote_yank = true,
 		},
 	},
 }
