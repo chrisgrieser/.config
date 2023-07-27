@@ -121,9 +121,40 @@ local keybindings = {
 	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
 	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
 
+	-- FIX works with `send_composed_key_when_right_alt_is_pressed = true`
+	-- but expects another character, so this mapping fixes it
+	{ key = "n", mods = "META", action = act.SendString("~") },
+
 	-- emoji picker
 	-- { key = "e", mods = "CMD", action = act.CharSelect },
 
+	{ -- cmd+l -> open current location in Finder
+		key = "l",
+		mods = "CMD",
+		action = actFun(function(_, pane)
+			local cwd = pane:get_current_working_dir()
+			wt.open_with(cwd, "Finder")
+		end),
+	},
+	-- Theme Cycler
+	{ key = "t", mods = "CMD|ALT", action = actFun(theme.cycle) },
+
+	-----------------------------------------------------------------------------
+
+	-- MODES
+	-- Search
+	{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
+
+	-- Console / REPL
+	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
+
+	-- Copy Mode (~= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
+	{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
+
+	-- Quick Select (~= Hint Mode) -- https://wezfurlong.org/wezterm/quickselect.html
+	{ key = "c", mods = "CMD|ALT", action = act.QuickSelect },
+
+	-- Quick Select Presets
 	{ -- cmd+u -> open URL (like f in vimium)
 		key = "u",
 		mods = "CMD",
@@ -139,54 +170,22 @@ local keybindings = {
 	{ -- cmd+y -> copy full line
 		key = "y",
 		mods = "CMD",
-		action = act.QuickSelectArgs {
-			patterns = {"^-*$"},
-			label = "Copy Full Line",
-		},
+		action = act.QuickSelectArgs { patterns = { "^.*$" }, label = "Copy Full Line" },
 	},
 	{ -- cmd+o -> copy shell option (e.g. to copy stuff from a man page)
 		key = "o",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
-			patterns = {
-				"--[\\w=-]+", -- long option
-				"-\\w", -- short option
-			},
+			patterns = { "--[\\w=-]+", "-\\w" }, -- long option, short option
 			label = "Copy Shell Option",
 		},
 	},
-	{ -- cmd+, -> open this config file
+	-- cmd+, -> open this config file
+	{ 
 		key = ",",
 		mods = "CMD",
 		action = actFun(function() wt.open_with(wt.config_file) end),
 	},
-	{ -- cmd+l -> open current location in Finder
-		key = "l",
-		mods = "CMD",
-		action = actFun(function(_, pane)
-			local cwd = pane:get_current_working_dir()
-			wt.open_with(cwd, "Finder")
-		end),
-	},
-	-- Theme Cycler
-	{ key = "t", mods = "CMD|ALT", action = actFun(theme.cycle) },
-
-	-- MODES
-	-- Search
-	{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
-
-	-- Console / REPL
-	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
-
-	-- Copy Mode (~= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
-	{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
-
-	-- Quick Select (~= Hint Mode) -- https://wezfurlong.org/wezterm/quickselect.html
-	{ key = "c", mods = "CMD|ALT", action = act.QuickSelect },
-
-	-- FIX works with `send_composed_key_when_right_alt_is_pressed = true`
-	-- but expects another character, so this mapping fixes it
-	{ key = "n", mods = "META", action = act.SendString("~") },
 }
 
 --------------------------------------------------------------------------------

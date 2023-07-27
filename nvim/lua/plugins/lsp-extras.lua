@@ -54,8 +54,8 @@ return {
 		"dgagn/diagflow.nvim",
 		event = "VeryLazy",
 		opts = {
-			max_width = 40,
-			max_height = 15,
+			max_width = 35,
+			max_height = 8,
 			scope = "line", -- cursor|line
 			placement = "top", -- top|inline
 			text_align = "left", -- left|right
