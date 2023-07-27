@@ -35,9 +35,6 @@ return {
 				{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
 				{ filter = { event = "msg_show", find = "^Auto-Closing Buffer:" }, view = "mini" },
 
-				-- { filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
-				-- { filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
-
 				-- unneeded info on search patterns
 				{ filter = { event = "msg_show", find = "^/." }, skip = true },
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
@@ -59,7 +56,7 @@ return {
 
 			-- DISABLED, since conflicts with existing plugins I prefer to use
 			popupmenu = { backend = "cmp" }, -- replace with nvim-cmp, since more sources
-			messages = { view_search = false }, -- replaced by custom lualine component
+			-- messages = { view_search = false }, -- replaced by custom lualine component
 			lsp = {
 				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since this one cannot filter null-ls
 				signature = { enabled = false }, -- replaced with lsp_signature.nvim
@@ -166,38 +163,6 @@ return {
 				mason = { icon = "", name = "Mason" },
 			},
 		},
-	},
-	{ -- Scrollbar, also shows search matches and git signs
-		"lewis6991/satellite.nvim",
-		commit = "18c3b4d",
-		event = "VeryLazy",
-		opts = {
-			winblend = 60, -- winblend = transparency
-			handlers = {
-				-- FIX displaying marks creates autocmd-mapping of things with m,
-				-- making m-bindings infeasable
-				marks = { enable = false },
-			},
-		},
-	},
-	{ -- Scrollbar, also shows search matches and gitsigns
-		"dstein64/nvim-scrollview",
-		enabled = false, -- very buggy
-		event = "VeryLazy",
-		dependencies = "neovim/nvim-lspconfig",
-		config = function()
-			require("scrollview").setup {
-				winblend = 40,
-				column = 1,
-				signs_on_startup = { "conflicts", "search", "diagnostics", "quickfix", "folds" },
-				refresh_mapping_desc = "which_key_ignore",
-				quickfix_symbol = "󰉀 ",
-				folds_symbol = " ",
-				search_symbol = { "⠂", "⠅", "⠇", "⠗", "⠟", "⠿" },
-			}
-			-- add gitsigns https://github.com/dstein64/nvim-scrollview/blob/main/lua/scrollview/contrib/gitsigns.lua
-			require("scrollview.contrib.gitsigns").setup()
-		end,
 	},
 	{ -- emphasized undo/redos
 		"tzachar/highlight-undo.nvim",
