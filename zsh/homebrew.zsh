@@ -40,8 +40,8 @@ function dump() {
 	# pip3 list --not-required | tail -n+3 | cut -d" " -f1 >"$dump_path/Pip3file_$device_name"
 
 	# shellcheck disable=2012
-	ls --color=never "$HOME/Library/Application Support/$BROWSER_DEFAULTS_PATH/Default/Extensions/" |
-		sed "s|^|https://chrome.google.com/webstore/detail/|" >"$dump_path/browser-extensions.txt"
+	command ls "$HOME/Library/Application Support/$BROWSER_DEFAULTS_PATH/Default/Extensions/" |
+		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" >"$dump_path/browser-extensions.txt"
 
 	echo "Brewfile, NPM-File, and list of browser extensions dumped at \"$dump_path\""
 }

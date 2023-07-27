@@ -100,6 +100,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9248EC6E-2EAB-43B6-B666-C9F3B323038F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ED8AD722-9DB6-49E1-A9DD-43769FFF8052</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9C8E2CFD-649D-4005-8762-41497D453FEF</key>
 		<array>
 			<dict>
@@ -489,6 +502,48 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>hammerspoon://backup</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>ED8AD722-9DB6-49E1-A9DD-43769FFF8052</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>bkp</string>
+				<key>subtext</key>
+				<string>Dotfiles, Vault &amp; Browser Bookmarks</string>
+				<key>text</key>
+				<string>🔁 Sync Repos</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>9248EC6E-2EAB-43B6-B666-C9F3B323038F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -578,6 +633,27 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Add Feed to Innoreader</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>9C8E2CFD-649D-4005-8762-41497D453FEF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -604,21 +680,44 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
+				<key>concurrently</key>
 				<false/>
-				<key>acceptsmulti</key>
+				<key>escaping</key>
 				<integer>0</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Add Feed to Innoreader</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/add-to-espanso-spellings.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>9C8E2CFD-649D-4005-8762-41497D453FEF</string>
+			<string>C120F733-C46F-44AC-ADAA-504E11D52028</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>spell</string>
+				<key>subtext</key>
+				<string>$1: Misspelling $2: Correct Spelling</string>
+				<key>text</key>
+				<string>Spelling: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A2960A81-02AB-485E-AF91-AEF7B502D533</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -680,44 +779,20 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>argument</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/add-to-espanso-spellings.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C120F733-C46F-44AC-ADAA-504E11D52028</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>spell</string>
-				<key>subtext</key>
-				<string>$1: Misspelling $2: Correct Spelling</string>
-				<key>text</key>
-				<string>Spelling: {query}</string>
-				<key>withspace</key>
+				<key>passthroughargument</key>
 				<true/>
+				<key>variables</key>
+				<dict>
+					<key>open</key>
+					<string>false</string>
+				</dict>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>A2960A81-02AB-485E-AF91-AEF7B502D533</string>
+			<string>0DF397E6-7179-4A9B-A07A-B32165613998</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -735,108 +810,6 @@ end tell</string>
 			<string>FDD33DE5-9EF6-4054-97BE-CD907ADEC73E</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>cd ~/dotfiles/
-
-filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
-if [[ -n "$filesChanged" ]] ; then
-	echo "📴 pre-shutdown-sync" &gt;&gt; ~"/dotfiles/Cron Jobs/sync.log"
-	zsh ~/dotfiles/git-dotfile-sync.sh
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/pre-shutdown.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>AB25652B-F29C-467C-A234-8DD5F700B047</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>shutdown</string>
-				<key>subtext</key>
-				<string>run dotfiles &amp; vault sync before</string>
-				<key>text</key>
-				<string>Shutdown</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>433B5526-5138-4622-BD58-0DE98F3C79F5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>success</string>
-						<key>outputlabel</key>
-						<string>success</string>
-						<key>uid</key>
-						<string>0AFB82C2-9EEE-4164-A0EF-F87F65EE719F</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>error</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>3FBF0208-3AC5-48A4-A7AF-86BE9C0B1915</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>open</key>
-					<string>false</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>0DF397E6-7179-4A9B-A07A-B32165613998</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1194,6 +1167,88 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>cd ~/dotfiles/
+
+filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
+if [[ -n "$filesChanged" ]] ; then
+	echo "📴 pre-shutdown-sync" &gt;&gt; ~"/dotfiles/Cron Jobs/sync.log"
+	zsh ~/dotfiles/git-dotfile-sync.sh
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/pre-shutdown.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>AB25652B-F29C-467C-A234-8DD5F700B047</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>shutdown</string>
+				<key>subtext</key>
+				<string>run dotfiles &amp; vault sync before</string>
+				<key>text</key>
+				<string>Shutdown</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>433B5526-5138-4622-BD58-0DE98F3C79F5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>success</string>
+						<key>outputlabel</key>
+						<string>success</string>
+						<key>uid</key>
+						<string>0AFB82C2-9EEE-4164-A0EF-F87F65EE719F</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>error</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>3FBF0208-3AC5-48A4-A7AF-86BE9C0B1915</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1268,9 +1323,9 @@ fi</string>
 			<key>note</key>
 			<string>Zoom Quicker Login</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>585</real>
 		</dict>
 		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
 		<dict>
@@ -1304,9 +1359,9 @@ fi</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>885</real>
+			<real>880</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>750</real>
 		</dict>
 		<key>433B5526-5138-4622-BD58-0DE98F3C79F5</key>
 		<dict>
@@ -1315,9 +1370,9 @@ fi</string>
 			<key>note</key>
 			<string>ensuring git repos synced before</string>
 			<key>xpos</key>
-			<real>550</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>730</real>
 		</dict>
 		<key>496D4848-5FF5-4521-AD62-DA66D955EF60</key>
 		<dict>
@@ -1358,6 +1413,17 @@ fi</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>155</real>
+		</dict>
+		<key>9248EC6E-2EAB-43B6-B666-C9F3B323038F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>backup: dotfiles, vault, and bookmarks</string>
+			<key>xpos</key>
+			<real>545</real>
+			<key>ypos</key>
+			<real>290</real>
 		</dict>
 		<key>9734FC1B-0242-4229-B9BF-4A809F59C81E</key>
 		<dict>
@@ -1424,9 +1490,9 @@ fi</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>705</real>
+			<real>700</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>730</real>
 		</dict>
 		<key>AF2E709C-56BA-4D78-AD00-074FC6326079</key>
 		<dict>
@@ -1464,27 +1530,27 @@ fi</string>
 			<key>note</key>
 			<string>keep on top</string>
 			<key>xpos</key>
-			<real>705</real>
+			<real>700</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>445</real>
 		</dict>
 		<key>CC649DDD-3F1D-47F4-A2BA-EA57ADBA8E06</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>445</real>
 		</dict>
 		<key>CD7F4A8F-7638-4D94-96DD-C7B2405D837C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1000</real>
+			<real>995</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>850</real>
 		</dict>
 		<key>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</key>
 		<dict>
@@ -1493,9 +1559,9 @@ fi</string>
 			<key>note</key>
 			<string>login script</string>
 			<key>xpos</key>
-			<real>705</real>
+			<real>700</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>585</real>
 		</dict>
 		<key>E8066503-E298-4023-9E9F-3FBA20E03748</key>
 		<dict>
@@ -1519,6 +1585,15 @@ fi</string>
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
+		<key>ED8AD722-9DB6-49E1-A9DD-43769FFF8052</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>700</real>
+			<key>ypos</key>
+			<real>290</real>
+		</dict>
 		<key>F34FCF8E-937F-468A-8727-48A458BF4FA9</key>
 		<dict>
 			<key>colorindex</key>
@@ -1535,9 +1610,9 @@ fi</string>
 			<key>note</key>
 			<string>will ask for confirmation</string>
 			<key>xpos</key>
-			<real>1000</real>
+			<real>995</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>715</real>
 		</dict>
 		<key>FFE40428-4486-4B45-AD59-024B6311D2D8</key>
 		<dict>
@@ -1546,9 +1621,9 @@ fi</string>
 			<key>note</key>
 			<string>move to bottom left</string>
 			<key>xpos</key>
-			<real>865</real>
+			<real>860</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>445</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
