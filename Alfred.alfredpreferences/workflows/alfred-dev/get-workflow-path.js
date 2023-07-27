@@ -1,5 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
-ObjC.import("stdlib")
+ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
@@ -12,14 +12,17 @@ function readFile(path) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
-const historyFile = app.pathTo("home folder") + "/Library/Application Support/Alfred/history.json";
-const navHistory = JSON.parse(readFile(historyFile)).preferences.workflows;
-const currentWorkflowId = navHistory[0];
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run() {
 
-const prefLocation = $.getenv("alfred_preferences")
-const workflowFolderPath = `${prefLocation}/workflows/${currentWorkflowId}`;
+	// https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
+	const historyFile = app.pathTo("home folder") + "/Library/Application Support/Alfred/history.json";
+	const navHistory = JSON.parse(readFile(historyFile)).preferences.workflows;
+	const currentWorkflowId = navHistory[0];
 
-const finder = Application("Finder");
-finder.open(Path(workflowFolderPath));
-finder.activate();
+	const prefLocation = $.getenv("alfred_preferences");
+	const workflowFolderPath = `${prefLocation}/workflows/${currentWorkflowId}`;
+
+	return workflowFolderPath;
+}

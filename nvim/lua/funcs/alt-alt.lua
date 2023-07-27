@@ -111,7 +111,9 @@ end
 function M.betterClose()
 	local absPath = fn.expand("%:p")
 	local fileExists = vim.fn.filereadable(absPath) ~= 0
-	if vim.bo.modifiable and absPath and fileExists then cmd.update(absPath) end
+	if vim.bo.modifiable and absPath and fileExists then
+		cmd("silent update " .. absPath)
+	end
 
 	-- close window
 	if numberOfWins() > 1 then

@@ -3,21 +3,17 @@
 		"prefix": "shebang",
 		"body": "#!/usr/bin/env osascript -l JavaScript"
 	},
-	"running check": {
-		"prefix": "running check",
+	"check if app is running": {
+		"prefix": "check if app is running",
 		"body": "Application(\"${1:appName}\").running()"
 	},
-	"check frontmost": {
-		"prefix": "check frontmost",
+	"check if app is frontmost": {
+		"prefix": "check if app is frontmost",
 		"body": "Application(\"${1:appName}\").frontmost();"
 	},
 	"running apps array": {
 		"prefix": "running apps array",
 		"body": "Application(\"System Events\").applicationProcesses.where({ backgroundOnly: false }).displayedName();"
-	},
-	"online JSON": {
-		"prefix": "online JSON",
-		"body": "const onlineJSON = (url) => JSON.parse(app.doShellScript(`curl -s \"${url}\"`));"
 	},
 	"notification": {
 		"prefix": [
@@ -37,8 +33,8 @@
 		"prefix": "open location",
 		"body": "app.openLocation(\"${1:url}\");"
 	},
-	"clipboard": {
-		"prefix": "clipboard",
+	"set clipboard": {
+		"prefix": "set clipboard",
 		"body": "app.setTheClipboardTo(\"${1:str}\");"
 	},
 	"home (JXA)": {
@@ -48,11 +44,6 @@
 	"exists (file)": {
 		"prefix": "exists (file)",
 		"body": "const fileExists = (/** @type {string} */ filePath) => Application(\"Finder\").exists(Path(filePath));"
-	},
-	"Create new Draft": {
-		"prefix": "Create new Draft",
-		"body": "Application(\"Drafts\").Draft({ \"content\": \"My Draft Content\"}).make()",
-		"description": "In the Drafts.app. See https://forums.getdrafts.com/t/create-new-draft-via-jxa/13940"
 	},
 	"window path (Finder)": {
 		"prefix": "window path (Finder)",
