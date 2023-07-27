@@ -16,16 +16,22 @@ return {
 		opts = {
 			winblend = 60, -- winblend = transparency
 			handlers = {
-				-- FIX displaying marks creates autocmd-mapping of things with m,
-				-- making m-bindings infeasable
+				-- FIX mark-related error message…
 				marks = { enable = false },
 			},
 		},
 	},
+
+
+	-- DISABLED BELOW HERE
+	-----------------------------------------------------------------------------
+	-----------------------------------------------------------------------------
+
+
 	{ -- search indicators requires nvim-hlslens as dependency and also does not work properly
 		"petertriho/nvim-scrollbar",
 		event = "VeryLazy",
-		enabled = true,
+		enabled = false,
 		opts = {
 			handle = {
 				highlight = "ScrollView",
