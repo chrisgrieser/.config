@@ -5,18 +5,27 @@
 
 return {
 	{
-		"kevinhwang91/nvim-hlslens",
-		enabled = false,
-		keys = {
-			{ "n", "n<Cmd>lua require('hlslens').start()<CR>", silent = true },
-			{ "N", "N<Cmd>lua require('hlslens').start()<CR>", silent = true },
+		"lewis6991/satellite.nvim",
+		commit = "5d33376", -- TODO following versions require nvim 0.10
+		event = "VeryLazy",
+		init = function()
+			if vim.version().major == 0 and vim.version().minor >= 10 then
+				vim.notify("satellite.nvim can now be updated.")
+			end
+		end,
+		opts = {
+			winblend = 60, -- winblend = transparency
+			handlers = {
+				-- FIX displaying marks creates autocmd-mapping of things with m,
+				-- making m-bindings infeasable
+				marks = { enable = false },
+			},
 		},
-		opts = {},
 	},
-	{ -- search indicators requires nvim-hlslens as dependency
+	{ -- search indicators requires nvim-hlslens as dependency and also does not work properly
 		"petertriho/nvim-scrollbar",
 		event = "VeryLazy",
-		cond = false,
+		enabled = true,
 		opts = {
 			handle = {
 				highlight = "ScrollView",
@@ -31,26 +40,7 @@ return {
 				diagnostic = true,
 				gitsigns = true,
 				handle = true,
-				search = false, -- Requires hlslens
-			},
-		},
-	},
-	{
-		"lewis6991/satellite.nvim",
-		cond = true,
-		commit = "5d33376", -- TODO following versions require nvim 0.10
-		event = "VeryLazy",
-		init = function()
-			if vim.version().major == 0 and vim.version().minor >= 10 then
-				vim.notify("satellite.nvim can now be updated.")
-			end
-		end,
-		opts = {
-			winblend = 60, -- winblend = transparency
-			handlers = {
-				-- FIX displaying marks creates autocmd-mapping of things with m,
-				-- making m-bindings infeasable
-				marks = { enable = false },
+				search = true, -- Requires hlslens
 			},
 		},
 	},
