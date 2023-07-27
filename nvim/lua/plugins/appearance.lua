@@ -167,9 +167,22 @@ return {
 			},
 		},
 	},
+	{ -- Scrollbar, also shows search matches and git signs
+		"lewis6991/satellite.nvim",
+		commit = "18c3b4d",
+		event = "VeryLazy",
+		opts = {
+			winblend = 60, -- winblend = transparency
+			handlers = {
+				-- FIX displaying marks creates autocmd-mapping of things with m,
+				-- making m-bindings infeasable
+				marks = { enable = false },
+			},
+		},
+	},
 	{ -- Scrollbar, also shows search matches and gitsigns
 		"dstein64/nvim-scrollview",
-		cond = false,
+		enabled = false, -- very buggy
 		event = "VeryLazy",
 		dependencies = "neovim/nvim-lspconfig",
 		config = function()
