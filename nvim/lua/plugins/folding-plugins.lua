@@ -34,12 +34,10 @@ return {
 	{
 		"chrisgrieser/nvim-origami",
 		dev = true,
-		init = function ()
-			vim.keymap.set("n", "h", function () require("origiami").h() end, {desc = "Origami h"})
+		init = function()
+			vim.keymap.set("n", "h", function() require("origiami").h() end, { desc = "Origami h" })
 		end,
-		opts = {
-			
-		},
+		opts = true, -- required, if you use the default config
 	},
 	{
 		"jghauser/fold-cycle.nvim",
@@ -50,6 +48,15 @@ return {
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
 		event = "BufReadPost",
+		init = function()
+			-- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
+			-- auto-closing them after leaving insert mode, however ufo does not seem to
+			-- have equivalents for zr and zm because there is no saved fold level.
+			-- Consequently, the vim-internal fold levels need to be disabled by setting
+			-- them to 99
+			vim.opt.foldlevel = 99
+			vim.opt.foldlevelstart = 99
+		end,
 		opts = {
 			provider_selector = function(_, ft, _)
 				local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh", "css" }

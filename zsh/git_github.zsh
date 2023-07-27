@@ -143,8 +143,8 @@ function pr() {
 	# settings
 	echo "Web interface or Terminal?"
 	mode=$(printf "Web Interface\nTerminal" |
-		fzf --bind="j:down,k:up" --no-sort --height=5% --no-info \
-			--header="j:↓  k:↑" --header-first)
+		fzf --bind="j:down,k:up" --no-sort --no-info --height="4" \
+			--layout=reverse-list --header="j:↓  k:↑")
 	echo
 
 	# get and validate commit msg
@@ -327,7 +327,7 @@ function gdf() {
 	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
 		print "🔍\033[1;34m Multiple files found."
 		echo
-		selection=$(echo "$deleted_path" | fzf --height=70%)
+		selection=$(echo "$deleted_path" | fzf --height=60%)
 		[[ -z "$selection" ]] && return 0
 		deleted_path="$selection"
 	fi
@@ -348,8 +348,8 @@ function gdf() {
 copy to clipboard
 show file (bat)"
 	decision=$(echo "$choices" |
-		fzf --bind="j:down,k:up" --no-sort --height=5% --no-info \
-			--header="j:↓  k:↑" --header-first)
+		fzf --bind="j:down,k:up" --no-sort --no-info --height="5" \
+			--layout=reverse-list --header="j:↓  k:↑")
 
 	if [[ -z "$decision" ]]; then
 		echo "Aborted."
