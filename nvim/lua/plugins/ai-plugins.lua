@@ -1,6 +1,7 @@
 return {
 	{ -- AI Ghost Text Suggestions
 		"Exafunction/codeium.vim",
+		enabled = false,
 		event = "InsertEnter",
 		build = function()
 			-- HACK enable	syncing of API key

@@ -53,8 +53,11 @@ return {
 					inspect = { pattern = "^:I", icon = " ", ft = "lua" },
 				},
 			},
+			view = {
+				mini = { timeout = 3000 },
+			},
 
-			-- DISABLED, since conflicts with existing plugins (which I find better)
+			-- DISABLED, since conflicts with existing plugins I prefer to use
 			popupmenu = { backend = "cmp" }, -- replace with nvim-cmp, since more sources
 			messages = { view_search = false }, -- replaced by custom lualine component
 			lsp = {
@@ -77,23 +80,22 @@ return {
 	},
 	{
 		"rcarriga/nvim-notify",
-		enabled = false,
 		lazy = true, -- loaded by noice
 		opts = {
 			-- HACK fix missing padding: https://github.com/rcarriga/nvim-notify/issues/152
-			-- render = function(bufnr, notif, highlights)
-			-- 	local base = require("notify.render.base")
-			-- 	local namespace = base.namespace()
-			-- 	local padded_message = vim.tbl_map(function(line) return " " .. line end, notif.message)
-			-- 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, padded_message)
-			--
-			-- 	vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
-			-- 		hl_group = highlights.icon,
-			-- 		end_line = #notif.message - 1,
-			-- 		end_col = #notif.message[#notif.message],
-			-- 		priority = 50,
-			-- 	})
-			-- end,
+			render = function(bufnr, notif, highlights)
+				local base = require("notify.render.base")
+				local namespace = base.namespace()
+				local padded_message = vim.tbl_map(function(line) return " " .. line end, notif.message)
+				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, padded_message)
+
+				vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
+					hl_group = highlights.icon,
+					end_line = #notif.message - 1,
+					end_col = #notif.message[#notif.message],
+					priority = 50,
+				})
+			end,
 			stages = "slide",
 			level = 0, -- minimum severity level to display (0 = display all)
 			max_height = 30,
@@ -167,6 +169,7 @@ return {
 	},
 	{ -- Scrollbar, also shows search matches and gitsigns
 		"dstein64/nvim-scrollview",
+		enabled = false,
 		event = "VeryLazy",
 		dependencies = "neovim/nvim-lspconfig",
 		config = function()

@@ -24,18 +24,6 @@ local function scrollUp()
 	end)
 end
 
----Checks clipboard for URL and cleans tracking stuff
-local function cleanUpLink()
-	if env.tickerApp ~= "Twitter" then return end
-	local clipb = hs.pasteboard.getContents()
-	if not clipb then return end
-	local isTweet = clipb:find("^https?://twitter%.com")
-	if not isTweet then return end -- to not overwrite the clipboard to often for clipboard watchers
-
-	local cleanURL = clipb:gsub("%?s=.*t=.*", "")
-	hs.pasteboard.setContents(cleanURL)
-end
-
 local function closeMediaWindow()
 	local app = u.app(env.tickerApp)
 	if not app then return end
@@ -50,6 +38,7 @@ local function closeMediaWindow()
 	if mediaWin then mediaWin:close() end
 end
 
+-- move the ticker-app window to the left side of the screen
 local function winToTheSide()
 	local app = u.app(env.tickerApp)
 	if not app or u.isFront("Alfred") then return end
@@ -65,6 +54,8 @@ local function winToTheSide()
 	win:raise()
 end
 
+-- SHOW if referenceWin is pseudo-maximized or centered
+-- HIDE referenceWin belongs to app with transparent background is maximized
 ---@param referenceWin hs.window
 local function showHideTickerApp(referenceWin)
 	local app = u.app(env.tickerApp)
@@ -72,9 +63,17 @@ local function showHideTickerApp(referenceWin)
 
 	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centered) then
 		winToTheSide()
-	elseif wu.CheckSize(referenceWin, wu.maximized) then
-		-- login window max sized and triggers this as well
-		if referenceWin:title() == "Login" then return end
+		return
+	end
+
+	local transBgApps = { "neovide", "Neovide", "Obsidian", "wezterm-gui", "WezTerm" }
+	local appWithTransBgWasMaximized = wu.CheckSize(referenceWin, wu.maximized)
+		and u.tbl_contains(transBgApps, referenceWin:title())
+
+	if appWithTransBgWasMaximized then
+		local loginWin = referenceWin:title() == "Login"
+		local screenshotOverlay = referenceWin:title() == ""
+		if loginWin or screenshotOverlay then return end
 		app:hide()
 	end
 end
@@ -109,7 +108,6 @@ TickerAppWatcher = u.aw
 		elseif appName == env.tickerApp and event == u.aw.deactivated then
 			if u.isFront("CleanShot X") then return end
 			scrollUp()
-			cleanUpLink()
 			closeMediaWindow()
 
 		-- raise twitter when switching window to other app

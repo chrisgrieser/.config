@@ -54,11 +54,10 @@ end
 u.urischeme("backup", backup)
 
 BiweeklyTimer = hs.timer
-	.doAt("02:00", "01d", function()
-		if getWeekday() == "Wed" or getWeekday() == "Sat" then
-			backup()
-			hs.loadSpoon("EmmyLua")
-		end
+	.doAt("23:00", "01d", function()
+		local weekday = getWeekday()
+		if weekday == "Tue" or weekday == "Fri" or weekday == "Sun" then backup() end
+		if weekday == "Sun" then hs.loadSpoon("EmmyLua") end
 	end, true)
 	:start()
 
@@ -75,8 +74,8 @@ local function closeFullscreenSpaces()
 	end
 end
 
----@nodiscard
 ---whether device has been idle
+---@nodiscard
 ---@param mins number Time idle
 ---@return boolean
 local function idleMins(mins)
