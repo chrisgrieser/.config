@@ -130,10 +130,15 @@ lspSettings.jsonls = {
 -- BASH / ZSH
 
 -- force bashls (and treesitter) to work in zsh files as well
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "zsh",
-	callback = function() vim.bo.filetype = "sh" end,
-})
+vim.filetype.add {
+	extension = {
+		sh = "bash",
+		zsh = "bash",
+	},
+	pattern = {
+		["%.z.+"] = { "bash", { priority = 100 } },
+	},
+}
 
 --------------------------------------------------------------------------------
 -- LTEX

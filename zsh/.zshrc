@@ -26,4 +26,4 @@ done
 
 
 # https://stackoverflow.com/a/69915614 remove last login message that some terminals leave
-[[ "$TERM_PROGRAM" == "WezTerm" ]] || printf '\33c\e[3J'
+[[ "$TERM_PROGRAM" != "WezTerm" ]] && printf '\33c\e[3J'

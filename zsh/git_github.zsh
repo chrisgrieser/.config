@@ -171,12 +171,11 @@ function pr() {
 		gh pr create --web --fill --base="$current_branch"
 	else # Terminal
 		gh pr create --fill --base="$current_branch"
-		# shellcheck disable=2181
 		if [[ $? -eq 0 ]] ; then
 			print "\033[1;32mPR created.\033[0m"
 			origin=$(git remote -v | grep "upstream" | head -n1 | cut -d: -f2 | cut -d. -f1)
 			gh repo set-default "$origin"
-			gh pr view --web # view in the web after
+			gh pr view --web || print "\033[1;33mCould not open web view.\033[0m"
 		fi
 	fi
 }
