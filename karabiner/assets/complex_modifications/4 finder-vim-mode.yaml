@@ -209,7 +209,7 @@ rules:
       # ENTER
       # Rename
       - type: basic
-        from: { key_code: c }
+        from: { key_code: return_or_enter }
         to:
           - key_code: return_or_enter
           - *insert-notice
@@ -217,7 +217,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # Batch Rename
       - type: basic
-        from: { key_code: c, modifiers: { mandatory: [shift] } }
+        from: { key_code: return_or_enter, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - shell_command: |
               osascript -l JavaScript "$HOME/.config/karabiner/assets/finder-vim-mode/batch-rename.js"
@@ -774,18 +774,30 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Navigation
-      # o = open/expand fold
+      # o = open/expand fold (O: do it recursively)
       - type: basic
         from: { key_code: o }
         to_if_alone:
           - key_code: right_arrow
           - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # O = close/collapse fold
       - type: basic
         from: { key_code: o, modifiers: { mandatory: [shift] } }
         to_if_alone:
+          - { key_code: right_arrow, modifiers: [option] }
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # c = close/collapse fold (C: do it recursively)
+      - type: basic
+        from: { key_code: c }
+        to_if_alone:
           - key_code: left_arrow
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic
+        from: { key_code: c, modifiers: { mandatory: [shift] } }
+        to_if_alone:
+          - { key_code: left_arrow, modifiers: [option] }
           - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <C-h> = History Back
