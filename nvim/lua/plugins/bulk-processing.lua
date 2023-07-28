@@ -5,7 +5,7 @@ return {
 		init = function()
 
 			vim.g.VM_set_statusline = 0 -- already using my version via lualine component
-			vim.g.VM_show_warning = 0
+			vim.g.VM_show_warnings = 0
 			vim.g.VM_silent_exit = 1
 			-- https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 			vim.g.VM_maps = {
@@ -13,8 +13,8 @@ return {
 				["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
 				["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
 				["Find Operator"] = "s", -- operator, selects all regions found in the given textobj (visual-multi)
+				["Reselect Last"] = "gV",
 			}
-
 		end,
 	},
 	-- TODO switch to multicursor.nvim once it's stable
