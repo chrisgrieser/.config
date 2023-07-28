@@ -38,7 +38,16 @@ declare class SideNotesNote {
 	text(): string;
 }
 
-declare function Path(filepath: string): finderItem;
+declare class finderItem {
+	creationDate: Date;
+	modificationDate: Date;
+	name: string; // basename
+	nameExtension: string;
+	kind: string;
+	size: number;
+}
+
+declare function Path(filepath: string): object;
 
 declare const Application: {
 	currentApplication: () => {
@@ -68,9 +77,9 @@ declare const Application: {
 		aliases: finderItem[]; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
 		keystroke(key: string, modifiers?: { using: string[] });
 		keyCode(keycode: number, modifiers?: { using: string[] });
-		// rome-ignore lint/suspicious/noExplicitAny: TODO
+		// rome-ignore lint/suspicious/noExplicitAny: later
 		applicationProcesses: any;
-		// rome-ignore lint/suspicious/noExplicitAny: TODO
+		// rome-ignore lint/suspicious/noExplicitAny: later
 		processes: any;
 	};
 	(name: "Reminders"): macAppObj & {
@@ -81,10 +90,10 @@ declare const Application: {
 		};
 	};
 	(name: "Finder"): macAppObj & {
-		// paths need to be wrapped for Finder: `Path(str)`
-		exists(wrappedPath: finderItem): boolean;
-		open(wrappedPath: finderItem): void;
-		reveal(wrappedPath: finderItem): void;
+		// INFO paths need to be wrapped for Finder: `Path(str)`
+		exists(wrappedPath: object): boolean;
+		open(wrappedPath: object): void;
+		reveal(wrappedPath: object): void;
 		finderWindows: {
 			target: { url: () => string };
 		};

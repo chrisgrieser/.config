@@ -15,14 +15,34 @@ else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
 const isUsingFallbackSearch = Boolean($.NSProcessInfo.processInfo.environment.objectForKey("no_ignore").js);
 const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
 
+//──────────────────────────────────────────────────────────────────────────────
+
+/** @param {string} filepath */
 function getCreationDate(filepath) {
 	return Application("System Events").aliases[filepath].creationDate();
 }
 
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
+/** @param {string} text @param {string} filepath */
+function writeToFile(filepath, text) {
+	const str = $.NSString.alloc.initWithUTF8String(text);
+	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
+}
+
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
 //──────────────────────────────────────────────────────────────────────────────
 
-// get the keywords that activate something in Alfred
-function getAlfredKeywords() {
+// get the keywords that activate something in Alfred and write them to the
+// cachePath
+/** @param {string} cachePath */
+function refreshKeywordsCache(cachePath) {
 	const keywords = app
 		.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
 		.split("\r")
@@ -87,7 +107,7 @@ function getAlfredKeywords() {
 		.join("")
 		.split(","); // back to array
 	const uniqueKeywords = [...new Set(trueKeywords)];
-	return uniqueKeywords;
+	writeToFile(JSON.stringify(uniqueKeywords), cachePath);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -123,14 +143,13 @@ function run(argv) {
 
 	// Guard clause 2: first word of query is alfred keyword
 	if (ignoreAlfredKeywords && !isUsingFallbackSearch) {
+		const cacheRecreationThresholdMins = 30;
+		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
+		// const cacheAgeMins = (+new Date() - getCreationDate(cachePath)) / 1000 / 60;
+		if (cacheAgeMins > cacheRecreationThresholdMins || !fileExists(cachePath)) refreshKeywordsCache(cachePath);
+		const alfredKeywords = JSON.parse(readFile(cachePath));
+
 		const queryFirstWord = query.split(" ")[0];
-
-		// Caching (Alfred keyword identification takes ~250ms with many workflows)
-		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords";
-
-		const alfredKeywords = getAlfredKeywords();
-
-		console.log("number of keywords:", alfredKeywords.length);
 		if (alfredKeywords.includes(queryFirstWord)) return;
 	}
 
@@ -180,7 +199,4 @@ function run(argv) {
 		variables: { oldResults: JSON.stringify(newResults), oldQuery: query },
 		items: [searchForQuery].concat(newResults),
 	});
-}
-function Application(arg0) {
-	throw new Error("Function not implemented.");
 }
