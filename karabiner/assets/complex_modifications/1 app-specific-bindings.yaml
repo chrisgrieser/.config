@@ -387,12 +387,6 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
-      # Toggle Sidebar
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: s, modifiers: [command, control] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
       # Toggle toolbar
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [command] } }
