@@ -669,7 +669,7 @@ rules:
                   set newFile to (make new file at thisFolder)
                   select newFile
                 end tell'
-              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_join.caf' &
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/begin_record.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # b = Toggle `.bkp` (Backup).
       - type: basic
@@ -688,6 +688,7 @@ rules:
               fi
               mv -n "$selection" "$newName"
               open -R "$newName" # forces refresh of Finder
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/begin_record.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = Create Symlink
       - type: basic
