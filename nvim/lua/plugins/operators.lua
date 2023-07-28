@@ -90,7 +90,7 @@ return {
 					line = line:gsub("%d+(.*=)", nextNum .. "%1")
 				end
 
-				-- move cursor position
+				-- move cursor position to value
 				local lineNum, colNum = unpack(vim.api.nvim_win_get_cursor(0))
 				local keyPos, valuePos = line:find(".%w+ ?[:=] ?")
 				if valuePos and not (ft == "css") then
