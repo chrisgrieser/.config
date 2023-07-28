@@ -98,7 +98,7 @@ end
 ---(BorderChars is needed for Harpoon and Telescope, both of which do not accept
 ---a Borderstyle string.)
 
-M.borderStyle = "rounded"
+M.borderStyle = "single"
 
 if M.borderStyle == "single" then
 	M.borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
@@ -112,12 +112,12 @@ elseif M.borderStyle == "rounded" then
 end
 
 M.textobjectRemaps = {
-	c = "}", -- [c]urly
+	c = "}", -- [c]urly brace
 	r = "]", -- [r]ectangular bracket
 	b = ")", -- [b]racket
 	m = "W", -- [m]assive word
 	q = '"', -- [q]uote
-	y = "'", -- s[y]ngle quote
+	z = "'", -- [z]ingle quote
 	e = "`", -- t[e]mplate string / inline cod[e]
 }
 
@@ -128,10 +128,12 @@ M.textobjectMaps = {
 	["doubleSquareBracket"] = "R",
 }
 
+---@param diag object https://neovim.io/doc/user/diagnostic.html#diagnostic-structure
+---@return string
 function M.diagnosticFmt(diag)
 	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
-	local msg = diag.message
-	return msg .. source
+	local out = diag.message .. source
+	return out
 end
 
 --------------------------------------------------------------------------------

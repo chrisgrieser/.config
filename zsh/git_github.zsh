@@ -12,8 +12,8 @@ alias push="git push"
 alias pull="git pull"
 alias gi='gh issue list'
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
-alias rel='make release'
 alias grh='git reset --hard'
+alias rel='make release'
 
 # Github Url: open & copy url
 function gu() {
