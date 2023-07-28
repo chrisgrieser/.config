@@ -202,15 +202,11 @@ keymap("n", "<leader>ow", function()
 		vim.opt_local.colorcolumn = vim.opt.colorcolumn:get()
 		vim.keymap.del("n", "A", { buffer = true })
 		vim.keymap.del("n", "I", { buffer = true })
-		vim.keymap.del("n", "H", { buffer = true })
-		vim.keymap.del("n", "L", { buffer = true })
 	else
 		vim.opt_local.wrap = true
 		vim.opt_local.colorcolumn = ""
 		keymap("n", "A", "g$a", { buffer = true })
 		keymap("n", "I", "g^i", { buffer = true })
-		keymap("n", "H", "g0g^", { buffer = true })
-		keymap("n", "L", "g$", { buffer = true })
 	end
 end, { desc = " 󰖶 Toggle Wrap" })
 
