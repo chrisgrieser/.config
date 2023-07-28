@@ -1,6 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
 
 ObjC.import("stdlib");
+ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
@@ -29,7 +30,7 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
-/** @param {string} text @param {string} filepath */
+/** @param {string} filepath @param {string} text */
 function writeToFile(filepath, text) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
@@ -107,7 +108,8 @@ function refreshKeywordsCache(cachePath) {
 		.join("")
 		.split(","); // back to array
 	const uniqueKeywords = [...new Set(trueKeywords)];
-	writeToFile(JSON.stringify(uniqueKeywords), cachePath);
+	console.log("uniqueKeywords:", uniqueKeywords);
+	writeToFile(cachePath, JSON.stringify(uniqueKeywords));
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -143,10 +145,16 @@ function run(argv) {
 
 	// Guard clause 2: first word of query is alfred keyword
 	if (ignoreAlfredKeywords && !isUsingFallbackSearch) {
-		const cacheRecreationThresholdMins = 30;
 		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
-		// const cacheAgeMins = (+new Date() - getCreationDate(cachePath)) / 1000 / 60;
-		if (cacheAgeMins > cacheRecreationThresholdMins || !fileExists(cachePath)) refreshKeywordsCache(cachePath);
+		console.log("cachePath:", cachePath);
+
+		if (!fileExists(cachePath)) {
+			refreshKeywordsCache(cachePath);
+		} else {
+			const cacheRecreationThresholdMins = 30;
+			const cacheAgeMins = (+new Date() - getCreationDate(cachePath)) / 1000 / 60;
+			if (cacheAgeMins > cacheRecreationThresholdMins) refreshKeywordsCache(cachePath);
+		}
 		const alfredKeywords = JSON.parse(readFile(cachePath));
 
 		const queryFirstWord = query.split(" ")[0];

@@ -59,12 +59,27 @@ declare const Application: {
 		setTheClipboardTo(str: string): void;
 		theClipboard(): string;
 		displayNotification(textToShow: string, options: { withTitle: string; subtitle?: string }): void;
+		displayAlert(
+			textToShow: string,
+			options?: {
+				message?: string;
+				defaultAnswer?: string;
+				buttons?: string[];
+				defaultButton?: string;
+				withIcon?: string;
+				gaveUp?: boolean;
+			},
+		): {
+			textReturned: string;
+			buttonReturned: string;
+		};
 		displayDialog(
 			textToShow: string,
-			options: {
-				defaultAnswer: string;
-				buttons: string[];
-				defaultButton: string;
+			options?: {
+				message?: string;
+				defaultAnswer?: string;
+				buttons?: string[];
+				defaultButton?: string;
 				withIcon?: string;
 				gaveUp?: boolean;
 			},
@@ -94,6 +109,7 @@ declare const Application: {
 		exists(wrappedPath: object): boolean;
 		open(wrappedPath: object): void;
 		reveal(wrappedPath: object): void;
+		selection(): object[];
 		finderWindows: {
 			target: { url: () => string };
 		};
