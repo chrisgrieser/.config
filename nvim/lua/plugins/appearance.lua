@@ -38,7 +38,7 @@ return {
 			routes = {
 				-- redirect stuff to the more subtle "mini"
 				{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
-				{ filter = { event = "notify", find = "^Auto-Closing Buffer:" }, view = "mini" },
+				{ filter = { event = "notify", find = "^Auto%-Closing Buffer:" }, view = "mini" },
 
 				-- unneeded info on search patterns
 				{ filter = { event = "msg_show", find = "^/." }, view = false },
