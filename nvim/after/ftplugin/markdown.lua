@@ -64,7 +64,6 @@ keymap({ "o", "x" }, "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlo
 
 -- Format Table
 keymap("n", "<leader>q", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table", buffer = true })
-keymap("x", "<leader>q", ":!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table", buffer = true })
 
 -- Heading jump to next/prev heading
 keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR><cmd>nohl<CR>]], { desc = " # Next Heading", buffer = true })

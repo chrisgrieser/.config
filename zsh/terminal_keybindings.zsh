@@ -2,6 +2,7 @@
 # CUSTOM WIDGETS
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/copybuffer/copybuffer.plugin.zsh
 function copy-buffer() {
+	# shellcheck disable=2153
 	printf "%s" "$BUFFER" | pbcopy
 	zle -M "Buffer copied."
 }
@@ -52,13 +53,18 @@ function zvm_after_init() {
 bindkey -M viins "…" insert-last-word # …=alt+.
 bindkey -M viins "^Z" undo            # cmd+z via wezterm
 
-# Escape by default
-
-function autoEscape() { LBUFFER+='\\`' }
-zle -N autoEscape
-bindkey -M viins '`' autoEscape
-
 # Plugin Bindings
 bindkey -M viins '^[[A' history-substring-search-up # up/down: history substring search
 bindkey -M viins '^[[B' history-substring-search-down
 bindkey -M viins "^X" autosuggest-accept # cmd+s via wezterm (consistent w/ nvim ghost text accept)
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# Escape by default
+function autoEscapeBacktick() { LBUFFER+='\`' ; }
+zle -N autoEscapeBacktick
+bindkey -M viins '`' autoEscapeBacktick
+function autoEscapeBang() { LBUFFER+='\!' ; }
+zle -N autoEscapeBang
+bindkey -M viins '!' autoEscapeBang
+
