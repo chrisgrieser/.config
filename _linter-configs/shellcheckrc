@@ -1,0 +1,5 @@
+# Check exit code directly with e.g. if mycmd;, not indirectly with $?.
+disable=SC2181
+
+# force shellcheck to work with zsh files
+shell=bash

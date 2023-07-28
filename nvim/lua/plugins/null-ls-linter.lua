@@ -43,16 +43,7 @@ local function nullSources()
 
 		-- SHELL
 		builtins.formatting.shfmt,
-
-		-- force shellcheck to work with zsh
-		builtins.diagnostics.shellcheck.with {
-			extra_filetypes = { "zsh" },
-			extra_args = { "--shell=bash" },
-		},
-		builtins.code_actions.shellcheck.with {
-			extra_filetypes = { "zsh" },
-			extra_args = { "--shell=bash" },
-		},
+		builtins.code_actions.shellcheck, -- bash-lsp does not provide code actions
 
 		-- JS/TS/JSON
 		builtins.formatting.rome, -- not available via LSP yet
@@ -62,7 +53,7 @@ local function nullSources()
 			-- using config without ordering, since automatic re-ordering can be
 			-- confusing. Config with stylelint-order is only run on build.
 			extra_args = { "--config", linterConfig .. "/stylelintrc-formatting.yml" },
-			timeout = 12000, -- longer timeout for large css files
+			timeout = 15000, -- longer timeout for large css files
 		},
 		builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 			extra_args = {
@@ -81,7 +72,7 @@ local function nullSources()
 		},
 
 		-- PRETTIER: YAML/HTML
-		-- INFO use only for yaml/html, since rome can handle the rest
+		-- INFO use only for yaml/html, since rome handles the rest
 		builtins.formatting.prettier.with {
 			filetypes = { "yaml", "html" },
 		},
@@ -104,10 +95,7 @@ local function nullSources()
 		builtins.diagnostics.markdownlint.with {
 			-- disabling rules that are autofixed already
 			-- stylua: ignore
-			extra_args = { "--disable", "trailing-spaces", "no-multiple-blanks", "--config", linterConfig .. "/markdownlintrc" },
-		},
-		builtins.completion.spell.with { -- vim's built-in spell-suggestions
-			filetypes = { "markdown", "gitcommit" },
+			extra_args = { "--config", linterConfig .. "/markdownlintrc" },
 		},
 	}
 end
