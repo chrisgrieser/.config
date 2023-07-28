@@ -20,6 +20,8 @@
 	<string>eng+deu</string>
 	<key>open_after_appending</key>
 	<false/>
+	<key>remove_emojis</key>
+	<true/>
 	<key>scratchpad_append_prefix</key>
 	<string>- </string>
 	<key>scratchpad_note_path</key>
