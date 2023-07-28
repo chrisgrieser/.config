@@ -2,8 +2,7 @@
 local s = {
 	emojis = { name = "emoji", keyword_length = 2 },
 	nerdfont = { name = "nerdfont", keyword_length = 2 },
-	buffer = { name = "buffer", keyword_length = 3 },
-	-- max count for performance and to ensure the popup isn't too high
+	buffer = { name = "buffer", keyword_length = 4 },
 	fuzzybuffer = { name = "fuzzy_buffer", max_item_count = 3 },
 	path = { name = "path" },
 	zsh = { name = "zsh" },
@@ -80,7 +79,7 @@ local function cmpconfig()
 			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L403
 			debounce = 20,
 			throttle = 10,
-			max_view_entries = 50,
+			max_view_entries = 75,
 			fetching_timeout = 100,
 		},
 		window = {
@@ -108,7 +107,7 @@ local function cmpconfig()
 		},
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
-			["<D-Esc>"] = cmp.mapping.complete(), -- like with macOS autocomplete
+			["<D-Esc>"] = cmp.mapping.complete(), -- trigger suggestion popup
 			["<C-e>"] = cmp.mapping.abort(),
 			["<S-CR>"] = cmp.mapping.abort(), -- accept current text, consistent with Obsidian https://medium.com/obsidian-observer/obsidian-quick-tip-use-shift-enter-to-skip-autocomplete-on-links-8495ea189c4c
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
@@ -180,9 +179,9 @@ local function filetypeCompletionConfig()
 			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$"))
 		end,
 		sources = cmp.config.sources {
+			s.codeium,
 			s.snippets,
 			s.lsp,
-			s.codeium,
 			s.nerdfont, -- add nerdfont for config
 			s.emojis,
 			s.treesitter,

@@ -1,13 +1,12 @@
 return {
 	{ -- AI Ghost Text Suggestions
 		"Exafunction/codeium.vim",
-		enabled = false,
 		event = "InsertEnter",
 		build = function()
 			-- HACK enable	syncing of API key
 			local symLinkFrom = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json"
 			local symLinkTo = vim.env.HOME .. "/.codeium/config.json"
-			vim.fn.mkdir(vim.fs.dirname(symLinkTo))
+			pcall(vim.fn.mkdir, vim.fs.dirname(symLinkTo))
 			os.remove(symLinkTo)
 			vim.loop.fs_symlink(symLinkFrom, symLinkTo)
 		end,
@@ -28,7 +27,6 @@ return {
 				"i",
 				"<D-s>",
 				function() return vim.fn["codeium#Accept"]() end,
-				-- Adding silent, so cmdline does not pop up, particularly annoying with noice.nvim
 				{ expr = true, desc = "󰚩 Accept Suggestion", silent = true }
 			)
 		end,
