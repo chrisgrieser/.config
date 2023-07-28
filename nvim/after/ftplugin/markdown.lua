@@ -9,8 +9,6 @@ vim.opt_local.wrap = true
 vim.opt_local.colorcolumn = ""
 keymap("n", "A", "g$a", { buffer = true })
 keymap("n", "I", "g^i", { buffer = true })
-keymap("n", "H", "g0g^", { buffer = true })
-keymap("n", "L", "g$", { buffer = true })
 
 -- decrease line length without zen mode plugins
 vim.opt_local.signcolumn = "yes:9"
@@ -18,7 +16,7 @@ vim.opt_local.signcolumn = "yes:9"
 -- do not auto-wrap text
 vim.opt_local.formatoptions:remove({"t", "c"})
 
--- hide links, effectively a sort of live-preview
+-- hide links and some markup (similar to Obsidian's live preview)
 vim.opt_local.conceallevel = 2 
 
 --------------------------------------------------------------------------------
