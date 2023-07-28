@@ -98,9 +98,10 @@ function refreshKeywordsCache(cachePath) {
 			return acc;
 		}, []);
 
-	// remove pseudo keywords from string
-	// (HACK to simplify removing sequence of items from an array, converting
-	// it to a string, removing the substring, then back to an array)
+	// HACK remove keywords from this very workflow. Cannot be done based on the
+	// foldername, since Alfred assigns a unique ID to local installations.
+	// (to simplify removing sequence of items from an array, also uses a HACK,
+	// converting namely it to a string, removing the substring, then back to an array)
 	const pseudoKeywords = "c,a,b,e,f,d,h,i,g,l,j,k,o,n,m,q,r,p,u,s,t,v,w,x,z,y";
 	const trueKeywords = keywords
 		.join(",") // to string

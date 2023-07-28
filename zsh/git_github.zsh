@@ -22,7 +22,6 @@ function gu() {
 	open "$url"
 }
 
-# remove the lock file
 function unlock() {
 	rm "$(git rev-parse --git-dir)/index.lock"
 	echo "Lock file removed."
