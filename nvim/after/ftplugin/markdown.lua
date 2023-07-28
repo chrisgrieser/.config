@@ -1,4 +1,3 @@
-local cmd = vim.cmd
 local keymap = vim.keymap.set
 local fn = vim.fn
 local u = require("config.utils")
@@ -18,6 +17,9 @@ vim.opt_local.signcolumn = "yes:9"
 
 -- do not auto-wrap text
 vim.opt_local.formatoptions:remove({"t", "c"})
+
+-- hide links, effectively a sort of live-preview
+vim.opt_local.conceallevel = 2 
 
 --------------------------------------------------------------------------------
 

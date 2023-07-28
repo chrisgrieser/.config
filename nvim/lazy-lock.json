@@ -33,7 +33,6 @@
   "highlight-undo.nvim": { "branch": "main", "commit": "1aeada51fb956f1ef121f29ddbb2ef6108a3c480" },
   "inc-rename.nvim": { "branch": "main", "commit": "ed0f6f2b917cac4eb3259f907da0a481b27a3b7e" },
   "indent-blankline.nvim": { "branch": "master", "commit": "4541d690816cb99a7fc248f1486aa87f3abce91c" },
-  "inline-fold.nvim": { "branch": "main", "commit": "f3548884b0595d336b27795485c5d255c9e70bdb" },
   "iron.nvim": { "branch": "master", "commit": "7f876ee3e1f4ea1e5284b1b697cdad5b256e8046" },
   "kanagawa.nvim": { "branch": "master", "commit": "1749cea392acb7d1548a946fcee1e6f1304cd3cb" },
   "lazy.nvim": { "branch": "main", "commit": "3ad55ae678876516156cca2f361c51f7952a924b" },

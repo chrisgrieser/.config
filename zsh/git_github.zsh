@@ -148,26 +148,22 @@ function pr() {
 			--layout=reverse-list --header="j:↓  k:↑")
 	echo
 
-	git add -A
-
-	# if things were added OR there are uncommitted changes
-	if [[ -n "$(git status --porcelain)" ]] ; then
-		if [[ -z "$*" ]]; then
-			echo -n "Commit Message: "
-			read -r msg && echo
-		else
-			msg="$*"
-		fi
-		local MSG_LENGTH=${#COMMIT_MSG}
-		if [[ $MSG_LENGTH -gt 50 ]]; then
-			echo "Commit Message too long ($MSG_LENGTH chars)."
-			COMMIT_MSG=${COMMIT_MSG::50}
-			print -z "pr \"$COMMIT_MSG\"" # put back into buffer
-			return 1
-		fi
-		git commit -m "$msg"
+	# get and validate commit msg
+	if [[ -z "$*" ]]; then
+		echo -n "Commit Message: "
+		read -r msg && echo
+	else
+		msg="$*"
+	fi
+	local MSG_LENGTH=${#COMMIT_MSG}
+	if [[ $MSG_LENGTH -gt 50 ]]; then
+		echo "Commit Message too long ($MSG_LENGTH chars)."
+		COMMIT_MSG=${COMMIT_MSG::50}
+		print -z "pr \"$COMMIT_MSG\"" # put back into buffer
+		return 1
 	fi
 
+	git add . && git commit -m "$msg"
 	current_branch=$(git branch --show-current)
 
 	# create PR into current branch (not the default branch)
@@ -175,9 +171,7 @@ function pr() {
 		gh pr create --web --fill --base="$current_branch"
 	else # Terminal
 		gh pr create --fill --base="$current_branch"
-		origin=$(git remote -v | grep origin | head -n1 | cut -d: -f2 | cut -d. -f1)
-		gh repo set-default "$origin"
-		gh pr view --web # viw in the web after
+		gh pr view --web # view in the web after
 	fi
 }
 

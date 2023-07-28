@@ -15,18 +15,6 @@ return {
 		ft = "markdown",
 		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
 	},
-	{
-		"malbertzard/inline-fold.nvim",
-		ft = "markdown",
-		opts = {
-			queries = {
-				defaultPlaceholder = "…",
-				markdown = {
-					{ pattern = '[]'}, 
-				},
-			},
-		},
-	},
 	{ -- preview markdown
 		"iamcco/markdown-preview.nvim",
 		ft = "markdown",
