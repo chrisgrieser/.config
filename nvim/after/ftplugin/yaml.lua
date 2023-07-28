@@ -8,7 +8,7 @@ vim.bo.expandtab = true
 
 -- Compile Karabiner Config
 vim.keymap.set("n", "<leader>r", function()
-	vim.cmd.update()
+	vim.cmd("silent update")
 	local parentFolder = vim.fn.expand("%:p:h")
 	if parentFolder:find("/karabiner") then
 		local karabinerBuildScp = vim.env.DOTFILE_FOLDER .. "/karabiner/build-karabiner-config.js"

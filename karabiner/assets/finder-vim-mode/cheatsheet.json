@@ -132,7 +132,7 @@
       ]
     },
     "i (I)\ninfo panel (window)",
-    "o (O)\nopen folds (recursive)",
+    "o (O)\nopen (close) folds",
     {
       "f": 2
     },
@@ -146,13 +146,22 @@
       "x": 0.25,
       "c": "#fff4a6",
       "f": 1,
+      "fa": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        4
+      ],
       "w": 1.25,
       "h": 2,
       "w2": 1.5,
       "h2": 1,
       "x2": -0.25
     },
-    "↵ rename<br><br><br>(⇧↵ batch rename)\ninsert mode: confirm & goto normal mode",
+    "\ninsert mode: confirm & goto normal mode\n\n\n\n\n↵",
     {
       "c": "#999999",
       "a": 7,
@@ -236,7 +245,7 @@
       ]
     },
     "x (X)\ncross-move (copy)",
-    "c (C)\nclose folds  (recursive)",
+    "c (C)\nchange name (batch)",
     {
       "f": 2
     },
