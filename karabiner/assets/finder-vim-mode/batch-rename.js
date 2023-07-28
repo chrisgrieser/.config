@@ -48,49 +48,41 @@ function confirm(text) {
 	}
 }
 
-/** @param {{ item: { name: any; }; to: any; }} task */
-function executeTask(task) {
-	task.item.name = task.to;
-}
-
 //──────────────────────────────────────────────────────────────────────────────
 // MAIN
 
-const selection = [].slice.call(Application("Finder").selection());
-const renamingFnReturn = prompt("How to modify the name?", "return name");
-const renamingFn = new Function("name", renamingFnReturn);
+const selectedFiles = [].slice.call(Application("Finder").selection());
 
 try {
-	const tasks = selection
+	const tasks = selectedFiles
 		.map(function (/** @type {{ name: () => string; }} */ item) {
 			const name = item.name();
-			let target;
+			let renameTo;
 			try {
-				target = renamingFn(name);
+				const userResponse = prompt("How to modify the name? \n search/replace", "/");
+				const [search, replace] = userResponse.split("/");
+				const searchRegExp = new RegExp(search, "gm");
+				renameTo = name.replace(searchRegExp, replace);
 			} catch (error) {
-				throw new Error(`Cannot rename "${name}": ${error}`);
+				throw new Error(`"${name}": ${error}`);
 			}
-			if (!target) {
-				throw new Error(`Cannot rename "${name}": expression returned empty result`);
+			if (!renameTo) {
+				throw new Error(`"${name}": expression has empty result`);
 			}
-			return { item: item, from: name, to: target };
+			return { item: item, from: name, to: renameTo };
 		})
-		.filter(function (/** @type renameTask */ task) {
-			return task.from !== task.to;
-		});
+		.filter((/** @type {renameTask} */ task) => task.from !== task.to);
 
-	if (tasks.length === 0) throw new Error("No files to rename!");
+	if (tasks.length === 0) throw new Error("No files to rename.");
 
 	const message =
 		"These files will be renamed:\n\n" +
-		tasks
-			.map(function (/** @type renameTask */ task) {
-				return "- " + task.from + " => " + task.to;
-			})
-			.join("\n");
+		tasks.map((/** @type {renameTask} */ task) => "- " + task.from + " => " + task.to).join("\n");
 
 	if (confirm(message)) {
-		tasks.forEach(executeTask);
+		tasks.forEach((/** @type {{ item: { name: any; }; to: any; }} */ task) => {
+			task.item.name = task.to;
+		});
 	}
 } catch (e) {
 	alert("Error!", String(e));
