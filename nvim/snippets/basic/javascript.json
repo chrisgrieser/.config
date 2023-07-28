@@ -41,7 +41,7 @@
 	"type definition (JSDoc, multi)": {
 		"prefix": "type definition (JSDoc, multi)",
 		"body": [
-			"/** @typedef {Object} ${typeName}",
+			"/** @typedef {Object} ${1:name}",
 			"* @property {${2|number,string,Object,boolean,() => void|}} ${3:prop1}",
 			"* @property {${4|number,string,Object,boolean|}} ${5:prop2}",
 			"*/"

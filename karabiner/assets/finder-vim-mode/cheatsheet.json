@@ -1,7 +1,8 @@
 [
   {
-    "name": "Finder Vim Mode Cheatsheet",
-    "author": "pseudometa",
+    "name": "Cheatsheet",
+    "author": "for Finder Vim Mode",
+    "notes": "https://github.com/chrisgrieser/finder-vim-mode",
     "pcb": false,
     "plate": false
   },

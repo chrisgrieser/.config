@@ -17,7 +17,7 @@ keymap("n", "L", "g$", { buffer = true })
 vim.opt_local.signcolumn = "yes:9"
 
 -- do not auto-wrap text
-vim.opt_local.formatoptions:remove("t")
+vim.opt_local.formatoptions:remove({"t", "c"})
 
 --------------------------------------------------------------------------------
 
