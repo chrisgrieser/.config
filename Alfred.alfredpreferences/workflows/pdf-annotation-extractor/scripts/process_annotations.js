@@ -6,12 +6,12 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
 /** write to file via c-bridge
+ * @param {string} filepath
  * @param {string} text
- * @param {string} filePath
  */
-function writeToFile(text, filePath) {
+function writeToFile(filepath, text) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
-	str.writeToFileAtomicallyEncodingError(filePath, true, $.NSUTF8StringEncoding, null);
+	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
 
 /** @param {string} str */

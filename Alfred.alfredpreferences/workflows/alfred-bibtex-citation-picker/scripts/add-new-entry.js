@@ -26,10 +26,10 @@ function readFile(path) {
 }
 
 /**
- * @param {string} text
  * @param {string} filepath
+ * @param {string} text
  */
-function writeToFile(text, filepath) {
+function writeToFile(filepath, text) {
 	app.doShellScript(`mkdir -p "$(dirname "${filepath}")"`);
 	const str = $.NSString.alloc.initWithUTF8String(text);
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);

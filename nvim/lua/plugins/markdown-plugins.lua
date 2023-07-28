@@ -41,7 +41,7 @@ return {
 			end, { desc = " Edit Embedded Code Block" })
 
 			vim.keymap.set("x", "<leader>e", function()
-				local fts = { "bash", "applescript", "vim" }
+				local fts = { "bash", "applescript", "vim", "javascript" }
 				vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
 					if not ft then return end
 					u.leaveVisualMode()
