@@ -3,7 +3,6 @@
 // INFO source: https://gist.github.com/dtinth/93e230152a771dcb1ec5
 //──────────────────────────────────────────────────────────────────────────────
 
-ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
@@ -51,24 +50,18 @@ function confirm(text) {
 //──────────────────────────────────────────────────────────────────────────────
 // MAIN
 
+const userResponse = prompt("Enter regex. \nsearch/replace", "/");
 const selectedFiles = [].slice.call(Application("Finder").selection());
 
 try {
 	const tasks = selectedFiles
 		.map(function (/** @type {{ name: () => string; }} */ item) {
 			const name = item.name();
-			let renameTo;
-			try {
-				const userResponse = prompt("How to modify the name? \n search/replace", "/");
-				const [search, replace] = userResponse.split("/");
-				const searchRegExp = new RegExp(search, "gm");
-				renameTo = name.replace(searchRegExp, replace);
-			} catch (error) {
-				throw new Error(`"${name}": ${error}`);
-			}
-			if (!renameTo) {
-				throw new Error(`"${name}": expression has empty result`);
-			}
+			const [search, replace] = userResponse.split("/");
+			const searchRegExp = new RegExp(search, "g");
+			if (!searchRegExp) throw new Error(`${search} is not a valid regex.`);
+			const renameTo = name.replace(searchRegExp, replace);
+			if (!renameTo) throw new Error(`"${name}": expression has empty result`);
 			return { item: item, from: name, to: renameTo };
 		})
 		.filter((/** @type {renameTask} */ task) => task.from !== task.to);
