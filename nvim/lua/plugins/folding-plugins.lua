@@ -35,10 +35,6 @@ return {
 		"chrisgrieser/nvim-origami",
 		event = "BufReadPost",
 		dev = true,
-		init = function()
-			vim.keymap.set("n", "h", function() require("origami").h() end, { desc = "Origami h" })
-			vim.keymap.set("n", "l", function() require("origami").l() end, { desc = "Origami l" })
-		end,
 		opts = {
 			pauseFoldsOnSearch = { forwardKey = "-" },
 		}

@@ -55,6 +55,7 @@ keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
 --------------------------------------------------------------------------------
 
 -- SEARCH
+keymap("n", "-", "/", { desc = "Search word under cursor" })
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 keymap("n", "+", "*", { desc = "Search word under cursor" })
 keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" })
@@ -67,6 +68,7 @@ vim.on_key(function(char)
 	if searchConfirmed or (fn.mode() == "n") then
 		local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
 		if searchKeyUsed or searchConfirmed then require("hlslens").start() end
+		---@diagnostic disable-next-line: param-type-mismatch
 		if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
 	end
 end, vim.api.nvim_create_namespace("auto_nohl"))
