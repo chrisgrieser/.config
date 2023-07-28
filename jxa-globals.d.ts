@@ -38,7 +38,7 @@ declare class SideNotesNote {
 	text(): string;
 }
 
-declare function Path(filepath: string): object;
+declare function Path(filepath: string): finderItem;
 
 declare const Application: {
 	currentApplication: () => {
@@ -65,6 +65,7 @@ declare const Application: {
 		};
 	};
 	(name: "System Events"): macAppObj & {
+		aliases: finderItem[]; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
 		keystroke(key: string, modifiers?: { using: string[] });
 		keyCode(keycode: number, modifiers?: { using: string[] });
 		// rome-ignore lint/suspicious/noExplicitAny: TODO
@@ -81,9 +82,9 @@ declare const Application: {
 	};
 	(name: "Finder"): macAppObj & {
 		// paths need to be wrapped for Finder: `Path(str)`
-		exists(wrappedPath: object): boolean;
-		open(wrappedPath: object): void;
-		reveal(wrappedPath: object): void;
+		exists(wrappedPath: finderItem): boolean;
+		open(wrappedPath: finderItem): void;
+		reveal(wrappedPath: finderItem): void;
 		finderWindows: {
 			target: { url: () => string };
 		};

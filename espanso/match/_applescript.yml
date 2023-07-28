@@ -26,23 +26,10 @@ matches:
       	click menu item "" of menu of menu item "Share" of menu "Edit" of menu bar 1
       end tell
     label: 🍏 Click Submenu Item of Menubar
-  - replace: |
-      tell application "Vivaldi" to close active tab of front window
-    label: 🍏 Close Browser Tab
   - replace: set the clipboard to POSIX file ($|$)
     label: 🍏 Copy Image to Clipboard
-  - replace: |
-      tell application "Drafts"
-      	make new draft with properties {content: "$|$", tags: {"blue", "green"}}
-      end tell
-    label: 🍏 Create new Draft
   - replace: display notification "subtitle" with title "title$|$"
     label: 🍏 Display Notification
-  - replace: |
-      tell application "Vivaldi"
-      	set currentTabUrl to URL of active tab of front window
-      end tell
-    label: 🍏 Get Current Browser Tab
   - replace: |
       tell application "Finder"
       	if ((count windows) is 0) then return "no window"
@@ -63,26 +50,14 @@ matches:
   - trigger: '!quit'
     replace: tell application "Twitterrific$|$" to if it is running then quit
     label: 🍏 Quit App
-  - replace: |
-      set AppleScript's text item delimiters to ":"
-      set theTextItems to every text item of strWithoutReplacement
-      set AppleScript's text item delimiters to "-"
-      set strWithReplacement to theTextItems as string
-    label: 🍏 Replace in String
   - trigger: '!shortcut'
     replace: tell application "Shortcuts" to run shortcut "$|$"
     label: 🍏 Run Shortcut
   - replace: |
-      repeat until application "Drafts$|$" is running
+      repeat until application "App$|$" is running
       	delay 0.5
       end repeat
     label: 🍏 Wait till app is running
-  - replace: |
-      tell application "Vivaldi"
-      	repeat until (loading of active tab of front window is false)
-      	end repeat
-      end tell
-    label: 🍏 Wait till tab is loaded
   - replace: |
       tell application "System Events"
       	tell process "Highlights"

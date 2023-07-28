@@ -15,6 +15,10 @@ else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
 const isUsingFallbackSearch = Boolean($.NSProcessInfo.processInfo.environment.objectForKey("no_ignore").js);
 const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
 
+function getCreationDate(filepath) {
+	return Application("System Events").aliases[filepath].creationDate();
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // get the keywords that activate something in Alfred
@@ -119,17 +123,15 @@ function run(argv) {
 
 	// Guard clause 2: first word of query is alfred keyword
 	if (ignoreAlfredKeywords && !isUsingFallbackSearch) {
-		const timelogKeywordIgnore = +new Date();
-
 		const queryFirstWord = query.split(" ")[0];
-		const alfredKeywords = getAlfredKeywords();
-		if (alfredKeywords.includes(queryFirstWord)) return;
 
-		// TODO with more than 50 workflows installed, and 180+ keywords, keyword
-		// identification takes about 250ms on my M1 machine. Consider caching?
-			const duration = (+new Date() - timelogKeywordIgnore) / 1000;
-		console.log("time to identify Alfred keywords:", duration, "s");
+		// Caching (Alfred keyword identification takes ~250ms with many workflows)
+		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords";
+
+		const alfredKeywords = getAlfredKeywords();
+
 		console.log("number of keywords:", alfredKeywords.length);
+		if (alfredKeywords.includes(queryFirstWord)) return;
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
@@ -178,4 +180,7 @@ function run(argv) {
 		variables: { oldResults: JSON.stringify(newResults), oldQuery: query },
 		items: [searchForQuery].concat(newResults),
 	});
+}
+function Application(arg0) {
+	throw new Error("Function not implemented.");
 }
