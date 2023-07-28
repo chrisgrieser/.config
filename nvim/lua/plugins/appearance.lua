@@ -41,7 +41,8 @@ return {
 				{ filter = { event = "notify", find = "^Auto%-Closing Buffer:" }, view = "mini" },
 
 				-- unneeded info on search patterns
-				{ filter = { event = "msg_show", find = "^/." }, view = false },
+				{ filter = { event = "msg_show", find = "^/." }, skip = true },
+				{ filter = { event = "msg_show", find = "^?." }, skip = true },
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 			},
 			cmdline = {

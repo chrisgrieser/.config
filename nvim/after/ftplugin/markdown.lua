@@ -67,7 +67,7 @@ keymap("n", "<leader>q", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = " �
 
 -- Heading jump to next/prev heading
 keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR><cmd>nohl<CR>]], { desc = " # Next Heading", buffer = true })
-keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR<cmd>:nohl<CR>]], { desc = " # Prev Heading", buffer = true })
+keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR><cmd>nohl<CR>]], { desc = " # Prev Heading", buffer = true })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
