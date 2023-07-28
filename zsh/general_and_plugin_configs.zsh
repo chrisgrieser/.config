@@ -38,11 +38,8 @@ eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 export FX_THEME=1 # only theme working in light & dark mode https://github.com/antonmedv/fx#themes
 export FX_SHOW_SIZE=true # show sizes of folded arrays
 
-# gh
-# https://cli.github.com/manual/gh_help_environment
+# gh https://cli.github.com/manual/gh_help_environment
 export GH_NO_UPDATE_NOTIFIER=1
-export GLAMOUR_STYLE="Dracula"
-
 
 #───────────────────────────────────────────────────────────────────────────────
 # ZSH PLUGIN SETTINGS

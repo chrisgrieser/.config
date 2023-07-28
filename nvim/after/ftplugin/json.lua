@@ -4,7 +4,8 @@ local keymap = vim.keymap.set
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-vim.opt_local.conceallevel = 2 -- hides quotes in JSON, making it actually more readable
+-- hides quotes, making it more readable
+vim.opt_local.conceallevel = 2 
 
 -- when opening large files, start with some folds closed
 if fn.line("$") > 400 then
