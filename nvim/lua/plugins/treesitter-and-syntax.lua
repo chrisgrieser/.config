@@ -28,7 +28,6 @@ local tsConfig = {
 			include_surrounding_whitespace = false,
 			disable = { "markdown" }, -- so `al` can be remapped to link text object
 			keymaps = {
-				["an"] = "@number.inner", -- [n]umber
 				["ik"] = "@assignment.lhs", -- inner [k]ey ( INFO: outer defined via various textobjs)
 				["a<CR>"] = "@return.outer", -- <CR>: return (`ar` already = a rectangular bracket)
 				["i<CR>"] = "@return.inner",
@@ -38,7 +37,6 @@ local tsConfig = {
 				["ia"] = "@parameter.inner",
 				["iu"] = "@loop.inner", -- loop (mnemonic: luup)
 				["au"] = "@loop.outer",
-
 				["a" .. u.textobjectMaps["function"]] = "@function.outer", -- [f]unction
 				["i" .. u.textobjectMaps["function"]] = "@function.inner",
 				["a" .. u.textobjectMaps["conditional"]] = "@conditional.outer", -- c[o]nditional (`ac` already = a curly)

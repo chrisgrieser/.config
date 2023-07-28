@@ -76,7 +76,7 @@ keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "󱡔 󰊢 hunk
 -- VARIOUS TEXTOBJS KEYMAPS
 
 -- stylua: ignore start
--- space: subword-fff
+-- space: subword
 keymap({"o", "x"}, "<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "󱡔 inner subword textobj" })
 keymap({"o", "x"}, "i<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "󱡔 inner subword textobj" })
 keymap({"o", "x"}, "a<Space>", "<cmd>lua require('various-textobjs').subword(false)<CR>", { desc = "󱡔 outer subword textobj" })
@@ -103,6 +103,10 @@ keymap({ "o", "x" }, "w", "<cmd>lua require('various-textobjs').toNextQuotationM
 
 -- o: c[o]lumn textobj
 keymap({"x", "o"}, "O", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "󱡔 column textobj" })
+
+-- an/in: number
+keymap({"x", "o"}, "in", "<cmd>lua require('various-textobjs').number(true)<CR>", { desc = "󱡔 inner number textobj" })
+keymap({"x", "o"}, "an", "<cmd>lua require('various-textobjs').number(false)<CR>", { desc = "󱡔 outer number textobj" })
 
 -- ag: entire buffer textobj
 keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "󱡔 entire buffer textobj" })

@@ -148,22 +148,26 @@ function pr() {
 			--layout=reverse-list --header="j:↓  k:↑")
 	echo
 
-	# get and validate commit msg
-	if [[ -z "$*" ]]; then
-		echo -n "Commit Message: "
-		read -r msg && echo
-	else
-		msg="$*"
-	fi
-	local MSG_LENGTH=${#COMMIT_MSG}
-	if [[ $MSG_LENGTH -gt 50 ]]; then
-		echo "Commit Message too long ($MSG_LENGTH chars)."
-		COMMIT_MSG=${COMMIT_MSG::50}
-		print -z "pr \"$COMMIT_MSG\"" # put back into buffer
-		return 1
+	git add -A
+
+	# if things were added OR there are uncommitted changes
+	if [[ -n "$(git status --porcelain)" ]] ; then
+		if [[ -z "$*" ]]; then
+			echo -n "Commit Message: "
+			read -r msg && echo
+		else
+			msg="$*"
+		fi
+		local MSG_LENGTH=${#COMMIT_MSG}
+		if [[ $MSG_LENGTH -gt 50 ]]; then
+			echo "Commit Message too long ($MSG_LENGTH chars)."
+			COMMIT_MSG=${COMMIT_MSG::50}
+			print -z "pr \"$COMMIT_MSG\"" # put back into buffer
+			return 1
+		fi
+		git commit -m "$msg"
 	fi
 
-	git add . && git commit -m "$msg"
 	current_branch=$(git branch --show-current)
 
 	# create PR into current branch (not the default branch)
