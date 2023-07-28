@@ -14,14 +14,14 @@ function copy-location() {
 zle -N copy-location
 
 # kills complete line, instead of just to beginning (^U) or end of a line (^K)
-function kill-full-line () {
+function kill-full-line() {
 	zle end-of-line
 	zle vi-kill-line
 }
 zle -N kill-full-line
 
 # Cycle through Directories
-function grappling-hook () {
+function grappling-hook() {
 	local to_open="$WD"
 	if [[ "$PWD" == "$WD" ]]; then
 		to_open="$DOTFILE_FOLDER"
@@ -50,11 +50,15 @@ function zvm_after_init() {
 	bindkey -M viins "^U" kill-full-line
 }
 bindkey -M viins "…" insert-last-word # …=alt+.
-bindkey -M viins "^Z" undo # cmd+z via wezterm
+bindkey -M viins "^Z" undo            # cmd+z via wezterm
+
+# Escape by default
+
+function autoEscape() { LBUFFER+='\\`' }
+zle -N autoEscape
+bindkey -M viins '`' autoEscape
 
 # Plugin Bindings
 bindkey -M viins '^[[A' history-substring-search-up # up/down: history substring search
-bindkey -M viins '^[[B' history-substring-search-down 
+bindkey -M viins '^[[B' history-substring-search-down
 bindkey -M viins "^X" autosuggest-accept # cmd+s via wezterm (consistent w/ nvim ghost text accept)
-
-
