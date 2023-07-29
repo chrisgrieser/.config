@@ -8,8 +8,8 @@ url="$*"
 # if it is not in selection, add it
 if grep -q "$url" "$buffer"; then
 	# using `grep -v` instead of `sed -i '//d'` to avoid annoying escaping issues
-	grep -v "$url" "$buffer" >"$buffer".tmp
-	mv "$buffer".tmp "$buffer"
+	grep -v "$url" "$buffer" >"$buffer.tmp"
+	cp "$buffer.tmp" "$buffer"
 	sound="mute"
 else
 	echo "$url" >>"$buffer"
