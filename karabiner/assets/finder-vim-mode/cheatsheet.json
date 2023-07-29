@@ -190,15 +190,23 @@
     "f\nfind mode",
     "gg (G)\nto top (bottom)\n\n\n^g gith.",
     {
-      "sm": "cherry"
+      "sm": "cherry",
+      "f2": 1
     },
-    "h\nparent dir\n\n\n⌃h back",
+    "h (H)\nparent dir (new win)\n\n\n⌃h back",
     {
+      "f": 2,
       "n": true
     },
     "j (J)\ndown (6x)",
+    {
+      "f": 2
+    },
     "k (K)\nup <br>(6x)",
-    "l\nopen file / dir\n\n\n⌃l forw",
+    {
+      "f2": 1
+    },
+    "l\nopen file / dir (and close)\n\n\n⌃l forw",
     {
       "c": "#CCCCCC"
     },
@@ -238,9 +246,10 @@
     "x (X)\ncross-move (copy)",
     "c (C)\nclose folds  (recursive)",
     {
-      "f": 2
+      "f": 2,
+      "f2": 1
     },
-    "v\nview settings",
+    "v (V)\n(pre)view options",
     {
       "f": 1,
       "fa": [
@@ -291,15 +300,12 @@
       "n": true
     },
     "↑\nsort by size",
-    {
-      "c": "#999999",
-      "a": 7,
-      "f": 4
-    },
-    "end"
+    "end\nsort by tags"
   ],
   [
     {
+      "c": "#999999",
+      "a": 7,
       "f": 7,
       "w": 1.25
     },
