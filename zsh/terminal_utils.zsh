@@ -41,7 +41,7 @@ function inspect() {
 	terminal_width=$(tput cols)
 	exa_output=$(export COLUMNS=$terminal_width && exa --all --grid --color=always \
 		--icons --git-ignore --ignore-glob=.DS_Store --sort=name --group-directories-first)
-	if [[ $(echo "$exa_output" | wc -l) -gt $max_files_lines ]] ; then
+	if [[ $(echo "$exa_output" | wc -l) -gt $max_files_lines ]]; then
 		echo "$exa_output" | head -n$max_files_lines
 		print "\033[1;34m(…)\033[0m" # blue = exa's default folder color
 	else
@@ -90,14 +90,14 @@ function d() {
 	if ! command -v trash &>/dev/null; then print "\033[1;33mmacos-trash not installed.\033[0m" && return 1; fi
 
 	if [[ $# == 0 ]]; then
-		trash ./*(D) # (D) makes the glob include dotfiles. is zsh-specific
+		# (D) makes the glob include dotfiles (zsh-specific)
+		trash ./*(D) || return 1 
 	else
-		trash "$@"
+		trash "$@"  || return 1
 	fi
 
 	## add nicer trash sound
-	# shellcheck disable=2181
-	[[ $? -ne 0 ]] && return 0
+	[[ "$current_vol" == "missing value" ]] && current_vol=50
 	current_vol=$(osascript -e 'output volume of (get volume settings)')
 	vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
 	(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
@@ -109,14 +109,13 @@ function ..d() {
 
 	local current_dir="$PWD"
 	cd ..
-	trash "$current_dir"
+	trash "$current_dir" || return 1
 	inspect
 
-	## add nicer trash sound
-	# shellcheck disable=2181
-	[[ $? -ne 0 ]] && return 0
-	current_vol=$(osascript -e 'output volume of (get volume settings)')
-	vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
+	# add nicer trash sound
+	current_vol=$(osascript -e 'output volume of (get volume settings)') # afplay play with 100% volume by default
+	[[ "$current_vol" == "missing value" ]] && current_vol=50
+	vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc)
 	(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
 }
 
@@ -156,7 +155,7 @@ function eject() {
 	fi
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	# if one volume, will auto-eject due to `-1`
-	selected=$(echo "$volumes" | fzf -0 -1 --no-info --height=30%)
+	selected=$(echo "$volumes" | fzf -0 -1 --no-info --height=10%)
 	[[ -z "$selected" ]] && return 0 # fzf aborted
 	diskutil eject "$selected"
 }
