@@ -1078,35 +1078,45 @@ rules:
         to:
           - { key_code: "1", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+          - shell_command: |
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+              osascript -e 'display notification "⬇️ Sort by name" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by modification date
         from: { key_code: "left_arrow" }
         to:
           - { key_code: "5", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+          - shell_command: |
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+              osascript -e 'display notification "⬅️ Sort by modification date" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by size
         from: { key_code: "up_arrow" }
         to:
           - { key_code: "6", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+          - shell_command: |
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+              osascript -e 'display notification "⬆️ Sort by size" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by kind
         from: { key_code: "right_arrow" }
         to:
           - { key_code: "2", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+          - shell_command: |
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+              osascript -e 'display notification "➡️ Sort by kind" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by tags
-        from: { key_code: "end" } # below the home key
+        from: { key_code: "end" }
         to:
           - { key_code: "7", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+          - shell_command: |
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+              osascript -e 'display notification "🔚 Sort by tags" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
