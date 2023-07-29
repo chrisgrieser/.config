@@ -107,32 +107,6 @@
 				<true/>
 			</dict>
 		</array>
-		<key>0F6DD660-7DBA-4369-9F0D-C6A0C1DB45D2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1C1350C9-BCCF-4FFC-B5EE-9AA6F9EF8C07</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>1C1350C9-BCCF-4FFC-B5EE-9AA6F9EF8C07</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C3931E43-660B-44BE-9AB0-828A5F2EF7FB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>1CB74B29-BB4E-486B-99D5-073652674E8A</key>
 		<array>
 			<dict>
@@ -880,18 +854,7 @@
 			</dict>
 		</array>
 		<key>D3C22147-3316-415A-B4C1-8AA201F0888E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0F6DD660-7DBA-4369-9F0D-C6A0C1DB45D2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>E2663B7F-3850-4F0C-A841-4B610205EB3A</key>
 		<array>
 			<dict>
@@ -1644,54 +1607,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>adduuid</key>
-				<false/>
-				<key>allowemptyfiles</key>
-				<false/>
-				<key>createintermediatefolders</key>
-				<true/>
-				<key>filename</key>
-				<string>{var:log_location}</string>
-				<key>filetext</key>
-				<string>{isodate:yyyy-MM-dd HH:mm} – {query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>relativepathmode</key>
-				<integer>0</integer>
-				<key>type</key>
-				<integer>3</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.writefile</string>
-			<key>uid</key>
-			<string>C3931E43-660B-44BE-9AB0-828A5F2EF7FB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>.*q=(.*)</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<true/>
-				<key>replacestring</key>
-				<string>"$1"</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>1C1350C9-BCCF-4FFC-B5EE-9AA6F9EF8C07</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1858,28 +1773,6 @@
 			<string>D3C22147-3316-415A-B4C1-8AA201F0888E</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>delimiter</key>
-				<string>
-</string>
-				<key>discardemptyarguments</key>
-				<true/>
-				<key>outputas</key>
-				<integer>1</integer>
-				<key>trimarguments</key>
-				<true/>
-				<key>variableprefix</key>
-				<string>split</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.split</string>
-			<key>uid</key>
-			<string>0F6DD660-7DBA-4369-9F0D-C6A0C1DB45D2</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -2880,26 +2773,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>785</real>
 		</dict>
-		<key>0F6DD660-7DBA-4369-9F0D-C6A0C1DB45D2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>975</real>
-			<key>ypos</key>
-			<real>635</real>
-		</dict>
-		<key>1C1350C9-BCCF-4FFC-B5EE-9AA6F9EF8C07</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>only query term</string>
-			<key>xpos</key>
-			<real>1050</real>
-			<key>ypos</key>
-			<real>480</real>
-		</dict>
 		<key>1CB74B29-BB4E-486B-99D5-073652674E8A</key>
 		<dict>
 			<key>xpos</key>
@@ -3130,17 +3003,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>165</real>
 			<key>ypos</key>
 			<real>1135</real>
-		</dict>
-		<key>C3931E43-660B-44BE-9AB0-828A5F2EF7FB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>Logging</string>
-			<key>xpos</key>
-			<real>1130</real>
-			<key>ypos</key>
-			<real>450</real>
 		</dict>
 		<key>C7FBCF0E-8C6B-4F3D-8678-BE05857CB7A9</key>
 		<dict>
