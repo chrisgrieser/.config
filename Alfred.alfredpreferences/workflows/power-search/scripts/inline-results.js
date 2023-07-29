@@ -41,7 +41,8 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 //──────────────────────────────────────────────────────────────────────────────
 
 // get the keywords that activate something in Alfred and write them to the
-// cachePath
+// cachePath. Saving the keywords in a cache saves about ~250ms on my device
+// (50+ workflows, 180+ keywords)
 /** @param {string} cachePath */
 function refreshKeywordsCache(cachePath) {
 	const keywords = app
@@ -131,12 +132,6 @@ function run(argv) {
 		title: query,
 		uid: query,
 		arg: $.getenv("search_site") + query,
-		mods: {
-			cmd: {
-				arg: "open_URLs",
-				subtitle: "⌘: Open all saved results",
-			},
-		},
 	};
 
 	//───────────────────────────────────────────────────────────────────────────
@@ -147,7 +142,6 @@ function run(argv) {
 	// Guard clause 2: first word of query is alfred keyword
 	if (ignoreAlfredKeywords && !isUsingFallbackSearch) {
 		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
-		console.log("cachePath:", cachePath);
 
 		if (!fileExists(cachePath)) {
 			refreshKeywordsCache(cachePath);
