@@ -524,7 +524,7 @@ zsh "$dock_switcher_path" --save "$1"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>100</real>
+			<real>70</real>
 		</dict>
 		<key>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</key>
 		<dict>
