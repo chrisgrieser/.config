@@ -144,7 +144,10 @@ function run(argv) {
 		if (keywordCacheIsOutdated(keywordCachePath)) refreshKeywordCache(keywordCachePath);
 		const alfredKeywords = JSON.parse(readFile(keywordCachePath));
 		const queryFirstWord = query.split(" ")[0];
-		if (alfredKeywords.includes(queryFirstWord)) return;
+		if (alfredKeywords.includes(queryFirstWord)) {
+			console.log("Ignored due to Alfred keyword: " + queryFirstWord);
+			return;
+		}
 	}
 
 	// GUARD CLAUSE 3: use old results
@@ -240,7 +243,9 @@ function run(argv) {
 	});
 
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
-	console.log(`${mode}: ${durationTotalSecs}s`);
+	let log = `${durationTotalSecs}s`;
+	if (mode !== "default") log += ` (${mode})`;
+	console.log(log);
 
 	return alfredInput;
 }
