@@ -12,7 +12,7 @@ const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
 let resultsToFetch = parseInt($.getenv("inline_results_to_fetch"));
 if (resultsToFetch < 1) resultsToFetch = 1;
 else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
-const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
+const ignoreAlfredKeywordsEnabled = $.getenv("ignore_alfred_keywords") === "1";
 
 const multiSelectIcon = "🔳";
 
@@ -129,22 +129,21 @@ function run(argv) {
 	const mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 	const query = argv[0];
 
-	// GUARD CLAUSE 1: query less than 3 chars or a URL
+	// GUARD CLAUSE 1: query < 3 chars, OR query is a URL
 	if (query.length < 3 || query.match(/^\w+:/)) return;
 
 	// GUARD CLAUSE 2: first word of query is alfred keyword
 	// (guard clause is ignored when doing fallback search or multi-select,
 	// since in that case we know we do not need to ignore anything.)
-	if (ignoreAlfredKeywords && mode !== "fallack" && mode !== "multi-select") {
+	if (ignoreAlfredKeywordsEnabled && mode !== "fallack" && mode !== "multi-select") {
 		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
-
 		if (keywordCacheIsOutdated(cachePath)) refreshKeywordsCache(cachePath);
 		const alfredKeywords = JSON.parse(readFile(cachePath));
-
 		const queryFirstWord = query.split(" ")[0];
 		if (alfredKeywords.includes(queryFirstWord)) return;
 	}
 
+	// GUARD CLAUSE 3: USE OLD RESULTS
 	// get values from previous run
 	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js;
 	const oldResults = JSON.parse(
@@ -156,7 +155,6 @@ function run(argv) {
 		arg: $.getenv("search_site") + encodeURIComponent(query),
 	};
 
-	// GUARD CLAUSE 3: USE OLD RESULTS
 	// PERF If the user is typing, return early to guarantee the top entry is the
 	// currently typed query. If we waited for the API, a fast typer would search
 	// for an incomplete query
@@ -223,7 +221,7 @@ function run(argv) {
 	});
 
 	const durationTotal = (+new Date() - timelogStart) / 1000;
-	console.log(`${mode} mode: ${durationTotal}s`);
+	console.log(`${mode}: ${durationTotal}s`);
 
 	return alfredInput;
 }
