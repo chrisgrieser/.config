@@ -1800,7 +1800,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/open-urls-from-buffer.sh</string>
+				<string>./scripts/open-urls.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
