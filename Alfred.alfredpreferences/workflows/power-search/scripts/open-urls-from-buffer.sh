@@ -1,30 +1,28 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154 # Alfred variables
 
-# OPEN ANY URLS IN THE BUFFER
-saved_urls="$alfred_workflow_cache/urlsToOpen.txt"
+# OPEN URL(S)
+last_given_url="$*"
+saved_urls="$alfred_workflow_cache/urlsToOpen.json"
 if [[ -f "$saved_urls" ]]; then
-	sed '/^$/d' "$saved_urls" | xargs open
+	urls="$(cat "$saved_urls")\n$last_given_url"
 	rm "$saved_urls"
 fi
+echo "$urls" | xargs open
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# OPEN CURRENT URL
-last_given_url="$*"
-open "$last_given_url"
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # LOG URLs
 
-# log location left empty = user decided not to save logs
+# log location left empty or non-existent = user decided not to save logs
 [[ ! -f "$log_location" ]] && return 0
 
-# if query on search site, keep only the query part
-queryOrUrl=$(echo "$last_given_url" | sed -E 's/.*q=(.*)/\1/') 
 date_time_stamp=$(date +"%Y-%m-%d %H:%M")
 
-# prepend to logfile
-echo -e "$date_time_stamp – $queryOrUrl\n$(cat "$log_location")" > todo.txt
+echo "$urls" | while read -r url; do
+	# if query on search site, keep only the query part
+	query_or_url=$(echo "$url" | sed -E 's/.*q=(.*)/\1/')
+
+	# prepend
+	echo -e "$date_time_stamp – $query_or_url\n$(cat "$log_location")" >"$log_location"
+done
 

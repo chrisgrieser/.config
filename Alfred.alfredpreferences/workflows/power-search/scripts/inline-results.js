@@ -15,6 +15,7 @@ else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
 
 const isUsingFallbackSearch = Boolean($.NSProcessInfo.processInfo.environment.objectForKey("no_ignore").js);
 const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
+const cacheRecreationThresholdMins = 60;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -110,7 +111,7 @@ function refreshKeywordsCache(cachePath) {
 		.join("")
 		.split(","); // back to array
 	const uniqueKeywords = [...new Set(trueKeywords)];
-	console.log("uniqueKeywords:", uniqueKeywords);
+	console.log("unique keywords:", uniqueKeywords);
 	writeToFile(cachePath, JSON.stringify(uniqueKeywords));
 }
 
@@ -146,7 +147,6 @@ function run(argv) {
 		if (!fileExists(cachePath)) {
 			refreshKeywordsCache(cachePath);
 		} else {
-			const cacheRecreationThresholdMins = 30;
 			const cacheAgeMins = (+new Date() - getCreationDate(cachePath)) / 1000 / 60;
 			if (cacheAgeMins > cacheRecreationThresholdMins) refreshKeywordsCache(cachePath);
 		}
@@ -178,10 +178,15 @@ function run(argv) {
 	// in restricting the number of results for performance (25 is ddgr's maximum)
 	const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
 	const responseJson = JSON.parse(app.doShellScript(ddgrCommand));
+
+	const bufferPath = $.getenv("alfred_workflow_cache") + "/urlsToOpen.json"
+	const savedUrls = bufferPath.split("\n");
+
 	const newResults = responseJson.map(
 		(/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
+			const savedIcon = savedUrls.includes(item.url) ? "🔵 " : "";
 			return {
-				title: item.title,
+				title: savedIcon + item.title,
 				subtitle: item.url,
 				uid: item.url,
 				arg: item.url,

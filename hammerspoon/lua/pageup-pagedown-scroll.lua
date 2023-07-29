@@ -8,10 +8,14 @@ local u = require("lua.utils")
 -- - This spoon is somewhat equivalent to https://github.com/dexterleng/KeyboardScroller.docs
 
 -- CONFIG
-local distancePerApp = {
+-- distance or false to ignore app
+local perAppSettings = {
 	Discord = 20,
 	Highlights = 50,
 	default = 40,
+	Neovide = false,
+	neovide = false,
+	WezTerm = false,
 }
 
 --------------------------------------------------------------------------------
@@ -26,8 +30,12 @@ local function scroll(direction)
 	local centerPos = { x = frame.x + frame.w * 0.5, y = frame.y + frame.h * 0.5 }
 	hs.mouse.setRelativePosition(centerPos)
 
+	-- ignore app
+	local ignoreApp = perAppSettings[frontApp:name()] == false
+	if ignoreApp then hs.eventtap.keyStroke({}, "page" .. direction) end
+
 	-- determine distance and scroll
-	local distance = distancePerApp[frontApp:name()] or distancePerApp.default
+	local distance = perAppSettings[frontApp:name()] or perAppSettings.default
 	if direction == "down" then distance = distance * -1 end
 	hs.eventtap.scrollWheel({ 0, distance }, {})
 
