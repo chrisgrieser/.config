@@ -50,7 +50,7 @@ function writeToFile(filepath, text) {
 /** @param {string} cachePath */
 function refreshKeywordCache(cachePath) {
 	const keywords = app
-		.doShellScript("grep -r -A1 '<key>keyword' ../**/info.plist | awk 'NR % 3 == 2'")
+		.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
 		.split("\r")
 		.reduce((acc, line) => {
 			const value = line.split(">")[1].split("<")[0];
@@ -147,10 +147,10 @@ function run(argv) {
 		if (alfredKeywords.includes(queryFirstWord)) return;
 	}
 
-	// GUARD CLAUSE 3: USE OLD RESULTS
+	// GUARD CLAUSE 3: use old results
 	// get values from previous run
 	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js;
-	const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js;
+	const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]";
 	const searchForQuery = {
 		title: `"${query}"`,
 		uid: query,
@@ -175,7 +175,7 @@ function run(argv) {
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
-	// MAIN: REQUEST NEW RESULTS
+	// MAIN: request NEW results
 
 	// PERF cache `ddgr` response so that re-opening Alfred or using multi-select
 	// does not re-fetch results

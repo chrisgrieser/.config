@@ -65,6 +65,9 @@ function run() {
 				? "stage"
 				: "unstage";
 
+			// https://stackoverflow.com/a/3527985/22114136
+			const gitDiffStaged = mode === "unstage" ? "--staged" : "";
+
 			return {
 				title: `${trackingDisplay} ${filename}`,
 				subtitle: parentFolder,
@@ -82,7 +85,7 @@ function run() {
 					},
 					ctrl: {
 						subtitle: "⌃: Diff Changes in Terminal",
-						arg: `cd "${repoPath}" && git diff "${pathInRepo}"`,
+						arg: `cd "${repoPath}" && git diff ${gitDiffStaged} "${pathInRepo}"`,
 					},
 					cmd: {
 						subtitle: isDeleted ? "🚫 Cannot open, because the file is deleted." : "⌥: Open File",
