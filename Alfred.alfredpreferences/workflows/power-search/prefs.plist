@@ -4,6 +4,8 @@
 <dict>
 	<key>include_unsafe</key>
 	<true/>
+	<key>inline_results_to_fetch</key>
+	<string>7</string>
 	<key>log_location</key>
 	<string>/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/power-search.log</string>
 </dict>
