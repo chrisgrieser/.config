@@ -10,11 +10,12 @@ local u = require("lua.utils")
 -- CONFIG
 -- distance or false to ignore app
 local perAppSettings = {
+	defaultScrollDistance = 40,
 	Discord = 20,
 	Highlights = 50,
-	default = 40,
 	Neovide = false,
 	neovide = false,
+	["wezterm-gui"] = false,
 	WezTerm = false,
 }
 
@@ -32,10 +33,13 @@ local function scroll(direction)
 
 	-- ignore app
 	local ignoreApp = perAppSettings[frontApp:name()] == false
-	if ignoreApp then hs.eventtap.keyStroke({}, "page" .. direction) end
+	if ignoreApp then
+		hs.eventtap.keyStroke({}, "page" .. direction, 0, frontApp)
+		return
+	end
 
 	-- determine distance and scroll
-	local distance = perAppSettings[frontApp:name()] or perAppSettings.default
+	local distance = perAppSettings[frontApp:name()] or perAppSettings.defaultScrollDistance
 	if direction == "down" then distance = distance * -1 end
 	hs.eventtap.scrollWheel({ 0, distance }, {})
 

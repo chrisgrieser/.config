@@ -108,6 +108,8 @@ local keybindings = {
 	{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 	{ key = "Enter", mods = "CTRL", action = act.ActivateTabRelative(1) },
 	{ key = "v", mods = "CMD", action = actFun(autoQuotePastedUrls) },
+	{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
+	{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
 
 	-- INFO using the mapping from the terminal_keybindings.zsh
 	-- undo
