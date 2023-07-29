@@ -10,6 +10,7 @@ app.includeStandardAdditions = true;
 function run() {
 	/** @type AlfredItem[] */
 	const appsWithDict = app
+		// Caveat: Script Editor does not have .sdef file
 		.doShellScript(`find \
 			'/Applications' \
 			"$HOME/Applications" \
@@ -24,7 +25,7 @@ function run() {
 			const appName = appPath.split("/").pop().split(".")[0];
 			return {
 				title: appName,
-				icon: { path: appPath, type: "fileicon"},
+				icon: { path: appPath, type: "fileicon" },
 				arg: sdefPath,
 			};
 		});
