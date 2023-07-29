@@ -15,7 +15,7 @@ const processAppName = {
 	"wezterm-gui": "WezTerm",
 	bird: "iCloud Sync",
 	"Steam Helper": "Steam",
-	"steam_osx": "Steam",
+	steam_osx: "Steam",
 	"Brave Browser Helper": "Brave Browser",
 	"Brave Browser Helper (Renderer)": "Brave Browser",
 	"Brave Browser Helper (GPU)": "Brave Browser",
@@ -36,7 +36,7 @@ const appFilePaths = {
 	"Alfred Preferences": "/Applications/Alfred 5.app/Contents/Preferences/Alfred Preferences.app",
 };
 
-const parentIcon = "↖"
+const parentIcon = "↖";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -62,6 +62,8 @@ function run() {
 	const parentProcs = {};
 
 	const processes = app
+		// command should come last, so it is not truncated and also fully
+		// identifiable by space delimitation even with spaces in the process name
 		.doShellScript(`ps ${sort}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`)
 		.split("\r")
 		.map((/** @type {string} */ processInfo) => {
@@ -92,7 +94,9 @@ function run() {
 			// display & icon
 			const appName = processAppName[processName] || processName;
 			const displayTitle =
-				appName !== processName && !processName.includes("Helper") ? `${processName} [${appName}]` : processName;
+				appName !== processName && !processName.includes("Helper")
+					? `${processName} [${appName}]`
+					: processName;
 			const subtitle = [memory, cpu, parentName].filter((t) => t !== "").join("   ");
 			const isApp = apps.includes(`${appName}.app`) || appFilePaths[appName];
 			let icon = {};
