@@ -108,10 +108,13 @@ local function cmpconfig()
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
 			["<D-Esc>"] = cmp.mapping.complete(), -- trigger suggestion popup
-			["<C-e>"] = cmp.mapping.abort(),
 			["<S-CR>"] = cmp.mapping.abort(), -- accept current text, consistent with Obsidian https://medium.com/obsidian-observer/obsidian-quick-tip-use-shift-enter-to-skip-autocomplete-on-links-8495ea189c4c
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
 			["<PageDown>"] = cmp.mapping.scroll_docs(4),
+			["<C-e>"] = function ()
+				cmp.mapping.abort()
+				vim.fn["codeium#Complete()"]() -- show virtual text
+			end,
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
