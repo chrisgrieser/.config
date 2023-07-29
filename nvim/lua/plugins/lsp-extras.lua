@@ -63,7 +63,7 @@ return {
 			padding_top = 0,
 			padding_right = 2, -- for scrollbar
 			update_event = { "BufReadPost", "InsertLeave", "DiagnosticChanged" },
-			toggle_event = { "InsertEnter", "DiagnosticChanged" },
+			toggle_event = { "InsertEnter" },
 			show_sign = true,
 			severity_colors = { -- virtual text hlgroups have background in most themes
 				error = "DiagnosticVirtualTextError",

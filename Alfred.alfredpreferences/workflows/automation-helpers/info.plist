@@ -34,6 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>33654CF6-613B-4F13-A9BB-C69F22B60536</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>87FA7BC2-6B86-4232-BC62-918EC5651BA7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3FBF0208-3AC5-48A4-A7AF-86BE9C0B1915</key>
 		<array>
 			<dict>
@@ -87,11 +100,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>69582200-3B13-4747-BCAD-1292B8BF99FD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>33654CF6-613B-4F13-A9BB-C69F22B60536</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>9734FC1B-0242-4229-B9BF-4A809F59C81E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>87FA7BC2-6B86-4232-BC62-918EC5651BA7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>221EDD07-BD53-4BD8-B302-CD0040D3FE51</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -511,6 +550,118 @@ window_name</string>
 			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>neovim-debugger.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>87FA7BC2-6B86-4232-BC62-918EC5651BA7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"Killall","arg":"killall","subtitle":"nvim, neovide, language servers"},{"title":"Signal","arg":"signal","subtitle":"send 'echo \"ping\"'"},{"title":"Report","arg":"report","subtitle":"of running processes"}]</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>33654CF6-613B-4F13-A9BB-C69F22B60536</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>18</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>1</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>69582200-3B13-4747-BCAD-1292B8BF99FD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>221EDD07-BD53-4BD8-B302-CD0040D3FE51</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1402,14 +1553,28 @@ fi</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
+		<key>221EDD07-BD53-4BD8-B302-CD0040D3FE51</key>
+		<dict>
+			<key>xpos</key>
+			<real>1240</real>
+			<key>ypos</key>
+			<real>165</real>
+		</dict>
 		<key>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>700</real>
+			<real>625</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>33654CF6-613B-4F13-A9BB-C69F22B60536</key>
+		<dict>
+			<key>xpos</key>
+			<real>910</real>
+			<key>ypos</key>
+			<real>165</real>
 		</dict>
 		<key>3FBF0208-3AC5-48A4-A7AF-86BE9C0B1915</key>
 		<dict>
@@ -1445,7 +1610,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>700</real>
+			<real>625</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -1460,6 +1625,15 @@ fi</string>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
+		<key>69582200-3B13-4747-BCAD-1292B8BF99FD</key>
+		<dict>
+			<key>note</key>
+			<string>neovim debug</string>
+			<key>xpos</key>
+			<real>765</real>
+			<key>ypos</key>
+			<real>165</real>
+		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
 			<key>colorindex</key>
@@ -1471,6 +1645,13 @@ fi</string>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
+		<key>87FA7BC2-6B86-4232-BC62-918EC5651BA7</key>
+		<dict>
+			<key>xpos</key>
+			<real>1070</real>
+			<key>ypos</key>
+			<real>165</real>
+		</dict>
 		<key>9248EC6E-2EAB-43B6-B666-C9F3B323038F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1478,7 +1659,7 @@ fi</string>
 			<key>note</key>
 			<string>backup: dotfiles, vault, and bookmarks</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>470</real>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
@@ -1636,7 +1817,7 @@ fi</string>
 			<key>note</key>
 			<string>restart</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>470</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -1656,7 +1837,7 @@ fi</string>
 			<key>note</key>
 			<string>repo sync</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>470</real>
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
@@ -1665,7 +1846,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>700</real>
+			<real>625</real>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>

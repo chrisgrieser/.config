@@ -1,15 +1,6 @@
 title: vim helpers
 rules:
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Hyper+1: Kill All Neovim processes"
-    manipulators:
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command, shift, control, option] } }
-        to:
-          # language_server_macos_x64 language_server_macos_arm are Codium servers
-          - shell_command: |
-              killall neovide nvim osascript language_server_macos_x64 language_server_macos_arm
-              osascript -e 'display notification "" with title "⚔️ Killed all nvim-related processes"'
   - description: "Neovide: Fix <S-Space> and cmd+q → ZZ"
     manipulators:
       - type: basic
