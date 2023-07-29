@@ -16,7 +16,7 @@
       },
       "backgroundSelected" : "#FFBB00FF",
       "text" : {
-        "size" : 29,
+        "size" : 28,
         "colorSelected" : "#590907FF",
         "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
@@ -44,7 +44,7 @@
       "color" : "#454545FF",
       "paddingHorizontal" : 10,
       "width" : 1024,
-      "borderPadding" : 8,
+      "borderPadding" : 9,
       "borderColor" : "#4141417F",
       "blur" : 0,
       "roundness" : 9,
