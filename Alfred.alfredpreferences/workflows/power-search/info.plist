@@ -119,16 +119,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>2F55B479-9490-4D67-BB20-11E92BE350B7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>1C1350C9-BCCF-4FFC-B5EE-9AA6F9EF8C07</key>
 		<array>
@@ -1872,27 +1862,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>2F55B479-9490-4D67-BB20-11E92BE350B7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>delimiter</key>
 				<string>
 </string>
@@ -2861,10 +2830,10 @@
 	</array>
 	<key>readme</key>
 	<string>## Actions on inline results
-- &lt;kbd&gt;⏎&lt;/kbd&gt; Search for Term / open URL
-- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Mark URL. When pressed on the first item, the search query, will open all previously marked items.
-- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Copy URL
-- &lt;kbd&gt;⇧&lt;/kbd&gt; Show Preview Text
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: Search for Term / open URL.
+- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Mark URL. The next &lt;kbd&gt;⏎&lt;/kbd&gt; will open the selected result as well as all previously marked URLs.
+- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy URL.
+- &lt;kbd&gt;⇧&lt;/kbd&gt; (or &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt;): Show preview text of search result.
 
 ### Recommendation
 - Add this workflow as [fallback search](https://www.alfredapp.com/help/features/default-results/fallback-searches/).
@@ -2914,7 +2883,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>0F6DD660-7DBA-4369-9F0D-C6A0C1DB45D2</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>975</real>
 			<key>ypos</key>
@@ -2952,7 +2921,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>write URL to buffer</string>
 			<key>xpos</key>
-			<real>830</real>
+			<real>810</real>
 			<key>ypos</key>
 			<real>955</real>
 		</dict>
@@ -2996,15 +2965,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>1020</real>
-		</dict>
-		<key>2F55B479-9490-4D67-BB20-11E92BE350B7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>1125</real>
-			<key>ypos</key>
-			<real>605</real>
 		</dict>
 		<key>318F6F96-8B4C-45EF-A20D-8CB2DC06772F</key>
 		<dict>
@@ -3201,9 +3161,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>D3C22147-3316-415A-B4C1-8AA201F0888E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>7</integer>
 			<key>note</key>
-			<string>load URLs from buffer, if there any</string>
+			<string>open URL(s)</string>
 			<key>xpos</key>
 			<real>805</real>
 			<key>ypos</key>

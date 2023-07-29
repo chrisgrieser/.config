@@ -200,6 +200,18 @@
 		"body": "for ${1:VAR} in ${0:LIST}\ndo\n\techo \"\\$${1:VAR}\"\ndone\n",
 		"description": "for loop in list"
 	},
+	"today (ISO date)": {
+		"prefix": ["today (ISO date)", "now"],
+		"body": "${1:now}=$(date +\"%Y-%m-%d %H:%M:%S\")"
+	},
+	"for each line (in file)": {
+		"prefix": "for each line (in file)",
+		"body": [
+			"sed '/^$/d' \"${1:filepath}\" | while read -r ${2:line}; do",
+			"\techo$0 \"$${2:line}\"",
+			"done"
+		]
+	},
 	"play sound": {
 		"prefix": [
 			"play sound",

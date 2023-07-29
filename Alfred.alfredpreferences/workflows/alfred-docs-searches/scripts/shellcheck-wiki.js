@@ -3,7 +3,7 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-const baseURL = "http://www.shellcheck.net/wiki/";
+const baseURL = "https://www.shellcheck.net/wiki/";
 
 //──────────────────────────────────────────────────────────────────────────────
 
