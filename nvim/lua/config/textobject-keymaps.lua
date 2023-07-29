@@ -115,10 +115,6 @@ keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<
 -- v: viewport
 keymap("o" , "v", "<cmd>lua require('various-textobjs').visibleInWindow()<CR>", { desc = "󱡔 visible in window textobj" })
 
--- az/iz: fold textobj
-keymap( { "x", "o" }, "az", "<cmd>lua require('various-textobjs').closedFold(false)<CR>", { desc = "󱡔 outer fold textobj" })
-keymap( { "x", "o" }, "iz", "<cmd>lua require('various-textobjs').closedFold(true)<CR>", { desc = "󱡔 inner fold textobj" })
-
 -- r: [r]est of …
 -- INFO not setting in visual mode, to keep visual block mode replace
 keymap("o", "rv", "<cmd>lua require('various-textobjs').restOfWindow()<CR>", { desc = "󱡔 rest of viewport textobj" })

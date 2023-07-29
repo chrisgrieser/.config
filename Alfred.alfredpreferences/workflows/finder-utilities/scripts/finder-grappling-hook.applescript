@@ -1,3 +1,4 @@
+#!/usr/bin/env osascript
 set home to POSIX path of (path to home folder as string)
 set wd to (home & "Library/Mobile Documents/com~apple~CloudDocs/File Hub/")
 set dotfile_folder to (home & ".config/")
