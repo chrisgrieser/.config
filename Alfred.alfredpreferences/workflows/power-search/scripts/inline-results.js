@@ -14,16 +14,17 @@ if (resultsToFetch < 1) resultsToFetch = 1;
 else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
 const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
 
-const keywordCacheThresholdMins = 60;
 const multiSelectIcon = "🔳";
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} filepath */
-function getFileAgeMins(filepath) {
-	const creationDate = Application("System Events").aliases[filepath].creationDate();
-	const cacheAgeMins = (+new Date() - creationDate) / 1000 / 60;
-	return cacheAgeMins;
+/** @param {string} cachePath */
+function keywordCacheIsOutdated(cachePath) {
+	const cacheCreation = Application("System Events").aliases[cachePath].creationDate();
+	const alfredConfigPath = $.getenv("alfred_config");
+	const lastAlfredConfigChange = Application("System Events").aliases[alfredConfigPath].creationDate();
+	const isOutdated = lastAlfredConfigChange > cacheCreation;
+	return isOutdated;
 }
 
 /** @param {string} path */
@@ -135,9 +136,7 @@ function run(argv) {
 	if (ignoreAlfredKeywords && mode !== "fallack" && mode !== "multi-select") {
 		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
 
-		if (!fileExists(cachePath)) {
-			refreshKeywordsCache(cachePath);
-		} else if (getFileAgeMins(cachePath) > keywordCacheThresholdMins) {
+		if (!fileExists(cachePath) || keywordCacheIsOutdated(cachePath)) {
 			refreshKeywordsCache(cachePath);
 		}
 		const alfredKeywords = JSON.parse(readFile(cachePath));

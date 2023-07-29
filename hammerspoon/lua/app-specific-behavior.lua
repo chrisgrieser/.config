@@ -168,13 +168,17 @@ Wf_script_editor = wf
 	:subscribe(wf.windowCreated, function(newWin)
 		-- skip new file creation dialogue
 		if newWin:title() == "Open" then
-			u.keystroke({ "cmd" }, "n")
+			u.applescript('tell application "Script Editor" to make new document')
 		-- auto-paste and lint content; resize window
 		elseif newWin:title() == "Untitled" then
-			u.keystroke({ "cmd" }, "v")
 			wu.moveResize(newWin, wu.centered)
-			u.runWithDelays(0.2, function() u.keystroke({ "cmd" }, "k") end)
-		-- resize window if it's an AppleScript Dictionaryx
+			local clipb = hs.pasteboard.getContents()
+			-- passing via for escaping
+			hs.osascript.javascript(([[
+				Application("Script Editor").documents()[0].text = `%s`;
+				Application("Script Editor").documents()[0].checkSyntax();
+			]]):format(clipb))
+		-- just resize window if it's an AppleScript Dictionary
 		elseif newWin:title():find("%.sdef$") then
 			wu.moveResize(newWin, wu.centered)
 		end

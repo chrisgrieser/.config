@@ -360,11 +360,24 @@ rules:
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
+          - { key_code: q, modifiers: [command] }
+          - { key_code: vk_none, hold_down_milliseconds: 400 }
+          - { key_code: delete_or_backspace, modifiers: [command] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
+      # toggle language
+      - type: basic
+        from: { key_code: l, modifiers: { mandatory: [command] } }
+        to:
           - shell_command: |
-              osascript -e 'tell application "Script Editor" to quit saving "no"'
-          # - { key_code: q, modifiers: [command] }
-          # - { key_code: vk_none, hold_down_milliseconds: 400 }
-          # - { key_code: delete_or_backspace, modifiers: [command] }
+              osascript -l JavaScript -e '
+                const se = Application("Script Editor");
+                const currentDoc = se.documents()[0]
+                const currentLang = currentDoc.language().name();
+                const otherLang = currentLang === "AppleScript" ? "JavaScript" : "AppleScript";
+                const otherLangObj = se.languages.byName(otherLang);
+                currentDoc.language = otherLangObj;
+                currentDoc.checkSyntax();
+              '
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) BusyCal"

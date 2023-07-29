@@ -47,7 +47,8 @@ return {
 				{ filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
 				-- Codeium.nvim
 				{ filter = { event = "notify", find = "^Codeium.nvim:" }, view = "mini" },
-				{ filter = { event = "notify", find = "server updated$" }, view = "mini" },
+				{ filter = { event = "notify", find = "downloading server" }, view = "mini" },
+				{ filter = { event = "notify", find = "unpacking server" }, view = "mini" },
 
 				-- unneeded info on search patterns
 				{ filter = { event = "msg_show", find = "^/." }, skip = true },
@@ -113,7 +114,7 @@ return {
 			max_height = 30,
 			max_width = 60,
 			minimum_width = 13,
-			timeout = 4000,
+			timeout = 7500,
 			top_down = false,
 			on_open = function(win)
 				if not vim.api.nvim_win_is_valid(win) then return end
