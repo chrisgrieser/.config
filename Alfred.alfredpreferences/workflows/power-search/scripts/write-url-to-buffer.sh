@@ -9,7 +9,7 @@ url="$*"
 if grep -q "$url" "$buffer"; then
 	# using `grep -v` instead of `sed -i '//d'` to avoid annoying escaping issues
 	grep -v "$url" "$buffer" >"$buffer.tmp"
-	cp "$buffer.tmp" "$buffer"
+	mv "$buffer.tmp" "$buffer"
 	sound="mute"
 else
 	echo "$url" >>"$buffer"
@@ -17,4 +17,4 @@ else
 fi
 
 # confirmation sound
-afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_$sound.caf" &
+afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_$sound.caf"

@@ -155,10 +155,6 @@ function run(argv) {
 		title: `"${query}"`,
 		uid: query,
 		arg: $.getenv("search_site") + encodeURIComponent(query),
-		mods: {
-			// query cannot be multi-selected
-			cmd: { valid: false, subtitle: "❌" },
-		},
 	};
 
 	// PERF If the user is typing, return early to guarantee the top entry is the
@@ -202,6 +198,8 @@ function run(argv) {
 	const multiSelectBufferPath = $.getenv("alfred_workflow_cache") + "/multiSelectBuffer.txt";
 	const multiSelectUrls = readFile(multiSelectBufferPath).split("\n") || [];
 
+	if ()
+
 	const newResults = results.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
 		const isSelected = multiSelectUrls.includes(item.url);
 		const icon = isSelected ? multiSelectIcon + " " : "";
@@ -214,7 +212,9 @@ function run(argv) {
 			mods: {
 				shift: { subtitle: item.abstract },
 				cmd: {
+					arg: item.url, // has to be set, since main arg can be ""
 					variables: { mode: "multi-select" },
+					subtitle: isSelected ? "⌘: Deselect URL" : "⌘: Select URL",
 				},
 			},
 		};

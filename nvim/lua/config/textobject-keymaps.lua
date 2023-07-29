@@ -12,6 +12,7 @@ end
 --------------------------------------------------------------------------------
 -- QUICK TEXTOBJ OPERATIONS
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
+keymap("x", "<Space>", '"_c', { desc = "󱡔 change selection" })
 keymap("n", "<F2>", '"_daw', { desc = "󱡔 delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
 keymap("i", "<F2>", "<Space>") -- FIX accidental triggering in insert mode when typing quickly
 
@@ -77,7 +78,7 @@ keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "󱡔 󰊢 hunk
 
 -- stylua: ignore start
 -- space: subword
-keymap({"o", "x"}, "<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "󱡔 inner subword textobj" })
+keymap("o", "<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "󱡔 inner subword textobj" })
 keymap({"o", "x"}, "i<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "󱡔 inner subword textobj" })
 keymap({"o", "x"}, "a<Space>", "<cmd>lua require('various-textobjs').subword(false)<CR>", { desc = "󱡔 outer subword textobj" })
 
