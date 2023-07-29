@@ -3,10 +3,10 @@
 
 # OPEN URL(S)
 last_given_url="$*"
-saved_urls="$alfred_workflow_cache/urlsToOpen.json"
-if [[ -f "$saved_urls" ]]; then
-	urls="$(cat "$saved_urls")\n$last_given_url"
-	rm "$saved_urls"
+multi_select_buffer="$alfred_workflow_cache/multiSelectBuffer.txt"
+if [[ -f "$multi_select_buffer" ]]; then
+	urls="$(cat "$multi_select_buffer")\n$last_given_url"
+	rm "$multi_select_buffer"
 else
 	urls="$last_given_url"
 fi

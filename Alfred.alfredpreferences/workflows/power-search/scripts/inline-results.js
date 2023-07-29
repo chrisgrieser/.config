@@ -129,7 +129,7 @@ function run(argv) {
 	const mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 	const query = argv[0];
 
-	// GUARD CLAUSE 1: query < 3 chars, OR query is a URL
+	// GUARD CLAUSE 1: query < 3 chars OR query is a URL
 	if (query.length < 3 || query.match(/^\w+:/)) return;
 
 	// GUARD CLAUSE 2: first word of query is alfred keyword
@@ -154,10 +154,8 @@ function run(argv) {
 		uid: query,
 		arg: $.getenv("search_site") + encodeURIComponent(query),
 		mods: {
-			cmd: {
-				valid: false,
-				subtitle: "❌",
-			},
+			// query cannot be multi-selected
+			cmd: { valid: false, subtitle: "❌" },
 		},
 	};
 
@@ -203,12 +201,13 @@ function run(argv) {
 	const multiSelectUrls = readFile(multiSelectBuffer).split("\n") || [];
 
 	const newResults = results.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
-		const icon = multiSelectUrls.includes(item.url) ? multiSelectIcon + " " : "";
+		const isSelected = multiSelectUrls.includes(item.url);
+		const icon = isSelected ? multiSelectIcon + " " : "";
 		return {
 			title: icon + item.title,
 			subtitle: item.url,
 			uid: item.url,
-			arg: item.url,
+			arg: isSelected ? "" : item.url, // prevent double opening a URL already selected
 			icon: { path: "icons/1.png" },
 			mods: {
 				shift: { subtitle: item.abstract },
