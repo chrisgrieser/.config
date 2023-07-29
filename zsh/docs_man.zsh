@@ -105,8 +105,7 @@ export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 export LESS='-R --incsearch --ignore-case --window=-3 --no-init --tilde' # --ignore-case is actually smart case
 export LESSHISTFILE=-                                                    # don't clutter home directory with useless `.lesshst` file
 
-# Keybindings
-# INFO
+# INFO Keybindings
 # - macOS currently ships less v.581, which lacks the ability to read lesskey
 #   source files. Therefore for this to work, the version of less provided by
 #   homebrew is needed (v.633)

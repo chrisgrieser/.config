@@ -130,6 +130,19 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>911BB1AD-FF93-4FDC-9490-1A34EF5F7D92</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>911BB1AD-FF93-4FDC-9490-1A34EF5F7D92</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>221EDD07-BD53-4BD8-B302-CD0040D3FE51</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -1527,6 +1540,38 @@ s  The process is a session leader.</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>^\s*$</string>
+						<key>outputlabel</key>
+						<string>empty</string>
+						<key>uid</key>
+						<string>1DC85A94-2184-4548-B095-E64011250D55</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>content</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>911BB1AD-FF93-4FDC-9490-1A34EF5F7D92</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1564,7 +1609,7 @@ s  The process is a session leader.</string>
 		<key>221EDD07-BD53-4BD8-B302-CD0040D3FE51</key>
 		<dict>
 			<key>xpos</key>
-			<real>505</real>
+			<real>585</real>
 			<key>ypos</key>
 			<real>1060</real>
 		</dict>
@@ -1660,6 +1705,13 @@ s  The process is a session leader.</string>
 			<key>ypos</key>
 			<real>1060</real>
 		</dict>
+		<key>911BB1AD-FF93-4FDC-9490-1A34EF5F7D92</key>
+		<dict>
+			<key>xpos</key>
+			<real>490</real>
+			<key>ypos</key>
+			<real>1080</real>
+		</dict>
 		<key>9248EC6E-2EAB-43B6-B666-C9F3B323038F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1714,7 +1766,7 @@ s  The process is a session leader.</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>555</real>
+			<real>545</real>
 			<key>ypos</key>
 			<real>900</real>
 		</dict>

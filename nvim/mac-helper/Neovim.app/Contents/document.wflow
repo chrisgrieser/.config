@@ -82,7 +82,8 @@ else
 	[[ -n "$LINE" ]] &amp;&amp; LINE="+$LINE"
 
 	# LINE must be unquoted to prevent opening empty file
-	neovide --geometry=104x33 --notabs $LINE "$@"
+	neovide --geometry=104x33 --notabs $LINE "$@" &amp;
+	disown
 fi</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>

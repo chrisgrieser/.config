@@ -1,4 +1,4 @@
-title: ⇪ Hyper and ↹ Meh Key
+title: ⇪ Hyper & ↹ Meh Key
 homepage: https://github.com/chrisgrieser/dotfiles/karabiner
 rules:
   #─────────────────────────────────────────────────────────────────────────────
@@ -57,12 +57,13 @@ rules:
 
               if [[ "$FRONT_APP" == "nvim" ]]; then
                 # bwipeout necessary due to empty buffer created before jumping to '0
-                neovide --notabs --frame=buttonless --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #"
-                exit 0
+                neovide --notabs --frame=buttonless --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #" &
+                disown # https://stackoverflow.com/a/20338584/22114136
               elif [[ "$FRONT_APP" == "wezterm-gui" ]]; then
-                FRONT_APP="WezTerm"
+                open -a "WezTerm"
+              else
+                open -a "$FRONT_APP"
               fi
-              open -a "$FRONT_APP"
       # Restart Alfred
       - type: basic
         from: { key_code: "5", modifiers: { mandatory: [command, control, shift, option] } }
