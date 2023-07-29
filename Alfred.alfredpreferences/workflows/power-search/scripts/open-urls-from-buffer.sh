@@ -23,11 +23,10 @@ date_time_stamp=$(date +"%Y-%m-%d %H:%M")
 echo "$urls" | while read -r url; do
 	# if query on search site, keep only the query part
 	query_or_url=$(echo "$url" | sed -E 's/.*q=(.*)/\1/')
-	if [[ "$query_or_url" =~ "http" ]]; then
-		 -e 's/%20/ /g'
-	fi
+
+	# if query term and not an URL, decode the spaces
+	[[ ! "$query_or_url" =~ "http" ]] && query_or_url=${query_or_url// /%20/}
 
 	# prepend
 	echo -e "$date_time_stamp – $query_or_url\n$(cat "$log_location")" >"$log_location"
 done
-

@@ -2679,7 +2679,7 @@
 			<key>config</key>
 			<dict>
 				<key>externaltriggerid</key>
-				<string>save-results-loop</string>
+				<string>multi-select-loop</string>
 				<key>passinputasargument</key>
 				<false/>
 				<key>passvariables</key>
@@ -2782,7 +2782,7 @@
 				<key>availableviaurlhandler</key>
 				<false/>
 				<key>triggerid</key>
-				<string>save-results-loop</string>
+				<string>multi-select-loop</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.external</string>
@@ -3176,6 +3176,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
+			<key>note</key>
+			<string>set mode</string>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
@@ -3212,6 +3214,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
+			<key>note</key>
+			<string>set mode</string>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>

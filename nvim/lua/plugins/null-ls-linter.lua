@@ -25,7 +25,7 @@ local function nullSources()
 	return {
 		-- GLOBAL
 		builtins.diagnostics.codespell.with {
-			disabled_filetypes = { "css", "bib" }, -- base64-encoded fonts cause a lot of errors
+			disabled_filetypes = { "css", "bib", "log" }, -- base64-encoded fonts cause a lot of errors
 			-- can't use `--skip`, since it null-ls reads from stdin and not from file
 			args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt", "-" },
 		},
@@ -33,18 +33,16 @@ local function nullSources()
 			disabled_filetypes = { "css", "bib" },
 			extra_args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" },
 		},
-		builtins.formatting.trim_newlines, -- trim trailing whitespace & newlines
-		builtins.formatting.trim_whitespace.with {
-			disabled_filetypes = { "markdown" }, -- do not remove spaces due to two-space-rule
-		},
+		-- builtins.formatting.trim_newlines, -- trim trailing whitespace & newlines
+		-- builtins.formatting.trim_whitespace.with {
+		-- 	disabled_filetypes = { "markdown" }, -- do not remove spaces due to two-space-rule
+		-- },
 
 		-- PYTHON
 		builtins.formatting.black,
 
 		-- SHELL
 		builtins.formatting.shfmt,
-
-		-- force shellcheck to work with zsh
 		builtins.diagnostics.shellcheck,
 		builtins.code_actions.shellcheck,
 
