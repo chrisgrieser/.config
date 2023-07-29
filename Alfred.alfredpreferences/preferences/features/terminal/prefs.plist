@@ -14,8 +14,12 @@
 		end repeat
 	end tell
 
+	# Add `clear` if it is just a `cd` command, because it looks cleaner
 	set command to text 1 thru 2 of shellCmd
-	if command is "cd" then set shellCmd to shellCmd &amp; " ; clear"
+	set isMultiCmd to (shellCmd contains "|" or shellCmd contains "&amp;&amp;" or shellCmd contains ";")
+	if command is "cd" and not isMultiCmd then 
+		set shellCmd to shellCmd &amp; " &amp;&amp; clear"
+	end if
 
 	do shell script ("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; echo '" &amp; shellCmd &amp; "' | wezterm cli send-text --no-paste")
 end alfred_script</string>

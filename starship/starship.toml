@@ -113,7 +113,6 @@ ahead = '[󰶣 $count ](fg:cyan bg:black)'
 behind = '[󰶡 $count ](fg:yellow bg:black)'
 style = 'fg:purple bg:black bold'
 format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
-ignore_submodules = false
 
 # lines
 [git_metrics]
@@ -155,7 +154,7 @@ format = '[󰮤 ](purple) [󰏗  $output]($style)'
 style = "dimmed cyan"
 
 [nodejs]
-format = " [$symbol$version]($style)"
+format = " [$symbol $version]($style)"
 version_format = "$major"
 style = "dimmed cyan"
 detect_extensions = ["ts"]            # dont trigger for JXA

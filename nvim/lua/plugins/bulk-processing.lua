@@ -3,7 +3,6 @@ return {
 		"mg979/vim-visual-multi",
 		keys = { { "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" } },
 		init = function()
-
 			vim.g.VM_set_statusline = 0 -- already using my version via lualine component
 			vim.g.VM_show_warnings = 0
 			vim.g.VM_silent_exit = 1
