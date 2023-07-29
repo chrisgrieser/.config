@@ -263,8 +263,6 @@ omap ir i[
 omap ar a[
 omap ac a{
 omap ic i{
-omap rg G
-omap rp {
 
 vmap am aW
 vmap im iW
@@ -278,8 +276,14 @@ vmap ir i[
 vmap ar a[
 vmap ac a{
 vmap ic i{
+
+" emulate some text objects from nvim-various-textobjs
+omap rg G
 vmap rg G
+omap rp {
 vmap rp {
+omap m t]
+omap w t"
 
 """"""""""""""""""""""
 " Surround
