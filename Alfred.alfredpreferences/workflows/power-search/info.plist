@@ -2794,7 +2794,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>write URL to buffer</string>
 			<key>xpos</key>
-			<real>805</real>
+			<real>780</real>
 			<key>ypos</key>
 			<real>955</real>
 		</dict>
@@ -2931,7 +2931,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>720</real>
 			<key>ypos</key>
 			<real>635</real>
 		</dict>
@@ -3027,7 +3027,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>open URL(s)</string>
 			<key>xpos</key>
-			<real>805</real>
+			<real>785</real>
 			<key>ypos</key>
 			<real>605</real>
 		</dict>
