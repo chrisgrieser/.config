@@ -1,4 +1,8 @@
 {
+	"shebang": {
+		"prefix": "shebang",
+		"body": "#!/usr/bin/env osascript"
+	},
 	"get selection (Finder)": {
 		"prefix": "get selection (Finder)",
 		"body": "tell application \"Finder\" to return POSIX path of (selection as alias)"

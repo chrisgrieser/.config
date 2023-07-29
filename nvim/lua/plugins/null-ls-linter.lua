@@ -45,28 +45,8 @@ local function nullSources()
 		builtins.formatting.shfmt,
 
 		-- force shellcheck to work with zsh
-		-- builtins.diagnostics.shellcheck,
+		builtins.diagnostics.shellcheck,
 		builtins.code_actions.shellcheck,
-
-		-- builtins.diagnostics.shellcheck.with {
-		-- 	extra_filetypes = { "zsh" },
-		-- 	extra_args = { "--shell=bash" },
-		-- },
-		-- builtins.code_actions.shellcheck.with {
-		-- 	extra_filetypes = { "zsh" },
-		-- 	extra_args = { "--shell=bash" },
-		-- },
-
-		-- force shellcheck to work with zsh
-		builtins.diagnostics.shellcheck.with {
-			extra_filetypes = { "zsh" },
-			extra_args = { "--shell=bash" },
-		},
-		builtins.code_actions.shellcheck.with {
-			extra_filetypes = { "zsh" },
-			extra_args = { "--shell=bash" },
-		},
-
 
 		-- JS/TS/JSON
 		builtins.formatting.rome, -- not available via LSP yet

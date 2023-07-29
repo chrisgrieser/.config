@@ -8,7 +8,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 -- META
 
-keymap("n", "<D-;>", function ()
+keymap("n", "<D-;>", function()
 	local thisFilePath = debug.getinfo(1).source:sub(2)
 	vim.cmd.edit(thisFilePath)
 end, { desc = "⌨️ Edit leader-keybindings.lua" })
@@ -64,7 +64,12 @@ end, { desc = "󰽘 Inspect FileType & BufType" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("n", "<leader>ff", ":% s/<C-r><C-w>//g<Left><Left><Left>", { desc = "󱗘 :s (word under cursor)" })
+keymap(
+	"n",
+	"<leader>ff",
+	":% s/<C-r><C-w>//g<Left><Left><Left>",
+	{ desc = "󱗘 :s (word under cursor)" }
+)
 keymap("x", "<leader>ff", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = "󱗘 :s (selection)" })
 
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
@@ -86,8 +91,12 @@ end, { desc = "󱁐 Use Spaces" })
 --------------------------------------------------------------------------------
 
 -- Undo
--- stylua: ignore
-keymap("n", "<leader>ur", function() cmd.later(tostring(vim.opt.undolevels:get())) end, { desc = "󰛒 Redo All", silent = true })
+keymap(
+	"n",
+	"<leader>ur",
+	function() cmd("silent earlier " .. tostring(vim.opt.undolevels:get())) end,
+	{ desc = "󰛒 Redo All", silent = true }
+)
 keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Undo (Reset) Hunk" })
 keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰕌 󰊢 Undo (Reset) Buffer" })
 
@@ -100,8 +109,7 @@ keymap("n", "<leader>uo", function()
 	local now = os.time() -- saved in epoch secs
 	local secsPassed = now - vim.b.timeOpened
 	cmd.earlier(tostring(secsPassed) .. "s")
-end, { desc = "󰜊 Undo since last open" })
-
+end, { desc = "󰜊 Undo since last open", silent = true })
 
 --------------------------------------------------------------------------------
 -- LSP
