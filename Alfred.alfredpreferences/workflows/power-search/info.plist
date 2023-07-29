@@ -174,18 +174,7 @@
 			</dict>
 		</array>
 		<key>203119B0-F56B-4EDE-BE71-21B68645EB6B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6E469712-4BF4-4A1F-A704-981B5144D034</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</key>
 		<array>
 			<dict>
@@ -342,19 +331,6 @@
 				<string>⌘: Mark URL</string>
 				<key>vitoclose</key>
 				<true/>
-			</dict>
-		</array>
-		<key>32C0F6D0-C6AB-4B36-9CE4-43A0F2F0DC79</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F264C666-C5B0-4F33-9961-A8806186569B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
 			</dict>
 		</array>
 		<key>37823B3A-8211-49F5-BC98-118E47141CB4</key>
@@ -1009,19 +985,6 @@
 				<string>⌘: Mark URL</string>
 				<key>vitoclose</key>
 				<true/>
-			</dict>
-		</array>
-		<key>F264C666-C5B0-4F33-9961-A8806186569B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>03296F2D-389A-45F3-BB31-D4D36C8EC1DA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
 			</dict>
 		</array>
 		<key>F5BF085E-4215-453C-88B5-95FC531F05D7</key>
@@ -2678,25 +2641,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>multi-select-loop</string>
-				<key>passinputasargument</key>
-				<false/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>6E469712-4BF4-4A1F-A704-981B5144D034</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>subtext</key>
 				<string>{query}</string>
 				<key>text</key>
@@ -2776,41 +2720,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>multi-select-loop</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>32C0F6D0-C6AB-4B36-9CE4-43A0F2F0DC79</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{var:multiselectPrevQuery}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>mode</key>
-					<string>multi-select</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>F264C666-C5B0-4F33-9961-A8806186569B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Actions on inline results
@@ -2883,7 +2792,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>write URL to buffer</string>
+			<string>save URL for multi-select</string>
 			<key>xpos</key>
 			<real>780</real>
 			<key>ypos</key>
@@ -2936,17 +2845,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>305</real>
 			<key>ypos</key>
 			<real>900</real>
-		</dict>
-		<key>32C0F6D0-C6AB-4B36-9CE4-43A0F2F0DC79</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>multi-select</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1510</real>
 		</dict>
 		<key>37823B3A-8211-49F5-BC98-118E47141CB4</key>
 		<dict>
@@ -3027,15 +2925,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>165</real>
 			<key>ypos</key>
 			<real>1020</real>
-		</dict>
-		<key>6E469712-4BF4-4A1F-A704-981B5144D034</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>1000</real>
-			<key>ypos</key>
-			<real>1365</real>
 		</dict>
 		<key>6E666DB2-B403-4DA6-9468-BE2FA2FEC5F5</key>
 		<dict>
@@ -3171,17 +3060,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>900</real>
-		</dict>
-		<key>F264C666-C5B0-4F33-9961-A8806186569B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>set mode</string>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>1540</real>
 		</dict>
 		<key>F5BF085E-4215-453C-88B5-95FC531F05D7</key>
 		<dict>

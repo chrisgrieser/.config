@@ -206,7 +206,7 @@ wt.on("format-tab-title", function(tab)
 		local pwdBasefolder = tab.active_pane.current_working_dir:gsub(".*/(.*)/$", "%1"):gsub("%%20", " ")
 		title = pwdBasefolder
 		icon = "  "
-	elseif title:find("^man") then
+	elseif title:find("^docs") then
 		icon = "  "
 	else
 		icon = "  "

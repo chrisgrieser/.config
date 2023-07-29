@@ -45,7 +45,14 @@ function man() {
 	if ! command -v "$command" &>/dev/null; then echo "$command not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
 
+	# INFO `test` is an exception, as it is a builtin command, but still has a
+	# man page and no builtin help
 	if [[ "$(type "$command")" =~ "builtin" ]] && [[ "$command" != "test" ]]; then
+		if [[ ! -f "/usr/share/zsh/*/help/$command" ]]; then
+			print "\033[1;33mNo builtin help found.\033[0m"
+			return 1
+		fi
+
 		# using bat, since it adds some syntax highlighting to the builtin pages,
 		# which man/less does not
 		# INFO `` makes less wrap the search (since less version 582)
@@ -56,7 +63,7 @@ function man() {
 		fi
 	else
 		if ! command man -w "$command" &>/dev/null; then
-			print "\033[1;33mNo manpage found.\033[0m"
+			print "\033[1;33mNo man page found.\033[0m"
 			return 1
 		fi
 		if [[ -n "$search_term" ]]; then
@@ -66,7 +73,7 @@ function man() {
 		fi
 	fi
 	# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
-	wezterm cli set-tab-title --pane-id="$pane_id" "man: $command"
+	wezterm cli set-tab-title --pane-id="$pane_id" "docs: $command"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -75,7 +82,7 @@ function man() {
 function ai() {
 	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
-	if [[ -z "$OPENAI_API_KEY" ]]; then echo "$OPENAI_API_KEY not found." && return 1; fi
+	if [[ -z "$OPENAI_API_KEY" ]]; then echo "\$OPENAI_API_KEY not found." && return 1; fi
 
 	local query="$*"
 	# WARN do not use "$prompt" as a variable in zsh, since it's a reserved keyword
@@ -102,8 +109,9 @@ export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
 export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
-export LESS='-R --incsearch --ignore-case --window=-3 --no-init --tilde' # --ignore-case is actually smart case
-export LESSHISTFILE=-                                                    # don't clutter home directory with useless `.lesshst` file
+# --ignore-case is actually smart case
+export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-3 --no-init --tilde'
+export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
 
 # INFO Keybindings
 # - macOS currently ships less v.581, which lacks the ability to read lesskey

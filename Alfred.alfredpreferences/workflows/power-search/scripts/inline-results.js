@@ -135,7 +135,7 @@ function run(argv) {
 	// GUARD CLAUSE 2: first word of query is alfred keyword
 	// (guard clause is ignored when doing fallback search or multi-select,
 	// since in that case we know we do not need to ignore anything.)
-	if (ignoreAlfredKeywordsEnabled && mode !== "fallack" && mode !== "multi-select") {
+	if (ignoreAlfredKeywordsEnabled && mode !== "fallback" && mode !== "multi-select") {
 		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
 		if (keywordCacheIsOutdated(cachePath)) refreshKeywordsCache(cachePath);
 		const alfredKeywords = JSON.parse(readFile(cachePath));
@@ -153,6 +153,12 @@ function run(argv) {
 		title: `"${query}"`,
 		uid: query,
 		arg: $.getenv("search_site") + encodeURIComponent(query),
+		mods: {
+			cmd: {
+				valid: false,
+				subtitle: "❌",
+			},
+		},
 	};
 
 	// PERF If the user is typing, return early to guarantee the top entry is the
@@ -193,13 +199,13 @@ function run(argv) {
 	}
 
 	// determine icon for multi-select from saved URLs
-	const bufferPath = $.getenv("alfred_workflow_cache") + "/urlsToOpen.json";
-	const savedUrls = readFile(bufferPath).split("\n") || [];
+	const multiSelectBuffer = $.getenv("alfred_workflow_cache") + "/multiSelectBuffer.txt";
+	const multiSelectUrls = readFile(multiSelectBuffer).split("\n") || [];
 
 	const newResults = results.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
-		const savedIcon = savedUrls.includes(item.url) ? multiSelectIcon + " " : "";
+		const icon = multiSelectUrls.includes(item.url) ? multiSelectIcon + " " : "";
 		return {
-			title: savedIcon + item.title,
+			title: icon + item.title,
 			subtitle: item.url,
 			uid: item.url,
 			arg: item.url,
@@ -207,7 +213,7 @@ function run(argv) {
 			mods: {
 				shift: { subtitle: item.abstract },
 				cmd: {
-					variables: { multiselectPrevQuery: query },
+					variables: { mode: "multi-select" },
 				},
 			},
 		};
@@ -215,7 +221,8 @@ function run(argv) {
 
 	// Pass to Alfred
 	const alfredInput = JSON.stringify({
-		skipknowledge: true, // so Alfred does not change result order for multiselect
+		rerun: 0.1, // has to permanently to pick up changes from multi-select
+		skipknowledge: true, // so Alfred does not change result order for multi-select
 		variables: { oldResults: JSON.stringify(newResults), oldQuery: query },
 		items: [searchForQuery].concat(newResults),
 	});
