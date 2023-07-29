@@ -18,12 +18,16 @@ const multiSelectIcon = "🔳";
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} cachePath */
+/** considers the possibility of the cache not existing, as well as the
+ * possibility of the user having set a custom location for their preferences
+ * @param {string} cachePath
+ */
 function keywordCacheIsOutdated(cachePath) {
-	const cacheCreation = Application("System Events").aliases[cachePath].creationDate();
-	const alfredConfigPath = $.getenv("alfred_config");
-	const lastAlfredConfigChange = Application("System Events").aliases[alfredConfigPath].creationDate();
-	const isOutdated = lastAlfredConfigChange > cacheCreation;
+	const getFileObj = (/** @type {string} */ path) => Application("System Events").aliases[path];
+	const cacheObj = getFileObj(cachePath);
+	if (!cacheObj.exists()) return true;
+	const alfredConfigObj = getFileObj($.getenv("alfred_preferences"));
+	const isOutdated = alfredConfigObj.modificationDate() > cacheObj.creationDate();
 	return isOutdated;
 }
 
@@ -39,8 +43,6 @@ function writeToFile(filepath, text) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
-
-const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -113,7 +115,7 @@ function refreshKeywordsCache(cachePath) {
 		.join("")
 		.split(","); // back to array
 	const uniqueKeywords = [...new Set(trueKeywords)];
-	console.log("unique keywords:", uniqueKeywords);
+	console.log(`Rebuilt cache: ${uniqueKeywords} keywords.`);
 	writeToFile(cachePath, JSON.stringify(uniqueKeywords));
 }
 
@@ -123,8 +125,8 @@ function refreshKeywordsCache(cachePath) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const timelogStart = +new Date();
-	const mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 
+	const mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 	const query = argv[0];
 
 	// GUARD CLAUSE 1: query less than 3 chars or a URL
@@ -136,9 +138,7 @@ function run(argv) {
 	if (ignoreAlfredKeywords && mode !== "fallack" && mode !== "multi-select") {
 		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
 
-		if (!fileExists(cachePath) || keywordCacheIsOutdated(cachePath)) {
-			refreshKeywordsCache(cachePath);
-		}
+		if (keywordCacheIsOutdated(cachePath)) refreshKeywordsCache(cachePath);
 		const alfredKeywords = JSON.parse(readFile(cachePath));
 
 		const queryFirstWord = query.split(" ")[0];
@@ -157,8 +157,9 @@ function run(argv) {
 	};
 
 	// GUARD CLAUSE 3: USE OLD RESULTS
-	// PERF If the user is typing, return early to guarantee the top entry is the currently typed query
-	// If we waited for the API, a fast typer would search for an incomplete query
+	// PERF If the user is typing, return early to guarantee the top entry is the
+	// currently typed query. If we waited for the API, a fast typer would search
+	// for an incomplete query
 	if (query !== oldQuery) {
 		searchForQuery.subtitle = "Loading Inline Results…";
 		return JSON.stringify({
@@ -180,7 +181,7 @@ function run(argv) {
 	if (cache.query === query) {
 		results = cache.results;
 	} else {
-		// PERF `--noua` disables user agent & fetches faster (~100ms, according to hyperfine)
+		// PERF `--noua` disables user agent & fetches faster (~100ms according to hyperfine)
 		// PERF the number of results fetched has basically no effect on the speed
 		// (less than 50ms difference between 1 and 25 results), so there is no use
 		// in restricting the number of results for performance, (except for 25 being
