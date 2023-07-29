@@ -10,6 +10,7 @@ local spellfixes = {
 	keybaord = "keyboard",
 	sicne = "since",
 	nto = "not",
+	reponse = "response"
 	shwo = "show",
 	retrun = "return",
 	onyl = "only",

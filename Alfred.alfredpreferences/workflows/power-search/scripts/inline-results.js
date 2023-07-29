@@ -20,8 +20,10 @@ const cacheRecreationThresholdMins = 60;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} filepath */
-function getCreationDate(filepath) {
-	return Application("System Events").aliases[filepath].creationDate();
+function getFileAgeMins(filepath) {
+	const creationDate = Application("System Events").aliases[filepath].creationDate();
+	const cacheAgeMins = (+new Date() - creationDate) / 1000 / 60;
+	return cacheAgeMins;
 }
 
 /** @param {string} path */
@@ -41,9 +43,8 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// get the keywords that activate something in Alfred and write them to the
-// cachePath. Saving the keywords in a cache saves about ~250ms on my device
-// (50+ workflows, 180+ keywords)
+// get the Alfred keywords and write them to the cachePath
+// PERF Saving keywords in a cache saves ~250ms for me (50+ workflows, 180+ keywords)
 /** @param {string} cachePath */
 function refreshKeywordsCache(cachePath) {
 	const keywords = app
@@ -134,8 +135,7 @@ function run(argv) {
 		if (!fileExists(cachePath)) {
 			refreshKeywordsCache(cachePath);
 		} else {
-			const cacheAgeMins = (+new Date() - getCreationDate(cachePath)) / 1000 / 60;
-			if (cacheAgeMins > cacheRecreationThresholdMins) refreshKeywordsCache(cachePath);
+			if (getFileAgeMins(cachePath) > cacheRecreationThresholdMins) refreshKeywordsCache(cachePath);
 		}
 		const alfredKeywords = JSON.parse(readFile(cachePath));
 
@@ -159,7 +159,7 @@ function run(argv) {
 	//───────────────────────────────────────────────────────────────────────────
 
 	// USE OLD RESULTS
-	// If the user is typing, return early to guarantee the top entry is the currently typed query
+	// PERF If the user is typing, return early to guarantee the top entry is the currently typed query
 	// If we waited for the API, a fast typer would search for an incomplete query
 	if (query !== oldQuery) {
 		searchForQuery.subtitle = "Loading Inline Results…";
@@ -172,17 +172,27 @@ function run(argv) {
 	}
 
 	// REQUEST NEW RESULTS
-	// `--noua` disables user agent & fetches faster (~10% faster according to hyperfine)
-	// INFO the number of results fetched does basically no effect on the speed
-	// (less than 50ms difference between 1 and 25 results), so there is no use
-	// in restricting the number of results for performance (25 is ddgr's maximum)
-	const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
-	const responseJson = JSON.parse(app.doShellScript(ddgrCommand));
+	// PERF cache new response so that reopening Alfred does not re-fetch results
+	const responseCache = $.getenv("alfred_workflow_cache") + "/reponseCache.json";
+	let response;
+	if (fileExists(responseCache)) {
+		response = readFile(responseCache);
+	} else {
+		// PERF `--noua` disables user agent & fetches faster (~100ms, according to hyperfine)
+		// PERF the number of results fetched has basically no effect on the speed
+		// (less than 50ms difference between 1 and 25 results), so there is no use
+		// in restricting the number of results for performance, (except for 25 being
+		// ddgr's maximum)
+		const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
+		response = app.doShellScript(ddgrCommand);
+		writeToFile(responseCache, response);
+	}
 
-	const bufferPath = $.getenv("alfred_workflow_cache") + "/urlsToOpen.json"
+	// Icon for saved URLs (multi-select)
+	const bufferPath = $.getenv("alfred_workflow_cache") + "/urlsToOpen.json";
 	const savedUrls = fileExists(bufferPath) ? readFile(bufferPath).split("\n") : [];
 
-	const newResults = responseJson.map(
+	const newResults = JSON.parse(response).map(
 		(/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
 			const savedIcon = savedUrls.includes(item.url) ? "🔵 " : "";
 			return {
