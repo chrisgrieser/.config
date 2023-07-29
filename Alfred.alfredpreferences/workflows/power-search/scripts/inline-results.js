@@ -12,10 +12,10 @@ const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
 let resultsToFetch = parseInt($.getenv("inline_results_to_fetch"));
 if (resultsToFetch < 1) resultsToFetch = 1;
 else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
-
-const isUsingFallbackSearch = Boolean($.NSProcessInfo.processInfo.environment.objectForKey("no_ignore").js);
 const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
-const cacheRecreationThresholdMins = 60;
+
+const keywordCacheThresholdMins = 60;
+const multiSelectIcon = "🔵";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -122,20 +122,25 @@ function refreshKeywordsCache(cachePath) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const timelogStart = +new Date();
+	const isUsingFallbackSearch = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "fallback"
+	const isMultiSelect = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "multi-select"
+
 
 	const query = argv[0];
 
-	// Guard clause 1: query less than 3 chars or a URL
+	// GUARD CLAUSE 1: query less than 3 chars or a URL
 	if (query.length < 3 || query.match(/^\w+:/)) return;
 
-	// Guard clause 2: first word of query is alfred keyword
-	if (ignoreAlfredKeywords && !isUsingFallbackSearch) {
+	// GUARD CLAUSE 2: first word of query is alfred keyword
+	// (guard clause is ignored when doing fallback search or multi-select,
+	// since in that case we know we do not need to ignore anything.)
+	if (ignoreAlfredKeywords && !isUsingFallbackSearch && !isMultiSelect) {
 		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
 
 		if (!fileExists(cachePath)) {
 			refreshKeywordsCache(cachePath);
-		} else {
-			if (getFileAgeMins(cachePath) > cacheRecreationThresholdMins) refreshKeywordsCache(cachePath);
+		} else if (getFileAgeMins(cachePath) > keywordCacheThresholdMins) {
+			refreshKeywordsCache(cachePath);
 		}
 		const alfredKeywords = JSON.parse(readFile(cachePath));
 
@@ -143,9 +148,7 @@ function run(argv) {
 		if (alfredKeywords.includes(queryFirstWord)) return;
 	}
 
-	//───────────────────────────────────────────────────────────────────────────
-
-	// values from previous run
+	// get values from previous run
 	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js;
 	const oldResults = JSON.parse(
 		$.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]",
@@ -156,9 +159,7 @@ function run(argv) {
 		arg: $.getenv("search_site") + encodeURIComponent(query),
 	};
 
-	//───────────────────────────────────────────────────────────────────────────
-
-	// USE OLD RESULTS
+	// GUARD CLAUSE 3: USE OLD RESULTS
 	// PERF If the user is typing, return early to guarantee the top entry is the currently typed query
 	// If we waited for the API, a fast typer would search for an incomplete query
 	if (query !== oldQuery) {
@@ -171,8 +172,12 @@ function run(argv) {
 		});
 	}
 
-	// REQUEST NEW RESULTS
-	// PERF cache new response so that reopening Alfred does not re-fetch results
+	//───────────────────────────────────────────────────────────────────────────
+
+	// MAIN: REQUEST NEW RESULTS
+
+	// PERF cache ddgr response so that reopening Alfred or using multi-select
+	// does not re-fetch results
 	const responseCachePath = $.getenv("alfred_workflow_cache") + "/reponseCache.json";
 	const cache = JSON.parse(readFile(responseCachePath) || "{}")
 	let results = [];
@@ -192,34 +197,35 @@ function run(argv) {
 		results = response.results;
 	}
 
-	// Icon for saved URLs (multi-select)
+	// determine icon for multi-select from saved URLs
 	const bufferPath = $.getenv("alfred_workflow_cache") + "/urlsToOpen.json";
-	const savedUrls = fileExists(bufferPath) ? readFile(bufferPath).split("\n") : [];
+	const savedUrls = readFile(bufferPath).split("\n") || [];
 
 	const newResults = results.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
-		const savedIcon = savedUrls.includes(item.url) ? "🔵 " : "";
+		const savedIcon = savedUrls.includes(item.url) ? multiSelectIcon : "";
 		return {
 			title: savedIcon + item.title,
 			subtitle: item.url,
 			uid: item.url,
 			arg: item.url,
-			icon: { path: "duckduckgo.png" },
 			mods: {
 				shift: { subtitle: item.abstract },
 				cmd: { 
-					variables: { prevQuery: query },
+					variables: { multiselectPrevQuery: query },
 				}
 			},
 		};
 	});
 
-	// Measuring execution time
-	const durationTotal = (+new Date() - timelogStart) / 1000;
-	console.log("total:", durationTotal, "s");
-
-	return JSON.stringify({
-		skipknowledge: true,
+	// Pass to Alfred
+	const alfredInput = JSON.stringify({
+		skipknowledge: true, // so Alfred does not change result order for multiselect
 		variables: { oldResults: JSON.stringify(newResults), oldQuery: query },
 		items: [searchForQuery].concat(newResults),
 	});
+
+	const durationTotal = (+new Date() - timelogStart) / 1000;
+	console.log("total:", durationTotal, "s");
+
+	return alfredInput;
 }
