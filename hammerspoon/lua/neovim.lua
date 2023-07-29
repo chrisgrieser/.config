@@ -48,18 +48,9 @@ local function addCssSelectorLeadingDot()
 end
 
 NeovideWatcher = aw.new(function(appName, eventType, neovide)
-	if not appName or appName:lower() ~= "neovide" then return end
-
-	if eventType == aw.activated then
+	if appName:lower() == "neovide" and eventType == aw.activated then
 		addCssSelectorLeadingDot()
 		obsidianThemeDevHelper(neovide:mainWindow())
-
-		-- FIX for: https://github.com/neovide/neovide/issues/1595
-	elseif eventType == aw.terminated then
-		-- language_server_macos_x64 language_server_macos_arm are Codium servers
-		local killCmd =
-			[[pgrep -xq 'neovide' || killall neovide nvim language_server_macos_x64 language_server_macos_arm]]
-		u.runWithDelays(3, function() hs.execute(killCmd) end)
 	end
 end):start()
 
@@ -67,11 +58,13 @@ Wf_neovideMoved = u.wf
 	.new({ "Neovide", "neovide" })
 	:subscribe(u.wf.windowMoved, function(movedWin) obsidianThemeDevHelper(movedWin) end)
 
------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 -- HACK since neovide does not send a launch signal, triggering window resizing
 -- via its URI scheme called on VimEnter
-u.urischeme("enlarge-neovide-window", function()
+u.urischeme("neovide-post-startup", function()
+	-- properly size the window
 	u.asSoonAsAppRuns("neovide", function()
 		local neovideWin = u.app("neovide"):mainWindow()
 		local size = env.isProjector() and wu.maximized or wu.pseudoMax
@@ -79,10 +72,22 @@ u.urischeme("enlarge-neovide-window", function()
 	end)
 	-- check for: https://github.com/neovide/neovide/issues/1595
 	u.runWithDelays(2, function()
-		local numOfNvimProcs = hs.execute("pgrep -x 'nvim' | wc -l"):match("%d+")
-		print("numOfNvimProcs: " .. numOfNvimProcs)
-		if numOfNvimProcs ~= "1" then u.notify(numOfNvimProcs .. " nvim processes running") end
+		local neovideProcs = hs.execute("pgrep -x 'nvim' | wc -l"):match("%d+")
+		if neovideProcs ~= "1" then u.notify(neovideProcs .. " nvim processes running") end
+		local nvimProcs = hs.execute("pgrep -x 'neovide' | wc -l"):match("%d+")
+		if nvimProcs ~= "1" then u.notify(nvimProcs .. " neovide processes running") end
 	end)
 end)
+
+-- FIX for too many leftover nvim processes: https://github.com/neovide/neovide/issues/1595
+NeovideWatcher2 = aw.new(function(_, eventType, _)
+	if eventType == aw.terminated then
+		u.runWithDelays(3, function()
+			local killCmd = [[pgrep -xq 'neovide' || killall neovide nvim]]
+			local _, hasKilled = hs.execute(killCmd)
+			if hasKilled then u.notify("⚔️ Killed leftover neovide/nvim processes.") end
+		end)
+	end
+end):start()
 
 --------------------------------------------------------------------------------

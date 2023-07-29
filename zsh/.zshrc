@@ -13,17 +13,23 @@ CONFIG_FILES=(
 	intro_messages
 )
 
-# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh shell integration for wezterm
+# shell integration for wezterm
+# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && CONFIG_FILES+=(semantic_prompts)
 
 #───────────────────────────────────────────────────────────────────────────────
 
 for config_file in "${CONFIG_FILES[@]}"; do
 	file="$DOTFILE_FOLDER/zsh/$config_file.zsh"
-	# shellcheck disable=1090
-	[[ -f "$file" ]] && source "$file"
+	if [[ -f "$file" ]] ; then
+		# shellcheck disable=1090
+		source "$file"
+	else
+		echo "$file cannot be found."
+	fi
 done
 
 
-# https://stackoverflow.com/a/69915614 remove last login message that some terminals leave
-[[ "$TERM_PROGRAM" != "WezTerm" ]] && printf '\33c\e[3J'
+# remove last login message that some terminals leave
+# https://stackoverflow.com/a/69915614 
+[[ "$TERM_PROGRAM" == "WezTerm" ]] || printf '\33c\e[3J'

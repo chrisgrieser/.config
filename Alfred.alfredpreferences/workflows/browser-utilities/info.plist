@@ -349,15 +349,15 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>keyword</key>
-				<string>down</string>
+				<string>down for everyone or just me</string>
 				<key>subtext</key>
 				<string>Current Tab</string>
 				<key>text</key>
 				<string>Down for Everyone or just me?</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>

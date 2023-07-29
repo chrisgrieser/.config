@@ -36,7 +36,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -69,7 +69,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -102,7 +102,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -135,7 +135,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -168,7 +168,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -229,7 +229,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -262,7 +262,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -295,7 +295,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -328,7 +328,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -374,7 +374,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -407,7 +407,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -453,7 +453,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -512,7 +512,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -545,7 +545,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -591,7 +591,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -624,7 +624,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -657,7 +657,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -690,7 +690,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -723,7 +723,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -769,7 +769,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -802,7 +802,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -835,7 +835,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -883,7 +883,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -916,7 +916,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -949,7 +949,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -982,7 +982,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -1015,7 +1015,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Mark URL</string>
+				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -2722,32 +2722,24 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Actions on inline results
-- &lt;kbd&gt;⏎&lt;/kbd&gt;: Search for Term / open URL.
-- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Multi-Select: Mark the URL. The next &lt;kbd&gt;⏎&lt;/kbd&gt; will open the selected result as well as all previously marked URLs.
-- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy URL.
-- &lt;kbd&gt;⇧&lt;/kbd&gt; (or &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt;): Show preview text of search result.
-
-### Recommendation
-- Add this workflow as [fallback search](https://www.alfredapp.com/help/features/default-results/fallback-searches/).
-- In the [Alfred Advanced Settings](https://www.alfredapp.com/help/advanced/), set &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; to `Action all visible results`. This allows you to open all search results at once.
-
----
-
-## Global search hotkey
-Selection is…
-- file path → reveal file in Finder
-- directory path → open directory in Finder
-- url → open in default browser
-- email → send eMail to that address in your default mail app
-- some other text → search for selection &amp; open first search result ("I'm feeling lucky")
-
-## Add link to selection
-Turns selected text into a markdown link, with the URL of the first search result for that text as URL for the markdown link. This feature is essentially a simplified version of [Brett Terpstra's SearchLink](https://brettterpstra.com/projects/searchlink/).
-
----
-
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>## Actions on inline results - &lt;kbd&gt;⏎&lt;/kbd&gt;: Search for Term / open URL. -
+			&lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Multi-Select: Mark the URL. The next
+			&lt;kbd&gt;⏎&lt;/kbd&gt; will open the selected result as well as all previously marked
+			URLs. - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy URL. -
+			&lt;kbd&gt;⇧&lt;/kbd&gt; (or &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt;): Show
+			preview text of search result. ### Recommendation - Add this workflow as [fallback
+			search](https://www.alfredapp.com/help/features/default-results/fallback-searches/). - In
+			the [Alfred Advanced Settings](https://www.alfredapp.com/help/advanced/), set
+			&lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; to `Action all visible results`. This
+			allows you to open all search results at once. --- ## Global search hotkey Selection is… -
+			file path → reveal file in Finder - directory path → open directory in Finder - url → open
+			in default browser - email → send eMail to that address in your default mail app - some
+			other text → search for selection &amp; open first search result ("I'm feeling lucky") ##
+			Add link to selection Turns selected text into a markdown link, with the URL of the first
+			search result for that text as URL for the markdown link. This feature is essentially a
+			simplified version of [Brett Terpstra's
+			SearchLink](https://brettterpstra.com/projects/searchlink/). --- Created by [Chris
+			Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>03296F2D-389A-45F3-BB31-D4D36C8EC1DA</key>
@@ -3128,7 +3120,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>Where searching a query should be performed. (Inline results come from DuckDuckGo, regardless of this setting.)</string>
+			<string>Where searching a query should be performed. (Inline results come from
+					DuckDuckGo, regardless of this setting.)</string>
 			<key>label</key>
 			<string>Search Site</string>
 			<key>type</key>
@@ -3147,7 +3140,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string></string>
 			</dict>
 			<key>description</key>
-			<string>When a keyword from another workflow is shown, this workflow will not be triggered (recommended).</string>
+			<string>When a keyword from another workflow is shown, this workflow will not be
+					triggered (recommended).</string>
 			<key>label</key>
 			<string>Ignore Alfred Keywords</string>
 			<key>type</key>

@@ -94,7 +94,7 @@ end, { desc = "󱁐 Use Spaces" })
 keymap(
 	"n",
 	"<leader>ur",
-	function() cmd("silent earlier " .. tostring(vim.opt.undolevels:get())) end,
+	function() cmd("silent later " .. tostring(vim.opt.undolevels:get())) end,
 	{ desc = "󰛒 Redo All", silent = true }
 )
 keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Undo (Reset) Hunk" })
