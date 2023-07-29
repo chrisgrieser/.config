@@ -173,10 +173,11 @@ function run(argv) {
 
 	// REQUEST NEW RESULTS
 	// PERF cache new response so that reopening Alfred does not re-fetch results
-	const responseCache = $.getenv("alfred_workflow_cache") + "/reponseCache.json";
-	let response;
-	if (fileExists(responseCache)) {
-		response = readFile(responseCache);
+	const responseCachePath = $.getenv("alfred_workflow_cache") + "/reponseCache.json";
+	const cache = JSON.parse(readFile(responseCachePath) || "{}")
+	let results = [];
+	if (cache.query === query) {
+		results = cache.results;
 	} else {
 		// PERF `--noua` disables user agent & fetches faster (~100ms, according to hyperfine)
 		// PERF the number of results fetched has basically no effect on the speed
@@ -184,29 +185,33 @@ function run(argv) {
 		// in restricting the number of results for performance, (except for 25 being
 		// ddgr's maximum)
 		const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
-		response = app.doShellScript(ddgrCommand);
-		writeToFile(responseCache, response);
+		const response = {};
+		response.results = JSON.parse(app.doShellScript(ddgrCommand));
+		response.query = query;
+		writeToFile(responseCachePath, JSON.stringify(response));
+		results = response.results;
 	}
 
 	// Icon for saved URLs (multi-select)
 	const bufferPath = $.getenv("alfred_workflow_cache") + "/urlsToOpen.json";
 	const savedUrls = fileExists(bufferPath) ? readFile(bufferPath).split("\n") : [];
 
-	const newResults = JSON.parse(response).map(
-		(/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
-			const savedIcon = savedUrls.includes(item.url) ? "🔵 " : "";
-			return {
-				title: savedIcon + item.title,
-				subtitle: item.url,
-				uid: item.url,
-				arg: item.url,
-				icon: { path: "duckduckgo.png" },
-				mods: {
-					shift: { subtitle: item.abstract },
-				},
-			};
-		},
-	);
+	const newResults = results.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
+		const savedIcon = savedUrls.includes(item.url) ? "🔵 " : "";
+		return {
+			title: savedIcon + item.title,
+			subtitle: item.url,
+			uid: item.url,
+			arg: item.url,
+			icon: { path: "duckduckgo.png" },
+			mods: {
+				shift: { subtitle: item.abstract },
+				cmd: { 
+					variables: { prevQuery: query },
+				}
+			},
+		};
+	});
 
 	// Measuring execution time
 	const durationTotal = (+new Date() - timelogStart) / 1000;
