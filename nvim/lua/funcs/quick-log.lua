@@ -52,7 +52,9 @@ function M.log()
 	local templateStr
 	local ft = bo.filetype
 
-	if ft == "lua" or ft == "python" then
+	if ft == "lua" then 
+		templateStr = 'print("%s: ".. %s)'
+	elseif ft == "python" then
 		templateStr = 'print("%s:", %s)'
 	elseif ft == "javascript" or ft == "typescript" then
 		templateStr = 'console.log("%s:", %s);'

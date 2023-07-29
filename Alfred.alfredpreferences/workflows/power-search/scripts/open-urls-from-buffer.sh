@@ -7,6 +7,8 @@ saved_urls="$alfred_workflow_cache/urlsToOpen.json"
 if [[ -f "$saved_urls" ]]; then
 	urls="$(cat "$saved_urls")\n$last_given_url"
 	rm "$saved_urls"
+else
+	urls="$last_given_url"
 fi
 echo "$urls" | xargs open
 

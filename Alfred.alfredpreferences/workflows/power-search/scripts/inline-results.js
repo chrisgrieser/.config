@@ -120,22 +120,9 @@ function refreshKeywordsCache(cachePath) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	console.log(""); // newline
 	const timelogStart = +new Date();
 
-	// Query + values from previous run
 	const query = argv[0];
-	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js;
-	const oldResults = JSON.parse(
-		$.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]",
-	);
-	const searchForQuery = {
-		title: query,
-		uid: query,
-		arg: $.getenv("search_site") + query,
-	};
-
-	//───────────────────────────────────────────────────────────────────────────
 
 	// Guard clause 1: query less than 3 chars or a URL
 	if (query.length < 3 || query.match(/^\w+:/)) return;
@@ -155,6 +142,19 @@ function run(argv) {
 		const queryFirstWord = query.split(" ")[0];
 		if (alfredKeywords.includes(queryFirstWord)) return;
 	}
+
+	//───────────────────────────────────────────────────────────────────────────
+
+	// values from previous run
+	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js;
+	const oldResults = JSON.parse(
+		$.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]",
+	);
+	const searchForQuery = {
+		title: query,
+		uid: query,
+		arg: $.getenv("search_site") + encodeURIComponent(query),
+	};
 
 	//───────────────────────────────────────────────────────────────────────────
 
@@ -180,7 +180,7 @@ function run(argv) {
 	const responseJson = JSON.parse(app.doShellScript(ddgrCommand));
 
 	const bufferPath = $.getenv("alfred_workflow_cache") + "/urlsToOpen.json"
-	const savedUrls = bufferPath.split("\n");
+	const savedUrls = fileExists(bufferPath) ? readFile(bufferPath).split("\n") : [];
 
 	const newResults = responseJson.map(
 		(/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
