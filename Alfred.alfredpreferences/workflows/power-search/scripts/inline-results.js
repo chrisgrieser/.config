@@ -1,5 +1,4 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
 ObjC.import("Foundation");
 const app = Application.currentApplication();
@@ -9,9 +8,9 @@ app.includeStandardAdditions = true;
 
 // CONFIG
 const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
-let resultsToFetch = parseInt($.getenv("inline_results_to_fetch"));
+let resultsToFetch = parseInt($.getenv("inline_results_to_fetch")) || 5;
 if (resultsToFetch < 1) resultsToFetch = 1;
-else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
+else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by `ddgr`
 const ignoreAlfredKeywordsEnabled = $.getenv("ignore_alfred_keywords") === "1";
 
 const multiSelectIcon = "🔳";
@@ -49,31 +48,31 @@ function writeToFile(filepath, text) {
 // get the Alfred keywords and write them to the cachePath
 // PERF Saving keywords in a cache saves ~250ms for me (50+ workflows, 180+ keywords)
 /** @param {string} cachePath */
-function refreshKeywordsCache(cachePath) {
+function refreshKeywordCache(cachePath) {
 	const keywords = app
-		.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
+		.doShellScript("grep -r -A1 '<key>keyword' ../**/info.plist | awk 'NR % 3 == 2'")
 		.split("\r")
 		.reduce((acc, line) => {
 			const value = line.split(">")[1].split("<")[0];
 			const keywords = [];
 
 			// DOCS ALFRED KEYWORDS https://www.alfredapp.com/help/workflows/advanced/keywords/
-			// 1) `{var:alfred_var}`: configurable keywords
+			// CASE 1: `{var:alfred_var}` -> configurable keywords
 			if (value.startsWith("{var:")) {
 				const varName = value.split("{var:")[1].split("}")[0];
 				const workflowPath = line.split("/info.plist")[0];
-				// 1a) user-set keywords
+				// CASE 1a) user-set keywords
 				// (`plutil` will fail, since the value is not saved in prefs.plist)
 				try {
 					const userKeyword = app.doShellScript(
-						`cd .. && plutil -extract "${varName}" raw -o - "${workflowPath}/prefs.plist"`,
+						`plutil -extract "${varName}" raw -o - "../${workflowPath}/prefs.plist"`,
 					);
 					keywords.push(userKeyword);
 				} catch (_error) {
-					// 1b) keywords where user kept the default value
+					// CASE 1b: keywords where user kept the default value
 					const workflowConfig = JSON.parse(
 						app.doShellScript(
-							`cd .. && plutil -extract "userconfigurationconfig" json -o - "${workflowPath}/info.plist"`,
+							`plutil -extract "userconfigurationconfig" json -o - "../${workflowPath}/info.plist"`,
 						),
 					);
 					const defaultValue = workflowConfig.find(
@@ -82,18 +81,18 @@ function refreshKeywordsCache(cachePath) {
 					keywords.push(defaultValue);
 				}
 			}
-			// 2) `||`: multiple keyword alternatives
+			// CASE 2: `||` -> multiple keyword alternatives
 			else if (value.includes("||")) {
 				const multiKeyword = value.split("||");
 				keywords.push(...multiKeyword);
 			}
-			// 3) normal keyword
+			// CASE 3: regular keyword
 			else {
 				keywords.push(value);
 			}
 
-			// only keywords with letter as first char are relevant, also only the
-			// first word of a keyword matters
+			// - also only the first word of a keyword matters
+			// - only keywords with letter as first char are relevant
 			const relevantKeywords = keywords.reduce((acc, keyword) => {
 				const firstWord = keyword.split(" ")[0];
 				if (firstWord.match(/^[a-z]/)) acc.push(firstWord);
@@ -105,9 +104,12 @@ function refreshKeywordsCache(cachePath) {
 		}, []);
 
 	// HACK remove keywords from this very workflow. Cannot be done based on the
-	// foldername, since Alfred assigns a unique ID to local installations.
-	// (to simplify removing sequence of items from an array, also uses a HACK,
-	// converting namely it to a string, removing the substring, then back to an array)
+	// foldername, since Alfred assigns a unique ID to local installations. The
+	// specific sequence of items is relevant, it is dependent on the occurrence
+	// of script filters in Alfred's "workflow canvas" and will change if script
+	// filter there re-arranged.
+	// (HACK to simplify removing sequence of items from an array, we convert it
+	// to a string, remove the substring, then convert it back)
 	const pseudoKeywords = "c,a,b,e,f,d,h,i,g,l,j,k,o,n,m,q,r,p,u,s,t,v,w,x,z,y";
 	const trueKeywords = keywords
 		.join(",") // to string
@@ -129,16 +131,18 @@ function run(argv) {
 	const mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 	const query = argv[0];
 
-	// GUARD CLAUSE 1: query < 3 chars OR query is a URL
+	// GUARD CLAUSE 1:
+	// - query < 3 chars
+	// - query == URL
 	if (query.length < 3 || query.match(/^\w+:/)) return;
 
-	// GUARD CLAUSE 2: first word of query is alfred keyword
+	// GUARD CLAUSE 2: first word of query is Alfred keyword
 	// (guard clause is ignored when doing fallback search or multi-select,
 	// since in that case we know we do not need to ignore anything.)
 	if (ignoreAlfredKeywordsEnabled && mode !== "fallback" && mode !== "multi-select") {
-		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
-		if (keywordCacheIsOutdated(cachePath)) refreshKeywordsCache(cachePath);
-		const alfredKeywords = JSON.parse(readFile(cachePath));
+		const keywordCachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
+		if (keywordCacheIsOutdated(keywordCachePath)) refreshKeywordCache(keywordCachePath);
+		const alfredKeywords = JSON.parse(readFile(keywordCachePath));
 		const queryFirstWord = query.split(" ")[0];
 		if (alfredKeywords.includes(queryFirstWord)) return;
 	}
@@ -146,9 +150,7 @@ function run(argv) {
 	// GUARD CLAUSE 3: USE OLD RESULTS
 	// get values from previous run
 	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js;
-	const oldResults = JSON.parse(
-		$.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]",
-	);
+	const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js;
 	const searchForQuery = {
 		title: `"${query}"`,
 		uid: query,
@@ -167,26 +169,26 @@ function run(argv) {
 		return JSON.stringify({
 			rerun: 0.1,
 			skipknowledge: true,
-			variables: { oldResults: JSON.stringify(oldResults), oldQuery: query },
-			items: [searchForQuery].concat(oldResults),
+			variables: { oldResults: oldResults, oldQuery: query },
+			items: [searchForQuery].concat(JSON.parse(oldResults)),
 		});
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
 	// MAIN: REQUEST NEW RESULTS
 
-	// PERF cache ddgr response so that reopening Alfred or using multi-select
+	// PERF cache `ddgr` response so that re-opening Alfred or using multi-select
 	// does not re-fetch results
 	const responseCachePath = $.getenv("alfred_workflow_cache") + "/reponseCache.json";
-	const cache = JSON.parse(readFile(responseCachePath) || "{}");
+	const responseCache = JSON.parse(readFile(responseCachePath) || "{}");
 	let results = [];
-	if (cache.query === query) {
-		results = cache.results;
+	if (responseCache.query === query) {
+		results = responseCache.results;
 	} else {
 		// PERF `--noua` disables user agent & fetches faster (~100ms according to hyperfine)
 		// PERF the number of results fetched has basically no effect on the speed
 		// (less than 50ms difference between 1 and 25 results), so there is no use
-		// in restricting the number of results for performance, (except for 25 being
+		// in restricting the number of results for performance. (Rxcept for 25 being
 		// ddgr's maximum)
 		const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
 		const response = {};
@@ -197,8 +199,8 @@ function run(argv) {
 	}
 
 	// determine icon for multi-select from saved URLs
-	const multiSelectBuffer = $.getenv("alfred_workflow_cache") + "/multiSelectBuffer.txt";
-	const multiSelectUrls = readFile(multiSelectBuffer).split("\n") || [];
+	const multiSelectBufferPath = $.getenv("alfred_workflow_cache") + "/multiSelectBuffer.txt";
+	const multiSelectUrls = readFile(multiSelectBufferPath).split("\n") || [];
 
 	const newResults = results.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
 		const isSelected = multiSelectUrls.includes(item.url);
@@ -207,7 +209,7 @@ function run(argv) {
 			title: icon + item.title,
 			subtitle: item.url,
 			uid: item.url,
-			arg: isSelected ? "" : item.url, // prevent double opening a URL already selected
+			arg: isSelected ? "" : item.url, // if URL already selected, no need to pass it
 			icon: { path: "icons/1.png" },
 			mods: {
 				shift: { subtitle: item.abstract },
@@ -220,14 +222,14 @@ function run(argv) {
 
 	// Pass to Alfred
 	const alfredInput = JSON.stringify({
-		rerun: 0.1, // has to permanently to pick up changes from multi-select
+		rerun: 0.1, // HACK has to permanently rerun to pick up changes from multi-select
 		skipknowledge: true, // so Alfred does not change result order for multi-select
 		variables: { oldResults: JSON.stringify(newResults), oldQuery: query },
 		items: [searchForQuery].concat(newResults),
 	});
 
-	const durationTotal = (+new Date() - timelogStart) / 1000;
-	console.log(`${mode}: ${durationTotal}s`);
+	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
+	console.log(`${mode}: ${durationTotalSecs}s`);
 
 	return alfredInput;
 }
