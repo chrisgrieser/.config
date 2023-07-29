@@ -2724,7 +2724,7 @@
 	<key>readme</key>
 	<string>## Actions on inline results
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: Search for Term / open URL.
-- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Mark URL. The next &lt;kbd&gt;⏎&lt;/kbd&gt; will open the selected result as well as all previously marked URLs.
+- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Multi-Select: Mark the URL. The next &lt;kbd&gt;⏎&lt;/kbd&gt; will open the selected result as well as all previously marked URLs.
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy URL.
 - &lt;kbd&gt;⇧&lt;/kbd&gt; (or &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt;): Show preview text of search result.
 
@@ -3216,7 +3216,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.12</string>
+	<string>0.13</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
