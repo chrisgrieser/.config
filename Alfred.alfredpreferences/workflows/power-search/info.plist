@@ -1160,7 +1160,7 @@
 				<key>textcolor</key>
 				<string></string>
 				<key>wrapat</key>
-				<integer>50</integer>
+				<integer>90</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.largetype</string>
@@ -2894,7 +2894,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>775</real>
+			<real>780</real>
 			<key>ypos</key>
 			<real>335</real>
 		</dict>
@@ -3138,7 +3138,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>open URL(s)</string>
+			<string>open URL(s) &amp; log queries</string>
 			<key>xpos</key>
 			<real>785</real>
 			<key>ypos</key>

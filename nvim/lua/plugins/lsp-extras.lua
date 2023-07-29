@@ -55,7 +55,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			max_width = 35,
-			max_height = 8,
+			max_height = 3,
 			scope = "line", -- cursor|line
 			placement = "top", -- top|inline
 			text_align = "left", -- left|right
