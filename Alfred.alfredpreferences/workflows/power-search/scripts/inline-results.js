@@ -15,7 +15,7 @@ else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by ddgr
 const ignoreAlfredKeywords = $.getenv("ignore_alfred_keywords") === "1";
 
 const keywordCacheThresholdMins = 60;
-const multiSelectIcon = "🔵";
+const multiSelectIcon = "🔳";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -152,7 +152,7 @@ function run(argv) {
 		$.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]",
 	);
 	const searchForQuery = {
-		title: query,
+		title: `"${query}"`,
 		uid: query,
 		arg: $.getenv("search_site") + encodeURIComponent(query),
 	};
@@ -171,7 +171,6 @@ function run(argv) {
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
-
 	// MAIN: REQUEST NEW RESULTS
 
 	// PERF cache ddgr response so that reopening Alfred or using multi-select
@@ -200,13 +199,13 @@ function run(argv) {
 	const savedUrls = readFile(bufferPath).split("\n") || [];
 
 	const newResults = results.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
-		const savedIcon = savedUrls.includes(item.url) ? multiSelectIcon : "";
+		const savedIcon = savedUrls.includes(item.url) ? multiSelectIcon + " " : "";
 		return {
 			title: savedIcon + item.title,
 			subtitle: item.url,
 			uid: item.url,
 			arg: item.url,
-			icon: { path: "icon2.png" },
+			icon: { path: "icons/1.png" },
 			mods: {
 				shift: { subtitle: item.abstract },
 				cmd: {
