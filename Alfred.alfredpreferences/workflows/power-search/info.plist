@@ -2462,7 +2462,7 @@
 			<key>config</key>
 			<dict>
 				<key>seconds</key>
-				<string>.25</string>
+				<string>.2</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.delay</string>
@@ -3067,7 +3067,7 @@
 			<key>xpos</key>
 			<real>720</real>
 			<key>ypos</key>
-			<real>1025</real>
+			<real>1030</real>
 		</dict>
 		<key>BAD2BCE8-96CD-4FF0-9445-860265918045</key>
 		<dict>

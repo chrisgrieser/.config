@@ -157,9 +157,9 @@ function run(argv) {
 		arg: $.getenv("search_site") + encodeURIComponent(query),
 	};
 
-	// PERF If the user is typing, return early to guarantee the top entry is the
-	// currently typed query. If we waited for the API, a fast typer would search
-	// for an incomplete query
+	// PERF & HACK If the user is typing, return early to guarantee the top entry
+	// is the currently typed query. If we waited for `ddgr`, a fast typer would
+	// search for an incomplete query
 	if (query !== oldQuery) {
 		searchForQuery.subtitle = "Loading Inline Results…";
 		return JSON.stringify({
@@ -198,8 +198,6 @@ function run(argv) {
 	const multiSelectBufferPath = $.getenv("alfred_workflow_cache") + "/multiSelectBuffer.txt";
 	const multiSelectUrls = readFile(multiSelectBufferPath).split("\n") || [];
 
-	if ()
-
 	const newResults = results.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
 		const isSelected = multiSelectUrls.includes(item.url);
 		const icon = isSelected ? multiSelectIcon + " " : "";
@@ -220,9 +218,22 @@ function run(argv) {
 		};
 	});
 
+	// if searchForQuery has been multi-selected, adapt its result as well
+	if (multiSelectUrls.includes(searchForQuery.arg)) {
+		searchForQuery.title = multiSelectIcon + " " + searchForQuery.title;
+		searchForQuery.mods = {
+			cmd: {
+				arg: searchForQuery.arg, // has to be set, since main arg can be ""
+				variables: { mode: "multi-select" },
+				subtitle: "⌘: Deselect URL",
+			},
+		};
+		searchForQuery.arg = ""; // if URL already selected, no need to pass it
+	}
+
 	// Pass to Alfred
 	const alfredInput = JSON.stringify({
-		rerun: 0.1, // HACK has to permanently rerun to pick up changes from multi-select
+		rerun: 0.2, // HACK has to permanently rerun to pick up changes from multi-select
 		skipknowledge: true, // so Alfred does not change result order for multi-select
 		variables: { oldResults: JSON.stringify(newResults), oldQuery: query },
 		items: [searchForQuery].concat(newResults),
