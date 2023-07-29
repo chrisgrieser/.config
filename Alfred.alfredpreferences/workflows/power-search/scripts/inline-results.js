@@ -122,9 +122,7 @@ function refreshKeywordsCache(cachePath) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const timelogStart = +new Date();
-	const isUsingFallbackSearch = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "fallback"
-	const isMultiSelect = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "multi-select"
-
+	const mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 
 	const query = argv[0];
 
@@ -134,7 +132,7 @@ function run(argv) {
 	// GUARD CLAUSE 2: first word of query is alfred keyword
 	// (guard clause is ignored when doing fallback search or multi-select,
 	// since in that case we know we do not need to ignore anything.)
-	if (ignoreAlfredKeywords && !isUsingFallbackSearch && !isMultiSelect) {
+	if (ignoreAlfredKeywords && mode !== "fallack" && mode !== "multi-select") {
 		const cachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
 
 		if (!fileExists(cachePath)) {
@@ -179,7 +177,7 @@ function run(argv) {
 	// PERF cache ddgr response so that reopening Alfred or using multi-select
 	// does not re-fetch results
 	const responseCachePath = $.getenv("alfred_workflow_cache") + "/reponseCache.json";
-	const cache = JSON.parse(readFile(responseCachePath) || "{}")
+	const cache = JSON.parse(readFile(responseCachePath) || "{}");
 	let results = [];
 	if (cache.query === query) {
 		results = cache.results;
@@ -208,11 +206,12 @@ function run(argv) {
 			subtitle: item.url,
 			uid: item.url,
 			arg: item.url,
+			icon: { path: "icon2.png" },
 			mods: {
 				shift: { subtitle: item.abstract },
-				cmd: { 
+				cmd: {
 					variables: { multiselectPrevQuery: query },
-				}
+				},
 			},
 		};
 	});
@@ -225,7 +224,7 @@ function run(argv) {
 	});
 
 	const durationTotal = (+new Date() - timelogStart) / 1000;
-	console.log("total:", durationTotal, "s");
+	console.log(`${mode} mode: ${durationTotal}s`);
 
 	return alfredInput;
 }
