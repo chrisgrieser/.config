@@ -151,25 +151,51 @@ rules:
         to_if_alone:
           - { key_code: up_arrow, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # H: parent, in new window
-      - type: basic
-        from: { key_code: h, modifiers: { mandatory: [shift] } }
-        to_if_alone:
-          - { key_code: up_arrow, modifiers: [command, control] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # l: open
       - type: basic
         from: { key_code: l }
         to_if_alone:
           - { key_code: o, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # L: open & close win
+      # HJKL
+      # H: goto parent in new window
+      - type: basic
+        from: { key_code: h, modifiers: { mandatory: [shift] } }
+        to_if_alone:
+          - { key_code: up_arrow, modifiers: [command, control] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      # L: open in new window
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [shift] } }
         to_if_alone:
-          - { key_code: o, modifiers: [command, option] }
+          - shell_command: |
+              osascript -e '
+                
+              '
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # gg, G, J, K
+      # J: 6j
+      - type: basic
+        from: { key_code: j, modifiers: { mandatory: [shift] } }
+        to:
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - key_code: down_arrow
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # K: 6k
+      - type: basic
+        from: { key_code: k, modifiers: { mandatory: [shift] } }
+        to:
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+          - key_code: up_arrow
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # g(g), G, 
       - type: basic
         from: { key_code: g }
         to:
@@ -181,26 +207,6 @@ rules:
         to_if_alone:
           - key_code: down_arrow
             modifiers: [option]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      - type: basic
-        from: { key_code: j, modifiers: { mandatory: [shift] } }
-        to:
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - key_code: down_arrow
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      - type: basic
-        from: { key_code: k, modifiers: { mandatory: [shift] } }
-        to:
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: up_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # :help
@@ -310,16 +316,6 @@ rules:
             *end-alfred,
           ]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic # Meh+return
-        from: { key_code: return_or_enter, modifiers: { mandatory: [shift, control, option] } }
-        to:
-          [
-            { key_code: return_or_enter, modifiers: [shift, control, option] },
-            *remove-insert-notice,
-            *leave-insert-mode,
-            *end-alfred,
-          ]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
       - type: basic
         from: { key_code: "2", modifiers: { mandatory: [command] } }
         to: [{ key_code: "2", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
@@ -386,7 +382,7 @@ rules:
           - *end-move
           - *remove-move-notice
         conditions: [*finder-or-alfred-app]
-        # Closing window or quitting Finder should also disable Insert mode
+        # Closing window or quitting/restarting Finder should also disable Insert mode
       - type: basic
         from: { key_code: w, modifiers: { mandatory: [command] } }
         to:
@@ -403,17 +399,26 @@ rules:
           - *leave-insert-mode
           - *end-menu
         conditions: [*finder-app, *alfred-inactive]
+      # Q: Restart Finder
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [shift] } }
+        to:
+          - shell_command: killall Finder
+          - *remove-insert-notice
+          - *leave-insert-mode
+          - *end-menu
+        conditions: [*finder-app, *alfred-inactive]
       #─────────────────────────────────────────────────────────────────────────
       # Window & Tabs
-      # w = close window/tab (:[tab]close)
+      # w = close window/tab
       - type: basic
         from: { key_code: w }
         to:
           - { key_code: w, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # w = close other windows (:only)
+      # e = close other windows (:only)
       - type: basic
-        from: { key_code: w, modifiers: { mandatory: [shift] } }
+        from: { key_code: e }
         to:
           - shell_command: |
               osascript -e '
@@ -423,13 +428,19 @@ rules:
                   end repeat
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      # E = eject (if volume or disk image)
+      - type: basic
+        from: { key_code: e, modifiers: { mandatory: [shift] } }
+        to_if_alone:
+          - { key_code: e, modifiers: [command] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <BS> = cycle windows (:bnext)
       - type: basic
         from: { key_code: delete_or_backspace }
         to_if_alone:
           - { key_code: grave_accent_and_tilde, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # t = cycle tabs to folder
+      # t = recent folders
       - type: basic
         from: { key_code: t }
         to_if_alone:
@@ -499,7 +510,7 @@ rules:
       - type: basic
         from: { key_code: q }
         to:
-          # yes, Finder needs to activate even though it is already frontmost,
+          # INFO Finder needs to activate even though it is already frontmost,
           # since running a shellcommand seems to temporarily take focus, so
           # that there is no AXfocusedUIElement during execution
           - shell_command: |
@@ -514,19 +525,9 @@ rules:
                 end tell'
           - *start-menu
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      # close context menu with q
       - type: basic
-        from: { key_code: q, modifiers: { mandatory: [shift] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Finder"
-                  click menu item "Share…" of menu "File" of menu bar 1
-                end tell'
-          - *start-menu
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # close context menu with another q/Q
-      - type: basic
-        from: { key_code: q, modifiers: { optional: [shift] } }
+        from: { key_code: q}
         to_if_alone:
           - key_code: escape
           - *end-menu
@@ -679,12 +680,6 @@ rules:
         to:
           - { key_code: "y", modifiers: [shift, command] } # y = z in German keyboard
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
-      # e = eject (if volume or disk image)
-      - type: basic
-        from: { key_code: e }
-        to_if_alone:
-          - { key_code: e, modifiers: [command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # N = New Folder
       - type: basic
         from: { key_code: n, modifiers: { mandatory: [shift] } }
