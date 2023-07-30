@@ -319,7 +319,7 @@ Set a specific Amazon store to search in the [Workflow’s Configuration](https:
 					</array>
 					<array>
 						<string>United Kingdom</string>
-						<string>uk</string>
+						<string>co.uk</string>
 					</array>
 					<array>
 						<string>United States of America</string>
@@ -338,7 +338,7 @@ Set a specific Amazon store to search in the [Workflow’s Configuration](https:
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2023.2</string>
+	<string>2023.3</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/amazon-suggest-workflow/</string>
 </dict>

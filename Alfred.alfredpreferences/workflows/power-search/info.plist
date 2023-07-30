@@ -1073,7 +1073,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Search for the Power User. Search Results in Alfred, without a keyword.</string>
+	<string>Search for the Power User. Inline Results, without a keyword.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -2801,7 +2801,7 @@
 	</array>
 	<key>readme</key>
 	<string># Hyper Seek
-Search for the Power User. Search Results in Alfred, *without a keyword*. Multi-select results to open. 
+Search for the Power User. Inline Results, *without a keyword*. Multi-select results to open. 
 
 ---
 
