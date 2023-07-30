@@ -84,7 +84,7 @@ end)
 NeovideWatcher2 = aw.new(function(_, eventType, _)
 	if eventType == aw.terminated then
 		u.runWithDelays(3, function()
-			local killCmd = [[pgrep -xq 'neovide' || killall neovide nvim]]
+			local killCmd = [[pgrep -xq 'neovide' || killall -9 neovide nvim]]
 			local _, hasKilled = hs.execute(killCmd)
 			if hasKilled then u.notify("⚔️ Killed leftover neovide/nvim processes.") end
 		end)
