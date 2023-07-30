@@ -260,7 +260,7 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
         conditions: [*finder-app, *is-insert-mode]
-      # Opening Alfred/Raycast/Spotlight cancels renaming and context menu, 
+      # Opening Alfred/Raycast/Spotlight cancels renaming and context menu,
       # so the respective modes have to be aborter here as well
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [command] } }
@@ -416,36 +416,36 @@ rules:
         to:
           - { key_code: down_arrow, modifiers: [shift] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # <M-Space> = select all files in window with tag "vim-mark" 
+      # <M-Space> = select all files in window with tag "vim-mark"
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [option] } }
         to:
+          # WARN this script can only select *files* https://github.com/chrisgrieser/finder-vim-mode/issues/3
           - shell_command: |
-              osascript -l JavaScript -e ' function run() {
+              osascript -l JavaScript -e 'function run() {
                 const app = Application.currentApplication();
                 app.includeStandardAdditions = true;
                 const finder = Application("Finder");
-                if (!finder.finderWindows) then return end
+                if (!finder.finderWindows) return;
                 const win = finder.finderWindows[0].target;
                 const winPath = decodeURIComponent(win.url().slice(7));
-                const taggedItems = app
-                  .doShellScript (`mdfind -onlyin "${winPath}" "kMDItemUserTags == vim-mark"`)
+                const taggedFiles = app
+                  // filter only files with mdfind
+                  .doShellScript (`mdfind -onlyin "${winPath}" "kMDItemUserTags == vim-mark && ! kMDItemContentType == public.folder"`)
                   .split("\r")
-                  .filter( path => Application("System Events").byName(wd + "untitled folder copy").kind() !== "Folder")
                   .map(path => Path(path));
-                const taggedFiles = taggedItems.map(item => item.kind !== "folder");
-                if (taggedFiles.length === 0) then return end
+                if (taggedFiles.length === 0) return;
                 try {
                   finder.select(taggedFiles);
                 } catch (error) {
                   app.displayNotification("", { withTitle: "Finder Vim Mode", subtitle: "Error: " + error })
                 }
-                delay (0.2) // wait for selection
-                finder.activate(); // ensures finder is still active
-                // untag the files
-                Application("System Events").keystroke("1", {using: ["control down"]});
               }
               run()'
+          # untag files 
+          # (does not work when invoked via keystroking in the script above)
+          - { key_code: vk_none, hold_down_milliseconds: 200 } # wait for selection
+          - { key_code: "1", modifiers: [control] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # q = right-click / Context Menu
