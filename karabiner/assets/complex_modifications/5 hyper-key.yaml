@@ -1,5 +1,4 @@
-title: ⇪ Hyper & ↹ Meh Key
-homepage: https://github.com/chrisgrieser/dotfiles/karabiner
+title: ⇪ Hyper
 rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪ Capslock → Hyper/Esc"
@@ -22,18 +21,6 @@ rules:
         conditions:
           - type: frontmost_application_unless
             bundle_identifiers: [^com\.apple\.finder$]
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "*️⃣ ↹ Tab → Meh/Tab"
-    manipulators:
-      - type: basic
-        from: { key_code: tab }
-        to_if_alone:
-          - key_code: tab
-        to:
-          - { key_code: right_shift, modifiers: [control, option] }
-        conditions:
-          # allow repeats for quicker completion selection
-          - { type: frontmost_application_unless, file_paths: ["[Nn]eovide", wezterm-gui$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪R: Restart App"
     manipulators:
@@ -77,7 +64,7 @@ rules:
               open -a "Alfred 5"
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Insert Mode Vim: ⇪ Hyper + hjklion<space> → ⌫←↓↑→"
+  - description: "Insert Mode Vim: ⇪ Hyper + hjklio<space> → ⌫←↓↑→"
     manipulators:
       # deletion
       - type: basic

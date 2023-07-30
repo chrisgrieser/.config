@@ -192,7 +192,13 @@ local function telescopeConfig()
 		extensions = {
 			undo = {
 				entry_format = "#$ID ($STAT) $TIME",
-				preview_width = { 0.70, min = 30 },
+				layout_config = {
+					-- more space for diffview useful here
+					horizontal = {
+						height = 0.8,
+						preview_width = { 0.70, min = 30 },
+					},
+				},
 				mappings = {
 					i = {
 						["<cr>"] = require("telescope-undo.actions").yank_additions,

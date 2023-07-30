@@ -139,7 +139,7 @@ local keybindings = {
 		end),
 	},
 	-- Theme Cycler
-	{ key = "t", mods = "CMD|ALT", action = actFun(theme.cycle) },
+	{ key = "t", mods = "ALT", action = actFun(theme.cycle) },
 
 	-----------------------------------------------------------------------------
 
