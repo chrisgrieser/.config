@@ -13,6 +13,9 @@ local s = {
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },
 }
+
+
+
 local source_icons = {
 	treesitter = "",
 	buffer = "󰽙",
@@ -77,10 +80,8 @@ local function cmpconfig()
 			-- lower values for lag-free performance
 			-- default values: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18
 			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L403
-			debounce = 20,
-			throttle = 10,
-			max_view_entries = 75,
-			fetching_timeout = 100,
+			max_view_entries = 100,
+			fetching_timeout = 400,
 		},
 		window = {
 			completion = {
@@ -111,7 +112,7 @@ local function cmpconfig()
 			["<S-CR>"] = cmp.mapping.abort(), -- accept current text, consistent with Obsidian https://medium.com/obsidian-observer/obsidian-quick-tip-use-shift-enter-to-skip-autocomplete-on-links-8495ea189c4c
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
 			["<PageDown>"] = cmp.mapping.scroll_docs(4),
-			["<C-e>"] = function ()
+			["<C-e>"] = function()
 				cmp.mapping.abort()
 				vim.fn["codeium#Complete()"]() -- show virtual text
 			end,
