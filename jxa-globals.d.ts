@@ -114,9 +114,7 @@ declare const Application: {
 		reveal(path: PathObj | finderItem): void;
 		select(path: PathObj | finderItem | PathObj[] | finderItem[]): void;
 		selection(): finderItem[];
-		finderWindows: {
-			target: finderItem; // the obj the finder is pointing too
-		};
+		finderWindows: undefined | { target: finderItem }; // undefined if Finder is not fromtmost
 	};
 	(name: "SideNotes"): macAppObj & {
 		currentNote(): SideNotesNote;
@@ -149,14 +147,22 @@ declare const Application: {
 //──────────────────────────────────────────────────────────────────────────────
 
 declare const ObjC: {
-	import: (package: "stdlib" | "Foundation") => void;
+	import: (package: "stdlib" | "Foundation"| "AppKit") => void;
 	unwrap: (string: string) => string;
 };
 
 declare function delay(seconds: number): void;
 
-// requires `ObjC.import("stdlib")`
 declare const $: {
+	// requires `ObjC.import("AppKit")`
+	// rome-ignore lint/suspicious/noExplicitAny: too long
+	NSPasteboard: any;
+	// rome-ignore lint/suspicious/noExplicitAny: too long
+	NSFilenamesPboardType: any;
+	// rome-ignore lint/suspicious/noExplicitAny: too long
+	(paths: string[]): any;
+
+	// requires `ObjC.import("stdlib")`
 	getenv: (envVar: string) => string;
 	// rome-ignore lint/suspicious/noExplicitAny: too long
 	NSFileManager: any;

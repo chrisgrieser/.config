@@ -469,6 +469,24 @@ rules:
         to:
           - { key_code: down_arrow, modifiers: [shift] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # <M-Space> = select all files in window with tag "vim-mode-selection"
+      - type: basic
+        from: { key_code: spacebar, modifiers: { mandatory: [option] } }
+        to:
+          - shell_command: |
+              osascript -l JavaScript -e '
+                const app = Application.currentApplication();
+                app.includeStandardAdditions = true;
+                const finder = Application("Finder");
+                const win = finder.finderWindows[0].target;
+                const winPath = decodeURIComponent(win.url().slice(7));
+                const taggedFiles = app
+                  .doShellScript (`mdfind -onlyin "${winPath}" "kMDItemUserTags == vim-mode-selection"`)
+                  .split("\r")
+                  .map(path => Path(path));
+                finder.select(taggedFiles);
+              '
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # q = right-click / Context Menu
       - type: basic
