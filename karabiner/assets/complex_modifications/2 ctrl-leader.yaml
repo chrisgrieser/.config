@@ -39,12 +39,13 @@ rules:
         to_if_alone:
           - *activate-leader
           - *set-notice
-      # 2x L-Ctrl: Finder
+      # 2x L-Ctrl: Toggle Sidenotes
       - type: basic
         from: { key_code: left_control }
         conditions: [*leader-active]
         to_if_alone:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "file-hub-cycle" in workflow "de.chris-grieser.finder"'
+          # cmd+opt+ctrl+s in the SideNotes Settings set to toggle
+          - { key_code: s, modifiers: [command, option, control] }
           - *deactivate-leader
           - *remove-notice
       # Cancel (Hyper/Esc)

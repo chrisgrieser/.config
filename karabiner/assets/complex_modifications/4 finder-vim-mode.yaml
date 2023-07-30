@@ -478,14 +478,20 @@ rules:
                 const app = Application.currentApplication();
                 app.includeStandardAdditions = true;
                 const finder = Application("Finder");
+                finder.activate(); // ensures finder is focussed for `finderWindows[0]`
                 const win = finder.finderWindows[0].target;
                 const winPath = decodeURIComponent(win.url().slice(7));
                 const taggedFiles = app
                   .doShellScript (`mdfind -onlyin "${winPath}" "kMDItemUserTags == vim-mark"`)
                   .split("\r")
                   .map(path => Path(path));
-                finder.select(taggedFiles);
+                try {
+                  finder.select(taggedFiles);
+                } catch (error) {
+                  app.displayNotification("", { withTitle: "Finder Vim Mode", subtitle: "Error: " + error })
+                }
               '
+          - { key_code: vk_none, hold_down_milliseconds: 100 }
           - { key_code: "1", modifiers: [control] } # untag the files
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
