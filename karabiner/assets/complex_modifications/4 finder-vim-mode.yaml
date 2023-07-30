@@ -469,7 +469,7 @@ rules:
         to:
           - { key_code: down_arrow, modifiers: [shift] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # <M-Space> = select all files in window with tag "vim-mode-selection"
+      # <M-Space> = select all files in window with tag "vim-mark"
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [option] } }
         to:

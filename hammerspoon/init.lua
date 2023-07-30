@@ -20,7 +20,7 @@ require("lua.layouts")
 require("lua.app-hider")
 
 -- system
-require("lua.console") 
+require("lua.console")
 require("lua.cronjobs")
 require("lua.filesystem-watchers")
 require("lua.repo-auto-sync")
@@ -36,7 +36,10 @@ require("lua.neovim")
 require("lua.sidenotes")
 
 -- other
-require("lua.weather-reminder")
+local month = tostring(os.date()):sub(5, 8)
+if month == "Jun" or month == "Jul" or month == "Aug" or month == "Sep" then
+	require("lua.weather-reminder")
+end
 
 -- reload function (should come last)
 require("lua.reload")
