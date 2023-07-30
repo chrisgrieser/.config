@@ -1,0 +1,209 @@
+{
+	"items": [
+		{
+			"title": "⎋ / Escape",
+			"arg": "53",
+			"subtitle": "53"
+		},
+		{
+			"title": "⌘ / Command",
+			"arg": "55",
+			"subtitle": "55"
+		},
+		{
+			"title": "⌥ / Option / Alt",
+			"arg": "58",
+			"subtitle": "58 (left) / 61 (right)"
+		},
+		{
+			"title": "⌃ / Control",
+			"arg": "59",
+			"subtitle": "59 (left) / 62 (right)"
+		},
+		{
+			"title": "⇧ / Shift",
+			"arg": "56",
+			"subtitle": "56 (left) / 60 (right)"
+		},
+		{
+			"title": "⇪ / Caps Lock",
+			"arg": "57",
+			"subtitle": "57"
+		},
+		{
+			"title": "⏎ / Return",
+			"arg": "36",
+			"subtitle": "36"
+		},
+		{
+			"title": "⌤ / Enter",
+			"arg": "76",
+			"subtitle": "76"
+		},
+		{
+			"title": "⇥ / Tab",
+			"arg": "48",
+			"subtitle": "48"
+		},
+		{
+			"title": "␣ / Space",
+			"arg": "49",
+			"subtitle": "49"
+		},
+		{
+			"title": "⌫ / Delete / Backspace",
+			"arg": "51",
+			"subtitle": "51"
+		},
+		{
+			"title": "⌦ / Forward Delete",
+			"arg": "117",
+			"subtitle": "117"
+		},
+		{
+			"title": "← / Left Arrow",
+			"arg": "123",
+			"subtitle": "123"
+		},
+		{
+			"title": "→ / Right Arrow",
+			"arg": "124",
+			"subtitle": "124"
+		},
+		{
+			"title": "↓ / Down Arrow",
+			"arg": "125",
+			"subtitle": "125"
+		},
+		{
+			"title": "↑ / Up Arrow",
+			"arg": "126",
+			"subtitle": "126"
+		},
+		{
+			"title": "⇞ / Page Up",
+			"arg": "116",
+			"subtitle": "116"
+		},
+		{
+			"title": "⇟ / Page Down",
+			"arg": "121",
+			"subtitle": "121"
+		},
+		{
+			"title": "⇱ / Home",
+			"arg": "115",
+			"subtitle": "115"
+		},
+		{
+			"title": "⇲ / End",
+			"arg": "119",
+			"subtitle": "119"
+		},
+		{
+			"title": "fn",
+			"arg": "63",
+			"subtitle": "63"
+		},
+		{
+			"title": "F1",
+			"arg": "122",
+			"subtitle": "122"
+		},
+		{
+			"title": "F2",
+			"arg": "120",
+			"subtitle": "120"
+		},
+		{
+			"title": "F3",
+			"arg": "99",
+			"subtitle": "99"
+		},
+		{
+			"title": "F4",
+			"arg": "118",
+			"subtitle": "118"
+		},
+		{
+			"title": "F5",
+			"arg": "96",
+			"subtitle": "96"
+		},
+		{
+			"title": "F6",
+			"arg": "97",
+			"subtitle": "97"
+		},
+		{
+			"title": "F7",
+			"arg": "98",
+			"subtitle": "98"
+		},
+		{
+			"title": "F8",
+			"arg": "100",
+			"subtitle": "100"
+		},
+		{
+			"title": "F9",
+			"arg": "101",
+			"subtitle": "101"
+		},
+		{
+			"title": "F10",
+			"arg": "109",
+			"subtitle": "109"
+		},
+		{
+			"title": "F11",
+			"arg": "103",
+			"subtitle": "103"
+		},
+		{
+			"title": "F12",
+			"arg": "111",
+			"subtitle": "111"
+		},
+		{
+			"title": "F13",
+			"arg": "105",
+			"subtitle": "105"
+		},
+		{
+			"title": "F14",
+			"arg": "107",
+			"subtitle": "107"
+		},
+		{
+			"title": "F15",
+			"arg": "113",
+			"subtitle": "113"
+		},
+		{
+			"title": "F16",
+			"arg": "106",
+			"subtitle": "106"
+		},
+		{
+			"title": "F17",
+			"arg": "64",
+			"subtitle": "64"
+		},
+		{
+			"title": "F18",
+			"arg": "79",
+			"subtitle": "79"
+		},
+		{
+			"title": "F19",
+			"arg": "80",
+			"subtitle": "80"
+		},
+		{
+			"title": "F20",
+			"arg": "90",
+			"subtitle": "90"
+		}
+	]
+}
