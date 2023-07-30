@@ -25,29 +25,4 @@ return {
 			}
 		end,
 	},
-	{ -- edit code blocks in their own buffer
-		"dawsers/edit-code-block.nvim",
-		cmd = { "EditCodeBlock", "EditCodeBlockSelection" },
-		main = "ecb",
-		opts = { wincmd = "split" },
-		init = function()
-			local u = require("config.utils")
-			vim.keymap.set("n", "<leader>e", function()
-				if vim.bo.filetype ~= "markdown" then
-					vim.notify("Only markdown codeblocks can be edited without a selection.", u.warn)
-					return
-				end
-				vim.cmd.EditCodeBlock()
-			end, { desc = " Edit Embedded Code Block" })
-
-			vim.keymap.set("x", "<leader>e", function()
-				local fts = { "bash", "applescript", "vim", "javascript" }
-				vim.ui.select(fts, { prompt = "Filetype:", kind = "simple" }, function(ft)
-					if not ft then return end
-					u.leaveVisualMode()
-					vim.cmd("'<,'>EditCodeBlockSelection " .. ft)
-				end)
-			end, { desc = " Edit Embedded Selection" })
-		end,
-	},
 }
