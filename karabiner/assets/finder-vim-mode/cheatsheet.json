@@ -113,12 +113,21 @@
         2
       ]
     },
-    "q (Q)\ncontext menu (share)",
-    "w (W)\nclose win (other wins)",
+    "q (Q)\nmenu (restart Finder)",
     {
       "f": 2
     },
-    "e\neject",
+    "w\nclose win",
+    {
+      "f": 1,
+      "fa": [
+        2
+      ]
+    },
+    "e (E)\nclose oth-er wins (eject)",
+    {
+      "f": 2
+    },
     "r\nreplicate",
     {
       "f": 1,
@@ -216,9 +225,13 @@
       "f": 2
     },
     "k (K)\nup <br>(6x)",
-    "l\nopen file / dir (and close)\n\n\n⌃l forw",
     {
-      "c": "#CCCCCC"
+      "f": 1
+    },
+    "l (L)\nopen file (new win)\n\n\n⌃l forw",
+    {
+      "c": "#CCCCCC",
+      "f": 2
     },
     "ö",
     "ä",
