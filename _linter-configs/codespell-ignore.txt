@@ -10,5 +10,8 @@ termine
 bu
 caf
 
+# vim command
+enew
+
 # actually a plugin name :S
 noice

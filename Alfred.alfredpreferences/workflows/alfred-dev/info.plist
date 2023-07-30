@@ -256,7 +256,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>alfred</string>
+				<string>alfred||cache</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -363,7 +363,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>alfred</string>
+				<string>alfred||data</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -672,11 +672,11 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>123</integer>
+				<integer>4</integer>
 				<key>hotmod</key>
-				<integer>12058624</integer>
+				<integer>524288</integer>
 				<key>hotstring</key>
-				<string>←</string>
+				<string>H</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
