@@ -124,7 +124,7 @@ function M.betterClose()
 	-- close buffers
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
 	if #openBuffers == 1 then
-		vim.notify("Only one buffer open.", vim.log.levels.WARN)
+		vim.notify("Only one buffer open.", vim.log.levels.TRACE)
 		return
 	end
 

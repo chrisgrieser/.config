@@ -351,7 +351,7 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 				<key>keyword</key>
 				<string>scratch</string>
 				<key>subtext</key>
-				<string></string>
+				<string>in neovide, from clipboard</string>
 				<key>text</key>
 				<string>Scratch File</string>
 				<key>withspace</key>

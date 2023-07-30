@@ -58,7 +58,7 @@ newCommand("Curl", function(ctx)
 	local lines = vim.split(response, "\n")
 	local ft = url:match("%.(%a)$") or "html"
 
-	cmd("en" .. "ew") -- separated due to unignorable codespell error…
+	cmd.enew()
 	a.nvim_buf_set_option(0, "filetype", ft)
 	a.nvim_buf_set_option(0, "buftype", "nowrite")
 	a.nvim_buf_set_name(0, "curl")
