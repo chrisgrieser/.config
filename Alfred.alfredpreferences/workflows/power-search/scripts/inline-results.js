@@ -55,7 +55,7 @@ function writeToFile(filepath, text) {
 /** @param {string} cachePath */
 function refreshKeywordCache(cachePath) {
 	const keywords = app
-		.doShellScript("cd .. && grep -r -A1 '<key>keyword' ./**/info.plist | awk 'NR % 3 == 2'")
+		.doShellScript("grep -A1 '<key>keyword' ../**/info.plist | awk 'NR % 3 == 2'")
 		.split("\r")
 		.reduce((acc, line) => {
 			const value = line.split(">")[1].split("<")[0];
@@ -71,14 +71,14 @@ function refreshKeywordCache(cachePath) {
 				try {
 					// `..` is already the Alfred preferences directory, so no need to `cd` there
 					const userKeyword = app.doShellScript(
-						`plutil -extract "${varName}" raw -o - "../${workflowPath}/prefs.plist"`,
+						`plutil -extract "${varName}" raw -o - "${workflowPath}/prefs.plist"`,
 					);
 					keywords.push(userKeyword);
 				} catch (_error) {
 					// CASE 1b: keywords where user kept the default value
 					const workflowConfig = JSON.parse(
 						app.doShellScript(
-							`plutil -extract "userconfigurationconfig" json -o - "../${workflowPath}/info.plist"`,
+							`plutil -extract "userconfigurationconfig" json -o - "${workflowPath}/info.plist"`,
 						),
 					);
 					const defaultValue = workflowConfig.find(
@@ -108,14 +108,19 @@ function refreshKeywordCache(cachePath) {
 			acc.push(...relevantKeywords);
 			return acc;
 		}, []);
-		// CASE 5: Web Searches
-		// TODO
-	const preInstalledSearches = app
-		.doShellScript("cd ../../preferences/features/websearch && find . -depth 2 -name 'prefs.plist'")
+	// CASE 5: Web Searches
+	// TODO
+	const webSearches = app
+		.doShellScript(
+			"grep --files-without-match 'disabled' ../../preferences/features/websearch/**/prefs.plist | " +
+				"xargs -I {} grep -A1 '<key>keyword' '{}' | grep '<string>'",
+		)
 		.split("\r")
 		.reduce((acc, line) => {
-			return acc
-		}, [])
+			const relativePath = line.slice(1); // remove leading `.`
+
+			return acc;
+		}, []);
 
 	// HACK remove keywords from this very workflow. Cannot be done based on the
 	// foldername, since Alfred assigns a unique ID to local installations. The
