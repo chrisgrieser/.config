@@ -7,6 +7,6 @@
 	<key>inline_results_to_fetch</key>
 	<string>7</string>
 	<key>log_location</key>
-	<string>/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/power-search.log</string>
+	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/search-log.log</string>
 </dict>
 </plist>

@@ -1,4 +1,0 @@
-# force shellcheck to work with zsh files
-shell=bash
-
-external-sources=true

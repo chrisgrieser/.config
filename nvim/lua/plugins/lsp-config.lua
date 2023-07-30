@@ -138,11 +138,11 @@ lspSettings.lemminx = {
 --------------------------------------------------------------------------------
 -- BASH / ZSH
 
--- filetype-adding for treesitter
+-- HACK make zsh files recognized as sh for bash-ls & treesitter
 vim.filetype.add {
 	extension = {
-		sh = "sh",
 		zsh = "sh",
+		sh = "sh", -- so .sh files with zsh-shebang still get sh filetype
 	},
 	filename = {
 		[".zshrc"] = "sh",
@@ -150,10 +150,9 @@ vim.filetype.add {
 	},
 }
 
--- forces bashls to work with zsh files
--- lspFiletypes.bashls = { "zsh", "bash", "sh" }
-
--- CAVEAT: various versions of setting shellcheck args for bashls does not work.
+-- CAVEAT: various attempts of setting shellcheck args for bashls does not work,
+-- apparently because bash-ls blocks them due to the zsh-shebang, regardless of
+-- filetype defined by nvim.
 -- Therefore using shellcheck via null-ls, since there enforcing the shell via
 -- `--shell=bash` does work.
 

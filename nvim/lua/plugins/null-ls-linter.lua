@@ -43,11 +43,14 @@ local function nullSources()
 
 		-- SHELL
 		builtins.formatting.shfmt,
-		-- builtins.diagnostics.shellcheck.with {
-		-- 	-- extra_args = { "--shell", "bash" },
-		-- 	-- filetypes = { "sh", "zsh" },
-		-- },
-		-- builtins.code_actions.shellcheck,
+		builtins.diagnostics.shellcheck.with {
+			extra_args = { "--shell", "bash" },
+			filetypes = { "sh", "zsh" },
+		},
+		builtins.code_actions.shellcheck.with{
+			extra_args = { "--shell", "bash" },
+			filetypes = { "sh", "zsh" },
+		},
 
 		-- JS/TS/JSON
 		builtins.formatting.rome, -- not available via LSP yet
