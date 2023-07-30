@@ -141,3 +141,4 @@ through
 Kanban
 autocmds
 functionality
+non-continious
