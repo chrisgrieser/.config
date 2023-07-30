@@ -14,6 +14,7 @@ declare class macAppObj {
 	activate(): void;
 	quit(): void;
 	launch(): void;
+	properties(): object; // inspect all properties
 
 	menuBars: {
 		menuBarItems: {
@@ -46,8 +47,8 @@ declare class finderItem {
 	kind: string;
 	size: number;
 	url: string; // file-url, contains file-path
+	properties(): object; // inspect all properties
 }
-
 
 // https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html
 declare type PathObj = {
@@ -95,7 +96,7 @@ declare const Application: {
 		};
 	};
 	(name: "System Events"): macAppObj & {
-		aliases: finderItem[]; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
+		aliases: object; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
 		keystroke(key: string, modifiers?: { using: string[] });
 		keyCode(keycode: number, modifiers?: { using: string[] });
 		// rome-ignore lint/suspicious/noExplicitAny: later
@@ -112,12 +113,13 @@ declare const Application: {
 	};
 	(name: "Finder"): macAppObj & {
 		// PathObj and finderItems are not the same, but are apparently both accepted
-		exists(path: PathObj | finderItem): boolean;
-		open(path: PathObj | finderItem): void;
-		reveal(path: PathObj | finderItem): void;
-		select(path: PathObj | finderItem | PathObj[] | finderItem[]): void;
-		selection(): finderItem[];
-		finderWindows: undefined | { target: finderItem }; // undefined if Finder is not fromtmost
+		exists(path: PathObj): boolean;
+		open(path: PathObj): void;
+		reveal(path: PathObj): void;
+		// accepts arrays only for *files*?! https://github.com/chrisgrieser/finder-vim-mode/issues/3
+		select(path: PathObj | PathObj[]): void; 
+		selection(): PathObj[];
+		finderWindows: { target: finderItem };
 	};
 	(name: "SideNotes"): macAppObj & {
 		currentNote(): SideNotesNote;
@@ -150,7 +152,7 @@ declare const Application: {
 //──────────────────────────────────────────────────────────────────────────────
 
 declare const ObjC: {
-	import: (package: "stdlib" | "Foundation"| "AppKit") => void;
+	import: (package: "stdlib" | "Foundation" | "AppKit") => void;
 	unwrap: (string: string) => string;
 };
 

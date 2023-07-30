@@ -89,6 +89,6 @@ return {
 
 	-- Syntax Highlighting Plugins
 	{ "mityu/vim-applescript", ft = "applescript" },
-	{ "hail2u/vim-css3-syntax", ft = "css" }, -- https://github.com/tree-sitter/tree-sitter-css/issues/34
+	{ "hail2u/vim-css3-syntax", ft = "css" }, -- FIX https://github.com/tree-sitter/tree-sitter-css/issues/34
 	{ "MTDL9/vim-log-highlighting", ft = "log" },
 }

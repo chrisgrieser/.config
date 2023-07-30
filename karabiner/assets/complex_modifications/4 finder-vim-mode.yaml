@@ -428,10 +428,12 @@ rules:
                 if (!finder.finderWindows) then return end
                 const win = finder.finderWindows[0].target;
                 const winPath = decodeURIComponent(win.url().slice(7));
-                const taggedFiles = app
+                const taggedItems = app
                   .doShellScript (`mdfind -onlyin "${winPath}" "kMDItemUserTags == vim-mark"`)
                   .split("\r")
+                  .filter( path => Application("System Events").byName(wd + "untitled folder copy").kind() !== "Folder")
                   .map(path => Path(path));
+                const taggedFiles = taggedItems.map(item => item.kind !== "folder");
                 if (taggedFiles.length === 0) then return end
                 try {
                   finder.select(taggedFiles);
