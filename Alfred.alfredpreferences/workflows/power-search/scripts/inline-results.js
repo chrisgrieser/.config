@@ -54,8 +54,10 @@ function writeToFile(filepath, text) {
 // PERF Saving keywords in a cache saves ~250ms for me (50+ workflows, 180+ keywords)
 /** @param {string} cachePath */
 function refreshKeywordCache(cachePath) {
+	const timelogStart = +new Date();
+
 	const keywords = app
-		.doShellScript("grep -A1 '<key>keyword' ../**/info.plist | awk 'NR % 3 == 2'")
+		.doShellScript("grep -A1 '<key>keyword' ../**/info.plist | grep '<string>'")
 		.split("\r")
 		.reduce((acc, line) => {
 			const value = line.split(">")[1].split("<")[0];
@@ -108,19 +110,25 @@ function refreshKeywordCache(cachePath) {
 			acc.push(...relevantKeywords);
 			return acc;
 		}, []);
-	// CASE 5: Web Searches
-	// TODO
-	const webSearches = app
+	// CASE 5: Pre-installed Searches
+	app
 		.doShellScript(
 			"grep --files-without-match 'disabled' ../../preferences/features/websearch/**/prefs.plist | " +
 				"xargs -I {} grep -A1 '<key>keyword' '{}' | grep '<string>'",
 		)
 		.split("\r")
-		.reduce((acc, line) => {
-			const relativePath = line.slice(1); // remove leading `.`
-
-			return acc;
-		}, []);
+		.forEach((line) => {
+			const searchKeyword = line.split(">")[1].split("<")[0];
+			keywords.push(searchKeyword);
+		});
+	// CASE 6: User Searches
+	const userSearches = JSON.parse(
+		app.doShellScript("plutil -convert json ../../preferences/features/websearch/prefs.plist -o -"),
+	).customSites;
+	Object.keys(userSearches).forEach((uuid) => {
+		const searchObj = userSearches[uuid];
+		if (searchObj.enabled) keywords.push(searchObj.keyword);
+	});
 
 	// HACK remove keywords from this very workflow. Cannot be done based on the
 	// foldername, since Alfred assigns a unique ID to local installations. The
@@ -136,7 +144,9 @@ function refreshKeywordCache(cachePath) {
 		.join("")
 		.split(","); // back to array
 	const uniqueKeywords = [...new Set(trueKeywords)];
-	console.log(`Rebuilt cache: ${uniqueKeywords.length} keywords.`);
+
+	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
+	console.log(`Rebuilt cache: ${uniqueKeywords.length} keywords, ${durationTotalSecs}s`);
 	writeToFile(cachePath, JSON.stringify(uniqueKeywords));
 }
 

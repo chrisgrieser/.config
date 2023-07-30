@@ -50,30 +50,31 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
-	{ -- Diagnostic Virtual Text at the top right, not at EoL
-		"dgagn/diagflow.nvim",
-		event = "VeryLazy",
-		opts = {
-			max_width = 35,
-			max_height = 3,
-			scope = "line", -- cursor|line
-			placement = "top", -- top|inline
-			text_align = "left", -- left|right
-			gap_size = 1,
-			padding_top = 0,
-			padding_right = 2, -- for scrollbar
-			update_event = { "BufReadPost", "InsertLeave", "DiagnosticChanged" },
-			toggle_event = { "InsertEnter" },
-			show_sign = true,
-			severity_colors = { -- virtual text hlgroups have background in most themes
-				error = "DiagnosticVirtualTextError",
-				warning = "DiagnosticVirtualTextWarning",
-				info = "DiagnosticVirtualTextInfo",
-				hint = "DiagnosticVirtualTextHint",
-			},
-			format = function(diag) return u.diagnosticFmt(diag) end,
-		},
-	},
+	-- TODO pending bugfixes
+	-- { -- Diagnostic Virtual Text at the top right, not at EoL
+	-- 	"dgagn/diagflow.nvim",
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		max_width = 35,
+	-- 		max_height = 3,
+	-- 		scope = "line", -- cursor|line
+	-- 		placement = "top", -- top|inline
+	-- 		text_align = "left", -- left|right
+	-- 		gap_size = 1,
+	-- 		padding_top = 0,
+	-- 		padding_right = 2, -- for scrollbar
+	-- 		update_event = { "BufReadPost", "InsertLeave", "DiagnosticChanged" },
+	-- 		toggle_event = { "InsertEnter" },
+	-- 		show_sign = true,
+	-- 		severity_colors = { -- virtual text hlgroups have background in most themes
+	-- 			error = "DiagnosticVirtualTextError",
+	-- 			warning = "DiagnosticVirtualTextWarning",
+	-- 			info = "DiagnosticVirtualTextInfo",
+	-- 			hint = "DiagnosticVirtualTextHint",
+	-- 		},
+	-- 		format = function(diag) return u.diagnosticFmt(diag) end,
+	-- 	},
+	-- },
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",
 		cmd = "Glance",
