@@ -21,8 +21,16 @@ return {
 		keys = ":",
 		config = true,
 	},
+
+	-----------------------------------------------------------------------------
+
+	-- hello, this is some text I am typing here. How are you doing? I am fine
+
+	-----------------------------------------------------------------------------
+
 	{ -- better % (highlighting, matches across lines, match quotes)
 		"andymass/vim-matchup",
+		enabled = false,
 		lazy = false, -- cannot be properly lazy-loaded
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()

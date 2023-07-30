@@ -3,8 +3,8 @@
 mode="$*"
 
 if [[ "$mode" == "killall" ]]; then
-	killall neovide nvim osascript
-	osascript -e 'display notification "" with title "⚔️ Killed all nvim-related processes."'
+	killall neovide nvim
+	osascript -e 'display notification "" with title "⚔️ Killed nvim & neovide processes."'
 elif [[ "$mode" == "signal" ]]; then
 	nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>echo 'ping'<CR>"
 elif [[ "$mode" == "report" ]]; then

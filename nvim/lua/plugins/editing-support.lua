@@ -122,10 +122,15 @@ return {
 		"folke/which-key.nvim",
 		config = function()
 			require("which-key").setup {
-				plugins = { presets = { motions = false, g = false, z = false } },
-				triggers_blacklist = { n = { "y" } }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
-				-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
+				plugins = {
+					presets = { motions = false, g = false, z = false },
+					spelling = { enabled = false },
+				},
+				triggers_blacklist = {
+					-- n = { "y" }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
+				},
 				hidden = { "<Plug>", "^:lua ", "<cmd>" },
+				-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
 				key_labels = { -- seems these are not working?
 					["<CR>"] = "↵ ",
 					["<BS>"] = "⌫",
