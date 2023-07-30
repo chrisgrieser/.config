@@ -20,14 +20,13 @@ local lsp_servers = {
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
 	"rome", -- js/ts/json – formatting capability needs to be provided via null-ls
-	-- TODO ast-grep https://ast-grep.github.io/guide/editor-integration.html
 }
 
 --------------------------------------------------------------------------------
 -- LUA
-
 -- https://github.com/LuaLS/lua-language-server/wiki/Annotations#annotations
 -- https://github.com/LuaLS/lua-language-server/wiki/Settings
+
 lspSettings.lua_ls = {
 	Lua = {
 		completion = {
@@ -53,14 +52,14 @@ lspSettings.lua_ls = {
 }
 
 --------------------------------------------------------------------------------
--- Emmet
+-- EMMET
 -- don't pollute completions for js and ts with stuff I don't need
 lspFiletypes.emmet_ls = { "css", "html" }
 
 --------------------------------------------------------------------------------
 -- CSS
-
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
+
 lspSettings.cssls = {
 	css = {
 		lint = {
@@ -79,8 +78,8 @@ lspSettings.cssls = {
 
 --------------------------------------------------------------------------------
 -- TSSERVER
-
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
+
 lspSettings.tsserver = {
 	completions = { completeFunctionCalls = true },
 	diagnostics = {
@@ -124,6 +123,16 @@ end
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
 lspSettings.jsonls = {
 	json = { format = { enable = false } }, -- taken care of by rome
+}
+
+--------------------------------------------------------------------------------
+-- XML/PLIST
+-- https://github.com/eclipse/lemminx/blob/main/docs/Configuration.md#all-formatting-options
+lspSettings.lemminx = {
+	xml = {
+		-- disabled, since it messes up some formatting Alfred .plist files
+		format = { enabled = false },
+	},
 }
 
 --------------------------------------------------------------------------------

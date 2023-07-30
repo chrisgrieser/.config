@@ -134,7 +134,7 @@ anchors:
 rules:
   - description: "Finder Vim Controls"
     manipulators:
-      # hjkl, LH
+      # hjkl
       - type: basic
         from: { key_code: j }
         to: # no to_if_alone since it blocks repeat
@@ -145,26 +145,29 @@ rules:
         to: # no to_if_alone since it blocks repeat
           - key_code: up_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # goto parent
+      # h: goto parent
       - type: basic
         from: { key_code: h }
         to_if_alone:
-          - key_code: up_arrow
-            modifiers: [command]
+          - { key_code: up_arrow, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # H: parent, in new window
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [shift] } }
         to_if_alone:
-          - key_code: up_arrow
-            modifiers: [command, control]
+          - { key_code: up_arrow, modifiers: [command, control] }
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      # l: open
+      - type: basic
+        from: { key_code: l }
+        to_if_alone:
+          - { key_code: o, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # L: open & close win
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [shift] } }
         to_if_alone:
-          - key_code: o
-            modifiers: [command, option]
+          - { key_code: o, modifiers: [command, option] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # gg, G, J, K
       - type: basic
