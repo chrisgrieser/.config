@@ -99,7 +99,7 @@ function run() {
 		});
 
 	return JSON.stringify({
-		rerun: 0.1, // needed for Alfred looping on actions
+		rerun: 0.2, // needed for Alfred looping on actions
 		skipknowledge: true, // so Alfred does not change order on looping
 		variables: { repo: repoPath },
 		items: unstagesArr,
