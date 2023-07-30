@@ -164,14 +164,22 @@ rules:
         to_if_alone:
           - { key_code: up_arrow, modifiers: [command, control] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # L: open in new window
+      # L: open; if folder in new window
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - shell_command: |
               osascript -e '
-                
-              '
+                tell application "Finder"
+                  if (selection is {}) then
+                    display notification "" with title "⚠️ No selection" subtitle "Finder Vim Mode"
+                    beep
+                  else
+                    repeat with aFolder in (selection as list)
+                      open aFolder
+                    end repeat
+                  end if
+                end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # J: 6j
       - type: basic
@@ -195,7 +203,7 @@ rules:
           - key_code: up_arrow
           - key_code: up_arrow
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # g(g), G, 
+      # g(g), G,
       - type: basic
         from: { key_code: g }
         to:
@@ -242,7 +250,7 @@ rules:
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-        # Switch Directory
+        # Switch Directory (for people using regular shortcuts)
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [command, shift] } }
         to:
@@ -258,6 +266,7 @@ rules:
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+        # Search (for people using regular shortcuts)
       - type: basic
         from: { key_code: f, modifiers: { mandatory: [command] } }
         to:
@@ -356,7 +365,12 @@ rules:
         from: { key_code: l, modifiers: { mandatory: [command] } }
         to: [{ key_code: l, modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
         conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      # Abort
+
+      #─────────────────────────────────────────────────────────────────────────
+      #─────────────────────────────────────────────────────────────────────────
+
+      # ABORT INSERT MODE
+      # Hyper
       - type: basic
         from: { key_code: caps_lock }
         to_if_alone:
@@ -367,10 +381,13 @@ rules:
           - *end-menu
           - *end-move
           - *remove-move-notice
+          - *leave-find-mode
+          - *remove-find-notice
         to:
           - key_code: right_shift
             modifiers: [command, control, option] # keep hyper binding
         conditions: [*finder-or-alfred-app]
+      # regular Esc
       - type: basic
         from: { key_code: escape }
         to:
@@ -381,16 +398,10 @@ rules:
           - *end-menu
           - *end-move
           - *remove-move-notice
+          - *leave-find-mode
+          - *remove-find-notice
         conditions: [*finder-or-alfred-app]
         # Closing window or quitting/restarting Finder should also disable Insert mode
-      - type: basic
-        from: { key_code: w, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: w, modifiers: [command] }
-          - *remove-insert-notice
-          - *leave-insert-mode
-          - *end-menu
-        conditions: [*finder-app, *alfred-inactive]
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
@@ -398,6 +409,8 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-menu
+          - *leave-find-mode
+          - *remove-find-notice
         conditions: [*finder-app, *alfred-inactive]
       # Q: Restart Finder
       - type: basic
@@ -407,10 +420,18 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-menu
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open, *alfred-inactive]
+      - type: basic
+        from: { key_code: w, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: w, modifiers: [command] }
+          - *remove-insert-notice
+          - *leave-insert-mode
+          - *end-menu
         conditions: [*finder-app, *alfred-inactive]
       #─────────────────────────────────────────────────────────────────────────
       # Window & Tabs
-      # w = close window/tab
+      # w (or cmd+w) = close window/tab
       - type: basic
         from: { key_code: w }
         to:
@@ -527,7 +548,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # close context menu with q
       - type: basic
-        from: { key_code: q}
+        from: { key_code: q }
         to_if_alone:
           - key_code: escape
           - *end-menu
@@ -874,18 +895,6 @@ rules:
           - *enter-find-mode
           - *find-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      - type: basic
-        from: { key_code: caps_lock }
-        to_if_alone:
-          - *leave-find-mode
-          - *remove-find-notice
-        conditions: [*finder-app, *is-find-mode]
-      - type: basic
-        from: { key_code: escape }
-        to:
-          - *leave-find-mode
-          - *remove-find-notice
-        conditions: [*finder-app, *is-find-mode]
       # One-Char-Searches
       - type: basic
         from: { key_code: a, modifiers: { optional: [shift] } }
