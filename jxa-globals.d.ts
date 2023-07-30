@@ -45,9 +45,12 @@ declare class finderItem {
 	nameExtension: string;
 	kind: string;
 	size: number;
+	url: string; // file-url, contains file-path
 }
 
-declare function Path(filepath: string): object;
+// rome-ignore lint/suspicious/noExplicitAny: no idea how to see the actual type
+declare type PathObj = any;
+declare function Path(filepath: string): PathObj;
 
 declare const Application: {
 	currentApplication: () => {
@@ -105,13 +108,14 @@ declare const Application: {
 		};
 	};
 	(name: "Finder"): macAppObj & {
-		// INFO paths need to be wrapped for Finder: `Path(str)`
-		exists(wrappedPath: object): boolean;
-		open(wrappedPath: object): void;
-		reveal(wrappedPath: object): void;
-		selection(): object[];
+		// PathObj and finderItems are not the same, but are apparently both accepted
+		exists(path: PathObj | finderItem): boolean;
+		open(path: PathObj | finderItem): void;
+		reveal(path: PathObj | finderItem): void;
+		select(path: PathObj | finderItem | PathObj[] | finderItem[]): void;
+		selection(): finderItem[];
 		finderWindows: {
-			target: { url: () => string };
+			target: finderItem; // the obj the finder is pointing too
 		};
 	};
 	(name: "SideNotes"): macAppObj & {
