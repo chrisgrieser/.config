@@ -57,13 +57,11 @@ return {
 		end,
 	},
 	{ -- editable quickfix list
-		-- my fork, pending on PR: https://github.com/gabrielpoca/replacer.nvim/pull/12
 		"gabrielpoca/replacer.nvim",
+		opts = { rename_files = false },
 		keys = {
-			-- stylua: ignore
-			{ "<leader>fq", function() require("replacer").run { rename_files = true } end, desc = "󱗘  replacer.nvim" },
+			{ "<leader>fq", function() require("replacer").run() end, desc = "󱗘  replacer.nvim" },
 		},
-		-- add keymaps for quicker closing + confirmation
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "replacer",
