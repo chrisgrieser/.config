@@ -152,7 +152,7 @@
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
-				<false/>
+				<true/>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
@@ -198,7 +198,7 @@ echo -n "$title"</string>
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
-				<false/>
+				<true/>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -336,7 +336,7 @@ echo -n "$title"</string>
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
-				<false/>
+				<true/>
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>

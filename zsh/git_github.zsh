@@ -139,14 +139,6 @@ function gli() {
 # - offers to delete local repo
 function pr() {
 	if ! command -v gh &>/dev/null; then printf "\033[1;33mgh not installed.\033[0m" && return 1; fi
-	if ! command -v fzf &>/dev/null; then printf "\033[1;33mfzf not installed.\033[0m" && return 1; fi
-
-	# settings
-	echo "Web interface or Terminal?"
-	mode=$(printf "Web Interface\nTerminal" |
-		fzf --bind="j:down,k:up" --no-sort --no-info --height="4" \
-			--layout=reverse-list --header="j:↓  k:↑")
-	echo
 
 	# get and validate commit msg
 	if [[ -z "$*" ]]; then
@@ -164,20 +156,9 @@ function pr() {
 	fi
 
 	git add . && git commit -m "$msg"
-	current_branch=$(git branch --show-current)
 
-	# create PR into current branch (not the default branch)
-	if [[ "$mode" == "Web Interface" ]]; then
-		gh pr create --web --fill --base="$current_branch"
-	else # Terminal
-		gh pr create --fill --base="$current_branch"
-		if [[ $? -eq 0 ]] ; then
-			print "\033[1;32mPR created.\033[0m"
-			origin=$(git remote -v | grep "upstream" | head -n1 | cut -d: -f2 | cut -d. -f1)
-			gh repo set-default "$origin"
-			gh pr view --web || print "\033[1;33mCould not open web view.\033[0m"
-		fi
-	fi
+	current_branch=$(git branch --show-current)
+	gh pr create --web --fill --base="$current_branch"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -188,11 +169,9 @@ function gb() {
 	local selected
 
 	selected=$(
-		git branch --all --color | grep -v "HEAD" | fzf \
-			--ansi \
-			--no-info \
-			--height=40% \
-			--header-first --header="↵ : Checkout Branch"
+		git branch --all --color | grep -v "HEAD" | 
+			fzf --ansi --no-info --height=40% \
+				--header-first --header="↵ : Checkout Branch"
 	)
 	[[ -z "$selected" ]] && return 0
 	selected=$(echo "$selected" | tr -d "* ")
@@ -248,7 +227,7 @@ function acp() {
 		return 1
 	fi
 
-	local commit_msg="$*" # this allows to write messages without quotes, since I am lazy
+	local commit_msg="$*" # $* allows to write messages without quotes, since I am lazy
 	[[ -z "$commit_msg" ]] && commit_msg="chore"
 
 	# ensure no overlength of commit msg
@@ -305,7 +284,8 @@ function nuke {
 	echo "Cloning repo again from remote… (with depth 5)"
 	printf "-----------------------------------------------\n\033[0m"
 
-	git clone --depth=5 "$SSH_REMOTE" "$local_repo_path" && cd "$local_repo_path" || return 1
+	git clone --depth=5 "$SSH_REMOTE" "$local_repo_path" && 
+		cd "$local_repo_path" || return 1
 	separator
 }
 
