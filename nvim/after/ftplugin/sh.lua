@@ -5,12 +5,6 @@ local u = require("config.utils")
 
 u.applyTemplateIfEmptyFile("zsh")
 
--- hover -> man page
--- stylua: ignore
-keymap("n", "<leader>h", function()
-	return "<cmd>tab Man " .. expand("<cword>") .. "<CR>"
-end, { desc = "  Man page in new tab", buffer = true, expr = true })
-
 -- pipe textobj
 --stylua: ignore
 keymap({ "o", "x" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { desc = "󱡔 inner shellPipe textobj", buffer = true })

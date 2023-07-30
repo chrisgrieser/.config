@@ -19,19 +19,20 @@ function httpRequest(url) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const query = argv[0];
-	if (query.match(/^\s*$/)) return; // don't run for empty query
-	const apiURL = `https://api.github.com/search/repositories?q=${query}`;
+	const query = argv[0] || "";
+	if (!query) return;
+	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
 
 	const jsonArray = JSON.parse(httpRequest(apiURL))
 		.items.filter((/** @type {{ fork: boolean; archived: boolean; }} */ repo) => !(repo.fork || repo.archived))
 		.map((/** @type {{ full_name: string; updated_at: string | number | Date; stargazers_count: any; description: string; html_url: any; open_issues: any; }} */ repo) => {
 			const name = repo.full_name.split("/")[1];
 
+			// calculate relative date
 			const daysAgo = Math.ceil((+new Date() - +new Date(repo.updated_at)) / 1000 / 3600 / 24);
 			let updated =
 				daysAgo < 31 ? daysAgo.toString() + " days ago" : Math.ceil(daysAgo / 30).toString() + " months ago";
-			if (updated.startsWith("1 ")) updated = updated.replace("s ago", " ago"); // remove plural "s"
+			if (updated.startsWith("1 ")) updated = updated.replace("s ago", " ago");
 
 			let subtitle = `★ ${repo.stargazers_count} – ${updated}`;
 			if (repo.description) subtitle += " – " + repo.description;
