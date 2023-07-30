@@ -48,8 +48,11 @@ declare class finderItem {
 	url: string; // file-url, contains file-path
 }
 
-// rome-ignore lint/suspicious/noExplicitAny: no idea how to see the actual type
-declare type PathObj = any;
+
+// https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html
+declare type PathObj = {
+	toString(): string;
+};
 declare function Path(filepath: string): PathObj;
 
 declare const Application: {
