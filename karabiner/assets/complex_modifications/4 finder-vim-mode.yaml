@@ -481,11 +481,12 @@ rules:
                 const win = finder.finderWindows[0].target;
                 const winPath = decodeURIComponent(win.url().slice(7));
                 const taggedFiles = app
-                  .doShellScript (`mdfind -onlyin "${winPath}" "kMDItemUserTags == vim-mode-selection"`)
+                  .doShellScript (`mdfind -onlyin "${winPath}" "kMDItemUserTags == vim-mark"`)
                   .split("\r")
                   .map(path => Path(path));
                 finder.select(taggedFiles);
               '
+          - { key_code: "1", modifiers: [control] } # untag the files
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # q = right-click / Context Menu
@@ -1144,7 +1145,7 @@ rules:
       # NUMBER KEYS: TOGGLE TAGS
       # https://support.apple.com/guide/mac-help/tag-files-and-folders-mchlp15236/mac
       - type: basic
-        from: { key_code: "1" }
+        from: { key_code: "1" } # ! used as mark
         to:
           - { key_code: "1", modifiers: [control] }
           - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &

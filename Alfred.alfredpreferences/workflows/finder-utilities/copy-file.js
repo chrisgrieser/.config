@@ -13,5 +13,6 @@ function copyPathToClipboard(path) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const path = argv[0];
+  console.log("path:", path);
 	copyPathToClipboard(path);
 }

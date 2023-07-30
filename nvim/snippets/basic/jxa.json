@@ -34,13 +34,28 @@
 			"app.includeStandardAdditions = true;"
 		]
 	},
-	"open location": {
-		"prefix": "open location",
+	"open location (url)": {
+		"prefix": "open location (url)",
 		"body": "app.openLocation(\"${1:url}\");"
 	},
-	"set clipboard": {
-		"prefix": "set clipboard",
+	"set clipboard (string)": {
+		"prefix": "set clipboard (string)",
 		"body": "app.setTheClipboardTo(\"${1:str}\");"
+	},
+	"set clipboard (file)": {
+		"prefix": "set clipboard (file)",
+		"body": [
+			"ObjC.import(\"AppKit\");",
+			"",
+			"/** @param {string} path */",
+			"function copyPathToClipboard(path) {",
+			"\tconst pasteboard = $.NSPasteboard.generalPasteboard;",
+			"\tpasteboard.clearContents;",
+			"\tconst success = pasteboard.setPropertyListForType($([path]), $.NSFilenamesPboardType);",
+			"\treturn success;",
+			"}"
+		],
+		"description": "https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/User-Interaction-with-Files-and-Folders#copy-a-file-to-pasteboard"
 	},
 	"home (JXA)": {
 		"prefix": "home (JXA)",

@@ -51,7 +51,7 @@ rules:
               else
                 open -a "$FRONT_APP"
               fi
-      # Restart Alfred
+      # Restart Alfred & Alfred Preferences
       - type: basic
         from: { key_code: "5", modifiers: { mandatory: [command, control, shift, option] } }
         to:
@@ -63,6 +63,7 @@ rules:
               sleep 0.1
               open -a "Alfred 5"
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
+              open -a "Alfred Preferences"
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Insert Mode Vim: ⇪ Hyper + hjklio<space> → ⌫←↓↑→"
     manipulators:
