@@ -15,6 +15,16 @@
 		],
 		"description": "Make Alfred Match CamelCase Results. https://www.alfredapp.com/help/workflows/inputs/script-filter/json/"
 	},
+	"matcher (simple)": {
+		"prefix": "matcher (simple)",
+		"body": [
+			"/** @param {string} str */",
+			"function alfredMatcher(str) {",
+			"\tconst clean = str.replace(/[-()_.:#/\\\\\\;,[\\]]/g, \" \");",
+			"\treturn [clean, str].join(\" \") + \" \";",
+			"}"
+		]
+	},
 	"Get Alfred Env": {
 		"prefix": "Get Alfred Env",
 		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\");"

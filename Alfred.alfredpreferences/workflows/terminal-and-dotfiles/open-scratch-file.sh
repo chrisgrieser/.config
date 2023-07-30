@@ -1,9 +1,12 @@
 #!/usr/bin/env zsh
 
-touch "$WD/scratch.txt" # WD defined in .zshenv
-open "$WD/scratch.txt"
-
-sleep 0.2 # wait till file open
+if pgrep -xq "neovide"; then
+	nvim --server "/tmp/nvim_server.pipe"
+	osascript -e 'tell application "Neovide" to activate'
+else
+	neovide --geometry=104x33 --notabs "$@" &
+	disown # https://stackoverflow.com/a/20338584/22114136
+fi
 
 # paste from system clipboard
 nvim --server "/tmp/nvim_server.pipe" --remote-send '"+p'
