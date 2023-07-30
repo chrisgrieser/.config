@@ -48,6 +48,7 @@ local function addCssSelectorLeadingDot()
 end
 
 NeovideWatcher = aw.new(function(appName, eventType, neovide)
+	if not appName then return end
 	if appName:lower() == "neovide" and eventType == aw.activated then
 		addCssSelectorLeadingDot()
 		obsidianThemeDevHelper(neovide:mainWindow())

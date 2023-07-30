@@ -1073,7 +1073,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Inline Search Results without keyword and other smart search utilities</string>
+	<string>Search for the Power User. Search Results in Alfred, without a keyword.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -2800,22 +2800,28 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string># Requirements
+	<string># Hyper Seek
+Search for the Power User. Search Results in Alfred, *without a keyword*. Multi-select results to open. 
+
+---
+
+## ℹ️ Requirements
 [ddgr](https://github.com/jarun/ddgr) is required. You can install it via: `brew install ddgr`
 
 ---
 
-## Actions on inline results 
-- &lt;kbd&gt;⏎&lt;/kbd&gt;: Search for Term / open URL. 
-- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Multi-Select: Mark the URL. The next &lt;kbd&gt;⏎&lt;/kbd&gt; will open the selected result as well as all previously marked URLs. 
+## Inline results (without a keyword!)
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: Search for the query term, or open result.
+- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Multi-Select: (de)select the URL. The next &lt;kbd&gt;⏎&lt;/kbd&gt; will open the selected result as well as all previously marked URLs. 
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy URL. 
-- &lt;kbd&gt;⇧&lt;/kbd&gt; (or &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt;): Show preview text of search result. 
+- &lt;kbd&gt;⇧&lt;/kbd&gt; (hold): Show preview text of search result. 
 
-__Recommendations__
+**Recommendations**
 - Add this workflow as [fallback search](https://www.alfredapp.com/help/features/default-results/fallback-searches/). 
 - In the [Alfred Advanced Settings](https://www.alfredapp.com/help/advanced/), set &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; to `Action all visible results`. This allows you to open all search results at once. 
 
-## Global search hotkey Selection is… 
+## Global search hotkey 
+Selection is… 
 - file path → reveal file in Finder 
 - directory path → open directory in Finder 
 - url → open in default browser 
@@ -3327,7 +3333,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.13</string>
+	<string>0.14</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -36,7 +36,8 @@ function inspect() {
 	fi
 
 	# FILES
-	# columns needs to be set, since exa print as --oneline if piped https://github.com/ogham/exa/issues/522
+	# columns needs to be set, since exa print as `--oneline` if piped 
+	# https://github.com/ogham/exa/issues/522
 	local exa_output terminal_width
 	terminal_width=$(tput cols)
 	exa_output=$(export COLUMNS=$terminal_width && exa --all --grid --color=always \
@@ -46,7 +47,6 @@ function inspect() {
 		print "\033[1;34m(…)\033[0m" # blue = exa's default folder color
 	else
 		[[ -n "$exa_output" ]] && echo "$exa_output"
-		echo
 	fi
 }
 
@@ -67,10 +67,7 @@ function o() {
 	# --delimiter and --nth options ensure only file name and parent folder are displayed
 	selected=$(
 		fd --type=file --type=symlink --hidden --color=always | fzf \
-			-0 -1 \
-			--ansi \
-			--query="$input" \
-			--info=inline \
+			-0 -1 --ansi --query="$input" --info=inline \
 			--preview 'bat --color=always --style=snip --wrap=never --tabs=2 {}'
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted
