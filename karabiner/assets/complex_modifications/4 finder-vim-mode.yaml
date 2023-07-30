@@ -6,19 +6,12 @@ anchors:
       - &finder-app
         type: frontmost_application_if
         bundle_identifiers: [^com\.apple\.finder$]
-      - &finder-or-alfred-app # for Alfred Compatibility Mode
-        type: frontmost_application_if
-        bundle_identifiers:
-          - ^com\.runningwithcrayons\.Alfred$
-          - ^com\.apple\.finder$
       - &is-German-keyboard
         type: input_source_if
-        input_sources:
-          - language: ^de$
+        input_sources: [language: ^de$]
       - &not-German-keyboard
         type: input_source_unless
-        input_sources:
-          - language: ^de$
+        input_sources: [language: ^de$]
       - &is-insert-mode
         type: variable_if
         name: FINDER_INSERT_MODE
@@ -34,14 +27,6 @@ anchors:
       - &not-find-mode
         type: variable_unless
         name: FINDER_FIND_MODE
-        value: true
-      - &alfred-active
-        type: variable_if
-        name: FINDER_ALFRED_ACTIVE
-        value: true
-      - &alfred-inactive
-        type: variable_unless
-        name: FINDER_ALFRED_ACTIVE
         value: true
       - &move-active
         type: variable_if
@@ -104,14 +89,6 @@ anchors:
         set_notification_message:
           id: move-notice
           text: "✂️  Move active"
-      - &start-alfred
-        set_variable:
-          name: FINDER_ALFRED_ACTIVE
-          value: true
-      - &end-alfred
-        set_variable:
-          name: FINDER_ALFRED_ACTIVE
-          value: false
       - &start-move
         set_variable:
           name: FINDER_MOVE_ACTIVE
@@ -274,14 +251,6 @@ rules:
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # Alfred: so you can insert text in Alfred/Spotlight while Finder is frontmost
-      - type: basic
-        from: { key_code: spacebar, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: spacebar, modifiers: [command] }
-          - *enter-insert-mode
-          - *start-alfred
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # LEAVE INSERT MODE
       # Confirm Insert Mode
       - type: basic
@@ -290,86 +259,22 @@ rules:
           - key_code: return_or_enter
           - *remove-insert-notice
           - *leave-insert-mode
-          - *end-alfred
-        conditions: [*finder-or-alfred-app, *is-insert-mode]
-      # Confirm Alfred Mode with various modifiers
+        conditions: [*finder-app, *is-insert-mode]
+      # Opening Alfred/Raycast/Spotlight cancels renaming and context menu, 
+      # so the respective modes have to be aborter here as well
       - type: basic
-        from: { key_code: return_or_enter, modifiers: { mandatory: [control] } }
+        from: { key_code: spacebar, modifiers: { mandatory: [command] } }
         to:
-          [{ key_code: return_or_enter, modifiers: [control] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: return_or_enter, modifiers: { mandatory: [command] } }
-        to:
-          [{ key_code: return_or_enter, modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: return_or_enter, modifiers: { mandatory: [shift] } }
-        to: [{ key_code: return_or_enter, modifiers: [shift] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: return_or_enter, modifiers: { mandatory: [option] } }
-        to: [{ key_code: return_or_enter, modifiers: [option] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: return_or_enter, modifiers: { mandatory: [fn] } }
-        to: [{ key_code: return_or_enter, modifiers: [fn] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic # Hyper+return
-        from: { key_code: return_or_enter, modifiers: { mandatory: [command, control, option, shift] } }
-        to:
-          [
-            { key_code: return_or_enter, modifiers: [command, control, option, shift] },
-            *remove-insert-notice,
-            *leave-insert-mode,
-            *end-alfred,
-          ]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: "2", modifiers: { mandatory: [command] } }
-        to: [{ key_code: "2", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: "3", modifiers: { mandatory: [command] } }
-        to: [{ key_code: "3", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: "4", modifiers: { mandatory: [command] } }
-        to: [{ key_code: "4", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: "5", modifiers: { mandatory: [command] } }
-        to: [{ key_code: "5", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: "6", modifiers: { mandatory: [command] } }
-        to: [{ key_code: "6", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: "7", modifiers: { mandatory: [command] } }
-        to: [{ key_code: "7", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: "8", modifiers: { mandatory: [command] } }
-        to: [{ key_code: "8", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: "9", modifiers: { mandatory: [command] } }
-        to: [{ key_code: "9", modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: c, modifiers: { mandatory: [command] } }
-        to: [{ key_code: c, modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
-      - type: basic
-        from: { key_code: l, modifiers: { mandatory: [command] } }
-        to: [{ key_code: l, modifiers: [command] }, *remove-insert-notice, *leave-insert-mode, *end-alfred]
-        conditions: [*finder-or-alfred-app, *is-insert-mode, *alfred-active]
+          - { key_code: spacebar, modifiers: [command] }
+          - *remove-insert-notice
+          - *leave-insert-mode
+          - *end-menu
+        conditions: [*finder-app]
 
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
 
-      # ABORT INSERT MODE
+      # ABORT VARIOUS MODES
       # Hyper
       - type: basic
         from: { key_code: caps_lock }
@@ -377,31 +282,29 @@ rules:
           - key_code: escape
           - *remove-insert-notice
           - *leave-insert-mode
-          - *end-alfred
           - *end-menu
           - *end-move
           - *remove-move-notice
           - *leave-find-mode
           - *remove-find-notice
+        # keep hyper binding if not pressed alone
         to:
           - key_code: right_shift
-            modifiers: [command, control, option] # keep hyper binding
-        conditions: [*finder-or-alfred-app]
+            modifiers: [command, control, option]
+        conditions: [*finder-app]
       # regular Esc
       - type: basic
         from: { key_code: escape }
-        to:
+        to_if_alone:
           - key_code: escape
           - *remove-insert-notice
           - *leave-insert-mode
-          - *end-alfred
-          - *end-menu
           - *end-move
           - *remove-move-notice
           - *leave-find-mode
           - *remove-find-notice
-        conditions: [*finder-or-alfred-app]
-        # Closing window or quitting/restarting Finder should also disable Insert mode
+        conditions: [*finder-app]
+        # Closing window or quite
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
@@ -409,9 +312,10 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-menu
+          - *remove-move-notice
           - *leave-find-mode
           - *remove-find-notice
-        conditions: [*finder-app, *alfred-inactive]
+        conditions: [*finder-app]
       # Q: Restart Finder
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [shift] } }
@@ -420,7 +324,12 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-menu
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open, *alfred-inactive]
+          - *end-move
+          - *remove-move-notice
+          - *leave-find-mode
+          - *remove-find-notice
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      # closing win should end insert, menu, and find mode, but not cancel move
       - type: basic
         from: { key_code: w, modifiers: { mandatory: [command] } }
         to:
@@ -428,7 +337,9 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-menu
-        conditions: [*finder-app, *alfred-inactive]
+          - *leave-find-mode
+          - *remove-find-notice
+        conditions: [*finder-app]
       #─────────────────────────────────────────────────────────────────────────
       # Window & Tabs
       # w (or cmd+w) = close window/tab
@@ -460,6 +371,9 @@ rules:
         from: { key_code: delete_or_backspace }
         to_if_alone:
           - { key_code: grave_accent_and_tilde, modifiers: [command] }
+          - *end-menu
+          - *leave-find-mode
+          - *remove-find-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # t = recent folders
       - type: basic
@@ -495,13 +409,14 @@ rules:
                   set the selection to files of Finder window 1
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # MULTI-SELECT
       # <S-Space> = add down to selection
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
         to:
           - { key_code: down_arrow, modifiers: [shift] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # <M-Space> = select all files in window with tag "vim-mark"
+      # <M-Space> = select all files in window with tag "vim-mark" 
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [option] } }
         to:
@@ -511,20 +426,24 @@ rules:
                 app.includeStandardAdditions = true;
                 const finder = Application("Finder");
                 finder.activate(); // ensures finder is focussed for `finderWindows[0]`
+                if (!finder.finderWindows) then return end
                 const win = finder.finderWindows[0].target;
                 const winPath = decodeURIComponent(win.url().slice(7));
                 const taggedFiles = app
                   .doShellScript (`mdfind -onlyin "${winPath}" "kMDItemUserTags == vim-mark"`)
                   .split("\r")
                   .map(path => Path(path));
+                if (taggedFiles.length === 0) then return end
                 try {
                   finder.select(taggedFiles);
                 } catch (error) {
                   app.displayNotification("", { withTitle: "Finder Vim Mode", subtitle: "Error: " + error })
                 }
+                delay (0.2) // wait for selection
+                finder.activate(); // ensures finder is still active
+                // untag the files
+                Application("System Events").keystroke("1", {using: ["control down"]});
               '
-          - { key_code: vk_none, hold_down_milliseconds: 100 }
-          - { key_code: "1", modifiers: [control] } # untag the files
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # q = right-click / Context Menu

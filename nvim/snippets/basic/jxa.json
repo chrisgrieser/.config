@@ -3,6 +3,23 @@
 		"prefix": "shebang",
 		"body": "#!/usr/bin/env osascript -l JavaScript"
 	},
+	"http request": {
+		"prefix": "http request",
+		"description": "http request via c-bridge",
+		"body": [
+			"/** @param {string} url */",
+			"function httpRequest(url) {",
+			"\tconst queryURL = $.NSURL.URLWithString(url);",
+			"\tconst requestData = $.NSData.dataWithContentsOfURL(queryURL);",
+			"\tconst requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;",
+			"\treturn requestString;",
+			"}"
+		]
+	},
+	"keystroke": {
+		"prefix": "keystroke",
+		"body": "Application(\"System Events\").keystroke(\"${1:key}\", {using: [\"${2:command} down\"]});"
+	},
 	"get Finder item": {
 		"prefix": "get Finder item",
 		"body": "Application(\"System Events\").aliases[${1:filepath}];",

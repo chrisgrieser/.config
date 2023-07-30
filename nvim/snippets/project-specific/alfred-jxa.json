@@ -1,8 +1,4 @@
 {
-	"keystroke": {
-		"prefix": "keystroke",
-		"body": "Application(\"System Events\").keystroke(\"${1:key}\", {using: [\"${2:command} down\"]});"
-	},
 	"matcher (CamelCase)": {
 		"prefix": "matcher (CamelCase)",
 		"body": [
@@ -32,19 +28,6 @@
 	"Get Alfred Env (Safe)": {
 		"prefix": "Get Alfred Env",
 		"body": "const ${1:envVar} = $.NSProcessInfo.processInfo.environment.objectForKey(\"${2:envVar}\").js;"
-	},
-	"http request": {
-		"prefix": "http request",
-		"description": "http request via c-bridge",
-		"body": [
-			"/** @param {string} url */",
-			"function httpRequest(url) {",
-			"\tconst queryURL = $.NSURL.URLWithString(url);",
-			"\tconst requestData = $.NSData.dataWithContentsOfURL(queryURL);",
-			"\tconst requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;",
-			"\treturn requestString;",
-			"}"
-		]
 	},
 	"AlfredRun": {
 		"prefix": ["run (Alfred)", "AlfredRun", "argv (Alfred)"],
@@ -85,34 +68,6 @@
 			"\t\t\t};",
 			"\t\t});",
 			"\treturn JSON.stringify({ items: ${1:scriptFilterArr} });",
-			"}"
-		]
-	},
-	"read Alfred data": {
-		"prefix": "read Alfred data",
-		"body": [
-			"function readData (key) {",
-			"\tconst fileExists = (filePath) => Application(\"Finder\").exists(Path(filePath));",
-			"\tconst dataPath = $.getenv(\"alfred_workflow_data\") + \"/\" + key;",
-			"\tif (!fileExists(dataPath)) return \"data does not exist.\";",
-			"\tconst data = $.NSFileManager.defaultManager.contentsAtPath(dataPath);",
-			"\tconst str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);",
-			"\treturn ObjC.unwrap(str);",
-			"}"
-		]
-	},
-	"write Alfred data": {
-		"prefix": "write Alfred data",
-		"body": [
-			"function writeData(key, newValue) {",
-			"\tconst dataFolder = $.getenv(\"alfred_workflow_data\");",
-			"\tconst fileManager = $.NSFileManager.defaultManager;",
-			"\tconst folderExists = fileManager.fileExistsAtPath(dataFolder);",
-			"\tif (!folderExists) fileManager.createDirectoryAtPathWithIntermediateDirectoriesAttributesError(dataFolder, false, $(), $());",
-			"\tconst dataPath = dataFolder + \"/\" + key;",
-			"\tconst str = $.NSString.alloc.initWithUTF8String(newValue);",
-			"\tstr.writeToFileAtomicallyEncodingError(dataPath,",
-			"\ttrue, $.NSUTF8StringEncoding, null);",
 			"}"
 		]
 	}
