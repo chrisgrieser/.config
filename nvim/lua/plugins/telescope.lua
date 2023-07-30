@@ -228,7 +228,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		commit = "9a82b5b", -- FIX https://github.com/nvim-telescope/telescope.nvim/issues/2593
+		-- commit = "9a82b5b", -- FIX https://github.com/nvim-telescope/telescope.nvim/issues/2593
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- add icons
