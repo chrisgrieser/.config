@@ -54,10 +54,17 @@
     },
     "^",
     {
+      "c": "#74b5fc",
+      "f": 1,
+      "fa": [
+        2
+      ]
+    },
+    "1\ntoggle tag #1 (mark)",
+    {
       "c": "#a6d1ff",
       "f": 2
     },
-    "1\ntoggle tag #1",
     "2\ntoggle tag #2",
     "3\ntoggle tag #3",
     "4\ntoggle tag #4",
@@ -99,7 +106,7 @@
       "f": 1,
       "w": 1.5
     },
-    "↹ next file, alphabetically\n(↹⇧ previous)",
+    "↹ next file, alphabetically\n↹⇧ previous",
     {
       "c": "#c7a6ff",
       "fa": [
@@ -152,7 +159,7 @@
       "h2": 1,
       "x2": -0.25
     },
-    "↵ rename<br><br><br>(⇧↵ batch rename)\ninsert mode: confirm & goto normal mode",
+    "↵ rename<br><br><br>⇧↵ batch rename\ninsert mode: confirm & goto normal mode",
     {
       "c": "#999999",
       "a": 7,
@@ -191,7 +198,13 @@
     "gg (G)\nto top (bottom)\n\n\n^g gith.",
     {
       "sm": "cherry",
-      "f2": 1
+      "fa": [
+        0,
+        1,
+        0,
+        0,
+        1
+      ]
     },
     "h (H)\nparent dir (new win)\n\n\n⌃h back",
     {
@@ -203,9 +216,6 @@
       "f": 2
     },
     "k (K)\nup <br>(6x)",
-    {
-      "f2": 1
-    },
     "l\nopen file / dir (and close)\n\n\n⌃l forw",
     {
       "c": "#CCCCCC"
@@ -300,6 +310,9 @@
       "n": true
     },
     "↑\nsort by size",
+    {
+      "c": "#a6d1ff"
+    },
     "end\nsort by tags"
   ],
   [
@@ -319,12 +332,12 @@
     },
     "⌘",
     {
-      "c": "#fff4a6",
+      "c": "#74b5fc",
       "a": 5,
       "f": 2,
       "w": 6.25
     },
-    "␣ quick look\n(⇧␣: add to selection)\n\n\n\n\n──────",
+    "␣ quick look\n⇧␣: add to selection &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌥␣: select marked items in window\n\n\n\n\n──────",
     {
       "c": "#999999",
       "a": 7,

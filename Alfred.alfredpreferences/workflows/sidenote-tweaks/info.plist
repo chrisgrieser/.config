@@ -463,27 +463,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>Space</string>
-				<key>keycode</key>
-				<integer>49</integer>
-				<key>keymod</key>
-				<integer>524288</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>1E30B300-F04E-4E9B-BA84-9D3D09B012D3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -511,6 +490,48 @@
 			<string>624976E3-5F1B-4FA4-BFBE-A6BF09FB8D70</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>F9</string>
+				<key>keycode</key>
+				<integer>101</integer>
+				<key>keymod</key>
+				<integer>9437184</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>1E30B300-F04E-4E9B-BA84-9D3D09B012D3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{var:split2}</string>
+				<key>title</key>
+				<string>{var:split1}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -546,27 +567,6 @@
 			<string>C966C7DA-C789-4049-8E5E-B99EF62FEF9D</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{var:split2}</string>
-				<key>title</key>
-				<string>{var:split1}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>660ACE51-61E1-4231-AB1E-78745ADC2616</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1191,21 +1191,6 @@ sketchybar --trigger update-sidenotes-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>soundname</key>
-				<string>Basso</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>0F4E0E09-3CE4-47C5-8B25-768B18A5E1BE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1221,6 +1206,21 @@ sketchybar --trigger update-sidenotes-count</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>71C0B192-0A89-41AF-BC76-029269AB4DCB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Basso</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>0F4E0E09-3CE4-47C5-8B25-768B18A5E1BE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1292,6 +1292,21 @@ sketchybar --trigger update-sidenotes-count</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>97F81C60-323D-4EA2-9E3C-E737806D428E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -1306,21 +1321,6 @@ sketchybar --trigger update-sidenotes-count</string>
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>3E1859F5-1C06-4E8A-9414-80AC822B0D22</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>97F81C60-323D-4EA2-9E3C-E737806D428E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
