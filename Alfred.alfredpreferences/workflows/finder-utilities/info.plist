@@ -246,6 +246,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>8FACCE6C-2228-4001-89AF-4953B84F95F7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0194E157-0701-47CC-996A-E69B0F976319</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>942D4032-DF12-435D-AF6E-B89AEBF9791E</key>
 		<array>
 			<dict>
@@ -833,7 +846,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>hotkey</key>
 				<integer>16</integer>
 				<key>hotmod</key>
-				<integer>917504</integer>
+				<integer>524288</integer>
 				<key>hotstring</key>
 				<string>Z</string>
 				<key>leftcursor</key>
@@ -921,6 +934,37 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>19</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>2</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>8FACCE6C-2228-4001-89AF-4953B84F95F7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -984,7 +1028,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>{var:tag_to_search}</string>
 				<key>title</key>
 				<string>🏷️ Tag removed</string>
 			</dict>
@@ -1041,7 +1085,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>{var:tag_to_search}</string>
 				<key>title</key>
 				<string>🏷️ Tag added</string>
 			</dict>
@@ -1060,7 +1104,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>filetypes</key>
 				<array/>
 				<key>name</key>
-				<string>Add Tag</string>
+				<string>Add Tag '{var:tag_to_search}'</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.action</string>
@@ -1412,9 +1456,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>175</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>540</real>
 		</dict>
 		<key>030529FB-C164-474A-8DB9-DD49AEB4893F</key>
 		<dict>
@@ -1430,18 +1474,18 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>400</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>540</real>
 		</dict>
 		<key>08389D62-E55B-43D3-80A1-D99149535F3C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>885</real>
+			<real>970</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>640</real>
 		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
@@ -1488,16 +1532,16 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>660</real>
 		</dict>
 		<key>2B2CC8D8-AB33-455A-BDF2-333C1C7C656F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>350</real>
+			<real>475</real>
 			<key>ypos</key>
 			<real>780</real>
 		</dict>
@@ -1526,9 +1570,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>855</real>
+			<real>940</real>
 			<key>ypos</key>
-			<real>835</real>
+			<real>830</real>
 		</dict>
 		<key>51903BB3-AE69-45A7-8492-CC712BB612A4</key>
 		<dict>
@@ -1537,9 +1581,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>get URL from browser</string>
 			<key>xpos</key>
-			<real>685</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>895</real>
 		</dict>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<dict>
@@ -1611,9 +1655,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>680</real>
+			<real>765</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>640</real>
 		</dict>
 		<key>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</key>
 		<dict>
@@ -1636,6 +1680,15 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>870</real>
 			<key>ypos</key>
 			<real>125</real>
+		</dict>
+		<key>8FACCE6C-2228-4001-89AF-4953B84F95F7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>540</real>
 		</dict>
 		<key>91F1901A-DC76-40BB-A629-0A37A7CDABD7</key>
 		<dict>
@@ -1660,9 +1713,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>URL action</string>
 			<key>xpos</key>
-			<real>685</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>760</real>
 		</dict>
 		<key>993B0563-52D6-4547-B1D7-97E70FF55DB2</key>
 		<dict>
@@ -1696,9 +1749,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<key>CB6E384B-F2A7-4E6A-B8BD-95128701CC68</key>
 		<dict>
 			<key>xpos</key>
-			<real>680</real>
+			<real>765</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>520</real>
 		</dict>
 		<key>D04D747E-97EE-434F-A844-51FF56BF67F2</key>
 		<dict>
@@ -1730,9 +1783,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<key>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</key>
 		<dict>
 			<key>xpos</key>
-			<real>680</real>
+			<real>765</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>410</real>
 		</dict>
 		<key>EE44CF5E-3896-4D8B-89C9-B1686A03E42E</key>
 		<dict>
@@ -1748,16 +1801,16 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>495</real>
+			<real>620</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>720</real>
 		</dict>
 		<key>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</key>
 		<dict>
 			<key>xpos</key>
-			<real>850</real>
+			<real>935</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>410</real>
 		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>
@@ -1773,7 +1826,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>325</real>
 			<key>ypos</key>
 			<real>780</real>
 		</dict>
@@ -1791,9 +1844,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>350</real>
+			<real>475</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>660</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

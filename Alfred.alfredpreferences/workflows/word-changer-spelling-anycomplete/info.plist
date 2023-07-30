@@ -10,19 +10,6 @@
 	<dict>
 		<key>07067962-C5C6-4B45-84D2-E12B587B394A</key>
 		<array/>
-		<key>11BA931A-B37A-4C8B-AA40-6E977C85F3ED</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C969FDEE-9A14-407F-A827-39F7707C0463</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>15C5CEF9-52E9-4682-8DE4-0E5332D17D18</key>
 		<array>
 			<dict>
@@ -93,32 +80,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>07067962-C5C6-4B45-84D2-E12B587B394A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C969FDEE-9A14-407F-A827-39F7707C0463</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>38487342-D9B5-4E96-B520-AA9C3EC175FC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F8A9FDD2-28B6-4EF4-80A4-D6DDACDE0BF1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C969FDEE-9A14-407F-A827-39F7707C0463</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -275,11 +236,11 @@ end run</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>39</integer>
+				<integer>33</integer>
 				<key>hotmod</key>
 				<integer>1048576</integer>
 				<key>hotstring</key>
-				<string>Ä</string>
+				<string>Ü</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -404,100 +365,6 @@ end run</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Spell checker</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>F8A9FDD2-28B6-4EF4-80A4-D6DDACDE0BF1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>38487342-D9B5-4E96-B520-AA9C3EC175FC</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>/usr/bin/python3 spell_checker.py "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C969FDEE-9A14-407F-A827-39F7707C0463</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>33</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>Ü</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>11BA931A-B37A-4C8B-AA40-6E977C85F3ED</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Spell-fixing requires "aspell" to be installed on the system. (`brew install aspell`)
@@ -516,13 +383,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
-		<key>11BA931A-B37A-4C8B-AA40-6E977C85F3ED</key>
-		<dict>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>620</real>
-		</dict>
 		<key>15C5CEF9-52E9-4682-8DE4-0E5332D17D18</key>
 		<dict>
 			<key>colorindex</key>
@@ -533,15 +393,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>150</real>
-		</dict>
-		<key>38487342-D9B5-4E96-B520-AA9C3EC175FC</key>
-		<dict>
-			<key>note</key>
-			<string>paste</string>
-			<key>xpos</key>
-			<real>435</real>
-			<key>ypos</key>
-			<real>540</real>
 		</dict>
 		<key>3C4BA326-F122-4D88-AF7F-18DD180CEF3E</key>
 		<dict>
@@ -604,20 +455,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>425</real>
 			<key>ypos</key>
 			<real>315</real>
-		</dict>
-		<key>C969FDEE-9A14-407F-A827-39F7707C0463</key>
-		<dict>
-			<key>xpos</key>
-			<real>270</real>
-			<key>ypos</key>
-			<real>540</real>
-		</dict>
-		<key>F8A9FDD2-28B6-4EF4-80A4-D6DDACDE0BF1</key>
-		<dict>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>485</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

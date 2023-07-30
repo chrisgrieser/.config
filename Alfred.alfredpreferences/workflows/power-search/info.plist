@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.power-search</string>
+	<string>de.chris-grieser.hyper-seek</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
@@ -1077,7 +1077,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Power Search</string>
+	<string>Hyper Seek</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -2800,17 +2800,21 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Actions on inline results 
+	<string># Requirements
+[ddgr](https://github.com/jarun/ddgr) is required. You can install it via: `brew install ddgr`
+
+---
+
+## Actions on inline results 
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: Search for Term / open URL. 
 - &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Multi-Select: Mark the URL. The next &lt;kbd&gt;⏎&lt;/kbd&gt; will open the selected result as well as all previously marked URLs. 
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy URL. 
 - &lt;kbd&gt;⇧&lt;/kbd&gt; (or &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt;): Show preview text of search result. 
 
-### Recommendation 
+__Recommendations__
 - Add this workflow as [fallback search](https://www.alfredapp.com/help/features/default-results/fallback-searches/). 
 - In the [Alfred Advanced Settings](https://www.alfredapp.com/help/advanced/), set &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; to `Action all visible results`. This allows you to open all search results at once. 
 
---- 
 ## Global search hotkey Selection is… 
 - file path → reveal file in Finder 
 - directory path → open directory in Finder 
@@ -2821,7 +2825,7 @@
 ## Add link to selection 
 Turns selected text into a markdown link, with the URL of the first search result for that text as URL for the markdown link. This feature is essentially a simplified version of [Brett Terpstra's SearchLink](https://brettterpstra.com/projects/searchlink/). 
 
---- 
+---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
@@ -2947,7 +2951,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>485</real>
+			<real>195</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
