@@ -108,6 +108,14 @@ function refreshKeywordCache(cachePath) {
 			acc.push(...relevantKeywords);
 			return acc;
 		}, []);
+		// CASE 5: Web Searches
+		// TODO
+	const preInstalledSearches = app
+		.doShellScript("cd ../../preferences/features/websearch && find . -depth 2 -name 'prefs.plist'")
+		.split("\r")
+		.reduce((acc, line) => {
+			return acc
+		}, [])
 
 	// HACK remove keywords from this very workflow. Cannot be done based on the
 	// foldername, since Alfred assigns a unique ID to local installations. The
