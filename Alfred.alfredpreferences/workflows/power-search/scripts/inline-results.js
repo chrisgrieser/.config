@@ -21,19 +21,18 @@ const multiSelectIcon = "🔳";
  * if the cache is outdated. Cannot use the workflow folder's mdate, since it
  * is too far up, and macOS does only changes the mdate of enclosing folders,
  * but not of their parents.
- * - considers the possibility of the cache not existing
- * - considers the user potentially having set a custom preferences location
+ * - Considers the possibility of the cache not existing
+ * - Considers the user potentially having set a custom preferences location, by
+ *   simply searching for the `.plist` files relative to this workflow's folder.
  * @param {string} cachePath
  */
 function keywordCacheIsOutdated(cachePath) {
 	const cacheObj = Application("System Events").aliases[cachePath];
 	if (!cacheObj.exists()) return true;
 	const cacheAgeMins = ((+new Date() - cacheObj.creationDate()) / 1000 / 60).toFixed(0);
-	const alfredPrefPath = $.getenv("alfred_preferences");
-	const isOutdated = app.doShellScript(
-		`cd "${alfredPrefPath}" && find . -depth 2 -name "*.plist" -mtime -${cacheAgeMins}m`,
-	) !== "";
-	return isOutdated;
+	// `..` is already the Alfred preferences directory, so no need to `cd` there
+	const moreRecentFiles = app.doShellScript(`find .. -depth 2 -name "*.plist" -mtime -${cacheAgeMins}m`);
+	return moreRecentFiles !== "";
 }
 
 /** @param {string} path */
@@ -70,6 +69,7 @@ function refreshKeywordCache(cachePath) {
 				// CASE 1a) user-set keywords
 				// (`plutil` will fail, since the value is not saved in prefs.plist)
 				try {
+					// `..` is already the Alfred preferences directory, so no need to `cd` there
 					const userKeyword = app.doShellScript(
 						`plutil -extract "${varName}" raw -o - "../${workflowPath}/prefs.plist"`,
 					);
@@ -249,7 +249,7 @@ function run(argv) {
 	});
 
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
-	let log = `${durationTotalSecs}s`;
+	let log = `Total: ${durationTotalSecs}s`;
 	if (mode !== "default") log += ` (${mode})`;
 	console.log(log);
 
