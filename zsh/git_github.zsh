@@ -132,11 +132,11 @@ function gli() {
 #───────────────────────────────────────────────────────────────────────────────
 
 # PULL REQUEST
-# - add all & commit with $1 (or prompted)
+# - stage all & commit with $* (or prompted)
 # - creates fork (if no writing access)
-# - create PR and autofills is with commit msg (merges into *current branch*, not the default branch)
+# - create PR and autofills is with commit msg
+# - merges into *current branch* (not the default branch)
 # - opens PR in the web
-# - offers to delete local repo
 function pr() {
 	if ! command -v gh &>/dev/null; then printf "\033[1;33mgh not installed.\033[0m" && return 1; fi
 
@@ -155,9 +155,9 @@ function pr() {
 		return 1
 	fi
 
-	git add . && git commit -m "$msg"
+	git add -A && git commit -m "$msg"
 
-	current_branch=$(git branch --show-current)
+	current_branch=$(git branch --show-current) # otherwise uses the default branch
 	gh pr create --web --fill --base="$current_branch"
 }
 
