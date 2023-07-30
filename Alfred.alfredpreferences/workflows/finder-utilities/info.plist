@@ -311,6 +311,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D32D490E-F78B-4733-A0EC-0672CD8A6E30</key>
 		<array>
 			<dict>
@@ -457,6 +470,37 @@
 			<string>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>-1</integer>
+				<key>hotmod</key>
+				<integer>524288</integer>
+				<key>hotstring</key>
+				<string>double tap</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1446,7 +1490,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>search file hub</string>
 			<key>xpos</key>
-			<real>260</real>
+			<real>400</real>
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
@@ -1455,7 +1499,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>700</real>
+			<real>825</real>
 			<key>ypos</key>
 			<real>260</real>
 		</dict>
@@ -1475,7 +1519,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>delete file</string>
 			<key>xpos</key>
-			<real>555</real>
+			<real>685</real>
 			<key>ypos</key>
 			<real>260</real>
 		</dict>
@@ -1504,7 +1548,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>check for files in file hub</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>190</real>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
@@ -1542,16 +1586,16 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>215</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>475</real>
 		</dict>
 		<key>5CCD4941-B4C3-444A-8318-2DDBF741229A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>570</real>
 			<key>ypos</key>
 			<real>45</real>
 		</dict>
@@ -1569,7 +1613,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>560</real>
+			<real>685</real>
 			<key>ypos</key>
 			<real>505</real>
 		</dict>
@@ -1598,7 +1642,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>265</real>
+			<real>405</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1618,9 +1662,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>copy file to clipboard</string>
 			<key>xpos</key>
-			<real>200</real>
+			<real>285</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>325</real>
 		</dict>
 		<key>8D046756-BF24-4658-BD57-CAB48FF61B9D</key>
 		<dict>
@@ -1629,7 +1673,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>to be copypasted after update of the rename workflow</string>
 			<key>xpos</key>
-			<real>700</real>
+			<real>825</real>
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
@@ -1676,7 +1720,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>475</real>
 		</dict>
 		<key>9CAC2CDA-1512-48F6-9273-1A82F9ECB969</key>
 		<dict>
@@ -1687,6 +1731,15 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>1240</real>
 		</dict>
+		<key>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</key>
+		<dict>
+			<key>note</key>
+			<string>open SideNotes</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1694,7 +1747,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>move to front window</string>
 			<key>xpos</key>
-			<real>555</real>
+			<real>685</real>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
@@ -1703,7 +1756,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>560</real>
+			<real>685</real>
 			<key>ypos</key>
 			<real>395</real>
 		</dict>
@@ -1712,7 +1765,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>320</real>
 			<key>ypos</key>
 			<real>50</real>
 		</dict>
@@ -1721,7 +1774,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>555</real>
+			<real>685</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1764,7 +1817,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>325</real>
 		</dict>
 		<key>F77CBF99-913B-4E23-B45A-1330ABD690FC</key>
 		<dict>
@@ -1780,9 +1833,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>345</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>325</real>
 		</dict>
 		<key>FFC42B20-8DB1-4234-9917-12D9E1656CC1</key>
 		<dict>
