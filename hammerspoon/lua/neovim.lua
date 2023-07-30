@@ -83,11 +83,7 @@ end)
 -- FIX for too many leftover nvim processes: https://github.com/neovide/neovide/issues/1595
 NeovideWatcher2 = aw.new(function(_, eventType, _)
 	if eventType == aw.terminated then
-		u.runWithDelays(3, function()
-			local killCmd = [[pgrep -xq 'neovide' || killall -9 neovide nvim]]
-			local _, hasKilled = hs.execute(killCmd)
-			if hasKilled then u.notify("⚔️ Killed leftover neovide/nvim processes.") end
-		end)
+		u.runWithDelays(3, function() hs.execute([[pgrep -xq 'neovide' || killall -9 neovide nvim]]) end)
 	end
 end):start()
 

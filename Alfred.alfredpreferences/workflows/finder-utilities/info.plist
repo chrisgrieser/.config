@@ -311,19 +311,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>CB6E384B-F2A7-4E6A-B8BD-95128701CC68</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>D32D490E-F78B-4733-A0EC-0672CD8A6E30</key>
 		<array>
 			<dict>
@@ -736,7 +723,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>copy-file.applescript</string>
+				<string>./scripts/copy-file.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -853,40 +840,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/BetterZip.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.zip-archive</string>
-				</array>
-				<key>name</key>
-				<string>Open in Better Zip</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>jumpto</key>
 				<string>alfred.action.copy</string>
 				<key>path</key>
@@ -939,37 +892,36 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/BetterZip.app</string>
+				<key>sourcefile</key>
 				<string></string>
-				<key>hotkey</key>
-				<integer>16</integer>
-				<key>hotmod</key>
-				<integer>524288</integer>
-				<key>hotstring</key>
-				<string>Z</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>CB6E384B-F2A7-4E6A-B8BD-95128701CC68</string>
+			<string>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.zip-archive</string>
+				</array>
+				<key>name</key>
+				<string>Open in Better Zip</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1483,7 +1435,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>965</real>
+			<real>940</real>
 			<key>ypos</key>
 			<real>775</real>
 		</dict>
@@ -1746,13 +1698,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
-		<key>CB6E384B-F2A7-4E6A-B8BD-95128701CC68</key>
-		<dict>
-			<key>xpos</key>
-			<real>760</real>
-			<key>ypos</key>
-			<real>655</real>
-		</dict>
 		<key>D04D747E-97EE-434F-A844-51FF56BF67F2</key>
 		<dict>
 			<key>colorindex</key>
@@ -1783,9 +1728,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<key>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</key>
 		<dict>
 			<key>xpos</key>
-			<real>760</real>
+			<real>765</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>655</real>
 		</dict>
 		<key>EE44CF5E-3896-4D8B-89C9-B1686A03E42E</key>
 		<dict>
@@ -1808,9 +1753,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<key>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</key>
 		<dict>
 			<key>xpos</key>
-			<real>930</real>
+			<real>935</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>655</real>
 		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>
