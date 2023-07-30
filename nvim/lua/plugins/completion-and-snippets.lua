@@ -177,9 +177,8 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.filetype({ "lua", "toml" }, {
 		enabled = function() -- disable leading "-" in lua
-			if vim.bo.filetype ~= "lua" then return true end
-			local lineContent = vim.fn.getline(".")
-			return not (lineContent:match("%s%-%-?$") or lineContent:match("^%-%-?$"))
+			local line = vim.api.nvim_get_current_line()
+			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
 		end,
 		sources = cmp.config.sources {
 			s.codeium,

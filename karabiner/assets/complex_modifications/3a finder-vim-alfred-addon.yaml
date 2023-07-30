@@ -1,8 +1,8 @@
-# INFO only needed when using Alfred's compatibility mode
 # INFO has to come before finder-vim-mode.yaml itself
 rules:
   - description: "Addons for Finder-Vim-Mode"
     manipulators:
+      # FIX for <Esc> -> f18 binding
       # Alfred Custom Clipboard Search & screenshot history (cleanshot)
       - type: basic
         from: { key_code: escape }
