@@ -127,7 +127,13 @@ return {
 					spelling = { enabled = false },
 				},
 				triggers_blacklist = {
-					-- n = { "y" }, -- FIX "y" needed to fix weird delay occurring when yanking after a change
+					-- FIX "y" needed to fix weird delay occurring when yanking after a change
+					-- n = { "y" },
+					-- FIX very weird bug where insert mode undo points (<C-g>u), 
+					-- as well as vim-matchup's <C-g>% binding insert extra `1`s
+					-- after wrapping to the next line in insert mode. The `G` needs
+					-- to be uppercased to affect the right mapping, too.
+					i = { "<C-G>" }, 
 				},
 				hidden = { "<Plug>", "^:lua ", "<cmd>" },
 				-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here

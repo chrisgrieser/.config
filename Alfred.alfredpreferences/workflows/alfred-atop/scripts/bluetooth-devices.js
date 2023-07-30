@@ -14,23 +14,28 @@ const excludedDevices = ($.getenv("excluded_devices") || "").split(",").map((t) 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	let deviceArr = [];
 
-	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType")).SPBluetoothDataType[0];
-	allDevices.device_connected.forEach((/** @type {{ [x: string]: any; }} */ device) => {
-		const name = Object.keys(device)[0];
-		const properties = device[name];
-		properties.device_name = name;
-		properties.connected = true;
-		deviceArr.push(properties);
-	});
-	allDevices.device_not_connected.forEach((/** @type {{ [x: string]: any; }} */ device) => {
-		const name = Object.keys(device)[0];
-		const properties = device[name];
-		properties.device_name = name;
-		properties.connected = false;
-		deviceArr.push(properties);
-	});
+	let deviceArr = [];
+	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType"))
+		.SPBluetoothDataType[0];
+	if (allDevices.device_connected) {
+		allDevices.device_connected.forEach((/** @type {{ [x: string]: any; }} */ device) => {
+			const name = Object.keys(device)[0];
+			const properties = device[name];
+			properties.device_name = name;
+			properties.connected = true;
+			deviceArr.push(properties);
+		});
+	}
+	if (allDevices.device_not_connected) {
+		allDevices.device_not_connected.forEach((/** @type {{ [x: string]: any; }} */ device) => {
+			const name = Object.keys(device)[0];
+			const properties = device[name];
+			properties.device_name = name;
+			properties.connected = false;
+			deviceArr.push(properties);
+		});
+	}
 
 	// INFO `ioreg` only includes Apple keyboards, mice, and trackpads, but does
 	// have battery data for them which is missing from the `system_profiler` output.
