@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 
-# WD defined in .zshenv
-# shellcheck disable=1091
-touch "$WD/scratch.txt"
+touch "$WD/scratch.txt" # WD defined in .zshenv
 open "$WD/scratch.txt"
+
+sleep 0.2 # wait till file open
+
+# paste from system clipboard
+nvim --server "/tmp/nvim_server.pipe" --remote-send '"+p'

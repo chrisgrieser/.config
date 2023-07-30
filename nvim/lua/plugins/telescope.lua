@@ -190,6 +190,17 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
+			undo = {
+				entry_format = "#$ID ($STAT) $TIME",
+				preview_width = { 0.70, min = 30 },
+				mappings = {
+					i = {
+						["<cr>"] = require("telescope-undo.actions").yank_additions,
+						["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
+						["<C-cr>"] = require("telescope-undo.actions").restore,
+					},
+				},
+			},
 			file_browser = {
 				prompt_prefix = " ",
 				depth = 2, -- initial depth (1 = only current folder)
@@ -228,12 +239,15 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		-- commit = "9a82b5b", -- FIX https://github.com/nvim-telescope/telescope.nvim/issues/2593
+		-- FIX https://github.com/nvim-telescope/telescope.nvim/issues/2593
+		-- not needed when using noice.nvim
+		-- commit = "9a82b5b",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- add icons
 			"nvim-telescope/telescope-file-browser.nvim", -- search folders
 			"smartpde/telescope-recent-files", -- better oldfiles
+			"debugloop/telescope-undo.nvim", -- undotree
 
 			-- also listed here as dependency, so it can be used by telescope
 			-- before cmp is loaded
@@ -244,6 +258,7 @@ return {
 			telescopeConfig()
 			require("telescope").load_extension("file_browser")
 			require("telescope").load_extension("recent_files")
+			require("telescope").load_extension("undo")
 
 			-- INFO since used for cmp-fuzzy-buffer already, might as well add it
 			-- here as well. Even though performance-wise vanilla telescope is fine

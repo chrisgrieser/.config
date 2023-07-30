@@ -47,7 +47,8 @@ function gd() {
 		# uses git delta (configured so in gitconfig)
 		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
 
-		# dynamically change theme // see themes: `delta --show-syntax-themes`
+		# dynamically change theme 
+		# see themes: `delta --show-syntax-themes`
 		if defaults read -g AppleInterfaceStyle &>/dev/null; then
 			light="false"
 			theme="Dracula"

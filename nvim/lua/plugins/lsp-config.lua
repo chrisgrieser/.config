@@ -130,7 +130,7 @@ lspSettings.jsonls = {
 -- https://github.com/eclipse/lemminx/blob/main/docs/Configuration.md#all-formatting-options
 lspSettings.lemminx = {
 	xml = {
-		-- disabled, since it messes up some formatting Alfred .plist files
+		-- disabled, since it messes up some formatting of Alfred .plist files
 		format = { enabled = false },
 	},
 }
