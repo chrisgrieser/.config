@@ -629,7 +629,7 @@ rules:
           - shell_command: |
               osascript -e '
                 tell application "System Events" to tell process "Finder"
-                  click menu item "Show Preview Option" of menu "View" of menu bar 1
+                  click menu item "Show Preview Options" of menu "View" of menu bar 1
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # u = undo

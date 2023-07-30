@@ -1,0 +1,40 @@
+{
+	"items": [
+		{
+			"title": "Organising workflows with categories and defaults",
+			"arg": "https://www.alfredapp.com/help/workflows/organising-workflows/"
+		},
+		{
+			"title": "Exporting and Sharing Workflows",
+			"arg": "https://www.alfredapp.com/help/workflows/advanced/sharing-workflows"
+		},
+		{
+			"title": "Workflow Troubleshooting",
+			"arg": "https://www.alfredapp.com/help/troubleshooting/workflows/"
+		},
+		{
+			"title": "Using the Workflow Debug Utility",
+			"arg": "https://www.alfredapp.com/help/workflows/utilities/debug/"
+		},
+		{
+			"title": "Setting Variables in Workflows",
+			"arg": "https://www.alfredapp.com/help/workflows/advanced/variables/"
+		},
+		{
+			"title": "Script Environment Variables",
+			"arg": "https://www.alfredapp.com/help/workflows/script-environment-variables/"
+		},
+		{
+			"title": "Using Alternative Actions in workflows",
+			"arg": "https://www.alfredapp.com/help/workflows/advanced/alternative-actions/"
+		},
+		{
+			"title": "Using Script Filter objects",
+			"arg": "https://www.alfredapp.com/help/workflows/inputs/script-filter/"
+		},
+		{
+			"title": "Workflow Object Inbound Configuration",
+			"arg": "https://www.alfredapp.com/help/workflows/inbound-configuration/"
+		}
+	]
+}

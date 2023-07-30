@@ -8,13 +8,6 @@ return {
 		"NeogitOrg/neogit",
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = "Neogit",
-		init = function()
-			-- HACK https://github.com/NeogitOrg/neogit/issues/405
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "NeogitCommitMessage",
-				command = "silent! set filetype=gitcommit",
-			})
-		end,
 		opts = {
 			disable_insert_on_commit = false, -- false = start commit msgs in insert mode
 			disable_commit_confirmation = true,
@@ -25,9 +18,7 @@ return {
 				item = { "", "" },
 			},
 			mappings = {
-				status = {
-					["<D-w>"] = "close",
-				},
+				status = { ["<D-w>"] = "close" },
 			},
 		},
 	},
