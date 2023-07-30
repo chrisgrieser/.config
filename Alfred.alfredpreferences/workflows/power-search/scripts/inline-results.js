@@ -17,16 +17,22 @@ const multiSelectIcon = "🔳";
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** considers the possibility of the cache not existing, as well as the
- * possibility of the user having set a custom location for their preferences
+/** searches for any `.plist` more recently modified than the cache to determine
+ * if the cache is outdated. Cannot use the workflow folder's mdate, since it
+ * is too far up, and macOS does only changes the mdate of enclosing folders,
+ * but not of their parents.
+ * - considers the possibility of the cache not existing
+ * - considers the user potentially having set a custom preferences location
  * @param {string} cachePath
  */
 function keywordCacheIsOutdated(cachePath) {
-	const getFileObj = (/** @type {string} */ path) => Application("System Events").aliases[path];
-	const cacheObj = getFileObj(cachePath);
+	const cacheObj = Application("System Events").aliases[cachePath];
 	if (!cacheObj.exists()) return true;
-	const alfredConfigObj = getFileObj($.getenv("alfred_preferences"));
-	const isOutdated = alfredConfigObj.modificationDate() > cacheObj.creationDate();
+	const cacheAgeMins = ((+new Date() - cacheObj.creationDate()) / 1000 / 60).toFixed(0);
+	const alfredPrefPath = $.getenv("alfred_preferences");
+	const isOutdated = app.doShellScript(
+		`cd "${alfredPrefPath}" && find . -depth 2 -name "*.plist" -mtime -${cacheAgeMins}m`,
+	) !== "";
 	return isOutdated;
 }
 
@@ -117,7 +123,7 @@ function refreshKeywordCache(cachePath) {
 		.join("")
 		.split(","); // back to array
 	const uniqueKeywords = [...new Set(trueKeywords)];
-	console.log(`Rebuilt cache: ${uniqueKeywords} keywords.`);
+	console.log(`Rebuilt cache: ${uniqueKeywords.length} keywords.`);
 	writeToFile(cachePath, JSON.stringify(uniqueKeywords));
 }
 

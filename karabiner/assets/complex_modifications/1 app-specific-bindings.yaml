@@ -364,9 +364,9 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 400 }
           - { key_code: delete_or_backspace, modifiers: [command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
-      # toggle language
+      # toggle syntax (Javascript <-> Applescript)
       - type: basic
-        from: { key_code: l, modifiers: { mandatory: [command] } }
+        from: { key_code: s, modifiers: { mandatory: [option] } }
         to:
           - shell_command: |
               osascript -l JavaScript -e '
@@ -495,9 +495,9 @@ rules:
         to:
           - { key_code: up_arrow, modifiers: [command, option, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apptorium\.SideNotes-paddle$] }]
-      # Meh+s: Change to Code Syntax
+      # alt+s: Change to Code Syntax
       - type: basic
-        from: { key_code: s, modifiers: { mandatory: [control, shift, option] } }
+        from: { key_code: s, modifiers: { mandatory: [option] } }
         to:
           - { key_code: "3", modifiers: [command, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apptorium\.SideNotes-paddle$] }]

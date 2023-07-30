@@ -623,7 +623,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>GitHub</string>
+	<string>GitFred</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -1748,7 +1748,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>40</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>1565</real>
 		</dict>
@@ -1907,7 +1907,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>40</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>1445</real>
 		</dict>

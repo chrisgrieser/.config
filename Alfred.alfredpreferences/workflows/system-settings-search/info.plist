@@ -2132,7 +2132,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>wi-fi||wifi</string>
+				<string>wifi||wlan</string>
 				<key>subtext</key>
 				<string>System Settings → Wi-Fi</string>
 				<key>text</key>
