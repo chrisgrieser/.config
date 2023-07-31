@@ -19,23 +19,19 @@ return {
 	{ -- display line numbers when using `:` to go to a line with
 		"nacro90/numb.nvim",
 		keys = ":",
-		config = true,
+		opts = true,
 	},
-
-	-----------------------------------------------------------------------------
-
-	-- hello, this is some text I am typing here. How are you doing? I am fine
-
-	-----------------------------------------------------------------------------
-
 	{ -- better % (highlighting, matches across lines, match quotes)
 		"andymass/vim-matchup",
-		enabled = false,
-		lazy = false, -- cannot be properly lazy-loaded
+		event = "BufReadPre", -- cannot 
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			vim.g.matchup_matchparen_offscreen = {} -- empty = disables
 			vim.g.matchup_text_obj_enabled = 0
+
+			vim.keymap.set("n", "m", "<Plug>(matchup-%)", { desc = "Goto Matching Bracket" })
+			-- if using the builtin matchit plugin, `remap = true` would be needed
+			-- to map m to %
 		end,
 	},
 	{ -- CamelCase Motion plus
@@ -44,9 +40,9 @@ return {
 		opts = { skipInsignificantPunctuation = true },
 		keys = {
 			-- stylua: ignore
-			{"e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider-e" },
+			{"e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider e" },
 			-- stylua: ignore
-			{"b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider-b" },
+			{"b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider b" },
 		},
 	},
 	-----------------------------------------------------------------------------

@@ -48,10 +48,6 @@ keymap("n", "ä", "'M", { desc = " Goto Mark" })
 keymap("n", "gh", "<cmd>Gitsigns next_hunk<CR>zv", { desc = "󰊢 Next Hunk" })
 keymap("n", "gH", "<cmd>Gitsigns prev_hunk<CR>zv", { desc = "󰊢 Previous Hunk" })
 
--- [M]atching Bracket
--- remap needed, if using the builtin matchit plugin / vim-matchup
-keymap("n", "m", "%", { remap = true, desc = "Goto Matching Bracket" })
-
 --------------------------------------------------------------------------------
 
 -- SEARCH
@@ -220,7 +216,6 @@ keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
 
 -- stylua: ignore start
 keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, { desc = "󰽙 Alt Buffer" })
-keymap("n", "<BS>", "<Plug>(CybuNext)", { desc = "󰽙 Next Buffer" })
 keymap("n", "<C-CR>", "<C-w>w", { desc = " Next Window" })
 
 keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "󰽙 close buffer/window" })
