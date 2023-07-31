@@ -116,7 +116,7 @@ rules:
           - shell_command: open -a 'zoom.us'
           - *deactivate-leader
           - *remove-notice
-      # [i]noreader
+      # [n]ewsreader
       - type: basic
         from: { key_code: "n" }
         conditions: [*leader-active]
