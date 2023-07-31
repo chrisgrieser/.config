@@ -11,6 +11,7 @@ return {
 	},
 	{ -- nice animations for floating wins (and controls, but those I don't use)
 		"tamton-aquib/flirt.nvim",
+		-- disabled, pending bug fix: https://github.com/tamton-aquib/flirt.nvim/issues/3
 		enabled = false,
 		event = "VeryLazy",
 		opts = {
@@ -18,6 +19,7 @@ return {
 				"TelescopePrompt",
 				"DressingInput",
 				"notify",
+				"ccc-ui",
 				"cmp_menu",
 			},
 		},

@@ -254,7 +254,6 @@ local lualineConfig = {
 			"TelescopePrompt",
 			"DressingInput",
 			"DressingSelect",
-			"Mason",
 			"ccc-ui",
 		},
 		globalstatus = true,
