@@ -1,11 +1,18 @@
+-- stylua: ignore start
 --------------------------------------------------------------------------------
 -- INFO Run this config via: `neovide test.lua -- -u repro.lua` or `make debug`
 --------------------------------------------------------------------------------
 -- INFO set path to my personal working directory. Change back when debugging
 -- folke plugins.
+local root = vim.fn.fnamemodify("./.repro", ":p")
 
-local root = vim.env.WD .. "/repro"
--- local root = vim.fn.fnamemodify("./.repro", ":p")
+-- local root = vim.env.WD .. "/repro"
+
+--------------------------------------------------------------------------------
+
+-- Convenience stuff, not strictly necessary
+vim.g.neovide_scale_factor = 1.6
+vim.fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
 
 --------------------------------------------------------------------------------
 
@@ -25,26 +32,27 @@ vim.opt.runtimepath:prepend(lazypath)
 local plugins = {
 	"folke/tokyonight.nvim",
 	{
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "williamboman/mason.nvim", opts = {} },
-		opts = { ensure_installed = { "lua_ls" } },
+		"folke/noice.nvim",
+		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+		opts = true,
 	},
-	{
-		"neovim/nvim-lspconfig",
-		init = function()
-			require("lspconfig")["lua_ls"].setup({})
-		end,
-	},
+	-- {
+	-- 	"williamboman/mason-lspconfig.nvim",
+	-- 	dependencies = { "williamboman/mason.nvim", opts = {} },
+	-- 	opts = { ensure_installed = { "lua_ls" } },
+	-- },
+	-- {
+	-- 	"neovim/nvim-lspconfig",
+	-- 	init = function()
+	-- 		require("lspconfig")["lua_ls"].setup({})
+	-- 	end,
+	-- },
 }
+
 require("lazy").setup(plugins, {
 	root = root .. "/plugins",
 })
 
 vim.cmd.colorscheme("tokyonight")
 
--- Convenience stuff, not strictly necessary
-vim.g.neovide_scale_factor = 1.6
-vim.fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
-
 --------------------------------------------------------------------------------
-
