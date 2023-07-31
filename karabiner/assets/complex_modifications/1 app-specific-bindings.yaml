@@ -416,7 +416,7 @@ rules:
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
       # Open in Gmail
       - type: basic
-        from: { key_code: g, modifiers: { mandatory: [shift, control, option] } }
+        from: { key_code: g, modifiers: { mandatory: [control] } }
         to:
           - { key_code: g, modifiers: [command, control] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]

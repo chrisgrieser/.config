@@ -190,7 +190,8 @@ function run(argv) {
 	// PERF & HACK If the user is typing, return early to guarantee the top entry
 	// is the currently typed query. If we waited for `ddgr`, a fast typer would
 	// search for an incomplete query
-	if (query !== oldQuery) {
+	const userIsTyping = query !== oldQuery;
+	if (userIsTyping) {
 		searchForQuery.subtitle = "Loading Inline Results…";
 		return JSON.stringify({
 			rerun: 0.1,
@@ -213,7 +214,7 @@ function run(argv) {
 	} else {
 		// PERF `--noua` disables user agent & fetches faster (~100ms according to hyperfine)
 		// PERF the number of results fetched has basically no effect on the speed
-		// (less than 50ms difference between 1 and 25 results), so there is no use
+		// (less than 40ms difference between 1 and 25 results), so there is no use
 		// in restricting the number of results for performance. (Except for 25 being
 		// ddgr's maximum)
 		const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
@@ -263,7 +264,7 @@ function run(argv) {
 
 	// Pass to Alfred
 	const alfredInput = JSON.stringify({
-		rerun: 0.2, // HACK has to permanently rerun to pick up changes from multi-select
+		rerun: 0.1, // HACK has to permanently rerun to pick up changes from multi-select
 		skipknowledge: true, // so Alfred does not change result order for multi-select
 		variables: { oldResults: JSON.stringify(newResults), oldQuery: query },
 		items: [searchForQuery].concat(newResults),
