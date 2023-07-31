@@ -1,5 +1,4 @@
 local u = require("config.utils")
-local spooky = "x" -- key triggering remote textobj
 --------------------------------------------------------------------------------
 
 return {
@@ -23,7 +22,7 @@ return {
 	},
 	{ -- better % (highlighting, matches across lines, match quotes)
 		"andymass/vim-matchup",
-		event = "BufReadPre", -- cannot 
+		event = "BufReadPre", -- cannot load on key due to highlights
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			vim.g.matchup_matchparen_offscreen = {} -- empty = disables
@@ -48,7 +47,7 @@ return {
 	-----------------------------------------------------------------------------
 	{ -- tons of text objects
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		event = "BufReadPre", -- to ensure it properly loads
+		event = "BufReadPre", -- not later to ensure it loads in time properly
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- tons of text objects
@@ -58,9 +57,23 @@ return {
 	},
 	{ -- distant textobjects
 		"ggandor/leap-spooky.nvim",
-		keys = { { spooky, mode = { "o" }, desc = "󱡔 Load Leap Spooky" } },
+		keys = { { "x", mode = { "o" }, desc = "󱡔 Load Leap Spooky" } },
 		dependencies = { "ggandor/leap.nvim" },
+		opts = {
+			affixes = {
+				-- magnetic = move to object after operation
+				magnetic = { window = nil, cross_window = nil }, 
+				remote = { window = "x", cross_window = nil },
+			},
+			prefix = true, -- false: `ixw`, true: `xiw`
+			paste_on_remote_yank = true,
+		},
 		init = function()
+			-- key triggering distant textobj, e.g. `yxap` to remote-yank a paragraph
+			-- also used in `keys` and `opts.affixes.remote`
+			local spooky = "x"
+
+			-- applying my textobj remappings to this plugin
 			local textobjRemaps = vim.deepcopy(u.textobjectRemaps)
 			for remap, original in pairs(textobjRemaps) do
 				vim.keymap.set(
@@ -77,13 +90,5 @@ return {
 				)
 			end
 		end,
-		opts = {
-			affixes = {
-				magnetic = { window = nil, cross_window = nil }, -- magnetic = move to object after operation
-				remote = { window = spooky, cross_window = nil },
-			},
-			prefix = true, -- false: `ixw`, true: `xiw`
-			paste_on_remote_yank = true,
-		},
 	},
 }
