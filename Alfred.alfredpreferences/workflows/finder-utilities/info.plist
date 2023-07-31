@@ -64,7 +64,7 @@
 				<key>modifiersubtext</key>
 				<string>⌘: Move to Front Finder Window</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -324,6 +324,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D32D490E-F78B-4733-A0EC-0672CD8A6E30</key>
 		<array>
 			<dict>
@@ -573,6 +586,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/move-to-frontmost-Finder-window.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -621,25 +657,21 @@ osascript -l JavaScript  "$WD"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/move-to-frontmost-Finder-window.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>externaltriggerid</key>
+				<string>file-hub-cycle</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
+			<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -665,25 +697,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>file-hub-cycle</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1470,7 +1483,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>365</real>
 			<key>ypos</key>
 			<real>845</real>
 		</dict>
@@ -1492,16 +1505,16 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>130</real>
 		</dict>
 		<key>11D8554B-846B-40DD-9CA0-C73F5736472F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>825</real>
+			<real>895</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>185</real>
 		</dict>
 		<key>1A313564-1CAF-412B-A205-98935912EC34</key>
 		<dict>
@@ -1733,6 +1746,8 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		</dict>
 		<key>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>note</key>
 			<string>open SideNotes</string>
 			<key>xpos</key>
@@ -1749,7 +1764,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>685</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>125</real>
 		</dict>
 		<key>D04D747E-97EE-434F-A844-51FF56BF67F2</key>
 		<dict>

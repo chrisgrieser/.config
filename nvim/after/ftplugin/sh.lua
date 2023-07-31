@@ -15,7 +15,7 @@ keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false
 
 -- Reload Sketchybar
 keymap("n", "<leader>r", function()
-	vim.cmd.update()
+	vim.cmd("silent update")
 	if expand("%:p:h"):find("sketchybar") then
 		vim.fn.system([[brew services restart sketchybar]])
 	else
