@@ -8,9 +8,10 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
-# OPTIONS --- (`man zshoptions` to see all options)
+# OPTIONS -- https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt AUTO_CD              # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
+# setopt NO_BANG_HIST         # don't expand "!!"
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLI SETTINGS
@@ -21,10 +22,9 @@ export YSU_MESSAGE_POSITION="after"
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='--color="hl:206" --keep-right --pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --cycle --layout=reverse --bind="tab:down,shift-tab:up" --preview-window=border-left --height="90%"'
 
-export EXA_STRICT=1
-
 # extra spacing needed for WezTerm + Iosevka
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && export EXA_ICON_SPACING=2  
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && export EXA_ICON_SPACING=2
+export EXA_STRICT=1
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 
@@ -35,7 +35,7 @@ export MAGIC_ENTER_OTHER_COMMAND=" inspect"
 export _ZO_DATA_DIR="$DATA_DIR/zoxide/"
 eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 
-export FX_THEME=1 # only theme working in light & dark mode https://github.com/antonmedv/fx#themes
+export FX_THEME=1        # only theme working in light & dark mode https://github.com/antonmedv/fx#themes
 export FX_SHOW_SIZE=true # show sizes of folded arrays
 
 # gh https://cli.github.com/manual/gh_help_environment
@@ -58,4 +58,3 @@ export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # do not accept autosuggestion when using vim `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
-
