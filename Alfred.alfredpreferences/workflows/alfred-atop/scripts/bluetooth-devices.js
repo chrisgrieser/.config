@@ -45,7 +45,8 @@ function run() {
 			properties.device_minorType = properties.device_minorClassOfDevice_string;
 			properties.device_name = name;
 			properties.connected = properties.device_isconnected === "attrib_Yes";
-			properties.device_address = properties.device_addr.replaceAll("_", ":");
+			// WARN do not use `replaceAll` because it doesn't work on older macOS versions
+			properties.device_address = properties.device_addr.replace(/_/g, ":");
 			deviceArr.push(properties);
 		});
 	}
@@ -62,7 +63,8 @@ function run() {
 	// data as xml -> remove "data" key -> convert to json
 	JSON.parse(applePeriData).forEach((/** @type {{ DeviceAddress: string; }} */ device) => {
 		// make address consistent with output from `system_profiler`
-		const address = device.DeviceAddress.toUpperCase().replaceAll("-", ":");
+		// WARN do not use `replaceAll` because it doesn't work on older macOS versions
+		const address = device.DeviceAddress.toUpperCase().replace(/-/, ":");
 		applePeriphery[address] = device;
 	});
 

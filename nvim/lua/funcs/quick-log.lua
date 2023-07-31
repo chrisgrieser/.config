@@ -10,6 +10,13 @@ local logWarn = vim.log.levels.WARN
 ---runs :normal natively with bang
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
+--------------------------------------------------------------------------------
+
+-- CONFIG
+local marker = "[QL]"
+
+--------------------------------------------------------------------------------
+
 ---in normal mode, returns word under cursor, in visual mode, returns selection
 ---@return string?
 local function getVar()
@@ -32,15 +39,11 @@ end
 
 ---append string below current line, if text is array of strings, append each
 ---element as separate line
----@param text string|string[]
+---@param text string
 local function append(text)
-	if type(text) == "string" then text = { text } end
-
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, text)
-	for _ = 1, #text, 1 do
-		normal("j==")
-	end
+	vim.api.nvim_buf_set_lines(0, ln, ln, false, {text})
+	normal("j==")
 end
 
 --------------------------------------------------------------------------------
@@ -52,16 +55,16 @@ function M.log()
 	local templateStr
 	local ft = bo.filetype
 
-	if ft == "lua" then 
-		templateStr = 'print("%s: ".. %s)'
+	if ft == "lua" then
+		templateStr = 'print("%s %s: ".. %s)'
 	elseif ft == "python" then
-		templateStr = 'print("%s:", %s)'
+		templateStr = 'print("%s %s:", %s)'
 	elseif ft == "javascript" or ft == "typescript" then
 		templateStr = 'console.log("%s:", %s);'
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		templateStr = 'echo "[log] %s: $%s"'
+		templateStr = 'echo "%s %s: $%s"'
 	elseif ft == "applescript" then
-		templateStr = 'log "%s:" & %s'
+		templateStr = 'log "%s %s:" & %s'
 	elseif ft == "css" or ft == "scss" then
 		templateStr = "outline: 2px solid red !important;"
 	else
@@ -69,7 +72,7 @@ function M.log()
 		return
 	end
 
-	local logStatement = string.format(templateStr, varname, varname)
+	local logStatement = string.format(templateStr, marker, varname, varname)
 	append(logStatement)
 end
 
@@ -79,13 +82,13 @@ function M.objectlog()
 	local ft = bo.filetype
 
 	if ft == "javascript" then
-		templateStr = 'console.log("%s:", JSON.stringify(%s))'
+		templateStr = 'console.log("%s %s:", JSON.stringify(%s))'
 	else
 		vim.notify("Objectlog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
-	local logStatement = string.format(templateStr, varname, varname)
+	local logStatement = templateStr:format(marker, varname, varname)
 	append(logStatement)
 end
 
@@ -99,11 +102,11 @@ function M.beeplog()
 	local randomEmoji = emojis[math.random(1, #emojis)]
 
 	if ft == "lua" or ft == "python" then
-		templateStr = 'print("%s beep")'
+		templateStr = 'print("%s %s beep")'
 	elseif ft == "javascript" or ft == "typescript" then
-		templateStr = 'console.log("%s beep");'
+		templateStr = 'console.log("%s %s beep");'
 	elseif ft == "zsh" or ft == "bash" or ft == "sh" then
-		templateStr = 'echo "%s [beep]"'
+		templateStr = 'echo "%s %s beep"'
 	elseif ft == "applescript" then
 		templateStr = "beep"
 	elseif ft == "css" or ft == "scss" then
@@ -113,7 +116,7 @@ function M.beeplog()
 		return
 	end
 
-	local logStatement = string.format(templateStr, randomEmoji)
+	local logStatement = string.format(marker, templateStr, randomEmoji)
 	append(logStatement)
 end
 
@@ -124,42 +127,53 @@ function M.timelog()
 
 	if ft == "lua" then
 		logStatement1 = {
-			'print("timelog start")',
+			'print("%s timelog start")',
 			"local timelogStart = os.time()",
 		}
 		logStatement2 = {
 			"local duration = os.difftime(os.time(), timelogStart)",
-			'print("timelog:", duration, "s")',
+			'print("%s timelog:", duration, "s")',
 		}
 	elseif ft == "javascript" then
-		-- JXA, for example, does not support console.time()
+		-- JXA does not support console.time()
 		logStatement1 = {
-			'console.log("timelog start")',
+			'console.log("%s timelog start")',
 			"const timelogStart = +new Date()",
 		}
 		logStatement2 = {
 			"const duration = (+new Date() - timelogStart) / 1000",
-			'console.log("timelog:", duration, "s")',
+			'console.log("%s timelog:", duration, "s")',
 		}
 	elseif ft == "typescript" then
-		logStatement1 = 'console.time("timelog")'
-		logStatement2 = 'console.timeEnd("timelog")'
+		logStatement1 = {
+			'console.time("timelog")',
+		}
+		logStatement2 = {
+			'console.timeEnd("timelog")',
+		}
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" or ft == "fish" then
 		logStatement1 = {
 			"timelogStart=$(date +%s)",
-			'echo "[time] start"',
+			'echo "%s time start"',
 		}
 		logStatement2 = {
 			"timelogEnd=$(date +%s) && runtime = $((timelogEnd - timelogStart))",
-			'echo "[time] ${runtime}s"',
+			'echo "%s time ${runtime}s"',
 		}
 	else
 		vim.notify("Timelog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
-	local logToAdd = g.timelogStart and logStatement1 or logStatement2
+	if g.timelogStart then
+		for _, line in pairs(logStatement1) do
+			append(line:format(marker))
+		end
+	else
+		for _, line in pairs(logStatement2) do
+			append(line:format(marker))
+		end
+	end
 
-	append(logToAdd)
 	g.timelogStart = not g.timelogStart
 end
 
@@ -182,36 +196,24 @@ end
 ---Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.removelogs()
 	local ft = bo.filetype
-	local logStatement
+	local logStatements
 	local numOfLinesBefore = fn.line("$")
 
-	if ft == "lua" and expand("%:p:h"):find("hammerspoon") then
-		logStatement = 'print(".*beep")'
-		vim.notify("Only removing beep logs for hammmerspoon, since prints are kept.")
-	elseif ft == "lua" or ft == "python" then
-		logStatement = "print"
+	if ft == "lua" or ft == "python" or ft == "sh" then
+		logStatements = {marker}
 	elseif ft == "javascript" or ft == "typescript" then
-		logStatement = {
-			"console.log",
-			"debugger",
-		}
-	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		logStatement = {
-			'echo "[beep]', -- no closing " to catch full log statement
-			'echo "[log]',
-			'echo "[time]',
-		}
+		logStatements = { marker, "debugger" }
 	elseif ft == "applescript" then
-		logStatement = { "log", "beep" }
+		logStatements = { marker, "beep" }
 	elseif ft == "css" or ft == "scss" then
-		logStatement = "outline: 2px solid red !important;"
+		logStatements = {"outline: 2px solid red !important;"}
 	else
 		vim.notify("Removelog does not support " .. ft .. " yet.", logWarn)
 	end
 
-	if type(logStatement) == "string" then logStatement = { logStatement } end
-	for _, logCom in pairs(logStatement) do
-		cmd([[silent g/^\s*]] .. logCom .. [[/d]])
+	for _, statement in pairs(logStatements) do
+		statement = statement:gsub("%]", "\\]"):gsub("%[", "\\[")
+		cmd(("g/%s/d"):format(statement))
 	end
 	cmd.nohlsearch()
 
