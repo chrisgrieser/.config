@@ -108,10 +108,12 @@ defaults write NSGlobalDomain NSWindowResizeTime 0.1
 # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-
+# Printer
 # expand print menu by default
 defaults write -g PMPrintingExpandedStateForPrint -bool true
 defaults write -g PMPrintingExpandedStateForPrint2 -bool true
+
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 # set highlight color
 defaults write NSGlobalDomain AppleHighlightColor -string "0.968627 0.831373 1.000000 Purple"
@@ -122,9 +124,6 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Show language menu in the top right corner of the boot screen
 sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
-
-# Printer setting
-defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 # turn on firewall
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
@@ -137,6 +136,9 @@ defaults write com.apple.screencapture disable-shadow -bool false
 defaults write com.apple.screencapture location -string "$WD"
 defaults write com.apple.screencapture type -string "png"
 killall SystemUIServer
+
+# Quicker Window Resizing
+defaults -currentHost write -g NSWindowResizeTime -float 0.05
 
 # App Store Update freq
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 2
