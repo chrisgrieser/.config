@@ -44,14 +44,14 @@ rules:
               while pgrep -xq "$FRONT_APP"; do 
                 i=$((i+1))
                 sleep 0.05
-                if [[ $i -eq 50 ]]; then
+                if [[ $i -eq 100 ]]; then
                   osascript -e "display notification \"Trying to force kill it…\" with title \"$FRONTAPP is hangup.\""
                   killall -9 "$FRONT_APP"
                   sleep 0.2
-                elif [[ $i -eq 51 ]]; then
+                elif [[ $i -eq 101 ]]; then
                   osascript -e "display notification \"\" with title \"Could not force kill $FRONTAPP.\""
                   return 1
-                end
+                fi
               done
 
               if [[ "$FRONT_APP" == "nvim" ]]; then
