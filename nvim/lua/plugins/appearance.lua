@@ -60,6 +60,7 @@ return {
 				{ filter = { event = "msg_show", find = "^/." }, skip = true },
 				{ filter = { event = "msg_show", find = "^?." }, skip = true },
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
+
 			},
 			cmdline = {
 				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
@@ -75,14 +76,8 @@ return {
 			-- https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 			view = {
 				mini = { timeout = 3000 },
-				notify = {
-					replace = false,
-					merge = false,
-				},
-			},
-			notify = {
-				enabled = false,
-				view = "notify",
+				-- FIX https://github.com/folke/noice.nvim/discussions/555
+				notify = { enabled = false }
 			},
 
 			-- DISABLED, since conflicts with existing plugins I prefer to use
