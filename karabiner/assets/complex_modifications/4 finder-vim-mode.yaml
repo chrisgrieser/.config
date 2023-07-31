@@ -320,7 +320,10 @@ rules:
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [shift] } }
         to:
-          - shell_command: killall Finder
+          - shell_command: |
+              killall Finder
+              osascript -e 'display notification "🔁 Restarting Finder…" with title "Finder Vim Mode"'
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
           - *remove-insert-notice
           - *leave-insert-mode
           - *end-menu
