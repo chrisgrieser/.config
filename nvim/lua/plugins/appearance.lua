@@ -10,7 +10,7 @@ return {
 		opts = { nearest_only = true },
 	},
 	{ -- just some nice animations when opening floating windows
-	-- (and controls, but those I don't use)
+		-- (and controls, but those I don't use)
 		"tamton-aquib/flirt.nvim",
 		event = "VeryLazy",
 		opts = true,
@@ -72,8 +72,17 @@ return {
 					inspect = { pattern = "^:I ", icon = " ", ft = "lua" },
 				},
 			},
+			-- https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 			view = {
 				mini = { timeout = 3000 },
+				notify = {
+					replace = false,
+					merge = false,
+				},
+			},
+			notify = {
+				enabled = false,
+				view = "notify",
 			},
 
 			-- DISABLED, since conflicts with existing plugins I prefer to use
