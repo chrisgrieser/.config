@@ -1044,7 +1044,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/clone-my-repo.sh</string>
+				<string>scripts/clone-repo.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>

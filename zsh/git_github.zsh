@@ -129,9 +129,6 @@ function gli() {
 	fi
 }
 
-if [[ "$var" ]]; then
-	
-fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # PULL REQUEST
@@ -261,7 +258,10 @@ function clone() {
 	# turn http into SSH remotes
 	[[ "$url" =~ http ]] && url="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 
-	git clone --depth=1 --filter=blob:none "$url"
+	# WARN depth=2 ensures that amending a shallow commit does not result in a 
+	# new commit without parent, effectively destroying git history (!!)
+	git clone --depth=2 --filter=blob:none "$url"
+
 	# shellcheck disable=SC2012
 	cd "$(command ls -1 -t | head -n1)" || return 1
 	separator
@@ -287,7 +287,9 @@ function nuke {
 	echo "Cloning repo again from remote… (with depth 5)"
 	printf "-----------------------------------------------\n\033[0m"
 
-	git clone --depth=5 "$SSH_REMOTE" "$local_repo_path" && 
+	# WARN depth=2 ensures that amending a shallow commit does not result in a 
+	# new commit without parent, effectively destroying git history (!!)
+	git clone --depth=2 "$SSH_REMOTE" "$local_repo_path" && 
 		cd "$local_repo_path" || return 1
 	separator
 }
