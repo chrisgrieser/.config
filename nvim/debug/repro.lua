@@ -1,20 +1,5 @@
--- stylua: ignore start
---------------------------------------------------------------------------------
--- INFO Run this config via: `neovide test.lua -- -u repro.lua` or `make debug`
---------------------------------------------------------------------------------
--- INFO set path to my personal working directory. Change back when debugging
--- folke plugins.
+-- DO NOT change the paths and don't remove the colorscheme
 local root = vim.fn.fnamemodify("./.repro", ":p")
-
--- local root = vim.env.WD .. "/repro"
-
---------------------------------------------------------------------------------
-
--- Convenience stuff, not strictly necessary
-vim.g.neovide_scale_factor = 1.6
-vim.fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
-
---------------------------------------------------------------------------------
 
 -- set stdpaths to use .repro
 for _, name in ipairs({ "config", "data", "state", "cache" }) do
@@ -54,5 +39,11 @@ require("lazy").setup(plugins, {
 })
 
 vim.cmd.colorscheme("tokyonight")
+
+--------------------------------------------------------------------------------
+
+-- Convenience stuff, not strictly necessary
+vim.g.neovide_scale_factor = 1.8
+vim.fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
 
 --------------------------------------------------------------------------------
