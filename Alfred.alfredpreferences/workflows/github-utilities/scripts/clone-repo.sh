@@ -12,7 +12,9 @@ cd "$LOCAL_REPOS" || exit 1
 if [[ -e "$reponame" ]]; then
 	osascript -e 'display notification "" with title "⚠️ Repo already exists."'
 else
-	git clone --depth=1 --filter="blob:none" "$url" || return 1
+	# WARN depth=2 ensures that amending a shallow commit does not result in a 
+	# new commit without parent, effectively destroying git history (!!)
+	git clone --depth=2 --filter="blob:none" "$url" || return 1
 fi
 
 # Open in terminal via Alfred

@@ -717,7 +717,6 @@ rules:
                 current_vol=$(osascript -e 'output volume of (get volume settings)')
                 vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
                 (afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &)
-
               else
                 osascript -e '
                   tell application "System Events" to tell process "Finder"
@@ -728,6 +727,7 @@ rules:
       - type: basic
         from: { key_code: z }
         to:
+          # WARN needs to be written twice, once for German, once for English (see above)
           - shell_command: |
               SEL=$(osascript -e 'tell application "Finder" to POSIX path of (item 1 of (get selection) as text)')
               selection_count=$(osascript -e 'tell application "Finder" to count (selection as list)')
@@ -741,7 +741,6 @@ rules:
                 current_vol=$(osascript -e 'output volume of (get volume settings)')
                 vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
                 (afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &)
-
               else
                 osascript -e '
                   tell application "System Events" to tell process "Finder"

@@ -46,7 +46,8 @@ function inspect() {
 		echo "$exa_output" | head -n$max_files_lines
 		print "\033[1;34m(…)\033[0m" # blue = exa's default folder color
 	else
-		[[ -n "$exa_output" ]] && echo "$exa_output"
+		# not using `[[ -n ]] &&` as that results in exit code 1
+		[[ -z "$exa_output" ]] || echo "$exa_output"
 	fi
 }
 
@@ -134,7 +135,7 @@ function zi() {
 function ld() {
 	last_pwd_location="$DOTFILE_FOLDER/zsh/.last_pwd"
 	if [[ ! -f "$last_pwd_location" ]]; then
-		print "\033[1;33mNo Last PWD available."
+		print "\033[1;33mNo Last PWD available.\033[0m"
 		return 1
 	fi
 	last_pwd=$(cat "$DOTFILE_FOLDER/zsh/.last_pwd")
