@@ -703,13 +703,12 @@ rules:
       - type: basic
         from: { key_code: "y" } # y and z switched on German keyboard
         to_if_alone:
+          # WARN needs to be written twice, once for German, once for English (see below)
           - shell_command: |
-              SEL=$(osascript -e 'tell application "Finder"
-                set sel to (item 1 of (get selection) as text)
-                return POSIX path of sel
-              end tell')
+              SEL=$(osascript -e 'tell application "Finder" to POSIX path of (item 1 of (get selection) as text)')
+              selection_count=$(osascript -e 'tell application "Finder" to count (selection as list)')
 
-              if [[ -d "$SEL" ]] ; then
+              if [[ -d "$SEL" && $selection_count -eq 1 ]] ; then
                 cd "$SEL"
                 foldername=$(basename "$SEL")
                 zip -r "../$foldername.zip" .
@@ -730,12 +729,10 @@ rules:
         from: { key_code: z }
         to:
           - shell_command: |
-              SEL=$(osascript -e 'tell application "Finder"
-                set sel to (item 1 of (get selection) as text)
-                return POSIX path of sel
-              end tell')
+              SEL=$(osascript -e 'tell application "Finder" to POSIX path of (item 1 of (get selection) as text)')
+              selection_count=$(osascript -e 'tell application "Finder" to count (selection as list)')
 
-              if [[ -d "$SEL" ]] ; then
+              if [[ -d "$SEL" && $selection_count -eq 1 ]] ; then
                 cd "$SEL"
                 foldername=$(basename "$SEL")
                 zip -r "../$foldername.zip" .
