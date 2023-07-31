@@ -1178,7 +1178,7 @@
 				<key>subtext</key>
 				<string>for today</string>
 				<key>text</key>
-				<string>📅 Power Search History</string>
+				<string>📅 {const:alfred_workflow_name} History</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
