@@ -1,8 +1,9 @@
 -- DEMO FUNCTIONS
 --------------------------------------------------------------------------------
 
-local function foobar(str)
-	print(str)
-end
+print("foo")
+print("bar")
 
-foobar("Hello World")
+-- vim.notify("foo")
+-- vim.notify("bar")
+

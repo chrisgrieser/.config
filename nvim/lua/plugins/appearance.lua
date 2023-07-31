@@ -76,8 +76,6 @@ return {
 			-- https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 			view = {
 				mini = { timeout = 3000 },
-				-- FIX https://github.com/folke/noice.nvim/discussions/555
-				notify = { enabled = false }
 			},
 
 			-- DISABLED, since conflicts with existing plugins I prefer to use

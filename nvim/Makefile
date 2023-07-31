@@ -16,4 +16,4 @@ plugins:
 # runs minimal config for debugging purposes
 debug:
 	export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$$PATH ; \
-	neovide test.lua -- -u ./debug/repro.lua
+	neovide ./debug/test.lua -- -u ./debug/repro.lua
