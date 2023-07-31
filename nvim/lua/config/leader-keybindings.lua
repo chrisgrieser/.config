@@ -70,7 +70,8 @@ keymap(
 	":% s/<C-r><C-w>//g<Left><Left><Left>",
 	{ desc = "󱗘 :s (word under cursor)" }
 )
-keymap("x", "<leader>ff", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = "󱗘 :s (selection)" })
+keymap("x", "<leader>ff", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = "󱗘 :s (selected text)" })
+keymap("x", "<leader>fs",	": s///g<Left><Left><Left>", { desc = "󱗘 :s (in selection)" })
 
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
 keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines" })

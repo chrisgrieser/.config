@@ -24,7 +24,7 @@ return {
 	},
 	{ -- basically autopair, but for keywords
 		"RRethy/nvim-treesitter-endwise",
-		ft = { "lua", "bash", "sh", "vim", "ruby", "elixir" },
+		ft = { "lua", "bash", "zsh", "sh", "vim", "ruby", "elixir" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- case conversion
@@ -65,10 +65,10 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
 			use_default_keymaps = false,
-			allowed_separators = { "..", "*" }, -- multiplication & lua string concatenation
+			allowed_separators = { "..", "*" }, -- add multiplication & lua string concatenation
 			highlight_node_at_cursor = true,
 			ignore_injected_langs = true,
-			allow_interline_swaps = true,
+			allow_interline_swaps = false,
 			interline_swaps_witout_separator = false,
 		},
 		keys = {
@@ -92,13 +92,13 @@ return {
 	{ -- split-join lines
 		"Wansmer/treesj",
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		keys = {
+			{ "<leader>s", vim.cmd.TSJToggle, desc = "󰗈 split/join lines" },
+		},
 		opts = {
 			use_default_keymaps = false,
 			cursor_behavior = "start", -- start|end|hold
 			max_join_length = 180,
-		},
-		keys = {
-			{ "<leader>s", vim.cmd.TSJToggle, desc = "󰗈 split/join lines" },
 		},
 	},
 	{ -- clipboard history / killring
@@ -118,7 +118,7 @@ return {
 		event = "BufReadPre",
 		opts = { override_editorconfig = false },
 	},
-	{ -- key chord hints
+	{ 
 		"folke/which-key.nvim",
 		config = function()
 			require("which-key").setup {
@@ -163,6 +163,7 @@ return {
 					align = "center",
 				},
 			}
+			-- leader prefixes normal mode
 			require("which-key").register({
 				f = { name = " 󱗘 Refactor" },
 				u = { name = " 󰕌 Undo" },
@@ -171,6 +172,13 @@ return {
 				o = { name = "  Options" },
 				p = { name = " 󰏗 Package" },
 			}, { prefix = "<leader>" })
+			-- leader prefixes visual mode
+			require("which-key").register({
+				f = { name = " 󱗘 Refactor" },
+				l = { name = "  Log / Cmdline" },
+				g = { name = " 󰊢 Git" },
+			}, { prefix = "<leader>", mode = "x" })
+
 		end,
 	},
 }
