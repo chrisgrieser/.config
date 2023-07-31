@@ -45,12 +45,14 @@ function keywordCacheIsOutdated(cachePath) {
 	const cacheObj = Application("System Events").aliases[cachePath];
 	if (!cacheObj.exists()) return true;
 	const cacheAgeMins = ((+new Date() - cacheObj.creationDate()) / 1000 / 60).toFixed(0);
-	// `..` is already the Alfred preferences directory, so no need to `cd` there
-	const workflowConfigChanges = app.doShellScript(`find .. -depth 2 -name "*.plist" -mtime -${cacheAgeMins}m`);
-	const webSearchCOnfigChanges = app.doShellScript(
-		
-	)
-	return workflowConfigChanges !== "";
+	const workflowConfigChanges = app.doShellScript(
+		`find .. -depth 2 -name "*.plist" -mtime -${cacheAgeMins}m`,
+	);
+	const webSearchConfigChanges = app.doShellScript(
+		`find ../../preferences/features/websearch -name "prefs.plist" -mtime -${cacheAgeMins}m`,
+	);
+	const cacheOutdated = workflowConfigChanges !== "" || webSearchConfigChanges !== "";
+	return cacheOutdated;
 }
 
 // get the Alfred keywords and write them to the cachePath
@@ -61,7 +63,7 @@ function refreshKeywordCache(cachePath) {
 
 	const keywords = app
 		// `grep -v "$(basename "$PWD")"` removes results from this folder, since
-		// they do not not need to be ignored by Alfred. 
+		// they do not not need to be ignored by Alfred.
 		// (Removing by a hardcoded foldername would not work, since Alfred
 		// assigns a unique ID to local installations. )
 		.doShellScript(
@@ -212,7 +214,7 @@ function run(argv) {
 		// PERF `--noua` disables user agent & fetches faster (~100ms according to hyperfine)
 		// PERF the number of results fetched has basically no effect on the speed
 		// (less than 50ms difference between 1 and 25 results), so there is no use
-		// in restricting the number of results for performance. (Rxcept for 25 being
+		// in restricting the number of results for performance. (Except for 25 being
 		// ddgr's maximum)
 		const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
 		const response = {};

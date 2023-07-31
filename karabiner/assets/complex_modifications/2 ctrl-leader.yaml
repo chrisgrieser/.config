@@ -116,12 +116,12 @@ rules:
           - shell_command: open -a 'zoom.us'
           - *deactivate-leader
           - *remove-notice
-      # [n]eovide
+      # [i]noreader
       - type: basic
         from: { key_code: "n" }
         conditions: [*leader-active]
         to:
-          - shell_command: osascript -e 'tell application "Neovide" to activate'
+          - shell_command: open -a 'ReadKit' || open 'https://www.inoreader.com/all_articles'
           - *deactivate-leader
           - *remove-notice
       # [S]lack
@@ -230,14 +230,6 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Alfred Preferences'
-          - *deactivate-leader
-          - *remove-notice
-      # [i]noreader
-      - type: basic
-        from: { key_code: "i" }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Inoreader' || open 'https://www.inoreader.com/all_articles'
           - *deactivate-leader
           - *remove-notice
       # [p]df Reader: Highlights

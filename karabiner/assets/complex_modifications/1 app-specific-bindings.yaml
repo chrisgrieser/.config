@@ -484,14 +484,14 @@ rules:
         to:
           - { key_code: up_arrow, modifiers: [command, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apptorium\.SideNotes-paddle$] }]
-      # Meh+j/k: move a note up/down
+      # cmd+alt+j/k: move a note up/down
       - type: basic
-        from: { key_code: j, modifiers: { mandatory: [control, shift, option] } }
+        from: { key_code: j, modifiers: { mandatory: [command, option] } }
         to:
           - { key_code: down_arrow, modifiers: [command, option, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apptorium\.SideNotes-paddle$] }]
       - type: basic
-        from: { key_code: k, modifiers: { mandatory: [control, shift, option] } }
+        from: { key_code: k, modifiers: { mandatory: [command, option] } }
         to:
           - { key_code: up_arrow, modifiers: [command, option, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apptorium\.SideNotes-paddle$] }]
