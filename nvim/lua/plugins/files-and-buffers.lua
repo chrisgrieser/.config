@@ -1,9 +1,14 @@
 local u = require("config.utils")
 
 return {
-	{ -- Cycle Buffers
+	{ -- :bnext & :bprevious get visual overview of buffers
 		"ghillb/cybu.nvim",
-		event = "BufEnter", -- cannot load on key when using <Plug> for whatever reason
+		keys = {
+			-- not mapping via <Plug>, since that prevents lazyloading
+			-- functions names from: https://github.com/ghillb/cybu.nvim/blob/c0866ef6735a85f85d4cf77ed6d9bc92046b5a99/plugin/cybu.lua#L38
+			{ "<BS>", function() require("cybu").cycle("next") end, desc = "󰽙 Next Buffer" },
+			{ "<S-BS>", function() require("cybu").cycle("prev") end, desc = "󰽙 Previous Buffer" },
+		},
 		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
 		opts = {
 			display_time = 1000,
