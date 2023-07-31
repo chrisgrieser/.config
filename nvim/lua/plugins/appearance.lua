@@ -11,8 +11,16 @@ return {
 	},
 	{ -- nice animations for floating wins (and controls, but those I don't use)
 		"tamton-aquib/flirt.nvim",
+		enabled = false,
 		event = "VeryLazy",
-		opts = true,
+		opts = {
+			exclude_fts = {
+				"TelescopePrompt",
+				"DressingInput",
+				"notify",
+				"cmp_menu",
+			},
+		},
 	},
 	{ -- UI overhaul
 		"folke/noice.nvim",
@@ -101,7 +109,7 @@ return {
 		"rcarriga/nvim-notify",
 		lazy = true, -- loaded by noice
 		opts = {
-			render = "compact", -- or "minimal"
+			render = "minimal", -- minimal|default|compact
 
 			-- HACK fix missing padding: https://github.com/rcarriga/nvim-notify/issues/152
 			-- render = function(bufnr, notif, highlights)
