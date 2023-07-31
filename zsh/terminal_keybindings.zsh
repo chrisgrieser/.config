@@ -64,7 +64,4 @@ bindkey -M viins "^X" autosuggest-accept # cmd+s via wezterm (consistent w/ nvim
 function autoEscapeBacktick() { LBUFFER+='\`' ; }
 zle -N autoEscapeBacktick
 bindkey -M viins '`' autoEscapeBacktick
-function autoEscapeBang() { LBUFFER+='\!' ; }
-zle -N autoEscapeBang
-bindkey -M viins '!' autoEscapeBang
 

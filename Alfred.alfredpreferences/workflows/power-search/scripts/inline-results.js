@@ -17,24 +17,6 @@ const multiSelectIcon = "🔳";
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** searches for any `.plist` more recently modified than the cache to determine
- * if the cache is outdated. Cannot use the workflow folder's mdate, since it
- * is too far up, and macOS does only changes the mdate of enclosing folders,
- * but not of their parents.
- * - Considers the possibility of the cache not existing
- * - Considers the user potentially having set a custom preferences location, by
- *   simply searching for the `.plist` files relative to this workflow's folder.
- * @param {string} cachePath
- */
-function keywordCacheIsOutdated(cachePath) {
-	const cacheObj = Application("System Events").aliases[cachePath];
-	if (!cacheObj.exists()) return true;
-	const cacheAgeMins = ((+new Date() - cacheObj.creationDate()) / 1000 / 60).toFixed(0);
-	// `..` is already the Alfred preferences directory, so no need to `cd` there
-	const moreRecentFiles = app.doShellScript(`find .. -depth 2 -name "*.plist" -mtime -${cacheAgeMins}m`);
-	return moreRecentFiles !== "";
-}
-
 /** @param {string} path */
 function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
@@ -50,6 +32,27 @@ function writeToFile(filepath, text) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/** searches for any `.plist` more recently modified than the cache to determine
+ * if the cache is outdated. Cannot use the workflow folder's mdate, since it
+ * is too far up, and macOS does only changes the mdate of enclosing folders,
+ * but not of their parents.
+ * - Considers the possibility of the cache not existing
+ * - Considers the user potentially having set a custom preferences location, by
+ *   simply searching for the `.plist` files relative to this workflow's folder.
+ * @param {string} cachePath
+ */
+function keywordCacheIsOutdated(cachePath) {
+	const cacheObj = Application("System Events").aliases[cachePath];
+	if (!cacheObj.exists()) return true;
+	const cacheAgeMins = ((+new Date() - cacheObj.creationDate()) / 1000 / 60).toFixed(0);
+	// `..` is already the Alfred preferences directory, so no need to `cd` there
+	const workflowConfigChanges = app.doShellScript(`find .. -depth 2 -name "*.plist" -mtime -${cacheAgeMins}m`);
+	const webSearchCOnfigChanges = app.doShellScript(
+		
+	)
+	return workflowConfigChanges !== "";
+}
+
 // get the Alfred keywords and write them to the cachePath
 // PERF Saving keywords in a cache saves ~250ms for me (50+ workflows, 180+ keywords)
 /** @param {string} cachePath */
@@ -57,7 +60,13 @@ function refreshKeywordCache(cachePath) {
 	const timelogStart = +new Date();
 
 	const keywords = app
-		.doShellScript("grep -A1 '<key>keyword' ../**/info.plist | grep '<string>'")
+		// `grep -v "$(basename "$PWD")"` removes results from this folder, since
+		// they do not not need to be ignored by Alfred. 
+		// (Removing by a hardcoded foldername would not work, since Alfred
+		// assigns a unique ID to local installations. )
+		.doShellScript(
+			'grep -A1 "<key>keyword" ../**/info.plist | grep "<string>" | grep -v "$(basename "$PWD")"',
+		)
 		.split("\r")
 		.reduce((acc, line) => {
 			const value = line.split(">")[1].split("<")[0];
@@ -130,20 +139,7 @@ function refreshKeywordCache(cachePath) {
 		if (searchObj.enabled) keywords.push(searchObj.keyword);
 	});
 
-	// HACK remove keywords from this very workflow. Cannot be done based on the
-	// foldername, since Alfred assigns a unique ID to local installations. The
-	// specific sequence of items is relevant, it is dependent on the occurrence
-	// of script filters in Alfred's "workflow canvas" and will change if script
-	// filter there re-arranged.
-	// (HACK to simplify removing sequence of items from an array, we convert it
-	// to a string, remove the substring, then convert it back)
-	const pseudoKeywords = "c,a,b,e,f,d,h,i,g,l,j,k,o,n,m,q,r,p,u,s,t,v,w,x,z,y";
-	const trueKeywords = keywords
-		.join(",") // to string
-		.split(pseudoKeywords) // remove substring
-		.join("")
-		.split(","); // back to array
-	const uniqueKeywords = [...new Set(trueKeywords)];
+	const uniqueKeywords = [...new Set(keywords)];
 
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
 	console.log(`Rebuilt cache: ${uniqueKeywords.length} keywords, ${durationTotalSecs}s`);
