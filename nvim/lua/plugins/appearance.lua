@@ -4,10 +4,16 @@ local colorPickerFts = { "css", "scss", "lua", "sh", "zsh", "bash" }
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- when searching, virtual text appended to cursor with search counts
 		"kevinhwang91/nvim-hlslens",
 		lazy = true, -- loaded by my "vim.on_key" function
 		opts = { nearest_only = true },
+	},
+	{ -- just some nice animations when opening floating windows
+	-- (and controls, but those I don't use)
+		"tamton-aquib/flirt.nvim",
+		event = "VeryLazy",
+		opts = true,
 	},
 	{ -- UI overhaul
 		"folke/noice.nvim",
