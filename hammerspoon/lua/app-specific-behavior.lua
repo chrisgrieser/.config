@@ -228,15 +228,16 @@ DiscordAppWatcher = aw.new(function(appName, eventType)
 	if eventType == aw.launched or eventType == aw.launching then
 		u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
 	elseif eventType == aw.activated then
-		local hasURL = clipb:match("^https?:%S+$")
-		local hasObsidianURL = clipb:match("^obsidian:%S+$")
-		local isTweet = clipb:match("^https?://twitter%.com") -- for tweets, the previews are actually useful since they show the full content
-		if (hasURL or hasObsidianURL) and not isTweet then
+		local hasURL = clipb:find("^https?:%S+$")
+		local hasObsidianURL = clipb:find("^obsidian:%S+$")
+		local isTweet = clipb:find("^https?://twitter%.com") -- for tweets, the previews are actually useful since they show the full content
+		local isToot = clipb:find("^https?://mastodon%.*") -- same for toots
+		if (hasURL or hasObsidianURL) and not (isTweet or isToot) then
 			hs.pasteboard.setContents("<" .. clipb .. ">")
 		end
 	elseif eventType == aw.deactivated then
-		local hasEnclosedURL = clipb:match("^<https?:%S+>$")
-		local hasEnclosedObsidianURL = clipb:match("^<obsidian:%S+>$")
+		local hasEnclosedURL = clipb:find("^<https?:%S+>$")
+		local hasEnclosedObsidianURL = clipb:find("^<obsidian:%S+>$")
 		if hasEnclosedURL or hasEnclosedObsidianURL then
 			clipb = clipb:sub(2, -2) -- remove first & last character
 			hs.pasteboard.setContents(clipb)
