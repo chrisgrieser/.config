@@ -38,9 +38,9 @@ function run() {
 
 	// INFO some macOS versions use a different property for that (see issue #2)
 	if (allDevices.device_title) {
-		const deviceNames = Object.keys(allDevices.device_title);
-		deviceNames.forEach((/** @type {string} */ name) => {
-			const properties = allDevices.device_title[name];
+		allDevices.device_title.forEach((/** @type {{ [x: string]: any; }} */ device) => {
+			const name = Object.keys(device)[0];
+			const properties = device[name];
 			// make keys consistent with the other versions of the output
 			properties.device_minorType = properties.device_minorClassOfDevice_string;
 			properties.device_name = name;
@@ -64,7 +64,7 @@ function run() {
 	JSON.parse(applePeriData).forEach((/** @type {{ DeviceAddress: string; }} */ device) => {
 		// make address consistent with output from `system_profiler`
 		// WARN do not use `replaceAll` because it doesn't work on older macOS versions
-		const address = device.DeviceAddress.toUpperCase().replace(/-/, ":");
+		const address = device.DeviceAddress.toUpperCase().replace(/-/g, ":");
 		applePeriphery[address] = device;
 	});
 
