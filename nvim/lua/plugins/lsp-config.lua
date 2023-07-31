@@ -263,6 +263,7 @@ local function diagnosticConfig()
 	-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
 	vim.diagnostic.config {
+		update_in_insert = false,
 		virtual_text = {
 			severity = { min = vim.diagnostic.severity.WARN }, -- no text for hints
 			source = false, -- already handled by format function
