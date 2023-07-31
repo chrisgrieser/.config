@@ -31,7 +31,7 @@ require("lua.pageup-pagedown-scroll")
 -- app-specific
 require("lua.app-specific-behavior")
 require("lua.browser")
-require("lua.twitter")
+require("lua.twitter-mastodon")
 require("lua.neovim")
 require("lua.sidenotes")
 

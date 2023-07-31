@@ -25,7 +25,9 @@ apiURL="https://api.github.com/users/${github_username}/repos?per_page=100"
 curl -s "$apiURL" | 
 	yq "filter(.fork == false) | filter(.archived == false) | filter(.name != \"$repo_to_ignore\") | map(.full_name)" --prettyPrint |
 	cut -c3- |
-	xargs -I {} git clone --depth=1 'git@github.com:{}.git' && echo
+	# WARN depth=2 ensures that amending a shallow commit does not result in a 
+	# new commit without parent, effectively destroying git history (!!)
+	xargs -I {} git clone --depth=2 'git@github.com:{}.git' && echo
 
 # archive them
 date_stamp=$(date +%Y-%m-%d_%H-%M-%S)
