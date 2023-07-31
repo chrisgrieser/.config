@@ -35,7 +35,8 @@ function run() {
 			deviceArr.push(properties);
 		});
 	}
-	// some macOS versions use a different property for that (see issue #2)
+
+	// INFO some macOS versions use a different property for that (see issue #2)
 	if (allDevices.device_title) {
 		const deviceNames = Object.keys(allDevices.device_title);
 		deviceNames.forEach((/** @type {string} */ name) => {
@@ -46,8 +47,7 @@ function run() {
 			properties.connected = properties.device_isconnected === "attrib_Yes";
 			properties.device_address = properties.device_addr.replaceAll("_", ":");
 			deviceArr.push(properties);
-		})
-
+		});
 	}
 
 	// INFO `ioreg` only includes Apple keyboards, mice, and trackpads, but does
@@ -81,7 +81,14 @@ function run() {
 
 		// icon
 		let category = "";
-		const typeIcons = { Keyboard: "⌨️", Mouse: "🖱️", AppleTrackpad: "🖲️", Gamepad: "🎮", Headphones: "🎧" };
+		const typeIcons = {
+			Keyboard: "⌨️",
+			Mouse: "🖱️",
+			AppleTrackpad: "🖲️",
+			Gamepad: "🎮",
+			Headphones: "🎧",
+			Headset: "🎧",
+		};
 		if (type) category = typeIcons[type];
 		else if (name.toLowerCase().includes("phone")) category = "📱";
 
