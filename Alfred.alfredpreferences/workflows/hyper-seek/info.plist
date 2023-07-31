@@ -2722,7 +2722,7 @@
 				<key>subtext</key>
 				<string>{query}</string>
 				<key>text</key>
-				<string>Search for Inline Results</string>
+				<string>Trigger Search for Inline Results</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.fallback</string>
