@@ -1,6 +1,7 @@
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
+local aw = require("lua.utils").aw
 
 --------------------------------------------------------------------------------
 
@@ -10,7 +11,7 @@ local function scrollUp()
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
 	local app = u.app(env.tickerApp)
-	if not app or not app:mainWindow() or not u.screenIsUnlocked() then return end
+	if not (app and app:mainWindow() and u.screenIsUnlocked() and app:isFrontmost()) then return end
 
 	u.keystroke({ "cmd" }, "left", 1, app) -- go back
 	u.keystroke({ "cmd" }, "1", 1, app) -- go to home tab
@@ -84,38 +85,36 @@ end
 -- once on system startup or reload
 scrollUp()
 
-TickerAppWatcher = u.aw
-	.new(function(appName, event)
-		if appName == "CleanShot X" or appName == "Alfred" then return end
-		local app = u.app(env.tickerApp)
+TickerAppWatcher = aw.new(function(appName, event)
+	if appName == "CleanShot X" or appName == "Alfred" then return end
+	local app = u.app(env.tickerApp)
 
-		-- move twitter and scroll up
-		if appName == env.tickerApp and (event == u.aw.launched or event == u.aw.activated) then
-			u.asSoonAsAppRuns(env.tickerApp, function()
-				winToTheSide()
-				scrollUp()
-				wu.bringAllWinsToFront()
+	-- move twitter and scroll up
+	if appName == env.tickerApp and (event == aw.launched or event == aw.activated) then
+		u.asSoonAsAppRuns(env.tickerApp, function()
+			winToTheSide()
+			scrollUp()
+			wu.bringAllWinsToFront()
 
-				-- focus new tweet / media window if there is one
-				if not app then return end
-				local newTweetWindow = app:findWindow("Tweet")
-				if newTweetWindow then newTweetWindow:focus() end
-				local mediaWindow = app:findWindow("Media") or app:findWindow("Ivory")
-				if mediaWindow then mediaWindow:focus() end
-			end)
+			-- focus new tweet / media window if there is one
+			if not app then return end
+			local newTweetWindow = app:findWindow("Tweet")
+			if newTweetWindow then newTweetWindow:focus() end
+			local mediaWindow = app:findWindow("Media") or app:findWindow("Ivory")
+			if mediaWindow then mediaWindow:focus() end
+		end)
 
 		-- auto-close media windows and scroll up when deactivating
-		elseif appName == env.tickerApp and event == u.aw.deactivated then
-			if u.isFront("CleanShot X") then return end
-			scrollUp()
-			closeMediaWindow()
+	elseif appName == env.tickerApp and event == aw.deactivated then
+		if u.isFront("CleanShot X") then return end
+		closeMediaWindow()
+		u.runWithDelays(2.5, scrollUp) -- deferred, so multiple links can be clicked
 
 		-- raise twitter when switching window to other app
-		elseif (event == u.aw.activated or event == u.aw.launched) and appName ~= env.tickerApp then
-			showHideTickerApp(hs.window.focusedWindow())
-		end
-	end)
-	:start()
+	elseif (event == aw.activated or event == aw.launched) and appName ~= env.tickerApp then
+		showHideTickerApp(hs.window.focusedWindow())
+	end
+end):start()
 
 -- scrollup on wake
 local c = hs.caffeinate.watcher

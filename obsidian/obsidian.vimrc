@@ -153,6 +153,7 @@ nmap U <C-r>
 " Case Switch via Smarter MD Hotkeys Plugin
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
 nmap ö :caseSwitch
+vmap ö :caseSwitch
 
 " do not move to the right on toggling case of a character
 nmap ~ ~h
