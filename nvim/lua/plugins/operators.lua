@@ -1,10 +1,12 @@
 return {
 	{ -- comment
 		"numToStr/Comment.nvim",
-		keys = { 
+		keys = {
 			-- mnemonic: [q]uiet text
-			{ "Q", desc = "Append Comment at EoL" },
-			{ "q", mode = { "n", "x" }, desc = "Comment" },
+			{ "Q", desc = " Append Comment at EoL" },
+			{ "q", mode = { "n", "x" }, desc = " Comment Operator" },
+			{ "qo", desc = " Comment below" },
+			{ "qO", desc = " Comment above" },
 		},
 		opts = {
 			opleader = {
@@ -24,17 +26,14 @@ return {
 	},
 	{ -- substitute
 		"gbprod/substitute.nvim",
-		lazy = true,
-		init = function()
-			-- stylua: ignore start
-			vim.keymap.set("n", "s", function() require("substitute").operator() end, { desc = "substitute operator" })
-			vim.keymap.set("n", "ss", function() require("substitute").line() end, { desc = "substitute line" })
-			vim.keymap.set("n", "S", function() require("substitute").eol() end, { desc = "substitute to EoL" })
-			vim.keymap.set("n", "sw", function() require("substitute.exchange").operator() end, { desc = "exchange operator" })
-			vim.keymap.set("n", "sW", "sw$", { remap = true, desc = "exchange to EoL" })
-			vim.keymap.set("n", "sww", function() require("substitute.exchange").line() end, { desc = "exchange line" })
-			-- stylua: ignore end
-		end,
+		keys = {
+			{ "s", function() require("substitute").operator() end, desc = "Substitute operator" },
+			{ "ss", function() require("substitute").line() end, desc = "Substitute line" },
+			{ "S", function() require("substitute").eol() end, desc = "Substitute to EoL" },
+			{ "sy", function() require("substitute.exchange").operator() end, desc = "Exchange operator" },
+			{ "sY", "sy$", remap = true, desc = "Exchange to EoL" },
+			{ "syy", function() require("substitute.exchange").line() end, desc = "Exchange line" },
+		},
 		opts = { on_substitute = require("yanky.integration").substitute() },
 	},
 	{ -- duplicate
