@@ -432,15 +432,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-
-vim.keymap.set("n", ",q", function()
-	print("foo")
-	print("bar")
-end)
-
-vim.keymap.set("n", ",Q", function()
-	vim.notify("foo")
-	vim.notify("bar")
-end)
-
-

@@ -1,5 +1,5 @@
 local u = require("config.utils")
-local colorPickerFts = { "css", "scss", "lua", "sh", "zsh", "bash" }
+local colorPickerFts = { "css", "scss", "lua", "sh" }
 
 --------------------------------------------------------------------------------
 
@@ -9,8 +9,7 @@ return {
 		lazy = true, -- loaded by my "vim.on_key" function
 		opts = { nearest_only = true },
 	},
-	{ -- just some nice animations when opening floating windows
-		-- (and controls, but those I don't use)
+	{ -- nice animations for floating wins (and controls, but those I don't use)
 		"tamton-aquib/flirt.nvim",
 		event = "VeryLazy",
 		opts = true,
@@ -60,7 +59,6 @@ return {
 				{ filter = { event = "msg_show", find = "^/." }, skip = true },
 				{ filter = { event = "msg_show", find = "^?." }, skip = true },
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
-
 			},
 			cmdline = {
 				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
@@ -103,27 +101,29 @@ return {
 		"rcarriga/nvim-notify",
 		lazy = true, -- loaded by noice
 		opts = {
-			-- HACK fix missing padding: https://github.com/rcarriga/nvim-notify/issues/152
-			render = function(bufnr, notif, highlights)
-				local base = require("notify.render.base")
-				local namespace = base.namespace()
-				local padded_message = vim.tbl_map(function(line) return " " .. line end, notif.message)
-				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, padded_message)
+			render = "compact", -- or "minimal"
 
-				vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
-					hl_group = highlights.icon,
-					end_line = #notif.message - 1,
-					end_col = #notif.message[#notif.message],
-					priority = 50,
-				})
-			end,
+			-- HACK fix missing padding: https://github.com/rcarriga/nvim-notify/issues/152
+			-- render = function(bufnr, notif, highlights)
+			-- 	local base = require("notify.render.base")
+			-- 	local namespace = base.namespace()
+			-- 	local padded_message = vim.tbl_map(function(line) return " " .. line end, notif.message)
+			-- 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, padded_message)
+			--
+			-- 	vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
+			-- 		hl_group = highlights.icon,
+			-- 		end_line = #notif.message - 1,
+			-- 		end_col = #notif.message[#notif.message],
+			-- 		priority = 50,
+			-- 	})
+			-- end,
 			stages = "slide",
-			level = 0, -- minimum severity level to display (0 = display all)
-			max_height = 30,
-			max_width = 60,
-			minimum_width = 13,
-			timeout = 7500,
 			top_down = false,
+			max_height = 30,
+			max_width = 50,
+			minimum_width = 15,
+			level = 0, -- minimum severity level to display (0 = display all)
+			timeout = 7500,
 			on_open = function(win)
 				if not vim.api.nvim_win_is_valid(win) then return end
 				vim.api.nvim_win_set_config(win, { border = u.borderStyle })

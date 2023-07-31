@@ -42,7 +42,7 @@ end
 ---@param text string
 local function append(text)
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, {text})
+	vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
 	normal("j==")
 end
 
@@ -57,6 +57,8 @@ function M.log()
 
 	if ft == "lua" then
 		templateStr = 'print("%s %s: ".. %s)'
+		-- FIX for noice.nvim print-bug: https://github.com/folke/noice.nvim/issues/556
+		if expand("%:p"):find("nvim") then templateStr = 'vim.notify("%s %s: ".. %s)' end
 	elseif ft == "python" then
 		templateStr = 'print("%s %s:", %s)'
 	elseif ft == "javascript" or ft == "typescript" then
@@ -200,13 +202,14 @@ function M.removelogs()
 	local numOfLinesBefore = fn.line("$")
 
 	if ft == "lua" or ft == "python" or ft == "sh" then
-		logStatements = {marker}
+		logStatements = { marker }
 	elseif ft == "javascript" or ft == "typescript" then
 		logStatements = { marker, "debugger" }
 	elseif ft == "applescript" then
 		logStatements = { marker, "beep" }
+		print("[QL] logStatements: " .. logStatements)
 	elseif ft == "css" or ft == "scss" then
-		logStatements = {"outline: 2px solid red !important;"}
+		logStatements = { "outline: 2px solid red !important;" }
 	else
 		vim.notify("Removelog does not support " .. ft .. " yet.", logWarn)
 	end
@@ -218,8 +221,7 @@ function M.removelogs()
 	cmd.nohlsearch()
 
 	local linesRemoved = numOfLinesBefore - fn.line("$")
-	local msg = "Removed " .. tostring(linesRemoved) .. " log statements."
-	if linesRemoved == 1 then msg = msg:gsub("s%.$", ".") end -- remove plural
+	local msg = ("Removed %s log statement(s)."):format(linesRemoved)
 	vim.notify(msg)
 
 	g.timelogCount = 0 -- reset timelog
