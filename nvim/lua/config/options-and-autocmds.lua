@@ -201,7 +201,7 @@ autocmd("BufReadPost", {
 -- save on leaving file
 opt.autowrite = true
 opt.autowriteall = true
-autocmd({ "BufLeave", "BufDelete", "QuitPre", "FocusLost" }, {
+autocmd({ "BufLeave", "BufDelete", "FocusLost" }, {
 	pattern = "?*",
 	callback = function()
 		local filepath = expand("%:p")
