@@ -28,7 +28,7 @@ local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1
 -- INFO: Transparency set in theme-config.lua
 if host:find("Mother") then
 	g.neovide_scale_factor = 0.88
-	g.neovide_refresh_rate = 30
+	g.neovide_refresh_rate = 35
 elseif isAtOffice then
 	g.neovide_scale_factor = 1.06
 	g.neovide_refresh_rate = 50
