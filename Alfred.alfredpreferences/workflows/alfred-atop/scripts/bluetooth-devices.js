@@ -18,10 +18,6 @@ function run() {
 	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType"))
 		.SPBluetoothDataType[0];
 	if (allDevices.device_connected) {
-		// single devices are not stored as array (see issue #2)
-		if (!Array.isArray(allDevices.device_connected)) {
-			allDevices.device_connected = [allDevices.device_connected];
-		}
 		allDevices.device_connected.forEach((/** @type {{ [x: string]: any; }} */ device) => {
 			const name = Object.keys(device)[0];
 			const properties = device[name];
@@ -31,9 +27,6 @@ function run() {
 		});
 	}
 	if (allDevices.device_not_connected) {
-		if (!Array.isArray(allDevices.device_not_connected)) {
-			allDevices.device_not_connected = [allDevices.device_not_connected];
-		}
 		allDevices.device_not_connected.forEach((/** @type {{ [x: string]: any; }} */ device) => {
 			const name = Object.keys(device)[0];
 			const properties = device[name];
@@ -41,6 +34,20 @@ function run() {
 			properties.connected = false;
 			deviceArr.push(properties);
 		});
+	}
+	// some macOS versions use a different property for that (see issue #2)
+	if (allDevices.device_title) {
+		const deviceNames = Object.keys(allDevices.device_title);
+		deviceNames.forEach((/** @type {string} */ name) => {
+			const properties = allDevices.device_title[name];
+			// make keys consistent with the other versions of the output
+			properties.device_minorType = properties.device_minorClassOfDevice_string;
+			properties.device_name = name;
+			properties.connected = properties.device_isconnected === "attrib_Yes";
+			properties.device_address = properties.device_addr.replaceAll("_", ":");
+			deviceArr.push(properties);
+		})
+
 	}
 
 	// INFO `ioreg` only includes Apple keyboards, mice, and trackpads, but does
