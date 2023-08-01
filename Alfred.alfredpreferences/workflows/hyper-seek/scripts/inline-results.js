@@ -5,8 +5,8 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
-
 // CONFIG
+
 const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
 let resultsToFetch = parseInt($.getenv("inline_results_to_fetch")) || 5;
 if (resultsToFetch < 1) resultsToFetch = 1;
