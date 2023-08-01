@@ -6,12 +6,4 @@ return {
 			{ "<leader>Ö", function() require("duck").cook("💀") end, desc = "󰇥 Cook Duck" },
 		},
 	},
-	{
-		"tamton-aquib/zone.nvim",
-		event = "VeryLazy",
-		opts = {
-			style = "epilepsy", -- vanish|epilepsy|treadmill|dvd|matrix
-			after = 60, -- seconds
-		},
-	},
 }

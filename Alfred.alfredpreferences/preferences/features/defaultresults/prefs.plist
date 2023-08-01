@@ -5,7 +5,7 @@
 	<key>fallbacks</key>
 	<array>
 		<string>features.websearch.google.fallback</string>
-		<string>power-search.C950FDC3-9DD1-427D-82D5-2FC76BE7858E</string>
+		<string>hyper-seek.C950FDC3-9DD1-427D-82D5-2FC76BE7858E</string>
 	</array>
 	<key>showContacts</key>
 	<false/>
