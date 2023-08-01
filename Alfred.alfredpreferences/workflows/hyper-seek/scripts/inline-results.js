@@ -217,12 +217,9 @@ function run(argv) {
 		// (less than 40ms difference between 1 and 25 results), so there is no use
 		// in restricting the number of results for performance. (Except for 25 being
 		// ddgr's maximum)
-		// const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
-		const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --noprompt --expand "${query}"`;
-		const rawResponse = app.doShellScript(ddgrCommand);
-		const jsonfiedResponse = rawResponse.split("\r\r");
+		const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
 		const response = {
-			results: jsonfiedResponse,
+			results: JSON.parse(app.doShellScript(ddgrCommand)),
 			query: query,
 		};
 		writeToFile(responseCachePath, JSON.stringify(response));
