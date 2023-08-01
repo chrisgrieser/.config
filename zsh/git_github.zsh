@@ -133,7 +133,7 @@ function gli() {
 
 # PULL REQUEST
 # - stage all & commit with $* (or prompted)
-# - creates fork (if no writing access)
+# - auto-creates fork
 # - create PR and autofills is with commit msg
 # - merges into *current branch* (not the default branch)
 # - opens PR in the web
