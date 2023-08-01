@@ -5,20 +5,20 @@ local u = require("lua.utils")
 -- USB WATCHER
 
 -- Podcasts onto OpenSwim-Player
-local podcastSyncScript = "./helpers/cp-podcasts.sh"
-OpenSwimWatcher = hs.usb.watcher
-	.new(function(device)
-		if not (device.eventType == "added" and device.productName == "LC8234xx_17S EVK") then return end
-
-		u.notify("⏳ Starting Podcast Sync…")
-		hs.task
-			.new(podcastSyncScript, function(exitCode, _, stdErr)
-				local msg = exitCode == 0 and "✅ Podcast Sync" or "⚠️️ Podcast Sync" .. stdErr
-				u.notify(msg)
-			end)
-			:start()
-	end)
-	:start()
+-- local podcastSyncScript = "./helpers/cp-podcasts.sh"
+-- OpenSwimWatcher = hs.usb.watcher
+-- 	.new(function(device)
+-- 		if not (device.eventType == "added" and device.productName == "LC8234xx_17S EVK") then return end
+--
+-- 		u.notify("⏳ Starting Podcast Sync…")
+-- 		hs.task
+-- 			.new(podcastSyncScript, function(exitCode, _, stdErr)
+-- 				local msg = exitCode == 0 and "✅ Podcast Sync" or "⚠️️ Podcast Sync" .. stdErr
+-- 				u.notify(msg)
+-- 			end)
+-- 			:start()
+-- 	end)
+-- 	:start()
 
 -- notify when new USB device is plugged in
 -- if backup device: open terminal
