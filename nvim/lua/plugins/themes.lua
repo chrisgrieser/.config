@@ -3,19 +3,18 @@ local g = vim.g
 
 -- INFO only the first theme will be used
 local lightThemes = {
+	{ "catppuccin/nvim", name = "catppuccin" },
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- { "rose-pine/neovim", name = "rose-pine" },
 	-- { "marko-cerovac/material.nvim", init = function() vim.g.material_style = "lighter" end, config = { lualine_style = "stealth" } },
-	-- { "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
-	-- { "catppuccin/nvim", name = "catppuccin" },
 }
 
 local darkThemes = {
+	"sainnhe/everforest",
 	"rebelot/kanagawa.nvim",
 	-- "folke/tokyonight.nvim",
 	-- "nvimdev/zephyr-nvim",
 	-- "kvrohit/mellow.nvim",
-	-- "sainnhe/everforest",
 	-- "nyoom-engineering/oxocarbon.nvim",
 }
 
