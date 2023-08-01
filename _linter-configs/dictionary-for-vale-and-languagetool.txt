@@ -142,3 +142,6 @@ Kanban
 autocmds
 functionality
 non-continious
+de
+eMail
+DuckDuckGo
