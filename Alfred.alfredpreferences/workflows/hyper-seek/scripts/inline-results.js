@@ -30,6 +30,8 @@ function writeToFile(filepath, text) {
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
 
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** searches for any `.plist` more recently modified than the cache to determine
@@ -158,6 +160,13 @@ function run(argv) {
 	/** @type{"fallback"|"multi-select"|"default"|"rerun"} */
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 	const query = argv[0].trim();
+
+	// ensure cache folder exists. check only done on short queries to not run
+	// the costly check on the later runs.
+	if (query.length < 2) {
+		if (!fileExists($.getenv("alfred_workflow_cache")))
+			app.pathTo("home folder")
+	}
 
 	// GUARD CLAUSE 1:
 	// - query < 3 chars

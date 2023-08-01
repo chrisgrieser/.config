@@ -57,8 +57,8 @@ rules:
               while pgrep -xq "Alfred"; do sleep 0.1; done
               sleep 0.1
               open -a "Alfred 5"
-              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
               open -a "Alfred Preferences"
+              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Insert Mode Vim: ⇪ Hyper + hjklio<space> → ⌫←↓↑→"
     manipulators:
