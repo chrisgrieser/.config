@@ -2719,21 +2719,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>subtext</key>
-				<string>{query}</string>
-				<key>text</key>
-				<string>Trigger Search for Inline Results</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.fallback</string>
-			<key>uid</key>
-			<string>C950FDC3-9DD1-427D-82D5-2FC76BE7858E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -2777,6 +2762,21 @@
 			<string>03296F2D-389A-45F3-BB31-D4D36C8EC1DA</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>subtext</key>
+				<string>{query}</string>
+				<key>text</key>
+				<string>Trigger Search for Inline Results</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>C950FDC3-9DD1-427D-82D5-2FC76BE7858E</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3135,7 +3135,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1370</real>
+			<real>1375</real>
 		</dict>
 		<key>D3C22147-3316-415A-B4C1-8AA201F0888E</key>
 		<dict>

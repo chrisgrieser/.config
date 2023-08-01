@@ -38,8 +38,10 @@ return {
 	},
 	{ -- duplicate
 		"smjonas/duplicate.nvim",
-		keys = { { "w", mode = { "n", "x" }, desc = "Duplicate" } },
-		init = function() vim.keymap.set("n", "W", "w$", { remap = true, desc = "Duplicate to EoL" }) end,
+		keys = {
+			{ "w", mode = { "n", "x" }, desc = "󰆑 Duplicate Operator" },
+		},
+		init = function() vim.keymap.set("n", "W", "w$", { remap = true, desc = "󰆑 Duplicate to EoL" }) end,
 		opts = {
 			operator = {
 				normal_mode = "w",
@@ -105,7 +107,13 @@ return {
 	},
 	{ -- surround
 		"kylechui/nvim-surround",
-		event = "BufRead",
+		keys = {
+			{ "ys", desc = "󰅪 Add Surround Operator" },
+			{ "yS", desc = "󰅪 Surround to EoL" },
+			{ "ds", desc = "󰅪 Delete Surround Operator" },
+			{ "cs", desc = "󰅪 Change Surround Operator" },
+			{ "s", mode = "x", desc = "󰅪 Add Surround Operator" },
+		},
 		config = function()
 			local u = require("config.utils")
 
@@ -113,8 +121,8 @@ return {
 			textobjRemaps.a = "*" -- markdown italics
 			textobjRemaps.u = "__" -- markdown bold
 
-			-- requires unmapping yS in the keymaps below
-			vim.keymap.set("n", "yS", "ys$", { desc = "surround to EoL", remap = true })
+			-- requires unmapping yS from normal_line below
+			vim.keymap.set("n", "yS", "ys$", { desc = "󰅪 Surround to EoL", remap = true })
 
 			-- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L483
 			local config = require("nvim-surround.config")
@@ -144,6 +152,14 @@ return {
 						delete = "(__)().-(__)()",
 						change = {
 							target = "(__)().-(__)()",
+						},
+					},
+					["/"] = {
+						find = "/.-/",
+						add = { "/", "/" },
+						delete = "(/)().-(/)()",
+						change = {
+							target = "(/)().-(/)()",
 						},
 					},
 					["*"] = {

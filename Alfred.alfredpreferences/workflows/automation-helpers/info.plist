@@ -333,19 +333,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>F5B23872-2F64-449D-A2A2-3D059481B91B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BF036F1E-6091-4825-BB2C-DECB11CBA1B8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -1586,76 +1573,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>test</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/Untitled.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>{const:alfred_workflow_name}</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>F5B23872-2F64-449D-A2A2-3D059481B91B</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>BF036F1E-6091-4825-BB2C-DECB11CBA1B8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1907,13 +1824,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>ypos</key>
 			<real>715</real>
 		</dict>
-		<key>BF036F1E-6091-4825-BB2C-DECB11CBA1B8</key>
-		<dict>
-			<key>xpos</key>
-			<real>310</real>
-			<key>ypos</key>
-			<real>1230</real>
-		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
 			<key>colorindex</key>
@@ -2011,13 +1921,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<real>185</real>
 			<key>ypos</key>
 			<real>715</real>
-		</dict>
-		<key>F5B23872-2F64-449D-A2A2-3D059481B91B</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1230</real>
 		</dict>
 		<key>FDD33DE5-9EF6-4054-97BE-CD907ADEC73E</key>
 		<dict>
