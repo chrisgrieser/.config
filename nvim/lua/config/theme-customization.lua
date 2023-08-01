@@ -66,14 +66,11 @@ local function themeModifications()
 		linkHighlight("ScrollView", "Substitute")
 		updateHighlight("NotifyINFOTitle", "guifg=#4eb400")
 		updateHighlight("NotifyINFOIcon", "guifg=#4eb400")
+		linkHighlight("@text.warning.comment", "WarningMsg")
 
-			for type, _ in pairs({}) do
-				vim.cmd.highlight("DiagnosticUnderline" .. type .. " gui=underdouble cterm=underline")
-			end
-		updateHighlight("DiagnosticUnderlineInfo", " gui=underdouble cterm=underline")
-		updateHighlight("DiagnosticUnderlineWarn", " gui=underdouble cterm=underline")
-		updateHighlight("DiagnosticUnderlineError", " gui=underdouble cterm=underline")
-		updateHighlight("DiagnosticUnderlineHint", " gui=underdouble cterm=underline")
+		for type, _ in pairs { "Hint", "Info", "Warn", "Error" } do
+			vim.cmd.highlight("DiagnosticUnderline" .. type .. " gui=underdouble cterm=underline")
+		end
 	elseif theme == "bluloco" then
 		linkHighlight("@text.note.comment", "@text.todo.comment")
 		linkHighlight("@text.warning.comment", "@text.todo.comment")
