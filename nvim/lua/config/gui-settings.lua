@@ -59,8 +59,7 @@ g.neovide_scroll_animation_length = 1
 --------------------------------------------------------------------------------
 -- CURSOR
 vim.opt.guicursor = {
-	-- INFO while using noice, the guicursor cannot be styled in the cmdline https://github.com/folke/noice.nvim/issues/552
-	"i-ci-c:ver25", 
+	"i-ci-c:ver25", -- INFO with noice.nvim, the guicursor cannot be styled in the cmdline https://github.com/folke/noice.nvim/issues/552
 	"n-sm:block",
 	"r-cr-o-v:hor10",
 	"a:blinkwait200-blinkoff500-blinkon700",

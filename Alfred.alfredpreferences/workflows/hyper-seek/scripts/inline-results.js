@@ -155,7 +155,8 @@ function refreshKeywordCache(cachePath) {
 function run(argv) {
 	const timelogStart = +new Date();
 
-	const mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
+	/** @type{"fallback"|"multi-select"|"default"|"rerun"} */
+	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 	const query = argv[0];
 
 	// GUARD CLAUSE 1:
@@ -211,6 +212,7 @@ function run(argv) {
 	let results = [];
 	if (responseCache.query === query) {
 		results = responseCache.results;
+		mode = "rerun";
 	} else {
 		// PERF `--noua` disables user agent & fetches faster (~100ms according to hyperfine)
 		// PERF the number of results fetched has basically no effect on the speed
@@ -271,9 +273,13 @@ function run(argv) {
 		items: [searchForQuery].concat(newResults),
 	});
 
+	// logging
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
-	let log = `Total: ${durationTotalSecs}s`;
-	if (mode !== "default") log += ` (${mode})`;
+	let log = `${durationTotalSecs}s`;
+	if (mode === "fallback" || mode === "multi-select") log += ` (${mode})`;
+
+	if (mode === "rerun") log = "__" + log; // indented to make it easier to read
+	else log = "Total: " + log;
 	console.log(log);
 
 	return alfredInput;

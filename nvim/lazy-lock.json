@@ -104,5 +104,6 @@
   "vim-matchup": { "branch": "master", "commit": "207418404291d81df13612b966b7eb9841c9e704" },
   "vim-visual-multi": { "branch": "master", "commit": "724bd53adfbaf32e129b001658b45d4c5c29ca1a" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" },
-  "yanky.nvim": { "branch": "main", "commit": "95c2f006ea6eaed2b2d8b8b4943b8fcf13faf03f" }
+  "yanky.nvim": { "branch": "main", "commit": "95c2f006ea6eaed2b2d8b8b4943b8fcf13faf03f" },
+  "zone.nvim": { "branch": "main", "commit": "f51c9e1097d4a77a78ff60c7649f4cbeded71b2f" }
 }
