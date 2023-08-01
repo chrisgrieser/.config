@@ -1,9 +1,9 @@
 title: vim helpers
 rules:
-  - description: "Neovide: Fix <S-Space> and cmd+q → ZZ"
+  - description: "Neovide: ⇪R to restart"
     manipulators:
       - type: basic
-        from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
+        from: { key_code: r, modifiers: { mandatory: [command, control, shift, option] } }
         conditions:
           - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
         to:
@@ -11,21 +11,34 @@ rules:
           # INFO Quitting via :wqall instead of cmd+Q so bufferleaving autocmds are triggered
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
               nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
 
+              # wait for 2 secs, if nvim is still running then, try to killall
               i=0
-              while pgrep -xq "$FRONT_APP" && [[ "$i" -lt 30 ]]; do 
+              while pgrep -xq "nvim" && [[ "$i" -lt 20 ]]; do 
                 i=$((i+1))
-                sleep 0.05
+                sleep 0.1
+              done
+              while pgrep -xq "nvim" ; do 
+                killall nvim neovide
+              fi
+
+              # wait for 2 seconds and if nvim is *still* running, abort
+              i=0
+              while pgrep -xq "nvim" ; do 
+                i=$((i+1))
+                sleep 0.1
+                if [[ "$i" -gt 20 ]]; then
+                  osascript -e 'display notification "" with title "Could not quit Neovide." sound name "Ping"'
+                  return 1
+                fi
               done
 
               # bwipeout necessary due to empty buffer created before jumping to '0
               nohup neovide --notabs --frame=buttonless --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #" &
               disown # https://stackoverflow.com/a/20338584/22114136
-
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Neovide: Fix <S-Space> and cmd+q → ZZ"
+  - description: "Neovide: Fix <S-Space> and ⌘Q → ZZ"
     manipulators:
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [shift] } }

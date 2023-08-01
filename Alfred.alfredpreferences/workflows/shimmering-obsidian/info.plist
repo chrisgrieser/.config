@@ -436,7 +436,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B9AC24F9-316C-4D05-903D-7ED21EA0A3C8</string>
+				<string>956AC463-0D84-45FF-B72B-80E2C495EC71</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -3011,6 +3011,26 @@ return hook;
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>appendedText</key>
+					<string>{var:prefix}{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>956AC463-0D84-45FF-B72B-80E2C495EC71</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -3039,7 +3059,7 @@ return hook;
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>{var:apendedText}</string>
+				<string>{var:appendedText}</string>
 				<key>title</key>
 				<string>✅ Appended</string>
 			</dict>
@@ -3066,26 +3086,6 @@ return hook;
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>DBA6DBFB-3701-4BFC-B72C-406BF62DF384</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>apendedText</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>956AC463-0D84-45FF-B72B-80E2C495EC71</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -8091,9 +8091,9 @@ DOUBLE CLICK THIS to set Hotkey.</string>
 			<key>note</key>
 			<string>save appended text for notification</string>
 			<key>xpos</key>
-			<real>2020</real>
+			<real>2040</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>710</real>
 		</dict>
 		<key>9888408F-4081-4003-8D82-85FF20EB8138</key>
 		<dict>

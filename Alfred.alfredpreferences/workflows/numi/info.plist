@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>137710DD-0C16-4CC3-A8A2-7C6A5B63ED07</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2A830C26-3537-47A3-B5A9-3DE93ACF7E5E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2A830C26-3537-47A3-B5A9-3DE93ACF7E5E</key>
 		<array>
 			<dict>
@@ -204,6 +217,55 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
+				<string>=</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>zsh ./numi-cli.sh "$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>137710DD-0C16-4CC3-A8A2-7C6A5B63ED07</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
 				<string>5</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -285,6 +347,46 @@
 			<string>8595930C-EBDF-4966-8B30-1696105D4481</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>2A830C26-3537-47A3-B5A9-3DE93ACF7E5E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F54EB2AF-5BE3-405C-8D2D-AC175D9817E1</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -481,46 +583,6 @@
 			<string>4C131AAD-DFDB-420C-8995-319D2B6610A9</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>2A830C26-3537-47A3-B5A9-3DE93ACF7E5E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>F54EB2AF-5BE3-405C-8D2D-AC175D9817E1</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -830,7 +892,18 @@ Disable Alfred's bultin Calculator, since this workflow works is a drop-in repla
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>285</real>
+		</dict>
+		<key>137710DD-0C16-4CC3-A8A2-7C6A5B63ED07</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>explicitely call the calculator, WITHOUT "=" as argument</string>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>2A830C26-3537-47A3-B5A9-3DE93ACF7E5E</key>
 		<dict>
@@ -846,42 +919,42 @@ Disable Alfred's bultin Calculator, since this workflow works is a drop-in repla
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>395</real>
 		</dict>
 		<key>6F5C9C4D-6511-49F2-B616-FB8FBCA608B3</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>505</real>
 		</dict>
 		<key>8595930C-EBDF-4966-8B30-1696105D4481</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>175</real>
 		</dict>
 		<key>8AA21862-ACD4-43D5-A764-794883682FAA</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>615</real>
 		</dict>
 		<key>9E463813-7BDA-4E5D-BA8F-7C55A264C2BB</key>
 		<dict>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>505</real>
 		</dict>
 		<key>AA36434E-071C-4F1E-9B6A-4E47272FF10E</key>
 		<dict>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>395</real>
 		</dict>
 		<key>CBDBAEED-8E9A-4803-AB35-14E7DC6BE6A9</key>
 		<dict>
@@ -892,7 +965,7 @@ Disable Alfred's bultin Calculator, since this workflow works is a drop-in repla
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>730</real>
 		</dict>
 		<key>D27B9988-315C-4520-8A5B-548C78CB4386</key>
 		<dict>
@@ -903,21 +976,21 @@ Disable Alfred's bultin Calculator, since this workflow works is a drop-in repla
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>730</real>
 		</dict>
 		<key>ED392178-56AA-491C-BBE1-66CFFA23AB0B</key>
 		<dict>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>615</real>
 		</dict>
 		<key>ED4143BD-CFF8-4E1F-8207-178B368B419C</key>
 		<dict>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>175</real>
 		</dict>
 		<key>F54EB2AF-5BE3-405C-8D2D-AC175D9817E1</key>
 		<dict>
@@ -933,7 +1006,7 @@ Disable Alfred's bultin Calculator, since this workflow works is a drop-in repla
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>285</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
