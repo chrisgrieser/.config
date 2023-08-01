@@ -31,10 +31,11 @@ ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# BETTER MAN
+# SUPER MAN
 # - searches directly for $2 in the manpage of $1
 # - works for builtin commands as well
 # - opens in a new wezterm tab
+# - fallsback to --help page if no manpage found
 function man() {
 	local command="$1"
 	local search_term="$2"
@@ -62,8 +63,11 @@ function man() {
 		fi
 	else
 		if ! command man -w "$command" &>/dev/null; then
-			print "\033[1;33mNo man page found.\033[0m"
-			return 1
+			# fallback to --help
+			if ! $command --help | bat --language=help --style=plain --wrap=character ; then
+				print "\033[1;33mNeither man page nor --help page found.\033[0m"
+				return 1
+			fi
 		fi
 		if [[ -n "$search_term" ]]; then
 			pane_id=$(wezterm cli spawn -- command man -P "less --pattern=$search_term" "$command")
