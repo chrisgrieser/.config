@@ -32,9 +32,13 @@ rules:
               killall "$FRONT_APP"
 
               i=0
-              while pgrep -xq "$FRONT_APP" && [[ "$i" -lt 30 ]]; do 
+              while pgrep -xq "$FRONT_APP"; do 
                 i=$((i+1))
                 sleep 0.05
+                if [[ "$i" -lt 30 ]]; then 
+                  osascript -e "display notification \"\" with title \"Could not quit $FRONT_APP\""
+                  return 1
+                fi
               done
 
               [[ "$FRONT_APP" == "wezterm-gui" ]] && FRONT_APP="WezTerm"
