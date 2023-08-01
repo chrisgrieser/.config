@@ -58,19 +58,22 @@ local function themeModifications()
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 		updateHighlight("GitSignsAdd", "guifg=#7fcc82")
 		updateHighlight("ScrollView", "guibg=#5a71b3")
-	elseif theme == "oxocarbon" then
-		linkHighlight("FloatTitle", "TelescopePromptTitle")
-	elseif theme == "material" then
+	elseif theme == "material" and mode == "light" then
 		updateHighlight("@property", "guifg=#6c9798")
 		updateHighlight("@field", "guifg=#6c9798")
 		updateHighlight("Comment", "guifg=#9cb4b5")
 		updateHighlight("NonText", "guifg=#9cb4b5")
 		linkHighlight("ScrollView", "Substitute")
-	elseif theme == "sweetie" and mode == "light" then
-		linkHighlight("ScrollView", "Visual")
-		linkHighlight("NotifyINFOIcon", "@string")
-		linkHighlight("NotifyINFOTitle", "@string")
-		linkHighlight("NotifyINFOBody", "@string")
+		updateHighlight("NotifyINFOTitle", "guifg=#4eb400")
+		updateHighlight("NotifyINFOIcon", "guifg=#4eb400")
+
+			for type, _ in pairs({}) do
+				vim.cmd.highlight("DiagnosticUnderline" .. type .. " gui=underdouble cterm=underline")
+			end
+		updateHighlight("DiagnosticUnderlineInfo", " gui=underdouble cterm=underline")
+		updateHighlight("DiagnosticUnderlineWarn", " gui=underdouble cterm=underline")
+		updateHighlight("DiagnosticUnderlineError", " gui=underdouble cterm=underline")
+		updateHighlight("DiagnosticUnderlineHint", " gui=underdouble cterm=underline")
 	elseif theme == "bluloco" then
 		linkHighlight("@text.note.comment", "@text.todo.comment")
 		linkHighlight("@text.warning.comment", "@text.todo.comment")

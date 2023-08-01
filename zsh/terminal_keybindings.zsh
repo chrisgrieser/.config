@@ -16,7 +16,7 @@ zle -N copy-location
 
 # kills complete line, instead of just to beginning (^U) or end of a line (^K)
 function kill-full-line() {
-	zle end-of-line | true
+	zle end-of-line || true
 	zle vi-kill-line
 }
 zle -N kill-full-line

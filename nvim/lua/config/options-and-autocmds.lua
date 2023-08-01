@@ -201,7 +201,7 @@ autocmd("BufReadPost", {
 -- save on leaving file
 opt.autowrite = true
 opt.autowriteall = true
-autocmd({ "BufLeave", "BufDelete", "FocusLost" }, {
+autocmd({ "QuitPre", "BufLeave", "BufDelete", "FocusLost" }, {
 	pattern = "?*",
 	callback = function()
 		local filepath = expand("%:p")
@@ -212,7 +212,7 @@ autocmd({ "BufLeave", "BufDelete", "FocusLost" }, {
 			and opt.write:get()
 			and not bo.readonly
 		then
-			cmd("silent update " .. filepath)
+			cmd("silent noautocmd update " .. filepath)
 		end
 	end,
 })
