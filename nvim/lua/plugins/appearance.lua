@@ -136,7 +136,9 @@ return {
 			timeout = 7500,
 			on_open = function(win)
 				if not vim.api.nvim_win_is_valid(win) then return end
-				vim.api.nvim_win_set_config(win, { border = u.borderStyle })
+				vim.api.nvim_win_set_config(win, {
+					border = u.borderStyle,
+				})
 			end,
 		},
 		init = function()
