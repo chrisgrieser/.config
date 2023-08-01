@@ -4,13 +4,14 @@ rules:
   # Chrome extension. Only done for a brief duration, so holding the right mouse
   # button still works for mouse gestues. Also, Rocker Gesture (Left) is
   # restricted by this (right works though).
-  - description: "(Mouse) Right-Click (briefly): Open link in new background tab (Browser)"
+  - description: "(Mouse) Right-Click (briefly): Open link in new background tab"
     manipulators:
       - type: basic
         from: { pointing_button: button2 }
         to_if_alone:
           - { pointing_button: button1, modifiers: [command] }
-        to_if_held_down: [pointing_button: button2]
+        to_if_held_down:
+          - pointing_button: button2
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -18,22 +19,16 @@ rules:
               - ^com\.brave\.Browser$
               - ^com\.apple\.Safari$
               - ^com\.vivaldi\.Vivaldi$
-  - description: "(Mouse) R (tap): Open link in new background tab (RSS Readers)"
-    manipulators:
+      # RSS Reader
       - type: basic
         from: { pointing_button: button2 }
         to_if_held_down: [pointing_button: button2]
         to_if_alone:
-          - { pointing_button: button1, modifiers: [command] }
-          - key_code: vk_none
-            hold_down_milliseconds: 80
-          - { key_code: tab, modifiers: [command] }
+          - pointing_button: button1
+          - { key_code: vk_none, hold_down_milliseconds: 600 } # readkit is slow :(
+          - { key_code: h, modifiers: [command] }
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^org\.chromium\.Chromium.+ # PWAs
-              - ^com\.brave\.Browser.+
-              - ^com\.vivaldi\.Vivaldi.+
+          - { type: frontmost_application_if, bundle_identifiers: [^app\.readkit\.universal$] }
       # Mimestream: Open link and delete mail (mostly github links)
       - type: basic
         from: { pointing_button: button2 }

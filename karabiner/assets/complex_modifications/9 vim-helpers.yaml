@@ -15,11 +15,12 @@ rules:
 
               # wait for 2 secs, if nvim is still running then, try to killall
               i=0
-              while pgrep -xq "nvim" && [[ "$i" -lt 20 ]]; do 
+              while pgrep -xq "nvim" && [[ $i -lt 20 ]]; do 
                 i=$((i+1))
                 sleep 0.1
               done
-              while pgrep -xq "nvim" ; do 
+              if pgrep -xq "nvim" ; then
+              osascript -e 'display notification "" with title "⚔️ Killing nvim…"'
                 killall nvim neovide
               fi
 
@@ -28,7 +29,7 @@ rules:
               while pgrep -xq "nvim" ; do 
                 i=$((i+1))
                 sleep 0.1
-                if [[ "$i" -gt 20 ]]; then
+                if [[ $i -gt 20 ]]; then
                   osascript -e 'display notification "" with title "Could not quit Neovide." sound name "Ping"'
                   return 1
                 fi
