@@ -128,14 +128,15 @@ nmap ,v :globalSearchReplace
 " Diffview, Git, Undo
 """"""""""""""""""""""
 
+" Version history plugin
 exmap diffview obcommand obsidian-version-history-diff:open-git-diff-view
 nmap ,gd :diffview
 
-" closest thing we get to the undohistory :(
-exmap undohistory obcommand obsidian-version-history-diff:open-recovery-diff-view
+" Edit History Plugin
+exmap undohistory obcommand edit-history:open-edit-history
 nmap ,ut :undohistory
 
-" Stage & Commit
+" Git Plugin
 exmap gitAdd obcommand obsidian-git:stage-current-file
 nmap ,ga :gitAdd
 nmap ,gA :gitAdd
