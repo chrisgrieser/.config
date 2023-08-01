@@ -144,7 +144,7 @@ function refreshKeywordCache(cachePath) {
 	const uniqueKeywords = [...new Set(keywords)];
 
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
-	console.log(`Rebuilt cache: ${uniqueKeywords.length} keywords, ${durationTotalSecs}s`);
+	console.log(`Rebuilt keyword cache (${uniqueKeywords.length} keywords) in ${durationTotalSecs}s`);
 	writeToFile(cachePath, JSON.stringify(uniqueKeywords));
 }
 
@@ -159,20 +159,18 @@ function run(argv) {
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 	const query = argv[0].trim();
 
-	// ensure cache folder exists. checks only done on short queries to not run
-	// the costly check on the later runs.
-	if (query.length < 2) {
-		const finder = Application("Finder");
-		const cacheDir = $.getenv("alfred_workflow_cache");
-		if (!finder.exists(cacheDir)) {
-			const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
-			const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
-			finder.make({
-				new: "folder",
-				at: Path(cacheDirParent),
-				withProperties: { name: cacheDirBasename },
-			});
-		}
+	// ensure cache folder exists
+	const finder = Application("Finder");
+	const cacheDir = $.getenv("alfred_workflow_cache");
+	if (!finder.exists(Path(cacheDir))) {
+		console.log("Cache Dir does not exist and is created.");
+		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
+		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
+		finder.make({
+			new: "folder",
+			at: Path(cacheDirParent),
+			withProperties: { name: cacheDirBasename },
+		});
 	}
 
 	// GUARD CLAUSE 1:
@@ -291,10 +289,10 @@ function run(argv) {
 
 	// logging
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
-	let log = `${durationTotalSecs}s`;
+	let log = `${durationTotalSecs}s, "${query}"`;
 	if (mode === "fallback" || mode === "multi-select") log += ` (${mode})`;
 
-	if (mode === "rerun") log = "__" + log; // indented to make it easier to read
+	if (mode === "rerun") log = "_ " + log; // indented to make it easier to read
 	else log = "Total: " + log;
 	console.log(log);
 

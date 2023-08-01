@@ -40,14 +40,15 @@ declare class SideNotesNote {
 }
 
 declare class finderItem {
-	creationDate: Date;
-	modificationDate: Date;
-	name: string; // basename
-	nameExtension: string;
-	kind: string;
-	size: number;
-	url: string; // file-url, contains file-path
+	creationDate(): Date;
+	modificationDate(): Date;
+	name(): string; // basename
+	nameExtension(): string;
+	kind(): string;
+	size(): number;
+	url(): string; // file-url, contains file-path
 	properties(): object; // inspect all properties
+	exists(): boolean;
 }
 
 // https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html
@@ -96,7 +97,7 @@ declare const Application: {
 		};
 	};
 	(name: "System Events"): macAppObj & {
-		aliases: object; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
+		aliases: finderItem[]; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
 		keystroke(key: string, modifiers?: { using: string[] });
 		keyCode(keycode: number, modifiers?: { using: string[] });
 		// rome-ignore lint/suspicious/noExplicitAny: later
