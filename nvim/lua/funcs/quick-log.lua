@@ -62,7 +62,7 @@ function M.log()
 	elseif ft == "python" then
 		templateStr = 'print("%s %s:", %s)'
 	elseif ft == "javascript" or ft == "typescript" then
-		templateStr = 'console.log("%s:", %s);'
+		templateStr = 'console.log("%s %s:", %s);'
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
 		templateStr = 'echo "%s %s: $%s"'
 	elseif ft == "applescript" then
@@ -74,7 +74,7 @@ function M.log()
 		return
 	end
 
-	local logStatement = string.format(templateStr, marker, varname, varname)
+	local logStatement = templateStr:format(marker, varname, varname)
 	append(logStatement)
 end
 
@@ -118,7 +118,7 @@ function M.beeplog()
 		return
 	end
 
-	local logStatement = string.format(marker, templateStr, randomEmoji)
+	local logStatement = templateStr:format(marker, randomEmoji)
 	append(logStatement)
 end
 
