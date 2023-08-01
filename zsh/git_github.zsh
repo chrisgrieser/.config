@@ -13,7 +13,11 @@ alias pull="git pull"
 alias gi='gh issue list'
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 alias grh='git reset --hard'
+
 alias rel='make release'
+alias pr='gh pr create --web --fill'
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # Github Url: open & copy url
 function gu() {
@@ -127,38 +131,6 @@ function gli() {
 	else # pressed return
 		git checkout "$hash"
 	fi
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-
-# PULL REQUEST
-# - stage all & commit with $* (or prompted)
-# - auto-creates fork
-# - create PR and autofills is with commit msg
-# - merges into *current branch* (not the default branch)
-# - opens PR in the web
-function pr() {
-	if ! command -v gh &>/dev/null; then printf "\033[1;33mgh not installed.\033[0m" && return 1; fi
-
-	# get and validate commit msg
-	if [[ -z "$*" ]]; then
-		echo -n "Commit Message: "
-		read -r msg && echo
-	else
-		msg="$*"
-	fi
-	local MSG_LENGTH=${#COMMIT_MSG}
-	if [[ $MSG_LENGTH -gt 50 ]]; then
-		echo "Commit Message too long ($MSG_LENGTH chars)."
-		COMMIT_MSG=${COMMIT_MSG::50}
-		print -z "pr \"$COMMIT_MSG\"" # put back into buffer
-		return 1
-	fi
-
-	git add -A && git commit -m "$msg"
-
-	current_branch=$(git branch --show-current) # otherwise uses the default branch
-	gh pr create --web --fill --base="$current_branch"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
