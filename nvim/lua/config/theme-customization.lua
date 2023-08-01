@@ -68,7 +68,7 @@ local function themeModifications()
 		updateHighlight("NotifyINFOIcon", "guifg=#4eb400")
 		linkHighlight("@text.warning.comment", "WarningMsg")
 
-		for type, _ in pairs { "Hint", "Info", "Warn", "Error" } do
+		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
 			vim.cmd.highlight("DiagnosticUnderline" .. type .. " gui=underdouble cterm=underline")
 		end
 	elseif theme == "bluloco" then
