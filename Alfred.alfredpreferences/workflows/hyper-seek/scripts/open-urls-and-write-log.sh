@@ -25,7 +25,7 @@ echo "$urls" | while read -r url; do
 	query_or_url=$(echo "$url" | sed -E 's/.*q=(.*)/\1/')
 
 	# if query term and not an URL, decode the spaces
-	[[ "$query_or_url" =~ "http" ]] || query_or_url=${query_or_url//\%20/ }
+	[[ "$query_or_url" =~ "http" ]] || query_or_url=$(osascript -l JavaScript -e "decodeURIComponent('$query_or_url')")
 
 	# prepend
 	echo -e "$date_time_stamp – $query_or_url\n$(cat "$log_location")" >"$log_location"
