@@ -35,7 +35,7 @@ rules:
               while pgrep -xq "$FRONT_APP"; do 
                 i=$((i+1))
                 sleep 0.05
-                if [[ "$i" -gt 100 ]]; then 
+                if [[ $i -gt 100 ]]; then 
                   osascript -e "display notification \"\" with title \"Could not quit $FRONT_APP\""
                   return 1
                 fi
