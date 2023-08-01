@@ -5,7 +5,7 @@
 	<key>include_unsafe</key>
 	<true/>
 	<key>inline_results_to_fetch</key>
-	<string>3</string>
+	<string>8</string>
 	<key>log_location</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/search-log.log</string>
 </dict>
