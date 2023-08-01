@@ -4,9 +4,9 @@ return {
 		event = "VeryLazy",
 		opts = {
 			theme = "summer", -- stars|summer|spring|xmas|snow|leaves
-			max = 100, -- maximum number of drops on the screen
-			interval = 100, -- updates in ms
-			screensaver = (1000 * 60) * 5, -- starting time in 5 minutes
+			max = 75, -- maximum number of drops on the screen
+			interval = 150, -- updates in ms
+			screensaver = (1000 * 60) * 10, -- starting time in 5 minutes
 		},
 	},
 	{ -- just a duck
