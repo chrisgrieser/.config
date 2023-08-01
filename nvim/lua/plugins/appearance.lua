@@ -4,13 +4,6 @@ local colorPickerFts = { "css", "scss", "lua", "sh" }
 --------------------------------------------------------------------------------
 
 return {
-	{ -- has no use, just funny
-		"tamton-aquib/duck.nvim",
-		keys = {
-			{"<leader>ö", function() require("duck").hatch("🦆", 5) end, desc = "󰇥 Hatch Duck" },
-			{"<leader>Ö", function() require("duck").cook("💀") end, desc = "󰇥 Cook Duck" },
-		},
-	},
 	{ -- when searching, virtual text appended to cursor with search counts
 		"kevinhwang91/nvim-hlslens",
 		lazy = true, -- loaded by my "vim.on_key" function

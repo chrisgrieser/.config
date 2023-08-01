@@ -68,6 +68,10 @@ local function themeModifications()
 		updateHighlight("NotifyINFOIcon", "guifg=#4eb400")
 		linkHighlight("@text.warning.comment", "WarningMsg")
 
+		-- fix cursor being partially overwritten by the theme
+		vim.opt.guicursor:append("r-cr-o-v:hor10")
+		vim.opt.guicursor:append("a:blinkwait200-blinkoff500-blinkon700")
+
 		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
 			vim.cmd.highlight("DiagnosticUnderline" .. type .. " gui=underdouble cterm=underline")
 		end
