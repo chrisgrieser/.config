@@ -25,7 +25,6 @@ function h() {
 # `--` ensures dash can be used in the alias name
 # `--help` and `-h` offer help pages of different length for some commands, e.g. fd
 alias -g -- -h='-h | bat --language=help --style=plain --wrap=character'
-
 alias -g -- --help='--help | bat --language=help --style=plain --wrap=character'
 alias -g H='--help | bat --language=help --style=plain --wrap=character'
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
