@@ -3,6 +3,12 @@ local expand = vim.fn.expand
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+-- TODO: explainshell Docker Image
+-- https://github.com/bash-lsp/bash-language-server/tree/main/vscode-client#configuration
+-- https://github.com/bash-lsp/bash-language-server/issues/180
+
+--------------------------------------------------------------------------------
+
 u.applyTemplateIfEmptyFile("zsh")
 
 -- pipe textobj
