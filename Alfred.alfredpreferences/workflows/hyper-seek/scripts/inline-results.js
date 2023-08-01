@@ -62,12 +62,10 @@ function refreshKeywordCache(cachePath) {
 	const timelogStart = +new Date();
 
 	const keywords = app
-		// `grep -v "$(basename "$PWD")"` removes results from this folder, since
-		// they do not not need to be ignored by Alfred.
-		// (Removing by a hardcoded foldername would not work, since Alfred
-		// assigns a unique ID to local installations. )
+		// $alfred_workflow_uid is identical for this workflow's pwd, which is excluded
+		// from the results, since this workflows keywords do not need to be removed
 		.doShellScript(
-			'grep -A1 "<key>keyword" ../**/info.plist | grep "<string>" | grep -v "$(basename "$PWD")"',
+			'grep -A1 "<key>keyword" ../**/info.plist | grep "<string>" | grep -v "$alfred_workflow_uid"',
 		)
 		.split("\r")
 		.reduce((acc, line) => {
