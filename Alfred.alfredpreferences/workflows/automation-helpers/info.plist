@@ -1526,6 +1526,7 @@ fi</string>
 				<string>{query}
 
 S  Marks a process that is sleeping for less than about 20 seconds.
+R  Marks a runnable process.
 Z  Marks a dead process (a “zombie”).
 s  The process is a session leader.
 N  The process has reduced CPU scheduling priority (see setpriority(2)).</string>

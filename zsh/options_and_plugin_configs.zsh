@@ -10,8 +10,14 @@ export LC_CTYPE="en_US.UTF-8"
 
 # OPTIONS -- https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt AUTO_CD              # pure directory = cd into it
-setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
-# setopt NO_BANG_HIST         # don't expand "!!"
+
+# comments in interactive mode (useful for copypasting)
+setopt INTERACTIVE_COMMENTS
+
+# but when typing hashes, escape them so they aren't turned into comments
+function autoEscapeHash() { LBUFFER+='\#' ; }
+zle -N autoEscapeBacktick
+bindkey -M viins '#' autoEscapeHash
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLI SETTINGS
