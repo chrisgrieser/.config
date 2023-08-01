@@ -19,8 +19,7 @@ rules:
         # INFO condition to avoid conflict with finder-vim-mode; mapping to f18
         # is done in finder-vim-alfred-addon.yaml
         conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers: [^com\.apple\.finder$]
+          - { type: frontmost_application_unless, bundle_identifiers: [^com\.apple\.finder$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "*️⃣ ⇪R: Restart App"
     manipulators:
@@ -31,11 +30,12 @@ rules:
               FRONT_APP=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
               killall "$FRONT_APP"
 
+              # wait for 5 secs
               i=0
               while pgrep -xq "$FRONT_APP"; do 
                 i=$((i+1))
                 sleep 0.05
-                if [[ "$i" -lt 30 ]]; then 
+                if [[ "$i" -gt 100 ]]; then 
                   osascript -e "display notification \"\" with title \"Could not quit $FRONT_APP\""
                   return 1
                 fi
@@ -44,6 +44,7 @@ rules:
               [[ "$FRONT_APP" == "wezterm-gui" ]] && FRONT_APP="WezTerm"
               open -a "$FRONT_APP"
           # INFO Neovide binding for restarting is in vim-helpers.yaml
+        conditions:
           - { type: frontmost_application_unless, file_paths: ["[Nn]eovide"] }
       # Restart Alfred & Alfred Preferences
       - type: basic

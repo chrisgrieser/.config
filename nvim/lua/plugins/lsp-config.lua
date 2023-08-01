@@ -185,8 +185,8 @@ lspSettings.ltex = {
 		disabledRules = {
 			["en-US"] = {
 				"EN_QUOTES", -- don't expect smart quotes
-				"WHITESPACE_RULE", -- often false positives
-				"PUNCTUATION_PARAGRAPH_END", -- often false positives
+				"WHITESPACE_RULE", -- too many false positives
+				"PUNCTUATION_PARAGRAPH_END", -- too many false positives
 				"CURRENCY",
 			},
 		},

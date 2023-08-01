@@ -9,21 +9,6 @@ return {
 		lazy = true, -- loaded by my "vim.on_key" function
 		opts = { nearest_only = true },
 	},
-	{ -- nice animations for floating wins (and controls, but those I don't use)
-		"tamton-aquib/flirt.nvim",
-		-- disabled, pending bug fix: https://github.com/tamton-aquib/flirt.nvim/issues/3
-		enabled = false,
-		event = "VeryLazy",
-		opts = {
-			exclude_fts = {
-				"TelescopePrompt",
-				"DressingInput",
-				"notify",
-				"ccc-ui",
-				"cmp_menu",
-			},
-		},
-	},
 	{ -- UI overhaul
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
@@ -69,6 +54,10 @@ return {
 				{ filter = { event = "msg_show", find = "^/." }, skip = true },
 				{ filter = { event = "msg_show", find = "^?." }, skip = true },
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
+
+				-- redirect long messages to split/mini
+				{ filter = { event = "msg_show", min_height = 12 }, view = "split" },
+				{ filter = { event = "notify", min_width = 50 }, view = "mini" },
 			},
 			cmdline = {
 				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
@@ -128,7 +117,7 @@ return {
 			-- 	})
 			-- end,
 			top_down = false,
-			max_height = 30,
+			max_height = 20,
 			max_width = 50,
 			minimum_width = 15,
 			level = 0, -- minimum severity level to display (0 = display all)
@@ -137,7 +126,6 @@ return {
 			on_open = function(win)
 				if not vim.api.nvim_win_is_valid(win) then return end
 				vim.api.nvim_win_set_config(win, { border = u.borderStyle })
-				vim.api.nvim_win_set_option(win, "wrap", true)
 			end,
 		},
 		init = function()
