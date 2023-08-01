@@ -30,8 +30,6 @@ function writeToFile(filepath, text) {
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
 
-const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** searches for any `.plist` more recently modified than the cache to determine
@@ -161,11 +159,20 @@ function run(argv) {
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 	const query = argv[0].trim();
 
-	// ensure cache folder exists. check only done on short queries to not run
+	// ensure cache folder exists. checks only done on short queries to not run
 	// the costly check on the later runs.
 	if (query.length < 2) {
-		if (!fileExists($.getenv("alfred_workflow_cache")))
-			app.pathTo("home folder")
+		const finder = Application("Finder");
+		const cacheDir = $.getenv("alfred_workflow_cache");
+		if (!finder.exists(cacheDir)) {
+			const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
+			const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
+			finder.make({
+				new: "folder",
+				at: Path(cacheDirParent),
+				withProperties: { name: cacheDirBasename },
+			});
+		}
 	}
 
 	// GUARD CLAUSE 1:

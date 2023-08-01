@@ -153,7 +153,7 @@ return {
 	},
 	{ -- rainbow brackets
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-		event = "BufEnter",
+		-- event = "BufEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			-- rainbow brackets without aggressive red
