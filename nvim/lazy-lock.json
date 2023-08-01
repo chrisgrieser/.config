@@ -22,6 +22,7 @@
   "diagflow.nvim": { "branch": "main", "commit": "dafd9d4a76bd97a17dc7ea6d2f1a2675c65324e5" },
   "diffview.nvim": { "branch": "main", "commit": "e91110d2a7f8e2f667666aba6ea089ff823f8748" },
   "dressing.nvim": { "branch": "master", "commit": "829bc80400651aea31b03d8fc9a99135512fe67a" },
+  "duck.nvim": { "branch": "main", "commit": "8f18dd79c701698fc150119ef642c1881ce6a538" },
   "duplicate.nvim": { "branch": "main", "commit": "f0129f5560f297bb28fc10192c444a853ddb3d98" },
   "everforest": { "branch": "master", "commit": "b8ef2d0bde98645250a8997393aefba38e8c6ff3" },
   "eyeliner.nvim": { "branch": "main", "commit": "70e1fb4f68bfdad2b9e2b53fcaf367ac86fc693f" },
