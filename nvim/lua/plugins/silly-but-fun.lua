@@ -10,7 +10,7 @@ return {
 		"tamton-aquib/zone.nvim",
 		event = "VeryLazy",
 		opts = {
-			style = "treadmill", -- vanish|epilepsy|treadmill|dvd|matrix
+			style = "epilepsy", -- vanish|epilepsy|treadmill|dvd|matrix
 			after = 60, -- seconds
 		},
 	},
