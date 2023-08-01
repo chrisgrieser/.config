@@ -194,19 +194,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>71AB5645-B299-4577-A54F-8E1A0857CC58</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9CAC2CDA-1512-48F6-9273-1A82F9ECB969</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
 		<array>
 			<dict>
@@ -1420,41 +1407,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>8</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>C</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>71AB5645-B299-4577-A54F-8E1A0857CC58</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -1639,17 +1591,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>1240</real>
 		</dict>
-		<key>71AB5645-B299-4577-A54F-8E1A0857CC58</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>Copy File Content</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1355</real>
-		</dict>
 		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
 		<dict>
 			<key>colorindex</key>
@@ -1796,7 +1737,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<key>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</key>
 		<dict>
 			<key>xpos</key>
-			<real>765</real>
+			<real>760</real>
 			<key>ypos</key>
 			<real>655</real>
 		</dict>
