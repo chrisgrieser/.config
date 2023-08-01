@@ -120,6 +120,13 @@ declare const Application: {
 		select(path: PathObj | PathObj[]): void; 
 		selection(): PathObj[];
 		finderWindows: { target: finderItem };
+		insertionLocation(): finderItem;
+		// https://medium.com/hackernoon/javascript-for-automation-in-macos-3b499da40da1
+		make(options: {
+			new: "folder"|"file",
+			at: PathObj,
+			withProperties: { name: string; }
+		}):finderItem;
 	};
 	(name: "SideNotes"): macAppObj & {
 		currentNote(): SideNotesNote;
