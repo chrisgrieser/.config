@@ -1,6 +1,10 @@
 {
 	"items": [
 		{
+			"title": "Script Filter JSON Format",
+			"arg": "https://www.alfredapp.com/help/workflows/inputs/script-filter/json/"
+		},
+		{
 			"title": "Organising workflows with categories and defaults",
 			"arg": "https://www.alfredapp.com/help/workflows/organising-workflows/"
 		},

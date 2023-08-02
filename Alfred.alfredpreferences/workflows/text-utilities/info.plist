@@ -395,8 +395,12 @@
 			</dict>
 			<key>inboundconfig</key>
 			<dict>
+				<key>custominputarg</key>
+				<string>{query}</string>
 				<key>externalid</key>
 				<string>fzf-loop</string>
+				<key>usecustominputarg</key>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -470,14 +474,15 @@
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string></string>
+				<string>{var:selected}{query}
+</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
 				<dict>
 					<key>selected</key>
-					<string>{var:selected}
-{query}</string>
+					<string>{var:selected}{query}
+</string>
 				</dict>
 			</dict>
 			<key>type</key>
@@ -576,12 +581,14 @@
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
-				<false/>
+				<true/>
 				<key>variables</key>
 				<dict>
+					<key></key>
+					<string></string>
 					<key>selected</key>
-					<string>{var:selected}
-{query}</string>
+					<string>{var:selected}{query}
+</string>
 				</dict>
 			</dict>
 			<key>type</key>
@@ -1220,7 +1227,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>note</key>
-			<string>append to selection</string>
+			<string>append to selection (multi-line-input)</string>
 			<key>xpos</key>
 			<real>520</real>
 			<key>ypos</key>
@@ -1278,7 +1285,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>note</key>
-			<string>append to selection</string>
+			<string>append to selection (multi-line-input)</string>
 			<key>xpos</key>
 			<real>520</real>
 			<key>ypos</key>
