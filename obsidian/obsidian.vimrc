@@ -166,7 +166,7 @@ nmap Ü "zdawbh"zph
 exmap aiWrite obcommand obsidian-textgenerator-plugin:generate-text
 exmap aiWrite obcommand obsidian-textgenerator-plugin:insert-generated-text-From-template
 nmap ,a :aiWrite
-xmap ,a :aiWrite
+vmap ,a :aiWrite
 
 """"""""""""""""""""""
 " Line-Based Editing

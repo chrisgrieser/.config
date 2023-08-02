@@ -198,6 +198,8 @@ Wf_appsOnMouseScreen = u.wf
 		env.mailApp,
 		"BetterTouchTool",
 		"Obsidian",
+		"Finder",
+		"ReadKit",
 		"Slack",
 		"IINA",
 		"WezTerm",
@@ -207,12 +209,12 @@ Wf_appsOnMouseScreen = u.wf
 		"Neovide",
 		"neovide",
 		"Espanso",
+		"espanso",
 		"BusyCal",
 		"Alfred Preferences",
 		"YouTube",
 		"Netflix",
 		"CrunchyRoll",
-		"Finder",
 	})
 	:subscribe(u.wf.windowCreated, function(newWin)
 		local mouseScreen = hs.mouse.getCurrentScreen()
