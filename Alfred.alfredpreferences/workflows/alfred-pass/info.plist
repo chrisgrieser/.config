@@ -95,7 +95,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Edit Entry in Terminal (using $EDITOR)</string>
+				<string>⌘: Edit Entry in Terminal</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>

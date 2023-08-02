@@ -85,7 +85,7 @@
 				<key>hotkey</key>
 				<integer>0</integer>
 				<key>hotmod</key>
-				<integer>917504</integer>
+				<integer>524288</integer>
 				<key>hotstring</key>
 				<string>A</string>
 				<key>leftcursor</key>
@@ -402,7 +402,7 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 				<key>filtermode</key>
 				<integer>1</integer>
 				<key>placeholder</key>
-				<string></string>
+				<string>~/Documents</string>
 				<key>required</key>
 				<true/>
 			</dict>
@@ -456,7 +456,7 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 			<key>description</key>
 			<string>The folder containing all PDFs. Required to be able to extract the current PDF from Highlights.</string>
 			<key>label</key>
-			<string>Highlights.app: PDF Folder</string>
+			<string>Highlights.app PDF Folder</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
