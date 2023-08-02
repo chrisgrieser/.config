@@ -75,7 +75,7 @@ rules:
         from: { key_code: b, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: |
-              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)' | sed 's|/$||' )
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (item 1 of (get selection) as text)' | sed 's|/$||' )
               # bash expansion does not work in karabiner
               filepathNoExt=$(echo "$selection" | rev | cut -d. -f2- | rev)
               ext=$(echo "$selection" | rev | cut -d. -f1 | rev)
@@ -102,24 +102,16 @@ rules:
         from: { key_code: y, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: |
-              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (item 1 of (get selection) as text)')
+              # bash expansion does not work in karabiner
               ext=$(echo "$selection" | rev | cut -d. -f1 | rev)
+
               if [[ "$ext" != "zip" ]]; then
                 display notification "" with title "⚠️ File not a zip file." subtitle "Finder Vim Mode"
                 return 1
               fi
-              
-              # bash expansion does not work in karabiner
-              filepathNoExt=$(echo "$selection" | rev | cut -d. -f2- | rev)
-              last3CharsOfFilename=$(echo "$filepathNoExt" | rev | cut -c-3 | rev)
-              if [[ "$last3CharsOfFilename" == "_CG" ]]; then
-                nameWithoutSig=$(echo "$filepathNoExt" | rev | cut -c4- | rev)
-                newName="$nameWithoutSig.$ext"
-              else
-                newName="${filepathNoExt}_CG.$ext"
-              fi
-              mv -n "$selection" "$newName"
-              open -R "$newName" # forces refresh of Finder
+
+              open -a "Betterzip" "$selection"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.apple\.finder$]
