@@ -34,6 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>AADD9ECB-F4AB-488C-8C2C-B7736DD7B815</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>65783839-9CCB-48D0-A740-1F7BF96926D1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CD293D43-2356-49DB-AD4F-DBA5FDE026C5</key>
 		<array>
 			<dict>
@@ -143,6 +156,86 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>anchorfields</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>daterange</key>
+				<integer>0</integer>
+				<key>fields</key>
+				<array>
+					<dict>
+						<key>field</key>
+						<string>kMDItemDisplayName</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemAlternateNames</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>field</key>
+						<string>kMDItemFinderComment</string>
+						<key>not</key>
+						<false/>
+						<key>split</key>
+						<true/>
+						<key>value</key>
+						<string>{query}</string>
+						<key>words</key>
+						<true/>
+					</dict>
+				</array>
+				<key>includesystem</key>
+				<false/>
+				<key>keyword</key>
+				<string>anno</string>
+				<key>limit</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>scopes</key>
+				<array/>
+				<key>sortmode</key>
+				<integer>2</integer>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Extract Annotations from PDF</string>
+				<key>types</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.filefilter</string>
+			<key>uid</key>
+			<string>AADD9ECB-F4AB-488C-8C2C-B7736DD7B815</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -229,11 +322,11 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 		<key>3069BB02-5E48-40CF-9DD8-337C5FA9F054</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>220</real>
+			<real>360</real>
 		</dict>
 		<key>65783839-9CCB-48D0-A740-1F7BF96926D1</key>
 		<dict>
@@ -257,16 +350,25 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 			<key>ypos</key>
 			<real>75</real>
 		</dict>
-		<key>CD293D43-2356-49DB-AD4F-DBA5FDE026C5</key>
+		<key>AADD9ECB-F4AB-488C-8C2C-B7736DD7B815</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>225</real>
+		</dict>
+		<key>CD293D43-2356-49DB-AD4F-DBA5FDE026C5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>cheatsheet for PDF Annotation Extractor</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>220</real>
+			<real>360</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -362,7 +464,7 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 		</dict>
 	</array>
 	<key>version</key>
-	<string>8.6.1</string>
+	<string>8.7.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/pdf-annotation-extractor-alfred</string>
 </dict>

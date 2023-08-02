@@ -1,6 +1,0 @@
-- 2023-06-26	release 8.6.0
-- 2023-06-26	fix: #14 #15
-- 2023-06-26	docs: lint, spellcheck, update
-- 2023-06-26	build: update release.sh
-- 2023-06-26	release 8.5.0
-- 2023-04-11	revert: unarchive & restore README
