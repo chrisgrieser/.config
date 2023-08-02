@@ -11,9 +11,5 @@
 	<false/>
 	<key>showPreferences</key>
 	<false/>
-	<key>showUserDefined</key>
-	<array>
-		<string>com.apple.alias-file</string>
-	</array>
 </dict>
 </plist>

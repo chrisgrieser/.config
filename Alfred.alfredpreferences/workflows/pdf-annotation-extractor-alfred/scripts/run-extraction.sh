@@ -1,10 +1,9 @@
 #!/bin/zsh
 # shellcheck disable=2164,2154
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# Input
-pdf_path=$(osascript "./scripts/get-pdf-path.applescript")
+# INPUT
+pdf_path="$*"
+[[ -z "$pdf_path" ]] && pdf_path=$(osascript "./scripts/get-pdf-path.applescript")
 
 #───────────────────────────────────────────────────────────────────────────────
 # GUARD CLAUSES & CITEKEY RETRIEVAL
