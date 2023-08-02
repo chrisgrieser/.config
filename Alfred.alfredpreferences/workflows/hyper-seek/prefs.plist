@@ -8,5 +8,7 @@
 	<string>8</string>
 	<key>log_location</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/search-log.log</string>
+	<key>region</key>
+	<string>de-de</string>
 </dict>
 </plist>

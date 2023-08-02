@@ -3245,7 +3245,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>Where searching a query should be performed. (Inline results come from DuckDuckGo, regardless of this setting.)</string>
 			<key>label</key>
-			<string>Search Site</string>
+			<string>Query Search Site</string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
@@ -3283,7 +3283,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Number of inline results to display</string>
+			<string>Number of inline results to display (1-25).</string>
 			<key>label</key>
 			<string>Num Inline Results</string>
 			<key>type</key>
@@ -3302,13 +3302,51 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string></string>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>for Inline Results</string>
 			<key>label</key>
 			<string>Disable Safe Search</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>include_unsafe</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>none</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>none</string>
+						<string>none</string>
+					</array>
+					<array>
+						<string>Germany</string>
+						<string>de-de</string>
+					</array>
+					<array>
+						<string>France</string>
+						<string>fr-fr</string>
+					</array>
+					<array>
+						<string>United States</string>
+						<string>en-us</string>
+					</array>
+					<array>
+						<string>Japan</string>
+						<string>jp-jp</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>region-specific search for the Inline Results</string>
+			<key>label</key>
+			<string>Region</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>region</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3333,7 +3371,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.2</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -13,6 +13,9 @@ if (resultsToFetch < 1) resultsToFetch = 1;
 else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by `ddgr`
 const ignoreAlfredKeywordsEnabled = $.getenv("ignore_alfred_keywords") === "1";
 
+// https://duckduckgo.com/duckduckgo-help-pages/settings/params/
+const searchRegion = $.getenv("region") === "none" ? "" : "--reg=" + $.getenv("region");
+
 const multiSelectIcon = "🔳";
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -120,17 +123,20 @@ function refreshKeywordCache(cachePath) {
 			acc.push(...relevantKeywords);
 			return acc;
 		}, []);
+
 	// CASE 5: Pre-installed Searches
-	app
-		.doShellScript(
-			"grep --files-without-match 'disabled' ../../preferences/features/websearch/**/prefs.plist | " +
-				"xargs -I {} grep -A1 '<key>keyword' '{}' | grep '<string>' || true",
-		)
-		.split("\r")
-		.forEach((line) => {
+	const preinstalledSearches = app.doShellScript(
+		"grep --files-without-match 'disabled' ../../preferences/features/websearch/**/prefs.plist | " +
+			"xargs -I {} grep -A1 '<key>keyword' '{}' | grep '<string>' || true",
+	);
+	// check for the possibility of user having all searches disabled
+	if (preinstalledSearches) {
+		preinstalledSearches.split("\r").forEach((line) => {
 			const searchKeyword = line.split(">")[1].split("<")[0];
 			keywords.push(searchKeyword);
 		});
+	}
+
 	// CASE 6: User Searches
 	const userSearches = JSON.parse(
 		app.doShellScript("plutil -convert json ../../preferences/features/websearch/prefs.plist -o - || true"),
@@ -232,7 +238,7 @@ function run(argv) {
 		// (less than 40ms difference between 1 and 25 results), so there is no use
 		// in restricting the number of results for performance. (Except for 25 being
 		// ddgr's maximum)
-		const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} --json "${query}"`;
+		const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} ${searchRegion} --json "${query}"`;
 		const response = {
 			results: JSON.parse(app.doShellScript(ddgrCommand)),
 			query: query,
