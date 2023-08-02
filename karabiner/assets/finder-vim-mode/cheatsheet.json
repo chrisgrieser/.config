@@ -257,15 +257,13 @@
     },
     ">",
     {
-      "c": "#c7a6ff"
-    },
-    "y\nyank / copy",
-    {
+      "c": "#c7a6ff",
       "f": 1,
       "fa": [
         2
       ]
     },
+    "y (Y)\ncopy file (content)",
     "x (X)\ncross-move (copy)",
     "c (C)\nclose folds  (recursive)",
     {

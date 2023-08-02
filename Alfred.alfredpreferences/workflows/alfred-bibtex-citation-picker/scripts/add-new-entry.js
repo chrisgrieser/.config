@@ -232,7 +232,11 @@ function inputToEntryData(input) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const input = argv[0].trim();
-	const libraryPath = $.getenv("bibtex_library_path").replace(/^~/, app.pathTo("home folder"));
+	if (!input) {
+		app.displayNotification("No input provided", { withTitle: "Supercharged Citation Picker" });
+		return;
+	}
+	const libraryPath = $.getenv("bibtex_library_path");
 
 	// Get entry data
 	const entry = inputToEntryData(input);

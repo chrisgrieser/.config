@@ -31,19 +31,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>030529FB-C164-474A-8DB9-DD49AEB4893F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>42050662-314E-4CB0-B9D8-1B29D1C9FF55</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<array>
 			<dict>
@@ -181,19 +168,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>691683CB-5914-40E0-AD1F-DD352551F338</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9CAC2CDA-1512-48F6-9273-1A82F9ECB969</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
 		<array>
 			<dict>
@@ -277,19 +251,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>9CAC2CDA-1512-48F6-9273-1A82F9ECB969</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>030529FB-C164-474A-8DB9-DD49AEB4893F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1137,11 +1098,11 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>19</integer>
+				<integer>13</integer>
 				<key>hotmod</key>
 				<integer>1966080</integer>
 				<key>hotstring</key>
-				<string>2</string>
+				<string>W</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -1335,78 +1296,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Copy file content to clipboard</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>691683CB-5914-40E0-AD1F-DD352551F338</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>030529FB-C164-474A-8DB9-DD49AEB4893F</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>42050662-314E-4CB0-B9D8-1B29D1C9FF55</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>9CAC2CDA-1512-48F6-9273-1A82F9ECB969</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -1420,15 +1309,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>175</real>
 			<key>ypos</key>
 			<real>845</real>
-		</dict>
-		<key>030529FB-C164-474A-8DB9-DD49AEB4893F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>335</real>
-			<key>ypos</key>
-			<real>1240</real>
 		</dict>
 		<key>06732C2D-88EF-48DF-81E5-A21235C6E96A</key>
 		<dict>
@@ -1517,15 +1397,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
-		<key>42050662-314E-4CB0-B9D8-1B29D1C9FF55</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>480</real>
-			<key>ypos</key>
-			<real>1240</real>
-		</dict>
 		<key>47245CFC-B3E9-4FD6-A021-06D0B87D637C</key>
 		<dict>
 			<key>colorindex</key>
@@ -1581,15 +1452,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>685</real>
 			<key>ypos</key>
 			<real>505</real>
-		</dict>
-		<key>691683CB-5914-40E0-AD1F-DD352551F338</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1240</real>
 		</dict>
 		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
 		<dict>
@@ -1675,15 +1537,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>475</real>
-		</dict>
-		<key>9CAC2CDA-1512-48F6-9273-1A82F9ECB969</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>1240</real>
 		</dict>
 		<key>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</key>
 		<dict>
