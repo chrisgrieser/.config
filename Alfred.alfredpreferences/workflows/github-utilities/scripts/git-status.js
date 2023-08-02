@@ -38,18 +38,24 @@ function run() {
 		});
 	}
 
-	const gitStatusCommand = "git status --porcelain";
+	const gitStatusCommand = "export GIT_OPTIONAL_LOCKS=0 ; git status --porcelain";
 	/** @type AlfredItem[] */
 	const unstagesArr = app
 		.doShellScript(`cd "${repoPath}" && ${gitStatusCommand}`)
 		.split("\r")
 		.map((file) => {
+			// quotes are added for escaping when the path has spaces, but are
+			// irrelevant for this workflow
+			file = file.replaceAll('"', "");
+
 			const pathInRepo = file.slice(3);
 			const parentFolder = pathInRepo.slice(0, pathInRepo.lastIndexOf("/"));
 			const filename = pathInRepo.slice(pathInRepo.lastIndexOf("/") + 1);
 
 			const trackingInfo = file.slice(0, 3);
 			const isDeleted = trackingInfo.includes("D");
+			const isStaged = [" M ", " D ", "?? ", "RM ", "MM "].includes(trackingInfo);
+
 			const trackingDisplay = trackingInfo
 				.replaceAll(" M ", "🟡") // modified
 				.replaceAll(" D ", "❌") // deleted
@@ -61,12 +67,8 @@ function run() {
 				.replaceAll("A  ", "🔼❇️ ") // staged new file
 				.replaceAll("R  ", "🔼✏️ "); // staged renamed
 
-			const mode = [" M ", " D ", "?? ", "RM ", "MM "].includes(trackingInfo)
-				? "stage"
-				: "unstage";
-
-			// https://stackoverflow.com/a/3527985/22114136
-			const gitDiffStaged = mode === "unstage" ? "--staged" : "";
+			const mode = isStaged ? "stage" : "unstage";
+			const gitDiffStaged = isStaged ? "--staged" : ""; // https://stackoverflow.com/a/3527985/22114136
 
 			return {
 				title: `${trackingDisplay} ${filename}`,
