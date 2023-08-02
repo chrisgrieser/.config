@@ -407,10 +407,7 @@ rules:
           # INFO use "Finder window" instead of "window" to target only regular
           # windows https://www.reddit.com/r/applescript/comments/uz9axo/comment/iayjrn4/?context=3
           - shell_command: |
-              osascript -e '
-                tell application "Finder"
-                  set the selection to files of Finder window 1
-                end tell'
+              osascript -e ' tell application "Finder" to set the selection to files of Finder window 1'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # MULTI-SELECT
       # <S-Space> = add down to selection
@@ -435,24 +432,24 @@ rules:
                 // filter only files with mdfind
                 const taggedFilesStr = app
                   .doShellScript (`mdfind -onlyin "${winPath}" "kMDItemUserTags == vim-mark && ! kMDItemContentType == public.folder"`)
-                if (!taggedFilesStr) return;
+                if (!taggedFilesStr) {
+                  app.displayNotification("(Only non-folders in non-hidden dirs are supported.)", { withTitle: "Finder Vim Mode", subtitle: "No file selected." })
+                  return;
+                }
                 const taggedFiles = taggedFilesStr
                   .split("\r")
                   .map(path => Path(path));
                 try {
                   finder.select(taggedFiles);
-                  delay(0.8)
+                  // untag the file again
+                  delay(0.3)
                   finder.activate();
-                  Application("System Events").keystroke("1", { control: down });
+                  Application("System Events").keystroke("1", { using: "control down" });
                 } catch (error) {
                   app.displayNotification("", { withTitle: "Finder Vim Mode", subtitle: "Error: " + error })
                 }
               }
               run()'
-          # untag files 
-          # (does not work when invoked via keystroking in the script above)
-          # - { key_code: vk_none, hold_down_milliseconds: 300 } # wait for selection
-          # - { key_code: "1", modifiers: [control] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # q = right-click / Context Menu
