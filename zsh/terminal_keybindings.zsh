@@ -60,8 +60,3 @@ bindkey -M viins "^X" autosuggest-accept # cmd+s via wezterm (consistent w/ nvim
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# Escape by default
-function autoEscapeBacktick() { LBUFFER+='\`' ; }
-zle -N autoEscapeBacktick
-bindkey -M viins '`' autoEscapeBacktick
-
