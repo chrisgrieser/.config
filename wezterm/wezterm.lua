@@ -127,6 +127,16 @@ local keybindings = {
 	-- but expects another character, so this mapping fixes it
 	{ key = "n", mods = "META", action = act.SendString("~") },
 
+	{ -- for adding inline code to a commit, hotkey consistent with GitHub's
+		key = "e",
+		mods = "CMD",
+		action = act.Multiple {
+			act.SendString([[\`\`]]),
+			act.SendKey { key = "LeftArrow" },
+			act.SendKey { key = "LeftArrow" },
+		},
+	},
+
 	-- emoji picker
 	-- { key = "e", mods = "CMD", action = act.CharSelect },
 
@@ -151,10 +161,10 @@ local keybindings = {
 	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
 
 	-- Copy Mode (~= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
-	{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
+	{ key = "c", mods = "CMD|ALT", action = act.ActivateCopyMode },
 
 	-- Quick Select (~= Hint Mode) -- https://wezfurlong.org/wezterm/quickselect.html
-	{ key = "c", mods = "CMD|ALT", action = act.QuickSelect },
+	{ key = "c", mods = "CMD|SHIFT", action = act.QuickSelect },
 
 	-- Quick Select Presets
 	{ -- cmd+u -> open URL (like f in vimium)
@@ -183,7 +193,7 @@ local keybindings = {
 		},
 	},
 	-- cmd+, -> open this config file
-	{ 
+	{
 		key = ",",
 		mods = "CMD",
 		action = actFun(function() wt.open_with(wt.config_file) end),
@@ -268,12 +278,9 @@ local config = {
 	cursor_blink_ease_out = "Constant",
 	force_reverse_video_cursor = true, -- true = color is reverse, false = color by color scheme
 
-	-- FONT
-	-- - even though symbols and nerd font are bundled with wezterm, some
-	--   icons have a sizing issues, therefore explicitly using the Nerd Font here
-	-- - some nerd font requires a space after them to be properly sized
+	-- font
+	-- INFO some nerd font requires a space after them to be properly sized
 	font = wt.font("Iosevka Fixed", { weight = "Medium" }),
-
 	font_size = fontSize,
 	command_palette_font_size = 30,
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
@@ -300,7 +307,7 @@ local config = {
 	window_padding = {
 		left = "0.5cell",
 		right = "1.1cell", -- if scrollbar enabled, "rights" controls scrollbar width
-		top = "0.8cell", -- account for macOS traffic lights
+		top = "0.8cell", -- extra height to account for macOS traffic lights
 		bottom = "0.3cell",
 	},
 	min_scroll_bar_height = "3cell",
