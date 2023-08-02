@@ -1,5 +1,5 @@
 return {
-	{ -- simple screensaver
+	{ -- simple screensaver, zone.nvim is nicer but often buggy
 		"folke/drop.nvim",
 		enabled = false,
 		event = "VeryLazy",
@@ -7,14 +7,6 @@ return {
 			theme = "summer", -- stars|summer|spring|xmas|snow|leaves
 			max = 50, -- maximum number of drops on the screen
 			screensaver = (1000 * 60) * 10, -- start after 10 minutes
-		},
-	},
-	{ -- nicer screensaver, but a bit buggy
-		"tamton-aquib/zone.nvim",
-		event = "VeryLazy",
-		opts = {
-			style = "treadmill", -- vanish|epilepsy|treadmill|dvd|matrix
-			after = 60 * 5, -- = 5 minutes
 		},
 	},
 	{ -- just a duck

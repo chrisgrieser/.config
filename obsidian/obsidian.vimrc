@@ -108,7 +108,7 @@ nmap go :quickSwitcher
 nmap gr :quickSwitcher
 
 " go to last change (HACK, only works to jump to the last location)
-nmap gc u<C-r>
+nmap g, u<C-r>
 
 """"""""""""""""""""""
 " Search & replace
@@ -162,6 +162,11 @@ nmap ~ ~h
 " Move words (equivalent to sibling-swap.nvim)
 nmap ü "zdawel"zph
 nmap Ü "zdawbh"zph
+
+exmap aiWrite obcommand obsidian-textgenerator-plugin:generate-text
+exmap aiWrite obcommand obsidian-textgenerator-plugin:insert-generated-text-From-template
+nmap ,a :aiWrite
+xmap ,a :aiWrite
 
 """"""""""""""""""""""
 " Line-Based Editing

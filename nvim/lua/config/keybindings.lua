@@ -47,6 +47,7 @@ keymap("n", "ä", "'M", { desc = " Goto Mark" })
 -- Hunks and Changes
 keymap("n", "gh", "<cmd>Gitsigns next_hunk<CR>zv", { desc = "󰊢 Next Hunk" })
 keymap("n", "gH", "<cmd>Gitsigns prev_hunk<CR>zv", { desc = "󰊢 Previous Hunk" })
+keymap("n", "g,", "g;", { desc = "Goto last change" })
 
 --------------------------------------------------------------------------------
 
