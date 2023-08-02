@@ -59,13 +59,14 @@ function keywordCacheIsOutdated(cachePath) {
 // PERF Saving keywords in a cache saves ~250ms for me (50+ workflows, 180+ keywords)
 /** @param {string} cachePath */
 function refreshKeywordCache(cachePath) {
+	console.log("Refreshing keyword cache…");
 	const timelogStart = +new Date();
 
 	const keywords = app
 		// $alfred_workflow_uid is identical for this workflow's pwd, which is excluded
 		// from the results, since this workflows keywords do not need to be removed
 		.doShellScript(
-			'grep -A1 "<key>keyword" ../**/info.plist | grep "<string>" | grep -v "$alfred_workflow_uid"',
+			'grep -A1 "<key>keyword" ../**/info.plist | grep "<string>" | grep -v "$alfred_workflow_uid" || true',
 		)
 		.split("\r")
 		.reduce((acc, line) => {
@@ -89,7 +90,7 @@ function refreshKeywordCache(cachePath) {
 					// CASE 1b: keywords where user kept the default value
 					const workflowConfig = JSON.parse(
 						app.doShellScript(
-							`plutil -extract "userconfigurationconfig" json -o - "${workflowPath}/info.plist"`,
+							`plutil -extract "userconfigurationconfig" json -o - "${workflowPath}/info.plist" || true`,
 						),
 					);
 					const defaultValue = workflowConfig.find(
@@ -123,7 +124,7 @@ function refreshKeywordCache(cachePath) {
 	app
 		.doShellScript(
 			"grep --files-without-match 'disabled' ../../preferences/features/websearch/**/prefs.plist | " +
-				"xargs -I {} grep -A1 '<key>keyword' '{}' | grep '<string>'",
+				"xargs -I {} grep -A1 '<key>keyword' '{}' | grep '<string>' || true",
 		)
 		.split("\r")
 		.forEach((line) => {
@@ -132,7 +133,7 @@ function refreshKeywordCache(cachePath) {
 		});
 	// CASE 6: User Searches
 	const userSearches = JSON.parse(
-		app.doShellScript("plutil -convert json ../../preferences/features/websearch/prefs.plist -o -"),
+		app.doShellScript("plutil -convert json ../../preferences/features/websearch/prefs.plist -o - || true"),
 	).customSites;
 	Object.keys(userSearches).forEach((uuid) => {
 		const searchObj = userSearches[uuid];
