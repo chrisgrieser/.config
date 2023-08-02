@@ -236,6 +236,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>acodes</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Cheatsheet for PDF Annotation Extractor</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CD293D43-2356-49DB-AD4F-DBA5FDE026C5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -256,33 +277,10 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>acodes</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Cheatsheet for PDF Annotation Extractor</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>CD293D43-2356-49DB-AD4F-DBA5FDE026C5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Alfred Gallery[This workflow is now included in the Alfred gallery](http://alfred.app/workflows/chrisgrieser/pdf-annotation-extractor-alfred/) and auto-updates will there be managed by Alfred and not by this workflow anymore.---
-
-# PDF Annotation Extractor
-Extract Annotations as Markdown, insert Pandoc Citations with correct page numbers and more.
+	<string># PDF Annotation Extractor
+Extract Annotations as Markdown, insert Pandoc Citations with correct page numbers, and more.
 
 ## Workflow Setup
 - Install [Homebrew](https://brew.sh/).
@@ -293,6 +291,8 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 - [README](https://github.com/chrisgrieser/pdf-annotation-extractor-alfred/blob/main/README.md)
 - [Changelog](https://github.com/chrisgrieser/pdf-annotation-extractor-alfred/blob/main/Changelog.md)
 - [Bug Reports](https://github.com/chrisgrieser/pdf-annotation-extractor-alfred/issues)
+
+---
 
 ## Created by
 [Chris Grieser](https://chris-grieser.de/)
