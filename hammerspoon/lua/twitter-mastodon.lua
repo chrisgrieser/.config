@@ -11,7 +11,8 @@ local function scrollUp()
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
 	local app = u.app(env.tickerApp)
-	if not (app and app:mainWindow() and u.screenIsUnlocked() and app:isFrontmost()) then return end
+	if not (app and app:mainWindow() and u.screenIsUnlocked()) then return end
+	if app:isFrontmost() then return end
 
 	u.keystroke({ "cmd" }, "left", 1, app) -- go back
 	u.keystroke({ "cmd" }, "1", 1, app) -- go to home tab

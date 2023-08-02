@@ -5,17 +5,16 @@ return {
 		event = "VeryLazy",
 		opts = {
 			theme = "summer", -- stars|summer|spring|xmas|snow|leaves
-			max = 75, -- maximum number of drops on the screen
-			interval = 150, -- updates in ms
-			screensaver = (1000 * 60) * 10, -- starting time in 5 minutes
+			max = 50, -- maximum number of drops on the screen
+			screensaver = (1000 * 60) * 10, -- start after 10 minutes
 		},
 	},
 	{ -- nicer screensaver, but a bit buggy
 		"tamton-aquib/zone.nvim",
 		event = "VeryLazy",
 		opts = {
-			style = "epilepsy", -- vanish|epilepsy|treadmill|dvd|matrix
-			after = 60, -- seconds?
+			style = "treadmill", -- vanish|epilepsy|treadmill|dvd|matrix
+			after = 60 * 5, -- = 5 minutes
 		},
 	},
 	{ -- just a duck
@@ -25,7 +24,10 @@ return {
 			{ "<leader>zc", function() require("duck").cook("💀") end, desc = "󰇥 Cook Duck" },
 		},
 		config = function()
-			require("which-key").register { mode = { "n" }, ["<leader>z"] = { name = "󰯉 Zilly Fun Stuff" } }
-		end
+			require("which-key").register {
+				mode = { "n" },
+				["<leader>z"] = { name = "󰯉 Zilly Fun Stuff" },
+			}
+		end,
 	},
 }
