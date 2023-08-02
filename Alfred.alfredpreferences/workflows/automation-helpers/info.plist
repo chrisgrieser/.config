@@ -154,19 +154,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>9248EC6E-2EAB-43B6-B666-C9F3B323038F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>ED8AD722-9DB6-49E1-A9DD-43769FFF8052</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>9C8E2CFD-649D-4005-8762-41497D453FEF</key>
 		<array>
 			<dict>
@@ -550,48 +537,6 @@ window_name</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>bkp</string>
-				<key>subtext</key>
-				<string>Dotfiles, Vault &amp; Browser Bookmarks</string>
-				<key>text</key>
-				<string>🔁 Sync Repos</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>9248EC6E-2EAB-43B6-B666-C9F3B323038F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>hammerspoon://backup</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>ED8AD722-9DB6-49E1-A9DD-43769FFF8052</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1661,17 +1606,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>ypos</key>
 			<real>1090</real>
 		</dict>
-		<key>9248EC6E-2EAB-43B6-B666-C9F3B323038F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>backup: dotfiles, vault, and bookmarks</string>
-			<key>xpos</key>
-			<real>470</real>
-			<key>ypos</key>
-			<real>290</real>
-		</dict>
 		<key>9734FC1B-0242-4229-B9BF-4A809F59C81E</key>
 		<dict>
 			<key>colorindex</key>
@@ -1831,15 +1765,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<real>470</real>
 			<key>ypos</key>
 			<real>160</real>
-		</dict>
-		<key>ED8AD722-9DB6-49E1-A9DD-43769FFF8052</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>625</real>
-			<key>ypos</key>
-			<real>290</real>
 		</dict>
 		<key>F34FCF8E-937F-468A-8727-48A458BF4FA9</key>
 		<dict>

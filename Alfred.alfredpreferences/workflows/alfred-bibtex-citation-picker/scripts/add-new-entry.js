@@ -223,6 +223,8 @@ function inputToEntryData(input) {
 		} else if (entry.type === "incollection") {
 			entry.booktitle = data["container-title"];
 		}
+	} else {
+		return { error: "No DOI or ISBN in selected text" };
 	}
 
 	return entry;
@@ -231,12 +233,9 @@ function inputToEntryData(input) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const input = argv[0].trim();
-	if (!input) {
-		app.displayNotification("No input provided", { withTitle: "Supercharged Citation Picker" });
-		return;
-	}
 	const libraryPath = $.getenv("bibtex_library_path");
+	const input = argv[0].trim();
+	if (!input) return "No input provided";
 
 	// Get entry data
 	const entry = inputToEntryData(input);
