@@ -216,19 +216,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A2E166F6-CEA5-452B-ACA3-EACF8897D858</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E9650F72-BF50-400A-8F51-96D2199DF19D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</key>
 		<array>
 			<dict>
@@ -1381,50 +1368,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>koala</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>koala DM</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A2E166F6-CEA5-452B-ACA3-EACF8897D858</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>open -a "Discord" "discord://discordapp.com/channels/@me/894696437676408833"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E9650F72-BF50-400A-8F51-96D2199DF19D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1765,15 +1708,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>ypos</key>
 			<real>565</real>
 		</dict>
-		<key>A2E166F6-CEA5-452B-ACA3-EACF8897D858</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>545</real>
-			<key>ypos</key>
-			<real>875</real>
-		</dict>
 		<key>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</key>
 		<dict>
 			<key>colorindex</key>
@@ -1884,15 +1818,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<real>470</real>
 			<key>ypos</key>
 			<real>20</real>
-		</dict>
-		<key>E9650F72-BF50-400A-8F51-96D2199DF19D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>715</real>
-			<key>ypos</key>
-			<real>875</real>
 		</dict>
 		<key>E9FF31BC-709C-4387-975A-0B1410418161</key>
 		<dict>
