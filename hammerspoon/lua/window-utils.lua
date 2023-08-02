@@ -117,11 +117,12 @@ function M.autoTile(winSrc)
 	u.runWithDelays(0.1, function() AutoTileInProgress = false end)
 	local pos = {}
 
-	if #wins == 0 and u.isFront("Finder") and not (env.isProjector()) then
+	if #wins == 0 and u.isFront("Finder") then
 		-- hide finder when no windows (delay needed for quitting fullscreen apps,
 		-- which are sometimes counted as finder windows)
 		u.runWithDelays(0.2, function()
-			if #(u.app("Finder"):allWindows()) == 0 then u.app("Finder"):hide() end
+			if #(u.app("Finder"):allWindows()) > 0 or env.isProjector() then return end
+			u.app("Finder"):hide()
 		end)
 	elseif #wins == 1 then
 		if env.isProjector() then
@@ -132,8 +133,6 @@ function M.autoTile(winSrc)
 			pos[1] = M.pseudoMax
 		end
 	elseif #wins == 2 then
-		-- do not switch two windows around that are correctly tiled but in the
-		-- other order
 		pos = { hs.layout.left50, hs.layout.right50 }
 	elseif #wins == 3 then
 		pos = {
@@ -169,10 +168,9 @@ function M.autoTile(winSrc)
 		}
 		if #wins == 8 then table.insert(pos, { h = 0.5, w = 0.25, x = 0.75, y = 0.5 }) end
 	end
-	-----------------------------------------------------------------------------
 
 	-- Do not autotile when windows are already tiled but not in the order of the
-	-- wins[], to prevent windows switching around. (wins[] is ordered by degree
+	-- wins[], to prevent windows glitching around. (wins[] is ordered by order
 	-- of the window being front.)
 	local existingPositions = 0
 	for _, position in pairs(pos) do
