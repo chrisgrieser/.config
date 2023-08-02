@@ -506,7 +506,7 @@ rules:
         to_if_alone:
           - { key_code: delete_or_backspace, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # y = yank
+      # y = yank file
       - type: basic
         from: { key_code: z } # y = z in German Keyboard
         to_if_alone:
@@ -518,6 +518,23 @@ rules:
         to:
           - { key_code: c, modifiers: [command] }
           - shell_command: osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
+        conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
+      # Y = yank file *content*
+      - type: basic
+        from: { key_code: z, modifiers: { mandatory: [shift] } } # y = z in German Keyboard
+        to_if_alone:
+          - shell_command: |
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
+              cat "$selection" | pbcopy
+              osascript -e 'display notification "✅ File content copied" with title "Finder Vim Mode"'
+        conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
+      - type: basic
+        from: { key_code: y, modifiers: { mandatory: [shift] } }
+        to:
+          - shell_command: |
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
+              cat "$selection" | pbcopy
+              osascript -e 'display notification "✅ File content copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
       # p = paste
       - type: basic

@@ -1,0 +1,133 @@
+# INFO has to come before finder-vim-mode.yaml itself
+rules:
+  - description: "Addons for Alfred"
+    manipulators:
+      # FIX for <Esc> -> f18 binding
+      # Alfred Custom Clipboard Search & screenshot history (cleanshot)
+      - type: basic
+        from: { key_code: escape }
+        to_if_alone:
+          - key_code: f18
+          - set_variable:
+              name: FINDER_INSERT_MODE
+              value: true
+          - set_variable:
+              name: FINDER_ALFRED_ACTIVE
+              value: true
+        to_if_held_down:
+          - shell_command: open "cleanshot://open-history"
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.apple\.finder$]
+          - type: variable_unless
+            name: FINDER_ALFRED_MODE
+            value: true
+          - type: variable_unless
+            name: FINDER_INSERT_MODE
+            value: true
+      # abort Alfred Clipboard
+      - type: basic
+        from: { key_code: escape }
+        to_if_alone:
+          - key_code: f18
+          - set_variable:
+              name: FINDER_INSERT_MODE
+              value: false
+          - set_variable:
+              name: FINDER_ALFRED_ACTIVE
+              value: false
+              # INFO no idea why, but setting a conditions here breaks this rule.
+              # Maybe due to recursion. But by placing this rule last, it only
+              # gets triggered if the other one does not get triggered before,
+              # which also works
+        to_if_held_down:
+          - shell_command: open "cleanshot://open-history"
+
+      #─────────────────────────────────────────────────────────────────────────
+      #─────────────────────────────────────────────────────────────────────────
+
+            #─────────────────────────────────────────────────────────────────────────
+      # abort Alfred Clipboard
+      - type: basic
+        from: { key_code: escape }
+        to_if_alone:
+          - key_code: f18
+          - set_variable:
+              name: FINDER_INSERT_MODE
+              value: false
+          - set_variable:
+              name: FINDER_ALFRED_ACTIVE
+              value: false
+              # INFO no idea why, but setting a conditions here breaks this rule.
+              # Maybe due to recursion. But by placing this rule last, it only
+              # gets triggered if the other one does not get triggered before,
+              # which also works
+        to_if_held_down:
+          - shell_command: open "cleanshot://open-history"
+
+  #─────────────────────────────────────────────────────────────────────────────
+  #─────────────────────────────────────────────────────────────────────────────
+
+  - description: "Extra keys"
+    manipulators:
+      # B: Signature ( append "_CG")
+      - type: basic
+        from: { key_code: b, modifiers: { mandatory: [shift] } }
+        to:
+          - shell_command: |
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)' | sed 's|/$||' )
+              # bash expansion does not work in karabiner
+              filepathNoExt=$(echo "$selection" | rev | cut -d. -f2- | rev)
+              ext=$(echo "$selection" | rev | cut -d. -f1 | rev)
+              last3CharsOfFilename=$(echo "$filepathNoExt" | rev | cut -c-3 | rev)
+              if [[ "$last3CharsOfFilename" == "_CG" ]]; then
+                nameWithoutSig=$(echo "$filepathNoExt" | rev | cut -c4- | rev)
+                newName="$nameWithoutSig.$ext"
+              else
+                newName="${filepathNoExt}_CG.$ext"
+              fi
+              mv -n "$selection" "$newName"
+              open -R "$newName" # forces refresh of Finder
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.apple\.finder$]
+          - type: variable_unless
+            name: FINDER_FIND_MODE
+            value: true
+          - type: variable_unless
+            name: FINDER_INSERT_MODE
+            value: true
+      # Z (German): Open in Betterzip
+      - type: basic
+        from: { key_code: y, modifiers: { mandatory: [shift] } }
+        to:
+          - shell_command: |
+              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
+              ext=$(echo "$selection" | rev | cut -d. -f1 | rev)
+              if [[ "$ext" != "zip" ]]; then
+                display notification "" with title "⚠️ File not a zip file." subtitle "Finder Vim Mode"
+                return 1
+              fi
+              
+              # bash expansion does not work in karabiner
+              filepathNoExt=$(echo "$selection" | rev | cut -d. -f2- | rev)
+              last3CharsOfFilename=$(echo "$filepathNoExt" | rev | cut -c-3 | rev)
+              if [[ "$last3CharsOfFilename" == "_CG" ]]; then
+                nameWithoutSig=$(echo "$filepathNoExt" | rev | cut -c4- | rev)
+                newName="$nameWithoutSig.$ext"
+              else
+                newName="${filepathNoExt}_CG.$ext"
+              fi
+              mv -n "$selection" "$newName"
+              open -R "$newName" # forces refresh of Finder
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.apple\.finder$]
+          - type: variable_unless
+            name: FINDER_FIND_MODE
+            value: true
+          - type: variable_unless
+            name: FINDER_INSERT_MODE
+            value: true
+          - type: input_source_if
+            input_sources: [language: ^de$]

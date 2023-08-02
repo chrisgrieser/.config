@@ -34,7 +34,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>33654CF6-613B-4F13-A9BB-C69F22B60536</key>
+		<key>2A58464F-69A0-434A-A54B-5814B905DEC6</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -104,7 +104,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>33654CF6-613B-4F13-A9BB-C69F22B60536</string>
+				<string>87FA7BC2-6B86-4232-BC62-918EC5651BA7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1368,64 +1368,12 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/neovim-debugger.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>87FA7BC2-6B86-4232-BC62-918EC5651BA7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>fixedorder</key>
-				<false/>
-				<key>items</key>
-				<string>[{"title":"Killall","arg":"killall","subtitle":"nvim, neovide, osascript"},{"title":"Ping","arg":"ping","subtitle":"send 'echo \"ping\"' to the nvim server"},{"title":"Report","arg":"report","subtitle":"of running nvim-related processes"}]</string>
-				<key>keyword</key>
-				<string>debug</string>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Remote Server Issues</string>
-				<key>title</key>
-				<string>Debug Neovim</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.listfilter</string>
-			<key>uid</key>
-			<string>33654CF6-613B-4F13-A9BB-C69F22B60536</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>report</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -1447,6 +1395,29 @@ fi</string>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>69582200-3B13-4747-BCAD-1292B8BF99FD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/neovim-debugger.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>87FA7BC2-6B86-4232-BC62-918EC5651BA7</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1517,6 +1488,39 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>killall</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>19</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>2</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>2A58464F-69A0-434A-A54B-5814B905DEC6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1554,9 +1558,16 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 		<key>221EDD07-BD53-4BD8-B302-CD0040D3FE51</key>
 		<dict>
 			<key>xpos</key>
-			<real>585</real>
+			<real>460</real>
 			<key>ypos</key>
 			<real>1060</real>
+		</dict>
+		<key>2A58464F-69A0-434A-A54B-5814B905DEC6</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1135</real>
 		</dict>
 		<key>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</key>
 		<dict>
@@ -1566,13 +1577,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<real>625</real>
 			<key>ypos</key>
 			<real>160</real>
-		</dict>
-		<key>33654CF6-613B-4F13-A9BB-C69F22B60536</key>
-		<dict>
-			<key>xpos</key>
-			<real>175</real>
-			<key>ypos</key>
-			<real>1060</real>
 		</dict>
 		<key>3FBF0208-3AC5-48A4-A7AF-86BE9C0B1915</key>
 		<dict>
@@ -1625,12 +1629,10 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 		</dict>
 		<key>69582200-3B13-4747-BCAD-1292B8BF99FD</key>
 		<dict>
-			<key>note</key>
-			<string>neovim debug</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>1025</real>
 		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
@@ -1646,7 +1648,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 		<key>87FA7BC2-6B86-4232-BC62-918EC5651BA7</key>
 		<dict>
 			<key>xpos</key>
-			<real>335</real>
+			<real>210</real>
 			<key>ypos</key>
 			<real>1060</real>
 		</dict>
@@ -1655,7 +1657,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>note</key>
 			<string>non-empty</string>
 			<key>xpos</key>
-			<real>500</real>
+			<real>375</real>
 			<key>ypos</key>
 			<real>1090</real>
 		</dict>
