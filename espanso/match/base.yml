@@ -1,5 +1,5 @@
 matches:
-  - trigger: "... " # space needed to avoid conflict with `...` in the shell
+  - trigger: "... " # space added to avoid conflict with `...` in the shell
     replace: "… "
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!web"
@@ -18,7 +18,7 @@ matches:
     replace: Christopher Grieser
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!wd"
-    replace: "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+    replace: "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
   - trigger: "!path"
     replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
   - trigger: "!null"
@@ -27,7 +27,12 @@ matches:
   - trigger: "!dontask"
     replace: "<https://dontasktoask.com/>"
   - trigger: "!bug"
-    replace: Could you open a bug report at the GitHub repo? Reason being that the bug report forms asks for various information I need to investigate the issue. (also, I don't have the time to look into it right now, so an issue will make sure that I can keep track of it.)
+    replace: >
+      Could you open a bug report at the GitHub repo? 
+      Reason being that the bug report forms asks for various information 
+      I need to investigate the issue. 
+      (Also, I don't have the time to look into it right now, so a bug report
+      will make sure that I can keep track of it.)
   - trigger: "!here"
     replace: "<https://heyoka.medium.com/dont-use-click-here-f32f445d1021>"
     #───────────────────────────────────────────────────────────────────────────
