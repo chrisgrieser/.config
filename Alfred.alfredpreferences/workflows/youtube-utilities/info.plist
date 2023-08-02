@@ -415,10 +415,17 @@ echo -n "$title"</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).
+	<string>### Requirements
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp)
+- [fileicon](https://github.com/mklement0/fileicon)
 
-https://github.com/ytdl-org/youtube-dl
-https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
+
+### Supported Sites
+- https://ytdl-org.github.io/youtube-dl/supportedsites.html
+
+---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>4B06046A-148C-4F17-B241-C48299B1D2F1</key>
@@ -526,21 +533,70 @@ https://ytdl-org.github.io/youtube-dl/supportedsites.html</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variables</key>
-	<dict>
-		<key>download_location</key>
-		<string>~/RomComs/-new</string>
-		<key>working_directory</key>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub/</string>
-		<key>youtube_link_folder</key>
-		<string>~/Downloaded</string>
-	</dict>
-	<key>variablesdontexport</key>
 	<array>
-		<string>youtube_link_folder</string>
-		<string>download_location</string>
-		<string>working_directory</string>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Downloads</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string>~/Downloads</string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Where Videos will be downloaded</string>
+			<key>label</key>
+			<string>Download Location</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>download_location</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Downloads</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string>~/Downloads</string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Where Watch Later Links will be stored</string>
+			<key>label</key>
+			<string>Watch Later Folder</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>youtube_link_folder</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string>~/Desktop</string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>When the Watch Later folder does not exist (e.g. second device), try this folder instead.</string>
+			<key>label</key>
+			<string>Fallback Folder</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>fallback_folder</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string></string>
