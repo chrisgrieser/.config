@@ -13,15 +13,16 @@ rules:
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
 
-              # wait for 2 secs, if nvim is still running then, try to killall
+              # wait for 3 secs, if nvim is still running then, try to killall
               i=0
-              while pgrep -xq "nvim" && [[ $i -lt 20 ]]; do 
+              while pgrep -xq "nvim" && [[ $i -lt 30 ]]; do 
                 i=$((i+1))
                 sleep 0.1
               done
+
               if pgrep -xq "nvim" ; then
-              osascript -e 'display notification "" with title "⚔️ Killing nvim…"'
-                killall nvim neovide
+                osascript -e 'display notification "" with title "⚔️ Force Killing nvim…"'
+                killall -9 nvim neovide
               fi
 
               # wait for 2 seconds and if nvim is *still* running, abort
