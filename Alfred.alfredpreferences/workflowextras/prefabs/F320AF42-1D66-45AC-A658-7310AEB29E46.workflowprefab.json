@@ -4,13 +4,13 @@
     "items" : [
       {
         "workflowobjecttype" : "alfred.workflow.output.clipboard",
-        "uid" : "87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA",
-        "note" : "paste",
+        "uid" : "6887CA13-E491-46B2-9AA3-D36BEC604521",
+        "note" : "",
         "workflowobjectconfig" : {
           "ignoredynamicplaceholders" : false,
           "transient" : false,
           "clipboardtext" : "{query}",
-          "autopaste" : true
+          "autopaste" : false
         },
         "colorindex" : 0,
         "ypos" : 120,
@@ -18,7 +18,7 @@
       },
       {
         "workflowobjecttype" : "alfred.workflow.action.openurl",
-        "uid" : "320A285D-5E2A-4D80-9B99-CFDED47BA207",
+        "uid" : "7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0",
         "note" : "",
         "workflowobjectconfig" : {
           "skipqueryencode" : false,
@@ -33,7 +33,7 @@
       },
       {
         "workflowobjecttype" : "alfred.workflow.input.scriptfilter",
-        "uid" : "BCC9ED2C-0A1A-47F0-83A2-492285CD9D56",
+        "uid" : "8851C420-3E80-4797-80F1-31999E4C2F54",
         "note" : "",
         "workflowobjectconfig" : {
           "argumenttrimmode" : 0,
@@ -62,18 +62,18 @@
     ],
     "connections" : [
       {
-        "sourceuid" : "BCC9ED2C-0A1A-47F0-83A2-492285CD9D56",
+        "sourceuid" : "8851C420-3E80-4797-80F1-31999E4C2F54",
         "config" : {
-          "destinationuid" : "87E8FA48-EDC8-4C70-B2E5-30E8BD99B2AA",
+          "destinationuid" : "6887CA13-E491-46B2-9AA3-D36BEC604521",
           "modifiers" : 524288,
           "modifiersubtext" : "⌥: Copy URL",
           "vitoclose" : false
         }
       },
       {
-        "sourceuid" : "BCC9ED2C-0A1A-47F0-83A2-492285CD9D56",
+        "sourceuid" : "8851C420-3E80-4797-80F1-31999E4C2F54",
         "config" : {
-          "destinationuid" : "320A285D-5E2A-4D80-9B99-CFDED47BA207",
+          "destinationuid" : "7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0",
           "modifiers" : 0,
           "modifiersubtext" : "",
           "vitoclose" : false
@@ -81,5 +81,5 @@
       }
     ]
   },
-  "description" : "Script Filter, Open URL, ⌥: Copy URL"
+  "description" : ""
 }

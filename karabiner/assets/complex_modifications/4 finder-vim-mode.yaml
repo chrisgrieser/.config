@@ -363,12 +363,6 @@ rules:
                   end repeat
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # E = eject (if volume or disk image)
-      - type: basic
-        from: { key_code: e, modifiers: { mandatory: [shift] } }
-        to_if_alone:
-          - { key_code: e, modifiers: [command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <BS> = cycle windows (:bnext)
       - type: basic
         from: { key_code: delete_or_backspace }

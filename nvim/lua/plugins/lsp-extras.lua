@@ -53,6 +53,7 @@ return {
 	-- TODO pending bugfixes
 	{ -- Diagnostic Virtual Text at the top right, not at EoL
 		"dgagn/diagflow.nvim",
+		enabled = false,
 		event = "VeryLazy",
 		opts = {
 			max_width = 35,
