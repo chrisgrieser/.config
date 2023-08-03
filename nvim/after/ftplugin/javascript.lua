@@ -1,5 +1,4 @@
 local fn = vim.fn
-local cmd = vim.cmd
 local keymap = vim.keymap.set
 local u = require("config.utils")
 --------------------------------------------------------------------------------

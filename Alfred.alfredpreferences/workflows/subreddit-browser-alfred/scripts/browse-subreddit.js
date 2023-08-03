@@ -13,12 +13,12 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const subreddit = $.getenv("selected_subreddit");
+	const subredditName = $.getenv("selected_subreddit");
 	// INFO yes, curl is blocked only until you change the user agent, lol
-	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subreddit}/new.json"`;
+	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));
 
-	let iconPath = `${$.getenv("alfred_workflow_data")}/${subreddit}.png`;
+	let iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
 	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
 
 	// e.g., too many requests
@@ -45,6 +45,9 @@ function run() {
 					valid: false,
 					subtitle: `author: ${item.author}`,
 				},
+				cmd: {
+					arg: subredditName,
+				}
 			},
 		};
 	});

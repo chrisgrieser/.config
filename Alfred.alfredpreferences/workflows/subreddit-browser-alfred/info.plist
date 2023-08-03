@@ -54,7 +54,7 @@
 				<key>modifiersubtext</key>
 				<string>⌘: Browse next subreddit</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -196,7 +196,7 @@
 				<key>scriptfile</key>
 				<string>./scripts/browse-subreddit.js</string>
 				<key>subtext</key>
-				<string>Loading from {var:selected_subreddit}…</string>
+				<string>Loading r/{var:selected_subreddit}…</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
@@ -374,6 +374,8 @@
 		</dict>
 		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
 		<dict>
+			<key>note</key>
+			<string>determine next subreddit</string>
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
