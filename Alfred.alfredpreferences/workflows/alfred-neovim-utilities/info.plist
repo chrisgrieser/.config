@@ -1021,11 +1021,30 @@ find "$plugin_installation_path" -path "*/$repo" -type d | xargs open</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Getting Started
-Run `:nvim` once to create the local cache for the online :help search.
+	<string>## Setup
+Run `:nvim` once to create the local cache for the `:h` search.
 
-## Info
-- [README](https://github.com/chrisgrieser/alfred-neovim-utilities/blob/main/README.md)
+## Features
+- `:h`: Searches the neovim [online :help](https://neovim.io/doc/). Groups synonyms together, for example, `:w` and `:write` both get one item.
+	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the respective help.
+	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the help URL to the clipboard.
+- `vp`: Searches [neovimcraft](https://neovimcraft.com/) for neovim plugins. Mnemonic: `[v]im [p]lugins`.
+	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the GitHub repo.
+	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Copy repo name for plugin managers.
+	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the GitHub URL to the clipboard.
+	- &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Open the `:help` page of the plugin at GitHub.
+	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search GitHub issues of the plugin.[^1]
+- `ip`: Search for plugins installed locally on your device. Mnemonic: `[i]installed [p]lugins`. The modifiers (&lt;kbd&gt;⌘⌥⌃⇧&lt;/kbd&gt;) from the plugin-search also apply for this command. In addition:
+	- &lt;kbd&gt;fn⏎&lt;/kbd&gt;: Open the local directory of the plugin in Finder.
+- `nvr`: Shows the latest posts from the neovim subreddit. (Limited to ~10 calls per minute.)
+	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the post in the browser.
+	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL to the clipboard.
+	- &lt;kbd&gt;⇧&lt;/kbd&gt;: Show author of the post.
+- `:old`: Displays and searches your `:oldfiles`. Opens them in the system's default editor for the respective filetype. (To open them directly in neovim, you need a neovim GUI with `Open With…` capability though.)
+- `:nvim`: Creates the local cache for the online :help search. Run it once in a while, when there have been updates to the online docs.
+
+## Bug reports, feature requests or just leave a star?
+➡️ [GitHub Repo](https://github.com/chrisgrieser/alfred-neovim-utilities/)
 
 ---
 
@@ -1425,7 +1444,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.0</string>
+	<string>1.3.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

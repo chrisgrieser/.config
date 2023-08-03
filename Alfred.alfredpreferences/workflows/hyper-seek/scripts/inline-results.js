@@ -94,15 +94,17 @@ function refreshKeywordCache(cachePath) {
 					keywords.push(userKeyword);
 				} catch (_error) {
 					// CASE 1b: keywords where user kept the default value
-					const workflowConfig = JSON.parse(
-						app.doShellScript(
-							`plutil -extract "userconfigurationconfig" json -o - "${workflowPath}/info.plist" || true`,
-						),
-					);
-					const defaultValue = workflowConfig.find(
-						(/** @type {{ variable: string; }} */ option) => option.variable === varName,
-					).config.default;
-					keywords.push(defaultValue);
+					try {
+						const workflowConfig = JSON.parse(
+							app.doShellScript(
+								`plutil -extract "userconfigurationconfig" json -o - "${workflowPath}/info.plist"`,
+							),
+						);
+						const defaultValue = workflowConfig.find(
+							(/** @type {{ variable: string; }} */ option) => option.variable === varName,
+						).config.default;
+						keywords.push(defaultValue);
+					} catch (_error) {}
 				}
 			}
 			// CASE 2: `||` -> multiple keyword alternatives
@@ -154,9 +156,10 @@ function refreshKeywordCache(cachePath) {
 
 	// CASE 7: Contact / Mail Search
 	const mailPrefs = JSON.parse(
-		app.doShellScript("plutil -convert json ../../preferences/features/contacts/email/prefs.plist -o - || true") ||
-			"{}",
-	)
+		app.doShellScript(
+			"plutil -convert json ../../preferences/features/contacts/email/prefs.plist -o - || true",
+		) || "{}",
+	);
 	// .keywordEnabled is undefined true, hence need to check for !== false
 	if (mailPrefs.keywordEnabled !== false) keywords.push(mailPrefs.keyword);
 
