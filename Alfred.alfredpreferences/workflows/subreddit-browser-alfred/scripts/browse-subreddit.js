@@ -45,9 +45,7 @@ function run() {
 					valid: false,
 					subtitle: `author: ${item.author}`,
 				},
-				cmd: {
-					arg: subredditName,
-				}
+				cmd: { arg: subredditName }, // next subreddit
 			},
 		};
 	});

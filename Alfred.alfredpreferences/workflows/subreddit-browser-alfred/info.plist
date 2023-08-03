@@ -33,29 +33,9 @@
 				<key>vitoclose</key>
 				<true/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>EF14C092-B8C8-4A81-96FA-3F812DA14099</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open in Browser</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>8851C420-3E80-4797-80F1-31999E4C2F54</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E640FB36-75C7-4B36-A8AC-0F56468145CC</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Browse next subreddit</string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</string>
@@ -65,6 +45,16 @@
 				<string></string>
 				<key>vitoclose</key>
 				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E640FB36-75C7-4B36-A8AC-0F56468145CC</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Browse next subreddit</string>
+				<key>vitoclose</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -104,6 +94,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -123,46 +134,6 @@
 			<string>E640FB36-75C7-4B36-A8AC-0F56468145CC</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>next-subreddit-loop</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>3381D52B-F37A-422A-BB73-2654C0280799</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -263,6 +234,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>externaltriggerid</key>
+				<string>loop</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>3381D52B-F37A-422A-BB73-2654C0280799</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -276,7 +266,7 @@
 			<key>inboundconfig</key>
 			<dict>
 				<key>externalid</key>
-				<string>next-subreddit-loop</string>
+				<string>loop</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
@@ -304,27 +294,6 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.reddit.com/r/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>EF14C092-B8C8-4A81-96FA-3F812DA14099</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -332,17 +301,19 @@
 	<dict>
 		<key>09B3D6D5-85DC-4788-B940-EDFB8EC74EE4</key>
 		<dict>
+			<key>note</key>
+			<string>store {query} in var</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>220</real>
 			<key>ypos</key>
 			<real>370</real>
 		</dict>
 		<key>3381D52B-F37A-422A-BB73-2654C0280799</key>
 		<dict>
 			<key>xpos</key>
-			<real>650</real>
+			<real>680</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>340</real>
 		</dict>
 		<key>5852A551-EFDF-47BB-A256-13A0D3975AA5</key>
 		<dict>
@@ -354,16 +325,16 @@
 		<key>6887CA13-E491-46B2-9AA3-D36BEC604521</key>
 		<dict>
 			<key>xpos</key>
-			<real>500</real>
+			<real>525</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>495</real>
 		</dict>
 		<key>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</key>
 		<dict>
 			<key>xpos</key>
-			<real>500</real>
+			<real>520</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>220</real>
 		</dict>
 		<key>8851C420-3E80-4797-80F1-31999E4C2F54</key>
 		<dict>
@@ -377,18 +348,9 @@
 			<key>note</key>
 			<string>determine next subreddit</string>
 			<key>xpos</key>
-			<real>500</real>
+			<real>520</real>
 			<key>ypos</key>
-			<real>145</real>
-		</dict>
-		<key>EF14C092-B8C8-4A81-96FA-3F812DA14099</key>
-		<dict>
-			<key>note</key>
-			<string>open subreddit in browser</string>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>500</real>
+			<real>335</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
