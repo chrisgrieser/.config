@@ -26,14 +26,20 @@ function run() {
 	/** @type AlfredItem[] */
 	const redditPosts = response.data.children.map((/** @type {{ data: any; }} */ data) => {
 		const item = data.data;
-		const score = item.score;
 		const comments = item.num_comments;
 		const category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
+		const subtitle = `${item.score}↑  ${comments}●  ${category}`;
 
 		return {
 			title: item.title,
-			subtitle: `${score}↑  ${comments}●  ${category}`,
+			subtitle: subtitle,
 			arg: item.url,
+			mods: {
+				shift: {
+					valid: false,
+					subtitle: `author: ${item.author}`,
+				},
+			},
 		};
 	});
 	return JSON.stringify({ items: redditPosts });
