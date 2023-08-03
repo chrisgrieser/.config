@@ -58,7 +58,7 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 # Views
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1 # bigger icons
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool false
-defaults write com.apple.finder ShowStatusBar -bool false
+defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv" # List view as default
@@ -78,7 +78,7 @@ killall Finder
 #───────────────────────────────────────────────────────────────────────────────
 
 # Reduce Transparency (native mac apps & menubar)
-defaults write com.apple.universalaccess reduceTransparency -bool false
+defaults write com.apple.universalaccess reduceTransparency -bool true
 killall Finder
 
 # these three need restart
