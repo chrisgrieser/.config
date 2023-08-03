@@ -48,6 +48,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>E640FB36-75C7-4B36-A8AC-0F56468145CC</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Browse next subreddit</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -67,6 +77,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3381D52B-F37A-422A-BB73-2654C0280799</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -78,6 +101,48 @@
 	<string>Sub-Reddit Browser</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>determine-next-subreddit.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E640FB36-75C7-4B36-A8AC-0F56468145CC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>next-subreddit-loop</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>3381D52B-F37A-422A-BB73-2654C0280799</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -208,6 +273,11 @@
 					<string>{query}</string>
 				</dict>
 			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>next-subreddit-loop</string>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
@@ -263,46 +333,60 @@
 		<key>09B3D6D5-85DC-4788-B940-EDFB8EC74EE4</key>
 		<dict>
 			<key>xpos</key>
-			<real>210</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>225</real>
+			<real>370</real>
+		</dict>
+		<key>3381D52B-F37A-422A-BB73-2654C0280799</key>
+		<dict>
+			<key>xpos</key>
+			<real>650</real>
+			<key>ypos</key>
+			<real>145</real>
 		</dict>
 		<key>5852A551-EFDF-47BB-A256-13A0D3975AA5</key>
 		<dict>
 			<key>xpos</key>
-			<real>40</real>
+			<real>45</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>340</real>
 		</dict>
 		<key>6887CA13-E491-46B2-9AA3-D36BEC604521</key>
 		<dict>
 			<key>xpos</key>
-			<real>465</real>
+			<real>500</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>395</real>
 		</dict>
 		<key>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</key>
 		<dict>
 			<key>xpos</key>
-			<real>465</real>
+			<real>500</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>280</real>
 		</dict>
 		<key>8851C420-3E80-4797-80F1-31999E4C2F54</key>
 		<dict>
 			<key>xpos</key>
-			<real>260</real>
+			<real>295</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>340</real>
+		</dict>
+		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
+		<dict>
+			<key>xpos</key>
+			<real>500</real>
+			<key>ypos</key>
+			<real>145</real>
 		</dict>
 		<key>EF14C092-B8C8-4A81-96FA-3F812DA14099</key>
 		<dict>
 			<key>note</key>
 			<string>open subreddit in browser</string>
 			<key>xpos</key>
-			<real>265</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>515</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -12,12 +12,13 @@ function cacheSubredditIcon(subredditName) {
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {
 		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
-		return;
+		return subredditInfo.error;
 	}
 
 	// for some subreddits saved as icon_img, for others as community_icon
-	const onlineIcon = subredditInfo.data.icon_img || subredditInfo.data.community_icon.replace(/\?.*$/, "");
-	if (!onlineIcon) return;
+	let onlineIcon = subredditInfo.data.icon_img || subredditInfo.data.community_icon;
+	if (!onlineIcon) return; // has no icon
+	onlineIcon = onlineIcon.replace(/\?.*$/, ""); // clean url for curl
 
 	app.doShellScript(`curl -sL "${onlineIcon}" --create-dirs --output "${iconPath}"`);
 }
@@ -31,16 +32,25 @@ function run() {
 	const subreddits = $.getenv("subreddits")
 		.split("\n")
 		.map((subredditName) => {
+			let subtitle = "";
+			
 			// cache subreddit image
 			let iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
+
 			if (!fileExists(iconPath)) {
-				cacheSubredditIcon(subredditName);
-				// cannot be cached
+				const error = cacheSubredditIcon(subredditName);
+				console.log("[QL] error:", error);
+				// if icon cannot be cached, use default icon
 				if (!fileExists(iconPath)) iconPath = "icon.png";
+
+				// only check for subreddit existence on icon caching, to reduce
+				// number of requests
+				if (error === 404) subtitle = "⚠️ subreddit not found";
 			}
 
 			return {
 				title: `r/${subredditName}`,
+				subtitle: subtitle,
 				arg: subredditName,
 				icon: { path: iconPath },
 			};
