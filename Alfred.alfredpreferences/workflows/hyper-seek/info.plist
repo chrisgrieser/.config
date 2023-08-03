@@ -478,10 +478,10 @@
 				<integer>0</integer>
 				<key>script</key>
 				<string># THESE VARIABLES MUST BE SET. SEE THE ONEUPDATER README FOR AN EXPLANATION OF EACH.
-readonly remote_info_plist=''
-readonly workflow_url=''
-readonly download_type=''
-readonly frequency_check=''
+readonly remote_info_plist='https://raw.githubusercontent.com/chrisgrieser/hyper-seek/main/info.plist'
+readonly workflow_url='https://github.com/chrisgrieser/hyper-seek/releases/latest/download/hyper-seek.alfredworkflow'
+readonly download_type='direct'
+readonly frequency_check='1'
 
 # FROM HERE ON, CODE SHOULD BE LEFT UNTOUCHED!
 function abort {
@@ -788,6 +788,9 @@ Selection is…
 ## Add link to selection 
 Turns selected text into a markdown link, with the URL of the first search result for that text as URL for the markdown link. This feature is essentially a simplified version of [Brett Terpstra's SearchLink](https://brettterpstra.com/projects/searchlink/). 
 
+## Auto-Update
+Due to the nature of this workflow, it will not be submitted to the Alfred Gallery. Therefore, the workflow includes it's own auto-update function, which checks every day for a new update.
+
 ---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -896,9 +899,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>triggers on every letter of the roman alphabet</string>
 			<key>xpos</key>
-			<real>165</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>455</real>
 		</dict>
 		<key>841BD8BB-2E10-4E6A-89DC-2C5DAA070D75</key>
 		<dict>
@@ -1150,7 +1153,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.5</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
