@@ -21,7 +21,7 @@ function run() {
 	let iconPath = `${$.getenv("alfred_workflow_data")}/${subreddit}.png`;
 	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
 
-	// mostly too many requests
+	// e.g., too many requests
 	if (response.error) {
 		return JSON.stringify({
 			items: [{ title: response.message, subtitle: response.error }],
