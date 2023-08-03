@@ -9,6 +9,9 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
+vim.cmd.inoreabbrev("<buffer> // #") -- habit from writing too much js or lua
+vim.cmd.inoreabbrev("<buffer> -- #") -- habit from writing too much js or lua
+
 u.applyTemplateIfEmptyFile("zsh")
 
 -- pipe textobj
