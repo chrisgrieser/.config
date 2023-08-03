@@ -116,8 +116,6 @@ local keybindings = {
 	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
 	-- Grappling-hook
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
-	-- accept autosuggestion
-	{ key = "s", mods = "CMD", action = act.SendKey { key = "x", mods = "CTRL" } },
 
 	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
 	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
@@ -136,9 +134,6 @@ local keybindings = {
 			act.SendKey { key = "LeftArrow" },
 		},
 	},
-
-	-- emoji picker
-	-- { key = "e", mods = "CMD", action = act.CharSelect },
 
 	{ -- cmd+l -> open current location in Finder
 		key = "l",

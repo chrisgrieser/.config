@@ -50,32 +50,6 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
-	-- TODO pending bugfixes
-	{ -- Diagnostic Virtual Text at the top right, not at EoL
-		"dgagn/diagflow.nvim",
-		enabled = false,
-		event = "VeryLazy",
-		opts = {
-			max_width = 35,
-			max_height = 6,
-			scope = "line", -- cursor|line
-			placement = "top", -- top|inline
-			text_align = "left", -- left|right
-			gap_size = 1,
-			padding_top = 0,
-			padding_right = 2, -- for scrollbar
-			update_event = { "BufReadPost", "InsertLeave", "DiagnosticChanged" },
-			toggle_event = { "InsertEnter" },
-			show_sign = true,
-			severity_colors = { -- virtual text hlgroups have background in most themes
-				error = "DiagnosticVirtualTextError",
-				warning = "DiagnosticVirtualTextWarning",
-				info = "DiagnosticVirtualTextInfo",
-				hint = "DiagnosticVirtualTextHint",
-			},
-			format = function(diag) return u.diagnosticFmt(diag) end,
-		},
-	},
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",
 		cmd = "Glance",
@@ -103,8 +77,11 @@ return {
 						["j"] = actions.next_location, -- `.next` goes to next item, `.next_location` skips groups
 						["k"] = actions.previous_location,
 
-						-- SEE https://github.com/DNLHC/glance.nvim/pull/60
-						["<D-s>"] = actions.quickfix, -- consistent with the respective keymap for telescope
+						-- consistent with the respective keymap for telescope
+						["<D-s>"] = function()
+							actions.quickfix() -- leaves quickfix window open, so it's necessary to close it
+							vim.cmd.cclose()
+						end,
 					},
 					preview = {
 						["<C-CR>"] = actions.enter_win("list"),
