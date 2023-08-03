@@ -129,7 +129,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>browse-subreddit.js</string>
+				<string>./scripts/browse-subreddit.js</string>
 				<key>subtext</key>
 				<string>Loading from {var:selected_subreddit}…</string>
 				<key>title</key>
@@ -178,7 +178,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>select-subreddit.js</string>
+				<string>./scripts/select-subreddit.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>

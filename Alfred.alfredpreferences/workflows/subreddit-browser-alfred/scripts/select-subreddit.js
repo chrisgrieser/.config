@@ -5,16 +5,21 @@ app.includeStandardAdditions = true;
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
-
 /** @param {string} subredditName */
 function cacheSubredditIcon(subredditName) {
-		const basename = $.getenv("alfred_workflow_bundleid");
-		const cacheDirParent = cacheDir.slice(0, -vasename.length);
-		Application("Finder").make({
-			new: "folder",
-			at: Path(cacheDirParent),
-			withProperties: { name: basename },
-		});
+	const iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
+	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
+	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
+	if (subredditInfo.error) {
+		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
+		return;
+	}
+
+	// for some subreddits saved as icon_img, for others as community_icon
+	const onlineIcon = subredditInfo.data.icon_img || subredditInfo.data.community_icon.replace(/\?.*$/, "");
+	if (!onlineIcon) return;
+
+	app.doShellScript(`curl -sL "${onlineIcon}" --create-dirs --output "${iconPath}"`);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -27,8 +32,12 @@ function run() {
 		.split("\n")
 		.map((subredditName) => {
 			// cache subreddit image
-			const iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
-			if (!fileExists(iconPath)) cacheSubredditIcon(subredditName);
+			let iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
+			if (!fileExists(iconPath)) {
+				cacheSubredditIcon(subredditName);
+				// cannot be cached
+				if (!fileExists(iconPath)) iconPath = "icon.png";
+			}
 
 			return {
 				title: `r/${subredditName}`,

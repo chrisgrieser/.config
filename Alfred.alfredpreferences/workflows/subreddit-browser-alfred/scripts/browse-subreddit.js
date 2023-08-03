@@ -3,6 +3,8 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // INFO free API calls restricted to 10 per minute
@@ -13,8 +15,11 @@ app.includeStandardAdditions = true;
 function run() {
 	const subreddit = $.getenv("selected_subreddit");
 	// INFO yes, curl is blocked only until you change the user agent, lol
-	const curlCommand = `curl -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subreddit}/new.json"`;
+	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subreddit}/new.json"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));
+
+	let iconPath = `${$.getenv("alfred_workflow_data")}/${subreddit}.png`;
+	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
 
 	// mostly too many requests
 	if (response.error) {
@@ -34,6 +39,7 @@ function run() {
 			title: item.title,
 			subtitle: subtitle,
 			arg: item.url,
+			icon: { path: iconPath },
 			mods: {
 				shift: {
 					valid: false,
