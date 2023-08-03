@@ -187,7 +187,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>loading…</string>
+				<string></string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
@@ -195,7 +195,7 @@
 				<key>scriptfile</key>
 				<string>./scripts/select-subreddit.js</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Loading subreddit icons…</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
