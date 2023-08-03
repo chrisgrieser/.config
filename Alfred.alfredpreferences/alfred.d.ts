@@ -27,7 +27,7 @@ declare class AlfredItem {
 	icon?: {
 		type?: "fileicon" | "filetype" | "";
 		path?: string;
-	} | {};
+	};
 	mods?: {
 		cmd?: AlfredModifierKey;
 		alt?: AlfredModifierKey;
