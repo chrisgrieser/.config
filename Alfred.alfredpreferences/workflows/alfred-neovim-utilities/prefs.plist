@@ -4,6 +4,8 @@
 <dict>
 	<key>help_search</key>
 	<string>vim</string>
+	<key>neovim_subreddit_search</key>
+	<string>rr</string>
 	<key>old_search</key>
 	<string>old</string>
 	<key>plugin_search</key>

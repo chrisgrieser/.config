@@ -22,7 +22,7 @@ function run() {
 
 	const cacheFile = $.getenv("alfred_workflow_data") + "/url-list.txt";
 	if (!fileExists(cacheFile)) {
-		jsonArray.push({ title: "Index missing. Create via ':vim'", valid: false });
+		jsonArray.push({ title: "Index missing. Create via ':nvim'", valid: false });
 		return JSON.stringify({ items: jsonArray });
 	}
 
