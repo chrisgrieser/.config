@@ -59,32 +59,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>31B881AB-5CA0-469C-B9F8-E33171B4E403</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5BA79A32-FAE5-4C6E-BE52-007074A12873</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>3D3D6FCC-566C-4ECC-8D1C-AE3FE9BA3DB8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5BA79A32-FAE5-4C6E-BE52-007074A12873</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<array>
 			<dict>
@@ -387,63 +361,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>curl "{query}" | fx .</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>5BA79A32-FAE5-4C6E-BE52-007074A12873</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>fx</string>
-				<key>subtext</key>
-				<string>&gt; curl "{query}" | fx .</string>
-				<key>text</key>
-				<string>View JSON in fx</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>31B881AB-5CA0-469C-B9F8-E33171B4E403</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Preview JSON (fx)</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>3D3D6FCC-566C-4ECC-8D1C-AE3FE9BA3DB8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -489,26 +406,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<key>ypos</key>
 			<real>310</real>
 		</dict>
-		<key>31B881AB-5CA0-469C-B9F8-E33171B4E403</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>460</real>
-		</dict>
-		<key>3D3D6FCC-566C-4ECC-8D1C-AE3FE9BA3DB8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>URL action</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>575</real>
-		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
 			<key>note</key>
@@ -517,15 +414,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>175</real>
-		</dict>
-		<key>5BA79A32-FAE5-4C6E-BE52-007074A12873</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>460</real>
 		</dict>
 		<key>707FB3E6-329A-4494-A074-D4CD436A44AD</key>
 		<dict>

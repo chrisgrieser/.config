@@ -180,7 +180,9 @@ function run(argv) {
 
 	/** @type{"fallback"|"multi-select"|"default"|"rerun"} */
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
-	const query = $.getenv("alfred_workflow_keyword") + argv[0].trim();
+
+	const scriptFilterKeyword = $.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js || "";
+	const query = scriptFilterKeyword + argv[0].trim();
 
 	// ensure cache folder exists
 	const finder = Application("Finder");
@@ -313,7 +315,7 @@ function run(argv) {
 	let log = `${durationTotalSecs}s, "${query}"`;
 	if (mode === "fallback" || mode === "multi-select") log += ` (${mode})`;
 
-	if (mode === "rerun") log = "_ " + log; // indented to make it easier to read
+	if (mode === "rerun") log = "__" + log; // indented to make it easier to read
 	else log = "Total: " + log;
 	console.log(log);
 
