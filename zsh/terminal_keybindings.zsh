@@ -56,7 +56,8 @@ bindkey -M viins "^Z" undo            # cmd+z via wezterm
 # Plugin Bindings
 bindkey -M viins '^[[A' history-substring-search-up # up/down: history substring search
 bindkey -M viins '^[[B' history-substring-search-down
-bindkey -M viins "^X" autosuggest-accept # cmd+s via wezterm (consistent w/ nvim ghost text accept)
+bindkey -M viins "^[[Z" autosuggest-accept # shift+tab
+bindkey -M viins "^X" autosuggest-execute
 
 #───────────────────────────────────────────────────────────────────────────────
 
