@@ -23,6 +23,8 @@ return {
 				["ccc-ui"] = false,
 			}
 			vim.g.codeium_disable_bindings = 1
+
+			-- INFO if cmp visible, will use cmp selection instead.
 			vim.keymap.set(
 				"i",
 				"<Tab>",

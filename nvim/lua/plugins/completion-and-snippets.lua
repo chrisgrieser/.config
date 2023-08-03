@@ -116,8 +116,7 @@ local function cmpconfig()
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
-				if cmp.visible() then
-				elseif require("luasnip").choice_active() then
+				if require("luasnip").choice_active() then
 					cmp.abort()
 					require("luasnip").change_choice(1)
 				elseif cmp.visible() then
