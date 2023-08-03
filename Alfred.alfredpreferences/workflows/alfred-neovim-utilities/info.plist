@@ -831,6 +831,55 @@ Search neovim plugins and online :help via Alfred</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
+				<string>nvr</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>nvim-reddit.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>r/neovim Search</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>7572486D-59C9-427F-8DF0-A60B6F876F57</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
 				<string>{var:installed_plugin_search}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -1029,6 +1078,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>645</real>
 			<key>ypos</key>
 			<real>20</real>
+		</dict>
+		<key>7572486D-59C9-427F-8DF0-A60B6F876F57</key>
+		<dict>
+			<key>xpos</key>
+			<real>685</real>
+			<key>ypos</key>
+			<real>650</real>
 		</dict>
 		<key>79F25308-2C64-400B-AC1D-C1FD5FC840DF</key>
 		<dict>

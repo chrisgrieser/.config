@@ -54,8 +54,11 @@ function keywordCacheIsOutdated(cachePath) {
 	const webSearchConfigChanges = app.doShellScript(
 		`find ../../preferences/features/websearch -name "prefs.plist" -mtime -${cacheAgeMins}m`,
 	);
-	const cacheOutdated = workflowConfigChanges !== "" || webSearchConfigChanges !== "";
-	return cacheOutdated;
+	const contactConfigChanges = app.doShellScript(
+		`find ../../preferences/features/contacts/email -name "prefs.plist" -mtime -${cacheAgeMins}m`,
+	);
+	const configChanges = contactConfigChanges || webSearchConfigChanges || workflowConfigChanges;
+	return configChanges;
 }
 
 // get the Alfred keywords and write them to the cachePath
@@ -149,6 +152,15 @@ function refreshKeywordCache(cachePath) {
 		});
 	}
 
+	// CASE 7: Contact / Mail Search
+	const mailPrefs = JSON.parse(
+		app.doShellScript("plutil -convert json ../../preferences/features/contacts/email/prefs.plist -o - || true") ||
+			"{}",
+	)
+	// .keywordEnabled is undefined true, hence need to check for !== false
+	if (mailPrefs.keywordEnabled !== false) keywords.push(mailPrefs.keyword);
+
+	// FINISH
 	const uniqueKeywords = [...new Set(keywords)];
 
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
