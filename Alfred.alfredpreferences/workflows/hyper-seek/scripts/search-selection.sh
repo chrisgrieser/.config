@@ -40,16 +40,12 @@ elif [[ -n "$SEL" ]]; then
 	URL_ENCODED_SEL=$(osascript -l JavaScript -e "encodeURIComponent('$SEL')")
 	# shellcheck disable=2154
 	URL_2="$search_site$URL_ENCODED_SEL"
-
-
-#───────────────────────────────────────────────────────────────────────────────
-	# INFO opening via `ddgr` because it loads quicker than opening search url with
-	# `!ducky` appended
-	# URL_1="https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky"
-	# open "$URL_1"
-	ddgr --ducky --noua "$SEL"
+	URL_1="https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky"
 
 #───────────────────────────────────────────────────────────────────────────────
+	# Open first URL
+	open "$URL_1"
+
 
 	# OPEN SECOND URL IN BACKGROUND
 	# Use AppleScript instead of JXA because the latter cannot create tabs at specific indexes
