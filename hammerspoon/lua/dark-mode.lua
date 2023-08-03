@@ -59,7 +59,6 @@ local function toggleDarkMode()
 		--set sidenotes-count icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--set clock icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--set weather icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
-		--set covid-stats icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
 		--update
 	]]):format(sketchyBg, sketchyFg))
 
