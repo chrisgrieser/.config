@@ -81,8 +81,9 @@ function refreshKeywordCache(cachePath) {
 	const timelogStart = +new Date();
 
 	const keywords = app
-		// $alfred_workflow_uid is identical for this workflow's pwd, which is excluded
-		// from the results, since this workflows keywords do not need to be removed
+		// $alfred_workflow_uid is identical with this workflow's foldername, which
+		// is excluded from the results, since this workflows keywords do not need
+		// to be removed
 		.doShellScript(
 			'grep -A1 "<key>keyword" ../**/info.plist | grep "<string>" | grep -v "$alfred_workflow_uid" || true',
 		)
@@ -96,8 +97,8 @@ function refreshKeywordCache(cachePath) {
 			if (value.startsWith("{var:")) {
 				const varName = value.split("{var:")[1].split("}")[0];
 				const workflowPath = line.split("/info.plist")[0];
-				// CASE 1a) user-set keywords
-				// (`plutil` will fail, since the value is not saved in prefs.plist)
+				// CASE 1a: user-set keywords
+				// (wrapped in try, since `plutil` will fail, as the value isn't saved in prefs.plist)
 				try {
 					// `..` is already the Alfred preferences directory, so no need to `cd` there
 					const userKeyword = app.doShellScript(
@@ -236,7 +237,7 @@ function run(argv) {
 	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js;
 	const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]";
 
-	const querySearchUrl = $.getenv("search_site") + encodeURIComponent(query)
+	const querySearchUrl = $.getenv("search_site") + encodeURIComponent(query);
 	/** @type AlfredItem */
 	const searchForQuery = {
 		title: `"${query}"`,
@@ -321,7 +322,7 @@ function run(argv) {
 		searchForQuery.title = multiSelectIcon + " " + searchForQuery.title;
 		searchForQuery.mods = {
 			cmd: {
-				arg: searchForQuery.arg, // has to be set, since main arg can be ""
+				arg: querySearchUrl, // has to be set again, since main arg can be ""
 				variables: { mode: "multi-select" },
 				subtitle: "⌘: Deselect URL",
 			},
@@ -342,9 +343,10 @@ function run(argv) {
 	// logging
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
 	let log = `${durationTotalSecs}s, "${query}"`;
-	if (mode === "fallback" || mode === "multi-select") log += ` (${mode})`;
-	if (mode === "rerun") log = "__" + log; // indented to make it easier to read
-	else log = "Total: " + log;
+	if (mode === "default") log = "Total: " + log;
+	// indented to make it easier to read (using `__`, since Alfred removes leading whitespace)
+	else if (mode === "rerun") log = "__" + log;
+	else log += ` (${mode})`;
 	console.log(log);
 
 	return alfredInput;
