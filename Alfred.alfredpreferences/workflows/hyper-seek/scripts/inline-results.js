@@ -196,7 +196,7 @@ function run(argv) {
 
 	const scriptFilterKeyword =
 		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js || "";
-	const query = scriptFilterKeyword + argv[0].trim();
+	const query = (scriptFilterKeyword + argv[0]).trim();
 
 	// ensure cache folder exists
 	const finder = Application("Finder");

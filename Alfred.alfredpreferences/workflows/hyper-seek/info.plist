@@ -772,7 +772,7 @@ fi</string>
 				<key>subtext</key>
 				<string>{query}</string>
 				<key>text</key>
-				<string>{const:alfred_workflow_name}: Search for Inline Results</string>
+				<string>Trigger Search for Inline Results</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.fallback</string>
@@ -882,7 +882,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache</string>
 			<key>xpos</key>
-			<real>805</real>
+			<real>775</real>
 			<key>ypos</key>
 			<real>135</real>
 		</dict>
@@ -933,7 +933,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>955</real>
+			<real>925</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -960,7 +960,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>805</real>
+			<real>775</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -978,7 +978,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>955</real>
+			<real>925</real>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
@@ -1007,7 +1007,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1100</real>
+			<real>1070</real>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
@@ -1018,7 +1018,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>OneUpdater</string>
 			<key>xpos</key>
-			<real>810</real>
+			<real>780</real>
 			<key>ypos</key>
 			<real>320</real>
 		</dict>
@@ -1047,7 +1047,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1100</real>
+			<real>1070</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -1261,7 +1261,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.0</string>
+	<string>1.4.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

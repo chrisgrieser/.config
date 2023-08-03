@@ -18,7 +18,6 @@ echo "$urls" | xargs open
 # log location left empty or non-existent = user decided not to save logs
 [[ ! -f "$log_location" ]] && return 0
 
-date_time_stamp=$(date +"%Y-%m-%d %H:%M")
 
 echo "$urls" | while read -r url; do
 	# if query on search site, keep only the query part
@@ -28,5 +27,6 @@ echo "$urls" | while read -r url; do
 	[[ "$query_or_url" =~ "http" ]] || query_or_url=$(osascript -l JavaScript -e "decodeURIComponent('$query_or_url')")
 
 	# prepend
+	date_time_stamp=$(date +"%Y-%m-%d %H:%M")
 	echo -e "$date_time_stamp – $query_or_url\n$(cat "$log_location")" >"$log_location"
 done
