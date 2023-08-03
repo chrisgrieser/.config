@@ -99,7 +99,8 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		lazy = true, -- loaded by noice
-		cond = vim.fn.has("gui_running"), -- does not play nice with the terminal
+		-- does not play nice with the terminal
+		cond = function () return vim.fn.has("gui_running") == 1 end,
 		opts = {
 			render = "minimal", -- minimal|default|compact
 			top_down = false,
