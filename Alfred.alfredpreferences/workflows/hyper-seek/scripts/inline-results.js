@@ -246,30 +246,35 @@ function run(argv) {
 	// does not re-fetch results
 	const responseCachePath = $.getenv("alfred_workflow_cache") + "/reponseCache.json";
 	const responseCache = JSON.parse(readFile(responseCachePath) || "{}");
-	let results = [];
+	let response = {};
 	if (responseCache.query === query) {
-		results = responseCache.results;
+		response = responseCache;
 		mode = "rerun";
 	} else {
+		// NOTE using a fork of ddgr which includes the instant_answer when using `--json`
+		// https://github.com/kometenstaub
 		// PERF `--noua` disables user agent & fetches faster (~100ms according to hyperfine)
 		// PERF the number of results fetched has basically no effect on the speed
 		// (less than 40ms difference between 1 and 25 results), so there is no use
 		// in restricting the number of results for performance. (Except for 25 being
 		// ddgr's maximum)
-		const ddgrCommand = `ddgr --noua ${includeUnsafe} --num=${resultsToFetch} ${searchRegion} --json "${query}"`;
-		const response = {
-			results: JSON.parse(app.doShellScript(ddgrCommand)),
-			query: query,
-		};
+		const ddgrCmd = `python3 ./dependencies/ddgr.py --json --noua ${includeUnsafe} --num=${resultsToFetch} ${searchRegion} --json "${query}"`;
+		response = JSON.parse(app.doShellScript(ddgrCmd));
+		response.query = query;
 		writeToFile(responseCachePath, JSON.stringify(response));
-		results = response.results;
 	}
 
-	// determine icon for multi-select from saved URLs
+	// INSTANT ANSWER
+	if (response.instant_answer) {
+		searchForQuery.subtitle = "ℹ️ " + response.instant_answer;
+	}
+
+	// determine multi-select items
 	const multiSelectBufferPath = $.getenv("alfred_workflow_cache") + "/multiSelectBuffer.txt";
 	const multiSelectUrls = readFile(multiSelectBufferPath).split("\n") || [];
 
-	const newResults = results.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
+	// RESULTS
+	const newResults = response.results.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
 		const isSelected = multiSelectUrls.includes(item.url);
 		const icon = isSelected ? multiSelectIcon + " " : "";
 		return {
@@ -289,7 +294,7 @@ function run(argv) {
 		};
 	});
 
-	// if searchForQuery has been multi-selected, adapt its result as well
+	// MULTI-SLECT: searchForQuery
 	if (multiSelectUrls.includes(searchForQuery.arg)) {
 		searchForQuery.title = multiSelectIcon + " " + searchForQuery.title;
 		searchForQuery.mods = {
@@ -301,6 +306,8 @@ function run(argv) {
 		};
 		searchForQuery.arg = ""; // if URL already selected, no need to pass it
 	}
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	// Pass to Alfred
 	const alfredInput = JSON.stringify({
