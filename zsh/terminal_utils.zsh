@@ -217,7 +217,7 @@ function prefs() {
 		PREF_BEFORE=1
 	else
 		defaults read >/tmp/after
-		command diff /tmp/before /tmp/after
+		command diff /tmp/before /tmp/after | grep -v "_DKThrottledActivityLast" | grep -E "^(<|>)"
 		PREF_BEFORE=0
 	fi
 }
