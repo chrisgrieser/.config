@@ -181,7 +181,8 @@ function run(argv) {
 	/** @type{"fallback"|"multi-select"|"default"|"rerun"} */
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 
-	const scriptFilterKeyword = $.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js || "";
+	const scriptFilterKeyword =
+		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js || "";
 	const query = scriptFilterKeyword + argv[0].trim();
 
 	// ensure cache folder exists
@@ -265,34 +266,34 @@ function run(argv) {
 	}
 
 	// INSTANT ANSWER
-	if (response.instant_answer) {
-		searchForQuery.subtitle = "ℹ️ " + response.instant_answer;
-	}
+	if (response.instant_answer) searchForQuery.subtitle = response.instant_answer;
 
 	// determine multi-select items
 	const multiSelectBufferPath = $.getenv("alfred_workflow_cache") + "/multiSelectBuffer.txt";
 	const multiSelectUrls = readFile(multiSelectBufferPath).split("\n") || [];
 
 	// RESULTS
-	const newResults = response.results.map((/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
-		const isSelected = multiSelectUrls.includes(item.url);
-		const icon = isSelected ? multiSelectIcon + " " : "";
-		return {
-			title: icon + item.title,
-			subtitle: item.url,
-			uid: item.url,
-			arg: isSelected ? "" : item.url, // if URL already selected, no need to pass it
-			icon: { path: "icons/1.png" },
-			mods: {
-				shift: { subtitle: item.abstract },
-				cmd: {
-					arg: item.url, // has to be set, since main arg can be ""
-					variables: { mode: "multi-select" },
-					subtitle: isSelected ? "⌘: Deselect URL" : "⌘: Select URL",
+	const newResults = response.results.map(
+		(/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
+			const isSelected = multiSelectUrls.includes(item.url);
+			const icon = isSelected ? multiSelectIcon + " " : "";
+			return {
+				title: icon + item.title,
+				subtitle: item.url,
+				uid: item.url,
+				arg: isSelected ? "" : item.url, // if URL already selected, no need to pass it
+				icon: { path: "icons/1.png" },
+				mods: {
+					shift: { subtitle: item.abstract },
+					cmd: {
+						arg: item.url, // has to be set, since main arg can be ""
+						variables: { mode: "multi-select" },
+						subtitle: isSelected ? "⌘: Deselect URL" : "⌘: Select URL",
+					},
 				},
-			},
-		};
-	});
+			};
+		},
+	);
 
 	// MULTI-SLECT: searchForQuery
 	if (multiSelectUrls.includes(searchForQuery.arg)) {

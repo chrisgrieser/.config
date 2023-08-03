@@ -115,29 +115,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>determine-next-subreddit.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E640FB36-75C7-4B36-A8AC-0F56468145CC</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -150,6 +127,8 @@
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>rr</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -198,7 +177,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>rr</string>
+				<string>sub</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -230,6 +209,29 @@
 			<string>5852A551-EFDF-47BB-A256-13A0D3975AA5</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>determine-next-subreddit.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E640FB36-75C7-4B36-A8AC-0F56468145CC</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -306,42 +308,42 @@
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>255</real>
 		</dict>
 		<key>3381D52B-F37A-422A-BB73-2654C0280799</key>
 		<dict>
 			<key>xpos</key>
 			<real>680</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>225</real>
 		</dict>
 		<key>5852A551-EFDF-47BB-A256-13A0D3975AA5</key>
 		<dict>
 			<key>xpos</key>
 			<real>45</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>225</real>
 		</dict>
 		<key>6887CA13-E491-46B2-9AA3-D36BEC604521</key>
 		<dict>
 			<key>xpos</key>
-			<real>525</real>
+			<real>520</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>370</real>
 		</dict>
 		<key>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</key>
 		<dict>
 			<key>xpos</key>
 			<real>520</real>
 			<key>ypos</key>
-			<real>220</real>
+			<real>105</real>
 		</dict>
 		<key>8851C420-3E80-4797-80F1-31999E4C2F54</key>
 		<dict>
 			<key>xpos</key>
 			<real>295</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>225</real>
 		</dict>
 		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
 		<dict>
@@ -350,7 +352,7 @@
 			<key>xpos</key>
 			<real>520</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>225</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -368,13 +370,34 @@
 				<integer>6</integer>
 			</dict>
 			<key>description</key>
-			<string>List of your favorite subreddits. One per line.</string>
+			<string>List of subreddits. One per line.</string>
 			<key>label</key>
 			<string>subreddits</string>
 			<key>type</key>
 			<string>textarea</string>
 			<key>variable</key>
 			<string>subreddits</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>15</string>
+				<key>placeholder</key>
+				<string>10</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>After this many minutes, the cache will be refreshed.</string>
+			<key>label</key>
+			<string>Cache Age Threshold</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>cache_age_threshold</string>
 		</dict>
 	</array>
 	<key>version</key>
