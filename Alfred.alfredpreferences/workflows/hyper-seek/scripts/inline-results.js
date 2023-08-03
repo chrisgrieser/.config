@@ -180,7 +180,7 @@ function run(argv) {
 
 	/** @type{"fallback"|"multi-select"|"default"|"rerun"} */
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
-	const query = argv[0].trim();
+	const query = $.getenv("alfred_workflow_keyword") + argv[0].trim();
 
 	// ensure cache folder exists
 	const finder = Application("Finder");
