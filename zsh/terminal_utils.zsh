@@ -36,7 +36,7 @@ function inspect() {
 	fi
 
 	# FILES
-	# columns needs to be set, since exa print as `--oneline` if piped 
+	# columns needs to be set, since exa print as `--oneline` if piped
 	# https://github.com/ogham/exa/issues/522
 	local exa_output terminal_width
 	terminal_width=$(tput cols)
@@ -89,9 +89,9 @@ function d() {
 
 	if [[ $# == 0 ]]; then
 		# (D) makes the glob include dotfiles (zsh-specific)
-		trash ./*(D) || return 1 
+		trash ./*(D) || return 1
 	else
-		trash "$@"  || return 1
+		trash "$@" || return 1
 	fi
 
 	## add nicer trash sound
@@ -207,6 +207,19 @@ function appid() {
 	id=$(osascript -e "id of app \"$1\"")
 	echo "Copied appid: $id"
 	echo -n "$id" | pbcopy
+}
+
+# read app and macOS system setting changes https://news.ycombinator.com/item?id=36982463
+function prefs() {
+	if [[ "$PREF_BEFORE" -eq 0 ]]; then
+		defaults read >/tmp/before
+		echo "Saved current defaults state."
+		PREF_BEFORE=1
+	else
+		defaults read >/tmp/after
+		command diff /tmp/before /tmp/after
+		PREF_BEFORE=0
+	fi
 }
 
 # Conversions
