@@ -16,16 +16,18 @@ const curlCommand = 'curl -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	/** @type AlfredItem[] */
-	const redditPosts = JSON.parse(app.doShellScript(curlCommand)).data.children.map((data) => {
-		const item = data.data;
-		const title = item.title;
+	const redditPosts = JSON.parse(app.doShellScript(curlCommand)).data.children.map(
+		(/** @type {{ data: any; }} */ data) => {
+			const item = data.data;
+			const title = item.title;
 
-		const url = baseURL + item.url;
-		return {
-			title: title,
-			subtitle: url,
-			arg: url,
-		};
-	});
+			const url = baseURL + item.url;
+			return {
+				title: title,
+				subtitle: url,
+				arg: url,
+			};
+		},
+	);
 	return JSON.stringify({ items: redditPosts });
 }
