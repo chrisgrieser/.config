@@ -25,7 +25,7 @@ fi
 
 # clean up
 SEL=$(echo -n "$SEL" | xargs) # trims whitespace
-SEL="${SEL/#\~/$HOME}"			# resolve ~
+SEL="${SEL/#\~/$HOME}"        # resolve ~
 
 # openers
 if [[ -f "$SEL" ]]; then
@@ -42,10 +42,18 @@ elif [[ -n "$SEL" ]]; then
 	URL_2="$search_site$URL_ENCODED_SEL"
 	URL_1="https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky"
 
-#───────────────────────────────────────────────────────────────────────────────
-	# Open first URL
-	open "$URL_1"
+	#────────────────────────────────────────────────────────────────────────────
+	# LOGGING
 
+	# shellcheck disable=2154 # Alfred variable
+	if [[ -f "$log_location" ]]; then # only log if it is set
+		date_time_stamp=$(date +"%Y-%m-%d %H:%M")
+		echo -e "$date_time_stamp – $SEL\n$(cat "$log_location")" >"$log_location"
+	fi
+
+	#────────────────────────────────────────────────────────────────────────────
+	# OPEN FIRST URL
+	open "$URL_1"
 
 	# OPEN SECOND URL IN BACKGROUND
 	# Use AppleScript instead of JXA because the latter cannot create tabs at specific indexes
