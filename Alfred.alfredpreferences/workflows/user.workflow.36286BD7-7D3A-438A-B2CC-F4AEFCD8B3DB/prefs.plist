@@ -2,11 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>help_search</key>
-	<string>vim</string>
-	<key>old_search</key>
-	<string>old</string>
-	<key>plugin_search</key>
-	<string>nv</string>
+	<key>subreddits</key>
+	<string>neovim
+macapps
+commandline</string>
 </dict>
 </plist>
