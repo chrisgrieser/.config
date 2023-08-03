@@ -32,7 +32,7 @@ function run() {
 
 		return {
 			title: item.title,
-			subtitle: `${score}↑  ${comments}⭘  ${category}`,
+			subtitle: `${score}↑  ${comments}●  ${category}`,
 			arg: item.url,
 		};
 	});
