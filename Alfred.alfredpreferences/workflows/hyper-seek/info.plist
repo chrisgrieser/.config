@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>0C8B99CA-B7BE-4D88-A242-34082B5A5CDB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4860DE40-15B2-4518-A205-B3B021266756</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>203119B0-F56B-4EDE-BE71-21B68645EB6B</key>
 		<array/>
 		<key>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</key>
@@ -80,6 +93,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>3F875B8F-22A9-4711-914D-C906CAC4F290</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4860DE40-15B2-4518-A205-B3B021266756</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>78EFB778-9A4C-4C49-8367-93D039DCD765</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -311,27 +337,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>today</string>
-				<key>subtext</key>
-				<string>for today</string>
-				<key>text</key>
-				<string>📅 {const:alfred_workflow_name} History</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>477EF12D-4892-4FE9-942B-A55E0C21A9BA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -355,33 +360,83 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
+				<key>argumenttype</key>
 				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>40</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>K</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<key>keyword</key>
+				<string>today</string>
+				<key>subtext</key>
+				<string>for today</string>
+				<key>text</key>
+				<string>📅 {const:alfred_workflow_name} History</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>25810527-3725-4BAA-91DA-7B4E6FCCCBB7</string>
+			<string>477EF12D-4892-4FE9-942B-A55E0C21A9BA</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>:hyper-seek</string>
+				<key>subtext</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>text</key>
+				<string>Refresh the cache</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0C8B99CA-B7BE-4D88-A242-34082B5A5CDB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Cache refreshed</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>78EFB778-9A4C-4C49-8367-93D039DCD765</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{const:alfred_workflow_cache}</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>4860DE40-15B2-4518-A205-B3B021266756</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -449,23 +504,31 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
+				<key>action</key>
 				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
+				<key>argument</key>
 				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/open-urls-and-write-log.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>40</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>K</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>D3C22147-3316-415A-B4C1-8AA201F0888E</string>
+			<string>25810527-3725-4BAA-91DA-7B4E6FCCCBB7</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -563,6 +626,29 @@ fi</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>841BD8BB-2E10-4E6A-89DC-2C5DAA070D75</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open-urls-and-write-log.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D3C22147-3316-415A-B4C1-8AA201F0888E</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -686,7 +772,7 @@ fi</string>
 				<key>subtext</key>
 				<string>{query}</string>
 				<key>text</key>
-				<string>Trigger Search for Inline Results</string>
+				<string>{const:alfred_workflow_name}: Search for Inline Results</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.fallback</string>
@@ -718,6 +804,25 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -735,25 +840,6 @@ fi</string>
 			<string>F6591673-575D-4105-B38F-59AD1457EF23</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -789,6 +875,17 @@ Due to the nature of this workflow, it will not be submitted to the Alfred Galle
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0C8B99CA-B7BE-4D88-A242-34082B5A5CDB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>refresh cache</string>
+			<key>xpos</key>
+			<real>805</real>
+			<key>ypos</key>
+			<real>135</real>
+		</dict>
 		<key>203119B0-F56B-4EDE-BE71-21B68645EB6B</key>
 		<dict>
 			<key>colorindex</key>
@@ -836,9 +933,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>785</real>
+			<real>955</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>20</real>
 		</dict>
 		<key>393BA661-A566-4A4C-872F-3385CC07DDB9</key>
 		<dict>
@@ -863,9 +960,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>20</real>
 		</dict>
 		<key>47FB3A9E-27F5-43FE-9F8D-DA7D444CEAA1</key>
 		<dict>
@@ -875,6 +972,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>170</real>
+		</dict>
+		<key>4860DE40-15B2-4518-A205-B3B021266756</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>955</real>
+			<key>ypos</key>
+			<real>140</real>
 		</dict>
 		<key>56C25BE3-595F-4D36-A7D7-7F6C9B233A6F</key>
 		<dict>
@@ -895,6 +1001,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>210</real>
 			<key>ypos</key>
 			<real>455</real>
+		</dict>
+		<key>78EFB778-9A4C-4C49-8367-93D039DCD765</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1100</real>
+			<key>ypos</key>
+			<real>140</real>
 		</dict>
 		<key>841BD8BB-2E10-4E6A-89DC-2C5DAA070D75</key>
 		<dict>
@@ -932,9 +1047,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>920</real>
+			<real>1100</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>20</real>
 		</dict>
 		<key>C950FDC3-9DD1-427D-82D5-2FC76BE7858E</key>
 		<dict>
@@ -1146,7 +1261,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.1</string>
+	<string>1.4.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
