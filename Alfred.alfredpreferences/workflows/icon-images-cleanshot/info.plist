@@ -185,7 +185,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>alfred preference app</string>
+				<string>alfred-preference app</string>
 				<key>subtext</key>
 				<string>apply custom app icon</string>
 				<key>text</key>
