@@ -5,6 +5,20 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
+
+/** @typedef {Object} ddgrResponse (of the fork)
+ * @property {string} instant_answer
+ * @property {ddgrResult[]} results
+ * @property {string?} query (manually added by this workflow for the cache)
+ */
+
+/** @typedef {Object} ddgrResult
+ * @property {string} title
+ * @property {string} abstract
+ * @property {string} url
+ */
+
+//──────────────────────────────────────────────────────────────────────────────
 // CONFIG
 
 const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
@@ -32,8 +46,6 @@ function writeToFile(filepath, text) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
-
-//──────────────────────────────────────────────────────────────────────────────
 
 /** searches for any `.plist` more recently modified than the cache to determine
  * if the cache is outdated. Cannot use the workflow folder's mdate, since it
@@ -117,15 +129,7 @@ function refreshKeywordCache(cachePath) {
 				keywords.push(value);
 			}
 
-			// - also only the first word of a keyword matters
-			// - only keywords with letter as first char are relevant
-			const relevantKeywords = keywords.reduce((acc, keyword) => {
-				const firstWord = keyword.split(" ")[0];
-				if (firstWord.match(/^[a-z]/)) acc.push(firstWord);
-				return acc;
-			}, []);
-
-			acc.push(...relevantKeywords);
+			acc.push(...keywords);
 			return acc;
 		}, []);
 
@@ -163,14 +167,23 @@ function refreshKeywordCache(cachePath) {
 	// .keywordEnabled is undefined true, hence need to check for !== false
 	if (mailPrefs.keywordEnabled !== false) keywords.push(mailPrefs.keyword);
 
-	// FINISH
-	const uniqueKeywords = [...new Set(keywords)];
+	// FILTER IRRELEVANT KEYWORDS
+	// - also only the first word of a keyword matters
+	// - only keywords with letter as first char are relevant
+	const relevantKeywords = keywords.reduce((acc, keyword) => {
+		const firstWord = keyword.split(" ")[0];
+		if (firstWord.match(/^[a-z]/)) acc.push(firstWord);
+		return acc;
+	}, []);
+	const uniqueKeywords = [...new Set(relevantKeywords)];
+	writeToFile(cachePath, JSON.stringify(uniqueKeywords));
 
+	// LOGGING
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
 	console.log(`Rebuilt keyword cache (${uniqueKeywords.length} keywords) in ${durationTotalSecs}s`);
-	writeToFile(cachePath, JSON.stringify(uniqueKeywords));
 }
 
+//──────────────────────────────────────────────────────────────────────────────
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -246,8 +259,12 @@ function run(argv) {
 	// PERF cache `ddgr` response so that re-opening Alfred or using multi-select
 	// does not re-fetch results
 	const responseCachePath = $.getenv("alfred_workflow_cache") + "/reponseCache.json";
+
+	/** @type{ddgrResponse} */
 	const responseCache = JSON.parse(readFile(responseCachePath) || "{}");
-	let response = {};
+	/** @type{ddgrResponse} */
+	let response;
+
 	if (responseCache.query === query) {
 		response = responseCache;
 		mode = "rerun";
@@ -259,7 +276,7 @@ function run(argv) {
 		// (less than 40ms difference between 1 and 25 results), so there is no use
 		// in restricting the number of results for performance. (Except for 25 being
 		// ddgr's maximum)
-		const ddgrCmd = `python3 ./dependencies/ddgr.py --json --noua ${includeUnsafe} --num=${resultsToFetch} ${searchRegion} --json "${query}"`;
+		const ddgrCmd = `python3 ./dependencies/ddgr.py --json --noua ${includeUnsafe} --num=${resultsToFetch} ${searchRegion} "${query}"`;
 		response = JSON.parse(app.doShellScript(ddgrCmd));
 		response.query = query;
 		writeToFile(responseCachePath, JSON.stringify(response));
@@ -273,27 +290,26 @@ function run(argv) {
 	const multiSelectUrls = readFile(multiSelectBufferPath).split("\n") || [];
 
 	// RESULTS
-	const newResults = response.results.map(
-		(/** @type {{ title: string; url: string; abstract: string; }} */ item) => {
-			const isSelected = multiSelectUrls.includes(item.url);
-			const icon = isSelected ? multiSelectIcon + " " : "";
-			return {
-				title: icon + item.title,
-				subtitle: item.url,
-				uid: item.url,
-				arg: isSelected ? "" : item.url, // if URL already selected, no need to pass it
-				icon: { path: "icons/1.png" },
-				mods: {
-					shift: { subtitle: item.abstract },
-					cmd: {
-						arg: item.url, // has to be set, since main arg can be ""
-						variables: { mode: "multi-select" },
-						subtitle: isSelected ? "⌘: Deselect URL" : "⌘: Select URL",
-					},
+	const newResults = response.results.map((item) => {
+		const isSelected = multiSelectUrls.includes(item.url);
+		const icon = isSelected ? multiSelectIcon + " " : "";
+		const topLevelDomain = item.url.replace(/^https?:\/\/(?:www.)?(.*?)\/.*/, "$1");
+		return {
+			title: icon + item.title,
+			subtitle: topLevelDomain,
+			uid: item.url,
+			arg: isSelected ? "" : item.url, // if URL already selected, no need to pass it
+			icon: { path: "icons/1.png" },
+			mods: {
+				shift: { subtitle: item.abstract },
+				cmd: {
+					arg: item.url, // has to be set, since main arg can be ""
+					variables: { mode: "multi-select" },
+					subtitle: isSelected ? "⌘: Deselect URL" : "⌘: Select URL",
 				},
-			};
-		},
-	);
+			},
+		};
+	});
 
 	// MULTI-SLECT: searchForQuery
 	if (multiSelectUrls.includes(searchForQuery.arg)) {
