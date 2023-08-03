@@ -2403,7 +2403,42 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>## Documentations
+- `css`: MDN
+- `html`: MDN
+- `js`: MDN
+- `jxa`: JavaScript for Automation Cookbook
+- `lua`
+- `eslint`
+- `rome`
+- `sc`: shellcheck Wiki
+- `pandoc`: Pandoc User Manual
+- `git`: official docs &amp; the "pro-git" book
+- `py`: python official docs
+- `sh`: cheat.sh
+- `man`: man pages
+- `hs`: Hammerspoon reference
+- `sb`: sketchybar docs
+- `ke`: Karabiner Elements docs
+- `star`: starship prompt docs
+- `ep`: espanso docs
+- `wt`: WezTerm docs
+- `awd`: Alfred Workflow docs
+
+## Extra Utilities
+- `coco`: conventional commit keywords
+- `keycode`: macOS keycodes
+- `appid`: app-id of installed macOS apps
+- `code`: Code search on GitHub and SourceGraph
+- `http`: HTTP status codes
+- `uri`: URI schemes available on the device
+- `as`: AppleScript Dictionaries of installed apps
+- `sound`: Preview (pre-listen, technically) macOS System Sounds
+- [File Action](https://www.alfredapp.com/help/workflows/triggers/file-action/): Uniform Type Identifier (UTI) of selected file.
+
+---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>03C8A38F-8577-483D-8E18-B31886F2113F</key>
@@ -2888,7 +2923,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.0</string>
+	<string>1.3.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

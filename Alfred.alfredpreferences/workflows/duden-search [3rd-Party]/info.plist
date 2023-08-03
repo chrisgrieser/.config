@@ -8,6 +8,58 @@
 	<string>⬇️</string>
 	<key>connections</key>
 	<dict>
+		<key>045CB19C-113B-4B44-A7B1-9CC6F96B82AA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>46B5A3F9-1A5E-4577-B195-3FBE5CAF7EF6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>46B5A3F9-1A5E-4577-B195-3FBE5CAF7EF6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FC9BC8F8-FC2F-4181-852E-EA302D5F63F5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>_button1</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E2EA5D30-5E3B-441F-84FF-1C8177E0FB38</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>_button2</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6B5A9307-1601-43DB-9872-103B8C86D141</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>_button3</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>70F90B12-7711-43E4-B689-F6A70D20573B</key>
 		<array>
 			<dict>
@@ -23,11 +75,73 @@
 				<false/>
 			</dict>
 		</array>
+		<key>89C248B1-9C16-455B-9F32-794A408D8BB7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CE485DFC-D3E5-4793-A052-7B89CF6B0982</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CA1292B5-C484-481A-A1D9-7284634E3519</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>70F90B12-7711-43E4-B689-F6A70D20573B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D08ED0BD-5010-4985-A15C-E2A7B21D7E99</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CA1292B5-C484-481A-A1D9-7284634E3519</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F070F9A4-3AC3-4BE3-866C-8FA843417B34</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>89C248B1-9C16-455B-9F32-794A408D8BB7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FC9BC8F8-FC2F-4181-852E-EA302D5F63F5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5D542F2A-7317-403B-9FE2-E9DB923226AB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F070F9A4-3AC3-4BE3-866C-8FA843417B34</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -47,27 +161,6 @@
 	<string>Duden</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>5368C258-B1A9-4EEA-A49F-CD194AEF040B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -131,6 +224,52 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>5368C258-B1A9-4EEA-A49F-CD194AEF040B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>D08ED0BD-5010-4985-A15C-E2A7B21D7E99</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -160,6 +299,184 @@ fi</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>#!/bin/zsh
+
+xattr -d com.apple.quarantine scraper
+
+cat &lt;&lt;EOF | osascript
+	tell application id "com.runningwithcrayons.Alfred"
+	 	set theWorkflow to "${alfred_workflow_bundleid}"
+	 	set granted to "granted"
+ 		set theValue to "1"
+	 	set configuration granted to value theValue in workflow theWorkflow
+	 	reload workflow theWorkflow	 end tell
+EOF
+exit 1</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5D542F2A-7317-403B-9FE2-E9DB923226AB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>init</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>CE485DFC-D3E5-4793-A052-7B89CF6B0982</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>F070F9A4-3AC3-4BE3-866C-8FA843417B34</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>0.5</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>89C248B1-9C16-455B-9F32-794A408D8BB7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict/>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>FC9BC8F8-FC2F-4181-852E-EA302D5F63F5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<true/>
+				<key>triggerid</key>
+				<string>polite</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>045CB19C-113B-4B44-A7B1-9CC6F96B82AA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>50</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string>System Light</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>＿＿＿＿＿＿＿＿＿＿＿   􁌴   ＿＿＿＿＿＿＿＿＿＿＿
+
+Granting permission removes the "quarantined" flag that MacOS automatically assigns to all files downloaded from the Internet. 
+
+Removing the flag prevents the system from classifying the program as corrupted and allows it to run.
+
+￣￣￣￣￣￣￣￣￣￣￣   􁌴   ￣￣￣￣￣￣￣￣￣￣￣</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>60</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>E2EA5D30-5E3B-441F-84FF-1C8177E0FB38</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>button1</key>
+				<string>Grant Permission</string>
+				<key>button2</key>
+				<string>More Info</string>
+				<key>button3</key>
+				<string>Cancel</string>
+				<key>description</key>
+				<string>To use the Alfred Duden Workflow, you have to allow it to run.</string>
+				<key>title</key>
+				<string>Permissions Required</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.dialog</string>
+			<key>uid</key>
+			<string>46B5A3F9-1A5E-4577-B195-3FBE5CAF7EF6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Tink</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>6B5A9307-1601-43DB-9872-103B8C86D141</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>![Duden Search Icon](icon.png)
@@ -175,41 +492,108 @@ Search, navigate and view information from duden.de. Get QuickLook previews for 
 - [SwiftSoup](https://github.com/scinfu/SwiftSoup)</string>
 	<key>uidata</key>
 	<dict>
+		<key>045CB19C-113B-4B44-A7B1-9CC6F96B82AA</key>
+		<dict>
+			<key>note</key>
+			<string>Permission Handler</string>
+			<key>xpos</key>
+			<real>50</real>
+			<key>ypos</key>
+			<real>285</real>
+		</dict>
+		<key>46B5A3F9-1A5E-4577-B195-3FBE5CAF7EF6</key>
+		<dict>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>290</real>
+		</dict>
 		<key>5368C258-B1A9-4EEA-A49F-CD194AEF040B</key>
 		<dict>
 			<key>xpos</key>
-			<real>300</real>
+			<real>390</real>
 			<key>ypos</key>
 			<real>55</real>
+		</dict>
+		<key>5D542F2A-7317-403B-9FE2-E9DB923226AB</key>
+		<dict>
+			<key>xpos</key>
+			<real>395</real>
+			<key>ypos</key>
+			<real>175</real>
+		</dict>
+		<key>6B5A9307-1601-43DB-9872-103B8C86D141</key>
+		<dict>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>395</real>
 		</dict>
 		<key>70F90B12-7711-43E4-B689-F6A70D20573B</key>
 		<dict>
 			<key>xpos</key>
-			<real>220</real>
+			<real>335</real>
 			<key>ypos</key>
 			<real>85</real>
+		</dict>
+		<key>89C248B1-9C16-455B-9F32-794A408D8BB7</key>
+		<dict>
+			<key>xpos</key>
+			<real>665</real>
+			<key>ypos</key>
+			<real>205</real>
 		</dict>
 		<key>CA1292B5-C484-481A-A1D9-7284634E3519</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>55</real>
+		</dict>
+		<key>CE485DFC-D3E5-4793-A052-7B89CF6B0982</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>720</real>
+			<key>ypos</key>
+			<real>175</real>
+		</dict>
+		<key>D08ED0BD-5010-4985-A15C-E2A7B21D7E99</key>
+		<dict>
+			<key>xpos</key>
 			<real>50</real>
 			<key>ypos</key>
 			<real>55</real>
 		</dict>
+		<key>E2EA5D30-5E3B-441F-84FF-1C8177E0FB38</key>
+		<dict>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>285</real>
+		</dict>
+		<key>F070F9A4-3AC3-4BE3-866C-8FA843417B34</key>
+		<dict>
+			<key>xpos</key>
+			<real>530</real>
+			<key>ypos</key>
+			<real>175</real>
+		</dict>
+		<key>FC9BC8F8-FC2F-4181-852E-EA302D5F63F5</key>
+		<dict>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>205</real>
+		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
-	<key>variables</key>
-	<dict>
-		<key>granted</key>
-		<string>1</string>
-	</dict>
 	<key>variablesdontexport</key>
-	<array>
-		<string>granted</string>
-	</array>
+	<array/>
 	<key>version</key>
 	<string>1.0.0</string>
 	<key>webaddress</key>
