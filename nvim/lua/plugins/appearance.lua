@@ -15,7 +15,7 @@ return {
 		event = "VeryLazy",
 		init = function()
 			-- Open Log & Scroll to most recent message
-			vim.keymap.set("n", "<D-0>", function()
+			vim.keymap.set({"n", "x", "i"}, "<D-0>", function()
 				vim.cmd.Noice("history")
 				vim.defer_fn(function()
 					if vim.bo.filetype == "noice" then u.normal("G") end
