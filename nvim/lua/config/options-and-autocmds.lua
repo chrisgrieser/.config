@@ -15,7 +15,7 @@ local api = vim.api
 -- nvim server (RPC) https://neovim.io/doc/user/remote.html
 
 -- avoid duplicate server when opening nvim in the terminal as well
-if vim.fn.has("gui_running") then
+if vim.fn.has("gui_running") == 1 then
 	local removed = pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
 	local delay = removed and 500 or 0
 	vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, delay)
