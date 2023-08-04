@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=./karabiner-schema.json
 title: ⇪ Hyper
 rules:
   #─────────────────────────────────────────────────────────────────────────────

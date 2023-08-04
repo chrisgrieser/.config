@@ -27,6 +27,10 @@
 		"prefix": "backspace",
 		"body": "⌫"
 	},
+	"middle dot": {
+		"prefix": "middle dot",
+		"body": "·"
+	},
 	"enter": {
 		"prefix": "enter",
 		"body": "⏎",

@@ -9,7 +9,7 @@ local newCommand = vim.api.nvim_create_user_command
 -- syntax highlighting
 newCommand("I", function(ctx)
 	local output = vim.inspect(fn.luaeval(ctx.args))
-	vim.notify(output, "trace", {
+	vim.notify(output, vim.log.levels.TRACE, {
 		timeout = 6000, -- ms
 		on_open = function(win) -- enable treesitter highlighting in the notification
 			local buf = vim.api.nvim_win_get_buf(win)
@@ -57,11 +57,13 @@ newCommand("Curl", function(ctx)
 	local response = fn.system(("curl --silent --max-time %s '%s'"):format(timeoutSecs, url))
 	local lines = vim.split(response, "\n")
 	table.insert(lines, 1, "<!-- " .. url .. " -->")
-	local ft = url:match("%.(%a)$") or "html"
 
 	cmd.enew()
+	local ft = url:match("%.(%a)$") or "html" -- could be html, json or other
 	a.nvim_buf_set_option(0, "filetype", ft)
+
 	a.nvim_buf_set_option(0, "buftype", "nowrite")
 	a.nvim_buf_set_name(0, "curl")
 	a.nvim_buf_set_lines(0, 0, -1, false, lines)
+	vim.lsp.buf.format {}
 end, { nargs = 1 })

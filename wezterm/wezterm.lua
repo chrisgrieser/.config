@@ -268,7 +268,7 @@ local config = {
 	line_height = 1,
 
 	-- Appearance
-	audible_bell = "SystemBeep", -- SystemBeep|Disabled
+	audible_bell = "Disabled", -- SystemBeep|Disabled
 	visual_bell = { -- briefly flash cursor on visual bell
 		fade_in_duration_ms = 150,
 		fade_out_duration_ms = 150,
