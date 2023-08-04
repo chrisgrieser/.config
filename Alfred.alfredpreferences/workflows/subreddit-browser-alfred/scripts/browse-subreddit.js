@@ -3,6 +3,12 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+//──────────────────────────────────────────────────────────────────────────────
+// CONFIG
+const useOldReddit = $.getenv("use_old_reddit") === "1";
+
+//──────────────────────────────────────────────────────────────────────────────
+
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
 /** @param {string} path */
@@ -58,7 +64,7 @@ function run() {
 	let response = {};
 
 	if (!fileExists(subredditCache) || cacheIsOutdated(subredditCache)) {
-		console.log("Writing new cache for " + subredditName);
+		console.log("Writing new cache for r/" + subredditName);
 
 		// INFO yes, curl is blocked only until you change the user agent, lol
 		const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
@@ -71,7 +77,7 @@ function run() {
 		ensureCacheFolderExists()
 		writeToFile(subredditCache, responseStr);
 	} else {
-		console.log("Using existing cache for " + subredditName);
+		console.log("Using existing cache for r/" + subredditName);
 		response = JSON.parse(readFile(subredditCache));
 	}
 

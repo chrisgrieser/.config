@@ -367,7 +367,7 @@
 				<key>trim</key>
 				<true/>
 				<key>verticalsize</key>
-				<integer>6</integer>
+				<integer>9</integer>
 			</dict>
 			<key>description</key>
 			<string>List of subreddits. One per line.</string>
@@ -398,6 +398,25 @@
 			<string>textfield</string>
 			<key>variable</key>
 			<string>cache_age_threshold</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>enabled</string>
+			</dict>
+			<key>description</key>
+			<string>redirect to oldreddit</string>
+			<key>label</key>
+			<string>use oldreddit</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>use_old_reddit</string>
 		</dict>
 	</array>
 	<key>version</key>

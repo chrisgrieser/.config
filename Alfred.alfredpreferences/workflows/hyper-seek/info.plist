@@ -381,27 +381,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>:hyper-seek</string>
-				<key>subtext</key>
-				<string>{const:alfred_workflow_name}</string>
-				<key>text</key>
-				<string>Refresh the cache</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>0C8B99CA-B7BE-4D88-A242-34082B5A5CDB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -435,6 +414,27 @@
 			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
 			<string>4860DE40-15B2-4518-A205-B3B021266756</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>:hyper-seek</string>
+				<key>subtext</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>text</key>
+				<string>Refresh the cache</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0C8B99CA-B7BE-4D88-A242-34082B5A5CDB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -884,7 +884,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>775</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>140</real>
 		</dict>
 		<key>203119B0-F56B-4EDE-BE71-21B68645EB6B</key>
 		<dict>
@@ -1164,6 +1164,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>3</string>
+				<key>placeholder</key>
+				<string>3</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Minimum length of the query before inline results are shown.</string>
+			<key>label</key>
+			<string>Min Query Length</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>minimum_query_length</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>5</string>
 				<key>placeholder</key>
 				<string>5</string>
@@ -1260,6 +1281,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>log_location</string>
 		</dict>
 	</array>
+	<key>variables</key>
+	<dict>
+		<key>multi_select_icon</key>
+		<string>🔳</string>
+	</dict>
 	<key>version</key>
 	<string>1.4.4</string>
 	<key>webaddress</key>
