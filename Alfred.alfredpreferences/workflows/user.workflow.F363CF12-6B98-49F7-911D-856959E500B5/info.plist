@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.zeitlings.keyboard.brightness</string>
+	<key>connections</key>
+	<dict>
+		<key>AD043AD7-5DC0-414A-82F6-3DB7D1C3AEBF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9E052A11-75FF-4976-81DC-8D7C01D646AC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BA52739C-D6E9-419D-ADD2-E1A11F4D83B5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C76B7986-771A-41E8-B29B-64D760CEA524</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C76B7986-771A-41E8-B29B-64D760CEA524</key>
+		<array/>
+		<key>DB870EF5-BD77-423C-B1CF-4E8078D8AA7F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7D4F7040-9102-4617-B400-FCB328DE869D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Patrick Sy</string>
+	<key>description</key>
+	<string>Adjust the Keyboard Brightness</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Keyboard Brightness</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:key}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Use &gt; and &lt; to increase or decrease</string>
+				<key>script</key>
+				<string>open -b "com.runningwithcrayons.Alfred" alfred://runtrigger/com.zeitlings.keyboard.brightness/init
+swift Incandescent.swift "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string>Use &gt; and &lt; to increase or decrease</string>
+				<key>title</key>
+				<string>Adjust the Keyboard Brightness</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C76B7986-771A-41E8-B29B-64D760CEA524</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<true/>
+				<key>triggerid</key>
+				<string>init</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>BA52739C-D6E9-419D-ADD2-E1A11F4D83B5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/keyboard-simulation/keyboard.top-row.keyboard-brightness</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>7D4F7040-9102-4617-B400-FCB328DE869D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>DB870EF5-BD77-423C-B1CF-4E8078D8AA7F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_key</key>
+					<string>keyboard-brightness-down</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/keyboard-simulation/keyboard.top-row.keyboard-brightness</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>9E052A11-75FF-4976-81DC-8D7C01D646AC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>AD043AD7-5DC0-414A-82F6-3DB7D1C3AEBF</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>![](icon.png)
+
+# Keyboard Brightness
+
+[▸ Visit on Github ◂](https://github.com/zeitlings/alfred-workflows) | [▸ Visit on Alfred Forum ◂](https://www.alfredforum.com/topic/20275-keyboard-brightness/)
+
+---
+
+Adjust the keyboard brightness either by using the keyword (default: `keybr`) or by setting up custom shortcuts.
+
+**When using the keyword**
+- type ` &gt; ` or ` + ` to increase the brightness
+- type ` &lt; ` or ` - ` to decrease the brightness
+
+
+## Change Log
+
+**v1.1.0**
+- Adds asynchronous dispatch for a smoother experience
+- Uses `Automation Tasks` for hotkey triggers (Alfred v5.1)</string>
+	<key>uidata</key>
+	<dict>
+		<key>7D4F7040-9102-4617-B400-FCB328DE869D</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>170</real>
+		</dict>
+		<key>9E052A11-75FF-4976-81DC-8D7C01D646AC</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>305</real>
+		</dict>
+		<key>AD043AD7-5DC0-414A-82F6-3DB7D1C3AEBF</key>
+		<dict>
+			<key>note</key>
+			<string>Decrease Brightness</string>
+			<key>xpos</key>
+			<real>70</real>
+			<key>ypos</key>
+			<real>305</real>
+		</dict>
+		<key>BA52739C-D6E9-419D-ADD2-E1A11F4D83B5</key>
+		<dict>
+			<key>xpos</key>
+			<real>70</real>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
+		<key>C76B7986-771A-41E8-B29B-64D760CEA524</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
+		<key>DB870EF5-BD77-423C-B1CF-4E8078D8AA7F</key>
+		<dict>
+			<key>note</key>
+			<string>Increase Brightness</string>
+			<key>xpos</key>
+			<real>70</real>
+			<key>ypos</key>
+			<real>170</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>keybr</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>key</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.1.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/zeitlings/alfred-workflows</string>
+</dict>
+</plist>
