@@ -42,7 +42,9 @@ local function nullSources()
 		builtins.formatting.black,
 
 		-- SHELL
-		builtins.formatting.shfmt,
+		builtins.formatting.shfmt.with{
+			extra_filetypes = {  "zsh" },
+		},
 		builtins.diagnostics.shellcheck.with {
 			extra_args = { "--shell", "bash" },
 			filetypes = { "sh", "zsh" },
