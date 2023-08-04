@@ -109,7 +109,7 @@ return {
 			minimum_width = 15,
 			level = 0, -- minimum severity level to display (0 = display all)
 			timeout = 7500,
-			stages = "fade", -- slide does not work well with wrapping
+			stages = "slide",
 			on_open = function(win)
 				if not vim.api.nvim_win_is_valid(win) then return end
 				vim.api.nvim_win_set_config(win, { border = u.borderStyle })
