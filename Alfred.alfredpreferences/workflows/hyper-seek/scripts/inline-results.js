@@ -21,16 +21,20 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 // CONFIG
 
-const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
 let resultsToFetch = parseInt($.getenv("inline_results_to_fetch")) || 5;
 if (resultsToFetch < 1) resultsToFetch = 1;
 else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by `ddgr`
+
+const minimumQueryLength = parseInt($.getenv("minimum_query_length")) || 3;
+if (minimumQueryLength < 0) resultsToFetch = 0;
+else if (minimumQueryLength > 10) resultsToFetch = 10; // prevent accidental high values
+
+const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
 const ignoreAlfredKeywordsEnabled = $.getenv("ignore_alfred_keywords") === "1";
+const multiSelectIcon = $.getenv("multi_select_icon") || "🔳";
 
 // https://duckduckgo.com/duckduckgo-help-pages/settings/params/
 const searchRegion = $.getenv("region") === "none" ? "" : "--reg=" + $.getenv("region");
-
-const multiSelectIcon = "🔳";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -215,8 +219,14 @@ function run(argv) {
 		});
 	}
 
-	// GUARD CLAUSE 1: query is URL
-	if (query.match(/^\w+:/)) return;
+	// GUARD CLAUSE 1: query is URL or too short
+	if (query.match(/^\w+:/)) {
+		console.log("Ignored (URL)");
+		return;
+	} else if (query.length < minimumQueryLength) {
+		console.log("Ignored (Min Query Length)");
+		return;
+	}
 
 	// GUARD CLAUSE 2: first word of query is Alfred keyword
 	// (guard clause is ignored when doing fallback search or multi-select,
@@ -227,7 +237,7 @@ function run(argv) {
 		const alfredKeywords = JSON.parse(readFile(keywordCachePath));
 		const queryFirstWord = query.split(" ")[0];
 		if (alfredKeywords.includes(queryFirstWord)) {
-			console.log("Ignored due to Alfred keyword: " + queryFirstWord);
+			console.log(`Ignored (Alfred keyword: ${queryFirstWord})`);
 			return;
 		}
 	}

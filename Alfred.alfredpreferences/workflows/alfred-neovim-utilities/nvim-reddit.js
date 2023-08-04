@@ -3,6 +3,47 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+
+//──────────────────────────────────────────────────────────────────────────────
+
+/** @param {string} path */
+function cacheIsOutdated(path) {
+	const cacheObj = Application("System Events").aliases[path];
+	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
+	const cacheAgeThreshold = 10;
+	return cacheAgeMins > cacheAgeThreshold;
+}
+
+function ensureCacheFolderExists() {
+	const finder = Application("Finder");
+	const cacheDir = $.getenv("alfred_workflow_cache");
+	if (!finder.exists(Path(cacheDir))) {
+		console.log("Cache Dir does not exist and is created.");
+		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
+		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
+		finder.make({
+			new: "folder",
+			at: Path(cacheDirParent),
+			withProperties: { name: cacheDirBasename },
+		});
+	}
+}
+
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
+/** @param {string} filepath @param {string} text */
+function writeToFile(filepath, text) {
+	const str = $.NSString.alloc.initWithUTF8String(text);
+	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // INFO free API calls restricted to 10 per minute
@@ -14,13 +55,25 @@ const curlCommand = 'curl -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const response = JSON.parse(app.doShellScript(curlCommand));
 
-	// mostly too many requests
-	if (response.error) {
-		return JSON.stringify({
-			items: [{ title: response.message, subtitle: response.error }],
-		});
+	const subredditCache = `${$.getenv("alfred_workflow_cache")}/neovim.json`;
+	let response = {}
+
+	if (!fileExists(subredditCache) || cacheIsOutdated(subredditCache)) {
+		console.log("Writing new cache for r/neovim.");
+
+		// INFO yes, curl is blocked only until you change the user agent, lol
+		const responseStr = app.doShellScript(curlCommand);
+		response = JSON.parse(responseStr);
+
+		if (response.error) {
+			return JSON.stringify({ items: [{ title: response.message, subtitle: response.error }] });
+		}
+		ensureCacheFolderExists()
+		writeToFile(subredditCache, responseStr);
+	} else {
+		console.log("Using existing cache for r/neovim.");
+		response = JSON.parse(readFile(subredditCache));
 	}
 
 	/** @type AlfredItem[] */
