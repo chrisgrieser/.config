@@ -216,15 +216,3 @@ function prefs() {
 	fi
 }
 
-# Conversions
-function yaml2json() {
-	file_name=${1%.*} # remove ext. (not using `basename` since it could be yml or yaml)
-	# using `explode` to expand anchors & aliases
-	# https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
-	yq --output-format=json 'explode(.)' "$1" >"${file_name}.json"
-}
-
-function json2yaml() {
-	file_name=$(basename "$1" .json)
-	yq --output-format=yaml '.' "$1" >"$file_name.yaml"
-}

@@ -9,6 +9,7 @@ CONFIG_FILES=(
 	history_config
 	docs_man
 	git_github
+	json_utils
 	homebrew
 	intro_messages
 )
