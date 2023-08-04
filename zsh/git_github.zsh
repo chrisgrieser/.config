@@ -169,12 +169,20 @@ function gb() {
 # last arg: commit msg
 # only one arg: `git add -A` & the one arg as commit msg
 function ac() {
-	local commit_msg="${*:$#}" # last arg https://stackoverflow.com/a/33271194/22114136
-	local files="${*:1:$((#-1))}" # all but last arg https://stackoverflow.com/a/1215592/22114136
+	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
+
+	local commit_msg
+	if [[ $# -eq 0 ]] ; then
+		commit_msg="chore"
+	else
+		commit_msg="${*:$#}" # last arg https://stackoverflow.com/a/33271194/22114136
+	fi
+
 	if [[ -f "$commit_msg" ]] ; then
 		echo "Commit Message should be the last argument."
 		return 1
 	fi
+	local files="${*:1:$((#-1))}" # all but last arg https://stackoverflow.com/a/1215592/22114136
 
 	# ensure no overlength of commit msg
 	local msg_length=${#commit_msg}
@@ -186,14 +194,16 @@ function ac() {
 	fi
 
 	if [[ -n "$files" ]] ; then
-		git add "$files"
+		ct git add "$files"
 	else
-		git add -A
+		ct git add -A
 	fi
-	git commit -m "$commit_msg"
+	ct git commit -m "$commit_msg"
 }
 
 function acp() {
+	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
+
 	# guard: accidental pushing of large files
 	local large_files
 	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M)
@@ -215,8 +225,8 @@ function acp() {
 		return 1
 	fi
 
-	git add -A && git commit -m "$commit_msg"
-	git pull && git push
+	ct git add -A && git commit -m "$commit_msg"
+	ct git pull && ct git push
 
 	# update sketchybar if one of respective repos
 	sketchybar --trigger repo-files-update
@@ -225,13 +235,15 @@ function acp() {
 #───────────────────────────────────────────────────────────────────────────────
 
 function clone() {
+	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
+
 	url="$1"
 	# turn http into SSH remotes
 	[[ "$url" =~ http ]] && url="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 
 	# WARN depth=2 ensures that amending a shallow commit does not result in a 
 	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=2 --filter=blob:none "$url"
+	ct git clone --depth=2 --filter=blob:none "$url"
 
 	# shellcheck disable=SC2012
 	cd "$(command ls -1 -t | head -n1)" || return 1
