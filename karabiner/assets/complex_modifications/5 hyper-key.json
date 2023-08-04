@@ -1,0 +1,418 @@
+{
+  "title": "⇪ Hyper",
+  "rules": [
+    {
+      "description": "*️⃣ ⇪ Capslock → Hyper/Esc",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock"
+          },
+          "to_if_alone": [
+            {
+              "key_code": "escape"
+            }
+          ],
+          "to": [
+            {
+              "key_code": "right_shift",
+              "modifiers": [
+                "control",
+                "option",
+                "command"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "escape"
+          },
+          "to_if_alone": [
+            {
+              "key_code": "f18"
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "shell_command": "open \"cleanshot://open-history\""
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.apple\\.finder$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "*️⃣ ⇪R: Restart App",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "r",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "control",
+                "shift",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "FRONT_APP=$(osascript -e 'tell application \"System Events\" to return name of first process whose frontmost is true')\nkillall \"$FRONT_APP\"\n\n# wait for 5 secs\ni=0\nwhile pgrep -xq \"$FRONT_APP\"; do \n  i=$((i+1))\n  sleep 0.05\n  if [[ $i -gt 100 ]]; then \n    osascript -e \"display notification \\\"\\\" with title \\\"Could not quit $FRONT_APP\\\"\"\n    return 1\n  fi\ndone\n\n[[ \"$FRONT_APP\" == \"wezterm-gui\" ]] && FRONT_APP=\"WezTerm\"\nopen -a \"$FRONT_APP\"\n"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "file_paths": [
+                "[Nn]eovide"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "5",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "control",
+                "shift",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'display notification \"\" with title \"Restarting Alfred…\"'\nkillall -9 \"Alfred\"\nkillall \"Alfred Preferences\"\nwhile pgrep -xq \"Alfred\"; do sleep 0.1; done\nsleep 0.1\nopen -a \"Alfred 5\"\nopen -a \"Alfred Preferences\"\nosascript -e 'tell application id \"com.runningwithcrayons.Alfred\" to search'\n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Insert Mode Vim: ⇪ Hyper + hjklio<space> → ⌫←↓↑→",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": [
+                "command",
+                "shift"
+              ]
+            },
+            {
+              "key_code": "delete_or_backspace"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "x",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": [
+                "command",
+                "shift"
+              ]
+            },
+            {
+              "key_code": "delete_or_backspace"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "down_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "up_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": [
+                "option"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "o",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": [
+                "option"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "spacebar",
+            "modifiers": {
+              "mandatory": [
+                "option",
+                "shift",
+                "command",
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": [
+                "option"
+              ]
+            },
+            {
+              "key_code": "delete_or_backspace",
+              "modifiers": [
+                "option"
+              ]
+            },
+            {
+              "key_code": "delete_or_backspace"
+            },
+            {
+              "key_code": "right_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "period",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "control",
+                "shift",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "vk_none"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "comma",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "control",
+                "shift",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "vk_none"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "period"
+              },
+              {
+                "key_code": "command"
+              },
+              {
+                "key_code": "shift"
+              },
+              {
+                "key_code": "control"
+              },
+              {
+                "key_code": "option"
+              }
+            ]
+          },
+          "to": [
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 400
+          }
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "comma"
+              },
+              {
+                "key_code": "command"
+              },
+              {
+                "key_code": "shift"
+              },
+              {
+                "key_code": "control"
+              },
+              {
+                "key_code": "option"
+              },
+              {
+                "key_code": "period"
+              }
+            ]
+          },
+          "to": [
+            {
+              "key_code": "vk_none"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 400
+          }
+        }
+      ]
+    }
+  ]
+}
