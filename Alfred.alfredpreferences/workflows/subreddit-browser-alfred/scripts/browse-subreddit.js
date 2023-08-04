@@ -82,7 +82,8 @@ function getHackernewsPosts() {
 
 		let category = item._tags.find((tag) => tag === "show_hn" || tag === "ask_hn");
 		category = category ? `[${category.replace("show_hn", "Show HN").replace("ask_hn", "Ask HN")}]` : "";
-		const subtitle = `${item.points}↑  ${item.num_comments}●  ${category}`;
+		const comments = item.num_comments || 0;
+		const subtitle = `${item.points}↑  ${comments}●  ${category}`;
 
 		return {
 			title: item.title,
@@ -119,7 +120,8 @@ function getRedditPosts(subredditName) {
 	const redditPosts = response.data.children.map((/** @type {{ data: any; }} */ data) => {
 		const item = data.data;
 		const category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
-		const subtitle = `${item.score}↑  ${item.num_comments}●  ${category}`;
+		const comments = item.num_comments || 0;
+		const subtitle = `${item.score}↑  ${comments}●  ${category}`;
 
 		const commentUrl = `https://${oldReddit}.reddit.com${item.permalink}`;
 		const externalUrl = item.url;

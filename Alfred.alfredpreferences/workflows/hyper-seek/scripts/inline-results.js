@@ -318,6 +318,7 @@ function run(argv) {
 			icon: { path: "icons/1.png" },
 			mods: {
 				shift: { subtitle: item.abstract },
+				alt: { subtitle: `⌥: Copy  ➙  ${item.url}` }, // also makes holding alt show the full URL
 				cmd: {
 					arg: item.url, // has to be set, since main arg can be ""
 					variables: { mode: "multi-select" },
