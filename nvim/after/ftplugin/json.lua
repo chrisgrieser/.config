@@ -1,18 +1,10 @@
 local cmd = vim.cmd
-local fn = vim.fn
 local keymap = vim.keymap.set
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- hides quotes, making it more readable
 vim.opt_local.conceallevel = 2 
-
--- when opening large files, start with some folds closed
-if fn.line("$") > 400 then
-	vim.defer_fn(function()
-		require("ufo").closeFoldsWith(1) -- = fold level one
-	end, 1)
-end
 
 -- escape stuff properly for VS Code Style snippet
 keymap("n", "<leader>q", function()

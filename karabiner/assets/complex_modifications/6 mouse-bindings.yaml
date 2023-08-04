@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=./schema/karabiner-mod.json
 title: "Mouse Click Trickery"
 rules:
   # this basically emulations the "Right-Click Open Link in new Background tab"

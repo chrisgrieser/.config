@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=./schema/karabiner-mod.json
 title: Vim Mode for Highlights.app
 anchors:
   - conditions:

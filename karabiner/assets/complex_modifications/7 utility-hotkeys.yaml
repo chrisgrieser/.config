@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=./schema/karabiner-mod.json
 title: 🔘 Utility Shortcuts
 rules:
   - description: "Utilities: r-cmd, cmd-j, cmd-shift-j, cmd-e"
