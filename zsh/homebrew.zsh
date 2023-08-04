@@ -23,6 +23,14 @@ alias bu='brew uninstall --zap'
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# colorize via chromaterm
+if command -v ct &>/dev/null; then
+	# recursive -> affects all brew commands
+	alias brew="ct brew" 
+fi
+
+#───────────────────────────────────────────────────────────────────────────────
+
 function print-section() {
 	echo
 	echo
