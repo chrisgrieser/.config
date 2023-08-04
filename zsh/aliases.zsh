@@ -65,7 +65,6 @@ alias treee='exa --tree --level=3 --icons --git-ignore'
 alias treeee='exa --tree --level=4 --icons --git-ignore'
 alias treeeee='exa --tree --level=5 --icons --git-ignore'
 
-alias diff='diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"'
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
 

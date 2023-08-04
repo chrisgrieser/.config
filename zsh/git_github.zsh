@@ -39,7 +39,7 @@ function unshallow() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-# GIT DIFF
+# GIT DIFF & DELTA
 
 # use delta for small diffs and diff2html for big diffs
 function gd() {
@@ -51,30 +51,22 @@ function gd() {
 		# uses git delta (configured so in gitconfig)
 		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
 
-		# dynamically change theme 
-		# see themes: `delta --show-syntax-themes`
+		git diff
 		if defaults read -g AppleInterfaceStyle &>/dev/null; then
-			light="false"
-			theme="Dracula"
+			git -c delta.dark=true diff
 		else
-			light="true"
-			theme="OneHalfLight"
+			git -c delta.light=true diff
 		fi
-		git -c delta.light="$light" -c delta.syntax-theme="$theme" diff
 	fi
 }
 
-
-# dynamically change theme 
-# see themes: `delta --show-syntax-themes`
-if defaults read -g AppleInterfaceStyle &>/dev/null; then
-	light="false"
-	theme="Dracula"
-else
-	light="true"
-	theme="OneHalfLight"
-fi
-export DELTA_FEATURE
+function delta() {
+	if defaults read -g AppleInterfaceStyle &>/dev/null; then
+		command delta --dark "$@"
+	else
+		command delta --light "$@"
+	fi
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
