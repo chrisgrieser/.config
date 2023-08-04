@@ -48,6 +48,7 @@ function inspect() {
 	else
 		# not using `[[ -n ]] &&` as that results in exit code 1
 		[[ -z "$exa_output" ]] || echo "$exa_output"
+		echo
 	fi
 }
 

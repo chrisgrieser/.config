@@ -7,7 +7,9 @@
 
 add_newline = false
 continuation_prompt = "↪️ "
-format = """[$directory\
+format = """[\
+${custom.location_indicator}\
+$directory\
 ${custom.folder_number}\
 ${custom.main_branch}\
 $git_branch\
@@ -45,6 +47,13 @@ disabled = false
 min_time = 2500
 format = " [󰔟 $duration](bold cyan)"
 
+[custom.location_indicator]
+description = "Indicate if in my local repo folder"
+command = '[[ "$PWD" =~ "$HOME/Repos" ]] && echo "󰛶" '
+when = "true"
+format = '[$output ]($style)' # extra space for proper nerdfont sizing
+style = "fg:bright-blue bg:black bold"
+
 [directory]
 truncation_length = 2
 truncation_symbol = "/"
@@ -62,10 +71,10 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 "/Alfred.alfredpreferences" = "/󰮤 "
 
 [custom.folder_number]
+description = "Number of files (and folders) in the current working directory"
 command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' | wc -l"
 when = "true"
 symbol = " "
-description = "Number of files (and folders) in the current working directory"
 format = '[$symbol$output]($style) '
 style = "fg:yellow bg:black bold"
 
@@ -145,11 +154,10 @@ symbol = "󰏗 "
 style = "dimmed 208"
 
 [custom.alfred]
+description = "Version number of Alfred Workflow"
 when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
-# multi-line version somehow does not work
 command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 os = "macos"
-description = "Version number of Alfred Workflow"
 format = '[󰮤 ](purple) [󰏗  $output]($style)'
 style = "dimmed cyan"
 

@@ -75,7 +75,7 @@ function getHackernewsPosts() {
 
 	/** @type AlfredItem[] */
 	const hits = JSON.parse(response).hits.map((/** @type {hackerNewsItem} */ item) => {
-		const postUrl = item.url;
+		const externalUrl = item.url;
 		const commentUrl = useDstillAi
 			? "https://dstill.ai/hackernews/item/" + item.objectID
 			: "https://news.ycombinator.com/item?id=" + item.objectID;
@@ -92,7 +92,9 @@ function getHackernewsPosts() {
 			mods: {
 				// pass current subreddit to determine next subreddit
 				cmd: { arg: "hackernews" },
-				shift: { arg: postUrl },
+				shift: {
+					arg: externalUrl,
+				},
 			},
 		};
 	});
@@ -120,7 +122,7 @@ function getRedditPosts(subredditName) {
 		const subtitle = `${item.score}↑  ${item.num_comments}●  ${category}`;
 
 		const commentUrl = `https://${oldReddit}.reddit.com${item.permalink}`;
-		const postUrl = `https://www.reddit.com${item.permalink}`;
+		const externalUrl = item.url;
 		const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
 		const emoji = isOnReddit ? "" : "🔗 ";
 
@@ -134,7 +136,8 @@ function getRedditPosts(subredditName) {
 				cmd: { arg: subredditName },
 				shift: {
 					valid: !isOnReddit,
-					arg: postUrl,
+					arg: externalUrl,
+					subttile: isOnReddit ? "No external link" : "⇧: Open external link"
 				},
 			},
 		};

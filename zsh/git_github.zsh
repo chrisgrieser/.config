@@ -219,12 +219,7 @@ function acp() {
 	git pull && git push
 
 	# update sketchybar if one of respective repos
-	# check if variable starts with variable: https://unix.stackexchange.com/a/465907
-	if [[ "$PWD" == "${PWD#"$DOTFILE_FOLDER"}" ]] ||
-		[[ "$PWD" == "${PWD#"$VAULT_PATH"}" ]] ||
-		[[ "$PWD" == "${PWD#"$PASSWORD_STORE"}" ]]; then
-		sketchybar --trigger repo-files-update
-	fi
+	sketchybar --trigger repo-files-update
 }
 
 #───────────────────────────────────────────────────────────────────────────────

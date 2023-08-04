@@ -137,7 +137,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Sub-Reddit Browser</string>
+	<string>Reddit Browser</string>
 	<key>objects</key>
 	<array>
 		<dict>
