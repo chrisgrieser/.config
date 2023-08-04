@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=./schema/karabiner-mod.json
 # INFO has to come before finder-vim-mode.yaml itself
 rules:
-  - description: "Addons for Alfred"
+  - description: "Finder Vim Addons for Alfred"
     manipulators:
       # FIX for <Esc> -> f18 binding
       # Alfred Custom Clipboard Search & screenshot history (cleanshot)
@@ -69,7 +69,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   #─────────────────────────────────────────────────────────────────────────────
 
-  - description: "Extra keys"
+  - description: "Finder Vim Extra keys"
     manipulators:
       # B: Signature ( append "_CG")
       - type: basic

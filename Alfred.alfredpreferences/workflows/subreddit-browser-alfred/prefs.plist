@@ -6,6 +6,8 @@
 	<true/>
 	<key>cache_age_threshold</key>
 	<string>10</string>
+	<key>custom_subreddit_icons</key>
+	<string>~/.config/Alfred.alfredpreferences/subreddit_icons</string>
 	<key>subreddits</key>
 	<string>neovim
 macapps

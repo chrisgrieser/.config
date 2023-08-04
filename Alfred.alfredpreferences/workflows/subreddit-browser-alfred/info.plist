@@ -642,6 +642,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>variable</key>
 			<string>use_dstill_ai</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Advanced: Directory where this workflow will save the subreddit icons. You can override the icons in that folder, to customize subreddit icons. (Leave empty to default to Alfred's Workflow Data storage.)</string>
+			<key>label</key>
+			<string>Subreddit Icons Location</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>custom_subreddit_icons</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string>0.9</string>

@@ -3,11 +3,19 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+//──────────────────────────────────────────────────────────────────────────────
+
+const iconFolder = $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data");
+
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
-/** @param {string} subredditName */
-function cacheSubredditIcon(subredditName) {
-	const iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
+//──────────────────────────────────────────────────────────────────────────────
+
+/**
+ * @param {string} iconPath
+ * @param {string} subredditName
+ */
+function cacheSubredditIcon(iconPath, subredditName) {
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {
@@ -35,10 +43,10 @@ function run() {
 			let subtitle = "";
 
 			// cache subreddit image
-			let iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
+			let iconPath = `${iconFolder}/${subredditName}.png`;
 			if (!fileExists(iconPath)) {
-				const error = cacheSubredditIcon(subredditName);
-				console.log("Error:", error);
+				const error = cacheSubredditIcon(iconPath, subredditName);
+				if (error) console.log("Error:", error);
 				// if icon cannot be cached, use default icon
 				if (!fileExists(iconPath)) iconPath = "icon.png";
 
