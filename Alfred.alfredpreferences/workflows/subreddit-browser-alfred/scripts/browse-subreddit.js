@@ -52,10 +52,90 @@ function cacheIsOutdated(path) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// https://hn.algolia.com/api/
-// rate limit: 10k per houer
+/** @typedef {Object} hackerNewsItem
+ * @property {string} objectID
+ * @property {string} title
+ * @property {string} url
+ * @property {number} num_comments
+ * @property {number} points
+ * @property {string} author
+ * @property {string[]} _tags
+ */
+
 function getHackernewsPosts() {
+	// INFO https://hn.algolia.com/api/
 	// alternative "https://hacker-news.firebaseio.com/v0/topstories.json";
+
+	const url = "https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=50";
+	const response = app.doShellScript(`curl -sL "${url}"`);
+
+	/** @type AlfredItem[] */
+	const hits = JSON.parse(response).hits.map((/** @type {hackerNewsItem} */ item) => {
+		const postUrl = item.url;
+		const commentUrl = "https://news.ycombinator.com/item?id=" + item.objectID;
+
+		let category = item._tags.find((tag) => tag.includes("hn"));
+		category = `[${category}]` || "";
+		const subtitle = `${item.points}↑  ${item.num_comments}●  ${category}`;
+
+		return {
+			title: item.title,
+			subtitle: subtitle,
+			arg: commentUrl,
+			icon: { path: "hackernews.png" },
+			mods: {
+				shift: {
+					valid: false,
+					subtitle: `author: ${item.author}`,
+				},
+				// pass current "subreddit" to determine next subreddit
+				cmd: { arg: "hackernews" },
+				ctrl: { arg: postUrl },
+			},
+		};
+	});
+
+	return hits;
+}
+
+/**
+ * @param {string} subredditName
+ * @return {AlfredItem[]|{ error?: number, message?: string}} redditPosts
+ */
+function getRedditPosts(subredditName) {
+	// INFO yes, curl is blocked only until you change the user agent, lol
+	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
+	const response = JSON.parse(app.doShellScript(curlCommand));
+
+	let iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
+	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
+
+	if (response.error) return response;
+
+	/** @type AlfredItem[] */
+	const redditPosts = response.data.children.map((/** @type {{ data: any; }} */ data) => {
+		const item = data.data;
+		const comments = item.num_comments;
+		const category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
+		const subtitle = `${item.score}↑  ${comments}●  ${category}`;
+		const url = useOldReddit ? item.url.replace("www", "old") : item.url;
+
+		return {
+			title: item.title,
+			subtitle: subtitle,
+			arg: url,
+			icon: { path: iconPath },
+			mods: {
+				shift: {
+					valid: false,
+					subtitle: `author: ${item.author}`,
+				},
+				// pass current "subreddit" to determine next subreddit
+				cmd: { arg: subredditName },
+			},
+		};
+	});
+	return redditPosts;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -75,63 +155,27 @@ function run() {
 		writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
 	}
 
-	// ICON
-	let iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
-	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
-
-	// GUARD 1: GET CACHE
+	// GUARD GET CACHE
 	const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
-	/** @type AlfredItem[] */
-	let redditPosts;
+	let posts;
 	if (!cacheIsOutdated(subredditCache)) {
-		redditPosts = JSON.parse(readFile(subredditCache));
-		return JSON.stringify({ items: redditPosts });
+		posts = JSON.parse(readFile(subredditCache));
+		return JSON.stringify({ items: posts });
 	}
 
-	// GUARD 2: USE HACKERNEWS
+	// MAIN
 	if (subredditName === "hackernews") {
-		const hackernewsPosts = getHackernewsPosts();
-		return JSON.stringify({ items: hackernewsPosts });
+		console.log("Writing new cache for hackernews");
+		posts = getHackernewsPosts();
+	} else {
+		console.log("Writing new cache for r/" + subredditName);
+		posts = getRedditPosts(subredditName);
+		// GUARD 2: No response from reddit API
+		if (posts.error) {
+			return JSON.stringify({ items: [{ title: posts.message, subtitle: posts.error }] });
+		}
 	}
 
-	//───────────────────────────────────────────────────────────────────────────
-
-	// LOAD NEW POSTS
-	console.log("Writing new cache for r/" + subredditName);
-
-	// INFO yes, curl is blocked only until you change the user agent, lol
-	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
-	const response = JSON.parse(app.doShellScript(curlCommand));
-
-	// GUARD 3: no response from reddit API
-	if (response.error) {
-		return JSON.stringify({ items: [{ title: response.message, subtitle: response.error }] });
-	}
-
-	/** @type AlfredItem[] */
-	redditPosts = response.data.children.map((/** @type {{ data: any; }} */ data) => {
-		const item = data.data;
-		const comments = item.num_comments;
-		const category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
-		const subtitle = `${item.score}↑  ${comments}●  ${category}`;
-		const url = useOldReddit ? item.url.replace("www", "old") : item.url;
-
-		return {
-			title: item.title,
-			subtitle: subtitle,
-			arg: url,
-			icon: { path: iconPath },
-			mods: {
-				shift: {
-					valid: false,
-					subtitle: `author: ${item.author}`,
-				},
-				cmd: { arg: subredditName }, // next subreddit
-			},
-		};
-	});
-
-	writeToFile(subredditCache, JSON.stringify(redditPosts));
-
-	return JSON.stringify({ items: redditPosts });
+	writeToFile(subredditCache, JSON.stringify(posts));
+	return JSON.stringify({ items: posts });
 }
